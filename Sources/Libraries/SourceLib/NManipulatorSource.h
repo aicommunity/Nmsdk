@@ -1,0 +1,83 @@
+// ===========================================================
+// Version:        3.0.2
+// ===========================================================
+/* ***********************************************************
+@Copyright Alexander V. Bakhshiev, 2002.
+E-mail:        alexab@ailab.ru
+url:            http://ailab.ru
+
+This file - part of the project: Neuro Modeler Software Developer Kit (NMSDK)
+
+File License:        BSD License
+Project License:     BSD License
+See file license.txt for more information
+*********************************************************** */
+
+#ifndef NMANIPULATOR_SOURCE_H
+#define NMANIPULATOR_SOURCE_H
+
+#include "../BCL/NSource.h"
+
+
+namespace NMSDK {
+
+class NManipulatorSource: public NSource
+{
+public: // Общедоступные свойства
+// угол разворота ротора
+RDK::ULProperty<real,NManipulatorSource> Angle;
+// угловая скорость
+RDK::ULProperty<real,NManipulatorSource> Speed;
+// момент двигателя
+RDK::ULProperty<real,NManipulatorSource> Force;
+protected: // Основные свойства
+
+
+public: // Методы
+bool UpdateOutputFlag;
+// --------------------------
+// Конструкторы и деструкторы
+// --------------------------
+NManipulatorSource(void);
+virtual ~NManipulatorSource(void);
+// --------------------------
+
+protected:
+// --------------------------
+// Методы управления общедоступными свойствами
+// --------------------------
+// Устанавливает угол
+bool SetAngle(real value);
+// Устанавливает скорость
+bool SetSpeed(real value);
+// Устанавливает момент
+bool SetForce(real value);
+// --------------------------
+
+public:
+// --------------------------
+// Системные методы управления объектом
+// --------------------------
+// Выделяет память для новой чистой копии объекта этого класса
+virtual NManipulatorSource* New(void);
+// --------------------------
+
+// --------------------------
+// Скрытые методы управления счетом
+// --------------------------
+protected:
+// Восстановление настроек по умолчанию и сброс процесса счета
+virtual bool ADefault(void);
+
+
+// Сброс процесса счета.
+virtual bool AReset(void);
+
+// Выполняет расчет этого объекта
+virtual bool ACalculate(void);
+// --------------------------
+};
+
+}
+#endif
+

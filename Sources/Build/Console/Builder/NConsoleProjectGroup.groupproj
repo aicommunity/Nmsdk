@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{0E6694CD-6500-4791-B022-2B81C36D47AB}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="NConsole.cbproj">
+				<Dependencies>..\..\Dll\Builder\nmsdk.cbproj</Dependencies>
+			</Projects>
+			<Projects Include="..\..\Dll\Builder\nmsdk.cbproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target DependsOnTargets="nmsdk" Name="NConsole">
+			<MSBuild Projects="NConsole.cbproj"/>
+		</Target>
+		<Target DependsOnTargets="nmsdk:Clean" Name="NConsole:Clean">
+			<MSBuild Targets="Clean" Projects="NConsole.cbproj"/>
+		</Target>
+		<Target DependsOnTargets="nmsdk:Make" Name="NConsole:Make">
+			<MSBuild Targets="Make" Projects="NConsole.cbproj"/>
+		</Target>
+		<Target Name="nmsdk">
+			<MSBuild Projects="..\..\Dll\Builder\nmsdk.cbproj"/>
+		</Target>
+		<Target Name="nmsdk:Clean">
+			<MSBuild Targets="Clean" Projects="..\..\Dll\Builder\nmsdk.cbproj"/>
+		</Target>
+		<Target Name="nmsdk:Make">
+			<MSBuild Targets="Make" Projects="..\..\Dll\Builder\nmsdk.cbproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="NConsole;nmsdk"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="NConsole:Clean;nmsdk:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="NConsole:Make;nmsdk:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

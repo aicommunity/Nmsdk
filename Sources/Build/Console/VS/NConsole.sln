@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NConsole", "NConsole.vcproj", "{F1D23C62-6E32-4194-AFD1-00241CAE0F1C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1699F12-CC0F-48FC-A8A6-47978A454AD8} = {E1699F12-CC0F-48FC-A8A6-47978A454AD8}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nmsdkdll_vs", "..\..\Dll\Vs\nmsdk_vs.vcproj", "{E1699F12-CC0F-48FC-A8A6-47978A454AD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1D23C62-6E32-4194-AFD1-00241CAE0F1C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F1D23C62-6E32-4194-AFD1-00241CAE0F1C}.Debug|Win32.Build.0 = Debug|Win32
+		{F1D23C62-6E32-4194-AFD1-00241CAE0F1C}.Release|Win32.ActiveCfg = Release|Win32
+		{F1D23C62-6E32-4194-AFD1-00241CAE0F1C}.Release|Win32.Build.0 = Release|Win32
+		{E1699F12-CC0F-48FC-A8A6-47978A454AD8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E1699F12-CC0F-48FC-A8A6-47978A454AD8}.Debug|Win32.Build.0 = Debug|Win32
+		{E1699F12-CC0F-48FC-A8A6-47978A454AD8}.Release|Win32.ActiveCfg = Release|Win32
+		{E1699F12-CC0F-48FC-A8A6-47978A454AD8}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
