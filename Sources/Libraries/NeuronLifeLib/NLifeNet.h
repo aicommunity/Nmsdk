@@ -185,13 +185,13 @@ protected:
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-virtual bool AAddComponent(NAContainer* comp, RDK::UIPointer* pointer=0);
+virtual bool AAddComponent(UEPtr<NAContainer> comp, RDK::UIPointer* pointer=0);
 
 // Выполняет предварительные пользовательские действия
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-virtual bool ADelComponent(NAContainer* comp);
+virtual bool ADelComponent(UEPtr<NAContainer> comp);
 // --------------------------
 
 

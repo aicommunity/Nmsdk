@@ -32,13 +32,13 @@ NPulseNeuronLibrary::NPulseNeuronLibrary(void)
 // Методы создания составных моделей
 // --------------------------
 // Метод формирования модели простого импульсного нейрона
-NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseNeuron(NStorage *storage, const string &neuronclass, const string &membraneclass, int num_membranes,
+UEPtr<NPulseNeuron> NPulseNeuronLibrary::CreateSimplePulseNeuron(NStorage *storage, const string &neuronclass, const string &membraneclass, int num_membranes,
                     int num_stimulates, int num_arresting, int dendrite_length)
 {
- NAContainer *membr=0;
- NPulseChannel *channel1=0, *channel2=0;
- NPulseNeuron *n=0;
- NPulseLTZone *ltzone=0;
+ UEPtr<NAContainer> membr=0;
+ UEPtr<NPulseChannel> channel1, channel2;
+ UEPtr<NPulseNeuron> n;
+ UEPtr<NPulseLTZone> ltzone;
  bool res;
  RDK::ULinkSide item,conn;
 
@@ -46,29 +46,29 @@ NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseNeuron(NStorage *storage, co
  if(!storage)
   return 0;
 
- n=static_cast<NPulseNeuron*>(storage->TakeObject(neuronclass));
+ n=static_pointer_cast<NPulseNeuron>(storage->TakeObject(neuronclass));
  if(!n)
   return 0;
 
 
- ltzone=static_cast<NPulseLTZone*>(storage->TakeObject("NPLTZone"));
+ ltzone=static_pointer_cast<NPulseLTZone>(storage->TakeObject("NPLTZone"));
  n->AddComponent(ltzone,&n->LTZone);
  ltzone->SetName("LTZone");
 
- NConstGenerator *gen_pos,*gen_neg;
- gen_pos=static_cast<NConstGenerator*>(storage->TakeObject("NPNeuronPosCGenerator"));
+ UEPtr<NConstGenerator> gen_pos,gen_neg;
+ gen_pos=static_pointer_cast<NConstGenerator>(storage->TakeObject("NPNeuronPosCGenerator"));
  res=n->AddComponent(gen_pos);
- gen_neg=static_cast<NConstGenerator*>(storage->TakeObject("NPNeuronNegCGenerator"));
+ gen_neg=static_pointer_cast<NConstGenerator>(storage->TakeObject("NPNeuronNegCGenerator"));
  n->AddComponent(gen_neg);
 
  for(int i=0;i<num_membranes;i++)
  {
-  membr=static_cast<NPulseMembrane*>(storage->TakeObject(membraneclass/*"NPNeuronMembrane"*/));
+  membr=static_pointer_cast<NPulseMembrane>(storage->TakeObject(membraneclass/*"NPNeuronMembrane"*/));
   res=n->AddComponent(membr);
 
-  channel1=static_cast<NPulseChannel*>(membr->GetComponent("PosChannel"));
+  channel1=static_pointer_cast<NPulseChannel>(membr->GetComponent("PosChannel"));
 
-  channel2=static_cast<NPulseChannel*>(membr->GetComponent("NegChannel"));
+  channel2=static_pointer_cast<NPulseChannel>(membr->GetComponent("NegChannel"));
 
   item.Index=0;
   conn.Index=-1;
@@ -97,19 +97,19 @@ NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseNeuron(NStorage *storage, co
 
  for(int i=1;i<dendrite_length;i++)
  {
-  membr=static_cast<NPulseMembrane*>(storage->TakeObject(membraneclass/*"NPNeuronMembrane"*/));
+  membr=static_pointer_cast<NPulseMembrane>(storage->TakeObject(membraneclass/*"NPNeuronMembrane"*/));
   res=n->AddComponent(membr);
 
-  channel1=static_cast<NPulseChannel*>(membr->GetComponent("PosChannel"));
+  channel1=static_pointer_cast<NPulseChannel>(membr->GetComponent("PosChannel"));
 
-  channel2=static_cast<NPulseChannel*>(membr->GetComponent("NegChannel"));
+  channel2=static_pointer_cast<NPulseChannel>(membr->GetComponent("NegChannel"));
 
  }
 
- NPulseLifeNeuron* lifeneuron=dynamic_cast<NPulseLifeNeuron*>(n);
+ UEPtr<NPulseLifeNeuron> lifeneuron=dynamic_pointer_cast<NPulseLifeNeuron>(n);
  if(lifeneuron)
  {
-  NNeuronLife *nlife=dynamic_cast<NNeuronLife*>(storage->TakeObject("NNeuronLife"));
+  UEPtr<NNeuronLife> nlife=dynamic_pointer_cast<NNeuronLife>(storage->TakeObject("NNeuronLife"));
   lifeneuron->AddComponent(nlife);
 
   item.Id=ltzone->GetLongId(n);
@@ -122,56 +122,56 @@ NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseNeuron(NStorage *storage, co
  if(!res)
   return 0;
 
- return dynamic_cast<NPulseNeuron*>(n);
+ return dynamic_pointer_cast<NPulseNeuron>(n);
 }
 
 // Метод формирования модели простого импульсного нейрона с синапсами хебба
-NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseHebbNeuron(NStorage *storage, const string &neuronclass, int num_membranes,
+UEPtr<NPulseNeuron> NPulseNeuronLibrary::CreateSimplePulseHebbNeuron(NStorage *storage, const string &neuronclass, int num_membranes,
                     int num_stimulates, int num_arresting, int dendrite_length)
 {
- NAContainer *membr=0;
- NPulseChannel *channel1=0, *channel2=0;
- NPulseChannel *dchannel1=0, *dchannel2=0;
+ UEPtr<NAContainer> membr;
+ UEPtr<NPulseChannel> channel1, channel2;
+ UEPtr<NPulseChannel> dchannel1, dchannel2;
 
- NPulseNeuron *n=0;
- NPulseLTZone *ltzone=0;
+ UEPtr<NPulseNeuron> n;
+ UEPtr<NPulseLTZone> ltzone;
  bool res;
  RDK::ULinkSide item,conn;
- vector<NPulseHebbSynapse*> synapse_list;
+ vector<UEPtr<NPulseHebbSynapse> > synapse_list;
 
  if(!storage)
   return 0;
 
- n=static_cast<NPulseNeuron*>(storage->TakeObject(neuronclass));
+ n=static_pointer_cast<NPulseNeuron>(storage->TakeObject(neuronclass));
  if(!n)
   return 0;
 
 
- ltzone=static_cast<NPulseLTZone*>(storage->TakeObject("NPLTZone"));
+ ltzone=static_pointer_cast<NPulseLTZone>(storage->TakeObject("NPLTZone"));
  n->AddComponent(ltzone,&n->LTZone);
  ltzone->SetName("LTZone");
 
  NConstGenerator *gen_pos,*gen_neg;
- gen_pos=static_cast<NConstGenerator*>(storage->TakeObject("NPNeuronPosCGenerator"));
+ gen_pos=static_pointer_cast<NConstGenerator>(storage->TakeObject("NPNeuronPosCGenerator"));
  res=n->AddComponent(gen_pos);
- gen_neg=static_cast<NConstGenerator*>(storage->TakeObject("NPNeuronNegCGenerator"));
+ gen_neg=static_pointer_cast<NConstGenerator>(storage->TakeObject("NPNeuronNegCGenerator"));
  n->AddComponent(gen_neg);
 
  synapse_list.clear();
  for(int i=0;i<num_membranes;i++)
  {
-  membr=static_cast<NPulseMembrane*>(storage->TakeObject("NPNeuronHebbMembrane"));
+  membr=static_pointer_cast<NPulseMembrane>(storage->TakeObject("NPNeuronHebbMembrane"));
   res=n->AddComponent(membr);
 
-  channel1=static_cast<NPulseChannel*>(membr->GetComponent("PosHebbChannel"));
+  channel1=static_pointer_cast<NPulseChannel>(membr->GetComponent("PosHebbChannel"));
 
   for(int j=0;j<channel1->GetNumComponents();j++)
-   synapse_list.push_back(dynamic_cast<NPulseHebbSynapse*>(channel1->GetComponentByIndex(j)));
+   synapse_list.push_back(dynamic_pointer_cast<NPulseHebbSynapse>(channel1->GetComponentByIndex(j)));
 
-  channel2=static_cast<NPulseChannel*>(membr->GetComponent("NegHebbChannel"));
+  channel2=static_pointer_cast<NPulseChannel>(membr->GetComponent("NegHebbChannel"));
 
   for(int j=0;j<channel2->GetNumComponents();j++)
-   synapse_list.push_back(dynamic_cast<NPulseHebbSynapse*>(channel2->GetComponentByIndex(j)));
+   synapse_list.push_back(dynamic_pointer_cast<NPulseHebbSynapse>(channel2->GetComponentByIndex(j)));
 
 
   item.Index=0;
@@ -210,19 +210,19 @@ NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseHebbNeuron(NStorage *storage
 
  for(int i=1;i<dendrite_length;i++)
  {
-  membr=static_cast<NPulseMembrane*>(storage->TakeObject("NPNeuronHebbMembrane"));
+  membr=static_pointer_cast<NPulseMembrane>(storage->TakeObject("NPNeuronHebbMembrane"));
   res=n->AddComponent(membr);
 
-  channel1=static_cast<NPulseChannel*>(membr->GetComponent("PosHebbChannel"));
+  channel1=static_pointer_cast<NPulseChannel>(membr->GetComponent("PosHebbChannel"));
 
   for(int j=0;j<channel1->GetNumComponents();j++)
-   synapse_list.push_back(dynamic_cast<NPulseHebbSynapse*>(channel1->GetComponentByIndex(j)));
+   synapse_list.push_back(dynamic_pointer_cast<NPulseHebbSynapse>(channel1->GetComponentByIndex(j)));
 
 
-  channel2=static_cast<NPulseChannel*>(membr->GetComponent("NegHebbChannel"));
+  channel2=static_pointer_cast<NPulseChannel>(membr->GetComponent("NegHebbChannel"));
 
   for(int j=0;j<channel2->GetNumComponents();j++)
-   synapse_list.push_back(dynamic_cast<NPulseHebbSynapse*>(channel2->GetComponentByIndex(j)));
+   synapse_list.push_back(dynamic_pointer_cast<NPulseHebbSynapse>(channel2->GetComponentByIndex(j)));
 
    // Связь между каналами в цепочке
    item.Id=channel1->GetLongId(n);
@@ -260,10 +260,10 @@ NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseHebbNeuron(NStorage *storage
    }
   }
 
- NPulseLifeNeuron* lifeneuron=dynamic_cast<NPulseLifeNeuron*>(n);
+ UEPtr<NPulseLifeNeuron> lifeneuron=dynamic_pointer_cast<NPulseLifeNeuron>(n);
  if(lifeneuron)
  {
-  NNeuronLife *nlife=dynamic_cast<NNeuronLife*>(storage->TakeObject("NNeuronLife"));
+  UEPtr<NNeuronLife> nlife=dynamic_pointer_cast<NNeuronLife>(storage->TakeObject("NNeuronLife"));
   lifeneuron->AddComponent(nlife);
 
   item.Id=ltzone->GetLongId(n);
@@ -276,17 +276,17 @@ NPulseNeuron* NPulseNeuronLibrary::CreateSimplePulseHebbNeuron(NStorage *storage
  if(!res)
   return 0;
 
- return dynamic_cast<NPulseNeuron*>(n);
+ return dynamic_pointer_cast<NPulseNeuron>(n);
 }
 
 // Метод формирования модели афферентного нейрона
-NAfferentNeuron* NPulseNeuronLibrary::CreateAfferentNeuron(NStorage *storage, int num_membranes)
+UEPtr<NAfferentNeuron> NPulseNeuronLibrary::CreateAfferentNeuron(NStorage *storage, int num_membranes)
 {
- NAContainer *membr=0;
- NPulseChannel *channel1=0, *channel2=0;
- NAfferentNeuron *n=0;
- NPulseLTZone *ltzone=0;
- NReceptor *receptor=0;
+ UEPtr<NAContainer> membr;
+ UEPtr<NPulseChannel> channel1, channel2;
+ UEPtr<NAfferentNeuron> n;
+ UEPtr<NPulseLTZone> ltzone;
+ UEPtr<NReceptor> receptor;
  bool res;
  RDK::ULinkSide item,conn;
 
@@ -296,36 +296,36 @@ NAfferentNeuron* NPulseNeuronLibrary::CreateAfferentNeuron(NStorage *storage, in
  if(!storage)
   return 0;
 
- n=static_cast<NAfferentNeuron*>(storage->TakeObject("NAfferentNeuron"));
+ n=static_pointer_cast<NAfferentNeuron>(storage->TakeObject("NAfferentNeuron"));
  if(!n)
   return 0;
 
- ltzone=static_cast<NPulseLTZone*>(storage->TakeObject("NPLTZone"));
+ ltzone=static_pointer_cast<NPulseLTZone>(storage->TakeObject("NPLTZone"));
  n->AddComponent(ltzone,&n->LTZone);
  ltzone->SetName("LTZone");
  ltzone->Threshold=0;
 
- NConstGenerator *gen_pos,*gen_neg;
- gen_pos=static_cast<NConstGenerator*>(storage->TakeObject("NPNeuronPosCGenerator"));
+ UEPtr<NConstGenerator> gen_pos,gen_neg;
+ gen_pos=static_pointer_cast<NConstGenerator>(storage->TakeObject("NPNeuronPosCGenerator"));
  res=n->AddComponent(gen_pos);
- gen_neg=static_cast<NConstGenerator*>(storage->TakeObject("NPNeuronNegCGenerator"));
+ gen_neg=static_pointer_cast<NConstGenerator>(storage->TakeObject("NPNeuronNegCGenerator"));
  n->AddComponent(gen_neg);
 
  bool linkres=true;
  for(int i=0;i<num_membranes;i++)
  {
-  membr=static_cast<NPulseMembrane*>(storage->TakeObject("NPNeuronMembrane"));
+  membr=static_pointer_cast<NPulseMembrane>(storage->TakeObject("NPNeuronMembrane"));
   res=n->AddComponent(membr);
 
-  receptor=static_cast<NReceptor*>(storage->TakeObject("NReceptor"));
+  receptor=static_pointer_cast<NReceptor>(storage->TakeObject("NReceptor"));
   receptor->ExpCoeff=0.01;
   receptor->Gain=1;
   res=n->AddComponent(receptor);
 
-  channel1=static_cast<NPulseChannel*>(membr->GetComponent("PosChannel"));//(storage->TakeObject("NPChannel"));
+  channel1=static_pointer_cast<NPulseChannel>(membr->GetComponent("PosChannel"));//(storage->TakeObject("NPChannel"));
 //  channel1->SetNumInputs(2);
 
-  channel2=static_cast<NPulseChannel*>(membr->GetComponent("NegChannel"));//(storage->TakeObject("NPChannel"));
+  channel2=static_pointer_cast<NPulseChannel>(membr->GetComponent("NegChannel"));//(storage->TakeObject("NPChannel"));
   // Устанавливаем обратную связь
   item.Id=ltzone->GetLongId(n);
   conn.Id=membr->GetLongId(n);
@@ -362,7 +362,7 @@ NAfferentNeuron* NPulseNeuronLibrary::CreateAfferentNeuron(NStorage *storage, in
  if(!res)
   return 0;
 
- return dynamic_cast<NAfferentNeuron*>(n);
+ return dynamic_pointer_cast<NAfferentNeuron>(n);
 }
 // --------------------------
 
@@ -373,56 +373,56 @@ NAfferentNeuron* NPulseNeuronLibrary::CreateAfferentNeuron(NStorage *storage, in
 // Не требуется предварительная очистка массива и уборка памяти.
 void NPulseNeuronLibrary::ACreateClassSamples(NStorage *storage)
 {
- NAContainer *cont=0;
+ UEPtr<NAContainer> cont;
 
  // Содержимое старой библиотеки PulseItemsLibrary
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  cont->SetName("PNeuronNegCGenerator");
- ((NConstGenerator*)cont)->Amplitude=-1;
+ dynamic_pointer_cast<NConstGenerator>(cont)->Amplitude=-1;
  UploadClass("NPNeuronNegCGenerator",cont);
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  cont->SetName("PNeuronPosCGenerator");
- ((NConstGenerator*)cont)->Amplitude=1;
+ dynamic_pointer_cast<NConstGenerator>(cont)->Amplitude=1;
  UploadClass("NPNeuronPosCGenerator",cont);
 
  // Формируем обычные синапсы и участки мембраны с ними
- NPulseSynapse *s_pos;
- NPulseChannel *ch_pos, *ch_neg;
- ch_pos=(NPulseChannel*)storage->TakeObject("NPChannel");
+ UEPtr<NPulseSynapse> s_pos;
+ UEPtr<NPulseChannel> ch_pos, ch_neg;
+ ch_pos=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPChannel"));
  ch_pos->SetName("PNeuronChannel");
  for(int i=0;i<3;i++)
  {
-  s_pos=(NPulseSynapse*)storage->TakeObject("NPSynapse");
+  s_pos=dynamic_pointer_cast<NPulseSynapse>(storage->TakeObject("NPSynapse"));
   s_pos->SetName("Synapse");
   ch_pos->AddComponent(s_pos);
  }
  UploadClass("NPNeuronChannel",ch_pos);
 
- ch_pos=(NPulseChannel*)storage->TakeObject("NPSynChannel");
+ ch_pos=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPSynChannel"));
  ch_pos->SetName("PNeuronChannel");
  UploadClass("NPSynNeuronChannel",ch_pos);
 
- cont=storage->TakeObject("NPMembrane");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPMembrane"));
  cont->SetName("PNeuronMembrane");
- ch_pos=(NPulseChannel*)storage->TakeObject("NPNeuronChannel");
+ ch_pos=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPNeuronChannel"));
  ch_pos->SetName("PosChannel");
  ch_pos->Type=-1;
 
- ch_neg=(NPulseChannel*)storage->TakeObject("NPNeuronChannel");
+ ch_neg=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPNeuronChannel"));
  ch_neg->SetName("NegChannel");
  ch_neg->Type=1;
  cont->AddComponent(ch_pos);
  cont->AddComponent(ch_neg);
  UploadClass("NPNeuronMembrane",cont);
 
- cont=storage->TakeObject("NPMembrane");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPMembrane"));
  cont->SetName("PNeuronMembrane");
- ch_pos=(NPulseChannel*)storage->TakeObject("NPSynNeuronChannel");
+ ch_pos=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPSynNeuronChannel"));
  ch_pos->SetName("PosChannel");
  ch_pos->Type=-1;
 
- ch_neg=(NPulseChannel*)storage->TakeObject("NPSynNeuronChannel");
+ ch_neg=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPSynNeuronChannel"));
  ch_neg->SetName("NegChannel");
  ch_neg->Type=1;
  cont->AddComponent(ch_pos);
@@ -430,24 +430,24 @@ void NPulseNeuronLibrary::ACreateClassSamples(NStorage *storage)
  UploadClass("NPSynNeuronMembrane",cont);
 
  // Формируем синапсы хебба и участки мембраны с ними
- NPulseHebbSynapse *hs_pos;
- ch_pos=(NPulseChannel*)storage->TakeObject("NPChannel");
+ UEPtr<NPulseHebbSynapse> hs_pos;
+ ch_pos=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPChannel"));
  ch_pos->SetName("PNeuronHebbChannel");
  for(int i=0;i<1;i++)
  {
-  hs_pos=(NPulseHebbSynapse*)storage->TakeObject("NPHebbSynapse");
+  hs_pos=dynamic_pointer_cast<NPulseHebbSynapse>(storage->TakeObject("NPHebbSynapse"));
   hs_pos->SetName("HebbSynapse");
   ch_pos->AddComponent(hs_pos);
  }
  UploadClass("NPNeuronHebbChannel",ch_pos);
 
- cont=storage->TakeObject("NPMembrane");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPMembrane"));
  cont->SetName("PNeuronHebbMembrane");
- ch_pos=(NPulseChannel*)storage->TakeObject("NPNeuronHebbChannel");
+ ch_pos=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPNeuronHebbChannel"));
  ch_pos->SetName("PosHebbChannel");
  ch_pos->Type=-1;
 
- ch_neg=(NPulseChannel*)storage->TakeObject("NPNeuronHebbChannel");
+ ch_neg=dynamic_pointer_cast<NPulseChannel>(storage->TakeObject("NPNeuronHebbChannel"));
  ch_neg->SetName("NegHebbChannel");
  ch_neg->Type=1;
  cont->AddComponent(ch_pos);
@@ -456,10 +456,10 @@ void NPulseNeuronLibrary::ACreateClassSamples(NStorage *storage)
  UploadClass("NPNeuronHebbMembrane",cont);
 
  // Модель мышцы
- cont=storage->TakeObject("NMuscle");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NMuscle"));
 
- NReceptor *input;
- input=dynamic_cast<NReceptor*>(storage->TakeObject("NReceptor"));
+ UEPtr<NReceptor> input;
+ input=dynamic_pointer_cast<NReceptor>(storage->TakeObject("NReceptor"));
  input->SetName("LengthInput");
  cont->AddComponent(input);
 
@@ -467,7 +467,7 @@ void NPulseNeuronLibrary::ACreateClassSamples(NStorage *storage)
  UploadClass("NSMuscle",cont);
 
  // Создаем мелкий нейрон
- NPulseNeuron *n=CreateSimplePulseNeuron(storage,"NPNeuron","NPNeuronMembrane",1,5,5);
+ UEPtr<NPulseNeuron> n=CreateSimplePulseNeuron(storage,"NPNeuron","NPNeuronMembrane",1,5,5);
  n->SetName("SPNeuron");
  UploadClass("NSPNeuron",n);
 
@@ -545,7 +545,7 @@ void NPulseNeuronLibrary::ACreateClassSamples(NStorage *storage)
  UploadClass("NLPLifeHebbNeuron",n);
 
  // Создаем афферентный нейрон
- NAfferentNeuron *an=CreateAfferentNeuron(storage,1);
+ UEPtr<NAfferentNeuron> an=CreateAfferentNeuron(storage,1);
  an->SetName("AfferentNeuron");
  UploadClass("NSAfferentNeuron",an);
 }

@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 
 #include <vcl.h>
+#include "rdk.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
 USEFORM("..\..\RDK\GUI\Builder\SeriesControlUnit.cpp", SeriesControlForm);
@@ -46,15 +47,27 @@ WINAPI WinMain(HINSTANCE inst, HINSTANCE, LPSTR, int)
 		Application->CreateForm(__classid(TLinksForm), &LinksForm);
 		Application->Run();
 	}
+	catch (RDK::UPtr<int>::UFEUsingZeroPtr *exception)
+	{
+	 Application->MessageBox(L"RDK::UPtr<int>::UFEUsingZeroPtr Exception",L"RDK Exception",MB_OK);
+
+	}
+	catch (RDK::UException *exception)
+	{
+	 Application->MessageBox(L"RDK Exception",L"RDK Exception",MB_OK);
+	}
 	catch (Exception &exception)
 	{
+//	 Application->MessageBox(L"RDK::UPtr<int>::UFEUsingZeroPtr Exception",L"RDK Exception",MB_OK);
 		Application->ShowException(&exception);
 	}
 	catch (...)
 	{
+//	 Application->MessageBox(L"RDK::UPtr<int>::UFEUsingZeroPtr Exception",L"RDK Exception",MB_OK);
+
 		try
 		{
-			throw Exception("");
+  			throw Exception("");
 		}
 		catch (Exception &exception)
 		{

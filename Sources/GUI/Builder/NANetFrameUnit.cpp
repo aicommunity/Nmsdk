@@ -64,7 +64,7 @@ void __fastcall TNANetFrame::ShowInputs(void)
 
  for(size_t i=0;i<buffer.GetSize();i++)
  {
-  NAConnector *cont=dynamic_cast<NAConnector*>(Net->GetComponentL(buffer[i]));
+  NAConnector *cont=RDK::dynamic_pointer_cast<NAConnector>(Net->GetComponentL(buffer[i]));
   for(int j=-1;j<int(cont->GetNumInputs());j++)
   {
    StringGrid->RowCount=StringGrid->RowCount+1;
@@ -103,7 +103,7 @@ void __fastcall TNANetFrame::ShowOutputs(void)
 
  for(size_t i=0;i<buffer.GetSize();i++)
  {
-  NAItem *cont=static_cast<NAItem*>(Net->GetComponentL(buffer[i]));
+  NAItem *cont=RDK::static_pointer_cast<NAItem>(Net->GetComponentL(buffer[i]));
   for(size_t j=0;j<cont->GetNumOutputs();j++)
   {
    StringGrid->RowCount=StringGrid->RowCount+1;
@@ -152,7 +152,7 @@ void __fastcall TNANetFrame::ShowLinks(void)
  for(int k=0;k<linkslist.GetSize();k++)
   {
    //b=linkslist.equal_range(I->first);
-   item=dynamic_cast<NAItem*>(Net->GetComponentL(linkslist[k].Item.Id));
+   item=RDK::dynamic_pointer_cast<NAItem>(Net->GetComponentL(linkslist[k].Item.Id));
    if(!item)
 	{
 	 continue;
@@ -161,7 +161,7 @@ void __fastcall TNANetFrame::ShowLinks(void)
    string itemname;
    item->GetLongName(Net,itemname);
 
-	 connector=dynamic_cast<NAConnector*>(Net->GetComponentL(linkslist[k].Connector.Id));
+	 connector=RDK::dynamic_pointer_cast<NAConnector>(Net->GetComponentL(linkslist[k].Connector.Id));
 	 if(!connector)
 	  {
 	   continue;

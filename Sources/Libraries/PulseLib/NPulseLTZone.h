@@ -98,7 +98,7 @@ virtual NPulseLTZone* New(void);
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-virtual bool CheckComponentType(const NAContainer* comp) const;
+virtual bool CheckComponentType(UEPtr<UAContainer> comp) const;
 // --------------------------
 
 

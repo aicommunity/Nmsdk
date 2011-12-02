@@ -196,29 +196,29 @@ void __fastcall TMuscleControlForm::SynapseKsiLabeledEditChange(TObject *Sender)
 
  real Ksi=StrToFloat(SynapseKsiLabeledEdit->Text);
 
- NNeuron* neuron=0;
- NPulseSynapse* synapse=0;
- NPulseChannel *channel=0;
+ UEPtr<NNeuron> neuron;
+ UEPtr<NPulseSynapse> synapse;
+ UEPtr<NPulseChannel> channel;
 
  for(size_t i=0;i<Net->GetNumComponents();i++)
  {
-  neuron=dynamic_cast<NNeuron*>(Net->GetComponentByIndex(i));
+  neuron=dynamic_pointer_cast<NNeuron>(Net->GetComponentByIndex(i));
   if(neuron)
   {
-   channel=dynamic_cast<NPulseChannel*>(neuron->GetComponentL("PNeuronMembrane.NegChannel"));
+   channel=dynamic_pointer_cast<NPulseChannel>(neuron->GetComponentL("PNeuronMembrane.NegChannel"));
    if(channel)
 	for(size_t j=0;j<channel->GetNumComponents();j++)
 	{
-	 synapse=dynamic_cast<NPulseSynapse*>(channel->GetComponentByIndex(j));
+	 synapse=dynamic_pointer_cast<NPulseSynapse>(channel->GetComponentByIndex(j));
 	 if(synapse)
 	  synapse->InhibitionCoeff=Ksi;
 	}
 
-   channel=dynamic_cast<NPulseChannel*>(neuron->GetComponentL("PNeuronMembrane.PosChannel"));
+   channel=dynamic_pointer_cast<NPulseChannel>(neuron->GetComponentL("PNeuronMembrane.PosChannel"));
    if(channel)
 	for(size_t j=0;j<channel->GetNumComponents();j++)
 	{
-	 synapse=dynamic_cast<NPulseSynapse*>(channel->GetComponentByIndex(j));
+	 synapse=dynamic_pointer_cast<NPulseSynapse>(channel->GetComponentByIndex(j));
 	 if(synapse)
 	  synapse->InhibitionCoeff=Ksi;
 	}

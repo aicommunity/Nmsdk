@@ -50,7 +50,7 @@ virtual ~NEnvironment(void);
 // Методы управления данными среды
 // --------------------------
 // Возвращает указатель на модель
-NModel* GetModel(void);
+RDK::UEPtr<NModel> GetModel(void);
 
 // Уничтожает текущую модель
 virtual bool DestroyModel(void);
@@ -61,13 +61,13 @@ virtual bool DestroyModel(void);
 // --------------------------
 // Добавляет объект заданного класса в модель
 // Возвращает указатель на добавленный объект
-NAContainer* AddObject(const NameT &classname);
+RDK::UEPtr<NAContainer> AddObject(const NameT &classname);
 
 // Добавляет объект заданного класса 'classname' в модель
 // в случае, если объект с именем 'objectname' не найден в модели
 // Возвращает указатель на объект
 // Метод не гарантирует задание имени 'objectname', если такое имя уже имеется в модели
-NAContainer* AddObject(const NameT &objectname, const NameT &classname);
+RDK::UEPtr<NAContainer> AddObject(const NameT &objectname, const NameT &classname);
 // --------------------------
 
 // --------------------------
@@ -91,20 +91,20 @@ map<NController*, bool>::iterator GetLastController(void);
 // Операторы доступа к данным среды
 // --------------------------
 // Возвращает указатель на модель
-NModel* const operator -> (void);
+RDK::UEPtr<NModel> const operator -> (void);
 
 // Возвращает указатель на компонент модели по длинному имени
 // Выбраный компонент становится текущим
 // Если компонент не найден, то возвращает 0 и сбрасывает текущий компонент
-NAContainer* operator () (const string &longname);
+RDK::UEPtr<NAContainer> operator () (const string &longname);
 
 // Возвращает указатель на компонент модели по длинному идентификатору
 // Выбраный компонент становится текущим
 // Если компонент не найден, то возвращает 0 и сбрасывает текущий компонент
-NAContainer* operator () (const ULongId &longid);
+RDK::UEPtr<NAContainer> operator () (const ULongId &longid);
 
 // Возвращает указатель на текущий компонент модели
-NAContainer* operator () (void);
+RDK::UEPtr<NAContainer> operator () (void);
 // --------------------------
 
 // --------------------------

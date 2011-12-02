@@ -36,9 +36,9 @@ NEnvironment::~NEnvironment(void)
 // Методы управления данными среды
 // --------------------------
 // Возвращает указатель на модель
-NModel* NEnvironment::GetModel(void)
+RDK::UEPtr<NModel> NEnvironment::GetModel(void)
 {
- return static_cast<NModel*>(Model);
+ return RDK::static_pointer_cast<NModel>(Model);
 }
 
 // Уничтожает текущую модель
@@ -47,7 +47,7 @@ bool NEnvironment::DestroyModel(void)
  if(!Model)
   return true;
 
- GetModel()->Free();
+// GetModel()->Free();
  return RDK::UAContainerEnvironment::DestroyModel();
 }
 // --------------------------
@@ -118,7 +118,7 @@ map<NController*, bool>::iterator NEnvironment::GetLastController(void)
 // Операторы доступа к данным среды
 // --------------------------
 // Возвращает указатель на модель
-NModel* const NEnvironment::operator -> (void)
+RDK::UEPtr<NModel> const NEnvironment::operator -> (void)
 {
  return GetModel();
 }
@@ -126,33 +126,33 @@ NModel* const NEnvironment::operator -> (void)
 // Возвращает указатель на компонент модели по длинному имени
 // Выбраный компонент становится текущим
 // Если компонент не найден, то возвращает 0 и сбрасывает текущий компонент
-NAContainer* NEnvironment::operator () (const string &longname)
+RDK::UEPtr<NAContainer> NEnvironment::operator () (const string &longname)
 {
  if(!Model)
   CurrentComponent=0;
  else
   CurrentComponent=GetModel()->GetComponentL(longname);
 
- return static_cast<NAContainer*>(CurrentComponent);
+ return RDK::static_pointer_cast<NAContainer>(CurrentComponent);
 }
 
 // Возвращает указатель на компонент модели по длинному идентификатору
 // Выбраный компонент становится текущим
 // Если компонент не найден, то возвращает 0 и сбрасывает текущий компонент
-NAContainer* NEnvironment::operator () (const ULongId &longid)
+RDK::UEPtr<NAContainer> NEnvironment::operator () (const ULongId &longid)
 {
  if(!Model)
   CurrentComponent=0;
  else
   CurrentComponent=GetModel()->GetComponentL(longid);
 
- return static_cast<NAContainer*>(CurrentComponent);
+ return RDK::static_pointer_cast<NAContainer>(CurrentComponent);
 }
 
 // Возвращает указатель на текущий компонент модели
-NAContainer* NEnvironment::operator () (void)
+RDK::UEPtr<NAContainer> NEnvironment::operator () (void)
 {
- return static_cast<NAContainer*>(CurrentComponent);
+ return RDK::static_pointer_cast<NAContainer>(CurrentComponent);
 }
 // --------------------------
 
@@ -312,21 +312,22 @@ bool NEnvironment::UnLoadClassLibrary(const string &libname)
 // --------------------------
 // Добавляет объект заданного класса в модель
 // Возвращает указатель на добавленный объект
-NAContainer* NEnvironment::AddObject(const NameT &classname)
+RDK::UEPtr<NAContainer> NEnvironment::AddObject(const NameT &classname)
 {
- NAContainer *comp=0;
+ RDK::UEPtr<NAContainer> comp=0;
 
  if(!Storage || !Model)
   return 0;
 
- comp=static_cast<NAContainer*>(GetStorage()->TakeObject(classname));
+ comp=RDK::static_pointer_cast<NAContainer>(GetStorage()->TakeObject(classname));
 
  if(!comp)
   return 0;
 
  if(!GetModel()->AddComponent(comp))
  {
-  Storage->ReturnObject(comp);
+  comp->Free();
+//  Storage->ReturnObject(RDK::static_pointer_cast<RDK::UAComponent>(comp));
   return 0;
  }
  return comp;
@@ -337,12 +338,12 @@ NAContainer* NEnvironment::AddObject(const NameT &classname)
 // в модель в случае, если объект с именем 'objectname' не найден в модели
 // Возвращает указатель на объект
 // Метод не гарантирует задание имени 'objectname', если такое имя уже имеется в модели
-NAContainer* NEnvironment::AddObject(const NameT &objectname, const NameT &classname)
+RDK::UEPtr<NAContainer> NEnvironment::AddObject(const NameT &objectname, const NameT &classname)
 {
  if(!Model)
   return 0;
 
- RDK::UAContainer *comp=GetModel()->GetComponent(objectname);
+ RDK::UEPtr<NAContainer> comp=GetModel()->GetComponent(objectname);
 
  if(!comp)
  {
@@ -353,7 +354,7 @@ NAContainer* NEnvironment::AddObject(const NameT &objectname, const NameT &class
   comp->SetName(objectname);
  }
 
- return dynamic_cast<NAContainer*>(comp);
+ return RDK::dynamic_pointer_cast<NAContainer>(comp);
 }
 // --------------------------
 

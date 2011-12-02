@@ -191,6 +191,13 @@ object ManipulatorTestForm: TManipulatorTestForm
         Height = 13
         Caption = #1055#1086#1089#1090'. '#1074#1088#1077#1084#1077#1085#1080' '#1079#1072#1088#1103#1076#1072' PAC:'
       end
+      object Label12: TLabel
+        Left = 14
+        Top = 257
+        Width = 77
+        Height = 13
+        Caption = #1056#1077#1078#1080#1084' '#1088#1072#1073#1086#1090#1099':'
+      end
       object MomentTrackBar: TTrackBar
         Left = 5
         Top = 18
@@ -435,7 +442,7 @@ object ManipulatorTestForm: TManipulatorTestForm
           Width = 48
           Height = 21
           TabOrder = 6
-          Text = '30'
+          Text = '5'
           OnChange = ServoNumberEditChange
         end
         object VaEdit: TEdit
@@ -444,7 +451,7 @@ object ManipulatorTestForm: TManipulatorTestForm
           Width = 48
           Height = 21
           TabOrder = 7
-          Text = '30'
+          Text = '100'
         end
         object SendVButton: TButton
           Left = 84
@@ -473,6 +480,19 @@ object ManipulatorTestForm: TManipulatorTestForm
         Height = 17
         Caption = #1087#1086' N'
         TabOrder = 17
+      end
+      object WorkModeComboBox: TComboBox
+        Left = 14
+        Top = 272
+        Width = 178
+        Height = 21
+        ItemIndex = 0
+        TabOrder = 18
+        Text = #1050#1086#1084#1072#1085#1076#1085#1099#1081
+        OnSelect = WorkModeComboBoxSelect
+        Items.Strings = (
+          #1050#1086#1084#1072#1085#1076#1085#1099#1081
+          #1053#1077#1081#1088#1086)
       end
     end
   end

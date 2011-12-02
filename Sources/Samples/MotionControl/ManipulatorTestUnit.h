@@ -82,6 +82,8 @@ __published:	// IDE-managed Components
 	TLabel *Label11;
 	TButton *SendVButton;
 	TCheckBox *MulToNumberOfControlElementsCheckBox;
+	TComboBox *WorkModeComboBox;
+	TLabel *Label12;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall MomentTrackBarChange(TObject *Sender);
 	void __fastcall IaCheckBoxClick(TObject *Sender);
@@ -103,6 +105,7 @@ __published:	// IDE-managed Components
 	void __fastcall OnDeviceButtonClick(TObject *Sender);
 	void __fastcall OffDeviceButtonClick(TObject *Sender);
 	void __fastcall SendVButtonClick(TObject *Sender);
+	void __fastcall WorkModeComboBoxSelect(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TManipulatorTestForm(TComponent* Owner);

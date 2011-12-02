@@ -142,7 +142,7 @@ NPulseSynChannel* NPulseSynChannel::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NPulseSynChannel::CheckComponentType(const NAContainer* comp) const
+bool NPulseSynChannel::CheckComponentType(UEPtr<NAContainer> comp) const
 {
 // if(dynamic_cast<const NPulseSynapse*>(comp))
 //  return true;
@@ -158,7 +158,7 @@ bool NPulseSynChannel::CheckComponentType(const NAContainer* comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-/*bool NPulseSynChannel::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
+/*bool NPulseSynChannel::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
 {
  InstallHebbSynapses(comp);
  return true;
@@ -168,7 +168,7 @@ bool NPulseSynChannel::CheckComponentType(const NAContainer* comp) const
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-/*bool NPulseSynChannel::ADelComponent(NAContainer* comp)
+/*bool NPulseSynChannel::ADelComponent(UEPtr<UAContainer> comp)
 {
  return true;
 }                     */
@@ -276,9 +276,9 @@ bool NPulseSynChannel::ACalculate(void)
    if(MainOwner && Owner)
    {
 	if(Type() < 0)
-	 ++static_cast<NPulseNeuron*>(MainOwner)->NumActivePosInputs.v;
+	 ++static_pointer_cast<NPulseNeuron>(MainOwner)->NumActivePosInputs.v;
 	else
-	 ++static_cast<NPulseNeuron*>(MainOwner)->NumActiveNegInputs.v;
+	 ++static_pointer_cast<NPulseNeuron>(MainOwner)->NumActiveNegInputs.v;
    }
 
    if(input>0)
@@ -297,7 +297,7 @@ bool NPulseSynChannel::ACalculate(void)
  if(num_connected_channels)
   channel_input/=num_connected_channels;
 
- real feedback=static_cast<NPulseMembrane*>(Owner)->Feedback;
+ real feedback=static_pointer_cast<NPulseMembrane>(Owner)->Feedback;
  // Получение информации об обратной связи
  if(Owner)
   channel_input-=feedback;

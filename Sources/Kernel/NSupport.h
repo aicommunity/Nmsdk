@@ -41,7 +41,7 @@ See file license.txt for more information
 namespace NMSDK {
 
 using namespace std;
-//using namespace RDK;
+using namespace RDK;
 using RDK::UId;
 using RDK::ULongId;
 using RDK::NameT;
@@ -313,8 +313,8 @@ struct NPVariable
                    */
 // Константы
 extern const TimeT DefaultTimeStep;
-extern const NameT ForbiddenName;
-extern const UId ForbiddenId;
+//extern const NameT ForbiddenName;
+//extern const UId ForbiddenId;
 
 // Буферы
 extern Real RTemp;

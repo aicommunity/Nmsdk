@@ -106,12 +106,12 @@ bool NEngineMotionControl::AReset(void)
   NAContainer* cont=GetComponent(string("MotionElement")+RDK::sntoa(n));
   if(!cont)
    continue;
-  receptor[n][0]=static_cast<NReceptor*>(cont->GetComponentL("Afferent_Ia1.Receptor"));
-  receptor[n][1]=static_cast<NReceptor*>(cont->GetComponentL("Afferent_Ia2.Receptor"));
-  receptor[n][2]=static_cast<NReceptor*>(cont->GetComponentL("Afferent_Ib1.Receptor"));
-  receptor[n][3]=static_cast<NReceptor*>(cont->GetComponentL("Afferent_Ib2.Receptor"));
-  receptor[n][4]=static_cast<NReceptor*>(cont->GetComponentL("Afferent_II1.Receptor"));
-  receptor[n][5]=static_cast<NReceptor*>(cont->GetComponentL("Afferent_II2.Receptor"));
+  receptor[n][0]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ia1.Receptor"));
+  receptor[n][1]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ia2.Receptor"));
+  receptor[n][2]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ib1.Receptor"));
+  receptor[n][3]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ib2.Receptor"));
+  receptor[n][4]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_II1.Receptor"));
+  receptor[n][5]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_II2.Receptor"));
  }
 
  return true;
@@ -197,10 +197,10 @@ bool NEngineMotionControl::Create(void)
 // на две полосы по знаку
 NANet* NEngineMotionControl::CreateEngineControlSignumAfferent(void)
 {
- NAContainer *cont;
+ UEPtr<NAContainer> cont;
  bool res;
 
- vector<NNet*> Motions;
+ vector<UEPtr<NNet> > Motions;
 
  NANet *net=this;
  NStorage *storage=dynamic_cast<NStorage*>(Storage);
@@ -212,113 +212,115 @@ NANet* NEngineMotionControl::CreateEngineControlSignumAfferent(void)
  // Двигательный элемент
 // size_t num_motions=1;
 
+ double exp_coeff=0.1;
+
  for(size_t i=0;i<num_motions;i++)
  {
-  cont=storage->TakeObject(MotionElementClassName);
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject(MotionElementClassName));
   if(!cont)
    return 0;
   cont->SetName(string("MotionElement")+RDK::sntoa(i));
   res=net->AddComponent(cont);
-  Motions.push_back(static_cast<NNet*>(cont));
+  Motions.push_back(static_pointer_cast<NNet>(cont));
 
-  receptor=dynamic_cast<NReceptor*>(Motions[0]->GetComponentL("Afferent_Ia1.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[0]->GetComponentL("Afferent_Ia1.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=10.0/num_motions;
   receptor->InputAdaptationMode=0;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[0]->GetComponentL("Afferent_Ia2.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[0]->GetComponentL("Afferent_Ia2.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=10.0/num_motions;
   receptor->InputAdaptationMode=0;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[0]->GetComponentL("Afferent_Ib1.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[0]->GetComponentL("Afferent_Ib1.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=10.0/num_motions;
   receptor->InputAdaptationMode=0;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[0]->GetComponentL("Afferent_Ib2.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[0]->GetComponentL("Afferent_Ib2.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=10.0/num_motions;
   receptor->InputAdaptationMode=0;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[0]->GetComponentL("Afferent_II1.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[0]->GetComponentL("Afferent_II1.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=3.14/num_motions;
   receptor->InputAdaptationMode=0;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
 
-  receptor=dynamic_cast<NReceptor*>(Motions[0]->GetComponentL("Afferent_II2.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[0]->GetComponentL("Afferent_II2.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=3.14/num_motions;
   receptor->InputAdaptationMode=0;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
  }
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("AfferentSource1");
- ((NConstGenerator*)cont)->Amplitude=0;
+ static_pointer_cast<NConstGenerator>(cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("AfferentSource2");
- ((NConstGenerator*)cont)->Amplitude=0;
+ static_pointer_cast<NConstGenerator>(cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("LengthSource1");
- ((NConstGenerator*)cont)->Amplitude=0;
+ static_pointer_cast<NConstGenerator>(cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow1ActivatorGenerator");
- ((NPulseGenerator*)cont)->Frequency=0;
- ((NPulseGenerator*)cont)->Amplitude=1;
+ static_pointer_cast<NPulseGenerator>(cont)->Frequency=0;
+ static_pointer_cast<NPulseGenerator>(cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow2ActivatorGenerator");
- ((NPulseGenerator*)cont)->Frequency=0;
- ((NPulseGenerator*)cont)->Amplitude=1;
+ static_pointer_cast<NPulseGenerator>(cont)->Frequency=0;
+ static_pointer_cast<NPulseGenerator>(cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow1DeactivatorGenerator");
- ((NPulseGenerator*)cont)->Frequency=0;
- ((NPulseGenerator*)cont)->Amplitude=1;
+ static_pointer_cast<NPulseGenerator>(cont)->Frequency=0;
+ static_pointer_cast<NPulseGenerator>(cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow2DeactivatorGenerator");
- ((NPulseGenerator*)cont)->Frequency=0;
- ((NPulseGenerator*)cont)->Amplitude=1;
+ static_pointer_cast<NPulseGenerator>(cont)->Frequency=0;
+ static_pointer_cast<NPulseGenerator>(cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NFrequencyReceiver");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
  if(!cont)
   return 0;
  cont->SetName("Motoneuron1FrequencyReceiver");
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NFrequencyReceiver");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
  if(!cont)
   return 0;
  cont->SetName("Motoneuron2FrequencyReceiver");
@@ -326,25 +328,25 @@ NANet* NEngineMotionControl::CreateEngineControlSignumAfferent(void)
 
 
  // Двигатель
- cont=storage->TakeObject("NDCEngine");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NDCEngine"));
  if(!cont)
   return 0;
  cont->SetName("Engine");
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("EngineMoment");
- ((NConstGenerator*)cont)->Amplitude=0;
+ static_pointer_cast<NConstGenerator>(cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPac");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPac"));
  if(!cont)
   return 0;
  cont->SetName("Pac");
  res=net->AddComponent(cont);
- ((NPac*)cont)->SetOutputDataSize(0,Motions.size()*2);
+ static_pointer_cast<NPac>(cont)->SetOutputDataSize(0,Motions.size()*2);
 
  // Начальные значения всем параметрам
  // Амплитуда входных импульсов
@@ -353,17 +355,17 @@ NANet* NEngineMotionControl::CreateEngineControlSignumAfferent(void)
  values.resize(Motions.size()*2);
  for(size_t i=0;i<values.size();i++)
   values[i].assign(1,1);
- ((NPac*)cont)->PulseAmplitude=values;
+ static_pointer_cast<NPac>(cont)->PulseAmplitude=values;
 
  // Постоянная времени выделения медиатора
  for(size_t i=0;i<values.size();i++)
   values[i].assign(1,0.05);
- ((NPac*)cont)->SecretionTC=values;
+ static_pointer_cast<NPac>(cont)->SecretionTC=values;
 
  // Постоянная времени распада медиатора
  for(size_t i=0;i<values.size();i++)
   values[i].assign(1,0.5);
- ((NPac*)cont)->DissociationTC=values;
+ static_pointer_cast<NPac>(cont)->DissociationTC=values;
 
  // Усиление
  for(size_t i=0;i<values.size()/2;i++)
@@ -377,54 +379,54 @@ NANet* NEngineMotionControl::CreateEngineControlSignumAfferent(void)
   values[i].assign(1,-10.0/num_motions);
  }
 
- ((NPac*)cont)->Gain=values;
+ static_pointer_cast<NPac>(cont)->Gain=values;
 
- cont=storage->TakeObject("NPosSignumSeparator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPosSignumSeparator"));
  if(!cont)
   return 0;
  cont->SetName("Ib_PosSignumSeparator");
- ((NSignumSeparator*)cont)->SetNumOutputs(1);
+ static_pointer_cast<NSignumSeparator>(cont)->SetNumOutputs(1);
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NNegSignumSeparator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NNegSignumSeparator"));
  if(!cont)
   return 0;
  cont->SetName("Ib_NegSignumSeparator");
- ((NSignumSeparator*)cont)->SetNumOutputs(1);
+ static_pointer_cast<NSignumSeparator>(cont)->SetNumOutputs(1);
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPosSignumSeparator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPosSignumSeparator"));
  if(!cont)
   return 0;
  cont->SetName("II_PosSignumSeparator");
- ((NSignumSeparator*)cont)->SetNumOutputs(1);
+ static_pointer_cast<NSignumSeparator>(cont)->SetNumOutputs(1);
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NNegSignumSeparator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NNegSignumSeparator"));
  if(!cont)
   return 0;
  cont->SetName("II_NegSignumSeparator");
- ((NSignumSeparator*)cont)->SetNumOutputs(1);
+ static_pointer_cast<NSignumSeparator>(cont)->SetNumOutputs(1);
  res=net->AddComponent(cont);
 
  Real gain_value;
 
- cont=dynamic_cast<NSignumSeparator*>(storage->TakeObject("NPosSignumSeparator"));
+ cont=dynamic_pointer_cast<NSignumSeparator>(storage->TakeObject("NPosSignumSeparator"));
  if(!cont)
   return 0;
  cont->SetName("Ia_PosSignumSeparator");
- ((NSignumSeparator*)cont)->SetNumOutputs(1);
+ static_pointer_cast<NSignumSeparator>(cont)->SetNumOutputs(1);
  gain_value.assign(1,1.0/num_motions);
- ((NSignumSeparator*)cont)->Gain=gain_value;
+ static_pointer_cast<NSignumSeparator>(cont)->Gain=gain_value;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NNegSignumSeparator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NNegSignumSeparator"));
  if(!cont)
   return 0;
  cont->SetName("Ia_NegSignumSeparator");
- ((NSignumSeparator*)cont)->SetNumOutputs(1);
+ static_pointer_cast<NSignumSeparator>(cont)->SetNumOutputs(1);
  gain_value.assign(1,1.0/num_motions);
- ((NSignumSeparator*)cont)->Gain=gain_value;
+ static_pointer_cast<NSignumSeparator>(cont)->Gain=gain_value;
  res=net->AddComponent(cont);
 
 // return net; // Заглушка!!!
@@ -729,86 +731,88 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  if(!net)
   return 0;
 
- int outmode=4;
+ int outmode=1;
  int inpmode=0;
+
+ double exp_coeff=0.0001;//0.00001;
 
  // Двигательные элементы
  for(int i=0;i<num_motions;i++)
  {
-  cont=storage->TakeObject(MotionElementClassName);
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject(MotionElementClassName));
   if(!cont)
    return 0;
   cont->SetName(string("MotionElement")+RDK::sntoa(i));
   res=net->AddComponent(cont);
   Motions.push_back(static_cast<NNet*>(cont));
 
-  receptor=dynamic_cast<NReceptor*>(Motions[i]->GetComponentL("Afferent_Ia1.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[i]->GetComponentL("Afferent_Ia1.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=fabs(IaMin)/real_ranges;
   receptor->InputAdaptationMode=inpmode;
   receptor->OutputAdaptationMode=outmode;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[i]->GetComponentL("Afferent_Ia2.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[i]->GetComponentL("Afferent_Ia2.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=fabs(IaMax)/real_ranges;
   receptor->InputAdaptationMode=inpmode;
   receptor->OutputAdaptationMode=outmode;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[i]->GetComponentL("Afferent_Ib1.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[i]->GetComponentL("Afferent_Ib1.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=fabs(IbMin)/real_ranges;
   receptor->InputAdaptationMode=inpmode;
   receptor->OutputAdaptationMode=outmode;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[i]->GetComponentL("Afferent_Ib2.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[i]->GetComponentL("Afferent_Ib2.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=fabs(IbMax)/real_ranges;
   receptor->InputAdaptationMode=inpmode;
   receptor->OutputAdaptationMode=outmode;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
-  receptor=dynamic_cast<NReceptor*>(Motions[i]->GetComponentL("Afferent_II1.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[i]->GetComponentL("Afferent_II1.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=fabs(IIMin)/real_ranges;
   receptor->InputAdaptationMode=inpmode;
   receptor->OutputAdaptationMode=outmode;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
 
 
-  receptor=dynamic_cast<NReceptor*>(Motions[i]->GetComponentL("Afferent_II2.Receptor"));
+  receptor=dynamic_pointer_cast<NReceptor>(Motions[i]->GetComponentL("Afferent_II2.Receptor"));
   receptor->MinInputRange=0;
   receptor->MaxInputRange=fabs(IIMax)/real_ranges;
   receptor->InputAdaptationMode=inpmode;
   receptor->OutputAdaptationMode=outmode;
-  receptor->ExpCoeff=1;
+  receptor->ExpCoeff=exp_coeff;
  }
 
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("AfferentSource1");
  ((NConstGenerator*)cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("AfferentSource2");
  ((NConstGenerator*)cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("LengthSource1");
  ((NConstGenerator*)cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow1ActivatorGenerator");
@@ -816,7 +820,7 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  ((NPulseGenerator*)cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow2ActivatorGenerator");
@@ -824,7 +828,7 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  ((NPulseGenerator*)cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow1DeactivatorGenerator");
@@ -832,7 +836,7 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  ((NPulseGenerator*)cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPGenerator"));
  if(!cont)
   return 0;
  cont->SetName("Renshow2DeactivatorGenerator");
@@ -840,13 +844,13 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  ((NPulseGenerator*)cont)->Amplitude=1;
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NFrequencyReceiver");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
  if(!cont)
   return 0;
  cont->SetName("Motoneuron1FrequencyReceiver");
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NFrequencyReceiver");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
  if(!cont)
   return 0;
  cont->SetName("Motoneuron2FrequencyReceiver");
@@ -854,44 +858,44 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
 
 
  // Двигатель
- cont=storage->TakeObject("NDCEngine");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NDCEngine"));
  if(!cont)
   return 0;
  cont->SetName("Engine");
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NCGenerator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NCGenerator"));
  if(!cont)
   return 0;
  cont->SetName("EngineMoment");
  ((NConstGenerator*)cont)->Amplitude=0;
  res=net->AddComponent(cont);
 
-  cont=storage->TakeObject("NManipulatorSource");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NManipulatorSource"));
  if(!cont)
   return 0;
  cont->SetName("NManipulatorSource1");
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NManipulatorSourceEmulator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NManipulatorSourceEmulator"));
  if(!cont)
   return 0;
  cont->SetName("NManipulatorSourceEmulator1");
  res=net->AddComponent(cont);
 
-cont=storage->TakeObject("NManipulatorInput");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NManipulatorInput"));
  if(!cont)
   return 0;
  cont->SetName("NManipulatorInput1");
  res=net->AddComponent(cont);
 
-cont=storage->TakeObject("NManipulatorInputEmulator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NManipulatorInputEmulator"));
  if(!cont)
   return 0;
  cont->SetName("NManipulatorInputEmulator1");
  res=net->AddComponent(cont);
 
- cont=storage->TakeObject("NPac");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NPac"));
  if(!cont)
   return 0;
  cont->SetName("Pac");
@@ -950,7 +954,7 @@ cont=storage->TakeObject("NManipulatorInputEmulator");
 
  for(int i=0;i<num_ranges;i++)
  {
-  cont=storage->TakeObject("NIntervalSeparator");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NIntervalSeparator"));
   if(!cont)
    return 0;
   cont->SetName(string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1));
@@ -969,7 +973,7 @@ cont=storage->TakeObject("NManipulatorInputEmulator");
 
  for(int i=0;i<num_ranges;i++)
  {
-  cont=storage->TakeObject("NIntervalSeparator");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NIntervalSeparator"));
   if(!cont)
    return 0;
   cont->SetName(string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1));
@@ -991,7 +995,7 @@ cont=storage->TakeObject("NManipulatorInputEmulator");
 // neg_range=(0-left_range)/num_ranges;
  for(int i=0;i<num_ranges;i++)
  {
-  cont=storage->TakeObject("NIntervalSeparator");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NIntervalSeparator"));
   if(!cont)
    return 0;
   cont->SetName(string("II_NegIntervalSeparator")+RDK::sntoa(i+1));
@@ -1010,7 +1014,7 @@ cont=storage->TakeObject("NManipulatorInputEmulator");
 
  for(int i=0;i<num_ranges;i++)
  {
-  cont=storage->TakeObject("NIntervalSeparator");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NIntervalSeparator"));
   if(!cont)
    return 0;
   cont->SetName(string("II_PosIntervalSeparator")+RDK::sntoa(i+1));
@@ -1032,7 +1036,7 @@ cont=storage->TakeObject("NManipulatorInputEmulator");
 // neg_range=(0-left_range)/num_ranges;
  for(int i=0;i<num_ranges;i++)
  {
-  cont=storage->TakeObject("NIntervalSeparator");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NIntervalSeparator"));
   if(!cont)
    return 0;
   cont->SetName(string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1));
@@ -1051,7 +1055,7 @@ cont=storage->TakeObject("NManipulatorInputEmulator");
 
  for(int i=0;i<num_ranges;i++)
  {
-  cont=storage->TakeObject("NIntervalSeparator");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NIntervalSeparator"));
   if(!cont)
    return 0;
   cont->SetName(string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1));
@@ -1071,13 +1075,13 @@ cont=storage->TakeObject("NManipulatorInputEmulator");
  // Компоненты вычисления статистики
  for(size_t i=0;i<num_motions;i++)
  {
-  cont=storage->TakeObject("NFrequencyReceiver");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
   if(!cont)
    return 0;
   cont->SetName("PosMNFrequencyReceiver"+RDK::sntoa(i));
   res=net->AddComponent(cont);
 
-  cont=storage->TakeObject("NFrequencyReceiver");
+  cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
   if(!cont)
    return 0;
   cont->SetName("NegMNFrequencyReceiver"+RDK::sntoa(i));

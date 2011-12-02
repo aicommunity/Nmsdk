@@ -20,10 +20,13 @@ namespace NMSDK {
 // Формирует СУ двигательной единицей
 // Если mode == 0 - формируется полная модель
 // 	    mode == 1 - модель без вставочных интернейронов
-NANet* CreateMotionElement(NStorage *storage, const string &netclassname, int mode);
+UEPtr<NANet> CreateMotionElement(NStorage *storage, const string &netclassname, int mode);
 
 // Аналогично, но с развязкой по дендритам
-NANet* CreateBranchedMotionElement(NStorage *storage, const string &netclassname, int mode);
+UEPtr<NANet> CreateBranchedMotionElement(NStorage *storage, const string &netclassname, int mode);
+
+bool CreateNeuronBranchLink(UEPtr<NANet> net,const string &source,
+	const string &target_head, const string &target_tail);
 
 }
 //---------------------------------------------------------------------------

@@ -96,7 +96,7 @@ NPulseLTZone* NPulseLTZone::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NPulseLTZone::CheckComponentType(const NAContainer* comp) const
+bool NPulseLTZone::CheckComponentType(UEPtr<UAContainer> comp) const
 {
 // if(dynamic_cast<const NConnector*>(comp))
 //  return true;
@@ -237,7 +237,7 @@ bool NPulseLTZone::ACalculate(void)
 
 
  if(MainOwner)
-  static_cast<NPulseNeuron*>(MainOwner)->NumActiveOutputs.v+=static_cast<real>(GetNumAConnectors(0));
+  static_pointer_cast<NPulseNeuron>(MainOwner)->NumActiveOutputs.v+=static_cast<real>(GetNumAConnectors(0));
 
  return true;
 }

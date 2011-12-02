@@ -591,7 +591,7 @@ size_t NAContainer::GetNumAllComponents(void) const
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NAContainer::CheckComponentType(const NAContainer* comp) const
+bool NAContainer::CheckComponentType(UEPtr<NAContainer> comp) const
 {
  return false;
 }
@@ -1433,7 +1433,7 @@ bool NAContainer::DelComponent(NAContainer* comp, bool canfree)
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NAContainer::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
+bool NAContainer::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
 {
  return true;
 }
@@ -1442,7 +1442,7 @@ bool NAContainer::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-bool NAContainer::ADelComponent(NAContainer* comp)
+bool NAContainer::ADelComponent(UEPtr<UAContainer> comp)
 {
  return true;
 }
@@ -2658,7 +2658,7 @@ LinksListT& NANet::GetLinks(LinksListT &linkslist, const NAContainer *netlevel) 
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NANet::CheckComponentType(const NAContainer* comp) const
+bool NANet::CheckComponentType(UEPtr<NAContainer> comp) const
 {
  return (dynamic_cast<const NAItem*>(comp) ||
  dynamic_cast<const NANet*>(comp) || dynamic_cast<const NAConnector*>(comp))?true:false;
@@ -2672,7 +2672,7 @@ bool NANet::CheckComponentType(const NAContainer* comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NANet::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
+bool NANet::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
 {
  return true;
 }
@@ -2681,7 +2681,7 @@ bool NANet::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-bool NANet::ADelComponent(NAContainer* comp)
+bool NANet::ADelComponent(UEPtr<UAContainer> comp)
 {
  if(dynamic_cast<NAItem*>(comp))
   ((NAItem*)comp)->DisconnectBy(this);

@@ -179,16 +179,16 @@ NLifeNet* NLifeNet::New(void)
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NLifeNet::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
+bool NLifeNet::AAddComponent(UEPtr<NAContainer> comp, RDK::UIPointer* pointer)
 {
  if(!NNet::AAddComponent(comp,pointer))
   return false;
 
  bool res=true;
 
- NPulseLifeNeuron *n=dynamic_cast<NPulseLifeNeuron*>(comp);
- NNeuronLife *life=0;
- NSum *pebonus=0;
+ UEPtr<NPulseLifeNeuron> n=dynamic_pointer_cast<NPulseLifeNeuron>(comp);
+ UEPtr<NNeuronLife> life;
+ UEPtr<NSum> pebonus;
  if(n)
  {
   life=n->GetNeuronLife();
@@ -203,8 +203,8 @@ bool NLifeNet::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
   // Устанавливает первичные связи нейрона
   for(size_t i=0;i<GetNumComponents();i++)
   {
-   NPulseLifeNeuron *nn=dynamic_cast<NPulseLifeNeuron*>(GetComponentByIndex(i));
-   NNeuronLife *life2=0;
+   UEPtr<NPulseLifeNeuron> nn=dynamic_pointer_cast<NPulseLifeNeuron>(GetComponentByIndex(i));
+   UEPtr<NNeuronLife> life2;
    if(nn && nn != n)
    {
 	life2=nn->GetNeuronLife();
@@ -298,7 +298,7 @@ bool NLifeNet::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-bool NLifeNet::ADelComponent(NAContainer* comp)
+bool NLifeNet::ADelComponent(UEPtr<NAContainer> comp)
 {
  vector<NNeuronLife*>::iterator I;
 
@@ -375,13 +375,13 @@ bool NLifeNet::ACalculate(void)
  for(size_t i=0;i<NeuronsLife.size();i++)
  {
 //  POutputData[10].Double[i]=0;
-  SynapticMap[static_cast<NPulseLifeNeuron*>(NeuronsLife[i]->GetOwner())];
+  SynapticMap[static_pointer_cast<NPulseLifeNeuron>(NeuronsLife[i]->GetOwner())];
   if(NeuronsLife[i]->GetActivity())
   {
    SummaryFeeling.v+=NeuronsLife[i]->GetOutputData(1).Double[0];
    SummaryWearOut.v+=NeuronsLife[i]->GetOutputData(2).Double[0];
    SummaryEnergy.v+=NeuronsLife[i]->GetOutputData(4).Double[0];
-   NPulseLTZone *zone=static_cast<NPulseLTZone*>(static_cast<NAContainer*>(NeuronsLife[i]->GetOwner())->GetComponent("LTZone"));
+   UEPtr<NPulseLTZone> zone=static_pointer_cast<NPulseLTZone>(static_pointer_cast<NAContainer>(NeuronsLife[i]->GetOwner())->GetComponent("LTZone"));
 //   POutputData[10].Double[i]=zone->GetNumAConnectors(0);
    SummaryFrequency.v+=zone->GetOutputData(2).Double[0];
    ++SummaryLiveNeurons.v;
@@ -394,9 +394,9 @@ bool NLifeNet::ACalculate(void)
  for(size_t i=0;i<best_neurons.size();i++)
  {
   best_neurons[i]->Energy=best_neurons[i]->Energy/2;
-  NPulseLifeNeuron *n=static_cast<NPulseLifeNeuron*>(Storage->TakeObject(best_neurons[i]->GetMainOwner()->GetClass()));
+  UEPtr<NPulseLifeNeuron> n=static_pointer_cast<NPulseLifeNeuron>(Storage->TakeObject(best_neurons[i]->GetMainOwner()->GetClass()));
   n->SetName("N");
-  n->SetCoord(static_cast<NPulseLifeNeuron*>(best_neurons[i]->GetMainOwner())->GetCoord());
+  n->SetCoord(static_pointer_cast<NPulseLifeNeuron>(best_neurons[i]->GetMainOwner())->GetCoord());
   n->GetNeuronLife()->Energy=best_neurons[i]->Energy;
   AddComponent(n);
  }
@@ -463,13 +463,13 @@ bool NLifeNet::CalcEnsembles(real threshold)
 
  real resthreshold=0;
  size_t numneurons=0;
- NPulseLifeNeuron* n=0;
+ UEPtr<NPulseLifeNeuron> n;
  switch(EnsembleThresholdMode)
  {
  case 2:
   for(size_t i=0;i<NeuronsLife.size();i++)
   {
-   n=static_cast<NPulseLifeNeuron*>(NeuronsLife[i]->GetOwner());
+   n=static_pointer_cast<NPulseLifeNeuron>(NeuronsLife[i]->GetOwner());
    if(n->GetActivity())
    {
 	resthreshold+=n->GetOutputData(5).Double[0];
@@ -483,7 +483,7 @@ bool NLifeNet::CalcEnsembles(real threshold)
 
  for(size_t i=0;i<NeuronsLife.size();i++)
  {
-  n=static_cast<NPulseLifeNeuron*>(NeuronsLife[i]->GetOwner());
+  n=static_pointer_cast<NPulseLifeNeuron>(NeuronsLife[i]->GetOwner());
   pair<real, NEnsemble > ensemble;
   ensemble.second.push_back(n);
   ensemble.first=n->GetOutputData(4).Double[0];
@@ -491,24 +491,24 @@ bool NLifeNet::CalcEnsembles(real threshold)
   {
    for(int j=0;j<n->GetNumComponents();j++)
    {
-	NPulseMembrane* membrane=dynamic_cast<NPulseMembrane*>(n->GetComponentByIndex(j));
+	UEPtr<NPulseMembrane> membrane=dynamic_pointer_cast<NPulseMembrane>(n->GetComponentByIndex(j));
 	if(membrane)
 	{
 	 for(int k=0;k<membrane->GetNumComponents();k++)
 	 {
-	  NPulseChannel* channel=dynamic_cast<NPulseChannel*>(membrane->GetComponentByIndex(k));
+	  UEPtr<NPulseChannel> channel=dynamic_pointer_cast<NPulseChannel>(membrane->GetComponentByIndex(k));
 	  if(channel)
 	  {
 	   for(int m=0;m<channel->GetNumComponents();m++)
 	   {
-		NPulseHebbSynapse* synapse=dynamic_cast<NPulseHebbSynapse*>(channel->GetComponentByIndex(m));
+		UEPtr<NPulseHebbSynapse> synapse=dynamic_pointer_cast<NPulseHebbSynapse>(channel->GetComponentByIndex(m));
 		if(synapse)
 		{
 		 if(EnsembleThresholdMode == 1)
 		  resthreshold=n->GetOutputData(5).Double[0];
 		 if(synapse->GetOutputData(3).Double[0] > resthreshold+threshold)
 		 {
-		  NPulseLifeNeuron* item=dynamic_cast<NPulseLifeNeuron*>(synapse->GetCItem(0).Item->GetMainOwner());
+		  UEPtr<NPulseLifeNeuron> item=dynamic_pointer_cast<NPulseLifeNeuron>(synapse->GetCItem(0).Item->GetMainOwner());
 		  if(item)
 		  {
 		   ensemble.first+=n->GetOutputData(4).Double[0];
@@ -605,8 +605,8 @@ bool NLifeNet::CalcEnsembleLinks(real threshold)
 	 for(int k=0;k<Ensembles[i].second[j]->GetLTZone()->GetNumOutputs();k++)
 	  for(int l=0;l<Ensembles[i].second[j]->GetLTZone()->GetNumAConnectors(k);l++)
 	  {
-	   const NPulseHebbSynapse* synapse=
-	   	dynamic_cast<const NPulseHebbSynapse*>(Ensembles[i].second[j]->GetLTZone()->GetAConnectorByIndex(int(k), int(l)));
+	   UEPtr<NPulseHebbSynapse> synapse=
+	   	dynamic_pointer_cast<NPulseHebbSynapse>(Ensembles[i].second[j]->GetLTZone()->GetAConnectorByIndex(int(k), int(l)));
 	   if(synapse)
 	   {
 		for(size_t n=0;n<Ensembles.size();n++)

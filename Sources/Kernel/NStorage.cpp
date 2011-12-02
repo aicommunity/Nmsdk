@@ -222,9 +222,10 @@ bool NStorage::ClearClassesStorage(void)
 // Если свободного объекта не существует он создается и добавляется
 // в хранилище
 
-NAContainer* NStorage::TakeObject(const UId &classid, const RDK::UAComponent *prototype)
+RDK::UEPtr<RDK::UAComponent> NStorage::TakeObject(const UId &classid, const RDK::UAComponent *prototype)
 {
- return dynamic_cast<NAContainer*>(RDK::UAContainerStorage::TakeObject(classid,prototype));
+ return RDK::UAContainerStorage::TakeObject(classid,prototype);
+// return dynamic_pointer_cast<NAContainer>(RDK::UAContainerStorage::TakeObject(classid,prototype));
 /* MySDK::ClassesStorageIterator CI=ClassesStorage.find(classid);
  if(CI == ClassesStorage.end())
   return 0;
@@ -293,9 +294,10 @@ NAContainer* NStorage::TakeObject(const UId &classid, const RDK::UAComponent *pr
  return obj;   */
 }
 
-NAContainer* NStorage::TakeObject(const NameT &classname, const RDK::UAComponent *prototype)
+RDK::UEPtr<RDK::UAComponent> NStorage::TakeObject(const NameT &classname, const RDK::UAComponent *prototype)
 {
- return dynamic_cast<NAContainer*>(RDK::UAContainerStorage::TakeObject(classname,prototype));
+ return RDK::UAContainerStorage::TakeObject(classname,prototype);
+// return dynamic_pointer_cast<NAContainer>(RDK::UAContainerStorage::TakeObject(classname,prototype));
 }
 		/*
 NAContainer* NStorage::TakeObject(const IdT &classid, const NAContainer *prototype)

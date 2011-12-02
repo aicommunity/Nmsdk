@@ -102,7 +102,7 @@ NPulseGenerator* NPulseGenerator::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NPulseGenerator::CheckComponentType(const NAContainer* comp) const
+bool NPulseGenerator::CheckComponentType(UEPtr<NAContainer> comp) const
 {
 // if(dynamic_cast<const NPulseChannel*>(comp))
 //  return true;

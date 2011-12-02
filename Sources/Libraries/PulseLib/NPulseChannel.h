@@ -59,7 +59,7 @@ virtual ~NPulseChannel(void);
 size_t GetNumSynapses(void) const;
 
 // Возвращает синапс по индексу
-NPulseSynapse* GetSynapse(size_t i);
+UEPtr<NPulseSynapse> GetSynapse(size_t i);
 // --------------------------
 
 // --------------------------
@@ -81,7 +81,7 @@ bool SetFBResistance(real value);
 // Подключает синапс хебба synapse к низкопороговой зоне нейрона-владельца
 // Возвращает false только если произошла ошибка установки связи
 // Если synapse == 0, то подключает все синапсы хебба
-bool InstallHebbSynapses(NAContainer *synapse=0);
+bool InstallHebbSynapses(UEPtr<NAContainer> synapse=0);
 // --------------------------
 
 // --------------------------
@@ -98,7 +98,7 @@ virtual NPulseChannel* New(void);
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-virtual bool CheckComponentType(const NAContainer* comp) const;
+virtual bool CheckComponentType(UEPtr<NAContainer> comp) const;
 // --------------------------
 
 // --------------------------
@@ -109,13 +109,13 @@ protected:
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-virtual bool AAddComponent(NAContainer* comp, RDK::UIPointer* pointer=0);
+virtual bool AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer=0);
 
 // Выполняет предварительные пользовательские действия
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-virtual bool ADelComponent(NAContainer* comp);
+virtual bool ADelComponent(UEPtr<UAContainer> comp);
 // --------------------------
 
 // --------------------------

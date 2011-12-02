@@ -41,15 +41,15 @@ NPulseNeuronLibrary(void);
 // Методы создания составных моделей
 // --------------------------
 // Метод формирования модели простого импульсного нейрона
-NPulseNeuron* CreateSimplePulseNeuron(NStorage *storage, const string &neuronclass, const string &membraneclass, int num_membranes,
-                    int num_stimulates, int num_arresting, int dendrite_length=1);
+UEPtr<NPulseNeuron> CreateSimplePulseNeuron(NStorage *storage, const string &neuronclass, const string &membraneclass, int num_membranes,
+					int num_stimulates, int num_arresting, int dendrite_length=1);
 
 // Метод формирования модели простого импульсного нейрона с синапсами хебба
-NPulseNeuron* CreateSimplePulseHebbNeuron(NStorage *storage, const string &neuronclass, int num_membranes,
-                    int num_stimulates, int num_arresting, int dendrite_length=1);
+UEPtr<NPulseNeuron> CreateSimplePulseHebbNeuron(NStorage *storage, const string &neuronclass, int num_membranes,
+					int num_stimulates, int num_arresting, int dendrite_length=1);
 
 // Метод формирования модели афферентного нейрона
-NAfferentNeuron* CreateAfferentNeuron(NStorage *storage, int num_membranes);
+UEPtr<NAfferentNeuron> CreateAfferentNeuron(NStorage *storage, int num_membranes);
 // --------------------------
 
 

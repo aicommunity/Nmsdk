@@ -23,7 +23,7 @@ void AddWatch(TWatchFrame *watch, RDK::UAContainer *item, int output, int outind
 
  wd.YShift=yshift;
  if(itemd->GetOwner())
-  itemd->GetLongName(static_cast<const NAContainer*>(itemd->GetOwner()->GetOwner()),wd.Legend);
+  itemd->GetLongName(static_pointer_cast<NAContainer>(itemd->GetOwner()->GetOwner()),wd.Legend);
  else
   itemd->GetLongName(0,wd.Legend);
  wd.Legend+=string("[")+RDK::sntoa(output)+string(":");
@@ -83,7 +83,7 @@ void AddFrequencyWatch(TWatchFrame *watch, RDK::UAContainer* item, real watchint
 
  wd.YShift=yshift;
  if(itemd->GetOwner())
-  itemd->GetLongName(static_cast<const RDK::UAContainer*>(itemd->GetOwner()->GetOwner()),wd.Legend);
+  itemd->GetLongName(static_pointer_cast<RDK::UAContainer>(itemd->GetOwner()->GetOwner()),wd.Legend);
  else
   itemd->GetLongName(0,wd.Legend);
 // wd.Legend+=string("[")+sntoa(output)+string(":")+sntoa(outindex)+string("]");

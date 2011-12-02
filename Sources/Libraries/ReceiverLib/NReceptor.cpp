@@ -148,8 +148,8 @@ bool NReceptor::ACalculate(void)
 
    // ѕреобразовываем сигнал к заданному диапазону
    input=(input-MinInputRange.v)*OutputRange/InputRange+MinOutputRange.v;  
-   real exp_coeff;
 
+   double exp_coeff;
    switch(OutputAdaptationMode.v)
    {
    case 0:

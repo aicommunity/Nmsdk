@@ -41,34 +41,14 @@ NWPhysicalManipulator::NWPhysicalManipulator(void)
  DLLManipulatorSetExternalData=0;
  DLLManipulatorGetModelTime=0;
 
+ DLLManipulatorGetState=0;
+ DLLManipulatorNeiroPulse=0;
+ DLLManipulatorNeiroPulseGroup=0;
+ DLLManipulatorGetNeiroSumm=0;
+ DLLManipulatorSetNeiroParam=0;
+ DLLManipulatorSetWorkMode=0;
+
  WindowHandle=0;
-
- // Диапазоны по току (моменту)
- MinMoment=-0.7;
- MaxMoment=0.7;
-
- // Диапазоны по углу
- MinAngle=0;
- MaxAngle=190;
-
- //Дипазоны по входному напряжению
- MinVoltage=-5;
- MaxVoltage=5;
-
-
- OutputMul=2;
- ComPort=2;
- ServoNumber=1;
-
- RightDirection=ServoRight;
- LeftDirection=ServoLeft;
-
- MaxSendCounter=0;
-
- TimeDuration=1;
-
- EmulatorMode=true;
-
 }
 
 NWPhysicalManipulator::~NWPhysicalManipulator(void)
@@ -109,6 +89,14 @@ bool NWPhysicalManipulator::LoadManipulatorDll(void)
  DLLManipulatorSetExternalData=(PDLLManipulatorSetExternalData)GetProcAddress(ManipulatorDLL, "SetExternalData");
  DLLManipulatorGetModelTime=(PDLLManipulatorGetModelTime)GetProcAddress(ManipulatorDLL, "GetModelTime");
 
+ DLLManipulatorGetState=(PDLLManipulatorGetState)GetProcAddress(ManipulatorDLL, "GetState");
+ DLLManipulatorNeiroPulse=(PDLLManipulatorNeiroPulse)GetProcAddress(ManipulatorDLL, "NeiroPulse");
+ DLLManipulatorNeiroPulseGroup=(PDLLManipulatorNeiroPulseGroup)GetProcAddress(ManipulatorDLL, "NeiroPulseGroup");
+
+ DLLManipulatorGetNeiroSumm=(PDLLManipulatorGetNeiroSumm)GetProcAddress(ManipulatorDLL, "GetNeiroSumm");
+ DLLManipulatorSetNeiroParam=(PDLLManipulatorSetNeiroParam)GetProcAddress(ManipulatorDLL, "SetNeiroParam");
+
+ DLLManipulatorSetWorkMode=(PDLLManipulatorSetWorkMode)GetProcAddress(ManipulatorDLL, "SetWorkMode");
 
  return true;
 }
@@ -132,6 +120,12 @@ bool NWPhysicalManipulator::UnLoadManipulatorDll(void)
  DLLManipulatorSetExternalData=0;
  DLLManipulatorGetModelTime=0;
 
+ DLLManipulatorGetState=0;
+ DLLManipulatorNeiroPulse=0;
+ DLLManipulatorNeiroPulseGroup=0;
+ DLLManipulatorGetNeiroSumm=0;
+ DLLManipulatorSetNeiroParam=0;
+ DLLManipulatorSetWorkMode=0;
 
  FreeLibrary(ManipulatorDLL);
  ManipulatorDLL=0;
@@ -149,6 +143,7 @@ bool NWPhysicalManipulator::InitManipulator(void)
  res=DLLManipulatorInit((void*)WindowHandle,EmulatorMode);
  res=DLLManipulatorComOpen(ComPort);
  res=DLLManipulatorReset();
+// res=DLLManipulatorSetWorkMode(DllManipulatorMode);
  res=DLLManipulatorStart();
 }
 
@@ -169,6 +164,10 @@ bool NWPhysicalManipulator::SetAccumulationStep(int value)
 {
  AccumulationStep=value;
  // Отправка
+ if(ManipulatorDLL && !EmulatorMode && DLLManipulatorSetNeiroParam)
+ {
+  DLLManipulatorSetNeiroParam(AccumulationStep,DissociationStep);
+ }
 
  return true;
 }
@@ -178,6 +177,10 @@ bool NWPhysicalManipulator::SetDissociationStep(int value)
 {
  DissociationStep=value;
  // Отправка
+ if(ManipulatorDLL && !EmulatorMode && DLLManipulatorSetNeiroParam)
+ {
+  DLLManipulatorSetNeiroParam(AccumulationStep,DissociationStep);
+ }
 
  return true;
 }
@@ -250,19 +253,50 @@ bool NWPhysicalManipulator::ADefault(void)
  SetOutputDataSize(1,1);
  SetOutputDataSize(2,1);
 
- TimeStep=10;
+ //TimeStep=1000;
  MinControlVoltage=0;//150;
 
- Mode=0;
+// Mode=0;
 
  // Шаг по накоплению в контроллере за 1мс
- AccumulationStep=30;
+ AccumulationStep=100;
 
  // Шаг по разряду в контроллере за 1мс
- DissociationStep=30;
+ DissociationStep=5;
 
  NumAnglesHistory=2;
  AnglesHistoryTime=0.3;
+
+ DllManipulatorMode=2;
+
+ // Диапазоны по току (моменту)
+ MinMoment=-0.7;
+ MaxMoment=0.7;
+
+ // Диапазоны по углу
+ MinAngle=0;
+ MaxAngle=190;
+
+ //Дипазоны по входному напряжению
+ MinVoltage=-5;
+ MaxVoltage=5;
+
+
+ OutputMul=2;
+ ComPort=2;
+ ServoNumber=1;
+
+ RightDirection=ServoRight;
+ LeftDirection=ServoLeft;
+
+ MaxSendCounter=20;
+ MaxReadCounter=50;
+
+ TimeDuration=1;
+
+ EmulatorMode=true;
+
+
 
  return true;
 }
@@ -296,6 +330,11 @@ bool NWPhysicalManipulator::AReset(void)
 
  LastSentTime=GetTickCount64();
 
+ if(ManipulatorDLL && !EmulatorMode && DLLManipulatorSetWorkMode)
+ {
+  DLLManipulatorSetWorkMode(DllManipulatorMode);
+ }
+
  return true;
 }
 
@@ -307,10 +346,14 @@ bool NWPhysicalManipulator::ACalculate(void)
 
  bool res;
 
-// res=DLLManipulatorReset();
- res=DLLManipulatorComStatus();
 
-  unsigned char buffer[100];
+// res=DLLManipulatorReset();
+// res=DLLManipulatorComStatus();
+
+if(ReadCounter == MaxReadCounter)
+{
+
+ unsigned char buffer[100];
  if(!DLLManipulatorGetServoData(ServoNumber,buffer))
  {
   POutputData[2].Double[0]=0.001;
@@ -406,7 +449,12 @@ bool NWPhysicalManipulator::ACalculate(void)
 //   POutputData[2].Double[0]=AngleSpeed; // Угловая скорость
   }
 
- if(Mode == 0)
+   ReadCounter=0;
+}
+else
+ ++ReadCounter;
+
+ if(DllManipulatorMode == 2 || EmulatorMode)
  {
   if(SendCounter == MaxSendCounter)
   {
@@ -456,7 +504,7 @@ bool NWPhysicalManipulator::ACalculate(void)
    ++SendCounter;
  }
  else
- if(Mode == 1)
+ if(DllManipulatorMode == 3)
  {
   if(NumInputs<1)
    return true;
@@ -464,29 +512,65 @@ bool NWPhysicalManipulator::ACalculate(void)
   PulseState.resize(NumInputs-1);
   for(size_t i=0;i<PulseState.size();i++)
   {
-   if(PInputDataSize[i+1]<0)
+/*   if(PInputDataSize[i+1]<0)
    {
-	PulseState[i]=0;
+	PulseState[i].first=0;
+	PulseState[i].second=0;
 	continue;
    }
-
+  */
    double curval=PInputData[i+1]->Double[0];
-   if(curval == 0)
-	PulseState[i]=0;
+
+   if(curval > 0 && !(i%2))
+	PulseState[i]+=1;
    else
-   if(curval > 0 && PulseState[i] != -1)
-	PulseState[i]=1;
-   else
-   if(curval > 0 && PulseState[i] == 1)
-	PulseState[i]=-1;
+   if(curval > 0 && (i%2))
+	PulseState[i]+=-1;
   }
- }
 
- // Отправка
- for(size_t i=0;i<PulseState.size();i++)
- {
-  if(PulseState[i] == 1);
+  if(SendCounter == MaxSendCounter)
+  {
 
+   // Отправка
+   for(size_t i=0;i<PulseState.size();i++)
+   {
+	if(PulseState[i] >= 1)
+	{
+ //	 for(int k=0;k<abs(PulseState[i].first);k++)
+	 {
+	  res=DLLManipulatorNeiroPulse(ServoNumber, i/2, 1);
+ //	  Sleep(0);
+	 }
+	 PulseState[i]=0;
+	}
+	else
+	if(PulseState[i] <= -1)
+	{
+  //	 for(int k=0;k<abs(PulseState[i].second);k++)
+	 {
+	  res=DLLManipulatorNeiroPulse(ServoNumber, i/2, 0);
+ //	  Sleep(0);
+	 }
+	 PulseState[i]=0;
+	}
+   }
+   /*
+   unsigned char group=0;
+   unsigned char table[8]={1,0,3,2,5,4,7,6};
+//   unsigned char table[8]={0,1,2,3,4,5,6,7};
+   for(size_t i=0;i<PulseState.size();i++)
+   {
+	if(PulseState[i] != 0)
+	{
+	 group+= (unsigned char)(1)<<table[i];
+	 PulseState[i]=0;
+    }
+   }
+   res=DLLManipulatorNeiroPulseGroup(ServoNumber, group);
+      */
+  }
+  else
+  ++SendCounter;
  }
 
 // if(!EmulatorMode)

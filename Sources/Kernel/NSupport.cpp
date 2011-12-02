@@ -22,8 +22,8 @@ namespace NMSDK {
 
 
 const TimeT DefaultTimeStep=(TimeT)2000;
-const NameT ForbiddenName="";
-const UId ForbiddenId=0;
+//const NameT ForbiddenName="";
+//const UId ForbiddenId=0;
 
 // Буферы
 Real RTemp;

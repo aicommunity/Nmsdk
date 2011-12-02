@@ -89,8 +89,8 @@ virtual ~NStorage(void);
 // Флаг 'Activity' объекта выставляется в true
 // Если свободного объекта не существует он создается и добавляется
 // в хранилище
-NAContainer* TakeObject(const UId &classid, const RDK::UAComponent *prototype=0);
-NAContainer* TakeObject(const string &classname, const RDK::UAComponent *prototype=0);
+RDK::UEPtr<RDK::UAComponent> TakeObject(const UId &classid, const RDK::UAComponent *prototype=0);
+RDK::UEPtr<RDK::UAComponent> TakeObject(const string &classname, const RDK::UAComponent *prototype=0);
 
 // Возвращает объект в хранилище
 // Выбранный объект помечается как свободный в хранилище

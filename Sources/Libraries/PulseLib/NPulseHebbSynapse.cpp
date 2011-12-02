@@ -250,10 +250,10 @@ bool NPulseHebbSynapse::ACalculate(void)
 
  if(MainOwner && Owner)
  {
-  NPulseLifeNeuron *neuron=dynamic_cast<NPulseLifeNeuron*>(MainOwner);
+  UEPtr<NPulseLifeNeuron> neuron=dynamic_pointer_cast<NPulseLifeNeuron>(MainOwner);
   if(neuron)
   {
-   if(static_cast<NPulseChannel*>(Owner)->Type()>0)
+   if(static_pointer_cast<NPulseChannel>(Owner)->Type()>0)
    {
 	neuron->SummaryNegGs.v+=gs_res*GsGain.v;
 	neuron->SummaryNegGd.v+=Gd.v*GdGain.v;

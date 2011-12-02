@@ -56,9 +56,9 @@ size_t NPulseChannel::GetNumSynapses(void) const
 }
 
 // Возвращает синапс по индексу
-NPulseSynapse* NPulseChannel::GetSynapse(size_t i)
+UEPtr<NPulseSynapse> NPulseChannel::GetSynapse(size_t i)
 {
- return static_cast<NPulseSynapse*>(GetComponentByIndex(i));
+ return static_pointer_cast<NPulseSynapse>(GetComponentByIndex(i));
 }
 // --------------------------
 
@@ -99,16 +99,16 @@ bool NPulseChannel::SetFBResistance(real value)
 // Подключает синапс хебба synapse к низкопороговой зоне нейрона-владельца
 // Возвращает false только если произошла ошибка установки связи
 // Если synapse == 0, то подключает все синапсы хебба
-bool NPulseChannel::InstallHebbSynapses(NAContainer *synapse)
+bool NPulseChannel::InstallHebbSynapses(UEPtr<NAContainer> synapse)
 {
  bool res=true;
- NPulseNeuron *mowner=dynamic_cast<NPulseNeuron*>(MainOwner);
+ UEPtr<NPulseNeuron> mowner=dynamic_pointer_cast<NPulseNeuron>(MainOwner);
 
  if(mowner && mowner->GetLTZone())
  {
   if(synapse)
   {
-   NPulseHebbSynapse *hsynapse=dynamic_cast<NPulseHebbSynapse*>(synapse);
+   UEPtr<NPulseHebbSynapse> hsynapse=dynamic_pointer_cast<NPulseHebbSynapse>(synapse);
    if(hsynapse)
    {
 	RDK::ULinkSide item,conn;
@@ -124,7 +124,7 @@ bool NPulseChannel::InstallHebbSynapses(NAContainer *synapse)
    RDK::ULinkSide item,conn;
    for(size_t i=0;i<GetNumSynapses();i++)
    {
-	NPulseHebbSynapse *hsynapse=dynamic_cast<NPulseHebbSynapse*>(GetSynapse(i));
+	UEPtr<NPulseHebbSynapse> hsynapse=dynamic_pointer_cast<NPulseHebbSynapse>(GetSynapse(i));
 	if(hsynapse)
 	{
 	 item.Id=mowner->GetLTZone()->GetLongId(mowner);
@@ -137,13 +137,13 @@ bool NPulseChannel::InstallHebbSynapses(NAContainer *synapse)
   }
  }
 
- NPulseLifeNeuron *mlowner=dynamic_cast<NPulseLifeNeuron*>(MainOwner);
+ UEPtr<NPulseLifeNeuron> mlowner=dynamic_pointer_cast<NPulseLifeNeuron>(MainOwner);
 
  if(mlowner && mlowner->GetNeuronLife())
  {
   if(synapse)
   {
-   NPulseHebbSynapse *hsynapse=dynamic_cast<NPulseHebbSynapse*>(synapse);
+   UEPtr<NPulseHebbSynapse> hsynapse=dynamic_pointer_cast<NPulseHebbSynapse>(synapse);
    if(hsynapse)
    {
 	RDK::ULinkSide item,conn;
@@ -162,7 +162,7 @@ bool NPulseChannel::InstallHebbSynapses(NAContainer *synapse)
    RDK::ULinkSide item,conn;
    for(size_t i=0;i<GetNumSynapses();i++)
    {
-	NPulseHebbSynapse *hsynapse=dynamic_cast<NPulseHebbSynapse*>(GetSynapse(i));
+	UEPtr<NPulseHebbSynapse> hsynapse=dynamic_pointer_cast<NPulseHebbSynapse>(GetSynapse(i));
 	if(hsynapse)
 	{
 	 item.Id=mlowner->GetNeuronLife()->GetLongId(mlowner);
@@ -198,9 +198,9 @@ NPulseChannel* NPulseChannel::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NPulseChannel::CheckComponentType(const NAContainer* comp) const
+bool NPulseChannel::CheckComponentType(UEPtr<NAContainer> comp) const
 {
- if(dynamic_cast<const NPulseSynapse*>(comp))
+ if(dynamic_pointer_cast<NPulseSynapse>(comp))
   return true;
 
  return false;
@@ -214,7 +214,7 @@ bool NPulseChannel::CheckComponentType(const NAContainer* comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NPulseChannel::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
+bool NPulseChannel::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
 {
  InstallHebbSynapses(comp);
  return true;
@@ -224,7 +224,7 @@ bool NPulseChannel::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-bool NPulseChannel::ADelComponent(NAContainer* comp)
+bool NPulseChannel::ADelComponent(UEPtr<UAContainer> comp)
 {
  return true;
 }
@@ -274,7 +274,7 @@ bool NPulseChannel::ACalculate(void)
 
  // Получение доступа к данным синапса
  for(int i=0;i<NumComponents;i++)
-  G+=static_cast<NADItem*>(PComponents[i])->GetOutputData(0).Double[0];
+  G+=static_pointer_cast<NADItem>(PComponents[i])->GetOutputData(0).Double[0];
  
  // Получение данных канала
  if(FullInputDataSize>0)
@@ -292,7 +292,7 @@ bool NPulseChannel::ACalculate(void)
   channel_input/=FullInputDataSize;
  }
 
- real feedback=static_cast<NPulseMembrane*>(Owner)->Feedback;
+ real feedback=static_pointer_cast<NPulseMembrane>(Owner)->Feedback;
  // Получение информации об обратной связи
  if(Owner)
   channel_input-=feedback;

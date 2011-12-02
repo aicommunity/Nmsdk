@@ -37,7 +37,7 @@
 			<TASM_FloatingPoint>Real</TASM_FloatingPoint>
 			<ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
 			<LinkPackageStatics>rtl.lib;vcl.lib;tee.lib;vclimg.lib</LinkPackageStatics>
-			<IncludePath>..\..\Libraries\PulseNeuronLib\;..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Libraries\SensorLib\;..\..\Libraries\PulseLib\;..\..\Libraries\ActLib\;..\..\Libraries\MotionControlLib\;..\..\Libraries\ReceiverLib\;..\..\PlatformLibraries\Windows\;..\..\GUI\Builder\;..\..\Kernel\;..\..\Deploy\Include\;..\..\Controllers\Builder\;..\..\Controllers\Builder;..\..\Kernel;..\..\..\Sources;..\..\GUI\Builder;..\..\GUI;..\..\Deploy\Include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\RDK\Core\Graphics\;..\..\RDK\Core\Engine\;..\..\Libraries\PulseNeuronLib\;..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Libraries\SensorLib\;..\..\Libraries\PulseLib\;..\..\Libraries\ActLib\;..\..\Libraries\MotionControlLib\;..\..\Libraries\ReceiverLib\;..\..\PlatformLibraries\Windows\;..\..\GUI\Builder\;..\..\Kernel\;..\..\Deploy\Include\;..\..\Controllers\Builder\;..\..\Controllers\Builder;..\..\Kernel;..\..\..\Sources;..\..\GUI\Builder;..\..\GUI;..\..\Deploy\Include;$(IncludePath)</IncludePath>
 			<BRCC_Defines>_RTLDLL;NO_STRICT;$(BRCC_Defines)</BRCC_Defines>
 			<PackageImports>vcl.bpi;vclx.bpi;dbrtl.bpi;Rave65VCL.bpi;bdertl.bpi;rtl.bpi;vcldb.bpi;adortl.bpi;dbxcds.bpi;dbexpress.bpi;vclib.bpi;ibxpress.bpi;xmlrtl.bpi;vclactnband.bpi;inet.bpi;IntrawebDB_90_100.bpi;Intraweb_90_100.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;indy.bpi;bcbofficexp.bpi;bcbsmp.bpi;soaprtl.bpi;dsnap.bpi;bcbie.bpi;teeui.bpi;teedb.bpi;tee.bpi;vcldbx.bpi;dsnapcon.bpi;websnap.bpi;webdsnap.bpi;VaComm2006.bpi</PackageImports>
 			<TASM_Defines>_RTLDLL;NO_STRICT;$(TASM_Defines)</TASM_Defines>
@@ -58,7 +58,7 @@
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_ObjPath>..\Kernel\CRLib;..\Interface;..\MySDK3\Interface\Builder;..\MySDK3\Utilities;..\Kernel;..\Kernel\BCL;..\Kernel\NLib;D:\Science\AI\AISD\NMSDK\Sources\Kernel\NLib;D:\Science\AI\AISD\NMSDK\Sources\Kernel\BCL;D:\Science\AI\AISD\NMSDK\Sources\Kernel;D:\Science\AI\AISD\NMSDK\Sources\MySDK3\Utilities;D:\Science\AI\AISD\NMSDK\Sources\MySDK3\Interface\Builder;D:\Science\AI\AISD\NMSDK\Sources\Interface;D:\Science\AI\AISD\NMSDK\Sources\Debug;$(DCC_ObjPath)</DCC_ObjPath>
 			<Multithreaded>true</Multithreaded>
-			<ILINK_LibraryPath>..\..\Libraries\PulseNeuronLib\;..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Libraries\SensorLib\;..\..\Libraries\PulseLib\;..\..\Libraries\ActLib\;..\..\Libraries\MotionControlLib\;..\..\Libraries\ReceiverLib\;..\..\PlatformLibraries\Windows\;..\..\GUI\Builder\;..\..\Kernel\;..\..\Deploy\Include\;..\..\Controllers\Builder\;..\..\Controllers\Builder;..\..\Kernel;..\..\Deploy\Include;..\..\Deploy\Lib\Debug;..\..\..\Sources;..\..\GUI\Builder;..\..\GUI;$(BDS)\lib\obj;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\RDK\Core\Graphics\;..\..\RDK\Core\Engine\;..\..\Libraries\PulseNeuronLib\;..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Libraries\SensorLib\;..\..\Libraries\PulseLib\;..\..\Libraries\ActLib\;..\..\Libraries\MotionControlLib\;..\..\Libraries\ReceiverLib\;..\..\PlatformLibraries\Windows\;..\..\GUI\Builder\;..\..\Kernel\;..\..\Deploy\Include\;..\..\Controllers\Builder\;..\..\Controllers\Builder;..\..\Kernel;..\..\Deploy\Include;..\..\Deploy\Lib\Debug;..\..\..\Sources;..\..\GUI\Builder;..\..\GUI;$(BDS)\lib\obj;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
@@ -88,31 +88,11 @@
 			<ILINK_LibraryPath>$(BDS)\lib\release;$(ILINK_LibraryPath);$(ILINK_LibraryPath)</ILINK_LibraryPath>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Deploy\Include\NMSDK.cpp">
-				<Suffix>_0</Suffix>
-				<BuildOrder>25</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\TNEnsembleControlFrameUnit.cpp">
 				<Form>NEnsembleControlFrame</Form>
 				<DesignClass>TFrame</DesignClass>
 				<DependentOn>..\..\GUI\Builder\TNEnsembleControlFrameUnit.h</DependentOn>
 				<BuildOrder>26</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\NANetGraphicsFrameUnit.cpp">
-				<Form>NANetGraphicsFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\GUI\Builder\NANetGraphicsFrameUnit.h</DependentOn>
-				<BuildOrder>22</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Controllers\Builder\NCMySDKWatchFrame.cpp">
-				<DependentOn>..\..\Controllers\Builder\NCMySDKWatchFrame.h</DependentOn>
-				<BuildOrder>28</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\NTGraphics.cpp">
-				<BuildOrder>25</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Kernel\NSupport.cpp">
-				<BuildOrder>66</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\TNSourceControlFrameUnit.cpp">
 				<Form>NSourceControlFrame</Form>
@@ -120,29 +100,43 @@
 				<DependentOn>..\..\GUI\Builder\TNSourceControlFrameUnit.h</DependentOn>
 				<BuildOrder>27</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\Controllers\Builder\NCMySDKWatchFrame.cpp">
+				<DependentOn>..\..\Controllers\Builder\NCMySDKWatchFrame.h</DependentOn>
+				<BuildOrder>28</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Deploy\Include\NMSDK.cpp">
+				<Suffix>_0</Suffix>
+				<BuildOrder>25</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Kernel\NSupport.cpp">
+				<BuildOrder>66</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\PulseLib\NPulseLibrary.cpp">
+				<DependentOn>..\..\Libraries\PulseLib\NPulseLibrary.h</DependentOn>
+				<BuildOrder>48</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\NEnsembleActivityFrameUnit.cpp">
 				<Form>NEnsembleActivityFrame</Form>
 				<DesignClass>TFrame</DesignClass>
 				<DependentOn>..\..\GUI\Builder\NEnsembleActivityFrameUnit.h</DependentOn>
 				<BuildOrder>23</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Kernel\NEnvironment.cpp">
-				<BuildOrder>60</BuildOrder>
+			<CppCompile Include="..\..\GUI\Builder\NTGraphics.cpp">
+				<BuildOrder>25</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\TNSupport.cpp">
 				<DependentOn>..\..\GUI\Builder\TNSupport.h</DependentOn>
 				<BuildOrder>28</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NPulseSynChannel.cpp">
-				<BuildOrder>53</BuildOrder>
+			<CppCompile Include="..\..\Kernel\NBios.cpp">
+				<BuildOrder>58</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Kernel\NController.cpp">
 				<DependentOn>..\..\Kernel\NController.h</DependentOn>
 				<BuildOrder>59</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Kernel\NLibrary.cpp">
-				<DependentOn>..\..\Kernel\NLibrary.h</DependentOn>
-				<BuildOrder>62</BuildOrder>
+			<CppCompile Include="..\..\Kernel\NEnvironment.cpp">
+				<BuildOrder>60</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\NANetFrameUnit.cpp">
 				<Form>NANetFrame</Form>
@@ -150,96 +144,102 @@
 				<DependentOn>..\..\GUI\Builder\NANetFrameUnit.h</DependentOn>
 				<BuildOrder>21</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Kernel\NBios.cpp">
-				<BuildOrder>58</BuildOrder>
+			<CppCompile Include="..\..\GUI\Builder\NANetGraphicsFrameUnit.cpp">
+				<Form>NANetGraphicsFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\GUI\Builder\NANetGraphicsFrameUnit.h</DependentOn>
+				<BuildOrder>22</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Kernel\NKernel.cpp">
 				<BuildOrder>61</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Kernel\NUSupport.cpp">
-				<DependentOn>..\..\Kernel\NUSupport.h</DependentOn>
-				<BuildOrder>67</BuildOrder>
+			<CppCompile Include="..\..\Kernel\NLibrary.cpp">
+				<DependentOn>..\..\Kernel\NLibrary.h</DependentOn>
+				<BuildOrder>62</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Libraries\ActLib\NActLibrary.cpp">
 				<DependentOn>..\..\Libraries\ActLib\NActLibrary.h</DependentOn>
 				<BuildOrder>34</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Libraries\ActLib\NDCEngine.cpp">
-				<DependentOn>..\..\Libraries\ActLib\NDCEngine.h</DependentOn>
-				<BuildOrder>35</BuildOrder>
+			<CppCompile Include="..\..\Libraries\PulseLib\NPulseHebbSynapse.cpp">
+				<BuildOrder>47</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Libraries\ActLib\NPac.cpp">
 				<BuildOrder>36</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Kernel\NUSupport.cpp">
+				<DependentOn>..\..\Kernel\NUSupport.h</DependentOn>
+				<BuildOrder>67</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\PulseLib\NAfferentNeuron.cpp">
+				<BuildOrder>43</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\Deploy\Include\rdk_builder.cpp">
+				<BuildOrder>63</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\PulseLib\NEyeMuscle.cpp">
+				<BuildOrder>44</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Libraries\MotionControlLib\NMotionElement.cpp">
 				<DependentOn>..\..\Libraries\MotionControlLib\NMotionElement.h</DependentOn>
 				<BuildOrder>57</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NAfferentNeuron.cpp">
-				<BuildOrder>43</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NPulseHebbSynapse.cpp">
-				<BuildOrder>47</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NEyeMuscle.cpp">
-				<BuildOrder>44</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Kernel\NStorage.cpp">
-				<DependentOn>..\..\Kernel\NStorage.h</DependentOn>
-				<BuildOrder>65</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\Libraries\PulseLib\NPulseChannel.cpp">
 				<BuildOrder>46</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NPulseLibrary.cpp">
-				<DependentOn>..\..\Libraries\PulseLib\NPulseLibrary.h</DependentOn>
-				<BuildOrder>48</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NPulseLTZone.cpp">
-				<BuildOrder>49</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NMuscle.cpp">
-				<BuildOrder>45</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\PulseLib\NPulseMembrane.cpp">
-				<BuildOrder>50</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\WatchWindowFormUnit.cpp">
 				<Form>WatchWindowForm</Form>
 				<DependentOn>..\..\RDK\GUI\Builder\WatchWindowFormUnit.h</DependentOn>
 				<BuildOrder>69</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\Libraries\PulseLib\NPulseLTZone.cpp">
+				<BuildOrder>49</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Kernel\NStorage.cpp">
+				<DependentOn>..\..\Kernel\NStorage.h</DependentOn>
+				<BuildOrder>65</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\PulseLib\NPulseMembrane.cpp">
+				<BuildOrder>50</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\ActLib\NDCEngine.cpp">
+				<DependentOn>..\..\Libraries\ActLib\NDCEngine.h</DependentOn>
+				<BuildOrder>35</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\Libraries\PulseLib\NPulseSynapse.cpp">
 				<BuildOrder>52</BuildOrder>
 			</CppCompile>
-			<None Include="Profiling\AQtimeModule1.aqt"/>
+			<CppCompile Include="..\..\Libraries\PulseLib\NMuscle.cpp">
+				<BuildOrder>45</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\Libraries\ReceiverLib\NFrequencyReceiver.cpp">
 				<DependentOn>..\..\Libraries\ReceiverLib\NFrequencyReceiver.h</DependentOn>
 				<BuildOrder>36</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\ReceiverLib\NManipulatorInput.cpp">
-				<BuildOrder>37</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\ReceiverLib\NManipulatorInputEmulator.cpp">
-				<BuildOrder>38</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\ReceiverLib\NNetworkLinksStatistic.cpp">
-				<DependentOn>..\..\Libraries\ReceiverLib\NNetworkLinksStatistic.h</DependentOn>
-				<BuildOrder>39</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\ReceiverLib\NReceiverLibrary.cpp">
-				<DependentOn>..\..\Libraries\ReceiverLib\NReceiverLibrary.h</DependentOn>
-				<BuildOrder>40</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Libraries\ReceiverLib\NReceptor.cpp">
-				<BuildOrder>41</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Libraries\ReceiverLib\NSimpleStatistic.cpp">
 				<DependentOn>..\..\Libraries\ReceiverLib\NSimpleStatistic.h</DependentOn>
 				<BuildOrder>42</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\Libraries\ReceiverLib\NManipulatorInputEmulator.cpp">
+				<BuildOrder>38</BuildOrder>
+			</CppCompile>
+			<None Include="Profiling\AQtimeModule1.aqt"/>
+			<CppCompile Include="..\..\Libraries\ReceiverLib\NReceiverLibrary.cpp">
+				<DependentOn>..\..\Libraries\ReceiverLib\NReceiverLibrary.h</DependentOn>
+				<BuildOrder>40</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\TImagesFrameUnit.cpp">
+				<Form>ImagesFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\RDK\GUI\Builder\TImagesFrameUnit.h</DependentOn>
+				<BuildOrder>63</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\Libraries\SensorLib\NIntervalSeparator.cpp">
 				<BuildOrder>57</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\ReceiverLib\NNetworkLinksStatistic.cpp">
+				<DependentOn>..\..\Libraries\ReceiverLib\NNetworkLinksStatistic.h</DependentOn>
+				<BuildOrder>39</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Libraries\SensorLib\NSensorLibrary.cpp">
 				<DependentOn>..\..\Libraries\SensorLib\NSensorLibrary.h</DependentOn>
@@ -254,13 +254,13 @@
 			<CppCompile Include="..\..\PlatformLibraries\Windows\NWPhysicalManipulator.cpp">
 				<BuildOrder>32</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\Deploy\Include\rdk_builder.cpp">
-				<BuildOrder>68</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\ListInputFormUnit.cpp">
 				<Form>ListInputForm</Form>
 				<DependentOn>..\..\RDK\GUI\Builder\ListInputFormUnit.h</DependentOn>
 				<BuildOrder>60</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\ReceiverLib\NManipulatorInput.cpp">
+				<BuildOrder>37</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\SeriesControlUnit.cpp">
 				<Form>SeriesControlForm</Form>
@@ -271,35 +271,11 @@
 				<DependentOn>..\..\RDK\GUI\Builder\TUFileSystem.h</DependentOn>
 				<BuildOrder>66</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\TUBitmap.cpp">
-				<BuildOrder>64</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="MainFormUnit.cpp">
 				<BuildOrder>24</BuildOrder>
 				<Form>MainForm</Form>
 				<DependentOn>MainFormUnit.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="SourcesControlFormUnit.cpp">
-				<Form>SourcesControlForm</Form>
-				<DependentOn>SourcesControlFormUnit.h</DependentOn>
-				<BuildOrder>85</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\WatchFrameUnit.cpp">
-				<Form>WatchFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\WatchFrameUnit.h</DependentOn>
-				<BuildOrder>68</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="ManipulatorTestUnit.cpp">
-				<Form>ManipulatorTestForm</Form>
-				<DependentOn>ManipulatorTestUnit.h</DependentOn>
-				<BuildOrder>51</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="GraphicsFormUnit.cpp">
-				<Form>GraphicsForm</Form>
-				<DependentOn>GraphicsFormUnit.h</DependentOn>
-				<BuildOrder>70</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\TUClassRegistryFrame.cpp">
 				<Form>UClassRegistryFrame</Form>
@@ -307,44 +283,60 @@
 				<DependentOn>..\..\RDK\GUI\Builder\TUClassRegistryFrame.h</DependentOn>
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\WatchFrameUnit.cpp">
+				<Form>WatchFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\RDK\GUI\Builder\WatchFrameUnit.h</DependentOn>
+				<BuildOrder>68</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\TUBitmap.cpp">
+				<BuildOrder>64</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="GraphicsFormUnit.cpp">
+				<Form>GraphicsForm</Form>
+				<DependentOn>GraphicsFormUnit.h</DependentOn>
+				<BuildOrder>70</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Libraries\PulseLib\NPulseSynChannel.cpp">
+				<BuildOrder>53</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="NMSDK.cpp">
 				<BuildOrder>-1</BuildOrder>
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<ResFiles Include="NMSDK.res">
-				<BuildOrder>-1</BuildOrder>
-				<BuildOrder>1</BuildOrder>
-			</ResFiles>
+			<CppCompile Include="ManipulatorTestUnit.cpp">
+				<Form>ManipulatorTestForm</Form>
+				<DependentOn>ManipulatorTestUnit.h</DependentOn>
+				<BuildOrder>51</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\ShowProgressBarUnit.cpp">
 				<Form>ShowProgressBarForm</Form>
 				<DependentOn>..\..\RDK\GUI\Builder\ShowProgressBarUnit.h</DependentOn>
 				<BuildOrder>62</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\TImagesFrameUnit.cpp">
-				<Form>ImagesFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\TImagesFrameUnit.h</DependentOn>
-				<BuildOrder>63</BuildOrder>
+			<CppCompile Include="MuscleTestFormUnit.cpp">
+				<Form>MuscleTestForm</Form>
+				<DependentOn>MuscleTestFormUnit.h</DependentOn>
+				<BuildOrder>41</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="StatisticFormUnit.cpp">
 				<Form>StatisticForm</Form>
 				<DependentOn>StatisticFormUnit.h</DependentOn>
 				<BuildOrder>29</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="LinksFormUnit.cpp">
-				<Form>LinksForm</Form>
-				<DependentOn>LinksFormUnit.h</DependentOn>
-				<BuildOrder>66</BuildOrder>
-			</CppCompile>
+			<ResFiles Include="NMSDK.res">
+				<BuildOrder>-1</BuildOrder>
+				<BuildOrder>1</BuildOrder>
+			</ResFiles>
 			<CppCompile Include="MuscleControlFormUnit.cpp">
 				<Form>MuscleControlForm</Form>
 				<DependentOn>MuscleControlFormUnit.h</DependentOn>
 				<BuildOrder>42</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="MuscleTestFormUnit.cpp">
-				<Form>MuscleTestForm</Form>
-				<DependentOn>MuscleTestFormUnit.h</DependentOn>
-				<BuildOrder>41</BuildOrder>
+			<CppCompile Include="SourcesControlFormUnit.cpp">
+				<Form>SourcesControlForm</Form>
+				<DependentOn>SourcesControlFormUnit.h</DependentOn>
+				<BuildOrder>85</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\NLinksFrameUnit.cpp">
 				<Form>NLinksFrame</Form>
@@ -352,27 +344,32 @@
 				<DependentOn>..\..\GUI\Builder\NLinksFrameUnit.h</DependentOn>
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="LinksFormUnit.cpp">
+				<Form>LinksForm</Form>
+				<DependentOn>LinksFormUnit.h</DependentOn>
+				<BuildOrder>66</BuildOrder>
+			</CppCompile>
 			<FormResources Include="..\..\GUI\Builder\TNEnsembleControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\GUI\Builder\NANetGraphicsFrameUnit.dfm"/>
 			<FormResources Include="..\..\GUI\Builder\TNSourceControlFrameUnit.dfm"/>
 			<FormResources Include="..\..\GUI\Builder\NEnsembleActivityFrameUnit.dfm"/>
 			<FormResources Include="..\..\GUI\Builder\NANetFrameUnit.dfm"/>
+			<FormResources Include="..\..\GUI\Builder\NANetGraphicsFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\WatchWindowFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\TImagesFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\ListInputFormUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\SeriesControlUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
-			<FormResources Include="SourcesControlFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\WatchFrameUnit.dfm"/>
-			<FormResources Include="ManipulatorTestUnit.dfm"/>
-			<FormResources Include="GraphicsFormUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\TUClassRegistryFrame.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\WatchFrameUnit.dfm"/>
+			<FormResources Include="GraphicsFormUnit.dfm"/>
+			<FormResources Include="ManipulatorTestUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\ShowProgressBarUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\TImagesFrameUnit.dfm"/>
-			<FormResources Include="StatisticFormUnit.dfm"/>
-			<FormResources Include="LinksFormUnit.dfm"/>
-			<FormResources Include="MuscleControlFormUnit.dfm"/>
 			<FormResources Include="MuscleTestFormUnit.dfm"/>
+			<FormResources Include="StatisticFormUnit.dfm"/>
+			<FormResources Include="MuscleControlFormUnit.dfm"/>
+			<FormResources Include="SourcesControlFormUnit.dfm"/>
 			<FormResources Include="..\..\GUI\Builder\NLinksFrameUnit.dfm"/>
+			<FormResources Include="LinksFormUnit.dfm"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
@@ -398,7 +395,7 @@
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
-						<VersionInfo Name="Build">72</VersionInfo>
+						<VersionInfo Name="Build">97</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -410,7 +407,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName"/>
 						<VersionInfoKeys Name="FileDescription"/>
-						<VersionInfoKeys Name="FileVersion">1.0.0.72</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.0.0.97</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName"/>
 						<VersionInfoKeys Name="LegalCopyright"/>
 						<VersionInfoKeys Name="LegalTrademarks"/>

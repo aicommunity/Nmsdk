@@ -39,6 +39,14 @@ typedef __stdcall bool (*PDLLManipulatorMoveServo)(unsigned char Servo,
 typedef __stdcall bool (*PDLLManipulatorGetServoData)(unsigned char servo, unsigned char *data);
 typedef __stdcall void (*PDLLManipulatorSetExternalData)(real moment, real currenttime);
 typedef __stdcall double (*PDLLManipulatorGetModelTime)(void);
+typedef __stdcall bool (*PDLLManipulatorGetState)(void);
+typedef __stdcall bool (*PDLLManipulatorNeiroPulse)(unsigned char Servo, unsigned char NumItem, unsigned char TypeItem);
+typedef __stdcall bool (*PDLLManipulatorNeiroPulseGroup)(unsigned char Servo, unsigned char MaskGroup);
+typedef __stdcall bool (*PDLLManipulatorGetNeiroSumm)(unsigned char Servo);
+typedef __stdcall bool (*PDLLManipulatorSetNeiroParam)(unsigned char NeiroPulseValue,unsigned char NeiroAutoDecValue);
+typedef __stdcall bool (*PDLLManipulatorSetWorkMode)(unsigned char WorkMode);
+
+
 
 struct TServoData {
  unsigned char N;
@@ -110,7 +118,7 @@ unsigned char ComPort;
 
 unsigned char ServoNumber;
 
-typedef enum {ServoLeft = 0, ServoRight = 1, ServoNone = 255} TServoDirect;
+typedef enum {ServoLeft = 1, ServoRight = 2, ServoNone = 255} TServoDirect;
 
 public: // Данные
 // Идентификатор библиотеки
@@ -129,12 +137,26 @@ PDLLManipulatorGetServoData DLLManipulatorGetServoData;
 PDLLManipulatorSetExternalData DLLManipulatorSetExternalData;
 PDLLManipulatorGetModelTime DLLManipulatorGetModelTime;
 
+PDLLManipulatorGetState DLLManipulatorGetState;
+PDLLManipulatorNeiroPulse DLLManipulatorNeiroPulse;
+PDLLManipulatorNeiroPulseGroup DLLManipulatorNeiroPulseGroup;
+PDLLManipulatorGetNeiroSumm DLLManipulatorGetNeiroSumm;
+PDLLManipulatorSetNeiroParam DLLManipulatorSetNeiroParam;
+PDLLManipulatorSetWorkMode DLLManipulatorSetWorkMode;
+
 
 public: // Общедоступные свойства
 // Режим вычисления управляющего напряжения
 // 0 - в модели
 // 1 - в контроллере
-int Mode;
+//int Mode;
+
+// Режим работы dll манипулятора
+// 0 - Не задан
+// 1 - Тестовый режим
+// 2 - Командный режим
+// 3 - Нейроуправление
+int DllManipulatorMode;
 
 protected: // Временные переменные
 // Счетчик пропусков задания управляющего воздействия
@@ -142,6 +164,12 @@ int SendCounter;
 
 // Максимум счетчика пропусков задания управляющего воздействия
 int MaxSendCounter;
+
+// Максимум счетчика пропусков считывания данных
+int MaxReadCounter;
+
+// Счетчик пропусков считывания данных
+int ReadCounter;
 
 // Ток якоря
 real Current;

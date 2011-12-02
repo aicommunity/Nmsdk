@@ -70,9 +70,9 @@ NPulseLifeNeuron* NPulseLifeNeuron::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NPulseLifeNeuron::CheckComponentType(const NAContainer* comp) const
+bool NPulseLifeNeuron::CheckComponentType(UEPtr<NAContainer> comp) const
 {
- if(NPulseNeuron::CheckComponentType(comp) || dynamic_cast<const NNeuronLife*>(comp))
+ if(NPulseNeuron::CheckComponentType(comp) || dynamic_pointer_cast<NNeuronLife>(comp))
   return true;
 
  return false;
@@ -86,9 +86,9 @@ bool NPulseLifeNeuron::CheckComponentType(const NAContainer* comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NPulseLifeNeuron::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
+bool NPulseLifeNeuron::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
 {
- NNeuronLife *temp=dynamic_cast<NNeuronLife*>(comp);
+ UEPtr<NNeuronLife> temp=dynamic_pointer_cast<NNeuronLife>(comp);
 
  if(temp && NeuronLife)
   return false;
@@ -106,7 +106,7 @@ bool NPulseLifeNeuron::AAddComponent(NAContainer* comp, RDK::UIPointer* pointer)
 // при удалении дочернего компонента из этого объекта
 // Метод будет вызван только если comp
 // существует в списке компонент
-bool NPulseLifeNeuron::ADelComponent(NAContainer* comp)
+bool NPulseLifeNeuron::ADelComponent(UEPtr<UAContainer> comp)
 {
  if(comp == NeuronLife)
   NeuronLife=0;

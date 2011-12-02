@@ -137,7 +137,7 @@ void TMainForm::CSInit(int mode, int afferentmode, int nummotionselements)
    mename="NIndRangeBranchedCrosslinksEngineControlRangeAfferent";
  }
 
- NANet *net=0;
+ RDK::UEPtr<NANet> net;
 
 // if(Environment->GetModel())
 //  net=dynamic_cast<NANet*>((*Environment)->GetComponent("EngineControl"));
@@ -147,10 +147,11 @@ void TMainForm::CSInit(int mode, int afferentmode, int nummotionselements)
   if(Environment->GetModel())
    Environment->GetModel()->DelAllComponents();
   res=Environment->DestroyModel();
+  //Storage->FreeObjectsStorage();
 
   res=Environment->CreateModel("NModel");
 
-  net=dynamic_cast<NANet*>(Storage->TakeObject(mename));
+  net=RDK::dynamic_pointer_cast<NANet>(Storage->TakeObject(mename));
  }
 
  if(!net)
@@ -158,17 +159,17 @@ void TMainForm::CSInit(int mode, int afferentmode, int nummotionselements)
 
  net->SetName("EngineControl");
 
- res=(*Environment)->AddComponent(net);
+ res=(*Environment)->AddComponent(RDK::static_pointer_cast<RDK::UAContainer>(net));
  ManipulatorTestForm->ControlSystem=net;
 
- ManipulatorTestForm->IIPosAfferent=dynamic_cast<NPulseGenerator*>(Storage->TakeObject("NPGenerator"));
+ ManipulatorTestForm->IIPosAfferent=RDK::dynamic_pointer_cast<NPulseGenerator>(Storage->TakeObject("NPGenerator"));
  if(ManipulatorTestForm->IIPosAfferent)
  {
   ManipulatorTestForm->IIPosAfferent->SetName("IIPosAfferentGenerator");
   net->AddComponent(ManipulatorTestForm->IIPosAfferent);
  }
 
- ManipulatorTestForm->IINegAfferent=dynamic_cast<NPulseGenerator*>(Storage->TakeObject("NPGenerator"));
+ ManipulatorTestForm->IINegAfferent=RDK::dynamic_pointer_cast<NPulseGenerator>(Storage->TakeObject("NPGenerator"));
  if(ManipulatorTestForm->IINegAfferent)
  {
   ManipulatorTestForm->IINegAfferent->SetName("IINegAfferentGenerator");
@@ -184,14 +185,14 @@ void TMainForm::CSInit(int mode, int afferentmode, int nummotionselements)
  }*/
 
  // Подключаем управления к мотонейронам
- ManipulatorTestForm->MN1PosControl=dynamic_cast<NPulseGenerator*>(Storage->TakeObject("NPGenerator"));
+ ManipulatorTestForm->MN1PosControl=RDK::dynamic_pointer_cast<NPulseGenerator>(Storage->TakeObject("NPGenerator"));
  if(ManipulatorTestForm->MN1PosControl)
  {
   ManipulatorTestForm->MN1PosControl->SetName("MN1PosControlGenerator");
   net->AddComponent(ManipulatorTestForm->MN1PosControl);
  }
 
- ManipulatorTestForm->MN1NegControl=dynamic_cast<NPulseGenerator*>(Storage->TakeObject("NPGenerator"));
+ ManipulatorTestForm->MN1NegControl=RDK::dynamic_pointer_cast<NPulseGenerator>(Storage->TakeObject("NPGenerator"));
  if(ManipulatorTestForm->MN1NegControl)
  {
   ManipulatorTestForm->MN1NegControl->SetName("MN1NegControlGenerator");
@@ -301,7 +302,18 @@ void __fastcall TMainForm::FormClose(TObject *Sender, TCloseAction &Action)
  MuscleTestForm->NetworkWatchFrame->CollectInfo("NetworkWatchFrame",false);
  MuscleTestForm->FNetworkWatchFrame->CollectInfo("FNetworkWatchFrame",false);
 
- delete Storage;
+ if(Storage)
+ {
+  Storage->ClearObjectsStorage();
+  delete Storage;
+  Storage=0;
+ }
+
+ if(Environment)
+ {
+  delete Environment;
+  Environment=0;
+ }
 }
 //---------------------------------------------------------------------------
 
@@ -326,7 +338,7 @@ void __fastcall TMainForm::TimerTimer(TObject *Sender)
  curtime=GetTickCount();
  while(curtime-CurrentTime<Timer->Interval && i<elapsed_counter)
  {
-  NWPhysicalManipulator *engine_input=dynamic_cast<NWPhysicalManipulator*>(ManipulatorTestForm->ControlSystem->GetComponent("WPhysicalManipulator"));
+  NWPhysicalManipulator *engine_input=RDK::dynamic_pointer_cast<NWPhysicalManipulator>(ManipulatorTestForm->ControlSystem->GetComponent("WPhysicalManipulator"));
   if(engine_input && engine_input->DLLManipulatorSetExternalData && engine_input->EmulatorMode)
   {
    engine_input->DLLManipulatorSetExternalData(StrToFloat(ManipulatorTestForm->ExtMomentEdit->Text),StatisticForm->StatsTime);
@@ -383,7 +395,7 @@ void __fastcall TMainForm::TimerTimer(TObject *Sender)
 
   if(ManipulatorTestForm->RadioGroup1->ItemIndex == 0)
   {
-   NADItem *engine_input=static_cast<NADItem*>(ManipulatorTestForm->ControlSystem->GetComponent("Pac"));
+   NADItem *engine_input=RDK::static_pointer_cast<NADItem>(ManipulatorTestForm->ControlSystem->GetComponent("Pac"));
    if(engine_input)
    {
 	ManipulatorTestForm->VoltageLabeledEdit->Text=FloatToStrF(engine_input->GetOutputData(0).Double[0],ffFixed,3,3);
@@ -392,7 +404,7 @@ void __fastcall TMainForm::TimerTimer(TObject *Sender)
   }
   else
   {
-   NWPhysicalManipulator *engine_input=static_cast<NWPhysicalManipulator*>(ManipulatorTestForm->ControlSystem->GetComponent("WPhysicalManipulator"));
+   NWPhysicalManipulator *engine_input=RDK::static_pointer_cast<NWPhysicalManipulator>(ManipulatorTestForm->ControlSystem->GetComponent("WPhysicalManipulator"));
    if(engine_input)
    {
 	ManipulatorTestForm->VoltageLabeledEdit->Text=FloatToStrF(engine_input->InputVoltage,ffFixed,3,3)+
@@ -457,19 +469,17 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
 
  CSInit(CSModeRadioGroup->ItemIndex,AfferentModeComboBox->ItemIndex,NumMotionElements);
 
- NANet *net=dynamic_cast<NANet*>((*Environment)("EngineControl"));
+ RDK::UEPtr<NANet> net=RDK::dynamic_pointer_cast<NANet>((*Environment)("EngineControl"));
 
  if(!net)
   return;
 
- (*Environment)->SetTimeStep(2000);
+ (*Environment)->SetTimeStep(1000);
  RDK::UAContainer *cont=0;
 
  // Контроллеры
 // NCMySDKWatchFrame* controller=0;
  Environment->DelAllControllers();
-
-
 
  MuscleTestForm->SingleMuscleWatchFrame->Clear();
  MuscleTestForm->DoubleMuscleWatchFrame->Clear();
@@ -599,22 +609,22 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
   // Конец заполнения графиков
   }
 
-  receptor[n][0]=dynamic_cast<NReceptor*>(cont->GetComponentL("Afferent_Ia1.Receptor"));
-  receptor[n][1]=dynamic_cast<NReceptor*>(cont->GetComponentL("Afferent_Ia2.Receptor"));
-  receptor[n][2]=dynamic_cast<NReceptor*>(cont->GetComponentL("Afferent_Ib1.Receptor"));
-  receptor[n][3]=dynamic_cast<NReceptor*>(cont->GetComponentL("Afferent_Ib2.Receptor"));
-  receptor[n][4]=dynamic_cast<NReceptor*>(cont->GetComponentL("Afferent_II1.Receptor"));
-  receptor[n][5]=dynamic_cast<NReceptor*>(cont->GetComponentL("Afferent_II2.Receptor"));
+  receptor[n][0]=RDK::dynamic_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ia1.Receptor"));
+  receptor[n][1]=RDK::dynamic_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ia2.Receptor"));
+  receptor[n][2]=RDK::dynamic_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ib1.Receptor"));
+  receptor[n][3]=RDK::dynamic_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ib2.Receptor"));
+  receptor[n][4]=RDK::dynamic_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_II1.Receptor"));
+  receptor[n][5]=RDK::dynamic_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_II2.Receptor"));
 
-  Separators[n][0]=dynamic_cast<NIntervalSeparator*>(net->GetComponentL(string("Ia_PosIntervalSeparator")+RDK::sntoa(n+1)));
-  Separators[n][1]=dynamic_cast<NIntervalSeparator*>(net->GetComponentL(string("Ia_NegIntervalSeparator")+RDK::sntoa(n+1)));
-  Separators[n][2]=dynamic_cast<NIntervalSeparator*>(net->GetComponentL(string("Ib_PosIntervalSeparator")+RDK::sntoa(n+1)));
-  Separators[n][3]=dynamic_cast<NIntervalSeparator*>(net->GetComponentL(string("Ib_NegIntervalSeparator")+RDK::sntoa(n+1)));
-  Separators[n][4]=dynamic_cast<NIntervalSeparator*>(net->GetComponentL(string("II_PosIntervalSeparator")+RDK::sntoa(n+1)));
-  Separators[n][5]=dynamic_cast<NIntervalSeparator*>(net->GetComponentL(string("II_NegIntervalSeparator")+RDK::sntoa(n+1)));
+  Separators[n][0]=RDK::dynamic_pointer_cast<NIntervalSeparator>(net->GetComponentL(string("Ia_PosIntervalSeparator")+RDK::sntoa(n+1)));
+  Separators[n][1]=RDK::dynamic_pointer_cast<NIntervalSeparator>(net->GetComponentL(string("Ia_NegIntervalSeparator")+RDK::sntoa(n+1)));
+  Separators[n][2]=RDK::dynamic_pointer_cast<NIntervalSeparator>(net->GetComponentL(string("Ib_PosIntervalSeparator")+RDK::sntoa(n+1)));
+  Separators[n][3]=RDK::dynamic_pointer_cast<NIntervalSeparator>(net->GetComponentL(string("Ib_NegIntervalSeparator")+RDK::sntoa(n+1)));
+  Separators[n][4]=RDK::dynamic_pointer_cast<NIntervalSeparator>(net->GetComponentL(string("II_PosIntervalSeparator")+RDK::sntoa(n+1)));
+  Separators[n][5]=RDK::dynamic_pointer_cast<NIntervalSeparator>(net->GetComponentL(string("II_NegIntervalSeparator")+RDK::sntoa(n+1)));
  }
 
- engine=ManipulatorTestForm->Engine;//static_cast<NADItem*>(net->GetComponentL("Engine"));
+ engine=ManipulatorTestForm->Engine;//RDK::static_pointer_cast<NADItem*>(net->GetComponentL("Engine"));
 
 /* bool ICheckBoxes[3];
  ICheckBoxes[0]=ManipulatorTestForm->IaCheckBox->Checked;
@@ -638,10 +648,11 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  ClassRegistryFrame->SetRegistry(&CSelectedRegistry);
 
  ManipulatorTestForm->MomentTrackBar->Position=0;
+ bool res=false;
 
  if(!Man)
  {
-  Man=dynamic_cast<NWPhysicalManipulator*>(Storage->TakeObject("NWPhysicalManipulator"));
+  Man=RDK::dynamic_pointer_cast<NWPhysicalManipulator>(Storage->TakeObject("NWPhysicalManipulator"));
   Man->WindowHandle=Handle;
   Man->LoadManipulatorDll();
  }
@@ -658,11 +669,11 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
   return;
 
 
+  // Связи с интерфейсом физического манипулятора
+  res=net->AddComponent(Man);
+  Man->SetActivity(true);
  //Man->Reset();
 
- // Связи с интерфейсом физического манипулятора
- bool res=net->AddComponent(Man);
- Man->SetActivity(true);
 
  res=net->CreateLink("WPhysicalManipulator",0,"NManipulatorSource1",0);
  res=net->CreateLink("WPhysicalManipulator",1,"NManipulatorSource1",1);
@@ -670,20 +681,25 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  res=net->CreateLink("NManipulatorInput1",0,"WPhysicalManipulator",0);
 
  // Связываем все управляющие элементы
- int motion_elements=dynamic_cast<NEngineMotionControl*>(net)->NumMotionElements;
+ int motion_elements=RDK::dynamic_pointer_cast<NEngineMotionControl>(net)->NumMotionElements;
  for(int i=0;i<motion_elements;i++)
  {
-  res&=(*Environment)->CreateLink(string("EngineControl.MotionElement")+RDK::sntoa(i)
+  res&=net->CreateLink(string("MotionElement")+RDK::sntoa(i)
+	+".Motoneuron1.LTZone",0,string("WPhysicalManipulator"));
+  res&=net->CreateLink(string("MotionElement")+RDK::sntoa(i)
+	+".Motoneuron2.LTZone",0,string("WPhysicalManipulator"));
+/*  res&=(*Environment)->CreateLink(string("EngineControl.MotionElement")+RDK::sntoa(i)
 	+".Motoneuron1.LTZone",0,string("WPhysicalManipulator"));
   res&=(*Environment)->CreateLink(string("EngineControl.MotionElement")+RDK::sntoa(i)
 	+".Motoneuron2.LTZone",0,string("WPhysicalManipulator"));
+ */
  }
 
 
  // Настраиваем статистику
  if(!SensorStats)
  {
-  SensorStats=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+  SensorStats=RDK::dynamic_pointer_cast<NSimpleStatistic>(Storage->TakeObject("NSimpleStatistic"));
  }
  else
  {
@@ -728,7 +744,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
 
  if(!OutStats)
  {
-  OutStats=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+  OutStats=RDK::dynamic_pointer_cast<NSimpleStatistic>(Storage->TakeObject("NSimpleStatistic"));
  }
  else
  {
@@ -760,7 +776,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
 
  if(!DetailedSensorStats)
  {
-  DetailedSensorStats=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+  DetailedSensorStats=RDK::dynamic_pointer_cast<NSimpleStatistic>(Storage->TakeObject("NSimpleStatistic"));
  }
  else
  {
@@ -806,7 +822,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  DetailedSensorStats->ReCreateFile();
 
  int oldsize=FFH.size();
- int newsize=dynamic_cast<NEngineMotionControl*>(net)->NumMotionElements*2;
+ int newsize=RDK::dynamic_pointer_cast<NEngineMotionControl>(net)->NumMotionElements*2;
  FFH.resize(newsize);
  for(int i=oldsize;i<newsize;i++)
   FFH[i]=0;
@@ -815,7 +831,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  {
   if(!FFH[i])
   {
-   FFH[i]=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+   FFH[i]=RDK::dynamic_pointer_cast<NSimpleStatistic>(Storage->TakeObject("NSimpleStatistic"));
   }
   else
   {
@@ -843,7 +859,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  {
   if(!FFH[i])
   {
-   FFH[i]=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+   FFH[i]=RDK::dynamic_pointer_cast<NSimpleStatistic>(Storage->TakeObject("NSimpleStatistic"));
   }
   else
   {
@@ -872,7 +888,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
 // SingleMNFrequency
  if(!SingleMNFrequency)
  {
-  SingleMNFrequency=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+  SingleMNFrequency=RDK::dynamic_pointer_cast<NSimpleStatistic>(Storage->TakeObject("NSimpleStatistic"));
  }
  else
  {
@@ -886,7 +902,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  SingleMNFrequency->StatsInterval=1;
  SingleMNFrequency->Mode=2;
  res=net->AddComponent(SingleMNFrequency);
- motion_elements=dynamic_cast<NEngineMotionControl*>(net)->NumMotionElements;
+ motion_elements=RDK::dynamic_pointer_cast<NEngineMotionControl>(net)->NumMotionElements;
  SingleMNFrequency->Headers.resize(motion_elements*2);
  for(int i=0;i<motion_elements;i++)
  {
@@ -907,7 +923,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
 
 // MNFrequency
 /* oldsize=MNFrequency.size();
- newsize=dynamic_cast<NEngineMotionControl*>(net)->NumMotionElements*2;
+ newsize=RDK::dynamic_pointer_cast<NEngineMotionControl*>(net)->NumMotionElements*2;
  MNFrequency.resize(newsize);
  for(size_t i=oldsize;i<newsize;i++)
   MNFrequency[i]=0;
@@ -915,7 +931,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  {
   if(!MNFrequency[i])
   {
-   MNFrequency[i]=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+   MNFrequency[i]=RDK::dynamic_pointer_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
   }
   else
   {
@@ -939,7 +955,7 @@ void __fastcall TMainForm::Button6Click(TObject *Sender)
  {
   if(!MNFrequency[i])
   {
-   MNFrequency[i]=dynamic_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
+   MNFrequency[i]=RDK::dynamic_pointer_cast<NSimpleStatistic*>(Storage->TakeObject("NSimpleStatistic"));
   }
   else
   {
@@ -1062,22 +1078,42 @@ void __fastcall TMainForm::NumMotionElementsComboBoxSelect(TObject *Sender)
 
 void __fastcall TMainForm::Button1Click(TObject *Sender)
 {
+ //try {
+  throw new RDK::UPtr<int>::UFEUsingZeroPtr();
+
+ /*}
+	catch (RDK::UPtr<int>::UFEUsingZeroPtr *exception)
+	{
+	 Application->MessageBox(L"RDK::UPtr<int>::UFEUsingZeroPtr Exception",L"RDK Exception",MB_OK);
+	 throw;
+
+	}
+  	catch (RDK::UException *exception)
+	{
+	 Application->MessageBox(L"RDK Exception",L"RDK Exception",MB_OK);
+	 throw;
+	}
+	catch(...)
+	{
+	 Application->MessageBox(L"AAAAAAAAAAAAAA",L"RDK Exception",MB_OK);
+
+	}     */
 /* NAContainer *cont=0;
- MySDKIOLabeledEdit->Text=IntToStr(int(sizeof(*dynamic_cast<NAContainer*>(cont))));
+ MySDKIOLabeledEdit->Text=IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NAContainer*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+";";
- MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*dynamic_cast<NAConnector*>(cont))));
+ MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NAConnector*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+";";
- MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*dynamic_cast<NAItem*>(cont))));
+ MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NAItem*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+";";
- MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*dynamic_cast<NADItem*>(cont))));
+ MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NADItem*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+";";
- MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*dynamic_cast<NANet*>(cont))));
+ MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NANet*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+";";
- MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*dynamic_cast<NNet*>(cont))));
+ MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NNet*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+";";
- MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*dynamic_cast<NNeuron*>(cont))));
+ MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NNeuron*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+";";
- MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*dynamic_cast<NPulseNeuron*>(cont))));
+ MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(sizeof(*RDK::dynamic_pointer_cast<NPulseNeuron*>(cont))));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+"; NumObjs=";
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+IntToStr(int(Environment->GetStorage()->CalcNumObjects()));
  MySDKIOLabeledEdit->Text=MySDKIOLabeledEdit->Text+"; LastClassId=";

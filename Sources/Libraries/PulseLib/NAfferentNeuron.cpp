@@ -55,12 +55,12 @@ NAfferentNeuron* NAfferentNeuron::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NAfferentNeuron::CheckComponentType(const NAContainer* comp) const
+bool NAfferentNeuron::CheckComponentType(UEPtr<NAContainer> comp) const
 {
- if(dynamic_cast<const NPulseMembrane*>(comp) ||
-	dynamic_cast<const NPulseLTZone*>(comp) ||
-	dynamic_cast<const NReceptor*>(comp) ||
-	dynamic_cast<const NConstGenerator*>(comp))
+ if(dynamic_pointer_cast<NPulseMembrane>(comp) ||
+	dynamic_pointer_cast<NPulseLTZone>(comp) ||
+	dynamic_pointer_cast<NReceptor>(comp) ||
+	dynamic_pointer_cast<NConstGenerator>(comp))
   return true;
 
  return false;

@@ -165,10 +165,10 @@ bool NPulseSynapse::ACalculate(void)
   input=PInputData[0]->Double[0];
   if(MainOwner && Owner)
   {
-   if(static_cast<NPulseChannel*>(Owner)->Type() < 0)
-	++static_cast<NPulseNeuron*>(MainOwner)->NumActivePosInputs.v;
+   if(static_pointer_cast<NPulseChannel>(Owner)->Type() < 0)
+	++static_pointer_cast<NPulseNeuron>(MainOwner)->NumActivePosInputs.v;
    else
-	++static_cast<NPulseNeuron*>(MainOwner)->NumActiveNegInputs.v;
+	++static_pointer_cast<NPulseNeuron>(MainOwner)->NumActiveNegInputs.v;
   }
  }
 

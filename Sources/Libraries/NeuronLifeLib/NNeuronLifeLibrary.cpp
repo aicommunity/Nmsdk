@@ -25,16 +25,16 @@ namespace NMSDK {
 NNeuronLifeLibrary NeuronLifeLibrary;
 
 
-bool CreateNeuronLifeObject(NNeuronLife* &life, NStorage *storage)
+bool CreateNeuronLifeObject(UEPtr<NNeuronLife> &life, NStorage *storage)
 {
  if(life || !storage)
   return false;
 
- life=static_cast<NNeuronLife*>(storage->TakeObject("NEmptyNeuronLife"));
+ life=static_pointer_cast<NNeuronLife>(storage->TakeObject("NEmptyNeuronLife"));
  if(!life)
   return false;
 
- NSum *sum=static_cast<NSum*>(storage->TakeObject("NSum"));
+ UEPtr<NSum> sum=static_pointer_cast<NSum>(storage->TakeObject("NSum"));
  if(!sum)
   return false;
 
@@ -78,7 +78,7 @@ void NNeuronLifeLibrary::ACreateClassSamples(NStorage *storage)
  cont->Default();
  UploadClass("NLifeNet",cont);
 
- NNeuronLife *life=0;
+ UEPtr<NNeuronLife> life;
  if(CreateNeuronLifeObject(life,storage))
  {
   life->Default();

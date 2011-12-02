@@ -90,10 +90,10 @@ int TNSourceControlFrame::FindSources(NAContainer *cont)
   return 0;
 
  int count=0;
- NSource *source=0;
+ UEPtr<NSource> source;
 
  for(int i=0;i<cont->GetNumComponents();i++)
-  if((source=dynamic_cast<NSource*>(cont->GetComponentByIndex(i))) != 0)
+  if((source=dynamic_pointer_cast<NSource>(cont->GetComponentByIndex(i))) != 0)
   {
    if(!AddSource(source))
     return count;

@@ -166,7 +166,7 @@ void __fastcall TManipulatorTestForm::MomentTrackBarChange(TObject *Sender)
 {
  if(Engine && ControlSystem)
  {
-  NConstGenerator *generator=dynamic_cast<NConstGenerator*>(ControlSystem->GetComponent("EngineMoment"));
+  UEPtr<NConstGenerator> generator=dynamic_pointer_cast<NConstGenerator>(ControlSystem->GetComponent("EngineMoment"));
   generator->Amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
   //  Engine->OutMoment=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
 //  ExtMomentEdit->Text=FloatToStrF(Engine->OutMoment,ffFixed,3,3);
@@ -467,40 +467,20 @@ void __fastcall TManipulatorTestForm::ControlVoltageCheckBoxClick(TObject *Sende
 {
  bool res;
  NADItem* cont;
+ int num_motions=StrToInt(MainForm->NumMotionElementsComboBox->Items->Strings[MainForm->NumMotionElementsComboBox->ItemIndex]);
+
 
   if(ControlVoltageCheckBox->Checked == false)
   {
-   res=ControlSystem->BreakLink("Pac",0,"Engine",0);
+   res=ControlSystem->BreakLink("Pac",0,"NManipulatorInput1",0);
 
-/*
-   for(int i=0;i<num_motions;i++)
-   {
-	string motion=string("MotionElement")+RDK::sntoa(i);
-	string pos_separator=string("II_PosIntervalSeparator")+RDK::sntoa(i+1);
-	string neg_separator=string("II_NegIntervalSeparator")+RDK::sntoa(i+1);
-
-	res=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_II2.Receptor",0);
-	res=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_II1.Receptor",0);
-
-	res=ControlSystem->CreateLink(pos_separator,0,motion+".Afferent_II1.Receptor");
-	res=ControlSystem->CreateLink(neg_separator,0,motion+".Afferent_II2.Receptor");
-   }  */
+   res=ControlSystem->BreakLink("Pac",0,"NManipulatorInputEmulator1",0);
   }
   else
   {
-   res=ControlSystem->CreateLink("Pac",0,"Engine",0);
-/*   for(int i=0;i<num_motions;i++)
-   {
-	string motion=string("MotionElement")+RDK::sntoa(i);
-	string pos_separator=string("II_PosIntervalSeparator")+RDK::sntoa(i+1);
-	string neg_separator=string("II_NegIntervalSeparator")+RDK::sntoa(i+1);
+   res=ControlSystem->CreateLink("Pac",0,"NManipulatorInput1",0);
 
-	res=ControlSystem->BreakLink(pos_separator,0,motion+".Afferent_II1.Receptor",0);
-	res=ControlSystem->BreakLink(neg_separator,0,motion+".Afferent_II2.Receptor",0);
-
-	res=ControlSystem->CreateLink("AfferentSource1",0,motion+".Afferent_II2.Receptor",0);
-	res=ControlSystem->CreateLink("AfferentSource1",0,motion+".Afferent_II1.Receptor",0);
-   }  */
+   res=ControlSystem->CreateLink("Pac",0,"NManipulatorInputEmulator1",0);
   }
 
  if(!res)
@@ -636,7 +616,7 @@ void __fastcall TManipulatorTestForm::VoltageMulTrackBarChange(TObject *Sender)
  VoltageMulEdit->Text=FloatToStrF(value,ffFixed,3,3);
  if(RadioGroup1->ItemIndex != 0)
   {
-   NWPhysicalManipulator *engine_input=static_cast<NWPhysicalManipulator*>(ControlSystem->GetComponent("WPhysicalManipulator"));
+   UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
    if(engine_input)
 	engine_input->OutputMul=value;
   }
@@ -661,7 +641,7 @@ void __fastcall TManipulatorTestForm::EmulatorCheckBoxClick(TObject *Sender)
 
 void __fastcall TManipulatorTestForm::SwapOutputVoltageDirectionCheckBoxClick(TObject *Sender)
 {
- NWPhysicalManipulator *engine_input=static_cast<NWPhysicalManipulator*>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ UEPtr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(!engine_input)
   return;
 
@@ -680,7 +660,7 @@ void __fastcall TManipulatorTestForm::SwapOutputVoltageDirectionCheckBoxClick(TO
 
 void __fastcall TManipulatorTestForm::ServoNumberEditChange(TObject *Sender)
 {
- NWPhysicalManipulator *engine_input=static_cast<NWPhysicalManipulator*>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ UEPtr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(!engine_input)
   return;
 
@@ -695,7 +675,7 @@ void __fastcall TManipulatorTestForm::TimeDurationTrackBarChange(TObject *Sender
  TimeDurationEdit->Text=FloatToStrF(value,ffFixed,3,3);
  if(RadioGroup1->ItemIndex != 0)
   {
-   NWPhysicalManipulator *engine_input=static_cast<NWPhysicalManipulator*>(ControlSystem->GetComponent("WPhysicalManipulator"));
+   UEPtr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
    if(engine_input)
 	engine_input->TimeDuration=value;
   }
@@ -710,7 +690,7 @@ void __fastcall TManipulatorTestForm::PACDeactivatorTimeTrackBarChange(TObject *
  real value=real(PACDeactivatorTimeTrackBar->Position)/real(PACDeactivatorTimeTrackBar->Max);
  PACDeactivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
- NPac *engine_input=dynamic_cast<NPac*>(ControlSystem->GetComponent("Pac"));
+ UEPtr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   vector<Real> values;
@@ -731,7 +711,7 @@ void __fastcall TManipulatorTestForm::PACActivatorTimeTrackBarChange(TObject *Se
  real value=real(PACActivatorTimeTrackBar->Position)/real(PACActivatorTimeTrackBar->Max);
  PACActivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
- NPac *engine_input=dynamic_cast<NPac*>(ControlSystem->GetComponent("Pac"));
+ UEPtr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   vector<Real> values;
@@ -747,9 +727,9 @@ void __fastcall TManipulatorTestForm::PACActivatorTimeTrackBarChange(TObject *Se
 
 void __fastcall TManipulatorTestForm::OnDeviceButtonClick(TObject *Sender)
 {
- RadioGroup1->ItemIndex=1;
+  RadioGroup1->ItemIndex=1;
  RadioGroup1Click(Sender);
- NWPhysicalManipulator *engine_input=dynamic_cast<NWPhysicalManipulator*>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(engine_input)
  {
   engine_input->SetActivity(true);
@@ -757,7 +737,8 @@ void __fastcall TManipulatorTestForm::OnDeviceButtonClick(TObject *Sender)
   if(engine_input->EmulatorMode)
    engine_input->SetTimeStep(ControlSystem->GetTimeStep());
   else
-   engine_input->SetTimeStep(50);
+   engine_input->SetTimeStep(ControlSystem->GetTimeStep());
+//   engine_input->SetTimeStep(100);
   engine_input->ComPort=StrToInt(ComPortEdit->Text);
   engine_input->ServoNumber=StrToInt(ServoNumberEdit->Text);
   engine_input->InitManipulator();
@@ -788,7 +769,7 @@ void __fastcall TManipulatorTestForm::OffDeviceButtonClick(TObject *Sender)
 
  RadioGroup1->ItemIndex=0;
  RadioGroup1Click(Sender);
- NWPhysicalManipulator *engine_input=dynamic_cast<NWPhysicalManipulator*>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(engine_input)
  {
   engine_input->UnInitManipulator();
@@ -804,11 +785,25 @@ void __fastcall TManipulatorTestForm::OffDeviceButtonClick(TObject *Sender)
 
 void __fastcall TManipulatorTestForm::SendVButtonClick(TObject *Sender)
 {
- NWPhysicalManipulator *engine_input=dynamic_cast<NWPhysicalManipulator*>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ int num_ranges=StrToInt(MainForm->NumMotionElementsComboBox->Items->Strings[MainForm->NumMotionElementsComboBox->ItemIndex]);
  if(engine_input)
  {
-  engine_input->SetAccumulationStep(StrToInt(VaEdit->Text));
+  engine_input->SetAccumulationStep(StrToInt(VaEdit->Text)/num_ranges);
   engine_input->SetDissociationStep(StrToInt(VdEdit->Text));
+ }
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TManipulatorTestForm::WorkModeComboBoxSelect(TObject *Sender)
+{
+ UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ if(engine_input)
+ {
+  engine_input->DllManipulatorMode=WorkModeComboBox->ItemIndex+2;
+  engine_input->DLLManipulatorSetWorkMode(engine_input->DllManipulatorMode);
  }
 }
 //---------------------------------------------------------------------------

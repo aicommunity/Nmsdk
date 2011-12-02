@@ -37,7 +37,7 @@ NSensorLibrary::NSensorLibrary(void)
 // Не требуется предварительная очистка массива и уборка памяти.
 void NSensorLibrary::ACreateClassSamples(NStorage *storage)
 {
- NAContainer *cont;
+ UEPtr<NAContainer> cont;
 
  cont=new NSignumSeparator;
  cont->SetName("SignumSeparator");
@@ -51,21 +51,21 @@ void NSensorLibrary::ACreateClassSamples(NStorage *storage)
 
 
  // Разделители аналогового сигнала на положительную и отрицательную части
- cont=storage->TakeObject("NSignumSeparator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NSignumSeparator"));
  cont->SetName("PosSignumSeparator");
  Real signum;
  signum.assign(1,1.0);
 // signum.assign(1,1.0/(2*M_PI));
  cont->Default();
- ((NSignumSeparator*)cont)->Sign=signum;
+ dynamic_pointer_cast<NSignumSeparator>(cont)->Sign=signum;
  UploadClass("NPosSignumSeparator",cont);
 
- cont=storage->TakeObject("NSignumSeparator");
+ cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NSignumSeparator"));
  cont->SetName("NegSignumSeparator");
  signum.assign(1,-1.0);
 // signum.assign(1,-1.0/(2*M_PI));
  cont->Default();
- ((NSignumSeparator*)cont)->Sign=signum;
+ dynamic_pointer_cast<NSignumSeparator>(cont)->Sign=signum;
  UploadClass("NNegSignumSeparator",cont);
 }
 // --------------------------

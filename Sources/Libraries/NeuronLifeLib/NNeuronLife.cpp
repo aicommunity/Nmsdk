@@ -170,9 +170,9 @@ NNeuronLife* NNeuronLife::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NNeuronLife::CheckComponentType(const NAContainer* comp) const
+bool NNeuronLife::CheckComponentType(UEPtr<NAContainer> comp) const
 {
- if(dynamic_cast<const NSum*>(comp))
+ if(dynamic_pointer_cast<NSum>(comp))
   return true;
 
  return false;
@@ -423,7 +423,7 @@ bool NNeuronLife::ACalculate(void)
 
  if(Energy.v < 0) // Вместо 0 должен быть параметр остаточного минимума
  {
-  NADItem *item=dynamic_cast<NADItem*>(Owner);
+  UEPtr<NADItem> item=dynamic_pointer_cast<NADItem>(Owner);
   if(item)
   {
    item->SetActivity(false);

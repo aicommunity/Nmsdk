@@ -19,7 +19,6 @@ RDK::UAContainerStorage* NewNStorage(void)
 RDK::UAContainerEnvironment* NewNEnvironment(void)
 {
  NEnvironment *env=new NEnvironment;
-
  env->AddClassLibrary(&BCLLibrary);
  env->AddClassLibrary(&ActLibrary);
  env->AddClassLibrary(&CRLibrary);
@@ -31,6 +30,7 @@ RDK::UAContainerEnvironment* NewNEnvironment(void)
  env->AddClassLibrary(&PulseLibrary);
  env->AddClassLibrary(&NeuronLifeLibrary);
  env->AddClassLibrary(&PulseNeuronLibrary);
+
  env->AddClassLibrary(&MotionControlLibrary);
  return env;
 }

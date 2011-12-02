@@ -60,18 +60,19 @@ NNet* NNet::New(void)
 // ћетоды управлени€ структурой сети
 // --------------------------
 // —оздает новый экземпл€р компонента по умолчанию и добавл€ет его в сеть
-NAContainer* NNet::InsertComponent(void)
+RDK::UEPtr<NAContainer> NNet::InsertComponent(void)
 {
  if(!Storage || DefaultComponentClassId == ForbiddenId)
   return 0;
 
- NAContainer *comp=static_cast<NAContainer*>(Storage->TakeObject(DefaultComponentClassId));
+ RDK::UEPtr<NAContainer> comp=RDK::static_pointer_cast<NAContainer>(Storage->TakeObject(DefaultComponentClassId));
  if(!comp)
   return 0;
 
  if(AddComponent(comp) == ForbiddenId)
  {
-  Storage->ReturnObject(comp);
+  comp->Free();
+//  Storage->ReturnObject(comp);
   return 0;
  }
 
