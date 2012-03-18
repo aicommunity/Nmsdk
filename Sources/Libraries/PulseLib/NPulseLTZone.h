@@ -23,7 +23,7 @@ namespace NMSDK {
 
 class NPulseNeuron;
 
-class NPulseLTZone: public NADItem
+class NPulseLTZone: public NANet
 {
 public: // Общедоступные свойства
 // Постоянная времени

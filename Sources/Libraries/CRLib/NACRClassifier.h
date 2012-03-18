@@ -34,7 +34,7 @@ namespace NMSDK {
 // Оценки качества этапа распознавания
 typedef double ExpectancyT;
 
-class NACRClassifier: public NADItem
+class NACRClassifier: public NANet
 {
 public: // Общедоступные свойства
 // Максимально допустимая ошибка обучения

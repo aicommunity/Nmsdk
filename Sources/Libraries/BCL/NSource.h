@@ -20,17 +20,17 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NSource: public NADItem
+class NSource: public NANet
 {
 public: // Общедоступные свойства
 // Длительность работы с момента включения (с)
 // 0 - постоянная работа
-RDK::ULProperty<TimeT,NSource> ActionPeriod;
+RDK::ULProperty<RDK::UTime,NSource> ActionPeriod;
 
 protected: // Основные свойства
 
 protected: // Временные переменные
-RDK::ULProperty<TimeT,NSource> ActionCounter;
+RDK::ULProperty<RDK::UTime,NSource> ActionCounter;
 
 public: // Методы
 // --------------------------
@@ -45,7 +45,7 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Длительность работы с момента включения
-bool SetActionPeriod(TimeT value);
+bool SetActionPeriod(RDK::UTime value);
 // --------------------------
 
 // --------------------------

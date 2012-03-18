@@ -54,7 +54,7 @@ NPulseNeuron::~NPulseNeuron(void)
 // Возвращает указатель на модель низкопороговой зоны
 NPulseLTZone* NPulseNeuron::GetLTZone(void)
 {
- return dynamic_cast<NPulseLTZone*>(LTZone.Get());// &(*LTZone);
+ return dynamic_pointer_cast<NPulseLTZone>(LTZone.Get());// &(*LTZone);
 }
 
 // Возвращает указатель на модель источника возбуждаюшего потенциала
@@ -132,7 +132,7 @@ NPulseMembrane* NPulseNeuron::BranchDendrite(const UId &id, bool feedback)
  int size=dendrite->GetNumComponents();
  if(size>cont->GetNumComponents())
   size=cont->GetNumComponents();
- for(size_t k=0;k<size;k++)
+ for(int k=0;k<size;k++)
  {
   UEPtr<NADItem> channel=static_pointer_cast<NADItem>(dendrite->GetComponentByIndex(k));
   for(int i=0;i<channel->GetNumOutputs();i++)
@@ -222,7 +222,7 @@ bool NPulseNeuron::CheckComponentType(UEPtr<NAContainer> comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NPulseNeuron::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
+bool NPulseNeuron::AAddComponent(UEPtr<UAContainer> comp, UEPtr<UIPointer> pointer)
 {
  if(!NNeuron::AAddComponent(comp,pointer))
   return false;
@@ -272,9 +272,7 @@ bool NPulseNeuron::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointe
     static_pointer_cast<NPulseChannel>(membrane->GetComponentByIndex(i))->InstallHebbSynapses();
    }
   }
-  return true;
  }
-
 
  return true;
 }

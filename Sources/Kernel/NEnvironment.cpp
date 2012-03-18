@@ -268,7 +268,6 @@ bool NEnvironment::ACalculate(void)
  if(!RDK::UAContainerEnvironment::ACalculate())
   return false;
 
- NAContainer::SetTime(NAContainer::GetTime()+1000000/GetModel()->GetTimeStep());
  return true;
 }
 // --------------------------

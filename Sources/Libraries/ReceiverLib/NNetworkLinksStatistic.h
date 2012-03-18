@@ -18,11 +18,11 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NNetworkLinksStatistic: public NADItem
+class NNetworkLinksStatistic: public NANet
 {
 public: // Параметры
 // Интервал времени через который обновляется статистика
-TimeT StatsInterval;
+double StatsInterval;
 
 // Режим формирования статистики
 int Mode;
@@ -36,7 +36,7 @@ protected: // Временные переменные
 RDK::UIniFile<char> StatsFile;
 
 // Момент начала очередного интервала накопления статистики
-TimeT StatsStartTime;
+RDK::ULongTime StatsStartTime;
 
 
 public: // Методы

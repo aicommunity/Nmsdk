@@ -10,6 +10,8 @@ File License:        BSD License
 Project License:    GNU GPLv3 License
 See file license.txt for more information
 *********************************************************** */
+#ifndef NRECEIVER_LIBRARY_CPP
+#define NRECEIVER_LIBRARY_CPP
 
 #include "NReceiverLibrary.h"
 
@@ -76,3 +78,6 @@ void NReceiverLibrary::ACreateClassSamples(NStorage *storage)
 
 
 }
+
+#endif
+

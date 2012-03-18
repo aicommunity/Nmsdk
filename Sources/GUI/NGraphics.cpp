@@ -300,7 +300,7 @@ namespace NMSDK {
 		UEPtr<NAItem>item = dynamic_pointer_cast<NAItem>(Net->GetComponent(id));
 		out = Descriptions[id];
 
-		for (size_t i = 0; i < Net->GetNumComponents(); i++) {
+		for (int i = 0; i < Net->GetNumComponents(); i++) {
 			linkslist.Clear();
 			if (item != Net->GetComponentByIndex(i)) {
 				item->GetFullItemLinks(linkslist,

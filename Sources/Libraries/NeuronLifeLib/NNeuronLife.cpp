@@ -377,12 +377,12 @@ real NNeuronLife::FeelDiff(real kq, real ediff, real en)
 // Выполняет расчет этого объекта
 bool NNeuronLife::ACalculate(void)
 {
- if(NumInputs<3 || PInputDataSize[0]<1 || PInputDataSize[1]<1 || PInputDataSize[2]<1)
+ if(NumInputs<3 || GetInputDataSize(0)<1 || GetInputDataSize(1)<1 || GetInputDataSize(2)<1)
   return true;
 
- real potential=PInputData[0]->Double[0];
- real epos=PInputData[1]->Double[0];
- real qsum=PInputData[2]->Double[0];
+ real potential=GetInputData(0)->Double[0];
+ real epos=GetInputData(1)->Double[0];
+ real qsum=GetInputData(2)->Double[0];
 
 // UsumProizv = (potential-Usum)*TimeStep;
  Usum=potential;

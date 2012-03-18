@@ -10,13 +10,13 @@
 namespace NMSDK {
 
 // —оздает пустое хранилище и возвращает указатель на него
-RDK::UAContainerStorage* NewNStorage(void)
+NStorage* CreateNewNStorage(void)
 {
  return new NStorage;
 }
 
 // —оздает среду и возвращает указатель на нее
-RDK::UAContainerEnvironment* NewNEnvironment(void)
+NEnvironment* CreateNewNEnvironment(void)
 {
  NEnvironment *env=new NEnvironment;
  env->AddClassLibrary(&BCLLibrary);
@@ -33,6 +33,12 @@ RDK::UAContainerEnvironment* NewNEnvironment(void)
 
  env->AddClassLibrary(&MotionControlLibrary);
  return env;
+}
+
+
+RDK::UEngine* CreateNewNEngine(void)
+{
+ return new RDK::UEngine;
 }
 
 }

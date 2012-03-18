@@ -22,11 +22,11 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NMExtrapolator: public NADItem
+class NMExtrapolator: public NANet
 {
 public: // Общедоступные свойства
 // Время прогноза, с
-RDK::ULProperty<TimeT,NMExtrapolator> PredictionTime;
+RDK::ULProperty<RDK::UTime,NMExtrapolator> PredictionTime;
 
 // Число уровней сети
 RDK::ULProperty<size_t,NMExtrapolator> NumLevels;
@@ -55,7 +55,7 @@ virtual ~NMExtrapolator(void);
 // Методы управления общедоступными свойствами
 // --------------------------
 // Время прогноза, с
-bool SetPredictionTime(TimeT ptime);
+bool SetPredictionTime(RDK::UTime ptime);
 
 // Число уровней сети
 bool SetNumLevels(size_t value);

@@ -108,7 +108,7 @@ bool NMuscle::CheckComponentType(UEPtr<NAContainer> comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NMuscle::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
+bool NMuscle::AAddComponent(UEPtr<UAContainer> comp, UEPtr<UIPointer> pointer)
 {
 /* NItem* item=dynamic_cast<NItem*>(comp);
  if(item)
@@ -281,12 +281,12 @@ bool NMuscle::ACalculate(void)
   yOld[i] = y[i];
 
  for(int i=0;i<NumInputs;i++)
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
    //if(k >= OutputSize)
    //	break;
 
-   y[0]=PInputData[i]->Double[j];
+   y[0]=GetInputData(i)->Double[j];
 
    ++k;
    break;

@@ -42,10 +42,10 @@ private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);
 
- NMExtrapolator* MExtrapolator;
- NSinusGenerator* Generator;
- NPulseGenerator* PGenerator;
- NSum* Sum;
+ RDK::UEPtr<NMExtrapolator> MExtrapolator;
+ RDK::UEPtr<NSinusGenerator> Generator;
+ RDK::UEPtr<NPulseGenerator> PGenerator;
+ RDK::UEPtr<NSum> Sum;
 
  NEnvironment Environment;
  NStorage Storage;

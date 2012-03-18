@@ -24,7 +24,7 @@ class NCRDistance: public NACRClassifier
 {
 public: // Общедоступные свойства
 // Число входов сети
-RDK::ULProperty<size_t, NCRDistance> NumInputs;
+RDK::ULProperty<size_t, NCRDistance> NumLayerInputs;
 
 // Флаг разрешения отсекания пиков выборки по дисперсии
 // 0 - не отсекать
@@ -119,7 +119,7 @@ protected:
 // Методы управления общедоступными свойствами
 // -----------------------------
 // Устанавливает число входов всех скрытых слоев
-bool SetNumInputs(size_t numinputs);
+bool SetNumLayerInputs(size_t numinputs);
 
 // Устанавливает скорость обучения сети
 bool SetTrainingRate(real tr);

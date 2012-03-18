@@ -152,13 +152,13 @@ bool NDCEngine::ACalculate(void)
 
  input.resize(2);
 
- for(size_t i=0;i<NumInputs;i++)
-  for(size_t j=0;j<PInputDataSize[i];j++)
+ for(int i=0;i<NumInputs;i++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
    if(k >= 2)
 	break;
 
-   input[k]=PInputData[i]->Double[j];
+   input[k]=GetInputData(i)->Double[j];
 
    ++k;
    break;

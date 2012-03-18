@@ -75,15 +75,14 @@ bool NManipulatorSourceEmulator::AReset(void)
 // Выполняет расчет этого объекта
 bool NManipulatorSourceEmulator::ACalculate(void)
 {
- size_t numout=NumOutputs;
- if(NumInputs >0 && PInputDataSize[0]>0)
-  POutputData[0].Double[0]=PInputData[0]->Double[0];
+ if(NumInputs >0 && GetInputDataSize(0)>0)
+  POutputData[0].Double[0]=GetInputData(0)->Double[0];
 
- if(NumInputs >1 && PInputDataSize[1]>0)
-  POutputData[1].Double[0]=PInputData[1]->Double[0];
+ if(NumInputs >1 && GetInputDataSize(1)>0)
+  POutputData[1].Double[0]=GetInputData(1)->Double[0];
 
- if(NumInputs >2 && PInputDataSize[2]>0)
-  POutputData[2].Double[0]=PInputData[2]->Double[0];
+ if(NumInputs >2 && GetInputDataSize(2)>0)
+  POutputData[2].Double[0]=GetInputData(2)->Double[0];
  return true;//NManipulatorSource::ACalculate();
 }
 // --------------------------

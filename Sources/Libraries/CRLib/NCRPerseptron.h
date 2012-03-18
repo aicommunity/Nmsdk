@@ -29,7 +29,7 @@ public: // Общедоступные свойства
 RDK::ULProperty<size_t,NCRPerseptron> NumLayers;
 
 // Число входов сети
-RDK::UCLProperty<vector<size_t>, NCRPerseptron> NumInputs;
+RDK::UCLProperty<vector<size_t>, NCRPerseptron> NumLayerInputs;
 
 // Скорость обучения
 RDK::ULProperty<real, NCRPerseptron> TrainingRate;
@@ -80,7 +80,7 @@ protected:
 bool SetNumLayers(size_t num);
 
 // Устанавливает число входов всех скрытых слоев
-bool SetNumInputs(const vector<size_t> &numinputs);
+bool SetNumLayerInputs(const vector<size_t> &numinputs);
 
 // Устанавливает скорость обучения сети
 bool SetTrainingRate(real tr);

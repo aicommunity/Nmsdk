@@ -40,7 +40,7 @@ NSource::~NSource(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Длительность работы с момента включения
-bool NSource::SetActionPeriod(TimeT value)
+bool NSource::SetActionPeriod(RDK::UTime value)
 {
  if(value < 0)
   return false;

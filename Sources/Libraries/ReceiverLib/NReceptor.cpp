@@ -110,9 +110,9 @@ bool NReceptor::ACalculate(void)
 
  size_t k=0;
  for(int i=0;i<NumInputs;i++)
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
-   real input=PInputData[i]->Double[j];
+   real input=GetInputData(i)->Double[j];
    if(k >= GetOutputDataSize(0))
 	break;
 

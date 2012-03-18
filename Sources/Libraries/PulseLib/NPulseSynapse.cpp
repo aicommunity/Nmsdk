@@ -160,9 +160,9 @@ bool NPulseSynapse::ACalculate(void)
 {
  real input=0;
 
- if(NumInputs >0 && PInputDataSize[0]>0)
+ if(NumInputs >0 && GetInputDataSize(0)>0)
  {
-  input=PInputData[0]->Double[0];
+  input=GetInputData(0)->Double[0];
   if(MainOwner && Owner)
   {
    if(static_pointer_cast<NPulseChannel>(Owner)->Type() < 0)

@@ -82,14 +82,14 @@ bool NCRSample::Add(int class_index)
  SampleData.resize(SampleSize);
 
  SampleData[SampleSize-1].first.Resize(0);
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
-  if(PInputDataSize[i]<=0)
+  if(GetInputDataSize(i)<=0)
    continue;
-  SampleData[SampleSize-1].first+=*PInputData[i];
+  SampleData[SampleSize-1].first+=*GetInputData(i);
  }
 
- if(SampleData[SampleSize-1].first.GetSize() != VectorSize)
+ if(SampleData[SampleSize-1].first.GetSize() != int(VectorSize))
  {
   --SampleSize.v;
   SampleData.resize(SampleSize);
@@ -182,10 +182,10 @@ bool NCRSample::ACalculate(void)
   if(!NumInputs)
    return false;
 
-  for(size_t i=0;i<NumInputs;i++)
+  for(int i=0;i<NumInputs;i++)
   {
-   for(size_t j=0;j<PInputDataSize[i];j++,k++)
-	POutputData[0].Double[k]=PInputData[i]->Double[j];
+   for(size_t j=0;j<GetInputDataSize(i);j++,k++)
+	POutputData[0].Double[k]=GetInputData(i)->Double[j];
   }
  break;
 

@@ -21,13 +21,13 @@
 //   If your DLL uses the dynamic version of the RTL, you do not need to
 //   explicitly add MEMMGR.LIB as this will be done implicitly for you
 //---------------------------------------------------------------------------
-#include "nmsdkdll.h"
+//#include "nmsdkdll.h"
 
 
 #pragma argsused
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fwdreason, LPVOID lpvReserved)
 {
- DllManager.Init(&NMSDK::NewNStorage,&NMSDK::NewNEnvironment);
+// DllManager.Init(&NMSDK::NewNStorage,&NMSDK::NewNEnvironment);
 	return 1;
 }
 //---------------------------------------------------------------------------

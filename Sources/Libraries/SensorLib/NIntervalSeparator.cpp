@@ -133,7 +133,7 @@ bool NIntervalSeparator::ACalculate(void)
  {
   for(size_t j=0;j<size;j++)
   {
-   input=PInputData[i]->Double[j];
+   input=GetInputData(i)->Double[j];
    switch(Mode[j])
    {
    case 0:

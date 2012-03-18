@@ -324,7 +324,7 @@ bool NCRFusion::AverageQualityCalculate(void)
 {
  vector<NACRClassifier*> classifiers;
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   if(dynamic_cast<NACRClassifier*>(GetCItem(i).Item))
    classifiers.push_back(static_cast<NACRClassifier*>(GetCItem(i).Item));
@@ -384,7 +384,7 @@ bool NCRFusion::AverageInputCalculate(void)
 {
  vector<NACRClassifier*> classifiers;
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   if(dynamic_cast<NACRClassifier*>(GetCItem(i).Item))
    classifiers.push_back(static_cast<NACRClassifier*>(GetCItem(i).Item));
@@ -447,7 +447,7 @@ bool NCRFusion::SumInputCalculate(void)
 {
  vector<NACRClassifier*> classifiers;
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   if(dynamic_cast<NACRClassifier*>(GetCItem(i).Item))
    classifiers.push_back(static_cast<NACRClassifier*>(GetCItem(i).Item));
@@ -599,7 +599,7 @@ bool NCRFusion::RecognitionCounterCalculate(void)
 {
  vector<NACRClassifier*> classifiers;
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   if(dynamic_cast<NACRClassifier*>(GetCItem(i).Item))
    classifiers.push_back(static_cast<NACRClassifier*>(GetCItem(i).Item));
@@ -659,7 +659,7 @@ bool NCRFusion::InputRecognitionCounterCalculate(void)
 {
  vector<NACRClassifier*> classifiers;
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   if(dynamic_cast<NACRClassifier*>(GetCItem(i).Item))
    classifiers.push_back(static_cast<NACRClassifier*>(GetCItem(i).Item));
@@ -724,7 +724,7 @@ bool NCRFusion::SumInputRecognitionCounterCalculate(void)
 {
  vector<NACRClassifier*> classifiers;
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   if(dynamic_cast<NACRClassifier*>(GetCItem(i).Item))
    classifiers.push_back(static_cast<NACRClassifier*>(GetCItem(i).Item));

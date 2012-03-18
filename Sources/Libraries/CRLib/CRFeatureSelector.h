@@ -23,7 +23,7 @@ using namespace MySDK;
 
 using namespace NMSDK;
 //---------------------------------------------------------------------------
-class CRFeatureSelector: public NADItem//UModule
+class CRFeatureSelectorpublic NANet//UModule
 {
 public: // Параметры
 // Режим накопления статистики

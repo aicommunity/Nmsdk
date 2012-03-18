@@ -24,7 +24,7 @@ namespace NMSDK {
 
 //using namespace MySDK;
 
-class NMuscle: public NADItem
+class NMuscle: public NANet
 {
 public: // Общедоступные свойства
 // Коэффициенты
@@ -113,7 +113,7 @@ protected:
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-virtual bool AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer=0);
+virtual bool AAddComponent(UEPtr<UAContainer> comp, UEPtr<UIPointer> pointer=0);
 
 // Выполняет предварительные пользовательские действия
 // при удалении дочернего компонента из этого объекта

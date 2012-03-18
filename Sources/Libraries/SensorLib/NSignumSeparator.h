@@ -22,7 +22,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NSignumSeparator: public NADItem
+class NSignumSeparator: public NANet
 {
 public: // Общедоступные свойства
 // Выделяемый знак

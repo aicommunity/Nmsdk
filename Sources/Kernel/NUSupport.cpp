@@ -17,7 +17,7 @@ namespace NMSDK {
 // Записывает изображение в bitmap
 RDK::UBitmap& operator << (RDK::UBitmap &bmp, const RDK::UItemData &data)
 {
- if(data.GetByteSize()<sizeof(int)*3)
+ if(data.GetByteSize()<int(sizeof(int)*3))
   return bmp;
 
  bmp.SetRes(data.Int[0],data.Int[1],static_cast<RDK::UBMColorModel>(data.Int[1]));

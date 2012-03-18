@@ -86,7 +86,7 @@ bool NPulseLifeNeuron::CheckComponentType(UEPtr<NAContainer> comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NPulseLifeNeuron::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
+bool NPulseLifeNeuron::AAddComponent(UEPtr<UAContainer> comp, UEPtr<UIPointer> pointer)
 {
  UEPtr<NNeuronLife> temp=dynamic_pointer_cast<NNeuronLife>(comp);
 

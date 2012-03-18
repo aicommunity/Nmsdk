@@ -10,6 +10,8 @@ File License:        BSD License
 Project License:    GNU GPLv3 License
 See file license.txt for more information
 *********************************************************** */
+#ifndef NACT_LIBRARY_CPP
+#define NACT_LIBRARY_CPP
 
 #include "NActLibrary.h"
 #include "NDCEngine.cpp"
@@ -51,3 +53,5 @@ void NActLibrary::ACreateClassSamples(NStorage *storage)
 
 
 }
+
+#endif

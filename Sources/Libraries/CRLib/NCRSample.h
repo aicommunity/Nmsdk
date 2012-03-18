@@ -23,7 +23,7 @@ namespace NMSDK {
 
 //using namespace RDK;
 
-class NCRSample: public NADItem
+class NCRSample: public NANet
 {
 public: // Общедоступные свойства
 // Размер выходного вектора выборки

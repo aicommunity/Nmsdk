@@ -27,8 +27,8 @@
 			<AllPackageLibs>rtl.lib;vcl.lib;Tee.lib;vclimg.lib</AllPackageLibs>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<Defines>NO_STRICT</Defines>
-			<IncludePath>..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Deploy\Include\;..\..\GUI\Builder\;..\..\Deploy\Src;..\..\MySDK4\Deploy\Src;..\..\GUI;..\..\GUI\Builder;..\..\MySDK4\GUI\Builder;$(CG_BOOST_ROOT)\boost\tr1\tr1;$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;$(CG_BOOST_ROOT);..\..\MySDK4\Deploy\Include;..\..\Deploy\Include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Deploy\Include\;..\..\GUI\Builder\;..\..\Deploy\Include;..\..\MySDK4\Deploy\Lib\Debug;..\..\Deploy\Src;..\..\MySDK4\Deploy\Src;..\..\GUI\Builder;..\..\MySDK4\GUI\Builder;$(BDS)\lib\obj;$(BDS)\lib\psdk;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\ThirdParty\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Deploy\Include\;..\..\GUI\Builder\;..\..\Deploy\Src;..\..\MySDK4\Deploy\Src;..\..\GUI;..\..\GUI\Builder;..\..\MySDK4\GUI\Builder;$(CG_BOOST_ROOT)\boost\tr1\tr1;$(BDS)\include;$(BDS)\include\dinkumware;$(BDS)\include\vcl;$(CG_BOOST_ROOT);..\..\MySDK4\Deploy\Include;..\..\Deploy\Include;..\..\ThirdParty\RDK\Deploy\Include\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\ThirdParty\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\RDK\GUI\Builder\;..\..\Deploy\Include\;..\..\GUI\Builder\;..\..\Deploy\Include;..\..\MySDK4\Deploy\Lib\Debug;..\..\Deploy\Src;..\..\MySDK4\Deploy\Src;..\..\GUI\Builder;..\..\MySDK4\GUI\Builder;$(BDS)\lib\obj;..\..\ThirdParty\RDK\Deploy\Include\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 		</PropertyGroup>
@@ -58,18 +58,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Deploy\Include\NMSDK.cpp">
-				<BuildOrder>17</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\NTGraphics.cpp">
-				<BuildOrder>39</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\NLinksFrameUnit.cpp">
-				<Form>NLinksFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\GUI\Builder\NLinksFrameUnit.h</DependentOn>
-				<BuildOrder>38</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\TNSupport.cpp">
 				<DependentOn>..\..\GUI\Builder\TNSupport.h</DependentOn>
 				<BuildOrder>41</BuildOrder>
@@ -80,89 +68,94 @@
 				<DependentOn>..\..\GUI\Builder\TNSourceControlFrameUnit.h</DependentOn>
 				<BuildOrder>40</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\NANetGraphicsFrameUnit.cpp">
-				<Form>NANetGraphicsFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\GUI\Builder\NANetGraphicsFrameUnit.h</DependentOn>
-				<BuildOrder>37</BuildOrder>
+			<CppCompile Include="..\..\Deploy\Include\NMSDK.cpp">
+				<BuildOrder>17</BuildOrder>
 			</CppCompile>
-			<ResFiles Include="Extrapolator.res">
-				<BuildOrder>1</BuildOrder>
-			</ResFiles>
+			<CppCompile Include="..\..\GUI\Builder\NTGraphics.cpp">
+				<BuildOrder>39</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="Extrapolator.cpp">
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="MainFormUnit.cpp">
 				<Form>MainForm</Form>
 				<DependentOn>MainFormUnit.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\NANetFrameUnit.cpp">
-				<Form>NANetFrame</Form>
+			<ResFiles Include="Extrapolator.res">
+				<BuildOrder>1</BuildOrder>
+			</ResFiles>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\ClassesListFrameUnit.cpp">
+				<Form>ClassesListFrame</Form>
 				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\GUI\Builder\NANetFrameUnit.h</DependentOn>
-				<BuildOrder>36</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="Extrapolator.cpp">
-				<BuildOrder>0</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\ListInputFormUnit.cpp">
-				<Form>ListInputForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\ListInputFormUnit.h</DependentOn>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\ClassesListFrameUnit.h</DependentOn>
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\SeriesControlUnit.cpp">
-				<Form>SeriesControlForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\SeriesControlUnit.h</DependentOn>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\ComponentsListFrameUnit.cpp">
+				<Form>ComponentsListFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\ComponentsListFrameUnit.h</DependentOn>
 				<BuildOrder>12</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\ShowProgressBarUnit.cpp">
-				<Form>ShowProgressBarForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\ShowProgressBarUnit.h</DependentOn>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\ListInputFormUnit.cpp">
+				<Form>ListInputForm</Form>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\ListInputFormUnit.h</DependentOn>
 				<BuildOrder>13</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\TImagesFrameUnit.cpp">
-				<Form>ImagesFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\TImagesFrameUnit.h</DependentOn>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\SeriesControlUnit.cpp">
+				<Form>SeriesControlForm</Form>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\SeriesControlUnit.h</DependentOn>
 				<BuildOrder>14</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\TUBitmap.cpp">
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\ShowProgressBarUnit.cpp">
+				<Form>ShowProgressBarForm</Form>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\ShowProgressBarUnit.h</DependentOn>
 				<BuildOrder>15</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\TUFileSystem.cpp">
-				<DependentOn>..\..\RDK\GUI\Builder\TUFileSystem.h</DependentOn>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\TImagesFrameUnit.cpp">
+				<Form>ImagesFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\TImagesFrameUnit.h</DependentOn>
+				<BuildOrder>16</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\TUBitmap.cpp">
 				<BuildOrder>17</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\WatchFrameUnit.cpp">
-				<Form>WatchFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\WatchFrameUnit.h</DependentOn>
-				<BuildOrder>19</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\WatchWindowFormUnit.cpp">
-				<Form>WatchWindowForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\WatchWindowFormUnit.h</DependentOn>
-				<BuildOrder>20</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\TUClassRegistryFrame.cpp">
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\TUClassRegistryFrame.cpp">
 				<Form>UClassRegistryFrame</Form>
 				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\TUClassRegistryFrame.h</DependentOn>
-				<BuildOrder>20</BuildOrder>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\TUClassRegistryFrame.h</DependentOn>
+				<BuildOrder>18</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\Deploy\Include\rdk_builder.cpp">
-				<BuildOrder>21</BuildOrder>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\TUFileSystem.cpp">
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\TUFileSystem.h</DependentOn>
+				<BuildOrder>19</BuildOrder>
 			</CppCompile>
-			<FormResources Include="..\..\GUI\Builder\NLinksFrameUnit.dfm"/>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\WatchFrameUnit.cpp">
+				<Form>WatchFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\WatchFrameUnit.h</DependentOn>
+				<BuildOrder>23</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\ThirdParty\RDK\GUI\Builder\WatchWindowFormUnit.cpp">
+				<Form>WatchWindowForm</Form>
+				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\WatchWindowFormUnit.h</DependentOn>
+				<BuildOrder>24</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\ThirdParty\RDK\Deploy\Include\rdk_builder.cpp">
+				<BuildOrder>22</BuildOrder>
+			</CppCompile>
 			<FormResources Include="..\..\GUI\Builder\TNSourceControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\GUI\Builder\NANetGraphicsFrameUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
-			<FormResources Include="..\..\GUI\Builder\NANetFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\ListInputFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\SeriesControlUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\ShowProgressBarUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\TImagesFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\WatchFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\WatchWindowFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\TUClassRegistryFrame.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\ClassesListFrameUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\ComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\ListInputFormUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\SeriesControlUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\ShowProgressBarUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\TImagesFrameUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\TUClassRegistryFrame.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\WatchFrameUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\WatchWindowFormUnit.dfm"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

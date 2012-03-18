@@ -42,7 +42,7 @@ int elemsort(const void *v1,const void *v2)
 // --------------------------
 NCRDistance::NCRDistance(void)
 //: NACRClassifier(name),
- : NumInputs("NumInputs",this,&NCRDistance::SetNumInputs),
+ : NumLayerInputs("NumLayerInputs",this,&NCRDistance::SetNumLayerInputs),
   NumMaxElements("NumMaxElements",this),
   MinElementsDistance("MinElementsDistance",this),
   DispersionCroppingFlag("DispersionCroppingFlag",this),
@@ -51,7 +51,7 @@ NCRDistance::NCRDistance(void)
   MinRecThreshold("MinRecThreshold",this),
   MaxRecThreshold("MaxRecThreshold",this,&NCRDistance::SetMaxRecThreshold)
 {
-/* AddLookupParameter("NumInputs",NumInputs);
+/* AddLookupParameter("NumLayerInputs",NumLayerInputs);
 
  AddLookupParameter("NumMaxElements",NumMaxElements);
  AddLookupParameter("MinElementsDistance",MinElementsDistance);
@@ -73,9 +73,9 @@ NCRDistance::~NCRDistance(void)
 // Методы управления параметрами
 // -----------------------------
 // Устанавливает число входов всех скрытых слоев
-bool NCRDistance::SetNumInputs(size_t numinputs)
+bool NCRDistance::SetNumLayerInputs(size_t numinputs)
 {
-// NumInputs=numinputs;
+// NumLayerInputs=numinputs;
  Ready=false;
 
  return true;
@@ -171,7 +171,7 @@ bool NCRDistance::AFileLoad(fstream &file)
 
  SetOutputDataSize(0,numclasses);
 
- SetNumInputs(numinputs);
+ SetNumLayerInputs(numinputs);
  Build();
 
  file.read((char*)&numtrainsamples,sizeof(numtrainsamples));
@@ -211,7 +211,7 @@ bool NCRDistance::AFileSave(fstream &file)
  size_t temp;
  temp=GetOutputDataSize(0);
  file.write((char*)&temp,sizeof(temp));
- temp=NumInputs;
+ temp=NumLayerInputs;
  file.write((char*)&temp,sizeof(temp));
 
  temp=NumTrainSamples;
@@ -257,7 +257,7 @@ NAContainer* NCRDistance::New(void)
 bool NCRDistance::ACRDefault(void)
 {
  SetOutputDataSize(0,2);
- SetNumInputs(100);
+ SetNumLayerInputs(100);
 // MinOutputValue=0;//-0.5;
 // MaxOutputValue=10000;//0.5;
 
@@ -284,7 +284,7 @@ bool NCRDistance::ACRDefault(void)
  MaxInputValue=0.5;
  MinInputValue=0;
  MinOutputValue=0;
- MaxOutputValue=0.001;//((MaxInputValue-MinInputValue)-MaxRecThreshold*(MaxInputValue-MinInputValue))*NumInputs;
+ MaxOutputValue=0.001;//((MaxInputValue-MinInputValue)-MaxRecThreshold*(MaxInputValue-MinInputValue))*NumLayerInputs;
 
  return true;
 }
@@ -318,7 +318,7 @@ bool NCRDistance::ACRCalculate(void)
  {
  case 0:
   memcpy(&NativeOutput[0],&Inputs[0],GetOutputDataSize(0)*sizeof(real));
-  for(size_t i=GetOutputDataSize(0);i<NumInputs;i++)
+  for(size_t i=GetOutputDataSize(0);i<NumLayerInputs;i++)
   {
    classindex=i/GetOutputDataSize(0);
    classindex*=GetOutputDataSize(0);
@@ -337,7 +337,7 @@ bool NCRDistance::ACRCalculate(void)
   for(size_t k=0;k<Samples[j].size();k++)
   {
    real omin=0;
-   for(size_t i=0;i<NumInputs;i++)
+   for(size_t i=0;i<NumLayerInputs;i++)
 	omin+=(Samples[j][k][i]-Inputs[i])*(Samples[j][k][i]-Inputs[i]);
    omin=sqrt(omin);
 
@@ -436,7 +436,7 @@ void NCRDistance::AResetTraining(void)
 {
 // Samples.resize(GetOutputDataSize(0));
  PreSamples.resize(GetOutputDataSize(0));
-// Inputs.resize(NumInputs);
+// Inputs.resize(NumLayerInputs);
 
  for(size_t j=0;j<Samples.size();j++)
  {
@@ -587,7 +587,7 @@ void NCRDistance::CalcMaxElements(void)
  }
 
 
-// NumMaxElements=NumInputs/3;//MiddleSamples.size();//NumInputs;
+// NumMaxElements=NumLayerInputs/3;//MiddleSamples.size();//NumLayerInputs;
 }
 
 
@@ -640,7 +640,7 @@ bool NCRDistance::SetInput(const Real &input)
 {
  size_t i;
 
- Inputs.resize(NumInputs);
+ Inputs.resize(NumLayerInputs);
 
  size_t mmin=(Inputs.size()<input.size())?Inputs.size():input.size();
  for(i=0;i<mmin;i++)

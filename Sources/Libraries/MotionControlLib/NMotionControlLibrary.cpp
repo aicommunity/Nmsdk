@@ -72,7 +72,7 @@ void NMotionControlLibrary::ACreateClassSamples(NStorage *storage)
 // pair<real,real> Ia(-2.0*M_PI,2.0*M_PI);
 // pair<real,real> Ib(-10,10);
 // pair<real,real> II(-M_PI/2,M_PI/2);
- size_t max_number_of_mc=9;
+ size_t max_number_of_mc=1;
 
  // Формируем сеть управления двигателем с разделением информационного потока с датчиков
  // на две полосы по знаку

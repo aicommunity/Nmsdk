@@ -158,7 +158,7 @@ bool NPulseSynChannel::CheckComponentType(UEPtr<NAContainer> comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-/*bool NPulseSynChannel::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
+/*bool NPulseSynChannel::AAddComponent(UEPtr<UAContainer> comp, UEPtr<UIPointer> pointer)
 {
  InstallHebbSynapses(comp);
  return true;
@@ -247,16 +247,16 @@ bool NPulseSynChannel::ACalculate(void)
 
  for(int n=0;n<NumInputs;n++)
  {
-  if(PInputDataSize[n] == 0)
+  if(GetInputDataSize(n) == 0)
    continue;
   if(dynamic_cast<NPulseChannel*>(GetCItem(n).Item) ||
      dynamic_cast<NReceptor*>(GetCItem(n).Item) ||
 	 dynamic_cast<NConstGenerator*>(GetCItem(n).Item))
   {
    size_t inpsize=0;
-   if((inpsize=PInputDataSize[n]) >0)
+   if((inpsize=GetInputDataSize(n)) >0)
    {
-    real *data=&(PInputData[n]->Double[0]);
+    real *data=&(GetInputData(n)->Double[0]);
     for(size_t j=0;j<inpsize;j++,++data)
      channel_input+=*data;
     ++num_connected_channels;
@@ -271,7 +271,7 @@ bool NPulseSynChannel::ACalculate(void)
     PreOutput.v[num_connected_synapsis-1]=0;
    }
 
-   input=PInputData[n]->Double[0];
+   input=GetInputData(n)->Double[0];
 
    if(MainOwner && Owner)
    {

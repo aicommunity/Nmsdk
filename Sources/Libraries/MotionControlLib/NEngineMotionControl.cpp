@@ -100,12 +100,17 @@ bool NEngineMotionControl::AReset(void)
   SetOutputDataSize(i,1);
 
  receptor.resize(NumMotionElements);
- for(int n=0;n<NumMotionElements;n++)
+ for(size_t n=0;n<NumMotionElements;n++)
  {
   receptor[n].assign(6,0);
-  NAContainer* cont=GetComponent(string("MotionElement")+RDK::sntoa(n));
-  if(!cont)
+  NAContainer* cont=0;
+  try {
+   cont=GetComponent(string("MotionElement")+RDK::sntoa(n));
+  }
+  catch (EComponentNameNotExist *exc) {
    continue;
+
+  }
   receptor[n][0]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ia1.Receptor"));
   receptor[n][1]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ia2.Receptor"));
   receptor[n][2]=static_pointer_cast<NReceptor>(cont->GetComponentL("Afferent_Ib1.Receptor"));
@@ -123,7 +128,7 @@ bool NEngineMotionControl::ACalculate(void)
  int pos_angle=0,pos_speed=0,pos_moment=0;
  int neg_angle=0,neg_speed=0,neg_moment=0;
  // Receptors
- for(int i=0;i<NumMotionElements;i++)
+ for(size_t i=0;i<NumMotionElements;i++)
  {
   if(receptor[i][0]->GetInputData(size_t(0))->Double[0] > 0)
    ++pos_speed;
@@ -203,7 +208,7 @@ NANet* NEngineMotionControl::CreateEngineControlSignumAfferent(void)
  vector<UEPtr<NNet> > Motions;
 
  NANet *net=this;
- NStorage *storage=dynamic_cast<NStorage*>(Storage);
+ UEPtr<NStorage> storage=dynamic_pointer_cast<NStorage>(Storage);
  size_t num_motions=NumMotionElements;
  NReceptor *receptor=0;
  if(!net)
@@ -601,7 +606,7 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  NAContainer *cont;
  bool res;
  NReceptor *receptor=0;
- NStorage *storage=static_cast<NStorage*>(Storage);
+ UEPtr<NStorage> storage=static_pointer_cast<NStorage>(Storage);
  size_t num_motions=NumMotionElements;
  vector<pair<double,double> > Ia_ranges_pos,Ia_ranges_neg;
  vector<pair<double,double> > Ib_ranges_pos,Ib_ranges_neg;
@@ -627,7 +632,7 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
 
  if(crossranges)
  {
- for(int i=0;i<num_motions;i++)
+ for(size_t i=0;i<num_motions;i++)
  {
   if(!(i % 2)) // четное
   {
@@ -693,7 +698,7 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  }
  else
  {
- for(int i=0;i<num_motions;i++)
+ for(size_t i=0;i<num_motions;i++)
  {
    real left_range=IaMin,right_range=IaMax;
    real pos_range=(right_range-0)/real_ranges;
@@ -737,7 +742,7 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
  double exp_coeff=0.0001;//0.00001;
 
  // Двигательные элементы
- for(int i=0;i<num_motions;i++)
+ for(size_t i=0;i<num_motions;i++)
  {
   cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject(MotionElementClassName));
   if(!cont)
@@ -1078,13 +1083,13 @@ NANet* NEngineMotionControl::CreateEngineControlRangeAfferent(bool crosslinks, b
   cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
   if(!cont)
    return 0;
-  cont->SetName("PosMNFrequencyReceiver"+RDK::sntoa(i));
+  cont->SetName("PosMNFrequencyReceiver"+RDK::sntoa(i+1));
   res=net->AddComponent(cont);
 
   cont=dynamic_pointer_cast<NAContainer>(storage->TakeObject("NFrequencyReceiver"));
   if(!cont)
    return 0;
-  cont->SetName("NegMNFrequencyReceiver"+RDK::sntoa(i));
+  cont->SetName("NegMNFrequencyReceiver"+RDK::sntoa(i+1));
   res=net->AddComponent(cont);
  }
 

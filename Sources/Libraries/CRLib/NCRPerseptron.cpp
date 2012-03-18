@@ -41,13 +41,13 @@ real Sigmoid(real x)
 NCRPerseptron::NCRPerseptron(void)
 //: NACRClassifier(name),
  : NumLayers("NumLayers",this,&NCRPerseptron::SetNumLayers),
-  NumInputs("NumInputs",this,&NCRPerseptron::SetNumInputs),
+  NumLayerInputs("NumLayerInputs",this,&NCRPerseptron::SetNumLayerInputs),
   TrainingRate("TrainingRate",this,&NCRPerseptron::SetTrainingRate),
   Moment("Moment",this,&NCRPerseptron::SetTrainingRate),
   AutoSetLayerInputs("AutoSetLayerInputs",this,&NCRPerseptron::SetAutoSetLayerInputs)
 {
 /* AddLookupParameter("NumLayers",NumLayers);
- AddLookupParameter("NumInputs",NumInputs);
+ AddLookupParameter("NumLayerInputs",NumLayerInputs);
  AddLookupParameter("TrainingRate",TrainingRate);
  AddLookupParameter("Moment",Moment);
  AddLookupParameter("AutoSetLayerInputs",AutoSetLayerInputs);
@@ -90,21 +90,21 @@ bool NCRPerseptron::SetNumLayers(size_t num)
   return false;
 
 // NumLayers=num;
- NumInputs->resize(num);
+ NumLayerInputs->resize(num);
  return true;
 }
 
 // Устанавливает число входов всех скрытых слоев
-bool NCRPerseptron::SetNumInputs(const vector<size_t> &numinputs)
+bool NCRPerseptron::SetNumLayerInputs(const vector<size_t> &numinputs)
 {
  size_t i;
  bool key;
 
- if(NumInputs->size() == numinputs.size())
+ if(NumLayerInputs->size() == numinputs.size())
   {
    key=true;
-   for(i=0;i<NumInputs->size();i++)
-	if(NumInputs[i] != numinputs[i])
+   for(i=0;i<NumLayerInputs->size();i++)
+	if(NumLayerInputs[i] != numinputs[i])
 	 { key=false; break; }
    if(key)
 	return true;
@@ -173,7 +173,7 @@ bool NCRPerseptron::AFileLoad(fstream &file)
  SetOutputDataSize(0,numclasses);
 
 
- SetNumInputs(numinputs);
+ SetNumLayerInputs(numinputs);
  Build();
 
  for(k=0;k<(int)NumLayers();k++)
@@ -197,7 +197,7 @@ bool NCRPerseptron::AFileSave(fstream &file)
  temp=GetOutputDataSize(0);
  file.write((char*)&temp,sizeof(temp));
  for(i=0;i<(int)NumLayers;i++)
-  file.write((char*)&(NumInputs[i]),sizeof(NumInputs[i]));
+  file.write((char*)&(NumLayerInputs[i]),sizeof(NumLayerInputs[i]));
 
  for(k=0;k<(int)NumLayers();k++)
   {
@@ -235,7 +235,7 @@ bool NCRPerseptron::ACRDefault(void)
 
  NumLayers=2;
  SetOutputDataSize(0,2);
- SetNumInputs(numinputs);
+ SetNumLayerInputs(numinputs);
  TrainingRate=0.1;
  Moment=0.5;
 // MinOutputValue=0;
@@ -270,19 +270,19 @@ bool NCRPerseptron::ACRBuild(void)
  Weights.resize(NumLayers);
  dWeights.resize(NumLayers);
  Outputs.resize(NumLayers);
- NumInputs->resize(NumLayers);
+ NumLayerInputs->resize(NumLayers);
 
  if(AutoSetLayerInputs())
  {
-  vector<size_t> numinputs=NumInputs();
+  vector<size_t> numinputs=NumLayerInputs();
   for(size_t i=1;i<NumLayers;i++)
-   numinputs[i]=(NumInputs[0]+GetOutputDataSize(0))/(i+1);
+   numinputs[i]=(NumLayerInputs[0]+GetOutputDataSize(0))/(i+1);
 
-  SetNumInputs(numinputs);
+  SetNumLayerInputs(numinputs);
  }
 
  if(NumLayers)
-  Inputs.resize(NumInputs[0]);
+  Inputs.resize(NumLayerInputs[0]);
  else
   Inputs.resize(0);
 
@@ -291,7 +291,7 @@ bool NCRPerseptron::ACRBuild(void)
    if(i == NumLayers-1)
 	Outputs[i].resize(GetOutputDataSize(0));
    else
-	Outputs[i].resize(NumInputs[i+1]);
+	Outputs[i].resize(NumLayerInputs[i+1]);
    }
 
  for(i=0;i<NumLayers;i++)
@@ -303,15 +303,15 @@ bool NCRPerseptron::ACRBuild(void)
 	}
    else
 	{
-	 Weights[i].resize(NumInputs[i+1]);
-	 dWeights[i].resize(NumInputs[i+1]);
+	 Weights[i].resize(NumLayerInputs[i+1]);
+	 dWeights[i].resize(NumLayerInputs[i+1]);
 	}
 
    // Изменяем длины строк матрицы весов
    for(j=0;j<Weights[i].size();j++)
 	{
-	 Weights[i][j].resize(NumInputs[i]+1);
-	 dWeights[i][j].resize(NumInputs[i]+1);
+	 Weights[i][j].resize(NumLayerInputs[i]+1);
+	 dWeights[i][j].resize(NumLayerInputs[i]+1);
 	}
   }
 
@@ -330,9 +330,9 @@ bool NCRPerseptron::ACRReset(void)
 // Выполняет расчет этого объекта на текущем шаге.
 bool NCRPerseptron::ACRCalculate(void)
 {
- Inputs.resize(PInputDataSize[0]);
- for(size_t i=0;i<PInputDataSize[0];i++)
-  Inputs[i]=PInputData[0]->Double[i];
+ Inputs.resize(GetInputDataSize(0));
+ for(size_t i=0;i<GetInputDataSize(0);i++)
+  Inputs[i]=GetInputData(0)->Double[i];
 
  CalcNetwork(Inputs);
  if(GetOutputDataSize(0) > 0 && Outputs.size()>0 && Outputs[Outputs.size()-1].size()>=GetOutputDataSize(0))
@@ -394,13 +394,13 @@ real NCRPerseptron::ATrain(size_t exp_class)
   return 0;
  
  // Проводим распознавание примера
- Inputs.resize(PInputDataSize[0]);
- for(size_t i=0;i<PInputDataSize[0];i++)
-  Inputs[i]=PInputData[0]->Double[i];
-// for(size_t i=0;i<PInputDataSize[0];i++)
-//  Inputs[i]=(PInputData[0]->Double[i]-0.9)*5;
-// for(size_t i=0;i<PInputDataSize[0];i++)
-//  Inputs[i]=(PInputData[0]->Double[i]-0.8)*2.5;
+ Inputs.resize(GetInputDataSize(0));
+ for(size_t i=0;i<GetInputDataSize(0);i++)
+  Inputs[i]=GetInputData(0)->Double[i];
+// for(size_t i=0;i<GetInputDataSize(0);i++)
+//  Inputs[i]=(GetInputData(0)->Double[i]-0.9)*5;
+// for(size_t i=0;i<GetInputDataSize(0);i++)
+//  Inputs[i]=(GetInputData(0)->Double[i]-0.8)*2.5;
 
 
  CalcNetwork(Inputs);

@@ -168,9 +168,9 @@ bool NPulseLTZone::ACalculate(void)
   size_t inpsize;
   for(int i=0;i<NumInputs;i++)
   {
-   if((inpsize=PInputDataSize[i]) >0)
+   if((inpsize=GetInputDataSize(i)) >0)
    {
-	real *data=&(PInputData[i]->Double[0]);
+	real *data=&(GetInputData(i)->Double[0]);
 	for(size_t j=0;j<inpsize;j++,++data)
 	 NeuralPotential.v+=*data;
    }

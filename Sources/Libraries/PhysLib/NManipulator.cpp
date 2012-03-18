@@ -46,6 +46,16 @@ NManipulator* NManipulator::New(void)
 // --------------------------
 
 // --------------------------
+// Методы управления данными
+// --------------------------
+// Отрисовка состояния манипулятора
+/*const RDK::UBitmap& NManipulator::GetStatePicture(void) const
+{
+ return StatePicture;
+} */
+// --------------------------
+
+// --------------------------
 // Методы управления общедоступными свойствами
 // --------------------------
 bool NManipulator::SetEMFactor(real value)
@@ -111,12 +121,12 @@ bool NManipulator::ACalculate(void)
  size_t k=0;
 
  for(int i=0;i<NumInputs;i++)
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
    if(k >= GetOutputDataSize(0))
 	break;
 
-   cs=PInputData[i]->Double[j];
+   cs=GetInputData(i)->Double[j];
 
    Current=(cs/TimeStep-0*EMFactor)/Inductance+(1.0-Resistance/(TimeStep*Inductance))*Current;
 

@@ -169,12 +169,12 @@ bool NFrequencyReceiver::ACalculate(void)
  size_t k=0;
 
  for(int i=0;i<NumInputs;i++)
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
    if(k >= GetOutputDataSize(0))
 	break;
 
-   cs=PInputData[i]->Double[j];
+   cs=GetInputData(i)->Double[j];
 
    if(cs>0)
    {

@@ -205,19 +205,19 @@ bool NPulseHebbSynapse::ACalculate(void)
  if(!NPulseSynapse::ACalculate())
   return false;
 
- if(NumInputs <2 || PInputDataSize[0]<=0 || PInputDataSize[1]<=0)
+ if(NumInputs <2 || GetInputDataSize(0)<=0 || GetInputDataSize(1)<=0)
   return true;
 
  motivation.assign(Kmot->size(),0);
- input=PInputData[0]->Double[0];
- ltzoneoutput=PInputData[1]->Double[0];
+ input=GetInputData(0)->Double[0];
+ ltzoneoutput=GetInputData(1)->Double[0];
 
  // Применяем мотивацию если есть
- if(NumInputs > 2 && PInputDataSize[2]>0)
+ if(NumInputs > 2 && GetInputDataSize(2)>0)
  {
-  size_t motmin=(Kmot->size()<PInputDataSize[2])?Kmot->size():PInputDataSize[2];
+  size_t motmin=(Kmot->size()<GetInputDataSize(2))?Kmot->size():GetInputDataSize(2);
   for(size_t i=0;i<motmin;i++)
-   motivation[i]=PInputData[2]->Double[i]*Kmot[i];
+   motivation[i]=GetInputData(2)->Double[i]*Kmot[i];
  }
 
  Win.v += (Kin.v*input - Min.v*Win.v)/TimeStep;

@@ -8,11 +8,12 @@
 namespace NMSDK {
 
 // —оздает пустое хранилище и возвращает указатель на него
-RDK::UAContainerStorage* NewNStorage(void);
+NStorage* CreateNewNStorage(void);
 
 // —оздает среду и возвращает указатель на нее
-RDK::UAContainerEnvironment* NewNEnvironment(void);
+NEnvironment* CreateNewNEnvironment(void);
 
+RDK::UEngine* CreateNewNEngine(void);
 }
 
 #endif

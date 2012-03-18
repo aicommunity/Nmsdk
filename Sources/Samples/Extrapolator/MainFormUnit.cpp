@@ -29,10 +29,10 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 
  Environment.CreateModel("NModel");
 
- MExtrapolator=dynamic_cast<NMExtrapolator*>(Storage.TakeObject("NMExtrapolator"));
- Generator=dynamic_cast<NSinusGenerator*>(Storage.TakeObject("NSinusGenerator"));
- PGenerator=dynamic_cast<NPulseGenerator*>(Storage.TakeObject("NPGenerator"));
- Sum=dynamic_cast<NSum*>(Storage.TakeObject("NSum"));
+ MExtrapolator=dynamic_pointer_cast<NMExtrapolator>(Storage.TakeObject("NMExtrapolator"));
+ Generator=dynamic_pointer_cast<NSinusGenerator>(Storage.TakeObject("NSinusGenerator"));
+ PGenerator=dynamic_pointer_cast<NPulseGenerator>(Storage.TakeObject("NPGenerator"));
+ Sum=dynamic_pointer_cast<NSum>(Storage.TakeObject("NSum"));
 
  Environment->AddComponent(MExtrapolator);
  Environment->AddComponent(Generator);

@@ -22,7 +22,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NIntervalSeparator: public NADItem
+class NIntervalSeparator: public NANet
 {
 public: // Общедоступные свойства
 // Нижняя граница выделяемого интервала

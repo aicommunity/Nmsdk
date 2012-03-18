@@ -150,14 +150,14 @@ bool NPac::ACalculate(void)
  real input;
 
  PreOutput->resize(NumInputs);
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
   PreOutput[i].resize(size);
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   for(size_t j=0;j<size;j++)
   {
-   input=PInputData[i]->Double[j];
+   input=GetInputData(i)->Double[j];
 
    Ts=(fabs(input)>0)?SecretionTC[i][j]:DissociationTC[i][j];
    PreOutput[i][j]+=(input/PulseAmplitude[i][j]-PreOutput[i][j])/(Ts*TimeStep);
@@ -167,7 +167,7 @@ bool NPac::ACalculate(void)
  for(size_t j=0;j<size;j++)
   POutputData[0].Double[j]=0;
 
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
   for(size_t j=0;j<size;j++)
   {

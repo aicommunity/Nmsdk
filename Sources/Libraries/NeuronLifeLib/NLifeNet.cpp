@@ -179,7 +179,7 @@ NLifeNet* NLifeNet::New(void)
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NLifeNet::AAddComponent(UEPtr<NAContainer> comp, RDK::UIPointer* pointer)
+bool NLifeNet::AAddComponent(UEPtr<NAContainer> comp, UEPtr<UIPointer> pointer)
 {
  if(!NNet::AAddComponent(comp,pointer))
   return false;
@@ -201,7 +201,7 @@ bool NLifeNet::AAddComponent(UEPtr<NAContainer> comp, RDK::UIPointer* pointer)
    }
 
   // Устанавливает первичные связи нейрона
-  for(size_t i=0;i<GetNumComponents();i++)
+  for(int i=0;i<GetNumComponents();i++)
   {
    UEPtr<NPulseLifeNeuron> nn=dynamic_pointer_cast<NPulseLifeNeuron>(GetComponentByIndex(i));
    UEPtr<NNeuronLife> life2;

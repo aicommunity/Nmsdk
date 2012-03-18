@@ -21,7 +21,7 @@ See file license.txt for more information
 namespace NMSDK {
 
 /* *************************************************************************** */
-class NManipulator: public NADItem
+class NManipulator: public NANet
 {
 public: // Общедоступные свойства
 // Электромагнитный коэффициент
@@ -34,10 +34,15 @@ RDK::ULProperty<real, NManipulator> Inductance;
 RDK::ULProperty<real, NManipulator> Resistance;
 
 protected: // Данные
+// Отрисовка состояния манипулятора
+//RDK::UBitmap StatePicture;
 
 protected: // Временные переменные
 // Ток якоря
 real Current;
+
+// Класс рисования
+RDK::UGraphics Graphics;
 
 public: // Методы
 // --------------------------
@@ -52,6 +57,13 @@ virtual ~NManipulator(void);
 // --------------------------
 // Выделяет память для новой чистой копии объекта этого класса
 virtual NManipulator* New(void);
+// --------------------------
+
+// --------------------------
+// Методы управления данными
+// --------------------------
+// Отрисовка состояния манипулятора
+//const RDK::UBitmap& GetStatePicture(void) const;
 // --------------------------
 
 protected:

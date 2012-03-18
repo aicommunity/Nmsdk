@@ -10,6 +10,8 @@ File License:        BSD License
 Project License:    GNU GPLv3 License
 See file license.txt for more information
 *********************************************************** */
+#ifndef NSENSOR_LIBRARY_CPP
+#define NSENSOR_LIBRARY_CPP
 
 #include "NSensorLibrary.h"
 
@@ -72,3 +74,6 @@ void NSensorLibrary::ACreateClassSamples(NStorage *storage)
 
 
 }
+
+#endif
+

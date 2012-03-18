@@ -10,6 +10,8 @@ File License:        BSD License
 Project License:    GNU GPLv3 License
 See file license.txt for more information
 *********************************************************** */
+#ifndef NPULSE_LIBRARY_CPP
+#define NPULSE_LIBRARY_CPP
 
 #include "NPulseLibrary.h"
 
@@ -115,3 +117,6 @@ void NPulseLibrary::ACreateClassSamples(NStorage *storage)
 
 
 }
+
+#endif
+

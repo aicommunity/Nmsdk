@@ -69,9 +69,9 @@ bool NManipulatorInputEmulator::AReset(void)
 // Выполняет расчет этого объекта
 bool NManipulatorInputEmulator::ACalculate(void)
 {
- if(NumInputs >0 && PInputDataSize[0]>0)
+ if(NumInputs >0 && GetInputDataSize(0)>0)
  {
-  Voltage=PInputData[0]->Double[0];
+  Voltage=GetInputData(0)->Double[0];
   POutputData[0].Double[0]=Voltage;
  }
 

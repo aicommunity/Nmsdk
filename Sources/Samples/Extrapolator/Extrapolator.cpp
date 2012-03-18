@@ -4,18 +4,17 @@
 #pragma hdrstop
 #include <tchar.h>
 //---------------------------------------------------------------------------
-USEFORM("..\..\GUI\Builder\NLinksFrameUnit.cpp", NLinksFrame); /* TFrame: File Type */
 USEFORM("..\..\GUI\Builder\TNSourceControlFrameUnit.cpp", NSourceControlFrame); /* TFrame: File Type */
-USEFORM("..\..\GUI\Builder\NANetGraphicsFrameUnit.cpp", NANetGraphicsFrame); /* TFrame: File Type */
 USEFORM("MainFormUnit.cpp", MainForm);
-USEFORM("..\..\GUI\Builder\NANetFrameUnit.cpp", NANetFrame); /* TFrame: File Type */
-USEFORM("..\..\RDK\GUI\Builder\ListInputFormUnit.cpp", ListInputForm);
-USEFORM("..\..\RDK\GUI\Builder\SeriesControlUnit.cpp", SeriesControlForm);
-USEFORM("..\..\RDK\GUI\Builder\ShowProgressBarUnit.cpp", ShowProgressBarForm);
-USEFORM("..\..\RDK\GUI\Builder\TImagesFrameUnit.cpp", ImagesFrame); /* TFrame: File Type */
-USEFORM("..\..\RDK\GUI\Builder\WatchFrameUnit.cpp", WatchFrame); /* TFrame: File Type */
-USEFORM("..\..\RDK\GUI\Builder\WatchWindowFormUnit.cpp", WatchWindowForm);
-USEFORM("..\..\RDK\GUI\Builder\TUClassRegistryFrame.cpp", UClassRegistryFrame); /* TFrame: File Type */
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\ClassesListFrameUnit.cpp", ClassesListFrame); /* TFrame: File Type */
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\ComponentsListFrameUnit.cpp", ComponentsListFrame); /* TFrame: File Type */
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\ListInputFormUnit.cpp", ListInputForm);
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\SeriesControlUnit.cpp", SeriesControlForm);
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\ShowProgressBarUnit.cpp", ShowProgressBarForm);
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\TImagesFrameUnit.cpp", ImagesFrame); /* TFrame: File Type */
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\TUClassRegistryFrame.cpp", UClassRegistryFrame); /* TFrame: File Type */
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\WatchFrameUnit.cpp", WatchFrame); /* TFrame: File Type */
+USEFORM("..\..\ThirdParty\RDK\GUI\Builder\WatchWindowFormUnit.cpp", WatchWindowForm);
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {

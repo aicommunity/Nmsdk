@@ -87,9 +87,9 @@ bool NSum::ACalculate(void)
  Build();
 
  FillOutputData();
- for(size_t j=0;j<NumInputs;j++)
+ for(int j=0;j<NumInputs;j++)
   for(size_t i=0;i<MinInputDataSize;i++)
-   POutputData[0].Double[i]+=PInputData[j]->Double[i];
+   POutputData[0].Double[i]+=GetInputData(j)->Double[i];
  return true;
 }
 // --------------------------

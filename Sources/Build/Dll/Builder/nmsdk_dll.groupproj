@@ -4,12 +4,6 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<Projects Include="nmsdk.cbproj">
-				<Dependencies>..\..\Lib\Builder\nmsdk_builder.cbproj;..\..\..\MySDK4\Build\Lib\Builder\MySDK_Builder.cbproj</Dependencies>
-			</Projects>
-			<Projects Include="..\..\Lib\Builder\nmsdk_builder.cbproj">
-				<Dependencies>..\..\..\MySDK4\Build\Lib\Builder\MySDK_Builder.cbproj</Dependencies>
-			</Projects>
-			<Projects Include="..\..\..\MySDK4\Build\Lib\Builder\MySDK_Builder.cbproj">
 				<Dependencies/>
 			</Projects>
 		</ItemGroup>
@@ -20,41 +14,23 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target DependsOnTargets="nmsdk_builder;MySDK_Builder" Name="nmsdk">
+		<Target Name="nmsdk">
 			<MSBuild Projects="nmsdk.cbproj"/>
 		</Target>
-		<Target DependsOnTargets="nmsdk_builder:Clean;MySDK_Builder:Clean" Name="nmsdk:Clean">
+		<Target Name="nmsdk:Clean">
 			<MSBuild Targets="Clean" Projects="nmsdk.cbproj"/>
 		</Target>
-		<Target DependsOnTargets="nmsdk_builder:Make;MySDK_Builder:Make" Name="nmsdk:Make">
+		<Target Name="nmsdk:Make">
 			<MSBuild Targets="Make" Projects="nmsdk.cbproj"/>
 		</Target>
-		<Target DependsOnTargets="MySDK_Builder" Name="nmsdk_builder">
-			<MSBuild Projects="..\..\Lib\Builder\nmsdk_builder.cbproj"/>
-		</Target>
-		<Target DependsOnTargets="MySDK_Builder:Clean" Name="nmsdk_builder:Clean">
-			<MSBuild Targets="Clean" Projects="..\..\Lib\Builder\nmsdk_builder.cbproj"/>
-		</Target>
-		<Target DependsOnTargets="MySDK_Builder:Make" Name="nmsdk_builder:Make">
-			<MSBuild Targets="Make" Projects="..\..\Lib\Builder\nmsdk_builder.cbproj"/>
-		</Target>
-		<Target Name="MySDK_Builder">
-			<MSBuild Projects="..\..\..\MySDK4\Build\Lib\Builder\MySDK_Builder.cbproj"/>
-		</Target>
-		<Target Name="MySDK_Builder:Clean">
-			<MSBuild Targets="Clean" Projects="..\..\..\MySDK4\Build\Lib\Builder\MySDK_Builder.cbproj"/>
-		</Target>
-		<Target Name="MySDK_Builder:Make">
-			<MSBuild Targets="Make" Projects="..\..\..\MySDK4\Build\Lib\Builder\MySDK_Builder.cbproj"/>
-		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="nmsdk;nmsdk_builder;MySDK_Builder"/>
+			<CallTarget Targets="nmsdk"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="nmsdk:Clean;nmsdk_builder:Clean;MySDK_Builder:Clean"/>
+			<CallTarget Targets="nmsdk:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="nmsdk:Make;nmsdk_builder:Make;MySDK_Builder:Make"/>
+			<CallTarget Targets="nmsdk:Make"/>
 		</Target>
 		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 	</Project>

@@ -207,7 +207,7 @@ bool NACRClassifier::ABuild(void)
 // —брос процесса счета.
 bool NACRClassifier::AReset(void)
 {
- QualityRate=pair<float,int>(0,0);
+ QualityRate=pair<float,int>(0.0f,0);
  IsSuccessed=false;
  return ACRReset();
 }

@@ -130,12 +130,12 @@ bool NEyeMuscle::ACalculate(void)
 {
  size_t k=0;
  for(int i=0;i<NumInputs;i++)
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
    if(k >= GetOutputDataSize(0))
 	break;
 
-   real in=PInputData[i]->Double[j];
+   real in=GetInputData(i)->Double[j];
    in/=100;
    ThresholdCount(k);
    in*=Threshold[k];

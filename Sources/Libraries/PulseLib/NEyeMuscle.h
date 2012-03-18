@@ -22,7 +22,7 @@ namespace NMSDK {
 
 //using namespace MySDK;
 
-class NEyeMuscle: public NADItem
+class NEyeMuscle: public NANet
 {
 public: // Общедоступные свойства
 // Коэффициенты

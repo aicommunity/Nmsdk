@@ -214,7 +214,7 @@ bool NPulseChannel::CheckComponentType(UEPtr<NAContainer> comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NPulseChannel::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
+bool NPulseChannel::AAddComponent(UEPtr<UAContainer> comp, UEPtr<UIPointer> pointer)
 {
  InstallHebbSynapses(comp);
  return true;
@@ -282,9 +282,9 @@ bool NPulseChannel::ACalculate(void)
   size_t inpsize;
   for(int i=0;i<NumInputs;i++)
   {
-   if((inpsize=PInputDataSize[i]) >0)
+   if((inpsize=GetInputDataSize(i)) >0)
    {
-	real *data=&(PInputData[i]->Double[0]);
+	real *data=&(GetInputData(i)->Double[0]);
 	for(size_t j=0;j<inpsize;j++,++data)
 	 channel_input+=*data;
    }

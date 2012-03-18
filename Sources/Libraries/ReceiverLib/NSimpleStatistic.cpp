@@ -53,7 +53,7 @@ NSimpleStatistic* NSimpleStatistic::New(void)
 // Открывает новый файл, сохраняя предыдущий
 bool NSimpleStatistic::ReCreateFile(void)
 {
- return true;// Заглушка !!!
+// return true;// Заглушка !!!
  if(StatsFile)
  {
   StatsFile->close();
@@ -124,7 +124,7 @@ bool NSimpleStatistic::AReset(void)
 // Execute math. computations of current object on current step
 bool NSimpleStatistic::ACalculate(void)
 {
- return true; // Заглушка !!
+// return true; // Заглушка !!
  if(!StatsFile)
   if(!ReCreateFile())
    return false;
@@ -151,12 +151,12 @@ bool NSimpleStatistic::ACalculate(void)
   ResizeStats();
   for(int i=0;i<GetNumInputs();i++)
   {
-   for(size_t j=0;j<PInputDataSize[i];j++)
+   for(size_t j=0;j<GetInputDataSize(i);j++)
    {
-	if(StatsMin[i][j]>PInputData[i]->Double[j])
-	 StatsMin[i][j]=PInputData[i]->Double[j];
-	if(StatsMax[i][j]<PInputData[i]->Double[j])
-	 StatsMax[i][j]=PInputData[i]->Double[j];
+	if(StatsMin[i][j]>GetInputData(i)->Double[j])
+	 StatsMin[i][j]=GetInputData(i)->Double[j];
+	if(StatsMax[i][j]<GetInputData(i)->Double[j])
+	 StatsMax[i][j]=GetInputData(i)->Double[j];
 
 	StatsAvg[i][j]=(StatsMax[i][j]+StatsMin[i][j])/2;
 	StatsDelta[i][j]=(StatsMax[i][j]-StatsMin[i][j]);
@@ -171,9 +171,9 @@ bool NSimpleStatistic::ACalculate(void)
    (*StatsFile)<<showpoint<<internal<<fixed<<setfill(' ')<<right<<setprecision(8)<<setw(10)<<NAContainer::GetDoubleTime()<<endl;
    for(int i=0;i<GetNumInputs();i++)
    {
-	for(size_t j=0;j<PInputDataSize[i];j++)
+	for(size_t j=0;j<GetInputDataSize(i);j++)
 	{
-	 (*StatsFile)<<showpoint<<internal<<fixed<<setfill(' ')<<right<<setprecision(8)<<setw(10)<<PInputData[i]->Double[j]<<"\t";
+	 (*StatsFile)<<showpoint<<internal<<fixed<<setfill(' ')<<right<<setprecision(8)<<setw(10)<<GetInputData(i)->Double[j]<<"\t";
 	}
 	(*StatsFile)<<endl;
    }
@@ -192,9 +192,9 @@ bool NSimpleStatistic::ACalculate(void)
    (*StatsFile)<<showpoint<<internal<<fixed<<setfill(' ')<<right<<setprecision(8)<<setw(10)<<NAContainer::GetDoubleTime()<<"\t";
    for(int i=0;i<GetNumInputs();i++)
    {
-	for(size_t j=0;j<PInputDataSize[i];j++)
+	for(size_t j=0;j<GetInputDataSize(i);j++)
 	{
-	 (*StatsFile)<<showpoint<<internal<<fixed<<setfill(' ')<<right<<setprecision(8)<<setw(10)<<PInputData[i]->Double[j]<<"\t";
+	 (*StatsFile)<<showpoint<<internal<<fixed<<setfill(' ')<<right<<setprecision(8)<<setw(10)<<GetInputData(i)->Double[j]<<"\t";
 	}
    }
    (*StatsFile)<<endl;
@@ -234,10 +234,10 @@ void NSimpleStatistic::ResizeStats(void)
  StatsDelta.resize(NumInputs);
  for(int i=0;i<GetNumInputs();i++)
  {
-  StatsMin[i].resize(PInputDataSize[i]);
-  StatsMax[i].resize(PInputDataSize[i]);
-  StatsAvg[i].resize(PInputDataSize[i]);
-  StatsDelta[i].resize(PInputDataSize[i]);
+  StatsMin[i].resize(GetInputDataSize(i));
+  StatsMax[i].resize(GetInputDataSize(i));
+  StatsAvg[i].resize(GetInputDataSize(i));
+  StatsDelta[i].resize(GetInputDataSize(i));
  }
 }
 // --------------------------

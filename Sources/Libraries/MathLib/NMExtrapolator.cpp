@@ -40,7 +40,7 @@ NMExtrapolator::~NMExtrapolator(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Время прогноза, с
-bool NMExtrapolator::SetPredictionTime(TimeT ptime)
+bool NMExtrapolator::SetPredictionTime(RDK::UTime ptime)
 {
  if(ptime <= 0)
   return false;
@@ -111,11 +111,11 @@ bool NMExtrapolator::ACalculate(void)
  Real input;
  input.resize(FullInputDataSize);
  size_t k=0;
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
-   input[k]=PInputData[i]->Double[j];
+   input[k]=GetInputData(i)->Double[j];
    ++k;
   }
  }
@@ -133,9 +133,9 @@ bool NMExtrapolator::ACalculate(void)
 
  k=0;
  long long currsign=1;
- for(size_t i=0;i<NumInputs;i++)
+ for(int i=0;i<NumInputs;i++)
  {
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
    real res=0;
    for(size_t m=0;m<NumLevels;m++)
@@ -158,7 +158,7 @@ bool NMExtrapolator::ACalculate(void)
  k=0;
  for(size_t i=0;i<NumInputs;i++)
  {
-  for(size_t j=0;j<PInputDataSize[i];j++)
+  for(size_t j=0;j<GetInputDataSize(i);j++)
   {
    Output.Double[k]=0;
    Real level;

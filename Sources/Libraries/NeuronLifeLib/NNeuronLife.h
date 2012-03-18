@@ -22,7 +22,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NNeuronLife: public NADItem
+class NNeuronLife: public NANet
 {
 public: // Общедоступные свойства
 // Статический порог нейрона

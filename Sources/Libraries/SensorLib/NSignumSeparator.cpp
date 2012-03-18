@@ -106,14 +106,14 @@ bool NSignumSeparator::ACalculate(void)
 {
  real input;
 
- size_t numoutputs=NumOutputs;
- size_t numios=(NumInputs<numoutputs)?NumInputs:numoutputs;
- for(size_t i=0;i<numios;i++)
+ int numoutputs=NumOutputs;
+ int numios=(NumInputs<numoutputs)?NumInputs:numoutputs;
+ for(int i=0;i<numios;i++)
  {
   size_t size=(MinInputDataSize<GetOutputDataSize(i))?MinInputDataSize:GetOutputDataSize(i);
   for(size_t j=0;j<size;j++)
   {
-   input=PInputData[i]->Double[j];
+   input=GetInputData(i)->Double[j];
 
    if((input<0 && Sign[j] >0) || (input>0 && Sign[j] <0))
 	POutputData[i].Double[j]=0;

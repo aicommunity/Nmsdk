@@ -275,6 +275,7 @@ bool CreateNeuronBranchLink(UEPtr<NANet> net,const string &source,
  channel=dynamic_pointer_cast<NPulseChannel>(branch->GetComponentL(target_tail));
  bool res=net->CreateLink(source,0,
 				 channel->GetLongName(net,tmpname));
+ return res;
 }
 
 // Формирует СУ двигательной единицей

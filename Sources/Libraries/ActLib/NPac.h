@@ -20,7 +20,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NPac: public NADItem
+class NPac: public NANet
 {
 public: // Общедоступные свойства
 // Амплитуда входных импульсов

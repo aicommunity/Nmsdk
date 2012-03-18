@@ -20,7 +20,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NReceiver: public NADItem//NAConnector
+class NReceiver: public NANet//NAConnector
 {
 protected: // Основные свойства
 

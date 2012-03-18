@@ -20,7 +20,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NSum: public NADItem
+class NSum: public NANet
 {
 public: // Общедоступные свойства
 

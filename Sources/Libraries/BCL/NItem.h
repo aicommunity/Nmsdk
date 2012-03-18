@@ -20,7 +20,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NItem: public NADItem
+class NItem: public NANet
 {
 public: // Ìועמהû
 // --------------------------

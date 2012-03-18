@@ -112,7 +112,7 @@ bool NPulseMembrane::CheckComponentType(UEPtr<NAContainer> comp) const
 // при добавлении дочернего компонента в этот объект
 // Метод будет вызван только если comp был
 // успешно добавлен в список компонент
-bool NPulseMembrane::AAddComponent(UEPtr<UAContainer> comp, RDK::UIPointer* pointer)
+bool NPulseMembrane::AAddComponent(UEPtr<UAContainer> comp, UEPtr<UIPointer> pointer)
 {
  UEPtr<NPulseChannel> channel=dynamic_pointer_cast<NPulseChannel>(comp);
  vector<NPulseChannel* >::iterator I;
@@ -195,8 +195,8 @@ bool NPulseMembrane::ACalculate(void)
  Feedback=0;
 
  for(int i=0;i<NumInputs;i++)
-  for(size_t j=0;j<PInputDataSize[i];j++)
-   Feedback.v+=PInputData[i]->Double[j];
+  for(size_t j=0;j<GetInputDataSize(i);j++)
+   Feedback.v+=GetInputData(i)->Double[j];
 
  Feedback.v*=FeedbackGain.v;
 

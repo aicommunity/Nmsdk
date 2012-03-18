@@ -163,10 +163,7 @@ bool NCRDirectCompare::AFileSave(fstream &file)
  size_t temp;
  temp=GetOutputDataSize(0);
  file.write((char*)&temp,sizeof(temp));
- if(PInputDataSize)
-  temp=PInputDataSize[0];
- else
-  temp=0;
+ temp=GetInputDataSize(0);
  file.write((char*)&temp,sizeof(temp));
 
  temp=NumTrainSamples;
@@ -228,7 +225,7 @@ bool NCRDirectCompare::ACRDefault(void)
  SetOutputDataSize(0,2);
  if(!Build())
   return false;
- PInputDataSize[0]=100;
+// PInputDataSize[0]=100;   // Заглушка!!! Что это
 
  Real minrate,maxrate;
  minrate.assign(GetOutputDataSize(0),10);
@@ -321,14 +318,14 @@ bool NCRDirectCompare::ACRCalculate(void)
  switch(RecognitionType)
  {
  case 0:
-  memcpy(&NativeOutput[0],&PInputData[0]->Double[0],outputsize*sizeof(real));
-  for(size_t i=outputsize;i<PInputDataSize[0];i++)
+  memcpy(&NativeOutput[0],&GetInputData(0)->Double[0],outputsize*sizeof(real));
+  for(size_t i=outputsize;i<GetInputDataSize(0);i++)
   {
    classindex=i/outputsize;
    classindex*=outputsize;
    classindex=i-classindex;
-   if(NativeOutput[classindex]<PInputData[0]->Double[i])
-	NativeOutput[classindex]=PInputData[0]->Double[i];
+   if(NativeOutput[classindex]<GetInputData(0)->Double[i])
+	NativeOutput[classindex]=GetInputData(0)->Double[i];
   }
 
   for(size_t k=0;k<outputsize;k++)
@@ -338,14 +335,14 @@ bool NCRDirectCompare::ACRCalculate(void)
  case 1:
   memset(&NativeOutput[0],0,outputsize*sizeof(real));
 
-  mininput=PInputData[0]->Double[0];
-  maxinput=PInputData[0]->Double[0];
-  for(size_t i=1;i<PInputDataSize[0];i++)
+  mininput=GetInputData(0)->Double[0];
+  maxinput=GetInputData(0)->Double[0];
+  for(size_t i=1;i<GetInputDataSize(0);i++)
   {
-   if(mininput>PInputData[0]->Double[i])
-	mininput=PInputData[0]->Double[i];
-   if(maxinput<PInputData[0]->Double[i])
-	maxinput=PInputData[0]->Double[i];
+   if(mininput>GetInputData(0)->Double[i])
+	mininput=GetInputData(0)->Double[i];
+   if(maxinput<GetInputData(0)->Double[i])
+	maxinput=GetInputData(0)->Double[i];
   }
 
   if(maxinput<(MaxInputValue()-MinInputValue())*MinRecThreshold)
@@ -355,13 +352,13 @@ bool NCRDirectCompare::ACRCalculate(void)
    break;
   }
 
-  for(size_t i=0;i<PInputDataSize[0];i++)
+  for(size_t i=0;i<GetInputDataSize(0);i++)
   {
    classindex=i/outputsize;
    classindex*=outputsize;
    classindex=i-classindex;
-   if(PInputData[0]->Double[i]>maxinput*MaxRecThreshold)
-	NativeOutput[classindex]+=PInputData[0]->Double[i]-maxinput*MaxRecThreshold;
+   if(GetInputData(0)->Double[i]>maxinput*MaxRecThreshold)
+	NativeOutput[classindex]+=GetInputData(0)->Double[i]-maxinput*MaxRecThreshold;
   }
   for(size_t k=0;k<outputsize;k++)
    POutputData[0].Double[k]=NativeOutput[k];
@@ -370,14 +367,14 @@ bool NCRDirectCompare::ACRCalculate(void)
  case 2:
   memset(&NativeOutput[0],0,outputsize*sizeof(real));
 
-  mininput=PInputData[0]->Double[0];
-  maxinput=PInputData[0]->Double[0];
-  for(size_t i=1;i<PInputDataSize[0];i++)
+  mininput=GetInputData(0)->Double[0];
+  maxinput=GetInputData(0)->Double[0];
+  for(size_t i=1;i<GetInputDataSize(0);i++)
   {
-   if(mininput>PInputData[0]->Double[i])
-	mininput=PInputData[0]->Double[i];
-   if(maxinput<PInputData[0]->Double[i])
-	maxinput=PInputData[0]->Double[i];
+   if(mininput>GetInputData(0)->Double[i])
+	mininput=GetInputData(0)->Double[i];
+   if(maxinput<GetInputData(0)->Double[i])
+	maxinput=GetInputData(0)->Double[i];
   }
 
   if(maxinput<(MaxInputValue()-MinInputValue())*MinRecThreshold)
@@ -388,13 +385,13 @@ bool NCRDirectCompare::ACRCalculate(void)
   }
 
   maxinput=(MaxInputValue()-MinInputValue());
-  for(size_t i=0;i<PInputDataSize[0];i++)
+  for(size_t i=0;i<GetInputDataSize(0);i++)
   {
    classindex=i/outputsize;
    classindex*=outputsize;
    classindex=i-classindex;
-   if(PInputData[0]->Double[i]>maxinput*MaxRecThreshold)
-	NativeOutput[classindex]+=PInputData[0]->Double[i]-maxinput*MaxRecThreshold;
+   if(GetInputData(0)->Double[i]>maxinput*MaxRecThreshold)
+	NativeOutput[classindex]+=GetInputData(0)->Double[i]-maxinput*MaxRecThreshold;
   }
   for(size_t k=0;k<outputsize;k++)
    POutputData[0].Double[k]=NativeOutput[k];
@@ -403,14 +400,14 @@ bool NCRDirectCompare::ACRCalculate(void)
  case 3:
   memset(&NativeOutput[0],0,outputsize*sizeof(real));
 
-  mininput=PInputData[0]->Double[0];
-  maxinput=PInputData[0]->Double[0];
-  for(size_t i=1;i<PInputDataSize[0];i++)
+  mininput=GetInputData(0)->Double[0];
+  maxinput=GetInputData(0)->Double[0];
+  for(size_t i=1;i<GetInputDataSize(0);i++)
   {
-   if(mininput>PInputData[0]->Double[i])
-	mininput=PInputData[0]->Double[i];
-   if(maxinput<PInputData[0]->Double[i])
-	maxinput=PInputData[0]->Double[i];
+   if(mininput>GetInputData(0)->Double[i])
+	mininput=GetInputData(0)->Double[i];
+   if(maxinput<GetInputData(0)->Double[i])
+	maxinput=GetInputData(0)->Double[i];
   }
 
   if(maxinput<(MaxInputValue()-MinInputValue())*MinRecThreshold)
@@ -420,12 +417,12 @@ bool NCRDirectCompare::ACRCalculate(void)
    break;
   }
 
-  for(size_t i=0;i<PInputDataSize[0];i++)
+  for(size_t i=0;i<GetInputDataSize(0);i++)
   {
    classindex=i/outputsize;
    classindex*=outputsize;
    classindex=i-classindex;
-   if(PInputData[0]->Double[i]>(MaxInputValue()-MinInputValue())*MaxRecThreshold)
+   if(GetInputData(0)->Double[i]>(MaxInputValue()-MinInputValue())*MaxRecThreshold)
 	++NativeOutput[classindex];//=PInputs[0]->Double[i]-maxinput*MaxRecThresholdCoeff;
   }
   for(size_t k=0;k<outputsize;k++)
@@ -435,14 +432,14 @@ bool NCRDirectCompare::ACRCalculate(void)
  case 4:
   memset(&NativeOutput[0],0,outputsize*sizeof(real));
 
-  mininput=PInputData[0]->Double[0];
-  maxinput=PInputData[0]->Double[0];
-  for(size_t i=1;i<PInputDataSize[0];i++)
+  mininput=GetInputData(0)->Double[0];
+  maxinput=GetInputData(0)->Double[0];
+  for(size_t i=1;i<GetInputDataSize(0);i++)
   {
-   if(mininput>PInputData[0]->Double[i])
-	mininput=PInputData[0]->Double[i];
-   if(maxinput<PInputData[0]->Double[i])
-	maxinput=PInputData[0]->Double[i];
+   if(mininput>GetInputData(0)->Double[i])
+	mininput=GetInputData(0)->Double[i];
+   if(maxinput<GetInputData(0)->Double[i])
+	maxinput=GetInputData(0)->Double[i];
   }
 
   if(maxinput<MinRecThreshold*(MaxInputValue()-MinInputValue()))
@@ -455,14 +452,14 @@ bool NCRDirectCompare::ACRCalculate(void)
   // Ищем абсолютный максимум
   if(maxinput>AbsoluteRecThreshold*(MaxInputValue()-MinInputValue()))
   {
-   memcpy(&NativeOutput[0],&PInputData[0]->Double[0],outputsize*sizeof(real));
-   for(size_t i=outputsize;i<PInputDataSize[0];i++)
+   memcpy(&NativeOutput[0],&GetInputData(0)->Double[0],outputsize*sizeof(real));
+   for(size_t i=outputsize;i<GetInputDataSize(0);i++)
    {
 	classindex=i/outputsize;
 	classindex*=outputsize;
 	classindex=i-classindex;
-	if(NativeOutput[classindex]<PInputData[0]->Double[i])
-	 NativeOutput[classindex]=PInputData[0]->Double[i];
+	if(NativeOutput[classindex]<GetInputData(0)->Double[i])
+	 NativeOutput[classindex]=GetInputData(0)->Double[i];
    }
 
 
@@ -485,12 +482,12 @@ bool NCRDirectCompare::ACRCalculate(void)
   // Если выше максимального порога то вычисляем результат по числу максимумов
   if(maxinput>MaxRecThreshold*(MaxInputValue()-MinInputValue()))
   {
-   for(size_t i=0;i<PInputDataSize[0];i++)
+   for(size_t i=0;i<GetInputDataSize(0);i++)
    {
 	classindex=i/outputsize;
 	classindex*=outputsize;
 	classindex=i-classindex;
-	if(PInputData[0]->Double[i]>(MaxInputValue()-MinInputValue())*MaxRecThreshold)
+	if(GetInputData(0)->Double[i]>(MaxInputValue()-MinInputValue())*MaxRecThreshold)
 	 ++NativeOutput[classindex];
    }
 
@@ -512,13 +509,13 @@ bool NCRDirectCompare::ACRCalculate(void)
   else
   if(maxinput>MiddleRecThreshold*(MaxInputValue()-MinInputValue()))
   {
-   for(size_t i=0;i<PInputDataSize[0];i++)
+   for(size_t i=0;i<GetInputDataSize(0);i++)
    {
 	classindex=i/outputsize;
 	classindex*=outputsize;
 	classindex=i-classindex;
-	if(PInputData[0]->Double[i]>MiddleRecThreshold*(MaxInputValue()-MinInputValue()))
-	 NativeOutput[classindex]+=PInputData[0]->Double[i]-MiddleRecThreshold*(MaxInputValue()-MinInputValue());
+	if(GetInputData(0)->Double[i]>MiddleRecThreshold*(MaxInputValue()-MinInputValue()))
+	 NativeOutput[classindex]+=GetInputData(0)->Double[i]-MiddleRecThreshold*(MaxInputValue()-MinInputValue());
    }
 /*
    for(size_t k=0;k<outputsize;k++)
@@ -541,13 +538,13 @@ bool NCRDirectCompare::ACRCalculate(void)
   }
   else
   {
-   for(size_t i=0;i<PInputDataSize[0];i++)
+   for(size_t i=0;i<GetInputDataSize(0);i++)
    {
 	classindex=i/outputsize;
 	classindex*=outputsize;
 	classindex=i-classindex;
-	if(PInputData[0]->Double[i]>MinRecThreshold)
-	 NativeOutput[classindex]+=PInputData[0]->Double[i]-MinRecThreshold;
+	if(GetInputData(0)->Double[i]>MinRecThreshold)
+	 NativeOutput[classindex]+=GetInputData(0)->Double[i]-MinRecThreshold;
    }
 
 /*   for(size_t k=0;k<outputsize;k++)
@@ -574,14 +571,14 @@ bool NCRDirectCompare::ACRCalculate(void)
  case 5:
   memset(&NativeOutput[0],0,outputsize*sizeof(real));
 
-  mininput=PInputData[0]->Double[0];
-  maxinput=PInputData[0]->Double[0];
-  for(size_t i=1;i<PInputDataSize[0];i++)
+  mininput=GetInputData(0)->Double[0];
+  maxinput=GetInputData(0)->Double[0];
+  for(size_t i=1;i<GetInputDataSize(0);i++)
   {
-   if(mininput>PInputData[0]->Double[i])
-	mininput=PInputData[0]->Double[i];
-   if(maxinput<PInputData[0]->Double[i])
-	maxinput=PInputData[0]->Double[i];
+   if(mininput>GetInputData(0)->Double[i])
+	mininput=GetInputData(0)->Double[i];
+   if(maxinput<GetInputData(0)->Double[i])
+	maxinput=GetInputData(0)->Double[i];
   }
 
   if(maxinput<MinRecThreshold*(MaxInputValue()-MinInputValue()))
@@ -592,14 +589,14 @@ bool NCRDirectCompare::ACRCalculate(void)
   }
 
   // Ищем абсолютный максимум
-  memcpy(&NativeOutput[0],&PInputData[0]->Double[0],outputsize*sizeof(real));
-  for(size_t i=outputsize;i<PInputDataSize[0];i++)
+  memcpy(&NativeOutput[0],&GetInputData(0)->Double[0],outputsize*sizeof(real));
+  for(size_t i=outputsize;i<GetInputDataSize(0);i++)
   {
    classindex=i/outputsize;
    classindex*=outputsize;
    classindex=i-classindex;
-   if(NativeOutput[classindex]<PInputData[0]->Double[i])
-	NativeOutput[classindex]=PInputData[0]->Double[i];
+   if(NativeOutput[classindex]<GetInputData(0)->Double[i])
+	NativeOutput[classindex]=GetInputData(0)->Double[i];
   }
   for(size_t k=0;k<outputsize;k++)
    POutputData[0].Double[k]=NativeOutput[k];
@@ -624,13 +621,13 @@ bool NCRDirectCompare::ACRCalculate(void)
 
   if(maxinput>(MaxInputValue()-MinInputValue())*MaxRecThreshold)
   {
-   memcpy(&NativeOutput[0],&PInputData[0]->Double[0],outputsize*sizeof(real));
-   for(size_t i=0;i<PInputDataSize[0];i++)
+   memcpy(&NativeOutput[0],&GetInputData(0)->Double[0],outputsize*sizeof(real));
+   for(size_t i=0;i<GetInputDataSize(0);i++)
    {
 	classindex=i/outputsize;
 	classindex*=outputsize;
 	classindex=i-classindex;
-	if(PInputData[0]->Double[i]>(MaxInputValue()-MinInputValue())*MaxRecThreshold)
+	if(GetInputData(0)->Double[i]>(MaxInputValue()-MinInputValue())*MaxRecThreshold)
 	 ++NativeOutput[classindex];
    }
 
@@ -654,14 +651,14 @@ bool NCRDirectCompare::ACRCalculate(void)
 
   if(maxinput>(MaxInputValue()-MinInputValue())*MiddleRecThreshold)
   {
-  memcpy(&NativeOutput[0],&PInputData[0]->Double[0],outputsize*sizeof(real));
-   for(size_t i=0;i<PInputDataSize[0];i++)
+  memcpy(&NativeOutput[0],&GetInputData(0)->Double[0],outputsize*sizeof(real));
+   for(size_t i=0;i<GetInputDataSize(0);i++)
    {
 	classindex=i/outputsize;
 	classindex*=outputsize;
 	classindex=i-classindex;
-	if(PInputData[0]->Double[i]>maxinput*MiddleRecThreshold)
-	 NativeOutput[classindex]+=PInputData[0]->Double[i]-maxinput*MiddleRecThreshold;
+	if(GetInputData(0)->Double[i]>maxinput*MiddleRecThreshold)
+	 NativeOutput[classindex]+=GetInputData(0)->Double[i]-maxinput*MiddleRecThreshold;
    }
 
    maxoutput=0;
@@ -682,14 +679,14 @@ bool NCRDirectCompare::ACRCalculate(void)
    nummethods++;
   }
 
-  memcpy(&NativeOutput[0],&PInputData[0]->Double[0],outputsize*sizeof(real));
-   for(size_t i=0;i<PInputDataSize[0];i++)
+  memcpy(&NativeOutput[0],&GetInputData(0)->Double[0],outputsize*sizeof(real));
+   for(size_t i=0;i<GetInputDataSize(0);i++)
    {
 	classindex=i/outputsize;
 	classindex*=outputsize;
 	classindex=i-classindex;
-	if(PInputData[0]->Double[i]>maxinput*MinRecThreshold)
-	 NativeOutput[classindex]+=PInputData[0]->Double[i]-mininput;//PInputs[0]->Double[i]-maxinput*MinRecThreshold;
+	if(GetInputData(0)->Double[i]>maxinput*MinRecThreshold)
+	 NativeOutput[classindex]+=GetInputData(0)->Double[i]-mininput;//PInputs[0]->Double[i]-maxinput*MinRecThreshold;
    }
    nummethods++;
 /*   for(size_t k=0;k<outputsize;k++)
@@ -717,12 +714,12 @@ bool NCRDirectCompare::ACRCalculate(void)
  case 6:
   sortinput.resize(outputsize);
 
-  for(size_t i=0;i<PInputDataSize[0];i++)
+  for(size_t i=0;i<GetInputDataSize(0);i++)
   {
    classindex=i/outputsize;
    classindex*=outputsize;
    classindex=i-classindex;
-   sortinput[classindex].push_back(PInputData[0]->Double[i]);
+   sortinput[classindex].push_back(GetInputData(0)->Double[i]);
   }
 
   for(size_t i=0;i<outputsize;i++)
@@ -764,14 +761,14 @@ bool NCRDirectCompare::ACRCalculate(void)
  break;
 
  case 10:
-  memcpy(&NativeOutput[0],&PInputData[0]->Double[0],outputsize*sizeof(real));
-  for(size_t i=outputsize;i<PInputDataSize[0];i++)
+  memcpy(&NativeOutput[0],&GetInputData(0)->Double[0],outputsize*sizeof(real));
+  for(size_t i=outputsize;i<GetInputDataSize(0);i++)
   {
    classindex=i/outputsize;
    classindex*=outputsize;
    classindex=i-classindex;
-   if(NativeOutput[classindex]<PInputData[0]->Double[i])
-	NativeOutput[classindex]=PInputData[0]->Double[i];
+   if(NativeOutput[classindex]<GetInputData(0)->Double[i])
+	NativeOutput[classindex]=GetInputData(0)->Double[i];
   }
 
   for(size_t k=0;k<outputsize;k++)
@@ -791,7 +788,7 @@ bool NCRDirectCompare::ACRCalculate(void)
 void NCRDirectCompare::AResetTraining(void)
 {
  Samples.resize(GetOutputDataSize(0));
-// PInputData[0]->Double.resize(PInputDataSize[0]);
+// GetInputData(0)->Double.resize(GetInputDataSize(0));
 
  for(size_t j=0;j<Samples.size();j++)
  {
@@ -806,9 +803,9 @@ real NCRDirectCompare::ATrain(size_t exp_class)
 
 // Samples[exp_class].push_back();
  Samples[exp_class].resize(Samples[exp_class].size()+1);
- Samples[exp_class].back().resize(PInputDataSize[0]);
- for(size_t i=0;i<PInputDataSize[0];i++)
-  Samples[exp_class].back()[i]=PInputData[0]->Double[i];
+ Samples[exp_class].back().resize(GetInputDataSize(0));
+ for(size_t i=0;i<GetInputDataSize(0);i++)
+  Samples[exp_class].back()[i]=GetInputData(0)->Double[i];
 
 
  return E;
@@ -826,7 +823,7 @@ real NCRDirectCompare::ATrain(size_t exp_class)
 
 // PInputs[0]->Double.resize(NumPInputs[0]->Double);
 
- size_t mmin=(PInputDataSize[0]<input.size())?PInputDataSize[0]:input.size();
+ size_t mmin=(GetInputDataSize(0)<input.size())?GetInputDataSize(0):input.size();
  for(i=0;i<mmin;i++)
   {
    PInputs[0]->Double[i]=input[i];

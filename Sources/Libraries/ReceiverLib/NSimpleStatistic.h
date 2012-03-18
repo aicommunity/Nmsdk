@@ -17,12 +17,12 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NSimpleStatistic: public NADItem
+class NSimpleStatistic: public NANet
 {
 public: // ѕараметры
 // »нтервал времени дл€ анализа в секундах
 // ѕо завершении интервала статистика сохран€етс€, и начинает копитьс€ заново
-TimeT StatsInterval;
+RDK::UTime StatsInterval;
 
 // –ежим формировани€ статистики
 // 0 - подсчет минимума, максимума и среднего
@@ -48,7 +48,7 @@ protected: // ¬ременные переменные
 fstream* StatsFile;
 
 // ћомент начала очередного интервала накоплени€ статистики
-TimeT StatsStartTime;
+double StatsStartTime;
 
 // ƒанные текущей статистики
 vector<Real> StatsMin;

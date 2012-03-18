@@ -141,10 +141,10 @@ bool NFileGenerator::ACalculate(void)
  DataStartTime+=1.0/TimeStep;
  if(DataStartTime >= CurrentIndex->first)
  {
-  size_t size=(NumOutputs<CurrentIndex->second.size())?NumOutputs:CurrentIndex->second.size();
+  int size=(NumOutputs<int(CurrentIndex->second.size()))?NumOutputs:CurrentIndex->second.size();
 
-  for(size_t i=0;i<size;i++)
-   for(size_t j=0;j<CurrentIndex->second[i].GetSize();j++)
+  for(int i=0;i<size;i++)
+   for(int j=0;j<CurrentIndex->second[i].GetSize();j++)
     POutputData[i].Double[j]=CurrentIndex->second[i].Double[j];
 
   ++CurrentIndex;
