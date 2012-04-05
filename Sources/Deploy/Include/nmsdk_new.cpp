@@ -1,25 +1,19 @@
-#ifndef NMSDK_CPP
-#define NMSDK_CPP
+#ifndef NMSDK_NEW_CPP
+#define NMSDK_NEW_CPP
 
 #include "nmsdk.h"
-#include "../../Kernel/NKernel.cpp"
-#include "../../Libraries/NLibraries.cpp"
-#include "../../GUI/NGraphics.cpp"
 
-    /*
-namespace NMSDK {
-
-// —оздает пустое хранилище и возвращает указатель на него
-NStorage* CreateNewNStorage(void)
+/*****************************************************************************/
+extern NMSDK::NStorage* CreateNewStorage(void)
 {
- return new NStorage;
+ return new NMSDK::NStorage;
 }
 
-// —оздает среду и возвращает указатель на нее
-NEnvironment* CreateNewNEnvironment(void)
+extern NMSDK::NEnvironment* CreateNewEnvironment(void)
 {
- NEnvironment *env=new NEnvironment;
- env->AddClassLibrary(&BCLLibrary);
+ NMSDK::NEnvironment* env=new NMSDK::NEnvironment;
+
+ env->AddClassLibrary(&NMSDK::BCLLibrary);
  env->AddClassLibrary(&ActLibrary);
  env->AddClassLibrary(&CRLibrary);
  env->AddClassLibrary(&MathLibrary);
@@ -32,14 +26,13 @@ NEnvironment* CreateNewNEnvironment(void)
  env->AddClassLibrary(&PulseNeuronLibrary);
 
  env->AddClassLibrary(&MotionControlLibrary);
+
  return env;
 }
 
-
-RDK::UEngine* CreateNewNEngine(void)
+extern RDK::UEngine* CreateNewEngine(void)
 {
  return new RDK::UEngine;
 }
-
-}        */
+/*****************************************************************************/
 #endif

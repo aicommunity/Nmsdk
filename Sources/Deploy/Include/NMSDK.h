@@ -4,7 +4,7 @@
 #include "../../Kernel/NKernel.h"
 #include "../../Libraries/NLibraries.h"
 #include "../../GUI/NGraphics.h"
-
+          /*
 namespace NMSDK {
 
 // Создает пустое хранилище и возвращает указатель на него
@@ -14,6 +14,6 @@ NStorage* CreateNewNStorage(void);
 NEnvironment* CreateNewNEnvironment(void);
 
 RDK::UEngine* CreateNewNEngine(void);
-}
+}           */
 
 #endif

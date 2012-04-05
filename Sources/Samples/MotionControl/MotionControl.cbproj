@@ -53,8 +53,8 @@
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<IncludePath>..\..\ThirdParty\RDK\Deploy\Include\;..\..\ThirdParty\RDK\GUI\Builder\;$(BDS)\include;$(BDS)\include\dinkumware;E:\Science\AI\AISD\Nmsdk\Sources\Deploy\Include;..\..\ThirdParty\RDK\Deploy\Include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\ThirdParty\RDK\Deploy\Include\;..\..\ThirdParty\RDK\GUI\Builder\;..\..\Deploy\Dll\;$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\Deploy\Include\;..\..\ThirdParty\RDK\Deploy\Include\;..\..\ThirdParty\RDK\GUI\Builder\;$(BDS)\include;$(BDS)\include\dinkumware;E:\Science\AI\AISD\Nmsdk\Sources\Deploy\Include;..\..\ThirdParty\RDK\Deploy\Include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\Deploy\Include\;..\..\ThirdParty\RDK\Deploy\Include\;..\..\ThirdParty\RDK\GUI\Builder\;..\..\Deploy\Dll\;$(BDS)\lib;$(BDS)\lib\obj;$(BDS)\lib\psdk;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -187,15 +187,15 @@ $(PreBuildEvent)]]></PreBuildEvent>
 				<DependentOn>..\..\ThirdParty\RDK\GUI\Builder\UEngineMonitorFrameUnit.h</DependentOn>
 				<BuildOrder>10</BuildOrder>
 			</CppCompile>
-			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
-			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UEngineMonitorFormUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
 			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
 			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UEngineMonitorFormUnit.dfm"/>
 			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UEngineMonitorFrameUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
+			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
 			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
-			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
 			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UClassesListFormUnit.dfm"/>
 			<FormResources Include="..\..\ThirdParty\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>

@@ -58,8 +58,8 @@
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<Defines>NO_STRICT;$(Defines)</Defines>
 			<UsePackages>true</UsePackages>
-			<IncludePath>..\..\..\ThirdParty\RDK\GUI\Builder\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\ThirdParty\RDK\GUI\Builder\;..\..\..\Deploy\Include\;..\..\..\Deploy\Lib\Release\;..\..\..\Deploy\Lib\Release;..\..\..\Deploy\Lib\Debug;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\lib\obj;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\ThirdParty\RDK\Deploy\Include\;..\..\..\ThirdParty\RDK\GUI\Builder\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\ThirdParty\RDK\Deploy\Include\;..\..\..\ThirdParty\RDK\GUI\Builder\;..\..\..\Deploy\Include\;..\..\..\Deploy\Lib\Release\;..\..\..\Deploy\Lib\Release;..\..\..\Deploy\Lib\Debug;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\lib\obj;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 		</PropertyGroup>
@@ -110,12 +110,18 @@
 			<CppCompile Include="nmsdkdll.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\Deploy\Include\nmsdk.cpp">
+				<BuildOrder>5</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_initdll.cpp">
 				<DependentOn>..\..\..\Deploy\Include\nmsdk_initdll.h</DependentOn>
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_winapi.cpp">
-				<BuildOrder>3</BuildOrder>
+			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_new_winapi.cpp">
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\ThirdParty\RDK\Deploy\Include\rdk_win.cpp">
+				<BuildOrder>5</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

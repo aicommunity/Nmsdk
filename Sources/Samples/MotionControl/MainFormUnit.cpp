@@ -31,7 +31,7 @@ void TMainForm::UpdateInterface(void)
 void __fastcall TMainForm::FormShow(TObject *Sender)
 {
  UEngineMonitorForm->Show();
- NMSDK_EngineInit(0,ExceptionHandler);
+ EngineInit(0,ExceptionHandler);
 
  //ComponentsListForm->Show();
  //ClassesListForm->Show();
