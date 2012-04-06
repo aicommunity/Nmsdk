@@ -6,18 +6,27 @@
 //---------------------------------------------------------------------------
 
 
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UComponentsControlFormUnit.cpp", UComponentsControlForm);
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UComponentsControlFrameUnit.cpp", UComponentsControlFrame); /* TFrame: File Type */
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UComponentLinksFormUnit.cpp", UComponentLinksForm);
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UComponentLinksFrameUnit.cpp", UComponentLinksFrame); /* TFrame: File Type */
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UEngineMonitorFormUnit.cpp", UEngineMonitorForm);
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UEngineMonitorFrameUnit.cpp", UEngineMonitorFrame); /* TFrame: File Type */
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UComponentsListFormUnit.cpp", UComponentsListForm);
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UComponentsListFrameUnit.cpp", UComponentsListFrame); /* TFrame: File Type */
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UComponentIOFrameUnit.cpp", UComponentIOFrame); /* TFrame: File Type */
+
+
+
+
+
+
+
+
+
+
+
+USEFORM("..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.cpp", UEngineMonitorFrame); /* TFrame: File Type */
+USEFORM("..\..\RDK\GUI\Builder\UComponentsListFrameUnit.cpp", UComponentsListFrame); /* TFrame: File Type */
 USEFORM("MainFormUnit.cpp", MainForm);
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UClassesListFormUnit.cpp", UClassesListForm);
-USEFORM("..\..\ThirdParty\RDK\GUI\Builder\UClassesListFrameUnit.cpp", UClassesListFrame); /* TFrame: File Type */
+USEFORM("..\..\RDK\GUI\Builder\UClassesListFrameUnit.cpp", UClassesListFrame); /* TFrame: File Type */
+USEFORM("..\..\RDK\GUI\Builder\UComponentIOFrameUnit.cpp", UComponentIOFrame); /* TFrame: File Type */
+USEFORM("..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.cpp", UComponentLinksFrame); /* TFrame: File Type */
+USEFORM("..\..\RDK\GUI\Builder\UComponentLinksFormUnit.cpp", UComponentLinksForm);
+USEFORM("..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.cpp", UComponentsControlFrame); /* TFrame: File Type */
+USEFORM("..\..\RDK\GUI\Builder\UComponentsControlFormUnit.cpp", UComponentsControlForm);
+USEFORM("..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.cpp", UEngineMonitorForm);
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -26,11 +35,9 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->Initialize();
 		Application->MainFormOnTaskBar = true;
 		Application->CreateForm(__classid(TMainForm), &MainForm);
-		Application->CreateForm(__classid(TUComponentsListForm), &UComponentsListForm);
-		Application->CreateForm(__classid(TUClassesListForm), &UClassesListForm);
-		Application->CreateForm(__classid(TUEngineMonitorForm), &UEngineMonitorForm);
-		Application->CreateForm(__classid(TUComponentsControlForm), &UComponentsControlForm);
 		Application->CreateForm(__classid(TUComponentLinksForm), &UComponentLinksForm);
+		Application->CreateForm(__classid(TUComponentsControlForm), &UComponentsControlForm);
+		Application->CreateForm(__classid(TUEngineMonitorForm), &UEngineMonitorForm);
 		Application->Run();
 	}
 	catch (Exception &exception)

@@ -2,8 +2,7 @@
 #define NMSDK_WINAPI_CPP
 
 #include "nmsdk.h"
-#include "../../Libraries/NLibraries.h"
-#include "../../Libraries/NWinAPILibraries.cpp"
+#include "../../Libraries/NWinAPILibraries.h"
 
 /*****************************************************************************/
 extern NMSDK::NStorage* CreateNewStorage(void)

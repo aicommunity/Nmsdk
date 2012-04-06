@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 
 #include <windows.h>
+#include <vcl.h>
 //---------------------------------------------------------------------------
 //   Important note about DLL memory management when your DLL uses the
 //   static version of the RunTime Library:

@@ -34,6 +34,8 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<UsingDelphiRTL>true</UsingDelphiRTL>
+			<Manifest_File>None</Manifest_File>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.0.19;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<VerInfo_DLL>true</VerInfo_DLL>
 			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -58,8 +60,8 @@
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<Defines>NO_STRICT;$(Defines)</Defines>
 			<UsePackages>true</UsePackages>
-			<IncludePath>..\..\..\ThirdParty\RDK\Deploy\Include\;..\..\..\ThirdParty\RDK\GUI\Builder\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\ThirdParty\RDK\Deploy\Include\;..\..\..\ThirdParty\RDK\GUI\Builder\;..\..\..\Deploy\Include\;..\..\..\Deploy\Lib\Release\;..\..\..\Deploy\Lib\Release;..\..\..\Deploy\Lib\Debug;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\lib\obj;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 		</PropertyGroup>
@@ -91,8 +93,9 @@
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
+			<UsePackages>false</UsePackages>
 			<BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
-			<Manifest_File>None</Manifest_File>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<VerInfo_Locale>1033</VerInfo_Locale>
 		</PropertyGroup>
@@ -110,8 +113,8 @@
 			<CppCompile Include="nmsdkdll.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\Deploy\Include\nmsdk.cpp">
-				<BuildOrder>5</BuildOrder>
+			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_builder.cpp">
+				<BuildOrder>4</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_initdll.cpp">
 				<DependentOn>..\..\..\Deploy\Include\nmsdk_initdll.h</DependentOn>
@@ -120,7 +123,7 @@
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_new_winapi.cpp">
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\ThirdParty\RDK\Deploy\Include\rdk_win.cpp">
+			<CppCompile Include="..\..\..\RDK\Deploy\Include\rdk_builder.cpp">
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">

@@ -1,7 +1,7 @@
 #ifndef NMSDK_INIT_H
 #define NMSDK_INIT_H
 
-#include "../../ThirdParty/RDK/Deploy/Include/rdk_init.h"
+#include "../../RDK/Deploy/Include/rdk_init.h"
 
 #ifdef __cplusplus
 extern "C"  {

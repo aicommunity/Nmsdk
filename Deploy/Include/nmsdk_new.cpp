@@ -14,18 +14,18 @@ extern NMSDK::NEnvironment* CreateNewEnvironment(void)
  NMSDK::NEnvironment* env=new NMSDK::NEnvironment;
 
  env->AddClassLibrary(&NMSDK::BCLLibrary);
- env->AddClassLibrary(&ActLibrary);
- env->AddClassLibrary(&CRLibrary);
- env->AddClassLibrary(&MathLibrary);
- env->AddClassLibrary(&PhysLibrary);
- env->AddClassLibrary(&SensorLibrary);
- env->AddClassLibrary(&SourceLibrary);
- env->AddClassLibrary(&ReceiverLibrary);
- env->AddClassLibrary(&PulseLibrary);
- env->AddClassLibrary(&NeuronLifeLibrary);
- env->AddClassLibrary(&PulseNeuronLibrary);
+ env->AddClassLibrary(&NMSDK::ActLibrary);
+ env->AddClassLibrary(&NMSDK::CRLibrary);
+ env->AddClassLibrary(&NMSDK::MathLibrary);
+ env->AddClassLibrary(&NMSDK::PhysLibrary);
+ env->AddClassLibrary(&NMSDK::SensorLibrary);
+ env->AddClassLibrary(&NMSDK::SourceLibrary);
+ env->AddClassLibrary(&NMSDK::ReceiverLibrary);
+ env->AddClassLibrary(&NMSDK::PulseLibrary);
+ env->AddClassLibrary(&NMSDK::NeuronLifeLibrary);
+ env->AddClassLibrary(&NMSDK::PulseNeuronLibrary);
 
- env->AddClassLibrary(&MotionControlLibrary);
+ env->AddClassLibrary(&NMSDK::MotionControlLibrary);
 
  return env;
 }
