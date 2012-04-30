@@ -46,30 +46,27 @@
 			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<FinalOutputDir>..\..\Deploy\Dll\</FinalOutputDir>
+			<FinalOutputDir>..\..\Bin\</FinalOutputDir>
 			<BCC_PCHUsage>None</BCC_PCHUsage>
 			<OutputExt>exe</OutputExt>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
 			<PackageImports>vclx.bpi;vcl.bpi;vclimg.bpi;dbrtl.bpi;Rave77VCL.bpi;bdertl.bpi;rtl.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;vcldb.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;intrawebdb_100_140.bpi;Intraweb_100_140.bpi;VclSmp.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inetdb.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;vclribbon.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DbxClientDriver.bpi;DataSnapServer.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;TVidGrab.bpi;$(PackageImports)</PackageImports>
 			<Multithreaded>true</Multithreaded>
-			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
+			<AllPackageLibs>rtl.lib;vcl.lib;Tee916.lib;vclimg.lib</AllPackageLibs>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<IncludePath>..\..\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\Deploy\Include\;..\..\Deploy\Dll\;$(BDS)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\GUI\Builder\;..\..\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\GUI\Builder\;..\..\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\Deploy\Include\;..\..\Deploy\Dll\;$(BDS)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base_Win32)'!=''">
-			<Icon_MainIcon>MotionControl_Icon1.ico</Icon_MainIcon>
-			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<ILINK_LibraryPath>E:\Science\AI\AISD\Nmsdk\Bin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
 			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
 			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
 			<VerInfo_Locale>1033</VerInfo_Locale>
-			<PreBuildEvent><![CDATA[copy ..\..\Deploy\Dll\nmsdk.dll Debug\nmsdk.dll /Y
-$(PreBuildEvent)]]></PreBuildEvent>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
@@ -91,10 +88,12 @@ $(PreBuildEvent)]]></PreBuildEvent>
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<LinkPackageStatics>rtl.lib;vcl.lib;Tee916.lib;vclimg.lib</LinkPackageStatics>
 			<BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<VerInfo_Locale>1033</VerInfo_Locale>
-			<Debugger_DebugSourcePath>E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\Sources\Libraries\NeuronLifeLib\;E:\Science\AI\AISD\Nmsdk\Sources\Kernel\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+			<Debugger_DebugSourcePath>E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\Sources\Libraries\NeuronLifeLib\;E:\Science\AI\AISD\Nmsdk\Sources\Kernel\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Kernel\;E:\Science\AI\AISD\Nmsdk\Libraries\PulseLib\;E:\Science\AI\AISD\Nmsdk\RDK\Core\System\Builder\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Utilities\;E:\Science\AI\AISD\Nmsdk\Libraries\MotionControlLib\;E:\Science\AI\AISD\Nmsdk\Libraries\SourceLib\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
@@ -103,13 +102,22 @@ $(PreBuildEvent)]]></PreBuildEvent>
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<None Include="..\..\Deploy\Dll\nmsdk.dll"/>
-			<LibFiles Include="..\..\Deploy\Dll\nmsdk.lib">
-				<BuildOrder>3</BuildOrder>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\Bin\nmsdk_builder.lib">
+				<BuildOrder>19</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
+			<None Include="..\..\Deploy\Dll\nmsdk.dll"/>
+			<CppCompile Include="..\..\GUI\Builder\TNDCEngineControlFormUnit.cpp">
+				<Form>NDCEngineControlForm</Form>
+				<FormType>dfm</FormType>
+				<DependentOn>..\..\GUI\Builder\TNDCEngineControlFormUnit.h</DependentOn>
+				<BuildOrder>20</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\RDK\Deploy\Include\myrdk_builder.cpp">
 				<BuildOrder>5</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\TUBitmap.cpp">
+				<BuildOrder>26</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\UClassesListFormUnit.cpp">
 				<DependentOn>..\..\RDK\GUI\Builder\UClassesListFormUnit.h</DependentOn>
@@ -150,14 +158,31 @@ $(PreBuildEvent)]]></PreBuildEvent>
 				<BuildOrder>15</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsListFormUnit.cpp">
+				<Form>UComponentsListForm</Form>
 				<DependentOn>..\..\RDK\GUI\Builder\UComponentsListFormUnit.h</DependentOn>
-				<BuildOrder>8</BuildOrder>
+				<BuildOrder>26</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsListFrameUnit.cpp">
 				<Form>UComponentsListFrame</Form>
 				<DesignClass>TFrame</DesignClass>
 				<DependentOn>..\..\RDK\GUI\Builder\UComponentsListFrameUnit.h</DependentOn>
 				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.cpp">
+				<Form>UComponentsPerformanceForm</Form>
+				<DependentOn>..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.h</DependentOn>
+				<BuildOrder>19</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.cpp">
+				<Form>UComponentsPerformanceFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.h</DependentOn>
+				<BuildOrder>18</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\UEngineControlFormUnit.cpp">
+				<Form>UEngineControlForm</Form>
+				<DependentOn>..\..\RDK\GUI\Builder\UEngineControlFormUnit.h</DependentOn>
+				<BuildOrder>17</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.cpp">
 				<Form>UEngineMonitorForm</Form>
@@ -170,6 +195,32 @@ $(PreBuildEvent)]]></PreBuildEvent>
 				<DependentOn>..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.h</DependentOn>
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\UListInputFormUnit.cpp">
+				<Form>UListInputForm</Form>
+				<DependentOn>..\..\RDK\GUI\Builder\UListInputFormUnit.h</DependentOn>
+				<BuildOrder>24</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\USeriesControlUnit.cpp">
+				<Form>USeriesControlForm</Form>
+				<DependentOn>..\..\RDK\GUI\Builder\USeriesControlUnit.h</DependentOn>
+				<BuildOrder>25</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\UShowProgressBarUnit.cpp">
+				<Form>UShowProgressBarForm</Form>
+				<DependentOn>..\..\RDK\GUI\Builder\UShowProgressBarUnit.h</DependentOn>
+				<BuildOrder>25</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\UWatchFrameUnit.cpp">
+				<Form>UWatchFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\RDK\GUI\Builder\UWatchFrameUnit.h</DependentOn>
+				<BuildOrder>23</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\GUI\Builder\UWatchWindowFormUnit.cpp">
+				<Form>UWatchWindowForm</Form>
+				<DependentOn>..\..\RDK\GUI\Builder\UWatchWindowFormUnit.h</DependentOn>
+				<BuildOrder>24</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="MainFormUnit.cpp">
 				<Form>MainForm</Form>
 				<DependentOn>MainFormUnit.h</DependentOn>
@@ -181,16 +232,26 @@ $(PreBuildEvent)]]></PreBuildEvent>
 			<ResFiles Include="MotionControl.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<FormResources Include="..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
-			<FormResources Include="MainFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UListInputFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\USeriesControlUnit.dfm"/>
+			<FormResources Include="MainFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UShowProgressBarUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UWatchFrameUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UWatchWindowFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\GUI\Builder\TNDCEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -267,23 +328,8 @@ $(PreBuildEvent)]]></PreBuildEvent>
 				<Platforms>
 					<Platform value="Win32">True</Platform>
 				</Platforms>
+				<ModelSupport>False</ModelSupport>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>
-		<PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-			<PreBuildEvent>copy ..\..\Deploy\Dll\nmsdk.dll Debug\nmsdk.dll /Y</PreBuildEvent>
-			<PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-			<PreLinkEvent/>
-			<PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-			<PostBuildEvent/>
-			<PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
-			<PreBuildEvent>copy ..\..\Deploy\Dll\nmsdk.dll Debug\nmsdk.dll /Y</PreBuildEvent>
-			<PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-			<PreLinkEvent/>
-			<PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-			<PostBuildEvent/>
-			<PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-		</PropertyGroup>
 	</Project>

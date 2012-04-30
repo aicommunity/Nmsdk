@@ -12,6 +12,7 @@ extern NMSDK::NStorage* CreateNewStorage(void)
 
 extern NMSDK::NEnvironment* CreateNewEnvironment(void)
 {
+ RDK::UItemData::DefaultDataSize=sizeof(double);
  NMSDK::NEnvironment* env=new NMSDK::NEnvironment;
 
  env->AddClassLibrary(&NMSDK::BCLLibrary);

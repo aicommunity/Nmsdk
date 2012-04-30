@@ -12,6 +12,7 @@ object MainForm: TMainForm
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
+  Visible = True
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,7 +23,6 @@ object MainForm: TMainForm
     Height = 266
     Align = alRight
     TabOrder = 0
-    ExplicitHeight = 213
     object ShowClassesButton: TButton
       Left = 8
       Top = 8
@@ -86,6 +86,15 @@ object MainForm: TMainForm
       TabOrder = 6
       OnClick = Button1Click
     end
+  end
+  object Button: TButton
+    Left = 48
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Button'
+    TabOrder = 1
+    OnClick = ButtonClick
   end
   object Timer: TTimer
     Enabled = False

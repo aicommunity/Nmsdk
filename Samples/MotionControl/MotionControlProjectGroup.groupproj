@@ -4,9 +4,9 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<Projects Include="MotionControl.cbproj">
-				<Dependencies>..\..\Build\Dll\Builder\nmsdk.cbproj</Dependencies>
+				<Dependencies>..\..\Build\Dll\Builder\nmsdk_builder.cbproj</Dependencies>
 			</Projects>
-			<Projects Include="..\..\Build\Dll\Builder\nmsdk.cbproj">
+			<Projects Include="..\..\Build\Dll\Builder\nmsdk_builder.cbproj">
 				<Dependencies/>
 			</Projects>
 		</ItemGroup>
@@ -17,32 +17,32 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="MotionControl" DependsOnTargets="nmsdk">
+		<Target Name="MotionControl" DependsOnTargets="nmsdk_builder">
 			<MSBuild Projects="MotionControl.cbproj"/>
 		</Target>
-		<Target Name="MotionControl:Clean" DependsOnTargets="nmsdk:Clean">
+		<Target Name="MotionControl:Clean" DependsOnTargets="nmsdk_builder:Clean">
 			<MSBuild Projects="MotionControl.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="MotionControl:Make" DependsOnTargets="nmsdk:Make">
+		<Target Name="MotionControl:Make" DependsOnTargets="nmsdk_builder:Make">
 			<MSBuild Projects="MotionControl.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="nmsdk">
-			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk.cbproj"/>
+		<Target Name="nmsdk_builder">
+			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk_builder.cbproj"/>
 		</Target>
-		<Target Name="nmsdk:Clean">
-			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk.cbproj" Targets="Clean"/>
+		<Target Name="nmsdk_builder:Clean">
+			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk_builder.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="nmsdk:Make">
-			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk.cbproj" Targets="Make"/>
+		<Target Name="nmsdk_builder:Make">
+			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk_builder.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="MotionControl;nmsdk"/>
+			<CallTarget Targets="MotionControl;nmsdk_builder"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="MotionControl:Clean;nmsdk:Clean"/>
+			<CallTarget Targets="MotionControl:Clean;nmsdk_builder:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="MotionControl:Make;nmsdk:Make"/>
+			<CallTarget Targets="MotionControl:Make;nmsdk_builder:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

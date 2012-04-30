@@ -10,6 +10,7 @@
 #include "UComponentsListFormUnit.h"
 #include "UComponentsControlFormUnit.h"
 #include "UComponentLinksFormUnit.h"
+#include "TNDCEngineControlFormUnit.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -30,14 +31,11 @@ void TMainForm::UpdateInterface(void)
 
 void __fastcall TMainForm::FormShow(TObject *Sender)
 {
- UEngineMonitorForm->Show();
- EngineInit(0,ExceptionHandler);
+// UEngineMonitorForm->Show();
+// EngineInit(0,ExceptionHandler);
 
- //ComponentsListForm->Show();
- //ClassesListForm->Show();
- UComponentsControlForm->Show();
- UComponentLinksForm->Show();
-// Model_Create(80);
+// UComponentsControlForm->Show();
+// UComponentLinksForm->Show();
 }
 //---------------------------------------------------------------------------
 
@@ -94,6 +92,12 @@ void __fastcall TMainForm::TimerTimer(TObject *Sender)
 void __fastcall TMainForm::Button1Click(TObject *Sender)
 {
  UComponentLinksForm->UComponentLinksFrame->UpdateInterface();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::ButtonClick(TObject *Sender)
+{
+ NDCEngineControlForm->Show();
 }
 //---------------------------------------------------------------------------
 

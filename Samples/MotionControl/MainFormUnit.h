@@ -21,6 +21,7 @@ __published:	// IDE-managed Components
 	TButton *ResetButton;
 	TTimer *Timer;
 	TButton *Button1;
+	TButton *Button;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall ShowClassesButtonClick(TObject *Sender);
 	void __fastcall CreateModelButtonClick(TObject *Sender);
@@ -30,6 +31,7 @@ __published:	// IDE-managed Components
 	void __fastcall ResetButtonClick(TObject *Sender);
 	void __fastcall TimerTimer(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall ButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TMainForm(TComponent* Owner);
