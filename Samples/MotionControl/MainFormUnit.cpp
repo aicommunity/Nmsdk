@@ -11,6 +11,7 @@
 #include "UComponentsControlFormUnit.h"
 #include "UComponentLinksFormUnit.h"
 #include "TNDCEngineControlFormUnit.h"
+#include "TNManipulatorControlForm.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -98,6 +99,12 @@ void __fastcall TMainForm::Button1Click(TObject *Sender)
 void __fastcall TMainForm::ButtonClick(TObject *Sender)
 {
  NDCEngineControlForm->Show();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Button2Click(TObject *Sender)
+{
+ NManipulatorControlForm->Show();
 }
 //---------------------------------------------------------------------------
 

@@ -96,6 +96,15 @@ object MainForm: TMainForm
     TabOrder = 1
     OnClick = ButtonClick
   end
+  object Button2: TButton
+    Left = 48
+    Top = 39
+    Width = 75
+    Height = 25
+    Caption = 'Button'
+    TabOrder = 2
+    OnClick = Button2Click
+  end
   object Timer: TTimer
     Enabled = False
     Interval = 1

@@ -93,7 +93,7 @@
 			<BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<VerInfo_Locale>1033</VerInfo_Locale>
-			<Debugger_DebugSourcePath>E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\Sources\Libraries\NeuronLifeLib\;E:\Science\AI\AISD\Nmsdk\Sources\Kernel\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Kernel\;E:\Science\AI\AISD\Nmsdk\Libraries\PulseLib\;E:\Science\AI\AISD\Nmsdk\RDK\Core\System\Builder\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Utilities\;E:\Science\AI\AISD\Nmsdk\Libraries\MotionControlLib\;E:\Science\AI\AISD\Nmsdk\Libraries\SourceLib\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+			<Debugger_DebugSourcePath>E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\Sources\Libraries\NeuronLifeLib\;E:\Science\AI\AISD\Nmsdk\Sources\Kernel\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Kernel\;E:\Science\AI\AISD\Nmsdk\Libraries\PulseLib\;E:\Science\AI\AISD\Nmsdk\RDK\Core\System\Builder\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Utilities\;E:\Science\AI\AISD\Nmsdk\Libraries\MotionControlLib\;E:\Science\AI\AISD\Nmsdk\Libraries\SourceLib\;E:\Science\AI\AISD\Nmsdk\Libraries\PhysLib\WinAPI\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
@@ -107,14 +107,23 @@
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
 			<None Include="..\..\Deploy\Dll\nmsdk.dll"/>
+			<CppCompile Include="..\..\Deploy\Include\nmsdk_builder.cpp">
+				<BuildOrder>28</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\GUI\Builder\TNDCEngineControlFormUnit.cpp">
 				<Form>NDCEngineControlForm</Form>
 				<FormType>dfm</FormType>
 				<DependentOn>..\..\GUI\Builder\TNDCEngineControlFormUnit.h</DependentOn>
 				<BuildOrder>20</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\RDK\Deploy\Include\myrdk_builder.cpp">
-				<BuildOrder>5</BuildOrder>
+			<CppCompile Include="..\..\GUI\Builder\TNManipulatorControlForm.cpp">
+				<Form>NManipulatorControlForm</Form>
+				<FormType>dfm</FormType>
+				<DependentOn>..\..\GUI\Builder\TNManipulatorControlForm.h</DependentOn>
+				<BuildOrder>27</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\RDK\Deploy\Include\rdk_builder.cpp">
+				<BuildOrder>29</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\RDK\GUI\Builder\TUBitmap.cpp">
 				<BuildOrder>26</BuildOrder>
@@ -235,23 +244,24 @@
 			<FormResources Include="..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UListInputFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UEngineControlFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\USeriesControlUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UWatchWindowFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\USeriesControlUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UShowProgressBarUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UWatchFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UWatchWindowFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\GUI\Builder\TNManipulatorControlForm.dfm"/>
 			<FormResources Include="..\..\GUI\Builder\TNDCEngineControlFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
+			<FormResources Include="..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
 			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
