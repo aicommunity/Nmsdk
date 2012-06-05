@@ -40,6 +40,11 @@
 
 
 
+
+
+
+
+
 USEFORM("..\..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.cpp", UEngineMonitorForm);
 USEFORM("..\..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.cpp", UEngineMonitorFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\Builder\UEngineControlFormUnit.cpp", UEngineControlForm);
@@ -57,6 +62,10 @@ USEFORM("..\..\..\RDK\GUI\Builder\UComponentsListFormUnit.cpp", UComponentsListF
 USEFORM("..\..\..\RDK\GUI\Builder\UComponentsControlFormUnit.cpp", UComponentsControlForm);
 USEFORM("..\..\..\RDK\GUI\Builder\UComponentLinksFormUnit.cpp", UComponentLinksForm);
 USEFORM("..\..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.cpp", UComponentLinksFrame); /* TFrame: File Type */
+USEFORM("..\..\..\RDK\GUI\Builder\UWatchFrameUnit.cpp", UWatchFrame); /* TFrame: File Type */
+USEFORM("..\..\..\RDK\GUI\Builder\UWatchWindowFormUnit.cpp", UWatchWindowForm);
+USEFORM("..\..\..\RDK\GUI\Builder\USeriesControlUnit.cpp", USeriesControlForm);
+USEFORM("..\..\..\RDK\GUI\Builder\UListInputFormUnit.cpp", UListInputForm);
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -74,6 +83,9 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TUEngineMonitorForm), &UEngineMonitorForm);
 		Application->CreateForm(__classid(TUComponentsControlForm), &UComponentsControlForm);
 		Application->CreateForm(__classid(TUComponentLinksForm), &UComponentLinksForm);
+		Application->CreateForm(__classid(TUWatchWindowForm), &UWatchWindowForm);
+		Application->CreateForm(__classid(TUSeriesControlForm), &USeriesControlForm);
+		Application->CreateForm(__classid(TUListInputForm), &UListInputForm);
 		Application->Run();
 	}
 	catch (Exception &exception)

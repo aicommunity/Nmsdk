@@ -118,6 +118,9 @@
 			<CppCompile Include="..\..\..\RDK\Deploy\Include\rdk_builder.cpp">
 				<BuildOrder>21</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\TUBitmap.cpp">
+				<BuildOrder>22</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\Builder\UClassesListFormUnit.cpp">
 				<Form>UClassesListForm</Form>
 				<DependentOn>..\..\..\RDK\GUI\Builder\UClassesListFormUnit.h</DependentOn>
@@ -195,6 +198,27 @@
 				<DependentOn>..\..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.h</DependentOn>
 				<BuildOrder>12</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UListInputFormUnit.cpp">
+				<Form>UListInputForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UListInputFormUnit.h</DependentOn>
+				<BuildOrder>26</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\USeriesControlUnit.cpp">
+				<Form>USeriesControlForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\USeriesControlUnit.h</DependentOn>
+				<BuildOrder>25</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UWatchFrameUnit.cpp">
+				<Form>UWatchFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UWatchFrameUnit.h</DependentOn>
+				<BuildOrder>23</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UWatchWindowFormUnit.cpp">
+				<Form>UWatchWindowForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UWatchWindowFormUnit.h</DependentOn>
+				<BuildOrder>24</BuildOrder>
+			</CppCompile>
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\Bin\nmsdk_builder.lib">
 				<BuildOrder>19</BuildOrder>
 				<IgnorePath>true</IgnorePath>
@@ -227,6 +251,10 @@
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UWatchFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UWatchWindowFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\USeriesControlUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UListInputFormUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
