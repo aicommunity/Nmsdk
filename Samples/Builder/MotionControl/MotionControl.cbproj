@@ -46,7 +46,7 @@
 			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<FinalOutputDir>..\..\Bin\</FinalOutputDir>
+			<FinalOutputDir>..\..\..\Bin\</FinalOutputDir>
 			<BCC_PCHUsage>None</BCC_PCHUsage>
 			<OutputExt>exe</OutputExt>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
@@ -55,8 +55,8 @@
 			<AllPackageLibs>rtl.lib;vcl.lib;Tee916.lib;vclimg.lib</AllPackageLibs>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<IncludePath>..\..\GUI\Builder\;..\..\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\GUI\Builder\;..\..\RDK\GUI\Builder\;..\..\RDK\Deploy\Include\;..\..\Deploy\Include\;..\..\Deploy\Dll\;$(BDS)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\GUI\Builder\;..\..\..\RDK\GUI\Builder\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\GUI\Builder\;..\..\..\RDK\GUI\Builder\;..\..\..\RDK\Deploy\Include\;$(BDS)\lib;..\..\..\Deploy\Include\;..\..\..\Deploy\Dll\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -102,134 +102,103 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_builder.cpp">
+				<BuildOrder>22</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\GUI\Builder\TNDCEngineControlFormUnit.cpp">
+				<Form>NDCEngineControlForm</Form>
+				<DependentOn>..\..\..\GUI\Builder\TNDCEngineControlFormUnit.h</DependentOn>
+				<BuildOrder>27</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\GUI\Builder\TNManipulatorControlForm.cpp">
+				<Form>NManipulatorControlForm</Form>
+				<DependentOn>..\..\..\GUI\Builder\TNManipulatorControlForm.h</DependentOn>
+				<BuildOrder>28</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\Deploy\Include\rdk_builder.cpp">
+				<BuildOrder>21</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UClassesListFormUnit.cpp">
+				<Form>UClassesListForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UClassesListFormUnit.h</DependentOn>
+				<BuildOrder>13</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UClassesListFrameUnit.cpp">
+				<Form>UClassesListFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UClassesListFrameUnit.h</DependentOn>
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentIOFrameUnit.cpp">
+				<Form>UComponentIOFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentIOFrameUnit.h</DependentOn>
+				<BuildOrder>21</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentLinksFormUnit.cpp">
+				<Form>UComponentLinksForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentLinksFormUnit.h</DependentOn>
+				<BuildOrder>22</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.cpp">
+				<Form>UComponentLinksFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.h</DependentOn>
+				<BuildOrder>22</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentsControlFormUnit.cpp">
+				<Form>UComponentsControlForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentsControlFormUnit.h</DependentOn>
+				<BuildOrder>22</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.cpp">
+				<Form>UComponentsControlFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.h</DependentOn>
+				<BuildOrder>14</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentsListFormUnit.cpp">
+				<Form>UComponentsListForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentsListFormUnit.h</DependentOn>
+				<BuildOrder>15</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentsListFrameUnit.cpp">
+				<Form>UComponentsListFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentsListFrameUnit.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.cpp">
+				<Form>UComponentsPerformanceForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.h</DependentOn>
+				<BuildOrder>16</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.cpp">
+				<Form>UComponentsPerformanceFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UEngineControlFormUnit.cpp">
+				<Form>UEngineControlForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UEngineControlFormUnit.h</DependentOn>
+				<BuildOrder>17</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.cpp">
+				<Form>UEngineMonitorForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.h</DependentOn>
+				<BuildOrder>18</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.cpp">
+				<Form>UEngineMonitorFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.h</DependentOn>
+				<BuildOrder>12</BuildOrder>
+			</CppCompile>
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\Bin\nmsdk_builder.lib">
 				<BuildOrder>19</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<None Include="..\..\Deploy\Dll\nmsdk.dll"/>
-			<CppCompile Include="..\..\Deploy\Include\nmsdk_builder.cpp">
-				<BuildOrder>28</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\TNDCEngineControlFormUnit.cpp">
-				<Form>NDCEngineControlForm</Form>
-				<FormType>dfm</FormType>
-				<DependentOn>..\..\GUI\Builder\TNDCEngineControlFormUnit.h</DependentOn>
-				<BuildOrder>20</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\GUI\Builder\TNManipulatorControlForm.cpp">
-				<Form>NManipulatorControlForm</Form>
-				<FormType>dfm</FormType>
-				<DependentOn>..\..\GUI\Builder\TNManipulatorControlForm.h</DependentOn>
-				<BuildOrder>27</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\Deploy\Include\rdk_builder.cpp">
-				<BuildOrder>29</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\TUBitmap.cpp">
-				<BuildOrder>26</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UClassesListFormUnit.cpp">
-				<DependentOn>..\..\RDK\GUI\Builder\UClassesListFormUnit.h</DependentOn>
-				<BuildOrder>6</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UClassesListFrameUnit.cpp">
-				<Form>UClassesListFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UClassesListFrameUnit.h</DependentOn>
-				<BuildOrder>7</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentIOFrameUnit.cpp">
-				<Form>UComponentIOFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentIOFrameUnit.h</DependentOn>
-				<BuildOrder>12</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentLinksFormUnit.cpp">
-				<Form>UComponentLinksForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentLinksFormUnit.h</DependentOn>
-				<BuildOrder>14</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.cpp">
-				<Form>UComponentLinksFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.h</DependentOn>
-				<BuildOrder>13</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsControlFormUnit.cpp">
-				<Form>UComponentsControlForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentsControlFormUnit.h</DependentOn>
-				<BuildOrder>16</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.cpp">
-				<Form>UComponentsControlFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.h</DependentOn>
-				<BuildOrder>15</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsListFormUnit.cpp">
-				<Form>UComponentsListForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentsListFormUnit.h</DependentOn>
-				<BuildOrder>26</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsListFrameUnit.cpp">
-				<Form>UComponentsListFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentsListFrameUnit.h</DependentOn>
-				<BuildOrder>9</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.cpp">
-				<Form>UComponentsPerformanceForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.h</DependentOn>
-				<BuildOrder>19</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.cpp">
-				<Form>UComponentsPerformanceFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.h</DependentOn>
-				<BuildOrder>18</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UEngineControlFormUnit.cpp">
-				<Form>UEngineControlForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UEngineControlFormUnit.h</DependentOn>
-				<BuildOrder>17</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.cpp">
-				<Form>UEngineMonitorForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.h</DependentOn>
-				<BuildOrder>16</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.cpp">
-				<Form>UEngineMonitorFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.h</DependentOn>
-				<BuildOrder>11</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UListInputFormUnit.cpp">
-				<Form>UListInputForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UListInputFormUnit.h</DependentOn>
-				<BuildOrder>24</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\USeriesControlUnit.cpp">
-				<Form>USeriesControlForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\USeriesControlUnit.h</DependentOn>
-				<BuildOrder>25</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UShowProgressBarUnit.cpp">
-				<Form>UShowProgressBarForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UShowProgressBarUnit.h</DependentOn>
-				<BuildOrder>25</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UWatchFrameUnit.cpp">
-				<Form>UWatchFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\RDK\GUI\Builder\UWatchFrameUnit.h</DependentOn>
-				<BuildOrder>23</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\RDK\GUI\Builder\UWatchWindowFormUnit.cpp">
-				<Form>UWatchWindowForm</Form>
-				<DependentOn>..\..\RDK\GUI\Builder\UWatchWindowFormUnit.h</DependentOn>
-				<BuildOrder>24</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="MainFormUnit.cpp">
 				<Form>MainForm</Form>
 				<DependentOn>MainFormUnit.h</DependentOn>
@@ -241,27 +210,23 @@
 			<ResFiles Include="MotionControl.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<FormResources Include="..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UListInputFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UEngineControlFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UWatchWindowFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\USeriesControlUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UShowProgressBarUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UWatchFrameUnit.dfm"/>
-			<FormResources Include="..\..\GUI\Builder\TNManipulatorControlForm.dfm"/>
-			<FormResources Include="..\..\GUI\Builder\TNDCEngineControlFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
-			<FormResources Include="..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UClassesListFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\Builder\TNDCEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\Builder\TNManipulatorControlForm.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

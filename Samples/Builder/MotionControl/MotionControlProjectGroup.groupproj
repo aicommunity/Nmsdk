@@ -4,9 +4,9 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<Projects Include="MotionControl.cbproj">
-				<Dependencies>..\..\Build\Dll\Builder\nmsdk_builder.cbproj</Dependencies>
+				<Dependencies>..\..\..\Build\Builder\Dll\nmsdk_builder.cbproj</Dependencies>
 			</Projects>
-			<Projects Include="..\..\Build\Dll\Builder\nmsdk_builder.cbproj">
+			<Projects Include="..\..\..\Build\Builder\Dll\nmsdk_builder.cbproj">
 				<Dependencies/>
 			</Projects>
 		</ItemGroup>
@@ -27,13 +27,13 @@
 			<MSBuild Projects="MotionControl.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="nmsdk_builder">
-			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk_builder.cbproj"/>
+			<MSBuild Projects="..\..\..\Build\Builder\Dll\nmsdk_builder.cbproj"/>
 		</Target>
 		<Target Name="nmsdk_builder:Clean">
-			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk_builder.cbproj" Targets="Clean"/>
+			<MSBuild Projects="..\..\..\Build\Builder\Dll\nmsdk_builder.cbproj" Targets="Clean"/>
 		</Target>
 		<Target Name="nmsdk_builder:Make">
-			<MSBuild Projects="..\..\Build\Dll\Builder\nmsdk_builder.cbproj" Targets="Make"/>
+			<MSBuild Projects="..\..\..\Build\Builder\Dll\nmsdk_builder.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
 			<CallTarget Targets="MotionControl;nmsdk_builder"/>
