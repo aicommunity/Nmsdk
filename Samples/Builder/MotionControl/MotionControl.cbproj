@@ -102,6 +102,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\..\Bin\nmsdk.bcc.lib">
+				<BuildOrder>27</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_builder.cpp">
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
@@ -236,25 +240,25 @@
 			</ResFiles>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UEngineMonitorFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UEngineMonitorFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UListInputFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsPerformanceFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsPerformanceFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\USeriesControlUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UClassesListFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\GUI\Builder\TNDCEngineControlFormUnit.dfm"/>
-			<FormResources Include="..\..\..\GUI\Builder\TNManipulatorControlForm.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UWatchFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\Builder\UWatchWindowFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\USeriesControlUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\Builder\UListInputFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UClassesListFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\Builder\TNDCEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\Builder\TNManipulatorControlForm.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UClassesListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsControlFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentsListFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentIOFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\Builder\UComponentLinksFrameUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
