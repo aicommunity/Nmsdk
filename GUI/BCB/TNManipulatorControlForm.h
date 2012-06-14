@@ -15,7 +15,7 @@
 #include <string>
 
 #include "nmsdk_cpp_initdll.h"
-#include "nmsdk_builder.h"
+#include "nmsdk.bcb.h"
 
 //---------------------------------------------------------------------------
 class TNManipulatorControlForm : public TForm
