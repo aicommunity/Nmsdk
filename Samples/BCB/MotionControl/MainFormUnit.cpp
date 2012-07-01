@@ -39,63 +39,6 @@ void __fastcall TMainForm::FormShow(TObject *Sender)
 // UComponentLinksForm->Show();
 }
 //---------------------------------------------------------------------------
-
-
-void __fastcall TMainForm::ShowClassesButtonClick(TObject *Sender)
-{
- UClassesListForm->Show();
-}
-//---------------------------------------------------------------------------
-
-
-void __fastcall TMainForm::CreateModelButtonClick(TObject *Sender)
-{
- Model_Destroy();
-
- Model_Create(UClassesListForm->ClassesListFrame->GetSelectedId());
-
- UComponentsListForm->ComponentsListFrame1->UpdateInterface();
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::DestroyModelButtonClick(TObject *Sender)
-{
- Model_Destroy();
- UComponentsListForm->ComponentsListFrame1->UpdateInterface();
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::StartButtonClick(TObject *Sender)
-{
- Timer->Enabled=true;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::StopButtonClick(TObject *Sender)
-{
- Timer->Enabled=false;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::ResetButtonClick(TObject *Sender)
-{
- Env_Reset("");
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::TimerTimer(TObject *Sender)
-{
- Env_Calculate("");
- UEngineMonitorForm->EngineMonitorFrame->UpdateInterface();
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TMainForm::Button1Click(TObject *Sender)
-{
- UComponentLinksForm->UComponentLinksFrame->UpdateInterface();
-}
-//---------------------------------------------------------------------------
-
 void __fastcall TMainForm::ButtonClick(TObject *Sender)
 {
  NDCEngineControlForm->Show();

@@ -31,7 +31,6 @@
     Width = 527
     Height = 19
     Panels = <>
-    ExplicitTop = 335
   end
   object PageControl1: TPageControl
     Left = 0
@@ -41,10 +40,8 @@
     ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 306
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitHeight = 278
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -54,8 +51,6 @@
         Caption = ' Communication options '
         Enabled = False
         TabOrder = 0
-        ExplicitTop = 0
-        ExplicitHeight = 278
         object Label1: TLabel
           Left = 7
           Top = 50
@@ -154,10 +149,8 @@
         Width = 519
         Height = 49
         Align = alTop
-        Caption = ' Component name  '
+        Caption = ' Manipulator component name  '
         TabOrder = 1
-        ExplicitLeft = 2
-        ExplicitTop = -2
         object ComponentSelectionPanel: TPanel
           Left = 2
           Top = 15
@@ -169,7 +162,6 @@
           ParentBackground = False
           TabOrder = 0
           OnDblClick = ComponentSelectionPanelDblClick
-          ExplicitHeight = 34
         end
       end
       object GroupBox3: TGroupBox
@@ -181,9 +173,6 @@
         Caption = ' Communication control '
         Enabled = False
         TabOrder = 2
-        ExplicitLeft = 231
-        ExplicitTop = 71
-        ExplicitHeight = 205
         DesignSize = (
           286
           260)
@@ -248,9 +237,8 @@
         Width = 519
         Height = 49
         Align = alTop
-        Caption = ' Component name  '
+        Caption = ' Control system component name  '
         TabOrder = 3
-        ExplicitTop = 0
         object ControlSystemSelectionPanel: TPanel
           Left = 2
           Top = 15
@@ -268,7 +256,6 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitHeight = 278
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
@@ -277,7 +264,6 @@
         Align = alLeft
         Caption = ' Servo Control '
         TabOrder = 0
-        ExplicitHeight = 278
         object Время: TLabel
           Left = 8
           Top = 120
@@ -366,7 +352,6 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitHeight = 278
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -375,7 +360,6 @@
         Align = alLeft
         Caption = ' '#1042#1085#1077#1096#1085#1077#1077' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1077' '
         TabOrder = 0
-        ExplicitHeight = 278
         object Label5: TLabel
           Left = 12
           Top = 18

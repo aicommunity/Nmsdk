@@ -9,11 +9,13 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "rdk_initdll.h"
+#include <Vcl.ComCtrls.hpp>
 #include <string>
 #include "myrdk.h"
+#include "TUVisualController.h"
 #pragma warn -8130
 //---------------------------------------------------------------------------
-class TNDCEngineControlForm : public TForm, public RDK::UIVisualController
+class TNDCEngineControlForm : public TUVisualControllerForm
 {
 __published:	// IDE-managed Components
 	TPanel *Panel1;
@@ -25,12 +27,16 @@ __published:	// IDE-managed Components
 	TCheckBox *IbCheckBox;
 	TCheckBox *IICheckBox;
 	TCheckBox *ControlVoltageCheckBox;
+	TGroupBox *GroupBox2;
+	TTrackBar *MomentTrackBar;
+	TProgressBar *MomentProgressBar;
+	TEdit *ExtMomentEdit;
 	void __fastcall FormShow(TObject *Sender);
-	void __fastcall FormHide(TObject *Sender);
 	void __fastcall IaCheckBoxClick(TObject *Sender);
 	void __fastcall IbCheckBoxClick(TObject *Sender);
 	void __fastcall IICheckBoxClick(TObject *Sender);
 	void __fastcall ControlVoltageCheckBoxClick(TObject *Sender);
+	void __fastcall MomentTrackBarChange(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNDCEngineControlForm(TComponent* Owner);
@@ -57,17 +63,14 @@ double Angle;
 // Длина звена (пикс)
 double Length;
 
-// Флаг обновления интерфейса
-bool UpdateInterfaceFlag;
-
 // Метод обновления интерфейса
-void UpdateInterface(void);
+void AUpdateInterface(void);
 
 // Метод, вызываемый перед шагом расчета
-void BeforeCalculate(void);
+void ABeforeCalculate(void);
 
 // Метод, вызываемый после шага расчета
-void AfterCalculate(void);
+void AAfterCalculate(void);
 
 // Считывает данные из компонента
 void ReadComponentData(void);

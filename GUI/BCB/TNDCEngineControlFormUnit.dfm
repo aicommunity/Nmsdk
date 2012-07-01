@@ -11,7 +11,6 @@ object NDCEngineControlForm: TNDCEngineControlForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnHide = FormHide
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,8 +21,6 @@ object NDCEngineControlForm: TNDCEngineControlForm
     Height = 248
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 342
-    ExplicitHeight = 256
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
@@ -32,8 +29,6 @@ object NDCEngineControlForm: TNDCEngineControlForm
       Align = alClient
       Caption = ' Visual '
       TabOrder = 0
-      ExplicitWidth = 340
-      ExplicitHeight = 254
       object Image: TImage
         Left = 2
         Top = 15
@@ -55,6 +50,7 @@ object NDCEngineControlForm: TNDCEngineControlForm
     Height = 200
     Align = alBottom
     TabOrder = 1
+    ExplicitLeft = 1
   end
   object Panel3: TPanel
     Left = 256
@@ -63,7 +59,6 @@ object NDCEngineControlForm: TNDCEngineControlForm
     Height = 248
     Align = alRight
     TabOrder = 2
-    ExplicitHeight = 256
     object IaCheckBox: TCheckBox
       Left = 6
       Top = 16
@@ -105,6 +100,42 @@ object NDCEngineControlForm: TNDCEngineControlForm
       State = cbChecked
       TabOrder = 3
       OnClick = ControlVoltageCheckBoxClick
+    end
+    object GroupBox2: TGroupBox
+      Left = 6
+      Top = 160
+      Width = 451
+      Height = 82
+      Caption = ' '#1042#1085#1077#1096#1085#1080#1081' '#1084#1086#1084#1077#1085#1090' '#1085#1072' '#1084#1086#1076#1077#1083#1080' '#1076#1074#1080#1075#1072#1090#1077#1083#1103' '
+      TabOrder = 4
+      object MomentTrackBar: TTrackBar
+        Left = 5
+        Top = 18
+        Width = 443
+        Height = 27
+        Max = 1000
+        Min = -1000
+        TabOrder = 0
+        OnChange = MomentTrackBarChange
+      end
+      object MomentProgressBar: TProgressBar
+        Left = 13
+        Top = 53
+        Width = 349
+        Height = 17
+        Max = 1000
+        TabOrder = 1
+      end
+      object ExtMomentEdit: TEdit
+        Left = 368
+        Top = 51
+        Width = 73
+        Height = 21
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 2
+        Text = '0'
+      end
     end
   end
 end

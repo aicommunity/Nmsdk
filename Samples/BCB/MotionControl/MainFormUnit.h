@@ -13,25 +13,10 @@ class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
 	TPanel *Panel1;
-	TButton *ShowClassesButton;
-	TButton *CreateModelButton;
-	TButton *DestroyModelButton;
-	TButton *StartButton;
-	TButton *StopButton;
-	TButton *ResetButton;
 	TTimer *Timer;
-	TButton *Button1;
-	TButton *Button;
 	TButton *Button2;
+	TButton *Button;
 	void __fastcall FormShow(TObject *Sender);
-	void __fastcall ShowClassesButtonClick(TObject *Sender);
-	void __fastcall CreateModelButtonClick(TObject *Sender);
-	void __fastcall DestroyModelButtonClick(TObject *Sender);
-	void __fastcall StartButtonClick(TObject *Sender);
-	void __fastcall StopButtonClick(TObject *Sender);
-	void __fastcall ResetButtonClick(TObject *Sender);
-	void __fastcall TimerTimer(TObject *Sender);
-	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall ButtonClick(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 private:	// User declarations

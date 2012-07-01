@@ -321,6 +321,9 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 void __fastcall TNManipulatorControlForm::IIAfferentTrackBarChange(TObject *Sender)
 
 {
+// IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(GetModel()->GetComponentL(ControlSystemName));
+
+
  if(!IIPosAfferent || !IINegAfferent)
   return;
 

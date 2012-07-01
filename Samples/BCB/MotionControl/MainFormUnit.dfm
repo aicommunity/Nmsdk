@@ -1,6 +1,6 @@
 object MainForm: TMainForm
   Left = 0
-  Top = 0
+  Top = 100
   Caption = 'MainForm'
   ClientHeight = 266
   ClientWidth = 527
@@ -23,93 +23,29 @@ object MainForm: TMainForm
     Height = 266
     Align = alRight
     TabOrder = 0
-    object ShowClassesButton: TButton
-      Left = 8
-      Top = 8
-      Width = 169
-      Height = 25
-      Caption = 'Show Classes'
-      TabOrder = 0
-      OnClick = ShowClassesButtonClick
-    end
-    object CreateModelButton: TButton
+    object Button2: TButton
       Left = 8
       Top = 39
       Width = 169
       Height = 25
-      Caption = 'Create Model'
+      Caption = 'Manipulator Control'
+      TabOrder = 0
+      OnClick = Button2Click
+    end
+    object Button: TButton
+      Left = 8
+      Top = 8
+      Width = 169
+      Height = 25
+      Caption = 'Engine Control'
       TabOrder = 1
-      OnClick = CreateModelButtonClick
+      OnClick = ButtonClick
     end
-    object DestroyModelButton: TButton
-      Left = 8
-      Top = 68
-      Width = 169
-      Height = 25
-      Caption = 'Destroy Model'
-      TabOrder = 2
-      OnClick = DestroyModelButtonClick
-    end
-    object StartButton: TButton
-      Left = 8
-      Top = 99
-      Width = 169
-      Height = 25
-      Caption = 'Start'
-      TabOrder = 3
-      OnClick = StartButtonClick
-    end
-    object StopButton: TButton
-      Left = 8
-      Top = 130
-      Width = 169
-      Height = 25
-      Caption = 'Stop'
-      TabOrder = 4
-      OnClick = StopButtonClick
-    end
-    object ResetButton: TButton
-      Left = 8
-      Top = 161
-      Width = 169
-      Height = 25
-      Caption = 'Reset'
-      TabOrder = 5
-      OnClick = ResetButtonClick
-    end
-    object Button1: TButton
-      Left = 8
-      Top = 233
-      Width = 169
-      Height = 25
-      Caption = 'Update'
-      TabOrder = 6
-      OnClick = Button1Click
-    end
-  end
-  object Button: TButton
-    Left = 48
-    Top = 8
-    Width = 75
-    Height = 25
-    Caption = 'Button'
-    TabOrder = 1
-    OnClick = ButtonClick
-  end
-  object Button2: TButton
-    Left = 48
-    Top = 39
-    Width = 75
-    Height = 25
-    Caption = 'Button'
-    TabOrder = 2
-    OnClick = Button2Click
   end
   object Timer: TTimer
     Enabled = False
     Interval = 1
-    OnTimer = TimerTimer
-    Left = 16
-    Top = 8
+    Left = 224
+    Top = 24
   end
 end

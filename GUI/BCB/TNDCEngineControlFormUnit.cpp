@@ -6,15 +6,15 @@
 #include "TNDCEngineControlFormUnit.h"
 #include "TUBitmap.h"
 #include "UEngineMonitorFormUnit.h"
+#include "myrdk.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TNDCEngineControlForm *NDCEngineControlForm;
 //---------------------------------------------------------------------------
 __fastcall TNDCEngineControlForm::TNDCEngineControlForm(TComponent* Owner)
-	: TForm(Owner)
+	: TUVisualControllerForm(Owner)
 {
- UpdateInterfaceFlag=false;
  BmpGraphics.SetCanvas(&BmpCanvas);
  CanvasWidth=640;
  CanvasHeight=480;
@@ -26,19 +26,19 @@ __fastcall TNDCEngineControlForm::TNDCEngineControlForm(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 // Метод, вызываемый перед шагом расчета
-void TNDCEngineControlForm::BeforeCalculate(void)
+void TNDCEngineControlForm::ABeforeCalculate(void)
 {
 
 }
 
 // Метод, вызываемый после шага расчета
-void TNDCEngineControlForm::AfterCalculate(void)
+void TNDCEngineControlForm::AAfterCalculate(void)
 {
 
 }
 
 // Метод обновления интерфейса
-void TNDCEngineControlForm::UpdateInterface(void)
+void TNDCEngineControlForm::AUpdateInterface(void)
 {
  UpdateInterfaceFlag=true;
 
@@ -65,15 +65,9 @@ void __fastcall TNDCEngineControlForm::FormShow(TObject *Sender)
 {
  MotionControlName="EngineControlRangeAfferent";
  ComponentName=MotionControlName+".Engine";
- UEngineMonitorForm->EngineMonitorFrame->AddInterface(this);
  UpdateInterface();
 }
 //---------------------------------------------------------------------------
-void __fastcall TNDCEngineControlForm::FormHide(TObject *Sender)
-{
- UEngineMonitorForm->EngineMonitorFrame->DelInterface(this);
-}
-
 void __fastcall TNDCEngineControlForm::IaCheckBoxClick(TObject *Sender)
 {
  bool res;
@@ -272,6 +266,19 @@ void __fastcall TNDCEngineControlForm::ControlVoltageCheckBoxClick(TObject *Send
 
  if(!res)
   return;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNDCEngineControlForm::MomentTrackBarChange(TObject *Sender)
+{
+ double amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
+ RDK::WriteParameterValue<double>(MotionControlName+std::string(".")+"EngineMoment", "Amplitude", amplitude);
+ ExtMomentEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
+
+ if(MomentTrackBar->Position>0)
+  MomentProgressBar->Position=MomentTrackBar->Position;
+ else
+  MomentProgressBar->Position=-MomentTrackBar->Position;
 }
 //---------------------------------------------------------------------------
 
