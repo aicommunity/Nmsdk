@@ -1,3 +1,3 @@
-#include "../../RDK/Deploy/Include/rdk_linux.cpp"
+#include "../../RDK/Deploy/Include/rdk.gcc.cpp"
 #include "nmsdk.cpp"
 

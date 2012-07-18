@@ -15,7 +15,7 @@ See file license.txt for more information
 #ifndef N_GRAPHICS_H
 #define N_GRAPHICS_H
 
-#include "../../Kernel/NBios.h"
+#include "../Kernel/NBios.h"
 #include "rdk.h"
 
 namespace NMSDK {
