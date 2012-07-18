@@ -10,6 +10,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include "rdk_initdll.h"
 #include <Vcl.ComCtrls.hpp>
+#include "TUVisualControllerFormUnit.h"
 #include <string>
 #include "myrdk.h"
 #include "TUVisualController.h"

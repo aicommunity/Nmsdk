@@ -6,9 +6,10 @@
 #include "TNDCEngineControlFormUnit.h"
 #include "TUBitmap.h"
 #include "UEngineMonitorFormUnit.h"
-#include "myrdk.h"
+#include "nmsdk_cpp_initdll.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma link "TUVisualControllerFormUnit"
 #pragma resource "*.dfm"
 TNDCEngineControlForm *NDCEngineControlForm;
 //---------------------------------------------------------------------------
