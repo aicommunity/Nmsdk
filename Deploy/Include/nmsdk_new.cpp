@@ -16,7 +16,7 @@ extern NMSDK::NEnvironment* CreateNewEnvironment(void)
 
  env->AddClassLibrary(&NMSDK::BCLLibrary);
  env->AddClassLibrary(&NMSDK::ActLibrary);
- env->AddClassLibrary(&NMSDK::CRLibrary);
+// env->AddClassLibrary(&NMSDK::CRLibrary);
  env->AddClassLibrary(&NMSDK::MathLibrary);
  env->AddClassLibrary(&NMSDK::PhysLibrary);
  env->AddClassLibrary(&NMSDK::SensorLibrary);
