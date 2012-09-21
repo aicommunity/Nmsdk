@@ -201,6 +201,11 @@
 				<DependentOn>..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.h</DependentOn>
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.cpp">
+				<Form>UCRPerseptronForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.h</DependentOn>
+				<BuildOrder>31</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\UEngineControlFormUnit.cpp">
 				<Form>UEngineControlForm</Form>
 				<DependentOn>..\..\..\RDK\GUI\BCB\UEngineControlFormUnit.h</DependentOn>
@@ -254,19 +259,20 @@
 			<ResFiles Include="MotionControl.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>
-			<FormResources Include="MainFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
+			<FormResources Include="MainFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\GUI\BCB\TNManipulatorControlForm.dfm"/>
 			<FormResources Include="..\..\..\GUI\BCB\TNDCEngineControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
@@ -277,7 +283,7 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

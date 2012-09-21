@@ -3,7 +3,7 @@
   Top = 0
   Caption = 'NManipulatorControlForm'
   ClientHeight = 434
-  ClientWidth = 527
+  ClientWidth = 693
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,29 +19,33 @@
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 527
+    Width = 693
     Height = 29
     Caption = 'ToolBar1'
     Images = ImageList
     TabOrder = 0
+    ExplicitWidth = 527
   end
   object StatusBar1: TStatusBar
     Left = 0
     Top = 415
-    Width = 527
+    Width = 693
     Height = 19
     Panels = <>
+    ExplicitWidth = 527
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 29
-    Width = 527
+    Width = 693
     Height = 386
     ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 527
     object TabSheet1: TTabSheet
       Caption = 'Communication'
+      ExplicitWidth = 519
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -146,15 +150,16 @@
       object GroupBox2: TGroupBox
         Left = 0
         Top = 0
-        Width = 519
+        Width = 685
         Height = 49
         Align = alTop
         Caption = ' Manipulator component name  '
         TabOrder = 1
+        ExplicitWidth = 519
         object ComponentSelectionPanel: TPanel
           Left = 2
           Top = 15
-          Width = 515
+          Width = 681
           Height = 32
           Align = alClient
           Caption = 'Double click to select manipulator component'
@@ -162,87 +167,95 @@
           ParentBackground = False
           TabOrder = 0
           OnDblClick = ComponentSelectionPanelDblClick
+          ExplicitWidth = 515
         end
       end
       object GroupBox3: TGroupBox
         Left = 233
         Top = 98
-        Width = 286
+        Width = 452
         Height = 260
         Align = alClient
         Caption = ' Communication control '
         Enabled = False
         TabOrder = 2
+        ExplicitWidth = 286
         DesignSize = (
-          286
+          452
           260)
         object ConnectButton: TButton
           Left = 6
           Top = 20
-          Width = 277
+          Width = 443
           Height = 25
           Anchors = [akLeft, akTop, akRight]
           Caption = ' Connect '
           TabOrder = 0
           OnClick = ConnectButtonClick
+          ExplicitWidth = 277
         end
         object DisconnectButton: TButton
           Left = 6
           Top = 51
-          Width = 277
+          Width = 443
           Height = 25
           Anchors = [akLeft, akTop, akRight]
           Caption = ' Disconnect '
           Enabled = False
           TabOrder = 1
           OnClick = DisconnectButtonClick
+          ExplicitWidth = 277
         end
         object ResetButton: TButton
           Left = 6
           Top = 144
-          Width = 277
+          Width = 443
           Height = 25
           Anchors = [akLeft, akTop, akRight]
           Caption = ' Reset '
           Enabled = False
           TabOrder = 2
           OnClick = ResetButtonClick
+          ExplicitWidth = 277
         end
         object StartButton: TButton
           Left = 6
           Top = 82
-          Width = 277
+          Width = 443
           Height = 25
           Anchors = [akLeft, akTop, akRight]
           Caption = ' Start '
           Enabled = False
           TabOrder = 3
           OnClick = StartButtonClick
+          ExplicitWidth = 277
         end
         object StopButton: TButton
           Left = 6
           Top = 113
-          Width = 277
+          Width = 443
           Height = 25
           Anchors = [akLeft, akTop, akRight]
           Caption = ' Stop '
           Enabled = False
           TabOrder = 4
           OnClick = StopButtonClick
+          ExplicitWidth = 277
         end
       end
       object GroupBox6: TGroupBox
         Left = 0
         Top = 49
-        Width = 519
+        Width = 685
         Height = 49
         Align = alTop
         Caption = ' Control system component name  '
         TabOrder = 3
+        ExplicitWidth = 519
         object ControlSystemSelectionPanel: TPanel
           Left = 2
           Top = 15
-          Width = 515
+          Width = 681
           Height = 32
           Align = alClient
           Caption = 'Double click to select control system'
@@ -250,12 +263,14 @@
           ParentBackground = False
           TabOrder = 0
           OnDblClick = ControlSystemSelectionPanelDblClick
+          ExplicitWidth = 515
         end
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
+      ExplicitWidth = 519
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
@@ -352,14 +367,16 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
+      ExplicitWidth = 519
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
         Width = 201
         Height = 358
         Align = alLeft
-        Caption = ' '#1042#1085#1077#1096#1085#1077#1077' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1077' '
+        Caption = ' External control '
         TabOrder = 0
+        ExplicitHeight = 280
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -418,7 +435,7 @@
           Top = 128
           Width = 181
           Height = 17
-          Caption = #1054#1057' '#1087#1086' '#1091#1075#1083#1086#1074#1086#1081' '#1089#1082#1086#1088#1086#1089#1090#1080' (Ia) '
+          Caption = 'FB by angle speed (Ia) '
           Checked = True
           State = cbChecked
           TabOrder = 4
@@ -429,7 +446,7 @@
           Top = 150
           Width = 181
           Height = 17
-          Caption = #1054#1057' '#1087#1086' '#1082#1088#1091#1090#1103#1097#1077#1084#1091' '#1084#1086#1084#1077#1085#1090#1091' (Ib) '
+          Caption = 'FB by moment (Ib) '
           TabOrder = 5
           OnClick = IbCheckBoxClick
         end
@@ -438,7 +455,7 @@
           Top = 170
           Width = 187
           Height = 17
-          Caption = #1054#1057' '#1087#1086' '#1091#1075#1083#1091' (II) '
+          Caption = 'FB by angle (II) '
           Checked = True
           State = cbChecked
           TabOrder = 6
@@ -449,7 +466,7 @@
           Top = 193
           Width = 181
           Height = 17
-          Caption = #1059#1087#1088#1072#1074#1083#1103#1102#1097#1077#1077' '#1074#1086#1079#1076#1077#1081#1089#1090#1074#1080#1077' (U) '
+          Caption = 'Control power (U) '
           Checked = True
           State = cbChecked
           TabOrder = 7
@@ -462,12 +479,248 @@
           Height = 60
           Align = alBottom
           Caption = ' '#1054#1059
-          ItemIndex = 0
+          ItemIndex = 1
           Items.Strings = (
-            #1052#1086#1076#1077#1083#1100
-            #1052#1072#1085#1080#1087#1091#1083#1103#1090#1086#1088)
+            'Model'
+            'Manipulator')
           TabOrder = 8
           OnClick = RadioGroup1Click
+          ExplicitTop = 218
+        end
+      end
+      object Panel1: TPanel
+        Left = 201
+        Top = 0
+        Width = 484
+        Height = 358
+        Align = alClient
+        TabOrder = 1
+        ExplicitLeft = 288
+        ExplicitTop = 256
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+        object GroupBox7: TGroupBox
+          Left = 1
+          Top = 1
+          Width = 482
+          Height = 176
+          Align = alTop
+          Caption = 'Control system parameters '
+          TabOrder = 0
+          ExplicitLeft = -71
+          ExplicitTop = -32
+          ExplicitWidth = 316
+          object Label8: TLabel
+            Left = 14
+            Top = 21
+            Width = 145
+            Height = 13
+            Caption = #1055#1086#1089#1090'. '#1074#1088#1077#1084#1077#1085#1080' '#1088#1072#1079#1088#1103#1076#1072' PAC:'
+          end
+          object Label10: TLabel
+            Left = 14
+            Top = 116
+            Width = 85
+            Height = 13
+            Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100' PAC:'
+          end
+          object Label13: TLabel
+            Left = 14
+            Top = 70
+            Width = 139
+            Height = 13
+            Caption = #1055#1086#1089#1090'. '#1074#1088#1077#1084#1077#1085#1080' '#1079#1072#1088#1103#1076#1072' PAC:'
+          end
+          object PACActivatorTimeTrackBar: TTrackBar
+            Left = 7
+            Top = 84
+            Width = 141
+            Height = 27
+            Max = 10000
+            Min = 10
+            Position = 10
+            TabOrder = 0
+            OnChange = PACActivatorTimeTrackBarChange
+          end
+          object PACActivatorTimeEdit: TEdit
+            Left = 146
+            Top = 86
+            Width = 48
+            Height = 21
+            TabOrder = 1
+            Text = '1'
+          end
+          object PACDeactivatorTimeEdit: TEdit
+            Left = 144
+            Top = 38
+            Width = 48
+            Height = 21
+            TabOrder = 2
+            Text = '1'
+          end
+          object PACDeactivatorTimeTrackBar: TTrackBar
+            Left = 5
+            Top = 36
+            Width = 141
+            Height = 27
+            Max = 10000
+            Min = 10
+            Position = 100
+            TabOrder = 3
+            OnChange = PACDeactivatorTimeTrackBarChange
+          end
+          object PACMultiplicatorTrackBar: TTrackBar
+            Left = 7
+            Top = 132
+            Width = 141
+            Height = 27
+            Max = 10000
+            Min = 10
+            Position = 10
+            TabOrder = 4
+          end
+          object PACMultiplicatorEdit: TEdit
+            Left = 146
+            Top = 132
+            Width = 48
+            Height = 21
+            TabOrder = 5
+            Text = '1'
+          end
+          object GroupBox9: TGroupBox
+            Left = 216
+            Top = 15
+            Width = 264
+            Height = 159
+            Align = alRight
+            Caption = ' Visual '
+            TabOrder = 6
+            object Image: TImage
+              Left = 2
+              Top = 15
+              Width = 260
+              Height = 142
+              Align = alClient
+              AutoSize = True
+              Center = True
+              IncrementalDisplay = True
+              Proportional = True
+              Stretch = True
+              ExplicitLeft = 200
+              ExplicitWidth = 280
+              ExplicitHeight = 159
+            end
+          end
+        end
+        object GroupBox8: TGroupBox
+          Left = 1
+          Top = 177
+          Width = 482
+          Height = 180
+          Align = alClient
+          Caption = ' Neuro manipulator parameters '
+          TabOrder = 1
+          ExplicitTop = 136
+          ExplicitWidth = 316
+          ExplicitHeight = 221
+          object Label12: TLabel
+            Left = 14
+            Top = 151
+            Width = 16
+            Height = 13
+            Caption = 'Va:'
+          end
+          object Label11: TLabel
+            Left = 87
+            Top = 150
+            Width = 16
+            Height = 13
+            Caption = 'Vd:'
+          end
+          object Label7: TLabel
+            Left = 14
+            Top = 57
+            Width = 97
+            Height = 13
+            Caption = #1042#1088#1077#1084#1103' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103':'
+          end
+          object Label9: TLabel
+            Left = 12
+            Top = 16
+            Width = 127
+            Height = 13
+            Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103':'
+          end
+          object VaEdit: TEdit
+            Left = 33
+            Top = 148
+            Width = 48
+            Height = 21
+            TabOrder = 0
+            Text = '100'
+          end
+          object VdEdit: TEdit
+            Left = 111
+            Top = 148
+            Width = 48
+            Height = 21
+            TabOrder = 1
+            Text = '5'
+          end
+          object SendVButton: TButton
+            Left = 165
+            Top = 146
+            Width = 91
+            Height = 25
+            Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
+            TabOrder = 2
+            OnClick = SendVButtonClick
+          end
+          object VoltageMulTrackBar: TTrackBar
+            Left = 5
+            Top = 30
+            Width = 141
+            Height = 27
+            Max = 5000
+            Position = 200
+            TabOrder = 3
+            OnChange = VoltageMulTrackBarChange
+          end
+          object TimeDurationTrackBar: TTrackBar
+            Left = 5
+            Top = 72
+            Width = 141
+            Height = 27
+            Max = 256
+            Min = 1
+            Position = 1
+            TabOrder = 4
+            OnChange = TimeDurationTrackBarChange
+          end
+          object VoltageMulEdit: TEdit
+            Left = 144
+            Top = 32
+            Width = 48
+            Height = 21
+            TabOrder = 5
+            Text = '1'
+          end
+          object TimeDurationEdit: TEdit
+            Left = 144
+            Top = 74
+            Width = 48
+            Height = 21
+            TabOrder = 6
+            Text = '1'
+          end
+          object MulToNumberOfControlElementsCheckBox: TCheckBox
+            Left = 198
+            Top = 34
+            Width = 50
+            Height = 17
+            Caption = #1087#1086' N'
+            TabOrder = 7
+          end
         end
       end
     end

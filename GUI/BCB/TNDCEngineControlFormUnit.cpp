@@ -7,6 +7,7 @@
 #include "TUBitmap.h"
 #include "UEngineMonitorFormUnit.h"
 #include "nmsdk_cpp_initdll.h"
+#include "TUVisualControllerFormUnit.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TUVisualControllerFormUnit"
@@ -71,8 +72,7 @@ void __fastcall TNDCEngineControlForm::FormShow(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TNDCEngineControlForm::IaCheckBoxClick(TObject *Sender)
 {
- bool res;
-// NAContainer* cont;
+ bool res=true;
  std::string MotionControlNameTemp=MotionControlName+".";
 
   std::size_t num_motions=RDK::ReadParameterValue<double>(MotionControlName,"NumMotionElements");
@@ -84,11 +84,11 @@ void __fastcall TNDCEngineControlForm::IaCheckBoxClick(TObject *Sender)
 	std::string pos_separator=MotionControlNameTemp+std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=MotionControlNameTemp+std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1);
 
-	res=Model_BreakLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
-	res=Model_BreakLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
+	res&=Model_BreakLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
+	res&=Model_BreakLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
 
-	res=Model_CreateLink(pos_separator.c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
-	res=Model_CreateLink(neg_separator.c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
+	res&=Model_CreateLink(pos_separator.c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
+	res&=Model_CreateLink(neg_separator.c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
    }
   }
   else
@@ -99,11 +99,11 @@ void __fastcall TNDCEngineControlForm::IaCheckBoxClick(TObject *Sender)
 	std::string pos_separator=MotionControlNameTemp+std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=MotionControlNameTemp+std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1);
 
-	res=Model_BreakLink(pos_separator.c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
-	res=Model_BreakLink(neg_separator.c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
+	res&=Model_BreakLink(pos_separator.c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
+	res&=Model_BreakLink(neg_separator.c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
 
-	res=Model_CreateLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
-	res=Model_CreateLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
+	res&=Model_CreateLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia2.Receptor").c_str(),0);
+	res&=Model_CreateLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ia1.Receptor").c_str(),0);
    }
   }
 
@@ -114,32 +114,9 @@ void __fastcall TNDCEngineControlForm::IaCheckBoxClick(TObject *Sender)
 
 void __fastcall TNDCEngineControlForm::IbCheckBoxClick(TObject *Sender)
 {
- bool res;
-// NAContainer* cont;
+ bool res=true;
  std::string MotionControlNameTemp=MotionControlName+".";
-				 /*
- if(MainForm->AfferentModeComboBox->ItemIndex == 0)
- {
-  if(IbCheckBox->Checked)
-  {
-   res=ControlSystem->BreakLink("AfferentSource1",0,"MotionElement0.Afferent_Ib2.Receptor",0);
-   res=ControlSystem->BreakLink("AfferentSource1",0,"MotionElement0.Afferent_Ib1.Receptor",0);
 
-   res=ControlSystem->CreateLink("Ib_PosSignumSeparator",0,"MotionElement0.Afferent_Ib1.Receptor",0);
-   res=ControlSystem->CreateLink("Ib_NegSignumSeparator",0,"MotionElement0.Afferent_Ib2.Receptor",0);
-  }
-  else
-  {
-   res=ControlSystem->BreakLink("Ib_PosSignumSeparator",0,"MotionElement0.Afferent_Ib1.Receptor",0);
-   res=ControlSystem->BreakLink("Ib_NegSignumSeparator",0,"MotionElement0.Afferent_Ib2.Receptor",0);
-
-   res=ControlSystem->CreateLink("AfferentSource1",0,"MotionElement0.Afferent_Ib2.Receptor",0);
-   res=ControlSystem->CreateLink("AfferentSource1",0,"MotionElement0.Afferent_Ib1.Receptor",0);
-  }
- }
-					  */
-// if(MainForm->AfferentModeComboBox->ItemIndex >0)
-// {
   int num_motions=RDK::ReadParameterValue<double>(MotionControlName,"NumMotionElements");
   if(IbCheckBox->Checked)
   {
@@ -171,7 +148,7 @@ void __fastcall TNDCEngineControlForm::IbCheckBoxClick(TObject *Sender)
 	res=Model_CreateLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_Ib2.Receptor").c_str(),0);
    }
   }
-// }
+
  if(!res)
   return;
 }
@@ -181,30 +158,7 @@ void __fastcall TNDCEngineControlForm::IICheckBoxClick(TObject *Sender)
 {
  bool res=true;
  std::string MotionControlNameTemp=MotionControlName+".";
-// NADItem* cont;
-/*
- if(MainForm->AfferentModeComboBox->ItemIndex == 0)
- {
-  if(IICheckBox->Checked)
-  {
-   res&=ControlSystem->BreakLink("AfferentSource1",0,"MotionElement0.Afferent_II2.Receptor",0);
-   res&=ControlSystem->BreakLink("AfferentSource1",0,"MotionElement0.Afferent_II1.Receptor",0);
 
-   res&=ControlSystem->CreateLink("II_PosSignumSeparator",0,"MotionElement0.Afferent_II1.Receptor",0);
-   res&=ControlSystem->CreateLink("II_NegSignumSeparator",0,"MotionElement0.Afferent_II2.Receptor",0);
-  }
-  else
-  {
-   res&=ControlSystem->BreakLink("II_PosSignumSeparator",0,"MotionElement0.Afferent_II1.Receptor",0);
-   res&=ControlSystem->BreakLink("II_NegSignumSeparator",0,"MotionElement0.Afferent_II2.Receptor",0);
-
-   res&=ControlSystem->CreateLink("AfferentSource1",0,"MotionElement0.Afferent_II2.Receptor",0);
-   res&=ControlSystem->CreateLink("AfferentSource1",0,"MotionElement0.Afferent_II1.Receptor",0);
-  }
- }
-		*/
-// if(MainForm->AfferentModeComboBox->ItemIndex >0)
-// {
   int num_motions=RDK::ReadParameterValue<double>(MotionControlName,"NumMotionElements");
   if(IICheckBox->Checked)
   {
@@ -236,7 +190,7 @@ void __fastcall TNDCEngineControlForm::IICheckBoxClick(TObject *Sender)
 	res&=Model_CreateLink((MotionControlNameTemp+"AfferentSource1").c_str(),0,(motion+".Afferent_II1.Receptor").c_str(),0);
    }
   }
-// }
+
  if(!res)
   return;
 }

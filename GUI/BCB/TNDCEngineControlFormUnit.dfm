@@ -50,7 +50,6 @@ object NDCEngineControlForm: TNDCEngineControlForm
     Height = 200
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = 1
   end
   object Panel3: TPanel
     Left = 256

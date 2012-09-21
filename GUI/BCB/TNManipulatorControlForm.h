@@ -12,13 +12,14 @@
 #include <Vcl.ToolWin.hpp>
 #include <Vcl.ImgList.hpp>
 #include <Vcl.Menus.hpp>
+#include "TUVisualControllerFormUnit.h"
 #include <string>
 
 #include "nmsdk_cpp_initdll.h"
 #include "nmsdk.bcb.h"
 
 //---------------------------------------------------------------------------
-class TNManipulatorControlForm : public TForm
+class TNManipulatorControlForm : public TUVisualControllerForm
 {
 __published:	// IDE-managed Components
 	TToolBar *ToolBar1;
@@ -65,6 +66,9 @@ __published:	// IDE-managed Components
 	TTrackBar *TrackBarPWM;
 	TComboBox *ComboBoxDir;
 	TComboBox *CBoxServoMove;
+	TMenuItem *SelectControlSystem1;
+	TGroupBox *GroupBox6;
+	TPanel *ControlSystemSelectionPanel;
 	TGroupBox *GroupBox5;
 	TLabel *Label5;
 	TLabel *Label6;
@@ -76,10 +80,33 @@ __published:	// IDE-managed Components
 	TCheckBox *IbCheckBox;
 	TCheckBox *IICheckBox;
 	TCheckBox *ControlVoltageCheckBox;
-	TMenuItem *SelectControlSystem1;
-	TGroupBox *GroupBox6;
-	TPanel *ControlSystemSelectionPanel;
 	TRadioGroup *RadioGroup1;
+	TPanel *Panel1;
+	TGroupBox *GroupBox7;
+	TLabel *Label8;
+	TLabel *Label10;
+	TTrackBar *PACActivatorTimeTrackBar;
+	TEdit *PACActivatorTimeEdit;
+	TEdit *PACDeactivatorTimeEdit;
+	TTrackBar *PACDeactivatorTimeTrackBar;
+	TGroupBox *GroupBox8;
+	TLabel *Label12;
+	TEdit *VaEdit;
+	TEdit *VdEdit;
+	TLabel *Label11;
+	TButton *SendVButton;
+	TTrackBar *VoltageMulTrackBar;
+	TTrackBar *TimeDurationTrackBar;
+	TLabel *Label7;
+	TLabel *Label9;
+	TEdit *VoltageMulEdit;
+	TEdit *TimeDurationEdit;
+	TCheckBox *MulToNumberOfControlElementsCheckBox;
+	TLabel *Label13;
+	TTrackBar *PACMultiplicatorTrackBar;
+	TEdit *PACMultiplicatorEdit;
+	TGroupBox *GroupBox9;
+	TImage *Image;
 	void __fastcall Disconnect1Click(TObject *Sender);
 	void __fastcall MoveLeft1Click(TObject *Sender);
 	void __fastcall MoveRight1Click(TObject *Sender);
@@ -99,15 +126,20 @@ __published:	// IDE-managed Components
 	void __fastcall Stop1Click(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall SelectControlSystem1Click(TObject *Sender);
+	void __fastcall ControlSystemSelectionPanelDblClick(TObject *Sender);
 	void __fastcall IaCheckBoxClick(TObject *Sender);
 	void __fastcall IIAfferentTrackBarChange(TObject *Sender);
 	void __fastcall IINumAfferentTrackBarChange(TObject *Sender);
 	void __fastcall IbCheckBoxClick(TObject *Sender);
 	void __fastcall IICheckBoxClick(TObject *Sender);
 	void __fastcall ControlVoltageCheckBoxClick(TObject *Sender);
-	void __fastcall SelectControlSystem1Click(TObject *Sender);
-	void __fastcall ControlSystemSelectionPanelDblClick(TObject *Sender);
 	void __fastcall RadioGroup1Click(TObject *Sender);
+	void __fastcall VoltageMulTrackBarChange(TObject *Sender);
+	void __fastcall TimeDurationTrackBarChange(TObject *Sender);
+	void __fastcall PACDeactivatorTimeTrackBarChange(TObject *Sender);
+	void __fastcall PACActivatorTimeTrackBarChange(TObject *Sender);
+	void __fastcall SendVButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNManipulatorControlForm(TComponent* Owner);
@@ -125,12 +157,40 @@ RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
 RDK::UEPtr<NMSDK::NPulseGenerator> IIPosAfferent,IINegAfferent;
 RDK::UEPtr<NMSDK::NPulseGenerator> MN1PosControl,MN1NegControl;
 
+// Отображаемое изображение
+RDK::UBitmap BmpCanvas;
+RDK::UGraphics BmpGraphics;
 
-bool UpdateInterfaceFlag;
+// Разрешение изображения
+int CanvasWidth,CanvasHeight;
 
-void UpdateInterface(void);
+// Координаты узла звена
+double X,Y;
+
+// Угол поворота звена
+double Angle;
+
+// Длина звена (пикс)
+double Length;
+
+// Имя компонента с которого считываем данные
+std::string ReadComponentName;
+
+
+// Сохраняет параметры интерфейса в xml
+virtual void ASaveParameters(RDK::Serialize::USerStorageXML &xml);
+
+// Загружает параметры интерфейса из xml
+virtual void ALoadParameters(RDK::Serialize::USerStorageXML &xml);
+
+
+void AUpdateInterface(void);
 
 bool ManipulatorCSConnect(const std::string &cs_name, const std::string &man_name);
+
+// Считывает данные из компонента
+void ReadComponentData(void);
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TNManipulatorControlForm *NManipulatorControlForm;

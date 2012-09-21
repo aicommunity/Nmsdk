@@ -5,21 +5,27 @@
 
 #include "TNManipulatorControlForm.h"
 #include "UComponentsListFormUnit.h"
+#include "TUBitmap.h"
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TNManipulatorControlForm *NManipulatorControlForm;
 //---------------------------------------------------------------------------
 __fastcall TNManipulatorControlForm::TNManipulatorControlForm(TComponent* Owner)
-	: TForm(Owner)
+	: TUVisualControllerForm(Owner)
 {
- UpdateInterfaceFlag=false;
+ BmpGraphics.SetCanvas(&BmpCanvas);
+ CanvasWidth=640;
+ CanvasHeight=480;
+ Length=100;
+ X=CanvasWidth/2;
+ Y=CanvasHeight/2;
+ BmpGraphics.SetPenWidth(4);
 }
 
-void TNManipulatorControlForm::UpdateInterface(void)
+void TNManipulatorControlForm::AUpdateInterface(void)
 {
- UpdateInterfaceFlag=true;
-
  if(ManipulatorName.empty())
  {
   ComponentSelectionPanel->Color=clRed;
@@ -75,8 +81,64 @@ void TNManipulatorControlForm::UpdateInterface(void)
   }
  }
 
- UpdateInterfaceFlag=false;
+ if(ControlSystem)
+ {
+  int num_motions=ControlSystem->NumMotionElements;
+  IINumAfferentTrackBar->Max=num_motions;
+  IINumAfferentTrackBar->Enabled=true;
+  IIAfferentTrackBar->Enabled=true;
+ }
+ else
+ {
+  IINumAfferentTrackBar->Enabled=false;
+  IIAfferentTrackBar->Enabled=false;
+ }
+
+ ReadComponentData();
+ BmpCanvas.SetRes(CanvasWidth,CanvasHeight,RDK::ubmRGB24);
+ BmpCanvas.Fill(RDK::UColorT(255,255,255));
+ BmpGraphics.Line(X,Y,X+Length*cos(Angle),Y+Length*sin(Angle));
+ BmpCanvas>>Image->Picture->Bitmap;
+ Image->Repaint();
 }
+
+// Сохраняет параметры интерфейса в xml
+void TNManipulatorControlForm::ASaveParameters(RDK::Serialize::USerStorageXML &xml)
+{
+ xml.SelectNodeForce("Control");
+ xml.WriteString("ManipulatorName",ManipulatorName);
+ xml.WriteString("ControlSystemName",ControlSystemName);
+ xml.SelectUp();
+}
+
+// Загружает параметры интерфейса из xml
+void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &xml)
+{
+ xml.SelectNodeForce("Control");
+ ManipulatorName=xml.ReadString("ManipulatorName","");
+ if(!ManipulatorName.empty())
+  Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
+ if(!Manipulator)
+  ManipulatorName="";
+
+ ControlSystemName=xml.ReadString("ControlSystemName","");
+ if(!ControlSystemName.empty())
+  ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(GetModel()->GetComponentL(ControlSystemName));
+ if(!ControlSystem)
+  ControlSystemName="";
+ else
+ {
+  RadioGroup1Click(this);
+ }
+
+ xml.SelectUp();
+
+ PACActivatorTimeTrackBar->Position=10;
+ PACDeactivatorTimeTrackBar->Position=100;
+ PACDeactivatorTimeTrackBarChange(this);
+ PACActivatorTimeTrackBarChange(this);
+}
+
 
 
 bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, const std::string &man_name)
@@ -91,15 +153,26 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
 
  // Связываем все управляющие элементы
  int motion_elements=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(net->GetComponentL(cs_name))->NumMotionElements;
+ int conn_index=1;
  for(int i=0;i<motion_elements;i++)
  {
   res&=net->CreateLink(cs_name+std::string(".MotionElement")+RDK::sntoa(i)
-	+".Motoneuron1.LTZone",0,man_name);
+	+".Motoneuron1.LTZone",0,man_name,conn_index++);
   res&=net->CreateLink(cs_name+std::string(".MotionElement")+RDK::sntoa(i)
-	+".Motoneuron2.LTZone",0,man_name);
+	+".Motoneuron2.LTZone",0,man_name,conn_index++);
  }
  return res;
 }
+
+
+// Считывает данные из компонента
+void TNManipulatorControlForm::ReadComponentData(void)
+{
+ if(!ControlSystem)
+  return;
+ Angle=RDK::dynamic_pointer_cast<RDK::UADItem>(GetModel()->GetComponentL(ReadComponentName))->GetOutputData(1).Double[0];
+}
+
 //---------------------------------------------------------------------------
 void __fastcall TNManipulatorControlForm::Disconnect1Click(TObject *Sender)
 {
@@ -144,6 +217,7 @@ void __fastcall TNManipulatorControlForm::SelectManipulator1Click(TObject *Sende
  if(!Manipulator)
   ManipulatorName="";
 
+
  UpdateInterface();
 }
 //---------------------------------------------------------------------------
@@ -185,6 +259,8 @@ void __fastcall TNManipulatorControlForm::EmulatorModeRadioButtonClick(TObject *
 
 void __fastcall TNManipulatorControlForm::FormShow(TObject *Sender)
 {
+ PACActivatorTimeTrackBar->Position=10;
+ PACDeactivatorTimeTrackBar->Position=100;
  UpdateInterface();
 }
 //---------------------------------------------------------------------------
@@ -321,7 +397,11 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 void __fastcall TNManipulatorControlForm::IIAfferentTrackBarChange(TObject *Sender)
 
 {
-// IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(GetModel()->GetComponentL(ControlSystemName));
+ if(!ControlSystem)
+  return;
+
+ IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator"));
+ IINegAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator"));
 
 
  if(!IIPosAfferent || !IINegAfferent)
@@ -504,6 +584,8 @@ void __fastcall TNManipulatorControlForm::SelectControlSystem1Click(TObject *Sen
  ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(GetModel()->GetComponentL(ControlSystemName));
  if(!ControlSystem)
   ControlSystemName="";
+ else
+  RadioGroup1Click(Sender);
 
  UpdateInterface();
 }
@@ -525,10 +607,14 @@ void __fastcall TNManipulatorControlForm::RadioGroup1Click(TObject *Sender)
   return;
 
  if(!ManipulatorName.empty() && !ControlSystemName.empty())
+ {
+  Manipulator->BreakLinks(ControlSystem);
   ManipulatorCSConnect(ControlSystemName, ManipulatorName);
+ }
 
  if(!RadioGroup1->ItemIndex)
  {
+  ReadComponentName=ControlSystemName+".Engine";
   for(int i=0;i<num_ranges;i++)
   {
    res&=ControlSystem->BreakLink("NManipulatorSource1",2,
@@ -583,6 +669,7 @@ void __fastcall TNManipulatorControlForm::RadioGroup1Click(TObject *Sender)
  }
  else
  {
+  ReadComponentName=ManipulatorName;
   for(int i=0;i<num_ranges;i++)
   {
    res&=ControlSystem->BreakLink("NManipulatorSourceEmulator1",2,
@@ -635,6 +722,99 @@ void __fastcall TNManipulatorControlForm::RadioGroup1Click(TObject *Sender)
 //  Engine=(NManipulatorSource*)cont;
  }
 
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TNManipulatorControlForm::VoltageMulTrackBarChange(TObject *Sender)
+
+{
+ double value=VoltageMulTrackBar->Position/100.0;
+ VoltageMulEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ if(!Manipulator)
+  return;
+
+ if(RadioGroup1->ItemIndex != 0)
+  {
+	Manipulator->OutputMul=value;
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::TimeDurationTrackBarChange(TObject *Sender)
+
+{
+ double value=TimeDurationTrackBar->Position;
+ TimeDurationEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ if(!Manipulator)
+  return;
+
+ if(RadioGroup1->ItemIndex != 0)
+  {
+   Manipulator->TimeDuration=value;
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::PACDeactivatorTimeTrackBarChange(TObject *Sender)
+{
+ if(!ControlSystem || UpdateInterfaceFlag)
+  return;
+ int num_ranges=ControlSystem->NumMotionElements;
+ double value=double(PACDeactivatorTimeTrackBar->Position)/double(PACDeactivatorTimeTrackBar->Max);
+ PACDeactivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ if(engine_input)
+ {
+  std::vector<NMSDK::Real> values;
+
+  values.resize(num_ranges*2);
+  // Постоянная времени распада медиатора
+  for(size_t i=0;i<values.size();i++)
+   values[i].assign(1,value);
+  engine_input->DissociationTC=values;
+ }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::PACActivatorTimeTrackBarChange(TObject *Sender)
+
+{
+ if(!ControlSystem)
+  return;
+ int num_ranges=ControlSystem->NumMotionElements;
+ double value=double(PACActivatorTimeTrackBar->Position)/double(PACActivatorTimeTrackBar->Max);
+ PACActivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ if(engine_input)
+ {
+  std::vector<NMSDK::Real> values;
+
+  values.resize(num_ranges*2);
+  // Постоянная времени распада медиатора
+  for(size_t i=0;i<values.size();i++)
+   values[i].assign(1,value);
+  engine_input->SecretionTC=values;
+ }
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TNManipulatorControlForm::SendVButtonClick(TObject *Sender)
+{
+ if(!Manipulator)
+  return;
+
+ if(!ControlSystem)
+  return;
+
+ int num_ranges=ControlSystem->NumMotionElements;
+ Manipulator->SetAccumulationStep(StrToInt(VaEdit->Text)/num_ranges);
+ Manipulator->SetDissociationStep(StrToInt(VdEdit->Text));
 }
 //---------------------------------------------------------------------------
 
