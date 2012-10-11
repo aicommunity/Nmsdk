@@ -41,10 +41,10 @@ protected: // Основные свойства
 
 public: // Временные переменные
 // Счетчик импульса
-RDK::ULStateProperty<RDK::UTime,NPulseGenerator> PulseCounter;
+RDK::ULProperty<RDK::UTime,NPulseGenerator,ptPubState> PulseCounter;
 
 // Случайное значение текущей частоты
-RDK::ULStateProperty<real,NPulseGenerator> RandomFrequency;
+RDK::ULProperty<real,NPulseGenerator,ptPubState> RandomFrequency;
 
 public: // Методы
 // --------------------------
