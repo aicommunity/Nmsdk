@@ -140,6 +140,7 @@ __published:	// IDE-managed Components
 	void __fastcall PACDeactivatorTimeTrackBarChange(TObject *Sender);
 	void __fastcall PACActivatorTimeTrackBarChange(TObject *Sender);
 	void __fastcall SendVButtonClick(TObject *Sender);
+	void __fastcall PACMultiplicatorTrackBarChange(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNManipulatorControlForm(TComponent* Owner);
@@ -185,6 +186,9 @@ virtual void ALoadParameters(RDK::Serialize::USerStorageXML &xml);
 
 
 void AUpdateInterface(void);
+
+// Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
+void LoadInterfaceInfoFromNet(void);
 
 bool ManipulatorCSConnect(const std::string &cs_name, const std::string &man_name);
 

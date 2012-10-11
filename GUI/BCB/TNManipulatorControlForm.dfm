@@ -24,7 +24,6 @@
     Caption = 'ToolBar1'
     Images = ImageList
     TabOrder = 0
-    ExplicitWidth = 527
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -32,7 +31,6 @@
     Width = 693
     Height = 19
     Panels = <>
-    ExplicitWidth = 527
   end
   object PageControl1: TPageControl
     Left = 0
@@ -42,10 +40,8 @@
     ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 527
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitWidth = 519
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -155,7 +151,6 @@
         Align = alTop
         Caption = ' Manipulator component name  '
         TabOrder = 1
-        ExplicitWidth = 519
         object ComponentSelectionPanel: TPanel
           Left = 2
           Top = 15
@@ -167,7 +162,6 @@
           ParentBackground = False
           TabOrder = 0
           OnDblClick = ComponentSelectionPanelDblClick
-          ExplicitWidth = 515
         end
       end
       object GroupBox3: TGroupBox
@@ -179,7 +173,6 @@
         Caption = ' Communication control '
         Enabled = False
         TabOrder = 2
-        ExplicitWidth = 286
         DesignSize = (
           452
           260)
@@ -192,7 +185,6 @@
           Caption = ' Connect '
           TabOrder = 0
           OnClick = ConnectButtonClick
-          ExplicitWidth = 277
         end
         object DisconnectButton: TButton
           Left = 6
@@ -204,7 +196,6 @@
           Enabled = False
           TabOrder = 1
           OnClick = DisconnectButtonClick
-          ExplicitWidth = 277
         end
         object ResetButton: TButton
           Left = 6
@@ -216,7 +207,6 @@
           Enabled = False
           TabOrder = 2
           OnClick = ResetButtonClick
-          ExplicitWidth = 277
         end
         object StartButton: TButton
           Left = 6
@@ -228,7 +218,6 @@
           Enabled = False
           TabOrder = 3
           OnClick = StartButtonClick
-          ExplicitWidth = 277
         end
         object StopButton: TButton
           Left = 6
@@ -240,7 +229,6 @@
           Enabled = False
           TabOrder = 4
           OnClick = StopButtonClick
-          ExplicitWidth = 277
         end
       end
       object GroupBox6: TGroupBox
@@ -251,7 +239,6 @@
         Align = alTop
         Caption = ' Control system component name  '
         TabOrder = 3
-        ExplicitWidth = 519
         object ControlSystemSelectionPanel: TPanel
           Left = 2
           Top = 15
@@ -263,14 +250,12 @@
           ParentBackground = False
           TabOrder = 0
           OnDblClick = ControlSystemSelectionPanelDblClick
-          ExplicitWidth = 515
         end
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitWidth = 519
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
@@ -367,7 +352,6 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitWidth = 519
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -376,7 +360,6 @@
         Align = alLeft
         Caption = ' External control '
         TabOrder = 0
-        ExplicitHeight = 280
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -485,7 +468,6 @@
             'Manipulator')
           TabOrder = 8
           OnClick = RadioGroup1Click
-          ExplicitTop = 218
         end
       end
       object Panel1: TPanel
@@ -495,10 +477,6 @@
         Height = 358
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 288
-        ExplicitTop = 256
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object GroupBox7: TGroupBox
           Left = 1
           Top = 1
@@ -507,9 +485,6 @@
           Align = alTop
           Caption = 'Control system parameters '
           TabOrder = 0
-          ExplicitLeft = -71
-          ExplicitTop = -32
-          ExplicitWidth = 316
           object Label8: TLabel
             Left = 14
             Top = 21
@@ -574,10 +549,10 @@
             Top = 132
             Width = 141
             Height = 27
-            Max = 10000
-            Min = 10
+            Max = 100
             Position = 10
             TabOrder = 4
+            OnChange = PACMultiplicatorTrackBarChange
           end
           object PACMultiplicatorEdit: TEdit
             Left = 146
@@ -620,9 +595,6 @@
           Align = alClient
           Caption = ' Neuro manipulator parameters '
           TabOrder = 1
-          ExplicitTop = 136
-          ExplicitWidth = 316
-          ExplicitHeight = 221
           object Label12: TLabel
             Left = 14
             Top = 151

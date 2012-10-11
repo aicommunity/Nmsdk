@@ -26,6 +26,7 @@ __fastcall TNManipulatorControlForm::TNManipulatorControlForm(TComponent* Owner)
 
 void TNManipulatorControlForm::AUpdateInterface(void)
 {
+ LoadInterfaceInfoFromNet();
  if(ManipulatorName.empty())
  {
   ComponentSelectionPanel->Color=clRed;
@@ -102,6 +103,35 @@ void TNManipulatorControlForm::AUpdateInterface(void)
  Image->Repaint();
 }
 
+// Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
+void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
+{
+ if(!ControlSystem)
+  return;
+
+ int num_ranges=ControlSystem->NumMotionElements;
+ RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ PACMultiplicatorTrackBar->Position=engine_input->Gain[0][0];
+ PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->Gain[0][0],ffFixed,3,3);
+ PACActivatorTimeTrackBar->Position=engine_input->SecretionTC[0][0]*double(PACActivatorTimeTrackBar->Max);
+ PACActivatorTimeEdit->Text=FloatToStrF(engine_input->SecretionTC[0][0],ffFixed,3,3);
+ PACDeactivatorTimeTrackBar->Position=engine_input->DissociationTC[0][0]*double(PACDeactivatorTimeTrackBar->Max);
+ PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->DissociationTC[0][0],ffFixed,3,3);
+
+
+ if(!Manipulator)
+  return;
+
+ VoltageMulTrackBar->Position=Manipulator->OutputMul*100.0;
+ VoltageMulEdit->Text=FloatToStrF(Manipulator->OutputMul,ffFixed,3,3);
+
+ TimeDurationTrackBar->Position=Manipulator->TimeDuration;
+ TimeDurationEdit->Text=FloatToStrF(Manipulator->TimeDuration,ffFixed,3,3);
+
+ VaEdit->Text=Manipulator->GetAccumulationStep()*num_ranges;
+ VdEdit->Text=Manipulator->GetDissociationStep();
+}
+
 // Сохраняет параметры интерфейса в xml
 void TNManipulatorControlForm::ASaveParameters(RDK::Serialize::USerStorageXML &xml)
 {
@@ -133,10 +163,7 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
 
  xml.SelectUp();
 
- PACActivatorTimeTrackBar->Position=10;
- PACDeactivatorTimeTrackBar->Position=100;
- PACDeactivatorTimeTrackBarChange(this);
- PACActivatorTimeTrackBarChange(this);
+ LoadInterfaceInfoFromNet();
 }
 
 
@@ -259,8 +286,6 @@ void __fastcall TNManipulatorControlForm::EmulatorModeRadioButtonClick(TObject *
 
 void __fastcall TNManipulatorControlForm::FormShow(TObject *Sender)
 {
- PACActivatorTimeTrackBar->Position=10;
- PACDeactivatorTimeTrackBar->Position=100;
  UpdateInterface();
 }
 //---------------------------------------------------------------------------
@@ -555,8 +580,6 @@ void __fastcall TNManipulatorControlForm::ControlVoltageCheckBoxClick(TObject *S
  if(!ControlSystem)
   return;
 
- int num_motions=ControlSystem->NumMotionElements;
-
   if(ControlVoltageCheckBox->Checked == false)
   {
    res&=ControlSystem->BreakLink("Pac",0,"NManipulatorInput1",0);
@@ -815,6 +838,28 @@ void __fastcall TNManipulatorControlForm::SendVButtonClick(TObject *Sender)
  int num_ranges=ControlSystem->NumMotionElements;
  Manipulator->SetAccumulationStep(StrToInt(VaEdit->Text)/num_ranges);
  Manipulator->SetDissociationStep(StrToInt(VdEdit->Text));
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::PACMultiplicatorTrackBarChange(TObject *Sender)
+{
+ if(!ControlSystem || UpdateInterfaceFlag)
+  return;
+ int num_ranges=ControlSystem->NumMotionElements;
+ double value=double(PACMultiplicatorTrackBar->Position);
+ PACMultiplicatorEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ if(engine_input)
+ {
+  std::vector<NMSDK::Real> values;
+
+  values.resize(num_ranges*2);
+  for(size_t i=0;i<values.size();i++)
+   values[i].assign(1,value);
+  engine_input->Gain=values;
+ }
+
 }
 //---------------------------------------------------------------------------
 
