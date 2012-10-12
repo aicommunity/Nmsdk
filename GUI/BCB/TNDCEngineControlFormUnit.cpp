@@ -59,7 +59,8 @@ void TNDCEngineControlForm::AUpdateInterface(void)
 // —читывает данные из компонента
 void TNDCEngineControlForm::ReadComponentData(void)
 {
- Angle=RDK::ReadStateValue<double>(ComponentName,"Angle");
+ Angle=RDK::dynamic_pointer_cast<RDK::UADItem>(GetModel()->GetComponentL(ComponentName))->GetOutputData(1).Double[0];
+// Angle=RDK::ReadStateValue<double>(ComponentName,"Angle");
 }
 //---------------------------------------------------------------------------
 

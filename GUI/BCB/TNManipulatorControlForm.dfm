@@ -37,7 +37,7 @@
     Top = 29
     Width = 693
     Height = 386
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
     object TabSheet1: TTabSheet

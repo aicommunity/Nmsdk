@@ -147,8 +147,11 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
  xml.SelectNodeForce("Control");
  ManipulatorName=xml.ReadString("ManipulatorName","");
  if(!ManipulatorName.empty())
+ {
+  UniversalManipulator=RDK::dynamic_pointer_cast<NMSDK::UANet>(GetModel()->GetComponentL(ManipulatorName));
   Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
- if(!Manipulator)
+ }
+ if(!UniversalManipulator)
   ManipulatorName="";
 
  ControlSystemName=xml.ReadString("ControlSystemName","");
@@ -158,6 +161,7 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
   ControlSystemName="";
  else
  {
+  ManipulatorCSConnect(ControlSystemName, ManipulatorName);
   RadioGroup1Click(this);
  }
 
@@ -173,6 +177,8 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
  RDK::UEPtr<RDK::UANet> net=RDK::dynamic_pointer_cast<RDK::UANet>(GetModel());
 
  bool res=true;
+ RDK::dynamic_pointer_cast<RDK::UAConnector>(net->GetComponentL(cs_name+".NManipulatorSource1"))->DisconnectAllItems();
+ RDK::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1"))->DisconnectAll();
  res&=net->CreateLink(man_name,0,cs_name+".NManipulatorSource1",0);
  res&=net->CreateLink(man_name,1,cs_name+".NManipulatorSource1",1);
  res&=net->CreateLink(man_name,2,cs_name+".NManipulatorSource1",2);
@@ -197,6 +203,8 @@ void TNManipulatorControlForm::ReadComponentData(void)
 {
  if(!ControlSystem)
   return;
+ ReadComponentName=ManipulatorName;
+
  Angle=RDK::dynamic_pointer_cast<RDK::UADItem>(GetModel()->GetComponentL(ReadComponentName))->GetOutputData(1).Double[0];
 }
 
@@ -240,9 +248,11 @@ void __fastcall TNManipulatorControlForm::SelectManipulator1Click(TObject *Sende
  }
 
  ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
+ UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UANet>(GetModel()->GetComponentL(ManipulatorName));
  Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
- if(!Manipulator)
+ if(!UniversalManipulator)
   ManipulatorName="";
+ ManipulatorCSConnect(ControlSystemName, ManipulatorName);
 
 
  UpdateInterface();
@@ -310,7 +320,7 @@ void __fastcall TNManipulatorControlForm::DisconnectButtonClick(TObject *Sender)
 
 void __fastcall TNManipulatorControlForm::Reset1Click(TObject *Sender)
 {
- if(!Manipulator || !Manipulator->DMMoveServo)
+ if(!Manipulator || !Manipulator->DMReset)
   return;
 
  Manipulator->DMReset();
@@ -338,7 +348,7 @@ void __fastcall TNManipulatorControlForm::StopButtonClick(TObject *Sender)
 
 void __fastcall TNManipulatorControlForm::Start1Click(TObject *Sender)
 {
- if(!Manipulator || !Manipulator->DMMoveServo)
+ if(!Manipulator || !Manipulator->DMStart)
   return;
 
  Manipulator->DMStart();
@@ -348,7 +358,7 @@ void __fastcall TNManipulatorControlForm::Start1Click(TObject *Sender)
 
 void __fastcall TNManipulatorControlForm::Stop1Click(TObject *Sender)
 {
- if(!Manipulator || !Manipulator->DMMoveServo)
+ if(!Manipulator || !Manipulator->DMStop)
   return;
 
  Manipulator->DMStop();
@@ -623,6 +633,7 @@ void __fastcall TNManipulatorControlForm::ControlSystemSelectionPanelDblClick(TO
 
 void __fastcall TNManipulatorControlForm::RadioGroup1Click(TObject *Sender)
 {
+return;
  int num_ranges=ControlSystem->NumMotionElements;
  bool res=true;
 
@@ -855,11 +866,14 @@ void __fastcall TNManipulatorControlForm::PACMultiplicatorTrackBarChange(TObject
   std::vector<NMSDK::Real> values;
 
   values.resize(num_ranges*2);
-  for(size_t i=0;i<values.size();i++)
+  for(size_t i=0;i<values.size()/2;i++)
+   values[i].assign(1,-value);
+  for(size_t i=values.size()/2;i<values.size();i++)
    values[i].assign(1,value);
   engine_input->Gain=values;
  }
 
 }
 //---------------------------------------------------------------------------
+
 

@@ -10,7 +10,7 @@
 #include "UComponentsListFormUnit.h"
 #include "UComponentsControlFormUnit.h"
 #include "UComponentLinksFormUnit.h"
-#include "TNDCEngineControlFormUnit.h"
+//#include "TNDCEngineControlFormUnit.h"
 #include "TNManipulatorControlForm.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -41,7 +41,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::ButtonClick(TObject *Sender)
 {
- NDCEngineControlForm->Show();
+// NDCEngineControlForm->Show();
 }
 //---------------------------------------------------------------------------
 
