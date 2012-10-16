@@ -101,6 +101,15 @@ void TNManipulatorControlForm::AUpdateInterface(void)
  BmpGraphics.Line(X,Y,X+Length*cos(Angle),Y+Length*sin(Angle));
  BmpCanvas>>Image->Picture->Bitmap;
  Image->Repaint();
+
+ double value=double(PACMultiplicatorTrackBar->Position);
+ PACMultiplicatorEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ value=double(PACDeactivatorTimeTrackBar->Position)/double(PACDeactivatorTimeTrackBar->Max);
+ PACDeactivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ value=double(PACActivatorTimeTrackBar->Position)/double(PACActivatorTimeTrackBar->Max);
+ PACActivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 }
 
 // Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
@@ -110,14 +119,18 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
   return;
 
  int num_ranges=ControlSystem->NumMotionElements;
+ bool flag=UpdateInterfaceFlag;
  RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
- PACMultiplicatorTrackBar->Position=engine_input->Gain[0][0];
+ if(!flag)
+  UpdateInterfaceFlag=true;
+ PACMultiplicatorTrackBar->Position=fabs(engine_input->Gain[0][0]);
  PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->Gain[0][0],ffFixed,3,3);
  PACActivatorTimeTrackBar->Position=engine_input->SecretionTC[0][0]*double(PACActivatorTimeTrackBar->Max);
  PACActivatorTimeEdit->Text=FloatToStrF(engine_input->SecretionTC[0][0],ffFixed,3,3);
  PACDeactivatorTimeTrackBar->Position=engine_input->DissociationTC[0][0]*double(PACDeactivatorTimeTrackBar->Max);
  PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->DissociationTC[0][0],ffFixed,3,3);
-
+ if(!flag)
+  UpdateInterfaceFlag=false;
 
  if(!Manipulator)
   return;
@@ -130,6 +143,8 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
 
  VaEdit->Text=Manipulator->GetAccumulationStep()*num_ranges;
  VdEdit->Text=Manipulator->GetDissociationStep();
+
+
 }
 
 // Сохраняет параметры интерфейса в xml
