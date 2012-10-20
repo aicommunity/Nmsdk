@@ -39,11 +39,6 @@ void __fastcall TMainForm::FormShow(TObject *Sender)
 // UComponentLinksForm->Show();
 }
 //---------------------------------------------------------------------------
-void __fastcall TMainForm::ButtonClick(TObject *Sender)
-{
-// NDCEngineControlForm->Show();
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TMainForm::Button2Click(TObject *Sender)
 {

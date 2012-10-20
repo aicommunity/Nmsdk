@@ -80,7 +80,6 @@ __published:	// IDE-managed Components
 	TCheckBox *IbCheckBox;
 	TCheckBox *IICheckBox;
 	TCheckBox *ControlVoltageCheckBox;
-	TRadioGroup *RadioGroup1;
 	TPanel *Panel1;
 	TGroupBox *GroupBox7;
 	TLabel *Label8;
@@ -134,7 +133,6 @@ __published:	// IDE-managed Components
 	void __fastcall IbCheckBoxClick(TObject *Sender);
 	void __fastcall IICheckBoxClick(TObject *Sender);
 	void __fastcall ControlVoltageCheckBoxClick(TObject *Sender);
-	void __fastcall RadioGroup1Click(TObject *Sender);
 	void __fastcall VoltageMulTrackBarChange(TObject *Sender);
 	void __fastcall TimeDurationTrackBarChange(TObject *Sender);
 	void __fastcall PACDeactivatorTimeTrackBarChange(TObject *Sender);

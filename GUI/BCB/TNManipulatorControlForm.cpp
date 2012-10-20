@@ -110,6 +110,26 @@ void TNManipulatorControlForm::AUpdateInterface(void)
 
  value=double(PACActivatorTimeTrackBar->Position)/double(PACActivatorTimeTrackBar->Max);
  PACActivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
+
+ if(ControlSystem)
+ {
+  IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator"));
+  IINegAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator"));
+
+  if(IIPosAfferent && IINegAfferent)
+  {
+   if(IIPosAfferent->Frequency > 0)
+   {
+	IIAfferentTrackBar->Position=IIPosAfferent->Frequency;
+	IIAfferentEdit->Text=FloatToStrF(IIPosAfferent->Frequency,ffFixed,3,3);
+   }
+   else
+   {
+	IIAfferentTrackBar->Position=IINegAfferent->Frequency;
+	IIAfferentEdit->Text=FloatToStrF(-IINegAfferent->Frequency,ffFixed,3,3);
+   }
+  }
+ }
 }
 
 // Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
@@ -177,7 +197,6 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
  else
  {
   ManipulatorCSConnect(ControlSystemName, ManipulatorName);
-  RadioGroup1Click(this);
  }
 
  xml.SelectUp();
@@ -409,6 +428,7 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 
  int num_motions=ControlSystem->NumMotionElements;
 
+
  if(IaCheckBox->Checked)
   {
    for(int i=0;i<num_motions;i++)
@@ -416,6 +436,9 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 	std::string motion=std::string("MotionElement")+RDK::sntoa(i);
 	std::string pos_separator=std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1);
+	if(!Model_CheckComponent((motion+".Afferent_Ia1.Receptor").c_str()) ||
+	   !Model_CheckComponent((motion+".Afferent_Ia2.Receptor").c_str()))
+	 break;
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_Ia2.Receptor",0);
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_Ia1.Receptor",0);
 
@@ -430,6 +453,9 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 	std::string motion=std::string("MotionElement")+RDK::sntoa(i);
 	std::string pos_separator=std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1);
+	if(!Model_CheckComponent((motion+".Afferent_Ia1.Receptor").c_str()) ||
+	   !Model_CheckComponent((motion+".Afferent_Ia2.Receptor").c_str()))
+	 break;
 	res&=ControlSystem->BreakLink(pos_separator,0,motion+".Afferent_Ia2.Receptor",0);
 	res&=ControlSystem->BreakLink(neg_separator,0,motion+".Afferent_Ia1.Receptor",0);
 
@@ -447,6 +473,9 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 void __fastcall TNManipulatorControlForm::IIAfferentTrackBarChange(TObject *Sender)
 
 {
+ if(UpdateInterfaceFlag)
+  return;
+
  if(!ControlSystem)
   return;
 
@@ -475,6 +504,9 @@ void __fastcall TNManipulatorControlForm::IIAfferentTrackBarChange(TObject *Send
 void __fastcall TNManipulatorControlForm::IINumAfferentTrackBarChange(TObject *Sender)
 
 {
+ if(UpdateInterfaceFlag)
+  return;
+
  bool res=true;
 
  if(!ControlSystem)
@@ -522,6 +554,10 @@ void __fastcall TNManipulatorControlForm::IbCheckBoxClick(TObject *Sender)
 	std::string pos_separator=std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1);
 
+	if(!Model_CheckComponent((motion+".Afferent_Ib1.Receptor").c_str()) ||
+	   !Model_CheckComponent((motion+".Afferent_Ib2.Receptor").c_str()))
+	 break;
+
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_Ib2.Receptor",0);
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_Ib1.Receptor",0);
 
@@ -536,6 +572,10 @@ void __fastcall TNManipulatorControlForm::IbCheckBoxClick(TObject *Sender)
 	std::string motion=std::string("MotionElement")+RDK::sntoa(i);
 	std::string pos_separator=std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1);
+
+	if(!Model_CheckComponent((motion+".Afferent_Ib1.Receptor").c_str()) ||
+	   !Model_CheckComponent((motion+".Afferent_Ib2.Receptor").c_str()))
+	 break;
 
 	res&=ControlSystem->BreakLink(pos_separator,0,motion+".Afferent_Ib1.Receptor",0);
 	res&=ControlSystem->BreakLink(neg_separator,0,motion+".Afferent_Ib2.Receptor",0);
@@ -569,6 +609,10 @@ void __fastcall TNManipulatorControlForm::IICheckBoxClick(TObject *Sender)
 	std::string pos_separator=std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1);
 
+	if(!Model_CheckComponent((motion+".Afferent_II1.Receptor").c_str()) ||
+	   !Model_CheckComponent((motion+".Afferent_II2.Receptor").c_str()))
+	 break;
+
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_II2.Receptor",0);
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_II1.Receptor",0);
 
@@ -583,6 +627,10 @@ void __fastcall TNManipulatorControlForm::IICheckBoxClick(TObject *Sender)
 	std::string motion=std::string("MotionElement")+RDK::sntoa(i);
 	std::string pos_separator=std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1);
+
+	if(!Model_CheckComponent((motion+".Afferent_II1.Receptor").c_str()) ||
+	   !Model_CheckComponent((motion+".Afferent_II2.Receptor").c_str()))
+	 break;
 
 	res&=ControlSystem->BreakLink(pos_separator,0,motion+".Afferent_II1.Receptor",0);
 	res&=ControlSystem->BreakLink(neg_separator,0,motion+".Afferent_II2.Receptor",0);
@@ -609,13 +657,13 @@ void __fastcall TNManipulatorControlForm::ControlVoltageCheckBoxClick(TObject *S
   {
    res&=ControlSystem->BreakLink("Pac",0,"NManipulatorInput1",0);
 
-   res&=ControlSystem->BreakLink("Pac",0,"NManipulatorInputEmulator1",0);
+//   res&=ControlSystem->BreakLink("Pac",0,"NManipulatorInputEmulator1",0);
   }
   else
   {
    res&=ControlSystem->CreateLink("Pac",0,"NManipulatorInput1",0);
 
-   res&=ControlSystem->CreateLink("Pac",0,"NManipulatorInputEmulator1",0);
+//   res&=ControlSystem->CreateLink("Pac",0,"NManipulatorInputEmulator1",0);
   }
 
  if(!res)
@@ -632,8 +680,6 @@ void __fastcall TNManipulatorControlForm::SelectControlSystem1Click(TObject *Sen
  ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(GetModel()->GetComponentL(ControlSystemName));
  if(!ControlSystem)
   ControlSystemName="";
- else
-  RadioGroup1Click(Sender);
 
  UpdateInterface();
 }
@@ -646,133 +692,6 @@ void __fastcall TNManipulatorControlForm::ControlSystemSelectionPanelDblClick(TO
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TNManipulatorControlForm::RadioGroup1Click(TObject *Sender)
-{
-return;
- int num_ranges=ControlSystem->NumMotionElements;
- bool res=true;
-
- if(!ControlSystem)
-  return;
-
- if(!ManipulatorName.empty() && !ControlSystemName.empty())
- {
-  Manipulator->BreakLinks(ControlSystem);
-  ManipulatorCSConnect(ControlSystemName, ManipulatorName);
- }
-
- if(!RadioGroup1->ItemIndex)
- {
-  ReadComponentName=ControlSystemName+".Engine";
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->BreakLink("NManipulatorSource1",2,
-				 std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->BreakLink("NManipulatorSource1",2,
-				 std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->BreakLink("NManipulatorSource1",1,
-				 std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->BreakLink("NManipulatorSource1",1,
-				 std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->BreakLink("NManipulatorSource1",0,
-				 std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->BreakLink("NManipulatorSource1",0,
-				 std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->CreateLink("NManipulatorSourceEmulator1",2,
-				 std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->CreateLink("NManipulatorSourceEmulator1",2,
-				 std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->CreateLink("NManipulatorSourceEmulator1",1,
-				 std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->CreateLink("NManipulatorSourceEmulator1",1,
-				 std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->CreateLink("NManipulatorSourceEmulator1",0,
-				 std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->CreateLink("NManipulatorSourceEmulator1",0,
-				 std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-//  cont=ControlSystem->GetComponent("NManipulatorSourceEmulator1");
-//  Engine=(NManipulatorSource*)cont;
- }
- else
- {
-  ReadComponentName=ManipulatorName;
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->BreakLink("NManipulatorSourceEmulator1",2,
-				 std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->BreakLink("NManipulatorSourceEmulator1",2,
-				 std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->BreakLink("NManipulatorSourceEmulator1",1,
-				 std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->BreakLink("NManipulatorSourceEmulator1",1,
-				 std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->BreakLink("NManipulatorSourceEmulator1",0,
-				 std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->BreakLink("NManipulatorSourceEmulator1",0,
-				 std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->CreateLink("NManipulatorSource1",2,
-				 std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->CreateLink("NManipulatorSource1",2,
-				 std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->CreateLink("NManipulatorSource1",1,
-				 std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->CreateLink("NManipulatorSource1",1,
-				 std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-
-  for(int i=0;i<num_ranges;i++)
-  {
-   res&=ControlSystem->CreateLink("NManipulatorSource1",0,
-				 std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1),0);
-   res&=ControlSystem->CreateLink("NManipulatorSource1",0,
-				 std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1),0);
-  }
-//  cont=ControlSystem->GetComponent("NManipulatorSource1");
-//  Engine=(NManipulatorSource*)cont;
- }
-
-}
-//---------------------------------------------------------------------------
 
 
 void __fastcall TNManipulatorControlForm::VoltageMulTrackBarChange(TObject *Sender)
@@ -784,10 +703,7 @@ void __fastcall TNManipulatorControlForm::VoltageMulTrackBarChange(TObject *Send
  if(!Manipulator)
   return;
 
- if(RadioGroup1->ItemIndex != 0)
-  {
-	Manipulator->OutputMul=value;
-  }
+ Manipulator->OutputMul=value;
 }
 //---------------------------------------------------------------------------
 
@@ -800,10 +716,7 @@ void __fastcall TNManipulatorControlForm::TimeDurationTrackBarChange(TObject *Se
  if(!Manipulator)
   return;
 
- if(RadioGroup1->ItemIndex != 0)
-  {
-   Manipulator->TimeDuration=value;
-  }
+ Manipulator->TimeDuration=value;
 }
 //---------------------------------------------------------------------------
 

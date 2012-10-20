@@ -157,7 +157,7 @@
           Width = 681
           Height = 32
           Align = alClient
-          Caption = 'Double click to select manipulator component'
+          Caption = 'Double click to select control object component '
           Color = clRed
           ParentBackground = False
           TabOrder = 0
@@ -375,7 +375,7 @@
           Caption = 'Number of II Afferents ext. controls'
         end
         object IIAfferentTrackBar: TTrackBar
-          Left = 2
+          Left = -4
           Top = 37
           Width = 146
           Height = 27
@@ -419,8 +419,6 @@
           Width = 181
           Height = 17
           Caption = 'FB by angle speed (Ia) '
-          Checked = True
-          State = cbChecked
           TabOrder = 4
           OnClick = IaCheckBoxClick
         end
@@ -454,20 +452,6 @@
           State = cbChecked
           TabOrder = 7
           OnClick = ControlVoltageCheckBoxClick
-        end
-        object RadioGroup1: TRadioGroup
-          Left = 2
-          Top = 296
-          Width = 197
-          Height = 60
-          Align = alBottom
-          Caption = ' '#1054#1059
-          ItemIndex = 1
-          Items.Strings = (
-            'Model'
-            'Manipulator')
-          TabOrder = 8
-          OnClick = RadioGroup1Click
         end
       end
       object Panel1: TPanel
