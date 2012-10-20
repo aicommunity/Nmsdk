@@ -35,9 +35,11 @@ NPulseGenerator::NPulseGenerator(void)
   PulseLength("PulseLength",this,&NPulseGenerator::SetPulseLength),
   Amplitude("Amplitude",this,&NPulseGenerator::SetAmplitude),
   FrequencyDeviation("FrequencyDeviation",this,&NPulseGenerator::SetFrequencyDeviation),
+  AvgInterval("AvgInterval",this),
 
   PulseCounter("PulseCounter",this),
-  RandomFrequency("RandomFrequency",this)
+  RandomFrequency("RandomFrequency",this),
+  AvgFrequencyCounter("AvgFrequencyCounter",this)
 {
 }
 
@@ -117,13 +119,14 @@ bool NPulseGenerator::CheckComponentType(UEPtr<NAContainer> comp) const
 // Восстановление настроек по умолчанию и сброс процесса счета
 bool NPulseGenerator::ADefault(void)
 {
- SetNumOutputs(2);
+ SetNumOutputs(4);
  SetOutputDataSize(0,1);
  SetOutputDataSize(1,1);
  Frequency=0.0;
  PulseLength=0.001;
  Amplitude=1.0;
  FrequencyDeviation=0;
+ AvgInterval=1;
  return NSource::ADefault();
 }
 
@@ -145,6 +148,7 @@ bool NPulseGenerator::AReset(void)
 
  PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
  RandomFrequency=Frequency;
+ AvgFrequencyCounter->clear();
  return NSource::AReset();
 }
 
@@ -154,6 +158,7 @@ bool NPulseGenerator::ACalculate(void)
  if(!Frequency)
  {
   FillOutputData();
+  AvgFrequencyCounter->clear();
   return NSource::ACalculate();
  }
 
@@ -166,6 +171,7 @@ bool NPulseGenerator::ACalculate(void)
    {
 	PulseCounter=static_cast<RDK::UTime>(-TimeStep/Frequency.v);
 	FillOutputData(0);
+	FillOutputData(1);
    }
   }
   else
@@ -175,9 +181,11 @@ bool NPulseGenerator::ACalculate(void)
    {
 	PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
 	FillOutputData(0,&Amplitude.v);
+	FillOutputData(1,&Amplitude.v);
+    AvgFrequencyCounter->push_back(GetDoubleTime());
    }
   }
-  FillOutputData(1,&Frequency.v);
+  FillOutputData(2,&Frequency.v);
  }
  else
  {
@@ -193,6 +201,8 @@ bool NPulseGenerator::ACalculate(void)
 	else
 	 PulseCounter=0;
 	FillOutputData(0);
+	FillOutputData(1);
+    AvgFrequencyCounter->push_back(GetDoubleTime());
    }
   }
   else
@@ -202,10 +212,36 @@ bool NPulseGenerator::ACalculate(void)
    {
 	PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
 	FillOutputData(0,&Amplitude.v);
+	FillOutputData(1,&Amplitude.v);
    }
   }
-  FillOutputData(1,&RandomFrequency.v);
+  FillOutputData(2,&RandomFrequency.v);
  }
+
+ list<double>::iterator I,J,K;
+ I=AvgFrequencyCounter->begin();
+ J=AvgFrequencyCounter->end();
+
+ if(AvgFrequencyCounter->size()>1)
+ {
+  while(I != J)
+  {
+   if(GetDoubleTime()-*I>AvgInterval)// && AvgFrequencyCounter->size()>3)
+   {
+	K=I;
+	++I;
+	AvgFrequencyCounter->erase(K);
+   }
+   else
+	++I;
+  }
+ }
+
+ I=AvgFrequencyCounter->begin();
+ J=AvgFrequencyCounter->end();
+ SetOutputDataSize(3,AvgFrequencyCounter->size(),true);
+ for(int i=0;i<POutputData[3].GetSize();i++,++I)
+  POutputData[3].Double[i]=*I;
 
  return true;//NSource::ACalculate();
 }

@@ -23,7 +23,7 @@ namespace NMSDK {
 
 class NPulseGenerator: public NSource
 {
-public: // Общедоступные свойства
+public: // Параметры
 // Частота генерации (Гц) (Математическое ожидание)
 RDK::ULProperty<real,NPulseGenerator> Frequency;
 
@@ -37,14 +37,18 @@ RDK::ULProperty<real,NPulseGenerator> Amplitude;
 // (Задает диапазон, не является стандартным отклонением!)
 RDK::ULProperty<real,NPulseGenerator> FrequencyDeviation;
 
-protected: // Основные свойства
+// Интервал времени оценки частоты генерации
+RDK::ULProperty<real,NPulseGenerator> AvgInterval;
 
-public: // Временные переменные
+public: // Переменные состояния
 // Счетчик импульса
 RDK::ULProperty<RDK::UTime,NPulseGenerator,ptPubState> PulseCounter;
 
 // Случайное значение текущей частоты
 RDK::ULProperty<real,NPulseGenerator,ptPubState> RandomFrequency;
+
+// Средняя частота за заданный интервал времени
+RDK::UCLProperty<list<real>,NPulseGenerator,ptPubState> AvgFrequencyCounter;
 
 public: // Методы
 // --------------------------
