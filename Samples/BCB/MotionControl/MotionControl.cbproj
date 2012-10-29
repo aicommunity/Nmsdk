@@ -197,6 +197,12 @@
 				<DependentOn>..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.h</DependentOn>
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.cpp">
+				<Form>UCreateProjectWizardForm</Form>
+				<FormType>dfm</FormType>
+				<DependentOn>..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.h</DependentOn>
+				<BuildOrder>35</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.cpp">
 				<Form>UCRPerseptronForm</Form>
 				<DependentOn>..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.h</DependentOn>
@@ -305,6 +311,7 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
