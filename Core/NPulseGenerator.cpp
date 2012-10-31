@@ -57,8 +57,8 @@ bool NPulseGenerator::SetFrequency(real value)
  if(value <0)
   return false;
 
- return Reset();
-// return true;
+// return Reset();
+ return true;
 }
 
 // Устанавливает длительность импульса
@@ -202,7 +202,6 @@ bool NPulseGenerator::ACalculate(void)
 	 PulseCounter=0;
 	FillOutputData(0);
 	FillOutputData(1);
-    AvgFrequencyCounter->push_back(GetDoubleTime());
    }
   }
   else
@@ -213,6 +212,7 @@ bool NPulseGenerator::ACalculate(void)
 	PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
 	FillOutputData(0,&Amplitude.v);
 	FillOutputData(1,&Amplitude.v);
+    AvgFrequencyCounter->push_back(GetDoubleTime());
    }
   }
   FillOutputData(2,&RandomFrequency.v);
