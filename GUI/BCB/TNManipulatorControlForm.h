@@ -106,6 +106,10 @@ __published:	// IDE-managed Components
 	TEdit *PACMultiplicatorEdit;
 	TGroupBox *GroupBox9;
 	TImage *Image;
+	TGroupBox *GroupBox10;
+	TTrackBar *MomentTrackBar;
+	TProgressBar *MomentProgressBar;
+	TEdit *ExtMomentEdit;
 	void __fastcall Disconnect1Click(TObject *Sender);
 	void __fastcall MoveLeft1Click(TObject *Sender);
 	void __fastcall MoveRight1Click(TObject *Sender);
@@ -139,6 +143,7 @@ __published:	// IDE-managed Components
 	void __fastcall PACActivatorTimeTrackBarChange(TObject *Sender);
 	void __fastcall SendVButtonClick(TObject *Sender);
 	void __fastcall PACMultiplicatorTrackBarChange(TObject *Sender);
+	void __fastcall MomentTrackBarChange(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNManipulatorControlForm(TComponent* Owner);

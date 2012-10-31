@@ -125,11 +125,26 @@ void TNManipulatorControlForm::AUpdateInterface(void)
    }
    else
    {
-	IIAfferentTrackBar->Position=IINegAfferent->Frequency;
+	IIAfferentTrackBar->Position=-IINegAfferent->Frequency;
 	IIAfferentEdit->Text=FloatToStrF(-IINegAfferent->Frequency,ffFixed,3,3);
    }
   }
  }
+ IINumAfferentTrackBarChange(this);
+
+ RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ double position=0;
+ if(engine)
+ {
+  position=engine->OutMoment*double(MomentTrackBar->Max/2.0);
+  ExtMomentEdit->Text=FloatToStrF(engine->OutMoment,ffFixed,3,3);
+ }
+
+ if(position>0)
+  MomentProgressBar->Position=position;
+ else
+  MomentProgressBar->Position=-position;
+
 }
 
 // Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
@@ -804,4 +819,24 @@ void __fastcall TNManipulatorControlForm::PACMultiplicatorTrackBarChange(TObject
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
+{
+ if(UpdateInterfaceFlag)
+  return;
+
+ RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ double amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
+ ExtMomentEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
+ if(engine)
+ {
+  engine->OutMoment=amplitude;
+ }
+
+ if(MomentTrackBar->Position>0)
+  MomentProgressBar->Position=MomentTrackBar->Position;
+ else
+  MomentProgressBar->Position=-MomentTrackBar->Position;
+}
+//---------------------------------------------------------------------------
 

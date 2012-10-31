@@ -453,6 +453,55 @@
           TabOrder = 7
           OnClick = ControlVoltageCheckBoxClick
         end
+        object GroupBox10: TGroupBox
+          Left = 2
+          Top = 274
+          Width = 197
+          Height = 82
+          Align = alBottom
+          Caption = ' Ext. moment '
+          TabOrder = 8
+          ExplicitLeft = -250
+          ExplicitTop = 160
+          ExplicitWidth = 448
+          DesignSize = (
+            197
+            82)
+          object MomentTrackBar: TTrackBar
+            Left = 5
+            Top = 18
+            Width = 192
+            Height = 27
+            Anchors = [akLeft, akTop, akRight]
+            Max = 1000
+            Min = -1000
+            TabOrder = 0
+            OnChange = MomentTrackBarChange
+            ExplicitWidth = 443
+          end
+          object MomentProgressBar: TProgressBar
+            Left = 13
+            Top = 53
+            Width = 98
+            Height = 17
+            Anchors = [akLeft, akTop, akRight]
+            Max = 1000
+            TabOrder = 1
+            ExplicitWidth = 349
+          end
+          object ExtMomentEdit: TEdit
+            Left = 117
+            Top = 51
+            Width = 73
+            Height = 21
+            Anchors = [akTop, akRight]
+            Color = clBtnFace
+            ReadOnly = True
+            TabOrder = 2
+            Text = '0'
+            ExplicitLeft = 368
+          end
+        end
       end
       object Panel1: TPanel
         Left = 201
