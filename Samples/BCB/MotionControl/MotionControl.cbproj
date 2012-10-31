@@ -55,8 +55,8 @@
 			<AllPackageLibs>rtl.lib;vcl.lib;Tee916.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib</AllPackageLibs>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<IncludePath>..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\lib;..\..\..\Deploy\Include\;..\..\..\Deploy\Dll\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\lib;..\..\..\Deploy\Include\;..\..\..\Deploy\Dll\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -287,31 +287,31 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\ULinkSelectionFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\ULinkSelectionFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
-			<FormResources Include="..\..\..\GUI\BCB\TNManipulatorControlForm.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\TNManipulatorControlForm.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentIOFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
