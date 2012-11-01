@@ -840,3 +840,4 @@ void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+

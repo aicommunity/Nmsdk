@@ -37,7 +37,7 @@
     Top = 29
     Width = 693
     Height = 386
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 2
     object TabSheet1: TTabSheet
@@ -461,9 +461,6 @@
           Align = alBottom
           Caption = ' Ext. moment '
           TabOrder = 8
-          ExplicitLeft = -250
-          ExplicitTop = 160
-          ExplicitWidth = 448
           DesignSize = (
             197
             82)
@@ -477,7 +474,6 @@
             Min = -1000
             TabOrder = 0
             OnChange = MomentTrackBarChange
-            ExplicitWidth = 443
           end
           object MomentProgressBar: TProgressBar
             Left = 13
@@ -487,7 +483,6 @@
             Anchors = [akLeft, akTop, akRight]
             Max = 1000
             TabOrder = 1
-            ExplicitWidth = 349
           end
           object ExtMomentEdit: TEdit
             Left = 117
@@ -499,7 +494,6 @@
             ReadOnly = True
             TabOrder = 2
             Text = '0'
-            ExplicitLeft = 368
           end
         end
       end
