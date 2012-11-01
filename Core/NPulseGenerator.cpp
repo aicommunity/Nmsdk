@@ -83,7 +83,7 @@ bool NPulseGenerator::SetFrequencyDeviation(real value)
  if(value<0)
   return false;
 
- return Reset();
+ return true;
 }
 // --------------------------
 
@@ -126,7 +126,8 @@ bool NPulseGenerator::ADefault(void)
  PulseLength=0.001;
  Amplitude=1.0;
  FrequencyDeviation=0;
- AvgInterval=1;
+ AvgInterval=5;
+ PulseCounter=0;
  return NSource::ADefault();
 }
 
@@ -136,6 +137,7 @@ bool NPulseGenerator::ADefault(void)
 // в случае успешной сборки
 bool NPulseGenerator::ABuild(void)
 {
+ AvgFrequencyCounter->clear();
  return true;
 }
 
@@ -146,9 +148,13 @@ bool NPulseGenerator::AReset(void)
  time(&tm);
  srand(static_cast<unsigned>(tm));
 
- PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
+// PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
+ if(Frequency.v > 0 && PulseCounter.v<-TimeStep/Frequency.v)
+  PulseCounter.v=-TimeStep/Frequency.v;
+ else
+  PulseCounter.v=0;
  RandomFrequency=Frequency;
- AvgFrequencyCounter->clear();
+ //AvgFrequencyCounter->clear();
  return NSource::AReset();
 }
 
