@@ -199,6 +199,9 @@ bool ManipulatorCSConnect(const std::string &cs_name, const std::string &man_nam
 // —читывает данные из компонента
 void ReadComponentData(void);
 
+void ReconnectManipulator(void);
+
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TNManipulatorControlForm *NManipulatorControlForm;

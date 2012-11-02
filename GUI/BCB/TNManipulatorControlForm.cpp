@@ -6,6 +6,8 @@
 #include "TNManipulatorControlForm.h"
 #include "UComponentsListFormUnit.h"
 #include "TUBitmap.h"
+#include "UDrawEngineFormUnit.h"
+
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -164,11 +166,17 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
  PACActivatorTimeEdit->Text=FloatToStrF(engine_input->SecretionTC[0][0],ffFixed,3,3);
  PACDeactivatorTimeTrackBar->Position=engine_input->DissociationTC[0][0]*double(PACDeactivatorTimeTrackBar->Max);
  PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->DissociationTC[0][0],ffFixed,3,3);
+
+ IINumAfferentTrackBar->Max=num_ranges;
+
  if(!flag)
   UpdateInterfaceFlag=false;
 
  if(!Manipulator)
   return;
+
+ if(!flag)
+  UpdateInterfaceFlag=true;
 
  VoltageMulTrackBar->Position=Manipulator->OutputMul*100.0;
  VoltageMulEdit->Text=FloatToStrF(Manipulator->OutputMul,ffFixed,3,3);
@@ -179,7 +187,8 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
  VaEdit->Text=Manipulator->GetAccumulationStep()*num_ranges;
  VdEdit->Text=Manipulator->GetDissociationStep();
 
-
+ if(!flag)
+  UpdateInterfaceFlag=false;
 }
 
 // Сохраняет параметры интерфейса в xml
@@ -194,6 +203,22 @@ void TNManipulatorControlForm::ASaveParameters(RDK::Serialize::USerStorageXML &x
 // Загружает параметры интерфейса из xml
 void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &xml)
 {
+ ManipulatorName.clear();
+ ControlSystemName.clear();
+
+ Manipulator=0;
+ UniversalManipulator=0;
+
+ Engine=0;
+ Source=0;
+ ControlSystem=0;
+
+ IIPosAfferent=0;
+ IINegAfferent=0;
+ MN1PosControl=0;
+ MN1NegControl=0;
+
+
  xml.SelectNodeForce("Control");
  ManipulatorName=xml.ReadString("ManipulatorName","");
  if(!ManipulatorName.empty())
@@ -217,6 +242,9 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
  xml.SelectUp();
 
  LoadInterfaceInfoFromNet();
+
+ IINumAfferentTrackBar->Position=0;
+ IINumAfferentTrackBarChange(this);
 }
 
 
@@ -257,6 +285,22 @@ void TNManipulatorControlForm::ReadComponentData(void)
  Angle=RDK::dynamic_pointer_cast<RDK::UADItem>(GetModel()->GetComponentL(ReadComponentName))->GetOutputData(1).Double[0];
 }
 
+
+void TNManipulatorControlForm::ReconnectManipulator(void)
+{
+ if(Manipulator)
+ {
+  Disconnect1Click(this);
+  ManipulatorName="";
+ }
+
+ ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
+ UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UANet>(GetModel()->GetComponentL(ManipulatorName));
+ Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
+ if(!UniversalManipulator)
+  ManipulatorName="";
+ ManipulatorCSConnect(ControlSystemName, ManipulatorName);
+}
 //---------------------------------------------------------------------------
 void __fastcall TNManipulatorControlForm::Disconnect1Click(TObject *Sender)
 {
@@ -290,20 +334,7 @@ void __fastcall TNManipulatorControlForm::SelectManipulator1Click(TObject *Sende
  if(UComponentsListForm->ShowComponentSelect() != mrOk)
   return;
 
- if(Manipulator)
- {
-  Disconnect1Click(Sender);
-  ManipulatorName="";
- }
-
- ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
- UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UANet>(GetModel()->GetComponentL(ManipulatorName));
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
- if(!UniversalManipulator)
-  ManipulatorName="";
- ManipulatorCSConnect(ControlSystemName, ManipulatorName);
-
-
+ ReconnectManipulator();
  UpdateInterface();
 }
 //---------------------------------------------------------------------------
@@ -352,6 +383,7 @@ void __fastcall TNManipulatorControlForm::FormShow(TObject *Sender)
 void __fastcall TNManipulatorControlForm::ComponentSelectionPanelDblClick(TObject *Sender)
 {
  SelectManipulator1Click(Sender);
+ UDrawEngineForm->ReloadNet();
 }
 //---------------------------------------------------------------------------
 
@@ -548,7 +580,7 @@ void __fastcall TNManipulatorControlForm::IINumAfferentTrackBarChange(TObject *S
  IINumAfferentEdit->Text=IntToStr(IINumAfferentTrackBar->Position);
  if(!res)
   return;
-
+ UDrawEngineForm->ReloadNet();
 }
 //---------------------------------------------------------------------------
 
@@ -704,6 +736,8 @@ void __fastcall TNManipulatorControlForm::SelectControlSystem1Click(TObject *Sen
 void __fastcall TNManipulatorControlForm::ControlSystemSelectionPanelDblClick(TObject *Sender)
 {
  SelectControlSystem1Click(Sender);
+ ReconnectManipulator();
+ UDrawEngineForm->UpdateInterface();
 }
 //---------------------------------------------------------------------------
 
@@ -839,5 +873,6 @@ void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
   MomentProgressBar->Position=-MomentTrackBar->Position;
 }
 //---------------------------------------------------------------------------
+
 
 

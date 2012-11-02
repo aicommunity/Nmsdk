@@ -37,7 +37,7 @@
     Top = 29
     Width = 693
     Height = 386
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
     object TabSheet1: TTabSheet
@@ -513,8 +513,8 @@
           Caption = 'Control system parameters '
           TabOrder = 0
           object Label8: TLabel
-            Left = 14
-            Top = 21
+            Left = 16
+            Top = 67
             Width = 145
             Height = 13
             Caption = #1055#1086#1089#1090'. '#1074#1088#1077#1084#1077#1085#1080' '#1088#1072#1079#1088#1103#1076#1072' PAC:'
@@ -527,15 +527,15 @@
             Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100' PAC:'
           end
           object Label13: TLabel
-            Left = 14
-            Top = 70
+            Left = 12
+            Top = 22
             Width = 139
             Height = 13
             Caption = #1055#1086#1089#1090'. '#1074#1088#1077#1084#1077#1085#1080' '#1079#1072#1088#1103#1076#1072' PAC:'
           end
           object PACActivatorTimeTrackBar: TTrackBar
-            Left = 7
-            Top = 84
+            Left = 5
+            Top = 36
             Width = 141
             Height = 27
             Max = 10000
@@ -545,24 +545,24 @@
             OnChange = PACActivatorTimeTrackBarChange
           end
           object PACActivatorTimeEdit: TEdit
-            Left = 146
-            Top = 86
+            Left = 144
+            Top = 38
             Width = 48
             Height = 21
             TabOrder = 1
             Text = '1'
           end
           object PACDeactivatorTimeEdit: TEdit
-            Left = 144
-            Top = 38
+            Left = 146
+            Top = 84
             Width = 48
             Height = 21
             TabOrder = 2
             Text = '1'
           end
           object PACDeactivatorTimeTrackBar: TTrackBar
-            Left = 5
-            Top = 36
+            Left = 7
+            Top = 82
             Width = 141
             Height = 27
             Max = 10000
