@@ -126,6 +126,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_new.win.cpp">
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\Deploy\Include\myrdk.bcb.cpp">
+				<BuildOrder>6</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\Deploy\Include\rdk.bcb.cpp">
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>

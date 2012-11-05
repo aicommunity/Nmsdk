@@ -114,6 +114,9 @@
 				<DependentOn>..\..\..\GUI\BCB\TNManipulatorControlForm.h</DependentOn>
 				<BuildOrder>28</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\Deploy\Include\myrdk.bcb.cpp">
+				<BuildOrder>37</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\Deploy\Include\rdk.bcb.cpp">
 				<BuildOrder>26</BuildOrder>
 			</CppCompile>
