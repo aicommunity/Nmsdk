@@ -24,6 +24,13 @@ __fastcall TNManipulatorControlForm::TNManipulatorControlForm(TComponent* Owner)
  X=CanvasWidth/2;
  Y=CanvasHeight/2;
  BmpGraphics.SetPenWidth(4);
+
+ // Константное смещение на постоянный угол при отображении
+ ZeroAngle=0;
+
+ ZeroMovement=0;
+
+ Movement=0;
 }
 
 void TNManipulatorControlForm::AUpdateInterface(void)
@@ -100,7 +107,7 @@ void TNManipulatorControlForm::AUpdateInterface(void)
  ReadComponentData();
  BmpCanvas.SetRes(CanvasWidth,CanvasHeight,RDK::ubmRGB24);
  BmpCanvas.Fill(RDK::UColorT(255,255,255));
- BmpGraphics.Line(X,Y,X+Length*cos(Angle),Y+Length*sin(Angle));
+ BmpGraphics.Line(Movement+ZeroMovement+X,Y,Movement+ZeroMovement+X+Length*cos(ZeroAngle+Angle),Y+Length*sin(ZeroAngle+Angle));
  BmpCanvas>>Image->Picture->Bitmap;
  Image->Repaint();
 
@@ -283,6 +290,12 @@ void TNManipulatorControlForm::ReadComponentData(void)
  ReadComponentName=ManipulatorName;
 
  Angle=RDK::dynamic_pointer_cast<RDK::UADItem>(GetModel()->GetComponentL(ReadComponentName))->GetOutputData(1).Double[0];
+
+ if(RDK::dynamic_pointer_cast<RDK::UADItem>(GetModel()->GetComponentL(ReadComponentName))->GetNumOutputs()>3)
+ {
+  Movement=RDK::dynamic_pointer_cast<RDK::UADItem>(GetModel()->GetComponentL(ReadComponentName))->GetOutputData(3).Double[0];
+  Movement*=10; // в 1 метре 10 пикселей
+ }
 }
 
 
