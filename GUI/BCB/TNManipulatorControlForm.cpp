@@ -496,8 +496,8 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 	std::string motion=std::string("MotionElement")+RDK::sntoa(i);
 	std::string pos_separator=std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1);
-	if(!Model_CheckComponent((motion+".Afferent_Ia1.Receptor").c_str()) ||
-	   !Model_CheckComponent((motion+".Afferent_Ia2.Receptor").c_str()))
+	if(!Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ia1.Receptor").c_str()) ||
+	   !Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ia2.Receptor").c_str()))
 	 break;
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_Ia2.Receptor",0);
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_Ia1.Receptor",0);
@@ -513,8 +513,8 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 	std::string motion=std::string("MotionElement")+RDK::sntoa(i);
 	std::string pos_separator=std::string("Ia_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ia_NegIntervalSeparator")+RDK::sntoa(i+1);
-	if(!Model_CheckComponent((motion+".Afferent_Ia1.Receptor").c_str()) ||
-	   !Model_CheckComponent((motion+".Afferent_Ia2.Receptor").c_str()))
+	if(!Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ia1.Receptor").c_str()) ||
+	   !Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ia2.Receptor").c_str()))
 	 break;
 	res&=ControlSystem->BreakLink(pos_separator,0,motion+".Afferent_Ia2.Receptor",0);
 	res&=ControlSystem->BreakLink(neg_separator,0,motion+".Afferent_Ia1.Receptor",0);
@@ -614,8 +614,8 @@ void __fastcall TNManipulatorControlForm::IbCheckBoxClick(TObject *Sender)
 	std::string pos_separator=std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1);
 
-	if(!Model_CheckComponent((motion+".Afferent_Ib1.Receptor").c_str()) ||
-	   !Model_CheckComponent((motion+".Afferent_Ib2.Receptor").c_str()))
+	if(!Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ib1.Receptor").c_str()) ||
+	   !Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ib2.Receptor").c_str()))
 	 break;
 
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_Ib2.Receptor",0);
@@ -633,8 +633,8 @@ void __fastcall TNManipulatorControlForm::IbCheckBoxClick(TObject *Sender)
 	std::string pos_separator=std::string("Ib_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("Ib_NegIntervalSeparator")+RDK::sntoa(i+1);
 
-	if(!Model_CheckComponent((motion+".Afferent_Ib1.Receptor").c_str()) ||
-	   !Model_CheckComponent((motion+".Afferent_Ib2.Receptor").c_str()))
+	if(!Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ib1.Receptor").c_str()) ||
+	   !Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_Ib2.Receptor").c_str()))
 	 break;
 
 	res&=ControlSystem->BreakLink(pos_separator,0,motion+".Afferent_Ib1.Receptor",0);
@@ -669,8 +669,8 @@ void __fastcall TNManipulatorControlForm::IICheckBoxClick(TObject *Sender)
 	std::string pos_separator=std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1);
 
-	if(!Model_CheckComponent((motion+".Afferent_II1.Receptor").c_str()) ||
-	   !Model_CheckComponent((motion+".Afferent_II2.Receptor").c_str()))
+	if(!Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_II1.Receptor").c_str()) ||
+	   !Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_II2.Receptor").c_str()))
 	 break;
 
 	res&=ControlSystem->BreakLink("AfferentSource1",0,motion+".Afferent_II2.Receptor",0);
@@ -688,8 +688,8 @@ void __fastcall TNManipulatorControlForm::IICheckBoxClick(TObject *Sender)
 	std::string pos_separator=std::string("II_PosIntervalSeparator")+RDK::sntoa(i+1);
 	std::string neg_separator=std::string("II_NegIntervalSeparator")+RDK::sntoa(i+1);
 
-	if(!Model_CheckComponent((motion+".Afferent_II1.Receptor").c_str()) ||
-	   !Model_CheckComponent((motion+".Afferent_II2.Receptor").c_str()))
+	if(!Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_II1.Receptor").c_str()) ||
+	   !Model_CheckComponent((ControlSystemName+std::string(".")+motion+".Afferent_II2.Receptor").c_str()))
 	 break;
 
 	res&=ControlSystem->BreakLink(pos_separator,0,motion+".Afferent_II1.Receptor",0);
