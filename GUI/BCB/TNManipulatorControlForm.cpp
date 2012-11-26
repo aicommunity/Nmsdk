@@ -873,11 +873,16 @@ void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
   return;
 
  RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
  double amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
  ExtMomentEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
  if(engine)
  {
   engine->OutMoment=amplitude;
+ }
+ if(engine2)
+ {
+  engine2->OutXMovement=amplitude;
  }
 
  if(MomentTrackBar->Position>0)
