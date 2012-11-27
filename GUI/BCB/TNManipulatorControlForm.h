@@ -110,6 +110,7 @@ __published:	// IDE-managed Components
 	TTrackBar *MomentTrackBar;
 	TProgressBar *MomentProgressBar;
 	TEdit *ExtMomentEdit;
+	TSplitter *Splitter1;
 	void __fastcall Disconnect1Click(TObject *Sender);
 	void __fastcall MoveLeft1Click(TObject *Sender);
 	void __fastcall MoveRight1Click(TObject *Sender);

@@ -2,7 +2,7 @@
   Left = 0
   Top = 0
   Caption = 'NManipulatorControlForm'
-  ClientHeight = 434
+  ClientHeight = 451
   ClientWidth = 693
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -27,30 +27,34 @@
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 415
+    Top = 432
     Width = 693
     Height = 19
     Panels = <>
+    ExplicitTop = 415
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 29
     Width = 693
-    Height = 386
+    Height = 403
     ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
+    ExplicitHeight = 386
     object TabSheet1: TTabSheet
       Caption = 'Communication'
+      ExplicitHeight = 358
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
         Width = 233
-        Height = 260
+        Height = 277
         Align = alLeft
         Caption = ' Communication options '
         Enabled = False
         TabOrder = 0
+        ExplicitHeight = 260
         object Label1: TLabel
           Left = 7
           Top = 50
@@ -168,14 +172,15 @@
         Left = 233
         Top = 98
         Width = 452
-        Height = 260
+        Height = 277
         Align = alClient
         Caption = ' Communication control '
         Enabled = False
         TabOrder = 2
+        ExplicitHeight = 260
         DesignSize = (
           452
-          260)
+          277)
         object ConnectButton: TButton
           Left = 6
           Top = 20
@@ -256,14 +261,16 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
+      ExplicitHeight = 358
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
         Width = 185
-        Height = 358
+        Height = 375
         Align = alLeft
         Caption = ' Servo Control '
         TabOrder = 0
+        ExplicitHeight = 358
         object Время: TLabel
           Left = 8
           Top = 120
@@ -352,14 +359,16 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
+      ExplicitHeight = 358
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
         Width = 201
-        Height = 358
+        Height = 375
         Align = alLeft
         Caption = ' External control '
         TabOrder = 0
+        ExplicitHeight = 358
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -455,12 +464,13 @@
         end
         object GroupBox10: TGroupBox
           Left = 2
-          Top = 274
+          Top = 291
           Width = 197
           Height = 82
           Align = alBottom
           Caption = ' Ext. moment '
           TabOrder = 8
+          ExplicitTop = 274
           DesignSize = (
             197
             82)
@@ -501,9 +511,18 @@
         Left = 201
         Top = 0
         Width = 484
-        Height = 358
+        Height = 375
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 358
+        object Splitter1: TSplitter
+          Left = 1
+          Top = 177
+          Width = 482
+          Height = 12
+          Cursor = crVSplit
+          Align = alTop
+        end
         object GroupBox7: TGroupBox
           Left = 1
           Top = 1
@@ -616,25 +635,31 @@
         end
         object GroupBox8: TGroupBox
           Left = 1
-          Top = 177
+          Top = 189
           Width = 482
-          Height = 180
+          Height = 185
           Align = alClient
           Caption = ' Neuro manipulator parameters '
           TabOrder = 1
+          ExplicitTop = 177
+          ExplicitHeight = 180
           object Label12: TLabel
             Left = 14
-            Top = 151
+            Top = 106
             Width = 16
             Height = 13
             Caption = 'Va:'
           end
           object Label11: TLabel
-            Left = 87
-            Top = 150
-            Width = 16
+            Left = 2
+            Top = 15
+            Width = 478
             Height = 13
+            Align = alTop
             Caption = 'Vd:'
+            ExplicitLeft = 87
+            ExplicitTop = 150
+            ExplicitWidth = 16
           end
           object Label7: TLabel
             Left = 14
@@ -652,7 +677,7 @@
           end
           object VaEdit: TEdit
             Left = 33
-            Top = 148
+            Top = 103
             Width = 48
             Height = 21
             TabOrder = 0
@@ -660,7 +685,7 @@
           end
           object VdEdit: TEdit
             Left = 111
-            Top = 148
+            Top = 103
             Width = 48
             Height = 21
             TabOrder = 1
@@ -668,7 +693,7 @@
           end
           object SendVButton: TButton
             Left = 165
-            Top = 146
+            Top = 101
             Width = 91
             Height = 25
             Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100

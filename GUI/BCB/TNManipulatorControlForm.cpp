@@ -107,7 +107,17 @@ void TNManipulatorControlForm::AUpdateInterface(void)
  ReadComponentData();
  BmpCanvas.SetRes(CanvasWidth,CanvasHeight,RDK::ubmRGB24);
  BmpCanvas.Fill(RDK::UColorT(255,255,255));
+ BmpGraphics.SetPenColor(0x00FF0000);
+ BmpGraphics.Line(0,Y,CanvasWidth,Y);
+ BmpGraphics.Line(X,Y-20,X,Y+20);
+ for(int i=0;i<20;i++)
+ {
+  BmpGraphics.Line(X+i*10,Y-10,X+i*10,Y);
+  BmpGraphics.Line(X-i*10,Y-10,X-i*10,Y);
+ }
+ BmpGraphics.SetPenColor(0x000000FF);
  BmpGraphics.Line(Movement+ZeroMovement+X,Y,Movement+ZeroMovement+X+Length*cos(ZeroAngle+Angle),Y+Length*sin(ZeroAngle+Angle));
+ BmpGraphics.Circle(Movement+ZeroMovement+X,Y,10,true);
  BmpCanvas>>Image->Picture->Bitmap;
  Image->Repaint();
 
@@ -278,6 +288,8 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
   res&=net->CreateLink(cs_name+std::string(".MotionElement")+RDK::sntoa(i)
 	+".Motoneuron2.LTZone",0,man_name,conn_index++);
  }
+
+ ZeroAngle=+3.14/2;
  return res;
 }
 
