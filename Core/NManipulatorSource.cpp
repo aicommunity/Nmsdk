@@ -79,10 +79,11 @@ bool NManipulatorSource::ADefault(void)
  Speed=0;
  Force=0;
  
- SetNumOutputs(3);
+ SetNumOutputs(4);
  SetOutputDataSize(0,1);
  SetOutputDataSize(1,1);
  SetOutputDataSize(2,1);
+ SetOutputDataSize(3,1);
 
  return NSource::ADefault();
 }
@@ -114,6 +115,9 @@ bool NManipulatorSource::ACalculate(void)
 
  if(NumInputs >2 && GetInputDataSize(2)>0)
   POutputData[2].Double[0]=GetInputData(2)->Double[0];
+
+ if(NumInputs >3 && GetInputDataSize(3)>0)
+  POutputData[3].Double[0]=GetInputData(3)->Double[0];
  return true;//NManipulatorSource::ACalculate();
 }
 // --------------------------
