@@ -111,6 +111,7 @@ __published:	// IDE-managed Components
 	TProgressBar *MomentProgressBar;
 	TEdit *ExtMomentEdit;
 	TSplitter *Splitter1;
+	TCheckBox *CheckBox1;
 	void __fastcall Disconnect1Click(TObject *Sender);
 	void __fastcall MoveLeft1Click(TObject *Sender);
 	void __fastcall MoveRight1Click(TObject *Sender);
@@ -145,6 +146,7 @@ __published:	// IDE-managed Components
 	void __fastcall SendVButtonClick(TObject *Sender);
 	void __fastcall PACMultiplicatorTrackBarChange(TObject *Sender);
 	void __fastcall MomentTrackBarChange(TObject *Sender);
+	void __fastcall CheckBox1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNManipulatorControlForm(TComponent* Owner);

@@ -31,7 +31,6 @@
     Width = 693
     Height = 19
     Panels = <>
-    ExplicitTop = 415
   end
   object PageControl1: TPageControl
     Left = 0
@@ -41,10 +40,12 @@
     ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 386
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitHeight = 358
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -54,7 +55,6 @@
         Caption = ' Communication options '
         Enabled = False
         TabOrder = 0
-        ExplicitHeight = 260
         object Label1: TLabel
           Left = 7
           Top = 50
@@ -177,7 +177,6 @@
         Caption = ' Communication control '
         Enabled = False
         TabOrder = 2
-        ExplicitHeight = 260
         DesignSize = (
           452
           277)
@@ -261,7 +260,10 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitHeight = 358
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
@@ -270,7 +272,6 @@
         Align = alLeft
         Caption = ' Servo Control '
         TabOrder = 0
-        ExplicitHeight = 358
         object Время: TLabel
           Left = 8
           Top = 120
@@ -359,7 +360,10 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitHeight = 358
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -368,7 +372,6 @@
         Align = alLeft
         Caption = ' External control '
         TabOrder = 0
-        ExplicitHeight = 358
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -453,7 +456,7 @@
         end
         object ControlVoltageCheckBox: TCheckBox
           Left = 5
-          Top = 193
+          Top = 208
           Width = 181
           Height = 17
           Caption = 'Control power (U) '
@@ -470,7 +473,6 @@
           Align = alBottom
           Caption = ' Ext. moment '
           TabOrder = 8
-          ExplicitTop = 274
           DesignSize = (
             197
             82)
@@ -506,6 +508,17 @@
             Text = '0'
           end
         end
+        object CheckBox1: TCheckBox
+          Left = 5
+          Top = 189
+          Width = 187
+          Height = 17
+          Caption = 'FB by movement (Ic) '
+          Checked = True
+          State = cbChecked
+          TabOrder = 9
+          OnClick = CheckBox1Click
+        end
       end
       object Panel1: TPanel
         Left = 201
@@ -514,7 +527,6 @@
         Height = 375
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 358
         object Splitter1: TSplitter
           Left = 1
           Top = 177
@@ -641,8 +653,6 @@
           Align = alClient
           Caption = ' Neuro manipulator parameters '
           TabOrder = 1
-          ExplicitTop = 177
-          ExplicitHeight = 180
           object Label12: TLabel
             Left = 14
             Top = 106
@@ -653,13 +663,10 @@
           object Label11: TLabel
             Left = 2
             Top = 15
-            Width = 478
+            Width = 16
             Height = 13
             Align = alTop
             Caption = 'Vd:'
-            ExplicitLeft = 87
-            ExplicitTop = 150
-            ExplicitWidth = 16
           end
           object Label7: TLabel
             Left = 14
