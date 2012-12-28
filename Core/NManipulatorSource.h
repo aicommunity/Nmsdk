@@ -30,6 +30,8 @@ RDK::ULProperty<real,NManipulatorSource> Angle;
 RDK::ULProperty<real,NManipulatorSource> Speed;
 // момент двигателя
 RDK::ULProperty<real,NManipulatorSource> Force;
+
+RDK::ULProperty<real,NManipulatorSource> Movement;
 protected: // Основные свойства
 
 

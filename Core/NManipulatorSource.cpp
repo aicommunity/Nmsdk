@@ -30,7 +30,8 @@ NManipulatorSource::NManipulatorSource(void)
 : NSource(),
   Angle("Angle",this,&NManipulatorSource::SetAngle),
   Speed("Speed",this,&NManipulatorSource::SetSpeed),
-  Force("Force",this,&NManipulatorSource::SetForce)
+  Force("Force",this,&NManipulatorSource::SetForce),
+  Movement("Movement",this)
 {
 }
 
@@ -78,6 +79,7 @@ bool NManipulatorSource::ADefault(void)
  Angle=0;
  Speed=0;
  Force=0;
+ Movement=0;
  
  SetNumOutputs(4);
  SetOutputDataSize(0,1);
@@ -108,10 +110,10 @@ bool NManipulatorSource::ACalculate(void)
   UpdateOutputFlag=false;
  }*/
  if(NumInputs >0 && GetInputDataSize(0)>0)
-  POutputData[0].Double[0]=GetInputData(0)->Double[0];
+  POutputData[0].Double[0]=GetInputData(0)->Double[0]-Movement;
 
  if(NumInputs >1 && GetInputDataSize(1)>0)
-  POutputData[1].Double[0]=GetInputData(1)->Double[0];
+  POutputData[1].Double[0]=GetInputData(1)->Double[0]-Angle;
 
  if(NumInputs >2 && GetInputDataSize(2)>0)
   POutputData[2].Double[0]=GetInputData(2)->Double[0];
