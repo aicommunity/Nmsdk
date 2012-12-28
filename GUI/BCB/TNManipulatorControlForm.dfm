@@ -42,10 +42,6 @@
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -260,10 +256,6 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
@@ -360,10 +352,6 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -519,6 +507,51 @@
           TabOrder = 9
           OnClick = CheckBox1Click
         end
+        object GroupBox11: TGroupBox
+          Left = 2
+          Top = 209
+          Width = 197
+          Height = 82
+          Align = alBottom
+          Caption = ' Movement control '
+          TabOrder = 10
+          ExplicitLeft = 3
+          ExplicitTop = 212
+          DesignSize = (
+            197
+            82)
+          object MovementControlTrackBar: TTrackBar
+            Left = 5
+            Top = 18
+            Width = 192
+            Height = 27
+            Anchors = [akLeft, akTop, akRight]
+            Max = 1000
+            Min = -1000
+            TabOrder = 0
+            OnChange = MovementControlTrackBarChange
+          end
+          object MovementControlProgressBar: TProgressBar
+            Left = 13
+            Top = 53
+            Width = 98
+            Height = 17
+            Anchors = [akLeft, akTop, akRight]
+            Max = 1000
+            TabOrder = 1
+          end
+          object MovementControlEdit: TEdit
+            Left = 117
+            Top = 51
+            Width = 73
+            Height = 21
+            Anchors = [akTop, akRight]
+            Color = clBtnFace
+            ReadOnly = True
+            TabOrder = 2
+            Text = '0'
+          end
+        end
       end
       object Panel1: TPanel
         Left = 201
@@ -663,10 +696,11 @@
           object Label11: TLabel
             Left = 2
             Top = 15
-            Width = 16
+            Width = 478
             Height = 13
             Align = alTop
             Caption = 'Vd:'
+            ExplicitWidth = 16
           end
           object Label7: TLabel
             Left = 14

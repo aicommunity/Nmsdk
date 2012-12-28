@@ -276,9 +276,11 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
  if(man_name == "PendulumAndCart")
  {
   res&=net->CreateLink(man_name,3,cs_name+".NManipulatorSource1",0);
+  res&=net->CreateLink(man_name,4,cs_name+".NManipulatorSource1",3);
  }
  else
   res&=net->CreateLink(man_name,0,cs_name+".NManipulatorSource1",0);
+
  res&=net->CreateLink(man_name,1,cs_name+".NManipulatorSource1",1);
  res&=net->CreateLink(man_name,2,cs_name+".NManipulatorSource1",2);
  res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
@@ -963,6 +965,42 @@ void __fastcall TNManipulatorControlForm::CheckBox1Click(TObject *Sender)
   return;
 
 
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::MovementControlTrackBarChange(TObject *Sender)
+
+{
+ if(UpdateInterfaceFlag)
+  return;
+
+
+ RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
+ double amplitude=double(MovementControlTrackBar->Position)/double(MovementControlTrackBar->Max/2.0);
+ MovementControlEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
+
+ RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
+ RDK::UEPtr<NMSDK::NWPhysicalManipulator> man=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(UniversalManipulator);
+
+ if(source)
+ {
+  if(engine || man)
+  {
+   source->Angle=amplitude;
+  }
+
+  if(engine2)
+  {
+   source->Movement=amplitude;
+  }
+
+ }
+
+ if(MovementControlTrackBar->Position>0)
+  MovementControlProgressBar->Position=MovementControlTrackBar->Position;
+ else
+  MovementControlProgressBar->Position=-MovementControlTrackBar->Position;
 }
 //---------------------------------------------------------------------------
 
