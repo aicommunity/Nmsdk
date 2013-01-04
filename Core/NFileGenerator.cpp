@@ -64,7 +64,7 @@ NFileGenerator* NFileGenerator::New(void)
 // в качестве компоненты данного объекта
 // Метод возвращает 'true' в случае допустимости
 // и 'false' в случае некорректного типа
-bool NFileGenerator::CheckComponentType(UEPtr<NAContainer> comp) const
+bool NFileGenerator::CheckComponentType(UEPtr<UAContainer> comp) const
 {
  return false;
 }
