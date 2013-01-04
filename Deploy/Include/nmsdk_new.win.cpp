@@ -5,15 +5,15 @@
 #include "../../Libraries/NWinAPILibraries.h"
 
 /*****************************************************************************/
-extern NMSDK::NStorage* CreateNewStorage(void)
+extern NMSDK::UAContainerStorage* CreateNewStorage(void)
 {
- return new NMSDK::NStorage;
+ return new NMSDK::UAContainerStorage;
 }
 
-extern NMSDK::NEnvironment* CreateNewEnvironment(void)
+extern NMSDK::UAContainerEnvironment* CreateNewEnvironment(void)
 {
  RDK::UItemData::DefaultDataSize=sizeof(double);
- NMSDK::NEnvironment* env=new NMSDK::NEnvironment;
+ NMSDK::UAContainerEnvironment* env=new NMSDK::UAContainerEnvironment;
 
  env->AddClassLibrary(&NMSDK::BCLLibrary);
  env->AddClassLibrary(&NMSDK::ActLibrary);

@@ -38,38 +38,13 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-using namespace std;
 using namespace RDK;
-using RDK::UId;
-using RDK::ULongId;
-using RDK::NameT;
-
-typedef RDK::UAContainer NAContainer;
-
-typedef RDK::UAConnector NAConnector;
-
-typedef RDK::UAItem NAItem;
-
-typedef RDK::UADItem NADItem;
-
-typedef RDK::UANet NANet;
 
 typedef double real;
 typedef vector<real> Real;
 typedef vector<real>::iterator RealIterator;
 typedef vector<real>::const_iterator RealCIterator;
 
-//typedef long int IndexT;
-//typedef int TimeT;
-
-typedef RDK::UVariableData NVariableData;
-
-// Константы
-//extern const TimeT DefaultTimeStep;
-
-// Буферы
-//extern ULongId LongIdTemp;
-//extern NameT NameTemp;
 
 }
 

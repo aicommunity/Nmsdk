@@ -15,7 +15,7 @@ See file license.txt for more information
 #ifndef N_GRAPHICS_H
 #define N_GRAPHICS_H
 
-#include "../Kernel/NBios.h"
+#include "../../Kernel/NSupport.h"
 #include "rdk.h"
 
 namespace NMSDK {
@@ -105,7 +105,7 @@ class NGraphics
 {
 protected: // Данные
 // Указатель на НС
-NANet *Net;
+UANet *Net;
 
 // Таблица соответствий между нейронами сети и описаний визуальных элементов
 map<UId,NVDescription> Descriptions;
@@ -155,7 +155,7 @@ NGraphics(void);
 // Методы доступа к данным
 // ---------------------------
 // Возвращает указатель на НС
-NANet* GetNet(void);
+UANet* GetNet(void);
 
 // Возвращает элемент таблицы соответствий
 NVDescription& GetDescription(const UId &id);
@@ -168,7 +168,7 @@ UAGraphics* GetGEngine(void);
 
 // Связывает класс с новой НС
 // Если net == 0 то отключает класс от текущей НС и возвращает true
-bool SetNet(NANet *net);
+bool SetNet(UANet *net);
 
 // Связывает класс с новой НС
 // Если engine == 0 то возвращает false и не делеает ничего

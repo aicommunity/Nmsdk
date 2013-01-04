@@ -500,7 +500,7 @@ void __fastcall TNManipulatorControlForm::FormClose(TObject *Sender, TCloseActio
 void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 {
  bool res=true;
- RDK::UEPtr<NMSDK::NAContainer> cont;
+ RDK::UEPtr<NMSDK::UAContainer> cont;
 
  if(!ControlSystem)
   return;
