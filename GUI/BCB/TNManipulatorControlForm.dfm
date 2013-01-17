@@ -2,7 +2,7 @@
   Left = 0
   Top = 0
   Caption = 'NManipulatorControlForm'
-  ClientHeight = 451
+  ClientHeight = 492
   ClientWidth = 693
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -27,34 +27,34 @@
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 432
+    Top = 473
     Width = 693
     Height = 19
     Panels = <>
+    ExplicitTop = 432
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 29
     Width = 693
-    Height = 403
+    Height = 444
     ActivePage = TabSheet3
     Align = alClient
     TabOrder = 2
+    ExplicitHeight = 403
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 375
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
         Width = 233
-        Height = 277
+        Height = 318
         Align = alLeft
         Caption = ' Communication options '
         Enabled = False
         TabOrder = 0
+        ExplicitHeight = 277
         object Label1: TLabel
           Left = 7
           Top = 50
@@ -172,14 +172,15 @@
         Left = 233
         Top = 98
         Width = 452
-        Height = 277
+        Height = 318
         Align = alClient
         Caption = ' Communication control '
         Enabled = False
         TabOrder = 2
+        ExplicitHeight = 277
         DesignSize = (
           452
-          277)
+          318)
         object ConnectButton: TButton
           Left = 6
           Top = 20
@@ -260,18 +261,16 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 375
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
         Width = 185
-        Height = 375
+        Height = 416
         Align = alLeft
         Caption = ' Servo Control '
         TabOrder = 0
+        ExplicitHeight = 375
         object Время: TLabel
           Left = 8
           Top = 120
@@ -360,18 +359,16 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 375
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
         Width = 201
-        Height = 375
+        Height = 416
         Align = alLeft
         Caption = ' External control '
         TabOrder = 0
+        ExplicitHeight = 375
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -387,7 +384,7 @@
           Caption = 'Number of II Afferents ext. controls'
         end
         object IIAfferentTrackBar: TTrackBar
-          Left = -4
+          Left = 4
           Top = 37
           Width = 146
           Height = 27
@@ -436,7 +433,7 @@
         end
         object IbCheckBox: TCheckBox
           Left = 5
-          Top = 150
+          Top = 151
           Width = 181
           Height = 17
           Caption = 'FB by moment (Ib) '
@@ -467,12 +464,13 @@
         end
         object GroupBox10: TGroupBox
           Left = 2
-          Top = 291
+          Top = 332
           Width = 197
           Height = 82
           Align = alBottom
-          Caption = ' Ext. moment '
+          Caption = ' Target position '
           TabOrder = 8
+          ExplicitTop = 291
           DesignSize = (
             197
             82)
@@ -521,14 +519,13 @@
         end
         object GroupBox11: TGroupBox
           Left = 2
-          Top = 209
+          Top = 250
           Width = 197
           Height = 82
           Align = alBottom
-          Caption = ' Movement control '
+          Caption = ' External power  '
           TabOrder = 10
-          ExplicitLeft = 3
-          ExplicitTop = 212
+          ExplicitTop = 209
           DesignSize = (
             197
             82)
@@ -564,129 +561,151 @@
             Text = '0'
           end
         end
+        object HideSecondaryGuiCheckBox: TCheckBox
+          Left = 6
+          Top = 231
+          Width = 189
+          Height = 17
+          Caption = 'Hide secondary GUI'
+          TabOrder = 11
+          OnClick = HideSecondaryGuiCheckBoxClick
+        end
       end
       object Panel1: TPanel
         Left = 201
         Top = 0
         Width = 484
-        Height = 375
+        Height = 416
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 375
         object Splitter1: TSplitter
           Left = 1
           Top = 177
           Width = 482
           Height = 12
           Cursor = crVSplit
-          Align = alTop
+          Align = alBottom
         end
         object GroupBox7: TGroupBox
           Left = 1
           Top = 1
           Width = 482
           Height = 176
-          Align = alTop
-          Caption = 'Control system parameters '
+          Align = alClient
+          Caption = ' Visual output '
+          DoubleBuffered = True
+          ParentDoubleBuffered = False
           TabOrder = 0
-          object Label8: TLabel
-            Left = 16
-            Top = 67
-            Width = 145
-            Height = 13
-            Caption = #1055#1086#1089#1090'. '#1074#1088#1077#1084#1077#1085#1080' '#1088#1072#1079#1088#1103#1076#1072' PAC:'
-          end
-          object Label10: TLabel
-            Left = 14
-            Top = 116
-            Width = 85
-            Height = 13
-            Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100' PAC:'
-          end
-          object Label13: TLabel
-            Left = 12
-            Top = 22
-            Width = 139
-            Height = 13
-            Caption = #1055#1086#1089#1090'. '#1074#1088#1077#1084#1077#1085#1080' '#1079#1072#1088#1103#1076#1072' PAC:'
-          end
-          object PACActivatorTimeTrackBar: TTrackBar
-            Left = 5
-            Top = 36
-            Width = 141
-            Height = 27
-            Max = 10000
-            Min = 10
-            Position = 10
-            TabOrder = 0
-            OnChange = PACActivatorTimeTrackBarChange
-          end
-          object PACActivatorTimeEdit: TEdit
-            Left = 144
-            Top = 38
-            Width = 48
-            Height = 21
-            TabOrder = 1
-            Text = '1'
-          end
-          object PACDeactivatorTimeEdit: TEdit
-            Left = 146
-            Top = 84
-            Width = 48
-            Height = 21
-            TabOrder = 2
-            Text = '1'
-          end
-          object PACDeactivatorTimeTrackBar: TTrackBar
-            Left = 7
-            Top = 82
-            Width = 141
-            Height = 27
-            Max = 10000
-            Min = 10
-            Position = 100
-            TabOrder = 3
-            OnChange = PACDeactivatorTimeTrackBarChange
-          end
-          object PACMultiplicatorTrackBar: TTrackBar
-            Left = 7
-            Top = 132
-            Width = 141
-            Height = 27
-            Max = 100
-            Position = 10
-            TabOrder = 4
-            OnChange = PACMultiplicatorTrackBarChange
-          end
-          object PACMultiplicatorEdit: TEdit
-            Left = 146
-            Top = 132
-            Width = 48
-            Height = 21
-            TabOrder = 5
-            Text = '1'
-          end
-          object GroupBox9: TGroupBox
-            Left = 216
+          object Splitter2: TSplitter
+            Left = 219
             Top = 15
-            Width = 264
+            Width = 8
             Height = 159
-            Align = alRight
-            Caption = ' Visual '
-            TabOrder = 6
-            object Image: TImage
-              Left = 2
-              Top = 15
-              Width = 260
-              Height = 142
-              Align = alClient
-              AutoSize = True
-              Center = True
-              IncrementalDisplay = True
-              Proportional = True
-              Stretch = True
-              ExplicitLeft = 200
-              ExplicitWidth = 280
-              ExplicitHeight = 159
+            ExplicitLeft = 2
+          end
+          object Image: TImage
+            Left = 227
+            Top = 15
+            Width = 253
+            Height = 159
+            Align = alClient
+            AutoSize = True
+            Center = True
+            IncrementalDisplay = True
+            Proportional = True
+            Stretch = True
+            ExplicitLeft = 6
+            ExplicitTop = 13
+            ExplicitWidth = 260
+            ExplicitHeight = 142
+          end
+          object Panel2: TPanel
+            Left = 2
+            Top = 15
+            Width = 217
+            Height = 159
+            Align = alLeft
+            TabOrder = 0
+            ExplicitLeft = -7
+            ExplicitTop = 29
+            ExplicitHeight = 134
+            object Label13: TLabel
+              Left = 12
+              Top = 9
+              Width = 130
+              Height = 13
+              Caption = 'Charge PAC time constant:'
+            end
+            object Label8: TLabel
+              Left = 16
+              Top = 54
+              Width = 142
+              Height = 13
+              Caption = 'Discharge PAC time constant:'
+            end
+            object Label10: TLabel
+              Left = 14
+              Top = 103
+              Width = 69
+              Height = 13
+              Caption = 'PAC multiplier:'
+            end
+            object PACActivatorTimeTrackBar: TTrackBar
+              Left = 5
+              Top = 23
+              Width = 141
+              Height = 27
+              Max = 10000
+              Min = 10
+              Position = 10
+              TabOrder = 0
+              OnChange = PACActivatorTimeTrackBarChange
+            end
+            object PACActivatorTimeEdit: TEdit
+              Left = 144
+              Top = 25
+              Width = 48
+              Height = 21
+              TabOrder = 1
+              Text = '1'
+            end
+            object PACDeactivatorTimeEdit: TEdit
+              Left = 146
+              Top = 71
+              Width = 48
+              Height = 21
+              TabOrder = 2
+              Text = '1'
+            end
+            object PACDeactivatorTimeTrackBar: TTrackBar
+              Left = 7
+              Top = 69
+              Width = 141
+              Height = 27
+              Max = 10000
+              Min = 10
+              Position = 100
+              TabOrder = 3
+              OnChange = PACDeactivatorTimeTrackBarChange
+            end
+            object PACMultiplicatorTrackBar: TTrackBar
+              Left = 7
+              Top = 119
+              Width = 141
+              Height = 27
+              Max = 100
+              Position = 10
+              TabOrder = 4
+              OnChange = PACMultiplicatorTrackBarChange
+            end
+            object PACMultiplicatorEdit: TEdit
+              Left = 146
+              Top = 119
+              Width = 48
+              Height = 21
+              TabOrder = 5
+              Text = '1'
             end
           end
         end
@@ -694,10 +713,11 @@
           Left = 1
           Top = 189
           Width = 482
-          Height = 185
-          Align = alClient
+          Height = 226
+          Align = alBottom
           Caption = ' Neuro manipulator parameters '
           TabOrder = 1
+          ExplicitHeight = 185
           object Label12: TLabel
             Left = 14
             Top = 106
@@ -706,26 +726,25 @@
             Caption = 'Va:'
           end
           object Label11: TLabel
-            Left = 2
-            Top = 15
-            Width = 16
-            Height = 13
-            Align = alTop
+            Left = 92
+            Top = 106
+            Width = 19
+            Height = 15
             Caption = 'Vd:'
           end
           object Label7: TLabel
             Left = 14
             Top = 57
-            Width = 97
+            Width = 174
             Height = 13
-            Caption = #1042#1088#1077#1084#1103' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103':'
+            Caption = 'Controller power time duration (ms):'
           end
           object Label9: TLabel
             Left = 12
             Top = 16
-            Width = 127
+            Width = 85
             Height = 13
-            Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103':'
+            Caption = 'Voltage multiplier:'
           end
           object VaEdit: TEdit
             Left = 33
@@ -802,12 +821,12 @@
     end
   end
   object ImageList: TImageList
-    Left = 464
-    Top = 40
+    Left = 456
+    Top = 8
   end
   object MainMenu: TMainMenu
-    Left = 408
-    Top = 40
+    Left = 384
+    Top = 8
     object Communication1: TMenuItem
       Caption = 'Communication'
       object SelectManipulator1: TMenuItem

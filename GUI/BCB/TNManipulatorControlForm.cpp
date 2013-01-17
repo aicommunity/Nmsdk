@@ -64,6 +64,30 @@ void TNManipulatorControlForm::AUpdateInterface(void)
   ControlSystemSelectionPanel->Color=clGreen;
   ControlSystemSelectionPanel->Caption=ControlSystemName.c_str();
   Caption=String("Control system [")+ControlSystemName.c_str()+String("]");
+
+  if(Model_CheckLink((ControlSystemName+".Ia_PosIntervalSeparator1").c_str(),0,(ControlSystemName+".MotionElement0.Afferent_Ia2.Receptor").c_str(),0))
+   IaCheckBox->Checked=true;
+  else
+   IaCheckBox->Checked=false;
+
+  if(Model_CheckLink((ControlSystemName+".Ib_PosIntervalSeparator1").c_str(),0,(ControlSystemName+".MotionElement0.Afferent_Ib1.Receptor").c_str(),0))
+   IbCheckBox->Checked=true;
+  else
+   IbCheckBox->Checked=false;
+
+  if(Model_CheckLink((ControlSystemName+".II_PosIntervalSeparator1").c_str(),0,(ControlSystemName+".MotionElement0.Afferent_II1.Receptor").c_str(),0))
+   IICheckBox->Checked=true;
+  else
+   IICheckBox->Checked=false;
+
+  if(Model_CheckLink((ControlSystemName+".Ic_PosIntervalSeparator1").c_str(),0,(ControlSystemName+".MotionElement0.Afferent_Ic1.Receptor").c_str(),0))
+   CheckBox1->Checked=true;
+  else
+   CheckBox1->Checked=false;
+  if(Model_CheckLink((ControlSystemName+".Pac").c_str(),0,(ControlSystemName+".NManipulatorInput1").c_str(),0))
+   ControlVoltageCheckBox->Checked=true;
+  else
+   ControlVoltageCheckBox->Checked=false;
  }
 
 
@@ -119,6 +143,14 @@ void TNManipulatorControlForm::AUpdateInterface(void)
  BmpGraphics.Line(Movement+ZeroMovement+X,Y,Movement+ZeroMovement+X+Length*cos(ZeroAngle+Angle),Y+Length*sin(ZeroAngle+Angle));
  BmpGraphics.Circle(Movement+ZeroMovement+X,Y,10,true);
  BmpCanvas>>Image->Picture->Bitmap;
+ if(ControlSystem)
+ {
+  String text;
+  text=IntToStr(int(ControlSystem->NumMotionElements));
+  text=text+" motion elements";
+  Image->Canvas->Font->Size=30;
+  Image->Canvas->TextOutA(0,0,text);
+ }
  Image->Repaint();
 
  double value=double(PACMultiplicatorTrackBar->Position);
@@ -499,6 +531,9 @@ void __fastcall TNManipulatorControlForm::FormClose(TObject *Sender, TCloseActio
 
 void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
 {
+ if(UpdateInterfaceFlag)
+  return;
+
  bool res=true;
  RDK::UEPtr<NMSDK::UAContainer> cont;
 
@@ -506,7 +541,6 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
   return;
 
  int num_motions=ControlSystem->NumMotionElements;
-
 
  if(IaCheckBox->Checked)
   {
@@ -618,6 +652,9 @@ void __fastcall TNManipulatorControlForm::IINumAfferentTrackBarChange(TObject *S
 
 void __fastcall TNManipulatorControlForm::IbCheckBoxClick(TObject *Sender)
 {
+ if(UpdateInterfaceFlag)
+  return;
+
  bool res=true;
 // RDK::UEPtr<NMSDK::NAContainer> cont;
 
@@ -672,6 +709,9 @@ void __fastcall TNManipulatorControlForm::IbCheckBoxClick(TObject *Sender)
 
 void __fastcall TNManipulatorControlForm::IICheckBoxClick(TObject *Sender)
 {
+ if(UpdateInterfaceFlag)
+  return;
+
  bool res=true;
 // RDK::UEPtr<NMSDK::NAContainer> cont;
 
@@ -727,6 +767,9 @@ void __fastcall TNManipulatorControlForm::IICheckBoxClick(TObject *Sender)
 void __fastcall TNManipulatorControlForm::ControlVoltageCheckBoxClick(TObject *Sender)
 
 {
+ if(UpdateInterfaceFlag)
+  return;
+
  bool res=true;
 
  if(!ControlSystem)
@@ -915,6 +958,9 @@ void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
 
 void __fastcall TNManipulatorControlForm::CheckBox1Click(TObject *Sender)
 {
+ if(UpdateInterfaceFlag)
+  return;
+
  bool res=true;
 // RDK::UEPtr<NMSDK::NAContainer> cont;
 
@@ -1001,6 +1047,26 @@ void __fastcall TNManipulatorControlForm::MovementControlTrackBarChange(TObject 
   MovementControlProgressBar->Position=MovementControlTrackBar->Position;
  else
   MovementControlProgressBar->Position=-MovementControlTrackBar->Position;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::HideSecondaryGuiCheckBoxClick(TObject *Sender)
+
+{
+ if(HideSecondaryGuiCheckBox->Checked)
+ {
+  GroupBox8->Visible=false;
+  Panel2->Visible=false;
+  Splitter1->Visible=false;
+  Splitter2->Visible=false;
+ }
+ else
+ {
+  GroupBox8->Visible=true;
+  Panel2->Visible=true;
+  Splitter1->Visible=true;
+  Splitter2->Visible=true;
+ }
 }
 //---------------------------------------------------------------------------
 

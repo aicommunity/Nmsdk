@@ -82,12 +82,6 @@ __published:	// IDE-managed Components
 	TCheckBox *ControlVoltageCheckBox;
 	TPanel *Panel1;
 	TGroupBox *GroupBox7;
-	TLabel *Label8;
-	TLabel *Label10;
-	TTrackBar *PACActivatorTimeTrackBar;
-	TEdit *PACActivatorTimeEdit;
-	TEdit *PACDeactivatorTimeEdit;
-	TTrackBar *PACDeactivatorTimeTrackBar;
 	TGroupBox *GroupBox8;
 	TLabel *Label12;
 	TEdit *VaEdit;
@@ -101,11 +95,6 @@ __published:	// IDE-managed Components
 	TEdit *VoltageMulEdit;
 	TEdit *TimeDurationEdit;
 	TCheckBox *MulToNumberOfControlElementsCheckBox;
-	TLabel *Label13;
-	TTrackBar *PACMultiplicatorTrackBar;
-	TEdit *PACMultiplicatorEdit;
-	TGroupBox *GroupBox9;
-	TImage *Image;
 	TGroupBox *GroupBox10;
 	TTrackBar *MomentTrackBar;
 	TProgressBar *MomentProgressBar;
@@ -116,6 +105,19 @@ __published:	// IDE-managed Components
 	TTrackBar *MovementControlTrackBar;
 	TProgressBar *MovementControlProgressBar;
 	TEdit *MovementControlEdit;
+	TSplitter *Splitter2;
+	TCheckBox *HideSecondaryGuiCheckBox;
+	TPanel *Panel2;
+	TLabel *Label13;
+	TTrackBar *PACActivatorTimeTrackBar;
+	TEdit *PACActivatorTimeEdit;
+	TEdit *PACDeactivatorTimeEdit;
+	TTrackBar *PACDeactivatorTimeTrackBar;
+	TLabel *Label8;
+	TLabel *Label10;
+	TTrackBar *PACMultiplicatorTrackBar;
+	TEdit *PACMultiplicatorEdit;
+	TImage *Image;
 	void __fastcall Disconnect1Click(TObject *Sender);
 	void __fastcall MoveLeft1Click(TObject *Sender);
 	void __fastcall MoveRight1Click(TObject *Sender);
@@ -152,6 +154,7 @@ __published:	// IDE-managed Components
 	void __fastcall MomentTrackBarChange(TObject *Sender);
 	void __fastcall CheckBox1Click(TObject *Sender);
 	void __fastcall MovementControlTrackBarChange(TObject *Sender);
+	void __fastcall HideSecondaryGuiCheckBoxClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNManipulatorControlForm(TComponent* Owner);
