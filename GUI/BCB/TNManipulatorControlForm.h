@@ -13,6 +13,7 @@
 #include <Vcl.ImgList.hpp>
 #include <Vcl.Menus.hpp>
 #include "TUVisualControllerFormUnit.h"
+#include <Vcl.Grids.hpp>
 #include <string>
 
 #include "nmsdk_cpp_initdll.h"
@@ -22,7 +23,6 @@
 class TNManipulatorControlForm : public TUVisualControllerForm
 {
 __published:	// IDE-managed Components
-	TToolBar *ToolBar1;
 	TStatusBar *StatusBar1;
 	TImageList *ImageList;
 	TMainMenu *MainMenu;
@@ -117,7 +117,10 @@ __published:	// IDE-managed Components
 	TLabel *Label10;
 	TTrackBar *PACMultiplicatorTrackBar;
 	TEdit *PACMultiplicatorEdit;
-	TImage *Image;
+	TPanel *Panel3;
+	TDrawGrid *DrawGrid;
+	TButton *ResetToZeroButton1;
+	TButton *ResetToZeroButton2;
 	void __fastcall Disconnect1Click(TObject *Sender);
 	void __fastcall MoveLeft1Click(TObject *Sender);
 	void __fastcall MoveRight1Click(TObject *Sender);
@@ -155,6 +158,12 @@ __published:	// IDE-managed Components
 	void __fastcall CheckBox1Click(TObject *Sender);
 	void __fastcall MovementControlTrackBarChange(TObject *Sender);
 	void __fastcall HideSecondaryGuiCheckBoxClick(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall FormDestroy(TObject *Sender);
+	void __fastcall DrawGridDrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
+          TGridDrawState State);
+	void __fastcall ResetToZeroButton1Click(TObject *Sender);
+	void __fastcall ResetToZeroButton2Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNManipulatorControlForm(TComponent* Owner);
@@ -200,6 +209,8 @@ double ZeroMovement;
 
 // Имя компонента с которого считываем данные
 std::string ReadComponentName;
+
+TBitmap *TempBmp;
 
 
 // Сохраняет параметры интерфейса в xml

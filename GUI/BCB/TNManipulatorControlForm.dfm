@@ -5,6 +5,7 @@
   ClientHeight = 492
   ClientWidth = 693
   Color = clBtnFace
+  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -13,48 +14,37 @@
   Menu = MainMenu
   OldCreateOrder = False
   OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object ToolBar1: TToolBar
-    Left = 0
-    Top = 0
-    Width = 693
-    Height = 29
-    Caption = 'ToolBar1'
-    Images = ImageList
-    TabOrder = 0
-  end
   object StatusBar1: TStatusBar
     Left = 0
     Top = 473
     Width = 693
     Height = 19
     Panels = <>
-    ExplicitTop = 432
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 29
+    Top = 0
     Width = 693
-    Height = 444
+    Height = 473
     ActivePage = TabSheet3
     Align = alClient
-    TabOrder = 2
-    ExplicitHeight = 403
+    TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitHeight = 375
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
         Width = 233
-        Height = 318
+        Height = 347
         Align = alLeft
         Caption = ' Communication options '
         Enabled = False
         TabOrder = 0
-        ExplicitHeight = 277
         object Label1: TLabel
           Left = 7
           Top = 50
@@ -172,15 +162,14 @@
         Left = 233
         Top = 98
         Width = 452
-        Height = 318
+        Height = 347
         Align = alClient
         Caption = ' Communication control '
         Enabled = False
         TabOrder = 2
-        ExplicitHeight = 277
         DesignSize = (
           452
-          318)
+          347)
         object ConnectButton: TButton
           Left = 6
           Top = 20
@@ -261,16 +250,14 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitHeight = 375
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
         Width = 185
-        Height = 416
+        Height = 445
         Align = alLeft
         Caption = ' Servo Control '
         TabOrder = 0
-        ExplicitHeight = 375
         object Время: TLabel
           Left = 8
           Top = 120
@@ -359,16 +346,14 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitHeight = 375
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
         Width = 201
-        Height = 416
+        Height = 445
         Align = alLeft
         Caption = ' External control '
         TabOrder = 0
-        ExplicitHeight = 375
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -464,20 +449,19 @@
         end
         object GroupBox10: TGroupBox
           Left = 2
-          Top = 332
+          Top = 361
           Width = 197
           Height = 82
           Align = alBottom
           Caption = ' Target position '
           TabOrder = 8
-          ExplicitTop = 291
           DesignSize = (
             197
             82)
           object MomentTrackBar: TTrackBar
             Left = 5
             Top = 18
-            Width = 192
+            Width = 116
             Height = 27
             Anchors = [akLeft, akTop, akRight]
             Max = 1000
@@ -505,6 +489,15 @@
             TabOrder = 2
             Text = '0'
           end
+          object ResetToZeroButton2: TButton
+            Left = 117
+            Top = 17
+            Width = 76
+            Height = 28
+            Caption = 'Reset to 0'
+            TabOrder = 3
+            OnClick = ResetToZeroButton2Click
+          end
         end
         object CheckBox1: TCheckBox
           Left = 5
@@ -519,20 +512,19 @@
         end
         object GroupBox11: TGroupBox
           Left = 2
-          Top = 250
+          Top = 279
           Width = 197
           Height = 82
           Align = alBottom
           Caption = ' External power  '
           TabOrder = 10
-          ExplicitTop = 209
           DesignSize = (
             197
             82)
           object MovementControlTrackBar: TTrackBar
             Left = 5
             Top = 18
-            Width = 192
+            Width = 116
             Height = 27
             Anchors = [akLeft, akTop, akRight]
             Max = 1000
@@ -560,6 +552,15 @@
             TabOrder = 2
             Text = '0'
           end
+          object ResetToZeroButton1: TButton
+            Left = 117
+            Top = 17
+            Width = 76
+            Height = 28
+            Caption = 'Reset to 0'
+            TabOrder = 3
+            OnClick = ResetToZeroButton1Click
+          end
         end
         object HideSecondaryGuiCheckBox: TCheckBox
           Left = 6
@@ -575,61 +576,43 @@
         Left = 201
         Top = 0
         Width = 484
-        Height = 416
+        Height = 445
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 375
         object Splitter1: TSplitter
           Left = 1
-          Top = 177
+          Top = 206
           Width = 482
           Height = 12
           Cursor = crVSplit
           Align = alBottom
+          ExplicitTop = 177
         end
         object GroupBox7: TGroupBox
           Left = 1
           Top = 1
           Width = 482
-          Height = 176
+          Height = 205
           Align = alClient
           Caption = ' Visual output '
-          DoubleBuffered = True
+          DoubleBuffered = False
           ParentDoubleBuffered = False
           TabOrder = 0
           object Splitter2: TSplitter
             Left = 219
             Top = 15
             Width = 8
-            Height = 159
+            Height = 188
             ExplicitLeft = 2
-          end
-          object Image: TImage
-            Left = 227
-            Top = 15
-            Width = 253
-            Height = 159
-            Align = alClient
-            AutoSize = True
-            Center = True
-            IncrementalDisplay = True
-            Proportional = True
-            Stretch = True
-            ExplicitLeft = 6
-            ExplicitTop = 13
-            ExplicitWidth = 260
-            ExplicitHeight = 142
+            ExplicitHeight = 159
           end
           object Panel2: TPanel
             Left = 2
             Top = 15
             Width = 217
-            Height = 159
+            Height = 188
             Align = alLeft
             TabOrder = 0
-            ExplicitLeft = -7
-            ExplicitTop = 29
-            ExplicitHeight = 134
             object Label13: TLabel
               Left = 12
               Top = 9
@@ -708,16 +691,42 @@
               Text = '1'
             end
           end
+          object Panel3: TPanel
+            Left = 227
+            Top = 15
+            Width = 253
+            Height = 188
+            Align = alClient
+            TabOrder = 1
+            object DrawGrid: TDrawGrid
+              Left = 1
+              Top = 1
+              Width = 251
+              Height = 186
+              Align = alClient
+              ColCount = 1
+              DoubleBuffered = True
+              FixedCols = 0
+              RowCount = 1
+              FixedRows = 0
+              ParentDoubleBuffered = False
+              TabOrder = 0
+              OnDrawCell = DrawGridDrawCell
+              ExplicitLeft = 64
+              ExplicitTop = 119
+              ExplicitWidth = 320
+              ExplicitHeight = 120
+            end
+          end
         end
         object GroupBox8: TGroupBox
           Left = 1
-          Top = 189
+          Top = 218
           Width = 482
           Height = 226
           Align = alBottom
           Caption = ' Neuro manipulator parameters '
           TabOrder = 1
-          ExplicitHeight = 185
           object Label12: TLabel
             Left = 14
             Top = 106
@@ -728,8 +737,8 @@
           object Label11: TLabel
             Left = 92
             Top = 106
-            Width = 19
-            Height = 15
+            Width = 16
+            Height = 13
             Caption = 'Vd:'
           end
           object Label7: TLabel

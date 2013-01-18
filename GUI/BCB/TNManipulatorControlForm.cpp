@@ -31,6 +31,7 @@ __fastcall TNManipulatorControlForm::TNManipulatorControlForm(TComponent* Owner)
  ZeroMovement=0;
 
  Movement=0;
+ TempBmp=0;
 }
 
 void TNManipulatorControlForm::AUpdateInterface(void)
@@ -142,16 +143,18 @@ void TNManipulatorControlForm::AUpdateInterface(void)
  BmpGraphics.SetPenColor(0x000000FF);
  BmpGraphics.Line(Movement+ZeroMovement+X,Y,Movement+ZeroMovement+X+Length*cos(ZeroAngle+Angle),Y+Length*sin(ZeroAngle+Angle));
  BmpGraphics.Circle(Movement+ZeroMovement+X,Y,10,true);
- BmpCanvas>>Image->Picture->Bitmap;
+ BmpCanvas>>TempBmp;
  if(ControlSystem)
  {
   String text;
   text=IntToStr(int(ControlSystem->NumMotionElements));
   text=text+" motion elements";
-  Image->Canvas->Font->Size=30;
-  Image->Canvas->TextOutA(0,0,text);
+  TempBmp->Canvas->Font->Size=30;
+  TempBmp->Canvas->TextOutA(0,0,text);
+  DrawGrid->DefaultColWidth=DrawGrid->ClientWidth;
+  DrawGrid->DefaultRowHeight=DrawGrid->ClientHeight;
+  DrawGrid->Repaint();
  }
- Image->Repaint();
 
  double value=double(PACMultiplicatorTrackBar->Position);
  PACMultiplicatorEdit->Text=FloatToStrF(value,ffFixed,3,3);
@@ -267,6 +270,12 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
  MN1PosControl=0;
  MN1NegControl=0;
 
+ ZeroAngle=0;
+
+ ZeroMovement=0;
+
+ Movement=0;
+
 
  xml.SelectNodeForce("Control");
  ManipulatorName=xml.ReadString("ManipulatorName","");
@@ -294,6 +303,8 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
 
  IINumAfferentTrackBar->Position=0;
  IINumAfferentTrackBarChange(this);
+ ResetToZeroButton1Click(this);
+ ResetToZeroButton2Click(this);
 }
 
 
@@ -1067,6 +1078,47 @@ void __fastcall TNManipulatorControlForm::HideSecondaryGuiCheckBoxClick(TObject 
   Splitter1->Visible=true;
   Splitter2->Visible=true;
  }
+ DrawGrid->Repaint();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::FormCreate(TObject *Sender)
+{
+ TempBmp=new TBitmap;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::FormDestroy(TObject *Sender)
+{
+ if(TempBmp)
+  delete TempBmp;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::DrawGridDrawCell(TObject *Sender, int ACol,
+          int ARow, TRect &Rect, TGridDrawState State)
+{
+// if(int(Images.size())<=ACol || int(Images[ACol].size())<=ARow)
+//  return;
+
+ dynamic_cast<TDrawGrid *>(Sender)->Canvas->
+		StretchDraw(Rect, TempBmp);
+// if(ShowLegendCheckBox->Checked)
+//  dynamic_cast<TDrawGrid *>(Sender)->Canvas->TextOut(Rect.Left,Rect.Top,(std::string(Model_GetComponentLongName(StringIds[ACol][ARow].c_str()))+std::string("[")+RDK::sntoa(ComponentIndexes[ACol][ARow])+"]").c_str());
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::ResetToZeroButton1Click(TObject *Sender)
+
+{
+ MovementControlTrackBar->Position=0;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNManipulatorControlForm::ResetToZeroButton2Click(TObject *Sender)
+
+{
+ MomentTrackBar->Position=0;
 }
 //---------------------------------------------------------------------------
 
