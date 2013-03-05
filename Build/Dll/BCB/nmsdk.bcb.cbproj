@@ -63,8 +63,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<Defines>NO_STRICT;$(Defines)</Defines>
 			<UsePackages>true</UsePackages>
-			<IncludePath>..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 		</PropertyGroup>
@@ -125,6 +125,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			</CppCompile>
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_new.win.cpp">
 				<BuildOrder>4</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\Core\Engine\Libraries\UELibraries.cpp">
+				<BuildOrder>7</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\Deploy\Include\myrdk.bcb.cpp">
 				<BuildOrder>6</BuildOrder>

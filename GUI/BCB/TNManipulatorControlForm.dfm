@@ -712,10 +712,6 @@
               ParentDoubleBuffered = False
               TabOrder = 0
               OnDrawCell = DrawGridDrawCell
-              ExplicitLeft = 64
-              ExplicitTop = 119
-              ExplicitWidth = 320
-              ExplicitHeight = 120
             end
           end
         end

@@ -1112,6 +1112,7 @@ void __fastcall TNManipulatorControlForm::ResetToZeroButton1Click(TObject *Sende
 
 {
  MovementControlTrackBar->Position=0;
+ MovementControlTrackBarChange(Sender);
 }
 //---------------------------------------------------------------------------
 
@@ -1119,6 +1120,7 @@ void __fastcall TNManipulatorControlForm::ResetToZeroButton2Click(TObject *Sende
 
 {
  MomentTrackBar->Position=0;
+ MomentTrackBarChange(Sender);
 }
 //---------------------------------------------------------------------------
 
