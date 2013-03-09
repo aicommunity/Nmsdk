@@ -9,7 +9,7 @@
 namespace NMSDK {
 
 // Добавляем объект в окно наблюдений (график по времени)
-void AddWatch(TWatchFrame *watch, RDK::UAContainer *item, int output, int outindex, real watchinterval, real yshift, TPenStyle style, TColor color)
+void AddWatch(TWatchFrame *watch, RDK::UContainer *item, int output, int outindex, real watchinterval, real yshift, TPenStyle style, TColor color)
 {
  NADItem *itemd=dynamic_cast<NADItem*>(item);
 
@@ -69,7 +69,7 @@ void AddWatch(TWatchFrame *watch, NameT name, real *y, real watchinterval, real 
 
 
 // Добавляем объект в окно наблюдений (график по частоте)
-void AddFrequencyWatch(TWatchFrame *watch, RDK::UAContainer* item, real watchinterval, real yshift, TPenStyle style, TColor color)
+void AddFrequencyWatch(TWatchFrame *watch, RDK::UContainer* item, real watchinterval, real yshift, TPenStyle style, TColor color)
 {
  NFrequencyReceiver *itemd=dynamic_cast<NFrequencyReceiver*>(item);
 
@@ -83,7 +83,7 @@ void AddFrequencyWatch(TWatchFrame *watch, RDK::UAContainer* item, real watchint
 
  wd.YShift=yshift;
  if(itemd->GetOwner())
-  itemd->GetLongName(static_pointer_cast<RDK::UAContainer>(itemd->GetOwner()->GetOwner()),wd.Legend);
+  itemd->GetLongName(static_pointer_cast<RDK::UContainer>(itemd->GetOwner()->GetOwner()),wd.Legend);
  else
   itemd->GetLongName(0,wd.Legend);
 // wd.Legend+=string("[")+sntoa(output)+string(":")+sntoa(outindex)+string("]");

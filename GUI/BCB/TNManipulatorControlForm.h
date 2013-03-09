@@ -173,7 +173,7 @@ std::string ManipulatorName;
 std::string ControlSystemName;
 
 RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
-RDK::UEPtr<NMSDK::UANet> UniversalManipulator;
+RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
 
 RDK::UEPtr<NMSDK::NManipulatorSource> Engine;
 RDK::UEPtr<NMSDK::NConstGenerator> Source;

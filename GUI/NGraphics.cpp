@@ -122,7 +122,7 @@ namespace NMSDK {
 	// Методы доступа к данным
 	// ---------------------------
 	// Возвращает указатель на НС
-	UANet* NGraphics::GetNet(void) {
+	UNet* NGraphics::GetNet(void) {
 		return Net;
 	}
 
@@ -143,7 +143,7 @@ namespace NMSDK {
 
 	// Связывает класс с новой НС
 	// Если net == 0 то отключает класс от текущей НС и возвращает true
-	bool NGraphics::SetNet(UANet *net) {
+	bool NGraphics::SetNet(UNet *net) {
 		if (Net == net)
 			return true;
 
@@ -219,7 +219,7 @@ namespace NMSDK {
 		Descriptions[I->second].Type=1;
 		}
 		else
-		if(dynamic_cast<UANet*>(Net->GetComponent(I->second)))
+		if(dynamic_cast<UNet*>(Net->GetComponent(I->second)))
 		{
 		Descriptions[I->second].Radius=15;
 		Descriptions[I->second].Type=2;
@@ -297,14 +297,14 @@ namespace NMSDK {
 
 		RDK::ULinksList linkslist;
 
-		UEPtr<UAItem>item = dynamic_pointer_cast<UAItem>(Net->GetComponent(id));
+		UEPtr<UItem>item = dynamic_pointer_cast<UItem>(Net->GetComponent(id));
 		out = Descriptions[id];
 
 		for (int i = 0; i < Net->GetNumComponents(); i++) {
 			linkslist.Clear();
 			if (item != Net->GetComponentByIndex(i)) {
 				item->GetFullItemLinks(linkslist,
-					dynamic_pointer_cast<UAItem>(Net->GetComponentByIndex(i)),
+					dynamic_pointer_cast<UItem>(Net->GetComponentByIndex(i)),
 					Net);
 				if (linkslist.GetSize() > 0) {
 					in = Descriptions[Net->GetComponentByIndex(i)->GetId()];
@@ -404,7 +404,7 @@ namespace NMSDK {
 		}
 	}
 
-	// Отрисовывает элемент-сеть (UANet*) с центром в заданной позиции
+	// Отрисовывает элемент-сеть (UNet*) с центром в заданной позиции
 	void NGraphics::PaintNet(NVDescription &ndescr, bool highlight) {
 		GEngine->SetPenWidth(ndescr.ContourWidth);
 		if (ndescr.ContourColor == ndescr.FillColor) {

@@ -105,7 +105,7 @@ class NGraphics
 {
 protected: // Данные
 // Указатель на НС
-UANet *Net;
+UNet *Net;
 
 // Таблица соответствий между нейронами сети и описаний визуальных элементов
 map<UId,NVDescription> Descriptions;
@@ -155,7 +155,7 @@ NGraphics(void);
 // Методы доступа к данным
 // ---------------------------
 // Возвращает указатель на НС
-UANet* GetNet(void);
+UNet* GetNet(void);
 
 // Возвращает элемент таблицы соответствий
 NVDescription& GetDescription(const UId &id);
@@ -168,7 +168,7 @@ UAGraphics* GetGEngine(void);
 
 // Связывает класс с новой НС
 // Если net == 0 то отключает класс от текущей НС и возвращает true
-bool SetNet(UANet *net);
+bool SetNet(UNet *net);
 
 // Связывает класс с новой НС
 // Если engine == 0 то возвращает false и не делеает ничего

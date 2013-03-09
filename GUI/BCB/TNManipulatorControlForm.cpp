@@ -281,7 +281,7 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
  ManipulatorName=xml.ReadString("ManipulatorName","");
  if(!ManipulatorName.empty())
  {
-  UniversalManipulator=RDK::dynamic_pointer_cast<NMSDK::UANet>(GetModel()->GetComponentL(ManipulatorName));
+  UniversalManipulator=RDK::dynamic_pointer_cast<NMSDK::UNet>(GetModel()->GetComponentL(ManipulatorName));
   Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
  }
  if(!UniversalManipulator)
@@ -311,10 +311,10 @@ void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &x
 
 bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, const std::string &man_name)
 {
- RDK::UEPtr<RDK::UANet> net=RDK::dynamic_pointer_cast<RDK::UANet>(GetModel());
+ RDK::UEPtr<RDK::UNet> net=RDK::dynamic_pointer_cast<RDK::UNet>(GetModel());
 
  bool res=true;
- RDK::dynamic_pointer_cast<RDK::UAConnector>(net->GetComponentL(cs_name+".NManipulatorSource1"))->DisconnectAllItems();
+ RDK::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(cs_name+".NManipulatorSource1"))->DisconnectAllItems();
  RDK::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1"))->DisconnectAll();
  if(man_name == "PendulumAndCart")
  {
@@ -370,7 +370,7 @@ void TNManipulatorControlForm::ReconnectManipulator(void)
  }
 
  ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
- UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UANet>(GetModel()->GetComponentL(ManipulatorName));
+ UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UNet>(GetModel()->GetComponentL(ManipulatorName));
  Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
  if(!UniversalManipulator)
   ManipulatorName="";
@@ -546,7 +546,7 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
   return;
 
  bool res=true;
- RDK::UEPtr<NMSDK::UAContainer> cont;
+ RDK::UEPtr<NMSDK::UContainer> cont;
 
  if(!ControlSystem)
   return;
