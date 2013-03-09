@@ -25,7 +25,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NSourceLibrary: public UALibrary
+class NSourceLibrary: public ULibrary
 {
 public: // Методы
 // --------------------------
@@ -39,7 +39,7 @@ NSourceLibrary(void);
 // --------------------------
 // Заполняет массив ClassSamples готовыми экземплярами образцов и их именами.
 // Не требуется предварительная очистка массива и уборка памяти.
-virtual void CreateClassSamples(UAStorage *storage);
+virtual void CreateClassSamples(UStorage *storage);
 // --------------------------
 };    
 

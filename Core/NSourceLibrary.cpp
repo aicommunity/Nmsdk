@@ -29,7 +29,7 @@ NSourceLibrary SourceLibrary;
 // Конструкторы и деструкторы
 // --------------------------
 NSourceLibrary::NSourceLibrary(void)
- : UALibrary("SourceLibrary","1.0")
+ : ULibrary("SourceLibrary","1.0")
 {
 }
 // --------------------------
@@ -39,9 +39,9 @@ NSourceLibrary::NSourceLibrary(void)
 // --------------------------
 // Заполняет массив ClassSamples готовыми экземплярами образцов и их именами.
 // Не требуется предварительная очистка массива и уборка памяти.
-void NSourceLibrary::CreateClassSamples(UAStorage *storage)
+void NSourceLibrary::CreateClassSamples(UStorage *storage)
 {
- UAContainer *cont;
+ UContainer *cont;
 
  cont=new NPulseGenerator;
  cont->SetName("PGenerator");
