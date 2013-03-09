@@ -244,7 +244,7 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
 }
 
 // Сохраняет параметры интерфейса в xml
-void TNManipulatorControlForm::ASaveParameters(RDK::Serialize::USerStorageXML &xml)
+void TNManipulatorControlForm::ASaveParameters(RDK::USerStorageXML &xml)
 {
  xml.SelectNodeForce("Control");
  xml.WriteString("ManipulatorName",ManipulatorName);
@@ -253,7 +253,7 @@ void TNManipulatorControlForm::ASaveParameters(RDK::Serialize::USerStorageXML &x
 }
 
 // Загружает параметры интерфейса из xml
-void TNManipulatorControlForm::ALoadParameters(RDK::Serialize::USerStorageXML &xml)
+void TNManipulatorControlForm::ALoadParameters(RDK::USerStorageXML &xml)
 {
  ManipulatorName.clear();
  ControlSystemName.clear();
