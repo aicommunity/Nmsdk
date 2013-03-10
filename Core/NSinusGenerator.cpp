@@ -47,13 +47,13 @@ NSinusGenerator::~NSinusGenerator(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает амплитуду синуса
-bool NSinusGenerator::SetAmplitude(real value)
+bool NSinusGenerator::SetAmplitude(const real &value)
 {
  return true;
 }
 
 // Устанавливает частоту
-bool NSinusGenerator::SetFrequency(real value)
+bool NSinusGenerator::SetFrequency(const real &value)
 {
  if(value <=0)
   return false;

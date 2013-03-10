@@ -52,7 +52,7 @@ NPulseGenerator::~NPulseGenerator(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает частоту импульсов
-bool NPulseGenerator::SetFrequency(real value)
+bool NPulseGenerator::SetFrequency(const real &value)
 {
  if(value <0)
   return false;
@@ -62,7 +62,7 @@ bool NPulseGenerator::SetFrequency(real value)
 }
 
 // Устанавливает длительность импульса
-bool NPulseGenerator::SetPulseLength(real value)
+bool NPulseGenerator::SetPulseLength(const real &value)
 {
  if(value <= 0)
   return false;
@@ -71,14 +71,14 @@ bool NPulseGenerator::SetPulseLength(real value)
 }
 
 // Устанавливает амплитуду импульсов
-bool NPulseGenerator::SetAmplitude(real value)
+bool NPulseGenerator::SetAmplitude(const real &value)
 {
  return true;
 }
 
 // Устанавливает отклонение частоты
 // (Задает диапазон, не является стандартным отклонением!)
-bool NPulseGenerator::SetFrequencyDeviation(real value)
+bool NPulseGenerator::SetFrequencyDeviation(const real &value)
 {
  if(value<0)
   return false;

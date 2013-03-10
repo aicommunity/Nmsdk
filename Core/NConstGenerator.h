@@ -46,7 +46,7 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает амплитуду импульсов
-bool SetAmplitude(real value);
+bool SetAmplitude(const real &value);
 // --------------------------
 
 public:

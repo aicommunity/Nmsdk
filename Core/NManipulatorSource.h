@@ -49,11 +49,11 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает угол
-bool SetAngle(real value);
+bool SetAngle(const real &value);
 // Устанавливает скорость
-bool SetSpeed(real value);
+bool SetSpeed(const real &value);
 // Устанавливает момент
-bool SetForce(real value);
+bool SetForce(const real &value);
 // --------------------------
 
 public:

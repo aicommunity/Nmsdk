@@ -63,17 +63,17 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает частоту импульсов
-bool SetFrequency(real value);
+bool SetFrequency(const real &value);
 
 // Устанавливает длительность импульса
-bool SetPulseLength(real value);
+bool SetPulseLength(const real &value);
 
 // Устанавливает амплитуду импульсов
-bool SetAmplitude(real value);
+bool SetAmplitude(const real &value);
 
 // Устанавливает случайное отклонение частоты
 // (Задает диапазон, не является стандартным отклонением!)
-bool SetFrequencyDeviation(real value);
+bool SetFrequencyDeviation(const real &value);
 // --------------------------
 
 public:

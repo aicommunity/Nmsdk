@@ -50,10 +50,10 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает амплитуду синуса
-bool SetAmplitude(real value);
+bool SetAmplitude(const real &value);
 
 // Устанавливает частоту генерации
-bool SetFrequency(real value);
+bool SetFrequency(const real &value);
 // --------------------------
 
 public:
