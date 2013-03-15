@@ -1031,6 +1031,8 @@ void __fastcall TNManipulatorControlForm::MovementControlTrackBarChange(TObject 
  if(UpdateInterfaceFlag)
   return;
 
+ if(!ControlSystem)
+  return;
 
  RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
  double amplitude=double(MovementControlTrackBar->Position)/double(MovementControlTrackBar->Max/2.0);
