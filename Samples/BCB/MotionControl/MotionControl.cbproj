@@ -52,7 +52,7 @@
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
 			<PackageImports>vclx.bpi;vcl.bpi;vclimg.bpi;dbrtl.bpi;Rave77VCL.bpi;bdertl.bpi;rtl.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;vcldb.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;intrawebdb_100_140.bpi;Intraweb_100_140.bpi;VclSmp.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inetdb.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;vclribbon.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DbxClientDriver.bpi;DataSnapServer.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;TVidGrab.bpi;$(PackageImports)</PackageImports>
 			<Multithreaded>true</Multithreaded>
-			<AllPackageLibs>rtl.lib;vcl.lib;Tee916.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib</AllPackageLibs>
+			<AllPackageLibs>rtl.lib;vcl.lib;Tee916.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib;IndyCore.lib;IndySystem.lib</AllPackageLibs>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<IncludePath>..\..\..\RDK\Core\Engine\Libraries\;E:\SDK\RDK\GUI\BCB\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
@@ -308,16 +308,17 @@
 			<ResFiles Include="MotionControl.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFormUnit.dfm"/>
 			<FormResources Include="MainFormUnit.dfm"/>
@@ -326,10 +327,9 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
 			<FormResources Include="..\..\..\GUI\BCB\TNManipulatorControlForm.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
