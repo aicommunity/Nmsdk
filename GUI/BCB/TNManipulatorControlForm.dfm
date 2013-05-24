@@ -354,10 +354,6 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -471,13 +467,13 @@
             197
             82)
           object MomentTrackBar: TTrackBar
-            Left = 5
+            Left = 3
             Top = 18
             Width = 116
             Height = 27
             Anchors = [akLeft, akTop, akRight]
-            Max = 1000
-            Min = -1000
+            Max = 10000
+            Min = -10000
             TabOrder = 0
             OnChange = MomentTrackBarChange
           end

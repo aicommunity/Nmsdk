@@ -5,7 +5,7 @@
 			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Base>True</Base>
 			<AppType>Library</AppType>
-			<FrameworkType>None</FrameworkType>
+			<FrameworkType>VCL</FrameworkType>
 			<Platform Condition="'$(Platform)'==''">Win32</Platform>
 			<TargetedPlatforms>1</TargetedPlatforms>
 		</PropertyGroup>
@@ -44,7 +44,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
 			<VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
 			<VerInfo_Build>19</VerInfo_Build>
-			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
 			<VerInfo_MinorVer>1</VerInfo_MinorVer>
 			<VerInfo_Locale>1049</VerInfo_Locale>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
@@ -57,18 +57,19 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			<PackageImports>vclx.bpi;vcl.bpi;dbrtl.bpi;Rave76VCL.bpi;bdertl.bpi;rtl.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;vcldb.bpi;vcldbx.bpi;dsnap.bpi;dsnapcon.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;adortl.bpi;vclib.bpi;ibxpress.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;intrawebdb_100_120.bpi;Intraweb_100_120.bpi;VclSmp.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;vclribbon.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DataSnapServer.bpi;DbxClientDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;$(PackageImports)</PackageImports>
 			<NoVCL>true</NoVCL>
 			<ProjectType>VCppStyleDll</ProjectType>
-			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
+			<AllPackageLibs>rtl.lib;vcl.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib</AllPackageLibs>
 			<OutputExt>dll</OutputExt>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<Defines>NO_STRICT;$(Defines)</Defines>
 			<UsePackages>true</UsePackages>
-			<IncludePath>..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
 			<Icon_MainIcon>nmsdk_Icon1.ico</Icon_MainIcon>
 			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
 			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -96,7 +97,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
+			<LinkPackageStatics>rtl.lib;vcl.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib</LinkPackageStatics>
 			<UsePackages>false</UsePackages>
 			<BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -128,6 +129,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\Core\Engine\Libraries\UELibraries.cpp">
 				<BuildOrder>7</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\Core\Graphics\Libraries\Libraries.cpp">
+				<BuildOrder>8</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\Deploy\Include\myrdk.bcb.cpp">
 				<BuildOrder>6</BuildOrder>

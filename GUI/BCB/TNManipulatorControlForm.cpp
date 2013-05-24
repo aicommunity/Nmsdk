@@ -201,6 +201,13 @@ void TNManipulatorControlForm::AUpdateInterface(void)
 
 }
 
+// Создание копии этого компонента
+TUVisualControllerForm* TNManipulatorControlForm::New(TComponent *owner)
+{
+ return 0;
+}
+
+
 // Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
 void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
 {
@@ -945,13 +952,15 @@ void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
  if(UpdateInterfaceFlag)
   return;
 
+ RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
  RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
  RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
  double amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
  ExtMomentEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
- if(engine)
+ if(engine && source)
  {
-  engine->OutMoment=amplitude;
+  source->Angle=amplitude;
+//  engine->OutMoment=amplitude;
  }
  if(engine2)
  {
@@ -1046,12 +1055,14 @@ void __fastcall TNManipulatorControlForm::MovementControlTrackBarChange(TObject 
  {
   if(engine || man)
   {
-   source->Angle=amplitude;
+   engine->OutMoment=amplitude;
+ //  source->Angle=amplitude;
   }
 
   if(engine2)
   {
-   source->Movement=amplitude;
+   engine2->ExtrenalMoment=amplitude;
+//   source->Movement=amplitude;
   }
 
  }
@@ -1087,6 +1098,7 @@ void __fastcall TNManipulatorControlForm::HideSecondaryGuiCheckBoxClick(TObject 
 void __fastcall TNManipulatorControlForm::FormCreate(TObject *Sender)
 {
  TempBmp=new TBitmap;
+ TUComponentsListFrame::ComponentControllers["NWPhysicalManipulator"]=NManipulatorControlForm;
 }
 //---------------------------------------------------------------------------
 

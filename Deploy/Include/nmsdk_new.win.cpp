@@ -13,7 +13,7 @@ extern NMSDK::UStorage* CreateNewStorage(void)
 extern NMSDK::UEnvironment* CreateNewEnvironment(void)
 {
  RDK::UItemData::DefaultDataSize=sizeof(double);
- NMSDK::UEnvironment* env=new NMSDK::UEnvironment;
+ NMSDK::UBAEnvironment* env=new NMSDK::UBAEnvironment;
 
  env->AddClassLibrary(&NMSDK::BCLLibrary);
  env->AddClassLibrary(&NMSDK::ActLibrary);
@@ -35,7 +35,7 @@ extern NMSDK::UEnvironment* CreateNewEnvironment(void)
 
 extern RDK::UEngine* CreateNewEngine(void)
 {
- return new RDK::UEngine;
+ return new RDK::UBEngine;
 }
 /*****************************************************************************/
 

@@ -233,6 +233,9 @@ void ReadComponentData(void);
 void ReconnectManipulator(void);
 
 
+// Создание копии этого компонента
+virtual TUVisualControllerForm* New(TComponent *owner=0);
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TNManipulatorControlForm *NManipulatorControlForm;
