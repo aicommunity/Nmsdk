@@ -1098,7 +1098,80 @@ void __fastcall TNManipulatorControlForm::HideSecondaryGuiCheckBoxClick(TObject 
 void __fastcall TNManipulatorControlForm::FormCreate(TObject *Sender)
 {
  TempBmp=new TBitmap;
- TUComponentsListFrame::ComponentControllers["NWPhysicalManipulator"]=NManipulatorControlForm;
+ int max_number_of_mc=10;
+
+ TUComponentsListFrame::ComponentControllers["NAslsNewSimplestAfferentBranchedEngineControl"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NAslsNewSimplestAfferentBranchedEngineControl")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NAsfNewSimplestAfferentBranchedEngineControl"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NAsfNewSimplestAfferentBranchedEngineControl")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NNewSimplestAfferentBranchedEngineControl"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NNewSimplestAfferentBranchedEngineControl")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NSimplestAfferentBranchedEngineControl"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NSimplestAfferentBranchedEngineControl")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NSimplestBranchedEngineControl"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NSimplestBranchedEngineControl")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NSimplestEngineControl"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NSimplestEngineControl")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NContinuesIndRangeBranchedCrosslinksEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NContinuesIndRangeBranchedCrosslinksEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NIndRangeBranchedCrosslinksEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NIndRangeBranchedCrosslinksEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NIndRangeBranchedEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NIndRangeBranchedEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NSimpleBranchedCrosslinksEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NSimpleBranchedCrosslinksEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NBranchedCrosslinksEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NBranchedCrosslinksEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NSimpleBranchedEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NSimpleBranchedEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NBranchedEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NBranchedEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NSimpleEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NSimpleEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NSimpleEngineControlSignumAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NSimpleEngineControlSignumAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NEngineControlRangeAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NEngineControlRangeAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NEngineControlSignumAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NEngineControlSignumAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NEngineControlSignumAfferent"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NEngineControlSignumAfferent")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
 }
 //---------------------------------------------------------------------------
 
