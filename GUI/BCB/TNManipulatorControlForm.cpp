@@ -1211,3 +1211,6 @@ void __fastcall TNManipulatorControlForm::ResetToZeroButton2Click(TObject *Sende
 }
 //---------------------------------------------------------------------------
 
+
+
+
