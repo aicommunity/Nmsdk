@@ -334,7 +334,7 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
  res&=net->CreateLink(man_name,1,cs_name+".NManipulatorSource1",1);
  res&=net->CreateLink(man_name,2,cs_name+".NManipulatorSource1",2);
  res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
-
+ /*
  // —в€зываем все управл€ющие элементы
  int motion_elements=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(net->GetComponentL(cs_name))->NumMotionElements;
  int conn_index=1;
@@ -344,7 +344,7 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
 	+".Motoneuron1.LTZone",0,man_name,conn_index++);
   res&=net->CreateLink(cs_name+std::string(".MotionElement")+RDK::sntoa(i)
 	+".Motoneuron2.LTZone",0,man_name,conn_index++);
- }
+ } */
 
  ZeroAngle=+3.14/2;
  return res;
