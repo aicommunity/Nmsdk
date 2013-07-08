@@ -7,6 +7,9 @@
 				<Dependencies>..\..\..\Build\Dll\BCB\nmsdk.bcb.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="..\..\..\Build\Dll\BCB\nmsdk.bcb.cbproj">
+				<Dependencies>..\..\..\RDK\ThirdParty\curl\build\bcb\libcurl.bcb.cbproj</Dependencies>
+			</Projects>
+			<Projects Include="..\..\..\RDK\ThirdParty\curl\build\bcb\libcurl.bcb.cbproj">
 				<Dependencies/>
 			</Projects>
 		</ItemGroup>
@@ -26,23 +29,32 @@
 		<Target Name="MotionControl:Make" DependsOnTargets="nmsdk.bcb:Make">
 			<MSBuild Projects="MotionControl.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="nmsdk_bcb">
+		<Target Name="nmsdk_bcb" DependsOnTargets="libcurl.bcb">
 			<MSBuild Projects="..\..\..\Build\Dll\BCB\nmsdk.bcb.cbproj"/>
 		</Target>
-		<Target Name="nmsdk_bcb:Clean">
+		<Target Name="nmsdk_bcb:Clean" DependsOnTargets="libcurl.bcb:Clean">
 			<MSBuild Projects="..\..\..\Build\Dll\BCB\nmsdk.bcb.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="nmsdk_bcb:Make">
+		<Target Name="nmsdk_bcb:Make" DependsOnTargets="libcurl.bcb:Make">
 			<MSBuild Projects="..\..\..\Build\Dll\BCB\nmsdk.bcb.cbproj" Targets="Make"/>
 		</Target>
+		<Target Name="libcurl_bcb">
+			<MSBuild Projects="..\..\..\RDK\ThirdParty\curl\build\bcb\libcurl.bcb.cbproj"/>
+		</Target>
+		<Target Name="libcurl_bcb:Clean">
+			<MSBuild Projects="..\..\..\RDK\ThirdParty\curl\build\bcb\libcurl.bcb.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="libcurl_bcb:Make">
+			<MSBuild Projects="..\..\..\RDK\ThirdParty\curl\build\bcb\libcurl.bcb.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="MotionControl;nmsdk_bcb"/>
+			<CallTarget Targets="MotionControl;nmsdk_bcb;libcurl_bcb"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="MotionControl:Clean;nmsdk_bcb:Clean"/>
+			<CallTarget Targets="MotionControl:Clean;nmsdk_bcb:Clean;libcurl_bcb:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="MotionControl:Make;nmsdk_bcb:Make"/>
+			<CallTarget Targets="MotionControl:Make;nmsdk_bcb:Make;libcurl_bcb:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>
