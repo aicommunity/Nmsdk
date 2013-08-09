@@ -190,14 +190,14 @@ void TNManipulatorControlForm::AUpdateInterface(void)
  double position=0;
  if(engine)
  {
-  position=engine->OutMoment*double(MomentTrackBar->Max/2.0);
-  ExtMomentEdit->Text=FloatToStrF(engine->OutMoment,ffFixed,3,3);
+  position=engine->OutMoment*double(MovementControlTrackBar->Max/2.0);
+  MovementControlEdit->Text=FloatToStrF(engine->OutMoment,ffFixed,3,3);
  }
 
  if(position>0)
-  MomentProgressBar->Position=position;
+  MovementControlProgressBar->Position=position;
  else
-  MomentProgressBar->Position=-position;
+  MovementControlProgressBar->Position=-position;
 
 }
 
@@ -950,6 +950,9 @@ void __fastcall TNManipulatorControlForm::PACMultiplicatorTrackBarChange(TObject
 void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
 {
  if(UpdateInterfaceFlag)
+  return;
+
+ if(!ControlSystem)
   return;
 
  RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
