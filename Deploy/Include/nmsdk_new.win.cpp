@@ -7,35 +7,37 @@
 /*****************************************************************************/
 extern NMSDK::UStorage* CreateNewStorage(void)
 {
- return new NMSDK::UStorage;
+ NMSDK::UStorage* storage=new NMSDK::UStorage;
+ storage->AddClassLibrary(&NMSDK::BCLLibrary);
+ storage->AddClassLibrary(&NMSDK::ActLibrary);
+ storage->AddClassLibrary(&NMSDK::CRLibrary);
+ storage->AddClassLibrary(&NMSDK::MathLibrary);
+ storage->AddClassLibrary(&NMSDK::PhysLibrary);
+ storage->AddClassLibrary(&NMSDK::SensorLibrary);
+ storage->AddClassLibrary(&NMSDK::SourceLibrary);
+ storage->AddClassLibrary(&NMSDK::ReceiverLibrary);
+ storage->AddClassLibrary(&NMSDK::PulseLibrary);
+ storage->AddClassLibrary(&NMSDK::NeuronLifeLibrary);
+ storage->AddClassLibrary(&NMSDK::PulseNeuronLibrary);
+
+ storage->AddClassLibrary(&NMSDK::MotionControlLibrary);
+
+ storage->AddClassLibrary(&NMSDK::WinAPIActLibrary);
+
+ return storage;
 }
 
 extern NMSDK::UEnvironment* CreateNewEnvironment(void)
 {
  RDK::UItemData::DefaultDataSize=sizeof(double);
- NMSDK::UBAEnvironment* env=new NMSDK::UBAEnvironment;
+ NMSDK::UEnvironment* env=new NMSDK::UEnvironment;
 
- env->AddClassLibrary(&NMSDK::BCLLibrary);
- env->AddClassLibrary(&NMSDK::ActLibrary);
- env->AddClassLibrary(&NMSDK::CRLibrary);
- env->AddClassLibrary(&NMSDK::MathLibrary);
- env->AddClassLibrary(&NMSDK::PhysLibrary);
- env->AddClassLibrary(&NMSDK::SensorLibrary);
- env->AddClassLibrary(&NMSDK::SourceLibrary);
- env->AddClassLibrary(&NMSDK::ReceiverLibrary);
- env->AddClassLibrary(&NMSDK::PulseLibrary);
- env->AddClassLibrary(&NMSDK::NeuronLifeLibrary);
- env->AddClassLibrary(&NMSDK::PulseNeuronLibrary);
-
- env->AddClassLibrary(&NMSDK::MotionControlLibrary);
-
- env->AddClassLibrary(&NMSDK::WinAPIActLibrary);
  return env;
 }
 
 extern RDK::UEngine* CreateNewEngine(void)
 {
- return new RDK::UBEngine;
+ return new RDK::UEngine;
 }
 /*****************************************************************************/
 

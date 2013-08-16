@@ -674,10 +674,10 @@
             end
             object PACMultiplicatorTrackBar: TTrackBar
               Left = 7
-              Top = 119
+              Top = 116
               Width = 141
               Height = 27
-              Max = 100
+              Max = 1000
               Position = 10
               TabOrder = 4
               OnChange = PACMultiplicatorTrackBarChange
