@@ -188,7 +188,7 @@ bool NPulseGenerator::ACalculate(void)
 	PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
 	FillOutputData(0,&Amplitude.v);
 	FillOutputData(1,&Amplitude.v);
-    AvgFrequencyCounter->push_back(GetDoubleTime());
+	AvgFrequencyCounter->push_back(Environment->GetTime().GetDoubleTime());
    }
   }
   FillOutputData(2,&Frequency.v);
@@ -218,7 +218,7 @@ bool NPulseGenerator::ACalculate(void)
 	PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
 	FillOutputData(0,&Amplitude.v);
 	FillOutputData(1,&Amplitude.v);
-    AvgFrequencyCounter->push_back(GetDoubleTime());
+	AvgFrequencyCounter->push_back(Environment->GetTime().GetDoubleTime());
    }
   }
   FillOutputData(2,&RandomFrequency.v);
@@ -232,7 +232,7 @@ bool NPulseGenerator::ACalculate(void)
  {
   while(I != J)
   {
-   if(GetDoubleTime()-*I>AvgInterval)// && AvgFrequencyCounter->size()>3)
+   if(Environment->GetTime().GetDoubleTime()-*I>AvgInterval)// && AvgFrequencyCounter->size()>3)
    {
 	K=I;
 	++I;
