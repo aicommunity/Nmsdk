@@ -33,14 +33,14 @@ protected: // Данные
 RDK::UIniFile<char> Ini;
 
 // 2D массив входов на каждый момент времени
-map<real,vector<RDK::UItemData> > Data;
+map<double,vector<RDK::UItemData> > Data;
 
 public: // Временные переменные
 // Итератор, указывающий на текущий момент времени
-map<real,vector<RDK::UItemData> >::iterator CurrentIndex;
+map<double,vector<RDK::UItemData> >::iterator CurrentIndex;
 
 // Момент времени начала очередной итерации
-real DataStartTime;
+double DataStartTime;
 
 
 public: // Методы

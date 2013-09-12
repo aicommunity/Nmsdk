@@ -98,7 +98,7 @@ bool NFileGenerator::AReset(void)
 
  // Заполняем массив данных
  vector<string> sections,variables;
- vector<real> value;
+ vector<double> value;
  string svalue;
 
  Ini.GetSectionList(sections);

@@ -47,13 +47,13 @@ NSinusGenerator::~NSinusGenerator(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает амплитуду синуса
-bool NSinusGenerator::SetAmplitude(const real &value)
+bool NSinusGenerator::SetAmplitude(const double &value)
 {
  return true;
 }
 
 // Устанавливает частоту
-bool NSinusGenerator::SetFrequency(const real &value)
+bool NSinusGenerator::SetFrequency(const double &value)
 {
  if(value <=0)
   return false;
@@ -103,7 +103,7 @@ bool NSinusGenerator::AReset(void)
 bool NSinusGenerator::ACalculate(void)
 {
  TimeCounter.v+=1.0/TimeStep;
- real tmp=Amplitude*sin(2.0*M_PI*TimeCounter*Frequency);
+ double tmp=Amplitude*sin(2.0*M_PI*TimeCounter*Frequency);
  for(size_t i=0;i<GetOutputDataSize(0);i++)
   POutputData[0].Double[i]=tmp;
  return true;//NSource::ACalculate();

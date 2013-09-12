@@ -25,16 +25,16 @@ class NSinusGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Амплитуда синуса
-RDK::ULProperty<real,NSinusGenerator> Amplitude;
+RDK::ULProperty<double,NSinusGenerator> Amplitude;
 
 // Частота генерации (Гц)
-RDK::ULProperty<real,NSinusGenerator> Frequency;
+RDK::ULProperty<double,NSinusGenerator> Frequency;
 
 protected: // Основные свойства
 
 public: // Временные переменные
 // Счетчик времени
-RDK::ULProperty<real,NSinusGenerator> TimeCounter;
+RDK::ULProperty<double,NSinusGenerator> TimeCounter;
 
 
 public: // Методы
@@ -50,10 +50,10 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает амплитуду синуса
-bool SetAmplitude(const real &value);
+bool SetAmplitude(const double &value);
 
 // Устанавливает частоту генерации
-bool SetFrequency(const real &value);
+bool SetFrequency(const double &value);
 // --------------------------
 
 public:

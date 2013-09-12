@@ -44,17 +44,17 @@ NManipulatorSource::~NManipulatorSource(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает угол, скорость, момент 
-bool NManipulatorSource::SetAngle(const real &value)
+bool NManipulatorSource::SetAngle(const double &value)
 {
  return true;
 }
 
-bool NManipulatorSource::SetSpeed(const real &value)
+bool NManipulatorSource::SetSpeed(const double &value)
 {
  return true;
 }
 
-bool NManipulatorSource::SetForce(const real &value)
+bool NManipulatorSource::SetForce(const double &value)
 {
  return true;
 }

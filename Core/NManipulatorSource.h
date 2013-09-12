@@ -25,13 +25,13 @@ class NManipulatorSource: public NSource
 {
 public: // Общедоступные свойства
 // угол разворота ротора
-RDK::ULProperty<real,NManipulatorSource> Angle;
+RDK::ULProperty<double,NManipulatorSource> Angle;
 // угловая скорость
-RDK::ULProperty<real,NManipulatorSource> Speed;
+RDK::ULProperty<double,NManipulatorSource> Speed;
 // момент двигателя
-RDK::ULProperty<real,NManipulatorSource> Force;
+RDK::ULProperty<double,NManipulatorSource> Force;
 
-RDK::ULProperty<real,NManipulatorSource> Movement;
+RDK::ULProperty<double,NManipulatorSource> Movement;
 protected: // Основные свойства
 
 
@@ -49,11 +49,11 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает угол
-bool SetAngle(const real &value);
+bool SetAngle(const double &value);
 // Устанавливает скорость
-bool SetSpeed(const real &value);
+bool SetSpeed(const double &value);
 // Устанавливает момент
-bool SetForce(const real &value);
+bool SetForce(const double &value);
 // --------------------------
 
 public:

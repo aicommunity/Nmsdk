@@ -43,7 +43,7 @@ NConstGenerator::~NConstGenerator(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает амплитуду импульсов
-bool NConstGenerator::SetAmplitude(const real &value)
+bool NConstGenerator::SetAmplitude(const double &value)
 {
  if(Amplitude.v != value)
   UpdateOutputFlag=true;

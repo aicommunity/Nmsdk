@@ -25,30 +25,30 @@ class NPulseGenerator: public NSource
 {
 public: // Параметры
 // Частота генерации (Гц) (Математическое ожидание)
-RDK::ULProperty<real,NPulseGenerator> Frequency;
+RDK::ULProperty<double,NPulseGenerator> Frequency;
 
 // Длительность импульса (с)
-RDK::ULProperty<real,NPulseGenerator> PulseLength;
+RDK::ULProperty<double,NPulseGenerator> PulseLength;
 
 // Амплитуда импульса
-RDK::ULProperty<real,NPulseGenerator> Amplitude;
+RDK::ULProperty<double,NPulseGenerator> Amplitude;
 
 // Отклонение частоты
 // (Задает диапазон, не является стандартным отклонением!)
-RDK::ULProperty<real,NPulseGenerator> FrequencyDeviation;
+RDK::ULProperty<double,NPulseGenerator> FrequencyDeviation;
 
 // Интервал времени оценки частоты генерации
-RDK::ULProperty<real,NPulseGenerator> AvgInterval;
+RDK::ULProperty<double,NPulseGenerator> AvgInterval;
 
 public: // Переменные состояния
 // Счетчик импульса
 RDK::ULProperty<RDK::UTime,NPulseGenerator,ptPubState> PulseCounter;
 
 // Случайное значение текущей частоты
-RDK::ULProperty<real,NPulseGenerator,ptPubState> RandomFrequency;
+RDK::ULProperty<double,NPulseGenerator,ptPubState> RandomFrequency;
 
 // Средняя частота за заданный интервал времени
-RDK::UCLProperty<list<real>,NPulseGenerator,ptPubState> AvgFrequencyCounter;
+RDK::UCLProperty<list<double>,NPulseGenerator,ptPubState> AvgFrequencyCounter;
 
 public: // Методы
 // --------------------------
@@ -63,17 +63,17 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает частоту импульсов
-bool SetFrequency(const real &value);
+bool SetFrequency(const double &value);
 
 // Устанавливает длительность импульса
-bool SetPulseLength(const real &value);
+bool SetPulseLength(const double &value);
 
 // Устанавливает амплитуду импульсов
-bool SetAmplitude(const real &value);
+bool SetAmplitude(const double &value);
 
 // Устанавливает случайное отклонение частоты
 // (Задает диапазон, не является стандартным отклонением!)
-bool SetFrequencyDeviation(const real &value);
+bool SetFrequencyDeviation(const double &value);
 // --------------------------
 
 public:

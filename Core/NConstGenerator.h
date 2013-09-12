@@ -25,7 +25,7 @@ class NConstGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Амплитуда импульса
-RDK::ULProperty<real,NConstGenerator> Amplitude;
+RDK::ULProperty<double,NConstGenerator> Amplitude;
 
 protected: // Основные свойства
 
@@ -46,7 +46,7 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает амплитуду импульсов
-bool SetAmplitude(const real &value);
+bool SetAmplitude(const double &value);
 // --------------------------
 
 public:

@@ -52,7 +52,7 @@ NPulseGenerator::~NPulseGenerator(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает частоту импульсов
-bool NPulseGenerator::SetFrequency(const real &value)
+bool NPulseGenerator::SetFrequency(const double &value)
 {
  if(value <0)
   return false;
@@ -62,7 +62,7 @@ bool NPulseGenerator::SetFrequency(const real &value)
 }
 
 // Устанавливает длительность импульса
-bool NPulseGenerator::SetPulseLength(const real &value)
+bool NPulseGenerator::SetPulseLength(const double &value)
 {
  if(value <= 0)
   return false;
@@ -71,14 +71,14 @@ bool NPulseGenerator::SetPulseLength(const real &value)
 }
 
 // Устанавливает амплитуду импульсов
-bool NPulseGenerator::SetAmplitude(const real &value)
+bool NPulseGenerator::SetAmplitude(const double &value)
 {
  return true;
 }
 
 // Устанавливает отклонение частоты
 // (Задает диапазон, не является стандартным отклонением!)
-bool NPulseGenerator::SetFrequencyDeviation(const real &value)
+bool NPulseGenerator::SetFrequencyDeviation(const double &value)
 {
  if(value<0)
   return false;
@@ -200,7 +200,7 @@ bool NPulseGenerator::ACalculate(void)
    --PulseCounter.v;
    if(PulseCounter <= 0) // Выключаем импульс и включаем ожидание
    {
-	RandomFrequency=real(rand()*FrequencyDeviation*2.0)/real(RAND_MAX)+
+	RandomFrequency=double(rand()*FrequencyDeviation*2.0)/double(RAND_MAX)+
 							Frequency.v-FrequencyDeviation.v;
 	if(RandomFrequency.v>0)
 	 PulseCounter=static_cast<RDK::UTime>(-TimeStep/RandomFrequency.v);
