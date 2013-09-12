@@ -85,7 +85,7 @@ NPulseNeuronLibrary PulseNeuronLibrary;
 
 
 
-		real CurrentOut;
+		double CurrentOut;
 
 		// Текущий выделенный item
 		NADItem *Selected;
@@ -109,8 +109,8 @@ NPulseNeuronLibrary PulseNeuronLibrary;
 		void CreateMotionElement(NStorage *storage, NANet *net);
 
 		// Добавляем объект в окно наблюдений
-		void AddWatch(NAContainer *item, int output, TWatchFrame *watch, real yshift=0, TPenStyle style=psSolid, TColor color=0);
-		void AddFrequencyWatch(NAContainer *item,TWatchFrame *watch, real yshift=0, TPenStyle style=psSolid, TColor color=0);
+		void AddWatch(NAContainer *item, int output, TWatchFrame *watch, double yshift=0, TPenStyle style=psSolid, TColor color=0);
+		void AddFrequencyWatch(NAContainer *item,TWatchFrame *watch, double yshift=0, TPenStyle style=psSolid, TColor color=0);
 
 };
 //---------------------------------------------------------------------------

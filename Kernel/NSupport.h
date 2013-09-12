@@ -40,10 +40,10 @@ namespace NMSDK {
 
 using namespace RDK;
 
-typedef double real;
-typedef vector<real> Real;
-typedef vector<real>::iterator RealIterator;
-typedef vector<real>::const_iterator RealCIterator;
+//typedef double double;
+typedef vector<double> Real;
+typedef vector<double>::iterator RealIterator;
+typedef vector<double>::const_iterator RealCIterator;
 
 
 }

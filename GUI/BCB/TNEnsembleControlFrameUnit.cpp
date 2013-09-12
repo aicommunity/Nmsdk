@@ -152,7 +152,7 @@ void __fastcall TNEnsembleControlFrame::EnsembleThresholdEditChange(TObject *Sen
  if(UpdateInterfaceFlag)
   return;
 
- NMSDK::real threshold=StrToFloat(EnsembleThresholdEdit->Text);
+ NMSDK::double threshold=StrToFloat(EnsembleThresholdEdit->Text);
  if(Network)
   Network->EnsembleThreshold=threshold;
 }

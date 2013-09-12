@@ -9,7 +9,7 @@
 namespace NMSDK {
 
 // Добавляем объект в окно наблюдений (график по времени)
-void AddWatch(TWatchFrame *watch, RDK::UContainer *item, int output, int outindex, real watchinterval, real yshift, TPenStyle style, TColor color)
+void AddWatch(TWatchFrame *watch, RDK::UContainer *item, int output, int outindex, double watchinterval, double yshift, TPenStyle style, TColor color)
 {
  NADItem *itemd=dynamic_cast<NADItem*>(item);
 
@@ -42,7 +42,7 @@ void AddWatch(TWatchFrame *watch, RDK::UContainer *item, int output, int outinde
 }
 
 // Добавляем посторонний объект в окно наблюдений (график по времени)
-void AddWatch(TWatchFrame *watch, NameT name, real *y, real watchinterval, real yshift, TPenStyle style, TColor color)
+void AddWatch(TWatchFrame *watch, NameT name, double *y, double watchinterval, double yshift, TPenStyle style, TColor color)
 {
  if(!watch || !y)
   return;
@@ -69,7 +69,7 @@ void AddWatch(TWatchFrame *watch, NameT name, real *y, real watchinterval, real 
 
 
 // Добавляем объект в окно наблюдений (график по частоте)
-void AddFrequencyWatch(TWatchFrame *watch, RDK::UContainer* item, real watchinterval, real yshift, TPenStyle style, TColor color)
+void AddFrequencyWatch(TWatchFrame *watch, RDK::UContainer* item, double watchinterval, double yshift, TPenStyle style, TColor color)
 {
  NFrequencyReceiver *itemd=dynamic_cast<NFrequencyReceiver*>(item);
 

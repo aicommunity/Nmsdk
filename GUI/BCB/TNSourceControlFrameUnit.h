@@ -56,7 +56,7 @@ vector<NSource*> Sources;
 bool UpdateInterfaceFlag;
 
 // Длительность интервала наблюдения
-real WatchInterval;
+double WatchInterval;
 
 // Реестр параметров
 RDK::UClassRegistry Parameters;
@@ -64,11 +64,11 @@ RDK::UClassRegistry Parameters;
 // Режим добавления графиков
 // 0 - начало отсчета неподвижно
 // иначе - начало отсчета смещается для каждого графика на заданное число
-real Origin;
+double Origin;
 
 public: // Методы
 // Устанавливает интервал наблюдения
-bool SetWatchInterval(real interval);
+bool SetWatchInterval(double interval);
 
 // Добавляет источник в массив
 bool AddSource(NSource* source);

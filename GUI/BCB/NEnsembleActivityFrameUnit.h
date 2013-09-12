@@ -25,10 +25,10 @@ NMSDK::NLifeNet* Network;
 
 bool UpdateInterfaceFlag;
 
-NMSDK::real WatchInterval;
+NMSDK::double WatchInterval;
 
 // Выходные данные ансамблей
-map<string, NMSDK::real> EnsemblesActivityData;
+map<string, NMSDK::double> EnsemblesActivityData;
 
 void UpdateInterface(void);
 };

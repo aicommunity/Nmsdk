@@ -28,8 +28,8 @@ void TManipulatorTestForm::UpdateInterface(void)
  if(!Engine)
   return;
 
- real angle=Engine->GetOutputData(1).Double[0];
- real x1,y1,x2,y2;
+ double angle=Engine->GetOutputData(1).Double[0];
+ double x1,y1,x2,y2;
 
  x1=320; y1=240;
  x2=x1+length*cos(angle-M_PI/2.0);

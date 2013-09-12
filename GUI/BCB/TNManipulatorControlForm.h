@@ -14,6 +14,13 @@
 #include <Vcl.Menus.hpp>
 #include "TUVisualControllerFormUnit.h"
 #include <Vcl.Grids.hpp>
+#include <IdBaseComponent.hpp>
+#include <IdComponent.hpp>
+#include <IdHTTP.hpp>
+#include <IdTCPClient.hpp>
+#include <IdTCPConnection.hpp>
+#include <Web.HTTPApp.hpp>
+#include <Web.HTTPProd.hpp>
 #include <string>
 
 #include "nmsdk_cpp_initdll.h"

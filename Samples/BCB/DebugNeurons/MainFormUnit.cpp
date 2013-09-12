@@ -21,7 +21,7 @@ TMainForm *MainForm;
 
 
 // Добавляем объект в окно наблюдений
-void TMainForm::AddWatch(NAContainer *item, int output, TWatchFrame *watch, real yshift, TPenStyle style, TColor color)
+void TMainForm::AddWatch(NAContainer *item, int output, TWatchFrame *watch, double yshift, TPenStyle style, TColor color)
 {
  NADItem *itemd=dynamic_cast<NADItem*>(item);
 
@@ -46,7 +46,7 @@ void TMainForm::AddWatch(NAContainer *item, int output, TWatchFrame *watch, real
  watch->Add(wd);
 }
 
-void TMainForm::AddFrequencyWatch(NAContainer *item,TWatchFrame *watch, real yshift, TPenStyle style, TColor color)
+void TMainForm::AddFrequencyWatch(NAContainer *item,TWatchFrame *watch, double yshift, TPenStyle style, TColor color)
 {
  NFrequencyReceiver* itemd=dynamic_cast<NFrequencyReceiver*>(item);
 
@@ -78,7 +78,7 @@ void TMainForm::CreateNeuralTest(NStorage *storage, NANet *net,TWatchFrame *watc
 
  int i=1,j=0;
 
- real ampl=1, dist=0.25;
+ double ampl=1, dist=0.25;
 
  // Простой мелкий нейрон
  cont=storage->TakeObject("NSPNeuron");
@@ -140,7 +140,7 @@ void TMainForm::CreateMotionElement(NStorage *storage, NANet *net)
 
  int i=1,j=0;
 
- real ampl=1, dist=0.25;
+ double ampl=1, dist=0.25;
 
  // Клетка реншоу 1
  cont=storage->TakeObject("NSPNeuron");

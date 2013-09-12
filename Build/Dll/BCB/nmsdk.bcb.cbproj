@@ -33,10 +33,14 @@
 			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+			<Cfg_2_Win32>true</Cfg_2_Win32>
+			<CfgParent>Cfg_2</CfgParent>
+			<Cfg_2>true</Cfg_2>
+			<Base>true</Base>
+		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<PostBuildEvent><![CDATA[copy $(OUTPUTDIR)\nmsdk.bcb.dll $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.dll /Y
-copy $(OUTPUTDIR)\nmsdk.bcb.lib $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.lib /Y
-$(PostBuildEvent)]]></PostBuildEvent>
+			<FinalOutputDir>..\..\..\Bin\Platform\Win</FinalOutputDir>
 			<UsingDelphiRTL>true</UsingDelphiRTL>
 			<Manifest_File>None</Manifest_File>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.0.19;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -97,6 +101,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<FinalOutputDir>..\..\..\Bin\Platform\Win</FinalOutputDir>
 			<LinkPackageStatics>rtl.lib;vcl.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib;inet.lib</LinkPackageStatics>
 			<UsePackages>false</UsePackages>
 			<BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
@@ -109,6 +114,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			<IntermediateOutputDir>Release</IntermediateOutputDir>
 			<ILINK_LibraryPath>$(BDS)\lib\release;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<TASM_Debugging>None</TASM_Debugging>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<VerInfo_Locale>1033</VerInfo_Locale>
 		</PropertyGroup>
 		<ItemGroup>
 			<ResFiles Include="nmsdk.bcb.res">
@@ -222,36 +231,4 @@ $(PostBuildEvent)]]></PostBuildEvent>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>
-		<PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='OSX32'">
-			<PreBuildEvent/>
-			<PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-			<PreLinkEvent/>
-			<PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-			<PostBuildEvent>copy $(OUTPUTDIR)\nmsdk.bcb.dll $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.dll /Y&amp;&amp;copy $(OUTPUTDIR)\nmsdk.bcb.lib $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.lib /Y</PostBuildEvent>
-			<PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-			<PreBuildEvent/>
-			<PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-			<PreLinkEvent/>
-			<PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-			<PostBuildEvent>copy $(OUTPUTDIR)\nmsdk.bcb.dll $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.dll /Y&amp;&amp;copy $(OUTPUTDIR)\nmsdk.bcb.lib $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.lib /Y</PostBuildEvent>
-			<PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='OSX32'">
-			<PreBuildEvent/>
-			<PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-			<PreLinkEvent/>
-			<PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-			<PostBuildEvent>copy $(OUTPUTDIR)\nmsdk.bcb.dll $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.dll /Y&amp;&amp;copy $(OUTPUTDIR)\nmsdk.bcb.lib $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.lib /Y</PostBuildEvent>
-			<PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
-			<PreBuildEvent/>
-			<PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
-			<PreLinkEvent/>
-			<PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-			<PostBuildEvent>copy $(OUTPUTDIR)\nmsdk.bcb.dll $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.dll /Y&amp;&amp;copy $(OUTPUTDIR)\nmsdk.bcb.lib $(OUTPUTDIR)..\Deploy\Dll\nmsdk.bcb.lib /Y</PostBuildEvent>
-			<PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
-		</PropertyGroup>
 	</Project>

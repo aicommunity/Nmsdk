@@ -119,7 +119,7 @@ public:		// User declarations
 
  UGraphics graph;
  UBitmap canvas;
- real length;
+ double length;
 
  void UpdateInterface(void);
 

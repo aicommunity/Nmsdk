@@ -50,8 +50,8 @@ void TManipulatorTestForm::UpdateInterface(void)
  if(!Engine)
   return;
 
- real angle=Engine->GetOutputData(1).Double[0];
- real x1,y1,x2,y2;
+ double angle=Engine->GetOutputData(1).Double[0];
+ double x1,y1,x2,y2;
 
  x1=320; y1=240;
  x2=x1+length*cos(angle-M_PI/2.0);
@@ -612,7 +612,7 @@ else
 
 void __fastcall TManipulatorTestForm::VoltageMulTrackBarChange(TObject *Sender)
 {
- real value=VoltageMulTrackBar->Position/100.0;
+ double value=VoltageMulTrackBar->Position/100.0;
  VoltageMulEdit->Text=FloatToStrF(value,ffFixed,3,3);
  if(RadioGroup1->ItemIndex != 0)
   {
@@ -671,7 +671,7 @@ void __fastcall TManipulatorTestForm::ServoNumberEditChange(TObject *Sender)
 void __fastcall TManipulatorTestForm::TimeDurationTrackBarChange(TObject *Sender)
 
 {
- real value=TimeDurationTrackBar->Position;
+ double value=TimeDurationTrackBar->Position;
  TimeDurationEdit->Text=FloatToStrF(value,ffFixed,3,3);
  if(RadioGroup1->ItemIndex != 0)
   {
@@ -687,7 +687,7 @@ void __fastcall TManipulatorTestForm::PACDeactivatorTimeTrackBarChange(TObject *
 
 {
  int num_ranges=StrToInt(MainForm->NumMotionElementsComboBox->Items->Strings[MainForm->NumMotionElementsComboBox->ItemIndex]);
- real value=real(PACDeactivatorTimeTrackBar->Position)/real(PACDeactivatorTimeTrackBar->Max);
+ double value=double(PACDeactivatorTimeTrackBar->Position)/double(PACDeactivatorTimeTrackBar->Max);
  PACDeactivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
  UEPtr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));
@@ -708,7 +708,7 @@ void __fastcall TManipulatorTestForm::PACActivatorTimeTrackBarChange(TObject *Se
 
 {
  int num_ranges=StrToInt(MainForm->NumMotionElementsComboBox->Items->Strings[MainForm->NumMotionElementsComboBox->ItemIndex]);
- real value=real(PACActivatorTimeTrackBar->Position)/real(PACActivatorTimeTrackBar->Max);
+ double value=double(PACActivatorTimeTrackBar->Position)/double(PACActivatorTimeTrackBar->Max);
  PACActivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
  UEPtr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));

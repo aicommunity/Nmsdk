@@ -26,7 +26,7 @@ void TNEnsembleActivityFrame::UpdateInterface(void)
 
  UpdateInterfaceFlag=true;
 
- map<string, NMSDK::real>::iterator I,J;
+ map<string, NMSDK::double>::iterator I,J;
  I=EnsemblesActivityData.begin();
  J=EnsemblesActivityData.end();
  for(;I!=J;++I)

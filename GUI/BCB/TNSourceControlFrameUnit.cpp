@@ -23,7 +23,7 @@ __fastcall TNSourceControlFrame::TNSourceControlFrame(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 // Устанавливает интервал наблюдения
-bool TNSourceControlFrame::SetWatchInterval(real interval)
+bool TNSourceControlFrame::SetWatchInterval(double interval)
 {
  if(WatchInterval == interval)
   return true;
