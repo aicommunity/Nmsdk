@@ -67,8 +67,8 @@
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<Defines>NO_STRICT;$(Defines)</Defines>
 			<UsePackages>true</UsePackages>
-			<IncludePath>..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\RDK\ThirdParty\curl\lib\;..\..\..\RDK\ThirdParty\curl\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;..\..\..\RDK\ThirdParty\curl\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;..\..\..\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\RDK\Core\Graphics\Libraries\Hardware\;..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\RDK\ThirdParty\curl\lib\;..\..\..\RDK\ThirdParty\curl\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;..\..\..\RDK\ThirdParty\curl\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\RDK\Core\Graphics\Libraries\Hardware\;..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;..\..\..\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 		</PropertyGroup>
@@ -141,6 +141,9 @@
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\Core\Graphics\Libraries\Detection\Detection.cpp">
 				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\Core\Graphics\Libraries\Hardware\Hardware.cpp">
+				<BuildOrder>11</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\Core\Graphics\Libraries\Libraries.cpp">
 				<BuildOrder>8</BuildOrder>
