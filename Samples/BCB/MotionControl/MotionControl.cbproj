@@ -62,7 +62,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base_Win32)'!=''">
-			<ILINK_LibraryPath>D:\NMSDK\Bin\Platform\Win\;E:\Science\AI\AISD\NMSDK\Bin\Platform\Win\;E:\Science\AI\AISD\Nmsdk\Bin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>E:\Science\AI\AISD\NMSDK\Bin\Platform\Win\;E:\Science\AI\AISD\Nmsdk\Bin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
 			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
 			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
@@ -103,7 +103,7 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\..\Bin\Platform\Win\nmsdk.bcb.lib">
-				<BuildOrder>47</BuildOrder>
+				<BuildOrder>48</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk.bcb.cpp">
@@ -251,6 +251,11 @@
 				<DependentOn>..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.h</DependentOn>
 				<BuildOrder>39</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.cpp">
+				<Form>UCRTeacherCVNetworkBPForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.h</DependentOn>
+				<BuildOrder>48</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.cpp">
 				<Form>UCRTeacherPerseptronBPForm</Form>
 				<DependentOn>..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.h</DependentOn>
@@ -320,11 +325,6 @@
 				<DependentOn>..\..\..\RDK\GUI\BCB\USeriesControlUnit.h</DependentOn>
 				<BuildOrder>25</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\RDK\GUI\BCB\UServerControlFormUnit.cpp">
-				<Form>UServerControlForm</Form>
-				<DependentOn>..\..\..\RDK\GUI\BCB\UServerControlFormUnit.h</DependentOn>
-				<BuildOrder>48</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.cpp">
 				<Form>UShowProgressBarForm</Form>
 				<DependentOn>..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.h</DependentOn>
@@ -385,7 +385,7 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UServerControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
