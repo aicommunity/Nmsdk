@@ -62,7 +62,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base_Win32)'!=''">
-			<ILINK_LibraryPath>E:\Science\AI\AISD\NMSDK\Bin\Platform\Win\;E:\Science\AI\AISD\Nmsdk\Bin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>D:\NMSDK\Bin\Platform\Win\;E:\Science\AI\AISD\NMSDK\Bin\Platform\Win\;E:\Science\AI\AISD\Nmsdk\Bin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
 			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
 			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
@@ -103,7 +103,7 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\..\Bin\Platform\Win\nmsdk.bcb.lib">
-				<BuildOrder>48</BuildOrder>
+				<BuildOrder>47</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk.bcb.cpp">
@@ -342,28 +342,28 @@
 			<ResFiles Include="MotionControl.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UGEngineControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFormUnit.dfm"/>
