@@ -39,6 +39,7 @@
 
 
 
+
 USEFORM("..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.cpp", UDrawEngineForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.cpp", UCRTeacherPerseptronDLForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.cpp", UCRTeacherPerseptronBPForm);
@@ -77,6 +78,7 @@ USEFORM("..\..\..\RDK\GUI\BCB\TUHttpServerUnit.cpp", UHttpServerFrame); /* TFram
 USEFORM("..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.cpp", UClassesListFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UClassesListFormUnit.cpp", UClassesListForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.cpp", UVisualControllerFrame); /* TFrame: File Type */
+USEFORM("..\..\..\RDK\GUI\BCB\UServerControlFormUnit.cpp", UServerControlForm);
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -108,6 +110,7 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TUImagesForm), &UImagesForm);
 		Application->CreateForm(__classid(TIdHttpResultBroadcasterForm), &IdHttpResultBroadcasterForm);
 		Application->CreateForm(__classid(TIdTcpResultBroadcasterForm), &IdTcpResultBroadcasterForm);
+		Application->CreateForm(__classid(TUServerControlForm), &UServerControlForm);
 		Application->Run();
     }
 	catch (Exception &exception)
