@@ -226,7 +226,6 @@ virtual void ASaveParameters(RDK::USerStorageXML &xml);
 // Загружает параметры интерфейса из xml
 virtual void ALoadParameters(RDK::USerStorageXML &xml);
 
-
 void AUpdateInterface(void);
 
 // Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления

@@ -73,6 +73,7 @@
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<ILINK_LibraryPath>E:\Science\AI\AISD\NMSDK\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
 			<Icon_MainIcon>nmsdk_Icon1.ico</Icon_MainIcon>
 			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
@@ -136,6 +137,10 @@
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk_new.win.cpp">
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\..\RDK\Bin\Platform\Win\libcurl.bcb.lib">
+				<BuildOrder>13</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
 			<CppCompile Include="..\..\..\RDK\Core\Engine\Libraries\UELibraries.cpp">
 				<BuildOrder>7</BuildOrder>
 			</CppCompile>

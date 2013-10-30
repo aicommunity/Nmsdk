@@ -38,18 +38,19 @@
 
 
 
+
 USEFORM("..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.cpp", UDrawEngineForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.cpp", UCRTeacherPerseptronDLForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.cpp", UCRTeacherPerseptronBPForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.cpp", UEngineMonitorFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.cpp", UEngineMonitorForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.cpp", UDrawEngineFrame); /* TFrame: File Type */
+USEFORM("..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.cpp", UCreateProjectWizardForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.cpp", UComponentsPerformanceFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.cpp", UComponentsPerformanceForm);
-USEFORM("..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.cpp", UComponentsListFrame); /* TFrame: File Type */
+USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.cpp", UCRTeacherCVNetworkBPForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.cpp", UCRSampleForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.cpp", UCRPerseptronForm);
-USEFORM("..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.cpp", UCreateProjectWizardForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UWatchFormUnit.cpp", UWatchForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.cpp", UShowProgressBarForm);
 USEFORM("..\..\..\RDK\GUI\BCB\USeriesControlUnit.cpp", USeriesControlForm);
@@ -60,6 +61,7 @@ USEFORM("..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.cpp", UFavoriteComp
 USEFORM("..\..\..\RDK\GUI\BCB\UListInputFormUnit.cpp", UListInputForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UImagesFrameUnit.cpp", UImagesFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UImagesFormUnit.cpp", UImagesForm);
+USEFORM("..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.cpp", UComponentsListFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.cpp", IdTcpResultBroadcasterForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFrameUnit.cpp", IdHttpResultBroadcasterFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFormUnit.cpp", IdHttpResultBroadcasterForm);
@@ -76,7 +78,7 @@ USEFORM("..\..\..\RDK\GUI\BCB\TUHttpServerUnit.cpp", UHttpServerFrame); /* TFram
 USEFORM("..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.cpp", UClassesListFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UClassesListFormUnit.cpp", UClassesListForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.cpp", UVisualControllerFrame); /* TFrame: File Type */
-USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.cpp", UCRTeacherCVNetworkBPForm);
+USEFORM("..\..\..\RDK\GUI\BCB\UServerControlFormUnit.cpp", UServerControlForm);
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -109,6 +111,7 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TIdHttpResultBroadcasterForm), &IdHttpResultBroadcasterForm);
 		Application->CreateForm(__classid(TIdTcpResultBroadcasterForm), &IdTcpResultBroadcasterForm);
 		Application->CreateForm(__classid(TUCRTeacherCVNetworkBPForm), &UCRTeacherCVNetworkBPForm);
+		Application->CreateForm(__classid(TUServerControlForm), &UServerControlForm);
 		Application->Run();
     }
 	catch (Exception &exception)
