@@ -25,10 +25,13 @@
 //#include "nmsdkdll.h"
 
 
+WORD Saved8087CW;
+
 #pragma argsused
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fwdreason, LPVOID lpvReserved)
 {
-// DllManager.Init(&NMSDK::NewNStorage,&NMSDK::NewNEnvironment);
-	return 1;
+ Saved8087CW = Default8087CW;
+ System::Set8087CW(0x133f);
+ return 1;
 }
 //---------------------------------------------------------------------------

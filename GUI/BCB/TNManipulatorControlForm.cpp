@@ -1056,7 +1056,7 @@ void __fastcall TNManipulatorControlForm::MovementControlTrackBarChange(TObject 
 
  if(source)
  {
-  if(engine || man)
+  if(engine)
   {
    engine->OutMoment=amplitude;
  //  source->Angle=amplitude;
