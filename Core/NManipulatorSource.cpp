@@ -110,10 +110,20 @@ bool NManipulatorSource::ACalculate(void)
   UpdateOutputFlag=false;
  }*/
  if(NumInputs >0 && GetInputDataSize(0)>0)
-  POutputData[0].Double[0]=GetInputData(0)->Double[0]-Movement;
+ {
+  if(NumInputs<=4)
+   POutputData[0].Double[0]=GetInputData(0)->Double[0]-Movement;
+  else
+   POutputData[0].Double[0]=GetInputData(0)->Double[0]-GetInputData(4)->Double[0];
+ }
 
  if(NumInputs >1 && GetInputDataSize(1)>0)
-  POutputData[1].Double[0]=GetInputData(1)->Double[0]-Angle;
+ {
+  if(NumInputs<=5)
+   POutputData[1].Double[0]=GetInputData(1)->Double[0]-Angle;
+  else
+   POutputData[1].Double[0]=GetInputData(1)->Double[0]-GetInputData(5)->Double[0];
+ }
 
  if(NumInputs >2 && GetInputDataSize(2)>0)
   POutputData[2].Double[0]=GetInputData(2)->Double[0];
