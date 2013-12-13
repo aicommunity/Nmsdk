@@ -836,6 +836,7 @@ void __fastcall TNManipulatorControlForm::ControlSystemSelectionPanelDblClick(TO
 
 
 
+
 void __fastcall TNManipulatorControlForm::VoltageMulTrackBarChange(TObject *Sender)
 
 {
