@@ -321,18 +321,23 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
  RDK::UEPtr<RDK::UNet> net=RDK::dynamic_pointer_cast<RDK::UNet>(GetModel());
 
  bool res=true;
- RDK::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(cs_name+".NManipulatorSource1"))->DisconnectAllItems();
+ string source_name=cs_name+".NManipulatorSource1";
+ net->BreakConnectorLink(source_name,0);
+ net->BreakConnectorLink(source_name,1);
+ net->BreakConnectorLink(source_name,2);
+ net->BreakConnectorLink(source_name,3);
+// RDK::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(source_name))->DisconnectAllItems();
  RDK::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1"))->DisconnectAll();
  if(man_name == "PendulumAndCart")
  {
-  res&=net->CreateLink(man_name,3,cs_name+".NManipulatorSource1",0);
-  res&=net->CreateLink(man_name,4,cs_name+".NManipulatorSource1",3);
+  res&=net->CreateLink(man_name,3,source_name,0);
+  res&=net->CreateLink(man_name,4,source_name,3);
  }
  else
-  res&=net->CreateLink(man_name,0,cs_name+".NManipulatorSource1",0);
+  res&=net->CreateLink(man_name,0,source_name,0);
 
- res&=net->CreateLink(man_name,1,cs_name+".NManipulatorSource1",1);
- res&=net->CreateLink(man_name,2,cs_name+".NManipulatorSource1",2);
+ res&=net->CreateLink(man_name,1,source_name,1);
+ res&=net->CreateLink(man_name,2,source_name,2);
  res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
  /*
  // —в€зываем все управл€ющие элементы
