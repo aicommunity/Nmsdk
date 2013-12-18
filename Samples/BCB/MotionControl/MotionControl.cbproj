@@ -109,6 +109,11 @@
 			<CppCompile Include="..\..\..\Deploy\Include\nmsdk.bcb.cpp">
 				<BuildOrder>27</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\GUI\BCB\TNAstaticGyroUnit.cpp">
+				<Form>NAstaticGyro</Form>
+				<DependentOn>..\..\..\GUI\BCB\TNAstaticGyroUnit.h</DependentOn>
+				<BuildOrder>50</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\GUI\BCB\TNManipulatorControlForm.cpp">
 				<Form>NManipulatorControlForm</Form>
 				<DependentOn>..\..\..\GUI\BCB\TNManipulatorControlForm.h</DependentOn>
@@ -392,6 +397,7 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentIOFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\TNAstaticGyroUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
