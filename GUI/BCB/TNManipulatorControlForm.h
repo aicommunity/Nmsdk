@@ -237,6 +237,8 @@ bool ManipulatorCSConnect(const std::string &cs_name, const std::string &man_nam
 void ReadComponentData(void);
 
 void ReconnectManipulator(void);
+void ReconnectCurrentManipulator(void);
+
 
 
 // Создание копии этого компонента

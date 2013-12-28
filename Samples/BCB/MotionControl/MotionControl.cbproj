@@ -34,6 +34,12 @@
 			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+			<Cfg_2_Win32>true</Cfg_2_Win32>
+			<CfgParent>Cfg_2</CfgParent>
+			<Cfg_2>true</Cfg_2>
+			<Base>true</Base>
+		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<Manifest_File>None</Manifest_File>
 			<Icon_MainIcon>MotionControl_Icon1.ico</Icon_MainIcon>
@@ -88,6 +94,8 @@
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<VerInfo_Debug>true</VerInfo_Debug>
+			<VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
 			<BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
 			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
 			<LinkPackageStatics>rtl.lib;vcl.lib;Tee916.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib;inet.lib</LinkPackageStatics>
@@ -100,6 +108,12 @@
 			<IntermediateOutputDir>Release</IntermediateOutputDir>
 			<ILINK_LibraryPath>$(BDS)\lib\release;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<TASM_Debugging>None</TASM_Debugging>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
 		</PropertyGroup>
 		<ItemGroup>
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\..\Bin\Platform\Win\nmsdk.bcb.lib">
@@ -380,24 +394,24 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\TNAstaticGyroUnit.dfm"/>
 			<FormResources Include="..\..\..\GUI\BCB\TNManipulatorControlForm.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TUHttpServerUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentIOFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentIOFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\TUHttpServerUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
-			<FormResources Include="..\..\..\GUI\BCB\TNAstaticGyroUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

@@ -372,6 +372,21 @@ void TNManipulatorControlForm::ReadComponentData(void)
  }
 }
 
+void TNManipulatorControlForm::ReconnectCurrentManipulator(void)
+{
+ if(Manipulator)
+ {
+  Disconnect1Click(this);
+//  ManipulatorName="";
+ }
+
+// ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
+ UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UNet>(GetModel()->GetComponentL(ManipulatorName));
+ Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(GetModel()->GetComponentL(ManipulatorName));
+ if(!UniversalManipulator)
+  ManipulatorName="";
+ ManipulatorCSConnect(ControlSystemName, ManipulatorName);
+}
 
 void TNManipulatorControlForm::ReconnectManipulator(void)
 {
@@ -834,7 +849,7 @@ void __fastcall TNManipulatorControlForm::SelectControlSystem1Click(TObject *Sen
 void __fastcall TNManipulatorControlForm::ControlSystemSelectionPanelDblClick(TObject *Sender)
 {
  SelectControlSystem1Click(Sender);
- ReconnectManipulator();
+ ReconnectCurrentManipulator();
  UDrawEngineForm->UpdateInterface();
 }
 //---------------------------------------------------------------------------
@@ -1219,6 +1234,7 @@ void __fastcall TNManipulatorControlForm::ResetToZeroButton2Click(TObject *Sende
  MomentTrackBarChange(Sender);
 }
 //---------------------------------------------------------------------------
+
 
 
 
