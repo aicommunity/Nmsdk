@@ -1124,6 +1124,14 @@ void __fastcall TNManipulatorControlForm::FormCreate(TObject *Sender)
  TempBmp=new TBitmap;
  int max_number_of_mc=10;
 
+ TUComponentsListFrame::ComponentControllers["NAslsNewSimplestAfferentBranchedEngineControlPM"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NAslsNewSimplestAfferentBranchedEngineControlPM")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
+ TUComponentsListFrame::ComponentControllers["NAsfNewSimplestAfferentBranchedEngineControlPM"]=NManipulatorControlForm;
+ for(int i=1;i<max_number_of_mc;i++)
+  TUComponentsListFrame::ComponentControllers[std::string("NAsfNewSimplestAfferentBranchedEngineControlPM")+RDK::sntoa(i+1)]=NManipulatorControlForm;
+
  TUComponentsListFrame::ComponentControllers["NAslsNewSimplestAfferentBranchedEngineControl"]=NManipulatorControlForm;
  for(int i=1;i<max_number_of_mc;i++)
   TUComponentsListFrame::ComponentControllers[std::string("NAslsNewSimplestAfferentBranchedEngineControl")+RDK::sntoa(i+1)]=NManipulatorControlForm;
