@@ -141,6 +141,12 @@
 			<CppCompile Include="..\..\..\RDK\Deploy\Include\rdk.bcb.cpp">
 				<BuildOrder>26</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.cpp">
+				<Form>EnchancedSG</Form>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.h</DependentOn>
+				<BuildOrder>51</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFormUnit.cpp">
 				<Form>IdHttpResultBroadcasterForm</Form>
 				<DependentOn>..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFormUnit.h</DependentOn>
@@ -411,6 +417,7 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
