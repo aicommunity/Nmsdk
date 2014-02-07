@@ -10,7 +10,7 @@ extern NMSDK::UStorage* CreateNewStorage(void)
  NMSDK::UStorage* storage=new NMSDK::UStorage;
  storage->AddClassLibrary(&NMSDK::BCLLibrary);
  storage->AddClassLibrary(&NMSDK::ActLibrary);
- storage->AddClassLibrary(&NMSDK::CRLibrary);
+// storage->AddClassLibrary(&NMSDK::CRLibrary);
  storage->AddClassLibrary(&NMSDK::MathLibrary);
  storage->AddClassLibrary(&NMSDK::PhysLibrary);
  storage->AddClassLibrary(&NMSDK::SensorLibrary);
