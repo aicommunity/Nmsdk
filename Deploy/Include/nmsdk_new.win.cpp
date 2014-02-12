@@ -8,21 +8,21 @@
 extern NMSDK::UStorage* CreateNewStorage(void)
 {
  NMSDK::UStorage* storage=new NMSDK::UStorage;
- storage->AddClassLibrary(&NMSDK::BCLLibrary);
- storage->AddClassLibrary(&NMSDK::ActLibrary);
-// storage->AddClassLibrary(&NMSDK::CRLibrary);
- storage->AddClassLibrary(&NMSDK::MathLibrary);
- storage->AddClassLibrary(&NMSDK::PhysLibrary);
- storage->AddClassLibrary(&NMSDK::SensorLibrary);
- storage->AddClassLibrary(&NMSDK::SourceLibrary);
- storage->AddClassLibrary(&NMSDK::ReceiverLibrary);
- storage->AddClassLibrary(&NMSDK::PulseLibrary);
- storage->AddClassLibrary(&NMSDK::NeuronLifeLibrary);
- storage->AddClassLibrary(&NMSDK::PulseNeuronLibrary);
+ storage->AddCollection(&NMSDK::BCLLibrary);
+ storage->AddCollection(&NMSDK::ActLibrary);
+// storage->AddCollection(&NMSDK::CRLibrary);
+ storage->AddCollection(&NMSDK::MathLibrary);
+ storage->AddCollection(&NMSDK::PhysLibrary);
+ storage->AddCollection(&NMSDK::SensorLibrary);
+ storage->AddCollection(&NMSDK::SourceLibrary);
+ storage->AddCollection(&NMSDK::ReceiverLibrary);
+ storage->AddCollection(&NMSDK::PulseLibrary);
+ storage->AddCollection(&NMSDK::NeuronLifeLibrary);
+ storage->AddCollection(&NMSDK::PulseNeuronLibrary);
 
- storage->AddClassLibrary(&NMSDK::MotionControlLibrary);
+ storage->AddCollection(&NMSDK::MotionControlLibrary);
 
- storage->AddClassLibrary(&NMSDK::WinAPIActLibrary);
+ storage->AddCollection(&NMSDK::WinAPIActLibrary);
 
  return storage;
 }
