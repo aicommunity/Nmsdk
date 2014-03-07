@@ -127,6 +127,11 @@
 				<DependentOn>..\..\..\GUI\BCB\TNAstaticGyroUnit.h</DependentOn>
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\GUI\BCB\TNewManipulatorControlForm.cpp">
+				<Form>NewManipulatorControlForm</Form>
+				<DependentOn>..\..\..\GUI\BCB\TNewManipulatorControlForm.h</DependentOn>
+				<BuildOrder>52</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\GUI\BCB\TNManipulatorControlForm.cpp">
 				<Form>NManipulatorControlForm</Form>
 				<DependentOn>..\..\..\GUI\BCB\TNManipulatorControlForm.h</DependentOn>
@@ -418,6 +423,7 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\TNewManipulatorControlForm.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
