@@ -84,12 +84,17 @@ USEFORM("..\..\..\RDK\GUI\BCB\UClassesListFormUnit.cpp", UClassesListForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.cpp", UVisualControllerFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.cpp", EnchancedSG); /* TFrame: File Type */
 //---------------------------------------------------------------------------
+extern HANDLE RdkLockStartapMutex;
+bool RdkIsApplicationRunning(void);
+
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
 	try
     {
         Application->Initialize();
         Application->MainFormOnTaskBar = true;
+		if(RdkIsApplicationRunning())
+		 Application->Terminate();
         Application->CreateForm(__classid(TUGEngineControlForm), &UGEngineControlForm);
 		Application->CreateForm(__classid(TNManipulatorControlForm), &NManipulatorControlForm);
 		Application->CreateForm(__classid(TUClassesListForm), &UClassesListForm);
@@ -118,13 +123,16 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TUServerControlForm), &UServerControlForm);
 		Application->CreateForm(__classid(TNAstaticGyro), &NAstaticGyro);
 		Application->Run();
-    }
+		CloseHandle(RdkLockStartapMutex);
+	}
 	catch (Exception &exception)
-    {
-        Application->ShowException(&exception);
-    }
-    catch (...)
-    {
+	{
+		CloseHandle(RdkLockStartapMutex);
+		Application->ShowException(&exception);
+	}
+	catch (...)
+	{
+		CloseHandle(RdkLockStartapMutex);
         try
         {
             throw Exception("");
