@@ -1,7 +1,7 @@
-﻿object NManipulatorControlForm: TNManipulatorControlForm
+﻿object NewManipulatorControlForm: TNewManipulatorControlForm
   Left = 0
   Top = 0
-  Caption = 'NManipulatorControlForm'
+  Caption = 'NewManipulatorControlForm'
   ClientHeight = 492
   ClientWidth = 693
   Color = clBtnFace
@@ -36,6 +36,10 @@
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Communication'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -350,6 +354,10 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -358,6 +366,8 @@
         Align = alLeft
         Caption = ' External control '
         TabOrder = 0
+        ExplicitLeft = 2
+        ExplicitTop = -2
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -411,44 +421,15 @@
           TabOrder = 3
           Text = '0'
         end
-        object IaCheckBox: TCheckBox
-          Left = 5
-          Top = 128
-          Width = 181
-          Height = 17
-          Caption = 'FB by angle speed (Ia) '
-          TabOrder = 4
-          OnClick = IaCheckBoxClick
-        end
-        object IbCheckBox: TCheckBox
-          Left = 5
-          Top = 151
-          Width = 181
-          Height = 17
-          Caption = 'FB by moment (Ib) '
-          TabOrder = 5
-          OnClick = IbCheckBoxClick
-        end
-        object IICheckBox: TCheckBox
-          Left = 5
-          Top = 170
-          Width = 187
-          Height = 17
-          Caption = 'FB by angle (II) '
-          Checked = True
-          State = cbChecked
-          TabOrder = 6
-          OnClick = IICheckBoxClick
-        end
         object ControlVoltageCheckBox: TCheckBox
-          Left = 5
-          Top = 208
-          Width = 181
+          Left = 12
+          Top = 229
+          Width = 183
           Height = 17
           Caption = 'Control power (U) '
           Checked = True
           State = cbChecked
-          TabOrder = 7
+          TabOrder = 4
           OnClick = ControlVoltageCheckBoxClick
         end
         object GroupBox10: TGroupBox
@@ -458,7 +439,7 @@
           Height = 82
           Align = alBottom
           Caption = ' Target position '
-          TabOrder = 8
+          TabOrder = 5
           DesignSize = (
             197
             82)
@@ -503,17 +484,6 @@
             OnClick = ResetToZeroButton2Click
           end
         end
-        object CheckBox1: TCheckBox
-          Left = 5
-          Top = 189
-          Width = 187
-          Height = 17
-          Caption = 'FB by movement (Ic) '
-          Checked = True
-          State = cbChecked
-          TabOrder = 9
-          OnClick = CheckBox1Click
-        end
         object GroupBox11: TGroupBox
           Left = 2
           Top = 279
@@ -521,7 +491,7 @@
           Height = 82
           Align = alBottom
           Caption = ' External power  '
-          TabOrder = 10
+          TabOrder = 6
           DesignSize = (
             197
             82)
@@ -567,13 +537,22 @@
           end
         end
         object HideSecondaryGuiCheckBox: TCheckBox
-          Left = 6
-          Top = 231
+          Left = 12
+          Top = 252
           Width = 189
           Height = 17
           Caption = 'Hide secondary GUI'
-          TabOrder = 11
+          TabOrder = 7
           OnClick = HideSecondaryGuiCheckBoxClick
+        end
+        object CheckListBox1: TCheckListBox
+          Left = 12
+          Top = 126
+          Width = 121
+          Height = 97
+          ItemHeight = 13
+          TabOrder = 8
+          OnClick = CheckListBox1Click
         end
       end
       object Panel1: TPanel
@@ -727,6 +706,8 @@
           Align = alBottom
           Caption = ' Neuro manipulator parameters '
           TabOrder = 1
+          ExplicitLeft = 0
+          ExplicitTop = 217
           object Label12: TLabel
             Left = 14
             Top = 106
