@@ -88,6 +88,7 @@ USEFORM("..\..\..\GUI\BCB\TNewManipulatorControlForm.cpp", NewManipulatorControl
 //---------------------------------------------------------------------------
 extern HANDLE RdkLockStartapMutex;
 bool RdkIsApplicationRunning(void);
+extern bool ApplicationInitialized;
 
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -125,7 +126,8 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TUServerControlForm), &UServerControlForm);
 		Application->CreateForm(__classid(TNAstaticGyro), &NAstaticGyro);
 		Application->CreateForm(__classid(TNewManipulatorControlForm), &NewManipulatorControlForm);
-		Application->Run();
+		ApplicationInitialized=true;
+   		Application->Run();
 		CloseHandle(RdkLockStartapMutex);
 	}
 	catch (Exception &exception)
