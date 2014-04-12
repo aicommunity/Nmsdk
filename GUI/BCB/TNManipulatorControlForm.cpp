@@ -216,16 +216,25 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
 
  int num_ranges=ControlSystem->NumMotionElements;
  bool flag=UpdateInterfaceFlag;
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(!flag)
   UpdateInterfaceFlag=true;
- PACMultiplicatorTrackBar->Position=fabs(engine_input->Gain[0][0]);
- PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->Gain[0][0],ffFixed,3,3);
- PACActivatorTimeTrackBar->Position=engine_input->SecretionTC[0][0]*double(PACActivatorTimeTrackBar->Max);
- PACActivatorTimeEdit->Text=FloatToStrF(engine_input->SecretionTC[0][0],ffFixed,3,3);
- PACDeactivatorTimeTrackBar->Position=engine_input->DissociationTC[0][0]*double(PACDeactivatorTimeTrackBar->Max);
- PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->DissociationTC[0][0],ffFixed,3,3);
+ try
+ {
+  RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+  if(engine_input)
+  {
+   PACMultiplicatorTrackBar->Position=fabs(engine_input->Gain[0][0]);
+   PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->Gain[0][0],ffFixed,3,3);
+   PACActivatorTimeTrackBar->Position=engine_input->SecretionTC[0][0]*double(PACActivatorTimeTrackBar->Max);
+   PACActivatorTimeEdit->Text=FloatToStrF(engine_input->SecretionTC[0][0],ffFixed,3,3);
+   PACDeactivatorTimeTrackBar->Position=engine_input->DissociationTC[0][0]*double(PACDeactivatorTimeTrackBar->Max);
+   PACDeactivatorTimeEdit->Text=FloatToStrF(engine_input->DissociationTC[0][0],ffFixed,3,3);
+  }
+ }
+ catch(RDK::UContainer::EComponentNameNotExist &exception)
+ {
 
+ }
  IINumAfferentTrackBar->Max=num_ranges;
 
  if(!flag)
@@ -322,6 +331,8 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
 
  bool res=true;
  string source_name=cs_name+".NManipulatorSource1";
+ if(!cs_name.empty())
+ {
  net->BreakConnectorLink(source_name,0);
  net->BreakConnectorLink(source_name,1);
  net->BreakConnectorLink(source_name,2);
@@ -339,6 +350,7 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
  res&=net->CreateLink(man_name,1,source_name,1);
  res&=net->CreateLink(man_name,2,source_name,2);
  res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
+ }
  /*
  // —в€зываем все управл€ющие элементы
  int motion_elements=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(net->GetComponentL(cs_name))->NumMotionElements;
