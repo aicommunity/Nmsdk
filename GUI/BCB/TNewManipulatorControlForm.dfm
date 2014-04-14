@@ -31,15 +31,11 @@
     Top = 0
     Width = 693
     Height = 473
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -254,10 +250,6 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
@@ -354,10 +346,6 @@
     object TabSheet3: TTabSheet
       Caption = 'Neuro Control'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -366,8 +354,6 @@
         Align = alLeft
         Caption = ' External control '
         TabOrder = 0
-        ExplicitLeft = 2
-        ExplicitTop = -2
         object Label5: TLabel
           Left = 12
           Top = 18
@@ -706,8 +692,6 @@
           Align = alBottom
           Caption = ' Neuro manipulator parameters '
           TabOrder = 1
-          ExplicitLeft = 0
-          ExplicitTop = 217
           object Label12: TLabel
             Left = 14
             Top = 106

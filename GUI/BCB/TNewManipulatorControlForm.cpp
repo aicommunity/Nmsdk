@@ -315,6 +315,9 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
 {
  RDK::UEPtr<RDK::UNet> net=RDK::dynamic_pointer_cast<RDK::UNet>(GetModel());
 
+ if(cs_name.empty())
+  return true;
+
  bool res=true;
  string source_name=cs_name+".NManipulatorSource1";
  net->BreakConnectorLink(source_name,0);
@@ -1006,4 +1009,5 @@ void __fastcall TNewManipulatorControlForm::CheckListBox1Click(TObject *Sender)
 	
 }
 //---------------------------------------------------------------------------
+
 
