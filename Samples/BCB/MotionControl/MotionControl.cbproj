@@ -61,8 +61,8 @@
 			<AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib;inet.lib;Tee.lib;Tee916.lib</AllPackageLibs>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<IncludePath>..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\lib;..\..\..\Deploy\Include\;..\..\..\Deploy\Dll\;..\..\..\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\Libraries\MotionControlLib\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\Libraries\MotionControlLib\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\lib;..\..\..\Deploy\Include\;..\..\..\Deploy\Dll\;..\..\..\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -137,6 +137,12 @@
 				<DependentOn>..\..\..\GUI\BCB\TNManipulatorControlForm.h</DependentOn>
 				<BuildOrder>28</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\Libraries\MotionControlLib\NPositionControlElement.cpp">
+				<BuildOrder>53</BuildOrder>
+			</CppCompile>
+			<None Include="..\..\..\Libraries\MotionControlLib\NPositionControlElement.h">
+				<BuildOrder>54</BuildOrder>
+			</None>
 			<CppCompile Include="..\..\..\RDK\Core\Engine\Libraries\UELibraries.cpp">
 				<BuildOrder>41</BuildOrder>
 			</CppCompile>

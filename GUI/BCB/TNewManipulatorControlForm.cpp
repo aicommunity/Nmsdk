@@ -1011,3 +1011,5 @@ void __fastcall TNewManipulatorControlForm::CheckListBox1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+
+
