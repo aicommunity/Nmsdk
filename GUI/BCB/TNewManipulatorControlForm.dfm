@@ -31,7 +31,7 @@
     Top = 0
     Width = 693
     Height = 473
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -534,7 +534,7 @@
         object CheckListBox1: TCheckListBox
           Left = 12
           Top = 126
-          Width = 121
+          Width = 183
           Height = 97
           ItemHeight = 13
           TabOrder = 8
