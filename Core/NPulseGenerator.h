@@ -42,7 +42,7 @@ RDK::ULProperty<double,NPulseGenerator> AvgInterval;
 
 public: // Переменные состояния
 // Счетчик импульса
-RDK::ULProperty<RDK::UTime,NPulseGenerator,ptPubState> PulseCounter;
+RDK::ULProperty<int,NPulseGenerator,ptPubState> PulseCounter;
 
 // Случайное значение текущей частоты
 RDK::ULProperty<double,NPulseGenerator,ptPubState> RandomFrequency;

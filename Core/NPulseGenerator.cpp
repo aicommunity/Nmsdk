@@ -149,8 +149,8 @@ bool NPulseGenerator::AReset(void)
  srand(static_cast<unsigned>(tm));
 
 // PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
- if(Frequency.v > 0 && PulseCounter.v<-TimeStep/Frequency.v)
-  PulseCounter.v=-TimeStep/Frequency.v;
+ if(Frequency.v > 0 && PulseCounter.v<-int(TimeStep/Frequency.v))
+  PulseCounter.v=-int(TimeStep/Frequency.v);
  else
   PulseCounter.v=0;
  RandomFrequency=Frequency;
@@ -175,7 +175,7 @@ bool NPulseGenerator::ACalculate(void)
    --PulseCounter.v;
    if(PulseCounter <= 0) // Выключаем импульс и включаем ожидание
    {
-	PulseCounter=static_cast<RDK::UTime>(-TimeStep/Frequency.v);
+	PulseCounter=static_cast<int>(-int(TimeStep/Frequency.v));
 	FillOutputData(0);
 	FillOutputData(1);
    }
@@ -203,7 +203,7 @@ bool NPulseGenerator::ACalculate(void)
 	RandomFrequency=double(rand()*FrequencyDeviation*2.0)/double(RAND_MAX)+
 							Frequency.v-FrequencyDeviation.v;
 	if(RandomFrequency.v>0)
-	 PulseCounter=static_cast<RDK::UTime>(-TimeStep/RandomFrequency.v);
+	 PulseCounter=static_cast<int>(-int(TimeStep/RandomFrequency.v));
 	else
 	 PulseCounter=0;
 	FillOutputData(0);
