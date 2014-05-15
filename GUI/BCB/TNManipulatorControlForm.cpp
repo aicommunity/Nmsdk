@@ -675,6 +675,8 @@ void __fastcall TNManipulatorControlForm::IINumAfferentTrackBarChange(TObject *S
  if(!ControlSystem)
   return;
 
+ try
+ {
  for(int i=0;i<IINumAfferentTrackBar->Position;i++)
  {
   // Вариант для отдельного участка мембраны для внешнего управления
@@ -693,6 +695,11 @@ void __fastcall TNManipulatorControlForm::IINumAfferentTrackBarChange(TObject *S
   res&=ControlSystem->BreakLink("IINegAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent24.PNeuronMembrane.PosChannel",0);
  }
 
+ }
+ catch(RDK::UContainer::EComponentNameNotExist &exception)
+ {
+
+ }
  IINumAfferentEdit->Text=IntToStr(IINumAfferentTrackBar->Position);
  if(!res)
   return;

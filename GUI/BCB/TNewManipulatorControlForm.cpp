@@ -609,7 +609,7 @@ void __fastcall TNewManipulatorControlForm::IINumAfferentTrackBarChange(TObject 
 
  if(!ControlSystem)
   return;
-
+/*
  for(int i=0;i<IINumAfferentTrackBar->Position;i++)
  {
   // Вариант для отдельного участка мембраны для внешнего управления
@@ -627,7 +627,7 @@ void __fastcall TNewManipulatorControlForm::IINumAfferentTrackBarChange(TObject 
   res&=ControlSystem->BreakLink("IINegAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent14.PNeuronMembrane.NegChannel",0);
   res&=ControlSystem->BreakLink("IINegAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent24.PNeuronMembrane.PosChannel",0);
  }
-
+  */
  IINumAfferentEdit->Text=IntToStr(IINumAfferentTrackBar->Position);
  if(!res)
   return;
