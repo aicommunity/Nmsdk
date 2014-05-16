@@ -187,10 +187,7 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
 	 for (int i=0; i < num_controls; i++)
 	 {
 	   CheckListBox1->Items->Add("Afferent"+IntToStr(i+1));
-	   if (ControlSystem->GetIsAfferentLinked(i))
-	   {
-		  CheckListBox1->Checked[i]=true;
-	   }
+	   CheckListBox1->Checked[i]=(*ControlSystem->ActiveContours)[i];
 	 }    
  }
 
@@ -953,12 +950,12 @@ void __fastcall TNewManipulatorControlForm::CheckListBox1Click(TObject *Sender)
 {
  if(UpdateInterfaceFlag)
 	return;
-
  bool res=true;
 
  if(!ControlSystem)
   return;
 
+/*
  int num_motions=ControlSystem->NumMotionElements;
  int num_controls=ControlSystem->GetNumControlLoops();
 
@@ -1006,7 +1003,14 @@ void __fastcall TNewManipulatorControlForm::CheckListBox1Click(TObject *Sender)
  if(!res)
   return;
 
-	
+ */
+ std::vector<bool> act_cont;
+ act_cont.resize(CheckListBox1->Count);
+ for(int i=0;i<CheckListBox1->Count;i++)
+  act_cont[i]=CheckListBox1->Checked[i];
+
+ ControlSystem->ActiveContours=act_cont;
+
 }
 //---------------------------------------------------------------------------
 
