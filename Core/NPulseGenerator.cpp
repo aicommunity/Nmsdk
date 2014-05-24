@@ -56,7 +56,13 @@ bool NPulseGenerator::SetFrequency(const double &value)
 {
  if(value <0)
   return false;
-
+/*
+ if(PulseCounter.v<=0 && value>Frequency.v)
+ {
+  Frequency.v=value;
+  return Reset();
+ }
+  */
 // return Reset();
  return true;
 }
@@ -149,23 +155,35 @@ bool NPulseGenerator::AReset(void)
  srand(static_cast<unsigned>(tm));
 
 // PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
- if(Frequency.v > 0 && PulseCounter.v<-int(TimeStep/Frequency.v))
-  PulseCounter.v=-int(TimeStep/Frequency.v);
- else
+// if(Frequency.v > 0 && PulseCounter.v<-int(TimeStep/Frequency.v))
+//  PulseCounter.v=-int(TimeStep/Frequency.v);
+// else
   PulseCounter.v=0;
  RandomFrequency=Frequency;
- //AvgFrequencyCounter->clear();
+ AvgFrequencyCounter->clear();
+
+ OldFrequency=Frequency;
  return NSource::AReset();
 }
 
 // Выполняет расчет этого объекта
 bool NPulseGenerator::ACalculate(void)
 {
- if(!Frequency)
+ if(Frequency.v<1e-8 || TimeStep/Frequency.v<1)
  {
   FillOutputData();
   AvgFrequencyCounter->clear();
-  return NSource::ACalculate();
+  OldFrequency=Frequency.v;
+  PulseCounter.v = 0;
+  return true;
+ }
+
+ if(OldFrequency != Frequency.v)
+ {
+  if(PulseCounter.v < 0 && PulseCounter.v < static_cast<int>(-int(TimeStep/Frequency.v)))
+   PulseCounter.v = static_cast<int>(-int(TimeStep/Frequency.v));
+
+  OldFrequency=Frequency.v;
  }
 
  if(FrequencyDeviation.v == 0)
@@ -232,7 +250,8 @@ bool NPulseGenerator::ACalculate(void)
  {
   while(I != J)
   {
-   if(Environment->GetTime().GetDoubleTime()-*I>AvgInterval)// && AvgFrequencyCounter->size()>3)
+   double diff=Environment->GetTime().GetDoubleTime()-*I;
+   if(diff>AvgInterval)// && AvgFrequencyCounter->size()>3)
    {
 	K=I;
 	++I;

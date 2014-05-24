@@ -50,6 +50,10 @@ RDK::ULProperty<double,NPulseGenerator,ptPubState> RandomFrequency;
 // Средняя частота за заданный интервал времени
 RDK::UCLProperty<list<double>,NPulseGenerator,ptPubState> AvgFrequencyCounter;
 
+protected:
+
+double OldFrequency;
+
 public: // Методы
 // --------------------------
 // Конструкторы и деструкторы
