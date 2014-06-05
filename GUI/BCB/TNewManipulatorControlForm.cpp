@@ -823,6 +823,7 @@ void __fastcall TNewManipulatorControlForm::MomentTrackBarChange(TObject *Sender
   return;
 
  RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
+ RDK::UEPtr<NMSDK::NControlObjectSource> source1=RDK::dynamic_pointer_cast<NMSDK::NControlObjectSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
  RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
  RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
  double amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
@@ -830,8 +831,12 @@ void __fastcall TNewManipulatorControlForm::MomentTrackBarChange(TObject *Sender
  if(engine && source)
  {
   source->Angle=amplitude;
-//  engine->OutMoment=amplitude;
  }
+ if(engine && source1)
+ {
+  (*source1->DataShift)[0]=amplitude;
+ }
+
  if(engine2)
  {
   engine2->OutXMovement=amplitude;
@@ -856,7 +861,8 @@ void __fastcall TNewManipulatorControlForm::MovementControlTrackBarChange(TObjec
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
+// RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
+// RDK::UEPtr<NMSDK::NControlObjectSource> source1=RDK::dynamic_pointer_cast<NMSDK::NControlObject>(ControlSystem->GetComponentL("NManipulatorSource1"));
  double amplitude=double(MovementControlTrackBar->Position)/double(MovementControlTrackBar->Max/2.0);
  MovementControlEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
 
@@ -864,21 +870,15 @@ void __fastcall TNewManipulatorControlForm::MovementControlTrackBarChange(TObjec
  RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
  RDK::UEPtr<NMSDK::NWPhysicalManipulator> man=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(UniversalManipulator);
 
- if(source)
- {
   if(engine)
   {
    engine->OutMoment=amplitude;
- //  source->Angle=amplitude;
   }
 
   if(engine2)
   {
    engine2->ExtrenalMoment=amplitude;
-//   source->Movement=amplitude;
   }
-
- }
 
  if(MovementControlTrackBar->Position>0)
   MovementControlProgressBar->Position=MovementControlTrackBar->Position;

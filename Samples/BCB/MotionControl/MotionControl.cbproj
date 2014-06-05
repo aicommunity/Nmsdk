@@ -137,6 +137,11 @@
 				<DependentOn>..\..\..\GUI\BCB\TNManipulatorControlForm.h</DependentOn>
 				<BuildOrder>28</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.cpp">
+				<Form>NNewPositionControlElementForm</Form>
+				<DependentOn>..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.h</DependentOn>
+				<BuildOrder>55</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\Libraries\MotionControlLib\NPositionControlElement.cpp">
 				<BuildOrder>53</BuildOrder>
 			</CppCompile>
@@ -430,6 +435,7 @@
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUHttpServerUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
