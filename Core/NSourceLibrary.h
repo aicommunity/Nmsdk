@@ -21,7 +21,8 @@ See file license.txt for more information
 #include "NSinusGenerator.h"
 #include "NFileGenerator.h"
 #include "NManipulatorSourceEmulator.h"
-#include "NManipulatorSource.h"
+#include "NManipulatorSource.h" 
+#include "NControlObjectSource.h"
 
 namespace NMSDK {
 

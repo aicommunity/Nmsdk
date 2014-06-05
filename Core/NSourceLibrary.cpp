@@ -20,6 +20,7 @@ See file license.txt for more information
 #include "NSinusGenerator.cpp"
 #include "NManipulatorSourceEmulator.cpp"
 #include "NManipulatorSource.cpp"
+#include "NControlObjectSource.cpp"
 
 namespace NMSDK {
 
@@ -71,7 +72,14 @@ void NSourceLibrary::CreateClassSamples(UStorage *storage)
  cont=new NManipulatorSource;
  cont->SetName("ManipulatorSource");
  cont->Default();
- UploadClass("NManipulatorSource",cont);
+ UploadClass("NManipulatorSource",cont);  
+ 
+ cont=new NControlObjectSource;
+ cont->SetName("ManipulatorSource");
+ cont->Default();
+ UploadClass("NControlObjectSource",cont);  
+ 
+ 
 }
 // --------------------------
 

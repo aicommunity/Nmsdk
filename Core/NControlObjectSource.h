@@ -13,25 +13,26 @@ Project License:     BSD License
 See file license.txt for more information
 *********************************************************** */
 
-#ifndef NMANIPULATOR_SOURCE_H
-#define NMANIPULATOR_SOURCE_H
+#ifndef NCONTROL_OBJECT_SOURCE_H
+#define NCONTROL_OBJECT_SOURCE_H
 
 #include "../BCL/NSource.h"
 
 
 namespace NMSDK {
 
-class NManipulatorSource: public NSource
+class NControlObjectSource: public NSource
 {
 public: // Общедоступные свойства
-// угол разворота ротора
-RDK::ULProperty<double,NManipulatorSource> Angle;
-// угловая скорость
-RDK::ULProperty<double,NManipulatorSource> Speed;
-// момент двигателя
-RDK::ULProperty<double,NManipulatorSource> Force;
+// Замена индексов выходов ОУ
+// индекс массива - индеск выхода ОУ, значение ячейки массива - индекс выхода
+// этого источника
+RDK::ULProperty<std::vector<int>,NControlObjectSource> DataIndexes;
 
-RDK::ULProperty<double,NManipulatorSource> Movement;
+// смещение данных с датчиков ОУ
+// в соответствии с индексами выхода этого источника
+RDK::ULProperty<std::vector<double>,NControlObjectSource> DataShift;
+
 
 protected: // Основные свойства
 
@@ -41,8 +42,8 @@ bool UpdateOutputFlag;
 // --------------------------
 // Конструкторы и деструкторы
 // --------------------------
-NManipulatorSource(void);
-virtual ~NManipulatorSource(void);
+NControlObjectSource(void);
+virtual ~NControlObjectSource(void);
 // --------------------------
 
 protected:
@@ -50,11 +51,7 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает угол
-bool SetAngle(const double &value);
-// Устанавливает скорость
-bool SetSpeed(const double &value);
-// Устанавливает момент
-bool SetForce(const double &value);
+bool SetDataShift(const std::vector<double> &value);
 // --------------------------
 
 public:
@@ -62,7 +59,7 @@ public:
 // Системные методы управления объектом
 // --------------------------
 // Выделяет память для новой чистой копии объекта этого класса
-virtual NManipulatorSource* New(void);
+virtual NControlObjectSource* New(void);
 // --------------------------
 
 // --------------------------
