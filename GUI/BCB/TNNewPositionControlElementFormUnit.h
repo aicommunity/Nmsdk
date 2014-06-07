@@ -21,9 +21,11 @@ __published:	// IDE-managed Components
 	TStringGrid *TrainedStateStringGrid;
 	TStringGrid *SelectedStateStringGrid;
 	TSplitter *Splitter1;
+	TButton *TrainPositionButton;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall SelectedStateStringGridSetEditText(TObject *Sender, int ACol, int ARow,
           const UnicodeString Value);
+	void __fastcall TrainPositionButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNNewPositionControlElementForm(TComponent* Owner);

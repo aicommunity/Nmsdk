@@ -72,4 +72,13 @@ object NNewPositionControlElementForm: TNNewPositionControlElementForm
       ExplicitHeight = 120
     end
   end
+  object TrainPositionButton: TButton
+    Left = 8
+    Top = 231
+    Width = 75
+    Height = 25
+    Caption = 'Train Position'
+    TabOrder = 2
+    OnClick = TrainPositionButtonClick
+  end
 end
