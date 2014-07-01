@@ -208,7 +208,7 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
 // Создание копии этого компонента
 TUVisualControllerForm* TNewManipulatorControlForm::New(TComponent *owner)
 {
- return 0;
+ return new TNewManipulatorControlForm(owner);
 }
 
 

@@ -234,8 +234,6 @@ void ReadComponentData(void);
 void ReconnectManipulator(void);
 void ReconnectCurrentManipulator(void);
 
-
-
 // Создание копии этого компонента
 virtual TUVisualControllerForm* New(TComponent *owner=0);
 
