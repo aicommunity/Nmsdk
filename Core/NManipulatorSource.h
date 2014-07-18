@@ -21,7 +21,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NManipulatorSource: public NSource
+class RDK_LIB_TYPE NManipulatorSource: public NSource
 {
 public: // ќбщедоступные свойства
 // угол разворота ротора

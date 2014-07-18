@@ -21,7 +21,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NPulseGenerator: public NSource
+class RDK_LIB_TYPE NPulseGenerator: public NSource
 {
 public: // Параметры
 // Частота генерации (Гц) (Математическое ожидание)

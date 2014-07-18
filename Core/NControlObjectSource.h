@@ -21,7 +21,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NControlObjectSource: public NSource
+class RDK_LIB_TYPE NControlObjectSource: public NSource
 {
 public: // Общедоступные свойства
 // Замена индексов выходов ОУ
