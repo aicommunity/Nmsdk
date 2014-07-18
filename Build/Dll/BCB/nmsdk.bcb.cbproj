@@ -65,7 +65,7 @@
 			<OutputExt>dll</OutputExt>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<Defines>NO_STRICT;$(Defines)</Defines>
+			<Defines>NO_STRICT;LIBRDK_LIBRARY;$(Defines)</Defines>
 			<UsePackages>true</UsePackages>
 			<IncludePath>..\..\..\RDK\Deploy\PtzLib\;..\..\..\RDK\Core\Graphics\Libraries\Hardware\;..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\RDK\ThirdParty\curl\lib\;..\..\..\RDK\ThirdParty\curl\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;..\..\..\RDK\ThirdParty\curl\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\..\RDK\Deploy\PtzLib\;..\..\..\RDK\Core\Graphics\Libraries\Hardware\;..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;..\..\..\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
