@@ -3,57 +3,8 @@
 #include <vcl.h>
 #pragma hdrstop
 #include <tchar.h>
+#include "rdk_cpp_initdll.h"
 //---------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.cpp", UCRTeacherPerseptronBPForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.cpp", UCRTeacherCVNetworkBPForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.cpp", UCRSampleForm);
@@ -144,11 +95,20 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
    		Application->Run();
 		CloseHandle(RdkLockStartapMutex);
 	}
-	catch (Exception &exception)
-	{
-		CloseHandle(RdkLockStartapMutex);
-		Application->ShowException(&exception);
-	}
+    catch (std::exception &exception)
+    {
+     Engine_LogMessage(RDK_EX_INFO, (std::string("Global Exception Catcher: ")+exception.what()).c_str());
+    }
+    catch (RDK::UException &exception)
+    {
+     Engine_LogMessage(exception.GetType(), (std::string("Global Exception Catcher: ")+exception.CreateLogMessage()).c_str());
+    }
+    catch (Exception &exception)
+    {
+//        CloseHandle(RdkLockStartapMutex);
+//        Application->ShowException(&exception);
+          Engine_LogMessage(RDK_EX_ERROR, (std::string("Global Exception Catcher: ")+AnsiString(exception.Message).c_str()).c_str());
+    }
 	catch (...)
 	{
 		CloseHandle(RdkLockStartapMutex);

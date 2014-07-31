@@ -40,8 +40,9 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<FinalOutputDir>..\..\..\Bin\Platform\Win</FinalOutputDir>
 			<UsingDelphiRTL>true</UsingDelphiRTL>
+			<DynamicRTL>true</DynamicRTL>
+			<FinalOutputDir>..\..\..\Bin\Platform\Win</FinalOutputDir>
 			<Manifest_File>None</Manifest_File>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.0.19;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<VerInfo_DLL>true</VerInfo_DLL>
@@ -65,7 +66,7 @@
 			<OutputExt>dll</OutputExt>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<Defines>NO_STRICT;LIBRDK_LIBRARY;$(Defines)</Defines>
+			<Defines>NO_STRICT;LIBRDK_LIBRARY_EXPORT;$(Defines)</Defines>
 			<UsePackages>true</UsePackages>
 			<IncludePath>..\..\..\RDK\Deploy\PtzLib\;..\..\..\RDK\Core\Graphics\Libraries\Hardware\;..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\RDK\ThirdParty\curl\lib\;..\..\..\RDK\ThirdParty\curl\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\RDK\Deploy\Include;..\..\..\RDK\ThirdParty\curl\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\..\RDK\Deploy\PtzLib\;..\..\..\RDK\Core\Graphics\Libraries\Hardware\;..\..\..\RDK\Core\Graphics\Libraries\SpatialGeometry\;..\..\..\RDK\Core\Graphics\Libraries\Detection\;..\..\..\..\;..\..\..\RDK\Core\Graphics\Libraries\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\RDK\Deploy\Include\;..\..\..\Deploy\Include\;..\..\..\Deploy\Include;..\..\Dll;..\..\..\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
