@@ -290,11 +290,6 @@
 				<DependentOn>..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.h</DependentOn>
 				<BuildOrder>40</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.cpp">
-				<Form>UDrawEngineForm</Form>
-				<DependentOn>..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.h</DependentOn>
-				<BuildOrder>32</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.cpp">
 				<Form>UDrawEngineFrame</Form>
 				<DesignClass>TFrame</DesignClass>
@@ -376,7 +371,6 @@
 			<ResFiles Include="MotionControl.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>

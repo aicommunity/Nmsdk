@@ -34,6 +34,10 @@ virtual void ALoadParameters(RDK::USerStorageXML &xml);
 void AUpdateInterface(void);
 
 
+// Возврат интерфейса в исходное состояние
+void AClearInterface(void);
+
+
 // Создание копии этого компонента
 virtual TUVisualControllerForm* New(TComponent *owner=0);
 };

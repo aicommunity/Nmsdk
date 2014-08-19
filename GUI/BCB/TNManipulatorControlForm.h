@@ -228,6 +228,9 @@ virtual void ALoadParameters(RDK::USerStorageXML &xml);
 
 void AUpdateInterface(void);
 
+// Возврат интерфейса в исходное состояние
+void AClearInterface(void);
+
 // Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
 void LoadInterfaceInfoFromNet(void);
 
