@@ -122,6 +122,11 @@ void TNNewPositionControlElementForm::AUpdateInterface(void)
  }
 }
 
+// Возврат интерфейса в исходное состояние
+void TNNewPositionControlElementForm::AClearInterface(void)
+{
+
+}
 
 // Создание копии этого компонента
 TUVisualControllerForm* TNNewPositionControlElementForm::New(TComponent *owner)

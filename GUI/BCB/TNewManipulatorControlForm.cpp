@@ -6,7 +6,7 @@
 #include "TNewManipulatorControlForm.h"
 #include "UComponentsListFormUnit.h"
 #include "TUBitmap.h"
-#include "UDrawEngineFormUnit.h"
+//#include "UDrawEngineFormUnit.h"
 
 
 //---------------------------------------------------------------------------
@@ -203,6 +203,43 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
   }
  }
 
+}
+
+// Возврат интерфейса в исходное состояние
+void TNewManipulatorControlForm::AClearInterface(void)
+{
+ ManipulatorName.clear();
+
+ ControlSystemName.clear();
+
+ Manipulator=0;
+ UniversalManipulator=0;
+
+ Engine=0;
+ Source=0;
+ ControlSystem=0;
+
+ IIPosAfferent=0; IINegAfferent=0;
+ MN1PosControl=0; MN1NegControl=0;
+
+ BmpCanvas.SetRes(0,0,BmpCanvas.GetColorModel());
+
+ CanvasWidth=0;
+ CanvasHeight=0;
+
+ X=0; Y=0;
+
+ Angle=0;
+
+ Movement=0;
+
+ Length=0;
+
+ ZeroAngle=0;
+
+ ZeroMovement=0;
+
+ ReadComponentName.clear();
 }
 
 // Создание копии этого компонента
@@ -492,7 +529,7 @@ void __fastcall TNewManipulatorControlForm::FormShow(TObject *Sender)
 void __fastcall TNewManipulatorControlForm::ComponentSelectionPanelDblClick(TObject *Sender)
 {
  SelectManipulator1Click(Sender);
- UDrawEngineForm->ReloadNet();
+// UDrawEngineForm->ReloadNet();
 }
 //---------------------------------------------------------------------------
 
@@ -640,7 +677,7 @@ void __fastcall TNewManipulatorControlForm::IINumAfferentTrackBarChange(TObject 
  IINumAfferentEdit->Text=IntToStr(IINumAfferentTrackBar->Position);
  if(!res)
   return;
- UDrawEngineForm->ReloadNet();
+// UDrawEngineForm->ReloadNet();
 }
 //---------------------------------------------------------------------------
 
@@ -696,7 +733,7 @@ void __fastcall TNewManipulatorControlForm::ControlSystemSelectionPanelDblClick(
 {
  SelectControlSystem1Click(Sender);
  ReconnectCurrentManipulator();
- UDrawEngineForm->UpdateInterface();
+// UDrawEngineForm->UpdateInterface();
 }
 //---------------------------------------------------------------------------
 

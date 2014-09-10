@@ -42,6 +42,11 @@ void TNAstaticGyro::AUpdateInterface(void)
  Image1->Repaint();
 }
 
+// Возврат интерфейса в исходное состояние
+void TNAstaticGyro::AClearInterface(void)
+{
+ Gyro=0;
+}
 
 // Создание копии этого компонента
 TUVisualControllerForm* TNAstaticGyro::New(TComponent *owner)
