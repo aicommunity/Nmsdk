@@ -21,7 +21,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NConstGenerator: public NSource
+class RDK_LIB_TYPE NConstGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Амплитуда импульса
