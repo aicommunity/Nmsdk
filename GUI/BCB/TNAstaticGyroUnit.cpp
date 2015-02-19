@@ -28,7 +28,7 @@ void TNAstaticGyro::ALoadParameters(RDK::USerStorageXML &xml)
 
 void TNAstaticGyro::AUpdateInterface(void)
 {
- Gyro=static_pointer_cast<NMSDK::NAstaticGyro>(GetModel()->GetComponentL(ComponentControlName.c_str()));
+ Gyro=RDK::static_pointer_cast<NMSDK::NAstaticGyro>(GetModel()->GetComponentL(ComponentControlName.c_str()));
  Image1->Canvas->TextOutA(5,0,"radians:");
  Image1->Canvas->TextOutA(5,20,"alpha = "+FloatToStr(Gyro->alpha));
  Image1->Canvas->TextOutA(5,40,"betta = "+FloatToStr(Gyro->betta));

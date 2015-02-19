@@ -365,7 +365,7 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
   return true;
 
  bool res=true;
- string source_name=cs_name+".NManipulatorSource1";
+ std::string source_name=cs_name+".NManipulatorSource1";
  net->BreakConnectorLink(source_name,0);
  net->BreakConnectorLink(source_name,1);
  net->BreakConnectorLink(source_name,2);
