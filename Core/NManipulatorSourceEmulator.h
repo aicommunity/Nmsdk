@@ -21,7 +21,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NManipulatorSourceEmulator: public NManipulatorSource
+class RDK_LIB_TYPE NManipulatorSourceEmulator: public NManipulatorSource
 {
 public: // Общедоступные свойства
 

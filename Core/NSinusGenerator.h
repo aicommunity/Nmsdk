@@ -21,7 +21,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NSinusGenerator: public NSource
+class RDK_LIB_TYPE NSinusGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Амплитуда синуса

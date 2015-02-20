@@ -21,7 +21,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NFileGenerator: public NSource
+class RDK_LIB_TYPE NFileGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Имя файла с данными

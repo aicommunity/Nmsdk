@@ -26,7 +26,7 @@ See file license.txt for more information
 
 namespace NMSDK {
 
-class NSourceLibrary: public ULibrary
+class RDK_LIB_TYPE NSourceLibrary: public ULibrary
 {
 public: // Ìועמהû
 // --------------------------
@@ -44,7 +44,7 @@ virtual void CreateClassSamples(UStorage *storage);
 // --------------------------
 };    
 
-extern NSourceLibrary SourceLibrary;
+extern RDK_LIB_TYPE NSourceLibrary SourceLibrary;
 
 }
 
