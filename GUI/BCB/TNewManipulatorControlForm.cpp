@@ -1066,3 +1066,11 @@ void __fastcall TNewManipulatorControlForm::CheckListBox1Click(TObject *Sender)
 
 
 
+
+void __fastcall TNewManipulatorControlForm::ManipDrawButtonClick(TObject *Sender)
+
+{
+ NDrawManipulatorForm->Show();
+}
+//---------------------------------------------------------------------------
+

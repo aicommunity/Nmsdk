@@ -36,10 +36,6 @@
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Communication'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 0
         Top = 98
@@ -254,10 +250,6 @@
     object TabSheet2: TTabSheet
       Caption = 'Manual Control'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
@@ -797,6 +789,15 @@
             Height = 17
             Caption = #1087#1086' N'
             TabOrder = 7
+          end
+          object ManipDrawButton: TButton
+            Left = 18
+            Top = 145
+            Width = 113
+            Height = 25
+            Caption = 'ManipDrawButton'
+            TabOrder = 8
+            OnClick = ManipDrawButtonClick
           end
         end
       end
