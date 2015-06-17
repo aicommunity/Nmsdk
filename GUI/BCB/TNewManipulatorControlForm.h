@@ -26,6 +26,7 @@
 
 #include "nmsdk_cpp_initdll.h"
 #include "nmsdk.bcb.h"
+#include "NDrawManipulatorFormUnit.h"
 
 //---------------------------------------------------------------------------
 class TNewManipulatorControlForm : public TUVisualControllerForm
@@ -126,6 +127,7 @@ __published:	// IDE-managed Components
 	TButton *ResetToZeroButton1;
 	TButton *ResetToZeroButton2;
 	TCheckListBox *CheckListBox1;
+	TButton *ManipDrawButton;
 	void __fastcall Disconnect1Click(TObject *Sender);
 	void __fastcall MoveLeft1Click(TObject *Sender);
 	void __fastcall MoveRight1Click(TObject *Sender);
@@ -166,6 +168,7 @@ __published:	// IDE-managed Components
 	void __fastcall ResetToZeroButton1Click(TObject *Sender);
 	void __fastcall ResetToZeroButton2Click(TObject *Sender);
 	void __fastcall CheckListBox1Click(TObject *Sender);
+	void __fastcall ManipDrawButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNewManipulatorControlForm(TComponent* Owner);

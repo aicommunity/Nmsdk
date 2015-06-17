@@ -1116,6 +1116,15 @@
             Caption = #1087#1086' N'
             TabOrder = 7
           end
+          object ManipDrawButton: TButton
+            Left = 18
+            Top = 145
+            Width = 113
+            Height = 25
+            Caption = 'ManipDrawButton'
+            TabOrder = 8
+            OnClick = ManipDrawButtonClick
+          end
         end
       end
     end

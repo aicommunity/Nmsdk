@@ -1,7 +1,7 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{EA2A2E14-8613-421D-960A-955A2EA60655}</ProjectGuid>
-			<ProjectVersion>15.3</ProjectVersion>
+			<ProjectVersion>13.4</ProjectVersion>
 			<MainSource>MotionControl.cpp</MainSource>
 			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Base>True</Base>
@@ -13,11 +13,6 @@
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
 			<Base>true</Base>
 		</PropertyGroup>
-		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
-			<Base_Win64>true</Base_Win64>
-			<CfgParent>Base</CfgParent>
-			<Base>true</Base>
-		</PropertyGroup>
 		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
 			<Base_Win32>true</Base_Win32>
 			<CfgParent>Base</CfgParent>
@@ -26,12 +21,6 @@
 		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
 			<Cfg_1>true</Cfg_1>
 			<CfgParent>Base</CfgParent>
-			<Base>true</Base>
-		</PropertyGroup>
-		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
-			<Cfg_1_Win64>true</Cfg_1_Win64>
-			<CfgParent>Cfg_1</CfgParent>
-			<Cfg_1>true</Cfg_1>
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
@@ -45,12 +34,6 @@
 			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
-		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-			<Cfg_2_Win64>true</Cfg_2_Win64>
-			<CfgParent>Cfg_2</CfgParent>
-			<Cfg_2>true</Cfg_2>
-			<Base>true</Base>
-		</PropertyGroup>
 		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
 			<Cfg_2_Win32>true</Cfg_2_Win32>
 			<CfgParent>Cfg_2</CfgParent>
@@ -58,7 +41,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<UsePackages>true</UsePackages>
+			<Defines>LIBRDK_LIBRARY_IMPORT;$(Defines)</Defines>
 			<DynamicRTL>true</DynamicRTL>
 			<UsingDelphiRTL>true</UsingDelphiRTL>
 			<Manifest_File>None</Manifest_File>
@@ -77,20 +60,16 @@
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
 			<PackageImports>vclx.bpi;vcl.bpi;vclimg.bpi;dbrtl.bpi;Rave77VCL.bpi;bdertl.bpi;rtl.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;vcldb.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;intrawebdb_100_140.bpi;Intraweb_100_140.bpi;VclSmp.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inetdb.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;vclribbon.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DbxClientDriver.bpi;DataSnapServer.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;TVidGrab.bpi;$(PackageImports)</PackageImports>
 			<Multithreaded>true</Multithreaded>
-			<AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib;inet.lib;Tee.lib</AllPackageLibs>
+			<AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib;inet.lib;Tee.lib;Tee916.lib</AllPackageLibs>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-			<IncludePath>..\..\..\Libraries\MotionControlLib\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\..\Libraries\MotionControlLib\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\include;$(BDS)\include\dinkumware;..\..\..\Deploy\Include\;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\..\Libraries\MotionControlLib\;..\..\..\RDK\Core\Engine\Libraries\;..\..\..\RDK\Core\Engine\;..\..\..\GUI\BCB\;..\..\..\RDK\GUI\BCB\;..\..\..\RDK\Deploy\Include\;$(BDS)\lib;..\..\..\Deploy\Include\;..\..\..\Deploy\Dll\;..\..\..\RDK\Bin\Platform\Win\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Base_Win64)'!=''">
-			<Defines>LIBRDK_LIBRARY_IMPORT;$(Defines)</Defines>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base_Win32)'!=''">
-			<Defines>LIBRDK_LIBRARY_IMPORT;$(Defines)</Defines>
 			<ILINK_LibraryPath>E:\Science\AI\AISD\NMSDK\Bin\Platform\Win\;E:\Science\AI\AISD\Nmsdk\Bin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
 			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
@@ -103,6 +82,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+			<Defines>_DEBUG;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<IntermediateOutputDir>Debug</IntermediateOutputDir>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
@@ -115,31 +95,23 @@
 			<TASM_Debugging>Full</TASM_Debugging>
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-			<Defines>_DEBUG;$(Defines)</Defines>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-			<LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;TVidGrab.bpi;vclx.bpi;VclSmp.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;Tee.bpi</LinkPackageImports>
-			<Defines>_DEBUG;$(Defines)</Defines>
 			<VerInfo_Debug>true</VerInfo_Debug>
 			<VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
 			<BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
 			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<LinkPackageStatics>rtl.lib;vcl.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib;inet.lib;Tee.lib;Tee916.lib</LinkPackageStatics>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<VerInfo_Locale>1033</VerInfo_Locale>
 			<Debugger_DebugSourcePath>E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Sources\ThirdParty\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\Sources\Libraries\NeuronLifeLib\;E:\Science\AI\AISD\Nmsdk\Sources\Kernel\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Engine\;E:\Science\AI\AISD\Nmsdk\RDK\Deploy\Include\;E:\Science\AI\AISD\Nmsdk\Kernel\;E:\Science\AI\AISD\Nmsdk\Libraries\PulseLib\;E:\Science\AI\AISD\Nmsdk\RDK\Core\System\Builder\;E:\Science\AI\AISD\Nmsdk\RDK\Core\Utilities\;E:\Science\AI\AISD\Nmsdk\Libraries\MotionControlLib\;E:\Science\AI\AISD\Nmsdk\Libraries\SourceLib\;E:\Science\AI\AISD\Nmsdk\Libraries\PhysLib\WinAPI\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<Defines>NDEBUG;$(Defines)</Defines>
 			<IntermediateOutputDir>Release</IntermediateOutputDir>
 			<ILINK_LibraryPath>$(BDS)\lib\release;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-			<Defines>NDEBUG;$(Defines)</Defines>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-			<LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;TVidGrab.bpi;vclx.bpi;VclSmp.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;Tee.bpi</LinkPackageImports>
-			<Defines>NDEBUG;$(Defines)</Defines>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
 			<VerInfo_Locale>1033</VerInfo_Locale>
@@ -149,6 +121,19 @@
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\..\Bin\Platform\Win\nmsdk.bcb.lib">
 				<BuildOrder>48</BuildOrder>
 			</LibFiles>
+			<CppCompile Include="..\..\..\GUI\BCB\NDrawManipulatorFormUnit.cpp">
+				<Form>NDrawManipulatorForm</Form>
+				<FormType>dfm</FormType>
+				<DependentOn>..\..\..\GUI\BCB\NDrawManipulatorFormUnit.h</DependentOn>
+				<BuildOrder>49</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.cpp">
+				<Form>NDrawManipulatorFrame</Form>
+				<FormType>dfm</FormType>
+				<DesignClass>TFrame</DesignClass>
+				<DependentOn>..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.h</DependentOn>
+				<BuildOrder>50</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\GUI\BCB\TNAstaticGyroUnit.cpp">
 				<Form>NAstaticGyro</Form>
 				<DependentOn>..\..\..\GUI\BCB\TNAstaticGyroUnit.h</DependentOn>
@@ -159,23 +144,15 @@
 				<DependentOn>..\..\..\GUI\BCB\TNewManipulatorControlForm.h</DependentOn>
 				<BuildOrder>52</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\GUI\BCB\TNManipulatorControlForm.cpp">
+				<Form>NManipulatorControlForm</Form>
+				<DependentOn>..\..\..\GUI\BCB\TNManipulatorControlForm.h</DependentOn>
+				<BuildOrder>28</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.cpp">
 				<Form>NNewPositionControlElementForm</Form>
 				<DependentOn>..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.h</DependentOn>
 				<BuildOrder>55</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\..\RDK\GUI\BCB\TApplicationOptionsFormUnit.cpp">
-				<Form>ApplicationOptionsForm</Form>
-				<FormType>dfm</FormType>
-				<DependentOn>..\..\..\RDK\GUI\BCB\TApplicationOptionsFormUnit.h</DependentOn>
-				<BuildOrder>51</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\..\RDK\GUI\BCB\TApplicationOptionsFrameUnit.cpp">
-				<Form>ApplicationOptionsFrame</Form>
-				<FormType>dfm</FormType>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\..\RDK\GUI\BCB\TApplicationOptionsFrameUnit.h</DependentOn>
-				<BuildOrder>49</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.cpp">
 				<Form>EnchancedSG</Form>
@@ -209,13 +186,6 @@
 				<DependentOn>..\..\..\RDK\GUI\BCB\TServerBroadcasterCommonUnit.h</DependentOn>
 				<BuildOrder>45</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\RDK\GUI\BCB\TServerOptionsFrameUnit.cpp">
-				<Form>ServerOptionsFrame</Form>
-				<FormType>dfm</FormType>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\..\RDK\GUI\BCB\TServerOptionsFrameUnit.h</DependentOn>
-				<BuildOrder>50</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\TUBitmap.cpp">
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
@@ -240,17 +210,6 @@
 				<DesignClass>TFrame</DesignClass>
 				<DependentOn>..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.h</DependentOn>
 				<BuildOrder>30</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\..\RDK\GUI\BCB\UClassesDescriptionsFormUnit.cpp">
-				<Form>UClassesDescriptionsForm</Form>
-				<DependentOn>..\..\..\RDK\GUI\BCB\UClassesDescriptionsFormUnit.h</DependentOn>
-				<BuildOrder>54</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\..\RDK\GUI\BCB\UClassesDescriptionsFrameUnit.cpp">
-				<Form>UClassesDescriptionsFrame</Form>
-				<DesignClass>TFrame</DesignClass>
-				<DependentOn>..\..\..\RDK\GUI\BCB\UClassesDescriptionsFrameUnit.h</DependentOn>
-				<BuildOrder>53</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.cpp">
 				<Form>UClassesListForm</Form>
@@ -328,6 +287,21 @@
 				<Form>UCRSampleForm</Form>
 				<DependentOn>..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.h</DependentOn>
 				<BuildOrder>39</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.cpp">
+				<Form>UCRTeacherCVNetworkBPForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.h</DependentOn>
+				<BuildOrder>48</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.cpp">
+				<Form>UCRTeacherPerseptronBPForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.h</DependentOn>
+				<BuildOrder>39</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.cpp">
+				<Form>UCRTeacherPerseptronDLForm</Form>
+				<DependentOn>..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.h</DependentOn>
+				<BuildOrder>40</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.cpp">
 				<Form>UDrawEngineFrame</Form>
@@ -410,51 +384,51 @@
 			<ResFiles Include="MotionControl.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<None Include="Profiling\AQtimeModule1.aqt"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronDLFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherPerseptronBPFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsPerformanceFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRTeacherCVNetworkBPFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRSampleFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UCRPerseptronFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UServerControlFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UGEngineControlFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdHttpResultBroadcasterFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TServerOptionsFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.dfm"/>
 			<FormResources Include="..\..\..\GUI\BCB\TNewManipulatorControlForm.dfm"/>
 			<FormResources Include="..\..\..\GUI\BCB\TNAstaticGyroUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TApplicationOptionsFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\TApplicationOptionsFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.dfm"/>
 			<FormResources Include="..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\TNManipulatorControlForm.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentIOFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUHttpServerUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesDescriptionsFrameUnit.dfm"/>
-			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesDescriptionsFormUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
 			<FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\NDrawManipulatorFormUnit.dfm"/>
+			<FormResources Include="..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -517,11 +491,7 @@
 						<Parameters Name="RemoteDebug">False</Parameters>
 					</Parameters>
 					<Excluded_Packages>
-						<Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD16\dclfs16.bpl">File C:\Program Files (x86)\FastReports\LibD16\dclfs16.bpl not found</Excluded_Packages>
-						<Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD16\dclfrx16.bpl">File C:\Program Files (x86)\FastReports\LibD16\dclfrx16.bpl not found</Excluded_Packages>
-						<Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD16\dclfsDB16.bpl">File C:\Program Files (x86)\FastReports\LibD16\dclfsDB16.bpl not found</Excluded_Packages>
-						<Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD16\dclfrxDB16.bpl">File C:\Program Files (x86)\FastReports\LibD16\dclfrxDB16.bpl not found</Excluded_Packages>
-						<Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD16\dclfrxe16.bpl">File C:\Program Files (x86)\FastReports\LibD16\dclfrxe16.bpl not found</Excluded_Packages>
+						<Excluded_Packages Name="c:\Program Files (x86)\Embarcadero\RAD Studio\TeeChart 2011 for Delphi 2012\Delphi16.win32\Bin\DclFMXTeePro916.bpl">TeeChart Pro 2011 for FireMonkey Components</Excluded_Packages>
 						<Excluded_Packages Name="$(BDSBIN)\bcboffice2k160.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
 						<Excluded_Packages Name="$(BDSBIN)\bcbofficexp160.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
 						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k160.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
@@ -534,7 +504,6 @@
 					</ProjectProperties>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>
-					<Platform value="Win64">False</Platform>
 					<Platform value="Win32">True</Platform>
 				</Platforms>
 				<ModelSupport>False</ModelSupport>
