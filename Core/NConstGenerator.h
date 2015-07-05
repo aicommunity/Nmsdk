@@ -16,7 +16,7 @@ See file license.txt for more information
 #ifndef NCONST_GENERATOR_H
 #define NCONST_GENERATOR_H
 
-#include "../BCL/NSource.h"
+#include "../../Nmsdk-BasicLib/Core/NSource.h"
 
 
 namespace NMSDK {

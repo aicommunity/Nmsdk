@@ -16,7 +16,7 @@ See file license.txt for more information
 #ifndef NCONTROL_OBJECT_SOURCE_H
 #define NCONTROL_OBJECT_SOURCE_H
 
-#include "../BCL/NSource.h"
+#include "../../Nmsdk-BasicLib/Core/NSource.h"
 
 
 namespace NMSDK {

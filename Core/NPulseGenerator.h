@@ -16,8 +16,7 @@ See file license.txt for more information
 #ifndef NPULSE_GENERATOR_H
 #define NPULSE_GENERATOR_H
 
-#include "../BCL/NSource.h"
-
+#include "../../Nmsdk-BasicLib/Core/NSource.h"
 
 namespace NMSDK {
 

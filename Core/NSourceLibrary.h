@@ -14,7 +14,7 @@ See file license.txt for more information
 #ifndef NSourceLibraryH
 #define NSourceLibraryH
 
-#include "../../Kernel/NSupport.h"
+#include "../../Nmsdk-BasicLib/Core/NSupport.h"
 
 #include "NConstGenerator.h"
 #include "NPulseGenerator.h"
