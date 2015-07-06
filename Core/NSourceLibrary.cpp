@@ -13,7 +13,7 @@ See file license.txt for more information
 
 #include "NSourceLibrary.h"
 
-
+/*
 #include "NConstGenerator.cpp"
 #include "NFileGenerator.cpp"
 #include "NPulseGenerator.cpp"
@@ -21,16 +21,16 @@ See file license.txt for more information
 #include "NManipulatorSourceEmulator.cpp"
 #include "NManipulatorSource.cpp"
 #include "NControlObjectSource.cpp"
-
+  */
 namespace NMSDK {
 
-NSourceLibrary SourceLibrary;
+NSourceLibrary NeuronSourceLibrary;
 
 // --------------------------
 // Конструкторы и деструкторы
 // --------------------------
 NSourceLibrary::NSourceLibrary(void)
- : ULibrary("SourceLibrary","1.0")
+ : ULibrary("NeuronSourceLibrary","1.0")
 {
 }
 // --------------------------

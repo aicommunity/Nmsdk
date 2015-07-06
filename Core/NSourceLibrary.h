@@ -44,7 +44,7 @@ virtual void CreateClassSamples(UStorage *storage);
 // --------------------------
 };    
 
-extern RDK_LIB_TYPE NSourceLibrary SourceLibrary;
+extern RDK_LIB_TYPE NSourceLibrary NeuronSourceLibrary;
 
 }
 
