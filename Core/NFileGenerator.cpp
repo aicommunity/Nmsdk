@@ -116,12 +116,12 @@ bool NFileGenerator::AReset(void)
 	strstream stream(&svalue[0],svalue.size());
 	RDK::operator >> (stream,value);
 	//stream>>value;
-	data[j].Resize(value.size());
+	data[j].Resize(1,value.size());
 	for(size_t k=0;k<value.size();k++)
 	 data[j].Double[k]=value[k];
    }
    else
-    data[j].Resize(0);
+    data[j].Resize(0,0);
   }
  }
  CurrentIndex=Data.begin();
