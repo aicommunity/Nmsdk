@@ -65,10 +65,10 @@ NControlObjectSource* NControlObjectSource::New(void)
 bool NControlObjectSource::ADefault(void)
 {
  SetNumOutputs(4);
- SetOutputDataSize(0,1);
- SetOutputDataSize(1,1);
- SetOutputDataSize(2,1);
- SetOutputDataSize(3,1);
+ SetOutputDataSize(0,MMatrixSize(1,1));
+ SetOutputDataSize(1,MMatrixSize(1,1));
+ SetOutputDataSize(2,MMatrixSize(1,1));
+ SetOutputDataSize(3,MMatrixSize(1,1));
 
  return NSource::ADefault();
 }
@@ -92,9 +92,9 @@ bool NControlObjectSource::ACalculate(void)
 
  for(int i=0;i<NumInputs;i++)
  {
-  if(GetInputDataSize(i)>0)
+  if(GetInputDataSize(i)[1]>0)
   {
-   SetOutputDataSize((*DataIndexes)[i],1);
+   SetOutputDataSize((*DataIndexes)[i],MMatrixSize(1,1));
    POutputData[(*DataIndexes)[i]].Double[0]=GetInputData(i)->Double[0]-(*DataShift)[(*DataIndexes)[i]];
   }
  }

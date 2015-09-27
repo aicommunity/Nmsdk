@@ -57,9 +57,9 @@ bool NManipulatorSourceEmulator::ADefault(void)
  Force=5;   
  
  SetNumOutputs(3);
- SetOutputDataSize(0,1);
- SetOutputDataSize(1,1);
- SetOutputDataSize(2,1);
+ SetOutputDataSize(0,MMatrixSize(1,1));
+ SetOutputDataSize(1,MMatrixSize(1,1));
+ SetOutputDataSize(2,MMatrixSize(1,1));
 
  return NManipulatorSource::ADefault();
 }
@@ -75,13 +75,13 @@ bool NManipulatorSourceEmulator::AReset(void)
 // Выполняет расчет этого объекта
 bool NManipulatorSourceEmulator::ACalculate(void)
 {
- if(NumInputs >0 && GetInputDataSize(0)>0)
+ if(NumInputs >0 && GetInputDataSize(0)[1]>0)
   POutputData[0].Double[0]=GetInputData(0)->Double[0];
 
- if(NumInputs >1 && GetInputDataSize(1)>0)
+ if(NumInputs >1 && GetInputDataSize(1)[1]>0)
   POutputData[1].Double[0]=GetInputData(1)->Double[0];
 
- if(NumInputs >2 && GetInputDataSize(2)>0)
+ if(NumInputs >2 && GetInputDataSize(2)[1]>0)
   POutputData[2].Double[0]=GetInputData(2)->Double[0];
  return true;//NManipulatorSource::ACalculate();
 }

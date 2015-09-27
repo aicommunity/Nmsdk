@@ -126,8 +126,8 @@ bool NPulseGenerator::CheckComponentType(UEPtr<UContainer> comp) const
 bool NPulseGenerator::ADefault(void)
 {
  SetNumOutputs(4);
- SetOutputDataSize(0,1);
- SetOutputDataSize(1,1);
+ SetOutputDataSize(0,MMatrixSize(1,1));
+ SetOutputDataSize(1,MMatrixSize(1,1));
  Frequency=0.0;
  PulseLength=0.001;
  Amplitude=1.0;
@@ -264,7 +264,7 @@ bool NPulseGenerator::ACalculate(void)
 
  I=AvgFrequencyCounter->begin();
  J=AvgFrequencyCounter->end();
- SetOutputDataSize(3,AvgFrequencyCounter->size(),true);
+ SetOutputDataSize(3,MMatrixSize(1,AvgFrequencyCounter->size()),true);
  for(int i=0;i<POutputData[3].GetSize();i++,++I)
   POutputData[3].Double[i]=*I;
 

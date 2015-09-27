@@ -82,10 +82,10 @@ bool NManipulatorSource::ADefault(void)
  Movement=0;
  
  SetNumOutputs(4);
- SetOutputDataSize(0,1);
- SetOutputDataSize(1,1);
- SetOutputDataSize(2,1);
- SetOutputDataSize(3,1);
+ SetOutputDataSize(0,MMatrixSize(1,1));
+ SetOutputDataSize(1,MMatrixSize(1,1));
+ SetOutputDataSize(2,MMatrixSize(1,1));
+ SetOutputDataSize(3,MMatrixSize(1,1));
 
  return NSource::ADefault();
 }
@@ -109,7 +109,7 @@ bool NManipulatorSource::ACalculate(void)
   FillOutputData(2,&Force.v);
   UpdateOutputFlag=false;
  }*/
- if(NumInputs >0 && GetInputDataSize(0)>0)
+ if(NumInputs >0 && GetInputDataSize(0)[1]>0)
  {
   if(NumInputs<=4)
    POutputData[0].Double[0]=GetInputData(0)->Double[0]-Movement;
@@ -117,7 +117,7 @@ bool NManipulatorSource::ACalculate(void)
    POutputData[0].Double[0]=GetInputData(0)->Double[0]-GetInputData(4)->Double[0];
  }
 
- if(NumInputs >1 && GetInputDataSize(1)>0)
+ if(NumInputs >1 && GetInputDataSize(1)[1]>0)
  {
   if(NumInputs<=5)
    POutputData[1].Double[0]=GetInputData(1)->Double[0]-Angle;
@@ -125,10 +125,10 @@ bool NManipulatorSource::ACalculate(void)
    POutputData[1].Double[0]=GetInputData(1)->Double[0]-GetInputData(5)->Double[0];
  }
 
- if(NumInputs >2 && GetInputDataSize(2)>0)
+ if(NumInputs >2 && GetInputDataSize(2)[1]>0)
   POutputData[2].Double[0]=GetInputData(2)->Double[0];
 
- if(NumInputs >3 && GetInputDataSize(3)>0)
+ if(NumInputs >3 && GetInputDataSize(3)[1]>0)
   POutputData[3].Double[0]=GetInputData(3)->Double[0];
  return true;//NManipulatorSource::ACalculate();
 }
