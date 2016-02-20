@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{149112E9-B343-4E81-A5F5-B4853AE7E8FB}</ProjectGuid>
+    <ProjectGuid>{AE365B33-44F8-4BA7-8666-C2E1D6282807}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>RdkBasicLib</RootNamespace>
   </PropertyGroup>
@@ -38,11 +38,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\..\..\Bin\Vs\</OutDir>
+    <OutDir>.\..\..\..\..\Bin\Platform\Win\Lib.Vs\</OutDir>
     <IncludePath>..\..\Core\;..\..\..\..\Rdk\Deploy\Include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\..\..\Bin\Vs\</OutDir>
+    <OutDir>.\..\..\..\..\Bin\Platform\Win\Lib.Vs\</OutDir>
     <IncludePath>..\..\Core\;..\..\..\..\Rdk\Deploy\Include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -51,7 +51,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);RDK_UNICODE_RUN</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);RDK_UNICODE_RUN;LIBRDK_LIBRARY_EXPORT</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
@@ -75,7 +75,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);LIBRDK_LIBRARY_EXPORT;RDK_UNICODE_RUN;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);LIBRDK_LIBRARY_EXPORT;RDK_UNICODE_RUN;;LIBRDK_LIBRARY_EXPORT</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
@@ -97,8 +97,24 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Core\UBCLLibrary.cpp" />
-    <ClCompile Include="..\..\Core\UModel.cpp" />
+    <ClCompile Include="..\..\Core\NConstGenerator.cpp" />
+    <ClCompile Include="..\..\Core\NControlObjectSource.cpp" />
+    <ClCompile Include="..\..\Core\NFileGenerator.cpp" />
+    <ClCompile Include="..\..\Core\NManipulatorSource.cpp" />
+    <ClCompile Include="..\..\Core\NManipulatorSourceEmulator.cpp" />
+    <ClCompile Include="..\..\Core\NPulseGenerator.cpp" />
+    <ClCompile Include="..\..\Core\NSinusGenerator.cpp" />
+    <ClCompile Include="..\..\Core\NSourceLibrary.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Core\NConstGenerator.h" />
+    <ClInclude Include="..\..\Core\NControlObjectSource.h" />
+    <ClInclude Include="..\..\Core\NFileGenerator.h" />
+    <ClInclude Include="..\..\Core\NManipulatorSource.h" />
+    <ClInclude Include="..\..\Core\NManipulatorSourceEmulator.h" />
+    <ClInclude Include="..\..\Core\NPulseGenerator.h" />
+    <ClInclude Include="..\..\Core\NSinusGenerator.h" />
+    <ClInclude Include="..\..\Core\NSourceLibrary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

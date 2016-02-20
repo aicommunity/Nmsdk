@@ -17,7 +17,7 @@ See file license.txt for more information
 #define NFILE_GENERATOR_H
 
 #include "../../Nmsdk-BasicLib/Core/NSource.h"
-#include "rdk.h"
+#include "../../../Rdk/Deploy/Include/rdk.h"
 
 namespace NMSDK {
 

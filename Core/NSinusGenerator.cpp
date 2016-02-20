@@ -104,7 +104,7 @@ bool NSinusGenerator::ACalculate(void)
 {
  TimeCounter.v+=1.0/TimeStep;
  double tmp=Amplitude*sin(2.0*M_PI*TimeCounter*Frequency);
- for(size_t i=0;i<GetOutputDataSize(0)[1];i++)
+ for(int i=0;i<GetOutputDataSize(0)[1];i++)
   POutputData[0].Double[i]=tmp;
  return true;//NSource::ACalculate();
 }
