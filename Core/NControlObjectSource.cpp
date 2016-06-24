@@ -29,7 +29,8 @@ namespace NMSDK {
 NControlObjectSource::NControlObjectSource(void)
 : NSource(),
   DataIndexes("DataIndexes",this),
-  DataShift("DataShift",this,&NControlObjectSource::SetDataShift)
+  DataShift("DataShift",this,&NControlObjectSource::SetDataShift),
+  DataMul("DataMul",this)
 {
 }
 
@@ -80,6 +81,7 @@ bool NControlObjectSource::AReset(void)
  UpdateOutputFlag=true;
  DataShift->resize(GetNumInputs(),0.0);
  DataIndexes->resize(GetNumInputs(),0);
+ DataMul->resize(GetNumInputs(),1.0);
  return NSource::AReset();
 }
 
@@ -88,6 +90,7 @@ bool NControlObjectSource::ACalculate(void)
 {
  DataShift->resize(GetNumInputs(),0.0);
  DataIndexes->resize(GetNumInputs(),0);
+ DataMul->resize(GetNumInputs(),1.0);
  SetNumOutputs(NumInputs);
 
  for(int i=0;i<NumInputs;i++)
@@ -95,7 +98,7 @@ bool NControlObjectSource::ACalculate(void)
   if(GetInputDataSize(i)[1]>0)
   {
    SetOutputDataSize((*DataIndexes)[i],MMatrixSize(1,1));
-   POutputData[(*DataIndexes)[i]].Double[0]=GetInputData(i)->Double[0]-(*DataShift)[(*DataIndexes)[i]];
+   POutputData[(*DataIndexes)[i]].Double[0]=(*DataMul)[(*DataIndexes)[i]]*(GetInputData(i)->Double[0]-(*DataShift)[(*DataIndexes)[i]]);
   }
  }
  return true;

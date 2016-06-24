@@ -30,9 +30,10 @@ public: // Общедоступные свойства
 RDK::ULProperty<std::vector<int>,NControlObjectSource> DataIndexes;
 
 // смещение данных с датчиков ОУ
-// в соответствии с индексами выхода этого источника
 RDK::ULProperty<std::vector<double>,NControlObjectSource> DataShift;
 
+// Умножение выходных данных
+RDK::ULProperty<std::vector<double>,NControlObjectSource> DataMul;
 
 protected: // Основные свойства
 
