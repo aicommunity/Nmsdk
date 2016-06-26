@@ -65,11 +65,12 @@ NControlObjectSource* NControlObjectSource::New(void)
 // Восстановление настроек по умолчанию и сброс процесса счета
 bool NControlObjectSource::ADefault(void)
 {
- SetNumOutputs(4);
+ SetNumOutputs(5);
  SetOutputDataSize(0,MMatrixSize(1,1));
  SetOutputDataSize(1,MMatrixSize(1,1));
  SetOutputDataSize(2,MMatrixSize(1,1));
  SetOutputDataSize(3,MMatrixSize(1,1));
+ SetOutputDataSize(4,MMatrixSize(1,1));
 
  return NSource::ADefault();
 }
@@ -95,10 +96,10 @@ bool NControlObjectSource::ACalculate(void)
 
  for(int i=0;i<NumInputs;i++)
  {
-  if(GetInputDataSize(i)[1]>0)
+  if(GetInputDataSize((*DataIndexes)[i])[1]>0)
   {
-   SetOutputDataSize((*DataIndexes)[i],MMatrixSize(1,1));
-   POutputData[(*DataIndexes)[i]].Double[0]=(*DataMul)[(*DataIndexes)[i]]*(GetInputData(i)->Double[0]-(*DataShift)[(*DataIndexes)[i]]);
+   SetOutputDataSize(i,MMatrixSize(1,1));
+   POutputData[i].Double[0]=(*DataMul)[i]*(GetInputData((*DataIndexes)[i])->Double[0]-(*DataShift)[i]);
   }
  }
  return true;
