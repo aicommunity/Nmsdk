@@ -33,6 +33,7 @@ NManipulatorSource::NManipulatorSource(void)
   Force("Force",this,&NManipulatorSource::SetForce),
   Movement("Movement",this)
 {
+ UpdateOutputFlag=0;
 }
 
 NManipulatorSource::~NManipulatorSource(void)

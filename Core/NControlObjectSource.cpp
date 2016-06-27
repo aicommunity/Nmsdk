@@ -32,6 +32,7 @@ NControlObjectSource::NControlObjectSource(void)
   DataShift("DataShift",this,&NControlObjectSource::SetDataShift),
   DataMul("DataMul",this)
 {
+ UpdateOutputFlag=false;
 }
 
 NControlObjectSource::~NControlObjectSource(void)

@@ -30,8 +30,7 @@ NConstGenerator::NConstGenerator(void)
 //: NSource(name),
  : Amplitude("Amplitude",this,&NConstGenerator::SetAmplitude)
 {
- // Устанавливаем новые параметры
-// AddLookupParameter("Amplitude",Amplitude);
+ UpdateOutputFlag=false;
 }
 
 NConstGenerator::~NConstGenerator(void)

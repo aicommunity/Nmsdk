@@ -41,6 +41,7 @@ NPulseGenerator::NPulseGenerator(void)
   RandomFrequency("RandomFrequency",this),
   AvgFrequencyCounter("AvgFrequencyCounter",this)
 {
+ OldFrequency=0;
 }
 
 NPulseGenerator::~NPulseGenerator(void)

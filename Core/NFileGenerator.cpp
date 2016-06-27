@@ -29,6 +29,7 @@ NFileGenerator::NFileGenerator(void)
 //: NSource(name),
  : FileName("FileName",this,&NFileGenerator::SetFileName)
 {
+ DataStartTime=0;
 }
 
 NFileGenerator::~NFileGenerator(void)
