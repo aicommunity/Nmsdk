@@ -17,7 +17,7 @@ See file license.txt for more information
 #define NSINUS_GENERATOR_CPP
 
 #include "NSinusGenerator.h"
-#include "rdk.h"
+//#include "rdk.h"
 
 
 namespace NMSDK {

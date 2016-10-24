@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Rdk-BasicLib" />
+		<Option title="Nmsdk-SourceLib" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="./../../Bin/CodeBlocks/Rdk-BasicLib" prefix_auto="1" extension_auto="1" />
+				<Option output="./../../../../Bin/Platform/Linux/Lib/Nmsdk-SourceLib" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
 				<Option type="2" />
@@ -17,7 +17,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="./../../Bin/CodeBlocks/Rdk-BasicLib" prefix_auto="1" extension_auto="1" />
+				<Option output="./../../../../Bin/Platform/Linux/Lib/Nmsdk-SourceLib" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
 				<Option type="2" />
@@ -33,10 +33,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../../Core/UBCLLibrary.cpp" />
-		<Unit filename="../../Core/UBCLLibrary.h" />
-		<Unit filename="../../Core/UModel.cpp" />
-		<Unit filename="../../Core/UModel.h" />
+		<Unit filename="../../Core/NConstGenerator.cpp" />
+		<Unit filename="../../Core/NConstGenerator.h" />
+		<Unit filename="../../Core/NControlObjectSource.cpp" />
+		<Unit filename="../../Core/NControlObjectSource.h" />
+		<Unit filename="../../Core/NFileGenerator.cpp" />
+		<Unit filename="../../Core/NFileGenerator.h" />
+		<Unit filename="../../Core/NManipulatorSource.cpp" />
+		<Unit filename="../../Core/NManipulatorSource.h" />
+		<Unit filename="../../Core/NManipulatorSourceEmulator.cpp" />
+		<Unit filename="../../Core/NManipulatorSourceEmulator.h" />
+		<Unit filename="../../Core/NPulseGenerator.cpp" />
+		<Unit filename="../../Core/NPulseGenerator.h" />
+		<Unit filename="../../Core/NSinusGenerator.cpp" />
+		<Unit filename="../../Core/NSinusGenerator.h" />
+		<Unit filename="../../Core/NSourceLibrary.cpp" />
+		<Unit filename="../../Core/NSourceLibrary.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
