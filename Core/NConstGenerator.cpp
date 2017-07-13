@@ -92,7 +92,7 @@ bool NConstGenerator::ACalculate(void)
 {
  if(UpdateOutputFlag)
  {
-  FillOutputData(0,&Amplitude.v);
+  *Output=Amplitude.v;
   UpdateOutputFlag=false;
  }
  return true;//NSource::ACalculate();

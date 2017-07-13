@@ -30,7 +30,9 @@ NControlObjectSource::NControlObjectSource(void)
 : NSource(),
   DataIndexes("DataIndexes",this),
   DataShift("DataShift",this,&NControlObjectSource::SetDataShift),
-  DataMul("DataMul",this)
+  DataMul("DataMul",this),
+  Input("Input",this),
+  Output("Output",this)
 {
  UpdateOutputFlag=false;
 }
@@ -44,7 +46,7 @@ NControlObjectSource::~NControlObjectSource(void)
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает угол, скорость, момент 
-bool NControlObjectSource::SetDataShift(const std::vector<double> &value)
+bool NControlObjectSource::SetDataShift(const MDMatrix<double> &value)
 {
  return true;
 }
@@ -66,13 +68,13 @@ NControlObjectSource* NControlObjectSource::New(void)
 // Восстановление настроек по умолчанию и сброс процесса счета
 bool NControlObjectSource::ADefault(void)
 {
- SetNumOutputs(5);
+/* SetNumOutputs(5);
  SetOutputDataSize(0,MMatrixSize(1,1));
  SetOutputDataSize(1,MMatrixSize(1,1));
  SetOutputDataSize(2,MMatrixSize(1,1));
  SetOutputDataSize(3,MMatrixSize(1,1));
  SetOutputDataSize(4,MMatrixSize(1,1));
-
+  */
  return NSource::ADefault();
 }
 
@@ -81,27 +83,26 @@ bool NControlObjectSource::ADefault(void)
 bool NControlObjectSource::AReset(void)
 {
  UpdateOutputFlag=true;
- DataShift->resize(GetNumInputs(),0.0);
- DataIndexes->resize(GetNumInputs(),0);
- DataMul->resize(GetNumInputs(),1.0);
+ DataShift->Assign(Input->GetRows(),Input->GetCols(),0.0);
+ DataIndexes->Assign(Input->GetRows(),0.0);
+ DataMul->Assign(Input->GetRows(),Input->GetCols(),1.0);
+ Output->Assign(Input->GetRows(),Input->GetCols(),0.0);
  return NSource::AReset();
 }
 
 // Выполняет расчет этого объекта
 bool NControlObjectSource::ACalculate(void)
 {
- DataShift->resize(GetNumInputs(),0.0);
- DataIndexes->resize(GetNumInputs(),0);
- DataMul->resize(GetNumInputs(),1.0);
- SetNumOutputs(NumInputs);
+ UpdateOutputFlag=true;
+ DataShift->Resize(Input->GetRows(),Input->GetCols());
+ DataIndexes->Resize(Input->GetRows());
+ DataMul->Resize(Input->GetRows(),Input->GetCols());
+ Output->Resize(Input->GetRows(),Input->GetCols());
 
- for(int i=0;i<NumInputs;i++)
+ for(int i=0;i<Input->GetRows();i++)
  {
-  if(GetInputDataSize((*DataIndexes)[i])[1]>0)
-  {
-   SetOutputDataSize(i,MMatrixSize(1,1));
-   POutputData[i].Double[0]=(*DataMul)[i]*(GetInputData((*DataIndexes)[i])->Double[0]-(*DataShift)[i]);
-  }
+  for(int j=0;j<Input->GetCols();j++)
+   (*Output)(i,j)=(*DataMul)(i,j)*( (*Input)((*DataIndexes)(i),j)-(*DataShift)(i,j));
  }
  return true;
 }

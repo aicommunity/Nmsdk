@@ -135,18 +135,30 @@ bool NFileGenerator::ACalculate(void)
 {
  if(CurrentIndex == Data.end())
  {
-  FillOutputData();
+  Output->ToZero();
   return true;
  }
 
  DataStartTime+=1.0/TimeStep;
  if(DataStartTime >= CurrentIndex->first)
  {
-  int size=(NumOutputs<int(CurrentIndex->second.size()))?NumOutputs:CurrentIndex->second.size();
+  int size_rows=(Output->GetRows()<int(CurrentIndex->second.size()))?Output->GetRows():CurrentIndex->second.size();
+  int size_cols(0);
 
-  for(int i=0;i<size;i++)
-   for(int j=0;j<CurrentIndex->second[i].GetSize();j++)
-    POutputData[i].Double[j]=CurrentIndex->second[i].Double[j];
+  if(size_rows>0)
+  {
+   size_cols=CurrentIndex->second[0].GetCols();
+   for(int i=0;i<size_rows;i++)
+	size_cols=(size_cols>CurrentIndex->second[i].GetCols())?CurrentIndex->second[i].GetCols():size_cols;
+  }
+
+//  DataOutput0->Resize(size_rows,size_cols);
+
+  for(int i=0;i<size_rows;i++)
+   for(int j=0;j<size_cols;j++)
+   {
+	Output.Double[j]=CurrentIndex->second[i].Double[j];
+   }
 
   ++CurrentIndex;
   if(CurrentIndex == Data.end())

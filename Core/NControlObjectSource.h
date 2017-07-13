@@ -21,21 +21,27 @@ See file license.txt for more information
 
 namespace NMSDK {
 
+/// Deprecated.
 class RDK_LIB_TYPE NControlObjectSource: public NSource
 {
 public: // Общедоступные свойства
 // Замена индексов выходов ОУ
 // индекс массива - индеск выхода ОУ, значение ячейки массива - индекс выхода
 // этого источника
-RDK::ULProperty<std::vector<int>,NControlObjectSource> DataIndexes;
+RDK::ULProperty<MDVector<int>,NControlObjectSource> DataIndexes;
 
 // смещение данных с датчиков ОУ
-RDK::ULProperty<std::vector<double>,NControlObjectSource> DataShift;
+RDK::ULProperty<MDMatrix<double>,NControlObjectSource> DataShift;
 
 // Умножение выходных данных
-RDK::ULProperty<std::vector<double>,NControlObjectSource> DataMul;
+RDK::ULProperty<MDMatrix<double>,NControlObjectSource> DataMul;
 
 protected: // Основные свойства
+// Входные данные
+RDK::UPropertyInputData<MDMatrix<double>,NControlObjectSource> Input;
+
+// Выходные данные
+RDK::UPropertyOutputData<MDMatrix<double>,NControlObjectSource> Output;
 
 
 public: // Методы
@@ -52,7 +58,7 @@ protected:
 // Методы управления общедоступными свойствами
 // --------------------------
 // Устанавливает угол
-bool SetDataShift(const std::vector<double> &value);
+bool SetDataShift(const MDMatrix<double> &value);
 // --------------------------
 
 public:
