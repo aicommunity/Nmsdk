@@ -24,30 +24,30 @@ class RDK_LIB_TYPE NPulseGenerator: public NSource
 {
 public: // Параметры
 // Частота генерации (Гц) (Математическое ожидание)
-RDK::ULProperty<double,NPulseGenerator> Frequency;
+RDK::UProperty<double,NPulseGenerator, ptPubParameter> Frequency;
 
 // Длительность импульса (с)
-RDK::ULProperty<double,NPulseGenerator> PulseLength;
+RDK::UProperty<double,NPulseGenerator, ptPubParameter> PulseLength;
 
 // Амплитуда импульса
-RDK::ULProperty<double,NPulseGenerator> Amplitude;
+RDK::UProperty<double,NPulseGenerator, ptPubParameter> Amplitude;
 
 // Отклонение частоты
 // (Задает диапазон, не является стандартным отклонением!)
-RDK::ULProperty<double,NPulseGenerator> FrequencyDeviation;
+RDK::UProperty<double,NPulseGenerator, ptPubParameter> FrequencyDeviation;
 
 // Интервал времени оценки частоты генерации
-RDK::ULProperty<double,NPulseGenerator> AvgInterval;
+RDK::UProperty<double,NPulseGenerator, ptPubParameter> AvgInterval;
 
 public: // Переменные состояния
 // Счетчик импульса
-RDK::ULProperty<int,NPulseGenerator,ptPubState> PulseCounter;
+RDK::UProperty<int,NPulseGenerator,ptPubState> PulseCounter;
 
 // Случайное значение текущей частоты
-RDK::ULProperty<double,NPulseGenerator,ptPubState> RandomFrequency;
+RDK::UProperty<double,NPulseGenerator,ptPubState> RandomFrequency;
 
 // Средняя частота за заданный интервал времени
-RDK::UCLProperty<list<double>,NPulseGenerator,ptPubState> AvgFrequencyCounter;
+RDK::UPropertyRange<double,list<double>, NPulseGenerator,ptPubState> AvgFrequencyCounter;
 
 protected:
 
