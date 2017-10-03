@@ -25,16 +25,16 @@ class RDK_LIB_TYPE NSinusGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Амплитуда синуса
-RDK::ULProperty<double,NSinusGenerator> Amplitude;
+RDK::UProperty<double, NSinusGenerator, ptPubParameter> Amplitude;
 
 // Частота генерации (Гц)
-RDK::ULProperty<double,NSinusGenerator> Frequency;
+RDK::UProperty<double, NSinusGenerator, ptPubParameter> Frequency;
 
 protected: // Основные свойства
 
 public: // Временные переменные
 // Счетчик времени
-RDK::ULProperty<double,NSinusGenerator> TimeCounter;
+RDK::UProperty<double, NSinusGenerator, ptPubParameter> TimeCounter;
 
 
 public: // Методы

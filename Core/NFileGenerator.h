@@ -16,6 +16,8 @@ See file license.txt for more information
 #ifndef NFILE_GENERATOR_H
 #define NFILE_GENERATOR_H
 
+#include <map>
+#include <vector>
 #include "../../Nmsdk-BasicLib/Core/NSource.h"
 #include "../../../Rdk/Deploy/Include/rdk.h"
 
@@ -25,15 +27,13 @@ class RDK_LIB_TYPE NFileGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Имя файла с данными
-RDK::ULProperty<string,NFileGenerator> FileName;
-
-protected: // Основные свойства
+UProperty<string,NFileGenerator, ptPubParameter> FileName;
 
 protected: // Данные
 RDK::UIniFile<char> Ini;
 
 // 2D массив входов на каждый момент времени
-map<double,vector<RDK::MDMatrix<double> > Data;
+map<double,vector<RDK::MDMatrix<double> > > Data;
 
 public: // Временные переменные
 // Итератор, указывающий на текущий момент времени

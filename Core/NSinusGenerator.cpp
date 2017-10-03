@@ -102,10 +102,10 @@ bool NSinusGenerator::AReset(void)
 // Выполняет расчет этого объекта
 bool NSinusGenerator::ACalculate(void)
 {
- TimeCounter.v+=1.0/TimeStep;
+ TimeCounter.v()+=1.0/TimeStep;
  double tmp=Amplitude*sin(2.0*M_PI*TimeCounter*Frequency);
  for(int i=0;i<GetOutputDataSize(0)[1];i++)
-  POutputData[0].Double[i]=tmp;
+  GetOutputData(0).Double[i]=tmp;
  return true;//NSource::ACalculate();
 }
 // --------------------------

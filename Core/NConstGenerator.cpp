@@ -44,7 +44,7 @@ NConstGenerator::~NConstGenerator(void)
 // ”станавливает амплитуду импульсов
 bool NConstGenerator::SetAmplitude(const double &value)
 {
- if(Amplitude.v != value)
+ if(Amplitude.v() != value)
   UpdateOutputFlag=true;
  return true;
 }
@@ -77,7 +77,7 @@ bool NConstGenerator::ADefault(void)
 // в случае успешной сборки
 bool NConstGenerator::ABuild(void)
 {
- return true;
+ return NSource::ABuild();
 }
 
 // —брос процесса счета.
@@ -92,7 +92,9 @@ bool NConstGenerator::ACalculate(void)
 {
  if(UpdateOutputFlag)
  {
-  *Output=Amplitude.v;
+  MDMatrix<double> out(Output->GetMatrixSize());
+  out=Amplitude.v();
+  Output=out;
   UpdateOutputFlag=false;
  }
  return true;//NSource::ACalculate();

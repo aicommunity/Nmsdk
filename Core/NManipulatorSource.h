@@ -25,13 +25,13 @@ class RDK_LIB_TYPE NManipulatorSource: public NSource
 {
 public: // ќбщедоступные свойства
 // угол разворота ротора
-RDK::ULProperty<double,NManipulatorSource> Angle;
+UProperty<double,NManipulatorSource, ptPubParameter> Angle;
 // углова€ скорость
-RDK::ULProperty<double,NManipulatorSource> Speed;
+UProperty<double,NManipulatorSource, ptPubParameter> Speed;
 // момент двигател€
-RDK::ULProperty<double,NManipulatorSource> Force;
+UProperty<double,NManipulatorSource, ptPubParameter> Force;
 
-RDK::ULProperty<double,NManipulatorSource> Movement;
+UProperty<double,NManipulatorSource, ptPubParameter> Movement;
 
 protected: // ќсновные свойства
 

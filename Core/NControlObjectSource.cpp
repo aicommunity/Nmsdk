@@ -83,10 +83,10 @@ bool NControlObjectSource::ADefault(void)
 bool NControlObjectSource::AReset(void)
 {
  UpdateOutputFlag=true;
- DataShift->Assign(Input->GetRows(),Input->GetCols(),0.0);
- DataIndexes->Assign(Input->GetRows(),0.0);
- DataMul->Assign(Input->GetRows(),Input->GetCols(),1.0);
- Output->Assign(Input->GetRows(),Input->GetCols(),0.0);
+ DataShift.Assign(Input.GetMatrixSize(),0.0);
+ DataIndexes.Assign(Input.GetRows(),0.0);
+ DataMul.Assign(Input.GetMatrixSize(),1.0);
+ Output.Assign(Input.GetMatrixSize(),0.0);
  return NSource::AReset();
 }
 
@@ -94,15 +94,15 @@ bool NControlObjectSource::AReset(void)
 bool NControlObjectSource::ACalculate(void)
 {
  UpdateOutputFlag=true;
- DataShift->Resize(Input->GetRows(),Input->GetCols());
- DataIndexes->Resize(Input->GetRows());
- DataMul->Resize(Input->GetRows(),Input->GetCols());
- Output->Resize(Input->GetRows(),Input->GetCols());
+ DataShift.Resize(Input.GetMatrixSize());
+ DataIndexes.Resize(Input.GetRows());
+ DataMul.Resize(Input.GetMatrixSize());
+ Output.Resize(Input.GetMatrixSize());
 
- for(int i=0;i<Input->GetRows();i++)
+ for(int i=0;i<Input.GetRows();i++)
  {
-  for(int j=0;j<Input->GetCols();j++)
-   (*Output)(i,j)=(*DataMul)(i,j)*( (*Input)((*DataIndexes)(i),j)-(*DataShift)(i,j));
+  for(int j=0;j<Input.GetCols();j++)
+   Output(i,j)=DataMul(i,j)*(Input(DataIndexes(i),j)-DataShift(i,j));
  }
  return true;
 }

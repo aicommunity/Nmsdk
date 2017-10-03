@@ -43,7 +43,7 @@ NFileGenerator::~NFileGenerator(void)
 // Устанавливает имя файла с данными
 bool NFileGenerator::SetFileName(const string &value)
 {
- FileName.v=value;
+ FileName.v()=value;
  return Reset();
 }
 // --------------------------
@@ -94,7 +94,7 @@ bool NFileGenerator::ABuild(void)
 bool NFileGenerator::AReset(void)
 {
  Ini.Delete();
- Ini.LoadFromFile(FileName);
+ Ini.LoadFromFile(*FileName);
  Data.clear();
 
  // Заполняем массив данных
@@ -135,7 +135,7 @@ bool NFileGenerator::ACalculate(void)
 {
  if(CurrentIndex == Data.end())
  {
-  Output->ToZero();
+  Output.ToZero();
   return true;
  }
 
@@ -152,12 +152,12 @@ bool NFileGenerator::ACalculate(void)
 	size_cols=(size_cols>CurrentIndex->second[i].GetCols())?CurrentIndex->second[i].GetCols():size_cols;
   }
 
-//  DataOutput0->Resize(size_rows,size_cols);
+  Output.Resize(size_rows,size_cols);
 
   for(int i=0;i<size_rows;i++)
    for(int j=0;j<size_cols;j++)
    {
-	Output.Double[j]=CurrentIndex->second[i].Double[j];
+	Output(i,j)=CurrentIndex->second[i].Double[j];
    }
 
   ++CurrentIndex;

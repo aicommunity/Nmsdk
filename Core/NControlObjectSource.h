@@ -28,20 +28,20 @@ public: // Общедоступные свойства
 // Замена индексов выходов ОУ
 // индекс массива - индеск выхода ОУ, значение ячейки массива - индекс выхода
 // этого источника
-RDK::ULProperty<MDVector<int>,NControlObjectSource> DataIndexes;
+RDK::UProperty<MDVector<int>,NControlObjectSource, ptPubParameter> DataIndexes;
 
 // смещение данных с датчиков ОУ
-RDK::ULProperty<MDMatrix<double>,NControlObjectSource> DataShift;
+RDK::UProperty<MDMatrix<double>,NControlObjectSource, ptPubParameter> DataShift;
 
 // Умножение выходных данных
-RDK::ULProperty<MDMatrix<double>,NControlObjectSource> DataMul;
+RDK::UProperty<MDMatrix<double>,NControlObjectSource, ptPubParameter> DataMul;
 
 protected: // Основные свойства
 // Входные данные
-RDK::UPropertyInputData<MDMatrix<double>,NControlObjectSource> Input;
+RDK::UProperty<MDMatrix<double>,NControlObjectSource, ptPubInput> Input;
 
 // Выходные данные
-RDK::UPropertyOutputData<MDMatrix<double>,NControlObjectSource> Output;
+RDK::UProperty<MDMatrix<double>,NControlObjectSource, ptPubOutput> Output;
 
 
 public: // Методы

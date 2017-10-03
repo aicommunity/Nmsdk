@@ -144,7 +144,7 @@ bool NPulseGenerator::ADefault(void)
 // в случае успешной сборки
 bool NPulseGenerator::ABuild(void)
 {
- AvgFrequencyCounter->clear();
+ AvgFrequencyCounter.clear();
  return true;
 }
 
@@ -159,9 +159,9 @@ bool NPulseGenerator::AReset(void)
 // if(Frequency.v > 0 && PulseCounter.v<-int(TimeStep/Frequency.v))
 //  PulseCounter.v=-int(TimeStep/Frequency.v);
 // else
-  PulseCounter.v=0;
+  PulseCounter.v()=0;
  RandomFrequency=Frequency;
- AvgFrequencyCounter->clear();
+ AvgFrequencyCounter.clear();
 
  OldFrequency=Frequency;
  return NSource::AReset();
@@ -170,59 +170,59 @@ bool NPulseGenerator::AReset(void)
 // Выполняет расчет этого объекта
 bool NPulseGenerator::ACalculate(void)
 {
- if(Frequency.v<1e-8 || TimeStep/Frequency.v<1)
+ if(Frequency.v()<1e-8 || TimeStep/Frequency.v()<1)
  {
   FillOutputData();
-  AvgFrequencyCounter->clear();
-  OldFrequency=Frequency.v;
-  PulseCounter.v = 0;
+  AvgFrequencyCounter.clear();
+  OldFrequency=Frequency.v();
+  PulseCounter.v() = 0;
   return true;
  }
 
- if(OldFrequency != Frequency.v)
+ if(OldFrequency != Frequency.v())
  {
-  if(PulseCounter.v < 0 && PulseCounter.v < static_cast<int>(-int(TimeStep/Frequency.v)))
-   PulseCounter.v = static_cast<int>(-int(TimeStep/Frequency.v));
+  if(PulseCounter.v() < 0 && PulseCounter.v() < static_cast<int>(-int(TimeStep/Frequency.v())))
+   PulseCounter.v() = static_cast<int>(-int(TimeStep/Frequency.v()));
 
-  OldFrequency=Frequency.v;
+  OldFrequency=Frequency.v();
  }
 
- if(FrequencyDeviation.v == 0)
+ if(FrequencyDeviation.v() == 0)
  {
   if(PulseCounter>0) // Если импульс идет
   {
-   --PulseCounter.v;
+   --PulseCounter.v();
    if(PulseCounter <= 0) // Выключаем импульс и включаем ожидание
    {
-	PulseCounter=static_cast<int>(-int(TimeStep/Frequency.v));
+	PulseCounter=static_cast<int>(-int(TimeStep/Frequency.v()));
 	FillOutputData(0);
 	FillOutputData(1);
    }
   }
   else
   {
-   ++PulseCounter.v;
+   ++PulseCounter.v();
    if(PulseCounter >= 0) // Включаем импульс
    {
-	PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
-	FillOutputData(0,&Amplitude.v);
-	FillOutputData(1,&Amplitude.v);
-	AvgFrequencyCounter->push_back(Environment->GetTime().GetDoubleTime());
+	PulseCounter=static_cast<RDK::UTime>(PulseLength.v()*TimeStep);
+	FillOutputData(0,&Amplitude.v());
+	FillOutputData(1,&Amplitude.v());
+	AvgFrequencyCounter.push_back(Environment->GetTime().GetDoubleTime());
    }
   }
-  FillOutputData(2,&Frequency.v);
+  FillOutputData(2,&Frequency.v());
  }
  else
  {
   if(PulseCounter>0) // Если импульс идет
   {
-   --PulseCounter.v;
+   --PulseCounter.v();
    if(PulseCounter <= 0) // Выключаем импульс и включаем ожидание
    {
 	RandomFrequency=double(rand()*FrequencyDeviation*2.0)/double(RAND_MAX)+
-							Frequency.v-FrequencyDeviation.v;
-	if(RandomFrequency.v>0)
-	 PulseCounter=static_cast<int>(-int(TimeStep/RandomFrequency.v));
+							Frequency.v()-FrequencyDeviation.v();
+	if(RandomFrequency.v()>0)
+	 PulseCounter=static_cast<int>(-int(TimeStep/RandomFrequency.v()));
 	else
 	 PulseCounter=0;
 	FillOutputData(0);
@@ -231,23 +231,23 @@ bool NPulseGenerator::ACalculate(void)
   }
   else
   {
-   ++PulseCounter.v;
+   ++PulseCounter.v();
    if(PulseCounter >= 0) // Включаем импульс
    {
-	PulseCounter=static_cast<RDK::UTime>(PulseLength.v*TimeStep);
-	FillOutputData(0,&Amplitude.v);
-	FillOutputData(1,&Amplitude.v);
-	AvgFrequencyCounter->push_back(Environment->GetTime().GetDoubleTime());
+	PulseCounter=static_cast<RDK::UTime>(PulseLength.v()*TimeStep);
+	FillOutputData(0,&Amplitude.v());
+	FillOutputData(1,&Amplitude.v());
+	AvgFrequencyCounter.push_back(Environment->GetTime().GetDoubleTime());
    }
   }
-  FillOutputData(2,&RandomFrequency.v);
+  FillOutputData(2,&RandomFrequency.v());
  }
 
  list<double>::iterator I,J,K;
- I=AvgFrequencyCounter->begin();
- J=AvgFrequencyCounter->end();
+ I=AvgFrequencyCounter.begin();
+ J=AvgFrequencyCounter.end();
 
- if(AvgFrequencyCounter->size()>1)
+ if(AvgFrequencyCounter.size()>1)
  {
   while(I != J)
   {
@@ -256,18 +256,18 @@ bool NPulseGenerator::ACalculate(void)
    {
 	K=I;
 	++I;
-	AvgFrequencyCounter->erase(K);
+	AvgFrequencyCounter.erase(K);
    }
    else
 	++I;
   }
  }
 
- I=AvgFrequencyCounter->begin();
- J=AvgFrequencyCounter->end();
- SetOutputDataSize(3,MMatrixSize(1,AvgFrequencyCounter->size()),true);
- for(int i=0;i<POutputData[3].GetSize();i++,++I)
-  POutputData[3].Double[i]=*I;
+ I=AvgFrequencyCounter.begin();
+ J=AvgFrequencyCounter.end();
+ SetOutputDataSize(3,MMatrixSize(1,AvgFrequencyCounter.size()));
+ for(int i=0;i<GetOutputData(3).GetSize();i++,++I)
+  GetOutputData(3).Double[i]=*I;
 
  return true;//NSource::ACalculate();
 }

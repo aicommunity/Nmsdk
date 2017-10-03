@@ -26,7 +26,7 @@ class RDK_LIB_TYPE NConstGenerator: public NSource
 {
 public: // Общедоступные свойства
 // Амплитуда импульса
-RDK::ULProperty<double,NConstGenerator> Amplitude;
+RDK::UProperty<double,NConstGenerator, ptPubParameter> Amplitude;
 
 protected: // Основные свойства
 
