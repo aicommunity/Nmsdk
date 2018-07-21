@@ -193,8 +193,8 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/USingleImagePainter.cpp \
     ../../../Rdk/GUI/Qt/qcustomplot.cpp \
     ../../../Rdk/GUI/Qt/UGraphWidget.cpp \
-    ../../../Rdk/GUI/Qt/UGraphWindow.cpp \
-    ../../../Rdk/GUI/Qt/UGraphControlDialog.cpp
+    ../../../Rdk/GUI/Qt/UGraphControlDialog.cpp \
+    ../../../Rdk/GUI/Qt/UGraphPaintWidget.cpp
 
 HEADERS += \
         ../../../Libraries/Libraries.h \
@@ -222,8 +222,8 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/qcustomplot.h \
     ../../../Rdk/GUI/Qt/UGraphWidget.h \
     ../../../Rdk/GUI/Qt/UStructSingleGraph.h \
-    ../../../Rdk/GUI/Qt/UGraphWindow.h \
-    ../../../Rdk/GUI/Qt/UGraphControlDialog.h
+    ../../../Rdk/GUI/Qt/UGraphControlDialog.h \
+    ../../../Rdk/GUI/Qt/UGraphPaintWidget.h
 
 FORMS   += \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.ui \
@@ -241,5 +241,5 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UComponentPropertyChanger.ui \
     ../../../Rdk/GUI/Qt/UStatusPanel.ui \
     ../../../Rdk/GUI/Qt/UGraphWidget.ui \
-    ../../../Rdk/GUI/Qt/UGraphWindow.ui \
-    ../../../Rdk/GUI/Qt/UGraphControlDialog.ui
+    ../../../Rdk/GUI/Qt/UGraphControlDialog.ui \
+    ../../../Rdk/GUI/Qt/UGraphPaintWidget.ui
