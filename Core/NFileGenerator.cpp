@@ -117,7 +117,7 @@ bool NFileGenerator::AReset(void)
 	strstream stream(&svalue[0],svalue.size());
 	RDK::operator >> (stream,value);
 	//stream>>value;
-	data[j].Resize(1,value.size());
+    data[j].Resize(1,int(value.size()));
 	for(size_t k=0;k<value.size();k++)
 	 data[j].Double[k]=value[k];
    }
