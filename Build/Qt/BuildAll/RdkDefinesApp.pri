@@ -4,3 +4,5 @@
 unix {
 #    DEFINES += RDK_USE_DARKNET
 }
+
+#DEFINES += RDK_USE_TENSORFLOW

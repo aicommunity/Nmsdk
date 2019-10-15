@@ -28,7 +28,6 @@ Rdk_Nmsdk_libs = Rdk-BasicLib \
         Rdk-CvStatisticLib \
         Rdk-CvVideoCaptureLib \
         Rdk-NoiseGenLib \
-        Rdk-PyMachineLearningLib \
         Nmsdk-ActLib \
         Nmsdk-BasicLib \
         Nmsdk-MathLib \
@@ -41,6 +40,18 @@ Rdk_Nmsdk_libs = Rdk-BasicLib \
         Nmsdk-ReceiverLib \
         Nmsdk-SensorLib \
         Nmsdk-SourceLib
+
+contains(DEFINES, RDK_USE_PYTHON) {
+  Rdk_Nmsdk_libs += Rdk-PyMachineLearningLib
+}
+
+contains(DEFINES, RDK_USE_DARKNET) {
+  Rdk_Nmsdk_libs += Rdk-DarknetLib
+}
+
+contains(DEFINES, RDK_USE_TENSORFLOW) {
+  Rdk_Nmsdk_libs += Rdk-TensorflowLib
+}
 
 SUBDIRS +=  rdk-static-qt
 rdk-static-qt.file = $$PWD/../../../Rdk/Build/Lib/Qt/rdk.static.qt.pro

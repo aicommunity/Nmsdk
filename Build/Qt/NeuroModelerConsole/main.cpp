@@ -6,7 +6,7 @@
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
-#include "../../../Rdk/Gui/Qt/UEngineControlQt.h"
+#include "../../../Rdk/GUI/Qt/UEngineControlQt.h"
 
 using namespace std;
 
