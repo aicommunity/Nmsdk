@@ -18,7 +18,9 @@
 #include "Rdk-NoiseGenLib/Deploy/Include/Lib.h"
 
 #ifndef __BORLANDC__
+#ifdef RDK_USE_PYTHON
 #include "Rdk-PyMachineLearningLib/Core/Lib.h"
+#endif
 #endif
 #include "Nmsdk-ActLib/Deploy/Include/Lib.h"
 #include "Nmsdk-BasicLib/Deploy/Include/Lib.h"
