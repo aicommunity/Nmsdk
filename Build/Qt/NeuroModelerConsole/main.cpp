@@ -87,6 +87,7 @@ void InitCmdParser(void)
     ("class", po::value<string>(), "Class name")
     ("collection", po::value<string>(), "collection name")
     ("mask", po::value<unsigned>(), "Property mask")
+    ("save_model_bmp", po::value<string>(), "Component name")
     ("session", po::value<unsigned>(), "Session Id")
 ;
 }
@@ -223,14 +224,6 @@ int main(int argc, char* argv[])
   calc_time_interval = CmdVariablesMap["ctime"].as<double>();
  }
 
- if(calc_time_interval<=0 || calc_time_interval>10e8)
- {
-  cout<<"CalcTimeInterval: Incorrect value "<<calc_time_interval<<"!"<<endl;
-  MCore_ChannelUnInit(0);
-  return 9000004;
- }
- cout<<"CalcTimeInterval: "<<calc_time_interval<<" sec"<<endl;
-
  // Loading configuration
  bool open_res=RdkApplication.OpenProject(configuration_name);
  RDK::GetEnvironmentLock(0)->SetMaxCalcTime(calc_time_interval);
@@ -241,6 +234,73 @@ int main(int argc, char* argv[])
   return res;
  }
  cout<<"Open configuration: Success."<<endl;
+
+ if(CmdVariablesMap.count("save_model_bmp"))
+ {
+  std::string component_name = CmdVariablesMap["save_model_bmp"].as<string>();
+
+  cout<<"Draw component scheme by name: "<<component_name<<endl;
+
+  /// Класс рисования структуры сети
+  RDK::UDrawEngine DrawEngine;
+
+  /// Графический движок
+  RDK::UGraphics Graph;
+
+  /// Тип шрифта
+  std::string FontType;
+
+  /// Размер шрифта
+  int FontSize;
+
+  /// Шрифт
+  RDK::UBitmapFont Font;
+
+  /// Канва рисования
+  RDK::UBitmap GraphCanvas;
+
+  /// Xml описание сети
+  RDK::USerStorageXML NetXml;
+
+  Graph.SetCanvas(&GraphCanvas);
+  FontType = "Tahoma";
+  FontSize = 15;
+  RDK::UBitmapFont* font=dynamic_cast<RDK::UBitmapFont*>(RDK::GetCoreLock()->GetFonts().GetFont(FontType,FontSize));
+  if(font)
+   Font=*font;
+  Graph.SetFont(&Font);
+  DrawEngine.SetEngine(&Graph);
+  DrawEngine.SetFonts(RDK::GetCoreLock()->GetFonts());
+      const char *xml=Model_SaveComponentDrawInfo(component_name.c_str());
+      if(xml)
+          NetXml.Load(xml,"");
+      else
+          NetXml.Destroy();
+      Engine_FreeBufString(xml);
+      DrawEngine.SetNetXml(NetXml);
+
+      int rec_width(1024), rec_height(768);
+      DrawEngine.CalcRecommendSize(rec_width,rec_height);
+  GraphCanvas.SetRes(rec_width, rec_height,RDK::ubmRGB24);
+  Graph.SetCanvas(&GraphCanvas);
+  DrawEngine.Draw();
+
+  GraphCanvas.ReflectionX();
+  SaveBitmapToFile("DrawCanvas.bmp", GraphCanvas);
+
+
+  MCore_ChannelUnInit(0);
+  return 0;
+ }
+
+
+ if(calc_time_interval<=0 || calc_time_interval>10e8)
+ {
+  cout<<"CalcTimeInterval: Incorrect value "<<calc_time_interval<<"!"<<endl;
+  MCore_ChannelUnInit(0);
+  return 9000004;
+ }
+ cout<<"CalcTimeInterval: "<<calc_time_interval<<" sec"<<endl;
  cout<<"Ready to calc."<<endl;
 
 
