@@ -39,7 +39,8 @@ Rdk_Nmsdk_libs = Rdk-BasicLib \
         Nmsdk-PulseNeuronLib \
         Nmsdk-ReceiverLib \
         Nmsdk-SensorLib \
-        Nmsdk-SourceLib
+        Nmsdk-SourceLib \
+        Nmsdk-YCorticalLib
 
 contains(DEFINES, RDK_USE_PYTHON) {
   Rdk_Nmsdk_libs += Rdk-PyMachineLearningLib

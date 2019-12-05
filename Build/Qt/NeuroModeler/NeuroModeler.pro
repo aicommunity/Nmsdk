@@ -80,7 +80,8 @@ NMSDK_LIBS_NAMES = \
  Nmsdk-ReceiverLib \
  Nmsdk-SensorLib \
  Nmsdk-SourceLib \
- rdk.static
+ rdk.static \
+ Nmsdk-YCorticalLib
 
 contains(DEFINES, RDK_USE_PYTHON) {
   NMSDK_LIBS_NAMES += Rdk-PyMachineLearningLib
