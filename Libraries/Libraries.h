@@ -25,7 +25,7 @@
 #include "Nmsdk-ActLib/Deploy/Include/Lib.h"
 #include "Nmsdk-BasicLib/Deploy/Include/Lib.h"
 #include "Nmsdk-MathLib/Deploy/Include/Lib.h"
-#include "Nmsdk-MotionControlLib/Deploy/Include/Lib.h"
+//#include "Nmsdk-MotionControlLib/Deploy/Include/Lib.h"
 #include "Nmsdk-NeuronLifeLib/Deploy/Include/Lib.h"
 #include "Nmsdk-PhysLib/Deploy/Include/Lib.h"
 #include "Nmsdk-PulseLib/Deploy/Include/Lib.h"
