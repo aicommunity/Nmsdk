@@ -288,7 +288,7 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
   if(!CalculationModeFlag || UpdateControlLoopsFlag)
   {
    UpdateControlLoopsFlag=false;
-   if(ControlSystem->ActiveContours->size() == num_controls)
+   if(int(ControlSystem->ActiveContours->size()) == num_controls)
    {
 	if(CheckListBox1->Items->Count != num_controls)
 	{
@@ -514,29 +514,29 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
  RDK::UEPtr<NMSDK::NControlObjectSource> source=net->GetComponentL<NMSDK::NControlObjectSource>(source_name,true);
  if(source)
  {
-  std::vector<int> indexes;
-  std::vector<double> data_mul;
-  std::vector<double> data_shift;
+  MDVector<int> indexes;
+  MDVector<double> data_mul;
+  MDVector<double> data_shift;
   if(man_name == "PendulumAndCart")
   {
-   indexes.resize(5);
+   indexes.Resize(5);
    indexes[0]=1;
    indexes[1]=2;
    indexes[2]=0;
    indexes[3]=3;
    indexes[4]=0;
-   data_mul.assign(5,1.0);
-   data_shift.assign(5,0.0);
+   data_mul.Assign(5,1.0);
+   data_shift.Assign(5,0.0);
   }
   else
   if(man_name == "DCEngine")
   {
-   indexes.resize(3);
+   indexes.Resize(3);
    indexes[0]=1;
    indexes[1]=2;
    indexes[2]=0;
-   data_mul.assign(3,1.0);
-   data_shift.assign(3,0.0);
+   data_mul.Assign(3,1.0);
+   data_shift.Assign(3,0.0);
   }
 
   source->DataIndexes=indexes;

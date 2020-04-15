@@ -993,7 +993,7 @@ void __fastcall TNManipulatorControlForm::PACDeactivatorTimeTrackBarChange(TObje
  RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
-  std::vector<NMSDK::Real> values;
+  std::vector<NMSDK::vector<double> > values;
 
   values.resize(num_ranges*2);
   // ѕосто€нна€ времени распада медиатора
@@ -1016,7 +1016,7 @@ void __fastcall TNManipulatorControlForm::PACActivatorTimeTrackBarChange(TObject
  RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
-  std::vector<NMSDK::Real> values;
+  std::vector<NMSDK::vector<double> > values;
 
   values.resize(num_ranges*2);
   // ѕосто€нна€ времени распада медиатора
@@ -1053,7 +1053,7 @@ void __fastcall TNManipulatorControlForm::PACMultiplicatorTrackBarChange(TObject
  RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
-  std::vector<NMSDK::Real> values;
+  std::vector<NMSDK::vector<double> > values;
 
   values.resize(num_ranges*2);
   for(size_t i=0;i<values.size()/2;i++)
