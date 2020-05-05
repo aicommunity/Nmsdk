@@ -201,7 +201,7 @@ int main(int argc, char* argv[])
   cout << "Session Id=" << session_id<<" has been started"<<endl;
   while(true)
   {
-   Sleep(1);
+   RDK::Sleep(1);
   }
   cout << "Session Id=" << session_id<<" has been stopped"<<endl;
   return a.exec();

@@ -71,7 +71,6 @@ NMSDK_LIBS_NAMES = \
  Rdk-CvSimulatorLib \
  Rdk-CvStatisticLib \
  Rdk-CvVideoCaptureLib \
- Rdk-PyMachineLearningLib \
  Rdk-NoiseGenLib \
  Nmsdk-ActLib \
  Nmsdk-BasicLib \
@@ -89,6 +88,17 @@ NMSDK_LIBS_NAMES = \
  Nmsdk-YCorticalLib
 
 
+contains(DEFINES, RDK_USE_PYTHON) {
+  NMSDK_LIBS_NAMES += Rdk-PyMachineLearningLib
+}
+
+contains(DEFINES, RDK_USE_DARKNET) {
+  NMSDK_LIBS_NAMES += Rdk-DarknetLib
+}
+
+contains(DEFINES, RDK_USE_TENSORFLOW) {
+  NMSDK_LIBS_NAMES += Rdk-TensorflowLib
+}
 
 windows:!windows-g++ {
 
@@ -120,8 +130,14 @@ OPENCV_LIBS_LIST = -L/usr/local/lib/ -lopencv_core \
 
 windows {
  OPENCV_LIBS_VERSION = 345
- OPENCV_COMPILED_VERSION_64 = vc15
- OPENCV_COMPILED_VERSION_86 = vc15
+
+contains(DEFINES, RDK_USE_CUDA) {
+    OPENCV_COMPILED_VERSION_64 = vc15cuda
+    OPENCV_COMPILED_VERSION_86 = vc15
+} else {
+    OPENCV_COMPILED_VERSION_64 = vc15
+    OPENCV_COMPILED_VERSION_86 = vc15
+}
 
  # функция добавляет постфикс(второй параметр) ко всем элементам первого входного параметра
  defineReplace(addPostfix) {
@@ -168,10 +184,39 @@ windows {
  LIBS += -lboost_thread \
   -lboost_system \
   -lboost_program_options \
-  -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-  -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-  -lpython3.5m \
   -lpthread
+
+  LIBS += -L/usr/lib/x86_64-linux-gnu -lcurl
+
+contains(DEFINES, RDK_USE_PYTHON) {
+    LIBS += -L$$(BOOST_PATH)/lib -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
+  -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
+  -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
+  -lpython3.5m
+
+    isEmpty(ANACONDA_PATH) {
+         LIBS += -L/usr/lib/python$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}/config-$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m-x86_64-linux-gnu -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}
+         LIBS += -L/usr/lib/python$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}/config-$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m-aarch64-linux-gnu -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}
+    } else {
+         LIBS += -L$$(ANACONDA_PATH)/lib -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR} #-lpng -lssl
+    }
+}
+contains(DEFINES, RDK_USE_DARKNET) {
+  LIBS+= -L$$PWD/../../../Libraries/Rdk-DarknetLib/ThirdParty/darknet -ldarknet
+}
+
+}
+
+contains(DEFINES, RDK_USE_TENSORFLOW) {
+
+windows {
+LIBS += -L$$(TENSORFLOW_PATH)/bazel-bin/tensorflow -llibtensorflow_framework.dll -llibtensorflow.dll -llibtensorflow_cc.dll
+
+} else:unix {
+    LIBS += -L$$(TENSORFLOW_PATH)/bazel-bin/tensorflow -ltensorflow_cc -ltensorflow_framework
+
+}
+
 }
 
 SOURCES += \

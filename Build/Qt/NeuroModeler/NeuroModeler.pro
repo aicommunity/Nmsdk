@@ -179,16 +179,15 @@ windows {
  LIBS += -lboost_thread \
   -lboost_system \
   -lboost_program_options \
-  -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-  -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-  -lpython3.5m \
   -lpthread
 
   LIBS += -L/usr/lib/x86_64-linux-gnu -lcurl
 
 contains(DEFINES, RDK_USE_PYTHON) {
     LIBS += -L$$(BOOST_PATH)/lib -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-  -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR}
+  -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
+  -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
+  -lpython3.5m
 
     isEmpty(ANACONDA_PATH) {
          LIBS += -L/usr/lib/python$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}/config-$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m-x86_64-linux-gnu -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}
