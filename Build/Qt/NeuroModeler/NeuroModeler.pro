@@ -116,6 +116,7 @@ windows:!windows-g++ {
 }
 
 #including opencv
+windows {
 OPENCV_LIBS_LIST = -L/usr/local/lib/ -lopencv_core \
  -L/usr/local/lib/ -lopencv_highgui \
  -L/usr/local/lib/ -lopencv_imgproc \
@@ -123,7 +124,6 @@ OPENCV_LIBS_LIST = -L/usr/local/lib/ -lopencv_core \
  -L/usr/local/lib/ -lopencv_video \
  -L/usr/local/lib/ -lopencv_imgcodecs
 
-windows {
  OPENCV_LIBS_VERSION = 345
 
 contains(DEFINES, RDK_USE_CUDA) {
@@ -160,7 +160,15 @@ contains(DEFINES, RDK_USE_CUDA) {
   LIBS += -L$$(OPENCV3_PATH)/build/x64/$${OPENCV_COMPILED_VERSION_64}/lib/Release $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION})
  }
 }
-} else:unix {
+} else:unix:!android {
+
+OPENCV_LIBS_LIST = -L/usr/local/lib/ -lopencv_core \
+ -L/usr/local/lib/ -lopencv_highgui \
+ -L/usr/local/lib/ -lopencv_imgproc \
+ -L/usr/local/lib/ -lopencv_videoio \
+ -L/usr/local/lib/ -lopencv_video \
+ -L/usr/local/lib/ -lopencv_imgcodecs
+
  LIBS += $$OPENCV_LIBS_LIST
 }
 
@@ -175,6 +183,11 @@ windows {
 } else {
  LIBS += -L$$(BOOST_PATH)/$${BOOST_COMPILED_VERSION}-x64/lib/
 }
+} else:android {
+ LIBS += -L$$(BOOST_PATH)/android-ndk-19/libs/llvm/x86/
+ LIBS += -lboost_thread \
+  -lboost_system \
+  -lboost_program_options
 } else:unix {
  LIBS += -lboost_thread \
   -lboost_system \
