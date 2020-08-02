@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
@@ -229,6 +229,12 @@ LIBS += -L$$(TENSORFLOW_PATH)/bazel-bin/tensorflow -llibtensorflow_framework.dll
 
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
+    ../../../Rdk/GUI/Qt/UWatch.cpp \
+    ../../../Rdk/GUI/Qt/UWatchChart.cpp \
+    ../../../Rdk/GUI/Qt/UWatchChartOption.cpp \
+    ../../../Rdk/GUI/Qt/UWatchSerie.cpp \
+    ../../../Rdk/GUI/Qt/UWatchSeriesOption.cpp \
+    ../../../Rdk/GUI/Qt/UWatchTab.cpp \
         main.cpp\
     ../../../Rdk/GUI/Qt/UComponentsListWidget.cpp \
     ../../../Rdk/GUI/Qt/UGEngineControllWidget.cpp \
@@ -281,6 +287,12 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UComponentPropertyChanger.h \
     ../../../Rdk/GUI/Qt/UStatusPanel.h \
     ../../../Rdk/GUI/Qt/USettingsReaderWidget.h \
+    ../../../Rdk/GUI/Qt/UWatch.h \
+    ../../../Rdk/GUI/Qt/UWatchChart.h \
+    ../../../Rdk/GUI/Qt/UWatchChartOption.h \
+    ../../../Rdk/GUI/Qt/UWatchSerie.h \
+    ../../../Rdk/GUI/Qt/UWatchSeriesOption.h \
+    ../../../Rdk/GUI/Qt/UWatchTab.h \
     ../../../Rdk/GUI/Qt/qcustomplot.h \
     ../../../Rdk/GUI/Qt/UGraphWidget.h \
     ../../../Rdk/GUI/Qt/UStructSingleGraph.h \
@@ -310,5 +322,10 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UGraphControlDialog.ui \
     ../../../Rdk/GUI/Qt/UGraphPaintWidget.ui \
     ../../../Rdk/GUI/Qt/UTableInfo.ui \
+    ../../../Rdk/GUI/Qt/UWatch.ui \
+    ../../../Rdk/GUI/Qt/UWatchChart.ui \
+    ../../../Rdk/GUI/Qt/UWatchChartOption.ui \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.ui \
-    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.ui
+    ../../../Rdk/GUI/Qt/UWatchSeriesOption.ui \
+    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.ui \
+    ../../../Rdk/GUI/Qt/UWatchTab.ui
