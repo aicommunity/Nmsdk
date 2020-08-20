@@ -14,7 +14,7 @@ TEMPLATE = app
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
 windows {
-message("Using "msvc-$$(VisualStudioVersion) compiler)
+message("NeuroModeler: using "msvc-$$(VisualStudioVersion) compiler)
 DESTDIR = $$PWD/../../../Bin/Platform/Win/
     LIBS += -L$$(ANACONDA_PATH)/libs/
 
