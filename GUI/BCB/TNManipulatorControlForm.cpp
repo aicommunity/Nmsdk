@@ -436,12 +436,17 @@ void TNManipulatorControlForm::ReadComponentData(void)
   return;
  ReadComponentName=ManipulatorName;
 
- Angle=RDK::dynamic_pointer_cast<RDK::UADItem>(RDK::GetModel()->GetComponentL(ReadComponentName))->GetOutputData(1).Double[0];
-
- if(RDK::dynamic_pointer_cast<RDK::UADItem>(RDK::GetModel()->GetComponentL(ReadComponentName))->GetNumOutputs()>3)
+  RDK::UEPtr<NMSDK::NDCEngine> engine = (RDK::GetModel()->GetComponentL<NMSDK::NDCEngine>(ReadComponentName));
+ RDK::UEPtr<NMSDK::NPendulumAndCart> pendulum = (RDK::GetModel()->GetComponentL<NMSDK::NPendulumAndCart>(ReadComponentName));
+ if(engine)
  {
-  Movement=RDK::dynamic_pointer_cast<RDK::UADItem>(RDK::GetModel()->GetComponentL(ReadComponentName))->GetOutputData(3).Double[0];
-  Movement*=100; // в 1 метре 10 пикселей
+  Angle=engine->OutputAngle->As<double>(0);
+ }
+ else if(pendulum)
+ {
+	Angle=pendulum->Angle->As<double>(0);
+	Movement=pendulum->Movement->As<double>(0);
+	Movement*=100; // в 1 метре 10 пикселей
  }
 }
 
