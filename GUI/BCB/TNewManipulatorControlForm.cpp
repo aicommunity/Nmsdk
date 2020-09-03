@@ -500,16 +500,20 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
  // RDK::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(source_name))->DisconnectAllItems();
  RDK::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1",true))->DisconnectAll();
 
- res&=net->CreateLink(man_name,0,source_name,0);
- res&=net->CreateLink(man_name,1,source_name,1);
- res&=net->CreateLink(man_name,2,source_name,2);
+ if(man_name == "DCEngine")
+ {
+  res&=net->CreateLink(man_name,"OutputAngle",source_name,"Input");
+  //res&=net->CreateLink(man_name+".OutputAngleSpeed",0,source_name);
+  //res&=net->CreateLink(man_name+".OutputMomentum",0,source_name);
+  res&=net->CreateLink(cs_name+".NManipulatorInput1","Output",man_name,"InputVoltage");
+ }
  if(man_name == "PendulumAndCart")
  {
   res&=net->CreateLink(man_name,3,source_name,3);
   res&=net->CreateLink(man_name,4,source_name,4);
  }
 
- res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
+ //res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
 
  RDK::UEPtr<NMSDK::NControlObjectSource> source=net->GetComponentL<NMSDK::NControlObjectSource>(source_name,true);
  if(source)
@@ -532,7 +536,7 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
   if(man_name == "DCEngine")
   {
    indexes.Resize(3);
-   indexes[0]=1;
+   indexes[0]=0;//1;
    indexes[1]=2;
    indexes[2]=0;
    data_mul.Assign(3,1.0);
@@ -561,12 +565,19 @@ void TNewManipulatorControlForm::ReadComponentData(void)
   return;
  ReadComponentName=ManipulatorName;
 
- Angle=RDK::dynamic_pointer_cast<RDK::UADItem>(model->GetComponentL(ReadComponentName))->GetOutputData(1).Double[0];
-
- if(RDK::dynamic_pointer_cast<RDK::UADItem>(model->GetComponentL(ReadComponentName))->GetNumOutputs()>3)
+ double angle = 0;
+ //RDK::UEPtr<NMSDK::NDCEngine> engine = RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(model->GetComponentL(ReadComponentName));
+ RDK::UEPtr<NMSDK::NDCEngine> engine = (model->GetComponentL<NMSDK::NDCEngine>(ReadComponentName));
+ RDK::UEPtr<NMSDK::NPendulumAndCart> pendulum = (model->GetComponentL<NMSDK::NPendulumAndCart>(ReadComponentName));
+ if(engine)
  {
-  Movement=RDK::dynamic_pointer_cast<RDK::UADItem>(model->GetComponentL(ReadComponentName))->GetOutputData(3).Double[0];
-  Movement*=100; // в 1 метре 10 пикселей
+  Angle=engine->OutputAngle->As<double>(0);
+ }
+ else if(pendulum)
+ {
+	Angle=pendulum->Angle->As<double>(0);
+	Movement=pendulum->Movement->As<double>(0);
+	Movement*=100; // в 1 метре 10 пикселей
  }
 
 
