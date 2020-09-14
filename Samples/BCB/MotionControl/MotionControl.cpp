@@ -18,8 +18,8 @@ USEFORM("..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.cpp", UComponentsContr
 USEFORM("..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.cpp", UComponentLinksFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.cpp", UComponentsControlForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TServerOptionsFrameUnit.cpp", ServerOptionsFrame); /* TFrame: File Type */
-USEFORM("..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.cpp", IdTcpResultBroadcasterForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFrameUnit.cpp", IdTcpResultBroadcasterFrame); /* TFrame: File Type */
+USEFORM("..\..\..\Rdk\GUI\BCB\TMatrixFormUnit.cpp", MatrixForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.cpp", UVisualControllerFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UClassesDescriptionsFormUnit.cpp", UClassesDescriptionsForm);
 USEFORM("..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.cpp", UVisualControllerForm);
@@ -42,6 +42,7 @@ USEFORM("..\..\..\RDK\GUI\BCB\UGEngineControlFormUnit.cpp", UGEngineControlForm)
 USEFORM("..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.cpp", UFavoriteComponentInfoForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.cpp", UEngineMonitorForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.cpp", UEngineMonitorFrame); /* TFrame: File Type */
+USEFORM("..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.cpp", IdTcpResultBroadcasterForm);
 USEFORM("..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.cpp", NNewPositionControlElementForm);
 USEFORM("..\..\..\GUI\BCB\TNManipulatorControlForm.cpp", NManipulatorControlForm);
 USEFORM("..\..\..\GUI\BCB\TNAstaticGyroUnit.cpp", NAstaticGyro);
@@ -53,7 +54,7 @@ USEFORM("..\..\..\RDK\GUI\BCB\TApplicationOptionsFormUnit.cpp", ApplicationOptio
 USEFORM("..\..\..\RDK\GUI\BCB\TApplicationOptionsFrameUnit.cpp", ApplicationOptionsFrame); /* TFrame: File Type */
 USEFORM("..\..\..\GUI\BCB\NDrawManipulatorFormUnit.cpp", NDrawManipulatorForm);
 USEFORM("..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.cpp", NDrawManipulatorFrame); /* TFrame: File Type */
-USEFORM("..\..\..\Rdk\GUI\BCB\TMatrixFormUnit.cpp", MatrixForm);
+USEFORM("..\..\..\GUI\BCB\NNeuronTrainerFrameUnit.cpp", NNeuronTrainerFrame); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 extern HANDLE RdkLockStartapMutex;
 bool RdkIsApplicationRunning(void);
