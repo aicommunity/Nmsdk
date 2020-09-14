@@ -3,16 +3,16 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include "NNeuronTrainerFrameUnit.h"
+#include "NNeuronTrainerFormUnit.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "UDrawEngineFrameUnit"
-#pragma link "UWatchFrameUnit"
+#pragma link "NNeuronTrainerFrameUnit"
+#pragma link "TUVisualControllerFrameUnit"
 #pragma resource "*.dfm"
-TNNeuronTrainerFrame *NNeuronTrainerFrame;
+TNNeuronTrainerForm *NNeuronTrainerForm;
 //---------------------------------------------------------------------------
-__fastcall TNNeuronTrainerFrame::TNNeuronTrainerFrame(TComponent* Owner)
-	: TUVisualControllerFrame(Owner)
+__fastcall TNNeuronTrainerForm::TNNeuronTrainerForm(TComponent* Owner)
+	: TUVisualControllerForm(Owner)
 {
 }
 //---------------------------------------------------------------------------

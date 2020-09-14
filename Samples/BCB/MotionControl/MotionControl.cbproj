@@ -273,6 +273,12 @@
             <DependentOn>..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.h</DependentOn>
             <BuildOrder>50</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\..\GUI\BCB\NNeuronTrainerFormUnit.cpp">
+            <Form>NNeuronTrainerForm</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\..\GUI\BCB\NNeuronTrainerFormUnit.h</DependentOn>
+            <BuildOrder>82</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\..\GUI\BCB\NNeuronTrainerFrameUnit.cpp">
             <Form>NNeuronTrainerFrame</Form>
             <FormType>dfm</FormType>
@@ -549,23 +555,24 @@
         <ResFiles Include="MotionControl.res">
             <BuildOrder>1</BuildOrder>
         </ResFiles>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentIOFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UClassesDescriptionsFrameUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentIOFrameUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UClassesListFormUnit.dfm"/>
-        <FormResources Include="..\..\..\Rdk\GUI\BCB\UComponentsLinksHintFormUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\TServerOptionsFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\Rdk\GUI\BCB\TMatrixFormUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UClassesDescriptionsFormUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UClassesDescriptionsFrameUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFrameUnit.dfm"/>
+        <FormResources Include="..\..\..\Rdk\GUI\BCB\UComponentsLinksHintFormUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsControlFormUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFormUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentLinksFrameUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\TServerOptionsFrameUnit.dfm"/>
+        <FormResources Include="..\..\..\Rdk\GUI\BCB\TMatrixFormUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFrameUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFormUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\TUVisualControllerFrameUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\TUHttpServerUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UComponentsListFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UServerControlFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
@@ -584,7 +591,6 @@
         <FormResources Include="..\..\..\RDK\GUI\BCB\UFavoriteComponentInfoFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UEngineMonitorFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\TIdTcpResultBroadcasterFormUnit.dfm"/>
         <FormResources Include="..\..\..\GUI\BCB\TNNewPositionControlElementFormUnit.dfm"/>
         <FormResources Include="..\..\..\GUI\BCB\TNManipulatorControlForm.dfm"/>
         <FormResources Include="..\..\..\GUI\BCB\TNAstaticGyroUnit.dfm"/>
@@ -594,9 +600,10 @@
         <FormResources Include="..\..\..\RDK\GUI\BCB\TEnchancedStringGrid.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\TApplicationOptionsFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\TApplicationOptionsFrameUnit.dfm"/>
-        <FormResources Include="..\..\..\GUI\BCB\NDrawManipulatorFormUnit.dfm"/>
         <FormResources Include="..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.dfm"/>
+        <FormResources Include="..\..\..\GUI\BCB\NDrawManipulatorFormUnit.dfm"/>
         <FormResources Include="..\..\..\GUI\BCB\NNeuronTrainerFrameUnit.dfm"/>
+        <FormResources Include="..\..\..\GUI\BCB\NNeuronTrainerFormUnit.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -699,13 +706,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicStatisticLib.lib" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicLib.lib" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicLib.lib" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicStatisticLib.lib" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -1279,13 +1286,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
