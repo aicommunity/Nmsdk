@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "NNeuronTrainerFormUnit.h"
+#include "UComponentsListFormUnit.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "NNeuronTrainerFrameUnit"
@@ -16,3 +17,15 @@ __fastcall TNNeuronTrainerForm::TNNeuronTrainerForm(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
+void __fastcall TNNeuronTrainerForm::FormCreate(TObject *Sender)
+{
+ TUComponentsListFrame::ComponentControllers["NNeuronTrainer"]=NNeuronTrainerForm;
+}
+
+// Создание копии этого компонента
+TUVisualControllerForm* TNNeuronTrainerForm::New(TComponent *owner)
+{
+ return new TNNeuronTrainerForm(owner);
+}
+//---------------------------------------------------------------------------
+

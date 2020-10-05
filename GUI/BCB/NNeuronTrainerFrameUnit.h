@@ -52,6 +52,7 @@ __published:	// IDE-managed Components
 	TLabel *TrainLabel;
 	TButton *StartTrainingButton;
 	TButton *StopTrainingButton;
+	void __fastcall StartToolButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNNeuronTrainerFrame(TComponent* Owner);
