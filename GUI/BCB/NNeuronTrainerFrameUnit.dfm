@@ -269,13 +269,13 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     TabOrder = 4
     object Splitter3: TSplitter
       Left = 1
-      Top = 1
+      Top = 201
       Width = 609
       Height = 8
       Cursor = crVSplit
       Align = alTop
-      ExplicitTop = 121
-      ExplicitWidth = 392
+      ExplicitLeft = -2
+      ExplicitTop = 206
     end
     object Panel4: TPanel
       Left = 1
@@ -317,11 +317,12 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     end
     object Panel5: TPanel
       Left = 1
-      Top = 9
+      Top = 1
       Width = 609
       Height = 200
       Align = alTop
       TabOrder = 1
+      ExplicitTop = 9
       inline UDrawEngineFrame1: TUDrawEngineFrame
         Left = 1
         Top = 1
@@ -343,8 +344,9 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
           Left = 367
           Height = 149
           Visible = False
-          ExplicitLeft = 150
-          ExplicitHeight = 125
+          ExplicitLeft = 366
+          ExplicitTop = 4
+          ExplicitHeight = 149
         end
         inherited Panel1: TPanel
           Left = 378
@@ -363,6 +365,8 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
                 inherited StringGrid: TStringGrid
                   Width = 219
                   Height = 98
+                  ExplicitLeft = 1
+                  ExplicitTop = -1
                   ExplicitWidth = 219
                   ExplicitHeight = 98
                 end
