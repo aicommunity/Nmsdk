@@ -11,6 +11,7 @@ object NNeuronTrainerForm: TNNeuronTrainerForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inline NNeuronTrainerFrame1: TNNeuronTrainerFrame
@@ -26,104 +27,67 @@ object NNeuronTrainerForm: TNNeuronTrainerForm
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 611
-    ExplicitHeight = 844
+    ExplicitWidth = 723
     inherited Splitter2: TSplitter
       Left = 594
-    end
-    inherited Panel1: TPanel
-      inherited NumInputDendriteLabeledEdit: TLabeledEdit
-        EditLabel.ExplicitLeft = 0
-        EditLabel.ExplicitTop = -16
-        EditLabel.ExplicitWidth = 143
-      end
+      ExplicitLeft = 594
     end
     inherited ToolBar1: TToolBar
       Width = 723
-      ExplicitWidth = 844
+      ExplicitWidth = 723
     end
     inherited StatusBar1: TStatusBar
       Width = 723
-      ExplicitWidth = 844
+      ExplicitWidth = 723
     end
     inherited Panel2: TPanel
       Left = 602
-      ExplicitLeft = 723
-      ExplicitTop = 29
-      inherited DelayLabeledEdit: TLabeledEdit
-        EditLabel.ExplicitLeft = 0
-        EditLabel.ExplicitTop = -16
-        EditLabel.ExplicitWidth = 82
-      end
-      inherited FrequencyLabeledEdit: TLabeledEdit
-        EditLabel.ExplicitLeft = 0
-        EditLabel.ExplicitTop = -16
-        EditLabel.ExplicitWidth = 106
-      end
-      inherited MaxDendriteLengthLabeledEdit: TLabeledEdit
-        EditLabel.ExplicitLeft = 0
-        EditLabel.ExplicitTop = -16
-        EditLabel.ExplicitWidth = 149
-      end
-      inherited LTZThresholdLabeledEdit: TLabeledEdit
-        EditLabel.ExplicitLeft = 0
-        EditLabel.ExplicitTop = -16
-        EditLabel.ExplicitWidth = 119
-      end
+      ExplicitLeft = 602
     end
     inherited Panel3: TPanel
       Width = 490
-      ExplicitLeft = 104
-      ExplicitWidth = 611
+      ExplicitWidth = 490
       inherited Splitter3: TSplitter
         Width = 488
+        ExplicitWidth = 488
       end
       inherited Panel4: TPanel
         Width = 488
-        ExplicitTop = 209
-        ExplicitWidth = 609
-        ExplicitHeight = 171
+        ExplicitWidth = 488
         inherited UWatchFrame1: TUWatchFrame
           Width = 486
-          ExplicitWidth = 607
-          ExplicitHeight = 169
+          ExplicitWidth = 486
           inherited Chart1: TChart
             Width = 486
-            ExplicitWidth = 607
-            ExplicitHeight = 169
+            ExplicitWidth = 486
+            PrintMargins = (
+              15
+              14
+              15
+              14)
           end
         end
       end
       inherited Panel5: TPanel
         Width = 488
-        ExplicitWidth = 609
+        ExplicitWidth = 488
         inherited UDrawEngineFrame1: TUDrawEngineFrame
           Width = 486
-          ExplicitWidth = 607
-          ExplicitHeight = 198
+          ExplicitWidth = 486
           inherited Splitter1: TSplitter
             Left = 246
+            ExplicitLeft = 246
           end
           inherited Panel1: TPanel
             Left = 257
-            ExplicitLeft = 378
-            ExplicitHeight = 149
+            ExplicitLeft = 257
             inherited UClassesListFrame: TUClassesListFrame
-              ExplicitHeight = 147
               inherited PageControl: TPageControl
-                ExplicitHeight = 126
-                inherited NameTabSheet: TTabSheet
-                  ExplicitWidth = 219
-                  ExplicitHeight = 98
-                  inherited StringGrid: TStringGrid
-                    ExplicitWidth = 219
-                    ExplicitHeight = 98
-                  end
-                end
                 inherited LibsControlTabSheet: TTabSheet
                   ExplicitHeight = 373
                   inherited Splitter1: TSplitter
                     Top = 83
+                    ExplicitTop = 83
                   end
                   inherited Panel1: TPanel
                     Top = 250
@@ -139,28 +103,22 @@ object NNeuronTrainerForm: TNNeuronTrainerForm
           end
           inherited Panel2: TPanel
             Width = 246
-            ExplicitWidth = 367
-            ExplicitHeight = 149
+            ExplicitWidth = 246
             inherited ScrollBox: TScrollBox
               Width = 244
-              ExplicitWidth = 365
-              ExplicitHeight = 147
-              inherited Image: TImage
-                ExplicitTop = 9
-              end
+              ExplicitWidth = 244
             end
           end
           inherited Panel3: TPanel
             Width = 486
-            ExplicitTop = 149
-            ExplicitWidth = 607
+            ExplicitWidth = 486
           end
         end
       end
     end
     inherited ImageList1: TImageList
       Bitmap = {
-        494C010103000800180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+        494C0101030008001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
         0000000000003600000028000000400000001000000001002000000000000010
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000

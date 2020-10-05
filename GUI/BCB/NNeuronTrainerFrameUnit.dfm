@@ -91,7 +91,6 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     Caption = 'ToolBar1'
     Images = ImageList1
     TabOrder = 1
-    ExplicitWidth = 588
     object StartToolButton: TToolButton
       Left = 0
       Top = 0
@@ -100,6 +99,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       ImageIndex = 0
       ParentShowHint = False
       ShowHint = True
+      OnClick = StartToolButtonClick
     end
     object ToolButton1: TToolButton
       Left = 23
@@ -142,7 +142,6 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     Width = 844
     Height = 19
     Panels = <>
-    ExplicitWidth = 588
   end
   object Panel2: TPanel
     Left = 723
@@ -151,8 +150,6 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     Height = 381
     Align = alRight
     TabOrder = 3
-    ExplicitLeft = 719
-    ExplicitTop = 23
     object SettingsLabel: TLabel
       Left = 6
       Top = 6
@@ -270,17 +267,15 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     Height = 381
     Align = alClient
     TabOrder = 4
-    ExplicitLeft = 97
-    ExplicitWidth = 456
     object Splitter3: TSplitter
       Left = 1
-      Top = 1
+      Top = 201
       Width = 609
       Height = 8
       Cursor = crVSplit
       Align = alTop
-      ExplicitTop = 121
-      ExplicitWidth = 392
+      ExplicitLeft = -2
+      ExplicitTop = 206
     end
     object Panel4: TPanel
       Left = 1
@@ -289,9 +284,6 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       Height = 171
       Align = alClient
       TabOrder = 0
-      ExplicitTop = 185
-      ExplicitWidth = 392
-      ExplicitHeight = 195
       inline UWatchFrame1: TUWatchFrame
         Left = 1
         Top = 1
@@ -308,24 +300,29 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
         TabStop = True
         ExplicitLeft = 1
         ExplicitTop = 1
-        ExplicitWidth = 390
-        ExplicitHeight = 193
+        ExplicitWidth = 607
+        ExplicitHeight = 169
         inherited Chart1: TChart
           Width = 607
           Height = 169
-          ExplicitWidth = 390
-          ExplicitHeight = 193
+          ExplicitWidth = 607
+          ExplicitHeight = 169
+          PrintMargins = (
+            15
+            14
+            15
+            14)
         end
       end
     end
     object Panel5: TPanel
       Left = 1
-      Top = 9
+      Top = 1
       Width = 609
       Height = 200
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 433
+      ExplicitTop = 9
       inline UDrawEngineFrame1: TUDrawEngineFrame
         Left = 1
         Top = 1
@@ -341,50 +338,47 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
         TabOrder = 0
         ExplicitLeft = 1
         ExplicitTop = 1
-        ExplicitWidth = 390
-        ExplicitHeight = 174
+        ExplicitWidth = 607
+        ExplicitHeight = 198
         inherited Splitter1: TSplitter
           Left = 367
           Height = 149
           Visible = False
-          ExplicitLeft = 150
-          ExplicitHeight = 125
+          ExplicitLeft = 366
+          ExplicitTop = 4
+          ExplicitHeight = 149
         end
         inherited Panel1: TPanel
           Left = 378
           Height = 149
           Visible = False
-          ExplicitLeft = 161
-          ExplicitHeight = 125
+          ExplicitLeft = 378
+          ExplicitHeight = 149
           inherited UClassesListFrame: TUClassesListFrame
             Height = 147
-            ExplicitHeight = 123
+            ExplicitHeight = 147
             inherited PageControl: TPageControl
               Height = 126
               ActivePage = UDrawEngineFrame1.UClassesListFrame.NameTabSheet
-              ExplicitHeight = 102
+              ExplicitHeight = 126
               inherited NameTabSheet: TTabSheet
                 inherited StringGrid: TStringGrid
                   Width = 219
                   Height = 98
+                  ExplicitLeft = 1
+                  ExplicitTop = -1
+                  ExplicitWidth = 219
+                  ExplicitHeight = 98
                 end
               end
               inherited LibsControlTabSheet: TTabSheet
-                ExplicitHeight = 74
                 inherited Splitter1: TSplitter
-                  Top = -216
                   ExplicitTop = -216
                 end
                 inherited Panel1: TPanel
-                  Top = -49
-                  ExplicitTop = -49
                   inherited DeleteLibraryButton: TButton
                     ExplicitTop = 51
                   end
-                end
-                inherited GroupBox2: TGroupBox
-                  Top = -209
-                  ExplicitTop = -209
                 end
               end
             end
@@ -393,24 +387,25 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
         inherited Panel2: TPanel
           Width = 367
           Height = 149
-          ExplicitWidth = 150
-          ExplicitHeight = 125
+          ExplicitWidth = 367
+          ExplicitHeight = 149
           inherited ScrollBox: TScrollBox
             Width = 365
             Height = 147
             VertScrollBar.Position = 5
-            ExplicitWidth = 148
-            ExplicitHeight = 123
+            ExplicitWidth = 365
+            ExplicitHeight = 147
             inherited Image: TImage
               Top = 9
+              ExplicitTop = 9
             end
           end
         end
         inherited Panel3: TPanel
           Top = 149
           Width = 607
-          ExplicitTop = 125
-          ExplicitWidth = 390
+          ExplicitTop = 149
+          ExplicitWidth = 607
         end
       end
     end
@@ -418,7 +413,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
   object ImageList1: TImageList
     Left = 552
     Bitmap = {
-      494C010103000800140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000800180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

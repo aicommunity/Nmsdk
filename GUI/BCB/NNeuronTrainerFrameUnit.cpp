@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "NNeuronTrainerFrameUnit.h"
+#include "UGEngineControlFormUnit.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "UDrawEngineFrameUnit"
@@ -16,3 +17,9 @@ __fastcall TNNeuronTrainerFrame::TNNeuronTrainerFrame(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
+void __fastcall TNNeuronTrainerFrame::StartToolButtonClick(TObject *Sender)
+{
+ UGEngineControlForm->Start1Click(Sender);
+}
+//---------------------------------------------------------------------------
+
