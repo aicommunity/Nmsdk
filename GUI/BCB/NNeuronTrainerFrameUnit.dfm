@@ -159,6 +159,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
+      OnClick = OpenToolButtonClick
     end
     object ToolButton5: TToolButton
       Left = 116
@@ -176,6 +177,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       ImageIndex = 4
       ParentShowHint = False
       ShowHint = True
+      OnClick = SaveToolButtonClick
     end
   end
   object StatusBar1: TStatusBar

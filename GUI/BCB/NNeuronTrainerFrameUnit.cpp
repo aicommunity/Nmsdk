@@ -33,7 +33,7 @@ void TNNeuronTrainerFrame::ALoadParameters(RDK::USerStorageXML &xml)
 
 void TNNeuronTrainerFrame::AAfterLoadProject(void)
 {
- UpdateInterface();
+ UpdateInterface(true);
 }
 
 void TNNeuronTrainerFrame::AUpdateInterface(void)
@@ -219,6 +219,18 @@ void __fastcall TNNeuronTrainerFrame::ResetToolButtonClick(TObject *Sender)
  trainer->IsNeedToTrain = is_need_to_train;
  trainer->Reset();
  PauseToolButtonClick(Sender);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNNeuronTrainerFrame::OpenToolButtonClick(TObject *Sender)
+{
+	UGEngineControlForm->LoadProjectItemClick(Sender);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNNeuronTrainerFrame::SaveToolButtonClick(TObject *Sender)
+{
+	UGEngineControlForm->SaveProjectItemClick(Sender);
 }
 //---------------------------------------------------------------------------
 

@@ -68,6 +68,8 @@ __published:	// IDE-managed Components
 	void __fastcall StartTrainingButtonClick(TObject *Sender);
 	void __fastcall StopTrainingButtonClick(TObject *Sender);
 	void __fastcall ResetToolButtonClick(TObject *Sender);
+	void __fastcall OpenToolButtonClick(TObject *Sender);
+	void __fastcall SaveToolButtonClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations
