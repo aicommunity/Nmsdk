@@ -31,6 +31,11 @@ void TNNeuronTrainerFrame::ALoadParameters(RDK::USerStorageXML &xml)
     //
 }
 
+void TNNeuronTrainerFrame::AAfterLoadProject(void)
+{
+ UpdateInterface();
+}
+
 void TNNeuronTrainerFrame::AUpdateInterface(void)
 {
  RDK::UELockPtr<RDK::UNet> model=RDK::GetModelLock<RDK::UNet>();
@@ -60,6 +65,8 @@ void TNNeuronTrainerFrame::AUpdateInterface(void)
  NumInputDendriteUpDown->Max = trainer->MaxDendriteLength;
  // Порог в низкопороговой зоне
  LTZThresholdLabeledEdit->Text = FloatToStr(trainer->LTZThreshold);
+ // Использование фиксированного порога
+ FixedLTZThresholdCheckBox->Checked = trainer->UseFixedLTZThreshold;
 
  // Процесс обучения
  bool is_training = trainer->IsNeedToTrain;
@@ -156,6 +163,8 @@ void __fastcall TNNeuronTrainerFrame::SetParamsButtonClick(TObject *Sender)
  trainer->MaxDendriteLength = StrToFloat(MaxDendriteLengthLabeledEdit->Text);
  // Порог в низкопороговой зоне
  trainer->LTZThreshold = StrToFloat(LTZThresholdLabeledEdit->Text);
+ // Использование фиксированного порога
+ trainer->UseFixedLTZThreshold = FixedLTZThresholdCheckBox->Checked;
 
  UpdateInterface();
 }
@@ -192,6 +201,24 @@ void __fastcall TNNeuronTrainerFrame::StopTrainingButtonClick(TObject *Sender)
  StopTrainingButton->Enabled = false;
 
  trainer->IsNeedToTrain = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNNeuronTrainerFrame::ResetToolButtonClick(TObject *Sender)
+{
+ RDK::UELockPtr<RDK::UNet> model=RDK::GetModelLock<RDK::UNet>();
+ if(!model)
+  return;
+ std::string ccname = "NeuronTrainer";
+ RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str()));
+ if(!trainer)
+  return;
+
+ bool is_need_to_train = trainer->IsNeedToTrain;
+ trainer->IsNeedToTrain = !is_need_to_train;
+ trainer->IsNeedToTrain = is_need_to_train;
+ trainer->Reset();
+ PauseToolButtonClick(Sender);
 }
 //---------------------------------------------------------------------------
 

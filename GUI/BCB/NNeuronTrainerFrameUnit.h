@@ -58,7 +58,8 @@ __published:	// IDE-managed Components
 	TToolButton *ToolButton2;
 	TToolButton *OpenToolButton;
 	TToolButton *ToolButton5;
-	TToolButton *SaveToolButton6;
+	TToolButton *SaveToolButton;
+	TCheckBox *FixedLTZThresholdCheckBox;
 	void __fastcall StartToolButtonClick(TObject *Sender);
 	void __fastcall PauseToolButtonClick(TObject *Sender);
 	void __fastcall SetDendritesButtonClick(TObject *Sender);
@@ -66,6 +67,7 @@ __published:	// IDE-managed Components
 	void __fastcall SetParamsButtonClick(TObject *Sender);
 	void __fastcall StartTrainingButtonClick(TObject *Sender);
 	void __fastcall StopTrainingButtonClick(TObject *Sender);
+	void __fastcall ResetToolButtonClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations
@@ -78,6 +80,7 @@ virtual void ASaveParameters(RDK::USerStorageXML &xml);
 // Загружает параметры интерфейса из xml
 virtual void ALoadParameters(RDK::USerStorageXML &xml);
 
+virtual void AAfterLoadProject(void);
 
 void AUpdateInterface(void);
 

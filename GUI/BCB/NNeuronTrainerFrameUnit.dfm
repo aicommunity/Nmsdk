@@ -141,6 +141,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
+      OnClick = ResetToolButtonClick
     end
     object ToolButton2: TToolButton
       Left = 85
@@ -167,7 +168,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       ImageIndex = 4
       Style = tbsSeparator
     end
-    object SaveToolButton6: TToolButton
+    object SaveToolButton: TToolButton
       Left = 124
       Top = 0
       Hint = 'Save'
@@ -191,6 +192,8 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     Height = 381
     Align = alRight
     TabOrder = 3
+    ExplicitLeft = 675
+    ExplicitTop = 23
     object SettingsLabel: TLabel
       Left = 6
       Top = 6
@@ -206,7 +209,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     end
     object TrainLabel: TLabel
       Left = 6
-      Top = 272
+      Top = 300
       Width = 82
       Height = 13
       Caption = 'Train Controls:'
@@ -259,7 +262,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     end
     object SetParamsButton: TButton
       Left = 6
-      Top = 210
+      Top = 242
       Width = 75
       Height = 25
       Caption = 'Set'
@@ -274,7 +277,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     end
     object StartTrainingButton: TButton
       Left = 6
-      Top = 291
+      Top = 319
       Width = 91
       Height = 25
       Caption = 'Start Training'
@@ -289,7 +292,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     end
     object StopTrainingButton: TButton
       Left = 6
-      Top = 322
+      Top = 350
       Width = 91
       Height = 25
       Caption = 'Stop Training'
@@ -301,6 +304,14 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       ParentFont = False
       TabOrder = 6
       OnClick = StopTrainingButtonClick
+    end
+    object FixedLTZThresholdCheckBox: TCheckBox
+      Left = 6
+      Top = 201
+      Width = 97
+      Height = 17
+      Caption = 'Fixed Threshold'
+      TabOrder = 7
     end
   end
   object Panel3: TPanel
