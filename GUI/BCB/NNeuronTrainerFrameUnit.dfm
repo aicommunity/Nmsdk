@@ -194,8 +194,6 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
     Height = 381
     Align = alRight
     TabOrder = 3
-    ExplicitLeft = 675
-    ExplicitTop = 23
     object SettingsLabel: TLabel
       Left = 6
       Top = 6
@@ -415,7 +413,10 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
             ExplicitWidth = 365
             ExplicitHeight = 147
             inherited Image: TImage
+              Left = 15
               Top = 9
+              OnMouseUp = UDrawEngineFrame1ImageMouseUp
+              ExplicitLeft = 15
               ExplicitTop = 9
             end
           end
@@ -432,7 +433,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
   object ImageList1: TImageList
     Left = 552
     Bitmap = {
-      494C010105000800300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

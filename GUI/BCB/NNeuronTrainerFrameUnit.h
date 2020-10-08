@@ -70,6 +70,8 @@ __published:	// IDE-managed Components
 	void __fastcall ResetToolButtonClick(TObject *Sender);
 	void __fastcall OpenToolButtonClick(TObject *Sender);
 	void __fastcall SaveToolButtonClick(TObject *Sender);
+	void __fastcall UDrawEngineFrame1ImageMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
 
 private:	// User declarations
 public:		// User declarations

@@ -5,6 +5,7 @@
 
 #include "NNeuronTrainerFormUnit.h"
 #include "UComponentsListFormUnit.h"
+#include "UGEngineControlFormUnit.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "NNeuronTrainerFrameUnit"
@@ -26,6 +27,27 @@ void __fastcall TNNeuronTrainerForm::FormCreate(TObject *Sender)
 TUVisualControllerForm* TNNeuronTrainerForm::New(TComponent *owner)
 {
  return new TNNeuronTrainerForm(owner);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNNeuronTrainerForm::Action1Execute(TObject *Sender)
+{
+ if(UGEngineControlForm->DisableAdminForm)
+  return;
+
+ if(UGEngineControlForm->Visible == false)
+ {
+  UGEngineControlForm->Show();
+  RDK::UIVisualControllerStorage::UpdateInterface(false);
+ }
+ else
+  UGEngineControlForm->Hide();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNNeuronTrainerForm::FormShow(TObject *Sender)
+{
+ NNeuronTrainerFrame1->UDrawEngineFrame1->ComponentsListFrame=UGEngineControlForm->UComponentsListFrame1;
 }
 //---------------------------------------------------------------------------
 
