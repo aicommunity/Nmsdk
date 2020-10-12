@@ -234,3 +234,13 @@ void __fastcall TNNeuronTrainerFrame::SaveToolButtonClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TNNeuronTrainerFrame::UDrawEngineFrame1ImageMouseUp(TObject *Sender,
+		  TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+  UDrawEngineFrame1->ImageMouseUp(Sender, Button, Shift, X, Y);
+  UDrawEngineFrame1->SelectComponent(UGEngineControlForm->UComponentsListFrame1->GetSelectedComponentName());
+  UDrawEngineFrame1->UpdateInterface();
+}
+//---------------------------------------------------------------------------
+
