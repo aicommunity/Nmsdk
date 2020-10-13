@@ -228,7 +228,7 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
   else
    UseSimpleAfferentsCheckBox->Checked=false;
 
-  if(*ControlSystem->MCNeuroObjectName == "NNewSynSPNeuron")
+  if(*ControlSystem->MCNeuroObjectName == "NNewSPNeuron")
    UseNewNeuronsCheckBox->Checked=true;
   else
    UseNewNeuronsCheckBox->Checked=false;
@@ -490,7 +490,7 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
   return true;
 
  bool res=true;
- std::string source_name=cs_name+".NManipulatorSource1";
+ std::string source_name=cs_name+".NManipulatorSource";
 // net->BreakConnectorLink(source_name,0);
 // net->BreakConnectorLink(source_name,1);
 // net->BreakConnectorLink(source_name,2);
@@ -502,9 +502,9 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
 
  if(man_name == "DCEngine")
  {
-  res&=net->CreateLink(man_name,"OutputAngle",source_name,"Input");
-  //res&=net->CreateLink(man_name+".OutputAngleSpeed",0,source_name);
-  //res&=net->CreateLink(man_name+".OutputMomentum",0,source_name);
+  res&=net->CreateLink(man_name,"OutputAngle",source_name+"1","Input");
+  res&=net->CreateLink(man_name,"OutputAngleSpeed",source_name+"2","Input");
+  res&=net->CreateLink(man_name,"OutputMomentum",source_name+"3","Input");
   res&=net->CreateLink(cs_name+".NManipulatorInput1","Output",man_name,"InputVoltage");
  }
  if(man_name == "PendulumAndCart")
@@ -1501,9 +1501,9 @@ void __fastcall TNewManipulatorControlForm::UseNewNeuronsCheckBoxClick(TObject *
   return;
 
  if(UseNewNeuronsCheckBox->Checked)
-  ControlSystem->MCNeuroObjectName= "NNewSynSPNeuron";
+  ControlSystem->MCNeuroObjectName= "NNewSPNeuron";
  else
-  ControlSystem->MCNeuroObjectName= "NSynSPNeuron";
+  ControlSystem->MCNeuroObjectName= "NSPNeuron";
 
  ControlSystem->Reset();
  UpdateInterface();
