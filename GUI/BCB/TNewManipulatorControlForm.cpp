@@ -490,7 +490,7 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
   return true;
 
  bool res=true;
- std::string source_name=cs_name+".NManipulatorSource";
+ std::string source_name=cs_name+".NManipulatorSource1";
 // net->BreakConnectorLink(source_name,0);
 // net->BreakConnectorLink(source_name,1);
 // net->BreakConnectorLink(source_name,2);
@@ -502,9 +502,9 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
 
  if(man_name == "DCEngine")
  {
-  res&=net->CreateLink(man_name,"OutputAngle",source_name+"1","Input");
-  res&=net->CreateLink(man_name,"OutputAngleSpeed",source_name+"2","Input");
-  res&=net->CreateLink(man_name,"OutputMomentum",source_name+"3","Input");
+  res&=net->CreateLink(man_name,"OutputAngle",source_name,"Input");
+  res&=net->CreateLink(man_name,"OutputAngleSpeed",source_name,"Input");
+  res&=net->CreateLink(man_name,"OutputMomentum",source_name,"Input");
   res&=net->CreateLink(cs_name+".NManipulatorInput1","Output",man_name,"InputVoltage");
  }
  if(man_name == "PendulumAndCart")
