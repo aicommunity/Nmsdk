@@ -509,8 +509,16 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
  }
  if(man_name == "PendulumAndCart")
  {
-  res&=net->CreateLink(man_name,3,source_name,3);
-  res&=net->CreateLink(man_name,4,source_name,4);
+  //res&=net->CreateLink(man_name,3,source_name,3);
+  //res&=net->CreateLink(man_name,4,source_name,4);
+  res&=net->CreateLink(man_name,"Angle",source_name,"Input");
+  res&=net->CreateLink(man_name,"Movement",source_name,"Input");
+  res&=net->CreateLink(man_name,"Speed",source_name,"Input");
+  res&=net->CreateLink(man_name,"MovementSpeed",source_name,"Input");
+  res&=net->CreateLink(man_name,"Acceleration",source_name,"Input");
+
+  res&=net->CreateLink(cs_name+".NManipulatorInput1","Output",man_name,"Input1");
+  res&=net->CreateLink(cs_name+".NManipulatorInput1","Output",man_name,"Input2");
  }
 
  //res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
@@ -1249,7 +1257,7 @@ void __fastcall TNewManipulatorControlForm::FormCreate(TObject *Sender)
  int max_number_of_mc=10;
 
  TUComponentsListFrame::ComponentControllers["N2AsfNewSimplestAfferentBranchedEngineControl"]=NewManipulatorControlForm;
- TUComponentsListFrame::ComponentControllers["N2AsfSimplestAfferentBranchedEngineControl"]=NewManipulatorControlForm;
+ TUComponentsListFrame::ComponentControllers["NEngineMotionControl"]=NewManipulatorControlForm;
 
 }
 //---------------------------------------------------------------------------
