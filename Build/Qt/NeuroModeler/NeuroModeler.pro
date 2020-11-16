@@ -5,6 +5,12 @@
 #-------------------------------------------------
 
 QT       += core gui charts
+QT += network
+
+
+QT      += sql
+QT      += xml
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
@@ -150,7 +156,10 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UGraphPaintWidget.cpp \
     ../../../Rdk/GUI/Qt/UTableInfo.cpp \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.cpp \
-    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.cpp
+    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.cpp \
+    ../../../Rdk/GUI/Qt/UTcpServerControlWidget.cpp \
+    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp
+
 
 HEADERS += \
         ../../../Libraries/Libraries.h \
@@ -189,7 +198,9 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UTableInfo.h \
     UWatchWidgetForm.h \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.h \
-    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.h
+    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.h \
+    ../../../Rdk/GUI/Qt/UTcpServerControlWidget.h \
+    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.h
 
 FORMS   += \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.ui \
@@ -216,7 +227,9 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.ui \
     ../../../Rdk/GUI/Qt/UWatchSeriesOption.ui \
     ../../../Rdk/GUI/Qt/UWatchSettingsDialog.ui \
-    ../../../Rdk/GUI/Qt/UWatchTab.ui
+    ../../../Rdk/GUI/Qt/UTcpServerControlWidget.ui \
+    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.ui
+
 
 # ???????? OpenCV
 contains(DEFINES, RDK_USE_OPENCV) {

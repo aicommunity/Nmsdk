@@ -7,7 +7,8 @@
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
 #include "../../../Rdk/GUI/Qt/UEngineControlQt.h"
-
+#include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
+#include "../../../Rdk/Core/Application/Qt/UServerTransportTcpQt.h"
 using namespace std;
 
 namespace po = boost::program_options;
@@ -25,7 +26,7 @@ int main(int argc, char* argv[])
  using namespace RDK;
  QCoreApplication a(argc, argv);
 
- RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon> AppCore;
+ RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
 
  if (CmdVariablesMap.count("help"))
  {
@@ -39,7 +40,7 @@ int main(int argc, char* argv[])
 
  std::string configuration_name;
 
- int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(),
+ int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModelerConsole.ini",
               (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(),
               argc, argv);
 
