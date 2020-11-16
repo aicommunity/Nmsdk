@@ -123,11 +123,11 @@
         <Debugger_DebugSourcePath>E:\Science-Repo\Nmsdk\Rdk\Core\Engine\;E:\Science-Repo\Nmsdk\Rdk\Deploy\Include\;E:\Science-Repo\Nmsdk\Rdk\Core\Math\;E:\Science-Repo\Nmsdk\Rdk\Core\Utilities\;D:\Nmsdk\Rdk\Core\Engine\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <VerInfo_Release>7</VerInfo_Release>
         <BCC_AllCodeguardOptions>false</BCC_AllCodeguardOptions>
-        <VerInfo_Build>90</VerInfo_Build>
+        <VerInfo_Build>91</VerInfo_Build>
         <Defines>_DEBUG;$(Defines)</Defines>
         <VerInfo_Debug>true</VerInfo_Debug>
         <LinkPackageStatics>rtl.lib;vcl.lib;vclimg.lib;TVidGrab.lib;vclx.lib;VclSmp.lib;IndyCore.lib;IndySystem.lib;IndyProtocols.lib;inet.lib;Tee.lib;inetwinsockets.lib;xmlrtl.lib;vclactnband.lib</LinkPackageStatics>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.7.90;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.7.91;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
@@ -714,13 +714,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicStatisticLib.lib" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicLib.lib" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicLib.lib" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicStatisticLib.lib" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -1294,13 +1294,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

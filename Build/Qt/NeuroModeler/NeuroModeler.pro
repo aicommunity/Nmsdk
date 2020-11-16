@@ -109,6 +109,7 @@ windows:!windows-g++ {
  }
 
  LIBS += -L$$PWD/../../../Bin/Platform/Win/Lib.Qt/ $$NMSDK_LIBS_LIST -lcurl.qt
+ LIBS +=   -lWldap32 -lWs2_32 -lCrypt32
  PRE_TARGETDEPS += $$NMSDK_LIBS_FILES
 
 } else:unix {
