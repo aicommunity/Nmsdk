@@ -44,7 +44,7 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
  libs_list.push_back(&NMSDK::WinAPIActLibrary);
  #endif
  libs_list.push_back(&NMSDK::PulseClassicModelsLib);
- libs_list.push_back(&RDK::YCorticalLibrary);
+// libs_list.push_back(&RDK::YCorticalLibrary);
  return true;
 }
 
