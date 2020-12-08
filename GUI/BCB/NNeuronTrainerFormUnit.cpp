@@ -51,3 +51,21 @@ void __fastcall TNNeuronTrainerForm::FormShow(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TNNeuronTrainerForm::SaveState1Click(TObject *Sender)
+{
+ UGEngineControlForm->SaveProjectItemClick(Sender);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNNeuronTrainerForm::Exit1Click(TObject *Sender)
+{
+ Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TNNeuronTrainerForm::WatchForm1Click(TObject *Sender)
+{
+ UGEngineControlForm->WatchWindow1Click(Sender);
+}
+//---------------------------------------------------------------------------
+

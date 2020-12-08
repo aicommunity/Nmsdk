@@ -13,6 +13,7 @@
 #include "TUVisualControllerFrameUnit.h"
 #include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
+#include <Vcl.Menus.hpp>
 //---------------------------------------------------------------------------
 class TNNeuronTrainerForm : public TUVisualControllerForm
 {
@@ -20,9 +21,18 @@ __published:	// IDE-managed Components
 	TNNeuronTrainerFrame *NNeuronTrainerFrame1;
 	TActionList *ActionList1;
 	TAction *Action1;
+	TMainMenu *MainMenu1;
+	TMenuItem *File1;
+	TMenuItem *Windows1;
+	TMenuItem *WatchForm1;
+	TMenuItem *Exit1;
+	TMenuItem *SaveState1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall Action1Execute(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
+	void __fastcall SaveState1Click(TObject *Sender);
+	void __fastcall Exit1Click(TObject *Sender);
+	void __fastcall WatchForm1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNNeuronTrainerForm(TComponent* Owner);

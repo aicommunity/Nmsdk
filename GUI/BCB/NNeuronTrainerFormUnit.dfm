@@ -10,6 +10,7 @@ object NNeuronTrainerForm: TNNeuronTrainerForm
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   OnCreate = FormCreate
   OnShow = FormShow
@@ -55,6 +56,19 @@ object NNeuronTrainerForm: TNNeuronTrainerForm
       inherited Panel4: TPanel
         Width = 488
         ExplicitWidth = 488
+        inherited UWatchFrame1: TUWatchFrame
+          Width = 486
+          ExplicitWidth = 486
+          inherited Chart1: TChart
+            Width = 486
+            ExplicitWidth = 486
+            PrintMargins = (
+              15
+              14
+              15
+              14)
+          end
+        end
       end
       inherited Panel5: TPanel
         Width = 488
@@ -100,7 +114,7 @@ object NNeuronTrainerForm: TNNeuronTrainerForm
     end
     inherited ImageList1: TImageList
       Bitmap = {
-        494C010105000800400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+        494C010105000800440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
         0000000000003600000028000000400000002000000001002000000000000020
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
@@ -379,6 +393,28 @@ object NNeuronTrainerForm: TNNeuronTrainerForm
       Caption = 'Action1'
       ShortCut = 16496
       OnExecute = Action1Execute
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 272
+    Top = 8
+    object File1: TMenuItem
+      Caption = 'File'
+      object SaveState1: TMenuItem
+        Caption = 'Save State'
+        OnClick = SaveState1Click
+      end
+      object Exit1: TMenuItem
+        Caption = 'Exit'
+        OnClick = Exit1Click
+      end
+    end
+    object Windows1: TMenuItem
+      Caption = 'Windows'
+      object WatchForm1: TMenuItem
+        Caption = 'Watch Form'
+        OnClick = WatchForm1Click
+      end
     end
   end
 end
