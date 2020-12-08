@@ -549,13 +549,14 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\..\Rdk\GUI\BCB\UWatchFramePageUnit.h</DependentOn>
-            <BuildOrder>83</BuildOrder>
+            <BuildOrder>82</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.cpp">
             <Form>UWatchFrame</Form>
+            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>..\..\..\RDK\GUI\BCB\UWatchFrameUnit.h</DependentOn>
-            <BuildOrder>23</BuildOrder>
+            <BuildOrder>83</BuildOrder>
         </CppCompile>
         <CppCompile Include="MotionControl.cpp">
             <BuildOrder>0</BuildOrder>
@@ -586,9 +587,7 @@
         <FormResources Include="..\..\..\RDK\GUI\BCB\USeriesControlUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFrameUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UListInputFormUnit.dfm"/>
-        <FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFormUnit.dfm"/>
-        <FormResources Include="..\..\..\Rdk\GUI\BCB\UWatchFramePageUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UImagesFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.dfm"/>
         <FormResources Include="..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.dfm"/>
@@ -613,6 +612,8 @@
         <FormResources Include="..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.dfm"/>
         <FormResources Include="..\..\..\GUI\BCB\NNeuronTrainerFormUnit.dfm"/>
         <FormResources Include="..\..\..\GUI\BCB\NDrawManipulatorFormUnit.dfm"/>
+        <FormResources Include="..\..\..\Rdk\GUI\BCB\UWatchFramePageUnit.dfm"/>
+        <FormResources Include="..\..\..\RDK\GUI\BCB\UWatchFrameUnit.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -715,13 +716,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Nmsdk-PhysLib.lib" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicLib.lib" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Rdk-BasicLib.lib" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\..\Bin\Platform\Win\Lib.Bcb\Nmsdk-PhysLib.lib" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -1295,13 +1296,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

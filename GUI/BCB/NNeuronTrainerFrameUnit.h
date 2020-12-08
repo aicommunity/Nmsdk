@@ -19,6 +19,7 @@
 #include "UWatchFramePageUnit.h"
 
 #include "..\..\Libraries\Nmsdk-PulseNeuronLib\Core\NNeuronTrainer.h"
+#include <Vcl.Menus.hpp>
 //#include "nmsdk_cpp_initdll.h"
 //---------------------------------------------------------------------------
 class TNNeuronTrainerFrame : public TUVisualControllerFrame
@@ -60,6 +61,7 @@ __published:	// IDE-managed Components
 	TToolButton *ToolButton5;
 	TToolButton *SaveToolButton;
 	TCheckBox *FixedLTZThresholdCheckBox;
+	TUWatchFrame *UWatchFrame1;
 	void __fastcall StartToolButtonClick(TObject *Sender);
 	void __fastcall PauseToolButtonClick(TObject *Sender);
 	void __fastcall SetDendritesButtonClick(TObject *Sender);
