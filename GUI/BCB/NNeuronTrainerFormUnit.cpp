@@ -70,3 +70,10 @@ void __fastcall TNNeuronTrainerForm::WatchForm1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TNNeuronTrainerForm::FormClose(TObject *Sender, TCloseAction &Action)
+
+{
+ Exit1Click(Sender);
+}
+//---------------------------------------------------------------------------
+

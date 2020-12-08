@@ -33,6 +33,7 @@ __published:	// IDE-managed Components
 	void __fastcall SaveState1Click(TObject *Sender);
 	void __fastcall Exit1Click(TObject *Sender);
 	void __fastcall WatchForm1Click(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TNNeuronTrainerForm(TComponent* Owner);
