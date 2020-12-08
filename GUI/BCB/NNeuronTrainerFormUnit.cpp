@@ -59,7 +59,8 @@ void __fastcall TNNeuronTrainerForm::SaveState1Click(TObject *Sender)
 
 void __fastcall TNNeuronTrainerForm::Exit1Click(TObject *Sender)
 {
- Close();
+ UGEngineControlForm->Pause1Click(Sender);
+ UGEngineControlForm->Close1Click(Sender);
 }
 //---------------------------------------------------------------------------
 
