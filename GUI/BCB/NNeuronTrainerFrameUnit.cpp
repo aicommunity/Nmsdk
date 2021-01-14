@@ -119,7 +119,14 @@ void __fastcall TNNeuronTrainerFrame::SetDendritesButtonClick(TObject *Sender)
   return;
 
  // Количество дендритов
- int dend_num = StrToInt(NumInputDendriteLabeledEdit->Text);
+ int dend_num = 1;
+ try {
+  dend_num = StrToInt(NumInputDendriteLabeledEdit->Text);
+ }
+ catch(EConvertError &)
+ {
+ }
+
  trainer->NumInputDendrite = dend_num;
  // Задержки сигналов на дендритах
  for(int i = 0; i < dend_num; i++)

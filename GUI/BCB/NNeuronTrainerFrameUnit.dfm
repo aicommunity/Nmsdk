@@ -337,6 +337,36 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
       Height = 171
       Align = alClient
       TabOrder = 0
+      inline UWatchFrame1: TUWatchFrame
+        Left = 1
+        Top = 1
+        Width = 607
+        Height = 169
+        Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        TabStop = True
+        ExplicitLeft = 1
+        ExplicitTop = 1
+        ExplicitWidth = 607
+        ExplicitHeight = 169
+        inherited Chart1: TChart
+          Width = 607
+          Height = 169
+          ExplicitWidth = 607
+          ExplicitHeight = 169
+          PrintMargins = (
+            15
+            14
+            15
+            14)
+        end
+      end
     end
     object Panel5: TPanel
       Left = 1
@@ -397,6 +427,11 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
                 inherited Splitter1: TSplitter
                   ExplicitTop = -216
                 end
+                inherited Panel1: TPanel
+                  inherited DeleteLibraryButton: TButton
+                    ExplicitTop = 51
+                  end
+                end
               end
             end
           end
@@ -424,7 +459,9 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
         inherited Panel3: TPanel
           Top = 149
           Width = 607
-          ExplicitTop = 149
+          Visible = False
+          ExplicitLeft = 4
+          ExplicitTop = 150
           ExplicitWidth = 607
         end
       end
@@ -433,7 +470,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
   object ImageList1: TImageList
     Left = 552
     Bitmap = {
-      494C010105000800340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
