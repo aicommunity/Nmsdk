@@ -14,7 +14,7 @@
 #include "Rdk-CvGuiLib/Deploy/Include/Lib.h"
 #include "Rdk-CvStatisticLib/Deploy/Include/Lib.h"
 #include "Rdk-CvSimulatorLib/Deploy/Include/Lib.h"
-#include "Rdk-CRLib/Deploy/Include/Lib.h"
+//#include "Rdk-CRLib/Deploy/Include/Lib.h"
 #include "Rdk-NoiseGenLib/Deploy/Include/Lib.h"
 
 #ifndef __BORLANDC__
@@ -34,7 +34,7 @@
 #include "Nmsdk-SensorLib/Deploy/Include/Lib.h"
 #include "Nmsdk-SourceLib/Deploy/Include/Lib.h"
 #include "Nmsdk-PulseClassicModelsLib/Core/Lib.h"
-#include "Nmsdk-YCorticalLib/Core/UYCorticalLibrary.h"
+//#include "Nmsdk-YCorticalLib/Core/UYCorticalLibrary.h"
 
 namespace RDK {
 

@@ -9,7 +9,7 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
 // RDK::UItemData::DefaultDataSize=sizeof(double);
  libs_list.push_back(&RDK::BCLLibrary);
  libs_list.push_back(&RDK::IOLibrary);
- libs_list.push_back(&RDK::CRLibrary);
+ //libs_list.push_back(&RDK::CRLibrary);
  libs_list.push_back(&RDK::StatisticLibrary);
  libs_list.push_back(&RDK::SourceLibrary);
  libs_list.push_back(&RDK::RDKVideoCaptureLibrary);
