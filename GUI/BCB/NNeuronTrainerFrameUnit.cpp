@@ -42,7 +42,7 @@ void TNNeuronTrainerFrame::AUpdateInterface(void)
  if(!model)
   return;
  std::string ccname = "NeuronTrainer";
- RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str()));
+ RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str(),true));
  if(!trainer)
   return;
 
@@ -114,7 +114,7 @@ void __fastcall TNNeuronTrainerFrame::SetDendritesButtonClick(TObject *Sender)
  if(!model)
   return;
  std::string ccname = "NeuronTrainer";
- RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str()));
+ RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str(),true));
  if(!trainer)
   return;
 
@@ -158,7 +158,7 @@ void __fastcall TNNeuronTrainerFrame::SetParamsButtonClick(TObject *Sender)
  if(!model)
   return;
  std::string ccname = "NeuronTrainer";
- RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str()));
+ RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str(),true));
  if(!trainer)
   return;
 
@@ -183,7 +183,7 @@ void __fastcall TNNeuronTrainerFrame::StartTrainingButtonClick(TObject *Sender)
  if(!model)
   return;
  std::string ccname = "NeuronTrainer";
- RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str()));
+ RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str(),true));
  if(!trainer)
   return;
 
@@ -200,7 +200,7 @@ void __fastcall TNNeuronTrainerFrame::StopTrainingButtonClick(TObject *Sender)
  if(!model)
   return;
  std::string ccname = "NeuronTrainer";
- RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str()));
+ RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str(),true));
  if(!trainer)
   return;
 
@@ -217,7 +217,7 @@ void __fastcall TNNeuronTrainerFrame::ResetToolButtonClick(TObject *Sender)
  if(!model)
   return;
  std::string ccname = "NeuronTrainer";
- RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str()));
+ RDK::UEPtr<NMSDK::NNeuronTrainer> trainer=RDK::dynamic_pointer_cast<NMSDK::NNeuronTrainer>(model->GetComponentL(ccname.c_str(),true));
  if(!trainer)
   return;
 

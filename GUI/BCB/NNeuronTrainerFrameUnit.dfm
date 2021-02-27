@@ -414,25 +414,21 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
               ActivePage = UDrawEngineFrame1.UClassesListFrame.NameTabSheet
               ExplicitHeight = 126
               inherited NameTabSheet: TTabSheet
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 219
                 ExplicitHeight = 98
                 inherited StringGrid: TStringGrid
-                  Width = 219
                   Height = 98
-                  ExplicitWidth = 219
                   ExplicitHeight = 98
                 end
               end
+              inherited LibsTabSheet: TTabSheet
+                inherited TreeView: TTreeView
+                  Width = 499
+                  Height = 494
+                end
+              end
               inherited LibsControlTabSheet: TTabSheet
-                ExplicitLeft = 0
-                ExplicitTop = 0
                 inherited Splitter1: TSplitter
                   ExplicitTop = -216
-                end
-                inherited GroupBox2: TGroupBox
-                  ExplicitHeight = 283
                 end
               end
             end
@@ -471,7 +467,7 @@ inherited NNeuronTrainerFrame: TNNeuronTrainerFrame
   object ImageList1: TImageList
     Left = 552
     Bitmap = {
-      494C010105000800440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
