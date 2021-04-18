@@ -36,6 +36,8 @@ CONFIG -= debug_and_release debug_and_release_target
 
 DEFINES += QT_DLL QT_WIDGETS_LIB
 
+DEFINES += RDK_DISABLE_EXT_GUI
+
 VERSION = $$system(hg parents --template '{rev}')
 DEFINES += RDK_APP_VERSION=$$VERSION
 
