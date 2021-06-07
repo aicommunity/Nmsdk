@@ -231,7 +231,8 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UWatchSeriesOption.ui \
     ../../../Rdk/GUI/Qt/UWatchSettingsDialog.ui \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.ui \
-    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.ui
+    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.ui \
+    ../../../Rdk/GUI/Qt/UWatchTab.ui
 
 
 # ???????? OpenCV
