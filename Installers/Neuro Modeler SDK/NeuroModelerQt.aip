@@ -2,7 +2,7 @@
 Version=6.5
 Edition=1
 GUID={4E882EBA-970C-E877-051C-CA30D9346389}
-AppName=Neuro Modeler SDK
+AppName=Neuro Modeler
 AppVersion=1.0.8.0
 AppDescription=
 CompanyName=
@@ -56,12 +56,12 @@ LinkSQLE=http://www.microsoft.com/en-us/download/details.aspx?id=30438
 PackageType=0
 DataFileName=
 SetupFolder=.
-SetupFileName=NeuroModelerSdk-<AppVersion>
-SetupFile=.\NeuroModelerSdk-<AppVersion>.exe
+SetupFileName=NeuroModelerQt-<AppVersion>
+SetupFile=.\NeuroModelerQt-<AppVersion>.exe
 IconFile=Default
-SourceDir=.\InstallSources
+SourceDir=.\InstallSourcesQt
 InstallationPath=<SystemDrive>\<AppName>
-MainExecutable=<InstallDir>\Bin\Platform\Win\MotionControl.exe
+MainExecutable=<InstallDir>\Bin\Platform\Win\NeuroModeler.exe
 ProgramGroup=<AppName>
 Uninstall=1
 ShowAddRemove=1
@@ -107,7 +107,7 @@ InfoSerialReq=0
 SerialsCount=0
 RestartComputer=0
 LaunchFile=1
-LaunchFileName=<InstallDir>\Bin\Platform\Win\MotionControl.exe
+LaunchFileName=<InstallDir>\Bin\Platform\Win\NeuroModeler.exe
 LaunchFileChecked=1
 ViewReadme=0
 ViewReadmeFile=
@@ -137,7 +137,7 @@ Russian=
 
 [Shortcuts]
 0=<ProgramGroup>*?Uninstall <AppName>*?<InstallDir>\Uninstall.exe*?*?*?<InstallDir>*?*?0*?Normal
-1=<ProgramGroup>*?MotionControl*?<InstallDir>\Bin\Platform\Win\MotionControl.exe*?Motion Control*?*?<InstallDir>\Bin\Platform\Win*?*?0*?Normal
+1=<ProgramGroup>*?NeuroModeler*?<InstallDir>\Bin\Platform\Win\NeuroModeler.exe*?Neuro Modeler*?*?<InstallDir>\Bin\Platform\Win*?*?0*?Normal
 2=<ProgramGroup>*?Application GUI Description*?<InstallDir>\Docs\RDK.GuiDescription.Bcb.Ru.doc*?*?*?<InstallDir>\Docs*?*?0*?Normal
 3=<ProgramGroup>*?Application Runtime Configuration Description*?<InstallDir>\Docs\RDK.RuntimeConfigurationDescription.Ru.doc*?*?*?<InstallDir>\Docs*?*?0*?Normal
 4=<ProgramGroup>*?Neuron Model Description*?<InstallDir>\Docs\NMSDK.NeuronModel.Ru.doc*?*?*?<InstallDir>\Docs*?*?0*?Normal
