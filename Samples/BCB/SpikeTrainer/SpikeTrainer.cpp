@@ -30,7 +30,9 @@ USEFORM("..\..\..\RDK\GUI\BCB\UShowProgressBarUnit.cpp", UShowProgressBarForm);
 USEFORM("..\..\..\RDK\GUI\BCB\USeriesControlUnit.cpp", USeriesControlForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UImagesFrameUnit.cpp", UImagesFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UListInputFormUnit.cpp", UListInputForm);
+USEFORM("..\..\..\RDK\GUI\BCB\UWatchFrameUnit.cpp", UWatchFrame); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UWatchFormUnit.cpp", UWatchForm);
+USEFORM("..\..\..\Rdk\GUI\BCB\UWatchFramePageUnit.cpp", UWatchFramePage); /* TFrame: File Type */
 USEFORM("..\..\..\RDK\GUI\BCB\UImagesFormUnit.cpp", UImagesForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UCreateProjectWizardFormUnit.cpp", UCreateProjectWizardForm);
 USEFORM("..\..\..\RDK\GUI\BCB\UDrawEngineFrameUnit.cpp", UDrawEngineFrame); /* TFrame: File Type */
@@ -55,8 +57,6 @@ USEFORM("..\..\..\GUI\BCB\NNeuronTrainerFrameUnit.cpp", NNeuronTrainerFrame); /*
 USEFORM("..\..\..\GUI\BCB\NDrawManipulatorFrameUnit.cpp", NDrawManipulatorFrame); /* TFrame: File Type */
 USEFORM("..\..\..\GUI\BCB\NNeuronTrainerFormUnit.cpp", NNeuronTrainerForm);
 USEFORM("..\..\..\GUI\BCB\NDrawManipulatorFormUnit.cpp", NDrawManipulatorForm);
-USEFORM("..\..\..\Rdk\GUI\BCB\UWatchFramePageUnit.cpp", UWatchFramePage); /* TFrame: File Type */
-USEFORM("..\..\..\RDK\GUI\BCB\UWatchFrameUnit.cpp", UWatchFrame); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 extern HANDLE RdkLockStartapMutex;
 bool RdkIsApplicationRunning(void);
@@ -70,7 +70,8 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
         Application->MainFormOnTaskBar = true;
 		if(RdkIsApplicationRunning())
 		 Application->Terminate();
-        Application->CreateForm(__classid(TUGEngineControlForm), &UGEngineControlForm);
+        Application->CreateForm(__classid(TNNeuronTrainerForm), &NNeuronTrainerForm);
+		Application->CreateForm(__classid(TUGEngineControlForm), &UGEngineControlForm);
 		Application->CreateForm(__classid(TUClassesListForm), &UClassesListForm);
 		Application->CreateForm(__classid(TUComponentsListForm), &UComponentsListForm);
 		Application->CreateForm(__classid(TUComponentsPerformanceForm), &UComponentsPerformanceForm);
@@ -98,7 +99,6 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TUComponentsLinksHintForm), &UComponentsLinksHintForm);
 		Application->CreateForm(__classid(TMatrixForm), &MatrixForm);
 		Application->CreateForm(__classid(TNNeuronTrainerFrame), &NNeuronTrainerFrame);
-		Application->CreateForm(__classid(TNNeuronTrainerForm), &NNeuronTrainerForm);
 		ApplicationInitialized=true;
    		Application->Run();
 		CloseHandle(RdkLockStartapMutex);

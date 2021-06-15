@@ -15,7 +15,6 @@ See file license.txt for more information
 #ifndef N_GRAPHICS_H
 #define N_GRAPHICS_H
 
-#include "../Libraries/Nmsdk-BasicLib/Core/NSupport.h"
 #include "rdk.h"
 
 namespace NMSDK {

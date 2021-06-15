@@ -7,99 +7,26 @@
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
 #include "../../../Rdk/GUI/Qt/UEngineControlQt.h"
-
+#include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
+#include "../../../Rdk/Core/Application/Qt/UServerTransportTcpQt.h"
 using namespace std;
 
 namespace po = boost::program_options;
+namespace RDK {
 
-po::options_description CmdLineDescription("Allowed options");
-po::variables_map CmdVariablesMap;
+extern po::options_description CmdLineDescription;
+extern po::variables_map CmdVariablesMap;
+
+}
 
 std::string Version("0.7.0");
-//std::map<std::string,std::string> ParsedArgs;
-
-/// Ёкзепл€р прототипа декодера команд
-RDK::URpcDecoderInternal RdkRpcDecoder;
-
-/// Ёкзепл€р класса диспетчера команд
-RDK::URpcDispatcher RdkRpcDispatcher;
-
-/// Ёкзепл€р класса приложени€
-RDK::UApplication RdkApplication;
-
-/// Ёкземпл€р класса контроллера сервера
-RDK::UServerControl RdkServerControl;
-RDK::URpcDecoderCommon RdkRpcDecoderCommon;
-
-/// Ёкземпл€р класса контроллера расчета
-UEngineControlQt RdkEngineControl;
-
-/// Ёкзепл€р класса проекта
-RDK::UProject RdkProject;
-
-int ParseArgs(int argc, char* argv[], std::map<std::string,std::string> &parsed_args)
-{
- if(argc<0 || argc>100)
-  return 9000001;
-
- parsed_args["Application"]=argv[0];
- int index=1;
- for(int i=1;i<argc-1;i++)
- {
-  parsed_args[argv[i]]=argv[i+1];
-  index+=2;
- }
-
- return RDK_SUCCESS;
-}
-
-int RdkApplicationInit(const std::string &application_name)
-{
- RdkApplication.SetApplicationFileName(application_name);
- // √рузим настройки приложени€
- std::string opt_name=RDK::extract_file_name(application_name);
- if(opt_name.size()>4)
-  opt_name=opt_name.substr(0,opt_name.size()-4);
- std::string app_path=RDK::extract_file_path(application_name);
- RdkApplication.SetWorkDirectory(app_path);
-
- RdkRpcDispatcher.SetDecoderPrototype(&RdkRpcDecoder);
- RdkRpcDispatcher.SetCommonDecoder(&RdkRpcDecoderCommon);
- RdkApplication.SetRpcDispatcher(&RdkRpcDispatcher);
- RdkApplication.SetServerControl(&RdkServerControl);
- RdkApplication.SetEngineControl(&RdkEngineControl);
- RdkApplication.SetProject(&RdkProject);
-// RdkApplication.SetLogDir("EventsLog/");
- RdkApplication.SetDebugMode(true);
- RdkApplication.SetDebugMode(false);
- if(!RdkApplication.Init())
-  return 9000010;
- return RDK_SUCCESS;
-}
-
-void InitCmdParser(void)
-{
- CmdLineDescription.add_options()
-    ("help", "produce help message")
-    ("conf", po::value<string>(), "Configuration file name")
-    ("ctime", po::value<double>(), "Calculation time interval, in seconds")
-    ("info", po::value<string>(), "Information about core, possible: CollectionsList, ClassesList, CollectionClassesList, ClassProperties")
-    ("class", po::value<string>(), "Class name")
-    ("collection", po::value<string>(), "collection name")
-    ("mask", po::value<unsigned>(), "Property mask")
-    ("save_model_bmp", po::value<string>(), "Component name")
-    ("session", po::value<unsigned>(), "Session Id")
-;
-}
 
 int main(int argc, char* argv[])
 {
+ using namespace RDK;
  QCoreApplication a(argc, argv);
 
- InitCmdParser();
-
- po::store(po::parse_command_line(argc, argv, CmdLineDescription), CmdVariablesMap);
- po::notify(CmdVariablesMap);
+ RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
 
  if (CmdVariablesMap.count("help"))
  {
@@ -112,8 +39,12 @@ int main(int argc, char* argv[])
  cout << "NMSDK console version "<<Version<<endl;
 
  std::string configuration_name;
- res=RdkApplicationInit(argv[0]);
- if(res != RDK_SUCCESS)
+
+ int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModelerConsole.ini",
+              (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(),
+              argc, argv);
+
+ if(init_res != RDK_SUCCESS)
  {
   cout<<"Init: Fail!"<<endl;
   return res;
@@ -201,7 +132,7 @@ int main(int argc, char* argv[])
   cout << "Session Id=" << session_id<<" has been started"<<endl;
   while(true)
   {
-   Sleep(1);
+   RDK::Sleep(1);
   }
   cout << "Session Id=" << session_id<<" has been stopped"<<endl;
   return a.exec();
@@ -225,7 +156,7 @@ int main(int argc, char* argv[])
  }
 
  // Loading configuration
- bool open_res=RdkApplication.OpenProject(configuration_name);
+ bool open_res=AppCore.application.OpenProject(configuration_name);
  RDK::GetEnvironmentLock(0)->SetMaxCalcTime(calc_time_interval);
  if(open_res != true)
  {
@@ -304,7 +235,7 @@ int main(int argc, char* argv[])
  cout<<"Ready to calc."<<endl;
 
 
- RdkApplication.StartChannel(0);
+ AppCore.application.StartChannel(0);
  double calc_time(0.0);
  while(!RDK::GetEnvironmentLock(0)->IsCalcFinished())
  {
@@ -316,7 +247,7 @@ int main(int argc, char* argv[])
  }
  calc_time=RDK::GetModelLock(0)->GetTime().GetDoubleTime();
  cout<<"Model time: "<<calc_time<<endl;
- RdkApplication.PauseChannel(0);
+ AppCore.application.PauseChannel(0);
  RDK::Sleep(100);
  MCore_ChannelUnInit(0);
  return a.exec();

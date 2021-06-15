@@ -3,14 +3,15 @@
 
 #include "UGEngineControllWidget.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
+#include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon> AppCore;
+    RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
 
-     int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(),
+     int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModeler.ini",
                   (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(),
                   argc, argv);
 

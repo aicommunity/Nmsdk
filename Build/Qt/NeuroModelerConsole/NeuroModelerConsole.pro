@@ -6,16 +6,24 @@
 
 QT       += core
 QT       -= gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += network
+
+
+QT      += sql
+QT      += xml
+
 
 #greaterThan(QT_MAJOR_VERSION, 4): QT += widgets #printsupport
 
 TARGET = NeuroModelerConsole
 TEMPLATE = app
 
+VERSION = 1.0.9.0
+
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
 windows {
-message("Using "msvc-$$(VisualStudioVersion) compiler)
+message("NeuroModelerConsole: using "msvc-$$(VisualStudioVersion) compiler)
 DESTDIR = $$PWD/../../../Bin/Platform/Win/
     LIBS += -L$$(ANACONDA_PATH)/libs/
 
@@ -71,7 +79,6 @@ NMSDK_LIBS_NAMES = \
  Rdk-CvSimulatorLib \
  Rdk-CvStatisticLib \
  Rdk-CvVideoCaptureLib \
- Rdk-PyMachineLearningLib \
  Rdk-NoiseGenLib \
  Nmsdk-ActLib \
  Nmsdk-BasicLib \
@@ -89,6 +96,17 @@ NMSDK_LIBS_NAMES = \
  Nmsdk-YCorticalLib
 
 
+contains(DEFINES, RDK_USE_PYTHON) {
+  NMSDK_LIBS_NAMES += Rdk-PyMachineLearningLib
+}
+
+contains(DEFINES, RDK_USE_DARKNET) {
+  NMSDK_LIBS_NAMES += Rdk-DarknetLib
+}
+
+contains(DEFINES, RDK_USE_TENSORFLOW) {
+  NMSDK_LIBS_NAMES += Rdk-TensorflowLib
+}
 
 windows:!windows-g++ {
 
@@ -98,6 +116,7 @@ windows:!windows-g++ {
  }
 
  LIBS += -L$$PWD/../../../Bin/Platform/Win/Lib.Qt/ $$NMSDK_LIBS_LIST -lcurl.qt
+ LIBS +=   -lWldap32 -lWs2_32 -lCrypt32
  PRE_TARGETDEPS += $$NMSDK_LIBS_FILES
 
 } else:unix {
@@ -108,70 +127,6 @@ windows:!windows-g++ {
  }
  LIBS += -L$$PWD/../../../Bin/Platform/Linux/Lib.Qt/ $$NMSDK_LIBS_LIST
  PRE_TARGETDEPS += $$NMSDK_LIBS_FILES
-}
-
-#including opencv
-OPENCV_LIBS_LIST = -L/usr/local/lib/ -lopencv_core \
- -L/usr/local/lib/ -lopencv_highgui \
- -L/usr/local/lib/ -lopencv_imgproc \
- -L/usr/local/lib/ -lopencv_videoio \
- -L/usr/local/lib/ -lopencv_video \
- -L/usr/local/lib/ -lopencv_imgcodecs
-
-windows {
- OPENCV_LIBS_VERSION = 345
- OPENCV_COMPILED_VERSION_64 = vc15
- OPENCV_COMPILED_VERSION_86 = vc15
-
- # функция добавляет постфикс(второй параметр) ко всем элементам первого входного параметра
- defineReplace(addPostfix) {
-  libList = $$1
-  for(lib, libList) {
-   returnValue += $${lib}$${2}
-  }
-  return($$returnValue)
- }
-
- INCLUDEPATH += $$(OPENCV3_PATH)/build/include
-
- !contains(QMAKE_TARGET.arch, x86_64) {
- CONFIG(debug){
-  LIBS += -L$$(OPENCV3_PATH)/build/x86/$${OPENCV_COMPILED_VERSION_86}/lib/Debug $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION}d)
- }
- CONFIG(release) {
-  LIBS += -L$$(OPENCV3_PATH)/build/x86/$${OPENCV_COMPILED_VERSION_86}/lib/Release $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION})
- }
-} else {
- CONFIG(debug){
-  LIBS += -L$$(OPENCV3_PATH)/build/x64/$${OPENCV_COMPILED_VERSION_64}/lib/Debug $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION}d)
- }
- CONFIG(release) {
-  LIBS += -L$$(OPENCV3_PATH)/build/x64/$${OPENCV_COMPILED_VERSION_64}/lib/Release $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION})
- }
-}
-} else:unix {
- LIBS += $$OPENCV_LIBS_LIST
-}
-
-#including boost
-
-windows {
- BOOST_COMPILED_VERSION = msvc-$$(VisualStudioVersion)
-
- INCLUDEPATH += $$(BOOST_PATH)
-!contains(QMAKE_TARGET.arch, x86_64) {
- LIBS += -L$$(BOOST_PATH)/$${BOOST_COMPILED_VERSION}-x86/lib/
-} else {
- LIBS += -L$$(BOOST_PATH)/$${BOOST_COMPILED_VERSION}-x64/lib/
-}
-} else:unix {
- LIBS += -lboost_thread \
-  -lboost_system \
-  -lboost_program_options \
-  -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-  -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-  -lpython3.5m \
-  -lpthread
 }
 
 SOURCES += \
@@ -254,3 +209,82 @@ HEADERS += \
 #    ../../../Rdk/GUI/Qt/UGraphControlDialog.ui \
 #    ../../../Rdk/GUI/Qt/UGraphPaintWidget.ui \
 #    ../../../Rdk/GUI/Qt/UTableInfo.ui
+
+# ???????? OpenCV
+contains(DEFINES, RDK_USE_OPENCV) {
+
+    windows {
+        CONFIG(debug){
+#            message("VideoAnalytics: using OpenCv from "$${OPENCV_LIB_PATH}/Debug)
+            LIBS += -L$${OPENCV_LIB_PATH}/Debug $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION}d)
+        }
+
+        CONFIG(release) {
+#            message("VideoAnalytics: using OpenCv from "$${OPENCV_LIB_PATH}/Release)
+            LIBS += -L$${OPENCV_LIB_PATH}/Release $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION})
+        }
+
+    } else:unix {
+        LIBS += -L$${OPENCV_LIB_PATH}/lib $$OPENCV_LIBS_LIST
+    }
+}
+
+#Boost
+unix {
+    LIBS += -L$$(BOOST_PATH)/lib -lboost_system \
+        -lboost_system \
+        -lboost_chrono \
+        -lboost_thread \
+        -lboost_program_options \
+        -lboost_filesystem \
+        -lboost_date_time \
+        -lboost_timer
+
+    LIBS += -L$$(QTDIR)/lib -lQt5Core -lQt5Widgets -lQt5Gui -lQt5PrintSupport -lGL
+    LIBS += -L/usr/lib/x86_64-linux-gnu -lcurl
+
+    contains(DEFINES, RDK_USE_PYTHON) {
+        LIBS += -L$$(BOOST_PATH)/lib -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
+            -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR}
+
+    isEmpty(ANACONDA_PATH) {
+         LIBS += -L/usr/lib/python$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}/config-$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m-x86_64-linux-gnu -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}
+         LIBS += -L/usr/lib/python$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}/config-$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m-aarch64-linux-gnu -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}
+    } else {
+         LIBS += -L$$(ANACONDA_PATH)/lib -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR} #-lpng -lssl
+    }
+    }
+
+}
+
+windows {
+    BOOST_COMPILED_VERSION = msvc-$$(VisualStudioVersion)
+
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        LIBS += -L$$(BOOST_PATH)/$${BOOST_COMPILED_VERSION}-x86/lib/
+    } else {
+         LIBS += -L$$(BOOST_PATH)/$${BOOST_COMPILED_VERSION}-x64/lib/
+    }
+
+    LIBS +=   -lWldap32
+    LIBS +=   -lAdvapi32
+
+    LIBS += -L$$(ANACONDA_PATH)/libs/
+}
+
+
+contains(DEFINES, RDK_USE_DARKNET) {
+    unix {
+        LIBS+= -L$$PWD/../../../Libraries/Rdk-DarknetLib/ThirdParty/darknet -ldarknet
+    }
+}
+
+contains(DEFINES, RDK_USE_TENSORFLOW) {
+
+    windows {
+        LIBS += -L$$(TENSORFLOW_PATH)/bazel-bin/tensorflow -ltensorflow_framework.dll.if -ltensorflow.dll.if -ltensorflow_cc.dll.if
+    } else:unix {
+        LIBS += -L$$(TENSORFLOW_PATH)/bazel-bin/tensorflow -ltensorflow_cc -ltensorflow_framework
+    }
+
+}

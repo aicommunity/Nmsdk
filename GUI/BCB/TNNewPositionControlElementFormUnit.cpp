@@ -82,10 +82,10 @@ void TNNewPositionControlElementForm::AUpdateInterface(void)
    {
 	RDK::UEPtr<NMSDK::NPulseNeuron> gen=dynamic_cast<NMSDK::NPulseNeuron*>(left_neurons[m][n]);
 	RDK::UEPtr<NMSDK::NPulseLTZone> ltzone=RDK::dynamic_pointer_cast<NMSDK::NPulseLTZone>(gen->GetComponentL("LTZone"));
-	TrainedStateStringGrid->Cells[num_motion_elements-1-n+1][m+1]=FloatToStrF(ltzone->GetOutputData(2).Double[0],ffFixed,3,3);
+	TrainedStateStringGrid->Cells[num_motion_elements-1-n+1][m+1]=FloatToStrF(ltzone->OutputFrequency->As<double>(0),ffFixed,3,3);
 	gen=dynamic_cast<NMSDK::NPulseNeuron*>(right_neurons[m][n]);
 	ltzone=RDK::dynamic_pointer_cast<NMSDK::NPulseLTZone>(gen->GetComponentL("LTZone"));
-	TrainedStateStringGrid->Cells[n+num_motion_elements+1][m+1]=FloatToStrF(ltzone->GetOutputData(2).Double[0],ffFixed,3,3);
+	TrainedStateStringGrid->Cells[n+num_motion_elements+1][m+1]=FloatToStrF(ltzone->OutputFrequency->As<double>(0),ffFixed,3,3);
 	TrainedStateStringGrid->Cells[num_motion_elements-1-n+1][0]=String("ML")+n;
 	TrainedStateStringGrid->Cells[n+num_motion_elements+1][0]=String("MR")+n;
    }
