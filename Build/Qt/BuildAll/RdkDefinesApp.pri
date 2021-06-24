@@ -6,3 +6,7 @@ unix {
 }
 
 #DEFINES += RDK_USE_TENSORFLOW
+
+windows:!windows-g++ { # visual studio spec filter
+#    QMAKE_CXXFLAGS += -MP -O2
+}

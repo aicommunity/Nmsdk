@@ -128,7 +128,7 @@ windows:!windows-g++ {
 
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
-    ../../../Rdk/GUI/Qt/UMatrixForm.cpp \
+    ../../../Rdk/GUI/Qt/UMatrixFormDialog.cpp \
     ../../../Rdk/GUI/Qt/UWatch.cpp \
     ../../../Rdk/GUI/Qt/UWatchChart.cpp \
     ../../../Rdk/GUI/Qt/UWatchChartOption.cpp \
@@ -171,7 +171,7 @@ HEADERS += \
         ../../../Libraries/Libraries.h \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.h \
     ../../../Rdk/GUI/Qt/UGEngineControllWidget.h \
-    ../../../Rdk/GUI/Qt/UMatrixForm.h \
+    ../../../Rdk/GUI/Qt/UMatrixFormDialog.h \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.h \
     ../../../Rdk/GUI/Qt/UDrawEngineWidget.h \
     ../../../Rdk/GUI/Qt/UDrawEngineImageWidget.h \
@@ -216,7 +216,7 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UClassesListWidget.ui \
     ../../../Rdk/GUI/Qt/UComponentLinksWidget.ui \
     ../../../Rdk/GUI/Qt/UImagesWidget.ui \
-    ../../../Rdk/GUI/Qt/UMatrixForm.ui \
+    ../../../Rdk/GUI/Qt/UMatrixFormDialog.ui \
     ../../../Rdk/GUI/Qt/USingleImageWidget.ui \
     ../../../Rdk/GUI/Qt/UComponentPropertySelectionWidget.ui \
     ../../../Rdk/GUI/Qt/UPropertyXMLWidget.ui \
