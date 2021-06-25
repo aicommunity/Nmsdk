@@ -129,6 +129,7 @@ windows:!windows-g++ {
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.cpp \
+    ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.cpp \
     ../../../Rdk/GUI/Qt/UWatch.cpp \
     ../../../Rdk/GUI/Qt/UWatchChart.cpp \
     ../../../Rdk/GUI/Qt/UWatchChartOption.cpp \
@@ -172,6 +173,7 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.h \
     ../../../Rdk/GUI/Qt/UGEngineControllWidget.h \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.h \
+    ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.h \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.h \
     ../../../Rdk/GUI/Qt/UDrawEngineWidget.h \
     ../../../Rdk/GUI/Qt/UDrawEngineImageWidget.h \
