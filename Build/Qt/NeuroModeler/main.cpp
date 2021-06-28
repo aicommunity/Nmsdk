@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     d=new QProgressDialog;
+    d->setWindowFlag(Qt::WindowStaysOnTopHint);
     d->setLabelText("Launching application");
     d->setMaximum(100);
     d->setValue(10);
@@ -42,6 +43,8 @@ int main(int argc, char *argv[])
       w.hide();
     else
       w.show();
+
+    AppCore.PostInit();
 
     RDK::UIVisualControllerStorage::UpdateInterface(true);
 
