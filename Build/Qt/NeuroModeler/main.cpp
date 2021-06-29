@@ -23,6 +23,9 @@ int main(int argc, char *argv[])
     d=new QProgressDialog;
     d->setWindowFlag(Qt::WindowStaysOnTopHint);
     d->setLabelText("Launching application");
+    int x=d->width()*2;
+    int y=d->height()*1;
+    d->setFixedSize(x,y);
     d->setMaximum(100);
     d->setValue(10);
     d->show();
