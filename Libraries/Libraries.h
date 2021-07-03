@@ -14,13 +14,19 @@
 #include "Rdk-CvGuiLib/Deploy/Include/Lib.h"
 #include "Rdk-CvStatisticLib/Deploy/Include/Lib.h"
 #include "Rdk-CvSimulatorLib/Deploy/Include/Lib.h"
-//#include "Rdk-CRLib/Deploy/Include/Lib.h"
+#include "Rdk-CRLib/Deploy/Include/Lib.h"
 #include "Rdk-NoiseGenLib/Deploy/Include/Lib.h"
+
 
 #ifndef __BORLANDC__
 #ifdef RDK_USE_PYTHON
 #include "Rdk-PyMachineLearningLib/Core/Lib.h"
 #endif
+
+#ifdef RDK_USE_TENSORFLOW
+#include "Rdk-TensorflowLib/Core/Lib.h"
+#endif
+
 #endif
 #include "Nmsdk-ActLib/Deploy/Include/Lib.h"
 #include "Nmsdk-BasicLib/Deploy/Include/Lib.h"
