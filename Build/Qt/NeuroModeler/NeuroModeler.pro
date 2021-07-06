@@ -132,6 +132,7 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.cpp \
     ../../../Rdk/GUI/Qt/UWatch.cpp \
     ../../../Rdk/GUI/Qt/UWatchChart.cpp \
+    ../../../Rdk/GUI/Qt/UWatchChartView.cpp \
     ../../../Rdk/GUI/Qt/UWatchChartOption.cpp \
     ../../../Rdk/GUI/Qt/UWatchSerie.cpp \
     ../../../Rdk/GUI/Qt/UWatchSeriesOption.cpp \
@@ -195,6 +196,7 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/USettingsReaderWidget.h \
     ../../../Rdk/GUI/Qt/UWatch.h \
     ../../../Rdk/GUI/Qt/UWatchChart.h \
+    ../../../Rdk/GUI/Qt/UWatchChartView.h \
     ../../../Rdk/GUI/Qt/UWatchChartOption.h \
     ../../../Rdk/GUI/Qt/UWatchSerie.h \
     ../../../Rdk/GUI/Qt/UWatchSeriesOption.h \
