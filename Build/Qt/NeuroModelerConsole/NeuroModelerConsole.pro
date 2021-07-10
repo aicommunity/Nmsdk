@@ -288,3 +288,13 @@ contains(DEFINES, RDK_USE_TENSORFLOW) {
     }
 
 }
+
+contains(DEFINES, RDK_USE_MATLAB) {
+
+windows {
+
+LIBS += $${RDK_MATLAB_LIBS}
+
+}
+
+}

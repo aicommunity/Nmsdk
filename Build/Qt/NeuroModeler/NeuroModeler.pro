@@ -322,3 +322,17 @@ contains(DEFINES, RDK_USE_TENSORFLOW) {
     }
 
 }
+
+
+contains(DEFINES, RDK_USE_MATLAB) {
+
+windows {
+
+message("NeuroModeler: using Matlab by path "$$(MATLAB_PATH))
+message("NeuroModeler: using Matlab libs "$${RDK_MATLAB_LIBS})
+
+LIBS += $${RDK_MATLAB_LIBS}
+
+}
+
+}
