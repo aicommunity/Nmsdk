@@ -166,7 +166,9 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.cpp \
     ../../../Rdk/GUI/Qt/UWatchSettingsDialog.cpp \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.cpp \
-    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp
+    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp \
+    ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.cpp \
+    ../../../Rdk/GUI/Qt/UClDescEditor.cpp
 
 
 HEADERS += \
@@ -211,7 +213,9 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.h \
     ../../../Rdk/GUI/Qt/UWatchSettingsDialog.h \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.h \
-    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.h
+    ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.h \
+    ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.h \
+    ../../../Rdk/GUI/Qt/UClDescEditor.h
 
 FORMS   += \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.ui \
@@ -241,7 +245,9 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UWatchSettingsDialog.ui \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.ui \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.ui \
-    ../../../Rdk/GUI/Qt/UWatchTab.ui
+    ../../../Rdk/GUI/Qt/UWatchTab.ui \
+    ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.ui \
+    ../../../Rdk/GUI/Qt/UClDescEditor.ui
 
 
 # ???????? OpenCV
