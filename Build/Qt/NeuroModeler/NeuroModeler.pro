@@ -168,7 +168,9 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.cpp \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp \
     ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.cpp \
-    ../../../Rdk/GUI/Qt/UClDescEditor.cpp
+    ../../../Rdk/GUI/Qt/UClDescEditor.cpp \
+    ../../../Rdk/GUI/Qt/UClassFavoritesEditor.cpp \
+    ../../../Rdk/GUI/Qt/USingleClassListWidget.cpp
 
 
 HEADERS += \
@@ -215,7 +217,10 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.h \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.h \
     ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.h \
-    ../../../Rdk/GUI/Qt/UClDescEditor.h
+    ../../../Rdk/GUI/Qt/UClDescEditor.h \
+    ../../../Rdk/GUI/Qt/UClassFavoritesEditor.h \
+    ../../../Rdk/GUI/Qt/USingleClassListWidget.h
+
 
 FORMS   += \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.ui \
@@ -247,7 +252,9 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.ui \
     ../../../Rdk/GUI/Qt/UWatchTab.ui \
     ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.ui \
-    ../../../Rdk/GUI/Qt/UClDescEditor.ui
+    ../../../Rdk/GUI/Qt/UClDescEditor.ui \
+    ../../../Rdk/GUI/Qt/UClassFavoritesEditor.ui \
+    ../../../Rdk/GUI/Qt/USingleClassListWidget.ui
 
 
 # ???????? OpenCV
