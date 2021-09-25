@@ -1,31 +1,46 @@
 #include <QCoreApplication>
 #include <iostream>
-#include "../../../Rdk/Deploy/Include/rdk_cpp_initlib.h"
-#include "../../../Rdk/Core/Application/UApplication.h"
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
+//#include "../../../Rdk/Deploy/Include/rdk_cpp_initlib.h"
+//#include "../../../Rdk/Core/Application/UApplication.h"
+#include "../../../Rdk/Core/Application/UAppCore.h"
 #include "../../../Rdk/GUI/Qt/UEngineControlQt.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 #include "../../../Rdk/Core/Application/Qt/UServerTransportTcpQt.h"
 using namespace std;
 
-namespace po = boost::program_options;
-namespace RDK {
+//namespace po = boost::program_options;
+//namespace RDK {
 
-extern po::options_description CmdLineDescription;
-extern po::variables_map CmdVariablesMap;
+//extern po::options_description CmdLineDescription;
+//extern po::variables_map CmdVariablesMap;
 
-}
+//}
 
-std::string Version("0.7.0");
+//std::string Version("0.7.0");
 
 int main(int argc, char* argv[])
 {
  using namespace RDK;
  QCoreApplication a(argc, argv);
 
+ RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
+
+ int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModelerConsole.ini",
+               (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(),
+               argc, argv);
+
+ if(init_res != 0)
+  return init_res;
+
+ AppCore.PostInit();
+
+ return a.exec();
+
+ /*
  RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
 
  if (CmdVariablesMap.count("help"))
@@ -250,5 +265,5 @@ int main(int argc, char* argv[])
  AppCore.application.PauseChannel(0);
  RDK::Sleep(100);
  MCore_ChannelUnInit(0);
- return a.exec();
+ return a.exec();*/
 }
