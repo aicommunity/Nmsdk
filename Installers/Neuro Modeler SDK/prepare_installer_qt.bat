@@ -21,5 +21,5 @@ xcopy "..\..\Rdk\Docs\RDK.GuiDescription.Bcb.Ru.doc" InstallSourcesQt\Docs\RDK.G
 xcopy "..\..\Rdk\Docs\RDK.RuntimeConfigurationDescription.Ru.doc" InstallSourcesQt\Docs\RDK.RuntimeConfigurationDescription.Ru.doc /Y /D
 call "InstallSourcesQt\Bin\Configs\erase_all.bat"
 
-rem "C:\Program Files (x86)\Actual Installer\actinst.exe" /S "NeuroModelerQt.aip"
+"C:\Program Files (x86)\Actual Installer\actinst.exe" /S "NeuroModelerQt.aip"
 
