@@ -257,95 +257,42 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/USingleClassListWidget.ui
 
 
-# ???????? OpenCV
+# Линковка OpenCV
 contains(DEFINES, RDK_USE_OPENCV) {
 
     windows {
-        CONFIG(debug){
-#            message("VideoAnalytics: using OpenCv from "$${OPENCV_LIB_PATH}/Debug)
-            LIBS += -L$${OPENCV_LIB_PATH}/Debug $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION}d)
-        }
-
-        CONFIG(release) {
-#            message("VideoAnalytics: using OpenCv from "$${OPENCV_LIB_PATH}/Release)
-            LIBS += -L$${OPENCV_LIB_PATH}/Release $$addPostfix($$OPENCV_LIBS_LIST, $${OPENCV_LIBS_VERSION})
-        }
+        LIBS += $$OPENCV_WIN_LINKER_LINE
 
     } else:unix {
-        LIBS += -L$${OPENCV_LIB_PATH}/lib $$OPENCV_LIBS_LIST
+        LIBS += $$OPENCV_UNIX_LINKER_LINE
     }
 }
 
 #Boost
-unix {
-    LIBS += -L$$(BOOST_PATH)/lib -lboost_system \
-        -lboost_system \
-        -lboost_chrono \
-        -lboost_thread \
-        -lboost_program_options \
-        -lboost_filesystem \
-        -lboost_date_time \
-        -lboost_timer
-
-    LIBS += -L$$(QTDIR)/lib -lQt5Core -lQt5Widgets -lQt5Gui -lQt5PrintSupport -lGL
-    LIBS += -L/usr/lib/x86_64-linux-gnu -lcurl
-
-    contains(DEFINES, RDK_USE_PYTHON) {
-        LIBS += -L$$(BOOST_PATH)/lib -lboost_python$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR} \
-            -lboost_numpy$${RDK_PYTHON_MAJOR}$${RDK_PYTHON_MINOR}
-
-    isEmpty(ANACONDA_PATH) {
-         LIBS += -L/usr/lib/python$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}/config-$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m-x86_64-linux-gnu -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}
-         LIBS += -L/usr/lib/python$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}/config-$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m-aarch64-linux-gnu -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}
-    } else {
-         LIBS += -L$$(ANACONDA_PATH)/lib -lpython$${RDK_PYTHON_MAJOR}.$${RDK_PYTHON_MINOR}m -lpython$${RDK_PYTHON_MAJOR} #-lpng -lssl
-    }
-    }
-
-}
-
 windows {
-    BOOST_COMPILED_VERSION = msvc-$$(VisualStudioVersion)
-
-    !contains(QMAKE_TARGET.arch, x86_64) {
-        LIBS += -L$$(BOOST_PATH)/$${BOOST_COMPILED_VERSION}-x86/lib/
-    } else {
-         LIBS += -L$$(BOOST_PATH)/$${BOOST_COMPILED_VERSION}-x64/lib/
-    }
-
-    LIBS +=   -lWldap32
-    LIBS +=   -lAdvapi32
-
-    LIBS += -L$$(ANACONDA_PATH)/libs/
+    LIBS += $$BOOST_WIN_LINKER_LINE
+} else:unix {
+    LIBS += $$BOOST_UNIX_LINKER_LINE
 }
-
 
 contains(DEFINES, RDK_USE_DARKNET) {
     unix {
-        LIBS+= -L$$PWD/../../../Libraries/Rdk-DarknetLib/ThirdParty/darknet -ldarknet
+        LIBS+= $$DARKNET_UNIX_LINKER_LINE
     }
 }
 
 contains(DEFINES, RDK_USE_TENSORFLOW) {
-
     windows {
-        LIBS += -L$$(TENSORFLOW_PATH)/bazel-bin/tensorflow -ltensorflow_framework.dll.if -ltensorflow.dll.if -ltensorflow_cc.dll.if
+        LIBS += $$TENSORFLOW_WIN_LINKER_LINE
     } else:unix {
-        LIBS += -L$$(TENSORFLOW_PATH)/bazel-bin/tensorflow -ltensorflow_cc -ltensorflow_framework
+        LIBS += $$TENSORFLOW_UNIX_LINKER_LINE
     }
-
 }
 
-
-contains(DEFINES, RDK_USE_MATLAB) {
-
-windows {
-
-message("NeuroModeler: using Matlab by path "$$(MATLAB_PATH))
-message("NeuroModeler: using Matlab libs "$${RDK_MATLAB_LIBS})
-
-LIBS += $${RDK_MATLAB_LIBS}
-
-}
-
+contains(DEFINES,RDK_USE_MATLAB) {
+    windows {
+        LIBS += $$MATLAB_WIN_LINKER_LINE
+    } else:unix {
+        LIBS += $$MATLAB_UNIX_LINKER_LINE
+    }
 }
