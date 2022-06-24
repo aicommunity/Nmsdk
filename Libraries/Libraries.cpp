@@ -39,6 +39,7 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
  libs_list.push_back(&NMSDK::ReceiverLibrary);
  libs_list.push_back(&NMSDK::PulseLibrary);
  libs_list.push_back(&NMSDK::NeuronLifeLibrary);
+ libs_list.push_back(&NMSDK::PulseClassicModelsLib);
  libs_list.push_back(&NMSDK::PulseNeuronLibrary);
  #ifndef NMSDK_DEBUG
  #ifndef NO_MOTION_CONTROL
@@ -48,7 +49,6 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
  #ifndef __GNUC__
 // libs_list.push_back(&NMSDK::WinAPIActLibrary);
  #endif
- libs_list.push_back(&NMSDK::PulseClassicModelsLib);
 // libs_list.push_back(&RDK::YCorticalLibrary);
  return true;
 }
