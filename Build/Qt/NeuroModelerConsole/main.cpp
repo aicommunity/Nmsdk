@@ -1,4 +1,6 @@
 #include <QCoreApplication>
+#include <QString>
+#include <QDebug>
 #include <iostream>
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/variables_map.hpp>
@@ -29,8 +31,14 @@ int main(int argc, char* argv[])
 
  RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
 
+ std::string default_user_name;
+ QString name = qgetenv("USER");
+ if (name.isEmpty())
+     name = qgetenv("USERNAME");
+ default_user_name = name.toLocal8Bit().constData();
+
  int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModelerConsole.ini",
-               (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(),
+               (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
                argc, argv);
 
  if(init_res != 0)

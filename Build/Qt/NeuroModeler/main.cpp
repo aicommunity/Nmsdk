@@ -1,5 +1,7 @@
 #include <QApplication>
 #include <QMessageBox>
+#include <QString>
+#include <QDebug>
 
 #include "UGEngineControllWidget.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
@@ -31,10 +33,16 @@ int main(int argc, char *argv[])
     d->show();
     QApplication::processEvents();
 
+    std::string default_user_name;
+    QString name = qgetenv("USER");
+    if (name.isEmpty())
+        name = qgetenv("USERNAME");
+    default_user_name = name.toLocal8Bit().constData();
+
     RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore(progress_bar_callback);
 
      int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModeler.ini",
-                  (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(),
+                  (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
                   argc, argv);
 
      if(init_res != 0)
