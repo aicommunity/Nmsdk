@@ -18,7 +18,7 @@ QT      += xml
 TARGET = NeuroModelerConsole
 TEMPLATE = app
 
-VERSION = 1.0.11.0
+VERSION = 1.1.0.0
 
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
@@ -42,8 +42,12 @@ CONFIG += console
 
 DEFINES += QT_DLL QT_WIDGETS_LIB
 
-VERSION = $$system(hg parents --template '{rev}')
-DEFINES += RDK_APP_VERSION=$$VERSION
+CVS_VERSION = $$system(hg parents --template '{rev}')
+DEFINES += RDK_APP_VERSION=$$CVS_VERSION
+
+DEFINES += "RDK_APP_URL=\\\"https://neuromodeler.ru\\\""
+DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2023)\\\"\""
+DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
 INCLUDEPATH += ../../../Gui/Qt \
     ../../../Deploy/Include \
