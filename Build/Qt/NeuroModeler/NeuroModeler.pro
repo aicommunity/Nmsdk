@@ -17,7 +17,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 TARGET = NeuroModeler
 TEMPLATE = app
 
-VERSION = 1.0.9.0
+VERSION = 1.1.0.0
 
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
@@ -42,6 +42,9 @@ DEFINES += RDK_DISABLE_EXT_GUI
 
 CVS_VERSION = $$system(hg parents --template '{rev}')
 DEFINES += RDK_APP_VERSION=$$CVS_VERSION
+DEFINES += "RDK_APP_URL=\\\"https://neuromodeler.ru\\\""
+DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2023)\\\"\""
+DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
 INCLUDEPATH += ../../../Gui/Qt \
     ../../../Deploy/Include \
@@ -128,6 +131,7 @@ windows:!windows-g++ {
 
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
+    ../../../Rdk/GUI/Qt/UAboutDialog.cpp \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.cpp \
     ../../../Rdk/GUI/Qt/UWatch.cpp \
@@ -175,6 +179,7 @@ SOURCES += \
 
 HEADERS += \
         ../../../Libraries/Libraries.h \
+    ../../../Rdk/GUI/Qt/UAboutDialog.h \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.h \
     ../../../Rdk/GUI/Qt/UGEngineControllWidget.h \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.h \
@@ -223,6 +228,7 @@ HEADERS += \
 
 
 FORMS   += \
+    ../../../Rdk/GUI/Qt/UAboutDialog.ui \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.ui \
     ../../../Rdk/GUI/Qt/UGEngineControllWidget.ui \
     ../../../Rdk/GUI/Qt/UDrawEngineWidget.ui \
