@@ -17,8 +17,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 TARGET = NeuroModeler
 TEMPLATE = app
 
-VERSION = 1.1.0.0
-
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
 windows {

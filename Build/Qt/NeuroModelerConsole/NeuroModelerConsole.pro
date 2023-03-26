@@ -18,8 +18,6 @@ QT      += xml
 TARGET = NeuroModelerConsole
 TEMPLATE = app
 
-VERSION = 1.1.0.0
-
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
 windows {
