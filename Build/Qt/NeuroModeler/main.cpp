@@ -9,11 +9,13 @@
 
 QProgressDialog* d(NULL);
 
-void progress_bar_callback(int complete_percent)
+void progress_bar_callback(int complete_percent, const std::string &text)
 {
  if(d)
  {
   d->setValue(complete_percent);
+  if(!text.empty())
+   d->setLabelText(text.c_str());
   QApplication::processEvents();
  }
 }
