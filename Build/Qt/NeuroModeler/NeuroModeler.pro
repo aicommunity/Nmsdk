@@ -130,6 +130,7 @@ windows:!windows-g++ {
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
     ../../../Rdk/GUI/Qt/UAboutDialog.cpp \
+    ../../../Rdk/GUI/Qt/UGEngineControlWidget.cpp \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.cpp \
     ../../../Rdk/GUI/Qt/UWatch.cpp \
@@ -141,7 +142,6 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UWatchTab.cpp \
         main.cpp\
     ../../../Rdk/GUI/Qt/UComponentsListWidget.cpp \
-    ../../../Rdk/GUI/Qt/UGEngineControllWidget.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.cpp \
     ../../../Rdk/GUI/Qt/UDrawEngineWidget.cpp \
     ../../../Rdk/GUI/Qt/UDrawEngineImageWidget.cpp \
@@ -179,7 +179,7 @@ HEADERS += \
         ../../../Libraries/Libraries.h \
     ../../../Rdk/GUI/Qt/UAboutDialog.h \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.h \
-    ../../../Rdk/GUI/Qt/UGEngineControllWidget.h \
+    ../../../Rdk/GUI/Qt/UGEngineControlWidget.h \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.h \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.h \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.h \

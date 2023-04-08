@@ -3,7 +3,7 @@
 #include <QString>
 #include <QDebug>
 
-#include "UGEngineControllWidget.h"
+#include "UGEngineControlWidget.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
      if(init_res != 0)
       return init_res;
 
-    UGEngineControllWidget w(NULL, &AppCore.application);
+    UGEngineControlWidget w(NULL, &AppCore.application);
 
     if(AppCore.hideAdminForm)
       w.hide();
