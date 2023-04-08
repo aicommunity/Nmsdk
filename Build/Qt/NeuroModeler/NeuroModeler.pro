@@ -17,7 +17,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 TARGET = NeuroModeler
 TEMPLATE = app
 
-VERSION = 1.1.1.0
+VERSION = 1.1.2.0
 
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
@@ -143,7 +143,7 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UWatchTab.cpp \
         main.cpp\
     ../../../Rdk/GUI/Qt/UComponentsListWidget.cpp \
-    ../../../Rdk/GUI/Qt/UGEngineControllWidget.cpp \
+    ../../../Rdk/GUI/Qt/UGEngineControlWidget.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.cpp \
     ../../../Rdk/GUI/Qt/UDrawEngineWidget.cpp \
     ../../../Rdk/GUI/Qt/UDrawEngineImageWidget.cpp \
@@ -181,7 +181,7 @@ HEADERS += \
         ../../../Libraries/Libraries.h \
     ../../../Rdk/GUI/Qt/UAboutDialog.h \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.h \
-    ../../../Rdk/GUI/Qt/UGEngineControllWidget.h \
+    ../../../Rdk/GUI/Qt/UGEngineControlWidget.h \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.h \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.h \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.h \

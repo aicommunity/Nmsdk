@@ -3,17 +3,19 @@
 #include <QString>
 #include <QDebug>
 
-#include "UGEngineControllWidget.h"
+#include "UGEngineControlWidget.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 
 QProgressDialog* d(NULL);
 
-void progress_bar_callback(int complete_percent)
+void progress_bar_callback(int complete_percent, const std::string &text)
 {
  if(d)
  {
   d->setValue(complete_percent);
+  if(!text.empty())
+   d->setLabelText(text.c_str());
   QApplication::processEvents();
  }
 }
@@ -48,7 +50,7 @@ int main(int argc, char *argv[])
      if(init_res != 0)
       return init_res;
 
-    UGEngineControllWidget w(NULL, &AppCore.application);
+    UGEngineControlWidget w(NULL, &AppCore.application);
 
     if(AppCore.hideAdminForm)
       w.hide();
