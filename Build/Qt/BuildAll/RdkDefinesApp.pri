@@ -18,3 +18,5 @@ DEFINES -= RDK_UNICODE_RUN
 windows:!windows-g++ { # visual studio spec filter
 #    QMAKE_CXXFLAGS += /MP /O2
 }
+
+VERSION = 1.1.1.0

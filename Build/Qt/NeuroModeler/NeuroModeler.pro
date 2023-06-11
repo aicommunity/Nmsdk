@@ -18,7 +18,6 @@ TARGET = NeuroModeler
 TEMPLATE = app
 
 VERSION = 1.1.3.0
-
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
 windows {
@@ -42,6 +41,9 @@ DEFINES += RDK_DISABLE_EXT_GUI
 
 CVS_VERSION = $$system(hg parents --template '{rev}')
 DEFINES += RDK_APP_VERSION=$$CVS_VERSION
+DEFINES += "RDK_APP_URL=\\\"https://neuromodeler.ru\\\""
+DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2023)\\\"\""
+DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
 INCLUDEPATH += ../../../Gui/Qt \
     ../../../Deploy/Include \
@@ -129,6 +131,7 @@ windows:!windows-g++ {
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
     ../../../Rdk/GUI/Qt/UAboutDialog.cpp \
+    ../../../Rdk/GUI/Qt/UGEngineControlWidget.cpp \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.cpp \
     ../../../Rdk/GUI/Qt/UWatch.cpp \
