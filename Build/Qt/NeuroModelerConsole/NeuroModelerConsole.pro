@@ -19,7 +19,6 @@ TARGET = NeuroModelerConsole
 TEMPLATE = app
 
 VERSION = 1.1.3.0
-
 include($$PWD/../../../Rdk/Build/Lib/Qt/RdkDefines.pri)
 
 windows {
