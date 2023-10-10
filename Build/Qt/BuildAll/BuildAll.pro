@@ -18,18 +18,12 @@ defineReplace(addSubdirsRdkNmsdk) {
 Rdk_Nmsdk_libs = Rdk-BasicLib \
         Rdk-CvBasicLib \
         Nmsdk-ActLib \
-        Nmsdk-BasicLib \
-        Nmsdk-MathLib \
         Nmsdk-MotionControlLib \
-        Nmsdk-NeuronLifeLib \
         Nmsdk-PhysLib \
-        Nmsdk-PulseClassicModelsLib \
         Nmsdk-PulseLib \
-        Nmsdk-PulseNeuronLib \
         Nmsdk-ReceiverLib \
         Nmsdk-SensorLib \
-        Nmsdk-SourceLib \
-        Nmsdk-YCorticalLib
+        Nmsdk-SourceLib
 
 contains(DEFINES, RDK_USE_PYTHON) {
   Rdk_Nmsdk_libs += Rdk-PyMachineLearningLib

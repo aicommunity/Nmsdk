@@ -73,20 +73,13 @@ NMSDK_LIBS_NAMES = \
  Rdk-BasicLib \
  Rdk-CvBasicLib \
  Nmsdk-ActLib \
- Nmsdk-BasicLib \
- Nmsdk-MathLib \
  Nmsdk-MotionControlLib \
- Nmsdk-NeuronLifeLib \
  Nmsdk-PhysLib \
- Nmsdk-PulseClassicModelsLib \
  Nmsdk-PulseLib \
- Nmsdk-PulseNeuronLib \
  Nmsdk-ReceiverLib \
  Nmsdk-SensorLib \
  Nmsdk-SourceLib \
- rdk.static \
- Nmsdk-YCorticalLib
-
+ rdk.static
 
 contains(DEFINES, RDK_USE_PYTHON) {
   NMSDK_LIBS_NAMES += Rdk-PyMachineLearningLib
