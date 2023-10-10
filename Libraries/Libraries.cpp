@@ -7,15 +7,8 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
 {
  using namespace NMSDK;
 // RDK::UItemData::DefaultDataSize=sizeof(double);
- libs_list.push_back(&RDK::BCLLibrary);
- libs_list.push_back(&RDK::CRLibrary);
- libs_list.push_back(&RDK::RDKVideoCaptureLibrary);
- libs_list.push_back(&RDK::AriphmeticLibrary);
  libs_list.push_back(&RDK::BasicLibrary);
- libs_list.push_back(&RDK::DetectionLibrary);
- libs_list.push_back(&RDK::GUILibrary);
- libs_list.push_back(&RDK::SimulatorLibrary);
- libs_list.push_back(&RDK::BStatisticLibrary);
+ libs_list.push_back(&RDK::CvBasicLibrary);
 #ifndef __BORLANDC__
 #ifdef RDK_USE_PYTHON
  libs_list.push_back(&RDK::PyMachineLearningLib);
@@ -54,7 +47,7 @@ libs_list.push_back(&NMSDK::MotionControlLibrary);
 extern RDK_LIB_TYPE bool RDK_CALL RdkLoadPredefinedCrPropFunctions(RDK::UStorage* storage)
 {
 
- storage->AddCrPropMockFunc(Simulator::SimulatorLibCrPropMock);
+ storage->AddCrPropMockFunc(CvBasicLib::CvBasicLibCrPropMock);
 
  return true;
 }

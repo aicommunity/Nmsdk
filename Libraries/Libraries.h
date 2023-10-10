@@ -4,15 +4,7 @@
 #include "../Rdk/Deploy/Include/rdk.h"
 
 #include "Rdk-BasicLib/Deploy/Include/Lib.h"
-#include "Rdk-CvVideoCaptureLib/Core/VideoCap.h"
-#include "Rdk-CvAriphmeticLib/Deploy/Include/Lib.h"
 #include "Rdk-CvBasicLib/Deploy/Include/Lib.h"
-#include "Rdk-CvDetectionLib/Deploy/Include/Lib.h"
-#include "Rdk-CvGuiLib/Deploy/Include/Lib.h"
-#include "Rdk-CvStatisticLib/Deploy/Include/Lib.h"
-#include "Rdk-CvSimulatorLib/Deploy/Include/Lib.h"
-#include "Rdk-CRLib/Deploy/Include/Lib.h"
-
 
 #ifndef __BORLANDC__
 #ifdef RDK_USE_PYTHON
