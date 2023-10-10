@@ -16,9 +16,6 @@ defineReplace(addSubdirsRdkNmsdk) {
 }
 
 Rdk_Nmsdk_libs = Rdk-BasicLib \
-        Rdk-BasicStatisticLib \
-        Rdk-IoLib \
-        Rdk-SourcesLib \
         Rdk-CRLib \
         Rdk-CvAriphmeticLib \
         Rdk-CvBasicLib \
@@ -27,7 +24,6 @@ Rdk_Nmsdk_libs = Rdk-BasicLib \
         Rdk-CvSimulatorLib \
         Rdk-CvStatisticLib \
         Rdk-CvVideoCaptureLib \
-        Rdk-NoiseGenLib \
         Nmsdk-ActLib \
         Nmsdk-BasicLib \
         Nmsdk-MathLib \

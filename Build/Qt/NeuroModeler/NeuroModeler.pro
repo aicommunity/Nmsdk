@@ -67,10 +67,7 @@ RCC_DIR = GeneratedFiles
 
 #including our libs
 NMSDK_LIBS_NAMES = \
- Rdk-BasicStatisticLib \
  Rdk-BasicLib \
- Rdk-IoLib \
- Rdk-SourcesLib \
  Rdk-CRLib \
  Rdk-CvAriphmeticLib \
  Rdk-CvBasicLib \
@@ -79,7 +76,6 @@ NMSDK_LIBS_NAMES = \
  Rdk-CvSimulatorLib \
  Rdk-CvStatisticLib \
  Rdk-CvVideoCaptureLib \
- Rdk-NoiseGenLib \
  Nmsdk-ActLib \
  Nmsdk-BasicLib \
  Nmsdk-MathLib \
