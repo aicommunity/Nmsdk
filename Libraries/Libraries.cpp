@@ -18,12 +18,6 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
 #endif
 #endif
 
-
- libs_list.push_back(&NMSDK::ActLibrary);
- libs_list.push_back(&NMSDK::PhysLibrary);
- libs_list.push_back(&NMSDK::SensorLibrary);
- libs_list.push_back(&NMSDK::NeuronSourceLibrary);
- libs_list.push_back(&NMSDK::ReceiverLibrary);
  libs_list.push_back(&NMSDK::PulseLibrary);
  #ifndef NMSDK_DEBUG
  #ifndef NO_MOTION_CONTROL

@@ -69,13 +69,8 @@ RCC_DIR = GeneratedFiles
 NMSDK_LIBS_NAMES = \
  Rdk-BasicLib \
  Rdk-CvBasicLib \
- Nmsdk-ActLib \
  Nmsdk-MotionControlLib \
- Nmsdk-PhysLib \
  Nmsdk-PulseLib \
- Nmsdk-ReceiverLib \
- Nmsdk-SensorLib \
- Nmsdk-SourceLib \
  rdk.static
 
 contains(DEFINES, RDK_USE_PYTHON) {

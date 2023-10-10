@@ -6,13 +6,8 @@
 #include "Rdk-BasicLib/Deploy/Include/Lib.h"
 #include "Rdk-CvBasicLib/Deploy/Include/Lib.h"
 //#include "Rdk-TensorflowLib/Core/UTensorflowLib.h"
-#include "Nmsdk-ActLib/Deploy/Include/Lib.h"
-//#include "Nmsdk-MotionControlLib/Deploy/Include/Lib.h"
-#include "Nmsdk-PhysLib/Deploy/Include/Lib.h"
+#include "Nmsdk-MotionControlLib/Deploy/Include/Lib.h"
 #include "Nmsdk-PulseLib/Deploy/Include/Lib.h"
-#include "Nmsdk-ReceiverLib/Deploy/Include/Lib.h"
-#include "Nmsdk-SensorLib/Deploy/Include/Lib.h"
-#include "Nmsdk-SourceLib/Deploy/Include/Lib.h"
 //#include "Rdk-PyMachineLearningLib/Core/Lib.h"
 
 namespace RDK {

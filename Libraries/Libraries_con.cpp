@@ -10,14 +10,9 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
  libs_list.push_back(&RDK::CvBasicLibrary);
  //libs_list.push_back(&RDK::TensorflowLibrary);
 
- libs_list.push_back(&NMSDK::ActLibrary);
- libs_list.push_back(&NMSDK::PhysLibrary);
- libs_list.push_back(&NMSDK::SensorLibrary);
- libs_list.push_back(&NMSDK::NeuronSourceLibrary);
- libs_list.push_back(&NMSDK::ReceiverLibrary);
  libs_list.push_back(&NMSDK::PulseLibrary);
  #ifndef NMSDK_DEBUG
- //libs_list.push_back(&NMSDK::MotionControlLibrary);
+ libs_list.push_back(&NMSDK::MotionControlLibrary);
  #endif
  #ifndef __GNUC__
  libs_list.push_back(&NMSDK::WinAPIActLibrary);
