@@ -121,7 +121,6 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UWatchTab.cpp \
         main.cpp\
     ../../../Rdk/GUI/Qt/UComponentsListWidget.cpp \
-    ../../../Rdk/GUI/Qt/UGEngineControlWidget.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.cpp \
     ../../../Rdk/GUI/Qt/UDrawEngineWidget.cpp \
     ../../../Rdk/GUI/Qt/UDrawEngineImageWidget.cpp \
