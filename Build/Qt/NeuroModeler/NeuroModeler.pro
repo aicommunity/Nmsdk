@@ -45,6 +45,8 @@ DEFINES += "RDK_APP_URL=\\\"https://neuromodeler.ru\\\""
 DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2023)\\\"\""
 DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
+RESOURCES = ../../../Rdk/GUI/Qt/static/res.qrc
+
 INCLUDEPATH += ../../../Gui/Qt \
     ../../../Deploy/Include \
     ../../../Rdk/Core/Graphics \

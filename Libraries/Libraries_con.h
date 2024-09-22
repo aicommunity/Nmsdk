@@ -5,6 +5,7 @@
 
 #include "Rdk-BasicLib/Deploy/Include/Lib.h"
 #include "Rdk-CvBasicLib/Deploy/Include/Lib.h"
+#include "Rdk-HardwareLib/Core/UHardwareLib.h"
 //#include "Rdk-TensorflowLib/Core/UTensorflowLib.h"
 #include "Nmsdk-MotionControlLib/Deploy/Include/Lib.h"
 #include "Nmsdk-PulseLib/Deploy/Include/Lib.h"

@@ -5,6 +5,7 @@
 
 #include "Rdk-BasicLib/Deploy/Include/Lib.h"
 #include "Rdk-CvBasicLib/Deploy/Include/Lib.h"
+#include "Rdk-HardwareLib/Core/UHardwareLib.h"
 
 #ifndef __BORLANDC__
 #ifdef RDK_USE_PYTHON

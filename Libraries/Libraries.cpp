@@ -9,6 +9,7 @@ bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
 // RDK::UItemData::DefaultDataSize=sizeof(double);
  libs_list.push_back(&RDK::BasicLibrary);
  libs_list.push_back(&RDK::CvBasicLibrary);
+ libs_list.push_back(&RDK::HardwareLibrary);
 #ifndef __BORLANDC__
 #ifdef RDK_USE_PYTHON
  libs_list.push_back(&RDK::PyMachineLearningLib);

@@ -17,6 +17,7 @@ defineReplace(addSubdirsRdkNmsdk) {
 
 Rdk_Nmsdk_libs = Rdk-BasicLib \
         Rdk-CvBasicLib \
+        Rdk-HardwareLib \
         Nmsdk-MotionControlLib \
         Nmsdk-PulseLib \
 
