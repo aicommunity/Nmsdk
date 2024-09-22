@@ -72,6 +72,7 @@ RCC_DIR = GeneratedFiles
 NMSDK_LIBS_NAMES = \
  Rdk-BasicLib \
  Rdk-CvBasicLib \
+ Rdk-HardwareLib \
  Nmsdk-MotionControlLib \
  Nmsdk-PulseLib \
  rdk.static
