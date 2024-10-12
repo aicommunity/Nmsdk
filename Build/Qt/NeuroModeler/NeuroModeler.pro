@@ -39,7 +39,7 @@ DEFINES += QT_DLL QT_WIDGETS_LIB
 
 DEFINES += RDK_DISABLE_EXT_GUI
 
-CVS_VERSION = $$system(hg parents --template '{rev}')
+CVS_VERSION = 0 # $$system(hg parents --template '{rev}')
 DEFINES += RDK_APP_VERSION=$$CVS_VERSION
 DEFINES += "RDK_APP_URL=\\\"https://neuromodeler.ru\\\""
 DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2023)\\\"\""
