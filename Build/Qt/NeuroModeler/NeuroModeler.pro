@@ -10,6 +10,7 @@ QT += network
 
 QT      += sql
 QT      += xml
+QT      += serialport
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
@@ -253,6 +254,17 @@ contains(DEFINES, RDK_USE_OPENCV) {
         LIBS += $$OPENCV_UNIX_LINKER_LINE
     }
 }
+
+contains(DEFINES, RDK_USE_SDESOLVER) {
+
+    windows {
+        LIBS += $$SDESOLVER_WIN_LINKER_LINE
+
+    } else:unix {
+        LIBS += $$SDESOLVER_WIN_LINKER_LINE
+    }
+}
+
 
 #Boost
 windows {
