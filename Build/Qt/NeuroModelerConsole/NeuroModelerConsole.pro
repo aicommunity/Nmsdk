@@ -141,7 +141,7 @@ contains(DEFINES, RDK_USE_SDESOLVER) {
         LIBS += $$SDESOLVER_WIN_LINKER_LINE
 
     } else:unix {
-        LIBS += $$SDESOLVER_WIN_LINKER_LINE
+        LIBS += $$SDESOLVER_UNIX_LINKER_LINE
     }
 }
 
