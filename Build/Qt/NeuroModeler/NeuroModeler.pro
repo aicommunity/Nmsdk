@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui charts
+QT       += serialport
 QT += network
 
 
