@@ -11,6 +11,7 @@ QT += network
 
 QT      += sql
 QT      += xml
+QT      += serialport
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
@@ -47,6 +48,35 @@ DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2023)\
 DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
 RESOURCES = ../../../Rdk/GUI/Qt/static/res.qrc
+
+
+contains(DEFINES, RDK_USE_ODESOLVER) {
+  windows {
+    ODESOLVER_DEPLOY_DIR = $$PWD/../../../Bin/Platform/Win
+    ODESOLVER_LINKER_LINE = -L$$ODESOLVER_DEPLOY_DIR -lode-solver
+
+  } else:unix {
+    ODESOLVER_DEPLOY_DIR = $$PWD/../../../Bin/Platform/Linux
+    ODESOLVER_LINKER_LINE = -L$$ODESOLVER_DEPLOY_DIR -lode-solver
+  }
+
+  CMAKE_PROJECT_DIR = $$PWD/../../../Rdk/ThirdParty/ode-solver
+  CMAKE_BUILD_DIR = $$PWD/ode-solver-build
+
+  configure_cmake.target = configure_cmake
+  configure_cmake.commands = \
+      cmake -S $$CMAKE_PROJECT_DIR -B $$CMAKE_BUILD_DIR "-D DEPLOY_DIR=$$ODESOLVER_DEPLOY_DIR"
+  QMAKE_EXTRA_TARGETS += configure_cmake
+
+  build_cmake.target = build_cmake
+  build_cmake.depends = configure_cmake
+  build_cmake.commands = \
+      cmake --build $$CMAKE_BUILD_DIR
+  QMAKE_EXTRA_TARGETS += build_cmake
+
+  PRE_TARGETDEPS += $$build_cmake.target
+}
+
 
 INCLUDEPATH += ../../../Gui/Qt \
     ../../../Deploy/Include \
@@ -197,7 +227,6 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UGraphControlDialog.h \
     ../../../Rdk/GUI/Qt/UGraphPaintWidget.h \
     ../../../Rdk/GUI/Qt/UTableInfo.h \
-    UWatchWidgetForm.h \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.h \
     ../../../Rdk/GUI/Qt/UWatchSettingsDialog.h \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.h \
@@ -244,7 +273,7 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/USingleClassListWidget.ui
 
 
-# Линковка OpenCV
+# пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenCV
 contains(DEFINES, RDK_USE_OPENCV) {
 
     windows {
@@ -254,6 +283,11 @@ contains(DEFINES, RDK_USE_OPENCV) {
         LIBS += $$OPENCV_UNIX_LINKER_LINE
     }
 }
+
+contains(DEFINES, RDK_USE_ODESOLVER) {
+    LIBS += $$ODESOLVER_LINKER_LINE
+}
+
 
 #Boost
 windows {
