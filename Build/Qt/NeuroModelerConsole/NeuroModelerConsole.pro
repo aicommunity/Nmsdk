@@ -51,12 +51,21 @@ DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
 
 contains(DEFINES, RDK_USE_ODESOLVER) {
+  windows {
+    ODESOLVER_DEPLOY_DIR = $$PWD/../../../Bin/Platform/Win
+    ODESOLVER_LINKER_LINE = -L$$ODESOLVER_DEPLOY_DIR -lode-solver
+
+  } else:unix {
+    ODESOLVER_DEPLOY_DIR = $$PWD/../../../Bin/Platform/Linux
+    ODESOLVER_LINKER_LINE = -L$$ODESOLVER_DEPLOY_DIR -lode-solver
+  }
+
   CMAKE_PROJECT_DIR = $$PWD/../../../Rdk/ThirdParty/ode-solver
   CMAKE_BUILD_DIR = $$PWD/ode-solver-build
 
   configure_cmake.target = configure_cmake
   configure_cmake.commands = \
-      cmake -S $$CMAKE_PROJECT_DIR -B $$CMAKE_BUILD_DIR "-D DEPLOY_DIR=$$PWD/../../../Bin/Platform/Win"
+      cmake -S $$CMAKE_PROJECT_DIR -B $$CMAKE_BUILD_DIR "-D DEPLOY_DIR=$$ODESOLVER_DEPLOY_DIR"
   QMAKE_EXTRA_TARGETS += configure_cmake
 
   build_cmake.target = build_cmake
@@ -155,14 +164,7 @@ contains(DEFINES, RDK_USE_OPENCV) {
 }
 
 contains(DEFINES, RDK_USE_ODESOLVER) {
-  windows {
-    ODESOLVER_WIN_LINKER_LINE += -L$$PWD/../../../Bin/Platform/Win -lode-solver
-    LIBS += $$ODESOLVER_WIN_LINKER_LINE
-
-  } else:unix {
-    ODESOLVER_UNIX_LINKER_LINE += -L$$PWD/../../../Bin/Platform/Linux -lode-solver
-    LIBS += $$ODESOLVER_WIN_LINKER_LINE
-  }
+    LIBS += $$ODESOLVER_LINKER_LINE
 }
 
 #Boost
