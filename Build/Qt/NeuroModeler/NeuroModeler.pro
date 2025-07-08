@@ -48,6 +48,26 @@ DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
 RESOURCES = ../../../Rdk/GUI/Qt/static/res.qrc
 
+
+contains(DEFINES, RDK_USE_ODESOLVER) {
+  CMAKE_PROJECT_DIR = $$PWD/../../../Rdk/ThirdParty/ode-solver
+  CMAKE_BUILD_DIR = $$PWD/ode-solver-build
+
+  configure_cmake.target = configure_cmake
+  configure_cmake.commands = \
+      cmake -S $$CMAKE_PROJECT_DIR -B $$CMAKE_BUILD_DIR "-D DEPLOY_DIR=$$PWD/../../../Bin/Platform/Win"
+  QMAKE_EXTRA_TARGETS += configure_cmake
+
+  build_cmake.target = build_cmake
+  build_cmake.depends = configure_cmake
+  build_cmake.commands = \
+      cmake --build $$CMAKE_BUILD_DIR
+  QMAKE_EXTRA_TARGETS += build_cmake
+
+  PRE_TARGETDEPS += $$build_cmake.target
+}
+
+
 INCLUDEPATH += ../../../Gui/Qt \
     ../../../Deploy/Include \
     ../../../Rdk/Core/Graphics \
@@ -197,7 +217,6 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UGraphControlDialog.h \
     ../../../Rdk/GUI/Qt/UGraphPaintWidget.h \
     ../../../Rdk/GUI/Qt/UTableInfo.h \
-    UWatchWidgetForm.h \
     ../../../Rdk/GUI/Qt/UWatchFormWidget.h \
     ../../../Rdk/GUI/Qt/UWatchSettingsDialog.h \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.h \
@@ -255,14 +274,15 @@ contains(DEFINES, RDK_USE_OPENCV) {
     }
 }
 
-contains(DEFINES, RDK_USE_SDESOLVER) {
+contains(DEFINES, RDK_USE_ODESOLVER) {
+  windows {
+    SDESOLVER_WIN_LINKER_LINE += -L$$PWD/../../../Bin/Platform/Win -lode-solver
+    LIBS += $$SDESOLVER_WIN_LINKER_LINE
 
-    windows {
-        LIBS += $$SDESOLVER_WIN_LINKER_LINE
-
-    } else:unix {
-        LIBS += $$SDESOLVER_WIN_LINKER_LINE
-    }
+  } else:unix {
+    SDESOLVER_UNIX_LINKER_LINE += -L$$PWD/../../../Bin/Platform/Linux -lode-solver
+    LIBS += $$SDESOLVER_WIN_LINKER_LINE
+  }
 }
 
 
