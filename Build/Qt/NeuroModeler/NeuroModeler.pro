@@ -263,7 +263,7 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/USingleClassListWidget.ui
 
 
-# Линковка OpenCV
+# пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenCV
 contains(DEFINES, RDK_USE_OPENCV) {
 
     windows {

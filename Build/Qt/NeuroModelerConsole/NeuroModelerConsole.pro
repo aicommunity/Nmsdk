@@ -143,7 +143,7 @@ HEADERS += \
 #FORMS   += \
 
 
-# Линковка OpenCV
+# пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenCV
 contains(DEFINES, RDK_USE_OPENCV) {
 
     windows {
