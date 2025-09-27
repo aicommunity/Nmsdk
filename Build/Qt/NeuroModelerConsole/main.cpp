@@ -9,9 +9,10 @@
 //#include "../../../Rdk/Deploy/Include/rdk_cpp_initlib.h"
 //#include "../../../Rdk/Core/Application/UApplication.h"
 #include "../../../Rdk/Core/Application/UAppCore.h"
-#include "../../../Rdk/GUI/Qt/UEngineControlQt.h"
-#include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
-#include "../../../Rdk/Core/Application/Qt/UServerTransportTcpQt.h"
+// Use base RDK classes without Qt dependencies for console build
+#include "../../../Rdk/Core/Application/UEngineControl.h"
+#include "../../../Rdk/Core/Application/UServerTransportTcp.h"
+#include "../../../Rdk/Core/Application/UProjectDeployer.h"
 using namespace std;
 
 //namespace po = boost::program_options;
@@ -29,7 +30,7 @@ int main(int argc, char* argv[])
  using namespace RDK;
  QCoreApplication a(argc, argv);
 
- RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
+ RDK::UAppCore<RDK::UApplication, RDK::UEngineControl, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, RDK::UServerTransportTcp, RDK::UProjectDeployer> AppCore;
 
  std::string default_user_name;
  QString name = qgetenv("USER");
@@ -195,25 +196,25 @@ int main(int argc, char* argv[])
 
   cout<<"Draw component scheme by name: "<<component_name<<endl;
 
-  /// Класс рисования структуры сети
+  /// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
   RDK::UDrawEngine DrawEngine;
 
-  /// Графический движок
+  /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
   RDK::UGraphics Graph;
 
-  /// Тип шрифта
+  /// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
   std::string FontType;
 
-  /// Размер шрифта
+  /// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
   int FontSize;
 
-  /// Шрифт
+  /// пїЅпїЅпїЅпїЅпїЅ
   RDK::UBitmapFont Font;
 
-  /// Канва рисования
+  /// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   RDK::UBitmap GraphCanvas;
 
-  /// Xml описание сети
+  /// Xml пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
   RDK::USerStorageXML NetXml;
 
   Graph.SetCanvas(&GraphCanvas);
