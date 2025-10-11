@@ -8,6 +8,45 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+# Современные флаги компилятора для C++20
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion")
+    
+    # Debug flags
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0")
+    
+    # Release flags with LTO
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG -flto")
+    
+    # Sanitizers (optional, can be enabled via CMake options)
+    option(USE_ADDRESS_SANITIZER "Enable AddressSanitizer" OFF)
+    option(USE_THREAD_SANITIZER "Enable ThreadSanitizer" OFF)
+    option(USE_UNDEFINED_SANITIZER "Enable UndefinedBehaviorSanitizer" OFF)
+    
+    if(USE_ADDRESS_SANITIZER)
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
+        set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
+    endif()
+    
+    if(USE_THREAD_SANITIZER)
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=thread -fno-omit-frame-pointer")
+        set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=thread")
+    endif()
+    
+    if(USE_UNDEFINED_SANITIZER)
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=undefined -fno-omit-frame-pointer")
+        set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=undefined")
+    endif()
+    
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /permissive-")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Od /Zi")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2 /Ob2 /DNDEBUG /GL")
+endif()
+
+# Precompiled headers для ускорения компиляции
+set(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
+
 # Каталог общих модулей CMake
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -41,5 +80,11 @@ add_subdirectory(Libraries/Nmsdk-PulseLib/CMake) # Nmsdk-PulseLib
 # Приложения
 add_subdirectory(Build/Qt/NeuroModeler/CMake)
 add_subdirectory(Build/Qt/NeuroModelerConsole/CMake)
+
+# Тесты
+option(BUILD_TESTS "Build tests" ON)
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
 
 

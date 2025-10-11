@@ -1,0 +1,37 @@
+project(RdkBasicLibTests LANGUAGES CXX)
+
+# Find Google Test
+find_package(GTest REQUIRED)
+
+# Create test executable for Rdk-BasicLib
+add_executable(RdkBasicLibTests
+    SimplifiedBasicLibTests.cpp
+)
+
+# Set output directory
+set_target_properties(RdkBasicLibTests PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests
+)
+
+# Include directories
+target_include_directories(RdkBasicLibTests PRIVATE
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Engine
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/System
+)
+
+# Link libraries
+target_link_libraries(RdkBasicLibTests PRIVATE
+    GTest::gtest
+    GTest::gtest_main
+    Threads::Threads
+)
+
+# Compile definitions
+target_compile_definitions(RdkBasicLibTests PRIVATE
+    RDK_LIB_CVS_REVISION=0
+)
+
+# Enable C++20 features
+target_compile_features(RdkBasicLibTests PRIVATE cxx_std_20)
+
