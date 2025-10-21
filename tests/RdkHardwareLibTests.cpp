@@ -624,3 +624,6 @@ TEST(HardwareLibIntegration, FullHardwarePipeline) {
     EXPECT_TRUE(adc->IsADCSensorValid());
 }
 
+
+
+

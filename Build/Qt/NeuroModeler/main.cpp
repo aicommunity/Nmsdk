@@ -4,6 +4,8 @@
 #include <QDebug>
 
 #include "UGEngineControlWidget.h"
+
+using namespace RDK;
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 #include "../../../Rdk/Core/Engine/ModernSmartPointers.h"
@@ -54,8 +56,8 @@ namespace RDK {
                 }
                 
                 return 0;
-            } catch (const std::exception& e) {
-                qDebug() << "Application initialization failed:" << e.what();
+            } catch (const std::exception& ex) {
+                qDebug() << "Application initialization failed:" << ex.what();
                 return std::nullopt;
             }
         }

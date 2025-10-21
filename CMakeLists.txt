@@ -1,6 +1,31 @@
 cmake_minimum_required(VERSION 3.16)
 project(Nmsdk LANGUAGES CXX)
 
+# Установка типа сборки по умолчанию
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+# Убедимся, что CMAKE_BUILD_TYPE установлен правильно
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
+# Установка переменных для всех типов сборки
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release;MinSizeRel;RelWithDebInfo" CACHE STRING "Available build types" FORCE)
+
+# Специальная настройка для Qt Creator
+if(DEFINED ENV{QTCREATOR_CMAKE_BUILD_TYPE})
+    set(CMAKE_BUILD_TYPE $ENV{QTCREATOR_CMAKE_BUILD_TYPE} CACHE STRING "Build type from Qt Creator" FORCE)
+endif()
+
+# Define Boost macros to suppress warnings
+add_definitions(-DBOOST_BIND_GLOBAL_PLACEHOLDERS)
+
+# Add compiler flags to suppress warnings
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    add_compile_options(-Wno-unused-function -Wno-sign-conversion -Wno-deprecated-enum-enum-conversion)
+endif()
+
 # Политики и стандарт
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,6 +42,12 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
     
     # Release flags with LTO
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG -flto")
+    
+    # RelWithDebInfo flags
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O2 -g -DNDEBUG")
+    
+    # MinSizeRel flags
+    set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} -Os -DNDEBUG")
     
     # Sanitizers (optional, can be enabled via CMake options)
     option(USE_ADDRESS_SANITIZER "Enable AddressSanitizer" OFF)

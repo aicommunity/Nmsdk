@@ -1,104 +1,100 @@
+# NeuroModeler Application CMake Configuration
 cmake_minimum_required(VERSION 3.16)
-project(NeuroModeler LANGUAGES CXX)
 
-add_executable(NeuroModeler)
+# C++20 configuration
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort)
+# Define macros to disable external GUI components
+add_definitions(-DRDK_DISABLE_EXT_GUI)
 
-target_sources(NeuroModeler PRIVATE
-  ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/static/res.qrc
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USettingsReaderWidget.h
-  ${CMAKE_SOURCE_DIR}/Build/Qt/NeuroModeler/main.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UAboutDialog.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGEngineControlWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMatrixFormDialog.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerMainWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatch.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChart.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartView.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartOption.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSerie.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSeriesOption.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchTab.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentsListWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UDrawEngineWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UDrawEngineImageWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassesListWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentLinksWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UImagesWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleImageWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentPropertySelectionWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UPropertyXMLWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCalculationChannelsWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UEngineControlQt.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/ULoggerWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCreateConfigurationWizardWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UImageLoader.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCreateTestWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentPropertyChanger.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStatusPanel.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleImagePainter.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/qcustomplot.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphControlDialog.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphPaintWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UTableInfo.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchFormWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSettingsDialog.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UTcpServerControlWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassDescriptionDisplay.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClDescEditor.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassFavoritesEditor.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleClassListWidget.cpp
+# Define Boost macros to suppress warnings
+add_definitions(-DBOOST_BIND_GLOBAL_PLACEHOLDERS)
+
+# Define application macros
+add_definitions(-DRDK_APP_URL="https://github.com/neuro-modeler/nmsdk")
+add_definitions(-DRDK_APP_LICENSE="MIT License")
+add_definitions(-DRDK_APP_VERSION="1.0.0")
+
+# Find required packages
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets Network Charts)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(CURL REQUIRED libcurl)
+find_package(Boost REQUIRED COMPONENTS thread filesystem system)
+
+# Include directories
+include_directories(
+    ${CMAKE_SOURCE_DIR}/Rdk/Core
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Engine
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Application
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/System
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Math
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Utilities
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Graphics
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
+    ${CMAKE_SOURCE_DIR}/Libraries
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/Core
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/Core
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/Core
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/Core
 )
 
-# DEFINES из оригинального .pro
-target_compile_definitions(NeuroModeler
-  PRIVATE
-    QT_DLL
-    QT_WIDGETS_LIB
-    RDK_DISABLE_EXT_GUI
+# Source files
+set(SOURCES
+    ../main.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Libraries_con.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp
 )
 
-# Подключаем заголовок с строковыми макросами
-target_compile_options(NeuroModeler PRIVATE -include ${CMAKE_CURRENT_LIST_DIR}/NeuroModelerAppDefs.h)
+# Add all Qt GUI files
+file(GLOB_RECURSE QT_GUI_SOURCES "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/*.cpp")
+list(APPEND SOURCES ${QT_GUI_SOURCES})
 
+# Create executable
+add_executable(NeuroModeler ${SOURCES})
+
+# Modern compiler flags for GNU
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(NeuroModeler PRIVATE
+        -Wall -Wextra -Wpedantic
+        -O3 -march=native -mtune=native
+        -flto -fuse-linker-plugin
+        -Wno-unused-function
+        -Wno-deprecated-copy
+    )
+endif()
+
+# Precompiled headers
+target_precompile_headers(NeuroModeler PRIVATE
+    <memory>
+    <string>
+    <vector>
+    <QApplication>
+    <QWidget>
+)
+
+# Link libraries
 target_link_libraries(NeuroModeler
-  PRIVATE
-    Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort
-    Rdk-CvBasicLib.qt
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::Network
+    Qt5::Charts
+    rdk.static.qt
     Rdk-BasicLib.qt
-    Rdk-HardwareLib.qt
     Nmsdk-PulseLib.qt
     Nmsdk-MotionControlLib.qt
-    rdk.static.qt
+    Rdk-CvBasicLib.qt
+    Rdk-HardwareLib.qt
+    Threads::Threads
+    ${CURL_LIBRARIES}
+    Boost::thread
+    Boost::filesystem
+    Boost::system
 )
 
-find_package(CURL QUIET)
-if(CURL_FOUND)
-  target_link_libraries(NeuroModeler PRIVATE CURL::libcurl)
-endif()
-
-target_include_directories(NeuroModeler PRIVATE
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
-  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include
-  ${CMAKE_SOURCE_DIR}/Rdk/Core/Graphics
+# Set output directory
+set_target_properties(NeuroModeler PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
-
-target_compile_definitions(NeuroModeler PRIVATE RDK_DISABLE_EXT_GUI QT_DLL QT_WIDGETS_LIB RDK_APP_VERSION=0)
-
-target_link_libraries(NeuroModeler PRIVATE
-  Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort
-  rdk.static.qt
-  Rdk-BasicLib.qt
-)
-
-# Опциональные зависимости
-if (RDK_USE_OPENCV AND OpenCV_FOUND)
-  target_link_libraries(NeuroModeler PRIVATE ${OpenCV_LIBS})
-endif()
-
-
