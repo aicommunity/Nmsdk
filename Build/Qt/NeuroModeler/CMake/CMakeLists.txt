@@ -44,12 +44,13 @@ include_directories(
 # Source files
 set(SOURCES
     ../main.cpp
-    ${CMAKE_SOURCE_DIR}/Libraries/Libraries_con.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp
 )
 
-# Add all Qt GUI files
+# Add all Qt GUI files except problematic ones
 file(GLOB_RECURSE QT_GUI_SOURCES "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/*.cpp")
+# Remove problematic files
+list(REMOVE_ITEM QT_GUI_SOURCES "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USettingsReaderWidget.cpp")
 list(APPEND SOURCES ${QT_GUI_SOURCES})
 
 # Create executable
