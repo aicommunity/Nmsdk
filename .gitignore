@@ -94,4 +94,18 @@ build-*
 *.stat
 *.res
 ode-solver-build/
+
+# CMake build directories (lowercase)
 build/
+Build/
+
+# IDE-specific build artifacts
+*.cbproj
+*.groupproj
+*.sln
+*.vcxproj
+*.vcproj
+*.workspace
+*.cbp
+*.pro
+*.pro.user

@@ -96,21 +96,19 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
 # Общие определения и зависимости (OpenCV/Boost/и т.д.)
 include(RdkDefines OPTIONAL)
 
-# Подпроекты (постепенная миграция)
-add_subdirectory(Rdk/Build/Lib/CMake) # rdk.static
-add_subdirectory(Libraries/Rdk-BasicLib/CMake) # Rdk-BasicLib
-add_subdirectory(Libraries/Rdk-CvBasicLib/CMake) # Rdk-CvBasicLib
-add_subdirectory(Libraries/Rdk-HardwareLib/CMake) # Rdk-HardwareLib
-add_subdirectory(Libraries/Nmsdk-MotionControlLib/CMake) # Nmsdk-MotionControlLib
-add_subdirectory(Libraries/Nmsdk-PulseLib/CMake) # Nmsdk-PulseLib
-# add_subdirectory(Libraries/Rdk-CvBasicLib/CMake)
-# add_subdirectory(Libraries/Rdk-HardwareLib/CMake)
-# add_subdirectory(Libraries/Nmsdk-MotionControlLib/CMake)
-# add_subdirectory(Libraries/Nmsdk-PulseLib/CMake)
+# Rdk core library
+add_subdirectory(Rdk)
 
-# Приложения
-add_subdirectory(Build/Qt/NeuroModeler/CMake)
-add_subdirectory(Build/Qt/NeuroModelerConsole/CMake)
+# Component libraries
+add_subdirectory(Libraries/Rdk-BasicLib)
+add_subdirectory(Libraries/Rdk-CvBasicLib)
+add_subdirectory(Libraries/Rdk-HardwareLib)
+add_subdirectory(Libraries/Nmsdk-MotionControlLib)
+add_subdirectory(Libraries/Nmsdk-PulseLib)
+
+# Applications
+add_subdirectory(App/NeuroModeler)
+add_subdirectory(App/NeuroModelerConsole)
 
 # Тесты
 option(BUILD_TESTS "Build tests" ON)

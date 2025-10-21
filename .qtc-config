@@ -1,0 +1,24 @@
+# Qt Creator configuration for NMSDK project
+# This file helps Qt Creator understand the project structure
+
+[CMake]
+# CMake configuration
+CMAKE_BUILD_TYPE=Debug
+CMAKE_CXX_STANDARD=20
+CMAKE_CXX_STANDARD_REQUIRED=ON
+
+# Build configurations
+Debug=Debug
+Release=Release
+MinSizeRel=MinSizeRel
+RelWithDebInfo=RelWithDebInfo
+
+[Qt]
+# Qt version (adjust as needed)
+QtVersion=5.15.2
+
+[Build]
+# Build configuration
+BuildConfiguration=Debug
+
+
