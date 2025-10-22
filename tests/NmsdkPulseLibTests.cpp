@@ -23,8 +23,8 @@ namespace NMSDK {
         MockNModel(int v = 0) : value(v) {}
         int GetValue() const { return value; }
 
-        // Mock New method returning UEPtr
-        static UEPtr<MockNModel> New() {
+        // Mock New method returning std::shared_ptr
+        static std::shared_ptr<MockNModel> New() {
             return make_ueptr<MockNModel>(456);
         }
     };
@@ -211,7 +211,7 @@ using namespace NMSDK;
 // ============================================================================
 
 TEST(MockNModel, SmartPointerCreation) {
-    UEPtr<MockNModel> model = MockNModel::New();
+    std::shared_ptr<MockNModel> model = MockNModel::New();
     EXPECT_NE(model, nullptr);
     EXPECT_EQ(model->GetValue(), 456);
 }
@@ -400,7 +400,7 @@ TEST(MockNPulseGenerator, ContainerOperations) {
 TEST(MockPerformance, NeuronCreationPerformance) {
     auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<UEPtr<MockNPulseNeuron>> neurons;
+    std::vector<std::shared_ptr<MockNPulseNeuron>> neurons;
     ReserveVector(neurons, 10000);
     
     for (int i = 0; i < 10000; ++i) {

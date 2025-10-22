@@ -486,7 +486,7 @@ TEST(MockUCRClassifier, ContainerOperations) {
 TEST(CvBasicLibPerformance, PipelineCreationPerformance) {
     auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<UEPtr<MockUBPipeline>> pipelines;
+    std::vector<std::shared_ptr<MockUBPipeline>> pipelines;
     ReserveVector(pipelines, 1000);
     
     for (int i = 0; i < 1000; ++i) {
@@ -629,6 +629,8 @@ TEST(CvBasicLibIntegration, FullComputerVisionPipeline) {
     EXPECT_TRUE(detector->IsObjectDetectorValid());
     EXPECT_TRUE(classifier->IsClassifierValid());
 }
+
+
 
 
 

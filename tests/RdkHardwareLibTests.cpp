@@ -480,7 +480,7 @@ TEST(MockUADC, ContainerOperations) {
 TEST(HardwareLibPerformance, HardwareLibraryCreationPerformance) {
     auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<UEPtr<MockUHardwareLibrary>> hardwareLibs;
+    std::vector<std::shared_ptr<MockUHardwareLibrary>> hardwareLibs;
     ReserveVector(hardwareLibs, 1000);
     
     for (int i = 0; i < 1000; ++i) {
@@ -623,6 +623,8 @@ TEST(HardwareLibIntegration, FullHardwarePipeline) {
     EXPECT_TRUE(arduinoConnect->IsArduinoConnectionValid());
     EXPECT_TRUE(adc->IsADCSensorValid());
 }
+
+
 
 
 

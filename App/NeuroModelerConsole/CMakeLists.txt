@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Find required packages
 find_package(Qt5 REQUIRED COMPONENTS Core)
+find_package(Boost REQUIRED COMPONENTS thread system filesystem program_options)
 
 # Include directories
 include_directories(
@@ -28,7 +29,11 @@ include_directories(
 # Source files
 set(SOURCES
     main.cpp
+    rdk_stubs.cpp
 )
+
+# Note: GUI files removed for console application
+# Missing RDK functions will be stubbed out
 
 # Create executable
 add_executable(NeuroModelerConsole ${SOURCES})
@@ -39,7 +44,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         -Wall -Wextra -Wpedantic
         -O3 -march=native -mtune=native
         -flto -fuse-linker-plugin
-        -fno-exceptions -fno-rtti
     )
 endif()
 
@@ -61,6 +65,10 @@ target_link_libraries(NeuroModelerConsole
     Rdk-CvBasicLib.qt
     Rdk-HardwareLib.qt
     Threads::Threads
+    Boost::thread
+    Boost::system
+    Boost::filesystem
+    Boost::program_options
 )
 
 # Set output directory

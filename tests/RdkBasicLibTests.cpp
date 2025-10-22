@@ -123,7 +123,7 @@ TEST(Performance, SmartPointerOverhead) {
     auto start = std::chrono::high_resolution_clock::now();
     
     // Create many UModel instances
-    std::vector<UEPtr<UModel>> models;
+    std::vector<std::shared_ptr<UModel>> models;
     models.reserve(10000);
     
     for (int i = 0; i < 10000; ++i) {
@@ -181,7 +181,7 @@ TEST(Integration, RdkBasicLibComponents) {
 TEST(Integration, ModernContainersWithBasicLib) {
     // Test modern containers with Rdk-BasicLib components
     
-    UVector<UEPtr<UModel>> models;
+    UVector<std::shared_ptr<UModel>> models;
     ReserveVector(models, 100);
     
     for (int i = 0; i < 100; ++i) {
@@ -249,6 +249,8 @@ TEST(ErrorHandling, MatrixSourceErrorHandling) {
     // Optimization should handle empty matrices gracefully
     EXPECT_NO_THROW(matrixSource.OptimizeMatrixOperations());
 }
+
+
 
 
 

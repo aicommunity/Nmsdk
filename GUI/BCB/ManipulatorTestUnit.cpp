@@ -166,7 +166,7 @@ void __fastcall TManipulatorTestForm::MomentTrackBarChange(TObject *Sender)
 {
  if(Engine && ControlSystem)
  {
-  UEPtr<NConstGenerator> generator=dynamic_pointer_cast<NConstGenerator>(ControlSystem->GetComponent("EngineMoment"));
+  std::shared_ptr<NConstGenerator> generator=dynamic_pointer_cast<NConstGenerator>(ControlSystem->GetComponent("EngineMoment"));
   generator->Amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
   //  Engine->OutMoment=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
 //  ExtMomentEdit->Text=FloatToStrF(Engine->OutMoment,ffFixed,3,3);
@@ -616,7 +616,7 @@ void __fastcall TManipulatorTestForm::VoltageMulTrackBarChange(TObject *Sender)
  VoltageMulEdit->Text=FloatToStrF(value,ffFixed,3,3);
  if(RadioGroup1->ItemIndex != 0)
   {
-   UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+   std::shared_ptr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
    if(engine_input)
 	engine_input->OutputMul=value;
   }
@@ -641,7 +641,7 @@ void __fastcall TManipulatorTestForm::EmulatorCheckBoxClick(TObject *Sender)
 
 void __fastcall TManipulatorTestForm::SwapOutputVoltageDirectionCheckBoxClick(TObject *Sender)
 {
- UEPtr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ std::shared_ptr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(!engine_input)
   return;
 
@@ -660,7 +660,7 @@ void __fastcall TManipulatorTestForm::SwapOutputVoltageDirectionCheckBoxClick(TO
 
 void __fastcall TManipulatorTestForm::ServoNumberEditChange(TObject *Sender)
 {
- UEPtr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ std::shared_ptr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(!engine_input)
   return;
 
@@ -675,7 +675,7 @@ void __fastcall TManipulatorTestForm::TimeDurationTrackBarChange(TObject *Sender
  TimeDurationEdit->Text=FloatToStrF(value,ffFixed,3,3);
  if(RadioGroup1->ItemIndex != 0)
   {
-   UEPtr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+   std::shared_ptr<NWPhysicalManipulator> engine_input=static_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
    if(engine_input)
 	engine_input->TimeDuration=value;
   }
@@ -690,7 +690,7 @@ void __fastcall TManipulatorTestForm::PACDeactivatorTimeTrackBarChange(TObject *
  double value=double(PACDeactivatorTimeTrackBar->Position)/double(PACDeactivatorTimeTrackBar->Max);
  PACDeactivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
- UEPtr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   vector<Real> values;
@@ -711,7 +711,7 @@ void __fastcall TManipulatorTestForm::PACActivatorTimeTrackBarChange(TObject *Se
  double value=double(PACActivatorTimeTrackBar->Position)/double(PACActivatorTimeTrackBar->Max);
  PACActivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
- UEPtr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NPac> engine_input=dynamic_pointer_cast<NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   vector<Real> values;
@@ -729,7 +729,7 @@ void __fastcall TManipulatorTestForm::OnDeviceButtonClick(TObject *Sender)
 {
   RadioGroup1->ItemIndex=1;
  RadioGroup1Click(Sender);
- UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ std::shared_ptr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(engine_input)
  {
   engine_input->SetActivity(true);
@@ -769,7 +769,7 @@ void __fastcall TManipulatorTestForm::OffDeviceButtonClick(TObject *Sender)
 
  RadioGroup1->ItemIndex=0;
  RadioGroup1Click(Sender);
- UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ std::shared_ptr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(engine_input)
  {
   engine_input->UnInitManipulator();
@@ -785,7 +785,7 @@ void __fastcall TManipulatorTestForm::OffDeviceButtonClick(TObject *Sender)
 
 void __fastcall TManipulatorTestForm::SendVButtonClick(TObject *Sender)
 {
- UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ std::shared_ptr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  int num_ranges=StrToInt(MainForm->NumMotionElementsComboBox->Items->Strings[MainForm->NumMotionElementsComboBox->ItemIndex]);
  if(engine_input)
  {
@@ -799,7 +799,7 @@ void __fastcall TManipulatorTestForm::SendVButtonClick(TObject *Sender)
 
 void __fastcall TManipulatorTestForm::WorkModeComboBoxSelect(TObject *Sender)
 {
- UEPtr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
+ std::shared_ptr<NWPhysicalManipulator> engine_input=dynamic_pointer_cast<NWPhysicalManipulator>(ControlSystem->GetComponent("WPhysicalManipulator"));
  if(engine_input)
  {
   engine_input->DllManipulatorMode=WorkModeComboBox->ItemIndex+2;

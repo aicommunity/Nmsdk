@@ -22,7 +22,7 @@ private:	// User declarations
 public:		// User declarations
 	__fastcall TNAstaticGyro(TComponent* Owner);
 
-	RDK::UEPtr<NMSDK::NAstaticGyro> Gyro;
+	std::shared_ptr<NMSDK::NAstaticGyro> Gyro;
 
 // Сохраняет параметры интерфейса в xml
 virtual void ASaveParameters(RDK::USerStorageXML &xml);

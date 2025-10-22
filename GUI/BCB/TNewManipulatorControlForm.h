@@ -213,15 +213,15 @@ std::string ManipulatorName;
 
 std::string ControlSystemName;
 /*
-RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
-RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
+std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+std::shared_ptr<NMSDK::UNet> UniversalManipulator;
 
-RDK::UEPtr<NMSDK::NManipulatorSource> Engine;
-RDK::UEPtr<NMSDK::NConstGenerator> Source;
-RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
+std::shared_ptr<NMSDK::NManipulatorSource> Engine;
+std::shared_ptr<NMSDK::NConstGenerator> Source;
+std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
 
-RDK::UEPtr<NMSDK::NPulseGenerator> IIPosAfferent,IINegAfferent;
-RDK::UEPtr<NMSDK::NPulseGenerator> MN1PosControl,MN1NegControl;
+std::shared_ptr<NMSDK::NPulseGenerator> IIPosAfferent,IINegAfferent;
+std::shared_ptr<NMSDK::NPulseGenerator> MN1PosControl,MN1NegControl;
   */
 // Отображаемое изображение
 RDK::UBitmap BmpCanvas;

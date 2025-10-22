@@ -81,8 +81,8 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
 
  if(Manipulator)
  {
@@ -123,7 +123,7 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
 
  if(ControlSystem)
  {
-  RDK::UEPtr<RDK::UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
+  std::shared_ptr<UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
   if(!stats)
   {
    NewStatsButton->Enabled=false;
@@ -196,8 +196,8 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
 
  if(ControlSystem)
  {
-  RDK::UEPtr<NMSDK::NPulseGenerator>IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator",true));
-  RDK::UEPtr<NMSDK::NPulseGenerator>IINegAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator",true));
+  std::shared_ptr<NMSDK::NPulseGenerator>IIPosAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator",true));
+  std::shared_ptr<NMSDK::NPulseGenerator>IINegAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator",true));
 
   if(IIPosAfferent && IINegAfferent)
   {
@@ -269,7 +269,7 @@ void TNewManipulatorControlForm::AUpdateInterface(void)
  }
  IINumAfferentTrackBarChange(this);
 
- RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NDCEngine> engine=std::dynamic_pointer_cast<NMSDK::NDCEngine>(model->GetComponentL(ManipulatorName,true));
  double position=0;
  if(engine)
  {
@@ -364,14 +364,14 @@ void TNewManipulatorControlForm::LoadInterfaceInfoFromNet(void)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
  int num_ranges=ControlSystem->NumMotionElements;
  bool flag=UpdateInterfaceFlag;
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(!flag)
   UpdateInterfaceFlag=true;
  PACMultiplicatorTrackBar->Position=ControlSystem->PacGain;//fabs(engine_input->Gain[0][0]);
@@ -444,20 +444,20 @@ void TNewManipulatorControlForm::ALoadParameters(RDK::USerStorageXML &xml)
 
   xml.SelectNodeForce("Control");
  ManipulatorName=xml.ReadString("ManipulatorName","");
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
  if(!ManipulatorName.empty())
  {
-  UniversalManipulator=RDK::dynamic_pointer_cast<NMSDK::UNet>(model->GetComponentL(ManipulatorName,true));
-  Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+  UniversalManipulator=std::dynamic_pointer_cast<NMSDK::UNet>(model->GetComponentL(ManipulatorName,true));
+  Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  }
  if(!UniversalManipulator)
   ManipulatorName="";
 
  ControlSystemName=xml.ReadString("ControlSystemName","");
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
  if(!ControlSystemName.empty())
-  ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+  ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   ControlSystemName="";
  else
@@ -484,7 +484,7 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return false;
- RDK::UEPtr<RDK::UNet> net=RDK::dynamic_pointer_cast<RDK::UNet>(RDK::UEPtr<NMSDK::NModel>(model.Get()));
+ std::shared_ptr<UNet> net=std::dynamic_pointer_cast<RDK::UNet>(std::shared_ptr<NMSDK::NModel>(model.get()));
 
  if(cs_name.empty())
   return true;
@@ -497,8 +497,8 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
 // net->BreakConnectorLink(source_name,3);
 // net->BreakConnectorLink(source_name,4);
  net->BreakAllOutgoingLinks(man_name);
- // RDK::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(source_name))->DisconnectAllItems();
- RDK::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1",true))->DisconnectAll();
+ // std::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(source_name))->DisconnectAllItems();
+ std::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1",true))->DisconnectAll();
 
  if(man_name == "DCEngine")
  {
@@ -515,7 +515,7 @@ bool TNewManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name
 
  //res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
 
- RDK::UEPtr<NMSDK::NControlObjectSource> source=net->GetComponentL<NMSDK::NControlObjectSource>(source_name,true);
+ std::shared_ptr<NMSDK::NControlObjectSource> source=net->GetComponentL<NMSDK::NControlObjectSource>(source_name,true);
  if(source)
  {
   MDVector<int> indexes;
@@ -559,16 +559,16 @@ void TNewManipulatorControlForm::ReadComponentData(void)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
 
  if(!ControlSystem)
   return;
  ReadComponentName=ManipulatorName;
 
  double angle = 0;
- //RDK::UEPtr<NMSDK::NDCEngine> engine = RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(model->GetComponentL(ReadComponentName));
- RDK::UEPtr<NMSDK::NDCEngine> engine = (model->GetComponentL<NMSDK::NDCEngine>(ReadComponentName));
- RDK::UEPtr<NMSDK::NPendulumAndCart> pendulum = (model->GetComponentL<NMSDK::NPendulumAndCart>(ReadComponentName));
+ //std::shared_ptr<NMSDK::NDCEngine> engine = std::dynamic_pointer_cast<NMSDK::NDCEngine>(model->GetComponentL(ReadComponentName));
+ std::shared_ptr<NMSDK::NDCEngine> engine = (model->GetComponentL<NMSDK::NDCEngine>(ReadComponentName));
+ std::shared_ptr<NMSDK::NPendulumAndCart> pendulum = (model->GetComponentL<NMSDK::NPendulumAndCart>(ReadComponentName));
  if(engine)
  {
   Angle=engine->OutputAngle->As<double>(0);
@@ -585,8 +585,8 @@ void TNewManipulatorControlForm::ReadComponentData(void)
  NegAngles.assign(ControlSystem->NumMotionElements,0.0);
  for(int i=0;i<ControlSystem->NumMotionElements;i++)
  {
-  RDK::UEPtr<NMSDK::NIntervalSeparator> pos_sep=ControlSystem->GetComponentL<NMSDK::NIntervalSeparator>(std::string("PosIntervalSeparator")+RDK::sntoa(i+1)+"1",true);
-  RDK::UEPtr<NMSDK::NIntervalSeparator> neg_sep=ControlSystem->GetComponentL<NMSDK::NIntervalSeparator>(std::string("NegIntervalSeparator")+RDK::sntoa(i+1)+"1",true);
+  std::shared_ptr<NMSDK::NIntervalSeparator> pos_sep=ControlSystem->GetComponentL<NMSDK::NIntervalSeparator>(std::string("PosIntervalSeparator")+RDK::sntoa(i+1)+"1",true);
+  std::shared_ptr<NMSDK::NIntervalSeparator> neg_sep=ControlSystem->GetComponentL<NMSDK::NIntervalSeparator>(std::string("NegIntervalSeparator")+RDK::sntoa(i+1)+"1",true);
 
   if(pos_sep)
   {
@@ -605,8 +605,8 @@ void TNewManipulatorControlForm::ReconnectCurrentManipulator(void)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
  if(Manipulator)
  {
   Disconnect1Click(this);
@@ -614,8 +614,8 @@ void TNewManipulatorControlForm::ReconnectCurrentManipulator(void)
  }
 
 // ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
- UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UNet>(model->GetComponentL(ManipulatorName,true));
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ UniversalManipulator=std::dynamic_pointer_cast<RDK::UNet>(model->GetComponentL(ManipulatorName,true));
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!UniversalManipulator)
   ManipulatorName="";
  ManipulatorCSConnect(ControlSystemName, ManipulatorName);
@@ -626,8 +626,8 @@ void TNewManipulatorControlForm::ReconnectManipulator(void)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
  if(Manipulator)
  {
   Disconnect1Click(this);
@@ -635,8 +635,8 @@ void TNewManipulatorControlForm::ReconnectManipulator(void)
  }
 
  ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
- UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UNet>(model->GetComponentL(ManipulatorName,true));
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ UniversalManipulator=std::dynamic_pointer_cast<RDK::UNet>(model->GetComponentL(ManipulatorName,true));
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!UniversalManipulator)
   ManipulatorName="";
  ManipulatorCSConnect(ControlSystemName, ManipulatorName);
@@ -647,9 +647,9 @@ void __fastcall TNewManipulatorControlForm::Disconnect1Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator)
   return;
 
@@ -663,9 +663,9 @@ void __fastcall TNewManipulatorControlForm::MoveLeft1Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator || !Manipulator->DMMoveServo)
   return;
 
@@ -675,9 +675,9 @@ void __fastcall TNewManipulatorControlForm::MoveLeft1Click(TObject *Sender)
 void __fastcall TNewManipulatorControlForm::MoveRight1Click(TObject *Sender)
 {
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator || !Manipulator->DMMoveServo)
   return;
 
@@ -700,9 +700,9 @@ void __fastcall TNewManipulatorControlForm::Connect1Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator)
   return;
  Manipulator->WindowHandle=Handle;
@@ -766,9 +766,9 @@ void __fastcall TNewManipulatorControlForm::Reset1Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator || !Manipulator->DMReset)
   return;
 
@@ -800,9 +800,9 @@ void __fastcall TNewManipulatorControlForm::Start1Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator || !Manipulator->DMStart)
   return;
 
@@ -816,9 +816,9 @@ void __fastcall TNewManipulatorControlForm::Stop1Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator || !Manipulator->DMStop)
   return;
 
@@ -832,9 +832,9 @@ void __fastcall TNewManipulatorControlForm::Button2Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
  if(!Manipulator || !Manipulator->DMMoveServo)
   return;
 
@@ -863,16 +863,16 @@ void __fastcall TNewManipulatorControlForm::IIAfferentTrackBarChange(TObject *Se
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<NMSDK::NPulseGenerator> IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator",true));
- RDK::UEPtr<NMSDK::NPulseGenerator> IINegAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator",true));
+ std::shared_ptr<NMSDK::NPulseGenerator> IIPosAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator",true));
+ std::shared_ptr<NMSDK::NPulseGenerator> IINegAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator",true));
 
 
  if(!IIPosAfferent || !IINegAfferent)
@@ -914,11 +914,11 @@ void __fastcall TNewManipulatorControlForm::ControlVoltageCheckBoxClick(TObject 
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -950,9 +950,9 @@ void __fastcall TNewManipulatorControlForm::SelectControlSystem1Click(TObject *S
   return;
  ControlSystemName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
 
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   ControlSystemName="";
 
@@ -981,11 +981,11 @@ void __fastcall TNewManipulatorControlForm::VoltageMulTrackBarChange(TObject *Se
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!Manipulator)
   return;
 
@@ -1002,11 +1002,11 @@ void __fastcall TNewManipulatorControlForm::TimeDurationTrackBarChange(TObject *
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!Manipulator)
   return;
 
@@ -1021,8 +1021,8 @@ void __fastcall TNewManipulatorControlForm::PACDeactivatorTimeTrackBarChange(TOb
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
  int num_ranges=ControlSystem->NumMotionElements;
@@ -1030,7 +1030,7 @@ void __fastcall TNewManipulatorControlForm::PACDeactivatorTimeTrackBarChange(TOb
  PACDeactivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
  ControlSystem->PacDissociationTC=value;
 /*
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   std::vector<NMSDK::Real> values;
@@ -1052,8 +1052,8 @@ void __fastcall TNewManipulatorControlForm::PACActivatorTimeTrackBarChange(TObje
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
  double value=double(PACActivatorTimeTrackBar->Position)/double(PACActivatorTimeTrackBar->Max);
@@ -1062,7 +1062,7 @@ void __fastcall TNewManipulatorControlForm::PACActivatorTimeTrackBarChange(TObje
  ControlSystem->PacSecretionTC=value;
 
 /*
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   std::vector<NMSDK::Real> values;
@@ -1082,11 +1082,11 @@ void __fastcall TNewManipulatorControlForm::SendVButtonClick(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
-// RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+// std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!Manipulator)
   return;
 
@@ -1106,15 +1106,15 @@ void __fastcall TNewManipulatorControlForm::PACMultiplicatorTrackBarChange(TObje
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
  double value=double(PACMultiplicatorTrackBar->Position);
  PACMultiplicatorEdit->Text=FloatToStrF(value,ffFixed,3,3);
  ControlSystem->PacGain=value;
 /*
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   std::vector<NMSDK::Real> values;
@@ -1139,19 +1139,19 @@ void __fastcall TNewManipulatorControlForm::MomentTrackBarChange(TObject *Sender
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
- UniversalManipulator=RDK::dynamic_pointer_cast<NMSDK::UNet>(model->GetComponentL(ManipulatorName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ UniversalManipulator=std::dynamic_pointer_cast<NMSDK::UNet>(model->GetComponentL(ManipulatorName,true));
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1",true));
- RDK::UEPtr<NMSDK::NControlObjectSource> source1=RDK::dynamic_pointer_cast<NMSDK::NControlObjectSource>(ControlSystem->GetComponentL("NManipulatorSource1",true));
- RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
- RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NManipulatorSource> source=std::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1",true));
+ std::shared_ptr<NMSDK::NControlObjectSource> source1=std::dynamic_pointer_cast<NMSDK::NControlObjectSource>(ControlSystem->GetComponentL("NManipulatorSource1",true));
+ std::shared_ptr<NMSDK::NDCEngine> engine=std::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NPendulumAndCart> engine2=std::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
  double amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
  ExtMomentEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
  if(engine && source)
@@ -1187,23 +1187,23 @@ void __fastcall TNewManipulatorControlForm::MovementControlTrackBarChange(TObjec
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- UniversalManipulator=RDK::dynamic_pointer_cast<NMSDK::UNet>(model->GetComponentL(ManipulatorName,true));
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ UniversalManipulator=std::dynamic_pointer_cast<NMSDK::UNet>(model->GetComponentL(ManipulatorName,true));
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
-// RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
-// RDK::UEPtr<NMSDK::NControlObjectSource> source1=RDK::dynamic_pointer_cast<NMSDK::NControlObject>(ControlSystem->GetComponentL("NManipulatorSource1"));
+// std::shared_ptr<NMSDK::NManipulatorSource> source=std::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
+// std::shared_ptr<NMSDK::NControlObjectSource> source1=std::dynamic_pointer_cast<NMSDK::NControlObject>(ControlSystem->GetComponentL("NManipulatorSource1"));
  double amplitude=double(MovementControlTrackBar->Position)/double(MovementControlTrackBar->Max/2.0);
  MovementControlEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
 
- RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
- RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> man=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NDCEngine> engine=std::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NPendulumAndCart> engine2=std::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> man=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(UniversalManipulator);
 
   if(engine)
   {
@@ -1305,11 +1305,11 @@ void __fastcall TNewManipulatorControlForm::CheckListBox1Click(TObject *Sender)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> Manipulator;
- RDK::UEPtr<NMSDK::UNet> UniversalManipulator;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> Manipulator;
+ std::shared_ptr<NMSDK::UNet> UniversalManipulator;
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(model->GetComponentL(ManipulatorName,true));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1340,11 +1340,11 @@ void __fastcall TNewManipulatorControlForm::SaveStatsButtonClick(TObject *Sender
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<RDK::UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
+ std::shared_ptr<UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
  if(!stats)
   return;
  stats->ManualModeSwitch=true;
@@ -1358,11 +1358,11 @@ void __fastcall TNewManipulatorControlForm::NewStatsButtonClick(TObject *Sender)
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<RDK::UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
+ std::shared_ptr<UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
  if(!stats)
   return;
  stats->ManualModeSwitch=false;
@@ -1382,7 +1382,7 @@ void __fastcall TNewManipulatorControlForm::NumMotionElementsTrackBarChange(TObj
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1400,8 +1400,8 @@ void __fastcall TNewManipulatorControlForm::IINumAfferentTrackBarChange(TObject 
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1423,8 +1423,8 @@ void __fastcall TNewManipulatorControlForm::BranchModeCheckBoxClick(TObject *Sen
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1447,8 +1447,8 @@ void __fastcall TNewManipulatorControlForm::RenshowCellsCheckBoxClick(TObject *S
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1471,8 +1471,8 @@ void __fastcall TNewManipulatorControlForm::UseSimpleAfferentsCheckBoxClick(TObj
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1495,8 +1495,8 @@ void __fastcall TNewManipulatorControlForm::UseNewNeuronsCheckBoxClick(TObject *
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1519,8 +1519,8 @@ void __fastcall TNewManipulatorControlForm::EnableStructuralAdaptationCheckBoxCl
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem;
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem;
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1555,7 +1555,7 @@ void __fastcall TNewManipulatorControlForm::NumControlLoopsTrackBarChange(TObjec
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
@@ -1578,7 +1578,7 @@ void __fastcall TNewManipulatorControlForm::SensorDivisionComboBoxChange(TObject
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
  ControlSystem->AfferentRangeMode=SensorDivisionComboBox->ItemIndex;

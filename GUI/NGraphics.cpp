@@ -297,7 +297,7 @@ namespace NMSDK {
 
 		RDK::ULinksList linkslist;
 
-		UEPtr<UItem>item = dynamic_pointer_cast<UItem>(Net->GetComponent(id));
+		std::shared_ptr<UItem>item = dynamic_pointer_cast<UItem>(Net->GetComponent(id));
 		out = Descriptions[id];
 
 		for (int i = 0; i < Net->GetNumComponents(); i++) {

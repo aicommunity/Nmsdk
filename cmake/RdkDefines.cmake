@@ -9,7 +9,7 @@ option(RDK_USE_SQL "Use Qt SQL" OFF)
 option(RDK_USE_ODESOLVER "Use ODE solver" OFF)
 option(RDK_USE_MATLAB "Use MATLAB" OFF)
 
-add_compile_definitions(RDK_UNICODE_RUN RDK_QT QT_NO_VERSION_TAGGING)
+add_compile_definitions(RDK_UNICODE_RUN RDK_QT QT_NO_VERSION_TAGGING RDK_APP_NAME="RDK")
 
 if (MSVC)
   add_compile_definitions(NOMINMAX)

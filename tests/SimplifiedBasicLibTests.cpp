@@ -27,7 +27,7 @@ public:
     MockUModel& operator=(const MockUModel&) = default;
     MockUModel& operator=(MockUModel&&) noexcept = default;
     
-    static UEPtr<MockUModel> New() {
+    static std::shared_ptr<MockUModel> New() {
         return make_ueptr<MockUModel>();
     }
     
@@ -257,7 +257,7 @@ TEST(MockPerformance, SmartPointerOverhead) {
     auto start = std::chrono::high_resolution_clock::now();
     
     // Create many MockUModel instances
-    std::vector<UEPtr<MockUModel>> models;
+    std::vector<std::shared_ptr<MockUModel>> models;
     ReserveVector(models, 10000);
     
     for (int i = 0; i < 10000; ++i) {
@@ -315,7 +315,7 @@ TEST(Integration, MockComponents) {
 TEST(Integration, ModernContainersWithMockComponents) {
     // Test modern containers with mock components
     
-    UVector<UEPtr<MockUModel>> models;
+    UVector<std::shared_ptr<MockUModel>> models;
     ReserveVector(models, 100);
     
     for (int i = 0; i < 100; ++i) {

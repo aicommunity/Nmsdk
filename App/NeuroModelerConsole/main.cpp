@@ -136,7 +136,7 @@ namespace RDK {
         // Application resource management
         void ReserveConsoleApplicationMemory(size_t components_count) {
             // Reserve memory for console application components
-            std::vector<UEPtr<void>> reserved_components;
+            std::vector<std::shared_ptr<void>> reserved_components;
             reserved_components.reserve(components_count);
         }
         
@@ -159,7 +159,6 @@ int main(int argc, char* argv[])
  using namespace RDK;
  
  // Modern C++20 console application initialization
- auto start_time = ModernCLI::GetConsoleApplicationStartTime();
  ModernCLI::OptimizeConsoleApplicationPerformance();
  ModernCLI::ReserveConsoleApplicationMemory(1000);
  

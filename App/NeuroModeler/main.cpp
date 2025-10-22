@@ -65,7 +65,7 @@ namespace RDK {
         // Application resource management
         void ReserveApplicationMemory(size_t components_count) {
             // Reserve memory for application components
-            std::vector<UEPtr<void>> reserved_components;
+            std::vector<std::shared_ptr<void>> reserved_components;
             reserved_components.reserve(components_count);
         }
         

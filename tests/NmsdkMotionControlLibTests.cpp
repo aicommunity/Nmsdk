@@ -486,7 +486,7 @@ TEST(MockNManipulator, ContainerOperations) {
 TEST(MotionControlPerformance, EngineCreationPerformance) {
     auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<UEPtr<MockNEngineMotionControl>> engines;
+    std::vector<std::shared_ptr<MockNEngineMotionControl>> engines;
     ReserveVector(engines, 5000);
     
     for (int i = 0; i < 5000; ++i) {

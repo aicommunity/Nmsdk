@@ -25,7 +25,7 @@ __fastcall TNManipulatorControlForm::TNManipulatorControlForm(TComponent* Owner)
  Y=CanvasHeight/2;
  BmpGraphics.SetPenWidth(4);
 
- // Константное смещение на постоянный угол при отображении
+ // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  ZeroAngle=0;
 
  ZeroMovement=0;
@@ -96,7 +96,7 @@ void TNManipulatorControlForm::AUpdateInterface(void)
 
  if(Manipulator)
  {
-  if(Manipulator->DMReset) // процедура подключения пройдена
+  if(Manipulator->DMReset) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   {
    ConnectButton->Enabled=false;
    DisconnectButton->Enabled=true;
@@ -169,8 +169,8 @@ void TNManipulatorControlForm::AUpdateInterface(void)
 
  if(ControlSystem)
  {
-  IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator"));
-  IINegAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator"));
+  IIPosAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator"));
+  IINegAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator"));
 
   if(IIPosAfferent && IINegAfferent)
   {
@@ -190,7 +190,7 @@ void TNManipulatorControlForm::AUpdateInterface(void)
 
  if(ControlSystem)
  {
-  RDK::UEPtr<RDK::UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
+  std::shared_ptr<UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
   if(!stats)
   {
    NewStatsButton->Enabled=false;
@@ -208,7 +208,7 @@ void TNManipulatorControlForm::AUpdateInterface(void)
   SaveStatsButton->Enabled=false;
  }
 
- RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NDCEngine> engine=std::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
  double position=0;
  if(engine)
  {
@@ -223,7 +223,7 @@ void TNManipulatorControlForm::AUpdateInterface(void)
 
 }
 
-// Возврат интерфейса в исходное состояние
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void TNManipulatorControlForm::AClearInterface(void)
 {
  ManipulatorName.clear();
@@ -260,14 +260,14 @@ void TNManipulatorControlForm::AClearInterface(void)
  ReadComponentName.clear();
 }
 
-// Создание копии этого компонента
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 TUVisualControllerForm* TNManipulatorControlForm::New(TComponent *owner)
 {
  return new TNManipulatorControlForm(owner);
 }
 
 
-// Считывает данные всех пармаетров из сети и выставляет в соответствующие позиции элементы управления
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
 {
  if(!ControlSystem)
@@ -279,7 +279,7 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
   UpdateInterfaceFlag=true;
  try
  {
-  RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+  std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
   if(engine_input)
   {
    PACMultiplicatorTrackBar->Position=fabs(engine_input->Gain[0][0]);
@@ -318,7 +318,7 @@ void TNManipulatorControlForm::LoadInterfaceInfoFromNet(void)
   UpdateInterfaceFlag=false;
 }
 
-// Сохраняет параметры интерфейса в xml
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ xml
 void TNManipulatorControlForm::ASaveParameters(RDK::USerStorageXML &xml)
 {
  xml.SelectNodeForce("Control");
@@ -327,7 +327,7 @@ void TNManipulatorControlForm::ASaveParameters(RDK::USerStorageXML &xml)
  xml.SelectUp();
 }
 
-// Загружает параметры интерфейса из xml
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ xml
 void TNManipulatorControlForm::ALoadParameters(RDK::USerStorageXML &xml)
 {
  ManipulatorName.clear();
@@ -356,15 +356,15 @@ void TNManipulatorControlForm::ALoadParameters(RDK::USerStorageXML &xml)
  ManipulatorName=xml.ReadString("ManipulatorName","");
  if(!ManipulatorName.empty())
  {
-  UniversalManipulator=RDK::dynamic_pointer_cast<NMSDK::UNet>(RDK::GetModel()->GetComponentL(ManipulatorName));
-  Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(RDK::GetModel()->GetComponentL(ManipulatorName));
+  UniversalManipulator=std::dynamic_pointer_cast<NMSDK::UNet>(RDK::GetModel()->GetComponentL(ManipulatorName));
+  Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(RDK::GetModel()->GetComponentL(ManipulatorName));
  }
  if(!UniversalManipulator)
   ManipulatorName="";
 
  ControlSystemName=xml.ReadString("ControlSystemName","");
  if(!ControlSystemName.empty())
-  ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(RDK::GetModel()->GetComponentL(ControlSystemName));
+  ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(RDK::GetModel()->GetComponentL(ControlSystemName));
  if(!ControlSystem)
   ControlSystemName="";
  else
@@ -388,7 +388,7 @@ void TNManipulatorControlForm::ALoadParameters(RDK::USerStorageXML &xml)
 
 bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, const std::string &man_name)
 {
- RDK::UEPtr<RDK::UNet> net=RDK::dynamic_pointer_cast<RDK::UNet>(RDK::GetModel());
+ std::shared_ptr<UNet> net=std::dynamic_pointer_cast<RDK::UNet>(RDK::GetModel());
 
  bool res=true;
  std::string source_name=cs_name+".NManipulatorSource1";
@@ -398,8 +398,8 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
  net->BreakConnectorLink(source_name,1);
  net->BreakConnectorLink(source_name,2);
  net->BreakConnectorLink(source_name,3);
-// RDK::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(source_name))->DisconnectAllItems();
- RDK::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1"))->DisconnectAll();
+// std::dynamic_pointer_cast<RDK::UConnector>(net->GetComponentL(source_name))->DisconnectAllItems();
+ std::dynamic_pointer_cast<RDK::UADItem>(net->GetComponentL(cs_name+".NManipulatorInput1"))->DisconnectAll();
  if(man_name == "PendulumAndCart")
  {
   res&=net->CreateLink(man_name,3,source_name,0);
@@ -413,8 +413,8 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
  res&=net->CreateLink(cs_name+".NManipulatorInput1",0,man_name,0);
  }
  /*
- // Связываем все управляющие элементы
- int motion_elements=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(net->GetComponentL(cs_name))->NumMotionElements;
+ // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+ int motion_elements=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(net->GetComponentL(cs_name))->NumMotionElements;
  int conn_index=1;
  for(int i=0;i<motion_elements;i++)
  {
@@ -429,15 +429,15 @@ bool TNManipulatorControlForm::ManipulatorCSConnect(const std::string &cs_name, 
 }
 
 
-// Считывает данные из компонента
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void TNManipulatorControlForm::ReadComponentData(void)
 {
  if(!ControlSystem)
   return;
  ReadComponentName=ManipulatorName;
 
-  RDK::UEPtr<NMSDK::NDCEngine> engine = (RDK::GetModel()->GetComponentL<NMSDK::NDCEngine>(ReadComponentName));
- RDK::UEPtr<NMSDK::NPendulumAndCart> pendulum = (RDK::GetModel()->GetComponentL<NMSDK::NPendulumAndCart>(ReadComponentName));
+  std::shared_ptr<NMSDK::NDCEngine> engine = (RDK::GetModel()->GetComponentL<NMSDK::NDCEngine>(ReadComponentName));
+ std::shared_ptr<NMSDK::NPendulumAndCart> pendulum = (RDK::GetModel()->GetComponentL<NMSDK::NPendulumAndCart>(ReadComponentName));
  if(engine)
  {
   Angle=engine->OutputAngle->As<double>(0);
@@ -446,7 +446,7 @@ void TNManipulatorControlForm::ReadComponentData(void)
  {
 	Angle=pendulum->Angle->As<double>(0);
 	Movement=pendulum->Movement->As<double>(0);
-	Movement*=100; // в 1 метре 10 пикселей
+	Movement*=100; // пїЅ 1 пїЅпїЅпїЅпїЅпїЅ 10 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  }
 }
 
@@ -459,8 +459,8 @@ void TNManipulatorControlForm::ReconnectCurrentManipulator(void)
  }
 
 // ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
- UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UNet>(RDK::GetModel()->GetComponentL(ManipulatorName));
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(RDK::GetModel()->GetComponentL(ManipulatorName));
+ UniversalManipulator=std::dynamic_pointer_cast<RDK::UNet>(RDK::GetModel()->GetComponentL(ManipulatorName));
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(RDK::GetModel()->GetComponentL(ManipulatorName));
  if(!UniversalManipulator)
   ManipulatorName="";
  ManipulatorCSConnect(ControlSystemName, ManipulatorName);
@@ -475,8 +475,8 @@ void TNManipulatorControlForm::ReconnectManipulator(void)
  }
 
  ManipulatorName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
- UniversalManipulator=RDK::dynamic_pointer_cast<RDK::UNet>(RDK::GetModel()->GetComponentL(ManipulatorName));
- Manipulator=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(RDK::GetModel()->GetComponentL(ManipulatorName));
+ UniversalManipulator=std::dynamic_pointer_cast<RDK::UNet>(RDK::GetModel()->GetComponentL(ManipulatorName));
+ Manipulator=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(RDK::GetModel()->GetComponentL(ManipulatorName));
  if(!UniversalManipulator)
   ManipulatorName="";
  ManipulatorCSConnect(ControlSystemName, ManipulatorName);
@@ -651,7 +651,7 @@ void __fastcall TNManipulatorControlForm::IaCheckBoxClick(TObject *Sender)
   return;
 
 // bool res=true;
-// RDK::UEPtr<NMSDK::UContainer> cont;
+// std::shared_ptr<NMSDK::UContainer> cont;
 
  if(!ControlSystem)
   return;
@@ -714,8 +714,8 @@ void __fastcall TNManipulatorControlForm::IIAfferentTrackBarChange(TObject *Send
  if(!ControlSystem)
   return;
 
- IIPosAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator"));
- IINegAfferent=RDK::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator"));
+ IIPosAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IIPosAfferentGenerator"));
+ IINegAfferent=std::dynamic_pointer_cast<NMSDK::NPulseGenerator>(ControlSystem->GetComponentL("IINegAfferentGenerator"));
 
 
  if(!IIPosAfferent || !IINegAfferent)
@@ -753,7 +753,7 @@ void __fastcall TNManipulatorControlForm::IINumAfferentTrackBarChange(TObject *S
   res&=ControlSystem->BreakAllOutgoingLinks("IINegAfferentGenerator");
  for(int i=0;i<IINumAfferentTrackBar->Position;i++)
  {
-  // Вариант для отдельного участка мембраны для внешнего управления
+  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   res&=ControlSystem->CreateLink("IIPosAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent14.PNeuronMembrane.PosChannel",0);
   res&=ControlSystem->CreateLink("IIPosAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent24.PNeuronMembrane.NegChannel",0);
   res&=ControlSystem->CreateLink("IINegAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent14.PNeuronMembrane.NegChannel",0);
@@ -762,7 +762,7 @@ void __fastcall TNManipulatorControlForm::IINumAfferentTrackBarChange(TObject *S
 
  for(int i=IINumAfferentTrackBar->Position;i<IINumAfferentTrackBar->Max;i++)
  {
-  // Вариант для отдельного участка мембраны для внешнего управления
+  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   res&=ControlSystem->BreakLink("IIPosAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent14.PNeuronMembrane.PosChannel",0);
   res&=ControlSystem->BreakLink("IIPosAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent24.PNeuronMembrane.NegChannel",0);
   res&=ControlSystem->BreakLink("IINegAfferentGenerator",0,std::string("MotionElement")+RDK::sntoa(i)+".PostAfferent14.PNeuronMembrane.NegChannel",0);
@@ -787,7 +787,7 @@ void __fastcall TNManipulatorControlForm::IbCheckBoxClick(TObject *Sender)
   return;
 
  bool res=true;
-// RDK::UEPtr<NMSDK::NAContainer> cont;
+// std::shared_ptr<NMSDK::NAContainer> cont;
 
  if(!ControlSystem)
   return;
@@ -850,7 +850,7 @@ void __fastcall TNManipulatorControlForm::IICheckBoxClick(TObject *Sender)
   return;
 
  bool res=true;
-// RDK::UEPtr<NMSDK::NAContainer> cont;
+// std::shared_ptr<NMSDK::NAContainer> cont;
 
  if(!ControlSystem)
   return;
@@ -941,7 +941,7 @@ void __fastcall TNManipulatorControlForm::SelectControlSystem1Click(TObject *Sen
   return;
 
  ControlSystemName=UComponentsListForm->ComponentsListFrame1->GetSelectedComponentLongName();
- ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(RDK::GetModel()->GetComponentL(ControlSystemName));
+ ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(RDK::GetModel()->GetComponentL(ControlSystemName));
  if(!ControlSystem)
   ControlSystemName="";
 
@@ -995,13 +995,13 @@ void __fastcall TNManipulatorControlForm::PACDeactivatorTimeTrackBarChange(TObje
  double value=double(PACDeactivatorTimeTrackBar->Position)/double(PACDeactivatorTimeTrackBar->Max);
  PACDeactivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   std::vector<NMSDK::vector<double> > values;
 
   values.resize(num_ranges*2);
-  // Постоянная времени распада медиатора
+  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   for(size_t i=0;i<values.size();i++)
    values[i].assign(1,value);
   engine_input->DissociationTC=values;
@@ -1018,13 +1018,13 @@ void __fastcall TNManipulatorControlForm::PACActivatorTimeTrackBarChange(TObject
  double value=double(PACActivatorTimeTrackBar->Position)/double(PACActivatorTimeTrackBar->Max);
  PACActivatorTimeEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   std::vector<NMSDK::vector<double> > values;
 
   values.resize(num_ranges*2);
-  // Постоянная времени распада медиатора
+  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   for(size_t i=0;i<values.size();i++)
    values[i].assign(1,value);
   engine_input->SecretionTC=values;
@@ -1055,7 +1055,7 @@ void __fastcall TNManipulatorControlForm::PACMultiplicatorTrackBarChange(TObject
  double value=double(PACMultiplicatorTrackBar->Position);
  PACMultiplicatorEdit->Text=FloatToStrF(value,ffFixed,3,3);
 
- RDK::UEPtr<NMSDK::NPac> engine_input=RDK::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
+ std::shared_ptr<NMSDK::NPac> engine_input=std::dynamic_pointer_cast<NMSDK::NPac>(ControlSystem->GetComponent("Pac"));
  if(engine_input)
  {
   std::vector<NMSDK::vector<double> > values;
@@ -1080,9 +1080,9 @@ void __fastcall TNManipulatorControlForm::MomentTrackBarChange(TObject *Sender)
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
- RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
- RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NManipulatorSource> source=std::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
+ std::shared_ptr<NMSDK::NDCEngine> engine=std::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NPendulumAndCart> engine2=std::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
  double amplitude=double(MomentTrackBar->Position)/double(MomentTrackBar->Max/2.0);
  ExtMomentEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
  if(engine && source)
@@ -1110,7 +1110,7 @@ void __fastcall TNManipulatorControlForm::CheckBox1Click(TObject *Sender)
   return;
 
  bool res=true;
-// RDK::UEPtr<NMSDK::NAContainer> cont;
+// std::shared_ptr<NMSDK::NAContainer> cont;
 
  if(!ControlSystem)
   return;
@@ -1179,13 +1179,13 @@ void __fastcall TNManipulatorControlForm::MovementControlTrackBarChange(TObject 
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<NMSDK::NManipulatorSource> source=RDK::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
+ std::shared_ptr<NMSDK::NManipulatorSource> source=std::dynamic_pointer_cast<NMSDK::NManipulatorSource>(ControlSystem->GetComponentL("NManipulatorSource1"));
  double amplitude=double(MovementControlTrackBar->Position)/double(MovementControlTrackBar->Max/2.0);
  MovementControlEdit->Text=FloatToStrF(amplitude,ffFixed,3,3);
 
- RDK::UEPtr<NMSDK::NDCEngine> engine=RDK::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
- RDK::UEPtr<NMSDK::NPendulumAndCart> engine2=RDK::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
- RDK::UEPtr<NMSDK::NWPhysicalManipulator> man=RDK::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NDCEngine> engine=std::dynamic_pointer_cast<NMSDK::NDCEngine>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NPendulumAndCart> engine2=std::dynamic_pointer_cast<NMSDK::NPendulumAndCart>(UniversalManipulator);
+ std::shared_ptr<NMSDK::NWPhysicalManipulator> man=std::dynamic_pointer_cast<NMSDK::NWPhysicalManipulator>(UniversalManipulator);
 
  if(source)
  {
@@ -1365,11 +1365,11 @@ void __fastcall TNManipulatorControlForm::SaveStatsButtonClick(TObject *Sender)
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<RDK::UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
+ std::shared_ptr<UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
  if(!stats)
   return;
  stats->ManualModeSwitch=true;
@@ -1382,11 +1382,11 @@ void __fastcall TNManipulatorControlForm::NewStatsButtonClick(TObject *Sender)
  if(!model)
   return;
 
- RDK::UEPtr<NMSDK::NEngineMotionControl> ControlSystem=RDK::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
+ std::shared_ptr<NMSDK::NEngineMotionControl> ControlSystem=std::dynamic_pointer_cast<NMSDK::NEngineMotionControl>(model->GetComponentL(ControlSystemName,true));
  if(!ControlSystem)
   return;
 
- RDK::UEPtr<RDK::UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
+ std::shared_ptr<UStatistic> stats=ControlSystem->GetComponentL<RDK::UStatistic>("StatisticDoubleMatrix",true);
  if(!stats)
   return;
  stats->ManualModeSwitch=false;

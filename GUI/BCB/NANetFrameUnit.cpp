@@ -12,23 +12,23 @@ TNANetFrame *NANetFrame;
 __fastcall TNANetFrame::TNANetFrame(TComponent* Owner)
 	: TFrame(Owner)
 {
- // Указатель на рассматриваемую сеть
+ // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
  Net=0;
 
- // Режим работы:
- // 1 - показывать входы
- // 2 - показывать выходы
- // 3 - показывать входы и выходы
- // 4 - показывать существующие связи
+ // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ:
+ // 1 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+ // 2 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+ // 3 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+ // 4 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
  Mode=1;
 
- // Модификатор режима показа
- // 1 - показывать только входы (выходы, связи) своего уровня
- // 2 - показывать входы (выходы, связи) своего уровня, и всех вложенных сетей
+ // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+ // 1 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+ // 2 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
  ShowModifier=1;
 
 
- // Флаг обновления интерфейса
+ // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  UpdateInterfaceFlag=false;
 }
 //---------------------------------------------------------------------------
@@ -36,16 +36,16 @@ __fastcall TNANetFrame::TNANetFrame(TComponent* Owner)
 // -----------------
 
 // -----------------
-// Методы управления
+// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 // -----------------
-// Очищает таблицу
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void __fastcall TNANetFrame::Clear(void)
 {
  StringGrid->RowCount=1;
  StringGrid->ColCount=1;
 }
 
-// Заполняет таблицу входами сети
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 void __fastcall TNANetFrame::ShowInputs(void)
 {
  if(!Net)
@@ -55,7 +55,7 @@ void __fastcall TNANetFrame::ShowInputs(void)
 
  StringGrid->ColCount=3;
  StringGrid->Cells[1][0]="#";
- StringGrid->Cells[2][0]="Вход";
+ StringGrid->Cells[2][0]="пїЅпїЅпїЅпїЅ";
 
  RDK::ULongIdVector buffer;
  string name;
@@ -64,7 +64,7 @@ void __fastcall TNANetFrame::ShowInputs(void)
 
  for(int i=0;i<buffer.GetSize();i++)
  {
-  UConnector *cont=RDK::dynamic_pointer_cast<UConnector>(Net->GetComponentL(buffer[i]));
+  UConnector *cont=std::dynamic_pointer_cast<UConnector>(Net->GetComponentL(buffer[i]));
   for(int j=-1;j<int(cont->GetNumInputs());j++)
   {
    StringGrid->RowCount=StringGrid->RowCount+1;
@@ -85,7 +85,7 @@ void __fastcall TNANetFrame::ShowInputs(void)
   StringGrid->Row=current_row;
 }
 
-// Заполняет таблицу выходами сети
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 void __fastcall TNANetFrame::ShowOutputs(void)
 {
  if(!Net)
@@ -94,7 +94,7 @@ void __fastcall TNANetFrame::ShowOutputs(void)
  int current_row=StringGrid->Row;
  StringGrid->ColCount=3;
  StringGrid->Cells[1][0]="#";
- StringGrid->Cells[2][0]="Выход";
+ StringGrid->Cells[2][0]="пїЅпїЅпїЅпїЅпїЅ";
 
  RDK::ULongIdVector buffer;
  string name;
@@ -103,7 +103,7 @@ void __fastcall TNANetFrame::ShowOutputs(void)
 
  for(int i=0;i<buffer.GetSize();i++)
  {
-  UItem *cont=RDK::static_pointer_cast<UItem>(Net->GetComponentL(buffer[i]));
+  UItem *cont=std::static_pointer_cast<UItem>(Net->GetComponentL(buffer[i]));
   for(int j=0;j<cont->GetNumOutputs();j++)
   {
    StringGrid->RowCount=StringGrid->RowCount+1;
@@ -124,15 +124,15 @@ void __fastcall TNANetFrame::ShowOutputs(void)
   StringGrid->Row=current_row;
 }
 
-// Заполняет таблицу установленными связями
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void __fastcall TNANetFrame::ShowLinks(void)
 {
  int current_row=StringGrid->Row;
  StringGrid->ColCount=5;
  StringGrid->Cells[1][0]="Out #";
  StringGrid->Cells[2][0]="In #";
- StringGrid->Cells[3][0]="Выход";
- StringGrid->Cells[4][0]="Вход";
+ StringGrid->Cells[3][0]="пїЅпїЅпїЅпїЅпїЅ";
+ StringGrid->Cells[4][0]="пїЅпїЅпїЅпїЅ";
 
  RDK::ULinksList linkslist;
  Net->GetLinks(linkslist, Net);
@@ -152,7 +152,7 @@ void __fastcall TNANetFrame::ShowLinks(void)
  for(int k=0;k<linkslist.GetSize();k++)
   {
    //b=linkslist.equal_range(I->first);
-   item=RDK::dynamic_pointer_cast<UItem>(Net->GetComponentL(linkslist[k].Item.Id));
+   item=std::dynamic_pointer_cast<UItem>(Net->GetComponentL(linkslist[k].Item.Id));
    if(!item)
 	{
 	 continue;
@@ -161,7 +161,7 @@ void __fastcall TNANetFrame::ShowLinks(void)
    string itemname;
    item->GetLongName(Net,itemname);
 
-  //	 connector=RDK::dynamic_pointer_cast<NAConnector>(Net->GetComponentL(linkslist[k].Connector.Id));
+  //	 connector=std::dynamic_pointer_cast<NAConnector>(Net->GetComponentL(linkslist[k].Connector.Id));
 	 if(!connector)
 	  {
 	   continue;
@@ -236,7 +236,7 @@ void __fastcall TNANetFrame::ShowLinks(void)
   StringGrid->Row=current_row;
 }
 
-// Отрисовывает текущее состояние фрейма
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 void __fastcall TNANetFrame::UpdateInterface(void)
 {
  UpdateInterfaceFlag=true;

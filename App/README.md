@@ -41,3 +41,5 @@ make
 - Rdk-HardwareLib.qt
 - Qt5 (Core, Widgets, Network, Charts для NeuroModeler)
 - Boost (опционально для некоторых компонентов)
+
+

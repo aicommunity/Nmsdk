@@ -466,7 +466,7 @@ TEST(MockCommandLineParser, MissingOption) {
 TEST(ApplicationsPerformance, NeuroModelerAppCreationPerformance) {
     auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<UEPtr<MockNeuroModelerApp>> apps;
+    std::vector<std::shared_ptr<MockNeuroModelerApp>> apps;
     ReserveVector(apps, 1000);
     
     for (int i = 0; i < 1000; ++i) {
@@ -483,7 +483,7 @@ TEST(ApplicationsPerformance, NeuroModelerAppCreationPerformance) {
 TEST(ApplicationsPerformance, NeuroModelerConsoleAppCreationPerformance) {
     auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<UEPtr<MockNeuroModelerConsoleApp>> consoleApps;
+    std::vector<std::shared_ptr<MockNeuroModelerConsoleApp>> consoleApps;
     ReserveVector(consoleApps, 1000);
     
     for (int i = 0; i < 1000; ++i) {

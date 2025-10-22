@@ -15,12 +15,12 @@ __fastcall TNAstaticGyro::TNAstaticGyro(TComponent* Owner)
 {
 }
 
-// Сохраняет параметры интерфейса в xml
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ xml
 void TNAstaticGyro::ASaveParameters(RDK::USerStorageXML &xml)
 {
 }
 
-// Загружает параметры интерфейса из xml
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ xml
 void TNAstaticGyro::ALoadParameters(RDK::USerStorageXML &xml)
 {
 }
@@ -31,7 +31,7 @@ void TNAstaticGyro::AUpdateInterface(void)
  RDK::UELockPtr<NMSDK::NModel> model=RDK::GetModelLock<NMSDK::NModel>();
  if(!model)
   return;
- Gyro=RDK::static_pointer_cast<NMSDK::NAstaticGyro>(model->GetComponentL(ComponentControlName.c_str()));
+ Gyro=std::static_pointer_cast<NMSDK::NAstaticGyro>(model->GetComponentL(ComponentControlName.c_str()));
  Image1->Canvas->TextOutA(5,0,"radians:");
  Image1->Canvas->TextOutA(5,20,"alpha = "+FloatToStr(Gyro->alpha));
  Image1->Canvas->TextOutA(5,40,"betta = "+FloatToStr(Gyro->betta));
@@ -45,13 +45,13 @@ void TNAstaticGyro::AUpdateInterface(void)
  Image1->Repaint();
 }
 
-// Возврат интерфейса в исходное состояние
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void TNAstaticGyro::AClearInterface(void)
 {
  Gyro=0;
 }
 
-// Создание копии этого компонента
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 TUVisualControllerForm* TNAstaticGyro::New(TComponent *owner)
 {
  return new TNAstaticGyro(owner);
