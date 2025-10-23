@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 
     d->setValue(100);
     d->hide();
-    delete d;
+    // d is managed by smart pointer, don't delete manually
     d=NULL;
     return a.exec();
 }
