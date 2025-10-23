@@ -24,12 +24,17 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/Core
     ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/Core
     ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/Core
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/Deploy/Include
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/Deploy/Include
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/Core
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/Deploy/Include
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Deploy/Include
 )
 
 # Source files
 set(SOURCES
     main.cpp
-    rdk_stubs.cpp
+    ../../Libraries/Libraries_con.cpp
 )
 
 # Note: GUI files removed for console application

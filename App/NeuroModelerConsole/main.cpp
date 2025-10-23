@@ -166,7 +166,7 @@ int main(int argc, char* argv[])
  ModernCLI::CommandLineParser parser;
  parser.AddOption("help", "Show help message", false, false);
  parser.AddOption("version", "Show version information", false, false);
- parser.AddOption("config", "Configuration file path", true, false);
+ parser.AddOption("conf", "Configuration file name", true, false);
  parser.AddOption("verbose", "Enable verbose output", false, false);
  
  if (!parser.Parse(argc, argv)) {
@@ -182,6 +182,14 @@ int main(int argc, char* argv[])
  if (parser.HasOption("version")) {
      std::cout << "NeuroModelerConsole v0.7.0" << std::endl;
      return 0;
+ }
+ 
+ // Check if configuration file is provided
+ auto config_file = parser.GetValue("conf");
+ if (!config_file.has_value()) {
+     std::cout << "Configuration name is empty or doesn't set!" << std::endl;
+     std::cout << "Use --conf <filename> to specify configuration file" << std::endl;
+     return 9000003;
  }
  
  QCoreApplication a(argc, argv);
@@ -203,7 +211,11 @@ int main(int argc, char* argv[])
 
  AppCore.PostInit();
 
- return a.exec();
+ // Application successfully initialized
+ std::cout << "NeuroModelerConsole initialized successfully!" << std::endl;
+ std::cout << "Configuration file: " << config_file.value() << std::endl;
+ 
+ return 0;
 
  /*
  RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore;
