@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
      if(init_res != 0)
       return init_res;
 
-    UGEngineControlWidget w(NULL, &AppCore.application);
+    UGEngineControlWidget w(NULL, AppCore.application.get());
 
     if(AppCore.hideAdminForm)
       w.hide();
