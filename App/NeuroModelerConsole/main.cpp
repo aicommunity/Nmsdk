@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <optional>
+#include <glog/logging.h>
 // Modern C++20 headers instead of Boost
 #include "../../../Rdk/Core/Engine/ModernSmartPointers.h"
 #include "../../../Rdk/Core/Engine/ModernContainers.h"
@@ -157,6 +158,11 @@ namespace RDK {
 int main(int argc, char* argv[])
 {
  using namespace RDK;
+ 
+ // Initialize Google Logging
+    google::InitGoogleLogging(argv[0]);
+    // Пути к логам будут настроены в UApplication::InitializeGlogLogging()
+    FLAGS_minloglevel = 0;  // Show all log levels
  
  // Modern C++20 console application initialization
  ModernCLI::OptimizeConsoleApplicationPerformance();

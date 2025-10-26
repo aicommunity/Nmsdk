@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QString>
 #include <QDebug>
+#include <glog/logging.h>
 
 #include "UGEngineControlWidget.h"
 
@@ -84,6 +85,11 @@ namespace RDK {
 
 int main(int argc, char *argv[])
 {
+    // Initialize Google Logging
+    google::InitGoogleLogging(argv[0]);
+    // Пути к логам будут настроены в UApplication::InitializeGlogLogging()
+    FLAGS_minloglevel = 0;  // Show all log levels
+    
     // Modern C++20 application initialization
     auto start_time = RDK::ModernApp::GetApplicationStartTime();
     RDK::ModernApp::OptimizeApplicationPerformance();

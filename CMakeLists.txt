@@ -96,6 +96,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
 # Общие определения и зависимости (OpenCV/Boost/и т.д.)
 include(RdkDefines OPTIONAL)
 
+# Google glog для логирования
+find_package(glog REQUIRED)
+
 # Rdk core library
 add_subdirectory(Rdk)
 
