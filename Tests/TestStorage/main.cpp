@@ -66,13 +66,26 @@ int main() {
             std::cout << "   ✗ Failed to get Storage from Environment" << std::endl;
         }
 
-        std::cout << "6. Testing TakeObject with UModel..." << std::endl;
+        std::cout << "6. Testing get_shared_from_this()..." << std::endl;
+        // ACTUAL CODE: Test get_shared_from_this() method
+        try {
+            std::shared_ptr<UStorage> storage_ptr = storage->get_shared_from_this();
+            std::cout << "   ✓ get_shared_from_this() works correctly" << std::endl;
+            std::cout << "   - Storage ptr type: " << typeid(*storage_ptr).name() << std::endl;
+            std::cout << "   - Storage ptr address: " << storage_ptr.get() << std::endl;
+        } catch (const std::bad_weak_ptr& e) {
+            std::cout << "   ✗ std::bad_weak_ptr caught: " << e.what() << std::endl;
+        } catch (const std::exception& e) {
+            std::cout << "   ✗ Exception caught: " << e.what() << std::endl;
+        }
+
+        std::cout << "7. Testing TakeObject with UModel..." << std::endl;
         // ACTUAL CODE: Try to create UModel object
         try {
             std::shared_ptr<UComponent> model = envStorage->TakeObject("UModel");
             if (model) {
                 std::cout << "   ✓ UModel object created successfully" << std::endl;
-                std::cout << "   - Object type: " << typeid(*model).name() << std::endl;
+                // std::cout << "   - Object type: " << typeid(*model).name() << std::endl;
                 std::cout << "   - Object address: " << model.get() << std::endl;
 
                 // Check if object is UComponent derived
@@ -88,7 +101,24 @@ int main() {
             std::cout << "   ✗ Failed to create UModel: " << e.what() << std::endl;
         }
 
-        std::cout << "7. Testing other object types..." << std::endl;
+        std::cout << "8. Testing incorrect creation via new (should crash)..." << std::endl;
+        // ACTUAL CODE: Test incorrect creation via new (should crash)
+        try {
+            UStorage* bad_storage = new UStorage();
+            std::cout << "   - Created UStorage via new (address: " << bad_storage << ")" << std::endl;
+            
+            // Попытка использовать shared_from_this
+            std::cout << "   - Attempting to call get_shared_from_this()..." << std::endl;
+            std::shared_ptr<UStorage> bad_ptr = bad_storage->get_shared_from_this();
+            std::cout << "   ⚠ No crash (unexpected) - get_shared_from_this() worked" << std::endl;
+            std::cout << "   - Bad storage ptr address: " << bad_ptr.get() << std::endl;
+        } catch (const std::bad_weak_ptr& e) {
+            std::cout << "   ✓ Expected crash caught: " << e.what() << std::endl;
+        } catch (const std::exception& e) {
+            std::cout << "   ✓ Exception caught: " << e.what() << std::endl;
+        }
+
+        std::cout << "9. Testing other object types..." << std::endl;
 
         // ACTUAL CODE: Test UContainer
         try {

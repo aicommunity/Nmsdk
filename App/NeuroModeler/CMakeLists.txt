@@ -18,7 +18,7 @@ add_definitions(-DRDK_APP_LICENSE="MIT License")
 add_definitions(-DRDK_APP_VERSION="1.0.0")
 
 # Find required packages
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets Network Charts)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets Network Charts PrintSupport)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(CURL REQUIRED libcurl)
 find_package(Boost REQUIRED COMPONENTS thread filesystem system)
@@ -82,6 +82,7 @@ target_link_libraries(NeuroModeler
     Qt5::Widgets
     Qt5::Network
     Qt5::Charts
+    Qt5::PrintSupport
     rdk.static.qt
     Rdk-BasicLib.qt
     Nmsdk-PulseLib.qt
@@ -94,6 +95,53 @@ target_link_libraries(NeuroModeler
     Boost::filesystem
     Boost::system
 )
+
+# Расширенные настройки отладки
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(NeuroModeler PRIVATE
+        -g3                    # Максимальная отладочная информация
+        -O0                    # Отключение оптимизации
+        -fno-omit-frame-pointer # Сохранение указателей фреймов
+        -fno-inline           # Отключение инлайнинга для лучшей отладки
+        -fno-optimize-sibling-calls # Отключение оптимизации хвостовых вызовов
+        -rdynamic              # Экспорт всех символов для отладки
+        -DDEBUG                # Определение DEBUG
+        -D_DEBUG               # Определение _DEBUG
+    )
+    
+    # Дополнительные флаги для детальной отладки
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        target_compile_options(NeuroModeler PRIVATE
+            -ggdb3              # Расширенная отладочная информация для GDB
+            -fno-eliminate-unused-debug-symbols # Сохранение неиспользуемых символов
+            -fno-merge-debug-strings # Отключение слияния строк отладки
+        )
+    endif()
+    
+    # Настройки для лучшей работы с отладчиком
+    target_compile_definitions(NeuroModeler PRIVATE
+        RDK_DEBUG=1
+        RDK_VERBOSE_DEBUG=1
+        RDK_ENABLE_ASSERTIONS=1
+        NEUROMODELER_DEBUG=1
+        NEUROMODELER_GUI_DEBUG=1
+    )
+endif()
+
+# Настройки для RelWithDebInfo
+if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    target_compile_options(NeuroModeler PRIVATE
+        -g                    # Отладочная информация
+        -O2                   # Умеренная оптимизация
+        -fno-omit-frame-pointer
+        -rdynamic
+    )
+    
+    target_compile_definitions(NeuroModeler PRIVATE
+        RDK_DEBUG=1
+        NEUROMODELER_DEBUG=1
+    )
+endif()
 
 # Set output directory
 set_target_properties(NeuroModeler PROPERTIES

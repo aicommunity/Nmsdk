@@ -46,3 +46,50 @@ target_compile_definitions(ModernRefactoringTests PRIVATE
 
 # Enable C++20 features
 target_compile_features(ModernRefactoringTests PRIVATE cxx_std_20)
+
+# Расширенные настройки отладки для тестов
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(ModernRefactoringTests PRIVATE
+        -g3                    # Максимальная отладочная информация
+        -O0                    # Отключение оптимизации
+        -fno-omit-frame-pointer # Сохранение указателей фреймов
+        -fno-inline           # Отключение инлайнинга для лучшей отладки
+        -fno-optimize-sibling-calls # Отключение оптимизации хвостовых вызовов
+        -rdynamic              # Экспорт всех символов для отладки
+        -DDEBUG                # Определение DEBUG
+        -D_DEBUG               # Определение _DEBUG
+    )
+    
+    # Дополнительные флаги для детальной отладки
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        target_compile_options(ModernRefactoringTests PRIVATE
+            -ggdb3              # Расширенная отладочная информация для GDB
+            -fno-eliminate-unused-debug-symbols # Сохранение неиспользуемых символов
+            -fno-merge-debug-strings # Отключение слияния строк отладки
+        )
+    endif()
+    
+    # Настройки для лучшей работы с отладчиком
+    target_compile_definitions(ModernRefactoringTests PRIVATE
+        RDK_DEBUG=1
+        RDK_VERBOSE_DEBUG=1
+        RDK_ENABLE_ASSERTIONS=1
+        TEST_DEBUG=1
+        GTEST_DEBUG=1
+    )
+endif()
+
+# Настройки для RelWithDebInfo
+if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    target_compile_options(ModernRefactoringTests PRIVATE
+        -g                    # Отладочная информация
+        -O2                   # Умеренная оптимизация
+        -fno-omit-frame-pointer
+        -rdynamic
+    )
+    
+    target_compile_definitions(ModernRefactoringTests PRIVATE
+        RDK_DEBUG=1
+        TEST_DEBUG=1
+    )
+endif()

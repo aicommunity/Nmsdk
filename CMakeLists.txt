@@ -109,6 +109,7 @@ add_subdirectory(Libraries/Nmsdk-PulseLib)
 # Applications
 add_subdirectory(App/NeuroModeler)
 add_subdirectory(App/NeuroModelerConsole)
+add_subdirectory(Tests/TestStorage)
 
 # Тесты
 option(BUILD_TESTS "Build tests" ON)
