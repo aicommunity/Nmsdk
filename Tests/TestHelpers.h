@@ -59,7 +59,9 @@ inline std::shared_ptr<UStorage> CreateTestStorage() {
     // For testing, we'll use classes from BasicLibrary which provides concrete implementations.
     
     // Add BasicLibrary for additional classes
-    storage->AddCollection(&RDK::BasicLibrary);
+    // BasicLibrary is a static library, so create shared_ptr with non-owning deleter
+    std::shared_ptr<ULibrary> basicLib(&RDK::BasicLibrary, [](ULibrary*) {});
+    storage->AddCollection(basicLib);
     storage->InitRTlibs();
     storage->BuildStorage();
     storage->LoadClassesDescription();
@@ -71,10 +73,14 @@ inline std::shared_ptr<UStorage> CreateStorageWithLibraries(std::initializer_lis
     auto storage = std::make_shared<UStorage>();
     storage->SetBuildMode(1);
 
-    storage->AddCollection(&RDK::BasicLibrary);
+    // BasicLibrary is a static library, so create shared_ptr with non-owning deleter
+    std::shared_ptr<ULibrary> basicLib(&RDK::BasicLibrary, [](ULibrary*) {});
+    storage->AddCollection(basicLib);
     for (auto* library : extraLibraries) {
         if (library && library != &RDK::BasicLibrary) {
-            storage->AddCollection(library);
+            // Create shared_ptr with non-owning deleter for static libraries
+            std::shared_ptr<ULibrary> libPtr(library, [](ULibrary*) {});
+            storage->AddCollection(libPtr);
         }
     }
 

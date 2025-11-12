@@ -31,7 +31,9 @@ int main() {
         std::cout << "   ✓ Logger functionality available through glog" << std::endl;
 
         storage->SetBuildMode(1);
-        storage->AddCollection(&RDK::BasicLibrary);
+        // BasicLibrary is a static library, so create shared_ptr with non-owning deleter
+        std::shared_ptr<ULibrary> basicLib(&RDK::BasicLibrary, [](ULibrary*) {});
+        storage->AddCollection(basicLib);
 
         std::cout << "   - Logger functionality now handled by glog..." << std::endl;
         std::cout << "   ✓ Logger functionality available through glog" << std::endl;
