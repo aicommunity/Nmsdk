@@ -1,6 +1,7 @@
 #ifndef TEST_HELPERS_H
 #define TEST_HELPERS_H
 
+#include <initializer_list>
 #include <memory>
 #include <string>
 #include <filesystem>
@@ -59,6 +60,24 @@ inline std::shared_ptr<UStorage> CreateTestStorage() {
     
     // Add BasicLibrary for additional classes
     storage->AddCollection(&RDK::BasicLibrary);
+    storage->InitRTlibs();
+    storage->BuildStorage();
+    storage->LoadClassesDescription();
+    return storage;
+}
+
+// Create storage and register additional libraries (always includes BasicLibrary)
+inline std::shared_ptr<UStorage> CreateStorageWithLibraries(std::initializer_list<ULibrary*> extraLibraries) {
+    auto storage = std::make_shared<UStorage>();
+    storage->SetBuildMode(1);
+
+    storage->AddCollection(&RDK::BasicLibrary);
+    for (auto* library : extraLibraries) {
+        if (library && library != &RDK::BasicLibrary) {
+            storage->AddCollection(library);
+        }
+    }
+
     storage->InitRTlibs();
     storage->BuildStorage();
     storage->LoadClassesDescription();
