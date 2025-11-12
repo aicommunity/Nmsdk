@@ -8,7 +8,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Find required packages
 find_package(Qt5 REQUIRED COMPONENTS Core)
-find_package(Boost REQUIRED COMPONENTS thread system filesystem program_options)
+# Boost dependencies removed - using modern C++20 alternatives
+# Boost::program_options replaced with custom ModernCLI::CommandLineParser
 
 # Include directories
 include_directories(
@@ -70,10 +71,7 @@ target_link_libraries(NeuroModelerConsole
     Rdk-CvBasicLib.qt
     Rdk-HardwareLib.qt
     Threads::Threads
-    Boost::thread
-    Boost::system
-    Boost::filesystem
-    Boost::program_options
+    # Boost dependencies removed - using modern C++20 alternatives
 )
 
 # Расширенные настройки отладки

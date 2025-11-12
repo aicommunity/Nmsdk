@@ -118,6 +118,7 @@ add_subdirectory(Tests/TestStorage)
 option(BUILD_TESTS "Build tests" ON)
 if(BUILD_TESTS)
     add_subdirectory(tests)
+    add_subdirectory(Tests)
 endif()
 
 
