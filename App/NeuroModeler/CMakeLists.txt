@@ -143,7 +143,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     )
 endif()
 
-# Set output directory
+# Set output directory to Bin/Platform/Linux
 set_target_properties(NeuroModeler PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    RUNTIME_OUTPUT_DIRECTORY ${DEPLOY_ROOT}
 )
