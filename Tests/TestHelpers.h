@@ -11,6 +11,17 @@
 // RDK includes
 #include "../../Rdk/Deploy/Include/rdk.h"
 #include "../../Libraries/Rdk-BasicLib/Deploy/Include/Lib.h"
+#include "../../Libraries/Rdk-CvBasicLib/Deploy/Include/Lib.h"
+// HardwareLibrary requires Qt, so we'll use forward declaration and include in .cpp
+// #include "../../Libraries/Rdk-HardwareLib/Core/UHardwareLibrary.h"
+#include "../../Libraries/Nmsdk-PulseLib/Deploy/Include/Lib.h"
+#include "../../Libraries/Nmsdk-MotionControlLib/Deploy/Include/Lib.h"
+
+// Forward declarations for libraries that require Qt
+namespace RDK {
+    class UHardwareLibrary;
+    extern RDK_LIB_TYPE UHardwareLibrary HardwareLibrary;
+}
 
 namespace RDK {
 namespace TestHelpers {
@@ -88,6 +99,28 @@ inline std::shared_ptr<UStorage> CreateStorageWithLibraries(std::initializer_lis
     storage->BuildStorage();
     storage->LoadClassesDescription();
     return storage;
+}
+
+// Create storage with all libraries in the correct initialization sequence
+// Sequence from Libraries/Libraries.cpp:
+// 1. RDK::BasicLibrary
+// 2. RDK::CvBasicLibrary
+// 3. RDK::HardwareLibrary
+// 4. NMSDK::PulseLibrary
+// 5. NMSDK::MotionControlLibrary
+// Note: Implementation is in TestHelpers.cpp to avoid Qt dependencies in header
+std::shared_ptr<UStorage> CreateStorageWithAllLibraries();
+
+// Helper function to filter classes by prefix (for library-specific class lists)
+inline std::vector<std::string> FilterClassesByPrefix(const std::vector<std::string>& allClasses, 
+                                                       const std::string& prefix) {
+    std::vector<std::string> filtered;
+    for (const auto& className : allClasses) {
+        if (className.find(prefix) == 0) {
+            filtered.push_back(className);
+        }
+    }
+    return filtered;
 }
 
 // Create a test Environment
