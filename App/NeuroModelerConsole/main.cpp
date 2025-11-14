@@ -173,6 +173,7 @@ int main(int argc, char* argv[])
  parser.AddOption("help", "Show help message", false, false);
  parser.AddOption("version", "Show version information", false, false);
  parser.AddOption("conf", "Configuration file name", true, false);
+ parser.AddOption("ctime", "Calculation time interval in seconds", true, false);
  parser.AddOption("verbose", "Enable verbose output", false, false);
  
  if (!parser.Parse(argc, argv)) {
@@ -221,6 +222,45 @@ int main(int argc, char* argv[])
  std::cout << "NeuroModelerConsole initialized successfully!" << std::endl;
  std::cout << "Configuration file: " << config_file.value() << std::endl;
  
+ // Get calculation time interval if provided
+ double calc_time_interval = 0.0;
+ auto ctime_value = parser.GetValue("ctime");
+ if (ctime_value.has_value()) {
+     try {
+         calc_time_interval = std::stod(ctime_value.value());
+     } catch (const std::exception& e) {
+         std::cerr << "Invalid ctime value: " << ctime_value.value() << std::endl;
+         return 9000004;
+     }
+ }
+
+ // Loading configuration
+ bool open_res = AppCore.application->OpenProject(config_file.value());
+ if (!open_res) {
+     std::cout << "Open configuration: Fail!" << std::endl;
+     return 1;
+ }
+ std::cout << "Open configuration: Success." << std::endl;
+
+ // If calculation time is specified, run calculation
+ if (calc_time_interval > 0.0 && calc_time_interval <= 10e8) {
+     RDK::GetEnvironmentLock(0)->SetMaxCalcTime(calc_time_interval);
+     std::cout << "CalcTimeInterval: " << calc_time_interval << " sec" << std::endl;
+     std::cout << "Ready to calc." << std::endl;
+
+     AppCore.application->StartChannel(0);
+     double calc_time = 0.0;
+     while (!RDK::GetEnvironmentLock(0)->IsCalcFinished()) {
+         calc_time = RDK::GetModelLock(0)->GetTime().GetDoubleTime();
+         std::cout << "Model time: " << calc_time << std::endl;
+         RDK::Sleep(1);
+     }
+     calc_time = RDK::GetModelLock(0)->GetTime().GetDoubleTime();
+     std::cout << "Model time: " << calc_time << std::endl;
+     AppCore.application->PauseChannel(0);
+     RDK::Sleep(100);
+ }
+
  return 0;
 
  /*

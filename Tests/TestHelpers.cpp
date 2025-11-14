@@ -1,6 +1,13 @@
 #include "TestHelpers.h"
 #include "../../Rdk/Core/Serialize/USerStorageXML.h"
 #include "../../Libraries/Rdk-HardwareLib/Core/UHardwareLibrary.h"
+#include <cstdio>
+#include <memory>
+#include <sstream>
+#include <array>
+#include <thread>
+#include <chrono>
+#include <sys/wait.h>
 
 namespace RDK {
 namespace TestHelpers {
@@ -60,6 +67,86 @@ std::shared_ptr<UStorage> CreateStorageWithAllLibraries() {
     storage->BuildStorage();
     storage->LoadClassesDescription();
     return storage;
+}
+
+// Run console application with arguments and timeout
+ConsoleAppResult RunConsoleApp(const std::string& executable, 
+                                const std::vector<std::string>& args, 
+                                int timeout_seconds) {
+    ConsoleAppResult result;
+    
+    if (!std::filesystem::exists(executable)) {
+        result.exit_code = -1;
+        result.stderr_output = "Executable not found: " + executable;
+        return result;
+    }
+    
+    // Build command string
+    std::ostringstream cmd_stream;
+    cmd_stream << "timeout " << timeout_seconds << " " << executable;
+    for (const auto& arg : args) {
+        cmd_stream << " " << arg;
+    }
+    cmd_stream << " 2>&1"; // Redirect stderr to stdout
+    
+    std::string command = cmd_stream.str();
+    
+    // Execute command and capture output
+    std::array<char, 128> buffer;
+    std::string output;
+    
+    FILE* pipe = popen(command.c_str(), "r");
+    if (!pipe) {
+        result.exit_code = -1;
+        result.stderr_output = "Failed to open pipe for command execution";
+        return result;
+    }
+    
+    // Read output
+    while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+        output += buffer.data();
+    }
+    
+    int exit_code = pclose(pipe);
+    
+    // Parse exit code (pclose returns wait status, need to extract exit code)
+    if (WIFEXITED(exit_code)) {
+        result.exit_code = WEXITSTATUS(exit_code);
+    } else {
+        result.exit_code = exit_code;
+    }
+    
+    // Check for timeout (exit code 124 from timeout command)
+    if (result.exit_code == 124) {
+        result.timed_out = true;
+    }
+    
+    // Split output into stdout and stderr (simplified - both go to stdout with 2>&1)
+    result.stdout_output = output;
+    result.stderr_output = ""; // Combined with stdout
+    
+    return result;
+}
+
+// Capture console output from a command
+std::string CaptureConsoleOutput(const std::string& command, int timeout_seconds) {
+    std::ostringstream cmd_stream;
+    cmd_stream << "timeout " << timeout_seconds << " " << command << " 2>&1";
+    
+    std::array<char, 128> buffer;
+    std::string output;
+    
+    FILE* pipe = popen(cmd_stream.str().c_str(), "r");
+    if (!pipe) {
+        return "";
+    }
+    
+    while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+        output += buffer.data();
+    }
+    
+    pclose(pipe);
+    return output;
 }
 
 } // namespace TestHelpers

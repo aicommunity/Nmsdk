@@ -236,6 +236,35 @@ inline bool CreateTestLink(std::shared_ptr<UItem> item, const std::string& prope
     return item->CheckLink(connector, propertyName, connectorName, -1);
 }
 
+// Structure to hold console application execution result
+struct ConsoleAppResult {
+    int exit_code;
+    std::string stdout_output;
+    std::string stderr_output;
+    bool timed_out;
+    
+    ConsoleAppResult() : exit_code(-1), timed_out(false) {}
+};
+
+// Run console application with arguments and timeout
+// Returns execution result with exit code and captured output
+ConsoleAppResult RunConsoleApp(const std::string& executable, 
+                                const std::vector<std::string>& args, 
+                                int timeout_seconds = 30);
+
+// Capture console output from a command
+std::string CaptureConsoleOutput(const std::string& command, int timeout_seconds = 30);
+
+// Check exit code matches expected value
+inline bool CheckExitCode(int exit_code, int expected_code) {
+    return exit_code == expected_code;
+}
+
+// Parse console output for specific patterns
+inline bool ParseConsoleOutput(const std::string& output, const std::string& pattern) {
+    return output.find(pattern) != std::string::npos;
+}
+
 } // namespace TestHelpers
 } // namespace RDK
 
