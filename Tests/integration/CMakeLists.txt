@@ -13,3 +13,6 @@ add_subdirectory(Model)
 # End-to-end tests
 add_subdirectory(EndToEnd)
 
+# Diagnostic tests
+add_subdirectory(Diagnostic)
+

@@ -8,6 +8,7 @@
 #include <thread>
 #include <chrono>
 #include <sys/wait.h>
+#include <csignal>
 
 namespace RDK {
 namespace TestHelpers {
@@ -112,6 +113,20 @@ ConsoleAppResult RunConsoleApp(const std::string& executable,
     // Parse exit code (pclose returns wait status, need to extract exit code)
     if (WIFEXITED(exit_code)) {
         result.exit_code = WEXITSTATUS(exit_code);
+    } else if (WIFSIGNALED(exit_code)) {
+        int signal_num = WTERMSIG(exit_code);
+        result.exit_code = 128 + signal_num;  // Standard convention: 128 + signal number
+        
+        // Detect specific signals
+        if (signal_num == SIGSEGV) {
+            result.segfaulted = true;
+            result.signal_info = "SIGSEGV (Segmentation fault)";
+        } else if (signal_num == SIGABRT) {
+            result.aborted = true;
+            result.signal_info = "SIGABRT (Aborted)";
+        } else {
+            result.signal_info = "Signal " + std::to_string(signal_num);
+        }
     } else {
         result.exit_code = exit_code;
     }
@@ -119,6 +134,19 @@ ConsoleAppResult RunConsoleApp(const std::string& executable,
     // Check for timeout (exit code 124 from timeout command)
     if (result.exit_code == 124) {
         result.timed_out = true;
+    }
+    
+    // Also check for segfault/abort by exit code (common cases)
+    if (result.exit_code == 139) {
+        result.segfaulted = true;
+        if (result.signal_info.empty()) {
+            result.signal_info = "SIGSEGV (Segmentation fault)";
+        }
+    } else if (result.exit_code == 134) {
+        result.aborted = true;
+        if (result.signal_info.empty()) {
+            result.signal_info = "SIGABRT (Aborted)";
+        }
     }
     
     // Split output into stdout and stderr (simplified - both go to stdout with 2>&1)

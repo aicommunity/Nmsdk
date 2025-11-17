@@ -261,6 +261,22 @@ int main(int argc, char* argv[])
      RDK::Sleep(100);
  }
 
+ // SAFETY: Explicitly call UnInit before glog shutdown to prevent SIGABRT
+ // UnInit will clean up resources properly
+ try {
+  AppCore.application->UnInit();
+ } catch (...) {
+  // Ignore exceptions during cleanup - application is exiting anyway
+ }
+
+ // SAFETY: Shutdown glog gracefully before exit
+ // This prevents SIGABRT from glog trying to log after shutdown
+ try {
+  google::ShutdownGoogleLogging();
+ } catch (...) {
+  // Ignore exceptions - glog may already be shut down
+ }
+
  return 0;
 
  /*

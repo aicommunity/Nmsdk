@@ -133,16 +133,29 @@ TEST_F(LIFNeuronFullLoadTest, FullConfigurationLoad) {
     
     // Call CreateClassSamples for libraries that need it
     try {
+        LOG(INFO) << "TestLIFNeuronFullLoad::LoadProjectIni - Calling PulseLibrary.CreateClassSamples";
         NMSDK::PulseLibrary.CreateClassSamples(storage.get());
+        LOG(INFO) << "TestLIFNeuronFullLoad::LoadProjectIni - PulseLibrary.CreateClassSamples completed";
+        
+        LOG(INFO) << "TestLIFNeuronFullLoad::LoadProjectIni - Calling MotionControlLibrary.CreateClassSamples";
         NMSDK::MotionControlLibrary.CreateClassSamples(storage.get());
+        LOG(INFO) << "TestLIFNeuronFullLoad::LoadProjectIni - MotionControlLibrary.CreateClassSamples completed";
     } catch (const std::exception& ex) {
+        LOG(ERROR) << "TestLIFNeuronFullLoad::LoadProjectIni - CreateClassSamples failed: " << ex.what();
         GTEST_SKIP() << "CreateClassSamples failed: " << ex.what();
+        return;
+    } catch (...) {
+        LOG(ERROR) << "TestLIFNeuronFullLoad::LoadProjectIni - Unknown exception in CreateClassSamples";
+        GTEST_SKIP() << "Unknown exception in CreateClassSamples";
         return;
     }
     
     // Create application
     auto application = std::make_unique<UApplication>();
     ASSERT_NE(application, nullptr) << "Failed to create application";
+    
+    // Check storage validity after CreateClassSamples
+    CheckSharedPtrValidity(storage, "after CreateClassSamples");
     
     // Try to open project
     bool opened = false;

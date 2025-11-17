@@ -242,8 +242,11 @@ struct ConsoleAppResult {
     std::string stdout_output;
     std::string stderr_output;
     bool timed_out;
+    bool segfaulted;  // SIGSEGV (exit code 139)
+    bool aborted;     // SIGABRT (exit code 134)
+    std::string signal_info;  // Information about signal if crashed
     
-    ConsoleAppResult() : exit_code(-1), timed_out(false) {}
+    ConsoleAppResult() : exit_code(-1), timed_out(false), segfaulted(false), aborted(false) {}
 };
 
 // Run console application with arguments and timeout
@@ -263,6 +266,64 @@ inline bool CheckExitCode(int exit_code, int expected_code) {
 // Parse console output for specific patterns
 inline bool ParseConsoleOutput(const std::string& output, const std::string& pattern) {
     return output.find(pattern) != std::string::npos;
+}
+
+// Diagnostic helper: Check shared_ptr validity
+inline bool CheckSharedPtrValidity(std::shared_ptr<UContainer> ptr, const std::string& context = "") {
+    if(!ptr) {
+        LOG(WARNING) << "CheckSharedPtrValidity" << (context.empty() ? "" : " [" + context + "]") 
+                     << " - ptr is null";
+        return false;
+    }
+    
+    try {
+        size_t use_count = ptr.use_count();
+        void* raw_ptr = ptr.get();
+        
+        if(use_count > 1000) {
+            LOG(WARNING) << "CheckSharedPtrValidity" << (context.empty() ? "" : " [" + context + "]") 
+                         << " - Suspicious use_count: " << use_count 
+                         << " raw_ptr=" << raw_ptr;
+            return false;
+        }
+        
+        if(!raw_ptr) {
+            LOG(WARNING) << "CheckSharedPtrValidity" << (context.empty() ? "" : " [" + context + "]") 
+                         << " - raw_ptr is null";
+            return false;
+        }
+        
+        LOG(INFO) << "CheckSharedPtrValidity" << (context.empty() ? "" : " [" + context + "]") 
+                  << " - Valid: use_count=" << use_count << " raw_ptr=" << raw_ptr;
+        return true;
+    } catch (...) {
+        LOG(ERROR) << "CheckSharedPtrValidity" << (context.empty() ? "" : " [" + context + "]") 
+                   << " - Exception checking validity";
+        return false;
+    }
+}
+
+// Diagnostic helper: Log component information
+inline void LogComponentInfo(std::shared_ptr<UContainer> comp, const std::string& context = "") {
+    if(!comp) {
+        LOG(WARNING) << "LogComponentInfo" << (context.empty() ? "" : " [" + context + "]") 
+                     << " - Component is null";
+        return;
+    }
+    
+    try {
+        std::string name = comp->GetName();
+        size_t use_count = comp.use_count();
+        void* raw_ptr = comp.get();
+        
+        LOG(INFO) << "LogComponentInfo" << (context.empty() ? "" : " [" + context + "]") 
+                  << " - name=" << name 
+                  << " use_count=" << use_count 
+                  << " raw_ptr=" << raw_ptr;
+    } catch (...) {
+        LOG(ERROR) << "LogComponentInfo" << (context.empty() ? "" : " [" + context + "]") 
+                   << " - Exception getting component info";
+    }
 }
 
 } // namespace TestHelpers
