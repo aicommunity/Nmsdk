@@ -14,6 +14,8 @@ add_executable(ConfigurationTests
     TestConfigurationStructure.cpp
     TestLIFNeuronFullLoad.cpp
     TestLIFNeuronExecution.cpp
+    TestConfigurationVerification.cpp
+    ConfigurationVerification.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Libraries_con.cpp
 )
 
