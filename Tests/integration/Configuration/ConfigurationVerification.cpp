@@ -290,9 +290,12 @@ VerificationResult VerifyComponents(std::shared_ptr<UApplication> app, const Ref
                         if (childId != ForbiddenId) {
                             ULongId childLongId;
                             childLongId.Add(childId);
-                            std::shared_ptr<UContainer> child = container->GetComponentL(childLongId, true);
-                            if (child) {
-                                collectComponents(child, fullPath);
+                            std::weak_ptr<UContainer> child_weak = container->GetComponentL(childLongId, true);
+                            if (!child_weak.expired()) {
+                                std::shared_ptr<UContainer> child = child_weak.lock();
+                                if (child) {
+                                    collectComponents(child, fullPath);
+                                }
                             }
                         }
                     } catch (...) {
@@ -398,9 +401,12 @@ VerificationResult VerifyLinks(std::shared_ptr<UApplication> app, const Referenc
                                 if (childId != ForbiddenId) {
                                     ULongId childLongId;
                                     childLongId.Add(childId);
-                                    std::shared_ptr<UContainer> child = container->GetComponentL(childLongId, true);
-                                    if (child) {
-                                        collectNames(child, fullPath);
+                                    std::weak_ptr<UContainer> child_weak = container->GetComponentL(childLongId, true);
+                                    if (!child_weak.expired()) {
+                                        std::shared_ptr<UContainer> child = child_weak.lock();
+                                        if (child) {
+                                            collectNames(child, fullPath);
+                                        }
                                     }
                                 }
                             } catch (...) {

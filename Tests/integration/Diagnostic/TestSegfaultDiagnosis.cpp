@@ -160,15 +160,18 @@ TEST_F(SegfaultDiagnosisTest, CheckSharedPtrValidity) {
     LOG(INFO) << "CheckSharedPtrValidity - NumComponents: " << num_components;
     
     for(int i = 0; i < num_components; ++i) {
-        auto comp = net->GetComponentByIndex(i);
-        if(comp) {
-            size_t use_count = comp.use_count();
-            LOG(INFO) << "CheckSharedPtrValidity - Component " << i 
-                      << " name=" << comp->GetName()
-                      << " use_count=" << use_count;
+        auto comp_weak = net->GetComponentByIndex(i);
+        if(!comp_weak.expired()) {
+            auto comp = comp_weak.lock();
+            if(comp) {
+                size_t use_count = comp.use_count();
+                LOG(INFO) << "CheckSharedPtrValidity - Component " << i 
+                          << " name=" << comp->GetName()
+                          << " use_count=" << use_count;
             
-            if(use_count > 1000) {
-                LOG(WARNING) << "CheckSharedPtrValidity - Suspicious use_count: " << use_count;
+                if(use_count > 1000) {
+                    LOG(WARNING) << "CheckSharedPtrValidity - Suspicious use_count: " << use_count;
+                }
             }
         }
     }

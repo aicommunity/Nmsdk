@@ -86,15 +86,18 @@ TEST_F(NEngineMotionControlLifecycleTest, ClearStructureDifferentParams) {
         
         // Check PComponents validity before ClearStructure
         for(int i = 0; i < num_components_before; ++i) {
-            auto comp = engine->GetComponentByIndex(i);
-            if(comp) {
-                size_t use_count = comp.use_count();
-                LOG(INFO) << "ClearStructureDifferentParams - Component " << i 
-                          << " name=" << comp->GetName()
-                          << " use_count=" << use_count;
-                
-                if(use_count > 1000) {
-                    LOG(WARNING) << "ClearStructureDifferentParams - Suspicious use_count before ClearStructure: " << use_count;
+            auto comp_weak = engine->GetComponentByIndex(i);
+            if(!comp_weak.expired()) {
+                auto comp = comp_weak.lock();
+                if(comp) {
+                    size_t use_count = comp.use_count();
+                    LOG(INFO) << "ClearStructureDifferentParams - Component " << i 
+                              << " name=" << comp->GetName()
+                              << " use_count=" << use_count;
+                    
+                    if(use_count > 1000) {
+                        LOG(WARNING) << "ClearStructureDifferentParams - Suspicious use_count before ClearStructure: " << use_count;
+                    }
                 }
             }
         }
@@ -186,30 +189,33 @@ TEST_F(NEngineMotionControlLifecycleTest, CheckPComponentsValidityBeforeDeletion
     
     // Check validity of each component before deletion
     for(int i = 0; i < num_components; ++i) {
-        auto comp = engine->GetComponentByIndex(i);
-        if(comp) {
-            size_t use_count = comp.use_count();
-            void* raw_ptr = comp.get();
-            
-            LOG(INFO) << "CheckPComponentsValidityBeforeDeletion - Component " << i 
-                      << " name=" << comp->GetName()
-                      << " use_count=" << use_count
-                      << " raw_ptr=" << raw_ptr;
-            
-            // Check if use_count is suspicious
-            if(use_count > 1000) {
-                LOG(WARNING) << "CheckPComponentsValidityBeforeDeletion - Suspicious use_count: " << use_count;
-            }
-            
-            // Try to delete component
-            try {
-                engine->DelComponent(comp->GetName());
-                LOG(INFO) << "CheckPComponentsValidityBeforeDeletion - Successfully deleted component " << i;
-            } catch (const std::exception& e) {
-                LOG(ERROR) << "CheckPComponentsValidityBeforeDeletion - Exception deleting component " << i 
+        auto comp_weak = engine->GetComponentByIndex(i);
+        if(!comp_weak.expired()) {
+            auto comp = comp_weak.lock();
+            if(comp) {
+                size_t use_count = comp.use_count();
+                void* raw_ptr = comp.get();
+                
+                LOG(INFO) << "CheckPComponentsValidityBeforeDeletion - Component " << i 
+                          << " name=" << comp->GetName()
+                          << " use_count=" << use_count
+                          << " raw_ptr=" << raw_ptr;
+                
+                // Check if use_count is suspicious
+                if(use_count > 1000) {
+                    LOG(WARNING) << "CheckPComponentsValidityBeforeDeletion - Suspicious use_count: " << use_count;
+                }
+                
+                // Try to delete component
+                try {
+                    engine->DelComponent(comp->GetName());
+                    LOG(INFO) << "CheckPComponentsValidityBeforeDeletion - Successfully deleted component " << i;
+                } catch (const std::exception& e) {
+                    LOG(ERROR) << "CheckPComponentsValidityBeforeDeletion - Exception deleting component " << i 
                            << ": " << e.what();
-            } catch (...) {
-                LOG(ERROR) << "CheckPComponentsValidityBeforeDeletion - Unknown exception deleting component " << i;
+                } catch (...) {
+                    LOG(ERROR) << "CheckPComponentsValidityBeforeDeletion - Unknown exception deleting component " << i;
+                }
             }
         }
     }

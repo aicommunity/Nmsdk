@@ -74,10 +74,16 @@ TEST_F(ModelComponentsTest, FindComponentsInModel) {
     }
     component->SetName("TestComponent");
     
-    model->AddComponent(component);
+    // Keep shared_ptr alive to prevent weak_ptr from expiring
+    std::shared_ptr<RDK::UContainer> component_keep_alive = component;
     
-    auto found = model->GetComponent("TestComponent", true);
-    ASSERT_NE(found, nullptr) << "Component should be findable";
+    UId added_id = model->AddComponent(std::weak_ptr<RDK::UContainer>(component));
+    EXPECT_NE(added_id, RDK::ForbiddenId) << "AddComponent should succeed";
+    
+    auto found_weak = model->GetComponent("TestComponent", true);
+    ASSERT_FALSE(found_weak.expired()) << "Component should be findable";
+    auto found = found_weak.lock();
+    ASSERT_NE(found, nullptr);
     EXPECT_EQ(found->GetName(), "TestComponent");
 }
 
@@ -143,5 +149,106 @@ TEST_F(ModelComponentsTest, ComponentsFromConfiguration) {
     EXPECT_TRUE(fs::exists(configPath + "/project.ini")) << "project.ini should exist";
     EXPECT_TRUE(fs::exists(configPath + "/Model_00.xml") || fs::exists(configPath + "/model.xml")) 
         << "Model XML file should exist";
+}
+
+// Diagnostic test: Check shared_ptr lifecycle and weak_ptr validity
+TEST_F(ModelComponentsTest, DiagnosticWeakPtrLifecycle) {
+    auto model = CreateTestModel(storage, environment);
+    if (!model) {
+        GTEST_SKIP() << "Cannot create test model";
+        return;
+    }
+    
+    LOG(INFO) << "=== Diagnostic Test: WeakPtr Lifecycle ===";
+    
+    // Step 1: Create component via TakeObject
+    auto component = storage->TakeObject("UModel");
+    ASSERT_NE(component, nullptr) << "Component should be created";
+    
+    size_t use_count_after_take = component.use_count();
+    LOG(INFO) << "After TakeObject: use_count=" << use_count_after_take 
+              << " component_name=" << component->GetName();
+    
+    // Step 2: Set name
+    component->SetName("DiagnosticComponent");
+    
+    // Step 3: Check if component is in ObjectsStorage (via use_count)
+    // If component is in ObjectsStorage, use_count should be > 1
+    EXPECT_GT(use_count_after_take, 1) << "Component should be in ObjectsStorage (use_count > 1)";
+    
+    // Step 4: Create weak_ptr from shared_ptr
+    std::weak_ptr<RDK::UContainer> component_weak(component);
+    ASSERT_FALSE(component_weak.expired()) << "weak_ptr should be valid immediately after creation";
+    
+    LOG(INFO) << "After creating weak_ptr: expired=" << component_weak.expired() 
+              << " use_count=" << component.use_count();
+    
+    // Step 5: Call AddComponent with weak_ptr
+    UId added_id = model->AddComponent(component_weak);
+    EXPECT_NE(added_id, RDK::ForbiddenId) << "AddComponent should succeed";
+    
+    LOG(INFO) << "After AddComponent: added_id=" << added_id 
+              << " use_count=" << component.use_count()
+              << " component_weak.expired()=" << component_weak.expired();
+    
+    // Step 6: Verify component is in Components vector
+    int num_components = model->GetNumComponents();
+    LOG(INFO) << "Model has " << num_components << " components";
+    EXPECT_GT(num_components, 0) << "Model should have at least one component";
+    
+    // Step 7: Try to find component by name
+    auto found_weak = model->GetComponent("DiagnosticComponent", true);
+    LOG(INFO) << "After GetComponent: found_weak.expired()=" << found_weak.expired();
+    
+    if(found_weak.expired())
+    {
+        LOG(ERROR) << "Component NOT found - weak_ptr is expired!";
+        LOG(ERROR) << "This indicates the problem: component was added but weak_ptr became expired";
+        
+        // Additional diagnostics
+        LOG(INFO) << "Checking Components vector directly:";
+        for(int i = 0; i < num_components; i++)
+        {
+            auto comp_weak = model->GetComponentByIndex(i);
+            if(!comp_weak.expired())
+            {
+                auto comp = comp_weak.lock();
+                if(comp)
+                {
+                    LOG(INFO) << "  Component[" << i << "]: name=" << comp->GetName() 
+                              << " id=" << comp->Id << " expired=" << comp_weak.expired();
+                }
+            }
+            else
+            {
+                LOG(INFO) << "  Component[" << i << "]: expired";
+            }
+        }
+    }
+    else
+    {
+        LOG(INFO) << "Component found successfully!";
+        auto found = found_weak.lock();
+        ASSERT_NE(found, nullptr);
+        EXPECT_EQ(found->GetName(), "DiagnosticComponent");
+    }
+    
+    // Step 8: Keep shared_ptr alive to prevent premature destruction
+    // This simulates the real scenario where component should stay in ObjectsStorage
+    std::shared_ptr<RDK::UContainer> component_keep_alive = component;
+    LOG(INFO) << "After keeping shared_ptr alive: use_count=" << component.use_count();
+    
+    // Step 9: Try to find component again
+    auto found_weak2 = model->GetComponent("DiagnosticComponent", true);
+    if(!found_weak2.expired())
+    {
+        LOG(INFO) << "Component found after keeping shared_ptr alive";
+    }
+    else
+    {
+        LOG(ERROR) << "Component still not found even after keeping shared_ptr alive!";
+    }
+    
+    LOG(INFO) << "=== End Diagnostic Test ===";
 }
 

@@ -49,8 +49,10 @@ TEST_F(FullWorkflowTest, FullWorkflow) {
     EXPECT_GT(model->GetNumComponents(), 0) << "Model should have components";
     
     // Step 5: Verify component exists
-    auto found = model->GetComponent("TestComponent", true);
-    ASSERT_NE(found, nullptr) << "Component should be findable";
+    auto found_weak = model->GetComponent("TestComponent", true);
+    ASSERT_FALSE(found_weak.expired()) << "Component should be findable";
+    auto found = found_weak.lock();
+    ASSERT_NE(found, nullptr);
     EXPECT_EQ(found->GetName(), "TestComponent");
     
     // Step 6: Cleanup (automatic via shared_ptr)
@@ -88,8 +90,8 @@ TEST_F(FullWorkflowTest, WorkflowWithMultipleComponents) {
     
     // Verify all components exist
     for (int i = 0; i < 3; ++i) {
-        auto found = model->GetComponent("Component" + std::to_string(i), true);
-        ASSERT_NE(found, nullptr) << "Component " << i << " should be findable";
+        auto found_weak = model->GetComponent("Component" + std::to_string(i), true);
+        ASSERT_FALSE(found_weak.expired()) << "Component " << i << " should be findable";
     }
 }
 

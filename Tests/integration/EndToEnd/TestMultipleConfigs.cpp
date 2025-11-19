@@ -142,8 +142,8 @@ TEST_F(MultipleConfigsTest, ConfigurationIsolation) {
         model1->AddComponent(component1);
         
         // Verify second model doesn't have it
-        auto found = model2->GetComponent("Component1", true);
-        EXPECT_EQ(found, nullptr) << "Second model should not have component from first model";
+        auto found_weak = model2->GetComponent("Component1", true);
+        EXPECT_TRUE(found_weak.expired()) << "Second model should not have component from first model";
     }
 }
 

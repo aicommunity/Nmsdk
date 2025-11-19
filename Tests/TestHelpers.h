@@ -151,7 +151,7 @@ inline std::unique_ptr<UEngine> CreateTestEngine(std::shared_ptr<UStorage> stora
 inline void AssertComponentExists(std::shared_ptr<UContainer> container, const std::string& componentName) {
     ASSERT_NE(container, nullptr) << "Container is null";
     auto component = container->GetComponent(componentName, true);
-    ASSERT_NE(component, nullptr) << "Component '" << componentName << "' not found";
+    ASSERT_FALSE(component.expired()) << "Component '" << componentName << "' not found";
 }
 
 // Assert that a link exists between two components
