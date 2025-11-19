@@ -90,6 +90,14 @@ TEST_F(ModelLoadTest, ModelXMLStructure) {
 
 // Test creating model from class name
 TEST_F(ModelLoadTest, CreateModelFromClassName) {
+    // Initialize environment if not already initialized
+    if (!environment->IsInit()) {
+        environment->Default();
+        environment->Init();
+    }
+    
+    EXPECT_TRUE(environment->IsInit()) << "Environment should be initialized";
+    
     bool result = environment->CreateModel("UModel");
     EXPECT_TRUE(result) << "Failed to create model from class name";
     
