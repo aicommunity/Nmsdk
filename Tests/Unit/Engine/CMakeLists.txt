@@ -1,14 +1,4 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Unit тесты для UProperty
-add_subdirectory(UProperty)
-
-# Unit тесты для UComponent
-add_subdirectory(UComponent)
-
-# Unit тесты для UStorage
-add_subdirectory(UStorage)
-
-# Unit тесты для UEnvironment
-add_subdirectory(UEnvironment)
-
+# Rdk-specific unit tests have been moved to Rdk/Tests/Unit/Engine
+# Only integration tests and tests requiring multiple submodules remain here
