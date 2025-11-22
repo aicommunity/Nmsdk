@@ -1,4 +1,4 @@
-﻿#include "Libraries_con.h"
+#include "Libraries_con.h"
 
 namespace RDK {
 

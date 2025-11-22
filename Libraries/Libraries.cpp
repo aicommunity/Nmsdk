@@ -2,7 +2,7 @@
 
 namespace RDK {
 
-/// Функция должна быть реализована в конечном проекте и загружать требуемые библиотеки
+/// вЂСѓРЅРєС†Рёв‚¬ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂРµР°Р»РёР·РѕРІР°РЅР° РІ РєРѕРЅРµС‡РЅРѕРј РїСЂРѕРµРєС‚Рµ Рё Р·Р°РіСЂСѓР¶Р°С‚СЊ С‚СЂРµР±СѓРµРјС‹Рµ Р±РёР±Р»РёРѕС‚РµРєРё
 bool RDK_CALL RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
 {
  using namespace NMSDK;
@@ -32,8 +32,8 @@ libs_list.push_back(&NMSDK::MotionControlLibrary);
  return true;
 }
 
-/// Функция должна быть реализована в конечном проекте
-/// и загружать функции формирования свойств для фиктивных компонентов из библиотек
+/// вЂСѓРЅРєС†Рёв‚¬ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂРµР°Р»РёР·РѕРІР°РЅР° РІ РєРѕРЅРµС‡РЅРѕРј РїСЂРѕРµРєС‚Рµ
+/// Рё Р·Р°РіСЂСѓР¶Р°С‚СЊ С„СѓРЅРєС†РёРё С„РѕСЂРјРёСЂРѕРІР°РЅРёв‚¬ СЃРІРѕР№СЃС‚РІ РґР»в‚¬ С„РёРєС‚РёРІРЅС‹С… РєРѕРјРїРѕРЅРµРЅС‚РѕРІ РёР· Р±РёР±Р»РёРѕС‚РµРє
 extern RDK_LIB_TYPE bool RDK_CALL RdkLoadPredefinedCrPropFunctions(RDK::UStorage* storage)
 {
 
@@ -42,7 +42,7 @@ extern RDK_LIB_TYPE bool RDK_CALL RdkLoadPredefinedCrPropFunctions(RDK::UStorage
  return true;
 }
 
-/// Функция должна быть реализована в конечном проекте
+/// вЂСѓРЅРєС†Рёв‚¬ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЂРµР°Р»РёР·РѕРІР°РЅР° РІ РєРѕРЅРµС‡РЅРѕРј РїСЂРѕРµРєС‚Рµ
 bool RDK_CALL RdkCreatePredefinedStructure(RDK::UEnvironment* env, int predefined_structure)
 {
  return true;
