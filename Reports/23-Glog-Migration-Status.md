@@ -74,6 +74,18 @@
 2. **Глобальные настройки зеркалирования**: при необходимости добавить в ini отдельный ключ для управления `UFileLogSink`.
 3. **Ротация логов**: внедрить очистку/ограничение размера каталога `EventsLog`.
 
+## Новые расширения (ноябрь 2025)
+
+- Добавлены ленивые макросы (`RLOG`, `VRLOG`, `RLOG_COUNTED`, `RLOG_IF`) для безопасного формирования сообщений без лишних `std::string`.
+- Появилась конфигурация уровней логирования на канал:
+  - Настраивается через проект (`EventsLogMode`, `DebugMode`), переменные окружения (`RDK_LOG_LEVEL`, `RDK_LOG_SYS_LEVEL`, `RDK_LOG_GLOB_LEVEL`, `RDK_LOG_CHANNELS`, `RDK_LOG_VERBOSITY`) и флаги командной строки (`--log-level`, `--log-channel-level`, `--log-verbosity`, `--log-sys-level`, `--log-glob-level`).
+  - Ленивая маршрутизация реализована в `rdk_logging.h` / `rdk_engine_support.cpp`.
+- Введён реестр приёмников логов:
+  - Интерфейс `RDK::Logging::ILogSink` и функции `RegisterLogSink`/`UnregisterLogSink`.
+  - Стандартные приёмники (`UGlogGuiSink`, `UFileLogSink`) подключены через реестр.
+- Добавлен JSON-приёмник (`UJsonLogSink`). Активируется установкой `RDK_LOG_JSON_PATH=/tmp/rdk-log.json`; каждая запись пишется отдельной JSON-строкой.
+- Для интеграционных тестов добавлен `Test_Logging_Sinks`, гарантирующий, что новый JSON-sink создаёт корректные записи.
+
 ## Файлы изменены
 
 - `Rdk/CMakeLists.txt` - добавление glog
