@@ -8,12 +8,11 @@
 - ✅ Добавлен `#include <glog/logging.h>` в необходимые файлы
 
 ### 2. Создание макросов-оберток
-- ✅ Создан `Rdk/Deploy/Include/rdk_logging.h` с макросами для всех уровней логирования
-- ✅ Реализованы функции `RDK_LOG_BY_LEVEL` и `RDK_LOG_BY_LEVEL_EX` для маппинга уровней
-- ✅ Добавлен fallback для случая, когда glog недоступен
+- ✅ Создан `Rdk/Deploy/Include/rdk_logging.h` с ленивыми макросами (`RLOG`, `VRLOG`, `RLOG_IF`, `RLOG_COUNTED`)
+- ✅ Реализованы вспомогательные функции `DispatchLazy()`, `ChannelLog()`, `SystemLog()` и `GlobalLog()`, которые маппят уровни на glog
+- ✅ Fallback без glog полностью удалён: теперь сборка требует `RDK_USE_GLOG`
 
-### 3. Интеграция с ProcessException
-- ✅ `ProcessExceptionRaw` обновлен для использования glog через `RDK_LOG_BY_LEVEL`
+- ✅ `ProcessExceptionRaw`/`UExceptionLogger` используют `RDK::Logging::ChannelLog()` для отправки сообщений в glog
 - ✅ `LogMessageEx` вызывает `ProcessException` для правильной обработки исключений
 - ✅ Сохранена функциональность добавления логов в `LogList` для GUI виджета
 - ✅ Сохранена правильная обработка препроцессоров, постпроцессоров и обработчиков исключений
@@ -43,7 +42,7 @@
 
 1. **Вызов логирования**: `LogMessage()` → `LogMessageEx()` → создание исключения → `ProcessException()`
 2. **Обработка исключения**: `ProcessException()` → форматирование с префиксом канала → `ProcessExceptionRaw()`
-3. **Логирование в glog**: `ProcessExceptionRaw()` → `RDK_LOG_BY_LEVEL()` → glog макросы
+3. **Логирование в glog**: `ProcessExceptionRaw()` → `RDK::Logging::ChannelLog()`/`DispatchLazy()` → glog
 4. **Добавление в LogList/GUI**: `ProcessExceptionRaw()` передаёт текст в `UGlogGuiSink`, откуда читает `ULoggerWidget`
 5. **Обработка GUI**: `UGlogGuiSink::ReadMessages()` используется Qt-виджетом напрямую (без зависимостей от старого `ProcessLog()`)
 
@@ -89,7 +88,7 @@
 ## Файлы изменены
 
 - `Rdk/CMakeLists.txt` - добавление glog
-- `Rdk/Deploy/Include/rdk_logging.h` - новые макросы (создан)
+- `Rdk/Deploy/Include/rdk_logging.h` - ленивые макросы и вспомогательные функции (создан)
 - `Rdk/Deploy/Include/rdk.h` - включение rdk_logging.h
 - `Rdk/Core/Engine/UExceptionLogger.cpp` — интеграция с glog, блокировка дублирования каналов
 - `Rdk/Core/Engine/UFileLogSink.{h,cpp}` — новый sink для зеркалирования логов
