@@ -1,13 +1,15 @@
 #include <QCoreApplication>
+#include <QCommandLineParser>
+#include <QTimer>
 #include <QString>
 #include <QDebug>
 #include <iostream>
+#include <algorithm>
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
-//#include "../../../Rdk/Deploy/Include/rdk_cpp_initlib.h"
-//#include "../../../Rdk/Core/Application/UApplication.h"
+#include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 #include "../../../Rdk/Core/Application/UAppCore.h"
 // Use base RDK classes without Qt dependencies for console build
 #include "../../../Rdk/Core/Application/UEngineControl.h"
@@ -30,6 +32,37 @@ int main(int argc, char* argv[])
  using namespace RDK;
  QCoreApplication a(argc, argv);
 
+ QCommandLineParser parser;
+ parser.setApplicationDescription("NeuroModelerConsole automation arguments");
+ parser.addHelpOption();
+ const QCommandLineOption configOption(QStringList() << "c" << "config",
+                                       "Path to project ini to open.",
+                                       "path");
+ const QCommandLineOption startCalcOption(QStringList() << "s" << "start-calc",
+                                          "Start calculations immediately after launch.");
+ const QCommandLineOption calcTimeOption(QStringList() << "t" << "calc-time",
+                                         "Calculation time interval in seconds.",
+                                         "seconds");
+ const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
+                                          "Exit application after calculations finish.");
+ parser.addOption(configOption);
+ parser.addOption(startCalcOption);
+ parser.addOption(calcTimeOption);
+ parser.addOption(exitAfterOption);
+ parser.process(a);
+
+ const QString cliConfigPath = parser.value(configOption).trimmed();
+ const bool cliStartCalc = parser.isSet(startCalcOption);
+ const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
+ double cliCalcTimeSec = 0.0;
+ if(parser.isSet(calcTimeOption))
+ {
+  bool ok=false;
+  const double parsed = parser.value(calcTimeOption).toDouble(&ok);
+  if(ok && parsed > 0.0)
+   cliCalcTimeSec = parsed;
+ }
+
  RDK::UAppCore<RDK::UApplication, RDK::UEngineControl, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, RDK::UServerTransportTcp, RDK::UProjectDeployer> AppCore;
 
  std::string default_user_name;
@@ -45,7 +78,55 @@ int main(int argc, char* argv[])
  if(init_res != 0)
   return init_res;
 
+ if(!cliConfigPath.isEmpty())
+ {
+  AppCore.startProjectName = cliConfigPath.toLocal8Bit().constData();
+  AppCore.autoexecLastProjectFlag = 0;
+ }
+ if(cliStartCalc)
+  AppCore.autoStartProjectFlag = 1;
+ if(cliCalcTimeSec > 0.0)
+  AppCore.calcTimeIntervalSec = cliCalcTimeSec;
+ if(cliExitAfterCalc)
+  AppCore.exitAfterCalcFlag = 1;
+
  AppCore.PostInit();
+
+ auto configureAutomation = [&AppCore]()
+ {
+  if(AppCore.calcTimeIntervalSec > 0.0 && AppCore.application.GetProjectOpenFlag())
+  {
+   const auto& config = AppCore.application.GetProjectConfig();
+   const int channel_count = std::max(1, config.NumChannels);
+   for(int channel = 0; channel < channel_count; ++channel)
+   {
+    auto env = RDK::GetEnvironmentLock(channel);
+    if(env)
+     env->SetMaxCalcTime(AppCore.calcTimeIntervalSec);
+   }
+  }
+  if(AppCore.exitAfterCalcFlag)
+  {
+   QTimer* monitor = new QTimer(QCoreApplication::instance());
+   QObject::connect(monitor, &QTimer::timeout, [&AppCore]()
+   {
+    if(!AppCore.application.GetProjectOpenFlag())
+     return;
+    const auto& cfg = AppCore.application.GetProjectConfig();
+    const int channel_count = std::max(1, cfg.NumChannels);
+    for(int channel = 0; channel < channel_count; ++channel)
+    {
+     auto env = RDK::GetEnvironmentLock(channel);
+     if(env && !env->IsCalcFinished())
+      return;
+    }
+    QCoreApplication::quit();
+   });
+   monitor->start(500);
+  }
+ };
+
+ configureAutomation();
 
  return a.exec();
 
