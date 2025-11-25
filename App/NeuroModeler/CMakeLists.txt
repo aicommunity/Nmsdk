@@ -3,7 +3,7 @@ project(NeuroModeler LANGUAGES CXX)
 
 add_executable(NeuroModeler)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort Concurrent)
 
 target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp
@@ -33,6 +33,8 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UPropertyXMLWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCalculationChannelsWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UEngineControlQt.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGuiTelemetry.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGuiModelSnapshot.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/ULoggerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCreateConfigurationWizardWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UImageLoader.cpp
@@ -68,7 +70,7 @@ target_compile_options(NeuroModeler PRIVATE -include ${CMAKE_SOURCE_DIR}/App/Neu
 
 target_link_libraries(NeuroModeler
   PRIVATE
-    Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort
+    Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort Qt5::Concurrent
     Rdk-CvBasicLib.qt
     Rdk-BasicLib.qt
     Rdk-HardwareLib.qt
@@ -91,7 +93,7 @@ target_include_directories(NeuroModeler PRIVATE
 target_compile_definitions(NeuroModeler PRIVATE RDK_DISABLE_EXT_GUI QT_DLL QT_WIDGETS_LIB RDK_APP_VERSION=0)
 
 target_link_libraries(NeuroModeler PRIVATE
-  Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort
+  Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort Qt5::Concurrent
   rdk.static.qt
   Rdk-BasicLib.qt
 )
