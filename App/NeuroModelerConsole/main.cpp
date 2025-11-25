@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <iostream>
 #include <algorithm>
+#include <utility>
+#include <vector>
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
@@ -51,6 +53,47 @@ int main(int argc, char* argv[])
  parser.addOption(exitAfterOption);
  parser.process(a);
 
+ auto buildForwardArgs = [&parser]() {
+  QStringList original = QCoreApplication::arguments();
+  std::vector<std::string> storage;
+  storage.reserve(original.size());
+  std::vector<char*> pointers;
+
+  auto push_arg = [&](const QString& value) {
+   storage.emplace_back(value.toLocal8Bit().constData());
+   pointers.push_back(storage.back().data());
+  };
+
+  if(!original.isEmpty())
+   push_arg(original.front());
+
+  auto shouldSkipValue = [](const QString& option) {
+   return option == "--config" || option == "-c" ||
+          option == "--calc-time" || option == "-t";
+  };
+
+  for(int i=1; i<original.size(); ++i)
+  {
+   const QString token = original[i];
+   if(token == "--config" || token == "-c" ||
+      token == "--start-calc" || token == "-s" ||
+      token == "--calc-time" || token == "-t" ||
+      token == "--exit-after-calc" || token == "-x")
+   {
+    if(shouldSkipValue(token) && i + 1 < original.size())
+     ++i;
+    continue;
+   }
+   push_arg(token);
+  }
+
+  return std::pair<std::vector<std::string>, std::vector<char*>>{std::move(storage), std::move(pointers)};
+ };
+
+ auto [forwardStorage, forwardPointers] = buildForwardArgs();
+ int forwardedArgc = static_cast<int>(forwardPointers.size());
+ char** forwardedArgv = forwardPointers.data();
+
  const QString cliConfigPath = parser.value(configOption).trimmed();
  const bool cliStartCalc = parser.isSet(startCalcOption);
  const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
@@ -73,7 +116,7 @@ int main(int argc, char* argv[])
 
  int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModelerConsole.ini",
                (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
-               argc, argv);
+               forwardedArgc, forwardedArgv);
 
  if(init_res != 0)
   return init_res;

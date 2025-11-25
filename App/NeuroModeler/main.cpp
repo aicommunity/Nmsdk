@@ -5,6 +5,8 @@
 #include <QString>
 #include <QDebug>
 #include <algorithm>
+#include <utility>
+#include <vector>
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
@@ -47,6 +49,47 @@ int main(int argc, char *argv[])
     parser.addOption(exitAfterOption);
     parser.process(a);
 
+    auto buildForwardArgs = []() {
+        QStringList original = QCoreApplication::arguments();
+        std::vector<std::string> storage;
+        storage.reserve(original.size());
+        std::vector<char*> pointers;
+
+        auto push_arg = [&](const QString& value) {
+            storage.emplace_back(value.toLocal8Bit().constData());
+            pointers.push_back(storage.back().data());
+        };
+
+        if(!original.isEmpty())
+            push_arg(original.front());
+
+        auto optionNeedsValue = [](const QString& option) {
+            return option == "--config" || option == "-c" ||
+                   option == "--calc-time" || option == "-t";
+        };
+
+        for(int i=1; i<original.size(); ++i)
+        {
+            const QString token = original[i];
+            if(token == "--config" || token == "-c" ||
+               token == "--start-calc" || token == "-s" ||
+               token == "--calc-time" || token == "-t" ||
+               token == "--exit-after-calc" || token == "-x")
+            {
+                if(optionNeedsValue(token) && i + 1 < original.size())
+                    ++i;
+                continue;
+            }
+            push_arg(token);
+        }
+
+        return std::pair<std::vector<std::string>, std::vector<char*>>{std::move(storage), std::move(pointers)};
+    };
+
+    auto [forwardStorage, forwardPointers] = buildForwardArgs();
+    int forwardedArgc = static_cast<int>(forwardPointers.size());
+    char** forwardedArgv = forwardPointers.data();
+
     const QString cliConfigPath = parser.value(configOption).trimmed();
     const bool cliStartCalc = parser.isSet(startCalcOption);
     const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
@@ -80,7 +123,7 @@ int main(int argc, char *argv[])
 
      int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModeler.ini",
                   (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
-                  argc, argv);
+                  forwardedArgc, forwardedArgv);
 
      if(init_res != 0)
       return init_res;
