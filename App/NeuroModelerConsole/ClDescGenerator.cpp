@@ -61,6 +61,10 @@ bool ClDescGenerator::Generate(RDK::UELockPtr<RDK::UStorage> storage,
     if (!lexiconLoaded_ && !ensureLexiconLoaded(options.lexiconCandidatePaths, errorMessage))
     {
         qWarning() << "ClDescGenerator: lexicon not found, будут использованы простые автогенераторы.";
+        if (errorMessage && !errorMessage->isEmpty())
+        {
+            qWarning() << "ClDescGenerator: lexicon error:" << *errorMessage;
+        }
     }
 
     // Перед началом генерации подгружаем существующие XML, чтобы не потерять ручные описания.
@@ -202,11 +206,24 @@ bool ClDescGenerator::loadLexiconFromFile(const QString& path, QString* errorMes
     const auto content = file.readAll();
     file.close();
 
-    const auto doc = QJsonDocument::fromJson(content);
+    QJsonParseError parseError;
+    const auto doc = QJsonDocument::fromJson(content, &parseError);
     if (doc.isNull() || !doc.isObject())
     {
         if (errorMessage)
-            *errorMessage = QStringLiteral("Некорректный JSON словаря: %1").arg(path);
+        {
+            if (parseError.error != QJsonParseError::NoError)
+            {
+                *errorMessage = QStringLiteral("Некорректный JSON словаря: %1 (offset %2: %3)")
+                                   .arg(path)
+                                   .arg(parseError.offset)
+                                   .arg(parseError.errorString());
+            }
+            else
+            {
+                *errorMessage = QStringLiteral("Некорректный JSON словаря: %1").arg(path);
+            }
+        }
         return false;
     }
 
