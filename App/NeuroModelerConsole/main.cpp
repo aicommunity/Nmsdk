@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
 #include <QTimer>
+#include <QDir>
 #include <QString>
 #include <QDebug>
 #include <iostream>
@@ -11,6 +12,7 @@
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
+#include "ClDescGenerator.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 #include "../../../Rdk/Core/Application/UAppCore.h"
 // Use base RDK classes without Qt dependencies for console build
@@ -45,12 +47,19 @@ int main(int argc, char* argv[])
  const QCommandLineOption calcTimeOption(QStringList() << "t" << "calc-time",
                                          "Calculation time interval in seconds.",
                                          "seconds");
- const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
-                                          "Exit application after calculations finish.");
+const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
+                                         "Exit application after calculations finish.");
+const QCommandLineOption generateClDescOption(QStringList() << "g" << "generate-cldesc",
+                                              "Generate XML descriptions for all loaded component classes and exit.");
+const QCommandLineOption lexiconOption(QStringList() << "l" << "cldesc-lexicon",
+                                       "Optional path to custom lexicon JSON used during description generation.",
+                                       "path");
  parser.addOption(configOption);
  parser.addOption(startCalcOption);
  parser.addOption(calcTimeOption);
  parser.addOption(exitAfterOption);
+parser.addOption(generateClDescOption);
+parser.addOption(lexiconOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -67,9 +76,10 @@ int main(int argc, char* argv[])
   if(!original.isEmpty())
    push_arg(original.front());
 
-  auto shouldSkipValue = [](const QString& option) {
-   return option == "--config" || option == "-c" ||
-          option == "--calc-time" || option == "-t";
+ auto shouldSkipValue = [](const QString& option) {
+  return option == "--config" || option == "-c" ||
+         option == "--calc-time" || option == "-t" ||
+         option == "--cldesc-lexicon" || option == "-l";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -78,7 +88,9 @@ int main(int argc, char* argv[])
    if(token == "--config" || token == "-c" ||
       token == "--start-calc" || token == "-s" ||
       token == "--calc-time" || token == "-t" ||
-      token == "--exit-after-calc" || token == "-x")
+      token == "--exit-after-calc" || token == "-x" ||
+      token == "--generate-cldesc" || token == "-g" ||
+      token == "--cldesc-lexicon" || token == "-l")
    {
     if(shouldSkipValue(token) && i + 1 < original.size())
      ++i;
@@ -97,6 +109,8 @@ int main(int argc, char* argv[])
  const QString cliConfigPath = parser.value(configOption).trimmed();
  const bool cliStartCalc = parser.isSet(startCalcOption);
  const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
+const bool cliGenerateClDesc = parser.isSet(generateClDescOption);
+const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
  double cliCalcTimeSec = 0.0;
  if(parser.isSet(calcTimeOption))
  {
@@ -170,6 +184,51 @@ int main(int argc, char* argv[])
  };
 
  configureAutomation();
+
+if(cliGenerateClDesc)
+{
+ auto storageLock = RDK::GetStorageLock();
+ if(!storageLock)
+ {
+  qCritical() << "Не удалось получить доступ к UStorage для генерации описаний.";
+  return 2;
+ }
+
+ const QString workspaceRoot = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath(QStringLiteral("../../../"));
+ const QString clDescPath = QDir(workspaceRoot).absoluteFilePath(QStringLiteral("Bin/ClDesc/"));
+ const QString libsPath = QDir(workspaceRoot).absoluteFilePath(QStringLiteral("Bin/RTlibs/"));
+ QDir().mkpath(clDescPath);
+
+ AppCore.application.SetClDescPath(clDescPath.toStdString());
+ AppCore.application.SetLibrariesPath(libsPath.toStdString());
+
+ if(auto coreLock = RDK::GetCoreLock())
+ {
+  coreLock->SetClDescPath(clDescPath.toStdString());
+  coreLock->SetLibrariesPath(libsPath.toStdString());
+ }
+ storageLock->SetClDescPath(clDescPath.toStdString());
+
+ NeuroModeler::ClDescGenerator generator;
+ NeuroModeler::ClDescGeneratorOptions options;
+ if(!cliLexiconPath.isEmpty())
+  options.lexiconCandidatePaths << cliLexiconPath;
+ const QString defaultLexiconPath = QDir(workspaceRoot).absoluteFilePath(QStringLiteral("Docs/ClDescLexicon.json"));
+ options.lexiconCandidatePaths << defaultLexiconPath
+                               << QStringLiteral("Docs/ClDescLexicon.json");
+ options.verbose = true;
+
+ QString errorMessage;
+ if(!generator.Generate(storageLock, options, &errorMessage))
+ {
+  if(!errorMessage.isEmpty())
+   qCritical() << errorMessage;
+  return 2;
+ }
+
+ qInfo() << "Генерация описаний классов успешно завершена.";
+ return 0;
+}
 
  return a.exec();
 

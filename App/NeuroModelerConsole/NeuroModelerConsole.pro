@@ -142,12 +142,14 @@ windows:!windows-g++ {
 
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
-        main.cpp \ #\
+        main.cpp \
+        ClDescGenerator.cpp \
     ../../../Rdk/GUI/Qt/UEngineControlQt.cpp
 
 
 HEADERS += \
         ../../../Libraries/Libraries.h \
+        ClDescGenerator.h \
     ../../../Rdk/GUI/Qt/UEngineControlQt.h
 
 #FORMS   += \
