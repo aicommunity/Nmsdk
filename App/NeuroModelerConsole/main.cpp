@@ -50,16 +50,27 @@ int main(int argc, char* argv[])
 const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
                                          "Exit application after calculations finish.");
 const QCommandLineOption generateClDescOption(QStringList() << "g" << "generate-cldesc",
-                                              "Generate XML descriptions for all loaded component classes and exit.");
+                                              "Generate XML descriptions for loaded component classes and exit.");
 const QCommandLineOption lexiconOption(QStringList() << "l" << "cldesc-lexicon",
                                        "Optional path to custom lexicon JSON used during description generation.",
                                        "path");
- parser.addOption(configOption);
- parser.addOption(startCalcOption);
- parser.addOption(calcTimeOption);
- parser.addOption(exitAfterOption);
+const QCommandLineOption clDescLibraryOption(QStringList() << "C" << "cldesc-library",
+                                             "Limit generation to the specified library name (can be repeated).",
+                                             "name");
+const QCommandLineOption clDescClassOption(QStringList() << "K" << "cldesc-class",
+                                           "Limit generation to the specified component class name (can be repeated).",
+                                           "class");
+const QCommandLineOption clDescForceOption(QStringList() << "F" << "cldesc-force",
+                                           "Force overwrite of existing headers/descriptions when generating ClDesc.");
+parser.addOption(configOption);
+parser.addOption(startCalcOption);
+parser.addOption(calcTimeOption);
+parser.addOption(exitAfterOption);
 parser.addOption(generateClDescOption);
 parser.addOption(lexiconOption);
+parser.addOption(clDescLibraryOption);
+parser.addOption(clDescClassOption);
+parser.addOption(clDescForceOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -79,7 +90,9 @@ parser.addOption(lexiconOption);
  auto shouldSkipValue = [](const QString& option) {
   return option == "--config" || option == "-c" ||
          option == "--calc-time" || option == "-t" ||
-         option == "--cldesc-lexicon" || option == "-l";
+         option == "--cldesc-lexicon" || option == "-l" ||
+         option == "--cldesc-library" || option == "-C" ||
+         option == "--cldesc-class" || option == "-K";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -90,7 +103,9 @@ parser.addOption(lexiconOption);
       token == "--calc-time" || token == "-t" ||
       token == "--exit-after-calc" || token == "-x" ||
       token == "--generate-cldesc" || token == "-g" ||
-      token == "--cldesc-lexicon" || token == "-l")
+      token == "--cldesc-lexicon" || token == "-l" ||
+      token == "--cldesc-library" || token == "-C" ||
+      token == "--cldesc-class" || token == "-K")
    {
     if(shouldSkipValue(token) && i + 1 < original.size())
      ++i;
@@ -111,6 +126,8 @@ parser.addOption(lexiconOption);
  const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
 const bool cliGenerateClDesc = parser.isSet(generateClDescOption);
 const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
+const QStringList cliLibraryFilters = parser.values(clDescLibraryOption);
+const QStringList cliClassFilters = parser.values(clDescClassOption);
  double cliCalcTimeSec = 0.0;
  if(parser.isSet(calcTimeOption))
  {
@@ -216,7 +233,14 @@ if(cliGenerateClDesc)
  const QString defaultLexiconPath = QDir(workspaceRoot).absoluteFilePath(QStringLiteral("Docs/ClDescLexicon.json"));
  options.lexiconCandidatePaths << defaultLexiconPath
                                << QStringLiteral("Docs/ClDescLexicon.json");
+ if(!cliLibraryFilters.isEmpty())
+  options.libraryFilters = cliLibraryFilters;
+if(!cliClassFilters.isEmpty())
+ options.classFilters = cliClassFilters;
  options.verbose = true;
+// В этом режиме всегда принудительно обновляем заголовки и описания,
+// опираясь на словарь и автогенерацию.
+options.forceOverride = true;
 
  QString errorMessage;
  if(!generator.Generate(storageLock, options, &errorMessage))

@@ -13,6 +13,9 @@ struct ClDescGeneratorOptions
 {
     QStringList lexiconCandidatePaths;
     bool verbose = false;
+    QStringList libraryFilters;
+    QStringList classFilters;
+    bool forceOverride = false;
 };
 
 class ClDescGenerator
@@ -35,11 +38,13 @@ public:
 
     void applyClassText(const std::string& className,
                         const std::string& libraryName,
-                        RDK::UEPtr<RDK::UContainerDescription>& description);
+                        RDK::UEPtr<RDK::UContainerDescription>& description,
+                        bool forceOverride);
 
     void applyPropertiesText(const std::string& className,
                              const QString& classHeader,
-                             RDK::UEPtr<RDK::UContainerDescription>& description);
+                             RDK::UEPtr<RDK::UContainerDescription>& description,
+                             bool forceOverride);
 
     QStringList splitIdentifier(const QString& name) const;
     QString tokensToPhrase(const QStringList& tokens,

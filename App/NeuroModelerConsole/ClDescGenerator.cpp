@@ -63,6 +63,9 @@ bool ClDescGenerator::Generate(RDK::UELockPtr<RDK::UStorage> storage,
         qWarning() << "ClDescGenerator: lexicon not found, будут использованы простые автогенераторы.";
     }
 
+    // Перед началом генерации подгружаем существующие XML, чтобы не потерять ручные описания.
+    storage->LoadClassesDescription();
+
     std::vector<std::string> classNames;
     storage->GetClassNameList(classNames);
 
@@ -80,15 +83,51 @@ bool ClDescGenerator::Generate(RDK::UELockPtr<RDK::UStorage> storage,
             createdNow = true;
         }
 
+        auto library = storage->FindCollection(className);
+        std::string libraryName = library ? library->GetName() : "Uncategorized";
+
+        if (!options.libraryFilters.isEmpty())
+        {
+            const QString libName = QString::fromStdString(libraryName);
+            bool allowed = false;
+            for (const QString& filter : options.libraryFilters)
+            {
+                if (libName.compare(filter, Qt::CaseInsensitive) == 0)
+                {
+                    allowed = true;
+                    break;
+                }
+            }
+            if (!allowed)
+            {
+                continue;
+            }
+        }
+
+        if (!options.classFilters.isEmpty())
+        {
+            const QString clsName = QString::fromStdString(className);
+            bool allowed = false;
+            for (const QString& filter : options.classFilters)
+            {
+                if (clsName.compare(filter, Qt::CaseInsensitive) == 0)
+                {
+                    allowed = true;
+                    break;
+                }
+            }
+            if (!allowed)
+            {
+                continue;
+            }
+        }
+
         description->SetStorage(storage.Get());
         description->SetClassNameValue(className);
         description->CreateProperties();
 
-        auto library = storage->FindCollection(className);
-        std::string libraryName = library ? library->GetName() : "Uncategorized";
-
-        applyClassText(className, libraryName, description);
-        applyPropertiesText(className, QString::fromStdString(description->GetHeader()), description);
+        applyClassText(className, libraryName, description, options.forceOverride);
+        applyPropertiesText(className, QString::fromStdString(description->GetHeader()), description, options.forceOverride);
 
         storage->SetClassDescription(className, description);
         storage->SaveClassDescriptionToFile(className);
@@ -219,7 +258,8 @@ bool ClDescGenerator::loadLexiconFromFile(const QString& path, QString* errorMes
 
 void ClDescGenerator::applyClassText(const std::string& className,
                                      const std::string& libraryName,
-                                     RDK::UEPtr<RDK::UContainerDescription>& description)
+                                     RDK::UEPtr<RDK::UContainerDescription>& description,
+                                     bool forceOverride)
 {
     const QString classKey = QString::fromStdString(className);
     QString currentHeader = QString::fromStdString(description->GetHeader());
@@ -228,7 +268,7 @@ void ClDescGenerator::applyClassText(const std::string& className,
     const auto overrideText = resolveClassOverride(classKey);
 
     QString header = currentHeader;
-    if (header.trimmed().isEmpty())
+    if (forceOverride || header.trimmed().isEmpty())
     {
         header = !overrideText.header.isEmpty() ? overrideText.header : classKey;
         if (header.isEmpty())
@@ -237,7 +277,7 @@ void ClDescGenerator::applyClassText(const std::string& className,
     }
 
     QString desc = currentDescription;
-    if (desc.trimmed().isEmpty())
+    if (forceOverride || desc.trimmed().isEmpty())
     {
         QString source = overrideText.description;
         if (source.isEmpty())
@@ -252,7 +292,8 @@ void ClDescGenerator::applyClassText(const std::string& className,
 
 void ClDescGenerator::applyPropertiesText(const std::string& className,
                                           const QString& classHeader,
-                                          RDK::UEPtr<RDK::UContainerDescription>& description)
+                                          RDK::UEPtr<RDK::UContainerDescription>& description,
+                                          bool forceOverride)
 {
     const auto& props = description->GetProperties();
     for (const auto& entry : props)
@@ -264,7 +305,7 @@ void ClDescGenerator::applyPropertiesText(const std::string& className,
         const auto overrideText = resolvePropertyOverride(QString::fromStdString(className), propertyKey);
 
         QString header = QString::fromStdString(propDesc.Header);
-        if (header.trimmed().isEmpty())
+        if (forceOverride || header.trimmed().isEmpty())
         {
             if (!overrideText.header.isEmpty())
             {
@@ -280,7 +321,13 @@ void ClDescGenerator::applyPropertiesText(const std::string& className,
         }
 
         QString desc = QString::fromStdString(propDesc.Description);
-        if (desc.trimmed().isEmpty())
+        // Старые автогенераторы могли оставить заглушки вида
+        // «%1 — параметр компонента %2.» или «%1 — свойство %2.».
+        // Если видим такую фразу, считаем описание пустым и перезаписываем его.
+        const bool isStubDescription =
+            desc.contains(QStringLiteral("— параметр компонента"))
+            || desc.contains(QStringLiteral("— свойство "));
+        if (forceOverride || desc.trimmed().isEmpty() || isStubDescription)
         {
             QString generated = overrideText.description;
             if (generated.isEmpty())
@@ -351,9 +398,9 @@ QString ClDescGenerator::buildDefaultPropertyDescription(const QString& header,
     if (owner.isEmpty())
         owner = QString::fromStdString(className);
     if (owner.isEmpty())
-        owner = QStringLiteral("этого компонента");
+        owner = QStringLiteral("компонента");
 
-    return QStringLiteral("%1 — параметр компонента %2.")
+    return QStringLiteral("%1 — свойство %2.")
         .arg(header, owner);
 }
 
