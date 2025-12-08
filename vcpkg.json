@@ -1,0 +1,55 @@
+{
+  "name": "nmsdk",
+  "version-string": "0.1.0",
+  "dependencies": [
+    {
+      "name": "qt5-base"
+    },
+    {
+      "name": "qt5-serialport"
+    },
+    {
+      "name": "qt5-charts"
+    },
+    {
+      "name": "curl"
+    },
+    {
+      "name": "opencv",
+      "default-features": true
+    },
+    {
+      "name": "python3"
+    },
+    {
+      "name": "eigen3"
+    },
+    {
+      "name": "zlib"
+    },
+    { "name": "boost-program-options" },
+    { "name": "boost-thread" },
+    { "name": "boost-filesystem" },
+    { "name": "boost-system" },
+    { "name": "boost-chrono" },
+    { "name": "boost-atomic" },
+    { "name": "glog" }
+  ],
+  "features": {
+    "python": {
+      "description": "Enable Python",
+      "dependencies": [
+        "python3"
+      ]
+    },
+    "darknet": {
+      "description": "Enable Darknet",
+      "dependencies": []
+    },
+    "tensorflow": {
+      "description": "Enable TensorFlow",
+      "dependencies": []
+    }
+  },
+  "builtin-baseline": "288e8bebf4ca67c1f8ebd49366b03650cfd9eb7d"
+}

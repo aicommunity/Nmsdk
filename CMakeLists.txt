@@ -1,4 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
+
+# Включаем поддержку CMAKE_MSVC_RUNTIME_LIBRARY (CMP0091) чтобы управлять /MDd|/MD
+if (MSVC AND POLICY CMP0091)
+  cmake_policy(SET CMP0091 NEW)
+endif()
+
 project(Nmsdk LANGUAGES CXX)
 
 # Политики и стандарт
@@ -7,6 +13,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+
+# Общие настройки для MSVC рантайма (DLL) — единообразно для всех таргетов
+if (MSVC)
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL" CACHE STRING "" FORCE)
+endif()
 
 # Каталог общих модулей CMake
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
