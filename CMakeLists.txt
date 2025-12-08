@@ -34,6 +34,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
 
+# Для multi-config генераторов (Visual Studio) убираем подпапки конфигурации
+# Устанавливаем одинаковые пути для всех конфигураций
+foreach(OUTPUTCONFIG DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
+  string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${DEPLOY_ROOT}")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${DEPLOY_ROOT}/Lib.CMake")
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${DEPLOY_ROOT}/Lib.CMake")
+endforeach()
+
 # Общие определения и зависимости (OpenCV/Boost/и т.д.)
 include(RdkDefines OPTIONAL)
 
