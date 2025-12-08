@@ -1,0 +1,12 @@
+{
+  "cmake.configureOnOpen": false,
+  "cmake.useCMakePresets": "always",
+  "cmake.generator": "Ninja",
+  "cmake.environment": {
+    "VCPKG_ROOT": "${env:VCPKG_ROOT}"
+  },
+  "cmake.sourceDirectory": "${workspaceFolder}"
+}
+{
+    "git.ignoreLimitWarning": true
+}

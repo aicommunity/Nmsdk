@@ -6,12 +6,12 @@
       "name": "win-msvc-base",
       "hidden": true,
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
       "cacheVariables": {
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>",
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
         "BUILD_SHARED_LIBS": "OFF",
@@ -20,6 +20,9 @@
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
         "RDK_UNICODE_RUN": "OFF"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       }
     },
     {
@@ -36,8 +39,8 @@
       "name": "win-vs2022-base",
       "hidden": true,
       "generator": "Visual Studio 17 2022",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
       "architecture": {
         "value": "x64",
         "strategy": "set"
@@ -46,7 +49,7 @@
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON",
         "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>",
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
         "BUILD_SHARED_LIBS": "OFF",
@@ -55,6 +58,14 @@
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
         "RDK_UNICODE_RUN": "OFF"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [ "Windows" ]
+        }
       }
     },
     {
@@ -76,8 +87,8 @@
     {
       "name": "linux-gcc-debug",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "/usr/bin/gcc",
         "CMAKE_CXX_COMPILER": "/usr/bin/g++",
@@ -88,6 +99,9 @@
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
         "RDK_UNICODE_RUN": "OFF"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       }
     },
     {

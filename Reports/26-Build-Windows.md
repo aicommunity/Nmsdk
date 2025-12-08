@@ -83,6 +83,16 @@ vcpkg install --triplet x64-windows
 
 ## Сборка проекта
 
+### Способ 0: Visual Studio 2022 через CMake Presets (Qt 5.15)
+
+1. Убедитесь, что Qt 5.15.2 (msvc2019_64/2022) установлена и путь прописан в `CMAKE_PREFIX_PATH` (в пресете стоит `C:/Qt/5.15.2/msvc2019_64`).  
+2. Откройте `CMakePresets.json` в Visual Studio → выберите Configure Preset:  
+   - Debug: `win-vs2022-debug`  
+   - Release: `win-vs2022-release`  
+3. Build Preset в VS: `win-vs2022-debug` или `win-vs2022-release`.  
+4. При необходимости задайте `VCPKG_ROOT` (по умолчанию `E:/vcpkg/scripts/buildsystems/vcpkg.cmake`).  
+5. Запускайте сборку/установку из VS кнопками Configure/Build.
+
 ### Способ 1: Использование скрипта сборки (рекомендуется)
 
 Самый простой способ - использовать готовый скрипт:
