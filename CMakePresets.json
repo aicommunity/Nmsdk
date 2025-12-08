@@ -22,7 +22,8 @@
         "RDK_UNICODE_RUN": "OFF"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       }
     },
     {
@@ -60,7 +61,8 @@
         "RDK_UNICODE_RUN": "OFF"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -101,7 +103,8 @@
         "RDK_UNICODE_RUN": "OFF"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       }
     },
     {
