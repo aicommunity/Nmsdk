@@ -1,7 +1,20 @@
 cmake_minimum_required(VERSION 3.16)
 project(NeuroModeler LANGUAGES CXX)
 
-add_executable(NeuroModeler)
+# Для Qt GUI приложения на Windows нужен subsystem:windows
+if(WIN32)
+  add_executable(NeuroModeler WIN32)
+else()
+  add_executable(NeuroModeler)
+endif()
+
+# Устанавливаем DLL runtime библиотеку для совместимости с vcpkg
+if(MSVC)
+  # Используем генератор выражений для multi-config генераторов (Visual Studio)
+  set_target_properties(NeuroModeler PROPERTIES
+    MSVC_RUNTIME_LIBRARY "$<IF:$<CONFIG:Debug>,MultiThreadedDebugDLL,MultiThreadedDLL>"
+  )
+endif()
 
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort Concurrent)
 
@@ -65,12 +78,17 @@ target_compile_definitions(NeuroModeler
     RDK_DISABLE_EXT_GUI
 )
 
-# Подключаем заголовок с строковыми макросами
-target_compile_options(NeuroModeler PRIVATE -include ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NeuroModelerAppDefs.h)
+# Подключаем заголовок со строковыми макросами (разный синтаксис для MSVC/GCC)
+if (MSVC)
+  target_compile_options(NeuroModeler PRIVATE /FI${CMAKE_SOURCE_DIR}/App/NeuroModeler/NeuroModelerAppDefs.h)
+else()
+  target_compile_options(NeuroModeler PRIVATE -include ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NeuroModelerAppDefs.h)
+endif()
 
 target_link_libraries(NeuroModeler
   PRIVATE
     Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort Qt5::Concurrent
+    $<$<PLATFORM_ID:Windows>:Qt5::WinMain>
     Rdk-CvBasicLib.qt
     Rdk-BasicLib.qt
     Rdk-HardwareLib.qt
@@ -82,6 +100,19 @@ target_link_libraries(NeuroModeler
 find_package(CURL QUIET)
 if(CURL_FOUND)
   target_link_libraries(NeuroModeler PRIVATE CURL::libcurl)
+endif()
+
+# Boost libraries (required by rdk.static.qt)
+find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
+if(Boost_FOUND)
+  target_link_libraries(NeuroModeler PRIVATE 
+    Boost::program_options 
+    Boost::thread 
+    Boost::filesystem 
+    Boost::system
+    Boost::chrono
+    Boost::atomic
+  )
 endif()
 
 target_include_directories(NeuroModeler PRIVATE

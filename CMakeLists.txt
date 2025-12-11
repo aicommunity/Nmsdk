@@ -1,4 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
+
+# Включаем поддержку CMAKE_MSVC_RUNTIME_LIBRARY (CMP0091) чтобы управлять /MDd|/MD
+if (MSVC AND POLICY CMP0091)
+  cmake_policy(SET CMP0091 NEW)
+endif()
+
 project(Nmsdk LANGUAGES CXX)
 
 # Политики и стандарт
@@ -7,6 +13,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+
+# Общие настройки для MSVC рантайма (DLL) — единообразно для всех таргетов
+if (MSVC)
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL" CACHE STRING "" FORCE)
+endif()
 
 # Каталог общих модулей CMake
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -22,6 +33,15 @@ set(DEPLOY_ROOT "${CMAKE_SOURCE_DIR}/Bin/Platform/${PLATFORM_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
+
+# Для multi-config генераторов (Visual Studio) убираем подпапки конфигурации
+# Устанавливаем одинаковые пути для всех конфигураций
+foreach(OUTPUTCONFIG DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
+  string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${DEPLOY_ROOT}")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${DEPLOY_ROOT}/Lib.CMake")
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${DEPLOY_ROOT}/Lib.CMake")
+endforeach()
 
 # Общие определения и зависимости (OpenCV/Boost/и т.д.)
 include(RdkDefines OPTIONAL)
