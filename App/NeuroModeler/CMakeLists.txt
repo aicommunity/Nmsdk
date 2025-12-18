@@ -70,6 +70,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleClassListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UQuickLinkDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStyleManager.cpp
 )
 
 # DEFINES из оригинального .pro
@@ -136,4 +137,18 @@ if (RDK_USE_OPENCV AND OpenCV_FOUND)
   target_link_libraries(NeuroModeler PRIVATE ${OpenCV_LIBS})
 endif()
 
+# Copy style files to output directory
+set(STYLES_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Styles")
+set(STYLES_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Styles")
+
+add_custom_command(TARGET NeuroModeler POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLES_DEST_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/default.qss"
+        "${STYLES_DEST_DIR}/default.qss"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/theme.json"
+        "${STYLES_DEST_DIR}/theme.json"
+    COMMENT "Copying style files to Bin/Styles/"
+)
 

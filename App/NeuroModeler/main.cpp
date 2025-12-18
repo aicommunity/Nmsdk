@@ -4,12 +4,14 @@
 #include <QTimer>
 #include <QString>
 #include <QDebug>
+#include <QDir>
 #include <algorithm>
 #include <utility>
 #include <vector>
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
+#include "UStyleManager.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 
@@ -29,6 +31,13 @@ void progress_bar_callback(int complete_percent, const std::string &text)
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    // Initialize style manager and apply global styles
+    QString stylesDir = QApplication::applicationDirPath() + "/Styles/";
+    UStyleManager* styleManager = UStyleManager::instance();
+    styleManager->loadTheme(stylesDir + "theme.json");
+    styleManager->loadStyleSheet(stylesDir + "default.qss");
+    styleManager->applyGlobalStyleSheet(&a);
 
     QCommandLineParser parser;
     parser.setApplicationDescription("NeuroModeler automation arguments");
