@@ -149,6 +149,12 @@ add_custom_command(TARGET NeuroModeler POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${STYLES_SOURCE_DIR}/theme.json"
         "${STYLES_DEST_DIR}/theme.json"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/dark.qss"
+        "${STYLES_DEST_DIR}/dark.qss"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/dark-theme.json"
+        "${STYLES_DEST_DIR}/dark-theme.json"
     COMMENT "Copying style files to Bin/Styles/"
 )
 

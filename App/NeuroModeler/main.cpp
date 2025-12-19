@@ -33,10 +33,19 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // Initialize style manager and apply global styles
-    QString stylesDir = QApplication::applicationDirPath() + "/Styles/";
     UStyleManager* styleManager = UStyleManager::instance();
-    styleManager->loadTheme(stylesDir + "theme.json");
-    styleManager->loadStyleSheet(stylesDir + "default.qss");
+    
+    // Get styles path (handles Bin/Platform/Linux/ case)
+    QString stylesDir = styleManager->getStylesPath();
+    
+    if (!styleManager->loadTheme(stylesDir + "theme.json"))
+    {
+        qWarning() << "Failed to load theme from:" << (stylesDir + "theme.json");
+    }
+    if (!styleManager->loadStyleSheet(stylesDir + "default.qss"))
+    {
+        qWarning() << "Failed to load stylesheet from:" << (stylesDir + "default.qss");
+    }
     styleManager->applyGlobalStyleSheet(&a);
 
     QCommandLineParser parser;
