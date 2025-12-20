@@ -144,6 +144,18 @@ cd build-check && cmake --build . -j$(nproc)
 2. **Further Test Expansion** - Additional edge case coverage
 3. **std::list Optimization in UStorage** - Only if profiling shows bottleneck
 
+## Recent Optimizations (December 2024)
+
+### Calculate() Performance Optimization ✅
+**See:** [30-Calculate-Performance-Optimization.md](30-Calculate-Performance-Optimization.md)
+
+**Summary:**
+- Optimized `Build()`, `Reset()`, and `Calculate()` methods using active components cache
+- Implemented incremental cache updates for component add/remove operations
+- Added inline optimizations for hot paths
+- Optimized time checks and controller loops
+- Expected performance improvement: 15-30% for Calculate(), 20-40% for Build()/Reset()
+
 ## Conclusion
 
 All planned refactoring tasks have been successfully completed. The codebase is:
