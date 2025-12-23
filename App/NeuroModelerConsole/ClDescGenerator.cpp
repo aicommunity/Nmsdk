@@ -13,6 +13,7 @@
 
 #include "../../Rdk/Core/Engine/UContainerDescription.h"
 #include "../../Rdk/Core/Engine/ULibrary.h"
+#include "../../Rdk/Core/Engine/UNet.h"
 
 namespace NeuroModeler {
 
@@ -132,6 +133,29 @@ bool ClDescGenerator::Generate(RDK::UELockPtr<RDK::UStorage> storage,
 
         applyClassText(className, libraryName, description, options.forceOverride);
         applyPropertiesText(className, QString::fromStdString(description->GetHeader()), description, options.forceOverride);
+        
+        // Генерируем алиасы свойств для компонентов с вложенными структурами
+        // Обернуто в try-catch, чтобы не прерывать генерацию других компонентов при ошибках
+        try
+        {
+            generatePropertyAliases(className, description, storage.Get(), options);
+        }
+        catch (const std::exception& e)
+        {
+            if (options.verbose)
+            {
+                qWarning() << "ClDescGenerator: ошибка при генерации алиасов для" 
+                          << QString::fromStdString(className) << ":" << e.what();
+            }
+        }
+        catch (...)
+        {
+            if (options.verbose)
+            {
+                qWarning() << "ClDescGenerator: неизвестная ошибка при генерации алиасов для" 
+                          << QString::fromStdString(className);
+            }
+        }
 
         storage->SetClassDescription(className, description);
         storage->SaveClassDescriptionToFile(className);
@@ -437,6 +461,105 @@ ClDescGenerator::TextOverride ClDescGenerator::resolvePropertyOverride(const QSt
         return propertyFallbacks_.value(propertyName);
 
     return {};
+}
+
+void ClDescGenerator::generatePropertyAliases(const std::string& className,
+                                                RDK::UEPtr<RDK::UContainerDescription>& description,
+                                                RDK::UStorage* storage,
+                                                const ClDescGeneratorOptions& options)
+{
+    if (!description || !storage)
+        return;
+    
+    // Создаем экземпляр компонента для анализа
+    // Используем RAII-подход: гарантируем возврат компонента даже при исключениях
+    RDK::UEPtr<RDK::UComponent> component;
+    
+    try
+    {
+        component = storage->TakeObject(className);
+        if (!component)
+            return;
+        
+        // Преобразуем в UContainer для анализа
+        RDK::UEPtr<RDK::UContainer> container = RDK::dynamic_pointer_cast<RDK::UContainer>(component);
+        if (!container)
+        {
+            storage->ReturnObject(component);
+            component = RDK::UEPtr<RDK::UComponent>();
+            return;
+        }
+        
+        // Проверяем, является ли компонент UNet (имеет вложенные компоненты)
+        RDK::UEPtr<RDK::UNet> net = RDK::dynamic_pointer_cast<RDK::UNet>(container);
+        if (!net)
+        {
+            storage->ReturnObject(component);
+            component = RDK::UEPtr<RDK::UComponent>();
+            return;
+        }
+        
+        // Настраиваем опции анализатора
+        PropertyAliasAnalyzerOptions analyzerOptions;
+        analyzerOptions.minDepth = 2;
+        analyzerOptions.maxAliasesPerComponent = 20;
+        analyzerOptions.preferredTypes.insert("ptOutput");
+        analyzerOptions.preferredTypes.insert("ptInput");
+        analyzerOptions.preferredTypes.insert("ptParameter");
+        analyzerOptions.excludePatterns.insert("DataInput*");
+        analyzerOptions.excludePatterns.insert("DataOutput*");
+        
+        // Определяем путь к конфигурациям
+        QString appDir = QCoreApplication::applicationDirPath();
+        QString configsPath = QDir(appDir).absoluteFilePath("../../Bin/Configs");
+        if (!QDir(configsPath).exists())
+        {
+            configsPath = QDir::current().absoluteFilePath("Bin/Configs");
+        }
+        analyzerOptions.configsPath = configsPath;
+        analyzerOptions.analyzeConfigs = QDir(configsPath).exists();
+        
+        // Анализируем компонент
+        std::vector<PropertyAliasCandidate> candidates = aliasAnalyzer_.AnalyzeComponent(container, analyzerOptions);
+        
+        // Добавляем алиасы в Favorites
+        for (const auto& candidate : candidates)
+        {
+            QString aliasName = candidate.aliasName;
+            QString componentPath = candidate.componentPath;
+            QString propertyName = candidate.propertyName;
+            
+            // Добавляем алиас в Favorites
+            description->AddPropertyAlias(
+                aliasName.toStdString(),
+                componentPath.toStdString(),
+                propertyName.toStdString(),
+                candidate.propertyType
+            );
+        }
+    }
+    catch (...)
+    {
+        // Гарантируем возврат компонента даже при исключении
+        if (component)
+        {
+            try
+            {
+                storage->ReturnObject(component);
+            }
+            catch (...)
+            {
+                // Игнорируем ошибки при возврате компонента
+            }
+        }
+        throw; // Пробрасываем исключение дальше
+    }
+    
+    // Возвращаем компонент в storage
+    if (component)
+    {
+        storage->ReturnObject(component);
+    }
 }
 
 } // namespace NeuroModeler

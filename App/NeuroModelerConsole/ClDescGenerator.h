@@ -6,6 +6,7 @@
 
 #include "../../Rdk/Core/Engine/UELockPtr.h"
 #include "../../Rdk/Core/Engine/UStorage.h"
+#include "PropertyAliasAnalyzer.h"
 
 namespace NeuroModeler {
 
@@ -46,6 +47,11 @@ public:
                              RDK::UEPtr<RDK::UContainerDescription>& description,
                              bool forceOverride);
 
+    void generatePropertyAliases(const std::string& className,
+                                  RDK::UEPtr<RDK::UContainerDescription>& description,
+                                  RDK::UStorage* storage,
+                                  const ClDescGeneratorOptions& options);
+
     QStringList splitIdentifier(const QString& name) const;
     QString tokensToPhrase(const QStringList& tokens,
                            bool capitalizeFirst) const;
@@ -68,6 +74,7 @@ private:
     QHash<QString, TextOverride> classOverrides_;
     QHash<QString, TextOverride> propertyFallbacks_;
     QHash<QString, QHash<QString, TextOverride>> propertyOverrides_;
+    PropertyAliasAnalyzer aliasAnalyzer_;
 };
 
 } // namespace NeuroModeler

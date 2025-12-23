@@ -97,6 +97,16 @@
 - **Drag&drop линков**: `UComponentLinksWidget` получает улучшенный UI для создания связей.
 - **Presets конфигурации**: наборы открытых окон, фильтров, графов, которые можно быстро применять.
 
+### 5.1 Адаптация к новым темам Qt (визуальное выравнивание)
+
+- **Иконка закрытия вкладок графиков**  
+  - В светлой и тёмной темах (`Rdk/GUI/Qt/Styles/default.qss`, `Rdk/GUI/Qt/Styles/dark.qss`) добавлен блок `QTabBar::close-button` с горизонтальными отступами (`margin-left`/`margin-right`) и фиксированным положением `subcontrol-position: right;`.  
+  - Это устраняет прилипание иконки закрытия к тексту заголовка вкладки в `UGraphWidget` и соседних виджетах на новых стилях, одновременно сохраняя корректный вид в старых темах.
+
+- **Вертикальные отступы в мастере конфигурации (`UCreateConfigurationWizardWidget`)**  
+  - На второй странице мастера (`Model`) увеличены `spacing` и `margins` у корневого `QVBoxLayout` (`verticalLayout_4`) и вложенных лейаутов (`verticalLayout_2`, `horizontalLayout_8`, `horizontalLayout_9`, `verticalLayout_5`, `horizontalLayout_10`).  
+  - Благодаря этому заголовок «Channels configuration», разделительная линия, флаг `Apply settings to all channels` и группа `Channel Properties` визуально разделены, элементы больше не “слипаются” по вертикали в новых темах и остаются аккуратными в классическом стиле.
+
 ## 6. Дорожная карта
 
 1. **Сбор метрик**  
