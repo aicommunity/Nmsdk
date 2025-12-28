@@ -24,6 +24,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USettingsReaderWidget.h
   ${CMAKE_SOURCE_DIR}/App/NeuroModeler/main.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UAboutDialog.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UHelpWindow.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGEngineControlWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMatrixFormDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerMainWidget.cpp
@@ -156,5 +157,25 @@ add_custom_command(TARGET NeuroModeler POST_BUILD
         "${STYLES_SOURCE_DIR}/dark-theme.json"
         "${STYLES_DEST_DIR}/dark-theme.json"
     COMMENT "Copying style files to Bin/Styles/"
+)
+
+# Copy help files to output directory
+set(HELP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Bin/Help")
+set(HELP_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Help")
+
+add_custom_command(TARGET NeuroModeler POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${HELP_DEST_DIR}/en"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${HELP_DEST_DIR}/ru"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${HELP_DEST_DIR}/styles"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${HELP_SOURCE_DIR}/en"
+        "${HELP_DEST_DIR}/en"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${HELP_SOURCE_DIR}/ru"
+        "${HELP_DEST_DIR}/ru"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${HELP_SOURCE_DIR}/styles"
+        "${HELP_DEST_DIR}/styles"
+    COMMENT "Copying help files to Bin/Help/"
 )
 

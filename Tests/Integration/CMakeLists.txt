@@ -6,4 +6,5 @@ add_subdirectory(PropertyConnections)
 add_subdirectory(Serialization)
 add_subdirectory(Libraries)
 add_subdirectory(Migration)
+add_subdirectory(GUI)
 
