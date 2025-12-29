@@ -9,6 +9,14 @@ option(RDK_USE_SQL "Use Qt SQL" OFF)
 option(RDK_USE_ODESOLVER "Use ODE solver" OFF)
 option(RDK_USE_MATLAB "Use MATLAB" OFF)
 
+# Проверка существования папки ode-solver
+if(RDK_USE_ODESOLVER)
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/Rdk/ThirdParty/ode-solver")
+    message(STATUS "ode-solver directory not found, disabling RDK_USE_ODESOLVER")
+    set(RDK_USE_ODESOLVER OFF CACHE BOOL "Use ODE solver" FORCE)
+  endif()
+endif()
+
 add_compile_definitions(RDK_UNICODE_RUN RDK_QT QT_NO_VERSION_TAGGING)
 
 if (MSVC)
