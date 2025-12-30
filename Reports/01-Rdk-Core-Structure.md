@@ -51,7 +51,7 @@
 - **ULibrary** - библиотека компонентов
 - **UModule** - базовый модуль
 - **UAModel** - модель
-- **ULogger** / **ULoggerEnv** - логирование
+- **ULogger** / **UExceptionLogger** - логирование
 - **UTime** - работа со временем
 - **UEnvException** - исключения окружения
 - **UEnvSupport** - поддержка окружения

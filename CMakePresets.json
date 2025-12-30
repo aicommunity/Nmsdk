@@ -1,0 +1,127 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "win-msvc-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_MANIFEST_DIR": "${sourceDir}",
+        "BUILD_SHARED_LIBS": "OFF",
+        "RDK_USE_ODESOLVER": "OFF",
+        "RDK_USE_PYTHON": "OFF",
+        "RDK_USE_DARKNET": "OFF",
+        "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_UNICODE_RUN": "OFF"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      }
+    },
+    {
+      "name": "win-msvc-debug",
+      "inherits": [ "win-msvc-base" ],
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "win-msvc-release",
+      "inherits": [ "win-msvc-base" ],
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "win-vs2022-base",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_MANIFEST_DIR": "${sourceDir}",
+        "BUILD_SHARED_LIBS": "OFF",
+        "RDK_USE_ODESOLVER": "OFF",
+        "RDK_USE_PYTHON": "OFF",
+        "RDK_USE_DARKNET": "OFF",
+        "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_UNICODE_RUN": "OFF"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [ "Windows" ]
+        }
+      }
+    },
+    {
+      "name": "win-vs2022-debug",
+      "displayName": "Windows Visual Studio 2022 Debug",
+      "inherits": [ "win-vs2022-base" ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "win-vs2022-release",
+      "displayName": "Windows Visual Studio 2022 Release",
+      "inherits": [ "win-vs2022-base" ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "linux-gcc-debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "/usr/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_CXX_STANDARD": "20",
+        "BUILD_SHARED_LIBS": "OFF",
+        "RDK_USE_ODESOLVER": "OFF",
+        "RDK_USE_PYTHON": "OFF",
+        "RDK_USE_DARKNET": "OFF",
+        "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_UNICODE_RUN": "OFF"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      }
+    },
+    {
+      "name": "linux-gcc-release",
+      "inherits": [ "linux-gcc-debug" ],
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "win-msvc-debug", "configurePreset": "win-msvc-debug" },
+    { "name": "win-msvc-release", "configurePreset": "win-msvc-release" },
+    { "name": "win-vs2022-debug", "configurePreset": "win-vs2022-debug", "displayName": "Build Windows VS2022 Debug" },
+    { "name": "win-vs2022-release", "configurePreset": "win-vs2022-release", "displayName": "Build Windows VS2022 Release" },
+    { "name": "linux-gcc-debug", "configurePreset": "linux-gcc-debug" },
+    { "name": "linux-gcc-release", "configurePreset": "linux-gcc-release" }
+  ]
+}
+
+
+

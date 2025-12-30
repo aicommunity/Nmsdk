@@ -1,0 +1,46 @@
+{
+  "classOverrides": {
+    "NPulseNeuron": {
+      "aliases": [
+        {
+          "name": "LTZoneOutput",
+          "path": "LTZone.Output",
+          "type": "output"
+        },
+        {
+          "name": "LTZoneThreshold",
+          "path": "LTZone.Threshold",
+          "type": "parameter"
+        },
+        {
+          "name": "LTZonePotential",
+          "path": "LTZone.Potential",
+          "type": "state"
+        }
+      ],
+      "excludePatterns": ["DataInput*", "DataOutput*"]
+    },
+    "NPulseNeuronIzhikevich": {
+      "aliases": [
+        {
+          "name": "LTZoneOutput",
+          "path": "LTZone.Output",
+          "type": "output"
+        },
+        {
+          "name": "LTZoneThreshold",
+          "path": "LTZone.Threshold",
+          "type": "parameter"
+        }
+      ],
+      "excludePatterns": ["DataInput*", "DataOutput*"]
+    }
+  },
+  "generationRules": {
+    "minDepth": 2,
+    "preferredTypes": ["ptOutput", "ptInput", "ptParameter"],
+    "maxAliasesPerComponent": 20,
+    "excludePatterns": ["DataInput*", "DataOutput*", "*Internal*", "*System*"]
+  }
+}
+

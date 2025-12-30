@@ -105,17 +105,17 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 	}
 	catch (RDK::UException &exception)
 	{
-	 MLog_LogMessage(RDK_SYS_MESSAGE, exception.GetType(), (std::string("Global Exception Catcher: ")+exception.what()).c_str());
+	 RDK::Logging::ChannelLog(RDK_SYS_MESSAGE, exception.GetType(), (std::string("Global Exception Catcher: ")+exception.what()).c_str());
 	}
     catch (std::exception &exception)
     {
-	 MLog_LogMessage(RDK_SYS_MESSAGE,RDK_EX_INFO, (std::string("Global Exception Catcher: ")+exception.what()).c_str());
+	 RDK::Logging::ChannelLog(RDK_SYS_MESSAGE,RDK_EX_INFO, (std::string("Global Exception Catcher: ")+exception.what()).c_str());
     }
     catch (Exception &exception)
 	{
 //        CloseHandle(RdkLockStartapMutex);
 //        Application->ShowException(&exception);
-		  MLog_LogMessage(RDK_SYS_MESSAGE,RDK_EX_ERROR, (std::string("Global Exception Catcher: ")+AnsiString(exception.Message).c_str()).c_str());
+		  RDK::Logging::ChannelLog(RDK_SYS_MESSAGE,RDK_EX_ERROR, (std::string("Global Exception Catcher: ")+AnsiString(exception.Message).c_str()).c_str());
     }
 	catch (...)
 	{
