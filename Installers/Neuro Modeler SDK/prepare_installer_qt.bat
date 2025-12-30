@@ -12,6 +12,10 @@ xcopy "..\..\Bin\Platform\Win\tbb.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 xcopy "..\..\Bin\Platform\Win\tbb_debug.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 xcopy "..\..\Bin\Platform\Win\NeuroModeler.ini" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 xcopy "..\..\Bin\Platform\Win\Fonts\*.*" InstallSourcesQt\Bin\Platform\Win\Fonts\ /Y /D
+xcopy "..\..\Bin\Platform\Win\boost*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+xcopy "..\..\Bin\Platform\Win\libcurl*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+xcopy "..\..\Bin\Platform\Win\libcrypto*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+xcopy "..\..\Bin\Platform\Win\libssl*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 
 xcopy "..\..\Bin\Configs\MC-RCN\*.*" InstallSourcesQt\Bin\Configs\MC-RCN\*.* /Y /E /D
 xcopy "..\..\Bin\Configs\NM-Neurons\*.*" InstallSourcesQt\Bin\Configs\NM-Neurons\*.* /Y /E /D
