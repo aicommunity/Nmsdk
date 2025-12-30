@@ -44,7 +44,7 @@ DEFINES += RDK_DISABLE_EXT_GUI
 CVS_VERSION = 0 # $$system(hg parents --template '{rev}')
 DEFINES += RDK_APP_VERSION=$$CVS_VERSION
 DEFINES += "RDK_APP_URL=\\\"https://neuromodeler.ru\\\""
-DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2023)\\\"\""
+DEFINES += "RDK_APP_LICENSE=\"\\\"There is a public domain software (2000-2026)\\\"\""
 DEFINES += "RDK_APP_NAME=\"\\\"Neuro Modeler\\\"\""
 
 RESOURCES = ../../../Rdk/GUI/Qt/static/res.qrc
