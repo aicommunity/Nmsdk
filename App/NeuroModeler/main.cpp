@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <utility>
 #include <vector>
+#include <atomic>
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
@@ -16,15 +17,32 @@
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 
 QProgressDialog* d(NULL);
+std::atomic<bool> g_cancelRequested(false);
 
 void progress_bar_callback(int complete_percent, const std::string &text)
 {
  if(d)
  {
+  if(g_cancelRequested.load())
+  {
+   d->setLabelText("Отмена инициализации...");
+   QApplication::processEvents();
+   return;
+  }
   d->setValue(complete_percent);
   if(!text.empty())
    d->setLabelText(text.c_str());
-  QApplication::processEvents();
+  
+  // Обрабатываем события чаще для обеспечения отзывчивости кнопки Cancel
+  // Используем AllEvents и таймаут 50мс для обработки всех событий включая клики
+  QApplication::processEvents(QEventLoop::AllEvents, 50);
+  
+  // Проверяем отмену после обработки событий
+  if(g_cancelRequested.load())
+  {
+   d->setLabelText("Отмена инициализации...");
+   return;
+  }
  }
 }
 
@@ -123,12 +141,28 @@ int main(int argc, char *argv[])
     d=new QProgressDialog;
     d->setWindowFlag(Qt::WindowStaysOnTopHint);
     d->setLabelText("Launching application");
+    d->setCancelButtonText("Отмена");
+    d->setWindowModality(Qt::NonModal); // NonModal чтобы окно могло получать события
+    d->setAutoClose(false); // Не закрывать автоматически
+    d->setAutoReset(false); // Не сбрасывать автоматически
     int x=d->width()*2;
     int y=d->height()*1;
     d->setFixedSize(x,y);
     d->setMaximum(100);
     d->setValue(10);
+    
+    // Обработка отмены через кнопку Cancel (подключаем ДО show())
+    QObject::connect(d, &QProgressDialog::canceled, []() {
+        g_cancelRequested.store(true);
+        if(d)
+        {
+            d->setLabelText("Отмена инициализации...");
+        }
+    });
+    
     d->show();
+    d->raise(); // Поднимаем окно наверх
+    d->activateWindow(); // Активируем окно для получения фокуса
     QApplication::processEvents();
 
     std::string default_user_name;
@@ -139,9 +173,24 @@ int main(int argc, char *argv[])
 
     RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore(progress_bar_callback);
 
+    // Сброс флага отмены перед инициализацией
+    g_cancelRequested.store(false);
+
      int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModeler.ini",
                   (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
                   forwardedArgc, forwardedArgv);
+
+     // Проверка отмены после инициализации
+     if(g_cancelRequested.load())
+     {
+         if(d)
+         {
+             d->hide();
+             delete d;
+             d = NULL;
+         }
+         return 1; // Код отмены
+     }
 
      if(init_res != 0)
       return init_res;
