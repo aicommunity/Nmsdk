@@ -144,19 +144,35 @@ int main(int argc, char *argv[])
     }
 
     d=new QProgressDialog;
+    
+    // Настраиваем окно перед показом, чтобы избежать черного прямоугольника
+    // Используем setAttribute для правильной отрисовки
+    d->setAttribute(Qt::WA_DontShowOnScreen, true); // Создаем окно невидимым сначала
     d->setWindowFlag(Qt::WindowStaysOnTopHint);
     d->setLabelText("Launching application");
     d->setCancelButtonText("Отмена");
     d->setWindowModality(Qt::NonModal); // NonModal чтобы окно могло получать события
     d->setAutoClose(false); // Не закрывать автоматически
     d->setAutoReset(false); // Не сбрасывать автоматически
+    d->setMinimumDuration(0); // Показывать окно сразу, без задержки
     d->setMaximum(100);
     d->setValue(10);
     
     // Устанавливаем минимальные размеры явно, чтобы избежать черного прямоугольника
-    // QProgressDialog имеет стандартные размеры, но лучше задать их явно
     d->setMinimumSize(400, 100);
     d->resize(400, 100);
+    
+    // Принудительно обновляем layout окна перед показом
+    d->adjustSize();
+    
+    // Применяем стили к окну прогресса явно
+    if(styleManager)
+    {
+        d->setStyleSheet(styleManager->getStyleSheet());
+    }
+    
+    // Обрабатываем события для применения стилей
+    QApplication::processEvents(QEventLoop::AllEvents, 0);
     
     // Обработка отмены через кнопку Cancel (подключаем ДО show())
     QObject::connect(d, &QProgressDialog::canceled, []() {
@@ -194,18 +210,27 @@ int main(int argc, char *argv[])
         }
     });
     
-    // Принудительно обновляем окно перед показом, чтобы избежать черного прямоугольника
+    // Принудительно обновляем окно перед показом
     d->update();
     d->repaint();
-    QApplication::processEvents(QEventLoop::AllEvents, 0);
     
+    // Убираем атрибут невидимости и показываем окно
+    d->setAttribute(Qt::WA_DontShowOnScreen, false);
     d->show();
+    
+    // Принудительно обрабатываем события для полной отрисовки окна
+    // Делаем это несколько раз, чтобы гарантировать отрисовку
+    for(int i = 0; i < 3; ++i)
+    {
+        QApplication::processEvents(QEventLoop::AllEvents, 0);
+        d->update();
+        d->repaint();
+    }
+    
     d->raise(); // Поднимаем окно наверх
     d->activateWindow(); // Активируем окно для получения фокуса
     
-    // Обрабатываем события несколько раз для полной отрисовки окна
-    QApplication::processEvents(QEventLoop::AllEvents, 0);
-    d->update();
+    // Финальная обработка событий для гарантии отрисовки
     QApplication::processEvents(QEventLoop::AllEvents, 0);
 
     std::string default_user_name;
@@ -219,10 +244,27 @@ int main(int argc, char *argv[])
     // Сброс флага отмены перед инициализацией
     g_cancelRequested.store(false);
 
+    // Создаем таймер для периодической обработки событий во время длительных блокирующих операций инициализации
+    // Это критично для обеспечения отзывчивости окна прогресса, особенно во время InitRTlibs, BuildStorage, LoadClassesDescription
+    // Таймер обрабатывает события даже после отмены, чтобы UI мог обновиться (например, текст кнопки "Cancelling...")
+    QTimer* eventTimer = new QTimer(&a);
+    QObject::connect(eventTimer, &QTimer::timeout, []() {
+        // Обрабатываем события пока окно прогресса существует
+        // Это позволяет окну получать сообщения даже во время длительных блокирующих операций
+        if(d) {
+            QApplication::processEvents(QEventLoop::AllEvents, 0);
+        }
+    });
+    eventTimer->start(50); // Обрабатывать события каждые 50 мс для обеспечения отзывчивости
+
      int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModeler.ini",
                   (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
                   forwardedArgc, forwardedArgv);
-
+     
+     // Останавливаем таймер после завершения инициализации (включая случай отмены)
+     eventTimer->stop();
+     delete eventTimer;
+     
      // Проверка отмены после инициализации
      if(g_cancelRequested.load())
      {
