@@ -5,6 +5,8 @@
 #include <QString>
 #include <QDebug>
 #include <QDir>
+#include <QPushButton>
+#include <QDialogButtonBox>
 #include <algorithm>
 #include <utility>
 #include <vector>
@@ -26,16 +28,19 @@ void progress_bar_callback(int complete_percent, const std::string &text)
   if(g_cancelRequested.load())
   {
    d->setLabelText("Отмена инициализации...");
-   QApplication::processEvents();
+   // Обрабатываем все события для обеспечения отзывчивости окна
+   QApplication::processEvents(QEventLoop::AllEvents, 0);
    return;
   }
   d->setValue(complete_percent);
   if(!text.empty())
    d->setLabelText(text.c_str());
   
-  // Обрабатываем события чаще для обеспечения отзывчивости кнопки Cancel
-  // Используем AllEvents и таймаут 50мс для обработки всех событий включая клики
-  QApplication::processEvents(QEventLoop::AllEvents, 50);
+  // Обрабатываем события для обеспечения отзывчивости окна во время блокирующих операций
+  // Используем AllEvents без таймаута для немедленной обработки всех событий включая клики
+  // Это критично для того, чтобы окно прогресса могло получать сообщения даже во время
+  // длительных блокирующих операций инициализации
+  QApplication::processEvents(QEventLoop::AllEvents, 0);
   
   // Проверяем отмену после обработки событий
   if(g_cancelRequested.load())
@@ -145,25 +150,63 @@ int main(int argc, char *argv[])
     d->setWindowModality(Qt::NonModal); // NonModal чтобы окно могло получать события
     d->setAutoClose(false); // Не закрывать автоматически
     d->setAutoReset(false); // Не сбрасывать автоматически
-    int x=d->width()*2;
-    int y=d->height()*1;
-    d->setFixedSize(x,y);
     d->setMaximum(100);
     d->setValue(10);
+    
+    // Устанавливаем минимальные размеры явно, чтобы избежать черного прямоугольника
+    // QProgressDialog имеет стандартные размеры, но лучше задать их явно
+    d->setMinimumSize(400, 100);
+    d->resize(400, 100);
     
     // Обработка отмены через кнопку Cancel (подключаем ДО show())
     QObject::connect(d, &QProgressDialog::canceled, []() {
         g_cancelRequested.store(true);
         if(d)
         {
+            // Мгновенно изменяем текст кнопки Cancel на "Cancelling..." для обратной связи
+            QPushButton* cancelButton = nullptr;
+            // Пробуем найти через buttonBox (стандартный способ для QProgressDialog)
+            QDialogButtonBox* buttonBox = d->findChild<QDialogButtonBox*>();
+            if(buttonBox)
+            {
+                cancelButton = buttonBox->button(QDialogButtonBox::Cancel);
+            }
+            // Если не нашли через buttonBox, ищем все кнопки и выбираем ту, у которой текст "Отмена"
+            if(!cancelButton)
+            {
+                QList<QPushButton*> buttons = d->findChildren<QPushButton*>();
+                for(QPushButton* btn : buttons)
+                {
+                    if(btn->text() == "Отмена" || btn->text() == "Cancel")
+                    {
+                        cancelButton = btn;
+                        break;
+                    }
+                }
+            }
+            if(cancelButton)
+            {
+                cancelButton->setText("Cancelling...");
+                // Немедленно обрабатываем события для обновления UI
+                QApplication::processEvents(QEventLoop::AllEvents, 0);
+            }
             d->setLabelText("Отмена инициализации...");
         }
     });
     
+    // Принудительно обновляем окно перед показом, чтобы избежать черного прямоугольника
+    d->update();
+    d->repaint();
+    QApplication::processEvents(QEventLoop::AllEvents, 0);
+    
     d->show();
     d->raise(); // Поднимаем окно наверх
     d->activateWindow(); // Активируем окно для получения фокуса
-    QApplication::processEvents();
+    
+    // Обрабатываем события несколько раз для полной отрисовки окна
+    QApplication::processEvents(QEventLoop::AllEvents, 0);
+    d->update();
+    QApplication::processEvents(QEventLoop::AllEvents, 0);
 
     std::string default_user_name;
     QString name = qgetenv("USER");
