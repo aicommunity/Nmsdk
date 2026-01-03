@@ -144,10 +144,6 @@ int main(int argc, char *argv[])
     }
 
     d=new QProgressDialog;
-    
-    // Настраиваем окно перед показом, чтобы избежать черного прямоугольника
-    // Используем setAttribute для правильной отрисовки
-    d->setAttribute(Qt::WA_DontShowOnScreen, true); // Создаем окно невидимым сначала
     d->setWindowFlag(Qt::WindowStaysOnTopHint);
     d->setLabelText("Launching application");
     d->setCancelButtonText("Отмена");
@@ -162,17 +158,11 @@ int main(int argc, char *argv[])
     d->setMinimumSize(400, 100);
     d->resize(400, 100);
     
-    // Принудительно обновляем layout окна перед показом
-    d->adjustSize();
-    
     // Применяем стили к окну прогресса явно
     if(styleManager)
     {
         d->setStyleSheet(styleManager->getStyleSheet());
     }
-    
-    // Обрабатываем события для применения стилей
-    QApplication::processEvents(QEventLoop::AllEvents, 0);
     
     // Обработка отмены через кнопку Cancel (подключаем ДО show())
     QObject::connect(d, &QProgressDialog::canceled, []() {
@@ -210,28 +200,20 @@ int main(int argc, char *argv[])
         }
     });
     
-    // Принудительно обновляем окно перед показом
-    d->update();
-    d->repaint();
-    
-    // Убираем атрибут невидимости и показываем окно
-    d->setAttribute(Qt::WA_DontShowOnScreen, false);
+    // Показываем окно
     d->show();
-    
-    // Принудительно обрабатываем события для полной отрисовки окна
-    // Делаем это несколько раз, чтобы гарантировать отрисовку
-    for(int i = 0; i < 3; ++i)
-    {
-        QApplication::processEvents(QEventLoop::AllEvents, 0);
-        d->update();
-        d->repaint();
-    }
-    
     d->raise(); // Поднимаем окно наверх
     d->activateWindow(); // Активируем окно для получения фокуса
-    
-    // Финальная обработка событий для гарантии отрисовки
-    QApplication::processEvents(QEventLoop::AllEvents, 0);
+
+    // Принудительно обрабатываем события несколько раз для полной отрисовки окна
+    // Это критично для избежания черного прямоугольника при первом показе
+    for(int i = 0; i < 5; ++i)
+    {
+        QApplication::processEvents(QEventLoop::AllEvents, 0);
+        d->repaint();
+        d->update();
+        QApplication::processEvents(QEventLoop::AllEvents, 0);
+    }
 
     std::string default_user_name;
     QString name = qgetenv("USER");
