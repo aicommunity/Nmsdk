@@ -156,7 +156,7 @@ SOURCES += \
         main.cpp\
     ../../../Rdk/GUI/Qt/UComponentsListWidget.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.cpp \
-    ../../../Rdk/GUI/Qt/UDrawEngineWidget.cpp \
+    ../../../Rdk/GUI/Qt/UModernDiagramContainerWidget.cpp \
     ../../../Rdk/GUI/Qt/UDrawEngineImageWidget.cpp \
     ../../../Rdk/GUI/Qt/UClassesListWidget.cpp \
     ../../../Rdk/GUI/Qt/UComponentLinksWidget.cpp \
@@ -196,7 +196,7 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.h \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.h \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.h \
-    ../../../Rdk/GUI/Qt/UDrawEngineWidget.h \
+    ../../../Rdk/GUI/Qt/UModernDiagramContainerWidget.h \
     ../../../Rdk/GUI/Qt/UDrawEngineImageWidget.h \
     ../../../Rdk/GUI/Qt/UClassesListWidget.h \
     ../../../Rdk/GUI/Qt/UComponentLinksWidget.h \
@@ -241,7 +241,6 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UAboutDialog.ui \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.ui \
     ../../../Rdk/GUI/Qt/UGEngineControllWidget.ui \
-    ../../../Rdk/GUI/Qt/UDrawEngineWidget.ui \
     ../../../Rdk/GUI/Qt/UClassesListWidget.ui \
     ../../../Rdk/GUI/Qt/UComponentLinksWidget.ui \
     ../../../Rdk/GUI/Qt/UImagesWidget.ui \

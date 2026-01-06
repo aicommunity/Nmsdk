@@ -5,9 +5,12 @@
 #include <QString>
 #include <QDebug>
 #include <QDir>
+#include <QPushButton>
+#include <QDialogButtonBox>
 #include <algorithm>
 #include <utility>
 #include <vector>
+#include <atomic>
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
@@ -16,15 +19,35 @@
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 
 QProgressDialog* d(NULL);
+std::atomic<bool> g_cancelRequested(false);
 
 void progress_bar_callback(int complete_percent, const std::string &text)
 {
  if(d)
  {
+  if(g_cancelRequested.load())
+  {
+   d->setLabelText("Отмена инициализации...");
+   // Обрабатываем все события для обеспечения отзывчивости окна
+   QApplication::processEvents(QEventLoop::AllEvents, 0);
+   return;
+  }
   d->setValue(complete_percent);
   if(!text.empty())
    d->setLabelText(text.c_str());
-  QApplication::processEvents();
+  
+  // Обрабатываем события для обеспечения отзывчивости окна во время блокирующих операций
+  // Используем AllEvents без таймаута для немедленной обработки всех событий включая клики
+  // Это критично для того, чтобы окно прогресса могло получать сообщения даже во время
+  // длительных блокирующих операций инициализации
+  QApplication::processEvents(QEventLoop::AllEvents, 0);
+  
+  // Проверяем отмену после обработки событий
+  if(g_cancelRequested.load())
+  {
+   d->setLabelText("Отмена инициализации...");
+   return;
+  }
  }
 }
 
@@ -123,13 +146,74 @@ int main(int argc, char *argv[])
     d=new QProgressDialog;
     d->setWindowFlag(Qt::WindowStaysOnTopHint);
     d->setLabelText("Launching application");
-    int x=d->width()*2;
-    int y=d->height()*1;
-    d->setFixedSize(x,y);
+    d->setCancelButtonText("Отмена");
+    d->setWindowModality(Qt::NonModal); // NonModal чтобы окно могло получать события
+    d->setAutoClose(false); // Не закрывать автоматически
+    d->setAutoReset(false); // Не сбрасывать автоматически
+    d->setMinimumDuration(0); // Показывать окно сразу, без задержки
     d->setMaximum(100);
     d->setValue(10);
+    
+    // Устанавливаем минимальные размеры явно, чтобы избежать черного прямоугольника
+    d->setMinimumSize(400, 100);
+    d->resize(400, 100);
+    
+    // Применяем стили к окну прогресса явно
+    if(styleManager)
+    {
+        d->setStyleSheet(styleManager->getStyleSheet());
+    }
+    
+    // Обработка отмены через кнопку Cancel (подключаем ДО show())
+    QObject::connect(d, &QProgressDialog::canceled, []() {
+        g_cancelRequested.store(true);
+        if(d)
+        {
+            // Мгновенно изменяем текст кнопки Cancel на "Cancelling..." для обратной связи
+            QPushButton* cancelButton = nullptr;
+            // Пробуем найти через buttonBox (стандартный способ для QProgressDialog)
+            QDialogButtonBox* buttonBox = d->findChild<QDialogButtonBox*>();
+            if(buttonBox)
+            {
+                cancelButton = buttonBox->button(QDialogButtonBox::Cancel);
+            }
+            // Если не нашли через buttonBox, ищем все кнопки и выбираем ту, у которой текст "Отмена"
+            if(!cancelButton)
+            {
+                QList<QPushButton*> buttons = d->findChildren<QPushButton*>();
+                for(QPushButton* btn : buttons)
+                {
+                    if(btn->text() == "Отмена" || btn->text() == "Cancel")
+                    {
+                        cancelButton = btn;
+                        break;
+                    }
+                }
+            }
+            if(cancelButton)
+            {
+                cancelButton->setText("Cancelling...");
+                // Немедленно обрабатываем события для обновления UI
+                QApplication::processEvents(QEventLoop::AllEvents, 0);
+            }
+            d->setLabelText("Отмена инициализации...");
+        }
+    });
+    
+    // Показываем окно
     d->show();
-    QApplication::processEvents();
+    d->raise(); // Поднимаем окно наверх
+    d->activateWindow(); // Активируем окно для получения фокуса
+
+    // Принудительно обрабатываем события несколько раз для полной отрисовки окна
+    // Это критично для избежания черного прямоугольника при первом показе
+    for(int i = 0; i < 5; ++i)
+    {
+        QApplication::processEvents(QEventLoop::AllEvents, 0);
+        d->repaint();
+        d->update();
+        QApplication::processEvents(QEventLoop::AllEvents, 0);
+    }
 
     std::string default_user_name;
     QString name = qgetenv("USER");
@@ -139,9 +223,41 @@ int main(int argc, char *argv[])
 
     RDK::UAppCore<RDK::UApplication, UEngineControlQt, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, UServerTransportTcpQt, RDK::UProjectDeployerQt> AppCore(progress_bar_callback);
 
+    // Сброс флага отмены перед инициализацией
+    g_cancelRequested.store(false);
+
+    // Создаем таймер для периодической обработки событий во время длительных блокирующих операций инициализации
+    // Это критично для обеспечения отзывчивости окна прогресса, особенно во время InitRTlibs, BuildStorage, LoadClassesDescription
+    // Таймер обрабатывает события даже после отмены, чтобы UI мог обновиться (например, текст кнопки "Cancelling...")
+    QTimer* eventTimer = new QTimer(&a);
+    QObject::connect(eventTimer, &QTimer::timeout, []() {
+        // Обрабатываем события пока окно прогресса существует
+        // Это позволяет окну получать сообщения даже во время длительных блокирующих операций
+        if(d) {
+            QApplication::processEvents(QEventLoop::AllEvents, 0);
+        }
+    });
+    eventTimer->start(50); // Обрабатывать события каждые 50 мс для обеспечения отзывчивости
+
      int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModeler.ini",
                   (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
                   forwardedArgc, forwardedArgv);
+     
+     // Останавливаем таймер после завершения инициализации (включая случай отмены)
+     eventTimer->stop();
+     delete eventTimer;
+     
+     // Проверка отмены после инициализации
+     if(g_cancelRequested.load())
+     {
+         if(d)
+         {
+             d->hide();
+             delete d;
+             d = NULL;
+         }
+         return 1; // Код отмены
+     }
 
      if(init_res != 0)
       return init_res;
