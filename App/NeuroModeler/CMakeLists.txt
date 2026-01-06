@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 project(NeuroModeler LANGUAGES CXX)
 
+# Подключаем функцию для получения версии из Git
+include(${CMAKE_SOURCE_DIR}/cmake/GetGitVersion.cmake)
+
+# Получаем версию из Git
+get_git_version(GIT_VERSION_STRING)
+
 # Для Qt GUI приложения на Windows нужен subsystem:windows
 if(WIN32)
   add_executable(NeuroModeler WIN32)
@@ -131,7 +137,15 @@ target_include_directories(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/Core/Graphics
 )
 
-target_compile_definitions(NeuroModeler PRIVATE RDK_DISABLE_EXT_GUI QT_DLL QT_WIDGETS_LIB RDK_APP_VERSION=0)
+# Передаем версию из Git в определение компилятора
+# CMake автоматически экранирует строку для передачи в препроцессор
+# Формат: RDK_APP_VERSION="1.2.1.0 (develop:b4ff447)"
+target_compile_definitions(NeuroModeler PRIVATE 
+  RDK_DISABLE_EXT_GUI 
+  QT_DLL 
+  QT_WIDGETS_LIB 
+  RDK_APP_VERSION="${GIT_VERSION_STRING}"
+)
 
 target_link_libraries(NeuroModeler PRIVATE
   Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort Qt5::Concurrent
