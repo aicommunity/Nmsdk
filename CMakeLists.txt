@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 
+# Нормализация пути vcpkg toolchain файла (только для Windows)
+# Это должно быть ДО project(), так как CMAKE_TOOLCHAIN_FILE используется при инициализации проекта
+if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/NormalizeVcpkgPath.cmake")
+    include("${CMAKE_SOURCE_DIR}/cmake/NormalizeVcpkgPath.cmake")
+endif()
+
 # Включаем поддержку CMAKE_MSVC_RUNTIME_LIBRARY (CMP0091) чтобы управлять /MDd|/MD
 if (MSVC AND POLICY CMP0091)
   cmake_policy(SET CMP0091 NEW)
