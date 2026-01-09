@@ -7,6 +7,25 @@ endif()
 
 project(Nmsdk LANGUAGES CXX)
 
+# Автоматическая настройка параллельной сборки
+# Определяем количество ядер процессора, если CMAKE_BUILD_PARALLEL_LEVEL не задан
+# Эта настройка автоматически распространяется на все подпроекты через add_subdirectory()
+if(NOT DEFINED ENV{CMAKE_BUILD_PARALLEL_LEVEL})
+    include(ProcessorCount)
+    ProcessorCount(N)
+    if(NOT N EQUAL 0)
+        # Устанавливаем переменную окружения для использования при сборке
+        set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} ${N})
+        message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL set to ${N} (auto-detected CPU cores)")
+    else()
+        # Fallback: используем значение по умолчанию
+        set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} "4")
+        message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL set to 4 (default fallback)")
+    endif()
+else()
+    message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL already set to $ENV{CMAKE_BUILD_PARALLEL_LEVEL}")
+endif()
+
 # Политики и стандарт
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

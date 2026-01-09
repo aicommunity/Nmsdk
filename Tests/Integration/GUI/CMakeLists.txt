@@ -7,8 +7,8 @@ add_executable(Test_MenuBar Test_MenuBar.cpp)
 # Используем обычный executable (не WIN32), так как это консольное приложение для тестирования
 add_executable(Test_QMessageBox Test_QMessageBox.cpp)
 
-# Production тест - использует Qt из Bin/Platform/Win (те же DLL и плагины, что и штатное приложение)
-# Собирается в Bin/Platform/Win для использования тех же бинарников Qt
+# Production тест - использует Qt из Bin/Platform/<OS> (те же DLL и плагины, что и штатное приложение)
+# Собирается в DEPLOY_ROOT для использования тех же бинарников Qt
 add_executable(Test_QMessageBox_Production Test_QMessageBox_Production.cpp)
 
 # Включаем автоматическую генерацию MOC файлов
@@ -16,17 +16,15 @@ set(CMAKE_AUTOMOC ON)
 set_target_properties(Test_QMessageBox PROPERTIES AUTOMOC ON)
 set_target_properties(Test_QMessageBox_Production PROPERTIES AUTOMOC ON)
 
-# Настройка вывода для production теста в Bin/Platform/Win
+# Настройка вывода для production теста в DEPLOY_ROOT
 # Используем те же настройки, что и для штатного приложения
-if(WIN32)
-    set_target_properties(Test_QMessageBox_Production PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
-        RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
-        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
-        RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
-        RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
-    )
-endif()
+set_target_properties(Test_QMessageBox_Production PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${DEPLOY_ROOT}"
+)
 
 # Поиск Qt5 или Qt6
 find_package(Qt5 COMPONENTS Core Test Widgets REQUIRED)
@@ -60,7 +58,7 @@ target_include_directories(Test_MenuBar PRIVATE
 add_executable(Test_PluginLoading test_plugin_loading.cpp)
 set_target_properties(Test_PluginLoading PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
+    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
 )
 if(Qt6_FOUND)
     target_link_libraries(Test_PluginLoading Qt6::Core Qt6::Test)
@@ -73,7 +71,7 @@ endif()
 add_executable(Test_AppStartup test_app_startup.cpp)
 set_target_properties(Test_AppStartup PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
+    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
 )
 if(Qt6_FOUND)
     target_link_libraries(Test_AppStartup Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)
@@ -86,7 +84,7 @@ endif()
 add_executable(Test_QMessageBoxStyleCrash test_qmessagebox_style_crash.cpp)
 set_target_properties(Test_QMessageBoxStyleCrash PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
+    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
 )
 if(Qt6_FOUND)
     target_link_libraries(Test_QMessageBoxStyleCrash Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)
@@ -99,7 +97,7 @@ endif()
 add_executable(Test_QMessageBoxWithStyles test_qmessagebox_with_styles.cpp)
 set_target_properties(Test_QMessageBoxWithStyles PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Bin/Platform/Win"
+    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
 )
 if(Qt6_FOUND)
     target_link_libraries(Test_QMessageBoxWithStyles Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)

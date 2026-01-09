@@ -1,6 +1,13 @@
 # ForceQtFromVcpkg.cmake
 # Принудительная настройка Qt только из vcpkg
 # Этот файл должен быть включен в самом начале CMakeLists.txt, ДО find_package(Qt5)
+# ВАЖНО: vcpkg используется только на Windows, на Linux этот модуль не выполняется
+
+# Выполняем только на Windows
+if(NOT WIN32)
+    message(STATUS "ForceQtFromVcpkg: Skipping on non-Windows platform (vcpkg is Windows-only)")
+    return()
+endif()
 
 # Проверяем, что vcpkg используется
 if(NOT DEFINED VCPKG_TARGET_TRIPLET)
@@ -37,7 +44,7 @@ get_property(_current_prefix_path CACHE CMAKE_PREFIX_PATH PROPERTY VALUE)
 if(_current_prefix_path)
     string(REPLACE ";" "|" _temp_string "${_current_prefix_path}")
     string(REPLACE "|" ";" _prefix_list "${_temp_string}")
-    
+
     set(_filtered_paths "")
     foreach(_path IN LISTS _prefix_list)
         # Исключаем локальные установки Qt
@@ -46,11 +53,11 @@ if(_current_prefix_path)
             list(APPEND _filtered_paths "${_path}")
         endif()
     endforeach()
-    
+
     # Добавляем vcpkg пути в начало (приоритет)
     list(INSERT _filtered_paths 0 "${_vcpkg_qt_path}/debug")
     list(INSERT _filtered_paths 0 "${_vcpkg_qt_path}")
-    
+
     list(REMOVE_DUPLICATES _filtered_paths)
     set(CMAKE_PREFIX_PATH "${_filtered_paths}" CACHE PATH "Qt from vcpkg only" FORCE)
 endif()
