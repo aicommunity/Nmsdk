@@ -5,8 +5,12 @@
   "cmake.environment": {
     "VCPKG_ROOT": "${env:VCPKG_ROOT}"
   },
-  "cmake.sourceDirectory": "${workspaceFolder}"
-}
-{
-    "git.ignoreLimitWarning": true
+  "cmake.sourceDirectory": "${workspaceFolder}",
+  "git.ignoreLimitWarning": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2
 }

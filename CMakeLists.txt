@@ -22,6 +22,12 @@ endif()
 # Каталог общих модулей CMake
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
+# Принудительная настройка Qt только из vcpkg (должно быть ДО find_package(Qt5))
+# Это гарантирует использование Qt только из vcpkg, исключая локальные установки
+if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
+    include("${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
+endif()
+
 # Вывод бинарей и библиотек в Bin/Platform/<OS>
 if (WIN32)
   set(PLATFORM_DIR "Win")
@@ -61,5 +67,11 @@ add_subdirectory(Libraries/Nmsdk-PulseLib) # Nmsdk-PulseLib
 # Приложения
 add_subdirectory(App/NeuroModeler)
 add_subdirectory(App/NeuroModelerConsole)
+
+# Тесты (опционально, можно отключить для production сборки)
+option(BUILD_TESTS "Build tests" ON)
+if(BUILD_TESTS)
+    add_subdirectory(Tests)
+endif()
 
 

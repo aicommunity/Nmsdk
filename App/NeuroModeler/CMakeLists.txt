@@ -22,6 +22,12 @@ if(MSVC)
   )
 endif()
 
+# Настройка Qt из vcpkg (должно быть ДО find_package(Qt5))
+# Это гарантирует использование Qt только из vcpkg
+if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
+    include("${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
+endif()
+
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort Concurrent)
 
 # Включаем AUTOUIC для автоматической обработки .ui файлов

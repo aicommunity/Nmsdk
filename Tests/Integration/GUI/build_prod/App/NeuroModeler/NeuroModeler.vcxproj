@@ -1,0 +1,854 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B2C9C932-377C-3DED-AE33-032247A83191}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>NeuroModeler</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NeuroModeler.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NeuroModeler</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NeuroModeler.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NeuroModeler</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">NeuroModeler.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">NeuroModeler</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">NeuroModeler.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">NeuroModeler</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_Debug;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtWidgets" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtGui" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtANGLE" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtPrintSupport" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCharts" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtXml" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtConcurrent"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ForcedIncludeFiles>E:/Science-Repo/nmsdk-git/App/NeuroModeler/NeuroModelerAppDefs.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION="1.2.1.1 (develop:510b7ab)";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION=\"1.2.1.1 (develop:510b7ab)\";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_Debug;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_Debug;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target NeuroModeler</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutogenInfo.json Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/NeuroModeler_autogen/autouic_Debug.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying style files to Bin/Styles/	Copying help files to Bin/Help/</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/default.qss E:/Science-Repo/nmsdk-git/Bin/Styles/default.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/theme.json
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark.qss E:/Science-Repo/nmsdk-git/Bin/Styles/dark.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark-theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/dark-theme.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/en E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Qt\5.15.2\msvc2019_64\lib\qtmaind.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-PulseLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-MotionControlLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5PrintSupportd.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Chartsd.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sqld.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Xmld.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPortd.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Concurrentd.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPortd.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sqld.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Cored.lib;C:\Qt\5.15.2\msvc2019_64\lib\qtmaind.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:/boost_1_82_0/lib;E:/boost_1_82_0/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/Lib.CMake/NeuroModeler.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/NeuroModeler.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_Release;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtWidgets" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtGui" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtANGLE" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtPrintSupport" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCharts" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtXml" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtConcurrent"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ForcedIncludeFiles>E:/Science-Repo/nmsdk-git/App/NeuroModeler/NeuroModelerAppDefs.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION="1.2.1.1 (develop:510b7ab)";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION=\"1.2.1.1 (develop:510b7ab)\";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_Release;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_Release;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target NeuroModeler</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutogenInfo.json Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/NeuroModeler_autogen/autouic_Release.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying style files to Bin/Styles/	Copying help files to Bin/Help/</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/default.qss E:/Science-Repo/nmsdk-git/Bin/Styles/default.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/theme.json
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark.qss E:/Science-Repo/nmsdk-git/Bin/Styles/dark.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark-theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/dark-theme.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/en E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Qt\5.15.2\msvc2019_64\lib\qtmain.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-PulseLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-MotionControlLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Network.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5PrintSupport.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Charts.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Xml.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Concurrent.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Widgets.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Gui.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Network.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Core.lib;C:\Qt\5.15.2\msvc2019_64\lib\qtmain.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:/boost_1_82_0/lib;E:/boost_1_82_0/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/Lib.CMake/NeuroModeler.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/NeuroModeler.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_MinSizeRel;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtWidgets" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtGui" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtANGLE" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtPrintSupport" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCharts" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtXml" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtConcurrent"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ForcedIncludeFiles>E:/Science-Repo/nmsdk-git/App/NeuroModeler/NeuroModelerAppDefs.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION="1.2.1.1 (develop:510b7ab)";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION=\"1.2.1.1 (develop:510b7ab)\";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_MinSizeRel;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_MinSizeRel;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target NeuroModeler</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutogenInfo.json MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/NeuroModeler_autogen/autouic_MinSizeRel.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying style files to Bin/Styles/	Copying help files to Bin/Help/</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/default.qss E:/Science-Repo/nmsdk-git/Bin/Styles/default.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/theme.json
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark.qss E:/Science-Repo/nmsdk-git/Bin/Styles/dark.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark-theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/dark-theme.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/en E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Qt\5.15.2\msvc2019_64\lib\qtmain.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-PulseLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-MotionControlLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Network.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5PrintSupport.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Charts.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Xml.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Concurrent.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Widgets.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Gui.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Network.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Core.lib;C:\Qt\5.15.2\msvc2019_64\lib\qtmain.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:/boost_1_82_0/lib;E:/boost_1_82_0/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/Lib.CMake/NeuroModeler.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/NeuroModeler.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_RelWithDebInfo;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtWidgets" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtGui" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtANGLE" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtPrintSupport" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCharts" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtXml" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtConcurrent"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ForcedIncludeFiles>E:/Science-Repo/nmsdk-git/App/NeuroModeler/NeuroModelerAppDefs.h</ForcedIncludeFiles>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION="1.2.1.1 (develop:510b7ab)";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;QT_DLL;QT_WIDGETS_LIB;RDK_DISABLE_EXT_GUI;RDK_APP_VERSION=\"1.2.1.1 (develop:510b7ab)\";RDK_UNICODE_RUN;RDK_QT;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_PRINTSUPPORT_LIB;QT_CHARTS_LIB;QT_SQL_LIB;QT_XML_LIB;QT_SERIALPORT_LIB;QT_CONCURRENT_LIB;RDK_LIB_CVS_REVISION=0;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_RelWithDebInfo;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\include_RelWithDebInfo;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Rdk\Core\Graphics;E:\Science-Repo\nmsdk-git\Libraries\Rdk-CvBasicLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-PulseLib\Core;E:\Science-Repo\nmsdk-git\Libraries\Nmsdk-MotionControlLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtWidgets;C:\Qt\5.15.2\msvc2019_64\include\QtGui;C:\Qt\5.15.2\msvc2019_64\include\QtANGLE;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;C:\Qt\5.15.2\msvc2019_64\include\QtCharts;C:\Qt\5.15.2\msvc2019_64\include\QtSql;C:\Qt\5.15.2\msvc2019_64\include\QtXml;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtConcurrent;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target NeuroModeler</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutogenInfo.json RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/NeuroModeler_autogen/autouic_RelWithDebInfo.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying style files to Bin/Styles/	Copying help files to Bin/Help/</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/default.qss E:/Science-Repo/nmsdk-git/Bin/Styles/default.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/theme.json
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark.qss E:/Science-Repo/nmsdk-git/Bin/Styles/dark.qss
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different E:/Science-Repo/nmsdk-git/Rdk/GUI/Qt/Styles/dark-theme.json E:/Science-Repo/nmsdk-git/Bin/Styles/dark-theme.json
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/en E:/Science-Repo/nmsdk-git/Bin/Help/en
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/ru E:/Science-Repo/nmsdk-git/Bin/Help/ru
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory E:/Science-Repo/nmsdk-git/Bin/Help/styles E:/Science-Repo/nmsdk-git/Bin/Help/styles
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>C:\Qt\5.15.2\msvc2019_64\lib\qtmain.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-PulseLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Nmsdk-MotionControlLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Network.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5PrintSupport.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Charts.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Xml.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Concurrent.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Widgets.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Gui.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-CvBasicLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-HardwareLib.qt.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\Rdk-BasicLib.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5SerialPort.lib;E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\rdk.static.qt.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Network.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.lib;C:\Qt\5.15.2\msvc2019_64\lib\Qt5Core.lib;C:\Qt\5.15.2\msvc2019_64\lib\qtmain.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:/boost_1_82_0/lib;E:/boost_1_82_0/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/Lib.CMake/NeuroModeler.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Science-Repo/nmsdk-git/Bin/Platform/Win/NeuroModeler.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\CMakeFiles\5904fba8a142576cefe34b4c40364bb3\autouic_(CONFIG).stamp.rule">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentsListWidgetModern.ui;C:\Qt\5.15.2\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_Debug.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentsListWidgetModern.ui;C:\Qt\5.15.2\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_Release.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentsListWidgetModern.ui;C:\Qt\5.15.2\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_MinSizeRel.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentsListWidgetModern.ui;C:\Qt\5.15.2\msvc2019_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_RelWithDebInfo.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\CMakeFiles\93521584961784f59a6348995f701879\qrc_res.cpp.rule">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Automatic RCC for ../../Rdk/GUI/Qt/static/res.qrc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autorcc E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutoRcc_res_XKFAHPVQCM_Info.json Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\NeuroModeler_autogen.dir\AutoRcc_res_XKFAHPVQCM_Info.json;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\warning_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\critical_error_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\hide_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\filter_button_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\datetime_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\disable_camera.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\show_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\all_camera_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\main_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\info_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\deactive_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\bw_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\error_deactivate_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\datetime_dialog_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\log_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\change_camera_style.css;C:\Qt\5.15.2\msvc2019_64\bin\rcc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\XKFAHPVQCM\qrc_res.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Automatic RCC for ../../Rdk/GUI/Qt/static/res.qrc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autorcc E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutoRcc_res_XKFAHPVQCM_Info.json Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\NeuroModeler_autogen.dir\AutoRcc_res_XKFAHPVQCM_Info.json;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\warning_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\critical_error_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\hide_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\filter_button_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\datetime_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\disable_camera.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\show_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\all_camera_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\main_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\info_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\deactive_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\bw_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\error_deactivate_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\datetime_dialog_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\log_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\change_camera_style.css;C:\Qt\5.15.2\msvc2019_64\bin\rcc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\XKFAHPVQCM\qrc_res.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Automatic RCC for ../../Rdk/GUI/Qt/static/res.qrc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autorcc E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutoRcc_res_XKFAHPVQCM_Info.json MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\NeuroModeler_autogen.dir\AutoRcc_res_XKFAHPVQCM_Info.json;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\warning_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\critical_error_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\hide_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\filter_button_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\datetime_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\disable_camera.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\show_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\all_camera_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\main_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\info_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\deactive_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\bw_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\error_deactivate_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\datetime_dialog_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\log_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\change_camera_style.css;C:\Qt\5.15.2\msvc2019_64\bin\rcc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\XKFAHPVQCM\qrc_res.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</BuildInParallel>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Automatic RCC for ../../Rdk/GUI/Qt/static/res.qrc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autorcc E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/NeuroModeler_autogen.dir/AutoRcc_res_XKFAHPVQCM_Info.json RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\NeuroModeler_autogen.dir\AutoRcc_res_XKFAHPVQCM_Info.json;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\warning_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\critical_error_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\hide_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\filter_button_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\datetime_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\disable_camera.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\show_pool_mini.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\all_camera_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\main_widget.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_30.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\checked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\unchecked_small.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\images\info_icon.png;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\deactive_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\bw_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\error_deactivate_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\datetime_dialog_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\log_style.css;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\styles\change_camera_style.css;C:\Qt\5.15.2\msvc2019_64\bin\rcc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\XKFAHPVQCM\qrc_res.cpp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Science-Repo\nmsdk-git\App\NeuroModeler\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/App/NeuroModeler/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CMakeParseArguments.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckLibraryExists.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindBoost.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindCURL.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindGit.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPkgConfig.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindThreads.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\SelectLibraryConfigurations.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QGifPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICNSPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICOPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QJpegPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QMinimalIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QOffscreenIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgIconPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTgaPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTiffPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTuioTouchPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QVirtualKeyboardPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWbmpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebGLIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsDirect2DIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QXdgDesktopPortalThemePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5Network_QGenericEnginePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupport_QWindowsPrinterSupportPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QODBCDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QPSQLDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QSQLiteDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsMacros.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5Widgets_QWindowsVistaStylePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfigVersion.cmake;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\cmake\GetGitVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/App/NeuroModeler/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CMakeParseArguments.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckLibraryExists.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindBoost.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindCURL.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindGit.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPkgConfig.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindThreads.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\SelectLibraryConfigurations.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QGifPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICNSPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICOPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QJpegPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QMinimalIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QOffscreenIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgIconPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTgaPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTiffPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTuioTouchPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QVirtualKeyboardPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWbmpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebGLIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsDirect2DIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QXdgDesktopPortalThemePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5Network_QGenericEnginePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupport_QWindowsPrinterSupportPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QODBCDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QPSQLDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QSQLiteDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsMacros.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5Widgets_QWindowsVistaStylePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfigVersion.cmake;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\cmake\GetGitVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/App/NeuroModeler/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CMakeParseArguments.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckLibraryExists.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindBoost.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindCURL.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindGit.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPkgConfig.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindThreads.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\SelectLibraryConfigurations.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QGifPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICNSPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICOPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QJpegPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QMinimalIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QOffscreenIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgIconPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTgaPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTiffPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTuioTouchPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QVirtualKeyboardPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWbmpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebGLIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsDirect2DIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QXdgDesktopPortalThemePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5Network_QGenericEnginePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupport_QWindowsPrinterSupportPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QODBCDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QPSQLDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QSQLiteDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsMacros.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5Widgets_QWindowsVistaStylePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfigVersion.cmake;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\cmake\GetGitVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/App/NeuroModeler/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/App/NeuroModeler/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CMakeParseArguments.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\CheckLibraryExists.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindBoost.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindCURL.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindGit.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPackageMessage.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindPkgConfig.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\FindThreads.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.31\Modules\SelectLibraryConfigurations.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Charts\Qt5ChartsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Concurrent\Qt5ConcurrentConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5GuiConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QGifPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICNSPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QICOPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QJpegPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QMinimalIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QOffscreenIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgIconPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QSvgPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTgaPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTiffPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QTuioTouchPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QVirtualKeyboardPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWbmpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebGLIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWebpPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsDirect2DIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QWindowsIntegrationPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Gui\Qt5Gui_QXdgDesktopPortalThemePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5NetworkConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Network\Qt5Network_QGenericEnginePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupportConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5PrintSupport\Qt5PrintSupport_QWindowsPrinterSupportPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5SqlConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QODBCDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QPSQLDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Sql\Qt5Sql_QSQLiteDriverPlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigExtras.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5WidgetsMacros.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Widgets\Qt5Widgets_QWindowsVistaStylePlugin.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Xml\Qt5XmlConfigVersion.cmake;E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc;E:\Science-Repo\nmsdk-git\cmake\GetGitVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\mocs_compilation_Debug.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Libraries\Libraries.cpp" />
+    <None Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\static\res.qrc">
+    </None>
+    <ClInclude Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\USettingsReaderWidget.h" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\App\NeuroModeler\main.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UAboutDialog.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UHelpWindow.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UGEngineControlWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UMatrixFormDialog.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UVisualControllerMainWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatch.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchChart.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchChartView.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchChartOption.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchSerie.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchSeriesOption.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchTab.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentsListWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentsListWidgetModern.cpp" />
+    <None Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentsListWidgetModern.ui">
+    </None>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UBreadcrumbsWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UVisualControllerWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UModernDiagramContainerWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UDrawEngineImageWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UClassesListWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentLinksWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UImagesWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\USingleImageWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentPropertySelectionWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UPropertyXMLWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UCalculationChannelsWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UEngineControlQt.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UGuiTelemetry.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UGuiModelSnapshot.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\ULoggerWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UCreateConfigurationWizardWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UImageLoader.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UCreateTestWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UComponentPropertyChanger.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UStatusPanel.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\USingleImagePainter.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\qcustomplot.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UGraphWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UGraphControlDialog.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UGraphPaintWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UTableInfo.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchFormWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UWatchSettingsDialog.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UTcpServerControlWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UCurlFtpClientTestWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UClassDescriptionDisplay.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UClDescEditor.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UClassFavoritesEditor.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\USingleClassListWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UQuickLinkDialog.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UModernDiagramWidget.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Rdk\GUI\Qt\UStyleManager.cpp" />
+    <ClInclude Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\Rdk\GUI\Qt\ui_UComponentsListWidgetModern.h" />
+    <None Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_Debug.stamp">
+    </None>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\XKFAHPVQCM\qrc_res.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\mocs_compilation_Release.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <None Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_Release.stamp">
+    </None>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\mocs_compilation_MinSizeRel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <None Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_MinSizeRel.stamp">
+    </None>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\mocs_compilation_RelWithDebInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <None Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\App\NeuroModeler\NeuroModeler_autogen\autouic_RelWithDebInfo.stamp">
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\ZERO_CHECK.vcxproj">
+      <Project>{E8EDA6B9-C0D0-388D-BD35-3D7A0E208B6A}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Nmsdk-MotionControlLib\Nmsdk-MotionControlLib.qt.vcxproj">
+      <Project>{69899706-E3E3-33D9-B97F-BDF965AB1C6D}</Project>
+      <Name>Nmsdk-MotionControlLib.qt</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Nmsdk-PulseLib\Nmsdk-PulseLib.qt.vcxproj">
+      <Project>{26AC4668-0973-317B-BF73-04EBE2C00ACA}</Project>
+      <Name>Nmsdk-PulseLib.qt</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-BasicLib\Rdk-BasicLib.qt.vcxproj">
+      <Project>{531B2FF5-4B1D-3D8E-A8ED-6782C722689E}</Project>
+      <Name>Rdk-BasicLib.qt</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-CvBasicLib\Rdk-CvBasicLib.qt.vcxproj">
+      <Project>{52E03741-8999-3FE0-ACE6-0F9829F2595D}</Project>
+      <Name>Rdk-CvBasicLib.qt</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt.vcxproj">
+      <Project>{2BAFCA9E-2D66-37C3-86A6-AA02A1FEBC56}</Project>
+      <Name>Rdk-HardwareLib.qt</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Rdk\rdk.static.qt.vcxproj">
+      <Project>{CB72B657-807D-3AD4-9E40-D8C571E18434}</Project>
+      <Name>rdk.static.qt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

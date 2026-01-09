@@ -51,9 +51,87 @@ void progress_bar_callback(int complete_percent, const std::string &text)
  }
 }
 
+// Функция для диагностики загрузки плагинов Qt
+void diagnoseQtPlugins()
+{
+    qDebug() << "=== Qt Plugin Diagnostics ===";
+    
+    // Получаем путь к плагинам
+    QStringList pluginPaths = QCoreApplication::libraryPaths();
+    qDebug() << "Qt library paths:";
+    for (const QString& path : pluginPaths) {
+        qDebug() << "  -" << path;
+    }
+    
+    // Проверяем qt.conf
+    QString appDir = QCoreApplication::applicationDirPath();
+    QString qtConfPath = appDir + "/qt.conf";
+    QFileInfo qtConfInfo(qtConfPath);
+    if (qtConfInfo.exists()) {
+        qDebug() << "qt.conf found at:" << qtConfPath;
+        QFile qtConfFile(qtConfPath);
+        if (qtConfFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QString content = QString::fromUtf8(qtConfFile.readAll());
+            qDebug() << "qt.conf content:\n" << content;
+            qtConfFile.close();
+        }
+    } else {
+        qWarning() << "qt.conf NOT found at:" << qtConfPath;
+    }
+    
+    // Проверяем наличие критически важных плагинов
+    QString pluginsDir = appDir + "/plugins";
+    QStringList criticalPlugins = {
+        "platforms/qwindows.dll",
+        "styles/qwindowsvistastyle.dll"
+    };
+    
+    qDebug() << "Checking critical plugins in:" << pluginsDir;
+    for (const QString& plugin : criticalPlugins) {
+        QString pluginPath = pluginsDir + "/" + plugin;
+        QFileInfo pluginInfo(pluginPath);
+        if (pluginInfo.exists()) {
+            qDebug() << "  ✓ Found:" << plugin;
+        } else {
+            qWarning() << "  ✗ Missing:" << plugin << "at" << pluginPath;
+        }
+    }
+    
+    // Проверяем версию Qt
+    QString qtVersion = QLibraryInfo::version().toString();
+    qDebug() << "Qt version:" << qtVersion;
+    qDebug() << "Qt location:" << QLibraryInfo::location(QLibraryInfo::PrefixPath);
+    
+    // Проверяем наличие debug плагинов (не должны быть в production)
+    QDir pluginsDirObj(pluginsDir);
+    if (pluginsDirObj.exists()) {
+        QStringList debugPlugins;
+        QDirIterator it(pluginsDir, QStringList() << "*d.dll", QDir::Files, QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            debugPlugins << it.next();
+        }
+        if (!debugPlugins.isEmpty()) {
+            qWarning() << "WARNING: Found" << debugPlugins.size() << "debug plugin(s):";
+            for (const QString& debugPlugin : debugPlugins) {
+                qWarning() << "  -" << debugPlugin;
+            }
+            qWarning() << "Debug plugins should not be present in production builds!";
+        } else {
+            qDebug() << "  ✓ No debug plugins found (correct)";
+        }
+    }
+    
+    qDebug() << "=== End Plugin Diagnostics ===";
+}
+
 int main(int argc, char *argv[])
 {
+    // Создаем QApplication
     QApplication a(argc, argv);
+    
+    // Выполняем диагностику плагинов после создания QApplication
+    // (QApplication наследуется от QCoreApplication, поэтому можем использовать его методы)
+    diagnoseQtPlugins();
 
     // Initialize style manager and apply global styles
     UStyleManager* styleManager = UStyleManager::instance();

@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2BAFCA9E-2D66-37C3-86A6-AA02A1FEBC56}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>Rdk-HardwareLib.qt</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Rdk-HardwareLib.qt.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Rdk-HardwareLib.qt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Rdk-HardwareLib.qt.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Rdk-HardwareLib.qt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Rdk-HardwareLib.qt.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Rdk-HardwareLib.qt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Bin\Platform\Win\Lib.CMake\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Rdk-HardwareLib.qt.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Rdk-HardwareLib.qt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_Debug;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_Debug;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_Debug;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target Rdk-HardwareLib.qt</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/Rdk-HardwareLib.qt_autogen.dir/AutogenInfo.json Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_Release;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_Release;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_Release;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target Rdk-HardwareLib.qt</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/Rdk-HardwareLib.qt_autogen.dir/AutogenInfo.json Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_MinSizeRel;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_MinSizeRel;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_MinSizeRel;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target Rdk-HardwareLib.qt</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/Rdk-HardwareLib.qt_autogen.dir/AutogenInfo.json MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_RelWithDebInfo;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Qt/5.15.2/msvc2019_64/include" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtCore" /external:I "C:/Qt/5.15.2/msvc2019_64/./mkspecs/win32-msvc" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSerialPort" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork" /external:I "C:/Qt/5.15.2/msvc2019_64/include/QtSql"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;RDK_QT;RDK_LIB_CVS_REVISION=0;RDK_UNICODE_RUN;QT_NO_VERSION_TAGGING;NOMINMAX;QT_CORE_LIB;QT_NO_DEBUG;QT_SERIALPORT_LIB;LIBRDK_LIBRARY_EXPORT;RDK_USE_SQL;QT_NETWORK_LIB;QT_SQL_LIB;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_RelWithDebInfo;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\include_RelWithDebInfo;E:\boost_1_82_0;E:\boost_1_82_0\include;E:\Science-Repo\nmsdk-git\Rdk\Deploy\Include;E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core;E:\Science-Repo\nmsdk-git\Rdk\Core;E:\Science-Repo\nmsdk-git\Rdk\ThirdParty;E:\Science-Repo\nmsdk-git\Libraries\Rdk-BasicLib\Core;C:\Qt\5.15.2\msvc2019_64\include;C:\Qt\5.15.2\msvc2019_64\include\QtCore;C:\Qt\5.15.2\msvc2019_64\.\mkspecs\win32-msvc;C:\Qt\5.15.2\msvc2019_64\include\QtSerialPort;C:\Qt\5.15.2\msvc2019_64\include\QtNetwork;C:\Qt\5.15.2\msvc2019_64\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message>Automatic MOC and UIC for target Rdk-HardwareLib.qt</Message>
+      <Command>setlocal
+cd E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_autogen E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/Rdk-HardwareLib.qt_autogen.dir/AutogenInfo.json RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/Libraries/Rdk-HardwareLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/Libraries/Rdk-HardwareLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/Libraries/Rdk-HardwareLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/Science-Repo/nmsdk-git/Libraries/Rdk-HardwareLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Science-Repo/nmsdk-git -BE:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod --check-stamp-file E:/Science-Repo/nmsdk-git/Tests/Integration/GUI/build_prod/Libraries/Rdk-HardwareLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5Config.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5\Qt5ModuleLocation.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5Core\Qt5CoreConfigVersion.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfig.cmake;C:\Qt\5.15.2\msvc2019_64\lib\cmake\Qt5SerialPort\Qt5SerialPortConfigVersion.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\mocs_compilation_Debug.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core\UAdcSensor.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core\UArduinoConnect.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core\UArduinoControl.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core\UDcControlDemo.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Libraries\Rdk-HardwareLib\Core\UHardwareLibrary.cpp" />
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\mocs_compilation_Release.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\mocs_compilation_MinSizeRel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-HardwareLib\Rdk-HardwareLib.qt_autogen\mocs_compilation_RelWithDebInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\ZERO_CHECK.vcxproj">
+      <Project>{E8EDA6B9-C0D0-388D-BD35-3D7A0E208B6A}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Libraries\Rdk-BasicLib\Rdk-BasicLib.qt.vcxproj">
+      <Project>{531B2FF5-4B1D-3D8E-A8ED-6782C722689E}</Project>
+      <Name>Rdk-BasicLib.qt</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\Science-Repo\nmsdk-git\Tests\Integration\GUI\build_prod\Rdk\rdk.static.qt.vcxproj">
+      <Project>{CB72B657-807D-3AD4-9E40-D8C571E18434}</Project>
+      <Name>rdk.static.qt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
