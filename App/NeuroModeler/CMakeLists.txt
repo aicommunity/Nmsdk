@@ -125,16 +125,24 @@ if(CURL_FOUND)
 endif()
 
 # Boost libraries (required by rdk.static.qt)
+# Используем MODULE режим для всех платформ (FindBoost.cmake правильно определяет имена библиотек)
 find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
 if(Boost_FOUND)
-  target_link_libraries(NeuroModeler PRIVATE 
-    Boost::program_options 
-    Boost::thread 
-    Boost::filesystem 
-    Boost::system
-    Boost::chrono
-    Boost::atomic
-  )
+  # Используем современные target'ы, если доступны, иначе используем переменные
+  if(TARGET Boost::program_options)
+    target_link_libraries(NeuroModeler PRIVATE
+      Boost::program_options
+      Boost::thread
+      Boost::filesystem
+      Boost::system
+      Boost::chrono
+      Boost::atomic
+    )
+  else()
+    # Fallback на старый способ, если target'ы не доступны
+    target_link_libraries(NeuroModeler PRIVATE ${Boost_LIBRARIES})
+    target_include_directories(NeuroModeler PRIVATE ${Boost_INCLUDE_DIRS})
+  endif()
 endif()
 
 target_include_directories(NeuroModeler PRIVATE
@@ -146,10 +154,10 @@ target_include_directories(NeuroModeler PRIVATE
 # Передаем версию из Git в определение компилятора
 # CMake автоматически экранирует строку для передачи в препроцессор
 # Формат: RDK_APP_VERSION="1.2.1.0 (develop:b4ff447)"
-target_compile_definitions(NeuroModeler PRIVATE 
-  RDK_DISABLE_EXT_GUI 
-  QT_DLL 
-  QT_WIDGETS_LIB 
+target_compile_definitions(NeuroModeler PRIVATE
+  RDK_DISABLE_EXT_GUI
+  QT_DLL
+  QT_WIDGETS_LIB
   RDK_APP_VERSION="${GIT_VERSION_STRING}"
 )
 

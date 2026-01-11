@@ -16,20 +16,31 @@ project(Nmsdk LANGUAGES CXX)
 # Автоматическая настройка параллельной сборки
 # Определяем количество ядер процессора, если CMAKE_BUILD_PARALLEL_LEVEL не задан
 # Эта настройка автоматически распространяется на все подпроекты через add_subdirectory()
+include(ProcessorCount)
+ProcessorCount(N)
+if(N EQUAL 0)
+    set(N 4)  # Fallback: используем значение по умолчанию
+endif()
+
+# Устанавливаем переменную окружения для использования при сборке (для Ninja и других генераторов)
 if(NOT DEFINED ENV{CMAKE_BUILD_PARALLEL_LEVEL})
-    include(ProcessorCount)
-    ProcessorCount(N)
-    if(NOT N EQUAL 0)
-        # Устанавливаем переменную окружения для использования при сборке
-        set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} ${N})
-        message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL set to ${N} (auto-detected CPU cores)")
-    else()
-        # Fallback: используем значение по умолчанию
-        set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} "4")
-        message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL set to 4 (default fallback)")
-    endif()
+    set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} ${N})
+    message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL set to ${N} (auto-detected CPU cores)")
 else()
     message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL already set to $ENV{CMAKE_BUILD_PARALLEL_LEVEL}")
+endif()
+
+# Для Visual Studio генератора настраиваем параллельную сборку через cache переменные
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
+    # Устанавливаем количество параллельных потоков для Visual Studio
+    if(NOT DEFINED CMAKE_VS_PARALLEL_BUILD_THREADS)
+        set(CMAKE_VS_PARALLEL_BUILD_THREADS ${N} CACHE STRING "Number of parallel build threads for Visual Studio" FORCE)
+        message(STATUS "CMAKE_VS_PARALLEL_BUILD_THREADS set to ${N} (auto-detected CPU cores)")
+    endif()
+    # Включаем параллельную сборку проектов
+    if(NOT DEFINED CMAKE_VS_GENERATE_DEVENV_LAUNCHER)
+        set(CMAKE_VS_GENERATE_DEVENV_LAUNCHER ON CACHE BOOL "Generate Visual Studio devenv launcher" FORCE)
+    endif()
 endif()
 
 # Политики и стандарт

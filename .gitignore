@@ -102,3 +102,9 @@ cmake_install.cmake
 Installers/Neuro Modeler SDK/InstallSourcesQt/Bin
 Installers/Neuro Modeler SDK/InstallSourcesQt/Docs
 *.exe
+
+# CMake-generated Visual Studio project files in test directories
+Tests/Integration/GUI/build_test/
+Tests/Integration/GUI/build_prod/
+Tests/Integration/GUI/GUI/CMakeFiles/
+Tests/Integration/GUI/GUI/cmake_install.cmake

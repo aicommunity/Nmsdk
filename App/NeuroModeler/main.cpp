@@ -17,6 +17,7 @@
 #include "UStyleManager.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
+#include "../../../Rdk/GUI/Qt/UGuiModelSnapshot.h"
 
 QProgressDialog* d(NULL);
 std::atomic<bool> g_cancelRequested(false);
@@ -35,13 +36,13 @@ void progress_bar_callback(int complete_percent, const std::string &text)
   d->setValue(complete_percent);
   if(!text.empty())
    d->setLabelText(text.c_str());
-  
+
   // Обрабатываем события для обеспечения отзывчивости окна во время блокирующих операций
   // Используем AllEvents без таймаута для немедленной обработки всех событий включая клики
   // Это критично для того, чтобы окно прогресса могло получать сообщения даже во время
   // длительных блокирующих операций инициализации
   QApplication::processEvents(QEventLoop::AllEvents, 0);
-  
+
   // Проверяем отмену после обработки событий
   if(g_cancelRequested.load())
   {
@@ -55,14 +56,14 @@ void progress_bar_callback(int complete_percent, const std::string &text)
 void diagnoseQtPlugins()
 {
     qDebug() << "=== Qt Plugin Diagnostics ===";
-    
+
     // Получаем путь к плагинам
     QStringList pluginPaths = QCoreApplication::libraryPaths();
     qDebug() << "Qt library paths:";
     for (const QString& path : pluginPaths) {
         qDebug() << "  -" << path;
     }
-    
+
     // Проверяем qt.conf
     QString appDir = QCoreApplication::applicationDirPath();
     QString qtConfPath = appDir + "/qt.conf";
@@ -78,14 +79,14 @@ void diagnoseQtPlugins()
     } else {
         qWarning() << "qt.conf NOT found at:" << qtConfPath;
     }
-    
+
     // Проверяем наличие критически важных плагинов
     QString pluginsDir = appDir + "/plugins";
     QStringList criticalPlugins = {
         "platforms/qwindows.dll",
         "styles/qwindowsvistastyle.dll"
     };
-    
+
     qDebug() << "Checking critical plugins in:" << pluginsDir;
     for (const QString& plugin : criticalPlugins) {
         QString pluginPath = pluginsDir + "/" + plugin;
@@ -96,12 +97,12 @@ void diagnoseQtPlugins()
             qWarning() << "  ✗ Missing:" << plugin << "at" << pluginPath;
         }
     }
-    
+
     // Проверяем версию Qt
     QString qtVersion = QLibraryInfo::version().toString();
     qDebug() << "Qt version:" << qtVersion;
     qDebug() << "Qt location:" << QLibraryInfo::location(QLibraryInfo::PrefixPath);
-    
+
     // Проверяем наличие debug плагинов (не должны быть в production)
     QDir pluginsDirObj(pluginsDir);
     if (pluginsDirObj.exists()) {
@@ -120,7 +121,7 @@ void diagnoseQtPlugins()
             qDebug() << "  ✓ No debug plugins found (correct)";
         }
     }
-    
+
     qDebug() << "=== End Plugin Diagnostics ===";
 }
 
@@ -128,17 +129,20 @@ int main(int argc, char *argv[])
 {
     // Создаем QApplication
     QApplication a(argc, argv);
-    
+
+    // Регистрируем типы для использования в Qt signals/slots с queued connections
+    qRegisterMetaType<NMSDK::UGuiSnapshotPtr>("NMSDK::UGuiSnapshotPtr");
+
     // Выполняем диагностику плагинов после создания QApplication
     // (QApplication наследуется от QCoreApplication, поэтому можем использовать его методы)
     diagnoseQtPlugins();
 
     // Initialize style manager and apply global styles
     UStyleManager* styleManager = UStyleManager::instance();
-    
+
     // Get styles path (handles Bin/Platform/Linux/ case)
     QString stylesDir = styleManager->getStylesPath();
-    
+
     if (!styleManager->loadTheme(stylesDir + "theme.json"))
     {
         qWarning() << "Failed to load theme from:" << (stylesDir + "theme.json");
@@ -231,17 +235,17 @@ int main(int argc, char *argv[])
     d->setMinimumDuration(0); // Показывать окно сразу, без задержки
     d->setMaximum(100);
     d->setValue(10);
-    
+
     // Устанавливаем минимальные размеры явно, чтобы избежать черного прямоугольника
     d->setMinimumSize(400, 100);
     d->resize(400, 100);
-    
+
     // Применяем стили к окну прогресса явно
     if(styleManager)
     {
         d->setStyleSheet(styleManager->getStyleSheet());
     }
-    
+
     // Обработка отмены через кнопку Cancel (подключаем ДО show())
     QObject::connect(d, &QProgressDialog::canceled, []() {
         g_cancelRequested.store(true);
@@ -277,7 +281,7 @@ int main(int argc, char *argv[])
             d->setLabelText("Отмена инициализации...");
         }
     });
-    
+
     // Показываем окно
     d->show();
     d->raise(); // Поднимаем окно наверх
@@ -320,11 +324,11 @@ int main(int argc, char *argv[])
      int init_res=AppCore.Init(QApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModeler.ini",
                   (QApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
                   forwardedArgc, forwardedArgv);
-     
+
      // Останавливаем таймер после завершения инициализации (включая случай отмены)
      eventTimer->stop();
      delete eventTimer;
-     
+
      // Проверка отмены после инициализации
      if(g_cancelRequested.load())
      {

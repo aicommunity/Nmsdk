@@ -14,6 +14,7 @@
         "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
+        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
         "BUILD_SHARED_LIBS": "OFF",
         "RDK_USE_ODESOLVER": "OFF",
         "RDK_USE_PYTHON": "OFF",
@@ -28,12 +29,53 @@
     },
     {
       "name": "win-msvc-debug",
+      "displayName": "Windows Ninja Debug",
       "inherits": [ "win-msvc-base" ],
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
     },
     {
       "name": "win-msvc-release",
+      "displayName": "Windows Ninja Release",
       "inherits": [ "win-msvc-base" ],
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "win-vs2019-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",
+        "CMAKE_CXX_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_MANIFEST_DIR": "${sourceDir}",
+        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
+        "BUILD_SHARED_LIBS": "OFF",
+        "RDK_USE_ODESOLVER": "OFF",
+        "RDK_USE_PYTHON": "OFF",
+        "RDK_USE_DARKNET": "OFF",
+        "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_UNICODE_RUN": "OFF"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      }
+    },
+    {
+      "name": "win-vs2019-debug",
+      "hidden": true,
+      "inherits": [ "win-vs2019-base" ],
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "win-vs2019-release",
+      "hidden": true,
+      "inherits": [ "win-vs2019-base" ],
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
     },
     {
@@ -53,6 +95,8 @@
         "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
+        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
+        "CMAKE_VS_GENERATE_DEVENV_LAUNCHER": "ON",
         "BUILD_SHARED_LIBS": "OFF",
         "RDK_USE_ODESOLVER": "OFF",
         "RDK_USE_PYTHON": "OFF",
@@ -66,13 +110,14 @@
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "hostOS": [ "Windows" ]
+          "hostOS": [ "Windows" ],
+          "intelliSenseMode": "windows-msvc-x64"
         }
       }
     },
     {
       "name": "win-vs2022-debug",
-      "displayName": "Windows Visual Studio 2022 Debug",
+      "hidden": true,
       "inherits": [ "win-vs2022-base" ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
@@ -80,7 +125,7 @@
     },
     {
       "name": "win-vs2022-release",
-      "displayName": "Windows Visual Studio 2022 Release",
+      "hidden": true,
       "inherits": [ "win-vs2022-base" ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
@@ -88,6 +133,7 @@
     },
     {
       "name": "linux-gcc-debug",
+      "hidden": true,
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -109,17 +155,44 @@
     },
     {
       "name": "linux-gcc-release",
+      "hidden": true,
       "inherits": [ "linux-gcc-debug" ],
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
     }
   ],
   "buildPresets": [
-    { "name": "win-msvc-debug", "configurePreset": "win-msvc-debug" },
-    { "name": "win-msvc-release", "configurePreset": "win-msvc-release" },
-    { "name": "win-vs2022-debug", "configurePreset": "win-vs2022-debug", "displayName": "Build Windows VS2022 Debug" },
-    { "name": "win-vs2022-release", "configurePreset": "win-vs2022-release", "displayName": "Build Windows VS2022 Release" },
-    { "name": "linux-gcc-debug", "configurePreset": "linux-gcc-debug" },
-    { "name": "linux-gcc-release", "configurePreset": "linux-gcc-release" }
+    {
+      "name": "win-msvc-debug",
+      "configurePreset": "win-msvc-debug",
+      "displayName": "Build Windows Ninja Debug",
+      "jobs": 8
+    },
+    {
+      "name": "win-msvc-release",
+      "configurePreset": "win-msvc-release",
+      "displayName": "Build Windows Ninja Release",
+      "jobs": 8
+    },
+    {
+      "name": "win-vs2019-debug",
+      "configurePreset": "win-vs2019-debug",
+      "displayName": "Build Windows VS2019 Ninja Debug"
+    },
+    {
+      "name": "win-vs2019-release",
+      "configurePreset": "win-vs2019-release",
+      "displayName": "Build Windows VS2019 Ninja Release"
+    },
+    {
+      "name": "win-vs2022-debug",
+      "configurePreset": "win-vs2022-debug",
+      "displayName": "Build Windows VS2022 Debug"
+    },
+    {
+      "name": "win-vs2022-release",
+      "configurePreset": "win-vs2022-release",
+      "displayName": "Build Windows VS2022 Release"
+    }
   ]
 }
 

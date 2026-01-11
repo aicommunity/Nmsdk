@@ -115,3 +115,113 @@ add_test(NAME AppStartupTest COMMAND Test_AppStartup)
 add_test(NAME QMessageBoxStyleCrashTest COMMAND Test_QMessageBoxStyleCrash)
 add_test(NAME QMessageBoxWithStylesTest COMMAND Test_QMessageBoxWithStyles)
 
+# Find GTest before defining test that uses it
+find_package(GTest QUIET)
+if(NOT GTest_FOUND)
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1
+    )
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+endif()
+
+# Find glog for RDK logging
+find_package(glog QUIET)
+if(NOT glog_FOUND)
+    # Try to find glog using pkg-config or standard paths (Unix)
+    if(UNIX)
+        find_path(GLOG_INCLUDE_DIR glog/logging.h
+            PATHS
+                /usr/include
+                /usr/local/include
+                /opt/homebrew/include
+        )
+        find_library(GLOG_LIBRARY
+            NAMES glog
+            PATHS
+                /usr/lib
+                /usr/local/lib
+                /opt/homebrew/lib
+        )
+        if(GLOG_INCLUDE_DIR AND GLOG_LIBRARY)
+            add_library(glog::glog UNKNOWN IMPORTED)
+            set_target_properties(glog::glog PROPERTIES
+                IMPORTED_LOCATION "${GLOG_LIBRARY}"
+                INTERFACE_INCLUDE_DIRECTORIES "${GLOG_INCLUDE_DIR}"
+            )
+            set(glog_FOUND TRUE)
+        endif()
+    else()
+        # On Windows, glog should be found via vcpkg automatically
+        # If not found, we'll just define RDK_USE_GLOG and hope it's linked via rdk.static.qt
+        message(STATUS "glog not found via find_package, assuming it will be available at link time")
+    endif()
+endif()
+
+# Test for component movement algorithms
+# Compile UModernDiagramWidget files directly into test to avoid MOC conflicts with NeuroModeler
+# Use stub implementations for classes not needed in movement tests
+add_executable(Test_UModernDiagramWidget_Movement
+    Test_UModernDiagramWidget_Movement.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStyleManager.cpp
+    # Stub implementations to avoid heavy dependencies
+    UClassDescriptionDisplay_stub.cpp
+    UClassFavoritesEditor_stub.cpp
+    UQuickLinkDialog_stub.cpp
+    UVisualControllerWidget_stub.cpp
+    Libraries_stub.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+    # Headers for MOC processing
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassDescriptionDisplay.h
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassFavoritesEditor.h
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UQuickLinkDialog.h
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerWidget.h
+)
+set_target_properties(Test_UModernDiagramWidget_Movement PROPERTIES
+    AUTOMOC ON
+    AUTOUIC ON
+    AUTORCC ON
+)
+set_target_properties(Test_UModernDiagramWidget_Movement PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${DEPLOY_ROOT}"
+)
+if(Qt6_FOUND)
+    target_link_libraries(Test_UModernDiagramWidget_Movement Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)
+    target_compile_definitions(Test_UModernDiagramWidget_Movement PRIVATE QT_VERSION_MAJOR=6)
+else()
+    target_link_libraries(Test_UModernDiagramWidget_Movement Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Test)
+    target_compile_definitions(Test_UModernDiagramWidget_Movement PRIVATE QT_DLL QT_WIDGETS_LIB)
+endif()
+target_compile_definitions(Test_UModernDiagramWidget_Movement PRIVATE RDK_USE_GLOG)
+target_include_directories(Test_UModernDiagramWidget_Movement PRIVATE
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
+    ${CMAKE_SOURCE_DIR}/Rdk/Core
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Engine
+    ${CMAKE_SOURCE_DIR}/Rdk/Core/Graphics
+    ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include
+)
+
+target_link_libraries(Test_UModernDiagramWidget_Movement
+    GTest::gtest
+    GTest::gtest_main
+)
+if(glog_FOUND)
+    target_link_libraries(Test_UModernDiagramWidget_Movement glog::glog)
+endif()
+
+# Link against RDK libraries that UModernDiagramWidget depends on
+target_link_libraries(Test_UModernDiagramWidget_Movement
+    rdk.static.qt
+    Rdk-BasicLib.qt
+    Rdk-CvBasicLib.qt
+)
+
+add_test(NAME UModernDiagramWidgetMovementTest COMMAND Test_UModernDiagramWidget_Movement)

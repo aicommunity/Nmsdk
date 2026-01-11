@@ -49,20 +49,32 @@ if (RDK_USE_OPENCV)
 endif()
 
 # Boost
-# Сначала пытаемся найти Boost через find_package (работает с vcpkg)
-# Временно очищаем BOOST_PATH, чтобы find_package использовал vcpkg
+# На Windows используем CONFIG режим (для vcpkg), на Linux - обычный режим (для системных пакетов)
 set(BOOST_PATH_SAVED ${BOOST_PATH})
 unset(BOOST_PATH CACHE)
-find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
-if (Boost_FOUND)
-  # Boost найден через find_package (vcpkg) - используем его
-  # Не используем BOOST_PATH, чтобы избежать конфликтов версий компилятора
-  message(STATUS "Boost found via find_package (vcpkg): ${Boost_VERSION}")
+
+if(WIN32)
+  # Windows: используем MODULE режим для vcpkg
+  # CONFIG режим ищет библиотеки с суффиксом vc143 (VS2022), но vcpkg предоставляет vc140
+  # MODULE режим (FindBoost.cmake) правильно определяет имена библиотек vc140
+  # Предупреждения о новых версиях Boost не критичны и не влияют на работу
+  find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
+  if (Boost_FOUND)
+    message(STATUS "Boost found via find_package (vcpkg): ${Boost_VERSION}")
+    message(STATUS "Boost libraries: ${Boost_LIBRARIES}")
+  endif()
 else()
-  # Восстанавливаем BOOST_PATH для fallback
+  # Linux: используем MODULE режим (по умолчанию) для системных пакетов
+  find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
+  if (Boost_FOUND)
+    message(STATUS "Boost found via find_package (system): ${Boost_VERSION}")
+  endif()
+endif()
+
+# Fallback на BOOST_PATH, если find_package не нашел Boost
+if (NOT Boost_FOUND)
   set(BOOST_PATH ${BOOST_PATH_SAVED} CACHE PATH "Path to Boost root")
   if (BOOST_PATH)
-    # Если find_package не нашел Boost, используем BOOST_PATH (fallback)
     include_directories(${BOOST_PATH} ${BOOST_PATH}/include)
     link_directories(${BOOST_PATH}/lib)
     message(STATUS "Boost found via BOOST_PATH: ${BOOST_PATH}")
@@ -130,7 +142,7 @@ if (WIN32)
   if (NOT Qt5_FOUND)
     find_package(Qt5 QUIET COMPONENTS Core)
   endif()
-  
+
   # OpenCV через vcpkg (если не задан путь вручную)
   if (RDK_USE_OPENCV AND NOT DEFINED OPENCV4_PATH AND NOT DEFINED OPENCV3_PATH)
     find_package(OpenCV QUIET)
