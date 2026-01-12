@@ -8,13 +8,17 @@
 #include <QTest>
 #include <cmath>
 #include "../../../Rdk/GUI/Qt/UModernDiagramWidget.h"
+#include "../../../Rdk/GUI/Qt/UModernDiagramNodeItem.h"
+#include "../../../Rdk/GUI/Qt/UModernDiagramScene.h"
+#include "../../../Rdk/GUI/Qt/UModernDiagramCoordinateManager.h"
+#include "../../../Rdk/GUI/Qt/UModernDiagramCacheManager.h"
 #include "../../../Rdk/GUI/Qt/UStyleManager.h"
 
 // Test fixture для тестирования перемещения компонентов
 class UModernDiagramWidgetMovementTest : public ::testing::Test {
 protected:
     // Typedef для доступа к приватному классу NodeItem через friend declaration
-    typedef UModernDiagramWidget::NodeItem NodeItem;
+    typedef UModernDiagramNodeItem NodeItem;
     void SetUp() override {
         // Создание QApplication если его нет
         static int argc = 1;
@@ -213,6 +217,8 @@ protected:
     QApplication* app = nullptr;
 };
 
+// ---------------- Основные тесты перемещения ----------------
+
 // Тест 1.1: Движение влево-вверх (отрицательные координаты)
 TEST_F(UModernDiagramWidgetMovementTest, MovementLeftUp_NegativeCoordinates) {
     // Создаем несколько компонентов
@@ -375,6 +381,84 @@ TEST_F(UModernDiagramWidgetMovementTest, MovementLeftDown_OffsetXOnly) {
 
     QPointF finalPos = node1->scenePos();
     EXPECT_GE(finalPos.x(), -0.1);
+}
+
+// ---------------- Дополнительные тесты: координаты и кэш ----------------
+
+// Тест координатного менеджера: прямое и обратное преобразование kernel <-> scene
+TEST_F(UModernDiagramWidgetMovementTest, CoordinateManager_KernelSceneConversion)
+{
+    ASSERT_NE(widget, nullptr);
+    // Используем отдельный экземпляр менеджера координат для теста преобразований
+    UModernDiagramCoordinateManager coord(widget);
+
+    // По умолчанию должен использоваться масштаб по умолчанию
+    double scale = coord.getCoordScale();
+    ASSERT_GT(scale, 0.0);
+
+    QPointF kernel(1.5, -2.0);
+    QPointF scene = coord.scenePosFromKernel(kernel);
+    QPointF back = coord.kernelPosFromScene(scene);
+
+    EXPECT_NEAR(scene.x(), kernel.x() * scale, 1e-6);
+    EXPECT_NEAR(scene.y(), kernel.y() * scale, 1e-6);
+
+    EXPECT_NEAR(back.x(), kernel.x(), 1e-6);
+    EXPECT_NEAR(back.y(), kernel.y(), 1e-6);
+
+    // Меняем масштаб и проверяем, что преобразование учитывает новый scale
+    coord.setCoordScale(scale * 2.0);
+    double newScale = coord.getCoordScale();
+    EXPECT_NEAR(newScale, scale * 2.0, 1e-9);
+
+    QPointF scene2 = coord.scenePosFromKernel(kernel);
+    EXPECT_NEAR(scene2.x(), kernel.x() * newScale, 1e-6);
+    EXPECT_NEAR(scene2.y(), kernel.y() * newScale, 1e-6);
+}
+
+// Тест кэша компонентов: setEntry / getEntry / hasEntry / invalidateEntry / clear
+TEST_F(UModernDiagramWidgetMovementTest, ComponentCache_BasicOperations)
+{
+    // Тестируем UModernDiagramComponentCache как независимый компонент
+    UModernDiagramComponentCache cache;
+    const QString compName = QStringLiteral("TestComponent");
+
+    // Начальное состояние: записи нет
+    cache.invalidateEntry(compName);
+    EXPECT_FALSE(cache.hasEntry(compName));
+    EXPECT_EQ(cache.getEntry(compName), nullptr);
+
+    // Добавляем запись
+    UModernDiagramComponentCacheEntry entry;
+    entry.className = QStringLiteral("TestClass");
+    entry.kernelPos = QPointF(1.0, 2.0);
+    entry.hasKernelPos = true;
+    entry.timestamp = 123456789;
+
+    cache.setEntry(compName, entry);
+    EXPECT_TRUE(cache.hasEntry(compName));
+
+    UModernDiagramComponentCacheEntry* stored = cache.getEntry(compName);
+    ASSERT_NE(stored, nullptr);
+    EXPECT_EQ(stored->className, entry.className);
+    EXPECT_EQ(stored->kernelPos, entry.kernelPos);
+    EXPECT_TRUE(stored->hasKernelPos);
+    EXPECT_EQ(stored->timestamp, entry.timestamp);
+
+    // Инвалидация записи
+    cache.invalidateEntry(compName);
+    EXPECT_FALSE(cache.hasEntry(compName));
+    EXPECT_EQ(cache.getEntry(compName), nullptr);
+
+    // Повторно добавляем несколько записей и очищаем весь кэш
+    cache.setEntry(QStringLiteral("A"), entry);
+    cache.setEntry(QStringLiteral("B"), entry);
+    EXPECT_TRUE(cache.hasEntry(QStringLiteral("A")));
+    EXPECT_TRUE(cache.hasEntry(QStringLiteral("B")));
+
+    cache.clear();
+    EXPECT_FALSE(cache.hasEntry(QStringLiteral("A")));
+    EXPECT_FALSE(cache.hasEntry(QStringLiteral("B")));
 }
 
 // Тест 1.4: Движение вправо-вверх (обновление offset только по Y)

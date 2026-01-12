@@ -167,6 +167,16 @@ endif()
 add_executable(Test_UModernDiagramWidget_Movement
     Test_UModernDiagramWidget_Movement.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramView.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramLinkItem.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramNodeItem.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramViewportManager.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramCoordinateManager.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramCacheManager.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramTooltipGenerator.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramContextMenu.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramPortManager.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStyleManager.cpp
     # Stub implementations to avoid heavy dependencies
     UClassDescriptionDisplay_stub.cpp
