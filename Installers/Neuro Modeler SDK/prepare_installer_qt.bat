@@ -6,12 +6,18 @@ rem set QtFullPath=%QtPath5\%QtVersion%\%QtCompiler%\bin\
 rem set path=%path%;%QtFullPath%
 xcopy "..\..\Bin\Platform\Win\NeuroModeler.exe" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 xcopy "..\..\Bin\Platform\Win\NeuroModelerConsole.exe" InstallSourcesQt\Bin\Platform\Win\ /Y /D
-xcopy "..\..\Bin\Platform\Win\Qt*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
-xcopy "..\..\Bin\Platform\Win\opencv_*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
-xcopy "..\..\Bin\Platform\Win\tbb.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
-xcopy "..\..\Bin\Platform\Win\tbb_debug.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
-xcopy "..\..\Bin\Platform\Win\NeuroModeler.ini" InstallSourcesQt\Bin\Platform\Win\ /Y /D
-xcopy "..\..\Bin\Platform\Win\Fonts\*.*" InstallSourcesQt\Bin\Platform\Win\Fonts\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\Qt*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\opencv_*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\tbb.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\tbb_debug.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\NeuroModeler.ini" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\Fonts\*.*" InstallSourcesQt\Bin\Platform\Win\Fonts\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\boost*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\libcurl*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\libcrypto*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\libssl*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+rem xcopy "..\..\Bin\Platform\Win\double-conversion.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+xcopy "..\..\Bin\Platform\Win\*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 
 xcopy "..\..\Bin\Configs\MC-RCN\*.*" InstallSourcesQt\Bin\Configs\MC-RCN\*.* /Y /E /D
 xcopy "..\..\Bin\Configs\NM-Neurons\*.*" InstallSourcesQt\Bin\Configs\NM-Neurons\*.* /Y /E /D

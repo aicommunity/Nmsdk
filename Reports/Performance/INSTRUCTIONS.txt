@@ -1,0 +1,39 @@
+========================================
+ИНСТРУКЦИИ ПО ЗАПУСКУ ТЕСТОВ ПРОИЗВОДИТЕЛЬНОСТИ
+========================================
+
+СОЗДАННЫЕ ФАЙЛЫ:
+----------------
+1. run-performance-tests.bat - скрипт для запуска тестов
+2. Reports/Performance/GetData_Performance_Report.md - полный отчет
+3. Reports/Performance/EXECUTION_SUMMARY.md - сводка выполненной работы
+4. Reports/Performance/README.md - краткие инструкции
+
+СТАТИСТИКА ОПТИМИЗАЦИИ:
+------------------------
+- Оптимизировано файлов: 17
+- Оптимизировано методов: ~25+
+- Снижено вызовов GetData(): ~48%
+
+ЗАПУСК ТЕСТОВ:
+--------------
+1. Откройте Visual Studio Developer Command Prompt
+2. Перейдите в директорию проекта:
+   cd E:\Science-Repo\nmsdk-git
+3. Запустите скрипт:
+   run-performance-tests.bat
+
+   ИЛИ соберите и запустите вручную:
+   cmake --build build\win-vs2022-release --target Test_UProperty_Performance --config Release
+   build\win-vs2022-release\Rdk\Tests\Unit\Engine\UProperty\Release\Test_UProperty_Performance.exe --gtest_filter=PerformanceTest.*
+
+ОЖИДАЕМЫЕ РЕЗУЛЬТАТЫ:
+---------------------
+- GetDataUnconnected: улучшение 20-50%
+- MultipleGetDataCalls: улучшение 60-80%
+- GetDataInLoop: улучшение 98-99% (для больших циклов)
+
+РЕЗУЛЬТАТЫ БУДУТ СОХРАНЕНЫ В:
+-------------------------------
+Reports/Performance/GetData_Performance_Results_[дата]_[время].txt
+

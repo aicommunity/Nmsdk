@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "CMake: Launch active target (Debug, Windows)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${command:cmake.launchTargetDirectory}",
+      "environment": [
+        { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" }
+      ],
+      "preLaunchTask": "CMake: build (platform preset)",
+      "console": "integratedTerminal",
+      "windows": {}
+    },
+    {
+      "name": "CMake: Launch active target (Debug, Linux)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${command:cmake.launchTargetDirectory}",
+      "environment": [
+        { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" }
+      ],
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "CMake: build (platform preset)",
+      "console": "integratedTerminal",
+      "linux": {}
+    }
+  ]
+}
+{
+    "configurations": [
+        {
+            "type": "cmake",
+            "request": "launch",
+            "name": "Debug portfile(s)",
+            "cmakeDebugType": "external",
+            "pipeName": "\\\\.\\pipe\\vcpkg_ext_portfile_dbg",
+            "preLaunchTask": "Debug vcpkg commands"
+        }
+    ]
+}
