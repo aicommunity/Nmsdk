@@ -14,6 +14,54 @@
 4. **theme.json** - цвета светлой темы для кастомной отрисовки (QPainter)
 5. **dark-theme.json** - цвета тёмной темы для кастомной отрисовки
 
+**Архитектура системы стилей:**
+
+```mermaid
+classDiagram
+    class UStyleManager {
+        <<singleton>>
+        +instance()
+        +loadTheme()
+        +loadStyleSheet()
+        +switchTheme()
+        +getNodeFillColor()
+        +getPortInputColor()
+        +getLinkColor()
+    }
+    
+    class QApplication {
+        +setStyleSheet()
+    }
+    
+    class UModernDiagramWidget {
+        +updateTheme()
+    }
+    
+    class UModernDiagramNodeItem {
+        +paint()
+    }
+    
+    UStyleManager --> QApplication
+    UModernDiagramWidget --> UStyleManager
+    UModernDiagramNodeItem --> UStyleManager
+```
+
+**Процесс применения стилей:**
+
+```mermaid
+flowchart TB
+    Start[Запуск приложения] --> Load[UStyleManager::loadTheme]
+    Load --> Parse[Парсинг theme.json]
+    Parse --> QSS[Загрузка .qss файла]
+    QSS --> Apply[applyGlobalStyleSheet]
+    Apply --> Widgets[Применение к виджетам]
+    
+    Switch[Переключение темы] --> Reload[switchTheme]
+    Reload --> Parse
+    Reload --> Invalidate[Инвалидация кэша]
+    Invalidate --> Repaint[Перерисовка виджетов]
+```
+
 ### Поддерживаемые темы
 
 - **Modern Light** - светлая профессиональная тема с градиентами
@@ -37,6 +85,8 @@ style->applyGlobalStyleSheet(qApp);
 // Переключение темы
 style->switchTheme("Modern Dark", qApp);
 ```
+
+`UStyleManager` загружает цвета из JSON файлов (`theme.json`, `dark-theme.json`) и применяет QSS стили к `QApplication`. Виджеты получают цвета через методы `getNodeFillColor()`, `getPortInputColor()` и т.д. для кастомной отрисовки через `QPainter`. При переключении темы виджеты вызывают `updateTheme()` для инвалидации кэша и перерисовки.
 
 ### Расположение файлов
 
@@ -70,6 +120,8 @@ The NeuroModeler style system provides centralized management of application vis
 - **Modern Dark** - dark theme in modern IDE style
 
 ### Usage
+
+`UStyleManager` loads colors from JSON files (`theme.json`, `dark-theme.json`) and applies QSS styles to `QApplication`. Widgets get colors through methods like `getNodeFillColor()`, `getPortInputColor()`, etc. for custom rendering via `QPainter`. When switching themes, widgets call `updateTheme()` to invalidate cache and repaint.
 
 ### File Locations
 

@@ -133,23 +133,27 @@ flowchart TB
 
 ### Поток данных и управления
 
+Диаграмма ниже показывает типичный сценарий использования системы: от создания проекта пользователем через GUI до выполнения вычислений компонентами. Она отражает реальные вызовы методов в коде: `UApplication::CreateProject()`, `UEngine::Init()`, `UStorage::LoadLibraries()`, `UStorage::CreateComponent()`, `UEnvironment::Start()` и цикл выполнения `Reset/Calculate`.
+
 ```mermaid
 sequenceDiagram
     participant User as Пользователь/GUI
     participant App as UApplication
     participant Engine as UEngine
     participant Env as UEnvironment
+    participant Storage as UStorage
     participant Comp as UComponent
     
     User->>App: Создать проект
     App->>Engine: Инициализация
+    Engine->>Storage: Инициализация хранилища
     Engine->>Env: Создать окружение
-    Env->>Storage: Загрузить библиотеки
+    Storage->>Storage: Загрузить библиотеки<br/>RdkLoadPredefinedLibraries
     
     User->>App: Добавить компонент
     App->>Engine: Создать компонент
-    Engine->>Storage: Получить фабрику
-    Storage->>Comp: Создать экземпляр
+    Engine->>Storage: Получить фабрику<br/>GetComponentFactory
+    Storage->>Comp: Создать экземпляр<br/>Factory->CreateComponent
     Comp->>Comp: ADefault()
     Comp->>Comp: ABuild()
     
@@ -160,13 +164,15 @@ sequenceDiagram
     loop Каждый шаг времени
         Env->>Comp: AReset()
         Env->>Comp: ACalculate()
-        Comp->>Comp: Обработка данных
+        Comp->>Comp: Обработка данных<br/>Обновление выходных свойств
     end
     
     User->>App: Остановить выполнение
     App->>Engine: Stop()
     Engine->>Env: Stop()
 ```
+
+Эта последовательность соответствует коду в `UAppCore::Init`, `UEngine::Init`, `UStorage::BuildStorage`, `UEnvironment::Start` и методам жизненного цикла компонентов.
 
 ### Зависимости между модулями
 

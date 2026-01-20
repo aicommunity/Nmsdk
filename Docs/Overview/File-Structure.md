@@ -47,21 +47,75 @@ Nmsdk/
 Rdk/
 ├── Core/                   # Исходный код ядра
 │   ├── Application/        # Приложение, RPC, сервер
+│   │   ├── UApplication.h/cpp
+│   │   ├── UEngineControl.h/cpp
+│   │   ├── URpcDispatcher.h/cpp
+│   │   ├── UProject.h/cpp
+│   │   ├── Qt/            # Qt реализация
+│   │   └── Bcb/           # Borland C++ Builder реализация
 │   ├── Engine/             # Движок, компоненты, окружение
+│   │   ├── UEngine.h/cpp
+│   │   ├── UComponent.h/cpp
+│   │   ├── UContainer.h/cpp
+│   │   ├── UNet.h/cpp
+│   │   ├── UStorage.h/cpp
+│   │   ├── UEnvironment.h/cpp
+│   │   ├── UProperty.h
+│   │   └── UPropertyEndpoints.h
 │   ├── Graphics/           # Графика и визуализация
+│   │   ├── UGraphics.h/cpp
+│   │   ├── UDrawEngine.h/cpp
+│   │   ├── UBitmap.h/cpp
+│   │   └── UFont.h
 │   ├── Math/              # Математические утилиты
-│   ├── Serialize/         # Сериализация (XML, Binary)
+│   │   └── MVector.h      # Векторы и матрицы
+│   ├── Serialize/          # Сериализация (XML, Binary)
+│   │   ├── USerStorage.h
+│   │   ├── USerStorageXML.h/cpp
+│   │   └── USerStorageBinary.h/cpp
 │   ├── System/            # Системные утилиты
-│   ├── Utilities/         # Вспомогательные утилиты
+│   │   ├── rdk_system.h
+│   │   ├── UGenericMutex.h
+│   │   ├── UGenericEvent.h
+│   │   ├── UDllLoader.h
+│   │   ├── Qt/            # Qt реализации
+│   │   ├── Win/           # Windows реализации
+│   │   └── Gcc/           # GCC/POSIX реализации
+│   ├── Utilities/          # Вспомогательные утилиты
+│   │   └── UIniFile.h     # Работа с INI файлами
 │   └── Console/           # Консольный движок
+│       └── UConsoleEngine.h/cpp
 ├── Deploy/                # Заголовочные файлы
 │   └── Include/           # Публичные заголовки
+│       ├── rdk.h
+│       ├── rdk_application.h
+│       └── rdk_init.h
 ├── GUI/                   # Графический интерфейс
-│   └── Qt/               # Qt реализация GUI
+│   ├── Qt/               # Qt реализация GUI
+│   │   ├── UGEngineControlWidget.h/cpp
+│   │   ├── UModernDiagramWidget.h/cpp
+│   │   ├── UStyleManager.h/cpp
+│   │   └── Styles/       # QSS и JSON темы
+│   └── BCB/              # Borland C++ Builder GUI
 ├── Tests/                 # Тесты
 │   ├── Unit/             # Юнит-тесты
 │   └── Integration/      # Интеграционные тесты
 └── ThirdParty/           # Сторонние библиотеки
+```
+
+**Зависимости между модулями Core:**
+
+```mermaid
+flowchart TB
+    Application[Application] --> Engine[Engine]
+    Application --> Serialize[Serialize]
+    Engine --> Graphics[Graphics]
+    Engine --> Serialize
+    Engine --> System[System]
+    Engine --> Math[Math]
+    Graphics --> Math
+    Serialize --> System
+    Application --> Utilities[Utilities]
 ```
 
 ### Структура Libraries

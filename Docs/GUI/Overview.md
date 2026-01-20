@@ -16,6 +16,35 @@
 - **Окно графиков** - визуализация данных компонентов
 - **Управление проектами** - создание, открытие, сохранение проектов
 
+**Архитектура GUI системы:**
+
+```mermaid
+flowchart TB
+    App[UApplication] --> MainWidget[UGEngineControlWidget]
+    MainWidget --> DiagramWidget[UModernDiagramWidget]
+    MainWidget --> PropertyWidget[UComponentPropertyChanger]
+    MainWidget --> ListWidget[UComponentsListWidget]
+    MainWidget --> LogWidget[ULoggerWidget]
+    MainWidget --> GraphWidget[UGraphWidget]
+    
+    DiagramWidget --> Scene[UModernDiagramScene]
+    Scene --> Nodes[UModernDiagramNodeItem]
+    Scene --> Links[UModernDiagramLinkItem]
+    
+    MainWidget --> EngineControl[UEngineControlQt]
+    EngineControl --> Timer[QTimer]
+    Timer --> Update[AUpdateInterface]
+    Update --> DiagramWidget
+    Update --> PropertyWidget
+    Update --> GraphWidget
+    
+    DiagramWidget --> App
+    PropertyWidget --> App
+    GraphWidget --> App
+```
+
+Все виджеты наследуются от `UVisualControllerWidget` или `UVisualControllerMainWidget` и получают указатель на `UApplication` при создании. Они используют этот указатель для доступа к движку (`UEngine`), хранилищу компонентов (`UStorage`) и проекту (`UProject`).
+
 ### См. также
 
 - [Справочник виджетов](Widgets-Reference.md)
@@ -39,6 +68,8 @@ The Graphical User Interface (GUI) of Nmsdk is built on Qt and provides a visual
 - **Log Window** - execution monitoring and debugging
 - **Graph Window** - component data visualization
 - **Project Management** - create, open, save projects
+
+All widgets inherit from `UVisualControllerWidget` or `UVisualControllerMainWidget` and receive a pointer to `UApplication` upon creation. They use this pointer to access the engine (`UEngine`), component storage (`UStorage`), and project (`UProject`). The update cycle is driven by `UEngineControlQt` timer, which calls `AUpdateInterface()` on all widgets periodically.
 
 ### See Also
 

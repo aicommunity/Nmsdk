@@ -57,8 +57,66 @@ cmake --build . --config Release  # Windows
 
 ```mermaid
 flowchart LR
-    Source[Источник данных] --> Process[Обработка]
-    Process --> Output[Выход]
+    Source[Источник данных<br/>UMatrixSource] --> Process[Обработка<br/>UStatistic]
+    Process --> Output[Выход<br/>UIO]
+```
+
+**Пример создания компонента программно:**
+
+```cpp
+#include <rdk.h>
+using namespace RDK;
+
+// Создание хранилища и движка
+UStorage storage;
+UEngine engine;
+engine.SetStorage(&storage);
+
+// Загрузка библиотек
+std::list<ULibrary*> libs;
+RdkLoadPredefinedLibraries(libs);
+for(auto lib : libs) {
+    storage.AddCollection(lib);
+}
+storage.BuildStorage();
+
+// Создание компонента
+auto source = storage.CreateComponent<UMatrixSource>("Source");
+source->FileName = "data.csv";
+source->Build();
+
+auto processor = storage.CreateComponent<UStatistic>("Processor");
+processor->Build();
+
+// Соединение компонентов
+processor->InputData.AttachTo(&source->OutputMatrix);
+
+// Выполнение
+engine.GetEnvironment()->Start();
+for(int i = 0; i < 10; i++) {
+    source->Calculate();
+    processor->Calculate();
+}
+```
+
+**Пример конфигурационного файла проекта (XML):**
+
+```xml
+<Project>
+  <Name>MyFirstProject</Name>
+  <Components>
+    <Component Name="Source" Class="UMatrixSource">
+      <Properties>
+        <Property Name="FileName" Type="string">data.csv</Property>
+      </Properties>
+    </Component>
+    <Component Name="Processor" Class="UStatistic">
+      <Properties>
+        <Property Name="InputData" Type="link">Source.OutputMatrix</Property>
+      </Properties>
+    </Component>
+  </Components>
+</Project>
 ```
 
 ### Следующие шаги

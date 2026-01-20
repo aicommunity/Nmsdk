@@ -45,6 +45,39 @@ make
 cmake --build . --config Release
 ```
 
+**Процесс сборки:**
+
+```mermaid
+flowchart TB
+    Start[Запуск CMake] --> Config[Конфигурация<br/>CMakeLists.txt]
+    Config --> Detect[Определение платформы<br/>QT_FOUND, WIN32, UNIX]
+    Detect --> SelectSys[Выбор системных абстракций<br/>System/Qt, System/Win, System/Gcc]
+    SelectSys --> Compile[Компиляция<br/>gcc/clang/msvc]
+    Compile --> Link[Линковка<br/>rdk.static.qt + библиотеки]
+    Link --> Deploy[Деплой<br/>Bin/Platform/OS/]
+    
+    Config --> LoadLibs[Загрузка библиотек<br/>RdkLoadPredefinedLibraries]
+    LoadLibs --> Compile
+```
+
+**Зависимости между модулями:**
+
+```mermaid
+flowchart LR
+    RdkCore[rdk.static.qt] --> BasicLib[Rdk-BasicLib]
+    RdkCore --> CvLib[Rdk-CvBasicLib]
+    RdkCore --> HardwareLib[Rdk-HardwareLib]
+    BasicLib --> PulseLib[Nmsdk-PulseLib]
+    BasicLib --> MotionLib[Nmsdk-MotionControlLib]
+    CvLib --> PyMLLib[Rdk-PyMachineLearningLib]
+    CvLib --> TfLib[Rdk-TensorflowLib]
+    CvLib --> DarknetLib[Rdk-DarknetLib]
+    
+    RdkCore --> App[NeuroModeler]
+    BasicLib --> App
+    CvLib --> App
+```
+
 ### Зависимости
 
 **Обязательные:**
@@ -104,6 +137,15 @@ All compiled files are placed in:
 - Applications: NeuroModeler, NeuroModelerConsole
 
 ### Build Process
+
+The build process follows these steps:
+1. **Configuration**: CMake analyzes `CMakeLists.txt` files and detects platform, dependencies, and build options
+2. **Platform Detection**: Determines which system abstraction implementation to use (Qt/Win/Gcc)
+3. **Compilation**: Compiles all source files with C++20 standard
+4. **Linking**: Links libraries and executables together
+5. **Deployment**: Copies binaries and resources to `Bin/Platform/<OS>/`
+
+The flowchart in the Russian section illustrates the complete build pipeline, including the selection of system abstractions and the dependency chain between modules.
 
 ### Dependencies
 

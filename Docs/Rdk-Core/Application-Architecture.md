@@ -18,6 +18,8 @@
 - Координация RPC и сервера
 - Управление проектами
 
+Архитектурно `UApplication` является центральной точкой входа для всех подсистем: при инициализации он настраивает `UEngineControl`, `UServerControl`, RPC‑подсистему, тестовый менеджер и `UProjectDeployer` (см. шаблон `UAppCore` в `UAppCore.h`).
+
 **Последовательность запуска приложения:**
 
 ```mermaid
@@ -41,6 +43,59 @@ sequenceDiagram
     EngineCtrl-->>App: Инициализация завершена
     App-->>Main: Приложение готово
 ```
+
+Эта диаграмма обобщает код инициализации в `UAppCore::Init` и последующие вызовы методов `UApplication` и `UEngineControl`: сначала загружается конфигурация (INI/проект), затем строится и инициализируется движок (`UEngine`, `UStorage`, `UEnvironment`), после чего приложение переходит в рабочее состояние.
+
+#### Классовые связи уровня Application
+
+```mermaid
+classDiagram
+    class UApplication {
+        +SetEngineControl()
+        +SetServerControl()
+        +SetProject()
+        +SetProjectDeployer()
+    }
+    
+    class UEngineControl {
+        +Start()
+        +Stop()
+        +SetEngine()
+    }
+    
+    class UServerControl {
+        +SetApplication()
+        +SetRpcDispatcher()
+        +SetServerTransport()
+    }
+    
+    class URpcDispatcher {
+        +SetApplication()
+        +SetDecoderPrototype()
+        +SetCommonDecoder()
+    }
+    
+    class UAppCore~template~ {
+        +application
+        +engineControl
+        +serverControl
+        +rpcDispatcher
+        +rpcDecoder
+        +project
+        +projectDeployer
+    }
+    
+    UAppCore --> UApplication
+    UAppCore --> UEngineControl
+    UAppCore --> UServerControl
+    UAppCore --> URpcDispatcher
+    UAppCore --> UProjectDeployer
+    UApplication --> UEngineControl
+    UApplication --> UServerControl
+    UApplication --> URpcDispatcher
+```
+
+Диаграмма отражает связи, явно устанавливаемые в конструкторе `UAppCore`: `rpcDecoder.SetDispatcher(&rpcDispatcher)`, `serverControl.SetApplication(&application)`, `application.SetEngineControl(&engineControl)` и т.д. Это позволяет шаблонному классу `UAppCore` собирать конкретную конфигурацию приложения из параметризованных типов.
 
 #### UEngineControl
 
@@ -90,6 +145,12 @@ sequenceDiagram
     end
 ```
 
+Здесь:
+- транспорт (`UServerTransport`) принимает запросы по TCP/HTTP и передаёт их в `URpcDispatcher`,
+- `URpcDispatcher` выбирает подходящий декодер (`URpcDecoder`, `URpcDecoderCommon`, `URpcDecoderInternal`) и передаёт ему команду,
+- декодер вызывает соответствующие методы `UApplication` или связанных контроллеров,
+- результат команды возвращается вызывающему клиенту через транспорт.
+
 #### UServerTransport
 
 Транспортный слой для сервера.
@@ -107,6 +168,8 @@ sequenceDiagram
 - Загрузка/сохранение проектов
 - Развертывание проектов на удаленные системы
 - Управление конфигурациями
+
+Класс `UProject` отвечает за структуру проекта (список компонентов, соединения и настройки), а `UProjectDeployer` реализует копирование и обновление конфигураций между локальными и удалёнными каталогами (используется в `UAppCore` и `UApplication`).
 
 ### Потоки выполнения
 
@@ -142,6 +205,8 @@ flowchart TB
     RpcDispatcher --> RpcDecoder
     RpcDecoder --> EngineCtrl
 ```
+
+Эта схема соответствует многопоточной архитектуре: как минимум отдельные потоки используются для RPC‑обработки, выполнения движка и сетевого сервера. `UApplication` создаёт и связывает соответствующие контроллеры, а `URpcDispatcher` и `UServerTransport` обеспечивают передачу команд между клиентами и приложением.
 
 ### Платформенные реализации
 
@@ -183,9 +248,16 @@ The `Rdk/Core/Application` module provides infrastructure for application manage
 
 Main application class managing lifecycle and coordination of all subsystems.
 
+**Key responsibilities:**
+- application startup/shutdown,
+- configuring and owning `UEngineControl`, `UServerControl`, RPC dispatcher and decoders,
+- managing projects (`UProject`) and deployment (`UProjectDeployer`).
+
 #### UEngineControl
 
 Control of component execution engine.
+
+It wraps `UEngine`, exposes high‑level `Start/Stop` operations and manages timing / threading for the engine execution loop.
 
 #### RPC System
 
@@ -197,6 +269,8 @@ Remote Procedure Call system for interacting with the application over the netwo
 - `URpcCommand` - RPC command
 - `URpcDecoderCommon` - common decoder
 - `URpcDecoderInternal` - internal decoder
+
+`URpcDispatcher` owns queues of incoming/processed commands and routes them to appropriate decoders. Decoders validate and decode payloads, then call methods on `UApplication` or related controllers, pushing results back to the dispatcher for sending via transports.
 
 #### UServerTransport
 
@@ -211,7 +285,15 @@ Transport layer for the server.
 
 Project management and deployment.
 
+`UProject` encapsulates project structure (components, connections, settings), while `UProjectDeployer` handles copying and updating configuration files between local and remote locations as configured in `UAppCore` / `UApplication`.
+
 ### Execution Threads
+
+The flowchart in the Russian section illustrates the main threads:
+- **Main Thread**: hosts `UApplication` and primary UI / control logic,
+- **Engine Thread**: runs the execution loop via `UEngineControl` and `UEnvironment`,
+- **RPC Thread**: processes command queues in `URpcDispatcher` / `URpcDecoder`,
+- **Server Thread**: accepts network connections and forwards commands to the dispatcher.
 
 ### Platform Implementations
 

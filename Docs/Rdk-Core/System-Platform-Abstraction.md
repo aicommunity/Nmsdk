@@ -78,15 +78,39 @@ flowchart TB
 Загрузчик динамических библиотек (DLL/SO).
 
 **Реализации:**
-- `Qt/UDllLoader.qt.cpp` - на базе Qt
-- `Win/UDllLoader.win.cpp` - на базе WinAPI
-- `Gcc/UDllLoader.gcc.cpp` - на базе `dlopen`
+- `Qt/UDllLoader.qt.cpp` - на базе Qt (`QLibrary`)
+- `Win/UDllLoader.win.cpp` - на базе WinAPI (`LoadLibraryA`, `GetProcAddress`)
+- `Gcc/UDllLoader.gcc.cpp` - на базе POSIX (`dlopen`, `dlsym`)
 - `BCB/UDllLoader.bcb.cpp` - для Borland C++ Builder
 
 **Основные методы:**
 - `Load()` - загрузка библиотеки
-- `GetProcAddress()` - получение адреса функции
+- `Resolve()` / `GetProcAddress()` - получение адреса функции
 - `Unload()` - выгрузка библиотеки
+
+**Процесс загрузки библиотеки:**
+
+```mermaid
+sequenceDiagram
+    participant App as Приложение
+    participant Loader as UDllLoader
+    participant Platform as Платформенный API
+    participant Library as Динамическая библиотека
+    
+    App->>Loader: Load("library.dll")
+    Loader->>Platform: LoadLibrary/dlopen
+    Platform->>Library: Загрузка в память
+    Library-->>Platform: Handle
+    Platform-->>Loader: Успех
+    Loader-->>App: true
+    
+    App->>Loader: Resolve("FunctionName")
+    Loader->>Platform: GetProcAddress/dlsym
+    Platform-->>Loader: Указатель на функцию
+    Loader-->>App: void* functionPtr
+```
+
+`UDllLoader` используется в `ULibrary` и `URuntimeLibrary` для загрузки библиотек компонентов во время выполнения. Фабрика `UCreateAndLoadDllLoader()` создаёт экземпляр загрузчика для конкретной платформы.
 
 #### USharedMemoryLoader
 
@@ -111,6 +135,26 @@ elseif(UNIX)
     add_subdirectory(System/Gcc)
 endif()
 ```
+
+**Процесс выбора реализации:**
+
+```mermaid
+flowchart TB
+    Start[CMake конфигурация] --> CheckQt{QT_FOUND?}
+    CheckQt -->|Да| QtImpl[System/Qt<br/>QLibrary, QReadWriteLock]
+    CheckQt -->|Нет| CheckWin{WIN32?}
+    CheckWin -->|Да| WinImpl[System/Win<br/>LoadLibrary, CreateMutex]
+    CheckWin -->|Нет| CheckUnix{UNIX?}
+    CheckUnix -->|Да| GccImpl[System/Gcc<br/>dlopen, pthread]
+    CheckUnix -->|Нет| ANSIImpl[System/ANSI<br/>Fallback]
+    
+    QtImpl --> Link[Линковка реализации]
+    WinImpl --> Link
+    GccImpl --> Link
+    ANSIImpl --> Link
+```
+
+Каждая реализация предоставляет одинаковый интерфейс (`UGenericMutex`, `UGenericEvent`, `UDllLoader`), но использует нативные API платформы для оптимальной производительности.
 
 ### Использование абстракций
 
