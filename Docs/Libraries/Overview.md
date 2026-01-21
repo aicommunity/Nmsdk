@@ -65,7 +65,6 @@ graph TD
 
 ### См. также
 
-- [Reports/02-Libraries-Overview.md](../../Reports/02-Libraries-Overview.md) - детальный обзор
 - [Component System](../Components-And-Configuration/Component-System.md)
 
 ---
@@ -102,5 +101,4 @@ Libraries are loaded through the `RdkLoadPredefinedLibraries()` function in `Lib
 
 ### See Also
 
-- [Reports/02-Libraries-Overview.md](../../Reports/02-Libraries-Overview.md) - detailed overview
 - [Component System](../Components-And-Configuration/Component-System.md)

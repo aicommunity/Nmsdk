@@ -21,8 +21,7 @@
 
 ### Детальная документация
 
-- [Reports/08-ML-Libraries.md](../../Reports/08-ML-Libraries.md) - детальное описание ML библиотек
-- [Libraries/Rdk-PyMachineLearningLib/](../../Libraries/Rdk-PyMachineLearningLib/) - исходный код библиотеки
+- [Libraries/Rdk-PyMachineLearningLib/Docs](../../Libraries/Rdk-PyMachineLearningLib/Docs/) - документация в репозитории библиотеки
 
 ---
 
@@ -47,5 +46,4 @@
 
 ### Detailed Documentation
 
-- [Reports/08-ML-Libraries.md](../../Reports/08-ML-Libraries.md) - detailed ML libraries description
-- [Libraries/Rdk-PyMachineLearningLib/](../../Libraries/Rdk-PyMachineLearningLib/) - library source code
+- [Libraries/Rdk-PyMachineLearningLib/Docs](../../Libraries/Rdk-PyMachineLearningLib/Docs/) - library repository documentation

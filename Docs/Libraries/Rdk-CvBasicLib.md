@@ -23,7 +23,6 @@
 
 ### Детальная документация
 
-- [Reports/04-Rdk-CvBasicLib.md](../../Reports/04-Rdk-CvBasicLib.md) - детальное описание
 - [Libraries/Rdk-CvBasicLib/Docs](../../Libraries/Rdk-CvBasicLib/Docs/) - документация в репозитории библиотеки
 
 ---
@@ -51,5 +50,4 @@
 
 ### Detailed Documentation
 
-- [Reports/04-Rdk-CvBasicLib.md](../../Reports/04-Rdk-CvBasicLib.md) - detailed description
 - [Libraries/Rdk-CvBasicLib/Docs](../../Libraries/Rdk-CvBasicLib/Docs/) - library repository documentation

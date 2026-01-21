@@ -25,7 +25,6 @@
 
 ### Детальная документация
 
-- [Reports/07-Nmsdk-MotionControlLib.md](../../Reports/07-Nmsdk-MotionControlLib.md) - детальное описание
 - [Libraries/Nmsdk-MotionControlLib/Docs](../../Libraries/Nmsdk-MotionControlLib/Docs/) - документация в репозитории библиотеки
 
 ---
@@ -55,5 +54,4 @@
 
 ### Detailed Documentation
 
-- [Reports/07-Nmsdk-MotionControlLib.md](../../Reports/07-Nmsdk-MotionControlLib.md) - detailed description
 - [Libraries/Nmsdk-MotionControlLib/Docs](../../Libraries/Nmsdk-MotionControlLib/Docs/) - library repository documentation

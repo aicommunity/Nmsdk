@@ -23,7 +23,6 @@
 
 ### Детальная документация
 
-- [Reports/06-Nmsdk-PulseLib.md](../../Reports/06-Nmsdk-PulseLib.md) - детальное описание
 - [Libraries/Nmsdk-PulseLib/Docs](../../Libraries/Nmsdk-PulseLib/Docs/) - документация в репозитории библиотеки
 
 ---
@@ -51,5 +50,4 @@
 
 ### Detailed Documentation
 
-- [Reports/06-Nmsdk-PulseLib.md](../../Reports/06-Nmsdk-PulseLib.md) - detailed description
 - [Libraries/Nmsdk-PulseLib/Docs](../../Libraries/Nmsdk-PulseLib/Docs/) - library repository documentation

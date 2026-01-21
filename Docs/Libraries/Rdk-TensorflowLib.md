@@ -20,8 +20,7 @@
 
 ### Детальная документация
 
-- [Reports/08-ML-Libraries.md](../../Reports/08-ML-Libraries.md) - детальное описание ML библиотек
-- [Libraries/Rdk-TensorflowLib/](../../Libraries/Rdk-TensorflowLib/) - исходный код библиотеки
+- [Libraries/Rdk-TensorflowLib/Docs](../../Libraries/Rdk-TensorflowLib/Docs/) - документация в репозитории библиотеки
 
 ---
 
@@ -45,5 +44,4 @@
 
 ### Detailed Documentation
 
-- [Reports/08-ML-Libraries.md](../../Reports/08-ML-Libraries.md) - detailed ML libraries description
-- [Libraries/Rdk-TensorflowLib/](../../Libraries/Rdk-TensorflowLib/) - library source code
+- [Libraries/Rdk-TensorflowLib/Docs](../../Libraries/Rdk-TensorflowLib/Docs/) - library repository documentation

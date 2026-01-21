@@ -16,7 +16,6 @@
 
 ### Детальная документация
 
-- [Reports/03-Rdk-BasicLib.md](../../Reports/03-Rdk-BasicLib.md) - детальное описание
 - [Libraries/Rdk-BasicLib/Docs](../../Libraries/Rdk-BasicLib/Docs/) - документация в репозитории библиотеки
 
 ---
@@ -37,5 +36,4 @@
 
 ### Detailed Documentation
 
-- [Reports/03-Rdk-BasicLib.md](../../Reports/03-Rdk-BasicLib.md) - detailed description
 - [Libraries/Rdk-BasicLib/Docs](../../Libraries/Rdk-BasicLib/Docs/) - library repository documentation

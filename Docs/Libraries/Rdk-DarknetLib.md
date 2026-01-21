@@ -18,8 +18,7 @@
 
 ### Детальная документация
 
-- [Reports/08-ML-Libraries.md](../../Reports/08-ML-Libraries.md) - детальное описание ML библиотек
-- [Libraries/Rdk-DarknetLib/](../../Libraries/Rdk-DarknetLib/) - исходный код библиотеки
+- [Libraries/Rdk-DarknetLib/Docs](../../Libraries/Rdk-DarknetLib/Docs/) - документация в репозитории библиотеки
 
 ---
 
@@ -41,5 +40,4 @@
 
 ### Detailed Documentation
 
-- [Reports/08-ML-Libraries.md](../../Reports/08-ML-Libraries.md) - detailed ML libraries description
-- [Libraries/Rdk-DarknetLib/](../../Libraries/Rdk-DarknetLib/) - library source code
+- [Libraries/Rdk-DarknetLib/Docs](../../Libraries/Rdk-DarknetLib/Docs/) - library repository documentation

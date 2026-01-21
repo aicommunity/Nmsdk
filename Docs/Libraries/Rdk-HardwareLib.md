@@ -20,7 +20,6 @@
 
 ### Детальная документация
 
-- [Reports/05-Rdk-HardwareLib.md](../../Reports/05-Rdk-HardwareLib.md) - детальное описание
 - [Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/) - документация в репозитории библиотеки
 
 ---
@@ -45,5 +44,4 @@
 
 ### Detailed Documentation
 
-- [Reports/05-Rdk-HardwareLib.md](../../Reports/05-Rdk-HardwareLib.md) - detailed description
 - [Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/) - library repository documentation
