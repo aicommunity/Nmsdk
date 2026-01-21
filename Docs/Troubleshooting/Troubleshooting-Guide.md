@@ -791,7 +791,7 @@ public:
 ### См. также
 
 - [Component Development Guide](../Development-Guides/Component-Development.md) - разработка компонентов
-- [Logging System](../Rdk/Docs/Logging-System.md) - система логирования
+- [Logging System](../../Rdk/Docs/Logging-System.md) - система логирования
 - [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - архитектура движка
 
 ---
@@ -983,5 +983,5 @@ Use console application for testing components.
 ### See Also
 
 - [Component Development Guide](../Development-Guides/Component-Development.md) - component development
-- [Logging System](../Rdk/Docs/Logging-System.md) - logging system
+- [Logging System](../../Rdk/Docs/Logging-System.md) - logging system
 - [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - engine architecture

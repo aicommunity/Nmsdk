@@ -857,7 +857,7 @@ protected:
 
 - [Component System](../Components-And-Configuration/Component-System.md) - обзор компонентной системы
 - [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - архитектура движка
-- [Property System](../Rdk/Docs/Diagrams/Property-System.md) - система свойств
+- [Property System](../../Rdk/Docs/Diagrams/Property-System.md) - система свойств
 - [Testing Strategy](../Performance-And-Testing/Testing-Strategy.md) - стратегия тестирования
 
 ---
@@ -1041,5 +1041,5 @@ protected:
 
 - [Component System](../Components-And-Configuration/Component-System.md) - component system overview
 - [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - engine architecture
-- [Property System](../Rdk/Docs/Diagrams/Property-System.md) - property system
+- [Property System](../../Rdk/Docs/Diagrams/Property-System.md) - property system
 - [Testing Strategy](../Performance-And-Testing/Testing-Strategy.md) - testing strategy
