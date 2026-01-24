@@ -182,6 +182,74 @@ cmake --build . --config Release  # Windows
 
 ### Example: Simple Component Network
 
+```mermaid
+flowchart LR
+    Source[Data Source<br/>UMatrixSource] --> Process[Processing<br/>UStatistic]
+    Process --> Output[Output<br/>UIO]
+```
+
+**Example component creation programmatically:**
+
+```cpp
+#include <rdk.h>
+using namespace RDK;
+
+// Create storage and engine
+UStorage storage;
+UEngine engine;
+engine.SetStorage(&storage);
+
+// Load libraries
+std::list<ULibrary*> libs;
+RdkLoadPredefinedLibraries(libs);
+for(auto lib : libs) {
+    storage.AddCollection(lib);
+}
+storage.BuildStorage();
+
+// Create component
+auto source = storage.CreateComponent<UMatrixSource>("Source");
+source->FileName = "data.csv";
+source->Build();
+
+auto processor = storage.CreateComponent<UStatistic>("Processor");
+processor->Build();
+
+// Connect components
+processor->InputData.AttachTo(&source->OutputMatrix);
+
+// Execute
+engine.GetEnvironment()->Start();
+for(int i = 0; i < 10; i++) {
+    source->Calculate();
+    processor->Calculate();
+}
+```
+
+**Example project configuration file (XML):**
+
+```xml
+<Project>
+  <Name>MyFirstProject</Name>
+  <Components>
+    <Component Name="Source" Class="UMatrixSource">
+      <Properties>
+        <Property Name="FileName" Type="string">data.csv</Property>
+      </Properties>
+    </Component>
+    <Component Name="Processor" Class="UStatistic">
+      <Properties>
+        <Property Name="InputData" Type="link">Source.OutputMatrix</Property>
+      </Properties>
+    </Component>
+  </Components>
+</Project>
+```
+
+### Common Issues
+
+Если возникли проблемы, см. [Troubleshooting Guide](../Troubleshooting/Troubleshooting-Guide.md) для решений типичных проблем.
+
 ### Next Steps
 
 - [Component System](../Components-And-Configuration/Component-System.md) - detailed component description
