@@ -12,12 +12,14 @@
 
 ### Конфигурации
 
-- [Configs-Structure.md](../../Bin/Docs/Configs-Structure.md) - структура конфигурационных файлов
+- [Configs-Structure.md](../../Bin/Docs/Configs-Structure.md) - структура конфигурационных файлов в Bin
   - Описание типов конфигурационных файлов (XML, INI, JPEG/PNG)
   - Структура конфигураций проектов
-  - Использование конфигураций в коде
+  - Артефакты сборки vs исходные ресурсы
+- [Rdk/Docs/Configuration-Management.md](../../Rdk/Docs/Configuration-Management.md) - работа с конфигурациями через классы Rdk
+  - Модули, работающие с конфигурациями (UProject, UApplication, UXMLEnvSerialize, UProjectDeployer)
   - Процесс чтения конфигураций
-  - Процесс деплоя конфигураций
+  - Процесс деплоя проектов
 
 ### Справочная система
 
@@ -31,7 +33,7 @@
 Для обзорной информации см. корневую документацию проекта:
 
 - [Configuration Files Overview](../Components-And-Configuration/Configuration-Files-Overview.md) - обзор конфигураций
-- [Component System](../Components-And-Configuration/Component-System.md) - компонентная система
+- [Component System](../../Rdk/Docs/Guides/Component-System.md) - компонентная система
 - [Style System](../GUI/Style-System.md) - система стилей
 
 ### Структура каталога Bin
@@ -68,12 +70,14 @@ This document contains a complete structured index of all documentation for reso
 
 ### Configurations
 
-- [Configs-Structure.md](../../Bin/Docs/Configs-Structure.md) - configuration files structure
+- [Configs-Structure.md](../../Bin/Docs/Configs-Structure.md) - configuration file structure in Bin
   - Description of configuration file types (XML, INI, JPEG/PNG)
   - Project configuration structure
-  - Configuration usage in code
+  - Build artifacts vs source resources
+- [Rdk/Docs/Configuration-Management.md](../../Rdk/Docs/Configuration-Management.md) - working with configurations through Rdk classes
+  - Modules working with configurations (UProject, UApplication, UXMLEnvSerialize, UProjectDeployer)
   - Configuration reading process
-  - Configuration deployment process
+  - Project deployment process
 
 ### Help System
 

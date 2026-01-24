@@ -18,7 +18,7 @@
 
 **См. также:**
 - [Overview/README.md](Overview/README.md) - основные термины
-- [Components-And-Configuration/Component-System.md](Components-And-Configuration/Component-System.md) - компонентная система
+- [Component System](Rdk/Docs/Guides/Component-System.md) - компонентная система
 - [Rdk/Docs/Guides/Creating-Components.md](../Rdk/Docs/Guides/Creating-Components.md) - создание компонентов
 
 #### Свойство (Property)
@@ -44,7 +44,7 @@
 **Описание:** Контейнер - это компонент, который может содержать другие компоненты. Базовый класс - `UContainer`.
 
 **См. также:**
-- [Rdk-Core/Engine-Architecture.md](Rdk-Core/Engine-Architecture.md) - архитектура движка
+- [Engine Architecture](Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
 
 #### Сеть (Net)
 
@@ -53,7 +53,7 @@
 **Описание:** Сеть - это контейнер, компоненты которого соединены через свойства. Базовый класс - `UNet`.
 
 **См. также:**
-- [Rdk-Core/Engine-Architecture.md](Rdk-Core/Engine-Architecture.md) - архитектура движка
+- [Engine Architecture](Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
 
 #### Окружение (Environment)
 
@@ -80,7 +80,7 @@
 **Описание:** Движок управляет жизненным циклом компонентов и их выполнением.
 
 **См. также:**
-- [Rdk-Core/Engine-Architecture.md](Rdk-Core/Engine-Architecture.md) - архитектура движка
+- [Engine Architecture](Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
 - [Rdk/Docs/Engine-Detailed.md](../Rdk/Docs/Engine-Detailed.md) - детали движка
 
 ### Термины библиотек
@@ -143,7 +143,7 @@
 **Описание:** Используется для сохранения и загрузки проектов, конфигураций. Читаемый человеком формат.
 
 **См. также:**
-- [Rdk-Core/Serialize-Architecture.md](Rdk-Core/Serialize-Architecture.md) - архитектура сериализации
+- [Serialize Architecture](Rdk/Docs/Architecture/Serialize-Architecture.md) - архитектура сериализации
 - [Rdk/Docs/Guides/Serialization-Guide.md](../Rdk/Docs/Guides/Serialization-Guide.md) - руководство по сериализации
 
 #### Binary Сериализация

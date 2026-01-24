@@ -93,7 +93,7 @@ comp->Build();
 comp->Calculate();
 ```
 
-См. [Components-And-Configuration/Component-System.md](Components-And-Configuration/Component-System.md) для детальной информации.
+См. [Component System](Rdk/Docs/Guides/Component-System.md) для детальной информации.
 
 ### Разработка
 

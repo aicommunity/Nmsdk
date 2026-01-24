@@ -86,13 +86,13 @@
 - Docs/Migration-Guides/API-Migration-Guide.md
 - Docs/Performance-And-Testing/Performance-Overview.md
 - Docs/Performance-And-Testing/Testing-Strategy.md
-- Docs/Rdk-Core/Application-Architecture.md
-- Docs/Rdk-Core/Engine-Architecture.md
-- Docs/Rdk-Core/Overview.md
-- Docs/Rdk-Core/Graphics-Architecture.md
-- Docs/Rdk-Core/System-Platform-Abstraction.md
-- Docs/Rdk-Core/Serialize-Architecture.md
-- Docs/Development-Guides/Component-Development.md
+- Rdk/Docs/Architecture/Application-Architecture.md
+- Rdk/Docs/Architecture/Engine-Architecture.md
+- Rdk/Docs/Architecture/Overview.md
+- Rdk/Docs/Architecture/Graphics-Architecture.md
+- Rdk/Docs/Architecture/System-Platform-Abstraction.md
+- Rdk/Docs/Architecture/Serialize-Architecture.md
+- Rdk/Docs/Guides/Component-Development.md
 - Docs/Development-Guides/Library-Development.md
 - Docs/Refactoring-History/Refactoring-Timeline.md
 - Docs/Refactoring-History/Lessons-Learned.md
@@ -102,10 +102,7 @@
 - Docs/Libraries/Rdk-HardwareLib.md
 - Docs/Libraries/Nmsdk-PulseLib.md
 - Docs/Libraries/Nmsdk-MotionControlLib.md
-- Docs/Libraries/Rdk-PyMachineLearningLib.md
-- Docs/Libraries/Rdk-TensorflowLib.md
-- Docs/Libraries/Rdk-DarknetLib.md
-- Docs/Projects-And-Deployment/Project-Management.md
+- Rdk/Docs/Guides/Project-Management.md
 - Docs/Troubleshooting/Troubleshooting-Guide.md
 - Docs/GUI/Style-System.md
 - Docs/GUI/Widgets-Reference.md
@@ -113,7 +110,7 @@
 - Docs/GUI/Widgets-Advanced-Customization.md
 - Docs/Components-And-Configuration/Direct-Property-Access.md
 - Docs/Components-And-Configuration/Configuration-Files-Overview.md
-- Docs/Components-And-Configuration/Component-System.md
+- Rdk/Docs/Guides/Component-System.md
 - Docs/Build-And-Deploy/Build-System.md
 - Docs/Build-And-Deploy/Build-Linux.md
 - Docs/Build-And-Deploy/Build-Windows.md
@@ -160,30 +157,6 @@
 - Libraries/Nmsdk-MotionControlLib/Docs/Usage-Examples.md
 - Libraries/Nmsdk-MotionControlLib/Docs/Diagrams/README.md
 
-### Rdk-PyMachineLearningLib
-- Libraries/Rdk-PyMachineLearningLib/Docs/README.md
-- Libraries/Rdk-PyMachineLearningLib/Docs/Architecture.md
-- Libraries/Rdk-PyMachineLearningLib/Docs/API-Overview.md
-- Libraries/Rdk-PyMachineLearningLib/Docs/Usage-Examples.md
-- Libraries/Rdk-PyMachineLearningLib/Docs/Diagrams/README.md
-- Libraries/Rdk-PyMachineLearningLib/Docs/Diagrams/ML-Pipeline.md
-- Libraries/Rdk-PyMachineLearningLib/Docs/Diagrams/Python-Integration.md
-
-### Rdk-TensorflowLib
-- Libraries/Rdk-TensorflowLib/Docs/README.md
-- Libraries/Rdk-TensorflowLib/Docs/Architecture.md
-- Libraries/Rdk-TensorflowLib/Docs/API-Overview.md
-- Libraries/Rdk-TensorflowLib/Docs/Usage-Examples.md
-- Libraries/Rdk-TensorflowLib/Docs/Diagrams/README.md
-- Libraries/Rdk-TensorflowLib/Docs/Diagrams/TensorFlow-Pipeline.md
-
-### Rdk-DarknetLib
-- Libraries/Rdk-DarknetLib/Docs/README.md
-- Libraries/Rdk-DarknetLib/Docs/Architecture.md
-- Libraries/Rdk-DarknetLib/Docs/API-Overview.md
-- Libraries/Rdk-DarknetLib/Docs/Usage-Examples.md
-- Libraries/Rdk-DarknetLib/Docs/Diagrams/README.md
-- Libraries/Rdk-DarknetLib/Docs/Diagrams/Darknet-Pipeline.md
 
 ## Build / cmake
 - cmake/README_QtVcpkg.md

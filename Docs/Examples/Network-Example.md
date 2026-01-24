@@ -63,8 +63,8 @@ void CreateNetwork() {
 
 ### Связанная документация
 
-- [Components-And-Configuration/Component-System.md](../Components-And-Configuration/Component-System.md) - компонентная система
-- [Rdk-Core/Engine-Architecture.md](../Rdk-Core/Engine-Architecture.md) - архитектура движка
+- [Component System](../Rdk/Docs/Guides/Component-System.md) - компонентная система
+- [Engine Architecture](../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
 - [Bin/Docs/Examples/Config-Example.md](../Bin/Docs/Examples/Config-Example.md) - примеры конфигураций
 
 ---

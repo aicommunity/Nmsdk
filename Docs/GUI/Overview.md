@@ -49,7 +49,7 @@ flowchart TB
 
 - [Справочник виджетов](Widgets-Reference.md)
 - [Система стилей](Style-System.md)
-- [Rdk Core Graphics](../Rdk-Core/Graphics-Architecture.md)
+- [Rdk Core Graphics](../Rdk/Docs/Architecture/Graphics-Architecture.md)
 
 ---
 
@@ -75,4 +75,4 @@ All widgets inherit from `UVisualControllerWidget` or `UVisualControllerMainWidg
 
 - [Widgets Reference](Widgets-Reference.md)
 - [Style System](Style-System.md)
-- [Rdk Core Graphics](../Rdk-Core/Graphics-Architecture.md)
+- [Rdk Core Graphics](../Rdk/Docs/Architecture/Graphics-Architecture.md)

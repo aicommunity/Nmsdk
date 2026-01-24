@@ -355,13 +355,7 @@ std::string NormalizePath(const std::string& path)
 }
 
 // ✅ Условная компиляция
-#ifdef RDK_USE_TENSORFLOW
-    // Код для TensorFlow
-#endif
-
-#ifdef RDK_USE_DARKNET
-    // Код для Darknet
-#endif
+// Примеры условной компиляции для других библиотек
 ```
 
 **CMake настройки:**
@@ -377,9 +371,7 @@ elseif(UNIX)
 endif()
 
 # Условная компиляция библиотек
-if(RDK_USE_TENSORFLOW)
-    target_link_libraries(MyLibrary PRIVATE TensorFlow::TensorFlow)
-endif()
+# Примеры условной компиляции для других библиотек
 ```
 
 #### Проблема 6: Проблемы с соединениями свойств
@@ -790,9 +782,9 @@ public:
 
 ### См. также
 
-- [Component Development Guide](../Development-Guides/Component-Development.md) - разработка компонентов
+- [Component Development Guide](../Rdk/Docs/Guides/Component-Development.md) - разработка компонентов
 - [Logging System](../../Rdk/Docs/Logging-System.md) - система логирования
-- [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - архитектура движка
+- [Engine Architecture](../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
 
 ---
 

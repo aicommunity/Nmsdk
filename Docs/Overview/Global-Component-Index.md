@@ -5,8 +5,5 @@
 - Rdk-BasicLib — [Libraries/Rdk-BasicLib/Docs/Component-Catalog.md](../../Libraries/Rdk-BasicLib/Docs/Component-Catalog.md) — базовые модели, статистика, источники/IO, генераторы.
 - Rdk-CvBasicLib — [Libraries/Rdk-CvBasicLib/Docs/Component-Catalog.md](../../Libraries/Rdk-CvBasicLib/Docs/Component-Catalog.md) — захват/источники, UBA-обработка, матричные операции, классификация/детекция/сегментация.
 - Rdk-HardwareLib — [Libraries/Rdk-HardwareLib/Docs/Component-Catalog.md](../../Libraries/Rdk-HardwareLib/Docs/Component-Catalog.md) — Arduino/ADC/DC (соединение, сенсоры, приводы).
-- Rdk-DarknetLib — [Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md](../../Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md) — Darknet детектор/классификатор.
-- Rdk-TensorflowLib — [Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md](../../Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md) — TF классификатор/детекторы.
-- Rdk-PyMachineLearningLib — [Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md](../../Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md) — Python-классификаторы/детекторы/сегментаторы + тренеры.
 - Nmsdk-PulseLib — [Libraries/Nmsdk-PulseLib/Docs/Component-Catalog.md](../../Libraries/Nmsdk-PulseLib/Docs/Component-Catalog.md) — SNN: нейроны/синапсы/каналы/мембраны/тренеры/классификаторы/генераторы.
 - Nmsdk-MotionControlLib — [Libraries/Nmsdk-MotionControlLib/Docs/Component-Catalog.md](../../Libraries/Nmsdk-MotionControlLib/Docs/Component-Catalog.md) — управление движением: двигатели, манипуляторы, сенсоры, контроллеры, траектории/память.

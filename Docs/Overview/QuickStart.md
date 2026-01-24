@@ -121,7 +121,7 @@ for(int i = 0; i < 10; i++) {
 
 ### Следующие шаги
 
-- [Компонентная система](../Components-And-Configuration/Component-System.md) - детальное описание работы с компонентами
+- [Компонентная система](../Rdk/Docs/Guides/Component-System.md) - детальное описание работы с компонентами
 - [Обзор библиотек](../Libraries/Overview.md) - доступные библиотеки компонентов
 - [GUI Overview](../GUI/Overview.md) - описание интерфейса
 

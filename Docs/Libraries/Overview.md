@@ -16,12 +16,6 @@
 4. **Nmsdk-PulseLib** - Импульсные нейронные сети
 5. **Nmsdk-MotionControlLib** - Управление движением и робототехника
 
-#### Библиотеки машинного обучения
-
-6. **Rdk-PyMachineLearningLib** - Интеграция с Python ML библиотеками
-7. **Rdk-TensorflowLib** - Интеграция с TensorFlow
-8. **Rdk-DarknetLib** - Интеграция с Darknet
-
 ### Зависимости между библиотеками
 
 ```mermaid
@@ -92,28 +86,6 @@ graph TD
    - [Каталог компонентов](../Libraries/Nmsdk-MotionControlLib/Docs/Component-Catalog.md) - список всех компонентов
    - [API Обзор](../Libraries/Nmsdk-MotionControlLib/Docs/API-Overview.md) - обзор API
 
-#### Библиотеки машинного обучения
-
-6. **Rdk-PyMachineLearningLib** - Python ML
-   - [Корневая документация](Rdk-PyMachineLearningLib.md) - обзор библиотеки
-   - [Детальная документация](../Libraries/Rdk-PyMachineLearningLib/Docs/README.md) - полная документация в репозитории библиотеки
-   - [Архитектура](../Libraries/Rdk-PyMachineLearningLib/Docs/Architecture.md) - архитектура библиотеки
-   - [Каталог компонентов](../Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md) - список всех компонентов
-   - [API Обзор](../Libraries/Rdk-PyMachineLearningLib/Docs/API-Overview.md) - обзор API
-
-7. **Rdk-TensorflowLib** - TensorFlow
-   - [Корневая документация](Rdk-TensorflowLib.md) - обзор библиотеки
-   - [Детальная документация](../Libraries/Rdk-TensorflowLib/Docs/README.md) - полная документация в репозитории библиотеки
-   - [Архитектура](../Libraries/Rdk-TensorflowLib/Docs/Architecture.md) - архитектура библиотеки
-   - [Каталог компонентов](../Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md) - список всех компонентов
-   - [API Обзор](../Libraries/Rdk-TensorflowLib/Docs/API-Overview.md) - обзор API
-
-8. **Rdk-DarknetLib** - Darknet
-   - [Корневая документация](Rdk-DarknetLib.md) - обзор библиотеки
-   - [Детальная документация](../Libraries/Rdk-DarknetLib/Docs/README.md) - полная документация в репозитории библиотеки
-   - [Архитектура](../Libraries/Rdk-DarknetLib/Docs/Architecture.md) - архитектура библиотеки
-   - [Каталог компонентов](../Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md) - список всех компонентов
-   - [API Обзор](../Libraries/Rdk-DarknetLib/Docs/API-Overview.md) - обзор API
 
 ### Индексы документации
 
@@ -122,7 +94,7 @@ graph TD
 
 ### См. также
 
-- [Component System](../Components-And-Configuration/Component-System.md)
+- [Component System](../Rdk/Docs/Guides/Component-System.md)
 
 ---
 
@@ -141,12 +113,6 @@ Libraries in the `Libraries/` folder contain implementations of specific compone
 3. **Rdk-HardwareLib** - Hardware integration (Arduino, etc.)
 4. **Nmsdk-PulseLib** - Spiking Neural Networks
 5. **Nmsdk-MotionControlLib** - Motion control and robotics
-
-#### Machine Learning Libraries
-
-6. **Rdk-PyMachineLearningLib** - Integration with Python ML libraries
-7. **Rdk-TensorflowLib** - TensorFlow integration
-8. **Rdk-DarknetLib** - Darknet integration
 
 ### Library Dependencies
 
@@ -194,28 +160,6 @@ Libraries are loaded through the `RdkLoadPredefinedLibraries()` function in `Lib
    - [Component Catalog](../Libraries/Nmsdk-MotionControlLib/Docs/Component-Catalog.md) - list of all components
    - [API Overview](../Libraries/Nmsdk-MotionControlLib/Docs/API-Overview.md) - API overview
 
-#### Machine Learning Libraries
-
-6. **Rdk-PyMachineLearningLib** - Python ML
-   - [Root Documentation](Rdk-PyMachineLearningLib.md) - library overview
-   - [Detailed Documentation](../Libraries/Rdk-PyMachineLearningLib/Docs/README.md) - complete documentation in library repository
-   - [Architecture](../Libraries/Rdk-PyMachineLearningLib/Docs/Architecture.md) - library architecture
-   - [Component Catalog](../Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md) - list of all components
-   - [API Overview](../Libraries/Rdk-PyMachineLearningLib/Docs/API-Overview.md) - API overview
-
-7. **Rdk-TensorflowLib** - TensorFlow
-   - [Root Documentation](Rdk-TensorflowLib.md) - library overview
-   - [Detailed Documentation](../Libraries/Rdk-TensorflowLib/Docs/README.md) - complete documentation in library repository
-   - [Architecture](../Libraries/Rdk-TensorflowLib/Docs/Architecture.md) - library architecture
-   - [Component Catalog](../Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md) - list of all components
-   - [API Overview](../Libraries/Rdk-TensorflowLib/Docs/API-Overview.md) - API overview
-
-8. **Rdk-DarknetLib** - Darknet
-   - [Root Documentation](Rdk-DarknetLib.md) - library overview
-   - [Detailed Documentation](../Libraries/Rdk-DarknetLib/Docs/README.md) - complete documentation in library repository
-   - [Architecture](../Libraries/Rdk-DarknetLib/Docs/Architecture.md) - library architecture
-   - [Component Catalog](../Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md) - list of all components
-   - [API Overview](../Libraries/Rdk-DarknetLib/Docs/API-Overview.md) - API overview
 
 ### Documentation Indexes
 
@@ -224,4 +168,4 @@ Libraries are loaded through the `RdkLoadPredefinedLibraries()` function in `Lib
 
 ### See Also
 
-- [Component System](../Components-And-Configuration/Component-System.md)
+- [Component System](../Rdk/Docs/Guides/Component-System.md)

@@ -4,6 +4,8 @@
 
 ### Обзор
 
+**Примечание:** Детальная информация о работе с конфигурациями через классы Rdk (UProject, UApplication, UXMLEnvSerialize, UProjectDeployer) находится в [Rdk/Docs/Configuration-Management.md](../../Rdk/Docs/Configuration-Management.md).
+
 Конфигурационные файлы в `Bin/Configs/` используются для настройки проектов, компонентов и приложения.
 
 ### Типы конфигурационных файлов
@@ -49,5 +51,7 @@ Project configurations contain:
 
 ### See Also
 
-- [Bin/Docs](../../Bin/Docs/) - detailed configuration documentation
+- [Rdk/Docs/Configuration-Management.md](../../Rdk/Docs/Configuration-Management.md) - detailed information about working with configurations through Rdk classes (UProject, UApplication, UXMLEnvSerialize, UProjectDeployer)
+- [Bin/Docs/Configs-Structure.md](../../Bin/Docs/Configs-Structure.md) - configuration file structure in Bin
+- [Bin/Docs](../../Bin/Docs/) - resources and configurations documentation
 - [Component System](Component-System.md)

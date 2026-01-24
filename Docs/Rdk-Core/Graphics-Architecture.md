@@ -149,9 +149,10 @@ XML сериализация графических данных.
 
 ### См. также
 
-- [GUI Overview](../GUI/Overview.md)
-- [Style System](../GUI/Style-System.md)
+- [GUI Overview](../../Docs/GUI/Overview.md)
+- [Style System](../../Docs/GUI/Style-System.md)
 - [Rdk Core Overview](Overview.md)
+- [Детальная документация Graphics](../../Rdk/Docs/Graphics-Detailed.md)
 
 ---
 

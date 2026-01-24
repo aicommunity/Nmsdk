@@ -13,7 +13,7 @@ flowchart TB
     Root[Docs/<br/>Корневая документация]
     
     Root --> Overview[Overview/<br/>Обзор проекта]
-    Root --> RdkCore[Rdk-Core/<br/>Обзор ядра]
+    Root --> RdkCore[Rdk/Docs/Architecture/<br/>Обзор ядра]
     Root --> Libraries[Libraries/<br/>Обзор библиотек]
     Root --> GUI[GUI/<br/>Интерфейс]
     Root --> Build[Build-And-Deploy/<br/>Сборка]
@@ -42,9 +42,6 @@ flowchart TB
     LibDocs --> BasicLib[Rdk-BasicLib/Docs/]
     LibDocs --> CvLib[Rdk-CvBasicLib/Docs/]
     LibDocs --> HardwareLib[Rdk-HardwareLib/Docs/]
-    LibDocs --> PyMLLib[Rdk-PyMachineLearningLib/Docs/]
-    LibDocs --> TfLib[Rdk-TensorflowLib/Docs/]
-    LibDocs --> DarknetLib[Rdk-DarknetLib/Docs/]
     
     PulseLib --> PulseComponents[Components/]
     MotionLib --> MotionComponents[Components/]
@@ -74,7 +71,7 @@ flowchart TB
 
 #### Rdk Core
 
-- [Обзор Rdk Core](../Rdk-Core/Overview.md) - обзор ядра системы
+- [Обзор Rdk Core](../../Rdk/Docs/Architecture/Overview.md) - обзор ядра системы
 - [Документация Rdk](../../Rdk/Docs/README.md) - детальная документация ядра
 - [Архитектура Rdk](../../Rdk/Docs/Architecture.md) - архитектура подсистем
 - [API Справочник](../../Rdk/Docs/API-Reference.md) - полный справочник API
@@ -100,14 +97,6 @@ flowchart TB
 - [Rdk-HardwareLib](../Libraries/Rdk-HardwareLib.md) - аппаратное обеспечение
   - [Документация](../../Libraries/Rdk-HardwareLib/Docs/README.md)
 
-##### Библиотеки машинного обучения
-
-- [Rdk-PyMachineLearningLib](../Libraries/Rdk-PyMachineLearningLib.md) - Python ML
-  - [Документация](../../Libraries/Rdk-PyMachineLearningLib/Docs/README.md)
-- [Rdk-TensorflowLib](../Libraries/Rdk-TensorflowLib.md) - TensorFlow
-  - [Документация](../../Libraries/Rdk-TensorflowLib/Docs/README.md)
-- [Rdk-DarknetLib](../Libraries/Rdk-DarknetLib.md) - Darknet
-  - [Документация](../../Libraries/Rdk-DarknetLib/Docs/README.md)
 
 ### Пути навигации
 
@@ -119,7 +108,7 @@ flowchart TB
 
 #### Для разработчиков
 
-1. [Rdk Core Overview](../Rdk-Core/Overview.md) → [Индекс документации Rdk](Rdk-Index.md)
+1. [Rdk Core Overview](../../Rdk/Docs/Architecture/Overview.md) → [Индекс документации Rdk](Rdk-Index.md)
 2. [Guides](../../Rdk/Docs/Guides/Creating-Components.md) → Создание компонентов
 3. [API Reference](../../Rdk/Docs/API-Reference.md) → Справочник API
 
@@ -180,7 +169,7 @@ flowchart TB
     Root[Docs/<br/>Root Documentation]
     
     Root --> Overview[Overview/<br/>Project Overview]
-    Root --> RdkCore[Rdk-Core/<br/>Core Overview]
+    Root --> RdkCore[Rdk/Docs/Architecture/<br/>Core Overview]
     Root --> Libraries[Libraries/<br/>Libraries Overview]
     Root --> GUI[GUI/<br/>Interface]
     Root --> Build[Build-And-Deploy/<br/>Build]
@@ -209,9 +198,6 @@ flowchart TB
     LibDocs --> BasicLib[Rdk-BasicLib/Docs/]
     LibDocs --> CvLib[Rdk-CvBasicLib/Docs/]
     LibDocs --> HardwareLib[Rdk-HardwareLib/Docs/]
-    LibDocs --> PyMLLib[Rdk-PyMachineLearningLib/Docs/]
-    LibDocs --> TfLib[Rdk-TensorflowLib/Docs/]
-    LibDocs --> DarknetLib[Rdk-DarknetLib/Docs/]
     
     PulseLib --> PulseComponents[Components/]
     MotionLib --> MotionComponents[Components/]
@@ -241,7 +227,7 @@ flowchart TB
 
 #### Rdk Core
 
-- [Rdk Core Overview](../Rdk-Core/Overview.md) - system core overview
+- [Rdk Core Overview](../../Rdk/Docs/Architecture/Overview.md) - system core overview
 - [Rdk Documentation](../../Rdk/Docs/README.md) - detailed core documentation
 - [Rdk Architecture](../../Rdk/Docs/Architecture.md) - subsystem architecture
 - [API Reference](../../Rdk/Docs/API-Reference.md) - complete API reference
@@ -267,14 +253,6 @@ flowchart TB
 - [Rdk-HardwareLib](../Libraries/Rdk-HardwareLib.md) - hardware
   - [Documentation](../../Libraries/Rdk-HardwareLib/Docs/README.md)
 
-##### Machine Learning Libraries
-
-- [Rdk-PyMachineLearningLib](../Libraries/Rdk-PyMachineLearningLib.md) - Python ML
-  - [Documentation](../../Libraries/Rdk-PyMachineLearningLib/Docs/README.md)
-- [Rdk-TensorflowLib](../Libraries/Rdk-TensorflowLib.md) - TensorFlow
-  - [Documentation](../../Libraries/Rdk-TensorflowLib/Docs/README.md)
-- [Rdk-DarknetLib](../Libraries/Rdk-DarknetLib.md) - Darknet
-  - [Documentation](../../Libraries/Rdk-DarknetLib/Docs/README.md)
 
 ### Navigation Paths
 
@@ -286,7 +264,7 @@ flowchart TB
 
 #### For Developers
 
-1. [Rdk Core Overview](../Rdk-Core/Overview.md) → [Rdk Documentation Index](Rdk-Index.md)
+1. [Rdk Core Overview](../../Rdk/Docs/Architecture/Overview.md) → [Rdk Documentation Index](Rdk-Index.md)
 2. [Guides](../../Rdk/Docs/Guides/Creating-Components.md) → Creating components
 3. [API Reference](../../Rdk/Docs/API-Reference.md) → API reference
 

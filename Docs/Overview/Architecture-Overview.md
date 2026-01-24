@@ -27,7 +27,6 @@ flowchart TB
         HardwareLib[Rdk-HardwareLib]
         PulseLib[Nmsdk-PulseLib]
         MotionLib[Nmsdk-MotionControlLib]
-        MLLibs[ML Libraries]
     end
     
     subgraph "Resources"
@@ -50,7 +49,6 @@ flowchart TB
     Engine --> HardwareLib
     Engine --> PulseLib
     Engine --> MotionLib
-    Engine --> MLLibs
     
     AppCore --> Configs
     GUI --> Help
@@ -120,9 +118,6 @@ flowchart TB
 - **Rdk-HardwareLib** - работа с аппаратным обеспечением
 - **Nmsdk-PulseLib** - импульсные нейронные сети
 - **Nmsdk-MotionControlLib** - управление движением
-- **Rdk-PyMachineLearningLib** - интеграция с Python ML
-- **Rdk-TensorflowLib** - интеграция с TensorFlow
-- **Rdk-DarknetLib** - интеграция с Darknet
 
 #### 4. Ресурсы (Resources)
 
@@ -223,10 +218,10 @@ graph TD
 
 ### См. также
 
-- [Rdk Core Architecture](../Rdk-Core/Overview.md) - детальная архитектура ядра
-- [Application Architecture](../Rdk-Core/Application-Architecture.md) - архитектура приложения
-- [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - архитектура движка
-- [Component System](../Components-And-Configuration/Component-System.md) - компонентная система
+- [Rdk Core Architecture](../Rdk/Docs/Architecture/Overview.md) - детальная архитектура ядра
+- [Application Architecture](../Rdk/Docs/Architecture/Application-Architecture.md) - архитектура приложения
+- [Engine Architecture](../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
+- [Component System](../Rdk/Docs/Guides/Component-System.md) - компонентная система
 
 ---
 

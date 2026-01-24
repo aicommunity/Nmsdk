@@ -69,9 +69,6 @@ flowchart LR
     RdkCore --> HardwareLib[Rdk-HardwareLib]
     BasicLib --> PulseLib[Nmsdk-PulseLib]
     BasicLib --> MotionLib[Nmsdk-MotionControlLib]
-    CvLib --> PyMLLib[Rdk-PyMachineLearningLib]
-    CvLib --> TfLib[Rdk-TensorflowLib]
-    CvLib --> DarknetLib[Rdk-DarknetLib]
     
     RdkCore --> App[NeuroModeler]
     BasicLib --> App
@@ -86,16 +83,10 @@ flowchart LR
 
 **Опциональные:**
 - OpenCV - для Rdk-CvBasicLib
-- Python - для Rdk-PyMachineLearningLib
-- TensorFlow - для Rdk-TensorflowLib
-- Darknet - для Rdk-DarknetLib
 - ODE Solver - для Nmsdk-PulseLib
 
 ### Опции CMake
 
-- `RDK_USE_PYTHON` - включить поддержку Python
-- `RDK_USE_TENSORFLOW` - включить поддержку TensorFlow
-- `RDK_USE_DARKNET` - включить поддержку Darknet
 - `RDK_USE_ODESOLVER` - включить поддержку ODE Solver
 
 ### См. также
@@ -155,16 +146,10 @@ The flowchart in the Russian section illustrates the complete build pipeline, in
 
 **Optional:**
 - OpenCV - for Rdk-CvBasicLib
-- Python - for Rdk-PyMachineLearningLib
-- TensorFlow - for Rdk-TensorflowLib
-- Darknet - for Rdk-DarknetLib
 - ODE Solver - for Nmsdk-PulseLib
 
 ### CMake Options
 
-- `RDK_USE_PYTHON` - enable Python support
-- `RDK_USE_TENSORFLOW` - enable TensorFlow support
-- `RDK_USE_DARKNET` - enable Darknet support
 - `RDK_USE_ODESOLVER` - enable ODE Solver support
 
 ### See Also

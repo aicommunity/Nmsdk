@@ -49,11 +49,17 @@
 
 - [Creating-Components.md](../../Rdk/Docs/Guides/Creating-Components.md) - создание компонентов
 - [Creating-Properties.md](../../Rdk/Docs/Guides/Creating-Properties.md) - создание свойств
+- [Component-System.md](../../Rdk/Docs/Guides/Component-System.md) - компонентная система
+- [Creating-Components.md](../../Rdk/Docs/Guides/Creating-Components.md) - создание компонентов (краткое руководство)
+- [Component-Development.md](../../Rdk/Docs/Guides/Component-Development.md) - разработка компонентов (детальное руководство)
+- [Creating-Properties.md](../../Rdk/Docs/Guides/Creating-Properties.md) - создание свойств
 - [Creating-Controllers.md](../../Rdk/Docs/Guides/Creating-Controllers.md) - создание контроллеров
 - [Serialization-Guide.md](../../Rdk/Docs/Guides/Serialization-Guide.md) - работа с сериализацией
 - [RPC-Integration.md](../../Rdk/Docs/Guides/RPC-Integration.md) - интеграция RPC
 - [Threading-Guide.md](../../Rdk/Docs/Guides/Threading-Guide.md) - многопоточность
 - [Error-Handling.md](../../Rdk/Docs/Guides/Error-Handling.md) - обработка ошибок
+- [Project-Management.md](../../Rdk/Docs/Guides/Project-Management.md) - управление проектами
+- [Configuration-Management.md](../../Rdk/Docs/Configuration-Management.md) - управление конфигурациями (UProject, UApplication, деплой)
 
 ### Диаграммы
 
@@ -66,12 +72,12 @@
 
 Для обзорной информации см. корневую документацию проекта:
 
-- [Rdk Core Overview](../Rdk-Core/Overview.md) - обзор Rdk Core
-- [Application Architecture](../Rdk-Core/Application-Architecture.md) - архитектура приложения
-- [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - архитектура движка
-- [Graphics Architecture](../Rdk-Core/Graphics-Architecture.md) - архитектура графики
-- [Serialize Architecture](../Rdk-Core/Serialize-Architecture.md) - архитектура сериализации
-- [System Platform Abstraction](../Rdk-Core/System-Platform-Abstraction.md) - системные абстракции
+- [Rdk Core Overview](../../Rdk/Docs/Architecture/Overview.md) - обзор Rdk Core
+- [Application Architecture](../../Rdk/Docs/Architecture/Application-Architecture.md) - архитектура приложения
+- [Engine Architecture](../../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
+- [Graphics Architecture](../../Rdk/Docs/Architecture/Graphics-Architecture.md) - архитектура графики
+- [Serialize Architecture](../../Rdk/Docs/Architecture/Serialize-Architecture.md) - архитектура сериализации
+- [System Platform Abstraction](../../Rdk/Docs/Architecture/System-Platform-Abstraction.md) - системные абстракции
 
 ### Дополнительные разделы
 
@@ -140,6 +146,7 @@ This document contains a complete structured index of all Rdk Core documentation
 - [RPC-Integration.md](../../Rdk/Docs/Guides/RPC-Integration.md) - RPC integration
 - [Threading-Guide.md](../../Rdk/Docs/Guides/Threading-Guide.md) - multithreading
 - [Error-Handling.md](../../Rdk/Docs/Guides/Error-Handling.md) - error handling
+- [Configuration-Management.md](../../Rdk/Docs/Configuration-Management.md) - configuration management (UProject, UApplication, deployment)
 
 ### Diagrams
 
@@ -152,12 +159,12 @@ This document contains a complete structured index of all Rdk Core documentation
 
 For overview information see root project documentation:
 
-- [Rdk Core Overview](../Rdk-Core/Overview.md) - Rdk Core overview
-- [Application Architecture](../Rdk-Core/Application-Architecture.md) - application architecture
-- [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - engine architecture
-- [Graphics Architecture](../Rdk-Core/Graphics-Architecture.md) - graphics architecture
-- [Serialize Architecture](../Rdk-Core/Serialize-Architecture.md) - serialization architecture
-- [System Platform Abstraction](../Rdk-Core/System-Platform-Abstraction.md) - system abstractions
+- [Rdk Core Overview](../../Rdk/Docs/Architecture/Overview.md) - Rdk Core overview
+- [Application Architecture](../../Rdk/Docs/Architecture/Application-Architecture.md) - application architecture
+- [Engine Architecture](../../Rdk/Docs/Architecture/Engine-Architecture.md) - engine architecture
+- [Graphics Architecture](../../Rdk/Docs/Architecture/Graphics-Architecture.md) - graphics architecture
+- [Serialize Architecture](../../Rdk/Docs/Architecture/Serialize-Architecture.md) - serialization architecture
+- [System Platform Abstraction](../../Rdk/Docs/Architecture/System-Platform-Abstraction.md) - system abstractions
 
 ### Additional Sections
 

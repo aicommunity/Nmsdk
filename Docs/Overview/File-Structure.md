@@ -22,10 +22,7 @@ Nmsdk/
 │   ├── Rdk-CvBasicLib/     # Компьютерное зрение
 │   ├── Rdk-HardwareLib/    # Работа с железом
 │   ├── Nmsdk-PulseLib/     # Импульсные нейронные сети
-│   ├── Nmsdk-MotionControlLib/  # Управление движением
-│   ├── Rdk-PyMachineLearningLib/  # Python ML интеграция
-│   ├── Rdk-TensorflowLib/  # TensorFlow интеграция
-│   └── Rdk-DarknetLib/     # Darknet интеграция
+│   └── Nmsdk-MotionControlLib/  # Управление движением
 │
 ├── Bin/                    # Скомпилированные бинарники и конфиги
 │   ├── Configs/            # Конфигурационные файлы

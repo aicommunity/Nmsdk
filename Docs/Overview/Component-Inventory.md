@@ -12,14 +12,6 @@
 ## Rdk-HardwareLib
 - UHardwareLibrary.cpp: `Arduino`, `ADC`, `DC`
 
-## Rdk-DarknetLib
-- Lib.cpp: `TDarknetObjectDetector`, `TDarknetUBitmapClassifier`, `DarknetObjectDetector`, `DarknetUBitmapClassifier`
-
-## Rdk-TensorflowLib
-- Lib.cpp: `UTfClassifier`, `UTfDetector`, `UTfSqDetector`, `ClassifierTF`, `DetectorTF`, `DetectorTFSq`
-
-## Rdk-PyMachineLearningLib
-- Lib.cpp: `TPyUBitmapClassifier`, `TPyAggregateClassifier`, `TPyObjectDetectorBasic`, `TPyObjectDetector`, `TPyObjectDetectorSqueezeDet`, `TPySegmentatorProtobuf`, `TPySegmentatorUNet`, `TPyClassifierTrainer`, `TPyDetectorTrainer`, `TPySegmenterTrainer`, `TPyPredictSort`, `TPyDetPredict` (+ aliases `Py*` for классификатор/детектор/сегментатор/предикт)
 
 ## Nmsdk-PulseLib
 - NPulseLibrary.cpp: длинный список SNN-компонентов (нейроны, синапсы, каналы, мембраны, тренеры, классификаторы, рефлексы, предикторы и пр.) — см. исходник для полного набора; ключевые семейства включают `NPulseNeuron*`, `NSynapse*`, `NPulseChannel*`, `NNeuron*`, `N*Trainer*`, `N*Classifier*`, `N*Membrane*`, `N*LTZone*`, `N*Generator*`, `N*Predictor*`, `N*Life*`, `N*Hebb*`, `N*Stdp*`.

@@ -459,11 +459,6 @@ flowchart TB
         CvLib[Rdk-CvBasicLib]
     end
     
-    subgraph "ML Libraries"
-        TfLib[Rdk-TensorflowLib]
-        DarknetLib[Rdk-DarknetLib]
-        PyMLLib[Rdk-PyMachineLearningLib]
-    end
     
     subgraph "Application Libraries"
         PulseLib[Nmsdk-PulseLib]
@@ -473,12 +468,6 @@ flowchart TB
     
     Rdk --> BasicLib
     Rdk --> CvLib
-    BasicLib --> TfLib
-    BasicLib --> DarknetLib
-    BasicLib --> PyMLLib
-    CvLib --> TfLib
-    CvLib --> DarknetLib
-    TfLib --> PulseLib
     HardwareLib --> MotionLib
 ```
 

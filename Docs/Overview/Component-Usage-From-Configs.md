@@ -11,7 +11,6 @@
 - SNN / PulseLib: огромный перечень нейронов/синапсов/каналов/мембран/тренеров, включая `NPulseNeuron*`, `NSynapse*`, `NPulseChannel*`, `NNeuron*`, `N*Trainer*`, `N*Membrane*`, `N*LTZone*`, `N*Generator*`, `N*Predictor*`, `N*Life*`, `N*Hebb*`, `N*Stdp*`, `NClassifier`, `NSpikeClassifier`, `NPCAClassifier`.
 - MotionControlLib: `NDCEngine`, `NEngineMotionControl`, `NManipulator*`, `NEyeRetina`, `NPendulumAndCart`, `NMultiPositionControl`, `NTrajectoryElement`, `NPulseReceiver`, `NFrequencyReceiver`, `NMazeMemory*`, `NSignumSeparator/IntervalSeparator`, `NActuatorSignals`, `NSignalEstimation`, `NPCN`.
 - HardwareLib: `Arduino`, `ADC`, `DC`.
-- Darknet/Tensorflow/Python ML: встречаются только в исходниках (в конфигах не обнаружено явных классов из этих библиотек).
 
 ## Где совпадает регистрация и использование (приоритет для подробной документации)
 - Rdk-BasicLib / CvBasicLib: большинство классов, встречающихся в конфигах, зарегистрированы (см. `Docs/Overview/Component-Inventory.md`).
@@ -22,7 +21,6 @@
 ## Наблюдения и рекомендации
 1. **Фокус первых итераций** — компоненты, реально встречающиеся в `Configs/ClDesc` (выше перечислены основные семьи). Для них нужны: полное описание, диаграммы, примеры конфигов.
 2. **SNN и Motion Control** — большие семейства; стоит группировать по семействам (нейроны, синапсы, каналы, тренеры, классификаторы, рефлексы, предикторы) и покрывать их батчами.
-3. **ML-библиотеки (Darknet/Tensorflow/Python)** — регистрация есть, но в текущих `Configs` не видно; документировать архитектуру и примеры (даже если конфиги отсутствуют) как отдельные страницы «готовые к использованию».
 4. **Оставить след использования** — в документации компонентов указывать примеры из `Bin/Configs` (для сабрепо — текст пути, для корня — активная ссылка).
 
 Эта выжимка нужна для этапов группировки и приоритезации в библиотечных проходах.

@@ -50,7 +50,7 @@ bool MyComponent::ABuild(void) {
 ```
 
 **См. также:**
-- [Development-Guides/Component-Development.md](Development-Guides/Component-Development.md) - детальное руководство
+- [Component Development Guide](Rdk/Docs/Guides/Component-Development.md) - детальное руководство
 - [Rdk/Docs/Guides/Creating-Components.md](../Rdk/Docs/Guides/Creating-Components.md) - создание компонентов
 
 #### Управление памятью
@@ -318,7 +318,7 @@ virtual bool ACalculate(void) override {
 
 ### Дополнительные ресурсы
 
-- [Development-Guides/Component-Development.md](Development-Guides/Component-Development.md) - детальное руководство по разработке компонентов
+- [Component Development Guide](Rdk/Docs/Guides/Component-Development.md) - детальное руководство по разработке компонентов
 - [Development-Guides/Library-Development.md](Development-Guides/Library-Development.md) - разработка библиотек
 - [Rdk/Docs/Guides/](../Rdk/Docs/Guides/) - руководства по Rdk Core
 - [Performance-And-Testing/Performance-Overview.md](Performance-And-Testing/Performance-Overview.md) - производительность

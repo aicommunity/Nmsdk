@@ -680,7 +680,7 @@ sed -i 's/\([A-Za-z]*\) = \([A-Za-z]*\) \* \([A-Za-z]*\)/\1 = \2() * \3()/g' *.c
 
 - [Refactoring Timeline](../Refactoring-History/Refactoring-Timeline.md) - история изменений
 - [Lessons Learned](../Refactoring-History/Lessons-Learned.md) - уроки рефакторинга
-- [Component Development Guide](../Development-Guides/Component-Development.md) - разработка компонентов
+- [Component Development Guide](../Rdk/Docs/Guides/Component-Development.md) - разработка компонентов
 
 ---
 

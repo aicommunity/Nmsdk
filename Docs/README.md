@@ -25,12 +25,12 @@
 
 #### Основные компоненты
 
-- [Rdk Core](Rdk-Core/Overview.md) - ядро системы, движок, компонентная система
-  - [Архитектура приложения](Rdk-Core/Application-Architecture.md) - RPC, сервер, управление проектами
-  - [Архитектура движка](Rdk-Core/Engine-Architecture.md) - компоненты, контейнеры, свойства
-  - [Графика](Rdk-Core/Graphics-Architecture.md) - система графики и визуализации
-  - [Сериализация](Rdk-Core/Serialize-Architecture.md) - XML и бинарная сериализация
-  - [Системные абстракции](Rdk-Core/System-Platform-Abstraction.md) - кроссплатформенные абстракции
+- [Rdk Core](Rdk/Docs/Architecture/Overview.md) - ядро системы, движок, компонентная система
+  - [Архитектура приложения](Rdk/Docs/Architecture/Application-Architecture.md) - RPC, сервер, управление проектами
+  - [Архитектура движка](Rdk/Docs/Architecture/Engine-Architecture.md) - компоненты, контейнеры, свойства
+  - [Графика](Rdk/Docs/Architecture/Graphics-Architecture.md) - система графики и визуализации
+  - [Сериализация](Rdk/Docs/Architecture/Serialize-Architecture.md) - XML и бинарная сериализация
+  - [Системные абстракции](Rdk/Docs/Architecture/System-Platform-Abstraction.md) - кроссплатформенные абстракции
 
 - [GUI](GUI/Overview.md) - графический интерфейс пользователя
   - [Справочник виджетов](GUI/Widgets-Reference.md) - описание основных виджетов
@@ -44,9 +44,6 @@
 - [Rdk-HardwareLib](Libraries/Rdk-HardwareLib.md) - работа с аппаратным обеспечением
 - [Nmsdk-PulseLib](Libraries/Nmsdk-PulseLib.md) - импульсные нейронные сети
 - [Nmsdk-MotionControlLib](Libraries/Nmsdk-MotionControlLib.md) - управление движением
-- [Rdk-PyMachineLearningLib](Libraries/Rdk-PyMachineLearningLib.md) - интеграция с Python ML
-- [Rdk-TensorflowLib](Libraries/Rdk-TensorflowLib.md) - интеграция с TensorFlow
-- [Rdk-DarknetLib](Libraries/Rdk-DarknetLib.md) - интеграция с Darknet
 
 #### Сборка и развертывание
 
@@ -155,29 +152,6 @@
 - [API Обзор](../Libraries/Rdk-HardwareLib/Docs/API-Overview.md) - обзор API
 - [Документация компонентов](../Libraries/Rdk-HardwareLib/Docs/Components/) - детальная документация по каждому компоненту
 
-##### Rdk-PyMachineLearningLib
-- [Обзор](../Libraries/Rdk-PyMachineLearningLib/Docs/README.md) - главная страница документации
-- [Архитектура](../Libraries/Rdk-PyMachineLearningLib/Docs/Architecture.md) - архитектура библиотеки
-- [Каталог компонентов](../Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md) - список всех компонентов
-- [Примеры использования](../Libraries/Rdk-PyMachineLearningLib/Docs/Usage-Examples.md) - практические примеры
-- [API Обзор](../Libraries/Rdk-PyMachineLearningLib/Docs/API-Overview.md) - обзор API
-- [Документация компонентов](../Libraries/Rdk-PyMachineLearningLib/Docs/Components/) - детальная документация по каждому компоненту
-
-##### Rdk-TensorflowLib
-- [Обзор](../Libraries/Rdk-TensorflowLib/Docs/README.md) - главная страница документации
-- [Архитектура](../Libraries/Rdk-TensorflowLib/Docs/Architecture.md) - архитектура библиотеки
-- [Каталог компонентов](../Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md) - список всех компонентов
-- [Примеры использования](../Libraries/Rdk-TensorflowLib/Docs/Usage-Examples.md) - практические примеры
-- [API Обзор](../Libraries/Rdk-TensorflowLib/Docs/API-Overview.md) - обзор API
-- [Документация компонентов](../Libraries/Rdk-TensorflowLib/Docs/Components/) - детальная документация по каждому компоненту
-
-##### Rdk-DarknetLib
-- [Обзор](../Libraries/Rdk-DarknetLib/Docs/README.md) - главная страница документации
-- [Архитектура](../Libraries/Rdk-DarknetLib/Docs/Architecture.md) - архитектура библиотеки
-- [Каталог компонентов](../Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md) - список всех компонентов
-- [Примеры использования](../Libraries/Rdk-DarknetLib/Docs/Usage-Examples.md) - практические примеры
-- [API Обзор](../Libraries/Rdk-DarknetLib/Docs/API-Overview.md) - обзор API
-- [Документация компонентов](../Libraries/Rdk-DarknetLib/Docs/Components/) - детальная документация по каждому компоненту
 
 - [Полный индекс документации библиотек](Submodules/Libraries-Index.md)
 - [Навигационная карта документации](Submodules/Navigation-Map.md)
@@ -209,12 +183,12 @@ Welcome to the documentation of **Nmsdk (Neuro Modeler SDK)** - SDK for neural n
 
 #### Core Components
 
-- [Rdk Core](Rdk-Core/Overview.md) - system core, engine, component system
-  - [Application Architecture](Rdk-Core/Application-Architecture.md) - RPC, server, project management
-  - [Engine Architecture](Rdk-Core/Engine-Architecture.md) - components, containers, properties
-  - [Graphics](Rdk-Core/Graphics-Architecture.md) - graphics and visualization system
-  - [Serialization](Rdk-Core/Serialize-Architecture.md) - XML and binary serialization
-  - [System Abstractions](Rdk-Core/System-Platform-Abstraction.md) - cross-platform abstractions
+- [Rdk Core](Rdk/Docs/Architecture/Overview.md) - system core, engine, component system
+  - [Application Architecture](Rdk/Docs/Architecture/Application-Architecture.md) - RPC, server, project management
+  - [Engine Architecture](Rdk/Docs/Architecture/Engine-Architecture.md) - components, containers, properties
+  - [Graphics](Rdk/Docs/Architecture/Graphics-Architecture.md) - graphics and visualization system
+  - [Serialization](Rdk/Docs/Architecture/Serialize-Architecture.md) - XML and binary serialization
+  - [System Abstractions](Rdk/Docs/Architecture/System-Platform-Abstraction.md) - cross-platform abstractions
 
 - [GUI](GUI/Overview.md) - graphical user interface
   - [Widgets Reference](GUI/Widgets-Reference.md) - description of main widgets
@@ -228,9 +202,6 @@ Welcome to the documentation of **Nmsdk (Neuro Modeler SDK)** - SDK for neural n
 - [Rdk-HardwareLib](Libraries/Rdk-HardwareLib.md) - hardware integration
 - [Nmsdk-PulseLib](Libraries/Nmsdk-PulseLib.md) - spiking neural networks
 - [Nmsdk-MotionControlLib](Libraries/Nmsdk-MotionControlLib.md) - motion control
-- [Rdk-PyMachineLearningLib](Libraries/Rdk-PyMachineLearningLib.md) - Python ML integration
-- [Rdk-TensorflowLib](Libraries/Rdk-TensorflowLib.md) - TensorFlow integration
-- [Rdk-DarknetLib](Libraries/Rdk-DarknetLib.md) - Darknet integration
 
 #### Build and Deploy
 
@@ -241,7 +212,7 @@ Welcome to the documentation of **Nmsdk (Neuro Modeler SDK)** - SDK for neural n
 
 #### Components and Configuration
 
-- [Component System](Components-And-Configuration/Component-System.md) - creating and using components
+- [Component System](Rdk/Docs/Guides/Component-System.md) - creating and using components
 - [Configuration Files](Components-And-Configuration/Configuration-Files-Overview.md) - config structure
 - [Direct Property Access](Components-And-Configuration/Direct-Property-Access.md) - property access optimization
 
@@ -350,29 +321,6 @@ Welcome to the documentation of **Nmsdk (Neuro Modeler SDK)** - SDK for neural n
 - [API Overview](../Libraries/Rdk-HardwareLib/Docs/API-Overview.md) - API overview
 - [Component Documentation](../Libraries/Rdk-HardwareLib/Docs/Components/) - detailed documentation for each component
 
-##### Rdk-PyMachineLearningLib
-- [Overview](../Libraries/Rdk-PyMachineLearningLib/Docs/README.md) - main documentation page
-- [Architecture](../Libraries/Rdk-PyMachineLearningLib/Docs/Architecture.md) - library architecture
-- [Component Catalog](../Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md) - list of all components
-- [Usage Examples](../Libraries/Rdk-PyMachineLearningLib/Docs/Usage-Examples.md) - practical examples
-- [API Overview](../Libraries/Rdk-PyMachineLearningLib/Docs/API-Overview.md) - API overview
-- [Component Documentation](../Libraries/Rdk-PyMachineLearningLib/Docs/Components/) - detailed documentation for each component
-
-##### Rdk-TensorflowLib
-- [Overview](../Libraries/Rdk-TensorflowLib/Docs/README.md) - main documentation page
-- [Architecture](../Libraries/Rdk-TensorflowLib/Docs/Architecture.md) - library architecture
-- [Component Catalog](../Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md) - list of all components
-- [Usage Examples](../Libraries/Rdk-TensorflowLib/Docs/Usage-Examples.md) - practical examples
-- [API Overview](../Libraries/Rdk-TensorflowLib/Docs/API-Overview.md) - API overview
-- [Component Documentation](../Libraries/Rdk-TensorflowLib/Docs/Components/) - detailed documentation for each component
-
-##### Rdk-DarknetLib
-- [Overview](../Libraries/Rdk-DarknetLib/Docs/README.md) - main documentation page
-- [Architecture](../Libraries/Rdk-DarknetLib/Docs/Architecture.md) - library architecture
-- [Component Catalog](../Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md) - list of all components
-- [Usage Examples](../Libraries/Rdk-DarknetLib/Docs/Usage-Examples.md) - practical examples
-- [API Overview](../Libraries/Rdk-DarknetLib/Docs/API-Overview.md) - API overview
-- [Component Documentation](../Libraries/Rdk-DarknetLib/Docs/Components/) - detailed documentation for each component
 
 - [Complete Libraries Documentation Index](Submodules/Libraries-Index.md)
 - [Documentation Navigation Map](Submodules/Navigation-Map.md)

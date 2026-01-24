@@ -31,7 +31,7 @@ Nmsdk поддерживает сборку и выполнение на раз�
 
 ### См. также
 
-- [System Platform Abstraction](../Rdk-Core/System-Platform-Abstraction.md) - детальное описание абстракций
+- [System Platform Abstraction](../Rdk/Docs/Architecture/System-Platform-Abstraction.md) - детальное описание абстракций
 - [Build System](Build-System.md)
 - [Reports/11-Cross-Platform-Support.md](../../Reports/11-Cross-Platform-Support.md) - детальное описание
 

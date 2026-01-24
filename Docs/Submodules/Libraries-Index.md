@@ -98,57 +98,6 @@
 
 **Корневая документация:** [Rdk-HardwareLib](../Libraries/Rdk-HardwareLib.md)
 
-### Библиотеки машинного обучения
-
-#### Rdk-PyMachineLearningLib
-
-**Назначение:** Интеграция с Python библиотеками машинного обучения.
-
-- [Обзор](../../Libraries/Rdk-PyMachineLearningLib/Docs/README.md) - главная страница документации
-- [Архитектура](../../Libraries/Rdk-PyMachineLearningLib/Docs/Architecture.md) - архитектура библиотеки
-- [Каталог компонентов](../../Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md) - список всех компонентов
-- [Примеры использования](../../Libraries/Rdk-PyMachineLearningLib/Docs/Usage-Examples.md) - практические примеры
-- [API Обзор](../../Libraries/Rdk-PyMachineLearningLib/Docs/API-Overview.md) - обзор API
-- [Документация компонентов](../../Libraries/Rdk-PyMachineLearningLib/Docs/Components/) - детальная документация
-  - PyMLComponents, TPyAggregateClassifier, TPyBaseTrainer
-  - TPyClassifierTrainer, TPyComponent, TPyDetectorTrainer
-  - TPyDetPredict, TPyObjectDetector, TPyObjectDetectorSqueezeDet
-  - TPyObjectDetectorYolo, TPyObjectDetectorYoloEx, TPyPredictSort
-  - TPySegmentator, TPySegmentatorProtobuf, TPySegmentatorUNet
-  - TPySegmenterTrainer, TPythonIntegration, TPyUBitmapClassifier
-- [Диаграммы](../../Libraries/Rdk-PyMachineLearningLib/Docs/Diagrams/) - диаграммы ML-пайплайнов и интеграции с Python
-
-**Корневая документация:** [Rdk-PyMachineLearningLib](../Libraries/Rdk-PyMachineLearningLib.md)
-
-#### Rdk-TensorflowLib
-
-**Назначение:** Интеграция с TensorFlow для машинного обучения.
-
-- [Обзор](../../Libraries/Rdk-TensorflowLib/Docs/README.md) - главная страница документации
-- [Архитектура](../../Libraries/Rdk-TensorflowLib/Docs/Architecture.md) - архитектура библиотеки
-- [Каталог компонентов](../../Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md) - список всех компонентов
-- [Примеры использования](../../Libraries/Rdk-TensorflowLib/Docs/Usage-Examples.md) - практические примеры
-- [API Обзор](../../Libraries/Rdk-TensorflowLib/Docs/API-Overview.md) - обзор API
-- [Документация компонентов](../../Libraries/Rdk-TensorflowLib/Docs/Components/) - детальная документация
-  - TfComponents, UTfClassifier, UTfComponent, UTfDetector, UTfSqDetector
-- [Диаграммы](../../Libraries/Rdk-TensorflowLib/Docs/Diagrams/) - диаграммы TensorFlow пайплайнов
-
-**Корневая документация:** [Rdk-TensorflowLib](../Libraries/Rdk-TensorflowLib.md)
-
-#### Rdk-DarknetLib
-
-**Назначение:** Интеграция с Darknet для детекции объектов и классификации изображений.
-
-- [Обзор](../../Libraries/Rdk-DarknetLib/Docs/README.md) - главная страница документации
-- [Архитектура](../../Libraries/Rdk-DarknetLib/Docs/Architecture.md) - архитектура библиотеки
-- [Каталог компонентов](../../Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md) - список всех компонентов
-- [Примеры использования](../../Libraries/Rdk-DarknetLib/Docs/Usage-Examples.md) - практические примеры
-- [API Обзор](../../Libraries/Rdk-DarknetLib/Docs/API-Overview.md) - обзор API
-- [Документация компонентов](../../Libraries/Rdk-DarknetLib/Docs/Components/) - детальная документация
-  - DarknetComponents, TDarknetObjectDetector, TDarknetUBitmapClassifier
-- [Диаграммы](../../Libraries/Rdk-DarknetLib/Docs/Diagrams/) - диаграммы Darknet пайплайнов
-
-**Корневая документация:** [Rdk-DarknetLib](../Libraries/Rdk-DarknetLib.md)
 
 ### Зависимости между библиотеками
 
@@ -258,57 +207,6 @@ This document contains a complete structured index of all component library docu
 
 **Root Documentation:** [Rdk-HardwareLib](../Libraries/Rdk-HardwareLib.md)
 
-### Machine Learning Libraries
-
-#### Rdk-PyMachineLearningLib
-
-**Purpose:** Integration with Python machine learning libraries.
-
-- [Overview](../../Libraries/Rdk-PyMachineLearningLib/Docs/README.md) - main documentation page
-- [Architecture](../../Libraries/Rdk-PyMachineLearningLib/Docs/Architecture.md) - library architecture
-- [Component Catalog](../../Libraries/Rdk-PyMachineLearningLib/Docs/Component-Catalog.md) - list of all components
-- [Usage Examples](../../Libraries/Rdk-PyMachineLearningLib/Docs/Usage-Examples.md) - practical examples
-- [API Overview](../../Libraries/Rdk-PyMachineLearningLib/Docs/API-Overview.md) - API overview
-- [Component Documentation](../../Libraries/Rdk-PyMachineLearningLib/Docs/Components/) - detailed documentation
-  - PyMLComponents, TPyAggregateClassifier, TPyBaseTrainer
-  - TPyClassifierTrainer, TPyComponent, TPyDetectorTrainer
-  - TPyDetPredict, TPyObjectDetector, TPyObjectDetectorSqueezeDet
-  - TPyObjectDetectorYolo, TPyObjectDetectorYoloEx, TPyPredictSort
-  - TPySegmentator, TPySegmentatorProtobuf, TPySegmentatorUNet
-  - TPySegmenterTrainer, TPythonIntegration, TPyUBitmapClassifier
-- [Diagrams](../../Libraries/Rdk-PyMachineLearningLib/Docs/Diagrams/) - ML pipeline and Python integration diagrams
-
-**Root Documentation:** [Rdk-PyMachineLearningLib](../Libraries/Rdk-PyMachineLearningLib.md)
-
-#### Rdk-TensorflowLib
-
-**Purpose:** Integration with TensorFlow for machine learning.
-
-- [Overview](../../Libraries/Rdk-TensorflowLib/Docs/README.md) - main documentation page
-- [Architecture](../../Libraries/Rdk-TensorflowLib/Docs/Architecture.md) - library architecture
-- [Component Catalog](../../Libraries/Rdk-TensorflowLib/Docs/Component-Catalog.md) - list of all components
-- [Usage Examples](../../Libraries/Rdk-TensorflowLib/Docs/Usage-Examples.md) - practical examples
-- [API Overview](../../Libraries/Rdk-TensorflowLib/Docs/API-Overview.md) - API overview
-- [Component Documentation](../../Libraries/Rdk-TensorflowLib/Docs/Components/) - detailed documentation
-  - TfComponents, UTfClassifier, UTfComponent, UTfDetector, UTfSqDetector
-- [Diagrams](../../Libraries/Rdk-TensorflowLib/Docs/Diagrams/) - TensorFlow pipeline diagrams
-
-**Root Documentation:** [Rdk-TensorflowLib](../Libraries/Rdk-TensorflowLib.md)
-
-#### Rdk-DarknetLib
-
-**Purpose:** Integration with Darknet for object detection and image classification.
-
-- [Overview](../../Libraries/Rdk-DarknetLib/Docs/README.md) - main documentation page
-- [Architecture](../../Libraries/Rdk-DarknetLib/Docs/Architecture.md) - library architecture
-- [Component Catalog](../../Libraries/Rdk-DarknetLib/Docs/Component-Catalog.md) - list of all components
-- [Usage Examples](../../Libraries/Rdk-DarknetLib/Docs/Usage-Examples.md) - practical examples
-- [API Overview](../../Libraries/Rdk-DarknetLib/Docs/API-Overview.md) - API overview
-- [Component Documentation](../../Libraries/Rdk-DarknetLib/Docs/Components/) - detailed documentation
-  - DarknetComponents, TDarknetObjectDetector, TDarknetUBitmapClassifier
-- [Diagrams](../../Libraries/Rdk-DarknetLib/Docs/Diagrams/) - Darknet pipeline diagrams
-
-**Root Documentation:** [Rdk-DarknetLib](../Libraries/Rdk-DarknetLib.md)
 
 ### Library Dependencies
 

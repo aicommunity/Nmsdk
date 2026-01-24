@@ -109,7 +109,7 @@ void ProcessData() {
 ### Связанная документация
 
 - [Rdk/Docs/Examples/Component-Creation-Example.md](../Rdk/Docs/Examples/Component-Creation-Example.md) - детальный пример создания компонента
-- [Components-And-Configuration/Component-System.md](../Components-And-Configuration/Component-System.md) - компонентная система
+- [Component System](../Rdk/Docs/Guides/Component-System.md) - компонентная система
 - [Rdk-BasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - примеры использования Rdk-BasicLib
 
 ---

@@ -887,7 +887,7 @@ TEST(CriticalTest, CriticalChecks)
 
 - [Rdk/Tests/](../../Rdk/Tests/) - исходный код тестов
 - [Reports/33-34](../../Reports/) - результаты тестирования
-- [Component Development Guide](../Development-Guides/Component-Development.md) - разработка компонентов с тестами
+- [Component Development Guide](../Rdk/Docs/Guides/Component-Development.md) - разработка компонентов с тестами
 
 ---
 
