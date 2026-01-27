@@ -8,6 +8,9 @@
 import subprocess
 import re
 import sys
+import json
+import time
+import argparse
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
@@ -16,6 +19,7 @@ from typing import Dict, List, Set, Tuple
 # Пути
 CONSOLE_EXE = "./Bin/Platform/Linux/NeuroModelerConsole"
 REPORT_FILE = "Reports/ConfigValidation-Detailed-Report.md"
+RESULTS_FILE = "Reports/ConfigValidation-Results.jsonl"
 CONFIGS_DIR = Path("Bin/Configs")
 
 # Типы ошибок
@@ -388,60 +392,210 @@ def generate_detailed_report(results: List[Dict]) -> str:
 
 def main():
     """Основная функция."""
+    parser = argparse.ArgumentParser(description="Generate config validation report (incremental).")
+    parser.add_argument(
+        "--time-budget-seconds",
+        type=int,
+        default=540,
+        help="Stop after this many seconds (default: 540) and save partial results.",
+    )
+    parser.add_argument(
+        "--finalize",
+        action="store_true",
+        help="Force (re)generate markdown report from accumulated JSONL results.",
+    )
+    args = parser.parse_args()
+
     print("Начинаю генерацию детального отчета валидации...")
+    print(f"Time budget: {args.time_budget_seconds}s")
+    print(f"Console: {CONSOLE_EXE}")
+    print(f"Results cache: {RESULTS_FILE}")
     print("")
+
+    # Проверяем наличие консоли
+    if not Path(CONSOLE_EXE).exists():
+        print(f"ОШИБКА: NeuroModelerConsole не найден: {CONSOLE_EXE}", file=sys.stderr)
+        sys.exit(2)
     
     # Находим все конфигурации
     configs = sorted(CONFIGS_DIR.rglob("project.ini"))
     total = len(configs)
     
     print(f"Найдено конфигураций: {total}")
-    print("Начинаю валидацию...")
+    print("Начинаю валидацию (инкрементально)...")
     print("")
-    
-    results = []
-    for i, config_path in enumerate(configs, 1):
-        rel_path = str(config_path.relative_to(CONFIGS_DIR))
-        print(f"[{i}/{total}] {rel_path}")
-        result = validate_config(config_path)
-        results.append(result)
-    
-    print("")
-    print("Генерирую отчет...")
-    
-    # Генерируем отчет
-    report_content = generate_detailed_report(results)
-    
-    # Сохраняем отчет
-    report_path = Path(REPORT_FILE)
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(report_path, 'w', encoding='utf-8') as f:
-        f.write(report_content)
-    
-    # Статистика
-    valid = sum(1 for r in results if r['status'] == 'VALID')
-    invalid = len(results) - valid
-    
-    print("")
-    print("Детальный отчет создан!")
-    print(f"Отчет сохранен в: {REPORT_FILE}")
-    print("")
-    print("Статистика:")
-    print(f"  Всего: {total}")
-    print(f"  Валидных: {valid}")
-    print(f"  Невалидных: {invalid}")
-    
-    # Подсчет типов ошибок
-    total_errors_by_type = defaultdict(int)
-    for result in results:
-        for error_type, errors in result['error_groups'].items():
-            total_errors_by_type[error_type] += len(errors)
-    
-    if total_errors_by_type:
+
+    # Загружаем уже обработанные результаты из JSONL (если есть)
+    results_by_path: Dict[str, Dict] = {}
+    results_path = Path(RESULTS_FILE)
+    results_path.parent.mkdir(parents=True, exist_ok=True)
+    if results_path.exists():
+        try:
+            with open(results_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        obj = json.loads(line)
+                        if isinstance(obj, dict) and "path" in obj:
+                            results_by_path[obj["path"]] = obj
+                    except json.JSONDecodeError:
+                        # Пропускаем битые строки
+                        continue
+        except Exception:
+            # Если файл недоступен/битый - продолжим без кеша
+            results_by_path = {}
+
+    start_time = time.monotonic()
+    processed_now = 0
+    remaining_before = total - len(results_by_path)
+
+    if remaining_before <= 0:
+        print("Все конфигурации уже провалидированы (по кешу).")
+    else:
+        print(f"Уже есть результатов: {len(results_by_path)}. Осталось: {remaining_before}.")
+
+        with open(results_path, "a", encoding="utf-8") as out:
+            for i, config_path in enumerate(configs, 1):
+                rel_path = str(config_path.relative_to(CONFIGS_DIR))
+                if rel_path in results_by_path:
+                    continue
+
+                elapsed = time.monotonic() - start_time
+                if elapsed >= args.time_budget_seconds:
+                    print("")
+                    print(f"Остановка по time-budget. Обработано за этот запуск: {processed_now}.")
+                    break
+
+                print(f"[{i}/{total}] {rel_path}")
+                result = validate_config(config_path)
+
+                # Превращаем в JSON-совместимый вид
+                json_obj = {
+                    "path": result.get("path"),
+                    "status": result.get("status"),
+                    "errors_count": result.get("errors_count"),
+                    "warnings_count": result.get("warnings_count"),
+                    "channels": list(result.get("channels")) if result.get("channels") else [None, None],
+                    "components": result.get("components"),
+                    "warnings": result.get("warnings", []),
+                    "nonexistent_classes": sorted(
+                        [{"component": c, "class": cls} for (c, cls) in result.get("nonexistent_classes", set())],
+                        key=lambda x: (x["class"], x["component"]),
+                    ),
+                    "nonexistent_components": sorted(list(result.get("nonexistent_components", set()))),
+                    # Для отладки оставляем сырой вывод (может быть большой, но конфигов всего ~123)
+                    "output": result.get("output", ""),
+                }
+
+                out.write(json.dumps(json_obj, ensure_ascii=False) + "\n")
+                out.flush()
+                results_by_path[rel_path] = json_obj
+                processed_now += 1
+
+    remaining_after = total - len(results_by_path)
+
+    # Если всё провалидировано или пользователь запросил finalize — генерируем md-отчет
+    if args.finalize or remaining_after == 0:
         print("")
-        print("Ошибки по типам:")
-        for error_type, count in sorted(total_errors_by_type.items(), key=lambda x: x[1], reverse=True):
-            print(f"  {error_type}: {count}")
+        print("Генерирую отчет...")
+
+        # Восстанавливаем структуру results, близкую к исходной generate_detailed_report()
+        results: List[Dict] = []
+        for config_path in configs:
+            rel_path = str(config_path.relative_to(CONFIGS_DIR))
+            cached = results_by_path.get(rel_path)
+            if not cached:
+                continue
+
+            # Минимальная реконструкция: для generate_detailed_report важны группы/множества.
+            error_groups = defaultdict(list)
+            parsed_errors: List[ErrorInfo] = []
+
+            # Парсим ошибки из output так же, как в validate_config (чтобы не хранить промежуточные структуры)
+            output = cached.get("output", "")
+            errors_match = re.search(r"Errors: (\d+)", output)
+            errors_count = int(errors_match.group(1)) if errors_match else int(cached.get("errors_count") or 0)
+            error_lines = []
+            lines = output.split("\n")
+            for idx, line in enumerate(lines):
+                stripped = line.strip()
+                if stripped == "Errors:" and errors_count > 0:
+                    for j in range(idx + 1, len(lines)):
+                        next_line = lines[j].strip()
+                        if next_line.startswith("- "):
+                            error_lines.append(next_line[2:])
+                        elif next_line and ("Warnings:" in next_line or "Configuration is" in next_line):
+                            break
+                    break
+
+            nonexistent_classes = set()
+            nonexistent_components = set()
+            invalid_links = []
+            for err in error_lines:
+                info = parse_error_message(err)
+                parsed_errors.append(info)
+                error_groups[info.error_type].append(info)
+                if info.error_type == ErrorType.NONEXISTENT_CLASS and info.class_name:
+                    nonexistent_classes.add((info.component, info.class_name))
+                if info.missing_component:
+                    nonexistent_components.add(info.missing_component)
+                if info.error_type == ErrorType.INVALID_LINK:
+                    invalid_links.append(info)
+
+            results.append(
+                {
+                    "path": cached.get("path"),
+                    "status": cached.get("status"),
+                    "errors_count": cached.get("errors_count", 0),
+                    "warnings_count": cached.get("warnings_count", 0),
+                    "channels": tuple(cached.get("channels", [None, None])),
+                    "components": cached.get("components"),
+                    "parsed_errors": parsed_errors,
+                    "error_groups": dict(error_groups),
+                    "nonexistent_classes": nonexistent_classes,
+                    "nonexistent_components": nonexistent_components,
+                    "invalid_links": invalid_links,
+                    "warnings": cached.get("warnings", []),
+                    "output": output,
+                }
+            )
+
+        report_content = generate_detailed_report(results)
+
+        report_path = Path(REPORT_FILE)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(report_path, "w", encoding="utf-8") as f:
+            f.write(report_content)
+
+        # Статистика
+        valid = sum(1 for r in results if r["status"] == "VALID")
+        invalid = len(results) - valid
+
+        print("")
+        print("Детальный отчет создан!")
+        print(f"Отчет сохранен в: {REPORT_FILE}")
+        print("")
+        print("Статистика:")
+        print(f"  Всего: {len(results)}")
+        print(f"  Валидных: {valid}")
+        print(f"  Невалидных: {invalid}")
+
+        total_errors_by_type = defaultdict(int)
+        for result in results:
+            for error_type, errors in result["error_groups"].items():
+                total_errors_by_type[error_type] += len(errors)
+        if total_errors_by_type:
+            print("")
+            print("Ошибки по типам:")
+            for error_type, count in sorted(total_errors_by_type.items(), key=lambda x: x[1], reverse=True):
+                print(f"  {error_type}: {count}")
+    else:
+        print("")
+        print(f"Частичный прогон завершен. Осталось конфигураций: {remaining_after}.")
+    
+    # Возвращаем 0 всегда: кеш/отчет могут генерироваться по частям.
 
 if __name__ == "__main__":
     main()
