@@ -404,6 +404,15 @@ def main():
         action="store_true",
         help="Force (re)generate markdown report from accumulated JSONL results.",
     )
+    parser.add_argument(
+        "--subdir",
+        type=str,
+        default="",
+        help=(
+            "Validate only configurations under Bin/Configs/<subdir>. "
+            "For example, use --subdir SpikeSamples to process Bin/Configs/SpikeSamples only."
+        ),
+    )
     args = parser.parse_args()
 
     print("Начинаю генерацию детального отчета валидации...")
@@ -418,7 +427,10 @@ def main():
         sys.exit(2)
     
     # Находим все конфигурации
-    configs = sorted(CONFIGS_DIR.rglob("project.ini"))
+    root_dir = CONFIGS_DIR
+    if args.subdir:
+        root_dir = CONFIGS_DIR / args.subdir
+    configs = sorted(root_dir.rglob("project.ini"))
     total = len(configs)
     
     print(f"Найдено конфигураций: {total}")
