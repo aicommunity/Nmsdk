@@ -28,7 +28,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
     include("${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
 endif()
 
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort Concurrent)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort Concurrent Test)
 
 # Qt WebEngine опционален: при отсутствии описание показывается через QTextEdit::setMarkdown()
 set(RDK_USE_QT_WEBENGINE 0)
@@ -190,6 +190,37 @@ target_link_libraries(NeuroModeler PRIVATE
   rdk.static.qt
   Rdk-BasicLib.qt
 )
+
+# -----------------------------
+# Тест рендеринга mermaid/markdown
+# -----------------------------
+if (RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
+  add_executable(MarkdownMermaidTest
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/MarkdownMermaidTest.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/static/res.qrc
+  )
+
+  target_link_libraries(MarkdownMermaidTest
+    PRIVATE
+      Qt5::Core
+      Qt5::Gui
+      Qt5::Widgets
+      Qt5::Test
+      Qt5::WebEngineWidgets
+  )
+
+  target_include_directories(MarkdownMermaidTest PRIVATE
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
+  )
+
+  target_compile_definitions(MarkdownMermaidTest PRIVATE
+    RDK_USE_QT_WEBENGINE
+  )
+
+  enable_testing()
+  add_test(NAME MarkdownMermaidTest COMMAND MarkdownMermaidTest)
+endif()
 
 # Опциональные зависимости
 if (RDK_USE_OPENCV AND OpenCV_FOUND)

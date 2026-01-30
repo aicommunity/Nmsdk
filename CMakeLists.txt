@@ -107,6 +107,7 @@ add_subdirectory(App/NeuroModelerConsole)
 # Тесты (опционально, можно отключить для production сборки)
 option(BUILD_TESTS "Build tests" ON)
 if(BUILD_TESTS)
+    enable_testing()
     add_subdirectory(Tests)
 endif()
 
