@@ -12,6 +12,7 @@ QT += network
 QT      += sql
 QT      += xml
 QT      += serialport
+QT      += webenginewidgets
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
@@ -147,6 +148,7 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.cpp \
     ../../../Rdk/GUI/Qt/UWatch.cpp \
+    ../../../Rdk/GUI/Qt/UProjectDescriptionWindow.cpp \
     ../../../Rdk/GUI/Qt/UWatchChart.cpp \
     ../../../Rdk/GUI/Qt/UWatchChartView.cpp \
     ../../../Rdk/GUI/Qt/UWatchChartOption.cpp \
@@ -185,7 +187,8 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.cpp \
     ../../../Rdk/GUI/Qt/UClDescEditor.cpp \
     ../../../Rdk/GUI/Qt/UClassFavoritesEditor.cpp \
-    ../../../Rdk/GUI/Qt/USingleClassListWidget.cpp
+    ../../../Rdk/GUI/Qt/USingleClassListWidget.cpp \
+    ../../../Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
 
 
 HEADERS += \
@@ -215,6 +218,7 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UStatusPanel.h \
     ../../../Rdk/GUI/Qt/USettingsReaderWidget.h \
     ../../../Rdk/GUI/Qt/UWatch.h \
+    ../../../Rdk/GUI/Qt/UProjectDescriptionWindow.h \
     ../../../Rdk/GUI/Qt/UWatchChart.h \
     ../../../Rdk/GUI/Qt/UWatchChartView.h \
     ../../../Rdk/GUI/Qt/UWatchChartOption.h \
@@ -234,7 +238,8 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.h \
     ../../../Rdk/GUI/Qt/UClDescEditor.h \
     ../../../Rdk/GUI/Qt/UClassFavoritesEditor.h \
-    ../../../Rdk/GUI/Qt/USingleClassListWidget.h
+    ../../../Rdk/GUI/Qt/USingleClassListWidget.h \
+    ../../../Rdk/GUI/Qt/UMarkdownViewerWidget.h
 
 
 FORMS   += \

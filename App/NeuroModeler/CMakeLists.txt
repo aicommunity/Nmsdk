@@ -30,8 +30,17 @@ endif()
 
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui Network PrintSupport Charts Sql Xml SerialPort Concurrent)
 
+# Qt WebEngine опционален: при отсутствии описание показывается через QTextEdit::setMarkdown()
+set(RDK_USE_QT_WEBENGINE 0)
+find_package(Qt5WebEngineWidgets QUIET)
+if(Qt5WebEngineWidgets_FOUND)
+  set(RDK_USE_QT_WEBENGINE 1)
+endif()
+
 # Включаем AUTOUIC для автоматической обработки .ui файлов
+# Включаем AUTOMOC для автоматической обработки Q_OBJECT классов
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
 
 target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp
@@ -44,6 +53,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMatrixFormDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerMainWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatch.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UProjectDescriptionWindow.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChart.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartView.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartOption.cpp
@@ -88,6 +98,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassFavoritesEditor.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleClassListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UQuickLinkDialog.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramView.cpp
@@ -120,6 +131,7 @@ endif()
 target_link_libraries(NeuroModeler
   PRIVATE
     Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort Qt5::Concurrent
+    $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:Qt5::WebEngineWidgets>
     $<$<PLATFORM_ID:Windows>:Qt5::WinMain>
     Rdk-CvBasicLib.qt
     Rdk-BasicLib.qt
@@ -169,10 +181,12 @@ target_compile_definitions(NeuroModeler PRIVATE
   QT_DLL
   QT_WIDGETS_LIB
   RDK_APP_VERSION="${GIT_VERSION_STRING}"
+  $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:RDK_USE_QT_WEBENGINE>
 )
 
 target_link_libraries(NeuroModeler PRIVATE
   Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort Qt5::Concurrent
+  $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:Qt5::WebEngineWidgets>
   rdk.static.qt
   Rdk-BasicLib.qt
 )
