@@ -93,7 +93,7 @@
 
 #### Шаг 2: Изучите примеры конфигураций
 
-1. `Bin/Configs/User/CognitiveNavigation/` - когнитивная навигация
+1. `Bin/Configs/Users/User/CognitiveNavigation/` - когнитивная навигация
 2. `Bin/Configs/!OldConfigs/` - различные эксперименты
 3. [Nmsdk-PulseLib/Docs/Config-Templates.md](../Libraries/Nmsdk-PulseLib/Docs/Config-Templates.md) - шаблоны экспериментов
 
@@ -275,7 +275,7 @@ This guide will help you quickly get started with Nmsdk depending on your role a
 
 #### Step 2: Study Configuration Examples
 
-1. `Bin/Configs/User/CognitiveNavigation/` - cognitive navigation
+1. `Bin/Configs/Users/User/CognitiveNavigation/` - cognitive navigation
 2. `Bin/Configs/!OldConfigs/` - various experiments
 3. [Nmsdk-PulseLib/Docs/Config-Templates.md](../Libraries/Nmsdk-PulseLib/Docs/Config-Templates.md) - experiment templates
 
