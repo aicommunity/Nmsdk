@@ -99,6 +99,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleClassListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UQuickLinkDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramView.cpp
@@ -198,6 +199,7 @@ if (RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
   add_executable(MarkdownMermaidTest
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/MarkdownMermaidTest.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/static/res.qrc
   )
 

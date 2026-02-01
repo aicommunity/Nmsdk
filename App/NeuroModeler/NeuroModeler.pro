@@ -188,7 +188,8 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UClDescEditor.cpp \
     ../../../Rdk/GUI/Qt/UClassFavoritesEditor.cpp \
     ../../../Rdk/GUI/Qt/USingleClassListWidget.cpp \
-    ../../../Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
+    ../../../Rdk/GUI/Qt/UMarkdownViewerWidget.cpp \
+    ../../../Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
 
 
 HEADERS += \
@@ -239,7 +240,8 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UClDescEditor.h \
     ../../../Rdk/GUI/Qt/UClassFavoritesEditor.h \
     ../../../Rdk/GUI/Qt/USingleClassListWidget.h \
-    ../../../Rdk/GUI/Qt/UMarkdownViewerWidget.h
+    ../../../Rdk/GUI/Qt/UMarkdownViewerWidget.h \
+    ../../../Rdk/GUI/Qt/UMarkdownWebEnginePage.h
 
 
 FORMS   += \
