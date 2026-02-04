@@ -138,11 +138,6 @@ endif()
 
 # Windows-специфичные настройки
 if (WIN32)
-  # Qt через vcpkg или стандартные пути
-  if (NOT Qt5_FOUND)
-    find_package(Qt5 QUIET COMPONENTS Core)
-  endif()
-
   # OpenCV через vcpkg (если не задан путь вручную)
   if (RDK_USE_OPENCV AND NOT DEFINED OPENCV4_PATH AND NOT DEFINED OPENCV3_PATH)
     find_package(OpenCV QUIET)

@@ -13,6 +13,16 @@ endif()
 
 project(Nmsdk LANGUAGES CXX)
 
+# Переключатель источника Qt на Windows:
+# - ON  (по умолчанию на Windows): принудительно использовать Qt из vcpkg (фильтруя локальные установки Qt из CMAKE_PREFIX_PATH)
+# - OFF: использовать локальный Qt (например, C:\Qt\5.15.2\msvc2019_64), при этом vcpkg остаётся для прочих зависимостей
+if(WIN32)
+  set(_NMSDK_FORCE_QT_FROM_VCPKG_DEFAULT ON)
+else()
+  set(_NMSDK_FORCE_QT_FROM_VCPKG_DEFAULT OFF)
+endif()
+option(NMSDK_FORCE_QT_FROM_VCPKG "Force Qt from vcpkg on Windows (filter local Qt from CMAKE_PREFIX_PATH)" ${_NMSDK_FORCE_QT_FROM_VCPKG_DEFAULT})
+
 # Автоматическая настройка параллельной сборки
 # Определяем количество ядер процессора, если CMAKE_BUILD_PARALLEL_LEVEL не задан
 # Эта настройка автоматически распространяется на все подпроекты через add_subdirectory()
@@ -58,11 +68,14 @@ endif()
 # Каталог общих модулей CMake
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
-# Принудительная настройка Qt только из vcpkg (должно быть ДО find_package(Qt5))
-# Это гарантирует использование Qt только из vcpkg, исключая локальные установки
-if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
-    include("${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
+# Принудительная настройка Qt только из vcpkg на Windows
+# (на Linux этот модуль ничего не делает)
+if(NMSDK_FORCE_QT_FROM_VCPKG AND EXISTS "${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
+  include("${CMAKE_SOURCE_DIR}/cmake/ForceQtFromVcpkg.cmake")
 endif()
+
+# Унифицированный выбор Qt5/Qt6 и создание алиасов Nmsdk::Qt::*
+include("${CMAKE_SOURCE_DIR}/cmake/SelectQt.cmake")
 
 # Вывод бинарей и библиотек в Bin/Platform/<OS>
 if (WIN32)

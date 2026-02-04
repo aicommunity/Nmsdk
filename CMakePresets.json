@@ -11,10 +11,10 @@
       "cacheVariables": {
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
-        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
         "BUILD_SHARED_LIBS": "OFF",
         "RDK_USE_ODESOLVER": "OFF",
         "RDK_USE_PYTHON": "OFF",
@@ -24,7 +24,8 @@
       },
       "environment": {
         "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
-        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+        "VCINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC",
+        "VSINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community"
       }
     },
     {
@@ -50,10 +51,8 @@
         "CMAKE_CXX_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
-        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
         "BUILD_SHARED_LIBS": "OFF",
         "RDK_USE_ODESOLVER": "OFF",
         "RDK_USE_PYTHON": "OFF",
@@ -92,10 +91,8 @@
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON",
         "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
-        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
         "CMAKE_VS_GENERATE_DEVENV_LAUNCHER": "ON",
         "BUILD_SHARED_LIBS": "OFF",
         "RDK_USE_ODESOLVER": "OFF",
@@ -129,6 +126,48 @@
       "inherits": [ "win-vs2022-base" ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "win-vs2022-debug-vcpkgqt",
+      "displayName": "Windows VS2022 Debug (Qt from vcpkg)",
+      "inherits": [ "win-vs2022-debug" ],
+      "cacheVariables": {
+        "NMSDK_FORCE_QT_FROM_VCPKG": "ON",
+        "QT_VERSION_MAJOR": "6",
+        "VCPKG_MANIFEST_FEATURES": "qt"
+      }
+    },
+    {
+      "name": "win-vs2022-release-vcpkgqt",
+      "displayName": "Windows VS2022 Release (Qt from vcpkg)",
+      "inherits": [ "win-vs2022-release" ],
+      "cacheVariables": {
+        "NMSDK_FORCE_QT_FROM_VCPKG": "ON",
+        "QT_VERSION_MAJOR": "6",
+        "VCPKG_MANIFEST_FEATURES": "qt"
+      }
+    },
+    {
+      "name": "win-vs2022-debug-localqt",
+      "displayName": "Windows VS2022 Debug (Qt 5.15.2 from C:\\Qt)",
+      "inherits": [ "win-vs2022-debug" ],
+      "cacheVariables": {
+        "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
+        "QT_VERSION_MAJOR": "5",
+        "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64"
+      }
+    },
+    {
+      "name": "win-vs2022-release-localqt",
+      "displayName": "Windows VS2022 Release (Qt 5.15.2 from C:\\Qt)",
+      "inherits": [ "win-vs2022-release" ],
+      "cacheVariables": {
+        "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
+        "QT_VERSION_MAJOR": "5",
+        "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64"
       }
     },
     {
@@ -192,6 +231,26 @@
       "name": "win-vs2022-release",
       "configurePreset": "win-vs2022-release",
       "displayName": "Build Windows VS2022 Release"
+    },
+    {
+      "name": "win-vs2022-debug-vcpkgqt",
+      "configurePreset": "win-vs2022-debug-vcpkgqt",
+      "displayName": "Build Windows VS2022 Debug (Qt from vcpkg)"
+    },
+    {
+      "name": "win-vs2022-release-vcpkgqt",
+      "configurePreset": "win-vs2022-release-vcpkgqt",
+      "displayName": "Build Windows VS2022 Release (Qt from vcpkg)"
+    },
+    {
+      "name": "win-vs2022-debug-localqt",
+      "configurePreset": "win-vs2022-debug-localqt",
+      "displayName": "Build Windows VS2022 Debug (Qt 5.15.2 from C:\\Qt)"
+    },
+    {
+      "name": "win-vs2022-release-localqt",
+      "configurePreset": "win-vs2022-release-localqt",
+      "displayName": "Build Windows VS2022 Release (Qt 5.15.2 from C:\\Qt)"
     }
   ]
 }

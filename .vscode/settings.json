@@ -1,15 +1,27 @@
 {
-  "cmake.configureOnOpen": false,
+  // Use CMakePresets.json (recommended for this repo)
   "cmake.useCMakePresets": "always",
+
+  // Do not auto-configure on folder open
+  "cmake.configureOnOpen": false,
+
+  // Use Ninja generator by default
   "cmake.generator": "Ninja",
+
+  // Environment for CMake Tools (applies to configure/build/test)
+  // This repo expects VCPKG_ROOT to be set (see cmake/vcpkg_toolchain_from_env.cmake).
   "cmake.environment": {
     "VCPKG_ROOT": "${env:VCPKG_ROOT}"
   },
+
   "cmake.sourceDirectory": "${workspaceFolder}",
+
   "git.ignoreLimitWarning": true,
+
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
   "editor.tabSize": 2

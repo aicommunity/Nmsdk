@@ -29,7 +29,8 @@ target_sources(NeuroModelerConsole PRIVATE
 
 target_compile_definitions(NeuroModelerConsole PRIVATE QT_DLL)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Network Sql Xml SerialPort)
+# Настройка Qt (Qt5/Qt6) через общий модуль
+include(${CMAKE_SOURCE_DIR}/cmake/SelectQt.cmake)
 
 target_link_libraries(NeuroModelerConsole PRIVATE
   rdk.static.qt
@@ -38,7 +39,11 @@ target_link_libraries(NeuroModelerConsole PRIVATE
   Rdk-HardwareLib.qt
   Nmsdk-MotionControlLib.qt
   Nmsdk-PulseLib.qt
-  Qt5::Core Qt5::Network Qt5::Sql Qt5::Xml Qt5::SerialPort
+  Nmsdk::Qt::Core
+  Nmsdk::Qt::Network
+  Nmsdk::Qt::Sql
+  Nmsdk::Qt::Xml
+  Nmsdk::Qt::Concurrent
 )
 
 find_package(CURL QUIET)
