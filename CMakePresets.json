@@ -156,7 +156,8 @@
         "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
         "QT_VERSION_MAJOR": "5",
         "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
-        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64"
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
+        "VCPKG_MANIFEST_FEATURES": ""
       }
     },
     {
@@ -167,7 +168,8 @@
         "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
         "QT_VERSION_MAJOR": "5",
         "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
-        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64"
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
+        "VCPKG_MANIFEST_FEATURES": ""
       }
     },
     {
@@ -225,32 +227,38 @@
     {
       "name": "win-vs2022-debug",
       "configurePreset": "win-vs2022-debug",
-      "displayName": "Build Windows VS2022 Debug"
+      "displayName": "Build Windows VS2022 Debug",
+      "configuration": "Debug"
     },
     {
       "name": "win-vs2022-release",
       "configurePreset": "win-vs2022-release",
-      "displayName": "Build Windows VS2022 Release"
+      "displayName": "Build Windows VS2022 Release",
+      "configuration": "Release"
     },
     {
       "name": "win-vs2022-debug-vcpkgqt",
       "configurePreset": "win-vs2022-debug-vcpkgqt",
-      "displayName": "Build Windows VS2022 Debug (Qt from vcpkg)"
+      "displayName": "Build Windows VS2022 Debug (Qt from vcpkg)",
+      "configuration": "Debug"
     },
     {
       "name": "win-vs2022-release-vcpkgqt",
       "configurePreset": "win-vs2022-release-vcpkgqt",
-      "displayName": "Build Windows VS2022 Release (Qt from vcpkg)"
+      "displayName": "Build Windows VS2022 Release (Qt from vcpkg)",
+      "configuration": "Release"
     },
     {
       "name": "win-vs2022-debug-localqt",
       "configurePreset": "win-vs2022-debug-localqt",
-      "displayName": "Build Windows VS2022 Debug (Qt 5.15.2 from C:\\Qt)"
+      "displayName": "Build Windows VS2022 Debug (Qt 5.15.2 from C:\\Qt)",
+      "configuration": "Debug"
     },
     {
       "name": "win-vs2022-release-localqt",
       "configurePreset": "win-vs2022-release-localqt",
-      "displayName": "Build Windows VS2022 Release (Qt 5.15.2 from C:\\Qt)"
+      "displayName": "Build Windows VS2022 Release (Qt 5.15.2 from C:\\Qt)",
+      "configuration": "Release"
     }
   ]
 }

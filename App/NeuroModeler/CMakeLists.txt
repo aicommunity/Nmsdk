@@ -148,6 +148,7 @@ target_link_libraries(NeuroModeler
     Nmsdk::Qt::Widgets
     Nmsdk::Qt::Gui
     Nmsdk::Qt::Network
+    Nmsdk::Qt::Charts
     Nmsdk::Qt::Print
     Nmsdk::Qt::Sql
     Nmsdk::Qt::Xml
@@ -235,51 +236,6 @@ target_compile_definitions(NeuroModeler PRIVATE
   $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:RDK_USE_QT_WEBENGINE>
   $<$<BOOL:${glog_FOUND}>:RDK_USE_GLOG>
 )
-
-target_link_libraries(NeuroModeler PRIVATE
-  Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network Qt5::PrintSupport Qt5::Charts Qt5::Sql Qt5::Xml Qt5::SerialPort Qt5::Concurrent
-  $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:Qt5::WebEngineWidgets>
-  rdk.static.qt
-  Rdk-BasicLib.qt
-)
-
-# -----------------------------
-# Тест рендеринга mermaid/markdown
-# -----------------------------
-if (RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
-  add_executable(MarkdownMermaidTest
-    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/MarkdownMermaidTest.cpp
-    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
-    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
-    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/static/res.qrc
-  )
-
-  # Отключаем AUTOUIC для MarkdownMermaidTest, чтобы избежать конфликтов с NeuroModeler
-  # MarkdownMermaidTest не использует UComponentsListWidgetModern.ui
-  set_target_properties(MarkdownMermaidTest PROPERTIES
-    AUTOUIC OFF
-  )
-
-  target_link_libraries(MarkdownMermaidTest
-    PRIVATE
-      Qt5::Core
-      Qt5::Gui
-      Qt5::Widgets
-      Qt5::Test
-      Qt5::WebEngineWidgets
-  )
-
-  target_include_directories(MarkdownMermaidTest PRIVATE
-    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
-  )
-
-  target_compile_definitions(MarkdownMermaidTest PRIVATE
-    RDK_USE_QT_WEBENGINE
-  )
-
-  enable_testing()
-  add_test(NAME MarkdownMermaidTest COMMAND MarkdownMermaidTest)
-endif()
 
 # Опциональные зависимости
 if (RDK_USE_OPENCV AND OpenCV_FOUND)

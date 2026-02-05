@@ -37,14 +37,11 @@ if(QT_VERSION_MAJOR EQUAL 6)
     Test
   )
 
-  # SerialPort (опционально; в vcpkg порт qtserialport ставится вместе с Qt)
+  # Дополнительные модули (опционально)
   find_package(Qt6 COMPONENTS SerialPort QUIET)
-
-  # WebEngineWidgets (опционально, но для Windows через vcpkg ожидается)
   find_package(Qt6 COMPONENTS WebEngineWidgets QUIET)
-
-  # Модуль совместимости для QTextCodec и др.
   find_package(Qt6 COMPONENTS Core5Compat QUIET)
+  find_package(Qt6 COMPONENTS Charts QUIET)
 
   # Создаём таргеты без :: (CMake не позволяет :: в add_library)
   add_library(Nmsdk_Qt_Core       INTERFACE)
@@ -59,6 +56,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
   add_library(Nmsdk_Qt_SerialPort INTERFACE)
   add_library(Nmsdk_Qt_WebEngineWidgets INTERFACE)
   add_library(Nmsdk_Qt_CoreCompat INTERFACE)
+  add_library(Nmsdk_Qt_Charts     INTERFACE)
 
   # Создаём алиасы с :: для удобства использования
   add_library(Nmsdk::Qt::Core ALIAS Nmsdk_Qt_Core)
@@ -73,6 +71,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
   add_library(Nmsdk::Qt::WebEngineWidgets ALIAS Nmsdk_Qt_WebEngineWidgets)
   add_library(Nmsdk::Qt::CoreCompat ALIAS Nmsdk_Qt_CoreCompat)
   add_library(Nmsdk::Qt::SerialPort ALIAS Nmsdk_Qt_SerialPort)
+  add_library(Nmsdk::Qt::Charts ALIAS Nmsdk_Qt_Charts)
 
   target_link_libraries(Nmsdk_Qt_Core       INTERFACE Qt6::Core)
   target_link_libraries(Nmsdk_Qt_Gui        INTERFACE Qt6::Gui)
@@ -97,6 +96,10 @@ if(QT_VERSION_MAJOR EQUAL 6)
 
   if(TARGET Qt6::SerialPort)
     target_link_libraries(Nmsdk_Qt_SerialPort INTERFACE Qt6::SerialPort)
+  endif()
+
+  if(TARGET Qt6::Charts)
+    target_link_libraries(Nmsdk_Qt_Charts INTERFACE Qt6::Charts)
   endif()
 
 elseif(QT_VERSION_MAJOR EQUAL 5)
@@ -130,6 +133,7 @@ elseif(QT_VERSION_MAJOR EQUAL 5)
   add_library(Nmsdk_Qt_WebEngineWidgets INTERFACE)
   add_library(Nmsdk_Qt_CoreCompat INTERFACE)
   add_library(Nmsdk_Qt_SerialPort INTERFACE)
+  add_library(Nmsdk_Qt_Charts     INTERFACE)
 
   # Создаём алиасы с :: для удобства использования
   add_library(Nmsdk::Qt::Core ALIAS Nmsdk_Qt_Core)
@@ -144,6 +148,7 @@ elseif(QT_VERSION_MAJOR EQUAL 5)
   add_library(Nmsdk::Qt::WebEngineWidgets ALIAS Nmsdk_Qt_WebEngineWidgets)
   add_library(Nmsdk::Qt::CoreCompat ALIAS Nmsdk_Qt_CoreCompat)
   add_library(Nmsdk::Qt::SerialPort ALIAS Nmsdk_Qt_SerialPort)
+  add_library(Nmsdk::Qt::Charts ALIAS Nmsdk_Qt_Charts)
 
   target_link_libraries(Nmsdk_Qt_Core       INTERFACE Qt5::Core)
   target_link_libraries(Nmsdk_Qt_Gui        INTERFACE Qt5::Gui)
@@ -155,6 +160,7 @@ elseif(QT_VERSION_MAJOR EQUAL 5)
   target_link_libraries(Nmsdk_Qt_Concurrent INTERFACE Qt5::Concurrent)
   target_link_libraries(Nmsdk_Qt_Test       INTERFACE Qt5::Test)
   target_link_libraries(Nmsdk_Qt_SerialPort INTERFACE Qt5::SerialPort)
+  target_link_libraries(Nmsdk_Qt_Charts     INTERFACE Qt5::Charts)
 
   if(Qt5WebEngineWidgets_FOUND)
     target_link_libraries(Nmsdk_Qt_WebEngineWidgets INTERFACE Qt5::WebEngineWidgets)
