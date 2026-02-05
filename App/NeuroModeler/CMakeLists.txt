@@ -168,6 +168,35 @@ if(CURL_FOUND)
   target_link_libraries(NeuroModeler PRIVATE CURL::libcurl)
 endif()
 
+# Google glog for logging (same as in Rdk/CMakeLists.txt)
+find_package(glog QUIET)
+if(NOT glog_FOUND)
+  find_path(GLOG_INCLUDE_DIR glog/logging.h
+    PATHS
+      /usr/include
+      /usr/local/include
+      /opt/homebrew/include
+  )
+  find_library(GLOG_LIBRARY
+    NAMES glog
+    PATHS
+      /usr/lib
+      /usr/local/lib
+      /opt/homebrew/lib
+  )
+  if(GLOG_INCLUDE_DIR AND GLOG_LIBRARY)
+    add_library(glog::glog UNKNOWN IMPORTED)
+    set_target_properties(glog::glog PROPERTIES
+      IMPORTED_LOCATION "${GLOG_LIBRARY}"
+      INTERFACE_INCLUDE_DIRECTORIES "${GLOG_INCLUDE_DIR}"
+    )
+    set(glog_FOUND TRUE)
+  endif()
+endif()
+if(glog_FOUND)
+  target_link_libraries(NeuroModeler PRIVATE glog::glog)
+endif()
+
 # Boost libraries (required by rdk.static.qt)
 # Используем MODULE режим для всех платформ (FindBoost.cmake правильно определяет имена библиотек)
 find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
@@ -204,6 +233,7 @@ target_compile_definitions(NeuroModeler PRIVATE
   QT_WIDGETS_LIB
   RDK_APP_VERSION="${GIT_VERSION_STRING}"
   $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:RDK_USE_QT_WEBENGINE>
+  $<$<BOOL:${glog_FOUND}>:RDK_USE_GLOG>
 )
 
 target_link_libraries(NeuroModeler PRIVATE
