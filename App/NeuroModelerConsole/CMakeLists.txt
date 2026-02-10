@@ -3,9 +3,9 @@ project(NeuroModelerConsole LANGUAGES CXX)
 
 add_executable(NeuroModelerConsole)
 
-# Устанавливаем DLL runtime библиотеку для совместимости с vcpkg
+# Set DLL runtime library for compatibility with vcpkg
 if(MSVC)
-  # Используем генератор выражений для multi-config генераторов (Visual Studio)
+  # Use generator expressions for multi-config generators (Visual Studio)
   set_target_properties(NeuroModelerConsole PROPERTIES
     MSVC_RUNTIME_LIBRARY "$<IF:$<CONFIG:Debug>,MultiThreadedDebugDLL,MultiThreadedDLL>"
   )
@@ -29,7 +29,7 @@ target_sources(NeuroModelerConsole PRIVATE
 
 target_compile_definitions(NeuroModelerConsole PRIVATE QT_DLL)
 
-# Настройка Qt (Qt5/Qt6) через общий модуль
+# Configure Qt (Qt5/Qt6) via shared module
 include(${CMAKE_SOURCE_DIR}/cmake/SelectQt.cmake)
 
 target_link_libraries(NeuroModelerConsole PRIVATE
@@ -52,10 +52,10 @@ if(CURL_FOUND)
 endif()
 
 # Boost libraries (required by rdk.static.qt)
-# Используем MODULE режим для всех платформ (FindBoost.cmake правильно определяет имена библиотек)
+# Use MODULE mode on all platforms (FindBoost.cmake correctly determines library names)
 find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
 if(Boost_FOUND)
-  # Используем современные target'ы, если доступны, иначе используем переменные
+  # Use modern targets if available, otherwise fall back to variables
   if(TARGET Boost::program_options)
     target_link_libraries(NeuroModelerConsole PRIVATE
       Boost::program_options
@@ -66,7 +66,7 @@ if(Boost_FOUND)
       Boost::atomic
     )
   else()
-    # Fallback на старый способ, если target'ы не доступны
+    # Fallback to the legacy approach if targets are not available
     target_link_libraries(NeuroModelerConsole PRIVATE ${Boost_LIBRARIES})
     target_include_directories(NeuroModelerConsole PRIVATE ${Boost_INCLUDE_DIRS})
   endif()

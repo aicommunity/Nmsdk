@@ -1,6 +1,6 @@
 #!/bin/bash
-# Автоматический скрипт для тестирования отладочных сообщений
-# Запускает валидацию и проверяет логи до тех пор, пока сообщения не будут найдены
+# Automatic script for testing debug messages
+# Runs validation and checks logs until the messages are found or attempts are exhausted
 
 set -e
 
@@ -10,62 +10,62 @@ LOG_DIR="Bin/Platform/Linux/EventsLog"
 MAX_ATTEMPTS=5
 
 echo "================================================================================"
-echo "АВТОМАТИЧЕСКОЕ ТЕСТИРОВАНИЕ ОТЛАДОЧНЫХ СООБЩЕНИЙ"
+echo "AUTOMATED TESTING OF DEBUG MESSAGES"
 echo "================================================================================"
 echo ""
 
 ATTEMPT=1
 while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
-    echo "Попытка $ATTEMPT из $MAX_ATTEMPTS..."
+    echo "Attempt $ATTEMPT of $MAX_ATTEMPTS..."
     echo ""
-    
-    # Запускаем валидацию
-    echo "Запускаю валидацию..."
+
+    # Run validation
+    echo "Starting validation..."
     "$CONSOLE_EXE" --check-config "$PROJECT_INI" > /dev/null 2>&1
-    
+
     sleep 2
-    
-    # Находим последний лог
+
+    # Find the latest log file
     LATEST_LOG=$(ls -t "$LOG_DIR"/*.INFO* 2>/dev/null | head -1)
-    
+
     if [ -z "$LATEST_LOG" ]; then
-        echo "❌ Файлы логов не найдены"
+        echo "❌ Log files not found"
         ATTEMPT=$((ATTEMPT + 1))
         continue
     fi
-    
-    echo "Проверяю лог: $(basename "$LATEST_LOG")"
-    
-    # Ищем ключевые сообщения
+
+    echo "Checking log: $(basename "$LATEST_LOG")"
+
+    # Look for key messages
     KEY_MESSAGES=(
         "UEngine::CreateEnvironment() called"
         "MotionControlLibrary::CreateClassSamples() called"
         "Loading library: MotionControlLibrary"
         "Adding library to Storage: MotionControlLibrary"
     )
-    
+
     FOUND_COUNT=0
     for msg in "${KEY_MESSAGES[@]}"; do
         if grep -q "$msg" "$LATEST_LOG" 2>/dev/null; then
-            echo "  ✅ Найдено: $msg"
+            echo "  ✅ Found: $msg"
             FOUND_COUNT=$((FOUND_COUNT + 1))
         fi
     done
-    
+
     if [ $FOUND_COUNT -ge 2 ]; then
         echo ""
         echo "================================================================================"
-        echo "✅ УСПЕХ! Найдено $FOUND_COUNT ключевых сообщений"
+        echo "✅ SUCCESS! Found $FOUND_COUNT key messages"
         echo "================================================================================"
         echo ""
-        echo "Все найденные отладочные сообщения:"
+        echo "All found debug messages:"
         grep -E "(CreateEnvironment|MotionControlLibrary|Loading library|Adding library|Build storage|Registered classes)" "$LATEST_LOG" | head -20
         exit 0
     else
-        echo "  ⚠️  Найдено только $FOUND_COUNT из ${#KEY_MESSAGES[@]} ключевых сообщений"
+        echo "  ⚠️  Found only $FOUND_COUNT of ${#KEY_MESSAGES[@]} key messages"
         ATTEMPT=$((ATTEMPT + 1))
         if [ $ATTEMPT -le $MAX_ATTEMPTS ]; then
-            echo "  Ожидание перед следующей попыткой..."
+            echo "  Waiting before the next attempt..."
             sleep 3
         fi
     fi
@@ -73,9 +73,9 @@ done
 
 echo ""
 echo "================================================================================"
-echo "⚠️  ПРОБЛЕМА НЕ РЕШЕНА ПОСЛЕ $MAX_ATTEMPTS ПОПЫТОК"
+echo "⚠️  PROBLEM NOT RESOLVED AFTER $MAX_ATTEMPTS ATTEMPTS"
 echo "================================================================================"
 echo ""
-echo "Последние строки из лога:"
+echo "Last lines from the log:"
 tail -20 "$LATEST_LOG"
 exit 1

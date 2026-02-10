@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Скрипт для добавления отсутствующих структурных компонентов в Model_*.xml.
+Script for adding missing structural components to Model_*.xml.
 
-Анализирует Parameters_*.xml для определения структуры нейрона и добавляет
-отсутствующие компоненты (LTZone, Soma, Dendrite, Generators) в Model_*.xml.
+It analyses Parameters_*.xml to determine neuron structure and adds
+missing components (LTZone, Soma, Dendrite, Generators) to Model_*.xml.
 """
 
 import os
@@ -14,42 +14,42 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple, Optional
 import re
 
-# Добавляем путь к скриптам
+# Add scripts directory to sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 class StructureComponentFixer:
-    """Класс для исправления отсутствующих структурных компонентов"""
-    
+    """Fix missing structural components in configurations."""
+
     def __init__(self, configs_dir: str = "Bin/Configs", reports_dir: str = "Reports"):
         self.configs_dir = Path(configs_dir)
         self.reports_dir = Path(reports_dir)
         self.validation_report = self.reports_dir / "ConfigValidation-Detailed-Report.md"
         self.fixes_applied = []
-        
+
     def find_configs_with_missing_components(self) -> List[str]:
-        """Находит конфигурации с отсутствующими структурными компонентами"""
+        """Find configurations with missing structural components listed in the validation report."""
         if not self.validation_report.exists():
-            print(f"Отчет валидации не найден: {self.validation_report}")
+            print(f"Validation report not found: {self.validation_report}")
             return []
-        
+
         content = self.validation_report.read_text(encoding='utf-8')
         problematic_configs = set()
         current_config = None
-        
-        # Структурные компоненты для поиска
+
+        # Structural components to search for
         structural_keywords = ['LTZone', 'Soma1', 'Soma2', 'Dendrite1_', 'PosGenerator', 'NegGenerator']
-        
+
         for line in content.split('\n'):
             if line.startswith('### '):
                 current_config = line[4:].strip()
             if any(keyword in line for keyword in structural_keywords):
                 if current_config:
                     problematic_configs.add(current_config)
-        
+
         return list(problematic_configs)
-    
+
     def parse_parameters(self, params_path: Path) -> Dict:
-        """Парсит Parameters_*.xml и извлекает информацию о структуре"""
+        """Parse Parameters_*.xml and extract structural information."""
         params = {
             'StructureBuildMode': 0,
             'NumSomaMembraneParts': 1,
@@ -60,12 +60,12 @@ class StructureComponentFixer:
             'InhGeneratorClassName': 'NPNeuronNegCGenerator',
             'MembraneClassName': 'NPMembrane',
         }
-        
+
         try:
             tree = ET.parse(params_path)
             root = tree.getroot()
-            
-            # Рекурсивный поиск параметров
+
+            # Recursive parameter search
             def find_param(elem, name):
                 for child in elem.iter():
                     if name in child.tag or (child.text and name in str(child.text)):
@@ -73,14 +73,14 @@ class StructureComponentFixer:
                             return child.text.strip()
                         return child.get('value', '')
                 return None
-            
-            # Ищем параметры
+
+            # Extract parameters
             for param_name in params.keys():
                 value = find_param(root, param_name)
                 if value:
                     try:
                         if 'Vec' in param_name:
-                            # Вектор - парсим как список
+                            # Vector value — parse as list
                             params[param_name] = [int(x.strip()) for x in value.split(',') if x.strip()]
                         elif param_name.endswith('ClassName'):
                             params[param_name] = value
@@ -89,8 +89,8 @@ class StructureComponentFixer:
                     except:
                         pass
         except Exception as e:
-            print(f"  ⚠️  Ошибка парсинга Parameters: {e}")
-            # Пробуем через regex
+            print(f"  ⚠️  Error parsing Parameters: {e}")
+            # Try to recover via regex
             try:
                 content = params_path.read_text(encoding='utf-8', errors='ignore')
                 for param_name in params.keys():
@@ -114,16 +114,16 @@ class StructureComponentFixer:
                                     pass
             except:
                 pass
-        
+
         return params
-    
+
     def get_existing_components(self, model_path: Path) -> Set[str]:
-        """Получает список существующих компонентов из Model_*.xml"""
+        """Return a set of existing component names from Model_*.xml."""
         components = set()
-        
+
         if not model_path.exists():
             return components
-        
+
         try:
             tree = ET.parse(model_path)
             root = tree.getroot()
@@ -135,15 +135,15 @@ class StructureComponentFixer:
                         components.add(comp.tag)
         except:
             pass
-        
+
         return components
-    
+
     def create_component_xml(self, comp_name: str, comp_class: str, comp_type: str) -> ET.Element:
-        """Создает XML элемент для компонента"""
+        """Create an XML element for a component."""
         comp_elem = ET.Element(comp_name)
         comp_elem.set("Class", comp_class)
-        
-        # Добавляем координаты в зависимости от типа
+
+        # Add coordinates depending on the component type
         if comp_type == "LTZone":
             comp_elem.set("X", "27.3")
             comp_elem.set("Y", "4.67")
@@ -159,57 +159,57 @@ class StructureComponentFixer:
         elif comp_type.startswith("Dendrite"):
             comp_elem.set("X", "15")
             comp_elem.set("Y", "5")
-        
+
         return comp_elem
-    
+
     def add_missing_components(self, model_path: Path, params: Dict, existing: Set[str]) -> bool:
-        """Добавляет отсутствующие компоненты в Model_*.xml"""
+        """Add missing components to Model_*.xml."""
         if params['StructureBuildMode'] == 0:
-            # Нет автоматической сборки - пропускаем
+            # Automatic structure building is disabled — skip
             return False
-        
+
         modified = False
-        
+
         try:
-            # Загружаем или создаем Model
+            # Load or create Model
             if model_path.exists():
                 tree = ET.parse(model_path)
                 root = tree.getroot()
             else:
                 root = ET.Element("Save")
                 tree = ET.ElementTree(root)
-            
-            # Находим или создаем Model элемент
+
+            # Find or create Model element
             model = root.find("Model")
             if model is None:
                 model = ET.SubElement(root, "Model")
-            
-            # Находим или создаем Components элемент
+
+            # Find or create Components element
             components = model.find("Components")
             if components is None:
                 components = ET.SubElement(model, "Components")
-            
-            # Добавляем LTZone
+
+            # Add LTZone
             if "LTZone" not in existing:
                 ltzone_elem = self.create_component_xml("LTZone", params['LTZoneClassName'], "LTZone")
                 components.append(ltzone_elem)
                 modified = True
-                print(f"    ✅ Добавлен LTZone")
-            
-            # Добавляем генераторы
+                print("    ✅ Added LTZone")
+
+            # Add generators
             if params.get('ExcGeneratorClassName') and "PosGenerator" not in existing:
                 pos_gen_elem = self.create_component_xml("PosGenerator", params['ExcGeneratorClassName'], "PosGenerator")
                 components.append(pos_gen_elem)
                 modified = True
-                print(f"    ✅ Добавлен PosGenerator")
-            
+                print("    ✅ Added PosGenerator")
+
             if params.get('InhGeneratorClassName') and "NegGenerator" not in existing:
                 neg_gen_elem = self.create_component_xml("NegGenerator", params['InhGeneratorClassName'], "NegGenerator")
                 components.append(neg_gen_elem)
                 modified = True
-                print(f"    ✅ Добавлен NegGenerator")
-            
-            # Добавляем Soma компоненты
+                print("    ✅ Added NegGenerator")
+
+            # Add Soma components
             num_soma = params.get('NumSomaMembraneParts', 1)
             for i in range(1, num_soma + 1):
                 soma_name = f"Soma{i}"
@@ -217,11 +217,11 @@ class StructureComponentFixer:
                     soma_elem = self.create_component_xml(soma_name, params['MembraneClassName'], f"Soma{i}")
                     components.append(soma_elem)
                     modified = True
-                    print(f"    ✅ Добавлен {soma_name}")
-            
-            # Добавляем Dendrite компоненты
+                    print(f"    ✅ Added {soma_name}")
+
+            # Add Dendrite components
             if params.get('NumDendriteMembranePartsVec'):
-                # Режим 2 - индивидуальная длина для каждой сомы
+                # Mode 2 — individual length for each soma
                 for soma_idx, dendrite_length in enumerate(params['NumDendriteMembranePartsVec'], 1):
                     for dendrite_idx in range(1, dendrite_length + 1):
                         dendrite_name = f"Dendrite{soma_idx}_{dendrite_idx}"
@@ -229,9 +229,9 @@ class StructureComponentFixer:
                             dendrite_elem = self.create_component_xml(dendrite_name, params['MembraneClassName'], f"Dendrite{soma_idx}_{dendrite_idx}")
                             components.append(dendrite_elem)
                             modified = True
-                            print(f"    ✅ Добавлен {dendrite_name}")
+                            print(f"    ✅ Added {dendrite_name}")
             elif params.get('NumDendriteMembraneParts', 0) > 0:
-                # Режим 1 - одинаковая длина для всех сом
+                # Mode 1 — same length for all soma
                 dendrite_length = params['NumDendriteMembraneParts']
                 for soma_idx in range(1, num_soma + 1):
                     for dendrite_idx in range(1, dendrite_length + 1):
@@ -240,92 +240,92 @@ class StructureComponentFixer:
                             dendrite_elem = self.create_component_xml(dendrite_name, params['MembraneClassName'], f"Dendrite{soma_idx}_{dendrite_idx}")
                             components.append(dendrite_elem)
                             modified = True
-                            print(f"    ✅ Добавлен {dendrite_name}")
-            
+                            print(f"    ✅ Added {dendrite_name}")
+
             if modified:
-                # Форматируем и сохраняем
+                # Format and save
                 ET.indent(tree, space="  ")
                 model_path.parent.mkdir(parents=True, exist_ok=True)
                 tree.write(model_path, encoding='utf-8', xml_declaration=True)
-                print(f"  ✅ Обновлен: {model_path}")
-            
+                print(f"  ✅ Updated: {model_path}")
+
             return modified
-            
+
         except Exception as e:
-            print(f"  ❌ Ошибка при добавлении компонентов: {e}")
+            print(f"  ❌ Error while adding components: {e}")
             return False
-    
+
     def fix_config(self, config_rel_path: str) -> bool:
-        """Исправляет одну конфигурацию"""
+        """Fix a single configuration."""
         config_dir = self.configs_dir / config_rel_path
         project_ini = config_dir / "project.ini"
-        
+
         if not project_ini.exists():
-            print(f"  ⚠️  project.ini не найден: {project_ini}")
+            print(f"  ⚠️  project.ini not found: {project_ini}")
             return False
-        
-        print(f"\nОбработка: {config_rel_path}")
-        
-        # Находим Parameters и Model файлы
+
+        print(f"\nProcessing: {config_rel_path}")
+
+        # Locate Parameters and Model files
         try:
             content = project_ini.read_text(encoding='utf-8', errors='ignore')
             params_match = re.search(r'<ParametersFileName>([^<]+)</ParametersFileName>', content)
             model_match = re.search(r'<ModelFileName>([^<]+)</ModelFileName>', content)
-            
+
             if not params_match or not model_match:
-                print(f"  ⚠️  Не найдены ParametersFileName или ModelFileName")
+                print(f"  ⚠️  ParametersFileName or ModelFileName not found")
                 return False
-            
+
             params_file = config_dir / params_match.group(1).strip()
             model_file = config_dir / model_match.group(1).strip()
-            
+
             if not params_file.exists():
-                print(f"  ⚠️  Parameters файл не найден: {params_file}")
+                print(f"  ⚠️  Parameters file not found: {params_file}")
                 return False
-            
-            # Парсим параметры
+
+            # Parse parameters
             params = self.parse_parameters(params_file)
-            
+
             if params['StructureBuildMode'] == 0:
-                print(f"  ℹ️  StructureBuildMode=0, автоматическая сборка отключена")
+                print("  ℹ️  StructureBuildMode=0, automatic structure building is disabled")
                 return False
-            
-            # Получаем существующие компоненты
+
+            # Get existing components
             existing = self.get_existing_components(model_file)
-            
-            # Добавляем отсутствующие компоненты
+
+            # Add missing components
             modified = self.add_missing_components(model_file, params, existing)
-            
+
             if modified:
                 self.fixes_applied.append(config_rel_path)
-            
+
             return modified
-            
+
         except Exception as e:
-            print(f"  ❌ Ошибка: {e}")
+            print(f"  ❌ Error: {e}")
             return False
-    
+
     def run(self):
-        """Запускает исправление всех проблемных конфигураций"""
-        print("Поиск конфигураций с отсутствующими структурными компонентами...")
+        """Run fixing for all problematic configurations."""
+        print("Searching for configurations with missing structural components...")
         problematic_configs = self.find_configs_with_missing_components()
-        
+
         if not problematic_configs:
-            print("Проблемных конфигураций не найдено.")
+            print("No problematic configurations found.")
             return
-        
-        print(f"Найдено проблемных конфигураций: {len(problematic_configs)}")
-        print(f"Обрабатываем все конфигурации...")
-        
+
+        print(f"Found problematic configurations: {len(problematic_configs)}")
+        print("Processing all configurations...")
+
         for config_path in problematic_configs:
             if self.fix_config(config_path):
                 self.fixes_applied.append(config_path)
-        
+
         print(f"\n{'='*60}")
-        print(f"Исправлено конфигураций: {len(self.fixes_applied)}")
-        
+        print(f"Fixed configurations: {len(self.fixes_applied)}")
+
         if self.fixes_applied:
-            print("\nИсправленные конфигурации:")
+            print("\nFixed configurations list:")
             for config in self.fixes_applied:
                 print(f"  - {config}")
 

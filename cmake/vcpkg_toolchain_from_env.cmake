@@ -18,11 +18,11 @@ if(NOT DEFINED ENV{VCPKG_ROOT} OR "$ENV{VCPKG_ROOT}" STREQUAL "")
 endif()
 file(TO_CMAKE_PATH "$ENV{VCPKG_ROOT}" _VCPKG_ROOT)
 
-# Ранее здесь по умолчанию добавлялись overlay-порты (vcpkg-overlay-ports),
-# в т.ч. наш кастомный boost-modular-build-helper. Сейчас мы хотим проверить
-# «чистый» vcpkg без оверлеев, поэтому не трогаем VCPKG_OVERLAY_PORTS вообще.
-# Если потребуется вернуть оверлеи, это можно будет сделать либо через
-# CMakePresets (cacheVariable VCPKG_OVERLAY_PORTS), либо через переменную среды.
+# Previously we added overlay ports (vcpkg-overlay-ports) here by default,
+# including our custom boost-modular-build-helper. Now we want to test
+# a \"clean\" vcpkg without overlays, so we do not touch VCPKG_OVERLAY_PORTS at all.
+# If overlays are needed again, they can be configured either via
+# CMakePresets (cacheVariable VCPKG_OVERLAY_PORTS) or via an environment variable.
 
 # If generator is Ninja, ensure CMAKE_MAKE_PROGRAM points to a real ninja.exe.
 # Qt Creator sometimes doesn't provide a valid path and CMake errors out early.

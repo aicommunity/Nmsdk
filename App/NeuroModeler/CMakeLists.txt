@@ -1,24 +1,24 @@
 cmake_minimum_required(VERSION 3.16)
 project(NeuroModeler LANGUAGES CXX)
 
-# Подключаем функцию для получения версии из Git
+# Include helper function to get version from Git
 include(${CMAKE_SOURCE_DIR}/cmake/GetGitVersion.cmake)
 
-# Получаем версию из Git
+# Obtain version string from Git
 get_git_version(GIT_VERSION_STRING)
 
-# Для Qt GUI приложения на Windows нужен subsystem:windows
+# For a Qt GUI application on Windows we need subsystem:windows
 if(WIN32)
   add_executable(NeuroModeler WIN32)
 else()
   add_executable(NeuroModeler)
 endif()
 
-# Устанавливаем DLL runtime библиотеку для совместимости с vcpkg
-# Устанавливаем AUTOUIC на уровне target для предотвращения конфликтов с глобальной настройкой
-# Это особенно важно на Windows, где могут возникать проблемы с дублированием правил
+# Set DLL runtime library for compatibility with vcpkg
+# Enable AUTOUIC at the target level to avoid conflicts with global settings
+# This is especially important on Windows, where duplicate rule issues may appear
 if(MSVC)
-  # Используем генератор выражений для multi-config генераторов (Visual Studio)
+  # Use generator expressions for multi-config generators (Visual Studio)
   set_target_properties(NeuroModeler PROPERTIES
     MSVC_RUNTIME_LIBRARY "$<IF:$<CONFIG:Debug>,MultiThreadedDebugDLL,MultiThreadedDLL>"
     AUTOUIC ON
@@ -29,22 +29,22 @@ else()
   )
 endif()
 
-# Настройка Qt (Qt5/Qt6) через общий модуль
+# Configure Qt (Qt5/Qt6) via shared module
 include(${CMAKE_SOURCE_DIR}/cmake/SelectQt.cmake)
 
-# Qt WebEngine опционален: при отсутствии описание показывается через QTextEdit::setMarkdown()
+# Qt WebEngine is optional: if absent, the description is shown via QTextEdit::setMarkdown()
 set(RDK_USE_QT_WEBENGINE 0)
 if(NMSDK_QT_WEBENGINE_AVAILABLE)
   set(RDK_USE_QT_WEBENGINE 1)
 endif()
 
-# Включаем AUTOMOC для автоматической обработки Q_OBJECT классов
+# Enable AUTOMOC for automatic handling of Q_OBJECT classes
 set(CMAKE_AUTOMOC ON)
 
-# Используем относительный путь к UI файлу
-# AUTOUIC отключен для MarkdownMermaidTest, поэтому дублирования не будет
+# Use a relative path to the UI file
+# AUTOUIC is disabled for MarkdownMermaidTest, so there will be no duplication
 set(UI_FILE_NORMALIZED "${CMAKE_CURRENT_SOURCE_DIR}/../../Rdk/GUI/Qt/UComponentsListWidgetModern.ui")
-# Нормализуем путь для единообразия
+# Normalize the path for consistency
 get_filename_component(UI_FILE_NORMALIZED "${UI_FILE_NORMALIZED}" ABSOLUTE)
 
 target_sources(NeuroModeler PRIVATE
@@ -119,15 +119,15 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStyleManager.cpp
 )
 
-# Явно указываем, что UI файл должен обрабатываться только один раз
-# Это предотвращает дублирование правил генерации на Windows
-# Важно: это должно быть ПОСЛЕ target_sources, но ДО других команд
-# Явно включаем AUTOUIC для UI файла, чтобы гарантировать его обработку
+# Explicitly state that the UI file must be processed only once
+# This prevents duplicate generation rules on Windows
+# Important: this must come AFTER target_sources but BEFORE other commands
+# Explicitly enable AUTOUIC for the UI file to guarantee its processing
 set_source_files_properties(${UI_FILE_NORMALIZED} PROPERTIES
   AUTOUIC ON
 )
 
-# DEFINES из оригинального .pro
+# DEFINES from the original .pro file
 target_compile_definitions(NeuroModeler
   PRIVATE
     QT_DLL
@@ -135,7 +135,7 @@ target_compile_definitions(NeuroModeler
     RDK_DISABLE_EXT_GUI
 )
 
-# Подключаем заголовок со строковыми макросами (разный синтаксис для MSVC/GCC)
+# Include header with string macros (different syntax for MSVC/GCC)
 if (MSVC)
   target_compile_options(NeuroModeler PRIVATE /FI${CMAKE_SOURCE_DIR}/App/NeuroModeler/NeuroModelerAppDefs.h)
 else()
@@ -199,10 +199,10 @@ if(glog_FOUND)
 endif()
 
 # Boost libraries (required by rdk.static.qt)
-# Используем MODULE режим для всех платформ (FindBoost.cmake правильно определяет имена библиотек)
+# Use MODULE mode on all platforms (FindBoost.cmake correctly determines library names)
 find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
 if(Boost_FOUND)
-  # Используем современные target'ы, если доступны, иначе используем переменные
+  # Use modern targets if available, otherwise fall back to variables
   if(TARGET Boost::program_options)
     target_link_libraries(NeuroModeler PRIVATE
       Boost::program_options
@@ -213,7 +213,7 @@ if(Boost_FOUND)
       Boost::atomic
     )
   else()
-    # Fallback на старый способ, если target'ы не доступны
+    # Fallback to the legacy approach if targets are not available
     target_link_libraries(NeuroModeler PRIVATE ${Boost_LIBRARIES})
     target_include_directories(NeuroModeler PRIVATE ${Boost_INCLUDE_DIRS})
   endif()
@@ -225,9 +225,9 @@ target_include_directories(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/Core/Graphics
 )
 
-# Передаем версию из Git в определение компилятора
-# CMake автоматически экранирует строку для передачи в препроцессор
-# Формат: RDK_APP_VERSION="1.2.1.0 (develop:b4ff447)"
+# Pass version from Git into a compiler definition
+# CMake automatically escapes the string when passing it to the preprocessor
+# Format: RDK_APP_VERSION="1.2.1.0 (develop:b4ff447)"
 target_compile_definitions(NeuroModeler PRIVATE
   RDK_DISABLE_EXT_GUI
   QT_DLL
@@ -237,12 +237,12 @@ target_compile_definitions(NeuroModeler PRIVATE
   $<$<BOOL:${glog_FOUND}>:RDK_USE_GLOG>
 )
 
-# Опциональные зависимости
+# Optional dependencies
 if (RDK_USE_OPENCV AND OpenCV_FOUND)
   target_link_libraries(NeuroModeler PRIVATE ${OpenCV_LIBS})
 endif()
 
-# Copy style files to output directory
+# Copy style files to the output directory
 set(STYLES_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Styles")
 set(STYLES_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Styles")
 
@@ -263,7 +263,7 @@ add_custom_command(TARGET NeuroModeler POST_BUILD
     COMMENT "Copying style files to Bin/Styles/"
 )
 
-# Copy help files to output directory
+# Copy help files to the output directory
 set(HELP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Bin/Help")
 set(HELP_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Help")
 
@@ -283,27 +283,27 @@ add_custom_command(TARGET NeuroModeler POST_BUILD
     COMMENT "Copying help files to Bin/Help/"
 )
 
-# Подключаем функцию развёртывания DLL из vcpkg
+# Include function for deploying DLLs from vcpkg
 include(${CMAKE_SOURCE_DIR}/cmake/DeployVcpkgDlls.cmake)
 
-# Развёртываем все необходимые DLL из vcpkg
+# Deploy all required DLLs from vcpkg
 deploy_vcpkg_dlls(NeuroModeler)
 
-# Copy Qt WebEngine files to output directory (Windows only)
-# Qt WebEngine требует QtWebEngineProcess.exe и другие файлы для работы
+# Copy Qt WebEngine files to the output directory (Windows only)
+# Qt WebEngine requires QtWebEngineProcess.exe and other files to work
 if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
-    # Получаем путь к Qt из vcpkg или локальной установки
+    # Get the Qt path from vcpkg or a local installation
     get_target_property(QT_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
     if(QT_QMAKE_EXECUTABLE)
         get_filename_component(QT_BIN_DIR "${QT_QMAKE_EXECUTABLE}" DIRECTORY)
 
-        # Также проверяем путь из vcpkg_installed
+        # Also check the path from vcpkg_installed
         if(EXISTS "${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/bin")
             set(_vcpkg_bin_dir "${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/bin")
             set(_vcpkg_debug_bin_dir "${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/debug/bin")
         endif()
 
-        # Список возможных путей к QtWebEngineProcess.exe (release)
+        # List of possible paths to QtWebEngineProcess.exe (release)
         set(_webengine_process_paths
             "${QT_BIN_DIR}/QtWebEngineProcess.exe"
             "${QT_BIN_DIR}/../tools/qt5/bin/QtWebEngineProcess.exe"
@@ -315,7 +315,7 @@ if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
             )
         endif()
 
-        # Ищем и копируем release версию
+        # Search for and copy the release version
         set(_found_release FALSE)
         foreach(_path IN LISTS _webengine_process_paths)
             if(EXISTS "${_path}")
@@ -333,12 +333,12 @@ if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
             message(WARNING "QtWebEngineProcess.exe not found. Checked: ${_webengine_process_paths}")
         endif()
 
-        # Список возможных путей к QtWebEngineProcessd.exe (debug)
+        # List of possible paths to QtWebEngineProcessd.exe (debug)
         get_filename_component(QT_ROOT_DIR "${QT_BIN_DIR}" DIRECTORY)
         set(_webengine_processd_paths
-            # Типичное расположение для системного Qt 5.15.2 на Windows
+            # Typical location for system Qt 5.15.2 on Windows
             "${QT_BIN_DIR}/QtWebEngineProcessd.exe"
-            # Альтернативные layout'ы (debug/tools), в т.ч. для vcpkg Qt5
+            # Alternative layouts (debug/tools), including vcpkg Qt5
             "${QT_ROOT_DIR}/debug/bin/QtWebEngineProcessd.exe"
             "${QT_BIN_DIR}/../debug/bin/QtWebEngineProcessd.exe"
             "${QT_ROOT_DIR}/tools/qt5/bin/QtWebEngineProcessd.exe"
@@ -350,7 +350,7 @@ if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
             )
         endif()
 
-        # Ищем и копируем debug версию
+        # Search for and copy the debug version
         set(_found_debug FALSE)
         foreach(_path IN LISTS _webengine_processd_paths)
             if(EXISTS "${_path}")
@@ -368,7 +368,7 @@ if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
             message(WARNING "QtWebEngineProcessd.exe not found. Checked: ${_webengine_processd_paths}")
         endif()
 
-        # Копируем директорию resources (если существует)
+        # Copy the resources directory (if it exists)
         get_filename_component(QT_ROOT_DIR "${QT_BIN_DIR}" DIRECTORY)
         set(QT_RESOURCES_DIR "${QT_ROOT_DIR}/resources")
         if(EXISTS "${QT_RESOURCES_DIR}")
@@ -380,7 +380,7 @@ if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
             )
         endif()
 
-        # Копируем директорию translations/qtwebengine_locales (если существует)
+        # Copy the translations/qtwebengine_locales directory (if it exists)
         set(QT_TRANSLATIONS_DIR "${QT_ROOT_DIR}/translations")
         if(EXISTS "${QT_TRANSLATIONS_DIR}")
             add_custom_command(TARGET NeuroModeler POST_BUILD

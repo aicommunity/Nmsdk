@@ -1,12 +1,12 @@
 # DeployVcpkgDlls.cmake
-# Функция для копирования всех необходимых DLL из vcpkg в выходную директорию
+# Function to copy all required DLLs from vcpkg into the output directory
 
 function(deploy_vcpkg_dlls TARGET_NAME)
     if(NOT WIN32)
         return()
     endif()
 
-    # Определяем путь к vcpkg_installed
+    # Determine path to vcpkg_installed
     if(DEFINED VCPKG_INSTALLED_DIR)
         set(_vcpkg_installed_dir "${VCPKG_INSTALLED_DIR}")
     elseif(EXISTS "${CMAKE_BINARY_DIR}/vcpkg_installed")
@@ -16,7 +16,7 @@ function(deploy_vcpkg_dlls TARGET_NAME)
         return()
     endif()
 
-    # Путь к bin директории vcpkg
+    # Path to vcpkg bin directory
     set(_vcpkg_bin_dir "${_vcpkg_installed_dir}/${VCPKG_TARGET_TRIPLET}/bin")
     set(_vcpkg_debug_bin_dir "${_vcpkg_installed_dir}/${VCPKG_TARGET_TRIPLET}/debug/bin")
 
@@ -25,11 +25,11 @@ function(deploy_vcpkg_dlls TARGET_NAME)
         return()
     endif()
 
-    # Копируем все DLL из release bin директории
+    # Copy all DLLs from the release bin directory
     file(GLOB _dll_files "${_vcpkg_bin_dir}/*.dll")
     foreach(_dll_file IN LISTS _dll_files)
         get_filename_component(_dll_name "${_dll_file}" NAME)
-        # Пропускаем debug DLL (с суффиксом 'd' перед .dll)
+        # Skip debug DLLs (with 'd' suffix before .dll)
         if(NOT _dll_name MATCHES "d\\.dll$")
             add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -40,7 +40,7 @@ function(deploy_vcpkg_dlls TARGET_NAME)
         endif()
     endforeach()
 
-    # Копируем debug DLL (если они существуют)
+    # Copy debug DLLs (if they exist)
     if(EXISTS "${_vcpkg_debug_bin_dir}")
         file(GLOB _debug_dll_files "${_vcpkg_debug_bin_dir}/*.dll")
         foreach(_dll_file IN LISTS _debug_dll_files)
@@ -54,7 +54,7 @@ function(deploy_vcpkg_dlls TARGET_NAME)
         endforeach()
     endif()
 
-    # Копируем Qt WebEngine файлы, если они есть
+    # Copy Qt WebEngine files, if present
     if(RDK_USE_QT_WEBENGINE)
         # QtWebEngineProcess.exe / QtWebEngineProcessd.exe
         get_filename_component(_vcpkg_root "${_vcpkg_bin_dir}" DIRECTORY)
@@ -84,7 +84,7 @@ function(deploy_vcpkg_dlls TARGET_NAME)
             endif()
         endforeach()
 
-        # Debug-версия
+        # Debug version
         set(_webengine_processd_candidates
             "${_vcpkg_debug_bin_dir}/QtWebEngineProcessd.exe"
             "${_tools_qt5_bin}/QtWebEngineProcessd.exe"
@@ -103,7 +103,7 @@ function(deploy_vcpkg_dlls TARGET_NAME)
             endif()
         endforeach()
 
-        # Qt WebEngine DLL (Qt5 и Qt6)
+        # Qt WebEngine DLLs (Qt5 and Qt6)
         file(GLOB _webengine_dlls
             "${_vcpkg_bin_dir}/Qt5WebEngine*.dll"
             "${_vcpkg_bin_dir}/Qt6WebEngine*.dll"
@@ -119,7 +119,7 @@ function(deploy_vcpkg_dlls TARGET_NAME)
             )
         endforeach()
 
-        # Ресурсы WebEngine
+        # WebEngine resources
         get_filename_component(_vcpkg_root "${_vcpkg_bin_dir}" DIRECTORY)
         set(_resources_dir "${_vcpkg_root}/resources")
         if(EXISTS "${_resources_dir}")
@@ -131,7 +131,7 @@ function(deploy_vcpkg_dlls TARGET_NAME)
             )
         endif()
 
-        # Переводы WebEngine
+        # WebEngine translations
         set(_translations_dir "${_vcpkg_root}/translations")
         if(EXISTS "${_translations_dir}")
             add_custom_command(TARGET ${TARGET_NAME} POST_BUILD

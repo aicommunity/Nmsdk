@@ -1,5 +1,5 @@
 #!/bin/bash
-# Скрипт для автоматической проверки отладочных сообщений в логах
+# Script for automatic verification of debug messages in logs
 
 set -e
 
@@ -8,29 +8,29 @@ CONSOLE_EXE="Bin/Platform/Linux/NeuroModelerConsole"
 LOG_DIR="Bin/Platform/Linux/EventsLog"
 
 echo "================================================================================"
-echo "АВТОМАТИЧЕСКАЯ ПРОВЕРКА ОТЛАДОЧНЫХ СООБЩЕНИЙ"
+echo "AUTOMATED DEBUG MESSAGE CHECK"
 echo "================================================================================"
 
-# Запускаем валидацию
+# Run validation
 echo ""
-echo "Запускаю валидацию..."
+echo "Starting validation..."
 "$CONSOLE_EXE" --check-config "$PROJECT_INI" > /dev/null 2>&1
 
 sleep 2
 
-# Находим последний лог
+# Find the latest log file
 LATEST_LOG=$(ls -t "$LOG_DIR"/*.INFO* 2>/dev/null | head -1)
 
 if [ -z "$LATEST_LOG" ]; then
-    echo "❌ Файлы логов не найдены"
+    echo "❌ Log files not found"
     exit 1
 fi
 
 echo ""
-echo "Проверяю лог: $(basename "$LATEST_LOG")"
+echo "Checking log: $(basename "$LATEST_LOG")"
 echo ""
 
-# Ищем отладочные сообщения
+# Look for debug messages
 KEYWORDS=(
     "UEngine::CreateEnvironment() called"
     "MotionControlLibrary::CreateClassSamples() called"
@@ -48,7 +48,7 @@ KEYWORDS=(
 FOUND_COUNT=0
 for keyword in "${KEYWORDS[@]}"; do
     if grep -q "$keyword" "$LATEST_LOG" 2>/dev/null; then
-        echo "✅ Найдено: $keyword"
+        echo "✅ Found: $keyword"
         grep "$keyword" "$LATEST_LOG" | head -3 | sed 's/^/   /'
         FOUND_COUNT=$((FOUND_COUNT + 1))
     fi
@@ -57,12 +57,12 @@ done
 echo ""
 if [ $FOUND_COUNT -gt 0 ]; then
     echo "================================================================================"
-    echo "✅ НАЙДЕНО $FOUND_COUNT ТИПОВ ОТЛАДОЧНЫХ СООБЩЕНИЙ"
+    echo "✅ FOUND $FOUND_COUNT TYPES OF DEBUG MESSAGES"
     echo "================================================================================"
     exit 0
 else
     echo "================================================================================"
-    echo "⚠️  ОТЛАДОЧНЫЕ СООБЩЕНИЯ НЕ НАЙДЕНЫ"
+    echo "⚠️  NO DEBUG MESSAGES FOUND"
     echo "================================================================================"
     exit 1
 fi

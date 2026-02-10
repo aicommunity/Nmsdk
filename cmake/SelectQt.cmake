@@ -1,16 +1,16 @@
 #
 # SelectQt.cmake
-# Унифицированный выбор Qt5/Qt6 и создание алиасов Nmsdk::Qt::*
+# Unified Qt5/Qt6 selection and creation of Nmsdk::Qt::* aliases
 #
 
 include_guard(GLOBAL)
 
-# Позволяем задавать версию явно: -DQT_MAJOR=5 или -DQT_MAJOR=6
+# Allow setting the version explicitly: -DQT_MAJOR=5 or -DQT_MAJOR=6
 if(DEFINED QT_MAJOR AND NOT DEFINED QT_VERSION_MAJOR)
   set(QT_VERSION_MAJOR "${QT_MAJOR}")
 endif()
 
-# Если версия ещё не определена — пробуем Qt6, затем Qt5
+# If the version is still not defined — try Qt6 first, then Qt5
 if(NOT DEFINED QT_VERSION_MAJOR)
   find_package(Qt6 QUIET COMPONENTS Core)
   if(Qt6_FOUND)
@@ -24,7 +24,7 @@ endif()
 message(STATUS "Nmsdk: using Qt${QT_VERSION_MAJOR}")
 
 if(QT_VERSION_MAJOR EQUAL 6)
-  # Qt 6: базовые модули
+  # Qt 6: core modules
   find_package(Qt6 REQUIRED COMPONENTS
     Core
     Gui
@@ -37,13 +37,13 @@ if(QT_VERSION_MAJOR EQUAL 6)
     Test
   )
 
-  # Дополнительные модули (опционально)
+  # Additional modules (optional)
   find_package(Qt6 COMPONENTS SerialPort QUIET)
   find_package(Qt6 COMPONENTS WebEngineWidgets QUIET)
   find_package(Qt6 COMPONENTS Core5Compat QUIET)
   find_package(Qt6 COMPONENTS Charts QUIET)
 
-  # Создаём таргеты без :: (CMake не позволяет :: в add_library)
+  # Create targets without :: (CMake does not allow :: in add_library)
   add_library(Nmsdk_Qt_Core       INTERFACE)
   add_library(Nmsdk_Qt_Gui        INTERFACE)
   add_library(Nmsdk_Qt_Widgets    INTERFACE)
@@ -58,7 +58,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
   add_library(Nmsdk_Qt_CoreCompat INTERFACE)
   add_library(Nmsdk_Qt_Charts     INTERFACE)
 
-  # Создаём алиасы с :: для удобства использования
+  # Create :: aliases for convenient usage
   add_library(Nmsdk::Qt::Core ALIAS Nmsdk_Qt_Core)
   add_library(Nmsdk::Qt::Gui ALIAS Nmsdk_Qt_Gui)
   add_library(Nmsdk::Qt::Widgets ALIAS Nmsdk_Qt_Widgets)
@@ -103,7 +103,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
   endif()
 
 elseif(QT_VERSION_MAJOR EQUAL 5)
-  # Qt 5: используем те же алиасы
+  # Qt 5: use the same aliases
   find_package(Qt5 REQUIRED COMPONENTS
     Core
     Gui
@@ -120,7 +120,7 @@ elseif(QT_VERSION_MAJOR EQUAL 5)
 
   find_package(Qt5WebEngineWidgets QUIET)
 
-  # Создаём таргеты без :: (CMake не позволяет :: в add_library)
+  # Create targets without :: (CMake does not allow :: in add_library)
   add_library(Nmsdk_Qt_Core       INTERFACE)
   add_library(Nmsdk_Qt_Gui        INTERFACE)
   add_library(Nmsdk_Qt_Widgets    INTERFACE)
@@ -135,7 +135,7 @@ elseif(QT_VERSION_MAJOR EQUAL 5)
   add_library(Nmsdk_Qt_SerialPort INTERFACE)
   add_library(Nmsdk_Qt_Charts     INTERFACE)
 
-  # Создаём алиасы с :: для удобства использования
+  # Create :: aliases for convenient usage
   add_library(Nmsdk::Qt::Core ALIAS Nmsdk_Qt_Core)
   add_library(Nmsdk::Qt::Gui ALIAS Nmsdk_Qt_Gui)
   add_library(Nmsdk::Qt::Widgets ALIAS Nmsdk_Qt_Widgets)

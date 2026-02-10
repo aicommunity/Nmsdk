@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 project(NmsdkTests LANGUAGES CXX)
 
-# Стандарт C++
+# C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Поиск Google Test
+# Find Google Test
 find_package(GTest QUIET)
 if(NOT GTest_FOUND)
-    # Если GTest не найден, используем FetchContent для загрузки
+    # If GTest is not found, use FetchContent to download it
     include(FetchContent)
     FetchContent_Declare(
         googletest
@@ -19,10 +19,10 @@ if(NOT GTest_FOUND)
     FetchContent_MakeAvailable(googletest)
 endif()
 
-# Включить тестирование
+# Enable testing
 enable_testing()
 
-# Подпроекты
+# Subprojects
 add_subdirectory(Unit)
 add_subdirectory(Integration)
 
