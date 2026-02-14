@@ -18,6 +18,7 @@ rem xcopy "..\..\Bin\Platform\Win\libcrypto*.dll" InstallSourcesQt\Bin\Platform\
 rem xcopy "..\..\Bin\Platform\Win\libssl*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 rem xcopy "..\..\Bin\Platform\Win\double-conversion.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 xcopy "..\..\Bin\Platform\Win\*.dll" InstallSourcesQt\Bin\Platform\Win\ /Y /D
+xcopy "..\..\Bin\Platform\Win\qt.conf" InstallSourcesQt\Bin\Platform\Win\ /Y /D
 
 xcopy "..\..\Bin\Configs\MC-RCN\*.*" InstallSourcesQt\Bin\Configs\MC-RCN\*.* /Y /E /D
 xcopy "..\..\Bin\Configs\NM-Neurons\*.*" InstallSourcesQt\Bin\Configs\NM-Neurons\*.* /Y /E /D
@@ -37,6 +38,7 @@ xcopy "..\..\Bin\Platform\Win\plugins\platforms\*.dll" InstallSourcesQt\Bin\Plat
 xcopy "..\..\Bin\Platform\Win\plugins\platformthemes\*.dll" InstallSourcesQt\Bin\Platform\Win\plugins\platformthemes\*.dll /Y /E /D
 xcopy "..\..\Bin\Platform\Win\plugins\printsupport\*.dll" InstallSourcesQt\Bin\Platform\Win\plugins\printsupport\*.dll /Y /E /D
 xcopy "..\..\Bin\Platform\Win\plugins\styles\*.dll" InstallSourcesQt\Bin\Platform\Win\plugins\styles\*.dll /Y /E /D
+xcopy "..\..\Bin\Platform\Win\resources\*.*" InstallSourcesQt\Bin\Platform\Win\resources\ /Y /E /D
 
 call "InstallSourcesQt\Bin\Configs\erase_all.bat"
 
