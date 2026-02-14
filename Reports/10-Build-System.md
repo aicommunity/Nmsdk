@@ -286,5 +286,5 @@ cmake -L ..
 
 - [00-Project-Overview.md](00-Project-Overview.md) - общий обзор проекта
 - [01-Rdk-Core-Structure.md](01-Rdk-Core-Structure.md) - структура ядра
-- [02-Libraries-Overview.md](02-Libraries-Overview.md) - обзор библиотек и их зависимостей
+- [Docs/Libraries/Overview.md](../Docs/Libraries/Overview.md) - обзор библиотек и их зависимостей
 

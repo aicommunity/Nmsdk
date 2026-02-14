@@ -62,6 +62,9 @@ const QCommandLineOption clDescClassOption(QStringList() << "K" << "cldesc-class
                                            "class");
 const QCommandLineOption clDescForceOption(QStringList() << "F" << "cldesc-force",
                                            "Force overwrite of existing headers/descriptions when generating ClDesc.");
+const QCommandLineOption checkConfigOption(QStringList() << "check-config" << "validate-config",
+                                          "Validate configuration file and exit with error code.",
+                                          "path");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
@@ -71,6 +74,7 @@ parser.addOption(lexiconOption);
 parser.addOption(clDescLibraryOption);
 parser.addOption(clDescClassOption);
 parser.addOption(clDescForceOption);
+parser.addOption(checkConfigOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -92,7 +96,8 @@ parser.addOption(clDescForceOption);
          option == "--calc-time" || option == "-t" ||
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
-         option == "--cldesc-class" || option == "-K";
+         option == "--cldesc-class" || option == "-K" ||
+         option == "--check-config" || option == "--validate-config";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -105,7 +110,8 @@ parser.addOption(clDescForceOption);
       token == "--generate-cldesc" || token == "-g" ||
       token == "--cldesc-lexicon" || token == "-l" ||
       token == "--cldesc-library" || token == "-C" ||
-      token == "--cldesc-class" || token == "-K")
+      token == "--cldesc-class" || token == "-K" ||
+      token == "--check-config" || token == "--validate-config")
    {
     if(shouldSkipValue(token) && i + 1 < original.size())
      ++i;
@@ -125,6 +131,7 @@ parser.addOption(clDescForceOption);
  const bool cliStartCalc = parser.isSet(startCalcOption);
  const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
 const bool cliGenerateClDesc = parser.isSet(generateClDescOption);
+const QString cliCheckConfig = parser.value(checkConfigOption).trimmed();
 const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
 const QStringList cliLibraryFilters = parser.values(clDescLibraryOption);
 const QStringList cliClassFilters = parser.values(clDescClassOption);
@@ -151,6 +158,96 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
 
  if(init_res != 0)
   return init_res;
+
+ // Обработка проверки конфигурации
+ if(!cliCheckConfig.isEmpty())
+ {
+  QString configPath = cliCheckConfig;
+  if(configPath.isEmpty() && !cliConfigPath.isEmpty())
+  {
+   configPath = cliConfigPath;
+  }
+  
+  if(configPath.isEmpty())
+  {
+   qCritical() << "Error: Configuration file path is required for --check-config";
+   return 1;
+  }
+
+  RDK::TProjectLoadDiagnostics diagnostics = AppCore.application.ValidateProject(configPath.toLocal8Bit().constData());
+  
+  // Выводим результаты
+  std::cout << "Configuration validation results:" << std::endl;
+  std::cout << "  Model exists: " << (diagnostics.modelExists ? "Yes" : "No") << std::endl;
+  std::cout << "  Model empty: " << (diagnostics.modelEmpty ? "Yes" : "No") << std::endl;
+  
+  if(!diagnostics.componentsCount.empty())
+  {
+   std::cout << "  Components count per channel:";
+   for(size_t i = 0; i < diagnostics.componentsCount.size(); ++i)
+   {
+	std::cout << " [" << i << "]=" << diagnostics.componentsCount[i];
+   }
+   std::cout << std::endl;
+  }
+  
+  std::cout << "  Channels loaded: " << diagnostics.channelsLoaded << "/" << diagnostics.channelsTotal << std::endl;
+  std::cout << "  Errors: " << diagnostics.errors.size() << std::endl;
+  std::cout << "  Warnings: " << diagnostics.warnings.size() << std::endl;
+  
+  if(!diagnostics.errors.empty())
+  {
+   std::cerr << std::endl << "Errors:" << std::endl;
+   for(const std::string& error : diagnostics.errors)
+   {
+	std::cerr << "  - " << error << std::endl;
+   }
+  }
+  
+  if(!diagnostics.warnings.empty())
+  {
+   std::cout << std::endl << "Warnings:" << std::endl;
+   for(const std::string& warning : diagnostics.warnings)
+   {
+	std::cout << "  - " << warning << std::endl;
+   }
+  }
+  
+  if(!diagnostics.missingFiles.empty())
+  {
+   std::cerr << std::endl << "Missing files:" << std::endl;
+   for(const std::string& file : diagnostics.missingFiles)
+   {
+	std::cerr << "  - " << file << std::endl;
+   }
+  }
+  
+  if(!diagnostics.failedChannels.empty())
+  {
+   std::cerr << std::endl << "Failed channels:";
+   for(int channel : diagnostics.failedChannels)
+   {
+	std::cerr << " " << channel;
+   }
+   std::cerr << std::endl;
+  }
+  
+  std::cout << std::endl << "Configuration is " << (diagnostics.isValid ? "VALID" : "INVALID") << std::endl;
+  
+  // Возвращаем код ошибки
+  if(!diagnostics.isValid || !diagnostics.errors.empty())
+  {
+   return 1; // Есть ошибки
+  }
+  else if(!diagnostics.warnings.empty())
+  {
+   return 2; // Есть только предупреждения
+  }
+  else
+  {
+   return 0; // Всё в порядке
+  }
+ }
 
  if(!cliConfigPath.isEmpty())
  {

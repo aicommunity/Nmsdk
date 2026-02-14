@@ -3,15 +3,6 @@
   "version-string": "0.1.0",
   "dependencies": [
     {
-      "name": "qt5-base"
-    },
-    {
-      "name": "qt5-serialport"
-    },
-    {
-      "name": "qt5-charts"
-    },
-    {
       "name": "curl"
     },
     {
@@ -36,6 +27,16 @@
     { "name": "glog" }
   ],
   "features": {
+    "qt": {
+      "description": "Enable Qt GUI via vcpkg (Qt6: qtbase, qttools, qtserialport, qtcharts, qtwebengine)",
+      "dependencies": [
+        "qtbase",
+        "qttools",
+        "qtserialport",
+        "qtcharts",
+        "qtwebengine"
+      ]
+    },
     "python": {
       "description": "Enable Python",
       "dependencies": [
@@ -50,6 +51,5 @@
       "description": "Enable TensorFlow",
       "dependencies": []
     }
-  },
-  "builtin-baseline": "288e8bebf4ca67c1f8ebd49366b03650cfd9eb7d"
+  }
 }

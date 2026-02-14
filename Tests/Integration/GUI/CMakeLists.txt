@@ -1,23 +1,23 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Тест для проверки работы меню
+# Test for verifying menu behavior
 add_executable(Test_MenuBar Test_MenuBar.cpp)
 
-# Тест для проверки QMessageBox::question в Windows
-# Используем обычный executable (не WIN32), так как это консольное приложение для тестирования
+# Test for verifying QMessageBox::question on Windows
+# Use a regular executable (not WIN32), because this is a console test application
 add_executable(Test_QMessageBox Test_QMessageBox.cpp)
 
-# Production тест - использует Qt из Bin/Platform/<OS> (те же DLL и плагины, что и штатное приложение)
-# Собирается в DEPLOY_ROOT для использования тех же бинарников Qt
+# Production test — uses Qt from Bin/Platform/<OS> (same DLLs and plugins as the main application)
+# Built into DEPLOY_ROOT to use the same Qt binaries
 add_executable(Test_QMessageBox_Production Test_QMessageBox_Production.cpp)
 
-# Включаем автоматическую генерацию MOC файлов
+# Enable automatic generation of MOC files
 set(CMAKE_AUTOMOC ON)
 set_target_properties(Test_QMessageBox PROPERTIES AUTOMOC ON)
 set_target_properties(Test_QMessageBox_Production PROPERTIES AUTOMOC ON)
 
-# Настройка вывода для production теста в DEPLOY_ROOT
-# Используем те же настройки, что и для штатного приложения
+# Configure output for the production test into DEPLOY_ROOT
+# Use the same settings as for the main application
 set_target_properties(Test_QMessageBox_Production PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
     RUNTIME_OUTPUT_DIRECTORY_DEBUG "${DEPLOY_ROOT}"
@@ -26,7 +26,7 @@ set_target_properties(Test_QMessageBox_Production PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${DEPLOY_ROOT}"
 )
 
-# Поиск Qt5 или Qt6
+# Find Qt5 or Qt6
 find_package(Qt5 COMPONENTS Core Test Widgets REQUIRED)
 find_package(Qt6 COMPONENTS Core Test Widgets QUIET)
 
@@ -40,14 +40,14 @@ if(Qt6_FOUND)
 else()
     target_link_libraries(Test_MenuBar Qt5::Core Qt5::Test Qt5::Widgets)
     target_link_libraries(Test_QMessageBox Qt5::Core Qt5::Widgets)
-    # Production тест использует те же настройки Qt, что и штатное приложение
+    # Production test uses the same Qt settings as the main application
     target_link_libraries(Test_QMessageBox_Production Qt5::Core Qt5::Widgets Qt5::Gui)
     target_compile_definitions(Test_MenuBar PRIVATE QT_VERSION_MAJOR=5)
     target_compile_definitions(Test_QMessageBox PRIVATE QT_VERSION_MAJOR=5)
     target_compile_definitions(Test_QMessageBox_Production PRIVATE QT_VERSION_MAJOR=5 QT_DLL QT_WIDGETS_LIB)
 endif()
 
-# Добавляем пути для включения заголовков
+# Add include paths for headers
 target_include_directories(Test_MenuBar PRIVATE
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
     ${CMAKE_SOURCE_DIR}/Rdk/Core
@@ -106,7 +106,7 @@ else()
     target_compile_definitions(Test_QMessageBoxWithStyles PRIVATE QT_DLL QT_WIDGETS_LIB)
 endif()
 
-# Добавляем тест в CTest
+# Register tests in CTest
 add_test(NAME MenuBarTest COMMAND Test_MenuBar)
 add_test(NAME QMessageBoxTest COMMAND Test_QMessageBox)
 add_test(NAME QMessageBoxProductionTest COMMAND Test_QMessageBox_Production)
@@ -115,7 +115,7 @@ add_test(NAME AppStartupTest COMMAND Test_AppStartup)
 add_test(NAME QMessageBoxStyleCrashTest COMMAND Test_QMessageBoxStyleCrash)
 add_test(NAME QMessageBoxWithStylesTest COMMAND Test_QMessageBoxWithStyles)
 
-# Find GTest before defining test that uses it
+# Find GTest before defining the test that uses it
 find_package(GTest QUIET)
 if(NOT GTest_FOUND)
     include(FetchContent)

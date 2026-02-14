@@ -1,0 +1,1198 @@
+{
+  "tokens": {
+    "Id": "Идентификатор",
+    "Name": "Имя"
+  },
+  "classOverrides": {
+    "ColorConvert": {
+      "header": "преобразование цветовых пространств (Rdk-CvBasicLib)",
+      "description": "`UBAColorConvert` (реализация в `UBAColorConvert.cpp`) — компонент конвейера, который конвертирует изображения между цветовыми пространствами (BGR/RGB/GRAY и т.п.)."
+    },
+    "ResizeEdges": {
+      "header": "геометрические преобразования (Rdk-CvBasicLib)",
+      "description": "Компоненты `UBAResize*`, `UBARotate*`, `UBAFlipImage*` выполняют геометрические преобразования изображений: изменение размера, поворот и отражение. Используются в пайплайнах предобработки перед детекцией/классификацией."
+    },
+    "RotateSimple": {
+      "header": "геометрические преобразования (Rdk-CvBasicLib)",
+      "description": "Компоненты `UBAResize*`, `UBARotate*`, `UBAFlipImage*` выполняют геометрические преобразования изображений: изменение размера, поворот и отражение. Используются в пайплайнах предобработки перед детекцией/классификацией."
+    },
+    "UBAFlipImageSimple": {
+      "header": "геометрические преобразования (Rdk-CvBasicLib)",
+      "description": "Компоненты `UBAResize*`, `UBARotate*`, `UBAFlipImage*` выполняют геометрические преобразования изображений: изменение размера, поворот и отражение. Используются в пайплайнах предобработки перед детекцией/классификацией."
+    },
+    "Model": {
+      "header": "модель обработки",
+      "description": "`UBAModel` служит контейнером для составных моделей обработки (например, совокупность нескольких пайплайнов/веток), предоставляя единый выход `Output` и рабочее разрешение (`WorkWidth`, `WorkHeight`)."
+    },
+    "Pipeline": {
+      "header": "конвейеры обработки",
+      "description": "UBPipeline / UBParallelPipeline — конвейеры обработки"
+    },
+    "ParallelPipeline": {
+      "header": "конвейеры обработки",
+      "description": "UBPipeline / UBParallelPipeline — конвейеры обработки"
+    },
+    "Source": {
+      "header": "захват и источники изображений (Rdk-CvBasicLib)",
+      "description": "Компоненты семейства `TCapture*` и `UBA*Source*` обеспечивают захват изображений из внешних устройств (камеры, IP‑камеры), последовательностей файлов и внутренних bitmap‑источников, формируя единый поток `UBitmap` для дальнейшей обработки в UBA‑пайплайнах."
+    },
+    "SourceFile": {
+      "header": "захват и источники изображений (Rdk-CvBasicLib)",
+      "description": "Компоненты семейства `TCapture*` и `UBA*Source*` обеспечивают захват изображений из внешних устройств (камеры, IP‑камеры), последовательностей файлов и внутренних bitmap‑источников, формируя единый поток `UBitmap` для дальнейшей обработки в UBA‑пайплайнах."
+    },
+    "SourceMultiFile": {
+      "header": "захват и источники изображений (Rdk-CvBasicLib)",
+      "description": "Компоненты семейства `TCapture*` и `UBA*Source*` обеспечивают захват изображений из внешних устройств (камеры, IP‑камеры), последовательностей файлов и внутренних bitmap‑источников, формируя единый поток `UBitmap` для дальнейшей обработки в UBA‑пайплайнах."
+    },
+    "Receiver": {
+      "header": "захват и источники изображений (Rdk-CvBasicLib)",
+      "description": "Компоненты семейства `TCapture*` и `UBA*Source*` обеспечивают захват изображений из внешних устройств (камеры, IP‑камеры), последовательностей файлов и внутренних bitmap‑источников, формируя единый поток `UBitmap` для дальнейшей обработки в UBA‑пайплайнах."
+    },
+    "Crop": {
+      "header": "обрезка и уменьшение изображений (Rdk-CvBasicLib)",
+      "description": "`UBACrop` (`UBACrop.cpp`), `UBAReduce` (`UBAReduce.cpp`) — компоненты конвейера для пространственной обрезки (ROI) и уменьшения размерности изображений."
+    },
+    "Reduce": {
+      "header": "обрезка и уменьшение изображений (Rdk-CvBasicLib)",
+      "description": "`UBACrop` (`UBACrop.cpp`), `UBAReduce` (`UBAReduce.cpp`) — компоненты конвейера для пространственной обрезки (ROI) и уменьшения размерности изображений."
+    },
+    "UMDMatrixDoubleMux": {
+      "header": "математика и мультиплексоры (Rdk-CvBasicLib)",
+      "description": "`UBMathOperator`, `UMatrixMath<T>`, `UMDMatrixMux<T>`, `UMDScalarMux<T>` — выполняют арифметику над матрицами/скалярами и объединение/разделение потоков данных."
+    },
+    "UMDMatrixIntMux": {
+      "header": "математика и мультиплексоры (Rdk-CvBasicLib)",
+      "description": "`UBMathOperator`, `UMatrixMath<T>`, `UMDMatrixMux<T>`, `UMDScalarMux<T>` — выполняют арифметику над матрицами/скалярами и объединение/разделение потоков данных."
+    },
+    "BMathOperator": {
+      "header": "математика и мультиплексоры (Rdk-CvBasicLib)",
+      "description": "`UBMathOperator`, `UMatrixMath<T>`, `UMDMatrixMux<T>`, `UMDScalarMux<T>` — выполняют арифметику над матрицами/скалярами и объединение/разделение потоков данных."
+    },
+    "UMatrixIntMath": {
+      "header": "математика и мультиплексоры (Rdk-CvBasicLib)",
+      "description": "`UBMathOperator`, `UMatrixMath<T>`, `UMDMatrixMux<T>`, `UMDScalarMux<T>` — выполняют арифметику над матрицами/скалярами и объединение/разделение потоков данных."
+    },
+    "UMatrixDoubleMath": {
+      "header": "математика и мультиплексоры (Rdk-CvBasicLib)",
+      "description": "`UBMathOperator`, `UMatrixMath<T>`, `UMDMatrixMux<T>`, `UMDScalarMux<T>` — выполняют арифметику над матрицами/скалярами и объединение/разделение потоков данных."
+    },
+    "UMDScalarDoubleMux": {
+      "header": "математика и мультиплексоры (Rdk-CvBasicLib)",
+      "description": "`UBMathOperator`, `UMatrixMath<T>`, `UMDMatrixMux<T>`, `UMDScalarMux<T>` — выполняют арифметику над матрицами/скалярами и объединение/разделение потоков данных."
+    },
+    "UMDScalarIntMux": {
+      "header": "математика и мультиплексоры (Rdk-CvBasicLib)",
+      "description": "`UBMathOperator`, `UMatrixMath<T>`, `UMDMatrixMux<T>`, `UMDScalarMux<T>` — выполняют арифметику над матрицами/скалярами и объединение/разделение потоков данных."
+    },
+    "DifferenceFrameSimple": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "BackgroundAvg": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "TBinarizationSimple": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "TBinarizationSimpleAdaptiveThreshold": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "TLabelingSimple": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "BackgroundExponnential": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "DeltaBackgroundExponnential": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "BackgroundSimpleAdaptive": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "UBABinarizationOtsu": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "UBABackgroundDependDiff": {
+      "header": "фон, разность, бинаризация и разметка (Rdk-CvBasicLib)",
+      "description": "Группа компонентов `UBABackground*`, `UBADifferenceFrame*`, `UBABinarization*`, `UBALabeling*`, `UBALooping*`, `UBAGuiSelection*`, `UBAShowObjects*` реализует этапы фоново‑разностной обработки, пороговой сегментации и визуализации/разметки в пайплайнах компьютерного зрения."
+    },
+    "UBShowRect": {
+      "header": "детекторы, сегментаторы и сохранение результатов (Rdk-CvBasicLib)",
+      "description": "`UDetectorBase`, `USegmentatorBase`, `UClassifierBase`, `UClassifierResSaver`, `UDetResSaverPVOC` и связанные компоненты визуализации (`UBShowRect`, `UBAShowObjects`, `UBALabeling`)."
+    },
+    "ShowObjectsSimple": {
+      "header": "детекторы, сегментаторы и сохранение результатов (Rdk-CvBasicLib)",
+      "description": "`UDetectorBase`, `USegmentatorBase`, `UClassifierBase`, `UClassifierResSaver`, `UDetResSaverPVOC` и связанные компоненты визуализации (`UBShowRect`, `UBAShowObjects`, `UBALabeling`)."
+    },
+    "VideoSimulatorSimple": {
+      "header": "видеосимуляторы (Rdk-CvBasicLib)",
+      "description": "`UBAVideoSimulator`, `UBAVideoSimulatorSimple`, `UBAVideoSimulatorSimpleBin`, `UBARotCameraSimulator`, `UBADataSimulator`, `UBADataSimulatorSimple` — генерация синтетических видеопотоков и данных для тестов/демо."
+    },
+    "RotCameraSimulator": {
+      "header": "видеосимуляторы (Rdk-CvBasicLib)",
+      "description": "`UBAVideoSimulator`, `UBAVideoSimulatorSimple`, `UBAVideoSimulatorSimpleBin`, `UBARotCameraSimulator`, `UBADataSimulator`, `UBADataSimulatorSimple` — генерация синтетических видеопотоков и данных для тестов/демо."
+    },
+    "VideoSimulatorSimpleBin": {
+      "header": "видеосимуляторы (Rdk-CvBasicLib)",
+      "description": "`UBAVideoSimulator`, `UBAVideoSimulatorSimple`, `UBAVideoSimulatorSimpleBin`, `UBARotCameraSimulator`, `UBADataSimulator`, `UBADataSimulatorSimple` — генерация синтетических видеопотоков и данных для тестов/демо."
+    },
+    "DataSimulatorSimple": {
+      "header": "видеосимуляторы (Rdk-CvBasicLib)",
+      "description": "`UBAVideoSimulator`, `UBAVideoSimulatorSimple`, `UBAVideoSimulatorSimpleBin`, `UBARotCameraSimulator`, `UBADataSimulator`, `UBADataSimulatorSimple` — генерация синтетических видеопотоков и данных для тестов/демо."
+    },
+    "BitmapSourceSimple": {
+      "header": "захват и источники изображений (Rdk-CvBasicLib)",
+      "description": "Компоненты семейства `TCapture*` и `UBA*Source*` обеспечивают захват изображений из внешних устройств (камеры, IP‑камеры), последовательностей файлов и внутренних bitmap‑источников, формируя единый поток `UBitmap` для дальнейшей обработки в UBA‑пайплайнах."
+    },
+    "BitmapSourceFile": {
+      "header": "захват и источники изображений (Rdk-CvBasicLib)",
+      "description": "Компоненты семейства `TCapture*` и `UBA*Source*` обеспечивают захват изображений из внешних устройств (камеры, IP‑камеры), последовательностей файлов и внутренних bitmap‑источников, формируя единый поток `UBitmap` для дальнейшей обработки в UBA‑пайплайнах."
+    },
+    "BStatisticSimple": {
+      "header": "пайплайны, модели и статистика (Rdk-CvBasicLib)",
+      "description": "Компоненты `UBPipeline*`, `UBAModel` и `UBStatistic*` описывают: - конвейер обработки изображений (последовательное/параллельное выполнение UBA‑компонентов); - обёртку модели обработки (`UBAModel`); - сбор и сохранение статистики и промежуточных результатов (`UBStatistic*`)."
+    },
+    "UClassifierBase": {
+      "header": "детекторы, сегментаторы и сохранение результатов (Rdk-CvBasicLib)",
+      "description": "`UDetectorBase`, `USegmentatorBase`, `UClassifierBase`, `UClassifierResSaver`, `UDetResSaverPVOC` и связанные компоненты визуализации (`UBShowRect`, `UBAShowObjects`, `UBALabeling`)."
+    },
+    "UDetectorBase": {
+      "header": "детекторы, сегментаторы и сохранение результатов (Rdk-CvBasicLib)",
+      "description": "`UDetectorBase`, `USegmentatorBase`, `UClassifierBase`, `UClassifierResSaver`, `UDetResSaverPVOC` и связанные компоненты визуализации (`UBShowRect`, `UBAShowObjects`, `UBALabeling`)."
+    },
+    "USegmentatorBase": {
+      "header": "детекторы, сегментаторы и сохранение результатов (Rdk-CvBasicLib)",
+      "description": "`UDetectorBase`, `USegmentatorBase`, `UClassifierBase`, `UClassifierResSaver`, `UDetResSaverPVOC` и связанные компоненты визуализации (`UBShowRect`, `UBAShowObjects`, `UBALabeling`)."
+    },
+    "UClassifierResSaver": {
+      "header": "детекторы, сегментаторы и сохранение результатов (Rdk-CvBasicLib)",
+      "description": "`UDetectorBase`, `USegmentatorBase`, `UClassifierBase`, `UClassifierResSaver`, `UDetResSaverPVOC` и связанные компоненты визуализации (`UBShowRect`, `UBAShowObjects`, `UBALabeling`)."
+    },
+    "UDetResSaverPVOC": {
+      "header": "детекторы, сегментаторы и сохранение результатов (Rdk-CvBasicLib)",
+      "description": "`UDetectorBase`, `USegmentatorBase`, `UClassifierBase`, `UClassifierResSaver`, `UDetResSaverPVOC` и связанные компоненты визуализации (`UBShowRect`, `UBAShowObjects`, `UBALabeling`)."
+    },
+    "UCRPrincipalComponentAnalysis": {
+      "header": "классификаторы и учителя (Rdk-CvBasicLib)",
+      "description": "Семейство компонентов `UCR*` реализует классификаторы, учителей и вспомогательные блоки для обучения и инференса."
+    },
+    "UCRBarnesHutTSNE": {
+      "header": "классификаторы и учителя (Rdk-CvBasicLib)",
+      "description": "Семейство компонентов `UCR*` реализует классификаторы, учителей и вспомогательные блоки для обучения и инференса."
+    },
+    "TCaptureImageSequence": {
+      "header": "захват и источники изображений (Rdk-CvBasicLib)",
+      "description": "Компоненты семейства `TCapture*` и `UBA*Source*` обеспечивают захват изображений из внешних устройств (камеры, IP‑камеры), последовательностей файлов и внутренних bitmap‑источников, формируя единый поток `UBitmap` для дальнейшей обработки в UBA‑пайплайнах."
+    },
+    "ChannelsMembranesLT": {
+      "header": "каналы для разных моделей нейронов.",
+      "description": "Группа включает компоненты распространения импульсов, мембранные модели и LT-зоны (долговременная пластичность)."
+    },
+    "GeneratorsIOClassifiers": {
+      "header": "генерация токов/спайков.",
+      "description": "gen[NPulseGenerator*] --> net[NNet]"
+    },
+    "NAfferentNeuron": {
+      "header": "афферентный нейрон",
+      "description": "**Класс**: `NAfferentNeuron` — базовый афферентный нейрон для приема внешних стимулов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NAfferentNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NAfferentNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NAssociationFormer": {
+      "header": "формирователь ассоциаций",
+      "description": "**Класс**: `NAssociationFormer` — компонент для моделирования формирования ассоциативных связей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NAssociationFormer\", ...)`. **Storage-инстансы**: `ClassName = \"NAssociationFormer\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NCGenerator": {
+      "header": "генератор токов (алиас)",
+      "description": "**Класс**: `NCGenerator` — алиас для класса генератора токов (классический генератор). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NCGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NCLTZone": {
+      "header": "классическая LT-зона",
+      "description": "**Класс**: `NCLTZone` — классическая LT-зона (долговременная пластичность) для классических нейронов/каналов. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами; `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCLTZone\", ...)`. **Storage-инстансы**: `ClassName = \"NCLTZone\"` в..."
+    },
+    "NCNeuron": {
+      "header": "классический нейрон",
+      "description": "**Класс**: `NCNeuron` — классический нейрон (непульсовый), вариант базовой модели для классических (не импульсных) нейронных сетей. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NCNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NCNeuronNegCGenerator": {
+      "header": "генератор отрицательных токов для классических нейронов",
+      "description": "**Класс**: `NCNeuronNegCGenerator` — конфигурационный вариант генератора постоянного тока с отрицательной амплитудой для классических нейронов. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCNeuronNegCGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NCNeuronNegCGenerator\"` в..."
+    },
+    "NCNeuronPosCGenerator": {
+      "header": "генератор положительных токов для классических нейронов",
+      "description": "**Класс**: `NCNeuronPosCGenerator` — конфигурационный вариант генератора постоянного тока с положительной амплитудой для классических нейронов. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCNeuronPosCGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NCNeuronPosCGenerator\"` в..."
+    },
+    "NCPac": {
+      "header": "классический PAC",
+      "description": "**Класс**: `NCPac` — классический PAC (Pulse Activity Counter) для классических моделей. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами; `PAC` — **P**ulse **A**ctivity **C**ounter (счетчик активности импульсов). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCPac\", ...)`. **Storage-инстансы**: `ClassName = \"NCPac\"` в..."
+    },
+    "NCSimpleLTZone": {
+      "header": "простая классическая LT-зона",
+      "description": "**Класс**: `NCSimpleLTZone` — простая классическая LT-зона для непрерывных нейронов. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами; **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCSimpleLTZone\", ...)`. **Storage-инстансы**: `ClassName = \"NCSimpleLTZone\"` в..."
+    },
+    "NCSynChannel": {
+      "header": "непрерывный синаптический канал",
+      "description": "**Класс**: `NCSynChannel` — алиас для класса `NContinuesSynChannel`. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами; `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCSynChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NCSynChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NCSynExcChannel": {
+      "header": "возбуждающий непрерывный синаптический канал",
+      "description": "**Класс**: `NCSynExcChannel` — конфигурационный вариант непрерывного синаптического канала с типом возбуждающего канала. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами; `Syn` — **Syn**apse (синапс); `Exc` — **Exc**itatory (возбуждающий). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCSynExcChannel\", ...)`. **Storage-инстансы**:..."
+    },
+    "NCSynInhChannel": {
+      "header": "тормозной непрерывный синаптический канал",
+      "description": "**Класс**: `NCSynInhChannel` — конфигурационный вариант непрерывного синаптического канала с типом тормозного канала. **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами; `Syn` — **Syn**apse (синапс); `Inh` — **Inh**ibitory (тормозной). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCSynInhChannel\", ...)`. **Storage-инстансы**:..."
+    },
+    "NCSynNeuronMembrane": {
+      "header": "мембрана для непрерывных syn-нейронов",
+      "description": "**Класс**: `NCSynNeuronMembrane` — конфигурационный вариант импульсной мембраны для непрерывных syn-нейронов (классических нейронов с синаптическими каналами). **Префикс**: `NC` — **C**ontinuous (непрерывный, классический), компонент с непрерывными входами/выходами; `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCSynNeuronMembrane\", ...)`...."
+    },
+    "NClassifier": {
+      "header": "классификатор",
+      "description": "**Класс**: `NClassifier` — базовый классификатор для распознавания паттернов импульсов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NClassifier\", ...)`. **Storage-инстансы**: `ClassName = \"NClassifier\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NConditionedReflex": {
+      "header": "условный рефлекс",
+      "description": "**Класс**: `NConditionedReflex` — компонент для моделирования условного рефлекса. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NConditionedReflex\", ...)`. **Storage-инстансы**: `ClassName = \"NConditionedReflex\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NContinuesSAfferentNeuron": {
+      "header": "непрерывный классический афферентный нейрон",
+      "description": "**Класс**: `NContinuesSAfferentNeuron` — конфигурационный вариант классического афферентного нейрона с непрерывным выходом. **Префикс**: `NContinues` — **Continues** (Continuous, непрерывный вариант компонента). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NContinuesSAfferentNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NContinuesSAfferentNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NContinuesSimpleAfferentNeuron": {
+      "header": "непрерывный простой афферентный нейрон",
+      "description": "**Класс**: `NContinuesSimpleAfferentNeuron` — конфигурационный вариант простого афферентного нейрона с непрерывным выходом. **Префикс**: `NContinues` — **Continues** (Continuous, непрерывный вариант компонента). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NContinuesSimpleAfferentNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NContinuesSimpleAfferentNeuron\"` в..."
+    },
+    "NContinuesSynChannel": {
+      "header": "непрерывный синаптический канал",
+      "description": "**Класс**: `NContinuesSynChannel` — непрерывный синаптический канал с упрощенной моделью динамики медиатора. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NCSynChannel\", ...)` (как алиас). **Storage-инстансы**: `ClassName = \"NContinuesSynChannel\"` или `\"NCSynChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NContinuesSynLPNeuron": {
+      "header": "непрерывный LP нейрон (syn)",
+      "description": "непрерывный LP-нейрон в син. семействе."
+    },
+    "NContinuesSynMotoneuron": {
+      "header": "непрерывный мотонейрон (syn)",
+      "description": "вариант мотонейрона с непрерывной обработкой, син. семейство."
+    },
+    "NContinuesSynRenshowCell": {
+      "header": "непрерывный син-клетка Реншоу",
+      "description": "**Класс**: `NContinuesSynRenshowCell` — конфигурационный вариант клетки Реншоу с непрерывной обработкой и оптимизированными синапсами. **Префикс**: `NContinues` — **Continues** (Continuous, непрерывный вариант компонента); **Аббревиатура**: `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NContinuesSynRenshowCell\", ...)`. **Storage-инстансы**: `ClassName =..."
+    },
+    "NContinuesSynSPNeuron": {
+      "header": "непрерывный син-SP-нейрон",
+      "description": "**Класс**: `NContinuesSynSPNeuron` — конфигурационный вариант мелкого непрерывного импульсного нейрона с оптимизированными синапсами. **Префикс**: `NContinues` — **Continues** (Continuous, непрерывный вариант компонента); **Аббревиатуры**: `Syn` — **Syn**apse (синапс); `SP` — **S**pike **P**attern (паттерн спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NContinuesSynSPNeuron\",..."
+    },
+    "NDataset": {
+      "header": "датасет",
+      "description": "**Класс**: `NDataset` — компонент для управления датасетами (выборками данных) для обучения и тестирования. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NDataset\", ...)`. **Storage-инстансы**: `ClassName = \"NDataset\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NEyeMuscle": {
+      "header": "глазная мышца",
+      "description": "**Класс**: `NEyeMuscle` — компонент для моделирования глазной мышцы. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NEyeMuscle\", ...)`. **Storage-инстансы**: `ClassName = \"NEyeMuscle\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NFileGenerator": {
+      "header": "генератор из файла",
+      "description": "**Класс**: `NFileGenerator` — генератор сигналов из файла. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NFileGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NFileGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NGenBioNeuron": {
+      "header": "био-генерирующий нейрон",
+      "description": "биологически ориентированный генерирующий нейрон."
+    },
+    "NIntegrateAndFireNeuron": {
+      "header": "нейрон IaF (модель integrate-and-fire)",
+      "description": "**Класс**: `NIntegrateAndFireNeuron` — модель нейрона integrate-and-fire (IaF). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NIntegrateAndFireNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NIntegrateAndFireNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NLPHebbNeuron": {
+      "header": "крупный импульсный нейрон с синапсами Хебба",
+      "description": "**Класс**: `NLPHebbNeuron` — конфигурационный вариант крупного импульсного нейрона с синапсами Хебба. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NLPHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NLPHebbNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NLPLifeHebbNeuron": {
+      "header": "крупный живой импульсный нейрон с синапсами Хебба",
+      "description": "**Класс**: `NLPLifeHebbNeuron` — конфигурационный вариант крупного живого импульсного нейрона с синапсами Хебба и поддержкой жизнеобеспечения. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NLPLifeHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NLPLifeHebbNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NLPLifeNeuron": {
+      "header": "крупный живой импульсный нейрон",
+      "description": "**Класс**: `NLPLifeNeuron` — конфигурационный вариант крупного живого импульсного нейрона с поддержкой жизнеобеспечения. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NLPLifeNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NLPLifeNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NLPNeuron": {
+      "header": "крупный импульсный нейрон (LP-нейрон)",
+      "description": "**Класс**: `NLPNeuron` — конфигурационный вариант крупного импульсного нейрона (Large Pulse Neuron). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NLPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NLPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NLifeNet": {
+      "header": "сетевая модель Life (Nmsdk-PulseLib)",
+      "description": "**Класс**: `NLifeNet` — сеть с жизненным циклом/метриками нейронов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NLifeNet\", ...)`. **Storage**: `ClassName = \"NLifeNet\"`."
+    },
+    "NLogicalNot": {
+      "header": "логическое НЕ",
+      "description": "**Класс**: `NLogicalNot` — компонент для реализации логической операции НЕ (инверсии) на основе нейронных сетей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NLogicalNot\", ...)`. **Storage-инстансы**: `ClassName = \"NLogicalNot\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NMExtrapolator": {
+      "header": "экстраполятор",
+      "description": "**Класс**: `NMExtrapolator` — компонент для экстраполяции временных рядов с использованием многоуровневой сети. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NMExtrapolator\", ...)`. **Storage-инстансы**: `ClassName = \"NMExtrapolator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NModel": {
+      "header": "модель SNN/контейнер сценария (Nmsdk-PulseLib)",
+      "description": "**Класс**: `NModel` — модель верхнего уровня, которая собирает сеть/сценарий и управляет запуском. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NModel\", ...)`. **Storage-инстансы**: `ClassName = \"NModel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NMotoneuron": {
+      "header": "мотонейрон",
+      "description": "**Класс**: `NMotoneuron` — мотонейрон (классический/базовый). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NMotoneuron\", ...)`. **Storage-инстансы**: `ClassName = \"NMotoneuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NMuscle": {
+      "header": "мышца",
+      "description": "**Класс**: `NMuscle` — компонент для моделирования мышечной активности. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NMuscle\", ...)`. **Storage-инстансы**: `ClassName = \"NMuscle\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNet": {
+      "header": "базовая сеть (Nmsdk-PulseLib)",
+      "description": "**Класс**: `NNet` — контейнер/организатор нейросети (узлы, связи, шаг симуляции). **Регистрация в UStorage**: `Libraries/Nmsdk-PulseLib/Core/NPulseLibrary.cpp` → `UploadClass(\"NNet\", ...)`. **Storage-инстансы**: `ClassName = \"NNet\"` в `Bin/ClDesc`/`Bin/Configs`."
+    },
+    "NNeuron": {
+      "header": "базовый нейрон",
+      "description": "**Класс**: `NNeuron` — базовый класс нейрона (абстрактная/общая логика). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNeuron\"` (обычно используется через наследников)."
+    },
+    "NNeuronFreqGroup": {
+      "header": "группа частотных нейронов",
+      "description": "группирует нейроны по частотным признакам."
+    },
+    "NNeuronFreqGroupLayer": {
+      "header": "слой частотных групп",
+      "description": "слой, состоящий из нескольких `NNeuronFreqGroup`."
+    },
+    "NNeuronLearner": {
+      "header": "обучающийся нейрон",
+      "description": "нейрон с функциями самообучения."
+    },
+    "NNeuronLife": {
+      "header": "нейрон с метриками жизнеобеспечения",
+      "description": "**Класс**: `NNeuronLife` — компонент модели жизнеобеспечения нейрона с метриками энергии, износа и чувства. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNeuronLife\", ...)`. **Storage-инстансы**: `ClassName = \"NNeuronLife\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNeuronTrainer": {
+      "header": "тренер нейронов",
+      "description": "обучает нейроны по заданному правилу/данным."
+    },
+    "NNeuronsLayer": {
+      "header": "слой нейронов (Nmsdk-PulseLib)",
+      "description": "слой нейронов (базовая версия)."
+    },
+    "NNeuronsLayerIaF": {
+      "header": "слой нейронов модели IaF",
+      "description": "**Класс**: `NNeuronsLayerIaF` — конфигурационный вариант слоя нейронов с нейронами модели Integrate-and-Fire (IaF). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNeuronsLayerIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NNeuronsLayerIaF\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewLPHebbNeuron": {
+      "header": "новый крупный импульсный нейрон с синапсами Хебба",
+      "description": "**Класс**: `NNewLPHebbNeuron` — конфигурационный вариант нового крупного импульсного нейрона с синапсами Хебба и улучшенной архитектурой. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewLPHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewLPHebbNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewLPNeuron": {
+      "header": "новый крупный импульсный нейрон",
+      "description": "**Класс**: `NNewLPNeuron` — конфигурационный вариант нового крупного импульсного нейрона с улучшенной архитектурой. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewLPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewLPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewMotoneuron": {
+      "header": "новая версия мотонейрона",
+      "description": "**Класс**: `NNewMotoneuron` — обновлённая модель мотонейрона с улучшенной архитектурой. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewMotoneuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewMotoneuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewRenshowCell": {
+      "header": "новая клетка Реншоу",
+      "description": "**Класс**: `NNewRenshowCell` — конфигурационный вариант новой клетки Реншоу (ингибирующий интернейрон) с улучшенной архитектурой. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewRenshowCell\", ...)`. **Storage-инстансы**: `ClassName = \"NNewRenshowCell\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSPHebbNeuron": {
+      "header": "новый мелкий импульсный нейрон с синапсами Хебба",
+      "description": "**Класс**: `NNewSPHebbNeuron` — конфигурационный вариант нового мелкого импульсного нейрона с синапсами Хебба и улучшенной архитектурой. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSPHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSPHebbNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSPLifeNeuron": {
+      "header": "новый мелкий живой импульсный нейрон",
+      "description": "**Класс**: `NNewSPLifeNeuron` — конфигурационный вариант нового мелкого живого импульсного нейрона с улучшенной архитектурой и поддержкой жизнеобеспечения. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSPLifeNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSPLifeNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSPNeuron": {
+      "header": "новый мелкий импульсный нейрон",
+      "description": "**Класс**: `NNewSPNeuron` — конфигурационный вариант нового мелкого импульсного нейрона с улучшенной архитектурой. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSynLPNeuron": {
+      "header": "новый крупный син-нейрон",
+      "description": "**Класс**: `NNewSynLPNeuron` — конфигурационный вариант нового крупного импульсного нейрона с оптимизированными синапсами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSynLPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSynLPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSynMotoneuron": {
+      "header": "новый син-мотонейрон",
+      "description": "**Класс**: `NNewSynMotoneuron` — конфигурационный вариант нового мотонейрона с оптимизированными синапсами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSynMotoneuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSynMotoneuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSynRenshowCell": {
+      "header": "новая син-клетка Реншоу",
+      "description": "**Класс**: `NNewSynRenshowCell` — конфигурационный вариант новой клетки Реншоу с оптимизированными синапсами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSynRenshowCell\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSynRenshowCell\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSynSPNeuron": {
+      "header": "новый мелкий син-нейрон",
+      "description": "**Класс**: `NNewSynSPNeuron` — конфигурационный вариант нового мелкого импульсного нейрона с оптимизированными синапсами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSynSPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSynSPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NNewSynTCNNeuron": {
+      "header": "новый син-TCN-нейрон",
+      "description": "**Класс**: `NNewSynTCNNeuron` — конфигурационный вариант нового TCN-нейрона (Thalamocortical Neuron) с оптимизированными синапсами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSynTCNNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSynTCNNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NOdeSolver": {
+      "header": "решатель ODE",
+      "description": "**Класс**: `NOdeSolver` — компонент для решения систем обыкновенных дифференциальных уравнений (ODE). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NOdeSolver\", ...)`. **Storage-инстансы**: `ClassName = \"NOdeSolver\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPCAClassifier": {
+      "header": "классификатор PCA",
+      "description": "**Класс**: `NPCAClassifier` — классификатор на основе PCA (Principal Component Analysis). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPCAClassifier\", ...)`. **Storage-инстансы**: `ClassName = \"NPCAClassifier\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPChannel": {
+      "header": "импульсный канал (Nmsdk-PulseLib)",
+      "description": "базовый канал передачи импульсов."
+    },
+    "NPDelay": {
+      "header": "задержка импульсов",
+      "description": "**Класс**: `NPDelay` — компонент для задержки импульсов/сигналов на заданное время. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPDelay\", ...)`. **Storage-инстансы**: `ClassName = \"NPDelay\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPExcChannel": {
+      "header": "возбуждающий канал",
+      "description": "**Класс**: `NPExcChannel` — конфигурационный вариант возбуждающего канала. **Аббревиатура**: `Exc` — **Exc**itatory (возбуждающий). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPExcChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPExcChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPExcChannelBio": {
+      "header": "возбуждающий биоинспирированный канал",
+      "description": "**Класс**: `NPExcChannelBio` — конфигурационный вариант возбуждающего канала с биологическими параметрами. **Аббревиатуры**: `Exc` — **Exc**itatory (возбуждающий); `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPExcChannelBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPExcChannelBio\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPExcChannelBio2": {
+      "header": "возбуждающий биоинспирированный канал (версия 2)",
+      "description": "**Класс**: `NPExcChannelBio2` — конфигурационный вариант возбуждающего канала с биологическими параметрами (версия 2). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPExcChannelBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPExcChannelBio2\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPGenerator": {
+      "header": "генератор импульсов (алиас)",
+      "description": "**Класс**: `NPGenerator` — алиас для класса `NPulseGenerator`. **Префикс**: `NP` — **P**ulse (импульсный), компонент с импульсными входами/выходами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NPGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPGeneratorDelay": {
+      "header": "генератор импульсов с задержкой (алиас)",
+      "description": "**Класс**: `NPGeneratorDelay` — алиас для класса `NPulseGeneratorDelay`. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPGeneratorDelay\", ...)`. **Storage-инстансы**: `ClassName = \"NPGeneratorDelay\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPHebbLifeSynapse": {
+      "header": "импульсный синапс Хебба с поддержкой жизнеобеспечения",
+      "description": "**Класс**: `NPHebbLifeSynapse` — импульсный синапс с механизмом Хебба и интеграцией с моделью жизнеобеспечения нейрона. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPHebbLifeSynapse\", ...)`. **Storage-инстансы**: `ClassName = \"NPHebbLifeSynapse\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPHebbNeuron": {
+      "header": "нейрон с синапсами Хебба",
+      "description": "**Класс**: `NPHebbNeuron` — конфигурационный вариант импульсного нейрона с мембраной, поддерживающей синапсы Хебба. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NPHebbNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPHebbSynapse": {
+      "header": "синапс Хебба (алиас)",
+      "description": "**Класс**: `NPHebbSynapse` — алиас для класса `NPulseHebbSynapse`. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPHebbSynapse\", ...)`. **Storage-инстансы**: `ClassName = \"NPHebbSynapse\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPInhChannel": {
+      "header": "тормозной канал",
+      "description": "**Класс**: `NPInhChannel` — конфигурационный вариант тормозного канала. **Аббревиатура**: `Inh` — **Inh**ibitory (тормозной). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPInhChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPInhChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPInhChannelBio": {
+      "header": "тормозной биоинспирированный канал",
+      "description": "**Класс**: `NPInhChannelBio` — конфигурационный вариант тормозного канала с биологическими параметрами. **Аббревиатуры**: `Inh` — **Inh**ibitory (тормозной); `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPInhChannelBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPInhChannelBio\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPInhChannelBio2": {
+      "header": "тормозной биоинспирированный канал (версия 2)",
+      "description": "**Класс**: `NPInhChannelBio2` — конфигурационный вариант тормозного канала с биологическими параметрами (версия 2). **Аббревиатуры**: `Inh` — **Inh**ibitory (тормозной); `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPInhChannelBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPInhChannelBio2\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPLTChannel": {
+      "header": "канал низкопороговой зоны",
+      "description": "**Класс**: `NPLTChannel` — конфигурационный вариант импульсного канала с параметрами для низкопороговой зоны (LT-зоны). **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPLTExcChannel": {
+      "header": "возбуждающий LT-канал",
+      "description": "**Класс**: `NPLTExcChannel` — конфигурационный вариант LT-канала с типом возбуждающего канала. **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `Exc` — **Exc**itatory (возбуждающий). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTExcChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTExcChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPLTInhChannel": {
+      "header": "тормозной LT-канал",
+      "description": "**Класс**: `NPLTInhChannel` — конфигурационный вариант LT-канала с типом тормозного канала. **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `Inh` — **Inh**ibitory (тормозной). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTInhChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTInhChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPLTSynChannel": {
+      "header": "LT-синаптический канал",
+      "description": "**Класс**: `NPLTSynChannel` — конфигурационный вариант синаптического импульсного канала с параметрами для LT-зоны. **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTSynChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTSynChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPLTSynExcChannel": {
+      "header": "возбуждающий LT-синаптический канал",
+      "description": "**Класс**: `NPLTSynExcChannel` — конфигурационный вариант LT-синаптического канала с типом возбуждающего канала. **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `Syn` — **Syn**apse (синапс); `Exc` — **Exc**itatory (возбуждающий). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTSynExcChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTSynExcChannel\"` в..."
+    },
+    "NPLTSynInhChannel": {
+      "header": "тормозной LT-синаптический канал",
+      "description": "**Класс**: `NPLTSynInhChannel` — конфигурационный вариант LT-синаптического канала с типом тормозного канала. **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `Syn` — **Syn**apse (синапс); `Inh` — **Inh**ibitory (тормозной). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTSynInhChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTSynInhChannel\"` в..."
+    },
+    "NPLTZone": {
+      "header": "импульсная LT-зона (алиас)",
+      "description": "**Класс**: `NPLTZone` — алиас для класса `NPulseLTZoneCommon`. **Префикс**: `NP` — **P**ulse (импульсный), компонент с импульсными входами/выходами; `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTZone\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTZone\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPLTZoneNeuronMembrane": {
+      "header": "мембрана нейрона с LT-зоной",
+      "description": "**Класс**: `NPLTZoneNeuronMembrane` — конфигурационный вариант импульсной мембраны для нейронов с низкопороговой зоной (LT-зоной). **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTZoneNeuronMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTZoneNeuronMembrane\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPLTZoneSynNeuronMembrane": {
+      "header": "мембрана syn-нейрона с LT-зоной",
+      "description": "**Класс**: `NPLTZoneSynNeuronMembrane` — конфигурационный вариант импульсной мембраны для syn-нейронов с низкопороговой зоной (LT-зоной). **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLTZoneSynNeuronMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPLTZoneSynNeuronMembrane\"` в..."
+    },
+    "NPLifeNeuron": {
+      "header": "нейрон Life (pulse)",
+      "description": "**Класс**: `NPLifeNeuron` — пульсовый нейрон с метриками Life. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPLifeNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NPLifeNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPMembrane": {
+      "header": "импульсная мембрана (алиас)",
+      "description": "**Класс**: `NPMembrane` — алиас для класса `NPulseMembrane`. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPMembrane\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPMembraneBio": {
+      "header": "биоинспирированная импульсная мембрана",
+      "description": "**Класс**: `NPMembraneBio` — конфигурационный вариант импульсной мембраны с биологическими параметрами. **Аббревиатура**: `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPMembraneBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPMembraneBio\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPMembraneBio2": {
+      "header": "биоинспирированная импульсная мембрана (версия 2)",
+      "description": "**Класс**: `NPMembraneBio2` — конфигурационный вариант импульсной мембраны с биологическими параметрами (версия 2). **Аббревиатура**: `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPMembraneBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPMembraneBio2\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuron": {
+      "header": "базовый пульсовый нейрон",
+      "description": "**Класс**: `NPNeuron` — базовый пульсовый нейрон, конфигурационный вариант `NPulseNeuron` с параметрами по умолчанию. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuron1x4": {
+      "header": "пульсовый нейрон 1x4",
+      "description": "**Класс**: `NPNeuron1x4` — конфигурационный вариант пульсового нейрона с одной сомальной частью и четырьмя дендритными частями мембраны. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuron1x4\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuron1x4\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuron4x1": {
+      "header": "пульсовый нейрон 4x1",
+      "description": "**Класс**: `NPNeuron4x1` — конфигурационный вариант пульсового нейрона с четырьмя сомальными частями и одной дендритной частью мембраны. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuron4x1\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuron4x1\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuron4x4": {
+      "header": "пульсовый нейрон 4x4",
+      "description": "**Класс**: `NPNeuron4x4` — конфигурационный вариант пульсового нейрона с четырьмя сомальными частями и четырьмя дендритными частями мембраны. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuron4x4\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuron4x4\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuronHebbLifeMembrane": {
+      "header": "мембрана Life-нейрона с синапсами Хебба",
+      "description": "**Класс**: `NPNeuronHebbLifeMembrane` — конфигурационный вариант импульсной мембраны для Life-нейронов с синапсами Хебба. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuronHebbLifeMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuronHebbLifeMembrane\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuronHebbMembrane": {
+      "header": "мембрана нейрона с синапсами Хебба",
+      "description": "**Класс**: `NPNeuronHebbMembrane` — конфигурационный вариант импульсной мембраны с синапсами Хебба. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuronHebbMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuronHebbMembrane\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuronNegCGenerator": {
+      "header": "генератор отрицательных токов для импульсных нейронов",
+      "description": "**Класс**: `NPNeuronNegCGenerator` — конфигурационный вариант генератора постоянного тока с отрицательной амплитудой для импульсных нейронов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuronNegCGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuronNegCGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuronNegCGeneratorBio": {
+      "header": "генератор отрицательных токов для биоинспирированных моделей",
+      "description": "**Класс**: `NPNeuronNegCGeneratorBio` — конфигурационный вариант генератора постоянного тока с отрицательной амплитудой для биоинспирированных импульсных нейронов. **Аббревиатура**: `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuronNegCGeneratorBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuronNegCGeneratorBio\"` в..."
+    },
+    "NPNeuronPosCGenerator": {
+      "header": "генератор положительных токов для импульсных нейронов",
+      "description": "**Класс**: `NPNeuronPosCGenerator` — конфигурационный вариант генератора постоянного тока с положительной амплитудой для импульсных нейронов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuronPosCGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuronPosCGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuronPosCGeneratorBio": {
+      "header": "генератор положительных токов для биоинспирированных моделей",
+      "description": "**Класс**: `NPNeuronPosCGeneratorBio` — конфигурационный вариант генератора постоянного тока с положительной амплитудой для биоинспирированных импульсных нейронов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuronPosCGeneratorBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuronPosCGeneratorBio\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPNeuronPosCGeneratorCable": {
+      "header": "генератор положительных токов для кабельных моделей",
+      "description": "**Класс**: `NPNeuronPosCGeneratorCable` — конфигурационный вариант генератора постоянного тока с отрицательной амплитудой для кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuronPosCGeneratorCable\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuronPosCGeneratorCable\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSimpleLTZone": {
+      "header": "простая импульсная LT-зона",
+      "description": "**Класс**: `NPSimpleLTZone` — простая импульсная LT-зона с встроенным генератором импульсов. **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSimpleLTZone\", ...)`. **Storage-инстансы**: `ClassName = \"NPSimpleLTZone\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynChannel": {
+      "header": "синаптический импульсный канал",
+      "description": "**Класс**: `NPSynChannel` — алиас для класса `NPulseSynChannel`. **Аббревиатура**: `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynExcChannel": {
+      "header": "возбуждающий синаптический импульсный канал",
+      "description": "**Класс**: `NPSynExcChannel` — конфигурационный вариант синаптического импульсного канала с типом возбуждающего канала. **Аббревиатуры**: `Syn` — **Syn**apse (синапс); `Exc` — **Exc**itatory (возбуждающий). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynExcChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynExcChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynInhChannel": {
+      "header": "тормозной синаптический импульсный канал",
+      "description": "**Класс**: `NPSynInhChannel` — конфигурационный вариант синаптического импульсного канала с типом тормозного канала. **Аббревиатуры**: `Syn` — **Syn**apse (синапс); `Inh` — **Inh**ibitory (тормозной). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynInhChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynInhChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynNeuronMembrane": {
+      "header": "мембрана для syn-нейронов (импульсная)",
+      "description": "**Класс**: `NPSynNeuronMembrane` — конфигурационный вариант импульсной мембраны для syn-нейронов (импульсных нейронов с синаптическими каналами). **Аббревиатура**: `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynNeuronMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynNeuronMembrane\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynapse": {
+      "header": "импульсный синапс (алиас)",
+      "description": "**Класс**: `NPSynapse` — алиас для класса `NPulseSynapse`. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynapse\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynapse\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynapseBio": {
+      "header": "биоинспирированный импульсный синапс",
+      "description": "**Класс**: `NPSynapseBio` — конфигурационный вариант импульсного синапса с биоинспирированными параметрами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynapseBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynapseBio\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynapseBio2": {
+      "header": "второй биоинспирированный импульсный синапс",
+      "description": "**Класс**: `NPSynapseBio2` — конфигурационный вариант импульсного синапса с альтернативными биоинспирированными параметрами. **Аббревиатура**: `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynapseBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynapseBio2\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPSynapseStdp": {
+      "header": "импульсный STDP-синапс (алиас)",
+      "description": "**Класс**: `NPSynapseStdp` — алиас для класса `NPulseSynapseStdp`. **Аббревиатура**: `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynapseStdp\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynapseStdp\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPac": {
+      "header": "PAC (Pulse Activity Counter)",
+      "description": "**Класс**: `NPac` — компонент PAC (Pulse Activity Counter) для подсчета и активации на основе импульсов. **Аббревиатура**: `PAC` — **P**ulse **A**ctivity **C**ounter (счетчик активности импульсов). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPac\", ...)`. **Storage-инстансы**: `ClassName = \"NPac\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPainReflexSimple": {
+      "header": "простой болевой рефлекс",
+      "description": "**Класс**: `NPainReflexSimple` — простой рефлекторный компонент для болевого стимула. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPainReflexSimple\", ...)`. **Storage-инстансы**: `ClassName = \"NPainReflexSimple\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPattern": {
+      "header": "паттерн данных",
+      "description": "**Класс**: `NPattern` — компонент для генерации паттернов импульсов на основе входного паттерна. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPattern\", ...)`. **Storage-инстансы**: `ClassName = \"NPattern\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPredictor": {
+      "header": "предсказатель",
+      "description": "**Класс**: `NPredictor` — предсказатель сигналов/состояний на основе временных рядов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPredictor\", ...)`. **Storage-инстансы**: `ClassName = \"NPredictor\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseChannel": {
+      "header": "импульсный канал",
+      "description": "**Класс**: `NPulseChannel` — базовый импульсный канал с параметрами емкости и сопротивления. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseChannel\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseChannelCable": {
+      "header": "кабельный импульсный канал",
+      "description": "**Класс**: `NPulseChannelCable` — импульсный канал для кабельной модели (cable model). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseChannelCable\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseChannelCable\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseChannelCableMulti": {
+      "header": "многоканальный кабельный импульсный канал",
+      "description": "**Класс**: `NPulseChannelCableMulti` — алиас для класса `NPulseChannelCable`. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseChannelCableMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseChannelCableMulti\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseChannelCommon": {
+      "header": "общий импульсный канал",
+      "description": "**Класс**: `NPulseChannelCommon` — базовый класс для импульсных каналов с общей функциональностью. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseChannelCommon\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseChannelCommon\"` (обычно используется через наследников)."
+    },
+    "NPulseChannelIaF": {
+      "header": "канал модели Integrate-and-Fire",
+      "description": "**Класс**: `NPulseChannelIaF` — канал модели Integrate-and-Fire для импульсных нейронов. **Аббревиатура**: `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseChannelIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseChannelIaF\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseChannelIzhikevich": {
+      "header": "канал модели Ижикевича",
+      "description": "**Класс**: `NPulseChannelIzhikevich` — канал модели Ижикевича для импульсных нейронов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseChannelIzhikevich\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseChannelIzhikevich\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseGenerator": {
+      "header": "генератор импульсов",
+      "description": "**Класс**: `NPulseGenerator` — генератор импульсов (спайков) с заданной частотой, амплитудой и длительностью. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseGeneratorDelay": {
+      "header": "генератор импульсов с задержкой",
+      "description": "**Класс**: `NPulseGeneratorDelay` — генератор импульсов с динамической задержкой, вычисляемой на основе входного параметра. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPGeneratorDelay\", ...)`. **Storage-инстансы**: `ClassName = \"NPGeneratorDelay\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseGeneratorMulti": {
+      "header": "генератор множественных импульсов",
+      "description": "**Класс**: `NPulseGeneratorMulti` — генератор множественных импульсов с индивидуальными задержками для каждого импульса. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseGeneratorMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseGeneratorMulti\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseGeneratorTransit": {
+      "header": "транзитный генератор импульсов",
+      "description": "**Класс**: `NPulseGeneratorTransit` — генератор импульсов с поддержкой транзитного сигнала и паттернов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseGeneratorTransit\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseGeneratorTransit\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseHebbSynapse": {
+      "header": "импульсный синапс с механизмом Хебба",
+      "description": "**Класс**: `NPulseHebbSynapse` — импульсный синапс с механизмом обучения Хебба и множественными выходами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPHebbSynapse\", ...)` (как алиас). **Storage-инстансы**: `ClassName = \"NPulseHebbSynapse\"` или `\"NPHebbSynapse\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseLTZone": {
+      "header": "импульсная LT-зона",
+      "description": "**Класс**: `NPulseLTZone` — базовая импульсная LT-зона (низкопороговая зона) для генерации спайков. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZone\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZone\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseLTZoneCable": {
+      "header": "кабельная импульсная LT-зона",
+      "description": "**Класс**: `NPulseLTZoneCable` — конфигурационный вариант импульсной LT-зоны для кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneCable\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneCable\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseLTZoneCommon": {
+      "header": "общая импульсная LT-зона",
+      "description": "**Класс**: `NPulseLTZoneCommon` — базовая LT-зона (Low-Threshold Zone) для импульсных нейронов с общей функциональностью. **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneCommon\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneCommon\"` (обычно используется через наследников)."
+    },
+    "NPulseLTZoneIaF": {
+      "header": "LT-зона модели IaF",
+      "description": "**Класс**: `NPulseLTZoneIaF` — конфигурационный вариант LT-зоны для нейронов модели Integrate-and-Fire. **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneIaF\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseLTZoneIzhikevich": {
+      "header": "LT-зона модели Ижикевича",
+      "description": "**Класс**: `NPulseLTZoneIzhikevich` — LT-зона (Low-Threshold Zone) для нейронов модели Ижикевича. **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneIzhikevich\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneIzhikevich\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseLTZoneThreshold": {
+      "header": "импульсная LT-зона с порогом",
+      "description": "**Класс**: `NPulseLTZoneThreshold` — базовая импульсная LT-зона с пороговой логикой генерации спайков. **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneThreshold\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneThreshold\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseLTZoneThresholdBio": {
+      "header": "биоинспирированная LT-зона с порогом",
+      "description": "**Класс**: `NPulseLTZoneThresholdBio` — конфигурационный вариант импульсной LT-зоны с порогом для биологических моделей. **Аббревиатуры**: `LT` — **L**ow **T**hreshold (низкопороговая зона); `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneThresholdBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneThresholdBio\"` в..."
+    },
+    "NPulseLTZoneThresholdBio2": {
+      "header": "биоинспирированная LT-зона с порогом (версия 2)",
+      "description": "**Класс**: `NPulseLTZoneThresholdBio2` — конфигурационный вариант импульсной LT-зоны с порогом для биологических моделей (версия 2). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneThresholdBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneThresholdBio2\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseMembrane": {
+      "header": "импульсная мембрана",
+      "description": "**Класс**: `NPulseMembrane` — базовая импульсная мембрана с управлением каналами и синапсами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseMembrane\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseMembraneCable": {
+      "header": "кабельная импульсная мембрана",
+      "description": "**Класс**: `NPulseMembraneCable` — конфигурационный вариант импульсной мембраны для кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseMembraneCable\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseMembraneCable\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseMembraneCableMulti": {
+      "header": "многоканальная кабельная импульсная мембрана",
+      "description": "**Класс**: `NPulseMembraneCableMulti` — конфигурационный вариант импульсной мембраны для многоканальных кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseMembraneCableMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseMembraneCableMulti\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseMembraneCommon": {
+      "header": "общая импульсная мембрана",
+      "description": "**Класс**: `NPulseMembraneCommon` — базовый класс для импульсных мембран с общей функциональностью. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseMembraneCommon\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseMembraneCommon\"` (обычно используется через наследников)."
+    },
+    "NPulseMembraneIaF": {
+      "header": "мембрана модели IaF",
+      "description": "**Класс**: `NPulseMembraneIaF` — конфигурационный вариант мембраны для нейронов модели Integrate-and-Fire. **Аббревиатура**: `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseMembraneIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseMembraneIaF\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseMembraneIaFStdp": {
+      "header": "мембрана модели IaF с STDP",
+      "description": "**Класс**: `NPulseMembraneIaFStdp` — конфигурационный вариант мембраны для нейронов модели Integrate-and-Fire с поддержкой STDP-обучения. **Аббревиатуры**: `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять); `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` →..."
+    },
+    "NPulseMembraneIzhikevich": {
+      "header": "мембрана модели Ижикевича",
+      "description": "**Класс**: `NPulseMembraneIzhikevich` — мембранная модель для нейронов Ижикевича. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseMembraneIzhikevich\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseMembraneIzhikevich\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseNeuron": {
+      "header": "импульсный нейрон с параметрами структурирования",
+      "description": "**Класс**: `NPulseNeuron` — импульсный нейрон с автоматическим построением структуры на основе параметров. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseNeuronCable": {
+      "header": "кабельный импульсный нейрон",
+      "description": "**Класс**: `NPulseNeuronCable` — импульсный нейрон с кабельной моделью мембраны для пространственно-распределенного моделирования. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronCable\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronCable\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseNeuronCableMulti": {
+      "header": "многоканальный кабельный импульсный нейрон",
+      "description": "**Класс**: `NPulseNeuronCableMulti` — импульсный нейрон с многоканальной кабельной моделью мембраны для моделирования нескольких параллельных кабельных каналов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronCableMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronCableMulti\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseNeuronCommon": {
+      "header": "общий импульсный нейрон",
+      "description": "**Класс**: `NPulseNeuronCommon` — базовый класс для импульсных нейронов с общей функциональностью. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronCommon\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronCommon\"` (обычно используется через наследников)."
+    },
+    "NPulseNeuronIaF": {
+      "header": "импульсный нейрон (модель Integrate-and-Fire)",
+      "description": "**Класс**: `NPulseNeuronIaF` — импульсный нейрон модели Integrate-and-Fire (IaF). **Аббревиатура**: `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronIaF\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseNeuronIaFStdp": {
+      "header": "импульсный нейрон IaF с STDP",
+      "description": "**Класс**: `NPulseNeuronIaFStdp` — импульсный нейрон модели Integrate-and-Fire с поддержкой STDP-обучения. **Аббревиатуры**: `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять); `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronIaFStdp\", ...)`. **Storage-инстансы**:..."
+    },
+    "NPulseNeuronIzhikevich": {
+      "header": "импульсный нейрон (модель Ижикевича)",
+      "description": "**Класс**: `NPulseNeuronIzhikevich` — модель спайкового нейрона по Ижикевичу. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronIzhikevich\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronIzhikevich\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulsePerseptron": {
+      "header": "импульсный персептрон",
+      "description": "**Класс**: `NPulsePerseptron` — компонент для создания многослойного импульсного персептрона с автоматическим построением структуры. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulsePerseptron\", ...)`. **Storage-инстансы**: `ClassName = \"NPulsePerseptron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulsePerseptronIaF": {
+      "header": "импульсный персептрон (модель IaF)",
+      "description": "**Класс**: `NPulsePerseptronIaF` — конфигурационный вариант импульсного персептрона с нейронами модели Integrate-and-Fire. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulsePerseptronIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NPulsePerseptronIaF\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseSynChannel": {
+      "header": "синаптический импульсный канал",
+      "description": "**Класс**: `NPulseSynChannel` — синаптический импульсный канал с поддержкой модели динамики медиатора для нескольких синапсов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynChannel\", ...)` (как алиас). **Storage-инстансы**: `ClassName = \"NPulseSynChannel\"` или `\"NPSynChannel\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseSynapse": {
+      "header": "импульсный синапс с моделью медиатора",
+      "description": "**Класс**: `NPulseSynapse` — импульсный синапс с моделью выделения и диссоциации медиатора. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseSynapse\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseSynapse\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NPulseSynapseCommon": {
+      "header": "общий импульсный синапс",
+      "description": "**Класс**: `NPulseSynapseCommon` — базовый класс для импульсных синапсов с общей функциональностью. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseSynapseCommon\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseSynapseCommon\"` (обычно используется через наследников)."
+    },
+    "NPulseSynapseStdp": {
+      "header": "импульсный синапс с STDP",
+      "description": "**Класс**: `NPulseSynapseStdp` — импульсный синапс с поддержкой STDP-обучения и моделью медиатора. **Аббревиатура**: `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseSynapseStdp\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseSynapseStdp\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NReceiver": {
+      "header": "приемник сигналов",
+      "description": "**Класс**: `NReceiver` — компонент для приема выходных сигналов/активности сети и преобразования/экспорта их наружу. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NReceiver\", ...)`. **Storage-инстансы**: `ClassName = \"NReceiver\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NReceptor": {
+      "header": "рецептор",
+      "description": "**Класс**: `NReceptor` — компонент для преобразования входных сигналов с адаптацией и различными режимами преобразования. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NReceptor\", ...)`. **Storage-инстансы**: `ClassName = \"NReceptor\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NRenshowCell": {
+      "header": "клетка Реншоу",
+      "description": "**Класс**: `NRenshowCell` — конфигурационный вариант клетки Реншоу (ингибирующий интернейрон) для моделирования реципрокного торможения. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NRenshowCell\", ...)`. **Storage-инстансы**: `ClassName = \"NRenshowCell\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSAfferentNeuron": {
+      "header": "классический афферентный нейрон",
+      "description": "**Класс**: `NSAfferentNeuron` — конфигурационный вариант классического афферентного нейрона с полной структурой. **Префикс**: `NS` — **S**imple (простой) или **S**tandard (стандартный/классический). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSAfferentNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSAfferentNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSPDendriteLifeHebbNeuron": {
+      "header": "мелкий живой импульсный нейрон с синапсами Хебба и дендритом",
+      "description": "**Класс**: `NSPDendriteLifeHebbNeuron` — конфигурационный вариант мелкого живого импульсного нейрона с синапсами Хебба и дендритной структурой. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPDendriteLifeHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSPDendriteLifeHebbNeuron\"` в..."
+    },
+    "NSPHebbNeuron": {
+      "header": "мелкий импульсный нейрон с синапсами Хебба",
+      "description": "**Класс**: `NSPHebbNeuron` — конфигурационный вариант мелкого импульсного нейрона с синапсами Хебба. **Аббревиатура**: `Hebb` — **Hebb**ian (геббовская пластичность, обучение по правилу Хебба). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSPHebbNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSPLifeHebbNeuron": {
+      "header": "мелкий живой импульсный нейрон с синапсами Хебба",
+      "description": "**Класс**: `NSPLifeHebbNeuron` — конфигурационный вариант мелкого живого импульсного нейрона с синапсами Хебба и поддержкой жизнеобеспечения. **Префикс**: `NSP` — **S**imple **P**ulse (простой импульсный); `Hebb` — **Hebb**ian (геббовская пластичность). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPLifeHebbNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSPLifeHebbNeuron\"` в..."
+    },
+    "NSPLifeNeuron": {
+      "header": "мелкий живой импульсный нейрон",
+      "description": "**Класс**: `NSPLifeNeuron` — конфигурационный вариант мелкого живого импульсного нейрона с поддержкой жизнеобеспечения. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPLifeNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSPLifeNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSPMinNeuron": {
+      "header": "минимальный мелкий импульсный нейрон",
+      "description": "**Класс**: `NSPMinNeuron` — конфигурационный вариант минимального мелкого импульсного нейрона с минимальным количеством синапсов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPMinNeuron\", ...)` (закомментирован в коде). **Storage-инстансы**: `ClassName = \"NSPMinNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSPNeuron": {
+      "header": "мелкий импульсный нейрон (SP-нейрон)",
+      "description": "**Класс**: `NSPNeuron` — конфигурационный вариант мелкого импульсного нейрона (Small Pulse Neuron). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSPNeuronBio": {
+      "header": "мелкий импульсный нейрон с биологически правдоподобными параметрами",
+      "description": "**Класс**: `NSPNeuronBio` — конфигурационный вариант мелкого импульсного нейрона с биологически правдоподобными параметрами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPNeuronBio\", ...)`. **Storage-инстансы**: `ClassName = \"NSPNeuronBio\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSPNeuronBio2": {
+      "header": "мелкий импульсный нейрон с биологически правдоподобными параметрами (версия 2)",
+      "description": "**Класс**: `NSPNeuronBio2` — конфигурационный вариант мелкого импульсного нейрона с биологически правдоподобными параметрами (версия 2, совместимая с кабельной моделью). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPNeuronBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NSPNeuronBio2\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSPNeuronGen": {
+      "header": "мелкий импульсный нейрон с упрощенным генератором спайков",
+      "description": "**Класс**: `NSPNeuronGen` — конфигурационный вариант мелкого импульсного нейрона с упрощенным генератором спайков. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPNeuronGen\", ...)`. **Storage-инстансы**: `ClassName = \"NSPNeuronGen\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSimpleAfferentNeuron": {
+      "header": "простой афферентный нейрон",
+      "description": "**Класс**: `NSimpleAfferentNeuron` — конфигурационный вариант простого афферентного нейрона с упрощенной структурой. **Префикс**: `NSimple` — **Simple** (простой вариант компонента). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSimpleAfferentNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSimpleAfferentNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSinusGenerator": {
+      "header": "синусоидальный генератор",
+      "description": "**Класс**: `NSinusGenerator` — генератор синусоидальных сигналов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSinusGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NSinusGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSource": {
+      "header": "источник сигналов",
+      "description": "**Класс**: `NSource` — базовый класс для источников внешних сигналов/стимулов для сети. **Префикс**: `NS` — **S**ource (источник) или **S**imple (простой). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSource\", ...)`. **Storage-инстансы**: `ClassName = \"NSource\"` (обычно используется через наследников)."
+    },
+    "NSpikeClassifier": {
+      "header": "классификатор по спайкам",
+      "description": "**Класс**: `NSpikeClassifier` — классификатор, определяющий класс по спайковым паттернам. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSpikeClassifier\", ...)`. **Storage-инстансы**: `ClassName = \"NSpikeClassifier\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NStatePredictor": {
+      "header": "предсказатель состояний",
+      "description": "**Класс**: `NStatePredictor` — предсказатель состояний на основе временных рядов с использованием нейронных сетей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NStatePredictor\", ...)`. **Storage-инстансы**: `ClassName = \"NStatePredictor\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSum": {
+      "header": "сумматор",
+      "description": "**Класс**: `NSum` — компонент для суммирования входных сигналов с коэффициентами усиления. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSum\", ...)`. **Storage-инстансы**: `ClassName = \"NSum\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynLPNeuron": {
+      "header": "крупный син-нейрон",
+      "description": "**Класс**: `NSynLPNeuron` — конфигурационный вариант крупного импульсного нейрона с оптимизированными синапсами. **Аббревиатуры**: `Syn` — **Syn**apse (синапс); `LP` — **L**ong **P**attern (длинный паттерн). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynLPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSynLPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynMotoneuron": {
+      "header": "син-мотонейрон",
+      "description": "**Класс**: `NSynMotoneuron` — конфигурационный вариант мотонейрона с оптимизированными синапсами. **Аббревиатура**: `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynMotoneuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSynMotoneuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynRenshowCell": {
+      "header": "син-клетка Реншоу",
+      "description": "**Класс**: `NSynRenshowCell` — конфигурационный вариант клетки Реншоу (ингибирующий интернейрон) с оптимизированными синапсами. **Аббревиатура**: `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynRenshowCell\", ...)`. **Storage-инстансы**: `ClassName = \"NSynRenshowCell\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynSPNeuron": {
+      "header": "мелкий син-нейрон",
+      "description": "**Класс**: `NSynSPNeuron` — конфигурационный вариант мелкого импульсного нейрона с оптимизированными синапсами. **Аббревиатуры**: `Syn` — **Syn**apse (синапс); `SP` — **S**pike **P**attern (паттерн спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynSPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSynSPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynTCNNeuron": {
+      "header": "компонент PulseLib",
+      "description": "компонент PulseLib (см. реализацию в `NPulseLibrary.cpp`)."
+    },
+    "NSynapseCable": {
+      "header": "кабельный импульсный синапс",
+      "description": "**Класс**: `NSynapseCable` — конфигурационный вариант импульсного синапса для кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseCable\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseCable\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseCableMulti": {
+      "header": "кабельный импульсный синапс (мульти-вариант)",
+      "description": "**Класс**: `NSynapseCableMulti` — конфигурационный вариант импульсного синапса для мульти-кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseCableMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseCableMulti\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseClassic": {
+      "header": "классический синапс",
+      "description": "**Класс**: `NSynapseClassic` — базовый классический синапс с параметрами синаптической передачи. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseClassic\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseClassic\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseClassicSlv": {
+      "header": "классический синапс с буфером спайков",
+      "description": "**Класс**: `NSynapseClassicSlv` — классический синапс с буфером спайков для отслеживания истории спайков и расчета тока на основе экспоненциальной функции времени. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseClassicSlv\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseClassicSlv\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseIaF": {
+      "header": "синапс для модели Integrate-and-Fire",
+      "description": "**Класс**: `NSynapseIaF` — конфигурационный вариант импульсного синапса с параметрами для модели Integrate-and-Fire (IaF). **Аббревиатура**: `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseIaF\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseStdp": {
+      "header": "базовый STDP-синапс",
+      "description": "**Класс**: `NSynapseStdp` — базовый импульсный синапс с поддержкой STDP-обучения (Spike-Timing Dependent Plasticity). **Аббревиатура**: `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseStdp\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseStdp\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseTrainerStdp": {
+      "header": "базовый тренер STDP",
+      "description": "**Класс**: `NSynapseTrainerStdp` — базовый класс тренера для обучения синапсов по правилу STDP (Spike-Timing Dependent Plasticity). **Аббревиатура**: `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdp\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdp\"` в..."
+    },
+    "NSynapseTrainerStdpClassicDiscrete": {
+      "header": "классический STDP (дискретный)",
+      "description": "**Класс**: `NSynapseTrainerStdpClassicDiscrete` — классический STDP с дискретной реализацией. **Аббревиатура**: `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpClassicDiscrete\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpClassicDiscrete\"` в..."
+    },
+    "NSynapseTrainerStdpClassicIntegrated": {
+      "header": "классический STDP (интегрированный)",
+      "description": "**Класс**: `NSynapseTrainerStdpClassicIntegrated` — классический STDP с интегрированной реализацией. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpClassicIntegrated\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpClassicIntegrated\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseTrainerStdpLobov": {
+      "header": "STDP по Лобову",
+      "description": "**Класс**: `NSynapseTrainerStdpLobov` — STDP-тренер по методу Лобова (изначальный вариант, не работает). **Аббревиатура**: `STDP` — **S**pike-**T**iming **D**ependent **P**lasticity (пластичность, зависящая от времени спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpLobov\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpLobov\"` в..."
+    },
+    "NSynapseTrainerStdpMirror": {
+      "header": "STDP Mirror",
+      "description": "**Класс**: `NSynapseTrainerStdpMirror` — STDP-тренер с зеркальным правилом. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpMirror\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpMirror\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseTrainerStdpProbabilistic": {
+      "header": "вероятностный STDP",
+      "description": "**Класс**: `NSynapseTrainerStdpProbabilistic` — вероятностный STDP-тренер. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpProbabilistic\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpProbabilistic\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseTrainerStdpStable": {
+      "header": "стабильный STDP",
+      "description": "**Класс**: `NSynapseTrainerStdpStable` — стабильный STDP-тренер. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpStable\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpStable\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseTrainerStdpTD": {
+      "header": "STDP-тренер, зависящий от времени",
+      "description": "**Класс**: `NSynapseTrainerStdpTD` — STDP-тренер, зависящий от времени напрямую (Time-Dependent). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpTD\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpTD\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseTrainerStdpTriplet": {
+      "header": "STDP Triplet",
+      "description": "**Класс**: `NSynapseTrainerStdpTriplet` — STDP-тренер с триплетным правилом. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpTriplet\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpTriplet\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "NSynapseTrainerStdpWD": {
+      "header": "STDP-тренер, зависящий от веса",
+      "description": "**Класс**: `NSynapseTrainerStdpWD` — STDP-тренер, зависящий от веса напрямую (Weight-Dependent). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseTrainerStdpWD\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseTrainerStdpWD\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "Neurons": {
+      "header": "NNeuron, NPulseNeuron* и семейства (Nmsdk-PulseLib)",
+      "description": "Группа нейронных классов реализует различные модели (Izhikevich, IaF, Cable, Hebb, LP/SP/TCN и др.), а также афферентные, моторные и обучающиеся нейроны."
+    },
+    "SynapsesAndTrainers": {
+      "header": "NPSynapse*, NSynapse*, NSynapseTrainer* (Nmsdk-PulseLib)",
+      "description": "Группа реализует передаточные элементы (синапсы) и обучающие модули (тренеры STDP и др.)."
+    },
+    "ManipulatorsAndMotion": {
+      "header": "",
+      "description": "Описывает классы NManipulator*, NMazeMemory*, NMotionElement, NPositionControlElement и др."
+    },
+    "N2AsfNewSimplestAfferentBranchedEngineControl": {
+      "header": "разветвлённый афферентный контроллер движения",
+      "description": "специализированная конфигурация `NEngineMotionControl` с разветвлённой афферентной обработкой и параметрическим управлением структурой нейросети."
+    },
+    "NActuatorSignals": {
+      "header": "сигналы актуаторов",
+      "description": "компонент для определения направления движения объекта управления с использованием нейросетевой структуры из генераторов импульсов, задержек и нейронов."
+    },
+    "NAstaticGyro": {
+      "header": "астатический гироскоп",
+      "description": "компонент моделирования астатического гироскопа для измерения углов ориентации (alpha, betta, gamma) на основе входных сигналов угловой скорости."
+    },
+    "NControlObjectSource": {
+      "header": "источник объекта управления",
+      "description": "источник данных о состоянии объекта управления для систем управления движением."
+    },
+    "NCounterNeuron": {
+      "header": "счетчик нейрон",
+      "description": "нейрон-счетчик, генерирующий выходной импульс только после получения MaxCount входных импульсов."
+    },
+    "NDCEngine": {
+      "header": "DC-двигатель",
+      "description": "компонент моделирования DC-двигателя с электромеханическими характеристиками."
+    },
+    "NEngineControlRangeAfferent": {
+      "header": "афферентный контроллер (range)",
+      "description": "вариант контроллера движения на базе диапазонных (range) афферентов."
+    },
+    "NEngineControlSignumAfferent": {
+      "header": "афферентный контроллер (signum)",
+      "description": "вариант контроллера движения на базе signum-признаков (афферентные сигналы)."
+    },
+    "NEngineMotionControl": {
+      "header": "движок управления движением",
+      "description": "центральный компонент управления движением, объединяющий сенсоры, контроллеры и актуаторы для реализации сложных систем управления движением."
+    },
+    "NEyeRetina": {
+      "header": "ретина глаза",
+      "description": "компонент моделирования биологической ретины глаза для обработки визуальной информации."
+    },
+    "NFrequencyReceiver": {
+      "header": "приемник частот",
+      "description": "приемник для измерения частоты импульсных сигналов в заданном диапазоне."
+    },
+    "NIntervalSeparator": {
+      "header": "разделитель по интервалам",
+      "description": "компонент для разделения входного сигнала по заданным интервалам значений с различными режимами обработки."
+    },
+    "NManipulator": {
+      "header": "манипулятор",
+      "description": "компонент моделирования манипулятора с электрическими характеристиками."
+    },
+    "NManipulatorAndGyro": {
+      "header": "манипулятор с гироскопом",
+      "description": "компонент для моделирования манипулятора с гироскопом, вычисляющий результирующий момент с учетом внешнего момента, момента двигателя и гравитации."
+    },
+    "NManipulatorInput": {
+      "header": "вход манипулятора",
+      "description": "источник входных данных для манипулятора, преобразующий входной сигнал в напряжение."
+    },
+    "NManipulatorInputEmulator": {
+      "header": "эмулятор ввода манипулятора",
+      "description": "эмулятор входных данных для манипулятора, упрощённая версия `NManipulatorInput` для тестирования и отладки."
+    },
+    "NManipulatorSource": {
+      "header": "источник манипулятора",
+      "description": "источник данных о состоянии манипулятора (угол, скорость, сила, перемещение)."
+    },
+    "NManipulatorSourceEmulator": {
+      "header": "эмулятор источника манипулятора",
+      "description": "эмулятор источника данных о состоянии манипулятора, упрощённая версия `NManipulatorSource` для тестирования и отладки."
+    },
+    "NMazeMemory": {
+      "header": "память лабиринта",
+      "description": "компонент для создания и управления памятью лабиринта с использованием элементов траектории (NTrajectoryElement), блоков множественного контроля позиции (NMultiPositionControl) и нейронных тренеров (NNeuronTrainer)."
+    },
+    "NMazeMemorySimplified": {
+      "header": "упрощенная память лабиринта",
+      "description": "упрощенная версия компонента памяти лабиринта с использованием элементов траектории (NTrajectoryElement), блоков множественного контроля позиции (NMultiPositionControl) и нейронных тренеров (NNeuronTrainer)."
+    },
+    "NMultiPositionControl": {
+      "header": "множественный контроль позиции",
+      "description": "элемент контроля позиции для управления несколькими позициями одновременно с поддержкой запоминания состояний."
+    },
+    "NNavMousePrimitive": {
+      "header": "примитив навигации мыши",
+      "description": "компонент для моделирования навигации мыши в лабиринте с вибриссами (усами) для обнаружения препятствий."
+    },
+    "NNegSignumSeparator": {
+      "header": "разделитель отрицательной части сигнала",
+      "description": "вариант конфигурации `NSignumSeparator` для выделения отрицательной составляющей сигнала."
+    },
+    "NNetworkLinksStatistic": {
+      "header": "статистика связей сети",
+      "description": "компонент для сбора и сохранения статистики по связям в нейронных сетях."
+    },
+    "NNewMotionElement": {
+      "header": "элемент движения",
+      "description": "`NMotionElement` (регистрируется как `NNewMotionElement`) — элемент движения, создающий нейросетевую структуру для управления движением с моторными нейронами, афферентными нейронами и интернейронами."
+    },
+    "NNewPositionControlElement": {
+      "header": "новый элемент контроля позиции",
+      "description": "расширенный элемент контроля позиции с поддержкой множественных контуров управления и элементов движения."
+    },
+    "NObjInArea": {
+      "header": "объект в области",
+      "description": "компонент для обнаружения объектов в ограниченной области изображения с использованием нейросетевой структуры и блоков подавления."
+    },
+    "NPCN": {
+      "header": "PCN элемент",
+      "description": "`NPCNElement` (регистрируется как `NPCN`) — элемент сети контроля позиции (Position Control Network) для управления движением на основе нейросетевых вычислений."
+    },
+    "NPendulumAndCart": {
+      "header": "маятник и тележка",
+      "description": "компонент для моделирования системы маятника на тележке (inverted pendulum on a cart) с возможностью управления через PID-регулятор."
+    },
+    "NPosSignumSeparator": {
+      "header": "разделитель положительной части сигнала",
+      "description": "вариант конфигурации `NSignumSeparator` для выделения положительной составляющей сигнала."
+    },
+    "NPositionControlElement": {
+      "header": "элемент контроля позиции",
+      "description": "базовый элемент для контроля позиции с использованием нейросетевых компонентов."
+    },
+    "NPulseReceiver": {
+      "header": "приемник импульсов",
+      "description": "приемник для накопления и обработки импульсных сигналов от нескольких источников."
+    },
+    "NSeqComparison": {
+      "header": "сравнение последовательностей",
+      "description": "компонент для сравнения последовательностей импульсных сигналов с использованием нейросетевых структур."
+    },
+    "NSignalEstimation": {
+      "header": "оценка сигнала",
+      "description": "компонент для зонирования сигнала, разделяющий входной сигнал на зоны по верхним пределам."
+    },
+    "NSignumSeparator": {
+      "header": "разделитель по знаку",
+      "description": "компонент для разделения входного сигнала по знаку с применением усиления."
+    },
+    "NSimpleStatistic": {
+      "header": "простая статистика",
+      "description": "компонент для сбора и записи статистики по входным данным в файл."
+    },
+    "NSuppressionUnit": {
+      "header": "блок подавления",
+      "description": "компонент для подавления входных импульсов в заданном временном интервале [Delay1, Delay2]."
+    },
+    "NTrajectoryElement": {
+      "header": "элемент траектории",
+      "description": "элемент траектории для построения и следования по траекториям движения, используется в системах навигации и памяти лабиринта."
+    },
+    "NWPhysicalManipulator": {
+      "header": "WinAPI физический манипулятор",
+      "description": "компонент для управления физическим манипулятором через WinAPI и внешнюю DLL (RoboLib.dll)."
+    },
+    "ADC": {
+      "header": "аналоговый сенсор (Rdk-HardwareLib)",
+      "description": "**Класс**: `UADC` — компонент для работы с аналоговыми датчиками через ADC (Analog-to-Digital Converter) Arduino. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"ADC\", ...)`. **Storage-инстансы**: `ClassName = \"ADC\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "Arduino": {
+      "header": "управление подключением к Arduino (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoControl` — компонент управления подключением к плате Arduino через последовательный порт. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"Arduino\", ...)`. **Storage-инстансы**: `ClassName = \"Arduino\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "ArduinoConnect": {
+      "header": "вспомогательный класс подключения к Arduino (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoConnect` — вспомогательный класс для работы с последовательным портом Arduino. **Тип**: Вспомогательный класс (не Storage-компонент). **Использование**: Используется внутри `UArduinoControl` для управления последовательным портом."
+    },
+    "DC": {
+      "header": "управление DC-двигателем (Rdk-HardwareLib)",
+      "description": "**Класс**: `UDcControlDemo` — демонстрационный компонент для управления DC-двигателем через Arduino. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"DC\", ...)`. **Storage-инстансы**: `ClassName = \"DC\"` в `Bin/Configs/*/Model_*.xml`."
+    },
+    "UFileIO": {
+      "header": "файловый ввод/вывод (Rdk-BasicLib)",
+      "description": "**Класс**: `UFileIO` — компонент ввода/вывода матричных данных в файлы. **Префикс**: `IO` — **I**nput/**O**utput (ввод-вывод). **Базовый класс**: `UIO` (см. `UIO.h`). Используется для чтения матриц из файлов и записи результатов вычислений на диск."
+    },
+    "UIO": {
+      "header": "базовый класс ввода/вывода (Rdk-BasicLib)",
+      "description": "**Класс**: `UIO` — базовый абстрактный класс для компонентов ввода/вывода данных. **Префикс**: `IO` — **I**nput/**O**utput (ввод-вывод). **Базовый класс**: `UNet`. Не регистрируется напрямую в `UStorage`, используется как родительский класс для специализированных IO-компонентов (например, `UFileIO`)."
+    },
+    "UIOConverter": {
+      "header": "базовый класс конвертеров IO (Rdk-BasicLib)",
+      "description": "**Класс**: `UIOConverter` — базовый абстрактный класс для компонентов преобразования данных в IO-контексте. **Префикс**: `IO` — **I**nput/**O**utput (ввод-вывод). **Базовый класс**: `UNet`. Не регистрируется напрямую в `UStorage`, используется как родительский класс для специализированных конвертеров (например, `UIOTextConverter`)."
+    },
+    "UIOTextConverter": {
+      "header": "текстовый конвертер IO (Rdk-BasicLib)",
+      "description": "**Класс**: `UIOTextConverter` — компонент для преобразования матричных данных между внутренним форматом и текстовым представлением. **Префикс**: `IO` — **I**nput/**O**utput (ввод-вывод). **Базовый класс**: `UIOConverter`. Используется для подготовки данных к экспорту/логированию или, наоборот, для чтения текстовых матриц."
+    },
+    "UMatrixSource": {
+      "header": "источник матриц (Rdk-BasicLib)",
+      "description": "**Класс**: `UMatrixSource` — базовый источник матриц и векторов для дальнейшей обработки в вычислительных моделях Rdk. **Storage-компоненты**: регистрируется как `Class=\"UMatrixSource\"` и используется, например, в конфигурациях `Bin/Configs/Samples/SdeSolver/*`."
+    },
+    "UMatrixSourceFileFamily": {
+      "header": "файловые источники матриц (Rdk-BasicLib)",
+      "description": "Семейство компонентов чтения матриц и датасетов из файловых источников:"
+    },
+    "UMatrixSourceTimeSeries": {
+      "header": "источник временных рядов матриц (Rdk-BasicLib)",
+      "description": "**Класс**: `UMatrixSourceTimeSeries` — источник временного ряда матриц, считываемых из файла. Компонент построчно выдаёт матрицы/кадры на каждом шаге расчёта и отслеживает появление новых данных."
+    },
+    "UModel": {
+      "header": "базовая модель (Rdk-BasicLib)",
+      "description": "универсальный контейнер вычислений над `UProperty` (матрицы, скаляры и другие данные), построенный на основе базового класса `UNet`."
+    },
+    "UNoise": {
+      "header": "базовый шаблонный класс генераторов шума (Rdk-BasicLib)",
+      "description": "**Класс-шаблон**: `UNoise<T>` — базовый шаблонный класс для генераторов аддитивного шума над матрицами типа `T`. **Базовый класс**: `UNet`. Не регистрируется напрямую в `UStorage`, используется как родительский класс для специализированных генераторов (например, `UNoiseGen<double>`, `UNoiseGen<int>`)."
+    },
+    "UNoiseGen": {
+      "header": "генераторы шума (Rdk-BasicLib)",
+      "description": "**Класс-шаблон**: `UNoiseGen<T>` — генератор аддитивного шума для матриц `MDMatrix<T>`. Конкретные типы, регистрируемые в библиотеке:"
+    },
+    "UScalarSource": {
+      "header": "источник скаляров (Rdk-BasicLib)",
+      "description": "**Класс**: `UScalarSource` — источник скалярных значений разных типов (double, float, int и др.). Компонент хранит значения в `UProperty` и предоставляет их другим компонентам как параметры/выходы."
+    },
+    "UStatisticDoubleMatrix": {
+      "header": "статистика по double-матрицам (Rdk-BasicLib)",
+      "description": "**Класс**: `UStatisticDoubleMatrix` — специализированный вариант `UStatisticMatrix<double>` для матриц с плавающей точкой. Собирает и сохраняет статистику по double‑матрицам (среднее, дисперсия, min/max и т.п.)."
+    },
+    "UStatisticIntMatrix": {
+      "header": "статистика по int-матрицам (Rdk-BasicLib)",
+      "description": "**Класс**: `UStatisticIntMatrix` — компонент сбора статистики по целочисленным матрицам на основе `UStatisticMatrix<int>`. Используется для анализа результатов экспериментов, построения логов и отчётов."
+    }
+  },
+  "propertyOverrides": {},
+  "propertyFallbacks": {}
+}

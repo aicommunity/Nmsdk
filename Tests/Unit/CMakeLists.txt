@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Unit тесты для Engine
+# Unit tests for Engine
 add_subdirectory(Engine)
 
-# Unit тесты для System
+# Unit tests for System
 add_subdirectory(System)
 
-# Unit тесты для Math
+# Unit tests for Math
 add_subdirectory(Math)
 

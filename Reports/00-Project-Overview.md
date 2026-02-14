@@ -142,7 +142,7 @@ bool RdkLoadPredefinedLibraries(std::list<RDK::ULibrary*> &libs_list)
 ## См. также
 
 - [01-Rdk-Core-Structure.md](01-Rdk-Core-Structure.md) - детальное описание ядра Rdk
-- [02-Libraries-Overview.md](02-Libraries-Overview.md) - обзор всех библиотек
+- [Docs/Libraries/Overview.md](../Docs/Libraries/Overview.md) - обзор всех библиотек
 - [09-Component-System.md](09-Component-System.md) - описание компонентной системы
 - [10-Build-System.md](10-Build-System.md) - детали системы сборки
 
