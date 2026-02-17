@@ -15,6 +15,7 @@
 
 #include "UGEngineControlWidget.h"
 #include "UStyleManager.h"
+#include "NeuroModelerGuiRegistration.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 #include "../../../Rdk/GUI/Qt/UGuiModelSnapshot.h"
@@ -357,6 +358,9 @@ int main(int argc, char *argv[])
         AppCore.exitAfterCalcFlag = 1;
 
     UGEngineControlWidget w(NULL, &AppCore.application);
+
+    // Регистрация доменных Qt-виджетов NeuroModeler поверх общего UGEngineControlWidget
+    RegisterNeuroModelerWidgets(w, AppCore.application);
 
     if(AppCore.hideAdminForm)
       w.hide();

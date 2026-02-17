@@ -108,6 +108,7 @@ add_subdirectory(Libraries/Rdk-CvBasicLib) # Rdk-CvBasicLib
 add_subdirectory(Libraries/Rdk-HardwareLib) # Rdk-HardwareLib
 add_subdirectory(Libraries/Nmsdk-MotionControlLib) # Nmsdk-MotionControlLib
 add_subdirectory(Libraries/Nmsdk-PulseLib) # Nmsdk-PulseLib
+add_subdirectory(GUI/Qt) # NeuroModeler-specific Qt GUI
 # add_subdirectory(Libraries/Rdk-CvBasicLib)
 # add_subdirectory(Libraries/Rdk-HardwareLib)
 # add_subdirectory(Libraries/Nmsdk-MotionControlLib)

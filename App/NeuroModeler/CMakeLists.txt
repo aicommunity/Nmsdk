@@ -1,4 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
+
+# Disable Qt Creator's automatic vcpkg setup on Linux to avoid
+# noisy warnings about missing vcpkg executable. We manage
+# dependencies explicitly via our own CMake logic.
+if(UNIX AND NOT WIN32)
+  set(QT_CREATOR_SKIP_VCPKG_SETUP ON CACHE BOOL
+      "Skip Qt Creator vcpkg auto-setup (handled manually in this project)" FORCE)
+endif()
+
 project(NeuroModeler LANGUAGES CXX)
 
 # Include helper function to get version from Git
@@ -162,6 +171,7 @@ target_link_libraries(NeuroModeler
     Nmsdk-PulseLib.qt
     Nmsdk-MotionControlLib.qt
     rdk.static.qt
+  NeuroModelerGuiQt
 )
 
 find_package(CURL QUIET)
