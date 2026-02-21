@@ -72,4 +72,8 @@ if(Boost_FOUND)
   endif()
 endif()
 
+# Deploy non-Qt DLLs from vcpkg to Bin/Platform/Win (Qt is from C:\Qt)
+include(${CMAKE_SOURCE_DIR}/cmake/DeployVcpkgDlls.cmake)
+deploy_vcpkg_dlls(NeuroModelerConsole)
+
 

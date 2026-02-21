@@ -25,32 +25,37 @@ function(deploy_vcpkg_dlls TARGET_NAME)
         return()
     endif()
 
-    # Copy all DLLs from the release bin directory
+    # Copy all DLLs from the release bin directory (skip Qt* — Qt is from C:\Qt)
     file(GLOB _dll_files "${_vcpkg_bin_dir}/*.dll")
     foreach(_dll_file IN LISTS _dll_files)
         get_filename_component(_dll_name "${_dll_file}" NAME)
         # Skip debug DLLs (with 'd' suffix before .dll)
         if(NOT _dll_name MATCHES "d\\.dll$")
-            add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                    "${_dll_file}"
-                    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${_dll_name}"
-                COMMENT "Copying ${_dll_name} to output directory"
-            )
+            # Skip Qt DLLs; they are supplied from C:\Qt into Bin\Platform\Win
+            if(NOT _dll_name MATCHES "^Qt")
+                add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                        "${_dll_file}"
+                        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${_dll_name}"
+                    COMMENT "Copying ${_dll_name} to output directory"
+                )
+            endif()
         endif()
     endforeach()
 
-    # Copy debug DLLs (if they exist)
+    # Copy debug DLLs (if they exist); skip Qt* DLLs
     if(EXISTS "${_vcpkg_debug_bin_dir}")
         file(GLOB _debug_dll_files "${_vcpkg_debug_bin_dir}/*.dll")
         foreach(_dll_file IN LISTS _debug_dll_files)
             get_filename_component(_dll_name "${_dll_file}" NAME)
-            add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                    "${_dll_file}"
-                    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${_dll_name}"
-                COMMENT "Copying debug ${_dll_name} to output directory"
-            )
+            if(NOT _dll_name MATCHES "^Qt")
+                add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                        "${_dll_file}"
+                        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${_dll_name}"
+                    COMMENT "Copying debug ${_dll_name} to output directory"
+                )
+            endif()
         endforeach()
     endif()
 

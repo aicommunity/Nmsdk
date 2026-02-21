@@ -2,22 +2,9 @@
   "name": "nmsdk",
   "version-string": "0.1.0",
   "dependencies": [
-    {
-      "name": "curl"
-    },
-    {
-      "name": "opencv",
-      "default-features": true
-    },
-    {
-      "name": "python3"
-    },
-    {
-      "name": "eigen3"
-    },
-    {
-      "name": "zlib"
-    },
+    { "name": "curl" },
+    { "name": "eigen3" },
+    { "name": "zlib" },
     { "name": "boost-program-options" },
     { "name": "boost-thread" },
     { "name": "boost-filesystem" },
@@ -27,29 +14,19 @@
     { "name": "glog" }
   ],
   "features": {
+    "opencv": {
+      "description": "Enable OpenCV (optional; avoids opencv4 build issues with x64-windows-v142)",
+      "dependencies": [ "opencv" ]
+    },
     "qt": {
       "description": "Enable Qt GUI via vcpkg (Qt6: qtbase, qttools, qtserialport, qtcharts, qtwebengine)",
-      "dependencies": [
-        "qtbase",
-        "qttools",
-        "qtserialport",
-        "qtcharts",
-        "qtwebengine"
-      ]
+      "dependencies": [ "qtbase", "qttools", "qtserialport", "qtcharts", "qtwebengine" ]
     },
     "python": {
-      "description": "Enable Python",
-      "dependencies": [
-        "python3"
-      ]
+      "description": "Enable Python (optional; python3 from vcpkg)",
+      "dependencies": [ "python3" ]
     },
-    "darknet": {
-      "description": "Enable Darknet",
-      "dependencies": []
-    },
-    "tensorflow": {
-      "description": "Enable TensorFlow",
-      "dependencies": []
-    }
+    "darknet": { "description": "Enable Darknet", "dependencies": [] },
+    "tensorflow": { "description": "Enable TensorFlow", "dependencies": [] }
   }
 }
