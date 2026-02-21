@@ -186,10 +186,6 @@ if(buildtree_length GREATER 22 AND VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_
     message(WARNING "Buildtree path '${CURRENT_BUILDTREES_DIR}' is too long.\nConsider passing --x-buildtrees-root=<shortpath> to vcpkg!\nTrying to use '${CURRENT_BUILDTREES_DIR}/../tmp'")
     set(CURRENT_BUILDTREES_DIR "${CURRENT_BUILDTREES_DIR}/../tmp") # activly avoid long path issues in CI. -> Means CI will not return logs
     cmake_path(NORMAL_PATH CURRENT_BUILDTREES_DIR)
-    string(LENGTH "${CURRENT_BUILDTREES_DIR}" buildtree_length_new)
-    if(buildtree_length_new GREATER 22)
-         message(FATAL_ERROR "Buildtree path is too long. Build will fail! Pass --x-buildtrees-root=<shortpath> to vcpkg!")
-    endif()
     file(MAKE_DIRECTORY "${CURRENT_BUILDTREES_DIR}")
 endif()
 
