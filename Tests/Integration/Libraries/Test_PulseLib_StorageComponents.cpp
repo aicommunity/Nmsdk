@@ -491,3 +491,165 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_CreateDeleteWithNumInputDe
     }
 }
 
+// Тест 6: эмуляция работы UWatchWidget с NNeuronLearner и точками съёма данных (DataReaders)
+// Сценарий: создаём NNeuronLearner с 4 дендритами, регистрируем 4 DataReader для SomaNeuronAmplitude,
+// выполняем расчёт, удаляем компонент, затем создаём новый с 3 дендритами и регистрируем 3 DataReader.
+// После этого ожидаем, что для исправленного поведения точки съёма для несуществующего 4-го дендрита
+// больше не доступны через GetDataReader.
+TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_WatchWidget_DataReadersCleanup)
+{
+    const std::string className    = "NNeuronLearner";
+    const std::string instanceName = "NeuronLearnerTrainer";
+
+    constexpr int numInputDendriteInitial = 4;
+    constexpr int numInputDendriteSecond  = 3;
+    constexpr int stepsPerCycle           = 20;
+
+    ASSERT_TRUE(storage);
+    ASSERT_TRUE(environment);
+    ASSERT_TRUE(model);
+
+    for (int cycle = 0; cycle < 2; ++cycle)
+    {
+        std::string stage = "before-create";
+        try
+        {
+            const int numInputDendrite = (cycle == 0) ? numInputDendriteInitial : numInputDendriteSecond;
+
+            stage = "create-component";
+            UEPtr<UContainer> cont = createAndAttachComponent(className, instanceName);
+            ASSERT_TRUE(cont) << "Failed to create NNeuronLearner component from Storage";
+
+            stage = "cast-to-nneuronlearner";
+            UEPtr<NMSDK::NNeuronLearner> learner = dynamic_pointer_cast<NMSDK::NNeuronLearner>(cont);
+            ASSERT_TRUE(learner) << "Class '" << className << "' is not NNeuronLearner or hierarchy changed";
+
+            stage = "configure-and-build";
+            learner->NumInputDendrite = numInputDendrite;
+            learner->Build();
+
+            // Проверяем, что внутренняя структура согласована с NumInputDendrite
+            EXPECT_EQ(learner->NumInputDendrite.GetData(), numInputDendrite);
+            EXPECT_EQ(learner->DendriteLength.size(), static_cast<size_t>(numInputDendrite));
+            EXPECT_EQ(learner->NumSynapse.size(), static_cast<size_t>(numInputDendrite));
+            EXPECT_EQ(learner->InitialSomaPotential.size(), static_cast<size_t>(numInputDendrite));
+
+            stage = "run-steps";
+            runModelSteps(stepsPerCycle);
+
+            // Эмулируем создание графиков в UWatchWidget через регистрацию DataReader
+            stage = "register-data-readers";
+            ASSERT_TRUE(environment);
+
+            if (cycle == 0)
+            {
+                // Первая фаза: регистрируем 4 точки съёма для SomaNeuronAmplitude(0..3,0)
+                for (int j = 0; j < numInputDendriteInitial; ++j)
+                {
+                    RDK::UControllerDataReader* reader =
+                        environment->RegisterDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
+                    ASSERT_NE(reader, nullptr)
+                        << "Failed to register data reader for '" << instanceName
+                        << "', property 'SomaNeuronAmplitude', index (" << j << ", 0)";
+                }
+
+                stage = "delete-component";
+                model->DelComponent(instanceName, /*canfree=*/true);
+                EXPECT_FALSE(modelHasComponentNamed(instanceName));
+            }
+            else
+            {
+                // Вторая фаза: создаём компонент с 3 дендритами и регистрируем 3 точки съёма
+                for (int j = 0; j < numInputDendriteSecond; ++j)
+                {
+                    RDK::UControllerDataReader* reader =
+                        environment->RegisterDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
+                    ASSERT_NE(reader, nullptr)
+                        << "Failed to register data reader (second phase) for '" << instanceName
+                        << "', property 'SomaNeuronAmplitude', index (" << j << ", 0)";
+                }
+
+                // Инварианты для желаемого поведения системы графиков:
+                // - для существующих сом (0..2) GetDataReader должен возвращать валидный указатель;
+                // - для несуществующей 4-й сомы (j=3) GetDataReader должен вернуть nullptr.
+                stage = "check-data-readers-after-recreate";
+
+                for (int j = 0; j < numInputDendriteSecond; ++j)
+                {
+                    RDK::UControllerDataReader* reader =
+                        environment->GetDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
+                    EXPECT_NE(reader, nullptr)
+                        << "Expected data reader for '" << instanceName
+                        << "', property 'SomaNeuronAmplitude', index (" << j << ", 0) "
+                        << "after recreating component with " << numInputDendriteSecond
+                        << " dendrites";
+                }
+
+                for (int j = numInputDendriteSecond; j < numInputDendriteInitial; ++j)
+                {
+                    RDK::UControllerDataReader* reader =
+                        environment->GetDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
+                    EXPECT_EQ(reader, nullptr)
+                        << "Data reader for '" << instanceName
+                        << "', property 'SomaNeuronAmplitude', index (" << j << ", 0) "
+                        << "should be removed when component is recreated with fewer dendrites; "
+                        << "otherwise UWatchWidget will continue to show extra series for "
+                        << "non-existing soma outputs.";
+                }
+
+                stage = "delete-component";
+                model->DelComponent(instanceName, /*canfree=*/true);
+                EXPECT_FALSE(modelHasComponentNamed(instanceName));
+            }
+        }
+        catch (const RDK::UException& ex)
+        {
+            std::cerr << "[NNeuronLearnerWatchTest] Caught RDK::UException at stage='" << stage
+                      << "', number=" << ex.GetNumber()
+                      << ", type=" << ex.GetType()
+                      << ", file=" << ex.GetExFileName()
+                      << ", line=" << ex.GetExLineNumber()
+                      << ", what=" << ex.what()
+                      << std::endl;
+
+            FAIL() << "Exception in NNeuronLearner_WatchWidget_DataReadersCleanup at stage '"
+                   << stage << "': number=" << ex.GetNumber()
+                   << ", type=" << ex.GetType()
+                   << ", file=" << ex.GetExFileName()
+                   << ", line=" << ex.GetExLineNumber()
+                   << ", what=" << ex.what();
+        }
+        catch (const std::exception& ex)
+        {
+            std::cerr << "[NNeuronLearnerWatchTest] Caught std::exception at stage='" << stage
+                      << "': what=" << ex.what() << std::endl;
+
+            FAIL() << "std::exception in NNeuronLearner_WatchWidget_DataReadersCleanup at stage '"
+                   << stage << "': " << ex.what();
+        }
+        catch (...)
+        {
+            std::cerr << "[NNeuronLearnerWatchTest] Caught unknown exception at stage='" << stage
+                      << "'" << std::endl;
+
+            FAIL() << "Unknown exception in NNeuronLearner_WatchWidget_DataReadersCleanup at stage '"
+                   << stage << "'";
+        }
+    }
+
+    // Аккуратно снимаем регистрацию всех датаридеров, созданных в тесте,
+    // чтобы не влиять на остальные интеграционные тесты.
+    if (environment)
+    {
+        // В первой фазе регистрировались индексы 0..3, во второй — 0..2.
+        for (int j = 0; j < numInputDendriteInitial; ++j)
+        {
+            environment->UnRegisterDataReader("NeuronLearnerTrainer", "SomaNeuronAmplitude", j, 0);
+        }
+        for (int j = 0; j < numInputDendriteSecond; ++j)
+        {
+            environment->UnRegisterDataReader("NeuronLearnerTrainer", "SomaNeuronAmplitude", j, 0);
+        }
+    }
+}
+
