@@ -39,20 +39,20 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
     const std::string appPath = "Test_PulseLib_StorageComponents.exe";
     const std::string iniFile = "NeuroModelerConsole.ini";
 
-    // Для интеграционных тестов используем отдельную директорию логов,
-    // чтобы не смешивать их с рабочими логами NeuroModelerConsole.
-    const std::string testLogDir = "TestLogs/PulseLib";
+    // Для интеграционных тестов PulseLib мы НЕ создаём файловые логи,
+    // чтобы избежать конфликтов glog/файловых логгеров и лишнего шума.
+    // Логи идут только в stderr/stdout.
+    const std::string testLogDir; // пустая строка => файловое логирование отключено
 
     std::string defaultUser = "TestUser";
 
     int argc = 0;
     char** argv = nullptr;
 
-    // Настраиваем системный и лог‑каталог до инициализации ядра
+    // Настраиваем только системный каталог до инициализации ядра
     // (относительно текущего Bin/Platform/Win).
-    // Core_SetSystemDir / Core_SetLogDir — C API из rdk_init.h (глобальная область видимости).
+    // Core_SetSystemDir — C API из rdk_init.h (глобальная область видимости).
     Core_SetSystemDir(".");
-    Core_SetLogDir(testLogDir.c_str());
 
     const int initRes = g_appCore.Init(appPath, iniFile, testLogDir, defaultUser, argc, argv);
     if (initRes != 0)
