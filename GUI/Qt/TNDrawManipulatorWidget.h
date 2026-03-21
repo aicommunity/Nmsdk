@@ -3,9 +3,15 @@
 
 #include "UVisualControllerWidget.h"
 
-// Qt-аналог TNDrawManipulatorFormUnit из GUI/BCB.
-// На старте реализует простую область отрисовки, позднее будет
-// использовать либо UDrawEngineImageWidget, либо UModernDiagramWidget.
+#include <string>
+
+class QLineEdit;
+class QLabel;
+class QPaintEvent;
+
+// Qt-аналог NDrawManipulatorFormUnit / NDrawManipulatorFrameUnit из GUI/BCB.
+// Визуализация манипулятора по данным модели: имя компонента, чтение Angle/Movement,
+// отрисовка одного или двух звеньев на канвасе (только модель, без физического устройства).
 class TNDrawManipulatorWidget : public UVisualControllerWidget
 {
     Q_OBJECT
@@ -16,6 +22,31 @@ public:
 
     void AUpdateInterface() override;
     void AClearInterface() override;
+    void ASaveParameters(RDK::USerStorageXML &xml) override;
+    void ALoadParameters(RDK::USerStorageXML &xml) override;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
+private slots:
+    void onComponentNameEdited();
+
+private:
+    std::string componentName_;
+    int canvasWidth_;
+    int canvasHeight_;
+    double x_;
+    double y_;
+    double angle_;
+    double movement_;
+    double length_;
+    double zeroAngle_;
+    double zeroMovement_;
+
+    QLineEdit *componentNameEdit_;
+    QLabel *hintLabel_;
+
+    void readComponentData();
 };
 
 #endif // TNDRAWMANIPULATORWIDGET_H

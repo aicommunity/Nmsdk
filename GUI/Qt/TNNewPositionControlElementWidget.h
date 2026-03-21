@@ -3,9 +3,15 @@
 
 #include "UVisualControllerWidget.h"
 
+#include <string>
+
+class QLineEdit;
+class QPushButton;
+class QTableWidget;
+
 // Qt-аналог TNNewPositionControlElementFormUnit из GUI/BCB.
-// Универсальный элемент управления позицией, который затем может
-// встраиваться в другие панели управления (например, манипулятором).
+// Элемент управления позицией: имя компонента NNewPositionControlElement,
+// таблицы выбранного и обученного состояния (генераторы/нейроны), кнопка «Запомнить» (только модель).
 class TNNewPositionControlElementWidget : public UVisualControllerWidget
 {
     Q_OBJECT
@@ -16,6 +22,26 @@ public:
 
     void AUpdateInterface() override;
     void AClearInterface() override;
+    void ASaveParameters(RDK::USerStorageXML &xml) override;
+    void ALoadParameters(RDK::USerStorageXML &xml) override;
+
+private slots:
+    void onComponentNameEdited();
+    void onTrainPositionClicked();
+    void onSelectedCellChanged(int row, int col);
+
+private:
+    std::string componentControlName_;
+    int numMotionElements_ = 0;
+    int numControlLoops_ = 0;
+
+    QLineEdit *componentNameEdit_;
+    QTableWidget *selectedStateTable_;
+    QTableWidget *trainedStateTable_;
+    QPushButton *trainPositionButton_;
+
+    void refreshTablesFromModel();
+    void applySelectedCellToModel(int row, int col);
 };
 
 #endif // TNNEWPOSITIONCONTROLELEMENTWIDGET_H

@@ -168,10 +168,10 @@ target_link_libraries(NeuroModeler
     Rdk-CvBasicLib.qt
     Rdk-BasicLib.qt
     Rdk-HardwareLib.qt
+    NeuroModelerGuiQt
     Nmsdk-PulseLib.qt
     Nmsdk-MotionControlLib.qt
     rdk.static.qt
-  NeuroModelerGuiQt
 )
 
 find_package(CURL QUIET)
