@@ -42,12 +42,12 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Closure criteria:** Add smoke/integration tests for: registered class open, unregistered class disabled/info, single-instance reopen.
 
 ### TD-005 - Feature-flag rollout for component GUI
-- **Status:** `open`
+- **Status:** `in_progress`
 - **Phase target:** Phase 6
-- **Scope:** `EnableComponentSpecialFormsQt` is planned but not yet implemented.
-- **Why not done immediately:** Infrastructure was prioritized before introducing rollout switches.
-- **Risk/impact:** No controlled enable/disable path by environment or staged deployment profile.
-- **Closure criteria:** Add flag support in runtime configuration and gate component GUI entrypoints/registration by flag.
+- **Scope:** Basic flag support added in `UGEngineControlWidget` (`EnableComponentSpecialFormsQt`, env override: `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT`), but staged per-library rollout is not implemented yet.
+- **Why not done immediately:** First step was global on/off gate to avoid regressions; granular rollout requires additional registration partitioning.
+- **Risk/impact:** Feature can be globally disabled, but no fine-grained library-level control yet.
+- **Closure criteria:** Add per-library rollout switches and document deployment profiles.
 
 ### TD-006 - Legacy entrypoint parity outside modern diagram
 - **Status:** `in_progress`

@@ -58,6 +58,11 @@ Pipeline вызова:
 
 `UModernDiagramContextMenu` -> `UModernDiagramWidget` -> `UModernDiagramContainerWidget` -> `UGEngineControlWidget` -> `UComponentGuiService`.
 
+Feature-flag:
+
+- `EnableComponentSpecialFormsQt` (settings key, default `true`)
+- `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT` (environment override: `1/true/yes/on` to enable, other values disable)
+
 ### См. также
 
 - [Справочник виджетов](Widgets-Reference.md)
