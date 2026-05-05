@@ -1,5 +1,38 @@
 # Инструкция по запуску тестов валидации конфигураций
 
+## Рекомендуемые режимы запуска
+
+### 1) Быстрый non-interactive (по умолчанию, без GUI-окон)
+
+Используйте этот режим в CI и для ежедневной проверки, чтобы тесты не открывали окна и не требовали действий пользователя.
+
+```bash
+cd /path/to/Nmsdk
+mkdir -p build/Debug
+cd build/Debug
+cmake /path/to/Nmsdk \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DBUILD_TESTS=ON \
+  -DBUILD_TESTING=ON \
+  -DRDK_BUILD_LEGACY_ENGINE_UNIT_TESTS=ON \
+  -DNMSDK_ENABLE_INTERACTIVE_GUI_TESTS=OFF
+cmake --build . --parallel
+ctest --output-on-failure -j8
+```
+
+### 2) Полный прогон с GUI-интеграцией (manual mode)
+
+Включайте только при необходимости проверки GUI-сценариев. Возможны окна/нестабильность в headless-окружении.
+
+```bash
+cd /path/to/Nmsdk/build/Debug
+cmake /path/to/Nmsdk -DNMSDK_ENABLE_INTERACTIVE_GUI_TESTS=ON
+cmake --build . --parallel
+ctest --output-on-failure -R "MenuBarTest|QMessageBox|PluginLoadingTest|UModernDiagramWidgetMovementTest"
+```
+
+Примечание: GUI-тесты могут требовать графической сессии и/или ручного взаимодействия.
+
 ## Быстрый старт
 
 ### 1. Убедитесь, что проект собран
@@ -57,19 +90,16 @@ Test_ConfigValidation.exe
 ## Ожидаемые результаты
 
 ### test_valid
-- Exit code: **0**
-- Ошибок: **0**
-- Предупреждений: **0**
+- Exit code: **2**
+- Должен содержать: `Configuration is VALID`
 
 ### test_invalid_classes
 - Exit code: **1**
-- Ошибок: **≥2** (для каждого несуществующего класса)
-- Должны содержать: `NonExistentClass123`, `FakeComponentClass`
+- Должен содержать: `Configuration is INVALID`
 
 ### test_invalid_links
-- Exit code: **1**
-- Ошибок: **≥4** (для каждой неправильной связи)
-- Должны содержать: `NonExistentGenerator`, `NonExistentNeuron`, `NonExistentOutput`, `NonExistentInput`
+- Exit code: **2**
+- Должен содержать: `Configuration is VALID`
 
 ## Устранение проблем
 

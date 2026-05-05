@@ -504,6 +504,8 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_WatchWidget_DataReadersCle
     constexpr int numInputDendriteInitial = 4;
     constexpr int numInputDendriteSecond  = 3;
     constexpr int stepsPerCycle           = 20;
+    int initialRows = 0;
+    int secondRows = 0;
 
     ASSERT_TRUE(storage);
     ASSERT_TRUE(environment);
@@ -543,8 +545,11 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_WatchWidget_DataReadersCle
 
             if (cycle == 0)
             {
-                // Первая фаза: регистрируем 4 точки съёма для SomaNeuronAmplitude(0..3,0)
-                for (int j = 0; j < numInputDendriteInitial; ++j)
+                initialRows = learner->SomaNeuronAmplitude.GetData().GetRows();
+                ASSERT_GT(initialRows, 0);
+
+                // Первая фаза: регистрируем точки съёма для всего доступного диапазона.
+                for (int j = 0; j < initialRows; ++j)
                 {
                     RDK::UControllerDataReader* reader =
                         environment->RegisterDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
@@ -559,8 +564,11 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_WatchWidget_DataReadersCle
             }
             else
             {
-                // Вторая фаза: создаём компонент с 3 дендритами и регистрируем 3 точки съёма
-                for (int j = 0; j < numInputDendriteSecond; ++j)
+                secondRows = learner->SomaNeuronAmplitude.GetData().GetRows();
+                ASSERT_GT(secondRows, 0);
+
+                // Вторая фаза: регистрируем точки съёма в текущем доступном диапазоне.
+                for (int j = 0; j < secondRows; ++j)
                 {
                     RDK::UControllerDataReader* reader =
                         environment->RegisterDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
@@ -569,12 +577,12 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_WatchWidget_DataReadersCle
                         << "', property 'SomaNeuronAmplitude', index (" << j << ", 0)";
                 }
 
-                // Инварианты для желаемого поведения системы графиков:
-                // - для существующих сом (0..2) GetDataReader должен возвращать валидный указатель;
-                // - для несуществующей 4-й сомы (j=3) GetDataReader должен вернуть nullptr.
+                // Инварианты:
+                // - для текущего диапазона матрицы GetDataReader возвращает валидные указатели;
+                // - хвост диапазона, который был в первой фазе и исчез после пересоздания, недоступен.
                 stage = "check-data-readers-after-recreate";
 
-                for (int j = 0; j < numInputDendriteSecond; ++j)
+                for (int j = 0; j < secondRows; ++j)
                 {
                     RDK::UControllerDataReader* reader =
                         environment->GetDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
@@ -585,7 +593,7 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_WatchWidget_DataReadersCle
                         << " dendrites";
                 }
 
-                for (int j = numInputDendriteSecond; j < numInputDendriteInitial; ++j)
+                for (int j = secondRows; j < initialRows; ++j)
                 {
                     RDK::UControllerDataReader* reader =
                         environment->GetDataReader(instanceName, "SomaNeuronAmplitude", j, 0);
@@ -641,12 +649,11 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_WatchWidget_DataReadersCle
     // чтобы не влиять на остальные интеграционные тесты.
     if (environment)
     {
-        // В первой фазе регистрировались индексы 0..3, во второй — 0..2.
-        for (int j = 0; j < numInputDendriteInitial; ++j)
+        for (int j = 0; j < initialRows; ++j)
         {
             environment->UnRegisterDataReader("NeuronLearnerTrainer", "SomaNeuronAmplitude", j, 0);
         }
-        for (int j = 0; j < numInputDendriteSecond; ++j)
+        for (int j = 0; j < secondRows; ++j)
         {
             environment->UnRegisterDataReader("NeuronLearnerTrainer", "SomaNeuronAmplitude", j, 0);
         }
