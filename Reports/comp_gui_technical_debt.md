@@ -40,3 +40,19 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Why not done immediately:** Requires selecting/creating the most suitable test harness in current project.
 - **Risk/impact:** Future regressions may be missed.
 - **Closure criteria:** Add smoke/integration tests for: registered class open, unregistered class disabled/info, single-instance reopen.
+
+### TD-005 - Feature-flag rollout for component GUI
+- **Status:** `open`
+- **Phase target:** Phase 6
+- **Scope:** `EnableComponentSpecialFormsQt` is planned but not yet implemented.
+- **Why not done immediately:** Infrastructure was prioritized before introducing rollout switches.
+- **Risk/impact:** No controlled enable/disable path by environment or staged deployment profile.
+- **Closure criteria:** Add flag support in runtime configuration and gate component GUI entrypoints/registration by flag.
+
+### TD-006 - Legacy entrypoint parity outside modern diagram
+- **Status:** `in_progress`
+- **Phase target:** Phase 5
+- **Scope:** `UComponentsListWidget*` entrypoints are wired; legacy draw-engine path still has `GUI (not implemented)`.
+- **Why not done immediately:** Priority was given to modern diagram + components list workflow.
+- **Risk/impact:** Users in legacy visualization path may still see incomplete GUI behavior.
+- **Closure criteria:** Decide scope for `UDrawEngineImageWidget` and implement/disable consistently with user-facing behavior.
