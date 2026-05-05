@@ -98,6 +98,18 @@
 
 **Корневая документация:** [Rdk-HardwareLib](../Libraries/Rdk-HardwareLib.md)
 
+### GUI/Qt registration units (component forms)
+
+Для миграции специализированных форм компонентов поддерживаются registration units в сабрепозиториях:
+
+- `Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlComponentGuiRegistration.cpp`
+- `Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibComponentGuiRegistration.cpp`
+- `Libraries/Rdk-BasicLib/GUI/Qt/BasicLibComponentGuiRegistration.cpp`
+- `Libraries/Rdk-CvBasicLib/GUI/Qt/CvBasicLibComponentGuiRegistration.cpp`
+- `Libraries/Rdk-HardwareLib/GUI/Qt/HardwareLibComponentGuiRegistration.cpp`
+
+Каждый unit регистрирует соответствие `componentClassName -> form factory` в `UComponentFormRegistry`.
+
 
 ### Зависимости между библиотеками
 

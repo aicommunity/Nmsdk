@@ -618,6 +618,21 @@ void UGEngineControlWidget::setupCustomWidgets()
 }
 ```
 
+### Регистрация форм компонентов по классу
+
+Для миграции BCB-контроллеров используется единый реестр форм:
+
+1. Определите виджет-контроллер (обычно на базе `UVisualControllerWidget` + `IComponentControllerWidget`).
+2. Зарегистрируйте фабрику в `UComponentFormRegistry`.
+3. Добавьте class mapping в registration unit нужного сабрепозитория (`Libraries/<Lib>/GUI/Qt/*ComponentGuiRegistration.cpp`).
+4. Подключите registration unit в сборку GUI-приложения (`App/NeuroModeler/CMakeLists.txt`).
+
+Минимальный контракт формы компонента:
+
+- `setComponentContext(const UComponentGuiContext&)`
+- `refreshFromModel(bool force)`
+- `componentGuiId() const`
+
 ### Работа с событиями и сигналами
 
 #### Пример 7: Обработка событий компонентов

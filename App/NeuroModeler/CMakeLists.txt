@@ -54,6 +54,10 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/App/NeuroModeler/main.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UAboutDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UHelpWindow.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentFormRegistry.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiService.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGenericComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiBootstrap.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGEngineControlWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMatrixFormDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerMainWidget.cpp
@@ -117,6 +121,11 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramTooltipGenerator.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramContextMenu.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStyleManager.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlComponentGuiRegistration.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibComponentGuiRegistration.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/GUI/Qt/BasicLibComponentGuiRegistration.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/GUI/Qt/CvBasicLibComponentGuiRegistration.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/GUI/Qt/HardwareLibComponentGuiRegistration.cpp
 )
 
 # Explicitly state that the UI file must be processed only once

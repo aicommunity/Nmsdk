@@ -45,6 +45,19 @@ flowchart TB
 
 Все виджеты наследуются от `UVisualControllerWidget` или `UVisualControllerMainWidget` и получают указатель на `UApplication` при создании. Они используют этот указатель для доступа к движку (`UEngine`), хранилищу компонентов (`UStorage`) и проекту (`UProject`).
 
+### Специализированные формы компонентов (BCB -> Qt)
+
+В Qt реализовано ядро открытия форм по классу компонента:
+
+- `UComponentGuiContext` - контекст (`componentLongName`, `componentClassName`, `channelIndex`)
+- `UComponentFormRegistry` - статический реестр `ComponentClass -> FormFactory`
+- `UComponentGuiService` - создание/активация инстансов форм
+- `UModernDiagramContextMenu::componentGUI()` - точка вызова из контекстного меню схемы
+
+Pipeline вызова:
+
+`UModernDiagramContextMenu` -> `UModernDiagramWidget` -> `UModernDiagramContainerWidget` -> `UGEngineControlWidget` -> `UComponentGuiService`.
+
 ### См. также
 
 - [Справочник виджетов](Widgets-Reference.md)
