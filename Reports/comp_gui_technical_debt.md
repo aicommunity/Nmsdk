@@ -12,10 +12,10 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 ### TD-001 - Real Qt ports for legacy BCB controllers
 - **Status:** `in_progress`
 - **Phase target:** Phase 4 / Phase 5
-- **Scope:** Dedicated real widgets were added for `NAstaticGyro`, `NNewPositionControlElement` (MotionControl) and `NNeuronTrainer` (PulseLib). Remaining MotionControl priority controller classes (e.g. `TNManipulatorControlForm`) and `NNeuronLearner` still use placeholders.
+- **Scope:** Dedicated widgets now cover `NAstaticGyro`, `NNewPositionControlElement`, `NNeuronTrainer`, and manipulator class groups (`TNManipulatorControlForm`/`TNewManipulatorControlForm`) with partial parity. Remaining placeholder in Priority A/B wave is `NNeuronLearner`; manipulator hardware and advanced parity is still incomplete.
 - **Why not done immediately:** Full feature parity requires deep UI/logic migration from BCB forms (`TNManipulatorControlForm`, `TNNeuronTrainerForm`, etc.).
-- **Risk/impact:** Users get opening support and routing now, but not full domain-specific controls.
-- **Closure criteria:** Replace remaining placeholders with dedicated Qt forms for each class group and verify behavior parity (model bindings, single-instance reuse, and core interactions).
+- **Risk/impact:** Routing/opening is available and key manipulator model controls are available, but WinAPI hardware actions and full advanced block parity are missing.
+- **Closure criteria:** Replace `NNeuronLearner` placeholder and finish manipulator parity gaps (hardware integration where applicable and advanced `TNewManipulatorControlForm` block) with verified model bindings and single-instance reuse.
 
 ### TD-002 - Dedicated tab hosting policy in MDI
 - **Status:** `open`
