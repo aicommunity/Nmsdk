@@ -109,3 +109,6 @@ Acceptance:
 - Integration tests cover all key open/reopen/fallback scenarios.
 - Priority forms are either fully ported or explicitly constrained with documented and tested behavior.
 - Technical debt and closure artifacts are evidence-based and synchronized.
+
+## Release Gate Artifact
+- `Reports/comp_gui_release_checklist.md` is the canonical final go/no-go checklist for release-readiness.
