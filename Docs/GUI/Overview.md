@@ -62,6 +62,20 @@ Feature-flag:
 
 - `EnableComponentSpecialFormsQt` (settings key, default `true`)
 - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT` (environment override: `1/true/yes/on` to enable, other values disable)
+- Per-library settings keys:
+  - `EnableComponentSpecialFormsQt.MotionControl`
+  - `EnableComponentSpecialFormsQt.PulseLib`
+  - `EnableComponentSpecialFormsQt.BasicLib`
+  - `EnableComponentSpecialFormsQt.CvBasicLib`
+  - `EnableComponentSpecialFormsQt.HardwareLib`
+- Per-library environment overrides:
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_MOTIONCONTROL`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_PULSELIB`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_BASICLIB`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_CVBASICLIB`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_HARDWARELIB`
+- Resolution order: `env override` -> `settings key` -> default value.
+- If global `EnableComponentSpecialFormsQt` is disabled, library-level flags are ignored.
 
 ### См. также
 
