@@ -130,3 +130,27 @@ Notes: Requires interactive runtime actions in application UI.
 
 Overall Result: CONDITIONAL GO  
 Follow-up Actions: complete scenarios A/B/C/D in interactive session and then update checklist status to full GO.
+
+---
+
+## Execution Evidence (manual follow-up)
+
+Execution Timestamp: 2026-05-06 (UTC+3)  
+Operator: user (interactive GUI run)  
+Environment: Linux desktop runtime, real `NeuroModeler` UI session  
+Project/Config: interactive project with `NNeuronTrainer`
+
+Scenario A (DrawEngine): PASS  
+Notes: `GUI` action opens dedicated form in MDI host. Repeated `GUI` action switches to existing GUI tab; no duplicate form instance.
+
+Scenario B (ModernDiagram): NOT EXECUTED  
+Notes: No explicit user confirmation in this run.
+
+Scenario C (ComponentsList): NOT EXECUTED  
+Notes: No explicit user confirmation in this run.
+
+Scenario D (Unregistered fallback): NOT EXECUTED  
+Notes: No explicit user confirmation in this run.
+
+Overall Result: CONDITIONAL GO  
+Follow-up Actions: complete scenarios B/C/D and then switch checklist to full GO.

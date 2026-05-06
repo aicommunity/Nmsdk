@@ -49,3 +49,4 @@ This report summarizes closure evidence for `TD-001..TD-007` after the detailed 
 - Migration matrix is synchronized to actual component GUI coverage.
 - Component GUI rollout is globally and per-library configurable.
 - DrawEngine entrypoint parity and integration-style pipeline test coverage are part of closure evidence.
+- Manual interactive evidence confirms DrawEngine `GUI` reopen activates the existing MDI tab after host/activation fixes.
