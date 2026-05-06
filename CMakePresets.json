@@ -300,7 +300,7 @@
       "configurePreset": "linux-gcc-debug-tests",
       "displayName": "Build Linux GCC Debug Tests",
       "jobs": 8,
-      "targets": [ "Test_ComponentGuiRegistry" ]
+      "targets": [ "Test_ComponentGuiRegistry", "Test_ComponentGuiLifecycle" ]
     }
   ],
   "testPresets": [
@@ -314,6 +314,19 @@
       "filter": {
         "include": {
           "name": "Test_ComponentGuiRegistry"
+        }
+      }
+    },
+    {
+      "name": "linux-component-gui-lifecycle",
+      "configurePreset": "linux-gcc-debug-tests",
+      "displayName": "Run Component GUI Lifecycle tests",
+      "output": {
+        "outputOnFailure": true
+      },
+      "filter": {
+        "include": {
+          "name": "Test_ComponentGuiLifecycle"
         }
       }
     }

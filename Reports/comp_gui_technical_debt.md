@@ -70,5 +70,5 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Status:** `open`
 - **Phase target:** Follow-up hardening
 - **Scope:** Aggressive cleanup of obsolete `ComponentGui/Floating/*` and `ComponentGui/Grid/*` keys that no longer map to active sessions/containers.
-- **Deferred reason:** First rollout writes and reuses keys safely, but full recursive cleanup is deferred to avoid accidental deletion during compatibility period with older configs.
+- **Deferred reason:** Base stale-key cleanup is implemented for known sessions/grids; deferred part is migration-safe aggressive cleanup (deep recursive pruning + compatibility backup/rollback strategy).
 - **Return condition:** Add migration-safe cleanup pass with backup/snapshot in dedicated hardening stage.

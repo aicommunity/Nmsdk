@@ -25,7 +25,11 @@ Status values:
 - [x] Preset-based reproducible test flow exists in `CMakePresets.json`:
   - `linux-gcc-debug-tests`
   - `linux-component-gui-registry`
+- [x] Separate lifecycle integration target is available and green:
+  - `Test_ComponentGuiLifecycle`
+  - `linux-component-gui-lifecycle`
 - [x] Generated `Test_ComponentGuiRegistry` binary is ignored in `Bin/.gitignore` (clean working tree during routine checks).
+- [x] Generated `Test_ComponentGuiLifecycle` binary is ignored in `Bin/.gitignore`.
 
 ## 3) Build Matrix
 

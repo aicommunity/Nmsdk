@@ -10,6 +10,7 @@ Purpose: execute the final release gate from `Reports/comp_gui_release_checklist
   - `cmake --preset linux-gcc-debug-tests`
   - `cmake --build --preset linux-gcc-debug-tests`
   - `ctest --preset linux-component-gui-registry`
+  - `ctest --preset linux-component-gui-lifecycle`
 
 ## Test Data Setup
 
