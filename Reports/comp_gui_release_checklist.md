@@ -57,6 +57,16 @@ Status values:
 - [ ] Open component GUI from **ComponentsList** and verify same target form and reuse behavior.
 - [ ] Validate user-facing message for an intentionally unregistered component class.
 
+## 7) Component GUI Interactivity (new)
+
+- [x] Session snapshot model for component GUI is persisted in `Interface.xml` (`ComponentGuiLayout`).
+- [x] Floating/grid visual state is persisted in `settings.qt` (`ComponentGui/*` keys).
+- [x] Service-level detach/attach API exists for MDI <-> floating migration.
+- [x] Base grid container exists with deterministic API (`setGridSize`, `assignCell`, `clearCell`, `swapCells`).
+- [ ] Manual validation: save/load restores opened component GUI set and active host mode (mdi/floating/grid).
+- [ ] Manual validation: floating geometry/state is restored after reopen.
+- [ ] Manual validation: grid splitter layout/state is restored after reopen.
+
 ## Go / No-Go
 
 - **Current recommendation:** `CONDITIONAL GO`

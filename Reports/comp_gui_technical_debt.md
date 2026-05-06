@@ -57,3 +57,18 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Scope:** DrawEngine path now uses the same component-GUI open contract as modern entrypoints.
 - **Resolution:** Replaced explicit disable policy with context-based open request (`UComponentGuiContext`) routed to shared `UComponentGuiService`.
 - **Evidence:** `Rdk/GUI/Qt/UDrawEngineImageWidget.*`, `Rdk/GUI/Qt/UDrawEngineWidget.*`, and `UGEngineControlWidget::openComponentGuiFromScheme`.
+
+### TD-008 - Advanced grid interactions for component GUI
+- **Status:** `open`
+- **Phase target:** Follow-up after first full interactivity rollout
+- **Scope:** Add drag-and-drop between grid cells, richer cell-level toolbar actions, and nested tabs inside one grid cell.
+- **Deferred reason:** Excluded from first implementation to keep lifecycle persistence (`save -> close -> open`) stable and avoid regressions in MDI host activation.
+- **Return condition:** Enable when base grid persistence and detach/attach flow are stable across integration target and manual smoke.
+- **Current baseline:** `UComponentGuiGridContainerWidget` supports deterministic API `setGridSize/assignCell/clearCell/swapCells`, splitter resize persistence, and context restore.
+
+### TD-009 - Full stale-key garbage collection in settings.qt
+- **Status:** `open`
+- **Phase target:** Follow-up hardening
+- **Scope:** Aggressive cleanup of obsolete `ComponentGui/Floating/*` and `ComponentGui/Grid/*` keys that no longer map to active sessions/containers.
+- **Deferred reason:** First rollout writes and reuses keys safely, but full recursive cleanup is deferred to avoid accidental deletion during compatibility period with older configs.
+- **Return condition:** Add migration-safe cleanup pass with backup/snapshot in dedicated hardening stage.

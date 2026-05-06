@@ -63,6 +63,37 @@ Expected:
 - No crash, no undefined behavior.
 - Informative fallback message is shown.
 
+## Scenario E: Session Restore (ComponentGuiLayout)
+
+1. Open at least 3 component GUI forms from mixed entrypoints.
+2. Keep one in MDI, detach one to floating, place one into grid container.
+3. Save project, close project, reopen project.
+4. Verify session composition is restored from `Interface.xml` section `ComponentGuiLayout`.
+
+Expected:
+- Same component forms are reopened.
+- Host modes are preserved (`mdi`, `floating`, `grid`).
+
+## Scenario F: Floating Window Visual Restore
+
+1. Put a component GUI into floating mode.
+2. Change position/size/window state.
+3. Save project, close, reopen.
+4. Verify restored geometry/state.
+
+Expected:
+- Floating window appears with previously saved visual parameters from `settings.qt`.
+
+## Scenario G: Grid Splitter Restore
+
+1. Create/resize grid rows and columns.
+2. Assign components to multiple cells.
+3. Save project, close, reopen.
+4. Verify splitter sizes are restored.
+
+Expected:
+- Root/row splitter states match saved layout.
+
 ## Evidence Template
 
 Fill and append to this file after execution:
@@ -83,6 +114,15 @@ Scenario C (ComponentsList): PASS/FAIL
 Notes:
 
 Scenario D (Unregistered fallback): PASS/FAIL
+Notes:
+
+Scenario E (Session Restore): PASS/FAIL
+Notes:
+
+Scenario F (Floating Visual Restore): PASS/FAIL
+Notes:
+
+Scenario G (Grid Splitter Restore): PASS/FAIL
 Notes:
 
 Overall Result: GO / CONDITIONAL GO / NO-GO

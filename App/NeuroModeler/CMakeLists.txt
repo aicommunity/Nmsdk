@@ -56,6 +56,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UHelpWindow.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentFormRegistry.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiService.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiGridContainerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGenericComponentControllerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiBootstrap.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGEngineControlWidget.cpp
