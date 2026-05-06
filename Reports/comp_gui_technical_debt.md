@@ -12,10 +12,10 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 ### TD-001 - Real Qt ports for legacy BCB controllers
 - **Status:** `in_progress`
 - **Phase target:** Phase 4 / Phase 5
-- **Scope:** The first implementation uses `UGenericComponentControllerWidget` placeholders for MotionControl/Pulse/other libs.
+- **Scope:** Dedicated real widgets were added for `NAstaticGyro`, `NNewPositionControlElement` (MotionControl) and `NNeuronTrainer` (PulseLib). Remaining MotionControl priority controller classes (e.g. `TNManipulatorControlForm`) and `NNeuronLearner` still use placeholders.
 - **Why not done immediately:** Full feature parity requires deep UI/logic migration from BCB forms (`TNManipulatorControlForm`, `TNNeuronTrainerForm`, etc.).
 - **Risk/impact:** Users get opening support and routing now, but not full domain-specific controls.
-- **Closure criteria:** Replace placeholders with dedicated Qt forms for each class group and verify behavior parity.
+- **Closure criteria:** Replace remaining placeholders with dedicated Qt forms for each class group and verify behavior parity (model bindings, single-instance reuse, and core interactions).
 
 ### TD-002 - Dedicated tab hosting policy in MDI
 - **Status:** `open`
