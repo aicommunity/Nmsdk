@@ -28,3 +28,4 @@
 ## Notes
 - Current phase focuses on infrastructure and opening path.
 - Placeholder forms are intentionally lightweight and tracked in technical debt.
+- DrawEngine GUI entrypoint is routed through the same `UComponentGuiService` contract as ModernDiagram and ComponentsList.

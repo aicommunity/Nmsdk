@@ -21,8 +21,8 @@ This report summarizes closure evidence for `TD-001..TD-007` after the detailed 
 - **Matrix:** Non-priority classes (`NModel`, `NCvImageSource`, `NHardwareDevice`, `UNet`) synchronized with effective contracts.
 
 ### TD-004
-- **Code:** Service/registry smoke tests remain in `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp`.
-- **Validation:** Pipeline wiring for diagram/list entrypoints verified in runtime path and build checks.
+- **Code:** Service/registry tests in `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp` include `ComponentGuiPipeline` scenarios.
+- **Validation:** Diagram, components list, and DrawEngine context paths are covered for open/reopen/fallback behavior.
 
 ### TD-005
 - **Code:** Per-library rollout options added in `UGEngineControlWidget` and `UComponentGuiBootstrap`.
@@ -30,8 +30,8 @@ This report summarizes closure evidence for `TD-001..TD-007` after the detailed 
 - **Docs:** `Docs/GUI/Overview.md` updated.
 
 ### TD-006
-- **Code:** `UDrawEngineImageWidget` no longer shows ambiguous "not implemented"; explicit policy message added.
-- **UX:** Users are redirected to ModernDiagram/ComponentsList entrypoints.
+- **Code:** DrawEngine `GUI` action builds `UComponentGuiContext` and emits `openComponentGuiRequested` through `UDrawEngineWidget`.
+- **UX:** DrawEngine opens component forms via the same shared service path as ModernDiagram/ComponentsList.
 
 ### TD-007
 - **Code:** Introduced `Nmsdk-MotionControlLib.core` + `Nmsdk-MotionControlLib.qt` and `Nmsdk-PulseLib.core` + `Nmsdk-PulseLib.qt`.
@@ -46,3 +46,4 @@ This report summarizes closure evidence for `TD-001..TD-007` after the detailed 
 - Technical debt statuses are synchronized to `closed` in `Reports/comp_gui_technical_debt.md`.
 - Migration matrix is synchronized to actual component GUI coverage.
 - Component GUI rollout is globally and per-library configurable.
+- DrawEngine entrypoint parity and integration-style pipeline test coverage are part of closure evidence.

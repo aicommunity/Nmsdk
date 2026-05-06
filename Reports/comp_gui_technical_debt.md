@@ -33,9 +33,9 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 ### TD-004 - Tests for registration and GUI open path
 - **Status:** `closed`
 - **Phase target:** Phase 5
-- **Scope:** Service/registry smoke coverage is in place; entrypoint behavior validated during repeated rebuild and runtime path checks.
-- **Resolution:** For current migration scope, deterministic service smoke + entrypoint wiring checks are accepted as sufficient.
-- **Evidence:** `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp` and runtime pipeline checks for diagram/list fallbacks.
+- **Scope:** Service/registry smoke coverage is in place; entrypoint behavior is validated for diagram, components list, and DrawEngine contexts.
+- **Resolution:** Integration-style tests cover open/reopen/fallback scenarios through the shared service contract.
+- **Evidence:** `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp` (`ComponentGuiPipeline.*`) and stable `build-tests` execution.
 
 ### TD-007 - Incremental core/qt split for MotionControl/PulseLib
 - **Status:** `closed`
@@ -54,6 +54,6 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 ### TD-006 - Legacy entrypoint parity outside modern diagram
 - **Status:** `closed`
 - **Phase target:** Phase 5
-- **Scope:** DrawEngine path has explicit user-facing disable policy.
-- **Resolution:** Removed ambiguous placeholder and added deterministic explanation in UI.
-- **Evidence:** `Rdk/GUI/Qt/UDrawEngineImageWidget.cpp` action text/tooltip/message updates.
+- **Scope:** DrawEngine path now uses the same component-GUI open contract as modern entrypoints.
+- **Resolution:** Replaced explicit disable policy with context-based open request (`UComponentGuiContext`) routed to shared `UComponentGuiService`.
+- **Evidence:** `Rdk/GUI/Qt/UDrawEngineImageWidget.*`, `Rdk/GUI/Qt/UDrawEngineWidget.*`, and `UGEngineControlWidget::openComponentGuiFromScheme`.
