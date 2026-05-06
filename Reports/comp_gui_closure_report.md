@@ -23,6 +23,7 @@ This report summarizes closure evidence for `TD-001..TD-007` after the detailed 
 ### TD-004
 - **Code:** Service/registry tests in `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp` include `ComponentGuiPipeline` scenarios.
 - **Validation:** Diagram, components list, and DrawEngine context paths are covered for open/reopen/fallback behavior.
+- **Stability:** Generated test binary is ignored in `Bin/.gitignore` (`Test_ComponentGuiRegistry`) to avoid false dirty state during routine verification.
 
 ### TD-005
 - **Code:** Per-library rollout options added in `UGEngineControlWidget` and `UComponentGuiBootstrap`.
