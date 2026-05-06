@@ -51,6 +51,7 @@ Status values:
 
 ## 6) Manual Final Smoke (Release Gate)
 
+- [x] Execution protocol prepared: `Reports/comp_gui_manual_smoke_protocol.md`.
 - [ ] Open component GUI from **DrawEngine** on a real project and verify expected form activation.
 - [ ] Open component GUI from **ModernDiagram** and verify same target form and reuse behavior.
 - [ ] Open component GUI from **ComponentsList** and verify same target form and reuse behavior.

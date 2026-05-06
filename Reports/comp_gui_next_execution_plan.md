@@ -112,3 +112,4 @@ Acceptance:
 
 ## Release Gate Artifact
 - `Reports/comp_gui_release_checklist.md` is the canonical final go/no-go checklist for release-readiness.
+- `Reports/comp_gui_manual_smoke_protocol.md` defines the mandatory manual execution/evidence procedure for release gate completion.
