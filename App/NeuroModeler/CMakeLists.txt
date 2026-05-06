@@ -123,6 +123,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStyleManager.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlComponentGuiRegistration.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlManipulatorComponentControllerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlAstaticGyroComponentControllerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlNewPositionControlElementControllerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibComponentGuiRegistration.cpp
