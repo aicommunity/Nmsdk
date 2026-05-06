@@ -34,12 +34,20 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Closure criteria:** Matrix coverage is complete and tested for all target classes.
 
 ### TD-004 - Tests for registration and GUI open path
-- **Status:** `open`
+- **Status:** `in_progress`
 - **Phase target:** Phase 5
-- **Scope:** No dedicated automated tests added yet for `UComponentFormRegistry` and context-menu open pipeline.
-- **Why not done immediately:** Requires selecting/creating the most suitable test harness in current project.
-- **Risk/impact:** Future regressions may be missed.
-- **Closure criteria:** Add smoke/integration tests for: registered class open, unregistered class disabled/info, single-instance reopen.
+- **Scope:** Smoke unit-tests for `UComponentFormRegistry` and `UComponentGuiService` have been added in Rdk tests; GUI/context-menu pipeline is still covered only manually.
+- **Why not done immediately:** Full GUI pipeline tests require interactive/Qt GUI harness which is out of scope for the current phase.
+- **Risk/impact:** Core registry/service contracts are guarded; context-menu wiring regressions may still slip through without integration tests.
+- **Closure criteria:** Add integration tests that drive context-menu entrypoints (diagram + components list) and verify registered/unregistered/single-instance behavior end-to-end.
+
+### TD-007 - Incremental core/qt split for MotionControl/PulseLib
+- **Status:** `in_progress`
+- **Phase target:** Phase 6
+- **Scope:** Initial CMake options (`NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY`, `NMSDK_PULSELIB_BUILD_CORE_ONLY`) added to allow building libraries without Qt GUI helpers; actual separation of targets and CI matrix are not implemented yet.
+- **Why not done immediately:** Requires careful dependency analysis and CI configuration to avoid breaking existing Qt builds.
+- **Risk/impact:** Current builds are unchanged by default; headless/core-only scenarios still need refinement and verification.
+- **Closure criteria:** Introduce distinct `*.core` targets, wire them into CI matrix (core-only vs qt), and update app/linking configuration accordingly.
 
 ### TD-005 - Feature-flag rollout for component GUI
 - **Status:** `in_progress`

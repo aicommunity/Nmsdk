@@ -110,6 +110,13 @@
 
 Каждый unit регистрирует соответствие `componentClassName -> form factory` в `UComponentFormRegistry`.
 
+### Core/Qt split (early stage)
+
+- MotionControl: CMake option `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY` (default `OFF`) allows building the library without Qt GUI helpers (`Nmsdk::Qt::Core` dependency is skipped, `NMSDK_MOTIONCONTROLLIB_CORE_ONLY` is defined).
+- PulseLib: CMake option `NMSDK_PULSELIB_BUILD_CORE_ONLY` (default `OFF`) behaves similarly, defining `NMSDK_PULSELIB_CORE_ONLY` when enabled.
+
+These options are the first step towards full `*.core` / `*.qt` target split and are currently intended for experimental/headless builds only.
+
 
 ### Зависимости между библиотеками
 
