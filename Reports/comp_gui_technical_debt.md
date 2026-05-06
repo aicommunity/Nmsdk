@@ -35,7 +35,7 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Phase target:** Phase 5
 - **Scope:** Service/registry smoke coverage is in place; entrypoint behavior is validated for diagram, components list, and DrawEngine contexts.
 - **Resolution:** Integration-style tests cover open/reopen/fallback scenarios through the shared service contract.
-- **Evidence:** `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp` (`ComponentGuiPipeline.*`), stable `build-tests` execution, and ignored generated binary in `Bin/.gitignore` (`Test_ComponentGuiRegistry`) for clean working tree.
+- **Evidence:** `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp` (`ComponentGuiPipeline.*`), stable `build-tests` execution, ignored generated binary in `Bin/.gitignore` (`Test_ComponentGuiRegistry`), and reproducible `CMakePresets.json` test flow (`linux-gcc-debug-tests` + `linux-component-gui-registry`).
 
 ### TD-007 - Incremental core/qt split for MotionControl/PulseLib
 - **Status:** `closed`

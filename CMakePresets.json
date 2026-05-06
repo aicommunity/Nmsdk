@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 3,
   "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
   "configurePresets": [
     {
@@ -180,7 +180,7 @@
     {
       "name": "linux-gcc-debug",
       "hidden": true,
-      "generator": "Ninja",
+      "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
       "cacheVariables": {
@@ -204,6 +204,26 @@
       "hidden": true,
       "inherits": [ "linux-gcc-debug" ],
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "linux-gcc-debug-local",
+      "displayName": "Linux GCC Debug",
+      "inherits": [ "linux-gcc-debug" ]
+    },
+    {
+      "name": "linux-gcc-release-local",
+      "displayName": "Linux GCC Release",
+      "inherits": [ "linux-gcc-release" ]
+    },
+    {
+      "name": "linux-gcc-debug-tests",
+      "displayName": "Linux GCC Debug Tests",
+      "inherits": [ "linux-gcc-debug" ],
+      "binaryDir": "${sourceDir}/build/linux-gcc-debug-tests-make",
+      "cacheVariables": {
+        "BUILD_TESTING": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
     }
   ],
   "buildPresets": [
@@ -262,6 +282,40 @@
       "configurePreset": "win-vs2022-release-vcpkgqt",
       "displayName": "Build Windows VS2022 Release (Qt from vcpkg)",
       "configuration": "Release"
+    },
+    {
+      "name": "linux-gcc-debug",
+      "configurePreset": "linux-gcc-debug-local",
+      "displayName": "Build Linux GCC Debug",
+      "jobs": 8
+    },
+    {
+      "name": "linux-gcc-release",
+      "configurePreset": "linux-gcc-release-local",
+      "displayName": "Build Linux GCC Release",
+      "jobs": 8
+    },
+    {
+      "name": "linux-gcc-debug-tests",
+      "configurePreset": "linux-gcc-debug-tests",
+      "displayName": "Build Linux GCC Debug Tests",
+      "jobs": 8,
+      "targets": [ "Test_ComponentGuiRegistry" ]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-component-gui-registry",
+      "configurePreset": "linux-gcc-debug-tests",
+      "displayName": "Run Component GUI Registry tests",
+      "output": {
+        "outputOnFailure": true
+      },
+      "filter": {
+        "include": {
+          "name": "Test_ComponentGuiRegistry"
+        }
+      }
     }
   ]
 }

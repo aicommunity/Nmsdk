@@ -24,6 +24,7 @@ This report summarizes closure evidence for `TD-001..TD-007` after the detailed 
 - **Code:** Service/registry tests in `Rdk/Tests/Unit/Test_ComponentGuiRegistry.cpp` include `ComponentGuiPipeline` scenarios.
 - **Validation:** Diagram, components list, and DrawEngine context paths are covered for open/reopen/fallback behavior.
 - **Stability:** Generated test binary is ignored in `Bin/.gitignore` (`Test_ComponentGuiRegistry`) to avoid false dirty state during routine verification.
+- **Reproducibility:** `CMakePresets.json` now includes linux build/test presets for this path (`linux-gcc-debug-tests`, `linux-component-gui-registry`).
 
 ### TD-005
 - **Code:** Per-library rollout options added in `UGEngineControlWidget` and `UComponentGuiBootstrap`.
