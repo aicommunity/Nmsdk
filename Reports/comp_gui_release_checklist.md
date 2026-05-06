@@ -61,3 +61,4 @@ Status values:
 
 - **Current recommendation:** `CONDITIONAL GO`
 - **Condition to switch to full GO:** complete section "Manual Final Smoke (Release Gate)" on target runtime environment and append execution evidence (date, config, operator, result).
+- **Latest evidence artifact:** `Reports/comp_gui_manual_smoke_protocol.md` (automated preconditions done, manual scenarios pending).

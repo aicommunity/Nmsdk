@@ -95,3 +95,38 @@ After all scenarios PASS:
 1. Mark section "Manual Final Smoke (Release Gate)" as completed in `Reports/comp_gui_release_checklist.md`.
 2. Update `Go / No-Go` to `GO`.
 3. Add short evidence summary in `Reports/comp_gui_closure_report.md`.
+
+---
+
+## Execution Evidence (latest run)
+
+Execution Timestamp: 2026-05-06 (UTC+3)  
+Operator: Codex (automated stage execution)  
+Environment: Linux 6.8 / headless CI-like shell environment  
+Project/Config: `/home/user/Nmsdk`
+
+Automated preconditions:
+- PASS: `cmake --build build --target NeuroModeler -j4`
+- PASS: `cmake --build build-core-only --target NeuroModelerConsole -j4`
+- PASS: `cmake --build build-motion-off --target NeuroModeler -j4`
+- PASS: `cmake --build build-pulse-off --target NeuroModeler -j4`
+- PASS: preset smoke flow  
+  `cmake --preset linux-gcc-debug-tests`  
+  `cmake --build --preset linux-gcc-debug-tests`  
+  `ctest --preset linux-component-gui-registry`
+- PASS (launch smoke): `timeout 8s env QT_QPA_PLATFORM=offscreen ./Bin/Platform/Linux/NeuroModeler` reached active event loop and was terminated by timeout (`exit 124`).
+
+Scenario A (DrawEngine): NOT EXECUTED (manual GUI interaction required)  
+Notes: Requires interactive runtime actions in application UI.
+
+Scenario B (ModernDiagram): NOT EXECUTED (manual GUI interaction required)  
+Notes: Requires interactive runtime actions in application UI.
+
+Scenario C (ComponentsList): NOT EXECUTED (manual GUI interaction required)  
+Notes: Requires interactive runtime actions in application UI.
+
+Scenario D (Unregistered fallback): NOT EXECUTED (manual GUI interaction required)  
+Notes: Requires interactive runtime actions in application UI.
+
+Overall Result: CONDITIONAL GO  
+Follow-up Actions: complete scenarios A/B/C/D in interactive session and then update checklist status to full GO.
