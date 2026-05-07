@@ -39,3 +39,12 @@ Estimated time: 2-3 minutes.
 - Fill results in `Reports/comp_gui_manual_smoke_protocol.md` (PASS/FAIL + notes + date + operator).
 - Mark manual smoke items completed in `Reports/comp_gui_release_checklist.md`.
 - If all scenarios pass, switch overall status to `GO`.
+
+## 7. DnD + Grid UX
+
+- Drag MDI component GUI tab outside window -> verify floating detach.
+- Drag floating component GUI by left drag-handle onto MDI header area -> verify attach back to MDI on release.
+- Drag floating component GUI by left drag-handle into grid cell -> verify placement.
+- Drag component GUI from grid cell back to MDI header area -> verify source cell is cleared after successful attach.
+- Trigger `Move to Grid...` and select existing grid -> verify no repeated rows/cols prompt.
+- Trigger `Window -> Component GUI Grid...` -> verify single dialog is used.

@@ -95,6 +95,35 @@ Expected:
 Expected:
 - Root/row splitter states match saved layout.
 
+## Scenario H: Native Qt DnD Host Migration UX
+
+1. Open a component GUI in MDI tab mode.
+2. Drag the tab outside tab bar/main window and release.
+3. Verify it detaches to floating window.
+4. Drag floating component GUI using the left drag-handle strip to MDI workspace header area (tab region / top of MDI viewport) and release.
+5. Verify it re-attaches as MDI tab on mouse release.
+6. Drag floating component GUI using the same drag-handle to a grid cell and release.
+7. Verify component appears in target grid cell.
+8. Drag component GUI from grid cell back to MDI header area and release.
+9. Verify source grid cell is cleared only after successful attach to MDI.
+
+Expected:
+- DnD cycle works in both directions: `mdi -> floating -> mdi/grid`.
+- `grid -> mdi` move keeps single-host invariant (no duplicate widget in source cell).
+- No mandatory popup action is required for basic host migration.
+
+## Scenario I: Grid Dialog UX (single form)
+
+1. Use `Window -> Component GUI Grid...`.
+2. Verify single dialog is shown (not chained multiple popups).
+3. Create new grid in one confirmation.
+4. Use context menu `Move to Grid...` for component GUI.
+5. Select existing grid in the same dialog and target cell.
+
+Expected:
+- Existing grid selection does not ask rows/cols again.
+- Move is applied immediately to selected existing grid.
+
 ## Evidence Template
 
 Fill and append to this file after execution:

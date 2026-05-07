@@ -70,6 +70,12 @@ Status values:
 - [ ] Manual validation: save/load restores opened component GUI set and active host mode (mdi/floating/grid).
 - [ ] Manual validation: floating geometry/state is restored after reopen.
 - [ ] Manual validation: grid splitter layout/state is restored after reopen.
+- [ ] Manual validation: DnD `mdi -> floating` detach works when dropped outside tabview/main window.
+- [ ] Manual validation: DnD `floating -> mdi` attach works by dropping with drag-handle to MDI header/viewport top area.
+- [ ] Manual validation: DnD `floating -> grid` placement works by dropping to a grid cell.
+- [ ] Manual validation: DnD `grid -> mdi` clears source cell only after successful attach.
+- [x] UX: grid creation/move now uses a single dialog (no chained 3 popups).
+- [x] UX: `Move to Grid...` supports existing grid selection without implicit resize/recreate flow.
 
 ## Go / No-Go
 

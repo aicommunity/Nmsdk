@@ -72,3 +72,12 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Scope:** Aggressive cleanup of obsolete `ComponentGui/Floating/*` and `ComponentGui/Grid/*` keys that no longer map to active sessions/containers.
 - **Deferred reason:** Base stale-key cleanup is implemented for known sessions/grids; deferred part is migration-safe aggressive cleanup (deep recursive pruning + compatibility backup/rollback strategy).
 - **Return condition:** Add migration-safe cleanup pass with backup/snapshot in dedicated hardening stage.
+
+### TD-010 - Native dock migration hardening for component GUI
+- **Status:** `in_progress`
+- **Phase target:** Current stabilization cycle
+- **Scope:** Replace custom floating/DnD wrapper paths with native `QDockWidget` host lifecycle (dock/floating/reattach) while preserving grid roundtrip compatibility.
+- **Decision:** Execute migration incrementally with compatibility fallback for test MDI harness; remove cursor-based `IgnoreAction` business logic from production paths.
+- **Impact:** Reduces nondeterministic DnD behavior and style regressions during detach/attach; requires expanded regression matrix for dock + grid transitions.
+- **Owner:** Codex + user validation on desktop runtime
+- **Exit criteria:** Native dock cycle passes unit/lifecycle tests, manual drag float/reattach works without style loss, technical debt item moved to `closed` with evidence links.
