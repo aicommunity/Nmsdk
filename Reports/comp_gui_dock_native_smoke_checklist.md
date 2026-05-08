@@ -30,27 +30,40 @@
 - float/reattach выполняется штатно мышью,
 - оформление формы не деградирует (без "чёрного" окна, без потери QSS).
 
-## Scenario 3: Dock -> Grid -> Dock
+## Scenario 3: Dock -> Tab Host -> Dock
 
-1. Для открытой component GUI выбери `Move to Grid...`.
-2. Помести форму в существующую ячейку grid.
+1. Для открытой component GUI выбери `Move to Tab Host...`.
+2. Помести форму в существующий tab-host.
 3. Верни форму обратно в dock-host (через host menu / attach action).
 
 Ожидание:
-- форма появляется в grid-ячейке,
-- после возврата в dock source-cell очищается,
+- форма появляется в tab-host как вкладка,
+- после возврата в dock source-tab очищается,
 - нет дублирования одного context в двух host-ах одновременно.
 
-## Scenario 4: Save/Load restore
+## Scenario 4: Dock -> Secondary Host -> Dock
+
+1. Открой `Window -> Component GUI Secondary Host...`.
+2. Для открытой component GUI выбери `Move to Secondary Host`.
+3. Верни форму обратно в main dock-host.
+
+Ожидание:
+- secondary host открывается как single-instance окно,
+- GUI пристыковывается в secondary host,
+- возврат в main host работает без потери состояния.
+
+## Scenario 5: Save/Load restore
 
 1. Открой 2-3 component GUI, часть оставь docked, одну сделай floating.
+2. Одну размести в tab-host и одну в secondary host.
 2. Сохрани проект, закрой и открой снова.
 
 Ожидание:
 - панели восстанавливаются с корректным host mode,
-- floating-состояние/позиция восстанавливается ожидаемо.
+- floating-состояние/позиция восстанавливается ожидаемо,
+- состояние tab-host и secondary host восстанавливается корректно.
 
-## Scenario 5: Negative checks
+## Scenario 6: Negative checks
 
 1. Попробуй выполнить attach/detach повторно для уже attached/detached панели.
 2. Открой GUI для незарегистрированного класса (если доступно в текущем проекте).

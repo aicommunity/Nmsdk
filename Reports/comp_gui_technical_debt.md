@@ -58,26 +58,60 @@ This file tracks unresolved migration items for the `comp_gui` branch.
 - **Resolution:** Replaced explicit disable policy with context-based open request (`UComponentGuiContext`) routed to shared `UComponentGuiService`.
 - **Evidence:** `Rdk/GUI/Qt/UDrawEngineImageWidget.*`, `Rdk/GUI/Qt/UDrawEngineWidget.*`, and `UGEngineControlWidget::openComponentGuiFromScheme`.
 
-### TD-008 - Advanced grid interactions for component GUI
+### TD-008 - Advanced tab-host interactions for component GUI
 - **Status:** `open`
-- **Phase target:** Follow-up after first full interactivity rollout
-- **Scope:** Add drag-and-drop between grid cells, richer cell-level toolbar actions, and nested tabs inside one grid cell.
-- **Deferred reason:** Excluded from first implementation to keep lifecycle persistence (`save -> close -> open`) stable and avoid regressions in MDI host activation.
-- **Return condition:** Enable when base grid persistence and detach/attach flow are stable across integration target and manual smoke.
-- **Current baseline:** `UComponentGuiGridContainerWidget` supports deterministic API `setGridSize/assignCell/clearCell/swapCells`, splitter resize persistence, and context restore.
+- **ID:** `TD-008`
+- **Phase discovered:** Phase 6/7 (tab-host migration validation)
+- **Context:** Base tab-host is functional but intentionally minimal to keep migration deterministic.
+- **Decision:** Defer advanced interaction layer until core lifecycle is fully stabilized in production use.
+- **Phase target:** Follow-up after tab-host stabilization
+- **Scope:** Add richer tab-host DnD ergonomics (cross-host previews, tab reorder persistence, bulk move actions).
+- **Deferred reason:** Excluded from core migration to keep host lifecycle + restore compatibility deterministic in first rollout.
+- **Target phase/commit for closure:** Next hardening cycle after post-migration regression pass.
+- **Risk if deferred:** UX remains functional but less discoverable/efficient for complex multi-host workflows.
+- **Verification evidence needed:** Manual DnD UX matrix + targeted unit tests for tab reorder/persistence.
+- **Return condition:** Enable after base `mdi/floating/tab-host/secondary-host` restore matrix is fully stable.
+- **Current baseline:** `UComponentGuiTabHostWidget` provides deterministic add/remove context flow and basic DnD payload routing.
 
 ### TD-009 - Full stale-key garbage collection in settings.qt
 - **Status:** `open`
+- **ID:** `TD-009`
+- **Phase discovered:** Phase 4 (persistence redesign)
+- **Context:** Migration adds new key space while preserving compatibility readers for old keys.
+- **Decision:** Keep conservative stale-key cleanup now; postpone aggressive recursive pruning.
 - **Phase target:** Follow-up hardening
-- **Scope:** Aggressive cleanup of obsolete `ComponentGui/Floating/*` and `ComponentGui/Grid/*` keys that no longer map to active sessions/containers.
-- **Deferred reason:** Base stale-key cleanup is implemented for known sessions/grids; deferred part is migration-safe aggressive cleanup (deep recursive pruning + compatibility backup/rollback strategy).
+- **Scope:** Aggressive cleanup of obsolete `ComponentGui/Floating/*`, `ComponentGui/Grid/*`, and `ComponentGui/TabHost/*` keys that no longer map to active sessions/containers.
+- **Deferred reason:** Base stale-key cleanup is implemented for known sessions/hosts; deferred part is migration-safe aggressive cleanup (deep recursive pruning + compatibility backup/rollback strategy).
+- **Target phase/commit for closure:** Dedicated persistence hardening phase after migration freeze.
+- **Risk if deferred:** Settings file may accumulate obsolete keys and increase restore ambiguity in edge cases.
+- **Verification evidence needed:** Before/after snapshot diff of `settings.qt` across repeated open/close cycles.
 - **Return condition:** Add migration-safe cleanup pass with backup/snapshot in dedicated hardening stage.
 
 ### TD-010 - Native dock migration hardening for component GUI
 - **Status:** `in_progress`
+- **ID:** `TD-010`
+- **Phase discovered:** Current migration rollout
+- **Context:** Native dock migration completed functionally, but requires broader runtime evidence to close confidently.
+- **Decision:** Keep item open until desktop manual validation fully confirms stability across user scenarios.
 - **Phase target:** Current stabilization cycle
-- **Scope:** Replace custom floating/DnD wrapper paths with native `QDockWidget` host lifecycle (dock/floating/reattach) while preserving grid roundtrip compatibility.
-- **Decision:** Execute migration incrementally with compatibility fallback for test MDI harness; remove cursor-based `IgnoreAction` business logic from production paths.
-- **Impact:** Reduces nondeterministic DnD behavior and style regressions during detach/attach; requires expanded regression matrix for dock + grid transitions.
+- **Scope:** Replace custom floating/DnD wrapper paths with native `QDockWidget` host lifecycle (dock/floating/reattach) while preserving tab-host roundtrip compatibility.
+- **Impact:** Reduces nondeterministic DnD behavior and style regressions during detach/attach; requires expanded regression matrix for dock + tab-host/secondary-host transitions.
 - **Owner:** Codex + user validation on desktop runtime
+- **Target phase/commit for closure:** First post-merge stabilization commit with manual evidence links.
+- **Risk if deferred:** Potential uncovered platform-specific DnD edge cases during extended usage.
+- **Verification evidence needed:** Manual smoke protocol with pass logs for float/reattach/tab-host/secondary-host flows.
 - **Exit criteria:** Native dock cycle passes unit/lifecycle tests, manual drag float/reattach works without style loss, technical debt item moved to `closed` with evidence links.
+
+### TD-011 - Legacy config migration strictness
+- **Status:** `open`
+- **ID:** `TD-011`
+- **Phase discovered:** Phase 4 (compatibility adapter implementation)
+- **Context:** Loader now maps legacy `grid` records to tab-host, but strict schema auditing is intentionally permissive.
+- **Decision:** Accept permissive compatibility fallback now; defer strict migration validation tooling.
+- **Phase target:** Post-migration hardening
+- **Scope:** Improve strict migration coverage for older `ComponentGuiLayout` schemas and mixed legacy keys (`Grid_*`, old host mode values).
+- **Deferred reason:** Full backward-matrix tooling would delay core host migration delivery.
+- **Target phase/commit for closure:** Compatibility hardening task in next regression cycle.
+- **Risk if deferred:** Rare historical layouts may restore to default placement rather than exact legacy arrangement.
+- **Impact if deferred:** Some rare legacy combinations may restore to default host target instead of exact historical placement.
+- **Verification evidence needed:** Dedicated compatibility regression set with archived legacy configs.

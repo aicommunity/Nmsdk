@@ -102,27 +102,26 @@ Expected:
 3. Verify it detaches to floating window.
 4. Drag floating component GUI using the left drag-handle strip to MDI workspace header area (tab region / top of MDI viewport) and release.
 5. Verify it re-attaches as MDI tab on mouse release.
-6. Drag floating component GUI using the same drag-handle to a grid cell and release.
-7. Verify component appears in target grid cell.
-8. Drag component GUI from grid cell back to MDI header area and release.
-9. Verify source grid cell is cleared only after successful attach to MDI.
+6. Move component GUI to tab host (`Move to Tab Host...`) and verify tab is created.
+7. Drag component GUI from tab host back to MDI header area and release.
+8. Verify source tab-host entry is removed only after successful attach to MDI.
 
 Expected:
-- DnD cycle works in both directions: `mdi -> floating -> mdi/grid`.
-- `grid -> mdi` move keeps single-host invariant (no duplicate widget in source cell).
+- DnD cycle works in both directions: `mdi -> floating -> mdi/tab-host`.
+- `tab-host -> mdi` move keeps single-host invariant (no duplicate widget in source container).
 - No mandatory popup action is required for basic host migration.
 
-## Scenario I: Grid Dialog UX (single form)
+## Scenario I: Tab Host + Secondary Host UX
 
-1. Use `Window -> Component GUI Grid...`.
-2. Verify single dialog is shown (not chained multiple popups).
-3. Create new grid in one confirmation.
-4. Use context menu `Move to Grid...` for component GUI.
-5. Select existing grid in the same dialog and target cell.
+1. Use `Window -> Component GUI Tab Host...`.
+2. Verify host window opens and can accept multiple component tabs.
+3. Use context menu `Move to Tab Host...` for component GUI.
+4. Use `Window -> Component GUI Secondary Host...`.
+5. Use context menu `Move to Secondary Host` for component GUI.
 
 Expected:
-- Existing grid selection does not ask rows/cols again.
-- Move is applied immediately to selected existing grid.
+- Tab host action opens/focuses host without grid-size prompts.
+- Move to secondary host docks component GUI into dedicated secondary window.
 
 ## Evidence Template
 

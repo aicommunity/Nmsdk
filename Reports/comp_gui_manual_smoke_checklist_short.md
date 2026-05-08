@@ -40,11 +40,11 @@ Estimated time: 2-3 minutes.
 - Mark manual smoke items completed in `Reports/comp_gui_release_checklist.md`.
 - If all scenarios pass, switch overall status to `GO`.
 
-## 7. DnD + Grid UX
+## 7. DnD + Tab Host UX
 
 - Drag MDI component GUI tab outside window -> verify floating detach.
 - Drag floating component GUI by left drag-handle onto MDI header area -> verify attach back to MDI on release.
-- Drag floating component GUI by left drag-handle into grid cell -> verify placement.
-- Drag component GUI from grid cell back to MDI header area -> verify source cell is cleared after successful attach.
-- Trigger `Move to Grid...` and select existing grid -> verify no repeated rows/cols prompt.
-- Trigger `Window -> Component GUI Grid...` -> verify single dialog is used.
+- Move component GUI to `Tab Host` and verify tab appears in host window.
+- Drag component GUI from tab host back to MDI header area -> verify attach to main host.
+- Trigger `Window -> Component GUI Tab Host...` -> verify host opens/focuses as single logical target.
+- Trigger `Window -> Component GUI Secondary Host...` -> verify secondary docking host opens.

@@ -67,15 +67,16 @@ Status values:
 - [x] Floating/grid visual state is persisted in `settings.qt` (`ComponentGui/*` keys).
 - [x] Service-level detach/attach API exists for MDI <-> floating migration.
 - [x] Base grid container exists with deterministic API (`setGridSize`, `assignCell`, `clearCell`, `swapCells`).
-- [ ] Manual validation: save/load restores opened component GUI set and active host mode (mdi/floating/grid).
+- [ ] Manual validation: save/load restores opened component GUI set and active host mode (mdi/floating/tab-host/secondary-host).
 - [ ] Manual validation: floating geometry/state is restored after reopen.
-- [ ] Manual validation: grid splitter layout/state is restored after reopen.
+- [ ] Manual validation: tab-host state is restored after reopen.
 - [ ] Manual validation: DnD `mdi -> floating` detach works when dropped outside tabview/main window.
 - [ ] Manual validation: DnD `floating -> mdi` attach works by dropping with drag-handle to MDI header/viewport top area.
-- [ ] Manual validation: DnD `floating -> grid` placement works by dropping to a grid cell.
-- [ ] Manual validation: DnD `grid -> mdi` clears source cell only after successful attach.
-- [x] UX: grid creation/move now uses a single dialog (no chained 3 popups).
-- [x] UX: `Move to Grid...` supports existing grid selection without implicit resize/recreate flow.
+- [ ] Manual validation: `Move to Tab Host...` places GUI in tab-host container.
+- [ ] Manual validation: `tab-host -> mdi` clears source tab only after successful attach.
+- [ ] Manual validation: `Move to Secondary Host` docks GUI in secondary host window.
+- [ ] Manual validation: main + secondary host window states restore after reopen.
+- [x] UX: tab-host action opens/focuses host without grid-size prompts.
 
 ## Go / No-Go
 

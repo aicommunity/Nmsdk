@@ -57,12 +57,9 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentFormRegistry.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiService.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiDndPayload.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiFloatingFrame.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiGridDialog.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiGridContainerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiTabHostWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGenericComponentControllerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiBootstrap.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiFloatingFrame.h
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGEngineControlWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMatrixFormDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerMainWidget.cpp
