@@ -134,7 +134,6 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibNeuronLearnerComponentControllerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/GUI/Qt/BasicLibComponentGuiRegistration.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/GUI/Qt/CvBasicLibComponentGuiRegistration.cpp
-  ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/GUI/Qt/HardwareLibComponentGuiRegistration.cpp
 )
 
 # Explicitly state that the UI file must be processed only once
@@ -177,6 +176,7 @@ target_link_libraries(NeuroModeler
     Rdk-CvBasicLib.qt
     Rdk-BasicLib.qt
     Rdk-HardwareLib.qt
+    Rdk-HardwareLib.gui
     Nmsdk-PulseLib.qt
     Nmsdk-MotionControlLib.qt
     rdk.static.qt
