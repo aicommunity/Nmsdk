@@ -47,6 +47,40 @@ int pinCountFromResource(const QString& path)
     return root.value(QStringLiteral("pins")).toArray().size();
 }
 
+QString resolveBoardPinsJson(const QString& fileName)
+{
+    const QString rel =
+        QStringLiteral("Libraries/Rdk-HardwareLib/GUI/Qt/Resources/boards/") + fileName;
+    QString sdkRoot = QString::fromLocal8Bit(qgetenv("NMSDK_ROOT"));
+    if (sdkRoot.isEmpty())
+        sdkRoot = QStringLiteral(".");
+    const QStringList candidates = {
+        sdkRoot + QLatin1Char('/') + rel,
+        QStringLiteral("../") + rel,
+    };
+    for (const QString& path : candidates) {
+        if (QFile::exists(path))
+            return path;
+    }
+    return candidates.last();
+}
+
+bool pinsJsonContainsId(const QString& path, const QString& pinId)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+    const QJsonArray pins = QJsonDocument::fromJson(file.readAll())
+                                .object()
+                                .value(QStringLiteral("pins"))
+                                .toArray();
+    for (const QJsonValue& value : pins) {
+        if (value.toObject().value(QStringLiteral("id")).toString() == pinId)
+            return true;
+    }
+    return false;
+}
+
 } // namespace
 
 TEST(ArduinoBoardProfile, UnoAvrdudeArgs)
@@ -126,6 +160,18 @@ TEST(ArduinoBinaryParser, FramedV2Crc)
     EXPECT_EQ(frames, 1);
 }
 
+TEST(ArduinoBinaryParser, FramedV2RejectsBadCrc)
+{
+    RDK::UArduinoBinaryStreamParser parser;
+    parser.setProtocolVersion(2);
+    int frames = 0;
+    QByteArray frame = buildV2Frame(0x07, QByteArray::fromHex("0102"));
+    frame[frame.size() - 1] = char(frame.at(frame.size() - 1) ^ 0xFF);
+
+    parser.feed(frame, [&](uint8_t, const QByteArray&) { frames++; });
+    EXPECT_EQ(frames, 0);
+}
+
 TEST(ArduinoFirmwareManifest, LoadsSensorLabId)
 {
     EnsureQtApp();
@@ -157,15 +203,49 @@ TEST(ArduinoFirmwareManifest, BundledFirmataHexExists)
     EXPECT_TRUE(QFile::exists(hex));
 }
 
+TEST(ArduinoFirmwareManifest, AllBundledIdsResolveHex)
+{
+    EnsureQtApp();
+    const QString manifestPath =
+        QDir(RDK::UFirmwareManifest::firmwareRoot()).filePath(QStringLiteral("manifest.json"));
+    ASSERT_TRUE(QFile::exists(manifestPath));
+
+    QFile file(manifestPath);
+    ASSERT_TRUE(file.open(QIODevice::ReadOnly));
+    const QJsonArray bundled =
+        QJsonDocument::fromJson(file.readAll()).object().value(QStringLiteral("bundled")).toArray();
+    ASSERT_GE(bundled.size(), 2);
+
+    for (const QJsonValue& entryVal : bundled) {
+        const QJsonObject entry = entryVal.toObject();
+        const QString id = entry.value(QStringLiteral("id")).toString();
+        ASSERT_FALSE(id.isEmpty()) << "manifest entry without id";
+
+        const QJsonObject boards = entry.value(QStringLiteral("boards")).toObject();
+        for (const QString& boardKey : {QStringLiteral("uno"), QStringLiteral("mega2560")}) {
+            ASSERT_TRUE(boards.contains(boardKey)) << id.toUtf8().constData() << boardKey.toUtf8().constData();
+            const int profile = boardKey == QStringLiteral("mega2560") ? 1 : 0;
+            const QString hex = RDK::UFirmwareManifest::resolveBundledHex(id, profile);
+            ASSERT_FALSE(hex.isEmpty()) << id.toUtf8().constData() << boardKey.toUtf8().constData();
+            EXPECT_TRUE(QFile::exists(hex)) << hex.toUtf8().constData();
+        }
+    }
+}
+
 TEST(ArduinoPinsJson, UnoHasAtLeast20Pins)
 {
-    const QString path = QStringLiteral("%1/Libraries/Rdk-HardwareLib/GUI/Qt/Resources/boards/uno_pins.json")
-                           .arg(QString::fromLocal8Bit(qgetenv("NMSDK_ROOT").isEmpty()
-                                                             ? ".."
-                                                             : qgetenv("NMSDK_ROOT")));
-    QString resolved = path;
-    if (!QFile::exists(resolved)) {
-        resolved = QStringLiteral("/home/user/Nmsdk/Libraries/Rdk-HardwareLib/GUI/Qt/Resources/boards/uno_pins.json");
-    }
+    const QString resolved = resolveBoardPinsJson(QStringLiteral("uno_pins.json"));
+    ASSERT_TRUE(QFile::exists(resolved));
     EXPECT_GE(pinCountFromResource(resolved), 20);
+    EXPECT_TRUE(pinsJsonContainsId(resolved, QStringLiteral("D13")));
+    EXPECT_TRUE(pinsJsonContainsId(resolved, QStringLiteral("A5")));
+}
+
+TEST(ArduinoPinsJson, MegaIncludesExtendedAnalogPins)
+{
+    const QString resolved = resolveBoardPinsJson(QStringLiteral("mega2560_pins.json"));
+    ASSERT_TRUE(QFile::exists(resolved));
+    EXPECT_GE(pinCountFromResource(resolved), 20);
+    EXPECT_TRUE(pinsJsonContainsId(resolved, QStringLiteral("D13")));
+    EXPECT_TRUE(pinsJsonContainsId(resolved, QStringLiteral("A7")));
 }

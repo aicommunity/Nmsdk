@@ -4,23 +4,31 @@
 
 ### Назначение
 
-**Rdk-HardwareLib** предоставляет компоненты для работы с аппаратным обеспечением, в первую очередь с Arduino.
+**Rdk-HardwareLib** — компоненты для работы с Arduino (USB serial): подключение, прошивка bundled HEX, custom протокол `sensor_lab`, Standard Firmata, GUI pinout в NeuroModeler.
 
-### Основные категории компонентов
+### Компоненты (актуальные ClassName)
 
-- **Подключение к Arduino** - UArduinoConnect
-- **Управление Arduino** - UArduinoControl
-- **Датчики** - UAdcSensor
-- **Демо контроллеры** - UDcControlDemo
+- **ArduinoBoard** — порт, upload, heartbeat
+- **ArduinoSensorSketch** — sensor_lab, команды, матрица
+- **ArduinoFirmata** — Firmata pin control
+- **ArduinoAdc** — ADC через связанный Firmata
+- **ArduinoDcDemo** — DC demo через связанный SensorSketch
 
 ### Зависимости
 
-- Qt5 (SerialPort)
-- rdk.static.qt
+- Qt (Core, SerialPort, Widgets, Svg для GUI)
+- `rdk.static.qt`, `Rdk-BasicLib.qt`
+- Targets: `Rdk-HardwareLib.qt`, `Rdk-HardwareLib.gui`
 
-### Детальная документация
+### Документация в репозитории
 
-- [Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/) - документация в репозитории библиотеки
+[Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/) — README, Architecture, API, компоненты, Transport/Protocol/GUI.
+
+Прошивки и чеклист: [Libraries/Rdk-HardwareLib/Firmware/README.md](../../Libraries/Rdk-HardwareLib/Firmware/README.md).
+
+### Миграция
+
+Старые `Arduino`, `ADC`, `DC` → см. [Component-Catalog.md](../../Libraries/Rdk-HardwareLib/Docs/Component-Catalog.md) и `Scripts/migrate_arduino_classnames.py`.
 
 ---
 
@@ -28,20 +36,16 @@
 
 ### Purpose
 
-**Rdk-HardwareLib** provides components for working with hardware, primarily Arduino.
+**Rdk-HardwareLib** provides Arduino hardware components for NeuroModeler (serial, firmware, sensor_lab, Firmata, GUI).
 
-### Main Component Categories
+### Main components
 
-- **Arduino Connection** - UArduinoConnect
-- **Arduino Control** - UArduinoControl
-- **Sensors** - UAdcSensor
-- **Demo Controllers** - UDcControlDemo
+`ArduinoBoard`, `ArduinoSensorSketch`, `ArduinoFirmata`, `ArduinoAdc`, `ArduinoDcDemo`.
 
 ### Dependencies
 
-- Qt5 (SerialPort)
-- rdk.static.qt
+Qt SerialPort; libraries `Rdk-HardwareLib.qt` and `Rdk-HardwareLib.gui`.
 
-### Detailed Documentation
+### Documentation
 
-- [Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/) - library repository documentation
+[Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/).

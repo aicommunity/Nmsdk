@@ -1125,8 +1125,8 @@
       "description": "компонент для управления физическим манипулятором через WinAPI и внешнюю DLL (RoboLib.dll)."
     },
     "ADC": {
-      "header": "аналоговый сенсор (Rdk-HardwareLib)",
-      "description": "**Класс**: `UADC` — компонент для работы с аналоговыми датчиками через ADC (Analog-to-Digital Converter) Arduino. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"ADC\", ...)`. **Storage-инстансы**: `ClassName = \"ADC\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "устаревший класс — используйте ArduinoAdc (Rdk-HardwareLib)",
+      "description": "**Устарело.** Замените `ClassName=\"ADC\"` на `ArduinoAdc`. См. `Scripts/migrate_arduino_classnames.py`."
     },
     "Arduino": {
       "header": "устаревший класс Arduino (Rdk-HardwareLib)",
@@ -1145,20 +1145,20 @@
       "description": "**Класс**: `UArduinoFirmata` — Firmata pin mode / digital / analog."
     },
     "ArduinoAdc": {
-      "header": "ADC через Arduino sketch (Rdk-HardwareLib)",
-      "description": "**Класс**: `UArduinoAdc` — аналоговые каналы через связанный `ArduinoSensorSketch`."
+      "header": "ADC через Arduino Firmata (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoAdc` — аналоговые каналы через связанный `ArduinoFirmata`."
     },
     "ArduinoDcDemo": {
       "header": "DC demo (Rdk-HardwareLib)",
       "description": "**Класс**: `UArduinoDcDemo` — управление DC через связанный sketch."
     },
     "ArduinoConnect": {
-      "header": "вспомогательный класс подключения к Arduino (Rdk-HardwareLib)",
-      "description": "**Класс**: `UArduinoConnect` — вспомогательный класс для работы с последовательным портом Arduino. **Тип**: Вспомогательный класс (не Storage-компонент). **Использование**: Используется внутри `UArduinoControl` для управления последовательным портом."
+      "header": "устаревший transport (Rdk-HardwareLib)",
+      "description": "**Устарело.** `UArduinoConnect` заменён на `UArduinoSerialSession` + `UArduinoBinaryStreamParser`."
     },
     "DC": {
-      "header": "управление DC-двигателем (Rdk-HardwareLib)",
-      "description": "**Класс**: `UDcControlDemo` — демонстрационный компонент для управления DC-двигателем через Arduino. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"DC\", ...)`. **Storage-инстансы**: `ClassName = \"DC\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "устаревший класс — используйте ArduinoDcDemo (Rdk-HardwareLib)",
+      "description": "**Устарело.** Замените `ClassName=\"DC\"` на `ArduinoDcDemo`. См. `Scripts/migrate_arduino_classnames.py`."
     },
     "UFileIO": {
       "header": "файловый ввод/вывод (Rdk-BasicLib)",
