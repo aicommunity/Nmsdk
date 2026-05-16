@@ -37,6 +37,7 @@ target_link_libraries(NeuroModelerConsole PRIVATE
   Rdk-BasicLib.qt
   Rdk-CvBasicLib.qt
   Rdk-HardwareLib.qt
+  Rdk-HardwareLib.gui
   Nmsdk-MotionControlLib.qt
   Nmsdk-PulseLib.qt
   Nmsdk::Qt::Core

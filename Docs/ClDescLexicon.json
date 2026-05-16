@@ -1129,8 +1129,28 @@
       "description": "**Класс**: `UADC` — компонент для работы с аналоговыми датчиками через ADC (Analog-to-Digital Converter) Arduino. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"ADC\", ...)`. **Storage-инстансы**: `ClassName = \"ADC\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "Arduino": {
-      "header": "управление подключением к Arduino (Rdk-HardwareLib)",
-      "description": "**Класс**: `UArduinoControl` — компонент управления подключением к плате Arduino через последовательный порт. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"Arduino\", ...)`. **Storage-инстансы**: `ClassName = \"Arduino\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "устаревший класс Arduino (Rdk-HardwareLib)",
+      "description": "**Устарело.** Используйте `ArduinoBoard`, `ArduinoSensorSketch`, `ArduinoFirmata`, `ArduinoAdc`, `ArduinoDcDemo`. См. `Scripts/migrate_arduino_classnames.py`."
+    },
+    "ArduinoBoard": {
+      "header": "плата Arduino: порт и прошивка (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoBoard` — подключение, прошивка HEX, heartbeat."
+    },
+    "ArduinoSensorSketch": {
+      "header": "кастомный sketch sensor_lab (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoSensorSketch` — бинарный протокол, команды, `DoubleMatrixReadings`."
+    },
+    "ArduinoFirmata": {
+      "header": "StandardFirmata (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoFirmata` — Firmata pin mode / digital / analog."
+    },
+    "ArduinoAdc": {
+      "header": "ADC через Arduino sketch (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoAdc` — аналоговые каналы через связанный `ArduinoSensorSketch`."
+    },
+    "ArduinoDcDemo": {
+      "header": "DC demo (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoDcDemo` — управление DC через связанный sketch."
     },
     "ArduinoConnect": {
       "header": "вспомогательный класс подключения к Arduino (Rdk-HardwareLib)",
