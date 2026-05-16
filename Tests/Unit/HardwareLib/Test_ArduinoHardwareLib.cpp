@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -9,6 +10,7 @@
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UArduinoBinaryStreamParser.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoBoardProfile.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoFlasher.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoSerialPortUtil.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/UFirmwareManifest.h"
 
 namespace {
@@ -131,6 +133,20 @@ TEST(ArduinoFirmwareManifest, LoadsSensorLabId)
     ASSERT_FALSE(hex.isEmpty());
     EXPECT_TRUE(hex.endsWith(QStringLiteral("uno.hex")) || hex.contains(QStringLiteral("sensor_lab")));
     EXPECT_TRUE(QFile::exists(hex));
+}
+
+TEST(ArduinoFlasher, LocatesAvrdudeFromArduinoCore)
+{
+    if (!QFile::exists(QDir::homePath() + QStringLiteral("/.arduino15/packages/arduino/tools/avrdude")))
+        GTEST_SKIP() << "arduino:avr core not installed";
+    EXPECT_FALSE(RDK::UArduinoFlasher::locateAvrdudeBinary().isEmpty());
+    EXPECT_FALSE(RDK::UArduinoFlasher::locateAvrdudeConf().isEmpty());
+}
+
+TEST(ArduinoSerialPortUtil, NormalizesLinuxTtyName)
+{
+    const QString path = RDK::UArduinoSerialPortUtil::normalizeDevicePath(QStringLiteral("ttyACM0"));
+    EXPECT_TRUE(path.startsWith(QStringLiteral("/dev/")));
 }
 
 TEST(ArduinoFirmwareManifest, BundledFirmataHexExists)
