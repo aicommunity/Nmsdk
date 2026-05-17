@@ -33,8 +33,6 @@ public:
     using RDK::UArduinoCustomLink::ProcessCustomLinkEdges;
     using RDK::UArduinoDcDemo::OnBinaryFrame;
     using RDK::UArduinoDcDemo::ProcessDcDemoEdges;
-    float cachedSpeed() const { return Speed; }
-    float cachedAcceleration() const { return Acceleration; }
 };
 
 } // namespace
@@ -97,8 +95,8 @@ TEST(ArduinoDcDemo, OnBinaryFrameSpeedAndAcceleration)
     dc.OnBinaryFrame(0x01, payload);
     dc.GetSpeed = true;
     dc.ProcessDcDemoEdges();
-    EXPECT_FLOAT_EQ(40.f, dc.cachedSpeed());
-    EXPECT_FLOAT_EQ(50.f, dc.cachedAcceleration());
+    EXPECT_FLOAT_EQ(40.f, static_cast<float>(dc.Speed));
+    EXPECT_FLOAT_EQ(50.f, static_cast<float>(dc.Acceleration));
 }
 
 TEST(ArduinoThreadingContract, NoBytesReceivedConnectInCore)
