@@ -3,6 +3,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -52,11 +53,15 @@ QString resolveBoardPinsJson(const QString& fileName)
     const QString rel =
         QStringLiteral("Libraries/Rdk-HardwareLib/GUI/Qt/Resources/boards/") + fileName;
     QString sdkRoot = QString::fromLocal8Bit(qgetenv("NMSDK_ROOT"));
-    if (sdkRoot.isEmpty())
-        sdkRoot = QStringLiteral(".");
+    if (sdkRoot.isEmpty()) {
+        const QFileInfo testFile(QString::fromUtf8(__FILE__));
+        sdkRoot = QDir(testFile.absolutePath()).filePath(QStringLiteral("../../.."));
+    }
     const QStringList candidates = {
-        sdkRoot + QLatin1Char('/') + rel,
+        QDir(sdkRoot).absoluteFilePath(rel),
         QStringLiteral("../") + rel,
+        QStringLiteral("../../../") + rel,
+        QStringLiteral("../../../../") + rel,
     };
     for (const QString& path : candidates) {
         if (QFile::exists(path))

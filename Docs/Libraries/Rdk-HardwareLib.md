@@ -12,7 +12,9 @@
 - **ArduinoSensorSketch** — sensor_lab, команды, матрица
 - **ArduinoFirmata** — Firmata pin control
 - **ArduinoAdc** — ADC через связанный Firmata
-- **ArduinoDcDemo** — DC demo через связанный SensorSketch
+- **ArduinoDcDemo** — DC demo (один узел, CustomLink + sensor_lab_v1)
+
+Property API (edge/state) и поток движка: [Architecture.md](../../Libraries/Rdk-HardwareLib/Docs/Architecture.md), [API-Overview.md](../../Libraries/Rdk-HardwareLib/Docs/API-Overview.md).
 
 ### Зависимости
 

@@ -74,6 +74,11 @@ BOARD_PROPS = """\
 \t\t\t\t\t<BoardProfile Type="int" PType="257" IoType="17">0</BoardProfile>
 \t\t\t\t\t<AutoReconnect Type="bool" PType="257" IoType="17">0</AutoReconnect>
 \t\t\t\t\t<ConnectOnBuild Type="bool" PType="257" IoType="17">0</ConnectOnBuild>
+\t\t\t\t\t<Connect Type="bool" PType="257" IoType="17">0</Connect>
+\t\t\t\t\t<Disconnect Type="bool" PType="257" IoType="17">0</Disconnect>
+\t\t\t\t\t<Reconnect Type="bool" PType="257" IoType="17">0</Reconnect>
+\t\t\t\t\t<UploadFirmware Type="bool" PType="257" IoType="17">0</UploadFirmware>
+\t\t\t\t\t<ClearLastError Type="bool" PType="257" IoType="17">0</ClearLastError>
 \t\t\t\t\t<HeartbeatEnabled Type="bool" PType="257" IoType="17">1</HeartbeatEnabled>
 \t\t\t\t\t<HeartbeatIntervalMs Type="int" PType="257" IoType="17">3000</HeartbeatIntervalMs>
 \t\t\t\t\t<HeartbeatTimeoutMs Type="int" PType="257" IoType="17">10000</HeartbeatTimeoutMs>
@@ -83,6 +88,12 @@ BOARD_PROPS = """\
 \t\t\t\t\t<ConnectionState Type="int" PType="258" IoType="17">0</ConnectionState>
 \t\t\t\t\t<LastError Type="std::string" PType="258" IoType="17"></LastError>
 \t\t\t\t\t<LastActivityMs Type="double" PType="258" IoType="17">0</LastActivityMs>
+\t\t\t\t\t<IsConnected Type="bool" PType="258" IoType="17">0</IsConnected>
+\t\t\t\t\t<IsOpening Type="bool" PType="258" IoType="17">0</IsOpening>
+\t\t\t\t\t<HasError Type="bool" PType="258" IoType="17">0</HasError>
+\t\t\t\t\t<IsDisconnected Type="bool" PType="258" IoType="17">1</IsDisconnected>
+\t\t\t\t\t<IsUploading Type="bool" PType="258" IoType="17">0</IsUploading>
+\t\t\t\t\t<UploadComplete Type="bool" PType="258" IoType="17">0</UploadComplete>
 \t\t\t\t\t<MissedHeartbeats Type="int" PType="258" IoType="17">0</MissedHeartbeats>
 \t\t\t\t\t<RequestHealthCheck Type="bool" PType="258" IoType="17">0</RequestHealthCheck>
 \t\t\t\t\t<UploadFirmwareFlag Type="bool" PType="258" IoType="17">0</UploadFirmwareFlag>
@@ -90,19 +101,28 @@ BOARD_PROPS = """\
 \t\t\t\t\t<UploadLastResult Type="std::string" PType="258" IoType="17"></UploadLastResult>
 """
 
-SKETCH_EXTRA = """\
+CUSTOM_LINK_EXTRA = """\
 \t\t\t\t\t<Command Type="std::string" PType="257" IoType="17"></Command>
+\t\t\t\t\t<SendCommand Type="bool" PType="257" IoType="17">0</SendCommand>
+\t\t\t\t\t<RequestGetStatus Type="bool" PType="257" IoType="17">0</RequestGetStatus>
+\t\t\t\t\t<RequestProtocolNegotiate Type="bool" PType="257" IoType="17">0</RequestProtocolNegotiate>
 \t\t\t\t\t<ProtocolVersion Type="int" PType="257" IoType="17">{proto}</ProtocolVersion>
-\t\t\t\t\t<LowerSensorLimit Type="double" PType="257" IoType="17">-100</LowerSensorLimit>
-\t\t\t\t\t<UpperSensorLimit Type="double" PType="257" IoType="17">100</UpperSensorLimit>
-\t\t\t\t\t<MatrixCols Type="int" PType="257" IoType="17">100</MatrixCols>
-\t\t\t\t\t<GetDataFromBuffers Type="bool" PType="258" IoType="17">0</GetDataFromBuffers>
-\t\t\t\t\t<GetPinsInfo Type="bool" PType="258" IoType="17">0</GetPinsInfo>
 \t\t\t\t\t<SendCommandFlag Type="bool" PType="258" IoType="17">0</SendCommandFlag>
 \t\t\t\t\t<SentCommand Type="std::string" PType="258" IoType="17"></SentCommand>
 \t\t\t\t\t<InputCommand Type="std::string" PType="258" IoType="17"></InputCommand>
 \t\t\t\t\t<RxFrameCount Type="int" PType="258" IoType="17">0</RxFrameCount>
 \t\t\t\t\t<TxCommandCount Type="int" PType="258" IoType="17">0</TxCommandCount>
+\t\t\t\t\t<IsProtocolReady Type="bool" PType="258" IoType="17">0</IsProtocolReady>
+\t\t\t\t\t<HasPendingCommands Type="bool" PType="258" IoType="17">0</HasPendingCommands>
+\t\t\t\t\t<LastSentCommand Type="std::string" PType="258" IoType="17"></LastSentCommand>
+"""
+
+SKETCH_EXTRA = CUSTOM_LINK_EXTRA + """\
+\t\t\t\t\t<LowerSensorLimit Type="double" PType="257" IoType="17">-100</LowerSensorLimit>
+\t\t\t\t\t<UpperSensorLimit Type="double" PType="257" IoType="17">100</UpperSensorLimit>
+\t\t\t\t\t<MatrixCols Type="int" PType="257" IoType="17">100</MatrixCols>
+\t\t\t\t\t<GetDataFromBuffers Type="bool" PType="258" IoType="17">0</GetDataFromBuffers>
+\t\t\t\t\t<GetPinsInfo Type="bool" PType="258" IoType="17">0</GetPinsInfo>
 \t\t\t\t\t<DoubleMatrixReadings Type="MDMatrix&lt;double&gt;" Rows="4" Cols="100" PType="258" IoType="17">
 </DoubleMatrixReadings>
 \t\t\t\t\t<PinStatusJson Type="std::string" PType="258" IoType="17"></PinStatusJson>
@@ -127,14 +147,10 @@ ADC_PROPS = """\
 \t\t\t\t\t<ReadAdcFlag Type="bool" PType="258" IoType="17">0</ReadAdcFlag>
 """
 
-DC_PROPS = """\
-\t\t\t\t\t<LinkedSketchName Type="std::string" PType="257" IoType="17">SensorSketch</LinkedSketchName>
-\t\t\t\t\t<Command Type="std::string" PType="257" IoType="17"></Command>
-\t\t\t\t\t<SendCommandFlag Type="bool" PType="258" IoType="17">0</SendCommandFlag>
-\t\t\t\t\t<SentCommand Type="std::string" PType="258" IoType="17"></SentCommand>
+DC_PROPS = CUSTOM_LINK_EXTRA.format(proto=1) + """\
 \t\t\t\t\t<Speed Type="float" PType="258" IoType="17">0</Speed>
 \t\t\t\t\t<Acceleration Type="float" PType="258" IoType="17">0</Acceleration>
-\t\t\t\t\t<GetSpeed Type="bool" PType="258" IoType="17">0</GetSpeed>
+\t\t\t\t\t<GetSpeed Type="bool" PType="257" IoType="17">0</GetSpeed>
 """
 
 PROJECT_INI = """\
@@ -321,26 +337,23 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    dc_body = (
-        component_block("SensorSketch", "ArduinoSensorSketch", "8 8 0", sketch)
-        + component_block("DcDemo", "ArduinoDcDemo", "8 12 0", UNET_BASE.format(coord="8 12 0") + DC_PROPS)
+    dc_demo = BOARD_PROPS.format(port=port, bundled="sensor_lab_v1") + DC_PROPS
+    write_project(
+        "05-ArduinoDcDemo",
+        "Hardware test: ArduinoDcDemo",
+        "Проверка `ArduinoDcDemo`: один узел CustomLink + DC (sensor_lab_v1), edge Connect/SendCommand/GetSpeed.",
+        "- `DcDemo` (`ArduinoDcDemo`) — порт, прошивка, команды DC без LinkedSketchName.",
+        component_block("DcDemo", "ArduinoDcDemo", "8 12 0", dc_demo),
+        port,
     )
-    dest = OUT / "05-ArduinoDcDemo"
-    dest.mkdir(parents=True, exist_ok=True)
-    (dest / "Model_00.xml").write_text(MODEL_HEADER + dc_body + MODEL_FOOTER, encoding="utf-8")
-    (dest / "Parameters_00.xml").write_text(PARAM_HEADER + dc_body + PARAM_FOOTER, encoding="utf-8")
-    (dest / "Project.ini").write_text(
-        PROJECT_INI.format(name="Hardware test: ArduinoDcDemo"), encoding="utf-8"
-    )
-    (dest / "Interface.xml").write_text(INTERFACE_XML, encoding="utf-8")
-    (dest / "README.md").write_text(
-        README_TEMPLATE.format(
-            title="Hardware test: ArduinoDcDemo",
-            folder="05-ArduinoDcDemo",
-            purpose="Проверка `ArduinoDcDemo`: команды и скорость через `SensorSketch`.",
-            components="- `SensorSketch` + `DcDemo` (`LinkedSketchName=SensorSketch`).",
-        ),
-        encoding="utf-8",
+
+    write_project(
+        "07-ArduinoPropertyEdges",
+        "Hardware test: Arduino property edges",
+        "Ручная проверка edge-свойств Board без отдельного железа (порт можно оставить пустым).",
+        "- `Board` (`ArduinoBoard`) — примеры `<Connect>1</Connect>`, `<UploadFirmware>1</UploadFirmware>`.",
+        component_block("Board", "ArduinoBoard", "8 4 0", board),
+        port,
     )
 
     index = OUT / "README.md"
@@ -357,12 +370,14 @@ def main() -> None:
             | [02-ArduinoSensorSketch](02-ArduinoSensorSketch/) | `ArduinoSensorSketch` | sensor_lab_v1 |
             | [03-ArduinoFirmata](03-ArduinoFirmata/) | `ArduinoFirmata` | standard_firmata |
             | [04-ArduinoAdc](04-ArduinoAdc/) | `ArduinoAdc` + `ArduinoFirmata` | standard_firmata |
-            | [05-ArduinoDcDemo](05-ArduinoDcDemo/) | `ArduinoDcDemo` + `ArduinoSensorSketch` | sensor_lab_v1 |
+            | [05-ArduinoDcDemo](05-ArduinoDcDemo/) | `ArduinoDcDemo` (single node) | sensor_lab_v1 |
             | [06-ArduinoSensorSketch-Proto2](06-ArduinoSensorSketch-Proto2/) | `ArduinoSensorSketch` (v2) | sensor_lab_v1 |
+            | [07-ArduinoPropertyEdges](07-ArduinoPropertyEdges/) | `ArduinoBoard` (edge API) | sensor_lab_v1 |
 
             Перед тестом задайте `PortName` и следуйте [чеклисту](../../../../Libraries/Rdk-HardwareLib/Firmware/README.md).
 
-            Генерация: `Scripts/generate_arduino_hardware_configs.py`
+            Генерация: `Scripts/generate_arduino_hardware_configs.py`  
+            Миграция legacy DC: `Scripts/migrate_arduino_board_hierarchy.py`
             """
         ),
         encoding="utf-8",

@@ -1150,7 +1150,7 @@
     },
     "ArduinoDcDemo": {
       "header": "DC demo (Rdk-HardwareLib)",
-      "description": "**Класс**: `UArduinoDcDemo` — управление DC через связанный sketch."
+      "description": "**Класс**: `UArduinoDcDemo` : `UArduinoCustomLink` — один узел: порт, sensor_lab_v1, `SendCommand`, `GetSpeed`. `LinkedSketchName` устарел."
     },
     "ArduinoConnect": {
       "header": "устаревший transport (Rdk-HardwareLib)",
@@ -1213,6 +1213,197 @@
       "description": "**Класс**: `UStatisticIntMatrix` — компонент сбора статистики по целочисленным матрицам на основе `UStatisticMatrix<int>`. Используется для анализа результатов экспериментов, построения логов и отчётов."
     }
   },
-  "propertyOverrides": {},
+  "propertyOverrides": {
+    "ArduinoBoard": {
+      "Connect": {
+        "header": "Connect",
+        "description": "Edge: открыть serial-порт (`EnsureConnected`)."
+      },
+      "Disconnect": {
+        "header": "Disconnect",
+        "description": "Edge: закрыть порт; `PortName` не очищается."
+      },
+      "Reconnect": {
+        "header": "Reconnect",
+        "description": "Edge: close + open."
+      },
+      "UploadFirmware": {
+        "header": "Upload firmware",
+        "description": "Edge: прошивка HEX (avrdude)."
+      },
+      "ClearLastError": {
+        "header": "Clear last error",
+        "description": "Edge: очистить `LastError`."
+      },
+      "IsConnected": {
+        "header": "Is connected",
+        "description": "State: `ConnectionState==Connected`."
+      },
+      "IsOpening": {
+        "header": "Is opening",
+        "description": "State: открытие порта."
+      },
+      "HasError": {
+        "header": "Has error",
+        "description": "State: ошибка подключения/upload."
+      },
+      "IsDisconnected": {
+        "header": "Is disconnected",
+        "description": "State: порт закрыт."
+      },
+      "IsUploading": {
+        "header": "Is uploading",
+        "description": "State: прошивка в процессе."
+      },
+      "UploadComplete": {
+        "header": "Upload complete",
+        "description": "State: `UploadLastResult==ok`."
+      },
+      "PortName": {
+        "header": "Port name",
+        "description": "Путь к serial (`/dev/ttyACM0`, `COM3`)."
+      },
+      "BundledFirmwareId": {
+        "header": "Bundled firmware",
+        "description": "ID из manifest (`sensor_lab_v1`, `standard_firmata`)."
+      }
+    },
+    "ArduinoSensorSketch": {
+      "SendCommand": {
+        "header": "Send command",
+        "description": "Edge: отправить `Command` на устройство."
+      },
+      "RequestGetStatus": {
+        "header": "Request GET STATUS",
+        "description": "Edge: запрос статуса."
+      },
+      "RequestProtocolNegotiate": {
+        "header": "Negotiate protocol",
+        "description": "Edge: сброс и `PROTO n`."
+      },
+      "StartReading": {
+        "header": "Start reading",
+        "description": "Edge: команда `START READING`."
+      },
+      "StopReading": {
+        "header": "Stop reading",
+        "description": "Edge: команда `STOP READING`."
+      },
+      "Rotate": {
+        "header": "Rotate",
+        "description": "Edge: команда `ROTATE`."
+      },
+      "StopRotate": {
+        "header": "Stop rotate",
+        "description": "Edge: команда `STOP ROTATE`."
+      },
+      "GetDataFromBuffers": {
+        "header": "Get data from buffers",
+        "description": "Edge: записать RX в `DoubleMatrixReadings`."
+      },
+      "GetPinsInfo": {
+        "header": "Get pins info",
+        "description": "Edge: `GET STATUS` → `PinStatusJson`."
+      },
+      "IsProtocolReady": {
+        "header": "Protocol ready",
+        "description": "State: протокол согласован."
+      },
+      "HasPendingCommands": {
+        "header": "Pending commands",
+        "description": "State: очередь/TX не пусты."
+      },
+      "LastSentCommand": {
+        "header": "Last sent command",
+        "description": "State: последняя отправленная строка."
+      },
+      "Command": {
+        "header": "Command",
+        "description": "Текстовая команда для прошивки."
+      },
+      "ProtocolVersion": {
+        "header": "Protocol version",
+        "description": "1=legacy, 2=framed CRC."
+      }
+    },
+    "ArduinoFirmata": {
+      "RestartFirmata": {
+        "header": "Restart Firmata",
+        "description": "Edge: сброс handshake."
+      },
+      "ApplyPinConfig": {
+        "header": "Apply pin config",
+        "description": "Edge: применить pin mode / IO."
+      },
+      "IsFirmataReady": {
+        "header": "Firmata ready",
+        "description": "State: handshake завершён."
+      },
+      "IsLinkReady": {
+        "header": "Link ready",
+        "description": "State: connected ∧ Firmata ready."
+      },
+      "ReportAnalogEnable": {
+        "header": "Report analog",
+        "description": "Включить analog report для `SelectedPin`."
+      },
+      "SelectedPin": {
+        "header": "Selected pin",
+        "description": "Номер пина Firmata."
+      }
+    },
+    "ArduinoDcDemo": {
+      "SendCommand": {
+        "header": "Send command",
+        "description": "Edge: DC-команда (`SET SPEED …`)."
+      },
+      "GetSpeed": {
+        "header": "Get speed",
+        "description": "Edge: обновить `Speed`/`Acceleration` из RX."
+      },
+      "Speed": {
+        "header": "Speed",
+        "description": "State: скорость DC."
+      },
+      "Acceleration": {
+        "header": "Acceleration",
+        "description": "State: ускорение (если есть в кадре)."
+      },
+      "LinkedSketchName": {
+        "header": "Linked sketch (deprecated)",
+        "description": "**Устарело.** Используйте один узел `ArduinoDcDemo` с `PortName`."
+      },
+      "PortName": {
+        "header": "Port name",
+        "description": "Serial-порт (наследуется от Board)."
+      },
+      "BundledFirmwareId": {
+        "header": "Bundled firmware",
+        "description": "По умолчанию `sensor_lab_v1`."
+      }
+    },
+    "ArduinoAdc": {
+      "ReadAdcFlag": {
+        "header": "Read ADC",
+        "description": "Edge: чтение через связанный Firmata."
+      },
+      "AdcReadOk": {
+        "header": "ADC read OK",
+        "description": "State: Firmata готов и значение прочитано."
+      },
+      "LinkedFirmataName": {
+        "header": "Linked Firmata",
+        "description": "Имя узла `ArduinoFirmata` на canvas."
+      },
+      "AnalogPin": {
+        "header": "Analog pin",
+        "description": "Номер аналогового пина Firmata."
+      },
+      "AdcValue": {
+        "header": "ADC value",
+        "description": "State: 0–1023."
+      }
+    }
+  },
   "propertyFallbacks": {}
 }
