@@ -49,6 +49,36 @@ target_link_libraries(Test_ArduinoBoardEdges PRIVATE
   Nmsdk::Qt::Core
 )
 
+add_executable(Test_ArduinoPinMap Test_ArduinoPinMap.cpp)
+
+target_link_libraries(Test_ArduinoPinMap PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+add_executable(Test_ArduinoFirmataClient Test_ArduinoFirmataClient.cpp)
+
+target_link_libraries(Test_ArduinoFirmataClient PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+add_executable(Test_ArduinoSampleBuffer Test_ArduinoSampleBuffer.cpp)
+
+target_link_libraries(Test_ArduinoSampleBuffer PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+gtest_discover_tests(Test_ArduinoPinMap)
+gtest_discover_tests(Test_ArduinoFirmataClient)
+gtest_discover_tests(Test_ArduinoSampleBuffer)
 gtest_discover_tests(Test_ArduinoHardwareLib)
 gtest_discover_tests(Test_ArduinoBoardEdges)
 gtest_discover_tests(Test_ArduinoComponentGuiRegistry)
