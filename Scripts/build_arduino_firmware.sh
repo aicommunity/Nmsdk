@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
-# Build bundled Arduino HEX files into Libraries/Rdk-HardwareLib/Firmware/.
-# Requires arduino-cli with working index (downloads.arduino.cc) and network.
+# Build bundled Arduino HEX into Bin/ArduinoFirmware/ (runtime default).
+# Sketch sources remain under Libraries/Rdk-HardwareLib/Firmware/.
+# Requires arduino-cli with working index and network.
 
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-FW="${ROOT}/Libraries/Rdk-HardwareLib/Firmware"
-SKETCH="${FW}/sensor_lab/sensor_lab.ino"
+SRC_FW="${ROOT}/Libraries/Rdk-HardwareLib/Firmware"
+BIN_FW="${ROOT}/Bin/ArduinoFirmware"
+SKETCH="${SRC_FW}/sensor_lab/sensor_lab.ino"
 CLI="${ARDUINO_CLI:-arduino-cli}"
 
 if ! command -v "${CLI}" >/dev/null 2>&1; then
   echo "arduino-cli not found. Install from https://arduino.github.io/arduino-cli/" >&2
   exit 1
 fi
+
+mkdir -p "${BIN_FW}/sensor_lab" "${BIN_FW}/firmata"
 
 "${CLI}" config init 2>/dev/null || true
 "${CLI}" core update-index
@@ -30,8 +34,8 @@ build_one() {
   cp "${outdir}/sensor_lab.ino.hex" "${dest}"
 }
 
-build_one "arduino:avr:uno" "${FW}/.build_uno" "${FW}/sensor_lab/uno.hex"
-build_one "arduino:avr:mega" "${FW}/.build_mega" "${FW}/sensor_lab/mega2560.hex"
+build_one "arduino:avr:uno" "${BIN_FW}/.build_uno" "${BIN_FW}/sensor_lab/uno.hex"
+build_one "arduino:avr:mega" "${BIN_FW}/.build_mega" "${BIN_FW}/sensor_lab/mega2560.hex"
 
 FIRMATA_INO="${HOME}/Arduino/libraries/Firmata/examples/StandardFirmata/StandardFirmata.ino"
 if [[ ! -f "${FIRMATA_INO}" ]]; then
@@ -39,11 +43,17 @@ if [[ ! -f "${FIRMATA_INO}" ]]; then
   exit 1
 fi
 
-mkdir -p "${FW}/firmata"
-"${CLI}" compile -b arduino:avr:uno "${FIRMATA_INO}" --output-dir "${FW}/.build_firmata_uno"
-cp "${FW}/.build_firmata_uno/StandardFirmata.ino.hex" "${FW}/firmata/standard_firmata_uno.hex"
-"${CLI}" compile -b arduino:avr:mega "${FIRMATA_INO}" --output-dir "${FW}/.build_firmata_mega"
-cp "${FW}/.build_firmata_mega/StandardFirmata.ino.hex" "${FW}/firmata/standard_firmata_mega2560.hex"
+"${CLI}" compile -b arduino:avr:uno "${FIRMATA_INO}" --output-dir "${BIN_FW}/.build_firmata_uno"
+cp "${BIN_FW}/.build_firmata_uno/StandardFirmata.ino.hex" "${BIN_FW}/firmata/standard_firmata_uno.hex"
+"${CLI}" compile -b arduino:avr:mega "${FIRMATA_INO}" --output-dir "${BIN_FW}/.build_firmata_mega"
+cp "${BIN_FW}/.build_firmata_mega/StandardFirmata.ino.hex" "${BIN_FW}/firmata/standard_firmata_mega2560.hex"
 
-echo "Done. HEX files:"
-ls -la "${FW}/sensor_lab/"*.hex "${FW}/firmata/"*.hex
+cp "${SRC_FW}/manifest.json" "${BIN_FW}/manifest.json"
+
+# Optional: keep Libraries tree in sync for dev/docs
+mkdir -p "${SRC_FW}/sensor_lab" "${SRC_FW}/firmata"
+cp "${BIN_FW}/sensor_lab/"*.hex "${SRC_FW}/sensor_lab/"
+cp "${BIN_FW}/firmata/"*.hex "${SRC_FW}/firmata/"
+
+echo "Done. Runtime HEX (Bin/ArduinoFirmware):"
+ls -la "${BIN_FW}/sensor_lab/"*.hex "${BIN_FW}/firmata/"*.hex

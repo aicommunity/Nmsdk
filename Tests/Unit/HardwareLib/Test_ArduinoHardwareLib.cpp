@@ -95,6 +95,7 @@ TEST(ArduinoBoardProfile, UnoAvrdudeArgs)
                                                            QStringLiteral("/tmp/f.hex"),
                                                            QStringLiteral("/etc/avrdude.conf"));
     EXPECT_TRUE(cmd.contains(QStringLiteral("atmega328p")));
+    EXPECT_TRUE(cmd.contains(QStringLiteral("-carduino")));
     EXPECT_TRUE(cmd.contains(QStringLiteral("-b115200")));
 }
 
@@ -198,6 +199,15 @@ TEST(ArduinoSerialPortUtil, NormalizesLinuxTtyName)
 {
     const QString path = RDK::UArduinoSerialPortUtil::normalizeDevicePath(QStringLiteral("ttyACM0"));
     EXPECT_TRUE(path.startsWith(QStringLiteral("/dev/")));
+}
+
+TEST(ArduinoFirmwareManifest, BundledHexRelativePathUsesBinOffset)
+{
+    const QString rel =
+        RDK::UFirmwareManifest::bundledHexRelativePath(QStringLiteral("standard_firmata"), 0);
+    ASSERT_FALSE(rel.isEmpty());
+    EXPECT_TRUE(rel.startsWith(QStringLiteral("../../ArduinoFirmware/")));
+    EXPECT_TRUE(rel.endsWith(QStringLiteral("firmata/standard_firmata_uno.hex")));
 }
 
 TEST(ArduinoFirmwareManifest, BundledFirmataHexExists)
