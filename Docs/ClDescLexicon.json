@@ -1350,6 +1350,142 @@
       "SelectedPin": {
         "header": "Selected pin",
         "description": "Номер пина Firmata."
+      },
+      "SetPinMode": {
+        "header": "Set pin mode",
+        "description": "Edge: `setPinMode` для `SelectedPin`."
+      },
+      "WriteDigital": {
+        "header": "Write digital",
+        "description": "Edge: digital write `SelectedPin`."
+      },
+      "ReadAnalog": {
+        "header": "Read analog",
+        "description": "Edge: analog report для `SelectedPin`."
+      },
+      "RefreshPins": {
+        "header": "Refresh pins",
+        "description": "Edge: one-shot digital/analog report."
+      },
+      "WritePwm": {
+        "header": "Write PWM",
+        "description": "Edge: extended analog write."
+      },
+      "LoadPreset": {
+        "header": "Load preset",
+        "description": "Edge: применить `PinConfigPreset`."
+      },
+      "QueryPinState": {
+        "header": "Query pin state",
+        "description": "Edge: PIN_STATE_QUERY."
+      },
+      "ConfigureServo": {
+        "header": "Configure servo",
+        "description": "Edge: SERVO_CONFIG."
+      },
+      "WriteServo": {
+        "header": "Write servo",
+        "description": "Edge: servo angle write."
+      },
+      "I2cWrite": {
+        "header": "I2C write",
+        "description": "Edge: I2C write sysex."
+      },
+      "I2cRead": {
+        "header": "I2C read",
+        "description": "Edge: I2C read request."
+      },
+      "HandshakeStage": {
+        "header": "Handshake stage",
+        "description": "State: 0..4 handshake progress."
+      },
+      "PinStatusJson": {
+        "header": "Pin status JSON",
+        "description": "State: snapshot всех пинов."
+      },
+      "CapabilityJson": {
+        "header": "Capability JSON",
+        "description": "State: capability subset."
+      },
+      "AnalogPinValue": {
+        "header": "Analog value",
+        "description": "State: последний analog выбранного пина."
+      },
+      "StreamLog": {
+        "header": "Stream log",
+        "description": "State: TX/RX hex log."
+      },
+      "I2cReadData": {
+        "header": "I2C read data",
+        "description": "State: hex ответ I2C."
+      },
+      "AnalogSamples": {
+        "header": "Analog samples",
+        "description": "Output: matrix timestamp/pin/channel/value."
+      },
+      "DigitalSamples": {
+        "header": "Digital samples",
+        "description": "Output: matrix timestamp/pin/value."
+      },
+      "AutoRefreshPins": {
+        "header": "Auto refresh pins",
+        "description": "Непрерывный port/analog report."
+      },
+      "StreamLogEnable": {
+        "header": "Stream log enable",
+        "description": "Писать StreamLog при ShowDebug."
+      },
+      "SelectedPinMode": {
+        "header": "Pin mode",
+        "description": "0=input, 1=output, 2=analog, 3=pwm."
+      },
+      "DigitalPinValue": {
+        "header": "Digital value",
+        "description": "0/1 для write digital."
+      },
+      "PwmPinValue": {
+        "header": "PWM value",
+        "description": "0..255 extended analog."
+      },
+      "SampleBufferRows": {
+        "header": "Sample buffer rows",
+        "description": "Макс. строк в sample matrices."
+      },
+      "PinConfigPreset": {
+        "header": "Pin config preset",
+        "description": "Id пресета (uno_d13_blink, …)."
+      },
+      "QueryPin": {
+        "header": "Query pin",
+        "description": "Firmata pin для query."
+      },
+      "ServoPin": {
+        "header": "Servo pin",
+        "description": "Пин серво."
+      },
+      "ServoAngle": {
+        "header": "Servo angle",
+        "description": "0..180."
+      },
+      "I2cAddress": {
+        "header": "I2C address",
+        "description": "7-bit I2C address."
+      },
+      "I2cWriteData": {
+        "header": "I2C write data",
+        "description": "Hex bytes для write."
+      },
+      "DigitalOutputCommands": {
+        "header": "Digital output batch",
+        "description": "Input matrix: pin, value."
+      },
+      "PinConfigBatch": {
+        "header": "Pin config batch",
+        "description": "Input matrix: pin, mode."
+      },
+      "AnalogOutputCommands": {
+        "header": "Analog output batch",
+        "description": "Input matrix: pin, pwm value."
       }
     },
     "ArduinoDcDemo": {
@@ -1402,6 +1538,14 @@
       "AdcValue": {
         "header": "ADC value",
         "description": "State: 0–1023."
+      },
+      "BoardProfile": {
+        "header": "Board profile",
+        "description": "0=Uno, 1=Mega (для labels в GUI)."
+      },
+      "UseLinkedAnalogSamples": {
+        "header": "Use linked samples",
+        "description": "Читать `AnalogSamples` Firmata."
       }
     }
   },

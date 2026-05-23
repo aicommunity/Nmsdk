@@ -132,12 +132,33 @@ FIRMATA_EXTRA = """\
 \t\t\t\t\t<SelectedPin Type="int" PType="257" IoType="17">13</SelectedPin>
 \t\t\t\t\t<SelectedPinMode Type="int" PType="257" IoType="17">1</SelectedPinMode>
 \t\t\t\t\t<DigitalPinValue Type="int" PType="257" IoType="17">0</DigitalPinValue>
+\t\t\t\t\t<AutoRefreshPins Type="bool" PType="257" IoType="17">0</AutoRefreshPins>
+\t\t\t\t\t<StreamLogEnable Type="bool" PType="257" IoType="17">0</StreamLogEnable>
+\t\t\t\t\t<SetPinMode Type="bool" PType="265" IoType="17">0</SetPinMode>
+\t\t\t\t\t<WriteDigital Type="bool" PType="265" IoType="17">0</WriteDigital>
+\t\t\t\t\t<ReadAnalog Type="bool" PType="265" IoType="17">0</ReadAnalog>
 \t\t\t\t\t<FirmataReady Type="bool" PType="258" IoType="17">0</FirmataReady>
 \t\t\t\t\t<FirmataFirmwareVersion Type="std::string" PType="258" IoType="17"></FirmataFirmwareVersion>
 \t\t\t\t\t<AnalogPinValue Type="int" PType="258" IoType="17">0</AnalogPinValue>
+\t\t\t\t\t<PinStatusJson Type="std::string" PType="258" IoType="17"></PinStatusJson>
+\t\t\t\t\t<AnalogSamples Type="MDMatrix&lt;double&gt;" Rows="0" Cols="4" PType="274" IoType="17"></AnalogSamples>
+\t\t\t\t\t<DigitalSamples Type="MDMatrix&lt;double&gt;" Rows="0" Cols="3" PType="274" IoType="17"></DigitalSamples>
 \t\t\t\t\t<SetPinModeFlag Type="bool" PType="258" IoType="17">0</SetPinModeFlag>
 \t\t\t\t\t<ReadAnalogFlag Type="bool" PType="258" IoType="17">0</ReadAnalogFlag>
 \t\t\t\t\t<WriteDigitalFlag Type="bool" PType="258" IoType="17">0</WriteDigitalFlag>
+"""
+
+FIRMATA_ANALOG_LINK_EXTRA = FIRMATA_EXTRA + """\
+\t\t\t\t\t<AutoRefreshPins Type="bool" PType="257" IoType="17">1</AutoRefreshPins>
+"""
+
+ADC_LINK_PROPS = """\
+\t\t\t\t\t<LinkedFirmataName Type="std::string" PType="257" IoType="17">Firmata</LinkedFirmataName>
+\t\t\t\t\t<AnalogPin Type="int" PType="257" IoType="17">14</AnalogPin>
+\t\t\t\t\t<BoardProfile Type="int" PType="257" IoType="17">0</BoardProfile>
+\t\t\t\t\t<UseLinkedAnalogSamples Type="bool" PType="257" IoType="17">1</UseLinkedAnalogSamples>
+\t\t\t\t\t<AdcValue Type="int" PType="258" IoType="17">0</AdcValue>
+\t\t\t\t\t<ReadAdcFlag Type="bool" PType="265" IoType="17">0</ReadAdcFlag>
 """
 
 ADC_PROPS = """\
@@ -347,6 +368,29 @@ def main() -> None:
         port,
     )
 
+    firmata_link = BOARD_PROPS.format(port=port, bundled="standard_firmata") + FIRMATA_ANALOG_LINK_EXTRA
+    adc_link_body = (
+        component_block("Firmata", "ArduinoFirmata", "12 4 0", firmata_link)
+        + component_block("Adc", "ArduinoAdc", "12 8 0", UNET_BASE.format(coord="12 8 0") + ADC_LINK_PROPS)
+    )
+    dest08 = OUT / "08-ArduinoFirmata-AnalogLink"
+    dest08.mkdir(parents=True, exist_ok=True)
+    (dest08 / "Model_00.xml").write_text(MODEL_HEADER + adc_link_body + MODEL_FOOTER, encoding="utf-8")
+    (dest08 / "Parameters_00.xml").write_text(PARAM_HEADER + adc_link_body + PARAM_FOOTER, encoding="utf-8")
+    (dest08 / "Project.ini").write_text(
+        PROJECT_INI.format(name="Hardware test: Firmata AnalogSamples link"), encoding="utf-8"
+    )
+    (dest08 / "Interface.xml").write_text(INTERFACE_XML, encoding="utf-8")
+    (dest08 / "README.md").write_text(
+        README_TEMPLATE.format(
+            title="Hardware test: Firmata AnalogSamples link",
+            folder="08-ArduinoFirmata-AnalogLink",
+            purpose="Firmata с `AutoRefreshPins` + `ArduinoAdc.UseLinkedAnalogSamples` для проверки link на `AnalogSamples`.",
+            components="- `Firmata` + `Adc` (linked samples, A0 = pin 14).",
+        ),
+        encoding="utf-8",
+    )
+
     write_project(
         "07-ArduinoPropertyEdges",
         "Hardware test: Arduino property edges",
@@ -373,6 +417,7 @@ def main() -> None:
             | [05-ArduinoDcDemo](05-ArduinoDcDemo/) | `ArduinoDcDemo` (single node) | sensor_lab_v1 |
             | [06-ArduinoSensorSketch-Proto2](06-ArduinoSensorSketch-Proto2/) | `ArduinoSensorSketch` (v2) | sensor_lab_v1 |
             | [07-ArduinoPropertyEdges](07-ArduinoPropertyEdges/) | `ArduinoBoard` (edge API) | sensor_lab_v1 |
+            | [08-ArduinoFirmata-AnalogLink](08-ArduinoFirmata-AnalogLink/) | `ArduinoFirmata` + `ArduinoAdc` (AnalogSamples) | standard_firmata |
 
             Перед тестом задайте `PortName` и следуйте [чеклисту](../../../../Libraries/Rdk-HardwareLib/Firmware/README.md).
 

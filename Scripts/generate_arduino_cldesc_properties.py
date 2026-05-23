@@ -17,6 +17,8 @@ LEXICON_PATH = ROOT / "Docs/ClDescLexicon.json"
 EDGE = ("| ptPubParameter | | ptInput | ", "265")
 PARAM = ("| ptPubParameter | ", "257")
 STATE = ("| ptPubState | ", "258")
+OUTPUT = ("| ptPubOutput | | ptPubState | ", "274")
+INPUT = ("| ptPubParameter | | ptPubInput | ", "265")
 
 PROPS: dict[str, list[tuple[str, str, str, tuple[str, str]]]] = {
     "ArduinoBoard": [
@@ -53,10 +55,44 @@ PROPS: dict[str, list[tuple[str, str, str, tuple[str, str]]]] = {
     "ArduinoFirmata": [
         ("RestartFirmata", "Restart Firmata", "Edge: сброс handshake.", EDGE),
         ("ApplyPinConfig", "Apply pin config", "Edge: применить pin mode / IO.", EDGE),
+        ("SetPinMode", "Set pin mode", "Edge: `setPinMode` для `SelectedPin`.", EDGE),
+        ("WriteDigital", "Write digital", "Edge: digital write `SelectedPin`.", EDGE),
+        ("ReadAnalog", "Read analog", "Edge: analog report для `SelectedPin`.", EDGE),
+        ("RefreshPins", "Refresh pins", "Edge: one-shot digital/analog report.", EDGE),
+        ("WritePwm", "Write PWM", "Edge: extended analog write.", EDGE),
+        ("LoadPreset", "Load preset", "Edge: применить `PinConfigPreset`.", EDGE),
+        ("QueryPinState", "Query pin state", "Edge: PIN_STATE_QUERY.", EDGE),
+        ("ConfigureServo", "Configure servo", "Edge: SERVO_CONFIG.", EDGE),
+        ("WriteServo", "Write servo", "Edge: servo angle write.", EDGE),
+        ("I2cWrite", "I2C write", "Edge: I2C write sysex.", EDGE),
+        ("I2cRead", "I2C read", "Edge: I2C read request.", EDGE),
         ("IsFirmataReady", "Firmata ready", "State: handshake завершён.", STATE),
         ("IsLinkReady", "Link ready", "State: connected ∧ Firmata ready.", STATE),
+        ("HandshakeStage", "Handshake stage", "State: 0..4 handshake progress.", STATE),
+        ("PinStatusJson", "Pin status JSON", "State: snapshot всех пинов.", STATE),
+        ("CapabilityJson", "Capability JSON", "State: capability subset.", STATE),
+        ("AnalogPinValue", "Analog value", "State: последний analog выбранного пина.", STATE),
+        ("StreamLog", "Stream log", "State: TX/RX hex log.", STATE),
+        ("I2cReadData", "I2C read data", "State: hex ответ I2C.", STATE),
+        ("AnalogSamples", "Analog samples", "Output: matrix timestamp/pin/channel/value.", OUTPUT),
+        ("DigitalSamples", "Digital samples", "Output: matrix timestamp/pin/value.", OUTPUT),
         ("ReportAnalogEnable", "Report analog", "Включить analog report для `SelectedPin`.", PARAM),
+        ("AutoRefreshPins", "Auto refresh pins", "Непрерывный port/analog report.", PARAM),
+        ("StreamLogEnable", "Stream log enable", "Писать StreamLog при ShowDebug.", PARAM),
         ("SelectedPin", "Selected pin", "Номер пина Firmata.", PARAM),
+        ("SelectedPinMode", "Pin mode", "0=input, 1=output, 2=analog, 3=pwm.", PARAM),
+        ("DigitalPinValue", "Digital value", "0/1 для write digital.", PARAM),
+        ("PwmPinValue", "PWM value", "0..255 extended analog.", PARAM),
+        ("SampleBufferRows", "Sample buffer rows", "Макс. строк в sample matrices.", PARAM),
+        ("PinConfigPreset", "Pin config preset", "Id пресета (uno_d13_blink, …).", PARAM),
+        ("QueryPin", "Query pin", "Firmata pin для query.", PARAM),
+        ("ServoPin", "Servo pin", "Пин серво.", PARAM),
+        ("ServoAngle", "Servo angle", "0..180.", PARAM),
+        ("I2cAddress", "I2C address", "7-bit I2C address.", PARAM),
+        ("I2cWriteData", "I2C write data", "Hex bytes для write.", PARAM),
+        ("DigitalOutputCommands", "Digital output batch", "Input matrix: pin, value.", INPUT),
+        ("PinConfigBatch", "Pin config batch", "Input matrix: pin, mode.", INPUT),
+        ("AnalogOutputCommands", "Analog output batch", "Input matrix: pin, pwm value.", INPUT),
     ],
     "ArduinoDcDemo": [
         ("SendCommand", "Send command", "Edge: DC-команда (`SET SPEED …`).", EDGE),
@@ -77,6 +113,8 @@ PROPS: dict[str, list[tuple[str, str, str, tuple[str, str]]]] = {
         ("AdcReadOk", "ADC read OK", "State: Firmata готов и значение прочитано.", STATE),
         ("LinkedFirmataName", "Linked Firmata", "Имя узла `ArduinoFirmata` на canvas.", PARAM),
         ("AnalogPin", "Analog pin", "Номер аналогового пина Firmata.", PARAM),
+        ("BoardProfile", "Board profile", "0=Uno, 1=Mega (для labels в GUI).", PARAM),
+        ("UseLinkedAnalogSamples", "Use linked samples", "Читать `AnalogSamples` Firmata.", PARAM),
         ("AdcValue", "ADC value", "State: 0–1023.", STATE),
     ],
 }

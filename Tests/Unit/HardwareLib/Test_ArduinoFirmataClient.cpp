@@ -118,3 +118,64 @@ TEST(ArduinoFirmataClient, UnoA0MapsToChannelZero)
     feedHandshake(client, 0);
     EXPECT_EQ(client.analogChannelForPin(14), 0);
 }
+
+TEST(ArduinoFirmataClient, ReportAnalogUsesChannel)
+{
+    RDK::UArduinoFirmataClient client;
+    feedHandshake(client, 0);
+    client.reportAnalog(nullptr, 14, 1);
+    ASSERT_FALSE(client.LastWrittenBytes.isEmpty());
+    EXPECT_EQ(static_cast<uint8_t>(client.LastWrittenBytes.at(0)), 0xC0);
+    EXPECT_EQ(static_cast<uint8_t>(client.LastWrittenBytes.at(1)), 1);
+}
+
+TEST(ArduinoFirmataClient, PinStateResponseUpdatesDigitalAndAnalog)
+{
+    RDK::UArduinoFirmataClient client;
+    feedHandshake(client, 0);
+    client.PortDigitalMask.resize(2);
+    client.PortDigitalMask.fill(0);
+
+    QByteArray payload;
+    payload.append(char(0x6E));
+    payload.append(char(13));
+    payload.append(char(1));
+    payload.append(char(1));
+    payload.append(char(0));
+    QByteArray msg;
+    msg.append(char(0xF0));
+    msg.append(payload);
+    msg.append(char(0xF7));
+    client.processIncoming(msg);
+    EXPECT_EQ(client.digitalValue(13), 1);
+    EXPECT_EQ(client.deviceModeForPin(13), 1);
+
+    QByteArray analog_payload;
+    analog_payload.append(char(0x6E));
+    analog_payload.append(char(14));
+    analog_payload.append(char(2));
+    analog_payload.append(char(100));
+    analog_payload.append(char(0));
+    QByteArray analog_msg;
+    analog_msg.append(char(0xF0));
+    analog_msg.append(analog_payload);
+    analog_msg.append(char(0xF7));
+    client.processIncoming(analog_msg);
+    EXPECT_EQ(client.analogValueForChannel(0), 100);
+}
+
+TEST(ArduinoFirmataClient, I2cReplyStored)
+{
+    RDK::UArduinoFirmataClient client;
+    QByteArray payload;
+    payload.append(char(0x77));
+    payload.append(char(0xAB));
+    payload.append(char(0xCD));
+    QByteArray msg;
+    msg.append(char(0xF0));
+    msg.append(payload);
+    msg.append(char(0xF7));
+    client.processIncoming(msg);
+    EXPECT_EQ(client.lastI2cReadData().size(), 2);
+    EXPECT_EQ(static_cast<uint8_t>(client.lastI2cReadData().at(0)), 0xAB);
+}
