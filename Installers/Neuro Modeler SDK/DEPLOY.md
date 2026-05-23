@@ -80,10 +80,10 @@ prepare_installer_qt.bat
 
 Если каталог `Bin\Platform\Win` был очищен или сборка выполнялась без vcpkg, не-Qt DLL можно подставить вручную скриптом:
 
-- **Скрипт:** `scripts\copy_runtime_deps_to_bin.bat` (вызывает `scripts\copy_runtime_deps_to_bin.ps1`).
+- **Скрипт:** `Scripts\copy_runtime_deps_to_bin.bat` (вызывает `Scripts\copy_runtime_deps_to_bin.ps1`).
 - **Запуск:** из корня репозитория:
   ```cmd
-  scripts\copy_runtime_deps_to_bin.bat
+  Scripts\copy_runtime_deps_to_bin.bat
   ```
 - По умолчанию берёт DLL из `build\vcpkg_installed\x64-windows\bin` и копирует в `Bin\Platform\Win` только не-Qt и не-debug DLL. Пути можно задать переменными окружения: `VCPKG_BIN_DIR`, `BIN_PLATFORM_WIN`.
 - **Когда использовать:** после клона репозитория или после очистки `Bin\Platform\Win`, если полная сборка не выполнялась и нужно только подготовить DLL для запуска или для **prepare_installer_qt.bat**.

@@ -4,7 +4,7 @@
 
 ## Шаг 1 — построение лексикона из документации
 
-Скрипт `scripts/build_cl_desc_lexicon_from_docs.py` обходит документацию компонентов в библиотеках:
+Скрипт `Scripts/build_cl_desc_lexicon_from_docs.py` обходит документацию компонентов в библиотеках:
 
 - **Rdk-CvBasicLib**
 - **Nmsdk-PulseLib**
@@ -17,7 +17,7 @@
 **Запуск** (из корня репозитория `Nmsdk`):
 
 ```bash
-python scripts/build_cl_desc_lexicon_from_docs.py
+python Scripts/build_cl_desc_lexicon_from_docs.py
 ```
 
 **Опции:**
@@ -31,8 +31,8 @@ python scripts/build_cl_desc_lexicon_from_docs.py
 **Примеры:**
 
 ```bash
-python scripts/build_cl_desc_lexicon_from_docs.py -o Docs/ClDescLexicon.json --verbose
-python scripts/build_cl_desc_lexicon_from_docs.py --no-merge
+python Scripts/build_cl_desc_lexicon_from_docs.py -o Docs/ClDescLexicon.json --verbose
+python Scripts/build_cl_desc_lexicon_from_docs.py --no-merge
 ```
 
 **Результат:** файл `Docs/ClDescLexicon.json` с секцией `classOverrides`, готовый для ClDescGenerator.

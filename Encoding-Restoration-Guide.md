@@ -10,13 +10,13 @@
 
 ## Расположение скриптов
 
-Все скрипты находятся в каталоге **`scripts/`** в корне репозитория:
+Все скрипты находятся в каталоге **`Scripts/`** в корне репозитория:
 
-- `scripts/detect_encoding.py` — определение кодировки файлов (Cp1251 / UTF-8)
-- `scripts/convert_cp1251_to_utf8.py` — конвертация файлов из Cp1251 в UTF-8
-- `scripts/restore_cp1251_comments.py` — восстановление битых комментариев из эталона в Git
+- `Scripts/detect_encoding.py` — определение кодировки файлов (Cp1251 / UTF-8)
+- `Scripts/convert_cp1251_to_utf8.py` — конвертация файлов из Cp1251 в UTF-8
+- `Scripts/restore_cp1251_comments.py` — восстановление битых комментариев из эталона в Git
 
-**Запуск:** из корня репозитория, например: `python scripts/detect_encoding.py ...`
+**Запуск:** из корня репозитория, например: `python Scripts/detect_encoding.py ...`
 
 ---
 
@@ -27,20 +27,20 @@
 - **UTF-8 кириллица:** двухбайтовые последовательности `0xD0/0xD1` + `0x80–0xBF`.
 - **Cp1251 кириллица:** одиночные байты `0xC0–0xFF`, не входящие в UTF-8 пару.
 
-**Скрипт:** `scripts/detect_encoding.py`
+**Скрипт:** `Scripts/detect_encoding.py`
 
 **Запуск из корня репозитория:**
 
 Для одной библиотеки (например, Nmsdk-PulseLib):
 
 ```bash
-python scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core
+python Scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core
 ```
 
 Скрипт выводит для каждого файла путь и метку `cp1251` или `utf8`. Чтобы записать список файлов в Cp1251 в отдельный файл:
 
 ```bash
-python scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core --list cp1251_files.txt
+python Scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core --list cp1251_files.txt
 ```
 
 Файл `cp1251_files.txt` будет создан только если найдётся хотя бы один файл в Cp1251. Пути в файле — относительно текущего каталога; для конвертации используйте тот же каталог библиотеки как `root_dir` и пути вида `Core/File.cpp`.
@@ -51,7 +51,7 @@ python scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core --list cp1251_fi
 
 Если обнаружены файлы в Cp1251, их нужно **сначала** перевести в UTF-8, затем при необходимости запускать восстановление комментариев (см. ниже).
 
-**Скрипт:** `scripts/convert_cp1251_to_utf8.py`
+**Скрипт:** `Scripts/convert_cp1251_to_utf8.py`
 
 **Запуск из корня репозитория:**
 
@@ -60,7 +60,7 @@ python scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core --list cp1251_fi
 Читать список путей из файла (пути в файле — относительно `root_dir`, например `Core/File.cpp`):
 
 ```bash
-python scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib --list cp1251_files.txt
+python Scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib --list cp1251_files.txt
 ```
 
 Если `detect_encoding.py` был запущен из каталога библиотеки и записал пути вида `Core/File.cpp`, используйте `root_dir=Libraries/Nmsdk-PulseLib`. Если пути в файле вида `Libraries/Nmsdk-PulseLib/Core/File.cpp`, используйте `root_dir=.` (корень репозитория).
@@ -68,7 +68,7 @@ python scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib --list cp1251_
 Указать файлы вручную (пути относительно `root_dir`):
 
 ```bash
-python scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib Core/SomeFile.h Core/Other.cpp
+python Scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib Core/SomeFile.h Core/Other.cpp
 ```
 
 Скрипт читает каждый файл как **Cp1251**, декодирует в Unicode и записывает в **UTF-8**.
@@ -112,12 +112,12 @@ python scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib Core/SomeFile.
 
 ## 4. Скрипт восстановления комментариев
 
-**Путь:** `scripts/restore_cp1251_comments.py`
+**Путь:** `Scripts/restore_cp1251_comments.py`
 
 **Запуск из корня репозитория:**
 
 ```bash
-python scripts/restore_cp1251_comments.py <каталог_репозитория_библиотеки> <путь_к_файлу_от_корня_этой_библиотеки> [коммит]
+python Scripts/restore_cp1251_comments.py <каталог_репозитория_библиотеки> <путь_к_файлу_от_корня_этой_библиотеки> [коммит]
 ```
 
 - **каталог_репозитория_библиотеки** — путь к корню Git-репозитория библиотеки (сабмодуля), например `Libraries/Nmsdk-PulseLib`.
@@ -129,30 +129,30 @@ python scripts/restore_cp1251_comments.py <каталог_репозитория
 Восстановить комментарии в одном файле Nmsdk-PulseLib:
 
 ```bash
-python scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapse.h
+python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapse.h
 ```
 
 Указать другой коммит:
 
 ```bash
-python scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.h 2b564e8
+python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.h 2b564e8
 ```
 
 Восстановить несколько файлов подряд (Nmsdk-PulseLib):
 
 ```bash
 for f in Core/NPulseSynapse.h Core/NPulseSynapse.cpp Core/NPulseSynapseCommon.h Core/NPulseSynapseCommon.cpp; do
-  python scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib "$f"
+  python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib "$f"
 done
 ```
 
 В PowerShell:
 
 ```powershell
-python scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapse.h
-python scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapse.cpp
-python scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.h
-python scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.cpp
+python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapse.h
+python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapse.cpp
+python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.h
+python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.cpp
 ```
 
 **Для другой библиотеки** подставьте её каталог вместо `Libraries/Nmsdk-PulseLib` и путь к файлу относительно её корня.
