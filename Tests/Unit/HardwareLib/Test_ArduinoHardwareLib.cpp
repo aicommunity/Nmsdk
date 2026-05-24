@@ -108,7 +108,61 @@ TEST(ArduinoBoardProfile, MegaAvrdudeArgs)
                                                            QStringLiteral("/tmp/f.hex"),
                                                            QStringLiteral("/etc/avrdude.conf"));
     EXPECT_TRUE(cmd.contains(QStringLiteral("atmega2560")));
-    EXPECT_TRUE(cmd.contains(QStringLiteral("stk500v2")));
+    EXPECT_TRUE(cmd.contains(QStringLiteral("-cwiring")));
+    EXPECT_FALSE(cmd.contains(QStringLiteral("stk500v2")));
+}
+
+TEST(ArduinoBoardProfile, ValidateUpload_RejectsUnoProfileWithMegaHex)
+{
+    const QString err = RDK::UArduinoBoardProfileUtil::validateUploadTargets(
+        0, QStringLiteral("C:/fw/firmata/standard_firmata_mega2560.hex"));
+    EXPECT_FALSE(err.isEmpty());
+}
+
+TEST(ArduinoBoardProfile, ValidateUpload_RejectsMegaProfileWithUnoHex)
+{
+    const QString err = RDK::UArduinoBoardProfileUtil::validateUploadTargets(
+        1, QStringLiteral("C:/fw/firmata/standard_firmata_uno.hex"));
+    EXPECT_FALSE(err.isEmpty());
+}
+
+TEST(ArduinoBoardProfile, ValidateUpload_AllowsMatchingPairs)
+{
+    EXPECT_TRUE(RDK::UArduinoBoardProfileUtil::validateUploadTargets(
+                    0, QStringLiteral("/x/standard_firmata_uno.hex"))
+                    .isEmpty());
+    EXPECT_TRUE(RDK::UArduinoBoardProfileUtil::validateUploadTargets(
+                    1, QStringLiteral("/x/standard_firmata_mega2560.hex"))
+                    .isEmpty());
+}
+
+TEST(ArduinoBoardProfile, ValidateUpload_SkipsAmbiguousCustomHex)
+{
+    EXPECT_TRUE(RDK::UArduinoBoardProfileUtil::validateUploadTargets(
+                    0, QStringLiteral("/x/custom_build.hex"))
+                    .isEmpty());
+}
+
+TEST(ArduinoBoardProfile, UsbIds_Mega2560)
+{
+    EXPECT_EQ(RDK::UArduinoBoardProfileUtil::boardProfileFromUsbIds(0x2341, 0x0010), 1);
+}
+
+TEST(ArduinoBoardProfile, UsbIds_Uno)
+{
+    EXPECT_EQ(RDK::UArduinoBoardProfileUtil::boardProfileFromUsbIds(0x2341, 0x0043), 0);
+}
+
+TEST(ArduinoBoardProfile, UsbIds_UnknownVendor)
+{
+    EXPECT_EQ(RDK::UArduinoBoardProfileUtil::boardProfileFromUsbIds(0x1A86, 0x7523), -1);
+}
+
+TEST(ArduinoBoardProfile, Description_Mega)
+{
+    EXPECT_EQ(RDK::UArduinoBoardProfileUtil::boardProfileFromDescription(
+                  QStringLiteral("Arduino Mega 2560")),
+              1);
 }
 
 TEST(ArduinoPropertyString, RoundTripCyrillic)

@@ -50,6 +50,8 @@ void EnsureSdkEnv()
         qputenv("NMSDK_SOURCE_DIR", root.toLocal8Bit());
     if (qgetenv("NMSDK_ROOT").isEmpty())
         qputenv("NMSDK_ROOT", root.toLocal8Bit());
+    if (qgetenv("ARDUINO_SYNC_UPLOAD").isEmpty())
+        qputenv("ARDUINO_SYNC_UPLOAD", "1");
 }
 
 bool envFlagEnabled(const char* name)
