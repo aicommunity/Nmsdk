@@ -71,7 +71,7 @@ UNET_BASE = """\
 BOARD_PROPS = """\
 \t\t\t\t\t<PortName Type="std::string" PType="257" IoType="17">{port}</PortName>
 \t\t\t\t\t<BaudRate Type="int" PType="257" IoType="17">57600</BaudRate>
-\t\t\t\t\t<BoardProfile Type="int" PType="257" IoType="17">0</BoardProfile>
+\t\t\t\t\t<BoardProfile Type="int" PType="257" IoType="17">{board_profile}</BoardProfile>
 \t\t\t\t\t<AutoReconnect Type="bool" PType="257" IoType="17">0</AutoReconnect>
 \t\t\t\t\t<ConnectOnBuild Type="bool" PType="257" IoType="17">0</ConnectOnBuild>
 \t\t\t\t\t<Connect Type="bool" PType="257" IoType="17">0</Connect>
@@ -155,7 +155,7 @@ FIRMATA_ANALOG_LINK_EXTRA = FIRMATA_EXTRA + """\
 ADC_LINK_PROPS = """\
 \t\t\t\t\t<LinkedFirmataName Type="std::string" PType="257" IoType="17">Firmata</LinkedFirmataName>
 \t\t\t\t\t<AnalogPin Type="int" PType="257" IoType="17">14</AnalogPin>
-\t\t\t\t\t<BoardProfile Type="int" PType="257" IoType="17">0</BoardProfile>
+\t\t\t\t\t<BoardProfile Type="int" PType="257" IoType="17">{board_profile}</BoardProfile>
 \t\t\t\t\t<UseLinkedAnalogSamples Type="bool" PType="257" IoType="17">1</UseLinkedAnalogSamples>
 \t\t\t\t\t<AdcValue Type="int" PType="258" IoType="17">0</AdcValue>
 \t\t\t\t\t<ReadAdcFlag Type="bool" PType="265" IoType="17">0</ReadAdcFlag>
@@ -241,6 +241,13 @@ README_TEMPLATE = """\
 3. При необходимости установите `ConnectOnBuild` = 1 или нажмите Connect в GUI.
 4. См. чеклист: `Libraries/Rdk-HardwareLib/Firmware/README.md`.
 
+## Плата Uno vs Mega 2560
+
+- Свойство `BoardProfile`: **0** = Arduino Uno, **1** = Arduino Mega 2560.
+- Bundled HEX (`BundledFirmwareId`) выбирается по профилю (см. `Bin/ArduinoFirmware/manifest.json`).
+- Перед **Upload** на Mega установите профиль **1** в GUI (Board) или включите авто-детект при выборе COM.
+- Конфиги в этом каталоге по умолчанию используют **Uno (0)**.
+
 ## Компоненты
 
 {components}
@@ -272,6 +279,7 @@ def write_project(
     components_desc: str,
     components_xml: str,
     port: str = "/dev/ttyACM0",
+    board_profile: int = 0,
 ) -> None:
     dest = OUT / folder
     dest.mkdir(parents=True, exist_ok=True)
@@ -295,8 +303,9 @@ def write_project(
 
 def main() -> None:
     port = "/dev/ttyACM0"
+    board_profile = 0
 
-    board = BOARD_PROPS.format(port=port, bundled="sensor_lab_v1")
+    board = BOARD_PROPS.format(port=port, bundled="sensor_lab_v1", board_profile=board_profile)
     write_project(
         "01-ArduinoBoard",
         "Hardware test: ArduinoBoard",
@@ -326,7 +335,9 @@ def main() -> None:
         port,
     )
 
-    firmata_board = BOARD_PROPS.format(port=port, bundled="standard_firmata") + FIRMATA_EXTRA
+    firmata_board = BOARD_PROPS.format(
+        port=port, bundled="standard_firmata", board_profile=board_profile
+    ) + FIRMATA_EXTRA
     write_project(
         "03-ArduinoFirmata",
         "Hardware test: ArduinoFirmata",
@@ -358,7 +369,7 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    dc_demo = BOARD_PROPS.format(port=port, bundled="sensor_lab_v1") + DC_PROPS
+    dc_demo = BOARD_PROPS.format(port=port, bundled="sensor_lab_v1", board_profile=board_profile) + DC_PROPS
     write_project(
         "05-ArduinoDcDemo",
         "Hardware test: ArduinoDcDemo",
@@ -368,10 +379,15 @@ def main() -> None:
         port,
     )
 
-    firmata_link = BOARD_PROPS.format(port=port, bundled="standard_firmata") + FIRMATA_ANALOG_LINK_EXTRA
+    firmata_link = BOARD_PROPS.format(
+        port=port, bundled="standard_firmata", board_profile=board_profile
+    ) + FIRMATA_ANALOG_LINK_EXTRA
+    adc_link_props = ADC_LINK_PROPS.format(board_profile=board_profile)
     adc_link_body = (
         component_block("Firmata", "ArduinoFirmata", "12 4 0", firmata_link)
-        + component_block("Adc", "ArduinoAdc", "12 8 0", UNET_BASE.format(coord="12 8 0") + ADC_LINK_PROPS)
+        + component_block(
+            "Adc", "ArduinoAdc", "12 8 0", UNET_BASE.format(coord="12 8 0") + adc_link_props
+        )
     )
     dest08 = OUT / "08-ArduinoFirmata-AnalogLink"
     dest08.mkdir(parents=True, exist_ok=True)
@@ -408,16 +424,18 @@ def main() -> None:
 
             Набор минимальных проектов для ручной проверки компонентов Arduino на плате.
 
-            | Каталог | ClassName | Прошивка |
-            |---------|-----------|----------|
-            | [01-ArduinoBoard](01-ArduinoBoard/) | `ArduinoBoard` | sensor_lab_v1 |
-            | [02-ArduinoSensorSketch](02-ArduinoSensorSketch/) | `ArduinoSensorSketch` | sensor_lab_v1 |
-            | [03-ArduinoFirmata](03-ArduinoFirmata/) | `ArduinoFirmata` | standard_firmata |
-            | [04-ArduinoAdc](04-ArduinoAdc/) | `ArduinoAdc` + `ArduinoFirmata` | standard_firmata |
-            | [05-ArduinoDcDemo](05-ArduinoDcDemo/) | `ArduinoDcDemo` (single node) | sensor_lab_v1 |
-            | [06-ArduinoSensorSketch-Proto2](06-ArduinoSensorSketch-Proto2/) | `ArduinoSensorSketch` (v2) | sensor_lab_v1 |
-            | [07-ArduinoPropertyEdges](07-ArduinoPropertyEdges/) | `ArduinoBoard` (edge API) | sensor_lab_v1 |
-            | [08-ArduinoFirmata-AnalogLink](08-ArduinoFirmata-AnalogLink/) | `ArduinoFirmata` + `ArduinoAdc` (AnalogSamples) | standard_firmata |
+            | Каталог | ClassName | Прошивка | Default BP |
+            |---------|-----------|----------|------------|
+            | [01-ArduinoBoard](01-ArduinoBoard/) | `ArduinoBoard` | sensor_lab_v1 | Uno (0) |
+            | [02-ArduinoSensorSketch](02-ArduinoSensorSketch/) | `ArduinoSensorSketch` | sensor_lab_v1 | Uno (0) |
+            | [03-ArduinoFirmata](03-ArduinoFirmata/) | `ArduinoFirmata` | standard_firmata | Uno (0) |
+            | [04-ArduinoAdc](04-ArduinoAdc/) | `ArduinoAdc` + `ArduinoFirmata` | standard_firmata | Uno (0) |
+            | [05-ArduinoDcDemo](05-ArduinoDcDemo/) | `ArduinoDcDemo` (single node) | sensor_lab_v1 | Uno (0) |
+            | [06-ArduinoSensorSketch-Proto2](06-ArduinoSensorSketch-Proto2/) | `ArduinoSensorSketch` (v2) | sensor_lab_v1 | Uno (0) |
+            | [07-ArduinoPropertyEdges](07-ArduinoPropertyEdges/) | `ArduinoBoard` (edge API) | sensor_lab_v1 | Uno (0) |
+            | [08-ArduinoFirmata-AnalogLink](08-ArduinoFirmata-AnalogLink/) | `ArduinoFirmata` + `ArduinoAdc` | standard_firmata | Uno (0) |
+
+            **BoardProfile:** 0 = Uno, 1 = Mega 2560. Перед Upload на Mega выберите профиль 1 или авто-детект в GUI.
 
             Перед тестом задайте `PortName` и следуйте [чеклисту](../../../../Libraries/Rdk-HardwareLib/Firmware/README.md).
 
