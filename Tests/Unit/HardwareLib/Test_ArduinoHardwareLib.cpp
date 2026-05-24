@@ -29,7 +29,7 @@ void EnsureQtApp()
 QByteArray buildV2Frame(uint8_t type, const QByteArray& payload)
 {
     QByteArray frame;
-    frame.append(char(0xAA));
+    frame.append('\xaa');
     frame.append(char(type));
     const uint16_t len = static_cast<uint16_t>(payload.size());
     frame.append(char(len & 0xFF));
@@ -167,7 +167,7 @@ TEST(ArduinoBoardProfile, Description_Mega)
 
 TEST(ArduinoPropertyString, RoundTripCyrillic)
 {
-    const QString original = QString::fromUtf8(u8"COM3 — USB-SERIAL CH340 (Порт)");
+    const QString original = QStringLiteral("COM3 — USB-SERIAL CH340 (Порт)");
     const std::string stored = RDK::UArduinoPropertyString::toStdProperty(original);
     const QString restored = RDK::UArduinoPropertyString::fromStdProperty(stored);
     EXPECT_EQ(restored, original);
