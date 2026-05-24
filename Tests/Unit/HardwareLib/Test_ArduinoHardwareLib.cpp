@@ -12,6 +12,7 @@
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoBoardProfile.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoFlasher.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoSerialPortUtil.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/UArduinoPropertyString.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/UFirmwareManifest.h"
 
 namespace {
@@ -108,6 +109,14 @@ TEST(ArduinoBoardProfile, MegaAvrdudeArgs)
                                                            QStringLiteral("/etc/avrdude.conf"));
     EXPECT_TRUE(cmd.contains(QStringLiteral("atmega2560")));
     EXPECT_TRUE(cmd.contains(QStringLiteral("stk500v2")));
+}
+
+TEST(ArduinoPropertyString, RoundTripCyrillic)
+{
+    const QString original = QString::fromUtf8(u8"COM3 — USB-SERIAL CH340 (Порт)");
+    const std::string stored = RDK::UArduinoPropertyString::toStdProperty(original);
+    const QString restored = RDK::UArduinoPropertyString::fromStdProperty(stored);
+    EXPECT_EQ(restored, original);
 }
 
 TEST(ArduinoSerialPortUtil, AvrdudePortArgumentQuotesComPort)
