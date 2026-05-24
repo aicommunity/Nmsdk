@@ -110,6 +110,16 @@ TEST(ArduinoBoardProfile, MegaAvrdudeArgs)
     EXPECT_TRUE(cmd.contains(QStringLiteral("stk500v2")));
 }
 
+TEST(ArduinoSerialPortUtil, AvrdudePortArgumentQuotesComPort)
+{
+#if defined(Q_OS_WIN)
+    const QString arg = RDK::UArduinoSerialPortUtil::avrdudePortArgument(QStringLiteral("COM3"));
+    EXPECT_TRUE(arg.startsWith(QStringLiteral("\\\\.\\COM3")));
+#else
+    GTEST_SKIP() << "Windows-only avrdude port form";
+#endif
+}
+
 TEST(ArduinoBinaryParser, LegacySensorPacket)
 {
     RDK::UArduinoBinaryStreamParser parser;
