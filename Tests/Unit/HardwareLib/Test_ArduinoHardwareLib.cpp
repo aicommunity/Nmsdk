@@ -195,6 +195,18 @@ TEST(ArduinoFlasher, LocatesAvrdudeFromArduinoCore)
     EXPECT_FALSE(RDK::UArduinoFlasher::locateAvrdudeConf().isEmpty());
 }
 
+TEST(ArduinoFlasher, LocatesBundledToolsNextToApplicationDir)
+{
+    EnsureQtApp();
+    const QDir appDir(QCoreApplication::applicationDirPath());
+    const QString bundledExe = appDir.filePath(QStringLiteral("ArduinoTools/bin/avrdude.exe"));
+    const QString bundledBin = appDir.filePath(QStringLiteral("ArduinoTools/bin/avrdude"));
+    if (!QFile::exists(bundledExe) && !QFile::exists(bundledBin))
+        GTEST_SKIP() << "Bundled ArduinoTools not present next to test executable";
+    EXPECT_FALSE(RDK::UArduinoFlasher::locateAvrdudeBinary().isEmpty());
+    EXPECT_FALSE(RDK::UArduinoFlasher::locateAvrdudeConf().isEmpty());
+}
+
 TEST(ArduinoSerialPortUtil, NormalizesLinuxTtyName)
 {
     const QString path = RDK::UArduinoSerialPortUtil::normalizeDevicePath(QStringLiteral("ttyACM0"));
