@@ -1,0 +1,5 @@
+# Runtime LLM data (see README.md). Do not commit user sessions or audit bodies.
+audit/*.jsonl
+sessions/*.json
+!audit/.gitkeep
+!sessions/.gitkeep

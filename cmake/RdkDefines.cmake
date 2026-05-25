@@ -8,8 +8,8 @@ option(RDK_USE_CUDA "Use CUDA" OFF)
 option(RDK_USE_SQL "Use Qt SQL" OFF)
 option(RDK_USE_ODESOLVER "Use ODE solver" OFF)
 option(RDK_USE_MATLAB "Use MATLAB" OFF)
-option(RDK_USE_LLM "Build RDK LLM assistant module (Rdk/LLM, GUI/Llm)" OFF)
-option(RDK_LLM_BUILD_EMBEDDED "Build embedded llama.cpp provider (requires RDK_USE_LLM)" OFF)
+option(RDK_USE_LLM "Build RDK LLM assistant module (Rdk/LLM, GUI/Llm)" ON)
+option(RDK_LLM_BUILD_EMBEDDED "Build embedded llama.cpp provider (requires RDK_USE_LLM)" ON)
 
 # Check that the ode-solver directory exists
 if(RDK_USE_ODESOLVER)
