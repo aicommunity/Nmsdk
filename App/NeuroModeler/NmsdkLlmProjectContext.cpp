@@ -9,7 +9,7 @@
 #include <rdk_application.h>
 
 #include "../../Libraries/Rdk-HardwareLib/Llm/RegisterHardwareLibLlmTools.h"
-#include "../../Rdk/LLM/Core/Context/UDocSearchHelper.h"
+#include "../../Rdk/LLM/Core/Context/UDocSearchIndex.h"
 
 namespace fs = std::filesystem;
 
@@ -108,7 +108,7 @@ std::vector<RDK::LLM::DocSnippet> NmsdkLlmProjectContext::searchDocs(const std::
     {
         roots.push_back(project_paths.repository_root / "Libraries" / lib.library_id / "Docs");
     }
-    return RDK::LLM::UDocSearchHelper::searchRoots(roots, query, top_k);
+    return RDK::LLM::searchDocsWithIndex(roots, query, top_k);
 }
 
 void NmsdkLlmProjectContext::registerExtraTools(RDK::LLM::ULLMToolRegistry& registry)
