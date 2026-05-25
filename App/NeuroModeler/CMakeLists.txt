@@ -168,11 +168,13 @@ if(RDK_USE_LLM)
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Llm/RegisterPulseLibLlmTools.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/Llm/RegisterMotionControlLibLlmTools.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/LlmGuiBootstrap.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmGuiLocale.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmQtProviderSettingsSource.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmProviderSettingsWidget.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmAssistantDockWidget.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChangePreviewWidget.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmGuiContextBridge.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmQtPresentationSink.cpp
   )
   target_compile_definitions(NeuroModeler PRIVATE RDK_USE_LLM=1)
   target_include_directories(NeuroModeler PRIVATE
@@ -180,6 +182,10 @@ if(RDK_USE_LLM)
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm
   )
   target_link_libraries(NeuroModeler PRIVATE rdk.llm.core)
+  if(RDK_LLM_BUILD_EMBEDDED)
+    target_include_directories(NeuroModeler PRIVATE ${CMAKE_SOURCE_DIR}/Rdk/LLM/Embedded)
+    target_compile_definitions(NeuroModeler PRIVATE RDK_LLM_EMBEDDED=1)
+  endif()
 endif()
 
 target_link_libraries(NeuroModeler
@@ -435,4 +441,9 @@ if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
     else()
         message(WARNING "Cannot find Qt5::qmake to locate Qt WebEngine files")
     endif()
+endif()
+
+# rdk.llm.embedded after other libs so EnsureEmbeddedLlamaProviderRegistered resolves.
+if(RDK_USE_LLM AND RDK_LLM_BUILD_EMBEDDED)
+  target_link_libraries(NeuroModeler PRIVATE rdk.llm.embedded)
 endif()
