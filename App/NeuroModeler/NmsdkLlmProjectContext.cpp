@@ -9,6 +9,8 @@
 #include <rdk_application.h>
 
 #include "../../Libraries/Rdk-HardwareLib/Llm/RegisterHardwareLibLlmTools.h"
+#include "../../Libraries/Nmsdk-PulseLib/Llm/RegisterPulseLibLlmTools.h"
+#include "../../Libraries/Nmsdk-MotionControlLib/Llm/RegisterMotionControlLibLlmTools.h"
 #include "../../Rdk/LLM/Core/Context/UDocSearchIndex.h"
 
 namespace fs = std::filesystem;
@@ -114,4 +116,6 @@ std::vector<RDK::LLM::DocSnippet> NmsdkLlmProjectContext::searchDocs(const std::
 void NmsdkLlmProjectContext::registerExtraTools(RDK::LLM::ULLMToolRegistry& registry)
 {
     RegisterHardwareLibLlmTools(registry, this);
+    RegisterPulseLibLlmTools(registry, this);
+    RegisterMotionControlLibLlmTools(registry, this);
 }
