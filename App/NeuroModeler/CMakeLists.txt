@@ -159,6 +159,23 @@ else()
   target_compile_options(NeuroModeler PRIVATE -include ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NeuroModelerAppDefs.h)
 endif()
 
+if(RDK_USE_LLM)
+  target_sources(NeuroModeler PRIVATE
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmProjectContext.cpp
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkRegisterLlm.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/LlmGuiBootstrap.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmAssistantDockWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChangePreviewWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmGuiContextBridge.cpp
+  )
+  target_compile_definitions(NeuroModeler PRIVATE RDK_USE_LLM=1)
+  target_include_directories(NeuroModeler PRIVATE
+    ${CMAKE_SOURCE_DIR}/Rdk/LLM/Core
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm
+  )
+  target_link_libraries(NeuroModeler PRIVATE rdk.llm.core)
+endif()
+
 target_link_libraries(NeuroModeler
   PRIVATE
     Nmsdk::Qt::Core

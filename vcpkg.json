@@ -27,6 +27,10 @@
       "dependencies": [ "python3" ]
     },
     "darknet": { "description": "Enable Darknet", "dependencies": [] },
-    "tensorflow": { "description": "Enable TensorFlow", "dependencies": [] }
+    "tensorflow": { "description": "Enable TensorFlow", "dependencies": [] },
+    "llm": {
+      "description": "RDK LLM module (Windows): nlohmann-json when RDK_USE_LLM=ON",
+      "dependencies": ["nlohmann-json"]
+    }
   }
 }
