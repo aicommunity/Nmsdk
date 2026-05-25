@@ -8,6 +8,9 @@
 
 #include <rdk_application.h>
 
+#include "../../Libraries/Rdk-HardwareLib/Llm/RegisterHardwareLibLlmTools.h"
+#include "../../Rdk/LLM/Core/Context/UDocSearchHelper.h"
+
 namespace fs = std::filesystem;
 
 static fs::path detectRepositoryRoot(const std::string& work_dir)
@@ -97,7 +100,6 @@ std::vector<RDK::LLM::DocSnippet> NmsdkLlmProjectContext::searchDocs(const std::
                                                                     int top_k,
                                                                     int) const
 {
-    std::vector<RDK::LLM::DocSnippet> out;
     const auto project_paths = paths();
     std::vector<fs::path> roots;
     roots.push_back(project_paths.docs_root);
@@ -106,50 +108,10 @@ std::vector<RDK::LLM::DocSnippet> NmsdkLlmProjectContext::searchDocs(const std::
     {
         roots.push_back(project_paths.repository_root / "Libraries" / lib.library_id / "Docs");
     }
+    return RDK::LLM::UDocSearchHelper::searchRoots(roots, query, top_k);
+}
 
-    const std::string qlower = [&]() {
-        std::string s = query;
-        std::transform(s.begin(), s.end(), s.begin(),
-                       [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-        return s;
-    }();
-
-    auto consider = [&](const fs::path& file) {
-        if(!file.has_extension() || (file.extension() != ".md" && file.extension() != ".txt"))
-            return;
-        std::ifstream in(file);
-        std::string line;
-        std::string excerpt;
-        while(std::getline(in, line) && excerpt.size() < 400)
-            excerpt += line + "\n";
-        std::string lower = excerpt;
-        std::transform(lower.begin(), lower.end(), lower.begin(),
-                       [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
-        if(lower.find(qlower) == std::string::npos && file.filename().string().find(query) ==
-                                                         std::string::npos)
-            return;
-        RDK::LLM::DocSnippet sn;
-        sn.path = file.string();
-        sn.title = file.filename().string();
-        sn.excerpt = excerpt.substr(0, 400);
-        sn.score = 0.5;
-        out.push_back(std::move(sn));
-    };
-
-    for(const fs::path& root : roots)
-    {
-        if(!fs::exists(root))
-            continue;
-        for(auto it = fs::recursive_directory_iterator(root);
-            it != fs::recursive_directory_iterator(); ++it)
-        {
-            if(it->is_regular_file())
-                consider(it->path());
-            if(static_cast<int>(out.size()) >= top_k)
-                break;
-        }
-        if(static_cast<int>(out.size()) >= top_k)
-            break;
-    }
-    return out;
+void NmsdkLlmProjectContext::registerExtraTools(RDK::LLM::ULLMToolRegistry& registry)
+{
+    RegisterHardwareLibLlmTools(registry, this);
 }

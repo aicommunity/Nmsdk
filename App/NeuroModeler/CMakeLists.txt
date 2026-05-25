@@ -164,6 +164,7 @@ if(RDK_USE_LLM)
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmProjectContext.cpp
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkRegisterLlm.cpp
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmSettings.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/Llm/RegisterHardwareLibLlmTools.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/LlmGuiBootstrap.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmQtProviderSettingsSource.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmProviderSettingsWidget.cpp

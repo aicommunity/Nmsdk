@@ -19,6 +19,7 @@ public:
                                const std::string& locale = "ru-RU") const override;
     std::vector<RDK::LLM::DocSnippet> searchDocs(const std::string& query, int top_k = 5,
                                                  int max_chars = 8000) const override;
+    void registerExtraTools(RDK::LLM::ULLMToolRegistry& registry) override;
 
 private:
     RDK::UApplication* m_app;
