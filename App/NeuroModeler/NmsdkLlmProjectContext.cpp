@@ -115,9 +115,10 @@ std::vector<RDK::LLM::DocSnippet> NmsdkLlmProjectContext::searchDocs(const std::
     return RDK::LLM::searchDocsWithIndex(roots, query, top_k);
 }
 
-void NmsdkLlmProjectContext::registerExtraTools(RDK::LLM::ULLMToolRegistry& registry)
+void NmsdkLlmProjectContext::registerExtraTools(RDK::LLM::ULLMToolRegistry& registry,
+                                              RDK::LLM::URdkDomainAccess& domain)
 {
-    RegisterHardwareLibLlmTools(registry, this);
-    RegisterPulseLibLlmTools(registry, this);
-    RegisterMotionControlLibLlmTools(registry, this);
+    RegisterHardwareLibLlmTools(registry, this, domain);
+    RegisterPulseLibLlmTools(registry, this, domain);
+    RegisterMotionControlLibLlmTools(registry, this, domain);
 }
