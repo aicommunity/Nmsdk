@@ -1,5 +1,6 @@
 #include "NmsdkBuiltinKnowledgeCatalog.h"
 
+#include <chrono>
 #include <cstdlib>
 #include <sstream>
 
@@ -143,7 +144,23 @@ std::string NmsdkBuiltinKnowledgeCatalog::catalogFingerprint() const
 {
     std::ostringstream oss;
     for(const LLMKnowledgeSource& source : sources())
-        oss << source.source_id << '|' << source.root.string() << '\n';
+    {
+        oss << source.source_id << '|' << source.root.string();
+        std::error_code ec;
+        if(std::filesystem::exists(source.root, ec))
+        {
+            const auto mtime = std::filesystem::last_write_time(source.root, ec);
+            if(!ec)
+            {
+                const auto sec =
+                    std::chrono::duration_cast<std::chrono::seconds>(
+                        mtime.time_since_epoch())
+                        .count();
+                oss << '|' << sec;
+            }
+        }
+        oss << '\n';
+    }
     const std::size_t h = std::hash<std::string>{}(oss.str());
     std::ostringstream hex;
     hex << std::hex << h;
