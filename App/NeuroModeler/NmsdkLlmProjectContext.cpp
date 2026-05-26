@@ -1,3 +1,4 @@
+#include "NmsdkBuiltinKnowledgeCatalog.h"
 #include "NmsdkLlmProjectContext.h"
 
 #include <algorithm>
@@ -59,11 +60,7 @@ RDK::LLM::ProjectPaths NmsdkLlmProjectContext::paths() const
 
 std::vector<RDK::LLM::LibraryDescriptor> NmsdkLlmProjectContext::loadedLibraries() const
 {
-    return {{"Rdk-BasicLib", "BasicLibrary"},
-            {"Rdk-CvBasicLib", "CvBasicLibrary"},
-            {"Rdk-HardwareLib", "HardwareLibrary"},
-            {"Nmsdk-PulseLib", "PulseLibrary"},
-            {"Nmsdk-MotionControlLib", "MotionControlLibrary"}};
+    return NmsdkBuiltinKnowledgeCatalog::loadedLibraries();
 }
 
 std::string NmsdkLlmProjectContext::clDescFragment(const std::string& class_name,

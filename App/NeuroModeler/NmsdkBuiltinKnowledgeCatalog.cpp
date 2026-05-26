@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <cstdlib>
+#include <fstream>
 #include <sstream>
 
 #include <rdk_application.h>
@@ -168,4 +169,49 @@ std::string NmsdkBuiltinKnowledgeCatalog::catalogFingerprint() const
     if(fp.size() > 16)
         fp.resize(16);
     return fp;
+}
+
+std::vector<RDK::LLM::LibraryDescriptor> NmsdkBuiltinKnowledgeCatalog::loadedLibraries()
+{
+    return {{"Rdk-BasicLib", "BasicLibrary"},
+            {"Rdk-CvBasicLib", "CvBasicLibrary"},
+            {"Rdk-HardwareLib", "HardwareLibrary"},
+            {"Nmsdk-PulseLib", "PulseLibrary"},
+            {"Nmsdk-MotionControlLib", "MotionControlLibrary"}};
+}
+
+bool NmsdkBuiltinKnowledgeCatalog::writeLlmsTxt(const std::filesystem::path& repository_root) const
+{
+    const std::filesystem::path out_path = repository_root / "Docs/llms.txt";
+    std::error_code ec;
+    std::filesystem::create_directories(out_path.parent_path(), ec);
+
+    std::ofstream out(out_path);
+    if(!out)
+        return false;
+
+    out << "# NMSdk knowledge sources (generated; run llm-index-pack to refresh)\n\n";
+    out << "Product documentation and C++ sources indexed for the AI assistant "
+           "(`search_project_docs`).\n\n";
+
+    out << "## Libraries (ClDesc)\n";
+    for(const RDK::LLM::LibraryDescriptor& lib : loadedLibraries())
+        out << "- " << lib.library_id << " → Bin/ClDesc/" << lib.cl_desc_folder << "\n";
+
+    out << "\n## Indexed roots\n";
+    for(const LLMKnowledgeSource& source : sources())
+    {
+        std::error_code ec;
+        std::string rel =
+            std::filesystem::relative(source.root, m_repository_root, ec).string();
+        if(ec)
+            rel = source.root.string();
+        for(char& c : rel)
+        {
+            if(c == '\\')
+                c = '/';
+        }
+        out << "- **" << source.source_id << "**: `" << rel << "`\n";
+    }
+    return true;
 }
