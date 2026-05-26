@@ -195,7 +195,6 @@
         "RDK_UNICODE_RUN": "OFF"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       }
     },
@@ -242,46 +241,54 @@
     {
       "name": "win-vs2019-debug",
       "configurePreset": "win-vs2019-debug",
-      "displayName": "Build Windows VS2019 Ninja Debug"
+      "displayName": "Build Windows VS2019 Ninja Debug",
+      "jobs": 8
     },
     {
       "name": "win-vs2019-release",
       "configurePreset": "win-vs2019-release",
-      "displayName": "Build Windows VS2019 Ninja Release"
+      "displayName": "Build Windows VS2019 Ninja Release",
+      "jobs": 8
     },
     {
       "name": "win-vs2019-debug-localqt",
       "configurePreset": "win-vs2019-debug-localqt",
-      "displayName": "Build Windows VS2019 Debug (Qt 5.15.2 from C:\\Qt)"
+      "displayName": "Build Windows VS2019 Debug (Qt 5.15.2 from C:\\Qt)",
+      "jobs": 8
     },
     {
       "name": "win-vs2019-release-localqt",
       "configurePreset": "win-vs2019-release-localqt",
-      "displayName": "Build Windows VS2019 Release (Qt 5.15.2 from C:\\Qt)"
+      "displayName": "Build Windows VS2019 Release (Qt 5.15.2 from C:\\Qt)",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-debug",
       "configurePreset": "win-vs2022-debug",
       "displayName": "Build Windows VS2022 Debug",
-      "configuration": "Debug"
+      "configuration": "Debug",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-release",
       "configurePreset": "win-vs2022-release",
       "displayName": "Build Windows VS2022 Release",
-      "configuration": "Release"
+      "configuration": "Release",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-debug-vcpkgqt",
       "configurePreset": "win-vs2022-debug-vcpkgqt",
       "displayName": "Build Windows VS2022 Debug (Qt from vcpkg)",
-      "configuration": "Debug"
+      "configuration": "Debug",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-release-vcpkgqt",
       "configurePreset": "win-vs2022-release-vcpkgqt",
       "displayName": "Build Windows VS2022 Release (Qt from vcpkg)",
-      "configuration": "Release"
+      "configuration": "Release",
+      "jobs": 8
     },
     {
       "name": "linux-gcc-debug",
