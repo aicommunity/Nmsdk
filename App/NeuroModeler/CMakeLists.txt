@@ -161,6 +161,7 @@ endif()
 
 if(RDK_USE_LLM)
   target_sources(NeuroModeler PRIVATE
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkBuiltinKnowledgeCatalog.cpp
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmProjectContext.cpp
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkRegisterLlm.cpp
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmSettings.cpp

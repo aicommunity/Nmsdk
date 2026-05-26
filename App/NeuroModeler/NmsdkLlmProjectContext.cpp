@@ -12,6 +12,7 @@
 #include "../../Libraries/Nmsdk-PulseLib/Llm/RegisterPulseLibLlmTools.h"
 #include "../../Libraries/Nmsdk-MotionControlLib/Llm/RegisterMotionControlLibLlmTools.h"
 #include "../../Rdk/LLM/Core/Context/UDocSearchIndex.h"
+#include "../../Rdk/LLM/Core/LlmPublicApi.h"
 
 namespace fs = std::filesystem;
 
@@ -102,6 +103,10 @@ std::vector<RDK::LLM::DocSnippet> NmsdkLlmProjectContext::searchDocs(const std::
                                                                     int top_k,
                                                                     int) const
 {
+    if(RDK::LLM::LLMServices::instance().isInitialized()
+       && !RDK::LLM::LLMServices::instance().searchIndex().empty())
+        return RDK::LLM::LLMServices::instance().searchIndex().searchWithScope(query, top_k, "docs");
+
     const auto project_paths = paths();
     std::vector<fs::path> roots;
     roots.push_back(project_paths.docs_root);

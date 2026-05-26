@@ -2,6 +2,7 @@
 
 #ifdef RDK_USE_LLM
 
+#include "NmsdkBuiltinKnowledgeCatalog.h"
 #include "NmsdkLlmProjectContext.h"
 #include "NmsdkLlmSettings.h"
 
@@ -23,8 +24,9 @@ void NmsdkRegisterLlm(UGEngineControlWidget* host, RDK::UApplication* app)
         return;
 
     g_project_context = std::make_unique<NmsdkLlmProjectContext>(app);
+    auto catalog = std::make_unique<NmsdkBuiltinKnowledgeCatalog>(app);
     RDK::LLM::LLMServices::instance().initialize(app, g_project_context.get(),
-                                                 &NmsdkLlmSettingsSource());
+                                                 &NmsdkLlmSettingsSource(), std::move(catalog));
 
     g_bridge = new ULlmGuiContextBridge(app, host);
     RDK::LLM::LLMServices::instance().setPresentationSink(
