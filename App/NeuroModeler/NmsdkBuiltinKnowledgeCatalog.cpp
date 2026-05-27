@@ -7,6 +7,8 @@
 
 #include <rdk_application.h>
 
+#include "../../Rdk/LLM/Core/Knowledge/ILLMYamlKnowledgeCatalog.h"
+
 namespace {
 
 using RDK::LLM::LLMKnowledgeKind;
@@ -44,6 +46,18 @@ std::filesystem::path detectRepositoryRoot(const std::string& work_dir)
         p = p.parent_path();
     }
     return std::filesystem::path(work_dir);
+}
+
+std::filesystem::path resolveYamlManifestPath(const std::filesystem::path& repository_root)
+{
+    if(const char* env = std::getenv("NMSDK_LLM_KNOWLEDGE_CATALOG_YAML"))
+    {
+        std::filesystem::path p(env);
+        if(p.is_relative())
+            p = repository_root / p;
+        return p;
+    }
+    return repository_root / "Docs/llm-knowledge.yaml";
 }
 
 } // namespace
@@ -133,17 +147,36 @@ std::vector<LLMKnowledgeSource> NmsdkBuiltinKnowledgeCatalog::sources() const
                    LLMKnowledgeKind::LibraryDocs, {".md"}));
     add(makeSource("bin.docs", root("Bin/Docs"), LLMKnowledgeKind::BinDocs, {".md"}));
 
+    const std::filesystem::path yaml_manifest = resolveYamlManifestPath(m_repository_root);
+    if(std::filesystem::is_regular_file(yaml_manifest))
+    {
+        if(const auto yaml_catalog = RDK::LLM::UYamlKnowledgeCatalog::load(
+               yaml_manifest, m_repository_root, nullptr))
+        {
+            for(const LLMKnowledgeSource& src : yaml_catalog->sources())
+                add(src);
+        }
+    }
+
     return out;
 }
 
 std::filesystem::path NmsdkBuiltinKnowledgeCatalog::prebuiltIndexDirectory() const
 {
+    const std::filesystem::path yaml_manifest = resolveYamlManifestPath(m_repository_root);
+    if(std::filesystem::is_regular_file(yaml_manifest))
+    {
+        if(const auto yaml_catalog = RDK::LLM::UYamlKnowledgeCatalog::load(
+               yaml_manifest, m_repository_root, nullptr))
+            return yaml_catalog->prebuiltIndexDirectory();
+    }
     return m_repository_root / "Bin/LLM/index";
 }
 
 std::string NmsdkBuiltinKnowledgeCatalog::catalogFingerprint() const
 {
     std::ostringstream oss;
+    const std::filesystem::path yaml_manifest = resolveYamlManifestPath(m_repository_root);
     for(const LLMKnowledgeSource& source : sources())
     {
         oss << source.source_id << '|' << source.root.string();
@@ -161,6 +194,17 @@ std::string NmsdkBuiltinKnowledgeCatalog::catalogFingerprint() const
             }
         }
         oss << '\n';
+    }
+    if(std::filesystem::is_regular_file(yaml_manifest))
+    {
+        std::error_code ec;
+        const auto mtime = std::filesystem::last_write_time(yaml_manifest, ec);
+        if(!ec)
+        {
+            const auto sec =
+                std::chrono::duration_cast<std::chrono::seconds>(mtime.time_since_epoch()).count();
+            oss << "yaml_manifest|" << yaml_manifest.string() << '|' << sec << '\n';
+        }
     }
     const std::size_t h = std::hash<std::string>{}(oss.str());
     std::ostringstream hex;
