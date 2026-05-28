@@ -7,4 +7,6 @@ cmake --build "${BUILD_DIR}" --target rdk.llm.core NeuroModeler llm_audit_verify
 ctest --test-dir "${BUILD_DIR}/Rdk/Tests/Unit/LLM" --output-on-failure
 # P0/P1 agentic-risk matrix (Post-Audit Phase 2)
 BUILD_DIR="${BUILD_DIR}" "${ROOT}/Scripts/ci-llm-agentic-risk.sh"
+# Agent scenario matrix (deterministic + optional e2e)
+BUILD_DIR="${BUILD_DIR}" "${ROOT}/Scripts/ci-llm-agent-scenarios.sh"
 # Hash-chain coverage: Test_LLM_AuditChain (in-process ULLMAuditLog)
