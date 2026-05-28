@@ -21,6 +21,7 @@
         "RDK_USE_PYTHON": "OFF",
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_LLM_BUILD_EMBEDDED": "OFF",
         "RDK_UNICODE_RUN": "OFF"
       },
       "environment": {
@@ -62,6 +63,7 @@
         "RDK_USE_PYTHON": "OFF",
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_LLM_BUILD_EMBEDDED": "OFF",
         "RDK_UNICODE_RUN": "OFF"
       },
       "environment": {
@@ -71,15 +73,29 @@
     },
     {
       "name": "win-vs2019-debug",
-      "hidden": true,
+      "displayName": "Windows VS2019 Ninja Debug",
       "inherits": [ "win-vs2019-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
+        "QT_VERSION_MAJOR": "5",
+        "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
+        "VCPKG_MANIFEST_FEATURES": "llm"
+      }
     },
     {
       "name": "win-vs2019-release",
-      "hidden": true,
+      "displayName": "Windows VS2019 Ninja Release",
       "inherits": [ "win-vs2019-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
+        "QT_VERSION_MAJOR": "5",
+        "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
+        "VCPKG_MANIFEST_FEATURES": "llm"
+      }
     },
     {
       "name": "win-vs2019-debug-localqt",
@@ -90,7 +106,7 @@
         "QT_VERSION_MAJOR": "5",
         "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
         "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
-        "VCPKG_MANIFEST_FEATURES": ""
+        "VCPKG_MANIFEST_FEATURES": "llm"
       }
     },
     {
@@ -102,7 +118,7 @@
         "QT_VERSION_MAJOR": "5",
         "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
         "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
-        "VCPKG_MANIFEST_FEATURES": ""
+        "VCPKG_MANIFEST_FEATURES": "llm"
       }
     },
     {
@@ -164,7 +180,7 @@
       "cacheVariables": {
         "NMSDK_FORCE_QT_FROM_VCPKG": "ON",
         "QT_VERSION_MAJOR": "6",
-        "VCPKG_MANIFEST_FEATURES": "qt"
+        "VCPKG_MANIFEST_FEATURES": "qt;llm"
       }
     },
     {
@@ -174,7 +190,7 @@
       "cacheVariables": {
         "NMSDK_FORCE_QT_FROM_VCPKG": "ON",
         "QT_VERSION_MAJOR": "6",
-        "VCPKG_MANIFEST_FEATURES": "qt"
+        "VCPKG_MANIFEST_FEATURES": "qt;llm"
       }
     },
     {

@@ -36,6 +36,11 @@ set(CMAKE_AUTORCC ON)
 # Common settings for MSVC runtime (DLL) — consistent for all targets
 if (MSVC)
   set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL" CACHE STRING "" FORCE)
+  # VS2019 + C++20: make u8 literals compatible with third-party code
+  # expecting const char* (for example llama.cpp b4533).
+  if(MSVC_VERSION LESS 1930)
+    add_compile_options(/Zc:char8_t-)
+  endif()
 endif()
 
 # Force Qt to be taken only from vcpkg on Windows
