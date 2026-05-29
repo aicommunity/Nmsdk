@@ -19,6 +19,12 @@ fi
 echo "ci-llm-agent-scenarios: deterministic suite"
 "${EXE}" --gtest_filter='Deterministic/*:AgentScenarioLoader.*:AgentScenarioEvalUnit.*'
 
+FREE_DIALOGUE="${BIN_DIR}/Test_LLM_FreeDialogueCorpus"
+if [[ -x "${FREE_DIALOGUE}" ]]; then
+  echo "ci-llm-agent-scenarios: free-dialogue corpus (mock)"
+  "${FREE_DIALOGUE}"
+fi
+
 echo "ci-llm-agent-scenarios: e2e suite (GTEST_SKIP when lab unreachable)"
 set +e
 "${EXE}" --gtest_filter='E2e/*'

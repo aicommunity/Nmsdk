@@ -17,6 +17,9 @@ struct LlmWriteToolsEngineContext {
 /// Console-like core init + optional open project. Skips test when init fails.
 const LlmWriteToolsEngineContext& EnsureLlmWriteToolsEngine();
 
+/// Tear down engine before process exit (avoids UAppCore destructor SIGSEGV in gtest).
+void ShutdownLlmWriteToolsEngine();
+
 std::string testValidProjectIniPath();
 
 } // namespace NmsdkTests

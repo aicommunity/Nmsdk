@@ -26,7 +26,7 @@ using AppCoreType = RDK::UAppCore<
 
 LlmWriteToolsEngineContext g_ctx;
 bool g_tried = false;
-AppCoreType g_appCore;
+AppCoreType* g_appCore = nullptr;
 
 #ifdef CMAKE_SOURCE_DIR
 constexpr const char* kSourceRoot = CMAKE_SOURCE_DIR;
@@ -67,12 +67,14 @@ const LlmWriteToolsEngineContext& EnsureLlmWriteToolsEngine()
 
     Core_SetSystemDir(bin.string().c_str());
 
-    const int initRes = g_appCore.Init(console_exe.string(), ini.string(), std::string(), "TestUser",
-                                     0, nullptr);
+    if(!g_appCore)
+        g_appCore = new AppCoreType();
+    const int initRes = g_appCore->Init(console_exe.string(), ini.string(), std::string(), "TestUser",
+                                      0, nullptr);
     if(initRes != 0)
         return g_ctx;
 
-    g_ctx.application = &g_appCore.application;
+    g_ctx.application = &g_appCore->application;
     g_ctx.initialized = true;
 
     const std::string project_ini = testValidProjectIniPath();
@@ -83,6 +85,20 @@ const LlmWriteToolsEngineContext& EnsureLlmWriteToolsEngine()
     }
 
     return g_ctx;
+}
+
+void ShutdownLlmWriteToolsEngine()
+{
+    if(g_ctx.application && g_ctx.application->GetProjectOpenFlag())
+        g_ctx.application->CloseProject();
+    g_ctx.application = nullptr;
+    g_ctx.initialized = false;
+    if(g_appCore)
+    {
+        delete g_appCore;
+        g_appCore = nullptr;
+    }
+    g_tried = false;
 }
 
 } // namespace NmsdkTests
