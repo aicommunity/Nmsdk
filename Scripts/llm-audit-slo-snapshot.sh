@@ -27,9 +27,15 @@ with open(path, encoding="utf-8") as f:
         if event in {
             "task_completed",
             "task_failed",
+            "task_plan_hint",
+            "task_plan_fallback_to_agent",
             "false_execution_prevented",
             "escalation_to_hitl",
             "intent_ambiguity_blocked",
+            "ask_user_issued",
+            "ask_user_answered",
+            "unified_turn_started",
+            "unified_turn_completed",
         }:
             counts[event] = counts.get(event, 0) + 1
 
