@@ -3,3 +3,7 @@ audit/*.jsonl
 sessions/*.json
 !audit/.gitkeep
 !sessions/.gitkeep
+
+# Dev doc/source search cache (generated at runtime or by llm-index-pack → Bin/LLM/index).
+index/*
+!index/README.md
