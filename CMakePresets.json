@@ -64,11 +64,12 @@
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
         "RDK_LLM_BUILD_EMBEDDED": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
+        "RDK_UNICODE_RUN": "OFF",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
-        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       }
     },
     {
@@ -144,11 +145,12 @@
         "RDK_USE_PYTHON": "OFF",
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
+        "RDK_UNICODE_RUN": "OFF",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
+        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
-        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -208,9 +210,8 @@
         "RDK_USE_PYTHON": "OFF",
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
-      },
-      "environment": {
+        "RDK_UNICODE_RUN": "OFF",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       }
     },

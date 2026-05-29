@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 
+# Qt Creator: skip package-manager auto-setup on every project() (googletest, etc.).
+# Windows vcpkg: use CMAKE_TOOLCHAIN_FILE from presets, not Qt Creator wrapper.
+if(NOT QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP)
+  set(QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP ON CACHE BOOL
+    "Skip Qt Creator package manager auto-setup" FORCE)
+endif()
+
 # Normalize vcpkg toolchain file path (Windows only)
 # This must be BEFORE project(), because CMAKE_TOOLCHAIN_FILE is used during project initialization
 if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/NormalizeVcpkgPath.cmake")
