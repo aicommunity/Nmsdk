@@ -7,6 +7,11 @@
 
 namespace {
 
+char firmataByte(unsigned value)
+{
+    return static_cast<char>(static_cast<unsigned char>(value));
+}
+
 QByteArray firmwareSysex()
 {
     return QByteArray::fromHex("F079020106F7");
@@ -15,34 +20,34 @@ QByteArray firmwareSysex()
 QByteArray capabilitySysexUno()
 {
     QByteArray payload;
-    payload.append(char(0x6C));
+    payload.append(firmataByte(0x6C));
     for (int pin = 0; pin < 20; ++pin) {
         Q_UNUSED(pin);
-        payload.append(char(0x00));
-        payload.append(char(0x01));
-        payload.append(char(0x7F));
+        payload.append(firmataByte(0x00));
+        payload.append(firmataByte(0x01));
+        payload.append(firmataByte(0x7F));
     }
     QByteArray msg;
-    msg.append(char(0xF0));
+    msg.append(firmataByte(0xF0));
     msg.append(payload);
-    msg.append(char(0xF7));
+    msg.append(firmataByte(0xF7));
     return msg;
 }
 
 QByteArray analogMappingSysex()
 {
     QByteArray payload;
-    payload.append(char(0x6A));
+    payload.append(firmataByte(0x6A));
     for (int pin = 0; pin < 20; ++pin) {
         if (pin >= 14)
             payload.append(char(pin - 14));
         else
-            payload.append(char(127));
+            payload.append(firmataByte(127));
     }
     QByteArray msg;
-    msg.append(char(0xF0));
+    msg.append(firmataByte(0xF0));
     msg.append(payload);
-    msg.append(char(0xF7));
+    msg.append(firmataByte(0xF7));
     return msg;
 }
 
@@ -92,17 +97,17 @@ TEST(ArduinoFirmataClient, MegaAnalogPin54UsesMapping)
 {
     RDK::UArduinoFirmataClient client;
     QByteArray payload;
-    payload.append(char(0x6A));
+    payload.append(firmataByte(0x6A));
     for (int pin = 0; pin < 70; ++pin) {
         if (pin == 54)
             payload.append(char(0));
         else
-            payload.append(char(127));
+            payload.append(firmataByte(127));
     }
     QByteArray msg;
-    msg.append(char(0xF0));
+    msg.append(firmataByte(0xF0));
     msg.append(payload);
-    msg.append(char(0xF7));
+    msg.append(firmataByte(0xF7));
 
     client.reset();
     client.setBoardProfile(1);
@@ -137,29 +142,29 @@ TEST(ArduinoFirmataClient, PinStateResponseUpdatesDigitalAndAnalog)
     client.PortDigitalMask.fill(0);
 
     QByteArray payload;
-    payload.append(char(0x6E));
+    payload.append(firmataByte(0x6E));
     payload.append(char(13));
     payload.append(char(1));
     payload.append(char(1));
     payload.append(char(0));
     QByteArray msg;
-    msg.append(char(0xF0));
+    msg.append(firmataByte(0xF0));
     msg.append(payload);
-    msg.append(char(0xF7));
+    msg.append(firmataByte(0xF7));
     client.processIncoming(msg);
     EXPECT_EQ(client.digitalValue(13), 1);
     EXPECT_EQ(client.deviceModeForPin(13), 1);
 
     QByteArray analog_payload;
-    analog_payload.append(char(0x6E));
+    analog_payload.append(firmataByte(0x6E));
     analog_payload.append(char(14));
     analog_payload.append(char(2));
     analog_payload.append(char(100));
     analog_payload.append(char(0));
     QByteArray analog_msg;
-    analog_msg.append(char(0xF0));
+    analog_msg.append(firmataByte(0xF0));
     analog_msg.append(analog_payload);
-    analog_msg.append(char(0xF7));
+    analog_msg.append(firmataByte(0xF7));
     client.processIncoming(analog_msg);
     EXPECT_EQ(client.analogValueForChannel(0), 100);
 }
@@ -168,13 +173,13 @@ TEST(ArduinoFirmataClient, I2cReplyStored)
 {
     RDK::UArduinoFirmataClient client;
     QByteArray payload;
-    payload.append(char(0x77));
-    payload.append(char(0xAB));
-    payload.append(char(0xCD));
+    payload.append(firmataByte(0x77));
+    payload.append(firmataByte(0xAB));
+    payload.append(firmataByte(0xCD));
     QByteArray msg;
-    msg.append(char(0xF0));
+    msg.append(firmataByte(0xF0));
     msg.append(payload);
-    msg.append(char(0xF7));
+    msg.append(firmataByte(0xF7));
     client.processIncoming(msg);
     EXPECT_EQ(client.lastI2cReadData().size(), 2);
     EXPECT_EQ(static_cast<uint8_t>(client.lastI2cReadData().at(0)), 0xAB);

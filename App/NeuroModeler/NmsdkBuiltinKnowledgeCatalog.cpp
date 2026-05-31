@@ -245,7 +245,7 @@ bool NmsdkBuiltinKnowledgeCatalog::writeLlmsTxt(const std::filesystem::path& rep
     out << "\n## Indexed roots\n";
     for(const LLMKnowledgeSource& source : sources())
     {
-        std::error_code ec;
+        ec.clear();
         std::string rel =
             std::filesystem::relative(source.root, m_repository_root, ec).string();
         if(ec)
