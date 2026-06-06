@@ -54,6 +54,12 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/App/NeuroModeler/main.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UAboutDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UHelpWindow.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentFormRegistry.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiService.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiDndPayload.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiTabHostWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGenericComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiBootstrap.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGEngineControlWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMatrixFormDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerMainWidget.cpp
@@ -67,6 +73,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchTab.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentsListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentsListWidgetModern.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UEngineSelectionSync.cpp
   ${UI_FILE_NORMALIZED}
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UBreadcrumbsWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerWidget.cpp
@@ -117,6 +124,17 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramTooltipGenerator.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramContextMenu.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStyleManager.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlComponentGuiRegistration.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlManipulatorComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlAstaticGyroComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/GUI/Qt/MotionControlNewPositionControlElementControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibComponentGuiRegistration.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibNeuronTrainerComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/GUI/Qt/PulseLibNeuronLearnerComponentControllerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/GUI/Qt/BasicLibComponentGuiRegistration.cpp
+  ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/GUI/Qt/CvBasicLibComponentGuiRegistration.cpp
 )
 
 # Explicitly state that the UI file must be processed only once
@@ -142,6 +160,38 @@ else()
   target_compile_options(NeuroModeler PRIVATE -include ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NeuroModelerAppDefs.h)
 endif()
 
+if(RDK_USE_LLM)
+  target_sources(NeuroModeler PRIVATE
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkBuiltinKnowledgeCatalog.cpp
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmProjectContext.cpp
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkRegisterLlm.cpp
+    ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmSettings.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/Llm/RegisterHardwareLibLlmTools.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Llm/RegisterPulseLibLlmTools.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/Llm/RegisterMotionControlLibLlmTools.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/LlmGuiBootstrap.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmGuiLocale.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmQtProviderSettingsSource.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmProviderSettingsWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmAssistantDockWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChatHistoryArchive.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChatHistoryDialog.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChangePreviewWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmGuiContextBridge.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmQtPresentationSink.cpp
+  )
+  target_compile_definitions(NeuroModeler PRIVATE RDK_USE_LLM=1)
+  target_include_directories(NeuroModeler PRIVATE
+    ${CMAKE_SOURCE_DIR}/Rdk/LLM/Core
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm
+  )
+  target_link_libraries(NeuroModeler PRIVATE rdk.llm.core)
+  if(RDK_LLM_BUILD_EMBEDDED)
+    target_include_directories(NeuroModeler PRIVATE ${CMAKE_SOURCE_DIR}/Rdk/LLM/Embedded)
+    target_compile_definitions(NeuroModeler PRIVATE RDK_LLM_EMBEDDED=1)
+  endif()
+endif()
+
 target_link_libraries(NeuroModeler
   PRIVATE
     Nmsdk::Qt::Core
@@ -159,6 +209,7 @@ target_link_libraries(NeuroModeler
     Rdk-CvBasicLib.qt
     Rdk-BasicLib.qt
     Rdk-HardwareLib.qt
+    Rdk-HardwareLib.gui
     Nmsdk-PulseLib.qt
     Nmsdk-MotionControlLib.qt
     rdk.static.qt
@@ -394,4 +445,9 @@ if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
     else()
         message(WARNING "Cannot find Qt5::qmake to locate Qt WebEngine files")
     endif()
+endif()
+
+# rdk.llm.embedded after other libs so EnsureEmbeddedLlamaProviderRegistered resolves.
+if(RDK_USE_LLM AND RDK_LLM_BUILD_EMBEDDED)
+  target_link_libraries(NeuroModeler PRIVATE rdk.llm.embedded)
 endif()

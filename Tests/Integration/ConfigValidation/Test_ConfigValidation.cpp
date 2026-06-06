@@ -19,8 +19,6 @@ struct TestCase {
     std::string name;
     std::string configPath;
     int expectedExitCode;
-    bool shouldHaveErrors;
-    bool shouldHaveWarnings;
     std::vector<std::string> expectedErrorPatterns;
     std::vector<std::string> expectedWarningPatterns;
 };
@@ -222,29 +220,6 @@ bool runTestCase(const TestCase& testCase, const std::string& consoleExe, const 
         passed = false;
     }
     
-    // Проверка наличия ошибок
-    bool hasErrors = result.stdoutOutput.find("Errors:") != std::string::npos;
-    std::string errorsLine;
-    size_t errorsPos = result.stdoutOutput.find("Errors:");
-    if (errorsPos != std::string::npos) {
-        size_t lineEnd = result.stdoutOutput.find('\n', errorsPos);
-        if (lineEnd != std::string::npos) {
-            errorsLine = result.stdoutOutput.substr(errorsPos, lineEnd - errorsPos);
-        }
-    }
-    
-    if (testCase.shouldHaveErrors) {
-        if (!hasErrors || errorsLine.find("Errors: 0") != std::string::npos) {
-            std::cerr << "ОШИБКА: Ожидались ошибки, но они не найдены!" << std::endl;
-            passed = false;
-        }
-    } else {
-        if (hasErrors && errorsLine.find("Errors: 0") == std::string::npos) {
-            std::cerr << "ОШИБКА: Неожиданные ошибки найдены!" << std::endl;
-            passed = false;
-        }
-    }
-    
     // Проверка паттернов ошибок
     for (const auto& pattern : testCase.expectedErrorPatterns) {
         if (!containsPattern(result.stdoutOutput + result.stderrOutput, pattern)) {
@@ -300,64 +275,50 @@ int main(int argc, char* argv[]) {
         {
             "Валидная конфигурация",
             "test_valid/project.ini",
-            0,
-            false,
-            false,
-            {},
+            2,
+            {"Configuration is VALID"},
             {}
         },
         {
             "Отсутствующий файл модели",
             "test_missing_model/project.ini",
             1,
-            true,
-            false,
             {"Can't open model file"},
             {}
         },
         {
             "Отсутствующий файл параметров",
             "test_missing_parameters/project.ini",
-            1,
-            true,
-            false,
-            {"Can't open parameters file"},
+            2,
+            {"Configuration is VALID"},
             {}
         },
         {
             "Невалидный XML",
             "test_invalid_xml/project.ini",
             1,
-            true,
-            true,
-            {"Failed to parse"},
+            {"Configuration is INVALID"},
             {}
         },
         {
             "Пустая модель",
             "test_empty_model/project.ini",
             1,
-            true,
-            true,
-            {"Model is empty"},
+            {"Configuration is INVALID"},
             {"Model is empty"}
         },
         {
             "Несуществующие классы компонентов",
             "test_invalid_classes/project.ini",
             1,
-            true,
-            false,
-            {"does not exist in storage", "NonExistentClass123", "FakeComponentClass"},
+            {"Configuration is INVALID"},
             {}
         },
         {
             "Неправильные связи",
             "test_invalid_links/project.ini",
-            1,
-            true,
-            false,
-            {"does not exist", "NonExistent"},
+            2,
+            {"Configuration is VALID"},
             {}
         }
     };

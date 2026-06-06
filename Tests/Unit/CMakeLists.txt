@@ -9,3 +9,6 @@ add_subdirectory(System)
 # Unit tests for Math
 add_subdirectory(Math)
 
+# HardwareLib
+add_subdirectory(HardwareLib)
+

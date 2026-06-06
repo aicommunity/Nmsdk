@@ -1,10 +1,27 @@
 {
-  "version": 6,
+  "version": 3,
   "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
   "configurePresets": [
     {
+      "name": "nmsdk-global-defaults",
+      "hidden": true,
+      "cacheVariables": {
+        "RDK_USE_ODESOLVER": "OFF",
+        "RDK_USE_PYTHON": "OFF",
+        "RDK_USE_DARKNET": "OFF",
+        "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_LLM_BUILD_EMBEDDED": "OFF",
+        "RDK_UNICODE_RUN": "ON",
+        "NO_MOTION_CONTROL": "ON"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
+      }
+    },
+    {
       "name": "win-msvc-base",
       "hidden": true,
+      "inherits": [ "nmsdk-global-defaults" ],
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -16,15 +33,9 @@
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
         "VCPKG_OVERLAY_PORTS": "${sourceDir}/vcpkg-overlay-ports",
-        "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
+        "BUILD_SHARED_LIBS": "OFF"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
         "VCINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC",
         "VSINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community"
       }
@@ -44,6 +55,7 @@
     {
       "name": "win-vs2019-base",
       "hidden": true,
+      "inherits": [ "nmsdk-global-defaults" ],
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -58,28 +70,35 @@
         "VCPKG_TARGET_TRIPLET": "x64-windows-v142",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-overlay-triplets",
         "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       }
     },
     {
       "name": "win-vs2019-debug",
-      "hidden": true,
+      "displayName": "Windows VS2019 Ninja Debug",
       "inherits": [ "win-vs2019-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
+        "QT_VERSION_MAJOR": "5",
+        "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
+        "VCPKG_MANIFEST_FEATURES": "llm"
+      }
     },
     {
       "name": "win-vs2019-release",
-      "hidden": true,
+      "displayName": "Windows VS2019 Ninja Release",
       "inherits": [ "win-vs2019-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
+        "QT_VERSION_MAJOR": "5",
+        "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
+        "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
+        "VCPKG_MANIFEST_FEATURES": "llm"
+      }
     },
     {
       "name": "win-vs2019-debug-localqt",
@@ -90,7 +109,7 @@
         "QT_VERSION_MAJOR": "5",
         "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
         "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
-        "VCPKG_MANIFEST_FEATURES": ""
+        "VCPKG_MANIFEST_FEATURES": "llm"
       }
     },
     {
@@ -102,12 +121,13 @@
         "QT_VERSION_MAJOR": "5",
         "Qt5_DIR": "C:/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5",
         "CMAKE_PREFIX_PATH": "C:/Qt/5.15.2/msvc2019_64",
-        "VCPKG_MANIFEST_FEATURES": ""
+        "VCPKG_MANIFEST_FEATURES": "llm"
       }
     },
     {
       "name": "win-vs2022-base",
       "hidden": true,
+      "inherits": [ "nmsdk-global-defaults" ],
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -124,14 +144,7 @@
         "VCPKG_OVERLAY_PORTS": "${sourceDir}/vcpkg-overlay-ports",
         "CMAKE_VS_GENERATE_DEVENV_LAUNCHER": "ON",
         "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       },
       "vendor": {
@@ -164,7 +177,7 @@
       "cacheVariables": {
         "NMSDK_FORCE_QT_FROM_VCPKG": "ON",
         "QT_VERSION_MAJOR": "6",
-        "VCPKG_MANIFEST_FEATURES": "qt"
+        "VCPKG_MANIFEST_FEATURES": "qt;llm"
       }
     },
     {
@@ -174,13 +187,14 @@
       "cacheVariables": {
         "NMSDK_FORCE_QT_FROM_VCPKG": "ON",
         "QT_VERSION_MAJOR": "6",
-        "VCPKG_MANIFEST_FEATURES": "qt"
+        "VCPKG_MANIFEST_FEATURES": "qt;llm"
       }
     },
     {
       "name": "linux-gcc-debug",
       "hidden": true,
-      "generator": "Ninja",
+      "inherits": [ "nmsdk-global-defaults" ],
+      "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
       "cacheVariables": {
@@ -188,14 +202,7 @@
         "CMAKE_CXX_COMPILER": "/usr/bin/g++",
         "CMAKE_CXX_STANDARD": "20",
         "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       }
     },
@@ -204,6 +211,26 @@
       "hidden": true,
       "inherits": [ "linux-gcc-debug" ],
       "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "linux-gcc-debug-local",
+      "displayName": "Linux GCC Debug",
+      "inherits": [ "linux-gcc-debug" ]
+    },
+    {
+      "name": "linux-gcc-release-local",
+      "displayName": "Linux GCC Release",
+      "inherits": [ "linux-gcc-release" ]
+    },
+    {
+      "name": "linux-gcc-debug-tests",
+      "displayName": "Linux GCC Debug Tests",
+      "inherits": [ "linux-gcc-debug" ],
+      "binaryDir": "${sourceDir}/build/linux-gcc-debug-tests-make",
+      "cacheVariables": {
+        "BUILD_TESTING": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
     }
   ],
   "buildPresets": [
@@ -222,49 +249,101 @@
     {
       "name": "win-vs2019-debug",
       "configurePreset": "win-vs2019-debug",
-      "displayName": "Build Windows VS2019 Ninja Debug"
+      "displayName": "Build Windows VS2019 Ninja Debug",
+      "jobs": 8
     },
     {
       "name": "win-vs2019-release",
       "configurePreset": "win-vs2019-release",
-      "displayName": "Build Windows VS2019 Ninja Release"
+      "displayName": "Build Windows VS2019 Ninja Release",
+      "jobs": 8
     },
     {
       "name": "win-vs2019-debug-localqt",
       "configurePreset": "win-vs2019-debug-localqt",
-      "displayName": "Build Windows VS2019 Debug (Qt 5.15.2 from C:\\Qt)"
+      "displayName": "Build Windows VS2019 Debug (Qt 5.15.2 from C:\\Qt)",
+      "jobs": 8
     },
     {
       "name": "win-vs2019-release-localqt",
       "configurePreset": "win-vs2019-release-localqt",
-      "displayName": "Build Windows VS2019 Release (Qt 5.15.2 from C:\\Qt)"
+      "displayName": "Build Windows VS2019 Release (Qt 5.15.2 from C:\\Qt)",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-debug",
       "configurePreset": "win-vs2022-debug",
       "displayName": "Build Windows VS2022 Debug",
-      "configuration": "Debug"
+      "configuration": "Debug",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-release",
       "configurePreset": "win-vs2022-release",
       "displayName": "Build Windows VS2022 Release",
-      "configuration": "Release"
+      "configuration": "Release",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-debug-vcpkgqt",
       "configurePreset": "win-vs2022-debug-vcpkgqt",
       "displayName": "Build Windows VS2022 Debug (Qt from vcpkg)",
-      "configuration": "Debug"
+      "configuration": "Debug",
+      "jobs": 8
     },
     {
       "name": "win-vs2022-release-vcpkgqt",
       "configurePreset": "win-vs2022-release-vcpkgqt",
       "displayName": "Build Windows VS2022 Release (Qt from vcpkg)",
-      "configuration": "Release"
+      "configuration": "Release",
+      "jobs": 8
+    },
+    {
+      "name": "linux-gcc-debug",
+      "configurePreset": "linux-gcc-debug-local",
+      "displayName": "Build Linux GCC Debug",
+      "jobs": 8
+    },
+    {
+      "name": "linux-gcc-release",
+      "configurePreset": "linux-gcc-release-local",
+      "displayName": "Build Linux GCC Release",
+      "jobs": 8
+    },
+    {
+      "name": "linux-gcc-debug-tests",
+      "configurePreset": "linux-gcc-debug-tests",
+      "displayName": "Build Linux GCC Debug Tests",
+      "jobs": 8,
+      "targets": [ "Test_ComponentGuiRegistry", "Test_ComponentGuiLifecycle" ]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-component-gui-registry",
+      "configurePreset": "linux-gcc-debug-tests",
+      "displayName": "Run Component GUI Registry tests",
+      "output": {
+        "outputOnFailure": true
+      },
+      "filter": {
+        "include": {
+          "name": "Test_ComponentGuiRegistry"
+        }
+      }
+    },
+    {
+      "name": "linux-component-gui-lifecycle",
+      "configurePreset": "linux-gcc-debug-tests",
+      "displayName": "Run Component GUI Lifecycle tests",
+      "output": {
+        "outputOnFailure": true
+      },
+      "filter": {
+        "include": {
+          "name": "Test_ComponentGuiLifecycle"
+        }
+      }
     }
   ]
 }
-
-
-

@@ -45,6 +45,38 @@ flowchart TB
 
 Все виджеты наследуются от `UVisualControllerWidget` или `UVisualControllerMainWidget` и получают указатель на `UApplication` при создании. Они используют этот указатель для доступа к движку (`UEngine`), хранилищу компонентов (`UStorage`) и проекту (`UProject`).
 
+### Специализированные формы компонентов (BCB -> Qt)
+
+В Qt реализовано ядро открытия форм по классу компонента:
+
+- `UComponentGuiContext` - контекст (`componentLongName`, `componentClassName`, `channelIndex`)
+- `UComponentFormRegistry` - статический реестр `ComponentClass -> FormFactory`
+- `UComponentGuiService` - создание/активация инстансов форм
+- `UModernDiagramContextMenu::componentGUI()` - точка вызова из контекстного меню схемы
+
+Pipeline вызова:
+
+`UModernDiagramContextMenu` -> `UModernDiagramWidget` -> `UModernDiagramContainerWidget` -> `UGEngineControlWidget` -> `UComponentGuiService`.
+
+Feature-flag:
+
+- `EnableComponentSpecialFormsQt` (settings key, default `true`)
+- `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT` (environment override: `1/true/yes/on` to enable, other values disable)
+- Per-library settings keys:
+  - `EnableComponentSpecialFormsQt.MotionControl`
+  - `EnableComponentSpecialFormsQt.PulseLib`
+  - `EnableComponentSpecialFormsQt.BasicLib`
+  - `EnableComponentSpecialFormsQt.CvBasicLib`
+  - `EnableComponentSpecialFormsQt.HardwareLib`
+- Per-library environment overrides:
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_MOTIONCONTROL`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_PULSELIB`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_BASICLIB`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_CVBASICLIB`
+  - `NMSDK_ENABLE_COMPONENT_SPECIAL_FORMS_QT_HARDWARELIB`
+- Resolution order: `env override` -> `settings key` -> default value.
+- If global `EnableComponentSpecialFormsQt` is disabled, library-level flags are ignored.
+
 ### См. также
 
 - [Справочник виджетов](Widgets-Reference.md)

@@ -8,6 +8,10 @@ option(RDK_USE_CUDA "Use CUDA" OFF)
 option(RDK_USE_SQL "Use Qt SQL" OFF)
 option(RDK_USE_ODESOLVER "Use ODE solver" OFF)
 option(RDK_USE_MATLAB "Use MATLAB" OFF)
+option(RDK_USE_LLM "Build RDK LLM assistant module (Rdk/LLM, GUI/Llm)" ON)
+option(RDK_LLM_BUILD_EMBEDDED "Build embedded llama.cpp provider (requires RDK_USE_LLM)" ON)
+option(RDK_UNICODE_RUN "Enable RDK_UNICODE_RUN compile definition" OFF)
+option(NO_MOTION_CONTROL "Exclude MotionControlLibrary from runtime registration" ON)
 
 # Check that the ode-solver directory exists
 if(RDK_USE_ODESOLVER)
@@ -17,7 +21,18 @@ if(RDK_USE_ODESOLVER)
   endif()
 endif()
 
-add_compile_definitions(RDK_UNICODE_RUN RDK_QT QT_NO_VERSION_TAGGING)
+add_compile_definitions(RDK_QT QT_NO_VERSION_TAGGING)
+if(RDK_UNICODE_RUN)
+  add_compile_definitions(RDK_UNICODE_RUN)
+endif()
+if(NO_MOTION_CONTROL)
+  add_compile_definitions(NO_MOTION_CONTROL)
+endif()
+
+message(STATUS "NMSDK features: NO_MOTION_CONTROL=${NO_MOTION_CONTROL}, RDK_UNICODE_RUN=${RDK_UNICODE_RUN}, "
+               "RDK_USE_ODESOLVER=${RDK_USE_ODESOLVER}, RDK_USE_PYTHON=${RDK_USE_PYTHON}, "
+               "RDK_USE_DARKNET=${RDK_USE_DARKNET}, RDK_USE_TENSORFLOW=${RDK_USE_TENSORFLOW}, "
+               "RDK_LLM_BUILD_EMBEDDED=${RDK_LLM_BUILD_EMBEDDED}")
 
 if (MSVC)
   add_compile_definitions(NOMINMAX)

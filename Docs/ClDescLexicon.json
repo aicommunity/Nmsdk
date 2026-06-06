@@ -1125,20 +1125,40 @@
       "description": "компонент для управления физическим манипулятором через WinAPI и внешнюю DLL (RoboLib.dll)."
     },
     "ADC": {
-      "header": "аналоговый сенсор (Rdk-HardwareLib)",
-      "description": "**Класс**: `UADC` — компонент для работы с аналоговыми датчиками через ADC (Analog-to-Digital Converter) Arduino. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"ADC\", ...)`. **Storage-инстансы**: `ClassName = \"ADC\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "устаревший класс — используйте ArduinoAdc (Rdk-HardwareLib)",
+      "description": "**Устарело.** Замените `ClassName=\"ADC\"` на `ArduinoAdc`. См. `Scripts/migrate_arduino_classnames.py`."
     },
     "Arduino": {
-      "header": "управление подключением к Arduino (Rdk-HardwareLib)",
-      "description": "**Класс**: `UArduinoControl` — компонент управления подключением к плате Arduino через последовательный порт. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"Arduino\", ...)`. **Storage-инстансы**: `ClassName = \"Arduino\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "устаревший класс Arduino (Rdk-HardwareLib)",
+      "description": "**Устарело.** Используйте `ArduinoBoard`, `ArduinoSensorSketch`, `ArduinoFirmata`, `ArduinoAdc`, `ArduinoDcDemo`. См. `Scripts/migrate_arduino_classnames.py`."
+    },
+    "ArduinoBoard": {
+      "header": "плата Arduino: порт и прошивка (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoBoard` — подключение, прошивка HEX, heartbeat."
+    },
+    "ArduinoSensorSketch": {
+      "header": "кастомный sketch sensor_lab (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoSensorSketch` — бинарный протокол, команды, `DoubleMatrixReadings`."
+    },
+    "ArduinoFirmata": {
+      "header": "StandardFirmata (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoFirmata` — Firmata pin mode / digital / analog."
+    },
+    "ArduinoAdc": {
+      "header": "ADC через Arduino Firmata (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoAdc` — аналоговые каналы через связанный `ArduinoFirmata`."
+    },
+    "ArduinoDcDemo": {
+      "header": "DC demo (Rdk-HardwareLib)",
+      "description": "**Класс**: `UArduinoDcDemo` : `UArduinoCustomLink` — один узел: порт, sensor_lab_v1, `SendCommand`, `GetSpeed`. `LinkedSketchName` устарел."
     },
     "ArduinoConnect": {
-      "header": "вспомогательный класс подключения к Arduino (Rdk-HardwareLib)",
-      "description": "**Класс**: `UArduinoConnect` — вспомогательный класс для работы с последовательным портом Arduino. **Тип**: Вспомогательный класс (не Storage-компонент). **Использование**: Используется внутри `UArduinoControl` для управления последовательным портом."
+      "header": "устаревший transport (Rdk-HardwareLib)",
+      "description": "**Устарело.** `UArduinoConnect` заменён на `UArduinoSerialSession` + `UArduinoBinaryStreamParser`."
     },
     "DC": {
-      "header": "управление DC-двигателем (Rdk-HardwareLib)",
-      "description": "**Класс**: `UDcControlDemo` — демонстрационный компонент для управления DC-двигателем через Arduino. **Регистрация**: `UHardwareLibrary.cpp` → `UploadClass(\"DC\", ...)`. **Storage-инстансы**: `ClassName = \"DC\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "устаревший класс — используйте ArduinoDcDemo (Rdk-HardwareLib)",
+      "description": "**Устарело.** Замените `ClassName=\"DC\"` на `ArduinoDcDemo`. См. `Scripts/migrate_arduino_classnames.py`."
     },
     "UFileIO": {
       "header": "файловый ввод/вывод (Rdk-BasicLib)",
@@ -1193,6 +1213,341 @@
       "description": "**Класс**: `UStatisticIntMatrix` — компонент сбора статистики по целочисленным матрицам на основе `UStatisticMatrix<int>`. Используется для анализа результатов экспериментов, построения логов и отчётов."
     }
   },
-  "propertyOverrides": {},
+  "propertyOverrides": {
+    "ArduinoBoard": {
+      "Connect": {
+        "header": "Connect",
+        "description": "Edge: открыть serial-порт (`EnsureConnected`)."
+      },
+      "Disconnect": {
+        "header": "Disconnect",
+        "description": "Edge: закрыть порт; `PortName` не очищается."
+      },
+      "Reconnect": {
+        "header": "Reconnect",
+        "description": "Edge: close + open."
+      },
+      "UploadFirmware": {
+        "header": "Upload firmware",
+        "description": "Edge: прошивка HEX (avrdude)."
+      },
+      "ClearLastError": {
+        "header": "Clear last error",
+        "description": "Edge: очистить `LastError`."
+      },
+      "IsConnected": {
+        "header": "Is connected",
+        "description": "State: `ConnectionState==Connected`."
+      },
+      "IsOpening": {
+        "header": "Is opening",
+        "description": "State: открытие порта."
+      },
+      "HasError": {
+        "header": "Has error",
+        "description": "State: ошибка подключения/upload."
+      },
+      "IsDisconnected": {
+        "header": "Is disconnected",
+        "description": "State: порт закрыт."
+      },
+      "IsUploading": {
+        "header": "Is uploading",
+        "description": "State: прошивка в процессе."
+      },
+      "UploadComplete": {
+        "header": "Upload complete",
+        "description": "State: `UploadLastResult==ok`."
+      },
+      "PortName": {
+        "header": "Port name",
+        "description": "Путь к serial (`/dev/ttyACM0`, `COM3`)."
+      },
+      "BundledFirmwareId": {
+        "header": "Bundled firmware",
+        "description": "ID из manifest (`sensor_lab_v1`, `standard_firmata`)."
+      }
+    },
+    "ArduinoSensorSketch": {
+      "SendCommand": {
+        "header": "Send command",
+        "description": "Edge: отправить `Command` на устройство."
+      },
+      "RequestGetStatus": {
+        "header": "Request GET STATUS",
+        "description": "Edge: запрос статуса."
+      },
+      "RequestProtocolNegotiate": {
+        "header": "Negotiate protocol",
+        "description": "Edge: сброс и `PROTO n`."
+      },
+      "StartReading": {
+        "header": "Start reading",
+        "description": "Edge: команда `START READING`."
+      },
+      "StopReading": {
+        "header": "Stop reading",
+        "description": "Edge: команда `STOP READING`."
+      },
+      "Rotate": {
+        "header": "Rotate",
+        "description": "Edge: команда `ROTATE`."
+      },
+      "StopRotate": {
+        "header": "Stop rotate",
+        "description": "Edge: команда `STOP ROTATE`."
+      },
+      "GetDataFromBuffers": {
+        "header": "Get data from buffers",
+        "description": "Edge: записать RX в `DoubleMatrixReadings`."
+      },
+      "GetPinsInfo": {
+        "header": "Get pins info",
+        "description": "Edge: `GET STATUS` → `PinStatusJson`."
+      },
+      "IsProtocolReady": {
+        "header": "Protocol ready",
+        "description": "State: протокол согласован."
+      },
+      "HasPendingCommands": {
+        "header": "Pending commands",
+        "description": "State: очередь/TX не пусты."
+      },
+      "LastSentCommand": {
+        "header": "Last sent command",
+        "description": "State: последняя отправленная строка."
+      },
+      "Command": {
+        "header": "Command",
+        "description": "Текстовая команда для прошивки."
+      },
+      "ProtocolVersion": {
+        "header": "Protocol version",
+        "description": "1=legacy, 2=framed CRC."
+      }
+    },
+    "ArduinoFirmata": {
+      "RestartFirmata": {
+        "header": "Restart Firmata",
+        "description": "Edge: сброс handshake."
+      },
+      "ApplyPinConfig": {
+        "header": "Apply pin config",
+        "description": "Edge: применить pin mode / IO."
+      },
+      "IsFirmataReady": {
+        "header": "Firmata ready",
+        "description": "State: handshake завершён."
+      },
+      "IsLinkReady": {
+        "header": "Link ready",
+        "description": "State: connected ∧ Firmata ready."
+      },
+      "ReportAnalogEnable": {
+        "header": "Report analog",
+        "description": "Включить analog report для `SelectedPin`."
+      },
+      "SelectedPin": {
+        "header": "Selected pin",
+        "description": "Номер пина Firmata."
+      },
+      "SetPinMode": {
+        "header": "Set pin mode",
+        "description": "Edge: `setPinMode` для `SelectedPin`."
+      },
+      "WriteDigital": {
+        "header": "Write digital",
+        "description": "Edge: digital write `SelectedPin`."
+      },
+      "ReadAnalog": {
+        "header": "Read analog",
+        "description": "Edge: analog report для `SelectedPin`."
+      },
+      "RefreshPins": {
+        "header": "Refresh pins",
+        "description": "Edge: one-shot digital/analog report."
+      },
+      "WritePwm": {
+        "header": "Write PWM",
+        "description": "Edge: extended analog write."
+      },
+      "LoadPreset": {
+        "header": "Load preset",
+        "description": "Edge: применить `PinConfigPreset`."
+      },
+      "QueryPinState": {
+        "header": "Query pin state",
+        "description": "Edge: PIN_STATE_QUERY."
+      },
+      "ConfigureServo": {
+        "header": "Configure servo",
+        "description": "Edge: SERVO_CONFIG."
+      },
+      "WriteServo": {
+        "header": "Write servo",
+        "description": "Edge: servo angle write."
+      },
+      "I2cWrite": {
+        "header": "I2C write",
+        "description": "Edge: I2C write sysex."
+      },
+      "I2cRead": {
+        "header": "I2C read",
+        "description": "Edge: I2C read request."
+      },
+      "HandshakeStage": {
+        "header": "Handshake stage",
+        "description": "State: 0..4 handshake progress."
+      },
+      "PinStatusJson": {
+        "header": "Pin status JSON",
+        "description": "State: snapshot всех пинов."
+      },
+      "CapabilityJson": {
+        "header": "Capability JSON",
+        "description": "State: capability subset."
+      },
+      "AnalogPinValue": {
+        "header": "Analog value",
+        "description": "State: последний analog выбранного пина."
+      },
+      "StreamLog": {
+        "header": "Stream log",
+        "description": "State: TX/RX hex log."
+      },
+      "I2cReadData": {
+        "header": "I2C read data",
+        "description": "State: hex ответ I2C."
+      },
+      "AnalogSamples": {
+        "header": "Analog samples",
+        "description": "Output: matrix timestamp/pin/channel/value."
+      },
+      "DigitalSamples": {
+        "header": "Digital samples",
+        "description": "Output: matrix timestamp/pin/value."
+      },
+      "AutoRefreshPins": {
+        "header": "Auto refresh pins",
+        "description": "Непрерывный port/analog report."
+      },
+      "StreamLogEnable": {
+        "header": "Stream log enable",
+        "description": "Писать StreamLog при ShowDebug."
+      },
+      "SelectedPinMode": {
+        "header": "Pin mode",
+        "description": "0=input, 1=output, 2=analog, 3=pwm."
+      },
+      "DigitalPinValue": {
+        "header": "Digital value",
+        "description": "0/1 для write digital."
+      },
+      "PwmPinValue": {
+        "header": "PWM value",
+        "description": "0..255 extended analog."
+      },
+      "SampleBufferRows": {
+        "header": "Sample buffer rows",
+        "description": "Макс. строк в sample matrices."
+      },
+      "PinConfigPreset": {
+        "header": "Pin config preset",
+        "description": "Id пресета (uno_d13_blink, …)."
+      },
+      "QueryPin": {
+        "header": "Query pin",
+        "description": "Firmata pin для query."
+      },
+      "ServoPin": {
+        "header": "Servo pin",
+        "description": "Пин серво."
+      },
+      "ServoAngle": {
+        "header": "Servo angle",
+        "description": "0..180."
+      },
+      "I2cAddress": {
+        "header": "I2C address",
+        "description": "7-bit I2C address."
+      },
+      "I2cWriteData": {
+        "header": "I2C write data",
+        "description": "Hex bytes для write."
+      },
+      "DigitalOutputCommands": {
+        "header": "Digital output batch",
+        "description": "Input matrix: pin, value."
+      },
+      "PinConfigBatch": {
+        "header": "Pin config batch",
+        "description": "Input matrix: pin, mode."
+      },
+      "AnalogOutputCommands": {
+        "header": "Analog output batch",
+        "description": "Input matrix: pin, pwm value."
+      }
+    },
+    "ArduinoDcDemo": {
+      "SendCommand": {
+        "header": "Send command",
+        "description": "Edge: DC-команда (`SET SPEED …`)."
+      },
+      "GetSpeed": {
+        "header": "Get speed",
+        "description": "Edge: обновить `Speed`/`Acceleration` из RX."
+      },
+      "Speed": {
+        "header": "Speed",
+        "description": "State: скорость DC."
+      },
+      "Acceleration": {
+        "header": "Acceleration",
+        "description": "State: ускорение (если есть в кадре)."
+      },
+      "LinkedSketchName": {
+        "header": "Linked sketch (deprecated)",
+        "description": "**Устарело.** Используйте один узел `ArduinoDcDemo` с `PortName`."
+      },
+      "PortName": {
+        "header": "Port name",
+        "description": "Serial-порт (наследуется от Board)."
+      },
+      "BundledFirmwareId": {
+        "header": "Bundled firmware",
+        "description": "По умолчанию `sensor_lab_v1`."
+      }
+    },
+    "ArduinoAdc": {
+      "ReadAdcFlag": {
+        "header": "Read ADC",
+        "description": "Edge: чтение через связанный Firmata."
+      },
+      "AdcReadOk": {
+        "header": "ADC read OK",
+        "description": "State: Firmata готов и значение прочитано."
+      },
+      "LinkedFirmataName": {
+        "header": "Linked Firmata",
+        "description": "Имя узла `ArduinoFirmata` на canvas."
+      },
+      "AnalogPin": {
+        "header": "Analog pin",
+        "description": "Номер аналогового пина Firmata."
+      },
+      "AdcValue": {
+        "header": "ADC value",
+        "description": "State: 0–1023."
+      },
+      "BoardProfile": {
+        "header": "Board profile",
+        "description": "0=Uno, 1=Mega (для labels в GUI)."
+      },
+      "UseLinkedAnalogSamples": {
+        "header": "Use linked samples",
+        "description": "Читать `AnalogSamples` Firmata."
+      }
+    }
+  },
   "propertyFallbacks": {}
 }

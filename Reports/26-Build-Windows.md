@@ -138,7 +138,7 @@ cmake .. --preset win-vs2022-release
 
 ```cmd
 cmake .. -G "Visual Studio 17 2022" -A x64 ^
-  -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake ^
+  -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%\Scripts\buildsystems\vcpkg.cmake ^
   -DCMAKE_BUILD_TYPE=Release
 ```
 

@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple, Optional
 import re
 
-# Add scripts directory to sys.path
+# Add Scripts directory to sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 class StructureComponentFixer:

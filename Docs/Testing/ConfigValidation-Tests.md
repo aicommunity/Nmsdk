@@ -215,6 +215,18 @@ ls -la Bin/Configs/TestValidation/
     ctest -R ConfigValidationTests -V
 ```
 
+## comp_gui smoke-check (presets)
+
+Для comp_gui-итераций дополнительно выполняйте короткий smoke-check GUI pipeline:
+
+```bash
+cmake --preset linux-gcc-debug-tests
+cmake --build --preset linux-gcc-debug-tests
+ctest --preset linux-component-gui-registry
+```
+
+Это обеспечивает воспроизводимую проверку `Test_ComponentGuiRegistry` без ручной настройки путей/таргетов.
+
 ## См. также
 
 - [README тестов](../Tests/Integration/ConfigValidation/README.md)

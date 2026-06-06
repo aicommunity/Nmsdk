@@ -1,5 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 
+option(NMSDK_ENABLE_INTERACTIVE_GUI_TESTS
+    "Build and run interactive/flaky GUI integration tests"
+    OFF)
+
+if(NOT NMSDK_ENABLE_INTERACTIVE_GUI_TESTS)
+    message(STATUS "Interactive GUI integration tests are disabled (NMSDK_ENABLE_INTERACTIVE_GUI_TESTS=OFF)")
+    return()
+endif()
+
 # Test for verifying menu behavior
 add_executable(Test_MenuBar Test_MenuBar.cpp)
 

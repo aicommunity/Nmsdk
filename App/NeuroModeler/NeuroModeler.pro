@@ -144,6 +144,8 @@ windows:!windows-g++ {
 SOURCES += \
         ../../../Libraries/Libraries.cpp \
     ../../../Rdk/GUI/Qt/UAboutDialog.cpp \
+    ../../../Rdk/GUI/Qt/UComponentGuiDndPayload.cpp \
+    ../../../Rdk/GUI/Qt/UComponentGuiTabHostWidget.cpp \
     ../../../Rdk/GUI/Qt/UGEngineControlWidget.cpp \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerMainWidget.cpp \
@@ -195,6 +197,8 @@ SOURCES += \
 HEADERS += \
         ../../../Libraries/Libraries.h \
     ../../../Rdk/GUI/Qt/UAboutDialog.h \
+    ../../../Rdk/GUI/Qt/UComponentGuiDndPayload.h \
+    ../../../Rdk/GUI/Qt/UComponentGuiTabHostWidget.h \
     ../../../Rdk/GUI/Qt/UComponentsListWidget.h \
     ../../../Rdk/GUI/Qt/UGEngineControlWidget.h \
     ../../../Rdk/GUI/Qt/UMatrixFormDialog.h \

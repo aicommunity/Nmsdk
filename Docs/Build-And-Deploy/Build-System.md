@@ -85,9 +85,27 @@ flowchart LR
 - OpenCV - для Rdk-CvBasicLib
 - ODE Solver - для Nmsdk-PulseLib
 
-### Опции CMake
+### Опции CMake и preset-ы
 
-- `RDK_USE_ODESOLVER` - включить поддержку ODE Solver
+Ключевые флаги сборки задаются **в одном месте** — hidden preset `nmsdk-global-defaults` в [`CMakePresets.json`](../../CMakePresets.json). Все платформенные preset-ы (`win-msvc-base`, `win-vs2019-base`, `win-vs2022-base`, `linux-gcc-debug`) наследуют его через `"inherits": ["nmsdk-global-defaults"]`.
+
+Тот же набор опций объявлен в [`cmake/RdkDefines.cmake`](../../cmake/RdkDefines.cmake) как `option()` и превращается в compile definitions. Это работает и при ручном `cmake ..` без preset-ов.
+
+| Опция | Preset по умолчанию | Назначение |
+|-------|---------------------|------------|
+| `RDK_USE_ODESOLVER` | OFF | ODE solver в Nmsdk-PulseLib |
+| `RDK_USE_PYTHON` | OFF | Python/Boost.Python |
+| `RDK_USE_DARKNET` | OFF | Darknet |
+| `RDK_USE_TENSORFLOW` | OFF | TensorFlow |
+| `RDK_LLM_BUILD_EMBEDDED` | OFF | Встроенный llama.cpp (RDK LLM) |
+| `RDK_UNICODE_RUN` | OFF | UTF-8 API (`RDK_UNICODE_RUN` define) |
+| `NO_MOTION_CONTROL` | ON | Не регистрировать MotionControlLibrary в runtime |
+
+Параллельная сборка: `CMAKE_BUILD_PARALLEL_LEVEL` задаётся в `nmsdk-global-defaults` через `$env{NUMBER_OF_PROCESSORS}` и наследуется всеми preset-ами. На Linux переменная может быть не задана — CMake использует значение по умолчанию.
+
+**После изменения флагов** нужен re-configure (в Qt Creator: «Run CMake» или очистка каталога `build/`). Иначе CMake cache сохранит старые значения.
+
+Локальные override-ы без правки общего preset-а: необязательный `CMakeUserPresets.json` с `"inherits": ["win-vs2019-debug-localqt"]` и точечными `cacheVariables`.
 
 ### См. также
 
@@ -148,9 +166,27 @@ The flowchart in the Russian section illustrates the complete build pipeline, in
 - OpenCV - for Rdk-CvBasicLib
 - ODE Solver - for Nmsdk-PulseLib
 
-### CMake Options
+### CMake Options and Presets
 
-- `RDK_USE_ODESOLVER` - enable ODE Solver support
+Key build flags are defined **in one place** — hidden preset `nmsdk-global-defaults` in [`CMakePresets.json`](../../CMakePresets.json). All platform presets inherit it via `"inherits": ["nmsdk-global-defaults"]`.
+
+The same options are declared in [`cmake/RdkDefines.cmake`](../../cmake/RdkDefines.cmake) as `option()` and become compile definitions. This also applies to manual `cmake ..` without presets.
+
+| Option | Preset default | Purpose |
+|--------|----------------|---------|
+| `RDK_USE_ODESOLVER` | OFF | ODE solver in Nmsdk-PulseLib |
+| `RDK_USE_PYTHON` | OFF | Python/Boost.Python |
+| `RDK_USE_DARKNET` | OFF | Darknet |
+| `RDK_USE_TENSORFLOW` | OFF | TensorFlow |
+| `RDK_LLM_BUILD_EMBEDDED` | OFF | Embedded llama.cpp (RDK LLM) |
+| `RDK_UNICODE_RUN` | OFF | UTF-8 API (`RDK_UNICODE_RUN` define) |
+| `NO_MOTION_CONTROL` | ON | Skip MotionControlLibrary runtime registration |
+
+Parallel builds: `CMAKE_BUILD_PARALLEL_LEVEL` is set in `nmsdk-global-defaults` via `$env{NUMBER_OF_PROCESSORS}` and inherited by all presets. On Linux the variable may be unset — CMake falls back to its default.
+
+**After changing flags**, re-run configure (Qt Creator: «Run CMake» or clear the `build/` directory). Otherwise the CMake cache keeps old values.
+
+Local overrides without editing the shared preset: optional `CMakeUserPresets.json` with `"inherits": ["win-vs2019-debug-localqt"]` and targeted `cacheVariables`.
 
 ### See Also
 

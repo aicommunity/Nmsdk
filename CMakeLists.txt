@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 
+# Qt Creator: skip package-manager auto-setup on every project() (googletest, etc.).
+# Windows vcpkg: use CMAKE_TOOLCHAIN_FILE from presets, not Qt Creator wrapper.
+if(NOT QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP)
+  set(QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP ON CACHE BOOL
+    "Skip Qt Creator package manager auto-setup" FORCE)
+endif()
+
 # Normalize vcpkg toolchain file path (Windows only)
 # This must be BEFORE project(), because CMAKE_TOOLCHAIN_FILE is used during project initialization
 if(EXISTS "${CMAKE_SOURCE_DIR}/cmake/NormalizeVcpkgPath.cmake")
@@ -23,35 +30,8 @@ else()
 endif()
 option(NMSDK_FORCE_QT_FROM_VCPKG "Force Qt from vcpkg on Windows (filter local Qt from CMAKE_PREFIX_PATH)" ${_NMSDK_FORCE_QT_FROM_VCPKG_DEFAULT})
 
-# Automatic parallel build configuration
-# Detect the number of CPU cores if CMAKE_BUILD_PARALLEL_LEVEL is not set
-# This setting is automatically propagated to all subprojects via add_subdirectory()
-include(ProcessorCount)
-ProcessorCount(N)
-if(N EQUAL 0)
-    set(N 4)  # Fallback: use default value
-endif()
-
-# Set environment variable for use during build (for Ninja and other generators)
-if(NOT DEFINED ENV{CMAKE_BUILD_PARALLEL_LEVEL})
-    set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} ${N})
-    message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL set to ${N} (auto-detected CPU cores)")
-else()
-    message(STATUS "CMAKE_BUILD_PARALLEL_LEVEL already set to $ENV{CMAKE_BUILD_PARALLEL_LEVEL}")
-endif()
-
-# For Visual Studio generator configure parallel build via cache variables
-if(CMAKE_GENERATOR MATCHES "Visual Studio")
-    # Set the number of parallel build threads for Visual Studio
-    if(NOT DEFINED CMAKE_VS_PARALLEL_BUILD_THREADS)
-        set(CMAKE_VS_PARALLEL_BUILD_THREADS ${N} CACHE STRING "Number of parallel build threads for Visual Studio" FORCE)
-        message(STATUS "CMAKE_VS_PARALLEL_BUILD_THREADS set to ${N} (auto-detected CPU cores)")
-    endif()
-    # Enable parallel project build
-    if(NOT DEFINED CMAKE_VS_GENERATE_DEVENV_LAUNCHER)
-        set(CMAKE_VS_GENERATE_DEVENV_LAUNCHER ON CACHE BOOL "Generate Visual Studio devenv launcher" FORCE)
-    endif()
-endif()
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(NmsdkParallelBuild)
 
 # Policies and standard
 set(CMAKE_CXX_STANDARD 20)
@@ -63,10 +43,12 @@ set(CMAKE_AUTORCC ON)
 # Common settings for MSVC runtime (DLL) — consistent for all targets
 if (MSVC)
   set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL" CACHE STRING "" FORCE)
+  # VS2019 + C++20: make u8 literals compatible with third-party code
+  # expecting const char* (for example llama.cpp b4533).
+  if(MSVC_VERSION LESS 1930)
+    add_compile_options(/Zc:char8_t-)
+  endif()
 endif()
-
-# Directory with shared CMake modules
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 # Force Qt to be taken only from vcpkg on Windows
 # (on Linux this module is a no-op)

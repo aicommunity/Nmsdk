@@ -96,6 +96,18 @@ cmake --build . --target test
 ctest -R Test_UComponent_Lifecycle
 ```
 
+### comp_gui smoke-check через presets
+
+Для стабильной проверки pipeline component GUI используйте воспроизводимый preset flow:
+
+```bash
+cmake --preset linux-gcc-debug-tests
+cmake --build --preset linux-gcc-debug-tests
+ctest --preset linux-component-gui-registry
+```
+
+Этот smoke-check покрывает `Test_ComponentGuiRegistry`: entrypoints (`diagram`, `components list`, `drawengine`), single-instance reopen и fallback для незарегистрированного класса.
+
 **Процесс запуска тестов:**
 
 ```mermaid
@@ -929,6 +941,18 @@ ctest --verbose         # Verbose output
 ctest -R Test_UComponent # Run specific test
 ctest -j$(nproc)        # Parallel execution
 ```
+
+### comp_gui Smoke Check (preset-based)
+
+For component GUI pipeline stability checks, use reproducible preset commands:
+
+```bash
+cmake --preset linux-gcc-debug-tests
+cmake --build --preset linux-gcc-debug-tests
+ctest --preset linux-component-gui-registry
+```
+
+This smoke check validates `Test_ComponentGuiRegistry` scenarios for diagram/components-list/drawengine entrypoints, single-instance reopen behavior, and unregistered-class fallback.
 
 The test structure follows CMake conventions with `add_test()` and `enable_testing()` in CMakeLists.txt files.
 

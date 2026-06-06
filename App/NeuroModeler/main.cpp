@@ -14,6 +14,9 @@
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
+#ifdef RDK_USE_LLM
+#include "NmsdkRegisterLlm.h"
+#endif
 #include "UStyleManager.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
@@ -357,6 +360,10 @@ int main(int argc, char *argv[])
         AppCore.exitAfterCalcFlag = 1;
 
     UGEngineControlWidget w(NULL, &AppCore.application);
+
+#ifdef RDK_USE_LLM
+    NmsdkRegisterLlm(&w, &AppCore.application, AppCore.showLlmAssistantMenu);
+#endif
 
     if(AppCore.hideAdminForm)
       w.hide();
