@@ -177,7 +177,7 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    RdkCore[rdk.static.qt<br/>Core]
+    RdkCore["rdk.static.qt<br/>Core"]
     
     BasicLib[Rdk-BasicLib]
     CvLib[Rdk-CvBasicLib]

@@ -69,12 +69,12 @@ flowchart TB
     Tests[Rdk/Tests/] --> Unit[Unit/]
     Tests --> Integration[Integration/]
     
-    Unit --> EngineTests[Engine/<br/>UComponent, UProperty, UContainer, UStorage]
-    Unit --> GraphicsTests[Graphics/<br/>UGraphics, UBitmap]
-    Unit --> SerializeTests[Serialize/<br/>USerStorage]
+    Unit --> EngineTests["Engine/<br/>UComponent, UProperty, UContainer, UStorage"]
+    Unit --> GraphicsTests["Graphics/<br/>UGraphics, UBitmap"]
+    Unit --> SerializeTests["Serialize/<br/>USerStorage"]
     
-    Integration --> AppTests[Application/<br/>UApplication, RPC]
-    Integration --> CoreTests[Core/<br/>Полная система]
+    Integration --> AppTests["Application/<br/>UApplication, RPC"]
+    Integration --> CoreTests["Core/<br/>Полная система"]
 ```
 
 Тесты используют Google Test (gtest) framework и запускаются через CMake/CTest.

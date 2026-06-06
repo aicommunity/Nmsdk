@@ -10,24 +10,24 @@
 
 ```mermaid
 flowchart TB
-    Root[Docs/<br/>Корневая документация]
+    Root["Docs/<br/>Корневая документация"]
     
-    Root --> Overview[Overview/<br/>Обзор проекта]
-    Root --> RdkCore[Rdk/Docs/Architecture/<br/>Обзор ядра]
-    Root --> Libraries[Libraries/<br/>Обзор библиотек]
-    Root --> GUI[GUI/<br/>Интерфейс]
-    Root --> Build[Build-And-Deploy/<br/>Сборка]
-    Root --> Components[Components-And-Configuration/<br/>Компоненты]
-    Root --> Submodules[Submodules/<br/>Индексы сабмодулей]
+    Root --> Overview["Overview/<br/>Обзор проекта"]
+    Root --> RdkCore["Rdk/Docs/Architecture/<br/>Обзор ядра"]
+    Root --> Libraries["Libraries/<br/>Обзор библиотек"]
+    Root --> GUI["GUI/<br/>Интерфейс"]
+    Root --> Build["Build-And-Deploy/<br/>Сборка"]
+    Root --> Components["Components-And-Configuration/<br/>Компоненты"]
+    Root --> Submodules["Submodules/<br/>Индексы сабмодулей"]
     
     Submodules --> RdkIndex[Rdk-Index.md]
     Submodules --> BinIndex[Bin-Index.md]
     Submodules --> LibIndex[Libraries-Index.md]
     Submodules --> NavMap[Navigation-Map.md]
     
-    RdkIndex --> RdkDocs[Rdk/Docs/<br/>Детальная документация Rdk]
-    BinIndex --> BinDocs[Bin/Docs/<br/>Документация Bin]
-    LibIndex --> LibDocs[Libraries/*/Docs/<br/>Документация библиотек]
+    RdkIndex --> RdkDocs["Rdk/Docs/<br/>Детальная документация Rdk"]
+    BinIndex --> BinDocs["Bin/Docs/<br/>Документация Bin"]
+    LibIndex --> LibDocs["Libraries/*/Docs/<br/>Документация библиотек"]
     
     RdkDocs --> RdkArch[Architecture.md]
     RdkDocs --> RdkAPI[API-Reference.md]
@@ -166,24 +166,24 @@ This document provides a visual map of the Nmsdk project documentation structure
 
 ```mermaid
 flowchart TB
-    Root[Docs/<br/>Root Documentation]
+    Root["Docs/<br/>Root Documentation"]
     
-    Root --> Overview[Overview/<br/>Project Overview]
-    Root --> RdkCore[Rdk/Docs/Architecture/<br/>Core Overview]
-    Root --> Libraries[Libraries/<br/>Libraries Overview]
-    Root --> GUI[GUI/<br/>Interface]
-    Root --> Build[Build-And-Deploy/<br/>Build]
-    Root --> Components[Components-And-Configuration/<br/>Components]
-    Root --> Submodules[Submodules/<br/>Submodule Indexes]
+    Root --> Overview["Overview/<br/>Project Overview"]
+    Root --> RdkCore["Rdk/Docs/Architecture/<br/>Core Overview"]
+    Root --> Libraries["Libraries/<br/>Libraries Overview"]
+    Root --> GUI["GUI/<br/>Interface"]
+    Root --> Build["Build-And-Deploy/<br/>Build"]
+    Root --> Components["Components-And-Configuration/<br/>Components"]
+    Root --> Submodules["Submodules/<br/>Submodule Indexes"]
     
     Submodules --> RdkIndex[Rdk-Index.md]
     Submodules --> BinIndex[Bin-Index.md]
     Submodules --> LibIndex[Libraries-Index.md]
     Submodules --> NavMap[Navigation-Map.md]
     
-    RdkIndex --> RdkDocs[Rdk/Docs/<br/>Detailed Rdk Documentation]
-    BinIndex --> BinDocs[Bin/Docs/<br/>Bin Documentation]
-    LibIndex --> LibDocs[Libraries/*/Docs/<br/>Library Documentation]
+    RdkIndex --> RdkDocs["Rdk/Docs/<br/>Detailed Rdk Documentation"]
+    BinIndex --> BinDocs["Bin/Docs/<br/>Bin Documentation"]
+    LibIndex --> LibDocs["Libraries/*/Docs/<br/>Library Documentation"]
     
     RdkDocs --> RdkArch[Architecture.md]
     RdkDocs --> RdkAPI[API-Reference.md]

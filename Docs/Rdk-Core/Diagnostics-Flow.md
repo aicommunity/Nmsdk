@@ -56,7 +56,7 @@ flowchart TD
     FindPortOut -->|Да| FindPortIn{Порт-приемник найден?}
     FindPortIn -->|Нет| AddError6[Добавить в diag->errors]
     FindPortIn -->|Да| CheckType{Типы совместимы?}
-    CheckType -->|Нет| LogError[Логировать ошибку<br/>НЕ накапливать]
+    CheckType -->|Нет| LogError["Логировать ошибку<br/>НЕ накапливать"]
     CheckType -->|Да| Connect[Установить связь]
     AddError1 --> NextComp[Следующий компонент]
     AddError2 --> NextComp

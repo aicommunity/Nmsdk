@@ -166,18 +166,18 @@ sequenceDiagram
 
 ```mermaid
 flowchart TB
-    Timer[QTimer<br/>UEngineControlQt] --> Update[AUpdateInterface]
-    Update --> DiagramWidget[UModernDiagramWidget<br/>Reload]
-    Update --> DrawWidget[UDrawEngineWidget<br/>AUpdateInterface]
-    Update --> PropertyWidget[UComponentPropertyChanger<br/>Update]
-    Update --> GraphWidget[UGraphWidget<br/>Update]
+    Timer["QTimer<br/>UEngineControlQt"] --> Update[AUpdateInterface]
+    Update --> DiagramWidget["UModernDiagramWidget<br/>Reload"]
+    Update --> DrawWidget["UDrawEngineWidget<br/>AUpdateInterface"]
+    Update --> PropertyWidget["UComponentPropertyChanger<br/>Update"]
+    Update --> GraphWidget["UGraphWidget<br/>Update"]
     
-    DiagramWidget --> Scene[UModernDiagramScene<br/>Обновление узлов]
-    DrawWidget --> DrawEngine[UDrawEngine<br/>Draw]
+    DiagramWidget --> Scene["UModernDiagramScene<br/>Обновление узлов"]
+    DrawWidget --> DrawEngine["UDrawEngine<br/>Draw"]
     
-    Scene --> App[UApplication<br/>GetEngine]
+    Scene --> App["UApplication<br/>GetEngine"]
     DrawEngine --> App
-    App --> Engine[UEngine<br/>GetComponent]
+    App --> Engine["UEngine<br/>GetComponent"]
 ```
 
 `UEngineControlQt` запускает таймер (интервал 16 мс для режима 0 или `MTUpdateInterfaceInterval` для режима 1), который вызывает `AUpdateInterface()` у всех виджетов, наследующих `UVisualControllerWidget`. Виджеты обновляют своё состояние, читая данные из `UApplication` и `UEngine`.

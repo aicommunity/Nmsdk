@@ -57,8 +57,8 @@ cmake --build . --config Release  # Windows
 
 ```mermaid
 flowchart LR
-    Source[Источник данных<br/>UMatrixSource] --> Process[Обработка<br/>UStatistic]
-    Process --> Output[Выход<br/>UIO]
+    Source["Источник данных<br/>UMatrixSource"] --> Process["Обработка<br/>UStatistic"]
+    Process --> Output["Выход<br/>UIO"]
 ```
 
 **Пример создания компонента программно:**
@@ -184,8 +184,8 @@ cmake --build . --config Release  # Windows
 
 ```mermaid
 flowchart LR
-    Source[Data Source<br/>UMatrixSource] --> Process[Processing<br/>UStatistic]
-    Process --> Output[Output<br/>UIO]
+    Source["Data Source<br/>UMatrixSource"] --> Process["Processing<br/>UStatistic"]
+    Process --> Output["Output<br/>UIO"]
 ```
 
 **Example component creation programmatically:**

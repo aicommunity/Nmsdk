@@ -19,7 +19,18 @@ from lib_doc_audit import (  # noqa: E402
 RU_ONLY_ALLOWLIST_PREFIXES = (
     "Bin/Configs/SpikeSamples/",
     "Reports/",
+    "Docs/Audit/",
 )
+
+RU_ONLY_ALLOWLIST_EXACT = (
+    "Docs/Overview/Markdown-Files-Index.md",
+)
+
+
+def is_allowlisted(rel: str) -> bool:
+    if rel in RU_ONLY_ALLOWLIST_EXACT:
+        return True
+    return rel.startswith(RU_ONLY_ALLOWLIST_PREFIXES)
 
 
 def main() -> int:
@@ -27,7 +38,7 @@ def main() -> int:
     missing_ru = []
     for path in iter_markdown_files():
         rel = path.relative_to(ROOT).as_posix()
-        if rel.startswith(RU_ONLY_ALLOWLIST_PREFIXES):
+        if is_allowlisted(rel):
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         lang = detect_bilingual(text)

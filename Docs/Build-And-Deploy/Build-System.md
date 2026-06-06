@@ -48,14 +48,14 @@ cmake --build . --config Release
 
 ```mermaid
 flowchart TB
-    Start[Запуск CMake] --> Config[Конфигурация<br/>CMakeLists.txt]
-    Config --> Detect[Определение платформы<br/>QT_FOUND, WIN32, UNIX]
-    Detect --> SelectSys[Выбор системных абстракций<br/>System/Qt, System/Win, System/Gcc]
-    SelectSys --> Compile[Компиляция<br/>gcc/clang/msvc]
-    Compile --> Link[Линковка<br/>rdk.static.qt + библиотеки]
-    Link --> Deploy[Деплой<br/>Bin/Platform/OS/]
+    Start[Запуск CMake] --> Config["Конфигурация<br/>CMakeLists.txt"]
+    Config --> Detect["Определение платформы<br/>QT_FOUND, WIN32, UNIX"]
+    Detect --> SelectSys["Выбор системных абстракций<br/>System/Qt, System/Win, System/Gcc"]
+    SelectSys --> Compile["Компиляция<br/>gcc/clang/msvc"]
+    Compile --> Link["Линковка<br/>rdk.static.qt + библиотеки"]
+    Link --> Deploy["Деплой<br/>Bin/Platform/OS/"]
     
-    Config --> LoadLibs[Загрузка библиотек<br/>RdkLoadPredefinedLibraries]
+    Config --> LoadLibs["Загрузка библиотек<br/>RdkLoadPredefinedLibraries"]
     LoadLibs --> Compile
 ```
 
