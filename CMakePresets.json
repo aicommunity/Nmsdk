@@ -3,8 +3,25 @@
   "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
   "configurePresets": [
     {
+      "name": "nmsdk-global-defaults",
+      "hidden": true,
+      "cacheVariables": {
+        "RDK_USE_ODESOLVER": "OFF",
+        "RDK_USE_PYTHON": "OFF",
+        "RDK_USE_DARKNET": "OFF",
+        "RDK_USE_TENSORFLOW": "OFF",
+        "RDK_LLM_BUILD_EMBEDDED": "OFF",
+        "RDK_UNICODE_RUN": "ON",
+        "NO_MOTION_CONTROL": "ON"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
+      }
+    },
+    {
       "name": "win-msvc-base",
       "hidden": true,
+      "inherits": [ "nmsdk-global-defaults" ],
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -16,16 +33,9 @@
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
         "VCPKG_MANIFEST_DIR": "${sourceDir}",
         "VCPKG_OVERLAY_PORTS": "${sourceDir}/vcpkg-overlay-ports",
-        "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_LLM_BUILD_EMBEDDED": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
+        "BUILD_SHARED_LIBS": "OFF"
       },
       "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
         "VCINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC",
         "VSINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community"
       }
@@ -45,6 +55,7 @@
     {
       "name": "win-vs2019-base",
       "hidden": true,
+      "inherits": [ "nmsdk-global-defaults" ],
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -59,17 +70,8 @@
         "VCPKG_TARGET_TRIPLET": "x64-windows-v142",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-overlay-triplets",
         "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_LLM_BUILD_EMBEDDED": "OFF",
-        "RDK_UNICODE_RUN": "OFF",
         "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       }
     },
     {
@@ -125,6 +127,7 @@
     {
       "name": "win-vs2022-base",
       "hidden": true,
+      "inherits": [ "nmsdk-global-defaults" ],
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -141,16 +144,8 @@
         "VCPKG_OVERLAY_PORTS": "${sourceDir}/vcpkg-overlay-ports",
         "CMAKE_VS_GENERATE_DEVENV_LAUNCHER": "ON",
         "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF",
         "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -198,6 +193,7 @@
     {
       "name": "linux-gcc-debug",
       "hidden": true,
+      "inherits": [ "nmsdk-global-defaults" ],
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/build/install/${presetName}",
@@ -206,11 +202,6 @@
         "CMAKE_CXX_COMPILER": "/usr/bin/g++",
         "CMAKE_CXX_STANDARD": "20",
         "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF",
         "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
       }
@@ -356,6 +347,3 @@
     }
   ]
 }
-
-
-
