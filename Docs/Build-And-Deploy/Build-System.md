@@ -108,6 +108,7 @@ flowchart LR
 | `NMSDK_PULSELIB_BUILD_CORE_ONLY` | OFF | PulseLib без Qt GUI helpers |
 | `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY` | OFF | MotionControlLib без Qt GUI helpers |
 | `BUILD_TESTS` | ON | Юнит и интеграционные тесты |
+| `NMSDK_FORCE_QT_FROM_VCPKG` | ON (Windows) | Принудительный Qt из vcpkg |
 
 Legacy `.pro` files may still list ML libraries; see [Optional ML Libraries](../Libraries/Optional-ML-Libraries.md).
 
@@ -195,6 +196,7 @@ The same options are declared in [`cmake/RdkDefines.cmake`](../../cmake/RdkDefin
 | `NMSDK_PULSELIB_BUILD_CORE_ONLY` | OFF | PulseLib without Qt GUI helpers |
 | `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY` | OFF | MotionControlLib without Qt GUI helpers |
 | `BUILD_TESTS` | ON | Unit and integration tests |
+| `NMSDK_FORCE_QT_FROM_VCPKG` | ON (Windows) | Force Qt from vcpkg |
 
 Legacy `.pro` files may still list ML libraries; see [Optional ML Libraries](../Libraries/Optional-ML-Libraries.md).
 
