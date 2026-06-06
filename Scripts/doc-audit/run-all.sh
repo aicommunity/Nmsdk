@@ -6,6 +6,7 @@ cd "$ROOT_DIR"
 
 echo "== doc-audit: inventory =="
 python3 Scripts/doc-audit/inventory.py
+python3 Scripts/doc-audit/regenerate-markdown-index.py
 
 echo "== doc-audit: links =="
 python3 Scripts/doc-audit/check-links.py || true

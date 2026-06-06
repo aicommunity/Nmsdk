@@ -2,9 +2,9 @@
 
 Auto-generated from `Docs/Audit/Documentation-Inventory.json`.
 
-Total: **778** files.
+Total: **805** files.
 
-Run `Scripts/doc-audit/inventory.py` to refresh.
+Run `Scripts/doc-audit/regenerate-markdown-index.py` after `inventory.py`.
 
 ## Bin
 
@@ -129,7 +129,9 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Bin/Configs/SpikeSamples/StructTrain/SpikeAnsTrainer/README.md
 - Bin/Configs/SpikeSamples/StructTrain/SpikeTrainer/README.md
 - Bin/Configs/SpikeSamples/StructTrain/XOR/README.md
+- Bin/Configs/TestValidation/README.md
 - Bin/Docs/Configs-Structure.md
+- Bin/Docs/Documentation-Status.md
 - Bin/Docs/Examples/ClDesc-Example.md
 - Bin/Docs/Examples/Config-Example.md
 - Bin/Docs/Examples/README.md
@@ -158,6 +160,12 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 
 ## Docs
 
+- Docs/Audit/Bilingual-Parity-Report.md
+- Docs/Audit/Build-Gap-Report.md
+- Docs/Audit/Component-Gap-Report.md
+- Docs/Audit/Index-Count-Gap-Report.md
+- Docs/Audit/Link-Health-Report.md
+- Docs/Audit/Mermaid-Sanity-Report.md
 - Docs/Audit/README.md
 - Docs/Best-Practices.md
 - Docs/Build-And-Deploy/Build-Linux.md
@@ -167,8 +175,11 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Docs/CONTRIBUTING.md
 - Docs/ClDescLexicon-From-Docs.md
 - Docs/Community.md
+- Docs/Components-And-Configuration/Component-System.md
 - Docs/Components-And-Configuration/Configuration-Files-Overview.md
 - Docs/Components-And-Configuration/Direct-Property-Access.md
+- Docs/Development-Guides/Component-Development.md
+- Docs/Development-Guides/Config-Validation.md
 - Docs/Development-Guides/Library-Development.md
 - Docs/Examples/Basic-Component-Example.md
 - Docs/Examples/Integration-Example.md
@@ -184,6 +195,7 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Docs/Glossary.md
 - Docs/Libraries/Nmsdk-MotionControlLib.md
 - Docs/Libraries/Nmsdk-PulseLib.md
+- Docs/Libraries/Optional-ML-Libraries.md
 - Docs/Libraries/Overview.md
 - Docs/Libraries/Rdk-BasicLib.md
 - Docs/Libraries/Rdk-CvBasicLib.md
@@ -390,13 +402,16 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuron1x4.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuron4x1.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuron4x4.md
+- Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronChannel.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronHebbLifeMembrane.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronHebbMembrane.md
+- Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronMembrane.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronNegCGenerator.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronNegCGeneratorBio.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronPosCGenerator.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronPosCGeneratorBio.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPNeuronPosCGeneratorCable.md
+- Libraries/Nmsdk-PulseLib/Docs/Components/NPNewNeuronMembrane.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPSimpleLTZone.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPSynChannel.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NPSynExcChannel.md
@@ -504,22 +519,29 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Libraries/Rdk-BasicLib/Docs/API-Overview.md
 - Libraries/Rdk-BasicLib/Docs/Architecture.md
 - Libraries/Rdk-BasicLib/Docs/Component-Catalog.md
+- Libraries/Rdk-BasicLib/Docs/Components/UFileDataset.md
 - Libraries/Rdk-BasicLib/Docs/Components/UFileIO.md
 - Libraries/Rdk-BasicLib/Docs/Components/UIO.md
 - Libraries/Rdk-BasicLib/Docs/Components/UIOConverter.md
 - Libraries/Rdk-BasicLib/Docs/Components/UIOTextConverter.md
 - Libraries/Rdk-BasicLib/Docs/Components/UMatrixSource.md
+- Libraries/Rdk-BasicLib/Docs/Components/UMatrixSourceDataFile.md
 - Libraries/Rdk-BasicLib/Docs/Components/UMatrixSourceFileFamily.md
+- Libraries/Rdk-BasicLib/Docs/Components/UMatrixSourceFileSep.md
 - Libraries/Rdk-BasicLib/Docs/Components/UMatrixSourceTimeSeries.md
 - Libraries/Rdk-BasicLib/Docs/Components/UModel.md
 - Libraries/Rdk-BasicLib/Docs/Components/UNoise.md
 - Libraries/Rdk-BasicLib/Docs/Components/UNoiseGen.md
+- Libraries/Rdk-BasicLib/Docs/Components/UNoiseGenDouble.md
+- Libraries/Rdk-BasicLib/Docs/Components/UNoiseGenInt.md
 - Libraries/Rdk-BasicLib/Docs/Components/UScalarSource.md
 - Libraries/Rdk-BasicLib/Docs/Components/UStatisticDoubleMatrix.md
 - Libraries/Rdk-BasicLib/Docs/Components/UStatisticIntMatrix.md
+- Libraries/Rdk-BasicLib/Docs/Components/UUMatrixSourceFile.md
 - Libraries/Rdk-BasicLib/Docs/Diagrams/Component-Interactions.md
 - Libraries/Rdk-BasicLib/Docs/Diagrams/Data-Flow.md
 - Libraries/Rdk-BasicLib/Docs/Diagrams/README.md
+- Libraries/Rdk-BasicLib/Docs/Documentation-Status.md
 - Libraries/Rdk-BasicLib/Docs/FAQ.md
 - Libraries/Rdk-BasicLib/Docs/README.md
 - Libraries/Rdk-BasicLib/Docs/Usage-Examples.md
@@ -541,6 +563,7 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Libraries/Rdk-CvBasicLib/Docs/Diagrams/Image-Processing-Pipeline.md
 - Libraries/Rdk-CvBasicLib/Docs/Diagrams/Object-Detection-Flow.md
 - Libraries/Rdk-CvBasicLib/Docs/Diagrams/README.md
+- Libraries/Rdk-CvBasicLib/Docs/Documentation-Status.md
 - Libraries/Rdk-CvBasicLib/Docs/FAQ.md
 - Libraries/Rdk-CvBasicLib/Docs/README.md
 - Libraries/Rdk-CvBasicLib/Docs/Rdk-CvBasicLib-Overview.md
@@ -560,6 +583,7 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Libraries/Rdk-HardwareLib/Docs/Components/DC.md
 - Libraries/Rdk-HardwareLib/Docs/DOXYGEN.md
 - Libraries/Rdk-HardwareLib/Docs/Diagrams/README.md
+- Libraries/Rdk-HardwareLib/Docs/Documentation-Status.md
 - Libraries/Rdk-HardwareLib/Docs/FirmataTechDebt.md
 - Libraries/Rdk-HardwareLib/Docs/GUI.md
 - Libraries/Rdk-HardwareLib/Docs/Legacy/ADC.md
@@ -587,6 +611,10 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 
 - README-VCPKG-ISSUES.md
 
+## README.md
+
+- README.md
+
 ## Rdk
 
 - Rdk/Docs/API-Reference.md
@@ -606,6 +634,7 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Rdk/Docs/Diagrams/Property-System.md
 - Rdk/Docs/Diagrams/README.md
 - Rdk/Docs/Diagrams/RPC-Flow.md
+- Rdk/Docs/Documentation-Status.md
 - Rdk/Docs/Engine-Detailed.md
 - Rdk/Docs/Examples/Component-Creation-Example.md
 - Rdk/Docs/Examples/README.md
@@ -776,6 +805,7 @@ Run `Scripts/doc-audit/inventory.py` to refresh.
 - Reports/Plan-01-PropertyRefactoring.md
 - Reports/PulseLib-Architecture-and-Compatibility.md
 - Reports/PulseLib-PosNeg-InhExc-Passport.md
+- Reports/README.md
 - Reports/RLOG-Messages-Not-Visible-Report.md
 - Reports/RLOG-Migration-Report.md
 - Reports/ScriptAnalysis-Report.md

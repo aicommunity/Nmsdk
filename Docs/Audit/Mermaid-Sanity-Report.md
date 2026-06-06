@@ -1,6 +1,6 @@
 # Mermaid Sanity Report
 
-Generated: 2026-06-06T18:08:03Z
+Generated: 2026-06-06T18:39:20Z
 
 - Mermaid blocks scanned: **2236**
 - Potential issues: **385**

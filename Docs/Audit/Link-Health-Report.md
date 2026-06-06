@@ -1,6 +1,6 @@
 # Link Health Report
 
-Generated: 2026-06-06T18:08:02Z
+Generated: 2026-06-06T18:44:20Z
 
 ## Summary
 

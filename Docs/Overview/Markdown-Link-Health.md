@@ -3,15 +3,16 @@
 Отчёт по валидации ссылок во всех Markdown-файлах репозитория `Nmsdk`.
 
 ## Методика
-- Собраны все `.md` файлы (157 шт., исключены только внешние зависимости `build/_deps/**`).
+- Собраны все `.md` файлы репозитория (~800+, см. [Documentation-Inventory.json](../Audit/Documentation-Inventory.json)); исключены `build/_deps/**`.
 - Для каждой ссылки формата `[text] (target)` и `![alt] (target)` (пробел разрывает парсинг ссылок в этом описании):
   - Пропущены внешние URL (`http(s)://`, `mailto:`) и чистые якоря `#anchor`.
   - Цель интерпретирована как путь, **относительный к каталогу текущего файла**; проверено существование файла.
   - Для сабрепозиториев оставлены только ссылки внутри их каталога; внешние пути заменены ранее на текстовые указания (в рамках предыдущих работ).
 
 ## Результат проверки
-- Автоматическая проверка: `Scripts/doc-audit/check-links.py` → [Docs/Audit/Link-Health-Report.md](../Audit/Link-Health-Report.md)
-- Последний прогон: см. дату в Link-Health-Report (полное дерево ~650+ `.md`)
+- Автоматическая проверка: `Scripts/doc-audit/run-all.sh` → [Link-Health-Report.md](../Audit/Link-Health-Report.md)
+- CI: `Scripts/ci-doc-audit.sh` (критические корневые ссылки + полный прогон отчётов)
+- Целевое значение: **0** битых относительных ссылок в Link-Health-Report
 
 ## Исправленные проблемы (кратко)
 - Обновлены ссылки в `Reports/00-Project-Overview.md`, `Reports/09-Component-System.md`, `Reports/10-Build-System.md` на актуальный `Docs/Libraries/Overview.md`.

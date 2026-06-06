@@ -193,7 +193,9 @@ def render_index_gap() -> str:
         parse_upload_classes(LIBRARY_REGISTRATION_FILES["Nmsdk-PulseLib"])
     )
     index_text = LIBRARIES_INDEX.read_text(encoding="utf-8", errors="replace") if LIBRARIES_INDEX.exists() else ""
-    m = re.search(r"\((\d+)\s+компонента\)", index_text)
+    m = re.search(r"(\d+)\s+зарегистрированн", index_text)
+    if not m:
+        m = re.search(r"\((\d+)\s+компонента\)", index_text)
     claimed = int(m.group(1)) if m else None
     lines = [
         "# Index Count Gap Report",
