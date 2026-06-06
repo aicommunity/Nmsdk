@@ -212,3 +212,33 @@ Local overrides without editing the shared preset: optional `CMakeUserPresets.js
 - [Build Windows](Build-Windows.md)
 - [Build Linux](Build-Linux.md)
 - [Reports/10-Build-System.md](../../Reports/10-Build-System.md) - detailed description
+
+```mermaid
+flowchart TB
+    Start[Запуск CMake] --> Config["Конфигурация<br/>CMakeLists.txt"]
+    Config --> Detect["Определение платформы<br/>QT_FOUND, WIN32, UNIX"]
+    Detect --> SelectSys["Выбор системных абстракций<br/>System/Qt, System/Win, System/Gcc"]
+    SelectSys --> Compile["Компиляция<br/>gcc/clang/msvc"]
+    Compile --> Link["Линковка<br/>rdk.static.qt + библиотеки"]
+    Link --> Deploy["Деплой<br/>Bin/Platform/OS/"]
+    
+    Config --> LoadLibs["Загрузка библиотек<br/>RdkLoadPredefinedLibraries"]
+    LoadLibs --> Compile
+```
+
+```mermaid
+flowchart LR
+    RdkCore[rdk.static.qt] --> BasicLib[Rdk-BasicLib.qt]
+    RdkCore --> CvLib[Rdk-CvBasicLib.qt]
+    RdkCore --> HardwareLib[Rdk-HardwareLib.qt]
+    BasicLib --> PulseLib[Nmsdk-PulseLib.qt]
+    BasicLib --> MotionLib[Nmsdk-MotionControlLib.qt]
+    RdkCore --> LlmMod[Rdk/LLM optional]
+    RdkCore --> App[NeuroModeler]
+    LlmMod --> App
+    BasicLib --> App
+    CvLib --> App
+    HardwareLib --> App
+    PulseLib --> App
+    MotionLib --> App
+```

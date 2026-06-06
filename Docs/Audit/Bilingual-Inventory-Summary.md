@@ -1,6 +1,6 @@
 # Bilingual Inventory Summary
 
-Generated: 2026-06-06T19:09:14Z
+Generated: 2026-06-06T21:49:43Z
 
 - Total markdown files: **806**
 - Missing `## EN` (outside allowlist): **0**

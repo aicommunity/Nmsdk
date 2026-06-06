@@ -1401,3 +1401,33 @@ TEST(CriticalTest, CriticalChecks)
 - [Rdk/Tests/](../../Rdk/Tests/) - test source code
 - [Reports/33-34](../../Reports/) - test results
 - [Component Development Guide](../Development-Guides/Component-Development.md) - component development with tests
+
+```mermaid
+flowchart TB
+    Tests[Rdk/Tests/] --> Unit[Unit/]
+    Tests --> Integration[Integration/]
+    
+    Unit --> EngineTests["Engine/<br/>UComponent, UProperty, UContainer, UStorage"]
+    Unit --> GraphicsTests["Graphics/<br/>UGraphics, UBitmap"]
+    Unit --> SerializeTests["Serialize/<br/>USerStorage"]
+    
+    Integration --> AppTests["Application/<br/>UApplication, RPC"]
+    Integration --> CoreTests["Core/<br/>Полная система"]
+```
+
+```mermaid
+sequenceDiagram
+    participant Developer as Разработчик
+    participant CMake as CMake
+    participant CTest as CTest
+    participant GTest as Google Test
+    participant Test as Тестовый код
+    
+    Developer->>CMake: cmake --build . --target test
+    CMake->>CTest: Запуск CTest
+    CTest->>GTest: Запуск тестовых сьютов
+    GTest->>Test: Выполнение тестов
+    Test-->>GTest: Результаты
+    GTest-->>CTest: Отчёт
+    CTest-->>Developer: Итоговый отчёт
+```

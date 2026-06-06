@@ -132,3 +132,47 @@ The NeuroModeler style system provides centralized management of application vis
 
 - [Reports/29-StyleSystem-Documentation.md](../../Reports/29-StyleSystem-Documentation.md) - detailed documentation
 - [GUI Overview](Overview.md)
+
+```mermaid
+classDiagram
+    class UStyleManager {
+        <<singleton>>
+        +instance()
+        +loadTheme()
+        +loadStyleSheet()
+        +switchTheme()
+        +getNodeFillColor()
+        +getPortInputColor()
+        +getLinkColor()
+    }
+    
+    class QApplication {
+        +setStyleSheet()
+    }
+    
+    class UModernDiagramWidget {
+        +updateTheme()
+    }
+    
+    class UModernDiagramNodeItem {
+        +paint()
+    }
+    
+    UStyleManager --> QApplication
+    UModernDiagramWidget --> UStyleManager
+    UModernDiagramNodeItem --> UStyleManager
+```
+
+```mermaid
+flowchart TB
+    Start[Запуск приложения] --> Load[UStyleManager::loadTheme]
+    Load --> Parse[Парсинг theme.json]
+    Parse --> QSS[Загрузка .qss файла]
+    QSS --> Apply[applyGlobalStyleSheet]
+    Apply --> Widgets[Применение к виджетам]
+    
+    Switch[Переключение темы] --> Reload[switchTheme]
+    Reload --> Parse
+    Reload --> Invalidate[Инвалидация кэша]
+    Invalidate --> Repaint[Перерисовка виджетов]
+```

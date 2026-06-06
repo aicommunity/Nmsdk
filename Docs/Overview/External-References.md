@@ -17,10 +17,12 @@
 ## EN
 
 ## neuromodeler.ru
+
 - Plan: collect sections/pages related to Nmsdk, the component system, and configuration examples.
 - If access is limited, leave links/brief summaries for later; current version is a placeholder.
 
 ## Publications (Google Scholar, author id 9JLa0b0AAAAJ)
+
 - Plan: compile publications relevant to spiking networks, motion control, CV/ML integration.
 - Add as `Background/References` in key sections (SNN, Motion Control, CV/ML).
 

@@ -108,3 +108,28 @@ All widgets inherit from `UVisualControllerWidget` or `UVisualControllerMainWidg
 - [Widgets Reference](Widgets-Reference.md)
 - [Style System](Style-System.md)
 - [Rdk Core Graphics](../../Rdk/Docs/Architecture/Graphics-Architecture.md)
+
+```mermaid
+flowchart TB
+    App[UApplication] --> MainWidget[UGEngineControlWidget]
+    MainWidget --> DiagramWidget[UModernDiagramWidget]
+    MainWidget --> PropertyWidget[UComponentPropertyChanger]
+    MainWidget --> ListWidget[UComponentsListWidget]
+    MainWidget --> LogWidget[ULoggerWidget]
+    MainWidget --> GraphWidget[UGraphWidget]
+    
+    DiagramWidget --> Scene[UModernDiagramScene]
+    Scene --> Nodes[UModernDiagramNodeItem]
+    Scene --> Links[UModernDiagramLinkItem]
+    
+    MainWidget --> EngineControl[UEngineControlQt]
+    EngineControl --> Timer[QTimer]
+    Timer --> Update[AUpdateInterface]
+    Update --> DiagramWidget
+    Update --> PropertyWidget
+    Update --> GraphWidget
+    
+    DiagramWidget --> App
+    PropertyWidget --> App
+    GraphWidget --> App
+```

@@ -38,6 +38,7 @@ CMAKE_MAKE_PROGRAM is not set.
 ## EN
 
 ## Problem
+
 Presets `win-msvc-debug` and `win-msvc-release` stopped working with:
 ```
 CMake Error: CMake was unable to find a build program corresponding to "Ninja".
@@ -45,9 +46,11 @@ CMAKE_MAKE_PROGRAM is not set.
 ```
 
 ## Cause
+
 Preset `win-msvc-base` uses the `Ninja` generator but does not specify the path to `ninja.exe`.
 
 ## Solution
+
 Added `CMAKE_MAKE_PROGRAM` to `cacheVariables` in preset `win-msvc-base`:
 ```json
 "CMAKE_MAKE_PROGRAM": "$env{VCPKG_ROOT}/downloads/tools/ninja-1.13.2-windows/ninja.exe"
@@ -66,4 +69,5 @@ Added `CMAKE_MAKE_PROGRAM` to `cacheVariables` in preset `win-msvc-base`:
 - **environment**: does not include VCINSTALLDIR/VSINSTALLDIR (not required)
 
 ## Status
+
 ✅ Presets `win-msvc-debug` and `win-msvc-release` should now work correctly.

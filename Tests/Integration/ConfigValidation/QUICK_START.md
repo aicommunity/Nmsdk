@@ -78,7 +78,7 @@ ctest -R ConfigValidationTests -V
 ✅ Invalid XML  
 ✅ Empty models  
 ✅ Nonexistent component classes  
-✅ Invalid links between components  
+✅ Invalid links between components
 
 ## Quick manual check
 

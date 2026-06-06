@@ -66,3 +66,12 @@ Short navigator for the Nmsdk component system. **Full documentation** lives in 
 - [Creating Components](../../Rdk/Docs/Guides/Creating-Components.md)
 - [Global Component Index](../Overview/Global-Component-Index.md)
 - [Component Inventory](../Overview/Component-Inventory.md)
+
+```mermaid
+flowchart LR
+    Storage[UStorage] --> Create[CreateComponent]
+    Create --> Component[UComponent]
+    Component --> Props[UProperty inputs/outputs]
+    Component --> Net[UNet graph]
+    Net --> Calculate[ACalculate loop]
+```

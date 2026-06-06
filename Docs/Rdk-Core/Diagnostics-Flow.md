@@ -356,7 +356,7 @@ struct TProjectLoadDiagnostics
 
 ```mermaid
 flowchart TD
-    Start[OpenProject с diagnostics] --> Init[Инициализация diagnostics]
+    Start[OpenProject с diagnostics] --> Init[Initialization diagnostics]
     Init --> ForEach[Для каждого канала]
     ForEach --> LoadModel[LoadModelFromFile с diagnostics]
     LoadModel --> SetEngine[SetLoadDiagnostics в Engine]
@@ -398,7 +398,7 @@ flowchart TD
     NextComp --> MoreComps{Еще компоненты?}
     MoreComps -->|Да| LoadComp
     MoreComps -->|Нет| ClearDiag[SetLoadDiagnostics nullptr]
-    ClearDiag --> Validate[ValidateProject использует diagnostics]
+    ClearDiag --> Validate[ValidateProject uses diagnostics]
     Validate --> End[Возврат diagnostics]
 ```
 

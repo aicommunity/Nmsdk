@@ -26,7 +26,7 @@
 
 ---
 
-## EN
+## EN
 
 [English text]
 ```
@@ -91,7 +91,7 @@
 
 ---
 
-## EN
+## EN
 
 Description in English...
 ```

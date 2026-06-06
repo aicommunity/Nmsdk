@@ -978,3 +978,4 @@ std::cout << "Loaded aliases: " << aliases.size() << std::endl;
 - **Validate component paths**: ensure component exists before creating alias
 - **Check property types**: use `DetectPropertyType()` for automatic type detection
 
+---

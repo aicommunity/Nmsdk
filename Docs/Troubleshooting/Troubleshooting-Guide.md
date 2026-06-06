@@ -977,3 +977,38 @@ Use console application for testing components.
 - [Component Development Guide](../Development-Guides/Component-Development.md) - component development
 - [Logging System](../../Rdk/Docs/Logging-System.md) - logging system
 - [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - engine architecture
+
+```mermaid
+flowchart TB
+    Start[Обнаружение проблемы] --> Logs[Проверка логов]
+    Logs --> Exception{Есть исключение?}
+    Exception -->|Да| AnalyzeEx[Анализ исключения]
+    Exception -->|Нет| CheckState[Проверка состояния]
+    
+    AnalyzeEx --> Type{Тип исключения}
+    Type -->|EIdError| CheckId[Проверка ID компонента]
+    Type -->|EStringError| CheckMsg[Анализ сообщения]
+    Type -->|ESystemException| CheckSys[Проверка системы]
+    
+    CheckId --> FixId[Исправление ID]
+    CheckMsg --> FixMsg[Исправление по сообщению]
+    CheckSys --> FixSys[Исправление системы]
+    
+    CheckState --> Ready{Компонент Ready?}
+    Ready -->|Нет| CheckBuild[Проверка Build]
+    Ready -->|Да| CheckCalc[Проверка Calculate]
+    
+    CheckBuild --> FixBuild[Исправление Build]
+    CheckCalc --> FixCalc[Исправление Calculate]
+    
+    FixId --> Verify[Проверка исправления]
+    FixMsg --> Verify
+    FixSys --> Verify
+    FixBuild --> Verify
+    FixCalc --> Verify
+    
+    Verify --> End[Завершение]
+    
+    style Start fill:#e1f5ff
+    style End fill:#ffe1f5
+```

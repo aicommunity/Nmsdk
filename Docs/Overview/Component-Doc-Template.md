@@ -81,6 +81,7 @@ sequenceDiagram
 Use for group pages and individual component pages. Language — RU; add an EN duplicate below in the same file if needed.
 
 ## Structure
+
 1. **Name and brief purpose**
 2. **UStorage registration**  
    - Library file/class: `Libraries/<Lib>/Core/...`  
@@ -102,18 +103,22 @@ Use for group pages and individual component pages. Language — RU; add an EN d
    - `neuromodeler.ru`, papers (Google Scholar), if relevant
 
 ## Link rules (multi-repo)
+
 - **Inside a subrepo (`Libraries/<Lib>`)**: active links only to files in the same subrepo. Links to the root repository — **text in backticks** (no Markdown link), so GitHub subrepo navigation is not broken.
 - **In the root repository (`Docs/**`)**: active relative links to `Libraries/<Lib>/Docs/...` and `Docs/**`.
 - **External URLs**: regular `https://` links.
 
 ## File structure rules
+
 - `Libraries/<Lib>/Docs/Component-Catalog.md` — component and group index.
 - `Libraries/<Lib>/Docs/Groups/<Group>.md` — groups (families) of components.
 - `Libraries/<Lib>/Docs/Components/<Component>.md` — complex/key components.
 - Diagrams: `Docs/Diagrams/*.md` (optional) or inside component pages.
 
 ## Mini sample (fragment)
+
 ```
+
 ## NPulseNeuronIzhikevich — spiking neuron (Izhikevich model)
 
 **Registration**: `Libraries/Nmsdk-PulseLib/Core/NPulseLibrary.cpp`, `UploadClass("NPulseNeuronIzhikevich", ...)`

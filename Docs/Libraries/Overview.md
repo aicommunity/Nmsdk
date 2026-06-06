@@ -177,3 +177,27 @@ Libraries are loaded through the `RdkLoadPredefinedLibraries()` function in `Lib
 ### See Also
 
 - [Component System](../../Rdk/Docs/Guides/Component-System.md)
+
+```mermaid
+graph TD
+    RdkCore[rdk.static.qt]
+    
+    BasicLib[Rdk-BasicLib]
+    CvLib[Rdk-CvBasicLib]
+    HardwareLib[Rdk-HardwareLib]
+    PulseLib[Nmsdk-PulseLib]
+    MotionLib[Nmsdk-MotionControlLib]
+    
+    RdkCore --> BasicLib
+    RdkCore --> CvLib
+    RdkCore --> HardwareLib
+    
+    RdkCore --> PulseLib
+    BasicLib --> PulseLib
+    
+    RdkCore --> MotionLib
+    BasicLib --> MotionLib
+    CvLib --> MotionLib
+    HardwareLib --> MotionLib
+    PulseLib --> MotionLib
+```

@@ -237,3 +237,109 @@ Widget for visualizing component data graphs.
 
 - [GUI Overview](Overview.md)
 - [Bin/Help](../../Bin/Help/) - user help
+
+```mermaid
+classDiagram
+    class UModernDiagramWidget {
+        +SetApplication()
+        +SetComponentName()
+        +Reload()
+        +updateScheme()
+    }
+    
+    class UModernDiagramScene {
+        +NodeItems
+        +LinkItems
+        +addNode()
+        +addLink()
+    }
+    
+    class UModernDiagramView {
+        +setScene()
+        +viewport()
+    }
+    
+    class UModernDiagramNodeItem {
+        +InputPorts
+        +OutputPorts
+        +paint()
+    }
+    
+    class UModernDiagramLinkItem {
+        +SourcePort
+        +TargetPort
+        +paint()
+    }
+    
+    class UModernDiagramPortManager {
+        +Ports
+        +ConnectPorts()
+    }
+    
+    UModernDiagramWidget --> UModernDiagramScene
+    UModernDiagramWidget --> UModernDiagramView
+    UModernDiagramScene --> UModernDiagramNodeItem
+    UModernDiagramScene --> UModernDiagramLinkItem
+    UModernDiagramNodeItem --> UModernDiagramPortManager
+```
+
+```mermaid
+sequenceDiagram
+    participant User as Пользователь
+    participant DiagramWidget as UModernDiagramWidget
+    participant Engine as UEngine
+    participant Component as UComponent
+    
+    User->>DiagramWidget: Добавить компонент
+    DiagramWidget->>Engine: CreateComponent()
+    Engine->>Component: Creation экземпляра
+    Component-->>Engine: Готов
+    Engine-->>DiagramWidget: Компонент создан
+    DiagramWidget->>DiagramWidget: Отображение компонента
+    
+    User->>DiagramWidget: Соединить компоненты
+    DiagramWidget->>Engine: ConnectProperties()
+    Engine->>Component: Установка соединения
+    Component-->>DiagramWidget: Соединение установлено
+```
+
+```mermaid
+sequenceDiagram
+    participant User as Пользователь
+    participant ControlWidget as UGEngineControlWidget
+    participant EngineControl as UEngineControl
+    participant Engine as UEngine
+    participant Environment as UEnvironment
+    
+    User->>ControlWidget: Нажать Start
+    ControlWidget->>EngineControl: Start()
+    EngineControl->>Engine: StartExecution()
+    Engine->>Environment: Start()
+    Environment->>Environment: Initialization выполнения
+    
+    loop Каждый шаг времени
+        Environment->>Environment: ExecuteStep()
+        Environment-->>ControlWidget: Обновление статуса
+    end
+    
+    User->>ControlWidget: Нажать Stop
+    ControlWidget->>EngineControl: Stop()
+    EngineControl->>Engine: StopExecution()
+    Engine->>Environment: Stop()
+```
+
+```mermaid
+flowchart TB
+    Timer["QTimer<br/>UEngineControlQt"] --> Update[AUpdateInterface]
+    Update --> DiagramWidget["UModernDiagramWidget<br/>Reload"]
+    Update --> DrawWidget["UDrawEngineWidget<br/>AUpdateInterface"]
+    Update --> PropertyWidget["UComponentPropertyChanger<br/>Update"]
+    Update --> GraphWidget["UGraphWidget<br/>Update"]
+    
+    DiagramWidget --> Scene["UModernDiagramScene<br/>Обновление узлов"]
+    DrawWidget --> DrawEngine["UDrawEngine<br/>Draw"]
+    
+    Scene --> App["UApplication<br/>GetEngine"]
+    DrawEngine --> App
+    App --> Engine["UEngine<br/>GetComponent"]
+```

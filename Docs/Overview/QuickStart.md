@@ -129,7 +129,7 @@ for(int i = 0; i < 10; i++) {
 
 ## EN
 
-### Installing Dependencies
+### Installation dependencies
 
 #### Linux (Ubuntu/Debian)
 
@@ -140,66 +140,66 @@ sudo apt-get install build-essential cmake qtbase5-dev
 
 #### Windows
 
-- Install Visual Studio 2019 or newer
+- Install Visual Studio 2019 или or newer
 - Install CMake 3.16+
 - Install Qt5
 
-### Building the Project
+### Build project
 
 ```bash
-# Create build directory
+# Создать директорию сборки
 mkdir build
 cd build
 
-# Configure CMake
+# Конфигурация CMake
 cmake ..
 
-# Build
+# Сборка
 cmake --build . -j$(nproc)  # Linux
-# or
+# или
 cmake --build . --config Release  # Windows
 ```
 
-### Creating Your First Project
+### Create first project
 
-1. **Launch NeuroModeler:**
+1. **Run NeuroModeler:**
    ```bash
    ./Bin/Platform/Linux/NeuroModeler
    ```
 
-2. **Create a new project:**
+2. **Create new project:**
    - File → New Project
 
-3. **Add a component:**
-   - Drag a component from the library to the diagram editor
-   - Configure component parameters
+3. **Add component:**
+   - Drag component из library в editor diagrams
+   - Configure parameters component
 
 4. **Connect components:**
-   - Connect outputs of some components to inputs of others
+   - Connect outputs some components с inputs others
 
-5. **Start execution:**
-   - Press the "Start" button in the control panel
+5. **Run execution:**
+   - Click button "Start" в panel control
 
-### Example: Simple Component Network
+### Example: Simple network components
 
 ```mermaid
 flowchart LR
-    Source["Data Source<br/>UMatrixSource"] --> Process["Processing<br/>UStatistic"]
-    Process --> Output["Output<br/>UIO"]
+    Source["Источник данных<br/>UMatrixSource"] --> Process["Processing<br/>UStatistic"]
+    Process --> Output["Выход<br/>UIO"]
 ```
 
-**Example component creation programmatically:**
+**Example creation component programmatically:**
 
 ```cpp
 #include <rdk.h>
 using namespace RDK;
 
-// Create storage and engine
+// Создание хранилища и движка
 UStorage storage;
 UEngine engine;
 engine.SetStorage(&storage);
 
-// Load libraries
+// Загрузка библиотек
 std::list<ULibrary*> libs;
 RdkLoadPredefinedLibraries(libs);
 for(auto lib : libs) {
@@ -207,7 +207,7 @@ for(auto lib : libs) {
 }
 storage.BuildStorage();
 
-// Create component
+// Создание компонента
 auto source = storage.CreateComponent<UMatrixSource>("Source");
 source->FileName = "data.csv";
 source->Build();
@@ -215,10 +215,10 @@ source->Build();
 auto processor = storage.CreateComponent<UStatistic>("Processor");
 processor->Build();
 
-// Connect components
+// Соединение компонентов
 processor->InputData.AttachTo(&source->OutputMatrix);
 
-// Execute
+// Выполнение
 engine.GetEnvironment()->Start();
 for(int i = 0; i < 10; i++) {
     source->Calculate();
@@ -226,7 +226,7 @@ for(int i = 0; i < 10; i++) {
 }
 ```
 
-**Example project configuration file (XML):**
+**Example configuration file project (XML):**
 
 ```xml
 <Project>
@@ -246,12 +246,10 @@ for(int i = 0; i < 10; i++) {
 </Project>
 ```
 
-### Common Issues
+### Next steps
 
-Если возникли проблемы, см. [Troubleshooting Guide](../Troubleshooting/Troubleshooting-Guide.md) для решений типичных проблем.
+- [Component system](../../Rdk/Docs/Guides/Component-System.md) - detailed description work с components
+- [Overview libraries](../Libraries/Overview.md) - available library components
+- [GUI Overview](../GUI/Overview.md) - description interface
 
-### Next Steps
-
-- [Component System](../Components-And-Configuration/Component-System.md) - detailed component description
-- [Libraries Overview](../Libraries/Overview.md) - available component libraries
-- [GUI Overview](../GUI/Overview.md) - interface description
+---

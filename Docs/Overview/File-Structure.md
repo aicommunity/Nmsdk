@@ -165,17 +165,155 @@ Bin/
 
 ### Overview
 
-Description of Nmsdk project directory and file structure.
+Description of the Nmsdk project directory and file structure.
 
 ### Root Structure
 
+```
+Nmsdk/
+├── Rdk/                    # Main module (core)
+│   ├── Core/               # Core source code
+│   ├── Deploy/             # Header files for use
+│   ├── GUI/                # Graphical user interface
+│   ├── Tests/              # Tests
+│   └── ThirdParty/         # Third-party libraries
+│
+├── Libraries/              # Component libraries
+│   ├── Rdk-BasicLib/       # Basic components
+│   ├── Rdk-CvBasicLib/     # Computer vision
+│   ├── Rdk-HardwareLib/    # Hardware integration
+│   ├── Nmsdk-PulseLib/     # Spiking neural networks
+│   └── Nmsdk-MotionControlLib/  # Motion control
+│
+├── Bin/                    # Compiled binaries and configs
+│   ├── Configs/            # Configuration files (Users/<UserName>/ — user folders)
+│   ├── ClDesc/             # Component class descriptions
+│   ├── Help/               # Reference documentation
+│   ├── Styles/             # Styles and themes
+│   └── Platform/           # Platform artifacts
+│
+├── Build/                  # Build files (CMake, Qt, VS, etc.)
+├── Docs/                   # Documentation (entry point Docs/README.md)
+│   └── Audit/              # Audit reports (Scripts/doc-audit/)
+├── Docs.old/               # Legacy .doc / Doxygen (not maintained)
+├── Reports/                # Historical reports (archive)
+├── Scripts/doc-audit/      # Documentation audit tools
+├── LLM/                    # LLM assistant runtime index
+├── README.md               # Root entry point
+└── CMakeLists.txt          # Root build file
+```
+
 ### Rdk Structure
+
+```
+Rdk/
+├── Core/                   # Core source code
+│   ├── Application/        # Application, RPC, server
+│   │   ├── UApplication.h/cpp
+│   │   ├── UEngineControl.h/cpp
+│   │   ├── URpcDispatcher.h/cpp
+│   │   ├── UProject.h/cpp
+│   │   ├── Qt/            # Qt implementation
+│   │   └── Bcb/           # Borland C++ Builder implementation
+│   ├── Engine/             # Engine, components, environment
+│   │   ├── UEngine.h/cpp
+│   │   ├── UComponent.h/cpp
+│   │   ├── UContainer.h/cpp
+│   │   ├── UNet.h/cpp
+│   │   ├── UStorage.h/cpp
+│   │   ├── UEnvironment.h/cpp
+│   │   ├── UProperty.h
+│   │   └── UPropertyEndpoints.h
+│   ├── Graphics/           # Graphics and visualization
+│   │   ├── UGraphics.h/cpp
+│   │   ├── UDrawEngine.h/cpp
+│   │   ├── UBitmap.h/cpp
+│   │   └── UFont.h
+│   ├── Math/              # Mathematical utilities
+│   │   └── MVector.h      # Vectors and matrices
+│   ├── Serialize/          # Serialization (XML, Binary)
+│   │   ├── USerStorage.h
+│   │   ├── USerStorageXML.h/cpp
+│   │   └── USerStorageBinary.h/cpp
+│   ├── System/            # System utilities
+│   │   ├── rdk_system.h
+│   │   ├── UGenericMutex.h
+│   │   ├── UGenericEvent.h
+│   │   ├── UDllLoader.h
+│   │   ├── Qt/            # Qt implementations
+│   │   ├── Win/           # Windows implementations
+│   │   └── Gcc/           # GCC/POSIX implementations
+│   ├── Utilities/          # Helper utilities
+│   │   └── UIniFile.h     # INI file handling
+│   └── Console/           # Console engine
+│       └── UConsoleEngine.h/cpp
+├── Deploy/                # Header files
+│   └── Include/           # Public headers
+│       ├── rdk.h
+│       ├── rdk_application.h
+│       └── rdk_init.h
+├── GUI/                   # Graphical user interface
+│   ├── Qt/               # Qt GUI implementation
+│   │   ├── UGEngineControlWidget.h/cpp
+│   │   ├── UModernDiagramWidget.h/cpp
+│   │   ├── UStyleManager.h/cpp
+│   │   └── Styles/       # QSS and JSON themes
+│   └── BCB/              # Borland C++ Builder GUI
+├── Tests/                 # Tests
+│   ├── Unit/             # Unit tests
+│   └── Integration/      # Integration tests
+└── ThirdParty/           # Third-party libraries
+```
+
+**Core module dependencies:**
+
+```mermaid
+flowchart TB
+    Application[Application] --> Engine[Engine]
+    Application --> Serialize[Serialize]
+    Engine --> Graphics[Graphics]
+    Engine --> Serialize
+    Engine --> System[System]
+    Engine --> Math[Math]
+    Graphics --> Math
+    Serialize --> System
+    Application --> Utilities[Utilities]
+```
 
 ### Libraries Structure
 
-Each library follows a common structure.
+Each library follows a common structure:
+
+```
+LibraryName/
+├── Core/                  # Component source code
+│   ├── Component1.h
+│   ├── Component1.cpp
+│   └── ...
+├── Deploy/                # Header files
+│   └── Include/
+│       └── Lib.h          # Main header
+├── CMake/                 # CMake build files
+│   └── CMakeLists.txt
+├── Build/                 # Build files for various IDEs
+├── Docs/                  # Library documentation
+└── Tests/                 # Library tests
+```
 
 ### Bin Structure
+
+```
+Bin/
+├── Configs/               # Project configuration files (Users/<UserName>/ — user folders)
+├── ClDesc/                # Component class descriptions (XML)
+├── Help/                  # Reference documentation
+│   ├── en/               # English version
+│   └── ru/               # Russian version
+├── Styles/                # GUI styles and themes
+└── Platform/              # Platform artifacts
+    ├── Linux/            # Linux-specific files
+    └── Win/              # Windows-specific files
+```
 
 ### See Also
 

@@ -12,137 +12,137 @@
 
 ## EN
 
-## Расположение скриптов
+## Script locations
 
-Все скрипты находятся в каталоге **`Scripts/`** в корне репозитория:
+All scripts are located in the directory **`Scripts/`** at the repository root:
 
-- `Scripts/detect_encoding.py` — определение кодировки файлов (Cp1251 / UTF-8)
-- `Scripts/convert_cp1251_to_utf8.py` — конвертация файлов из Cp1251 в UTF-8
-- `Scripts/restore_cp1251_comments.py` — восстановление битых комментариев из эталона в Git
+- `Scripts/detect_encoding.py` — detect file encoding (Cp1251 / UTF-8)
+- `Scripts/convert_cp1251_to_utf8.py` — convert files from Cp1251 to UTF-8
+- `Scripts/restore_cp1251_comments.py` — restore broken comments from a Git reference
 
-**Запуск:** из корня репозитория, например: `python Scripts/detect_encoding.py ...`
+**Run:** from the repository root, for example: `python Scripts/detect_encoding.py ...`
 
 ---
 
-## Определение файлов в Cp1251
+## Detecting files in Cp1251
 
-Чтобы выявить исходники, которые до сих пор хранятся в кодировке **Cp1251** (а не в UTF-8), используется скрипт по сырым байтам:
+To find source files still stored in encoding **Cp1251** (rather than UTF-8), a raw-byte script is used:
 
-- **UTF-8 кириллица:** двухбайтовые последовательности `0xD0/0xD1` + `0x80–0xBF`.
-- **Cp1251 кириллица:** одиночные байты `0xC0–0xFF`, не входящие в UTF-8 пару.
+- **UTF-8 Cyrillic:** two-byte sequences `0xD0/0xD1` + `0x80–0xBF`.
+- **Cp1251 Cyrillic:** single bytes `0xC0–0xFF`, not part of a UTF-8 pair.
 
-**Скрипт:** `Scripts/detect_encoding.py`
+**Script:** `Scripts/detect_encoding.py`
 
-**Запуск из корня репозитория:**
+**Run from the repository root:**
 
-Для одной библиотеки (например, Nmsdk-PulseLib):
+For one library (for example, Nmsdk-PulseLib):
 
 ```bash
 python Scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core
 ```
 
-Скрипт выводит для каждого файла путь и метку `cp1251` или `utf8`. Чтобы записать список файлов в Cp1251 в отдельный файл:
+The script prints each file path and label `cp1251` или `utf8`. To write the Cp1251 file list to a separate file:
 
 ```bash
 python Scripts/detect_encoding.py Libraries/Nmsdk-PulseLib/Core --list cp1251_files.txt
 ```
 
-Файл `cp1251_files.txt` будет создан только если найдётся хотя бы один файл в Cp1251. Пути в файле — относительно текущего каталога; для конвертации используйте тот же каталог библиотеки как `root_dir` и пути вида `Core/File.cpp`.
+File `cp1251_files.txt` is created only if at least one Cp1251 file is found. Paths in the file are relative to the current directory; for conversion use the same library directory as `root_dir` and paths like `Core/File.cpp`.
 
 ---
 
-## Конвертация Cp1251 → UTF-8
+## Cp1251 → UTF-8 conversion
 
-Если обнаружены файлы в Cp1251, их нужно **сначала** перевести в UTF-8, затем при необходимости запускать восстановление комментариев (см. ниже).
+If Cp1251 files are found, **first** convert them to UTF-8, then run comment restoration if needed (see below).
 
-**Скрипт:** `Scripts/convert_cp1251_to_utf8.py`
+**Script:** `Scripts/convert_cp1251_to_utf8.py`
 
-**Запуск из корня репозитория:**
+**Run from the repository root:**
 
-- **root_dir** — каталог библиотеки (или корень репозитория), относительно которого заданы пути.
+- **root_dir** — library directory (or repository root) paths are relative to.
 
-Читать список путей из файла (пути в файле — относительно `root_dir`, например `Core/File.cpp`):
+Read path list from file (paths in the file are relative to `root_dir`, for example `Core/File.cpp`):
 
 ```bash
 python Scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib --list cp1251_files.txt
 ```
 
-Если `detect_encoding.py` был запущен из каталога библиотеки и записал пути вида `Core/File.cpp`, используйте `root_dir=Libraries/Nmsdk-PulseLib`. Если пути в файле вида `Libraries/Nmsdk-PulseLib/Core/File.cpp`, используйте `root_dir=.` (корень репозитория).
+If `detect_encoding.py` was run from the library directory and wrote paths like `Core/File.cpp`, use `root_dir=Libraries/Nmsdk-PulseLib`. If paths in the file look like `Libraries/Nmsdk-PulseLib/Core/File.cpp`, use `root_dir=.` (repository root).
 
-Указать файлы вручную (пути относительно `root_dir`):
+Specify files manually (paths relative to `root_dir`):
 
 ```bash
 python Scripts/convert_cp1251_to_utf8.py Libraries/Nmsdk-PulseLib Core/SomeFile.h Core/Other.cpp
 ```
 
-Скрипт читает каждый файл как **Cp1251**, декодирует в Unicode и записывает в **UTF-8**.
+The script reads each file as **Cp1251**, decodes to Unicode, and writes **UTF-8**.
 
-**Порядок работ:** сначала определение кодировки → конвертация файлов в Cp1251 в UTF-8 → затем проверка и восстановление битых комментариев (скрипт `restore_cp1251_comments.py`) по всем исходникам.
+**Workflow:** first encoding detection → convert Cp1251 files to UTF-8 → then verify and restore broken comments (script `restore_cp1251_comments.py`) across all sources.
 
 ---
 
-## 1. Как найти «хорошую» версию в Git
+## 1. How to find a good version in Git
 
-1. Перейдите в репозиторий (или сабмодуль), где лежит проблемный файл.  
-   Например, для Nmsdk-PulseLib: `Libraries/Nmsdk-PulseLib`; для другой библиотеки — её каталог.
+1. Go to the repository (or submodule) containing the problem file.  
+   For example, для Nmsdk-PulseLib: `Libraries/Nmsdk-PulseLib`; для another library — её directory.
 
-2. Посмотрите историю файла:
+2. View file history:
    ```bash
    cd Libraries/Nmsdk-PulseLib
    git log --oneline -- Core/NPulseSynapse.h
    ```
 
-3. Выберите коммит **до** массовой смены кодировки или с сообщением вроде «Comment updated». Для Nmsdk-PulseLib использовался коммит **bcf94ed**.
+3. Pick a commit **before** bulk encoding changes or with a message like «Comment updated». Для Nmsdk-PulseLib was used commit **bcf94ed**.
 
-4. Проверьте, что в выбранном коммите комментарии действительно в Cp1251:
+4. Verify comments in the chosen commit are actually in Cp1251:
    ```bash
    git show <коммит>:Core/NPulseSynapse.h
    ```
-   Если при выводе в UTF-8 консоли видна **кракозябра** той же длины, что и ожидаемый русский текст, скорее всего файл в этом коммите хранится в **Cp1251**.
+   If the UTF-8 console shows **mojibake** of the same length as the expected Russian text, the file in that commit is likely stored in **Cp1251**.
 
 ---
 
-## 2. Как получить комментарии в правильной кодировке
+## 2. How to get comments in the correct encoding
 
-Содержимое файла из коммита нужно получить **в виде сырых байтов** и затем декодировать как **Cp1251** в Unicode (в скрипте `restore_cp1251_comments.py` это делается автоматически).
-
----
-
-## 3. Как применить комментарии к текущему файлу
-
-Скрипт `restore_cp1251_comments.py` делает это автоматически: строит по эталону (версия из Git, декодированная из Cp1251) карту «следующая строка кода» → «комментарий над ней», находит в текущем файле битые комментарии (пустые или без кириллицы; закомментированный код не трогает) и подставляет эталонные. Результат записывается в UTF-8.
+Get the file content from the commit as **raw bytes**, then decode as **Cp1251** to Unicode (in the script `restore_cp1251_comments.py` this is done automatically).
 
 ---
 
-## 4. Скрипт восстановления комментариев
+## 3. How to apply comments to the current file
 
-**Путь:** `Scripts/restore_cp1251_comments.py`
+Script `restore_cp1251_comments.py` does this automatically: builds from the reference (Git version decoded from Cp1251) map «next code line» → «comment above it», finds broken comments in the current file (empty or without Cyrillic; does not touch commented-out code) and substitutes reference comments. The result is written in UTF-8.
 
-**Запуск из корня репозитория:**
+---
+
+## 4. Comment restoration script
+
+**Path:** `Scripts/restore_cp1251_comments.py`
+
+**Run from the repository root:**
 
 ```bash
 python Scripts/restore_cp1251_comments.py <каталог_репозитория_библиотеки> <путь_к_файлу_от_корня_этой_библиотеки> [коммит]
 ```
 
-- **каталог_репозитория_библиотеки** — путь к корню Git-репозитория библиотеки (сабмодуля), например `Libraries/Nmsdk-PulseLib`.
-- **путь_к_файлу_от_корня_этой_библиотеки** — путь к файлу **от корня этой библиотеки**, например `Core/NPulseSynapse.h`.
-- **коммит** — необязательный аргумент; по умолчанию `bcf94ed`.
+- **library_repository_directory** — path to the library Git repository root (submodule), for example `Libraries/Nmsdk-PulseLib`.
+- **file_path_from_library_root** — file path **from that library root**, for example `Core/NPulseSynapse.h`.
+- **commit** — optional argument; default `bcf94ed`.
 
-**Примеры (из корня репозитория):**
+**Examples (from repository root):**
 
-Восстановить комментарии в одном файле Nmsdk-PulseLib:
+Restore comments in one file Nmsdk-PulseLib:
 
 ```bash
 python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapse.h
 ```
 
-Указать другой коммит:
+Specify another commit:
 
 ```bash
 python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.h 2b564e8
 ```
 
-Восстановить несколько файлов подряд (Nmsdk-PulseLib):
+Restore several files in sequence (Nmsdk-PulseLib):
 
 ```bash
 for f in Core/NPulseSynapse.h Core/NPulseSynapse.cpp Core/NPulseSynapseCommon.h Core/NPulseSynapseCommon.cpp; do
@@ -159,26 +159,26 @@ python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSy
 python Scripts/restore_cp1251_comments.py Libraries/Nmsdk-PulseLib Core/NPulseSynapseCommon.cpp
 ```
 
-**Для другой библиотеки** подставьте её каталог вместо `Libraries/Nmsdk-PulseLib` и путь к файлу относительно её корня.
+**For another library** substitute its directory for `Libraries/Nmsdk-PulseLib` and the file path relative to its root.
 
 ---
 
-## 5. Проверка после восстановления
+## 5. Verification after restoration
 
-1. **Визуально** откройте файл в редакторе с кодировкой UTF-8 и убедитесь, что комментарии отображаются корректно.
-2. **Сборка:** выполните сборку проекта (например, через CMake), чтобы убедиться, что правки не сломали компиляцию.
-3. При необходимости зафиксируйте изменения в Git (в репозитории сабмодуля или в корневом репозитории).
-
----
-
-## 6. Ограничения и подсказки
-
-- **Разная структура кода:** если между выбранным коммитом и текущей версией менялись имена членов, типы или порядок объявлений, часть комментариев может остаться без пары. Выберите другой коммит или допишите комментарии вручную.
-- **Закомментированный код:** скрипт не заменяет строки, похожие на закомментированный код (например, `// return false;`, `// if (...)`) — только пустые или явно битые комментарии.
-- **Кодировка при сохранении:** при ручном редактировании сохраняйте файл в **UTF-8**.
+1. **Visually** open the file in a UTF-8 editor and verify comments display correctly.
+2. **Build:** build the project (for example, via CMake), to ensure edits did not break compilation.
+3. Commit changes to Git if needed (in the submodule or root repository).
 
 ---
 
-## 7. Выполненная работа (пример)
+## 6. Limitations and tips
 
-С помощью скриптов восстановлены комментарии в файлах Nmsdk-PulseLib (коммит **bcf94ed**): в том числе `Core/NPulseSynapse.h`, `Core/NPulseSynapse.cpp`, `Core/NPulseSynapseCommon.h`, `Core/NPulseSynapseCommon.cpp` и ряд других в `Core/`. Для файлов, добавленных после выбранного коммита, скрипт выводит «Skip (file not in commit)»; для них можно указать другой коммит или восстановить комментарии вручную.
+- **Different code structure:** if member names, types, or declaration order changed between the chosen commit and the current version, some comments may remain unmatched. Pick another commit or add comments manually.
+- **Commented-out code:** the script does not replace lines that look like commented-out code (for example, `// return false;`, `// if (...)`) — only empty or clearly broken comments.
+- **Encoding when saving:** when editing manually, save the file in **UTF-8**.
+
+---
+
+## 7. Completed work (example)
+
+Comments were restored with the scripts in files Nmsdk-PulseLib (commit **bcf94ed**): including `Core/NPulseSynapse.h`, `Core/NPulseSynapse.cpp`, `Core/NPulseSynapseCommon.h`, `Core/NPulseSynapseCommon.cpp` and others in `Core/`. For files added after the chosen commit, the script prints «Skip (file not in commit)»; specify another commit or restore comments manually.

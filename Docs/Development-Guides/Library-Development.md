@@ -1008,3 +1008,119 @@ storage->RegisterLibrary(&RDK::MyLibInstance);
 - [Component Development Guide](Component-Development.md) - component development
 - [Build System](../Build-And-Deploy/Build-System.md) - build system
 - [Library Examples](../../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - library examples
+
+```mermaid
+classDiagram
+    class ULibrary {
+        -string Name
+        -string Version
+        -UClassesStorage ClassSamples
+        +GetName() string
+        +GetVersion() string
+        +CreateClassSamples(UStorage*) void*
+        +UploadClass(string, UContainer*) void
+        +UploadClass~T~(string, string) void
+    }
+    
+    class UStorage {
+        -UClassesStorage ClassesStorage
+        -UClassLibraryList CollectionList
+        +RegisterLibrary(ULibrary*) bool
+        +CreateComponent~T~(string) UEPtr~UContainer~
+        +FindClass(string) UId
+    }
+    
+    class UComponentFactory {
+        <<abstract>>
+        +Create() UContainer*
+    }
+    
+    class UComponentAbstractFactory {
+        +Create() UContainer*
+        +GetClassName() string
+    }
+    
+    ULibrary --> UStorage: регистрация
+    UStorage --> UComponentAbstractFactory: создание компонентов
+    UComponentAbstractFactory <|-- UComponentFactory
+```
+
+```mermaid
+flowchart TB
+    Start[Creation библиотеки] --> Structure[Структура каталогов]
+    Structure --> Components[Creation компонентов]
+    Components --> Library[Creation класса библиотеки]
+    Library --> Register[Регистрация компонентов]
+    Register --> CMake[Настройка CMake]
+    CMake --> Build[Сборка]
+    Build --> Test[Тестирование]
+    Test --> Document[Документирование]
+    Document --> End[Завершение]
+    
+    style Start fill:#e1f5ff
+    style End fill:#ffe1f5
+```
+
+```mermaid
+sequenceDiagram
+    participant App as Приложение
+    participant Storage as UStorage
+    participant Library as MyLibrary
+    participant Factory as ComponentFactory
+    
+    App->>Storage: RegisterLibrary(&MyLibInstance)
+    Storage->>Storage: Добавление в CollectionList
+    Storage->>Library: CreateClassSamples(storage)
+    Library->>Library: UploadClass<MyComponent>("Name")
+    Library->>Storage: Регистрация фабрики
+    Storage->>Storage: Сохранение в ClassesStorage
+    
+    Note over Storage: При создании компонента
+    App->>Storage: CreateComponent<MyComponent>("Name")
+    Storage->>Factory: Create()
+    Factory->>Factory: new MyComponent()
+    Factory-->>Storage: UEPtr<MyComponent>
+    Storage-->>App: Компонент создан
+```
+
+```mermaid
+flowchart TB
+    subgraph "Core"
+        Rdk[Rdk Core]
+    end
+    
+    subgraph "Basic Libraries"
+        BasicLib[Rdk-BasicLib]
+        CvLib[Rdk-CvBasicLib]
+    end
+    
+    
+    subgraph "Application Libraries"
+        PulseLib[Nmsdk-PulseLib]
+        MotionLib[Nmsdk-MotionControlLib]
+        HardwareLib[Rdk-HardwareLib]
+    end
+    
+    Rdk --> BasicLib
+    Rdk --> CvLib
+    HardwareLib --> MotionLib
+```
+
+```mermaid
+sequenceDiagram
+    participant App as Приложение
+    participant Loader as UDllLoader
+    participant Library as MyLibrary
+    participant Storage as UStorage
+    
+    App->>Loader: LoadLibrary("MyLibrary.dll")
+    Loader->>Loader: Загрузка DLL/SO
+    Loader->>Library: InitLibrary()
+    Library->>Library: Creation MyLibInstance
+    Library->>Storage: RegisterLibrary(&MyLibInstance)
+    Storage->>Storage: Добавление в CollectionList
+    Storage->>Library: CreateClassSamples(storage)
+    Library->>Library: UploadClass() для каждого компонента
+    Library->>Storage: Регистрация фабрик компонентов
+    Storage-->>App: Библиотека загружена
+```

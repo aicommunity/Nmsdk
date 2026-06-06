@@ -1,10 +1,12 @@
 # Link Health Report
 
-Generated: 2026-06-06T19:09:13Z
+Generated: 2026-06-06T21:49:42Z
 
 ## Summary
 
 - Markdown files scanned: **806**
-- Broken relative links: **0**
+- Broken relative links: **1**
 
-No broken relative links found.
+## Broken links
+
+- `Libraries/Nmsdk-PulseLib/Docs/CONTRIBUTING-docs.md` → `Components/Componentname.md` — target does not exist

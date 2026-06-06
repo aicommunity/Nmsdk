@@ -1,6 +1,6 @@
 # Component Gap Report
 
-Generated: 2026-06-06T19:09:15Z
+Generated: 2026-06-06T21:49:44Z
 
 Comparison of `UploadClass` registrations vs `Docs/Components/*.md` and Component-Catalog mentions.
 

@@ -319,3 +319,121 @@ Abstractions in `Rdk/Core/System` provide a unified interface for:
 - [Application Architecture](../Rdk-Core/Application-Architecture.md) - application architecture
 - [Engine Architecture](../Rdk-Core/Engine-Architecture.md) - engine architecture
 - [Component System](../Components-And-Configuration/Component-System.md) - component system
+
+```mermaid
+flowchart TB
+    subgraph "Application Layer"
+        GUI[GUI Qt Application]
+        Console[Console Application]
+        Server[RPC Server]
+    end
+    
+    subgraph "Rdk Core"
+        AppCore[Application Core]
+        Engine[Engine]
+        Storage[Storage]
+        Env[Environment]
+    end
+    
+    subgraph "Libraries"
+        BasicLib[Rdk-BasicLib]
+        CvLib[Rdk-CvBasicLib]
+        HardwareLib[Rdk-HardwareLib]
+        PulseLib[Nmsdk-PulseLib]
+        MotionLib[Nmsdk-MotionControlLib]
+    end
+    
+    subgraph "Resources"
+        Configs[Bin/Configs]
+        ClDesc[Bin/ClDesc]
+        Help[Bin/Help]
+        Styles[Bin/Styles]
+    end
+    
+    GUI --> AppCore
+    Console --> AppCore
+    Server --> AppCore
+    
+    AppCore --> Engine
+    Engine --> Storage
+    Engine --> Env
+    
+    Engine --> BasicLib
+    Engine --> CvLib
+    Engine --> HardwareLib
+    Engine --> PulseLib
+    Engine --> MotionLib
+    
+    AppCore --> Configs
+    GUI --> Help
+    GUI --> Styles
+    Engine --> ClDesc
+```
+
+```mermaid
+sequenceDiagram
+    participant User as Пользователь/GUI
+    participant App as UApplication
+    participant Engine as UEngine
+    participant Env as UEnvironment
+    participant Storage as UStorage
+    participant Comp as UComponent
+    
+    User->>App: Создать проект
+    App->>Engine: Initialization
+    Engine->>Storage: Initialization хранилища
+    Engine->>Env: Создать окружение
+    Storage->>Storage: Загрузить библиотеки<br/>RdkLoadPredefinedLibraries
+    
+    User->>App: Добавить компонент
+    App->>Engine: Создать компонент
+    Engine->>Storage: Получить фабрику<br/>GetComponentFactory
+    Storage->>Comp: Создать экземпляр<br/>Factory->CreateComponent
+    Comp->>Comp: ADefault()
+    Comp->>Comp: ABuild()
+    
+    User->>App: Запустить выполнение
+    App->>Engine: Start()
+    Engine->>Env: Start()
+    
+    loop Каждый шаг времени
+        Env->>Comp: AReset()
+        Env->>Comp: ACalculate()
+        Comp->>Comp: Processing данных<br/>Обновление выходных свойств
+    end
+    
+    User->>App: Остановить выполнение
+    App->>Engine: Stop()
+    Engine->>Env: Stop()
+```
+
+```mermaid
+graph TD
+    RdkCore["rdk.static.qt<br/>Core"]
+    
+    BasicLib[Rdk-BasicLib]
+    CvLib[Rdk-CvBasicLib]
+    HardwareLib[Rdk-HardwareLib]
+    PulseLib[Nmsdk-PulseLib]
+    MotionLib[Nmsdk-MotionControlLib]
+    
+    RdkCore --> BasicLib
+    RdkCore --> CvLib
+    RdkCore --> HardwareLib
+    
+    RdkCore --> PulseLib
+    BasicLib --> PulseLib
+    
+    RdkCore --> MotionLib
+    BasicLib --> MotionLib
+    CvLib --> MotionLib
+    HardwareLib --> MotionLib
+    PulseLib --> MotionLib
+    
+    style RdkCore fill:#5B8DEF,color:#fff
+    style BasicLib fill:#10B981,color:#fff
+    style CvLib fill:#10B981,color:#fff
+    style HardwareLib fill:#10B981,color:#fff
+    style PulseLib fill:#F59E0B,color:#fff
+    style MotionLib fill:#EF4444,color:#fff
+```

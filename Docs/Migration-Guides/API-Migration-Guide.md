@@ -832,3 +832,32 @@ The following APIs are deprecated and will be removed in future versions:
 - [Refactoring Timeline](../Refactoring-History/Refactoring-Timeline.md) - change history
 - [Lessons Learned](../Refactoring-History/Lessons-Learned.md) - refactoring lessons
 - [Component Development Guide](../Development-Guides/Component-Development.md) - component development
+
+```mermaid
+flowchart TB
+    Start[Старый код] --> Step1[Замена переменных на UProperty]
+    Step1 --> Step2[Initialization в конструкторе]
+    Step2 --> Step3[Удаление RegisterProperty]
+    Step3 --> Step4[Замена доступа к свойствам]
+    Step4 --> Step5[Тестирование]
+    Step5 --> End[Новый код]
+    
+    style Start fill:#ffe1f5
+    style End fill:#e1f5ff
+```
+
+```mermaid
+flowchart TB
+    Start[Start миграции] --> Backup[Резервная копия]
+    Backup --> Analyze[Анализ кода]
+    Analyze --> Plan[План миграции]
+    Plan --> Migrate[Миграция компонентов]
+    Migrate --> Test[Тестирование]
+    Test --> Fix[Исправление ошибок]
+    Fix --> Verify[Проверка функциональности]
+    Verify --> Deploy[Развертывание]
+    Deploy --> End[Завершение]
+    
+    style Start fill:#e1f5ff
+    style End fill:#ffe1f5
+```
