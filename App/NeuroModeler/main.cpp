@@ -362,7 +362,7 @@ int main(int argc, char *argv[])
     UGEngineControlWidget w(NULL, &AppCore.application);
 
 #ifdef RDK_USE_LLM
-    NmsdkRegisterLlm(&w, &AppCore.application);
+    NmsdkRegisterLlm(&w, &AppCore.application, AppCore.showLlmAssistantMenu);
 #endif
 
     if(AppCore.hideAdminForm)

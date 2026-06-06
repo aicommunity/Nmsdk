@@ -8,7 +8,7 @@ class UApplication;
 }
 
 #ifdef RDK_USE_LLM
-void NmsdkRegisterLlm(UGEngineControlWidget* host, RDK::UApplication* app);
+void NmsdkRegisterLlm(UGEngineControlWidget* host, RDK::UApplication* app, int showLlmAssistantMenu);
 #endif
 
 #endif

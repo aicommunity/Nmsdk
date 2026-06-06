@@ -18,7 +18,7 @@
 static std::unique_ptr<NmsdkLlmProjectContext> g_project_context;
 static ULlmGuiContextBridge* g_bridge = nullptr;
 
-void NmsdkRegisterLlm(UGEngineControlWidget* host, RDK::UApplication* app)
+void NmsdkRegisterLlm(UGEngineControlWidget* host, RDK::UApplication* app, int showLlmAssistantMenu)
 {
     if(!host || !app)
         return;
@@ -31,7 +31,7 @@ void NmsdkRegisterLlm(UGEngineControlWidget* host, RDK::UApplication* app)
     g_bridge = new ULlmGuiContextBridge(app, host);
     RDK::LLM::LLMServices::instance().setPresentationSink(
         std::make_unique<ULlmQtPresentationSink>(host, g_bridge));
-    LlmGui::RegisterLlmUi(host, app, g_bridge);
+    LlmGui::RegisterLlmUi(host, app, g_bridge, showLlmAssistantMenu != 0);
 }
 
 #endif
