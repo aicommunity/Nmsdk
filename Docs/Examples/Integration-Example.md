@@ -62,8 +62,8 @@ void VisionSpikingIntegration() {
 ### Связанная документация
 
 - [Libraries/Overview.md](../Libraries/Overview.md) - обзор библиотек
-- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - примеры импульсных сетей
-- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - примеры компьютерного зрения
+- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - примеры импульсных сетей
+- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - примеры компьютерного зрения
 
 ---
 
@@ -129,5 +129,5 @@ void VisionSpikingIntegration() {
 ### Related Documentation
 
 - [Libraries/Overview.md](../Libraries/Overview.md) - libraries overview
-- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - spiking network examples
-- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - computer vision examples
+- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - spiking network examples
+- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - computer vision examples

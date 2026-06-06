@@ -48,8 +48,8 @@
 
 ### Дополнительные разделы
 
-- [FAQ](FAQ.md) - часто задаваемые вопросы по Bin
-- [Examples/](Examples/) - примеры конфигураций и использования ресурсов
+- [FAQ](../../Bin/Docs/FAQ.md) - часто задаваемые вопросы по Bin
+- [Examples](../../Bin/Docs/Examples/) - примеры конфигураций и использования ресурсов
 
 ### Навигация
 
@@ -106,8 +106,8 @@ The `Bin/` directory contains:
 
 ### Additional Sections
 
-- [FAQ](FAQ.md) - frequently asked questions about Bin
-- [Examples/](Examples/) - configuration and resource usage examples
+- [FAQ](../../Bin/Docs/FAQ.md) - frequently asked questions about Bin
+- [Examples](../../Bin/Docs/Examples/) - configuration and resource usage examples
 
 ### Navigation
 

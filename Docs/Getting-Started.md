@@ -87,8 +87,8 @@
 
 #### Шаг 1: Изучите доступные библиотеки
 
-1. [Libraries Overview](../Libraries/Overview.md) - обзор всех библиотек
-2. [Nmsdk-PulseLib](../Libraries/Nmsdk-PulseLib.md) - импульсные нейронные сети
+1. [Libraries Overview](Libraries/Overview.md) - обзор всех библиотек
+2. [Nmsdk-PulseLib](Libraries/Nmsdk-PulseLib.md) - импульсные нейронные сети
 3. [Nmsdk-PulseLib/Docs/Scientific-Background.md](../Libraries/Nmsdk-PulseLib/Docs/Scientific-Background.md) - научный фон
 
 #### Шаг 2: Изучите примеры конфигураций
@@ -269,8 +269,8 @@ This guide will help you quickly get started with Nmsdk depending on your role a
 
 #### Step 1: Study Available Libraries
 
-1. [Libraries Overview](../Libraries/Overview.md) - overview of all libraries
-2. [Nmsdk-PulseLib](../Libraries/Nmsdk-PulseLib.md) - spiking neural networks
+1. [Libraries Overview](Libraries/Overview.md) - overview of all libraries
+2. [Nmsdk-PulseLib](Libraries/Nmsdk-PulseLib.md) - spiking neural networks
 3. [Nmsdk-PulseLib/Docs/Scientific-Background.md](../Libraries/Nmsdk-PulseLib/Docs/Scientific-Background.md) - scientific background
 
 #### Step 2: Study Configuration Examples

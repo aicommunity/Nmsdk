@@ -108,9 +108,9 @@ void ProcessData() {
 
 ### Связанная документация
 
-- [Rdk/Docs/Examples/Component-Creation-Example.md](../Rdk/Docs/Examples/Component-Creation-Example.md) - детальный пример создания компонента
-- [Component System](../Rdk/Docs/Guides/Component-System.md) - компонентная система
-- [Rdk-BasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - примеры использования Rdk-BasicLib
+- [Rdk/Docs/Examples/Component-Creation-Example.md](../../Rdk/Docs/Examples/Component-Creation-Example.md) - детальный пример создания компонента
+- [Component System](../../Rdk/Docs/Guides/Component-System.md) - компонентная система
+- [Rdk-BasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - примеры использования Rdk-BasicLib
 
 ---
 
@@ -222,6 +222,6 @@ void ProcessData() {
 
 ### Related Documentation
 
-- [Rdk/Docs/Examples/Component-Creation-Example.md](../Rdk/Docs/Examples/Component-Creation-Example.md) - detailed component creation example
+- [Rdk/Docs/Examples/Component-Creation-Example.md](../../Rdk/Docs/Examples/Component-Creation-Example.md) - detailed component creation example
 - [Components-And-Configuration/Component-System.md](../Components-And-Configuration/Component-System.md) - component system
-- [Rdk-BasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - Rdk-BasicLib usage examples
+- [Rdk-BasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - Rdk-BasicLib usage examples

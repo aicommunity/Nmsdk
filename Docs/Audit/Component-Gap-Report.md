@@ -1,24 +1,17 @@
 # Component Gap Report
 
-Generated: 2026-06-06T17:58:22Z
+Generated: 2026-06-06T18:08:03Z
 
 Comparison of `UploadClass` registrations vs `Docs/Components/*.md` and Component-Catalog mentions.
 
 ## Rdk-BasicLib
 
 - Registered classes: **15**
-- Component docs: **13**
-- Missing component docs: **6**
+- Component docs: **19**
+- Missing documented (per-class or catalog): **0**
+- Missing per-class `.md` only: **0**
 - Orphan component docs (no UploadClass): **4**
-- Missing from catalog: **7**
-
-### Missing docs
-- `UFileDataset`
-- `UMatrixSourceDataFile`
-- `UMatrixSourceFileSep`
-- `UNoiseGenDouble`
-- `UNoiseGenInt`
-- `UUMatrixSourceFile`
+- Missing from catalog: **0**
 
 ### Orphan docs (group/legacy names)
 - `UIO`
@@ -30,62 +23,12 @@ Comparison of `UploadClass` registrations vs `Docs/Components/*.md` and Componen
 
 - Registered classes: **56**
 - Component docs: **12**
-- Missing component docs: **55**
+- Missing documented (per-class or catalog): **0**
+- Missing per-class `.md` only: **55**
 - Orphan component docs (no UploadClass): **11**
-- Missing from catalog: **50**
+- Missing from catalog: **18**
 
-### Missing docs
-- `BMathOperator`
-- `BStatisticSimple`
-- `BackgroundAvg`
-- `BackgroundExponnential`
-- `BackgroundSimpleAdaptive`
-- `BitmapSourceFile`
-- `BitmapSourceSimple`
-- `Crop`
-- `DataSimulatorSimple`
-- `DeltaBackgroundExponnential`
-- `DifferenceFrameSimple`
-- `Model`
-- `ParallelPipeline`
-- `Pipeline`
-- `Receiver`
-- `Reduce`
-- `ResizeEdges`
-- `RotCameraSimulator`
-- `RotateSimple`
-- `ShowObjectsSimple`
-- `Source`
-- `SourceFile`
-- `SourceMultiFile`
-- `TBinarizationSimple`
-- `TBinarizationSimpleAdaptiveThreshold`
-- `TLabelingSimple`
-- `UBABackgroundDependDiff`
-- `UBABinarizationOtsu`
-- `UBAFlipImageSimple`
-- `UBShowRect`
-- `UCRBarnesHutTSNE`
-- `UCRConvolutionNetwork`
-- `UCRDirectCompare`
-- `UCRDistance`
-- `UCRFusion`
-- `UCRPerseptron`
-- `UCRPrincipalComponentAnalysis`
-- `UCRSample`
-- `UCRTeacherCVNetworkBP`
-- `UCRTeacherPerseptronBP`
-- `UCRTeacherPerseptronDL`
-- `UClassifierBase`
-- `UClassifierResSaver`
-- `UDetResSaverPVOC`
-- `UDetectorBase`
-- `UMDMatrixDoubleMux`
-- `UMDMatrixIntMux`
-- `UMDScalarDoubleMux`
-- `UMDScalarIntMux`
-- `UMatrixDoubleMath`
-- ... and 5 more
+_Group-doc library: classes listed in Component-Catalog count as documented._
 
 ### Orphan docs (group/legacy names)
 - `BackgroundBinarizationLabeling`
@@ -104,7 +47,8 @@ Comparison of `UploadClass` registrations vs `Docs/Components/*.md` and Componen
 
 - Registered classes: **5**
 - Component docs: **9**
-- Missing component docs: **0**
+- Missing documented (per-class or catalog): **0**
+- Missing per-class `.md` only: **0**
 - Orphan component docs (no UploadClass): **4**
 - Missing from catalog: **0**
 
@@ -117,15 +61,11 @@ Comparison of `UploadClass` registrations vs `Docs/Components/*.md` and Componen
 ## Nmsdk-PulseLib
 
 - Registered classes: **177**
-- Component docs: **193**
-- Missing component docs: **3**
+- Component docs: **196**
+- Missing documented (per-class or catalog): **0**
+- Missing per-class `.md` only: **0**
 - Orphan component docs (no UploadClass): **19**
 - Missing from catalog: **3**
-
-### Missing docs
-- `NPNeuronChannel`
-- `NPNeuronMembrane`
-- `NPNewNeuronMembrane`
 
 ### Orphan docs (group/legacy names)
 - `ChannelsMembranesLT`
@@ -152,7 +92,8 @@ Comparison of `UploadClass` registrations vs `Docs/Components/*.md` and Componen
 
 - Registered classes: **38**
 - Component docs: **41**
-- Missing component docs: **0**
+- Missing documented (per-class or catalog): **0**
+- Missing per-class `.md` only: **0**
 - Orphan component docs (no UploadClass): **3**
 - Missing from catalog: **0**
 
@@ -163,7 +104,7 @@ Comparison of `UploadClass` registrations vs `Docs/Components/*.md` and Componen
 
 ## Totals
 
-- Missing component docs (all libs): **64**
+- Missing component docs (all libs): **0**
 - Orphan component docs (all libs): **41**
 
 Note: group docs (e.g. `Neurons.md`) and legacy redirect stubs are expected orphans.

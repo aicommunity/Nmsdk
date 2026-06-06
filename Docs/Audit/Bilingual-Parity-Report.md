@@ -1,11 +1,11 @@
 # Bilingual Parity Report
 
-Generated: 2026-06-06T17:58:21Z
+Generated: 2026-06-06T18:08:03Z
 
 ## Summary
 
-- Files missing `## EN`: **206**
-- Files missing `## RU`: **212**
+- Files missing `## EN`: **207**
+- Files missing `## RU`: **213**
 
 RU-only allowlist prefixes:
 
@@ -16,6 +16,7 @@ RU-only allowlist prefixes:
 
 - `Bin/ArduinoFirmware/README.md`
 - `Bin/Configs/Bakhshiev/TestTrain/README.md`
+- `Bin/Configs/TestValidation/README.md`
 - `Bin/Docs/Literature-References.md`
 - `Bin/Docs/SpikeSamples/ActivitySwitcher.md`
 - `Bin/Docs/SpikeSamples/CSNM-Models.md`
@@ -213,5 +214,4 @@ RU-only allowlist prefixes:
 - `Tests/Integration/ConfigValidation/RUN_TESTS.md`
 - `Tests/Integration/ConfigValidation/SUMMARY.md`
 - `Tests/Integration/GUI/BUILD_INSTRUCTIONS.md`
-- `Tests/Integration/GUI/PRODUCTION_TEST_README.md`
-- ... and 6 more
+- ... and 7 more

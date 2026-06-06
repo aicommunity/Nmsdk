@@ -81,9 +81,9 @@
 
 ### Дополнительные разделы
 
-- [FAQ](FAQ.md) - часто задаваемые вопросы по Rdk Core
-- [Getting-Started.md](Getting-Started.md) - быстрый старт для разработчиков
-- [Examples/](Examples/) - практические примеры использования Rdk
+- [FAQ](../../Rdk/Docs/FAQ.md) - часто задаваемые вопросы по Rdk Core
+- [Getting-Started.md](../Getting-Started.md) - быстрый старт для разработчиков
+- [Examples](../../Rdk/Docs/Examples/) - практические примеры использования Rdk
 
 ### Навигация
 
@@ -168,9 +168,9 @@ For overview information see root project documentation:
 
 ### Additional Sections
 
-- [FAQ](FAQ.md) - frequently asked questions about Rdk Core
-- [Getting-Started.md](Getting-Started.md) - quick start for developers
-- [Examples/](Examples/) - practical examples of using Rdk
+- [FAQ](../../Rdk/Docs/FAQ.md) - frequently asked questions about Rdk Core
+- [Getting-Started.md](../Getting-Started.md) - quick start for developers
+- [Examples](../../Rdk/Docs/Examples/) - practical examples of using Rdk
 
 ### Navigation
 

@@ -1,6 +1,6 @@
 # Build Documentation Gap Report
 
-Generated: 2026-06-06T17:58:22Z
+Generated: 2026-06-06T18:08:03Z
 
 ## Documented targets in Build-System.md
 
@@ -22,4 +22,4 @@ Generated: 2026-06-06T17:58:22Z
 - `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY`: doc=yes, cmake=yes
 - `NMSDK_PULSELIB_BUILD_CORE_ONLY`: doc=yes, cmake=yes
 - `BUILD_TESTS`: doc=yes, cmake=yes
-- `NMSDK_FORCE_QT_FROM_VCPKG`: doc=**NO**, cmake=yes
+- `NMSDK_FORCE_QT_FROM_VCPKG`: doc=yes, cmake=yes

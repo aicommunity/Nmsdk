@@ -115,8 +115,8 @@ flowchart TB
 #### Для пользователей библиотек
 
 1. [Обзор библиотек](../Libraries/Overview.md) → [Индекс документации библиотек](Libraries-Index.md)
-2. Выбор библиотеки → [Документация библиотеки](../../Libraries/<LibName>/Docs/README.md)
-3. [Каталог компонентов](../../Libraries/<LibName>/Docs/Component-Catalog.md) → [Документация компонента](../../Libraries/<LibName>/Docs/Components/<Component>.md)
+2. Выбор библиотеки → документация библиотеки `Libraries/<LibName>/Docs/README.md`
+3. каталог `Libraries/<LibName>/Docs/Component-Catalog.md` → страница `Libraries/<LibName>/Docs/Components/<Component>.md`
 
 #### Для работы с конфигурациями
 
@@ -271,8 +271,8 @@ flowchart TB
 #### For Library Users
 
 1. [Libraries Overview](../Libraries/Overview.md) → [Libraries Documentation Index](Libraries-Index.md)
-2. Choose library → [Library Documentation](../../Libraries/<LibName>/Docs/README.md)
-3. [Component Catalog](../../Libraries/<LibName>/Docs/Component-Catalog.md) → [Component Documentation](../../Libraries/<LibName>/Docs/Components/<Component>.md)
+2. Choose library → library docs at `Libraries/<LibName>/Docs/README.md`
+3. catalog `Libraries/<LibName>/Docs/Component-Catalog.md` → component page `Libraries/<LibName>/Docs/Components/<Component>.md`
 
 #### For Configuration Work
 

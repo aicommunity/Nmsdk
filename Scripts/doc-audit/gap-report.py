@@ -39,7 +39,39 @@ def catalog_mentions(lib_path: Path) -> set[str]:
     if not catalog.exists():
         return set()
     text = catalog.read_text(encoding="utf-8", errors="replace")
-    return set(re.findall(r"`([A-Za-z0-9_]+)`", text))
+    names = set(re.findall(r"`([A-Za-z0-9_]+)`", text))
+    names.update(re.findall(r"\*\*([A-Za-z][A-Za-z0-9_]*)\*\*", text))
+    return names
+
+
+# Libraries that document many UploadClass entries via group overview pages.
+GROUP_DOC_LIBS = {"Rdk-CvBasicLib"}
+
+CVBASIC_GROUP_MAP = {
+    "Capture": "CaptureAndSources.md",
+    "TCaptureImageSequence": "CaptureAndSources.md",
+    "Source": "CaptureAndSources.md",
+    "SourceFile": "CaptureAndSources.md",
+    "SourceMultiFile": "CaptureAndSources.md",
+    "Receiver": "ReceiverAndShowRect.md",
+    "ColorConvert": "ColorConvert.md",
+    "ResizeEdges": "GeometricTransformations.md",
+    "RotateSimple": "GeometricTransformations.md",
+    "UBAFlipImageSimple": "GeometricTransformations.md",
+    "Crop": "CropReduce.md",
+    "Reduce": "CropReduce.md",
+}
+
+
+def group_covered(lib: str, class_name: str, lib_path: Path) -> bool:
+    if lib != "Rdk-CvBasicLib":
+        return False
+    components = lib_path / "Docs" / "Components"
+    # Any group .md that mentions class in backticks
+    for md in components.glob("*.md"):
+        if class_name in md.read_text(encoding="utf-8", errors="replace"):
+            return True
+    return class_name in CVBASIC_GROUP_MAP
 
 
 def render_component_gap() -> str:
@@ -58,7 +90,13 @@ def render_component_gap() -> str:
         registered = set(parse_upload_classes(reg_files))
         doc_names = component_doc_names(lib_path)
         catalog = catalog_mentions(lib_path)
-        missing_docs = sorted(registered - doc_names)
+        if lib in GROUP_DOC_LIBS:
+            group_ok = {c for c in registered if group_covered(lib, c, lib_path)}
+            documented = doc_names | catalog | group_ok
+        else:
+            documented = doc_names
+        missing_docs = sorted(registered - documented)
+        missing_per_class = sorted(registered - doc_names)
         orphan_docs = sorted(doc_names - registered)
         missing_catalog = sorted(registered - catalog)
         total_missing_docs += len(missing_docs)
@@ -69,12 +107,17 @@ def render_component_gap() -> str:
                 "",
                 f"- Registered classes: **{len(registered)}**",
                 f"- Component docs: **{len(doc_names)}**",
-                f"- Missing component docs: **{len(missing_docs)}**",
+                f"- Missing documented (per-class or catalog): **{len(missing_docs)}**",
+                f"- Missing per-class `.md` only: **{len(missing_per_class)}**",
                 f"- Orphan component docs (no UploadClass): **{len(orphan_docs)}**",
                 f"- Missing from catalog: **{len(missing_catalog)}**",
                 "",
             ]
         )
+        if lib in GROUP_DOC_LIBS:
+            lines.append(
+                f"_Group-doc library: classes listed in Component-Catalog count as documented._\n"
+            )
         if missing_docs:
             lines.append("### Missing docs")
             for name in missing_docs[:50]:

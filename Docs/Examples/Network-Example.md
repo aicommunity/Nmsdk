@@ -59,13 +59,13 @@ void CreateNetwork() {
 
 ### Использование конфигурационного файла
 
-См. [Bin/Docs/Examples/Config-Example.md](../Bin/Docs/Examples/Config-Example.md) для примера создания сети через XML конфигурацию.
+См. [Bin/Docs/Examples/Config-Example.md](../../Bin/Docs/Examples/Config-Example.md) для примера создания сети через XML конфигурацию.
 
 ### Связанная документация
 
-- [Component System](../Rdk/Docs/Guides/Component-System.md) - компонентная система
-- [Engine Architecture](../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
-- [Bin/Docs/Examples/Config-Example.md](../Bin/Docs/Examples/Config-Example.md) - примеры конфигураций
+- [Component System](../../Rdk/Docs/Guides/Component-System.md) - компонентная система
+- [Engine Architecture](../../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
+- [Bin/Docs/Examples/Config-Example.md](../../Bin/Docs/Examples/Config-Example.md) - примеры конфигураций
 
 ---
 
@@ -128,10 +128,10 @@ void CreateNetwork() {
 
 ### Using Configuration File
 
-See [Bin/Docs/Examples/Config-Example.md](../Bin/Docs/Examples/Config-Example.md) for example of creating network via XML configuration.
+See [Bin/Docs/Examples/Config-Example.md](../../Bin/Docs/Examples/Config-Example.md) for example of creating network via XML configuration.
 
 ### Related Documentation
 
 - [Components-And-Configuration/Component-System.md](../Components-And-Configuration/Component-System.md) - component system
 - [Rdk-Core/Engine-Architecture.md](../Rdk-Core/Engine-Architecture.md) - engine architecture
-- [Bin/Docs/Examples/Config-Example.md](../Bin/Docs/Examples/Config-Example.md) - configuration examples
+- [Bin/Docs/Examples/Config-Example.md](../../Bin/Docs/Examples/Config-Example.md) - configuration examples

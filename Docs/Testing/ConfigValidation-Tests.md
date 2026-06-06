@@ -229,5 +229,5 @@ ctest --preset linux-component-gui-registry
 
 ## См. также
 
-- [README тестов](../Tests/Integration/ConfigValidation/README.md)
+- [README тестов](../../Tests/Integration/ConfigValidation/README.md)
 - [Документация валидации конфигураций](../Development-Guides/Config-Validation.md)

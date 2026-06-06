@@ -17,7 +17,7 @@
 
 #### Rdk Core
 
-- [Rdk/Docs/Examples/](../Rdk/Docs/Examples/) - примеры использования Rdk Core
+- [Rdk/Docs/Examples/](../../Rdk/Docs/Examples/) - примеры использования Rdk Core
   - Создание компонентов
   - Сериализация
   - RPC интеграция
@@ -25,16 +25,16 @@
 
 #### Bin
 
-- [Bin/Docs/Examples/](../Bin/Docs/Examples/) - примеры конфигураций
+- [Bin/Docs/Examples/](../../Bin/Docs/Examples/) - примеры конфигураций
   - Создание конфигурационных файлов
   - Создание ClDesc
   - Создание тем и стилей
 
 #### Библиотеки
 
-- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - примеры импульсных сетей
-- [Rdk-BasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - примеры базовых компонентов
-- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - примеры компьютерного зрения
+- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - примеры импульсных сетей
+- [Rdk-BasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - примеры базовых компонентов
+- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - примеры компьютерного зрения
 
 ### Как использовать примеры
 
@@ -68,7 +68,7 @@ This directory contains practical examples of using Nmsdk for various tasks. Exa
 
 #### Rdk Core
 
-- [Rdk/Docs/Examples/](../Rdk/Docs/Examples/) - Rdk Core usage examples
+- [Rdk/Docs/Examples/](../../Rdk/Docs/Examples/) - Rdk Core usage examples
   - Creating components
   - Serialization
   - RPC integration
@@ -76,16 +76,16 @@ This directory contains practical examples of using Nmsdk for various tasks. Exa
 
 #### Bin
 
-- [Bin/Docs/Examples/](../Bin/Docs/Examples/) - configuration examples
+- [Bin/Docs/Examples/](../../Bin/Docs/Examples/) - configuration examples
   - Creating configuration files
   - Creating ClDesc
   - Creating themes and styles
 
 #### Libraries
 
-- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - spiking network examples
-- [Rdk-BasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - basic component examples
-- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - computer vision examples
+- [Nmsdk-PulseLib/Docs/Usage-Examples.md](../../Libraries/Nmsdk-PulseLib/Docs/Usage-Examples.md) - spiking network examples
+- [Rdk-BasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-BasicLib/Docs/Usage-Examples.md) - basic component examples
+- [Rdk-CvBasicLib/Docs/Usage-Examples.md](../../Libraries/Rdk-CvBasicLib/Docs/Usage-Examples.md) - computer vision examples
 
 ### How to Use Examples
 

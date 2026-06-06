@@ -55,4 +55,4 @@ ctest -R ConfigValidationTests -V
 ## См. также
 
 - [Общая документация по тестированию](../../../Docs/Testing/ConfigValidation-Tests.md)
-- [Документация тестовых конфигураций](../../../../Bin/Configs/TestValidation/README.md)
+- [Документация тестовых конфигураций](../../../Bin/Configs/TestValidation/README.md)

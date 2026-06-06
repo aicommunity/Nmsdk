@@ -53,7 +53,7 @@
 
 1. См. [Quick Start](QuickStart.md) для быстрого начала работы с проектом
 2. См. [Система сборки](../Build-And-Deploy/Build-System.md) для установки зависимостей и сборки проекта
-3. См. [Компонентная система](../Rdk/Docs/Guides/Component-System.md) для понимания работы с компонентами
+3. См. [Компонентная система](../../Rdk/Docs/Guides/Component-System.md) для понимания работы с компонентами
 4. См. [Обзор библиотек](../Libraries/Overview.md) для выбора нужных библиотек
 
 ### Структура проекта
@@ -63,7 +63,7 @@
 ### Дополнительная информация
 
 - [Архитектура системы](Architecture-Overview.md) - детальное описание архитектуры
-- [Rdk Core](../Rdk/Docs/Architecture/Overview.md) - документация ядра
+- [Rdk Core](../../Rdk/Docs/Architecture/Overview.md) - документация ядра
 - [GUI](../GUI/Overview.md) - документация интерфейса
 
 ---

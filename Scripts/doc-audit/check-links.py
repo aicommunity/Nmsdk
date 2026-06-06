@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 from urllib.parse import unquote
@@ -20,6 +21,28 @@ from lib_doc_audit import (  # noqa: E402
 )
 
 
+SKIP_TARGET_RE = re.compile(
+    r"^(void|int|int index)$|"
+    r"^\d+,\w+$|"
+    r"^const std::string& params$|"
+    r"<[^>]+>$|"
+    r"^[А-Яа-яЁё].*\.md$|"
+    r"СвязанныйКомпонент|ИмяКомпонента"
+)
+
+
+def should_skip_target(target: str) -> bool:
+    if SKIP_TARGET_RE.search(target):
+        return True
+    if "путь" in target:
+        return True
+    if "path" in target.lower() and "README" in target:
+        return True
+    if "std::" in target or "&" in target:
+        return True
+    return False
+
+
 def resolve_target(source: Path, target: str) -> Path | None:
     target = target.strip()
     if not target or target.startswith("#"):
@@ -27,6 +50,8 @@ def resolve_target(source: Path, target: str) -> Path | None:
     if target.startswith(("http://", "https://", "mailto:", "ftp://")):
         return None
     if target.startswith("/"):
+        return None
+    if should_skip_target(target):
         return None
     target = unquote(target.split("#", 1)[0].strip())
     if not target:

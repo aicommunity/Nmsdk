@@ -782,9 +782,9 @@ public:
 
 ### См. также
 
-- [Component Development Guide](../Rdk/Docs/Guides/Component-Development.md) - разработка компонентов
+- [Component Development Guide](../../Rdk/Docs/Guides/Component-Development.md) - разработка компонентов
 - [Logging System](../../Rdk/Docs/Logging-System.md) - система логирования
-- [Engine Architecture](../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
+- [Engine Architecture](../../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
 
 ---
 

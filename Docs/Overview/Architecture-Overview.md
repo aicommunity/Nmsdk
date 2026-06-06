@@ -222,10 +222,10 @@ graph TD
 
 ### См. также
 
-- [Rdk Core Architecture](../Rdk/Docs/Architecture/Overview.md) - детальная архитектура ядра
-- [Application Architecture](../Rdk/Docs/Architecture/Application-Architecture.md) - архитектура приложения
-- [Engine Architecture](../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
-- [Component System](../Rdk/Docs/Guides/Component-System.md) - компонентная система
+- [Rdk Core Architecture](../../Rdk/Docs/Architecture/Overview.md) - детальная архитектура ядра
+- [Application Architecture](../../Rdk/Docs/Architecture/Application-Architecture.md) - архитектура приложения
+- [Engine Architecture](../../Rdk/Docs/Architecture/Engine-Architecture.md) - архитектура движка
+- [Component System](../../Rdk/Docs/Guides/Component-System.md) - компонентная система
 
 ---
 

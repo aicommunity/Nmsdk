@@ -318,6 +318,6 @@ if(!diagnostics.isValid)
 
 ## См. также
 
-- [Цепочка загрузки компонентов](Component-Loading-Chain.md)
-- [Цепочка создания связей](Link-Creation-Chain.md)
+- [Engine Architecture](../../Rdk/Docs/Architecture/Engine-Architecture.md) — загрузка компонентов
+- [Serialize Architecture](../../Rdk/Docs/Architecture/Serialize-Architecture.md) — сериализация и связи
 - [Архитектура Application](Application-Architecture.md)
