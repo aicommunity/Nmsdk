@@ -62,6 +62,8 @@ def main() -> int:
     ]
     for prefix in RU_ONLY_ALLOWLIST_PREFIXES:
         lines.append(f"- `{prefix}*`")
+    for exact in RU_ONLY_ALLOWLIST_EXACT:
+        lines.append(f"- `{exact}`")
     lines.extend(["", "## Missing EN section", ""])
     for rel in missing_en[:200]:
         lines.append(f"- `{rel}`")

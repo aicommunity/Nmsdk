@@ -1,5 +1,7 @@
 # Построение лексикона ClDesc из документации библиотек
 
+## RU
+
 Краткая инструкция по заполнению и обновлению описаний компонентов в **ClDesc** (XML в `Bin/ClDesc/`) с использованием документации из папок `Libraries/*/Docs/Components/`.
 
 ## Шаг 1 — построение лексикона из документации
@@ -77,3 +79,85 @@ NeuroModelerConsole -g -l Docs/ClDescLexicon.json -F
 - Для **Rdk-CvBasicLib** используется явный маппинг имён класса в Storage и имени в документации (например, класс в Storage — `Pipeline`, в документации — `UBPipeline`); маппинг задан в скрипте.
 - В остальных библиотеках имя класса совпадает с именем файла документации без расширения (например, `NManipulator.md` → класс `NManipulator`).
 - Подробнее о формате лексикона и генерации ClDesc см. [PropertyAliasGeneration.md](PropertyAliasGeneration.md).
+
+---
+
+## EN
+
+Brief guide to filling and updating component descriptions in **ClDesc** (XML in `Bin/ClDesc/`) using documentation from `Libraries/*/Docs/Components/`.
+
+## Step 1 — build the lexicon from documentation
+
+The script `Scripts/build_cl_desc_lexicon_from_docs.py` scans component documentation in these libraries:
+
+- **Rdk-CvBasicLib**
+- **Nmsdk-PulseLib**
+- **Nmsdk-MotionControlLib**
+- **Rdk-HardwareLib**
+- **Rdk-BasicLib**
+
+and extracts a short header (Header) and description (Description) for each class from Markdown files. The result is written to a JSON lexicon used by NeuroModelerConsole when generating ClDesc.
+
+**Run** (from the repository root `Nmsdk`):
+
+```bash
+python Scripts/build_cl_desc_lexicon_from_docs.py
+```
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `-o`, `--output PATH` | Output JSON path (default: `Docs/ClDescLexicon.json`) |
+| `--no-merge` | Fully overwrite the lexicon; by default the existing file is merged (`tokens`, `propertyFallbacks` sections are preserved) |
+| `-v`, `--verbose` | Print the list of processed classes and files |
+
+**Examples:**
+
+```bash
+python Scripts/build_cl_desc_lexicon_from_docs.py -o Docs/ClDescLexicon.json --verbose
+python Scripts/build_cl_desc_lexicon_from_docs.py --no-merge
+```
+
+**Result:** file `Docs/ClDescLexicon.json` with a `classOverrides` section, ready for ClDescGenerator.
+
+## Step 2 — generate ClDesc using the lexicon
+
+After building the lexicon, run **NeuroModelerConsole** with the class-description generation task and the lexicon path:
+
+```bash
+NeuroModelerConsole -g -l Docs/ClDescLexicon.json
+```
+
+or the short form:
+
+```bash
+NeuroModelerConsole --generate-cldesc --cldesc-lexicon Docs/ClDescLexicon.json
+```
+
+If the lexicon is already at `Docs/ClDescLexicon.json`, the generator picks it up by default:
+
+```bash
+NeuroModelerConsole -g
+```
+
+To force overwriting existing headers and descriptions in ClDesc from the lexicon:
+
+```bash
+NeuroModelerConsole -g -l Docs/ClDescLexicon.json -F
+```
+
+(flag `-F` / `--cldesc-force`).
+
+**Outcome:** updated XML files in `Bin/ClDesc/<Library>/ru-RU/<ClassName>.xml` with extended Header and Description from library documentation.
+
+## Recommended order
+
+1. Run **step 1** (script) — build or update `Docs/ClDescLexicon.json`.
+2. Run **step 2** (NeuroModelerConsole) — generate ClDesc with the new lexicon.
+
+## Notes
+
+- For **Rdk-CvBasicLib**, an explicit mapping is used between the class name in Storage and the name in documentation (e.g. Storage class `Pipeline`, documentation `UBPipeline`); the mapping is defined in the script.
+- In other libraries, the class name matches the documentation file name without extension (e.g. `NManipulator.md` → class `NManipulator`).
+- For lexicon format and ClDesc generation details, see [PropertyAliasGeneration.md](PropertyAliasGeneration.md).

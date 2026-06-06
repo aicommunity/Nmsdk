@@ -12,6 +12,7 @@ echo "== doc-audit: links =="
 python3 Scripts/doc-audit/check-links.py || true
 
 echo "== doc-audit: bilingual =="
+python3 Scripts/doc-audit/bilingual-inventory.py
 python3 Scripts/doc-audit/check-bilingual.py
 
 echo "== doc-audit: mermaid =="

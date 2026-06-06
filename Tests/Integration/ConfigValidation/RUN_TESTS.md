@@ -1,5 +1,7 @@
 # Инструкция по запуску тестов валидации конфигураций
 
+## RU
+
 ## Рекомендуемые режимы запуска
 
 ### 1) Быстрый non-interactive (по умолчанию, без GUI-окон)
@@ -163,3 +165,171 @@ Exit code: 1 (ожидалось: 1)
 
 - Подробная документация: `Tests/Integration/ConfigValidation/README.md`
 - Общая документация: `Docs/Testing/ConfigValidation-Tests.md`
+
+---
+
+## EN
+
+## Recommended run modes
+
+### 1) Quick non-interactive (default, no GUI windows)
+
+Use in CI and for daily checks so tests do not open windows or require user interaction.
+
+```bash
+cd /path/to/Nmsdk
+mkdir -p build/Debug
+cd build/Debug
+cmake /path/to/Nmsdk \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DBUILD_TESTS=ON \
+  -DBUILD_TESTING=ON \
+  -DRDK_BUILD_LEGACY_ENGINE_UNIT_TESTS=ON \
+  -DNMSDK_ENABLE_INTERACTIVE_GUI_TESTS=OFF
+cmake --build . --parallel
+ctest --output-on-failure -j8
+```
+
+### 2) Full run with GUI integration (manual mode)
+
+Enable only when GUI scenarios must be checked. Windows may appear; headless environments may be unstable.
+
+```bash
+cd /path/to/Nmsdk/build/Debug
+cmake /path/to/Nmsdk -DNMSDK_ENABLE_INTERACTIVE_GUI_TESTS=ON
+cmake --build . --parallel
+ctest --output-on-failure -R "MenuBarTest|QMessageBox|PluginLoadingTest|UModernDiagramWidgetMovementTest"
+```
+
+Note: GUI tests may require a graphical session and/or manual interaction.
+
+## Quick start
+
+### 1. Ensure the project is built
+
+```bash
+cd /path/to/Nmsdk
+mkdir -p build
+cd build
+cmake ..
+cmake --build . --target NeuroModelerConsole
+```
+
+### 2. Build tests
+
+```bash
+cd build
+cmake --build . --target Test_ConfigValidation
+```
+
+### 3. Run tests
+
+**Via CTest (recommended):**
+```bash
+cd build
+ctest -R ConfigValidationTests -V
+```
+
+**Directly:**
+```bash
+cd build/Tests/Integration/ConfigValidation
+./Test_ConfigValidation
+```
+
+**On Windows:**
+```cmd
+cd build\Tests\Integration\ConfigValidation
+Test_ConfigValidation.exe
+```
+
+## Manual check of individual tests
+
+To manually validate a specific configuration:
+
+```bash
+# Valid configuration
+./Bin/Platform/Linux/NeuroModelerConsole --check-config Bin/Configs/TestValidation/test_valid/project.ini
+
+# Nonexistent classes
+./Bin/Platform/Linux/NeuroModelerConsole --check-config Bin/Configs/TestValidation/test_invalid_classes/project.ini
+
+# Invalid links
+./Bin/Platform/Linux/NeuroModelerConsole --check-config Bin/Configs/TestValidation/test_invalid_links/project.ini
+```
+
+## Expected results
+
+### test_valid
+- Exit code: **2**
+- Should contain: `Configuration is VALID`
+
+### test_invalid_classes
+- Exit code: **1**
+- Should contain: `Configuration is INVALID`
+
+### test_invalid_links
+- Exit code: **2**
+- Should contain: `Configuration is VALID`
+
+## Troubleshooting
+
+### Error: "NeuroModelerConsole not found"
+
+**Solution:**
+```bash
+# Ensure the file exists
+ls -la Bin/Platform/Linux/NeuroModelerConsole
+
+# If missing, rebuild
+cd build
+cmake --build . --target NeuroModelerConsole
+```
+
+### Error: "Test configs directory not found"
+
+**Solution:**
+```bash
+# Check directory exists
+ls -la Bin/Configs/TestValidation/
+
+# If missing, create test configurations
+# (they should be in the repository)
+```
+
+### Tests fail
+
+1. Run validation manually for the failing configuration
+2. Check actual output
+3. Compare with expected result
+4. Update patterns in `Test_ConfigValidation.cpp` if needed
+
+## Example successful run
+
+```
+=== Интеграционные тесты валидации конфигураций ===
+NeuroModelerConsole: /path/to/Bin/Platform/Linux/NeuroModelerConsole
+Тестовые конфигурации: /path/to/Bin/Configs/TestValidation
+
+=== Тест: Валидная конфигурация ===
+Команда: "/path/to/NeuroModelerConsole" --check-config "/path/to/test_valid/project.ini"
+Exit code: 0 (ожидалось: 0)
+✓ Тест пройден
+
+=== Тест: Несуществующие классы компонентов ===
+Команда: "/path/to/NeuroModelerConsole" --check-config "/path/to/test_invalid_classes/project.ini"
+Exit code: 1 (ожидалось: 1)
+  ✓ Найден паттерн ошибки: does not exist in storage
+  ✓ Найден паттерн ошибки: NonExistentClass123
+  ✓ Найден паттерн ошибки: FakeComponentClass
+✓ Тест пройден
+
+=== Итоги ===
+Пройдено: 7
+Провалено: 0
+Всего: 7
+```
+
+## Additional information
+
+- Detailed documentation: `Tests/Integration/ConfigValidation/README.md`
+- General documentation: `Docs/Testing/ConfigValidation-Tests.md`

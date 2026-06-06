@@ -1,5 +1,7 @@
 # Интеграционные тесты валидации конфигураций
 
+## RU
+
 ## Описание
 
 Эти тесты проверяют функциональность валидации конфигураций проектов через команду `--check-config` в `NeuroModelerConsole`.
@@ -172,3 +174,180 @@ Exit code: 1 (ожидалось: 1)
 - Тесты выполняют реальные команды через системный shell
 - На Windows используется `CreateProcess`, на Linux - `fork/exec`
 - Тесты проверяют как exit code, так и содержимое вывода
+
+---
+
+## EN
+
+## Description
+
+These tests verify project configuration validation via the `--check-config` command in `NeuroModelerConsole`.
+
+## Requirements
+
+- Built project (`NeuroModelerConsole` executable)
+- Test configurations in `Bin/Configs/TestValidation/`
+
+## Test cases
+
+### 1. Valid configuration (`test_valid`)
+- **Expected:** Exit code 0, no errors or warnings
+- **Checks:** Correct handling of a valid configuration
+
+### 2. Missing model file (`test_missing_model`)
+- **Expected:** Exit code 1, errors about missing files
+- **Checks:** Detection of missing model files
+
+### 3. Missing parameters file (`test_missing_parameters`)
+- **Expected:** Exit code 1, errors about missing parameter files
+- **Checks:** Detection of missing parameter files
+
+### 4. Invalid XML (`test_invalid_xml`)
+- **Expected:** Exit code 1, XML parsing errors
+- **Checks:** Detection of XML syntax errors
+
+### 5. Empty model (`test_empty_model`)
+- **Expected:** Exit code 1, warnings about empty model
+- **Checks:** Detection of empty models (no components)
+
+### 6. Nonexistent component classes (`test_invalid_classes`)
+- **Expected:** Exit code 1, errors about nonexistent classes
+- **Checks:** Detection of components with nonexistent classes
+- **Test data:**
+  - `NonExistentComponent1` with class `NonExistentClass123`
+  - `NonExistentComponent2` with class `FakeComponentClass`
+
+### 7. Invalid links (`test_invalid_links`)
+- **Expected:** Exit code 1, errors about invalid links
+- **Checks:** Detection of links with nonexistent components and ports
+- **Test data:**
+  - Link with nonexistent source component
+  - Link with nonexistent destination component
+  - Link with nonexistent output port
+  - Link with nonexistent input port
+
+## Building tests
+
+### Via CMake
+
+```bash
+cd /path/to/Nmsdk
+mkdir -p build
+cd build
+cmake ..
+cmake --build . --target Test_ConfigValidation
+```
+
+### Direct compilation
+
+```bash
+cd Tests/Integration/ConfigValidation
+g++ -std=c++17 -o Test_ConfigValidation Test_ConfigValidation.cpp
+```
+
+## Running tests
+
+### Via CTest
+
+```bash
+cd build
+ctest -R ConfigValidationTests -V
+```
+
+### Direct run
+
+```bash
+cd build/Tests/Integration/ConfigValidation
+./Test_ConfigValidation
+```
+
+### On Windows
+
+```cmd
+cd build\Tests\Integration\ConfigValidation
+Test_ConfigValidation.exe
+```
+
+## Output structure
+
+Tests print:
+- Name of each test
+- Command executed
+- Exit code (actual and expected)
+- Error and warning pattern check results
+- Summary (passed/failed)
+
+## Sample output
+
+```
+=== Интеграционные тесты валидации конфигураций ===
+NeuroModelerConsole: /path/to/Bin/Platform/Linux/NeuroModelerConsole
+Тестовые конфигурации: /path/to/Bin/Configs/TestValidation
+
+=== Тест: Валидная конфигурация ===
+Команда: "/path/to/NeuroModelerConsole" --check-config "/path/to/test_valid/project.ini"
+Exit code: 0 (ожидалось: 0)
+✓ Тест пройден
+
+=== Тест: Несуществующие классы компонентов ===
+Команда: "/path/to/NeuroModelerConsole" --check-config "/path/to/test_invalid_classes/project.ini"
+Exit code: 1 (ожидалось: 1)
+  ✓ Найден паттерн ошибки: does not exist in storage
+  ✓ Найден паттерн ошибки: NonExistentClass123
+  ✓ Найден паттерн ошибки: FakeComponentClass
+✓ Тест пройден
+
+=== Итоги ===
+Пройдено: 7
+Провалено: 0
+Всего: 7
+```
+
+## Debugging
+
+If tests fail:
+
+1. **Check NeuroModelerConsole exists:**
+   ```bash
+   ls -la Bin/Platform/Linux/NeuroModelerConsole
+   ```
+
+2. **Check test configurations exist:**
+   ```bash
+   ls -la Bin/Configs/TestValidation/
+   ```
+
+3. **Run validation manually:**
+   ```bash
+   ./Bin/Platform/Linux/NeuroModelerConsole --check-config Bin/Configs/TestValidation/test_invalid_classes/project.ini
+   ```
+
+4. **Check test output:**
+   - Tests print full STDOUT and STDERR on failure
+   - Verify error patterns match actual output
+
+## Adding new tests
+
+To add a new test:
+
+1. Create a test configuration in `Bin/Configs/TestValidation/`
+2. Add a new `TestCase` to the `testCases` array in `Test_ConfigValidation.cpp`:
+
+```cpp
+{
+    "Test name",
+    "path/to/config/project.ini",
+    expected_exit_code,
+    should_have_errors,
+    should_have_warnings,
+    {"pattern1", "pattern2"},  // Expected error patterns
+    {"pattern1"}                // Expected warning patterns
+}
+```
+
+## Notes
+
+- Tests require a built project
+- Tests run real commands via the system shell
+- On Windows uses `CreateProcess`, on Linux — `fork/exec`
+- Tests check both exit code and output content

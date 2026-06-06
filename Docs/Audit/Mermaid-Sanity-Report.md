@@ -1,9 +1,9 @@
 # Mermaid Sanity Report
 
-Generated: 2026-06-06T18:56:03Z
+Generated: 2026-06-06T19:09:15Z
 
-- Mermaid blocks scanned: **2158**
-- Files skipped (allowlist): **253**
+- Mermaid blocks scanned: **2204**
+- Files skipped (allowlist): **254**
 - Potential issues: **0**
 
 Allowlist prefixes:

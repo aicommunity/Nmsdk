@@ -1,5 +1,7 @@
 # Решение проблем с vcpkg и Qt Creator
 
+## RU
+
 ## Проблема 1: boost-filesystem не собирается
 
 **Ошибка:** `boost-filesystem:x64-windows failed with: BUILD_FAILED`
@@ -52,3 +54,60 @@
 1. **Используйте Visual Studio генератор** вместо Ninja - он не требует дополнительных инструментов
 2. **Дождитесь завершения сборки всех пакетов vcpkg** - первый запуск может занять много времени
 3. **Не прерывайте процесс сборки vcpkg** - это может привести к неконсистентному состоянию
+
+---
+
+## EN
+
+## Issue 1: boost-filesystem fails to build
+
+**Error:** `boost-filesystem:x64-windows failed with: BUILD_FAILED`
+
+**Cause:** vcpkg build order issue — `boost-filesystem` tries to build before `boost-atomic` is fully built.
+
+**Solution:**
+1. Wait for vcpkg to build all dependencies (may take 30–60 minutes)
+2. If the error repeats, try:
+   ```cmd
+   cd E:\vcpkg
+   vcpkg remove boost-filesystem:x64-windows
+   vcpkg install boost-filesystem:x64-windows --triplet x64-windows
+   ```
+
+## Issue 2: CMake cannot find Ninja
+
+**Error:** `CMake was unable to find a build program corresponding to "Ninja". CMAKE_MAKE_PROGRAM is not set.`
+
+**Solution:**
+
+### Option 1: Install Ninja system-wide (recommended)
+1. Download Ninja from https://github.com/ninja-build/ninja/releases
+2. Extract `ninja.exe` to a directory on PATH (e.g. `C:\Windows\System32` or create `C:\Tools\ninja` and add to PATH)
+3. Or run `install-ninja.bat`
+
+### Option 2: Use Visual Studio generator
+In Qt Creator, choose preset `win-vs2022-debug` or `win-vs2022-release` instead of `win-msvc-debug/release`. These presets use the Visual Studio generator and do not require Ninja.
+
+### Option 3: Specify Ninja path manually
+In Qt Creator:
+1. Open project settings (Projects)
+2. In Build Settings, find "CMake Configuration"
+3. Add: `-DCMAKE_MAKE_PROGRAM=E:/vcpkg/downloads/tools/ninja-1.13.2-windows/ninja.exe`
+
+## Issue 3: atlmfc not found
+
+**Error:** `Unable to locate 'afxres.h'. Ensure you have installed the ATL/MFC component of Visual Studio.`
+
+**Solution:**
+1. Open Visual Studio Installer
+2. Click "Modify" for your Visual Studio installation
+3. On the "Individual components" tab, install:
+   - `C++ ATL for latest v143 build tools (x86 & x64)`
+   - `C++ MFC for latest v143 build tools (x86 & x64)`
+4. Restart Qt Creator after installation
+
+## Recommendations
+
+1. **Use the Visual Studio generator** instead of Ninja — no extra tools required
+2. **Wait for vcpkg to finish building all packages** — first run can take a long time
+3. **Do not interrupt vcpkg build** — may leave an inconsistent state

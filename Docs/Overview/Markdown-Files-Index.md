@@ -2,7 +2,7 @@
 
 Auto-generated from `Docs/Audit/Documentation-Inventory.json`.
 
-Total: **805** files.
+Total: **806** files.
 
 Run `Scripts/doc-audit/regenerate-markdown-index.py` after `inventory.py`.
 
@@ -160,6 +160,7 @@ Run `Scripts/doc-audit/regenerate-markdown-index.py` after `inventory.py`.
 
 ## Docs
 
+- Docs/Audit/Bilingual-Inventory-Summary.md
 - Docs/Audit/Bilingual-Parity-Report.md
 - Docs/Audit/Build-Gap-Report.md
 - Docs/Audit/Component-Gap-Report.md

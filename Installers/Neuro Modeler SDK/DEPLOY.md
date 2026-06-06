@@ -1,5 +1,7 @@
 # Развёртывание Neuro Modeler на Windows
 
+## RU
+
 ## Требование: Visual C++ Redistributable
 
 Для запуска Neuro Modeler на целевой машине Windows необходим **Microsoft Visual C++ 2015–2022 Redistributable (x64)**.
@@ -13,6 +15,8 @@
 Для пресетов win-vs2019-*-localqt зависимости vcpkg (curl, boost, glog и т.д.) собираются с **триплетом x64-windows-v142** (инструмент VS2019, v142), так что все DLL в `Bin\Platform\Win` используют один и тот же CRT (v142), как и Qt из C:\Qt.
 
 ---
+
+## EN
 
 ## Вариант без установки Redistributable: копирование CRT DLL
 

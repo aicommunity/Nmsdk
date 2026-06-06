@@ -1,5 +1,7 @@
 # Сводка: Интеграционные тесты валидации конфигураций
 
+## RU
+
 ## ✅ Созданные файлы
 
 ### Тесты
@@ -97,3 +99,105 @@ ctest -R ConfigValidationTests -V
 - Все тестовые конфигурации используют формально валидный XML
 - Тесты проверяют семантическую валидность (существование классов, компонентов, портов)
 - Функциональность валидации может требовать доработки для полного обнаружения всех ошибок
+
+---
+
+## EN
+
+## ✅ Created files
+
+### Tests
+- ✅ `Test_ConfigValidation.cpp` — main integration test file
+- ✅ `CMakeLists.txt` — CMake build setup
+- ✅ `README.md` — full documentation
+- ✅ `RUN_TESTS.md` — run instructions
+- ✅ `QUICK_START.md` — quick start
+- ✅ `INDEX.md` — documentation index
+
+### Test configurations
+- ✅ `test_valid/` — valid configuration
+- ✅ `test_missing_model/` — missing model file
+- ✅ `test_missing_parameters/` — missing parameters file
+- ✅ `test_invalid_xml/` — invalid XML
+- ✅ `test_empty_model/` — empty model
+- ✅ `test_invalid_classes/` — nonexistent component classes
+- ✅ `test_invalid_links/` — invalid links
+
+### Documentation
+- ✅ `Bin/Configs/TestValidation/README.md` — test configuration description
+- ✅ `Docs/Testing/ConfigValidation-Tests.md` — general documentation
+
+## 🎯 Test functionality
+
+Tests verify:
+1. ✅ Valid configurations (exit code 0)
+2. ✅ Missing files (exit code 1, errors)
+3. ✅ Invalid XML (exit code 1, parsing errors)
+4. ✅ Empty models (exit code 1, warnings)
+5. ✅ Nonexistent component classes (exit code 1, class errors)
+6. ✅ Invalid links (exit code 1, link errors)
+
+## 📋 Test data
+
+### test_invalid_classes
+**File:** `InvalidClassesModel.xml`
+
+**Contains:**
+- `NonExistentComponent1` with class `NonExistentClass123`
+- `NonExistentComponent2` with class `FakeComponentClass`
+- `ValidComponent` with class `NPGenerator` (valid)
+
+### test_invalid_links
+**File:** `InvalidLinksModel.xml`
+
+**Contains 5 links:**
+1. Valid: `Generator1.Output` -> `Neuron1.Soma1.ExcSynapse1.Input`
+2. Invalid: `NonExistentGenerator.Output` -> `Neuron1.Soma1.ExcSynapse1.Input`
+3. Invalid: `Generator1.Output` -> `NonExistentNeuron.Soma1.ExcSynapse1.Input`
+4. Invalid: `Generator1.NonExistentOutput` -> `Neuron1.Soma1.ExcSynapse1.Input`
+5. Invalid: `Generator1.Output` -> `Neuron1.Soma1.ExcSynapse1.NonExistentInput`
+
+## 🚀 Quick run
+
+```bash
+# 1. Build
+cd build
+cmake --build . --target Test_ConfigValidation
+
+# 2. Run
+ctest -R ConfigValidationTests -V
+# or
+./Tests/Integration/ConfigValidation/Test_ConfigValidation
+```
+
+## 📚 Documentation
+
+- **Quick start:** `QUICK_START.md`
+- **Full documentation:** `README.md`
+- **Run instructions:** `RUN_TESTS.md`
+- **Index:** `INDEX.md`
+
+## ✨ Implementation notes
+
+1. **Cross-platform:** Windows and Linux support
+2. **Auto-discovery:** Automatically finds `NeuroModelerConsole` and test configurations
+3. **Pattern checks:** Verifies exit code and output content
+4. **CTest integration:** Tests registered in CTest for CI/CD
+
+## 🔍 Manual verification
+
+```bash
+# Nonexistent classes
+./Bin/Platform/Linux/NeuroModelerConsole --check-config \
+  Bin/Configs/TestValidation/test_invalid_classes/project.ini
+
+# Invalid links
+./Bin/Platform/Linux/NeuroModelerConsole --check-config \
+  Bin/Configs/TestValidation/test_invalid_links/project.ini
+```
+
+## 📝 Notes
+
+- All test configurations use formally valid XML
+- Tests check semantic validity (existence of classes, components, ports)
+- Validation may need further work to detect all errors fully

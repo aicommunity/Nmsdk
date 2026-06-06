@@ -1,5 +1,7 @@
 # Component Inventory (Libraries/* registration in UStorage)
 
+## RU
+
 Сводный список классов, регистрируемых через `UploadClass(...)` / `CreateClassSamples(...)` в библиотеках `Libraries/*`. Получено автоматически по исходникам (`Core/*.cpp|*.h`). Повторяющиеся псевдонимы сохранены для трассировки.
 
 ## Rdk-BasicLib
@@ -23,4 +25,7 @@
 - NWinAPIActLibrary.cpp: `NWPhysicalManipulator`
 
 ---
+
+## EN
+
 Эта инвентаризация — исходная точка для дальнейших шагов (сопоставление с `Bin/Configs`, `Bin/ClDesc`, группировка, подробная документация компонентов и диаграммы).

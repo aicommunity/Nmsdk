@@ -22,16 +22,34 @@ Scripts/doc-audit/run-all.sh
 | [Component-Gap-Report.md](Component-Gap-Report.md) | Классы без docs / orphan docs |
 | [Build-Gap-Report.md](Build-Gap-Report.md) | CMake targets/options vs Build-System.md |
 | [Index-Count-Gap-Report.md](Index-Count-Gap-Report.md) | Счётчики в индексах |
+| [Bilingual-Inventory.csv](Bilingual-Inventory.csv) | CSV: `## RU` / `## EN` по файлам |
+
+### Целевые метрики (phase 6)
+
+| Метрика | Цель | Скрипт |
+|---------|------|--------|
+| Битые ссылки | **0** | `check-links.py` |
+| Mermaid issues (вне allowlist) | **0** | `check-mermaid.py` |
+| Missing `## EN` (вне allowlist) | **0** | `check-bilingual.py` |
+| Missing `## RU` | **0** | `check-bilingual.py` |
+| Component gap (missing docs) | **0** | `gap-report.py` |
+
+Allowlist RU-only: `Bin/Configs/SpikeSamples/`, `Reports/`, `Docs/Audit/`, `Markdown-Files-Index.md`.
 
 ### Матрица зон
 
-| Зона | Субмодуль | Статус |
-|------|-----------|--------|
-| `Docs/` | nmsdk (root) | active |
-| `Rdk/Docs/`, `Rdk/LLM/Docs/` | Rdk | active |
-| `Bin/Docs/`, SpikeSamples README | Bin | active |
-| `Libraries/*/Docs/` | per-library | active |
-| `Reports/` | nmsdk | historical (archive only) |
+| Зона | Субмодуль | Статус | Bilingual | Mermaid |
+|------|-----------|--------|-----------|---------|
+| `Docs/` | nmsdk (root) | active | ✅ | ✅ |
+| `Rdk/Docs/`, `Rdk/LLM/Docs/` | Rdk | active | ✅ | ✅ |
+| `Bin/Docs/`, SpikeSamples README | Bin | active | ✅ | ✅ |
+| `Libraries/Nmsdk-MotionControlLib/Docs/` | MotionControlLib | active | ✅ | ✅ |
+| `Libraries/Nmsdk-PulseLib/Docs/` | PulseLib | active | ✅ | ✅ |
+| `Libraries/Rdk-HardwareLib/Docs/` | HardwareLib | active | ✅ | ✅ |
+| `Libraries/Rdk-CvBasicLib/Docs/` | CvBasicLib | active | ✅ | ✅ |
+| `Libraries/Rdk-BasicLib/Docs/` | BasicLib | active | ✅ | ✅ |
+| `Reports/` | nmsdk | historical (archive only) | allowlist | allowlist |
+| `Bin/Configs/SpikeSamples/` | Bin | RU-only configs | allowlist | allowlist |
 
 ### Шаблон находки
 
@@ -66,7 +84,7 @@ Scripts/doc-audit/run-all.sh
 
 ### Reports
 
-See the table in the RU section (same filenames).
+See the table in the RU section (same filenames). Target metrics: links=0, mermaid=0, bilingual=0 outside allowlist.
 
 ### Commit workflow
 

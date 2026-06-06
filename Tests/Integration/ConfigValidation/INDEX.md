@@ -1,5 +1,7 @@
 # Индекс документации тестов валидации конфигураций
 
+## RU
+
 ## Быстрый доступ
 
 - **🚀 Быстрый старт:** [QUICK_START.md](QUICK_START.md) - минимальные шаги для запуска
@@ -56,3 +58,64 @@ ctest -R ConfigValidationTests -V
 
 - [Общая документация по тестированию](../../../Docs/Testing/ConfigValidation-Tests.md)
 - [Документация тестовых конфигураций](../../../Bin/Configs/TestValidation/README.md)
+
+---
+
+## EN
+
+## Quick access
+
+- **🚀 Quick start:** [QUICK_START.md](QUICK_START.md) — minimal steps to run
+- **📖 Full documentation:** [README.md](README.md) — detailed test description
+- **▶️ Run instructions:** [RUN_TESTS.md](RUN_TESTS.md) — detailed run guide
+
+## File structure
+
+```
+Tests/Integration/ConfigValidation/
+├── CMakeLists.txt              # CMake build setup
+├── Test_ConfigValidation.cpp   # Main test file
+├── INDEX.md                    # This file
+├── QUICK_START.md              # Quick start
+├── README.md                   # Full documentation
+└── RUN_TESTS.md                # Run instructions
+```
+
+## Test configurations
+
+All test configurations are in `Bin/Configs/TestValidation/`:
+
+- `test_valid/` — valid configuration
+- `test_missing_model/` — missing model file
+- `test_missing_parameters/` — missing parameters file
+- `test_invalid_xml/` — invalid XML
+- `test_empty_model/` — empty model
+- `test_invalid_classes/` — nonexistent component classes
+- `test_invalid_links/` — invalid links
+
+## Commands
+
+### Build
+```bash
+cmake --build build --target Test_ConfigValidation
+```
+
+### Run
+```bash
+# Via CTest
+ctest -R ConfigValidationTests -V
+
+# Directly
+./build/Tests/Integration/ConfigValidation/Test_ConfigValidation
+```
+
+### Manual check
+```bash
+./Bin/Platform/Linux/NeuroModelerConsole --check-config \
+  Bin/Configs/TestValidation/test_invalid_classes/project.ini
+```
+
+## See also
+
+- [General testing documentation](../../../Docs/Testing/ConfigValidation-Tests.md)
+- [Test configuration documentation](../../../Bin/Configs/TestValidation/README.md)
