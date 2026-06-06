@@ -1,6 +1,6 @@
 # Bilingual Parity Report
 
-Generated: 2026-06-06T19:09:15Z
+Generated: 2026-06-06T19:20:58Z
 
 ## Summary
 
