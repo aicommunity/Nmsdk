@@ -1,3 +1,5 @@
+> **Note:** Root-level diagnostic flow doc. Related: [Engine-Detailed.md](../../Rdk/Docs/Engine-Detailed.md), `TProjectLoadDiagnostics` in `Rdk/Core/Engine/`.
+
 # Поток диагностики при загрузке проекта
 
 ## Обзор

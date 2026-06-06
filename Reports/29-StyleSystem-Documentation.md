@@ -1,3 +1,5 @@
+> **Historical report.** See [Docs/Overview/](../Docs/Overview/) for current documentation.
+
 # Система стилей NeuroModeler (v2.0 - Modern UI)
 
 ## Обзор

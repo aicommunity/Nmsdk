@@ -32,9 +32,13 @@ Nmsdk/
 │   └── Platform/           # Платформенные артефакты
 │
 ├── Build/                  # Файлы сборки (CMake, Qt, VS, etc.)
-├── Docs/                   # Документация
-├── Docs.old/               # Старая документация
-├── Reports/                # Отчеты и анализ
+├── Docs/                   # Документация (точка входа Docs/README.md)
+│   └── Audit/              # Отчёты аудита (Scripts/doc-audit/)
+├── Docs.old/               # Legacy .doc / Doxygen (не поддерживается)
+├── Reports/                # Исторические отчёты (archive)
+├── Scripts/doc-audit/      # Инструменты аудита документации
+├── LLM/                    # Runtime-индекс LLM-ассистента
+├── README.md               # Корневая точка входа
 └── CMakeLists.txt          # Корневой файл сборки
 ```
 

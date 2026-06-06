@@ -11,6 +11,7 @@
 - [FAQ](FAQ.md) - часто задаваемые вопросы
 - [Getting Started](Getting-Started.md) - пути для разных ролей пользователей
 - [Troubleshooting](Troubleshooting/Troubleshooting-Guide.md) - устранение неполадок
+- [Documentation Audit](Audit/README.md) - отчёты аудита документации
 
 ### Навигация
 
@@ -25,12 +26,12 @@
 
 #### Основные компоненты
 
-- [Rdk Core](Rdk/Docs/Architecture/Overview.md) - ядро системы, движок, компонентная система
-  - [Архитектура приложения](Rdk/Docs/Architecture/Application-Architecture.md) - RPC, сервер, управление проектами
-  - [Архитектура движка](Rdk/Docs/Architecture/Engine-Architecture.md) - компоненты, контейнеры, свойства
-  - [Графика](Rdk/Docs/Architecture/Graphics-Architecture.md) - система графики и визуализации
-  - [Сериализация](Rdk/Docs/Architecture/Serialize-Architecture.md) - XML и бинарная сериализация
-  - [Системные абстракции](Rdk/Docs/Architecture/System-Platform-Abstraction.md) - кроссплатформенные абстракции
+- [Rdk Core](../Rdk/Docs/Architecture/Overview.md) - ядро системы, движок, компонентная система
+  - [Архитектура приложения](../Rdk/Docs/Architecture/Application-Architecture.md) - RPC, сервер, управление проектами
+  - [Архитектура движка](../Rdk/Docs/Architecture/Engine-Architecture.md) - компоненты, контейнеры, свойства
+  - [Графика](../Rdk/Docs/Architecture/Graphics-Architecture.md) - система графики и визуализации
+  - [Сериализация](../Rdk/Docs/Architecture/Serialize-Architecture.md) - XML и бинарная сериализация
+  - [Системные абстракции](../Rdk/Docs/Architecture/System-Platform-Abstraction.md) - кроссплатформенные абстракции
 
 - [GUI](GUI/Overview.md) - графический интерфейс пользователя
   - [Справочник виджетов](GUI/Widgets-Reference.md) - описание основных виджетов
@@ -67,6 +68,12 @@
 
 - [Хронология рефакторинга](Refactoring-History/Refactoring-Timeline.md) - основные изменения
 - [Извлеченные уроки](Refactoring-History/Lessons-Learned.md) - важные выводы и практики
+
+#### Аудит и legacy
+
+- [Documentation Audit](Audit/README.md) - отчёты и скрипты аудита
+- [Reports/](../Reports/README.md) - исторические отчёты разработки (archive)
+- [Docs.old/](../Docs.old/) - устаревшие `.doc` и Doxygen-артефакты (не поддерживаются)
 
 ### Документация в сабрепозиториях
 
@@ -183,12 +190,12 @@ Welcome to the documentation of **Nmsdk (Neuro Modeler SDK)** - SDK for neural n
 
 #### Core Components
 
-- [Rdk Core](Rdk/Docs/Architecture/Overview.md) - system core, engine, component system
-  - [Application Architecture](Rdk/Docs/Architecture/Application-Architecture.md) - RPC, server, project management
-  - [Engine Architecture](Rdk/Docs/Architecture/Engine-Architecture.md) - components, containers, properties
-  - [Graphics](Rdk/Docs/Architecture/Graphics-Architecture.md) - graphics and visualization system
-  - [Serialization](Rdk/Docs/Architecture/Serialize-Architecture.md) - XML and binary serialization
-  - [System Abstractions](Rdk/Docs/Architecture/System-Platform-Abstraction.md) - cross-platform abstractions
+- [Rdk Core](../Rdk/Docs/Architecture/Overview.md) - system core, engine, component system
+  - [Application Architecture](../Rdk/Docs/Architecture/Application-Architecture.md) - RPC, server, project management
+  - [Engine Architecture](../Rdk/Docs/Architecture/Engine-Architecture.md) - components, containers, properties
+  - [Graphics](../Rdk/Docs/Architecture/Graphics-Architecture.md) - graphics and visualization system
+  - [Serialization](../Rdk/Docs/Architecture/Serialize-Architecture.md) - XML and binary serialization
+  - [System Abstractions](../Rdk/Docs/Architecture/System-Platform-Abstraction.md) - cross-platform abstractions
 
 - [GUI](GUI/Overview.md) - graphical user interface
   - [Widgets Reference](GUI/Widgets-Reference.md) - description of main widgets
@@ -212,7 +219,7 @@ Welcome to the documentation of **Nmsdk (Neuro Modeler SDK)** - SDK for neural n
 
 #### Components and Configuration
 
-- [Component System](Rdk/Docs/Guides/Component-System.md) - creating and using components
+- [Component System](../Rdk/Docs/Guides/Component-System.md) - creating and using components
 - [Configuration Files](Components-And-Configuration/Configuration-Files-Overview.md) - config structure
 - [Direct Property Access](Components-And-Configuration/Direct-Property-Access.md) - property access optimization
 

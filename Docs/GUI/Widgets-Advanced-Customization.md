@@ -6,6 +6,23 @@
 
 Этот документ описывает расширенные возможности кастомизации виджетов Nmsdk, включая создание пользовательских виджетов, стилизацию через QSS, расширение функциональности существующих виджетов и интеграцию с системой контроллеров.
 
+### UDrawEngineImageWidget (legacy raster diagram)
+
+`UDrawEngineImageWidget` (`Rdk/GUI/Qt/UDrawEngineImageWidget.h`) — QLabel-based raster view of the component network via `RDK::UDrawEngine`. Parent `UDrawEngineWidget` bridges engine access; signals connect to `UComponentsListWidget` in `UGEngineControlWidget`.
+
+**Customization points:**
+
+| Hook | Purpose |
+|------|---------|
+| `reDrawScheme(shouldReloadXml, no_resize_canvas)` | Force XML reload and bitmap repaint |
+| `setComponentName` / `selectComponent` | Focus component on canvas |
+| `ResizeCanvas` | Expand canvas on widget resize |
+| `SetApplication` | Bind `UApplication` from parent |
+| Mouse/drag slots | Link creation, move, switch modes via context menu |
+| `classDescription` | ClDesc popup via `UClassDescriptionDisplay` |
+
+Use `UModernDiagramWidget` for vector editing; keep `UDrawEngineImageWidget` for legacy layouts and tests that assert bitmap output.
+
 ### Архитектура виджетов
 
 ```mermaid

@@ -10,8 +10,8 @@
   - Для сабрепозиториев оставлены только ссылки внутри их каталога; внешние пути заменены ранее на текстовые указания (в рамках предыдущих работ).
 
 ## Результат проверки
-- Всего проверено Markdown-файлов: **157**
-- Некорректных ссылок после правок: **0**
+- Автоматическая проверка: `Scripts/doc-audit/check-links.py` → [Docs/Audit/Link-Health-Report.md](../Audit/Link-Health-Report.md)
+- Последний прогон: см. дату в Link-Health-Report (полное дерево ~650+ `.md`)
 
 ## Исправленные проблемы (кратко)
 - Обновлены ссылки в `Reports/00-Project-Overview.md`, `Reports/09-Component-System.md`, `Reports/10-Build-System.md` на актуальный `Docs/Libraries/Overview.md`.

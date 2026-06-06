@@ -21,13 +21,12 @@
 
 ### Основные цели сборки
 
-- `rdk.static.qt` - статическая библиотека ядра Rdk
-- `Rdk-BasicLib.qt` - базовая библиотека
-- `Rdk-CvBasicLib.qt` - библиотека компьютерного зрения
-- `Rdk-HardwareLib.qt` - библиотека работы с железом
-- `Nmsdk-MotionControlLib.qt` - библиотека управления движением
-- `Nmsdk-PulseLib.qt` - библиотека импульсных нейросетей
-- Приложения: NeuroModeler, NeuroModelerConsole
+- `rdk.static.qt` — статическая библиотека ядра Rdk (+ Qt GUI в `Rdk/GUI/Qt`)
+- `Rdk-BasicLib.qt`, `Rdk-CvBasicLib.qt`, `Rdk-HardwareLib.qt` — библиотеки компонентов
+- `Rdk-HardwareLib.gui`, `Rdk-BasicLib.gui`, … — Qt-формы компонентов (registration units)
+- `Nmsdk-MotionControlLib.qt`, `Nmsdk-PulseLib.qt` — SNN и motion control
+- Приложения: `NeuroModeler`, `NeuroModelerConsole`
+- LLM (при `RDK_USE_LLM=ON`): модуль `Rdk/LLM`, GUI dock; утилита `llm-index-pack` — индекс документации для ассистента
 
 ### Процесс сборки
 
@@ -64,15 +63,19 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    RdkCore[rdk.static.qt] --> BasicLib[Rdk-BasicLib]
-    RdkCore --> CvLib[Rdk-CvBasicLib]
-    RdkCore --> HardwareLib[Rdk-HardwareLib]
-    BasicLib --> PulseLib[Nmsdk-PulseLib]
-    BasicLib --> MotionLib[Nmsdk-MotionControlLib]
-    
+    RdkCore[rdk.static.qt] --> BasicLib[Rdk-BasicLib.qt]
+    RdkCore --> CvLib[Rdk-CvBasicLib.qt]
+    RdkCore --> HardwareLib[Rdk-HardwareLib.qt]
+    BasicLib --> PulseLib[Nmsdk-PulseLib.qt]
+    BasicLib --> MotionLib[Nmsdk-MotionControlLib.qt]
+    RdkCore --> LlmMod[Rdk/LLM optional]
     RdkCore --> App[NeuroModeler]
+    LlmMod --> App
     BasicLib --> App
     CvLib --> App
+    HardwareLib --> App
+    PulseLib --> App
+    MotionLib --> App
 ```
 
 ### Зависимости
@@ -93,13 +96,20 @@ flowchart LR
 
 | Опция | Preset по умолчанию | Назначение |
 |-------|---------------------|------------|
+| `RDK_USE_LLM` | ON | Сборка `Rdk/LLM` и GUI dock ассистента |
+| `RDK_USE_OPENCV` | ON | OpenCV для Rdk-CvBasicLib |
 | `RDK_USE_ODESOLVER` | OFF | ODE solver в Nmsdk-PulseLib |
-| `RDK_USE_PYTHON` | OFF | Python/Boost.Python |
-| `RDK_USE_DARKNET` | OFF | Darknet |
-| `RDK_USE_TENSORFLOW` | OFF | TensorFlow |
+| `RDK_USE_PYTHON` | OFF | Deprecated: `Rdk-PyMachineLearningLib` (submodule absent) |
+| `RDK_USE_DARKNET` | OFF | Deprecated: `Rdk-DarknetLib` (submodule absent) |
+| `RDK_USE_TENSORFLOW` | OFF | Deprecated: `Rdk-TensorflowLib` (submodule absent) |
 | `RDK_LLM_BUILD_EMBEDDED` | OFF | Встроенный llama.cpp (RDK LLM) |
 | `RDK_UNICODE_RUN` | OFF | UTF-8 API (`RDK_UNICODE_RUN` define) |
 | `NO_MOTION_CONTROL` | ON | Не регистрировать MotionControlLibrary в runtime |
+| `NMSDK_PULSELIB_BUILD_CORE_ONLY` | OFF | PulseLib без Qt GUI helpers |
+| `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY` | OFF | MotionControlLib без Qt GUI helpers |
+| `BUILD_TESTS` | ON | Юнит и интеграционные тесты |
+
+Legacy `.pro` files may still list ML libraries; see [Optional ML Libraries](../Libraries/Optional-ML-Libraries.md).
 
 Параллельная сборка: `CMAKE_BUILD_PARALLEL_LEVEL` задаётся в `nmsdk-global-defaults` через `$env{NUMBER_OF_PROCESSORS}` и наследуется всеми preset-ами. На Linux переменная может быть не задана — CMake использует значение по умолчанию.
 
@@ -137,13 +147,12 @@ All compiled files are placed in:
 
 ### Main Build Targets
 
-- `rdk.static.qt` - static Rdk core library
-- `Rdk-BasicLib.qt` - basic library
-- `Rdk-CvBasicLib.qt` - computer vision library
-- `Rdk-HardwareLib.qt` - hardware library
-- `Nmsdk-MotionControlLib.qt` - motion control library
-- `Nmsdk-PulseLib.qt` - spiking neural networks library
-- Applications: NeuroModeler, NeuroModelerConsole
+- `rdk.static.qt` — static Rdk core (+ `Rdk/GUI/Qt`)
+- `Rdk-BasicLib.qt`, `Rdk-CvBasicLib.qt`, `Rdk-HardwareLib.qt` — component libraries
+- `*.gui` targets — Qt component form registration units
+- `Nmsdk-MotionControlLib.qt`, `Nmsdk-PulseLib.qt`
+- Applications: `NeuroModeler`, `NeuroModelerConsole`
+- With `RDK_USE_LLM=ON`: `Rdk/LLM` module and `llm-index-pack` documentation index tool
 
 ### Build Process
 
@@ -174,13 +183,20 @@ The same options are declared in [`cmake/RdkDefines.cmake`](../../cmake/RdkDefin
 
 | Option | Preset default | Purpose |
 |--------|----------------|---------|
+| `RDK_USE_LLM` | ON | Build `Rdk/LLM` and assistant GUI dock |
+| `RDK_USE_OPENCV` | ON | OpenCV for Rdk-CvBasicLib |
 | `RDK_USE_ODESOLVER` | OFF | ODE solver in Nmsdk-PulseLib |
-| `RDK_USE_PYTHON` | OFF | Python/Boost.Python |
-| `RDK_USE_DARKNET` | OFF | Darknet |
-| `RDK_USE_TENSORFLOW` | OFF | TensorFlow |
+| `RDK_USE_PYTHON` | OFF | Deprecated: `Rdk-PyMachineLearningLib` (submodule absent) |
+| `RDK_USE_DARKNET` | OFF | Deprecated: `Rdk-DarknetLib` (submodule absent) |
+| `RDK_USE_TENSORFLOW` | OFF | Deprecated: `Rdk-TensorflowLib` (submodule absent) |
 | `RDK_LLM_BUILD_EMBEDDED` | OFF | Embedded llama.cpp (RDK LLM) |
 | `RDK_UNICODE_RUN` | OFF | UTF-8 API (`RDK_UNICODE_RUN` define) |
 | `NO_MOTION_CONTROL` | ON | Skip MotionControlLibrary runtime registration |
+| `NMSDK_PULSELIB_BUILD_CORE_ONLY` | OFF | PulseLib without Qt GUI helpers |
+| `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY` | OFF | MotionControlLib without Qt GUI helpers |
+| `BUILD_TESTS` | ON | Unit and integration tests |
+
+Legacy `.pro` files may still list ML libraries; see [Optional ML Libraries](../Libraries/Optional-ML-Libraries.md).
 
 Parallel builds: `CMAKE_BUILD_PARALLEL_LEVEL` is set in `nmsdk-global-defaults` via `$env{NUMBER_OF_PROCESSORS}` and inherited by all presets. On Linux the variable may be unset — CMake falls back to its default.
 

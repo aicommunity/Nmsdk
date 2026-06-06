@@ -29,14 +29,14 @@
 
 **Рекомендуемые ресурсы:**
 - [QuickStart.md](Overview/QuickStart.md) - быстрый старт
-- [Component System](Rdk/Docs/Guides/Component-System.md) - работа с компонентами
+- [Component System](../Rdk/Docs/Guides/Component-System.md) - работа с компонентами
 - [GUI Overview](GUI/Overview.md) - интерфейс приложения
 
 ### Для разработчиков компонентов
 
 #### Шаг 1: Изучите основы Rdk Core
 
-1. [Rdk Core Overview](Rdk/Docs/Architecture/Overview.md) - обзор ядра
+1. [Rdk Core Overview](../Rdk/Docs/Architecture/Overview.md) - обзор ядра
 2. [Rdk/Docs/Getting-Started.md](../Rdk/Docs/Getting-Started.md) - быстрый старт для разработчиков
 3. [Rdk/Docs/Guides/Creating-Components.md](../Rdk/Docs/Guides/Creating-Components.md) - создание компонентов
 
@@ -55,7 +55,7 @@
 
 **Рекомендуемые ресурсы:**
 - [Rdk/Docs/Getting-Started.md](../Rdk/Docs/Getting-Started.md) - быстрый старт
-- [Component Development Guide](Rdk/Docs/Guides/Component-Development.md) - разработка компонентов
+- [Component Development Guide](../Rdk/Docs/Guides/Component-Development.md) - разработка компонентов
 - [Rdk/Docs/FAQ.md](../Rdk/Docs/FAQ.md) - FAQ по Rdk Core
 
 ### Для разработчиков библиотек
@@ -63,7 +63,7 @@
 #### Шаг 1: Изучите архитектуру
 
 1. [Architecture Overview](Overview/Architecture-Overview.md) - общая архитектура
-2. [Rdk Core Overview](Rdk/Docs/Architecture/Overview.md) - ядро системы
+2. [Rdk Core Overview](../Rdk/Docs/Architecture/Overview.md) - ядро системы
 3. [Development-Guides/Library-Development.md](Development-Guides/Library-Development.md) - разработка библиотек
 
 #### Шаг 2: Создайте структуру библиотеки
@@ -87,8 +87,8 @@
 
 #### Шаг 1: Изучите доступные библиотеки
 
-1. [Libraries Overview](Libraries/Overview.md) - обзор всех библиотек
-2. [Nmsdk-PulseLib](Libraries/Nmsdk-PulseLib.md) - импульсные нейронные сети
+1. [Libraries Overview](../Libraries/Overview.md) - обзор всех библиотек
+2. [Nmsdk-PulseLib](../Libraries/Nmsdk-PulseLib.md) - импульсные нейронные сети
 3. [Nmsdk-PulseLib/Docs/Scientific-Background.md](../Libraries/Nmsdk-PulseLib/Docs/Scientific-Background.md) - научный фон
 
 #### Шаг 2: Изучите примеры конфигураций
@@ -113,7 +113,7 @@
 #### Шаг 1: Изучите API
 
 1. [Rdk/Docs/API-Reference.md](../Rdk/Docs/API-Reference.md) - полный справочник API
-2. [Application Architecture](Rdk/Docs/Architecture/Application-Architecture.md) - работа с приложением
+2. [Application Architecture](../Rdk/Docs/Architecture/Application-Architecture.md) - работа с приложением
 3. [Rdk/Docs/Guides/RPC-Integration.md](../Rdk/Docs/Guides/RPC-Integration.md) - интеграция RPC
 
 #### Шаг 2: Интеграция в приложение
@@ -131,7 +131,7 @@
 **Рекомендуемые ресурсы:**
 - [Rdk/Docs/Getting-Started.md](../Rdk/Docs/Getting-Started.md) - быстрый старт для интеграторов
 - [Rdk/Docs/API-Reference.md](../Rdk/Docs/API-Reference.md) - API справочник
-- [Application Architecture](Rdk/Docs/Architecture/Application-Architecture.md) - архитектура приложения
+- [Application Architecture](../Rdk/Docs/Architecture/Application-Architecture.md) - архитектура приложения
 
 ### Чеклисты для начала работы
 
@@ -269,8 +269,8 @@ This guide will help you quickly get started with Nmsdk depending on your role a
 
 #### Step 1: Study Available Libraries
 
-1. [Libraries Overview](Libraries/Overview.md) - overview of all libraries
-2. [Nmsdk-PulseLib](Libraries/Nmsdk-PulseLib.md) - spiking neural networks
+1. [Libraries Overview](../Libraries/Overview.md) - overview of all libraries
+2. [Nmsdk-PulseLib](../Libraries/Nmsdk-PulseLib.md) - spiking neural networks
 3. [Nmsdk-PulseLib/Docs/Scientific-Background.md](../Libraries/Nmsdk-PulseLib/Docs/Scientific-Background.md) - scientific background
 
 #### Step 2: Study Configuration Examples

@@ -25,7 +25,7 @@
 - [Шаблоны конфигураций](../../Libraries/Nmsdk-PulseLib/Docs/Config-Templates.md) - шаблоны типовых экспериментов
 - [Научный фон](../../Libraries/Nmsdk-PulseLib/Docs/Scientific-Background.md) - научный фон и связанные публикации
 - [FAQ](../../Libraries/Nmsdk-PulseLib/Docs/FAQ.md) - часто задаваемые вопросы
-- [Документация компонентов](../../Libraries/Nmsdk-PulseLib/Docs/Components/) - детальная документация по каждому компоненту (73 компонента)
+- [Документация компонентов](../../Libraries/Nmsdk-PulseLib/Docs/Components/) - детальная документация (177 зарегистрированных классов + групповые обзоры)
 - [Диаграммы](../../Libraries/Nmsdk-PulseLib/Docs/Diagrams/) - архитектурные диаграммы
 
 **Корневая документация:** [Nmsdk-PulseLib](../Libraries/Nmsdk-PulseLib.md)
@@ -93,7 +93,7 @@
 - [Примеры использования](../../Libraries/Rdk-HardwareLib/Docs/Usage-Examples.md) - практические примеры
 - [API Обзор](../../Libraries/Rdk-HardwareLib/Docs/API-Overview.md) - обзор API
 - [Документация компонентов](../../Libraries/Rdk-HardwareLib/Docs/Components/) - детальная документация
-  - ADC, Arduino, ArduinoConnect, DC
+  - `ArduinoBoard`, `ArduinoSensorSketch`, `ArduinoFirmata`, `ArduinoAdc`, `ArduinoDcDemo` (legacy: ADC, Arduino, DC → `Docs/Legacy/`)
 - [Диаграммы](../../Libraries/Rdk-HardwareLib/Docs/Diagrams/) - архитектурные диаграммы
 
 **Корневая документация:** [Rdk-HardwareLib](../Libraries/Rdk-HardwareLib.md)
@@ -153,7 +153,7 @@ This document contains a complete structured index of all component library docu
 - [Configuration Overview](../../Libraries/Nmsdk-PulseLib/Docs/Config-Overview.md) - configuration projects
 - [Configuration Templates](../../Libraries/Nmsdk-PulseLib/Docs/Config-Templates.md) - experiment templates
 - [Scientific Background](../../Libraries/Nmsdk-PulseLib/Docs/Scientific-Background.md) - scientific background and related publications
-- [Component Documentation](../../Libraries/Nmsdk-PulseLib/Docs/Components/) - detailed documentation for each component (73 components)
+- [Component Documentation](../../Libraries/Nmsdk-PulseLib/Docs/Components/) - detailed documentation (177 registered classes + group overviews)
 - [Diagrams](../../Libraries/Nmsdk-PulseLib/Docs/Diagrams/) - architecture diagrams
 
 **Root Documentation:** [Nmsdk-PulseLib](../Libraries/Nmsdk-PulseLib.md)
@@ -221,7 +221,7 @@ This document contains a complete structured index of all component library docu
 - [Usage Examples](../../Libraries/Rdk-HardwareLib/Docs/Usage-Examples.md) - practical examples
 - [API Overview](../../Libraries/Rdk-HardwareLib/Docs/API-Overview.md) - API overview
 - [Component Documentation](../../Libraries/Rdk-HardwareLib/Docs/Components/) - detailed documentation
-  - ADC, Arduino, ArduinoConnect, DC
+  - `ArduinoBoard`, `ArduinoSensorSketch`, `ArduinoFirmata`, `ArduinoAdc`, `ArduinoDcDemo` (legacy: ADC, Arduino, DC → `Docs/Legacy/`)
 - [Diagrams](../../Libraries/Rdk-HardwareLib/Docs/Diagrams/) - architecture diagrams
 
 **Root Documentation:** [Rdk-HardwareLib](../Libraries/Rdk-HardwareLib.md)

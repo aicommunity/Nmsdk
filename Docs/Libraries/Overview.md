@@ -16,6 +16,10 @@
 4. **Nmsdk-PulseLib** - Импульсные нейронные сети
 5. **Nmsdk-MotionControlLib** - Управление движением и робототехника
 
+#### Опциональные / deprecated ML-библиотеки (не в `.gitmodules`)
+
+См. [Optional-ML-Libraries.md](Optional-ML-Libraries.md) — `Rdk-TensorflowLib`, `Rdk-PyMachineLearningLib`, `Rdk-DarknetLib` отсутствуют в текущем дереве.
+
 ### Зависимости между библиотеками
 
 ```mermaid
@@ -113,6 +117,10 @@ Libraries in the `Libraries/` folder contain implementations of specific compone
 3. **Rdk-HardwareLib** - Hardware integration (Arduino, etc.)
 4. **Nmsdk-PulseLib** - Spiking Neural Networks
 5. **Nmsdk-MotionControlLib** - Motion control and robotics
+
+#### Optional / deprecated ML libraries (not in `.gitmodules`)
+
+See [Optional-ML-Libraries.md](Optional-ML-Libraries.md).
 
 ### Library Dependencies
 

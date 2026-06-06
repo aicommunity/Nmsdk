@@ -112,10 +112,27 @@ flowchart TB
 
 Перед коммитом проверьте:
 
-1. Все ссылки работают
-2. Диаграммы mermaid корректны
-3. Обе языковые секции заполнены
-4. Документация соответствует коду
+1. Прогон `Scripts/doc-audit/run-all.sh` (или CI `Scripts/ci-doc-audit.sh`)
+2. Все ссылки работают — см. [Audit/Link-Health-Report.md](Audit/Link-Health-Report.md)
+3. Диаграммы mermaid корректны
+4. Обе языковые секции заполнены
+5. Документация соответствует коду — см. [Audit/Component-Gap-Report.md](Audit/Component-Gap-Report.md)
+
+### Commit workflow (documentation)
+
+После логической порции правок документации:
+
+```bash
+Scripts/doc-audit/commit-phase.sh \
+  --phase "phase-name" \
+  --scope "nmsdk|rdk|bin|hardware|..." \
+  --summary "imperative English summary" \
+  --body-file Docs/Audit/commit-templates/phase-name.txt
+```
+
+- Сообщения коммитов — **только на английском**, формат `docs(<scope>): <summary>`
+- Сначала субмодуль, затем корневой репозиторий (gitlink bump)
+- Без `--no-verify`; без push из скрипта
 
 ### См. также
 
@@ -236,10 +253,15 @@ flowchart TB
 
 Before committing, check:
 
-1. All links work
-2. Mermaid diagrams are correct
-3. Both language sections are filled
-4. Documentation matches the code
+1. Run `Scripts/doc-audit/run-all.sh` (or CI `Scripts/ci-doc-audit.sh`)
+2. All links work — see [Audit/Link-Health-Report.md](Audit/Link-Health-Report.md)
+3. Mermaid diagrams are correct
+4. Both language sections are filled
+5. Documentation matches the code — see [Audit/Component-Gap-Report.md](Audit/Component-Gap-Report.md)
+
+### Commit workflow (documentation)
+
+Use `Scripts/doc-audit/commit-phase.sh` after each documentation batch. English conventional commits only: `docs(<scope>): <summary>`. Submodule first, then root gitlink bump.
 
 ### See Also
 

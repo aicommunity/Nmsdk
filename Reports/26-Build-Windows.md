@@ -1,3 +1,5 @@
+> **Historical report.** See [Docs/Overview/](../Docs/Overview/) for current documentation.
+
 # Инструкция по сборке Nmsdk под Windows
 
 ## Требования

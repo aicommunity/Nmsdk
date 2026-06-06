@@ -119,6 +119,10 @@ flowchart TB
 - **Nmsdk-PulseLib** - импульсные нейронные сети
 - **Nmsdk-MotionControlLib** - управление движением
 
+Опциональные ML-библиотеки (`Rdk-TensorflowLib`, `Rdk-PyMachineLearningLib`, `Rdk-DarknetLib`) **не входят** в активный состав — см. [Optional-ML-Libraries.md](../Libraries/Optional-ML-Libraries.md).
+
+При `RDK_USE_LLM=ON` к Application Layer добавляется подсистема **Rdk/LLM** (ассистент конфигурирования).
+
 #### 4. Ресурсы (Resources)
 
 - **Configs** - конфигурационные файлы проектов и компонентов
