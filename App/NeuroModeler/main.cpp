@@ -11,6 +11,8 @@
 #include <utility>
 #include <vector>
 #include <atomic>
+#include <clocale>
+#include <locale>
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
@@ -130,6 +132,9 @@ void diagnoseQtPlugins()
 
 int main(int argc, char *argv[])
 {
+    if(std::setlocale(LC_ALL, "C.UTF-8") == nullptr)
+        std::setlocale(LC_ALL, "POSIX");
+
     // Создаем QApplication
     QApplication a(argc, argv);
 
