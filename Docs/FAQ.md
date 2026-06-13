@@ -36,7 +36,7 @@ Nmsdk (Neuro Modeler SDK) - это SDK для моделирования ней�
 sudo apt update
 sudo apt install -y \
   build-essential cmake git g++ \
-  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev qt6-charts-dev \
   libboost-all-dev libcurl4-openssl-dev \
   libcups2-dev libgtest-dev
 ```
@@ -231,7 +231,7 @@ See [Overview/README.md](Overview/README.md) - project overview.
 sudo apt update
 sudo apt install -y \
   build-essential cmake git g++ \
-  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev qt6-charts-dev \
   libboost-all-dev libcurl4-openssl-dev \
   libcups2-dev libgtest-dev
 ```

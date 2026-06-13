@@ -12,11 +12,12 @@
 sudo apt update
 sudo apt install -y \
   build-essential cmake git g++ \
-  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev qt6-charts-dev \
   libboost-all-dev libcurl4-openssl-dev \
   libcups2-dev libgtest-dev
 ```
 
+- `qt6-charts-dev` — графики Watch/NeuroModeler (Qt Charts)
 - `qt6-svg-dev` — GUI-диаграммы в HardwareLib
 - `libcups2-dev` — печать через Qt PrintSupport
 - `libgtest-dev` — системный Google Test (без скачивания через FetchContent при configure)
@@ -146,11 +147,12 @@ The project uses **Qt6** system packages on Linux. Recommended dependencies:
 sudo apt update
 sudo apt install -y \
   build-essential cmake git g++ \
-  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev qt6-charts-dev \
   libboost-all-dev libcurl4-openssl-dev \
   libcups2-dev libgtest-dev
 ```
 
+- `qt6-charts-dev` — Watch charts in NeuroModeler (Qt Charts)
 - `qt6-svg-dev` — HardwareLib GUI diagrams
 - `libcups2-dev` — Qt PrintSupport (printing)
 - `libgtest-dev` — system Google Test (avoids FetchContent download at configure time)
