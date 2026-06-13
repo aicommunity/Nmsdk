@@ -23,28 +23,39 @@ Nmsdk (Neuro Modeler SDK) - это SDK для моделирования ней�
 
 #### Какие системные требования?
 
-- **Linux**: Ubuntu 18.04+ или аналогичный дистрибутив
+- **Linux**: Ubuntu 22.04+ или аналогичный дистрибутив
 - **Windows**: Windows 10+
-- **Компилятор**: GCC 7+ или MSVC 2019+
-- **CMake**: 3.16+
-- **Qt**: 5.12+
+- **Компилятор**: GCC 9+ или MSVC 2019+
+- **CMake**: 3.16+ (3.20+ для presets)
+- **Qt**: Qt6 на Linux; Qt5 или Qt6 на Windows (зависит от пресета)
 
 #### Как установить зависимости?
 
-**Linux:**
+**Linux (Ubuntu/Debian):**
 ```bash
-sudo apt-get update
-sudo apt-get install build-essential cmake qtbase5-dev
+sudo apt update
+sudo apt install -y \
+  build-essential cmake git g++ \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  libboost-all-dev libcurl4-openssl-dev \
+  libcups2-dev libgtest-dev
 ```
 
 **Windows:**
 - Установите Visual Studio 2019 или новее
 - Установите CMake 3.16+
-- Установите Qt5
+- Qt5 (VS2019) или Qt6 через vcpkg (VS2022)
 
-См. [Build-And-Deploy/Build-System.md](Build-And-Deploy/Build-System.md) для детальной информации.
+См. [Overview/QuickStart.md](Overview/QuickStart.md) для детальной информации.
 
 #### Как собрать проект?
+
+```bash
+cmake --preset linux-gcc-debug-local   # Linux, preset
+cmake --build --preset linux-gcc-debug
+```
+
+Или классически:
 
 ```bash
 mkdir build
@@ -55,7 +66,7 @@ cmake --build . -j$(nproc)  # Linux
 cmake --build . --config Release  # Windows
 ```
 
-См. [Build-And-Deploy/Build-System.md](Build-And-Deploy/Build-System.md) для детальной информации.
+См. [Overview/QuickStart.md](Overview/QuickStart.md) для детальной информации.
 
 ### Использование компонентов
 
@@ -207,28 +218,39 @@ See [Overview/README.md](Overview/README.md) - project overview.
 
 #### What are the system requirements?
 
-- **Linux**: Ubuntu 18.04+ or similar distribution
+- **Linux**: Ubuntu 22.04+ or similar distribution
 - **Windows**: Windows 10+
-- **Compiler**: GCC 7+ or MSVC 2019+
-- **CMake**: 3.16+
-- **Qt**: 5.12+
+- **Compiler**: GCC 9+ or MSVC 2019+
+- **CMake**: 3.16+ (3.20+ for presets)
+- **Qt**: Qt6 on Linux; Qt5 or Qt6 on Windows (depends on preset)
 
 #### How do I install dependencies?
 
-**Linux:**
+**Linux (Ubuntu/Debian):**
 ```bash
-sudo apt-get update
-sudo apt-get install build-essential cmake qtbase5-dev
+sudo apt update
+sudo apt install -y \
+  build-essential cmake git g++ \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  libboost-all-dev libcurl4-openssl-dev \
+  libcups2-dev libgtest-dev
 ```
 
 **Windows:**
 - Install Visual Studio 2019 or newer
 - Install CMake 3.16+
-- Install Qt5
+- Qt5 (VS2019) or Qt6 via vcpkg (VS2022)
 
-See [Build-And-Deploy/Build-System.md](Build-And-Deploy/Build-System.md) for detailed information.
+See [Overview/QuickStart.md](Overview/QuickStart.md) for detailed information.
 
 #### How do I build the project?
+
+```bash
+cmake --preset linux-gcc-debug-local   # Linux preset
+cmake --build --preset linux-gcc-debug
+```
+
+Or the classic flow:
 
 ```bash
 mkdir build
@@ -239,7 +261,7 @@ cmake --build . -j$(nproc)  # Linux
 cmake --build . --config Release  # Windows
 ```
 
-See [Build-And-Deploy/Build-System.md](Build-And-Deploy/Build-System.md) for detailed information.
+See [Overview/QuickStart.md](Overview/QuickStart.md) for detailed information.
 
 ### Component Usage
 

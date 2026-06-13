@@ -13,9 +13,6 @@
         "RDK_LLM_BUILD_EMBEDDED": "OFF",
         "RDK_UNICODE_RUN": "ON",
         "NO_MOTION_CONTROL": "ON"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       }
     },
     {
@@ -36,6 +33,7 @@
         "BUILD_SHARED_LIBS": "OFF"
       },
       "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
         "VCINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC",
         "VSINSTALLDIR": "C:/Program Files/Microsoft Visual Studio/2022/Community"
       }
@@ -72,6 +70,9 @@
         "BUILD_SHARED_LIBS": "OFF",
         "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       }
     },
     {
@@ -146,6 +147,9 @@
         "BUILD_SHARED_LIBS": "OFF",
         "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON",
         "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      },
+      "environment": {
+        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {

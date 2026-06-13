@@ -80,6 +80,11 @@ foreach(OUTPUTCONFIG DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
   set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} "${DEPLOY_ROOT}/Lib.CMake")
 endforeach()
 
+# CMake 4.x: keep FindBoost MODULE mode for system/vcpkg packages
+if(POLICY CMP0167)
+  cmake_policy(SET CMP0167 OLD)
+endif()
+
 # Common definitions and dependencies (OpenCV/Boost/etc.)
 include(RdkDefines OPTIONAL)
 

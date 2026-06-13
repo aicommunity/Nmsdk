@@ -4,33 +4,40 @@
 
 ### Установка зависимостей
 
-#### Linux (Ubuntu/Debian)
+#### Linux (Ubuntu/Debian 22.04+)
+
+На Linux проект использует **Qt6** (системные пакеты). Рекомендуемый набор зависимостей:
 
 ```bash
-sudo apt-get update
-sudo apt-get install build-essential cmake qtbase5-dev
+sudo apt update
+sudo apt install -y \
+  build-essential cmake git g++ \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  libboost-all-dev libcurl4-openssl-dev \
+  libcups2-dev libgtest-dev
 ```
+
+- `qt6-svg-dev` — GUI-диаграммы в HardwareLib
+- `libcups2-dev` — печать через Qt PrintSupport
+- `libgtest-dev` — системный Google Test (без скачивания через FetchContent при configure)
 
 #### Windows
 
 - Установите Visual Studio 2019 или новее
 - Установите CMake 3.16+
-- Установите Qt5
+- Qt5 (VS2019) или Qt6/vcpkg (VS2022) — см. пресеты в `CMakePresets.json`
 
 ### Сборка проекта
 
 ```bash
-# Создать директорию сборки
-mkdir build
-cd build
+# Вариант 1: CMake preset (рекомендуется, Qt Creator / CLI)
+cmake --preset linux-gcc-debug-local
+cmake --build --preset linux-gcc-debug
 
-# Конфигурация CMake
-cmake ..
-
-# Сборка
-cmake --build . -j$(nproc)  # Linux
-# или
-cmake --build . --config Release  # Windows
+# Вариант 2: классическая out-of-source сборка
+mkdir -p build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+cmake --build . -j$(nproc)
 ```
 
 ### Создание первого проекта
@@ -131,33 +138,40 @@ for(int i = 0; i < 10; i++) {
 
 ### Installation dependencies
 
-#### Linux (Ubuntu/Debian)
+#### Linux (Ubuntu/Debian 22.04+)
+
+The project uses **Qt6** system packages on Linux. Recommended dependencies:
 
 ```bash
-sudo apt-get update
-sudo apt-get install build-essential cmake qtbase5-dev
+sudo apt update
+sudo apt install -y \
+  build-essential cmake git g++ \
+  qt6-base-dev qt6-tools-dev qt6-serialport-dev qt6-svg-dev \
+  libboost-all-dev libcurl4-openssl-dev \
+  libcups2-dev libgtest-dev
 ```
+
+- `qt6-svg-dev` — HardwareLib GUI diagrams
+- `libcups2-dev` — Qt PrintSupport (printing)
+- `libgtest-dev` — system Google Test (avoids FetchContent download at configure time)
 
 #### Windows
 
-- Install Visual Studio 2019 или or newer
+- Install Visual Studio 2019 or newer
 - Install CMake 3.16+
-- Install Qt5
+- Qt5 (VS2019) or Qt6/vcpkg (VS2022) — see presets in `CMakePresets.json`
 
 ### Build project
 
 ```bash
-# Создать директорию сборки
-mkdir build
-cd build
+# Option 1: CMake preset (recommended, Qt Creator / CLI)
+cmake --preset linux-gcc-debug-local
+cmake --build --preset linux-gcc-debug
 
-# Конфигурация CMake
-cmake ..
-
-# Сборка
-cmake --build . -j$(nproc)  # Linux
-# или
-cmake --build . --config Release  # Windows
+# Option 2: classic out-of-source build
+mkdir -p build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+cmake --build . -j$(nproc)
 ```
 
 ### Create first project

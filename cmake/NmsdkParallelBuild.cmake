@@ -13,6 +13,15 @@ if(NOT DEFINED NMSDK_BUILD_PARALLEL_JOBS)
       CACHE STRING "Parallel compile jobs (make -jN / cmake --build --parallel)")
 endif()
 
+# Presets/Qt Creator may set CMAKE_BUILD_PARALLEL_LEVEL to $env{NUMBER_OF_PROCESSORS}
+# or ${NUMBER_OF_PROCESSORS} on Linux; FetchContent sub-builds fail on invalid values.
+set(_nmsdk_parallel_env_level "$ENV{CMAKE_BUILD_PARALLEL_LEVEL}")
+if(_nmsdk_parallel_env_level STREQUAL ""
+    OR NOT _nmsdk_parallel_env_level MATCHES "^[0-9]+$")
+  set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} "${NMSDK_BUILD_PARALLEL_JOBS}")
+endif()
+unset(_nmsdk_parallel_env_level)
+
 message(STATUS "Parallel build: ${NMSDK_BUILD_PARALLEL_JOBS} jobs "
   "(Qt Creator: Build step Tool arguments '--parallel' and env CMAKE_BUILD_PARALLEL_LEVEL=${NMSDK_BUILD_PARALLEL_JOBS}; "
   "or cmake --build -j ${NMSDK_BUILD_PARALLEL_JOBS})")
