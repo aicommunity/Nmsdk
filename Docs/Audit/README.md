@@ -70,6 +70,15 @@ Scripts/doc-audit/commit-phase.sh \
 
 Сообщения — **English**, формат `docs(<scope>): <summary>`.
 
+### Защита living debt docs
+
+Bilingual/EN cleanup и массовые правки markdown **не должны** обрезать:
+- `Rdk/LLM/TECH-DEBT.md`
+- `Rdk/LLM/Docs/Post-MVP-Implementation-Plan.md`
+- `Rdk/LLM/Docs/Post-Audit-Phase-2-Implementation-Plan.md`
+
+Перед коммитом: в diff должны оставаться таблицы `| TD-` / фазы плана, а не только шапка/легенда. См. [CONTRIBUTING.md](../CONTRIBUTING.md).
+
 ---
 
 ## EN
@@ -89,5 +98,9 @@ See the table in the RU section (same filenames). Target metrics: links=0, merma
 ### Commit workflow
 
 Use `Scripts/doc-audit/commit-phase.sh` after each audit batch. English conventional commits only.
+
+### Protect living debt docs
+
+Bilingual/EN cleanup must not truncate `Rdk/LLM/TECH-DEBT.md` or the Post-MVP / Post-Audit plan docs to legend-only stubs. Diff must retain `| TD-` tables. See [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for maintenance rules.

@@ -117,6 +117,7 @@ flowchart TB
 3. Диаграммы mermaid корректны
 4. Обе языковые секции заполнены
 5. Документация соответствует коду — см. [Audit/Component-Gap-Report.md](Audit/Component-Gap-Report.md)
+6. **Не обрезать living debt/plan docs:** после bilingual/EN cleanup скриптов убедитесь, что таблицы и тело `[Rdk/LLM/TECH-DEBT.md](../Rdk/LLM/TECH-DEBT.md)`, `Post-MVP-Implementation-Plan.md`, `Post-Audit-Phase-2-Implementation-Plan.md` и аналогичные статус-файлы сохранены (не только легенда/шапка). Diff по числу строк / наличию `| TD-` обязателен.
 
 ### Commit workflow (documentation)
 
@@ -258,6 +259,7 @@ Before committing, check:
 3. Mermaid diagrams are correct
 4. Both language sections are filled
 5. Documentation matches the code — see [Audit/Component-Gap-Report.md](Audit/Component-Gap-Report.md)
+6. **Do not truncate living debt/plan docs:** after bilingual/EN cleanup scripts, verify tables and body of `[Rdk/LLM/TECH-DEBT.md](../Rdk/LLM/TECH-DEBT.md)`, `Post-MVP-Implementation-Plan.md`, `Post-Audit-Phase-2-Implementation-Plan.md`, and similar status files remain intact (not legend-only). Require a line-count / `| TD-` presence check in the diff.
 
 ### Commit workflow (documentation)
 
