@@ -97,18 +97,20 @@ flowchart LR
 | Опция | Preset по умолчанию | Назначение |
 |-------|---------------------|------------|
 | `RDK_USE_LLM` | ON | Сборка `Rdk/LLM` и GUI dock ассистента |
-| `RDK_USE_OPENCV` | ON | OpenCV для Rdk-CvBasicLib |
+| `RDK_USE_OPENCV` | OFF (`option()` in `cmake/RdkDefines.cmake`; presets may override ON) | OpenCV для Rdk-CvBasicLib |
 | `RDK_USE_ODESOLVER` | OFF | ODE solver в Nmsdk-PulseLib |
 | `RDK_USE_PYTHON` | OFF | Deprecated: `Rdk-PyMachineLearningLib` (submodule absent) |
 | `RDK_USE_DARKNET` | OFF | Deprecated: `Rdk-DarknetLib` (submodule absent) |
 | `RDK_USE_TENSORFLOW` | OFF | Deprecated: `Rdk-TensorflowLib` (submodule absent) |
-| `RDK_LLM_BUILD_EMBEDDED` | OFF | Встроенный llama.cpp (RDK LLM) |
+| `RDK_LLM_BUILD_EMBEDDED` | ON in `RdkDefines.cmake` / OFF in `nmsdk-global-defaults` preset | Встроенный llama.cpp (RDK LLM) |
 | `RDK_UNICODE_RUN` | OFF | UTF-8 API (`RDK_UNICODE_RUN` define) |
 | `NO_MOTION_CONTROL` | ON | Не регистрировать MotionControlLibrary в runtime |
 | `NMSDK_PULSELIB_BUILD_CORE_ONLY` | OFF | PulseLib без Qt GUI helpers |
 | `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY` | OFF | MotionControlLib без Qt GUI helpers |
 | `BUILD_TESTS` | ON | Юнит и интеграционные тесты |
 | `NMSDK_FORCE_QT_FROM_VCPKG` | ON (Windows) | Принудительный Qt из vcpkg |
+
+Источник истины для `option()`: [`cmake/RdkDefines.cmake`](../../cmake/RdkDefines.cmake). Preset-значения — [`CMakePresets.json`](../../CMakePresets.json) `nmsdk-global-defaults`. Аудит `Docs/Audit/Build-Gap-Report.md` обязан сканировать и `cmake/*.cmake`, не только корневой `CMakeLists.txt`.
 
 Legacy `.pro` files may still list ML libraries; see [Optional ML Libraries](../Libraries/Optional-ML-Libraries.md).
 
@@ -185,18 +187,20 @@ The same options are declared in [`cmake/RdkDefines.cmake`](../../cmake/RdkDefin
 | Option | Preset default | Purpose |
 |--------|----------------|---------|
 | `RDK_USE_LLM` | ON | Build `Rdk/LLM` and assistant GUI dock |
-| `RDK_USE_OPENCV` | ON | OpenCV for Rdk-CvBasicLib |
+| `RDK_USE_OPENCV` | OFF (`option()` in `cmake/RdkDefines.cmake`; presets may override ON) | OpenCV for Rdk-CvBasicLib |
 | `RDK_USE_ODESOLVER` | OFF | ODE solver in Nmsdk-PulseLib |
 | `RDK_USE_PYTHON` | OFF | Deprecated: `Rdk-PyMachineLearningLib` (submodule absent) |
 | `RDK_USE_DARKNET` | OFF | Deprecated: `Rdk-DarknetLib` (submodule absent) |
 | `RDK_USE_TENSORFLOW` | OFF | Deprecated: `Rdk-TensorflowLib` (submodule absent) |
-| `RDK_LLM_BUILD_EMBEDDED` | OFF | Embedded llama.cpp (RDK LLM) |
+| `RDK_LLM_BUILD_EMBEDDED` | ON in `RdkDefines.cmake` / OFF in `nmsdk-global-defaults` preset | Embedded llama.cpp (RDK LLM) |
 | `RDK_UNICODE_RUN` | OFF | UTF-8 API (`RDK_UNICODE_RUN` define) |
 | `NO_MOTION_CONTROL` | ON | Skip MotionControlLibrary runtime registration |
 | `NMSDK_PULSELIB_BUILD_CORE_ONLY` | OFF | PulseLib without Qt GUI helpers |
 | `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY` | OFF | MotionControlLib without Qt GUI helpers |
 | `BUILD_TESTS` | ON | Unit and integration tests |
 | `NMSDK_FORCE_QT_FROM_VCPKG` | ON (Windows) | Force Qt from vcpkg |
+
+Source of truth for `option()`: [`cmake/RdkDefines.cmake`](../../cmake/RdkDefines.cmake). Preset values: [`CMakePresets.json`](../../CMakePresets.json) `nmsdk-global-defaults`. `Docs/Audit/Build-Gap-Report.md` must scan `cmake/*.cmake`, not only the root `CMakeLists.txt`.
 
 Legacy `.pro` files may still list ML libraries; see [Optional ML Libraries](../Libraries/Optional-ML-Libraries.md).
 

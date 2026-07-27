@@ -15,6 +15,8 @@
 - **Окно логов** - мониторинг выполнения и отладка
 - **Окно графиков** - визуализация данных компонентов
 - **Управление проектами** - создание, открытие, сохранение проектов
+- **Component GUI hosts** - MDI / floating dock / tab-host; см. [ComponentGui-NativeDock-Smoke.md](ComponentGui-NativeDock-Smoke.md)
+- **Performance epic (deferred)** - [GuiModelSnapshot-Epic.md](GuiModelSnapshot-Epic.md)
 
 **Архитектура GUI системы:**
 
@@ -100,6 +102,10 @@ The Graphical User Interface (GUI) of Nmsdk is built on Qt and provides a visual
 - **Log Window** - execution monitoring and debugging
 - **Graph Window** - component data visualization
 - **Project Management** - create, open, save projects
+- **Component GUI hosts** - MDI / floating dock / tab-host; see [ComponentGui-NativeDock-Smoke.md](ComponentGui-NativeDock-Smoke.md)
+- **Performance epic (deferred)** - [GuiModelSnapshot-Epic.md](GuiModelSnapshot-Epic.md)
+- **Component GUI hosts** - MDI / floating dock / tab-host; see [ComponentGui-NativeDock-Smoke.md](ComponentGui-NativeDock-Smoke.md)
+- **Performance epic (deferred)** - [GuiModelSnapshot-Epic.md](GuiModelSnapshot-Epic.md)
 
 All widgets inherit from `UVisualControllerWidget` or `UVisualControllerMainWidget` and receive a pointer to `UApplication` upon creation. They use this pointer to access the engine (`UEngine`), component storage (`UStorage`), and project (`UProject`). The update cycle is driven by `UEngineControlQt` timer, which calls `AUpdateInterface()` on all widgets periodically.
 
@@ -107,6 +113,8 @@ All widgets inherit from `UVisualControllerWidget` or `UVisualControllerMainWidg
 
 - [Widgets Reference](Widgets-Reference.md)
 - [Style System](Style-System.md)
+- [Component GUI native dock smoke](ComponentGui-NativeDock-Smoke.md)
+- [GuiModelSnapshot epic](GuiModelSnapshot-Epic.md)
 - [Rdk Core Graphics](../../Rdk/Docs/Architecture/Graphics-Architecture.md)
 
 ```mermaid

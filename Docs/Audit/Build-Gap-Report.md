@@ -1,6 +1,6 @@
 # Build Documentation Gap Report
 
-Generated: 2026-06-06T21:49:44Z
+Generated: 2026-07-27 (Track 6 refresh)
 
 ## Documented targets in Build-System.md
 
@@ -16,10 +16,17 @@ Generated: 2026-06-06T21:49:44Z
 
 ## Documented options in Build-System.md
 
-- `RDK_USE_LLM`: doc=yes, cmake=no
-- `RDK_USE_OPENCV`: doc=yes, cmake=no
-- `NO_MOTION_CONTROL`: doc=yes, cmake=no
+Source of truth: `cmake/RdkDefines.cmake` (+ root/`Libraries` `option()`).
+
+- `RDK_USE_LLM`: doc=yes, cmake=yes (`cmake/RdkDefines.cmake`)
+- `RDK_USE_OPENCV`: doc=yes, cmake=yes (`cmake/RdkDefines.cmake`, default OFF)
+- `NO_MOTION_CONTROL`: doc=yes, cmake=yes (`cmake/RdkDefines.cmake`, default ON)
+- `RDK_LLM_BUILD_EMBEDDED`: doc=yes, cmake=yes (`cmake/RdkDefines.cmake`; preset may set OFF)
 - `NMSDK_MOTIONCONTROLLIB_BUILD_CORE_ONLY`: doc=yes, cmake=yes
 - `NMSDK_PULSELIB_BUILD_CORE_ONLY`: doc=yes, cmake=yes
 - `BUILD_TESTS`: doc=yes, cmake=yes
 - `NMSDK_FORCE_QT_FROM_VCPKG`: doc=yes, cmake=yes
+
+## Notes
+
+Prior audit (2026-06-06) marked `RDK_USE_LLM` / `RDK_USE_OPENCV` / `NO_MOTION_CONTROL` as `cmake=no` because the scanner missed `cmake/RdkDefines.cmake`. Build-System.md defaults were synced to `option()` on 2026-07-27.
