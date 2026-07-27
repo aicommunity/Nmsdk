@@ -2,7 +2,64 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "CMake: build (platform preset)",
+      "label": "nmsdk: configure (linux-gcc-debug-local)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--preset",
+        "linux-gcc-debug-local",
+        "-DCMAKE_BUILD_TYPE=Debug"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "nmsdk: build NeuroModeler (linux-gcc-debug)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "--preset",
+        "linux-gcc-debug",
+        "--target",
+        "NeuroModeler",
+        "--parallel"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "dependsOn": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "nmsdk: configure+build NeuroModeler",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "nmsdk: configure (linux-gcc-debug-local)",
+        "nmsdk: build NeuroModeler (linux-gcc-debug)"
+      ],
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "nmsdk: build all (linux-gcc-debug)",
+      "type": "shell",
       "command": "cmake",
       "args": [
         "--build",
@@ -10,17 +67,76 @@
         "linux-gcc-debug",
         "--parallel"
       ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "nmsdk: build NeuroModelerConsole",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "--preset",
+        "linux-gcc-debug",
+        "--target",
+        "NeuroModelerConsole",
+        "--parallel"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "nmsdk: run NeuroModeler",
+      "type": "shell",
+      "command": "${workspaceFolder}/Bin/Platform/Linux/NeuroModeler",
+      "options": {
+        "cwd": "${workspaceFolder}/Bin/Platform/Linux",
+        "env": {
+          "NMSDK_ROOT": "${workspaceFolder}",
+          "NMSDK_SOURCE_DIR": "${workspaceFolder}"
+        }
+      },
+      "dependsOn": [
+        "nmsdk: build NeuroModeler (linux-gcc-debug)"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "CMake: build (platform preset)",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "--preset",
+        "linux-gcc-debug",
+        "--target",
+        "NeuroModeler",
+        "--parallel"
+      ],
       "windows": {
         "args": [
           "--build",
           "--preset",
           "win-vs2022-debug",
+          "--target",
+          "NeuroModeler",
           "--parallel"
         ]
       },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "group": "build",
-      "problemMatcher": "$msCompile"
+      "problemMatcher": ["$gcc", "$msCompile"]
     }
   ]
 }
-

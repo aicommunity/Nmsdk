@@ -1,20 +1,62 @@
 {
+  // Bottom status bar must be visible for Build/Run buttons
+  "workbench.statusBar.visible": true,
+
   // Use CMakePresets.json (recommended for this repo)
   "cmake.useCMakePresets": "always",
+  "cmake.configurePreset": "linux-gcc-debug-local",
+  "cmake.buildPreset": "linux-gcc-debug",
+  "cmake.configureArgs": [
+    "-DCMAKE_BUILD_TYPE=Debug"
+  ],
 
-  // Do not auto-configure on folder open
+  // Prefer NeuroModeler as the default build target in CMake Tools status bar
+  "cmake.buildTarget": "NeuroModeler",
+
+  // Show CMake Build / Launch / Debug on the IDE status bar
+  "cmake.options.statusBarVisibility": "visible",
+  "cmake.options.advanced": {
+    "configure": { "statusBarVisibility": "icon" },
+    "build": { "statusBarVisibility": "visible" },
+    "launch": { "statusBarVisibility": "visible" },
+    "debug": { "statusBarVisibility": "visible" },
+    "buildTarget": { "statusBarVisibility": "visible" },
+    "launchTarget": { "statusBarVisibility": "visible" },
+    "preset": { "statusBarVisibility": "compact" }
+  },
+
+  // Do not auto-configure on folder open (first configure via task / CMake sidebar)
   "cmake.configureOnOpen": false,
 
-  // Use Ninja generator by default
-  "cmake.generator": "Ninja",
-
   // Environment for CMake Tools (applies to configure/build/test)
-  // This repo expects VCPKG_ROOT to be set (see cmake/vcpkg_toolchain_from_env.cmake).
   "cmake.environment": {
-    "VCPKG_ROOT": "${env:VCPKG_ROOT}"
+    "VCPKG_ROOT": "${env:VCPKG_ROOT}",
+    "NMSDK_ROOT": "${workspaceFolder}",
+    "NMSDK_SOURCE_DIR": "${workspaceFolder}"
   },
 
   "cmake.sourceDirectory": "${workspaceFolder}",
+  "cmake.buildDirectory": "${workspaceFolder}/build/${presetName}",
+
+  // Status bar: Build / Run buttons (extension spencerwmiles.vscode-task-buttons)
+  "VsCodeTaskButtons.showCounter": false,
+  "VsCodeTaskButtons.tasks": [
+    {
+      "label": "$(tools) Build",
+      "task": "nmsdk: build NeuroModeler (linux-gcc-debug)",
+      "tooltip": "Build NeuroModeler (linux-gcc-debug)",
+      "alignment": "left"
+    },
+    {
+      "label": "$(play) Run",
+      "task": "nmsdk: run NeuroModeler",
+      "tooltip": "Build and run NeuroModeler",
+      "alignment": "left"
+    }
+  ],
+
+  // Debug / run defaults
+  "debug.internalConsoleOptions": "openOnSessionStart",
 
   "git.ignoreLimitWarning": true,
 
@@ -24,5 +66,11 @@
 
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+
+  // Terminal: useful when running NeuroModeler from tasks
+  "terminal.integrated.env.linux": {
+    "NMSDK_ROOT": "${workspaceFolder}",
+    "NMSDK_SOURCE_DIR": "${workspaceFolder}"
+  }
 }

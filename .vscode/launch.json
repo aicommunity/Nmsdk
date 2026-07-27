@@ -2,6 +2,70 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "NeuroModeler (Debug, Linux / CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/Bin/Platform/Linux/NeuroModeler",
+      "cwd": "${workspaceFolder}/Bin/Platform/Linux",
+      "args": [],
+      "env": {
+        "NMSDK_ROOT": "${workspaceFolder}",
+        "NMSDK_SOURCE_DIR": "${workspaceFolder}"
+      },
+      "preLaunchTask": "nmsdk: build NeuroModeler (linux-gcc-debug)",
+      "terminal": "integrated"
+    },
+    {
+      "name": "NeuroModeler (Debug, Linux / gdb)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/Bin/Platform/Linux/NeuroModeler",
+      "cwd": "${workspaceFolder}/Bin/Platform/Linux",
+      "args": [],
+      "environment": [
+        { "name": "NMSDK_ROOT", "value": "${workspaceFolder}" },
+        { "name": "NMSDK_SOURCE_DIR", "value": "${workspaceFolder}" }
+      ],
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "nmsdk: build NeuroModeler (linux-gcc-debug)",
+      "externalConsole": false
+    },
+    {
+      "name": "NeuroModelerConsole (Debug, Linux / CodeLLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/Bin/Platform/Linux/NeuroModelerConsole",
+      "cwd": "${workspaceFolder}/Bin/Platform/Linux",
+      "args": [],
+      "env": {
+        "NMSDK_ROOT": "${workspaceFolder}",
+        "NMSDK_SOURCE_DIR": "${workspaceFolder}"
+      },
+      "preLaunchTask": "nmsdk: build NeuroModelerConsole",
+      "terminal": "integrated"
+    },
+    {
+      "name": "CMake: Launch active target (Debug, Linux)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${workspaceFolder}/Bin/Platform/Linux",
+      "env": {
+        "NMSDK_ROOT": "${workspaceFolder}",
+        "NMSDK_SOURCE_DIR": "${workspaceFolder}"
+      },
+      "preLaunchTask": "CMake: build (platform preset)",
+      "terminal": "integrated"
+    },
+    {
       "name": "CMake: Launch active target (Debug, Windows)",
       "type": "cppvsdbg",
       "request": "launch",
@@ -11,35 +75,7 @@
         { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" }
       ],
       "preLaunchTask": "CMake: build (platform preset)",
-      "console": "integratedTerminal",
-      "windows": {}
-    },
-    {
-      "name": "CMake: Launch active target (Debug, Linux)",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${command:cmake.launchTargetPath}",
-      "cwd": "${command:cmake.launchTargetDirectory}",
-      "environment": [
-        { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" }
-      ],
-      "MIMode": "gdb",
-      "miDebuggerPath": "/usr/bin/gdb",
-      "preLaunchTask": "CMake: build (platform preset)",
-      "console": "integratedTerminal",
-      "linux": {}
+      "console": "integratedTerminal"
     }
   ]
-}
-{
-    "configurations": [
-        {
-            "type": "cmake",
-            "request": "launch",
-            "name": "Debug portfile(s)",
-            "cmakeDebugType": "external",
-            "pipeName": "\\\\.\\pipe\\vcpkg_ext_portfile_dbg",
-            "preLaunchTask": "Debug vcpkg commands"
-        }
-    ]
 }
