@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QCoreApplication>
 #include <QCommandLineParser>
 #include <QMessageBox>
 #include <QTimer>
@@ -7,6 +8,7 @@
 #include <QDir>
 #include <QPushButton>
 #include <QDialogButtonBox>
+#include <QtGlobal>
 #include <algorithm>
 #include <utility>
 #include <vector>
@@ -134,6 +136,12 @@ int main(int argc, char *argv[])
 {
     if(std::setlocale(LC_ALL, "C.UTF-8") == nullptr)
         std::setlocale(LC_ALL, "POSIX");
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    // GNOME "Large Text" / fractional scaling: let Qt follow desktop DPI before QApplication.
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
 
     // Создаем QApplication
     QApplication a(argc, argv);
