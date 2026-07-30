@@ -1,5 +1,60 @@
 {
   "tokens": {
+    "n": "",
+    "npulse": "импульсный",
+    "pulse": "импульсный",
+    "neuron": "нейрон",
+    "generator": "генератор",
+    "membrane": "мембрана",
+    "channel": "канал",
+    "synapse": "синапс",
+    "syn": "синапс",
+    "lt": "низкопороговый",
+    "zone": "зона",
+    "dendrite": "дендрит",
+    "soma": "сома",
+    "spike": "спайк",
+    "spikes": "спайки",
+    "train": "последовательность",
+    "pattern": "шаблон",
+    "dataset": "набор данных",
+    "delay": "задержка",
+    "left": "левый",
+    "right": "правый",
+    "frequency": "частота",
+    "signal": "сигнал",
+    "engine": "двигатель",
+    "control": "управление",
+    "manipulator": "манипулятор",
+    "gyro": "гироскоп",
+    "estimation": "оценка",
+    "sequence": "последовательность",
+    "object": "объект",
+    "area": "область",
+    "counter": "счётчик",
+    "actuator": "исполнитель",
+    "suppression": "подавление",
+    "amplitude": "амплитуда",
+    "threshold": "порог",
+    "class": "класс",
+    "model": "модель",
+    "noise": "шум",
+    "level": "уровень",
+    "statistic": "статистика",
+    "matrix": "матрица",
+    "source": "источник",
+    "time": "время",
+    "series": "ряд",
+    "scalar": "скаляр",
+    "life": "жизнь",
+    "energy": "энергия",
+    "ensemble": "ансамбль",
+    "predictor": "предиктор",
+    "classifier": "классификатор",
+    "trainer": "тренер",
+    "state": "состояние",
+    "potential": "потенциал",
+    "resistance": "сопротивление",
     "Id": "Идентификатор",
     "Name": "Имя"
   },
@@ -373,8 +428,8 @@
       "description": "**Класс**: `NNeuronLife` — компонент модели жизнеобеспечения нейрона с метриками энергии, износа и чувства. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNeuronLife\", ...)`. **Storage-инстансы**: `ClassName = \"NNeuronLife\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NNeuronTrainer": {
-      "header": "тренер нейронов",
-      "description": "обучает нейроны по заданному правилу/данным."
+      "header": "тренер нейрона",
+      "description": "Обучение импульсного нейрона: IsNeedToTrain, LTZThreshold, паттерны и ClassName частей."
     },
     "NNeuronsLayer": {
       "header": "слой нейронов (Nmsdk-PulseLib)",
@@ -409,8 +464,8 @@
       "description": "**Класс**: `NNewSPLifeNeuron` — конфигурационный вариант нового мелкого живого импульсного нейрона с улучшенной архитектурой и поддержкой жизнеобеспечения. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSPLifeNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSPLifeNeuron\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NNewSPNeuron": {
-      "header": "новый мелкий импульсный нейрон",
-      "description": "**Класс**: `NNewSPNeuron` — конфигурационный вариант нового мелкого импульсного нейрона с улучшенной архитектурой. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NNewSPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NNewSPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "SP-нейрон",
+      "description": "Композитный импульсный нейрон: структура сомы/дендритов, LT-зона и генераторы; primary — StructureBuildMode и ClassName частей."
     },
     "NNewSynLPNeuron": {
       "header": "новый крупный син-нейрон",
@@ -461,8 +516,8 @@
       "description": "**Класс**: `NPExcChannelBio2` — конфигурационный вариант возбуждающего канала с биологическими параметрами (версия 2). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPExcChannelBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPExcChannelBio2\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NPGenerator": {
-      "header": "генератор импульсов (алиас)",
-      "description": "**Класс**: `NPGenerator` — алиас для класса `NPulseGenerator`. **Префикс**: `NP` — **P**ulse (импульсный), компонент с импульсными входами/выходами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPGenerator\", ...)`. **Storage-инстансы**: `ClassName = \"NPGenerator\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "генератор импульсов",
+      "description": "Генератор импульсов (алиас NPulseGenerator): частота, длительность и амплитуда спайков для входов SNN."
     },
     "NPGeneratorDelay": {
       "header": "генератор импульсов с задержкой (алиас)",
@@ -545,8 +600,8 @@
       "description": "**Класс**: `NPMembraneBio2` — конфигурационный вариант импульсной мембраны с биологическими параметрами (версия 2). **Аббревиатура**: `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPMembraneBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPMembraneBio2\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NPNeuron": {
-      "header": "базовый пульсовый нейрон",
-      "description": "**Класс**: `NPNeuron` — базовый пульсовый нейрон, конфигурационный вариант `NPulseNeuron` с параметрами по умолчанию. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "импульсный нейрон",
+      "description": "Композитный импульсный нейрон: структура сомы/дендритов, LT-зона; Favorites — StructureBuildMode и порты синапсов/LTZone."
     },
     "NPNeuron1x4": {
       "header": "пульсовый нейрон 1x4",
@@ -609,16 +664,16 @@
       "description": "**Класс**: `NPSynNeuronMembrane` — конфигурационный вариант импульсной мембраны для syn-нейронов (импульсных нейронов с синаптическими каналами). **Аббревиатура**: `Syn` — **Syn**apse (синапс). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynNeuronMembrane\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynNeuronMembrane\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NPSynapse": {
-      "header": "импульсный синапс (алиас)",
-      "description": "**Класс**: `NPSynapse` — алиас для класса `NPulseSynapse`. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynapse\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynapse\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "импульсный синапс",
+      "description": "Импульсный синапс: вес, сопротивление и постоянные секреции/диссоциации определяют постсинаптический вклад."
     },
     "NPSynapseBio": {
-      "header": "биоинспирированный импульсный синапс",
-      "description": "**Класс**: `NPSynapseBio` — конфигурационный вариант импульсного синапса с биоинспирированными параметрами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynapseBio\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynapseBio\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "импульсный синапс Bio",
+      "description": "Биологический вариант импульсного синапса: вес, R и TC секреции/диссоциации."
     },
     "NPSynapseBio2": {
-      "header": "второй биоинспирированный импульсный синапс",
-      "description": "**Класс**: `NPSynapseBio2` — конфигурационный вариант импульсного синапса с альтернативными биоинспирированными параметрами. **Аббревиатура**: `Bio` — **Bio**logical (биологическая модель). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPSynapseBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NPSynapseBio2\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "импульсный синапс Bio2",
+      "description": "Вариант Bio2 импульсного синапса: primary — Weight, Resistance, TC и PulseAmplitude."
     },
     "NPSynapseStdp": {
       "header": "импульсный STDP-синапс (алиас)",
@@ -677,8 +732,8 @@
       "description": "**Класс**: `NPulseGeneratorMulti` — генератор множественных импульсов с индивидуальными задержками для каждого импульса. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseGeneratorMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseGeneratorMulti\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NPulseGeneratorTransit": {
-      "header": "транзитный генератор импульсов",
-      "description": "**Класс**: `NPulseGeneratorTransit` — генератор импульсов с поддержкой транзитного сигнала и паттернов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseGeneratorTransit\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseGeneratorTransit\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "генератор с транзитным входом",
+      "description": "Генератор импульсов с транзитным/паттерн-режимом: Frequency/Amplitude плюс UseTransitSignal и Pattern*."
     },
     "NPulseHebbSynapse": {
       "header": "импульсный синапс с механизмом Хебба",
@@ -705,8 +760,8 @@
       "description": "**Класс**: `NPulseLTZoneIzhikevich` — LT-зона (Low-Threshold Zone) для нейронов модели Ижикевича. **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneIzhikevich\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneIzhikevich\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NPulseLTZoneThreshold": {
-      "header": "импульсная LT-зона с порогом",
-      "description": "**Класс**: `NPulseLTZoneThreshold` — базовая импульсная LT-зона с пороговой логикой генерации спайков. **Аббревиатура**: `LT` — **L**ow **T**hreshold (низкопороговая зона). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseLTZoneThreshold\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseLTZoneThreshold\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "LT-зона с порогом",
+      "description": "LT-зона: Threshold/Pulse* / TimeConstant — primary для генерации спайка."
     },
     "NPulseLTZoneThresholdBio": {
       "header": "биоинспирированная LT-зона с порогом",
@@ -749,20 +804,20 @@
       "description": "**Класс**: `NPulseNeuron` — импульсный нейрон с автоматическим построением структуры на основе параметров. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuron\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NPulseNeuronCable": {
-      "header": "кабельный импульсный нейрон",
-      "description": "**Класс**: `NPulseNeuronCable` — импульсный нейрон с кабельной моделью мембраны для пространственно-распределенного моделирования. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronCable\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronCable\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "cable-нейрон",
+      "description": "Cable-модель нейрона: структура частей мембраны и LTZone; curated Favorites."
     },
     "NPulseNeuronCableMulti": {
-      "header": "многоканальный кабельный импульсный нейрон",
-      "description": "**Класс**: `NPulseNeuronCableMulti` — импульсный нейрон с многоканальной кабельной моделью мембраны для моделирования нескольких параллельных кабельных каналов. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronCableMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronCableMulti\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "cable-нейрон multi",
+      "description": "Многосегментный cable-нейрон: StructureBuildMode и ClassName частей; I/O aliases."
     },
     "NPulseNeuronCommon": {
       "header": "общий импульсный нейрон",
       "description": "**Класс**: `NPulseNeuronCommon` — базовый класс для импульсных нейронов с общей функциональностью. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronCommon\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronCommon\"` (обычно используется через наследников)."
     },
     "NPulseNeuronIaF": {
-      "header": "импульсный нейрон (модель Integrate-and-Fire)",
-      "description": "**Класс**: `NPulseNeuronIaF` — импульсный нейрон модели Integrate-and-Fire (IaF). **Аббревиатура**: `IaF` — **I**ntegrate and **F**ire (интегрировать и стрелять). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NPulseNeuronIaF\", ...)`. **Storage-инстансы**: `ClassName = \"NPulseNeuronIaF\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "LIF-нейрон",
+      "description": "Интегратор-и-огонь (IaF): структура мембраны/LTZone; primary Favorites + порты Input/Output."
     },
     "NPulseNeuronIaFStdp": {
       "header": "импульсный нейрон IaF с STDP",
@@ -837,12 +892,12 @@
       "description": "**Класс**: `NSPNeuron` — конфигурационный вариант мелкого импульсного нейрона (Small Pulse Neuron). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPNeuron\", ...)`. **Storage-инстансы**: `ClassName = \"NSPNeuron\"` в `Bin/Configs/*/Model_*.xml`."
     },
     "NSPNeuronBio": {
-      "header": "мелкий импульсный нейрон с биологически правдоподобными параметрами",
-      "description": "**Класс**: `NSPNeuronBio` — конфигурационный вариант мелкого импульсного нейрона с биологически правдоподобными параметрами. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPNeuronBio\", ...)`. **Storage-инстансы**: `ClassName = \"NSPNeuronBio\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "SP-нейрон Bio",
+      "description": "Биологический SP-нейрон: структура мембраны/LTZone и training-поля; curated Favorites."
     },
     "NSPNeuronBio2": {
-      "header": "мелкий импульсный нейрон с биологически правдоподобными параметрами (версия 2)",
-      "description": "**Класс**: `NSPNeuronBio2` — конфигурационный вариант мелкого импульсного нейрона с биологически правдоподобными параметрами (версия 2, совместимая с кабельной моделью). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSPNeuronBio2\", ...)`. **Storage-инстансы**: `ClassName = \"NSPNeuronBio2\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "SP-нейрон Bio2",
+      "description": "Вариант Bio2 SP-нейрона: структура и I/O aliases на синапсы/LTZone."
     },
     "NSPNeuronGen": {
       "header": "мелкий импульсный нейрон с упрощенным генератором спайков",
@@ -861,8 +916,8 @@
       "description": "**Класс**: `NSource` — базовый класс для источников внешних сигналов/стимулов для сети. **Префикс**: `NS` — **S**ource (источник) или **S**imple (простой). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSource\", ...)`. **Storage-инстансы**: `ClassName = \"NSource\"` (обычно используется через наследников)."
     },
     "NSpikeClassifier": {
-      "header": "классификатор по спайкам",
-      "description": "**Класс**: `NSpikeClassifier` — классификатор, определяющий класс по спайковым паттернам. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSpikeClassifier\", ...)`. **Storage-инстансы**: `ClassName = \"NSpikeClassifier\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "спайковый классификатор",
+      "description": "Классификатор на импульсных нейронах: число нейронов/дендритов, обучение и порог LTZ."
     },
     "NStatePredictor": {
       "header": "предсказатель состояний",
@@ -893,12 +948,12 @@
       "description": "компонент PulseLib (см. реализацию в `NPulseLibrary.cpp`)."
     },
     "NSynapseCable": {
-      "header": "кабельный импульсный синапс",
-      "description": "**Класс**: `NSynapseCable` — конфигурационный вариант импульсного синапса для кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseCable\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseCable\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "cable-синапс",
+      "description": "Cable-синапс: Weight, Resistance, TC и амплитуда импульса."
     },
     "NSynapseCableMulti": {
-      "header": "кабельный импульсный синапс (мульти-вариант)",
-      "description": "**Класс**: `NSynapseCableMulti` — конфигурационный вариант импульсного синапса для мульти-кабельных моделей. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NSynapseCableMulti\", ...)`. **Storage-инстансы**: `ClassName = \"NSynapseCableMulti\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "cable-синапс multi",
+      "description": "Многосегментный cable-синапс: Weight, Resistance, TC и амплитуда импульса."
     },
     "NSynapseClassic": {
       "header": "классический синапс",
@@ -1266,6 +1321,22 @@
       "BundledFirmwareId": {
         "header": "Bundled firmware",
         "description": "ID из manifest (`sensor_lab_v1`, `standard_firmata`)."
+      },
+      "BaudRate": {
+        "header": "Baud rate",
+        "description": "Скорость serial (по умолчанию 57600)."
+      },
+      "BoardProfile": {
+        "header": "Board profile",
+        "description": "0=Uno, 1=Mega 2560."
+      },
+      "ConnectOnBuild": {
+        "header": "Connect on build",
+        "description": "Автоподключение при `ABuild`, если `PortName` задан."
+      },
+      "LastError": {
+        "header": "Last error",
+        "description": "State: текст последней ошибки порта/upload."
       }
     },
     "ArduinoSensorSketch": {
@@ -1549,5 +1620,1394 @@
       }
     }
   },
-  "propertyFallbacks": {}
+  "propertyFallbacks": {
+    "Activity": {
+      "header": "Активность",
+      "description": "Включает участие компонента в расчёте. При значении false шаг моделирования для узла пропускается."
+    },
+    "CalculationDurationThreshold": {
+      "header": "Порог времени расчёта",
+      "description": "Контрольный порог длительности шага (мс). При превышении генерируется предупреждение."
+    },
+    "Coord": {
+      "header": "Координаты в редакторе",
+      "description": "Позиция узла на диаграмме, используется только визуальным редактором."
+    },
+    "DebugSysEventsMask": {
+      "header": "Маска системных событий",
+      "description": "Битовая маска событий, которые следует выводить в журнал для отладки."
+    },
+    "Id": {
+      "header": "Идентификатор",
+      "description": "Уникальный идентификатор экземпляра компонента в хранилище."
+    },
+    "MaxCalculationDuration": {
+      "header": "Макс. длительность расчёта",
+      "description": "Ограничение по времени (мс) для выполнения компонента на последовательности шагов."
+    },
+    "Name": {
+      "header": "Имя компонента",
+      "description": "Отображаемое имя узла в проекте."
+    },
+    "StepDuration": {
+      "header": "Время шага",
+      "description": "Продолжительность последнего расчётного шага (мс)."
+    },
+    "TimeStep": {
+      "header": "Временной шаг",
+      "description": "Длительность шага моделирования, с которой работает компонент."
+    },
+    "InputParams": {
+      "header": "Входные данные",
+      "description": "Матрица или вектор, к которому применяется операция компонента."
+    },
+    "OutputParams": {
+      "header": "Выходные данные",
+      "description": "Результирующая матрица/вектор после обработки."
+    },
+    "Input": {
+      "header": "Вход",
+      "description": "Матрица или bitmap, который поступает на обработку."
+    },
+    "Output": {
+      "header": "Выход",
+      "description": "Результат обработки, передаваемый следующему компоненту."
+    },
+    "Source": {
+      "header": "Источник",
+      "description": "Путь или идентификатор источника данных (файл, камера, последовательность)."
+    },
+    "NewColorModel": {
+      "header": "Цветовая модель",
+      "description": "Целевая цветовая модель (RGB, HSV и т.д.) для преобразования."
+    },
+    "FullMatrix": {
+      "header": "Полная матрица",
+      "description": "Вся матрица данных, считанных из источника."
+    },
+    "CurrentLine": {
+      "header": "Текущая строка",
+      "description": "Последняя прочитанная строка временного ряда."
+    },
+    "CurrentLineIndex": {
+      "header": "Номер текущей строки",
+      "description": "Индекс строки временного ряда, поданной на выход."
+    },
+    "FileName": {
+      "header": "Имя файла",
+      "description": "Путь к файлу, содержащему данные или изображение."
+    },
+    "UseRelativePathFromConfig": {
+      "header": "Относительный путь (конфигурация)",
+      "description": "Интерпретировать путь относительно файла конфигурации проекта."
+    },
+    "UseRelativePathFromWorkDir": {
+      "header": "Относительный путь (рабочая папка)",
+      "description": "Интерпретировать путь относительно рабочего каталога приложения."
+    },
+    "RowCount": {
+      "header": "Количество строк",
+      "description": "Сколько строк содержит считанная матрица."
+    },
+    "ColCount": {
+      "header": "Количество столбцов",
+      "description": "Сколько столбцов содержит считанная матрица."
+    },
+    "DoubleMatrix": {
+      "header": "Матрица double",
+      "description": "Матрица данных типа double."
+    },
+    "IntMatrix": {
+      "header": "Матрица int",
+      "description": "Матрица данных типа int."
+    },
+    "DoubleVector": {
+      "header": "Вектор double",
+      "description": "Вектор данных типа double."
+    },
+    "IntVector": {
+      "header": "Вектор int",
+      "description": "Вектор данных типа int."
+    },
+    "Double": {
+      "header": "Значение double",
+      "description": "Константа типа double, доступная на выходе компонента."
+    },
+    "LDouble": {
+      "header": "Значение long double",
+      "description": "Константа типа long double."
+    },
+    "Float": {
+      "header": "Значение float",
+      "description": "Константа типа float."
+    },
+    "Int": {
+      "header": "Значение int",
+      "description": "Константа типа int."
+    },
+    "Long": {
+      "header": "Значение long",
+      "description": "Константа типа long."
+    },
+    "ULong": {
+      "header": "Значение unsigned long",
+      "description": "Беззнаковая константа типа unsigned long."
+    },
+    "LongLong": {
+      "header": "Значение long long",
+      "description": "Константа типа long long."
+    },
+    "ULongLong": {
+      "header": "Значение unsigned long long",
+      "description": "Беззнаковая константа типа unsigned long long."
+    },
+    "ActionCounter": {
+      "header": "Счётчик срабатываний",
+      "description": "Считает количество срабатываний или импульсов, прошедших через компонент."
+    },
+    "ActionPeriod": {
+      "header": "Период срабатывания",
+      "description": "Интервал времени между срабатываниями компонента или генератора."
+    },
+    "PulseAmplitude": {
+      "header": "Амплитуда импульса",
+      "description": "Базовая амплитуда формируемого импульсного сигнала."
+    },
+    "SecretionTC": {
+      "header": "Временная константа секреции",
+      "description": "Константа времени выброса медиатора в синаптическую щель."
+    },
+    "DissociationTC": {
+      "header": "Временная константа диссоциации",
+      "description": "Константа времени спада концентрации медиатора после выброса."
+    },
+    "Gain": {
+      "header": "Коэффициент усиления",
+      "description": "Масштабирует входной сигнал при преобразовании в выход компонента."
+    },
+    "Inputs": {
+      "header": "Входные сигналы",
+      "description": "Набор входных сигналов или каналов, подаваемых на компонент."
+    },
+    "ExcChannelClassName": {
+      "header": "Класс возбудительного канала",
+      "description": "Имя класса канала, через который проходят возбудительные сигналы."
+    },
+    "InhChannelClassName": {
+      "header": "Класс тормозного канала",
+      "description": "Имя класса канала, через который проходят тормозные сигналы."
+    },
+    "InputFeedbackSignal": {
+      "header": "Входной сигнал обратной связи",
+      "description": "Сигнал обратной связи, влияющий на работу мембраны и её пороги."
+    },
+    "Feedback": {
+      "header": "Обратная связь",
+      "description": "Текущее значение сигнала обратной связи, учитываемое при расчёте мембранного потенциала."
+    },
+    "FeedbackGain": {
+      "header": "Коэффициент обратной связи",
+      "description": "Масштабирует вклад обратной связи в потенциал мембраны."
+    },
+    "NumExcitatorySynapses": {
+      "header": "Количество возбудительных синапсов",
+      "description": "Число возбудительных синаптических контактов, подключённых к мембране."
+    },
+    "NumInhibitorySynapses": {
+      "header": "Количество тормозных синапсов",
+      "description": "Число тормозных синаптических контактов, подключённых к мембране."
+    },
+    "ResetAvailable": {
+      "header": "Разрешить сброс",
+      "description": "Определяет, может ли состояние мембраны быть сброшено программно."
+    },
+    "SumPotential": {
+      "header": "Суммарный потенциал",
+      "description": "Сумма потенциалов по всем входным каналам и синапсам мембраны."
+    },
+    "UseAveragePotential": {
+      "header": "Использовать усреднённый потенциал",
+      "description": "Если true, вместо суммы используется среднее значение мембранного потенциала."
+    },
+    "Capacity": {
+      "header": "Ёмкость",
+      "description": "Эффективная мембранная ёмкость канала или синапса."
+    },
+    "FBResistance": {
+      "header": "Сопротивление обратной связи",
+      "description": "Сопротивление ветви обратной связи, влияющее на стабилизацию потенциала."
+    },
+    "IsNeuronActivated": {
+      "header": "Нейрон активирован",
+      "description": "Флаг, показывающий, был ли нейрон активирован на текущем шаге расчёта."
+    },
+    "NumConnectedSynapsis": {
+      "header": "Количество подключённых синапсов",
+      "description": "Число синапсов, фактически подключённых к данному каналу."
+    },
+    "Resistance": {
+      "header": "Сопротивление",
+      "description": "Сопротивление канала или пути тока."
+    },
+    "RestingResistance": {
+      "header": "Сопротивление в покое",
+      "description": "Сопротивление канала в состоянии покоя (без активности)."
+    },
+    "SumChannelInput": {
+      "header": "Суммарный вход канала",
+      "description": "Сумма всех входных сигналов канала по времени или пространству."
+    },
+    "SumSynapticInput": {
+      "header": "Суммарный синаптический вход",
+      "description": "Сумма вкладов синаптических входов канала."
+    },
+    "SynapseResistance": {
+      "header": "Сопротивление синапса",
+      "description": "Эффективное сопротивление синаптического контакта."
+    },
+    "SynapticInputs": {
+      "header": "Синаптические входы",
+      "description": "Набор входных сигналов от синапсов, подключённых к каналу."
+    },
+    "TimeConstant": {
+      "header": "Временная константа",
+      "description": "Характерное время релаксации или фильтрации сигнала в канале."
+    },
+    "UseAverageSynapsis": {
+      "header": "Использовать усреднённые синапсы",
+      "description": "Если true, используется усреднённый вклад всех синапсов вместо поэлементного."
+    },
+    "ActiveMs": {
+      "header": "Активные веса M",
+      "description": "Набор активных мультипликативных коэффициентов (M) для хеббовского обновления веса."
+    },
+    "PassiveMs": {
+      "header": "Пассивные веса M",
+      "description": "Набор пассивных мультипликативных коэффициентов (M), используемых в модели Хебба."
+    },
+    "G": {
+      "header": "Проводимость G",
+      "description": "Текущая эффективная проводимость синапса."
+    },
+    "Gd": {
+      "header": "Проводимость Gd",
+      "description": "Компонента проводимости, связанная с дендритной или тормозной частью."
+    },
+    "GdGain": {
+      "header": "Коэффициент Gd",
+      "description": "Коэффициент усиления для компоненты проводимости Gd."
+    },
+    "Gs": {
+      "header": "Вектор Gs",
+      "description": "Вектор компонент проводимости, связанных с мотивацией/состояниями."
+    },
+    "GsGain": {
+      "header": "Коэффициент Gs",
+      "description": "Коэффициент усиления для компоненты Gs."
+    },
+    "GsSum": {
+      "header": "Сумма Gs",
+      "description": "Суммарная проводимость по компонентам Gs."
+    },
+    "Win": {
+      "header": "Вес входа",
+      "description": "Вес, соответствующий входному влиянию на синапс."
+    },
+    "Wout": {
+      "header": "Вес выхода",
+      "description": "Вес, соответствующий выходному влиянию синапса."
+    },
+    "InputLTZoneFeedbackSignal": {
+      "header": "Сигнал обратной связи LT-зоны",
+      "description": "Сигнал обратной связи от низкопороговой зоны (LT-zone), влияющий на обучение."
+    },
+    "InputMotivation": {
+      "header": "Сигнал мотивации",
+      "description": "Вход мотивации/вознаграждения, влияющий на изменение веса хеббовского синапса."
+    },
+    "InputPulseSignal": {
+      "header": "Входной импульсный сигнал",
+      "description": "Импульсный сигнал на входе синапса или канала, используемый для расчёта тока/проводимости."
+    },
+    "OutInCopy": {
+      "header": "Копия входа на выходе",
+      "description": "Выход, повторяющий входной сигнал без преобразований (удобно для отладки и мониторинга)."
+    },
+    "Weight": {
+      "header": "Вес синапса",
+      "description": "Текущий вес/проводимость синаптической связи, масштабирующий вклад входного сигнала."
+    },
+    "WeightInput": {
+      "header": "Вес входа",
+      "description": "Входной коэффициент, задающий относительную важность данного синапта или канала."
+    },
+    "TypicalPulseDuration": {
+      "header": "Типичная длительность импульса",
+      "description": "Ожидаемая длительность входных импульсов, используемая при настройке временных констант модели."
+    },
+    "UsePresynapticInhibition": {
+      "header": "Использовать пресинаптическое торможение",
+      "description": "Если true, активируется механизм пресинаптического торможения для данного синапса."
+    },
+    "UsePulseSignal": {
+      "header": "Использовать импульсный сигнал",
+      "description": "Определяет, обрабатывается ли вход как дискретный импульсный сигнал (спайки) или как непрерывный ток."
+    },
+    "InhibitionCoeff": {
+      "header": "Коэффициент торможения",
+      "description": "Коэффициент, масштабирующий вклад тормозных синапсов или каналов."
+    },
+    "ChannelInputs": {
+      "header": "Входы канала",
+      "description": "Набор входных сигналов, поступающих непосредственно в канал помимо синаптических входов."
+    },
+    "Kin": {
+      "header": "Коэффициент Kin",
+      "description": "Параметр модели, задающий влияние входного сигнала на обновление веса."
+    },
+    "Kmot": {
+      "header": "Коэффициент Kmot",
+      "description": "Параметр, задающий влияние мотивационного сигнала на изменение веса."
+    },
+    "Kout": {
+      "header": "Коэффициент Kout",
+      "description": "Параметр, задающий влияние выхода нейрона на изменение веса."
+    },
+    "Md": {
+      "header": "Параметр Md",
+      "description": "Константа, задающая скорость/масштаб изменения проводимости в модели Хебба."
+    },
+    "Min": {
+      "header": "Минимальный вес",
+      "description": "Нижняя граница веса хеббовского синапса."
+    },
+    "Mout": {
+      "header": "Максимальный вес",
+      "description": "Верхняя граница веса хеббовского синапса."
+    },
+    "PreOutput": {
+      "header": "Промежуточный выход",
+      "description": "Текущее значение выходного сигнала до финальной агрегации или пороговой обработки."
+    },
+    "Type": {
+      "header": "Тип",
+      "description": "Определяет режим или тип работы компонента (конкретное значение зависит от класса)."
+    },
+    "StructureBuildMode": {
+      "header": "Режим построения структуры",
+      "description": "Определяет, как автоматически строится структура нейронов/синапсов в компоненте."
+    },
+    "CalculateMode": {
+      "header": "Режим расчёта",
+      "description": "Выбирает алгоритм или сценарий расчёта (обучение, тестирование, комбинированный режим)."
+    },
+    "PulseGeneratorClassName": {
+      "header": "Класс генератора импульсов",
+      "description": "Имя класса генератора, создающего импульсные последовательности для нейронов."
+    },
+    "NeuronTrainerClassName": {
+      "header": "Класс тренера нейронов",
+      "description": "Имя класса, реализующего алгоритм обучения нейронов."
+    },
+    "NeuronClassName": {
+      "header": "Класс нейрона",
+      "description": "Имя класса нейрона, используемого в данном компоненте."
+    },
+    "SynapseClassName": {
+      "header": "Класс синапса",
+      "description": "Имя класса синапса, который соединяет нейроны."
+    },
+    "NumNeurons": {
+      "header": "Количество нейронов",
+      "description": "Число нейронов, создаваемых и используемых в компоненте."
+    },
+    "IsNeedToTrain": {
+      "header": "Требуется обучение",
+      "description": "Если true, компонент будет выполнять процедуру обучения перед эксплуатацией."
+    },
+    "Delay": {
+      "header": "Задержка",
+      "description": "Базовая временная задержка импульсов или реакции системы (в условных единицах/мс)."
+    },
+    "SpikesFrequency": {
+      "header": "Частота спайков",
+      "description": "Желаемая или измеряемая частота следования спайков (Гц)."
+    },
+    "NumInputDendrite": {
+      "header": "Число входных дендритов",
+      "description": "Количество дендритов, к которым подаются входные сигналы."
+    },
+    "MaxDendriteLength": {
+      "header": "Максимальная длина дендритов",
+      "description": "Ограничение на длину дендритных ветвей в шагах или сегментах."
+    },
+    "TrainingPatterns": {
+      "header": "Обучающие шаблоны",
+      "description": "Матрица входных шаблонов, используемых на этапе обучения."
+    },
+    "InputPattern": {
+      "header": "Входной шаблон",
+      "description": "Шаблон входных данных для текущего эксперимента или шага обучения."
+    },
+    "AdditionalInputPattern": {
+      "header": "Дополнительный входной шаблон",
+      "description": "Дополнительные входные данные, используемые в расширенных сценариях обучения."
+    },
+    "LTZThreshold": {
+      "header": "Порог LT-зоны",
+      "description": "Порог активации низкопороговой зоны (LT-zone) нейрона."
+    },
+    "FixedLTZThreshold": {
+      "header": "Фиксированный порог LT-зоны",
+      "description": "Жёстко заданное значение порога LT-зоны, используемое вместо адаптивного."
+    },
+    "TrainingLTZThreshold": {
+      "header": "Обучающий порог LT-зоны",
+      "description": "Порог LT-зоны, применяемый во время обучения для формирования требуемой активности."
+    },
+    "UseFixedLTZThreshold": {
+      "header": "Использовать фиксированный порог LT-зоны",
+      "description": "Если true, используется фиксированное значение порога LT-зоны."
+    },
+    "UseTransitSignal": {
+      "header": "Транзитный сигнал",
+      "description": "Разрешает передавать сигнал напрямую через компонент без изменения."
+    },
+    "DataFromFile": {
+      "header": "Данные из файла",
+      "description": "Если true, обучающие и/или входные данные читаются из внешних файлов."
+    },
+    "DendriteNeuronAmplitude": {
+      "header": "Амплитуда на дендритах",
+      "description": "Матрица амплитуд сигналов на дендритах нейронов."
+    },
+    "SomaNeuronAmplitude": {
+      "header": "Амплитуда на соме",
+      "description": "Матрица амплитуд соматического потенциала нейронов."
+    },
+    "NeuronAmplitude": {
+      "header": "Амплитуда нейронов",
+      "description": "Сводная амплитуда активности нейронов для анализа или визуализации."
+    },
+    "SynapseResistanceStep": {
+      "header": "Шаг изменения сопротивления синапса",
+      "description": "Величина, на которую изменяется сопротивление синапса при обучении."
+    },
+    "DendriteLength": {
+      "header": "Длина дендритов",
+      "description": "Вектор длин дендритных ветвей для отдельных нейронов."
+    },
+    "InitialSomaPotential": {
+      "header": "Начальный потенциал сомы",
+      "description": "Начальные значения мембранного потенциала сомы для нейронов."
+    },
+    "NumSynapse": {
+      "header": "Количество синапсов",
+      "description": "Число синаптических связей, создаваемых для каждого нейрона."
+    },
+    "ExperimentNum": {
+      "header": "Номер эксперимента",
+      "description": "Идентификатор сценария эксперимента или этапа обучения."
+    },
+    "ExperimentMode": {
+      "header": "Режим эксперимента",
+      "description": "Включает/отключает специальные режимы работы компонента для экспериментов."
+    },
+    "AvailableEnergy": {
+      "header": "Доступная энергия",
+      "description": "Суммарный запас энергии в модели жизненной сети."
+    },
+    "CellDivisionFlag": {
+      "header": "Разрешить деление клеток",
+      "description": "Указывает, может ли происходить деление клеток при достижении условий."
+    },
+    "CellDivisionEnergy": {
+      "header": "Энергия деления клетки",
+      "description": "Минимальный запас энергии, необходимый для запуска деления клетки."
+    },
+    "EnsembleThreshold": {
+      "header": "Порог ансамбля",
+      "description": "Порог активации ансамбля нейронов."
+    },
+    "EnsembleLinkThreshold": {
+      "header": "Порог связи ансамбля",
+      "description": "Минимальная сила связи для включения связи в ансамбль."
+    },
+    "EnsembleThresholdMode": {
+      "header": "Режим порога ансамбля",
+      "description": "Определяет, как рассчитывается порог активности ансамбля."
+    },
+    "EnsembleCalculationStep": {
+      "header": "Шаг расчёта ансамбля",
+      "description": "Шаг по времени или итерациям, с которым обновляется состояние ансамбля."
+    },
+    "EnergyBalanceMode": {
+      "header": "Режим баланса энергии",
+      "description": "Определяет, как распределяется и тратится энергия в жизненной сети."
+    },
+    "SummaryFeeling": {
+      "header": "Сводное ощущение",
+      "description": "Интегральная метрика ощущения/вознаграждения в модели LifeNet."
+    },
+    "SummaryEnergy": {
+      "header": "Сводная энергия",
+      "description": "Суммарная энергия всех элементов системы."
+    },
+    "SummaryWearOut": {
+      "header": "Сводной износ",
+      "description": "Интегральный показатель износа или усталости системы."
+    },
+    "SummaryFrequency": {
+      "header": "Сводная частота",
+      "description": "Обобщённая частота активности нейронной популяции."
+    },
+    "SummaryLiveNeurons": {
+      "header": "Количество живых нейронов",
+      "description": "Число активных (не выбывших) нейронов в жизненной сети."
+    },
+    "DefaultComponentClassId": {
+      "header": "Класс компонента по умолчанию",
+      "description": "Идентификатор класса компонента, используемого по умолчанию при автоматическом построении структуры сети."
+    },
+    "NetType": {
+      "header": "Тип сети",
+      "description": "Тип топологии сети: 0 — без структуры, 1 — слоистая, 2 — рецепторная и т.д."
+    },
+    "NetStructure": {
+      "header": "Структура сети",
+      "description": "Многомерная структура идентификаторов компонентов, определяющая топологию нейронной сети."
+    },
+    "NumLayers": {
+      "header": "Количество слоёв",
+      "description": "Число слоёв в многослойной структуре нейронов."
+    },
+    "LayerWidth": {
+      "header": "Ширина слоя",
+      "description": "Количество нейронов по горизонтали в одном слое."
+    },
+    "LayerHeight": {
+      "header": "Высота слоя",
+      "description": "Количество нейронов по вертикали в одном слое."
+    },
+    "ReceptorFieldWidth": {
+      "header": "Ширина рецепторного поля",
+      "description": "Ширина рецепторного поля в единицах нейронов."
+    },
+    "ReceptorFieldHeight": {
+      "header": "Высота рецепторного поля",
+      "description": "Высота рецепторного поля в единицах нейронов."
+    },
+    "LinkDistance": {
+      "header": "Расстояние связи",
+      "description": "Максимальное расстояние, на котором могут быть установлены связи между нейронами."
+    },
+    "LinkOrganizationMode": {
+      "header": "Режим организации связей",
+      "description": "Способ организации связей: 0 — без связей, 1 — многослойные, 2 — рецепторные, 3 — полный радиус."
+    },
+    "LinksOrganizationMode": {
+      "header": "Режим организации связей",
+      "description": "Способ организации связей: 0 — без связей, 1 — многослойные, 2 — рецепторные, 3 — полный радиус."
+    },
+    "MembraneClassName": {
+      "header": "Класс мембраны",
+      "description": "Имя класса мембраны, используемой для моделирования соматической части нейрона."
+    },
+    "LTMembraneClassName": {
+      "header": "Класс мембраны LT-зоны",
+      "description": "Имя класса мембраны для низкопороговой зоны (LT-zone) нейрона."
+    },
+    "LTZoneClassName": {
+      "header": "Класс LT-зоны",
+      "description": "Имя класса низкопороговой зоны (LT-zone), используемой для детекции слабых сигналов."
+    },
+    "ExcGeneratorClassName": {
+      "header": "Класс возбудительного генератора",
+      "description": "Имя класса генератора возбудительных импульсов для нейрона."
+    },
+    "InhGeneratorClassName": {
+      "header": "Класс тормозного генератора",
+      "description": "Имя класса генератора тормозных импульсов для нейрона."
+    },
+    "ReceptorClassName": {
+      "header": "Класс рецептора",
+      "description": "Имя класса рецептора, преобразующего внешние сигналы во входные импульсы нейрона."
+    },
+    "NumSomaMembraneParts": {
+      "header": "Количество частей соматической мембраны",
+      "description": "Число сегментов или частей, на которые разделена соматическая мембрана нейрона."
+    },
+    "NumDendriteMembraneParts": {
+      "header": "Количество частей дендритной мембраны",
+      "description": "Число сегментов дендритной мембраны для каждого дендрита."
+    },
+    "NumDendriteMembranePartsVec": {
+      "header": "Вектор количества частей дендритной мембраны",
+      "description": "Вектор, задающий число сегментов для каждого дендрита отдельно."
+    },
+    "TrainingPattern": {
+      "header": "Обучающий шаблон",
+      "description": "Матрица входных данных, используемая для обучения нейрона на текущем шаге."
+    },
+    "TrainingDendIndexes": {
+      "header": "Индексы обучаемых дендритов",
+      "description": "Матрица индексов дендритов, которые участвуют в обучении на текущем шаге."
+    },
+    "TrainingSynapsisNum": {
+      "header": "Количество обучаемых синапсов",
+      "description": "Число синапсов, которые участвуют в обучении на текущем шаге."
+    },
+    "ActiveOutputs": {
+      "header": "Активные выходы",
+      "description": "Матрица, показывающая, какие выходы нейрона активны (выдают импульсы) на текущем шаге."
+    },
+    "ActivePosInputs": {
+      "header": "Активные положительные входы",
+      "description": "Матрица, показывающая, какие возбудительные входы нейрона активны на текущем шаге."
+    },
+    "ActiveNegInputs": {
+      "header": "Активные отрицательные входы",
+      "description": "Матрица, показывающая, какие тормозные входы нейрона активны на текущем шаге."
+    },
+    "NumActiveOutputs": {
+      "header": "Количество активных выходов",
+      "description": "Число выходов нейрона, которые выдали импульсы на текущем шаге."
+    },
+    "NumActivePosInputs": {
+      "header": "Количество активных положительных входов",
+      "description": "Число возбудительных входов нейрона, получивших импульсы на текущем шаге."
+    },
+    "NumActiveNegInputs": {
+      "header": "Количество активных отрицательных входов",
+      "description": "Число тормозных входов нейрона, получивших импульсы на текущем шаге."
+    },
+    "DendriticSumPotential": {
+      "header": "Суммарный дендритный потенциал",
+      "description": "Сумма мембранных потенциалов всех дендритов нейрона."
+    },
+    "SomaSumPotential": {
+      "header": "Суммарный соматический потенциал",
+      "description": "Сумма мембранных потенциалов соматической части нейрона."
+    },
+    "UseAverageDendritesPotential": {
+      "header": "Использовать усреднённый дендритный потенциал",
+      "description": "Если true, вместо суммы используется среднее значение потенциала по всем дендритам."
+    },
+    "UseAverageLTZonePotential": {
+      "header": "Использовать усреднённый потенциал LT-зоны",
+      "description": "Если true, вместо суммы используется среднее значение потенциала низкопороговой зоны."
+    },
+    "MaxReceptorOutput": {
+      "header": "Максимальный выход рецептора",
+      "description": "Максимальное значение выходного сигнала рецептора, используемое для нормализации."
+    },
+    "AvgFreqCounter": {
+      "header": "Счётчик средней частоты",
+      "description": "Счётчик, накапливающий данные для расчёта средней частоты импульсов в LT-зоне."
+    },
+    "AvgInterval": {
+      "header": "Средний интервал",
+      "description": "Средний интервал времени между импульсами, рассчитанный за последний период наблюдения."
+    },
+    "OutputFreq": {
+      "header": "Выходная частота",
+      "description": "Текущая частота импульсов на выходе LT-зоны или нейрона (Гц)."
+    },
+    "OutputFrequency": {
+      "header": "Выходная частота",
+      "description": "Текущая частота импульсов на выходе LT-зоны или нейрона (Гц)."
+    },
+    "AvgFrequencyCounter": {
+      "header": "Счётчик средней частоты",
+      "description": "Счётчик, накапливающий данные для расчёта средней частоты импульсов в LT-зоне."
+    },
+    "OutputPotential": {
+      "header": "Выходной потенциал",
+      "description": "Текущее значение мембранного потенциала на выходе LT-зоны или канала."
+    },
+    "NeuralPotential": {
+      "header": "Нейронный потенциал",
+      "description": "Текущее значение мембранного потенциала нейрона или его части."
+    },
+    "NumChannelsInGroup": {
+      "header": "Количество каналов в группе",
+      "description": "Число каналов, объединённых в группу для совместного расчёта или усреднения."
+    },
+    "OutputPulseTimes": {
+      "header": "Времена выходных импульсов",
+      "description": "Вектор моментов времени, когда были сгенерированы выходные импульсы."
+    },
+    "Potential": {
+      "header": "Потенциал",
+      "description": "Текущее значение мембранного потенциала компонента."
+    },
+    "PrePotential": {
+      "header": "Предыдущий потенциал",
+      "description": "Значение мембранного потенциала на предыдущем шаге расчёта."
+    },
+    "PulseCounter": {
+      "header": "Счётчик импульсов",
+      "description": "Счётчик общего количества импульсов, сгенерированных компонентом."
+    },
+    "PulseFlag": {
+      "header": "Флаг импульса",
+      "description": "Флаг, показывающий, был ли сгенерирован импульс на текущем шаге."
+    },
+    "PulseLength": {
+      "header": "Длительность импульса",
+      "description": "Длительность текущего или последнего сгенерированного импульса."
+    },
+    "Threshold": {
+      "header": "Порог",
+      "description": "Пороговое значение потенциала, при превышении которого генерируется импульс."
+    },
+    "ThresholdOff": {
+      "header": "Порог выключения",
+      "description": "Пороговое значение потенциала, при падении ниже которого импульс прекращается."
+    },
+    "MaxFreq": {
+      "header": "Максимальная частота",
+      "description": "Максимально допустимая частота импульсов для данного компонента (Гц)."
+    },
+    "UseLtzIntegtation": {
+      "header": "Использовать интегрирование LT-зоны",
+      "description": "Если true, LT-зона использует интегрирование входных сигналов вместо простого суммирования."
+    },
+    "UseLTZIntegtation": {
+      "header": "Использовать интегрирование LT-зоны",
+      "description": "Если true, LT-зона использует интегрирование входных сигналов вместо простого суммирования."
+    },
+    "XModCoeff": {
+      "header": "X mod coeff",
+      "description": "Коэффициент модуляции для переменной X в расширенной модели STDP синапса."
+    },
+    "YModCoeff": {
+      "header": "Y mod coeff",
+      "description": "Коэффициент модуляции для переменной Y в расширенной модели STDP синапса."
+    },
+    "RandomFrequency": {
+      "header": "Random частота",
+      "description": "Случайная частота генерации импульсов, используемая для создания стохастических последовательностей."
+    },
+    "UseSpikeStabilizer": {
+      "header": "Использовать стабилизатор спайков",
+      "description": "Если true, активируется механизм стабилизации частоты спайков для предотвращения нестабильности."
+    },
+    "TrainerClassName": {
+      "header": "Класс тренера",
+      "description": "Имя класса тренера синапса, реализующего алгоритм обучения (STDP, Hebb и т.д.)."
+    },
+    "Amplitude": {
+      "header": "Амплитуда",
+      "description": "Амплитуда сигнала, импульса или генератора (в единицах потенциала или тока)."
+    },
+    "Output1": {
+      "header": "Выход 1",
+      "description": "Первый выходной сигнал компонента (для многоканальных компонентов)."
+    },
+    "Output2": {
+      "header": "Выход 2",
+      "description": "Второй выходной сигнал компонента."
+    },
+    "Output3": {
+      "header": "Выход 3",
+      "description": "Третий выходной сигнал компонента."
+    },
+    "Output4": {
+      "header": "Выход 4",
+      "description": "Четвёртый выходной сигнал компонента."
+    },
+    "Output5": {
+      "header": "Выход 5",
+      "description": "Пятый выходной сигнал компонента."
+    },
+    "Output6": {
+      "header": "Выход 6",
+      "description": "Шестой выходной сигнал компонента."
+    },
+    "NumClasses": {
+      "header": "Количество классов",
+      "description": "Число классов, на которые классификатор разделяет входные данные."
+    },
+    "SizeTrainingSet": {
+      "header": "Размер обучающей выборки",
+      "description": "Количество образцов в обучающей выборке для классификатора или детектора."
+    },
+    "BigNeuronSize": {
+      "header": "Размер большого нейрона",
+      "description": "Размер (количество элементов) большого нейрона в ассоциативном формирователе."
+    },
+    "NumStimulus1Dendrite": {
+      "header": "Количество дендритов стимула 1",
+      "description": "Число дендритов, связанных с первым стимулом в ассоциативном формирователе."
+    },
+    "NumStimulus2Dendrite": {
+      "header": "Количество дендритов стимула 2",
+      "description": "Число дендритов, связанных со вторым стимулом в ассоциативном формирователе."
+    },
+    "Stimulus1Pattern": {
+      "header": "Шаблон стимула 1",
+      "description": "Входной шаблон первого стимула для формирования ассоциации."
+    },
+    "Stimulus2Pattern": {
+      "header": "Шаблон стимула 2",
+      "description": "Входной шаблон второго стимула для формирования ассоциации."
+    },
+    "APlus": {
+      "header": "A plus",
+      "description": "Коэффициент усиления синапса при долгосрочной потенциации (LTP) в STDP: увеличение веса при пре-до-пост активации."
+    },
+    "AMinus": {
+      "header": "A minus",
+      "description": "Коэффициент ослабления синапса при долгосрочной депрессии (LTD) в STDP: уменьшение веса при пост-до-пре активации."
+    },
+    "WMin": {
+      "header": "W min",
+      "description": "Минимальное значение веса синапса, ниже которого вес не может опуститься."
+    },
+    "WMax": {
+      "header": "W max",
+      "description": "Максимальное значение веса синапса, выше которого вес не может подняться."
+    },
+    "TPre": {
+      "header": "T pre",
+      "description": "Время последнего пресинаптического импульса (момент активации входного нейрона)."
+    },
+    "TPost": {
+      "header": "T post",
+      "description": "Время последнего постсинаптического импульса (момент активации выходного нейрона)."
+    },
+    "TPreOld": {
+      "header": "T pre old",
+      "description": "Время предыдущего пресинаптического импульса (для отслеживания истории активаций)."
+    },
+    "TPostOld": {
+      "header": "T post old",
+      "description": "Время предыдущего постсинаптического импульса (для отслеживания истории активаций)."
+    },
+    "TDiff": {
+      "header": "T diff",
+      "description": "Разница во времени между последним пре- и постсинаптическим импульсами (TPre - TPost)."
+    },
+    "XYDiff": {
+      "header": "Xy diff",
+      "description": "Разница между переменными X и Y в расширенной модели STDP (используется для отслеживания истории активаций)."
+    },
+    "IsInputPulseActive": {
+      "header": "Is input импульсный active",
+      "description": "Флаг, показывающий, был ли получен пресинаптический импульс на текущем шаге."
+    },
+    "IsOutputPulseActive": {
+      "header": "Is output импульсный active",
+      "description": "Флаг, показывающий, был ли получен постсинаптический импульс на текущем шаге."
+    },
+    "IsTrainEnable": {
+      "header": "Is последовательность enable",
+      "description": "Флаг, разрешающий или запрещающий обучение синапса на текущем шаге."
+    },
+    "PreSynInput": {
+      "header": "Pre синапс input",
+      "description": "Входной сигнал от пресинаптического нейрона (входной импульс или активность)."
+    },
+    "PostSynInput": {
+      "header": "Post синапс input",
+      "description": "Входной сигнал от постсинаптического нейрона (выходной импульс или активность)."
+    },
+    "WeightOutput": {
+      "header": "Weight output",
+      "description": "Выходной вес синапса после применения правил STDP обучения (обновлённое значение веса)."
+    },
+    "TauX": {
+      "header": "Tau x",
+      "description": "Временная константа для переменной X в расширенной модели STDP (характерное время затухания)."
+    },
+    "TauY": {
+      "header": "Tau y",
+      "description": "Временная константа для переменной Y в расширенной модели STDP (характерное время затухания)."
+    },
+    "TauPlus": {
+      "header": "Tau plus",
+      "description": "Временная константа для долгосрочной потенциации (LTP) в STDP: определяет временное окно, в котором пре-до-пост активация усиливает синапс."
+    },
+    "TauMinus": {
+      "header": "Tau minus",
+      "description": "Временная константа для долгосрочной депрессии (LTD) в STDP: определяет временное окно, в котором пост-до-пре активация ослабляет синапс."
+    },
+    "XAvg": {
+      "header": "X avg",
+      "description": "Среднее значение переменной X в расширенной модели STDP (используется для отслеживания истории пресинаптических активаций)."
+    },
+    "YAvg": {
+      "header": "Y avg",
+      "description": "Среднее значение переменной Y в расширенной модели STDP (используется для отслеживания истории постсинаптических активаций)."
+    },
+    "WRange": {
+      "header": "W range",
+      "description": "Диапазон возможных значений веса синапса (WMax - WMin)."
+    },
+    "Frequency": {
+      "header": "Частота",
+      "description": "Частота следования импульсов или событий (Гц)."
+    },
+    "FrequencyDeviation": {
+      "header": "Частота deviation",
+      "description": "Отклонение частоты от среднего значения (используется для анализа стабильности)."
+    },
+    "ChannelInputCoeff": {
+      "header": "Канал input coeff",
+      "description": "Коэффициент, масштабирующий вклад входных сигналов канала."
+    },
+    "SynapticInputCoeff": {
+      "header": "Synaptic input coeff",
+      "description": "Коэффициент, масштабирующий вклад синаптических входных сигналов."
+    },
+    "ConditionalStimulPattern": {
+      "header": "Conditional stimul шаблон",
+      "description": "Входной шаблон условного стимула для условного рефлекса."
+    },
+    "UnconditionalStimulPattern": {
+      "header": "Unconditional stimul шаблон",
+      "description": "Входной шаблон безусловного стимула для условного рефлекса."
+    },
+    "NumConditionalStimulDendrite": {
+      "header": "Num conditional stimul дендрит",
+      "description": "Число дендритов, связанных с условным стимулом в условном рефлексе."
+    },
+    "NumUnconditionalStimulDendrite": {
+      "header": "Num unconditional stimul дендрит",
+      "description": "Число дендритов, связанных с безусловным стимулом в условном рефлексе."
+    },
+    "IsNegInfluence": {
+      "header": "Is neg influence",
+      "description": "Флаг, указывающий, оказывает ли стимул отрицательное (тормозное) влияние на рефлекс."
+    },
+    "Iteration": {
+      "header": "Iteration",
+      "description": "Номер текущей итерации или шага в цикле обработки данных."
+    },
+    "Mode": {
+      "header": "Mode",
+      "description": "Режим работы компонента (конкретное значение зависит от класса компонента)."
+    },
+    "TCMode": {
+      "header": "Tc mode",
+      "description": "Режим временной константы (time constant mode): определяет, как рассчитывается временная константа в модели."
+    },
+    "TC": {
+      "header": "Tc",
+      "description": "Временная константа (time constant): характерное время релаксации или фильтрации сигнала."
+    },
+    "NeuronsClassName": {
+      "header": "Neurons класс name",
+      "description": "Имя класса нейронов, используемых в слое или группе."
+    },
+    "NumAffNeuronsInGroup": {
+      "header": "Количество афферентных нейронов в группе",
+      "description": "Число афферентных нейронов, объединённых в одну группу для совместной обработки."
+    },
+    "PatternFrequency": {
+      "header": "Шаблон частота",
+      "description": "Частота следования импульсов в паттерне (Гц)."
+    },
+    "NeuronFreqGroupLayerClassName": {
+      "header": "Нейрон freq group layer класс name",
+      "description": "Имя класса нейрона для частотной групповой слоистой структуры."
+    },
+    "NumNeuronsLayer": {
+      "header": "Количество нейронов в слое",
+      "description": "Число нейронов в одном слое нейронной сети."
+    },
+    "NumInputFeatures": {
+      "header": "Количество входных признаков",
+      "description": "Число признаков или размерность входного вектора."
+    },
+    "NumGenerators": {
+      "header": "Количество генераторов",
+      "description": "Число генераторов импульсов, используемых в компоненте."
+    },
+    "NeuronsWidth": {
+      "header": "Ширина нейронов",
+      "description": "Количество нейронов по горизонтали в слое или группе."
+    },
+    "NeuronsHeight": {
+      "header": "Высота нейронов",
+      "description": "Количество нейронов по вертикали в слое или группе."
+    },
+    "NeuronsLayerSize": {
+      "header": "Размер слоя нейронов",
+      "description": "Общее количество нейронов в слое (ширина × высота)."
+    },
+    "NeuronsLayerClassName": {
+      "header": "Neurons layer класс name",
+      "description": "Имя класса нейронов, используемых в слое."
+    },
+    "MulCoeffs": {
+      "header": "Mul coeffs",
+      "description": "Вектор мультипликативных коэффициентов для масштабирования входных сигналов."
+    },
+    "MeasurementPeriod": {
+      "header": "Measurement period",
+      "description": "Период измерения или интервал времени между измерениями."
+    },
+    "LogicalNotClassName": {
+      "header": "Logical not класс name",
+      "description": "Имя класса компонента логического отрицания (NOT)."
+    },
+    "InputMode": {
+      "header": "Input mode",
+      "description": "Режим обработки входных данных (например, обучение, тестирование, предсказание)."
+    },
+    "InputMatrix": {
+      "header": "Input матрица",
+      "description": "Входная матрица данных для обработки компонентом."
+    },
+    "FlagFreqGroupLayer": {
+      "header": "Flag freq group layer",
+      "description": "Флаг, указывающий, используется ли частотная групповая слоистая структура."
+    },
+    "AffNeuronsLayerSize": {
+      "header": "Размер слоя афферентных нейронов",
+      "description": "Общее количество афферентных нейронов в слое."
+    },
+    "YTau": {
+      "header": "Y tau",
+      "description": "Временная константа для переменной Y в модели STDP."
+    },
+    "XTau": {
+      "header": "X tau",
+      "description": "Временная константа для переменной X в модели STDP."
+    },
+    "Vm": {
+      "header": "Vm",
+      "description": "Мембранный потенциал (membrane potential) в модели кабеля или нейрона."
+    },
+    "UsePatternOutput": {
+      "header": "Use шаблон output",
+      "description": "Флаг, определяющий, использовать ли выходной паттерн для генерации."
+    },
+    "TrainingPatternInx": {
+      "header": "Training шаблон inx",
+      "description": "Индекс текущего обучающего шаблона в наборе данных."
+    },
+    "TimeWindowSize": {
+      "header": "Время window size",
+      "description": "Размер временного окна для анализа или обработки данных."
+    },
+    "TimeGeneration": {
+      "header": "Время generation",
+      "description": "Время генерации данных или паттернов."
+    },
+    "TimeCounter": {
+      "header": "Время счётчик",
+      "description": "Счётчик времени или номер текущего временного шага."
+    },
+    "Tay": {
+      "header": "Tay",
+      "description": "Параметр временной константы или задержки в модели."
+    },
+    "TauS": {
+      "header": "Tau s",
+      "description": "Временная константа для синаптической переменной S."
+    },
+    "TauM": {
+      "header": "Tau m",
+      "description": "Мембранная временная константа (membrane time constant)."
+    },
+    "StdpInfluence": {
+      "header": "Stdp influence",
+      "description": "Влияние STDP обучения на изменение веса синапса."
+    },
+    "StatesNumber": {
+      "header": "States number",
+      "description": "Количество состояний в модели или автомате."
+    },
+    "StateGeneration": {
+      "header": "Состояние generation",
+      "description": "Генерация состояния или режим работы генератора состояний."
+    },
+    "SpikeClassifierClassName": {
+      "header": "Спайк классификатор класс name",
+      "description": "Имя класса классификатора спайков для распознавания паттернов."
+    },
+    "Rm": {
+      "header": "Rm",
+      "description": "Мембранное сопротивление (membrane resistance) в модели кабеля."
+    },
+    "Ri": {
+      "header": "Ri",
+      "description": "Внутреннее сопротивление (internal resistance) в модели кабеля."
+    },
+    "ResetDelay": {
+      "header": "Reset задержка",
+      "description": "Задержка перед сбросом состояния компонента."
+    },
+    "ReloadDataset": {
+      "header": "Reload набор данных",
+      "description": "Флаг, указывающий, нужно ли перезагрузить набор данных."
+    },
+    "PulseCounters": {
+      "header": "Импульсный counters",
+      "description": "Счётчики импульсов для различных каналов или групп."
+    },
+    "PulseCount": {
+      "header": "Импульсный count",
+      "description": "Счётчик количества импульсов, сгенерированных компонентом."
+    },
+    "PsActivityInput": {
+      "header": "Ps activity input",
+      "description": "Входной сигнал активности постсинаптического нейрона для STDP."
+    },
+    "PredictionTime": {
+      "header": "Prediction время",
+      "description": "Время предсказания или горизонт прогнозирования."
+    },
+    "ParameterData": {
+      "header": "Parameter data",
+      "description": "Данные параметров для настройки компонента."
+    },
+    "PainInput": {
+      "header": "Pain input",
+      "description": "Входной сигнал боли для рефлекса."
+    },
+    "OutputSpeed": {
+      "header": "Output speed",
+      "description": "Выходная скорость движения мышцы или исполнительного органа."
+    },
+    "OutputLength": {
+      "header": "Output length",
+      "description": "Выходная длина мышцы или исполнительного органа."
+    },
+    "OutputFile": {
+      "header": "Output file",
+      "description": "Путь к файлу для сохранения выходных данных."
+    },
+    "OutputAcceleration": {
+      "header": "Output acceleration",
+      "description": "Выходное ускорение движения мышцы или исполнительного органа."
+    },
+    "OutComponents": {
+      "header": "Out components",
+      "description": "Количество выходных компонент или размерность выходного вектора."
+    },
+    "OperatingTime": {
+      "header": "Operating время",
+      "description": "Время работы компонента или длительность операции."
+    },
+    "NumSamples": {
+      "header": "Количество образцов",
+      "description": "Число образцов в наборе данных или обучающей выборке."
+    },
+    "NumLevels": {
+      "header": "Количество уровней",
+      "description": "Число уровней в иерархической структуре или модели."
+    },
+    "NumFeatures": {
+      "header": "Количество признаков",
+      "description": "Число признаков в векторе данных."
+    },
+    "NumExcSynapsesGen1": {
+      "header": "Num exc synapses  gen1",
+      "description": "Количество возбудительных синапсов для первого генератора."
+    },
+    "NumExcSynapsesGen2": {
+      "header": "Num exc synapses  gen2",
+      "description": "Количество возбудительных синапсов для второго генератора."
+    },
+    "Number": {
+      "header": "Number",
+      "description": "Номер или идентификатор элемента в последовательности."
+    },
+    "NumAffNeurons": {
+      "header": "Количество афферентных нейронов",
+      "description": "Число афферентных нейронов в группе или слое."
+    },
+    "MinSample": {
+      "header": "Минимальный образец",
+      "description": "Минимальное значение в выборке или минимальный индекс образца."
+    },
+    "MinInputFreq": {
+      "header": "Минимальная входная частота",
+      "description": "Минимальная частота входных сигналов (Гц)."
+    },
+    "MaxFrequency": {
+      "header": "Max частота",
+      "description": "Максимальная частота импульсов или сигналов (Гц)."
+    },
+    "MaxSample": {
+      "header": "Максимальный образец",
+      "description": "Максимальное значение в выборке или максимальный индекс образца."
+    },
+    "MaxInputFreq": {
+      "header": "Максимальная входная частота",
+      "description": "Максимальная частота входных сигналов (Гц)."
+    },
+    "Mass": {
+      "header": "Mass",
+      "description": "Масса объекта в физической модели (например, мышцы)."
+    },
+    "LengthInput": {
+      "header": "Length input",
+      "description": "Входная длина для модели мышцы или исполнительного органа."
+    },
+    "K": {
+      "header": "K",
+      "description": "Коэффициент жёсткости или упругости в модели."
+    },
+    "IsCalibrativeDendrite": {
+      "header": "Is calibrative дендрит",
+      "description": "Флаг, указывающий, является ли дендрит калибровочным."
+    },
+    "InpV": {
+      "header": "Inp v",
+      "description": "Входной потенциал (input voltage) для модели кабеля."
+    },
+    "InputRows": {
+      "header": "Input rows",
+      "description": "Количество строк во входной матрице данных."
+    },
+    "InputCols": {
+      "header": "Input cols",
+      "description": "Количество столбцов во входной матрице данных."
+    },
+    "FlagStart": {
+      "header": "Flag start",
+      "description": "Флаг начала работы генератора или компонента."
+    },
+    "FeaturesNumber": {
+      "header": "Features number",
+      "description": "Количество признаков в векторе данных."
+    },
+    "EL": {
+      "header": "El",
+      "description": "Потенциал покоя (equilibrium potential) в модели кабеля."
+    },
+    "Dx": {
+      "header": "Dx",
+      "description": "Пространственный шаг дискретизации кабеля (spatial step)."
+    },
+    "Dt": {
+      "header": "Dt",
+      "description": "Временной шаг дискретизации кабеля (time step)."
+    },
+    "Delays": {
+      "header": "Delays",
+      "description": "Вектор задержек для различных каналов или генераторов."
+    },
+    "D": {
+      "header": "D",
+      "description": "Коэффициент диффузии в модели кабеля."
+    },
+    "Current": {
+      "header": "Current",
+      "description": "Ток в модели синапса или канала."
+    },
+    "Cm": {
+      "header": "Cm",
+      "description": "Мембранная ёмкость (membrane capacitance) в модели кабеля."
+    },
+    "CalcMode": {
+      "header": "Calc mode",
+      "description": "Режим расчёта: определяет порядок вычисления параметров модели."
+    },
+    "CableMembraneResistance": {
+      "header": "Cable мембрана сопротивление",
+      "description": "Сопротивление мембраны кабеля в модели распространения потенциала."
+    },
+    "AffNeuronClassName": {
+      "header": "Aff нейрон класс name",
+      "description": "Имя класса афферентного нейрона, используемого в компоненте."
+    },
+    "AffNeuronGroupClassName": {
+      "header": "Aff нейрон group класс name",
+      "description": "Имя класса группы афферентных нейронов."
+    },
+    "AffNeuronsGroupWidth": {
+      "header": "Aff neurons group width",
+      "description": "Ширина группы афферентных нейронов (количество по горизонтали)."
+    },
+    "AffNeuronsGroupHeight": {
+      "header": "Aff neurons group height",
+      "description": "Высота группы афферентных нейронов (количество по вертикали)."
+    },
+    "DendriteLengthGen1": {
+      "header": "Дендрит length  gen1",
+      "description": "Длина дендрита для первого генератора."
+    },
+    "DendriteLengthGen2": {
+      "header": "Дендрит length  gen2",
+      "description": "Длина дендрита для второго генератора."
+    },
+    "DelayTime": {
+      "header": "Задержка время",
+      "description": "Время задержки сигнала или импульса."
+    },
+    "MatrixDelay": {
+      "header": "Матрица задержка",
+      "description": "Матрица задержек для различных каналов или элементов."
+    },
+    "MatrixData": {
+      "header": "Матрица data",
+      "description": "Матрица данных для обработки или хранения."
+    },
+    "MatrixClasses": {
+      "header": "Матрица classes",
+      "description": "Матрица классов или меток для классификации."
+    },
+    "MatrixSourceTimeSeriesClassName": {
+      "header": "Матрица источник время ряд класс name",
+      "description": "Имя класса источника матрицы временных рядов."
+    },
+    "ModelMaxLength": {
+      "header": "Модель max length",
+      "description": "Максимальная длина модели кабеля или структуры."
+    },
+    "ModelMaxTime": {
+      "header": "Модель max время",
+      "description": "Максимальное время моделирования или расчёта."
+    },
+    "NeuronLearnerClassName": {
+      "header": "Нейрон learner класс name",
+      "description": "Имя класса обучателя нейронов для адаптивного обучения."
+    },
+    "PredictorClassName": {
+      "header": "Предиктор класс name",
+      "description": "Имя класса предиктора для прогнозирования состояний."
+    },
+    "PCAClassName": {
+      "header": "Pca класс name",
+      "description": "Имя класса компонента PCA (Principal Component Analysis) для снижения размерности."
+    },
+    "PatternDuration": {
+      "header": "Шаблон duration",
+      "description": "Длительность паттерна импульсов или последовательности."
+    },
+    "DendriteLengthNGen1": {
+      "header": "Дендрит length  gen1",
+      "description": "Длина дендрита для первого генератора отрицания в логическом NOT."
+    },
+    "DendriteLengthNGen2": {
+      "header": "Дендрит length  gen2",
+      "description": "Длина дендрита для второго генератора отрицания в логическом NOT."
+    },
+    "NumExcSynapsesNGen1": {
+      "header": "Num exc synapses  gen1",
+      "description": "Количество возбудительных синапсов для первого генератора отрицания в логическом NOT."
+    },
+    "NumExcSynapsesNGen2": {
+      "header": "Num exc synapses  gen2",
+      "description": "Количество возбудительных синапсов для второго генератора отрицания в логическом NOT."
+    },
+    "Param": {
+      "header": "Param",
+      "description": "Вектор параметров для настройки модели мышцы или компонента."
+    },
+    "dx": {
+      "header": "Dx",
+      "description": "Пространственный шаг дискретизации кабеля (spatial step)."
+    },
+    "dt": {
+      "header": "Dt",
+      "description": "Временной шаг дискретизации кабеля (time step)."
+    }
+  }
 }

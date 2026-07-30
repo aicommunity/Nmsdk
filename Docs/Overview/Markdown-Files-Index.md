@@ -175,6 +175,7 @@ Run `Scripts/doc-audit/regenerate-markdown-index.py` after `inventory.py`.
 - Docs/Build-And-Deploy/Cross-Platform.md
 - Docs/CONTRIBUTING.md
 - Docs/ClDescLexicon-From-Docs.md
+- Docs/ClDesc-Detailed-Methodology.md
 - Docs/Community.md
 - Docs/Components-And-Configuration/Component-System.md
 - Docs/Components-And-Configuration/Configuration-Files-Overview.md
@@ -215,6 +216,7 @@ Run `Scripts/doc-audit/regenerate-markdown-index.py` after `inventory.py`.
 - Docs/Overview/README.md
 - Docs/Performance-And-Testing/Performance-Overview.md
 - Docs/Performance-And-Testing/Testing-Strategy.md
+- Docs/PropertyAliasConfig.json
 - Docs/PropertyAliasGeneration.md
 - Docs/README.md
 - Docs/Rdk-Core/Application-Architecture.md

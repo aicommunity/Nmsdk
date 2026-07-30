@@ -34,7 +34,11 @@ PROPS: dict[str, list[tuple[str, str, str, tuple[str, str]]]] = {
         ("IsUploading", "Is uploading", "State: прошивка в процессе.", STATE),
         ("UploadComplete", "Upload complete", "State: `UploadLastResult==ok`.", STATE),
         ("PortName", "Port name", "Путь к serial (`/dev/ttyACM0`, `COM3`).", PARAM),
+        ("BaudRate", "Baud rate", "Скорость serial (по умолчанию 57600).", PARAM),
+        ("BoardProfile", "Board profile", "0=Uno, 1=Mega 2560.", PARAM),
+        ("ConnectOnBuild", "Connect on build", "Автоподключение при `ABuild`, если `PortName` задан.", PARAM),
         ("BundledFirmwareId", "Bundled firmware", "ID из manifest (`sensor_lab_v1`, `standard_firmata`).", PARAM),
+        ("LastError", "Last error", "State: текст последней ошибки порта/upload.", STATE),
     ],
     "ArduinoSensorSketch": [
         ("SendCommand", "Send command", "Edge: отправить `Command` на устройство.", EDGE),
@@ -165,8 +169,12 @@ def update_lexicon() -> None:
 
 
 def main() -> None:
-    for class_name, props in PROPS.items():
-        update_class_xml(class_name, props)
+    import sys
+    classes = sys.argv[1:] or list(PROPS.keys())
+    for class_name in classes:
+        if class_name not in PROPS:
+            raise SystemExit(f"unknown class: {class_name}")
+        update_class_xml(class_name, PROPS[class_name])
     update_lexicon()
 
 

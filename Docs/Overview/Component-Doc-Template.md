@@ -15,6 +15,11 @@
    - `ADefault/ABuild/AReset/ACalculate` и другие фазы; что и когда инициализируется
 5. **Входы/выходы (UProperty)**  
    - входные параметры/потоки, выходные результаты, типы данных
+5a. **Ключевые свойства / Favorites** (для DETAILED ClDesc)  
+   - таблица primary-свойств (то, что должно быть в `Bin/ClDesc/.../Favorites` как `{CompName}:Prop`)  
+   - secondary/технические (`Activity`, `Coord`, `Name`, `TimeStep`, debug…) — не включать  
+   - опционально: 0–N curated nested I/O aliases (`Nested.Path.Prop`)  
+   - см. `Docs/ClDesc-Detailed-Methodology.md`
 6. **Типовые сценарии / пайплайны**  
    - `flowchart` или `sequenceDiagram` (init → build → calc → outputs)  
    - примеры конфигов: активные ссылки в корне, текстовые пути в сабрепо
@@ -92,6 +97,10 @@ Use for group pages and individual component pages. Language — RU; add an EN d
    - `ADefault/ABuild/AReset/ACalculate` and other phases; what is initialized and when
 5. **Inputs/outputs (UProperty)**  
    - input parameters/streams, output results, data types
+5a. **Key properties / Favorites** (DETAILED ClDesc)  
+   - table of primary properties for `Bin/ClDesc/.../Favorites` as `{CompName}:Prop`  
+   - secondary/technical (`Activity`, `Coord`, `Name`, `TimeStep`, debug…) — omit  
+   - optional curated nested I/O aliases; see `Docs/ClDesc-Detailed-Methodology.md`
 6. **Typical scenarios / pipelines**  
    - `flowchart` or `sequenceDiagram` (init → build → calc → outputs)  
    - config examples: active links in the root repo, text paths in subrepos

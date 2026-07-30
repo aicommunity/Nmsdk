@@ -8,6 +8,19 @@
 
 Алиасы свойств позволяют создавать "порты" верхнего уровня для входов/выходов глубоко вложенных компонентов, упрощая создание связей между компонентами и улучшая читаемость диаграмм.
 
+### Favorites: dual purpose (primary + aliases)
+
+Секция `<Favorites>` в ClDesc используется для двух разных целей:
+
+| Тип | Формат `Path` | Назначение |
+|-----|---------------|------------|
+| **Direct (primary)** | `{CompName}:PropName` или имя без `.` | Главные user-facing свойства на вкладке Favorites |
+| **Alias** | `Nested.Component.Property` (есть `.`) | Короткие порты для связей на диаграмме; GUI помечает `[Alias]` |
+
+Автоген (`--generate-cldesc`) создаёт **только** nested aliases (и часто шум: `Coord`/`Activity`/`Type`). Curated **primary** Favorites пишутся вручную (XML / `UClassFavoritesEditor`). Подробности и чеклист: [ClDesc-Detailed-Methodology.md](ClDesc-Detailed-Methodology.md).
+
+**Не** считать вывод автогена финальной курацией Favorites. После DETAILED не запускать массовый `--cldesc-force` без политики сохранения Favorites.
+
 ## Процесс генерации
 
 ### 1. Сборка проекта
@@ -127,29 +140,27 @@ Bin/Platform/Linux/NeuroModelerConsole --generate-cldesc \
 
 ## Настройка генерации
 
-Настройки генерации можно изменить в файле `Docs/PropertyAliasConfig.json`:
+Правила задокументированы в [`Docs/PropertyAliasConfig.json`](PropertyAliasConfig.json) и зеркально применены в `PropertyAliasAnalyzer` / `ClDescGenerator::generatePropertyAliases` (exclude технических leaf, aliases только для I/O-подобных имён).
 
-```json
-{
-  "generationRules": {
-    "minDepth": 2,                    // Минимальная глубина вложенности
-    "preferredTypes": ["ptOutput", "ptInput", "ptParameter"],
-    "maxAliasesPerComponent": 20,     // Максимум алиасов на компонент
-    "excludePatterns": ["DataInput*", "DataOutput*"]
-  }
-}
-```
+Если в ClDesc уже есть **direct** Favorites (`Path` без `.`), `--generate-cldesc` **не** регенерирует nested aliases — защита DETAILED-курации.
 
-## Ручное управление алиасами
+Exclude: `Coord`, `Activity`, `Type`, `Name`, `StepDuration`, `DebugSysEventsMask`, `*CalculationDuration*`, `DataInput*`, `DataOutput*`.
 
-Алиасы можно добавлять/редактировать вручную через:
+## Ручное управление Favorites (primary + aliases)
 
-1. **Редактор описаний классов** в GUI приложения NeuroModeler
+Редактирование:
+
+1. **Редактор описаний классов** в NeuroModeler (`UClDescEditor` / `UClassFavoritesEditor`)
 2. **Прямое редактирование XML** в `Bin/ClDesc/<Library>/ru-RU/<Class>.xml`
 
 Формат в XML:
 ```xml
 <Favorites>
+  <!-- primary -->
+  <Frequency>
+    <Path>{CompName}:Frequency</Path>
+  </Frequency>
+  <!-- curated alias -->
   <LTZoneOutput>
     <Path>LTZone.Output</Path>
   </LTZoneOutput>
@@ -599,6 +610,15 @@ The automatic property alias generation system is integrated into the class desc
 
 Property aliases allow creating "ports" at the top level for inputs/outputs of deeply nested components, simplifying component connections and improving diagram readability.
 
+#### Favorites: dual purpose (primary + aliases)
+
+| Kind | `Path` format | Purpose |
+|------|---------------|---------|
+| **Direct (primary)** | `{CompName}:PropName` or name without `.` | Main user-facing properties on the Favorites tab |
+| **Alias** | `Nested.Component.Property` (contains `.`) | Short ports for diagram links; GUI marks `[Alias]` |
+
+Autogen (`--generate-cldesc`) creates **nested aliases only** (often noisy). Curated **primary** Favorites are written manually. See [ClDesc-Detailed-Methodology.md](ClDesc-Detailed-Methodology.md). If direct Favorites already exist, alias regeneration is skipped.
+
 ### Generation Process
 
 #### 1. Building the Project
@@ -718,18 +738,7 @@ After generation, aliases are automatically:
 
 ### Generation Configuration
 
-Generation settings can be changed in `Docs/PropertyAliasConfig.json`:
-
-```json
-{
-  "generationRules": {
-    "minDepth": 2,                    // Minimum nesting depth
-    "preferredTypes": ["ptOutput", "ptInput", "ptParameter"],
-    "maxAliasesPerComponent": 20,     // Maximum aliases per component
-    "excludePatterns": ["DataInput*", "DataOutput*"]
-  }
-}
-```
+Canonical rules: [`Docs/PropertyAliasConfig.json`](PropertyAliasConfig.json) (mirrored in `PropertyAliasAnalyzer` / `ClDescGenerator`). Technical leaves (`Coord`/`Activity`/`Type`/…) are excluded; only I/O-like nested aliases are emitted. If curated **direct** Favorites already exist, alias regeneration is skipped.
 
 ### Manual Alias Management
 

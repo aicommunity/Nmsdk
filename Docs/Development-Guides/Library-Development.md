@@ -220,52 +220,46 @@ sequenceDiagram
 
 ### Шаг 4: Создание описаний классов (ClDesc)
 
-Для каждого компонента можно создать XML описание класса, которое используется GUI для отображения информации о компоненте.
+Для каждого компонента создаётся XML с метаданными для GUI (Header/Description свойств и **Favorites**).
 
-**Структура ClDesc файла:**
+**Каноническое хранилище:** `Bin/ClDesc/<LibraryName>/ru-RU/<ClassName>.xml` (субмодуль Bin), не `MyLibrary/ClDesc/*.cls`.
+
+**Реальная схема** (см. эталон и методологию):
+
+- [Bin/Docs/Examples/ClDesc-Example.md](../../Bin/Docs/Examples/ClDesc-Example.md)
+- [Docs/ClDesc-Detailed-Methodology.md](../ClDesc-Detailed-Methodology.md)
+
+Кратко:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
 <ClassDescription>
-    <ClassName>MyComponent1</ClassName>
-    <DisplayName>My Component 1</DisplayName>
-    <Description>
-        <RU>Описание компонента на русском языке</RU>
-        <EN>Component description in English</EN>
-    </Description>
-    <Category>MyCategory</Category>
-    <Icon>path/to/icon.png</Icon>
-    <Properties>
-        <Property>
-            <Name>Parameter1</Name>
-            <DisplayName>Parameter 1</DisplayName>
-            <Type>double</Type>
-            <Description>
-                <RU>Описание параметра</RU>
-                <EN>Parameter description</EN>
-            </Description>
-            <DefaultValue>0.0</DefaultValue>
-            <MinValue>0.0</MinValue>
-            <MaxValue>100.0</MaxValue>
-        </Property>
-    </Properties>
+  <ClassName>MyComponent1</ClassName>
+  <Header>краткий заголовок</Header>
+  <Description>назначение компонента</Description>
+  <Properties>
+    <Parameter1>
+      <Header>Параметр 1</Header>
+      <Description>поведение, единицы</Description>
+      <Type>| ptPubParameter |</Type>
+      <DataSelectionType>0</DataSelectionType>
+      <ValueList Type="std::vector" Size="2" elemType="std::string">
+        <elem Type="std::string"></elem>
+        <elem Type="std::string"></elem>
+      </ValueList>
+      <PropertyType>257</PropertyType>
+    </Parameter1>
+  </Properties>
+  <Favorites>
+    <Parameter1>
+      <Path>{CompName}:Parameter1</Path>
+    </Parameter1>
+  </Favorites>
 </ClassDescription>
 ```
 
-**Расположение ClDesc файлов:**
+Каркас можно получить через `NeuroModelerConsole --generate-cldesc`; **primary Favorites** и смысловые Description — ручная курация (не полагаться только на автоген aliases).
 
-```
-MyLibrary/
-├── Core/
-│   └── ...
-└── ClDesc/
-    ├── MyComponent1.cls
-    └── MyComponent2.cls
-```
-
-**Загрузка описаний:**
-
-Описания классов загружаются автоматически при регистрации библиотеки, если они находятся в каталоге `ClDesc/` относительно библиотеки.
+**Загрузка:** `UStorage::LoadClassesDescription()` читает `Bin/ClDesc/*/ru-RU/*.xml`.
 
 ### Шаг 5: Генерация алиасов свойств
 
@@ -898,22 +892,11 @@ void MyLibrary::CreateClassSamples(UStorage *storage)
 
 ### Step 4: Class Descriptions (ClDesc)
 
-Create XML descriptions for each component for GUI display.
+Create XML metadata for the GUI (property Header/Description and **Favorites**).
 
-**ClDesc File Structure:**
+**Canonical storage:** `Bin/ClDesc/<LibraryName>/ru-RU/<ClassName>.xml` (Bin submodule), not `MyLibrary/ClDesc/*.cls`.
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<ClassDescription>
-    <ClassName>MyComponent1</ClassName>
-    <DisplayName>My Component 1</DisplayName>
-    <Description>
-        <RU>Description in Russian</RU>
-        <EN>Description in English</EN>
-    </Description>
-    <Category>MyCategory</Category>
-</ClassDescription>
-```
+See [Bin/Docs/Examples/ClDesc-Example.md](../../Bin/Docs/Examples/ClDesc-Example.md) and [Docs/ClDesc-Detailed-Methodology.md](../ClDesc-Detailed-Methodology.md) for the real schema (`Header`/`PropertyType`/`Favorites/Path`). Skeleton via `--generate-cldesc`; curated primary Favorites are manual.
 
 ### Step 5: Property Alias Generation
 

@@ -199,25 +199,31 @@ bool PropertyAliasAnalyzer::IsImportantProperty(
 {
     if (!property)
         return false;
-    
-    // Проверяем, является ли свойство публичным
-    // Проверяем, является ли свойство публичным (через Type из UVariable)
-    // Для этого нужно получить доступ к UVariable, но у нас только UIProperty
-    // Пока пропускаем эту проверку
-    // TODO: Передавать UVariable вместо UIProperty
-    if (false) // Временно отключено
-        return false;
-    
-    // Проверяем предпочтительные типы (нужно получить UVariable из property)
-    // Для этого нужно найти свойство в компоненте
-    // Пока пропускаем эту проверку, так как у нас нет прямого доступа к UVariable
-    // TODO: Передавать UVariable вместо UIProperty в IsImportantProperty
-    
-    // Исключаем системные свойства
+
+    // Technical / editor / inherited secondary — never auto-alias into Favorites
+    static const QSet<QString> kTechnicalLeaves = {
+        QStringLiteral("Coord"),
+        QStringLiteral("Activity"),
+        QStringLiteral("Type"),
+        QStringLiteral("Name"),
+        QStringLiteral("Id"),
+        QStringLiteral("TimeStep"),
+        QStringLiteral("StepDuration"),
+        QStringLiteral("DebugSysEventsMask"),
+        QStringLiteral("CalculationDurationThreshold"),
+        QStringLiteral("MaxCalculationDuration"),
+        QStringLiteral("IsVisible"),
+        QStringLiteral("MemoryMonitor"),
+    };
+
     QString propName = QString::fromStdString(property->GetName());
     if (propName.startsWith("DataInput") || propName.startsWith("DataOutput"))
         return false;
-    
+    if (kTechnicalLeaves.contains(propName))
+        return false;
+    if (ShouldExcludeProperty(propName, options.excludePatterns))
+        return false;
+
     return true;
 }
 

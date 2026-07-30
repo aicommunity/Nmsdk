@@ -502,6 +502,27 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
             return;
         }
 
+        // If curated direct Favorites already exist ({CompName}:Prop / no '.'), do not
+        // regenerate nested aliases — protects DETAILED curation from --generate-cldesc.
+        {
+            const auto& existingFavorites = description->GetFavorites();
+            bool hasDirectFavorite = false;
+            for (const auto& fav : existingFavorites)
+            {
+                if (fav.second.find('.') == std::string::npos)
+                {
+                    hasDirectFavorite = true;
+                    break;
+                }
+            }
+            if (hasDirectFavorite)
+            {
+                storage->ReturnObject(component);
+                component = RDK::UEPtr<RDK::UComponent>();
+                return;
+            }
+        }
+
         // Настраиваем опции анализатора
         PropertyAliasAnalyzerOptions analyzerOptions;
         analyzerOptions.minDepth = 2;
@@ -511,6 +532,14 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
         analyzerOptions.preferredTypes.insert("ptParameter");
         analyzerOptions.excludePatterns.insert("DataInput*");
         analyzerOptions.excludePatterns.insert("DataOutput*");
+        // Secondary / technical leaves (see Docs/PropertyAliasConfig.json)
+        for (const char* leaf : {
+                 "Coord", "Activity", "Type", "Name", "Id", "TimeStep", "StepDuration",
+                 "DebugSysEventsMask", "CalculationDurationThreshold", "MaxCalculationDuration",
+                 "IsVisible", "MemoryMonitor"})
+        {
+            analyzerOptions.excludePatterns.insert(QString::fromUtf8(leaf));
+        }
 
         // Определяем путь к конфигурациям
         QString appDir = QCoreApplication::applicationDirPath();
@@ -525,17 +554,24 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
         // Анализируем компонент
         std::vector<PropertyAliasCandidate> candidates = aliasAnalyzer_.AnalyzeComponent(container, analyzerOptions);
 
-        // Добавляем алиасы в Favorites
+        // Добавляем алиасы в Favorites (I/O leaves only — avoid parameter noise)
         for (const auto& candidate : candidates)
         {
-            QString aliasName = candidate.aliasName;
-            QString componentPath = candidate.componentPath;
-            QString propertyName = candidate.propertyName;
+            const QString& propertyName = candidate.propertyName;
+            const bool isIo =
+                propertyName == QLatin1String("Input") ||
+                propertyName == QLatin1String("Output") ||
+                propertyName == QLatin1String("Weight") ||
+                propertyName == QLatin1String("Threshold") ||
+                propertyName == QLatin1String("Frequency") ||
+                propertyName.endsWith(QLatin1String("Input")) ||
+                propertyName.endsWith(QLatin1String("Output"));
+            if (!isIo)
+                continue;
 
-            // Добавляем алиас в Favorites
             description->AddPropertyAlias(
-                aliasName.toStdString(),
-                componentPath.toStdString(),
+                candidate.aliasName.toStdString(),
+                candidate.componentPath.toStdString(),
                 propertyName.toStdString(),
                 candidate.propertyType
             );

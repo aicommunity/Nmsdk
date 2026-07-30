@@ -1,0 +1,28 @@
+{
+  "generationRules": {
+    "minDepth": 2,
+    "maxAliasesPerComponent": 20,
+    "preferredTypes": ["ptOutput", "ptInput", "ptParameter"],
+    "excludeExact": [
+      "Coord",
+      "Activity",
+      "Type",
+      "Name",
+      "Id",
+      "TimeStep",
+      "StepDuration",
+      "DebugSysEventsMask",
+      "CalculationDurationThreshold",
+      "MaxCalculationDuration",
+      "IsVisible",
+      "MemoryMonitor"
+    ],
+    "excludePatterns": ["DataInput*", "DataOutput*"],
+    "aliasLeafAllowlistHint": ["Input", "Output", "Weight", "Threshold", "Frequency", "*Input", "*Output"],
+    "notes": [
+      "Rules are enforced in PropertyAliasAnalyzer / ClDescGenerator (hardcoded mirror of this file).",
+      "If ClDesc already has direct Favorites (Path without '.'), --generate-cldesc skips alias regeneration.",
+      "Curated primary Favorites use Path '{CompName}:PropName'. See Docs/ClDesc-Detailed-Methodology.md."
+    ]
+  }
+}
