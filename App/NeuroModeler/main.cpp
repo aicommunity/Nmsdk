@@ -375,7 +375,19 @@ int main(int argc, char *argv[])
     UGEngineControlWidget w(NULL, &AppCore.application);
 
 #ifdef RDK_USE_LLM
-    NmsdkRegisterLlm(&w, &AppCore.application, AppCore.showLlmAssistantMenu);
+    // Default: ShowLlmAssistantMenu=0 → skip LLM entirely (no index/provider cost on startup).
+    // Enable via NeuroModeler.ini General/ShowLlmAssistantMenu=1 or NMSDK_LLM_ENABLE=1.
+    if(NmsdkLlmRuntimeEnabled(AppCore.showLlmAssistantMenu))
+    {
+        if(d)
+        {
+            d->setLabelText("Launching application: starting AI assistant…");
+            d->setValue(22);
+            QApplication::processEvents(QEventLoop::AllEvents, 0);
+        }
+        // Non-blocking: core init runs on a worker thread; UI registers when ready.
+        NmsdkRegisterLlm(&w, &AppCore.application, AppCore.showLlmAssistantMenu);
+    }
 #endif
 
     if(AppCore.hideAdminForm)
