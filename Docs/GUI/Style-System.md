@@ -93,6 +93,29 @@ style->switchTheme("Modern Dark", qApp);
 - Исходники: `Rdk/GUI/Qt/Styles/`
 - Runtime: `Bin/Styles/`
 
+### Spatial density (compact default)
+
+NeuroModeler — desktop power-tool (IDE / MATLAB-like). **Compact** — текущий дефолт плотности; отдельного UI-переключателя Compact/Comfortable пока нет.
+
+**Два слоя плотности (оба обязательны):**
+
+1. **QSS chrome** (`default.qss` / `dark.qss`) — padding dock title, tabs, headers, toolbar, tree/list items, GroupBox.
+2. **Widget layout** — `setContentsMargins` / `setSpacing` / высоты chrome (status, breadcrumbs, custom title bars, form controllers). QSS не заменяет hardcoded margins в C++/`.ui`.
+
+Правило: **spacing в light и dark QSS идентичен**; отличаются только цвета. Новые формы и docks должны использовать margins/spacing **4** (не платформенный default ~9–11).
+
+| Токен chrome | Целевое значение |
+|--------------|------------------|
+| Dock / MDI title padding | 4px 8px / 4px 6px |
+| TabBar tab padding | 4px 12px 4px 10px |
+| HeaderView section | 4px 6px |
+| ToolBar padding / spacing | 2px 4px / 4 |
+| Tree/List item padding | 2–3px (+ margin 0–2) |
+| GroupBox margin-top / padding-top | 8px |
+| Form / dock content margins | 4px |
+
+Шрифт UI не уменьшается density-режимом (берётся system UI font через `UStyleManager`).
+
 ### См. также
 
 - [Reports/29-StyleSystem-Documentation.md](../../Reports/29-StyleSystem-Documentation.md) - детальная документация
@@ -127,6 +150,29 @@ The NeuroModeler style system provides centralized management of application vis
 
 - Sources: `Rdk/GUI/Qt/Styles/`
 - Runtime: `Bin/Styles/`
+
+### Spatial density (compact default)
+
+NeuroModeler is a desktop power tool (IDE / MATLAB-like). **Compact** is the current density default; there is no Compact/Comfortable UI toggle yet.
+
+**Two density layers (both required):**
+
+1. **QSS chrome** (`default.qss` / `dark.qss`) — dock title, tabs, headers, toolbar, tree/list items, GroupBox padding.
+2. **Widget layout** — `setContentsMargins` / `setSpacing` / chrome heights (status, breadcrumbs, custom title bars, form controllers). QSS does not override hardcoded C++/`.ui` margins.
+
+Rule: **light and dark QSS spacing must match**; only colors differ. New forms and docks should use margins/spacing **4** (not the platform default ~9–11).
+
+| Chrome token | Target |
+|--------------|--------|
+| Dock / MDI title padding | 4px 8px / 4px 6px |
+| TabBar tab padding | 4px 12px 4px 10px |
+| HeaderView section | 4px 6px |
+| ToolBar padding / spacing | 2px 4px / 4 |
+| Tree/List item padding | 2–3px (+ margin 0–2) |
+| GroupBox margin-top / padding-top | 8px |
+| Form / dock content margins | 4px |
+
+UI font size is not reduced by density (system UI font via `UStyleManager`).
 
 ### See Also
 
