@@ -46,12 +46,23 @@
 
 Активный график задаётся кликом / combo в шапке / context menu; toolbar Layout/Chart/Series не сбрасывает выбор на chart 0. Hide и Esc закрывают инспектор.
 
+### Add series wizard
+
+GUI «Add series…» открывает `UWatchSeriesWizard` (не цепочку modal dialogs):
+
+1. **Type** — `VizKind` + form выборки матрицы (cell / multi / row / column).
+2. **Sources** — old `UComponentsListWidget` (дерево всегда видно, `setWatchablePropertiesOnly`) + inline `UWatchMatrixSelector`; для XY — Y и X на одной странице.
+3. **Style** (опционально) — name / color / Y shift; Finish доступен уже со страницы Sources.
+
+Commit через существующие `createSerie` / `createSerieXY`. Общий type-gate: `RDK::isWatchableLanguageType` (`Core/Math/UWatchablePropertyTypes.h`), зеркало `NMSDK::Plot::isWatchableLanguageType`.
+
 ## Test plan
 
 - [x] Сборка `NeuroModeler` (linux-gcc-debug)
 - [ ] Watch window: add TimeSeries, pan/box zoom/track/reset modebar
 - [ ] Inspector hidden by default; Layout | Chart | Series pages; Hide/Esc
 - [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart
+- [ ] Add series wizard: Type → Sources (+ matrix) → optional Style; XY Y+X one page
 - [ ] Multi-channel: series with `channel_index != 0` survives Interface.xml save/load
 - [ ] XY: set viz XYLine, pick Y then X property; points accumulate
 - [ ] Hover tooltip shows series binding + X/Y
