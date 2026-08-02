@@ -217,8 +217,9 @@ std::string NmsdkBuiltinKnowledgeCatalog::catalogFingerprint() const
 
 std::vector<RDK::LLM::LibraryDescriptor> NmsdkBuiltinKnowledgeCatalog::loadedLibraries()
 {
-    return {{"Rdk-BasicLib", "BasicLibrary"},
-            {"Rdk-CvBasicLib", "CvBasicLibrary"},
+    // Folder names must match Bin/ClDesc/* on disk (not historical Storage library display names).
+    return {{"Rdk-BasicLib", "BasicLib"},
+            {"Rdk-CvBasicLib", "CvBasicLib"},
             {"Rdk-HardwareLib", "HardwareLibrary"},
             {"Nmsdk-PulseLib", "PulseLibrary"},
             {"Nmsdk-MotionControlLib", "MotionControlLibrary"}};
