@@ -111,6 +111,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleClassListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UQuickLinkDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownDocWindow.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
