@@ -34,11 +34,24 @@
 - Миграция XML на save; load v1 остаётся совместимым.
 - BCB TeeChart (`TUWatchInfo` X+Y sources) — только референс для DataBinding, не порт.
 
+### UX инспектора (Watch settings)
+
+Инспектор `PlotSettingsSidePanel` **скрыт по умолчанию** (графики на всю ширину; `QSplitter` charts|inspector).
+
+Три явных scope-страницы вместо смешанного «Panel»:
+
+1. **Layout** — сетка вкладки (`gridRows`/`gridCols`) и `UpdateIntervalMs`.
+2. **Chart** — активный `PlotPanel` (title, axes, viz, legend, track).
+3. **Series** — серии активного chart.
+
+Активный график задаётся кликом / combo в шапке / context menu; toolbar Layout/Chart/Series не сбрасывает выбор на chart 0. Hide и Esc закрывают инспектор.
+
 ## Test plan
 
 - [x] Сборка `NeuroModeler` (linux-gcc-debug)
 - [ ] Watch window: add TimeSeries, pan/box zoom/track/reset modebar
-- [ ] Panel settings side panel: legend/title/axes/viz kind/grid
+- [ ] Inspector hidden by default; Layout | Chart | Series pages; Hide/Esc
+- [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart
 - [ ] Multi-channel: series with `channel_index != 0` survives Interface.xml save/load
 - [ ] XY: set viz XYLine, pick Y then X property; points accumulate
 - [ ] Hover tooltip shows series binding + X/Y
