@@ -104,7 +104,7 @@ sequenceDiagram
 - Управление шагами времени
 - Мониторинг состояния
 
-`UGEngineControlWidget` является главным окном приложения (`UVisualControllerMainWidget`) и содержит все основные виджеты: `UModernDiagramWidget`, `UComponentsListWidget`, `UComponentPropertyChanger`, `ULoggerWidget`, `UGraphWidget` и др. Он управляет жизненным циклом приложения и координирует взаимодействие между виджетами.
+`UGEngineControlWidget` является главным окном приложения (`UVisualControllerMainWidget`) и содержит все основные виджеты: `UModernDiagramWidget`, `UComponentsListWidget`, `UComponentPropertyChanger`, `ULoggerWidget`, `UWatch` и др. Он управляет жизненным циклом приложения и координирует взаимодействие между виджетами.
 
 **Взаимодействие с движком:**
 
@@ -153,14 +153,15 @@ sequenceDiagram
 - Фильтрация по уровням
 - Поиск в логах
 
-#### UGraphWidget
+#### UWatch
 
-Виджет для визуализации графиков данных компонентов.
+Виджет наблюдения за свойствами компонентов (Qt Charts): вкладки, сетка графиков, серии Y(t) / XY.
 
 **Основные функции:**
-- Отображение временных рядов
-- Настройка осей и масштаба
-- Экспорт графиков
+- Временные ряды и параметрические (XY) серии
+- Настройка осей, viewport (track/zoom), легенды
+- MDI-вкладки Watches и LLM watch tools
+- Persistence в `Interface.xml` (PlotDocument schema)
 
 **Процесс обновления интерфейса:**
 
@@ -170,7 +171,7 @@ flowchart TB
     Update --> DiagramWidget["UModernDiagramWidget<br/>Reload"]
     Update --> DrawWidget["UDrawEngineWidget<br/>AUpdateInterface"]
     Update --> PropertyWidget["UComponentPropertyChanger<br/>Update"]
-    Update --> GraphWidget["UGraphWidget<br/>Update"]
+    Update --> WatchWidget["UWatch / UWatchTab<br/>Update"]
     
     DiagramWidget --> Scene["UModernDiagramScene<br/>Обновление узлов"]
     DrawWidget --> DrawEngine["UDrawEngine<br/>Draw"]
@@ -184,6 +185,7 @@ flowchart TB
 
 ### См. также
 
+- [ADR-PlotDocument.md](ADR-PlotDocument.md) — канон PlotDocument / UWatch
 - [GUI Overview](Overview.md)
 - [Bin/Help](../../Bin/Help/) - пользовательская справка
 
@@ -213,7 +215,7 @@ Uses `UDrawEngine` to render component diagrams in bitmap format. Works together
 
 Widget for controlling execution engine.
 
-`UGEngineControlWidget` is the main application window (`UVisualControllerMainWidget`) and contains all main widgets: `UModernDiagramWidget`, `UComponentsListWidget`, `UComponentPropertyChanger`, `ULoggerWidget`, `UGraphWidget`, etc. It manages the application lifecycle and coordinates interaction between widgets.
+`UGEngineControlWidget` is the main application window (`UVisualControllerMainWidget`) and contains all main widgets: `UModernDiagramWidget`, `UComponentsListWidget`, `UComponentPropertyChanger`, `ULoggerWidget`, `UWatch`, etc. It manages the application lifecycle and coordinates interaction between widgets.
 
 #### UComponentPropertyChanger
 
@@ -225,9 +227,9 @@ Component property editor.
 
 Log window for execution monitoring.
 
-#### UGraphWidget
+#### UWatch
 
-Widget for visualizing component data graphs.
+Watch widget for component property charts (Qt Charts): tabs, chart grid, TimeSeries / XY series, MDI Watches, LLM tools, `Interface.xml` PlotDocument persistence.
 
 **Interface update process:**
 
@@ -334,7 +336,7 @@ flowchart TB
     Update --> DiagramWidget["UModernDiagramWidget<br/>Reload"]
     Update --> DrawWidget["UDrawEngineWidget<br/>AUpdateInterface"]
     Update --> PropertyWidget["UComponentPropertyChanger<br/>Update"]
-    Update --> GraphWidget["UGraphWidget<br/>Update"]
+    Update --> WatchWidget["UWatch / UWatchTab<br/>Update"]
     
     DiagramWidget --> Scene["UModernDiagramScene<br/>Обновление узлов"]
     DrawWidget --> DrawEngine["UDrawEngine<br/>Draw"]

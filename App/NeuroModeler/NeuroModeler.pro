@@ -15,7 +15,7 @@ QT      += serialport
 QT      += webenginewidgets
 
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = NeuroModeler
 TEMPLATE = app
@@ -153,10 +153,12 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UProjectDescriptionWindow.cpp \
     ../../../Rdk/GUI/Qt/UWatchChart.cpp \
     ../../../Rdk/GUI/Qt/UWatchChartView.cpp \
-    ../../../Rdk/GUI/Qt/UWatchChartOption.cpp \
     ../../../Rdk/GUI/Qt/UWatchSerie.cpp \
-    ../../../Rdk/GUI/Qt/UWatchSeriesOption.cpp \
     ../../../Rdk/GUI/Qt/UWatchTab.cpp \
+    ../../../Rdk/GUI/Qt/Plot/PlotDocument.cpp \
+    ../../../Rdk/GUI/Qt/Plot/PlotDataAdapter.cpp \
+    ../../../Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.cpp \
+    ../../../Rdk/GUI/Qt/Plot/PlotSurface.cpp \
         main.cpp\
     ../../../Rdk/GUI/Qt/UComponentsListWidget.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.cpp \
@@ -177,13 +179,7 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/UComponentPropertyChanger.cpp \
     ../../../Rdk/GUI/Qt/UStatusPanel.cpp \
     ../../../Rdk/GUI/Qt/USingleImagePainter.cpp \
-    ../../../Rdk/GUI/Qt/qcustomplot.cpp \
-    ../../../Rdk/GUI/Qt/UGraphWidget.cpp \
-    ../../../Rdk/GUI/Qt/UGraphControlDialog.cpp \
-    ../../../Rdk/GUI/Qt/UGraphPaintWidget.cpp \
     ../../../Rdk/GUI/Qt/UTableInfo.cpp \
-    ../../../Rdk/GUI/Qt/UWatchFormWidget.cpp \
-    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.cpp \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.cpp \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp \
     ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.cpp \
@@ -226,18 +222,13 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/UProjectDescriptionWindow.h \
     ../../../Rdk/GUI/Qt/UWatchChart.h \
     ../../../Rdk/GUI/Qt/UWatchChartView.h \
-    ../../../Rdk/GUI/Qt/UWatchChartOption.h \
     ../../../Rdk/GUI/Qt/UWatchSerie.h \
-    ../../../Rdk/GUI/Qt/UWatchSeriesOption.h \
     ../../../Rdk/GUI/Qt/UWatchTab.h \
-    ../../../Rdk/GUI/Qt/qcustomplot.h \
-    ../../../Rdk/GUI/Qt/UGraphWidget.h \
-    ../../../Rdk/GUI/Qt/UStructSingleGraph.h \
-    ../../../Rdk/GUI/Qt/UGraphControlDialog.h \
-    ../../../Rdk/GUI/Qt/UGraphPaintWidget.h \
+    ../../../Rdk/GUI/Qt/Plot/PlotDocument.h \
+    ../../../Rdk/GUI/Qt/Plot/PlotDataAdapter.h \
+    ../../../Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.h \
+    ../../../Rdk/GUI/Qt/Plot/PlotSurface.h \
     ../../../Rdk/GUI/Qt/UTableInfo.h \
-    ../../../Rdk/GUI/Qt/UWatchFormWidget.h \
-    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.h \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.h \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.h \
     ../../../Rdk/GUI/Qt/UClassDescriptionDisplay.h \
@@ -264,16 +255,9 @@ FORMS   += \
     ../../../Rdk/GUI/Qt/UCreateTestWidget.ui \
     ../../../Rdk/GUI/Qt/UComponentPropertyChanger.ui \
     ../../../Rdk/GUI/Qt/UStatusPanel.ui \
-    ../../../Rdk/GUI/Qt/UGraphWidget.ui \
-    ../../../Rdk/GUI/Qt/UGraphControlDialog.ui \
-    ../../../Rdk/GUI/Qt/UGraphPaintWidget.ui \
     ../../../Rdk/GUI/Qt/UTableInfo.ui \
     ../../../Rdk/GUI/Qt/UWatch.ui \
     ../../../Rdk/GUI/Qt/UWatchChart.ui \
-    ../../../Rdk/GUI/Qt/UWatchChartOption.ui \
-    ../../../Rdk/GUI/Qt/UWatchFormWidget.ui \
-    ../../../Rdk/GUI/Qt/UWatchSeriesOption.ui \
-    ../../../Rdk/GUI/Qt/UWatchSettingsDialog.ui \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.ui \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.ui \
     ../../../Rdk/GUI/Qt/UWatchTab.ui \

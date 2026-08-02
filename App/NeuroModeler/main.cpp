@@ -8,6 +8,7 @@
 #include <QDir>
 #include <QPushButton>
 #include <QDialogButtonBox>
+#include <QProgressDialog>
 #include <QtGlobal>
 #include <algorithm>
 #include <utility>
@@ -263,7 +264,7 @@ int main(int argc, char *argv[])
     }
 
     // Обработка отмены через кнопку Cancel (подключаем ДО show())
-    QObject::connect(d, &QProgressDialog::canceled, []() {
+    QObject::connect(d, &QProgressDialog::canceled, [d]() {
         g_cancelRequested.store(true);
         if(d)
         {
@@ -328,7 +329,7 @@ int main(int argc, char *argv[])
     // Это критично для обеспечения отзывчивости окна прогресса, особенно во время InitRTlibs, BuildStorage, LoadClassesDescription
     // Таймер обрабатывает события даже после отмены, чтобы UI мог обновиться (например, текст кнопки "Cancelling...")
     QTimer* eventTimer = new QTimer(&a);
-    QObject::connect(eventTimer, &QTimer::timeout, []() {
+    QObject::connect(eventTimer, &QTimer::timeout, [d]() {
         // Обрабатываем события пока окно прогресса существует
         // Это позволяет окну получать сообщения даже во время длительных блокирующих операций
         if(d) {

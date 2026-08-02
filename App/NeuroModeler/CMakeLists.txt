@@ -67,10 +67,12 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UProjectDescriptionWindow.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChart.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartView.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartOption.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSerie.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSeriesOption.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchTab.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotDocument.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotDataAdapter.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotSurface.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentsListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentsListWidgetModern.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UEngineSelectionSync.cpp
@@ -96,13 +98,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentPropertyChanger.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStatusPanel.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleImagePainter.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/qcustomplot.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphControlDialog.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphPaintWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UTableInfo.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchFormWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSettingsDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UTcpServerControlWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassDescriptionDisplay.cpp
@@ -210,7 +206,6 @@ target_link_libraries(NeuroModeler
     Nmsdk::Qt::Gui
     Nmsdk::Qt::Network
     Nmsdk::Qt::Charts
-    Nmsdk::Qt::Print
     Nmsdk::Qt::Sql
     Nmsdk::Qt::Xml
     Nmsdk::Qt::Concurrent
