@@ -45,13 +45,15 @@
 
 ### Add series wizard
 
-GUI «Add series…» открывает `UWatchSeriesWizard` (не цепочку modal dialogs):
+GUI «Add series…» открывает `UWatchSeriesWizard`:
 
-1. **Type** — `VizKind` + form выборки матрицы (cell / multi / row / column).
-2. **Sources** — old `UComponentsListWidget` (дерево всегда видно, `setWatchablePropertiesOnly`) + inline `UWatchMatrixSelector`; для XY — Y и X на одной странице.
-3. **Style** (опционально) — name / color / Y shift; Finish доступен уже со страницы Sources.
+1. **Type** — `VizKind` + form (TS: cell/multi/row/column; XY: single pair). Hint: XY = parametric `(x,y)`, не ось времени; скаляры OK.
+2. **Sources** — TS: **Y**; XY: **X → Y** (отдельные страницы, один picker).
+3. **Style** — scrollable; name/color/shift; ClDescr → X/Y min/max; для XY Sampling (max points / min interval / min distance).
 
-Commit через существующие `createSerie` / `createSerieXY`. Общий type-gate: `RDK::isWatchableLanguageType` (`Core/Math/UWatchablePropertyTypes.h`), зеркало `NMSDK::Plot::isWatchableLanguageType`.
+XY chart axes: `AxisXmin`/`AxisXmax` + `AxisYmin`/`AxisYmax` (inspector скрывает time `X range` / Track). Автоscale X только при `trackLatest` и наличии точек; pad при `xmin≈xmax`. XY readers: `SetTimeInterval(0)` (длинная история).
+
+Commit через `createSerie` / `createSerieXY`. Type-gate: `RDK::isWatchableLanguageType`.
 
 ## Test plan
 
@@ -60,9 +62,9 @@ Commit через существующие `createSerie` / `createSerieXY`. Об
 - [ ] Inspector: Chart|Series side panel with hero identity; live apply; Hide/Esc
 - [ ] Layout toolbar → Tab layout dialog (presets + interval); charts stay full width
 - [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart
-- [ ] Add series wizard: Type → Sources (+ matrix) → optional Style; XY Y+X one page
+- [ ] Add series wizard: Type → X→Y (XY) or Y (TS) → Style; ClDesc axis limits; compact Style scroll
 - [ ] Multi-channel: series with `channel_index != 0` survives Interface.xml save/load
-- [ ] XY: set viz XYLine, pick Y then X property; points accumulate
+- [ ] XY: visible with constant X (axis pad); AxisXmin/max + AxisYmin/max; scalars OK
 - [ ] Hover tooltip shows series binding + X/Y
 - [ ] LLM: `add_watch_series`, `set_panel_viz_kind`, `set_series_binding`, MDI create/list
 - [ ] Profiling (`UTableInfo`) opens without legacy Graph includes
