@@ -70,6 +70,11 @@ XY не трогаем: `SetTimeInterval(0)`, свой Track/extents.
 
 Box Zoom: reverse ROI сбрасывает зум; rubber band только в Box Zoom.
 
+### Grid expand и экспорт
+
+- Сетка (`countGraphs()>1`): double-click по chart / кнопка **Expand** на modeBar — скрыть соседей (без пересоздания layout); **Esc** или **Restore** — вернуть сетку и размеры splitters.
+- Экспорт: toolbar **Save chart…** / **Save all…** / **Quick save**; форматы PNG/SVG/JPEG. Quick save пишет в `<ProjectPath>/SavedWatches/<yyyy-MM-dd_HH-mm-ss>/` (сессионная папка до перезапуска вкладки/окна).
+
 Commit через `createSerie` / `createSerieXY`. Type-gate: `RDK::isWatchableLanguageType`.
 TS matrix resize: фиксированные jx/jy — при уменьшении матрицы серия уходит offline; новые ячейки не появляются сами (пересоздать серии).
 
@@ -79,6 +84,8 @@ TS matrix resize: фиксированные jx/jy — при уменьшени
 - [ ] Watch window: add TimeSeries, pan/box zoom/track/reset modebar
 - [ ] Reverse box zoom resets viewport (+ Track)
 - [ ] X range 5/10 s matches visible TS window (not stuck at 2 s)
+- [ ] Grid expand: double-click / Esc / Restore
+- [ ] Save chart / Save all / Quick save → `SavedWatches/`
 - [ ] Inspector: Chart|Series side panel with hero identity; live apply; Hide/Esc
 - [ ] Layout toolbar → Tab layout dialog (presets + interval); charts stay full width
 - [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart

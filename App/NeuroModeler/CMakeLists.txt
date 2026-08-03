@@ -210,6 +210,7 @@ target_link_libraries(NeuroModeler
     Nmsdk::Qt::Gui
     Nmsdk::Qt::Network
     Nmsdk::Qt::Charts
+    Nmsdk::Qt::Svg
     Nmsdk::Qt::Sql
     Nmsdk::Qt::Xml
     Nmsdk::Qt::Concurrent
