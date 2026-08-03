@@ -47,24 +47,44 @@
 
 GUI «Add series…» открывает `UWatchSeriesWizard`:
 
-1. **Type** — `VizKind` + form (TS: cell/multi/row/column; XY: single pair). Hint: XY = parametric `(x,y)`, не ось времени; скаляры OK.
-2. **Sources** — TS: **Y**; XY: **X → Y** (отдельные страницы, один picker).
-3. **Style** — scrollable; name/color/shift; ClDescr → X/Y min/max; для XY Sampling (max points / min interval / min distance).
+1. **Type** — `VizKind` + form (TS: cell/multi/row/column → N серий; XY: cell pair **или** row/column snapshot curve). Hint: XY = parametric `(x,y)`, не ось времени.
+2. **Sources** — TS: **Y**; XY: **X → Y** (отдельные страницы).
+3. **Style** — scrollable; name/color/shift; ClDescr → X/Y min/max; для scalar XY Sampling (max points / min interval / min distance).
 
-XY chart axes: `AxisXmin`/`AxisXmax` + `AxisYmin`/`AxisYmax` (inspector скрывает time `X range` / Track). Автоscale X только при `trackLatest` и наличии точек; pad при `xmin≈xmax`. XY readers: `SetTimeInterval(0)` (длинная история).
+Семейства на одном chart **взаимоисключающие**: TimeSeries vs Y(x) (`XYLine`/`XYScatter`/matrix-slice). Внутри Y(x) Line+Scatter+slice можно смешивать.
+
+XY chart axes: `AxisXmin`/`AxisXmax` + `AxisYmin`/`AxisYmax` (inspector скрывает time `X range` / Track). Scalar XY readers: `SetTimeInterval(0)`. Matrix row/col XY: snapshot zip `min(nx,ny)` каждый тик (`SliceKind` в XML `SerieXSlice`/`SerieYSlice`).
+
+TS default `AxisXrange` = **5** с; смена X range через `updateTimeIntervals` (только `axisXrange` + `SetTimeInterval(W)` на TS-ридерах; ось не двигает).
+
+### Инвариант окна TimeSeries
+
+`W = axisXrange = reader.TimeInterval` (секунды model time):
+
+1. **Reader** — единственный owner истории (`TimeInterval` + `NumPoints`). `NumPoints` ≥ ~`2·W·Hz` (RT может давать плотнее 1 сэмпла/шаг); при упирании в cap до заполнения окна `AUpdate` наращивает буфер по наблюдаемой частоте.
+2. **Display** (`sampleTimeSeries`) — pass-through ридера; decimation только для отрисовки (endpoints сохраняются). Не trim’ить историю по `windowSize`/`TimeInterval`.
+3. **Track** (если trackable и не zoomed):  
+   `lo=oldest`, `hi=latest`; если `hi-lo < W` → `hi = lo+W`; если `hi-lo > W` → `lo = hi-W`; затем **атомарно** `axis.setRange(lo, hi)`.
+
+XY не трогаем: `SetTimeInterval(0)`, свой Track/extents.
+
+Box Zoom: reverse ROI сбрасывает зум; rubber band только в Box Zoom.
 
 Commit через `createSerie` / `createSerieXY`. Type-gate: `RDK::isWatchableLanguageType`.
+TS matrix resize: фиксированные jx/jy — при уменьшении матрицы серия уходит offline; новые ячейки не появляются сами (пересоздать серии).
 
 ## Test plan
 
 - [x] Сборка `NeuroModeler` (linux-gcc-debug)
 - [ ] Watch window: add TimeSeries, pan/box zoom/track/reset modebar
+- [ ] Reverse box zoom resets viewport (+ Track)
+- [ ] X range 5/10 s matches visible TS window (not stuck at 2 s)
 - [ ] Inspector: Chart|Series side panel with hero identity; live apply; Hide/Esc
 - [ ] Layout toolbar → Tab layout dialog (presets + interval); charts stay full width
 - [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart
 - [ ] Add series wizard: Type → X→Y (XY) or Y (TS) → Style; ClDesc axis limits; compact Style scroll
 - [ ] Multi-channel: series with `channel_index != 0` survives Interface.xml save/load
-- [ ] XY: visible with constant X (axis pad); AxisXmin/max + AxisYmin/max; scalars OK
+- [ ] XY: scalar pair; XY row/col snapshot curve; Line+Scatter mix OK; TS+XY blocked on same chart
 - [ ] Hover tooltip shows series binding + X/Y
 - [ ] LLM: `add_watch_series`, `set_panel_viz_kind`, `set_series_binding`, MDI create/list
 - [ ] Profiling (`UTableInfo`) opens without legacy Graph includes

@@ -15,6 +15,7 @@
 #include <vector>
 #include <atomic>
 #include <clocale>
+#include <cstdio>
 #include <locale>
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
@@ -26,6 +27,7 @@
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 #include "../../../Rdk/GUI/Qt/UGuiModelSnapshot.h"
+#include "../../../Rdk/GUI/Qt/Plot/WatchDebug.h"
 
 QProgressDialog* d(NULL);
 std::atomic<bool> g_cancelRequested(false);
@@ -183,10 +185,13 @@ int main(int argc, char *argv[])
                                             "seconds");
     const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
                                              "Exit application after calculations finish.");
+    const QCommandLineOption watchDebugOption(QStringList() << "watch-debug",
+                                              "Log Watch Track/reader/axis window diagnostics to stderr.");
     parser.addOption(configOption);
     parser.addOption(startCalcOption);
     parser.addOption(calcTimeOption);
     parser.addOption(exitAfterOption);
+    parser.addOption(watchDebugOption);
     parser.process(a);
 
     auto buildForwardArgs = []() {
@@ -214,7 +219,8 @@ int main(int argc, char *argv[])
             if(token == "--config" || token == "-c" ||
                token == "--start-calc" || token == "-s" ||
                token == "--calc-time" || token == "-t" ||
-               token == "--exit-after-calc" || token == "-x")
+               token == "--exit-after-calc" || token == "-x" ||
+               token == "--watch-debug")
             {
                 if(optionNeedsValue(token) && i + 1 < original.size())
                     ++i;
@@ -233,6 +239,7 @@ int main(int argc, char *argv[])
     const QString cliConfigPath = parser.value(configOption).trimmed();
     const bool cliStartCalc = parser.isSet(startCalcOption);
     const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
+    const bool cliWatchDebug = parser.isSet(watchDebugOption);
     double cliCalcTimeSec = 0.0;
     if(parser.isSet(calcTimeOption))
     {
@@ -372,6 +379,12 @@ int main(int argc, char *argv[])
         AppCore.calcTimeIntervalSec = cliCalcTimeSec;
     if(cliExitAfterCalc)
         AppCore.exitAfterCalcFlag = 1;
+    if(cliWatchDebug)
+    {
+        NMSDK::WatchDebug::setEnabled(true);
+        std::fprintf(stderr, "[WatchDebug] enabled via --watch-debug\n");
+        std::fflush(stderr);
+    }
 
     UGEngineControlWidget w(NULL, &AppCore.application);
 
