@@ -159,6 +159,7 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/Plot/PlotDataAdapter.cpp \
     ../../../Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.cpp \
     ../../../Rdk/GUI/Qt/Plot/PlotSurface.cpp \
+    ../../../Rdk/GUI/Qt/Plot/UWatchLayoutDialog.cpp \
     ../../../Rdk/GUI/Qt/Plot/UWatchMatrixSelector.cpp \
     ../../../Rdk/GUI/Qt/Plot/UWatchSourcePickerWidget.cpp \
     ../../../Rdk/GUI/Qt/Plot/UWatchSeriesWizard.cpp \
@@ -231,6 +232,7 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/Plot/PlotDataAdapter.h \
     ../../../Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.h \
     ../../../Rdk/GUI/Qt/Plot/PlotSurface.h \
+    ../../../Rdk/GUI/Qt/Plot/UWatchLayoutDialog.h \
     ../../../Rdk/GUI/Qt/Plot/UWatchMatrixSelector.h \
     ../../../Rdk/GUI/Qt/Plot/UWatchSourcePickerWidget.h \
     ../../../Rdk/GUI/Qt/Plot/UWatchSeriesWizard.h \

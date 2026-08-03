@@ -73,6 +73,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotDataAdapter.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotSurface.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchLayoutDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchMatrixSelector.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchSourcePickerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchSeriesWizard.cpp

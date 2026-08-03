@@ -36,15 +36,12 @@
 
 ### UX инспектора (Watch settings)
 
-Инспектор `PlotSettingsSidePanel` **скрыт по умолчанию** (графики на всю ширину; `QSplitter` charts|inspector).
+Разделение scope:
 
-Три явных scope-страницы вместо смешанного «Panel»:
+1. **Tab layout** — отдельный modal `UWatchLayoutDialog` (пресеты сетки + Custom, preview, `UpdateIntervalMs`). Toolbar **Layout** открывает только этот диалог; side panel не затрагивается.
+2. **Chart / Series** — `PlotSettingsSidePanel` в `QSplitter` (скрыт по умолчанию): hero «Chart N · title», combo активного графика, вкладки только Chart | Series. Live apply (без Apply-кнопок); формы в `QGroupBox` (Identity / Axes / Display; список серий + Selected series). Ширина ~320–420 px. Hide и Esc закрывают инспектор.
 
-1. **Layout** — сетка вкладки (`gridRows`/`gridCols`) и `UpdateIntervalMs`.
-2. **Chart** — активный `PlotPanel` (title, axes, viz, legend, track).
-3. **Series** — серии активного chart.
-
-Активный график задаётся кликом / combo в шапке / context menu; toolbar Layout/Chart/Series не сбрасывает выбор на chart 0. Hide и Esc закрывают инспектор.
+Активный график задаётся кликом / combo в шапке / context menu; Chart/Series toolbar не сбрасывает выбор на chart 0.
 
 ### Add series wizard
 
@@ -60,7 +57,8 @@ Commit через существующие `createSerie` / `createSerieXY`. Об
 
 - [x] Сборка `NeuroModeler` (linux-gcc-debug)
 - [ ] Watch window: add TimeSeries, pan/box zoom/track/reset modebar
-- [ ] Inspector hidden by default; Layout | Chart | Series pages; Hide/Esc
+- [ ] Inspector: Chart|Series side panel with hero identity; live apply; Hide/Esc
+- [ ] Layout toolbar → Tab layout dialog (presets + interval); charts stay full width
 - [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart
 - [ ] Add series wizard: Type → Sources (+ matrix) → optional Style; XY Y+X one page
 - [ ] Multi-channel: series with `channel_index != 0` survives Interface.xml save/load
