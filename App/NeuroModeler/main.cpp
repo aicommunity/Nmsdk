@@ -148,6 +148,9 @@ int main(int argc, char *argv[])
 
     // Создаем QApplication
     QApplication a(argc, argv);
+    // Qt may call setlocale(LC_ALL, "") during QApplication init; keep numeric C
+    // so strtod/printf and property paths always use '.' as decimal separator.
+    std::setlocale(LC_NUMERIC, "C");
 
     // Регистрируем типы для использования в Qt signals/slots с queued connections
     qRegisterMetaType<NMSDK::UGuiSnapshotPtr>("NMSDK::UGuiSnapshotPtr");
