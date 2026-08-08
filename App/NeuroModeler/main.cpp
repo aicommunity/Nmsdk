@@ -20,6 +20,8 @@
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
+#include "UGuiShellController.h"
+#include "UEngineControlStripWidget.h"
 #ifdef RDK_USE_LLM
 #include "NmsdkRegisterLlm.h"
 #endif
@@ -148,6 +150,7 @@ int main(int argc, char *argv[])
 
     // Создаем QApplication
     QApplication a(argc, argv);
+    a.setQuitOnLastWindowClosed(false);
     // Qt may call setlocale(LC_ALL, "") during QApplication init; keep numeric C
     // so strtod/printf and property paths always use '.' as decimal separator.
     std::setlocale(LC_NUMERIC, "C");
@@ -391,6 +394,14 @@ int main(int argc, char *argv[])
 
     UGEngineControlWidget w(NULL, &AppCore.application);
 
+    auto* shell = new UGuiShellController(&w, &a);
+    w.setShellController(shell);
+    auto* strip = new UEngineControlStripWidget(shell, &AppCore.application);
+    shell->setStrip(strip);
+    strip->bindHost(&w);
+    shell->installWindowMenuActions();
+    shell->loadSettings(QString::fromStdString(AppCore.guiShellPreset));
+
 #ifdef RDK_USE_LLM
     // Default: ShowLlmAssistantMenu=0 → skip LLM entirely (no index/provider cost on startup).
     // Enable via NeuroModeler.ini General/ShowLlmAssistantMenu=1 or NMSDK_LLM_ENABLE=1.
@@ -407,10 +418,7 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    if(AppCore.hideAdminForm)
-      w.hide();
-    else
-      w.show();
+    shell->applyStartupVisibility(AppCore.hideAdminForm != 0, AppCore.startMinimized != 0);
 
     AppCore.PostInit();
 
@@ -451,9 +459,6 @@ int main(int argc, char *argv[])
     configureAutomation();
 
     RDK::UIVisualControllerStorage::UpdateInterface(true);
-
-    if(AppCore.startMinimized)
-      w.showMinimized();
 
     d->setValue(100);
     d->hide();
