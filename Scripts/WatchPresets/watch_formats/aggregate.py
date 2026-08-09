@@ -11,7 +11,8 @@ from typing import Any, Dict, List, Sequence, Tuple
 from .common import NormalizedSerie
 from .cldesc_libs import build_class_to_library
 from .model_map import common_anchor, deepest_class, load_project_class_map
-from .path_roles import is_internal_role, normalize_role_path, template_role_path
+from .path_roles import is_internal_role, normalize_role_path
+from .composition import is_variable_neuron_path
 
 
 def _slug(parts: Sequence[str]) -> str:
@@ -86,9 +87,7 @@ def aggregate_drafts(
                 role = normalize_role_path(s.rel_path)
                 if s.anchor_class != s.y_class or role:
                     bump_single(s.anchor_class, role, s.y.property, s.project, s.format)
-                tmpl = template_role_path(role)
-                if tmpl and s.anchor_class:
-                    bump_single(s.anchor_class, tmpl, s.y.property, s.project, s.format)
+                # Do not bump wildcard template keys (Dendrite*) — not resolvable presets.
 
     for _key, group in by_graph.items():
         if len(group) < 2:
@@ -169,30 +168,23 @@ def aggregate_drafts(
         )
 
     for (cls, path, prop), count in single.most_common():
-        if "*" in path:
-            # template keys: keep only if enough hits and no concrete yet
-            if count < min_hits_internal:
-                continue
-        elif count < hits_threshold(path):
+        if "*" in path or "*" in prop:
+            continue
+        if count < hits_threshold(path):
+            continue
+        if is_variable_neuron_path(path):
             continue
         doc = ensure_class(cls)
-        pid = _slug([path.replace("*", "star"), prop])
+        pid = _slug([path, prop])
         if any(p["id"] == pid for p in doc["presets"]):
             continue
-        path_out = path
-        if path.startswith("Dendrite*."):
-            path_out = "Dendrite1_1." + path.split(".", 1)[1]
-        elif path == "Dendrite*":
-            path_out = "Dendrite1_1"
-        elif "*" in path:
-            path_out = path.replace("*", "1")
         doc["presets"].append(
             {
                 "id": pid,
                 "title": f"{path + '.' if path else ''}{prop}",
                 "description": f"Auto-mined property (hits={count})",
                 "vizKind": "TimeSeries",
-                "series": [{"path": path_out, "property": prop, "jx": 0, "jy": 0}],
+                "series": [{"path": path, "property": prop, "jx": 0, "jy": 0}],
                 "evidence": {
                     "hitCount": count,
                     "formats": sorted(single_formats[(cls, path, prop)]),

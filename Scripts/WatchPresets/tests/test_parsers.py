@@ -9,7 +9,11 @@ sys.path.insert(0, str(ROOT))
 
 from watch_formats.bcb_watch import parse_bcb_watch
 from watch_formats.common import parse_xml_file
-from watch_formats.composition import default_composition, expand_presets_for_class
+from watch_formats.composition import (
+    default_composition,
+    expand_presets_for_class,
+    series_signature,
+)
 from watch_formats.legend_parse import parse_legend
 from watch_formats.model_map import load_class_map_from_xml
 from watch_formats.path_roles import normalize_role_path, template_role_path
@@ -72,6 +76,49 @@ class TestCompositionExpand(unittest.TestCase):
         inh = next(p for p in expanded if p["id"] == "inherited:LTZone:output")
         self.assertEqual(inh["series"][0]["path"], "LTZone")
         self.assertEqual(inh["series"][0]["property"], "Output")
+
+    def test_dedupe_identical_series(self):
+        by_class = {
+            "NPLTZone": [
+                {
+                    "id": "output",
+                    "title": "A",
+                    "series": [{"path": "", "property": "Output", "jx": 0, "jy": 0}],
+                }
+            ],
+            "NPulseLTZoneCable": [
+                {
+                    "id": "output",
+                    "title": "B",
+                    "series": [{"path": "", "property": "Output", "jx": 0, "jy": 0}],
+                }
+            ],
+        }
+        # Selecting leaf: family would duplicate Output — only one remains
+        expanded = expand_presets_for_class("NPLTZone", by_class, default_composition())
+        outs = [p for p in expanded if series_signature(p).endswith("|Output|0|0") or series_signature(p) == "|Output|0|0"]
+        self.assertEqual(len(outs), 1)
+
+    def test_skip_wildcard_and_dendrite_on_neuron(self):
+        by_class = {
+            "NSPNeuron": [
+                {
+                    "id": "bad",
+                    "title": "Dendrite*.ExcChannel.Output",
+                    "series": [
+                        {"path": "Dendrite1_1.ExcChannel", "property": "Output", "jx": 0, "jy": 0}
+                    ],
+                },
+                {
+                    "id": "ok",
+                    "title": "Output",
+                    "series": [{"path": "", "property": "Output", "jx": 0, "jy": 0}],
+                },
+            ]
+        }
+        expanded = expand_presets_for_class("NSPNeuron", by_class, default_composition())
+        ids = [p["id"] for p in expanded]
+        self.assertEqual(ids, ["ok"])
 
 
 class TestParsers(unittest.TestCase):

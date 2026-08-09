@@ -8,7 +8,12 @@ from typing import Any, Dict, List, Optional
 
 
 def default_composition() -> Dict[str, Any]:
-    """Hand-authored map derived from NPulseLibrary UploadClass + BuildStructure."""
+    """Hand-authored map derived from NPulseLibrary UploadClass + BuildStructure.
+
+    Neuron parents only expose stable always-present slots (LTZone).
+    Variable structure (SomaN, Dendrite*, synapses, channels) is NOT inherited
+    onto the neuron root — select those instances directly when needed.
+    """
     membrane_classic = [
         {"slot": "ExcChannel", "childClass": "NPExcChannel"},
         {"slot": "InhChannel", "childClass": "NPInhChannel"},
@@ -28,80 +33,32 @@ def default_composition() -> Dict[str, Any]:
         {"slot": "InhSynapse1", "childClass": "NPSynapseBio2"},
     ]
 
+    # Stable slot only: LTZone is always built for these neuron templates.
     parents = {
-        "NPNeuron": [
-            {"slot": "LTZone", "childClass": "NPLTZone"},
-            {"slot": "Soma1", "childClass": "NPMembrane"},
-        ],
-        "NPulseNeuronIaF": [
-            {"slot": "LTZone", "childClass": "NPulseLTZoneIaF"},
-            {"slot": "Soma1", "childClass": "NPulseMembraneIaF"},
-        ],
-        "NPulseNeuronCable": [
-            {"slot": "LTZone", "childClass": "NPulseLTZoneCable"},
-            {"slot": "Soma1", "childClass": "NPulseMembraneCable"},
-        ],
-        "NPulseNeuronCableMulti": [
-            {"slot": "LTZone", "childClass": "NPulseLTZoneCable"},
-            {"slot": "Soma1", "childClass": "NPulseMembraneCableMulti"},
-        ],
-        "NSPNeuron": [
-            {"slot": "LTZone", "childClass": "NPLTZone"},
-            {"slot": "Soma1", "childClass": "NPMembrane"},
-            {"slot": "Dendrite1_1", "childClass": "NPMembrane"},
-        ],
-        "NSPNeuronGen": [
-            {"slot": "LTZone", "childClass": "NPulseLTZoneThreshold"},
-            {"slot": "Soma1", "childClass": "NPMembraneBio"},
-            {"slot": "Dendrite1_1", "childClass": "NPMembraneBio"},
-        ],
-        "NSPNeuronBio": [
-            {"slot": "LTZone", "childClass": "NPulseLTZoneThresholdBio"},
-            {"slot": "Soma1", "childClass": "NPMembraneBio"},
-            {"slot": "Dendrite1_1", "childClass": "NPMembraneBio"},
-        ],
-        "NSPNeuronBio2": [
-            {"slot": "LTZone", "childClass": "NPulseLTZoneThresholdBio2"},
-            {"slot": "Soma1", "childClass": "NPMembraneBio2"},
-            {"slot": "Dendrite1_1", "childClass": "NPMembraneBio2"},
-        ],
-        "NNewSPNeuron": [
-            {"slot": "LTZone", "childClass": "NPLTZone"},
-            {"slot": "Soma1", "childClass": "NPMembrane"},
-        ],
+        "NPNeuron": [{"slot": "LTZone", "childClass": "NPLTZone"}],
+        "NPulseNeuronIaF": [{"slot": "LTZone", "childClass": "NPulseLTZoneIaF"}],
+        "NPulseNeuronCable": [{"slot": "LTZone", "childClass": "NPulseLTZoneCable"}],
+        "NPulseNeuronCableMulti": [{"slot": "LTZone", "childClass": "NPulseLTZoneCable"}],
+        "NSPNeuron": [{"slot": "LTZone", "childClass": "NPLTZone"}],
+        "NSPNeuronGen": [{"slot": "LTZone", "childClass": "NPulseLTZoneThreshold"}],
+        "NSPNeuronBio": [{"slot": "LTZone", "childClass": "NPulseLTZoneThresholdBio"}],
+        "NSPNeuronBio2": [{"slot": "LTZone", "childClass": "NPulseLTZoneThresholdBio2"}],
+        "NNewSPNeuron": [{"slot": "LTZone", "childClass": "NPLTZone"}],
     }
-
-    # Expand Favorites-style always-present nested slots on neuron parents
-    for pname, slots in list(parents.items()):
-        soma = next((s for s in slots if s["slot"] == "Soma1"), None)
-        if not soma:
-            continue
-        mclass = soma["childClass"]
-        if mclass == "NPMembrane":
-            nested = membrane_classic
-        elif mclass == "NPMembraneBio":
-            nested = membrane_bio
-        elif mclass == "NPMembraneBio2":
-            nested = membrane_bio2
-        else:
-            nested = [
-                {"slot": "ExcChannel", "childClass": "NPExcChannel"},
-                {"slot": "InhChannel", "childClass": "NPInhChannel"},
-            ]
-        for n in nested:
-            parents[pname].append(
-                {"slot": f"Soma1.{n['slot']}", "childClass": n["childClass"]}
-            )
 
     return {
         "schemaVersion": 1,
         "parents": parents,
+        # When the selected instance IS a membrane, channels/synapses on that
+        # instance are still useful (one membrane → few children).
         "membraneChildren": {
             "NPMembrane": membrane_classic,
             "NPNeuronMembrane": membrane_classic,
             "NPMembraneBio": membrane_bio,
             "NPMembraneBio2": membrane_bio2,
         },
+        # Families: leaf roles with interchangeable properties only.
+        # Do NOT group whole neurons (identical SomaSumPotential spam).
         "families": {
             "ltzone": [
                 "NPLTZone",
@@ -132,27 +89,11 @@ def default_composition() -> Dict[str, Any]:
                 "NPInhChannelBio",
                 "NPInhChannelBio2",
             ],
-            "membrane": [
-                "NPMembrane",
-                "NPMembraneBio",
-                "NPMembraneBio2",
-                "NPNeuronMembrane",
-                "NPulseMembraneIaF",
-                "NPulseMembraneCable",
-                "NPulseMembraneCableMulti",
-            ],
             "generator": [
                 "NPGenerator",
                 "NPulseGeneratorTransit",
                 "NPulseGeneratorMulti",
                 "NCGenerator",
-            ],
-            "sp_neuron": [
-                "NSPNeuron",
-                "NSPNeuronGen",
-                "NSPNeuronBio",
-                "NSPNeuronBio2",
-                "NNewSPNeuron",
             ],
         },
     }
@@ -172,6 +113,59 @@ def load_composition(path: Path) -> Dict[str, Any]:
     return default_composition()
 
 
+def series_signature(preset: Dict[str, Any]) -> str:
+    keys = []
+    for s in preset.get("series") or []:
+        keys.append(
+            f"{s.get('path') or ''}|{s.get('property') or ''}|"
+            f"{s.get('jx', 0)}|{s.get('jy', 0)}"
+        )
+    return ";".join(sorted(keys))
+
+
+def preset_has_wildcard(preset: Dict[str, Any]) -> bool:
+    for s in preset.get("series") or []:
+        if "*" in (s.get("path") or "") or "*" in (s.get("property") or ""):
+            return True
+        if "*" in (preset.get("title") or "") or "*" in (preset.get("id") or ""):
+            return True
+    return False
+
+
+def is_variable_neuron_path(path: str) -> bool:
+    """Paths that should not appear as neuron-root presets.
+
+    Stable: empty (root props), LTZone, Soma1 (first soma is always built).
+    Variable: Dendrite*, Soma2+, synapses, channels.
+    """
+    if not path:
+        return False
+    if "*" in path:
+        return True
+    if path == "LTZone" or path.startswith("LTZone."):
+        return False
+    if path == "Soma1" or path.startswith("Soma1."):
+        # Soma1 itself OK for curated multi (spikes+soma); nested channel/synapse under Soma1 not
+        rest = path[5:].lstrip(".")
+        if not rest:
+            return False
+        if rest in ("ExcChannel", "InhChannel") or rest.startswith("ExcSynapse") or rest.startswith(
+            "InhSynapse"
+        ):
+            return True
+        return True  # any deeper under Soma1 treated as variable for neuron-root list
+    p = path.split(".")[0]
+    if p.startswith("Dendrite"):
+        return True
+    if p.startswith("Soma") and p[4:].isdigit():
+        return True
+    if "ExcSynapse" in path or "InhSynapse" in path:
+        return True
+    if path.endswith("ExcChannel") or path.endswith("InhChannel"):
+        return True
+    return False
+
+
 def expand_presets_for_class(
     class_name: str,
     by_class: Dict[str, List[Dict[str, Any]]],
@@ -181,15 +175,28 @@ def expand_presets_for_class(
     composition = composition or default_composition()
     out: List[Dict[str, Any]] = []
     seen_ids = set()
+    seen_sigs = set()
 
     def add(preset: Dict[str, Any], new_id: Optional[str] = None) -> None:
         p = dict(preset)
         if new_id:
             p = {**p, "id": new_id}
+        if preset_has_wildcard(p):
+            return
+        # Drop variable structure when listing for any class that uses parent map
+        # (neuron roots); still allow empty-path root props.
+        for s in p.get("series") or []:
+            if is_variable_neuron_path(s.get("path") or ""):
+                if class_name in composition.get("parents", {}):
+                    return
         pid = p.get("id", "")
         if pid in seen_ids:
             return
+        sig = series_signature(p)
+        if not sig or sig in seen_sigs:
+            return
         seen_ids.add(pid)
+        seen_sigs.add(sig)
         out.append(p)
 
     for p in by_class.get(class_name, []):
@@ -209,7 +216,6 @@ def expand_presets_for_class(
                 new_id=f"inherited:{slot}:{p.get('id', '')}",
             )
 
-    # membrane one-level when selecting membrane class
     for slot_info in composition.get("membraneChildren", {}).get(class_name, []):
         slot = slot_info["slot"]
         child = slot_info["childClass"]
@@ -225,7 +231,7 @@ def expand_presets_for_class(
             )
 
     family_of = None
-    for fname, members in composition.get("families", {}).items():
+    for _fname, members in composition.get("families", {}).items():
         if class_name in members:
             family_of = members
             break

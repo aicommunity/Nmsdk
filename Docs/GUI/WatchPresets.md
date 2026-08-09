@@ -28,9 +28,9 @@ WatchPresetsPath=../../WatchPresets/
 2. **Inherited** — пресеты детей из `composition.json` (`parents` / `membraneChildren`) с rewrite `path` (`""` → `LTZone`, …). Id: `inherited:<slot>:<id>`.
 3. **Family** — own-пресеты sibling-классов одной роли (`ltzone`, `synapse`, …). Id: `family:<Sibling>:<id>`.
 
-Resolve: `GetComponentL` + property exists + `isWatchableLanguageType`; при ошибке — полный reject.
-
-Пример: выбран `NPNeuron` → виден `NPLTZone.Output` как `LTZone.Output`.
+- Вариативная структура (`Soma2+` / `Dendrite*` / синапсы / каналы) **не** показывается в пресетах корня нейрона — выбирайте эти экземпляры напрямую. Родитель наследует только стабильный **LTZone** (курация может явно указывать `Soma1`).
+- Полностью одинаковые наборы серий дедуплицируются (own важнее family).
+- Пути с `*` никогда не показываются.
 
 ## Схема JSON (`schemaVersion: 1`)
 
