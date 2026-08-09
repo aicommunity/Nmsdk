@@ -92,8 +92,10 @@ TS matrix resize: фиксированные jx/jy — при уменьшени
 - [ ] Inspector: Chart|Series side panel with hero identity; live apply; Hide/Esc
 - [ ] Layout toolbar → Tab layout dialog (presets + interval); charts stay full width
 - [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart
+- [x] Watch presets: LIF root (`NPulseNeuronIaF` spikes+soma); leaf `NPulseLTZoneIaF`; `NPGenerator`
+- [x] Watch presets: composition inherit (`NPNeuron`→`LTZone`); coverage ≥95% named hits
 - [ ] Add series wizard: Manual Type → X→Y (XY) or Y (TS) → Style; Preset → Component → Select → Style; ClDesc axis limits
-- [ ] Watch presets: LIF root (`NPulseNeuronIaF` spikes+soma); leaf `NPulseLTZoneIaF`; `NPGenerator`
+- [ ] Watch presets GUI smoke: LIF / NPGenerator / NPNeuron nested LTZone
 - [ ] Multi-channel: series with `channel_index != 0` survives Interface.xml save/load
 - [ ] XY: scalar pair; XY row/col snapshot curve; Line+Scatter mix OK; TS+XY blocked on same chart
 - [ ] Hover tooltip shows series binding + X/Y

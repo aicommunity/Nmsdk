@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Sequence, Tuple
 from .common import NormalizedSerie
 from .cldesc_libs import build_class_to_library
 from .model_map import common_anchor, deepest_class, load_project_class_map
+from .path_roles import is_internal_role, normalize_role_path, template_role_path
 
 
 def _slug(parts: Sequence[str]) -> str:
@@ -54,6 +55,7 @@ def aggregate_drafts(
     out_root: Path,
     min_hits: int = 3,
     min_cooccur: int = 2,
+    min_hits_internal: int = 2,
 ) -> Dict[str, Any]:
     lib_map = build_class_to_library(cldesc_root)
     single: Counter = Counter()
@@ -66,25 +68,27 @@ def aggregate_drafts(
     multi_formats: Dict[Any, set] = defaultdict(set)
     multi_series_map: Dict[Any, List[Tuple[str, str, int, int]]] = {}
 
+    def bump_single(cls: str, path: str, prop: str, project: str, fmt: str) -> None:
+        key = (cls, path, prop)
+        single[key] += 1
+        if len(single_examples[key]) < 5:
+            single_examples[key].append(project)
+        single_formats[key].add(fmt)
+
     by_graph: Dict[Tuple[str, str, str], List[NormalizedSerie]] = defaultdict(list)
     for s in all_series:
         by_graph[(s.project, s.container, s.graph_id)].append(s)
         if s.y and s.y_class and s.y.property and not s.unmatched_property:
-            # single keyed by leaf class + rel from leaf (usually "")
-            key = (s.y_class, "", s.y.property)
-            # Prefer path relative to leaf: always "" for deepest class property
-            single[key] += 1
-            if len(single_examples[key]) < 5:
-                single_examples[key].append(s.project)
-            single_formats[key].add(s.format)
+            # leaf class + empty path
+            bump_single(s.y_class, "", s.y.property, s.project, s.format)
 
             if s.anchor_class and s.rel_path is not None:
-                key2 = (s.anchor_class, s.rel_path, s.y.property)
-                if s.anchor_class != s.y_class or s.rel_path:
-                    single[key2] += 1
-                    if len(single_examples[key2]) < 5:
-                        single_examples[key2].append(s.project)
-                    single_formats[key2].add(s.format)
+                role = normalize_role_path(s.rel_path)
+                if s.anchor_class != s.y_class or role:
+                    bump_single(s.anchor_class, role, s.y.property, s.project, s.format)
+                tmpl = template_role_path(role)
+                if tmpl and s.anchor_class:
+                    bump_single(s.anchor_class, tmpl, s.y.property, s.project, s.format)
 
     for _key, group in by_graph.items():
         if len(group) < 2:
@@ -96,7 +100,8 @@ def aggregate_drafts(
         for s in group:
             if not s.y or not s.y.property or s.unmatched_property:
                 continue
-            sig_list.append((s.rel_path, s.y.property, s.y.jx, s.y.jy))
+            role = normalize_role_path(s.rel_path or "")
+            sig_list.append((role, s.y.property, s.y.jx, s.y.jy))
         if len(sig_list) < 2:
             continue
         frozen = frozenset((p, prop) for p, prop, _jx, _jy in sig_list)
@@ -121,6 +126,9 @@ def aggregate_drafts(
             }
         return drafts[class_name]
 
+    def hits_threshold(path: str) -> int:
+        return min_hits_internal if is_internal_role(path) else min_hits
+
     for (anchor, frozen), count in multi.most_common():
         if count < min_cooccur:
             continue
@@ -128,6 +136,9 @@ def aggregate_drafts(
         series_specs = []
         seen = set()
         for path, prop, jx, jy in multi_series_map[(anchor, frozen)]:
+            # Prefer concrete role over wildcard templates in multi output
+            if "*" in path:
+                continue
             t = (path, prop)
             if t in seen:
                 continue
@@ -135,6 +146,8 @@ def aggregate_drafts(
             series_specs.append(
                 {"path": path, "property": prop, "jx": jx, "jy": jy}
             )
+        if len(series_specs) < 2:
+            continue
         title_bits = [
             f"{s['path'] + '.' if s['path'] else ''}{s['property']}"
             for s in series_specs
@@ -156,21 +169,30 @@ def aggregate_drafts(
         )
 
     for (cls, path, prop), count in single.most_common():
-        if count < min_hits:
+        if "*" in path:
+            # template keys: keep only if enough hits and no concrete yet
+            if count < min_hits_internal:
+                continue
+        elif count < hits_threshold(path):
             continue
         doc = ensure_class(cls)
-        # skip if already covered as lone series of a multi with same id
-        pid = _slug([path, prop])
+        pid = _slug([path.replace("*", "star"), prop])
         if any(p["id"] == pid for p in doc["presets"]):
             continue
-        # skip singles that are exact one-item subset of existing multi? keep for leaf UX
+        path_out = path
+        if path.startswith("Dendrite*."):
+            path_out = "Dendrite1_1." + path.split(".", 1)[1]
+        elif path == "Dendrite*":
+            path_out = "Dendrite1_1"
+        elif "*" in path:
+            path_out = path.replace("*", "1")
         doc["presets"].append(
             {
                 "id": pid,
                 "title": f"{path + '.' if path else ''}{prop}",
                 "description": f"Auto-mined property (hits={count})",
                 "vizKind": "TimeSeries",
-                "series": [{"path": path, "property": prop, "jx": 0, "jy": 0}],
+                "series": [{"path": path_out, "property": prop, "jx": 0, "jy": 0}],
                 "evidence": {
                     "hitCount": count,
                     "formats": sorted(single_formats[(cls, path, prop)]),
@@ -193,7 +215,7 @@ def aggregate_drafts(
     report = {
         "classes": len(drafts),
         "presets": sum(len(d["presets"]) for d in drafts.values()),
-        "singleKeys": sum(1 for _, c in single.items() if c >= min_hits),
+        "singleKeys": sum(1 for (c, p, pr), n in single.items() if n >= hits_threshold(p)),
         "multiKeys": sum(1 for _, c in multi.items() if c >= min_cooccur),
         "topSingles": [
             {"class": a, "path": b, "property": c, "hits": n}

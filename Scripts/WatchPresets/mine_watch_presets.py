@@ -19,6 +19,8 @@ if str(_SCRIPT_DIR) not in sys.path:
 from watch_formats.aggregate import aggregate_drafts, annotate_with_classes
 from watch_formats.bcb_watch import parse_bcb_watch
 from watch_formats.common import parse_xml_file
+from watch_formats.composition import load_composition, write_composition_json
+from watch_formats.coverage import write_coverage_reports
 from watch_formats.qt_watch import parse_qt_mdi, parse_qt_tabs
 
 
@@ -48,6 +50,7 @@ def main() -> int:
     ap.add_argument("--cldesc", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--min-hits", type=int, default=3)
+    ap.add_argument("--min-hits-internal", type=int, default=2)
     ap.add_argument("--min-cooccur", type=int, default=2)
     args = ap.parse_args()
 
@@ -58,6 +61,12 @@ def main() -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     meta = args.out / "meta"
     meta.mkdir(parents=True, exist_ok=True)
+
+    # Ensure composition map exists at catalog root
+    composition_path = args.out / "composition.json"
+    if not composition_path.is_file():
+        write_composition_json(composition_path)
+    composition = load_composition(composition_path)
 
     all_series: list = []
     format_counts = Counter()
@@ -111,6 +120,7 @@ def main() -> int:
         args.out,
         min_hits=args.min_hits,
         min_cooccur=args.min_cooccur,
+        min_hits_internal=args.min_hits_internal,
     )
     report["projectsScanned"] = projects_scanned
     report["seriesTotal"] = len(all_series)
@@ -150,9 +160,11 @@ def main() -> int:
         )
     (meta / "mining-report.md").write_text("\n".join(md_lines) + "\n", encoding="utf-8")
 
+    cov = write_coverage_reports(args.out, composition)
     print(f"Wrote {bindings_path}")
     print(f"Draft presets under {args.out / 'draft'}")
     print(f"Report: {meta / 'mining-report.md'}")
+    print(f"Coverage: {meta / 'coverage.md'} ({cov['hitCoverage']*100:.1f}%)")
     return 0 if not errors else 0  # non-fatal errors
 
 

@@ -7,19 +7,30 @@
 | Что | Путь |
 |-----|------|
 | Каталог продукта | `Bin/WatchPresets/<Library>/<ClassName>.json` |
+| Композиция / семьи | `Bin/WatchPresets/composition.json` |
 | Черновики майнера | `Bin/WatchPresets/draft/` (runtime **не** загружает) |
-| Отчёт майнера | `Bin/WatchPresets/meta/` (runtime **не** загружает) |
+| Отчёты | `Bin/WatchPresets/meta/` (`mining-report`, `coverage`) |
 | Непривязанные классы | `Bin/WatchPresets/Unassigned/` (загружается) |
 | Майнер / тесты | `Scripts/WatchPresets/` |
 
-INI (`Project.ini` / settings):
+INI:
 
 ```ini
 [General]
 WatchPresetsPath=../../WatchPresets/
 ```
 
-По умолчанию — соседняя папка с `ClDescPath`. Runtime: `UApplication::GetWatchPresetsPath()` → `WatchPresetCatalog`.
+## Наследование (composition + families)
+
+`WatchPresetCatalog::presetsForClass` возвращает:
+
+1. **Own** — JSON выбранного класса.
+2. **Inherited** — пресеты детей из `composition.json` (`parents` / `membraneChildren`) с rewrite `path` (`""` → `LTZone`, …). Id: `inherited:<slot>:<id>`.
+3. **Family** — own-пресеты sibling-классов одной роли (`ltzone`, `synapse`, …). Id: `family:<Sibling>:<id>`.
+
+Resolve: `GetComponentL` + property exists + `isWatchableLanguageType`; при ошибке — полный reject.
+
+Пример: выбран `NPNeuron` → виден `NPLTZone.Output` как `LTZone.Output`.
 
 ## Схема JSON (`schemaVersion: 1`)
 
@@ -32,7 +43,6 @@ WatchPresetsPath=../../WatchPresets/
     {
       "id": "spikes_and_soma",
       "title": "Spikes + soma potential",
-      "description": "…",
       "vizKind": "TimeSeries",
       "series": [
         { "path": "LTZone", "property": "Output", "jx": 0, "jy": 0 },
@@ -43,44 +53,32 @@ WatchPresetsPath=../../WatchPresets/
 }
 ```
 
-- Ключ пресета — **класс выбранного экземпляра** (не родителя).
-- `path: ""` — свойство самого выбранного компонента.
-- `path: "LTZone"` → `rootLongName + ".LTZone"`.
-- `vizKind`: `TimeSeries` | `XYLine` | `XYScatter`.
-- Наследование пресетов родителя в v1 **не** делается.
+Ключ — класс **выбранного** экземпляра. Nested path относительно него.
 
-## Wizard (Manual | Preset)
+## Wizard
 
-`UWatchSeriesWizard`:
+Manual | Preset → Component (class only) → Preset list (own+inherited+family) → Style → `createSerie`.
 
-1. **Type** — Manual (как раньше: Kind + Source form) или Preset.
-2. **Preset → Component** — выбор экземпляра; class через `componentClassNameFromModelScope`. Property **не** обязателен.
-3. **Preset → Select** — список `presetsForClass`; preview серий; resolve через `GetComponentL`.
-4. **Style** — имя prefill от `title`; цвет / shift.
-5. **Apply** — цикл `createSerie` / `createSerieXY`; при ошибке resolve — без частичного набора.
-
-Семейство графика (TS vs XY) блокируется так же, как в Manual.
-
-Код: `Rdk/GUI/Qt/Plot/WatchPresetCatalog.*`, `UWatchSeriesWizard.*`.
-
-## Майнинг из конфигов
+## Майнинг и покрытие
 
 ```bash
 python3 Scripts/WatchPresets/mine_watch_presets.py \
-  --configs Bin/Configs \
-  --cldesc Bin/ClDesc \
-  --out Bin/WatchPresets \
-  --min-hits 3
+  --configs Bin/Configs --cldesc Bin/ClDesc --out Bin/WatchPresets \
+  --min-hits 3 --min-hits-internal 2
+
+python3 Scripts/WatchPresets/promote_drafts.py \
+  --out Bin/WatchPresets --cldesc Bin/ClDesc --min-hits 1
+
+python3 Scripts/WatchPresets/check_coverage.py \
+  --out Bin/WatchPresets --min-hit-coverage 0.95
 
 python3 -m unittest Scripts/WatchPresets/tests/test_parsers.py
 ```
 
-Парсеры: BCB `UWatchForm` / `UWatchFrame_*`, Qt v1 `serie_*`, Qt v2 role fields, MDI `Watches_*`; class map из `Model_*.xml` и legacy `model.xml`.
+Slot-роли (`LTZone`, `Dendrite1_1.ExcChannel`, …) нормализуют instance-paths при агрегации. Coverage считает только серии с именованным property (numeric-only BCB unmatched исключены).
 
-Курация: правки в `Bin/WatchPresets/<Lib>/` (submodule `Nmsdk-Bin`); `draft/` в продукт не коммитить как «истину».
+Цель: ≥95% hit-coverage; own JSON для всех `yClass` с ≥5 named hits.
 
 ## Связь с ClDesc
 
-Convention + docs; **без** новых XML-тегов ClDesc в первом релизе.
-
-См. также [ADR-PlotDocument.md](ADR-PlotDocument.md) (Add series wizard).
+Convention + Favorites paths; без новых XML-тегов. См. [ADR-PlotDocument.md](ADR-PlotDocument.md).
