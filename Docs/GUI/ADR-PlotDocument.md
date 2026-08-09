@@ -47,9 +47,12 @@
 
 GUI «Add series…» открывает `UWatchSeriesWizard`:
 
-1. **Type** — `VizKind` + form (TS: cell/multi/row/column → N серий; XY: cell pair **или** row/column snapshot curve). Hint: XY = parametric `(x,y)`, не ось времени.
-2. **Sources** — TS: **Y**; XY: **X → Y** (отдельные страницы).
-3. **Style** — scrollable; name/color/shift; ClDescr → X/Y min/max; для scalar XY Sampling (max points / min interval / min distance).
+1. **Type** — режим **Manual** | **Preset** (default Manual). Manual: `VizKind` + form (TS: cell/multi/row/column → N серий; XY: cell pair **или** row/column snapshot curve). Preset: Kind/Form скрыты → страницы компонента и выбора пресета.
+2. **Sources (Manual)** — TS: **Y**; XY: **X → Y** (отдельные страницы).
+3. **Preset** — компонент (class via `componentClassNameFromModelScope`) → пресет из `Bin/WatchPresets/` → Style. Resolve: `WatchPresetCatalog` + `GetComponentL`; без частичного apply.
+4. **Style** — scrollable; name/color/shift (в Preset name prefill от title); ClDescr → X/Y min/max; для scalar XY Sampling (max points / min interval / min distance).
+
+Каталог пресетов: [WatchPresets.md](WatchPresets.md).
 
 Семейства на одном chart **взаимоисключающие**: TimeSeries vs Y(x) (`XYLine`/`XYScatter`/matrix-slice). Внутри Y(x) Line+Scatter+slice можно смешивать.
 
@@ -89,7 +92,8 @@ TS matrix resize: фиксированные jx/jy — при уменьшени
 - [ ] Inspector: Chart|Series side panel with hero identity; live apply; Hide/Esc
 - [ ] Layout toolbar → Tab layout dialog (presets + interval); charts stay full width
 - [ ] Multi-chart grid: click + chrome; Chart/Series settings target active chart
-- [ ] Add series wizard: Type → X→Y (XY) or Y (TS) → Style; ClDesc axis limits; compact Style scroll
+- [ ] Add series wizard: Manual Type → X→Y (XY) or Y (TS) → Style; Preset → Component → Select → Style; ClDesc axis limits
+- [ ] Watch presets: LIF root (`NPulseNeuronIaF` spikes+soma); leaf `NPulseLTZoneIaF`; `NPGenerator`
 - [ ] Multi-channel: series with `channel_index != 0` survives Interface.xml save/load
 - [ ] XY: scalar pair; XY row/col snapshot curve; Line+Scatter mix OK; TS+XY blocked on same chart
 - [ ] Hover tooltip shows series binding + X/Y

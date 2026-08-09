@@ -165,6 +165,7 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/Plot/UWatchMatrixSelector.cpp \
     ../../../Rdk/GUI/Qt/Plot/UWatchSourcePickerWidget.cpp \
     ../../../Rdk/GUI/Qt/Plot/UWatchSeriesWizard.cpp \
+    ../../../Rdk/GUI/Qt/Plot/WatchPresetCatalog.cpp \
         main.cpp\
     ../../../Rdk/GUI/Qt/UComponentsListWidget.cpp \
     ../../../Rdk/GUI/Qt/UVisualControllerWidget.cpp \
@@ -241,6 +242,7 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/Plot/UWatchMatrixSelector.h \
     ../../../Rdk/GUI/Qt/Plot/UWatchSourcePickerWidget.h \
     ../../../Rdk/GUI/Qt/Plot/UWatchSeriesWizard.h \
+    ../../../Rdk/GUI/Qt/Plot/WatchPresetCatalog.h \
     ../../../Rdk/GUI/Qt/UTableInfo.h \
     ../../../Rdk/GUI/Qt/UTcpServerControlWidget.h \
     ../../../Rdk/GUI/Qt/UCurlFtpClientTestWidget.h \

@@ -13,7 +13,7 @@
 - **Список компонентов** - библиотека доступных компонентов
 - **Редактор свойств** - настройка параметров компонентов
 - **Окно логов** - мониторинг выполнения и отладка
-- **Окно графиков** - визуализация данных компонентов
+- **Окно графиков** - визуализация данных компонентов; пресеты Add series — [WatchPresets.md](WatchPresets.md)
 - **Управление проектами** - создание, открытие, сохранение проектов
 - **Component GUI hosts** - MDI / floating dock / tab-host; см. [ComponentGui-NativeDock-Smoke.md](ComponentGui-NativeDock-Smoke.md)
 - **Performance epic (deferred)** - [GuiModelSnapshot-Epic.md](GuiModelSnapshot-Epic.md)
