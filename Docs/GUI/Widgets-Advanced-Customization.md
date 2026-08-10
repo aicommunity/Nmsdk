@@ -48,7 +48,7 @@ classDiagram
         +UComponentsListWidget* componentsList
         +UComponentPropertyChanger* propertyChanger
         +ULoggerWidget* loggerWidget
-        +UGraphWidget* graphWidget
+        +UWatch* watchWindow
         +SetupWidgets()
         +SetupMenuBar()
         +SetupToolBar()
@@ -69,20 +69,19 @@ classDiagram
         +OnPropertyChanged()
     }
     
-    class UGraphWidget {
-        +QCustomPlot* plot
-        +std::vector~UWatchSerie~* series
-        +AddSeries()
-        +UpdateGraph()
+    class UWatch {
+        +UWatchTab* tabs
+        +createTab()
+        +ASaveParameters()
     }
     
     UVisualControllerMainWidget <|-- UGEngineControlWidget
     UVisualControllerWidget <|-- UModernDiagramWidget
     UVisualControllerWidget <|-- UComponentPropertyChanger
-    UVisualControllerWidget <|-- UGraphWidget
+    UVisualControllerWidget <|-- UWatch
     UGEngineControlWidget --> UModernDiagramWidget
     UGEngineControlWidget --> UComponentPropertyChanger
-    UGEngineControlWidget --> UGraphWidget
+    UGEngineControlWidget --> UWatch
 ```
 
 ### Создание пользовательского виджета
@@ -460,22 +459,22 @@ public:
 
 ### Расширение функциональности существующих виджетов
 
-#### Пример 5: Расширение UGraphWidget
+#### Пример 5: Расширение UWatch
 
 ```cpp
-#include "UGraphWidget.h"
+#include "UWatch.h"
 #include "UWatchChart.h"
 #include "UWatchSerie.h"
 #include <QMenu>
 #include <QContextMenuEvent>
 
-class ExtendedGraphWidget : public RDK::UGraphWidget
+class ExtendedWatchWidget : public UWatch
 {
     Q_OBJECT
     
 public:
-    ExtendedGraphWidget(QWidget* parent = nullptr, RDK::UApplication* app = nullptr)
-        : UGraphWidget(parent, app)
+    ExtendedWatchWidget(QWidget* parent = nullptr)
+        : UWatch(parent)
     {
         setupExtendedFeatures();
     }
@@ -777,7 +776,7 @@ classDiagram
         +UComponentsListWidget* componentsList
         +UComponentPropertyChanger* propertyChanger
         +ULoggerWidget* loggerWidget
-        +UGraphWidget* graphWidget
+        +UWatch* watchWindow
         +SetupWidgets()
         +SetupMenuBar()
         +SetupToolBar()
@@ -798,20 +797,19 @@ classDiagram
         +OnPropertyChanged()
     }
     
-    class UGraphWidget {
-        +QCustomPlot* plot
-        +std::vector~UWatchSerie~* series
-        +AddSeries()
-        +UpdateGraph()
+    class UWatch {
+        +UWatchTab* tabs
+        +createTab()
+        +ASaveParameters()
     }
     
     UVisualControllerMainWidget <|-- UGEngineControlWidget
     UVisualControllerWidget <|-- UModernDiagramWidget
     UVisualControllerWidget <|-- UComponentPropertyChanger
-    UVisualControllerWidget <|-- UGraphWidget
+    UVisualControllerWidget <|-- UWatch
     UGEngineControlWidget --> UModernDiagramWidget
     UGEngineControlWidget --> UComponentPropertyChanger
-    UGEngineControlWidget --> UGraphWidget
+    UGEngineControlWidget --> UWatch
 ```
 
 ### Creating Custom Widgets
@@ -1189,22 +1187,22 @@ public:
 
 ### Extending Existing Widget Functionality
 
-#### Example 5: Extending UGraphWidget
+#### Example 5: Extending UWatch
 
 ```cpp
-#include "UGraphWidget.h"
+#include "UWatch.h"
 #include "UWatchChart.h"
 #include "UWatchSerie.h"
 #include <QMenu>
 #include <QContextMenuEvent>
 
-class ExtendedGraphWidget : public RDK::UGraphWidget
+class ExtendedWatchWidget : public UWatch
 {
     Q_OBJECT
     
 public:
-    ExtendedGraphWidget(QWidget* parent = nullptr, RDK::UApplication* app = nullptr)
-        : UGraphWidget(parent, app)
+    ExtendedWatchWidget(QWidget* parent = nullptr)
+        : UWatch(parent)
     {
         setupExtendedFeatures();
     }

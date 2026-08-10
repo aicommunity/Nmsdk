@@ -13,7 +13,7 @@
 - **Список компонентов** - библиотека доступных компонентов
 - **Редактор свойств** - настройка параметров компонентов
 - **Окно логов** - мониторинг выполнения и отладка
-- **Окно графиков** - визуализация данных компонентов
+- **Окно графиков** - визуализация данных компонентов; пресеты Add series — [WatchPresets.md](WatchPresets.md)
 - **Управление проектами** - создание, открытие, сохранение проектов
 - **Component GUI hosts** - MDI / floating dock / tab-host; см. [ComponentGui-NativeDock-Smoke.md](ComponentGui-NativeDock-Smoke.md)
 - **Performance epic (deferred)** - [GuiModelSnapshot-Epic.md](GuiModelSnapshot-Epic.md)
@@ -27,7 +27,7 @@ flowchart TB
     MainWidget --> PropertyWidget[UComponentPropertyChanger]
     MainWidget --> ListWidget[UComponentsListWidget]
     MainWidget --> LogWidget[ULoggerWidget]
-    MainWidget --> GraphWidget[UGraphWidget]
+    MainWidget --> WatchWidget[UWatch]
     
     DiagramWidget --> Scene[UModernDiagramScene]
     Scene --> Nodes[UModernDiagramNodeItem]
@@ -38,11 +38,11 @@ flowchart TB
     Timer --> Update[AUpdateInterface]
     Update --> DiagramWidget
     Update --> PropertyWidget
-    Update --> GraphWidget
+    Update --> WatchWidget
     
     DiagramWidget --> App
     PropertyWidget --> App
-    GraphWidget --> App
+    WatchWidget --> App
 ```
 
 Все виджеты наследуются от `UVisualControllerWidget` или `UVisualControllerMainWidget` и получают указатель на `UApplication` при создании. Они используют этот указатель для доступа к движку (`UEngine`), хранилищу компонентов (`UStorage`) и проекту (`UProject`).
@@ -124,7 +124,7 @@ flowchart TB
     MainWidget --> PropertyWidget[UComponentPropertyChanger]
     MainWidget --> ListWidget[UComponentsListWidget]
     MainWidget --> LogWidget[ULoggerWidget]
-    MainWidget --> GraphWidget[UGraphWidget]
+    MainWidget --> WatchWidget[UWatch]
     
     DiagramWidget --> Scene[UModernDiagramScene]
     Scene --> Nodes[UModernDiagramNodeItem]
@@ -135,9 +135,9 @@ flowchart TB
     Timer --> Update[AUpdateInterface]
     Update --> DiagramWidget
     Update --> PropertyWidget
-    Update --> GraphWidget
+    Update --> WatchWidget
     
     DiagramWidget --> App
     PropertyWidget --> App
-    GraphWidget --> App
+    WatchWidget --> App
 ```

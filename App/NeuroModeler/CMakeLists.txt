@@ -61,16 +61,25 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGenericComponentControllerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentGuiBootstrap.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGEngineControlWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGuiShellController.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UEngineControlStripWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMatrixFormDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UVisualControllerMainWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatch.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UProjectDescriptionWindow.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChart.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartView.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchChartOption.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSerie.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSeriesOption.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchTab.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotDocument.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotDataAdapter.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/PlotSurface.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchLayoutDialog.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchMatrixSelector.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchSourcePickerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/UWatchSeriesWizard.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Plot/WatchPresetCatalog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentsListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentsListWidgetModern.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UEngineSelectionSync.cpp
@@ -96,13 +105,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UComponentPropertyChanger.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UStatusPanel.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleImagePainter.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/qcustomplot.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphControlDialog.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UGraphPaintWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UTableInfo.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchFormWidget.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UWatchSettingsDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UTcpServerControlWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UCurlFtpClientTestWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UClassDescriptionDisplay.cpp
@@ -111,6 +114,7 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/USingleClassListWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UQuickLinkDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownDocWindow.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
@@ -167,13 +171,23 @@ if(RDK_USE_LLM)
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkRegisterLlm.cpp
     ${CMAKE_SOURCE_DIR}/App/NeuroModeler/NmsdkLlmSettings.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Rdk-HardwareLib/Llm/RegisterHardwareLibLlmTools.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/Llm/RegisterBasicLibLlmTools.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/Llm/UPackBasicDocs.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/Llm/RegisterCvBasicLibLlmTools.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/Llm/UPackCvBasicDocs.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Llm/RegisterPulseLibLlmTools.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Llm/UPackPulseDocs.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-MotionControlLib/Llm/RegisterMotionControlLibLlmTools.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/LlmGuiBootstrap.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmGuiLocale.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmQtProviderSettingsSource.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmProviderSettingsWidget.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmAssistantDockWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChatInputCompleter.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChatMarkdown.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmDetailsHtml.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmCollapsibleDetailsWidget.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChatHistoryPanel.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChatHistoryArchive.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChatHistoryDialog.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Llm/ULlmChangePreviewWidget.cpp
@@ -199,7 +213,7 @@ target_link_libraries(NeuroModeler
     Nmsdk::Qt::Gui
     Nmsdk::Qt::Network
     Nmsdk::Qt::Charts
-    Nmsdk::Qt::Print
+    Nmsdk::Qt::Svg
     Nmsdk::Qt::Sql
     Nmsdk::Qt::Xml
     Nmsdk::Qt::Concurrent

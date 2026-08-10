@@ -344,8 +344,16 @@
       "description": "**Класс**: `NContinuesSynSPNeuron` — конфигурационный вариант мелкого непрерывного импульсного нейрона с оптимизированными синапсами. **Префикс**: `NContinues` — **Continues** (Continuous, непрерывный вариант компонента); **Аббревиатуры**: `Syn` — **Syn**apse (синапс); `SP` — **S**pike **P**attern (паттерн спайков). **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NContinuesSynSPNeuron\",..."
     },
     "NDataset": {
-      "header": "датасет",
-      "description": "**Класс**: `NDataset` — компонент для управления датасетами (выборками данных) для обучения и тестирования. **Регистрация**: `NPulseLibrary.cpp` → `UploadClass(\"NDataset\", ...)`. **Storage-инстансы**: `ClassName = \"NDataset\"` в `Bin/Configs/*/Model_*.xml`."
+      "header": "датасет из файла",
+      "description": "**Класс**: `NDataset` — загрузка датасета из файла и генерация спайков (лист `NDatasetBase`). **Регистрация**: `UploadClass(\"NDataset\", ...)`. Для ручного ввода матриц см. `NDatasetMatrix`."
+    },
+    "NDatasetMatrix": {
+      "header": "датасет спайков из матрицы",
+      "description": "**Класс**: `NDatasetMatrix` — датасет с MatrixData/MatrixClasses как редактируемыми параметрами (лист `NDatasetBase`). **Регистрация**: `UploadClass(\"NDatasetMatrix\", ...)`."
+    },
+    "NDatasetBase": {
+      "header": "база датасетов спайков",
+      "description": "**Класс**: `NDatasetBase` — общая база для `NDataset` и `NDatasetMatrix`. В Storage не регистрируется."
     },
     "NEyeMuscle": {
       "header": "глазная мышца",

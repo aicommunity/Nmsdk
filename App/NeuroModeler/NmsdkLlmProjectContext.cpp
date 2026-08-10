@@ -10,6 +10,8 @@
 #include <rdk_application.h>
 
 #include "../../Libraries/Rdk-HardwareLib/Llm/RegisterHardwareLibLlmTools.h"
+#include "../../Libraries/Rdk-BasicLib/Llm/RegisterBasicLibLlmTools.h"
+#include "../../Libraries/Rdk-CvBasicLib/Llm/RegisterCvBasicLibLlmTools.h"
 #include "../../Libraries/Nmsdk-PulseLib/Llm/RegisterPulseLibLlmTools.h"
 #include "../../Libraries/Nmsdk-MotionControlLib/Llm/RegisterMotionControlLibLlmTools.h"
 #include "../../Rdk/LLM/Core/Context/UDocSearchIndex.h"
@@ -119,6 +121,8 @@ void NmsdkLlmProjectContext::registerExtraTools(RDK::LLM::ULLMToolRegistry& regi
                                               RDK::LLM::URdkDomainAccess& domain)
 {
     RegisterHardwareLibLlmTools(registry, this, domain);
+    RegisterBasicLibLlmTools(registry, this, domain);
+    RegisterCvBasicLibLlmTools(registry, this, domain);
     RegisterPulseLibLlmTools(registry, this, domain);
     RegisterMotionControlLibLlmTools(registry, this, domain);
 }
