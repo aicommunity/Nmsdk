@@ -254,8 +254,8 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   AppCore.startProjectName = cliConfigPath.toLocal8Bit().constData();
   AppCore.autoexecLastProjectFlag = 0;
  }
- if(cliStartCalc)
-  AppCore.autoStartProjectFlag = 1;
+ // Defer StartChannel until after MaxCalcTime is applied (see below).
+ const bool wantStartCalc = cliStartCalc;
  if(cliCalcTimeSec > 0.0)
   AppCore.calcTimeIntervalSec = cliCalcTimeSec;
  if(cliExitAfterCalc)
@@ -263,6 +263,13 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
 
  AppCore.PostInit();
 
+ if(!cliConfigPath.isEmpty() && !AppCore.application.GetProjectOpenFlag())
+ {
+  qCritical() << "Error: failed to open project:" << cliConfigPath;
+  return 1;
+ }
+
+ // Apply calc-time before starting channels so --calc-time / --exit-after-calc work.
  auto configureAutomation = [&AppCore]()
  {
   if(AppCore.calcTimeIntervalSec > 0.0 && AppCore.application.GetProjectOpenFlag())
@@ -278,6 +285,11 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   }
   if(AppCore.exitAfterCalcFlag)
   {
+   if(AppCore.calcTimeIntervalSec <= 0.0)
+   {
+    qWarning() << "--exit-after-calc without --calc-time may never quit"
+               << "(MaxCalcTime stays 0 / IsCalcFinished never becomes true).";
+   }
    QTimer* monitor = new QTimer(QCoreApplication::instance());
    QObject::connect(monitor, &QTimer::timeout, [&AppCore]()
    {
@@ -298,6 +310,16 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
  };
 
  configureAutomation();
+
+ if(wantStartCalc)
+ {
+  if(!AppCore.application.GetProjectOpenFlag())
+  {
+   qCritical() << "Error: --start-calc requested but project is not open.";
+   return 1;
+  }
+  AppCore.application.StartChannel(-1);
+ }
 
 if(cliGenerateClDesc)
 {
