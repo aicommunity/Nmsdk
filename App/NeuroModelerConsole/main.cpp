@@ -49,6 +49,8 @@ int main(int argc, char* argv[])
                                          "seconds");
 const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
                                          "Exit application after calculations finish.");
+const QCommandLineOption saveProjectOption(QStringList() << "S" << "save-project",
+                                           "Save project (Model + Parameters + Interface) before exit.");
 const QCommandLineOption generateClDescOption(QStringList() << "g" << "generate-cldesc",
                                               "Generate XML descriptions for loaded component classes and exit.");
 const QCommandLineOption lexiconOption(QStringList() << "l" << "cldesc-lexicon",
@@ -69,6 +71,7 @@ parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
 parser.addOption(exitAfterOption);
+parser.addOption(saveProjectOption);
 parser.addOption(generateClDescOption);
 parser.addOption(lexiconOption);
 parser.addOption(clDescLibraryOption);
@@ -107,6 +110,7 @@ parser.addOption(checkConfigOption);
       token == "--start-calc" || token == "-s" ||
       token == "--calc-time" || token == "-t" ||
       token == "--exit-after-calc" || token == "-x" ||
+      token == "--save-project" || token == "-S" ||
       token == "--generate-cldesc" || token == "-g" ||
       token == "--cldesc-lexicon" || token == "-l" ||
       token == "--cldesc-library" || token == "-C" ||
@@ -130,6 +134,7 @@ parser.addOption(checkConfigOption);
  const QString cliConfigPath = parser.value(configOption).trimmed();
  const bool cliStartCalc = parser.isSet(startCalcOption);
  const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
+ const bool cliSaveProject = parser.isSet(saveProjectOption);
 const bool cliGenerateClDesc = parser.isSet(generateClDescOption);
 const QString cliCheckConfig = parser.value(checkConfigOption).trimmed();
 const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
@@ -270,7 +275,7 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
  }
 
  // Apply calc-time before starting channels so --calc-time / --exit-after-calc work.
- auto configureAutomation = [&AppCore]()
+ auto configureAutomation = [&AppCore, cliSaveProject, cliExitAfterCalc]()
  {
   if(AppCore.calcTimeIntervalSec > 0.0 && AppCore.application.GetProjectOpenFlag())
   {
@@ -283,15 +288,15 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
      env->SetMaxCalcTime(AppCore.calcTimeIntervalSec);
    }
   }
-  if(AppCore.exitAfterCalcFlag)
+  if(AppCore.exitAfterCalcFlag || cliSaveProject)
   {
-   if(AppCore.calcTimeIntervalSec <= 0.0)
+   if(AppCore.exitAfterCalcFlag && AppCore.calcTimeIntervalSec <= 0.0)
    {
     qWarning() << "--exit-after-calc without --calc-time may never quit"
                << "(MaxCalcTime stays 0 / IsCalcFinished never becomes true).";
    }
    QTimer* monitor = new QTimer(QCoreApplication::instance());
-   QObject::connect(monitor, &QTimer::timeout, [&AppCore]()
+   QObject::connect(monitor, &QTimer::timeout, [&, cliSaveProject, cliExitAfterCalc]()
    {
     if(!AppCore.application.GetProjectOpenFlag())
      return;
@@ -303,7 +308,18 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
      if(env && !env->IsCalcFinished())
       return;
     }
-    QCoreApplication::quit();
+    if(cliSaveProject)
+    {
+     if(!AppCore.application.SaveProject())
+     {
+      qCritical() << "Error: --save-project failed.";
+      QCoreApplication::exit(1);
+      return;
+     }
+     qInfo() << "Project saved.";
+    }
+    if(cliExitAfterCalc)
+     QCoreApplication::quit();
    });
    monitor->start(500);
   }
