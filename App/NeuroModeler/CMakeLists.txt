@@ -313,6 +313,7 @@ set(STYLES_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Styles")
 
 add_custom_command(TARGET NeuroModeler POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLES_DEST_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLES_DEST_DIR}/icons"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${STYLES_SOURCE_DIR}/default.qss"
         "${STYLES_DEST_DIR}/default.qss"
@@ -325,6 +326,12 @@ add_custom_command(TARGET NeuroModeler POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${STYLES_SOURCE_DIR}/dark-theme.json"
         "${STYLES_DEST_DIR}/dark-theme.json"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/icons/checkbox-checked.svg"
+        "${STYLES_DEST_DIR}/icons/checkbox-checked.svg"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/icons/checkbox-checked-dark.svg"
+        "${STYLES_DEST_DIR}/icons/checkbox-checked-dark.svg"
     COMMENT "Copying style files to Bin/Styles/"
 )
 
