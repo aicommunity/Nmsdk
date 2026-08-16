@@ -103,6 +103,10 @@ add_subdirectory(Libraries/Nmsdk-PulseLib) # Nmsdk-PulseLib
 # Applications
 add_subdirectory(App/NeuroModeler)
 add_subdirectory(App/NeuroModelerConsole)
+# Default startup/run target for IDEs (VS / CMake Tools when supported)
+if(TARGET NeuroModeler)
+  set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT NeuroModeler)
+endif()
 
 # Tests (optional, can be disabled for production builds)
 option(BUILD_TESTS "Build tests" ON)
