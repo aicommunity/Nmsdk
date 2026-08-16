@@ -14,11 +14,11 @@
 
 #include <QtSerialPort/QSerialPort>
 
-#include "../../../Libraries/Rdk-HardwareLib/Core/UArduinoFirmata.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Board/UArduinoFirmata.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoPinMap.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoFlasher.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoSerialPortUtil.h"
-#include "../../../Libraries/Rdk-HardwareLib/Core/UFirmwareManifest.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Board/UFirmwareManifest.h"
 
 namespace {
 

@@ -5,8 +5,8 @@
 #include <QDirIterator>
 #include <QFile>
 
-#include "../../../Libraries/Rdk-HardwareLib/Core/UArduinoBoard.h"
-#include "../../../Libraries/Rdk-HardwareLib/Core/UArduinoDcDemo.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Board/UArduinoBoard.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Links/UArduinoDcDemo.h"
 
 namespace {
 

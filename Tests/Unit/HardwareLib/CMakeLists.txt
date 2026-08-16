@@ -123,3 +123,21 @@ target_link_libraries(Test_ArduinoProtocolPlugins PRIVATE
 )
 
 gtest_discover_tests(Test_ArduinoProtocolPlugins)
+
+add_executable(Test_ArduinoFirmataI2cPending Test_ArduinoFirmataI2cPending.cpp)
+
+target_sources(Test_ArduinoFirmataI2cPending PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+
+target_compile_definitions(Test_ArduinoFirmataI2cPending PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+
+target_link_libraries(Test_ArduinoFirmataI2cPending PRIVATE
+  Rdk-HardwareLib.qt
+  rdk.static.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+gtest_discover_tests(Test_ArduinoFirmataI2cPending)

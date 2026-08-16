@@ -4,6 +4,24 @@
 
 Быстрый срез того, какие компоненты реально встречаются в `Bin/ClDesc/**` и `Bin/Configs/**` (по тегам/атрибутам `Class` / `ClassName`). Можно использовать для приоритезации документации и примеров.
 
+## HardwareLib (Arduino)
+
+Актуальные ClassName в палитре / SpikeSamples:
+
+| ClassName | Sample | Назначение |
+|-----------|--------|------------|
+| `ArduinoBoard` | 01, 07, 09 | порт, upload, Hardware Setup |
+| `ArduinoSensorSketch` | 02, 06 | sensor_lab protocol |
+| `ArduinoFirmata` | 03, 08–13 | Standard Firmata + ApplyHardwareSetup |
+| `ArduinoAdc` | 04, 08 | ADC через Firmata |
+| `ArduinoDcDemo` | 05 | DC single-node |
+| `ArduinoDeviceIO` | 10–13 | sensor/actuator adapters |
+| `ArduinoCustomFirmware` | — | generic host + protocol plugin |
+
+Каталог: `Libraries/Rdk-HardwareLib/Catalog`, runtime `Bin/HardwareCatalog`. Валидация: `Scripts/validate_hardware_catalog.py`.
+
+Legacy ClDesc `Arduino` / `ADC` / `DC` — migrate only; не в `UploadClass`.
+
 ## Источники
 - `Bin/ClDesc/**` — найдено 243 уникальных `ClassName`.
 - `Bin/Configs/**` — найдено 170 уникальных `Class` / `ClassName`.
@@ -12,7 +30,7 @@
 - Базовые/математика/видео: `UMatrixSource*`, `UStatistic*`, `UNoiseGen*`, `ColorConvert`, `Crop`, `Reduce`, `TBinarizationSimple`, `UCR*` (PCA/TSNE/персептрон и т.д.), `VideoSimulatorSimple`, `RotCameraSimulator`, `BStatisticSimple`.
 - SNN / PulseLib: огромный перечень нейронов/синапсов/каналов/мембран/тренеров, включая `NPulseNeuron*`, `NSynapse*`, `NPulseChannel*`, `NNeuron*`, `N*Trainer*`, `N*Membrane*`, `N*LTZone*`, `N*Generator*`, `N*Predictor*`, `N*Life*`, `N*Hebb*`, `N*Stdp*`, `NClassifier`, `NSpikeClassifier`, `NPCAClassifier`.
 - MotionControlLib: `NDCEngine`, `NEngineMotionControl`, `NManipulator*`, `NEyeRetina`, `NPendulumAndCart`, `NMultiPositionControl`, `NTrajectoryElement`, `NPulseReceiver`, `NFrequencyReceiver`, `NMazeMemory*`, `NSignumSeparator/IntervalSeparator`, `NActuatorSignals`, `NSignalEstimation`, `NPCN`.
-- HardwareLib: `Arduino`, `ADC`, `DC`.
+- HardwareLib: см. таблицу выше (`ArduinoBoard`, `ArduinoFirmata`, `ArduinoDeviceIO`, …).
 
 ## Где совпадает регистрация и использование (приоритет для подробной документации)
 - Rdk-BasicLib / CvBasicLib: большинство классов, встречающихся в конфигах, зарегистрированы (см. `Docs/Overview/Component-Inventory.md`).
