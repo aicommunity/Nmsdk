@@ -141,3 +141,22 @@ target_link_libraries(Test_ArduinoFirmataI2cPending PRIVATE
 )
 
 gtest_discover_tests(Test_ArduinoFirmataI2cPending)
+
+add_executable(Test_FirmwareManifestCatalog Test_FirmwareManifestCatalog.cpp)
+target_link_libraries(Test_FirmwareManifestCatalog PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+gtest_discover_tests(Test_FirmwareManifestCatalog)
+
+find_program(NMSDK_PYTHON NAMES python python3 py)
+if(NMSDK_PYTHON)
+  add_test(
+    NAME ValidateHardwareCatalog
+    COMMAND ${NMSDK_PYTHON} ${CMAKE_SOURCE_DIR}/Scripts/validate_hardware_catalog.py
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  )
+  set_tests_properties(ValidateHardwareCatalog PROPERTIES LABELS "hardware;catalog")
+endif()

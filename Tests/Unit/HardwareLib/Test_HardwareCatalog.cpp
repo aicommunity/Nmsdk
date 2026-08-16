@@ -93,3 +93,26 @@ TEST(HardwareCatalog, SetupEmptyOk)
     QVector<RDK::UHwIssue> issues;
     EXPECT_TRUE(setup.validate(RDK::UHardwareCatalog::instance(), &issues));
 }
+
+TEST(HardwareCatalog, SetupJsonRoundTrip)
+{
+    qputenv("RDK_HARDWARE_CATALOG_DIR", catalogFixtureRoot().toUtf8());
+    RDK::UHardwareCatalog::instance().unload();
+    ASSERT_TRUE(RDK::UHardwareCatalog::instance().load(nullptr));
+    const QByteArray json = R"({
+      "schemaVersion": 1,
+      "board": "uno",
+      "firmwareId": "standard_firmata",
+      "stack": ["sensor_shield_v5"],
+      "devices": [
+        {"id": "a", "module": "potentiometer", "port": "A0", "role": "sensor"}
+      ]
+    })";
+    RDK::UHardwareSetup setup;
+    ASSERT_TRUE(setup.loadFromJson(json, nullptr));
+    RDK::UHardwareSetup again;
+    ASSERT_TRUE(again.loadFromJson(setup.toJson(true), nullptr));
+    EXPECT_EQ(again.document().board, QStringLiteral("uno"));
+    EXPECT_EQ(again.document().devices.size(), 1);
+    EXPECT_EQ(again.document().devices[0].port, QStringLiteral("A0"));
+}

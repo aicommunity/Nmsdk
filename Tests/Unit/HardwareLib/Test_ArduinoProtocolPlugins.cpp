@@ -10,6 +10,13 @@ TEST(ProtocolPlugins, SensorLabRegistered)
     EXPECT_TRUE(RDK::registeredArduinoProtocolPluginIds().contains(QStringLiteral("sensor_lab_v1")));
 }
 
+TEST(ProtocolPlugins, HubPluginsRegistered)
+{
+    RDK::registerBuiltinArduinoProtocolPlugins();
+    ASSERT_NE(RDK::findArduinoProtocolPlugin(QStringLiteral("nmsdk_sensor_hub_v1")), nullptr);
+    ASSERT_NE(RDK::findArduinoProtocolPlugin(QStringLiteral("nmsdk_motor_hub_v1")), nullptr);
+}
+
 TEST(SensorLabDecoder, SensorsPayload)
 {
     QByteArray payload;

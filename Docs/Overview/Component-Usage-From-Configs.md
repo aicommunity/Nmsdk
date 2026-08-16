@@ -16,7 +16,7 @@
 | `ArduinoAdc` | 04, 08 | ADC через Firmata |
 | `ArduinoDcDemo` | 05 | DC single-node |
 | `ArduinoDeviceIO` | 10–13 | sensor/actuator adapters |
-| `ArduinoCustomFirmware` | — | generic host + protocol plugin |
+| `ArduinoCustomFirmware` | 14–16 | hubs (`nmsdk_*_hub_v1`) + sensor_lab plugin |
 
 Каталог: `Libraries/Rdk-HardwareLib/Catalog`, runtime `Bin/HardwareCatalog`. Валидация: `Scripts/validate_hardware_catalog.py`.
 

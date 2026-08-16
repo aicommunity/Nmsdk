@@ -132,6 +132,15 @@ SKETCH_EXTRA = CUSTOM_LINK_EXTRA + """\
 \t\t\t\t\t<PinStatusJson Type="std::string" PType="258" IoType="17"></PinStatusJson>
 """
 
+CUSTOM_FW_EXTRA = CUSTOM_LINK_EXTRA + """\
+\t\t\t\t\t<HostPluginId Type="std::string" PType="257" IoType="17">{plugin}</HostPluginId>
+\t\t\t\t\t<ClearFrameLog Type="bool" PType="257" IoType="17">0</ClearFrameLog>
+\t\t\t\t\t<FrameLog Type="std::string" PType="258" IoType="17"></FrameLog>
+\t\t\t\t\t<NamedValuesJson Type="std::string" PType="258" IoType="17">{{}}</NamedValuesJson>
+\t\t\t\t\t<PluginBound Type="bool" PType="258" IoType="17">0</PluginBound>
+\t\t\t\t\t<DoubleMatrixReadings Type="MDMatrix&lt;double&gt;" Rows="0" Cols="8" PType="258" IoType="17"></DoubleMatrixReadings>
+"""
+
 FIRMATA_EXTRA = """\
 \t\t\t\t\t<SelectedPin Type="int" PType="257" IoType="17">13</SelectedPin>
 \t\t\t\t\t<SelectedPinMode Type="int" PType="257" IoType="17">1</SelectedPinMode>
@@ -614,6 +623,89 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    shared = OUT / "_shared"
+    shared.mkdir(parents=True, exist_ok=True)
+    (shared / "SensorHubSetup.json").write_text(
+        textwrap.dedent(
+            """\
+            {
+              "schemaVersion": 1,
+              "board": "uno",
+              "firmwareId": "nmsdk_sensor_hub_v1",
+              "stack": ["sensor_shield_v5"],
+              "devices": [
+                {"id": "dht", "module": "dht11", "port": "D2", "role": "sensor"},
+                {"id": "sonar", "module": "hc_sr04", "port": "D7", "role": "sensor"}
+              ]
+            }
+            """
+        ).strip()
+        + "\n",
+        encoding="utf-8",
+    )
+    (shared / "MotorHubSetup.json").write_text(
+        textwrap.dedent(
+            """\
+            {
+              "schemaVersion": 1,
+              "board": "uno",
+              "firmwareId": "nmsdk_motor_hub_v1",
+              "stack": ["motor_shield_r3"],
+              "devices": [
+                {"id": "m1", "module": "dc_motor", "channel": "A", "role": "actuator"}
+              ]
+            }
+            """
+        ).strip()
+        + "\n",
+        encoding="utf-8",
+    )
+
+    sensor_hub = BOARD_PROPS.format(
+        port=port,
+        bundled="nmsdk_sensor_hub_v1",
+        board_profile=board_profile,
+        setup_path="../_shared/SensorHubSetup.json",
+    ) + CUSTOM_FW_EXTRA.format(proto=2, plugin="nmsdk_sensor_hub_v1")
+    write_project(
+        "14-SensorHub",
+        "Hardware test: Nmsdk Sensor Hub",
+        "CustomFirmware + plugin `nmsdk_sensor_hub_v1`: DHT/HC-SR04 framed hub, Assembly setup.",
+        "- `Hub` (`ArduinoCustomFirmware`) — HostPluginId/BundledFirmwareId = nmsdk_sensor_hub_v1.",
+        component_block("Hub", "ArduinoCustomFirmware", "8 4 0", sensor_hub),
+        port,
+    )
+
+    motor_hub = BOARD_PROPS.format(
+        port=port,
+        bundled="nmsdk_motor_hub_v1",
+        board_profile=board_profile,
+        setup_path="../_shared/MotorHubSetup.json",
+    ) + CUSTOM_FW_EXTRA.format(proto=2, plugin="nmsdk_motor_hub_v1")
+    write_project(
+        "15-MotorHub",
+        "Hardware test: Nmsdk Motor Hub",
+        "CustomFirmware + plugin `nmsdk_motor_hub_v1`: MOTOR A pwm/dir, framed status 0x20.",
+        "- `Hub` (`ArduinoCustomFirmware`) — HostPluginId = nmsdk_motor_hub_v1.",
+        component_block("Hub", "ArduinoCustomFirmware", "8 4 0", motor_hub),
+        port,
+    )
+
+    custom_lab = BOARD_PROPS.format(
+        port=port,
+        bundled="sensor_lab_v1",
+        board_profile=board_profile,
+        setup_path="",
+    ) + CUSTOM_FW_EXTRA.format(proto=2, plugin="sensor_lab_v1")
+    write_project(
+        "16-CustomFirmware-SensorLab",
+        "Hardware test: CustomFirmware + sensor_lab plugin",
+        "ArduinoCustomFirmware bound to sensor_lab_v1 plugin (generic custom path).",
+        "- `Fw` (`ArduinoCustomFirmware`) — HostPluginId=sensor_lab_v1.",
+        component_block("Fw", "ArduinoCustomFirmware", "8 4 0", custom_lab),
+        port,
+    )
+
     index = OUT / "README.md"
     index.write_text(
         textwrap.dedent(
@@ -637,6 +729,9 @@ def main() -> None:
             | [11-DeviceIO-Servo](11-DeviceIO-Servo/) | `ArduinoDeviceIO` | standard_firmata | Uno (0) |
             | [12-MotorShield-R3](12-MotorShield-R3/) | `ArduinoDeviceIO` motor | standard_firmata | Uno (0) |
             | [13-Sensors-To-Pulse](13-Sensors-To-Pulse/) | DeviceIO sensors | standard_firmata | Uno (0) |
+            | [14-SensorHub](14-SensorHub/) | `ArduinoCustomFirmware` | nmsdk_sensor_hub_v1 | Uno (0) |
+            | [15-MotorHub](15-MotorHub/) | `ArduinoCustomFirmware` | nmsdk_motor_hub_v1 | Uno (0) |
+            | [16-CustomFirmware-SensorLab](16-CustomFirmware-SensorLab/) | `ArduinoCustomFirmware` | sensor_lab_v1 | Uno (0) |
 
             **BoardProfile:** 0 = Uno, 1 = Mega 2560. Перед Upload на Mega выберите профиль 1 или авто-детект в GUI.
 

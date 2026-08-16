@@ -119,5 +119,50 @@ New-Item -ItemType Directory -Force -Path (Join-Path $SrcFw "sensor_lab"), (Join
 Copy-Item -Path (Join-Path $BinFw "sensor_lab\*.hex") -Destination (Join-Path $SrcFw "sensor_lab\") -Force
 Copy-Item -Path (Join-Path $BinFw "firmata\*.hex") -Destination (Join-Path $SrcFw "firmata\") -Force
 
+function Build-HubSketch {
+    param(
+        [string]$SketchDir,
+        [string]$SketchName,
+        [string]$Fqbn,
+        [string]$OutDir,
+        [string]$Dest
+    )
+    New-Item -ItemType Directory -Force -Path $OutDir, (Split-Path -Parent $Dest) | Out-Null
+    Invoke-ArduinoCli compile -b $Fqbn $SketchDir --output-dir $OutDir
+    $built = Join-Path $OutDir "$SketchName.ino.hex"
+    if (-not (Test-Path -LiteralPath $built)) {
+        Write-Error "Build output not found: $built"
+    }
+    Copy-Item -LiteralPath $built -Destination $Dest -Force
+}
+
+New-Item -ItemType Directory -Force -Path `
+    (Join-Path $BinFw "nmsdk_sensor_hub"),
+    (Join-Path $BinFw "nmsdk_motor_hub"),
+    (Join-Path $SrcFw "nmsdk_sensor_hub"),
+    (Join-Path $SrcFw "nmsdk_motor_hub") | Out-Null
+
+$SensorHubDir = Join-Path $SrcFw "nmsdk_sensor_hub"
+$MotorHubDir = Join-Path $SrcFw "nmsdk_motor_hub"
+
+Build-HubSketch -SketchDir $SensorHubDir -SketchName "nmsdk_sensor_hub" -Fqbn "arduino:avr:uno" `
+    -OutDir (Join-Path $BinFw ".build_sensor_hub_uno") `
+    -Dest (Join-Path $BinFw "nmsdk_sensor_hub\uno.hex")
+Build-HubSketch -SketchDir $SensorHubDir -SketchName "nmsdk_sensor_hub" -Fqbn "arduino:avr:mega" `
+    -OutDir (Join-Path $BinFw ".build_sensor_hub_mega") `
+    -Dest (Join-Path $BinFw "nmsdk_sensor_hub\mega2560.hex")
+
+Build-HubSketch -SketchDir $MotorHubDir -SketchName "nmsdk_motor_hub" -Fqbn "arduino:avr:uno" `
+    -OutDir (Join-Path $BinFw ".build_motor_hub_uno") `
+    -Dest (Join-Path $BinFw "nmsdk_motor_hub\uno.hex")
+Build-HubSketch -SketchDir $MotorHubDir -SketchName "nmsdk_motor_hub" -Fqbn "arduino:avr:mega" `
+    -OutDir (Join-Path $BinFw ".build_motor_hub_mega") `
+    -Dest (Join-Path $BinFw "nmsdk_motor_hub\mega2560.hex")
+
+Copy-Item -Path (Join-Path $BinFw "nmsdk_sensor_hub\*.hex") -Destination (Join-Path $SrcFw "nmsdk_sensor_hub\") -Force
+Copy-Item -Path (Join-Path $BinFw "nmsdk_motor_hub\*.hex") -Destination (Join-Path $SrcFw "nmsdk_motor_hub\") -Force
+
 Write-Host "Done. Runtime HEX (Bin/ArduinoFirmware):"
-Get-ChildItem -Path (Join-Path $BinFw "sensor_lab\*.hex"), (Join-Path $BinFw "firmata\*.hex") | Format-Table Name, Length
+Get-ChildItem -Path (Join-Path $BinFw "sensor_lab\*.hex"), (Join-Path $BinFw "firmata\*.hex"), `
+    (Join-Path $BinFw "nmsdk_sensor_hub\*.hex"), (Join-Path $BinFw "nmsdk_motor_hub\*.hex") |
+    Format-Table Name, Length
