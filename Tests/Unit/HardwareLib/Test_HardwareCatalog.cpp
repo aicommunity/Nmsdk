@@ -94,6 +94,30 @@ TEST(HardwareCatalog, SetupEmptyOk)
     EXPECT_TRUE(setup.validate(RDK::UHardwareCatalog::instance(), &issues));
 }
 
+TEST(HardwareCatalog, FirmwareShieldIncompatible)
+{
+    qputenv("RDK_HARDWARE_CATALOG_DIR", catalogFixtureRoot().toUtf8());
+    RDK::UHardwareCatalog::instance().unload();
+    ASSERT_TRUE(RDK::UHardwareCatalog::instance().load(nullptr));
+
+    // standard_firmata is compatible with sensor_shield; force mismatch via motor shield + sensor hub
+    const QByteArray json = R"({
+      "schemaVersion": 1,
+      "board": "uno",
+      "firmwareId": "nmsdk_sensor_hub_v1",
+      "stack": ["motor_shield_r3"],
+      "devices": []
+    })";
+    RDK::UHardwareSetup setup;
+    ASSERT_TRUE(setup.loadFromJson(json, nullptr));
+    QVector<RDK::UHwIssue> issues;
+    EXPECT_FALSE(setup.validate(RDK::UHardwareCatalog::instance(), &issues));
+    bool found = false;
+    for (const auto& i : issues)
+        found = found || i.code == QLatin1String("FirmwareShieldIncompatible");
+    EXPECT_TRUE(found);
+}
+
 TEST(HardwareCatalog, SetupJsonRoundTrip)
 {
     qputenv("RDK_HARDWARE_CATALOG_DIR", catalogFixtureRoot().toUtf8());
