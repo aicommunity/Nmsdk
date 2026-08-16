@@ -99,6 +99,10 @@ BOARD_PROPS = """\
 \t\t\t\t\t<UploadFirmwareFlag Type="bool" PType="258" IoType="17">0</UploadFirmwareFlag>
 \t\t\t\t\t<UploadProgress Type="int" PType="258" IoType="17">0</UploadProgress>
 \t\t\t\t\t<UploadLastResult Type="std::string" PType="258" IoType="17"></UploadLastResult>
+\t\t\t\t\t<HardwareSetupPath Type="std::string" PType="257" IoType="17">{setup_path}</HardwareSetupPath>
+\t\t\t\t\t<HardwareSetupJson Type="std::string" PType="257" IoType="17"></HardwareSetupJson>
+\t\t\t\t\t<HardwareSetupValid Type="bool" PType="258" IoType="17">1</HardwareSetupValid>
+\t\t\t\t\t<HardwareSetupIssues Type="std::string" PType="258" IoType="17"></HardwareSetupIssues>
 """
 
 CUSTOM_LINK_EXTRA = """\
@@ -308,7 +312,9 @@ def main() -> None:
     port = "/dev/ttyACM0"
     board_profile = 0
 
-    board = BOARD_PROPS.format(port=port, bundled="sensor_lab_v1", board_profile=board_profile)
+    board = BOARD_PROPS.format(
+        port=port, bundled="sensor_lab_v1", board_profile=board_profile, setup_path=""
+    )
     write_project(
         "01-ArduinoBoard",
         "Hardware test: ArduinoBoard",
@@ -339,7 +345,7 @@ def main() -> None:
     )
 
     firmata_board = BOARD_PROPS.format(
-        port=port, bundled="standard_firmata", board_profile=board_profile
+        port=port, bundled="standard_firmata", board_profile=board_profile, setup_path=""
     ) + FIRMATA_EXTRA
     write_project(
         "03-ArduinoFirmata",
@@ -372,7 +378,9 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    dc_demo = BOARD_PROPS.format(port=port, bundled="sensor_lab_v1", board_profile=board_profile) + DC_PROPS
+    dc_demo = BOARD_PROPS.format(
+        port=port, bundled="sensor_lab_v1", board_profile=board_profile, setup_path=""
+    ) + DC_PROPS
     write_project(
         "05-ArduinoDcDemo",
         "Hardware test: ArduinoDcDemo",
@@ -383,7 +391,7 @@ def main() -> None:
     )
 
     firmata_link = BOARD_PROPS.format(
-        port=port, bundled="standard_firmata", board_profile=board_profile
+        port=port, bundled="standard_firmata", board_profile=board_profile, setup_path=""
     ) + FIRMATA_ANALOG_LINK_EXTRA
     adc_link_props = ADC_LINK_PROPS.format(board_profile=board_profile)
     adc_link_body = (
@@ -419,6 +427,22 @@ def main() -> None:
         port,
     )
 
+    setup_rel = "../_shared/HardwareSetup.json"
+    firmata_setup = BOARD_PROPS.format(
+        port=port,
+        bundled="standard_firmata",
+        board_profile=board_profile,
+        setup_path=setup_rel,
+    ) + FIRMATA_EXTRA
+    write_project(
+        "09-HardwareSetup-SensorShield",
+        "Hardware test: Hardware Setup + Assembly",
+        "Board/Firmata с `HardwareSetupPath` на Sensor Shield + pot/servo; откройте вкладку Assembly.",
+        "- `Firmata` — `HardwareSetupPath=../_shared/HardwareSetup.json`, firmware `standard_firmata`.",
+        component_block("Firmata", "ArduinoFirmata", "16 4 0", firmata_setup),
+        port,
+    )
+
     index = OUT / "README.md"
     index.write_text(
         textwrap.dedent(
@@ -437,6 +461,7 @@ def main() -> None:
             | [06-ArduinoSensorSketch-Proto2](06-ArduinoSensorSketch-Proto2/) | `ArduinoSensorSketch` (v2) | sensor_lab_v1 | Uno (0) |
             | [07-ArduinoPropertyEdges](07-ArduinoPropertyEdges/) | `ArduinoBoard` (edge API) | sensor_lab_v1 | Uno (0) |
             | [08-ArduinoFirmata-AnalogLink](08-ArduinoFirmata-AnalogLink/) | `ArduinoFirmata` + `ArduinoAdc` | standard_firmata | Uno (0) |
+            | [09-HardwareSetup-SensorShield](09-HardwareSetup-SensorShield/) | `ArduinoFirmata` + HardwareSetup | standard_firmata | Uno (0) |
 
             **BoardProfile:** 0 = Uno, 1 = Mega 2560. Перед Upload на Mega выберите профиль 1 или авто-детект в GUI.
 

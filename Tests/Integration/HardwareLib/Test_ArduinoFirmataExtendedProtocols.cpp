@@ -56,7 +56,7 @@ TEST(ArduinoUploadCancel, CancelFlagStopsBeforeFlashWhenPreCancelled)
     const RDK::UArduinoBoardProfile profile =
         RDK::UArduinoBoardProfileUtil::profileForKind(RDK::UArduinoBoardKind::Uno);
 
-    RDK::UArduinoUploadJob::runSync(&state, nullptr, profile, QStringLiteral("/dev/null"),
+    RDK::UArduinoUploadJob::runSync(&state, profile, QStringLiteral("/dev/null"),
                                     QStringLiteral("/nonexistent.hex"));
     EXPECT_TRUE(state.finished.load());
     EXPECT_FALSE(state.success.load());
