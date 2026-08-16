@@ -1336,7 +1336,7 @@
       },
       "BoardProfile": {
         "header": "Board profile",
-        "description": "0=Uno, 1=Mega 2560."
+        "description": "0=Uno, 1=Mega 2560. CH340-клоны: задавайте вручную (AU-10)."
       },
       "ConnectOnBuild": {
         "header": "Connect on build",
@@ -1345,6 +1345,58 @@
       "LastError": {
         "header": "Last error",
         "description": "State: текст последней ошибки порта/upload."
+      },
+      "CancelUpload": {
+        "header": "Cancel upload",
+        "description": "Edge: отменить async upload (kill avrdude)."
+      },
+      "ConnectionState": {
+        "header": "Connection state",
+        "description": "State: 0=Disconnected, 1=Opening, 2=Connected, 3=Error."
+      },
+      "UploadProgress": {
+        "header": "Upload progress",
+        "description": "State: 0..100 прогресс прошивки."
+      },
+      "UploadLastResult": {
+        "header": "Upload last result",
+        "description": "State: `ok` / `uploading` / текст ошибки."
+      },
+      "LastActivityMs": {
+        "header": "Last activity ms",
+        "description": "State: время последней активности (ms)."
+      },
+      "MissedHeartbeats": {
+        "header": "Missed heartbeats",
+        "description": "State: пропуски heartbeat."
+      },
+      "RequestHealthCheck": {
+        "header": "Request health check",
+        "description": "State/pulse: запрос health check."
+      },
+      "AutoReconnect": {
+        "header": "Auto reconnect",
+        "description": "Автопереподключение при обрыве."
+      },
+      "HeartbeatEnabled": {
+        "header": "Heartbeat enabled",
+        "description": "Включить heartbeat."
+      },
+      "HeartbeatIntervalMs": {
+        "header": "Heartbeat interval ms",
+        "description": "Интервал heartbeat."
+      },
+      "HeartbeatTimeoutMs": {
+        "header": "Heartbeat timeout ms",
+        "description": "Таймаут heartbeat."
+      },
+      "FirmwarePath": {
+        "header": "Firmware path",
+        "description": "Путь к HEX (пусто = bundled id)."
+      },
+      "ShowDebug": {
+        "header": "Show debug",
+        "description": "Отладочный вывод serial session."
       }
     },
     "ArduinoSensorSketch": {

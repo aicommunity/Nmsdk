@@ -76,9 +76,19 @@ target_link_libraries(Test_ArduinoSampleBuffer PRIVATE
   Nmsdk::Qt::Core
 )
 
+add_executable(Test_HardwareCatalog Test_HardwareCatalog.cpp)
+
+target_link_libraries(Test_HardwareCatalog PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
 gtest_discover_tests(Test_ArduinoPinMap)
 gtest_discover_tests(Test_ArduinoFirmataClient)
 gtest_discover_tests(Test_ArduinoSampleBuffer)
 gtest_discover_tests(Test_ArduinoHardwareLib)
 gtest_discover_tests(Test_ArduinoBoardEdges)
 gtest_discover_tests(Test_ArduinoComponentGuiRegistry)
+gtest_discover_tests(Test_HardwareCatalog)

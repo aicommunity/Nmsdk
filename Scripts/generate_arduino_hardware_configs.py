@@ -148,9 +148,12 @@ FIRMATA_EXTRA = """\
 \t\t\t\t\t<WriteDigitalFlag Type="bool" PType="258" IoType="17">0</WriteDigitalFlag>
 """
 
-FIRMATA_ANALOG_LINK_EXTRA = FIRMATA_EXTRA + """\
-\t\t\t\t\t<AutoRefreshPins Type="bool" PType="257" IoType="17">1</AutoRefreshPins>
-"""
+# Override AutoRefreshPins=1 without duplicating the property element.
+FIRMATA_ANALOG_LINK_EXTRA = FIRMATA_EXTRA.replace(
+    '">0</AutoRefreshPins>',
+    '">1</AutoRefreshPins>',
+    1,
+)
 
 ADC_LINK_PROPS = """\
 \t\t\t\t\t<LinkedFirmataName Type="std::string" PType="257" IoType="17">Firmata</LinkedFirmataName>
@@ -410,8 +413,8 @@ def main() -> None:
     write_project(
         "07-ArduinoPropertyEdges",
         "Hardware test: Arduino property edges",
-        "Ручная проверка edge-свойств Board без отдельного железа (порт можно оставить пустым).",
-        "- `Board` (`ArduinoBoard`) — примеры `<Connect>1</Connect>`, `<UploadFirmware>1</UploadFirmware>`.",
+        "Ручная проверка edge-свойств Board: в XML edges = 0; импульс Connect/UploadFirmware из GUI или Property editor.",
+        "- `Board` (`ArduinoBoard`) — edges по умолчанию 0; пульсируйте `Connect` / `UploadFirmware` вручную.",
         component_block("Board", "ArduinoBoard", "8 4 0", board),
         port,
     )
