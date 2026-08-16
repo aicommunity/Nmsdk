@@ -134,6 +134,26 @@ PROPS: dict[str, list[tuple[str, str, str, tuple[str, str]]]] = {
         ("UseLinkedAnalogSamples", "Use linked samples", "Читать `AnalogSamples` Firmata.", PARAM),
         ("AdcValue", "ADC value", "State: 0–1023.", STATE),
     ],
+    "ArduinoDeviceIO": [
+        ("ApplyConfig", "Apply config", "Edge: pin mode / report для модуля.", EDGE),
+        ("WriteOutput", "Write output", "Edge: запись актуатора.", EDGE),
+        ("ReadInput", "Read input", "Edge: one-shot чтение датчика.", EDGE),
+        ("LinkedFirmataName", "Linked Firmata", "Имя узла `ArduinoFirmata`.", PARAM),
+        ("ModuleId", "Module id", "Id модуля Hardware Catalog.", PARAM),
+        ("DeviceId", "Device id", "Id устройства из Hardware Setup.", PARAM),
+        ("Port", "Port", "Метка пина (D2, A0) или пусто для channel.", PARAM),
+        ("Channel", "Channel", "Канал мотор-щита A/B.", PARAM),
+        ("Role", "Role", "0=sensor, 1=actuator, 2=auto.", PARAM),
+        ("BoardProfile", "Board profile", "0=Uno, 1=Mega.", PARAM),
+        ("HardwareSetupPath", "Hardware setup path", "Путь к setup JSON (опционально).", PARAM),
+        ("ValueIn", "Value in", "Вход актуатора (0..1 или raw).", INPUT),
+        ("InputMode", "Input mode", "0=normalized, 1=raw.", PARAM),
+        ("Continuous", "Continuous", "Непрерывный опрос samples.", PARAM),
+        ("Value", "Value", "Выход (нормализованный).", OUTPUT),
+        ("ValueRaw", "Value raw", "Выход raw (ADC/digital/pwm).", STATE),
+        ("IsOnline", "Is online", "Firmata ready + pin resolved.", STATE),
+        ("LastError", "Last error", "Ошибка resolve/unsupported.", STATE),
+    ],
 }
 
 

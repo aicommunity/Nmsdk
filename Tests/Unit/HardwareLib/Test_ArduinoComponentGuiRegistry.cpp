@@ -26,4 +26,5 @@ TEST(ArduinoComponentGuiRegistry, HardwareLibClassesRegistered)
     EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoFirmata")));
     EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoDcDemo")));
     EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoAdc")));
+    EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoDeviceIO")));
 }

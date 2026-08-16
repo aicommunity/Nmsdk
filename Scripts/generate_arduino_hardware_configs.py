@@ -175,6 +175,27 @@ ADC_PROPS = """\
 \t\t\t\t\t<ReadAdcFlag Type="bool" PType="258" IoType="17">0</ReadAdcFlag>
 """
 
+DEVICE_IO_PROPS = """\
+\t\t\t\t\t<LinkedFirmataName Type="std::string" PType="257" IoType="17">Firmata</LinkedFirmataName>
+\t\t\t\t\t<ModuleId Type="std::string" PType="257" IoType="17">{module}</ModuleId>
+\t\t\t\t\t<DeviceId Type="std::string" PType="257" IoType="17">{device_id}</DeviceId>
+\t\t\t\t\t<Port Type="std::string" PType="257" IoType="17">{port}</Port>
+\t\t\t\t\t<Channel Type="std::string" PType="257" IoType="17">{channel}</Channel>
+\t\t\t\t\t<Role Type="int" PType="257" IoType="17">{role}</Role>
+\t\t\t\t\t<BoardProfile Type="int" PType="257" IoType="17">{board_profile}</BoardProfile>
+\t\t\t\t\t<HardwareSetupPath Type="std::string" PType="257" IoType="17">{setup_path}</HardwareSetupPath>
+\t\t\t\t\t<Value Type="double" PType="274" IoType="17">0</Value>
+\t\t\t\t\t<ValueRaw Type="int" PType="258" IoType="17">0</ValueRaw>
+\t\t\t\t\t<ValueIn Type="double" PType="265" IoType="17">0</ValueIn>
+\t\t\t\t\t<InputMode Type="int" PType="257" IoType="17">0</InputMode>
+\t\t\t\t\t<IsOnline Type="bool" PType="258" IoType="17">0</IsOnline>
+\t\t\t\t\t<LastError Type="std::string" PType="258" IoType="17"></LastError>
+\t\t\t\t\t<ApplyConfig Type="bool" PType="265" IoType="17">0</ApplyConfig>
+\t\t\t\t\t<WriteOutput Type="bool" PType="265" IoType="17">0</WriteOutput>
+\t\t\t\t\t<ReadInput Type="bool" PType="265" IoType="17">0</ReadInput>
+\t\t\t\t\t<Continuous Type="bool" PType="257" IoType="17">1</Continuous>
+"""
+
 DC_PROPS = CUSTOM_LINK_EXTRA.format(proto=1) + """\
 \t\t\t\t\t<Speed Type="float" PType="258" IoType="17">0</Speed>
 \t\t\t\t\t<Acceleration Type="float" PType="258" IoType="17">0</Acceleration>
@@ -443,6 +464,156 @@ def main() -> None:
         port,
     )
 
+    setup_rel = "../_shared/HardwareSetup.json"
+    dio_common = dict(board_profile=board_profile, setup_path=setup_rel, channel="")
+    pot_body = (
+        component_block("Firmata", "ArduinoFirmata", "12 4 0", firmata_setup)
+        + component_block(
+            "Pot",
+            "ArduinoDeviceIO",
+            "12 8 0",
+            UNET_BASE.format(coord="12 8 0")
+            + DEVICE_IO_PROPS.format(
+                module="potentiometer", device_id="pot1", port="A0", role=0, **dio_common
+            ),
+        )
+    )
+    dest10 = OUT / "10-DeviceIO-Potentiometer"
+    dest10.mkdir(parents=True, exist_ok=True)
+    (dest10 / "Model_00.xml").write_text(MODEL_HEADER + pot_body + MODEL_FOOTER, encoding="utf-8")
+    (dest10 / "Parameters_00.xml").write_text(PARAM_HEADER + pot_body + PARAM_FOOTER, encoding="utf-8")
+    (dest10 / "Project.ini").write_text(
+        PROJECT_INI.format(name="Hardware test: DeviceIO Potentiometer"), encoding="utf-8"
+    )
+    (dest10 / "Interface.xml").write_text(INTERFACE_XML, encoding="utf-8")
+    (dest10 / "README.md").write_text(
+        README_TEMPLATE.format(
+            title="Hardware test: DeviceIO Potentiometer",
+            folder="10-DeviceIO-Potentiometer",
+            purpose="Firmata + DeviceIO potentiometer A0; Upload standard_firmata, ApplyHardwareSetup, Continuous Value.",
+            components="- `Firmata` + `Pot` (`ArduinoDeviceIO`, ModuleId=potentiometer).",
+        ),
+        encoding="utf-8",
+    )
+
+    servo_body = (
+        component_block("Firmata", "ArduinoFirmata", "12 4 0", firmata_setup)
+        + component_block(
+            "Servo",
+            "ArduinoDeviceIO",
+            "12 8 0",
+            UNET_BASE.format(coord="12 8 0")
+            + DEVICE_IO_PROPS.format(
+                module="servo", device_id="servo1", port="D9", role=1, **dio_common
+            ),
+        )
+    )
+    write_project(
+        "11-DeviceIO-Servo",
+        "Hardware test: DeviceIO Servo",
+        "Firmata + DeviceIO servo D9; ValueIn 0..1 → угол.",
+        "- `Firmata` + `Servo` (`ArduinoDeviceIO`).",
+        servo_body,
+        port,
+    )
+
+    motor_setup_path = "../_shared/MotorShieldR3Setup.json"
+    motor_firmata = BOARD_PROPS.format(
+        port=port,
+        bundled="standard_firmata",
+        board_profile=board_profile,
+        setup_path=motor_setup_path,
+    ) + FIRMATA_EXTRA
+    motor_body = (
+        component_block("Firmata", "ArduinoFirmata", "8 4 0", motor_firmata)
+        + component_block(
+            "MotorA",
+            "ArduinoDeviceIO",
+            "8 8 0",
+            UNET_BASE.format(coord="8 8 0")
+            + DEVICE_IO_PROPS.format(
+                module="dc_motor_channel",
+                device_id="mA",
+                port="",
+                channel="A",
+                role=1,
+                board_profile=board_profile,
+                setup_path=motor_setup_path,
+            ),
+        )
+        + component_block(
+            "MotorB",
+            "ArduinoDeviceIO",
+            "8 12 0",
+            UNET_BASE.format(coord="8 12 0")
+            + DEVICE_IO_PROPS.format(
+                module="dc_motor_channel",
+                device_id="mB",
+                port="",
+                channel="B",
+                role=1,
+                board_profile=board_profile,
+                setup_path=motor_setup_path,
+            ),
+        )
+    )
+    dest12 = OUT / "12-MotorShield-R3"
+    dest12.mkdir(parents=True, exist_ok=True)
+    (dest12 / "Model_00.xml").write_text(MODEL_HEADER + motor_body + MODEL_FOOTER, encoding="utf-8")
+    (dest12 / "Parameters_00.xml").write_text(PARAM_HEADER + motor_body + PARAM_FOOTER, encoding="utf-8")
+    (dest12 / "Project.ini").write_text(
+        PROJECT_INI.format(name="Hardware test: Motor Shield R3"), encoding="utf-8"
+    )
+    (dest12 / "Interface.xml").write_text(INTERFACE_XML, encoding="utf-8")
+    (dest12 / "README.md").write_text(
+        README_TEMPLATE.format(
+            title="Hardware test: Motor Shield R3",
+            folder="12-MotorShield-R3",
+            purpose="Firmata + 2× DeviceIO dc_motor_channel A/B. Для Seeed смените setup на MotorShieldSeeedSetup.json.",
+            components="- `Firmata` + `MotorA`/`MotorB`.",
+        ),
+        encoding="utf-8",
+    )
+
+    pulse_body = (
+        component_block("Firmata", "ArduinoFirmata", "8 4 0", firmata_setup)
+        + component_block(
+            "Pot",
+            "ArduinoDeviceIO",
+            "8 8 0",
+            UNET_BASE.format(coord="8 8 0")
+            + DEVICE_IO_PROPS.format(
+                module="potentiometer", device_id="pot1", port="A0", role=0, **dio_common
+            ),
+        )
+        + component_block(
+            "Btn",
+            "ArduinoDeviceIO",
+            "8 12 0",
+            UNET_BASE.format(coord="8 12 0")
+            + DEVICE_IO_PROPS.format(
+                module="button", device_id="btn1", port="D2", role=0, **dio_common
+            ),
+        )
+    )
+    dest13 = OUT / "13-Sensors-To-Pulse"
+    dest13.mkdir(parents=True, exist_ok=True)
+    (dest13 / "Model_00.xml").write_text(MODEL_HEADER + pulse_body + MODEL_FOOTER, encoding="utf-8")
+    (dest13 / "Parameters_00.xml").write_text(PARAM_HEADER + pulse_body + PARAM_FOOTER, encoding="utf-8")
+    (dest13 / "Project.ini").write_text(
+        PROJECT_INI.format(name="Hardware test: Sensors to network"), encoding="utf-8"
+    )
+    (dest13 / "Interface.xml").write_text(INTERFACE_XML, encoding="utf-8")
+    (dest13 / "README.md").write_text(
+        README_TEMPLATE.format(
+            title="Hardware test: Sensors to network",
+            folder="13-Sensors-To-Pulse",
+            purpose="DeviceIO pot/button → Value; добавьте Watch/PulseLib downstream вручную.",
+            components="- `Firmata` + `Pot` + `Btn`.",
+        ),
+        encoding="utf-8",
+    )
+
     index = OUT / "README.md"
     index.write_text(
         textwrap.dedent(
@@ -462,6 +633,10 @@ def main() -> None:
             | [07-ArduinoPropertyEdges](07-ArduinoPropertyEdges/) | `ArduinoBoard` (edge API) | sensor_lab_v1 | Uno (0) |
             | [08-ArduinoFirmata-AnalogLink](08-ArduinoFirmata-AnalogLink/) | `ArduinoFirmata` + `ArduinoAdc` | standard_firmata | Uno (0) |
             | [09-HardwareSetup-SensorShield](09-HardwareSetup-SensorShield/) | `ArduinoFirmata` + HardwareSetup | standard_firmata | Uno (0) |
+            | [10-DeviceIO-Potentiometer](10-DeviceIO-Potentiometer/) | `ArduinoDeviceIO` | standard_firmata | Uno (0) |
+            | [11-DeviceIO-Servo](11-DeviceIO-Servo/) | `ArduinoDeviceIO` | standard_firmata | Uno (0) |
+            | [12-MotorShield-R3](12-MotorShield-R3/) | `ArduinoDeviceIO` motor | standard_firmata | Uno (0) |
+            | [13-Sensors-To-Pulse](13-Sensors-To-Pulse/) | DeviceIO sensors | standard_firmata | Uno (0) |
 
             **BoardProfile:** 0 = Uno, 1 = Mega 2560. Перед Upload на Mega выберите профиль 1 или авто-детект в GUI.
 

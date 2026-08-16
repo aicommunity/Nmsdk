@@ -1678,6 +1678,80 @@
         "header": "Use linked samples",
         "description": "Читать `AnalogSamples` Firmata."
       }
+    },
+    "ArduinoDeviceIO": {
+      "ApplyConfig": {
+        "header": "Apply config",
+        "description": "Edge: pin mode / report для модуля."
+      },
+      "WriteOutput": {
+        "header": "Write output",
+        "description": "Edge: запись актуатора."
+      },
+      "ReadInput": {
+        "header": "Read input",
+        "description": "Edge: one-shot чтение датчика."
+      },
+      "LinkedFirmataName": {
+        "header": "Linked Firmata",
+        "description": "Имя узла `ArduinoFirmata`."
+      },
+      "ModuleId": {
+        "header": "Module id",
+        "description": "Id модуля Hardware Catalog."
+      },
+      "DeviceId": {
+        "header": "Device id",
+        "description": "Id устройства из Hardware Setup."
+      },
+      "Port": {
+        "header": "Port",
+        "description": "Метка пина (D2, A0) или пусто для channel."
+      },
+      "Channel": {
+        "header": "Channel",
+        "description": "Канал мотор-щита A/B."
+      },
+      "Role": {
+        "header": "Role",
+        "description": "0=sensor, 1=actuator, 2=auto."
+      },
+      "BoardProfile": {
+        "header": "Board profile",
+        "description": "0=Uno, 1=Mega."
+      },
+      "HardwareSetupPath": {
+        "header": "Hardware setup path",
+        "description": "Путь к setup JSON (опционально)."
+      },
+      "ValueIn": {
+        "header": "Value in",
+        "description": "Вход актуатора (0..1 или raw)."
+      },
+      "InputMode": {
+        "header": "Input mode",
+        "description": "0=normalized, 1=raw."
+      },
+      "Continuous": {
+        "header": "Continuous",
+        "description": "Непрерывный опрос samples."
+      },
+      "Value": {
+        "header": "Value",
+        "description": "Выход (нормализованный)."
+      },
+      "ValueRaw": {
+        "header": "Value raw",
+        "description": "Выход raw (ADC/digital/pwm)."
+      },
+      "IsOnline": {
+        "header": "Is online",
+        "description": "Firmata ready + pin resolved."
+      },
+      "LastError": {
+        "header": "Last error",
+        "description": "Ошибка resolve/unsupported."
+      }
     }
   },
   "propertyFallbacks": {
