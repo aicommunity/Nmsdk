@@ -4,25 +4,52 @@
 
   // Use CMakePresets.json (recommended for this repo)
   "cmake.useCMakePresets": "always",
+  // Default presets for shared/Linux workflow. On Windows pick
+  // win-vs2019-*-localqt via CMake sidebar or tasks.json windows overrides.
   "cmake.configurePreset": "linux-gcc-debug-local",
   "cmake.buildPreset": "linux-gcc-debug",
-  "cmake.configureArgs": [
-    "-DCMAKE_BUILD_TYPE=Debug"
-  ],
+  // Clear user-level cmake.configureArgs / buildArgs for this workspace
+  // (e.g. -mavx2, foreign TOOLCHAIN_FILE, -j7 that duplicate preset jobs).
+  "cmake.configureArgs": [],
+  "cmake.buildArgs": [],
 
-  // Prefer NeuroModeler as the default build target in CMake Tools status bar
+  // Do NOT use "always": that injects the newest VS (2022) INCLUDE while
+  // win-vs2019-* still compiles with cl 19.29 → STL1001 mismatch.
+  // INCLUDE/LIB/PATH for the matching toolset are set in CMakePresets.json.
+  "cmake.useVsDeveloperEnvironment": "never",
+
+  // Launch/Debug: CMake Tools builds the launch target once. Do not also attach
+  // a preLaunchTask that runs cmake --build (that caused double rebuilds).
+  "cmake.buildBeforeRun": true,
+  "cmake.parallelJobs": 8,
+
+  // Prefer NeuroModeler as the default launch/build target in CMake Tools.
+  // Note: CMake Tools persists the last selected launch target in IDE state;
+  // if a Test_* is still selected, use Command Palette →
+  // "CMake: Set Launch/Debug Target" → NeuroModeler (once).
   "cmake.buildTarget": "NeuroModeler",
 
-  // Show CMake Build / Launch / Debug on the IDE status bar
-  "cmake.options.statusBarVisibility": "visible",
+  // Minimal CMake status bar: hide CTest/presets so Build/Run stay on-screen.
+  // Full control: CMake sidebar / Command Palette. Task Buttons (if installed)
+  // also add left-aligned Build/Run icons.
+  "cmake.options.statusBarVisibility": "compact",
   "cmake.options.advanced": {
-    "configure": { "statusBarVisibility": "icon" },
-    "build": { "statusBarVisibility": "visible" },
-    "launch": { "statusBarVisibility": "visible" },
-    "debug": { "statusBarVisibility": "visible" },
-    "buildTarget": { "statusBarVisibility": "visible" },
-    "launchTarget": { "statusBarVisibility": "visible" },
-    "preset": { "statusBarVisibility": "compact" }
+    "configure": { "statusBarVisibility": "hidden" },
+    "configurePreset": { "statusBarVisibility": "hidden" },
+    "buildPreset": { "statusBarVisibility": "hidden" },
+    "testPreset": { "statusBarVisibility": "hidden" },
+    "packagePreset": { "statusBarVisibility": "hidden" },
+    "workflowPreset": { "statusBarVisibility": "hidden" },
+    "kit": { "statusBarVisibility": "hidden" },
+    "variant": { "statusBarVisibility": "hidden" },
+    "buildTarget": { "statusBarVisibility": "hidden" },
+    "launchTarget": { "statusBarVisibility": "hidden" },
+    "build": { "statusBarVisibility": "icon" },
+    "launch": { "statusBarVisibility": "icon" },
+    "debug": { "statusBarVisibility": "hidden" },
+    "ctest": { "statusBarVisibility": "hidden" },
+    "cpack": { "statusBarVisibility": "hidden" },
+    "workflow": { "statusBarVisibility": "hidden" }
   },
 
   // Do not auto-configure on folder open (first configure via task / CMake sidebar)
@@ -38,19 +65,20 @@
   "cmake.sourceDirectory": "${workspaceFolder}",
   "cmake.buildDirectory": "${workspaceFolder}/build/${presetName}",
 
-  // Status bar: Build / Run buttons (extension spencerwmiles.vscode-task-buttons)
+  // Requires extension: spencerwmiles.vscode-task-buttons (see extensions.json).
+  // Left-aligned so they are not pushed off-screen by CMake/Git status items.
   "VsCodeTaskButtons.showCounter": false,
   "VsCodeTaskButtons.tasks": [
     {
       "label": "$(tools) Build",
-      "task": "nmsdk: build NeuroModeler (linux-gcc-debug)",
-      "tooltip": "Build NeuroModeler (linux-gcc-debug)",
+      "task": "nmsdk: build NeuroModeler",
+      "tooltip": "Build NeuroModeler",
       "alignment": "left"
     },
     {
       "label": "$(play) Run",
       "task": "nmsdk: run NeuroModeler",
-      "tooltip": "Build and run NeuroModeler",
+      "tooltip": "Run NeuroModeler (no rebuild)",
       "alignment": "left"
     }
   ],

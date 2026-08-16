@@ -2,6 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "NeuroModeler (Windows)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/Bin/Platform/Win/NeuroModeler.exe",
+      "cwd": "${workspaceFolder}/Bin/Platform/Win",
+      "args": [],
+      "environment": [
+        { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" },
+        { "name": "NMSDK_ROOT", "value": "${workspaceFolder}" },
+        { "name": "NMSDK_SOURCE_DIR", "value": "${workspaceFolder}" }
+      ],
+      "console": "integratedTerminal"
+    },
+    {
       "name": "NeuroModeler (Debug, Linux / CodeLLDB)",
       "type": "lldb",
       "request": "launch",
@@ -64,18 +78,6 @@
       },
       "preLaunchTask": "CMake: build (platform preset)",
       "terminal": "integrated"
-    },
-    {
-      "name": "CMake: Launch active target (Debug, Windows)",
-      "type": "cppvsdbg",
-      "request": "launch",
-      "program": "${command:cmake.launchTargetPath}",
-      "cwd": "${command:cmake.launchTargetDirectory}",
-      "environment": [
-        { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" }
-      ],
-      "preLaunchTask": "CMake: build (platform preset)",
-      "console": "integratedTerminal"
     }
   ]
 }
