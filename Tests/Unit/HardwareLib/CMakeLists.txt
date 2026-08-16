@@ -112,3 +112,14 @@ gtest_discover_tests(Test_ArduinoComponentGuiRegistry)
 gtest_discover_tests(Test_HardwareCatalog)
 gtest_discover_tests(Test_AssemblySceneBuilder)
 gtest_discover_tests(Test_ArduinoDeviceIO)
+
+add_executable(Test_ArduinoProtocolPlugins Test_ArduinoProtocolPlugins.cpp)
+
+target_link_libraries(Test_ArduinoProtocolPlugins PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+gtest_discover_tests(Test_ArduinoProtocolPlugins)

@@ -1752,6 +1752,40 @@
         "header": "Last error",
         "description": "Ошибка resolve/unsupported."
       }
+    },
+    "ArduinoCustomFirmware": {
+      "SendCommand": {
+        "header": "Send command",
+        "description": "Edge: отправить Command."
+      },
+      "ClearFrameLog": {
+        "header": "Clear frame log",
+        "description": "Edge: очистить FrameLog."
+      },
+      "HostPluginId": {
+        "header": "Host plugin id",
+        "description": "Override catalog hostPlugin."
+      },
+      "FrameLog": {
+        "header": "Frame log",
+        "description": "Ring buffer RX/frames."
+      },
+      "NamedValuesJson": {
+        "header": "Named values JSON",
+        "description": "Bag publishNamedFloat."
+      },
+      "PluginBound": {
+        "header": "Plugin bound",
+        "description": "Найден protocol plugin."
+      },
+      "Command": {
+        "header": "Command",
+        "description": "Текстовая команда."
+      },
+      "BundledFirmwareId": {
+        "header": "Bundled firmware",
+        "description": "Id прошивки каталога."
+      }
     }
   },
   "propertyFallbacks": {
