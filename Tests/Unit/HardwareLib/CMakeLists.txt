@@ -109,6 +109,20 @@ gtest_discover_tests(Test_ArduinoSampleBuffer)
 gtest_discover_tests(Test_ArduinoHardwareLib)
 gtest_discover_tests(Test_ArduinoBoardEdges)
 gtest_discover_tests(Test_ArduinoComponentGuiRegistry)
+
+add_executable(Test_ComponentGuiDockChrome Test_ComponentGuiDockChrome.cpp)
+
+target_include_directories(Test_ComponentGuiDockChrome PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
+)
+
+target_link_libraries(Test_ComponentGuiDockChrome PRIVATE
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Widgets
+)
+
+gtest_discover_tests(Test_ComponentGuiDockChrome)
 gtest_discover_tests(Test_HardwareCatalog)
 gtest_discover_tests(Test_AssemblySceneBuilder)
 gtest_discover_tests(Test_ArduinoDeviceIO)

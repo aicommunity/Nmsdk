@@ -2,26 +2,28 @@
 
 ## RU
 
-Ручной протокол после lifecycle-тестов `Test_ComponentGuiLifecycle` / `Test_ComponentGuiRegistry`.
+Ручной протокол после unit-теста `Test_ComponentGuiDockChrome`.
 
 1. Открыть 2 component forms → Detach (floating dock) → reattach to MDI.
 2. Move one form to Tab Host → reorder tabs → close/reopen project → order restored.
 3. Move form to Secondary Host → close secondary → reopen from menu.
 4. Float dock, close via X, reopen from diagram — single instance.
 5. No style loss on float/reattach (title bar, tab strip).
+6. Float dock → **рамка ресайза**, кнопки свернуть / развернуть / закрыть; re-dock возвращает окно в док без потери содержимого.
 
-Автоматика: `NativeDockHostCreateAndClose`, `TabHostSaveStatePersistsTabOrderV2` в `Rdk/Tests/Unit/Test_ComponentGuiLifecycle.cpp`.
+Автоматика: `Tests/Unit/HardwareLib/Test_ComponentGuiDockChrome.cpp` (`installComponentGuiFloatingChrome`).
 
 ---
 
 ## EN
 
-Manual protocol after lifecycle unit tests.
+Manual protocol after the `Test_ComponentGuiDockChrome` unit test.
 
 1. Open 2 component forms → Detach (floating) → reattach to MDI.
 2. Move one to Tab Host → reorder tabs → close/reopen project → order restored.
 3. Move to Secondary Host → close secondary → reopen.
 4. Float dock, close via X, reopen from diagram — single instance.
 5. No style loss on float/reattach.
+6. Float dock → **resize frame**, minimize / maximize / close; re-dock restores the docked host without losing content.
 
-Automation: `NativeDockHostCreateAndClose`, `TabHostSaveStatePersistsTabOrderV2` in `Rdk/Tests/Unit/Test_ComponentGuiLifecycle.cpp`.
+Automation: `Tests/Unit/HardwareLib/Test_ComponentGuiDockChrome.cpp` (`installComponentGuiFloatingChrome`).
