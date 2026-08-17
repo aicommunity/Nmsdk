@@ -169,6 +169,23 @@ TEST(ArduinoFirmataClient, PinStateResponseUpdatesDigitalAndAnalog)
     EXPECT_EQ(client.analogValueForChannel(0), 100);
 }
 
+TEST(ArduinoFirmataClient, PinStateResponseAcceptsSingleStateByte)
+{
+    RDK::UArduinoFirmataClient client;
+    feedHandshake(client, 0);
+    QByteArray payload;
+    payload.append(firmataByte(0x6E));
+    payload.append(char(9));
+    payload.append(char(3));
+    payload.append(char(64));
+    QByteArray msg;
+    msg.append(firmataByte(0xF0));
+    msg.append(payload);
+    msg.append(firmataByte(0xF7));
+    client.processIncoming(msg);
+    EXPECT_EQ(client.deviceModeForPin(9), 3);
+}
+
 TEST(ArduinoFirmataClient, I2cReplyStored)
 {
     RDK::UArduinoFirmataClient client;
