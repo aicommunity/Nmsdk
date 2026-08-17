@@ -159,4 +159,10 @@ if(NMSDK_PYTHON)
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
   )
   set_tests_properties(ValidateHardwareCatalog PROPERTIES LABELS "hardware;catalog")
+  add_test(
+    NAME ValidateHardwareSpikeConfigs
+    COMMAND ${NMSDK_PYTHON} ${CMAKE_SOURCE_DIR}/Scripts/validate_hardware_spike_configs.py
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  )
+  set_tests_properties(ValidateHardwareSpikeConfigs PROPERTIES LABELS "hardware;catalog;spike")
 endif()
