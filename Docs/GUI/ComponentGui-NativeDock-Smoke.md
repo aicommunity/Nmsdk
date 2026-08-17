@@ -9,7 +9,7 @@
 3. Move form to Secondary Host → close secondary → reopen from menu.
 4. Float dock, close via X, reopen from diagram — single instance.
 5. No style loss on float/reattach (title bar, tab strip).
-6. Float dock → **рамка ресайза**, кнопки свернуть / развернуть / закрыть; re-dock возвращает окно в док без потери содержимого.
+6. Float dock → **рамка ресайза**, кнопки свернуть / **развернуть (активна)** / закрыть. Двойной клик по заголовку **максимизирует**, а не возвращает в док. Re-dock — перетаскиванием к главному окну.
 
 Автоматика: `Tests/Unit/HardwareLib/Test_ComponentGuiDockChrome.cpp` (`installComponentGuiFloatingChrome`).
 
@@ -24,6 +24,6 @@ Manual protocol after the `Test_ComponentGuiDockChrome` unit test.
 3. Move to Secondary Host → close secondary → reopen.
 4. Float dock, close via X, reopen from diagram — single instance.
 5. No style loss on float/reattach.
-6. Float dock → **resize frame**, minimize / maximize / close; re-dock restores the docked host without losing content.
+6. Float dock → **resize frame**, minimize / **maximize (enabled)** / close. Title-bar double-click **maximizes** instead of re-docking. Re-dock by dragging to the main window.
 
 Automation: `Tests/Unit/HardwareLib/Test_ComponentGuiDockChrome.cpp` (`installComponentGuiFloatingChrome`).

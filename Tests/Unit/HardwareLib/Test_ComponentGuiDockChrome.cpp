@@ -27,8 +27,13 @@ TEST(ComponentGuiDockChrome, FloatingHasMinMaxWithoutCustomizeHint)
     dock->show();
     mw.show();
     dock->setFloating(true);
+    QApplication::sendPostedEvents();
     QApplication::processEvents();
     EXPECT_TRUE(dock->windowFlags() & Qt::WindowMinimizeButtonHint);
     EXPECT_TRUE(dock->windowFlags() & Qt::WindowMaximizeButtonHint);
     EXPECT_FALSE(dock->windowFlags() & Qt::CustomizeWindowHint);
+    dock->showMaximized();
+    QApplication::processEvents();
+    EXPECT_TRUE(dock->isMaximized());
+    EXPECT_TRUE(dock->isFloating());
 }
