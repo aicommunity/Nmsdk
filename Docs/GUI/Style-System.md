@@ -116,6 +116,18 @@ NeuroModeler — desktop power-tool (IDE / MATLAB-like). **Compact** — тек�
 
 Шрифт UI не уменьшается density-режимом (берётся system UI font через `UStyleManager`).
 
+### Windows large-font / HiDPI policy
+
+На Windows при системном масштабе ≥ 1.25 и очень крупном Interface Text `UStyleManager::applySystemUiFonts` мягко ограничивает UI font приложения (~12 pt). Content (markdown, charts) не затрагивается.
+
+Для chrome-высот и отступов в C++ используйте `UStyleManager::densitySpace(n)` (`n * fontMetrics.height()/4`), а не жёсткие px: breadcrumbs, diagram overlay buttons и т.п.
+
+При смене темы эмитится `UStyleManager::themeChanged()`; виджеты с локальным QSS/HTML должны подписаться или обновляться из `switchToTheme`.
+
+### Audit notes (known dead menu actions)
+
+Window/File UI содержит пункты без `connect` (EngineMonitor, VideoSources, Application Options и др.) — не удалять без отдельного решения о продукте.
+
 ### См. также
 
 - [Reports/29-StyleSystem-Documentation.md](../../Reports/29-StyleSystem-Documentation.md) - детальная документация
@@ -173,6 +185,14 @@ Rule: **light and dark QSS spacing must match**; only colors differ. New forms a
 | Form / dock content margins | 4px |
 
 UI font size is not reduced by density (system UI font via `UStyleManager`).
+
+### Windows large-font / HiDPI policy
+
+On Windows, when system scale ≥ 1.25 and Interface Text is oversized, `UStyleManager::applySystemUiFonts` soft-caps the application UI font (~12 pt). Content (markdown, charts) is unchanged. Prefer `UStyleManager::densitySpace(n)` for chrome heights/spacings. Theme switches emit `themeChanged()`.
+
+### Audit notes
+
+Some Window/File actions in the `.ui` have no `connect` — leave until a product decision.
 
 ### See Also
 
