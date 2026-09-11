@@ -23,7 +23,10 @@ Defaults match the polished `Dendrite1_85` layout (TimeNeuronTimeLearnerBranch/T
 
 - Internal draw pass uses `scopeChildBoundaryLinksXmlFromModelScope` (personal links of direct children), matching classic `SaveComponentDrawInfo`.
 - Recursive `GetComponentInternalLinks` is **not** used for drawing — nested feedback would collapse to peer self-loops on the parent node.
-- External incoming keeps its own depth filter (`isConnectorNestedInsideVisibleChild`).
+- External **incoming** (left): `UModernDiagramExternalSourceItem` + dashed link to local inputs; depth filter `isConnectorNestedInsideVisibleChild`.
+  - External **outgoing** (right): `UModernDiagramExternalSinkItem` — one diamond per local output that has at least one consumer outside the current scope; label `Component:property` **relative to the current diagram scope** (current level name is omitted, e.g. on `Dendrite1_85` → `ExcChannel:Output`); single dashed stub from the local output port (no fan-out to each external consumer).
+  - Resolution uses `UModernDiagramScopePath` / `resolveNodeByIdOnDiagram`: strip **current scope** from model-root ids, then take the visible top child (not the global first segment).
+  - StructTrain sample: at **Neuron** scope, `Dendrite1_85.ExcChannel → Dendrite1_84.*` is an internal peer edge (no diamond). Drill into **Dendrite1_85** → two right diamonds (`ExcChannel:Output`, `InhChannel:Output`) for the sibling-channel exports.
 
 ## Link routing
 
@@ -32,14 +35,15 @@ Defaults match the polished `Dendrite1_85` layout (TimeNeuronTimeLearnerBranch/T
 - Modes (`RouteMode::Auto`):
   - **ExternalCorridor** — dashed external incoming: outside top/bottom envelope (no forced left detour); `parallelIndex` spreads fan-out lanes.
   - **OrthogonalAvoid** — reverse internal links (`start.x > end.x + ε`): H-ended Manhattan; never falls back to L→R cubic.
-  - **CubicFallback** — forward internal links (classic Bezier, horizontal tangents).
+  - **CubicFallback** — forward internal links and external **outgoing** stubs (classic Bezier, horizontal tangents).
 - Colors:
   - forward / external: `link.solid` (blue);
   - reverse: `link.reverse` (green) via `UStyleManager::getLinkReverseColor()`;
   - temp rubber-band: `link.dashed`.
-- External port placement (`layoutOptimal`):
+- External **incoming** port placement (`layoutOptimal`, left):
   - X: `leftOfBounds` and `leftOfTargets`;
   - Y: target centers / **median** / span center, row samples, and outside `bounds±gap`;
   - scoring uses **ExternalCorridor**; **no** outside-band Y penalty when the port is already in the left pocket (fan-out bus);
   - left-pocket dashed routes prefer a shared vertical stem at `S.x` over a full top/bottom envelope (avoids kink piles for N≫1 tips).
+- External **outgoing** sink placement (right): immediately to the **right of the source node** (`sinkTopLeftBesideSource`); auto-restored positions in the left input pocket are ignored. Settings group `UModernDiagramWidget_ExternalSinkPositions`.
 - Wired from `UModernDiagramLinkItem::updateGeometry`.
