@@ -179,6 +179,7 @@ add_executable(Test_UModernDiagramWidget_Movement
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramView.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramLinkItem.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramLinkRouter.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramExternalSourceItem.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramNodeItem.cpp
     ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramViewportManager.cpp

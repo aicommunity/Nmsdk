@@ -27,6 +27,9 @@ classDiagram
         +getNodeFillColor()
         +getPortInputColor()
         +getLinkColor()
+        +getLinkTempColor()
+        +getLinkReverseColor()
+        +getLinkWidth()
     }
     
     class QApplication {
@@ -210,6 +213,9 @@ classDiagram
         +getNodeFillColor()
         +getPortInputColor()
         +getLinkColor()
+        +getLinkTempColor()
+        +getLinkReverseColor()
+        +getLinkWidth()
     }
     
     class QApplication {
