@@ -8,6 +8,17 @@
 - Dense horizontal chains (dendrites) use pitch **X ≈ 11** kernel units (`NPulseNeuron::BuildStructure`).
 - `SetCoord` inside `Build` / `ApplyDiagramLayout` overwrites child positions on rebuild.
 
+## Membrane segment internals (`NPulseMembrane::ABuild`)
+
+Defaults match the polished `Dendrite1_85` layout (TimeNeuronTimeLearnerBranch/Test):
+
+| N synapses / mechanism | Layout |
+|------------------------|--------|
+| **N = 1** | Exc: `ExcSynapse (0.3, 1.6)` → `ExcChannel (7.3, 1.6)`; Inh: `(0.3, 5.25)` → `(7.3, 5.25)` |
+| **N > 1** | Synapses in a **left column** (`Y += i * 3.5`); channel on the **right** at mid-Y of that column. Inh row base = `max(5.25, 1.6 + N_exc * 3.5)` so it clears the Exc column. |
+
+`NPulseMembraneIzhikevich` places `PosChannel` on the Exc-channel slot. Synapse `Trainer` stays at relative `(0, -3)`.
+
 ## Link enumeration (scope)
 
 - Internal draw pass uses `scopeChildBoundaryLinksXmlFromModelScope` (personal links of direct children), matching classic `SaveComponentDrawInfo`.
