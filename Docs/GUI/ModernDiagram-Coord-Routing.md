@@ -10,11 +10,11 @@
 
 ## Membrane segment internals (`NPulseMembrane::ABuild`)
 
-Defaults match the polished `Dendrite1_85` layout (TimeNeuronTimeLearnerBranch/Test):
+Defaults match the polished `Dendrite1_85` layout (TimeNeuronTimeLearnerBranch/Test), with a wider Syn→Channel gap:
 
 | N synapses / mechanism | Layout |
 |------------------------|--------|
-| **N = 1** | Exc: `ExcSynapse (0.3, 1.6)` → `ExcChannel (7.3, 1.6)`; Inh: `(0.3, 5.25)` → `(7.3, 5.25)` |
+| **N = 1** | Exc: `ExcSynapse (0.3, 1.6)` → `ExcChannel (17.8, 1.6)`; Inh: `(0.3, 5.25)` → `(17.8, 5.25)` (ΔX = 1 block + 1.5 blocks) |
 | **N > 1** | Synapses in a **left column** (`Y += i * 3.5`); channel on the **right** at mid-Y of that column. Inh row base = `max(5.25, 1.6 + N_exc * 3.5)` so it clears the Exc column. |
 
 `NPulseMembraneIzhikevich` places `PosChannel` on the Exc-channel slot. Synapse `Trainer` stays at relative `(0, -3)`.
@@ -39,6 +39,7 @@ Defaults match the polished `Dendrite1_85` layout (TimeNeuronTimeLearnerBranch/T
   - temp rubber-band: `link.dashed`.
 - External port placement (`layoutOptimal`):
   - X: `leftOfBounds` and `leftOfTargets`;
-  - Y: target centers, row samples, and **outside** `bounds±gap` candidates;
-  - scoring uses **ExternalCorridor** (live obstacleHits) plus a penalty for Y inside the node band.
+  - Y: target centers / **median** / span center, row samples, and outside `bounds±gap`;
+  - scoring uses **ExternalCorridor**; **no** outside-band Y penalty when the port is already in the left pocket (fan-out bus);
+  - left-pocket dashed routes prefer a shared vertical stem at `S.x` over a full top/bottom envelope (avoids kink piles for N≫1 tips).
 - Wired from `UModernDiagramLinkItem::updateGeometry`.
