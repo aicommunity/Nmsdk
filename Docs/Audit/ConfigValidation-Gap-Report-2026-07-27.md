@@ -20,14 +20,14 @@ python3 Scripts/generate_detailed_validation_report.py --subdir TestValidation -
 | Model missing | 2 |
 | Other errors | 4 |
 
-Отчёт: [ConfigValidation-Detailed-Report.md](../../Reports/ConfigValidation-Detailed-Report.md). Кэш: `Reports/ConfigValidation-Results.jsonl`.
+Отчёт: [ConfigValidation-Detailed-Report.md] (исторический путь `../../Reports/ConfigValidation-Detailed-Report.md`; файл/каталог отсутствует в текущем checkout). Кэш: `Reports/ConfigValidation-Results.jsonl`.
 
 ### CI / интеграционные тесты
 
 Покрытие в [Tests/Integration/ConfigValidation/](../../Tests/Integration/ConfigValidation/):
 - valid / missing model / missing parameters / invalid XML / empty model / invalid classes / invalid links
 
-**Gaps vs historical [Reports/NextSteps-Plan.md](../../Reports/NextSteps-Plan.md):**
+**Gaps vs historical [Reports/NextSteps-Plan.md] (исторический путь `../../Reports/NextSteps-Plan.md`; файл/каталог отсутствует в текущем checkout):**
 1. Полный прогон всех `Bin/Configs/SpikeSamples` + legacy — не в CI (долго); запускать с `--subdir SpikeSamples` по необходимости.
 2. Исторические «288 несуществующих классов» / «другие ошибки» на полном дереве — требуют отдельного nightly budget (`--time-budget-seconds` ≥ 540) и сверки с `check_registered_classes.py`.
 3. CI gap: ConfigValidation tests покрывают synthetic fixtures, не production SpikeSamples corpus.
