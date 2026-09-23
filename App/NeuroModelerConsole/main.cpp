@@ -296,8 +296,13 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
                << "(MaxCalcTime stays 0 / IsCalcFinished never becomes true).";
    }
    QTimer* monitor = new QTimer(QCoreApplication::instance());
-   QObject::connect(monitor, &QTimer::timeout, [&, cliSaveProject, cliExitAfterCalc]()
+   // Latch: one SaveProject and one quit per run (A15).
+   auto* completionHandled = new bool(false);
+   QObject::connect(monitor, &QTimer::timeout,
+    [&, cliSaveProject, monitor, completionHandled]()
    {
+    if(*completionHandled)
+     return;
     if(!AppCore.application.GetProjectOpenFlag())
      return;
     const auto& cfg = AppCore.application.GetProjectConfig();
@@ -308,6 +313,8 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
      if(env && !env->IsCalcFinished())
       return;
     }
+    *completionHandled = true;
+    monitor->stop();
     if(cliSaveProject)
     {
      if(!AppCore.application.SaveProject())
@@ -318,7 +325,8 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
      }
      qInfo() << "Project saved.";
     }
-    if(cliExitAfterCalc)
+    // Quit on AppCore flag (ini or CLI -x), not only raw cliExitAfterCalc.
+    if(AppCore.exitAfterCalcFlag)
      QCoreApplication::quit();
    });
    monitor->start(500);
