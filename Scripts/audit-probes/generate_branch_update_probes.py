@@ -56,13 +56,14 @@ struct FakeEnv {std::string GetCurrentDataDir(){return "";}};
 struct FakeLogger {template<class...T>void LogMessage(T...){}
  template<class...T>void LogMessageEx(T...){}};
 namespace RDK {FakeLogger* GetLogger(){return nullptr;}}
-constexpr int RDK_EX_INFO=1,RDK_EX_DEBUG=2;
+constexpr int RDK_EX_INFO=1,RDK_EX_DEBUG=2,RDK_EX_ERROR=3;
 class NNeuronTimeLearnerBranch {
 public:
  static constexpr int kPhaseDone=2,kPhasePostTune=4;
  P<bool> IsNeedToTrain{true},PostTrainTuneComplete{false},EnablePostTrainMidThreshold{true};
  P<bool> AutoCalibrateFixedLTZThreshold{false},UseFixedLTZThreshold{true},EnableDebug{false};
  P<int> TrainingPhase{kPhasePostTune},PostTrainTipResistanceMode{4},NumInputDendrite{4},PostTrainTipSearchIters{1};
+ P<int> PostTuneResult{PostTrainTune::kResultNone};
  P<double> FixedLTZThreshold{1},CalibratedFixedLTZThreshold{1},PostTrainSilentThreshold{1},LTZThreshold{1},TipResistanceCanonFloor{1};
  P<std::vector<double>> TipSynapseResistance{std::vector<double>{30,31,32,33}};
  bool PostTuneInferenceMidPending=false,PostTuneFreeRunActive=false,PostTuneSearchReverted=false;
