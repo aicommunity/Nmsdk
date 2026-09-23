@@ -1,9 +1,9 @@
 {
-  "generated_utc": "2026-09-23T10:34:39.082399+00:00",
-  "pulselib_head": "8c04814f741e3bd90c02c68247963640cc7cf909",
-  "bin_head": "616deefa053cd539c7263b71c22d85ee1469fee0",
+  "generated_utc": "2026-09-23T23:10:00+00:00",
+  "pulselib_head": "d4149190aa30a99366eb453bd69306a0278c34f9",
+  "bin_head": "9733281ccaf660785d4a77f95fcfd7cc82f392ca",
   "rdk_head": "c503a04090ea7aa8c4cd09f4abe8d86d68cd66d3",
-  "root_note": "gitlinks may lag until root commit",
+  "root_note": "gitlinks updated after follow-up F1\u2013F5",
   "A01": "closed",
   "A02": "closed",
   "A03": "closed",
@@ -20,20 +20,41 @@
   "A14": "closed",
   "A15": "closed",
   "A16": "closed",
+  "console_path": "Bin/Platform/Linux/NeuroModelerConsole",
+  "console_sha256": "1b719f6f140e82a0da3999ab02c7fce0d183a0c34b5e7521b623c730ec48720f",
+  "console_mtime": "2026-09-23T15:00:58+03:00",
   "stage7_cold_replay": {
-    "status": "blocked",
-    "reason": "NeuroModelerConsole binary not present on this host; rebuild required before V1-V6 calibration-quality runs",
-    "protocol": "Bin/Configs/SpikeSamples/StructTrain/POST_TRAIN_VERIFY.ru.md + fixed posttune_verify.py"
+    "status": "partial",
+    "quality_class": "calibration-quality",
+    "protocol": "Bin/Configs/SpikeSamples/StructTrain/POST_TRAIN_VERIFY.ru.md + posttune_verify.py",
+    "pass": [
+      "asym50",
+      "br100_search"
+    ],
+    "fail": [
+      "br25_on",
+      "br25_off",
+      "asym25",
+      "br100_keep",
+      "phase6_480"
+    ],
+    "notes": "Branch soft_cold retrain NonSeparable/wrong fires; gold inherited-weights still PASS on new Console; A01 DatasetMatrix bind fixed stim_count=4; soft_cold FixedLTZ silent reset"
+  },
+  "probes": {
+    "gui": "13/13 PASS (after-fixes/gui-tests.xml)",
+    "counterexamples_gate": "9/9 PASS excluding A12 PositiveTau",
+    "a12_diagnostic": "FAIL deferred",
+    "branch_update": "8/8 PASS (after-fixes/branch-tests.xml)",
+    "python_ce": "after-fixes/py/"
   },
   "unit_evidence": {
-    "posttune_verify_unit": "10/10 PASS",
+    "posttune_verify_unit": "15/15 PASS (incl. A16 SHA + tipr expect)",
     "selectivity_metrics_fixtures": "per_stim injective + 7 foil FP + last_pulse sum(ISI) PASS"
   },
   "follow_up_required": true,
   "follow_up_items": [
-    "Rebuild NeuroModelerConsole with PulseLib tipr_snapshot/PostTuneResult/analyzer fixes",
-    "Run posttune_verify V1-V6 into _repro/runs/ as calibration-quality",
-    "Re-run Scripts/audit-probes (counterexamples + branch_update) expecting former FAILs to PASS",
+    "Investigate Branch soft_cold retrain NonSeparable / fires\u226010000000 after A01 bind",
+    "phase6_480 cold gate after FixedLTZ soft_cold fix",
     "Optional: held-out robustness; A12 Euler integrator"
   ]
 }
