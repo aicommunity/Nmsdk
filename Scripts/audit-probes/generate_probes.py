@@ -88,7 +88,7 @@ public:
  }
  bool IsPatternComplete()const{
   if(trial_expected_stims_>0) return int(trial_stim_times_.size())>=trial_expected_stims_;
-  return trial_stim_times_.size()==1 || trial_stim_times_.size()>=4;
+  return trial_stim_times_.size()>=4;
  }
  void MaybeClassifyFire(double now,double post_win){
   if(!trial_pattern_complete_) return;
