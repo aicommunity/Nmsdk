@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-09-23T10:34:39.082399+00:00",
+  "pulselib_head": "8c04814f741e3bd90c02c68247963640cc7cf909",
+  "bin_head": "616deefa053cd539c7263b71c22d85ee1469fee0",
+  "rdk_head": "c503a04090ea7aa8c4cd09f4abe8d86d68cd66d3",
+  "root_note": "gitlinks may lag until root commit",
+  "A01": "closed",
+  "A02": "closed",
+  "A03": "closed",
+  "A04": "closed",
+  "A05": "closed",
+  "A06": "closed",
+  "A07": "accepted",
+  "A08": "closed",
+  "A09": "closed",
+  "A10": "closed",
+  "A11": "closed",
+  "A12": "deferred",
+  "A13": "closed",
+  "A14": "closed",
+  "A15": "closed",
+  "A16": "closed",
+  "stage7_cold_replay": {
+    "status": "blocked",
+    "reason": "NeuroModelerConsole binary not present on this host; rebuild required before V1-V6 calibration-quality runs",
+    "protocol": "Bin/Configs/SpikeSamples/StructTrain/POST_TRAIN_VERIFY.ru.md + fixed posttune_verify.py"
+  },
+  "unit_evidence": {
+    "posttune_verify_unit": "10/10 PASS",
+    "selectivity_metrics_fixtures": "per_stim injective + 7 foil FP + last_pulse sum(ISI) PASS"
+  },
+  "follow_up_required": true,
+  "follow_up_items": [
+    "Rebuild NeuroModelerConsole with PulseLib tipr_snapshot/PostTuneResult/analyzer fixes",
+    "Run posttune_verify V1-V6 into _repro/runs/ as calibration-quality",
+    "Re-run Scripts/audit-probes (counterexamples + branch_update) expecting former FAILs to PASS",
+    "Optional: held-out robustness; A12 Euler integrator"
+  ]
+}
