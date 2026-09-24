@@ -130,10 +130,10 @@
     "R03": "code_fixed; posttune probes no Success mid on timeout/NaN",
     "R04": "code_fixed; stale Success overwritten to NonSeparable",
     "R05": "code_fixed; sidechannel absent confirmed",
-    "R06": "code_fixed; e2e negative + phase9 + 21 units",
+    "R06": "code_fixed_clean_workdir+flag_flush_Save_race; unit_tests_22",
     "R07": "code_fixed; metrics_probes schema_ok",
     "control_runs_P15": "completed; gold PASS soft_cold FAIL asym50 FAIL(Need1)",
-    "morphogenesis_P2": "H1 Canon_vs_Keep: Keep also NonSeparable; Canon-alone rejected; next soft_vs_strip",
+    "morphogenesis_P2": "H1 Canon\u2260sole; H2 flag_flush fixes TipR lag; NonSeparable remains; H3 soft-vs-strip queued",
     "tails_plan": "TAILS_PLAN.ru.md",
     "claim_policy": "verified only with probe/bundle paths; no cold PASS without fresh run-bundles"
   }

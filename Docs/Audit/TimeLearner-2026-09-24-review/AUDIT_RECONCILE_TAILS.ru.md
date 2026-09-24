@@ -50,10 +50,12 @@
 | H | Результат |
 |---|---|
 | H1 Canon vs Keep | Keep тоже NonSeparable → Canon не единственная причина |
-| H2 TipR flag≠Parameters / Need=1 Save | **следующая** |
+| H2 TipR flag≠Parameters / Need=1 Save | **подтверждено**: Console `-S` только после IsCalcFinished; early stop → lag. `flush_current_train_flag` синхронизирует TipR/Need из **текущего** Train flag (не archive). После flush: tipr=canon Need=0; FAIL = NonSeparable/gate |
 | H3 soft vs strip/full init | очередь |
 | H4 AutoScale/gap | очередь |
 
 ## Политика claims
 
 `verified` только с путями в `evidence/tails/`. Семь cases PASS — только после свежих runs каждого. A07/A12 без изменений.
+
+После H2: soft_cold FAIL можно относить к **отрицательному landscape (NonSeparable)** плюс оставшийся morphogenesis/L, а не к stale TipR-flat артефакту harness. Полная локализация «только морфогенез» всё ещё требует H3 (soft vs strip).

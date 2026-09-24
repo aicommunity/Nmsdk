@@ -1,0 +1,26 @@
+{
+  "hypothesis": "H2_flag_flush_Save_race",
+  "flush": "flag_flush",
+  "row_fail": true,
+  "train_status": "skip_train_gate_FAIL_gate_rc=1",
+  "tipr_class": "canon",
+  "fires": "",
+  "mid_source": "missing",
+  "fail_notes": [
+    "fires_missing",
+    "gate_fail",
+    "gate_rc=1"
+  ],
+  "after": {
+    "TipSynapseResistance": "2e07 2e07 2e07 8.6e07",
+    "FixedLTZThreshold": "1",
+    "ResistanceMin": "20000000",
+    "IsNeedToTrain": "0",
+    "EnablePostTrainTuning": "1",
+    "PostTrainTipResistanceMode": "1",
+    "PostTrainTuneComplete": "",
+    "TrainingPhase": "",
+    "DendriteLength": "1 1 1 1"
+  },
+  "conclusion": "After flag_flush TipR=canon Need=0; FAIL is gate/NonSeparable mid=1 \u2014 harness TipR-flat artifact removed; landscape NonSeparable remains"
+}

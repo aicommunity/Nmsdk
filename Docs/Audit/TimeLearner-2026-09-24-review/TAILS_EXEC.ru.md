@@ -65,3 +65,12 @@ Evidence: `evidence/tails/T3_H1_canon_vs_keep.json`.
 ## Критерий remediation
 
 T0+T1+T2 **выполнены и задокументированы**. Полный PASS семи cases — нет. T3 начат (H1).
+
+
+## T3 — H2 TipR Save lag — DONE
+
+Console `-S` пишет Parameters только после `IsCalcFinished`. Early stop после flag оставлял TipR=flat Need=1 при flag tipr=canon.
+
+Исправление harness: `flush_current_train_flag` (текущий workdir flag → Parameters/Model). Retest: tipr_class=**canon**, Need=0; FAIL только fires/gate (NonSeparable mid=1).
+
+Evidence: `evidence/tails/T3_H2_flag_flush_RESULT.json`.

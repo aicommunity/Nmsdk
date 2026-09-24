@@ -1,0 +1,186 @@
+{
+  "forensic_prior": [
+    {
+      "label": "soft_cold_canon",
+      "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T170503Z_work",
+      "Train_params": {
+        "Need": "1",
+        "TipR": "86000000 86000000 86000000 86000000",
+        "Fixed": "1",
+        "L": "1 1 1 1",
+        "mode": "1",
+        "Complete": null
+      },
+      "Train_flag": {
+        "mid": "1",
+        "gap": "-0.00098367",
+        "landscape_ok": "0",
+        "inference": "0",
+        "result": "2",
+        "FixedLTZ": "1",
+        "tipr": "2e+07 2e+07 2e+07 8.6e+07",
+        "tipr_snapshot": "2e+07 2e+07 4.20211e+07 8.6e+07",
+        "metrics": "0.102519,0.10328,0.103349,0.103419,0.0786552,0.0790846,0.101577,0.103503"
+      },
+      "Test_params": {
+        "Need": "0",
+        "TipR": "86000000 86000000 86000000 86000000",
+        "Fixed": "1",
+        "L": "1 1 1 1",
+        "mode": "1",
+        "Complete": null
+      },
+      "Test_flag": {
+        "mid": "1",
+        "gap": "-0.00177451",
+        "landscape_ok": "0",
+        "inference": "1",
+        "result": "2",
+        "FixedLTZ": "1",
+        "tipr": "8.6e+07 8.6e+07 8.6e+07 8.6e+07",
+        "metrics": "0.0134003,0.0141973,0.0126681,0.0132587,0.0116843,0.0140422,0.0136387,0.0151749"
+      },
+      "tipr_flag_vs_params_match": false,
+      "need_stuck": true,
+      "nonseparable": true
+    },
+    {
+      "label": "t3_keep",
+      "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_t3_keep_20260924T184149Z_work",
+      "Train_params": {
+        "Need": "1",
+        "TipR": "86000000 86000000 86000000 86000000",
+        "Fixed": "1",
+        "L": "1 1 1 1",
+        "mode": "3",
+        "Complete": null
+      },
+      "Train_flag": {
+        "mid": "1",
+        "gap": "-0.00113693",
+        "landscape_ok": "0",
+        "inference": "0",
+        "result": "2",
+        "FixedLTZ": "1",
+        "tipr": "2e+07 2e+07 4.20211e+07 8.6e+07",
+        "tipr_snapshot": "2e+07 2e+07 4.20211e+07 8.6e+07",
+        "metrics": "0.0838088,0.0845027,0.0845261,0.0845325,0.0641387,0.064503,0.0831975,0.0849457"
+      },
+      "Test_params": {
+        "Need": "0",
+        "TipR": "86000000 86000000 86000000 86000000",
+        "Fixed": "1",
+        "L": "1 1 1 1",
+        "mode": "3",
+        "Complete": null
+      },
+      "Test_flag": {
+        "mid": "1",
+        "gap": "-0.00177451",
+        "landscape_ok": "0",
+        "inference": "1",
+        "result": "2",
+        "FixedLTZ": "1",
+        "tipr": "8.6e+07 8.6e+07 8.6e+07 8.6e+07",
+        "metrics": "0.0134003,0.0141973,0.0126681,0.0132587,0.0116843,0.0140422,0.0136387,0.0151749"
+      },
+      "tipr_flag_vs_params_match": false,
+      "need_stuck": true,
+      "nonseparable": true
+    },
+    {
+      "label": "gold_skip",
+      "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T165949Z_work",
+      "Train_params": {
+        "Need": "0",
+        "TipR": "20000000 20000000 20000000 86000000",
+        "Fixed": "1",
+        "L": "13 11 7 1",
+        "mode": "1",
+        "Complete": null
+      },
+      "Train_flag": null,
+      "Test_params": {
+        "Need": "0",
+        "TipR": "20000000 20000000 20000000 86000000",
+        "Fixed": "0.0718001",
+        "L": "13 11 7 1",
+        "mode": "1",
+        "Complete": null
+      },
+      "Test_flag": {
+        "mid": "0.0718001",
+        "gap": "0.000122244",
+        "landscape_ok": "1",
+        "inference": "1",
+        "result": "1",
+        "FixedLTZ": "0.0718001",
+        "tipr": "2e+07 2e+07 2e+07 8.6e+07",
+        "metrics": "0.0718613,0.0713728,0.0715112,0.071739,0.0711622,0.0711039,0.069854,0.0697481"
+      },
+      "tipr_flag_vs_params_match": false,
+      "need_stuck": false,
+      "nonseparable": false
+    },
+    {
+      "label": "asym50",
+      "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym50_20260924T171141Z_work",
+      "Train_params": {
+        "Need": "1",
+        "TipR": "20000000 20000000 20000000 86000000",
+        "Fixed": "1",
+        "L": "27 22 15 1",
+        "mode": "1",
+        "Complete": null
+      },
+      "Train_flag": null,
+      "Test_params": {
+        "Need": "0",
+        "TipR": "20000000 20000000 20000000 86000000",
+        "Fixed": "0.0100962",
+        "L": "27 22 15 1",
+        "mode": "1",
+        "Complete": null
+      },
+      "Test_flag": {
+        "mid": "0.0100962",
+        "gap": "0.000114223",
+        "landscape_ok": "1",
+        "inference": "1",
+        "result": "1",
+        "FixedLTZ": "0.0100962",
+        "tipr": "2e+07 2e+07 2e+07 8.6e+07",
+        "metrics": "0.0101533,0.00994936,0.0100026,0.0100391,0.00989448,0.00985698,0.00972746,0.0096561"
+      },
+      "tipr_flag_vs_params_match": false,
+      "need_stuck": true,
+      "nonseparable": false
+    }
+  ],
+  "flush_retest": {
+    "hypothesis": "H2_flag_flush_Save_race",
+    "flush": "flag_flush",
+    "row_fail": true,
+    "train_status": "skip_train_gate_FAIL_gate_rc=1",
+    "tipr_class": "canon",
+    "fires": "",
+    "mid_source": "missing",
+    "fail_notes": [
+      "fires_missing",
+      "gate_fail",
+      "gate_rc=1"
+    ],
+    "after": {
+      "TipSynapseResistance": "2e07 2e07 2e07 8.6e07",
+      "FixedLTZThreshold": "1",
+      "ResistanceMin": "20000000",
+      "IsNeedToTrain": "0",
+      "EnablePostTrainTuning": "1",
+      "PostTrainTipResistanceMode": "1",
+      "PostTrainTuneComplete": "",
+      "TrainingPhase": "",
+      "DendriteLength": "1 1 1 1"
+    },
+    "conclusion": "After flag_flush TipR=canon Need=0; FAIL is gate/NonSeparable mid=1 \u2014 harness TipR-flat artifact removed; landscape NonSeparable remains"
+  }
+}
