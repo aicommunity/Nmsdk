@@ -30,32 +30,39 @@
     "R01": {
       "priority": 2,
       "evidence": "isolated_coincident_boundary_transition",
-      "scheduler_reachability": "not_established"
+      "scheduler_reachability": "not_established",
+      "remediation": "close_first_independent_of_stim_edge"
     },
     "R02": {
       "priority": 1,
-      "evidence": "extracted_analyzer_methods"
+      "evidence": "extracted_analyzer_methods",
+      "remediation": "EffectiveDatasetDelaySec_ge_1.55_plus_censored"
     },
     "R03": {
       "priority": 1,
-      "evidence": "extracted_update_and_finalize_TL_Branch"
+      "evidence": "extracted_update_and_finalize_TL_Branch",
+      "remediation": "SampleMetricState_and_no_mid_on_timeout"
     },
     "R04": {
       "priority": 2,
       "evidence": "static_reset_chain_and_finalize_with_prior_result",
-      "two_full_training_cycles_run": false
+      "two_full_training_cycles_run": false,
+      "remediation": "ClearPostTuneResult_on_attempt"
     },
     "R05": {
       "priority": 2,
-      "evidence": "Branch_accumulator_probe_and_TL_source_comparison"
+      "evidence": "Branch_accumulator_probe_and_TL_source_comparison",
+      "remediation": "removed_Branch_soma_sidechannel"
     },
     "R06": {
       "priority": 1,
-      "evidence": "real_verifier_helpers_and_mocked_external_train_gate"
+      "evidence": "real_verifier_helpers_and_mocked_external_train_gate",
+      "remediation": "prepare_clean_case_accept_run"
     },
     "R07": {
       "priority": 2,
-      "evidence": "actual_python_metrics_invalid_input_and_N1_fixtures"
+      "evidence": "actual_python_metrics_invalid_input_and_N1_fixtures",
+      "remediation": "schema_csv_v3_ok_audit_strict_shape"
     }
   },
   "verification": {
@@ -106,5 +113,17 @@
   "documentation_commits": {
     "PulseLib": "8d88c08770f1fc9176e719036af3094f5d8b940c",
     "Bin": "820c76595440694678dbe6914c41d04ecc256716"
+  },
+  "remediation_2026_09_24": {
+    "code_changes": "implemented_pending_rebuild_and_control_runs",
+    "R01": "code_fixed_sample_close_first_censored; scheduler_reachability_pending",
+    "R02": "code_fixed_delay_ge_late_window_and_censored_csv",
+    "R03": "code_fixed_sample_state_timeout_nan",
+    "R04": "code_fixed_result_reset_always_assign",
+    "R05": "code_fixed_branch_no_soma_sidechannel_tl_soma_max",
+    "R06": "code_fixed_clean_workdir_accept_run_phase9; unit_tests_21",
+    "R07": "code_fixed_schema_n1_csv_v3_legacy_rename",
+    "control_runs_P15": "protocol_documented; cold_runs_need_console_rebuild",
+    "morphogenesis_P2": "gated_on_P15_fail; protocol_documented"
   }
 }

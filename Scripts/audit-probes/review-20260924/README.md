@@ -44,3 +44,5 @@ cl /nologo /EHsc /std:c++17 build/audit-review-20260924/analyzer/analyzer-bounda
 Исторический и текущий analyzer-срезы для исходных A01–A04 сохранены как [analyzer-historical.cpp](../../../Docs/Audit/TimeLearner-2026-09-24-review/evidence/analyzer/analyzer-historical.cpp) и [analyzer-current.cpp](../../../Docs/Audit/TimeLearner-2026-09-24-review/evidence/analyzer/analyzer-current.cpp), со source hash. Их можно отдельно собрать C++17-компилятором.
 
 Обычный набор GUI/CE/Branch остаётся в [родительском README](../README.md); A12 исключён из обязательного gate.
+
+После remediation R01–R07 (2026-09-24): production Update/Finalize/analyzer изменены. Пересоберите probes и ожидайте, что прежние контрпримеры timeout/NaN/stale Success / incomplete_sample / branch_ltz_mode **перестанут** демонстрировать ошибочный mid/Success (exit 0 скрипта по-прежнему = «опыт выполнен», не quality PASS). См. [REMEDIATION_NOTES.ru.md](../../../Docs/Audit/TimeLearner-2026-09-24-review/REMEDIATION_NOTES.ru.md).

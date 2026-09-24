@@ -35,3 +35,5 @@
 - A07 — принятая same-Matrix калибровка; A12 отложен. Held-out/замена интегратора не обязательны.
 
 [Сводка опытов](../../../../Bin/Configs/SpikeSamples/StructTrain/_repro/POSTTUNE_VERIFY_RESULT.md). Заявленные 2 PASS не объявляются ложными; текущие артефакты и harness недостаточны для независимой приёмки всего HEAD.
+
+**Remediation (код):** см. [REMEDIATION_NOTES.ru.md](../../TimeLearner-2026-09-24-review/REMEDIATION_NOTES.ru.md) и [status.json remediation_2026_09_24](../../TimeLearner-2026-09-24-review/status.json). Контроли P1.5 / морфогенез P2: `_repro/CONTROL_RUNS_P15.md`, `_repro/MORPHOGENESIS_P2.md`.
