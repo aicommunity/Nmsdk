@@ -1,0 +1,21 @@
+test_parse_flag_tipr_multivalue (test_posttune_verify_unit.TestFlags.test_parse_flag_tipr_multivalue) ... ok
+test_train_test_flags_not_merged (test_posttune_verify_unit.TestFlags.test_train_test_flags_not_merged) ... ok
+test_mid_source_cpp_ok (test_posttune_verify_unit.TestMidSource.test_mid_source_cpp_ok) ... ok
+test_mid_source_requires_landscape (test_posttune_verify_unit.TestMidSource.test_mid_source_requires_landscape) ... ok
+test_sha256_file_roundtrip (test_posttune_verify_unit.TestProvenanceHash.test_sha256_file_roundtrip) ... ok
+test_sha256_paths_keys (test_posttune_verify_unit.TestProvenanceHash.test_sha256_paths_keys) ... ok
+test_classify_slog_order (test_posttune_verify_unit.TestSlog.test_classify_slog_order) ... ok
+test_tipr_expect_fail_fixture (test_posttune_verify_unit.TestTiprExpect.test_tipr_expect_fail_fixture)
+Canon case with flat TipR must fail the expect gate. ... ok
+test_tipr_matches_expect_canon_flat (test_posttune_verify_unit.TestTiprExpect.test_tipr_matches_expect_canon_flat) ... ok
+test_tipr_matches_expect_legacy (test_posttune_verify_unit.TestTiprExpect.test_tipr_matches_expect_legacy) ... ok
+test_tipr_numeric_equal_sci_vs_decimal (test_posttune_verify_unit.TestTiprNumeric.test_tipr_numeric_equal_sci_vs_decimal) ... ok
+test_tipr_vs_snapshot_applied_best (test_posttune_verify_unit.TestTiprNumeric.test_tipr_vs_snapshot_applied_best) ... ok
+test_tipr_vs_snapshot_reverted (test_posttune_verify_unit.TestTiprNumeric.test_tipr_vs_snapshot_reverted) ... ok
+test_tipr_vs_snapshot_same_fail (test_posttune_verify_unit.TestTiprNumeric.test_tipr_vs_snapshot_same_fail) ... ok
+test_verdict_exit (test_posttune_verify_unit.TestVerdict.test_verdict_exit) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.022s
+
+OK

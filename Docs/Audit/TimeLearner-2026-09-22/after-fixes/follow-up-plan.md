@@ -1,5 +1,7 @@
 # Follow-up после исправлений аудита TimeLearner-2026-09-22
 
+**Этот план сохраняет состояние прежнего follow-up.** Его порядок и статусы заменены [NEXT_PLAN.ru.md](NEXT_PLAN.ru.md) по повторной проверке 2026-09-24. Зелёные узкие probes не закрывают все пути измерения и provenance.
+
 ## Обязательно до заявлений о calibration-quality на HEAD
 
 1. ~~Пересобрать `NeuroModelerConsole`~~ — done (`Bin/Platform/Linux/…`, SHA в after-fixes).

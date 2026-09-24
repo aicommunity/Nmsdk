@@ -1,0 +1,110 @@
+{
+  "review_date": "2026-09-24",
+  "scope": {
+    "root_baseline": "23e4e8231e2bd1c7201f724fd5510f824c229dad",
+    "root_reviewed": "14286c9ebf80193a3436790850ba39e3844fbe44",
+    "pulselib_reviewed": "d4149190aa30a99366eb453bd69306a0278c34f9",
+    "bin_reviewed": "9733281ccaf660785d4a77f95fcfd7cc82f392ca",
+    "rdk_reviewed": "c503a04090ea7aa8c4cd09f4abe8d86d68cd66d3"
+  },
+  "historical_audit": "main_findings_supported_with_documented_scope_limits",
+  "original_ids": {
+    "A01": "partial_boundary_contract_R01",
+    "A02": "partial_observation_window_R02",
+    "A03": "immutable_label_fixed_boundary_R01_separate",
+    "A04": "injective_matching_fixed_N1_limit_R07",
+    "A05": "original_foil_FP_fixed_schema_and_legacy_limits_R07",
+    "A06": "original_sum_ISI_fixed_schema_N_limits_R07",
+    "A07": "accepted_current_algorithm",
+    "A08": "partial_live_validity_timeout_R03_result_R04",
+    "A09": "reported_best_reprobe_setup_fallback_paths_fixed_end_to_end_R03_R05",
+    "A10": "partial_metric_collector_R05",
+    "A11": "reported_axon_off_by_one_fixed",
+    "A12": "deferred_small_step_assumption",
+    "A13": "registration_fixed_static_not_full_storage_runtime",
+    "A14": "segment_intersection_fixed_tested",
+    "A15": "reported_single_CLI_run_fixed_static_not_GUI_proof",
+    "A16": "partial_run_acceptance_and_stale_artifacts_R06"
+  },
+  "findings": {
+    "R01": {
+      "priority": 2,
+      "evidence": "isolated_coincident_boundary_transition",
+      "scheduler_reachability": "not_established"
+    },
+    "R02": {
+      "priority": 1,
+      "evidence": "extracted_analyzer_methods"
+    },
+    "R03": {
+      "priority": 1,
+      "evidence": "extracted_update_and_finalize_TL_Branch"
+    },
+    "R04": {
+      "priority": 2,
+      "evidence": "static_reset_chain_and_finalize_with_prior_result",
+      "two_full_training_cycles_run": false
+    },
+    "R05": {
+      "priority": 2,
+      "evidence": "Branch_accumulator_probe_and_TL_source_comparison"
+    },
+    "R06": {
+      "priority": 1,
+      "evidence": "real_verifier_helpers_and_mocked_external_train_gate"
+    },
+    "R07": {
+      "priority": 2,
+      "evidence": "actual_python_metrics_invalid_input_and_N1_fixtures"
+    }
+  },
+  "verification": {
+    "gui": {
+      "pass": 13,
+      "fail": 0
+    },
+    "original_counterexamples_excluding_A12": {
+      "pass": 9,
+      "fail": 0
+    },
+    "branch_probes": {
+      "pass": 8,
+      "fail": 0
+    },
+    "verifier_unit": {
+      "pass": 15,
+      "fail": 0
+    },
+    "additional_probes": "reproduce_documented_counterexamples; zero process exit is not quality PASS",
+    "full_console_or_cold_run_performed": false,
+    "production_source_sha_unchanged": true,
+    "documentation": {
+      "files": 22,
+      "local_links": 149,
+      "missing_destinations": 0
+    }
+  },
+  "cold_follow_up": {
+    "status": "developer_reported_not_independently_verified",
+    "reported_pass": [
+      "asym50",
+      "br100_search"
+    ],
+    "reported_fail": [
+      "br25_on",
+      "br25_off",
+      "asym25",
+      "br100_keep",
+      "phase6_480"
+    ],
+    "fresh_run_bundles_available": false,
+    "declared_linux_console_available": false,
+    "historical_results_declared_false": false
+  },
+  "production_algorithms_modified_in_review": false,
+  "plan": "PLAN.ru.md",
+  "documentation_commits": {
+    "PulseLib": "8d88c08770f1fc9176e719036af3094f5d8b940c",
+    "Bin": "820c76595440694678dbe6914c41d04ecc256716"
+  }
+}
