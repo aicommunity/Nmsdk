@@ -70,11 +70,13 @@ public:
  FakeDataset fake_ds; FakeDataset* dataset_source_=&fake_ds;
  bool trial_active_=false, trial_window_closed_=false, playback_stopped_=false;
  bool trial_pattern_complete_=false, trial_neu_edge_consumed_=false;
+ bool trial_censored_=false, trial_incomplete_=false, pending_neu_valid_=false;
  int trial_neuron_fired_=0, trial_late_fired_=0, trial_target_class_=1, current_class=1;
  int trial_sample_id_=-1, trial_expected_stims_=0;
  double trial_t_last_stim_=0, trial_t_neuron_=-1, trial_t_late_neuron_=-1;
  double trial_observe_until_=-1, trial_t_first_stim_=0;
  double trial_sample_start_abs_=0, trial_expected_last_stim_abs_=-1;
+ double pending_neu_time_=-1;
  std::vector<double> trial_stim_times_, prev_stimulus_{0}, prev_neuron_{0}, spikes;
  struct Result{int count,fired,late,label;}; std::vector<Result> closed;
  static std::string ClassifyResponseMorphology(const std::vector<double>&, const std::vector<double>&);

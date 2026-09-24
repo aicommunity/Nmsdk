@@ -1,0 +1,15 @@
+branch_timeout_before_foil result=4 complete=1 mid=1 metrics=0.5,0,
+tl_timeout_before_foil result=4 complete=1 mid=1 metrics=0.5,0,
+branch_nan_in_foil_trace result=5 complete=1 mid=1 metrics=0.5,0,
+tl_nan_in_foil_trace result=5 complete=1 mid=1 metrics=0.5,0,
+branch_stale_success result=2 complete=1 mid=1 metrics=0.5,0.6,
+tl_stale_success result=2 complete=1 mid=1 metrics=0.5,0.6,
+branch_ltz_mode live_max=0.2 expected_ltz_peak=0.2 sidechannel_absent=1
+ 
+historical_tl_higher_foil mid=0.35 complete=1
+historical_branch_higher_foil mid=1 complete=1
+historical_branch_nan mid=0.495 complete=1
+historical_tl_best setup_called=0 mid=0.35 complete=1 tips0=20 metrics=0.5,0.2,
+historical_branch_best setup_called=1 mid=1 complete=0 tips0=20 metrics=0,0,
+historical_branch_reverted_snapshot tips0=10 metrics=0.5,0.6,
+ 

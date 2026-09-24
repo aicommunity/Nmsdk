@@ -68,9 +68,12 @@ public:
  P<std::vector<double>> TipSynapseResistance{std::vector<double>{30,31,32,33}};
  bool PostTuneInferenceMidPending=false,PostTuneFreeRunActive=false,PostTuneSearchReverted=false;
  bool PostTuneHaveSavedMatrix=false,CanChangeDendLength=false,PostTuneInferenceMidDone=false;
+ bool PostTuneRunInvalid=false;
+ int PostTuneRunTerminal=PostTrainTune::kResultNone;
  double PostTuneLiveSomaMax=0,PostTuneFreeRunStartTime=-1,PostTuneBestGap=.4;
  int PostTuneLastDatasetIter=-1,PostTunePatternIndex=1,PostTuneSearchMult=2,PostTuneSearchTip=3,PostTuneSearchPass=0;
  std::vector<double> PostTuneMetrics{.5,.2},PostTuneTipSnapshot{10,11,12,13},PostTuneTrialTips{30,31,32,33},PostTuneBestTips{20,21,22,23},PostTuneTargetIsi;
+ std::vector<PostTrainTune::SampleMetricState> PostTuneSampleState;
  std::vector<std::vector<double>> PostTunePatterns{{.01},{.02}};
  MDMatrix<double> PostTuneSavedMatrix,PostTuneSavedClasses,InputPattern;
  FakeDataset* Dataset=nullptr;FakeNeuron* Neuron=nullptr;FakeEnv* Environment=nullptr;

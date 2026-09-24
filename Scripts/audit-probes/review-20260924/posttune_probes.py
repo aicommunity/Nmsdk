@@ -1,12 +1,12 @@
 """Independent current-source PostTune counterexamples. No production edits.
 
 Extract full FinalizePostTuneMid and UpdatePostTuneFreeRunPeak unchanged;
-stub framework, clock, dataset and instantaneous signal only. The mode probe
-additionally executes the unchanged soma-accumulator block from ACalculate.
-No full application or physics integration is claimed.
+stub framework, clock, dataset and instantaneous signal only.
+Compiles with g++ (Linux) or MSVC cl.exe when present.
+After R05 the Branch ACalculate soma→LiveSomaMax side-channel is gone.
 """
 from pathlib import Path
-import ast, re, hashlib, os, subprocess, json
+import ast, re, hashlib, os, subprocess, json, shutil
 ROOT=next(p for p in Path(__file__).resolve().parents if (p / ".gitmodules").exists())
 OUT=ROOT/"build/audit-review-20260924/posttune"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -15,7 +15,7 @@ tree=ast.parse((ROOT/'Scripts/audit-probes/generate_branch_update_probes.py').re
 prefix=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='prefix' for t in n.targets))
 prefix=prefix.replace('#include <gtest/gtest.h>', '#include <iostream>')
 prefix=prefix.replace('struct FakeEnv {std::string GetCurrentDataDir(){return "";}};', 'struct FakeTime {double now=0;double GetDoubleTime(){return now;}}; struct FakeEnv {FakeTime time;FakeTime& GetTime(){return time;} std::string GetCurrentDataDir(){return "";}};')
-prefix=prefix.replace('void FinalizePostTuneMid();void HandlePostTuneFinishIteration();', 'void FinalizePostTuneMid();void UpdatePostTuneFreeRunPeak();double amp=.5; double ReadPostTuneLiveMetric()const{return amp;} double EffectiveDatasetDelaySec(){return .1;} double PatternSpanSec(){return .1;} double SettleMarginSec(){return .1;} void SomaBlock(double soma_amp);')
+prefix=prefix.replace('void FinalizePostTuneMid();void HandlePostTuneFinishIteration();', 'void FinalizePostTuneMid();void UpdatePostTuneFreeRunPeak();double amp=.5; double ReadPostTuneLiveMetric()const{return amp;} double EffectiveDatasetDelaySec(){return .1;} double PatternSpanSec(){return .1;} double SettleMarginSec(){return .1;};')
 raw_by_type={name:(PULSE/(name+'.cpp')).read_text(encoding='utf-8') for name in ['NNeuronTimeLearnerBranch','NNeuronTimeLearner']}
 def extract(raw,signature):
     clean=re.sub(r'//[^\n]*|/\*[\s\S]*?\*/|"(?:\\.|[^"\\])*"',lambda m: ''.join('\n' if c=='\n' else ' ' for c in m[0]),raw)
@@ -29,13 +29,15 @@ parts.append(prefix[start:].replace('NNeuronTimeLearnerBranch','NNeuronTimeLearn
 for name,raw in raw_by_type.items():
     for method in ['FinalizePostTuneMid','UpdatePostTuneFreeRunPeak']:
         parts.append(extract(raw,f'void {name}::{method}(void)'))
+# R05: production must NOT write soma into PostTuneLiveSomaMax in ACalculate.
 snippet='if(PostTuneFreeRunActive && soma_amp > PostTuneLiveSomaMax)\n    PostTuneLiveSomaMax = soma_amp;'
-assert snippet in raw_by_type['NNeuronTimeLearnerBranch']
-parts.append('void NNeuronTimeLearnerBranch::SomaBlock(double soma_amp){'+snippet+'}')
+assert snippet not in raw_by_type['NNeuronTimeLearnerBranch'], 'R05 regression: soma side-channel still present'
 parts.append(r'''
 template<class T> void prepare(T& b,FakeDataset& d,FakeNeuron& n,FakeEnv& e) {
  b.IsNeedToTrain=false;b.TrainingPhase=2;b.PostTuneInferenceMidPending=true;
  b.PostTuneFreeRunActive=true;b.PostTuneMetrics={0,0};b.PostTuneFreeRunStartTime=0;
+ b.PostTuneSampleState.clear();b.PostTuneRunInvalid=false;b.PostTuneRunTerminal=PostTrainTune::kResultNone;
+ b.PostTuneResult=PostTrainTune::kResultNone;
  b.Dataset=&d;b.Neuron=&n;b.Environment=&e;d.StateGeneration=2;
 }
 template<class T> void dump(const char* label,T& b) {
@@ -65,31 +67,55 @@ int main(){
  stale_result<NNeuronTimeLearnerBranch>("branch_stale_success");
  stale_result<NNeuronTimeLearner>("tl_stale_success");
  NNeuronTimeLearnerBranch b;FakeDataset d;FakeNeuron n;FakeEnv e;prepare(b,d,n,e);
- // ReadPostTuneLiveMetric() is stubbed to its explicit-LTZ output 0.2.
- // ACalculate soma side channel remains active before the real update.
- b.amp=.2;b.SomaBlock(.8);b.UpdatePostTuneFreeRunPeak();
- std::cout<<"branch_ltz_mode actual_accumulator="<<b.PostTuneLiveSomaMax<<" expected_ltz_peak=0.2\n";
+ // R05: only ReadPostTuneLiveMetric (amp) feeds the accumulator; no soma side-channel.
+ b.amp=.2;b.UpdatePostTuneFreeRunPeak();
+ std::cout<<"branch_ltz_mode live_max="<<b.PostTuneLiveSomaMax<<" expected_ltz_peak=0.2"
+          <<" sidechannel_absent=1\n";
 }
 ''')
 (OUT/'current_source_probes.cpp').write_text('\n'.join(parts),encoding='utf-8')
-env={k.upper():v for k,v in os.environ.items()}
-ms=Path('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207')
-sdk=Path('C:/Program Files (x86)/Windows Kits/10'); version='10.0.26100.0'
-env['PATH']=str(ms/'bin/Hostx64/x64')+';'+str(sdk/f'bin/{version}/x64')+';'+env['PATH']
-env['INCLUDE']=';'.join(str(p) for p in [ms/'include']+[sdk/f'Include/{version}/{p}' for p in ['ucrt','shared','um','winrt']])
-env['LIB']=';'.join(str(p) for p in [ms/'lib/x64']+[sdk/f'Lib/{version}/{p}/x64' for p in ['ucrt','um']])
-cmd=[str(ms/'bin/Hostx64/x64/cl.exe'),'/nologo','/EHsc','/std:c++17','/I'+str(PULSE),str(OUT/'current_source_probes.cpp'),str(PULSE/'NNeuronPostTrainTune.cpp'),'/Fe:'+str(OUT/'current_source_probes.exe')]
-build=subprocess.run(cmd,env=env,cwd=OUT,text=True,capture_output=True)
-(OUT/'build.log').write_text(build.stdout+'\n'+build.stderr,encoding='utf-8')
-if build.returncode:
-    print(build.stdout,build.stderr);raise SystemExit(build.returncode)
-run=subprocess.run([str(OUT/'current_source_probes.exe')],cwd=OUT,text=True,capture_output=True)
+
+def compile_and_run(cpp: Path, helper: Path | None, exe: Path, include_dirs: list[Path], log: Path):
+    cl = Path('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe')
+    if cl.exists():
+        env={k.upper():v for k,v in os.environ.items()}
+        ms=Path('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207')
+        sdk=Path('C:/Program Files (x86)/Windows Kits/10'); version='10.0.26100.0'
+        env['PATH']=str(ms/'bin/Hostx64/x64')+';'+str(sdk/f'bin/{version}/x64')+';'+env['PATH']
+        env['INCLUDE']=';'.join(str(p) for p in [ms/'include']+[sdk/f'Include/{version}/{p}' for p in ['ucrt','shared','um','winrt']])
+        env['LIB']=';'.join(str(p) for p in [ms/'lib/x64']+[sdk/f'Lib/{version}/{p}/x64' for p in ['ucrt','um']])
+        cmd=[str(cl),'/nologo','/EHsc','/std:c++17']
+        for d in include_dirs:
+            cmd.append('/I'+str(d))
+        cmd += [str(cpp)]
+        if helper:
+            cmd.append(str(helper))
+        cmd.append('/Fe:'+str(exe))
+        build=subprocess.run(cmd,env=env,cwd=OUT,text=True,capture_output=True)
+    else:
+        gxx=shutil.which('g++')
+        if not gxx:
+            raise SystemExit('no C++ compiler (g++/cl) for posttune probes')
+        cmd=[gxx,'-std=c++17','-O2','-o',str(exe)]
+        for d in include_dirs:
+            cmd += ['-I',str(d)]
+        cmd.append(str(cpp))
+        if helper:
+            cmd.append(str(helper))
+        build=subprocess.run(cmd,cwd=OUT,text=True,capture_output=True)
+    log.write_text(build.stdout+'\n'+build.stderr,encoding='utf-8')
+    if build.returncode:
+        print(build.stdout,build.stderr);raise SystemExit(build.returncode)
+    run=subprocess.run([str(exe)],cwd=OUT,text=True,capture_output=True)
+    return run
+
+run=compile_and_run(OUT/'current_source_probes.cpp', PULSE/'NNeuronPostTrainTune.cpp',
+                    OUT/'current_source_probes', [PULSE], OUT/'build.log')
 (OUT/'results.txt').write_text(run.stdout+run.stderr,encoding='utf-8')
 (OUT/'source_sha256.json').write_text(json.dumps({str(PULSE/(name+'.cpp')):hashlib.sha256((PULSE/(name+'.cpp')).read_bytes()).hexdigest() for name in raw_by_type},indent=2),encoding='utf-8')
 print(run.stdout,run.stderr)
 
 # Retrospective reproduction at the exact PulseLib gitlink in audit root23e4.
-# Compatibility stub has PostTuneResult, but historical bodies never write it.
 revision='17854a4fabd53841d8840d382a2186ba1cadbd80'
 def git_file(path):
     return subprocess.check_output(['git','-c','safe.directory='+str(PULSE.parent).replace('\\','/'),'-C',str(PULSE.parent),'show',revision+':'+path]).decode('utf-8')
@@ -101,6 +127,11 @@ old_helper=OUT/'historical_posttrain_helper.cpp'
 old_helper.write_text(git_file('Core/NNeuronPostTrainTune.cpp'),encoding='utf-8')
 old_prefix=prefix.replace('void FinalizePostTuneMid();','void FinalizePostTuneMid();void HandlePostTuneFinishIteration();')
 old_prefix=old_prefix.replace('PostTrainTune::kResultNone','0')
+# Historical prefix lacks SampleState fields — strip them for old bodies if present
+for token in ('bool PostTuneRunInvalid=false;',
+              'int PostTuneRunTerminal=PostTrainTune::kResultNone;',
+              'std::vector<PostTrainTune::SampleMetricState> PostTuneSampleState;'):
+    old_prefix=old_prefix.replace(token,'')
 old_parts=[old_prefix,old_prefix[old_prefix.index('class NNeuronTimeLearnerBranch'):].replace('NNeuronTimeLearnerBranch','NNeuronTimeLearner')]
 for name,raw in historic.items():
     for method in ['FinalizePostTuneMid','HandlePostTuneFinishIteration']:
@@ -126,12 +157,7 @@ int main(){
 }
 ''')
 old_cpp=OUT/'historical_source_probes.cpp';old_cpp.write_text('\n'.join(old_parts),encoding='utf-8')
-old_exe=OUT/'historical_source_probes.exe'
-cmd=[str(ms/'bin/Hostx64/x64/cl.exe'),'/nologo','/EHsc','/std:c++17','/I'+str(historic_include),'/I'+str(PULSE),str(old_cpp),str(old_helper),'/Fe:'+str(old_exe)]
-build=subprocess.run(cmd,env=env,cwd=OUT,text=True,capture_output=True)
-(OUT/'historical_build.log').write_text(build.stdout+'\n'+build.stderr,encoding='utf-8')
-if build.returncode:
-    print(build.stdout,build.stderr);raise SystemExit(build.returncode)
-run=subprocess.run([str(old_exe)],cwd=OUT,text=True,capture_output=True)
+old_exe=OUT/'historical_source_probes'
+run=compile_and_run(old_cpp, old_helper, old_exe, [historic_include, PULSE], OUT/'historical_build.log')
 (OUT/'historical_results.txt').write_text(run.stdout+run.stderr,encoding='utf-8')
 print(run.stdout,run.stderr)

@@ -24,7 +24,7 @@ python -B Scripts/audit-probes/review-20260924/posttune_probes.py
 
 Скрипт извлекает текущие FinalizePostTuneMid/UpdatePostTuneFreeRunPeak TL и Branch, а также soma accumulator из Branch ACalculate. Подменены framework, время и входной scalar signal. Для исторического среза 17854a4 извлекаются Finalize/Handle и соответствующие helper cpp/header. Тела production-методов не редактируются.
 
-Build recipe записан для данной Windows-машины: MSVC 14.44.35207, Windows SDK 10.0.26100.0. На другой машине настройте toolchain либо скомпилируйте сгенерированные C++17-файлы своим компилятором. Сохраняются compiler logs, исходники и результаты; GTest не требуется.
+На Linux скрипт сам собирает probes через `g++ -std=c++17`. На Windows — MSVC cl.exe при наличии (14.44+/SDK 10). Сохраняются compiler logs, исходники и результаты; GTest не требуется.
 
 ## C++ Analyzer
 

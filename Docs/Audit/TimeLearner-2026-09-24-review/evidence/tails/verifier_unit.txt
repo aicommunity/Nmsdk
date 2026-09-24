@@ -1,0 +1,27 @@
+test_empty_fires_fails (test_posttune_verify_unit.TestAcceptRun) ... ok
+test_need1_exited_fails (test_posttune_verify_unit.TestAcceptRun) ... ok
+test_search_diff_after_revert_fails (test_posttune_verify_unit.TestAcceptRun) ... ok
+test_prepare_clean_excludes_flag (test_posttune_verify_unit.TestCleanWorkdir) ... ok
+test_parse_flag_tipr_multivalue (test_posttune_verify_unit.TestFlags) ... ok
+test_train_test_flags_not_merged (test_posttune_verify_unit.TestFlags) ... ok
+test_mid_source_cpp_ok (test_posttune_verify_unit.TestMidSource) ... ok
+test_mid_source_rejects_nonfinite (test_posttune_verify_unit.TestMidSource) ... ok
+test_mid_source_requires_landscape (test_posttune_verify_unit.TestMidSource) ... ok
+test_sha256_file_roundtrip (test_posttune_verify_unit.TestProvenanceHash) ... ok
+test_sha256_paths_keys (test_posttune_verify_unit.TestProvenanceHash) ... ok
+test_classify_slog_order (test_posttune_verify_unit.TestSlog) ... ok
+test_tipr_expect_fail_fixture (test_posttune_verify_unit.TestTiprExpect)
+Canon case with flat TipR must fail the expect gate. ... ok
+test_tipr_matches_expect_canon_flat (test_posttune_verify_unit.TestTiprExpect) ... ok
+test_tipr_matches_expect_legacy (test_posttune_verify_unit.TestTiprExpect) ... ok
+test_tipr_close_rejects_nan (test_posttune_verify_unit.TestTiprNan) ... ok
+test_tipr_numeric_equal_sci_vs_decimal (test_posttune_verify_unit.TestTiprNumeric) ... ok
+test_tipr_vs_snapshot_applied_best (test_posttune_verify_unit.TestTiprNumeric) ... ok
+test_tipr_vs_snapshot_reverted (test_posttune_verify_unit.TestTiprNumeric) ... ok
+test_tipr_vs_snapshot_same_fail (test_posttune_verify_unit.TestTiprNumeric) ... ok
+test_verdict_exit (test_posttune_verify_unit.TestVerdict) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.017s
+
+OK

@@ -30,7 +30,7 @@
     "R01": {
       "priority": 2,
       "evidence": "isolated_coincident_boundary_transition",
-      "scheduler_reachability": "not_established",
+      "scheduler_reachability": "analyzer_probe_advance_window_and_incomplete_sample; Dataset scheduler frequency not instrumented",
       "remediation": "close_first_independent_of_stim_edge"
     },
     "R02": {
@@ -40,7 +40,7 @@
     },
     "R03": {
       "priority": 1,
-      "evidence": "extracted_update_and_finalize_TL_Branch",
+      "evidence": "posttune_probes timeout=4 nan=5 stale\u2192NonSeparable mid=1",
       "remediation": "SampleMetricState_and_no_mid_on_timeout"
     },
     "R04": {
@@ -51,12 +51,12 @@
     },
     "R05": {
       "priority": 2,
-      "evidence": "Branch_accumulator_probe_and_TL_source_comparison",
+      "evidence": "branch_ltz_mode live_max=0.2 sidechannel_absent=1",
       "remediation": "removed_Branch_soma_sidechannel"
     },
     "R06": {
       "priority": 1,
-      "evidence": "real_verifier_helpers_and_mocked_external_train_gate",
+      "evidence": "prepare_clean+crash e2e; phase9 removes stale Test flag; verifier fixtures reject empty fires",
       "remediation": "prepare_clean_case_accept_run"
     },
     "R07": {
@@ -68,62 +68,73 @@
   "verification": {
     "gui": {
       "pass": 13,
-      "fail": 0
+      "fail": 0,
+      "evidence": "evidence/tails/gui.txt"
     },
     "original_counterexamples_excluding_A12": {
       "pass": 9,
-      "fail": 0
+      "fail": 0,
+      "evidence": "evidence/tails/ce_no_a12.txt"
     },
     "branch_probes": {
       "pass": 8,
-      "fail": 0
+      "fail": 0,
+      "evidence": "evidence/tails/branch.txt"
     },
     "verifier_unit": {
-      "pass": 15,
-      "fail": 0
+      "pass": 21,
+      "fail": 0,
+      "evidence": "evidence/tails/verifier_unit.txt"
     },
-    "additional_probes": "reproduce_documented_counterexamples; zero process exit is not quality PASS",
-    "full_console_or_cold_run_performed": false,
-    "production_source_sha_unchanged": true,
+    "additional_probes": "review-20260924 posttune/analyzer/verifier re-run after R01-R07; timeout/NaN/stale no longer Success mid; branch_ltz sidechannel_absent",
+    "full_console_or_cold_run_performed": true,
+    "production_source_sha_unchanged": false,
     "documentation": {
       "files": 22,
       "local_links": 149,
       "missing_destinations": 0
-    }
+    },
+    "console_sha256": "5e7829bf9beb1901336ed15b7595786d5708c40d0dd9c9f2f1329bff3c3a1b63",
+    "tails_floor_utc": "2026-09-24T17:00:19Z",
+    "claim_policy": "verified only with probe/bundle paths in evidence/tails"
   },
   "cold_follow_up": {
-    "status": "developer_reported_not_independently_verified",
-    "reported_pass": [
-      "asym50",
-      "br100_search"
+    "status": "t2_control_runs_completed_2026_09_24",
+    "console_sha256": "5e7829bf9beb1901336ed15b7595786d5708c40d0dd9c9f2f1329bff3c3a1b63",
+    "fresh_run_bundles_available": true,
+    "declared_linux_console_available": true,
+    "results": {
+      "br25_gold_skip_train": "PASS",
+      "br25_soft_cold": "FAIL",
+      "asym50_cold": "FAIL_Need1_but_gate_ok_fresh_mid"
+    },
+    "stale_flag_isolation_asym50": true,
+    "bundles": [
+      "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T165949Z_work",
+      "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T170503Z_work",
+      "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym50_20260924T171141Z_work"
     ],
-    "reported_fail": [
-      "br25_on",
-      "br25_off",
-      "asym25",
-      "br100_keep",
-      "phase6_480"
-    ],
-    "fresh_run_bundles_available": false,
-    "declared_linux_console_available": false,
-    "historical_results_declared_false": false
+    "evidence": "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/T2_summary.json"
   },
   "production_algorithms_modified_in_review": false,
   "plan": "PLAN.ru.md",
   "documentation_commits": {
-    "PulseLib": "8d88c08770f1fc9176e719036af3094f5d8b940c",
-    "Bin": "820c76595440694678dbe6914c41d04ecc256716"
+    "PulseLib": "8d429e7463850b06163f177b42b17977baa38e45",
+    "Bin": "452141572de27f8688a7ec06b6e8a9d5c693af10",
+    "root": "101553a3d24bd9347186383f56fbdfe1e1249a03"
   },
   "remediation_2026_09_24": {
-    "code_changes": "implemented_pending_rebuild_and_control_runs",
-    "R01": "code_fixed_sample_close_first_censored; scheduler_reachability_pending",
-    "R02": "code_fixed_delay_ge_late_window_and_censored_csv",
-    "R03": "code_fixed_sample_state_timeout_nan",
-    "R04": "code_fixed_result_reset_always_assign",
-    "R05": "code_fixed_branch_no_soma_sidechannel_tl_soma_max",
-    "R06": "code_fixed_clean_workdir_accept_run_phase9; unit_tests_21",
-    "R07": "code_fixed_schema_n1_csv_v3_legacy_rename",
-    "control_runs_P15": "protocol_documented; cold_runs_need_console_rebuild",
-    "morphogenesis_P2": "gated_on_P15_fail; protocol_documented"
+    "code_changes": "landed PulseLib 8d429e7 Bin 4521415; probes stubs updated for SampleState",
+    "R01": "code_fixed; analyzer boundaries probe re-run",
+    "R02": "code_fixed delay>=1.55; advance_window probe",
+    "R03": "code_fixed; posttune probes no Success mid on timeout/NaN",
+    "R04": "code_fixed; stale Success overwritten to NonSeparable",
+    "R05": "code_fixed; sidechannel absent confirmed",
+    "R06": "code_fixed; e2e negative + phase9 + 21 units",
+    "R07": "code_fixed; metrics_probes schema_ok",
+    "control_runs_P15": "completed; gold PASS soft_cold FAIL asym50 FAIL(Need1)",
+    "morphogenesis_P2": "H1 Canon_vs_Keep: Keep also NonSeparable; Canon-alone rejected; next soft_vs_strip",
+    "tails_plan": "TAILS_PLAN.ru.md",
+    "claim_policy": "verified only with probe/bundle paths; no cold PASS without fresh run-bundles"
   }
 }

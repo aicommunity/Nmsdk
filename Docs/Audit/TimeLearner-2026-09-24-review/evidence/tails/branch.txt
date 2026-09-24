@@ -1,0 +1,28 @@
+Running main() from /home/user/Nmsdk/build/linux-gcc-release-local/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 8 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 5 tests from BranchUpdate
+[ RUN      ] BranchUpdate.SelectedBestStartsFreshProbe
+[       OK ] BranchUpdate.SelectedBestStartsFreshProbe (0 ms)
+[ RUN      ] BranchUpdate.FailedBestFallsBackAndLeavesSilent
+[       OK ] BranchUpdate.FailedBestFallsBackAndLeavesSilent (0 ms)
+[ RUN      ] BranchUpdate.ValidSearchTrainStaysSilentAndSuppressesSecondMid
+[       OK ] BranchUpdate.ValidSearchTrainStaysSilentAndSuppressesSecondMid (0 ms)
+[ RUN      ] BranchUpdate.InvalidInferenceKeepsSilentThreshold
+[       OK ] BranchUpdate.InvalidInferenceKeepsSilentThreshold (0 ms)
+[ RUN      ] BranchUpdate.ValidInferenceCommitsMeasuredThreshold
+[       OK ] BranchUpdate.ValidInferenceCommitsMeasuredThreshold (0 ms)
+[----------] 5 tests from BranchUpdate (0 ms total)
+
+[----------] 3 tests from BranchRemaining
+[ RUN      ] BranchRemaining.NaNInferenceMustNotCommitRecognitionThreshold
+[       OK ] BranchRemaining.NaNInferenceMustNotCommitRecognitionThreshold (0 ms)
+[ RUN      ] BranchRemaining.SetupFailureMustNotMarkCalibrationComplete
+[       OK ] BranchRemaining.SetupFailureMustNotMarkCalibrationComplete (0 ms)
+[ RUN      ] BranchRemaining.FallbackMustNotPublishRejectedCandidateMetrics
+[       OK ] BranchRemaining.FallbackMustNotPublishRejectedCandidateMetrics (0 ms)
+[----------] 3 tests from BranchRemaining (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 8 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 8 tests.

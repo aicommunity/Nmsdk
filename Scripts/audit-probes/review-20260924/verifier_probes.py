@@ -1,4 +1,9 @@
-"""Adversarial verifier fixtures; external simulator/gates are mocked."""
+"""Adversarial verifier fixtures; external simulator/gates are mocked.
+
+After R06: wait_need0 returns (status, child_rc); prepare_clean_case is the
+default path; accept_run rejects empty fires / incomplete / Need≠0; phase9
+does not reuse stale Test mid.
+"""
 from pathlib import Path
 import sys, json, tempfile, importlib.util, time, io, contextlib
 from unittest.mock import patch
@@ -22,13 +27,23 @@ def case_fixture(name, train_status='done', snapshot='20000000 30000000 40000000
         for d in (root/'Train',root/'Test',gold/'Test',rd/'Train',rd/'Test'):d.mkdir(parents=True)
         for side in ('Train','Test'):
             (root/side/'Parameters_00.xml').write_text(xml(final,need),encoding='utf-8')
+            (root/side/'Model_00.xml').write_text('<M/>',encoding='utf-8')
+            (root/side/'Project.ini').write_text('[x]\n',encoding='utf-8')
         (gold/'Test'/'Parameters_00.xml').write_text(xml(),encoding='utf-8')
         (root/'Test'/'posttune_complete.flag').write_text('mid=0.05 landscape_ok=1 inference=1 result=1\n',encoding='utf-8')
         if snapshot is not None:
             (root/'Train'/'posttune_complete.flag').write_text(f'mid=1 landscape_ok=1 inference=0 result=1 search_reverted={reverted}\ntipr={final}\ntipr_snapshot={snapshot}\n',encoding='utf-8')
         case={**pv.CASES[name],'root':root,'gold':gold}
         gate=pv.GateResult(fires,'ok=1 n=8 acc=8',0,None,time.time(),True)
-        with patch.dict(pv.CASES,{name:case}), patch.object(pv,'soft_cold_reset_train'),patch.object(pv,'wait_need0',return_value=train_status),patch.object(pv,'flush_posttune_artifacts',return_value='none'),patch.object(pv,'run_gate',return_value=gate),contextlib.redirect_stdout(io.StringIO()):
+        def _clean(_name, archive_root):
+            return archive_root
+        with patch.dict(pv.CASES,{name:case}), \
+             patch.object(pv,'prepare_clean_case',side_effect=_clean), \
+             patch.object(pv,'soft_cold_reset_train'), \
+             patch.object(pv,'wait_need0',return_value=(train_status,0)), \
+             patch.object(pv,'flush_posttune_artifacts',return_value='none'), \
+             patch.object(pv,'run_gate',return_value=gate), \
+             contextlib.redirect_stdout(io.StringIO()):
             row=pv.run_case(name,run_dir=rd)
         return {k:row[k] for k in ('row_fail','train_status','mid_source','tipr_vs_snapshot','tipr_class','fail_notes')}|{'verdict_exit':pv.verdict_rows([row]),'need':row['after']['IsNeedToTrain']}
 
@@ -45,18 +60,21 @@ with tempfile.TemporaryDirectory(dir=OUT) as td:
     flag=test/'posttune_complete.flag';flag.write_bytes((S.parent/'SelectivityAsymRm/EXP_span50ms_packA_gen_posttune/Test/posttune_complete.flag').read_bytes())
     old_bytes=flag.read_bytes()
     thr=p9.overlay_train_params(train,test)
-    results['stale_test_flag_in_phase9']={'returned_threshold':thr,'flag_retained':flag.read_bytes()==old_bytes,'test_threshold':pv.get_tag((test/'Parameters_00.xml').read_text(),'FixedLTZThreshold'),'will_skip_fresh_inference':float(thr)<0.9,'reported_mid_source':pv.mid_source_of(pv.parse_flag_file(flag),thr),'fixture_source':'tracked Asym50 Test flag, last commit b8cef72 (2026-09-22)'}
+    results['stale_test_flag_in_phase9']={'returned_threshold':thr,'flag_retained':flag.exists() and flag.read_bytes()==old_bytes,'flag_removed':not flag.exists(),'test_threshold':pv.get_tag((test/'Parameters_00.xml').read_text(),'FixedLTZThreshold'),'will_skip_fresh_inference':float(thr)<0.9,'reported_mid_source':pv.mid_source_of(pv.parse_flag_file(flag) if flag.exists() else {},thr),'fixture_source':'tracked Asym50 Test flag, last commit b8cef72 (2026-09-22)'}
 with tempfile.TemporaryDirectory(dir=OUT) as td:
     train=Path(td);(train/'Parameters_00.xml').write_text(xml(need='1'),encoding='utf-8')
     (train/'posttune_tipr_live.txt').write_text('tipr=91 92 93 94\nL=9 8 7 1\n',encoding='utf-8')
     class Exited:
         def poll(self):return 9
+        def terminate(self):pass
+        def kill(self):pass
+        def wait(self,timeout=None):return 9
     def start_proc(*args,**kwargs):
         kwargs['stdout'].close()
         return Exited()
     with patch.object(pv,'assert_disk_for_train'),patch.object(pv,'free_gib',return_value=100),patch.object(pv.subprocess,'Popen',side_effect=start_proc),patch.object(pv.time,'sleep'),contextlib.redirect_stdout(io.StringIO()):
-        st=pv.wait_need0(train,1,train/'log',max_polls=1)
+        st, rc = pv.wait_need0(train,1,train/'log',max_polls=1,allow_salvage=False)
     t=(train/'Parameters_00.xml').read_text()
-    results['stale_live_after_train_crash']={'train_status':st,'tipr':pv.get_tag(t,'TipSynapseResistance'),'lengths':pv.get_tag(t,'DendriteLength'),'need':pv.get_tag(t,'IsNeedToTrain')}
+    results['stale_live_after_train_crash']={'train_status':st,'child_rc':rc,'tipr':pv.get_tag(t,'TipSynapseResistance'),'lengths':pv.get_tag(t,'DendriteLength'),'need':pv.get_tag(t,'IsNeedToTrain'),'live_not_salvaged':pv.get_tag(t,'TipSynapseResistance')!='91 92 93 94'}
 (OUT/'a16-boundary-fixtures.json').write_text(json.dumps(results,indent=2)+'\n',encoding='utf-8')
 print(json.dumps(results,indent=2))
