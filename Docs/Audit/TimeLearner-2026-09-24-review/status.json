@@ -30,7 +30,8 @@
     "R01": {
       "priority": 2,
       "evidence": "isolated_coincident_boundary_transition",
-      "scheduler_reachability": "analyzer_probe_advance_window_and_incomplete_sample; Dataset scheduler frequency not instrumented",
+      "scheduler_reachability": "not_observed",
+      "scheduler_evidence": "evidence/tails/d1_r01_scheduler.json",
       "remediation": "close_first_independent_of_stim_edge"
     },
     "R02": {
@@ -45,8 +46,9 @@
     },
     "R04": {
       "priority": 2,
-      "evidence": "static_reset_chain_and_finalize_with_prior_result",
-      "two_full_training_cycles_run": false,
+      "evidence": "posttune_probes double_train_result_reset Success\u2192NonSeparable",
+      "two_full_training_cycles_run": "probe_only",
+      "evidence_path": "evidence/tails/d1_r04_double_attempt.txt",
       "remediation": "ClearPostTuneResult_on_attempt"
     },
     "R05": {
@@ -82,7 +84,7 @@
       "evidence": "evidence/tails/branch.txt"
     },
     "verifier_unit": {
-      "pass": 21,
+      "pass": 24,
       "fail": 0,
       "evidence": "evidence/tails/verifier_unit.txt"
     },
@@ -99,14 +101,38 @@
     "claim_policy": "verified only with probe/bundle paths in evidence/tails"
   },
   "cold_follow_up": {
-    "status": "t2_control_runs_completed_2026_09_24",
+    "status": "d4_matrix_completed_0_of_6_2026_09_25",
     "console_sha256": "5e7829bf9beb1901336ed15b7595786d5708c40d0dd9c9f2f1329bff3c3a1b63",
+    "bin_gitlink": "0600e38a118f4b5b578187d0c4b1e0339537474f",
+    "pulselib_gitlink": "8d429e7463850b06163f177b42b17977baa38e45",
     "fresh_run_bundles_available": true,
     "declared_linux_console_available": true,
     "results": {
       "br25_gold_skip_train": "PASS",
-      "br25_soft_cold": "FAIL",
-      "asym50_cold": "FAIL_Need1_but_gate_ok_fresh_mid"
+      "br25_soft_cold": "FAIL_NonSeparable_after_H2_flush",
+      "asym50_cold": "FAIL_Need1_no_train_flag_train_t_bumped_640"
+    },
+    "morphogenesis": {
+      "H1": "done",
+      "H2": "done",
+      "H3": "done_no_material_diff",
+      "H4": "done_no_differs",
+      "overlay": "skipped"
+    },
+    "debts": {
+      "D1": "done",
+      "D2": "done",
+      "D3": "done",
+      "D4": "done_0_of_6_pass",
+      "D5": "done",
+      "D6": "done"
+    },
+    "d4_matrix": {
+      "utc": "20260924T204259Z",
+      "pass_count": 0,
+      "n": 6,
+      "seven_pass_claim": false,
+      "evidence": "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/D4_matrix_summary.json"
     },
     "stale_flag_isolation_asym50": true,
     "bundles": [
@@ -114,7 +140,11 @@
       "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T170503Z_work",
       "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym50_20260924T171141Z_work"
     ],
-    "evidence": "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/T2_summary.json"
+    "evidence": [
+      "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/T2_summary.json",
+      "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/d1_n1_to_n8.json",
+      "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/d2_asym50_need1_diag.json"
+    ]
   },
   "production_algorithms_modified_in_review": false,
   "plan": "PLAN.ru.md",

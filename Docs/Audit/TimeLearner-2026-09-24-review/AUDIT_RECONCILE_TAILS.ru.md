@@ -17,24 +17,24 @@
 | Timeout/NaN → Success mid | Probes: timeout→4, NaN→5, mid=1 (R03) |
 | Stale Success наследуется | Stale Success→NonSeparable (R04) |
 | Branch soma side-channel | `sidechannel_absent=1` (R05) |
-| Gold PASS + soft_cold FAIL ⇒ только morphogenesis | **Ещё нельзя**: есть Save/Need=1 и TipR flag≠Parameters |
+| Gold PASS + soft_cold FAIL ⇒ только morphogenesis | **Ещё нельзя**: H2 закрыл TipR Save lag; H3 soft vs strip ещё в прогоне |
 
 ## A01–A16 ↔ R01–R07 (кратко)
 
 | ID | Аудит | Код | Приёмка tails | Закрытие |
 |---|---|---|---|---|
-| A01/A03 → R01 | close-first | да | analyzer probe; scheduler freq нет | **частично** |
-| A02 → R02 | delay≥late + censored | да | код 1.55; Dataset→CSV e2e N=1..8 нет | **частично** |
-| A04–A06 → R07 | schema/N=1/CSV v3 | да | metrics_probes; нет полного N=1..8 e2e | **частично** |
+| A01/A03 → R01 | close-first | да | analyzer probe; scheduler `not_observed` (`d1_r01_scheduler.json`) | **частично** |
+| A02 → R02 | delay≥late + censored | да | код 1.55; N=1..8 + censored (`d1_n1_to_n8.json`) | **измерение ок** |
+| A04–A06 → R07 | schema/N=1/CSV v3 | да | N=1 not per_stim; censored≠silence PASS | **измерение ок** |
 | A07 | accepted | — | — | accepted |
-| A08–A09 → R03/R04 | SampleState/Result | да | posttune probes + Branch 8/8 | **измерение ок**; cold model FAIL отдельно |
+| A08–A09 → R03/R04 | SampleState/Result | да | double Finalize `probe_only` (`d1_r04_*`) | **измерение ок**; cold model FAIL отдельно |
 | A10 → R05 | collector | да | branch_ltz probe | **да** (код+probe) |
-| A11 | delay N ticks | да | CE IntegerDelay PASS | **да** (точечно) |
+| A11 | delay N ticks | да | CE + `d5_pulse_delay.txt` | **да** |
 | A12 | deferred | — | — | deferred |
-| A13 | Preinh ApplyDefaults | да | static count; полный Storage/XML нет | **частично** |
+| A13 | Preinh ApplyDefaults | да | `d5_preinh_xml_load.json` validate+class | **да** (load path) |
 | A14 | segment∩rect | да | GUI 13 | **да** |
-| A15 | CLI -S / exit | да | help + static; не GUI multi-channel | **частично** |
-| A16 → R06 | clean workdir/accept | да | e2e+unit+T2 isolation; TipR Save lag | **частично** |
+| A15 | CLI -S / exit | да | `d5_cli_save.json` `-S` без `-x` saves | **да** (Console) |
+| A16 → R06 | clean workdir/accept | да | tipr hash provenance; Need=1 still fails; H2 flush | **да** (harness) |
 
 ## T2 vs «не локализовать в morphogenesis»
 
@@ -50,12 +50,12 @@
 | H | Результат |
 |---|---|
 | H1 Canon vs Keep | Keep тоже NonSeparable → Canon не единственная причина |
-| H2 TipR flag≠Parameters / Need=1 Save | **подтверждено**: Console `-S` только после IsCalcFinished; early stop → lag. `flush_current_train_flag` синхронизирует TipR/Need из **текущего** Train flag (не archive). После flush: tipr=canon Need=0; FAIL = NonSeparable/gate |
-| H3 soft vs strip/full init | очередь |
-| H4 AutoScale/gap | очередь |
+| H2 TipR flag≠Parameters / Need=1 Save | **закрыто**: `flush_current_train_flag`; после flush tipr=canon Need=0; FAIL = NonSeparable/gate |
+| H3 soft vs strip/full init | **done** — `no_material_diff` (`T3_H3_soft_vs_strip.json`) |
+| H4 AutoScale/gap | **done** — no Delay/mid/TipR/Need differs (`T3_H4_autoscale.json`); overlay skipped |
 
 ## Политика claims
 
 `verified` только с путями в `evidence/tails/`. Семь cases PASS — только после свежих runs каждого. A07/A12 без изменений.
 
-После H2: soft_cold FAIL можно относить к **отрицательному landscape (NonSeparable)** плюс оставшийся morphogenesis/L, а не к stale TipR-flat артефакту harness. Полная локализация «только морфогенез» всё ещё требует H3 (soft vs strip).
+После H2: soft_cold FAIL относится к **отрицательному landscape (NonSeparable)** + оставшийся morphogenesis/L, а не к stale TipR-flat артефакту harness. H3 soft vs strip: **no_material_diff**. H4 AutoScale: **no differs**; overlay skipped. TipR identity: `weights_identity.tipr_sha256` в provenance (D2). D4 cold matrix: **0/6 PASS** (`D4_matrix_summary.json`); seven PASS не заявлен.

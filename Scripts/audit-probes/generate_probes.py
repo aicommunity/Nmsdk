@@ -142,6 +142,13 @@ public:
  std::list<MDMatrix<double>> buffer; MDMatrix<double> Input,Output;
  bool ACalculate();
 };
+class NPulseDelay {
+public:
+ int desired_buffer_length=2; double DelayTime=.001; double TimeStep=1000;
+ std::list<MDMatrix<double>> buffer; MDMatrix<double> Input,Output;
+ bool ACalculate();
+ bool AReset(){buffer.clear();Output.ToZero();return true;}
+};
 class NAperiodicLink {
 public:
  MDMatrix<double> Input,Output,filter_state;
@@ -183,6 +190,21 @@ TEST(AxonAudit, IntegerDelayMustNotAddAnExtraStep) {
  for(int i=0;i<5;++i){d.Input.v=(i==0?1:0);d.ACalculate();out.push_back(d.Output.v);}
  EXPECT_EQ(out[2],1);EXPECT_EQ(out[3],0);
 }
+TEST(PulseDelayAudit, SubMillisecondDelayBypassesBuffer) {
+ NPulseDelay d;d.DelayTime=0.0005;d.desired_buffer_length=2;
+ d.Input.v=1;d.ACalculate();EXPECT_EQ(d.Output.v,1);
+ EXPECT_TRUE(d.buffer.empty());
+}
+TEST(PulseDelayAudit, BufferLengthMatchesDesired) {
+ NPulseDelay d;d.DelayTime=0.002;d.desired_buffer_length=2;d.Input.v=1;
+ d.ACalculate();EXPECT_EQ(d.Output.v,0);EXPECT_EQ(int(d.buffer.size()),1);
+ d.Input.v=0;d.ACalculate();EXPECT_EQ(d.Output.v,0);EXPECT_EQ(int(d.buffer.size()),2);
+ d.Input.v=0;d.ACalculate();EXPECT_EQ(d.Output.v,1);EXPECT_EQ(int(d.buffer.size()),2);
+}
+TEST(PulseDelayAudit, ResetClearsBuffer) {
+ NPulseDelay d;d.desired_buffer_length=2;d.Input.v=1;d.ACalculate();d.ACalculate();
+ d.AReset();EXPECT_TRUE(d.buffer.empty());EXPECT_EQ(d.Output.v,0);
+}
 TEST(AxonAudit, PositiveTauShouldNotDivergeWithoutAStabilityGuard) {
  NAperiodicLink f;f.Input.v=1;
  for(int i=0;i<5;++i)f.ACalculate();
@@ -192,5 +214,6 @@ TEST(AxonAudit, PositiveTauShouldNotDivergeWithoutAStabilityGuard) {
 bodies = [method("NPatternResponseAnalyzer.cpp", "std::string NPatternResponseAnalyzer::ClassifyResponseMorphology"),
           method("NPatternResponseAnalyzer.cpp", "bool NPatternResponseAnalyzer::ACalculate(void)"),
           method("NAxoneDelay.cpp", "bool NAxoneDelay::ACalculate(void)"),
+          method("NPulseDelay.cpp", "bool NPulseDelay::ACalculate(void)"),
           method("NAperiodicLink.cpp", "bool NAperiodicLink::ACalculate(void)")]
 Path(sys.argv[1]).write_text(prefix + "\n".join(bodies) + tests, encoding="utf-8")

@@ -74,3 +74,66 @@ Console `-S` пишет Parameters только после `IsCalcFinished`. Ear
 Исправление harness: `flush_current_train_flag` (текущий workdir flag → Parameters/Model). Retest: tipr_class=**canon**, Need=0; FAIL только fires/gate (NonSeparable mid=1).
 
 Evidence: `evidence/tails/T3_H2_flag_flush_RESULT.json`.
+
+## D1 — Измерительная приёмка — DONE
+
+| Пункт | Evidence |
+|---|---|
+| R01 scheduler | `not_observed` — `evidence/tails/d1_r01_scheduler.json` |
+| R02/R07 N=1..8 + censored | `evidence/tails/d1_n1_to_n8.json` (all_pass) |
+| R04 double Finalize | `evidence/tails/d1_r04_double_attempt.txt` (`probe_only`) |
+
+## D2 — Harness — DONE
+
+| Пункт | Результат |
+|---|---|
+| asym50 Need=1 | нет Train flag; Finalize не за `-t 320`; `train_t→640`; `d2_asym50_need1_diag.json` |
+| TipR hash provenance | `weights_identity` в `build_provenance` |
+| unit | **24** PASS (`test_need1_with_gate_ok_still_fails`, `test_weights_identity_*`) |
+
+## D3 — Morphogenesis H3/H4 — DONE
+
+| H | Verdict | Evidence |
+|---|---|---|
+| H3 soft vs strip | **no_material_diff** (оба NonSeparable, TipR canon, mid=1, L=1…) | `T3_H3_soft_vs_strip.json` |
+| H4 AutoScale 1 vs 0 | **no material differs** (Delay/mid/TipR/Need alike) | `T3_H4_autoscale.json` |
+| Overlay | skipped (H3/H4 не локализовали) | — |
+
+Скрипты: `_repro/runs/T3_H3_soft_vs_strip.py`, `T3_H4_autoscale.py`.
+
+## D4 — Cold matrix — DONE (0/6 PASS)
+
+Batch `T4_cold_matrix.sh` utc `20260924T204259Z`. All six `rc=1`. **seven_pass_claim=false**.
+
+| case | run_id | note |
+|---|---|---|
+| br25_off | `br25_off_20260924T204259Z` | gate_ok; tipr other |
+| asym25 | `asym25_20260924T214120Z` | gate FAIL; tipr flat |
+| asym50 | `asym50_20260924T214908Z` | exited Need; tipr canon; mid cpp |
+| br100_keep | `br100_keep_20260924T234016Z` | gate FAIL |
+| phase6_480 | `phase6_480_20260924T234719Z` | gate FAIL; expect_fires dual 10000010 vs strict 10000000 |
+| br100_search | `br100_search_20260925T015547Z` | same_reverted; fires fail expect |
+
+Evidence: `evidence/tails/D4_matrix_summary.json`; RESULT section T4 in `_repro/POSTTUNE_VERIFY_RESULT.md`.
+
+## D5 — Preinh / Delay / CLI — DONE
+
+| Пункт | Evidence |
+|---|---|
+| Preinh XML load | `d5_preinh_xml_load.json` |
+| NPulseDelay | `d5_pulse_delay.txt` |
+| CLI `-S` без `-x` | `d5_cli_save.json` |
+
+## D6 — Docs sync — DONE
+
+status.json (Bin `85d973a+`, verifier 24, R01 `not_observed`, R04 `probe_only`, D4 0/6); TAILS_PLAN/EXEC; AUDIT_RECONCILE; POST_TRAIN_VERIFY (`flush_current_train_flag`); CONTROL_RUNS_P15; MORPHOGENESIS_P2; 7× EXP README current verdict; review-20260924 README probe commands.
+
+**Remediation (PLAN criterion D1+D2+D3+D6):** закрыт с evidence. **Семь PASS:** нет (D4 0/6).
+
+## D5 — Preinh / Delay / CLI — DONE
+
+| Пункт | Evidence |
+|---|---|
+| Preinh XML load | `d5_preinh_xml_load.json` (validate rc=0, class `NSPNeuronGenPreinh2_5AsymRmD001C1e9`) |
+| NPulseDelay | `d5_pulse_delay.txt` (bypass/buffer/reset) |
+| CLI `-S` без `-x` | `d5_cli_save.json` (Project saved; process stays until kill) |

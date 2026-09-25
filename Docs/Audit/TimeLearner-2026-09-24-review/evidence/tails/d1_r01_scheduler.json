@@ -1,0 +1,51 @@
+{
+  "finding": "R01",
+  "scheduler_reachability": "not_observed",
+  "note": "sample_changed path present in production ACalculate; incomplete_sample_new_stim probe covers conditional close; no live Console EventsLog/CSV with trial_sample_id transitions captured in D1.",
+  "code_anchor": {
+    "analyzer": "Libraries/Nmsdk-PulseLib/Core/NPatternResponseAnalyzer.cpp:819-830",
+    "sample_changed": "trial_active_ && GetCurrentSampleId()!=trial_sample_id_",
+    "dataset": "Libraries/Nmsdk-PulseLib/Core/NDatasetBase.cpp:GetCurrentSampleId",
+    "probe_fixture": "Scripts/audit-probes/review-20260924/generate_analyzer_probe.py incomplete_sample_new_stim"
+  },
+  "csv_scans": [
+    {
+      "path": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T165949Z/Test/results.csv",
+      "n": 8,
+      "columns": [
+        "trial",
+        "target_class",
+        "stim_count",
+        "isi0",
+        "isi1",
+        "isi2",
+        "isi3",
+        "neuron_fired",
+        "neuron_t_rel",
+        "match",
+        "late_fired",
+        "late_t_rel"
+      ],
+      "has_trial_sample_id": false
+    },
+    {
+      "path": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/TimeNeuronTimeLearnerBranch/Test/SelectivityLog/results.csv",
+      "n": 8,
+      "columns": [
+        "trial",
+        "target_class",
+        "stim_count",
+        "isi0",
+        "isi1",
+        "isi2",
+        "isi3",
+        "neuron_fired",
+        "neuron_t_rel",
+        "match",
+        "late_fired",
+        "late_t_rel"
+      ],
+      "has_trial_sample_id": false
+    }
+  ]
+}

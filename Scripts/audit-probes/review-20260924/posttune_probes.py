@@ -59,6 +59,26 @@ template<class T> void stale_result(const char* label) {
  T b;b.IsNeedToTrain=false;b.TrainingPhase=2;b.PostTuneInferenceMidPending=true;
  b.PostTuneResult=PostTrainTune::kResultSuccess;b.PostTuneMetrics={.5,.6};b.FinalizePostTuneMid();dump(label,b);
 }
+// D1.3 R04: two Finalize attempts — Success then reset then NonSeparable must not leave Success.
+template<class T> void double_train_result_reset(const char* label) {
+ T b;FakeDataset d;FakeNeuron n;FakeEnv e;prepare(b,d,n,e);
+ b.PostTuneMetrics={.5,.05,.05,.05,.05,.05,.05,.05}; // LandscapeOk-style target high / foils low
+ b.FinalizePostTuneMid();
+ int first=b.PostTuneResult.GetData();
+ // Production free-run setup clears SampleState / Result before next attempt.
+ b.PostTuneSampleState.clear();
+ b.PostTuneResult=PostTrainTune::kResultNone;
+ b.PostTrainTuneComplete=false;
+ b.PostTuneInferenceMidPending=true;
+ b.PostTuneFreeRunActive=true;
+ b.PostTuneRunInvalid=false;
+ b.PostTuneRunTerminal=PostTrainTune::kResultNone;
+ b.PostTuneMetrics={.1,.2,.3,.4,.5,.6,.7,.8}; // NonSeparable / foil-dominant
+ b.FinalizePostTuneMid();
+ int second=b.PostTuneResult.GetData();
+ std::cout<<label<<" first="<<first<<" second="<<second
+          <<" not_stuck_success="<<(second!=PostTrainTune::kResultSuccess)<<'\n';
+}
 int main(){
  timeout<NNeuronTimeLearnerBranch>("branch_timeout_before_foil");
  timeout<NNeuronTimeLearner>("tl_timeout_before_foil");
@@ -66,6 +86,8 @@ int main(){
  nan_foil<NNeuronTimeLearner>("tl_nan_in_foil_trace");
  stale_result<NNeuronTimeLearnerBranch>("branch_stale_success");
  stale_result<NNeuronTimeLearner>("tl_stale_success");
+ double_train_result_reset<NNeuronTimeLearnerBranch>("branch_double_train_result_reset");
+ double_train_result_reset<NNeuronTimeLearner>("tl_double_train_result_reset");
  NNeuronTimeLearnerBranch b;FakeDataset d;FakeNeuron n;FakeEnv e;prepare(b,d,n,e);
  // R05: only ReadPostTuneLiveMetric (amp) feeds the accumulator; no soma side-channel.
  b.amp=.2;b.UpdatePostTuneFreeRunPeak();

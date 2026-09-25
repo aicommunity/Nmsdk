@@ -1,0 +1,134 @@
+{
+  "batch": "T4_cold_matrix",
+  "utc": "20260924T204259Z",
+  "pass_count": 0,
+  "n": 6,
+  "seven_pass_claim": false,
+  "phase6_expect_fires_harness": "10000010",
+  "phase6_strict_fires": "10000000",
+  "cases": [
+    {
+      "label": "br25_off_cold",
+      "case": "br25_off",
+      "rc": 1,
+      "run_id": "br25_off_20260924T204259Z"
+    },
+    {
+      "label": "asym25_cold",
+      "case": "asym25",
+      "rc": 1,
+      "run_id": "asym25_20260924T214120Z"
+    },
+    {
+      "label": "asym50_cold",
+      "case": "asym50",
+      "rc": 1,
+      "run_id": "asym50_20260924T214908Z"
+    },
+    {
+      "label": "br100_keep_cold",
+      "case": "br100_keep",
+      "rc": 1,
+      "run_id": "br100_keep_20260924T234016Z"
+    },
+    {
+      "label": "phase6_480_cold",
+      "case": "phase6_480",
+      "rc": 1,
+      "run_id": "phase6_480_20260924T234719Z"
+    },
+    {
+      "label": "br100_search_cold",
+      "case": "br100_search",
+      "rc": 1,
+      "run_id": "br100_search_20260925T015547Z"
+    }
+  ],
+  "bundles": [
+    {
+      "case": "br25_off",
+      "run_id": "br25_off_20260924T204259Z",
+      "rc": 1,
+      "train_status": "done",
+      "params_source": "nm_save",
+      "tipr_class": "other",
+      "tipr_vs_snapshot": "",
+      "mid_source": "missing",
+      "gate_ok": true,
+      "tipr_sha256": "0920a46df5b8914aed893927810415122f428f160461cc4949b7b102d192018f",
+      "flag_params_tipr_match": true,
+      "work_root": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_off_20260924T204259Z_work"
+    },
+    {
+      "case": "asym25",
+      "run_id": "asym25_20260924T214120Z",
+      "rc": 1,
+      "train_status": "done_flag_flush_gate_FAIL_gate_rc=1",
+      "params_source": "flag_flush",
+      "tipr_class": "flat",
+      "tipr_vs_snapshot": "",
+      "mid_source": "missing",
+      "gate_ok": false,
+      "tipr_sha256": "a6f04f9fdfb378882d88318c4a8d8a29fc9b2677ce66943f5ba3e365c8acc7a7",
+      "flag_params_tipr_match": true,
+      "work_root": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym25_20260924T214120Z_work"
+    },
+    {
+      "case": "asym50",
+      "run_id": "asym50_20260924T214908Z",
+      "rc": 1,
+      "train_status": "exited",
+      "params_source": "nm_save",
+      "tipr_class": "canon",
+      "tipr_vs_snapshot": "",
+      "mid_source": "cpp",
+      "gate_ok": true,
+      "tipr_sha256": "0920a46df5b8914aed893927810415122f428f160461cc4949b7b102d192018f",
+      "flag_params_tipr_match": true,
+      "work_root": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym50_20260924T214908Z_work"
+    },
+    {
+      "case": "br100_keep",
+      "run_id": "br100_keep_20260924T234016Z",
+      "rc": 1,
+      "train_status": "done_flag_flush_gate_FAIL_gate_rc=1",
+      "params_source": "flag_flush",
+      "tipr_class": "other",
+      "tipr_vs_snapshot": "same_FAIL",
+      "mid_source": "missing",
+      "gate_ok": false,
+      "tipr_sha256": "69d76ee4af6721a28ae772c9c34e7e95c938817a8ef5dbd799969e9013731aab",
+      "flag_params_tipr_match": true,
+      "work_root": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br100_keep_20260924T234016Z_work"
+    },
+    {
+      "case": "phase6_480",
+      "run_id": "phase6_480_20260924T234719Z",
+      "rc": 1,
+      "train_status": "exited_gate_FAIL_gate_rc=1",
+      "params_source": "nm_save",
+      "tipr_class": "other",
+      "tipr_vs_snapshot": "",
+      "mid_source": "missing",
+      "gate_ok": false,
+      "tipr_sha256": "cea71a48cb3478dff054d8b115144c1b8603aca33d8079676e5b8ddb61042d60",
+      "flag_params_tipr_match": true,
+      "work_root": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/phase6_480_20260924T234719Z_work"
+    },
+    {
+      "case": "br100_search",
+      "run_id": "br100_search_20260925T015547Z",
+      "rc": 1,
+      "train_status": "done_search_reverted",
+      "params_source": "flag_flush",
+      "tipr_class": "other",
+      "tipr_vs_snapshot": "same_reverted",
+      "mid_source": "cpp",
+      "gate_ok": true,
+      "tipr_sha256": "c9b3ad2094110be0bad94e76921ea1500865d58ab47c6e37c5786b082abe88eb",
+      "flag_params_tipr_match": true,
+      "work_root": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br100_search_20260925T015546Z_work"
+    }
+  ],
+  "note": "0/6 PASS; do not claim 7/7. LandscapeOk unchanged. asym50 train_t=640 still Need incomplete/exited."
+}

@@ -62,6 +62,27 @@ Verifier unit: **21/21**. Console в manifest собран **до** PulseLib `8d
 - status: `verified` только с путями к probes/bundles.
 - RU/EN + local Markdown links.
 
-## Критерий «remediation закрыт»
+## Сделано (T0–T2 / H1–H2)
 
-T0 + T1 + T2 выполнены и задокументированы. Полный PASS семи cases — отдельно и только со свежими runs.
+| ID | Статус |
+|---|---|
+| T0 rebuild + floor | DONE |
+| T1 measurement probes | DONE |
+| T2 control runs | DONE (gold PASS; soft_cold/asym50 FAIL documented) |
+| H1 Canon vs Keep | DONE |
+| H2 flag_flush TipR/Need | DONE |
+
+## Осталось (долги D1–D6)
+
+См. план долгов (не PLAN.ru.md): D1 measure / D2 harness / D3 morpho H3–H4 / D4 cold matrix / D5 Preinh·Delay·CLI / D6 docs sync.
+
+| ID | Статус (2026-09-24 вечер) |
+|---|---|
+| D1 | DONE — `d1_*.json` / R04 txt |
+| D2 | DONE — tipr hash + asym50 diag + unit 24 |
+| D3 | DONE — H3 no_material_diff; H4 no differs; overlay skipped |
+| D4 | DONE — 0/6 PASS; `D4_matrix_summary.json`; no 7/7 claim |
+| D5 | DONE — `d5_*` |
+| D6 | DONE — status/TAILS/reconcile/POST_TRAIN_VERIFY + EXP README lines |
+
+Verifier unit: **24/24**. Bin gitlink `85d973a+` (flush + tipr hash). PulseLib `8d429e7`.
