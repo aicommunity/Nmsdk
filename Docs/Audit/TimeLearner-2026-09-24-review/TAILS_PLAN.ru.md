@@ -85,4 +85,6 @@ Verifier unit: **21/21**. Console в manifest собран **до** PulseLib `8d
 | D5 | DONE — `d5_*` |
 | D6 | DONE — status/TAILS/reconcile/POST_TRAIN_VERIFY + EXP README lines |
 
-Verifier unit: **24/24**. Bin gitlink `85d973a+` (flush + tipr hash). PulseLib `8d429e7`.
+Verifier unit: **24/24**. Bin gitlink `0600e38` (tipr hash + cold matrix). PulseLib `8d429e7`.
+
+**Сводка экспериментов для чтения:** [EXPERIMENTS_AFTER_FIXES.ru.md](EXPERIMENTS_AFTER_FIXES.ru.md).
