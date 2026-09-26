@@ -12,7 +12,7 @@
 
 ### TL-01 — P1: epsilon классического learner обнуляется при преобразовании в `int`
 
-В `NNeuronTimeLearner.h` задано `static constexpr int kAmpNormEps = 1e-5`. Преобразование константы к `int` даёт `0`. Значение используется как tolerance в `ChangeSynapseResistanceStatus` и `AllSynapsesNormalized`; часть критериев завершения тем самым требует точного равенства амплитуд. MSVC подтверждает проблему предупреждением C4244. Branch-класс объявляет такую же константу как `double`.
+В `NNeuronTimeLearner.h` ранее было `static constexpr int kAmpNormEps = 1e-5` (narrowing → 0). **Исправлено 2026-09-26:** тип `double` + `static_assert`; см. [evidence/P1_eps_fix.md](evidence/P1_eps_fix.md). SoftCold `asym25_preinh` после фикса: Need=0, tipr=canon, mid silent → gate_fail ([P2_asymrm_ab.md](evidence/P2_asymrm_ab.md)).
 
 Комментарий рядом с константой прямо связывает её с Cold stalls около `6e-6` и незакрытым `IsNeedToTrain`. Это согласуется с незавершёнными AsymRm wave-C случаями (`asym50_preinh`, `asym100_preinh`), но из-за отсутствия run bundles нельзя приписать этому дефекту каждый конкретный отказ.
 
@@ -40,9 +40,9 @@ Python helper проверяет в XML `DendriteLength=1 1 1 1` до запус
 
 Ссылки: [таблица результатов](../../../Bin/Configs/SpikeSamples/StructTrain/EXPERIMENTS.md#L238), [подробные причины и DEFER](../../../Bin/Configs/SpikeSamples/StructTrain/SUCCESSFUL_EXPERIMENTS.md#L278).
 
-### TL-05 — P2: недостаточно архивных данных для независимой проверки wave C
+### TL-05 — P2: архивные данные wave C (обновлено локально)
 
-В checkout отсутствуют 14 bundle-директорий, на которые ссылаются таблицы wave C; локально доступны только шесть более ранних run bundles. `_repro/SOFTCOLD_C_rcs.txt` содержит имена случаев и `rc`, но не stdout/stderr, параметры после reset и полные артефакты gate. Повторная SSH-проверка `10.245.1.11:22` завершилась таймаутом TCP до аутентификации, поэтому remote `/home/user/Nmsdk/Bin` проверить не удалось.
+Ранее: bundles отсутствовали на удалённой машине аудита. **Локально 2026-09-26:** inventory 14/14 в [evidence/P0_waveC_inventory.md](evidence/P0_waveC_inventory.md); SSH более не блокер.
 
 ### TL-06 — P2: несогласованная provenance и текст реестров
 
