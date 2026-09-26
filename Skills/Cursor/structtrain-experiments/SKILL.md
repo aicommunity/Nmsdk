@@ -40,7 +40,7 @@ description: >-
    По умолчанию: clean workdir. **Не** `--allow-salvage` / `--use-archive-inplace` без явной просьбы.
 3. **Метрики:** Acc `N/8`, Цель `да`/`нет`/`—`, fires, Need, mid, Result/NonSeparable; bundle `_repro/runs/<id>/`.
 4. **Реестр:** обновить/добавить строку у **канонического Имени** с протоколом (`GoldTest` | `SoftCold+PostTune` | `SkipTrainGold` | `SoftCold+PostTuneOff` | `MatrixClone`) и HEAD `PASS`|`FAIL`|`NOT_RETESTED`.
-5. **PASS** → та же логика в `SUCCESSFUL_EXPERIMENTS.md`. **FAIL** — только в `EXPERIMENTS.md`.
+5. **PASS** → те же разделы/колонки в `SUCCESSFUL_EXPERIMENTS.md`. **FAIL**-строки в таблицы PASS не класть; причины FAIL/DEFER — блок «Провалы / вне PASS» в каждом разделе SUCCESSFUL (полный FAIL — в `EXPERIMENTS.md`).
 6. Гипотезы без различия (soft vs strip, AutoScale) — **примечание** к SoftCold-строке, не новые «эксперименты».
 
 ## Запреты
