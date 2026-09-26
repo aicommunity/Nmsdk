@@ -1,14 +1,14 @@
 # Результаты cold-экспериментов после исправлений измерения и приёмки
 
 Дата сводки: 2026-09-25.  
-Сборка Console (SHA-256): `5e7829bf9beb1901336ed15b7595786d5708c40d0dd9c9f2f1329bff3c3a1b63`.  
-PulseLib: `8d429e7`. Bin (harness): `0600e38`.
+Сборка Console (SHA-256): `4917a2bcbac318d160ca8b596452d3986ccc9978172d35a1b554d65b5a27c843` (ранее в срезе cold V1–V6 фигурировал `5e7829bf…`).  
+PulseLib: `8d429e7`. Bin: `1a664a2`.
 
 Этот документ — **единая человекочитаемая сводка** постановок и фактических результатов после исправления контура измерения/приёмки PostTune. Здесь нет исторических ярлыков вроде «V1…V6» и нет внутренних кодов хвостов аудита как основного языка.
 
 Связанные машинные артефакты: каталог [`evidence/tails/`](evidence/tails/), bundles в `Bin/Configs/SpikeSamples/StructTrain/_repro/runs/`, контракт приёмки [`POST_TRAIN_VERIFY.ru.md`](../../../Bin/Configs/SpikeSamples/StructTrain/POST_TRAIN_VERIFY.ru.md).
 
-**Табличный срез текущего состояния алгоритмов** (не хроника remediation): [`EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/EXPERIMENTS.md) (PASS+FAIL+NOT_RETESTED) и [`SUCCESSFUL_EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/SUCCESSFUL_EXPERIMENTS.md) (только HEAD PASS). Этот файл — narrative постановок и результатов; цифры в реестрах не дублировать сюда повторно.
+**Табличный срез текущего состояния алгоритмов** (ось — алгоритм + параметры; cold/PostTune — протокол того же канона, не отдельная семья): [`EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/EXPERIMENTS.md) и [`SUCCESSFUL_EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/SUCCESSFUL_EXPERIMENTS.md) (только HEAD PASS). Этот файл — narrative доработок измерения и постановок прогонов.
 
 ---
 
@@ -236,7 +236,7 @@ Test flag: NonSeparable, mid=1, metrics с foils, сопоставимыми с 
 
 ## 7. Указатели на сырые данные
 
-Табличный реестр этих же прогонов (и остальных семейств): [`EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/EXPERIMENTS.md) §A · только PASS: [`SUCCESSFUL_EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/SUCCESSFUL_EXPERIMENTS.md).
+Табличный реестр тех же прогонов **внутри канонических алгоритмов** (не отдельная секция «PostTune»): [`EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/EXPERIMENTS.md) §1.1 / §1.3 / §3.1–3.2 / §5.1 · только PASS: [`SUCCESSFUL_EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/SUCCESSFUL_EXPERIMENTS.md).
 
 | Опыт | Каталог bundle (малые артефакты) |
 |---|---|
@@ -250,3 +250,22 @@ Test flag: NonSeparable, mid=1, metrics с foils, сопоставимыми с 
 | Phase6 480 ms | `_repro/runs/phase6_480_20260924T234719Z/` |
 | Soft vs strip / AutoScale | `evidence/tails/T3_H3_soft_vs_strip.json`, `T3_H4_autoscale.json` |
 | Машинная матрица 6 клонов | `evidence/tails/D4_matrix_summary.json` |
+
+---
+
+## 8. Retest NOT_RETESTED (2026-09-25/26)
+
+**Console SHA-256:** `4917a2bcbac318d160ca8b596452d3986ccc9978172d35a1b554d65b5a27c843` · PulseLib `8d429e7` · Bin `1a664a2` (accidental rebuild поверх прежнего `5e7829bf…`).
+
+### GoldTest (волна G)
+
+- Инструмент: `scripts/gold_retest_batch.py` (манифест `_repro/NOT_RETESTED_manifest_20260925.txt`, span-aware `-t`, SIGTERM после CSV n≥8).
+- Итог: `_repro/GOLD_RETEST_MERGED_20260925.csv` — **101 PASS / 1 FAIL** из 102 прогнанных (OUT×4 не гонялись).
+- Единственный GoldTest **FAIL:** `Phase6/EXP_480_ltzcal_twin_gen` (Acc 2/8, fires `11110111`).
+- Реестр: [`EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/EXPERIMENTS.md) / [`SUCCESSFUL_EXPERIMENTS.md`](../../../Bin/Configs/SpikeSamples/StructTrain/SUCCESSFUL_EXPERIMENTS.md); gate: `AUDIT_GATE_RECOMPUTE.csv`.
+
+### SoftCold (волна C)
+
+- Расширены `CASES` в `posttune_verify.py`; batch: `scripts/softcold_c_batch.sh`; allowlist +`Interface.xml`.
+- C1: **14/22** завершены на HEAD — все **FAIL** (`_repro/SOFTCOLD_C_rcs.txt`); batch остановлен 2026-09-26 (Need→stuck / wall-clock). Секция «SoftCold wave C (auto)» в EXPERIMENTS.
+- Остаток C1 (Phase6×3, FastSpan×5) + C2 (Ltz/PhaseA/PSI): **DEFER** с таблицей в EXPERIMENTS.
