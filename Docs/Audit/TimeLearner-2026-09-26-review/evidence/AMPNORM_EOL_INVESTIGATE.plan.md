@@ -1,45 +1,41 @@
 # План: почему не завершилась amp-нормализация (после всех прогонов)
 
-Статус: **в работе** (после `DONE_TAILS` 2026-09-30T10:05:51Z).  
-Порядок: **(0) git commit checkpoint ✓** → (1) проверка полноты хвостов ✓ → (2) этот план amp-norm.
+Статус: **DONE** (расследование; PulseLib fix — отдельный план).  
+Порядок: **(0) checkpoint ✓** → (1) полнота ✓ → (2) классификация ✓ → (3) diagnostic ✓ → (4) code-map ✓.
 
-Связано: [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md), `EndOfLearning` / `AllSynapsesNormalized` в `NNeuronTimeLearner.cpp`.
+Связано: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md),
+`AllSynapsesNormalized` / `ChangeSynapseResistanceStatus` в `NNeuronTimeLearner.cpp`.
 
-## 0. Checkpoint commit (перед проверкой полноты) — DONE
+## 0. Checkpoint commit — DONE
 
-После `DONE_TAILS`, **до** сверки манифеста/C1+C2:
+1. ✓ Bin SoftCold scripts/manifest + root Docs (`c790edb` / later AmpNorm bumps).
+2. ✓ Без `*_work/`, archives.
+3. ✓ Полнота: 4 extended + 24 C1+C2, `missing_count=0`, все `rc=1`.
 
-1. ✓ Bin `0bb8125` (scripts/manifest/rcs) + root `c790edb` (Docs evidence + Bin gitlink).
-2. ✓ Без `*_work/`, StatisticLog, archives (`nmsdk-gitlinks`).
-3. ✓ Полнота: 4 extended + 24 C1+C2 в RC, `missing_count=0`, все `rc=1`.
-## Наблюдение (уже)
+## Наблюдение
 
-| case | L | TipR live | Need | Интерпретация |
-|------|---|-----------|------|----------------|
-| fs25_gen_ext640 | gold `6 5 4 1` | dend2≈`3.4e7` (не Rmin) | 1 | length OK, **amp-norm не дожат** на dend2 |
-| asym50 (ext, mid) | ≈`29 22 15 1` | canon `2e7×3` | 1 | TipR на полу; EOL всё равно не срабатывает → residual `|ampDt|`, sync, или иной gate |
+| case | L | TipR live | Need | класс |
+|------|---|-----------|------|-------|
+| fs25 | ≈gold | dend2≈`3.4–3.5e7` | 1 | **(a)** not-at-Rmin |
+| asym50/100 | growth | `2e7×3` Rmin | 1 | **(b)** @Rmin Need=1 |
 
-`EndOfLearning` = `AllDendritesSynced() && AllSynapsesNormalized()`; при PostTune Need не сбрасывается сразу.
+## Гипотезы → итог
 
-## Гипотезы
+1. **H1** — ✓ (a) mid-band; код: skip `|dt|>5` / NoImprove без Done.
+2. **H2** — возможен, traces не пойманы до wipe.
+3. **H3** — главный кандидат для (b).
+4. **H4** — ✓; mitigation `--keep-slog` (+ `--no-prune`/`--snap-every`).
+5. **H5** — снят.
 
-1. **H1 TipR floor + residual dt** — R на Rmin, но `|Initial−MaxAmp|>kAmpNormEps` и знак/условия `at_r_min&&dt_positive` не закрывают Done.
-2. **H2 NoImprove застревание** — счётчик/oscillation band не достигает best-effort выхода.
-3. **H3 length_settled ложный** — L≈gold, но `DendLastAbsDt` / BestEffort не в tol → `ready_for_r_tune=0` или sync gate.
-4. **H4 prune/harness** — после `rmtree(StatisticLog)` трассы мертвы; диагностика слепа (не причина EOL, но мешает).
-5. **H5 softcold tip-1 vs gold fat** — иная траектория ampDt после strip (сравнить с GoldTest / pre-fix strip).
+## Метод — DONE
 
-## Метод после очереди
-
-0. ✓ Checkpoint + полнота (см. §0).
-1. ✓ Собрать extended bundles: см. [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) — классы (a)/(b).
-2. ✓ Классификация: fs25=(a) TipR not-at-Rmin; asym\*=(b) TipR@Rmin Need=1.
-3. ✓ Diagnostic `fs25_gen --no-prune --snap-every 20`: Need=1, dend2 mid-band; NM exit по `-t`; slog wiped post-run.
-4. Сопоставить с `AllSynapsesNormalized` / TipR-update (`dt>5` skip) — **next** (код + keep-slog).
-5. ✓ Документ: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md).
+0. ✓ Checkpoint + полнота.
+1. ✓ Bundle classification → STUCK doc.
+2. ✓ (a)/(b).
+3. ✓ `fs25 --no-prune --snap-every 20`.
+4. ✓ Code-map `AllSynapsesNormalized` / TipR branches + `--keep-slog`.
+5. ✓ [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md).
 
 ## Не смешивать
 
-- NonSeparable mid (A) — после Need=0.
-- Phase6 EstDelay runaway — отдельная ось.
-- SoftCold SBM/tip-1 — уже снят как причина «не старта».
+- NonSeparable mid (A), phase6 EstDelay, SoftCold SBM — вне этого плана.
