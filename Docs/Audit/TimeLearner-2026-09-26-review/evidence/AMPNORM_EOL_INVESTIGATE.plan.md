@@ -1,17 +1,17 @@
 # План: почему не завершилась amp-нормализация (после всех прогонов)
 
-Статус: **отложено до `DONE_TAILS`** очереди S3.c/d.  
-Порядок после очереди: **(0) git commit checkpoint** → (1) проверка полноты хвостов → (2) этот план amp-norm.
+Статус: **в работе** (после `DONE_TAILS` 2026-09-30T10:05:51Z).  
+Порядок: **(0) git commit checkpoint ✓** → (1) проверка полноты хвостов ✓ → (2) этот план amp-norm.
 
 Связано: [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md), `EndOfLearning` / `AllSynapsesNormalized` в `NNeuronTimeLearner.cpp`.
 
-## 0. Checkpoint commit (перед проверкой полноты)
+## 0. Checkpoint commit (перед проверкой полноты) — DONE
 
 После `DONE_TAILS`, **до** сверки манифеста/C1+C2:
 
-1. Зафиксировать Docs/audit, Bin scripts (`repro_cold_lib`, `posttune_verify` overrides, smoke), `_repro/*manifest*`, `SOFTCOLD_DEFER_rcs_after_softcold_fix.txt`, taxonomy.
-2. **Не** коммитить `*_work/`, StatisticLog, огромные archives (скилл `nmsdk-gitlinks`).
-3. Только после успешного commit — проверка полноты хвостов и при необходимости AMPNORM.
+1. ✓ Bin `0bb8125` (scripts/manifest/rcs) + root `c790edb` (Docs evidence + Bin gitlink).
+2. ✓ Без `*_work/`, StatisticLog, archives (`nmsdk-gitlinks`).
+3. ✓ Полнота: 4 extended + 24 C1+C2 в RC, `missing_count=0`, все `rc=1`.
 ## Наблюдение (уже)
 
 | case | L | TipR live | Need | Интерпретация |
@@ -31,13 +31,12 @@
 
 ## Метод после очереди
 
-1. Собрать все extended + B_partial bundles: provenance, tipr_live, mid_dbg, Need/TipR/L final.
-2. Классифицировать: (a) TipR not-at-Rmin, (b) TipR@Rmin but Need=1, (c) PostTune stuck.
-3. Точечный re-run **одного** кейса (`fs25_gen` или `asym50`) с:
-   - отключённым prune **или** периодическим SNAP ResistanceStatus / AmpDt / NoImprove / DendLastAbsDt / TrainingPhase;
-   - EnableDebug AmpDtAudit если доступен в логе.
-4. Сопоставить с условиями `AllSynapsesNormalized` (ветки amp_ok / at_r_min / dead_tip / no_improve).
-5. Документ: `evidence/AMPNORM_EOL_STUCK.ru.md` + при необходимости правка harness (не ослаблять LandscapeOk).
+0. ✓ Checkpoint + полнота (см. §0).
+1. ✓ Собрать extended bundles: см. [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) — классы (a)/(b).
+2. ✓ Классификация: fs25=(a) TipR not-at-Rmin; asym\*=(b) TipR@Rmin Need=1.
+3. ✓ Diagnostic `fs25_gen --no-prune --snap-every 20`: Need=1, dend2 mid-band; NM exit по `-t`; slog wiped post-run.
+4. Сопоставить с `AllSynapsesNormalized` / TipR-update (`dt>5` skip) — **next** (код + keep-slog).
+5. ✓ Документ: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md).
 
 ## Не смешивать
 

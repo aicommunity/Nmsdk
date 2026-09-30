@@ -16,8 +16,7 @@ Console: `ec86430e…`.
 | S3.a Cold PASS | **провал** | Need≠0, XML не Save, gate FAIL |
 | S3.b не сломать Train Done (asym25/br25) | **успех** | Done + tipr=canon; gate FAIL как раньше (A) |
 | S3.b fs25/phase6 → PASS | **провал** | incomplete / runaway |
-| S3.c полная DEFER C1+C2 | **в запуске** | хвост после S3.a/b |
-| S3.d extended `-t` | **в запуске** | P0: fs25 + B_partial asym* |
+| S3.c полная DEFER C1+C2 | **done** | 24/24 rc=1 (`DONE_TAILS`) |
 | Cold PASS / SUCCESSFUL PASS rows | **не достигнуто** | ни один из 9 не PASS |
 
 **Итог кампании фикса:** целевая проблема SoftCold (**desync / frozen TipR**) устранена.  
@@ -57,7 +56,7 @@ Console: `ec86430e…`.
 - EndOfLearning при уже settled TipR/L (asym50/100).
 - NonSeparable mid.
 - Phase6 EstDelay vs span.
-- Полный покрытие C1+C2 (S3.c) и extended P0 (S3.d) — хвосты запускаются отдельно.
+- Полный покрытие C1+C2 (S3.c) и extended P0 (S3.d) — **done** (`DONE_TAILS` 2026-09-30T10:05:51Z); дальше [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md).
 
 ## Артефакты
 

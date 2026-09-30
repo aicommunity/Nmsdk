@@ -1,16 +1,16 @@
 # Статус аудита TimeLearner Cold 2026-09-26
 
-Дата обновления: 2026-09-28 ~10:00.
+Дата обновления: 2026-09-30 (после DONE_TAILS).
 
 | Фаза | Статус | Кратко |
 |------|--------|--------|
 | SoftCold S1+S2 | **done** | фикс + smoke OK |
 | SoftCold S3.a+b | **done** | 9/9; desync lifted; Cold PASS нет |
-| Анализ плана | **done** | [SOFTCOLD_PLAN_RESULT.md](evidence/SOFTCOLD_PLAN_RESULT.md) |
-| S3.d extended-t | **in progress** | сейчас `fs25_gen` `-t 640` polls=801 |
-| S3.c DEFER остаток | **queued** | после S3.d (23 кейса) |
-| FAIL_TAXONOMY | **updated** | campaign `after_softcold_fix` |
+| SoftCold S3.c/d | **done** | 4 ext + 24 C1+C2; all rc=1; Need≠0 |
+| Checkpoint commit | **done** | Bin `0bb8125`, root `c790edb` |
+| Анализ SoftCold | **done** | [SOFTCOLD_PLAN_RESULT.md](evidence/SOFTCOLD_PLAN_RESULT.md) |
+| Amp-norm / EOL | **partial** | [AMPNORM_EOL_STUCK.ru.md](evidence/AMPNORM_EOL_STUCK.ru.md) — fs25 (a) confirmed |
 
-**Вердикт фикса:** SoftCold desync **успех**; Cold PASS / NonSeparable / phase6 EstDelay — **не закрыты** этим планом.
+**Вердикт фикса:** SoftCold desync **успех**; Cold PASS / NonSeparable / phase6 EstDelay — **не закрыты**.
 
-**После DONE_TAILS:** (1) git commit checkpoint → (2) проверка полноты хвостов → (3) [AMPNORM_EOL_INVESTIGATE.plan.md](evidence/AMPNORM_EOL_INVESTIGATE.plan.md).
+**Amp-norm:** diagnostic `fs25 --no-prune` DONE — dend2 mid-band ~34–35 M весь `-t 640`, Need=1; slog wiped post-run. Дальше: keep-slog + разбор TipR-update / asym50 (b).
