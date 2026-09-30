@@ -1,6 +1,6 @@
 # Phase 4 — Branch br25 SoftCold diagnostics
 
-**Status:** in progress / evidence-first (no morphogenesis code change)
+**Status:** B1 done — see P4_br25_B1.md (Need=0 tipr=canon gate_fail; no morph change)
 
 ## Existing evidence (do not re-run H1–H4 unless incomplete)
 
