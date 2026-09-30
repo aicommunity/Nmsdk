@@ -19,7 +19,7 @@
 | WS | Статус | Кратко |
 |----|--------|--------|
 | **W0** docs/реестры | **done** | SoftCold DEFER→closed; SUCCESSFUL 0 PASS; FAIL_TAXONOMY after_fix 37+diag |
-| **W1** AmpNorm(a) TipR mid-band | **open** | keep-slog fs25 → PulseLib `|dt|>5` escape → SoftCold fs* |
+| **W1** AmpNorm(a) TipR mid-band | **in progress** | keep-slog: не L775, а NoImprove+mid→Rmin fix; rebuild Console `7aa47f30…` |
 | **W2** AmpNorm(b) TipR@Rmin Need=1 | **open** | keep-slog asym50 → length_ok/EOL fix → SoftCold asym* |
 | **W3** Phase6 EstDelay | **open** | XML EstDelayPerSeg → SoftCold phase6×3 |
 | **W4** NonSeparable mid | **open** | asym25/br25 research; **не** ослаблять LandscapeOk |
