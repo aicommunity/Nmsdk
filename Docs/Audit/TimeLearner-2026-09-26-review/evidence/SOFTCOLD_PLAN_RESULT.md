@@ -57,6 +57,7 @@ Console: `ec86430e…`.
 - NonSeparable mid.
 - Phase6 EstDelay vs span.
 - Полный покрытие C1+C2 (S3.c) и extended P0 (S3.d) — **done** (`DONE_TAILS` 2026-09-30T10:05:51Z); дальше [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md).
+- Follow-up remediations (PulseLib TipR / EstDelay / mid / R01–R04): см. STATUS W0–W6.
 
 ## Артефакты
 

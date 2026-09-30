@@ -1,7 +1,8 @@
 # План: исправление SoftCold → проверка → retest затронутых кейсов
 
-Статус: **S3.a+b done; S3.c/d tails running; анализ** [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md).  
-Fix: `2026-09-27_sbm2_strip_tip1`. Desync lifted; Cold PASS не получен.
+Статус: **done** (desync снят; Cold PASS нет). Анализ: [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md).  
+`DONE_TAILS` 2026-09-30T10:05:51Z; AmpNorm: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md).  
+Fix: `2026-09-27_sbm2_strip_tip1`.
 
 ```mermaid
 flowchart TD
@@ -101,11 +102,11 @@ flowchart TD
 3. [x] S2: smoke asym50 (+ asym25 control) — growth ~30 s; [S2_SMOKE_RESULT.md](S2_SMOKE_RESULT.md)  
 4. [x] S3.a: asym50/100_* — desync lifted all 3; Need≠0. [S3a_DESYNC_SUMMARY.md](S3a_DESYNC_SUMMARY.md)  
 5. [x] S3.b: asym25, br25, fs25, phase6_* — все rc=1; [S3_QUEUE_RESULT.md](S3_QUEUE_RESULT.md)  
-6. [~] S3.c: остаток C1+C2 — в `run_S3cd_tails.sh` (после S3.d)  
-7. [~] S3.d: extended — манифест; сейчас asym100_* после fs25+asym50_ext  
+6. [x] S3.c: C1+C2 остаток — 24/24 rc=1 (`DONE_TAILS`)  
+7. [x] S3.d: extended P0 — 4/4 Need=1 (fs25+asym*); phase6 не в манифесте  
 8. [x] Обновить EXPERIMENTS/SUCCESSFUL/`FAIL_TAXONOMY` / STATUS + [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md)  
-9. [ ] **После `DONE_TAILS`:** сначала **git commit** текущего состояния (Docs + Bin scripts/манифесты/rc; без `*_work`/StatisticLog) по скиллу `nmsdk-gitlinks`  
-10. [ ] Затем проверка полноты хвостов S3.c/d; доделать пробелы **или** перейти к [AMPNORM_EOL_INVESTIGATE.plan.md](AMPNORM_EOL_INVESTIGATE.plan.md)  
+9. [x] Checkpoint commit после `DONE_TAILS` (Bin+Docs gitlinks)  
+10. [x] Полнота хвостов OK → [AMPNORM_EOL_INVESTIGATE.plan.md](AMPNORM_EOL_INVESTIGATE.plan.md) DONE; follow-up remediations отдельно
 
 ---
 

@@ -1,7 +1,8 @@
 # План: классификация SoftCold FAIL + отложенный retest с увеличенным `-t`
 
-Статус: **S3.d in progress** (после softcold_fix).  
-Манифест: `EXTENDED_TIME_MANIFEST.txt` — fs25 + asym50/100 (B_partial). Phase6 **не** в P0.  
+Статус: **done** (все P0 extended Need=1; дальше не множить `-t` → AmpNorm fix).  
+Манифест: `EXTENDED_TIME_MANIFEST.txt` — fs25 `-t 640` + asym50/100 `-t 1280`. Phase6 **не** в P0.  
+Итог: 4/4 `rc=1`; fs25 TipR mid-band dend2; asym* TipR@Rmin + Need=1.  
 Harness: `posttune_verify --train-t` / `--max-polls`.
 
 ## 0. Уточнение после timing-разбора (2026-09-27)
@@ -111,13 +112,14 @@ phase6_ltzcal_twin
 | Need=1, L/TipR ближе к gold | Ещё один шаг ×2 **один раз**, потом stop |
 | Need=1, TipR всё ещё flat cold | **B_tipr_frozen** confirmed; stop extended; отдельная диагностика |
 
-## 5. Чеклист перед стартом extended (позже)
+## 5. Чеклист (исполнение)
 
-- [ ] Phase 5 DEFER queue завершена; taxonomy JSON обновлён на все 28 кейсов  
-- [ ] Harness поддерживает override `train_t` + `max_polls`  
-- [ ] Хост стабилен; metrics sampler включён  
-- [ ] PARALLEL=1; не одновременно с тяжёлым Phase6×4 без нужды  
-- [ ] Не ослаблять LandscapeOk  
+- [x] SoftCold S3.c/d / DEFER queue завершена (`DONE_TAILS`)  
+- [x] Harness `--train-t` + `--max-polls`  
+- [x] P0 extended прогнан (fs25+asym50/100_*)  
+- [x] PARALLEL=1; phase6 не в extended  
+- [x] LandscapeOk не ослабляли  
+- [x] Stop extended: Need=1 на всех → [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md)
 
 ## 6. Обновление taxonomy после каждого FAIL
 
