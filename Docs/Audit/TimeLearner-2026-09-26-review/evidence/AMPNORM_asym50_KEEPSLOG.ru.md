@@ -39,3 +39,9 @@ Console: **старый** (до `kRminLengthTolFactor` / PulseLib `bb438c4`).
 | Wall | ~4.5 ч (`posttune_exit=0`) |
 
 Этот прогон — только диагностика на pre-fix Console; SoftCold asym* — на Console после `bb438c4`.
+
+## Следующий инкремент (2026-10-01, после autosave)
+
+Classic `kRminLengthTolFactor=2` уже в `bb438c4`. Зеркало в **TimeLearnerBranch** `AllSynapsesNormalized` (тот же Rmin length override) — чтобы SoftCold `br*` не залипал в корзине B тем же механизмом.
+
+Harness: `--autosave-model-s 10` закрывает gap свежести Need XML; повторный diag якоря `asym50_preinh` — на Console после rebuild.

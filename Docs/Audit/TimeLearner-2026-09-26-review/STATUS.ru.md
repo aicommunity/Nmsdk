@@ -37,3 +37,9 @@ Harness: `--no-prune` / `--snap-every` / `--keep-slog`. LandscapeOk / Acc / fire
 - Реестр: [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md) — Gold ≠ SoftCold.
 - Границы FAIL: [SOFTCOLD_FAIL_BOUNDS.ru.md](evidence/SOFTCOLD_FAIL_BOUNDS.ru.md).
 - Model-time autosave / полная SoftCold-матрица — цель `Working=SoftCold` где объективно возможно.
+
+## SoftCold full matrix (после autosave)
+
+- Инвентарь закрыт: [`SOFTCOLD_CANON_INVENTORY.md`](../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_CANON_INVENTORY.md).
+- Очередь: `scripts/softcold_full_matrix.sh` → `metrics/SOFTCOLD_full_matrix.log`.
+- PulseLib Branch: зеркало `kRminLengthTolFactor` (AmpNorm b).

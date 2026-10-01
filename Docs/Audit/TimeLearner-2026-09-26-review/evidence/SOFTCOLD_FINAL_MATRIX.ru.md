@@ -28,3 +28,11 @@ Taxonomy snapshot: [`FAIL_TAXONOMY.json`](FAIL_TAXONOMY.json) (after SoftCold fi
 - Границы FAIL: [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md). Autosave: [MODEL_TIME_AUTOSAVE.ru.md](MODEL_TIME_AUTOSAVE.ru.md).
 
 Ссылки: [STATUS.ru.md](../STATUS.ru.md), [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md), [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md), [W5_R01_R04.ru.md](W5_R01_R04.ru.md).
+
+
+## Волна autosave / Working (2026-10-01)
+
+- Console SHA-256 `e018c02430d905be…` · PulseLib `b29b595` (Branch AmpNorm b mirror) · harness `--autosave-model-s 10`.
+- Инвентарь: [`SOFTCOLD_CANON_INVENTORY.md`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_CANON_INVENTORY.md) · очередь [`SOFTCOLD_QUEUE_manifest.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_QUEUE_manifest.txt).
+- Лог матрицы: [`metrics/SOFTCOLD_full_matrix.log`](metrics/SOFTCOLD_full_matrix.log) · RCS [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt).
+- Цель: рост `Working=SoftCold` где объективно возможно; GoldTest не обнулять. Working≠SoftCold без cold PASS.
