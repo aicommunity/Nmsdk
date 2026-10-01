@@ -36,3 +36,11 @@ Taxonomy snapshot: [`FAIL_TAXONOMY.json`](FAIL_TAXONOMY.json) (after SoftCold fi
 - Инвентарь: [`SOFTCOLD_CANON_INVENTORY.md`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_CANON_INVENTORY.md) · очередь [`SOFTCOLD_QUEUE_manifest.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_QUEUE_manifest.txt).
 - Лог матрицы: [`metrics/SOFTCOLD_full_matrix.log`](metrics/SOFTCOLD_full_matrix.log) · RCS [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt).
 - Цель: рост `Working=SoftCold` где объективно возможно; GoldTest не обнулять. Working≠SoftCold без cold PASS.
+
+### Статус очереди autosave (live)
+
+- Запущена softcold_full_matrix.sh (49 case), якорь первый: asym50_preinh.
+- Smoke autosave OK; SoftCold workdir писал Project auto-save call completed @ model t=10/20.
+- RCS: _repro/SOFTCOLD_HEAD_rcs.txt; реестр обновляется apply_softcold_rcs_to_registry.py после каждого case.
+- Working≠SoftCold, пока нет cold PASS.
+
