@@ -45,6 +45,6 @@ Taxonomy snapshot: [`FAIL_TAXONOMY.json`](FAIL_TAXONOMY.json) (after SoftCold fi
 - Working≠SoftCold, пока нет cold PASS.
 ### Autosave wave — first Cold PASS
 
-- ** SoftCold PASS** (rc=0) 2026-10-01 · Console  · TipR@Rmin Need=0 fires=.
-- Working= в реестре. Очередь продолжается (…).
+- **asym50_preinh SoftCold PASS** (rc=0) 2026-10-01 · Console `e018c024…` · TipR@Rmin Need=0 fires=`10000000`.
+- Working=`SoftCold` в реестре. Очередь продолжается (`asym25_preinh`…).
 
