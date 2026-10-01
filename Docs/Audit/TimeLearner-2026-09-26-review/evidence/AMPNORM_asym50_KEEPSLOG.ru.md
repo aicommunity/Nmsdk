@@ -42,6 +42,10 @@ Console: **старый** (до `kRminLengthTolFactor` / PulseLib `bb438c4`).
 
 ## Следующий инкремент (2026-10-01, после autosave)
 
-Classic `kRminLengthTolFactor=2` уже в `bb438c4`. Зеркало в **TimeLearnerBranch** `AllSynapsesNormalized` (тот же Rmin length override) — чтобы SoftCold `br*` не залипал в корзине B тем же механизмом.
+Classic `kRminLengthTolFactor=2` уже в `bb438c4`. Зеркало в **TimeLearnerBranch** `AllSynapsesNormalized` (тот же Rmin length override) — SoftCold `br*` / PulseLib `b29b595`.
 
-Harness: `--autosave-model-s 10` закрывает gap свежести Need XML; повторный diag якоря `asym50_preinh` — на Console после rebuild.
+Harness: `--autosave-model-s 10` закрывает gap свежести Need XML.
+
+### Live SoftCold `asym50_preinh` (autosave wave)
+
+Console `e018c024…` · poll#10 `AUTOSAVE_SEEN`: TipR **`2e7×3 8.6e7`**, L≈`27 22 15 1`, Need=1 — корзина B всё ещё на якоре; матрица продолжает очередь (`SOFTCOLD_full_matrix.log`).
