@@ -37,3 +37,9 @@
 | 5–10 | SoftCold default / AmpNorm diagnostics |
 | 20–30 | длинные Train (-t ≥ 900) если I/O Save заметно |
 | 0 | отладка без mid-train Save |
+
+## Smoke (2026-10-01)
+
+- Console SHA-256 `e018c02430d905be…` после порта Rdk+main + PulseLib Branch AmpNorm b.
+- Workdir soft-cold `autosave_model_s=5`, NM `-t 25`: лог **`Project auto-save call completed at channel 0 model time 5.06…`**.
+- SoftCold full matrix: `scripts/softcold_full_matrix.sh` → `metrics/SOFTCOLD_full_matrix.log` (`--autosave-model-s 10 --snap-every 20`).
