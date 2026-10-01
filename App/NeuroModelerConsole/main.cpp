@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 #include <utility>
 #include <vector>
 #include <boost/program_options/cmdline.hpp>
@@ -288,7 +289,10 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
      env->SetMaxCalcTime(AppCore.calcTimeIntervalSec);
    }
   }
-  if(AppCore.exitAfterCalcFlag || cliSaveProject)
+  const int projectAutoSaveInterval = AppCore.application.GetProjectOpenFlag()
+      ? std::max(0, AppCore.application.GetProjectConfig().ProjectAutoSaveModelTimeInterval)
+      : 0;
+  if(AppCore.exitAfterCalcFlag || cliSaveProject || projectAutoSaveInterval > 0)
   {
    if(AppCore.exitAfterCalcFlag && AppCore.calcTimeIntervalSec <= 0.0)
    {
@@ -298,21 +302,66 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
    QTimer* monitor = new QTimer(QCoreApplication::instance());
    // Latch: one SaveProject and one quit per run (A15).
    auto* completionHandled = new bool(false);
+   const int projectChannelCount = std::max(1, AppCore.application.GetProjectConfig().NumChannels);
    QObject::connect(monitor, &QTimer::timeout,
-    [&, cliSaveProject, monitor, completionHandled]()
+    [&, cliSaveProject, monitor, completionHandled, projectAutoSaveInterval,
+     nextAutoSaveModelTime = std::vector<double>(static_cast<size_t>(projectChannelCount), -1.0),
+     lastAutoSaveModelTime = std::vector<double>(static_cast<size_t>(projectChannelCount), -1.0)]() mutable
    {
-    if(*completionHandled)
-     return;
     if(!AppCore.application.GetProjectOpenFlag())
      return;
     const auto& cfg = AppCore.application.GetProjectConfig();
     const int channel_count = std::max(1, cfg.NumChannels);
+    bool allCalcFinished = true;
+    bool autoSaveDue = false;
+    int autoSaveTriggerChannel = -1;
+    std::vector<double> modelTimes(static_cast<size_t>(channel_count), 0.0);
     for(int channel = 0; channel < channel_count; ++channel)
     {
      auto env = RDK::GetEnvironmentLock(channel);
      if(env && !env->IsCalcFinished())
-      return;
+      allCalcFinished = false;
+
+     if(projectAutoSaveInterval > 0)
+     {
+      const double modelTime = MModel_GetDoubleTime(channel);
+      if(!std::isfinite(modelTime))
+       continue;
+      modelTimes[static_cast<size_t>(channel)] = modelTime;
+      double& nextSaveTime = nextAutoSaveModelTime[static_cast<size_t>(channel)];
+      double& lastModelTime = lastAutoSaveModelTime[static_cast<size_t>(channel)];
+      if(nextSaveTime < 0.0 || (lastModelTime >= 0.0 && modelTime + 1.0e-9 < lastModelTime))
+       nextSaveTime = modelTime + projectAutoSaveInterval;
+      if(modelTime + 1.0e-9 >= nextSaveTime)
+      {
+       autoSaveDue = true;
+       if(autoSaveTriggerChannel < 0)
+        autoSaveTriggerChannel = channel;
+      }
+      lastModelTime = modelTime;
+     }
     }
+
+    if(autoSaveDue)
+    {
+     const bool saved = AppCore.application.SaveProject();
+     if(!saved)
+      qCritical() << "Error: model-time auto-save call failed.";
+     else
+      qInfo() << "Project auto-save call completed at channel" << autoSaveTriggerChannel
+              << "model time" << modelTimes[static_cast<size_t>(autoSaveTriggerChannel)] << "seconds.";
+     // Do not retry on every 500 ms timer tick if writing failed. Try again after
+     // the next configured model-time interval.
+     for(int channel = 0; channel < channel_count; ++channel)
+     {
+      double& nextSaveTime = nextAutoSaveModelTime[static_cast<size_t>(channel)];
+      if(nextSaveTime >= 0.0 && modelTimes[static_cast<size_t>(channel)] + 1.0e-9 >= nextSaveTime)
+       nextSaveTime = modelTimes[static_cast<size_t>(channel)] + projectAutoSaveInterval;
+     }
+    }
+
+    if(!allCalcFinished || *completionHandled)
+     return;
     *completionHandled = true;
     monitor->stop();
     if(cliSaveProject)
