@@ -79,6 +79,21 @@ Cold PASS / правка PulseLib **не** входят в этот план (о
 3. Для (b): diagnostic asym50 + проверка `DendLastAbsDt` / `length_ok` vs `at_r_min`.
 4. LandscapeOk / gate **не** ослаблять.
 
+## После фикса TipR mid-band (W1 SoftCold retest)
+
+Console `18a8a062…` · PulseLib `09d37e2` midband→Rmin every `|ampDt|≤osc`.
+
+| case | TipR live/Save | L | Need | вердикт |
+|------|----------------|---|------|---------|
+| fs25_gen | dend2≈**2.91e7** (было ~3.5e7) | `6 5 4 1` | 1 | mid улучшен, Rmin не за `-t 160` |
+| fs25_preinh | dend2≈**3.96e7** | `6 6 3 1` | 1 | mid остаётся |
+| **fs50_preinh** | **`2e7×3 8.6e7` (=Rmin)** | `11 10 7 1` | 1 | **(a) TipR fixed**; Need=1 → корзина **(b)** |
+| fs100_gen | live dend2≈1.04e8; XML flat no Save | live `21 18 12 1` | 1 | TipR ушёл вверх, не mid-stall |
+| fs100_preinh | live dend2≈3.07e8; XML flat | live `21 18 12 1` | 1 | TipR ceiling-ward |
+
+**W1 итог:** mid-band freeze (a) снят на fs50 (TipR@Rmin). Need≠0 на всех → дальше W2 AmpNorm(b).  
+Log: `metrics/SOFTCOLD_w1_fs_retest.log`. Keep-slog confirm: [AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md).
+
 ## Не смешивать
 
 - A_nonseparable, phase6 EstDelay, SoftCold SBM — отдельно / снято.
