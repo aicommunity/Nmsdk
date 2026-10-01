@@ -43,4 +43,8 @@ Taxonomy snapshot: [`FAIL_TAXONOMY.json`](FAIL_TAXONOMY.json) (after SoftCold fi
 - Smoke autosave OK; SoftCold workdir писал Project auto-save call completed @ model t=10/20.
 - RCS: _repro/SOFTCOLD_HEAD_rcs.txt; реестр обновляется apply_softcold_rcs_to_registry.py после каждого case.
 - Working≠SoftCold, пока нет cold PASS.
+### Autosave wave — first Cold PASS
+
+- ** SoftCold PASS** (rc=0) 2026-10-01 · Console  · TipR@Rmin Need=0 fires=.
+- Working= в реестре. Очередь продолжается (…).
 
