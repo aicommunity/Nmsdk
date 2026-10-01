@@ -31,3 +31,9 @@ Harness: `--no-prune` / `--snap-every` / `--keep-slog`. LandscapeOk / Acc / fire
 ## Closeout
 
 Кампания follow-up W0–W6 **закрыта** 2026-10-01: desync OK; EstDelay L-fix OK; AmpNorm mid→Rmin OK на части кейсов; **Cold SoftCold PASS = 0**. R01/R04 — blocked:time.
+
+## Следующая волна (Working/LastCheck + autosave)
+
+- Реестр: [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md) — Gold ≠ SoftCold.
+- Границы FAIL: [SOFTCOLD_FAIL_BOUNDS.ru.md](evidence/SOFTCOLD_FAIL_BOUNDS.ru.md).
+- Model-time autosave / полная SoftCold-матрица — цель `Working=SoftCold` где объективно возможно.

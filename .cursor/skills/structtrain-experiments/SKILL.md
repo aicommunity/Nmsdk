@@ -39,9 +39,10 @@ description: >-
    ```
    По умолчанию: clean workdir. **Не** `--allow-salvage` / `--use-archive-inplace` без явной просьбы.
 3. **Метрики:** Acc `N/8`, Цель `да`/`нет`/`—`, fires, Need, mid, Result/NonSeparable; bundle `_repro/runs/<id>/`.
-4. **Реестр:** обновить/добавить строку у **канонического Имени** с протоколом (`GoldTest` | `SoftCold+PostTune` | `SkipTrainGold` | `SoftCold+PostTuneOff` | `MatrixClone`) и HEAD `PASS`|`FAIL`|`NOT_RETESTED`.
-5. **PASS** → те же разделы/колонки в `SUCCESSFUL_EXPERIMENTS.md`. **FAIL**-строки в таблицы PASS не класть; причины FAIL/DEFER — блок «Провалы / вне PASS» в каждом разделе SUCCESSFUL (полный FAIL — в `EXPERIMENTS.md`).
+4. **Реестр:** обновить **LastCheck** (протокол этой проверки + вердикт) и пересчитать **Working** (сильнейший PASS по лестнице SoftCold > SoftColdOff > SkipTrainGold > GoldTest ≈ MatrixClone). HEAD `PASS`|`FAIL`|`NOT_RETESTED`.
+5. **PASS** → те же разделы/колонки в `SUCCESSFUL_EXPERIMENTS.md`. **FAIL**-строки в таблицы PASS не класть; причины — блок «Провалы / вне PASS» (полный FAIL — в `EXPERIMENTS.md`).
 6. Гипотезы без различия (soft vs strip, AutoScale) — **примечание** к SoftCold-строке, не новые «эксперименты».
+7. GoldTest/MatrixClone PASS **≠** SoftCold. См. [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md).
 
 ## Запреты
 
@@ -51,4 +52,4 @@ description: >-
 
 ## Колонки строки реестра
 
-`Имя | Алгоритм | Параметры | Протокол | Acc | Цель | Режим | HEAD | PHASE12 | Примечание | Конфиги`
+`Имя | Алгоритм | Параметры | Working | LastCheck | Acc | Цель | Режим | HEAD | PHASE12 | Примечание | Конфиги`

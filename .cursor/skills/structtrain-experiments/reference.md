@@ -14,15 +14,19 @@
 
 Skip-train gold control: тот же канон Branch25, протокол `SkipTrainGold` (не отдельный case-алгоритм).
 
-## Протоколы
+## Протоколы / Working
 
-| Протокол | Смысл |
-|----------|--------|
-| `GoldTest` | Готовые веса на диске, канонический Test |
-| `SkipTrainGold` | Контроль контура на frozen весах без Train |
-| `SoftCold+PostTune` | Soft-cold Train + PostTune + gate |
-| `SoftCold+PostTuneOff` | Soft-cold, `EnablePostTrainTuning=0` |
-| `MatrixClone` | Pack B/C matrix-only, не независимое cold |
+Лестница **Working**: SoftCold > SoftColdOff > SkipTrainGold > GoldTest ≈ MatrixClone.
+
+| Протокол / Working | Смысл |
+|--------------------|--------|
+| SoftCold (`SoftCold+PostTune`) | Soft-cold Train + PostTune + gate (cold-from-scratch) |
+| SoftColdOff | Soft-cold, `EnablePostTrainTuning=0` |
+| SkipTrainGold | Контроль контура на frozen весах без Train |
+| GoldTest | Готовые веса на диске, канонический Test |
+| MatrixClone | Pack B/C matrix-only, не независимое cold |
+
+**GoldTest PASS ≠ SoftCold.** Колонки реестра: **Working** (сильнейший PASS) + **LastCheck** (эта проверка). См. [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md).
 
 ## Acc / Цель
 

@@ -23,7 +23,8 @@ Taxonomy snapshot: [`FAIL_TAXONOMY.json`](FAIL_TAXONOMY.json) (after SoftCold fi
 
 - SoftCold **desync** (S1–S3) — успех (исторически).
 - **Cold PASS** после W1–W4 remediations — **по-прежнему 0**.
-- SUCCESSFUL SoftCold: **пусто** (только GoldTest/SkipTrainGold PASS в реестре).
+- SUCCESSFUL SoftCold: **пусто** (только GoldTest/SkipTrainGold PASS в реестре) — колонки **Working**/**LastCheck**: [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](PROTOCOL_WORKING_VS_LASTCHECK.ru.md).
 - LandscapeOk / Acc / fires пороги **не** менялись.
+- Границы FAIL: [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md). Autosave: [MODEL_TIME_AUTOSAVE.ru.md](MODEL_TIME_AUTOSAVE.ru.md).
 
 Ссылки: [STATUS.ru.md](../STATUS.ru.md), [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md), [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md), [W5_R01_R04.ru.md](W5_R01_R04.ru.md).
