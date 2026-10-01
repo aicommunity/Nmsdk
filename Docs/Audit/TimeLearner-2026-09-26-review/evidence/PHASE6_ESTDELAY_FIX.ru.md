@@ -18,11 +18,15 @@ Archive Phase6 SoftCold-source **без** тега `EstDelayPerSeg` → runtime 
 
 Ожидание SoftCold: L≈gold (±tol), не runaway ~97.
 
-## Retest
+## Retest (2026-10-01)
 
-`posttune_verify --case phase6_{thr_only,preinh250,ltzcal_twin}` (train_t=900) + монитор 10 м.  
-Extended `-t` не открывать, пока L не в окрестности gold.
+Console `b66711b5…` · log `metrics/SOFTCOLD_w3_phase6_retest.log`.
 
-## После retest
+| case | L live | TipR live (хвост) | Need | gate | rc | bundle |
+|------|--------|-------------------|------|------|----|--------|
+| phase6_thr_only | **`49 41 25 1`** (≠97) | dend0/1 ceiling `1e11`, dend2≈2.3e7 | 1 | 1 | **1** | `…T110339Z` |
+| phase6_preinh250 | **`53 45 28 1`** (≠97) | `1e11×3` | 1 | 1 | **1** | `…T121029Z` |
+| phase6_ltzcal_twin | **`49 41 25 1`** (≠97) | dend0/1 `1e11`, dend2≈2.2e7 | 1 | 1 | **1** | `…T132330Z` |
 
-(заполнить: Need, TipR, L live, gate_rc)
+**Итог EstDelay:** runaway L≈97 **снят**, L в окрестности gold.  
+**Cold PASS:** нет (Need=1, TipR non-canon/ceiling, gate_rc=1). Extended `-t` не открывать ради L.
