@@ -43,20 +43,19 @@ function(deploy_vcpkg_dlls TARGET_NAME)
         endif()
     endforeach()
 
-    # Copy debug DLLs (if they exist); skip Qt* DLLs
+    # Copy debug DLLs only when building a Debug configuration. Some vcpkg
+    # ports (notably glog) use the same DLL filename for Release and Debug.
+    # Copying both variants to one output directory makes the Debug DLL replace
+    # the Release one and can crash Release apps during CRT/static teardown.
     if(EXISTS "${_vcpkg_debug_bin_dir}")
-        file(GLOB _debug_dll_files "${_vcpkg_debug_bin_dir}/*.dll")
-        foreach(_dll_file IN LISTS _debug_dll_files)
-            get_filename_component(_dll_name "${_dll_file}" NAME)
-            if(NOT _dll_name MATCHES "^Qt")
-                add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                        "${_dll_file}"
-                        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${_dll_name}"
-                    COMMENT "Copying debug ${_dll_name} to output directory"
-                )
-            endif()
-        endforeach()
+        add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND}
+                "-DACTIVE_CONFIG=$<CONFIG>"
+                "-DSOURCE_DIR=${_vcpkg_debug_bin_dir}"
+                "-DDEST_DIR=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+                -P "${CMAKE_SOURCE_DIR}/cmake/DeployVcpkgDebugDlls.cmake"
+            COMMENT "Deploying Debug vcpkg DLLs when building Debug"
+        )
     endif()
 
     # Copy Qt WebEngine files, if present
