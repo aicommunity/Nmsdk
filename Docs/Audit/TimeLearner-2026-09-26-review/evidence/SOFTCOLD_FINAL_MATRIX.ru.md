@@ -47,4 +47,5 @@ Taxonomy snapshot: [`FAIL_TAXONOMY.json`](FAIL_TAXONOMY.json) (after SoftCold fi
 
 - **asym50_preinh SoftCold PASS** (rc=0) 2026-10-01 · Console `e018c024…` · TipR@Rmin Need=0 fires=`10000000`.
 - Working=`SoftCold` в реестре. Очередь продолжается (`asym25_preinh`…).
+- **asym25_preinh SoftCold PASS** (rc=0) 2026-10-01; очередь 2 PASS / 0 FAIL, сейчас `br25_on`.
 
