@@ -94,6 +94,19 @@ Console `18a8a062…` · PulseLib `09d37e2` midband→Rmin every `|ampDt|≤osc`
 **W1 итог:** mid-band freeze (a) снят на fs50 (TipR@Rmin). Need≠0 на всех → дальше W2 AmpNorm(b).  
 Log: `metrics/SOFTCOLD_w1_fs_retest.log`. Keep-slog confirm: [AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md).
 
+## После AmpNorm(b) Rmin length slack (W2 SoftCold retest)
+
+PulseLib `bb438c4` · Console `b66711b5…` · keep-slog: [AMPNORM_asym50_KEEPSLOG.ru.md](AMPNORM_asym50_KEEPSLOG.ru.md).
+
+| case | TipR live | L | Need@flag | rc |
+|------|-----------|---|-----------|-----|
+| asym50_preinh | **@Rmin** | `27 22 15 1` | 1 | 1 |
+| asym100_preinh | **@Rmin** | `49 41 31 1` | 1 | 1 |
+| asym100_gen | **@Rmin** | `54 43 27 1` | 1 | 1 |
+
+**W2 итог:** (b) диагностирован (LastAbsDt vs SyncTol); фикс `2×` залит; SoftCold asym* всё ещё **rc=1** / Cold PASS нет.  
+Сводка: [SOFTCOLD_W2_ASYM.ru.md](SOFTCOLD_W2_ASYM.ru.md). Log: `metrics/SOFTCOLD_w2_asym_retest.log`.
+
 ## Не смешивать
 
 - A_nonseparable, phase6 EstDelay, SoftCold SBM — отдельно / снято.
