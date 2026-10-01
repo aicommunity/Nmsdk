@@ -24,6 +24,10 @@
 | **W3** Phase6 EstDelay | **done** | EstDelay XML → SoftCold L≈gold (не 97); **0 PASS** Need/TipR/gate ([PHASE6_ESTDELAY_FIX.ru.md](evidence/PHASE6_ESTDELAY_FIX.ru.md)) |
 | **W4** NonSeparable mid | **done** | SoftCold asym25/br25 **0 PASS**; LandscapeOk не трогали ([A_NONSEPARABLE_MID.ru.md](evidence/A_NONSEPARABLE_MID.ru.md)) |
 | **W5** R01/R04 + шапки | **done** | TL-06 headers updated; R01/R04 **blocked: time** ([W5_R01_R04.ru.md](evidence/W5_R01_R04.ru.md)) |
-| **W6** final matrix | **open** | 37 RC PASS/FAIL vs RC → STATUS closeout |
+| **W6** final matrix | **done** | 37 RC → **0 PASS**; remediations W1–W4 без Cold PASS ([SOFTCOLD_FINAL_MATRIX.ru.md](evidence/SOFTCOLD_FINAL_MATRIX.ru.md)) |
 
 Harness: `--no-prune` / `--snap-every` / `--keep-slog`. LandscapeOk / Acc / fires **не** ослаблять.
+
+## Closeout
+
+Кампания follow-up W0–W6 **закрыта** 2026-10-01: desync OK; EstDelay L-fix OK; AmpNorm mid→Rmin OK на части кейсов; **Cold SoftCold PASS = 0**. R01/R04 — blocked:time.
