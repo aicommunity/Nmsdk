@@ -1,7 +1,14 @@
 add_executable(Test_ArduinoHardwareLib Test_ArduinoHardwareLib.cpp)
 
+target_sources(Test_ArduinoHardwareLib PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+
+target_compile_definitions(Test_ArduinoHardwareLib PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+
 target_link_libraries(Test_ArduinoHardwareLib PRIVATE
   Rdk-HardwareLib.qt
+  rdk.static.qt
   GTest::gtest
   GTest::gtest_main
   Nmsdk::Qt::Core
@@ -51,8 +58,15 @@ target_link_libraries(Test_ArduinoBoardEdges PRIVATE
 
 add_executable(Test_ArduinoPinMap Test_ArduinoPinMap.cpp)
 
+target_sources(Test_ArduinoPinMap PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+
+target_compile_definitions(Test_ArduinoPinMap PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+
 target_link_libraries(Test_ArduinoPinMap PRIVATE
   Rdk-HardwareLib.qt
+  rdk.static.qt
   GTest::gtest
   GTest::gtest_main
   Nmsdk::Qt::Core
@@ -60,8 +74,15 @@ target_link_libraries(Test_ArduinoPinMap PRIVATE
 
 add_executable(Test_ArduinoFirmataClient Test_ArduinoFirmataClient.cpp)
 
+target_sources(Test_ArduinoFirmataClient PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+
+target_compile_definitions(Test_ArduinoFirmataClient PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+
 target_link_libraries(Test_ArduinoFirmataClient PRIVATE
   Rdk-HardwareLib.qt
+  rdk.static.qt
   GTest::gtest
   GTest::gtest_main
   Nmsdk::Qt::Core
@@ -69,8 +90,15 @@ target_link_libraries(Test_ArduinoFirmataClient PRIVATE
 
 add_executable(Test_ArduinoSampleBuffer Test_ArduinoSampleBuffer.cpp)
 
+target_sources(Test_ArduinoSampleBuffer PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+
+target_compile_definitions(Test_ArduinoSampleBuffer PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+
 target_link_libraries(Test_ArduinoSampleBuffer PRIVATE
   Rdk-HardwareLib.qt
+  rdk.static.qt
   GTest::gtest
   GTest::gtest_main
   Nmsdk::Qt::Core
