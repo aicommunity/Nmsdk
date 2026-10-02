@@ -21,27 +21,17 @@
 
 - v1 (без `schemaVersion`): прежний layout `graph_N` / `serie_N`.
 - v2+: `schemaVersion`, `VizKind`, `SerieChannel`; X-role по умолчанию Time.
-
-### LLM tools (host `llmWatch*`)
-
-- `add/list/remove/clear_watch_series`
-- `list/create/focus/close_watch_mdi`
-- Расширения: `set_series_binding`, `set_panel_viz_kind` на той же DTO.
-
-## Consequences
-
-- Один стек в UI; меньше бинарного размера (нет ~23k LOC QCP).
-- Миграция XML на save; load v1 остаётся совместимым.
-- BCB TeeChart (`TUWatchInfo` X+Y sources) — только референс для DataBinding, не порт.
+- **v3 (2026-10):** стабильные `PanelId` / `SerieId`, `PanelVisible`, `DenseGrid`, `FixedYRange`/`FixedXRange`. Смена сетки меняет только геометрию (layout ≠ composition): лишние панели не удаляются, а уходят в overflow/hidden и восстанавливаются при расширении сетки.
 
 ### UX инспектора (Watch settings)
 
 Разделение scope:
 
-1. **Tab layout** — отдельный modal `UWatchLayoutDialog` (пресеты сетки + Custom, preview, `UpdateIntervalMs`). Toolbar **Layout** открывает только этот диалог; side panel не затрагивается.
-2. **Chart / Series** — `PlotSettingsSidePanel` в `QSplitter` (скрыт по умолчанию): hero «Chart N · title», combo активного графика, вкладки только Chart | Series. Live apply (без Apply-кнопок); формы в `QGroupBox` (Identity / Axes / Display; список серий + Selected series). Ширина ~320–420 px. Hide и Esc закрывают инспектор.
+1. **Tab layout** — отдельный modal `UWatchLayoutDialog` (пресеты сетки включая overview/dense monitor + Custom, preview, `UpdateIntervalMs`). Toolbar **Layout** открывает только этот диалог; side panel не затрагивается. Layout **не** уничтожает панели.
+2. **Chart / Series** — `PlotSettingsSidePanel` в `QSplitter`: hero `Watch / Tab / <title>` + **combo панелей**, вкладки Chart | Series. Live apply; Hide/Show/Dup/Delete/↑↓ для серий; Dense grid chrome; `X range, s`. Y shift — `double` end-to-end.
+3. Context menu ячейки: Add series, settings, Duplicate/Hide/Delete panel, Expand, save.
 
-Активный график задаётся кликом / combo в шапке / context menu; Chart/Series toolbar не сбрасывает выбор на chart 0.
+Активный график: клик / combo в шапке / context menu.
 
 ### Add series wizard
 
@@ -65,7 +55,7 @@ TS default `AxisXrange` = **5** с; смена X range через `updateTimeInt
 `W = axisXrange = reader.TimeInterval` (секунды model time):
 
 1. **Reader** — единственный owner истории (`TimeInterval` + `NumPoints`). `NumPoints` ≥ ~`2·W·Hz` (RT может давать плотнее 1 сэмпла/шаг); при упирании в cap до заполнения окна `AUpdate` наращивает буфер по наблюдаемой частоте.
-2. **Display** (`sampleTimeSeries`) — pass-through ридера; decimation только для отрисовки (endpoints сохраняются). Не trim’ить историю по `windowSize`/`TimeInterval`.
+2. **Display** (`sampleTimeSeries`) — pass-through ридера; decimation для отрисовки использует **min/max envelope** по пиксельным корзинам (сохраняет пики); endpoints сохраняются. Не trim’ить историю по `windowSize`/`TimeInterval`.
 3. **Track** (если trackable и не zoomed):  
    `lo=oldest`, `hi=latest`; если `hi-lo < W` → `hi = lo+W`; если `hi-lo > W` → `lo = hi-W`; затем **атомарно** `axis.setRange(lo, hi)`.
 

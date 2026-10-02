@@ -160,6 +160,10 @@ SOURCES += \
     ../../../Rdk/GUI/Qt/Plot/PlotDocument.cpp \
     ../../../Rdk/GUI/Qt/Plot/PlotDataAdapter.cpp \
     ../../../Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.cpp \
+    ../../../Rdk/GUI/Qt/Plot/PlotWatchUndoCommands.cpp \
+    ../../../Rdk/GUI/Qt/Plot/UWatchQuickAddDialog.cpp \
+    ../../../Rdk/GUI/Qt/Plot/WatchPropertyDndPayload.cpp \
+    ../../../Rdk/GUI/Qt/Plot/WatchTemplateStore.cpp \
     ../../../Rdk/GUI/Qt/Plot/PlotSurface.cpp \
     ../../../Rdk/GUI/Qt/Plot/UWatchLayoutDialog.cpp \
     ../../../Rdk/GUI/Qt/Plot/UWatchMatrixSelector.cpp \
@@ -237,6 +241,10 @@ HEADERS += \
     ../../../Rdk/GUI/Qt/Plot/PlotDocument.h \
     ../../../Rdk/GUI/Qt/Plot/PlotDataAdapter.h \
     ../../../Rdk/GUI/Qt/Plot/PlotSettingsSidePanel.h \
+    ../../../Rdk/GUI/Qt/Plot/PlotWatchUndoCommands.h \
+    ../../../Rdk/GUI/Qt/Plot/UWatchQuickAddDialog.h \
+    ../../../Rdk/GUI/Qt/Plot/WatchPropertyDndPayload.h \
+    ../../../Rdk/GUI/Qt/Plot/WatchTemplateStore.h \
     ../../../Rdk/GUI/Qt/Plot/PlotSurface.h \
     ../../../Rdk/GUI/Qt/Plot/UWatchLayoutDialog.h \
     ../../../Rdk/GUI/Qt/Plot/UWatchMatrixSelector.h \
