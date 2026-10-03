@@ -1,10 +1,10 @@
 # SoftCold full matrix — аудит сходимости обучения
 
 **Срез:** 2026-10-03T13:10+03 · матрица **завершена** (**49/49**).  
-**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · лог [`metrics/SOFTCOLD_full_matrix.log`](metrics/SOFTCOLD_full_matrix.log) · live [`metrics/softcold_last_sample.json`](metrics/softcold_last_sample.json).  
+**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · run-local log `metrics/SOFTCOLD_full_matrix.log` и live `metrics/softcold_last_sample.json` (в текущем checkout отсутствуют; см. §9).
 **Console/PulseLib HEAD матрицы:** AmpNorm a/b + midband→Rmin escape · harness `--autosave-model-s 10`.
 
-**Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL), разделить **C++ алгоритм**, **harness/скрипты** и **объективные** пределы. Финальные цифры — после закрытия очереди 49/49.
+**Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL), отделить подтверждённые факты от гипотез о **C++ алгоритме**, **harness/скриптах** и **пределах конфигураций**. Финальные цифры — после закрытия очереди 49/49.
 
 Связанные разборы: **[AMPNORM_EOL_FIX.plan.md](AMPNORM_EOL_FIX.plan.md)** (план фикса E→B→D) · [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) · [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) · [FAIL_ROOTCAUSE.ru.md](FAIL_ROOTCAUSE.ru.md) (старый eps-fixed срез) · [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md) · [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md).
 
@@ -22,7 +22,7 @@
 **PASS (cold Train сошёлся + gate):**  
 `asym50_preinh`, `asym25_preinh`, `asym50`, `br50_gen`, `br100_preinh`, `br25_nextseg`, `br50_preinh`, `ltz50_gen`.
 
-**Интерпретация:** soft-cold desync (TipR flat + L=`1 1 1 1` на всём budget) на HEAD **снят** для большинства канонов. Доминируют уже **реальные** провалы AmpNorm/TipR/EOL и селективности.
+**Интерпретация:** soft-cold desync (TipR flat + L=`1 1 1 1` на всём budget) на HEAD **снят** для большинства канонов. D/E/B дают 35 симптоматических кандидатов для проверки R-control/EOL; сами категории ещё не доказывают единую причину в C++. Ещё 6 FAIL относятся к A/C/G; N для `br25_on` — пересекающийся признак.
 
 ---
 
@@ -33,12 +33,15 @@
 
 | ID | Корзина | Критерий | # | Слой |
 |----|---------|----------|---|------|
-| **D** | TipR runaway / ceiling | ≥1 dend → `≥1e9` или `1e11`; Need=1 | **21** | **C++** R-control |
-| **E** | TipR@Rmin, Need=1 | dend TipR≈`2e7` (или близко), EOL не закрывает Need | **6** (+ mid/search в B/G) | **C++** AmpNorm(b)/EOL |
-| **B** | mid-band TipR, Need=1 | dend2 (часто) ~2.5e7…7e7; gate иногда 0 | **7** | **C++** AmpNorm(a) |
+| **D** | TipR runaway / ceiling | ≥1 dend → `≥1e9` или `1e11`; Need=1 | **22** | **C++ candidate** R-control |
+| **E** | TipR@Rmin, Need=1 | dend TipR≈`2e7` (или близко), EOL не закрывает Need | **6** | **C++ candidate** AmpNorm/EOL or sync gate |
+| **B** | mid-band / noncanonical TipR, Need=1 | хотя бы один обучаемый dend вне Rmin, часто dend2 ~2.5e7…7e7 | **7** | **C++ candidate** R-control / budget |
 | **A** | TipR flat LastR | `8.6e7×4`, R-tune не стартовал | **3** | смесь протокол / cold path |
-| **C** | Need=0, metrics/fires | Train «закрыт», Acc/fires плохие | **1+** | часто **объективно** / протокол |
+| **C** | Need=0, metrics/fires | Train «закрыт», Acc/fires плохие | **1** | gate/протокол; отдельно от convergence |
 | **N** | NonSeparable mid | LandscapeOk=0 при TipR@Rmin | **1** (`br25_on`) | **объективно** (+E) |
+| **G** | альтернативный TipR-режим | Keep/Search, не CanonRmin | **2** (`br100_keep`, `br100_search`) | режим/протокол |
+
+**Подсчёт после сверки с RCS и manifest:** D=22 (включая `ltz25_preinh`), E=6, B=7, A=3, C=1, G=2 — всего **41 FAIL**; N — пересекающийся признак `br25_on`, он уже входит в E. Класс описывает симптом/режим, не доказанную первопричину.
 
 ### 2.1 По семействам
 
@@ -46,19 +49,21 @@
 |-----------|---------|---------|
 | PhaseA / PSI | **D** ceiling `1e11`, L часто `97 81 49` | EstDelay/length + R упирается в Rmax |
 | Phase6 / TimeNeuron | **D** ceiling `1e11` (иногда частичный mid dend2) | thr_only / ltzcal_twin / preinh250 / **480** / **tn_classic** (L=`97 81 49`) |
-| FastSpan | **B** mid dend2 (fs25*) + **E** @Rmin (fs50/100) | классика AmpNorm (a)/(b) |
-| AsymRm / LtzCal gen | **E** @Rmin Need=1 на 100/25; **PASS** на 50 | тот же EOL-stuck при канон TipR |
-| LtzCal / Asym *preinh* | **D** runaway (ltz25/50/100_preinh) | preinh хуже удерживает TipR |
-| Branch | смесь A/B/C/D/E/N | keep/search/nextseg/off — не чистый AmpNorm |
+| FastSpan | **B** mid/unstable TipR (fs25*, fs100*) + **E** @Rmin (`fs50_preinh`) | разные семейства поведения; не сводить к одному AmpNorm дефекту |
+| AsymRm / LtzCal gen | **E** @Rmin (asym100*, ltz100/25); asym25 — **A** flat; **PASS** на 50 | проверять EOL отдельно от синхронизации |
+| LtzCal preinh / AsymRm preinh | LtzCal 25/50/100 — **D**; asym100 — **E**, asym25/50 — **PASS** | не обобщать runaway на все preinh |
+| Branch | смесь A/B/C/D/E/G/N | keep/search/nextseg/off — отдельные режимы; reverse train имеет свой active-pulse gate |
 
 ---
 
-## 3. Первопричины по слоям
+## 3. Гипотезы по слоям (не все причины подтверждены)
 
-### 3.1 C++ алгоритм (`NNeuronTimeLearner.cpp`) — главный слой
+### 3.1 C++ алгоритм (`NNeuronTimeLearner.cpp`) — главный кандидат
 
 EOL: `EndOfLearning` ⇔ `AllDendritesSynced() && AllSynapsesNormalized()`  
 (см. ~3671–3679). SoftCold PASS требует Need→0; иначе `posttune_verify` → `train_incomplete`.
+
+**Ограничение причинного вывода:** `Need=1` и конечные TipR/L не показывают, какой именно гейт удержал EOL. Нужно сохранить оба результата (`AllDendritesSynced`, `AllSynapsesNormalized`), `DendLastAbsDt`, best-effort/length status, amp `dt`, `ResistanceStatus`, NoImprove и фазу PostTune на последнем SNAP. В Branch нормализация идёт в обратном порядке и `AllSynapsesNormalized` рассматривает только `ActivePulseIndex`; базовый разбор нельзя механически переносить на Branch.
 
 #### (a) Mid-band TipR / skip `|dt|>5` — корзина **B**
 
@@ -66,11 +71,11 @@ EOL: `EndOfLearning` ⇔ `AllDendritesSynced() && AllSynapsesNormalized()`
 
 | Что делает код | Симптом матрицы |
 |----------------|-----------------|
-| При \|ampDt\|>5 **не** обновляет TipR несколько хитов; escape к Rmin после `kNoImproveResistanceLimit` | fs25_gen/preinh: dend2 осциллирует ~2.6–4.1e7, Need=1, **gate rc=0** |
-| midband_walk / NoImprove→Rmin | не всегда успевает за `-t`; br25_preinh dend2 **замёрз** на `6.76e7` |
-| ResistanceStatus=0 без Done | mid freeze при Status=0 |
+| Base path при \|ampDt\|>5 пропускает несколько TipR-обновлений, затем делает ограниченный шаг по знаку dt | механизм есть в коде, но `fs25` keep-slog измерил **0** таких hits; это не объясняет fs25 freeze |
+| NoImprove сбрасывает ResistanceStatus; midband walk требует \|dt\|≤0.005 | старый fs25 keep-slog наблюдал NoImprove=21, Status=0 и узкий R-oscillation; это объясняет тот срез, но не доказывает точную причину после поздней midband правки |
+| Branch не имеет `|dt|>5` skip/midband walk | применимо к Branch B-кейсам, но точный gate/controller state финальных запусков не приложен |
 
-**Вердикт:** несовершенство **реализации R-control / AmpNorm(a)**. Harness честно режет по Need. Якорь диагностики: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) (fs25 keep-slog).
+**Вердикт:** fs25 keep-slog подтверждает stall старого среза на счётчике NoImprove/ResistanceStatus, а не на `|dt|>5`. Более поздний HEAD добавил midband walk, но matrix fs25 всё ещё не дошёл до Rmin за бюджет; без текущего полного лога нельзя решить, это остаточный stall, слишком медленный сход за `-t` или другой путь. Не приписывать все B-кейсы одной ветке кода. Harness корректно сохраняет Need≠0. Якорь: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) и [AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md).
 
 #### (b) TipR@Rmin, но Need=1 — корзина **E**
 
@@ -80,9 +85,9 @@ AmpNorm(b): slack `tol * kRminLengthTolFactor` для length при Rmin (~3586�
 
 | Симптом | Кейсы |
 |---------|-------|
-| TipR=`2e7×3 / 8.6e7`, L растёт, Need=1 до конца `-t` | asym100_*, ltz100_gen, ltz25_gen, fs50_preinh, fs100_*, br25_on |
+| TipR=`2e7×3 / 8.6e7`, L растёт, Need=1 до конца `-t` | asym100_*, ltz100_gen, ltz25_gen, fs50_preinh, br25_on |
 
-**Вердикт:** дефект/дыра **EOL-гейтов** (length_ok / dt_positive / ResistanceStatus / PeakSeen). W2 AmpNorm(b) **не** дал Cold PASS на этих якорях. Контраст: asym50 / ltz50_gen — **PASS** при том же каноне TipR.
+**Вердикт:** кандидат — EOL/sync гейты (length_ok / dt_positive / ResistanceStatus / PeakSeen), но сама комбинация `TipR@Rmin + Need=1` не устанавливает, какой гейт ложен. W2 AmpNorm(b) **не** дал Cold PASS на этих якорях. Контраст: asym50 / ltz50_gen — **PASS** при том же каноне TipR.
 
 #### (c) TipR → ceiling / runaway — корзина **D**
 
@@ -94,7 +99,7 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 | `1e11×2` + dend2 mid ~2.2–2.5e7 | phase6_thr_only, phase6_ltzcal_twin, **phase6_preinh250 (live)** |
 | runaway ≥1e9…2e10 без единого ceiling | ltz100_preinh, ltz50_preinh, ltz25_preinh, br480_preinh, часть psi |
 
-**Вердикт:** **реализация R-control** не удерживает бассейн притяжения; на PhaseA дополнительно L=`97…` (EstDelay/length трек, см. Phase6 fix — на PSI/PhaseA ещё проявляется). Часть preinh-конфигов может быть **вне рабочего бассейна** (объективный предел конфига), но механизм ухода — кодовый.
+**Вердикт:** R-control — основной кодовый кандидат, но конечный высокий TipR не доказывает, что причина только в регуляторе. На PhaseA дополнительно L=`97…` (EstDelay/length трек, см. Phase6 fix — на PSI/PhaseA ещё проявляется). Часть preinh-конфигов может быть **вне рабочего бассейна**; для отделения этого от дефекта регулятора нужны временные ряды amp/dt/TipR/length на том же бинарном срезе.
 
 ### 3.2 Harness / скрипты — вторичный слой
 
@@ -118,17 +123,19 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 | Gold PASS ≠ SoftCold | почти все SUCCESSFUL | Working=GoldTest ≠ cold Train — ожидаемо |
 | Длинный span / preinh runaway | ltz*_preinh, psi* | конфиг может быть вне бассейна TipR |
 
+Эти строки показывают возможные объяснения, а не доказанную объективную границу конфигурации; для такого вывода нужны повторяемость/сравнение с управляемым изменением параметров.
+
 ---
 
 ## 4. Карта кейсов (закрытые FAIL, финал 49)
 
-### 4.1 D — runaway / ceiling (21)
+### 4.1 D — runaway / ceiling (22)
 
 `pa00_baseline`, `pa01_ltz_sweep`, `pa02_ltzone_avg`, `pa06_ltzone_int`,  
 `psi01_050`, `psi14_260`, `psi15_270`, `psi21_100`, `psi31_200`, `psi32_300`, `psi33_300`, `psi34_400`, `psi35_400`,  
 `phase6_thr_only`, `phase6_ltzcal_twin`, `phase6_preinh250`, `phase6_480`,  
 `br480_preinh`,  
-`ltz100_preinh`, `ltz50_preinh`,  
+`ltz100_preinh`, `ltz50_preinh`, `ltz25_preinh`,
 `tn_classic`.
 
 ### 4.2 E — TipR@Rmin Need=1 (6)
@@ -142,18 +149,22 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 |------|--------------|------|-------------|
 | `fs25_gen` | `2e7 2e7 ~2.6e7` | 0 | AmpNorm(a); Acc OK |
 | `fs25_preinh` | `2e7 2e7 ~4.0e7` | 0 | то же |
-| `br25_preinh` | `2e7 2e7 **6.76e7** freeze** | 0 | mid freeze |
+| `br25_preinh` | `2e7 2e7 ~6.76e7` | 0 | mid freeze |
 | `fs100_gen` / `fs100_preinh` | mid/нестабильный dend | 1 | рядом с E; TipR не удержал канон |
 | `br480_nextseg` | `8.6e7 2e7 2e7` | 1 | частичный mid |
 | `br480_tiprmin` | `8.6e7 2e7 2e7` | 1 | частичный mid |
 
-`br100_keep` / `br100_search` / `ltz25_preinh` — см. G/протокол (Need иногда →0 при mid TipR; search/preinh runaway-parse).
+`ltz25_preinh` включён в D по симптому runaway из §2.1; в checkout нет первичного лога, чтобы независимо перепроверить его последний SNAP. `br100_keep` / `br100_search` относятся к отдельной корзине G: это Keep/Search, а не CanonRmin.
 
-### 4.4 A — flat LastR (3)
+### 4.4 G — другой TipR-режим / протокол (2)
+
+`br100_keep`, `br100_search` — KeepDone/SearchSynthetic; не считать эти результаты свидетельством дефекта CanonRmin-маршрута. Для Search отдельно сохранять признак search-revert и результат gate.
+
+### 4.5 A — flat LastR (3)
 
 `asym25`, `br50_nextseg`, `br100_nextseg`.
 
-### 4.5 C — metrics после Need=0 (1+)
+### 4.6 C — metrics после Need=0 (1)
 
 `br25_off` — SoftColdOff, Need=0, gate=0, verify rc=1 (fires/Acc).
 
@@ -163,26 +174,26 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 
 | Приоритет | Что | Где | Зачем |
 |-----------|-----|-----|-------|
-| P0 | AmpNorm(b): TipR@Rmin → EOL | C++ `AllSynapsesNormalized` / sync length | разблокирует E (asym100, ltz*, fs50/100) |
-| P0 | AmpNorm(a): mid-band → Rmin за бюджет | C++ ветка `|dt|>5` / escape | разблокирует B (fs25*, br25_preinh) |
-| P1 | TipR ceiling/runaway на PhaseA/PSI/Phase6 | C++ R-update + EstDelay/L | корзина D |
-| P2 | Диагностика: `--keep-slog`, нормализация TipR в логе | harness | не меняет rc, ускоряет разбор |
+| P0 | Установить блокирующий EOL-гейт для E/B и точный branch/dendrite state | `AllDendritesSynced`, `AllSynapsesNormalized`, SNAP/StatisticLog | отделить причину от корреляции |
+| P1 | Исправлять подтверждённый AmpNorm/R-control stall | base + Branch отдельно | E/B, с сохранением знака dt и проверок Done |
+| P1 | Проверить причины TipR ceiling/runaway на PhaseA/PSI/Phase6 | C++ R-update; EstDelay/L отдельно | D; не вводить Rmax escape без dwell evidence |
+| P2 | Упаковать `--keep-slog`, autosave и нормализацию TipR в воспроизводимый артефакт | harness/evidence | не меняет rc, позволяет перепроверить классификацию |
 | — | LandscapeOk / Acc / fires пороги | gate scripts | **не ослаблять** ради зелёного SoftCold |
 | — | Matcher реестра | `apply_softcold_rcs_*` | только LastCheck; уже чинится отдельно |
 
 ---
 
-## 6. Что уже *не* является первопричиной на этом HEAD
+## 6. Что не объясняет FAIL по доступным записям
 
-1. Soft-cold tip-1 desync (исторический `B_tipr_frozen_cold` в FAIL_TAXONOMY) — для PASS-кейсов и большинства FAIL TipR/L **двигаются**.  
-2. Ложный FAIL из‑за «gate убил Acc при живом Train» на B-кейсах: gate часто **зелёный**, режет именно Need/tipr_class.  
-3. Отсутствие autosave: mtime TipR/Need обновляются (`softcold_last_sample.json`).
+1. Исторический soft-cold tip-1 desync не объясняет PASS-кейсы и те FAIL, где в записях матрицы есть движение TipR/L. Полного лога, чтобы проверить это утверждение для всех 49 кейсов, в checkout нет.
+2. Ложный FAIL из‑за «gate убил Acc при живом Train» не объясняет B-кейсы с `gate_rc=0` в зафиксированных SNAP-заметках: там rc=1 возникает от Need/tipr_class. Без полного лога это нельзя обобщить на все B-кейсы.
+3. Отсутствие autosave не подтверждено: записи указывают на autosave, но упомянутый aggregate `softcold_last_sample.json` не сохранён в checkout, поэтому проверка всех mtime независимо не повторяется.
 
 ---
 
 ## 7. Однострочный вердикт
 
-> Финал **41 FAIL / 8 PASS**: большинство — **несходимость AmpNorm/TipR/EOL в PulseLib** (D=21, E=6, B=7). Скрипты анализа **честно** фиксируют Need≠0 / tipr≠canon. Меньшинство — **объективная** неразделимость (`br25_on`), Off/Keep/Search/nextseg протоколы.
+> Финал **41 FAIL / 8 PASS** подтверждён RCS. Симптомы D=22, E=6, B=7 (35 кейсов) указывают на приоритет проверки PulseLib R-control/EOL, но без полного SNAP/trace не доказывают для всех этих кейсов единую C++-причину. Остальные корзины: A=3, C=1, G=2; `br25_on` — пересекающийся E+NonSeparable, не отдельный дополнительный кейс.
 
 ---
 
@@ -191,6 +202,28 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 - [x] Пересчитать §1 из финального `SOFTCOLD_HEAD_rcs.txt` → **8/41**
 - [x] Добавить `phase6_preinh250`, `tn_classic`, `phase6_480` в §4 (все **D**)
 - [x] Новых PASS в хвосте нет — список из 8 канонов стабилен
-- [x] Перегнать классификатор по логу (нормализация TipR)
+- [x] Классификатор был прогнан во время матрицы (по отчёту автора); полный исходный лог не приложен и независимо не воспроизводится из текущего checkout
+- [x] Сверить числа с RCS/manifest: D=22 с `ltz25_preinh`; G=2 (`br100_keep`, `br100_search`); N — overlap
 - [ ] Синхронизировать краткий вердикт в [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) / STATUS (по желанию)
 - [ ] При P0-фиксе — отдельный retest-якорь: `fs25_gen`, `asym100_gen`, `ltz50_gen` (keep PASS)
+
+---
+
+## 9. Независимая проверка аудита (2026-10-03)
+
+### Что подтверждается в текущем checkout
+
+- Корневой HEAD `c0b69ef`; `Bin` HEAD `babdba99`; PulseLib HEAD `b29b595`. Ветка обоих репозиториев — `time_trainer_audit3`. Реестр фиксирует Console SHA-256 `e018c02430d905be`.
+- `SOFTCOLD_QUEUE_manifest.txt` и `SOFTCOLD_HEAD_rcs.txt` согласуются по 49 case id; RCS содержит 8 значений `0` и 41 значение `1`.
+- PulseLib на этом срезе включает mid-band walk (09d37e2) и Rmin length slack ×2 в base/Branch (bb438c4/b29b595). Матрица проверяла именно этот алгоритм.
+- Код `EndOfLearning` требует одновременно синхронизацию длин и нормализацию амплитуд. У base и Branch есть разные детали: в частности, Branch пропускает неактивные импульсы при проверке AmpNorm.
+
+### Что исправлено в классификации
+
+Исходные списки не сходились с 41 FAIL: `ltz25_preinh` назван runaway в семейной таблице и в комментарии к матрице, но отсутствовал в §4.1; корзина G упоминалась, но не была определена и не перечисляла `br100_keep/search`. Для арифметически полной раскладки `ltz25_preinh` отнесён к D, G содержит два неканонических режима, итог D=22 / E=6 / B=7 / A=3 / C=1 / G=2. N по `br25_on` пересекается с E. Классификацию `ltz25_preinh` следует считать предварительной, пока не приложен его первичный SNAP/log.
+
+### Ограничения доказательств и причинности
+
+В этом checkout отсутствуют файлы, на которые ссылаются заголовок аудита: `evidence/metrics/SOFTCOLD_full_matrix.log` и `evidence/metrics/softcold_last_sample.json`. Доступны RCS, manifest, записи реестра и отдельные текстовые разборы, но не полный журнал 49 прогонов и не live JSON. Поэтому можно подтвердить итоговые коды и проверить правдоподобие механики по исходникам, но нельзя повторно воспроизвести классификатор или утверждать точную ветку отказа для каждого кейса.
+
+Сильные диагностические подтверждения старого среза существуют для `fs25_gen` (keep-slog: NoImprove/ResistanceStatus freeze) и asym* W2 (Rmin, но Need остаётся 1). Они предшествуют финальному matrix HEAD и не заменяют поле-за-полем анализ финального среза. Для причинной атрибуции E/B/D сначала фиксировать оба EOL-гейта и состояние дендритов из списка в §3.1; не выводить одиночный дефект C++ только из конечных TipR, длины и Need.
