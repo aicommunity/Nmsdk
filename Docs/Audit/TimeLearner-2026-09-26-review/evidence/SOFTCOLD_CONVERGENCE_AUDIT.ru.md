@@ -1,23 +1,23 @@
 # SoftCold full matrix — аудит сходимости обучения
 
-**Срез:** 2026-10-03T11:30+03 · матрица **не завершена** (48/49 закрыто).  
+**Срез:** 2026-10-03T13:10+03 · матрица **завершена** (**49/49**).  
 **RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · лог [`metrics/SOFTCOLD_full_matrix.log`](metrics/SOFTCOLD_full_matrix.log) · live [`metrics/softcold_last_sample.json`](metrics/softcold_last_sample.json).  
 **Console/PulseLib HEAD матрицы:** AmpNorm a/b + midband→Rmin escape · harness `--autosave-model-s 10`.
 
-**Назначение:** систематизировать закрытые SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL), разделить **C++ алгоритм**, **harness/скрипты** и **объективные** пределы. После 49/49 — обновить §1, §4, §8.
+**Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL), разделить **C++ алгоритм**, **harness/скрипты** и **объективные** пределы. Финальные цифры — после закрытия очереди 49/49.
 
 Связанные разборы: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) · [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) · [FAIL_ROOTCAUSE.ru.md](FAIL_ROOTCAUSE.ru.md) (старый eps-fixed срез) · [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md) · [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md).
 
 ---
 
-## 1. Сводка матрицы (живой счётчик)
+## 1. Сводка матрицы (финал)
 
 | | |
 |--|--|
-| Закрыто | **48 / 49** |
-| PASS / FAIL | **8 / 40** |
-| Сейчас | `phase6_480` (49/49) |
-| Хвост очереди | — |
+| Закрыто | **49 / 49** |
+| PASS / FAIL | **8 / 41** |
+| Статус очереди | **DONE** 2026-10-03T10:08:58Z (`phase6_480` последний) |
+| Хвост | — |
 
 **PASS (cold Train сошёлся + gate):**  
 `asym50_preinh`, `asym25_preinh`, `asym50`, `br50_gen`, `br100_preinh`, `br25_nextseg`, `br50_preinh`, `ltz50_gen`.
@@ -33,9 +33,9 @@
 
 | ID | Корзина | Критерий | # | Слой |
 |----|---------|----------|---|------|
-| **D** | TipR runaway / ceiling | ≥1 dend → `≥1e9` или `1e11`; Need=1 | **~20** | **C++** R-control |
-| **E** | TipR@Rmin, Need=1 | dend TipR≈`2e7` (или близко), EOL не закрывает Need | **~9** | **C++** AmpNorm(b)/EOL |
-| **B** | mid-band TipR, Need=1 | dend2 (часто) ~2.5e7…7e7; gate иногда 0 | **~6** | **C++** AmpNorm(a) |
+| **D** | TipR runaway / ceiling | ≥1 dend → `≥1e9` или `1e11`; Need=1 | **21** | **C++** R-control |
+| **E** | TipR@Rmin, Need=1 | dend TipR≈`2e7` (или близко), EOL не закрывает Need | **6** (+ mid/search в B/G) | **C++** AmpNorm(b)/EOL |
+| **B** | mid-band TipR, Need=1 | dend2 (часто) ~2.5e7…7e7; gate иногда 0 | **7** | **C++** AmpNorm(a) |
 | **A** | TipR flat LastR | `8.6e7×4`, R-tune не стартовал | **3** | смесь протокол / cold path |
 | **C** | Need=0, metrics/fires | Train «закрыт», Acc/fires плохие | **1+** | часто **объективно** / протокол |
 | **N** | NonSeparable mid | LandscapeOk=0 при TipR@Rmin | **1** (`br25_on`) | **объективно** (+E) |
@@ -45,7 +45,7 @@
 | Семейство | Паттерн | Заметка |
 |-----------|---------|---------|
 | PhaseA / PSI | **D** ceiling `1e11`, L часто `97 81 49` | EstDelay/length + R упирается в Rmax |
-| Phase6 | **D** частичный ceiling (dend0/1=`1e11`, dend2 mid) | L≈gold (`49 41 25`); thr_only / ltzcal_twin / preinh250 |
+| Phase6 / TimeNeuron | **D** ceiling `1e11` (иногда частичный mid dend2) | thr_only / ltzcal_twin / preinh250 / **480** / **tn_classic** (L=`97 81 49`) |
 | FastSpan | **B** mid dend2 (fs25*) + **E** @Rmin (fs50/100) | классика AmpNorm (a)/(b) |
 | AsymRm / LtzCal gen | **E** @Rmin Need=1 на 100/25; **PASS** на 50 | тот же EOL-stuck при канон TipR |
 | LtzCal / Asym *preinh* | **D** runaway (ltz25/50/100_preinh) | preinh хуже удерживает TipR |
@@ -120,33 +120,34 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 
 ---
 
-## 4. Карта кейсов (закрытые FAIL, срез 46)
+## 4. Карта кейсов (закрытые FAIL, финал 49)
 
-### 4.1 D — runaway / ceiling (~20)
+### 4.1 D — runaway / ceiling (21)
 
 `pa00_baseline`, `pa01_ltz_sweep`, `pa02_ltzone_avg`, `pa06_ltzone_int`,  
 `psi01_050`, `psi14_260`, `psi15_270`, `psi21_100`, `psi31_200`, `psi32_300`, `psi33_300`, `psi34_400`, `psi35_400`,  
-`phase6_thr_only`, `phase6_ltzcal_twin`,  
+`phase6_thr_only`, `phase6_ltzcal_twin`, `phase6_preinh250`, `phase6_480`,  
 `br480_preinh`,  
-`ltz100_preinh`, `ltz50_preinh`, `ltz25_preinh`,
+`ltz100_preinh`, `ltz50_preinh`,  
 `tn_classic`.
 
-### 4.2 E — TipR@Rmin Need=1 (~9)
+### 4.2 E — TipR@Rmin Need=1 (6)
 
-`br25_on` (+ **N** NonSeparable), `fs50_preinh`, `fs100_gen`, `fs100_preinh`,  
-`asym100_gen`, `asym100_preinh`, `ltz100_gen`, `ltz25_gen`,  
-`br100_search` (TipR≈`4e7`, не канон Rmin, но «села» полоса без EOL).
+`br25_on` (+ **N** NonSeparable), `fs50_preinh`,  
+`asym100_gen`, `asym100_preinh`, `ltz100_gen`, `ltz25_gen`.
 
-### 4.3 B — mid-band Need=1 (~6)
+### 4.3 B — mid-band Need=1 (7)
 
 | case | TipR (конец) | gate | Комментарий |
 |------|--------------|------|-------------|
 | `fs25_gen` | `2e7 2e7 ~2.6e7` | 0 | AmpNorm(a); Acc OK |
 | `fs25_preinh` | `2e7 2e7 ~4.0e7` | 0 | то же |
 | `br25_preinh` | `2e7 2e7 **6.76e7** freeze** | 0 | mid freeze |
+| `fs100_gen` / `fs100_preinh` | mid/нестабильный dend | 1 | рядом с E; TipR не удержал канон |
 | `br480_nextseg` | `8.6e7 2e7 2e7` | 1 | частичный mid |
 | `br480_tiprmin` | `8.6e7 2e7 2e7` | 1 | частичный mid |
-| `br100_keep` | `2e7 2e7 ~3.5e7`, **Need→0** | 1 | EOL «закрылся» без canon TipR |
+
+`br100_keep` / `br100_search` / `ltz25_preinh` — см. G/протокол (Need иногда →0 при mid TipR; search/preinh runaway-parse).
 
 ### 4.4 A — flat LastR (3)
 
@@ -181,15 +182,15 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 
 ## 7. Однострочный вердикт
 
-> Из 38 FAIL на срезе 46/49 большинство — **несходимость AmpNorm/TipR/EOL в PulseLib** (D/E/B). Скрипты анализа **честно** фиксируют Need≠0 / tipr≠canon. Меньшинство — **объективная** неразделимость (`br25_on`), Off/Keep/Search/nextseg протоколы.
+> Финал **41 FAIL / 8 PASS**: большинство — **несходимость AmpNorm/TipR/EOL в PulseLib** (D=21, E=6, B=7). Скрипты анализа **честно** фиксируют Need≠0 / tipr≠canon. Меньшинство — **объективная** неразделимость (`br25_on`), Off/Keep/Search/nextseg протоколы.
 
 ---
 
 ## 8. Чеклист обновления после 49/49
 
-- [ ] Пересчитать §1 из финального `SOFTCOLD_HEAD_rcs.txt`
-- [ ] Добавить `phase6_preinh250`, `tn_classic`, `phase6_480` в §4
-- [ ] Если новые PASS — вынести общий паттерн (TipR@Rmin + Need=0 + gate) в §2
-- [ ] Перегнать классификатор по логу (нормализация `,`→`.` в TipR)
-- [ ] Синхронизировать краткий вердикт в [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) / STATUS
+- [x] Пересчитать §1 из финального `SOFTCOLD_HEAD_rcs.txt` → **8/41**
+- [x] Добавить `phase6_preinh250`, `tn_classic`, `phase6_480` в §4 (все **D**)
+- [x] Новых PASS в хвосте нет — список из 8 канонов стабилен
+- [x] Перегнать классификатор по логу (нормализация TipR)
+- [ ] Синхронизировать краткий вердикт в [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) / STATUS (по желанию)
 - [ ] При P0-фиксе — отдельный retest-якорь: `fs25_gen`, `asym100_gen`, `ltz50_gen` (keep PASS)
