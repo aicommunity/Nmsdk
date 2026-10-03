@@ -1,8 +1,8 @@
 # План: AmpNorm / EOL — исправление сходимости Train
 
-Статус: **pending** (исполнение не начато; пересмотрен по ре-аудиту `db7c9133`, сверка агентом 2026-10-03).  
+Статус: **pending** (исполнение не начато; детализация по коду 2026-10-03 после `db7c9133`).  
 База: [SOFTCOLD_CONVERGENCE_AUDIT.ru.md](SOFTCOLD_CONVERGENCE_AUDIT.ru.md) (49/49 = **8 PASS / 41 FAIL**; D=22, E=6, B=7, A=3, C=1, G=2; N пересекает E).  
-Код: `Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.cpp` (+ Branch twin).  
+Код: [`NNeuronTimeLearner.cpp`](../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.cpp) / [`.h`](../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h) (+ [`NNeuronTimeLearnerBranch.cpp`](../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.cpp)).  
 Связано: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md), [AMPNORM_EOL_INVESTIGATE.plan.md](AMPNORM_EOL_INVESTIGATE.plan.md).
 
 **Инварианты:** не трогать LandscapeOk / Acc / fires; SoftCold контракт `tipr_class=canon` + Need→0; не маскировать Need в harness.
@@ -26,7 +26,7 @@
 
 ### Этапы
 
-- [ ] **W0 — доказательства:** из локального matrix log (если есть) и/или новых diagnostic runs извлечь per-case SNAP: оба EOL-гейта + dendrite state; закоммитить компактный summary в evidence; полный slog не в git. Без W0 не менять критерии Done.
+- [ ] **W0 — доказательства:** (1) matrix-log TipR/Need/L/gate; (2) harness читает уже существующие `*Trace` из Parameters на autosave; (3) при необходимости одна diagnostic-строка `EolGateAudit` (без смены Done); summary → `AMPNORM_EOL_W0_SNAP.md`. Без W0 не менять критерии Done.
 - [ ] **W1 — E:** по W0 определить, что именно блокирует каждый Rmin-якорь; внести минимальную branch-specific правку только в доказанно ложный гейт.
 - [ ] **W1 retest:** `asym100_gen`, `asym100_preinh`, `ltz100_gen`, `ltz25_gen`, `fs50_preinh`; Keep PASS: `asym50`, `ltz50_gen`; отдельно измерить Branch `br25_on` (ожидаемый NonSeparable не считать обучающим PASS).
 - [ ] **W2 — B:** исправлять фактически подтверждённый stall отдельно в base и Branch; не переносить одну реализацию копированием.
@@ -71,7 +71,27 @@ flowchart TD
 
 ---
 
-## Текущая реализация
+## Детализация по коду (base / Branch)
+
+Константы (`NNeuronTimeLearner.h` ~450–470): `kAmpNormEps=1e-5`, `kAmpOscillationBand=0.005`, `kNoImproveResistanceLimit=3`, `kRminLengthTolFactor=2.0`, `kResistanceSettleRatio=1e-3`. Порог pathological `|dt|>5` — литерал в base (~778).
+
+### Уже доступные traces (W0 без смены Done)
+
+`UpdateNormTraces` (~220–293) пишет в `ptPubState` и уходит в Parameters/autosave:
+
+| Property | Содержание |
+|----------|------------|
+| `AmpDtTrace` | `Initial - MaxAmp` per dend |
+| `TipSynapseResistanceTrace` / `TipSynapseResistance` | TipR |
+| `ResistanceStatusTrace` | ResistanceStatus |
+| `NoImproveResistanceTrace` | NoImprove count |
+| `LastAbsDtTrace` | DendLastAbsDt |
+| `DendriteLengthTrace` | L |
+| `TrainingPhase` | фаза Train/PostTune/Done |
+| `IsNeedToTrain` | Need |
+
+**Нет в Parameters (нужен diagnostic dump или EnableDebug log):** булевы `AllDendritesSynced()` / `AllSynapsesNormalized()` целиком; `PeakSeen`; `DendBestEffortSynced`; `SomaPeakValid`; Branch `PulseSynced` / `ActivePulseIndex`.  
+W0 harness: расширить `posttune_verify` snap — парсить перечисленные `*Trace` из Parameters. Опционально C++: одна строка `EolGateAudit synced=… norm=…` при `EnableDebug` на вызове `EndOfLearning` (~3679 / Branch ~4001) — **только лог**.
 
 ### Поток Train → Need
 
@@ -87,105 +107,146 @@ flowchart LR
   burst --> eol
   eol --> sync
   eol --> amp
-  eol -->|both_true| need
-  need -->|PostTune_or_Done| doneNode[Need_0]
+  eol -->|both_true| postOrDone[PostTune_or_Done]
+  postOrDone --> need
 ```
 
-### TipR tree (base) — сейчас
+Важно: при `EnablePostTrainTuning` успешный EOL вызывает `EnterPostTunePhase` и возвращает **false** (Need ещё не 0). SoftCold Need→0 = завершение PostTune / Done. Кейсы E с Need=1 до конца `-t` **не вошли** в PostTune.
 
-`ChangeSynapseResistanceStatus` ~669–925. Константы в `NNeuronTimeLearner.h`: `kAmpNormEps=1e-5`, `kAmpOscillationBand=0.005`, `kNoImproveResistanceLimit=3`, `kRminLengthTolFactor=2.0`. Порог `|dt|>5` — литерал.
+### TipR tree — base (`ChangeSynapseResistanceStatus` ~669–925)
 
 ```
 dt = Initial - MaxAmp
-ready = length_settled AND NOT DendStatus
+ready = length_settled AND NOT DendStatus   # length_settled: LastAbsDt<=tol OR best_effort
 
-IF NOT ready:          Status = pending if |dt|>eps; no TipR update
+IF NOT ready:          Status = (|dt|>eps)?1:0;   # TipR НЕ обновляется
 ELIF same_pattern AND |dt|<=eps:  Status=0
-ELIF |dt| > 5.0:                  # SKIP TipR
-  AmpDtSkipCount++
-  IF skip>=3: clamp-step +/-5%; Status=1
+ELIF |dt| > 5.0:                  # AmpDtSkipCount; после 3 — clamp ±5% по знаку dt
 ELIF |dt| > eps:
-  IF R>Rmin AND |dt|<=osc_band:   # midband_walk → Rmin 5%
-    force Rmin step
+  IF R>Rmin AND |dt|<=osc_band:   # midband_walk (~824): шаг к Rmin 5%, NoImprove=0
+    force Rmin
   ELSE:
-    r_new = ComputeDampedTipResistance(...)  # может гнать к Rmax
-    NoImprove++; IF NoImprove>=3 AND midband: force Rmin
-                 ELIF NoImprove>=3: Status=0   # без Done
+    damped-P / coarse ±15%
+    ApplyComputedResistance  # Status=0 если |ΔR|/R < settle_ratio !
+    IF |dt|>eps: Status=1
+    NoImprove++ unless meaningful_drop
+    IF NoImprove>=3:
+      IF R>Rmin AND |dt|<=osc_band: force Rmin   # (~891–907)
+      ELSE: Status=0                             # ★ HOLE: freeze при osc_band < |dt| <= 5
 ELSE: Status=0
 ```
 
-**Branch** (~916–1058): нет `|dt|>5` skip, нет midband→Rmin, нет `AmpDtSkipCount` — при NoImprove только Status=0. Критично для `br25_preinh` / br480 mid.
+**Критическая дыра base (кандидат W2):** при `NoImprove>=3` и `R>Rmin` и `|dt| > kAmpOscillationBand` код ставит `ResistanceStatus=0` **без** шага к Rmin (~909–910). Keep-slog fs25: медиана `|AmpDt|~6e-5` (внутри band), но хвосты/знаки могут уводить в damped-P; после midband-патча матрица всё ещё FAIL — проверить, срабатывает ли walk на HEAD и хватает ли шага 5% за `-t`.
 
-### EOL Done — сейчас
+`ApplyComputedResistance` (~612–614): при крошечном ΔR снова Status=0 — ещё один путь «заморозки» при формально активном контроллере.
+
+### TipR tree — Branch (~916–1058)
+
+Нет `|dt|>5` skip, нет `AmpDtSkipCount`, нет `midband_walk`, нет force-Rmin на NoImprove. При `NoImprove>=3` всегда `ResistanceStatus=0` (~1044–1045).  
+`AllSynapsesNormalized` смотрит **только** `i == ActivePulseIndex` (~3896–3897).  
+`AllDendritesSynced` = все `PulseSynced[]` (~3865–3877), не `DendLastAbsDt`.  
+`EndOfLearning` → `kPhaseCalibrateLtz` + `ScaleTipResistancesForParallelActivation` (~4030), не сразу Done.
+
+### EOL predicates — base
+
+**`AllDendritesSynced` (~3523–3563)** для non-ref: требует `HasPrevPeakSnapshot`, valid ref peaks; per dend: `best_effort` OR `length_ok` OR `rmin_length_ok` (LastAbsDt ≤ 2×tol @Rmin) OR (dead_tip∧length_ok); иначе `SomaPeakValid` must hold.
+
+**`AllSynapsesNormalized` parametric (~3567–3640)** per non-ref:
 
 ```
-EndOfLearning:
-  IF PostTune: false
-  IF NOT synced OR NOT normalized: false
-  IF PostTrainTuning: EnterPostTune; false
-  ELSE: CalibrateFixedLTZ; Need=0
+length_ok = LastAbsDt<=tol OR best_effort OR (at_Rmin AND LastAbsDt<=2*tol)
+IF ResistanceStatus AND NOT (length_ok AND NoImprove>=3): return false   # pending R
 
-AllSynapsesNormalized (parametric, non-ref):
-  length_ok = tol OR best_effort
-              OR (at_r_min AND LastAbsDt <= tol * kRminLengthTolFactor)
-  IF ResistanceStatus AND NOT (length_ok AND NoImprove>=3): BLOCK
-  OK if amp_ok
-     OR (at_r_min AND dt_positive AND length_ok)  # требует Initial > MaxAmp
-     OR dead_tip+PeakSeen
-     OR oscillation_ok / no_improve_done
+OK iff any:
+  amp_ok:           length_ok AND |dt|<=eps
+  dead_tip:         MaxAmp < kMinMeasurable AND length_ok AND PeakSeen
+  rmin_undershoot:  at_Rmin AND dt_positive AND length_ok   # Initial > MaxAmp+eps
+  oscillation_ok:   length_ok AND NoImprove>=3 AND |dt|<osc_band
+  no_improve_done:  length_ok AND NoImprove>=3 AND at_Rmin AND dt_positive
 ```
 
-Гипотезы: **E** — один из sync/AmpNorm гейтов не проходит (конкретный предикат не известен); **B** — mid-band/NoImprove stall или недостаточный budget (base skip `|dt|>5` существует, но не наблюдался в старом fs25 keep-slog); **D** — TipR упирается в ResistanceMax, но причина и польза dwell-escape не доказаны.
+**Кандидаты блокировки E (TipR@Rmin, Need=1) — выбрать по W0 traces:**
+
+| ID | Предикат ложен | Как видно в traces |
+|----|----------------|--------------------|
+| E1 | `AllDendritesSynced==false` | `LastAbsDtTrace` > 2×tol; или peak invalid (нет в Parameters → EolGateAudit) |
+| E2 | `ResistanceStatus==1` и NoImprove&lt;3 | `ResistanceStatusTrace`, `NoImproveResistanceTrace` |
+| E3 | overshoot: `dt<=0` и `|dt|>=osc_band` @Rmin | `AmpDtTrace` ≤ −eps, TipR@Rmin — **нет** Done-пути |
+| E4 | `|dt|` в (eps, osc_band) без NoImprove≥3 | amp не amp_ok, oscillation_ok ещё нет |
+| E5 | PostTune/Need lifecycle | `TrainingPhase`≠Done при synced∧norm (редко для E) |
+
+W1 правит **только** подтверждённый ID; запрещён слепой «Done if TipR@Rmin».
+
+### Кандидаты B (mid TipR)
+
+| ID | Механизм | base / Branch |
+|----|----------|---------------|
+| B1 | NoImprove≥3 → Status=0 при `|dt|>osc_band` | base ★ |
+| B2 | midband_walk/force только при `|dt|<=osc_band`; иначе damped-P осцилляция mid-R | base |
+| B3 | шаг 5% слишком медленный за `-t` при walk | base (budget) |
+| B4 | NoImprove≥3 → Status=0, **нет** force Rmin | Branch ★ (`br25_preinh`) |
+| B5 | `!ready_for_r_tune` (length) — TipR не крутится | оба |
+
+Гипотезы D: damped-P + clamp `ResistanceMax=1e11`; польза Rmax-dwell **не доказана** без ряда TipR/dt.
 
 ---
 
 ## Планируемые изменения
 
+### W0 — доказательства (деталь)
+
+1. Из untracked `SOFTCOLD_full_matrix.log` — таблица case→Need/TipR/L/gate (все 49).
+2. Harness: на каждом autosave/SNAP писать из Parameters: `AmpDtTrace`, `ResistanceStatusTrace`, `NoImproveResistanceTrace`, `LastAbsDtTrace`, TipR, L, `TrainingPhase`, Need. Нормализация `,`→`.` в TipR.
+3. Diagnostic SoftCold на якорях E/B (+1 D): `asym100_gen`, `fs50_preinh`, `fs25_gen`, `br25_preinh`, `phase6_480` — с `--keep-slog --snap-every 20`; EnableDebug для `AmpDtAudit` / опциональный `EolGateAudit`.
+4. Артефакт git: `AMPNORM_EOL_W0_SNAP.md` — per-anchor гипотеза E1–E5 / B1–B5.  
+5. **Стоп-критерий W0:** для каждого E/B якоря назван один доминирующий предикат; иначе не переходить к коду Done/controller.
+
 ### W1 — EOL при TipR@Rmin (E)
 
-**Сначала диагноз, затем код.** На каждом E-якоре сохранить `AllDendritesSynced()`, `AllSynapsesNormalized()`, `DendLastAbsDt`, `DendBestEffortSynced`, `DendStatus`, `PulseSynced` (Branch), `ResistanceStatus`, `NoImproveResistanceCount`, `PeakSeen`, `dt = InitialSomaPotential - MaxIterSomaAmp`, текущую фазу и `ActivePulseIndex` (для Branch). Длины `L` и факт `TipR≈Rmin` не заменяют эти поля.
-
-В текущем base-коде уже есть проверки `at_r_min && dt_positive && length_ok`, `no_improve_done` и slack длины до `2×SyncTolerance`; `AllDendritesSynced` имеет соответствующую проверку длины. Поэтому W1 **не** должен просто добавлять второй `at_r_min` bypass. Branch имеет другой active-pulse gate, и его анализ/правка отдельны.
+**Сначала W0, затем узкая правка.**
 
 ```text
 IF AllDendritesSynced == false:
-  diagnose length / best-effort / PeakValid; fix only measured sync blocker
+  fix only measured sync blocker (length / peak / best-effort)
 ELIF AllSynapsesNormalized == false:
-  identify exact failing predicate (dt sign/magnitude, pending status, peak attempt)
-  propose the narrowest rule consistent with the amp error contract
+  match failing predicate to E2–E4; narrowest rule that preserves dt-sign contract
 ELSE:
-  inspect PostTune transition and Need lifecycle; do not change normalization gate
+  inspect PostTune / Need lifecycle — do not widen normalization
 ```
 
-Не считать `NoImprove >= limit` само по себе достаточным для Done. При `dt <= 0` TipR@Rmin нельзя трактовать как «недостаёт только спуска R»: сначала выяснить, вызван ли overshoot/invalid peak; не снимать `Need` только потому, что сопротивление упёрлось в нижний предел. Не ослаблять `LandscapeOk`, gate, fires или контракт `tipr_class`.
+Примеры допустимых правок **после** доказательства (не заранее):
+- E2: не держать Status=1 вечно @Rmin при length_ok (согласовать с ApplyComputedResistance).
+- E3/E4: только если amp-контракт допускает — например oscillation_ok уже покрывает `|dt|<osc_band`; расширять band **не** без метрик.
+- Запрещено: `if (at_r_min) return true` без length/dt.
 
-**Успех:** на E-якорях, для которых селективность достижима, `Need→0`, ожидаемый CanonRmin и сохранённые гейты; `asym50`, `ltz50_gen` остаются PASS. `br25_on` проверяется отдельно: EndOfLearning и классификатор/gate — разные критерии, и ожидаемый NonSeparable не засчитывается как селективный PASS.
+**Успех:** E-якоря с достижимой селективностью → Need=0 + tipr=canon; keep `asym50`/`ltz50_gen`. `br25_on`: Train Done отдельно от NonSeparable gate.
 
 ### W2 — mid-band → Rmin (B)
 
-Отдельные правки **base** и **Branch** (не копировать base verbatim). Инвариант: при валидном измерении и R>Rmin контроллер не замирает через `ResistanceStatus=0` без шага коррекции ошибки.
+Отдельно base и Branch. Приоритет по коду (до подтверждения W0 trace на HEAD):
+
+**Base — кандидат B1 (главный):** заменить ветку ~909–910:
 
 ```text
-IF peak/length data are valid AND R > Rmin:
-  IF |dt| <= eps:
-    settle this amp measurement
-  ELIF near-band AND NoImprove >= limit:
-    take a bounded step in the measured error-correction direction
-    # primary fs25 path (keep-slog): |dt|>5 never fired
-  ELIF |dt| > kPathologicalAmpDt:
-    after the bounded skip budget, take a bounded directional recovery step
-    # defense only; not the proven fs25 stall
-  ELSE:
-    continue the damped controller and track whether error actually falls
-ELSE:
-  do not apply a blind floor step; record invalid/opposite-sign/unready state
+# сейчас:
+IF NoImprove>=3:
+  IF R>Rmin AND |dt|<=osc_band: force Rmin
+  ELSE: ResistanceStatus=0          # freeze
+
+# цель после W0 (если подтверждено):
+IF NoImprove>=3 AND R>Rmin AND ready AND peak valid:
+  bounded step in error-correction direction  # dt>0 → R↓, dt<0 → R↑
+  NoImprove=0; Status=1
+ELSE IF NoImprove>=3 AND R<=Rmin:
+  Status=0   # floor reached; EOL решает W1
 ```
 
-Preserve error direction: lower R for positive `dt`, raise for negative `dt`; unconditionally forcing Rmin when `dt<0` is forbidden. Do not reintroduce NoImprove→freeze without Done.
+Сохранить/усилить midband_walk (~824) только как ускоритель при `|dt|<=osc_band`; не единственный фикс.  
+**Branch — кандидат B4:** добавить bounded directional recovery при NoImprove≥3 и R>Rmin (инвариант base, не copy-paste midband/`|dt|>5`).
 
-**Диагностическое ограничение:** [AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md) — `|dt|>5` hits=0, NoImprove mid=21, ResSt=0. W2 сначала проверяет near-band на финальном HEAD (`--keep-slog`), затем Branch mid-freeze (`br25_preinh`). Не переносить причину fs25 на все B без per-case trace.
+Запрещено: безусловный force Rmin при `dt<0`. `|dt|>5` escape — вторичная защита, не фокус fs25.
 
-**Успех:** B retests → tipr=canon и Need=0 без деградации fires/Acc; `fs25_gen` не stall ~2.6e7; `br25_preinh` dend2 уходит с ~6.76e7. Keep-PASS зелёные.
+**Успех:** `fs25_gen` / `br25_preinh` → tipr=canon, Need=0; keep-PASS зелёные.
 
 ### W3 — Rmax dwell (D)
 
@@ -205,8 +266,9 @@ EstDelay / L=97 — отдельный follow-up, не смешивать его
 ### Скрипты (минимально)
 
 - Retest: `--keep-slog --snap-every 20` (на fail-якорях при нужде `--no-prune`).
+- **W0 harness:** парсить из Parameters уже существующие `AmpDtTrace`, `ResistanceStatusTrace`, `NoImproveResistanceTrace`, `LastAbsDtTrace` (см. `UpdateNormTraces`); не ждать нового бинарника для базового SNAP.
 - Нормализация запятой в TipR только в разборе лога (не меняет rc).
-- **Evidence policy:** полный `SOFTCOLD_full_matrix.log` / slog — локально или в архиве вне git; в git — компактный `AMPNORM_EOL_W0_SNAP.md` (таблица case → Need/TipR/L/gate + поля гейтов, когда доступны). Не считать «отсутствие в git» = «прогонов не было», если файлы есть untracked на машине прогона.
+- **Evidence policy:** полный matrix log / slog — вне git; в git — `AMPNORM_EOL_W0_SNAP.md`.
 - Зафиксировать SHA Console, commit PulseLib, config hash, cmdline, RCS, bundle path у каждого нового прогона.
 - Реестр: `apply_softcold_rcs_to_registry.py` после retest.
 - Не менять tipr_class / early-stop / gate пороги.
@@ -215,7 +277,7 @@ EstDelay / L=97 — отдельный follow-up, не смешивать его
 
 ## Порядок исполнения
 
-0. **W0:** (a) извлечь из локального matrix log финальные TipR/Need/L/gate для всех 41 FAIL + PASS controls; (b) для якорей E/B/D — diagnostic SoftCold с расширенным SNAP обоих EOL-гейтов и dendrite state (код логирования SNAP при необходимости — **только диагностика**, не смена Done); (c) закоммитить summary; (d) зафиксировать гипотезу per-anchor до правки алгоритма.
+0. **W0:** (a) matrix-log TipR/Need/L/gate на 49; (b) harness читает `AmpDtTrace` / `ResistanceStatusTrace` / `NoImproveResistanceTrace` / `LastAbsDtTrace` с autosave; (c) diagnostic runs якорей + опциональный `EolGateAudit`; (d) `AMPNORM_EOL_W0_SNAP.md` с ID E1–E5 / B1–B5; (e) без названного предиката — не править Done/controller.
 1. **W1:** воспроизвести E; если изменяется алгоритм — build, smoke на `asym50`/`ltz50_gen`, затем все релевантные E-якоря и отдельный Branch контроль.
 2. **W2:** отдельные base и Branch изменения; build и ретест B плюс keep-PASS.
 3. **W3:** только после подтверждения Rmax-dwell; диагностический ретест разных семейств, затем весь D=22.
