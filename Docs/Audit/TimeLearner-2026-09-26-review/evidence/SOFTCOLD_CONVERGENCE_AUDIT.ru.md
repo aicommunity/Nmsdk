@@ -1,7 +1,7 @@
 # SoftCold full matrix — аудит сходимости обучения
 
 **Срез:** 2026-10-03T13:10+03 · матрица **завершена** (**49/49**).  
-**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · run-local log `metrics/SOFTCOLD_full_matrix.log` и live `metrics/softcold_last_sample.json` (в текущем checkout отсутствуют; см. §9).
+**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · run-local log `metrics/SOFTCOLD_full_matrix.log` и live `metrics/softcold_last_sample.json` (**не в git**; на машине прогона могут быть untracked — см. §9).
 **Console/PulseLib HEAD матрицы:** AmpNorm a/b + midband→Rmin escape · harness `--autosave-model-s 10`.
 
 **Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL), отделить подтверждённые факты от гипотез о **C++ алгоритме**, **harness/скриптах** и **пределах конфигураций**. Финальные цифры — после закрытия очереди 49/49.
@@ -224,6 +224,6 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 
 ### Ограничения доказательств и причинности
 
-В этом checkout отсутствуют файлы, на которые ссылаются заголовок аудита: `evidence/metrics/SOFTCOLD_full_matrix.log` и `evidence/metrics/softcold_last_sample.json`. Доступны RCS, manifest, записи реестра и отдельные текстовые разборы, но не полный журнал 49 прогонов и не live JSON. Поэтому можно подтвердить итоговые коды и проверить правдоподобие механики по исходникам, но нельзя повторно воспроизвести классификатор или утверждать точную ветку отказа для каждого кейса.
+Файлы `evidence/metrics/SOFTCOLD_full_matrix.log` и `evidence/metrics/softcold_last_sample.json` **не tracked в git** (clone их не получает). На машине прогона они могут оставаться как untracked working-tree артефакты (~0.5 MB log проверен 2026-10-03: `ltz25_preinh` TipR runaway подтверждает отнесение к D). Для причинной атрибуции E/B/D этого журнала недостаточно: в нём нет полей обоих EOL-гейтов / `DendLastAbsDt` / `ResistanceStatus`. Нужен W0 SNAP (см. [AMPNORM_EOL_FIX.plan.md](AMPNORM_EOL_FIX.plan.md)).
 
 Сильные диагностические подтверждения старого среза существуют для `fs25_gen` (keep-slog: NoImprove/ResistanceStatus freeze) и asym* W2 (Rmin, но Need остаётся 1). Они предшествуют финальному matrix HEAD и не заменяют поле-за-полем анализ финального среза. Для причинной атрибуции E/B/D сначала фиксировать оба EOL-гейта и состояние дендритов из списка в §3.1; не выводить одиночный дефект C++ только из конечных TipR, длины и Need.
