@@ -6,7 +6,7 @@
 
 **Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL), разделить **C++ алгоритм**, **harness/скрипты** и **объективные** пределы. Финальные цифры — после закрытия очереди 49/49.
 
-Связанные разборы: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) · [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) · [FAIL_ROOTCAUSE.ru.md](FAIL_ROOTCAUSE.ru.md) (старый eps-fixed срез) · [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md) · [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md).
+Связанные разборы: **[AMPNORM_EOL_FIX.plan.md](AMPNORM_EOL_FIX.plan.md)** (план фикса E→B→D) · [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) · [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) · [FAIL_ROOTCAUSE.ru.md](FAIL_ROOTCAUSE.ru.md) (старый eps-fixed срез) · [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md) · [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md).
 
 ---
 
