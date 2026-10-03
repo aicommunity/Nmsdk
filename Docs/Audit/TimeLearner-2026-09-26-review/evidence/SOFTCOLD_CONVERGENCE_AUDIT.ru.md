@@ -1,6 +1,6 @@
 # SoftCold full matrix — аудит сходимости обучения
 
-**Срез:** 2026-10-03T10:35+03 · матрица **не завершена** (46/49 закрыто).  
+**Срез:** 2026-10-03T11:10+03 · матрица **не завершена** (47/49 закрыто).  
 **RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · лог [`metrics/SOFTCOLD_full_matrix.log`](metrics/SOFTCOLD_full_matrix.log) · live [`metrics/softcold_last_sample.json`](metrics/softcold_last_sample.json).  
 **Console/PulseLib HEAD матрицы:** AmpNorm a/b + midband→Rmin escape · harness `--autosave-model-s 10`.
 
@@ -14,10 +14,10 @@
 
 | | |
 |--|--|
-| Закрыто | **46 / 49** |
-| PASS / FAIL | **8 / 38** |
-| Сейчас | `phase6_preinh250` (47/49) · TipR `1e11×3 / 8.6e7` · Need=1 · L=`53 45 28 1` · `-t 900` |
-| Хвост очереди | `tn_classic`, `phase6_480` |
+| Закрыто | **47 / 49** |
+| PASS / FAIL | **8 / 39** |
+| Сейчас | `tn_classic` (48/49) |
+| Хвост очереди | `phase6_480` |
 
 **PASS (cold Train сошёлся + gate):**  
 `asym50_preinh`, `asym25_preinh`, `asym50`, `br50_gen`, `br100_preinh`, `br25_nextseg`, `br50_preinh`, `ltz50_gen`.
@@ -129,8 +129,6 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 `phase6_thr_only`, `phase6_ltzcal_twin`,  
 `br480_preinh`,  
 `ltz100_preinh`, `ltz50_preinh`, `ltz25_preinh`.
-
-Live → ожидаемо в D: `phase6_preinh250`.
 
 ### 4.2 E — TipR@Rmin Need=1 (~9)
 
