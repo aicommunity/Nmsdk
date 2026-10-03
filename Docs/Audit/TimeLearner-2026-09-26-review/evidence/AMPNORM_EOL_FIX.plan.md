@@ -1,19 +1,32 @@
 # План: AmpNorm / EOL — исправление сходимости Train
 
-Статус: **pending** (исполнение не начато; план пересмотрен после code/evidence review 2026-10-03).
-База: [SOFTCOLD_CONVERGENCE_AUDIT.ru.md](SOFTCOLD_CONVERGENCE_AUDIT.ru.md) (49/49 = **8 PASS / 41 FAIL**; D=22, E=6, B=7, A=3, C=1, G=2; N пересекает E).
+Статус: **pending** (исполнение не начато; пересмотрен по ре-аудиту `db7c9133`, сверка агентом 2026-10-03).  
+База: [SOFTCOLD_CONVERGENCE_AUDIT.ru.md](SOFTCOLD_CONVERGENCE_AUDIT.ru.md) (49/49 = **8 PASS / 41 FAIL**; D=22, E=6, B=7, A=3, C=1, G=2; N пересекает E).  
 Код: `Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.cpp` (+ Branch twin).  
-Связано: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [AMPNORM_EOL_INVESTIGATE.plan.md](AMPNORM_EOL_INVESTIGATE.plan.md).
+Связано: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md), [AMPNORM_EOL_INVESTIGATE.plan.md](AMPNORM_EOL_INVESTIGATE.plan.md).
 
 **Инварианты:** не трогать LandscapeOk / Acc / fires; SoftCold контракт `tipr_class=canon` + Need→0; не маскировать Need в harness.
 
 **Цель:** cold Train доходит до `EndOfLearning` на якорях E/B; ceiling/runaway (D) — отдельная волна; keep-PASS (`asym50`, `ltz50_gen`) без регрессии.
 
-**Вывод ревью:** симптомы и исходники обосновывают приоритет E/B/D, но плановые эвристики W1–W3 пока не подтверждены финальными per-dendrite traces. В частности, `Need=1 + TipR@Rmin` не доказывает, что блокирует AmpNorm, а предложенный W1 обход терял проверку знака `dt`. До W0 не применять псевдоправки ниже как готовую спецификацию.
+### Сверка выводов ре-аудита (`db7c9133`)
+
+| Утверждение ре-аудита | Вердикт сверки |
+|----------------------|----------------|
+| Арифметика 41 FAIL = D22+E6+B7+A3+C1+G2; N overlap на `br25_on` | **Подтверждено** по `SOFTCOLD_HEAD_rcs.txt` + спискам §4 |
+| `ltz25_preinh` → D (runaway), не «прочее» | **Подтверждено** из локального untracked `metrics/SOFTCOLD_full_matrix.log`: TipR dend уходит в ~1e8…2e8+, Need=1 |
+| `br100_keep/search` = G, не CanonRmin-дефект | **Подтверждено** (режим TipRMode) |
+| Симптом ≠ доказанная C++-причина; нужны оба EOL-гейта | **Согласны** |
+| Старый W1 «rmin_settled / Done при любом dt@Rmin» опасен (теряет знак dt) | **Согласны** — снят как спецификация |
+| fs25 keep-slog: `\|dt\|>5` hits=0; stall = NoImprove/ResSt=0 | **Подтверждено** ([AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md)); W2 не центрировать на skip-ветке |
+| Branch ≠ base (`ActivePulseIndex`, нет midband/`\|dt\|>5`) | **Подтверждено** в `NNeuronTimeLearnerBranch.cpp` |
+| Полный matrix log «отсутствует в checkout» | **Уточнение:** файлы `metrics/SOFTCOLD_full_matrix.log` и `softcold_last_sample.json` есть **локально**, но **не в git** (`git ls-files` пусто). Clone без working tree их не видит. W0 = извлечь committed SNAP-summary + политика архива, не обязательно перегонять 49 |
+
+**Вывод ревью (принят):** приоритет E/B/D сохраняется как *симптоматический*; W1–W3 — гипотезы до W0. До W0 не менять критерии Done и не применять слепые Rmin/Rmax escapes.
 
 ### Этапы
 
-- [ ] **W0 — доказательства:** восстановить/архивировать полный matrix log и live snapshot; для якорей E/B/D записать оба EOL-гейта и состояние дендритов на последнем SNAP. Без W0 не менять критерии Done.
+- [ ] **W0 — доказательства:** из локального matrix log (если есть) и/или новых diagnostic runs извлечь per-case SNAP: оба EOL-гейта + dendrite state; закоммитить компактный summary в evidence; полный slog не в git. Без W0 не менять критерии Done.
 - [ ] **W1 — E:** по W0 определить, что именно блокирует каждый Rmin-якорь; внести минимальную branch-specific правку только в доказанно ложный гейт.
 - [ ] **W1 retest:** `asym100_gen`, `asym100_preinh`, `ltz100_gen`, `ltz25_gen`, `fs50_preinh`; Keep PASS: `asym50`, `ltz50_gen`; отдельно измерить Branch `br25_on` (ожидаемый NonSeparable не считать обучающим PASS).
 - [ ] **W2 — B:** исправлять фактически подтверждённый stall отдельно в base и Branch; не переносить одну реализацию копированием.
@@ -29,7 +42,7 @@
 | Волна | Корзина | Симптом | Где правим |
 |-------|---------|---------|------------|
 | **W1** | **E** (6) | TipR@Rmin, Need=1 | сначала оба EOL-гейта; branch-specific правка |
-| **W2** | **B** (7) | mid-band TipR, Need=1 | `ChangeSynapseResistanceStatus` + порт Branch |
+| **W2** | **B** (7) | mid-band TipR, Need=1 | near-band/NoImprove path; base и Branch **отдельно** |
 | **W3** | **D** (22) | TipR → 1e11 / runaway | сначала диагностика; Rmax-dwell escape только при подтверждении |
 | **—** | A/C/G/N | flat / Off / Keep-Search / NonSeparable | отдельные протоколы и свойства данных |
 
@@ -150,7 +163,7 @@ ELSE:
 
 ### W2 — mid-band → Rmin (B)
 
-Base + **обязательный порт Branch**.
+Отдельные правки **base** и **Branch** (не копировать base verbatim). Инвариант: при валидном измерении и R>Rmin контроллер не замирает через `ResistanceStatus=0` без шага коррекции ошибки.
 
 ```text
 IF peak/length data are valid AND R > Rmin:
@@ -158,19 +171,21 @@ IF peak/length data are valid AND R > Rmin:
     settle this amp measurement
   ELIF near-band AND NoImprove >= limit:
     take a bounded step in the measured error-correction direction
+    # primary fs25 path (keep-slog): |dt|>5 never fired
   ELIF |dt| > kPathologicalAmpDt:
     after the bounded skip budget, take a bounded directional recovery step
+    # defense only; not the proven fs25 stall
   ELSE:
     continue the damped controller and track whether error actually falls
 ELSE:
   do not apply a blind floor step; record invalid/opposite-sign/unready state
 ```
 
-Base currently has a `|dt|>5` skip with periodic ±5% step; Branch has no such skip but clears `ResistanceStatus` after NoImprove. The observed control paths differ, so port the *invariant and evidence*, not the base code verbatim. Preserve error direction: current controller lowers R for positive `dt` and raises it for negative `dt`; unconditionally forcing Rmin when `dt<0` can move away from the amp target. Do not make `NoImprove` freeze the controller again.
+Preserve error direction: lower R for positive `dt`, raise for negative `dt`; unconditionally forcing Rmin when `dt<0` is forbidden. Do not reintroduce NoImprove→freeze without Done.
 
-**Диагностическое ограничение:** старый `fs25` keep-slog записал `|dt|>5` hits = 0, но наблюдал mid-band NoImprove и `ResistanceStatus=0`; значит, skip-ветка не объясняет тот stall. W2 должен проверить прежде всего этот near-band путь и длительность схода, а не только патологический `|dt|>5` escape. Ни одну из этих причин нельзя переносить на новые B-кейсы без trace финального среза.
+**Диагностическое ограничение:** [AMPNORM_fs25_KEEPSLOG.ru.md](AMPNORM_fs25_KEEPSLOG.ru.md) — `|dt|>5` hits=0, NoImprove mid=21, ResSt=0. W2 сначала проверяет near-band на финальном HEAD (`--keep-slog`), затем Branch mid-freeze (`br25_preinh`). Не переносить причину fs25 на все B без per-case trace.
 
-**Успех:** all B retests reach the expected canonical TipR and `Need=0` without degrading fires/Acc; `fs25_gen` no longer stalls around 2.6e7 and `br25_preinh` dend2 leaves 6.76e7. Keep-PASS controls remain green.
+**Успех:** B retests → tipr=canon и Need=0 без деградации fires/Acc; `fs25_gen` не stall ~2.6e7; `br25_preinh` dend2 уходит с ~6.76e7. Keep-PASS зелёные.
 
 ### W3 — Rmax dwell (D)
 
@@ -191,8 +206,8 @@ EstDelay / L=97 — отдельный follow-up, не смешивать его
 
 - Retest: `--keep-slog --snap-every 20` (на fail-якорях при нужде `--no-prune`).
 - Нормализация запятой в TipR только в разборе лога (не меняет rc).
-- Сохранить компактный структурированный SNAP summary и полный matrix log вне `metrics/` или приложить в evidence; сейчас два файла, на которые ссылается аудит (`SOFTCOLD_full_matrix.log`, `softcold_last_sample.json`), в checkout отсутствуют.
-- Зафиксировать SHA бинарника Console, commit PulseLib, входной config hash, командную строку, RCS и bundle path у каждого нового прогона.
+- **Evidence policy:** полный `SOFTCOLD_full_matrix.log` / slog — локально или в архиве вне git; в git — компактный `AMPNORM_EOL_W0_SNAP.md` (таблица case → Need/TipR/L/gate + поля гейтов, когда доступны). Не считать «отсутствие в git» = «прогонов не было», если файлы есть untracked на машине прогона.
+- Зафиксировать SHA Console, commit PulseLib, config hash, cmdline, RCS, bundle path у каждого нового прогона.
 - Реестр: `apply_softcold_rcs_to_registry.py` после retest.
 - Не менять tipr_class / early-stop / gate пороги.
 
@@ -200,7 +215,7 @@ EstDelay / L=97 — отдельный follow-up, не смешивать его
 
 ## Порядок исполнения
 
-0. **W0:** восстановить evidence и снять gate-state на последнем SNAP; записать диагноз до кода.
+0. **W0:** (a) извлечь из локального matrix log финальные TipR/Need/L/gate для всех 41 FAIL + PASS controls; (b) для якорей E/B/D — diagnostic SoftCold с расширенным SNAP обоих EOL-гейтов и dendrite state (код логирования SNAP при необходимости — **только диагностика**, не смена Done); (c) закоммитить summary; (d) зафиксировать гипотезу per-anchor до правки алгоритма.
 1. **W1:** воспроизвести E; если изменяется алгоритм — build, smoke на `asym50`/`ltz50_gen`, затем все релевантные E-якоря и отдельный Branch контроль.
 2. **W2:** отдельные base и Branch изменения; build и ретест B плюс keep-PASS.
 3. **W3:** только после подтверждения Rmax-dwell; диагностический ретест разных семейств, затем весь D=22.
