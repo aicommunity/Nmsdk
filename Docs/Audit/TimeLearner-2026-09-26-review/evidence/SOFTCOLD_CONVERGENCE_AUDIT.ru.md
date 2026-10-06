@@ -34,26 +34,26 @@
 
 | ID | Корзина | Критерий | # | Слой |
 |----|---------|----------|---|------|
-| **D** | TipR runaway / ceiling | ≥1 dend → `≥1e9` / `1e11`; Need=1 | **20** | **C++ candidate** R-control (W3 hold: нет down-step при dt&lt;0) |
-| **E** | TipR@Rmin / partial Rmin, Need≠0 или gate | dend≈`2e7` или смешанный Rmin; EOL/gate | **8** | **C++ candidate** AmpNorm/EOL or sync gate |
-| **B** | mid-band / noncanonical TipR, Need=1 | mid TipR вне Rmin/Rmax | **1** (`ltz25_preinh`) | **C++ candidate** R-control / budget |
-| **A** | TipR flat LastR | `8.6e7×4` | **3** | протокол (`asym25`, nextseg) — см. §5 evidence |
-| **C** | TipR canon + gate_fail | Train metrics/Landscape | **1** (`fs50_preinh`) | gate/протокол; **§4 не ослаблять** |
-| **N** | NonSeparable mid | LandscapeOk=0 при TipR@Rmin | **1** (`br25_on`) | **объективно**; §4 вне скоупа |
-| **G** | альтернативный TipR-режим | Keep/Search | **2** (`br100_keep`, `br100_search`) | режим/протокол |
+| **D** | TipR ceiling freeze @Rmax | ≥1 dend → `1e11`; Need=1; `amp_dt&lt;0` hold | **20** | **C++** W3c: length-grow DOF ([AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md)) |
+| **E_algo** | TipR partial Rmin, **Need=1** | Branch partial (`br480_nextseg`/`tiprmin`) | **2** | Branch EOL (отложено) |
+| **E_gate** | TipR@Rmin canon, Train done, gate/Landscape | Need→0; LandscapeOk=0 / silent mid | **6** | **объективно** (`asym100_gen`, `ltz100_gen`, `ltz25_gen`, `fs100_gen`, `br25_preinh`, + overlap C) — **не** AmpNorm EOL |
+| **B** | mid-band TipR, Need=1 | mid вне Rmin/Rmax | **1** (`ltz25_preinh`) | R-control / budget |
+| **A** | TipR flat LastR | `8.6e7×4` | **3** | протокол (`asym25`, nextseg) |
+| **C** | TipR canon + gate_fail | metrics/Landscape | **1** (`fs50_preinh`) | §4 не ослаблять |
+| **N** | NonSeparable mid | LandscapeOk=0 @Rmin | **1** (`br25_on`) | объективно |
+| **G** | Keep/Search TipRMode | не CanonRmin | **2** | режим/протокол |
 
-**Подсчёт:** D=20, E=8, B=1, A=3, C=1, G=2, N=1 → **36 FAIL** + **13 PASS** = 49. N учтён отдельно от E (у `br25_on` tipr_class=canon, fail=gate_fail).
+**Подсчёт FAIL:** D=20 + E_algo=2 + E_gate≈5–6 + B=1 + A=3 + C=1 + N=1 + G=2 ≈ **36** (+13 PASS). Старая «E=8» смешивала gate/Landscape с Need=1 — для волны D чинить только D (+ EstDelay gaps); E_gate/N/C/A/G вне скоупа.
 
 ### 2.1 По семействам (rematrix)
 
 | Семейство | Паттерн | Заметка |
 |-----------|---------|---------|
-| PhaseA / PSI | **D** ceiling `1e11`; L≈gold (`49 41 25`) | EstDelay seed OK; R остаётся на Rmax при dt&lt;0 hold |
-| Phase6 / TimeNeuron | **D** ceiling `1e11` (иногда частичный mid dend2) | thr_only / ltzcal_twin / preinh250 / **480** / **tn_classic** (L=`97 81 49`) |
-| FastSpan | **B** mid/unstable TipR (fs25*, fs100*) + **E** @Rmin (`fs50_preinh`) | разные семейства поведения; не сводить к одному AmpNorm дефекту |
-| AsymRm / LtzCal gen | **E** @Rmin (asym100*, ltz100/25); asym25 — **A** flat; **PASS** на 50 | проверять EOL отдельно от синхронизации |
-| LtzCal preinh / AsymRm preinh | LtzCal 25/50/100 — **D**; asym100 — **E**, asym25/50 — **PASS** | не обобщать runaway на все preinh |
-| Branch | смесь A/B/C/D/E/G/N | keep/search/nextseg/off — отдельные режимы; reverse train имеет свой active-pulse gate |
+| PhaseA / PSI | **D** ceiling; L≈gold | EstDelay OK; нужны L-grow @Rmax overshoot |
+| Phase6 / TimeNeuron | **D** ceiling; `phase6_480`/`tn_classic` ещё L=`97…` | EstDelay gap в `EXP_480_gen_tiprmin` / TimeNeuron |
+| FastSpan / AsymRm gen | **E_gate** @Rmin+Landscape (`asym100_gen`, `fs100_gen`, …); `fs50_preinh` **C** | не ослаблять LandscapeOk |
+| LtzCal preinh | **D** ceiling/runaway | W3c |
+| Branch | A/G/N + E_algo `br480_*` Need=1 | keep/search/nextseg отдельно |
 
 ---
 
