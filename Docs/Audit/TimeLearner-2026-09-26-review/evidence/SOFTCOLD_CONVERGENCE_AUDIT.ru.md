@@ -1,53 +1,54 @@
 # SoftCold full matrix — аудит сходимости обучения
 
-**Срез:** 2026-10-03T13:10+03 · матрица **завершена** (**49/49**).  
-**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · run-local log `metrics/SOFTCOLD_full_matrix.log` и live `metrics/softcold_last_sample.json` (**не в git**; на машине прогона могут быть untracked — см. §9).
-**Console/PulseLib HEAD матрицы:** AmpNorm a/b + midband→Rmin escape · harness `--autosave-model-s 10`.
+**Срез (актуальный):** SoftCold rematrix PARALLEL **49×6** · **DONE** 2026-10-05T09:17Z→2026-10-05T22:12Z (apply 2026-10-06T05:15Z).  
+**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · log `metrics/SOFTCOLD_full_matrix_parallel.log`.  
+**Console SHA16:** `8589daff6d131c9b` · **PulseLib:** `b32d715` (RmaxDwell escape только при dt≥0) · harness `--autosave-model-s 10` · `PARALLEL=6`.
 
-**Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL), отделить подтверждённые факты от гипотез о **C++ алгоритме**, **harness/скриптах** и **пределах конфигураций**. Финальные цифры — после закрытия очереди 49/49.
+Предыдущий срез 2026-10-03 (8/41) и partial W4 — архив; PASS W4 **не** входят в финал.
 
-Связанные разборы: **[AMPNORM_EOL_FIX.plan.md](AMPNORM_EOL_FIX.plan.md)** (план фикса E→B→D) · [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md) · [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) · [FAIL_ROOTCAUSE.ru.md](FAIL_ROOTCAUSE.ru.md) (старый eps-fixed срез) · [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md) · [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md).
+**Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL).
+
+Связанные разборы: [AMPNORM_EOL_RETEST_RESULT.md](AMPNORM_EOL_RETEST_RESULT.md) · [PHASEA_PSI_ESTDELAY_FIX.ru.md](PHASEA_PSI_ESTDELAY_FIX.ru.md) · [AMPNORM_FLAT_TIPR_ASYM25.ru.md](AMPNORM_FLAT_TIPR_ASYM25.ru.md) · [AMPNORM_EOL_FIX.plan.md](AMPNORM_EOL_FIX.plan.md) · [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md).
 
 ---
 
-## 1. Сводка матрицы (финал)
+## 1. Сводка матрицы (rematrix PARALLEL, финал)
 
 | | |
 |--|--|
 | Закрыто | **49 / 49** |
-| PASS / FAIL | **8 / 41** |
-| Статус очереди | **DONE** 2026-10-03T10:08:58Z (`phase6_480` последний) |
-| Хвост | — |
+| PASS / FAIL | **13 / 36** |
+| Статус очереди | **DONE** (`phase6_480` последний Train; RCS merge + registry apply) |
+| Оркестратор | `scripts/softcold_full_matrix_parallel.sh` (rcs.d shards → merge → apply) |
 
 **PASS (cold Train сошёлся + gate):**  
-`asym50_preinh`, `asym25_preinh`, `asym50`, `br50_gen`, `br100_preinh`, `br25_nextseg`, `br50_preinh`, `ltz50_gen`.
+`asym50_preinh`, `asym25_preinh`, `asym50`, `br25_off`, `fs25_gen`, `br50_gen`, `br100_preinh`, `br25_nextseg`, `br50_preinh`, `fs100_preinh`, `fs25_preinh`, `asym100_preinh`, `ltz50_gen`.
 
-**Интерпретация:** soft-cold desync (TipR flat + L=`1 1 1 1` на всём budget) на HEAD **снят** для большинства канонов. D/E/B дают 35 симптоматических кандидатов для проверки R-control/EOL; сами категории ещё не доказывают единую причину в C++. Ещё 6 FAIL относятся к A/C/G; N для `br25_on` — пересекающийся признак.
+**Дельта vs 2026-10-03 (8 PASS):** +`br25_off` (expect_fires SoftColdOff), +`fs25_gen`/`fs25_preinh`/`fs100_preinh`, +`asym100_preinh`. Keep-якоря (`asym50`, `ltz50_gen`, `br50_gen`, `fs25_gen`) зелёные. EstDelay PhaseA: live L=`49 41 25` на `pa*` (≠`97 81 49`); TipR всё ещё ceiling → корзина **D**.
 
 ---
 
-## 2. Таксономия FAIL (сходимость)
+## 2. Таксономия FAIL (сходимость, срез rematrix)
 
-Класс по **последнему осмысленному autosave/SNAP перед GATE**: Need, форма TipR (dend0..2), `gate rc`.  
-(В логе TipR иногда с запятой как десятичный разделитель — парсер должен нормализовать.)
+Класс по `tipr_final` / provenance `tipr_class` + `failure_class` последнего run на SHA `8589daff…`.
 
 | ID | Корзина | Критерий | # | Слой |
 |----|---------|----------|---|------|
-| **D** | TipR runaway / ceiling | ≥1 dend → `≥1e9` или `1e11`; Need=1 | **22** | **C++ candidate** R-control |
-| **E** | TipR@Rmin, Need=1 | dend TipR≈`2e7` (или близко), EOL не закрывает Need | **6** | **C++ candidate** AmpNorm/EOL or sync gate |
-| **B** | mid-band / noncanonical TipR, Need=1 | хотя бы один обучаемый dend вне Rmin, часто dend2 ~2.5e7…7e7 | **7** | **C++ candidate** R-control / budget |
-| **A** | TipR flat LastR | `8.6e7×4`, R-tune не стартовал | **3** | смесь протокол / cold path |
-| **C** | Need=0, metrics/fires | Train «закрыт», Acc/fires плохие | **1** | gate/протокол; отдельно от convergence |
-| **N** | NonSeparable mid | LandscapeOk=0 при TipR@Rmin | **1** (`br25_on`) | **объективно** (+E) |
-| **G** | альтернативный TipR-режим | Keep/Search, не CanonRmin | **2** (`br100_keep`, `br100_search`) | режим/протокол |
+| **D** | TipR runaway / ceiling | ≥1 dend → `≥1e9` / `1e11`; Need=1 | **20** | **C++ candidate** R-control (W3 hold: нет down-step при dt&lt;0) |
+| **E** | TipR@Rmin / partial Rmin, Need≠0 или gate | dend≈`2e7` или смешанный Rmin; EOL/gate | **8** | **C++ candidate** AmpNorm/EOL or sync gate |
+| **B** | mid-band / noncanonical TipR, Need=1 | mid TipR вне Rmin/Rmax | **1** (`ltz25_preinh`) | **C++ candidate** R-control / budget |
+| **A** | TipR flat LastR | `8.6e7×4` | **3** | протокол (`asym25`, nextseg) — см. §5 evidence |
+| **C** | TipR canon + gate_fail | Train metrics/Landscape | **1** (`fs50_preinh`) | gate/протокол; **§4 не ослаблять** |
+| **N** | NonSeparable mid | LandscapeOk=0 при TipR@Rmin | **1** (`br25_on`) | **объективно**; §4 вне скоупа |
+| **G** | альтернативный TipR-режим | Keep/Search | **2** (`br100_keep`, `br100_search`) | режим/протокол |
 
-**Подсчёт после сверки с RCS и manifest:** D=22 (включая `ltz25_preinh`), E=6, B=7, A=3, C=1, G=2 — всего **41 FAIL**; N — пересекающийся признак `br25_on`, он уже входит в E. Класс описывает симптом/режим, не доказанную первопричину.
+**Подсчёт:** D=20, E=8, B=1, A=3, C=1, G=2, N=1 → **36 FAIL** + **13 PASS** = 49. N учтён отдельно от E (у `br25_on` tipr_class=canon, fail=gate_fail).
 
-### 2.1 По семействам
+### 2.1 По семействам (rematrix)
 
 | Семейство | Паттерн | Заметка |
 |-----------|---------|---------|
-| PhaseA / PSI | **D** ceiling `1e11`, L часто `97 81 49` | EstDelay/length + R упирается в Rmax |
+| PhaseA / PSI | **D** ceiling `1e11`; L≈gold (`49 41 25`) | EstDelay seed OK; R остаётся на Rmax при dt&lt;0 hold |
 | Phase6 / TimeNeuron | **D** ceiling `1e11` (иногда частичный mid dend2) | thr_only / ltzcal_twin / preinh250 / **480** / **tn_classic** (L=`97 81 49`) |
 | FastSpan | **B** mid/unstable TipR (fs25*, fs100*) + **E** @Rmin (`fs50_preinh`) | разные семейства поведения; не сводить к одному AmpNorm дефекту |
 | AsymRm / LtzCal gen | **E** @Rmin (asym100*, ltz100/25); asym25 — **A** flat; **PASS** на 50 | проверять EOL отдельно от синхронизации |
