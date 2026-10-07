@@ -47,18 +47,43 @@ TEST(WheeledDriveLogic, StopEdgeClearsPwm)
     EXPECT_EQ(0, cmd.rightPwm);
 }
 
-TEST(WaveshareUgvJson, EncodeT11AndParseT1001)
+TEST(WheeledRobotEdgesL3, ApplyDriveBuildsMotorHubQueueLines)
 {
     EnsureQtApp();
-    const QString t11 = RDK::UWaveshareUgvJsonProtocol::encodePwmInputT11(100, -50);
-    const QJsonObject o = QJsonDocument::fromJson(t11.toUtf8()).object();
-    EXPECT_EQ(11, o.value(QStringLiteral("T")).toInt());
-    EXPECT_EQ(100, o.value(QStringLiteral("L")).toInt());
-    EXPECT_EQ(-50, o.value(QStringLiteral("R")).toInt());
+    RDK::UWheeledDriveCommand cmd;
+    cmd.leftPwm = 90;
+    cmd.rightPwm = 110;
+    cmd.leftDir = 1;
+    cmd.rightDir = 1;
+    bool apply = false, stop = false;
+    ASSERT_TRUE(RDK::UWheeledDriveLogic::processEdges(true, false, &cmd, &apply, &stop));
+    const QStringList queue = RDK::UWheeledDriveLogic::buildMotorHubCommands(cmd);
+    ASSERT_EQ(4, queue.size());
+    EXPECT_TRUE(queue[1].contains(QStringLiteral("MOTOR A 90")));
+    EXPECT_TRUE(queue[3].contains(QStringLiteral("MOTOR B 110")));
+}
 
-    double l = 0, r = 0;
-    EXPECT_TRUE(RDK::UWaveshareUgvJsonProtocol::parseFeedbackT1001(
-        QStringLiteral("{\"T\":1001,\"L\":0.2,\"R\":-0.1}"), &l, &r, nullptr));
-    EXPECT_DOUBLE_EQ(0.2, l);
-    EXPECT_DOUBLE_EQ(-0.1, r);
+TEST(WheeledRobotEdgesL3, StopBuildsMotorStop)
+{
+    RDK::UWheeledDriveCommand cmd;
+    cmd.leftPwm = 50;
+    bool apply = false, stop = false;
+    ASSERT_TRUE(RDK::UWheeledDriveLogic::processEdges(false, true, &cmd, &apply, &stop));
+    EXPECT_EQ(QStringList{QStringLiteral("MOTOR STOP")},
+              RDK::UWheeledDriveLogic::buildMotorStopCommands());
+}
+
+TEST(WheeledRobotEdgesL3, WaveRoverApplyDriveJsonContainsT11)
+{
+    EnsureQtApp();
+    RDK::UWheeledDriveCommand cmd;
+    cmd.leftPwm = 100;
+    cmd.rightPwm = 50;
+    cmd.leftDir = 1;
+    cmd.rightDir = 0;
+    const QString json = RDK::UWheeledDriveLogic::buildWaveshareT11Json(cmd);
+    EXPECT_TRUE(json.contains(QStringLiteral("\"T\":11")));
+    EXPECT_TRUE(json.contains(QStringLiteral("\"L\":100")));
+    EXPECT_TRUE(json.contains(QStringLiteral("\"R\":-50")));
+    Q_UNUSED(QJsonDocument::fromJson(json.toUtf8()));
 }

@@ -4,7 +4,7 @@
 
 ### Назначение
 
-**Rdk-HardwareLib** — компоненты для работы с Arduino (USB serial): подключение, прошивка bundled HEX, custom протокол `sensor_lab`, Standard Firmata, GUI pinout в NeuroModeler.
+**Rdk-HardwareLib** — компоненты для работы с Arduino/ESP32 (USB serial): подключение, прошивка bundled HEX, custom протокол `sensor_lab` / Nmsdk hub, Standard Firmata, wheeled robots, GUI pinout в NeuroModeler.
 
 ### Компоненты (актуальные ClassName)
 
@@ -13,8 +13,13 @@
 - **ArduinoFirmata** — Firmata pin control
 - **ArduinoAdc** — ADC через связанный Firmata
 - **ArduinoDcDemo** — DC demo (один узел, CustomLink + sensor_lab_v1)
+- **ArduinoDeviceIO** / **ArduinoCustomFirmware** — модули DeviceIO / произвольный hub plugin
+- **Esp32Board** — ESP32 serial (DTR/RTS off, Connect-only P0)
+- **ArduinoWheeledRobot** / **Esp32WheeledRobot** — open-loop Left/Right PWM+Dir (Nmsdk motor hub)
+- **WaveRover** — Waveshare UGV JSON (`T:11`)
 
-Property API (edge/state) и поток движка: [Architecture.md](../../Libraries/Rdk-HardwareLib/Docs/Architecture.md), [API-Overview.md](../../Libraries/Rdk-HardwareLib/Docs/API-Overview.md).
+Property API и поток движка: [Architecture.md](../../Libraries/Rdk-HardwareLib/Docs/Architecture.md), [API-Overview.md](../../Libraries/Rdk-HardwareLib/Docs/API-Overview.md).  
+Wheeled ADR: [WheeledRobots.md](../../Libraries/Rdk-HardwareLib/Docs/WheeledRobots.md).
 
 ### Зависимости
 
@@ -24,7 +29,7 @@ Property API (edge/state) и поток движка: [Architecture.md](../../Li
 
 ### Документация в репозитории
 
-[Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/) — README, Architecture, API, компоненты, Transport/Protocol/GUI.
+[Libraries/Rdk-HardwareLib/Docs](../../Libraries/Rdk-HardwareLib/Docs/) — README, Architecture, API, компоненты, Transport/Protocol/GUI, Modules-Catalog.
 
 Прошивки и чеклист: [Libraries/Rdk-HardwareLib/Firmware/README.md](../../Libraries/Rdk-HardwareLib/Firmware/README.md).
 
@@ -38,11 +43,11 @@ Property API (edge/state) и поток движка: [Architecture.md](../../Li
 
 ### Purpose
 
-**Rdk-HardwareLib** provides Arduino hardware components for NeuroModeler (serial, firmware, sensor_lab, Firmata, GUI).
+**Rdk-HardwareLib** provides Arduino/ESP32 hardware components for NeuroModeler (serial, firmware, sensor_lab, Firmata, wheeled hubs, WaveRover JSON, GUI).
 
 ### Main components
 
-`ArduinoBoard`, `ArduinoSensorSketch`, `ArduinoFirmata`, `ArduinoAdc`, `ArduinoDcDemo`.
+`ArduinoBoard`, `ArduinoSensorSketch`, `ArduinoFirmata`, `ArduinoAdc`, `ArduinoDcDemo`, `ArduinoDeviceIO`, `ArduinoCustomFirmware`, `Esp32Board`, `ArduinoWheeledRobot`, `Esp32WheeledRobot`, `WaveRover`.
 
 ### Dependencies
 
