@@ -44,4 +44,14 @@ TEST(HardwareModulesCatalog, LoadsAtLeastSeventyModules)
     ASSERT_TRUE(f.open(QIODevice::ReadOnly));
     const QJsonObject idx = QJsonDocument::fromJson(f.readAll()).object();
     EXPECT_GE(idx.value(QStringLiteral("modules")).toArray().size(), 70);
+
+    for (const auto& id : {QStringLiteral("bme280"), QStringLiteral("vl53l0x"),
+                           QStringLiteral("mpu_6050"), QStringLiteral("ina219"),
+                           QStringLiteral("pca9685_16_ch_pwm")}) {
+        const auto* m = RDK::UHardwareCatalog::instance().module(id);
+        ASSERT_NE(nullptr, m) << id.toStdString();
+        EXPECT_EQ(QStringLiteral("hub"), m->runtime) << id.toStdString();
+    }
+    EXPECT_EQ(QStringLiteral("planned"),
+              RDK::UHardwareCatalog::instance().module(QStringLiteral("icm_20948"))->runtime);
 }
