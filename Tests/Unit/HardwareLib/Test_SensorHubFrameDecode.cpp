@@ -22,8 +22,13 @@ public:
     void setProtocolReady(bool ready) override { Ready = ready; }
     void setLastError(const QString&) override {}
     void publishNamedFloat(const QString& key, float value) override { Named[key] = value; }
+    void publishNamedString(const QString& key, const QString& value) override
+    {
+        NamedStr[key] = value;
+    }
 
     QMap<QString, float> Named;
+    QMap<QString, QString> NamedStr;
     bool Ready = false;
 };
 
@@ -90,6 +95,11 @@ TEST(I2cHubFrameDecode, Vl53MpuInaPcaFrames)
     host.Named.clear();
     plugin.onBinaryFrame(&host, 0x32, MakeSensors({5.0f, 100.f, 500.f}));
     EXPECT_FLOAT_EQ(5.0f, host.Named.value(QStringLiteral("bus_v")));
+    EXPECT_FLOAT_EQ(100.f, host.Named.value(QStringLiteral("current_ma")));
+
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x32, MakeSensors({5.0f, 0.01f, 100.f, 500.f}));
+    EXPECT_FLOAT_EQ(0.01f, host.Named.value(QStringLiteral("shunt_v")));
     EXPECT_FLOAT_EQ(100.f, host.Named.value(QStringLiteral("current_ma")));
 
     host.Named.clear();
@@ -177,7 +187,9 @@ TEST(P2PlusHubFrameDecode, DisplayPixelRadioUart)
     EXPECT_FLOAT_EQ(-55.f, host.Named.value(QStringLiteral("rssi")));
 
     host.Named.clear();
+    host.NamedStr.clear();
     RDK::UNmsdkUartDeviceHubProtocolPlugin uart;
     uart.onBinaryFrame(&host, 0x60, QByteArray("hello"));
     EXPECT_FLOAT_EQ(5.f, host.Named.value(QStringLiteral("last_line_len")));
+    EXPECT_EQ(QStringLiteral("hello"), host.NamedStr.value(QStringLiteral("last_line")));
 }

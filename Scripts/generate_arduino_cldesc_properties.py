@@ -121,6 +121,15 @@ PROPS: dict[str, list[tuple[str, str, str, tuple[str, str]]]] = {
         ("UseLinkedAnalogSamples", "Use linked samples", "Читать `AnalogSamples` Firmata.", PARAM),
         ("AdcValue", "ADC value", "State: 0–1023.", STATE),
     ],
+    "ArduinoCustomFirmware": [
+        ("HostPluginId", "Host plugin id", "Id protocol plugin (`nmsdk_*_hub_v1`).", PARAM),
+        ("Command", "Command", "Текстовая команда hub.", PARAM),
+        ("SendCommand", "Send command", "Edge: отправить `Command`.", EDGE),
+        ("NamedValuesJson", "Named values JSON", "State: телеметрия (float + string keys).", STATE),
+        ("PluginBound", "Plugin bound", "State: plugin найден в registry.", STATE),
+        ("Connect", "Connect", "Edge: открыть serial.", EDGE),
+        ("UploadFirmware", "Upload firmware", "Edge: прошивка HEX.", EDGE),
+    ],
 }
 
 
