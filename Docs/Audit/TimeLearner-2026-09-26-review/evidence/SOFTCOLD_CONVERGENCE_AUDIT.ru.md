@@ -139,6 +139,11 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 `ltz100_preinh`, `ltz50_preinh`, `ltz25_preinh`,
 `tn_classic`.
 
+**Anti-bounce partial (2026-10-07, Console `dde07ac6…`):** sterile TipR bounce `1e11↔0.85·Rmax` на D снят (hold@MaxL+overshoot вместо W3f TipR-down). SoftCold D-core всё ещё **0/5**; keep SoftCold **8/8** (после solo `asym50`). Подклассы residual (якоря P12 + investigate):  
+`pa00` / `phase6_thr_only` / `phase6_480` / `tn_classic` → **D_algo_open** (W3d grow работает; overshoot+LastAbsDt блокируют W3e — **algo**, не arm/apply bug);  
+`psi01_050` → **D_objective** (diag Sync/EstDelay=keep: TipR@Rmin+L=MaxL+Need≠0; не MaxL-hold impl bug).  
+C++ после investigate **не** меняли. Детали: [`AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md`](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md) §Residual investigate; params/diag: [`AMPNORM_D_VS_KEEP_PARAMS.ru.md`](AMPNORM_D_VS_KEEP_PARAMS.ru.md).
+
 ### 4.2 E — TipR@Rmin Need=1 (6)
 
 `br25_on` (+ **N** NonSeparable), `fs50_preinh`,  
