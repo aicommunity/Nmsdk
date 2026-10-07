@@ -144,10 +144,18 @@ damped-P + clamp к ResistanceMax (`1e11`) при патологическом a
 `psi01_050` → **D_objective** (diag Sync/EstDelay=keep: TipR@Rmin+L=MaxL+Need≠0; не MaxL-hold impl bug).  
 C++ после investigate **не** меняли. Детали: [`AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md`](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md) §Residual investigate; params/diag: [`AMPNORM_D_VS_KEEP_PARAMS.ru.md`](AMPNORM_D_VS_KEEP_PARAMS.ru.md).
 
-### 4.2 E — TipR@Rmin Need=1 (6)
+**DEFERRED (2026-10-07):** правка AmpNorm для **`D_algo_open`** отложена (anti-bounce hold сохранён; full 49 не открывать ради D). См. Open Gaps.
 
-`br25_on` (+ **N** NonSeparable), `fs50_preinh`,  
-`asym100_gen`, `asym100_preinh`, `ltz100_gen`, `ltz25_gen`.
+### 4.2 E — TipR@Rmin Need=1
+
+HEAD rematrix / Open Gaps W0 FAIL: `fs50_preinh`, `asym100_gen`, `ltz100_gen`, `ltz25_gen`; `br25_on` (+ **N**).  
+`asym100_preinh` на rematrix — PASS (не E).
+
+**Open Gaps W0 (2026-10-07) — E1/E3 = DEFERRED:**  
+W0 SNAP назвал предикаты (**E1** length/sync @Rmin; **E3** overshoot@Rmin без Done). Это **не** доказанный impl-bug arm/apply (TipR доходит до CanonRmin; keep на том же `NNeuronTimeLearner` PASS). Сходимость при текущих EOL-правилах + паттерн/span не достигается; silent mid на gate — следствие Need=1.  
+**Правку Done/controller и ослабление LandscapeOk откладываем.** Follow-up только отдельным policy-планом (не слепой `at_r_min→true`).  
+Якоря отложенного фикса: `asym100_gen`, `ltz100_gen`, `ltz25_gen`, `fs50_preinh` (+ `psi01_050` как E3∩D_objective).  
+Детали: [`OPEN_GAPS_E_B.ru.md`](OPEN_GAPS_E_B.ru.md).
 
 ### 4.3 B — mid-band Need=1 (7)
 
