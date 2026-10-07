@@ -112,3 +112,39 @@ TEST(I2cHubFrameDecode, Wave1aBmpVl53l1Icm)
     EXPECT_FLOAT_EQ(1.f, host.Named.value(QStringLiteral("ax")));
     EXPECT_FLOAT_EQ(7.f, host.Named.value(QStringLiteral("mx")));
 }
+
+TEST(I2cHubFrameDecode, Wave1bEnvSensors)
+{
+    CapturingHost host;
+    RDK::UNmsdkI2cHubProtocolPlugin plugin;
+    plugin.onBinaryFrame(&host, 0x37, MakeSensors({21.f, 48.f}));
+    EXPECT_FLOAT_EQ(21.f, host.Named.value(QStringLiteral("t")));
+    EXPECT_FLOAT_EQ(48.f, host.Named.value(QStringLiteral("h")));
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x38, MakeSensors({123.5f}));
+    EXPECT_FLOAT_EQ(123.5f, host.Named.value(QStringLiteral("lux")));
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x39, MakeSensors({36.6f, 25.f}));
+    EXPECT_FLOAT_EQ(36.6f, host.Named.value(QStringLiteral("object_c")));
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x3A, MakeSensors({400.f, 12.f}));
+    EXPECT_FLOAT_EQ(400.f, host.Named.value(QStringLiteral("eco2")));
+    EXPECT_FLOAT_EQ(12.f, host.Named.value(QStringLiteral("tvoc")));
+}
+
+TEST(I2cHubFrameDecode, Wave1cMiscSensors)
+{
+    CapturingHost host;
+    RDK::UNmsdkI2cHubProtocolPlugin plugin;
+    plugin.onBinaryFrame(&host, 0x3B, MakeSensors({1.f, 2.f, 3.f, 4.f}));
+    EXPECT_FLOAT_EQ(4.f, host.Named.value(QStringLiteral("c")));
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x3C, MakeSensors({0.1f, 0.2f, 0.3f}));
+    EXPECT_FLOAT_EQ(0.3f, host.Named.value(QStringLiteral("az")));
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x3D, MakeSensors({1.f, 10.f, 1.f, 2.f, 3.f}));
+    EXPECT_FLOAT_EQ(10.f, host.Named.value(QStringLiteral("proximity")));
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x3E, MakeSensors({0.5f, 1.f, 1.5f, 2.f}));
+    EXPECT_FLOAT_EQ(2.f, host.Named.value(QStringLiteral("ch3")));
+}
