@@ -151,3 +151,26 @@ gtest_discover_tests(Test_WaveshareUgvJsonProtocol)
 gtest_discover_tests(Test_NmsdkMotorHubPluginDual)
 gtest_discover_tests(Test_MotorDriverSetPin)
 gtest_discover_tests(Test_HardwareModulesCatalog)
+
+add_executable(Test_DeviceIOModulePins Test_DeviceIOModulePins.cpp)
+target_sources(Test_DeviceIOModulePins PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+target_compile_definitions(Test_DeviceIOModulePins PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+target_link_libraries(Test_DeviceIOModulePins PRIVATE
+  Rdk-HardwareLib.qt
+  rdk.static.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+gtest_discover_tests(Test_DeviceIOModulePins)
+
+add_executable(Test_SensorHubFrameDecode Test_SensorHubFrameDecode.cpp)
+target_link_libraries(Test_SensorHubFrameDecode PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+gtest_discover_tests(Test_SensorHubFrameDecode)
