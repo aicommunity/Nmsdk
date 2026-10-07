@@ -4,8 +4,12 @@
 #include <cstring>
 
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/IArduinoProtocolPlugin.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkDisplayHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkI2cHubProtocolPlugin.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkPixelHubProtocolPlugin.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkRadioHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkSensorHubProtocolPlugin.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkUartDeviceHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/USensorLabFrameDecoder.h"
 
 namespace {
@@ -147,4 +151,33 @@ TEST(I2cHubFrameDecode, Wave1cMiscSensors)
     host.Named.clear();
     plugin.onBinaryFrame(&host, 0x3E, MakeSensors({0.5f, 1.f, 1.5f, 2.f}));
     EXPECT_FLOAT_EQ(2.f, host.Named.value(QStringLiteral("ch3")));
+}
+
+TEST(P2PlusHubFrameDecode, DisplayPixelRadioUart)
+{
+    CapturingHost host;
+    RDK::UNmsdkDisplayHubProtocolPlugin display;
+    display.onBinaryFrame(&host, 0x40, MakeSensors({2.f, 16.f, 1.f}));
+    EXPECT_FLOAT_EQ(2.f, host.Named.value(QStringLiteral("rows")));
+    EXPECT_FLOAT_EQ(16.f, host.Named.value(QStringLiteral("cols")));
+
+    host.Named.clear();
+    RDK::UNmsdkPixelHubProtocolPlugin pixel;
+    pixel.onBinaryFrame(&host, 0x41, MakeSensors({8.f, 4.f}));
+    EXPECT_FLOAT_EQ(8.f, host.Named.value(QStringLiteral("led_count")));
+    EXPECT_FLOAT_EQ(4.f, host.Named.value(QStringLiteral("last_ack")));
+
+    host.Named.clear();
+    RDK::UNmsdkRadioHubProtocolPlugin radio;
+    radio.onBinaryFrame(&host, 0x50, MakeSensors({3.f, -40.f}));
+    EXPECT_FLOAT_EQ(3.f, host.Named.value(QStringLiteral("rx_len")));
+    radio.onBinaryFrame(&host, 0x51, MakeSensors({12345.f}));
+    EXPECT_FLOAT_EQ(12345.f, host.Named.value(QStringLiteral("uid")));
+    radio.onBinaryFrame(&host, 0x52, MakeSensors({-55.f, 192.f, 168.f, 1.f, 10.f}));
+    EXPECT_FLOAT_EQ(-55.f, host.Named.value(QStringLiteral("rssi")));
+
+    host.Named.clear();
+    RDK::UNmsdkUartDeviceHubProtocolPlugin uart;
+    uart.onBinaryFrame(&host, 0x60, QByteArray("hello"));
+    EXPECT_FLOAT_EQ(5.f, host.Named.value(QStringLiteral("last_line_len")));
 }

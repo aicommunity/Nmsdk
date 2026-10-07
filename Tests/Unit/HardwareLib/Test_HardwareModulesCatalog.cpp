@@ -61,7 +61,7 @@ TEST(HardwareModulesCatalog, LoadsAtLeastSeventyModules)
             << id.toStdString();
     }
 
-    // Wave 0: false hub tags without firmware binding must not remain hub.
+    // Wave 5: UART product modules bound to nmsdk_uart_device_hub_v1.
     for (const auto& id : {QStringLiteral("nextion_hmi"), QStringLiteral("sim800l_gsm"),
                            QStringLiteral("hc_05_bluetooth_classic"),
                            QStringLiteral("hc_06_bluetooth"),
@@ -69,8 +69,12 @@ TEST(HardwareModulesCatalog, LoadsAtLeastSeventyModules)
                            QStringLiteral("a9g_gsmplusgps")}) {
         const auto* m = RDK::UHardwareCatalog::instance().module(id);
         ASSERT_NE(nullptr, m) << id.toStdString();
-        EXPECT_EQ(QStringLiteral("planned"), m->runtime) << id.toStdString();
+        EXPECT_EQ(QStringLiteral("hub"), m->runtime) << id.toStdString();
+        EXPECT_TRUE(m->preferredFirmware.contains(QStringLiteral("nmsdk_uart_device_hub_v1")))
+            << id.toStdString();
     }
+    EXPECT_EQ(QStringLiteral("planned"),
+              RDK::UHardwareCatalog::instance().module(QStringLiteral("e_paper_waveshare_154"))->runtime);
 
     // Invariant: every runtime=hub module has preferredFirmware whose hostPlugin exists
     // (or preferredFirmware points at a known hub firmware JSON).
