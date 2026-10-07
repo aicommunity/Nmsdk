@@ -89,6 +89,43 @@ target_link_libraries(Test_WheeledRobotEdges PRIVATE
   Nmsdk::Qt::Core
 )
 
+add_executable(Test_WheeledDriveLogic Test_WheeledDriveLogic.cpp)
+target_link_libraries(Test_WheeledDriveLogic PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+add_executable(Test_WaveshareUgvJsonProtocol Test_WaveshareUgvJsonProtocol.cpp)
+target_link_libraries(Test_WaveshareUgvJsonProtocol PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+add_executable(Test_NmsdkMotorHubPluginDual Test_NmsdkMotorHubPluginDual.cpp)
+target_link_libraries(Test_NmsdkMotorHubPluginDual PRIVATE
+  Rdk-HardwareLib.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+add_executable(Test_MotorDriverSetPin Test_MotorDriverSetPin.cpp)
+target_sources(Test_MotorDriverSetPin PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+target_compile_definitions(Test_MotorDriverSetPin PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+target_link_libraries(Test_MotorDriverSetPin PRIVATE
+  Rdk-HardwareLib.qt
+  rdk.static.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
 add_executable(Test_HardwareModulesCatalog Test_HardwareModulesCatalog.cpp)
 target_sources(Test_HardwareModulesCatalog PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
@@ -109,4 +146,8 @@ gtest_discover_tests(Test_ArduinoHardwareLib)
 gtest_discover_tests(Test_ArduinoBoardEdges)
 gtest_discover_tests(Test_ArduinoComponentGuiRegistry)
 gtest_discover_tests(Test_WheeledRobotEdges)
+gtest_discover_tests(Test_WheeledDriveLogic)
+gtest_discover_tests(Test_WaveshareUgvJsonProtocol)
+gtest_discover_tests(Test_NmsdkMotorHubPluginDual)
+gtest_discover_tests(Test_MotorDriverSetPin)
 gtest_discover_tests(Test_HardwareModulesCatalog)
