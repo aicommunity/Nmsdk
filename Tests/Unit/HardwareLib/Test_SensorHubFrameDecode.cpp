@@ -93,3 +93,22 @@ TEST(I2cHubFrameDecode, Vl53MpuInaPcaFrames)
     EXPECT_FLOAT_EQ(3.f, host.Named.value(QStringLiteral("pca_ch")));
     EXPECT_FLOAT_EQ(2048.f, host.Named.value(QStringLiteral("pca_duty")));
 }
+
+TEST(I2cHubFrameDecode, Wave1aBmpVl53l1Icm)
+{
+    CapturingHost host;
+    RDK::UNmsdkI2cHubProtocolPlugin plugin;
+
+    plugin.onBinaryFrame(&host, 0x34, MakeSensors({20.f, 40.f, 1000.f}));
+    EXPECT_FLOAT_EQ(20.f, host.Named.value(QStringLiteral("t")));
+    EXPECT_FLOAT_EQ(1000.f, host.Named.value(QStringLiteral("pressure_hpa")));
+
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x35, MakeSensors({250.f}));
+    EXPECT_FLOAT_EQ(250.f, host.Named.value(QStringLiteral("distance_mm")));
+
+    host.Named.clear();
+    plugin.onBinaryFrame(&host, 0x36, MakeSensors({1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f}));
+    EXPECT_FLOAT_EQ(1.f, host.Named.value(QStringLiteral("ax")));
+    EXPECT_FLOAT_EQ(7.f, host.Named.value(QStringLiteral("mx")));
+}

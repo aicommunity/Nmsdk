@@ -52,8 +52,14 @@ TEST(HardwareModulesCatalog, LoadsAtLeastSeventyModules)
         ASSERT_NE(nullptr, m) << id.toStdString();
         EXPECT_EQ(QStringLiteral("hub"), m->runtime) << id.toStdString();
     }
-    EXPECT_EQ(QStringLiteral("planned"),
+    EXPECT_EQ(QStringLiteral("hub"),
               RDK::UHardwareCatalog::instance().module(QStringLiteral("icm_20948"))->runtime);
+    for (const auto& id : {QStringLiteral("bmp280"), QStringLiteral("bme680"),
+                           QStringLiteral("vl53l1x")}) {
+        EXPECT_EQ(QStringLiteral("hub"),
+                  RDK::UHardwareCatalog::instance().module(id)->runtime)
+            << id.toStdString();
+    }
 
     // Wave 0: false hub tags without firmware binding must not remain hub.
     for (const auto& id : {QStringLiteral("nextion_hmi"), QStringLiteral("sim800l_gsm"),
