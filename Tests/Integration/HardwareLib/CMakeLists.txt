@@ -48,3 +48,16 @@ gtest_discover_tests(
         LABELS "hardware;arduino;firmata;integration"
         TIMEOUT 120
 )
+
+add_executable(Test_WheeledHardwareIntegration Test_WheeledHardwareIntegration.cpp)
+target_compile_definitions(Test_WheeledHardwareIntegration PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+target_link_libraries(Test_WheeledHardwareIntegration PRIVATE
+    GTest::gtest
+    GTest::gtest_main
+)
+gtest_discover_tests(
+    Test_WheeledHardwareIntegration
+    PROPERTIES
+        LABELS "hardware;wheeled;integration"
+        TIMEOUT 60
+)

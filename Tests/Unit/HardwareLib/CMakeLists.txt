@@ -76,9 +76,37 @@ target_link_libraries(Test_ArduinoSampleBuffer PRIVATE
   Nmsdk::Qt::Core
 )
 
+add_executable(Test_WheeledRobotEdges Test_WheeledRobotEdges.cpp)
+target_sources(Test_WheeledRobotEdges PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+target_compile_definitions(Test_WheeledRobotEdges PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+target_link_libraries(Test_WheeledRobotEdges PRIVATE
+  Rdk-HardwareLib.qt
+  rdk.static.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
+add_executable(Test_HardwareModulesCatalog Test_HardwareModulesCatalog.cpp)
+target_sources(Test_HardwareModulesCatalog PRIVATE
+  ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include/RdkDummyLibraries.cpp
+)
+target_compile_definitions(Test_HardwareModulesCatalog PRIVATE RDK_LIB_TYPE= RDK_CALL=)
+target_link_libraries(Test_HardwareModulesCatalog PRIVATE
+  Rdk-HardwareLib.qt
+  rdk.static.qt
+  GTest::gtest
+  GTest::gtest_main
+  Nmsdk::Qt::Core
+)
+
 gtest_discover_tests(Test_ArduinoPinMap)
 gtest_discover_tests(Test_ArduinoFirmataClient)
 gtest_discover_tests(Test_ArduinoSampleBuffer)
 gtest_discover_tests(Test_ArduinoHardwareLib)
 gtest_discover_tests(Test_ArduinoBoardEdges)
 gtest_discover_tests(Test_ArduinoComponentGuiRegistry)
+gtest_discover_tests(Test_WheeledRobotEdges)
+gtest_discover_tests(Test_HardwareModulesCatalog)
