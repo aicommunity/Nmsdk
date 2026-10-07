@@ -54,4 +54,36 @@ TEST(HardwareModulesCatalog, LoadsAtLeastSeventyModules)
     }
     EXPECT_EQ(QStringLiteral("planned"),
               RDK::UHardwareCatalog::instance().module(QStringLiteral("icm_20948"))->runtime);
+
+    // Wave 0: false hub tags without firmware binding must not remain hub.
+    for (const auto& id : {QStringLiteral("nextion_hmi"), QStringLiteral("sim800l_gsm"),
+                           QStringLiteral("hc_05_bluetooth_classic"),
+                           QStringLiteral("hc_06_bluetooth"),
+                           QStringLiteral("bluetooth_ble_hm_10"),
+                           QStringLiteral("a9g_gsmplusgps")}) {
+        const auto* m = RDK::UHardwareCatalog::instance().module(id);
+        ASSERT_NE(nullptr, m) << id.toStdString();
+        EXPECT_EQ(QStringLiteral("planned"), m->runtime) << id.toStdString();
+    }
+
+    // Invariant: every runtime=hub module has preferredFirmware whose hostPlugin exists
+    // (or preferredFirmware points at a known hub firmware JSON).
+    auto& cat = RDK::UHardwareCatalog::instance();
+    for (const QString& mid : cat.moduleIds()) {
+        const RDK::UHwModuleInfo* m = cat.module(mid);
+        ASSERT_NE(nullptr, m);
+        if (m->runtime != QStringLiteral("hub") && m->runtime != QStringLiteral("motor_hub"))
+            continue;
+        ASSERT_FALSE(m->preferredFirmware.isEmpty())
+            << mid.toStdString() << " hub without preferredFirmware";
+        bool bound = false;
+        for (const QString& fid : m->preferredFirmware) {
+            const RDK::UHwFirmwareInfo* fw = cat.firmware(fid);
+            if (fw && !fw->hostPlugin.isEmpty()) {
+                bound = true;
+                break;
+            }
+        }
+        EXPECT_TRUE(bound) << mid.toStdString() << " hub preferredFirmware missing hostPlugin";
+    }
 }
