@@ -78,10 +78,23 @@ protected:
     {
         if (!learner || !model)
             return false;
-        if (!learner->Build() || !model->Build())
+        const int configuredMode = learner->NormalizationMode.GetData();
+        if (!learner->Build())
             return false;
+        EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
+            << "learner Build changed NormalizationMode";
+        if (!model->Build())
+            return false;
+        EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
+            << "model Build changed NormalizationMode";
         learner->ResetToUntrainedState = true;
-        return model->Reset();
+        if (!model->Reset())
+            return false;
+        EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
+            << "model Reset changed NormalizationMode";
+        EXPECT_FALSE(learner->ResetToUntrainedState.GetData())
+            << "model Reset did not consume ResetToUntrainedState";
+        return true;
     }
 };
 
@@ -128,6 +141,8 @@ TEST_F(TimeLearnerResistanceTest, StructuralColdStartDoesNotApplyParametricRatio
     auto learner = CreateLearner("TimeLearnerStructuralResistance");
     ASSERT_TRUE(learner);
     learner->NormalizationMode = 0;
+    EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0)
+        << "switching to structural mode must clear the parametric-only cap";
     learner->InitialSynapseToMembraneResistanceRatio = 17.0;
     learner->EnableRmaxLengthEscape = true;
     const double baseResistance = learner->SynapseResistanceBase.GetData();
