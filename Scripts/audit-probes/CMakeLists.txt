@@ -30,8 +30,23 @@ target_include_directories(audit_counterexamples PRIVATE "${REPO}/Libraries/Nmsd
 target_link_libraries(audit_counterexamples PRIVATE gtest_main Qt5::Core Qt5::Gui)
 add_test(NAME counterexamples COMMAND audit_counterexamples)
 
+# Compile unchanged Classic and Branch training gate/controller bodies above
+# with adapters; source edits regenerate the probes at configure time.
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  "${REPO}/Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.cpp"
+  "${REPO}/Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.cpp"
+  "${REPO}/Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
+  "${REPO}/Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
+  "${CMAKE_CURRENT_LIST_DIR}/generate_training_core_probes.py")
+execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_LIST_DIR}/generate_training_core_probes.py"
+  "${CMAKE_BINARY_DIR}/training_core_probes.cpp" COMMAND_ERROR_IS_FATAL ANY)
+add_executable(audit_training_core "${CMAKE_BINARY_DIR}/training_core_probes.cpp")
+target_link_libraries(audit_training_core PRIVATE gtest_main)
+add_test(NAME training_core COMMAND audit_training_core)
+
 # Incremental audit of Branch commits daf9c23..9a6cee0.
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  "${REPO}/Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.cpp"
   "${REPO}/Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.cpp"
   "${CMAKE_CURRENT_LIST_DIR}/generate_branch_update_probes.py")
 execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_LIST_DIR}/generate_branch_update_probes.py"
