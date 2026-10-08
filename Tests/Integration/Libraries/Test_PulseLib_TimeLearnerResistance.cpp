@@ -55,7 +55,6 @@ protected:
         if (!learner)
             return learner;
 
-        EXPECT_NE(model->AddComponent(container), ForbiddenId);
         EXPECT_TRUE(model->Default());
         learner->StructureBuildMode = 1;
         learner->NumInputDendrite = 3;
@@ -70,6 +69,8 @@ protected:
         pattern(1, 0) = 0.02;
         pattern(2, 0) = 0.03;
         learner->InputPattern = pattern;
+        EXPECT_TRUE(container->Build());
+        EXPECT_NE(model->AddComponent(container), ForbiddenId);
         return learner;
     }
 
@@ -80,7 +81,7 @@ protected:
         if (!learner->Build() || !model->Build())
             return false;
         learner->ResetToUntrainedState = true;
-        return learner->Reset();
+        return model->Reset();
     }
 };
 
