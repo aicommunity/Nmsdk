@@ -59,6 +59,22 @@ python3 Scripts/audit_timelearner.py --out Docs/Audit/TimeLearner-2026-09-22/aft
 
 Импортирует производственные функции классификации; симулятор не запускает. Вывод: inventory.json, counterexamples.json, stored_metrics.json.
 
+### Фиксированный threshold sweep для готовой Test-модели
+
+`run_fixed_threshold_grid.py` клонирует уже подготовленный каталог `Test`, меняет только фиксированный LTZ threshold и запускает отдельный C++ Console на каждую точку. Обучение и PostTune отключены; скрипт не содержит логики тренера. В уникальном `--output-dir` остаются параметры каждой копии, CSV, хэши и сводка `results.json`. После анализа удаляются только крупные сгенерированные `StatisticLog`/`EventsLog` внутри этих копий.
+
+```bash
+python3 Scripts/audit-probes/run_fixed_threshold_grid.py \
+  --source-test /path/to/prepared/Test \
+  --console "$PWD/Bin/Platform/Linux/NeuroModelerConsole" \
+  --output-dir /path/to/new-unique-run-dir \
+  --analyzer Bin/Configs/SpikeSamples/StructTrain/scripts/selectivity_metrics.py \
+  --thresholds 0.1070,0.1075,0.1080,0.1083,0.1086,0.1089,0.1092,0.1095 \
+  --parallel 8 --time-s 40
+```
+
+Каталог результата должен ещё не существовать. Каждый Console работает в отдельной копии проекта; запускать на машине, предназначенной для экспериментов.
+
 ## Branch update
 
 Цель `audit_branch_update`: FinalizePostTuneMid / HandlePostTuneFinishIteration. После remediation — 8/8 PASS (включая NaN, setup failure, fallback metrics).
