@@ -85,3 +85,16 @@ W3: pa00 TipR stays at ceiling without 1e11↔8.5e10 oscillation under `amp_dt<0
 Keep-PASS не регрессировали. EstDelay PhaseA: `pa00`/`pa01` live L=`49 41 25` (≠97). W3: нет 1e11↔8.5e10 step-down при dt&lt;0@Rmax (hold). Registry apply: один раз после join (снят nested flock deadlock).
 
 Корзины FAIL: см. [SOFTCOLD_CONVERGENCE_AUDIT.ru.md](SOFTCOLD_CONVERGENCE_AUDIT.ru.md) (срез rematrix).
+
+## SoftCold full49 HEAD PARALLEL 49×6 (DONE 2026-10-07→08)
+
+| | |
+|--|--|
+| Console SHA16 | `18f0ef414b1f9c06` |
+| PulseLib | `dc2866a` (anti-bounce + EolGateAudit) |
+| Log | `metrics/SOFTCOLD_full_matrix_20261007.log` |
+| RCS | `_repro/SOFTCOLD_HEAD_rcs.txt` (49/49) |
+| PASS / FAIL | **13 / 36** (тот же PASS-набор, что rematrix) |
+| SNAP | [SOFTCOLD_FULL49_SNAP.md](SOFTCOLD_FULL49_SNAP.md) |
+
+User-override baseline после Open Gaps; AmpNorm DEFERRED не снимался. Registry apply + шапки SHA обновлены.

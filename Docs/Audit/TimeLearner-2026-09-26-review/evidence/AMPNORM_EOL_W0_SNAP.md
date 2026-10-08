@@ -3,6 +3,8 @@
 Источник: локальный `metrics/SOFTCOLD_full_matrix.log` (не в git) + `SOFTCOLD_HEAD_rcs.txt`.  
 Дата извлечения: 2026-10-03. Полный slog — вне git (evidence policy).
 
+**Актуальный full49 HEAD SNAP (2026-10-08):** [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md) — 13/36, D=20 E=6 B=4 A=3 N=1 G=2. Ниже — исторический W0 baseline.
+
 **Инвариант W0:** критерии Done не менялись на этапе извлечения; таблица = baseline до W1–W3.
 
 ## Сводка корзин

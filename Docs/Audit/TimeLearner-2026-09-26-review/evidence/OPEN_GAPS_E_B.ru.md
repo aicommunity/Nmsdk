@@ -61,4 +61,6 @@ Diagnostic: `OPEN_GAPS_W0_focused_manifest.txt` / remain6 → `metrics/OPEN_GAPS
 
 ## Итог E/B Open Gaps
 
-Предикаты **названы** (E1/E3/B4/N). C++ AmpNorm controller **не** расширяли; только EolGateAudit PeakSeen/BestEffort (лог). Full 49 закрыт. Follow-up: дождаться `OPEN_GAPS_W0` END → обновить SNAP; E1/E3 policy plan отдельно; B4 retest `br25_preinh`+keep `br50_gen`.
+Предикаты **названы** (E1/E3/B4/N). C++ AmpNorm controller **не** расширяли; только EolGateAudit PeakSeen/BestEffort (лог).
+
+**Full49 HEAD (2026-10-08):** E-корзина SNAP = `fs50_preinh`, `asym100_gen`, `ltz100_gen`, `ltz25_gen`, `fs100_gen`, `br25_preinh` (TipR@Rmin/canon FAIL). `br25_preinh` на full49 — TipR@Rmin (не mid B4). Branch B: `br480_*` + `ltz25_preinh`. DEFERRED E1/E3 **не** снят. См. [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md).

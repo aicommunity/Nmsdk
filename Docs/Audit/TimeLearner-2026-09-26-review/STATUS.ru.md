@@ -1,6 +1,17 @@
 # Статус аудита TimeLearner Cold 2026-09-26
 
-Дата обновления: 2026-10-01 (follow-up remediations W0–W6).
+Дата обновления: 2026-10-08 (SoftCold full49 HEAD).
+
+## SoftCold full49 HEAD (2026-10-07/08)
+
+| | |
+|--|--|
+| Результат | **49/49 DONE · 13 PASS / 36 FAIL** |
+| Console / PulseLib | `18f0ef414b1f9c06` / `dc2866a` · PARALLEL=6 |
+| RCS / LOG | [`SOFTCOLD_HEAD_rcs.txt`](../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · [`metrics/SOFTCOLD_full_matrix_20261007.log`](evidence/metrics/SOFTCOLD_full_matrix_20261007.log) |
+| SNAP / аудит | [`SOFTCOLD_FULL49_SNAP.md`](evidence/SOFTCOLD_FULL49_SNAP.md) · [`SOFTCOLD_CONVERGENCE_AUDIT.ru.md`](evidence/SOFTCOLD_CONVERGENCE_AUDIT.ru.md) |
+| Корзины FAIL | D=20 · E=6 · B=4 · A=3 · N=1 · G=2 |
+| Примечание | PASS-набор = rematrix 2026-10-05; AmpNorm DEFERRED не снимался |
 
 ## SoftCold / AmpNorm (закрытые кампании)
 

@@ -5,6 +5,8 @@
 Fix tag: `softcold_fix=2026-09-27_sbm2_strip_tip1`.  
 Console: `ec86430e…`.
 
+> Указатель 2026-10-08: актуальный SoftCold full49 HEAD = **13 PASS / 36 FAIL** — [SOFTCOLD_CONVERGENCE_AUDIT.ru.md](SOFTCOLD_CONVERGENCE_AUDIT.ru.md) / [SOFTCOLD_FULL49_SNAP.md](SOFTCOLD_FULL49_SNAP.md). Ниже — история кампании fix→retest.
+
 ## Вердикт по целям плана
 
 | Цель плана | Итог | Комментарий |
