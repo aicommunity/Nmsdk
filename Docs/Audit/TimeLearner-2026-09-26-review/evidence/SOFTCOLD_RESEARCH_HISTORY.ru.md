@@ -154,6 +154,17 @@ flowchart LR
 | Эксперименты | **49/49 · 13 PASS / 36 FAIL** — PASS-набор = rematrix; AmpNorm DEFERRED не снимался |
 | Итог | Новый HEAD baseline зафиксирован; **нет** прироста PASS vs rematrix |
 
+### 13. Rs/Rm-предел и выборочная D-перепроверка на текущем C++-срезе
+
+| | |
+|--|--|
+| Отчёт | [`RSRM_D_RETEST_2026-10-08.ru.md`](RSRM_D_RETEST_2026-10-08.ru.md) |
+| База | root `0246f1f`, Bin `f04faa3`, PulseLib `d1344cb`; Linux Console SHA записан в отчёте и evidence bundle |
+| Выборка | 9 SoftCold cases + диагностические па00-варианты; отдельный gate-only повтор pa00 с правильным `span_ms=480` |
+| Train | Основные `D_algo_open` cases `pa00`, `phase6_480`, `phase6_thr_only`, `tn_classic` финализировались с `Need=0`; gate-исходы оценены отдельно |
+| Ограничение | Низкий Rs/Rm cap и ослабление `ResistanceMin` приводят к ожидаемому C++-отказу на Rmax; это не доказательство невозможности решения |
+| Структурный режим | Rs/Rm cold init, вычисленный cap и W3 изолированы; Classic/Branch проверки прошли тела тестов |
+
 ---
 
 ## Сводка «планка → Cold PASS»

@@ -1,6 +1,8 @@
 # D-кейсы: масштаб паттерна, задержка сегмента и MaxDendriteLength
 
-Дата проверки: 2026-10-08. Это разбор исходников, текущих XML и сохранённых инструментированных D-прогонов; новая матрица обучения в этой проверке не запускалась. Основная хронология и более ранние ретесты — в [`AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md`](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md), [`TIMING_SPAN_MISMATCH.ru.md`](TIMING_SPAN_MISMATCH.ru.md), [`PHASE6_ESTDELAY_FIX.ru.md`](PHASE6_ESTDELAY_FIX.ru.md) и [`PHASEA_PSI_ESTDELAY_FIX.ru.md`](PHASEA_PSI_ESTDELAY_FIX.ru.md).
+Исходная проверка от 2026-10-08 была разбором исходников и сохранённых трасс без новой матрицы. После неё выполнена выборочная серверная перепроверка: [`RSRM_D_RETEST_2026-10-08.ru.md`](RSRM_D_RETEST_2026-10-08.ru.md). Она меняет текущую классификацию четырёх основных `D_algo_open`: на зафиксированном новом срезе Train завершился с `Need=0`, а оставшиеся FAIL относятся к quality/detection или к незавершённой проверке gate. Старые трассы ниже остаются историческими и не подменяются новым результатом.
+
+Основная ранняя хронология и ретесты — в [`AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md`](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md), [`TIMING_SPAN_MISMATCH.ru.md`](TIMING_SPAN_MISMATCH.ru.md), [`PHASE6_ESTDELAY_FIX.ru.md`](PHASE6_ESTDELAY_FIX.ru.md) и [`PHASEA_PSI_ESTDELAY_FIX.ru.md`](PHASEA_PSI_ESTDELAY_FIX.ru.md).
 
 ## Вывод
 
