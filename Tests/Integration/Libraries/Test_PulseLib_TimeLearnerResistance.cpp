@@ -56,6 +56,7 @@ protected:
             return learner;
 
         EXPECT_NE(model->AddComponent(container), ForbiddenId);
+        EXPECT_TRUE(model->Default());
         learner->StructureBuildMode = 1;
         learner->NumInputDendrite = 3;
         learner->MaxDendriteLength = 10;
@@ -76,9 +77,7 @@ protected:
     {
         if (!learner || !model)
             return false;
-        if (!learner->Build())
-            return false;
-        if (!model->Default() || !model->Build())
+        if (!learner->Build() || !model->Build())
             return false;
         return model->Reset();
     }
@@ -90,8 +89,8 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartUsesTargetRmAndDerivedCeili
     ASSERT_TRUE(learner);
     learner->NormalizationMode = 1;
     learner->InitialSynapseToMembraneResistanceRatio = 2.0;
-    learner->MaxSynapseToMembraneResistanceRatio = 1000.0;
     ASSERT_TRUE(BuildAndReset(learner));
+    ASSERT_EQ(learner->NumInputDendrite.GetData(), 3);
 
     auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
     ASSERT_TRUE(neuron);
@@ -128,7 +127,6 @@ TEST_F(TimeLearnerResistanceTest, StructuralColdStartDoesNotApplyParametricRatio
     ASSERT_TRUE(learner);
     learner->NormalizationMode = 0;
     learner->InitialSynapseToMembraneResistanceRatio = 17.0;
-    learner->MaxSynapseToMembraneResistanceRatio = 3.0;
     learner->EnableRmaxLengthEscape = true;
     const double baseResistance = learner->SynapseResistanceBase.GetData();
     ASSERT_TRUE(BuildAndReset(learner));
