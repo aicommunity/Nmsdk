@@ -30,7 +30,6 @@ protected:
         ASSERT_TRUE(environment);
         ASSERT_TRUE(storage->CheckClass("NNeuronTimeLearner"));
         ASSERT_TRUE(environment->CreateModel("NModel"));
-        environment->ModelInit();
         model = environment->GetModel();
         ASSERT_TRUE(model);
     }
@@ -87,10 +86,11 @@ protected:
             return false;
         EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
             << "model Build changed NormalizationMode";
+        // The fixture adds the learner after creating the model. Initialize
+        // the completed component tree before requesting its cold reset.
+        model->Init();
         learner->ResetToUntrainedState = true;
         if (!model->Reset())
-            return false;
-        if (!learner->Reset())
             return false;
         EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
             << "model Reset changed NormalizationMode";
