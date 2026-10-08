@@ -1,16 +1,16 @@
 # Статус аудита TimeLearner Cold 2026-09-26
 
-Дата обновления: 2026-10-08 (SoftCold full49 HEAD).
+Дата обновления: 2026-10-08 (C++ probes и уточнённая Test-сетка `br25_on`).
 
 ## Повторная диагностическая выборка (2026-10-08)
 
 Выполнена на отдельном checkout и Linux Console с read-only C++ audit: два положительных контроля и семь выбранных случаев; full49 не повторялась. Отчёт с раздельными полями **сходимость тренера / PostTune-разделимость / детекция на Test**, доказательствами и планом продолжения: [REPEAT_CHECK_RESULT.ru.md](evidence/REPEAT_CHECK_RESULT.ru.md).
 
-Ключевое различие: C++ может штатно завершить обучение (`Need=0`, `TrainingPhase=Done`) с `PostTuneResult=NonSeparable`; это не одно и то же, что отсутствие сходимости. Два PASS-контроля прошли Test gate, несмотря на `NonSeparable` в тренировочном PostTune. Три D-кейса остановлены примерно через 15 минут при `Need=1`, поэтому их дальнейший исход не установлен.
+Ключевое различие: C++ может штатно завершить обучение (`Need=0`, `TrainingPhase=Done`) с `PostTuneResult=NonSeparable`; это не одно и то же, что отсутствие сходимости. Два PASS-контроля прошли Test gate, несмотря на `NonSeparable` в тренировочном PostTune. Три D-кейса остановлены примерно через 15 минут при `Need=1`, поэтому их дальнейший исход не установлен. C++ probes дополнительно собраны и пройдены на удалённом Linux; результаты: [CPP_AUDIT_PROBE_BUILD.ru.md](evidence/CPP_AUDIT_PROBE_BUILD.ru.md).
 
 ## Повторная классификация full49 и `br25_on` threshold sweep (2026-10-08)
 
-49/49 исторических bundles сопоставлены с provenance и финальными Train/Test артефактами: 26 не достигли PostTune (`Need=1` в лимите), 8 CanonRmin-моделей сошлись, но не прошли quality/detection, отдельно классифицированы 1 Keep и 1 Search/revert FAIL; 12 стандартных PASS и 1 отдельный SoftColdOff PASS. Восьмиточечный C++ threshold sweep готового `br25_on` не нашёл маску `10000000`; цель теряется при пороге, на котором ещё firing два foil. Полный разбор, все категории и ограничения вывода: [SOFTCOLD_FULL49_RECLASSIFICATION.ru.md](evidence/SOFTCOLD_FULL49_RECLASSIFICATION.ru.md).
+49/49 исторических bundles сопоставлены с provenance и финальными Train/Test артефактами: 26 не достигли PostTune (`Need=1` в лимите), 8 CanonRmin-моделей сошлись, но не прошли quality/detection, отдельно классифицированы 1 Keep и 1 Search/revert FAIL; 12 стандартных PASS и 1 отдельный SoftColdOff PASS. Для готового `br25_on` C++ threshold sweep расширен до 29 точек с шагом `1e-5`; target-only маска `10000000` не найдена, даже при компромиссе `2` ложных срабатывания цель теряется. См. [BR25_ON_THRESHOLD_REFINE.ru.md](evidence/BR25_ON_THRESHOLD_REFINE.ru.md), полный разбор full49 — [SOFTCOLD_FULL49_RECLASSIFICATION.ru.md](evidence/SOFTCOLD_FULL49_RECLASSIFICATION.ru.md).
 
 ## SoftCold full49 HEAD (2026-10-07/08)
 
