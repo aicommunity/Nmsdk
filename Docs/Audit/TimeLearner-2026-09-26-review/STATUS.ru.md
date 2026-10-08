@@ -8,6 +8,10 @@
 
 Ключевое различие: C++ может штатно завершить обучение (`Need=0`, `TrainingPhase=Done`) с `PostTuneResult=NonSeparable`; это не одно и то же, что отсутствие сходимости. Два PASS-контроля прошли Test gate, несмотря на `NonSeparable` в тренировочном PostTune. Три D-кейса остановлены примерно через 15 минут при `Need=1`, поэтому их дальнейший исход не установлен.
 
+## Повторная классификация full49 и `br25_on` threshold sweep (2026-10-08)
+
+49/49 исторических bundles сопоставлены с provenance и финальными Train/Test артефактами: 26 не достигли PostTune (`Need=1` в лимите), 8 CanonRmin-моделей сошлись, но не прошли quality/detection, отдельно классифицированы 1 Keep и 1 Search/revert FAIL; 12 стандартных PASS и 1 отдельный SoftColdOff PASS. Восьмиточечный C++ threshold sweep готового `br25_on` не нашёл маску `10000000`; цель теряется при пороге, на котором ещё firing два foil. Полный разбор, все категории и ограничения вывода: [SOFTCOLD_FULL49_RECLASSIFICATION.ru.md](evidence/SOFTCOLD_FULL49_RECLASSIFICATION.ru.md).
+
 ## SoftCold full49 HEAD (2026-10-07/08)
 
 | | |
