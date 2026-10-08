@@ -3,6 +3,8 @@
 Дата: 2026-10-06.  
 Срез до фикса: SoftCold rematrix PARALLEL 13 PASS / 36 FAIL · Console `8589daff…` · PulseLib `b32d715` (W3 hold).
 
+**Актуальная проверка масштаба D-кейсов (2026-10-08):** [`D_CASES_TIMESCALE_INVESTIGATION.ru.md`](D_CASES_TIMESCALE_INVESTIGATION.ru.md) сопоставляет `InputPattern`, `EstDelayPerSeg`, RC-параметры сегментов, `MaxDendriteLength` и сохранённые итерационные трассы. Она отделяет старый default-5ms случай (`L≈97/100`) от остаточного `Rmax + amp overshoot + рассинхронизации` после калибровки (`Need=1`).
+
 ## Физика
 
 `amp_dt = Initial − MaxAmp`. При TipR@ResistanceMax и `amp_dt < 0` (overshoot) R поднять нельзя. Down-step усиливает amp → re-climb → осцилляция `1e11↔0.85·Rmax` (снята W3 hold). Hold без DOF → ceiling freeze / Need=1 (корзина D).
