@@ -119,9 +119,11 @@ W3c arming (`RmaxOvershootLengthGrow`) жил только внутри `ready_f
 
 **Inv3 (`asym50` Need=1 polls):** финальный Train XML **Need=0** + TipR canon; Test flag landscape_ok=1 mid=cpp. Polls `Need=1 flag=1` = autosave lag до flush. SoftCold **PASS** (accept_run). Keep **8/8**. Не регресс anti-bounce.
 
-**Условный фикс:** нет доказанного impl-bug AmpNorm/hold → **код не трогали**. Full 49 / registry **закрыты**.
+**Условный фикс:** нет доказанного impl-bug AmpNorm/hold → **код не трогали**.
 
-Ворота full 49: **закрыты**. Следующая AmpNorm-итерация: algo для `D_algo_open` (как получить `dt≥0` @Rmax при L&lt;MaxL без TipR-down на overshoot) и отдельный param-policy для `D_objective` — не registry.
+**Full49 baseline (user override 2026-10-07/08):** SoftCold **13 PASS / 36 FAIL** на Console `18f0ef41…` / PulseLib `dc2866a` — [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md). Registry обновлён. **`D_algo_open` / E1–E3 по-прежнему DEFERRED** (матрица не открывает AmpNorm-фикс).
+
+Следующая AmpNorm-итерация: algo для `D_algo_open` (как получить `dt≥0` @Rmax при L&lt;MaxL без TipR-down на overshoot) и отдельный param-policy для `D_objective`.
 
 ## Вне скоупа
 

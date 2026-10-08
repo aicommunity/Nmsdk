@@ -1,10 +1,10 @@
 # SoftCold full matrix — аудит сходимости обучения
 
-**Срез (актуальный):** SoftCold rematrix PARALLEL **49×6** · **DONE** 2026-10-05T09:17Z→2026-10-05T22:12Z (apply 2026-10-06T05:15Z).  
-**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · log `metrics/SOFTCOLD_full_matrix_parallel.log`.  
-**Console SHA16:** `8589daff6d131c9b` · **PulseLib:** `b32d715` (RmaxDwell escape только при dt≥0) · harness `--autosave-model-s 10` · `PARALLEL=6`.
+**Срез (актуальный):** SoftCold full49 HEAD PARALLEL **49×6** · **DONE** 2026-10-07T17:22Z→2026-10-08T01:21Z (apply в том же join).  
+**RC:** [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · log [`metrics/SOFTCOLD_full_matrix_20261007.log`](metrics/SOFTCOLD_full_matrix_20261007.log) · SNAP [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md).  
+**Console SHA16:** `18f0ef414b1f9c06` · **PulseLib:** `dc2866a` (anti-bounce hold + EolGateAudit) · harness `--autosave-model-s 10` · `PARALLEL=6` (запрос 8, clamp по диску 149→145 GiB).
 
-Предыдущий срез 2026-10-03 (8/41) и partial W4 — архив; PASS W4 **не** входят в финал.
+Предыдущий rematrix 2026-10-05 (`8589daff…` / `b32d715`, тоже **13/36**) — архив сравнения; partial W4 не в финале.
 
 **Назначение:** систематизировать SoftCold FAIL с фокусом на **сходимость Train** (Need / TipR / EOL).
 
@@ -12,38 +12,36 @@
 
 ---
 
-## 1. Сводка матрицы (rematrix PARALLEL, финал)
+## 1. Сводка матрицы (full49 HEAD, финал)
 
 | | |
 |--|--|
 | Закрыто | **49 / 49** |
 | PASS / FAIL | **13 / 36** |
-| Статус очереди | **DONE** (`phase6_480` последний Train; RCS merge + registry apply) |
-| Оркестратор | `scripts/softcold_full_matrix_parallel.sh` (rcs.d shards → merge → apply) |
+| Статус очереди | **DONE** (RCS merge + registry apply) |
+| Оркестратор | `scripts/softcold_full_matrix_parallel.sh` (rcs.d → merge → apply) |
 
 **PASS (cold Train сошёлся + gate):**  
 `asym50_preinh`, `asym25_preinh`, `asym50`, `br25_off`, `fs25_gen`, `br50_gen`, `br100_preinh`, `br25_nextseg`, `br50_preinh`, `fs100_preinh`, `fs25_preinh`, `asym100_preinh`, `ltz50_gen`.
 
-**Дельта vs 2026-10-03 (8 PASS):** +`br25_off` (expect_fires SoftColdOff), +`fs25_gen`/`fs25_preinh`/`fs100_preinh`, +`asym100_preinh`. Keep-якоря (`asym50`, `ltz50_gen`, `br50_gen`, `fs25_gen`) зелёные. EstDelay PhaseA: live L=`49 41 25` на `pa*` (≠`97 81 49`); TipR всё ещё ceiling → корзина **D**.
+**Дельта vs rematrix 2026-10-05:** тот же набор **13 PASS** (keep живы). TipR ceiling PhaseA/PSI/Phase6 → **D=20**. Open Gaps DEFERRED (E1/E3, `D_algo_open`) не снимались этим прогоном.
 
 ---
 
-## 2. Таксономия FAIL (сходимость, срез rematrix)
+## 2. Таксономия FAIL (сходимость, срез full49 HEAD)
 
-Класс по `tipr_final` / provenance `tipr_class` + `failure_class` последнего run на SHA `8589daff…`.
+Класс по `tipr_final` / provenance на SHA `18f0ef41…` — см. [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md).
 
 | ID | Корзина | Критерий | # | Слой |
 |----|---------|----------|---|------|
-| **D** | TipR ceiling freeze @Rmax | ≥1 dend → `1e11`; Need=1; `amp_dt&lt;0` hold | **20** | **C++** W3c: length-grow DOF ([AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md)) |
-| **E_algo** | TipR partial Rmin, **Need=1** | Branch partial (`br480_nextseg`/`tiprmin`) | **2** | Branch EOL (отложено) |
-| **E_gate** | TipR@Rmin canon, Train done, gate/Landscape | Need→0; LandscapeOk=0 / silent mid | **6** | **объективно** (`asym100_gen`, `ltz100_gen`, `ltz25_gen`, `fs100_gen`, `br25_preinh`, + overlap C) — **не** AmpNorm EOL |
-| **B** | mid-band TipR, Need=1 | mid вне Rmin/Rmax | **1** (`ltz25_preinh`) | R-control / budget |
-| **A** | TipR flat LastR | `8.6e7×4` | **3** | протокол (`asym25`, nextseg) |
-| **C** | TipR canon + gate_fail | metrics/Landscape | **1** (`fs50_preinh`) | §4 не ослаблять |
-| **N** | NonSeparable mid | LandscapeOk=0 @Rmin | **1** (`br25_on`) | объективно |
-| **G** | Keep/Search TipRMode | не CanonRmin | **2** | режим/протокол |
+| **D** | TipR ceiling @Rmax | ≥1 dend → `1e11` | **20** | `D_algo_open` DEFERRED / D_objective follow-up |
+| **E** | TipR@Rmin / canon, SoftCold FAIL | Need≠0 или gate | **6** | E1/E3 DEFERRED + E_gate (`fs50_preinh`, `asym100_gen`, `ltz100_gen`, `ltz25_gen`, `fs100_gen`, `br25_preinh`) |
+| **B** | mid / Branch partial | mid TipR Need=1 | **4** | `br480_*`, `ltz25_preinh` |
+| **A** | TipR flat LastR | `8.6e7×4` | **3** | `asym25`, `br50_nextseg`, `br100_nextseg` |
+| **N** | NonSeparable | LandscapeOk=0 | **1** | `br25_on` |
+| **G** | Keep/Search TipRMode | не CanonRmin | **2** | `br100_keep`, `br100_search` |
 
-**Подсчёт FAIL:** D=20 + E_algo=2 + E_gate≈5–6 + B=1 + A=3 + C=1 + N=1 + G=2 ≈ **36** (+13 PASS). Старая «E=8» смешивала gate/Landscape с Need=1 — для волны D чинить только D (+ EstDelay gaps); E_gate/N/C/A/G вне скоупа.
+**Подсчёт FAIL:** 20+6+4+3+1+2 = **36** (+13 PASS). LandscapeOk / Acc / fires **не** ослаблять.
 
 ### 2.1 По семействам (rematrix)
 
@@ -207,19 +205,18 @@ W0 SNAP назвал предикаты (**E1** length/sync @Rmin; **E3** oversh
 
 ## 7. Однострочный вердикт
 
-> Финал **41 FAIL / 8 PASS** подтверждён RCS. Симптомы D=22, E=6, B=7 (35 кейсов) указывают на приоритет проверки PulseLib R-control/EOL, но без полного SNAP/trace не доказывают для всех этих кейсов единую C++-причину. Остальные корзины: A=3, C=1, G=2; `br25_on` — пересекающийся E+NonSeparable, не отдельный дополнительный кейс.
+> Full49 HEAD **13 PASS / 36 FAIL** (как rematrix 2026-10-05). Anti-bounce + EolGateAudit не изменили PASS-набор; D=20 ceiling остаётся; E@Rmin и Branch B/N/G/A — как Open Gaps / Proto. SNAP: [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md).
 
 ---
 
-## 8. Чеклист обновления после 49/49
+## 8. Чеклист обновления после 49/49 (full49 HEAD)
 
-- [x] Пересчитать §1 из финального `SOFTCOLD_HEAD_rcs.txt` → **8/41**
-- [x] Добавить `phase6_preinh250`, `tn_classic`, `phase6_480` в §4 (все **D**)
-- [x] Новых PASS в хвосте нет — список из 8 канонов стабилен
-- [x] Классификатор был прогнан во время матрицы (по отчёту автора); полный исходный лог не приложен и независимо не воспроизводится из текущего checkout
-- [x] Сверить числа с RCS/manifest: D=22 с `ltz25_preinh`; G=2 (`br100_keep`, `br100_search`); N — overlap
-- [ ] Синхронизировать краткий вердикт в [SOFTCOLD_FAIL_BOUNDS.ru.md](SOFTCOLD_FAIL_BOUNDS.ru.md) / STATUS (по желанию)
-- [ ] При P0-фиксе — отдельный retest-якорь: `fs25_gen`, `asym100_gen`, `ltz50_gen` (keep PASS)
+- [x] Пересчитать §1 из финального `SOFTCOLD_HEAD_rcs.txt` → **13/36**
+- [x] SNAP 49× [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md)
+- [x] Корзины D=20 E=6 B=4 A=3 N=1 G=2; PASS list = rematrix
+- [x] Registry apply + шапки SHA Console `18f0ef41…` / PulseLib `dc2866a`
+- [x] STATUS / FAIL_BOUNDS / Open Gaps sync
+- [ ] AmpNorm DEFERRED (E1/E3, `D_algo_open`) — отдельный план, не эта матрица
 
 ---
 

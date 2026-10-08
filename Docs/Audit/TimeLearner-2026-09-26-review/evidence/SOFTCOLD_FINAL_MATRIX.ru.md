@@ -1,5 +1,7 @@
 # SoftCold final matrix — follow-up W0–W6 (2026-10-01)
 
+> **Актуальный SoftCold full49 HEAD (2026-10-07/08):** **13 PASS / 36 FAIL** — см. [`SOFTCOLD_CONVERGENCE_AUDIT.ru.md`](SOFTCOLD_CONVERGENCE_AUDIT.ru.md) и [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md). Ниже — исторический closeout W0–W6 (0 SoftCold PASS), не путать с HEAD rematrix.
+
 ## Базовая матрица 37 RC
 
 Источник: [`SOFTCOLD_DEFER_rcs_after_softcold_fix.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_DEFER_rcs_after_softcold_fix.txt)  

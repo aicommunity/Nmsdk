@@ -52,3 +52,5 @@ Train AmpNorm/EOL **не** главный блокер. Примеры семе�
 ## Итог Proto
 
 Эти корзины **документированы как объяснённые / вне AmpNorm E/B fix**. C++ TimeLearner не менять ради них в Open Gaps волне.
+
+**Full49 HEAD:** N=`br25_on`, A=`asym25`+nextseg, G=`br100_keep/search` подтверждены в [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md).
