@@ -9,6 +9,7 @@
 
 #include "../../../Libraries/Rdk-HardwareLib/Core/Catalog/UHardwareCatalog.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Catalog/UHardwareCatalogPaths.h"
+#include "HardwareTestPaths.h"
 
 namespace {
 
@@ -26,10 +27,7 @@ void EnsureQtApp()
 TEST(HardwareModulesCatalog, LoadsAtLeastSeventyModules)
 {
     EnsureQtApp();
-    if (qgetenv("NMSDK_SOURCE_DIR").isEmpty())
-        qputenv("NMSDK_SOURCE_DIR", QByteArray("/home/user/Nmsdk"));
-    if (qgetenv("NMSDK_ROOT").isEmpty())
-        qputenv("NMSDK_ROOT", QByteArray("/home/user/Nmsdk"));
+    HardwareTestPaths::ensureCatalogEnvironment(__FILE__);
 
     RDK::UHardwareCatalog::instance().unload();
     QString err;

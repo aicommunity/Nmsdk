@@ -72,7 +72,7 @@ TEST(NmsdkMotorHubPluginDual, PinMap0x21DualChannel)
     CapturingHost host;
     RDK::UNmsdkMotorHubProtocolPlugin plugin;
     QByteArray p;
-    // A: dir12 pwm3 brake9 sense0 | B: dir13 pwm11 brake8 sense1
+    // V1 compatibility: A(dir12,pwm3,brake9,sense0) B(dir13,pwm11,brake8,sense1)
     const uint8_t pins[8] = {12, 3, 9, 0, 13, 11, 8, 1};
     for (uint8_t b : pins)
         p.append(char(b));
@@ -81,4 +81,34 @@ TEST(NmsdkMotorHubPluginDual, PinMap0x21DualChannel)
     EXPECT_FLOAT_EQ(3.f, host.Named.value(QStringLiteral("left_pin_pwm")));
     EXPECT_FLOAT_EQ(13.f, host.Named.value(QStringLiteral("right_pin_dir")));
     EXPECT_FLOAT_EQ(11.f, host.Named.value(QStringLiteral("right_pin_pwm")));
+}
+
+TEST(NmsdkMotorHubPluginDual, ExtendedPinMapCarriesDir2AndEnable)
+{
+    EnsureQtApp();
+    CapturingHost host;
+    RDK::UNmsdkMotorHubProtocolPlugin plugin;
+    const uint8_t pins[12] = {2, 4, 5, 255, 255, 255, 7, 8, 6, 255, 255, 255};
+    QByteArray payload;
+    for (uint8_t pin : pins)
+        payload.append(char(pin));
+
+    plugin.onBinaryFrame(&host, 0x21, payload);
+    EXPECT_FLOAT_EQ(2.f, host.Named.value(QStringLiteral("pin_dir")));
+    EXPECT_FLOAT_EQ(4.f, host.Named.value(QStringLiteral("pin_dir2")));
+    EXPECT_FLOAT_EQ(5.f, host.Named.value(QStringLiteral("pin_pwm")));
+    EXPECT_FLOAT_EQ(-1.f, host.Named.value(QStringLiteral("pin_enable")));
+    EXPECT_FLOAT_EQ(7.f, host.Named.value(QStringLiteral("pin_dir_b")));
+    EXPECT_FLOAT_EQ(8.f, host.Named.value(QStringLiteral("pin_dir2_b")));
+    EXPECT_FLOAT_EQ(6.f, host.Named.value(QStringLiteral("pin_pwm_b")));
+    EXPECT_TRUE(host.Ready);
+}
+
+TEST(NmsdkMotorHubPluginDual, NegotiationDoesNotOverrideConfiguredWatchdog)
+{
+    EnsureQtApp();
+    CapturingHost host;
+    RDK::UNmsdkMotorHubProtocolPlugin plugin;
+    plugin.negotiate(&host, 2);
+    EXPECT_EQ(QStringList{QStringLiteral("PROTO 2")}, host.Commands);
 }
