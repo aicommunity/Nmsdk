@@ -219,3 +219,7 @@ flowchart LR
 | [cold_follow-up_…](plans/cold_follow-up_remediations_efe00c4b.plan.md) | W0–W6 |
 | [registry_protocol_…](plans/registry_protocol_clarity_541cfa97.plan.md) | Working vs SoftCold |
 | [cold_audit_fixes_…](plans/cold_audit_fixes_e6d3a0e9.plan.md) | Исходный cold audit |
+
+### Уточнение после выборочной проверки Rs/Rm (2026-10-08)
+
+`ResistanceMin` переведён из абсолютного параметра в вычисляемое состояние по нижнему отношению `Rs/Rm`. Обоснование по эффективному диапазону рисунка 2 статьи Бахшиева и Романова, формулы для общей пары границ и влияние на старые XML: [RSRM_MIN_RATIO_FOLLOWUP_2026-10-08.ru.md](RSRM_MIN_RATIO_FOLLOWUP_2026-10-08.ru.md). Исторические результаты выше относятся к прежнему абсолютному нижнему пределу и не являются повторной проверкой новой политики.

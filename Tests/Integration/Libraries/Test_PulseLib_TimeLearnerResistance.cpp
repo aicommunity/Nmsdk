@@ -154,6 +154,7 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartUsesTargetRmAndDerivedCeili
     ASSERT_GE(tips.size(), 2u);
 
     double minRm = std::numeric_limits<double>::max();
+    double maxRm = 0.0;
     for (int i = 0; i < 2; ++i)
     {
         const std::string membraneName = "Dendrite" + std::to_string(i + 1) + "_1";
@@ -167,6 +168,7 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartUsesTargetRmAndDerivedCeili
             : channel->Resistance.GetData();
         ASSERT_GT(rm, 0.0);
         minRm = std::min(minRm, rm);
+        maxRm = std::max(maxRm, rm);
         const double expectedRs = std::max(learner->ResistanceMin.GetData(), rm * 2.0);
         EXPECT_NEAR(tips[static_cast<size_t>(i)], expectedRs,
                     std::max(1e-6, expectedRs * 1e-9));
@@ -174,6 +176,8 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartUsesTargetRmAndDerivedCeili
 
     EXPECT_NEAR(learner->ResistanceMax.GetData(), minRm * 1000.0,
                 std::max(1e-6, minRm * 1e-6));
+    EXPECT_NEAR(learner->ResistanceMin.GetData(), maxRm / 1000.0,
+                std::max(1e-6, maxRm * 1e-9));
     EXPECT_FALSE(learner->EnableRmaxLengthEscape.GetData());
 }
 
@@ -184,6 +188,8 @@ TEST_F(TimeLearnerResistanceTest, StructuralColdStartDoesNotApplyParametricRatio
     learner->NormalizationMode = 0;
     EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0)
         << "switching to structural mode must clear the parametric-only cap";
+    EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0)
+        << "switching to structural mode must clear the parametric-only floor";
     learner->InitialSynapseToMembraneResistanceRatio = 17.0;
     learner->EnableRmaxLengthEscape = true;
     const double baseResistance = learner->SynapseResistanceBase.GetData();
@@ -192,9 +198,30 @@ TEST_F(TimeLearnerResistanceTest, StructuralColdStartDoesNotApplyParametricRatio
     const auto tips = learner->TipSynapseResistance.GetData();
     ASSERT_GE(tips.size(), 2u);
     EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0);
+    EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0);
     EXPECT_DOUBLE_EQ(learner->SynapseResistanceBase.GetData(), baseResistance);
     EXPECT_DOUBLE_EQ(tips[0], baseResistance);
     EXPECT_DOUBLE_EQ(tips[1], baseResistance);
+}
+
+TEST_F(TimeLearnerResistanceTest, ResistanceRatioMustBeAtLeastOne)
+{
+    auto classic = CreateLearner("TimeLearnerRatioBoundary");
+    ASSERT_TRUE(classic);
+    EXPECT_FALSE(classic->SetMaxSynapseToMembraneResistanceRatio(0.999));
+    EXPECT_TRUE(classic->SetMaxSynapseToMembraneResistanceRatio(1.0));
+    classic->MaxSynapseToMembraneResistanceRatio = 1.0;
+    EXPECT_DOUBLE_EQ(classic->MaxSynapseToMembraneResistanceRatio.GetData(), 1.0);
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchResistanceRatioMustBeAtLeastOne)
+{
+    auto branch = CreateBranchLearner("TimeLearnerBranchRatioBoundary");
+    ASSERT_TRUE(branch);
+    EXPECT_FALSE(branch->SetMaxSynapseToMembraneResistanceRatio(0.999));
+    EXPECT_TRUE(branch->SetMaxSynapseToMembraneResistanceRatio(1.0));
+    branch->MaxSynapseToMembraneResistanceRatio = 1.0;
+    EXPECT_DOUBLE_EQ(branch->MaxSynapseToMembraneResistanceRatio.GetData(), 1.0);
 }
 
 TEST_F(TimeLearnerResistanceTest, BranchParametricColdStartUsesTargetRmAndDerivedCeiling)
@@ -224,6 +251,8 @@ TEST_F(TimeLearnerResistanceTest, BranchParametricColdStartUsesTargetRmAndDerive
     EXPECT_NEAR(tips[1], expectedRs, std::max(1e-6, expectedRs * 1e-9));
     EXPECT_NEAR(learner->ResistanceMax.GetData(), rm * 1000.0,
                 std::max(1e-6, rm * 1e-6));
+    EXPECT_NEAR(learner->ResistanceMin.GetData(), rm / 1000.0,
+                std::max(1e-6, rm * 1e-9));
 }
 
 TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartDoesNotApplyParametricRatios)
@@ -233,6 +262,8 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartDoesNotApplyParametri
     learner->NormalizationMode = 0;
     EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0)
         << "switching to structural mode must clear the parametric-only cap";
+    EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0)
+        << "switching to structural mode must clear the parametric-only floor";
     learner->InitialSynapseToMembraneResistanceRatio = 17.0;
     learner->EnableRmaxLengthEscape = true;
     const double baseResistance = learner->SynapseResistanceBase.GetData();
@@ -241,6 +272,7 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartDoesNotApplyParametri
     const auto tips = learner->TipSynapseResistance.GetData();
     ASSERT_GE(tips.size(), 2u);
     EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0);
+    EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0);
     EXPECT_DOUBLE_EQ(learner->SynapseResistanceBase.GetData(), baseResistance);
     EXPECT_DOUBLE_EQ(tips[0], baseResistance);
     EXPECT_DOUBLE_EQ(tips[1], baseResistance);
