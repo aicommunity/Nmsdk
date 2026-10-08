@@ -90,6 +90,8 @@ protected:
         learner->ResetToUntrainedState = true;
         if (!model->Reset())
             return false;
+        if (!learner->Reset())
+            return false;
         EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
             << "model Reset changed NormalizationMode";
         EXPECT_FALSE(learner->ResetToUntrainedState.GetData())
