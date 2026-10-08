@@ -4,6 +4,8 @@
 
 Исходный исторический разбор и список D-конфигураций: [`SOFTCOLD_RESEARCH_HISTORY.ru.md`](SOFTCOLD_RESEARCH_HISTORY.ru.md), [`OPEN_GAPS_D_CLASSIFY.ru.md`](OPEN_GAPS_D_CLASSIFY.ru.md), [`D_CASES_TIMESCALE_INVESTIGATION.ru.md`](D_CASES_TIMESCALE_INVESTIGATION.ru.md), [`AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md`](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md). Компактные provenance, C++ iteration audit, reset contract и логи сохранены в [`rsratio_selected_2026-10-08/rsratio-evidence-20261008.tar.gz`](rsratio_selected_2026-10-08/rsratio-evidence-20261008.tar.gz).
 
+Последующее обоснование нижней границы и C++-реализация описаны в [`RSRM_MIN_RATIO_FOLLOWUP_2026-10-08.ru.md`](RSRM_MIN_RATIO_FOLLOWUP_2026-10-08.ru.md). Оно меняет тренировочный нижний предел относительно конфигов этой выборки; таблицы ниже остаются историческими наблюдениями старой абсолютной `ResistanceMin`.
+
 ## Зафиксированная база
 
 | Компонент | Версия |
