@@ -79,7 +79,8 @@ protected:
             return false;
         if (!learner->Build() || !model->Build())
             return false;
-        return model->Reset();
+        learner->ResetToUntrainedState = true;
+        return learner->Reset();
     }
 };
 
