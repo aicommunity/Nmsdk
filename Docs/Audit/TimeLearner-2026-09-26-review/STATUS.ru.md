@@ -10,6 +10,7 @@
 | Console / PulseLib | `18f0ef414b1f9c06` / `dc2866a` · PARALLEL=6 |
 | RCS / LOG | [`SOFTCOLD_HEAD_rcs.txt`](../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · [`metrics/SOFTCOLD_full_matrix_20261007.log`](evidence/metrics/SOFTCOLD_full_matrix_20261007.log) |
 | SNAP / аудит | [`SOFTCOLD_FULL49_SNAP.md`](evidence/SOFTCOLD_FULL49_SNAP.md) · [`SOFTCOLD_CONVERGENCE_AUDIT.ru.md`](evidence/SOFTCOLD_CONVERGENCE_AUDIT.ru.md) |
+| История планов | [`SOFTCOLD_RESEARCH_HISTORY.ru.md`](evidence/SOFTCOLD_RESEARCH_HISTORY.ru.md) · копии Cursor [`evidence/plans/`](evidence/plans/) |
 | Корзины FAIL | D=20 · E=6 · B=4 · A=3 · N=1 · G=2 |
 | Примечание | PASS-набор = rematrix 2026-10-05; AmpNorm DEFERRED не снимался |
 
@@ -43,9 +44,9 @@ Harness: `--no-prune` / `--snap-every` / `--keep-slog`. LandscapeOk / Acc / fire
 
 Кампания follow-up W0–W6 **закрыта** 2026-10-01: desync OK; EstDelay L-fix OK; AmpNorm mid→Rmin OK на части кейсов; **Cold SoftCold PASS = 0**. R01/R04 — blocked:time.
 
-## Следующая волна (Working/LastCheck + autosave)
+## Следующая волна (Working / SoftCold + autosave)
 
-- Реестр: [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md) — Gold ≠ SoftCold.
+- Реестр: [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md) — Working ≠ SoftCold; колонки SoftCold/SoftColdDetail.
 - Границы FAIL: [SOFTCOLD_FAIL_BOUNDS.ru.md](evidence/SOFTCOLD_FAIL_BOUNDS.ru.md).
 - Model-time autosave / полная SoftCold-матрица — цель `Working=SoftCold` где объективно возможно.
 
