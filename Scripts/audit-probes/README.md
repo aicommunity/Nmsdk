@@ -34,6 +34,8 @@ cmake --build build/audit-timelearner-make --parallel "$(nproc)"
   --gtest_filter=-AxonAudit.PositiveTauShouldNotDivergeWithoutAStabilityGuard
 ./build/audit-timelearner-make/audit_branch_update \
   --gtest_output=xml:Docs/Audit/TimeLearner-2026-09-22/after-fixes/branch-tests.xml
+./build/audit-timelearner-make/audit_training_core \
+  --gtest_output=xml:Docs/Audit/TimeLearner-2026-09-26-review/evidence/training-core-tests.xml
 ```
 
 `GTEST_SOURCE` на другой машине — путь к исходникам googletest. При наличии Ninja можно `-G Ninja` и каталог `build/audit-timelearner-ninja`.
@@ -46,6 +48,8 @@ cmake --build build/audit-timelearner-ninja --parallel 4
 ```
 
 `counterexamples.cpp` линкуется с реальными `NNeuronPostTrainTune.cpp` и `UModernDiagramLinkRouter.cpp`. `generate_probes.py` / `generate_branch_update_probes.py` извлекают тела функций с SHA256 исходников; lifecycle/IO заменены минимальными адаптерами. CMake перегенерирует probes при изменении исходников.
+
+`audit_training_core` выполняет неизменённые C++-тела EOL-гейтов, TipR-регуляторов, выбора Branch и циклов применения длины через узкие адаптеры. Проверяются epsilon/SyncTol, валидность пика, Rmin/Rmax направления, рост длины и эквивалентность reference `L=0` и физического сегмента `L=1` после `BuildStructure`. Python-генератор только извлекает C++-фрагменты для тестовой компиляции; состояние и логика обучения остаются в C++-тренерах.
 
 ## Python
 
