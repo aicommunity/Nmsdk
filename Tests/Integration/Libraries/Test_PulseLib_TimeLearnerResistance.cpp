@@ -1,0 +1,142 @@
+#include <gtest/gtest.h>
+
+#include "../../../Rdk/Deploy/Include/rdk.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
+#include "../Support/ConsoleLikeInit.h"
+
+#include <algorithm>
+#include <cmath>
+#include <limits>
+#include <string>
+
+using namespace RDK;
+
+class TimeLearnerResistanceTest : public ::testing::Test
+{
+protected:
+    UEPtr<UStorage> storage;
+    UEPtr<UEnvironment> environment;
+    UEPtr<UContainer> model;
+
+    void SetUp() override
+    {
+        const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+        storage = core.storage;
+        environment = core.environment;
+        ASSERT_TRUE(storage);
+        ASSERT_TRUE(environment);
+        ASSERT_TRUE(storage->CheckClass("NNeuronTimeLearner"));
+        ASSERT_TRUE(environment->CreateModel("NModel"));
+        environment->ModelInit();
+        model = environment->GetModel();
+        ASSERT_TRUE(model);
+    }
+
+    UEPtr<NMSDK::NNeuronTimeLearner> CreateLearner(const std::string& name)
+    {
+        UEPtr<UComponent> base = storage->TakeObject("NNeuronTimeLearner");
+        EXPECT_TRUE(base);
+        if (!base)
+            return UEPtr<NMSDK::NNeuronTimeLearner>();
+
+        UEPtr<UContainer> container = dynamic_pointer_cast<UContainer>(base);
+        EXPECT_TRUE(container);
+        if (!container)
+            return UEPtr<NMSDK::NNeuronTimeLearner>();
+
+        container->Name = name;
+        container->Default();
+        UEPtr<NMSDK::NNeuronTimeLearner> learner =
+            dynamic_pointer_cast<NMSDK::NNeuronTimeLearner>(container);
+        EXPECT_TRUE(learner);
+        if (!learner)
+            return learner;
+
+        EXPECT_NE(model->AddComponent(container), ForbiddenId);
+        learner->StructureBuildMode = 1;
+        learner->NumInputDendrite = 3;
+        learner->MaxDendriteLength = 10;
+        learner->IsNeedToTrain = true;
+        learner->CalculateMode = 1;
+        learner->ExperimentMode = false;
+
+        MDMatrix<double> pattern;
+        pattern.Assign(3, 1, 0.0);
+        pattern(0, 0) = 0.01;
+        pattern(1, 0) = 0.02;
+        pattern(2, 0) = 0.03;
+        learner->InputPattern = pattern;
+        return learner;
+    }
+
+    bool BuildAndReset(const UEPtr<NMSDK::NNeuronTimeLearner>& learner)
+    {
+        if (!learner || !model)
+            return false;
+        if (!learner->Build())
+            return false;
+        if (!model->Default() || !model->Build())
+            return false;
+        return model->Reset();
+    }
+};
+
+TEST_F(TimeLearnerResistanceTest, ParametricColdStartUsesTargetRmAndDerivedCeiling)
+{
+    auto learner = CreateLearner("TimeLearnerParametricResistance");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 1;
+    learner->InitialSynapseToMembraneResistanceRatio = 2.0;
+    learner->MaxSynapseToMembraneResistanceRatio = 1000.0;
+    ASSERT_TRUE(BuildAndReset(learner));
+
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    const auto tips = learner->TipSynapseResistance.GetData();
+    ASSERT_GE(tips.size(), 2u);
+
+    double minRm = std::numeric_limits<double>::max();
+    for (int i = 0; i < 2; ++i)
+    {
+        const std::string membraneName = "Dendrite" + std::to_string(i + 1) + "_1";
+        auto membrane = neuron->GetComponentL<NMSDK::NPulseMembrane>(membraneName, true);
+        ASSERT_TRUE(membrane) << membraneName;
+        ASSERT_GT(membrane->GetNumPosChannels(), 0);
+        auto* channel = dynamic_cast<NMSDK::NPulseChannel*>(membrane->GetPosChannel(0));
+        ASSERT_NE(channel, nullptr);
+        const double rm = channel->RestingResistance.GetData() > 0.0
+            ? channel->RestingResistance.GetData()
+            : channel->Resistance.GetData();
+        ASSERT_GT(rm, 0.0);
+        minRm = std::min(minRm, rm);
+        const double expectedRs = std::max(learner->ResistanceMin.GetData(), rm * 2.0);
+        EXPECT_NEAR(tips[static_cast<size_t>(i)], expectedRs,
+                    std::max(1e-6, expectedRs * 1e-9));
+    }
+
+    EXPECT_NEAR(learner->ResistanceMax.GetData(), minRm * 1000.0,
+                std::max(1e-6, minRm * 1e-6));
+    EXPECT_FALSE(learner->EnableRmaxLengthEscape.GetData());
+}
+
+TEST_F(TimeLearnerResistanceTest, StructuralColdStartDoesNotApplyParametricRatios)
+{
+    auto learner = CreateLearner("TimeLearnerStructuralResistance");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    learner->InitialSynapseToMembraneResistanceRatio = 17.0;
+    learner->MaxSynapseToMembraneResistanceRatio = 3.0;
+    learner->EnableRmaxLengthEscape = true;
+    const double baseResistance = learner->SynapseResistanceBase.GetData();
+    ASSERT_TRUE(BuildAndReset(learner));
+
+    const auto tips = learner->TipSynapseResistance.GetData();
+    ASSERT_GE(tips.size(), 2u);
+    EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0);
+    EXPECT_DOUBLE_EQ(learner->SynapseResistanceBase.GetData(), baseResistance);
+    EXPECT_DOUBLE_EQ(tips[0], baseResistance);
+    EXPECT_DOUBLE_EQ(tips[1], baseResistance);
+}
