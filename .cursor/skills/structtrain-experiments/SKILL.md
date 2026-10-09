@@ -39,17 +39,19 @@ description: >-
    ```
    По умолчанию: clean workdir. **Не** `--allow-salvage` / `--use-archive-inplace` без явной просьбы.
 3. **Метрики:** Acc `N/8`, Цель `да`/`нет`/`—`, fires, Need, mid, Result/NonSeparable; bundle `_repro/runs/<id>/`.
-4. **Реестр:** обновить **LastCheck** (протокол этой проверки + вердикт) и пересчитать **Working** (сильнейший PASS по лестнице SoftCold > SoftColdOff > SkipTrainGold > GoldTest ≈ MatrixClone). HEAD `PASS`|`FAIL`|`NOT_RETESTED`.
+4. **Реестр SoftCold:** после матрицы — `scripts/apply_softcold_rcs_to_registry.py --rcs _repro/SOFTCOLD_HEAD_rcs.txt` (пишет **SoftCold** / **SoftColdDetail** на все строки Имени; **Working**↑ только при SoftCold PASS). Лестница Working: SoftCold > SoftColdOff > SkipTrainGold > GoldTest ≈ MatrixClone. HEAD `PASS`|`FAIL`|`NOT_RETESTED`.
 5. **PASS** → те же разделы/колонки в `SUCCESSFUL_EXPERIMENTS.md`. **FAIL**-строки в таблицы PASS не класть; причины — блок «Провалы / вне PASS» (полный FAIL — в `EXPERIMENTS.md`).
 6. Гипотезы без различия (soft vs strip, AutoScale) — **примечание** к SoftCold-строке, не новые «эксперименты».
 7. GoldTest/MatrixClone PASS **≠** SoftCold. См. [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md).
+8. Full SoftCold: `PARALLEL=8` `scripts/softcold_full_matrix_parallel.sh`; W3 (`EnableRmaxLengthEscape`) off; без `--initial-rs-rm` / `--max-rs-rm`.
 
 ## Запреты
 
 - Не создавать отдельную секцию «кампания PostTune / §A».
 - Не ослаблять LandscapeOk / ok_audit пороги ради PASS.
 - Не коммитить `_work/`, StatisticLog, огромные archives (см. `nmsdk-gitlinks`).
+- Не писать absolute `ResistanceMin` в soft-cold XML; bounds — derived state из C++.
 
 ## Колонки строки реестра
 
-`Имя | Алгоритм | Параметры | Working | LastCheck | Acc | Цель | Режим | HEAD | PHASE12 | Примечание | Конфиги`
+`Имя | Алгоритм | Параметры | Working | Acc | Цель | SoftCold | SoftColdDetail | HEAD | PHASE12 | Примечание | Конфиги`
