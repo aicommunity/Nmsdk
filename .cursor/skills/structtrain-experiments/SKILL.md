@@ -43,7 +43,7 @@ description: >-
 5. **PASS** → те же разделы/колонки в `SUCCESSFUL_EXPERIMENTS.md`. **FAIL**-строки в таблицы PASS не класть; причины — блок «Провалы / вне PASS» (полный FAIL — в `EXPERIMENTS.md`).
 6. Гипотезы без различия (soft vs strip, AutoScale) — **примечание** к SoftCold-строке, не новые «эксперименты».
 7. GoldTest/MatrixClone PASS **≠** SoftCold. См. [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md).
-8. Full SoftCold: `PARALLEL=8` `scripts/softcold_full_matrix_parallel.sh`; W3 (`EnableRmaxLengthEscape`) off; без `--initial-rs-rm` / `--max-rs-rm`.
+8. Full SoftCold: `PARALLEL=8` `scripts/softcold_full_matrix_parallel.sh`; W3 (`EnableRmaxLengthEscape`) off. Cold reset preserves the configured initial TipR; `--max-rs-rm` remains a diagnostic override for the derived upper bound, not an initial-Rs setting.
 
 ## Запреты
 
