@@ -17,7 +17,7 @@
 | | |
 |--|--|
 | Итог | **0 PASS / 49 FAIL** |
-| Console / PulseLib / Bin | `39edc03c82665dba` / `b5229e4` / `566fbc08` · PARALLEL=8 |
+| Console / PulseLib / Bin | `39edc03c82665dba` / `b5229e4` / `6a7ef63a` · PARALLEL=8 |
 | RCS / LOG | [`SOFTCOLD_HEAD_rcs.txt`](../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt) · [`SOFTCOLD_full_matrix_20261009T001408Z.log`](evidence/metrics/SOFTCOLD_full_matrix_20261009T001408Z.log) |
 | SNAP / аудит | [`SOFTCOLD_FULL49_SNAP.md`](evidence/SOFTCOLD_FULL49_SNAP.md) · [`SOFTCOLD_CONVERGENCE_AUDIT.ru.md`](evidence/SOFTCOLD_CONVERGENCE_AUDIT.ru.md) |
 | Корзины SNAP | D=24 · B=19 · E=2 · G=2 · N=1 · other=1 |
