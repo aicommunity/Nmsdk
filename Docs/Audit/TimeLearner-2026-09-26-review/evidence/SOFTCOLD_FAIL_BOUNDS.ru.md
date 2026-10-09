@@ -1,15 +1,16 @@
 # SoftCold FAIL — границы и стоит ли чинить
 
-Дата: 2026-10-01. Источники: [FAIL_TAXONOMY.json](FAIL_TAXONOMY.json), W1–W4 remediations, [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md).
+Дата: 2026-10-09. Срез full49: **0 PASS / 49 FAIL** (W3 off, derived Rs/Rm).  
+Источники: [`SOFTCOLD_FULL49_SNAP.md`](SOFTCOLD_FULL49_SNAP.md), [`SOFTCOLD_CONVERGENCE_AUDIT.ru.md`](SOFTCOLD_CONVERGENCE_AUDIT.ru.md), [`FAIL_TAXONOMY_FULL49_NOTE.md`](FAIL_TAXONOMY_FULL49_NOTE.md).
 
-**Цель продукта:** рабочий C++ cold Train (`Working=SoftCold`), не зелёный rc ценой порогов. LandscapeOk / Acc / fires **не** ослаблять.
+**Цель продукта:** рабочий C++ cold Train (`Working=SoftCold`), не зелёный rc ценой порогов. LandscapeOk / Acc / fires / Need→0 **не** ослаблять.
 
-| Корзина | Признак | Типичные кейсы | Чинить? |
-|---------|---------|----------------|---------|
-| **A_nonseparable_mid** | Need=0, TipR canon, LandscapeOk=0 / NonSeparable | asym25, br25 | Research; можно оставить FAIL как объективную неразделимость |
-| **B / AmpNorm Need=1** | Рост L/TipR есть, EOL не закрывает Need | asym50/100, fs* | **Да** — PulseLib EOL/Save (якорь asym50 + model-time autosave) |
-| **EstDelay / runaway L** | L≈97 при span480 | phase6_* | XML EstDelay **done** (L≈gold); остаток → B |
-| **Harness desync** | TipR flat, L=1, SBM | asym50 historically | **Закрыто** SoftCold fix |
-| **Gold PASS + SoftCold FAIL** | Working=GoldTest | почти все SUCCESSFUL | Ожидаемо; не регрессия Gold |
+| Корзина | Признак на срезе | Чинить? |
+|---------|------------------|---------|
+| **train_incomplete** | Need=1 до конца `-t`; TipR mid/`other` | **Да** — логика cold при derived bounds (не harness) |
+| **cpp_training_failure_1** | TipR@Rmax, `failure_reason=1`, W3 off | Не возвращать W3; отдельный research path |
+| **E / Rmin floor** | TipR≈derived rmin | Исследовать, не absolute floor 20 МΩ |
+| **G (br100 keep/search)** | search/keep аномалии; `br100_search` rc=137 | Отдельно от AmpNorm-D |
+| **Gold PASS + SoftCold FAIL** | Working=GoldTest | Ожидаемо на этом срезе |
 
-См. также: **[SOFTCOLD_CONVERGENCE_AUDIT.ru.md](SOFTCOLD_CONVERGENCE_AUDIT.ru.md)** / **[SOFTCOLD_FULL49_SNAP.md](SOFTCOLD_FULL49_SNAP.md)** (full49 HEAD **0 PASS / 49 FAIL** (W3 off, derived Rs/Rm) — см. SOFTCOLD_FULL49_SNAP.md.ru.md](A_NONSEPARABLE_MID.ru.md), [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [PHASE6_ESTDELAY_FIX.ru.md](PHASE6_ESTDELAY_FIX.ru.md), [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](PROTOCOL_WORKING_VS_LASTCHECK.ru.md).
+См. также: [A_NONSEPARABLE_MID.ru.md](A_NONSEPARABLE_MID.ru.md), [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md), [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](PROTOCOL_WORKING_VS_LASTCHECK.ru.md).

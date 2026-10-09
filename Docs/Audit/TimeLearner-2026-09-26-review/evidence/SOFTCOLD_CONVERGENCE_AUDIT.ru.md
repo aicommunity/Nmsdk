@@ -1,6 +1,6 @@
 # SoftCold convergence audit (full49 Rs/Rm · W3 off)
 
-Срез: Console `39edc03c82665dba` · PulseLib `b5229e4` · PARALLEL=8 · **0 PASS / 49 FAIL**.
+Срез: Console `39edc03c82665dba` · PulseLib `b5229e4` · Bin `6a7ef63a` · PARALLEL=8 · **0 PASS / 49 FAIL**.
 
 ## Вердикт
 

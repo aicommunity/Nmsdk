@@ -1,6 +1,6 @@
 # SoftCold FULL49 SNAP (Rs/Rm · W3 off)
 
-Срез: Console `39edc03c82665dba` · PulseLib `b5229e4` · Bin `566fbc08` · PARALLEL=8 · LOG `metrics/SOFTCOLD_full_matrix_20261009T001408Z.log` · RCS [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt).
+Срез: Console `39edc03c82665dba` · PulseLib `b5229e4` · Bin `6a7ef63a` · PARALLEL=8 · LOG `metrics/SOFTCOLD_full_matrix_20261009T001408Z.log` · RCS [`SOFTCOLD_HEAD_rcs.txt`](../../../Bin/Configs/SpikeSamples/StructTrain/_repro/SOFTCOLD_HEAD_rcs.txt).
 
 W3 (`EnableRmaxLengthEscape`) **off**; TipR bounds derived (`rmin`/`rmax` из audit). Итог: **0 PASS / 49 FAIL**.
 
