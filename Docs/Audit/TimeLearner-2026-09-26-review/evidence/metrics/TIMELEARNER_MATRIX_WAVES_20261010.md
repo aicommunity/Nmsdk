@@ -1,6 +1,6 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-10T15:35:27.275623+00:00 UTC.
+Обновлено: 2026-10-10T17:36:39.879318+00:00 UTC.
 
 ### W01
 
@@ -14,6 +14,19 @@
 | W01_CL50_N0_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
 | W01_CL50_N1_PSIoff | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
 | W01_CL50_N1_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+
+### W02
+
+| Случай | Сходимость обучения | Качество PostTune | Детекция цели | Need | Fires | Категория |
+|---|---|---|---|---:|---|---|
+| W02_CL100_N0_PSIoff | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W02_CL100_N0_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W02_CL100_N1_PSIoff | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W02_CL100_N1_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W02_CL480_N0_PSIoff | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W02_CL480_N0_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W02_CL480_N1_PSIoff | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W02_CL480_N1_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
 
 ### W03
 
