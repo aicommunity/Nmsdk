@@ -1,7 +1,17 @@
-# Статус матричных волн TimeLearner
+# Текущий статус матричных волн TimeLearner
 
-Очередь W01–W04 была остановлена по просьбе пользователя 2026-10-10 до завершения первой волны. В W01 были запущены восемь процессов Console; ни один случай не успел сохранить итоговый `matrix_result.json`. W02–W04 не запускались. Поэтому новых PASS/FAIL результатов матрицы нет.
+Обновлено: 2026-10-10T12:26:08.117126+00:00 UTC.
 
-Удалены только временные данные этой незавершённой попытки: восемь рабочих каталогов W01 (около 1,71 ГБ), временная папка `_repro/TimeLearnerMatrixRuns` и неудачные частичные снимки подготовки конфигов. После очистки свободно около 208 ГБ. Исторические каталоги `_repro/runs`, остановленный full49 и другие исследовательские данные не затрагивались.
+### W03
 
-Сохранены закоммиченные входы Train/Test W01–W04 и скрипты очереди. Самостоятельный запуск на сервере описан в `Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/RUN_ON_SERVER.ru.md`. Повторный запуск начнётся с W01.
+| Случай | Сходимость обучения | Качество PostTune | Детекция цели | Need | Fires | Категория |
+|---|---|---|---|---:|---|---|
+| W03_BR25_N0_PSIoff | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W03_BR25_N0_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W03_BR25_N1_PSIoff | converged_need0 | not_reached_or_unknown | pass | 0 | 10100000 | обучение сошлось; quality/detection FAIL |
+| W03_BR25_N1_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W03_BR50_N0_PSIoff | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W03_BR50_N0_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+| W03_BR50_N1_PSIoff | converged_need0 | not_reached_or_unknown | pass | 0 | 00000000 | обучение сошлось; quality/detection FAIL |
+| W03_BR50_N1_PSI25 | not_converged_at_stop | not_reached_or_unknown | not_evaluated_training_incomplete | 1 | — | обучение не сошлось |
+
