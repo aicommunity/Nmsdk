@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-11T20:04:03.630837+00:00 UTC.
+Обновлено: 2026-10-11T20:04:13.889482+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 40 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 48 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -68,4 +68,17 @@
 | W06_BR100_N1_PSI25_HIST | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=0a15da3a695c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W06_BR480_N0_PSI25_HIST | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=0a15da3a695c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W06_BR480_N1_PSI25_HIST | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=0a15da3a695c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+
+### W07
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W07_BR25_N0_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR25_N0_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR25_N1_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR25_N1_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR50_N0_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR50_N0_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR50_N1_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR50_N1_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
 
