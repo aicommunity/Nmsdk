@@ -127,7 +127,7 @@ public:
  int CountIteration = 0;
  P<double> SyncTolerance{{0.01}}, ResistanceMin{{20.0}}, ResistanceMax{{100.0}};
  P<double> ResistanceAdjustGain{{0.4}}, SynapseResistanceBase{{80.0}};
- P<bool> EnableDebug{{false}};
+ P<bool> EnableDebug{{false}}, EnableRmaxLengthEscape{{false}};
  P<std::vector<double>> TipSynapseResistance{{std::vector<double>{{50.0,86.0,86.0}}}};
  P<std::vector<double>> InitialSomaPotential{{std::vector<double>{{1.0,0.0,0.0}}}};
  P<std::vector<int>> NumSynapse{{std::vector<int>{{1,1,1}}}};
@@ -289,6 +289,7 @@ TEST(TimeLearnerCore, BranchTipResistanceDirectionAndBoundsMatchClassicContract)
 
 TEST(TimeLearnerCore, ClassicForcedRmaxLengthGrowthIsAppliedExactlyOnce) {
  NNeuronTimeLearner learner;
+ learner.EnableRmaxLengthEscape = true;
  learner.NumInputDendrite = 2;
  learner.DendriteLength = std::vector<int>{2,1,1};
  learner.MaxDendriteLength = 6;
@@ -304,6 +305,7 @@ TEST(TimeLearnerCore, ClassicForcedRmaxLengthGrowthIsAppliedExactlyOnce) {
 
 TEST(TimeLearnerCore, BranchForcedRmaxLengthGrowthIsAppliedAndBounded) {
  NNeuronTimeLearnerBranch learner;
+ learner.EnableRmaxLengthEscape = true;
  learner.NumInputDendrite = 2;
  learner.DendriteLength = std::vector<int>{2,1,1};
  learner.MaxDendriteLength = 3;
