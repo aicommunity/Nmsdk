@@ -229,6 +229,13 @@ TEST_F(TimeLearnerResistanceTest, BranchParametricColdStartPreservesTipResistanc
     learner->NormalizationMode = 1;
     ASSERT_TRUE(BuildAndReset(learner));
 
+    // Branch resets every input to the first segment. The final input is the
+    // reference anchor and must also be clamped back to a valid segment.
+    const auto lengths = learner->DendriteLength.GetData();
+    ASSERT_EQ(lengths.size(), static_cast<size_t>(learner->NumInputDendrite.GetData()));
+    EXPECT_TRUE(std::all_of(lengths.begin(), lengths.end(), [](int value) { return value == 1; }));
+    EXPECT_TRUE(learner->IsNeedToTrain.GetData());
+
     auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
     ASSERT_TRUE(neuron);
     auto membrane = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite1_1", true);
@@ -272,4 +279,32 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartPreservesBaseResistan
     EXPECT_DOUBLE_EQ(learner->SynapseResistanceBase.GetData(), baseResistance);
     EXPECT_DOUBLE_EQ(tips[0], baseResistance);
     EXPECT_DOUBLE_EQ(tips[1], baseResistance);
+}
+
+TEST_F(TimeLearnerResistanceTest, ClassicToleranceAndPeakMarginBoundaries)
+{
+    auto learner = CreateLearner("TimeLearnerClassicToleranceBoundaries");
+    ASSERT_TRUE(learner);
+
+    EXPECT_FALSE(learner->SetSyncTolerance(-std::numeric_limits<double>::epsilon()));
+    EXPECT_TRUE(learner->SetSyncTolerance(0.0));
+    EXPECT_TRUE(learner->SetSyncTolerance(std::numeric_limits<double>::min()));
+
+    EXPECT_FALSE(learner->SetPeakMeasureMargin(-std::numeric_limits<double>::epsilon()));
+    EXPECT_TRUE(learner->SetPeakMeasureMargin(0.0));
+    EXPECT_TRUE(learner->SetPeakMeasureMargin(std::numeric_limits<double>::min()));
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchToleranceAndPeakMarginBoundaries)
+{
+    auto learner = CreateBranchLearner("TimeLearnerBranchToleranceBoundaries");
+    ASSERT_TRUE(learner);
+
+    EXPECT_FALSE(learner->SetSyncTolerance(-std::numeric_limits<double>::epsilon()));
+    EXPECT_TRUE(learner->SetSyncTolerance(0.0));
+    EXPECT_TRUE(learner->SetSyncTolerance(std::numeric_limits<double>::min()));
+
+    EXPECT_FALSE(learner->SetPeakMeasureMargin(-std::numeric_limits<double>::epsilon()));
+    EXPECT_TRUE(learner->SetPeakMeasureMargin(0.0));
+    EXPECT_TRUE(learner->SetPeakMeasureMargin(std::numeric_limits<double>::min()));
 }
