@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-12T22:51:20.942358+00:00 UTC.
+Обновлено: 2026-10-12T23:26:48.336373+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 186 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 191 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -319,4 +319,14 @@
 | W24_CL480_PSI25_RS1RM | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=b0e82401f589; Bin=bac38e89c583; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W24_CL480_PSI25_RS10RM | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=b0e82401f589; Bin=bac38e89c583; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W24_CL480_PSI25_RS1000RM | cpp_training_refusal | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=b0e82401f589; Bin=bac38e89c583; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+
+### W27
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W27_CL480_D_BASE | cpp_training_refusal | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=f3cb25576fa4; Bin=99c5fb0479f9; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W27_CL480_D_DELAY5 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=4c91476a7853; Bin=943a77328a45; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W27_CL480_D_RC5_DELAY5 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=4c91476a7853; Bin=943a77328a45; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W27_CL480_D_RC20_DELAY20 | converged_need0 | evaluation_error | evaluation_error | — | 0 | — | обучение сошлось; качество=evaluation_error; цель=evaluation_error | root=f3cb25576fa4; Bin=99c5fb0479f9; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W27_CL480_D_MAXLEN150 | cpp_training_refusal | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=f3cb25576fa4; Bin=99c5fb0479f9; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 
