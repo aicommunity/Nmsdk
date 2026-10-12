@@ -139,6 +139,102 @@ protected:
     }
 };
 
+class BranchSegmentOrderHarness : public NMSDK::NNeuronTimeLearnerBranch
+{
+public:
+    void SetOrderState(
+        const std::vector<int>& lengths,
+        int active,
+        int max_length,
+        bool active_peak_valid = true)
+    {
+        NumInputDendrite = static_cast<int>(lengths.size());
+        MaxDendriteLength = max_length;
+        DendriteLength = lengths;
+        ActiveDendrite = active;
+        ActivePulseIndex = active;
+        SyncTolerance = 0.02;
+        EstDelayPerSeg = 0.006666666666666667;
+        DendStatus.assign(lengths.size(), 0);
+        SomaPeakValid.assign(lengths.size(), false);
+        SomaPeakValid.at(static_cast<size_t>(active)) = active_peak_valid;
+        PeakRel.assign(lengths.size(), 0.0);
+        PeakRel.at(static_cast<size_t>(active)) = 0.48;
+        PulseSynced.assign(lengths.size(), false);
+        PulseSynced.back() = true;
+        StoredPeakRel.assign(lengths.size(), 0.0);
+        StoredPeakRel.back() = 0.4945;
+        ExpectedPulseRelTimes.assign(lengths.size(), 0.0);
+        ExpectedPulseRelTimes.at(static_cast<size_t>(active)) = 0.08;
+        DelayFromPulse.assign(lengths.size(), 0.0);
+        DelayFromPulse.at(static_cast<size_t>(active)) = 0.41316;
+        PrevPeakRel.assign(lengths.size(), 0.0);
+        DendLastAbsDt.assign(lengths.size(), 0.0);
+        DendBestEffortSynced.assign(lengths.size(), false);
+        Dissynchronization.assign(lengths.size(), 0.0);
+        PrevDissynchronization.assign(lengths.size(), 0.0);
+        InitialSomaPotential.assign(lengths.size(), 0.0);
+        MaxIterSomaAmp.assign(lengths.size(), 0.0);
+        NumSynapse.assign(lengths.size(), 1);
+        CanChangeDendLength = true;
+        TrainingPhase = 0;
+        TrainingFailureReason = 0;
+    }
+
+    bool DecideLength(int pulse)
+    {
+        return ChangeDendriteStatus(pulse);
+    }
+
+    int LengthStatus(int pulse) const
+    {
+        return DendStatus.at(static_cast<size_t>(pulse));
+    }
+
+    int FailureReason() const
+    {
+        return TrainingFailureReason.GetData();
+    }
+
+    int Phase() const
+    {
+        return TrainingPhase.GetData();
+    }
+};
+
+TEST(BranchSegmentOrderTransitionTest, GrowsSyncedActivePulseWhenOrderIsBroken)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 61, 89, 1}, 1, 100);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.LengthStatus(1), 1)
+        << "a locally synchronized pulse must still grow past the next committed attach point";
+    EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchSegmentOrderTransitionTest, DoesNotChangeLengthWithoutActivePeak)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 61, 89, 1}, 1, 100, false);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.LengthStatus(1), 0)
+        << "segment-order recovery must preserve the no-length-change-without-peak contract";
+    EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchSegmentOrderTransitionTest, RefusesWhenMaxLengthCannotRestoreOrder)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 100, 100, 1}, 1, 100);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.LengthStatus(1), 0);
+    EXPECT_EQ(learner.FailureReason(), 2);
+    EXPECT_EQ(learner.Phase(), 5);
+}
+
 TEST_F(TimeLearnerResistanceTest, ParametricColdStartPreservesTipResistanceAndDerivedBounds)
 {
     auto learner = CreateLearner("TimeLearnerParametricResistance");
