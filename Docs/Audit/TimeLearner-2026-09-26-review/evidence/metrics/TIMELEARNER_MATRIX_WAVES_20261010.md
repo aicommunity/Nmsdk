@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-12T13:17:27.114706+00:00 UTC.
+Обновлено: 2026-10-12T14:19:00.820062+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 123 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 131 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -211,4 +211,17 @@
 | W15_HIST_psi33_300 | cpp_training_refusal | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W15_HIST_psi34_400 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W15_HIST_psi35_400 | cpp_training_refusal | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+
+### W16
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W16_CL25_N0_PSI05 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bc99a3994098; Bin=088d413d767c; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W16_CL25_N0_PSI27 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=575fb37cdda4; Bin=4ebf959105ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W16_CL25_N1_PSI05 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bc99a3994098; Bin=088d413d767c; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W16_CL25_N1_PSI27 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bc99a3994098; Bin=088d413d767c; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W16_CL50_N0_PSI05 | converged_need0 | evaluation_error | evaluation_error | — | 0 | — | обучение сошлось; качество=evaluation_error; цель=evaluation_error | root=575fb37cdda4; Bin=4ebf959105ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W16_CL50_N0_PSI27 | converged_need0 | evaluation_error | evaluation_error | — | 0 | — | обучение сошлось; качество=evaluation_error; цель=evaluation_error | root=575fb37cdda4; Bin=4ebf959105ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W16_CL50_N1_PSI05 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=575fb37cdda4; Bin=4ebf959105ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W16_CL50_N1_PSI27 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=575fb37cdda4; Bin=4ebf959105ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 
