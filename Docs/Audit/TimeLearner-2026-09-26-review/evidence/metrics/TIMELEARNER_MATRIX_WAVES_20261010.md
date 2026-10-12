@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-12T16:38:33.564707+00:00 UTC.
+Обновлено: 2026-10-12T18:29:48.465110+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 147 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 152 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -250,4 +250,14 @@
 | W18_BR50_N0_PSI27 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=6608f9884912; Bin=e11f00142a49; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W18_BR50_N1_PSI05 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=6608f9884912; Bin=e11f00142a49; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W18_BR50_N1_PSI27 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=6608f9884912; Bin=e11f00142a49; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+
+### W20
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W20_psi31_200_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=b9a6b82ecf5e; Bin=3a99866c1323; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W20_psi32_300_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=1539bd3c45e8; Bin=9f383651f4c0; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W20_psi33_300_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=1539bd3c45e8; Bin=9f383651f4c0; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W20_psi34_400_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=1539bd3c45e8; Bin=9f383651f4c0; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W20_psi35_400_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=1539bd3c45e8; Bin=9f383651f4c0; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 
