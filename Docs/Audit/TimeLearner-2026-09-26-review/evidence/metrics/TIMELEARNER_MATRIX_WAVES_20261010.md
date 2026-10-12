@@ -1,6 +1,6 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-12T01:08:06.100256+00:00 UTC.
+Обновлено: 2026-10-12T05:52:12.501371+00:00 UTC.
 
 Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 64 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
@@ -86,14 +86,14 @@
 
 | Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
 |---|---|---|---|---|---:|---|---|---|
-| W07_BR25_N0_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
-| W07_BR25_N0_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
-| W07_BR25_N1_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
-| W07_BR25_N1_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
-| W07_BR50_N0_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
-| W07_BR50_N0_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
-| W07_BR50_N1_PSIoff_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
-| W07_BR50_N1_PSI25_NEXT | worker_infrastructure_error | not_reached_or_unknown | not_evaluated_training_incomplete | — | — | — | результат не сохранён | runtime provenance missing |
+| W07_BR25_N0_PSIoff_NEXT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W07_BR25_N0_PSI25_NEXT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W07_BR25_N1_PSIoff_NEXT | converged_need0 | fail | detected | 1/8 strict; FP=7 | 0 | 11111111 | обучение сошлось; качество=fail; цель=detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W07_BR25_N1_PSI25_NEXT | converged_need0 | fail | detected | 1/8 strict; FP=7 | 0 | 11111111 | обучение сошлось; качество=fail; цель=detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W07_BR50_N0_PSIoff_NEXT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W07_BR50_N0_PSI25_NEXT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W07_BR50_N1_PSIoff_NEXT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W07_BR50_N1_PSI25_NEXT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 
 ### W08
 
