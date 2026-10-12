@@ -276,6 +276,98 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartPreservesTipResistanceAndDe
     EXPECT_FALSE(learner->EnableRmaxLengthEscape.GetData());
 }
 
+TEST_F(TimeLearnerResistanceTest, FrozenAttenuationGammaSurvivesColdReset)
+{
+    auto learner = CreateLearner("TimeLearnerFrozenAttenuationGamma");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 1;
+    learner->AutoEstimateAttenuationGamma = false;
+    learner->AttenuationGamma = 0.05;
+
+    ASSERT_TRUE(BuildAndReset(learner));
+    EXPECT_FALSE(learner->AutoEstimateAttenuationGamma.GetData());
+    EXPECT_DOUBLE_EQ(learner->AttenuationGamma.GetData(), 0.05)
+        << "cold reset must preserve a fixed gamma used for controlled training comparisons";
+}
+
+class SyncResistanceFreezeHarness : public NMSDK::NNeuronTimeLearner
+{
+public:
+    void SetSyncEvidence(double absDt)
+    {
+        NumInputDendrite = 3;
+        HasPrevPeakSnapshot = true;
+        SomaPeakValid.assign(3, true);
+        PrevPeakValid.assign(3, true);
+        DendLastAbsDt.assign(3, absDt);
+        DendBestEffortSynced.assign(3, false);
+        ResistanceStatus.assign(3, 0);
+        TipSynapseResistance.assign(3, 8.6e7);
+        ResistanceMin = 1.0e3;
+        InitialSomaPotential.assign(3, 0.01);
+        MaxIterSomaAmp.assign(3, 0.02);
+    }
+
+    bool ObserveSyncAndMaybeFreeze()
+    {
+        return ShouldFreezeTipResistanceAfterFirstSync();
+    }
+
+    bool TryChangeResistance(int dendrite)
+    {
+        return ChangeSynapseResistanceStatus(dendrite);
+    }
+
+    void TryFeedforwardLengthGrow(int dendrite, int deltaLength)
+    {
+        FeedforwardResistanceOnLengthGrow(dendrite, deltaLength);
+    }
+
+    void SetPendingResistanceStatus(int dendrite, int status)
+    {
+        ResistanceStatus.at(static_cast<size_t>(dendrite)) = status;
+    }
+
+    int PendingResistanceStatus(int dendrite) const
+    {
+        return ResistanceStatus.at(static_cast<size_t>(dendrite));
+    }
+
+    void InvalidateOnePeak()
+    {
+        SomaPeakValid[0] = false;
+    }
+};
+
+TEST(TimeLearnerResistanceFreezeTest, LatchesOnlyAfterGlobalSyncAndSurvivesLaterDesync)
+{
+    SyncResistanceFreezeHarness learner;
+    learner.Default();
+    EXPECT_FALSE(learner.FreezeTipResistanceAfterFirstSync.GetData());
+    EXPECT_FALSE(learner.TipResistanceFrozenAfterSync.GetData());
+    learner.FreezeTipResistanceAfterFirstSync = true;
+    learner.SetSyncEvidence(0.03);
+
+    EXPECT_FALSE(learner.ObserveSyncAndMaybeFreeze());
+    EXPECT_FALSE(learner.TipResistanceFrozenAfterSync.GetData());
+
+    learner.SetSyncEvidence(0.01);
+    EXPECT_TRUE(learner.ObserveSyncAndMaybeFreeze());
+    EXPECT_TRUE(learner.TipResistanceFrozenAfterSync.GetData());
+
+    const double frozenR = learner.TipSynapseResistance[0];
+    learner.SetPendingResistanceStatus(0, 1);
+    EXPECT_TRUE(learner.TryChangeResistance(0));
+    EXPECT_DOUBLE_EQ(learner.TipSynapseResistance[0], frozenR);
+    EXPECT_EQ(learner.PendingResistanceStatus(0), 0);
+
+    learner.TryFeedforwardLengthGrow(0, 2);
+    EXPECT_DOUBLE_EQ(learner.TipSynapseResistance[0], frozenR);
+
+    learner.InvalidateOnePeak();
+    EXPECT_TRUE(learner.ObserveSyncAndMaybeFreeze());
+}
+
 TEST_F(TimeLearnerResistanceTest, StructuralColdStartPreservesBaseResistance)
 {
     auto learner = CreateLearner("TimeLearnerStructuralResistance");
