@@ -218,6 +218,12 @@ public:
         HasPrevPeakSnapshot = true;
         FirstImpulseTime = 12.2565;
         ExpectedPulseRelTimes = {0.0, 0.08, 0.24, 0.48};
+        MDMatrix<double> input_pattern;
+        input_pattern.Assign(4, 1, 0.0);
+        for(int i = 0; i < 4; ++i)
+            input_pattern(i, 0) = ExpectedPulseRelTimes[static_cast<size_t>(i)];
+        InputPattern = input_pattern;
+        PrevInputPattern = input_pattern;
         TimeOfMaxIterSomaAmp = {0.0, 0.0,
             FirstImpulseTime + ExpectedPulseRelTimes[2] + measured_delay, 0.0};
         SomaPeakValid = {false, false, true, false};
