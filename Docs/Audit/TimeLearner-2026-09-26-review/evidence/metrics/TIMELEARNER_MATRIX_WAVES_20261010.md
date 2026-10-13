@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-13T12:12:51.664236+00:00 UTC.
+Обновлено: 2026-10-13T13:41:01.386597+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 300 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 304 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -518,4 +518,13 @@
 | W40_BR100_N1_PSI25_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W40_BR480_N1_PSIoff_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W40_BR480_N1_PSI25_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+
+### W41
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W41_CL50_RM_HALF | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W41_CL50_RM_DOUBLE | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W41_CL50_CM_HALF | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W41_CL50_CM_DOUBLE | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 
