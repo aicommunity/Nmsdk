@@ -202,6 +202,73 @@ public:
     }
 };
 
+class ClassicDelayRoundoffHarness : public NMSDK::NNeuronTimeLearner
+{
+public:
+    void SetDelayState(double measured_delay)
+    {
+        NumInputDendrite = 4;
+        MaxDendriteLength = 100;
+        IterationGap = 1.5;
+        SyncTolerance = 0.02;
+        EstDelayPerSeg = 0.005;
+        NormalizationMode = 0;
+        DendriteLength = {17, 17, 9, 1};
+        ActiveDendrite = 2;
+        HasPrevPeakSnapshot = true;
+        FirstImpulseTime = 12.2565;
+        ExpectedPulseRelTimes = {0.0, 0.08, 0.24, 0.48};
+        TimeOfMaxIterSomaAmp = {0.0, 0.0,
+            FirstImpulseTime + ExpectedPulseRelTimes[2] + measured_delay, 0.0};
+        SomaPeakValid = {false, false, true, false};
+        PeakRel = {0.0, 0.0, 0.24, 0.0};
+        DelayFromPulse = {0.0, 0.0, measured_delay, 0.0};
+        PrevPeakValid = {false, false, false, true};
+        PrevPeakRel = {0.0, 0.0, 0.0, 0.4945};
+        DendStatus.assign(4, 0);
+        DendLastAbsDt.assign(4, 0.0);
+        DendBestEffortSynced.assign(4, false);
+        Dissynchronization.assign(4, 0.0);
+        PrevDissynchronization.assign(4, 0.0);
+        NoImproveCount.assign(4, 0);
+        InitialSomaPotential.assign(4, 0.0);
+        MaxIterSomaAmp.assign(4, 0.0);
+        NumSynapse.assign(4, 1);
+        LastLengthDelta = 0;
+        LastLengthDeltaDendrite = -1;
+    }
+
+    bool DecideLength(int pulse)
+    {
+        return ChangeDendriteStatus(pulse);
+    }
+
+    int LengthStatus(int pulse) const
+    {
+        return DendStatus.at(static_cast<size_t>(pulse));
+    }
+};
+
+TEST(ClassicDelayRoundoffTest, ClampsOnlyAbsoluteTimeSubtractionNoise)
+{
+    ClassicDelayRoundoffHarness learner;
+    learner.SetDelayState(-1.7763568394002505e-15);
+
+    ASSERT_TRUE(learner.DecideLength(2));
+    EXPECT_EQ(learner.LengthStatus(2), 1)
+        << "a one-ULP negative delay at the pulse should use the cable-delay estimate";
+}
+
+TEST(ClassicDelayRoundoffTest, KeepsMeaningfulNegativeDelayInvalid)
+{
+    ClassicDelayRoundoffHarness learner;
+    learner.SetDelayState(-1e-9);
+
+    ASSERT_TRUE(learner.DecideLength(2));
+    EXPECT_EQ(learner.LengthStatus(2), 0)
+        << "a real early-peak measurement must not be rounded into the valid range";
+}
+
 TEST(BranchSegmentOrderTransitionTest, GrowsSyncedActivePulseWhenOrderIsBroken)
 {
     BranchSegmentOrderHarness learner;
