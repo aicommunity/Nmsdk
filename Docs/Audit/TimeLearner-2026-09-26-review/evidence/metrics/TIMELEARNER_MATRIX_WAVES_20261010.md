@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-13T10:29:23.605310+00:00 UTC.
+Обновлено: 2026-10-13T10:40:38.346429+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 284 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 292 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -479,6 +479,19 @@
 | W37_CL100_PACKB_N1 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=e69b32ce037e; Bin=1fe5c2adc03e; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W37_CL100_PACKC_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=c203a43092a3; Bin=485415894b45; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W37_CL100_PACKC_N1 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=e69b32ce037e; Bin=1fe5c2adc03e; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+
+### W38
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W38_BR25_PACKB_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W38_BR25_PACKB_N1 | converged_need0 | fail | detected | 7/8 strict; FP=1 | 0 | 10100000 | обучение сошлось; качество=fail; цель=detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W38_BR25_PACKC_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W38_BR25_PACKC_N1 | converged_need0 | fail | detected | 7/8 strict; FP=1 | 0 | 10100000 | обучение сошлось; качество=fail; цель=detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W38_BR100_PACKB_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W38_BR100_PACKB_N1 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W38_BR100_PACKC_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W38_BR100_PACKC_N1 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 
 ### W39
 
