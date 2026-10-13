@@ -146,7 +146,8 @@ public:
         const std::vector<int>& lengths,
         int active,
         int max_length,
-        bool active_peak_valid = true)
+        bool active_peak_valid = true,
+        bool exhausted_amp_collapse = false)
     {
         NumInputDendrite = static_cast<int>(lengths.size());
         MaxDendriteLength = max_length;
@@ -176,6 +177,16 @@ public:
         InitialSomaPotential.assign(lengths.size(), 0.0);
         MaxIterSomaAmp.assign(lengths.size(), 0.0);
         NumSynapse.assign(lengths.size(), 1);
+        if (exhausted_amp_collapse)
+        {
+            auto initial_soma = InitialSomaPotential.GetData();
+            auto num_synapses = NumSynapse.GetData();
+            initial_soma.at(static_cast<size_t>(active)) = 0.01;
+            MaxIterSomaAmp.at(static_cast<size_t>(active)) = 1.0e-11;
+            num_synapses.at(static_cast<size_t>(active)) = 128;
+            InitialSomaPotential = initial_soma;
+            NumSynapse = num_synapses;
+        }
         CanChangeDendLength = true;
         TrainingPhase = 0;
         TrainingFailureReason = 0;
@@ -295,6 +306,28 @@ TEST(BranchSegmentOrderTransitionTest, DoesNotChangeLengthWithoutActivePeak)
     EXPECT_EQ(learner.LengthStatus(1), 0)
         << "segment-order recovery must preserve the no-length-change-without-peak contract";
     EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchSegmentOrderTransitionTest, RepairsOrderAfterConfirmedAmpCollapseWithoutPeak)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 61, 89, 1}, 1, 100, false, true);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.LengthStatus(1), 1)
+        << "confirmed amplitude collapse at exhausted synapse capacity permits only the structural order repair";
+    EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchSegmentOrderTransitionTest, RefusesOrderRepairAtMaxLengthAfterAmpCollapse)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 100, 100, 1}, 1, 100, false, true);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.LengthStatus(1), 0);
+    EXPECT_EQ(learner.FailureReason(), 2);
+    EXPECT_EQ(learner.Phase(), 5);
 }
 
 TEST(BranchSegmentOrderTransitionTest, RefusesWhenMaxLengthCannotRestoreOrder)
