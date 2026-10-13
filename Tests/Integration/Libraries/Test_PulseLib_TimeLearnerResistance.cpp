@@ -192,6 +192,69 @@ public:
         TrainingFailureReason = 0;
     }
 
+    void SetInvalidPeakNoActionState(double tip_r, bool model_ok)
+    {
+        SetOrderState({1, 10, 6, 1}, 1, 100, false);
+        NormalizationMode = 1;
+        ResistanceMin = 1.0e6;
+        ResistanceMax = 1.0e8;
+        TipSynapseResistance = {86.0e6, tip_r, 1.0e6, 86.0e6};
+        InitialSomaPotential[1] = 0.015828572406203167;
+        MaxIterSomaAmp[1] = 1.7046206635118466e-7;
+        NumSynapse[1] = 1;
+        IsNeedToTrain = true; // this callback clears the runtime sync vectors
+        ActiveDendrite = 1;
+        ActivePulseIndex = 1;
+        DendStatus.assign(4, 0);
+        EstDelayPerSeg = model_ok
+            ? (0.4945 - 0.08) / 9.0
+            : 0.006666666666666667;
+        // Reassert the runtime reference after property setters: the test is
+        // exercising an already committed Branch anchor, not anchor bootstrap.
+        PulseSynced.assign(4, false);
+        PulseSynced.back() = true;
+        StoredPeakRel.assign(4, 0.0);
+        StoredPeakRel.back() = 0.4945;
+        HasPrevPeakSnapshot = true;
+        InvalidPeakNoActionCount.assign(4, 0);
+    }
+
+    int InvalidPeakNoActionCountAt(int pulse) const
+    {
+        return InvalidPeakNoActionCount.at(static_cast<size_t>(pulse));
+    }
+
+    bool IsBestEffortSynced(int pulse) const
+    {
+        return DendBestEffortSynced.at(static_cast<size_t>(pulse));
+    }
+
+    double InvalidPeakModelTimingError(int pulse) const
+    {
+        const size_t index = static_cast<size_t>(pulse);
+        return MeanStoredPeakRel(pulse) - ExpectedPulseRelTimes.at(index) - DelayLenOf(pulse);
+    }
+
+    double TipResistance(int pulse) const
+    {
+        return TipSynapseResistance.GetData().at(static_cast<size_t>(pulse));
+    }
+
+    double MinimumResistance() const
+    {
+        return ResistanceMin.GetData();
+    }
+
+    bool IsPulsePeakValid(int pulse) const
+    {
+        return SomaPeakValid.at(static_cast<size_t>(pulse));
+    }
+
+    bool IsReferencePulseSynced() const
+    {
+        return PulseSynced.back();
+    }
+
     bool DecideLength(int pulse)
     {
         return ChangeDendriteStatus(pulse);
@@ -339,6 +402,83 @@ TEST(BranchSegmentOrderTransitionTest, RefusesWhenMaxLengthCannotRestoreOrder)
     EXPECT_EQ(learner.LengthStatus(1), 0);
     EXPECT_EQ(learner.FailureReason(), 2);
     EXPECT_EQ(learner.Phase(), 5);
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionBurstsAtRmin)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(1.0e6, false);
+    ASSERT_NEAR(learner.TipResistance(1), learner.MinimumResistance(), 1e-9);
+    ASSERT_FALSE(learner.IsPulsePeakValid(1));
+    ASSERT_TRUE(learner.IsReferencePulseSynced());
+    ASSERT_GT(std::fabs(learner.InvalidPeakModelTimingError(1)), 0.02);
+
+    for (int burst = 1; burst < 3; ++burst)
+    {
+        ASSERT_TRUE(learner.DecideLength(1));
+        EXPECT_EQ(learner.FailureReason(), 0);
+        EXPECT_EQ(learner.Phase(), 0);
+        EXPECT_EQ(learner.LengthStatus(1), 0);
+        EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), burst);
+    }
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.FailureReason(), 3)
+        << "parametric Branch must report refusal when the invalid peak, Rmin, and timing guard leave no legal transition";
+    EXPECT_EQ(learner.Phase(), 5);
+    EXPECT_EQ(learner.LengthStatus(1), 0)
+        << "the refusal must preserve the no-length-change-without-peak contract";
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, DoesNotRefuseWhenCableTimingIsWithinTolerance)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(1.0e6, true);
+    ASSERT_NEAR(learner.InvalidPeakModelTimingError(1), 0.0, 1e-12);
+
+    for (int burst = 0; burst < 5; ++burst)
+        ASSERT_TRUE(learner.DecideLength(1));
+
+    EXPECT_EQ(learner.FailureReason(), 0);
+    EXPECT_EQ(learner.Phase(), 0);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 0);
+    EXPECT_TRUE(learner.IsBestEffortSynced(1));
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionAboveRmin)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(2.0e6, false);
+    ASSERT_GT(learner.TipResistance(1), learner.MinimumResistance());
+
+    for (int burst = 1; burst < 3; ++burst)
+    {
+        ASSERT_TRUE(learner.DecideLength(1));
+        EXPECT_EQ(learner.FailureReason(), 0);
+        EXPECT_EQ(learner.Phase(), 0);
+        EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), burst);
+    }
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.FailureReason(), 3);
+    EXPECT_EQ(learner.Phase(), 5);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 3);
+    EXPECT_EQ(learner.LengthStatus(1), 0);
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, DoesNotRefuseAtRmaxWhileW3EscapeIsEnabled)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(1.0e8, false);
+    learner.EnableRmaxLengthEscape = true;
+
+    for (int burst = 0; burst < 5; ++burst)
+    {
+        ASSERT_TRUE(learner.DecideLength(1));
+        EXPECT_EQ(learner.FailureReason(), 0);
+        EXPECT_EQ(learner.Phase(), 0);
+        EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 0);
+    }
 }
 
 TEST_F(TimeLearnerResistanceTest, ParametricColdStartPreservesTipResistanceAndDerivedBounds)
