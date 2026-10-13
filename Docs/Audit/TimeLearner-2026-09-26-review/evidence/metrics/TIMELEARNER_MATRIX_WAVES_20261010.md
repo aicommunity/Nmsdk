@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-13T08:31:48.623707+00:00 UTC.
+Обновлено: 2026-10-13T10:29:23.605310+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 276 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 284 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -479,4 +479,17 @@
 | W37_CL100_PACKB_N1 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=e69b32ce037e; Bin=1fe5c2adc03e; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W37_CL100_PACKC_N0 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=c203a43092a3; Bin=485415894b45; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W37_CL100_PACKC_N1 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=e69b32ce037e; Bin=1fe5c2adc03e; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+
+### W39
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W39_BR25_N0_PSIoff_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W39_BR25_N0_PSI25_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W39_BR50_N0_PSIoff_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W39_BR50_N0_PSI25_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W39_BR100_N0_PSIoff_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W39_BR100_N0_PSI25_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W39_BR480_N0_PSIoff_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W39_BR480_N0_PSI25_REV | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=ee8ed93cc5ba; Bin=87f81e070ae8; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 
