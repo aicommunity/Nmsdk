@@ -569,3 +569,153 @@ TEST_F(TimeLearnerResistanceTest, BranchToleranceAndPeakMarginBoundaries)
     EXPECT_TRUE(learner->SetPeakMeasureMargin(0.0));
     EXPECT_TRUE(learner->SetPeakMeasureMargin(std::numeric_limits<double>::min()));
 }
+
+
+class BranchPathologicalAmpHarness : public NMSDK::NNeuronTimeLearnerBranch
+{
+public:
+    void SetAmpState(double amp)
+    {
+        NumInputDendrite = 2;
+        NormalizationMode = 1;
+        EnableRmaxLengthEscape = false;
+        AutoEstimateAttenuationGamma = false;
+        AttenuationGamma = 0.05;
+        ResistanceAdjustGain = 0.4;
+        SynapseResistanceBase = 8.6e7;
+        ResistanceMin = 1.0e4;
+        ResistanceMax = 1.0e10;
+        MaxDendriteLength = 100;
+        DendriteLength = {9, 1};
+        TipSynapseResistance = {2.5e5, 8.6e7};
+        InitialSomaPotential = {0.015781, 0.015781};
+        MaxIterSomaAmp = {amp, 0.0};
+        NumSynapse = {1, 1};
+        DendStatus.assign(2, 0);
+        SynapseStatus.assign(2, 0);
+        ResistanceStatus.assign(2, 0);
+        ResistanceDifference.assign(2, 0.0);
+        PrevAmpError.assign(2, 0.0);
+        PrevResistanceRatio.assign(2, 1.0);
+        NoImproveResistanceCount.assign(2, 0);
+        AmpDtSkipCount.assign(2, 0);
+        RmaxDwellCount.assign(2, 0);
+        RmaxOvershootLengthGrow.assign(2, false);
+        RmaxOvershootLengthCooldown.assign(2, 0);
+        EffectiveResistanceGain.assign(2, 0.4);
+        DendLastAbsDt.assign(2, 0.0);
+        DendBestEffortSynced.assign(2, false);
+        InputPattern.Assign(2, 1, 0.0);
+        PrevInputPattern.Assign(2, 1, 0.0);
+    }
+
+    bool Tune()
+    {
+        return ChangeSynapseResistanceStatus(0);
+    }
+
+    double TipResistance() const
+    {
+        return TipSynapseResistance[0];
+    }
+
+    int PendingResistanceStatus() const
+    {
+        return ResistanceStatus[0];
+    }
+
+    int PathologicalSkipCount() const
+    {
+        return AmpDtSkipCount[0];
+    }
+};
+
+TEST(BranchPathologicalAmpNormTest, BoundsRepeatedExtremeAmplitudeSteps)
+{
+    BranchPathologicalAmpHarness learner;
+    learner.Default();
+    learner.SetAmpState(1.0e19);
+    const double initialR = learner.TipResistance();
+
+    ASSERT_TRUE(learner.Tune());
+    EXPECT_DOUBLE_EQ(learner.TipResistance(), initialR);
+    EXPECT_EQ(learner.PendingResistanceStatus(), 0);
+    EXPECT_EQ(learner.PathologicalSkipCount(), 1);
+
+    ASSERT_TRUE(learner.Tune());
+    EXPECT_DOUBLE_EQ(learner.TipResistance(), initialR);
+    EXPECT_EQ(learner.PendingResistanceStatus(), 0);
+    EXPECT_EQ(learner.PathologicalSkipCount(), 2);
+
+    ASSERT_TRUE(learner.Tune());
+    EXPECT_NEAR(learner.TipResistance(), initialR * 1.15, 1e-6);
+    EXPECT_LT(learner.TipResistance(), 1.0e10);
+    EXPECT_EQ(learner.PendingResistanceStatus(), 1);
+    EXPECT_EQ(learner.PathologicalSkipCount(), 0);
+}
+
+TEST(BranchPathologicalAmpNormTest, OrdinaryUnderTargetStillUsesAmplitudeFeedback)
+{
+    BranchPathologicalAmpHarness learner;
+    learner.Default();
+    learner.SetAmpState(0.00045);
+    const double initialR = learner.TipResistance();
+
+    ASSERT_TRUE(learner.Tune());
+    EXPECT_LT(learner.TipResistance(), initialR);
+    EXPECT_GT(learner.TipResistance(), 1.0e4);
+    EXPECT_EQ(learner.PathologicalSkipCount(), 0);
+}
+
+class BranchPerInputGammaHarness : public NMSDK::NNeuronTimeLearnerBranch
+{
+public:
+    void SetGammaState(bool perInput)
+    {
+        NumInputDendrite = 3;
+        NormalizationMode = 1;
+        AutoEstimateAttenuationGamma = false;
+        UsePerInputAttenuationGamma = perInput;
+        AttenuationGamma = 0.05;
+        AttenuationGammaByInput = {0.1, 0.2, 0.3};
+        SynapseResistanceBase = 8.6e7;
+        TipSynapseResistance = {1.0e6, 2.0e6, 3.0e6};
+        ResistanceStatus.assign(3, 0);
+        ResistanceDifference.assign(3, 0.0);
+        InitialSomaPotential.assign(3, 0.01);
+        MaxIterSomaAmp.assign(3, 0.0);
+    }
+
+    void Grow(int input, int deltaLength)
+    {
+        FeedforwardResistanceOnLengthGrow(input, deltaLength);
+    }
+};
+
+TEST(BranchAttenuationGammaTest, PerInputModeUsesOnlyTheGrowingInputsGamma)
+{
+    BranchPerInputGammaHarness learner;
+    learner.Default();
+    learner.SetGammaState(true);
+
+    learner.Grow(1, 2);
+
+    const auto tips = learner.TipSynapseResistance.GetData();
+    ASSERT_EQ(tips.size(), 3u);
+    EXPECT_DOUBLE_EQ(tips[0], 1.0e6);
+    EXPECT_NEAR(tips[1], 2.0e6 * std::exp(-0.2 * 2.0), 1e-8);
+    EXPECT_DOUBLE_EQ(tips[2], 3.0e6);
+}
+
+TEST(BranchAttenuationGammaTest, SharedModeRetainsLegacyScalarGamma)
+{
+    BranchPerInputGammaHarness learner;
+    learner.Default();
+    learner.SetGammaState(false);
+
+    learner.Grow(1, 2);
+
+    const auto tips = learner.TipSynapseResistance.GetData();
+    ASSERT_EQ(tips.size(), 3u);
+    EXPECT_NEAR(tips[1], 2.0e6 * std::exp(-0.05 * 2.0), 1e-8);
+}
