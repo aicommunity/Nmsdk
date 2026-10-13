@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-13T00:29:35.646843+00:00 UTC.
+Обновлено: 2026-10-13T00:30:42.698298+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 197 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 203 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -340,4 +340,15 @@
 | W27_CL480_D_RC5_DELAY5 | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=4c91476a7853; Bin=943a77328a45; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W27_CL480_D_RC20_DELAY20 | converged_need0 | evaluation_error | evaluation_error | — | 0 | — | обучение сошлось; качество=evaluation_error; цель=evaluation_error | root=f3cb25576fa4; Bin=99c5fb0479f9; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 | W27_CL480_D_MAXLEN150 | cpp_training_refusal | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=f3cb25576fa4; Bin=99c5fb0479f9; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+
+### W29
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W29_CL25_SYNC_CURRENT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bf10b491e107; Bin=1fecf00f99ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W29_CL25_SYNC_HALF | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bf10b491e107; Bin=1fecf00f99ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W29_CL25_SYNC_DOUBLE | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bf10b491e107; Bin=1fecf00f99ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W29_CL480_SYNC_CURRENT | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bf10b491e107; Bin=1fecf00f99ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W29_CL480_SYNC_HALF | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=60aef415b307; Bin=0b17f1b97bd3; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
+| W29_CL480_SYNC_DOUBLE | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=bf10b491e107; Bin=1fecf00f99ef; PulseLib=2bb72a3b6b28; Console=e4df62fb9163 |
 
