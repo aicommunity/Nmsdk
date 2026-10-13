@@ -1,8 +1,8 @@
 # Текущий статус матричных волн TimeLearner
 
-Обновлено: 2026-10-13T13:41:01.386597+00:00 UTC.
+Обновлено: 2026-10-13T13:54:17.310190+00:00 UTC.
 
-Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 304 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
+Реестр подготовлен: 312 опыта, 47 волн, максимум 8 в волне. Полный прогон не выполнялся в рамках подготовки. Существуют только сохранённые результаты: 308 базовых опытов W01–W04; exact Console SHA в этих записях отсутствует.
 
 ### W01
 
@@ -527,4 +527,13 @@
 | W41_CL50_RM_DOUBLE | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W41_CL50_CM_HALF | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 | W41_CL50_CM_DOUBLE | not_converged_at_stop | not_evaluated_training_incomplete | not_evaluated_training_incomplete | — | 1 | — | обучение не сошлось | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+
+### W42
+
+| Случай | Сходимость C++ | Качество разделения | Детекция цели | Acc / FP | Need | Fires | Категория | Provenance (SHA, начало) |
+|---|---|---|---|---|---:|---|---|---|
+| W42_BR50_RM_HALF | converged_need0 | fail | target_not_detected | 7/8 strict; FP=0 | 0 | 00000000 | обучение сошлось; качество=fail; цель=target_not_detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W42_BR50_RM_DOUBLE | converged_need0 | fail | target_not_detected | 7/8 strict; FP=0 | 0 | 00000000 | обучение сошлось; качество=fail; цель=target_not_detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W42_BR50_CM_HALF | converged_need0 | fail | target_not_detected | 7/8 strict; FP=0 | 0 | 00000000 | обучение сошлось; качество=fail; цель=target_not_detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
+| W42_BR50_CM_DOUBLE | converged_need0 | fail | target_not_detected | 7/8 strict; FP=0 | 0 | 00000000 | обучение сошлось; качество=fail; цель=target_not_detected | root=9258a114accb; Bin=f8054f809e8c; PulseLib=2bb72a3b6b28; Console=51da1f19a441 |
 
