@@ -3,6 +3,7 @@
 #include "../../../Rdk/Deploy/Include/rdk.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerResistanceBounds.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
@@ -12,8 +13,101 @@
 #include <cmath>
 #include <limits>
 #include <string>
+#include <vector>
 
 using namespace RDK;
+
+TEST(TimeLearnerResistanceBoundsTest, ComputesNoCrossingRatioFromMembraneTimeScale)
+{
+    const auto br480 = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+        1.0e-9, 1.0e7, 2000.0, 1);
+    ASSERT_EQ(br480.status, NMSDK::TimeLearnerResistanceBounds::FloorStatus::Ok);
+    EXPECT_NEAR(br480.dimensionlessTimeScale, 20.0, 1.0e-12);
+    EXPECT_NEAR(br480.minimumResistance, 2.879e6, 2.0e3);
+
+    const double q = br480.dimensionlessTimeScale;
+    const double rho = br480.minimumResistance / 1.0e7;
+    const double stepGain = std::pow(1.0 + 1.0 / rho, 2.0) / q;
+    EXPECT_NEAR(stepGain, 1.0, 1.0e-12);
+}
+
+TEST(TimeLearnerResistanceBoundsTest, ScalesFloorForMultipleSynapsesAndFastSteps)
+{
+    const auto minMatrixQ = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+        1.0e-11, 1.0e7, 20000.0, 1);
+    ASSERT_EQ(minMatrixQ.status, NMSDK::TimeLearnerResistanceBounds::FloorStatus::Ok);
+    EXPECT_NEAR(minMatrixQ.minimumResistance / 1.0e7, 2.41421356237, 1.0e-9);
+
+    const auto twoSynapses = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+        1.0e-9, 1.0e7, 2000.0, 2);
+    ASSERT_EQ(twoSynapses.status, NMSDK::TimeLearnerResistanceBounds::FloorStatus::Ok);
+    EXPECT_NEAR(twoSynapses.minimumResistance, 2.0 * 2.879e6, 4.0e3);
+}
+
+TEST(TimeLearnerResistanceBoundsTest, RejectsScalesWithoutFiniteNoCrossingFloor)
+{
+    const auto belowBoundary = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+        2.5e-11, 1.0e7, 2000.0, 1);
+    EXPECT_EQ(belowBoundary.status,
+              NMSDK::TimeLearnerResistanceBounds::FloorStatus::NoFiniteNoCrossingFloor);
+    EXPECT_NEAR(belowBoundary.dimensionlessTimeScale, 0.5, 1.0e-12);
+
+    const auto atBoundary = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+        1.0e-11, 1.0e7, 10000.0, 1);
+    EXPECT_EQ(atBoundary.status,
+              NMSDK::TimeLearnerResistanceBounds::FloorStatus::NoFiniteNoCrossingFloor);
+
+    const auto invalid = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+        0.0, 1.0e7, 2000.0, 1);
+    EXPECT_EQ(invalid.status, NMSDK::TimeLearnerResistanceBounds::FloorStatus::InvalidInput);
+}
+
+TEST(TimeLearnerResistanceBoundsTest, KeepsDistinctPerInputResistanceIntervals)
+{
+    const auto result = NMSDK::TimeLearnerResistanceBounds::ComputePerInputBounds(
+        {1.0e7, 1.0e8}, {2.879e6, 2.0e7}, 1.0);
+    ASSERT_TRUE(result.valid);
+    EXPECT_FALSE(result.commonIntervalExists)
+        << "different membrane resistances need not share one absolute Rs interval";
+    ASSERT_EQ(result.minimumResistance.size(), 2u);
+    ASSERT_EQ(result.maximumResistance.size(), 2u);
+    EXPECT_DOUBLE_EQ(result.minimumResistance[0], 1.0e7);
+    EXPECT_DOUBLE_EQ(result.maximumResistance[0], 1.0e7);
+    EXPECT_DOUBLE_EQ(result.minimumResistance[1], 1.0e8);
+    EXPECT_DOUBLE_EQ(result.maximumResistance[1], 1.0e8);
+    EXPECT_DOUBLE_EQ(result.maximumMinimumRatio, 1.0);
+}
+
+TEST(TimeLearnerResistanceBoundsTest, CombinesEachInputRatioWithItsOwnStabilityFloor)
+{
+    const auto result = NMSDK::TimeLearnerResistanceBounds::ComputePerInputBounds(
+        {1.0e7, 1.0e8}, {2.879e6, 2.0e4}, 1000.0);
+    ASSERT_TRUE(result.valid);
+    ASSERT_TRUE(result.commonIntervalExists);
+    ASSERT_EQ(result.minimumResistance.size(), 2u);
+    EXPECT_NEAR(result.minimumResistance[0], 2.879e6, 1.0e-8);
+    EXPECT_NEAR(result.minimumRatio[0], 0.2879, 1.0e-12);
+    EXPECT_NEAR(result.minimumResistance[1], 1.0e5, 1.0e-8)
+        << "the second input uses its own Rm and does not inherit the first input's absolute floor";
+    EXPECT_NEAR(result.minimumRatio[1], 0.001, 1.0e-12);
+}
+
+TEST(TimeLearnerResistanceBoundsTest, RejectsOnlyWhenAnInputHasNoFeasibleLocalRange)
+{
+    const auto impossible = NMSDK::TimeLearnerResistanceBounds::ComputePerInputBounds(
+        {1.0e7, 1.0e8}, {1.1e7, 1.0e5}, 1.0);
+    EXPECT_FALSE(impossible.valid)
+        << "a stability floor above that input's own upper ratio is infeasible";
+}
+
+TEST(TimeLearnerResistanceBoundsTest, EffectiveSynapseCountMatchesChannelAggregation)
+{
+    EXPECT_EQ(NMSDK::TimeLearnerResistanceBounds::EffectiveConductanceCount(0, false), 0);
+    EXPECT_EQ(NMSDK::TimeLearnerResistanceBounds::EffectiveConductanceCount(1, false), 1);
+    EXPECT_EQ(NMSDK::TimeLearnerResistanceBounds::EffectiveConductanceCount(8, false), 8);
+    EXPECT_EQ(NMSDK::TimeLearnerResistanceBounds::EffectiveConductanceCount(0, true), 0);
+    EXPECT_EQ(NMSDK::TimeLearnerResistanceBounds::EffectiveConductanceCount(8, true), 1);
+}
 
 class TimeLearnerResistanceTest : public ::testing::Test
 {
@@ -535,7 +629,8 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartPreservesTipResistanceAndDe
     ASSERT_GE(tips.size(), 2u);
 
     double minRm = std::numeric_limits<double>::max();
-    double maxRm = 0.0;
+    std::vector<double> expectedMinima;
+    std::vector<double> expectedRatios;
     for (int i = 0; i < 2; ++i)
     {
         const std::string membraneName = "Dendrite" + std::to_string(i + 1) + "_1";
@@ -549,16 +644,45 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartPreservesTipResistanceAndDe
             : channel->Resistance.GetData();
         ASSERT_GT(rm, 0.0);
         minRm = std::min(minRm, rm);
-        maxRm = std::max(maxRm, rm);
+        double stabilityFloor = 0.0;
+        const double channelRs[] = {
+            channel->Resistance.GetData(),
+            channel->RestingResistance.GetData(),
+            channel->FBResistance.GetData()
+        };
+        for (double candidateRs : channelRs)
+        {
+            const auto floor = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+                channel->Capacity.GetData(), candidateRs,
+                static_cast<double>(channel->TimeStep.GetData()),
+                std::max(1, channel->GetNumSynapses()));
+            ASSERT_EQ(floor.status, NMSDK::TimeLearnerResistanceBounds::FloorStatus::Ok);
+            stabilityFloor = std::max(stabilityFloor, floor.minimumResistance);
+        }
         const double configuredRs = learner->SynapseResistanceBase.GetData();
         EXPECT_NEAR(tips[static_cast<size_t>(i)], configuredRs,
                     std::max(1e-6, configuredRs * 1e-9));
+        const double localMinimum = std::max(rm / 1000.0, stabilityFloor);
+        expectedMinima.push_back(localMinimum);
+        expectedRatios.push_back(localMinimum / rm);
     }
 
     EXPECT_NEAR(learner->ResistanceMax.GetData(), minRm * 1000.0,
                 std::max(1e-6, minRm * 1e-6));
-    EXPECT_NEAR(learner->ResistanceMin.GetData(), maxRm / 1000.0,
-                std::max(1e-6, maxRm * 1e-9));
+    const double expectedMinRs = *std::max_element(expectedMinima.begin(), expectedMinima.end());
+    const double expectedMinRatio = *std::max_element(expectedRatios.begin(), expectedRatios.end());
+    EXPECT_NEAR(learner->ResistanceMin.GetData(), expectedMinRs,
+                std::max(1e-6, expectedMinRs * 1e-9));
+    EXPECT_NEAR(learner->ResistanceMinRatio.GetData(), expectedMinRatio, 1e-12);
+    const auto actualMinima = learner->ResistanceMinByInput.GetData();
+    const auto actualRatios = learner->ResistanceMinRatioByInput.GetData();
+    ASSERT_EQ(actualMinima.size(), expectedMinima.size());
+    ASSERT_EQ(actualRatios.size(), expectedRatios.size());
+    for(size_t i = 0; i < expectedMinima.size(); ++i)
+    {
+        EXPECT_NEAR(actualMinima[i], expectedMinima[i], std::max(1e-6, expectedMinima[i] * 1e-9));
+        EXPECT_NEAR(actualRatios[i], expectedRatios[i], 1e-12);
+    }
     EXPECT_FALSE(learner->EnableRmaxLengthEscape.GetData());
 }
 
@@ -663,6 +787,8 @@ TEST_F(TimeLearnerResistanceTest, StructuralColdStartPreservesBaseResistance)
         << "switching to structural mode must clear the parametric-only cap";
     EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0)
         << "switching to structural mode must clear the parametric-only floor";
+    EXPECT_TRUE(learner->ResistanceMinByInput.GetData().empty())
+        << "input-specific parametric bounds must not survive in structural mode";
     learner->EnableRmaxLengthEscape = true;
     const double baseResistance = learner->SynapseResistanceBase.GetData();
     ASSERT_TRUE(BuildAndReset(learner));
@@ -671,6 +797,7 @@ TEST_F(TimeLearnerResistanceTest, StructuralColdStartPreservesBaseResistance)
     ASSERT_GE(tips.size(), 2u);
     EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0);
     EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0);
+    EXPECT_TRUE(learner->ResistanceMinByInput.GetData().empty());
     EXPECT_DOUBLE_EQ(learner->SynapseResistanceBase.GetData(), baseResistance);
     EXPECT_DOUBLE_EQ(tips[0], baseResistance);
     EXPECT_DOUBLE_EQ(tips[1], baseResistance);
@@ -680,10 +807,44 @@ TEST_F(TimeLearnerResistanceTest, ResistanceRatioMustBeAtLeastOne)
 {
     auto classic = CreateLearner("TimeLearnerRatioBoundary");
     ASSERT_TRUE(classic);
+    classic->NormalizationMode = 0; // isolate parameter-domain validation from live stability feasibility
     EXPECT_FALSE(classic->SetMaxSynapseToMembraneResistanceRatio(0.999));
     EXPECT_TRUE(classic->SetMaxSynapseToMembraneResistanceRatio(1.0));
     classic->MaxSynapseToMembraneResistanceRatio = 1.0;
     EXPECT_DOUBLE_EQ(classic->MaxSynapseToMembraneResistanceRatio.GetData(), 1.0);
+}
+
+TEST_F(TimeLearnerResistanceTest, AllowsPerInputRatioOneWithoutFalseGlobalIntervalFailure)
+{
+    auto classic = CreateLearner("TimeLearnerRatioStabilityConflict");
+    ASSERT_TRUE(classic);
+    classic->NormalizationMode = 1;
+    ASSERT_TRUE(BuildAndReset(classic));
+    auto neuron = classic->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    auto secondMembrane = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite2_1", true);
+    ASSERT_TRUE(secondMembrane);
+    ASSERT_GT(secondMembrane->GetNumPosChannels(), 0);
+    auto* secondChannel = dynamic_cast<NMSDK::NPulseChannel*>(secondMembrane->GetPosChannel(0));
+    ASSERT_NE(secondChannel, nullptr);
+    secondChannel->RestingResistance = 2.0e7;
+    ASSERT_TRUE(classic->SetMaxSynapseToMembraneResistanceRatio(1.0));
+    EXPECT_DOUBLE_EQ(classic->MaxSynapseToMembraneResistanceRatio.GetData(), 1.0);
+    EXPECT_GT(classic->ResistanceMin.GetData(), classic->ResistanceMax.GetData())
+        << "the diagnostic common interval may be empty when tips have different Rm";
+    const auto minima = classic->ResistanceMinByInput.GetData();
+    const auto maxima = classic->ResistanceMaxByInput.GetData();
+    const auto tips = classic->TipSynapseResistance.GetData();
+    ASSERT_EQ(minima.size(), 2u);
+    ASSERT_EQ(maxima.size(), minima.size());
+    ASSERT_GE(tips.size(), minima.size());
+    for(size_t i = 0; i < minima.size(); ++i)
+    {
+        EXPECT_DOUBLE_EQ(minima[i], maxima[i]);
+        EXPECT_NEAR(tips[i], minima[i], std::max(1e-6, minima[i] * 1e-9));
+    }
+    EXPECT_NEAR(minima[0], 1.0e7, 1.0e-6);
+    EXPECT_NEAR(minima[1], 2.0e7, 1.0e-6);
 }
 
 TEST_F(TimeLearnerResistanceTest, BranchResistanceRatioMustBeAtLeastOne)
@@ -712,6 +873,8 @@ TEST_F(TimeLearnerResistanceTest, BranchParametricColdStartPreservesTipResistanc
 
     auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
     ASSERT_TRUE(neuron);
+    double minRm = std::numeric_limits<double>::max();
+    double stabilityMinRatio = 0.0;
     auto membrane = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite1_1", true);
     ASSERT_TRUE(membrane);
     ASSERT_GT(membrane->GetNumPosChannels(), 0);
@@ -721,16 +884,43 @@ TEST_F(TimeLearnerResistanceTest, BranchParametricColdStartPreservesTipResistanc
         ? channel->RestingResistance.GetData()
         : channel->Resistance.GetData();
     ASSERT_GT(rm, 0.0);
+    minRm = rm;
+    const double channelRs[] = {
+        channel->Resistance.GetData(),
+        channel->RestingResistance.GetData(),
+        channel->FBResistance.GetData()
+    };
+    for (double candidateRs : channelRs)
+    {
+        const auto floor = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+            channel->Capacity.GetData(), candidateRs,
+            static_cast<double>(channel->TimeStep.GetData()),
+            std::max(1, channel->GetNumSynapses()));
+        ASSERT_EQ(floor.status, NMSDK::TimeLearnerResistanceBounds::FloorStatus::Ok);
+        stabilityMinRatio = std::max(stabilityMinRatio, floor.minimumResistance / rm);
+    }
 
     const auto tips = learner->TipSynapseResistance.GetData();
     ASSERT_GE(tips.size(), 2u);
     const double configuredRs = learner->SynapseResistanceBase.GetData();
     EXPECT_NEAR(tips[0], configuredRs, std::max(1e-6, configuredRs * 1e-9));
     EXPECT_NEAR(tips[1], configuredRs, std::max(1e-6, configuredRs * 1e-9));
-    EXPECT_NEAR(learner->ResistanceMax.GetData(), rm * 1000.0,
-                std::max(1e-6, rm * 1e-6));
-    EXPECT_NEAR(learner->ResistanceMin.GetData(), rm / 1000.0,
-                std::max(1e-6, rm * 1e-9));
+    EXPECT_NEAR(learner->ResistanceMax.GetData(), minRm * 1000.0,
+                std::max(1e-6, minRm * 1e-6));
+    const double expectedMinRatio = std::max(1.0 / 1000.0, stabilityMinRatio);
+    const double expectedMinRs = rm * expectedMinRatio;
+    EXPECT_NEAR(learner->ResistanceMin.GetData(), expectedMinRs,
+                std::max(1e-6, expectedMinRs * 1e-9));
+    EXPECT_NEAR(learner->ResistanceMinRatio.GetData(), expectedMinRatio, 1e-12);
+    const auto actualMinima = learner->ResistanceMinByInput.GetData();
+    const auto actualRatios = learner->ResistanceMinRatioByInput.GetData();
+    ASSERT_EQ(actualMinima.size(), 2u);
+    ASSERT_EQ(actualRatios.size(), 2u);
+    for(size_t i = 0; i < actualMinima.size(); ++i)
+    {
+        EXPECT_NEAR(actualMinima[i], expectedMinRs, std::max(1e-6, expectedMinRs * 1e-9));
+        EXPECT_NEAR(actualRatios[i], expectedMinRatio, 1e-12);
+    }
 }
 
 TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartPreservesBaseResistance)
@@ -742,6 +932,8 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartPreservesBaseResistan
         << "switching to structural mode must clear the parametric-only cap";
     EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0)
         << "switching to structural mode must clear the parametric-only floor";
+    EXPECT_TRUE(learner->ResistanceMinByInput.GetData().empty())
+        << "input-specific parametric bounds must not survive in structural mode";
     learner->EnableRmaxLengthEscape = true;
     const double baseResistance = learner->SynapseResistanceBase.GetData();
     ASSERT_TRUE(BuildAndReset(learner));
@@ -750,6 +942,7 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartPreservesBaseResistan
     ASSERT_GE(tips.size(), 2u);
     EXPECT_DOUBLE_EQ(learner->ResistanceMax.GetData(), 0.0);
     EXPECT_DOUBLE_EQ(learner->ResistanceMin.GetData(), 0.0);
+    EXPECT_TRUE(learner->ResistanceMinByInput.GetData().empty());
     EXPECT_DOUBLE_EQ(learner->SynapseResistanceBase.GetData(), baseResistance);
     EXPECT_DOUBLE_EQ(tips[0], baseResistance);
     EXPECT_DOUBLE_EQ(tips[1], baseResistance);
