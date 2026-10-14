@@ -235,6 +235,25 @@ public:
         return MeanStoredPeakRel(pulse) - ExpectedPulseRelTimes.at(index) - DelayLenOf(pulse);
     }
 
+    double CurrentModelTimingError(int pulse) const
+    {
+        const size_t index = static_cast<size_t>(pulse);
+        const double expected = ExpectedPulseRelTimes.at(index);
+        const double measured_delay = DelayFromPulse.at(index);
+        return MeanStoredPeakRel(pulse) - expected
+            - DelayUseOf(pulse, expected, measured_delay);
+    }
+
+    void SetDissynchronization(int pulse, double value)
+    {
+        Dissynchronization.at(static_cast<size_t>(pulse)) = value;
+    }
+
+    double DissynchronizationAt(int pulse) const
+    {
+        return Dissynchronization.at(static_cast<size_t>(pulse));
+    }
+
     double TipResistance(int pulse) const
     {
         return TipSynapseResistance.GetData().at(static_cast<size_t>(pulse));
@@ -357,6 +376,21 @@ TEST(BranchSegmentOrderTransitionTest, GrowsSyncedActivePulseWhenOrderIsBroken)
     ASSERT_TRUE(learner.DecideLength(1));
     EXPECT_EQ(learner.LengthStatus(1), 1)
         << "a locally synchronized pulse must still grow past the next committed attach point";
+    EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchSegmentOrderTransitionTest, RefreshesTimingErrorBeforeOrderRepairReturn)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 61, 89, 1}, 1, 100);
+    const double current_error = learner.CurrentModelTimingError(1);
+    ASSERT_NEAR(current_error, 0.00134, 1e-10);
+    learner.SetDissynchronization(1, 1.5);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_NEAR(learner.DissynchronizationAt(1), current_error, 1e-12)
+        << "the next delay-per-segment estimate must compare against the current error, not stale IterationGap";
+    EXPECT_EQ(learner.LengthStatus(1), 1);
     EXPECT_EQ(learner.FailureReason(), 0);
 }
 
