@@ -21,6 +21,9 @@ struct ConsoleInitResult
 /// Повторные вызовы возвращают уже инициализированный результат.
 const ConsoleInitResult& InitEngineForPulseLibTests();
 
+/// Tear down the console-like engine before process exit.
+void ShutdownEngineForPulseLibTests();
+
 } // namespace NmsdkTests
 
 #endif // NMSDK_TESTS_CONSOLE_LIKE_INIT_H
