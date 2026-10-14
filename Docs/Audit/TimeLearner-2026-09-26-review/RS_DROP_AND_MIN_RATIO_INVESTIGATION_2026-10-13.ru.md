@@ -365,3 +365,18 @@ Provenance матрицы неоднороден по бинарному фай�
 Для неоднородных мембран устранён ещё один риск в рабочем варианте C++: один общий нижний Rs теперь должен быть максимумом **абсолютных** требований по каналам и базового `max(Rm)/MaxRatio`. Формула `max_i(floor_i/Rm_i)×max(Rm)` могла завысить пол, если наибольшая локальная доля относилась к сегменту с меньшим Rm. Вычисляемый `ResistanceMinRatio` — это фактический глобальный минимум, выраженный относительно `max(Rm)`. Дополнительно эффективное число проводимостей должно учитывать `UseAverageSynapsis` (сумма: число подключений; среднее: 1 для непустой группы). Эти корректировки ещё требуют Linux Release-пересборки и повторного C++-тестирования на `.17`; их не было в Console приведённого прогона. Локальная Windows-сборка не запускалась.
 
 Console опыта: SHA-256 `3ccf7cabc1f9a8466cfbd393d5db67cbb18d77bb926cc41b2bfff8dc631de408`. Runner успешно записал отказ и получил `child_rc=-15`, так как остановил оставшийся event loop после обнаружения C++-отказа; это не причина самого отказа. Входные SHA, run ID, пути и статусы приведены в [компактной JSON-записи](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/branch_br480_dynamic_rs_rm_floor_2026-10-14.json). Полные логи сохранены на Data-диске `.17` в `/media/user/Data/NmsdkStructTrainArchive/TimeLearnerAudit-20261013-historical_view/diagnostics/branch-rmin-refusal-20261014-01/rs-ratio-bound-20261014-02/`. Через `.12` SSH-туннель оборвался; на момент фиксации `.12` и `.17` недоступны по SSH, поэтому повторный анализ больших логов и Release-пересборка ожидают восстановления соединения. Данные не удалялись.
+
+### Подготовлен разбор per-tick телеметрии
+
+Добавлен read-only инструмент [analyze_timelearner_dynamics.py](../../../Bin/Configs/SpikeSamples/StructTrain/scripts/analyze_timelearner_dynamics.py). Он потоково обрабатывает `TimeLearnerTrainingDynamics.log`, считает min/max выходов каналов, `SumPotential` каждого сегмента и сомы, переходы через ноль и выходы за заданный resting bound; также извлекает сопротивления синапсов. Если задана частота обновления, инструмент восстанавливает активное канальное сопротивление из `Capacity`, `SumSynapticInput` и записанного `TimeConstant`, затем оценивает локальный коэффициент явного шага. Это локальная оценка при замороженном входе канала, а не гарантия устойчивости всей связанной модели. Порог сомы не зашит: его можно передать только при наличии точного значения из конфигурации.
+
+Пример запуска на сервере после восстановления доступа:
+
+```bash
+python3 /home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/scripts/analyze_timelearner_dynamics.py \
+  /media/user/Data/NmsdkStructTrainArchive/TimeLearnerAudit-20261013-historical_view/diagnostics/branch-rmin-refusal-20261014-01/rs-ratio-bound-20261014-02/runs/diag_rsratio_br480_20261014T070040Z_3412788_f16f478a_work/Train/TimeLearnerTrainingDynamics.log \
+  --time-step-hz 2000 \
+  --output /media/user/Data/NmsdkStructTrainArchive/TimeLearnerAudit-20261013-historical_view/diagnostics/branch-rmin-refusal-20261014-01/rs-ratio-bound-20261014-02/dynamics_summary.json
+```
+
+Новая C++-телеметрия дописывает `NPulseChannel.Type` в каждый channel snapshot. В уже сохранённом BR480-логе этого поля нет, и анализатор явно помечает вывод ориентации по первому ненулевому наблюдению как fallback. Старую трассу можно использовать для абсолютных экстремумов; строгая проверка соответствия знака канала его `Type` потребует новой Release-сборки с этим telemetry-полем. Четыре unit-теста анализатора на синтетических строках прошли; старый формат также проверен. Реальные 596-МБ dynamics логи пока не анализировались из-за потери SSH-доступа.
