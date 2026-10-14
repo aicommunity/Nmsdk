@@ -464,19 +464,25 @@ TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionBurstsAtRmin)
         << "the refusal must preserve the no-length-change-without-peak contract";
 }
 
-TEST(BranchInvalidPeakNoRecoveryTest, DoesNotRefuseWhenCableTimingIsWithinTolerance)
+TEST(BranchInvalidPeakNoRecoveryTest, RefusesWhenTimingMatchesButAmplitudeCannotRecover)
 {
     BranchSegmentOrderHarness learner;
     learner.SetInvalidPeakNoActionState(1.0e6, true);
     ASSERT_NEAR(learner.InvalidPeakModelTimingError(1), 0.0, 1e-12);
 
-    for (int burst = 0; burst < 5; ++burst)
+    for (int burst = 1; burst < 3; ++burst)
+    {
         ASSERT_TRUE(learner.DecideLength(1));
+        EXPECT_EQ(learner.FailureReason(), 0);
+        EXPECT_EQ(learner.Phase(), 0);
+        EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), burst);
+    }
 
-    EXPECT_EQ(learner.FailureReason(), 0);
-    EXPECT_EQ(learner.Phase(), 0);
-    EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 0);
-    EXPECT_TRUE(learner.IsBestEffortSynced(1));
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.FailureReason(), 3);
+    EXPECT_EQ(learner.Phase(), 5);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 3);
+    EXPECT_FALSE(learner.IsBestEffortSynced(1));
 }
 
 TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionAboveRmin)
