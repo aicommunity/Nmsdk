@@ -25,7 +25,7 @@ using AppCoreType = RDK::UAppCore<
 
 ConsoleInitResult g_result;
 bool g_initialized = false;
-AppCoreType g_appCore;
+AppCoreType* g_appCore = nullptr;
 
 } // namespace
 
@@ -54,7 +54,10 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
     // Core_SetSystemDir — C API из rdk_init.h (глобальная область видимости).
     Core_SetSystemDir(".");
 
-    const int initRes = g_appCore.Init(appPath, iniFile, testLogDir, defaultUser, argc, argv);
+    if (!g_appCore)
+        g_appCore = new AppCoreType();
+
+    const int initRes = g_appCore->Init(appPath, iniFile, testLogDir, defaultUser, argc, argv);
     if (initRes != 0)
     {
         throw std::runtime_error(
@@ -76,6 +79,19 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
 
     g_initialized = true;
     return g_result;
+}
+
+void ShutdownEngineForPulseLibTests()
+{
+    if (g_appCore)
+    {
+        delete g_appCore;
+        g_appCore = nullptr;
+    }
+    g_result.storage = static_cast<RDK::UStorage*>(nullptr);
+    g_result.environment = static_cast<RDK::UEnvironment*>(nullptr);
+    g_result.engine = static_cast<RDK::UEngine*>(nullptr);
+    g_initialized = false;
 }
 
 } // namespace NmsdkTests
