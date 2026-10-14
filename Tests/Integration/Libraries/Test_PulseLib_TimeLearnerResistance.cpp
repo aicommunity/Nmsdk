@@ -47,19 +47,47 @@ TEST(TimeLearnerResistanceBoundsTest, ScalesFloorForMultipleSynapsesAndFastSteps
 TEST(TimeLearnerResistanceBoundsTest, RejectsScalesWithoutFiniteNoCrossingFloor)
 {
     const auto belowBoundary = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
-        2.5e-11, 1.0e7, 2000.0, 1);
+        1.0e-11, 1.0e7, 2000.0, 1);
     EXPECT_EQ(belowBoundary.status,
-              NMSDK::TimeLearnerResistanceBounds::FloorStatus::NoFiniteNoCrossingFloor);
-    EXPECT_NEAR(belowBoundary.dimensionlessTimeScale, 0.5, 1.0e-12);
+              NMSDK::TimeLearnerResistanceBounds::FloorStatus::NoFiniteLinearStabilityFloor);
+    EXPECT_NEAR(belowBoundary.dimensionlessTimeScale, 0.2, 1.0e-12);
 
     const auto atBoundary = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
-        1.0e-11, 1.0e7, 10000.0, 1);
+        2.5e-11, 1.0e7, 2000.0, 1);
     EXPECT_EQ(atBoundary.status,
+              NMSDK::TimeLearnerResistanceBounds::FloorStatus::NoFiniteLinearStabilityFloor);
+
+    const auto stableButOvershooting = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
+        3.75e-11, 1.0e7, 2000.0, 1);
+    EXPECT_EQ(stableButOvershooting.status,
               NMSDK::TimeLearnerResistanceBounds::FloorStatus::NoFiniteNoCrossingFloor);
+    EXPECT_NEAR(stableButOvershooting.dimensionlessTimeScale, 0.75, 1.0e-12);
 
     const auto invalid = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
         0.0, 1.0e7, 2000.0, 1);
     EXPECT_EQ(invalid.status, NMSDK::TimeLearnerResistanceBounds::FloorStatus::InvalidInput);
+}
+
+TEST(TimeLearnerResistanceBoundsTest, SeparatesLinearStabilityFromMonotoneNoCrossing)
+{
+    const auto unstable = NMSDK::TimeLearnerResistanceBounds::AssessStepStability(
+        1.0e-11, 1.0e7, 2000.0);
+    EXPECT_EQ(unstable.status,
+              NMSDK::TimeLearnerResistanceBounds::StepStabilityStatus::NoStrictLinearStabilityForAnyFiniteResistance);
+    EXPECT_NEAR(unstable.dimensionlessTimeScale, 0.2, 1.0e-12);
+    EXPECT_NEAR(unstable.minimumStepGainAtZeroConductance, 5.0, 1.0e-12);
+
+    const auto marginal = NMSDK::TimeLearnerResistanceBounds::AssessStepStability(
+        2.5e-11, 1.0e7, 2000.0);
+    EXPECT_EQ(marginal.status,
+              NMSDK::TimeLearnerResistanceBounds::StepStabilityStatus::NoStrictLinearStabilityForAnyFiniteResistance);
+    EXPECT_NEAR(marginal.minimumStepGainAtZeroConductance, 2.0, 1.0e-12);
+
+    const auto stablePossible = NMSDK::TimeLearnerResistanceBounds::AssessStepStability(
+        3.75e-11, 1.0e7, 2000.0);
+    EXPECT_EQ(stablePossible.status,
+              NMSDK::TimeLearnerResistanceBounds::StepStabilityStatus::StrictLinearStabilityPossible);
+    EXPECT_NEAR(stablePossible.minimumStepGainAtZeroConductance, 4.0 / 3.0, 1.0e-12);
 }
 
 TEST(TimeLearnerResistanceBoundsTest, KeepsDistinctPerInputResistanceIntervals)
@@ -150,7 +178,7 @@ protected:
         if (!learner)
             return learner;
 
-        EXPECT_TRUE(model->Default());
+        model->Default();
         learner->StructureBuildMode = 1;
         learner->NumInputDendrite = 3;
         learner->MaxDendriteLength = 10;
@@ -187,7 +215,7 @@ protected:
         if (!learner)
             return learner;
 
-        EXPECT_TRUE(model->Default());
+        model->Default();
         learner->StructureBuildMode = 1;
         learner->NumInputDendrite = 3;
         learner->MaxDendriteLength = 10;
@@ -211,11 +239,13 @@ protected:
         if (!learner || !model)
             return false;
         const int configuredMode = learner->NormalizationMode.GetData();
-        if (!learner->Build())
+        learner->Build();
+        if (!learner->IsReady())
             return false;
         EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
             << "learner Build changed NormalizationMode";
-        if (!model->Build())
+        model->Build();
+        if (!model->IsReady())
             return false;
         EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
             << "model Build changed NormalizationMode";
@@ -223,8 +253,7 @@ protected:
         // the completed component tree before requesting its cold reset.
         model->Init();
         learner->ResetToUntrainedState = true;
-        if (!model->Reset())
-            return false;
+        model->Reset();
         EXPECT_EQ(learner->NormalizationMode.GetData(), configuredMode)
             << "model Reset changed NormalizationMode";
         EXPECT_FALSE(learner->ResetToUntrainedState.GetData())
@@ -801,6 +830,110 @@ TEST_F(TimeLearnerResistanceTest, StructuralColdStartPreservesBaseResistance)
     EXPECT_DOUBLE_EQ(learner->SynapseResistanceBase.GetData(), baseResistance);
     EXPECT_DOUBLE_EQ(tips[0], baseResistance);
     EXPECT_DOUBLE_EQ(tips[1], baseResistance);
+}
+
+TEST_F(TimeLearnerResistanceTest, ClassicStructuralRejectsTimeScaleUnstableForAnyRs)
+{
+    constexpr const char* kFastNeuron = "NSPNeuronGenAsymRmD001C1e11";
+    ASSERT_TRUE(storage->CheckClass(kFastNeuron));
+    auto learner = CreateLearner("TimeLearnerClassicNoStableStep");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    learner->NeuronClassName = kFastNeuron;
+
+    learner->Build();
+    EXPECT_TRUE(learner->IsReady())
+        << "Build's bool result is not the failure contract; the component exposes its preflight state";
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 4);
+    EXPECT_EQ(learner->TrainingFailureReason.GetData(), 2);
+    EXPECT_TRUE(learner->SetIsNeedToTrain(true));
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 4)
+        << "raising IsNeedToTrain must not clear an impossible integration step";
+    learner->Reset();
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 4)
+        << "Reset must preserve the integration preflight failure";
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchStructuralRejectsTimeScaleUnstableForAnyRs)
+{
+    constexpr const char* kFastNeuron = "NSPNeuronGenAsymRmD001C1e11";
+    ASSERT_TRUE(storage->CheckClass(kFastNeuron));
+    auto learner = CreateBranchLearner("TimeLearnerBranchNoStableStep");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    learner->NeuronClassName = kFastNeuron;
+
+    learner->Build();
+    EXPECT_TRUE(learner->IsReady())
+        << "Build's bool result is not the failure contract; the component exposes its preflight state";
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 5);
+    EXPECT_EQ(learner->TrainingFailureReason.GetData(), 4);
+    EXPECT_TRUE(learner->SetIsNeedToTrain(true));
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 5)
+        << "raising IsNeedToTrain must not clear an impossible integration step";
+    learner->Reset();
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 5)
+        << "Reset must preserve the integration preflight failure";
+}
+
+TEST_F(TimeLearnerResistanceTest, ClassicChecksAllMembranesAndSkipsCalculationAfterPreflightFailure)
+{
+    auto learner = CreateLearner("TimeLearnerClassicSomaPreflight");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    ASSERT_TRUE(BuildAndReset(learner));
+    learner->NormalizationMode = 1;
+    learner->StructureBuildMode = 0;
+    learner->Build();
+    ASSERT_TRUE(learner->IsReady());
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    auto soma = neuron->GetComponentL<NMSDK::NPulseMembrane>("Soma1", true);
+    ASSERT_TRUE(soma);
+    auto* channel = dynamic_cast<NMSDK::NPulseChannel*>(soma->GetPosChannel(0));
+    ASSERT_NE(channel, nullptr);
+    const double output_before = channel->Output(0, 0);
+    channel->Capacity = 1.0e-11;
+
+    EXPECT_FALSE(learner->SetMaxSynapseToMembraneResistanceRatio(
+        learner->MaxSynapseToMembraneResistanceRatio.GetData()))
+        << "the soma must be checked even though it is not a synaptic target tip";
+    EXPECT_EQ(learner->TrainingFailureReason.GetData(), 2);
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 4);
+    ASSERT_TRUE(learner->IsReady());
+    learner->Calculate();
+    EXPECT_DOUBLE_EQ(channel->Output(0, 0), output_before)
+        << "the rejected learner must skip its unstable neuron child calculation";
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchChecksAllMembranesAndSkipsCalculationAfterPreflightFailure)
+{
+    auto learner = CreateBranchLearner("TimeLearnerBranchSomaPreflight");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    ASSERT_TRUE(BuildAndReset(learner));
+    learner->NormalizationMode = 1;
+    learner->StructureBuildMode = 0;
+    learner->Build();
+    ASSERT_TRUE(learner->IsReady());
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    auto soma = neuron->GetComponentL<NMSDK::NPulseMembrane>("Soma1", true);
+    ASSERT_TRUE(soma);
+    auto* channel = dynamic_cast<NMSDK::NPulseChannel*>(soma->GetPosChannel(0));
+    ASSERT_NE(channel, nullptr);
+    const double output_before = channel->Output(0, 0);
+    channel->Capacity = 1.0e-11;
+
+    EXPECT_FALSE(learner->SetMaxSynapseToMembraneResistanceRatio(
+        learner->MaxSynapseToMembraneResistanceRatio.GetData()))
+        << "the soma must be checked even though it is not a synaptic target tip";
+    EXPECT_EQ(learner->TrainingFailureReason.GetData(), 4);
+    EXPECT_EQ(learner->TrainingPhase.GetData(), 5);
+    ASSERT_TRUE(learner->IsReady());
+    learner->Calculate();
+    EXPECT_DOUBLE_EQ(channel->Output(0, 0), output_before)
+        << "the rejected learner must skip its unstable neuron child calculation";
 }
 
 TEST_F(TimeLearnerResistanceTest, ResistanceRatioMustBeAtLeastOne)
