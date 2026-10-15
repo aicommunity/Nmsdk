@@ -1081,6 +1081,78 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralColdStartPreservesBaseResistan
     EXPECT_DOUBLE_EQ(tips[1], baseResistance);
 }
 
+TEST_F(TimeLearnerResistanceTest, BranchStructuralSynapseMultiplicityIsDrivenByGenerator)
+{
+    auto learner = CreateBranchLearner("TimeLearnerBranchStructuralSynapseWiring");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    ASSERT_TRUE(BuildAndReset(learner));
+    learner->DendriteLength = {1, 1, 1};
+    learner->NumSynapse = {1, 3, 1};
+    learner->Build();
+    ASSERT_TRUE(learner->IsReady());
+
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    auto tip = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite1_1", true);
+    ASSERT_TRUE(tip);
+    auto exc_channel = tip->GetComponentL<NMSDK::NPulseChannelCommon>("ExcChannel", true);
+    ASSERT_TRUE(exc_channel);
+    ASSERT_EQ(int(tip->NumExcitatorySynapses), 3)
+        << "structural NumSynapse must survive Build/Reset at its attach segment";
+
+    for (int index = 1; index <= 3; ++index)
+    {
+        auto synapse = tip->GetComponentL<NMSDK::NPulseSynapseCommon>(
+            std::string("ExcSynapse") + std::to_string(index), true);
+        ASSERT_TRUE(synapse) << "missing structural synapse " << index;
+        EXPECT_TRUE(synapse->Input.IsConnected())
+            << "every structural synapse contributing to this pulse must receive Generator1";
+        ASSERT_NE(synapse->Input.GetItem(), nullptr);
+        EXPECT_EQ(synapse->Input.GetItem()->GetName(), "Generator1");
+        auto* channel_input = exc_channel->SynapticInputs.GetItem(index - 1);
+        ASSERT_NE(channel_input, nullptr);
+        EXPECT_EQ(channel_input->GetName(), synapse->GetName());
+    }
+    EXPECT_EQ(exc_channel->SynapticInputs.GetNumPointers(), 3)
+        << "every created structural synapse must remain linked to its membrane ExcChannel";
+}
+
+TEST_F(TimeLearnerResistanceTest, ClassicStructuralSynapseOutputsSurviveGeneratorRelink)
+{
+    auto learner = CreateLearner("TimeLearnerClassicStructuralSynapseWiring");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    ASSERT_TRUE(BuildAndReset(learner));
+    learner->DendriteLength = {1, 1, 1};
+    learner->NumSynapse = {3, 1, 1};
+    learner->Build();
+    ASSERT_TRUE(learner->IsReady());
+
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    auto tip = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite1_1", true);
+    ASSERT_TRUE(tip);
+    auto exc_channel = tip->GetComponentL<NMSDK::NPulseChannelCommon>("ExcChannel", true);
+    ASSERT_TRUE(exc_channel);
+    ASSERT_EQ(int(tip->NumExcitatorySynapses), 3);
+
+    for (int index = 1; index <= 3; ++index)
+    {
+        auto synapse = tip->GetComponentL<NMSDK::NPulseSynapseCommon>(
+            std::string("ExcSynapse") + std::to_string(index), true);
+        ASSERT_TRUE(synapse) << "missing structural synapse " << index;
+        EXPECT_TRUE(synapse->Input.IsConnected());
+        ASSERT_NE(synapse->Input.GetItem(), nullptr);
+        EXPECT_EQ(synapse->Input.GetItem()->GetName(), "Generator1");
+        auto* channel_input = exc_channel->SynapticInputs.GetItem(index - 1);
+        ASSERT_NE(channel_input, nullptr);
+        EXPECT_EQ(channel_input->GetName(), synapse->GetName());
+    }
+    EXPECT_EQ(exc_channel->SynapticInputs.GetNumPointers(), 3)
+        << "the structural synapses must remain connected to their membrane ExcChannel";
+}
+
 TEST_F(TimeLearnerResistanceTest, ClassicToleranceAndPeakMarginBoundaries)
 {
     auto learner = CreateLearner("TimeLearnerClassicToleranceBoundaries");
