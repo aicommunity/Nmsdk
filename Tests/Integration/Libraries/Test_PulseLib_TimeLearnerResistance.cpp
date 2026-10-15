@@ -4,6 +4,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerResistanceBounds.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerStructuralAmp.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
@@ -16,6 +17,94 @@
 #include <vector>
 
 using namespace RDK;
+
+TEST(StructuralAmpQuantizationTest, AcceptsOnlyTheRepeatedLowerSideOfAnAdjacentBracket)
+{
+    NMSDK::StructuralAmpQuantizationTracker tracker;
+    tracker.Reset(1, 10);
+    const double target = 0.01;
+
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), 7);
+    EXPECT_FALSE(tracker.IsAccepted(0, 8, 6, target))
+        << "the upper, over-target candidate must never be accepted";
+    EXPECT_TRUE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_TRUE(tracker.IsAccepted(0, 7, 6, target));
+}
+
+TEST(StructuralAmpQuantizationTest, RejectsNonAdjacentCountsAndUnusableMeasurements)
+{
+    NMSDK::StructuralAmpQuantizationTracker tracker;
+    tracker.Reset(1, 10);
+    const double target = 0.01;
+
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 9, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, false, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, false, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 9, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), -1);
+}
+
+TEST(StructuralAmpQuantizationTest, ChoosesTheHighestSafeAdjacentPair)
+{
+    NMSDK::StructuralAmpQuantizationTracker tracker;
+    tracker.Reset(1, 10);
+    const double target = 0.01;
+
+    for (int repeat = 0; repeat < 2; ++repeat)
+    {
+        EXPECT_FALSE(tracker.Observe(0, 3, 6, target, 0.008, true, true, 1e-5));
+        EXPECT_FALSE(tracker.Observe(0, 4, 6, target, 0.012, true, true, 1e-5));
+    }
+    for (int repeat = 0; repeat < 2; ++repeat)
+    {
+        EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+        EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    }
+
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), 7);
+}
+
+TEST(StructuralAmpQuantizationTest, ExactMeasurementsClearTheQuantizedBracket)
+{
+    NMSDK::StructuralAmpQuantizationTracker tracker;
+    tracker.Reset(1, 10);
+    const double target = 0.01;
+
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), 7);
+
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, target, true, true, 1e-5));
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), -1)
+        << "an exact sample must use the existing exact EOL path";
+
+    tracker.Reset(1, 10);
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), 7);
+    EXPECT_FALSE(tracker.IsAccepted(0, 7, 7, target));
+    EXPECT_FALSE(tracker.IsAccepted(0, 7, 6, target + 0.001));
+
+    tracker.Reset(1, 10);
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), 7);
+    EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_EQ(tracker.AcceptedCount(0, 6, target), -1)
+        << "a count whose measurements crossed the target is not stable evidence";
+}
 
 TEST(TimeLearnerResistanceBoundsTest, ComputesNoCrossingRatioFromMembraneTimeScale)
 {
