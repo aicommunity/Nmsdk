@@ -106,6 +106,34 @@ TEST(StructuralAmpQuantizationTest, ExactMeasurementsClearTheQuantizedBracket)
         << "a count whose measurements crossed the target is not stable evidence";
 }
 
+TEST(StructuralAmpQuantizationTest, InvalidatesEvidenceWhenOtherStructureChanges)
+{
+    NMSDK::StructuralAmpQuantizationTracker tracker;
+    tracker.Reset(3, 10);
+    const double target = 0.01;
+
+    for (int repeat = 0; repeat < 2; ++repeat)
+    {
+        EXPECT_FALSE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+        EXPECT_FALSE(tracker.Observe(0, 8, 6, target, 0.011, true, true, 1e-5));
+        EXPECT_FALSE(tracker.Observe(1, 4, 6, target, 0.009, true, true, 1e-5));
+        EXPECT_FALSE(tracker.Observe(1, 5, 6, target, 0.011, true, true, 1e-5));
+    }
+    EXPECT_TRUE(tracker.Observe(0, 7, 6, target, 0.009, true, true, 1e-5));
+    EXPECT_TRUE(tracker.Observe(1, 4, 6, target, 0.009, true, true, 1e-5));
+    ASSERT_TRUE(tracker.IsAccepted(0, 7, 6, target));
+    ASSERT_TRUE(tracker.IsAccepted(1, 4, 6, target));
+
+    tracker.InvalidateOtherInputs(0);
+    EXPECT_TRUE(tracker.IsAccepted(0, 7, 6, target))
+        << "the changing input's own adjacent-count evidence remains usable";
+    EXPECT_FALSE(tracker.IsAccepted(1, 4, 6, target))
+        << "other inputs must be re-measured after the shared response changes";
+
+    tracker.InvalidateAll();
+    EXPECT_FALSE(tracker.IsAccepted(0, 7, 6, target));
+}
+
 TEST(TimeLearnerResistanceBoundsTest, ComputesNoCrossingRatioFromMembraneTimeScale)
 {
     const auto br480 = NMSDK::TimeLearnerResistanceBounds::ComputeNoCrossingResistanceFloor(
