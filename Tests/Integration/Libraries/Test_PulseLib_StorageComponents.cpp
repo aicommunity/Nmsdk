@@ -2,6 +2,7 @@
 
 #include "../../../Rdk/Deploy/Include/rdk.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronLearner.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerScopedDefaults.h"
 #include "../Support/ConsoleLikeInit.h"
 
 #include <algorithm>
@@ -489,6 +490,70 @@ TEST_F(PulseLibStorageIntegrationTest, NNeuronLearner_CreateDeleteWithNumInputDe
                    << stage << "'";
         }
     }
+}
+
+TEST_F(PulseLibStorageIntegrationTest, TimeLearnerScopedDefaultsPreserveOtherMembranes)
+{
+    ASSERT_TRUE(storage);
+    ASSERT_TRUE(storage->CheckClass("NPNeuron"));
+    ASSERT_TRUE(storage->CheckClass("NPNeuronMembrane"));
+
+    UEPtr<UComponent> neuronBase = storage->TakeObject("NPNeuron");
+    ASSERT_TRUE(neuronBase);
+    UEPtr<NMSDK::NPulseNeuron> neuron = dynamic_pointer_cast<NMSDK::NPulseNeuron>(neuronBase);
+    ASSERT_TRUE(neuron);
+    neuron->Default();
+    neuron->UseElementDefaults = true;
+    neuron->ExcSynapseResistance = 86.0e6;
+    neuron->MembraneCapacity = 1.0e-9;
+
+    auto makeMembrane = [this](const std::string& name) -> UEPtr<NMSDK::NPulseMembrane>
+    {
+        UEPtr<UComponent> base = storage->TakeObject("NPNeuronMembrane");
+        EXPECT_TRUE(base);
+        if(!base)
+            return UEPtr<NMSDK::NPulseMembrane>();
+        UEPtr<NMSDK::NPulseMembrane> membrane = dynamic_pointer_cast<NMSDK::NPulseMembrane>(base);
+        EXPECT_TRUE(membrane);
+        if(!membrane)
+            return UEPtr<NMSDK::NPulseMembrane>();
+        membrane->Name = name;
+        membrane->Default();
+        membrane->NumExcitatorySynapses = 2;
+        membrane->Build();
+        return membrane;
+    };
+
+    UEPtr<NMSDK::NPulseMembrane> changed = makeMembrane("ChangedSegment");
+    UEPtr<NMSDK::NPulseMembrane> untouched = makeMembrane("UntouchedSegment");
+    ASSERT_TRUE(changed);
+    ASSERT_TRUE(untouched);
+
+    auto setResistance = [](NMSDK::NPulseMembrane* membrane, int index, double resistance)
+    {
+        if(NMSDK::NPulseSynapseCommon* synapse = membrane->GetComponentL<NMSDK::NPulseSynapseCommon>(
+             std::string("ExcSynapse") + sntoa(index), true))
+            synapse->Resistance = resistance;
+    };
+    auto getResistance = [](NMSDK::NPulseMembrane* membrane, int index) -> double
+    {
+        NMSDK::NPulseSynapseCommon* synapse = membrane->GetComponentL<NMSDK::NPulseSynapseCommon>(
+            std::string("ExcSynapse") + sntoa(index), true);
+        return synapse ? synapse->Resistance.GetData() : -1.0;
+    };
+
+    setResistance(changed.Get(), 1, 250.0e6);
+    setResistance(changed.Get(), 2, 350.0e6);
+    setResistance(untouched.Get(), 1, 500.0e6);
+    setResistance(untouched.Get(), 2, 700.0e6);
+
+    NMSDK::ApplyElementDefaultsToMembrane(neuron.Get(), changed.Get());
+    NMSDK::SetAdditionalSynapseResistance(changed.Get(), 1.0e9);
+
+    EXPECT_DOUBLE_EQ(getResistance(changed.Get(), 1), 86.0e6);
+    EXPECT_DOUBLE_EQ(getResistance(changed.Get(), 2), 1.0e9);
+    EXPECT_DOUBLE_EQ(getResistance(untouched.Get(), 1), 500.0e6);
+    EXPECT_DOUBLE_EQ(getResistance(untouched.Get(), 2), 700.0e6);
 }
 
 // Тест 6: эмуляция работы UWatchWidget с NNeuronLearner и точками съёма данных (DataReaders)
