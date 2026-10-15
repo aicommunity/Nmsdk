@@ -382,6 +382,56 @@ protected:
 class BranchSegmentOrderHarness : public NMSDK::NNeuronTimeLearnerBranch
 {
 public:
+    void SetCommittedPulseStatesForTest()
+    {
+        const size_t count = static_cast<size_t>(NumInputDendrite.GetData());
+        PulseSynced.assign(count, true);
+        DendBestEffortSynced.assign(count, true);
+        NoImproveCount.assign(count, 7);
+        InvalidPeakNoActionCount.assign(count, 2);
+        DendLastAbsDt.assign(count, 0.0005);
+    }
+
+    void ReopenAfterStructuralChangeForTest()
+    {
+        InvalidatePulseSyncAfterStructuralChange();
+    }
+
+    bool AllPulsesSyncedForTest() const
+    {
+        return AllDendritesSynced();
+    }
+
+    bool PulseSyncedForTest(int pulse) const
+    {
+        return PulseSynced.at(static_cast<size_t>(pulse));
+    }
+
+    bool BestEffortSyncedForTest(int pulse) const
+    {
+        return DendBestEffortSynced.at(static_cast<size_t>(pulse));
+    }
+
+    int NoImproveCountForTest(int pulse) const
+    {
+        return NoImproveCount.at(static_cast<size_t>(pulse));
+    }
+
+    int InvalidPeakNoActionCountForTest(int pulse) const
+    {
+        return InvalidPeakNoActionCount.at(static_cast<size_t>(pulse));
+    }
+
+    double LastAbsDtForTest(int pulse) const
+    {
+        return DendLastAbsDt.at(static_cast<size_t>(pulse));
+    }
+
+    int SelectedPulseForTest() const
+    {
+        return SelectActiveDendrite();
+    }
+
     void SetOrderState(
         const std::vector<int>& lengths,
         int active,
@@ -395,6 +445,7 @@ public:
         ActiveDendrite = active;
         ActivePulseIndex = active;
         SyncTolerance = 0.02;
+        IterationGap = 1.5;
         EstDelayPerSeg = 0.006666666666666667;
         DendStatus.assign(lengths.size(), 0);
         SomaPeakValid.assign(lengths.size(), false);
@@ -617,6 +668,28 @@ TEST(BranchSegmentOrderTransitionTest, GrowsSyncedActivePulseWhenOrderIsBroken)
     EXPECT_EQ(learner.LengthStatus(1), 1)
         << "a locally synchronized pulse must still grow past the next committed attach point";
     EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchStructuralSyncInvalidationTest, ReopensCommittedPulsesAndReferenceAnchor)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 12, 6, 1}, 1, 100);
+    learner.SetCommittedPulseStatesForTest();
+    ASSERT_TRUE(learner.AllPulsesSyncedForTest());
+
+    learner.ReopenAfterStructuralChangeForTest();
+
+    EXPECT_FALSE(learner.AllPulsesSyncedForTest());
+    for (int pulse = 0; pulse < 4; ++pulse)
+    {
+        EXPECT_FALSE(learner.PulseSyncedForTest(pulse)) << "pulse " << pulse;
+        EXPECT_FALSE(learner.BestEffortSyncedForTest(pulse)) << "pulse " << pulse;
+        EXPECT_EQ(learner.NoImproveCountForTest(pulse), 0) << "pulse " << pulse;
+        EXPECT_EQ(learner.InvalidPeakNoActionCountForTest(pulse), 0) << "pulse " << pulse;
+        EXPECT_GT(learner.LastAbsDtForTest(pulse), 0.02) << "pulse " << pulse;
+    }
+    EXPECT_EQ(learner.SelectedPulseForTest(), 3)
+        << "the reference pulse must be measured again before the earlier pulses are retuned";
 }
 
 TEST(BranchSegmentOrderTransitionTest, RefreshesTimingErrorBeforeOrderRepairReturn)
