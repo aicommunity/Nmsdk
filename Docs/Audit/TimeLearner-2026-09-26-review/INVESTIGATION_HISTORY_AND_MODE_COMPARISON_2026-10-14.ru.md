@@ -17,7 +17,7 @@
 
 | Артефакт | Зафиксированное значение |
 |---|---|
-| Текущая ветка аудита на момент этой редакции | root `9bdae65` (`codex/historical_view`); незатреканные пользовательские каталоги не включались в фиксацию |
+| Ветка аудита | root `codex/historical_view`; незатреканные пользовательские каталоги не включались в фиксацию |
 | Текущий gitlink PulseLib | `9177e5781fc428834b3cb6efbdb1581b5173e668` (`fix(TimeLearnerBranch): drive structural synapse multiplicity`); содержит preflight `5bfffe7` и исправление Branch Mode 0 |
 | Текущий gitlink Bin | `f2db7b375280abf6053190611ab8f58d0b7641eb` (`docs(TimeLearnerBranch): describe structural synapse wiring`); содержит исправления отчётного gate `afe838bc`/`a1f415dc` |
 | Rdk | `b3b2472dc347899af266cd46e64bca2a6ea16fea`, чистый; в движок изменения не внесены |
