@@ -1099,7 +1099,11 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralSynapseMultiplicityIsDrivenByG
     auto exc_channel = tip->GetComponentL<NMSDK::NPulseChannelCommon>("ExcChannel", true);
     ASSERT_TRUE(exc_channel);
     ASSERT_EQ(int(tip->NumExcitatorySynapses), 3)
-        << "structural NumSynapse must survive Build/Reset at its attach segment";
+        << "structural NumSynapse must survive Build/Reset at its attach segment; NumSynapse=["
+        << learner->NumSynapse[0] << ',' << learner->NumSynapse[1] << ','
+        << learner->NumSynapse[2] << "] DendriteLength=["
+        << learner->DendriteLength[0] << ',' << learner->DendriteLength[1] << ','
+        << learner->DendriteLength[2] << ']';
 
     for (int index = 1; index <= 3; ++index)
     {
@@ -1116,6 +1120,84 @@ TEST_F(TimeLearnerResistanceTest, BranchStructuralSynapseMultiplicityIsDrivenByG
     }
     EXPECT_EQ(exc_channel->SynapticInputs.GetNumPointers(), 3)
         << "every created structural synapse must remain linked to its membrane ExcChannel";
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchDynamicallyAddedStructuralSynapsesAreActiveAndInitialized)
+{
+    auto learner = CreateBranchLearner("TimeLearnerBranchDynamicSynapseLifecycle");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    ASSERT_TRUE(BuildAndReset(learner));
+
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    auto tip = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite1_1", true);
+    ASSERT_TRUE(tip);
+    ASSERT_TRUE(tip->GetActivity());
+    ASSERT_TRUE(tip->IsInit());
+    ASSERT_EQ(tip->NumExcitatorySynapses.GetData(), 1);
+
+    // Mirror ChangeSynapseNumber's live structural update: rebuild the
+    // membrane, then apply neuron-wide parameters without rebuilding the
+    // complete neuron tree.
+    tip->NumExcitatorySynapses = 3;
+    tip->Build();
+    ASSERT_TRUE(tip->IsReady());
+    ASSERT_TRUE(tip->IsInit());
+    neuron->ApplyElementDefaults();
+
+    for (int index = 1; index <= 3; ++index)
+    {
+        auto synapse = tip->GetComponentL<NMSDK::NPulseSynapseCommon>(
+            std::string("ExcSynapse") + std::to_string(index), true);
+        ASSERT_TRUE(synapse) << "missing dynamic structural synapse " << index;
+        EXPECT_TRUE(synapse->GetActivity())
+            << "dynamic structural synapse " << index << " is inactive after membrane Build";
+        EXPECT_TRUE(synapse->IsInit())
+            << "dynamic structural synapse " << index << " is not initialized after membrane Build";
+    }
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchDynamicallyAddedInhibitorySynapseIsActiveAndInitialized)
+{
+    auto learner = CreateBranchLearner("TimeLearnerBranchDynamicNextSegSynapseLifecycle");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    ASSERT_TRUE(BuildAndReset(learner));
+
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    // The cold reset intentionally returns the cable to length one. Build an
+    // initialized second segment so this exercises adding NextSeg inhibition
+    // to an already-running membrane.
+    neuron->NumDendriteMembranePartsVec = {2};
+    neuron->Build();
+    ASSERT_TRUE(neuron->IsReady());
+    neuron->Reset();
+    auto segment = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite1_2", true);
+    ASSERT_TRUE(segment);
+    if (!segment->GetActivity())
+        segment->SetActivity(true);
+    if (!segment->IsInit())
+        segment->Init();
+    ASSERT_TRUE(segment->GetActivity());
+    ASSERT_TRUE(segment->IsInit());
+
+    // Remove the default child, then recreate it as EnsureNextSegInhSynapseOnSegment does.
+    segment->NumInhibitorySynapses = 0;
+    segment->Build();
+    ASSERT_TRUE(segment->IsReady());
+    EXPECT_FALSE(segment->GetComponentL<NMSDK::NPulseSynapseCommon>("InhSynapse1", true));
+    segment->NumInhibitorySynapses = 1;
+    segment->Build();
+    ASSERT_TRUE(segment->IsReady());
+    ASSERT_TRUE(segment->IsInit());
+    neuron->ApplyElementDefaults();
+
+    auto synapse = segment->GetComponentL<NMSDK::NPulseSynapseCommon>("InhSynapse1", true);
+    ASSERT_TRUE(synapse);
+    EXPECT_TRUE(synapse->GetActivity());
+    EXPECT_TRUE(synapse->IsInit());
 }
 
 TEST_F(TimeLearnerResistanceTest, ClassicStructuralSynapseOutputsSurviveGeneratorRelink)
@@ -1151,6 +1233,40 @@ TEST_F(TimeLearnerResistanceTest, ClassicStructuralSynapseOutputsSurviveGenerato
     }
     EXPECT_EQ(exc_channel->SynapticInputs.GetNumPointers(), 3)
         << "the structural synapses must remain connected to their membrane ExcChannel";
+}
+
+TEST_F(TimeLearnerResistanceTest, ClassicDynamicallyAddedStructuralSynapsesAreActiveAndInitialized)
+{
+    auto learner = CreateLearner("TimeLearnerClassicDynamicSynapseLifecycle");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 0;
+    ASSERT_TRUE(BuildAndReset(learner));
+
+    auto neuron = learner->GetComponentL<NMSDK::NPulseNeuron>("Neuron", true);
+    ASSERT_TRUE(neuron);
+    auto tip = neuron->GetComponentL<NMSDK::NPulseMembrane>("Dendrite1_1", true);
+    ASSERT_TRUE(tip);
+    ASSERT_TRUE(tip->GetActivity());
+    ASSERT_TRUE(tip->IsInit());
+    ASSERT_EQ(tip->NumExcitatorySynapses.GetData(), 1);
+
+    // Mirror NNeuronTimeLearner::ChangeSynapseNumber after the initial build.
+    tip->NumExcitatorySynapses = 3;
+    tip->Build();
+    ASSERT_TRUE(tip->IsReady());
+    ASSERT_TRUE(tip->IsInit());
+    neuron->ApplyElementDefaults();
+
+    for (int index = 1; index <= 3; ++index)
+    {
+        auto synapse = tip->GetComponentL<NMSDK::NPulseSynapseCommon>(
+            std::string("ExcSynapse") + std::to_string(index), true);
+        ASSERT_TRUE(synapse) << "missing dynamic structural synapse " << index;
+        EXPECT_TRUE(synapse->GetActivity())
+            << "dynamic structural synapse " << index << " is inactive after membrane Build";
+        EXPECT_TRUE(synapse->IsInit())
+            << "dynamic structural synapse " << index << " is not initialized after membrane Build";
+    }
 }
 
 TEST_F(TimeLearnerResistanceTest, ClassicToleranceAndPeakMarginBoundaries)
