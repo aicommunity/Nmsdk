@@ -984,6 +984,62 @@ TEST_F(TimeLearnerResistanceTest, ParametricColdStartPreservesTipResistanceAndDe
     EXPECT_FALSE(learner->EnableRmaxLengthEscape.GetData());
 }
 
+TEST_F(TimeLearnerResistanceTest, ClassicParametricColdStartIgnoresStaleSerializedMinimum)
+{
+    auto learner = CreateLearner("TimeLearnerClassicStaleMinimum");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 1;
+    learner->NeuronClassName = "NSPNeuronGenAsymRmD001C1e9";
+    learner->ResistanceMin.SetDataDirect(2.0e7);
+    learner->SynapseResistanceBase = 1.0e7;
+    learner->TipSynapseResistance = {1.0e7, 1.0e7, 1.0e7};
+    learner->InitialSomaPotential = {0.01, 0.01, 0.01};
+
+    ASSERT_TRUE(BuildAndReset(learner));
+
+    const auto tips = learner->TipSynapseResistance.GetData();
+    const auto minima = learner->ResistanceMinByInput.GetData();
+    ASSERT_EQ(tips.size(), 3u);
+    ASSERT_EQ(minima.size(), 2u);
+    for (size_t i = 0; i < tips.size(); ++i)
+    {
+        const double expected = i < minima.size()
+            ? std::max(1.0e7, minima[i]) : 1.0e7;
+        EXPECT_DOUBLE_EQ(tips[i], expected)
+            << "derived per-input bounds must not replace a configured Rs=10 MOhm cold start with the old 20 MOhm state";
+        EXPECT_LT(tips[i], 2.0e7);
+    }
+    EXPECT_LT(learner->ResistanceMin.GetData(), 2.0e7);
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchParametricColdStartIgnoresStaleSerializedMinimum)
+{
+    auto learner = CreateBranchLearner("TimeLearnerBranchStaleMinimum");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 1;
+    learner->NeuronClassName = "NSPNeuronGenAsymRmD001C1e9";
+    learner->ResistanceMin.SetDataDirect(2.0e7);
+    learner->SynapseResistanceBase = 1.0e7;
+    learner->TipSynapseResistance = {1.0e7, 1.0e7, 1.0e7};
+    learner->InitialSomaPotential = {0.01, 0.01, 0.01};
+
+    ASSERT_TRUE(BuildAndReset(learner));
+
+    const auto tips = learner->TipSynapseResistance.GetData();
+    const auto minima = learner->ResistanceMinByInput.GetData();
+    ASSERT_EQ(tips.size(), 3u);
+    ASSERT_EQ(minima.size(), 2u);
+    for (size_t i = 0; i < tips.size(); ++i)
+    {
+        const double expected = i < minima.size()
+            ? std::max(1.0e7, minima[i]) : 1.0e7;
+        EXPECT_DOUBLE_EQ(tips[i], expected)
+            << "derived per-input bounds must not replace a configured Rs=10 MOhm cold start with the old 20 MOhm state";
+        EXPECT_LT(tips[i], 2.0e7);
+    }
+    EXPECT_LT(learner->ResistanceMin.GetData(), 2.0e7);
+}
+
 TEST_F(TimeLearnerResistanceTest, FrozenAttenuationGammaSurvivesColdReset)
 {
     auto learner = CreateLearner("TimeLearnerFrozenAttenuationGamma");
