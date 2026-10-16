@@ -179,6 +179,20 @@ Untracked `EventsLog`, nohup/monitor, partial-файлы аудита и рез�
 
 Локальная ветка `codex/historical_view` находится на root `3d8ae6d`, PulseLib `a79c80b`, Bin `e33bf2ea`; root совпадает с `origin`. На `.17` доступны три процесса Console в отдельных worktree и с разными RUN_ID. Они используют Release Console SHA-256 `8a36c61abdc821451fd35563877f67a809daacdba7cc435ef46497c2784b29ab`, собранную из root `3d8ae6d`, PulseLib `a79c80b`, Bin `e33bf2ea`. Материалы с их входами и диагностикой описаны в [отчёте о сбросе устаревших Branch-команд](BRANCH_W04_STALE_COMMAND_INVALIDATION_2026-10-16.ru.md).
 
+### После восстановления VPN и публикации аудита Rs — 2026-10-16, около 12:43 MSK
+
+Документальные коммиты отправлены в origin: PulseLib `2215b35`, root `e105d9e`. PulseLib-коммит меняет только формулировки `TrainingBehaviorConclusions.md`; он не меняет код тренеров. Поэтому текущая Release Console `.17` с SHA-256 `8a36c61abdc821451fd35563877f67a809daacdba7cc435ef46497c2784b29ab` сохраняет соответствие исходникам обучения.
+
+После push на обоих серверах выполнен безопасный `git fetch` ветки `codex/historical_view`; рабочие каталоги не переключались и не сбрасывались.
+
+| Среда | Checkout root / PulseLib / Bin | `origin/codex/historical_view` root / PulseLib / Bin | Состояние |
+|---|---|---|---|
+| Локальная `E:\Science-Repo\nmsdk-git` | `e105d9e` / `2215b35` / `e33bf2ea` | те же | ветка актуальна; пользовательские untracked-каталоги сохранены |
+| `.17`, worktrees активных запусков | `3d8ae6d` / `a79c80b` / `e33bf2ea` | `e105d9e` / `2215b35` / `e33bf2ea` | четыре старых попытки продолжаются на своей неизменной Release-сборке |
+| `.11`, основной `/home/user/Nmsdk` | `14783af1` / `2b30628a` / `84defc89` | `e105d9e` / `2215b35` / `e33bf2ea` | дерево остаётся dirty и старым; изменились только remote refs, процессов Console нет |
+
+На `.17` активны два Classic W01 50 N0 опыта и два Branch W04 480 N0 опыта, каждый в собственном worktree/RUN_ID. На 12:43 MSK у всех `Need=1`, `failure_reason=0`; классификатор не запускался. Подробные текущие трассы по Step и движущемуся `InitialSomaPotential` добавлены в [исторический разбор сопротивления структурных синапсов](STRUCTURAL_SYNAPSE_RESISTANCE_HISTORY_2026-10-15.ru.md). `.11` для обучения не использовался: единственный видимый системный раздел имел около 84 ГиБ свободного места, а крупный Data-диск доступен на `.17`.
+
 Последние C++ audit-снимки на 12:17 MSK:
 
 | Сервер / случай | RUN_ID | Итерация | Текущее состояние |
