@@ -390,6 +390,9 @@ public:
         NoImproveCount.assign(count, 7);
         InvalidPeakNoActionCount.assign(count, 2);
         DendLastAbsDt.assign(count, 0.0005);
+        DendStatus.assign(count, 1);
+        SynapseStatus.assign(count, -1);
+        AmpDifference.assign(count, 0.125);
     }
 
     void ReopenAfterStructuralChangeForTest()
@@ -420,6 +423,21 @@ public:
     int InvalidPeakNoActionCountForTest(int pulse) const
     {
         return InvalidPeakNoActionCount.at(static_cast<size_t>(pulse));
+    }
+
+    int LengthStatusForTest(int pulse) const
+    {
+        return DendStatus.at(static_cast<size_t>(pulse));
+    }
+
+    int SynapseStatusForTest(int pulse) const
+    {
+        return SynapseStatus.at(static_cast<size_t>(pulse));
+    }
+
+    double AmpDifferenceForTest(int pulse) const
+    {
+        return AmpDifference.at(static_cast<size_t>(pulse));
     }
 
     double LastAbsDtForTest(int pulse) const
@@ -686,6 +704,9 @@ TEST(BranchStructuralSyncInvalidationTest, ReopensCommittedPulsesAndReferenceAnc
         EXPECT_FALSE(learner.BestEffortSyncedForTest(pulse)) << "pulse " << pulse;
         EXPECT_EQ(learner.NoImproveCountForTest(pulse), 0) << "pulse " << pulse;
         EXPECT_EQ(learner.InvalidPeakNoActionCountForTest(pulse), 0) << "pulse " << pulse;
+        EXPECT_EQ(learner.LengthStatusForTest(pulse), 0) << "pulse " << pulse;
+        EXPECT_EQ(learner.SynapseStatusForTest(pulse), 0) << "pulse " << pulse;
+        EXPECT_DOUBLE_EQ(learner.AmpDifferenceForTest(pulse), 0.0) << "pulse " << pulse;
         EXPECT_GT(learner.LastAbsDtForTest(pulse), 0.02) << "pulse " << pulse;
     }
     EXPECT_EQ(learner.SelectedPulseForTest(), 3)
