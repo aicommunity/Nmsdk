@@ -1675,6 +1675,138 @@ TEST(BranchAmpNormOscillationTest, RepeatedCrossingsReachExistingNearTargetEol)
         << "the existing near-target EOL should accept the repeated bounded oscillation";
 }
 
+class ClassicStructuralDeadTipHarness : public NMSDK::NNeuronTimeLearner
+{
+public:
+    void SetDeadTipState(int synapseCount)
+    {
+        NumInputDendrite = 2;
+        NormalizationMode = 0;
+        AcceptQuantizedAmpUnderTarget = false;
+        DendriteLength = {59, 1};
+        NumSynapse = {synapseCount, 1};
+        InitialSomaPotential = {0.015828572406203167, 0.015828572406203167};
+        MaxIterSomaAmp = {7.932737848825866e-7, 0.0};
+        SomaPeakValid = {false, true};
+        DendLastAbsDt = {0.000269921, 1.500999};
+        DendBestEffortSynced = {true, false};
+        DendStatus.assign(2, 0);
+        SynapseStatus.assign(2, 0);
+        AmpDifference.assign(2, 0.0);
+        InputPattern.Assign(2, 1, 0.0);
+        PrevInputPattern.Assign(2, 1, 0.0);
+    }
+
+    bool Decide() { return ChangeSynapseStatus(0); }
+    int PendingCountChange() const { return SynapseStatus[0]; }
+    bool IsAmpNormalized() const { return AllSynapsesNormalized(); }
+};
+
+class BranchStructuralDeadTipHarness : public NMSDK::NNeuronTimeLearnerBranch
+{
+public:
+    void SetDeadTipState(int synapseCount)
+    {
+        NumInputDendrite = 2;
+        NormalizationMode = 0;
+        AcceptQuantizedAmpUnderTarget = false;
+        DendriteLength = {59, 1};
+        NumSynapse = {synapseCount, 1};
+        InitialSomaPotential = {0.015828572406203167, 0.015828572406203167};
+        MaxIterSomaAmp = {7.932737848825866e-7, 0.0};
+        SomaPeakValid = {false, true};
+        DendLastAbsDt = {0.000269921, 1.500999};
+        DendBestEffortSynced = {true, false};
+        DendStatus.assign(2, 0);
+        SynapseStatus.assign(2, 0);
+        AmpDifference.assign(2, 0.0);
+        InputPattern.Assign(2, 1, 0.0);
+        PrevInputPattern.Assign(2, 1, 0.0);
+    }
+
+    bool Decide() { return ChangeSynapseStatus(0); }
+    int PendingCountChange() const { return SynapseStatus[0]; }
+    bool IsAmpNormalized() const { return AllSynapsesNormalized(); }
+};
+
+TEST(StructuralDeadTipRecoveryTest, ClassicContinuesAddingBelowTheStructuralCap)
+{
+    ClassicStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 1)
+        << "a best-effort timing estimate must not suppress the only structural amplitude control";
+}
+
+TEST(StructuralDeadTipRecoveryTest, ClassicStopsAddingAtTheStructuralCap)
+{
+    ClassicStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(128);
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0);
+}
+
+TEST(StructuralDeadTipRecoveryTest, ClassicDoesNotAcceptUnmeasurableAmplitudeBelowCap)
+{
+    ClassicStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+
+    EXPECT_FALSE(learner.IsAmpNormalized());
+}
+
+TEST(StructuralDeadTipRecoveryTest, ClassicAcceptsUnmeasurableAmplitudeAtCap)
+{
+    ClassicStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(128);
+
+    EXPECT_TRUE(learner.IsAmpNormalized());
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchContinuesAddingBelowTheStructuralCap)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 1)
+        << "a best-effort timing estimate must not suppress the only structural amplitude control";
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchStopsAddingAtTheStructuralCap)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(128);
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0);
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchDoesNotAcceptUnmeasurableAmplitudeBelowCap)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+
+    EXPECT_FALSE(learner.IsAmpNormalized());
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchAcceptsUnmeasurableAmplitudeAtCap)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(128);
+
+    EXPECT_TRUE(learner.IsAmpNormalized());
+}
+
 class BranchPerInputGammaHarness : public NMSDK::NNeuronTimeLearnerBranch
 {
 public:
