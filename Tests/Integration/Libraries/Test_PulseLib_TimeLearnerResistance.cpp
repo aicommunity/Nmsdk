@@ -1522,8 +1522,19 @@ public:
         EffectiveResistanceGain.assign(2, 0.4);
         DendLastAbsDt.assign(2, 0.0);
         DendBestEffortSynced.assign(2, false);
+        ActivePulseIndex = 0;
         InputPattern.Assign(2, 1, 0.0);
         PrevInputPattern.Assign(2, 1, 0.0);
+    }
+
+    void SetAmpError(double dt)
+    {
+        MaxIterSomaAmp[0] = InitialSomaPotential[0] - dt;
+    }
+
+    void SetNearTargetResistance(double resistance)
+    {
+        TipSynapseResistance[0] = resistance;
     }
 
     bool Tune()
@@ -1544,6 +1555,16 @@ public:
     int PathologicalSkipCount() const
     {
         return AmpDtSkipCount[0];
+    }
+
+    int NoImproveCount() const
+    {
+        return NoImproveResistanceCount[0];
+    }
+
+    bool IsAmpNormalized() const
+    {
+        return AllSynapsesNormalized();
     }
 };
 
@@ -1582,6 +1603,26 @@ TEST(BranchPathologicalAmpNormTest, OrdinaryUnderTargetStillUsesAmplitudeFeedbac
     EXPECT_LT(learner.TipResistance(), initialR);
     EXPECT_GT(learner.TipResistance(), 1.0e4);
     EXPECT_EQ(learner.PathologicalSkipCount(), 0);
+}
+
+TEST(BranchAmpNormOscillationTest, RepeatedCrossingsReachExistingNearTargetEol)
+{
+    BranchPathologicalAmpHarness learner;
+    learner.Default();
+    learner.SetAmpState(0.015781 - 1.1e-5);
+    learner.SetNearTargetResistance(717430.0);
+
+    for (const double dt : {1.1e-5, -3.4e-5, 1.1e-5})
+    {
+        learner.SetAmpError(dt);
+        ASSERT_TRUE(learner.Tune());
+    }
+
+    EXPECT_EQ(learner.NoImproveCount(), 3)
+        << "a smaller residual on the opposite side of the target is an oscillation, not progress";
+    EXPECT_EQ(learner.PendingResistanceStatus(), 0);
+    EXPECT_TRUE(learner.IsAmpNormalized())
+        << "the existing near-target EOL should accept the repeated bounded oscillation";
 }
 
 class BranchPerInputGammaHarness : public NMSDK::NNeuronTimeLearnerBranch
