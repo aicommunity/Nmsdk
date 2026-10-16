@@ -129,3 +129,13 @@ Runner теперь резервирует новый `RUN_ID` атомарны�
 ## Регрессионная проверка namespace очереди — 2026-10-15
 
 В `test_timelearner_matrix.py` добавлены проверки резервирования namespace поверх `matrix_run_safety`: повторный `RUN_ID` отклоняется без изменения частичных артефактов; восемь одновременных уникальных запусков получают непересекающиеся каталоги; resume требует точного fingerprint; lock не допускает второго владельца; атомарная запись с `replace=false` сохраняет первый результат. Команда `python -m unittest test_timelearner_matrix test_timelearner_matrix_report -v` из каталога `scripts` завершилась **26/26 успешно**. Использовались только временные каталоги и заглушки; Console и обучающие входы не запускались и не менялись.
+
+## Повторная проверка текущего runner — 2026-10-16
+
+На локальной ветке root `47e6973`, Bin `2f9363ae` и PulseLib `c8a0a891` повторно запущены только Python-тесты инфраструктуры с временными каталогами и stub-worker-ами:
+
+- `py -3 -m unittest test_matrix_run_safety -v` — **18/18 PASS**;
+- `py -3 -m unittest test_timelearner_matrix -v` — **26/26 PASS**;
+- `py -3 -m unittest test_timelearner_matrix_report -v` — **2/2 PASS**.
+
+Эта проверка повторно подтверждает no-clobber для `RUN_ID` и результатов, эксклюзивный lock, раздельные каталоги попыток, точное совпадение provenance для resume, отказ от stale-result и сохранение нескольких снимков волны. Console, C++-сборка и обучение не запускались. Runner в Bin не менялся; root получил только эту запись аудита.
