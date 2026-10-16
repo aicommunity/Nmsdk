@@ -28,6 +28,17 @@
 - Отдельно проверить общий teardown SIGSEGV в тестовом harness. Он возникает после успешных assertions и сам по себе не свидетельствует о дефекте проверяемой логики тренера.
 - `NPulseChannelCable::GetAuditVmSummary()` в candidate `.17` найден только как объявление и определение; вызова из тренера нет, поэтому текущий audit min/max `Vm` не получает.
 - Эти проверки не включали запуск обучения и не дают метрик сходимости или классификации.
+
+## Контроль на чистом актуальном исходнике
+
+Позднее были созданы отдельные чистые worktree на root `0f99d3a1` с gitlink-версиями PulseLib `c8a0a891`, Bin `2f9363ae` и остальными сабмодулями из этого root. В них выполнена Release-сборка Linux Console и повторён `PulseLib_StorageComponents`:
+
+| Сервер | Console SHA-256 | CTest |
+|---|---|---|
+| `.11` | `c319c02d64e3362a5e910d08c4290bea3aecc0bd3b3201892a3ae0610ba6f883` | 1/1 passed |
+| `.17` | `d95dc1a7a82a8f92b912e97001d799a0df9c7646d068c6592d7dfb78d3d53d6a` | 1/1 passed |
+
+Обе сборки настроены как `CMAKE_BUILD_TYPE=Release` с `-O3 -DNDEBUG`. Следовательно, SIGSEGV при `UApplication` teardown был воспроизведён только в двух старых грязных candidate checkout на PulseLib `2b30628`; это не общий сбой текущего тестового harness. Логи чистого контрольного запуска находятся в `current-release-console-20261016/{configure.log,build.log,test-build.log,test-run.log}` под каждым соответствующим каталогом свежего worktree.
 ## Предварительный review логики кандидатов
 
 Проверка исходников после тестов выявила ограничения, которые не видны по успешным assertions:
