@@ -82,6 +82,18 @@ TEST(StructuralAmpQuantizationTest, AcceptsOnlyTheRepeatedLowerSideOfAnAdjacentB
     EXPECT_TRUE(tracker.IsAccepted(0, 7, 6, target));
 }
 
+TEST(StructuralAmpQuantizationTest, StepsDownFromUpperCountToAcceptedLowerCount)
+{
+    EXPECT_EQ(NMSDK::StructuralAmpQuantizedStepTowardLowerCount(99, 98), -1)
+        << "a confirmed bracket must move from its upper count to the safe lower count";
+    EXPECT_EQ(NMSDK::StructuralAmpQuantizedStepTowardLowerCount(98, 98), 0)
+        << "the accepted lower count is held once selected";
+    EXPECT_EQ(NMSDK::StructuralAmpQuantizedStepTowardLowerCount(97, 98), 0)
+        << "do not remove further contacts when already below the selected count";
+    EXPECT_EQ(NMSDK::StructuralAmpQuantizedStepTowardLowerCount(99, -1), 0)
+        << "no structural step is requested without an accepted candidate";
+}
+
 TEST(StructuralAmpQuantizationTest, RejectsNonAdjacentCountsAndUnusableMeasurements)
 {
     NMSDK::StructuralAmpQuantizationTracker tracker;
