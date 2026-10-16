@@ -3,6 +3,7 @@
 #include "../../../Rdk/Deploy/Include/rdk.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerAmpReference.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerResistanceBounds.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerStructuralAmp.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
@@ -17,6 +18,18 @@
 #include <vector>
 
 using namespace RDK;
+
+TEST(TimeLearnerAmpReferenceTest, CapturesTheSingleSynapseShortCablePeakOnly)
+{
+    using NMSDK::TimeLearnerAmpReference::ShouldCaptureSingleSynapsePeak;
+
+    EXPECT_TRUE(ShouldCaptureSingleSynapsePeak(true, true, 1, 0.02, 0.01));
+    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(true, true, 2, 0.02, 0.01))
+        << "additional structural contacts must not raise the reference";
+    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(true, false, 1, 0.02, 0.01));
+    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(false, true, 1, 0.02, 0.01));
+    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(true, true, 1, 0.01, 0.01));
+}
 
 TEST(StructuralAmpQuantizationTest, AcceptsOnlyTheRepeatedLowerSideOfAnAdjacentBracket)
 {
