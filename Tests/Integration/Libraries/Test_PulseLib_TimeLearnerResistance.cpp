@@ -19,18 +19,32 @@
 
 using namespace RDK;
 
-TEST(TimeLearnerAmpReferenceTest, InitializesOnceFromTheSingleSynapseShortCable)
+TEST(TimeLearnerAmpReferenceTest, CapturesOnlyTheFinalizedSingleSynapsePeak)
 {
-    using NMSDK::TimeLearnerAmpReference::ShouldInitializeSingleSynapsePeakReference;
+    using NMSDK::TimeLearnerAmpReference::ShouldCaptureFinalizedSingleSynapsePeakReference;
 
-    EXPECT_TRUE(ShouldInitializeSingleSynapsePeakReference(true, true, 1, 0.02, 0.0));
-    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, true, 2, 0.02, 0.0))
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 1, false, true, 0.005, 0.0))
+        << "a rising-edge sample is not the completed peak";
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 1, true, false, 0.0, 0.0))
+        << "an empty measurement window has no reference peak";
+    EXPECT_TRUE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 1, true, true, 0.02, 0.0));
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 2, true, true, 0.02, 0.0))
         << "additional structural contacts must not raise the reference";
-    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, true, 1, 0.02, 0.01))
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 1, true, true, 0.02, 0.01))
         << "later higher peaks must not move an established reference";
-    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, false, 1, 0.02, 0.0));
-    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(false, true, 1, 0.02, 0.0));
-    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, true, 1, 0.0, 0.0));
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, false, 1, true, true, 0.02, 0.0));
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        false, true, 1, true, true, 0.02, 0.0));
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 1, true, true, 0.0, 0.0));
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 1, true, true, std::numeric_limits<double>::quiet_NaN(), 0.0));
 }
 
 TEST(StructuralAmpQuantizationTest, AcceptsOnlyTheRepeatedLowerSideOfAnAdjacentBracket)
