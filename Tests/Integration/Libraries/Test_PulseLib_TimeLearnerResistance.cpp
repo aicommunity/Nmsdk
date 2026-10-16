@@ -19,16 +19,18 @@
 
 using namespace RDK;
 
-TEST(TimeLearnerAmpReferenceTest, CapturesTheSingleSynapseShortCablePeakOnly)
+TEST(TimeLearnerAmpReferenceTest, InitializesOnceFromTheSingleSynapseShortCable)
 {
-    using NMSDK::TimeLearnerAmpReference::ShouldCaptureSingleSynapsePeak;
+    using NMSDK::TimeLearnerAmpReference::ShouldInitializeSingleSynapsePeakReference;
 
-    EXPECT_TRUE(ShouldCaptureSingleSynapsePeak(true, true, 1, 0.02, 0.01));
-    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(true, true, 2, 0.02, 0.01))
+    EXPECT_TRUE(ShouldInitializeSingleSynapsePeakReference(true, true, 1, 0.02, 0.0));
+    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, true, 2, 0.02, 0.0))
         << "additional structural contacts must not raise the reference";
-    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(true, false, 1, 0.02, 0.01));
-    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(false, true, 1, 0.02, 0.01));
-    EXPECT_FALSE(ShouldCaptureSingleSynapsePeak(true, true, 1, 0.01, 0.01));
+    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, true, 1, 0.02, 0.01))
+        << "later higher peaks must not move an established reference";
+    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, false, 1, 0.02, 0.0));
+    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(false, true, 1, 0.02, 0.0));
+    EXPECT_FALSE(ShouldInitializeSingleSynapsePeakReference(true, true, 1, 0.0, 0.0));
 }
 
 TEST(StructuralAmpQuantizationTest, AcceptsOnlyTheRepeatedLowerSideOfAnAdjacentBracket)
