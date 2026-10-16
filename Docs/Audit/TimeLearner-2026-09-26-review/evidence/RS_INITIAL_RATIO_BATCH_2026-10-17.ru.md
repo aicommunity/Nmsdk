@@ -212,6 +212,12 @@ Branch `DendriteLength[k]` задаёт сегмент общей цепи, к �
 
 Provenance этих результатов: root `1481bf31948fad5552243ef7587c6f7922dcec29`, PulseLib `97dd5211fb7d800523f9862cac281d909be27d46`, Bin `815c0c81c19b09bbc34a01058c407d51022aaacf`, Console SHA-256 `f76f90565eee8eefc241e7bf03b31e6504f2b998c6592a2cdf1c249a31f01d9e`. Run ID `tl-b08-w04-br100-n1-current-20261017`; сырые артефакты — `/media/user/Data/NmsdkRuntime/TimeLearnerAudit-20261016/diagnostic-batch-07/branch100-param-current/runs/`.
 
+## Текущий повтор Classic100 N0
+
+Первый вызов очереди на `.17` с RUN ID `tl-b08-w02-cl100-n0-current-20261017` остановился до запуска Console: preflight обнаружил устаревшее определение матрицы в W02 manifests. Этот ID оставлен неиспользованным; каталог не содержит C++ попыток или результатов. Перед refresh все восемь W02 `matrix_input_manifest.json` сохранены в `diagnostic-batch-08/classic100-structural-current/pre-refresh-manifests/`. `timelearner_matrix.py --prepare W02 --refresh` подготовил восемь cases; в Bin изменились только эти восемь manifests, Train/Test конфиги не редактировались.
+
+После preflight под новым ID `tl-b08-w02-cl100-n0-current-r2-20261017` запущены Classic100 N0 PSI off/on на `.17`, по два отдельных Console, с матричным `SynapseResistanceStep` 1 ГОм. Выходы находятся отдельно в `diagnostic-batch-08/classic100-structural-current-r2/runs/`; на момент записи обе попытки выполняются. Вместе с текущими процессами `.11` на `.17` занято 11 из 12 CPU, суммарно 19 из 20 Console на двух серверах.
+
 ## История `SynapseResistanceStep`
 
 В доступной истории Git значение `1e9` не появилось в октябрьских правках. Старый `NNeuronTrainer` уже по умолчанию назначал добавляемым синапсам `SynapseResistanceStep=1e9`; это видно в исходном снимке `0b03edb` (2023-10-10). Temporal Classic был добавлен коммитом `ad50903` (2026-08-10) как адаптация/копия `NNeuronLearner` и сохранил этот default; Branch добавлен `279116d` (2026-08-18) с тем же default. Коммиты описывают добавление структурных синапсов и применение свойства, но численного обоснования выбора 1 ГОм не содержат. Документация определяет свойство только как сопротивление новых синапсов.
