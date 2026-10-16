@@ -174,3 +174,19 @@ Untracked `EventsLog`, nohup/monitor, partial-файлы аудита и рез�
 На `.17` в отдельной tmux-сессии идёт один текущий Release-процесс для `W04_BR480_N0_PSIoff` (`RUN_ID=w04-br480-n0-b7af5fd-20261016-01`, PID `1091577`). Provenance исходников: root `2462fbf2`, PulseLib `b7af5fd4`, Bin `e33bf2ea`; Console SHA-256 `1b534a7a034f90c4e8d21065e3a41029904ea57d02c4c754d7928bf116e2c8e1`. К последнему снимку C++ audit (итерация 132) `Need=1`, `failure_reason=0`, `eol_sync=0`, `length_after=[1,1,25,1]`, `num_synapse=[1,1,126,1]` после достижения потолка 128, `peak_valid=[0,0,0,1]`; `active_dendrite=3`. Test ещё не запускался; процесс и очередь не завершены. Полный терминальный итог будет добавлен после остановки этого опыта.
 
 В конфигурации режима N0 задан `SynapseResistanceStep=1 ГОм`, при базовом `SynapseResistanceBase=86 МОм`. Трасса показывает, что именно добавляемые структурным алгоритмом контакты получают 1 ГОм. Это соответствует историческому исходному значению параметра, но является фактором эксперимента: текущий повтор не изолирует влияние только количества контактов от сопротивления новых синапсов.
+
+### Сверка после возврата связи — 2026-10-16, 12:17 MSK
+
+Локальная ветка `codex/historical_view` находится на root `3d8ae6d`, PulseLib `a79c80b`, Bin `e33bf2ea`; root совпадает с `origin`. На `.17` доступны три процесса Console в отдельных worktree и с разными RUN_ID. Они используют Release Console SHA-256 `8a36c61abdc821451fd35563877f67a809daacdba7cc435ef46497c2784b29ab`, собранную из root `3d8ae6d`, PulseLib `a79c80b`, Bin `e33bf2ea`. Материалы с их входами и диагностикой описаны в [отчёте о сбросе устаревших Branch-команд](BRANCH_W04_STALE_COMMAND_INVALIDATION_2026-10-16.ru.md).
+
+Последние C++ audit-снимки на 12:17 MSK:
+
+| Сервер / случай | RUN_ID | Итерация | Текущее состояние |
+|---|---|---:|---|
+| `.17`, Branch W04 480 N0, Step=1 ГОм | `w04-br480-n0-postfix-step1g-a79c80b-20261016-02` | 155 | `Need=1`, `failure_reason=0`, `active_dendrite=3`, `eol_sync=0`, `eol_amp=1`; `L=[1,1,89,1]`, `N=[1,1,78,1]`, `SynapseStatus=[0,0,0,0]`, `peak_valid=[0,0,1,1]` |
+| `.17`, Branch W04 480 N0, Step=86 МОм | `w04-br480-n0-postfix-step86m-a79c80b-20261016-03` | 154 | `Need=1`, `failure_reason=0`, `active_dendrite=2`, `eol_sync=0`, `eol_amp=0`; `L=[1,1,89,1]`, `N=[1,1,73,1]`, `SynapseStatus=[0,0,0,0]`, `peak_valid=[0,0,0,1]` |
+| `.17`, Classic W01 50 N0, Step=1 ГОм | `w01-cl50-n0-postfix-a79c80b-20261016-01` | 35 | `Need=1`, `failure_reason=0`, `active_dendrite=1`, `eol_sync=0`, `eol_amp=0`; `L=[29,22,15,1]`, `N=[36,36,36,1]`, `peak_valid=[1,1,1,1]` |
+
+Все три процесса ещё работали на момент снимка; результатов Test и `matrix_result.json` ещё нет. Поэтому эти строки показывают только ход обучения. Два Branch-снимка не показывают ненулевой сохранённый `SynapseStatus`, что согласуется с исправлением, но само по себе не подтверждает `Need=0`. На `.17` средняя нагрузка была около 2.4 на 12 логических CPU, свободно около 2.4 ТиБ на диске данных.
+
+Сохранённая запись старого запуска `.11` `n0-cl50-step86m-acceptq-cur-20261015-03` теперь классифицирована как остановленная попытка: `training_convergence=not_converged_at_stop`, `Need=1`, `child_rc=-15`, оценщик не вызывался. Её provenance сообщает `inputs_mutated_during_run=true` и `training_config_changed_during_run=true`, поэтому её нельзя использовать как доказательство исторической сходимости Classic. На `.11` процессов Console нет. Основной `/home/user/Nmsdk` не изменялся и остаётся старым dirty checkout; его содержимое не переносилось в актуальную ветку.
