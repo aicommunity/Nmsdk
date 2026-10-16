@@ -12,6 +12,12 @@
 
 Classic не менялся: хотя соответствующий счётчик есть и в Classic, в имеющихся данных этот механизм доказан для конкретной Branch-трассы. Перенос на Classic требует собственной трассы или контрпримера.
 
+## Проверка аналогичных Classic-данных
+
+В доступных Classic Phase6 материалах не найдено независимой трассы с тем же near-target циклом. Точный Linux Release повтор `phase6_480` на текущем Classic-коде завершился явным `Need=1` из-за `Rs=Rmax=10 GΩ` и `amp_dt=−0.275999` на активном входе — далеко за `kAmpOscillationBand`; см. [отчёт точного PHASE6 повтора](PHASE6_EXACT_REPLAY_STATUS_2026-10-16.ru.md). В исторических реконструкциях PHASE6 на итерациях с плато остатки первых трёх входов были около `−0.064`, `−0.064`, `−0.051` при Rs=100 GΩ; в паре после первого sync зафиксированы `−0.132`, `−0.0237`, `+0.0158`, причём пик третьего входа невалиден. Эти состояния показывают другие проблемы поиска/границ, а не знакочередующуюся ошибку около epsilon. См. [аудит итераций PHASE6 до октября](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/phase6_historical_positive_replay_pre_oct_iteration_audit_2026-10-12.csv), [аудит после изменений 6 октября](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/phase6_historical_positive_replay_oct06_iteration_audit_2026-10-12.csv) и [пару фиксации Rs после sync](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/phase6_first_sync_rs_freeze_iteration_audit_2026-10-12.csv).
+
+Вывод ограничен доступными записями: он не доказывает, что аналогичный сброс счётчика никогда не блокирует Classic. В Classic исходнике есть похожее условие, поэтому будущий точечный Classic повтор следует писать с `amp_dt`, `NoImproveResistanceCount`, `ResistanceStatus` на каждой итерации. Менять Classic до появления такой трассы оснований нет.
+
 ## Регрессионная проверка
 
 Новый C++ тест подаёт на Branch контролируемую последовательность ошибок `+1.1e-5 → −3.4e-5 → +1.1e-5`. Он проверяет накопление трёх no-improve событий, снятие блокирующего `ResistanceStatus` и прохождение существующего `AllSynapsesNormalized()` near-target EOL. До исправления третий отсчёт сбрасывал счётчик; после исправления тест проходит.
