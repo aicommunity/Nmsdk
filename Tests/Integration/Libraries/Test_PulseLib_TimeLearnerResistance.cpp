@@ -47,6 +47,23 @@ TEST(TimeLearnerAmpReferenceTest, CapturesOnlyTheFinalizedSingleSynapsePeak)
         true, true, 1, true, true, std::numeric_limits<double>::quiet_NaN(), 0.0));
 }
 
+TEST(TimeLearnerAmpReferenceTest, KeepsReferenceBeforeStructuralLengthening)
+{
+    using NMSDK::TimeLearnerAmpReference::ShouldCaptureFinalizedSingleSynapsePeakReference;
+
+    double reference = 0.0;
+    const double measured_single_synapse_peak = 0.015781466599319449;
+
+    ASSERT_TRUE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, true, 1, true, true, measured_single_synapse_peak, reference));
+    reference = measured_single_synapse_peak;
+    EXPECT_DOUBLE_EQ(reference, measured_single_synapse_peak);
+
+    EXPECT_FALSE(ShouldCaptureFinalizedSingleSynapsePeakReference(
+        true, false, 1, true, true, 0.004, reference))
+        << "after the dendrite grows, a later attenuated peak must not replace its unit-cable reference";
+}
+
 TEST(StructuralAmpQuantizationTest, AcceptsOnlyTheRepeatedLowerSideOfAnAdjacentBracket)
 {
     NMSDK::StructuralAmpQuantizationTracker tracker;
