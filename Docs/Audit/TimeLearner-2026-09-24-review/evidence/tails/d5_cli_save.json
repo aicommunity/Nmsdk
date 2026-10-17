@@ -1,0 +1,41 @@
+{
+  "commands": [
+    {
+      "cmd": "NeuroModelerConsole -c <ini> -s -t 2 -S",
+      "note": "no -x; Save fired; process stayed until timeout (rc=124) \u2014 proves -S independent of -x",
+      "rc": 124,
+      "timeout_sec": 30,
+      "mtime_params_before": 1789309104,
+      "mtime_params_after": 1790279923,
+      "mtime_model_before": 1789309104,
+      "mtime_model_after": 1790279923,
+      "saved": true,
+      "log_tail": " (unknown)\n*** SIGTERM (@0x3e80000380c) received by PID 14349 (TID 0x787059057f40) from PID 14348; stack trace: ***\n    @     0x787059930046 (unknown)\n    @     0x787058a42520 (unknown)\n    @     0x787058b18c0f __poll\n    @     0x787058d70426 (unknown)\n    @     0x787058d183e3 g_main_context_iteration\n    @     0x7870595130b8 QEventDispatcherGlib::processEvents()\n    @     0x7870594b875b QEventLoop::exec()\n    @     0x7870594c0cf4 QCoreApplication::exec()\n    @     0x59c90d2da275 main\n    @     0x787058a29d90 (unknown)\n    @     0x787058a29e40 __libc_start_main\n    @     0x59c90d2dda15 _start\n",
+      "log_has_project_saved": true
+    },
+    {
+      "cmd": "NeuroModelerConsole -c <ini> -s -t 2 -S with ini exitAfterCalc",
+      "note": "no CLI -x",
+      "rc": 124,
+      "mtime_params_before": 1790279923,
+      "mtime_params_after": 1790279923,
+      "mtime_model_after": 1790279923,
+      "saved": false,
+      "log_tail": " (unknown)\n*** SIGTERM (@0x3e800003b39) received by PID 15162 (TID 0x7921ae439f40) from PID 15161; stack trace: ***\n    @     0x7921aed12046 (unknown)\n    @     0x7921ade42520 (unknown)\n    @     0x7921adf18c0f __poll\n    @     0x7921ae170426 (unknown)\n    @     0x7921ae1183e3 g_main_context_iteration\n    @     0x7921ae9130b8 QEventDispatcherGlib::processEvents()\n    @     0x7921ae8b875b QEventLoop::exec()\n    @     0x7921ae8c0cf4 QCoreApplication::exec()\n    @     0x637132eee275 main\n    @     0x7921ade29d90 (unknown)\n    @     0x7921ade29e40 __libc_start_main\n    @     0x637132ef1a15 _start\n"
+    },
+    {
+      "cmd": "NeuroModelerConsole -c <ini> -s -t 2 -S",
+      "note": "ExitAfterCalcFlag=1 in [General], no CLI -x",
+      "rc": 124,
+      "mtime_before": 1789309104,
+      "mtime_after": 1789309104,
+      "saved": false,
+      "exited_cleanly": false,
+      "log_head": "*** Aborted at 1790280019 (unix time) try \"date -d @1790280019\" if you are using GNU date ***\nPC: @                0x0 (unknown)\n*** SIGTERM (@0x3e8000041c6) received by PID 16839 (TID 0x7dea4305bf40) from PID 16838; stack trace: ***\n    @     0x7dea43867046 (unknown)\n    @     0x7dea42a42520 (unknown)\n    @     0x7dea42b18c0f __poll\n    @     0x7dea42375426 (unknown)\n    @     0x7dea4231d3e3 g_ma",
+      "log_tail": "ea42b18c0f __poll\n    @     0x7dea42375426 (unknown)\n    @     0x7dea4231d3e3 g_main_context_iteration\n    @     0x7dea435130b8 QEventDispatcherGlib::processEvents()\n    @     0x7dea434b875b QEventLoop::exec()\n    @     0x7dea434c0cf4 QCoreApplication::exec()\n    @     0x5b73e1734275 main\n    @     0x7dea42a29d90 (unknown)\n    @     0x7dea42a29e40 __libc_start_main\n    @     0x5b73e1737a15 _start\n"
+    }
+  ],
+  "workdir": "/tmp/d5_cli_save_14329",
+  "verdict": "PASS: -S saves without -x; ini ExitAfterCalcFlag quits after Save",
+  "ini_exit_after_note": "AppCore.exitAfterCalcFlag is set from CLI -x (main.cpp); ad-hoc [Automation]exitAfterCalc=1 not wired. Second run: Save already done, mtime unchanged, process still needed kill (ini key not honored)."
+}

@@ -1,0 +1,120 @@
+diff --git a/Core/NNeuronTimeLearnerBranch.cpp b/Core/NNeuronTimeLearnerBranch.cpp
+index 9aad9eb..ff2508c 100644
+--- a/Core/NNeuronTimeLearnerBranch.cpp
++++ b/Core/NNeuronTimeLearnerBranch.cpp
+@@ -4041,8 +4041,8 @@ double NNeuronTimeLearnerBranch::ReadPostTuneProbeMetric(void) const
+  const bool use_ltz = (mode == PostTrainTune::kMidMetricLtz);
+  if(use_ltz)
+   return std::max(IterMaxLTZPotential, PostTuneLiveSomaMax);
+- // Auto/Soma: continuous soma (Training + ACalculate live max), same idea as
+- // CalibrateFixedLTZ parallel peak / Test analyzer soma_amp_sum.
++ // Auto/Soma: shared-soma continuous amp — same quantity as analyzer CSV
++ // soma_amp_sum (SomaNeuronAmplitude row0), not sum of MaxIterSomaAmp[].
+  double peak = std::max(IterMaxSomaPotential, PostTuneLiveSomaMax);
+  for(size_t i = 0; i < MaxIterSomaAmp.size(); ++i)
+   peak = std::max(peak, MaxIterSomaAmp[i]);
+@@ -4187,6 +4187,7 @@ void NNeuronTimeLearnerBranch::UpdatePostTuneFreeRunPeak(void)
+  if(!Dataset || !Neuron)
+   return;
+ 
++ // Shared soma amp (analyzer soma_amp_sum = SomaNeuronAmplitude row0).
+  UEPtr<NPulseMembrane> soma =
+   Neuron->GetComponentL<NPulseMembrane>(MakeBranchSomaName(), true);
+  const double amp = soma ? soma->SumPotential(0, 0) : 0.0;
+@@ -4510,9 +4511,30 @@ void NNeuronTimeLearnerBranch::FinalizePostTuneMid(void)
+   PostTrainTune::ComputeMidThreshold(tgt, foils, mid, gap);
+   if(gap < 1e-4)
+    landscape_ok = false;
++  // Search BestTips from trial probes can look OK but fail recognition free-run:
++  // fall back to KeepDone/ScaleTipR snapshot and silent thr for Test mid.
++  if(!inference && !landscape_ok
++     && PostTrainTipResistanceMode.GetData() == PostTrainTune::kPostTipSearchSynthetic
++     && !PostTuneSearchReverted && !PostTuneTipSnapshot.empty())
++  {
++   PostTuneTrialTips = PostTuneTipSnapshot;
++   ApplyPostTrainTipMode(true);
++   PostTuneSearchReverted = true;
++   if(RDK::GetLogger())
++   {
++    std::ostringstream oss;
++    oss << "SearchSynthetic: free_run_reject_best revert_to_snapshot gap=" << gap;
++    RDK::GetLogger()->LogMessage(RDK_EX_INFO, "NNeuronTimeLearnerBranch", oss.str());
++   }
++  }
+   // Train in-process free-run often underestimates Test SB=2 peaks (~0.066 vs ~0.072)
+   // and can invert foils. Keep silent thr so Test inference mid can run.
+-  if(!inference && !landscape_ok)
++  // Search: always leave silent on Train — Test recomputes mid (phase8 skip-tipr-mid).
++  // Inference: never lock a failed landscape mid (would skip Test re-probe).
++  if(!landscape_ok
++     || (!inference
++         && PostTrainTipResistanceMode.GetData()
++            == PostTrainTune::kPostTipSearchSynthetic))
+    mid = PostTrainSilentThreshold.GetData();
+   FixedLTZThreshold = mid;
+   CalibratedFixedLTZThreshold = mid;
+@@ -4590,13 +4612,15 @@ void NNeuronTimeLearnerBranch::FinalizePostTuneMid(void)
+  SetLTZThreshold(FixedLTZThreshold.GetData());
+  LTZThreshold = FixedLTZThreshold.GetData();
+  ApplyPulseGeneratorMute();
++ // Always mark mid-done after Finalize: Train must not start a second
++ // "inference" free-run in the leftover sim window (overwrites silent thr and
++ // breaks phase8 skip-tipr-mid). Test loads a fresh process.
++ PostTuneInferenceMidDone = true;
+  if(!inference)
+  {
+   SetIsNeedToTrain(false);
+   IsNeedToTrain = false;
+  }
+- else
+-  PostTuneInferenceMidDone = true;
+ 
+  if(EnableDebug.GetData() && RDK::GetLogger())
+  {
+@@ -4828,9 +4852,14 @@ void NNeuronTimeLearnerBranch::HandlePostTuneFinishIteration(void)
+   }
+   else if(!landscape_ok && RDK::GetLogger())
+   {
++   int foils_above = 0;
++   for(size_t i = 0; i < foils.size(); ++i)
++    if(foils[i] + 1e-12 >= tgt)
++     ++foils_above;
+    std::ostringstream oss;
+    oss << "SearchSynthetic: skip_candidate landscape_ok=0 gap=" << gap
+-       << " BestGap=" << PostTuneBestGap;
++       << " BestGap=" << PostTuneBestGap
++       << " tgt=" << tgt << " foils_above=" << foils_above;
+    RDK::GetLogger()->LogMessage(RDK_EX_INFO, "NNeuronTimeLearnerBranch", oss.str());
+   }
+ 
+@@ -4886,11 +4915,18 @@ void NNeuronTimeLearnerBranch::HandlePostTuneFinishIteration(void)
+    if(RDK::GetLogger())
+    {
+     std::ostringstream oss;
+-    oss << "SearchSynthetic: apply_best_tips gap=" << PostTuneBestGap;
++    oss << "SearchSynthetic: apply_best_tips gap=" << PostTuneBestGap
++        << " metric=soma";
+     RDK::GetLogger()->LogMessage(RDK_EX_INFO, "NNeuronTimeLearnerBranch", oss.str());
+    }
+   }
+- }
++
++  // Trial-loop landscape ≠ Test free-run. Recalibrate mid via free-run; if BestTips
++  // fails landscape there, FinalizePostTuneMid reverts to KeepDone snapshot.
++  PostTuneMetrics.assign(PostTunePatterns.size(), 0.0);
++  if(SetupPostTuneFreeRunProbes())
++   return;
++  }
+ 
+  FinalizePostTuneMid();
+ }
+@@ -5493,7 +5529,8 @@ bool NNeuronTimeLearnerBranch::ACalculate(void)
+     const double amp = (i < int(MaxIterSomaAmp.size())) ? MaxIterSomaAmp[i] : 0.0;
+     SomaNeuronAmplitude(i + 1, 0) = amp;
+    }
+-  // Continuous soma max for PostTune / inference mid free-run.
++  // Continuous shared-soma max for PostTune / inference mid free-run
++  // (CSV soma_amp_sum tracks SomaNeuronAmplitude row0).
+   if(PostTuneFreeRunActive && soma_amp > PostTuneLiveSomaMax)
+     PostTuneLiveSomaMax = soma_amp;
+  }

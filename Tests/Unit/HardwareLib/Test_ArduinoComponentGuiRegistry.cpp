@@ -26,4 +26,10 @@ TEST(ArduinoComponentGuiRegistry, HardwareLibClassesRegistered)
     EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoFirmata")));
     EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoDcDemo")));
     EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoAdc")));
+    EXPECT_TRUE(registry.canOpen(QStringLiteral("Esp32Board")));
+    EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoWheeledRobot")));
+    EXPECT_TRUE(registry.canOpen(QStringLiteral("Esp32WheeledRobot")));
+    EXPECT_TRUE(registry.canOpen(QStringLiteral("WaveRover")));
+    EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoDeviceIO")));
+    EXPECT_TRUE(registry.canOpen(QStringLiteral("ArduinoCustomFirmware")));
 }

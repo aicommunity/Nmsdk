@@ -1,0 +1,426 @@
+{
+  "case": "W04_BR100_N1_PSIoff",
+  "status": "exited",
+  "training_convergence": "not_converged_at_stop",
+  "failure_class": "train_incomplete",
+  "fail_notes": [
+    "child_rc=4294967295",
+    "train_incomplete:exited",
+    "Need=1",
+    "tipr_class=other expect=canon"
+  ],
+  "quality": {
+    "separation": "not_evaluated_training_incomplete",
+    "detection": "not_evaluated_training_incomplete",
+    "metrics": {}
+  },
+  "final_tip_r": "86000000 86000000 54160453.128513001 86000000",
+  "final_lengths": "1 1 10 1",
+  "repeated_final_state": "iterations 146 through 165: target index 2 peak invalid, Need=1, Rs and lengths unchanged",
+  "runtime_polls_before_manual_stop": 334,
+  "selected_audit_states": [
+    {
+      "kind": "reset",
+      "iter": 0,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 3,
+      "gamma": -1.0,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        86000000.0,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_valid": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "last_abs_dt": [
+        1.501,
+        1.501,
+        1.501,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 0,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": -1.0,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        86000000.0,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.007454888436372986
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.007454888436372986
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_valid": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "last_abs_dt": [
+        1.501,
+        1.501,
+        1.501,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 1,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": -1.0,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        57647523.95906498,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        9,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.009702394858918773,
+        0.009377294596080943
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.009702394858918773,
+        0.009377294596080943
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.1043,
+        0.0876333,
+        0.05010000000000024,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 2,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.062396301205295795,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        54160453.128513,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        10,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.005889683953450464,
+        0.006011918200045208
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.009702394858918773,
+        0.009377294596080943
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.0038127109054683084,
+        0.0033653763960357352
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.1043,
+        0.0876333,
+        0.42115,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 146,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.062396301205295795,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        54160453.128513,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        10,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.006152387888650357
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.009702394858918773,
+        0.009377294596080943
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.009702394858918773,
+        0.003224906707430586
+      ],
+      "peak_valid": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "last_abs_dt": [
+        0.1043,
+        0.0876333,
+        0.48058125000000007,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 165,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.062396301205295795,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        54160453.128513,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        10,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.006152387888650357
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.009702394858918773,
+        0.009377294596080943
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.009702394858918773,
+        0.003224906707430586
+      ],
+      "peak_valid": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "last_abs_dt": [
+        0.1043,
+        0.0876333,
+        0.48058125000000007,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "provenance": {
+    "root_git": "81a87429678ac445208febe53b6db2f44b61bbef",
+    "gitlinks": {
+      "Libraries/Nmsdk-PulseLib": "28c32e9803a34eb840eb45fd7d800decae1f5102",
+      "Bin": "810bb66284e6d7ace4964969d2a8304e4bee287d",
+      "Rdk": "b3b2472dc347899af266cd46e64bca2a6ea16fea"
+    },
+    "binary_sha256": "cd6d8ae8b157c1d00a0319251c2bbb3d91c7360c16e5e3299c512a2b5d5d78b5",
+    "source_changed_during_run": false,
+    "source_sha256": {
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearner.cpp": "8f3abcd064ad236e2db04fa4911df8d43da27c6064ffa26c50e3f5355461b667",
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearner.h": "48c08fb6355af469334a8c7da94aa2311c2b46f135cfebd7a86050262c2d3eeb",
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearnerBranch.cpp": "2cdd8a44f3ac381b7f70e9b077554c842dce6a3da0d15a6da80ed9af1ba88078",
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearnerBranch.h": "5eeb1846736efeeef21cd2a8a27628c4c6a626e9c26af32f40b8db156b86e0ec"
+    },
+    "input_config_sha256_before": {
+      "Train/Parameters_00.xml": "9c4a2bd43580ecee42eb5d78719a646c90668783da95037f4b73025c554d8bf7",
+      "Train/Model_00.xml": "c0c807e1340f2d2e3a8499c6ca02ee6bcd32ec8bc43c9c53ed8644223431d041",
+      "Test/Parameters_00.xml": "3cd63c3923c06ff71ae2c3865e4c983e12883d6d870ca9dea934b10995d8b87d",
+      "Test/Model_00.xml": "5ac37ccaabd55c9d360b8c18ea79d532964f9c133ed83c430b96f50ba29fb239"
+    },
+    "input_config_sha256_after": {
+      "Train/Parameters_00.xml": "fc3acf9963e69e5411ca10d335ef9d962a23500cd03661f860054d511b96678b",
+      "Train/Model_00.xml": "4d91bd2b6d5c7cfc04316544105e9c5c16188f0f00f29e53fb526f5e48dcb79a",
+      "Test/Parameters_00.xml": "3cd63c3923c06ff71ae2c3865e4c983e12883d6d870ca9dea934b10995d8b87d",
+      "Test/Model_00.xml": "5ac37ccaabd55c9d360b8c18ea79d532964f9c133ed83c430b96f50ba29fb239"
+    },
+    "training_audit_sha256": "5a89a8e99d2d1a071e72aa6f8250202805856c38ebb65be7a8b8d2b5ecedcbfd"
+  },
+  "raw_run_relative_path": "Bin/Configs/SpikeSamples/StructTrain/_repro/TimeLearnerMatrixRuns/local-W04-current28c-20261013-03/W04/W04_BR100_N1_PSIoff/attempt-0001",
+  "stop_note": "Console was manually stopped after 334 polls because the target peak remained invalid and length/Rs stayed unchanged through the final autosaves. The process exited before a C++ terminal state; this is an incomplete run, not a trainer failure code."
+}

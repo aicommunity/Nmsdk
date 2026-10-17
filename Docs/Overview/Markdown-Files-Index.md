@@ -357,6 +357,7 @@ Run `Scripts/doc-audit/regenerate-markdown-index.py` after `inventory.py`.
 - Libraries/Nmsdk-PulseLib/Docs/Components/NNeuronFreqGroup.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NNeuronFreqGroupLayer.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NNeuronLearner.md
+- Libraries/Nmsdk-PulseLib/Docs/Components/NNeuronTimeLearner.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NNeuronLife.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NNeuronTrainer.md
 - Libraries/Nmsdk-PulseLib/Docs/Components/NNeuronsLayer.md

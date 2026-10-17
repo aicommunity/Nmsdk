@@ -120,6 +120,9 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramView.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramLinkItem.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramLinkRouter.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramExternalSourceItem.cpp
+  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramExternalSinkItem.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramNodeItem.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramViewportManager.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramCoordinateManager.cpp
@@ -313,6 +316,7 @@ set(STYLES_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Styles")
 
 add_custom_command(TARGET NeuroModeler POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLES_DEST_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLES_DEST_DIR}/icons"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${STYLES_SOURCE_DIR}/default.qss"
         "${STYLES_DEST_DIR}/default.qss"
@@ -325,6 +329,12 @@ add_custom_command(TARGET NeuroModeler POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${STYLES_SOURCE_DIR}/dark-theme.json"
         "${STYLES_DEST_DIR}/dark-theme.json"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/icons/checkbox-checked.svg"
+        "${STYLES_DEST_DIR}/icons/checkbox-checked.svg"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${STYLES_SOURCE_DIR}/icons/checkbox-checked-dark.svg"
+        "${STYLES_DEST_DIR}/icons/checkbox-checked-dark.svg"
     COMMENT "Copying style files to Bin/Styles/"
 )
 
