@@ -288,6 +288,7 @@ TEST(ArduinoSerialPortUtil, NormalizesLinuxTtyName)
 
 TEST(ArduinoFirmwareManifest, BundledHexRelativePathUsesBinOffset)
 {
+    EnsureQtApp();
     const QString rel =
         RDK::UFirmwareManifest::bundledHexRelativePath(QStringLiteral("standard_firmata"), 0);
     ASSERT_FALSE(rel.isEmpty());
