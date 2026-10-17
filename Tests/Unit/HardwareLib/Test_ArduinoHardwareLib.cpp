@@ -12,8 +12,8 @@
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoBoardProfile.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoFlasher.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoSerialPortUtil.h"
-#include "../../../Libraries/Rdk-HardwareLib/Core/UArduinoPropertyString.h"
-#include "../../../Libraries/Rdk-HardwareLib/Core/UFirmwareManifest.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Board/UArduinoPropertyString.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Board/UFirmwareManifest.h"
 
 namespace {
 
