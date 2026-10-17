@@ -1,5 +1,7 @@
 # Повторный аудит TimeLearner и StructTrain Cold
 
+Практический, пополняемый протокол подготовки и безопасного исполнения выборочных/матричных опытов: [TIMELEARNER_EXPERIMENT_RUNBOOK.ru.md](TIMELEARNER_EXPERIMENT_RUNBOOK.ru.md).
+
 Дата: 2026-09-26. Проверены root-коммит `23e4e8231e2bd1c7201f724fd5510f824c229dad` и состояние на текущем root HEAD `e2c52d0271193dfc853bcab4da07a4cb813362b8`; текущие gitlinks: PulseLib `8d429e7463850b06163f177b42b17977baa38e45`, Bin `a99c7c6af182bafa03119ed4ebcd599e20ec2b94`.
 
 ## Вывод
