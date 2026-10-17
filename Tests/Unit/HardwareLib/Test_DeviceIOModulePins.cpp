@@ -5,6 +5,7 @@
 #include "../../../Libraries/Rdk-HardwareLib/Core/Catalog/UHardwareCatalog.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Devices/UArduinoDevicePinResolver.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Transport/UArduinoPinMap.h"
+#include "HardwareTestPaths.h"
 
 namespace {
 
@@ -17,22 +18,12 @@ void EnsureQtApp()
         new QCoreApplication(argc, argv);
 }
 
-void EnsureCatalogEnv()
-{
-    if (qgetenv("NMSDK_SOURCE_DIR").isEmpty())
-        qputenv("NMSDK_SOURCE_DIR", QByteArray("/home/user/Nmsdk"));
-    if (qgetenv("RDK_HARDWARE_CATALOG_DIR").isEmpty()) {
-        qputenv("RDK_HARDWARE_CATALOG_DIR",
-                QByteArray("/home/user/Nmsdk/Libraries/Rdk-HardwareLib/Catalog"));
-    }
-}
-
 } // namespace
 
 TEST(DeviceIOModulePins, JoystickUsesDefaultPortA0)
 {
     EnsureQtApp();
-    EnsureCatalogEnv();
+    HardwareTestPaths::ensureCatalogEnvironment(__FILE__);
     RDK::UHardwareCatalog::instance().unload();
     QString err;
     ASSERT_TRUE(RDK::UHardwareCatalog::instance().load(&err)) << err.toStdString();
@@ -52,7 +43,7 @@ TEST(DeviceIOModulePins, JoystickUsesDefaultPortA0)
 TEST(DeviceIOModulePins, TierAAliasesResolve)
 {
     EnsureQtApp();
-    EnsureCatalogEnv();
+    HardwareTestPaths::ensureCatalogEnvironment(__FILE__);
     RDK::UHardwareCatalog::instance().unload();
     QString err;
     ASSERT_TRUE(RDK::UHardwareCatalog::instance().load(&err)) << err.toStdString();

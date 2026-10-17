@@ -1,22 +1,25 @@
 #include <gtest/gtest.h>
 
 #include <QMap>
+#include <QStringList>
 #include <cstring>
 
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/IArduinoProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkDisplayHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkI2cHubProtocolPlugin.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkMotorHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkPixelHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkRadioHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkSensorHubProtocolPlugin.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmsdkUartDeviceHubProtocolPlugin.h"
+#include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/UNmeaGpsParser.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Protocol/USensorLabFrameDecoder.h"
 
 namespace {
 
 class CapturingHost : public RDK::UArduinoPluginHost {
 public:
-    void enqueueCommand(const QString&) override {}
+    void enqueueCommand(const QString& command) override { Commands << command; }
     int boardProfile() const override { return 0; }
     int protocolVersion() const override { return 2; }
     void setProtocolReady(bool ready) override { Ready = ready; }
@@ -29,6 +32,7 @@ public:
 
     QMap<QString, float> Named;
     QMap<QString, QString> NamedStr;
+    QStringList Commands;
     bool Ready = false;
 };
 
@@ -192,4 +196,61 @@ TEST(P2PlusHubFrameDecode, DisplayPixelRadioUart)
     uart.onBinaryFrame(&host, 0x60, QByteArray("hello"));
     EXPECT_FLOAT_EQ(5.f, host.Named.value(QStringLiteral("last_line_len")));
     EXPECT_EQ(QStringLiteral("hello"), host.NamedStr.value(QStringLiteral("last_line")));
+}
+
+TEST(NmeaGpsParser, ConvertsGgaDegreesMinutesWithBothTalkers)
+{
+    double latitude = 0.0;
+    double longitude = 0.0;
+    ASSERT_TRUE(RDK::UNmeaGpsParser::parseGga(
+        QStringLiteral("$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,"),
+        &latitude, &longitude));
+    EXPECT_NEAR(48.1173, latitude, 0.000001);
+    EXPECT_NEAR(11.5166667, longitude, 0.000001);
+
+    ASSERT_TRUE(RDK::UNmeaGpsParser::parseGga(
+        QStringLiteral("$GNGGA,123519,3450.000,S,05822.000,W,1,08,0.9,10.0,M,0.0,M,,"),
+        &latitude, &longitude));
+    EXPECT_NEAR(-34.8333333, latitude, 0.000001);
+    EXPECT_NEAR(-58.3666667, longitude, 0.000001);
+}
+
+TEST(NmeaGpsParser, RejectsNoFixInvalidMinutesAndBadChecksum)
+{
+    double latitude = 0.0;
+    double longitude = 0.0;
+    EXPECT_FALSE(RDK::UNmeaGpsParser::parseGga(
+        QStringLiteral("$GPGGA,123519,4807.038,N,01131.000,E,0,08,0.9,545.4,M,46.9,M,,"),
+        &latitude, &longitude));
+    EXPECT_FALSE(RDK::UNmeaGpsParser::parseGga(
+        QStringLiteral("$GPGGA,123519,4860.000,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,"),
+        &latitude, &longitude));
+    EXPECT_FALSE(RDK::UNmeaGpsParser::parseGga(
+        QStringLiteral("$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*00"),
+        &latitude, &longitude));
+}
+
+TEST(HubPlugins, NegotiationQueuesProtocolV2OnlyOnce)
+{
+    CapturingHost host;
+    RDK::UNmsdkSensorHubProtocolPlugin sensor;
+    RDK::UNmsdkMotorHubProtocolPlugin motor;
+    RDK::UNmsdkI2cHubProtocolPlugin i2c;
+    RDK::UNmsdkDisplayHubProtocolPlugin display;
+    RDK::UNmsdkPixelHubProtocolPlugin pixel;
+    RDK::UNmsdkRadioHubProtocolPlugin radio;
+    RDK::UNmsdkUartDeviceHubProtocolPlugin uart;
+
+    const auto expectOneCommand = [&](RDK::IArduinoProtocolPlugin& plugin) {
+        host.Commands.clear();
+        plugin.negotiate(&host, 2);
+        EXPECT_EQ(QStringList{QStringLiteral("PROTO 2")}, host.Commands);
+    };
+    expectOneCommand(sensor);
+    expectOneCommand(motor);
+    expectOneCommand(i2c);
+    expectOneCommand(display);
+    expectOneCommand(pixel);
+    expectOneCommand(radio);
+    expectOneCommand(uart);
 }
