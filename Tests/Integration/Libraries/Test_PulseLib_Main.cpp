@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "../Support/ConsoleLikeInit.h"
 
 #include <cstdio>
 
@@ -13,6 +14,8 @@ int main(int argc, char** argv)
 #endif
 
     ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    const int result = RUN_ALL_TESTS();
+    NmsdkTests::ShutdownEngineForPulseLibTests();
+    return result;
 }
 

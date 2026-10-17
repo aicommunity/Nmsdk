@@ -36,8 +36,8 @@ See [.gitmodules](.gitmodules) for the canonical list (Rdk, Bin, five Libraries)
 ## Build (quick)
 
 ```bash
-cmake --preset linux-gcc-debug
-cmake --build build
+cmake --preset linux-gcc-debug-local
+cmake --build --preset linux-gcc-debug
 ```
 
 See [Docs/Build-And-Deploy/](Docs/Build-And-Deploy/) for platform-specific guides.
@@ -80,8 +80,8 @@ See [.gitmodules](.gitmodules) for the canonical list (Rdk, Bin, five Libraries)
 ## Build (quick)
 
 ```bash
-cmake --preset linux-gcc-debug
-cmake --build build
+cmake --preset linux-gcc-debug-local
+cmake --build --preset linux-gcc-debug
 ```
 
 See [Docs/Build-And-Deploy/](Docs/Build-And-Deploy/) for platform-specific guides.

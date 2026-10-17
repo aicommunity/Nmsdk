@@ -22,6 +22,41 @@
       }
     },
     {
+      "label": "nmsdk: build NeuroModeler",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "--preset",
+        "linux-gcc-debug",
+        "--target",
+        "NeuroModeler",
+        "--parallel"
+      ],
+      "windows": {
+        "args": [
+          "--build",
+          "--preset",
+          "win-vs2019-release-localqt",
+          "--target",
+          "NeuroModeler",
+          "--parallel"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc", "$msCompile"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
       "label": "nmsdk: build NeuroModeler (linux-gcc-debug)",
       "type": "shell",
       "command": "cmake",
@@ -36,12 +71,8 @@
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
       "problemMatcher": ["$gcc"],
-      "dependsOn": [],
       "presentation": {
         "reveal": "always",
         "panel": "shared"
@@ -85,16 +116,37 @@
         "NeuroModelerConsole",
         "--parallel"
       ],
+      "windows": {
+        "args": [
+          "--build",
+          "--preset",
+          "win-vs2019-release-localqt",
+          "--target",
+          "NeuroModelerConsole",
+          "--parallel"
+        ]
+      },
       "options": {
         "cwd": "${workspaceFolder}"
       },
       "group": "build",
-      "problemMatcher": ["$gcc"]
+      "problemMatcher": ["$gcc", "$msCompile"]
     },
     {
       "label": "nmsdk: run NeuroModeler",
       "type": "shell",
       "command": "${workspaceFolder}/Bin/Platform/Linux/NeuroModeler",
+      "windows": {
+        "command": "${workspaceFolder}/Bin/Platform/Win/NeuroModeler.exe",
+        "options": {
+          "cwd": "${workspaceFolder}/Bin/Platform/Win",
+          "env": {
+            "NMSDK_ROOT": "${workspaceFolder}",
+            "NMSDK_SOURCE_DIR": "${workspaceFolder}",
+            "VCPKG_ROOT": "${env:VCPKG_ROOT}"
+          }
+        }
+      },
       "options": {
         "cwd": "${workspaceFolder}/Bin/Platform/Linux",
         "env": {
@@ -102,9 +154,7 @@
           "NMSDK_SOURCE_DIR": "${workspaceFolder}"
         }
       },
-      "dependsOn": [
-        "nmsdk: build NeuroModeler (linux-gcc-debug)"
-      ],
+      // No dependsOn build: avoids a second full rebuild after CMake Build/Launch.
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -126,7 +176,7 @@
         "args": [
           "--build",
           "--preset",
-          "win-vs2022-debug",
+          "win-vs2019-release-localqt",
           "--target",
           "NeuroModeler",
           "--parallel"

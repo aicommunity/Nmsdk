@@ -11,6 +11,7 @@ endif()
 add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_StorageComponents.cpp
     Test_PulseLib_NeuronGrowth.cpp
+    Test_PulseLib_TimeLearnerResistance.cpp
     Test_PulseLib_Main.cpp
 )
 
@@ -25,7 +26,7 @@ target_link_libraries(Test_PulseLib_StorageComponents
         Rdk-HardwareLib.qt
         Nmsdk-MotionControlLib.qt
         Nmsdk-PulseLib.qt
-        gtest
+        GTest::gtest
 )
 
 target_include_directories(Test_PulseLib_StorageComponents

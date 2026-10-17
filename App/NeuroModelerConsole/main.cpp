@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 #include <utility>
 #include <vector>
 #include <boost/program_options/cmdline.hpp>
@@ -49,6 +50,8 @@ int main(int argc, char* argv[])
                                          "seconds");
 const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
                                          "Exit application after calculations finish.");
+const QCommandLineOption saveProjectOption(QStringList() << "S" << "save-project",
+                                           "Save project (Model + Parameters + Interface) before exit.");
 const QCommandLineOption generateClDescOption(QStringList() << "g" << "generate-cldesc",
                                               "Generate XML descriptions for loaded component classes and exit.");
 const QCommandLineOption lexiconOption(QStringList() << "l" << "cldesc-lexicon",
@@ -69,6 +72,7 @@ parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
 parser.addOption(exitAfterOption);
+parser.addOption(saveProjectOption);
 parser.addOption(generateClDescOption);
 parser.addOption(lexiconOption);
 parser.addOption(clDescLibraryOption);
@@ -107,6 +111,7 @@ parser.addOption(checkConfigOption);
       token == "--start-calc" || token == "-s" ||
       token == "--calc-time" || token == "-t" ||
       token == "--exit-after-calc" || token == "-x" ||
+      token == "--save-project" || token == "-S" ||
       token == "--generate-cldesc" || token == "-g" ||
       token == "--cldesc-lexicon" || token == "-l" ||
       token == "--cldesc-library" || token == "-C" ||
@@ -130,6 +135,7 @@ parser.addOption(checkConfigOption);
  const QString cliConfigPath = parser.value(configOption).trimmed();
  const bool cliStartCalc = parser.isSet(startCalcOption);
  const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
+ const bool cliSaveProject = parser.isSet(saveProjectOption);
 const bool cliGenerateClDesc = parser.isSet(generateClDescOption);
 const QString cliCheckConfig = parser.value(checkConfigOption).trimmed();
 const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
@@ -254,8 +260,8 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   AppCore.startProjectName = cliConfigPath.toLocal8Bit().constData();
   AppCore.autoexecLastProjectFlag = 0;
  }
- if(cliStartCalc)
-  AppCore.autoStartProjectFlag = 1;
+ // Defer StartChannel until after MaxCalcTime is applied (see below).
+ const bool wantStartCalc = cliStartCalc;
  if(cliCalcTimeSec > 0.0)
   AppCore.calcTimeIntervalSec = cliCalcTimeSec;
  if(cliExitAfterCalc)
@@ -263,7 +269,14 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
 
  AppCore.PostInit();
 
- auto configureAutomation = [&AppCore]()
+ if(!cliConfigPath.isEmpty() && !AppCore.application.GetProjectOpenFlag())
+ {
+  qCritical() << "Error: failed to open project:" << cliConfigPath;
+  return 1;
+ }
+
+ // Apply calc-time before starting channels so --calc-time / --exit-after-calc work.
+ auto configureAutomation = [&AppCore, cliSaveProject, cliExitAfterCalc]()
  {
   if(AppCore.calcTimeIntervalSec > 0.0 && AppCore.application.GetProjectOpenFlag())
   {
@@ -276,28 +289,110 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
      env->SetMaxCalcTime(AppCore.calcTimeIntervalSec);
    }
   }
-  if(AppCore.exitAfterCalcFlag)
+  const int projectAutoSaveInterval = AppCore.application.GetProjectOpenFlag()
+      ? std::max(0, AppCore.application.GetProjectConfig().ProjectAutoSaveModelTimeInterval)
+      : 0;
+  if(AppCore.exitAfterCalcFlag || cliSaveProject || projectAutoSaveInterval > 0)
   {
+   if(AppCore.exitAfterCalcFlag && AppCore.calcTimeIntervalSec <= 0.0)
+   {
+    qWarning() << "--exit-after-calc without --calc-time may never quit"
+               << "(MaxCalcTime stays 0 / IsCalcFinished never becomes true).";
+   }
    QTimer* monitor = new QTimer(QCoreApplication::instance());
-   QObject::connect(monitor, &QTimer::timeout, [&AppCore]()
+   // Latch: one SaveProject and one quit per run (A15).
+   auto* completionHandled = new bool(false);
+   const int projectChannelCount = std::max(1, AppCore.application.GetProjectConfig().NumChannels);
+   QObject::connect(monitor, &QTimer::timeout,
+    [&, cliSaveProject, monitor, completionHandled, projectAutoSaveInterval,
+     nextAutoSaveModelTime = std::vector<double>(static_cast<size_t>(projectChannelCount), -1.0),
+     lastAutoSaveModelTime = std::vector<double>(static_cast<size_t>(projectChannelCount), -1.0)]() mutable
    {
     if(!AppCore.application.GetProjectOpenFlag())
      return;
     const auto& cfg = AppCore.application.GetProjectConfig();
     const int channel_count = std::max(1, cfg.NumChannels);
+    bool allCalcFinished = true;
+    bool autoSaveDue = false;
+    int autoSaveTriggerChannel = -1;
+    std::vector<double> modelTimes(static_cast<size_t>(channel_count), 0.0);
     for(int channel = 0; channel < channel_count; ++channel)
     {
      auto env = RDK::GetEnvironmentLock(channel);
      if(env && !env->IsCalcFinished())
-      return;
+      allCalcFinished = false;
+
+     if(projectAutoSaveInterval > 0)
+     {
+      const double modelTime = MModel_GetDoubleTime(channel);
+      if(!std::isfinite(modelTime))
+       continue;
+      modelTimes[static_cast<size_t>(channel)] = modelTime;
+      double& nextSaveTime = nextAutoSaveModelTime[static_cast<size_t>(channel)];
+      double& lastModelTime = lastAutoSaveModelTime[static_cast<size_t>(channel)];
+      if(nextSaveTime < 0.0 || (lastModelTime >= 0.0 && modelTime + 1.0e-9 < lastModelTime))
+       nextSaveTime = modelTime + projectAutoSaveInterval;
+      if(modelTime + 1.0e-9 >= nextSaveTime)
+      {
+       autoSaveDue = true;
+       if(autoSaveTriggerChannel < 0)
+        autoSaveTriggerChannel = channel;
+      }
+      lastModelTime = modelTime;
+     }
     }
-    QCoreApplication::quit();
+
+    if(autoSaveDue)
+    {
+     const bool saved = AppCore.application.SaveProject();
+     if(!saved)
+      qCritical() << "Error: model-time auto-save call failed.";
+     else
+      qInfo() << "Project auto-save call completed at channel" << autoSaveTriggerChannel
+              << "model time" << modelTimes[static_cast<size_t>(autoSaveTriggerChannel)] << "seconds.";
+     // Do not retry on every 500 ms timer tick if writing failed. Try again after
+     // the next configured model-time interval.
+     for(int channel = 0; channel < channel_count; ++channel)
+     {
+      double& nextSaveTime = nextAutoSaveModelTime[static_cast<size_t>(channel)];
+      if(nextSaveTime >= 0.0 && modelTimes[static_cast<size_t>(channel)] + 1.0e-9 >= nextSaveTime)
+       nextSaveTime = modelTimes[static_cast<size_t>(channel)] + projectAutoSaveInterval;
+     }
+    }
+
+    if(!allCalcFinished || *completionHandled)
+     return;
+    *completionHandled = true;
+    monitor->stop();
+    if(cliSaveProject)
+    {
+     if(!AppCore.application.SaveProject())
+     {
+      qCritical() << "Error: --save-project failed.";
+      QCoreApplication::exit(1);
+      return;
+     }
+     qInfo() << "Project saved.";
+    }
+    // Quit on AppCore flag (ini or CLI -x), not only raw cliExitAfterCalc.
+    if(AppCore.exitAfterCalcFlag)
+     QCoreApplication::quit();
    });
    monitor->start(500);
   }
  };
 
  configureAutomation();
+
+ if(wantStartCalc)
+ {
+  if(!AppCore.application.GetProjectOpenFlag())
+  {
+   qCritical() << "Error: --start-calc requested but project is not open.";
+   return 1;
+  }
+  AppCore.application.StartChannel(-1);
+ }
 
 if(cliGenerateClDesc)
 {

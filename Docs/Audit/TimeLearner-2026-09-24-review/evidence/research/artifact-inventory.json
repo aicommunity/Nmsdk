@@ -1,0 +1,191 @@
+{
+  "linux_console_present": false,
+  "runs_present": false,
+  "cases": [
+    {
+      "case": "br25_on",
+      "changed_files": [
+        "Configs/SpikeSamples/StructTrain/SelectivityBranch/EXP_br_span25_packA_gen_C1e9_posttune/README.md"
+      ],
+      "csv_present": true,
+      "rows": 8,
+      "csv_sha256": "a098df52bdd487c85463e2d7010b5d4325262d11eedcd74abec466169f85487f",
+      "first_row": {
+        "trial": "0",
+        "target_class": "1",
+        "stim_count": "4",
+        "isi0": "0.00415",
+        "isi1": "0.00835",
+        "isi2": "0.0125",
+        "isi3": "",
+        "neuron_fired": "1",
+        "neuron_t_rel": "0.11255",
+        "match": "1",
+        "late_fired": "0",
+        "late_t_rel": "-1",
+        "error_class": "ok",
+        "ltz_potential_max": "0",
+        "soma_amp_0": "0",
+        "soma_amp_1": "0",
+        "soma_amp_2": "0",
+        "soma_amp_3": "0",
+        "soma_amp_sum": "0.0717894",
+        "neuron_spike_count": "1",
+        "neuron_spike_times": "0.11255",
+        "response_class": "single"
+      }
+    },
+    {
+      "case": "br25_off",
+      "changed_files": [
+        "Configs/SpikeSamples/StructTrain/SelectivityBranch/EXP_br_span25_packA_gen_C1e9_posttune_off/README.md"
+      ],
+      "csv_present": true,
+      "rows": 9,
+      "csv_sha256": "277df48128e809e99f80e07a0deab59f738ba3797d5bac311581b2eca28164ca",
+      "first_row": {
+        "trial": "0",
+        "target_class": "1",
+        "stim_count": "4",
+        "isi0": "0.00415",
+        "isi1": "0.00835",
+        "isi2": "0.0125",
+        "isi3": "",
+        "neuron_fired": "1",
+        "neuron_t_rel": "0.1124",
+        "match": "1",
+        "late_fired": "0",
+        "late_t_rel": "-1",
+        "error_class": "ok",
+        "ltz_potential_max": "0",
+        "soma_amp_0": "0",
+        "soma_amp_1": "0",
+        "soma_amp_2": "0",
+        "soma_amp_3": "0",
+        "soma_amp_sum": "0.0717788",
+        "neuron_spike_count": "1",
+        "neuron_spike_times": "0.1124",
+        "response_class": "single"
+      }
+    },
+    {
+      "case": "asym25",
+      "changed_files": [
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/EXP_span25ms_packA_gen_posttune/README.md"
+      ],
+      "csv_present": false,
+      "rows": 0,
+      "csv_sha256": null,
+      "first_row": null
+    },
+    {
+      "case": "br100_keep",
+      "changed_files": [
+        "Configs/SpikeSamples/StructTrain/SelectivityBranch/EXP_br_span100_packA_gen_C1e9_posttune_keep/README.md"
+      ],
+      "csv_present": true,
+      "rows": 8,
+      "csv_sha256": "0935989f55e514fcc84b3a265e9a154612c850dcad0eb8b201b723058db22793",
+      "first_row": {
+        "trial": "0",
+        "target_class": "1",
+        "stim_count": "4",
+        "isi0": "0.0167",
+        "isi1": "0.0333",
+        "isi2": "0.05",
+        "isi3": "",
+        "neuron_fired": "1",
+        "neuron_t_rel": "0.24755",
+        "match": "1",
+        "late_fired": "0",
+        "late_t_rel": "-1",
+        "error_class": "ok",
+        "ltz_potential_max": "0",
+        "soma_amp_0": "0",
+        "soma_amp_1": "0",
+        "soma_amp_2": "0",
+        "soma_amp_3": "0",
+        "soma_amp_sum": "0.00718243",
+        "neuron_spike_count": "1",
+        "neuron_spike_times": "0.24755",
+        "response_class": "single"
+      }
+    },
+    {
+      "case": "br100_search",
+      "changed_files": [
+        "Configs/SpikeSamples/StructTrain/SelectivityBranch/EXP_br_span100_packA_gen_C1e9_posttune_search/README.md"
+      ],
+      "csv_present": true,
+      "rows": 8,
+      "csv_sha256": "1f2c542448305884b1e24131908476c78a1285200dbe28d15ce8904828cc4700",
+      "first_row": {
+        "trial": "0",
+        "target_class": "1",
+        "stim_count": "4",
+        "isi0": "0.0167",
+        "isi1": "0.0333",
+        "isi2": "0.05",
+        "isi3": "",
+        "neuron_fired": "1",
+        "neuron_t_rel": "0.24585",
+        "match": "1",
+        "late_fired": "0",
+        "late_t_rel": "-1",
+        "error_class": "ok",
+        "ltz_potential_max": "0",
+        "soma_amp_0": "0",
+        "soma_amp_1": "0",
+        "soma_amp_2": "0",
+        "soma_amp_3": "0",
+        "soma_amp_sum": "0.00714256",
+        "neuron_spike_count": "1",
+        "neuron_spike_times": "0.24585",
+        "response_class": "single"
+      }
+    },
+    {
+      "case": "asym50",
+      "changed_files": [
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/EXP_span50ms_packA_gen_posttune/README.md"
+      ],
+      "csv_present": false,
+      "rows": 0,
+      "csv_sha256": null,
+      "first_row": null
+    },
+    {
+      "case": "phase6_480",
+      "changed_files": [
+        "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/Phase6/EXP_480_gen_posttune/README.md"
+      ],
+      "csv_present": true,
+      "rows": 8,
+      "csv_sha256": "b53ecfcf4ceaebc950fd6a4bdabf06f729e0585522be7eed41bafc44b3a900b2",
+      "first_row": {
+        "trial": "0",
+        "target_class": "1",
+        "stim_count": "4",
+        "isi0": "0.08",
+        "isi1": "0.16",
+        "isi2": "0.24",
+        "isi3": "",
+        "neuron_fired": "1",
+        "neuron_t_rel": "0.4895",
+        "match": "1",
+        "late_fired": "0",
+        "late_t_rel": "-1",
+        "error_class": "ok",
+        "ltz_potential_max": "0.0170584",
+        "soma_amp_0": "0.019369",
+        "soma_amp_1": "0.0213963",
+        "soma_amp_2": "0.0242272",
+        "soma_amp_3": "0.0158276",
+        "soma_amp_sum": "0.0682334",
+        "neuron_spike_count": "1",
+        "neuron_spike_times": "0.4895",
+        "response_class": "single"
+      }
+    }
+  ]
+}
