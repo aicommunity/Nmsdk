@@ -5,6 +5,7 @@
 
 #include "../../../Libraries/Rdk-HardwareLib/Core/Catalog/UHardwareCatalog.h"
 #include "../../../Libraries/Rdk-HardwareLib/Core/Wheeled/UWheeledDriveLogic.h"
+#include "HardwareTestPaths.h"
 
 namespace {
 
@@ -17,22 +18,12 @@ void EnsureQtApp()
         new QCoreApplication(argc, argv);
 }
 
-void EnsureCatalogEnv()
-{
-    if (qgetenv("NMSDK_SOURCE_DIR").isEmpty())
-        qputenv("NMSDK_SOURCE_DIR", QByteArray("/home/user/Nmsdk"));
-    if (qgetenv("RDK_HARDWARE_CATALOG_DIR").isEmpty()) {
-        qputenv("RDK_HARDWARE_CATALOG_DIR",
-                QByteArray("/home/user/Nmsdk/Libraries/Rdk-HardwareLib/Catalog"));
-    }
-}
-
 } // namespace
 
 TEST(MotorDriverSetPinL2, MotorShieldR3EmitsDirPwm)
 {
     EnsureQtApp();
-    EnsureCatalogEnv();
+    HardwareTestPaths::ensureCatalogEnvironment(__FILE__);
     RDK::UHardwareCatalog::instance().unload();
     QString err;
     ASSERT_TRUE(RDK::UHardwareCatalog::instance().load(&err)) << err.toStdString();
@@ -48,6 +39,28 @@ TEST(MotorDriverSetPinL2, MotorShieldR3EmitsDirPwm)
     EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN A pwm D3")));
     EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN B dir D13")));
     EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN B pwm D11")));
+    EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN A dir2 NONE")));
+    EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN A enable NONE")));
+}
+
+TEST(MotorDriverSetPinL2, L298NUsesTwoDirectionPinsAndPwm)
+{
+    EnsureQtApp();
+    HardwareTestPaths::ensureCatalogEnvironment(__FILE__);
+    RDK::UHardwareCatalog::instance().unload();
+    QString err;
+    ASSERT_TRUE(RDK::UHardwareCatalog::instance().load(&err)) << err.toStdString();
+
+    const auto* shield = RDK::UHardwareCatalog::instance().shield(QStringLiteral("wire_l298n"));
+    ASSERT_NE(nullptr, shield);
+    EXPECT_EQ(QStringLiteral("dir2_pwm"), shield->controlModel);
+    const QStringList lines =
+        RDK::UWheeledDriveLogic::buildSetPinCommands(QStringLiteral("wire_l298n"));
+    EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN A dir D2")));
+    EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN A dir2 D4")));
+    EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN A pwm D5")));
+    EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN B dir2 D8")));
+    EXPECT_TRUE(lines.contains(QStringLiteral("SET PIN B brake NONE")));
 }
 
 TEST(MotorDriverSetPinL2, EmptyIdYieldsNoCommands)
