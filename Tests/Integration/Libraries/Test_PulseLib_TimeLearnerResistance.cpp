@@ -1040,6 +1040,62 @@ TEST_F(TimeLearnerResistanceTest, BranchParametricColdStartIgnoresStaleSerialize
     EXPECT_LT(learner->ResistanceMin.GetData(), 2.0e7);
 }
 
+TEST_F(TimeLearnerResistanceTest, ClassicColdResetCanKeepExplicitPerInputTipResistance)
+{
+    auto learner = CreateLearner("TimeLearnerClassicLoadedTipReset");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 1;
+    learner->NeuronClassName = "NSPNeuronGenAsymRmD001C1e9";
+    learner->SynapseResistanceBase = 8.6e7;
+    learner->TipSynapseResistance = {8.6e7, 8.6e7, 8.6e7};
+    learner->InitialSomaPotential = {0.01, 0.01, 0.01};
+    learner->Build();
+    ASSERT_TRUE(learner->IsReady());
+    model->Build();
+    ASSERT_TRUE(model->IsReady());
+    model->Init();
+    // Mimic the runtime per-input diagnostic overlay arriving after the cold
+    // snapshot was captured, while keeping the final reference anchor fixed.
+    learner->TipSynapseResistance = {5.0e7, 6.0e7, 8.6e7};
+    learner->UseLoadedTipResistanceOnUntrainedReset = true;
+    learner->ResetToUntrainedState = true;
+    model->Reset();
+
+    const auto tips = learner->TipSynapseResistance.GetData();
+    ASSERT_EQ(tips.size(), 3u);
+    EXPECT_DOUBLE_EQ(tips[0], 5.0e7);
+    EXPECT_DOUBLE_EQ(tips[1], 6.0e7);
+    EXPECT_DOUBLE_EQ(tips[2], 8.6e7)
+        << "the configured reference anchor must remain independent of trainable tips";
+}
+
+TEST_F(TimeLearnerResistanceTest, BranchColdResetCanKeepExplicitPerInputTipResistance)
+{
+    auto learner = CreateBranchLearner("TimeLearnerBranchLoadedTipReset");
+    ASSERT_TRUE(learner);
+    learner->NormalizationMode = 1;
+    learner->NeuronClassName = "NSPNeuronGenAsymRmD001C1e9";
+    learner->SynapseResistanceBase = 8.6e7;
+    learner->TipSynapseResistance = {8.6e7, 8.6e7, 8.6e7};
+    learner->InitialSomaPotential = {0.01, 0.01, 0.01};
+    learner->Build();
+    ASSERT_TRUE(learner->IsReady());
+    model->Build();
+    ASSERT_TRUE(model->IsReady());
+    model->Init();
+    learner->TipSynapseResistance = {5.0e7, 6.0e7, 8.6e7};
+    learner->UseLoadedTipResistanceOnUntrainedReset = true;
+    learner->ResetToUntrainedState = true;
+    model->Reset();
+
+    const auto tips = learner->TipSynapseResistance.GetData();
+    ASSERT_EQ(tips.size(), 3u);
+    EXPECT_DOUBLE_EQ(tips[0], 5.0e7);
+    EXPECT_DOUBLE_EQ(tips[1], 6.0e7);
+    EXPECT_DOUBLE_EQ(tips[2], 8.6e7)
+        << "the configured reference anchor must remain independent of trainable tips";
+}
+
 TEST_F(TimeLearnerResistanceTest, FrozenAttenuationGammaSurvivesColdReset)
 {
     auto learner = CreateLearner("TimeLearnerFrozenAttenuationGamma");
