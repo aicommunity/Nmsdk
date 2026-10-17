@@ -1,6 +1,6 @@
 # Промежуточный ре-аудит TimeLearner на 2026-10-17
 
-Обновлено: 2026-10-17 19:04 MSK. Ветка: `codex/historical_view`.
+Обновлено: 2026-10-17 19:14 MSK. Ветка: `codex/historical_view`.
 
 ## Краткий итог
 
@@ -68,7 +68,7 @@
 
 | Проверка | `.11` | `.17` |
 |---|---|---|
-| Root branch / HEAD | `codex/historical_view` / `3ec6ce117a59d30e9bcb1ae7bce0d49dc0682183` | `codex/historical_view` / `3ec6ce117a59d30e9bcb1ae7bce0d49dc0682183` |
+| Root branch / HEAD | `codex/historical_view`, синхронизирован с origin после документального коммита | `codex/historical_view`, синхронизирован с origin после документального коммита |
 | Bin | `f13180052b8ba1302d66dd0cd793962945552f74` | `f13180052b8ba1302d66dd0cd793962945552f74` |
 | PulseLib | `da307d3ac1169c72d2d0c030b67ec29ac93e267b` | `da307d3ac1169c72d2d0c030b67ec29ac93e267b` |
 | Rdk | `b3b2472dc347899af266cd46e64bca2a6ea16fea` | `b3b2472dc347899af266cd46e64bca2a6ea16fea` |
@@ -79,7 +79,7 @@
 
 На `.11` в PulseLib перед финальной проверкой восстановлен файл `Core/NNeuronTimeLearnerResistanceBounds.h` из текущего HEAD после обнаруженного локального удаления; затем PulseLib и root стали clean. Изменение `.git/modules/Rdk/config` исправило только локальный путь основного submodule checkout, исходники не изменялись.
 
-Удалены старые зарегистрированные worktree: `.11` — 11 root worktree, `.17` — 34, локально — 5. На `.11` capture idle tmux сохранён в `/media/user/Data/NmsdkRuntime/TimeLearnerAudit-20261017/server-cleanup/tmux-captures-11-20261017.tar.gz`, SHA-256 `459d060f30154173e66220c3f58b28e442131c384317c094c61b46f94d2c36aa`; на `.17` снимки старых tmux-сессий сохранены в `/media/user/Data/NmsdkRuntime/TimeLearnerAudit-20261017/server-cleanup/tmux-captures-17/`. Обе стороны оставлены без tmux-сессий и активных процессов обучения.
+Удалены старые зарегистрированные worktree: `.11` — 11 root worktree, `.17` — 34, локально — 5. Локальный отчёт был создан и отправлен в origin; затем обе серверные основные папки fast-forward/reset до опубликованной ветки. На `.11` capture idle tmux сохранён в `/media/user/Data/NmsdkRuntime/TimeLearnerAudit-20261017/server-cleanup/tmux-captures-11-20261017.tar.gz`, SHA-256 `459d060f30154173e66220c3f58b28e442131c384317c094c61b46f94d2c36aa`; на `.17` снимки старых tmux-сессий сохранены в `/media/user/Data/NmsdkRuntime/TimeLearnerAudit-20261017/server-cleanup/tmux-captures-17/`. Обе стороны оставлены без tmux-сессий и активных процессов обучения.
 
 Архивы удалённых checkout/diffs: `.11` — `imported-from-11/worktree-review-11-20261017.tar.gz` (SHA-256 `c3d8679cd08a2fb72c52e27a7a574aaebb0186c15d9ff87ef9a74cd131705060`) и `worktree-objects-11-20261017.tar.gz` (SHA-256 `2effc098cddc2f7348fa4d1ef6e88b7102c2afbbcc29dc907ef0acf5bd0a970c`); `.17` — `worktree-review-17-20261017.tar.gz` (SHA-256 `a6f19fba46b39ee2161ef0a553b8a6d46bd3b7bd58abe9a3c7dcefda99f4561f`) и Git bundles в соседней `objects/` directory. Основные server-preservation архивы и meaningful experiment logs сохранены на большом диске `.17`; см. хеши выше и [снимок server worktree](evidence/SERVER_WORKTREE_STATE_2026-10-16.ru.md). Старые данные матрицы не удалялись.
 
