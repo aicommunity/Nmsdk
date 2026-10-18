@@ -448,6 +448,7 @@ public:
         NoImproveCount.assign(count, 7);
         InvalidPeakNoActionCount.assign(count, 2);
         DendLastAbsDt.assign(count, 0.0005);
+        Dissynchronization.assign(count, 0.0005);
         DendStatus.assign(count, 1);
         SynapseStatus.assign(count, -1);
         AmpDifference.assign(count, 0.125);
@@ -766,6 +767,7 @@ TEST(BranchStructuralSyncInvalidationTest, ReopensCommittedPulsesAndReferenceAnc
         EXPECT_EQ(learner.SynapseStatusForTest(pulse), 0) << "pulse " << pulse;
         EXPECT_DOUBLE_EQ(learner.AmpDifferenceForTest(pulse), 0.0) << "pulse " << pulse;
         EXPECT_GT(learner.LastAbsDtForTest(pulse), 0.02) << "pulse " << pulse;
+        EXPECT_GT(std::fabs(learner.DissynchronizationAt(pulse)), 0.02) << "pulse " << pulse;
     }
     EXPECT_EQ(learner.SelectedPulseForTest(), 3)
         << "the reference pulse must be measured again before the earlier pulses are retuned";
@@ -1841,6 +1843,12 @@ public:
     bool Decide() { return ChangeSynapseStatus(0); }
     int PendingCountChange() const { return SynapseStatus[0]; }
     bool IsAmpNormalized() const { return AllSynapsesNormalized(); }
+
+    void SetUnmeasuredPeakState()
+    {
+        MaxIterSomaAmp = {0.0, 0.0};
+        PeakSeen.assign(2, false);
+    }
 };
 
 class BranchStructuralDeadTipHarness : public NMSDK::NNeuronTimeLearnerBranch
@@ -1868,6 +1876,12 @@ public:
     bool Decide() { return ChangeSynapseStatus(0); }
     int PendingCountChange() const { return SynapseStatus[0]; }
     bool IsAmpNormalized() const { return AllSynapsesNormalized(); }
+
+    void SetUnmeasuredPeakState()
+    {
+        MaxIterSomaAmp = {0.0, 0.0};
+        PeakSeen.assign(2, false);
+    }
 };
 
 TEST(StructuralDeadTipRecoveryTest, ClassicContinuesAddingBelowTheStructuralCap)
@@ -1918,6 +1932,30 @@ TEST(StructuralDeadTipRecoveryTest, BranchContinuesAddingBelowTheStructuralCap)
     ASSERT_TRUE(learner.Decide());
     EXPECT_EQ(learner.PendingCountChange(), 1)
         << "a best-effort timing estimate must not suppress the only structural amplitude control";
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchDoesNotAddWhenPeakWasNeverMeasured)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+    learner.SetUnmeasuredPeakState();
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0)
+        << "PeakLocked/unmeasured bursts must not grow N from Initial-vs-zero amp";
+}
+
+TEST(StructuralDeadTipRecoveryTest, ClassicDoesNotAddWhenPeakWasNeverMeasured)
+{
+    ClassicStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+    learner.SetUnmeasuredPeakState();
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0)
+        << "PeakLocked/unmeasured bursts must not grow N from Initial-vs-zero amp";
 }
 
 TEST(StructuralDeadTipRecoveryTest, BranchStopsAddingAtTheStructuralCap)
