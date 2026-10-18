@@ -870,11 +870,12 @@ TEST(BranchSegmentOrderTransitionTest, RefusesWhenMaxLengthCannotRestoreOrder)
 TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionBurstsAtRmin)
 {
     BranchSegmentOrderHarness learner;
-    learner.SetInvalidPeakNoActionState(1.0e6, false);
+    // Timing already ok: length cannot help, TipR@Rmin, amp collapsed → refuse.
+    learner.SetInvalidPeakNoActionState(1.0e6, true);
     ASSERT_NEAR(learner.TipResistance(1), learner.MinimumResistance(), 1e-9);
     ASSERT_FALSE(learner.IsPulsePeakValid(1));
     ASSERT_TRUE(learner.IsReferencePulseSynced());
-    ASSERT_GT(std::fabs(learner.InvalidPeakModelTimingError(1)), 0.02);
+    ASSERT_NEAR(learner.InvalidPeakModelTimingError(1), 0.0, 1e-12);
 
     for (int burst = 1; burst < 3; ++burst)
     {
@@ -891,6 +892,20 @@ TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionBurstsAtRmin)
     EXPECT_EQ(learner.Phase(), 5);
     EXPECT_EQ(learner.LengthStatus(1), 0)
         << "the refusal must preserve the no-length-change-without-peak contract";
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, TriesLengthWhenTimingStillWrongDespiteCollapsedAmp)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(1.0e6, false);
+    ASSERT_GT(std::fabs(learner.InvalidPeakModelTimingError(1)), 0.02);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.FailureReason(), 0);
+    EXPECT_EQ(learner.Phase(), 0);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 0)
+        << "collapsed amp with |dt|>tol must try length before InvalidPeakNoRecovery";
+    EXPECT_EQ(learner.LengthStatus(1), 1);
 }
 
 TEST(BranchInvalidPeakNoRecoveryTest, DoesNotCountUnmeasuredBurstsTowardRefusal)
@@ -933,8 +948,10 @@ TEST(BranchInvalidPeakNoRecoveryTest, RefusesWhenTimingMatchesButAmplitudeCannot
 TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionAboveRmin)
 {
     BranchSegmentOrderHarness learner;
-    learner.SetInvalidPeakNoActionState(2.0e6, false);
+    // Invalid peak blocks TipR feedback even above Rmin; with timing ok refuse.
+    learner.SetInvalidPeakNoActionState(2.0e6, true);
     ASSERT_GT(learner.TipResistance(1), learner.MinimumResistance());
+    ASSERT_NEAR(learner.InvalidPeakModelTimingError(1), 0.0, 1e-12);
 
     for (int burst = 1; burst < 3; ++burst)
     {
@@ -1939,7 +1956,7 @@ TEST(StructuralDeadTipRecoveryTest, ClassicContinuesAddingBelowTheStructuralCap)
 {
     ClassicStructuralDeadTipHarness learner;
     learner.Default();
-    learner.SetDeadTipState(8);
+    learner.SetDeadTipState(3);
 
     ASSERT_TRUE(learner.Decide());
     EXPECT_EQ(learner.PendingCountChange(), 1)
@@ -1978,11 +1995,22 @@ TEST(StructuralDeadTipRecoveryTest, BranchContinuesAddingBelowTheStructuralCap)
 {
     BranchStructuralDeadTipHarness learner;
     learner.Default();
-    learner.SetDeadTipState(8);
+    learner.SetDeadTipState(3);
 
     ASSERT_TRUE(learner.Decide());
     EXPECT_EQ(learner.PendingCountChange(), 1)
-        << "a best-effort timing estimate must not suppress the only structural amplitude control";
+        << "below kEarlyAmpCollapseSynapseFloor, unmeasurable amp may still request +N";
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchStopsAddingAtEarlyAmpCollapseFloor)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0)
+        << "Mode=0 must not climb N past the early amp-collapse floor on noise-floor amp";
 }
 
 TEST(StructuralDeadTipRecoveryTest, BranchDoesNotAddWhenPeakWasNeverMeasured)
@@ -2023,7 +2051,7 @@ TEST(StructuralDeadTipRecoveryTest, BranchDoesNotAcceptUnmeasurableAmplitudeBelo
 {
     BranchStructuralDeadTipHarness learner;
     learner.Default();
-    learner.SetDeadTipState(8);
+    learner.SetDeadTipState(3);
 
     EXPECT_FALSE(learner.IsAmpNormalized());
 }
