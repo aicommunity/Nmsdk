@@ -617,6 +617,18 @@ public:
         Dissynchronization.at(static_cast<size_t>(pulse)) = value;
     }
 
+    void ClearPeakAttemptForTest(int pulse)
+    {
+        if (pulse < int(MaxIterSomaAmp.size()))
+            MaxIterSomaAmp[static_cast<size_t>(pulse)] = 0.0;
+        if (int(PeakSeen.size()) != NumInputDendrite.GetData())
+            PeakSeen.assign(static_cast<size_t>(NumInputDendrite.GetData()), false);
+        else
+            PeakSeen[static_cast<size_t>(pulse)] = false;
+        if (pulse < int(SomaPeakValid.size()))
+            SomaPeakValid[static_cast<size_t>(pulse)] = false;
+    }
+
     double DissynchronizationAt(int pulse) const
     {
         return Dissynchronization.at(static_cast<size_t>(pulse));
@@ -856,6 +868,22 @@ TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionBurstsAtRmin)
     EXPECT_EQ(learner.Phase(), 5);
     EXPECT_EQ(learner.LengthStatus(1), 0)
         << "the refusal must preserve the no-length-change-without-peak contract";
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, DoesNotCountUnmeasuredBurstsTowardRefusal)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(1.0e6, false);
+    learner.ClearPeakAttemptForTest(1);
+
+    for (int burst = 0; burst < 5; ++burst)
+    {
+        ASSERT_TRUE(learner.DecideLength(1));
+        EXPECT_EQ(learner.FailureReason(), 0);
+        EXPECT_EQ(learner.Phase(), 0);
+        EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 0)
+            << "empty PeakSeen/MaxAmp windows must not arm InvalidPeakNoRecovery";
+    }
 }
 
 TEST(BranchInvalidPeakNoRecoveryTest, RefusesWhenTimingMatchesButAmplitudeCannotRecover)
