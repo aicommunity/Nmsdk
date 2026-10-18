@@ -800,6 +800,12 @@ TEST(BranchStructuralSyncInvalidationTest, ScopedReopenKeepsAnchorWhenEarlierPul
     EXPECT_TRUE(learner.PulseSyncedForTest(3))
         << "anchor stays synced so SelectActive returns the edited pulse";
     EXPECT_EQ(learner.SelectedPulseForTest(), 1);
+    // Scoped ±1 length edits must keep the no-improve streak; clearing it on
+    // every invalidate freezes W10 @25 ms in an L=5↔6 oscillation.
+    EXPECT_EQ(learner.NoImproveCountForTest(0), 7);
+    EXPECT_EQ(learner.NoImproveCountForTest(1), 7);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountForTest(0), 2);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountForTest(1), 2);
 }
 
 TEST(BranchSegmentOrderTransitionTest, RefreshesTimingErrorBeforeOrderRepairReturn)
