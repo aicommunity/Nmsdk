@@ -22,7 +22,7 @@
 2. На finish якоря `length_ok` проходил через старый `|Dissync|≈0` **без PeakSeen** → pulse N−2 снова `PulseSynced`, Active прыгал **1↔3**.
 3. `ChangeSynapseStatus` при `MaxAmp==0`/`PeakSeen=false` трактовал «короче Initial» как +N.
 
-## Фиксы (PulseLib `b861f8b` и предки)
+## Фиксы (PulseLib `2f22c26` и предки)
 
 | Коммит | Суть |
 |---|---|
@@ -31,11 +31,13 @@
 | `35b805c` | защита `EstDelayPerSeg` от sentinel prev_dt |
 | `80c28e8` | не травить `Dissync` IterationGap (демпфирование длины) |
 | `b861f8b` | **scoped reopen**: после edit пульса k чистить sync только `≤k`, якорь оставить |
+| `2f22c26` | scoped edit не сбрасывает NoImprove/LastLengthDelta; Dissync length_ok только при свежем LastAbsDt |
 
 ## Повтор после фикса
 
 | RUN_ID | Статус |
 |---|---|
-| `tl-m0-c-w04-86m-fix-20261018-11-05` | в очереди после M1 (`/tmp/dualtrack-m1m0.log`) |
+| `tl-m0-c-w04-86m-fix-20261018-11-05` | остановлен (заменён после фикса роста) |
+| `tl-m0-c-w04-86m-fix-20261018-11-36` | в очереди после M1 (`/tmp/dualtrack-m1m0.log`) |
 
-Ожидаемые признаки: нет thrash Active 1↔3; после роста на 1 якорь остаётся synced; PeakSeen нужен для commit sync. Итог Need/длины — дописать по завершении.
+Ожидаемые признаки: нет thrash Active 1↔3; после роста на 1 якорь остаётся synced; PeakSeen нужен для commit sync; NoImprove может остановить L-осцилляцию. Итог Need/длины — дописать по завершении.
