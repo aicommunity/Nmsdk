@@ -1,32 +1,41 @@
-# M0-C: повтор W04 Branch 480/N0 Step 86 МОм на текущем срезе
+# M0-C: повтор W04 Branch 480/N0 Step 86 МОм
 
-RUN_ID: `tl-m0-c-w04-86m-11-20261017-01`  
-Хост: `.11` (10.245.1.11). Root `d8302bc3`, PulseLib `2820738`, Bin `9f824fa6`, Console `f8893a3b…`.
+## Что проверяли (уточнение)
 
-## Результат
+Один cold-повтор **`W04_BR480_N0_PSIoff`**: Branch structural N0, overlay **`SynapseResistanceStep=86e6`**, `-t=900`, без Test quality. Цель: воспроизвести matched Step86M и классифицировать failure (баг контракта vs предел алгоритма).
+
+## База до фикса — `tl-m0-c-w04-86m-11-20261017-01`
 
 | Поле | Значение |
 |---|---|
-| training_convergence | `not_converged_at_stop` |
+| convergence | `not_converged_at_stop` |
 | Need / failure_reason | 1 / 0 |
-| lengths | `[1, 75, 89, 1]` |
-| num_synapse (финал) | `[1, 88, 128, 1]` |
-| peak_valid | `[0,0,0,1]` |
-| initial_amp[1] | `≈0.01583` (эталон захвачен) |
-| best_effort | все 0 |
-| Test | not evaluated |
-| iter финал | 440 |
+| lengths / N | `[1,75,89,1]` / `[1,88,128,1]` |
+| initial_amp[1] | ≈0.01583 (эталон есть) |
+| iter | 440 |
 
-Совпадает с matched Step86M на PulseLib `f465f55` (длины `[1,75,89,1]`, Need=1).
+## Корневая причина
 
-## Классификация (ворота D)
+Не «отсутствие amp-ref», а **ложный re-sync после structural edit**:
 
-**Класс:** ограничение проверенного алгоритма/протокола structural Branch W04 N0 при Step=86 МОм и `-t=900` на текущем коде — **не** подтверждённый дефект контракта с готовым патчем в этом цикле.
+1. Рост L/N на пульсе 1 → `InvalidatePulseSyncAfterStructuralChange` сбрасывал `PulseSynced`.
+2. На finish якоря `length_ok` проходил через старый `|Dissync|≈0` **без PeakSeen** → pulse N−2 снова `PulseSynced`, Active прыгал **1↔3**.
+3. `ChangeSynapseStatus` при `MaxAmp==0`/`PeakSeen=false` трактовал «короче Initial» как +N.
 
-Обоснование:
-1. Amp-reference fix (`56a5962`) присутствует: `initial_amp[1]` ненулевой к моменту активного этапа.
-2. Dead-tip / order-repair уже в коде; рост N на индексе 1 до 88 продолжается.
-3. На активном входе 1 пик чаще невалиден или субпорогов относительно эталона; EOL не достигается; `best_effort` не закрывает Done без измеримого отклика.
-4. MaxLen=100 не достигнут; C++ `TrainingFailureReason=0`.
+## Фиксы (PulseLib `b861f8b` и предки)
 
-**C++ patch в этом цикле не вносился.** Positive control M1 seed `br25_nextseg` на `.17` остаётся PASS 8/8. Следующие гипотезы (отдельные циклы): динамика суммарной проводимости при N≫1, условие валидности пика vs численный floor, удлинение `-t` только как диагностика неполноты лимита.
+| Коммит | Суть |
+|---|---|
+| `24de804` | PeakSeen gate на `PulseSynced`; не ±N без peak attempt |
+| `cb57b08` | `InvalidPeakNoRecovery` не считает пустые окна |
+| `35b805c` | защита `EstDelayPerSeg` от sentinel prev_dt |
+| `80c28e8` | не травить `Dissync` IterationGap (демпфирование длины) |
+| `b861f8b` | **scoped reopen**: после edit пульса k чистить sync только `≤k`, якорь оставить |
+
+## Повтор после фикса
+
+| RUN_ID | Статус |
+|---|---|
+| `tl-m0-c-w04-86m-fix-20261018-11-05` | в очереди после M1 (`/tmp/dualtrack-m1m0.log`) |
+
+Ожидаемые признаки: нет thrash Active 1↔3; после роста на 1 якорь остаётся synced; PeakSeen нужен для commit sync. Итог Need/длины — дописать по завершении.
