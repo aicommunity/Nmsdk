@@ -14,34 +14,38 @@
 
 `W10_HIST_br25_nextseg` на `.17` / PulseLib `2820738`: **PASS 8/8**, L=`[9,8,5,1]`.
 
-## Фикс роста (после `11-05`)
+## Фикс роста
 
-На `tl-m1-25ms-full-20261018-11-05` @25 мс длина осциллировала `5↔6` без NoImprove→best-effort: scoped invalidate обнулял `NoImproveCount`/`LastLengthDelta`, а `length_ok` принимал stale Dissync сразу после reopen.
+На `11-05` @25 мс длина осциллировала `5↔6` без NoImprove→best-effort. PulseLib `2f22c26`: scoped edit сохраняет streak; Dissync-`length_ok` только при свежем `DendLastAbsDt`.
 
-PulseLib `2f22c26` / root `da341d78e`: на scoped edit сохраняем streak; Dissync-`length_ok` только при свежем `DendLastAbsDt`. Console SHA-16 `0b25d88fb439d57b`.
+## Прогон — `tl-m1-25ms-full-20261018-11-36` (завершён)
 
-## Прогон — `tl-m1-25ms-full-20261018-11-36`
+Хост `.11`, PulseLib `2f22c26`, Console `0b25d88f…`. Fingerprint `65b47094…`.
 
-Хост `.11`, PulseLib `2f22c26`, Console `0b25d88f…`. Статус: **запущен**.
+| Case | Training | C++ Test fires | Quality | Длины | Вердикт |
+|---|---|---|---|---|---|
+| `W10_HIST_br25_nextseg` | Need=0, converged | `10000000` FA=0 | **pass / detected** | `[7,6,4,1]` N=`[1,1,1,1]` | **PASS** (короче seed `[9,8,5,1]`) |
+| `W10_HIST_br50_preinh` | Need=0, converged | `10000000` FA=0 | **pass / detected** | `[15,12,6,1]` | **PASS** (раньше silence на `11-05`) |
+| `W10_HIST_br25_gen` | Need=0, converged | `00000000` silence | fail / not detected | `[7,6,4,1]` | **train OK, Test silence**; train-mid даёт fire-all |
+| `W10_HIST_br25_preinh` | refuse phase=5 reason=3 | — | incomplete | `[16,13,3,1]` synced=`[0,1,1,1]` | **InvalidPeakNoRecovery** на pulse0 при TipR↓ |
 
-| Case | Training | Quality | Длины | Вердикт |
-|---|---|---|---|---|
-| `W10_HIST_br25_gen` | queued/running | — | — | **in progress** |
-| `W10_HIST_br25_nextseg` | queued/running | — | — | **in progress** |
-| `W10_HIST_br25_preinh` | queued/running | — | — | **in progress** |
-| `W10_HIST_br50_preinh` | queued/running | — | — | **in progress** |
-
-Предыдущий `11-05`: br50 train OK / Test silence; 25 мс застряли в L-oscillation (причина закрыта выше).
+Очередь: `paused_after_training_or_evaluation_issue` (1 training_stop + 1 quality_failure) — ожидаемо при `--no-commit`.
 
 ## Регрессии по пути (закрыты)
 
 | Симптом | Причина | Фикс |
 |---|---|---|
-| refuse `failure_reason=3` за ≤6 iter | пустые PeakSeen окна → InvalidPeakNoRecovery | `cb57b08` |
-| PeakSeen[2]=0 навсегда после L-step | `EstDelayPerSeg` 0.005→0.15 от sentinel Dissync | `35b805c` + не травить Dissync |
-| L=3↔4 stall @25 мс | full invalidate → Active=N−1 каждый ±1 | `b861f8b` scoped reopen |
-| L=5↔6 без stop @25 мс | scoped invalidate сбрасывал NoImprove/LastLengthDelta; Dissync length_ok без свежего LastAbsDt | `2f22c26` |
+| refuse `failure_reason=3` за ≤6 iter | пустые PeakSeen окна | `cb57b08` |
+| PeakSeen[2]=0 после L-step | EstDelay poison от sentinel | `35b805c` |
+| L=3↔4 stall | full invalidate → Active thrash | `b861f8b` |
+| L=5↔6 без stop | NoImprove/LastLengthDelta сброс + stale Dissync length_ok | `2f22c26` |
+
+## Открытые дефекты (после `11-36`)
+
+1. **br25_preinh refuse@3**: pulse0 растёт L 9→16, peak_seen=1, но `invalid_peak_no_action` 0→3 → refuse; TipR mid-pulses уходит в ~2.88e6.
+2. **br25_gen silence на C++ Test** при полном sync Train; train-candidate mid → fire-all (порог/амплитуда).
+3. Структура nextseg короче исторической — селективность удержана, но запас по delay иной.
 
 ## Сводка
 
-Остров PASS на старом срезе: 25 мс nextseg/preinh. Повтор после фикса роста: `11-36` (M1 затем M0 W04 Step86M в той же tmux-сессии). Дописать fires/Acc по завершении.
+Рост-фикс восстановил **nextseg@25** и **br50_preinh** до C++ PASS. Остров больше не только «старый срез». Следующие оси: InvalidPeak на preinh/pulse0 и post-train amplitude/threshold для gen (silence vs fire-all).
