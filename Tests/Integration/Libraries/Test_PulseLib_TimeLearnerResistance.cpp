@@ -454,9 +454,9 @@ public:
         AmpDifference.assign(count, 0.125);
     }
 
-    void ReopenAfterStructuralChangeForTest()
+    void ReopenAfterStructuralChangeForTest(int edited_pulse = -1)
     {
-        InvalidatePulseSyncAfterStructuralChange();
+        InvalidatePulseSyncAfterStructuralChange(edited_pulse);
     }
 
     bool AllPulsesSyncedForTest() const
@@ -782,6 +782,24 @@ TEST(BranchStructuralSyncInvalidationTest, ReopensCommittedPulsesAndReferenceAnc
     }
     EXPECT_EQ(learner.SelectedPulseForTest(), 3)
         << "the reference pulse must be measured again before the earlier pulses are retuned";
+}
+
+TEST(BranchStructuralSyncInvalidationTest, ScopedReopenKeepsAnchorWhenEarlierPulseEdited)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 12, 6, 1}, 1, 100);
+    learner.SetCommittedPulseStatesForTest();
+    ASSERT_TRUE(learner.AllPulsesSyncedForTest());
+
+    learner.ReopenAfterStructuralChangeForTest(1);
+
+    EXPECT_FALSE(learner.PulseSyncedForTest(0));
+    EXPECT_FALSE(learner.PulseSyncedForTest(1));
+    EXPECT_TRUE(learner.PulseSyncedForTest(2))
+        << "later committed pulses stay synced after an earlier structural edit";
+    EXPECT_TRUE(learner.PulseSyncedForTest(3))
+        << "anchor stays synced so SelectActive returns the edited pulse";
+    EXPECT_EQ(learner.SelectedPulseForTest(), 1);
 }
 
 TEST(BranchSegmentOrderTransitionTest, RefreshesTimingErrorBeforeOrderRepairReturn)
