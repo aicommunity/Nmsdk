@@ -14,18 +14,24 @@
 
 `W10_HIST_br25_nextseg` на `.17` / PulseLib `2820738`: **PASS 8/8**, L=`[9,8,5,1]`.
 
-## Прогон после фиксов — `tl-m1-25ms-full-20261018-11-05`
+## Фикс роста (после `11-05`)
 
-Хост `.11`, PulseLib `b861f8b`, Console `5b91bddb…`.
+На `tl-m1-25ms-full-20261018-11-05` @25 мс длина осциллировала `5↔6` без NoImprove→best-effort: scoped invalidate обнулял `NoImproveCount`/`LastLengthDelta`, а `length_ok` принимал stale Dissync сразу после reopen.
 
-| Case | Training | Quality | Длины (live/final) | Вердикт |
+PulseLib `2f22c26` / root `da341d78e`: на scoped edit сохраняем streak; Dissync-`length_ok` только при свежем `DendLastAbsDt`. Console SHA-16 `0b25d88fb439d57b`.
+
+## Прогон — `tl-m1-25ms-full-20261018-11-36`
+
+Хост `.11`, PulseLib `2f22c26`, Console `0b25d88f…`. Статус: **запущен**.
+
+| Case | Training | Quality | Длины | Вердикт |
 |---|---|---|---|---|
-| `W10_HIST_br25_gen` | running (pulse1 R-tune) | — | ~`[1,5,4,1]` | **in progress** |
-| `W10_HIST_br25_nextseg` | running (pulse1 R-tune) | — | ~`[1,6,4,1]` | **in progress** |
-| `W10_HIST_br25_preinh` | running (pulse1 R-tune) | — | ~`[1,4,3,1]` | **in progress** |
-| `W10_HIST_br50_preinh` | `converged_posttune_finalized` | fires=`00000000` silence / nonseparable | `[11,9,6,1]` | **train OK, quality FAIL** |
+| `W10_HIST_br25_gen` | queued/running | — | — | **in progress** |
+| `W10_HIST_br25_nextseg` | queued/running | — | — | **in progress** |
+| `W10_HIST_br25_preinh` | queued/running | — | — | **in progress** |
+| `W10_HIST_br50_preinh` | queued/running | — | — | **in progress** |
 
-Прогресс алгоритма: после scoped reopen Active больше не thrash’ит 2↔3; pulse2 стабильно sync’ится (`synced=[0,0,1,1]`→ дальше). br50 дошёл до полного sync и EOL, но Test молчит — отдельный разбор TipR/mid.
+Предыдущий `11-05`: br50 train OK / Test silence; 25 мс застряли в L-oscillation (причина закрыта выше).
 
 ## Регрессии по пути (закрыты)
 
@@ -34,7 +40,8 @@
 | refuse `failure_reason=3` за ≤6 iter | пустые PeakSeen окна → InvalidPeakNoRecovery | `cb57b08` |
 | PeakSeen[2]=0 навсегда после L-step | `EstDelayPerSeg` 0.005→0.15 от sentinel Dissync | `35b805c` + не травить Dissync |
 | L=3↔4 stall @25 мс | full invalidate → Active=N−1 каждый ±1 | `b861f8b` scoped reopen |
+| L=5↔6 без stop @25 мс | scoped invalidate сбрасывал NoImprove/LastLengthDelta; Dissync length_ok без свежего LastAbsDt | `2f22c26` |
 
 ## Сводка
 
-Остров PASS на старом срезе: 25 мс nextseg/preinh. На текущем коде с фиксом sync: обучение br50_preinh сходится, качество silence; 25 мс ещё в R-tune на pulse1. Дописать fires/Acc по завершении `11-05`, затем чинить silence br50 при необходимости.
+Остров PASS на старом срезе: 25 мс nextseg/preinh. Повтор после фикса роста: `11-36` (M1 затем M0 W04 Step86M в той же tmux-сессии). Дописать fires/Acc по завершении.
