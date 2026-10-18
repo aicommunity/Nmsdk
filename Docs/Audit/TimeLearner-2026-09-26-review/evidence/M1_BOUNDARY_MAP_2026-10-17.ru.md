@@ -49,3 +49,74 @@
 ## Сводка
 
 Рост-фикс восстановил **nextseg@25** и **br50_preinh** до C++ PASS. Остров больше не только «старый срез». Следующие оси: InvalidPeak на preinh/pulse0 и post-train amplitude/threshold для gen (silence vs fire-all).
+
+## P0 rerun + `.17` regress — PulseLib `e23f2e9`
+
+| Run | Host | Console | Итог |
+|---|---|---|---|
+| `tl-m1-p0-rerun-20261018-17-24` | `.11` | `9d8da6ad` | D2 refuse снят; `br25_preinh` Incomplete (L thrash); `br25_gen` silence |
+| `tl-m1-p0-regress-17-20261018-18-25` | `.17` | `26f0d6da` | **PASS×3**: nextseg@25, preinh@50, preinh@100 |
+
+PASS-остров после P0 **не сломан**. Открыто: D2 residual (Incomplete), D3, D6; на M0 — **D7** (early BE vs seg-order).
+
+## M1-ext dt-ось — `tl-m1-dt-axis-20261018-16-12`
+
+Хост `.11`, PulseLib `2f22c26`, Console `0b25d88f…` (тот же срез, что `11-36`). Fingerprint `832dce57…`. Очередь: `paused_infrastructure_or_incomplete_results` (2 Incomplete nextseg) — ожидаемо при `--no-commit`.
+
+| Case | Training | C++ Test fires | Quality | Длины / audit | Вердикт |
+|---|---|---|---|---|---|
+| `W10_HIST_br100_preinh` | Need=0, converged_posttune | `10000000` FA=0 (cpp_test) | **pass / detected** (train-mid silent) | L=`[21,18,11,1]` synced=`[1,1,1,1]` TipR mid~`[2.88e6,3.98e6,3.57e7,86e6]` | **PASS** — preinh-ось шире 50 мс |
+| `W10_HIST_br50_nextseg` | not_converged_at_stop, Need=1 | — | incomplete | L=`[1,1,1,1]` N=`[1,1,1,1]` peak_seen=`[0,0,0,0]` peak_locked=`[1,1,1,0]` last_abs_dt≈1.501 | **Incomplete / peak-blind** (D6) |
+| `W10_HIST_br100_nextseg` | not_converged_at_stop, Need=1 | — | incomplete | то же: peak_seen all0, L stuck1 | **Incomplete / peak-blind** (D6) |
+
+Сравнение с seed nextseg@25 L=`[7,6,4,1]` / hist PASS `[9,8,5,1]`: на 50/100 мс Train не видит пики вовсе (не refuse@3 и не silence-после-Need=0).
+
+Классификация: **preinh@100 = PASS**; **nextseg@50/100 = новый класс D6** (peak blindness + peak_locked без PeakSeen), не D1/D2/D3.
+
+## D6 audit: nextseg@25 vs @50 (до кода)
+
+Одинаковый soft-cold tip-1, один SHA `2f22c26`/`e23f2e9` класс. Мембрана/PartsVec/паттерн **не** объясняют разрыв (см. Post-P0 plan).
+
+| | nextseg@25 (PASS) | nextseg@50 (Incomplete) |
+|---|---|---|
+| PeakSeen | `[1,1,1,1]` | `[0,0,0,0]` |
+| PeakLocked | `[1,1,1,1]` | `[1,1,1,0]` |
+| L / sync | `[7,6,4,1]` / all1 | `[1,1,1,1]` / all0 |
+| last_abs_dt | ~1e-4 (свежий) | `≈IterationGap` sentinel |
+| TipR | midband ~2e7…4e7 | flat `86e6` (не трогали) |
+
+**Вердикт D6:** измерительный путь не фиксирует пик при NextSeg@50 (peak_lock без PeakSeen + sentinel LastAbsDt). Гипотеза — **NextSeg-inh / окно peak measure / peak_lock**, не spike-паттерн и не PartsVec. Код не трогать, пока нет трассы PeakLock vs mute/inh на @50.
+
+## D3 evidence: `br25_gen` mid/TipR (`tl-m1-p0-rerun-17-24`)
+
+| Поле | Значение |
+|---|---|
+| Train | Need=0, L=`[7,6,4,1]`, synced all1 |
+| TipR end-train | ~`[20.3e6, 14.5e6, 42.0e6, 86e6]` |
+| TipR after (matrix) | `[20e6, 20e6, 20e6, 86e6]` (PostTune CanonRmin flatten) |
+| train_candidate_mid | `0.102` |
+| C++ Test | fires=`00000000`, `test_mid_nonseparable`, gap≈`-1.7e-4`, mode=silent |
+
+**Гипотеза D3:** структура/sync ок; селекция ломается на **post-train amp/пороге** (CanonRmin flatten + NonSeparable mid), не на growth. Фикс — точечно mid/PostTune/margin, не L/N.
+
+## D2 residual fix (код + cold)
+
+**Корневая причина thrash:** `PeakSeen=1` / `SomaPeakValid=0` → invalid-peak length-recovery ±L при `|dt|∈(SyncTol, SyncTol×4]` и TipR@Rmin; каждый ±L → Invalidate → LastAbsDt=Gap → sync не коммитится.
+
+**Фикс:** на TipR@Rmin принимать timing band `SyncTol×kRminLengthTolFactor` (и valid-, и invalid-peak path) → DendStatus=0 + BE.
+
+**Cold** `tl-m1-d2v4-preinh-17-20261018-21-36` (`.17`, SHA `6f6624ab`): Need=0, L=`[16,13,3,1]`, synced all1, **без** Incomplete/L-thrash. C++ Test silence (класс D3 mid/PostTune), не D2.
+
+**PASS regress** `tl-m1-pass-regress-d2v4-17-20261018-21-57`: nextseg@25 / preinh@50 / preinh@100 — **PASS×3** fires=`10000000`.
+
+## Sync-parity Mode=0 vs Mode=1 (P4)
+
+Общий sync-контракт (`PeakSeen` + `length_ok`/`BE` + `seg_ok` → `PulseSynced`) **один** в `FinishTrainingIteration`. Расхождения — **mode-gated amp/BE политики**, не разные правила закрытия пульса:
+
+| | Mode=0 (M0 W04) | Mode=1 (W10 HIST) |
+|---|---|---|
+| Amp путь | +N / early BE@N≥8 | TipR + InvalidPeak length recovery |
+| BE риск | D7: early BE без seg_ok → idle (исправлено) | D2: thrash@Rmin без BE (исправлено) |
+| Sync commit | тот же seg_ok / PeakSeen | тот же |
+
+**Вердикт P4:** этап sync **совпадает** по правилам; отличия amp-веток допустимы. Баги контракта были в BE-политиках, ломавших общий seg_ok/length_ok.

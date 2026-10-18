@@ -1,14 +1,23 @@
 # Статус аудита TimeLearner Cold 2026-09-26
 
-Дата обновления: 2026-10-18 (dual-track кампания).
+Дата обновления: 2026-10-18 (цикл после P0 / Post-P0 plan).
 
-## Текущий статус: dual-track кампания закрыта по DoD плана
+## Текущий статус: Post-P0 — D7/D2 закрыты; PASS-остров удержан
 
-Выполнена двухдорожечная кампания на `.11` (эта машина, 10.245.1.11) и `.17` (10.245.1.17). Ветка исполнения `timelearner_fix` (root `d8302bc3+`, PulseLib `2820738`, Bin с обновлёнными manifests). Полная матрица 312 не запускалась. C++-патч тренера в этом цикле не вносился: M0 классифицирован как ограничение протокола/алгоритма под проверенными условиями; M1 seed PASS сохранён.
+Хосты `.11` / `.17`. PulseLib P0 `e23f2e9` + D7 seg-order + D2 Rmin-band (invalid-peak path). Console `.17` d2v4 `6f6624ab`.
 
-Артефакты: [M0-A карточки](evidence/M0A_ARCHIVE_CARDS_2026-10-17.ru.md), [M0-B трасса](evidence/M0B_W04_TRACE_TABLE_2026-10-17.ru.md), [M0-C повтор](evidence/M0C_W04_CURRENT_REPEAT_2026-10-17.ru.md), [M1 карта границ](evidence/M1_BOUNDARY_MAP_2026-10-17.ru.md).
+**PASS-остров:** nextseg@25 / preinh@50 / preinh@100 — **PASS×3** на `tl-m1-pass-regress-d2v4-17-20261018-21-57`.
 
-## Сводка dual-track (2026-10-17/18)
+| Дефект | Итог Post-P0 |
+|---|---|
+| D7 | cold M0 без BE-deadlock; BE только при `L[k]>L[k+1]` |
+| D2 | `br25_preinh` Need=0 (был Incomplete L-thrash); Test silence → D3 |
+| D3/D6 | evidence зафиксирован; код не трогали |
+| P4 sync | общий контракт; отличия только mode-gated BE/amp |
+
+Артефакты: [ALGORITHM…](ALGORITHM_UNDERSTANDING_AND_NEXT_PLAN_2026-10-18.ru.md), [M0-C](evidence/M0C_W04_CURRENT_REPEAT_2026-10-17.ru.md), [M1 карта](evidence/M1_BOUNDARY_MAP_2026-10-17.ru.md).
+
+## Сводка dual-track (2026-10-17/18) — историческая
 
 **M1 (Mode=1):** seed `W10_HIST_br25_nextseg` на `.17` — Need=0, 8/8, FP=0. Сосед `br25_preinh` тоже PASS. Границы: NextSeg@50/100 Incomplete; `br50_gen`/W34 N1 — Need=0+silence; W32 MARGIN_HALF Incomplete (исторический PASS не удержан); W03 — all-fire (PSI off) / silence (PSI 25); N0 boundary Incomplete.
 
