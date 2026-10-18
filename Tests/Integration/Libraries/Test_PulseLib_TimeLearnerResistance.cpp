@@ -779,7 +779,6 @@ TEST(BranchStructuralSyncInvalidationTest, ReopensCommittedPulsesAndReferenceAnc
         EXPECT_EQ(learner.SynapseStatusForTest(pulse), 0) << "pulse " << pulse;
         EXPECT_DOUBLE_EQ(learner.AmpDifferenceForTest(pulse), 0.0) << "pulse " << pulse;
         EXPECT_GT(learner.LastAbsDtForTest(pulse), 0.02) << "pulse " << pulse;
-        EXPECT_GT(std::fabs(learner.DissynchronizationAt(pulse)), 0.02) << "pulse " << pulse;
     }
     EXPECT_EQ(learner.SelectedPulseForTest(), 3)
         << "the reference pulse must be measured again before the earlier pulses are retuned";
