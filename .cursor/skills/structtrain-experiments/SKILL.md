@@ -35,7 +35,8 @@ description: >-
 4. **Строки = Mod** (`gen` / `preinh` / `nextseg` / …); **колонки = PostTune ON / OFF** (+ Host, RUN_ID, SHA).
 
 Канон: [`Docs/Audit/TimeLearner-2026-09-26-review/evidence/RESULT_GROUPING_HIERARCHY.ru.md`](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/RESULT_GROUPING_HIERARCHY.ru.md).  
-Семья Branch×FastSpan: `Bin/Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/` (EXP `EXP_br_fs_span…`).
+Семья Branch×FastSpan: `Bin/Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/` (EXP `EXP_br_fs_span…`).  
+PostTune (PulseLib ≥`d52dc1c`): ideal LandscapeOk → tiny-gap best-effort mid → иначе silent mid для Test inference; TipR KeepDone только явным tip-mode / PostTune OFF (не auto-revert — иначе ломается PASS×3 preinh).
 
 ## Ось учёта
 
