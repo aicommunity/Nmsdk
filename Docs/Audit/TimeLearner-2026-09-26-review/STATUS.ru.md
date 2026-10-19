@@ -3,7 +3,8 @@
 Дата обновления: 2026-10-19 (цикл N+1 **cold closeout**; старт цикла PostTune-fix / оси NeuronModel).  
 Канон группировки: [RESULT_GROUPING_HIERARCHY…](evidence/RESULT_GROUPING_HIERARCHY.ru.md).  
 План: [POST_P0_SYNTHESIS…](POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md) · execute: [N1_EXECUTE_READY…](N1_EXECUTE_READY.ru.md).  
-PulseLib `20c3e22`. Хосты `.11` ≤8 / `.17` ≤12. Монитор N+1 остановлен ~11:20.
+PulseLib `20c3e22`. Хосты `.11` ≤8 / `.17` ≤12. Монитор N+1 остановлен ~11:20.  
+**Sync `.17`:** 2026-10-19 root `ce7e8fe35` (= `.11` после P0 docs/skill push); иерархия и STATUS на cold-хосте совпадают.
 
 Ниже результаты сгруппированы по иерархии **Trainer×Mode → Span → NeuronModel → Mod** (колонки PostTune ON/OFF). Исторический нарратив dual-track сохранён после этой сводки и не отменяет факты таблиц.
 
