@@ -1,9 +1,12 @@
 # Понимание алгоритмов обучения и план после P0
 
-Дата: 2026-10-18.  
-Срезы: PulseLib `e23f2e9` (+D7 seg-order gate), Console `.11` `9d8da6ad` / `.17` `26f0d6da`.  
-PASS-остров + регрессия `.17`: `tl-m1-p0-regress-17-20261018-18-25` (3/3 PASS).  
-M0 abort (D7): `tl-m0-c-w04-86m-p0-20261018-18-20` / `MANUAL_STOP.json`.
+Дата: 2026-10-19 (обновление после Post-P0 GATE + план N+1).  
+PulseLib: `20c3e22` (D7+D2). Console `.17` d2v4: `6f6624ab`.  
+PASS regress: `tl-m1-pass-regress-d2v4-17-20261018-21-57` (3/3).  
+M0 финал: `tl-m0-d7-20261018-20-27` Need=1, D7_bad=0, peak0=0.  
+Актуальный план: [POST_P0_SYNTHESIS…](POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md).
+
+**Разделение тренеров:** §1–4 ниже — **Trainer=Branch** only. Classic — [CLASSIC_BOUNDARY_MAP…](evidence/CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md).
 
 ## 1. Как сейчас работает Branch TimeLearner (сжатая модель)
 
@@ -19,46 +22,51 @@ M0 abort (D7): `tl-m0-c-w04-86m-p0-20261018-18-20` / `MANUAL_STOP.json`.
 
 PostTune TipR CanonRmin — отдельная фаза после Need=0; C++ Test калибрует mid. Train-candidate mid ≠ C++ Test mid (часто fire-all / silence vs selective).
 
-## 2. Стабильный PASS-остров (C++ fires=`10000000`, Need=0)
+## 2. Стабильный PASS-остров Branch (C++ fires=`10000000`, Need=0)
 
-| Case | L | Срезы |
+Группировка: **Trainer=Branch · Mode=N1 · NeuronModel=baseline** (канон [RESULT_GROUPING…](evidence/RESULT_GROUPING_HIERARCHY.ru.md)).
+
+| Span | Mod | Case | L | Срезы |
+|---|---|---|---|---|
+| 25 мс | nextseg | `W10_HIST_br25_nextseg` | `[7,6,4,1]` | P0 + d2v4 regress |
+| 50 мс | preinh | `W10_HIST_br50_preinh` | `[15,12,6,1]` | то же |
+| 100 мс | preinh | `W10_HIST_br100_preinh` | `[21,18,11,1]` | M1-ext + d2v4 regress |
+
+На том же Trainer×Mode×NeuronModel при Mod=`gen`/`preinh` @25 Need=0, но Test silence при PostTune ON (BR-D3); PostTune OFF у gen даёт частичный detected (`10110000`).
+
+## 3. Итог дефектов Branch (после Post-P0)
+
+| ID | Статус | Остаток |
 |---|---|---|
-| `W10_HIST_br25_nextseg` | `[7,6,4,1]` | `.11` P0 + `.17` regress |
-| `W10_HIST_br50_preinh` | `[15,12,6,1]` | то же |
-| `W10_HIST_br100_preinh` | `[21,18,11,1]` | M1-ext + `.17` regress |
+| BR-D2 | ✅ TipR@Rmin×SyncTol×4 | — (Need=0; Test → BR-D3) |
+| BR-D7 | ✅ BE∧seg_ok | — |
+| BR-D3 | open | gen+preinh@25 silence |
+| BR-D6 | open | nextseg@50/100 + M0 pulse0 peak-blind |
+| thrash 1↔3 | ✅ | — |
 
-## 3. Итог P0 по дефектам
-
-| ID | После P0 (`e23f2e9`) | Остаток |
-|---|---|---|
-| D2 | refuse@3 снят (`invalid_peak=0`) | L-thrash `17↔18` @Rmin, Incomplete (`br25_preinh`) |
-| D1 | early BE на pulse1 при N=8 | pulse2 всё ещё N=128; плюс **D7** |
-| **D7** | обнаружен на M0 abort | BE[1]=1 при L=`[1,65,89,1]` → sync commit вечно ждёт `L[k]>L[k+1]`; фикс: BE∧seg_ok |
-| D3 | без изменений | `br25_gen` Need=0 + C++ silence |
-| D6 | без изменений | nextseg@50/100 peak_seen all0, L stuck1 |
-| thrash | Active 1↔3 не вернулся | — |
-
-## 4. Post-P0 реализация (в коде / evidence)
+## 4. Post-P0 реализация (Branch)
 
 | Item | Статус |
 |---|---|
-| **P0b / D7** | ✅ unit+cold: BE∧seg_ok; M0 `tl-m0-d7-*` без deadlock; pulse0 peak-blind остаток |
-| **P1 / D2** | ✅ TipR@Rmin × SyncTol×4 на invalid-peak path; cold Need=0; PASS regress ×3 |
-| **P2 / D3** | ✅ evidence (CanonRmin + NonSeparable mid); `br25_preinh` теперь тоже silence-после-Need=0 |
-| **P3 / D6** | ✅ evidence nextseg@25 vs @50 peak pipeline |
-| **P4 sync** | ✅ общий sync-контракт; mode-gated только amp/BE |
-| Параллель | ✅ `.11` / `.17` isolated `RUNS_ROOT`; лимиты соблюдены |
+| **P0b / BR-D7** | ✅ unit+cold; M0 финал Need=1 peak0=0 D7_bad=0 |
+| **P1 / BR-D2** | ✅ cold Need=0; PASS×3 regress |
+| **P2 / BR-D3** | evidence; фикс mid — цикл N+1 A |
+| **P3 / BR-D6** | evidence; цикл N+1 B/C |
+| **P4 sync** | ✅ sync общий; amp/BE mode-gated (**Branch-only** формулировка seg_ok/D7) |
+| Параллель N+1 | `.11`≤8 BR B/C; `.17`≤12 BR A + Classic CL |
 
-## 5. Критерии успеха
+## 5. Критерии успеха (цикл N+1)
 
-- Unit D7 зелёный; M0 rerun без BE-deadlock (Need=0 или synced=`[1,1,1,1]`).
-- `br25_preinh` без refuse@3; регрессия 3× PASS.
-- D3/D6: evidence или фикс.
-- P4: вердикт «sync Mode=0/1 совпадает» или документированное отличие.
-- Нет коллизий RUNS_ROOT/lock/work.
+- BR-D3: ≥1 silence→PASS или документированный предел mid.
+- BR-D6: PeakSeen@50≠0 или PeakLock/inh evidence; M0 pulse0 классифицирован.
+- Classic: ≥2 cold `matrix_result` в CLASSIC map (отдельный трекер).
+- PASS×3 Branch зелёный на SHA любого Branch-фикса.
+- Монитор `check_n1_status.sh` + чат-тики; лимиты Console.
 
 ## 6. Ссылки на evidence
 
-- `evidence/M1_BOUNDARY_MAP_2026-10-17.ru.md` — PASS-остров, D6, P0/D7  
-- `evidence/M0C_W04_CURRENT_REPEAT_2026-10-17.ru.md` — M0 + D7 abort  
+- `POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md` — сводка + N+1  
+- `evidence/M1_BOUNDARY_MAP_2026-10-17.ru.md` — Branch PASS / D6  
+- `evidence/M0C_W04_CURRENT_REPEAT_2026-10-17.ru.md` — BR-M0  
+- `evidence/CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md` — Classic only  
 - Runs: `/home/user/TimeLearnerAudit-20261017/dualtrack/runs/`

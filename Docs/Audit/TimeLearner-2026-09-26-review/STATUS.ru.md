@@ -1,21 +1,94 @@
 # Статус аудита TimeLearner Cold 2026-09-26
 
-Дата обновления: 2026-10-18 (цикл после P0 / Post-P0 plan).
+Дата обновления: 2026-10-19 (цикл N+1 **cold closeout**; старт цикла PostTune-fix / оси NeuronModel).  
+Канон группировки: [RESULT_GROUPING_HIERARCHY…](evidence/RESULT_GROUPING_HIERARCHY.ru.md).  
+План: [POST_P0_SYNTHESIS…](POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md) · execute: [N1_EXECUTE_READY…](N1_EXECUTE_READY.ru.md).  
+PulseLib `20c3e22`. Хосты `.11` ≤8 / `.17` ≤12. Монитор N+1 остановлен ~11:20.
 
-## Текущий статус: Post-P0 — D7/D2 закрыты; PASS-остров удержан
+Ниже результаты сгруппированы по иерархии **Trainer×Mode → Span → NeuronModel → Mod** (колонки PostTune ON/OFF). Исторический нарратив dual-track сохранён после этой сводки и не отменяет факты таблиц.
 
-Хосты `.11` / `.17`. PulseLib P0 `e23f2e9` + D7 seg-order + D2 Rmin-band (invalid-peak path). Console `.17` d2v4 `6f6624ab`.
+---
 
-**PASS-остров:** nextseg@25 / preinh@50 / preinh@100 — **PASS×3** на `tl-m1-pass-regress-d2v4-17-20261018-21-57`.
+## Trainer=Branch · Mode=N1 (равн. BR-M1 track)
 
-| Дефект | Итог Post-P0 |
+### Span=25 мс · NeuronModel=baseline (W10 Branch)
+
+| Mod | PostTune OFF: Need / fires / detected | PostTune ON: Need / fires / detected / notes | SHA / Host / RUN_ID |
+|---|---|---|---|
+| gen | 0 / `10110000` / **detected** (A2.1) | 0 / `00000000` silence; thr=`1` NonSeparable (N+1 D3) | PL `20c3e22`; OFF `.11` `tl-m1-n1-a21-ptoff-…`; ON `.17` `tl-m1-n1-d3-silence-…` |
+| preinh | 0 / `00000000` / silence (A2.1); TipR×0.75 A2.3 тоже silence | 0 / `00000000` silence; thr=`1` (N+1 D3) | те же RUN |
+| nextseg | — (PASS исторически с PostTune штатным путём) | **PASS** fires=`10000000` (PASS×3 d2v4) | `tl-m1-pass-regress-d2v4-17-…` / `.17` |
+
+A2.3 (TipR×0.75 post-Need=0) у gen дал all-fire `11111111` и не снял silence у preinh: глобальный TipR-down не лечит preinh и портит уже частичный gen.
+
+### Span=50 мс · NeuronModel=baseline
+
+| Mod | PostTune OFF | PostTune ON | SHA / Host / RUN_ID |
+|---|---|---|---|
+| preinh | — | **PASS** fires=`10000000` | PASS×3 d2v4 `.17` |
+| nextseg | — | Incomplete BR-D6 PeakSeen all0 L stuck1 | `tl-m1-n1-d6-br50ns-…` `.11` Need=1 |
+| gen | — | исторически Need=0+silence; в cold фикса — отдельно | HIST |
+
+### Span=100 мс · NeuronModel=baseline
+
+| Mod | PostTune OFF | PostTune ON | SHA / Host / RUN_ID |
+|---|---|---|---|
+| preinh | — | **PASS** fires=`10000000` | PASS×3 d2v4 |
+| nextseg | — | Incomplete BR-D6 peak-blind | M1-ext |
+| gen | — | канона `br100_gen` в W10 нет (дыра матрицы) | — |
+
+### NeuronModel=FastSpan (Branch)
+
+Конфигов Branch×FastSpan **ещё нет** — дыра плана PostTune-цикла (`SelectivityBranchFastSpan/`, волна W48).
+
+---
+
+## Trainer=Branch · Mode=N0 (равн. BR-M0 track)
+
+### Span=480 мс · NeuronModel=baseline W04
+
+| Mod | Итог | Host / RUN_ID |
+|---|---|---|
+| PSIoff W04 | Need=1, peak0=0, D7_bad=0 → класс BR-D6 pulse0; BR-D7 закрыт | `.11` `tl-m0-d7-20261018-20-27` |
+
+---
+
+## Trainer=Classic · Mode=N0
+
+### Span=25 мс · NeuronModel=baseline W01
+
+| Mod | PostTune / Test | Итог | Host / RUN_ID |
+|---|---|---|---|
+| PSIoff | N+1 cold | Need=1, incomplete (`CL-stall-short`) | `.17` `tl-cl-n1-w01-20261019-10-04` |
+
+### Span=50 мс · NeuronModel=baseline W01
+
+| Mod | PostTune / Test | Итог | Host / RUN_ID |
+|---|---|---|---|
+| PSIoff | N+1 cold | Need=0, fires=`00000000`, `cpp_nonseparable` (`CL-Need0-silent`) | `.17` `tl-cl-n1-w01-…` |
+
+### NeuronModel=AsymRm / FastSpan
+
+AsymRm и FastSpan Classic — в HIST матрице; в cold N+1 не входили. Мини-сетка для PostTune-фикса — см. план §4 B/C.
+
+---
+
+## Trainer=Classic · Mode=N1
+
+Исторически broken path (`CL-N1-stall`); в мини-набор N+1 **не** входил. Для контроля фикса — ≥1 short N1 в §4D (допустимо broken как исход).
+
+---
+
+## Дефекты и инфраструктура (кратко)
+
+| Дефект | Итог |
 |---|---|
-| D7 | cold M0 без BE-deadlock; BE только при `L[k]>L[k+1]` |
-| D2 | `br25_preinh` Need=0 (был Incomplete L-thrash); Test silence → D3 |
-| D3/D6 | evidence зафиксирован; код не трогали |
-| P4 sync | общий контракт; отличия только mode-gated BE/amp |
+| BR-D7 / BR-D2 / P4 sync | ✅ закрыты |
+| BR-D3 / BR-D6 | открыты (PostTune mid / peak-blind) |
+| A2.4 thr=1 | следующий разбор runtime vs репортёр |
+| PASS×3 | **не** arm’ился в N+1 closeout — ждать Branch PostTune-фикс / явный arm |
 
-Артефакты: [ALGORITHM…](ALGORITHM_UNDERSTANDING_AND_NEXT_PLAN_2026-10-18.ru.md), [M0-C](evidence/M0C_W04_CURRENT_REPEAT_2026-10-17.ru.md), [M1 карта](evidence/M1_BOUNDARY_MAP_2026-10-17.ru.md).
+Артефакты: [SYNTHESIS…](POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md), [ALGORITHM…](ALGORITHM_UNDERSTANDING_AND_NEXT_PLAN_2026-10-18.ru.md), [M0-C](evidence/M0C_W04_CURRENT_REPEAT_2026-10-17.ru.md), [M1 Branch](evidence/M1_BOUNDARY_MAP_2026-10-17.ru.md), [Classic](evidence/CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md), [иерархия](evidence/RESULT_GROUPING_HIERARCHY.ru.md).
 
 ## Сводка dual-track (2026-10-17/18) — историческая
 

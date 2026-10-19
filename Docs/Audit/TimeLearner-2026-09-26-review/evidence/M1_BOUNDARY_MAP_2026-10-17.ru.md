@@ -1,5 +1,8 @@
 # M1 карта границ: полный 25 мс, затем br50_preinh
 
+**Trainer=Branch · Mode=N1** (равн. BR-M1 track). Канон группировки: [RESULT_GROUPING_HIERARCHY.ru.md](RESULT_GROUPING_HIERARCHY.ru.md).  
+Ниже сохранён хронологический разбор прогонов; сводные PASS/FAIL читать также в [STATUS…](../STATUS.ru.md) по Span → NeuronModel=baseline → Mod.
+
 ## Метод (исправлен 2026-10-18)
 
 Не формальные «соседи по id». Порядок:
@@ -46,9 +49,19 @@
 2. **br25_gen silence на C++ Test** при полном sync Train; train-candidate mid → fire-all (порог/амплитуда).
 3. Структура nextseg короче исторической — селективность удержана, но запас по delay иной.
 
-## Сводка
+## Сводка (иерархия Trainer×Mode → Span → NeuronModel → Mod)
 
 Рост-фикс восстановил **nextseg@25** и **br50_preinh** до C++ PASS. Остров больше не только «старый срез». Следующие оси: InvalidPeak на preinh/pulse0 и post-train amplitude/threshold для gen (silence vs fire-all).
+
+| Span | NeuronModel | Mod | PostTune ON (типичный HIST/N+1) | PostTune OFF (A2.1) |
+|---|---|---|---|---|
+| 25 | baseline | nextseg | PASS `10000000` | — |
+| 25 | baseline | gen | silence thr≈1 | detected `10110000` |
+| 25 | baseline | preinh | silence thr≈1 | silence |
+| 50 | baseline | preinh | PASS | — |
+| 50 | baseline | nextseg | Incomplete D6 | — |
+| 100 | baseline | preinh | PASS | — |
+| 100 | baseline | nextseg | Incomplete D6 | — |
 
 ## P0 rerun + `.17` regress — PulseLib `e23f2e9`
 
@@ -98,6 +111,28 @@ PASS-остров после P0 **не сломан**. Открыто: D2 residu
 | C++ Test | fires=`00000000`, `test_mid_nonseparable`, gap≈`-1.7e-4`, mode=silent |
 
 **Гипотеза D3:** структура/sync ок; селекция ломается на **post-train amp/пороге** (CanonRmin flatten + NonSeparable mid), не на growth. Фикс — точечно mid/PostTune/margin, не L/N.
+
+**N+1 cold 2026-10-19 (`tl-m1-n1-d3-silence-…`, PL `20c3e22`):** gen — `train_threshold_test` fires=`11111111` thr≈0.102, `cpp_test` fires=`00000000` thr=`1`; preinh — оба пути silence (train thr≈0.084, cpp thr=`1`).  
+Следствие: «не калибровать cpp» у gen даёт **all-fire**, не нейтраль. Новые оси: PostTune off; **amp overshoot** (пик чуть выше эталона); разбор thr=`1`.
+
+### A2.1 PostTune OFF — `tl-m1-n1-a21-ptoff-20261019-10-34` (`.11`, PL `20c3e22`)
+
+| Case | Need | TipR | fires (C++ Test) | detection |
+|---|---|---|---|---|
+| `br25_gen` | 0 | midband (не CanonRmin `20e6`) | `10110000` | **detected** (не 8/8, не silence) |
+| `br25_preinh` | 0 | midband | `00000000` | silence |
+
+**Вывод:** CanonRmin/PostTune flatten был сильным фактором silence у **gen**. Без PostTune — частичный паттерн + target. **preinh** всё ещё silence → нужен A2.3 overshoot / другой рычаг amp.
+
+### A2.3 TipR×0.75 post-Need=0 (`tl-m1-n1-a23-overshoot-20261019-10-52`)
+
+| Case | A2.1 fires | A2.3 fires | thr | вывод |
+|---|---|---|---|---|
+| `br25_gen` | `10110000` detected | `11111111` fire_all | ≈0.026 | TipR↓ слишком сильный → all-fire |
+| `br25_preinh` | `00000000` | `00000000` | ≈0.192 | overshoot×0.75 **не** снимает silence |
+
+Следствие: глобальный TipR-down не лечит preinh; у gen уже был рабочий midband — усиливать amp нельзя. Дальше: A2.4 (cpp thr=1 / mid) или точечный TipR только на undershoot-входах preinh.
+
 
 ## D2 residual fix (код + cold)
 

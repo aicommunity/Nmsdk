@@ -86,3 +86,17 @@ M0-C больше не «сломанный Active». Следующий рыч�
 | pulse0 stall | `[81,97,89,1]` N=`[12,12,128,1]` PeakSeen0=`0` — **не D7** (BE=0, D7_bad=0) |
 
 **Вердикт D7:** deadlock снят. Остаток M0 — peak-blind на pulse0 (как класс D6), не BE∧¬seg_ok.
+
+## Финал P0b cold — `matrix_result` (2026-10-19)
+
+| Поле | Значение |
+|---|---|
+| convergence | `not_converged_at_stop` |
+| Need / failure_class | 1 / `train_incomplete` |
+| L / N | `[81,97,89,1]` / `[12,12,128,1]` |
+| synced / BE / peak | `[0,1,1,1]` / `[0,1,1,0]` / `[0,1,1,1]` |
+| TipR | flat `86e6` (Mode=0) |
+| iters / D7_bad | 441 / **0** |
+| child_rc | 0 (train exited incomplete) |
+
+**Итог M0 Post-P0:** D7 закрыт на cold. Need=0 **не** достигнут — класс **D6 peak-blind pulse0** (Active=0, PeakSeen[0]=0 при sync 1..2). Дальше — diagnostic peak0, не повтор D7.
