@@ -2,16 +2,40 @@
 name: structtrain-experiments
 description: >-
   Runs StructTrain cold/PostTune experiments via posttune_verify and updates
-  EXPERIMENTS.md / SUCCESSFUL_EXPERIMENTS.md by canonical algorithm. Use when
+  EXPERIMENTS.md / SUCCESSFUL_EXPERIMENTS.md by canonical algorithm. Also
+  governs TimeLearner dual-track audit docs (Docs/Audit/TimeLearner-*), matrix
+  queue cold runs, Branch/Classic labeling, and experiment write-ups. Use when
   the user mentions StructTrain, soft-cold, PostTune, posttune_verify, Acc,
-  Цель, experiment registry, or retesting TimeLearner selectivity configs.
+  Цель, experiment registry, TimeLearner matrix, dualtrack, BR-D*, PASS×3,
+  Classic W01, or retesting TimeLearner selectivity configs.
 ---
 
 # StructTrain: эксперименты и реестр
 
 ## Когда читать
 
-Сразу при запросах про cold/PostTune StructTrain или обновление реестра. Детали case→EXP: [reference.md](reference.md).
+Сразу при запросах про cold/PostTune StructTrain, матрицу TimeLearner, dual-track аудит (`Docs/Audit/TimeLearner-*`), или обновление реестра. Детали case→EXP: [reference.md](reference.md). Сборка runtime — скилл `nmsdk-build`; gitlinks/тяжёлые артефакты — `nmsdk-gitlinks`.
+
+## Требования к постановке и выводам
+
+1. **Всегда писать постановку и выводы развернутыми предложениями.**
+2. В chat-тиках, STATUS, SYNTHESIS, boundary maps и `N1_EXECUTE_*` не ограничиваться одними табличными ярлыками: к таблице или списку RUN добавлять 2–5 предложений — что проверяли, при каком Trainer/Track/Host/SHA, чем кончилось и что из этого следует для следующего шага.
+3. Разделять **Trainer=Branch** и **Trainer=Classic**; не смешивать PASS×3 Branch с Classic W01 в одной «общей» таблице без колонки Trainer.
+4. Cold execute только после явного «запускай» / execute; docs-ready ≠ cold start. Лимиты Console: `.11` ≤8, `.17` ≤12, если кампания dual-host.
+5. PASS×3 regress не стартовать молча: либо после Branch-фикса на том же SHA, либо по явному arm.
+
+## Иерархия группировки результатов (обязательно)
+
+Во всех audit-отчётах и сводных таблицах группировать **сверху вниз**:
+
+1. **Trainer × Mode** — четыре корзины: Classic×N0, Classic×N1, Branch×N0, Branch×N1.  
+   N0 = чисто структурный; N1 = структурная sync + параметрическая TipR. Ярлыки кампании M0/M1 = те же Mode (`N0/N1 (равн. M0/M1 track)`).
+2. **Span** — 25 / 50 / 100 / 480 мс (ось паттерна по времени).
+3. **NeuronModel** — baseline / AsymRm / FastSpan / LTZ / … (**не** называть это «семьёй паттерна»: при одном Span ISI часто общий).
+4. **Строки = Mod** (`gen` / `preinh` / `nextseg` / …); **колонки = PostTune ON / OFF** (+ Host, RUN_ID, SHA).
+
+Канон: [`Docs/Audit/TimeLearner-2026-09-26-review/evidence/RESULT_GROUPING_HIERARCHY.ru.md`](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/RESULT_GROUPING_HIERARCHY.ru.md).  
+Семья Branch×FastSpan: `Bin/Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/` (EXP `EXP_br_fs_span…`).
 
 ## Ось учёта
 
