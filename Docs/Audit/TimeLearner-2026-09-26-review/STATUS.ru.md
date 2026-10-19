@@ -4,7 +4,8 @@
 Канон группировки: [RESULT_GROUPING_HIERARCHY…](evidence/RESULT_GROUPING_HIERARCHY.ru.md).  
 План: [POST_P0_SYNTHESIS…](POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md) · execute: [N1_EXECUTE_READY…](N1_EXECUTE_READY.ru.md).  
 PulseLib `20c3e22`. Хосты `.11` ≤8 / `.17` ≤12. Монитор N+1 остановлен ~11:20.  
-**Sync `.17`:** 2026-10-19 root `ce7e8fe35` (= `.11` после P0 docs/skill push); иерархия и STATUS на cold-хосте совпадают.
+**Sync `.17`:** 2026-10-19 root `252e2ce6e` / PulseLib `8575df3` / Bin `f8f8d49f` (= `.11` после PostTune-фикса + BranchFastSpan/W48).  
+**Cold PostTune-fix (волна1 ON, dual-host):** `.11` `tl-ptfix-w1-11-pton-…` cases `br25_gen`+`br50_gen`; `.17` `tl-ptfix-w1-17-pton-…-br` case `br25_preinh`. Монитор `AGENT_LOOP_TICK_ptfix` каждые 15 мин. Назначение: [DUALHOST_ASSIGNMENT…](evidence/DUALHOST_ASSIGNMENT_POSTTUNE_FIX_2026-10-19.ru.md).
 
 Ниже результаты сгруппированы по иерархии **Trainer×Mode → Span → NeuronModel → Mod** (колонки PostTune ON/OFF). Исторический нарратив dual-track сохранён после этой сводки и не отменяет факты таблиц.
 
