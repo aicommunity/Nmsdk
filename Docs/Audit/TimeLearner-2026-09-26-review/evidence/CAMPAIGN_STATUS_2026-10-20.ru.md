@@ -1,16 +1,18 @@
 # Campaign status 2026-10-20 (agent)
 
-Постановка: автокампания AGENT_PLAN без human-gate (кроме infra); коммиты evidence/tools по ходу.
+Постановка: автокампания AGENT_PLAN; коммиты evidence/tools по ходу (`timelearner_fix2`, local ahead).
 
 ## Диск
-- .11 свободно ~280+ ГБ после оффлоада EventsLog на `.17:/media/user/Data/from-11-offload-20261020/`.
-- **Правило:** `<200 ГБ` — не STOP; лишнее уводить на Data-.17.
+- .11 ~280+ ГБ free; EventsLog offload на `.17` Data. **Не STOP при <200 ГБ.**
 
 ## Закрыто
-- A0, R1, A2/B1/E0/E1 flags, D1 STOP (нет регрессии в окне PulseLib), A3.1 **A15_ACTIVE_AT_RUNTIME**, A3.2 relink≈DendriteLength, A1 BASELINE_DEGRADED, C2_MATCH, F1a MATCH, Stage0 tool-columns.
+- A0/R1/A2/B1/E0/E1 flags; D1 STOP; A3 A15_ACTIVE + relink; A1 DEGRADED; C2_MATCH; F1a; Stage0 tools; C1 NSP OK / AsymRm +47% calib.
 
-## В полёте
-- D2.0 OK; D2.1 EstDelay отвергнут (1×); D2.2–D2.5 на .17; D2.1 rerun на .11; C1 live-soma OK / AsymRm calib.
+## D2
+- D2.0/D2.2: train `converged_need0`, Test **silent** fires=0
+- D2.1 EstDelay=0.01: not_converged (hyp rejected)
+- D2.3 W02: not_converged TipR@Rmax
+- D2.4/D2.5 + local D2.1: running
 
 ## Дальше
-- Дожать D2 summarize → R3/F2–F8 → E2/G1 labeled BASELINE_DEGRADED → Controller/Stage6 → SYNTHESIS.
+- D2.4/5 summarize → R3/F2–F8 → E2/G1 (BASELINE_DEGRADED) → Controller → SYNTHESIS
