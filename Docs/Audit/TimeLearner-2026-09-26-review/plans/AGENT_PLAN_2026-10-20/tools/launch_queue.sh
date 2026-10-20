@@ -13,6 +13,20 @@ bash "$DIR/cpu_gate.sh" "$JOBS" "$LIMIT" >/dev/null
 RUN_ID="$TASK-$HOSTTAG-$(date -u +%Y%m%dT%H%M%SZ)-$RANDOM"
 LOG="$TIMELEARNER_MATRIX_RUNS_ROOT/$RUN_ID.launch.log"; EXITF="$TIMELEARNER_MATRIX_RUNS_ROOT/$RUN_ID.launch.exit"
 mkdir -p "$TIMELEARNER_MATRIX_RUNS_ROOT" "$REPORTS"
+
+# Stage0 wiring preflight (best-effort)
+if [ -f "$DIR/check_model_wiring.py" ]; then
+  for c in $CASES; do
+    for side in Train Test; do
+      m=$(find "$ST/TimeLearnerMatrix/$WAVE/inputs/$c/$side" -name Model_00.xml 2>/dev/null | head -1)
+      if [ -n "$m" ]; then
+        python3 "$DIR/check_model_wiring.py" "$m" >"$TIMELEARNER_MATRIX_RUNS_ROOT/${RUN_ID}.wiring_${c}_${side}.txt" 2>&1 || \
+          echo "WIRING_FAIL $RUN_ID $c $side" >> "$REPORTS/ASSIGNMENTS.tsv"
+      fi
+    done
+  done
+fi
+
 CONS="${NMSDK_CONSOLE:-}"
 EXTRA="$*"
 printf '%s\t%s\t%s\t%s\t%s\tst=%s\tconsole=%s\textra=%s\trunning\n' "$RUN_ID" "$(hostname)" "$(date -u +%FT%TZ)" "$WAVE" "$CASES" "$ST" "${CONS:-default}" "$EXTRA" >> "$REPORTS/ASSIGNMENTS.tsv"

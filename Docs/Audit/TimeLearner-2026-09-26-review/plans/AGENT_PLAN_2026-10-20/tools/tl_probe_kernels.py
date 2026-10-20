@@ -143,9 +143,11 @@ def cmd_prepare(a):
     tpl_chk = check_model_wiring.analyze(str(tpl / 'Model_00.xml'))
     template_taps = {str(k): v for k, v in tpl_chk['generator_exc_taps'].items()}
     if not a.keep_links:
-        text = (out / 'Model_00.xml').read_text(encoding='utf-8', newline='')
+        with (out / 'Model_00.xml').open('r', encoding='utf-8', newline='') as f:
+            text = f.read()
         new, st = repair_model_wiring.repair(text, lengths)
-        (out / 'Model_00.xml').write_text(new, encoding='utf-8', newline='')
+        with (out / 'Model_00.xml').open('w', encoding='utf-8', newline='') as f:
+            f.write(new)
         rep_stats.append(st)
     chk = check_model_wiring.analyze(str(out / 'Model_00.xml'), str(out / 'Parameters_00.xml'))
     manifest = {'tool': 'tl_probe_kernels.py prepare', 'template': str(tpl), 'template_sha256': {
