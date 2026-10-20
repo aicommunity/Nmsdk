@@ -19,10 +19,17 @@
 
 Host `.17`, limit ≤12 Console; S0=Nmsdk-s0 baseline, S1=Nmsdk audit, S2=Nmsdk-e1 (E1 flags). На момент снимка S0×W04 и S0×W10 уже в train/test; остальные 10 серий перезапущены после refresh.
 
-## F4/F6 (`.11`)
+## F4/F6 (`.11`) — cold закрыт
 
-PulseLib `agent/tl-audit-f2-f3` @ `696f6d7` (UseRelativeAmpEps + PreferConfiguredResistanceMinFloor); Bin whitelist `27015f88`→queue fix `774704fc`. Сборка `NeuroModelerConsole` ~86 % (linux-gcc-debug-local); cold F4/F6 — после replace Console.
+PulseLib `696f6d7`, Console `8dac9680…`, Bin `774704fc`.
+
+| ID | Train | L | TipR | Test |
+|---|---|---|---|---|
+| F4.rel UseRelativeAmpEps | converged_need0 | 25 22 15 1 | 2.88 М×3+86 М | gate hang −15 |
+| F6.floor PreferConfiguredRminFloor | converged_need0 | 25 22 15 1 | та же | gate hang −15 |
+
+Train/Test: `W01/inputs/W01_CL50_N1_PSIoff/{Train,Test}`. Evidence: `F4_F6_FLOOR_COLD_2026-10-20.ru.md`.
 
 ## Вывод
 
-Кампания снова в движении: диск и matrix-prepare больше не стопят soft-cold на выбранных кейсах; полный E2 R8×3 и F4/F6 cold — следующий измеримый gate. G1/Controller/SYNTHESIS по-прежнему после E2+F*.
+E2 R8×3 на `.17` крутится (S1/S2 W04 уже rep≥2); F4/F6-floor Need=0 на той же L, что F2/F6mid, но TipR не все@Rmin. Дальше: F5, silent-Test, дождаться SERIES_DONE E2 → G1.
