@@ -15,7 +15,7 @@
 |---|---|---|---|
 | A1 DelayUseOf model-vs-meas | CONFIRMED | open → F2 | |
 | A2 EstDelay abs EMA | CONFIRMED | open → F1/`UseSignedDelayEstimate` | E1 flags committed PulseLib `393463d8` |
-| A3 kRminLengthTolFactor=4 | CONFIRMED | open → F7 train-param | |
+| A3 kRminLengthTolFactor=4 | CONFIRMED | D2b.1 RminTol=1 stalls (`last_abs_dt[0]=0.0031`>`sync_tol`); defaults Done via ×4 → F7 Done_BE patch | F2.pref cold |
 | A4 absolute eps | CONFIRMED | open → F4 | |
 | A5 Reset after change | CONFIRMED | open → F3 | |
 | A6 midband→Rmin | CONFIRMED | open → F6 | |
