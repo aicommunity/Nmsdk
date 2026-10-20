@@ -19,4 +19,6 @@ DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent fires	P0	E
 DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol×4 masks measured dt	P0	F2 Done_BE	confirmed	F7	abs_dt 0.0031>tol; factor1 stalls; F2.pref Done via ×4	2026-10-20T17:12Z	F2.pref
 DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	quality	open	gate	kill etime>180; child_rc=-15		
 DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-N1	open	D2b	L=54 44 1 1		
+DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib()=Bin volume not DATA	P1	E2 soft-cold	done	.17	offload unused lanes /→Data; Avail≈108G; assert still on /	2026-10-20T20:17Z	lanes-offload
+DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale snapshots	P0	E2 R8	done	Bin	queue prepare --case-ids only; Bin 774704fc	2026-10-20T20:24Z	774704fc
 ```
