@@ -10,7 +10,7 @@ DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	R3	open	D1	W02 both end
 DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional	P2	S5	open	—	canon 24-32		
 DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	margins MATCH; W13/W37 not_converged	2026-10-20T15:45Z	F1a_20261020_11
 DEBT-F1b	2026-10-20T13:22Z	S1	card	F1b pilot	P1	S1	open	F1b			
-DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE report fields	P0	S0/R8	open	stage0	C++ instrumentation pending		
+DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE report fields	P0	S0/R8	open	stage0	summarize columns ready; C++ emit still missing		
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	human: no STOP <200G; EventsLog→.17 Data; ~288G free	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	repaired: kill after stall; peaks from partial trace		
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH; L51/L25 meas=0		
