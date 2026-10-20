@@ -21,6 +21,7 @@
 2. **Span** (25 / 50 / 100 / 480 мс).
 3. **NeuronModel** (baseline / AsymRm / FastSpan / …).
 4. **Строки = Mod** (`gen` / `preinh` / `nextseg` / …); **колонки = PostTune ON / OFF** (Need, fires, detected, `posttune_result`, SHA, Host, RUN_ID).
+5. **Configs Train · Test** — в каждой строке ссылки на каталоги Train и Test, с которых готовился / на которых интерпретируется результат (см. скилл `structtrain-experiments`).
 
 Шаблон:
 
@@ -28,9 +29,9 @@
 ## Trainer=Branch · Mode=N1 (структурная sync + параметрическая TipR)
 ### Span=25 мс
 #### NeuronModel=baseline (W10 Branch)
-| Mod | PostTune OFF: Need / fires / detected | PostTune ON: Need / fires / detected / posttune_result | SHA | Host | RUN_ID |
-|---|---|---|---|---|---|
-| gen | … | … | … | … | … |
+| Mod | Configs (Train · Test) | PostTune OFF: Need / fires / detected | PostTune ON: Need / fires / detected / posttune_result | SHA | Host | RUN_ID |
+|---|---|---|---|---|---|---|
+| gen | [Train](…/EXP_…/Train) · [Test](…/EXP_…/Test) | … | … | … | … | … |
 ```
 
 ## Запреты
@@ -38,3 +39,4 @@
 - Не называть AsymRm / FastSpan «семьёй паттерна»: при одном Span ISI часто общий; различается модель элемента.
 - Не класть Branch PASS×3 и Classic W01 в одну «общую» таблицу без колонки Trainer и без разделения корзин Mode.
 - Постановки и выводы — развёрнутыми предложениями (см. rule `timelearner-experiment-prose` и скилл `structtrain-experiments`).
+- Не публиковать сводную метрик без ссылок на Train и Test конфиги соответствующей строки.
