@@ -10,13 +10,16 @@ import json
 import sys
 from pathlib import Path
 
-KEYS = ('train_status', 'training_convergence', 'fires', 'separation_quality', 'detection_quality')
+KEYS = ('train_status', 'training_convergence', 'fires', 'separation_quality', 'detection_quality',
+         'training_failure_reason', 'training_failure_phase')
+EXTRA_METRIC_KEYS = ('sep_margin', 'margin', 'amp_over_target', 'delay_residue', 'sync_exit', 'done_be')
 
 
 def flat(d):
     r = d.get('result') if isinstance(d.get('result'), dict) else d
     after = r.get('after') or {}
-    return {
+    metrics = r.get('metrics') if isinstance(r.get('metrics'), dict) else {}
+    row = {
         'case': r.get('case') or d.get('case') or '-',
         **{k: r.get(k) if r.get(k) not in (None, '') else '-' for k in KEYS},
         'DendriteLength': after.get('DendriteLength', '-') or '-',
@@ -25,6 +28,21 @@ def flat(d):
         'metrics': r.get('metrics') or '-',
         'runtime_execution_options': d.get('runtime_execution_options') or r.get('runtime_execution_options'),
     }
+    # Stage0 fields: prefer explicit result keys, else metrics dict / selectivity
+    sel = r.get('selectivity') if isinstance(r.get('selectivity'), dict) else {}
+    tgt = sel.get('target_peak') or metrics.get('target_peak')
+    foil = sel.get('max_foil_peak') or metrics.get('max_foil_peak')
+    if tgt not in (None, '') and foil not in (None, ''):
+        try:
+            row['sep_margin'] = (float(tgt) - float(foil)) / float(tgt) if float(tgt) else '-'
+        except Exception:
+            row['sep_margin'] = '-'
+    else:
+        row['sep_margin'] = r.get('sep_margin') or metrics.get('sep_margin') or '-'
+    for k in ('delay_residue', 'amp_over_target', 'sync_exit', 'done_be', 'amp_target_ratio'):
+        row[k] = r.get(k) or metrics.get(k) or '-'
+    return row
+
 
 
 def main(argv):
@@ -47,7 +65,7 @@ def main(argv):
     if not rows:
         print('NO_RESULTS under', root)
         sys.exit(1)
-    cols = ('wave', 'case', 'attempt') + KEYS + ('DendriteLength', 'TipSynapseResistance', 'FixedLTZThreshold', 'metrics')
+    cols = ('wave', 'case', 'attempt') + KEYS + ('DendriteLength', 'TipSynapseResistance', 'FixedLTZThreshold', 'sep_margin', 'delay_residue', 'amp_over_target', 'sync_exit', 'done_be', 'metrics')
     print('\t'.join(cols))
     for r in rows:
         print('\t'.join(str(r.get(c, 'ERR')) for c in cols) if 'error' not in r else f"ERROR\t{r['file']}\t{r['error']}")

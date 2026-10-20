@@ -9,7 +9,8 @@ busy() { read -r _ a b c d e f g h _ < /proc/stat; t1=$((a+b+c+d+e+f+g+h)); i1=$
          echo $(( 100 * ( (t2-t1) - (i2-i1) ) / (t2-t1) )); }
 ok=0
 while :; do
-  running=$(pgrep -c -f '[N]euroModelerConsole' || true); u=$(busy)
+  # Count real Console binaries only (not cmake/gmake lines that mention the target name).
+  running=$(pgrep -c -f '/Bin/Platform/.*/NeuroModelerConsole( |$)' || true); u=$(busy)
   if [ $((running + N)) -le "$LIMIT" ] && [ "$u" -lt 70 ]; then ok=$((ok+1)); else ok=0; fi
   if [ "$u" -ge 85 ]; then echo "$(date -u +%T) PAUSE cpu=${u}% consoles=$running"; fi
   [ "$ok" -ge 2 ] && { echo "GO consoles=$running cpu=${u}%"; exit 0; }
