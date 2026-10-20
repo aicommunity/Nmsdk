@@ -16,3 +16,7 @@ DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH; L51/L25 meas=0		
 DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2.0/D2.2	W01 converge but fires=0	P0	E2/R8	open	D2	A9/A11 mid axis		
 DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent fires	P0	E2/G1 labels	open	A1	BASELINE_DEGRADED; nextseg MATCH; br50_gen better-than-expected		
+DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol×4 masks measured dt	P0	F2 Done_BE	confirmed	F7	abs_dt 0.0031>tol; factor1 stalls; F2.pref Done via ×4	2026-10-20T17:12Z	F2.pref
+DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	quality	open	gate	kill etime>180; child_rc=-15		
+DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-N1	open	D2b	L=54 44 1 1		
+```
