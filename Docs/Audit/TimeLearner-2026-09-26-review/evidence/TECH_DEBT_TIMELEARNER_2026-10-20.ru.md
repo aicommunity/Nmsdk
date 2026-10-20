@@ -8,6 +8,7 @@ DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	rep
 DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1	P1	E2	open	E2			
 DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	R3	open	D1	W02 both ends not_converged; not in PulseLib 780→d52 window; W01 OK		
 DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional	P2	S5	open	—	canon 24-32		
+DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	margins MATCH; W13/W37 not_converged	2026-10-20T15:45Z	F1a_20261020_11
 DEBT-F1b	2026-10-20T13:22Z	S1	card	F1b pilot	P1	S1	open	F1b			
 DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE report fields	P0	S0/R8	open	stage0	C++ instrumentation pending		
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	human: no STOP <200G; EventsLog→.17 Data; ~288G free	2026-10-20T15:16Z	offload

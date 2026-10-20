@@ -57,3 +57,7 @@
 A3.1: см. `A3_1_verdict` в agent-reports; TRACE hang после записи CSV (оба варианта). Model SHA repaired не менялся после run.
 A3.2: best taps ≈ DendriteLength на 3/4 каналах → гипотеза CPP_RELINKS_TO_DENDRITELENGTH (silent soma_1 как C1).
 D2.0 control .17: converged_need0.
+
+## F1a offline (2026-10-20)
+
+ideal_delay margins MATCH; sweep τ=0.25 `feasible=false` для S=25/50/100. W13 ltz* и W37 PACKC (C25e12) в matrix — все `not_converged_at_stop`, согласуется с физическим пределом (ledger Finding #5).
