@@ -1,50 +1,40 @@
-# Dual-host назначение cold PostTune-fix (2026-10-19)
+# Dual-host назначение cold PostTune-fix (2026-10-19, кампания v5 — финал)
 
-PulseLib `8575df3` · Console SHA16 `.11` `3034d0872f856d7d` · root `252e2ce6e`.  
+PulseLib финал `d52dc1c`. Console SHA16 (оба хоста после sync): `d2862a42fa266145`.  
 Лимиты: `.11` PARALLEL≤8 · `.17` PARALLEL≤12.  
-Канон группировки: [RESULT_GROUPING_HIERARCHY…](RESULT_GROUPING_HIERARCHY.ru.md).
+Канон группировки: [RESULT_GROUPING_HIERARCHY.ru.md](RESULT_GROUPING_HIERARCHY.ru.md).  
+Сводная: [POSTTUNE_FIX_COLD_SUMMARY_2026-10-19.ru.md](POSTTUNE_FIX_COLD_SUMMARY_2026-10-19.ru.md).
 
 ## Изоляция
 
 | Host | RUNS_ROOT | RUN_ID prefix |
 |---|---|---|
-| `.11` | `/home/user/TimeLearnerAudit-20261017/dualtrack/runs/n1-posttune-fix-11` | `tl-ptfix-w*-11-*` |
-| `.17` | `/media/user/Data/NmsdkRuntime/TimeLearnerMatrixRuns/n1-posttune-fix-17` | `tl-ptfix-w*-17-*` |
+| `.11` | `/home/user/TimeLearnerAudit-20261017/dualtrack/runs/n1-posttune-fix-11` | `tl-ptfix-v5-11-pt{on\|off}-…-<WAVE>` |
+| `.17` | `/media/user/Data/NmsdkRuntime/TimeLearnerMatrixRuns/n1-posttune-fix-17` | `tl-ptfix-v5-17-pt{on\|off}-…-<WAVE>` |
 
-Списки кейсов **не пересекаются**. ON/OFF пары — на одном host, суффиксы `-pton` / `-ptoff`.
+Launcher: `TimeLearnerAudit-…/dualtrack/run_ptfix_v5_complete.sh` (+ ручные W48 дозапуски при disk/pause).
 
-## Волна 1 (контроль фикса)
+## Фактические RUN_ID (v5)
 
-| matrix_id | Mode PostTune | Host | RUN_ID |
-|---|---|---|---|
-| `W10_HIST_br25_gen` | ON | `.11` | `tl-ptfix-w1-11-pton-…` |
-| `W10_HIST_br50_gen` | ON | `.11` | same batch ON |
-| `W10_HIST_br25_gen` | OFF | `.11` | `tl-ptfix-w1-11-ptoff-…` |
-| `W10_HIST_br50_gen` | OFF | `.11` | same batch OFF |
-| `W10_HIST_br25_preinh` | ON | `.17` | `tl-ptfix-w1-17-pton-…` |
-| `W09_HIST_asym25` | ON | `.17` | same |
-| `W10_HIST_br25_preinh` | OFF | `.17` | `tl-ptfix-w1-17-ptoff-…` |
-| `W09_HIST_asym25` | OFF | `.17` | same |
+### Host `.11`
 
-## Волна 2 (NeuronModel / Classic / BR-FS)
+| matrix_id | ON | OFF |
+|---|---|---|
+| `W10_HIST_br25_gen`, `W10_HIST_br50_gen` | `tl-ptfix-v5-11-pton-20261019-17-23-W10` | `tl-ptfix-v5-11-ptoff-20261019-19-37-W10` |
+| `W12_HIST_fs25_gen`, `fs25_preinh`, `fs50_gen` | `…-pton-…-17-23-W12` | `…-ptoff-…-19-37-W12` |
+| `W48_BR_FS25_N1_gen`, `preinh` | `…-pton-…-18-42-W48` | `…-ptoff-…-20-47-W48` |
 
-| matrix_id | Host |
-|---|---|
-| `W12_HIST_fs25_gen`, `W12_HIST_fs25_preinh`, `W12_HIST_fs50_gen` | `.11` |
-| `W12_HIST_fs100_gen` или `W13_HIST_fs100_preinh` | `.17` |
-| `W01_CL25_N0_PSIoff`, `W01_CL50_N0_PSIoff` (+ N1 short) | `.17` |
-| `W48_BR_FS25_N1_gen`, `W48_BR_FS25_N1_preinh` | `.11` |
+### Host `.17`
 
-Все — парный ON затем OFF (отдельные RUN_ID).
-
-## PASS×3 (§5)
-
-| Case | Host |
-|---|---|
-| `W10_HIST_br25_nextseg` | `.17` |
-| `W10_HIST_br50_preinh` | `.17` |
-| `W10_HIST_br100_preinh` | `.11` |
+| matrix_id | ON | OFF |
+|---|---|---|
+| `W10_HIST_br25_preinh` | `tl-ptfix-v5-17-pton-20261019-17-25-W10` | `…-ptoff-…-20-46-W10` |
+| PASS×3 `br25_nextseg`, `br50_preinh`, `br100_preinh` | **reuse** `tl-ptfix-passx3-v4-17-20261019-16-40` | `…-ptoff-…-20-46-W10` |
+| `W09_HIST_asym25` | `…-pton-…-17-25-W09` | `…-ptoff-…-20-46-W09` |
+| `W11_HIST_asym25_preinh` | `…-pton-…-17-25-W11` | `…-ptoff-…-20-46-W11` |
+| `W12_HIST_fs100_gen` | `…-pton-…-17-25-W12` | `…-ptoff-…-20-46-W12` |
+| `W01_CL25_N0`, `CL50_N0`, `CL25_N1` | `…-pton-…-17-25-W01` | `…-ptoff-…-20-46-W01` |
 
 ## Монитор
 
-`/home/user/TimeLearnerAudit-20261017/dualtrack/monitor/n1-posttune-fix/` + arm после старта Console. Тик ~15 мин. Sentinel `AGENT_LOOP_TICK_ptfix`.
+Остановлен после closeout v5 (`/tmp/ptfix_v5_monitor_loop.pid`). Sentinel был `AGENT_LOOP_TICK_ptfix`.

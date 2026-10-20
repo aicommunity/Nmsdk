@@ -33,6 +33,7 @@ description: >-
 2. **Span** — 25 / 50 / 100 / 480 мс (ось паттерна по времени).
 3. **NeuronModel** — baseline / AsymRm / FastSpan / LTZ / … (**не** называть это «семьёй паттерна»: при одном Span ISI часто общий).
 4. **Строки = Mod** (`gen` / `preinh` / `nextseg` / …); **колонки = PostTune ON / OFF** (+ Host, RUN_ID, SHA).
+5. **Ссылки на конфиги Train и Test** — в каждой строке сводной / evidence-таблицы обязательна колонка (или явные markdown-ссылки) на каталоги **Train** и **Test**, по которым получен результат: для matrix HIST обычно `source_config` из `TimeLearnerMatrix/matrix.json` → `Bin/Configs/SpikeSamples/StructTrain/<source_config>/{Train,Test}`; для factor-variant / W01 без `source_config` — prepared inputs `TimeLearnerMatrix/<WAVE>/inputs/<case_id>/{Train,Test}` (и при необходимости указать исходный шаблон из `matrix_input_manifest.json`). Не ограничиваться одним именем EXP без пары Train/Test.
 
 Канон: [`Docs/Audit/TimeLearner-2026-09-26-review/evidence/RESULT_GROUPING_HIERARCHY.ru.md`](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/RESULT_GROUPING_HIERARCHY.ru.md).  
 Семья Branch×FastSpan: `Bin/Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/` (EXP `EXP_br_fs_span…`).  
