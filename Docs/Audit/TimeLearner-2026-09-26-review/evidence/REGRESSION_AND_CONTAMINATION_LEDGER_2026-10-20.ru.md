@@ -61,3 +61,7 @@ D2.0 control .17: converged_need0.
 ## F1a offline (2026-10-20)
 
 ideal_delay margins MATCH; sweep τ=0.25 `feasible=false` для S=25/50/100. W13 ltz* и W37 PACKC (C25e12) в matrix — все `not_converged_at_stop`, согласуется с физическим пределом (ledger Finding #5).
+
+## D2 update
+
+D2.0/D2.2 W01 converged_need0; D2.1 EstDelay=0.01 not_converged (hyp. rejected); D2.3 W02 not_converged TipR@Rmax.
