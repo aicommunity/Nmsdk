@@ -1,22 +1,18 @@
-# Campaign status 2026-10-20 (agent)
+# Campaign status 2026-10-20
 
-Постановка: автокампания AGENT_PLAN; коммиты evidence/tools по ходу (`timelearner_fix2`, local ahead).
+Постановка: AGENT_PLAN auto; commit+push origin после артефактов.
 
 ## Диск
-- .11 ~280+ ГБ free; EventsLog offload на `.17` Data. **Не STOP при <200 ГБ.**
+.11 ~268G free; offload EventsLog→.17 Data; **не STOP <200G**.
 
 ## Закрыто
-- A0/R1/A2/B1/E0/E1 flags; D1 STOP; A3 A15_ACTIVE + relink; A1 DEGRADED; C2_MATCH; F1a; Stage0 tools; C1 NSP OK / AsymRm +47% calib.
+A0/R1/A2/B1/E0/E1flags; D1 STOP; A3 A15_ACTIVE; A1 DEGRADED; C1/C2/F1a; D2×1 (EstDelay/gamma rejected); D2.1 local confirm; Stage0 tools.
 
-## D2
-- D2.0/D2.2: train `converged_need0`, Test **silent** fires=0
-- D2.1 EstDelay=0.01: not_converged (hyp rejected)
-- D2.3 W02: not_converged TipR@Rmax
-- D2.4/D2.5 + local D2.1: running
+## Сейчас
+- D2b.0 **converged_need0** (silent Test); D2b.1–4 in flight on .11 E1
+- E2 S0+S1 W01_CL50_N0 on .17 (A0 Console)
+- E1 Console build on .17 (for S2 / D2b capacity)
+- S0 checkout created on .11
 
-## Дальше
-- D2.4/5 summarize → R3/F2–F8 → E2/G1 (BASELINE_DEGRADED) → Controller → SYNTHESIS
-
-## Update D2b (2026-10-20 ~19:15)
-
-На `.11` с Console E1 (`Nmsdk-e1`, SHA `8690f442…`) запущены D2b.0 (контроль), D2b.1 (`RminLengthTolFactor=1`), D2b.2 (`UseSignedDelayEstimate=1`). Параллельно ещё идёт local D2.1 (baseline EstDelay=0.01).
+## Bin/PulseLib на GitHub
+`agent/tl-audit-20261020`, `agent/tl-a15-inputs`, `agent/tl-audit-e1-flags`
