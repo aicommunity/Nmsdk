@@ -16,3 +16,7 @@
 
 ## Дальше
 - D2.4/5 summarize → R3/F2–F8 → E2/G1 (BASELINE_DEGRADED) → Controller → SYNTHESIS
+
+## Update D2b (2026-10-20 ~19:15)
+
+На `.11` с Console E1 (`Nmsdk-e1`, SHA `8690f442…`) запущены D2b.0 (контроль), D2b.1 (`RminLengthTolFactor=1`), D2b.2 (`UseSignedDelayEstimate=1`). Параллельно ещё идёт local D2.1 (baseline EstDelay=0.01).
