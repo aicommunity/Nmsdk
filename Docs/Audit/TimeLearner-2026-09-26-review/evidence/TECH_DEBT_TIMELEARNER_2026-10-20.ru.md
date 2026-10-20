@@ -14,5 +14,5 @@ DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE report fiel
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	human: no STOP <200G; EventsLog→.17 Data; ~288G free	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	repaired: kill after stall; peaks from partial trace		
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH; L51/L25 meas=0		
+DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2.0/D2.2	W01 converge but fires=0	P0	E2/R8	open	D2	A9/A11 mid axis		
 DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent fires	P0	E2/G1 labels	open	A1	BASELINE_DEGRADED; nextseg MATCH; br50_gen better-than-expected		
-```

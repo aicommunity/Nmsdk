@@ -64,4 +64,4 @@ ideal_delay margins MATCH; sweep τ=0.25 `feasible=false` для S=25/50/100. W1
 
 ## D2 update
 
-D2.0/D2.2 W01 converged_need0; D2.1 EstDelay=0.01 not_converged (hyp. rejected); D2.3 W02 not_converged TipR@Rmax.
+D2.0/D2.2 W01 converged_need0 (Test silent); D2.1/D2.5 EstDelay variants not_converged; D2.3/D2.4 W02 not_converged TipR@Rmax. Gamma не лечит Span480.
