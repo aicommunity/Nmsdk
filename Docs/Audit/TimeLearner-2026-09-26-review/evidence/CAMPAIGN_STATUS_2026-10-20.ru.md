@@ -16,3 +16,6 @@ A0/R1/A2/B1/E0/E1flags; D1 STOP; A3 A15_ACTIVE; A1 DEGRADED; C1/C2/F1a; D2×1 (E
 
 ## Bin/PulseLib на GitHub
 `agent/tl-audit-20261020`, `agent/tl-a15-inputs`, `agent/tl-audit-e1-flags`
+
+## Update 2026-10-20 evening
+D2b.0/2/3: converge+silent (Freeze same L); D2b.1 RminTol=1 still Need=1 → F7 masking. F2/F3/F7-Done_BE patched PulseLib `0ad009a` / Bin whitelist `33750565` branch `agent/tl-audit-f2-f3` (build in progress). E2 S0/S1/S2 W01 + D2b.5–7 on .17.
