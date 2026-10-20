@@ -71,12 +71,28 @@ PostTune (PulseLib ≥`d52dc1c`): ideal LandscapeOk → tiny-gap best-effort mid
 7. GoldTest/MatrixClone PASS **≠** SoftCold. См. [PROTOCOL_WORKING_VS_LASTCHECK.ru.md](../../../Docs/Audit/TimeLearner-2026-09-26-review/evidence/PROTOCOL_WORKING_VS_LASTCHECK.ru.md).
 8. Full SoftCold: `PARALLEL=8` `scripts/softcold_full_matrix_parallel.sh`; W3 (`EnableRmaxLengthEscape`) off. Cold reset preserves the configured initial TipR; `--max-rs-rm` remains a diagnostic override for the derived upper bound, not an initial-Rs setting.
 
+## Matrix PostTune ON/OFF (immutable inputs)
+
+Для парных cold ON/OFF **не** патчить `TimeLearnerMatrix/matrix.json` и **не** делать `--prepare --refresh` ради переключения PostTune: shared `TimeLearnerMatrix/<WAVE>/inputs/` иммутабельны и засоряются чужим `EnablePostTrainTuning`.
+
+Правильный путь — attempt-local override очереди:
+
+```bash
+python3 scripts/run_timelearner_matrix_queue.py \
+  --run-id <id> --waves <WAVE> --cases <CASE...> --jobs N \
+  --force-posttrain-tuning 0|1 \
+  --no-commit --allow-repeat
+```
+
+Флаг пишет overlay в attempt + `worker_config.enable_posttrain_tuning` (posttune_verify читает его); канонические inputs и `matrix.json` не меняются. Лаунчеры dual-host: `TimeLearnerAudit-…/dualtrack/run_ptfix_v5_complete.sh`, `run_n1_a21_ptoff.sh`. `--prepare WAVE --case-ids <missing…>` без `--refresh` — только если нет `matrix_input_manifest.json` (не гонять весь wave, если соседние snapshots дрейфуют).
+
 ## Запреты
 
 - Не создавать отдельную секцию «кампания PostTune / §A».
 - Не ослаблять LandscapeOk / ok_audit пороги ради PASS.
 - Не коммитить `_work/`, StatisticLog, огромные archives (см. `nmsdk-gitlinks`).
 - Не писать absolute `ResistanceMin` в soft-cold XML; bounds — derived state из C++.
+- Не патчить `matrix.json` / не `--prepare --refresh` shared inputs для PostTune ON/OFF — только `--force-posttrain-tuning`.
 
 ## Колонки строки реестра
 
