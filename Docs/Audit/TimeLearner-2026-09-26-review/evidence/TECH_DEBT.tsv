@@ -1,13 +1,23 @@
 debt_id	opened_utc	stage_id	source	item_ref	priority	blocker_for	status	owner_arm	notes	closed_utc	fix_run_id
 DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	open	—	baseline 85/87		
 DEBT-cpu-gate-pgrep	2026-10-20T13:48Z	R2	companion	cpu_gate false positive	P1	D1	done	.11	pattern fixed	2026-10-20T13:48Z	local
-DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired on agent/tl-a15-inputs 98ac830d; FAIL Test 0	2026-10-20T14:05Z	98ac830d
-DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1	P1	E2	open	E2			
-DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	R3	in_progress	D1	i=11 cold running		
-DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional	P2	S5	open	—	canon 24-32		
-DEBT-F1b	2026-10-20T13:22Z	S1	card	F1b pilot	P1	S1	open	F1b			
-DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE report fields	P0	S0/R8	open	stage0	C++ instrumentation pending		
-DEBT-disk-200G	2026-10-20T13:06Z	A0	card	DATA≥200G	P2	—	done	.11	EventsLog offload freed ~205G; now ~292G avail	2026-10-20T14:05Z	offload
-DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3.1 corrupt TRACE hang	P1	A3	open	A3	killed after 16min; retry		
-DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib Bin volume	P1	E2	done	.17	lanes offload	2026-10-20T20:17Z	offload
-DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare	P0	E2	done	Bin	774704fc case-ids	2026-10-20T20:24Z	774704fc
+DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired 98ac830d	2026-10-20T14:05Z	98ac830d
+DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 EQUIVALENT		
+DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	W02 all E2 arms not_converged		
+DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	G1 selected 24-32		
+DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH	2026-10-20T15:45Z	F1a_20261020
+DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	F1_fast_epsp_pilot		
+DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	open	stage0	V_S0_UPDATE		
+DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog offload	2026-10-20T15:16Z	offload
+DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang	P1	A3	open	A3			
+DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma silent set1	P1	E1	open	C1			
+DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2	W01 fires=0 Test hang	P0	SYNTH/G1	open	D2/E2			
+DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent	P0	G1 labels	open	A1			
+DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol masks dt	P0	F2 Done_BE	confirmed	F7		2026-10-20T17:12Z	F2.pref
+DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test	open	gate			
+DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 not_converged	P0	CL-N1	open	D2b			
+DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2	done	.17	2026-10-20 offload	2026-10-20T20:17Z	lanes-offload
+DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare	P0	E2 R8	done	Bin	774704fc	2026-10-20T20:24Z	774704fc
+DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR	P1	R3	open	F5	F5_GAMMA_COLD		
+DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	open	drv	G1_S1_LAUNCH_EXIT_AUDIT		
+DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail 80G threshold	P1	cold .17	open	ops	STATUS 2026-10-21T0514		
