@@ -15,6 +15,9 @@ for i in $(seq 1 "$REP"); do
   echo "$(date -u +%FT%TZ) lane=$LANE task=$TASK rep=$i rc=$rc run_id=$rid" | tee -a "$REPORTS/${TASK%%.*}_series.log"
   [ $rc -eq 0 ] || { echo "$out"; echo "STOP: launch failed"; exit 1; }
   echo "$rid" >> "$REPORTS/${TASK%%.*}_runs.txt"
-  bash "$DIR/wait_run.sh" "$rid" "${TASK%%.*}" > /dev/null || { echo "STOP: wait failed for $rid"; exit 1; }
+  bash "$DIR/wait_run.sh" "$rid" "${TASK%%.*}" > /dev/null || { echo "STOP: wait failed or launch.exit≠0 for $rid"; exit 1; }
+  EXITF="$TIMELEARNER_MATRIX_RUNS_ROOT/$rid.launch.exit"
+  [ -f "$EXITF" ] || { echo "STOP: missing launch.exit for $rid"; exit 1; }
+  qe=$(cat "$EXITF"); [ "$qe" = "0" ] || { echo "STOP: launch.exit=$qe for $rid (expected 0)"; exit 1; }
 done
 echo "SERIES_DONE $TASK"
