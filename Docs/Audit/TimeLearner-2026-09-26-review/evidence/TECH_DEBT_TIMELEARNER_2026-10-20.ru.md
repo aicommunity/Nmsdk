@@ -1,24 +1,69 @@
-# TECH_DEBT TimeLearner 2026-10-20
+# TECH_DEBT TimeLearner
+
+Реестр открытых инженерных и алгоритмических долгов кампании AGENT_PLAN (2026-10-20+). Сводная машиночитаемая копия: [`TECH_DEBT.tsv`](TECH_DEBT.tsv). Постановка и выводы — развёрнутыми предложениями; cold-прогоны по этому тикету **не** запускались.
+
+---
+
+## Обновление 2026-10-21 (docs-only)
+
+На срезе после **E2 R8×3 SERIES_DONE** и частичного **G1 S1** (12/12 drv `SERIES_DONE`, но **3/12** rep3 с `launch.exit=0`) нижеперечисленные пункты остаются блокерами для `SYNTHESIS_FINAL` и для честного сравнения C2↔Console, хотя инфраструктурные долги prepare/disk частично закрыты.
+
+### P0 — алгоритм и качество оценки
+
+**silent-Test (`DEBT-D2-silent-test`, связанный `DEBT-TRACE-NOCSV`).** На W01 Classic×N0 train сходится с `converged_need0`, но Test даёт `fires=00000000` и/или зависание с `child_rc=-15` без TRACE CSV. То же качество встречается на части Branch HIST (br25_gen, br25_preinh) при `converged_posttune_finalized`. E2 показал, что silent **не** различает S0/S1/S2 — это не артефакт B1/E0, а ось detection/mid ([`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md), [`E2_W01_PARTIAL_2026-10-20.ru.md`](E2_W01_PARTIAL_2026-10-20.ru.md), [`F4_F6_FLOOR_COLD_2026-10-20.ru.md`](F4_F6_FLOOR_COLD_2026-10-20.ru.md)). F2/F3/F4/F6-floor **не** регрессировали train, но не снимают DEBT Test.
+
+**Classic N1 stall (`DEBT-CL-N1`, `DEBT-D2b5-W02`).** W02 `W02_CL480_N1_PSIoff` на всех плечах E2 заканчивается `not_converged_at_stop` с L=`54 44 1 1` и разносом TipR — картина согласуется с [`CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md`](CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md) и [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md). D1 bisect на `.11` ещё не дал «первый плохой коммит» ([`D1_PARTIAL_2026-10-20.ru.md`](D1_PARTIAL_2026-10-20.ru.md)).
+
+**S0 C++ поля (`DEBT-S0-cpp-fields`).** `summarize_run.py` уже выводит колонки residue/margin/`done_be`, но PulseLib HEAD не эмитит соответствующие поля в iteration-audit / EOL ([`V_S0_UPDATE_2026-10-20.ru.md`](V_S0_UPDATE_2026-10-20.ru.md), [`F2_F3_COLD_2026-10-20.ru.md`](F2_F3_COLD_2026-10-20.ru.md) — `done_best_effort` после audit). Без C++-эмиссии нельзя автоматически отличать exact Done от F7 `Done_BE` в rollup G1.
+
+### P1 — фиксы и пилоты
+
+**F5 OPEN (`DEBT-F5-gamma`).** Патч `CorrectAttenuationGammaForTipR` на PulseLib `6d746ac` (default off); один cold W01 с флагом=1 ([`F5_GAMMA_COLD_2026-10-21.ru.md`](F5_GAMMA_COLD_2026-10-21.ru.md)) не закрывает A7: Need=0 при silent/quality_fail, paired сравнение γ vs baseline S1 на том же case **не** завершено ([`R3_FIX_QUEUE_2026-10-20.ru.md`](R3_FIX_QUEUE_2026-10-20.ru.md), [`REGRESSION_AND_CONTAMINATION_LEDGER_2026-10-20.ru.md`](REGRESSION_AND_CONTAMINATION_LEDGER_2026-10-20.ru.md) A7).
+
+**F1b senior (`DEBT-F1b`).** Console-пилот «быстрый EPSP + NAxoneDelay» не стартовал: нужен новый тип конфигурации, DefaultTimeStep ≥ 20 kHz, senior ([`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md)). F1a офлайн закрыт (DEBT-F1a-offline done). F1b питает этап 4 Controller v2 ([`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)).
+
+### P0 infra — G1 exit-gate и диск
+
+**Ложный «зелёный» SERIES_DONE (`DEBT-G1-exit-gate`).** `run_series.sh` фиксирует drv `EXIT=0` при появлении файла `launch.exit`, **не** проверяя его значение. На G1 S1 rep3 только W01/W13/W33 на `.11` имеют `launch.exit=0`; W08 — `paused_after_training_or_evaluation_issue` при drv «зелёном» ([`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md), [`G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md`](G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md)). Rollup метрик и SYNTHESIS **не** должны опираться на drv-only SERIES_DONE.
+
+**Политика offload диска (`DEBT-disk-offload-policy`).** Soft-cold на `.17` смотрит Avail **корня** `/` (≥80 ГБ), тогда как `$DATA` на отдельном томе; неиспользуемые lanes и `_repro` offload на Data поднимали Avail корня до ~90–108 ГБ ([`STATUS_SNAPSHOT_2026-10-20T2325.ru.md`](STATUS_SNAPSHOT_2026-10-20T2325.ru.md), [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md)). На 2026-10-21 корень снова ~76 ГБ — риск повторного `worker_exit=1` (E2 rep3 W01). Операционное правило: перед новым cold на `.17` — offload lanes/`_repro`, не трогая активные G1 runs; human rule `.11` DATA≥200G без STOP ([`CAMPAIGN_STATUS_2026-10-20.ru.md`](CAMPAIGN_STATUS_2026-10-20.ru.md)). Исправление gate в скриптах — открытый пункт (см. TSV).
+
+### Прочие открытые (без изменения статуса)
+
+- `DEBT-H-A15b` — не подтверждён на E2 R8, но формально open до отдельного SoftCold-среза.
+- `DEBT-A3-trace-hang`, `DEBT-A1-preinh-silent`, `DEBT-G1-432` (полная 432-матрица v1/v2 — этап 5).
+- Закрытые: A15 inputs, cpu-gate, disk-200G, disk-freegib-root (разовый offload), matrix-prepare-wave, F1a-offline, F7 confirmed→F2.pref.
+
+---
+
+## TSV (канон)
 
 ```tsv
 debt_id	opened_utc	stage_id	source	item_ref	priority	blocker_for	status	owner_arm	notes	closed_utc	fix_run_id
 DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	open	—	baseline 85/87		
 DEBT-cpu-gate-pgrep	2026-10-20T13:48Z	R2	companion	cpu_gate false positive	P1	D1	done	.11	pattern fixed	2026-10-20T13:48Z	local
-DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired on agent/tl-a15-inputs 98ac830d; FAIL Test 0	2026-10-20T14:05Z	98ac830d
-DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1	P1	E2	open	E2			
-DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	R3	open	D1	W02 both ends not_converged; not in PulseLib 780→d52 window; W01 OK		
-DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional	P2	S5	open	—	canon 24-32		
-DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	margins MATCH; W13/W37 not_converged	2026-10-20T15:45Z	F1a_20261020_11
-DEBT-F1b	2026-10-20T13:22Z	S1	card	F1b pilot	P1	S1	open	F1b			
-DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE report fields	P0	S0/R8	open	stage0	summarize columns ready; C++ emit still missing		
-DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	human: no STOP <200G; EventsLog→.17 Data; ~288G free	2026-10-20T15:16Z	offload
-DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	repaired: kill after stall; peaks from partial trace		
-DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH; L51/L25 meas=0		
-DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2.0/D2.2	W01 converge but fires=0	P0	E2/R8	open	D2	A9/A11 mid axis		
-DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent fires	P0	E2/G1 labels	open	A1	BASELINE_DEGRADED; nextseg MATCH; br50_gen better-than-expected		
-DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol×4 masks measured dt	P0	F2 Done_BE	confirmed	F7	abs_dt 0.0031>tol; factor1 stalls; F2.pref Done via ×4	2026-10-20T17:12Z	F2.pref
-DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	quality	open	gate	kill etime>180; child_rc=-15		
-DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-N1	open	D2b	L=54 44 1 1		
-DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib()=Bin volume not DATA	P1	E2 soft-cold	done	.17	offload unused lanes /→Data; Avail≈108G; assert still on /	2026-10-20T20:17Z	lanes-offload
-DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale snapshots	P0	E2 R8	done	Bin	queue prepare --case-ids only; Bin 774704fc	2026-10-20T20:24Z	774704fc
+DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired 98ac830d	2026-10-20T14:05Z	98ac830d
+DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 EQUIVALENT — не подтверждён на R8; см. E2_R8_SYNTHESIS		
+DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	W02 not_converged all E2 arms; CLASSIC_BOUNDARY_MAP		
+DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	canon 24-32 selected for G1		
+DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH margins	2026-10-20T15:45Z	F1a_20261020
+DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	spec only; F1_fast_epsp_pilot §F1b		
+DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	open	stage0	V_S0_UPDATE; F2 done_be timing		
+DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog→.17 Data	2026-10-20T15:16Z	offload
+DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	kill after stall		
+DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH		
+DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2.0/D2.2	W01 converge fires=0 Test hang	P0	SYNTH/G1	open	D2/E2	F4_F6 F2_F3; E2 not DIFFERENT		
+DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent fires	P0	G1 labels	open	A1	BASELINE_DEGRADED		
+DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol×4 masks measured dt	P0	F2 Done_BE	confirmed	F7	F2.pref cold	2026-10-20T17:12Z	F2.pref
+DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test	open	gate	kill etime>180; rc=-15; linked DEBT-D2		
+DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-N1	open	D2b	L=54 44 1 1; E2 all arms		
+DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2 soft-cold	done	.17	lanes offload 2026-10-20	2026-10-20T20:17Z	lanes-offload
+DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	P0	E2 R8	done	Bin	case-ids only 774704fc	2026-10-20T20:24Z	774704fc
+DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR cold incomplete	P1	F8 chain/R3	open	F5	patch default off; F5_GAMMA_COLD W01 one-shot		
+DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series ignores launch.exit≠0	P0	G1 SYNTH	open	drv	9/12 rep3 fail exit; G1_S1_LAUNCH_EXIT_AUDIT		
+DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
 ```
+
+---
+
+*Последнее docs-обновление: 2026-10-21 (parallel AGENT_PLAN docs arm, без Console cold).*
