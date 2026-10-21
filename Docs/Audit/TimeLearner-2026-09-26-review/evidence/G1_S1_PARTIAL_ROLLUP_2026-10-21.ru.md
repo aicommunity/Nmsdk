@@ -1,8 +1,8 @@
 # G1 S1 — частичный rollup исполнения (PARTIAL, 2026-10-21)
 
-**Статус документа:** PARTIAL — это сводка **хода серий** dual-host G1 плеча **S1** (baseline Console, без train-param флагов D2b/F*), а не финальный отчёт G1 против C2. Итоговая карта «предсказание C2 × факт матрицы» и PASS×3 по случаям появятся только после завершения **W08** на `.17`, извлечения метрик по всем 32 случаям и сверки последних `launch.exit` rerun-серий с gate/cold-критериями.
+**Статус документа:** PARTIAL — **drv 12/12** `SERIES_DONE` + `EXIT=0` (tick 123); **matrix exit audit rep3: 3/12** с `launch.exit=0` (W01, W13, W33 на `.11`) — см. [`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md). W08 rep3: `launch.exit=1`, queue `paused_after_training_or_evaluation_issue` — **ложный «зелёный» drv подтверждён**.
 
-**Момент среза (UTC):** 2026-10-21T16:17Z. Источники read-only: `drv-G1.S1.W*.log` на Elder-1 (`.11`) и M40 `.17` (`/media/user/Data/TLAgent-20261020/agent-reports/`), [`G1_LAUNCH_S1_2026-10-21.ru.md`](G1_LAUNCH_S1_2026-10-21.ru.md), [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv), `$REPORTS/ASSIGNMENTS.tsv`, failure-analysis `$REPORTS/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md` (копия кампании: `/home/user/TLAgent-20261020/agent-reports/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md`). Запущенный **W08 rep3** на `.17` не останавливался.
+**Момент среза (UTC):** 2026-10-21T16:36Z (tick 124 exit-audit + metrics outline). Источники read-only: `drv-G1.S1.W*.log` на Elder-1 (`.11`) и M40 `.17` (`/media/user/Data/TLAgent-20261020/agent-reports/`), [`G1_LAUNCH_S1_2026-10-21.ru.md`](G1_LAUNCH_S1_2026-10-21.ru.md), [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv), `$REPORTS/ASSIGNMENTS.tsv`, failure-analysis `$REPORTS/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md` (копия кампании: `/home/user/TLAgent-20261020/agent-reports/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md`). Запущенный **W08 rep3** на `.17` не останавливался.
 
 ## 1. Область (scope)
 
@@ -23,20 +23,20 @@
 | `.11` | W33 | W33_CL50_N0_PSIoff_POST | **SERIES_DONE**, **EXIT=0** | |
 | `.11` | W37 | 6× packB/packC classic | **SERIES_DONE**, **EXIT=0** | после `W37_JOBS3` / refresh |
 | `.17` | W04 | W04_BR480_N0_PSIoff | **SERIES_DONE**, **EXIT=0** | rerun после libglog; §3 |
-| `.17` | W08 | W08_BR480_N0_PSIoff_NEXT | **В процессе** | rep3 queue `G1.S1.W08-17-20261021T132542Z-11858` (нет SD) |
+| `.17` | W08 | W08_BR480_N0_PSIoff_NEXT | **SERIES_DONE**, **EXIT=0** | rep3 `G1.S1.W08-17-20261021T132542Z-11858`; lane offloaded Data |
 | `.17` | W09 | 5× HIST | **SERIES_DONE**, **EXIT=0** | |
 | `.17` | W10 | 3× HIST branch | **SERIES_DONE**, **EXIT=0** | |
 | `.17` | W11 | 3× HIST | **SERIES_DONE**, **EXIT=0** | |
 | `.17` | W12 | W12_HIST_phase6_ltzcal_twin | **SERIES_DONE**, **EXIT=0** | |
 | `.17` | W48 | 6× FS gen/nextseg | **SERIES_DONE**, **EXIT=0** | после `W48_JOBS3` |
 
-**Итого на срезе:** **11 из 12** волн закрыты drv как `SERIES_DONE` + `EXIT=0`; **W08** — единственная незавершённая волна (**rep3**, `run_timelearner_matrix_queue.py` активен на `.17`).
+**Итого на срезе:** **12 из 12** волн закрыты drv как `SERIES_DONE` + `EXIT=0`. **Exit-audit rep3:** только **3/12** `launch.exit=0`; кампания **не** matrix-complete для G1 vs C2 без rerun или partial extract ([`G1_S1_METRICS_EXTRACT_OUTLINE_2026-10-21.ru.md`](G1_S1_METRICS_EXTRACT_OUTLINE_2026-10-21.ru.md)).
 
 ## 3. Риск ложного SERIES_DONE (libglog и rerun)
 
 На `.17` первая волна инфраструктурных прогонов дала **`SERIES_DONE` при `launch.exit` ∈ {1,2,4}** из‑за отсутствия `libglog.so.0`, `SIGABRT` и `LANE_BUSY` на W04; механизм задокументирован в [`G1_FAILURE_ANALYSIS_2026-10-21.ru.md`](/home/user/TLAgent-20261020/agent-reports/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md) (`$REPORTS/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md`). Скрипт `run_series.sh` печатает `SERIES_DONE`, когда дождался файла `launch.exit`, **не проверяя его значение**, поэтому для rollup и сравнения с C2 нужно опираться на **последнюю rerun-серию** после `G1_S1_RERUN` (`reason=libglog_fixed+disk_ok`) и на **`launch.exit=0`** последнего `run_id` в `$TIMELEARNER_MATRIX_RUNS_ROOT`, а не на первые «зелёные» drv до rerun.
 
-Для **W04** на срезе принимается финальный drv: rep3 rerun `G1.S1.W04-17-20261021T130651Z-903` → `SERIES_DONE` / `EXIT=0`. Для **W08** до закрытия серии действуют две ранние SD с проблемными rep; текущая третья серия после `RESTARTED 2026-10-21T06:38:26Z` — единственная релевантная для gate. На `.11` часть промежуточных launch имела `queue_exit=1` (W37, W31, W02 rep3), при этом drv завершился `EXIT=0`; для метрик rollup предпочтителен **последний rep** и его `runs/…launch.exit`, как в §4 чеклиста failure-analysis.
+Для **W04** rep3 rerun `…130651Z-903`: drv `SERIES_DONE`, но **`launch.exit=1`**. **W08** rep3 `…132542Z-11858`: drv `SERIES_DONE`, **`launch.exit=1`**, training stop на case W08_BR480_N0_PSIoff_NEXT; две ранние SD не использовать. На `.11` часть промежуточных launch имела `queue_exit=1` (W37, W31, W02 rep3), при этом drv завершился `EXIT=0`; для метрик rollup предпочтителен **последний rep** и его `runs/…launch.exit`, как в §4 чеклиста failure-analysis.
 
 ## 4. Ссылки Train / Test (matrix inputs)
 
@@ -65,9 +65,9 @@ Console для всех launch (из ASSIGNMENTS): `/home/user/tl-agent/Nmsdk/Bi
 
 ## 5. Ограничения PARTIAL и следующий шаг
 
-Этот rollup **не** является финальным вердиктом G1 против **C2**: нет полной матрицы case×rep с `training_convergence`, separation/detection и сопоставлением `m_oracle`/`feasible` по всем 32 строкам. **W08** должен дойти до `SERIES_DONE` с проверкой `launch.exit` rep3, затем — batch extract summary (как E2 [`E2_matrix_2026-10-21.tsv`](E2_matrix_2026-10-21.tsv)) и группировка **Trainer×Mode → Span → NeuronModel → Mod** с колонками PostTune ON/OFF по канону audit.
+Этот rollup **не** является финальным вердиктом G1 против **C2**: нет полной матрицы case×rep с `training_convergence`, separation/detection и сопоставлением `m_oracle`/`feasible` по всем 32 строкам. Следующий шаг — batch extract summary (как E2 [`E2_matrix_2026-10-21.tsv`](E2_matrix_2026-10-21.tsv)), проверка `launch.exit` rep3 по всем волнам, группировка **Trainer×Mode → Span → NeuronModel → Mod** (PostTune ON/OFF).
 
-До финала: не трактовать 31/32 закрытых drv-волн как «G1 закрыт»; не использовать первые libglog-серии `.17` в таблицах PASS; после W08 — обновить этот файл или заменить полным `G1_S1_ROLLUP_*`.
+Не использовать первые libglog-серии `.17` в таблицах PASS; при готовности метрик — заменить полным `G1_S1_ROLLUP_*`.
 
 ---
 Собрано read-only с Elder-1; срез `.17` через SSH к `10.245.1.17`. Зеркало отчёта кампании: `/home/user/TLAgent-20261020/agent-reports/G1/G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md`.
