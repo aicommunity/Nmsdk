@@ -42,7 +42,7 @@
 
 ## 5. Точечные фиксы F1–F8
 
-F2/F3/F4/F6 cold закрыты без регрессии Train на своих пилотах; **F5** — OPEN (`CorrectAttenuationGammaForTipR` patched, один cold W01 Need=0 + quality_fail; paired γ vs baseline **не** завершён — [`F5_GAMMA_COLD_2026-10-21.ru.md`](F5_GAMMA_COLD_2026-10-21.ru.md)). F7 → F2.pref; F8 done. Silent Test **не** зачтён как PASS ни на одном фиксе.
+F2/F3/F4/F6 cold закрыты без регрессии Train на своих пилотах; **F5** — OPEN: paired γ=0 vs γ=1 на `W01_CL50_N1_PSIoff` ([`F5_GAMMA_PAIRED_2026-10-22.ru.md`](F5_GAMMA_PAIRED_2026-10-22.ru.md)) — оба плеча Need=0, **идентичный** silent 7/8, PASS **нет** (one-shot — [`F5_GAMMA_COLD_2026-10-21.ru.md`](F5_GAMMA_COLD_2026-10-21.ru.md)). F7 → F2.pref; F8 done. Silent Test **не** зачтён как PASS ни на одном фиксе.
 
 ## 6. Controller v2 и этап 5–6
 
@@ -51,7 +51,7 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 ## 7. Риски и следующий цикл
 
 1. Починить или явно жить с **DEBT-G1-exit-gate** в `run_series.sh` (читать значение `launch.exit`).
-2. **F5 paired** γ vs baseline на одном case (слоты Console свободны после RERUN).
+2. **F5** — paired W01 N1 выполнен; следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
 3. Алгоритм: **silent-Test** / mid / CL-N1 — без этого G1 не наберёт exit-clean большинство.
 4. Не стартовать повторный RERUN тех же 10 волн на том же SHA.
 
