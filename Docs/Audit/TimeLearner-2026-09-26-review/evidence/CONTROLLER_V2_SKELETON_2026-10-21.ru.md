@@ -1,6 +1,6 @@
 # Controller v2 — каркас спецификации (этап 4/6)
 
-**Статус:** **DRAFT** — черновик для согласования до **exit-clean G1** (аудит `launch.exit`, метрики Train/Test, сопоставление с C2). Не является заданием на реализацию в C++ и не заменяет [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §«Этап 4».
+**Статус:** **DRAFT** — черновик для согласования. G1 S1 RERUN закрыт с **3/13** exit-clean; опора для порогов v2 — PARTIAL метрики ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md), [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md)), не drv-only SERIES_DONE. Не является заданием на реализацию в C++ и не заменяет [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §«Этап 4».
 
 **Канон этапа:** один общий контроллер для Classic и Branch за флагом `ControllerVersion=2`, стратегия топологии вместо двух независимых копий тренера.
 
@@ -22,11 +22,11 @@
 
 C2 задаёт для каждой пары (τ, span) длины синхронизации `L`, поля `m_equal` / `m_ampnorm` / `m_oracle`, флаг `feasible=false` при L > MaxL и эталон `ideal_delay` (узкий EPSP + задержка без дисперсии). Для v2 это **библиотека стартовых точек** для bracketed-поиска L\* и верхняя граница ожидаемого запаса на G1-матрице ([`G1_predictions_2026-10-21.tsv`](G1_predictions_2026-10-21.tsv)).
 
-### 2.2 G1 — сокращённая матрица границ (в процессе)
+### 2.2 G1 — сокращённая матрица границ (PARTIAL после RERUN)
 
-Источник: [`G1_READY_2026-10-21.ru.md`](G1_READY_2026-10-21.ru.md), [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv), rollup [`G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md`](G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md).
+Источник: [`G1_READY_2026-10-21.ru.md`](G1_READY_2026-10-21.ru.md), [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv), exit [`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md), метрики [`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md).
 
-G1 даёт эмпирическую карту Trainer×Mode×Span×NeuronModel×Mod на **v1** (arm S1). До exit-clean v2-спека **не фиксирует** числовые пороги: расхождения «C2 говорит margin > 0, Console fires silent» должны быть разобраны по строкам G1, а не объяснены постфактум правками контроллера.
+G1 даёт эмпирическую карту Trainer×Mode×Span×NeuronModel×Mod на **v1** (arm S1). Числовые пороги v2 пока опираются только на **exit-clean** подмножество (W01/W13/W33) плюс `failure_class` для остальных; silent 7/8 без цели на clean-волнах — обязательный вход в detection/mid, не в «уже зелёную» матрицу.
 
 ### 2.3 E2 — A/B R8 (S0/S1/S2)
 
@@ -81,7 +81,7 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 
 - **Не** объявлять v2 реализованным по результатам E2/F* alone.
 - **Не** менять алгоритм v1 в mainline без R8 A/B на каждый флаг (правила AGENT_PLAN `00_RULES.md`).
-- **Не** писать `SYNTHESIS_FINAL` по кампании до rollup G1 с `launch.exit=0` на волнах, где извлекаются метрики ([`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md)).
+- **Не** писать `SYNTHESIS_FINAL` по полной 13-волновой матрице, пока большинство волн без `launch.exit=0`; PARTIAL уже опубликован ([`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md), политика [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md)).
 
 ---
 
