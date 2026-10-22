@@ -47,7 +47,7 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 
 ## 6. Controller v2 и этап 5–6
 
-Скелет DRAFT — [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md). Решение «432 v1 vs v2» и V-gate этапов 4–6 **не** блокируются ожиданием 13/13 exit-clean, но **не** опираются на drv-only SERIES_DONE. F1b senior по-прежнему блокер физики быстрого EPSP.
+Скелет DRAFT — [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md); обогащение входов 2026-10-22 (E1 δ/amp/N-sat, H3 default-off, H1-weak/H4 weakened/H2 inconclusive, D1 lo…hi + mid `3cefd64` in flight, open decisions candidate_mid/KeepDone/sep_margin, F1b docs-ready) — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md). Решение «432 v1 vs v2» и V-gate этапов 4–6 **не** блокируются ожиданием 13/13 exit-clean, но **не** опираются на drv-only SERIES_DONE; F1b senior (`DEBT-F1b`) по-прежнему блокер физики быстрого EPSP до SPEC.
 
 ## 7. Риски и следующий цикл
 
