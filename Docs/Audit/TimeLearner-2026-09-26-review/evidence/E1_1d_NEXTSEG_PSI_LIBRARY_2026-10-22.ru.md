@@ -36,7 +36,7 @@
 ## Как заменить `ideal_inh_proxy` в E1.4 (без полного RERUN)
 
 1. **Не** подставлять measured single-pulse FWHM вместо τ = 0.5 мс — числа не сходятся (62 мс vs ≲ 3 мс).
-2. Tip multi-pulse (E1.1e) **не** закрыл замену: nextseg@L=7 ≈passive; нужен 4-dendrite Pack-A / Console Branch IR или явный SPEC «proxy intentional».
+2. Tip multi-pulse (E1.1e) **и** 4-dendrite Pack-A (E1.1f) **не** закрыли замену: nextseg sep&lt;0; нужен Console Branch IR или явный SPEC «proxy intentional».
 3. Proxy τ = 0.5 мс остаётся **феноменологическим** стендом Acc-direction (E1.4 6/6); tol VERIFY — не из tip FWHM E1.1d/e.
 4. Полный RERUN E1.4 **не** делался в этом turn (scoped OK).
 
@@ -49,9 +49,10 @@
 | **δ peak/FWHM vs passive** | **PARTIAL DONE** | таблица + TSV |
 | **Console PSI / Branch NextSeg якоря** | **PENDING** | prepare OK; Console hang (dbg); Branch probe tool gap |
 | **Multi-pulse tip IR** | **DONE negative → E1.1e** | Pack-A tip-drive не retire proxy — [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md) |
-| **4-dendrite / Console Branch IR** | **PENDING** | pattern-level gap после E1.1e |
+| **4-dendrite Pack-A** | **DONE negative → E1.1f** | [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md) |
+| **Console Branch IR** | **PENDING** | после E1.1f; `DEBT-E1.1f` |
 | **Gen / FastSpan / Rs×8 full / N-grid** | **PENDING** | вне scope |
 
 ## Выводы
 
-Одиночные импульсные ядра NextSegInh/PSI для AsymRm **измерены** на scoped-сетке и дают ясную картину относительно passive: PSI масштабирует amp, NextSeg режет хвост только на коротких L. Это **не** оправдывает прямую замену E1.4 `ideal_inh_proxy` τ = 0.5 мс числами FWHM из single-pulse — для острова `br25_nextseg` (L = 7) FWHM остаётся ~62 мс. Follow-up **E1.1e** (tip multi-pulse Pack-A) тоже **отрицательный**: @L=7 nextseg≈passive, gate 0/132 — proxy остаётся; следующий gap — 4-dendrite / Console Branch IR.
+Одиночные импульсные ядра NextSegInh/PSI для AsymRm **измерены** на scoped-сетке и дают ясную картину относительно passive: PSI масштабирует amp, NextSeg режет хвост только на коротких L. Это **не** оправдывает прямую замену E1.4 `ideal_inh_proxy` τ = 0.5 мс числами FWHM из single-pulse — для острова `br25_nextseg` (L = 7) FWHM остаётся ~62 мс. Follow-up **E1.1e** (tip multi-pulse) и **E1.1f** (4-dendrite Pack-A) тоже **отрицательные** — proxy остаётся; следующий gap — Console Branch soma IR или SPEC «proxy intentional».

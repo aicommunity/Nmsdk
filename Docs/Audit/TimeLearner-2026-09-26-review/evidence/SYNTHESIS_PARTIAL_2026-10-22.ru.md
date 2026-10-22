@@ -14,7 +14,7 @@
 | PulseLib F6/F7 diagnostic flags | tip `a532db7` | opt-in Classic UProperty; **defaults = historical** (off / tol×4) |
 | E1.4 sep predictor | `e9a0808c8` | gate **6/6** PARTIAL |
 | E1.5 fragility | `f9e83bf8c` | **FRAGILE** PARTIAL |
-| E1.1d / E1.1e | `da88a998c` / `2adf0cd35` | proxy **остаётся** (tip multi-pulse negative) |
+| E1.1d / E1.1e / E1.1f | `da88a998c` / `2adf0cd35` / (этот turn) | proxy **остаётся** (tip + 4-dendrite Pack-A negative) |
 | F3 Reset CODE | `e02f7bcaa` (PulseLib `4b85c91`) | flag default **off**; `DEBT-F3-R8` deferred |
 | Controller DRAFT inputs | `1a8d8ad50` (+ E1.1e sync `59517f65d`) | [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) |
 
@@ -30,6 +30,7 @@ G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 
 | E1.1 / E1.1b / E1.1c timing+amp | **PARTIAL** scoped libraries |
 | E1.1d NextSegInh/PSI | **PARTIAL** — [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md) |
 | E1.1e multi-pulse tip IR | **PARTIAL / negative** — proxy не retired — [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md) |
+| E1.1f 4-dendrite Pack-A | **PARTIAL / negative** — nextseg sep −0.01/−0.03 vs proxy +0.074 — [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md) |
 | E1.2 repeatability Reset vs no-Reset | **PARTIAL** — [`E1_2_REPEATABILITY_2026-10-22.ru.md`](E1_2_REPEATABILITY_2026-10-22.ru.md) |
 | E1.4 separability predictor | **PARTIAL** gate **6/6** — [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md) |
 | E1.5 historical PASS fragility | **PARTIAL / FRAGILE** — [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md) |
@@ -74,7 +75,7 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 
 **PulseLib F6/F7 (`a532db7`):** runtime-свойства `PreferConfiguredResistanceMinFloor` / `DisableMidbandWalkToRmin` / `RminLengthTolFactor` — opt-in, **defaults historical**; без overlay поведение бит-в-бит как до флагов. На W02 N1 абляции a/b/c с флагами **не** вернули `converged*`.
 
-**E1 chain (docs-ready / offline, без нового G1 RERUN):** E1.4 предсказатель Acc-direction **6/6** на passive cable + `ideal_inh_proxy` τ=0.5 мс; E1.1d single-pulse и E1.1e tip multi-pulse **не** заменяют proxy; E1.5 задаёт хрупкость VERIFY-tol (~1–2% sep; L±1 / TipR±25%).
+**E1 chain (docs-ready / offline, без нового G1 RERUN):** E1.4 предсказатель Acc-direction **6/6** на passive cable + `ideal_inh_proxy` τ=0.5 мс; E1.1d/e/**f** (single-pulse / tip multi-pulse / 4-dendrite Pack-A) **не** заменяют proxy; E1.5 задаёт хрупкость VERIFY-tol (~1–2% sep; L±1 / TipR±25%).
 
 ## 6. Controller v2 и этап 5–6
 
@@ -86,7 +87,7 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 2. **DEBT-CL-N1 open:** не повторять те же overlays a–e; дальше — смена постановки (поведение вокруг `3cefd64` / MaxL escape, multifactor на ином Span, или Controller length search).
 3. Починить или явно жить с **DEBT-G1-exit-gate** в `run_series.sh` (читать значение `launch.exit`).
 4. **F5** — paired W01 N1 выполнен; следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
-5. Алгоритм: Train **`sep_margin` / `amp_be` emit** закрыт (`DEBT-S0` **done**). H3 mid-policy **зафлажена и cold-verified** (default off сохраняет G1 silent). **H4 / H2 ослаблены**. **D1 phase2 CLOSED:** первый L₀≥54 = **`3cefd64`**. Ideal_inh_proxy intentional до 4-dendrite / Console Branch IR.
+5. Алгоритм: Train **`sep_margin` / `amp_be` emit** закрыт (`DEBT-S0` **done**). H3 mid-policy **зафлажена и cold-verified** (default off сохраняет G1 silent). **H4 / H2 ослаблены**. **D1 phase2 CLOSED:** первый L₀≥54 = **`3cefd64`**. Ideal_inh_proxy intentional до Console Branch IR / SPEC (E1.1f 4-dendrite offline **negative**).
 6. Controller SPEC tol обязан учитывать E1.5 FRAGILE; F1b cold / KeepDone / новый Console cold — только по явному arm (этот refresh — docs only).
 
 ---

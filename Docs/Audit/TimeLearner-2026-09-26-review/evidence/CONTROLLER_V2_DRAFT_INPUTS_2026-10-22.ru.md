@@ -4,7 +4,7 @@
 
 **Запрет этого arm:** не трогать Console, не стартовать cold/matrix/bisect, не G1 RERUN / F1b cold / KeepDone.
 
-**Refresh SHA якорей (root `timelearner_fix2`):** E1.4 `e9a0808c8` · E1.5 `f9e83bf8c` · E1.1d `da88a998c` · E1.1e `2adf0cd35` · F3 `e02f7bcaa` (PulseLib `4b85c91`) · CL-N1 HEAD ablations `6245a0c09` (PulseLib F6/F7 tip `a532db7`, defaults historical). Сводка кампании — [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) (**FINAL blocked**; `DEBT-CL-N1` open).
+**Refresh SHA якорей (root `timelearner_fix2`):** E1.4 `e9a0808c8` · E1.5 `f9e83bf8c` · E1.1d `da88a998c` · E1.1e `2adf0cd35` · E1.1f 4-dendrite Pack-A (этот turn) · F3 `e02f7bcaa` (PulseLib `4b85c91`) · CL-N1 HEAD ablations `6245a0c09` (PulseLib F6/F7 tip `a532db7`, defaults historical). Сводка кампании — [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) (**FINAL blocked**; `DEBT-CL-N1` open).
 
 ---
 
@@ -19,10 +19,11 @@
 | **E1.1b** amp Rs×N | **PARTIAL DONE** | γ(L)≈const по TipR; рычаг amp = **log Rs / N**; насыщение **N ≳ 16** (эффективно N≲8…16) | [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md), TSV |
 | **E1.1d** NextSegInh/PSI | **PARTIAL** (`da88a998c`) | single-pulse AsymRm: PSI amp×~2.4 (FWHM≈pas); NextSeg ΔFWHM≈−9.5% @L=1, ≈pas @остров L=7 — **не** τ=0.5 мс; **не заменяет** E1.4 `ideal_inh_proxy` | [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md), TSV |
 | **E1.1e** multi-pulse tip IR | **PARTIAL / negative** | Pack-A ISI tip-drive: nextseg@L=7 ≈passive (last_fwhm~62–66 мс); **0/132** meet FWHM/span≲0.13; **не** retire proxy | [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md), TSV |
-| **E1.4** sep predictor | **PARTIAL** gate **6/6** (`e9a0808c8`) | офлайн `(tgt−max_foil)/tgt` по L/TipR/mod; gen→passive cable; nextseg/preinh→**`ideal_inh_proxy`** τ=0.5 мс при sync CV≤0.25; proxy остаётся (E1.1e tip multi-pulse negative) | [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md), TSV |
+| **E1.1f** 4-dendrite Pack-A | **PARTIAL / negative** | island L=`7 6 4 1`+TipR Pack-A: nextseg sep **−0.010 / −0.030** vs proxy **+0.074**; tgt_fwhm~58–68 мс; **не** retire proxy | [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md), TSV |
+| **E1.4** sep predictor | **PARTIAL** gate **6/6** (`e9a0808c8`) | офлайн `(tgt−max_foil)/tgt` по L/TipR/mod; gen→passive cable; nextseg/preinh→**`ideal_inh_proxy`** τ=0.5 мс при sync CV≤0.25; proxy остаётся (E1.1d/e/**f** offline IR negative) | [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md), TSV |
 | **E1.5** fragility | **PARTIAL / FRAGILE** (`f9e83bf8c`) | Test-only L±1 / TipR×0.8/×1.25: br25_nextseg **0/9** strict; tiprmin TipR **0/2**; baseline `sep_ltz` **~1–2%** — tol VERIFY ≥ L±1 и TipR±25% | [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md); `DEBT-E1.5-fragile-pass` |
 
-**Следствие для скелета:** шаг `LEN_SEARCH` стартует из C2 + δ(E1.1); шаг `AMP_ALIGN` — бисекция log Rs и N с потолком кратности ~16; калибровка peak — Gen×1.067 / AsymRm oracle, не «сырой» passive cable. VERIFY может сверять Train `sep_margin` с E1.4-предсказанием, но **числовой tol SPEC** обязан учитывать E1.5 (остров ~1–2% sep; Done на граничном mid ложен) и **не** может опираться на замену inh-proxy tip-ядрами E1.1d/e (multi-pulse tip negative; proxy intentional до 4-dendrite/Console Branch IR).
+**Следствие для скелета:** шаг `LEN_SEARCH` стартует из C2 + δ(E1.1); шаг `AMP_ALIGN` — бисекция log Rs и N с потолком кратности ~16; калибровка peak — Gen×1.067 / AsymRm oracle, не «сырой» passive cable. VERIFY может сверять Train `sep_margin` с E1.4-предсказанием, но **числовой tol SPEC** обязан учитывать E1.5 (остров ~1–2% sep; Done на граничном mid ложен) и **не** может опираться на замену inh-proxy ядрами E1.1d/e/f (single-pulse / tip multi-pulse / 4-dendrite Pack-A **все negative**; proxy intentional до Console Branch IR или явного SPEC).
 
 Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline); Train/Test — N/A или probe-шаблоны W01/W02/W11 (см. E1.0). E1.5 якоря — Branch×N1 tiprmin/nextseg с явными Train/Test в evidence.
 
@@ -61,7 +62,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (§5) и cold; **`DEBT-F1b` OPEN**.
 5. **N0 при Span > 50 мс / 480 мс:** C2 T_max и E1.1 δ остаются; решение «чистый N0 vs N1+delay» — после согласования с D1/CL-N1 и этапом 6.
 6. **F3 Reset в train loop:** default-off CODE готов; включать ли Reset в v2 по умолчанию — после **`DEBT-F3-R8`** (deferred).
-7. **Замена `ideal_inh_proxy`:** single-pulse E1.1d **не** закрывает; tip multi-pulse E1.1e **negative** (`2adf0cd35`) — proxy intentional до 4-dendrite Pack-A / Console Branch soma IR (`DEBT-E1.1e`); блокер точного VERIFY-tol для nextseg/preinh.
+7. **Замена `ideal_inh_proxy`:** E1.1d single-pulse, E1.1e tip multi-pulse **и** E1.1f 4-dendrite Pack-A (**sep nextseg −0.01/−0.03 vs proxy +0.074**) — все **negative**; proxy intentional до Console Branch soma IR или SPEC «proxy intentional» (`DEBT-E1.1f`); блокер точного VERIFY-tol для nextseg/preinh.
 
 ---
 
@@ -89,7 +90,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Default Test mid policy | Решение §4.1 — **ещё open** |
 | Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
 | Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
-| Inh-ядра для nextseg/preinh | tip multi-pulse E1.1e **negative**; proxy intentional до 4-dendrite/Console Branch IR |
+| Inh-ядра для nextseg/preinh | E1.1d/e/**f** offline **negative**; proxy intentional до Console Branch IR / SPEC |
 | F3 Reset default в v2 | после R8 A/B (`DEBT-F3-R8` deferred); CODE default off |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |

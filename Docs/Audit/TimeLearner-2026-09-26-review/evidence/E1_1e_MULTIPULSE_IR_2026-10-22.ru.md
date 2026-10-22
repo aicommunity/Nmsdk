@@ -62,7 +62,8 @@ NextSeg ≡ passive по last_fwhm / half_decay / late50 (Δ ≈ 0). PSI —
 | NextSeg @ L=7 vs E1.4 FWHM gate | **DONE (negative)** | ≈passive; gate 0/132 |
 | PSI multi-pulse amp / shape | **PARTIAL DONE** | amp×~2.3–2.4; FWHM не ↓ |
 | Retire `ideal_inh_proxy` | **NO** | proxy остаётся |
-| Console Branch / 4-dendrite Pack-A IR | **PENDING** | вне scope; см. TECH_DEBT |
+| 4-dendrite Pack-A IR | **DONE negative → E1.1f** | sep&lt;0; proxy не retired — [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md) |
+| Console Branch soma IR | **PENDING** | вне scope; см. TECH_DEBT `DEBT-E1.1f` |
 
 ## Выводы
 
