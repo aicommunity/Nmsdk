@@ -63,7 +63,7 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 - Флаг: `ControllerVersion=2` (XML Train + fingerprint очереди).
 - Classic и Branch: **одна** реализация + стратегия топологии (разветвление только там, где семантика входов различается).
 - PostTune: вне scope этапа 4; пары ON/OFF по-прежнему только `--force-posttrain-tuning` (скилл structtrain-experiments).
-- Отчётность прогона: сходимость (exact / `Done_BE` / Need=1), residue, margin, fires, Acc — поля Stage0 ([`V_S0_UPDATE_2026-10-20.ru.md`](V_S0_UPDATE_2026-10-20.ru.md)); C++-эмиссия части полей ещё OPEN (`DEBT-S0-cpp-fields`).
+- Отчётность прогона: сходимость (exact / `Done_BE` / Need=1), residue, margin, fires, Acc — поля Stage0 ([`V_S0_UPDATE_2026-10-20.ru.md`](V_S0_UPDATE_2026-10-20.ru.md)); C++ emit residue/`done_be`/`sep_margin` готов; `DEBT-S0-cpp-fields` partial только amp-BE mark.
 
 ---
 
@@ -77,7 +77,7 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 6. **480 мс:** запускать только если G1+C2 согласованы; иначе — аксонные задержки (этап 6 аудита).
 7. **Test mid policy (H3, 2026-10-22):** при NonSeparable / `candidate_mid` finite **не** оставлять `FixedLTZ=1` как единственный классификатор Test — иначе silent Acc 7/8 маскирует foil fires ([`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)). Решение v2: явный Verify vs Test threshold contract (best-effort mid / refuse silent-as-PASS).
 8. **sep_margin / TipR (H4, 2026-10-22):** flat CanonRmin на Classic×N0 W01 кладёт Pack A LTZ в полосу ~2–3×10⁻³ с target&lt;candidate_mid; E1.1b γ(L)≈const → равномерный TipR не чинит gap — Verify должен смотреть ranking/margin, а AMP_ALIGN — дифференциальный Rs/N ([`SILENT_TEST_H4_MARGIN_2026-10-22.ru.md`](SILENT_TEST_H4_MARGIN_2026-10-22.ru.md), [`CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md`](CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md)).
-9. **Явные решения до SPEC** (полный список — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §4): когда включать `candidate_mid` на Test; TipR KeepDone vs CanonRmin (H2 still inconclusive / `DEBT-17-console-glog`); Train emit `sep_margin` (`DEBT-S0-cpp-fields` gap).
+9. **Явные решения до SPEC** (полный список — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §4): когда включать `candidate_mid` на Test; TipR KeepDone vs CanonRmin (H2 **ослаблена**, `DEBT-17` **done**); Train emit `sep_margin` (**DONE**, emit path закрыт — остаётся tol в SPEC).
 
 ---
 
