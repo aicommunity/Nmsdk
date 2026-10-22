@@ -36,14 +36,14 @@ Trainer×Mode якоря: **Classic×N1**. Span480: AsymRm → PSIoff → PostTu
 | Артефакт | критерии входа в SPEC / DRAFT §`LEN_SEARCH`, **не** новый Console RUN |
 | Предлагаемые acceptance (черновик, post-H1) | (1) если L₀ достигло MaxL **и** Need≠0 → класс **`infeasible_len` / MaxL-hold**, не `quality_fail` SoftCold; (2) W3=1 — **opt-in diagnostic**, не SoftCold default; (3) stall TipR@Rmax / Need=1 при W3=off на Span **480** — отдельный класс **bounded stall@Rmax** (H1 доказал: на 100 этого класса нет); (4) shorter-span Need=0 + silent-Test → **`quality_fail` / `DEBT-D2`**, **не** тот же `infeasible_len` |
 | Ссылки | скелет [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md); DRAFT §3–§4.5; AMPNORM W3 [`AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md`](AMPNORM_D_RMAX_LENGTH_ESCAPE.ru.md); H1 evidence |
-| Статус | **docs-ready**; SPEC **blocked** (`DEBT-CTRL-V2-DRAFT` open) |
+| Статус | **wording DRAFTED** в [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §4.5a; SPEC **blocked** (`DEBT-CTRL-V2-DRAFT` open) |
 
 ---
 
 ## Приоритет и что не делать
 
-1. **H2 в docs** — уточнить wording acceptance в DRAFT/SPEC (два класса: 480 TipR@Rmax vs shorter Need=0+silent) — без Console.  
-2. **Span480 / SoftCold policy** — `DEBT-CL-N1` open; не считать H1 закрытием долга на 480.  
+1. **H2 wording** — **DRAFTED** (§4.5a DRAFT, 2026-10-22T22); дальше только перенос в `CONTROLLER_V2_SPEC_*.ru.md` (SPEC ещё blocked).  
+2. **Span480 / SoftCold policy** — `DEBT-CL-N1` open; не считать H1/H2-docs закрытием долга на 480 без SPEC/senior.  
 3. **Не** multifactor a–c на Span100; **не** повторять a–e на W02 480 без новой гипотезы; **не** «чинить» SoftCold включением W3; **не** G1 RERUN / F1b / KeepDone из этого note.
 
 `DEBT-CL-N1` остаётся **open** до policy-close через SPEC `infeasible_len` (H2) на оси **480** и/или явного senior close; H1 **не** закрывает долг, но сужает scope: train-stall TipR@Rmax = 480-specific.

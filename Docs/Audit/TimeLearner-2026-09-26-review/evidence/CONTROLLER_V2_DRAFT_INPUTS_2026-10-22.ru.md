@@ -65,10 +65,25 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 2. **TipR PostTune: KeepDone vs CanonRmin:** H2 KeepDone **по-прежнему ослаблена** (overlay + KeepDone cold W33 после pin); `DEBT-17` done. SPEC **не** должен зафиксировать KeepDone(3) или Canon mode=1 как sole-fix silent thr=1. KeepDone cold **не** стартовать из DRAFT.
 3. **`sep_margin` / `amp_be` Train emit** — **CLOSED** (`DEBT-S0` done): C++ пишет `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` + `amp_be`/`done_be` в Train audit + `posttune_complete.flag`; harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). **Числовой tol** «запас ≥ предсказанный − …» для SPEC **ещё open** и **обязан учитывать E1.5**: baseline sep острова ~**1–2%**; tol не должен съедать весь запас (согласуется с E1.2 eps_amp≈1%·target). Ideal_inh proxy E1.4 даёт более широкий margin (~7%), чем Console peaks — не путать proxy-margin с Console `sep_ltz`.
 4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (§5) и cold; **`DEBT-F1b` OPEN** (senior blocked).
-5. **`LEN_SEARCH` / `infeasible_len` — развести два класса (обязательно после H1):** (a) **Span480 TipR@Rmax stall** — Classic×N1 `W02_CL480_N1_PSIoff`, W3=off, Need=1, TipR@`1e10`, `not_converged_at_stop` (и W3on MaxL-hold Need≠0) — кандидат **`infeasible_len` / bounded stall@Rmax / MaxL-hold**, не «универсальный SoftCold fail Classic×N1»; (b) **короче Span (H1=100) Need=0 + silent-Test** — Train уже `converged_need0`, fail = `quality_fail`/`DEBT-D2`, **не** train-stall и **не** тот же `infeasible_len`. C2 T_max и E1.1 δ остаются; wording acceptance — H2 в [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md). Решение «чистый N0 vs N1+delay» — после согласования с CL-N1(480) и этапом 6. Multifactor на Span100 **не** планировать ради train stall.
+5. **`LEN_SEARCH` / `infeasible_len` — развести два класса (обязательно после H1):** см. **§4.5a** (H2 acceptance wording **DRAFTED** 2026-10-22T22). Кратко: (a) Span480 TipR@Rmax / MaxL-hold → `infeasible_len` / `bounded_stall_rmax` / `maxl_hold`; (b) shorter Span Need=0+silent → `quality_fail`/`DEBT-D2`, **не** `infeasible_len`. Multifactor на Span100 **не** планировать ради train stall.
 6. **F3 Reset в train loop:** A/B **`DEBT-F3-R8` done** (BR island OK / W01 silent unchanged) — включать ли Reset в v2 по умолчанию остаётся продуктовым выбором (рекомендация: **opt-in** / CODE default off).
 7. **`ideal_inh_proxy` intentional for SPEC (закрыто как измеренная замена):** E1.1d/e/f offline **и** E1.1g Console Branch IR (FWHM **28.8–30.9 мс** ≫ 2.1; sep_soma **≈−0.015**) — **retire=NO**; `DEBT-E1.1f` **partial-wontfix-offline**. SPEC nextseg/preinh держит τ=0.5 мс phenomenological; VERIFY-tol **не** из E1.1d–g FWHM/sep.
 8. **W3 / `EnableRmaxLengthEscape`:** diagnostic opt-in (E0 whitelist на Bin tip); **не** SoftCold default; не sole-fix CL-N1(480).
+
+### 4.5a H2 — acceptance wording `LEN_SEARCH` / exit-классы (DRAFTED, без cold)
+
+Постановка: после H1 Span100 (`converged_need0`) и W3on MaxL-hold на Span480 контроллер v2 **не** должен смешивать train-stall TipR@Rmax с silent-Test на уже сошедшем Train. Этот подпункт фиксирует **черновик acceptance** для SPEC (ещё не C++ SPEC; `DEBT-CTRL-V2-DRAFT` / `DEBT-CL-N1` open). Источник критериев: [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) §H2; evidence H1 / W3on / HEAD ablations.
+
+Иерархия якорей: **Classic×N1** → Span **480** vs **100** → AsymRm → PSIoff → PostTune OFF. Train/Test: [`W02_CL480_N1_PSIoff/{Train,Test}`](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/W02/inputs/W02_CL480_N1_PSIoff/Train), [`W02_CL100_N1_PSIoff/{Train,Test}`](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/W02/inputs/W02_CL100_N1_PSIoff/Train).
+
+| Exit-класс (черновик SPEC) | Когда выставлять | Не путать с | Evidence |
+|----------------------------|------------------|-------------|---------|
+| **`bounded_stall_rmax`** | W3=off, Need≠0, TipR@`Rmax`/`1e10`, `not_converged_at_stop`, L₀ в corridor без MaxL-escape | SoftCold `quality_fail`; «универсальный Classic×N1 fail» | HEAD a–e на Span**480** |
+| **`maxl_hold` / `infeasible_len`** | L достигло MaxL **и** Need≠0 (в т.ч. W3on escape) | `bounded_stall_rmax` (разный tip-класс); silent-Test | W3on `L=100 58 1 1` Need=1 |
+| **`quality_fail` / silent-Test (`DEBT-D2`)** | Train `converged_need0` (Need=0), Test silent / nonseparable / fires≈0 | любой `infeasible_len` / stall@Rmax | H1 Span**100**; F5 Span100 γ noop |
+| **SoftCold PASS** | Need=0 **и** Test target_hit / Acc цель | Acc 7/8 при silent thr=1 | не закрывать CL-N1 этим классом на 480 |
+
+**Policy (DRAFT→SPEC):** (1) W3 = **opt-in diagnostic**, не SoftCold default; (2) C2 `T_max` + E1.1 δ остаются входом `LEN_SEARCH`; (3) shorter-span Need=0+silent **не** эскалировать в `infeasible_len`; (4) закрытие `DEBT-CL-N1` — через принятие этих классов в SPEC (или senior close), **не** через повтор multifactor / G1 RERUN. **H2 wording: DRAFTED**; SPEC по-прежнему **blocked**.
 
 ---
 
@@ -98,7 +113,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
 | Inh-ядра для nextseg/preinh | E1.1d/e/f offline + E1.1g Console **negative**; **`ideal_inh_proxy` intentional for SPEC** (`DEBT-E1.1f` partial-wontfix-offline) |
 | F3 Reset default в v2 | A/B done (`DEBT-F3-R8`); CODE default off; opt-in recommended |
-| `LEN_SEARCH` / `infeasible_len` acceptance | **Развести:** Span480 TipR@Rmax / MaxL-hold vs shorter-span Need=0+silent-Test; H1 DONE; H2 wording ещё open |
+| `LEN_SEARCH` / `infeasible_len` acceptance | **§4.5a DRAFTED** (классы `bounded_stall_rmax` / `maxl_hold` / silent `quality_fail`); H1 DONE; SPEC ещё blocked |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior blocked + PASS×3 margin |
 | D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); HEAD W3on MaxL `100 58 1 1` Need=1 |
