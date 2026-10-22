@@ -41,4 +41,4 @@ One-shot **2026-10-21** `F5.gamma-11-20261021T053512Z-6091` (только γ=1) 
 | `.11` Elder-1 | 0 | Avail ≈ 179 G `/` |
 | `.17` M40 | 0 | Data Avail ≈ 743 G |
 
-Серия: tmux `drv-F5_paired` → `SERIES_DONE F5.paired` после обоих `launch.exit=0`.
+Серия завершена на срезе **2026-10-22 ~07:24 MSK**: оба `launch.exit=0`, real Console **0**, tmux **drv-F5_paired** снят; в `paired_series.log` строки `SERIES_DONE F5.paired` **нет** (drv пишет только LAUNCH-блоки), факт закрытия — по exit-файлам и отсутствию drv/wait_run.
