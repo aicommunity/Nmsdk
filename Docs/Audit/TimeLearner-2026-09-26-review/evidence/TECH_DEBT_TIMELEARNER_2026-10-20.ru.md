@@ -20,7 +20,7 @@
 
 **Classic N1 stall (`DEBT-CL-N1`, `DEBT-D2b5-W02`).** W02 `W02_CL480_N1_PSIoff` на всех плечах E2 заканчивается `not_converged_at_stop` с L=`54 44 1 1` и разносом TipR — картина согласуется с [`CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md`](CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md) и [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md). D1 bisect на `.11` ещё не дал «первый плохой коммит» ([`D1_PARTIAL_2026-10-20.ru.md`](D1_PARTIAL_2026-10-20.ru.md)).
 
-**S0 C++ поля (`DEBT-S0-cpp-fields`).** `summarize_run.py` уже выводит колонки residue/margin/`done_be`, но PulseLib HEAD не эмитит соответствующие поля в iteration-audit / EOL ([`V_S0_UPDATE_2026-10-20.ru.md`](V_S0_UPDATE_2026-10-20.ru.md), [`F2_F3_COLD_2026-10-20.ru.md`](F2_F3_COLD_2026-10-20.ru.md) — `done_best_effort` после audit). Без C++-эмиссии нельзя автоматически отличать exact Done от F7 `Done_BE` в rollup G1.
+**S0 C++ поля (`DEBT-S0-cpp-fields`) — partial 2026-10-22.** PulseLib эмитит `delay_residue` / `amp_over_target` / `sync_exit` / `done_be` в audit и `kind=done` после EOL; harness переносит в `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). **`sep_margin` на Train по-прежнему только через Test/gate**; amp-quantized BE в `done_be` не размечен отдельно.
 
 ### P1 — фиксы и пилоты
 
@@ -54,7 +54,7 @@ DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	W02
 DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	canon 24-32 selected for G1		
 DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH margins	2026-10-20T15:45Z	F1a_20261020
 DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	spec only; F1_fast_epsp_pilot §F1b		
-DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	open	stage0	V_S0_UPDATE; F2 done_be timing		
+DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	partial	stage0	S0_CPP_EMIT_2026-10-22; sep_margin Train gate-only		
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog→.17 Data	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	kill after stall		
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH		
