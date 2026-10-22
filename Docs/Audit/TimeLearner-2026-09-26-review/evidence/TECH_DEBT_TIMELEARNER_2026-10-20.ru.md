@@ -36,6 +36,10 @@
 
 **Политика offload диска (`DEBT-disk-offload-policy`).** Soft-cold на `.17` смотрит Avail **корня** `/` (≥80 ГБ), тогда как `$DATA` на отдельном томе; неиспользуемые lanes и `_repro` offload на Data поднимали Avail корня до ~90–108 ГБ ([`STATUS_SNAPSHOT_2026-10-20T2325.ru.md`](STATUS_SNAPSHOT_2026-10-20T2325.ru.md), [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md)). На 2026-10-21 корень снова ~76 ГБ — риск повторного `worker_exit=1` (E2 rep3 W01). Операционное правило: перед новым cold на `.17` — offload lanes/`_repro`, не трогая активные G1 runs; human rule `.11` DATA≥200G без STOP ([`CAMPAIGN_STATUS_2026-10-20.ru.md`](CAMPAIGN_STATUS_2026-10-20.ru.md)). Исправление gate в скриптах — открытый пункт (см. TSV).
 
+### Физика E1 (2026-10-22, E1.1c)
+
+**FastSpan library PARTIAL** (`NSPNeuronGenD002C25e11`, τ=2.5 мс / D=2 мс / f=2000): offline timing L=1…100 + Rs×8 @ L∈{1,10,25} + N∈{1…128} — [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md). **Open:** Console amp/timing anchors FastSpan; amp-cal bias; PSI/NextSegInh; на N≳64–128 short-τ Euler `model_unstable` (потолок N жёстче Gen).
+
 ### Прочие открытые (без изменения статуса)
 
 - `DEBT-H-A15b` — не подтверждён на E2 R8, но формально open до отдельного SoftCold-среза.

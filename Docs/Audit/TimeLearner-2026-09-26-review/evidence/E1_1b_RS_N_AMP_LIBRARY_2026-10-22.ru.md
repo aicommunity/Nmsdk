@@ -72,7 +72,8 @@
 | **N ∈ {1…128}, L ∈ {1,10,25}, TipR=8.6e7** | **PARTIAL DONE** | multiplicity + Reset; насыщение N≳16 |
 | **γ(Rs) таблица** | **PARTIAL** | γ(L) ≈ const по Rs; F5 TipR-γ слабо поддержан пассивом |
 | **Console amp anchors на новой Rs/N сетке** | **PENDING** | не снимались; опора на E1.0 @ TipR=8.6e7 |
-| **FastSpan / PSI / NextSegInh** | **PENDING** | вне scope |
+| **FastSpan** | **PARTIAL → E1.1c** | [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md) (timing L=1…100 + Rs/N truncated) |
+| **PSI / NextSegInh** | **PENDING** | вне scope E1.1b/c |
 | **AsymRm A/B/C, W01/W10 full NeuronModel** | **PENDING** | вне scope |
 | **Полный L=1…100 × Rs × N** | **PENDING** | план §E1.1 целиком |
 
@@ -82,4 +83,4 @@
 
 **Train / Test:** N/A (probe-only offline).
 
-**Следующий логичный шаг:** либо точечные Console-якоря amp на 1–2 крайних TipR (если слоты `.11`/`.17` свободны), либо расширение моделей (FastSpan / NextSegInh / PSI), либо CL-N1 bisect / margin H1/H4 по плану синтеза — не повтор G1 RERUN.
+**Следующий логичный шаг:** FastSpan закрыт scoped в E1.1c. Дальше — Console-якоря amp (Gen крайние TipR или FastSpan L-grid), PSI/NextSegInh, либо CL-N1 bisect / margin — не повтор G1 RERUN.
