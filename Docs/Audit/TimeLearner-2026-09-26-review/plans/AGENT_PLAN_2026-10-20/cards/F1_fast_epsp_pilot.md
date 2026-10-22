@@ -36,6 +36,18 @@ python3 classic_full.py 0.01 0.001 25 15,12,8,1 | tail -3 | tee "$OUT/classic_fu
 2. Собрать XML вручную из Test-шаблона W01 (20000 Гц). Проверить проводку `check_model_wiring.py` (правила Classic с L = 1) и отдельно — что каждый `NAxoneDelay` стоит ровно на одном пути.
 3. Если подтвердится: следующий шаг — тренер подбирает `d_k` (длину задержки), а не длину кабеля. Это отдельная задача проектирования (этап 4 плана, ControllerVersion = 2).
 
+### F1b docs-ready checklist (senior approve → cold; **DEBT-F1b OPEN**)
+
+Документация готова к согласованию; **Console pilot / cold не стартовать** без явного senior go-ahead. Канон обогащения DRAFT: [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](../../../evidence/CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §5.
+
+| # | Senior must approve | Notes |
+|---|---------------------|-------|
+| 1 | `NAxoneDelay` units + DefaultTimeStep ≥ 20 kHz | иначе d_k ≈ FWHM |
+| 2 | XML Classic Test 4×L=1 AsymRmD001C25e12 + delay per path; wiring OK | новый тип конфига |
+| 3 | Mid между max(foil) и target по `ltz_potential`; два порядка паттернов | пороги запаса 0.08 / 0.15 |
+| 4 | Host/runtime без `DEBT-17-console-glog`; не конкурировать с D1 `3cefd64` | infra ≠ физика |
+| 5 | После PASS: delay только в verify **или** в train `FINE_DELAY` (v2) | решение Controller DRAFT §4.4 |
+
 ## Выход
 
 F1a: три файла и таблица W13/W37. F1b: XML-конфигурация, trace, таблица запаса по повторам.

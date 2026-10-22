@@ -1,6 +1,6 @@
 # Controller v2 — каркас спецификации (этап 4/6)
 
-**Статус:** **DRAFT** — черновик для согласования. G1 S1 RERUN закрыт с **3/13** exit-clean; опора для порогов v2 — PARTIAL метрики ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md), [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md)), не drv-only SERIES_DONE. Не является заданием на реализацию в C++ и не заменяет [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §«Этап 4».
+**Статус:** **DRAFT** — черновик для согласования. G1 S1 RERUN закрыт с **3/13** exit-clean; опора для порогов v2 — PARTIAL метрики ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md), [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md)), не drv-only SERIES_DONE. Обогащение входов 2026-10-22 (E1 библиотеки, H1–H4, D1 bounds, F1b checklist, open decisions) — sibling [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md). Не является заданием на реализацию в C++ и не заменяет [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §«Этап 4».
 
 **Канон этапа:** один общий контроллер для Classic и Branch за флагом `ControllerVersion=2`, стратегия топологии вместо двух независимых копий тренера.
 
@@ -37,7 +37,8 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 ### 2.4 Смежные пилоты (не блокируют каркас, но питают этап 6)
 
 - **F1a** (закрыт): офлайн-подтверждение, что пассивный кабель не даёт oracle-margin > 0; [`F1a`-отчёт в TECH_DEBT](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md).
-- **F1b** (OPEN, senior): Console-пилот `NAxoneDelay` — прототип «тонкой задержки» (п. 3 этапа 4); карточка [`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b.
+- **F1b** (OPEN, senior): Console-пилот `NAxoneDelay` — прототип «тонкой задержки» (п. 3 этапа 4); карточка [`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b + docs-ready checklist; **`DEBT-F1b` still open**.
+- **E1.0 / E1.1 / E1.1b** (PARTIAL): δ≈9.5–10 мс/сег, Gen amp×1.067, AsymRm oracle, N sat≳16 — см. DRAFT inputs §1.
 
 ---
 
@@ -76,6 +77,7 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 6. **480 мс:** запускать только если G1+C2 согласованы; иначе — аксонные задержки (этап 6 аудита).
 7. **Test mid policy (H3, 2026-10-22):** при NonSeparable / `candidate_mid` finite **не** оставлять `FixedLTZ=1` как единственный классификатор Test — иначе silent Acc 7/8 маскирует foil fires ([`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)). Решение v2: явный Verify vs Test threshold contract (best-effort mid / refuse silent-as-PASS).
 8. **sep_margin / TipR (H4, 2026-10-22):** flat CanonRmin на Classic×N0 W01 кладёт Pack A LTZ в полосу ~2–3×10⁻³ с target&lt;candidate_mid; E1.1b γ(L)≈const → равномерный TipR не чинит gap — Verify должен смотреть ranking/margin, а AMP_ALIGN — дифференциальный Rs/N ([`SILENT_TEST_H4_MARGIN_2026-10-22.ru.md`](SILENT_TEST_H4_MARGIN_2026-10-22.ru.md), [`CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md`](CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md)).
+9. **Явные решения до SPEC** (полный список — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §4): когда включать `candidate_mid` на Test; TipR KeepDone vs CanonRmin (H2 still inconclusive / `DEBT-17-console-glog`); Train emit `sep_margin` (`DEBT-S0-cpp-fields` gap).
 
 ---
 
