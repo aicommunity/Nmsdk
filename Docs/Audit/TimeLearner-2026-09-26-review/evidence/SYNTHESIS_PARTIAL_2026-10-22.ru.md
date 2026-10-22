@@ -17,9 +17,11 @@
 | E1.5 fragility | `f9e83bf8c` | **FRAGILE** PARTIAL |
 | E1.1d / E1.1e / E1.1f / E1.1g | `da88a998c` / `2adf0cd35` / `18ddd803a` / `ab3abc329` | proxy **intentional for SPEC** (offline + Console IR negative) |
 | F3 Reset CODE + R8 A/B | CODE `e02f7bcaa` / A/B `0755c31ca` (PulseLib `3a599a7`) | default **off**; [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md) — **`DEBT-F3-R8` done** |
-| Controller DRAFT inputs | `6de2f77d1` (proxy intentional) | [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) |
+| Controller DRAFT inputs | refresh post-W3on / E0 | [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) — SPEC blocked |
+| CL-N1 next hypothesis | docs-ready only | [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) — H1 Span≠480 / H2 `infeasible_len` |
+| Bin E0 `--train-param` | tip `bf3e82ffe` | whitelist ResetNeuron / EnableRmaxLengthEscape на `timelearner_fix2` |
 
-G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 default off); CL-N1 ablations — Console `9540e64b…` / `6adf5875…` на PulseLib tip с F3+F6/F7 flags (см. evidence CL-N1).
+G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 default off); CL-N1 ablations / W3on — Console `f88d1852…` на PulseLib tip с F3+F6/F7 (см. evidence CL-N1).
 
 ## 1. Ворота кампании
 
@@ -83,16 +85,16 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 
 ## 6. Controller v2 и этап 5–6
 
-Скелет — [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md). Обогащённые входы 2026-10-22 (E1.0–E1.5, H3/H1/H4/H2, D1 `3cefd64`, F3 CODE, open decisions mid/KeepDone/proxy/F1b; Train `sep_margin` emit **CLOSED**) — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md). Решение «432 v1 vs v2» и V-gate этапов 4–6 **не** блокируются ожиданием 13/13 exit-clean, но **не** опираются на drv-only SERIES_DONE; F1b senior (`DEBT-F1b`) по-прежнему блокер физики быстрого EPSP до SPEC. **`DEBT-CTRL-V2-DRAFT` open** до `CONTROLLER_V2_SPEC_*.ru.md`. CL-N1 stall после stage-2 ablations **не** закрыт — v2 `LEN_SEARCH` / MaxL escape остаются кандидатами постановки, не sole-fix overlays a–e.
+Скелет — [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md). Обогащённые входы 2026-10-22 (E1.0–E1.5, H3/H1/H4/H2, D1 `3cefd64`, **W3on MaxL≠fix**, F3-R8 A/B done, Bin E0 tip `bf3e82ffe`, open decisions mid/KeepDone/proxy/F1b/`infeasible_len`; Train `sep_margin` emit **CLOSED**) — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md). **SPEC blocked**; решение «432 v1 vs v2» и V-gate этапов 4–6 **не** блокируются ожиданием 13/13 exit-clean, но **не** опираются на drv-only SERIES_DONE; F1b senior (`DEBT-F1b`) по-прежнему блокер физики быстрого EPSP до SPEC. **`DEBT-CTRL-V2-DRAFT` open** до `CONTROLLER_V2_SPEC_*.ru.md`. CL-N1 после a–e + W3on **не** закрыт — кандидаты H1/H2 в [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) (cold **не** стартован).
 
 ## 7. Риски и следующий цикл
 
 1. **`SYNTHESIS_FINAL` не публиковать**, пока нет exit-clean большинства волн или явной смены отбора; не стартовать повторный RERUN тех же 10 волн на том же SHA.
-2. **DEBT-CL-N1 open:** a–e не sole-fix; W3on **подтвердил** MaxL-фенотип (`100 58 1 1`) без converged — не включать W3 в SoftCold; дальше Controller v2 `LEN_SEARCH` / `infeasible_len`, multifactor на ином Span при W3=off ([`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md)).
+2. **DEBT-CL-N1 open:** a–e не sole-fix; W3on **MaxL≠fix** (`100 58 1 1`, Need=1) — не включать W3 в SoftCold; следующий цикл docs/execute по [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) (H2 `infeasible_len` docs-first; H1 multifactor Span≠480 W3=off — только по явному arm). Bin E0 `bf3e82ffe` готов к overlays.
 3. **DEBT-G1-exit-gate** harness **done**; исторический G1 остаётся 3/13 exit-clean.
 4. **F5** — paired W01 N1 выполнен (γ noop); следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
-5. Алгоритм: Train **`sep_margin` / `amp_be` emit** закрыт (`DEBT-S0` **done**). H3 mid-policy **зафлажена и cold-verified**. **H4 / H2 ослаблены**. **D1 phase2 CLOSED** (`3cefd64`). **`ideal_inh_proxy` intentional for SPEC** (E1.1d–g negative). **F3-R8 done** (Reset default off).
-6. Controller SPEC tol обязан учитывать E1.5 FRAGILE; открытые блокеры cold: **CL-N1**, **F5**, **F1b senior**, тег **tl-baseline**; KeepDone / новый Console cold — только по явному arm.
+5. Алгоритм: Train **`sep_margin` / `amp_be` emit** закрыт (`DEBT-S0` **done**). H3 mid-policy **зафлажена и cold-verified**. **H4 / H2 ослаблены**. **D1 phase2 CLOSED** (`3cefd64`). **`ideal_inh_proxy` intentional for SPEC** (E1.1d–g negative). **F3-R8 done** (Reset default off; BR OK / W01 silent unchanged).
+6. Controller SPEC tol обязан учитывать E1.5 FRAGILE; открытые блокеры: **CL-N1**, **F5**, **F1b senior**, тег **tl-baseline**, **`DEBT-CTRL-V2-DRAFT`**; KeepDone / новый Console cold — только по явному arm.
 
 ---
 *При достижении exit-clean большинства волн или смене отбора — опубликовать `SYNTHESIS_FINAL_*.ru.md` и пометить этот PARTIAL superseded. До тех пор FINAL остаётся blocked.*
