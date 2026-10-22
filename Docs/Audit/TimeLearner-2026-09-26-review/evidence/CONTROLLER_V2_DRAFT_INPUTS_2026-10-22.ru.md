@@ -1,26 +1,29 @@
 # Controller v2 — входы DRAFT (обогащение 2026-10-22)
 
-**Статус:** **DRAFT** (богаче каркаса [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)), **не** C++ SPEC и **не** задание на реализацию. Цель документа — связать новые evidence 2026-10-22 с машиной состояний v2 и зафиксировать открытые решения до `CONTROLLER_V2_SPEC_*.ru.md`.
+**Статус:** **DRAFT** (богаче каркаса [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)), **не** C++ SPEC и **не** задание на реализацию. Цель документа — связать evidence 2026-10-22 с машиной состояний v2 и зафиксировать открытые решения до `CONTROLLER_V2_SPEC_*.ru.md`. **`DEBT-CTRL-V2-DRAFT` остаётся open** до появления SPEC.
 
-**Запрет этого arm:** не трогать Console, не стартовать cold/matrix/bisect, не конкурировать с D1 W02 на PulseLib `3cefd64` (HOST_LIMIT busy).
+**Запрет этого arm:** не трогать Console, не стартовать cold/matrix/bisect, не G1 RERUN / F1b cold / KeepDone.
+
+**Refresh SHA якорей (root `timelearner_fix2`):** E1.4 `e9a0808c8` · E1.5 `f9e83bf8c` · E1.1d `da88a998c` · F3 `e02f7bcaa` (PulseLib `4b85c91`).
 
 ---
 
-## 1. Новые библиотеки физики (E1.0 / E1.1 / E1.1b / E1.1d / E1.4)
+## 1. Новые библиотеки физики (E1.0 / E1.1 / E1.1b / E1.1d / E1.4 / E1.5)
 
-Постановка: этап 4 контроллера опирается на измеренную/предсказанную задержку и амплитуду одиночного EPSP; scoped-проходы E1 закрыли **частичную** замену полной сетки плана без cold Train.
+Постановка: этап 4 контроллера опирается на измеренную/предсказанную задержку и амплитуду одиночного EPSP; scoped-проходы E1 закрыли **частичную** замену полной сетки плана без cold Train. После E1.5 критерий VERIFY обязан учитывать хрупкость острова PASS (~1–2% sep).
 
-| Библиотека | Вердикт | Что даёт v2 | Ссылки |
-|------------|---------|-------------|--------|
+| Библиотека | Вердикт | Что даёт v2 | Ссылки / SHA |
+|------------|---------|-------------|--------------|
 | **E1.0** cable vs Console | **PARTIAL** | Gen amp bias ≈ **÷1.067** (Console ниже model); AsymRm peak **не** совпадает с пассивом → нужен **oracle ×≈1.46**; timing/FWHM на якорях OK | [`E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md`](E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md) |
 | **E1.1** timing L=1…100 | **PARTIAL DONE** | δ ≈ **9.48** мс/сег (Gen), **9.96** мс/сег (AsymRm) — старт bracketed `LEN_SEARCH` | [`E1_1_TIMING_LIBRARY_2026-10-22.ru.md`](E1_1_TIMING_LIBRARY_2026-10-22.ru.md), TSV |
 | **E1.1b** amp Rs×N | **PARTIAL DONE** | γ(L)≈const по TipR; рычаг amp = **log Rs / N**; насыщение **N ≳ 16** (эффективно N≲8…16) | [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md), TSV |
-| **E1.1d** NextSegInh/PSI | **PARTIAL DONE** | single-pulse: PSI amp×~2.4 (FWHM≈pas); NextSeg ΔFWHM≈−9.5% @L=1, ≈pas @остров L=7 — **не** τ=0.5 мс; tol VERIFY после multi-pulse | [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md), TSV |
-| **E1.4** sep predictor | **PARTIAL DONE** (gate **6/6**) | офлайн `(tgt−max_foil)/tgt` по L/TipR/mod; gen→passive cable; nextseg/preinh→ideal τ=0.5 мс при sync CV≤0.25 (proxy остаётся до multi-pulse IR) | [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md), TSV |
+| **E1.1d** NextSegInh/PSI | **PARTIAL** (`da88a998c`) | single-pulse AsymRm: PSI amp×~2.4 (FWHM≈pas); NextSeg ΔFWHM≈−9.5% @L=1, ≈pas @остров L=7 — **не** τ=0.5 мс; **не заменяет** E1.4 `ideal_inh_proxy`; multi-pulse IR **PENDING** | [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md), TSV |
+| **E1.4** sep predictor | **PARTIAL** gate **6/6** (`e9a0808c8`) | офлайн `(tgt−max_foil)/tgt` по L/TipR/mod; gen→passive cable; nextseg/preinh→**`ideal_inh_proxy`** τ=0.5 мс при sync CV≤0.25; proxy остаётся до multi-pulse | [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md), TSV |
+| **E1.5** fragility | **PARTIAL / FRAGILE** (`f9e83bf8c`) | Test-only L±1 / TipR×0.8/×1.25: br25_nextseg **0/9** strict; tiprmin TipR **0/2**; baseline `sep_ltz` **~1–2%** — tol VERIFY ≥ L±1 и TipR±25% | [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md); `DEBT-E1.5-fragile-pass` |
 
-**Следствие для скелета:** шаг `LEN_SEARCH` стартует из C2 + δ(E1.1); шаг `AMP_ALIGN` — бисекция log Rs и N с потолком кратности ~16; калибровка peak — Gen×1.067 / AsymRm oracle, не «сырой» passive cable. VERIFY может сверять Train `sep_margin` с E1.4-предсказанием (tol SPEC после замены inh-proxy на **multi-pulse** NextSegInh/PSI ядра — single-pulse E1.1d недостаточен).
+**Следствие для скелета:** шаг `LEN_SEARCH` стартует из C2 + δ(E1.1); шаг `AMP_ALIGN` — бисекция log Rs и N с потолком кратности ~16; калибровка peak — Gen×1.067 / AsymRm oracle, не «сырой» passive cable. VERIFY может сверять Train `sep_margin` с E1.4-предсказанием, но **числовой tol SPEC** обязан учитывать E1.5 (остров ~1–2% sep; Done на граничном mid ложен) и **не** может опираться на замену inh-proxy single-pulse E1.1d (нужен multi-pulse).
 
-Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline); Train/Test — N/A или probe-шаблоны W01/W02/W11 (см. E1.0).
+Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline); Train/Test — N/A или probe-шаблоны W01/W02/W11 (см. E1.0). E1.5 якоря — Branch×N1 tiprmin/nextseg с явными Train/Test в evidence.
 
 ---
 
@@ -39,21 +42,25 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 
 ---
 
-## 3. D1 фаза 2 (контекст CL-N1, не финал)
+## 3. D1 фаза 2 + F3 Reset (контекст, не финал SPEC)
 
-На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span; числа tol — отдельно от CL-N1 stall (долг ещё open).
+**D1 / CL-N1.** На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span; числа tol — отдельно от CL-N1 stall (долг ещё open).
+
+**F3 / A5 (`e02f7bcaa`, PulseLib `4b85c91`).** Флаг `ResetNeuronBeforeTrainBurst` портирован на `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`), **CODE default off**; матричные defaults не трогали. **`DEBT-F3-R8` deferred** — cold A/B flag=0 vs 1 и R8 не этот arm. Исторический Need=0@flag=1 на `agent/tl-audit-f2-f3` не закрывает R8 на HEAD. Evidence: [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). Для скелета §5.3: Reset остаётся **опциональным** до R8; E1.3 показал, что пауза ≤5 с не заменяет Reset.
 
 ---
 
 ## 4. Открытые решения v2 (явный список)
 
-Эти пункты **блокируют** перевод DRAFT→SPEC (не блокируют дальнейшее обогащение docs):
+Эти пункты **блокируют** перевод DRAFT→SPEC (не блокируют дальнейшее обогащение docs). **`DEBT-CTRL-V2-DRAFT` notes refreshed** этим документом; **не закрывать** долг, пока нет `CONTROLLER_V2_SPEC_*.ru.md`.
 
-1. **`candidate_mid` на Test:** когда включать `UseCandidateMidOnNonSeparableTest` (только NonSeparable? всегда при finite candidate? never default-on до V-gate)? Default-off сохраняет G1 silent; cold PASS на flag=1 доказан, но production policy не выбрана.
-2. **TipR PostTune: KeepDone vs CanonRmin:** H2 **ослаблена** (overlay + KeepDone cold W33 после pin); `DEBT-17` done. SPEC не должен зафиксировать KeepDone(3) или Canon mode=1 как sole-fix silent thr=1.
-3. **`sep_margin` Train emit** — **CLOSED 2026-10-22** (больше не блокер emit-path): C++ пишет `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` в Train audit + `posttune_complete.flag` (`(tgt−max_foil)/tgt`); harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). Для SPEC остаётся выбрать **числовой tol** «запас ≥ предсказанный − 2 п.п.».
-4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (ниже) и cold; **`DEBT-F1b` OPEN**.
+1. **`candidate_mid` на Test (mid policy):** когда включать `UseCandidateMidOnNonSeparableTest` (только NonSeparable? всегда при finite candidate? never default-on до V-gate)? Default-off сохраняет G1 silent; cold PASS на flag=1 доказан, но **production policy ещё open**.
+2. **TipR PostTune: KeepDone vs CanonRmin:** H2 **по-прежнему ослаблена** (overlay + KeepDone cold W33 после pin); `DEBT-17` done. SPEC **не** должен зафиксировать KeepDone(3) или Canon mode=1 как sole-fix silent thr=1.
+3. **`sep_margin` / `amp_be` Train emit** — **CLOSED** (`DEBT-S0` done): C++ пишет `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` + `amp_be`/`done_be` в Train audit + `posttune_complete.flag`; harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). **Числовой tol** «запас ≥ предсказанный − …» для SPEC **ещё open** и **обязан учитывать E1.5**: baseline sep острова ~**1–2%**; tol не должен съедать весь запас (согласуется с E1.2 eps_amp≈1%·target). Ideal_inh proxy E1.4 даёт более широкий margin (~7%), чем Console peaks — не путать proxy-margin с Console `sep_ltz`.
+4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (§5) и cold; **`DEBT-F1b` OPEN**.
 5. **N0 при Span > 50 мс / 480 мс:** C2 T_max и E1.1 δ остаются; решение «чистый N0 vs N1+delay» — после согласования с D1/CL-N1 и этапом 6.
+6. **F3 Reset в train loop:** default-off CODE готов; включать ли Reset в v2 по умолчанию — после **`DEBT-F3-R8`** (deferred).
+7. **Замена `ideal_inh_proxy`:** single-pulse E1.1d **не** закрывает; multi-pulse NextSegInh/PSI IR **PENDING** (`DEBT-E1.1d`) — блокер точного VERIFY-tol для nextseg/preinh.
 
 ---
 
@@ -77,12 +84,14 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 
 | Артефакт / пробел | Нужно для SPEC |
 |-------------------|----------------|
-| Числовые tol Done / margin / residual_dt | Из exit-clean G1 + E1 cal, не из drv-only |
-| Default Test mid policy | Решение §4.1 |
+| Числовые tol Done / margin / residual_dt | Из exit-clean G1 + E1 cal + **E1.5 fragility (~1–2% sep; L±1 / TipR±25%)**, не из drv-only |
+| Default Test mid policy | Решение §4.1 — **ещё open** |
 | Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
 | Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
+| Inh-ядра для nextseg/preinh | multi-pulse IR (E1.1d PENDING); single-pulse **не** заменяет `ideal_inh_proxy` |
+| F3 Reset default в v2 | после R8 A/B (`DEBT-F3-R8` deferred); CODE default off |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |
 | D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); см. `D1_BISECT_2026-10-22` |
 
-См. также: скелет §7 [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md), PARTIAL [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) §Controller.
+См. также: скелет §5–§7 [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md), PARTIAL [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) §Controller, TECH_DEBT `DEBT-CTRL-V2-DRAFT` / `DEBT-E1.5-fragile-pass` / `DEBT-F3-R8`.

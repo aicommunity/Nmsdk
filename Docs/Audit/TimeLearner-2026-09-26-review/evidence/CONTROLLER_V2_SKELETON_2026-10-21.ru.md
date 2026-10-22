@@ -39,6 +39,8 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 - **F1a** (закрыт): офлайн-подтверждение, что пассивный кабель не даёт oracle-margin > 0; [`F1a`-отчёт в TECH_DEBT](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md).
 - **F1b** (OPEN, senior): Console-пилот `NAxoneDelay` — прототип «тонкой задержки» (п. 3 этапа 4); карточка [`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b + docs-ready checklist; **`DEBT-F1b` still open**.
 - **E1.0 / E1.1 / E1.1b** (PARTIAL): δ≈9.5–10 мс/сег, Gen amp×1.067, AsymRm oracle, N sat≳16 — см. DRAFT inputs §1.
+- **E1.1d / E1.4 / E1.5** (PARTIAL): single-pulse NextSeg/PSI **не** заменяет `ideal_inh_proxy`; sep predictor gate 6/6; PASS **FRAGILE** (sep~1–2%) — DRAFT inputs §1, §4.3/§4.7.
+- **F3** CODE default off (`ResetNeuronBeforeTrainBurst`); R8 deferred — DRAFT inputs §3.
 
 ---
 
@@ -71,13 +73,13 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 
 1. **N0 для span > 50 мс:** если C2/E1.4 подтверждают T_max ≈ 41 мс, нужен ли чистый N0 или только N1 + задержки (этап 6)?
 2. **Связь F5 (γ по TipR)** с шагом `AMP_ALIGN`: фиксированная γ из E1.1 vs online-коррекция — влияет на L\* или только на Rs?
-3. **Reset перед пачкой (F3)** и E1.3 релаксация: детерминированный Reset обязателен в v2 или опциональный режим с паузой?
+3. **Reset перед пачкой (F3)** и E1.3 релаксация: CODE default off на `timelearner_fix2` (`e02f7bcaa` / PulseLib `4b85c91`); пауза ≤5 с не заменяет Reset; обязателен ли Reset в v2 — после `DEBT-F3-R8`?
 4. **Verify vs реальный Test:** пока Test silent ([`DEBT-D2-silent-test`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md)), критерий «VERIFY pass» не может быть единственным gate качества.
 5. **F1b → v2:** если Console-пилот подтверждает margin ≥ модели, переносится ли `NAxoneDelay` в train loop или только в финальный verify?
 6. **480 мс:** запускать только если G1+C2 согласованы; иначе — аксонные задержки (этап 6 аудита).
 7. **Test mid policy (H3, 2026-10-22):** при NonSeparable / `candidate_mid` finite **не** оставлять `FixedLTZ=1` как единственный классификатор Test — иначе silent Acc 7/8 маскирует foil fires ([`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)). Решение v2: явный Verify vs Test threshold contract (best-effort mid / refuse silent-as-PASS).
 8. **sep_margin / TipR (H4, 2026-10-22):** flat CanonRmin на Classic×N0 W01 кладёт Pack A LTZ в полосу ~2–3×10⁻³ с target&lt;candidate_mid; E1.1b γ(L)≈const → равномерный TipR не чинит gap — Verify должен смотреть ranking/margin, а AMP_ALIGN — дифференциальный Rs/N ([`SILENT_TEST_H4_MARGIN_2026-10-22.ru.md`](SILENT_TEST_H4_MARGIN_2026-10-22.ru.md), [`CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md`](CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md)).
-9. **Явные решения до SPEC** (полный список — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §4): когда включать `candidate_mid` на Test; TipR KeepDone vs CanonRmin (H2 **ослаблена**, `DEBT-17` **done**); Train emit `sep_margin` (**DONE**, emit path закрыт — остаётся tol в SPEC).
+9. **Явные решения до SPEC** (полный список — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §4): mid policy ещё open; TipR KeepDone vs CanonRmin (H2 **ослаблена**, `DEBT-17` **done**); Train emit `sep_margin`/`amp_be` (**DONE**); **tol margin** обязан учесть E1.5 FRAGILE (~1–2% sep); `ideal_inh_proxy` не заменён E1.1d single-pulse.
 
 ---
 
