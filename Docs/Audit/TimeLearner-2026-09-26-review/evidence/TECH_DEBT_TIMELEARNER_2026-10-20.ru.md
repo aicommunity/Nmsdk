@@ -8,7 +8,7 @@
 
 **G1_S1_RERUN dual-host закрыт** (последняя волна W02 rep3, `launch.exit=1`). В отборе [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv) **13 волн**; **3/13** exit-clean (W01/W13/W33), **10/13** с последним `launch.exit` ∈ {1,2}. Политика: [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md) — `SYNTHESIS_FINAL` по полной матрице запрещён; разрешён PARTIAL rollup. Ниже — блокеры, которые остаются открытыми.
 
-**DEBT-D2-silent-test (variant A offline, 2026-10-22):** на bundle `G1.S1.W01-11-20261021T113257Z-15892` парный Test-gate: **`candidate_mid=0.0024126668029073456`** → `fires=01000101`, Acc 4/8, Цель нет; **cpp thr=1** → `fires=00000000`, Acc 7/8 (как G1 partial). **H3 подтверждена** (finite candidate даёт не-all-zero fires vs silent cpp); **H1** — только слабая форма (thr=1 маскирует partial fires), **target_hit=0** при обоих порогах (peak target &lt; candidate_mid). Детали — [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md); cold W01_N0 (variant B) **не** нужен, пока не идём в H2/H4.
+**DEBT-D2-silent-test (variant A offline + mid policy patch, 2026-10-22):** на bundle `G1.S1.W01-11-20261021T113257Z-15892` парный Test-gate: **`candidate_mid=0.0024126668029073456`** → `fires=01000101`, Acc 4/8, Цель нет; **cpp thr=1** → `fires=00000000`, Acc 7/8 (как G1 partial). **H3 подтверждена** offline; **код:** `UseCandidateMidOnNonSeparableTest` (default **off**) + `ApplyCandidateMidOnNonSeparableTest` в `FinalizePostTuneMid` (Classic+Branch) — [`MID_POLICY_H3_2026-10-22.ru.md`](MID_POLICY_H3_2026-10-22.ru.md). **H1** — слабая форма (thr=1 маскирует partial fires), **target_hit=0** при обоих порогах. Cold: **1×** W01 Test (или paired) с **flag=1** после сборки Console; при **flag=0** cold не обязателен. Variant B (KeepDone/TipR) — только при H2/H4.
 
 ## Обновление 2026-10-21 (docs-only)
 
@@ -72,4 +72,4 @@ DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (DEBT-D2 variant A offline mid sweep W01-15892).*
+*Последнее docs-обновление: 2026-10-22 (DEBT-D2 mid policy H3, UseCandidateMidOnNonSeparableTest).*
