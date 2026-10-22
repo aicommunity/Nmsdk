@@ -54,10 +54,10 @@
 
 ### Прочие открытые (без изменения статуса)
 
-- `DEBT-A0-ctest` — **recheck 2026-10-22** на HEAD `818fb0d3f` / PulseLib `a532db7`: снова **85/87**, те же 2 FAIL `BranchInvalidPeakNoRecoveryTest` (Rmin+timing-ok, счётчик no-action=0). Не flake; долг **open**. Тег `tl-baseline-20261020` на root **не** резали (нет валидного root-tag; HEAD ≠ `03c8cb9`/`d52dc1c`/`e7509263`) — [`A0_CTEST_2026-10-22.ru.md`](A0_CTEST_2026-10-22.ru.md).
+- `DEBT-A0-ctest` — **закрыт 2026-10-22**: TipR@Rmin early-BE не сбрасывает stall при `no_legal_recovery`; `PulseLib_StorageComponents` **87/87**. Тег `tl-baseline-20261020` на root по-прежнему не резали — [`A0_CTEST_2026-10-22.ru.md`](A0_CTEST_2026-10-22.ru.md).
 - `DEBT-H-A15b` — не подтверждён на E2 R8, но формально open до отдельного SoftCold-среза.
 - `DEBT-A3-trace-hang`, `DEBT-A1-preinh-silent`, `DEBT-G1-432` (полная 432-матрица v1/v2 — этап 5).
-- Закрытые: A15 inputs, cpu-gate, disk-200G, disk-freegib-root (разовый offload), matrix-prepare-wave, F1a-offline, F7 confirmed→F2.pref, **G1-exit-gate harness**.
+- Закрытые: A15 inputs, cpu-gate, disk-200G, disk-freegib-root (разовый offload), matrix-prepare-wave, F1a-offline, F7 confirmed→F2.pref, **G1-exit-gate harness**, **A0-ctest** (87/87).
 
 ---
 
@@ -65,7 +65,7 @@
 
 ```tsv
 debt_id	opened_utc	stage_id	source	item_ref	priority	blocker_for	status	owner_arm	notes	closed_utc	fix_run_id
-DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	open	.11	HEAD 818fb0d3f 85/87 same 2 Rmin; A0_CTEST_2026-10-22; tl-baseline root tag blocker		
+DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	done	.11	Rmin BE skip when no_legal_recovery; StorageComponents 87/87	2026-10-22T15:13Z	A0_CTEST_FIX
 DEBT-cpu-gate-pgrep	2026-10-20T13:48Z	R2	companion	cpu_gate false positive	P1	D1	done	.11	pattern fixed	2026-10-20T13:48Z	local
 DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired 98ac830d	2026-10-20T14:05Z	98ac830d
 DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 EQUIVALENT — не подтверждён на R8; см. E2_R8_SYNTHESIS		
