@@ -28,7 +28,7 @@
 
 **F1b senior (`DEBT-F1b`) — still OPEN.** Console-пилот «быстрый EPSP + NAxoneDelay» не стартовал; docs-ready checklist добавлен в карточку ([`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b) и в [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §5 — cold только после senior approve. F1a офлайн закрыт (DEBT-F1a-offline done). F1b питает этап 4 Controller v2 ([`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)).
 
-**Controller DRAFT refresh (2026-10-22, post-W3on / E0):** sibling входы E1.0–E1.5 / H* / D1 / **W3on MaxL≠fix** / F3-R8 A/B done / Bin E0 `bf3e82ffe` / open decisions (incl. `infeasible_len`) — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md); next CL-N1 hyp — [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md). Train `sep_margin` / `amp_be` emit **закрыт**, `DEBT-S0` done ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); **`DEBT-CTRL-V2-DRAFT` остаётся open** до SPEC (**SPEC blocked**; tol с учётом E1.5 ~1–2% sep; mid policy; TipR KeepDone weakened; **`ideal_inh_proxy` intentional for SPEC** — E1.1d/e/f offline + E1.1g Console FWHM~29–31 мс ≫ 2.1, `DEBT-E1.1f` partial-wontfix-offline).
+**Controller DRAFT refresh (2026-10-22, post-H1 Span100):** sibling входы E1.0–E1.5 / H* / D1 / W3on MaxL≠fix / **H1 Span100 `converged_need0`** / F3-R8 A/B done / Bin `e49a52bf` / open decisions — **`LEN_SEARCH` разводит Span480 TipR@Rmax stall vs shorter Need=0+silent-Test** — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md); CL-N1 hyp — H1 **executed**, focus H2/480 — [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md). Train `sep_margin` / `amp_be` emit **закрыт**, `DEBT-S0` done ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); **`DEBT-CTRL-V2-DRAFT` остаётся open** до SPEC (**SPEC blocked**; tol с учётом E1.5 ~1–2% sep; mid policy; TipR KeepDone weakened; **`ideal_inh_proxy` intentional for SPEC** — E1.1d/e/f offline + E1.1g Console FWHM~29–31 мс ≫ 2.1, `DEBT-E1.1f` partial-wontfix-offline).
 
 ### P0 infra — G1 exit-gate и диск
 
@@ -78,7 +78,7 @@ DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	
 DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH margins	2026-10-20T15:45Z	F1a_20261020
 DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	docs-ready checklist; DEBT-F1b still open; no cold		
 DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	done	stage0	S0_CPP_EMIT_2026-10-22; amp_be+done_be OR; PulseLib 4e3714a	2026-10-22T12:40Z	4e3714a
-DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller DRAFT refresh	P1	SPEC	open	docs	notes refreshed post-W3on/E0/F3-R8; SPEC blocked; keep open until SPEC		
+DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller DRAFT refresh	P1	SPEC	open	docs	post-H1: LEN_SEARCH split 480 TipR@Rmax vs shorter Need0+silent; SPEC blocked		
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog→.17 Data	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	kill after stall		
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH		
