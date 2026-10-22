@@ -42,6 +42,8 @@
 
 **E1.2 repeatability PARTIAL** (AsymRm L=10 @ TipR=8.6e7, Console `4a0658f3…`): reset×20 **σ_amp=σ_lat=0** (bit-identical); noreset arm усечён (`MaxSpikesPerFeature=4`, trace≈13.5 с) → 4 valid EPSP, settled bias ≈**−28%** vs reset (A5/F3, не раздувать F4). Предложение F4: **eps_amp=1%·target**, **latency_tol=1/f** — [`E1_2_REPEATABILITY_2026-10-22.ru.md`](E1_2_REPEATABILITY_2026-10-22.ru.md). DEBT-C1 на L=10 не мешал.
 
+**F3 Reset-before-pack CODE** (2026-10-22): `ResetNeuronBeforeTrainBurst` default **off** на PulseLib `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`); Console `9540e64b7813ee2e…` — [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). **DEBT-F3-R8:** cold A/B flag=0 vs 1 и R8 **deferred** (матричные defaults не трогали). Исторический cold Need=0 при flag=1 был на `agent/tl-audit-f2-f3`@`0ad009a` ([`F2_F3_COLD_2026-10-20.ru.md`](F2_F3_COLD_2026-10-20.ru.md)) — не считать закрытым R8 на HEAD без повторного arm.
+
 ### Прочие открытые (без изменения статуса)
 
 - `DEBT-H-A15b` — не подтверждён на E2 R8, но формально open до отдельного SoftCold-среза.
@@ -79,8 +81,9 @@ DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	
 DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR no PASS on W01 N1	P1	F8 chain/R3	open	F5	paired 2026-10-22 γ=0≡γ=1; F5_GAMMA_PAIRED		
 DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	done	drv	wait_run+run_series propagate; DEBT_G1_EXIT_GATE_FIX_2026-10-22	2026-10-22T06:30Z	harness
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
+DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	open	F3	CODE timelearner_fix2 default off; Console 9540e64b…; R8 deferred; F3_RESET_BEFORE_PACK_2026-10-22		
 ```
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (H2 KeepDone retry T104632Z — H2 weakened TipR-mode; DEBT-17 pin confirmed; DEBT-D2 partial).*
+*Последнее docs-обновление: 2026-10-22 (F3 ResetNeuronBeforeTrainBurst CODE on timelearner_fix2; DEBT-F3-R8 open; E1.3→F3).*
