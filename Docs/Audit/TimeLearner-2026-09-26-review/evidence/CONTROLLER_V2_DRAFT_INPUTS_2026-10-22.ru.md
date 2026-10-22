@@ -31,7 +31,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | **H3** mid-policy | Flag `UseCandidateMidOnNonSeparableTest` **default-off**; cold **PASS** (flag=1 → fires=`01000101`) | Явный Test-threshold contract: при NonSeparable не оставлять только `FixedLTZ=1` | [`MID_POLICY_H3_COLD_2026-10-22.ru.md`](MID_POLICY_H3_COLD_2026-10-22.ru.md) |
 | **H1** / **H1-weak** | Strong fail (target_hit=0 при candidate_mid); weak: thr=1 маскирует foil fires; W13/W33 replicate | VERIFY ≠ «silent Acc 7/8 = PASS»; ranking/margin обязателен | [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md), [`SILENT_TEST_W13_W33_MID_2026-10-22.ru.md`](SILENT_TEST_W13_W33_MID_2026-10-22.ru.md) |
 | **H4** sep_margin | **Ослаблена** как sole-cause flat CanonRmin | AMP_ALIGN дифференциальный Rs/N; Verify смотрит sep_margin | [`SILENT_TEST_H4_MARGIN_2026-10-22.ru.md`](SILENT_TEST_H4_MARGIN_2026-10-22.ru.md) |
-| **H2** KeepDone vs CanonRmin | **Still inconclusive** (KeepDone W33 abort + TipR overlay `.17` fires=null/`rc=-6`) | Не фиксировать default TipR mode в SPEC; долг **`DEBT-17-console-glog`**, не physics | [`SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md`](SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md), [`SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md`](SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md) |
+| **H2** KeepDone vs CanonRmin | **Ослаблена** (TipR overlay thr=1 silent; KeepDone W33 после pin: TipR flat `86M×4`, Need=1, SKIP_GATE; `DEBT-17` done) | Не фиксировать KeepDone(3) / mode=1 как «чинит silent thr=1» в SPEC | [`SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md`](SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md), [`SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md`](SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md) |
 
 Краткая связка: [`CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md`](CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md).
 
@@ -39,7 +39,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 
 ## 3. D1 фаза 2 (контекст CL-N1, не финал)
 
-На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) поиск первого L₀=54: границы **lo=`5308aa5` … hi=`2bb72a3`**, текущий midpoint **`3cefd64` in flight** — **не** объявлять финальный SHA регрессии. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span, но числа tol — после закрытия D1.
+На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span; числа tol — отдельно от CL-N1 stall (долг ещё open).
 
 ---
 
@@ -48,7 +48,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 Эти пункты **блокируют** перевод DRAFT→SPEC (не блокируют дальнейшее обогащение docs):
 
 1. **`candidate_mid` на Test:** когда включать `UseCandidateMidOnNonSeparableTest` (только NonSeparable? всегда при finite candidate? never default-on до V-gate)? Default-off сохраняет G1 silent; cold PASS на flag=1 доказан, но production policy не выбрана.
-2. **TipR PostTune: KeepDone vs CanonRmin:** H2 inconclusive (`DEBT-17-console-glog`); SPEC не должен зафиксировать mode=1 как «безопасно» без повторного измерения fires на known-good Console.
+2. **TipR PostTune: KeepDone vs CanonRmin:** H2 **ослаблена** (overlay + KeepDone cold W33 после pin); `DEBT-17` done. SPEC не должен зафиксировать KeepDone(3) или Canon mode=1 как sole-fix silent thr=1.
 3. **`sep_margin` Train emit (`DEBT-S0-cpp-fields` gap):** residue/Done_BE уже частичны; **sep_margin на Train всё ещё gate-only** — без C++ emit Verify/rollup v2 не сможет закрыть ворота «запас ≥ предсказанный − 2 п.п.» из offline-таблиц без повторного Test-gate.
 4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (ниже) и cold; **`DEBT-F1b` OPEN**.
 5. **N0 при Span > 50 мс / 480 мс:** C2 T_max и E1.1 δ остаются; решение «чистый N0 vs N1+delay» — после согласования с D1/CL-N1 и этапом 6.
