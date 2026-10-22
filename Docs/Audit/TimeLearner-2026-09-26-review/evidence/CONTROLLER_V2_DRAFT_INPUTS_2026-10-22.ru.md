@@ -1,10 +1,10 @@
 # Controller v2 — входы DRAFT (обогащение 2026-10-22)
 
-**Статус:** **DRAFT** (богаче каркаса [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)), **не** C++ SPEC и **не** задание на реализацию. Цель документа — связать evidence 2026-10-22 с машиной состояний v2 и зафиксировать открытые решения до `CONTROLLER_V2_SPEC_*.ru.md`. **`DEBT-CTRL-V2-DRAFT` остаётся open** до появления SPEC.
+**Статус:** **DRAFT** (богаче каркаса [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)), **не** C++ SPEC и **не** задание на реализацию. Цель документа — связать evidence 2026-10-22 с машиной состояний v2 и зафиксировать открытые решения до `CONTROLLER_V2_SPEC_*.ru.md`. **`DEBT-CTRL-V2-DRAFT` остаётся open** до появления SPEC. **SPEC по-прежнему blocked.**
 
 **Запрет этого arm:** не трогать Console, не стартовать cold/matrix/bisect, не G1 RERUN / F1b cold / KeepDone.
 
-**Refresh SHA якорей (root `timelearner_fix2`):** E1.4 `e9a0808c8` · E1.5 `f9e83bf8c` · E1.1d `da88a998c` · E1.1e `2adf0cd35` · E1.1f offline Pack-A · **E1.1g Console Branch IR** (этот turn; proxy **не** retired) · F3 `e02f7bcaa` (PulseLib `4b85c91`) · CL-N1 HEAD ablations `6245a0c09` (PulseLib F6/F7 tip `a532db7`, defaults historical). Сводка кампании — [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) (**FINAL blocked**; `DEBT-CL-N1` open).
+**Refresh SHA якорей (root `timelearner_fix2`, docs follow-up post-W3on):** E1.4 `e9a0808c8` · E1.5 `f9e83bf8c` · E1.1d `da88a998c` · E1.1e `2adf0cd35` · E1.1f offline Pack-A · E1.1g Console Branch IR (proxy **не** retired) · F3 CODE `e02f7bcaa` / **F3-R8 A/B `0755c31ca`** (PulseLib `3a599a7`) · CL-N1 HEAD ablations `6245a0c09` · **CL-N1 W3on** [`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md) · next hyp [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md). **Bin tip `bf3e82ffe`:** E0 `--train-param` whitelist на `timelearner_fix2` (ResetNeuron, EnableRmaxLengthEscape, …) — overlays attempt-local без патча `matrix.json`. Сводка — [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) (**FINAL blocked**; `DEBT-CL-N1` open).
 
 ---
 
@@ -45,25 +45,28 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 
 ---
 
-## 3. D1 фаза 2 + F3 Reset (контекст, не финал SPEC)
+## 3. D1 фаза 2 + CL-N1 W3on + F3 Reset (контекст, не финал SPEC)
 
-**D1 / CL-N1.** На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). **HEAD stage-2 ablations (`6245a0c09`):** base+(a–e) — **6/6** `not_converged_at_stop` (Need=1, L≈`53–54 44 1 1`); ни Rmin-floor / midband-off / tol×1 / γ-fixed / Reset **не** sole-fix — [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span; числа tol — отдельно от CL-N1 stall (**`DEBT-CL-N1` open**).
+**D1 / CL-N1.** На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). **HEAD stage-2 ablations (`6245a0c09`):** base+(a–e) — **6/6** `not_converged_at_stop` (Need=1, L≈`53–54 44 1 1`); ни Rmin-floor / midband-off / tol×1 / γ-fixed / Reset **не** sole-fix — [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md).
 
-**F3 / A5 (`e02f7bcaa`, PulseLib `4b85c91` + tip `3a599a7`).** Флаг `ResetNeuronBeforeTrainBurst` портирован на `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`), **CODE default off**; матричные defaults не трогали. **`DEBT-F3-R8` done** — cold A/B flag=0 vs 1: Branch `br25_nextseg` без регрессии при flag=1; W01 Classic silent без изменения — [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md). Для скелета §5.3: Reset остаётся **опциональным** (default off); E1.3 показал, что пауза ≤5 с не заменяет Reset.
+**W3on Arm A (2026-10-22, MaxL ≠ fix):** overlay `EnableRmaxLengthEscape=1` на том же W02 → L=`100 58 1 1` (MaxL escape), Need=1, `not_converged_at_stop` — RUN `CLN1.W3on-11-20261022T163105Z-19730` — [`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md). Phenotype stall→MaxL **да**; критерий **fix / SoftCold — нет**. Train/Test: [`W02_CL480_N1_PSIoff/{Train,Test}`](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/W02/inputs/W02_CL480_N1_PSIoff/Train). Для v2: `infeasible_len` / MaxL-hold и bounded stall@Rmax (W3=off) — кандидаты acceptance ([`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) H2); числа tol — отдельно (**`DEBT-CL-N1` open**). W3 **не** default SoftCold.
+
+**F3 / A5 + R8 A/B (`e02f7bcaa` / `0755c31ca`, PulseLib `3a599a7`).** Флаг `ResetNeuronBeforeTrainBurst` портирован на `timelearner_fix2` (Classic+Branch), **CODE default off**; матричные defaults не трогали. **`DEBT-F3-R8` done** — cold A/B flag=0≡1: Branch `br25_nextseg` Acc 8/8 / Цель да **без регрессии** при flag=1; Classic W01 Need=0 + silent 7/8 **без изменения** — [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md). Вердикт: Reset **безопасен** на BR island и **noop** на W01 silent; включать в v2 default — продуктовый выбор (рекомендация: opt-in). E1.3: пауза ≤5 с не заменяет Reset. Bin E0 tip `bf3e82ffe` делает `--train-param` для Reset/W3 доступным на tip без lane-скриптов.
 
 ---
 
-## 4. Открытые решения v2 (явный список)
+## 4. Открытые решения v2 (явный список, актуально post-W3on / E0)
 
-Эти пункты **блокируют** перевод DRAFT→SPEC (не блокируют дальнейшее обогащение docs). **`DEBT-CTRL-V2-DRAFT` notes refreshed** этим документом; **не закрывать** долг, пока нет `CONTROLLER_V2_SPEC_*.ru.md`.
+Эти пункты **блокируют** перевод DRAFT→SPEC (не блокируют дальнейшее обогащение docs). **`DEBT-CTRL-V2-DRAFT` notes refreshed** этим документом; **не закрывать** долг, пока нет `CONTROLLER_V2_SPEC_*.ru.md`. **SPEC blocked.**
 
 1. **`candidate_mid` на Test (mid policy):** когда включать `UseCandidateMidOnNonSeparableTest` (только NonSeparable? всегда при finite candidate? never default-on до V-gate)? Default-off сохраняет G1 silent; cold PASS на flag=1 доказан, но **production policy ещё open**.
-2. **TipR PostTune: KeepDone vs CanonRmin:** H2 **по-прежнему ослаблена** (overlay + KeepDone cold W33 после pin); `DEBT-17` done. SPEC **не** должен зафиксировать KeepDone(3) или Canon mode=1 как sole-fix silent thr=1.
+2. **TipR PostTune: KeepDone vs CanonRmin:** H2 **по-прежнему ослаблена** (overlay + KeepDone cold W33 после pin); `DEBT-17` done. SPEC **не** должен зафиксировать KeepDone(3) или Canon mode=1 как sole-fix silent thr=1. KeepDone cold **не** стартовать из DRAFT.
 3. **`sep_margin` / `amp_be` Train emit** — **CLOSED** (`DEBT-S0` done): C++ пишет `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` + `amp_be`/`done_be` в Train audit + `posttune_complete.flag`; harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). **Числовой tol** «запас ≥ предсказанный − …» для SPEC **ещё open** и **обязан учитывать E1.5**: baseline sep острова ~**1–2%**; tol не должен съедать весь запас (согласуется с E1.2 eps_amp≈1%·target). Ideal_inh proxy E1.4 даёт более широкий margin (~7%), чем Console peaks — не путать proxy-margin с Console `sep_ltz`.
-4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (§5) и cold; **`DEBT-F1b` OPEN**.
-5. **N0 при Span > 50 мс / 480 мс:** C2 T_max и E1.1 δ остаются; решение «чистый N0 vs N1+delay» — после согласования с D1/CL-N1 и этапом 6.
-6. **F3 Reset в train loop:** default-off CODE готов; A/B **`DEBT-F3-R8` done** (BR island OK / W01 silent unchanged) — включать ли Reset в v2 по умолчанию остаётся продуктовым выбором (рекомендация: оставить opt-in).
+4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (§5) и cold; **`DEBT-F1b` OPEN** (senior blocked).
+5. **N0 / N1 на Span > 50 мс и 480 мс + `LEN_SEARCH` / `infeasible_len`:** C2 T_max и E1.1 δ остаются; W3on показал MaxL≠fix на Classic×N1 Span480 — acceptance MaxL-hold vs bounded stall (W3=off) ещё **open** ([`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) H2). Решение «чистый N0 vs N1+delay» — после согласования с CL-N1 и этапом 6; multifactor cold на Span≠480 — только по явному arm (H1).
+6. **F3 Reset в train loop:** A/B **`DEBT-F3-R8` done** (BR island OK / W01 silent unchanged) — включать ли Reset в v2 по умолчанию остаётся продуктовым выбором (рекомендация: **opt-in** / CODE default off).
 7. **`ideal_inh_proxy` intentional for SPEC (закрыто как измеренная замена):** E1.1d/e/f offline **и** E1.1g Console Branch IR (FWHM **28.8–30.9 мс** ≫ 2.1; sep_soma **≈−0.015**) — **retire=NO**; `DEBT-E1.1f` **partial-wontfix-offline**. SPEC nextseg/preinh держит τ=0.5 мс phenomenological; VERIFY-tol **не** из E1.1d–g FWHM/sep.
+8. **W3 / `EnableRmaxLengthEscape`:** diagnostic opt-in (E0 whitelist на Bin tip); **не** SoftCold default; не sole-fix CL-N1.
 
 ---
 
@@ -93,8 +96,10 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
 | Inh-ядра для nextseg/preinh | E1.1d/e/f offline + E1.1g Console **negative**; **`ideal_inh_proxy` intentional for SPEC** (`DEBT-E1.1f` partial-wontfix-offline) |
 | F3 Reset default в v2 | A/B done (`DEBT-F3-R8`); CODE default off; opt-in recommended |
+| `LEN_SEARCH` / `infeasible_len` acceptance | W3on MaxL≠fix; draft H2 в `CL_N1_NEXT_HYPOTHESIS_2026-10-22` — ещё open |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
-| F1b cold результат | Senior + PASS×3 margin |
-| D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); см. `D1_BISECT_2026-10-22` |
+| F1b cold результат | Senior blocked + PASS×3 margin |
+| D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); HEAD W3on MaxL `100 58 1 1` Need=1 |
+| Bin E0 `--train-param` | tip `bf3e82ffe` landed — harness ready for future overlays |
 
-См. также: скелет §5–§7 [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md), PARTIAL [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) §Controller, TECH_DEBT `DEBT-CTRL-V2-DRAFT` / `DEBT-E1.5-fragile-pass` / `DEBT-F3-R8`.
+См. также: скелет §5–§7 [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md), PARTIAL [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) §6–§7, TECH_DEBT `DEBT-CTRL-V2-DRAFT` / `DEBT-CL-N1` / `DEBT-E1.5-fragile-pass` / `DEBT-F3-R8`.
