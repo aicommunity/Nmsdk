@@ -91,7 +91,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Default Test mid policy | Решение §4.1 — **ещё open** |
 | Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
 | Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
-| Inh-ядра для nextseg/preinh | E1.1d/e/**f** offline **negative**; proxy intentional до Console Branch IR / SPEC |
+| Inh-ядра для nextseg/preinh | E1.1d/e/f offline + E1.1g Console **negative**; **`ideal_inh_proxy` intentional for SPEC** (`DEBT-E1.1f` partial-wontfix-offline) |
 | F3 Reset default в v2 | после R8 A/B (`DEBT-F3-R8` deferred); CODE default off |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |
