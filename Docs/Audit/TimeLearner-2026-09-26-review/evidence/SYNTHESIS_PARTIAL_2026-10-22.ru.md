@@ -14,11 +14,11 @@
 | A1 / A3 / B2 / C1 / C2_MATCH | закрыты или MATCH по evidence R/E1 |
 | E2 R8 | EQUIVALENT — [`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md) |
 | G1 exit-clean полная матрица | **не** пройдена: **3/13** волн `launch.exit=0` после RERUN |
-| TECH_DEBT P0 | silent-Test, CL-N1, S0 C++ fields, G1-exit-gate — open ([`TECH_DEBT_TIMELEARNER_2026-10-20.ru.md`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md)) |
+| TECH_DEBT P0 | silent-Test (H3 confirmed offline — [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)); CL-N1; S0 **partial**; G1-exit-gate **done** |
 
 ## 2. Trainer×Mode — системные выводы
 
-**Classic×N0.** На Span 50 exit-clean волны **W01** (PostTune OFF) и **W33** (PostTune ON) стабильно сходятся Train (`converged_need0` / `converged_posttune_finalized`), но Test даёт **silent Acc=7/8, Цель=нет** на всех трёх rep ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md)). Это совпадает с DEBT-D2-silent-test и с E2: silent не различает S0/S1/S2. Span 100/480 (**W02**, **W31**) после RERUN остаются `launch_exit=1` с `not_converged_at_stop` — метрики Test в partial **не** зачисляются.
+**Classic×N0.** На Span 50 exit-clean волны **W01** (PostTune OFF) и **W33** (PostTune ON) стабильно сходятся Train (`converged_need0` / `converged_posttune_finalized`), но Test даёт **silent Acc=7/8, Цель=нет** на всех трёх rep ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md)). Offline mid-sweep на W01-15892 ([`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)): при `candidate_mid≈0.00241` fires=`01000101` (Acc 4/8), при thr=1 — silent 7/8; **H3 подтверждена** (штатный путь маскирует soma-fire thr=1), сильный H1 (target_hit при candidate) **нет** (peak target &lt; candidate_mid). Span 100/480 (**W02**, **W31**) после RERUN — `launch_exit=1`.
 
 **Classic×N1.** **W13** (HIST ltz50 gen) — единственная exit-clean N1-волна; та же silent 7/8 без цели. **W09** / **W12** / pack-волна **W37** после RERUN — `launch_exit=1`, доли PASS по ним в кампанию не входят. CL-N1 stall на длинных span (семейство W02 N1 в E2) остаётся открытым DEBT.
 
@@ -52,7 +52,7 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 
 1. Починить или явно жить с **DEBT-G1-exit-gate** в `run_series.sh` (читать значение `launch.exit`).
 2. **F5** — paired W01 N1 выполнен; следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
-3. Алгоритм: **silent-Test** / mid / CL-N1 — без этого G1 не наберёт exit-clean большинство.
+3. Алгоритм: политика mid на Test (не оставлять thr=1 при finite `candidate_mid` / landscape NonSeparable) — H3; отдельно CL-N1 и margin target&lt;candidate (H1/H4).
 4. Не стартовать повторный RERUN тех же 10 волн на том же SHA.
 
 ---

@@ -74,6 +74,7 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 4. **Verify vs реальный Test:** пока Test silent ([`DEBT-D2-silent-test`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md)), критерий «VERIFY pass» не может быть единственным gate качества.
 5. **F1b → v2:** если Console-пилот подтверждает margin ≥ модели, переносится ли `NAxoneDelay` в train loop или только в финальный verify?
 6. **480 мс:** запускать только если G1+C2 согласованы; иначе — аксонные задержки (этап 6 аудита).
+7. **Test mid policy (H3, 2026-10-22):** при NonSeparable / `candidate_mid` finite **не** оставлять `FixedLTZ=1` как единственный классификатор Test — иначе silent Acc 7/8 маскирует foil fires ([`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)). Решение v2: явный Verify vs Test threshold contract (best-effort mid / refuse silent-as-PASS).
 
 ---
 
