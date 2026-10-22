@@ -22,7 +22,7 @@
 
 ### P1 — фиксы и пилоты
 
-**F5 OPEN (`DEBT-F5-gamma`).** Патч `CorrectAttenuationGammaForTipR` на PulseLib `6d746ac` (default off); один cold W01 с флагом=1 ([`F5_GAMMA_COLD_2026-10-21.ru.md`](F5_GAMMA_COLD_2026-10-21.ru.md)) не закрывает A7: Need=0 при silent/quality_fail, paired сравнение γ vs baseline S1 на том же case **не** завершено ([`R3_FIX_QUEUE_2026-10-20.ru.md`](R3_FIX_QUEUE_2026-10-20.ru.md), [`REGRESSION_AND_CONTAMINATION_LEDGER_2026-10-20.ru.md`](REGRESSION_AND_CONTAMINATION_LEDGER_2026-10-20.ru.md) A7).
+**F5 OPEN (`DEBT-F5-gamma`).** Патч `CorrectAttenuationGammaForTipR` на PulseLib `6d746ac` (default off). One-shot γ=1 ([`F5_GAMMA_COLD_2026-10-21.ru.md`](F5_GAMMA_COLD_2026-10-21.ru.md)) и **paired** γ=0 vs γ=1 на `W01_CL50_N1_PSIoff` ([`F5_GAMMA_PAIRED_2026-10-22.ru.md`](F5_GAMMA_PAIRED_2026-10-22.ru.md), `launch.exit=0` обоих) **не** закрывают A7: Need=0, бит-в-бит одинаковые TipR/L/mid/fires, silent Test `quality_fail`. Paired baseline на том же case **завершён**; PASS по фиксу **нет** ([`R3_FIX_QUEUE_2026-10-20.ru.md`](R3_FIX_QUEUE_2026-10-20.ru.md) A7).
 
 **F1b senior (`DEBT-F1b`).** Console-пилот «быстрый EPSP + NAxoneDelay» не стартовал: нужен новый тип конфигурации, DefaultTimeStep ≥ 20 kHz, senior ([`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md)). F1a офлайн закрыт (DEBT-F1a-offline done). F1b питает этап 4 Controller v2 ([`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)).
 
@@ -63,11 +63,11 @@ DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test
 DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-N1	open	D2b	L=54 44 1 1; E2 all arms		
 DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2 soft-cold	done	.17	lanes offload 2026-10-20	2026-10-20T20:17Z	lanes-offload
 DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	P0	E2 R8	done	Bin	case-ids only 774704fc	2026-10-20T20:24Z	774704fc
-DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR cold incomplete	P1	F8 chain/R3	open	F5	patch default off; F5_GAMMA_COLD W01 one-shot		
+DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR no PASS on W01 N1	P1	F8 chain/R3	open	F5	paired 2026-10-22 γ=0≡γ=1; F5_GAMMA_PAIRED		
 DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series ignores launch.exit≠0	P0	G1 SYNTH	open	drv	post-RERUN 10/13 exit≠0; G1_S1_RERUN_EXIT_STATUS 2026-10-22		
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
 ```
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (G1 RERUN complete + PARTIAL exit policy, без нового Console cold).*
+*Последнее docs-обновление: 2026-10-22 (G1 RERUN complete + F5 paired γ cold на W01_CL50_N1).*
