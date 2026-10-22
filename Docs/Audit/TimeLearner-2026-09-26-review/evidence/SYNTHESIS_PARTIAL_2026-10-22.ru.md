@@ -11,6 +11,7 @@
 | Цепочка | SHA / tip | Evidence |
 |---------|-----------|----------|
 | CL-N1 HEAD stage-2 ablations | `6245a0c09` | [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md) — **6/6** `not_converged_at_stop` |
+| CL-N1 next arm W3on (`3cefd64` hyp) | docs + cold `CLN1.W3on-…19730` | [`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md) — MaxL `100 58 1 1`, **not** converged |
 | PulseLib F6/F7 diagnostic flags | tip `a532db7` | opt-in Classic UProperty; **defaults = historical** (off / tol×4) |
 | E1.4 sep predictor | `e9a0808c8` | gate **6/6** PARTIAL |
 | E1.5 fragility | `f9e83bf8c` | **FRAGILE** PARTIAL |
@@ -37,6 +38,7 @@ G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 
 | E2 R8 | EQUIVALENT — [`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md) |
 | G1 exit-clean полная матрица | **не** пройдена: **3/13** волн `launch.exit=0` после RERUN |
 | CL-N1 HEAD ablations (§этап 2) | **6/6 stall** — DEBT-CL-N1 **open** — [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md) |
+| CL-N1 W3on Arm A | MaxL phenotype **да**, Need=0 **нет** — [`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md) |
 | F3 ResetNeuronBeforeTrainBurst | **CODE** default off; cold R8 A/B **done** (`0755c31ca`) — BR PASS no regress; W01 silent 0≡1 |
 | Controller v2 DRAFT inputs | notes refreshed; **не** SPEC — `DEBT-CTRL-V2-DRAFT` open |
 | TECH_DEBT P0 | silent-Test (H3 confirmed offline); **CL-N1 open** (stall not fixed); S0 **done**; G1-exit-gate **done** |
@@ -45,7 +47,7 @@ G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 
 
 **Classic×N0.** На Span 50 exit-clean волны **W01** (PostTune OFF) и **W33** (PostTune ON) стабильно сходятся Train (`converged_need0` / `converged_posttune_finalized`), но Test даёт **silent Acc=7/8, Цель=нет** на всех трёх rep ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md)). Offline mid-sweep на W01-15892 ([`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)): при `candidate_mid≈0.00241` fires=`01000101` (Acc 4/8), при thr=1 — silent 7/8; **H3 подтверждена** (штатный путь маскирует soma-fire thr=1), сильный H1 (target_hit при candidate) **нет** (peak target &lt; candidate_mid). Span 100/480 (**W02**, **W31**) после RERUN — `launch_exit=1`.
 
-**Classic×N1.** **W13** (HIST ltz50 gen) — единственная exit-clean N1-волна; та же silent 7/8 без цели. **W09** / **W12** / pack-волна **W37** после RERUN — `launch_exit=1`, доли PASS по ним в кампанию не входят. На Span **480** (`W02_CL480_N1_PSIoff`) фенотип stall **подтверждён на HEAD**: D1 phase2 CLOSED (первый L₀≥54 = `3cefd64`); stage-2 однофакторные абляции base+(a–e) — **все 6/6** `not_converged_at_stop`, Need=1, L≈`53–54 44 1 1`, TipR `1e10×2+86M×2` ([`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md)). Ни Rmin-floor, ни midband-off, ни tol×1, ни γ-fixed, ни Reset-before-burst **не** sole-fix. **`DEBT-CL-N1` остаётся open.**
+**Classic×N1.** **W13** (HIST ltz50 gen) — единственная exit-clean N1-волна; та же silent 7/8 без цели. **W09** / **W12** / pack-волна **W37** после RERUN — `launch_exit=1`, доли PASS по ним в кампанию не входят. На Span **480** (`W02_CL480_N1_PSIoff`) фенотип stall **подтверждён на HEAD**: D1 phase2 CLOSED (первый L₀≥54 = `3cefd64`); stage-2 однофакторные абляции base+(a–e) — **все 6/6** `not_converged_at_stop`, Need=1, L≈`53–54 44 1 1`, TipR `1e10×2+86M×2` ([`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md)). Ни Rmin-floor, ни midband-off, ни tol×1, ни γ-fixed, ни Reset-before-burst **не** sole-fix. **Next arm W3on** (`EnableRmaxLengthEscape=1`, RUN `CLN1.W3on-…19730`): L сменился на **MaxL** `100 58 1 1` (как D1 @ `3cefd64`), Need=1 / `not_converged_at_stop` — гейт W3 после `a15f4eb` объясняет stall vs MaxL, но W3 **не** SoftCold-фикс ([`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md)). **`DEBT-CL-N1` остаётся open.**
 
 **Branch×N0 / Branch×N1.** Ни одна Branch-волна отбора не стала exit-clean после RERUN. **W04** — единственная с `launch_exit=2`; остальные Branch HIST / FastSpan (**W08**, **W10**, **W11**, **W48**) — `launch_exit=1`. Остров nextseg/preinh vs silent gen из более ранних boundary-map **не** перепроверен на exit-clean G1 S1 (нет clean Branch-волн). E1.5 показал, что исторический PASS-остров Branch×N1 **FRAGILE** (br25_nextseg 0/9 strict; tiprmin TipR 0/2; sep ~1–2%).
 
@@ -62,6 +64,8 @@ G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 
 Остальные 29 case-строк TSV несут `failure_class=launch_exit_1|2` и Acc/Цель = `—`.
 
 **CL-N1 HEAD ablations (не exit-clean G1; отдельный arm):** Classic×N1 → Span **480** → AsymRm → PSIoff → PostTune OFF; Train/Test — [`W02_CL480_N1_PSIoff/{Train,Test}`](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/W02/inputs/W02_CL480_N1_PSIoff/Train); все шесть RUN — SKIP_GATE / `not_evaluated_training_incomplete` — TSV [`CL_N1_HEAD_ABLATIONS_2026-10-22.tsv`](CL_N1_HEAD_ABLATIONS_2026-10-22.tsv).
+
+**CL-N1 W3on next arm:** тот же Trainer×Mode/Span/Mod; overlay `EnableRmaxLengthEscape=1` → L=`100 58 1 1`, Need=1 — [`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.tsv`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.tsv).
 
 ## 4. C2 vs Console (G1)
 
@@ -84,7 +88,7 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 ## 7. Риски и следующий цикл
 
 1. **`SYNTHESIS_FINAL` не публиковать**, пока нет exit-clean большинства волн или явной смены отбора; не стартовать повторный RERUN тех же 10 волн на том же SHA.
-2. **DEBT-CL-N1 open:** не повторять те же overlays a–e; дальше — смена постановки (поведение вокруг `3cefd64` / MaxL escape, multifactor на ином Span, или Controller length search).
+2. **DEBT-CL-N1 open:** a–e не sole-fix; W3on **подтвердил** MaxL-фенотип (`100 58 1 1`) без converged — не включать W3 в SoftCold; дальше Controller v2 `LEN_SEARCH` / `infeasible_len`, multifactor на ином Span при W3=off ([`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md)).
 3. **DEBT-G1-exit-gate** harness **done**; исторический G1 остаётся 3/13 exit-clean.
 4. **F5** — paired W01 N1 выполнен (γ noop); следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
 5. Алгоритм: Train **`sep_margin` / `amp_be` emit** закрыт (`DEBT-S0` **done**). H3 mid-policy **зафлажена и cold-verified**. **H4 / H2 ослаблены**. **D1 phase2 CLOSED** (`3cefd64`). **`ideal_inh_proxy` intentional for SPEC** (E1.1d–g negative). **F3-R8 done** (Reset default off).
