@@ -1,6 +1,6 @@
 # SYNTHESIS — черновое оглавление (не финал)
 
-**Статус:** OUTLINE ONLY. Документ **`SYNTHESIS_FINAL` по полной 13-волновой матрице** запрещён: после RERUN только **3/13** волн с `launch.exit=0` ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md)). Разрешён путь **`SYNTHESIS_PARTIAL`** по политике [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md) (метрики только exit-clean + `failure_class` для остальных). Этот файл фиксирует структуру сводки.
+**Статус:** OUTLINE ONLY. **Заполненный PARTIAL:** [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md). Документ **`SYNTHESIS_FINAL` по полной 13-волновой матрице** запрещён: после RERUN только **3/13** волн с `launch.exit=0` ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md)). Политика PARTIAL — [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md) (метрики только exit-clean + `failure_class` для остальных). Этот файл фиксирует структуру сводки.
 
 ---
 
