@@ -4,9 +4,13 @@
 
 ---
 
+## Обновление 2026-10-22 (docs-only, post-RERUN)
+
+**G1_S1_RERUN dual-host закрыт** (последняя волна W02 rep3, `launch.exit=1`). В отборе [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv) **13 волн**; **3/13** exit-clean (W01/W13/W33), **10/13** с последним `launch.exit` ∈ {1,2}. Политика: [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md) — `SYNTHESIS_FINAL` по полной матрице запрещён; разрешён PARTIAL rollup. Ниже — блокеры, которые остаются открытыми.
+
 ## Обновление 2026-10-21 (docs-only)
 
-На срезе после **E2 R8×3 SERIES_DONE** и частичного **G1 S1** (12/12 drv `SERIES_DONE`, но **3/12** rep3 с `launch.exit=0`) нижеперечисленные пункты остаются блокерами для `SYNTHESIS_FINAL` и для честного сравнения C2↔Console, хотя инфраструктурные долги prepare/disk частично закрыты.
+На срезе после **E2 R8×3 SERIES_DONE** и частичного **G1 S1** (drv `SERIES_DONE` на всех волнах, но только **3** волны с `launch.exit=0`; счёт «3/12» в тиках того дня был неточен — в TSV **13** `wave`) нижеперечисленные пункты оставались блокерами для `SYNTHESIS_FINAL` и для честного сравнения C2↔Console.
 
 ### P0 — алгоритм и качество оценки
 
@@ -24,7 +28,7 @@
 
 ### P0 infra — G1 exit-gate и диск
 
-**Ложный «зелёный» SERIES_DONE (`DEBT-G1-exit-gate`).** `run_series.sh` фиксирует drv `EXIT=0` при появлении файла `launch.exit`, **не** проверяя его значение. На G1 S1 rep3 только W01/W13/W33 на `.11` имеют `launch.exit=0`; W08 — `paused_after_training_or_evaluation_issue` при drv «зелёном» ([`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md), [`G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md`](G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md)). Rollup метрик и SYNTHESIS **не** должны опираться на drv-only SERIES_DONE.
+**Ложный «зелёный» SERIES_DONE (`DEBT-G1-exit-gate`).** `run_series.sh` фиксирует drv `EXIT=0` при появлении файла `launch.exit`, **не** проверяя его значение. После полного RERUN по-прежнему только W01/W13/W33 имеют `launch.exit=0`; остальные 10 волн — exit 1/2 при drv «зелёном» ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md), [`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md)). Rollup метрик и SYNTHESIS **не** должны опираться на drv-only SERIES_DONE; чинить gate в `run_series.sh` — отдельный infra-шаг.
 
 **Политика offload диска (`DEBT-disk-offload-policy`).** Soft-cold на `.17` смотрит Avail **корня** `/` (≥80 ГБ), тогда как `$DATA` на отдельном томе; неиспользуемые lanes и `_repro` offload на Data поднимали Avail корня до ~90–108 ГБ ([`STATUS_SNAPSHOT_2026-10-20T2325.ru.md`](STATUS_SNAPSHOT_2026-10-20T2325.ru.md), [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md)). На 2026-10-21 корень снова ~76 ГБ — риск повторного `worker_exit=1` (E2 rep3 W01). Операционное правило: перед новым cold на `.17` — offload lanes/`_repro`, не трогая активные G1 runs; human rule `.11` DATA≥200G без STOP ([`CAMPAIGN_STATUS_2026-10-20.ru.md`](CAMPAIGN_STATUS_2026-10-20.ru.md)). Исправление gate в скриптах — открытый пункт (см. TSV).
 
@@ -60,10 +64,10 @@ DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-
 DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2 soft-cold	done	.17	lanes offload 2026-10-20	2026-10-20T20:17Z	lanes-offload
 DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	P0	E2 R8	done	Bin	case-ids only 774704fc	2026-10-20T20:24Z	774704fc
 DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR cold incomplete	P1	F8 chain/R3	open	F5	patch default off; F5_GAMMA_COLD W01 one-shot		
-DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series ignores launch.exit≠0	P0	G1 SYNTH	open	drv	9/12 rep3 fail exit; G1_S1_LAUNCH_EXIT_AUDIT		
+DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series ignores launch.exit≠0	P0	G1 SYNTH	open	drv	post-RERUN 10/13 exit≠0; G1_S1_RERUN_EXIT_STATUS 2026-10-22		
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
 ```
 
 ---
 
-*Последнее docs-обновление: 2026-10-21 (parallel AGENT_PLAN docs arm, без Console cold).*
+*Последнее docs-обновление: 2026-10-22 (G1 RERUN complete + PARTIAL exit policy, без нового Console cold).*

@@ -1,6 +1,6 @@
 # SYNTHESIS — черновое оглавление (не финал)
 
-**Статус:** OUTLINE ONLY. Документ **`SYNTHESIS_FINAL`** запрещён до exit-clean G1 (аудит `launch.exit`, извлечение метрик по [`G1_S1_METRICS_EXTRACT_OUTLINE_2026-10-21.ru.md`](G1_S1_METRICS_EXTRACT_OUTLINE_2026-10-21.ru.md)). Этот файл фиксирует структуру будущей сводки, чтобы параллельные docs-агенты не дублировали разделы.
+**Статус:** OUTLINE ONLY. Документ **`SYNTHESIS_FINAL` по полной 13-волновой матрице** запрещён: после RERUN только **3/13** волн с `launch.exit=0` ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md)). Разрешён путь **`SYNTHESIS_PARTIAL`** по политике [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md) (метрики только exit-clean + `failure_class` для остальных). Этот файл фиксирует структуру сводки.
 
 ---
 
@@ -11,7 +11,7 @@
 ## 1. Ворота кампании (checklist)
 
 - A0 provenance; A1 контроли; A3 runtime wiring; B2 inputs; C1 kernels; C2_MATCH; E2 R8 EQUIVALENT ([`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md)).
-- G1: отбор 24–32, rep3 **`launch.exit` audit** ([`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md)) — **TBD**.
+- G1: отбор 13 волн / 32 case; RERUN **закрыт**; exit audit **3/13** clean ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md)); PARTIAL policy принята.
 - Открытый TECH_DEBT: [`TECH_DEBT_TIMELEARNER_2026-10-20.ru.md`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md) (обновление 2026-10-21).
 
 ## 2. Trainer×Mode — системные выводы
