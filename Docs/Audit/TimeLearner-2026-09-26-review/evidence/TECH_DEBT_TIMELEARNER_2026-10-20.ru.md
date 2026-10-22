@@ -20,7 +20,7 @@
 
 **Classic N1 stall (`DEBT-CL-N1`, `DEBT-D2b5-W02`).** W02 `W02_CL480_N1_PSIoff` на всех плечах E2 заканчивается `not_converged_at_stop` с L=`54 44 1 1` (или близким `53 44 1 1` на ранних PulseLib) и разносом TipR — картина согласуется с [`CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md`](CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md). D1 фаза 1: **нет** good→bad converged в окне 11.09–19.10 ([`D1_BISECT_VERDICT_2026-10-20.ru.md`](D1_BISECT_VERDICT_2026-10-20.ru.md)); фаза 2 (L₀ 53→≥54): **CLOSED** lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); первый L₀≥54 = **`3cefd64`** — [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md).
 
-**S0 C++ поля (`DEBT-S0-cpp-fields`) — partial 2026-10-22 (sep_margin closed).** PulseLib эмитит `delay_residue` / `amp_over_target` / `sync_exit` / `done_be` и **Train `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil`** в audit `kind=done` + `posttune_complete.flag` после `FinalizePostTuneMid`; harness переносит в `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). Формула: `sep_gap = tgt − max_foil` (как `ComputeMidThreshold`), `sep_margin = sep_gap/tgt` при finite && `tgt>0`, иначе NaN. **Остаётся open:** amp-quantized BE mark в `done_be` (отдельный флаг amp BE).
+**S0 C++ поля (`DEBT-S0-cpp-fields`) — done 2026-10-22.** PulseLib эмитит `delay_residue` / `amp_over_target` / `sync_exit` / **`amp_be`** / `done_be` и Train `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` в audit `kind=done` (+ `sep_*` в `posttune_complete.flag`); harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). Формула Done_BE: **`done_be = sync_be ∨ rmin_be ∨ amp_be`**, где `amp_be` = любой дендрит с `StructuralAmpTracker.IsAccepted` (тот же предикат, что `amp_quantized_under_target`); `sep_margin = sep_gap/tgt` при finite && `tgt>0`, иначе NaN. PulseLib `4e3714a`, Bin `73a6e456`.
 
 ### P1 — фиксы и пилоты
 
@@ -28,7 +28,7 @@
 
 **F1b senior (`DEBT-F1b`) — still OPEN.** Console-пилот «быстрый EPSP + NAxoneDelay» не стартовал; docs-ready checklist добавлен в карточку ([`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b) и в [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §5 — cold только после senior approve. F1a офлайн закрыт (DEBT-F1a-offline done). F1b питает этап 4 Controller v2 ([`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)).
 
-**Controller DRAFT refresh (2026-10-22):** sibling входы E1/H*/D1/open decisions — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md); Train `sep_margin` emit **закрыт** ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); SPEC ещё не писать (tol margin, mid policy, TipR mode).
+**Controller DRAFT refresh (2026-10-22):** sibling входы E1/H*/D1/open decisions — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md); Train `sep_margin` / `amp_be` emit **закрыт**, `DEBT-S0` done ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); SPEC ещё не писать (tol margin, mid policy, TipR mode).
 
 ### P0 infra — G1 exit-gate и диск
 
@@ -62,7 +62,7 @@ DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	W02
 DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	canon 24-32 selected for G1		
 DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH margins	2026-10-20T15:45Z	F1a_20261020
 DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	docs-ready checklist; DEBT-F1b still open; no cold		
-DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	partial	stage0	S0_CPP_EMIT_2026-10-22; sep_margin Train DONE; amp-BE mark still open		
+DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	done	stage0	S0_CPP_EMIT_2026-10-22; amp_be+done_be OR; PulseLib 4e3714a	2026-10-22T12:40Z	4e3714a
 DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller DRAFT refresh	P1	SPEC	open	docs	CONTROLLER_V2_DRAFT_INPUTS_2026-10-22; not C++ SPEC		
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog→.17 Data	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	kill after stall		

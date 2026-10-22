@@ -63,7 +63,7 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 - Флаг: `ControllerVersion=2` (XML Train + fingerprint очереди).
 - Classic и Branch: **одна** реализация + стратегия топологии (разветвление только там, где семантика входов различается).
 - PostTune: вне scope этапа 4; пары ON/OFF по-прежнему только `--force-posttrain-tuning` (скилл structtrain-experiments).
-- Отчётность прогона: сходимость (exact / `Done_BE` / Need=1), residue, margin, fires, Acc — поля Stage0 ([`V_S0_UPDATE_2026-10-20.ru.md`](V_S0_UPDATE_2026-10-20.ru.md)); C++ emit residue/`done_be`/`sep_margin` готов; `DEBT-S0-cpp-fields` partial только amp-BE mark.
+- Отчётность прогона: сходимость (exact / `Done_BE` / Need=1), residue, margin, fires, Acc — поля Stage0 ([`V_S0_UPDATE_2026-10-20.ru.md`](V_S0_UPDATE_2026-10-20.ru.md)); C++ emit residue/`amp_be`/`done_be`/`sep_margin` готов; **`DEBT-S0-cpp-fields` = done**.
 
 ---
 
