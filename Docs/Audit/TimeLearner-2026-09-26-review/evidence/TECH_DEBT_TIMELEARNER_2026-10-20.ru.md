@@ -42,6 +42,8 @@
 
 **E1.2 repeatability PARTIAL** (AsymRm L=10 @ TipR=8.6e7, Console `4a0658f3…`): reset×20 **σ_amp=σ_lat=0** (bit-identical); noreset arm усечён (`MaxSpikesPerFeature=4`, trace≈13.5 с) → 4 valid EPSP, settled bias ≈**−28%** vs reset (A5/F3, не раздувать F4). Предложение F4: **eps_amp=1%·target**, **latency_tol=1/f** — [`E1_2_REPEATABILITY_2026-10-22.ru.md`](E1_2_REPEATABILITY_2026-10-22.ru.md). DEBT-C1 на L=10 не мешал.
 
+**E1.4 sep predictor PARTIAL** (gate **6/6** match Console Acc-direction): passive cable superposition для gen/W01 + ideal_inh proxy τ=0.5 мс для nextseg/preinh при length_sync_cv≤0.25 — [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md). **Open:** заменить proxy на измеренные NextSegInh/PSI ядра (E1.1 PENDING).
+
 **F3 Reset-before-pack CODE** (2026-10-22): `ResetNeuronBeforeTrainBurst` default **off** на PulseLib `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`); Console `9540e64b7813ee2e…` — [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). **DEBT-F3-R8:** cold A/B flag=0 vs 1 и R8 **deferred** (матричные defaults не трогали). Исторический cold Need=0 при flag=1 был на `agent/tl-audit-f2-f3`@`0ad009a` ([`F2_F3_COLD_2026-10-20.ru.md`](F2_F3_COLD_2026-10-20.ru.md)) — не считать закрытым R8 на HEAD без повторного arm.
 
 ### Прочие открытые (без изменения статуса)
