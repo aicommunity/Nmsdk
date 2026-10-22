@@ -18,7 +18,7 @@
 | E1.1d / E1.1e / E1.1f / E1.1g | `da88a998c` / `2adf0cd35` / `18ddd803a` / `ab3abc329` | proxy **intentional for SPEC** (offline + Console IR negative) |
 | F3 Reset CODE + R8 A/B | CODE `e02f7bcaa` / A/B `0755c31ca` (PulseLib `3a599a7`) | default **off**; [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md) — **`DEBT-F3-R8` done** |
 | Controller DRAFT inputs | refresh post-W3on / E0 | [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) — SPEC blocked |
-| CL-N1 next hypothesis | docs-ready only | [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) — H1 Span≠480 / H2 `infeasible_len` |
+| CL-N1 next hypothesis | H1 **executed**; H2 open | [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) — H1 Span100 DONE; focus = 480 / H2 `infeasible_len` |
 | Bin E0 `--train-param` | tip `bf3e82ffe` | whitelist ResetNeuron / EnableRmaxLengthEscape на `timelearner_fix2` |
 
 G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 default off); CL-N1 ablations / W3on — Console `f88d1852…` на PulseLib tip с F3+F6/F7 (см. evidence CL-N1).
