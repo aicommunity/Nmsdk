@@ -3,7 +3,7 @@ DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	do
 DEBT-cpu-gate-pgrep	2026-10-20T13:48Z	R2	companion	cpu_gate false positive	P1	D1	done	.11	pattern fixed	2026-10-20T13:48Z	local
 DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired 98ac830d	2026-10-20T14:05Z	98ac830d
 DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 EQUIVALENT		
-DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	W02 L0 CLOSED 3cefd64; HEAD ablations a-e all not_converged; CL_N1_HEAD_ABLATIONS_2026-10-22		
+DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	W02 L0 CLOSED 3cefd64; a-e stall; W3on=1 MaxL L=100 58 1 1 not sole-fix; CL_N1_NEXT_ARM_3CEFD64_2026-10-22		
 DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	G1 selected 24-32		
 DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH	2026-10-20T15:45Z	F1a_20261020
 DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	docs-ready checklist; still open; no cold		
@@ -17,7 +17,7 @@ DEBT-17-console-glog	2026-10-22T12:10Z	R2	infra	.17 EmitToGlog smash phase9	P0	H
 DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent	P0	G1 labels	open	A1			
 DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol masks dt	P0	F2 Done_BE	confirmed	F7		2026-10-20T17:12Z	F2.pref
 DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test	open	gate			
-DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 not_converged	P0	CL-N1	open	D2b	L0 first>=54=3cefd64; HEAD a-e all stall; CL_N1_HEAD_ABLATIONS_2026-10-22		
+DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 not_converged	P0	CL-N1	open	D2b	L0 first>=54=3cefd64; a-e stall; W3on MaxL not converged; CL_N1_NEXT_ARM_3CEFD64_2026-10-22		
 DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2	done	.17	2026-10-20 offload	2026-10-20T20:17Z	lanes-offload
 DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare	P0	E2 R8	done	Bin	774704fc	2026-10-20T20:24Z	774704fc
 DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR	P1	R3	open	F5	paired W01_CL50_N1 2026-10-22 γ=0≡γ=1 silent; F5_GAMMA_PAIRED		
