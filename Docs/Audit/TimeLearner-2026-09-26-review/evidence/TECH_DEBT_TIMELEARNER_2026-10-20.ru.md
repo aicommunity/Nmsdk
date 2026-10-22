@@ -28,7 +28,7 @@
 
 **F1b senior (`DEBT-F1b`) — still OPEN.** Console-пилот «быстрый EPSP + NAxoneDelay» не стартовал; docs-ready checklist добавлен в карточку ([`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b) и в [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §5 — cold только после senior approve. F1a офлайн закрыт (DEBT-F1a-offline done). F1b питает этап 4 Controller v2 ([`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)).
 
-**Controller DRAFT refresh (2026-10-22, notes refreshed):** sibling входы E1.0–E1.5 / H* / D1 / F3 / open decisions — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) (якоря E1.4 `e9a0808c8`, E1.5 `f9e83bf8c`, E1.1d `da88a998c`, E1.1e `2adf0cd35`, E1.1f 4-dendrite Pack-A negative, F3 `e02f7bcaa`/PulseLib `4b85c91`); Train `sep_margin` / `amp_be` emit **закрыт**, `DEBT-S0` done ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); **`DEBT-CTRL-V2-DRAFT` остаётся open** до SPEC (tol с учётом E1.5 ~1–2% sep; mid policy; TipR KeepDone weakened; ideal_inh_proxy **не** retired E1.1d/e/f — intentional до Console Branch IR / SPEC).
+**Controller DRAFT refresh (2026-10-22, notes refreshed):** sibling входы E1.0–E1.5 / H* / D1 / F3 / open decisions — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) (якоря E1.4 `e9a0808c8`, E1.5 `f9e83bf8c`, E1.1d `da88a998c`, E1.1e `2adf0cd35`, E1.1f/g Console Branch IR negative, F3 `e02f7bcaa`/PulseLib `4b85c91`); Train `sep_margin` / `amp_be` emit **закрыт**, `DEBT-S0` done ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); **`DEBT-CTRL-V2-DRAFT` остаётся open** до SPEC (tol с учётом E1.5 ~1–2% sep; mid policy; TipR KeepDone weakened; **`ideal_inh_proxy` intentional for SPEC** — E1.1d/e/f offline + E1.1g Console FWHM~29–31 мс ≫ 2.1, `DEBT-E1.1f` partial-wontfix-offline).
 
 ### P0 infra — G1 exit-gate и диск
 
@@ -44,7 +44,9 @@
 
 **E1.1e multi-pulse tip IR PARTIAL** (2026-10-22): Pack-A ISI / packA_tgt4 @ L∈{1,7,10,25} TipR=8.6e7 — [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md). NextSeg@L=7 ≈passive (last_fwhm~62–66 мс); **0/132** meet FWHM/span≲0.13; tip multi-pulse **не** retire E1.4 `ideal_inh_proxy`.
 
-**E1.1f 4-dendrite Pack-A PARTIAL / negative** (2026-10-22): island L=`7 6 4 1` TipR=`20M×3+86M` × Pack-A × {passive,nextseg,psi} × drive {per_input,full_train} — [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md). NextSeg sep **−0.010 / −0.030** (proxy **+0.074**); tgt_fwhm~58–68 мс; **не** retire proxy. **Open / DEBT-E1.1f:** Console Branch soma IR или SPEC «proxy intentional»; offline IR chain E1.1d/e/f closed negative.
+**E1.1f 4-dendrite Pack-A PARTIAL / negative** (2026-10-22): island L=`7 6 4 1` TipR=`20M×3+86M` × Pack-A × {passive,nextseg,psi} × drive {per_input,full_train} — [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md). NextSeg sep **−0.010 / −0.030** (proxy **+0.074**); tgt_fwhm~58–68 мс; **не** retire proxy.
+
+**E1.1g Console Branch soma IR PARTIAL / negative** (2026-10-22): Test-only TRACE nextseg vs gen @ island — Acc tgt FWHM **28.8 / 22.7 мс**, IR nextseg **30.9 мс**, sep_soma **≈−0.015**; proxy FWHM 2.1 мс **не** достигнут — [`E1_1g_CONSOLE_BRANCH_IR_2026-10-22.ru.md`](E1_1g_CONSOLE_BRANCH_IR_2026-10-22.ru.md). **`DEBT-E1.1f` → partial-wontfix-offline:** proxy **intentional for SPEC** (offline E1.1d/e/f + Console E1.1g all negative).
 
 **E1.2 repeatability PARTIAL** (AsymRm L=10 @ TipR=8.6e7, Console `4a0658f3…`): reset×20 **σ_amp=σ_lat=0** (bit-identical); noreset arm усечён (`MaxSpikesPerFeature=4`, trace≈13.5 с) → 4 valid EPSP, settled bias ≈**−28%** vs reset (A5/F3, не раздувать F4). Предложение F4: **eps_amp=1%·target**, **latency_tol=1/f** — [`E1_2_REPEATABILITY_2026-10-22.ru.md`](E1_2_REPEATABILITY_2026-10-22.ru.md). DEBT-C1 на L=10 не мешал.
 
@@ -94,8 +96,9 @@ DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 S
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
 DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	open	F3	CODE timelearner_fix2 default off; Console 9540e64b…; R8 deferred; F3_RESET_BEFORE_PACK_2026-10-22		
 DEBT-E1.5-fragile-pass	2026-10-22T13:20Z	E1	E1.5	L±1 TipR×0.8/1.25 Test-only	P1	Controller v2 tol	partial	.11	FRAGILE br25 0/9 tiprmin TipR 0/2; E1_5_FRAGILITY_2026-10-22		E1_5_20261022
+DEBT-E1.1f	2026-10-22T15:20Z	E1	E1.1f	4-dendrite Pack-A / Console IR retire proxy	P1	Controller VERIFY tol	partial-wontfix-offline	.11	offline E1.1d/e/f + Console E1.1g FWHM~29–31ms≫2.1; sep_soma&lt;0; proxy intentional for SPEC; E1_1g_CONSOLE_BRANCH_IR_2026-10-22	2026-10-22T15:40Z	E1_1g_20261022
 ```
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (CL-N1 HEAD stage-2 ablations 6/6 not_converged; DEBT-CL-N1/D2b5 notes + CL_N1_HEAD_ABLATIONS_2026-10-22).*
+*Последнее docs-обновление: 2026-10-22 (E1.1g Console Branch IR — proxy intentional; DEBT-E1.1f partial-wontfix-offline).*
