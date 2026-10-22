@@ -228,7 +228,7 @@ V(t) = \sum_{k=0}^{3} \sum_{j=0}^{3} w_k \, K_k(t - t_j - d_k), \qquad d_k = t_3
 
 - [ ] Входы: EXP00 (480 мс, N1) и EXP04 PSI k=2.5 из колд-состояния плюс W01 CL50 N1. Во всех прогонах явно задать `AutoScaleIterationGap`, `EnablePostTrainTuning=0`, `NormalizationMode=1` и одинаковый `-t`.
 - [ ] Срезы PulseLib: `780ffc7` (11.09) → `fd79b0f` → `8d429e7` → `09d37e2` → `bb438c4` → `5308aa5` → `3cefd64` → `b5229e4` → `2bb72a3` → `38fc7d4` → `5bfffe7` → `d52dc1c`. Регистрировать Need, длины, TipR, траекторию Rs и запас.
-- [ ] Абляции на HEAD, по одной: (a) Rmin = 20 МОм без вывода из Rm; (b) без midband walk; (c) `kRminLengthTolFactor = 1`; (d) `AutoEstimateAttenuationGamma = 0`; (e) Reset перед каждой пачкой.
+- [x] Абляции на HEAD, по одной: (a) Rmin = 20 МОм без вывода из Rm; (b) без midband walk; (c) `kRminLengthTolFactor = 1`; (d) `AutoEstimateAttenuationGamma = 0`; (e) Reset перед каждой пачкой. **DONE 2026-10-22 W02:** все 6/6 `not_converged_at_stop` — [`evidence/CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](evidence/CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md).
 
 **Ворота:** найден первый плохой коммит и абляция, возвращающая Classic N1 к Done.
 
