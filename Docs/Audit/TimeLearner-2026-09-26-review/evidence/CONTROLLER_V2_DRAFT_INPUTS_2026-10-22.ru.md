@@ -49,7 +49,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 
 **D1 / CL-N1.** На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). **HEAD stage-2 ablations (`6245a0c09`):** base+(a–e) — **6/6** `not_converged_at_stop` (Need=1, L≈`53–54 44 1 1`); ни Rmin-floor / midband-off / tol×1 / γ-fixed / Reset **не** sole-fix — [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span; числа tol — отдельно от CL-N1 stall (**`DEBT-CL-N1` open**).
 
-**F3 / A5 (`e02f7bcaa`, PulseLib `4b85c91`).** Флаг `ResetNeuronBeforeTrainBurst` портирован на `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`), **CODE default off**; матричные defaults не трогали. **`DEBT-F3-R8` deferred** — cold A/B flag=0 vs 1 и R8 не этот arm. Исторический Need=0@flag=1 на `agent/tl-audit-f2-f3` не закрывает R8 на HEAD. Evidence: [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). Для скелета §5.3: Reset остаётся **опциональным** до R8; E1.3 показал, что пауза ≤5 с не заменяет Reset.
+**F3 / A5 (`e02f7bcaa`, PulseLib `4b85c91` + tip `3a599a7`).** Флаг `ResetNeuronBeforeTrainBurst` портирован на `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`), **CODE default off**; матричные defaults не трогали. **`DEBT-F3-R8` done** — cold A/B flag=0 vs 1: Branch `br25_nextseg` без регрессии при flag=1; W01 Classic silent без изменения — [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md). Для скелета §5.3: Reset остаётся **опциональным** (default off); E1.3 показал, что пауза ≤5 с не заменяет Reset.
 
 ---
 
@@ -62,7 +62,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 3. **`sep_margin` / `amp_be` Train emit** — **CLOSED** (`DEBT-S0` done): C++ пишет `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` + `amp_be`/`done_be` в Train audit + `posttune_complete.flag`; harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). **Числовой tol** «запас ≥ предсказанный − …» для SPEC **ещё open** и **обязан учитывать E1.5**: baseline sep острова ~**1–2%**; tol не должен съедать весь запас (согласуется с E1.2 eps_amp≈1%·target). Ideal_inh proxy E1.4 даёт более широкий margin (~7%), чем Console peaks — не путать proxy-margin с Console `sep_ltz`.
 4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (§5) и cold; **`DEBT-F1b` OPEN**.
 5. **N0 при Span > 50 мс / 480 мс:** C2 T_max и E1.1 δ остаются; решение «чистый N0 vs N1+delay» — после согласования с D1/CL-N1 и этапом 6.
-6. **F3 Reset в train loop:** default-off CODE готов; включать ли Reset в v2 по умолчанию — после **`DEBT-F3-R8`** (deferred).
+6. **F3 Reset в train loop:** default-off CODE готов; A/B **`DEBT-F3-R8` done** (BR island OK / W01 silent unchanged) — включать ли Reset в v2 по умолчанию остаётся продуктовым выбором (рекомендация: оставить opt-in).
 7. **`ideal_inh_proxy` intentional for SPEC (закрыто как измеренная замена):** E1.1d/e/f offline **и** E1.1g Console Branch IR (FWHM **28.8–30.9 мс** ≫ 2.1; sep_soma **≈−0.015**) — **retire=NO**; `DEBT-E1.1f` **partial-wontfix-offline**. SPEC nextseg/preinh держит τ=0.5 мс phenomenological; VERIFY-tol **не** из E1.1d–g FWHM/sep.
 
 ---
@@ -92,7 +92,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
 | Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
 | Inh-ядра для nextseg/preinh | E1.1d/e/f offline + E1.1g Console **negative**; **`ideal_inh_proxy` intentional for SPEC** (`DEBT-E1.1f` partial-wontfix-offline) |
-| F3 Reset default в v2 | после R8 A/B (`DEBT-F3-R8` deferred); CODE default off |
+| F3 Reset default в v2 | A/B done (`DEBT-F3-R8`); CODE default off; opt-in recommended |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |
 | D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); см. `D1_BISECT_2026-10-22` |
