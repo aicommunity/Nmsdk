@@ -52,7 +52,7 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 
 1. Починить или явно жить с **DEBT-G1-exit-gate** в `run_series.sh` (читать значение `launch.exit`).
 2. **F5** — paired W01 N1 выполнен; следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
-3. Алгоритм: политика mid на Test (не оставлять thr=1 при finite `candidate_mid` / landscape NonSeparable) — H3; отдельно CL-N1 и margin target&lt;candidate (H1/H4).
+3. Алгоритм: H3 mid-policy **зафлажена и cold-verified** (`UseCandidateMidOnNonSeparableTest=1` → fires=`01000101`, [`MID_POLICY_H3_COLD_2026-10-22.ru.md`](MID_POLICY_H3_COLD_2026-10-22.ru.md)); default off сохраняет G1 silent. Дальше: включение в кампанию / CL-N1 / margin target&lt;candidate (H1/H4) / E1.
 4. Не стартовать повторный RERUN тех же 10 волн на том же SHA.
 
 ---
