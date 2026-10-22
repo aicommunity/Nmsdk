@@ -73,15 +73,15 @@ Probe-only, `IsNeedToTrain=0`. Trainer×Mode не применим.
 | **γ, Rs-сетка** | **PARTIAL → E1.1b** | [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md) |
 | **N-train (1,2,4…128)** | **PARTIAL → E1.1b** | multiplicity + Reset; L∈{1,10,25} |
 | **NextSegInh, PSI** | **PENDING** | отдельные прогоны |
-| **NeuronModel sweep** | **PENDING** | W01, W10, FastSpan, AsymRm A/B/C |
-| **Amp library** | **PARTIAL → E1.1b** | Gen ÷1.067; AsymRm ×1.46; Gen L50 debt |
+| **NeuronModel sweep** | **PARTIAL** | FastSpan → [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md); AsymRm A/B/C / W01-full ещё PENDING |
+| **Amp library** | **PARTIAL → E1.1b / E1.1c** | Gen ÷1.067; AsymRm ×1.46; FastSpan model_only (no Console cal) |
 
 ## Что E1.1 ещё требует (amp / Rs / N)
 
 1. **Amplitude:** Console-сетка или калиброванная модель — Gen (**×1.067** к model peak), AsymRm (**oracle** тормозной Rm=1e8, ≈×1.45–1.47), разбор **silent soma** Gen на L≈50–51 и sporadic L=20,25 (C1 p1/p2).
 2. **Rs (8 log-точек):** для каждой NeuronModel и опорного L — γ(Rs), сдвиг t_peak/FWHM/peak; база F5 paired TipR частично см. [`F5_GAMMA_PAIRED_2026-10-22.ru.md`](F5_GAMMA_PAIRED_2026-10-22.ru.md), но не заменяет E1.1 kernel grid.
 3. **N ∈ {1,2,4,…,128}:** train-length sweep с Reset перед импульсом — амплитуда и форма на соме vs одиночный EPSP; нужно для F1/F5 и margin H1/H4.
-4. **Расширение моделей:** тот же каркас L×Rs×N для **FastSpan**, **AsymRm A/B/C**, шаблонов W01/W10 — не покрыто текущим TSV.
+4. **Расширение моделей:** **FastSpan** закрыт scoped в E1.1c; остаются **AsymRm A/B/C**, полный W01/W10 NeuronModel-sweep, PSI/NextSegInh.
 5. **Одиночный missing-L cold Console** (опционально): только если понадобится снять silent **Gen L=50** — не блокирует timing L≤25 и модель L=50.
 
-**Следующий логичный шаг:** E1.1b выполнен scoped PARTIAL — [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md). Дальше: FastSpan/PSI/NextSegInh, Console amp-якоря, или CL-N1 bisect.
+**Следующий логичный шаг:** E1.1c FastSpan PARTIAL — [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md). Дальше: Console-якоря FastSpan, PSI/NextSegInh, или CL-N1 bisect.
