@@ -61,7 +61,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (§5) и cold; **`DEBT-F1b` OPEN**.
 5. **N0 при Span > 50 мс / 480 мс:** C2 T_max и E1.1 δ остаются; решение «чистый N0 vs N1+delay» — после согласования с D1/CL-N1 и этапом 6.
 6. **F3 Reset в train loop:** default-off CODE готов; включать ли Reset в v2 по умолчанию — после **`DEBT-F3-R8`** (deferred).
-7. **Замена `ideal_inh_proxy`:** single-pulse E1.1d **не** закрывает; multi-pulse NextSegInh/PSI IR **PENDING** (`DEBT-E1.1d`) — блокер точного VERIFY-tol для nextseg/preinh.
+7. **Замена `ideal_inh_proxy`:** single-pulse E1.1d **не** закрывает; tip multi-pulse E1.1e **negative** (`2adf0cd35`) — proxy intentional до 4-dendrite Pack-A / Console Branch soma IR (`DEBT-E1.1e`); блокер точного VERIFY-tol для nextseg/preinh.
 
 ---
 
