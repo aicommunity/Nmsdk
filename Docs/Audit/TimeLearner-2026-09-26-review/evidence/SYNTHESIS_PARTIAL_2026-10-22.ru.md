@@ -14,9 +14,9 @@
 | PulseLib F6/F7 diagnostic flags | tip `a532db7` | opt-in Classic UProperty; **defaults = historical** (off / tol×4) |
 | E1.4 sep predictor | `e9a0808c8` | gate **6/6** PARTIAL |
 | E1.5 fragility | `f9e83bf8c` | **FRAGILE** PARTIAL |
-| E1.1d / E1.1e / E1.1f | `da88a998c` / `2adf0cd35` / (этот turn) | proxy **остаётся** (tip + 4-dendrite Pack-A negative) |
-| F3 Reset CODE | `e02f7bcaa` (PulseLib `4b85c91`) | flag default **off**; `DEBT-F3-R8` deferred |
-| Controller DRAFT inputs | `1a8d8ad50` (+ E1.1e sync `59517f65d`) | [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) |
+| E1.1d / E1.1e / E1.1f / E1.1g | `da88a998c` / `2adf0cd35` / `18ddd803a` / `ab3abc329` | proxy **intentional for SPEC** (offline + Console IR negative) |
+| F3 Reset CODE + R8 A/B | CODE `e02f7bcaa` / A/B `0755c31ca` (PulseLib `3a599a7`) | default **off**; [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md) — **`DEBT-F3-R8` done** |
+| Controller DRAFT inputs | `6de2f77d1` (proxy intentional) | [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) |
 
 G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 default off); CL-N1 ablations — Console `9540e64b…` / `6adf5875…` на PulseLib tip с F3+F6/F7 flags (см. evidence CL-N1).
 
@@ -24,7 +24,7 @@ G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 
 
 | Ворота | Статус |
 |--------|--------|
-| A0 env / refresh / Console | OK; тег `tl-baseline-20261020` и DEBT-A0-ctest ещё open |
+| A0 env / refresh / Console | OK; `DEBT-A0-ctest` **done** (87/87); тег `tl-baseline-20261020` ещё **не** резан |
 | A1 / A3 / B2 / C1 / C2_MATCH | закрыты или MATCH по evidence R/E1 |
 | E1.0 cable vs Console soma-kernel | **PARTIAL** — [`E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md`](E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md) |
 | E1.1 / E1.1b / E1.1c timing+amp | **PARTIAL** scoped libraries |
@@ -37,7 +37,7 @@ G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 
 | E2 R8 | EQUIVALENT — [`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md) |
 | G1 exit-clean полная матрица | **не** пройдена: **3/13** волн `launch.exit=0` после RERUN |
 | CL-N1 HEAD ablations (§этап 2) | **6/6 stall** — DEBT-CL-N1 **open** — [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md) |
-| F3 ResetNeuronBeforeTrainBurst | **CODE** default off (`e02f7bcaa`); cold R8 A/B deferred |
+| F3 ResetNeuronBeforeTrainBurst | **CODE** default off; cold R8 A/B **done** (`0755c31ca`) — BR PASS no regress; W01 silent 0≡1 |
 | Controller v2 DRAFT inputs | notes refreshed; **не** SPEC — `DEBT-CTRL-V2-DRAFT` open |
 | TECH_DEBT P0 | silent-Test (H3 confirmed offline); **CL-N1 open** (stall not fixed); S0 **done**; G1-exit-gate **done** |
 
@@ -71,7 +71,7 @@ G1 cold Console sha256 эпохи S1 — `745d6061…` / PulseLib `6d746ac` (F5 
 
 F2/F3/F4/F6 cold закрыты без регрессии Train на своих пилотах; **F5** — OPEN: paired γ=0 vs γ=1 на `W01_CL50_N1_PSIoff` ([`F5_GAMMA_PAIRED_2026-10-22.ru.md`](F5_GAMMA_PAIRED_2026-10-22.ru.md)) — оба плеча Need=0, **идентичный** silent 7/8, PASS **нет**. F7 → F2.pref; F8 done. Silent Test **не** зачтён как PASS ни на одном фиксе.
 
-**F3 на HEAD (`e02f7bcaa`):** `ResetNeuronBeforeTrainBurst` портирован (Classic+Branch), **CODE default off**; матричные defaults не трогали; **`DEBT-F3-R8` deferred** (не этот docs-arm). На CL-N1 Span480 overlay Reset=1 **не** снял stall (абляция e).
+**F3 / DEBT-F3-R8 (`0755c31ca`):** `ResetNeuronBeforeTrainBurst` портирован (Classic+Branch), **CODE default off**; матричные defaults не трогали. Cold A/B W01 + `br25_nextseg` — flag 0≡1: Branch Acc 8/8 / Цель да без регрессии; Classic W01 Need=0 + silent 7/8 на обоих ([`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md)). **`DEBT-F3-R8` done.** На CL-N1 Span480 overlay Reset=1 **не** снял stall (абляция e).
 
 **PulseLib F6/F7 (`a532db7`):** runtime-свойства `PreferConfiguredResistanceMinFloor` / `DisableMidbandWalkToRmin` / `RminLengthTolFactor` — opt-in, **defaults historical**; без overlay поведение бит-в-бит как до флагов. На W02 N1 абляции a/b/c с флагами **не** вернули `converged*`.
 
@@ -85,10 +85,10 @@ F2/F3/F4/F6 cold закрыты без регрессии Train на своих 
 
 1. **`SYNTHESIS_FINAL` не публиковать**, пока нет exit-clean большинства волн или явной смены отбора; не стартовать повторный RERUN тех же 10 волн на том же SHA.
 2. **DEBT-CL-N1 open:** не повторять те же overlays a–e; дальше — смена постановки (поведение вокруг `3cefd64` / MaxL escape, multifactor на ином Span, или Controller length search).
-3. Починить или явно жить с **DEBT-G1-exit-gate** в `run_series.sh` (читать значение `launch.exit`).
-4. **F5** — paired W01 N1 выполнен; следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
-5. Алгоритм: Train **`sep_margin` / `amp_be` emit** закрыт (`DEBT-S0` **done**). H3 mid-policy **зафлажена и cold-verified** (default off сохраняет G1 silent). **H4 / H2 ослаблены**. **D1 phase2 CLOSED:** первый L₀≥54 = **`3cefd64`**. Ideal_inh_proxy intentional до Console Branch IR / SPEC (E1.1f 4-dendrite offline **negative**).
-6. Controller SPEC tol обязан учитывать E1.5 FRAGILE; F1b cold / KeepDone / новый Console cold — только по явному arm (этот refresh — docs only).
+3. **DEBT-G1-exit-gate** harness **done**; исторический G1 остаётся 3/13 exit-clean.
+4. **F5** — paired W01 N1 выполнен (γ noop); следующий шаг — другой case/span или mid-диагностика, не повтор W01 без гипотезы.
+5. Алгоритм: Train **`sep_margin` / `amp_be` emit** закрыт (`DEBT-S0` **done**). H3 mid-policy **зафлажена и cold-verified**. **H4 / H2 ослаблены**. **D1 phase2 CLOSED** (`3cefd64`). **`ideal_inh_proxy` intentional for SPEC** (E1.1d–g negative). **F3-R8 done** (Reset default off).
+6. Controller SPEC tol обязан учитывать E1.5 FRAGILE; открытые блокеры cold: **CL-N1**, **F5**, **F1b senior**, тег **tl-baseline**; KeepDone / новый Console cold — только по явному arm.
 
 ---
 *При достижении exit-clean большинства волн или смене отбора — опубликовать `SYNTHESIS_FINAL_*.ru.md` и пометить этот PARTIAL superseded. До тех пор FINAL остаётся blocked.*
