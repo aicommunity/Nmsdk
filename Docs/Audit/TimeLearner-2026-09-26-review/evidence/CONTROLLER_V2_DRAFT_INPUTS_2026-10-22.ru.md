@@ -64,7 +64,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | 1 | Единицы и дискретизация `NAxoneDelay` (шаг ≥ 20 kHz) | Иначе d_k неразличим от FWHM |
 | 2 | XML: Classic Test, 4× L=1 AsymRmD001C25e12 + delay на каждом пути; wiring check | Без нового типа конфига pilot невалиден |
 | 3 | Порог mid: max(foil)…target по `ltz_potential`; два порядка паттернов | Критерий запаса 0.08 / 0.15 |
-| 4 | Host/runtime: не `.17` с `DEBT-17-console-glog`; не конкурировать с D1 `3cefd64` | Инфра abort ≠ физика |
+| 4 | Host/runtime: на `.17` держать pin glog **0.4** (`DEBT-17` done); не ломать pin при sync Console | Иначе снова EmitToGlog smash |
 | 5 | Связь с v2: только verify vs train-loop `FINE_DELAY` | Решение §4.4 |
 
 После approve — отдельный execute-arm; этот документ **не** является go-ahead на cold.
@@ -77,10 +77,10 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 |-------------------|----------------|
 | Числовые tol Done / margin / residual_dt | Из exit-clean G1 + E1 cal, не из drv-only |
 | Default Test mid policy | Решение §4.1 |
-| Default PostTrainTipResistanceMode | Решение §4.2 после H2 conclusive |
+| Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
 | Train `sep_margin` emit | Закрытие gap `DEBT-S0-cpp-fields` |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |
-| D1 финальный mid SHA | Не раньше закрытия окна `5308aa5…2bb72a3` |
+| D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); см. `D1_BISECT_2026-10-22` |
 
 См. также: скелет §7 [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md), PARTIAL [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) §Controller.
