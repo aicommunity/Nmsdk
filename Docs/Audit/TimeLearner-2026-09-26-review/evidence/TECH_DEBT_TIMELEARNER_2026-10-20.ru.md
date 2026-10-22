@@ -36,13 +36,15 @@
 
 **Политика offload диска (`DEBT-disk-offload-policy`).** Soft-cold на `.17` смотрит Avail **корня** `/` (≥80 ГБ), тогда как `$DATA` на отдельном томе; неиспользуемые lanes и `_repro` offload на Data поднимали Avail корня до ~90–108 ГБ ([`STATUS_SNAPSHOT_2026-10-20T2325.ru.md`](STATUS_SNAPSHOT_2026-10-20T2325.ru.md), [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md)). На 2026-10-21 корень снова ~76 ГБ — риск повторного `worker_exit=1` (E2 rep3 W01). Операционное правило: перед новым cold на `.17` — offload lanes/`_repro`, не трогая активные G1 runs; human rule `.11` DATA≥200G без STOP ([`CAMPAIGN_STATUS_2026-10-20.ru.md`](CAMPAIGN_STATUS_2026-10-20.ru.md)). Исправление gate в скриптах — открытый пункт (см. TSV).
 
-### Физика E1 (2026-10-22, E1.1c / E1.2)
+### Физика E1 (2026-10-22, E1.1c / E1.1d / E1.2)
 
-**FastSpan library PARTIAL** (`NSPNeuronGenD002C25e11`, τ=2.5 мс / D=2 мс / f=2000): offline timing L=1…100 + Rs×8 @ L∈{1,10,25} + N∈{1…128} — [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md). **Open:** Console amp/timing anchors FastSpan; amp-cal bias; PSI/NextSegInh; на N≳64–128 short-τ Euler `model_unstable` (потолок N жёстче Gen).
+**FastSpan library PARTIAL** (`NSPNeuronGenD002C25e11`, τ=2.5 мс / D=2 мс / f=2000): offline timing L=1…100 + Rs×8 @ L∈{1,10,25} + N∈{1…128} — [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md). **Open:** Console amp/timing anchors FastSpan; amp-cal bias; на N≳64–128 short-τ Euler `model_unstable` (потолок N жёстче Gen).
+
+**E1.1d NextSegInh/PSI library PARTIAL** (2026-10-22): AsymRm L∈{1,4,7,10,25}×TipR×3×N=1 offline dual-Euler vs passive — [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md). PSI k=2.5: Δpeak ≈ +143 %, ΔFWHM ≈ 0 на 1 spike; NextSeg: ΔFWHM ≈ −9.5 % только @L=1, @L≥7 ≈passive. **Open / DEBT-E1.1d:** Console PSI prepare OK но hang на `posttune_mid_dbg`; Branch NextSeg probe (tl_probe_kernels Classic-only); multi-pulse IR для замены E1.4 `ideal_inh_proxy`.
 
 **E1.2 repeatability PARTIAL** (AsymRm L=10 @ TipR=8.6e7, Console `4a0658f3…`): reset×20 **σ_amp=σ_lat=0** (bit-identical); noreset arm усечён (`MaxSpikesPerFeature=4`, trace≈13.5 с) → 4 valid EPSP, settled bias ≈**−28%** vs reset (A5/F3, не раздувать F4). Предложение F4: **eps_amp=1%·target**, **latency_tol=1/f** — [`E1_2_REPEATABILITY_2026-10-22.ru.md`](E1_2_REPEATABILITY_2026-10-22.ru.md). DEBT-C1 на L=10 не мешал.
 
-**E1.4 sep predictor PARTIAL** (gate **6/6** match Console Acc-direction): passive cable superposition для gen/W01 + ideal_inh proxy τ=0.5 мс для nextseg/preinh при length_sync_cv≤0.25 — [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md). **Open:** заменить proxy на измеренные NextSegInh/PSI ядра (E1.1 PENDING).
+**E1.4 sep predictor PARTIAL** (gate **6/6** match Console Acc-direction): passive cable superposition для gen/W01 + ideal_inh proxy τ=0.5 мс для nextseg/preinh при length_sync_cv≤0.25 — [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md). **Open:** single-pulse E1.1d **не** заменяет proxy; нужен multi-pulse / Console Branch IR ([`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md)).
 
 **E1.5 fragility PARTIAL** (`DEBT-E1.5-fragile-pass`, 2026-10-22): Test-only L±1 / TipR global ×0.8/×1.25 на PASS tiprmin + br25_nextseg — вердикт **FRAGILE** (br25 **0/9** strict; tiprmin TipR 0/2; sep_ltz baseline ~1–2%). Вход в Controller v2 SPEC: tol margin ≥ L±1 и TipR±25% — [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md). Per-tip TipR ещё PENDING.
 
