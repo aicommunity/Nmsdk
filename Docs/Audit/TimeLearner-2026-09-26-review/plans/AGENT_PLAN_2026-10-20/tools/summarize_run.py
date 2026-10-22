@@ -12,7 +12,7 @@ from pathlib import Path
 
 KEYS = ('train_status', 'training_convergence', 'fires', 'separation_quality', 'detection_quality',
          'training_failure_reason', 'training_failure_phase')
-EXTRA_METRIC_KEYS = ('sep_margin', 'margin', 'amp_over_target', 'delay_residue', 'sync_exit', 'done_be')
+EXTRA_METRIC_KEYS = ('sep_margin', 'margin', 'amp_over_target', 'delay_residue', 'sync_exit', 'amp_be', 'done_be')
 
 
 def flat(d):
@@ -45,7 +45,7 @@ def flat(d):
                 row['sep_margin'] = '-'
         else:
             row['sep_margin'] = '-'
-    for k in ('delay_residue', 'amp_over_target', 'sync_exit', 'done_be', 'amp_target_ratio',
+    for k in ('delay_residue', 'amp_over_target', 'sync_exit', 'amp_be', 'done_be', 'amp_target_ratio',
               'sep_gap', 'sep_tgt', 'sep_max_foil'):
         row[k] = r.get(k) or metrics.get(k) or '-'
     return row
@@ -72,7 +72,7 @@ def main(argv):
     if not rows:
         print('NO_RESULTS under', root)
         sys.exit(1)
-    cols = ('wave', 'case', 'attempt') + KEYS + ('DendriteLength', 'TipSynapseResistance', 'FixedLTZThreshold', 'sep_margin', 'delay_residue', 'amp_over_target', 'sync_exit', 'done_be', 'metrics')
+    cols = ('wave', 'case', 'attempt') + KEYS + ('DendriteLength', 'TipSynapseResistance', 'FixedLTZThreshold', 'sep_margin', 'delay_residue', 'amp_over_target', 'sync_exit', 'amp_be', 'done_be', 'metrics')
     print('\t'.join(cols))
     for r in rows:
         print('\t'.join(str(r.get(c, 'ERR')) for c in cols) if 'error' not in r else f"ERROR\t{r['file']}\t{r['error']}")

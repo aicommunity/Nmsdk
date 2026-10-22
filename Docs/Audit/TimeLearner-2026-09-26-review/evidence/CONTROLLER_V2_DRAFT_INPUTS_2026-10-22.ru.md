@@ -78,7 +78,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Числовые tol Done / margin / residual_dt | Из exit-clean G1 + E1 cal, не из drv-only |
 | Default Test mid policy | Решение §4.1 |
 | Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
-| Train `sep_margin` emit | **DONE** (C+++harness); SPEC tol ещё open; amp-BE mark остаётся в `DEBT-S0` |
+| Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |
 | D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); см. `D1_BISECT_2026-10-22` |
