@@ -8,7 +8,7 @@
 
 **G1_S1_RERUN dual-host закрыт** (последняя волна W02 rep3, `launch.exit=1`). В отборе [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv) **13 волн**; **3/13** exit-clean (W01/W13/W33), **10/13** с последним `launch.exit` ∈ {1,2}. Политика: [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md) — `SYNTHESIS_FINAL` по полной матрице запрещён; разрешён PARTIAL rollup. Ниже — блокеры, которые остаются открытыми.
 
-**DEBT-D2-silent-test (расследование 2026-10-22):** exit-clean W01/W13/W33 и F5 paired подтверждают стабильный фенотип `fires=00000000`, Acc 7/8, `FixedLTZ≈1`, `target_not_detected`; F5 γ и E2 wiring сняты с критического пути. Ранжированные гипотезы (silent mid / Canon flatten / train-vs-Test probes), code paths и **минимальный** следующий шаг (offline threshold sweep на bundle `G1.S1.W01-…15892`, опционально один cold W01_N0 с явным PostTune OFF) — [`SILENT_TEST_NEXT_STEPS_2026-10-22.ru.md`](SILENT_TEST_NEXT_STEPS_2026-10-22.ru.md).
+**DEBT-D2-silent-test (variant A offline, 2026-10-22):** на bundle `G1.S1.W01-11-20261021T113257Z-15892` парный Test-gate: **`candidate_mid=0.0024126668029073456`** → `fires=01000101`, Acc 4/8, Цель нет; **cpp thr=1** → `fires=00000000`, Acc 7/8 (как G1 partial). **H3 подтверждена** (finite candidate даёт не-all-zero fires vs silent cpp); **H1** — только слабая форма (thr=1 маскирует partial fires), **target_hit=0** при обоих порогах (peak target &lt; candidate_mid). Детали — [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md); cold W01_N0 (variant B) **не** нужен, пока не идём в H2/H4.
 
 ## Обновление 2026-10-21 (docs-only)
 
@@ -16,7 +16,7 @@
 
 ### P0 — алгоритм и качество оценки
 
-**silent-Test (`DEBT-D2-silent-test`, связанный `DEBT-TRACE-NOCSV`).** На W01 Classic×N0 train сходится с `converged_need0`, но Test даёт `fires=00000000` и/или зависание с `child_rc=-15` без TRACE CSV. G1 partial (2026-10-22): то же на exit-clean **W13/W33**; F5 paired γ=0≡γ=1 на W01 N1. E2: silent **не** различает S0/S1/S2 — ось detection/mid, не B1/E0 ([`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md)). Следующие шаги: [`SILENT_TEST_NEXT_STEPS_2026-10-22.ru.md`](SILENT_TEST_NEXT_STEPS_2026-10-22.ru.md).
+**silent-Test (`DEBT-D2-silent-test`, связанный `DEBT-TRACE-NOCSV`).** На W01 Classic×N0 train сходится с `converged_need0`, но Test даёт `fires=00000000` и/или `child_rc=-15` на gate. Offline sweep (2026-10-22) показал, что **thr=1** скрывает partial soma-fire, достижимый при `candidate_mid`, без восстановления target hit на N0 flat TipR. G1 partial: то же на **W13/W33**; F5 γ noop. E2: ось detection/mid ([`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md)). Evidence: [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md).
 
 **Classic N1 stall (`DEBT-CL-N1`, `DEBT-D2b5-W02`).** W02 `W02_CL480_N1_PSIoff` на всех плечах E2 заканчивается `not_converged_at_stop` с L=`54 44 1 1` и разносом TipR — картина согласуется с [`CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md`](CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md) и [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md). D1 bisect на `.11` ещё не дал «первый плохой коммит» ([`D1_PARTIAL_2026-10-20.ru.md`](D1_PARTIAL_2026-10-20.ru.md)).
 
@@ -58,7 +58,7 @@ DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog→.17 Data	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	kill after stall		
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH		
-DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2.0/D2.2	W01 converge fires=0 Test hang	P0	SYNTH/G1	open	D2/E2	G1 W01/W13/W33 silent; F5 γ noop; SILENT_TEST_NEXT_STEPS_2026-10-22		
+DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2.0/D2.2	W01 converge fires=0 Test hang	P0	SYNTH/G1	open	D2/E2	offline mid sweep W01-15892; H3 confirmed; SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22		
 DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent fires	P0	G1 labels	open	A1	BASELINE_DEGRADED		
 DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol×4 masks measured dt	P0	F2 Done_BE	confirmed	F7	F2.pref cold	2026-10-20T17:12Z	F2.pref
 DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test	open	gate	kill etime>180; rc=-15; linked DEBT-D2		
@@ -72,4 +72,4 @@ DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (G1 RERUN + F5 paired + DEBT-D2 SILENT_TEST_NEXT_STEPS).*
+*Последнее docs-обновление: 2026-10-22 (DEBT-D2 variant A offline mid sweep W01-15892).*
