@@ -11,7 +11,7 @@ DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog offload	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang	P1	A3	open	A3			
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma silent set1	P1	E1	open	C1			
-DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2	W01 fires=0 Test hang	P0	SYNTH/G1	partial	D2/E2	UseCandidateMidOnNonSeparableTest default off; MID_POLICY_H3_2026-10-22; cold flag=1 pending		
+DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2	W01 fires=0 Test hang	P0	SYNTH/G1	partial	D2/E2	H3 cold flag=1 PASS MID_POLICY_H3_COLD_2026-10-22; default-off silent G1/W13/W33 open	2026-10-22T09:58Z	h3_mid_flag1_w01
 DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent	P0	G1 labels	open	A1			
 DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol masks dt	P0	F2 Done_BE	confirmed	F7		2026-10-20T17:12Z	F2.pref
 DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test	open	gate			

@@ -16,6 +16,6 @@
 
 **Включение в StructTrain.** В Train XML нейрона (Classic или Branch): `<UseCandidateMidOnNonSeparableTest>1</UseCandidateMidOnNonSeparableTest>`. Test EXP наследует frozen weights; inference mid пересчитывается в отдельном процессе Test с тем же параметром, если он сериализован в модель/конфиг Test.
 
-**Cold (осталось).** При `flag=0` регрессия **не** требуется (идентично текущему G1). Для закрытия H3 на коде: **один** Test-only или paired Train+Test на **W01-15892** (или свежий W01_N0) с **`UseCandidateMidOnNonSeparableTest=1`**, Console собранный после gitlink PulseLib; ожидание: `FixedLTZ≈candidate_mid`, `fires` согласованы с offline `01000101`, `result=2`, gate quality_fail по цели.
+**Cold (harness, 2026-10-22).** Test-only на frozen W01 rep3 с **`UseCandidateMidOnNonSeparableTest=1`**, Console **`4a0658f3…`**, PulseLib **`5e5a59d`** — **PASS**: [`MID_POLICY_H3_COLD_2026-10-22.ru.md`](MID_POLICY_H3_COLD_2026-10-22.ru.md) (`FixedLTZ≈candidate_mid`, `fires=01000101`, `result=2`, `test_mid_policy=candidate`). При **`flag=0`** регрессия cold **не** требуется (идентично G1 partial / offline `test_cpp_mid`).
 
 **Связанные долги.** [`TECH_DEBT_TIMELEARNER_2026-10-20.ru.md`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md) **DEBT-D2-silent-test**; оси H1/H2/H4 без изменения.
