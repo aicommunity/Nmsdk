@@ -36,7 +36,7 @@
 |---|---|---|
 | Офлайн суперпозиция L/TipR × Pack A | **PARTIAL DONE** | cable_model + E2 states |
 | Gate match Console ≥5/6 | **PASS (6/6)** | Acc/Цель направление |
-| Измеренные ядра NextSegInh / PSI | **PARTIAL (E1.1d+e)** | single-pulse — [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md); tip multi-pulse Pack-A — [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md): @L=7 ≈passive, **0/132** gate; **не** заменяют τ=0.5 мс; proxy остаётся |
+| Измеренные ядра NextSegInh / PSI | **PARTIAL (E1.1d+e+f)** | single-pulse — [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md); tip multi-pulse — [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md); **4-dendrite Pack-A** — [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md): nextseg sep **−0.01/−0.03** vs proxy **+0.074**; **не** заменяют τ=0.5 мс; proxy остаётся |
 | Количественное совпадение margin с Console FixedLTZ | **PARTIAL** | знаки/fires совпали; абсолютные peak ≠ LTZ Console |
 | Карта Span × NeuronModel | **PARTIAL** | 6 точечных кейсов R8-среза, не полная матрица |
 

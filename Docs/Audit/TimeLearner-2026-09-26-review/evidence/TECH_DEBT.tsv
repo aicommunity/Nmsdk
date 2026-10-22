@@ -25,3 +25,4 @@ DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 S
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail 80G threshold	P1	cold .17	open	ops	root OK~156G; Dynamics offload 2026-10-22 → TLAgent-offload/dynamics-logs; OFFLOAD_DYNAMICS_17		
 DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	open	F3	CODE on timelearner_fix2 default off; Console 9540e64b…; R8 deferred; F3_RESET_BEFORE_PACK_2026-10-22		
 DEBT-E1.5-fragile-pass	2026-10-22T13:20Z	E1	E1.5	L±1 TipR×0.8/1.25 Test-only	P1	Controller v2 tol	partial	.11	FRAGILE br25 0/9 tiprmin TipR 0/2; E1_5_FRAGILITY_2026-10-22		E1_5_20261022
+DEBT-E1.1f	2026-10-22T15:20Z	E1	E1.1f	4-dendrite Pack-A retire proxy	P1	Controller VERIFY tol	partial	.11	offline negative sep−0.01/−0.03 vs proxy+0.074; Console Branch IR PENDING; E1_1f_FOUR_DENDRITE_PACKA_2026-10-22		E1_1f_20261022
