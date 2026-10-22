@@ -9,12 +9,25 @@ LANE="$1"; TASK="$2"; WAVE="$3"; CASES="$4"; JOBS="$5"; REP="$6"; shift 6
 DIR=$(cd "$(dirname "$0")" && pwd)
 eval "$(bash "$DIR/make_lane.sh" "$LANE" | grep '^export ST=')"
 : "${NMSDK_CONSOLE:?set NMSDK_CONSOLE to the Console built from the lane source}"
+series_rc=0
 for i in $(seq 1 "$REP"); do
   out=$(bash "$DIR/launch_queue.sh" "$TASK" "$WAVE" "$CASES" "$JOBS" "$@"); rc=$?
   rid=$(echo "$out" | tail -1)
   echo "$(date -u +%FT%TZ) lane=$LANE task=$TASK rep=$i rc=$rc run_id=$rid" | tee -a "$REPORTS/${TASK%%.*}_series.log"
   [ $rc -eq 0 ] || { echo "$out"; echo "STOP: launch failed"; exit 1; }
   echo "$rid" >> "$REPORTS/${TASK%%.*}_runs.txt"
-  bash "$DIR/wait_run.sh" "$rid" "${TASK%%.*}" > /dev/null || { echo "STOP: wait failed for $rid"; exit 1; }
+  bash "$DIR/wait_run.sh" "$rid" "${TASK%%.*}" > /dev/null
+  wr=$?
+  if [ "$wr" -ne 0 ]; then
+    echo "STOP: wait/launch.exit failed for $rid (wait_rc=$wr)"
+    # Keep going through remaining reps only if CONTINUE_ON_LAUNCH_EXIT=1; default stop.
+    if [ "${CONTINUE_ON_LAUNCH_EXIT:-0}" = "1" ]; then
+      series_rc=$wr
+      continue
+    fi
+    echo "SERIES_DONE $TASK EXIT=$wr"
+    exit "$wr"
+  fi
 done
 echo "SERIES_DONE $TASK"
+exit "$series_rc"

@@ -28,7 +28,7 @@
 
 ### P0 infra — G1 exit-gate и диск
 
-**Ложный «зелёный» SERIES_DONE (`DEBT-G1-exit-gate`).** `run_series.sh` фиксирует drv `EXIT=0` при появлении файла `launch.exit`, **не** проверяя его значение. После полного RERUN по-прежнему только W01/W13/W33 имеют `launch.exit=0`; остальные 10 волн — exit 1/2 при drv «зелёном» ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md), [`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md)). Rollup метрик и SYNTHESIS **не** должны опираться на drv-only SERIES_DONE; чинить gate в `run_series.sh` — отдельный infra-шаг.
+**Ложный «зелёный» SERIES_DONE (`DEBT-G1-exit-gate`) — harness DONE 2026-10-22.** `wait_run.sh` / `run_series.sh` теперь пробрасывают значение `launch.exit` в exit-код драйвера ([`DEBT_G1_EXIT_GATE_FIX_2026-10-22.ru.md`](DEBT_G1_EXIT_GATE_FIX_2026-10-22.ru.md)). Исторический G1 RERUN по-прежнему **3/13** exit-clean ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md)); rollup не опирается на старые drv `EXIT=0`.
 
 **Политика offload диска (`DEBT-disk-offload-policy`).** Soft-cold на `.17` смотрит Avail **корня** `/` (≥80 ГБ), тогда как `$DATA` на отдельном томе; неиспользуемые lanes и `_repro` offload на Data поднимали Avail корня до ~90–108 ГБ ([`STATUS_SNAPSHOT_2026-10-20T2325.ru.md`](STATUS_SNAPSHOT_2026-10-20T2325.ru.md), [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md)). На 2026-10-21 корень снова ~76 ГБ — риск повторного `worker_exit=1` (E2 rep3 W01). Операционное правило: перед новым cold на `.17` — offload lanes/`_repro`, не трогая активные G1 runs; human rule `.11` DATA≥200G без STOP ([`CAMPAIGN_STATUS_2026-10-20.ru.md`](CAMPAIGN_STATUS_2026-10-20.ru.md)). Исправление gate в скриптах — открытый пункт (см. TSV).
 
@@ -36,7 +36,7 @@
 
 - `DEBT-H-A15b` — не подтверждён на E2 R8, но формально open до отдельного SoftCold-среза.
 - `DEBT-A3-trace-hang`, `DEBT-A1-preinh-silent`, `DEBT-G1-432` (полная 432-матрица v1/v2 — этап 5).
-- Закрытые: A15 inputs, cpu-gate, disk-200G, disk-freegib-root (разовый offload), matrix-prepare-wave, F1a-offline, F7 confirmed→F2.pref.
+- Закрытые: A15 inputs, cpu-gate, disk-200G, disk-freegib-root (разовый offload), matrix-prepare-wave, F1a-offline, F7 confirmed→F2.pref, **G1-exit-gate harness**.
 
 ---
 
@@ -64,10 +64,10 @@ DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-
 DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2 soft-cold	done	.17	lanes offload 2026-10-20	2026-10-20T20:17Z	lanes-offload
 DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	P0	E2 R8	done	Bin	case-ids only 774704fc	2026-10-20T20:24Z	774704fc
 DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR no PASS on W01 N1	P1	F8 chain/R3	open	F5	paired 2026-10-22 γ=0≡γ=1; F5_GAMMA_PAIRED		
-DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series ignores launch.exit≠0	P0	G1 SYNTH	open	drv	post-RERUN 10/13 exit≠0; G1_S1_RERUN_EXIT_STATUS 2026-10-22		
+DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	done	drv	wait_run+run_series propagate; DEBT_G1_EXIT_GATE_FIX_2026-10-22	2026-10-22T06:30Z	harness
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
 ```
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (G1 RERUN complete + F5 paired γ cold на W01_CL50_N1).*
+*Последнее docs-обновление: 2026-10-22 (exit-gate harness fix + plan continue).*
