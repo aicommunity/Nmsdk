@@ -70,11 +70,11 @@ Probe-only, `IsNeedToTrain=0`. Trainer×Mode не применим.
 |---|---|---|
 | **t_peak(L), FWHM(L), L=1…100** | **PARTIAL DONE** | Gen + AsymRm W01-class; модель + якоря C1/E1_0 |
 | **δ(L), τ(L) таблицы** | **PARTIAL** | δ линейно из t_peak; τ(L) не выделена отдельно |
-| **γ, Rs-сетка** | **PENDING** | 8 точек log Rs, TipR≠8.6e7 |
-| **N-train (1,2,4…128)** | **PENDING** | с Reset; влияние на soma kernel |
+| **γ, Rs-сетка** | **PARTIAL → E1.1b** | [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md) |
+| **N-train (1,2,4…128)** | **PARTIAL → E1.1b** | multiplicity + Reset; L∈{1,10,25} |
 | **NextSegInh, PSI** | **PENDING** | отдельные прогоны |
 | **NeuronModel sweep** | **PENDING** | W01, W10, FastSpan, AsymRm A/B/C |
-| **Amp library** | **PENDING** | Gen bias 1.067; AsymRm oracle; silent L50 Gen |
+| **Amp library** | **PARTIAL → E1.1b** | Gen ÷1.067; AsymRm ×1.46; Gen L50 debt |
 
 ## Что E1.1 ещё требует (amp / Rs / N)
 
@@ -84,4 +84,4 @@ Probe-only, `IsNeedToTrain=0`. Trainer×Mode не применим.
 4. **Расширение моделей:** тот же каркас L×Rs×N для **FastSpan**, **AsymRm A/B/C**, шаблонов W01/W10 — не покрыто текущим TSV.
 5. **Одиночный missing-L cold Console** (опционально): только если понадобится снять silent **Gen L=50** — не блокирует timing L≤25 и модель L=50.
 
-**Следующий логичный шаг:** E1.1b — Rs×N на фиксированных L={1,10,25,50} для Gen (Console amp) + AsymRm после oracle; либо CL-N1 bisect по плану синтеза.
+**Следующий логичный шаг:** E1.1b выполнен scoped PARTIAL — [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md). Дальше: FastSpan/PSI/NextSegInh, Console amp-якоря, или CL-N1 bisect.
