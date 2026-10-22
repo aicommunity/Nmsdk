@@ -75,6 +75,7 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 5. **F1b → v2:** если Console-пилот подтверждает margin ≥ модели, переносится ли `NAxoneDelay` в train loop или только в финальный verify?
 6. **480 мс:** запускать только если G1+C2 согласованы; иначе — аксонные задержки (этап 6 аудита).
 7. **Test mid policy (H3, 2026-10-22):** при NonSeparable / `candidate_mid` finite **не** оставлять `FixedLTZ=1` как единственный классификатор Test — иначе silent Acc 7/8 маскирует foil fires ([`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)). Решение v2: явный Verify vs Test threshold contract (best-effort mid / refuse silent-as-PASS).
+8. **sep_margin / TipR (H4, 2026-10-22):** flat CanonRmin на Classic×N0 W01 кладёт Pack A LTZ в полосу ~2–3×10⁻³ с target&lt;candidate_mid; E1.1b γ(L)≈const → равномерный TipR не чинит gap — Verify должен смотреть ranking/margin, а AMP_ALIGN — дифференциальный Rs/N ([`SILENT_TEST_H4_MARGIN_2026-10-22.ru.md`](SILENT_TEST_H4_MARGIN_2026-10-22.ru.md), [`CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md`](CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md)).
 
 ---
 
