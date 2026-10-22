@@ -1,0 +1,110 @@
+{
+  "NeuronModel": "NSPNeuronGenAsymRmD001C1e9",
+  "L": 10,
+  "TipR": 86000000.0,
+  "f_hz": 20000,
+  "isi_s": 2.0,
+  "hosts": {
+    "reset": "Elder-1 (.11)",
+    "noreset": "M40 (.17)"
+  },
+  "console_sha256": "4a0658f34736bf0575f051d6ee790e9342f5df8ebf904956640fbeaaa7fdc5d7",
+  "reset": {
+    "peak": {
+      "n": 20,
+      "mean": 0.0022115747388351537,
+      "stdev": 0.0,
+      "min": 0.0022115747388351537,
+      "max": 0.0022115747388351537
+    },
+    "t_peak_s": {
+      "n": 20,
+      "mean": 0.09920000000000001,
+      "stdev": 0.0,
+      "min": 0.09920000000000001,
+      "max": 0.09920000000000001
+    },
+    "n_packs_requested": 20
+  },
+  "noreset": {
+    "trace_t_end_s": 13.5015,
+    "n_packs_requested": 20,
+    "n_windows_in_trace": 7,
+    "n_valid_epsp": 4,
+    "valid_packs": [
+      0,
+      1,
+      3,
+      6
+    ],
+    "missed_or_empty_packs": [
+      2,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "cause_notes": [
+      "MaxSpikesPerFeature=4 left at template default \u2014 multi-pulse InputPattern not fully honored",
+      "PatternResponseAnalyzer trace ends at ~13.5 s despite Console -t 42",
+      "Packs 2,4,5 in-window are numerically flat (missed spike), not amp noise"
+    ],
+    "all_valid": {
+      "peak": {
+        "n": 4,
+        "mean": 0.0017520090566999825,
+        "stdev": 0.0003063776061875401,
+        "min": 0.0015984351120955642,
+        "max": 0.0022115747388351537
+      },
+      "t_peak_s": {
+        "n": 4,
+        "mean": 0.10017499999999975,
+        "stdev": 0.0007675719293110298,
+        "min": 0.09920000000000001,
+        "max": 0.10099999999999909
+      }
+    },
+    "settled_pack_gt0": {
+      "peak": {
+        "n": 3,
+        "mean": 0.0015988204959882586,
+        "stdev": 6.675044825654162e-07,
+        "min": 0.0015984351120955642,
+        "max": 0.0015995912637736475
+      },
+      "t_peak_s": {
+        "n": 3,
+        "mean": 0.10049999999999966,
+        "stdev": 0.0004999999999997229,
+        "min": 0.09999999999999964,
+        "max": 0.10099999999999909
+      }
+    },
+    "systematic_bias_settled_vs_reset_rel": -0.2770669388137592
+  },
+  "proposed_F4": {
+    "eps_amp_abs": 2.2115747388351536e-05,
+    "eps_amp_rel": 0.01,
+    "latency_tol_s": 5e-05,
+    "basis": "reset arm sample \u03c3 (n=20); floor max(3\u03c3, 1%\u00b7mean_amp, 1/f_hz)",
+    "sigma_amp_reset": 0.0,
+    "sigma_lat_reset": 0.0,
+    "do_not_cover_noreset_bias": true,
+    "noreset_settled_bias_rel": -0.2770669388137592,
+    "secondary_sigma_amp_noreset_settled": 6.675044825654162e-07,
+    "secondary_sigma_lat_noreset_settled": 0.0004999999999997229
+  },
+  "verdict": "PARTIAL"
+}

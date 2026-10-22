@@ -13,6 +13,7 @@
 | A0 env / refresh / Console | OK; тег `tl-baseline-20261020` и DEBT-A0-ctest ещё open |
 | A1 / A3 / B2 / C1 / C2_MATCH | закрыты или MATCH по evidence R/E1 |
 | E1.0 cable vs Console soma-kernel | **PARTIAL** — [`E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md`](E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md) |
+| E1.2 repeatability Reset vs no-Reset | **PARTIAL** — reset×20 σ=0; noreset 4 valid / bias≈−28%; F4 eps=1% — [`E1_2_REPEATABILITY_2026-10-22.ru.md`](E1_2_REPEATABILITY_2026-10-22.ru.md) |
 | E2 R8 | EQUIVALENT — [`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md) |
 | G1 exit-clean полная матрица | **не** пройдена: **3/13** волн `launch.exit=0` после RERUN |
 | TECH_DEBT P0 | silent-Test (H3 confirmed offline — [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md)); CL-N1; S0 **partial**; G1-exit-gate **done** |
