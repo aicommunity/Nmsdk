@@ -1,0 +1,59 @@
+# SYNTHESIS_PARTIAL — TimeLearner AGENT_PLAN (2026-10-22)
+
+**Статус:** PARTIAL (не FINAL). Политика exit — [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md). Оглавление-черновик — [`SYNTHESIS_DRAFT_OUTLINE_2026-10-21.ru.md`](SYNTHESIS_DRAFT_OUTLINE_2026-10-21.ru.md). Группировка — [`RESULT_GROUPING_HIERARCHY.ru.md`](RESULT_GROUPING_HIERARCHY.ru.md).
+
+## 0. Область и SHA
+
+Кампания AGENT_PLAN 2026-10-20 на ветке `timelearner_fix2`. Cold-arm, вошедшие в эту сводку: **E2 R8** (EQUIVALENT) и **G1 S1** (13 волн / 32 case, RERUN закрыт). Console sha256 `745d6061…`, PulseLib `6d746ac` (F5-флаг default off). Документ **не** смешивает S0/S2 E2-плечи с G1 S1 в одной доле PASS без колонки Arm.
+
+## 1. Ворота кампании
+
+| Ворота | Статус |
+|--------|--------|
+| A0 env / refresh / Console | OK; тег `tl-baseline-20261020` и DEBT-A0-ctest ещё open |
+| A1 / A3 / B2 / C1 / C2_MATCH | закрыты или MATCH по evidence R/E1 |
+| E2 R8 | EQUIVALENT — [`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md) |
+| G1 exit-clean полная матрица | **не** пройдена: **3/13** волн `launch.exit=0` после RERUN |
+| TECH_DEBT P0 | silent-Test, CL-N1, S0 C++ fields, G1-exit-gate — open ([`TECH_DEBT_TIMELEARNER_2026-10-20.ru.md`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md)) |
+
+## 2. Trainer×Mode — системные выводы
+
+**Classic×N0.** На Span 50 exit-clean волны **W01** (PostTune OFF) и **W33** (PostTune ON) стабильно сходятся Train (`converged_need0` / `converged_posttune_finalized`), но Test даёт **silent Acc=7/8, Цель=нет** на всех трёх rep ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md)). Это совпадает с DEBT-D2-silent-test и с E2: silent не различает S0/S1/S2. Span 100/480 (**W02**, **W31**) после RERUN остаются `launch_exit=1` с `not_converged_at_stop` — метрики Test в partial **не** зачисляются.
+
+**Classic×N1.** **W13** (HIST ltz50 gen) — единственная exit-clean N1-волна; та же silent 7/8 без цели. **W09** / **W12** / pack-волна **W37** после RERUN — `launch_exit=1`, доли PASS по ним в кампанию не входят. CL-N1 stall на длинных span (семейство W02 N1 в E2) остаётся открытым DEBT.
+
+**Branch×N0 / Branch×N1.** Ни одна Branch-волна отбора не стала exit-clean после RERUN. **W04** — единственная с `launch_exit=2`; остальные Branch HIST / FastSpan (**W08**, **W10**, **W11**, **W48**) — `launch_exit=1`. Остров nextseg/preinh vs silent gen из более ранних boundary-map **не** перепроверен на exit-clean G1 S1 (нет clean Branch-волн).
+
+## 3. Таблица результатов (PARTIAL)
+
+Канон строк: [`G1_S1_PARTIAL_METRICS_2026-10-22.tsv`](G1_S1_PARTIAL_METRICS_2026-10-22.tsv). Кратко exit-clean (rep3):
+
+| Trainer×Mode | Span | NeuronModel | Mod | PostTune | Case | Acc | Цель | Train | Test |
+|--------------|------|-------------|-----|----------|------|-----|------|-------|------|
+| Classic×N0 | 50 | AsymRm | gen | OFF | W01_CL50_N0_PSIoff | 7/8 | нет | `TimeLearnerMatrix/W01/inputs/…/Train` | `…/Test` |
+| Classic×N1 | 50 | AsymRm | gen | OFF | W13_HIST_ltz50_gen | 7/8 | нет | `TimeLearnerMatrix/W13/inputs/…/Train` | `…/Test` |
+| Classic×N0 | 50 | AsymRm | gen | ON | W33_CL50_N0_PSIoff_POST | 7/8 | нет | `TimeLearnerMatrix/W33/inputs/…/Train` | `…/Test` |
+
+Остальные 29 case-строк TSV несут `failure_class=launch_exit_1|2` и Acc/Цель = `—`.
+
+## 4. C2 vs Console (G1)
+
+Полное сопоставление 32 case **отложено**. Для exit-clean тройки допустима точечная сверка с [`G1_predictions_2026-10-21.tsv`](G1_predictions_2026-10-21.tsv) / [`G1_vs_C2_2026-10-21.tsv`](G1_vs_C2_2026-10-21.tsv) без экстраполяции на non-exit волны. Расхождения oracle vs silent на W01/W13/W33 остаются в зоне DEBT detection/mid, не infra.
+
+## 5. Точечные фиксы F1–F8
+
+F2/F3/F4/F6 cold закрыты без регрессии Train на своих пилотах; **F5** — OPEN (`CorrectAttenuationGammaForTipR` patched, один cold W01 Need=0 + quality_fail; paired γ vs baseline **не** завершён — [`F5_GAMMA_COLD_2026-10-21.ru.md`](F5_GAMMA_COLD_2026-10-21.ru.md)). F7 → F2.pref; F8 done. Silent Test **не** зачтён как PASS ни на одном фиксе.
+
+## 6. Controller v2 и этап 5–6
+
+Скелет DRAFT — [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md). Решение «432 v1 vs v2» и V-gate этапов 4–6 **не** блокируются ожиданием 13/13 exit-clean, но **не** опираются на drv-only SERIES_DONE. F1b senior по-прежнему блокер физики быстрого EPSP.
+
+## 7. Риски и следующий цикл
+
+1. Починить или явно жить с **DEBT-G1-exit-gate** в `run_series.sh` (читать значение `launch.exit`).
+2. **F5 paired** γ vs baseline на одном case (слоты Console свободны после RERUN).
+3. Алгоритм: **silent-Test** / mid / CL-N1 — без этого G1 не наберёт exit-clean большинство.
+4. Не стартовать повторный RERUN тех же 10 волн на том же SHA.
+
+---
+*При достижении exit-clean большинства волн или смене отбора — опубликовать `SYNTHESIS_FINAL_*.ru.md` и пометить этот PARTIAL superseded.*
