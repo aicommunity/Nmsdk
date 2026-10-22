@@ -17,11 +17,12 @@
 | **E1.0** cable vs Console | **PARTIAL** | Gen amp bias ≈ **÷1.067** (Console ниже model); AsymRm peak **не** совпадает с пассивом → нужен **oracle ×≈1.46**; timing/FWHM на якорях OK | [`E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md`](E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md) |
 | **E1.1** timing L=1…100 | **PARTIAL DONE** | δ ≈ **9.48** мс/сег (Gen), **9.96** мс/сег (AsymRm) — старт bracketed `LEN_SEARCH` | [`E1_1_TIMING_LIBRARY_2026-10-22.ru.md`](E1_1_TIMING_LIBRARY_2026-10-22.ru.md), TSV |
 | **E1.1b** amp Rs×N | **PARTIAL DONE** | γ(L)≈const по TipR; рычаг amp = **log Rs / N**; насыщение **N ≳ 16** (эффективно N≲8…16) | [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md), TSV |
-| **E1.1d** NextSegInh/PSI | **PARTIAL** (`da88a998c`) | single-pulse AsymRm: PSI amp×~2.4 (FWHM≈pas); NextSeg ΔFWHM≈−9.5% @L=1, ≈pas @остров L=7 — **не** τ=0.5 мс; **не заменяет** E1.4 `ideal_inh_proxy`; multi-pulse IR **PENDING** | [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md), TSV |
-| **E1.4** sep predictor | **PARTIAL** gate **6/6** (`e9a0808c8`) | офлайн `(tgt−max_foil)/tgt` по L/TipR/mod; gen→passive cable; nextseg/preinh→**`ideal_inh_proxy`** τ=0.5 мс при sync CV≤0.25; proxy остаётся до multi-pulse | [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md), TSV |
+| **E1.1d** NextSegInh/PSI | **PARTIAL** (`da88a998c`) | single-pulse AsymRm: PSI amp×~2.4 (FWHM≈pas); NextSeg ΔFWHM≈−9.5% @L=1, ≈pas @остров L=7 — **не** τ=0.5 мс; **не заменяет** E1.4 `ideal_inh_proxy` | [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md), TSV |
+| **E1.1e** multi-pulse tip IR | **PARTIAL / negative** | Pack-A ISI tip-drive: nextseg@L=7 ≈passive (last_fwhm~62–66 мс); **0/132** meet FWHM/span≲0.13; **не** retire proxy | [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md), TSV |
+| **E1.4** sep predictor | **PARTIAL** gate **6/6** (`e9a0808c8`) | офлайн `(tgt−max_foil)/tgt` по L/TipR/mod; gen→passive cable; nextseg/preinh→**`ideal_inh_proxy`** τ=0.5 мс при sync CV≤0.25; proxy остаётся (E1.1e tip multi-pulse negative) | [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md), TSV |
 | **E1.5** fragility | **PARTIAL / FRAGILE** (`f9e83bf8c`) | Test-only L±1 / TipR×0.8/×1.25: br25_nextseg **0/9** strict; tiprmin TipR **0/2**; baseline `sep_ltz` **~1–2%** — tol VERIFY ≥ L±1 и TipR±25% | [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md); `DEBT-E1.5-fragile-pass` |
 
-**Следствие для скелета:** шаг `LEN_SEARCH` стартует из C2 + δ(E1.1); шаг `AMP_ALIGN` — бисекция log Rs и N с потолком кратности ~16; калибровка peak — Gen×1.067 / AsymRm oracle, не «сырой» passive cable. VERIFY может сверять Train `sep_margin` с E1.4-предсказанием, но **числовой tol SPEC** обязан учитывать E1.5 (остров ~1–2% sep; Done на граничном mid ложен) и **не** может опираться на замену inh-proxy single-pulse E1.1d (нужен multi-pulse).
+**Следствие для скелета:** шаг `LEN_SEARCH` стартует из C2 + δ(E1.1); шаг `AMP_ALIGN` — бисекция log Rs и N с потолком кратности ~16; калибровка peak — Gen×1.067 / AsymRm oracle, не «сырой» passive cable. VERIFY может сверять Train `sep_margin` с E1.4-предсказанием, но **числовой tol SPEC** обязан учитывать E1.5 (остров ~1–2% sep; Done на граничном mid ложен) и **не** может опираться на замену inh-proxy tip-ядрами E1.1d/e (multi-pulse tip negative; proxy intentional до 4-dendrite/Console Branch IR).
 
 Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline); Train/Test — N/A или probe-шаблоны W01/W02/W11 (см. E1.0). E1.5 якоря — Branch×N1 tiprmin/nextseg с явными Train/Test в evidence.
 
@@ -88,7 +89,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Default Test mid policy | Решение §4.1 — **ещё open** |
 | Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
 | Train `sep_margin` / `amp_be` emit | **DONE** (C+++harness; `DEBT-S0` closed); SPEC tol ещё open |
-| Inh-ядра для nextseg/preinh | multi-pulse IR (E1.1d PENDING); single-pulse **не** заменяет `ideal_inh_proxy` |
+| Inh-ядра для nextseg/preinh | tip multi-pulse E1.1e **negative**; proxy intentional до 4-dendrite/Console Branch IR |
 | F3 Reset default в v2 | после R8 A/B (`DEBT-F3-R8` deferred); CODE default off |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |
