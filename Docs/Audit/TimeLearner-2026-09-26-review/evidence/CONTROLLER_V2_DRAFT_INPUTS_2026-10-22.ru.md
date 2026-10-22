@@ -4,7 +4,7 @@
 
 **Запрет этого arm:** не трогать Console, не стартовать cold/matrix/bisect, не G1 RERUN / F1b cold / KeepDone.
 
-**Refresh SHA якорей (root `timelearner_fix2`):** E1.4 `e9a0808c8` · E1.5 `f9e83bf8c` · E1.1d `da88a998c` · F3 `e02f7bcaa` (PulseLib `4b85c91`).
+**Refresh SHA якорей (root `timelearner_fix2`):** E1.4 `e9a0808c8` · E1.5 `f9e83bf8c` · E1.1d `da88a998c` · E1.1e `2adf0cd35` · F3 `e02f7bcaa` (PulseLib `4b85c91`) · CL-N1 HEAD ablations `6245a0c09` (PulseLib F6/F7 tip `a532db7`, defaults historical). Сводка кампании — [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md) (**FINAL blocked**; `DEBT-CL-N1` open).
 
 ---
 
@@ -45,7 +45,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 
 ## 3. D1 фаза 2 + F3 Reset (контекст, не финал SPEC)
 
-**D1 / CL-N1.** На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span; числа tol — отдельно от CL-N1 stall (долг ещё open).
+**D1 / CL-N1.** На Classic×N1 W02 (`W02_CL480_N1_PSIoff`) фаза 2 поиска первого L₀≥54 **CLOSED**: lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); **первый L₀≥54 = `3cefd64`**. Источник: [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). **HEAD stage-2 ablations (`6245a0c09`):** base+(a–e) — **6/6** `not_converged_at_stop` (Need=1, L≈`53–54 44 1 1`); ни Rmin-floor / midband-off / tol×1 / γ-fixed / Reset **не** sole-fix — [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md). Для v2: `infeasible_len` / MaxL overshoot и hold TipR остаются кандидатами поведения на длинных Span; числа tol — отдельно от CL-N1 stall (**`DEBT-CL-N1` open**).
 
 **F3 / A5 (`e02f7bcaa`, PulseLib `4b85c91`).** Флаг `ResetNeuronBeforeTrainBurst` портирован на `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`), **CODE default off**; матричные defaults не трогали. **`DEBT-F3-R8` deferred** — cold A/B flag=0 vs 1 и R8 не этот arm. Исторический Need=0@flag=1 на `agent/tl-audit-f2-f3` не закрывает R8 на HEAD. Evidence: [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). Для скелета §5.3: Reset остаётся **опциональным** до R8; E1.3 показал, что пауза ≤5 с не заменяет Reset.
 

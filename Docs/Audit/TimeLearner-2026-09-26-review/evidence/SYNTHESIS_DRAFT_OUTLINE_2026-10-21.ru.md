@@ -19,7 +19,7 @@
 Развёрнутые абзацы (не только таблица):
 
 - **Classic×N0:** W01 Need=0 + silent Test (DEBT); эквивалентность E2.
-- **Classic×N1:** CL-N1 stall на W02 (L=54 44 1 1, not_converged) — все arms E2; bisect D1 частично ([`D1_PARTIAL_2026-10-20.ru.md`](D1_PARTIAL_2026-10-20.ru.md)).
+- **Classic×N1:** CL-N1 stall на W02 (L=54 44 1 1, not_converged) — все arms E2; D1 L₀ CLOSED `3cefd64`; HEAD ablations 6/6 stall ([`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md)); `DEBT-CL-N1` open.
 - **Branch×N0/N1:** W04/W10 — converged vs fires/quality; остров nextseg/preinh vs gen/preinh silent.
 
 ## 3. Таблица результатов (шаблон)
