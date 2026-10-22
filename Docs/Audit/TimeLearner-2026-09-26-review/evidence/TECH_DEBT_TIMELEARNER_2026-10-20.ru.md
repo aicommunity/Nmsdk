@@ -28,7 +28,7 @@
 
 **F1b senior (`DEBT-F1b`) — still OPEN.** Console-пилот «быстрый EPSP + NAxoneDelay» не стартовал; docs-ready checklist добавлен в карточку ([`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b) и в [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §5 — cold только после senior approve. F1a офлайн закрыт (DEBT-F1a-offline done). F1b питает этап 4 Controller v2 ([`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md)).
 
-**Controller DRAFT refresh (2026-10-22):** sibling входы E1/H*/D1/open decisions — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md); Train `sep_margin` / `amp_be` emit **закрыт**, `DEBT-S0` done ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); SPEC ещё не писать (tol margin, mid policy, TipR mode).
+**Controller DRAFT refresh (2026-10-22, notes refreshed):** sibling входы E1.0–E1.5 / H* / D1 / F3 / open decisions — [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) (якоря E1.4 `e9a0808c8`, E1.5 `f9e83bf8c`, E1.1d `da88a998c`, F3 `e02f7bcaa`/PulseLib `4b85c91`); Train `sep_margin` / `amp_be` emit **закрыт**, `DEBT-S0` done ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)); **`DEBT-CTRL-V2-DRAFT` остаётся open** до SPEC (tol с учётом E1.5 ~1–2% sep; mid policy; TipR KeepDone weakened; ideal_inh_proxy не заменён single-pulse E1.1d).
 
 ### P0 infra — G1 exit-gate и диск
 
@@ -71,7 +71,7 @@ DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	
 DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH margins	2026-10-20T15:45Z	F1a_20261020
 DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	docs-ready checklist; DEBT-F1b still open; no cold		
 DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	done	stage0	S0_CPP_EMIT_2026-10-22; amp_be+done_be OR; PulseLib 4e3714a	2026-10-22T12:40Z	4e3714a
-DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller DRAFT refresh	P1	SPEC	open	docs	CONTROLLER_V2_DRAFT_INPUTS_2026-10-22; not C++ SPEC		
+DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller DRAFT refresh	P1	SPEC	open	docs	notes refreshed 2026-10-22: E1.4/E1.5/E1.1d/F3; not C++ SPEC; keep open until SPEC		
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog→.17 Data	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	kill after stall		
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH		
@@ -93,4 +93,4 @@ DEBT-E1.5-fragile-pass	2026-10-22T13:20Z	E1	E1.5	L±1 TipR×0.8/1.25 Test-only	P
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (E1.5 fragility PARTIAL FRAGILE; DEBT-E1.5-fragile-pass; F3 CODE / DEBT-F3-R8 open).*
+*Последнее docs-обновление: 2026-10-22 (Controller DRAFT inputs refresh: E1.4/E1.5/E1.1d/F3; DEBT-CTRL-V2-DRAFT notes refreshed, still open until SPEC).*
