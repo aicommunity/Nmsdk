@@ -54,7 +54,7 @@
 
 **E1.5 fragility PARTIAL** (`DEBT-E1.5-fragile-pass`, 2026-10-22): Test-only L±1 / TipR global ×0.8/×1.25 на PASS tiprmin + br25_nextseg — вердикт **FRAGILE** (br25 **0/9** strict; tiprmin TipR 0/2; sep_ltz baseline ~1–2%). Вход в Controller v2 SPEC: tol margin ≥ L±1 и TipR±25% — [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md). Per-tip TipR ещё PENDING.
 
-**F3 Reset-before-pack CODE** (2026-10-22): `ResetNeuronBeforeTrainBurst` default **off** на PulseLib `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`); Console `9540e64b7813ee2e…` — [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). **DEBT-F3-R8:** cold A/B flag=0 vs 1 и R8 **deferred** (матричные defaults не трогали). Исторический cold Need=0 при flag=1 был на `agent/tl-audit-f2-f3`@`0ad009a` ([`F2_F3_COLD_2026-10-20.ru.md`](F2_F3_COLD_2026-10-20.ru.md)) — не считать закрытым R8 на HEAD без повторного arm.
+**F3 Reset-before-pack CODE** (2026-10-22): `ResetNeuronBeforeTrainBurst` default **off** на PulseLib `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`); Console после tip sync `f88d1852…` / PulseLib `3a599a7` — [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). **DEBT-F3-R8: done** — cold A/B flag=0 vs 1 на `W01_CL50_N1_PSIoff` и `W10_HIST_br25_nextseg`: Branch остров **не** регрессировал при flag=1 (Acc 8/8); W01 — Need=0 + silent Test `quality_fail` бит-в-бит как flag=0; матричные defaults не трогали — [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md).
 
 ### Прочие открытые (без изменения статуса)
 
@@ -94,7 +94,7 @@ DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	
 DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR no PASS on W01 N1	P1	F8 chain/R3	open	F5	paired 2026-10-22 γ=0≡γ=1; F5_GAMMA_PAIRED		
 DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	done	drv	wait_run+run_series propagate; DEBT_G1_EXIT_GATE_FIX_2026-10-22	2026-10-22T06:30Z	harness
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
-DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	open	F3	CODE timelearner_fix2 default off; Console 9540e64b…; R8 deferred; F3_RESET_BEFORE_PACK_2026-10-22		
+DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	done	F3	A/B W01+br25_nextseg; BR PASS no regress; W01 silent unchanged; default off; F3_R8_AB_2026-10-22	2026-10-22T16:15Z	F3.R8.W01+BR		
 DEBT-E1.5-fragile-pass	2026-10-22T13:20Z	E1	E1.5	L±1 TipR×0.8/1.25 Test-only	P1	Controller v2 tol	partial	.11	FRAGILE br25 0/9 tiprmin TipR 0/2; E1_5_FRAGILITY_2026-10-22		E1_5_20261022
 DEBT-E1.1f	2026-10-22T15:20Z	E1	E1.1f	4-dendrite Pack-A / Console IR retire proxy	P1	Controller VERIFY tol	partial-wontfix-offline	.11	offline E1.1d/e/f + Console E1.1g FWHM~29–31ms≫2.1; sep_soma&lt;0; proxy intentional for SPEC; E1_1g_CONSOLE_BRANCH_IR_2026-10-22	2026-10-22T15:40Z	E1_1g_20261022
 ```

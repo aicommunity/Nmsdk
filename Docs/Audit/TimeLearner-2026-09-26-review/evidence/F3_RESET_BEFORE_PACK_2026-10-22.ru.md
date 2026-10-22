@@ -35,7 +35,7 @@ Audit: в iteration-строке печатается `;reset_before_train_burst
 
 ## R8 A/B
 
-**Отложено** (не этот turn): cold A/B flag=0 vs flag=1 на W01 Classic×N1 и R8 после успешного merge. Default off → поведение матрицы без overlay бит-в-бит как до патча.
+**Закрыто 2026-10-22:** cold A/B flag=0 vs 1 на `W01_CL50_N1_PSIoff` и `W10_HIST_br25_nextseg` — [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md) (`DEBT-F3-R8` done). Branch остров без регрессии при flag=1; W01 silent Test без изменения. Default **off** сохранён; матричные defaults не трогали.
 
 ## Вывод
 
