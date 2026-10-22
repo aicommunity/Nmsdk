@@ -24,3 +24,4 @@ DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR	P1	R3	op
 DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	done	drv	wait_run+run_series propagate launch.exit; DEBT_G1_EXIT_GATE_FIX_2026-10-22	2026-10-22T06:30Z	harness
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail 80G threshold	P1	cold .17	open	ops	root OK~156G; Dynamics offload 2026-10-22 → TLAgent-offload/dynamics-logs; OFFLOAD_DYNAMICS_17		
 DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	open	F3	CODE on timelearner_fix2 default off; Console 9540e64b…; R8 deferred; F3_RESET_BEFORE_PACK_2026-10-22		
+DEBT-E1.5-fragile-pass	2026-10-22T13:20Z	E1	E1.5	L±1 TipR×0.8/1.25 Test-only	P1	Controller v2 tol	partial	.11	FRAGILE br25 0/9 tiprmin TipR 0/2; E1_5_FRAGILITY_2026-10-22		E1_5_20261022
