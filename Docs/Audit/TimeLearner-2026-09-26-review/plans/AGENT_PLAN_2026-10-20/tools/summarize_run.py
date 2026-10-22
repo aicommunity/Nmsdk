@@ -28,18 +28,25 @@ def flat(d):
         'metrics': r.get('metrics') or '-',
         'runtime_execution_options': d.get('runtime_execution_options') or r.get('runtime_execution_options'),
     }
-    # Stage0 fields: prefer explicit result keys, else metrics dict / selectivity
+    # Stage0: prefer C++ Train emit (sep_margin), else gate selectivity peaks.
     sel = r.get('selectivity') if isinstance(r.get('selectivity'), dict) else {}
-    tgt = sel.get('target_peak') or metrics.get('target_peak')
-    foil = sel.get('max_foil_peak') or metrics.get('max_foil_peak')
-    if tgt not in (None, '') and foil not in (None, ''):
-        try:
-            row['sep_margin'] = (float(tgt) - float(foil)) / float(tgt) if float(tgt) else '-'
-        except Exception:
-            row['sep_margin'] = '-'
+    explicit = r.get('sep_margin')
+    if explicit in (None, ''):
+        explicit = metrics.get('sep_margin')
+    if explicit not in (None, ''):
+        row['sep_margin'] = explicit
     else:
-        row['sep_margin'] = r.get('sep_margin') or metrics.get('sep_margin') or '-'
-    for k in ('delay_residue', 'amp_over_target', 'sync_exit', 'done_be', 'amp_target_ratio'):
+        tgt = sel.get('target_peak') or metrics.get('target_peak')
+        foil = sel.get('max_foil_peak') or metrics.get('max_foil_peak')
+        if tgt not in (None, '') and foil not in (None, ''):
+            try:
+                row['sep_margin'] = (float(tgt) - float(foil)) / float(tgt) if float(tgt) else '-'
+            except Exception:
+                row['sep_margin'] = '-'
+        else:
+            row['sep_margin'] = '-'
+    for k in ('delay_residue', 'amp_over_target', 'sync_exit', 'done_be', 'amp_target_ratio',
+              'sep_gap', 'sep_tgt', 'sep_max_foil'):
         row[k] = r.get(k) or metrics.get(k) or '-'
     return row
 

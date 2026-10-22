@@ -49,7 +49,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 
 1. **`candidate_mid` на Test:** когда включать `UseCandidateMidOnNonSeparableTest` (только NonSeparable? всегда при finite candidate? never default-on до V-gate)? Default-off сохраняет G1 silent; cold PASS на flag=1 доказан, но production policy не выбрана.
 2. **TipR PostTune: KeepDone vs CanonRmin:** H2 **ослаблена** (overlay + KeepDone cold W33 после pin); `DEBT-17` done. SPEC не должен зафиксировать KeepDone(3) или Canon mode=1 как sole-fix silent thr=1.
-3. **`sep_margin` Train emit (`DEBT-S0-cpp-fields` gap):** residue/Done_BE уже частичны; **sep_margin на Train всё ещё gate-only** — без C++ emit Verify/rollup v2 не сможет закрыть ворота «запас ≥ предсказанный − 2 п.п.» из offline-таблиц без повторного Test-gate.
+3. **`sep_margin` Train emit** — **CLOSED 2026-10-22** (больше не блокер emit-path): C++ пишет `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` в Train audit + `posttune_complete.flag` (`(tgt−max_foil)/tgt`); harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). Для SPEC остаётся выбрать **числовой tol** «запас ≥ предсказанный − 2 п.п.».
 4. **F1b → `FINE_DELAY`:** перенос `NAxoneDelay` в train loop vs только финальный verify — ждёт senior docs-ready (ниже) и cold; **`DEBT-F1b` OPEN**.
 5. **N0 при Span > 50 мс / 480 мс:** C2 T_max и E1.1 δ остаются; решение «чистый N0 vs N1+delay» — после согласования с D1/CL-N1 и этапом 6.
 
@@ -78,7 +78,7 @@ Trainer×Mode для probe-библиотек **N/A** (IsNeedToTrain=0 / offline
 | Числовые tol Done / margin / residual_dt | Из exit-clean G1 + E1 cal, не из drv-only |
 | Default Test mid policy | Решение §4.1 |
 | Default PostTrainTipResistanceMode | Решение §4.2: H2 **ослаблена** — не брать KeepDone(3) как sole-fix silent thr=1 |
-| Train `sep_margin` emit | Закрытие gap `DEBT-S0-cpp-fields` |
+| Train `sep_margin` emit | **DONE** (C+++harness); SPEC tol ещё open; amp-BE mark остаётся в `DEBT-S0` |
 | Псевдокод Branch reverse-order + topology strategy | После C2↔Console точечной сверки |
 | F1b cold результат | Senior + PASS×3 margin |
 | D1 L₀≥54 SHA | phase2 CLOSED: первый ≥54 = **`3cefd64`** (MaxL escape); см. `D1_BISECT_2026-10-22` |
