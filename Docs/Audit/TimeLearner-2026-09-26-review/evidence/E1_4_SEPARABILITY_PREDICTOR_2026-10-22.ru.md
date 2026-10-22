@@ -36,7 +36,7 @@
 |---|---|---|
 | Офлайн суперпозиция L/TipR × Pack A | **PARTIAL DONE** | cable_model + E2 states |
 | Gate match Console ≥5/6 | **PASS (6/6)** | Acc/Цель направление |
-| Измеренные ядра NextSegInh / PSI | **PENDING** | E1.1; сейчас ideal_delay τ=0.5 мс + CV≤0.25 |
+| Измеренные ядра NextSegInh / PSI | **PARTIAL (E1.1d)** | single-pulse AsymRm сняты — [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md); **не** заменяют τ=0.5 мс (FWHM@L=7≈62 мс); multi-pulse IR PENDING; proxy остаётся |
 | Количественное совпадение margin с Console FixedLTZ | **PARTIAL** | знаки/fires совпали; абсолютные peak ≠ LTZ Console |
 | Карта Span × NeuronModel | **PARTIAL** | 6 точечных кейсов R8-среза, не полная матрица |
 

@@ -72,7 +72,7 @@ Probe-only, `IsNeedToTrain=0`. Trainer×Mode не применим.
 | **δ(L), τ(L) таблицы** | **PARTIAL** | δ линейно из t_peak; τ(L) не выделена отдельно |
 | **γ, Rs-сетка** | **PARTIAL → E1.1b** | [`E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md`](E1_1b_RS_N_AMP_LIBRARY_2026-10-22.ru.md) |
 | **N-train (1,2,4…128)** | **PARTIAL → E1.1b** | multiplicity + Reset; L∈{1,10,25} |
-| **NextSegInh, PSI** | **PENDING** | отдельные прогоны |
+| **NextSegInh, PSI** | **PARTIAL → E1.1d** | [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md) |
 | **NeuronModel sweep** | **PARTIAL** | FastSpan → [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md); AsymRm A/B/C / W01-full ещё PENDING |
 | **Amp library** | **PARTIAL → E1.1b / E1.1c** | Gen ÷1.067; AsymRm ×1.46; FastSpan model_only (no Console cal) |
 
