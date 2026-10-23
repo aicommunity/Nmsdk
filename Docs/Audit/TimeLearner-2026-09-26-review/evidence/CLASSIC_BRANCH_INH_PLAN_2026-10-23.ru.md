@@ -89,9 +89,9 @@ Mod: `gen`, `preinh`, `nextseg`, `segei`, `preinh_nextseg`, `preinh_segei`, `nex
 
 | Шаг | Статус |
 | --- | --- |
-| Этот документ | in progress |
-| PulseLib NextSeg Classic + SegEI Classic/Branch + SymInh | pending |
-| Bin EXP сетка | pending |
-| SoftCold Classic 48 | pending |
-| SoftCold Branch 24 | pending |
+| Этот документ | done |
+| PulseLib NextSeg Classic + SegEI Classic/Branch + SymInh | done (40f09a2) |
+| Bin EXP сетка | done (01baf8d4, 72 EXP) |
+| SoftCold Classic 48 | in progress |
+| SoftCold Branch 24 | in progress |
 | RESULTS | pending |
