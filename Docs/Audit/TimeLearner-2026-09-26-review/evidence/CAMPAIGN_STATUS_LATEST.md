@@ -1,15 +1,11 @@
-# Campaign status 2026-10-23T08:10Z
+# Campaign status 2026-10-23T09:15Z
 
-- **A15 port to Bin tip** — DONE: B1 `1fa1aa7c` + B2 `7292522e` (from `agent/tl-a15-inputs`); FAIL Test 0; evidence [`A15_PORT_TO_TIP_2026-10-23.ru.md`](A15_PORT_TO_TIP_2026-10-23.ru.md). Bin tip local ahead; push pending.
-- **Стратегия 23.10** — норматив: [`STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md`](STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md). Дендрит: τ(Cm) per Span + Trainer×Mode×Mod (карточка [`H0`](../plans/AGENT_PLAN_2026-10-20/cards/H0_tau_cm_per_span.md)). F1b **не отменён** = фаза A (аксонный тренер) **после** ворот H0.
-- **Исходный Cursor-план** сохранён в git: [`../plans/CURSOR_PLAN_timelearner_agent_plan_1d9a3d4d.plan.md`](../plans/CURSOR_PLAN_timelearner_agent_plan_1d9a3d4d.plan.md) · индекс [`../plans/CURSOR_PLAN_INDEX.ru.md`](../plans/CURSOR_PLAN_INDEX.ru.md) ← связь с аудитом [`../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md).
-- **G1 S1 RERUN** dual-host — **closed** (PARTIAL exit policy; 3/13 exit-clean). G1 waves **not** restarted.
-- **F5 paired γ (Span50)** — **done** on `.11`. Evidence: [`F5_GAMMA_PAIRED_2026-10-22.ru.md`](F5_GAMMA_PAIRED_2026-10-22.ru.md).
-- **F5 Span100 tip-noop A/B** — **done**. Evidence: [`F5_GAMMA_SPAN100_2026-10-22.ru.md`](F5_GAMMA_SPAN100_2026-10-22.ru.md).
-- **F5 Span100 LIVE A/B** — **done**: PulseLib **`9efca9c`**, Console **`213e7003…`**, **γ=0≡γ=1** silent noop. Evidence: [`F5_GAMMA_SPAN100_LIVE_2026-10-23.ru.md`](F5_GAMMA_SPAN100_LIVE_2026-10-23.ru.md). **DEBT-F5-gamma OPEN**. **No more F5 cold** without new hypothesis.
-- **CL-N1:** H1 Span100 done (stall 480-specific); H2 exit-classes normative in SPEC DRAFT.
-- **Controller v2:** SPEC DRAFT enriched; **FINAL** still open (mid / tol / CL-N1@480; F1b = фаза A, не блокер дендритного FINAL по стратегии 23.10).
-- **E0** `--train-param` на Bin tip; **tl-baseline-20261020** cut → root `03c8cb9`.
-- Tip (на момент F5 close): root **`a4f7c1287`**, Bin **`e49a52bf`**, PulseLib **`9efca9c`**, Console **`213e7003…`**.
-- Still open (no auto-cold): H0 τ(Cm) docs→execute; F1b senior **фаза A**; CTRL FINAL (mid/tol/CL-N1@480); F5 A7 noop; silent-Test `DEBT-D2`.
-- Monitor 5м ticks — **stopped** (user).
+- **Фаза D (дендрит) / ворота D** — **карта опубликована**: [`DENDRITE_MAP_TAU_CM_2026-10-23.ru.md`](DENDRITE_MAP_TAU_CM_2026-10-23.ru.md). Preflight: [`PREFLIGHT_PHASE_D_2026-10-23.ru.md`](PREFLIGHT_PHASE_D_2026-10-23.ru.md).
+- **H0a** — DONE: теор. таблица + UploadClass PulseLib **`35cd074`** + EXP `SelectivityTauCm` Bin **`ab8c5bae`**. Evidence: [`H0A_TAU_CM_TABLE_2026-10-23.ru.md`](H0A_TAU_CM_TABLE_2026-10-23.ru.md). Legacy classes/EXP read-only.
+- **H0b** — cold dual-host **in flight** (`.11`≤8 Classic S100/50/200; `.17`≤12 Branch S100). Журнал: [`H0B_COLD_LAUNCH_2026-10-23.tsv`](H0B_COLD_LAUNCH_2026-10-23.tsv).
+- **Controller v2 SPEC FINAL** — DONE: [`CONTROLLER_V2_SPEC_FINAL_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_FINAL_2026-10-23.ru.md) (mid C+A; tol; CL-N1@480). `DEBT-CTRL-V2-DRAFT` closed.
+- **A15 port** — DONE on tip (`7292522e` / root was `23b6ff7ad`).
+- **Стратегия 23.10** — норматив: [`STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md`](STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md). **F1b = фаза A** после D — **не стартовать** (`DEBT-F1b` OPEN).
+- **F5** — no more cold without new hypothesis (A7 midband noop).
+- **G1** — closed PARTIAL; not restarted.
+- Tip (после H0 push): PulseLib **`35cd074`**, Bin **`ab8c5bae`**, root bump pending this commit; Console `.11` rebuild **`dd4ebd0a…`**.
