@@ -38,7 +38,7 @@ for case in "${CASES[@]}"; do
   while [[ "$(running_jobs)" -ge "$LIMIT" ]]; do
     wait -n 2>/dev/null || sleep 5
   done
-  "$GATE" 1 "$LIMIT" || true
+  bash "$GATE" 1 "$LIMIT" || true
   RUN_ID="INH.${case}-${HOSTTAG}-$(date -u +%Y%m%dT%H%MZ)-$$"
   LOG="$LOGDIR/${RUN_ID}.log"
   START="$(date -u +%Y-%m-%dT%H:%MZ)"
