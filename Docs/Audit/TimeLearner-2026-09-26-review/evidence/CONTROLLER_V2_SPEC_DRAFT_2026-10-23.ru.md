@@ -2,7 +2,7 @@
 
 **Статус:** **SPEC DRAFT** — продвижение каркаса [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md) и входов [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) в форму спецификации. Документ **ещё не FINAL SPEC**: открытые продуктовые решения (§8) оставляют **`DEBT-CTRL-V2-DRAFT` open** до `CONTROLLER_V2_SPEC_FINAL_*.ru.md` (или эквивалентного senior-approved FINAL). **Не** является заданием на реализацию в C++ и **не** go-ahead на cold Console.
 
-**Постановка.** Этап 4 аудита TimeLearner требует одного контроллера Classic+Branch за флагом `ControllerVersion=2`, с разведёнными шагами поиска длины, выравнивания амплитуды, тонкой задержки, verify и калибровки mid. Evidence 2026-10-22 (E1 библиотеки, silent-Test H*, D1/CL-N1, F3-R8) достаточно, чтобы зафиксировать **нормативные** контракты exit-классов `LEN_SEARCH` и ряд intentional-политик; числовые tol Done/margin и production mid-policy ещё не закрыты — поэтому статус остаётся DRAFT относительно FINAL.
+**Постановка.** Этап 4 аудита TimeLearner требует одного контроллера Classic+Branch за флагом `ControllerVersion=2`, с разведёнными шагами поиска длины, выравнивания амплитуды, тонкой задержки, verify и калибровки mid. Evidence 2026-10-22 (E1 библиотеки, silent-Test H*, D1/CL-N1, F3-R8) достаточно, чтобы зафиксировать **нормативные** контракты exit-классов `LEN_SEARCH` и ряд intentional-политик; числовые tol Done/margin и production mid-policy ещё не закрыты — поэтому статус остаётся DRAFT относительно FINAL. Обогащение 2026-10-23 (этот arm, без cold): guidance по VERIFY/Done tol из E1.5 FRAGILE и явный список **опций** mid production policy из H3 — без объявления FINAL и без фиксации одного production-выбора.
 
 **Запрет этого arm:** не трогать Console, не стартовать cold/matrix/bisect, не G1 RERUN / F1b cold / KeepDone; не править C++/PulseLib под этот документ.
 
@@ -82,11 +82,28 @@
 
 ---
 
-## 5. VERIFY / sep / fragility (норматив guidance)
+## 5. VERIFY / Done — numeric tol guidance (E1.5; ещё не FINAL thresholds)
 
-1. **`ideal_inh_proxy` intentional.** Для nextseg/preinh при sync CV≤0.25 E1.4 использует phenomenological τ=0.5 мс. E1.1d/e/f offline и E1.1g Console Branch IR (FWHM **28.8–30.9 мс** ≫ 2.1; sep_soma **≈−0.015**) — **retire=NO**; `DEBT-E1.1f` = partial-wontfix-offline. VERIFY-tol **не** строить из E1.1d–g FWHM/sep; proxy-margin (~7%) **не** путать с Console `sep_ltz`.
-2. **E1.5 fragility tol guidance.** Baseline sep острова ~**1–2%**; br25_nextseg **0/9** strict при L±1 / TipR×0.8/×1.25. Числовой tol SPEC (ещё open, §8) **обязан** оставлять запас ≥ возмущения L±1 и TipR±25% и не съедать весь margin (согласуется с E1.2 eps_amp≈1%·target). Done на граничном mid без учёта fragility — **ложный**.
-3. **Emit готов, tol нет.** C++/`posttune_complete` уже пишут `sep_margin`/`amp_be`/`done_be` (`DEBT-S0` done); формула порога «запас ≥ предсказанный − …» для FINAL — open.
+Постановка: шаг `VERIFY` и критерий exact/`Done_BE` обязаны опираться на измеренный запас разделимости и на хрупкость исторического PASS-острова. Ниже — **нормативный guidance** для SPEC DRAFT (вход в формулу FINAL), а не закрытые числа порогов. Источник fragility: [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md) (Test-only L±1 / TipR×0.8/×1.25; вердикт **FRAGILE**).
+
+### 5.1 Различать proxy-margin и Console `sep_ltz`
+
+1. **`ideal_inh_proxy` intentional (не регрессировать).** Для nextseg/preinh при sync CV≤0.25 E1.4 использует phenomenological τ=0.5 мс. E1.1d/e/f offline и E1.1g Console Branch IR (FWHM **28.8–30.9 мс** ≫ 2.1; sep_soma **≈−0.015**) — **retire=NO**; `DEBT-E1.1f` = partial-wontfix-offline. VERIFY-tol **не** строить из E1.1d–g FWHM/sep.
+2. **Два разных «margin».** E1.4 `ideal_inh_proxy` даёт **proxy-margin ~7%** на офлайн-предсказателе; Console peaks / `ltz_potential_max` на живом острове дают **`sep_ltz` ~1–2%** (tiprmin ≈+1.77%, br25_nextseg ≈+1.11%). SPEC **обязан** явно различать эти величины: порог Done/VERIFY, завязанный на proxy ~7%, **не** означает, что Console `sep_ltz` уже имеет такой же запас. Смешивать proxy-margin с `sep_ltz` в одной формуле tol без пересчёта — запрещено в DRAFT wording.
+
+### 5.2 Остров PASS ~1–2%; tol не съедает весь запас
+
+3. **Масштаб острова.** Baseline Console `sep_ltz` на исторических PASS (Branch×N1 tiprmin / nextseg) лежит в полосе **~1–2%**. Это и есть практический «бюджет» разделимости на границе, с которым конкурирует любой числовой tol Done/VERIFY.
+4. **Не съедать margin.** Числовой tol SPEC (ещё open, §8) **не должен** быть сопоставим со всем островом: допуск порядка E1.2 **eps_amp≈1%·target** уже сравним с `sep_ltz` ~1–2%, поэтому tol, который «съедает» весь запас, делает exact Done на граничном mid **ложным**. Guidance: оставлять несъеденный остаток margin после tol (конкретная формула «≥ predicted − Δ» — блокер FINAL).
+5. **Emit готов, пороги нет.** C++/`posttune_complete` уже пишут `sep_margin`/`amp_be`/`done_be` (`DEBT-S0` done); финальная подгонка порога — open до exit-clean G1 + cal E1 + senior approve чисел.
+
+### 5.3 Survive L±1 и TipR±25% (E1.5 FRAGILE)
+
+6. **Критерий устойчивости (guidance → обязанность FINAL).** Done/VERIFY **обязан** требовать запас, достаточный, чтобы режим **переживал** единичный сдвиг **L±1** по входу и глобальный масштаб **TipR ±25%** (×0.8 / ×1.25), иначе Done на граничном mid без учёта fragility считается ложным. Evidence: br25_nextseg — **0/9** strict PASS под любым из этих возмущений; tiprmin — TipR-scale **0/2**, часть L-осей (L1+1, L2−1, L3+1) тоже ломает selective.
+7. **Частичная устойчивость ≠ отсутствие требования.** tiprmin терпимее к L0±1 и части L1/L2 (5/9 strict hold), но это **не** отменяет требование «survive L±1 / TipR±25%» для tol: хрупкий nextseg-остров показывает нижнюю границу, на которую должен ориентироваться критерий VERIFY в v2.
+8. **sep>0 при silent.** На E1.5 часто `sep_ltz>0` при fires=`00000000` после L-сдвига — FixedLTZ оказывается не в середине tgt/foil. Поэтому VERIFY смотрит **ranking/fires/margin**, а не один знак `sep_ltz`.
+
+**Вывод §5.** Guidance по tol в SPEC DRAFT зафиксирован (остров ~1–2%; не съедать margin; survive L±1/TipR±25%; proxy ≠ `sep_ltz`; proxy intentional). **Числовые константы порогов остаются блокером FINAL** (§8 #2), а не закрываются этим разделом.
 
 ---
 
@@ -94,11 +111,33 @@
 
 | Тема | Норматив SPEC DRAFT | Что ещё open для FINAL |
 |------|---------------------|-------------------------|
-| **Mid policy (H3)** | Flag `UseCandidateMidOnNonSeparableTest` **default-off**; при NonSeparable не оставлять только `FixedLTZ=1`; silent Acc 7/8 ≠ PASS | **Production policy** (когда включать: только NonSeparable / always finite candidate / never default-on до V-gate) |
-| **KeepDone / CanonRmin** | KeepDone(3) / mode=1 **не** sole-fix silent thr=1; H2 ослаблена (`DEBT-17` done) | Default `PostTrainTipResistanceMode` для v2 |
+| **Mid policy (H3)** | Flag `UseCandidateMidOnNonSeparableTest` **default-off**; при NonSeparable restore fires доказан; silent Acc 7/8 ≠ PASS — см. §6.1 | **Production policy** — список опций §6.1, выбор **OPEN** |
+| **KeepDone / CanonRmin** | KeepDone(3) / mode=1 **не** sole-fix silent thr=1; H2 silent-ось ослаблена (`DEBT-17` done); silent evidence: [`SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md`](SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md), [`SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md`](SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md) | Default `PostTrainTipResistanceMode` для v2 |
 | **F3 Reset** | **Opt-in**; CODE default off; A/B: BR island OK, W01 silent unchanged | Продуктовый default в v2 XML (рекомендация: оставить off) |
 | **W3** | Не SoftCold default; не sole-fix 480 | — (закрыто как policy в DRAFT) |
 | **F1b → `FINE_DELAY`** | Только после senior docs-ready + cold; checklist в DRAFT INPUTS §5 | **`DEBT-F1b` OPEN**, senior blocked |
+
+### 6.1 Mid policy — default-off, H3 restore, production options (OPEN)
+
+Постановка: silent-Test на Classic×N0 Span50 AsymRm/gen (W01 и реплики W13/W33) показал, что при NonSeparable штатный path оставляет `FixedLTZ=PostTrainSilentThreshold` (1.0) и даёт Acc 7/8 при fires=`00000000`, тогда как finite `candidate_mid` честно поднимает foil fires. Это меняет **честность фенотипа**, но **не** восстанавливает Цель (H1 strong fail: peak target &lt; candidate_mid). Источники: [`MID_POLICY_H3_2026-10-22.ru.md`](MID_POLICY_H3_2026-10-22.ru.md), [`MID_POLICY_H3_COLD_2026-10-22.ru.md`](MID_POLICY_H3_COLD_2026-10-22.ru.md), [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md), [`SILENT_TEST_W13_W33_MID_2026-10-22.ru.md`](SILENT_TEST_W13_W33_MID_2026-10-22.ru.md), [`CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md`](CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md).
+
+**Уже нормативно в SPEC DRAFT (не ослаблять):**
+
+1. **`UseCandidateMidOnNonSeparableTest` default-off** — CODE/XML default остаётся `0`; G1 silent thr=1 при flag=0 сохраняется как известный baseline.
+2. **Когда NonSeparable + flag=1:** cold PASS доказал restore: `FixedLTZ`/`mid` ← `candidate_mid` (≈0.00241 на W01), fires=`01000101`, Acc 4/8, Цель нет, `PostTuneResult` остаётся NonSeparable (`result=2`), `test_mid_policy=candidate`. VERIFY **не** трактует silent Acc 7/8 при thr=1 как selectivity PASS.
+3. **KeepDone не sole-fix** silent thr=1; **не** фиксировать KeepDone(3)/Canon mode=1 как «чинит» silent (см. таблицу выше).
+4. **H2 `LEN_SEARCH` exit-классы §4 уже нормативны** — mid-policy arm **не** регрессирует и не переписывает wording `bounded_stall_rmax` / `maxl_hold` / `quality_fail` / SoftCold PASS.
+
+**Production policy — OPEN; явные опции для FINAL (выбрать одну или зафиксировать V-gate комбинацию):**
+
+| Опция | Смысл | За / против (evidence) |
+|-------|--------|-------------------------|
+| **A. Только NonSeparable** | Включать flag=1 **только** когда Test уже NonSeparable / silent-mid path; иначе default-off | Ближе к текущему флагу; честный phenotyp без смены result; не чинит Цель (H1) |
+| **B. Always finite candidate** | Всегда подставлять finite `candidate_mid` на Test, даже вне NonSeparable | Максимальная «честность» mid; риск сдвинуть PASS-острова и SoftCold; **не** доказано cold |
+| **C. Never default-on до V-gate** | Production/SoftCold держит flag=0, пока отдельный V-gate (margin/fires/ranking) не одобрит opt-in | Сохраняет G1 comparable; требует явного gate-контракта в FINAL |
+| **D. Diagnostic-only** | Flag=1 только в harness/overlay diagnostic; никогда в SoftCold default XML | Минимальный риск регрессии; silent Acc 7/8 остаётся в поле до `DEBT-D2` |
+
+**Вывод §6.1.** Default-off и cold restore при NonSeparable **закрыты как факт evidence**; **какая опция A–D (или смесь C+A) станет production** — блокер FINAL (§8 #1). Этот SPEC DRAFT **не** выбирает опцию.
 
 ---
 
@@ -114,17 +153,17 @@
 
 ## 8. Что блокирует FINAL SPEC (`DEBT-CTRL-V2-DRAFT` остаётся open)
 
-Постановка: SPEC DRAFT **продвигает** прогресс (H2 exit-классы нормативны; intentional proxy; mid default-off; KeepDone не sole-fix; F3 opt-in; W3 не SoftCold default; F1b senior-blocked явно). Ниже — решения, без которых **нельзя** объявлять `CONTROLLER_V2_SPEC_FINAL` и закрывать `DEBT-CTRL-V2-DRAFT`.
+Постановка: SPEC DRAFT **продвигает** прогресс (H2 exit-классы нормативны; intentional proxy; mid default-off + H3 restore; KeepDone не sole-fix; F3 opt-in; W3 не SoftCold default; F1b senior-blocked явно; **tol guidance §5** и **опции mid §6.1** зафиксированы без выбора FINAL чисел/опции). Ниже — решения, без которых **нельзя** объявлять `CONTROLLER_V2_SPEC_FINAL` и закрывать `DEBT-CTRL-V2-DRAFT`.
 
 | # | Блокер FINAL | Почему |
 |---|--------------|--------|
-| 1 | **Mid policy production** | Default-off и cold PASS на flag=1 доказаны; когда включать в production / V-gate — open |
-| 2 | **Числовой tol** Done / margin / residual_dt / VERIFY | Нужны exit-clean G1 + E1 cal + **E1.5** (~1–2% sep; L±1 / TipR±25%); emit готов, пороги нет |
+| 1 | **Mid policy production** | Default-off и cold PASS на flag=1 доказаны; **выбор опции A–D §6.1** (или V-gate смесь) — open |
+| 2 | **Числовой tol** Done / margin / residual_dt / VERIFY | Guidance §5 есть (остров ~1–2%; не съедать margin; survive L±1/TipR±25%; proxy ≠ `sep_ltz`); **константы порогов** ещё нет (нужны exit-clean G1 + E1 cal + senior) |
 | 3 | **F1b senior** (`DEBT-F1b`) | Docs-ready checklist есть; cold/пилот и решение train-loop vs verify-only — senior blocked |
 | 4 | **CL-N1@480 senior/policy close** | Exit-классы §4 нормативны в DRAFT; долг на 480 open до принятия в FINAL / senior close (не через multifactor) |
-| 5 | *(вторично)* Default TipR PostTune mode; псевдокод Branch reverse-order + topology после C2↔Console сверки; N0 для span>50 | Не блокируют формулировку §4, но нужны для полной миграции v1→v2 |
+| 5 | *(вторично)* Default TipR PostTune mode; псевдокод Branch reverse-order + topology после C2↔Console сверки; N0 для span>50 | Не блокируют формулировку §4/§5/§6.1, но нужны для полной миграции v1→v2 |
 
-**Не блокеры FINAL (уже зафиксированы в этом DRAFT):** формулировки `bounded_stall_rmax` / `maxl_hold`/`infeasible_len` / `quality_fail`/`DEBT-D2` / SoftCold PASS; intentional `ideal_inh_proxy`; KeepDone ≠ sole-fix; F3 opt-in; W3 ≠ SoftCold default; Train `sep_margin` emit.
+**Не блокеры FINAL (уже зафиксированы в этом DRAFT):** формулировки `bounded_stall_rmax` / `maxl_hold`/`infeasible_len` / `quality_fail`/`DEBT-D2` / SoftCold PASS; intentional `ideal_inh_proxy`; KeepDone ≠ sole-fix; F3 opt-in; W3 ≠ SoftCold default; Train `sep_margin` emit; E1.5 tol **guidance** (без чисел); mid default-off + список production-опций.
 
 **Вывод.** `DEBT-CTRL-V2-DRAFT` **остаётся open** со ссылкой на этот файл; закрытие — только после FINAL SPEC (или явного senior supersede). Cold / C++ под этот документ **не** стартовать.
 
@@ -137,9 +176,13 @@
 | [`CONTROLLER_V2_SKELETON_2026-10-21.ru.md`](CONTROLLER_V2_SKELETON_2026-10-21.ru.md) | Каркас FSM (superseded по статусу этим SPEC DRAFT) |
 | [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) | Полные входы E1/H*/D1/F*; §4.5a исходник wording |
 | [`CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md`](CONTROLLER_V2_H3_H4_NOTE_2026-10-22.ru.md) | Mid + margin связка |
+| [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md) | Остров ~1–2%; L±1 / TipR±25% FRAGILE → §5 |
+| [`MID_POLICY_H3_COLD_2026-10-22.ru.md`](MID_POLICY_H3_COLD_2026-10-22.ru.md) | Cold flag=1 restore → §6.1 |
 | [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) | H1 executed; H2 → §4 этого документа |
+| [`F5_GAMMA_SPAN100_2026-10-22.ru.md`](F5_GAMMA_SPAN100_2026-10-22.ru.md) | Опциональный cross-link: Span100 γ noop / `quality_fail` (tip без F5 symbol; `DEBT-F5-gamma` open) |
+| [`F5_GAMMA_LIVE_OFFLINE_COMPARE_2026-10-23.ru.md`](F5_GAMMA_LIVE_OFFLINE_COMPARE_2026-10-23.ru.md) | Опциональный cross-link (sibling arm): live vs offline γ compare — **не** вход в tol/mid этого DRAFT |
 | [`TECH_DEBT_TIMELEARNER_2026-10-20.ru.md`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md) | `DEBT-CTRL-V2-DRAFT` / `DEBT-CL-N1` / `DEBT-F1b` / `DEBT-E1.5` |
-| Следующий: `CONTROLLER_V2_SPEC_FINAL_*.ru.md` | Числовые tol + closed mid/F1b/CL-N1 policy |
+| Следующий: `CONTROLLER_V2_SPEC_FINAL_*.ru.md` | Числовые tol-константы + выбранная mid-опция A–D + F1b/CL-N1 policy |
 
 ---
 
