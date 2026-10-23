@@ -16,30 +16,35 @@ PulseLib: `35cd074` (`CreateClassSamples`). Legacy `C25e12`/`C25e11`/`C1e9` **н
 
 ---
 
-## 2. H0b — cold dual-host (ядро)
+## 2. H0b — cold dual-host (волна 1, SERIES_DONE 2026-10-23T12:36Z)
 
-| Хост | Лимит | Полоса (первая волна) |
-|------|-------|----------------------|
-| `.11` (10.245.1.11) | ≤8 | Classic×N0/N1 × S100 × {gen,preinh} × PostTune ON |
-| `.17` (10.245.1.17) | ≤12 | Branch×N0/N1 × S100 × {gen,preinh,nextseg} × PostTune ON |
+| Хост | Лимит | Полоса (волна 1) | Итог |
+|------|-------|-----------------|------|
+| `.11` | ≤8 | Classic S50/S100/S200 + R8 smoke | 8/8 DONE |
+| `.17` | ≤12 | Branch S25/S50/S100/S480 gen/preinh/nextseg | 12/12 DONE |
 
-Ключи SoftCold: `h0_c100_*_pton`, `h0_b100_*_pton` (регистрация из `SelectivityTauCm/H0_EXP_MANIFEST.json` в `posttune_verify.py`).  
-Train/Test: `Bin/Configs/SpikeSamples/StructTrain/SelectivityTauCm/EXP_*_{N0,N1}/{Train,Test}` — см. манифест и `DERIVED_FROM.md`.
+**Вердикт волны 1.** На согласованных TauH0-классах **ни одна** новая H0-ячейка не дала SoftCold PASS: 14× `not_converged_at_stop` (Need≠0 до max_polls / stop), 2× Classic×N1 `cpp_training_refusal`, 3× `gate0_exit_nonzero`. Единственный PASS волны — preflight R8 `br25_nextseg` на **legacy** C1e9 Branch (не TauH0). Это усиливает потолок §3: τ(Cm) per Span необходима, но **недостаточна** для cold PASS на дендрите без аксонного носителя / иной топологии.
 
-Порядок Span (план): 100–200 → 50 → 25 → 480 (480 преимущественно `.17`). PostTune OFF — attempt-local/`h0_*_ptoff` после ядра ON; PASS-кандидаты — PASS×3 на том же SHA.
+Журнал: [`H0B_COLD_LAUNCH_2026-10-23.tsv`](H0B_COLD_LAUNCH_2026-10-23.tsv). Монитор 10 мин остановлен после ALL_DONE волны 1.
 
-Машиночитаемый журнал запусков: [`H0B_COLD_LAUNCH_2026-10-23.tsv`](H0B_COLD_LAUNCH_2026-10-23.tsv) (обновляется по мере SERIES_DONE).
+### Сводка волны 1 (Trainer×Mode → Span → Mod; PostTune ON)
 
-### Сводка по иерархии (заполняется по мере cold)
+| Trainer×Mode | Span | NeuronModel | Mod | PostTune ON | Host | Train | Test | exit |
+|--------------|------|-------------|-----|-------------|------|-------|------|------|
+| Classic×N0 | 50 | TauH0_S50 | gen | fail | .11 | `SelectivityTauCm/EXP_classic_S50_gen_TauH0_N0/Train` | `…/Test` | not_converged_at_stop |
+| Classic×N1 | 50 | TauH0_S50 | gen | fail | .11 | `…_N1/Train` | `…/Test` | gate0_exit_nonzero |
+| Classic×N0 | 100 | TauH0_S100 | gen | fail | .11 | `EXP_classic_S100_gen_TauH0_N0/Train` | `…/Test` | not_converged_at_stop |
+| Classic×N1 | 100 | TauH0_S100 | gen | fail | .11 | `…_N1/Train` | `…/Test` | cpp_training_refusal |
+| Classic×N0 | 100 | TauH0_S100 | preinh | fail | .11 | `EXP_classic_S100_preinh_TauH0_N0/Train` | `…/Test` | not_converged_at_stop |
+| Classic×N1 | 100 | TauH0_S100 | preinh | fail | .11 | `…_N1/Train` | `…/Test` | cpp_training_refusal |
+| Classic×N0 | 200 | TauH0_S200 | gen | fail | .11 | `EXP_classic_S200_gen_TauH0_N0/Train` | `…/Test` | not_converged_at_stop |
+| Branch×N0/N1 | 25 | TauH0_S25 | nextseg | fail | .17 | `EXP_branch_S25_nextseg_TauH0_N*/Train` | `…/Test` | not_converged_at_stop |
+| Branch×N0 | 50 | TauH0_S50 | gen/nextseg | fail | .17 | `EXP_branch_S50_*_TauH0_N0/Train` | `…/Test` | not_converged_at_stop |
+| Branch×N0/N1 | 100 | TauH0_S100 | gen/preinh/nextseg | fail | .17 | `EXP_branch_S100_*_TauH0_N*/Train` | `…/Test` | not_converged / gate0 |
+| Branch×N0 | 480 | TauH0_S480 | gen/nextseg | fail | .17 | `EXP_branch_S480_*_TauH0_N0/Train` | `…/Test` | not_converged_at_stop |
+| Branch (legacy R8) | 25 | C1e9 | nextseg | **PASS** | .11 | `SelectivityBranch/…_nextseginh_C1e9/Train` | `…/Test` | SoftCold ok |
 
-| Trainer×Mode | Span | NeuronModel | Mod | PostTune ON | PostTune OFF | Host | Train | Test | Need/fires/Acc/Цель | exit |
-|--------------|------|-------------|-----|-------------|--------------|------|-------|------|---------------------|------|
-| Classic×N0 | 100 | TauH0_S100 | gen | *running* | — | .11 | `SelectivityTauCm/EXP_classic_S100_gen_TauH0_N0/Train` | `…/Test` | TBD | TBD |
-| Classic×N1 | 100 | TauH0_S100 | gen | *running* | — | .11 | `…_N1/Train` | `…/Test` | TBD | TBD |
-| Branch×N0 | 100 | TauH0_S100 | nextseg | *running* | — | .17 | `EXP_branch_S100_nextseg_TauH0_N0/Train` | `…/Test` | TBD | TBD |
-| … | … | … | … | … | … | … | … | … | … | … |
-
-*(Полная сетка 88 ключей `h0_*`; строки добавляются в TSV без overwrite HIST.)*
+**Хвосты после волны 1:** PostTune OFF / полная сетка 88 / PASS×3 — не стартовать без новой гипотезы (единая τ уже опровергнута; TauH0 cold не PASS). Рекомендация: senior review ворот D → фаза A (F1b), либо узкий diagnostic (EstDelay↔τ, wiring) без полного RERUN.
 
 ---
 
@@ -72,7 +77,7 @@ Train/Test: `Bin/Configs/SpikeSamples/StructTrain/SelectivityTauCm/EXP_*_{N0,N1}
 - Preflight: [`PREFLIGHT_PHASE_D_2026-10-23.ru.md`](PREFLIGHT_PHASE_D_2026-10-23.ru.md).
 - E2 R8 EQUIVALENT (ранее); полный RERUN не делался.
 - SPEC FINAL: [`CONTROLLER_V2_SPEC_FINAL_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_FINAL_2026-10-23.ru.md).
-- `DEBT-H0-tau-cm`: **narrowed** — H0a done; H0b in flight; ворота D открыты для фазы A по потолкам выше.
+- `DEBT-H0-tau-cm`: **partial** — H0a done; H0b волна 1 SERIES_DONE (0 SoftCold PASS на TauH0); ворота D подтверждают потолок → фаза A.
 - `DEBT-CTRL-V2-DRAFT`: **closed** (FINAL).
 - `DEBT-F1b`: **OPEN**, отложен.
 
