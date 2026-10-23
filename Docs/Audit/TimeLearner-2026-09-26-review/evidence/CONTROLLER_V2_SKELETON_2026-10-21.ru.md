@@ -1,6 +1,6 @@
 # Controller v2 — каркас спецификации (этап 4/6)
 
-**Статус:** **DRAFT** — черновик для согласования. G1 S1 RERUN закрыт с **3/13** exit-clean; опора для порогов v2 — PARTIAL метрики ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md), [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md)), не drv-only SERIES_DONE. Обогащение входов 2026-10-22 (E1 библиотеки, H1–H4, D1 bounds, F1b checklist, open decisions) — sibling [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md). Не является заданием на реализацию в C++ и не заменяет [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §«Этап 4».
+**Статус:** **SKELETON** (каркас FSM). **Продвинут** в SPEC DRAFT — [`CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md). G1 S1 RERUN закрыт с **3/13** exit-clean; опора для порогов v2 — PARTIAL метрики ([`G1_S1_PARTIAL_METRICS_2026-10-22.ru.md`](G1_S1_PARTIAL_METRICS_2026-10-22.ru.md), [`SYNTHESIS_PARTIAL_2026-10-22.ru.md`](SYNTHESIS_PARTIAL_2026-10-22.ru.md)), не drv-only SERIES_DONE. Входы — sibling [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md). Не является заданием на реализацию в C++ и не заменяет [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §«Этап 4».
 
 **Канон этапа:** один общий контроллер для Classic и Branch за флагом `ControllerVersion=2`, стратегия топологии вместо двух независимых копий тренера.
 
@@ -95,7 +95,8 @@ E2 показал **EQUIVALENT** всех пар S0↔S1 и S1↔S2 на R8: п�
 
 | Артефакт | Содержание |
 |----------|------------|
-| `CONTROLLER_V2_SPEC_*.ru.md` | Замена DRAFT: числовые tol, порядок Branch, псевдокод, миграция v1→v2 |
+| `CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md` | **есть:** H2 exit-классы нормативны; FINAL ещё blocked |
+| `CONTROLLER_V2_SPEC_FINAL_*.ru.md` | Числовые tol, mid production, F1b, CL-N1@480 close, псевдокод Branch |
 | `SYNTHESIS_FINAL_*.ru.md` | Сводка Trainer×Mode → Span → NeuronModel → Mod с Train/Test ссылками |
 | R8-план v2 | Отдельный commit + 12 серий по аналогии E2 |
 
