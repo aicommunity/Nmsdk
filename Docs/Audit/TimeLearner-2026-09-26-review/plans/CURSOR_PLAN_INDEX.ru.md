@@ -40,3 +40,18 @@
 4. STRATEGY 23.10 + H0 (куда идём после idle: дендрит τ(Cm), потом аксоны F1b).
 
 Не считать YAML `todos` в архивной копии «живым» трекером: актуальный статус — `CAMPAIGN_STATUS_LATEST` + `TECH_DEBT*`; стратегия 23.10 может опережать старые формулировки Cursor-плана про F1b как блокер дендритного Controller.
+
+---
+
+## Архив 2: фаза D (дендрит до аксона)
+
+| Поле | Значение |
+|------|----------|
+| Файл в репозитории | [`CURSOR_PLAN_dendrite_map_before_axon_90d0ee9a.plan.md`](CURSOR_PLAN_dendrite_map_before_axon_90d0ee9a.plan.md) |
+| Исходник Cursor (вне git) | `/home/user/.cursor/plans/dendrite_map_before_axon_90d0ee9a.plan.md` |
+| Идентификатор | `dendrite_map_before_axon_90d0ee9a` |
+| Имя в Cursor | Dendrite map before axon |
+| Дата архивации в repo | 2026-10-23 |
+| Тело файла | **verbatim** копия на момент архивации |
+
+Связь: стратегия [`../evidence/STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md`](../evidence/STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md), карта [`../evidence/DENDRITE_MAP_TAU_CM_2026-10-23.ru.md`](../evidence/DENDRITE_MAP_TAU_CM_2026-10-23.ru.md), H0b журнал [`../evidence/H0B_COLD_LAUNCH_2026-10-23.tsv`](../evidence/H0B_COLD_LAUNCH_2026-10-23.tsv).
