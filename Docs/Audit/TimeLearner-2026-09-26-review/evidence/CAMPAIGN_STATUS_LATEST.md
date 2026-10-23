@@ -1,5 +1,6 @@
-# Campaign status 2026-10-23T07:30Z
+# Campaign status 2026-10-23T08:10Z
 
+- **A15 port to Bin tip** — DONE: B1 `1fa1aa7c` + B2 `7292522e` (from `agent/tl-a15-inputs`); FAIL Test 0; evidence [`A15_PORT_TO_TIP_2026-10-23.ru.md`](A15_PORT_TO_TIP_2026-10-23.ru.md). Bin tip local ahead; push pending.
 - **Стратегия 23.10** — норматив: [`STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md`](STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md). Дендрит: τ(Cm) per Span + Trainer×Mode×Mod (карточка [`H0`](../plans/AGENT_PLAN_2026-10-20/cards/H0_tau_cm_per_span.md)). F1b **не отменён** = фаза A (аксонный тренер) **после** ворот H0.
 - **Исходный Cursor-план** сохранён в git: [`../plans/CURSOR_PLAN_timelearner_agent_plan_1d9a3d4d.plan.md`](../plans/CURSOR_PLAN_timelearner_agent_plan_1d9a3d4d.plan.md) · индекс [`../plans/CURSOR_PLAN_INDEX.ru.md`](../plans/CURSOR_PLAN_INDEX.ru.md) ← связь с аудитом [`../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md).
 - **G1 S1 RERUN** dual-host — **closed** (PARTIAL exit policy; 3/13 exit-clean). G1 waves **not** restarted.

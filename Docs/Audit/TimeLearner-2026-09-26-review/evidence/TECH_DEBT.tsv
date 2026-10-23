@@ -1,7 +1,7 @@
 debt_id	opened_utc	stage_id	source	item_ref	priority	blocker_for	status	owner_arm	notes	closed_utc	fix_run_id
 DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	done	.11	Rmin BE skip when no_legal_recovery; StorageComponents 87/87	2026-10-22T15:13Z	A0_CTEST_FIX
 DEBT-cpu-gate-pgrep	2026-10-20T13:48Z	R2	companion	cpu_gate false positive	P1	D1	done	.11	pattern fixed	2026-10-20T13:48Z	local
-DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired 98ac830d	2026-10-20T14:05Z	98ac830d
+DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired on tip 7292522e (port from 98ac830d); B1 1fa1aa7c; A15_PORT_TO_TIP_2026-10-23	2026-10-23T08:10Z	7292522e
 DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 EQUIVALENT		
 DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	480 TipR@Rmax stall open; H1 Span100 converged_need0 (CL_N1_H1_SPAN100_2026-10-22) — stall 480-specific		
 DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	G1 selected 24-32		
