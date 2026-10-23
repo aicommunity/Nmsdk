@@ -24,7 +24,7 @@
 
 ### P1 — фиксы и пилоты
 
-**F5 OPEN (`DEBT-F5-gamma`).** Патч `CorrectAttenuationGammaForTipR` на PulseLib `6d746ac` (default off; **не** в tip `3a599a7`). One-shot γ=1 ([`F5_GAMMA_COLD_2026-10-21.ru.md`](F5_GAMMA_COLD_2026-10-21.ru.md)) и paired γ=0 vs γ=1 на `W01_CL50_N1_PSIoff` ([`F5_GAMMA_PAIRED_2026-10-22.ru.md`](F5_GAMMA_PAIRED_2026-10-22.ru.md)) **не** закрывают A7. **Next arm Span100 (2026-10-22):** paired cold `W02_CL100_N1_PSIoff` γ=0 vs γ=1, PostTune OFF, root `8643c9227` / Bin `e49a52bf` / Console `f88d1852` — оба `launch.exit=0`, **γ=0≡γ=1** (`converged_need0`, L=`54 48 30 1`, TipR `2.88M×3+86M`, silent 7/8 `quality_fail`), фенотип Train **≡ H1**; tip-бинарник **без** символа F5 → A/B не активирует кодpath A7 — [`F5_GAMMA_SPAN100_2026-10-22.ru.md`](F5_GAMMA_SPAN100_2026-10-22.ru.md). PASS по фиксу **нет**; next = rebuild Console с F5 на tip, затем повтор Span100 A/B.
+**F5 OPEN (`DEBT-F5-gamma`).** Патч `CorrectAttenuationGammaForTipR` на tip PulseLib **`9efca9c`** (default off; re-land с `6d746ac` после conflict на F4-adjacent props). One-shot / W01 paired / tip-noop Span100 ([`F5_GAMMA_SPAN100_2026-10-22.ru.md`](F5_GAMMA_SPAN100_2026-10-22.ru.md)) **не** закрывали A7. **LIVE Span100 (2026-10-23):** Console sha256 **`213e7003…`** (символ F5 **present**), case `W02_CL100_N1_PSIoff`, PostTune OFF — `F5.S100L.0-…21224` (γ=0) + `F5.S100L.1-…27819` (γ=1), оба `launch.exit=0`, **γ=0≡γ=1** (`converged_need0`, L=`54 48 30 1`, TipR `2.88M×3+86M`, silent 7/8 `quality_fail`) при **активном** кодpath A7 — [`F5_GAMMA_SPAN100_LIVE_2026-10-23.ru.md`](F5_GAMMA_SPAN100_LIVE_2026-10-23.ru.md). PASS по фиксу **нет**; A7 = γ noop на midband silent Classic×N1 Span100. **Без** нового F5 cold без новой гипотезы.
 
 **F1b senior (`DEBT-F1b`) — still OPEN.** Console-пилот «быстрый EPSP + NAxoneDelay» не стартовал; docs-ready checklist добавлен в карточку ([`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) §F1b) и в [`CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md`](CONTROLLER_V2_DRAFT_INPUTS_2026-10-22.ru.md) §5 — cold только после senior approve. F1a офлайн закрыт (DEBT-F1a-offline done). F1b питает этап 4 / `FINE_DELAY` в [`CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md) (§8 блокер FINAL).
 
@@ -91,7 +91,7 @@ DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test
 DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-N1	open	D2b	CL480 stall open; H1 CL100 Need=0 TipR midband — see CL_N1_H1_SPAN100_2026-10-22		
 DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2 soft-cold	done	.17	lanes offload 2026-10-20	2026-10-20T20:17Z	lanes-offload
 DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	P0	E2 R8	done	Bin	case-ids only 774704fc	2026-10-20T20:24Z	774704fc
-DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR no PASS W01+W02_CL100	P1	F8 chain/R3	open	F5	Span100 2026-10-22 γ=0≡γ=1; tip Console no F5 symbol; F5_GAMMA_SPAN100		
+DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR no PASS W01+W02_CL100	P1	F8 chain/R3	open	F5	LIVE Span100 2026-10-23 A7 on tip 9efca9c; γ=0≡γ=1 silent noop; F5_GAMMA_SPAN100_LIVE		
 DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	done	drv	wait_run+run_series propagate; DEBT_G1_EXIT_GATE_FIX_2026-10-22	2026-10-22T06:30Z	harness
 DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
 DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	done	F3	A/B W01+br25_nextseg; BR PASS no regress; W01 silent unchanged; default off; F3_R8_AB_2026-10-22	2026-10-22T16:15Z	F3.R8.W01+BR		
@@ -101,4 +101,4 @@ DEBT-E1.1f	2026-10-22T15:20Z	E1	E1.1f	4-dendrite Pack-A / Console IR retire prox
 
 ---
 
-*Последнее docs-обновление: 2026-10-22 (E1.1g Console Branch IR — proxy intentional; DEBT-E1.1f partial-wontfix-offline).*
+*Последнее docs-обновление: 2026-10-23 (F5 LIVE Span100 A/B на tip `9efca9c` — γ noop; DEBT-F5-gamma OPEN).*
