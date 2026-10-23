@@ -1,5 +1,6 @@
-# Campaign status 2026-10-22T22:06Z
+# Campaign status 2026-10-23T04:00Z
 
+- **tl-baseline-20261020** — **cut** on root `03c8cb912748a7a9df9f6cf19eca092489a16ebc` (annotated; PulseLib `d52dc1c` / Bin `e7509263`); pushed `origin`. Not tip.
 - **G1 S1 RERUN** dual-host — **closed** (PARTIAL exit policy; 3/13 exit-clean). G1 waves **not** restarted.
 - **F5 paired γ (Span50)** — **done** on `.11`: `F5.paired-base-…30140` (γ=0) + `F5.paired-gamma-…10276` (γ=1), case `W01_CL50_N1_PSIoff`. Evidence: [`F5_GAMMA_PAIRED_2026-10-22.ru.md`](F5_GAMMA_PAIRED_2026-10-22.ru.md).
 - **F5 Span100 γ A/B** — **done** (`SERIES_DONE` EXIT=0): `F5.S100.0-…27970` (γ=0) + `F5.S100.1-…3403` (γ=1), case `W02_CL100_N1_PSIoff`, PostTune OFF. γ=0≡γ=1 (`converged_need0`, L=`54 48 30 1`, TipR midband, silent `quality_fail`). Tip Console **без** символа F5 → кодpath A7 не активен. Evidence: [`F5_GAMMA_SPAN100_2026-10-22.ru.md`](F5_GAMMA_SPAN100_2026-10-22.ru.md). Commit `b00527a44`. **DEBT-F5-gamma OPEN** — next = rebuild Console с F5 на tip, затем повтор Span100 A/B.
@@ -7,4 +8,4 @@
 - **E0** `--train-param` whitelist на Bin tip `bf3e82ff` / root bump `1792ece42` (pushed).
 - Console idle: `.11` NeuroModelerConsole = **0**; free≈122 G. Host limit 8.
 - Tip: root **`b00527a44`**, Bin **`e49a52bf`**, Console sha256 **`f88d1852…`**, PulseLib **`3a599a7`**.
-- Still open (no auto-cold): F1b senior; CTRL SPEC blocked (H2 wording done); tl-baseline tag; CL-N1@480; F5 rebuild.
+- Still open (no auto-cold): F1b senior; CTRL SPEC blocked (H2 wording done); CL-N1@480; F5 rebuild.
