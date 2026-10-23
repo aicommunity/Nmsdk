@@ -115,7 +115,7 @@
 | **KeepDone / CanonRmin** | KeepDone(3) / mode=1 **не** sole-fix silent thr=1; H2 silent-ось ослаблена (`DEBT-17` done); silent evidence: [`SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md`](SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md), [`SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md`](SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md) | Default `PostTrainTipResistanceMode` для v2 |
 | **F3 Reset** | **Opt-in**; CODE default off; A/B: BR island OK, W01 silent unchanged | Продуктовый default в v2 XML (рекомендация: оставить off) |
 | **W3** | Не SoftCold default; не sole-fix 480 | — (закрыто как policy в DRAFT) |
-| **F1b → `FINE_DELAY`** | Только после senior docs-ready + cold; checklist в DRAFT INPUTS §5 | **`DEBT-F1b` OPEN**, senior blocked |
+| **F1b → аксонный тренер / `FINE_DELAY`** | Стратегия 23.10: F1b **не** блокер дендритного FINAL; фаза A после ворот H0 (τ via Cm). Checklist DRAFT INPUTS §5 + [`STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md`](STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md) | **`DEBT-F1b` OPEN** (фаза A); дендритный FINAL: mid/tol/CL-N1@480 |
 
 ### 6.1 Mid policy — default-off, H3 restore, production options (OPEN)
 
@@ -159,7 +159,7 @@
 |---|--------------|--------|
 | 1 | **Mid policy production** | Default-off и cold PASS на flag=1 доказаны; **выбор опции A–D §6.1** (или V-gate смесь) — open |
 | 2 | **Числовой tol** Done / margin / residual_dt / VERIFY | Guidance §5 есть (остров ~1–2%; не съедать margin; survive L±1/TipR±25%; proxy ≠ `sep_ltz`); **константы порогов** ещё нет (нужны exit-clean G1 + E1 cal + senior) |
-| 3 | **F1b senior** (`DEBT-F1b`) | Docs-ready checklist есть; cold/пилот и решение train-loop vs verify-only — senior blocked |
+| 3 | **F1b senior** (`DEBT-F1b`) — **фаза A (аксоны)** | **Уточнение 23.10:** не блокер **дендритного** FINAL SPEC; отдельный аксонный тренер после ворот H0. Docs-ready checklist сохраняется; cold только senior + (H0 done \| override) |
 | 4 | **CL-N1@480 senior/policy close** | Exit-классы §4 нормативны в DRAFT; долг на 480 open до принятия в FINAL / senior close (не через multifactor) |
 | 5 | *(вторично)* Default TipR PostTune mode; псевдокод Branch reverse-order + topology после C2↔Console сверки; N0 для span>50 | Не блокируют формулировку §4/§5/§6.1, но нужны для полной миграции v1→v2 |
 
@@ -181,8 +181,10 @@
 | [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md) | H1 executed; H2 → §4 этого документа |
 | [`F5_GAMMA_SPAN100_2026-10-22.ru.md`](F5_GAMMA_SPAN100_2026-10-22.ru.md) | Опциональный cross-link: Span100 γ noop / `quality_fail` (tip без F5 symbol; `DEBT-F5-gamma` open) |
 | [`F5_GAMMA_LIVE_OFFLINE_COMPARE_2026-10-23.ru.md`](F5_GAMMA_LIVE_OFFLINE_COMPARE_2026-10-23.ru.md) | Опциональный cross-link (sibling arm): live vs offline γ compare — **не** вход в tol/mid этого DRAFT |
-| [`TECH_DEBT_TIMELEARNER_2026-10-20.ru.md`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md) | `DEBT-CTRL-V2-DRAFT` / `DEBT-CL-N1` / `DEBT-F1b` / `DEBT-E1.5` |
-| Следующий: `CONTROLLER_V2_SPEC_FINAL_*.ru.md` | Числовые tol-константы + выбранная mid-опция A–D + F1b/CL-N1 policy |
+| [`TECH_DEBT_TIMELEARNER_2026-10-20.ru.md`](TECH_DEBT_TIMELEARNER_2026-10-20.ru.md) | `DEBT-CTRL-V2-DRAFT` / `DEBT-CL-N1` / `DEBT-F1b` (фаза A) / `DEBT-H0-tau-cm` / `DEBT-E1.5` |
+| [`STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md`](STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md) | τ(Cm) per Span → аксоны; F1b не отменён |
+| [`../plans/CURSOR_PLAN_INDEX.ru.md`](../plans/CURSOR_PLAN_INDEX.ru.md) | Архив Cursor-плана ↔ аудит |
+| Следующий: `CONTROLLER_V2_SPEC_FINAL_*.ru.md` | Числовые tol + mid A–D + CL-N1@480 (+ F1b вне дендритного FINAL) |
 
 ---
 

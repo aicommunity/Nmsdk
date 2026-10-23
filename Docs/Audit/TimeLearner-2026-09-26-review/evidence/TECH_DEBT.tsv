@@ -6,9 +6,10 @@ DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 
 DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	480 TipR@Rmax stall open; H1 Span100 converged_need0 (CL_N1_H1_SPAN100_2026-10-22) — stall 480-specific		
 DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	G1 selected 24-32		
 DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH	2026-10-20T15:45Z	F1a_20261020
-DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Console NAxoneDelay pilot	P1	Controller v2	open	senior	docs-ready checklist; still open; no cold		
+DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Axon trainer / NAxoneDelay pilot	P1	фаза A (после H0)	open	senior	STRATEGY 23.10: not discarded; axon trainer after dendrite map; no cold yet; not dendrite-FINAL blocker		
+DEBT-H0-tau-cm	2026-10-23T07:30Z	S1	strategy 23.10	τ(Cm) per Span + Trainer×Mode×Mod	P0	dendrite map / E1.7-8	open	H0	card H0_tau_cm_per_span; STRATEGY_TAU_PER_SPAN_THEN_AXON; prefer Cm over Rm		
 DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	done	stage0	S0_CPP_EMIT_2026-10-22; amp_be+done_be OR; PulseLib 4e3714a	2026-10-22T12:40Z	4e3714a
-DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller SPEC DRAFT	P1	FINAL SPEC	open	docs	SPEC_DRAFT enrich §5 E1.5 tol guidance + §6.1 mid opts A-D; H2 normative; FINAL blocked: mid-choice/tol-constants/F1b/CL-N1@480		
+DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller SPEC DRAFT	P1	FINAL SPEC	open	docs	SPEC_DRAFT; FINAL blocked mid/tol/CL-N1@480; F1b=фаза A (не dendrite FINAL blocker) per STRATEGY 23.10		
 DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog offload	2026-10-20T15:16Z	offload
 DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang	P1	A3	open	A3			
 DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma silent set1	P1	E1	open	C1			
