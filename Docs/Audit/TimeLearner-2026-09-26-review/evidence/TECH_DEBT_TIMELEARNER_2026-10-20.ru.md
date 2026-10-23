@@ -58,7 +58,7 @@
 
 ### Прочие открытые (без изменения статуса)
 
-- `DEBT-A0-ctest` — **закрыт 2026-10-22**: TipR@Rmin early-BE не сбрасывает stall при `no_legal_recovery`; `PulseLib_StorageComponents` **87/87**. Тег `tl-baseline-20261020` на root по-прежнему не резали — [`A0_CTEST_2026-10-22.ru.md`](A0_CTEST_2026-10-22.ru.md).
+- `DEBT-A0-ctest` — **закрыт 2026-10-22**: TipR@Rmin early-BE не сбрасывает stall при `no_legal_recovery`; `PulseLib_StorageComponents` **87/87**. Тег `tl-baseline-20261020` на root **срезан 2026-10-23**: annotated → `03c8cb912748a7a9df9f6cf19eca092489a16ebc` (PulseLib `d52dc1c` / Bin `e7509263` на том коммите); pushed `origin` — [`A0_CTEST_2026-10-22.ru.md`](A0_CTEST_2026-10-22.ru.md).
 - `DEBT-H-A15b` — не подтверждён на E2 R8, но формально open до отдельного SoftCold-среза.
 - `DEBT-A3-trace-hang`, `DEBT-A1-preinh-silent`, `DEBT-G1-432` (полная 432-матрица v1/v2 — этап 5).
 - Закрытые: A15 inputs, cpu-gate, disk-200G, disk-freegib-root (разовый offload), matrix-prepare-wave, F1a-offline, F7 confirmed→F2.pref, **G1-exit-gate harness**, **A0-ctest** (87/87).
