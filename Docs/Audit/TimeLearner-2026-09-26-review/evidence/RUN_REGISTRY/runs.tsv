@@ -111,4 +111,10 @@ W2_sim_k4_20261024T1831Z.naive_br100_j0-20261024T1831Z-e17	e17	br100_nextseg	W2_
 C1b_fine_order_load_20261024T1816Z	Elder-1	br25_nextseg C1 Test-only	C1b	done	/home/user/TLAgent-20261020/runs/C1b_fine_order_load_20261024T1816Z				2026-10-24T18:16Z	order/fine/load controls; first-trial artifact
 Q1sim_20261024T1831Z	M40	br25 C1 Test-only xk	Q1sim	done	/media/user/Data/TLAgent-20261020/runs/Q1sim_20261024T1831Z				2026-10-24T18:31Z	time-similar Test-only; Sim1 bit-identical
 W0_order_ctrl_20261024T1834Z	M40	br25_nextseg W0 Test-only	W0_order	done	/media/user/Data/TLAgent-20261020/runs/W0_order_ctrl_20261024T1834Z				2026-10-24T18:34Z	W0 detection = trial-0 artifact
-C2order_20261024T1857Z	M40	br25 C1 Test-only preinh/combo	C2order	active	/media/user/Data/TLAgent-20261020/runs/C2order_20261024T1857Z				2026-10-24T18:57Z	pre+post inhibition with order controls
+C2order_20261024T1857Z	M40	br25 C1 Test-only preinh/combo	C2order	done	/media/user/Data/TLAgent-20261020/runs/C2order_20261024T1857Z				2026-10-24T18:57Z	pre+post inhibition with order controls
+W1_order_ctrl_20261024T1910Z	Elder-1	W1 simk2/ctrlbr25 Test-only order ctrl	W1_order	done	/home/user/TLAgent-20261020/runs/W1_order_ctrl_20261024T1910Z				2026-10-24T19:10Z	no real selectivity; positional
+W0_longITI_20261024T1925Z	M40	br25_nextseg W0 Test-only Delay 6s	ITI	done	/media/user/Data/TLAgent-20261020/runs/W0_longITI_20261024T1925Z				2026-10-24T19:25Z	carry-over removed; sample-dep. suppression only
+ITI_ctrl_e11_20261024T1922Z	Elder-1	simk2 d12, C1 w1.5 d6 ref/tpos4	ITI	active	/home/user/TLAgent-20261020/runs/ITI_ctrl_e11_20261024T1922Z				2026-10-24T19:22Z	long-ITI controls
+ITI_ctrl_e17_20261024T1924Z	M40	combo/psi2.5 d6	ITI	active	/media/user/Data/TLAgent-20261020/runs/ITI_ctrl_e17_20261024T1924Z				2026-10-24T19:24Z	long-ITI controls
+ITI_ctrl2_e11_20261024T1930Z	Elder-1	ctrlbr25 d6, c1w15 nsoff, c1w075	ITI	queued	/home/user/TLAgent-20261020/runs/ITI_ctrl2_e11_20261024T1930Z				2026-10-24T19:30Z	long-ITI controls 2
+ITI_ctrl2_e17_20261024T1930Z	M40	W0 d6 rev, psi2.5 tpos4, combo nsoff	ITI	queued	/media/user/Data/TLAgent-20261020/runs/ITI_ctrl2_e17_20261024T1930Z				2026-10-24T19:30Z	long-ITI controls 2

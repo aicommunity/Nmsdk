@@ -2,11 +2,43 @@
 
 **Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H)  
 **Ветка:** `plan/2026-10-25-dendrite-limits`  
-**Обновлено:** 2026-10-24T19:00Z (22:00 МСК)
+**Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
 Метрика: `sep_margin` + детекция цели; Done_exact / Done_BE раздельно.
 
 ---
+
+## 2026-10-24T19:25Z (22:25 MSK): order controls + long ITI -> nextseg "detection" is inter-trial carry-over
+
+**W1 (Branch sim k2) jitter replicas:** simk2 j0/jp01/jm01 bit-identical (results md5 ab162e0a, Model f4b489c1ed57) -> post-reset TipR jitter is erased by training; NOT independent seeds. simk1 == ctrl_br25 (f82febbc, sep 0.0111).
+
+**W1_order_ctrl_20261024T1910Z (.11, Test-only on trained structures):**
+| job | sep | note |
+|---|---|---|
+| simk2_ref | +0.2389 | ltz decays with trial index 0.0434 -> 0.017 |
+| simk2_tpos4 | -1.2725 (excl0 -0.7075) | foil at pos0 = 0.0434 fires, target@4 = 0.0191 |
+| simk2_tlast | -1.2726 (excl0 -0.7430) | positional |
+| simk2_nsoff / nsoff_tpos4 | -0.0002 / -0.0004 | all 8 = 0.0434, all fire |
+| ctrlbr25_tpos4 / tlast | -0.0184 / -0.0199 (excl0 -0.0083) | none fire, ~0.096-0.100 |
+Verdict: W1 has no real selectivity; effect is positional/cumulative.
+
+**C2order_20261024T1857Z (.17), done:** preinh k0 all 0.0477 fire (sep -0.0009/tpos4 -0.0006); k3.0 ~0.0478 all fire (0.0003/-0.0019); k2.5 none fire, 0.031-0.034, sample-dependent, target 0.0341 ~ samples1-3 (sep 0.0111 / tpos4 -0.0024); combo psi2.5+nextseg ref sep 0.2293, tpos4 -0.2192 (excl0 -0.0084) -> artifact. Non-monotonic k2.5 vs k3.0 noted.
+
+**Lazy-wiring hypothesis REFUTED:** nextseg inh synapse is wired in Test (wire_now true; trace of W0 ref vs nsoff differs inside trial 0 from 50 ms). It acts mainly after the peak, producing a long hyperpolarizing tail (-0.039 at 0.5 s, -0.003 at 1.5 s) that carries into the next trial at ITI 1.5 s (trial starts at -0.0027 -> peaks ~0.098). The "detection" = trial-0 advantage from carry-over.
+
+**W0_longITI_20261024T1925Z (.17, Delay 1.5 -> 6.0 s, verified in model: trial1 starts 6.027 s, all trial starts 0.0000):**
+| job | fired (by trial) | ltz |
+|---|---|---|
+| d6.0_ref | 11110000 | target 0.1003 = samples1-3 0.1003; samples4-7 0.0995/0.0999/0.0979/0.0988 |
+| d6.0_tpos4 | 00001111 (samples 4-7 first) | position-independent: samples 4-7 suppressed, 0-3 fire |
+| d6.0_nsoff | 11111111 | all 0.1003-0.1004 |
+Verdict: without carry-over nextseg gives a small within-trial, sample-dependent (not target-specific) suppression (<=2.4%) of samples 4-7; target not separated from samples 1-3. Threshold margin ~0.0001 -> fragile.
+
+**ITI_ctrl_e11_20261024T1922Z / ITI_ctrl_e17_20261024T1924Z (partial at 19:27Z):** simk2 Delay 12: all trials 0.0434 and fire (no within-trial effect at all). C1 nextseg w1.5 Delay 6: 0.0419/0.0415/0.0416, none fire. combo Delay 6: 0.0271/0.0267/0.0268; psi2.5 Delay 6: 0.0341/0.0336/0.0337 (same as at 1.5 s -> preinh effect is within-trial, sample-dependent, not target-selective).
+
+Queued: ITI_ctrl2_e11_20261024T1930Z (ctrlbr25 d6 ref/tpos4, c1w15 d6 nsoff, c1w075 d6 ref), ITI_ctrl2_e17_20261024T1930Z (W0 d6 reversed order, psi2.5 d6 tpos4, combo d6 nsoff). Tool: tools/run_iti.py.
+
+**Q1 implication:** S25 "success" of Branch nextseg is an ITI carry-over artifact; there is nothing to transfer to S50/S100 until a within-trial target-selective mechanism exists. **Q2:** pre-inh (k2.5) and post-seg (nextseg) inhibition both act, but are sample-dependent and not aligned with the target.
 
 ## 2026-10-24 ~22:00 МСК (19:00Z) — главное: артефакт первого предъявления
 
