@@ -18,7 +18,7 @@ JITTERS=(-0.03 -0.02 -0.01 0.01 0.02)
 mkdir -p "$LOGDIR" "$RUNS_ROOT"
 [[ -f "$TSV" ]] || echo -e "rep\trun_id\tstatus\tstarted\tfinished\tnote" >"$TSV"
 
-running_consoles() { pgrep -c -f NeuroModelerConsole 2>/dev/null || echo 0; }
+running_consoles() { local n; n=$(pgrep -c -f NeuroModelerConsole 2>/dev/null); echo "${n:-0}"; }
 
 idx=0
 for j in "${JITTERS[@]}"; do
