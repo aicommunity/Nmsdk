@@ -8,6 +8,29 @@
 
 ---
 
+## 2026-10-24T20:30Z (23:30 MSK): long-ITI controls done -> no target selectivity in any variant; REPASS sweep launched
+
+**ITI_ctrl (.11 + .17), Test-only, ITI 6 s (12 s for simk2), ref vs target@pos4/reversed:**
+| job | sep | fired | note |
+|---|---|---|---|
+| simk2 d12 ref / tpos4 | -0.0004 / -0.0003 | all 8 | all = 0.0434, zero within-trial effect |
+| ctrl_br25 d6 ref / tpos4 | -0.0002 / -0.0003 | target + samples1-3 | samples 4-7 at 0.098-0.0999 below thr; position-independent |
+| W0 d6 reversed (.17) | -0.0003 | target + samples1-3 | same sample-dependent pattern |
+| C1 w1.5 d6 ref / tpos4 | +0.0008 / -0.0068 | none | 0.040-0.042 |
+| C1 w1.5 d6 nsoff | -0.0009 | all 8 | 0.0477: nextseg lowers all trials ~12%, uniformly |
+| C1 w0.75 d6 | +0.0003 | all 8 | |
+| psi2.5 d6 ref / tpos4 | +0.0111 / -0.0024 | none | target 0.0341@pos0 vs 0.0336@pos4: residual first-trial bias ~1.5% even at 6 s |
+| combo psi2.5+nextseg d6 ref / tpos4 | +0.0112 / -0.0029 | none | |
+| combo d6 nsoff | md5 == psi2.5 d6 ref (03efc964) | | nextseg adds NOTHING once trials do not overlap |
+
+**Conclusions.** (1) With non-overlapping trials no tested structure (Branch nextseg S25, sim k1/k2, C1 nextseg dose, pre-inh psi, combo) separates the target from foils; all residual differences are sample-identity-driven (target ~= samples 1-3, samples 4-7 slightly lower) and <=2.5% of LTZ max. (2) Q1: nothing to transfer to S50/S100 - S25 success was ITI carry-over. (3) Q2: pre-inh acts within trial but by sample features, not by target; nextseg acts only across trials in combo. (4) Even ITI 6 s leaves a ~1.5% first-trial bias for psi2.5 -> keep permutation controls mandatory, not only long ITI.
+
+**Launched:** REPASS_ITI6 sweep - every historical trained Test dir (latest per case) re-tested at ITI 6 s, ref + target@pos4: .11 `REPASS_ITI6_e11_20261024T2011Z` (53 cases/106 jobs, 6 parallel), .17 `REPASS_ITI6_e17_20261024T2012Z` (43 cases/86 jobs, 10 parallel). Large models (W01_CL50, CL480, BR480) run >13 min per batch. Tool: /tmp/repass_sweep.sh (copy to be committed after first full pass).
+
+**Next (pending REPASS):** if no historical case shows position-independent target selectivity, the one-channel campaign result is negative for the current target/foil set; next step is the input-level analysis why target ~= samples 1-3 (requirements for the pattern / synthetic dataset design, to be approved by Tim before generation).
+
+---
+
 ## 2026-10-24T19:25Z (22:25 MSK): order controls + long ITI -> nextseg "detection" is inter-trial carry-over
 
 **W1 (Branch sim k2) jitter replicas:** simk2 j0/jp01/jm01 bit-identical (results md5 ab162e0a, Model f4b489c1ed57) -> post-reset TipR jitter is erased by training; NOT independent seeds. simk1 == ctrl_br25 (f82febbc, sep 0.0111).
