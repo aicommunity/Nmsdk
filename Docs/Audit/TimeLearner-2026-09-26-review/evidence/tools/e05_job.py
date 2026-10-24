@@ -68,6 +68,7 @@ def readback(d):
             r[f"{rel[:-7]}.{k}"] = get_tag(t, k)
     ini = (d / "Project.ini").read_text() if (d / "Project.ini").is_file() else ""
     m = re.search(r"<DefaultTimeStep>(\d+)<", ini); r["DefaultTimeStep"] = m.group(1) if m else None
+    m = re.search(r"<GlobalTimeStep>(\d+)<", ini); r["GlobalTimeStep"] = m.group(1) if m else None
     ov = []
     for f in sorted(glob.glob(str(d / "EventsLog" / "*INFO*"))) + [str(x) for x in d.glob("*.log")]:
         try:
@@ -194,7 +195,7 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
         samples = [T if k == "T" else row_of(v[1], off) for k, v in batch]
         classes = [1 if k == "T" else 0 for k, _ in batch]
         rows, rb = run_test(bn, samples, classes, "1.5")
-        res[f"readback_{bn}"] = {"DefaultTimeStep": rb.get("DefaultTimeStep")}
+        res[f"readback_{bn}"] = {"DefaultTimeStep": rb.get("DefaultTimeStep"), "GlobalTimeStep": rb.get("GlobalTimeStep")}
         for (k, v), r in zip(batch, rows):
             pv = float(r["ltz_potential_max"])
             q[k].append(pv)
@@ -214,7 +215,20 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["m8_iti6"] = (min(tg) - max(fo)) / min(tg) if tg and fo and min(tg) else None
     res["iti6_target_fired"] = [int(x["neuron_fired"]) for x in rows if x["target_class"] == "1"]
     res["iti6_foils_fired"] = sum(int(x["neuron_fired"]) for x in rows if x["target_class"] == "0")
-    # gate test m8 (posttune_verify Test as run, Delay 1.5, original order)
+    # gate05 (2026-10-25 02:30 MSK fix): phase8 gate forces Test GlobalTimeStep=20000 (dt 0.05 ms) -> m8_gate is NOT at dt 0.5 ms.
+    # Re-run original samples at dt 0.5 ms (patch_ini), Delay 1.5, target at position 4 (not first).
+    others = [i for i in range(8) if i != tgt_i]
+    perm5 = others[:4] + [tgt_i] + others[4:]
+    rows, rb = run_test("gate05", [smp[i] for i in perm5], [cls[i] for i in perm5], "1.5")
+    res["readback_gate05"] = {"DefaultTimeStep": rb.get("DefaultTimeStep"), "GlobalTimeStep": rb.get("GlobalTimeStep")}
+    tg = [float(x["ltz_potential_max"]) for x in rows if x["target_class"] == "1"]
+    fo = [float(x["ltz_potential_max"]) for x in rows if x["target_class"] == "0"]
+    res["gate05_perm"] = perm5
+    res["m8_gate05"] = (min(tg) - max(fo)) / min(tg) if tg and fo and min(tg) else None
+    res["gate05_target_fired"] = [int(x["neuron_fired"]) for x in rows if x["target_class"] == "1"]
+    res["gate05_foils_fired"] = sum(int(x["neuron_fired"]) for x in rows if x["target_class"] == "0")
+    res["gate_GlobalTimeStep"] = readback(work / "Test").get("GlobalTimeStep")
+    # gate test m8 (posttune_verify Test as run, Delay 1.5, original order; dt per gate_GlobalTimeStep, 20000 = 0.05 ms -> diagnostic only)
     g = work / "Test" / "SelectivityLog" / "results.csv"
     if g.is_file():
         rows = list(csv.DictReader(g.open()))
@@ -237,5 +251,5 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["dyn_now_min_step"] = steps[0] if steps else None
 res["wall_total_s"] = round(time.time() - t0)
 (OUT / "result.json").write_text(json.dumps(res, indent=1, default=str))
-log("RESULT", json.dumps({k: res.get(k) for k in ("m_S4", "m_S8", "m8_gate", "m8_iti6", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
+log("RESULT", json.dumps({k: res.get(k) for k in ("m_S4", "m_S8", "m8_gate05", "m8_iti6", "m8_gate", "gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
 log("JOB_DONE")

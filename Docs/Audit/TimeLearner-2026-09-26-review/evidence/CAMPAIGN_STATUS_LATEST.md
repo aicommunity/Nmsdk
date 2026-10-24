@@ -186,3 +186,36 @@ Train: лог `Resistance bounds could not be derived: no positive NPulseChannel
 - E4_b_s0 (.17, old binary, diagnostic only): Done_BE at L 18/17/11/1, m(S/4) -0.195, m8_iti6 -0.527: no detection (est deadlock, see above).
 - Utilisation fix: .11 dispatcher reserved 6 slots for REPASS_ITI6 while it ran only 2 Consoles (3 cores idle). Restarted with RESERVE_N=2: E3off_b_s0, E4off_c_s0, E4off_b_s0 started; .11 8/8 busy. .17 12/12 busy (10 REPASS + E4_c, E5_c).
 - Disk: .11 / 69 % used; .17 / 46 %, /media/user/Data 89 % used (413 GB free, above the 5 % threshold).
+
+## 2026-10-24T23:20Z (02:20 MSK 25.10): hourly check, E05 + REPASS_ITI6
+
+**Incidents (fixed this hour)**
+- .17 E05 dispatcher (pid 56417, started 00:45 MSK) had no NMSDK_ROOT -> JOB=/home/user/Nmsdk/... missing -> 22 queued jobs ended rc=2 in ~20 s each (01:14-01:22 MSK); .17 ran only REPASS + E5_c_s0, idle 01:48-02:14 MSK after REPASS finished. Fix: dispatcher restarted 02:14 MSK (pid 113632, NMSDK_ROOT=~/tl-agent/Nmsdk, console e05b, DATA_DIR set, no reserve); the 22 labels requeued as `<label>_r` (E5/E3weak/E5off s0 first, then s1, s2).
+- dt rule violation found: phase8_tiprmin_gate.py forces Test `GlobalTimeStep 20000` (dt 0.05 ms) for the posttune gate test, while Train and the e05 XT tests run at 2000 (now step 5e-4). => `m8_gate`, gate ROW fires/detection and the C++ inference-mid threshold of every E05 job are at dt 0.05 ms and are NOT valid results (diagnostic only); XT `neuron_fired` flags use that threshold too. m(S/4), m(S/8), m8_iti6 (relative ltz at dt 0.5 ms) stay valid. Fix in e05_job.py (this commit): readback of GlobalTimeStep, new `gate05` test (original samples, target at position 4, Delay 1.5 s, dt 0.5 ms) -> `m8_gate05`, plus `gate_GlobalTimeStep` in result.json. phase8 itself not changed (Bin, needs decision).
+
+**E05 results since 01:10 MSK** (m = (tgt - max foil)/tgt, ltz at dt 0.5 ms)
+| job | host | outcome | final L | m(S/4) | m(S/8) | m8_iti6 |
+| --- | --- | --- | --- | --- | --- | --- |
+| E3off_c_s0 | .11 | C++ refusal (TipR cap 1e10) | 393 345 217 1 | - | - | - |
+| E4off_c_s0 | .11 | C++ refusal (TipR d1,d2 1e10) | 201 177 105 1 | - | - | - |
+| E4_c_s0 | .17 | C++ refusal | 201 177 105 1 | - | - | - |
+| E5_c_s0 (old bin) | .17 | not_converged_at_stop, TipR d1,d2 1e10, Test model stale (L 25 23 15) | 209 185 105 1 | - | - | - |
+| E1_c_s1 | .11 | C++ refusal (= s0) | 49 47 29 1 | - | - | - |
+| E2_b_s0n | .11 | Done_BE early | 73 57 41 1 | 0.000 | -0.053 | -0.342 |
+| E3off_b_s0 | .11 | Done_BE; training identical to E2_b_s0n (same L, TipR, audit ROW) | 73 57 41 1 | -0.00005 (flat 0.0764) | - | - |
+| E4off_b_s0 | .11 | Done_BE early | 89 73 57 1 | +0.072 | +0.029 | -0.103 |
+| E1_b_s1 | .11 | Done_BE | 28 21 14 1 | -0.153 | +0.045 | -0.238 |
+
+- Classic: grows to the design length (E3off ~400, E4/E4off ~200, E5 ~200) but tip resistances of d1/d2 hit the 1e10 cap -> refusal/no convergence. Consistent with E0 (Console amplitude after 200-400 segments ~0.36-0.40 of the tip input): attenuation, not delay, is the binding limit.
+- Branch: stops by Done_BE at 73/57/41 (E2/E3off) or 89/73/57 (E4off), far below design (400/334/200, 200/168/101); no detection in any test; E2 prediction (m ~0.11 Branch) not met; off controls are FAIL as expected but indistinguishable from "on".
+- Inhibition overrides reach Train/Test XML (readback) but do not change Branch training at all (E2_b_s0n == E3off_b_s0 bit-identical training) -> "identical repeat" class: inhibition is inactive during Branch growth at these params.
+
+**REPASS_ITI6 e17: finished 01:48 MSK** (43 cases, 41 with results, 2 NO_RESULTS). Order-invariant positive (ref and tpos4 both m>0, target fired, no foil fired): only BR480 Branch structures:
+W08_BR480_N0_PSIoff_NEXT, br480_nextseg, h0_b480_nextseg_n0_pton all give identical ltz (tgt 0.0365 / max foil 0.0358, m +0.019) -> one deterministic structure, not 3 replicas; br480_tiprmin (L 85 46 25 1) m +0.017 (0.0517/0.0508). All S25/S50/S100 cases: m <= 0 in at least one order (br25sim_k4 +0.164 ref / -0.211 tpos4, h0_b100_preinh_n0 +0.027/-0.121, br100_preinh, br50_preinh, br50_gen, h2_keepdone_w33/W01_CL50: order artifacts). Tests at dt 0.5 ms (Test ini 2000).
+**REPASS_ITI6 e11**: 23/53 cases done (16 inh_c100_* NO_RESULTS, the rest m <= 0); still running (batch 008 of 017, 2 Consoles).
+
+**Launched**
+- .17 W08ctrl_e17_20261024T2313Z (Test-only, run_iti.py): W08 tlast d6, tpos2 d12, tpos4 d6 nextseg OFF, tpos4 d1.5; br480_tiprmin tlast d6, tpos2 d12, tpos4 d1.5.
+- .17 E05 requeue (22 jobs), .11 queue continues (E2_c_s2 ... E1_b_s0r).
+- Load: .11 8/8 slots (7 Consoles + job between Consoles); .17 12/12 (7 W08ctrl + 5 E05 at 02:16 MSK).
+- Disk: .11 / 69 %; .17 / 46 %, /media/user/Data 89 % (409 GB free) -> no cleanup.
