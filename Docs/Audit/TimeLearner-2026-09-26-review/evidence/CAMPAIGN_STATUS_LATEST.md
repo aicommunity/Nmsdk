@@ -1,37 +1,40 @@
 # Campaign status — latest
 
-**Активный план (приоритет):** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md)  
-**Ветка:** `plan/2026-10-25-dendrite-limits` (от `timelearner_fix3`)  
-**Обновлено:** 2026-10-24T18:00Z
+**Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H dual-host/disk/offload)  
+**Ветка:** `plan/2026-10-25-dendrite-limits`  
+**Обновлено:** 2026-10-24T18:05Z
 
-Метрика волн: `sep_margin` + обязательная детекция цели; **Done_exact** и **Done_BE** раздельно. Волна без прошедшего контроля W0 не засчитывается. H0_tau_cm_per_span / TauH0 — **сняты с приоритета** (τ масштабируется неверно относительно плана §1).
+Метрика: `sep_margin` + детекция цели; Done_exact / Done_BE раздельно. H0 TauH0 — вне приоритета.
+
+---
+
+## BLOCK: offload на `/media/user/Data`
+
+На M40 `/media/user/Data` сейчас **~89% used / ~11% free** (&lt; порога **15% free** из плана §H3).
+
+**Действие:** перенос в `/media/user/Data/TLAgent-offload/…` **не выполнять**, пока free% ≥ 15. Скрипт `evidence/tools/disk_watch_offload.sh` при `check`/`offload` вернёт `BLOCK_OFFLOAD`. Активные Console **не** убивать.
+
+Нужна ручная очистка Data (или другой том) — затем снять блок в этом файле.
 
 ---
 
 ## Очередь
 
-| Блок | Статус | Коммит / note |
+| Блок | Статус | Note |
 | --- | --- | --- |
-| §0 F1 InhGrid neuron = AsymRm (не SymInh) | **code done** | `clone_inh_grid.py` → `NEURON_BASE`/`NEURON_PSI`; re-clone EXP перед следующей InhGrid-волной |
-| §0 F2 PSI только классом нейрона | **code done** | убран Model `UsePresynaptic` патч |
-| §0 F3 Test overlay NumSynapse + Ns==128 = saturated | **code done** | phase8/phase9 overlay; `not_converged_saturated` в `posttune_verify` |
-| §0 F4 ложный ERROR Resistance bounds | **code done** | PulseLib Classic+Branch: `target_count==0` → true без ERROR |
-| §0 F5 / R0 Train↔Test LTZ ≤5% | **script ready** | прогон после W0 артефактов |
-| W0 br25_nextseg ×3 + R0 | **running** | 3× SoftCold `br25_nextseg`; Console `27ea0604ca9af64b`; logs `w0_br25_nextseg_logs/` |
-| C1 доза-ответ торможения | **pending** | после W0 PASS детекции |
-| W1/W2 sim Span | **pending** | после C1 / контроль в каждой волне |
-| genasym SoftCold (`inh_c25_genasym_n0_pton`) | **running** — не стопать | poll ~262+; параллельно W0 |
+| §0 F1–F5 | **done** (pushed) | PulseLib `2e5308e`, Bin `b7706a07` |
+| §H dual-host / disk / registry | **in progress** | plan §H; `RUN_REGISTRY/`; `disk_watch_offload.sh` |
+| M40 sync + build + br25_nextseg ctrl | **in progress** | stash сохранён на .17; fetch ветки |
+| W0 br25_nextseg ×3 (.11) | **running** | параллельно genasym |
+| genasym SoftCold (.11) | **running** — не стопать | |
+| C1 / W1–W2 | **pending** | после W0 PASS + M40 ctrl |
 
 ---
 
-## genasym (не блокер §0)
+## Диск сейчас
 
-Параллельный Diag §6.3: InhGrid S25 gen fan-out + `NeuronClassName=AsymRm`. Лог: `evidence/inh_grid_logs/INH.inh_c25_genasym_*`. Не прерывать ради dendrite_limits.
-
----
-
-## Next
-
-1. Commit+push PulseLib → Bin → root (§0 block).  
-2. Rebuild Console (F4).  
-3. W0: `br25_nextseg` контроль (явный cold после §0 push).
+| FS | Host | Avail / free% | Действие |
+| --- | --- | --- | --- |
+| `/home/user` | Elder-1 | ~186G (~41% free) | OK; warn&lt;80G → offload done (не kill) |
+| `/` | M40 | ~138G | OK |
+| `/media/user/Data` | M40 | ~407G / **~11% free** | **BLOCK offload** |
