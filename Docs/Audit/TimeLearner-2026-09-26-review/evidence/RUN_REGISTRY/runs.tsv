@@ -124,3 +124,6 @@ E05_series_e11	Elder-1	E1-E5 Classic/Branch x3 seeds (queue_elder1_11.tsv)	E05	a
 E05_series_e17	M40	E1-E5 Classic/Branch x3 seeds (queue_m40_17.tsv)	E05	active	/media/user/Data/TLAgent-20261020/runs/E05_series				2026-10-24T21:25Z	dispatcher e05_dispatch.sh; dt 0.5 ms
 E05_E0	Elder-1	E0 kernel probe Console vs segsim	E05	done_local	/home/user/e05_runs/E0				2026-10-24T21:00Z	delay=tau-dt confirmed
 E05_smoke	Elder-1	E2 classic/branch smoke (=E2_c_s0)	E05	active	/home/user/e05_runs/smoke				2026-10-24T21:20Z	e2b killed (Branch est deadlock, old binary)
+E05_series_e17_requeue	M40	22 rc=2 jobs requeued as *_r (dispatcher NMSDK_ROOT fix)	E05	active	/media/user/Data/TLAgent-20261020/runs/E05_series				2026-10-24T23:14Z	dispatcher pid 113632; e05_job gate05 fix
+REPASS_ITI6_e17	M40	retest historic Test dirs ITI 6 s ref+tpos4 (43 cases)	REPASS	done_local	/media/user/Data/TLAgent-20261020/runs/REPASS_ITI6_e17_20261024T2012Z				2026-10-24T22:48Z	only BR480 (W08 = br480_nextseg = h0_b480 identical; br480_tiprmin) order-invariant m~+0.02
+W08ctrl_e17	M40	W08/br480_tiprmin order/ITI/nextseg-off controls (7 Test-only)	REPASS	active	/media/user/Data/TLAgent-20261020/runs/W08ctrl_e17_20261024T2313Z				2026-10-24T23:13Z	run_iti.py
