@@ -164,6 +164,67 @@ def scale_inh_resistances(model: Path, scale: float) -> int:
     return int(n)
 
 
+def apply_trial_order(params: Path, perm: list[int]) -> None:
+    """Reorder Test dataset samples (MatrixData rows x4 + MatrixClasses) by perm.
+    new sample i = old sample perm[i]. Used for trial-order controls (C1b)."""
+    t = params.read_text(encoding="utf-8", errors="replace")
+
+    def fix_data(m: re.Match[str]) -> str:
+        vals = m.group(2).split()
+        n = len(perm)
+        if len(vals) % n:
+            return m.group(0)
+        k = len(vals) // n
+        rows = [vals[i * k:(i + 1) * k] for i in range(n)]
+        new = [x for i in perm for x in rows[i]]
+        return m.group(1) + "\n".join(new) + m.group(3)
+
+    def fix_cls(m: re.Match[str]) -> str:
+        vals = m.group(2).split()
+        if len(vals) != len(perm):
+            return m.group(0)
+        return m.group(1) + "\n".join(vals[i] for i in perm) + m.group(3)
+
+    t = re.sub(r"(<MatrixData\b[^>]*>)([^<]*)(</MatrixData>)", fix_data, t)
+    t = re.sub(r"(<MatrixClasses\b[^>]*>)([^<]*)(</MatrixClasses>)", fix_cls, t)
+    params.write_text(t, encoding="utf-8")
+
+
+SIM_TIME_TAGS = (
+    "MembraneCapacity", "SynapseSecretionTC", "SynapseDissociationTC",
+    "SynapseTypicalPulseDuration", "Capacity", "SecretionTC", "DissociationTC",
+    "TypicalPulseDuration", "PulseLength",
+)
+
+
+def scale_time_xml(path: Path, k: float, *, pattern: bool, constants: bool) -> dict:
+    """Q1 H-sim: multiply pattern times (MatrixData) and/or every time constant by k."""
+    t = path.read_text(encoding="utf-8", errors="replace")
+    counts: dict = {}
+
+    def mul(m: re.Match[str]) -> str:
+        vals = m.group(2).split()
+        try:
+            new = [f"{float(v) * k:.12g}" for v in vals]
+        except ValueError:
+            return m.group(0)
+        return m.group(1) + "\n".join(new) + m.group(3)
+
+    if pattern:
+        t, n = re.subn(r"(<MatrixData\b[^>]*>)([^<]*)(</MatrixData>)", mul, t)
+        counts["MatrixData"] = n
+    if constants:
+        for tag in SIM_TIME_TAGS:
+            t, n = re.subn(rf"(<{tag}\b[^>]*>)([^<]*)(</{tag}>)", mul, t)
+            counts[tag] = n
+        if "<SynapseTypicalPulseDuration" not in t and "<SynapseSecretionTC" in t:
+            t = ensure_tag_after(t, "SynapseSecretionTC", "SynapseTypicalPulseDuration",
+                                 f"{0.001 * k:.12g}", attrs=' Type="d" PType="257" IoType="17"')
+            counts["SynapseTypicalPulseDuration_inserted"] = 1
+    path.write_text(t, encoding="utf-8")
+    return counts
+
+
 def unlink_inh_inputs(model: Path) -> None:
     t = model.read_text(encoding="utf-8", errors="replace")
 
@@ -268,6 +329,19 @@ def prepare_case(out: Path, *, template: Path, meta: dict) -> Path:
                 meta["inh_blocks_patched"] = n
             if meta.get("inh_input_off") == "1":
                 unlink_inh_inputs(model)
+        if meta.get("time_k"):
+            k = float(meta["time_k"])
+            sc = {}
+            if params.is_file():
+                sc["Parameters"] = scale_time_xml(params, k, pattern=True,
+                                                  constants=meta.get("sim_xml") == "1")
+            if model.is_file():
+                sc["Model"] = scale_time_xml(model, k, pattern=True,
+                                             constants=meta.get("sim_xml") == "1")
+            meta = dict(meta)
+            meta.setdefault("time_scale_counts", {})[side] = sc
+        if params.is_file() and side == "Test" and meta.get("order"):
+            apply_trial_order(params, [int(x) for x in meta["order"]])
     test = out / "Test"
     rb = readback(test, meta)
     (out / "c1_meta.json").write_text(
@@ -397,6 +471,60 @@ def build_jobs(series: str) -> list[dict]:
              "neuron": PSI_CLASSES[0.0], "nextseg": "0", "segei": "1",
              "delta": "1", "alpha": "1.0"},
         ]
+    if series == "c1b":
+        # C1b (2026-10-24 21:xx): fine nextseg weights, pure cable-load control,
+        # trial-order controls (target not first). Needs NextSegInhResistance Console.
+        def ns(w, **kw):
+            j = {"id": f"nextseg_w{w}", "template": BASE_NEXTSEG,
+                 "neuron": PSI_CLASSES[0.0], "nextseg": "1" if w > 0 else "0",
+                 "segei": "0", "w": w}
+            if w > 0:
+                j["nextseg_r"] = f"{TIPR_LAST / w:.17g}"
+            j.update(kw)
+            return j
+        rot4 = [4, 5, 6, 7, 0, 1, 2, 3]
+        last = [1, 2, 3, 4, 5, 6, 7, 0]
+        jobs += [
+            ns(0.75), ns(1.25), ns(1.5),
+            {"id": "nextseg_load_only_R1e15", "template": BASE_NEXTSEG,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "1", "segei": "0",
+             "nextseg_r": "1e15"},
+            ns(1.0, id="nextseg_w1.0_tpos4", order=rot4),
+            ns(1.0, id="nextseg_w1.0_tlast", order=last),
+            ns(0.0, id="nextseg_w0.0_tpos4", order=rot4),
+            {"id": "segei_d1_a1.0_tpos4", "template": BASE_GEN,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "0", "segei": "1",
+             "delta": "1", "alpha": "1.0", "order": rot4},
+        ]
+    if series == "q1sim":
+        # Q1 H-sim Console probe: trained S25 structure (L=13 11 7 1, nextseg w=1)
+        # replayed with every time constant x k and pattern x k (exact similarity),
+        # vs naive (pattern x k only, original neuron) and Sim1 identity control.
+        def q(id_, k, cls, nextseg_w, sim):
+            j = {"id": id_, "template": BASE_NEXTSEG if nextseg_w > 0 else BASE_GEN,
+                 "neuron": cls, "nextseg": "1" if nextseg_w > 0 else "0",
+                 "segei": "0"}
+            if nextseg_w > 0:
+                j["w"] = nextseg_w
+                j["nextseg_r"] = f"{TIPR_LAST / nextseg_w:.17g}"
+            if k != 1.0:
+                j["time_k"] = k
+            if sim:
+                j["sim_xml"] = "1"
+            return j
+        jobs += [
+            q("sim_k1_identity_ns_w1", 1.0, "NSPNeuronGenAsymRmD001C1e9Sim1", 1.0, False),
+            q("sim_k2_ns_w1", 2.0, "NSPNeuronGenAsymRmD001C1e9Sim2", 1.0, True),
+            q("sim_k4_ns_w1", 4.0, "NSPNeuronGenAsymRmD001C1e9Sim4", 1.0, True),
+            q("sim_k2_gen", 2.0, "NSPNeuronGenAsymRmD001C1e9Sim2", 0.0, True),
+            q("sim_k4_gen", 4.0, "NSPNeuronGenAsymRmD001C1e9Sim4", 0.0, True),
+            q("naive_k2_ns_w1", 2.0, PSI_CLASSES[0.0], 1.0, False),
+            q("naive_k4_ns_w1", 4.0, PSI_CLASSES[0.0], 1.0, False),
+            q("sim_k2_ns_w0.5", 2.0, "NSPNeuronGenAsymRmD001C1e9Sim2", 0.5, True),
+            q("sim_k2_ns_w2.0", 2.0, "NSPNeuronGenAsymRmD001C1e9Sim2", 2.0, True),
+            q("sim_k4_ns_w0.5", 4.0, "NSPNeuronGenAsymRmD001C1e9Sim4", 0.5, True),
+            q("sim_k4_ns_w2.0", 4.0, "NSPNeuronGenAsymRmD001C1e9Sim4", 2.0, True),
+        ]
     if series in ("all", "combo"):
         jobs.append(
             {
@@ -428,7 +556,7 @@ def main() -> int:
     ap.add_argument(
         "--series",
         default="mech",
-        choices=("all", "psi", "nextseg", "segei", "combo", "mech", "onoff"),
+        choices=("all", "psi", "nextseg", "segei", "combo", "mech", "onoff", "c1b", "q1sim"),
         help="Default mech=prove nextseg/segei write+effect before dose grids",
     )
     ap.add_argument("--limit", type=int, default=8)
