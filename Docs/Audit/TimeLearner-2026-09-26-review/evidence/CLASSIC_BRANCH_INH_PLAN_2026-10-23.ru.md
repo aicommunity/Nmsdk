@@ -85,15 +85,43 @@ Mod: `gen`, `preinh`, `nextseg`, `segei`, `preinh_nextseg`, `preinh_segei`, `nex
 
 ---
 
-## 4. Статус
+## 4. Расследование результатов (Diag)
+
+Постановка: cold-очередь Done ≠ научный вердикт. Нужно отделить **сходимость Train** (`training_convergence` / Need / tipr_settled / rmax_stall) от **качества Test** (fires, Acc N/8, Цель, mid, sep_margin) и сравнить механизмы по иерархии Trainer×Mode → Span → NeuronModel → Mod (колонка PostTune ON).
+
+### 4.1 Источники
+
+| Host | Адрес | Артефакты |
+| --- | --- | --- |
+| Elder-1 | локально | `evidence/inh_grid_logs/INH.inh_c*`, `TLAgent-20261020/runs/inh_c*/provenance.json` |
+| M40 | **`10.245.1.17`** (не `192.168.1.17`) | `/home/user/tl-agent/Nmsdk/.../inh_grid_logs/`, offload workdirs в `/home/user/Data` |
+
+Метрики из stdout логов неполны (Acc нет) — канон: `provenance.json` → `result.{training_convergence,fires,Need,mid_source,detection_quality,…}` + хвост лога (`SKIP_GATE`, `Need=`, `rmax_stall`).
+
+### 4.2 Шаги Diag
+
+1. **Harvest** — для каждого case latest non-disk_stop run: Need, tipr_settled, rmax_stall, training_convergence, fires, Acc, Цель/detection, mid_source, Test Train paths.
+2. **Корневая причина `not_converged_at_stop`** — классификация: Need=1 без finalize vs tipr unsettle vs rmax_stall vs early child stop; отдельно S25 «verify при Need=1» (posttune_complete/flag vs Need).
+3. **Абляция Mod** — NextSeg (\(d=1\)) vs SegEI (\(d=8\)) vs preinh vs gen; эффекты комбинаций; Classic vs Branch на одном Span×Mode.
+4. **Deliverables** — TSV harvest; evidence [`INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md`](INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md); колонки Acc/Need/mid в RESULTS; статус ниже → done.
+
+### 4.3 Критерий закрытия Diag
+
+Сводная таблица Acc/Need/fires по всей Done-сетке (72) с Train/Test ссылками; явный вердикт: есть ли хоть один SoftCold PASS; гипотеза почему Classic S50/S100 не сходятся; next action (не silent re-run без гипотезы).
+
+---
+
+## 5. Статус
 
 | Шаг | Статус |
 | --- | --- |
-| Этот документ | done |
+| Этот документ | done (+ §4 Diag) |
 | PulseLib NextSeg Classic + SegEI Classic/Branch + SymInh | done (40f09a2) |
 | Bin EXP сетка | done (01baf8d4, 72 EXP) |
-| SoftCold Classic 48 | **очередь Done** (48/48); после disk_stop re-run S25/S50 закрыты; Acc PASS не получен |
-| SoftCold Branch 24 N1 | **очередь Done** (24/24); Acc PASS не сведён в таблицу |
-| RESULTS | done → [`CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md`](CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md) (+ addendum disk_stop re-run) |
-| Научный разбор Acc/mid/Need по Mod (абляция NextSeg vs SegEI) | **не выполнен** — нет сводной Acc N/8 / Цель |
+| SoftCold Classic 48 | **очередь Done** (48/48); после disk_stop re-run S25/S50 закрыты |
+| SoftCold Branch 24 N1 | **очередь Done** (24/24) |
+| RESULTS (Done/reasons) | done → [`CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md`](CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md) |
+| Diag harvest Acc/Need/mid/fires | **done** — [`INH_GRID_DIAG_HARVEST_2026-10-24.tsv`](INH_GRID_DIAG_HARVEST_2026-10-24.tsv) |
+| Diag `not_converged` root cause | **done** — L=1 stall / TipR+rmax_stall; см. DIAG §3 |
+| Evidence DIAG + Acc в RESULTS | **done** — [`INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md`](INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md); SoftCold PASS **0/72** |
 | Branch×N0 | вне Done-сетки (как в постановке) |

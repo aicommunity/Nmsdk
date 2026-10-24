@@ -6,7 +6,7 @@
 
 **Счётчик Done:** Classic 48/48, Branch 24/24. Это закрытие очереди cold, **не** эквивалент Acc PASS.
 
-**Вывод по качеству:** на Classic 24 кейса оборваны гейтом `STOP Avail<80G` (весь Span50 и часть Span25) — SoftCold/Acc для них отсутствует и требует pack+re-run; все 16 Classic×Span100 дошли до verify с `not_converged`; 8 Classic×Span25 завершили verify. Branch×N1: Span25 все `exit_1`; Span50 смешанно `exit_1`/`not_converged`; Span100 почти все `exit_1` (один `exit_1_tsv_fix` на `all`). Следующий шаг кампании — освободить диск на Elder-1 и переиграть Classic disk_stop×24, затем дописать Acc/Цель в эту таблицу.
+**Вывод по качеству (после Diag 2026-10-24):** disk_stop-хвост закрыт re-run; научный разбор Acc/Need/mid — [`INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md`](INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md), harvest [`INH_GRID_DIAG_HARVEST_2026-10-24.tsv`](INH_GRID_DIAG_HARVEST_2026-10-24.tsv). **SoftCold PASS = 0/72:** у всех `converged_posttune_finalized` fires=`00000000`, Acc≈7/8, mid=`cpp_nonseparable`, Цель=нет; 34 кейса — `not_converged_at_stop` (Test не считался). Done≠Acc PASS.
 
 ---
 
@@ -154,7 +154,34 @@ Branch×N0 в этой волне не входил в Done-сетку.
 | Elder-1 | Classic S25 ×8 | **8/8** | все `exit_1` (полный verify; не disk_stop) |
 | M40 | Classic S50 ×16 | **16/16** | 14×`not_converged`, 2×`exit_1` (`preinh_segei_n0`, `segei_n0`) |
 
-**Вывод:** infra-хвост disk_stop закрыт. Acc PASS на этих Span не получен: S25 завершил verify с `exit_1`, S50 почти весь `not_converged` (в духе Classic S100 первой волны). Сводную Acc-таблицу PASS не поднимаем; детали — workdir `_repro/runs/` / `POSTTUNE_VERIFY_RESULT` на хостах. Следующий шаг — разбор mid/Need/fires по Mod×Mode, не повтор pack.
+**Вывод:** infra-хвост disk_stop закрыт. Acc PASS на этих Span не получен: S25 завершил verify с `exit_1`, S50 почти весь `not_converged` (в духе Classic S100 первой волны).
 
 Конфиги: `Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/EXP_classic_S{25,50}_*_InhGrid_N{0,1}/{Train,Test}`.
+
+---
+
+## Addendum: Diag Acc/Need/mid (2026-10-24)
+
+Постановка Diag — план §4. Ниже сжатая матрица по provenance (не TSV exit-кодам). Полный разбор и root-cause not_converged — в DIAG.
+
+### Classic (PostTune ON) — Acc / Need / mid
+
+| Mode | Span | Mod (все 8, если не указано) | Conv | Need | fires | Acc | mid | Train/Test |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| N0+N1 | 25 | все | finalized | 0 | `00000000` | 7/8 | `cpp_nonseparable` | [`SelectivityInhGrid/EXP_classic_S25_*`](../../../Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/) |
+| N0 | 50 | `segei`, `preinh_segei` | finalized | 0 | `00000000` | 7/8 | `cpp_nonseparable` | `EXP_classic_S50_{segei,preinh_segei}_InhGrid_N0` |
+| N0+N1 | 50 | остальные 14 | not_converged | 1 | — | — | missing | `EXP_classic_S50_*` |
+| N0+N1 | 100 | все | not_converged | 1 | — | — | missing | `EXP_classic_S100_*` |
+
+### Branch × N1 (PostTune ON)
+
+| Span | Conv OK Mods | not_conv Mods | fires@conv | Acc | mid |
+| --- | --- | --- | --- | --- | --- |
+| 25 | все 8 | — | `00000000` | 7/8 | `cpp_nonseparable` |
+| 50 | `gen`,`preinh`,`segei`,`preinh_segei` | `nextseg`,`preinh_nextseg`,`nextseg_segei`,`all` | `00000000` | 7/8 | `cpp_nonseparable` / missing |
+| 100 | все 8 | — | `00000000` | 7/8 | `cpp_nonseparable` |
+
+Train/Test: [`EXP_branch_S{25,50,100}_*_InhGrid_N1`](../../../Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/).
+
+**Итог addendum:** ни Classic, ни Branch не дали Цель=да; Branch сходится на S100, Classic — нет; единственный «плюс» SegEI на Classic — чаще дойти до finalize на S50 N0, без улучшения fires.
 
