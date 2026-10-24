@@ -20,9 +20,10 @@
 
 ### H3. Offload на `/media/user/Data` (M40)
 
-- Цель: `/media/user/Data/TLAgent-offload/<host>/<date>/` (rsync с проверкой; удаление исходника **только** после сверки checksum/size).
-- Реестр путей: [`../evidence/RUN_REGISTRY`](../evidence/RUN_REGISTRY/) — где лежит каждый прогон после переноса.
-- **Стоп offload:** если на `/media/user/Data` свободно **&lt; 15%**, записать в [`CAMPAIGN_STATUS_LATEST.md`](../evidence/CAMPAIGN_STATUS_LATEST.md) и **не переносить**, пока место не появится. (На 2026-10-24: Data ~89% used / ~11% free → offload **запрещён** до очистки.)
+- Цель журналов: `/media/user/Data/TLAgent-offload/journals/<host>/<date>/` — **только** текстовые журналы NMSDK/Console (`*.log`, `*Audit.log`, `TimeLearnerTrainingAudit.log`, launch `*posttune*.out` / `*console*.out`). Модели, конфиги, `results.csv`, StatisticLog и чужие файлы **не трогать**.
+- Упаковка: `tar | zstd` по каталогу прогона; проверка `zstd -t` + сверка списка файлов; удаление исходных журналов **только** после OK. Активные прогоны / текущие волны — skip. `nice`/`ionice`. Скрипт: [`../evidence/tools/archive_nmsdk_journals.sh`](../evidence/tools/archive_nmsdk_journals.sh).
+- Реестр: [`../evidence/RUN_REGISTRY`](../evidence/RUN_REGISTRY/) (строки `jarch_*`).
+- **Стоп archive/offload:** если на `/media/user/Data` свободно **&lt; 5%**, записать в [`CAMPAIGN_STATUS_LATEST.md`](../evidence/CAMPAIGN_STATUS_LATEST.md) и остановиться. (Порог снижен с 15%→5% 2026-10-24; при free≈11% перенос журналов **разрешён**.)
 
 ## 0. Что исправить ДО любых новых прогонов (блокеры валидности)
 
