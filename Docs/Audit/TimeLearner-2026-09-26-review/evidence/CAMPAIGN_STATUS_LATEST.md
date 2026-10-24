@@ -2,7 +2,7 @@
 
 **Активный план (приоритет):** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md)  
 **Ветка:** `plan/2026-10-25-dendrite-limits` (от `timelearner_fix3`)  
-**Обновлено:** 2026-10-24T17:55Z (локально)
+**Обновлено:** 2026-10-24T18:00Z
 
 Метрика волн: `sep_margin` + обязательная детекция цели; **Done_exact** и **Done_BE** раздельно. Волна без прошедшего контроля W0 не засчитывается. H0_tau_cm_per_span / TauH0 — **сняты с приоритета** (τ масштабируется неверно относительно плана §1).
 
@@ -16,11 +16,11 @@
 | §0 F2 PSI только классом нейрона | **code done** | убран Model `UsePresynaptic` патч |
 | §0 F3 Test overlay NumSynapse + Ns==128 = saturated | **code done** | phase8/phase9 overlay; `not_converged_saturated` в `posttune_verify` |
 | §0 F4 ложный ERROR Resistance bounds | **code done** | PulseLib Classic+Branch: `target_count==0` → true без ERROR |
-| §0 F5 / R0 Train↔Test LTZ ≤5% | **script ready** | `scripts/r0_train_test_ltz_replay.py` — прогон на артефакте после W0 |
-| W0 br25_nextseg ×3 + R0 | **pending** | не стартовать до push §0; нужен Console после PulseLib F4 |
-| C1 доза-ответ торможения | **pending** | после W0 PASS |
-| W1/W2 sim Span | **pending** | после C1 / по плану §3 |
-| genasym SoftCold (`inh_c25_genasym_n0_pton`) | **running** — не стопать | Elder-1; итог зафиксировать в DIAG когда Done |
+| §0 F5 / R0 Train↔Test LTZ ≤5% | **script ready** | прогон после W0 артефактов |
+| W0 br25_nextseg ×3 + R0 | **running** | 3× SoftCold `br25_nextseg`; Console `27ea0604ca9af64b`; logs `w0_br25_nextseg_logs/` |
+| C1 доза-ответ торможения | **pending** | после W0 PASS детекции |
+| W1/W2 sim Span | **pending** | после C1 / контроль в каждой волне |
+| genasym SoftCold (`inh_c25_genasym_n0_pton`) | **running** — не стопать | poll ~262+; параллельно W0 |
 
 ---
 
