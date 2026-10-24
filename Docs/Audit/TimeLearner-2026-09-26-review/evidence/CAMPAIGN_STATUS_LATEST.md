@@ -22,6 +22,9 @@ Plan: [`../plans/PLAN_2026-10-25_E05_series.md`](../plans/PLAN_2026-10-25_E05_se
 
 **Dispatchers** (`tools/e05_dispatch.sh`, own session, survive ssh): .11 `~/e05_runs/series` (8 slots, 6 reserved for REPASS_ITI6), .17 `$DATA/runs/E05_series` (12 slots, 10 reserved). REPASS_ITI6 not touched. Wall time: classic at L ~170 needs ~16 s per 1.5 s iteration -> up to ~4 h per point for train_t 1280 s.
 
+**First results (00:45 MSK).** E1_c_s0 (S100, MaxDL 100): trainer refused after 797 s wall, L 49/47/29/1, d2 TipR saturated at 1e10 (res_no_improve 30), delay_residue 0.0025 -> E1 fails as predicted (amplitude limit), test not run. E4_b_s0 (old binary, diagnostic): Done_BE, L 18/17/11/1, m(S/4) -0.195, m(S/8) -0.527. .17 PulseLib a327676 + e05b built (sha af9f39d9), dispatcher restarted 00:45 MSK with e05b; E4_b_s0n queued first. Both hosts full: .11 6 REPASS + 2 E05, .17 REPASS batch + 2 E05 (reserve 10 until REPASS ends, ~1-1.5 h).
+
+
 ---
 
 ## 2026-10-24T20:30Z (23:30 MSK): long-ITI controls done -> no target selectivity in any variant; REPASS sweep launched
