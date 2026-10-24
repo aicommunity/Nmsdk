@@ -137,7 +137,24 @@ Branch×N0 в этой волне не входил в Done-сетку.
 | `nextseg_segei` | `NSPNeuronGenSymInhC1e9` | `exit_1` | `INH.inh_b100_nextseg_segei_n1_pton-M40_-20261023T1729Z-3207187` | [`Train`](../../../Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/EXP_branch_S100_nextseg_segei_InhGrid_N1/Train) | [`Test`](../../../Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/EXP_branch_S100_nextseg_segei_InhGrid_N1/Test) |
 | `all` | `NSPNeuronGenSymInhC1e9` | `exit_1_tsv_fix` | `INH.inh_b100_all_n1_pton-M40_-20261023T1727Z-3207187` | [`Train`](../../../Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/EXP_branch_S100_all_InhGrid_N1/Train) | [`Test`](../../../Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/EXP_branch_S100_all_InhGrid_N1/Test) |
 
-## Classic disk_stop хвост ( Acc отсутствует )
+## Classic disk_stop хвост — закрыт re-run
 
-Кейсы с `disk_stop_<80G` (24): весь Span50 × N0/N1 × 8 Mod; Span25: `all`, `preinh_nextseg`, `preinh_segei`, `segei` × N0/N1. На момент закрытия очереди Avail≈80 GiB — на пороге HARD STOP.
+Исходные 24 кейса с `disk_stop_<80G` переиграны (см. addendum ниже).
+
+---
+
+## Addendum: disk_stop re-run (2026-10-24)
+
+Постановка: 24 Classic-кейса, ранее оборванные `STOP Avail<80G`, переиграны dual-host после offload (Elder-1 S25×8 LIMIT≤8, M40/`.17` S50×16 LIMIT≤12). SoftCold PostTune ON; NeuronModel `NSPNeuronGenSymInhC1e9`.
+
+### Итог очереди re-run
+
+| Host | Span | Done | Notes |
+| --- | --- | --- | --- |
+| Elder-1 | Classic S25 ×8 | **8/8** | все `exit_1` (полный verify; не disk_stop) |
+| M40 | Classic S50 ×16 | **16/16** | 14×`not_converged`, 2×`exit_1` (`preinh_segei_n0`, `segei_n0`) |
+
+**Вывод:** infra-хвост disk_stop закрыт. Acc PASS на этих Span не получен: S25 завершил verify с `exit_1`, S50 почти весь `not_converged` (в духе Classic S100 первой волны). Сводную Acc-таблицу PASS не поднимаем; детали — workdir `_repro/runs/` / `POSTTUNE_VERIFY_RESULT` на хостах. Следующий шаг — разбор mid/Need/fires по Mod×Mode, не повтор pack.
+
+Конфиги: `Bin/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/EXP_classic_S{25,50}_*_InhGrid_N{0,1}/{Train,Test}`.
 
