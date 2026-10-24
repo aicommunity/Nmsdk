@@ -25,6 +25,11 @@ if os.environ.get("E0_CASES"):
 WIN = 0.98
 T0 = 0.005
 
+TIPR0 = os.environ.get("E0_TIPR0", "20000000")  # dendrite-0 tip Rs; 1e15 = reference run (no d0 input)
+TIPR_REST = os.environ.get("E0_TIPR_REST", "20000000")  # tip Rs of dendrites 1..3; 1e15 = silence them
+EXTRA = json.loads(os.environ.get("E0_EXTRA", "{}"))  # e.g. {"OverrideInhSynapseResistance": 1e15} = inhibition off
+
+
 def prep(d, cap, L):
     if d.exists():
         shutil.rmtree(d)
@@ -40,7 +45,7 @@ def prep(d, cap, L):
         t = p.read_text(encoding="utf-8", errors="replace")
         t = re.sub(r'(<MatrixData Type="MDMatrix&lt;d&gt;" Rows="32" Cols="1"[^>]*>)[^<]*(</MatrixData>)', lambda m: m.group(1) + samples + m.group(2), t)
         for name, val in (("IsNeedToTrain", "0"), ("StructureBuildMode", "1"), ("DendriteLength", f"{L} 1 1 1"),
-                          ("TipSynapseResistance", "20000000 20000000 20000000 20000000"), ("MaxDendriteLength", "450"),
+                          ("TipSynapseResistance", f"{TIPR0} {TIPR_REST} {TIPR_REST} {TIPR_REST}"), ("MaxDendriteLength", "450"),
                           ):
             if name in ("StructureBuildMode",):
                 t = set_tag(t, name, val, 1)
@@ -52,6 +57,8 @@ def prep(d, cap, L):
                 t = set_tag(t, name, val, 1)
         if abs(cap - 2.5e-10) > 1e-16 and get_tag(t, "EnableDebug") is not None:
             t = ensure_tag_after(t, "EnableDebug", "OverrideMembraneCapacity", repr(cap), ' Type="d" PType="257" IoType="17"')
+        for k, v in EXTRA.items():
+            t = ensure_tag_after(t, "EnableDebug", k, repr(v), ' Type="d" PType="257" IoType="17"')
         t = set_tag(t, "EnableDebug", "0", 1) if get_tag(t, "EnableDebug") is not None else t
         p.write_text(t, encoding="utf-8")
     enable_pattern_response_trace(d / "Model_00.xml")
@@ -143,7 +150,7 @@ def main():
         m = analyze(d) or {}
         tau = cap * RM
         th = theory(tau, L, int(WIN / DT))
-        txt = (d / "console.log").read_text(errors="replace")
+        txt = (d / "console.log").read_text(errors="replace") + "".join(x.read_text(errors="replace") for x in (d / "EventsLog").glob("*INFO*"))
         ov = "|".join(sorted(set(re.findall(r"NeuronClassOverrides:[^\n]*", txt))))[:300]
         step = "5e-4" if re.search(r"0\.0005\b|5e-0?4", txt) else "?"
         r = {"case": name, "C": cap, "tau_ms": tau * 1000, "L": L, "err": err, "wall_s": wall,
