@@ -47,6 +47,8 @@ def patch_xml(t, with_L=True):
     if SPEC.get("est") and get_tag(t, "EstDelayPerSeg") is not None:
         t = set_tag_all(t, "EstDelayPerSeg", repr(float(SPEC["est"])))
     if get_tag(t, "EnableDebug") is not None:
+        if SPEC.get("est") and get_tag(t, "EstDelayPerSeg") is None and SPEC.get("kind") == "branch":
+            t = ensure_tag_after(t, "EnableDebug", "InitEstDelayPerSeg", repr(float(SPEC["est"])), DTYPE)  # Branch: initial adaptive estimate (PulseLib e05b)
         for k, v in SPEC.get("ov", {}).items():
             t = ensure_tag_after(t, "EnableDebug", k, repr(float(v)), DTYPE)
         for k, v in SPEC.get("dlog", {}).items():
@@ -60,7 +62,7 @@ def readback(d):
         if not p.is_file():
             continue
         t = p.read_text(encoding="utf-8", errors="replace")
-        for k in ("NeuronClassName", "DendriteLength", "MaxDendriteLength", "EstDelayPerSeg", "MembraneCapacity", "TipSynapseResistance",
+        for k in ("NeuronClassName", "DendriteLength", "MaxDendriteLength", "EstDelayPerSeg", "InitEstDelayPerSeg", "MembraneCapacity", "TipSynapseResistance",
                   "OverrideMembraneCapacity", "OverrideExcMembraneResistance", "OverrideInhMembraneResistance",
                   "OverrideExcSynapseResistance", "OverrideInhSynapseResistance", "DynamicsLogHead", "DynamicsLogEvery"):
             r[f"{rel[:-7]}.{k}"] = get_tag(t, k)
@@ -172,7 +174,7 @@ def orig_samples():
     cls = [int(float(x)) for x in get_tag(t, "MatrixClasses").split()]
     return [vals[i * 4:(i + 1) * 4] for i in range(8)], cls
 
-res = {"spec": SPEC, "src": SRC.name, "train_t": TRAIN_T, "wall_train_s": round(wall_train), "work": str(work),
+res = {"console": os.environ.get("NMSDK_CONSOLE", ""), "spec": SPEC, "src": SRC.name, "train_t": TRAIN_T, "wall_train_s": round(wall_train), "work": str(work),
        "row": {k: row.get(k) for k in ("verdict", "train_status", "training_convergence", "separation_quality", "detection_quality",
                                        "target_detected", "fires", "metrics", "delay_residue", "amp_over_target", "sync_exit", "amp_be",
                                        "done_be", "sep_margin", "sep_gap", "sep_tgt", "sep_max_foil", "run_dir", "gate_ok")}}

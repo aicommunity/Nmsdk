@@ -120,3 +120,7 @@ ITI_ctrl2_e11_20261024T1930Z	Elder-1	ctrlbr25 d6, c1w15 nsoff, c1w075	ITI	done	/
 ITI_ctrl2_e17_20261024T1930Z	M40	W0 d6 rev, psi2.5 tpos4, combo nsoff	ITI	done	/media/user/Data/TLAgent-20261020/runs/ITI_ctrl2_e17_20261024T1930Z				2026-10-24T19:30Z	long-ITI controls 2
 REPASS_ITI6_e11_20261024T2011Z	Elder-1	all historical Test dirs (53 cases) ref+tpos4	REPASS	active	/home/user/TLAgent-20261020/runs/REPASS_ITI6_e11_20261024T2011Z				2026-10-24T20:11Z	ITI 6s re-test of old PASS
 REPASS_ITI6_e17_20261024T2012Z	M40	all historical Test dirs (43 cases) ref+tpos4	REPASS	active	/media/user/Data/TLAgent-20261020/runs/REPASS_ITI6_e17_20261024T2012Z				2026-10-24T20:12Z	ITI 6s re-test of old PASS
+E05_series_e11	Elder-1	E1-E5 Classic/Branch x3 seeds (queue_elder1_11.tsv)	E05	active	/home/user/e05_runs/series				2026-10-24T21:24Z	dispatcher e05_dispatch.sh; dt 0.5 ms
+E05_series_e17	M40	E1-E5 Classic/Branch x3 seeds (queue_m40_17.tsv)	E05	active	/media/user/Data/TLAgent-20261020/runs/E05_series				2026-10-24T21:25Z	dispatcher e05_dispatch.sh; dt 0.5 ms
+E05_E0	Elder-1	E0 kernel probe Console vs segsim	E05	done_local	/home/user/e05_runs/E0				2026-10-24T21:00Z	delay=tau-dt confirmed
+E05_smoke	Elder-1	E2 classic/branch smoke (=E2_c_s0)	E05	active	/home/user/e05_runs/smoke				2026-10-24T21:20Z	e2b killed (Branch est deadlock, old binary)
