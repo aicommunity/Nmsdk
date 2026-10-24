@@ -1,10 +1,26 @@
 # Campaign status — latest
 
 **Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H)  
-**Ветка:** `plan/2026-10-25-dendrite-limits`  
+**Ветка:** 2026-10-24T21:45Z (00:45 MSK 25.10)
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
 Метрика: `sep_margin` + детекция цели; Done_exact / Done_BE раздельно.
+
+---
+
+## 2026-10-24T21:45Z (00:45 MSK 25.10): E05 series E0-E5 at dt = 0.5 ms launched (queue dispatchers on .11 and .17)
+
+Plan: [`../plans/PLAN_2026-10-25_E05_series.md`](../plans/PLAN_2026-10-25_E05_series.md). DefaultTimeStep 2000 in Train/Test, verified in Project.ini and by `now=` increments of 5e-4 in TrainingDynamics.
+
+**E0 (done).** Console vs segsim, one dendrite, subthreshold sig-ref probe: t_peak and FWHM equal segsim for C 7.5e-11/1e-10/2.5e-10 and L 50/200/400; delay/seg = tau - dt (0.25/0.5/2.0 ms). Amplitude Console/segsim 0.72-0.80 at L 50, 0.36-0.40 at L 200-400 (open item, TipR compensates). Delay parameters used as planned. Table: `E05/E0/E0_console_vs_segsim_dt2000.tsv`.
+
+**Code.** PulseLib 29c7ead (class overrides + dynamics-log thinning), a327676 (Branch `InitEstDelayPerSeg`). Consoles `~/e05_bin/NeuroModelerConsole.e05` (first jobs) and `.e05b` (from 00:41 MSK .11; .17 after its build).
+
+**Finding (Branch, tau 0.75 ms).** Branch EstDelayPerSeg is internal (init 0.005 s/seg, EMA). Smoke E2_b (old binary): L stuck at 1/1/9/1 for 300 iterations, d2 peak never valid, est stays 0.005 -> deadlock, not a capacity limit. E4_b_s0 (.17, old binary) ended Done_BE at L 18/17/11/1. Both are diagnostic only; Branch points rerun with InitEstDelayPerSeg = point EstDelayPerSeg.
+
+**Readback OK** (smoke E2_c, E4_c, E5_c): NeuronClassOverrides in EventsLog (Capacity 7.5e-11 / 1e-10, InhRm 1e7, InhRsyn 8.6e7), MaxDL 450/250/500, EstDelayPerSeg 0.00025/0.0005, POST_RESET L 1 1 1 1, TipR 8.6e7 flat.
+
+**Dispatchers** (`tools/e05_dispatch.sh`, own session, survive ssh): .11 `~/e05_runs/series` (8 slots, 6 reserved for REPASS_ITI6), .17 `$DATA/runs/E05_series` (12 slots, 10 reserved). REPASS_ITI6 not touched. Wall time: classic at L ~170 needs ~16 s per 1.5 s iteration -> up to ~4 h per point for train_t 1280 s.
 
 ---
 
