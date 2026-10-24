@@ -124,6 +124,16 @@ def write_neuron_params(path: Path, meta: dict) -> None:
         after="SegExcInhDelta",
         attrs=' Type="d" PType="257" IoType="17"',
     )
+    # NextSeg Inh weight: runtime override (XML InhSynapse Resistance is rewritten
+    # by EnsureNextSegInhSynapseOnSegment, so the old block patch was a no-op).
+    if "nextseg_r" in meta:  # needs Console with NextSegInhResistance (2026-10-24)
+        t = patch_or_insert(
+            t,
+            "NextSegInhResistance",
+            meta["nextseg_r"],
+            after="SegExcInhAlpha",
+            attrs=' Type="d" PType="257" IoType="17"',
+        )
     path.write_text(t, encoding="utf-8")
 
 
@@ -197,6 +207,7 @@ def readback(test_dir: Path, meta: dict) -> dict:
             "SegExcInhDelta": get_tag(model, "SegExcInhDelta"),
             "SegExcInhAlpha": get_tag(model, "SegExcInhAlpha"),
             "EnableNextSegmentInhibition": get_tag(model, "EnableNextSegmentInhibition"),
+            "NextSegInhResistance": get_tag(model, "NextSegInhResistance"),
             "NeuronClassName": get_tag(model, "NeuronClassName"),
             "DendriteLength": get_tag(model, "DendriteLength"),
             "TipSynapseResistance": get_tag(model, "TipSynapseResistance"),
@@ -331,9 +342,10 @@ def build_jobs(series: str) -> list[dict]:
                     "id": f"nextseg_w{w}",
                     "template": BASE_NEXTSEG,
                     "neuron": PSI_CLASSES[0.0],
-                    "nextseg": "1",
+                    "nextseg": "1" if w > 0 else "0",
                     "segei": "0",
                     "w": w,
+                    "nextseg_r": f"{TIPR_LAST / w:.17g}" if w > 0 else "0",
                 }
             )
     if series in ("all", "segei", "mech"):
@@ -366,6 +378,25 @@ def build_jobs(series: str) -> list[dict]:
                         "inh_input_off": "1",
                     }
                 )
+    if series == "onoff":
+        # inhibition on/off controls (bot takeover 2026-10-24)
+        jobs += [
+            {"id": "onoff_nextseg_on_legacyR", "template": BASE_NEXTSEG,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "1", "segei": "0"},
+            {"id": "onoff_nextseg_off", "template": BASE_NEXTSEG,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "0", "segei": "0"},
+            {"id": "onoff_nextseg_on_inhinputoff", "template": BASE_NEXTSEG,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "1", "segei": "0",
+             "inh_input_off": "1"},
+            {"id": "onoff_gen_noinh", "template": BASE_GEN,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "0", "segei": "0"},
+            {"id": "onoff_segei_d8_on", "template": BASE_GEN,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "0", "segei": "1",
+             "delta": "8", "alpha": "1.0"},
+            {"id": "onoff_segei_d1_on", "template": BASE_GEN,
+             "neuron": PSI_CLASSES[0.0], "nextseg": "0", "segei": "1",
+             "delta": "1", "alpha": "1.0"},
+        ]
     if series in ("all", "combo"):
         jobs.append(
             {
@@ -397,7 +428,7 @@ def main() -> int:
     ap.add_argument(
         "--series",
         default="mech",
-        choices=("all", "psi", "nextseg", "segei", "combo", "mech"),
+        choices=("all", "psi", "nextseg", "segei", "combo", "mech", "onoff"),
         help="Default mech=prove nextseg/segei write+effect before dose grids",
     )
     ap.add_argument("--limit", type=int, default=8)
