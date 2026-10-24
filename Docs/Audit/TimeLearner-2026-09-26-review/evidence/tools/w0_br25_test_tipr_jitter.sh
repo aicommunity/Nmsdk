@@ -29,7 +29,7 @@ mkdir -p "$LOGDIR" "$RUNS_ROOT"
 [[ -f "$TSV" ]] || echo -e "rep\trun_id\tstatus\tstarted\tfinished\tnote" >"$TSV"
 [[ -d "$SRC_WORK/Test" ]] || { echo "ERROR: no Test/ in $SRC_WORK"; exit 2; }
 
-running_consoles() { pgrep -c -f NeuroModelerConsole 2>/dev/null || echo 0; }
+running_consoles() { local n; n=$(pgrep -c -f NeuroModelerConsole 2>/dev/null); echo "${n:-0}"; }
 
 idx=0
 for j in "${JITTERS[@]}"; do
