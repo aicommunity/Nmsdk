@@ -178,3 +178,11 @@ Train: лог `Resistance bounds could not be derived: no positive NPulseChannel
 | C1 `--series mech` | M40 | **launch** (до dose) |
 | R0 FixedLTZ overlay | M40 | **launch** |
 | W1 | — | blocked до R0+W0 margin context + C1 mech |
+
+## 2026-10-24T22:10Z (01:10 MSK 25.10): hourly check, E05 series in progress
+
+- E1_c_s0 (.11, S100 class TauH0, C 2.5e-10, MaxDL 100): ended with C++ training refusal (TimeLearnerTrainingAudit phase 4 reason 1) at L 49/47/29/1, d2 TipR saturated at 1e10, no_imp 30. No test metrics. Consistent with expected FAIL (delay budget does not fit S100 at tau 2 ms), but the FAIL is a training refusal, not a measured m(S/4).
+- E1_b_s0 (old binary) stopped after 1.5 min without exit code; Branch points rerun as *_s0n with InitEstDelayPerSeg.
+- E4_b_s0 (.17, old binary, diagnostic only): Done_BE at L 18/17/11/1, m(S/4) -0.195, m8_iti6 -0.527: no detection (est deadlock, see above).
+- Utilisation fix: .11 dispatcher reserved 6 slots for REPASS_ITI6 while it ran only 2 Consoles (3 cores idle). Restarted with RESERVE_N=2: E3off_b_s0, E4off_c_s0, E4off_b_s0 started; .11 8/8 busy. .17 12/12 busy (10 REPASS + E4_c, E5_c).
+- Disk: .11 / 69 % used; .17 / 46 %, /media/user/Data 89 % used (413 GB free, above the 5 % threshold).
