@@ -525,6 +525,23 @@ def build_jobs(series: str) -> list[dict]:
             q("sim_k4_ns_w0.5", 4.0, "NSPNeuronGenAsymRmD001C1e9Sim4", 0.5, True),
             q("sim_k4_ns_w2.0", 4.0, "NSPNeuronGenAsymRmD001C1e9Sim4", 2.0, True),
         ]
+    if series == "c2order":
+        # Q2 pre+post inhibition with trial-order controls (first-trial artifact found in C1b/W0).
+        rot4 = [4, 5, 6, 7, 0, 1, 2, 3]
+        for k in (0.0, 2.5, 3.0):
+            for tag, order in (("", None), ("_tpos4", rot4)):
+                j = {"id": f"psi_k{k}_gen{tag}", "template": BASE_GEN, "neuron": PSI_CLASSES[k],
+                     "nextseg": "0", "segei": "0", "psi_k": k}
+                if order:
+                    j["order"] = order
+                jobs.append(j)
+        for tag, order in (("", None), ("_tpos4", rot4)):
+            j = {"id": f"combo_psi2.5_nextseg_w1{tag}", "template": BASE_NEXTSEG,
+                 "neuron": PSI_CLASSES[2.5], "nextseg": "1", "segei": "0", "w": 1.0,
+                 "nextseg_r": f"{TIPR_LAST:.17g}", "psi_k": 2.5}
+            if order:
+                j["order"] = order
+            jobs.append(j)
     if series in ("all", "combo"):
         jobs.append(
             {
@@ -556,7 +573,7 @@ def main() -> int:
     ap.add_argument(
         "--series",
         default="mech",
-        choices=("all", "psi", "nextseg", "segei", "combo", "mech", "onoff", "c1b", "q1sim"),
+        choices=("all", "psi", "nextseg", "segei", "combo", "mech", "onoff", "c1b", "q1sim", "c2order"),
         help="Default mech=prove nextseg/segei write+effect before dose grids",
     )
     ap.add_argument("--limit", type=int, default=8)
