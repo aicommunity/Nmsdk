@@ -15,7 +15,8 @@
 #   RUN_REGISTRY_TSV    append jarch_* rows when set
 set -euo pipefail
 
-HOSTTAG="$(hostname | tr -c 'A-Za-z0-9._-' '_')"
+HOSTTAG="$(hostname -s 2>/dev/null || hostname | cut -d. -f1)"
+HOSTTAG="$(printf '%s' "$HOSTTAG" | tr -c 'A-Za-z0-9._-' '_' | sed 's/_\+$//')"
 DATE_UTC="$(date -u +%Y%m%d)"
 DATA_ROOT="${DATA_OFFLOAD_ROOT:-/media/user/Data}"
 DATA_HOST="${DATA_OFFLOAD_HOST:-}"
@@ -175,8 +176,8 @@ archive_one_dir() {
   nice -n 19 ionice -c3 zstd -t "$archive_local"
   local tar_list
   tar_list="$staging/tar_list.txt"
-  nice -n 19 ionice -c3 zstd -dc "$archive_local" | tar -tf - | sed 's#^\./##' | sort >"$tar_list"
-  sort -o "$listfile" "$listfile"
+  nice -n 19 ionice -c3 zstd -dc "$archive_local" | tar -tf - | sed 's#^\./##' | LC_ALL=C sort >"$tar_list"
+  LC_ALL=C sort -o "$listfile" "$listfile"
   if ! cmp -s "$listfile" "$tar_list"; then
     echo "VERIFY_FAIL list mismatch local $archive_local" >&2
     rm -rf "$staging"
@@ -187,7 +188,7 @@ archive_one_dir() {
   if [[ -n "$DATA_HOST" ]]; then
     nice -n 19 ionice -c3 rsync -a "$archive_local" "${DATA_HOST}:${archive_remote}"
     remote_sh "nice -n 19 ionice -c3 zstd -t '${archive_remote}'"
-    remote_sh "nice -n 19 ionice -c3 zstd -dc '${archive_remote}' | tar -tf - | sed 's#^\\./##' | sort" >"$staging/remote_list.txt"
+    remote_sh "nice -n 19 ionice -c3 zstd -dc '${archive_remote}' | tar -tf - | sed 's#^\\./##' | LC_ALL=C sort" >"$staging/remote_list.txt"
     if ! cmp -s "$listfile" "$staging/remote_list.txt"; then
       echo "VERIFY_FAIL remote list mismatch $archive_remote" >&2
       rm -rf "$staging"
@@ -196,7 +197,7 @@ archive_one_dir() {
   else
     nice -n 19 ionice -c3 mv -f "$archive_local" "$archive_remote"
     nice -n 19 ionice -c3 zstd -t "$archive_remote"
-    nice -n 19 ionice -c3 zstd -dc "$archive_remote" | tar -tf - | sed 's#^\./##' | sort >"$staging/placed_list.txt"
+    nice -n 19 ionice -c3 zstd -dc "$archive_remote" | tar -tf - | sed 's#^\./##' | LC_ALL=C sort >"$staging/placed_list.txt"
     if ! cmp -s "$listfile" "$staging/placed_list.txt"; then
       echo "VERIFY_FAIL placed list mismatch $archive_remote" >&2
       rm -rf "$staging"
