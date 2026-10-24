@@ -92,6 +92,8 @@ Mod: `gen`, `preinh`, `nextseg`, `segei`, `preinh_nextseg`, `preinh_segei`, `nex
 | Этот документ | done |
 | PulseLib NextSeg Classic + SegEI Classic/Branch + SymInh | done (40f09a2) |
 | Bin EXP сетка | done (01baf8d4, 72 EXP) |
-| SoftCold Classic 48 | in progress |
-| SoftCold Branch 24 | in progress |
-| RESULTS | pending |
+| SoftCold Classic 48 | **очередь Done** (48/48); после disk_stop re-run S25/S50 закрыты; Acc PASS не получен |
+| SoftCold Branch 24 N1 | **очередь Done** (24/24); Acc PASS не сведён в таблицу |
+| RESULTS | done → [`CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md`](CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md) (+ addendum disk_stop re-run) |
+| Научный разбор Acc/mid/Need по Mod (абляция NextSeg vs SegEI) | **не выполнен** — нет сводной Acc N/8 / Цель |
+| Branch×N0 | вне Done-сетки (как в постановке) |
