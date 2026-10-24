@@ -155,7 +155,12 @@ def prepare_case(out: Path, *, template: Path, meta: dict) -> Path:
                 scale_inh_resistances(model, float(meta["w"]))
             if meta.get("inh_input_off") == "1":
                 unlink_inh_inputs(model)
-    (out / "c1_meta.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    meta_json = {
+        k: (str(v) if isinstance(v, Path) else v) for k, v in meta.items()
+    }
+    (out / "c1_meta.json").write_text(
+        json.dumps(meta_json, indent=2) + "\n", encoding="utf-8"
+    )
     return out / "Test"
 
 

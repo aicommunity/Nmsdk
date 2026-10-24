@@ -10,7 +10,7 @@ HOSTTAG="$(hostname | tr -c 'A-Za-z0-9._-' '_')"
 DATE_UTC="$(date -u +%Y%m%d)"
 DATA_ROOT="${DATA_OFFLOAD_ROOT:-/media/user/Data}"
 OFFLOAD_ROOT="${DATA_ROOT}/TLAgent-offload/${HOSTTAG}/${DATE_UTC}"
-MIN_DATA_FREE_PCT="${MIN_DATA_FREE_PCT:-15}"
+MIN_DATA_FREE_PCT="${MIN_DATA_FREE_PCT:-5}"
 WARN_HOME_AVAIL_G="${WARN_HOME_AVAIL_G:-80}"
 
 die() { echo "ERROR: $*" >&2; exit 2; }
