@@ -219,3 +219,12 @@ W08_BR480_N0_PSIoff_NEXT, br480_nextseg, h0_b480_nextseg_n0_pton all give identi
 - .17 E05 requeue (22 jobs), .11 queue continues (E2_c_s2 ... E1_b_s0r).
 - Load: .11 8/8 slots (7 Consoles + job between Consoles); .17 12/12 (7 W08ctrl + 5 E05 at 02:16 MSK).
 - Disk: .11 / 69 %; .17 / 46 %, /media/user/Data 89 % (409 GB free) -> no cleanup.
+
+**W08ctrl first results (02:25 MSK, dt 0.5 ms; d12 runs partial 5/8 trials)**
+| test | W08 (BR480 nextseg) tgt / max foil / m / fired | br480_tiprmin tgt / max foil / m / fired |
+| --- | --- | --- |
+| target last, ITI 6 s | 0.03654 / 0.03582 / +0.0196 / 00000001 | 0.05174 / 0.05082 / +0.0177 / 00000001 |
+| target pos 2, ITI 12 s (5/8) | +0.0196 / 00100 | +0.0177 / 00100 |
+| target pos 4, ITI 1.5 s | +0.0196 / 00001000 | +0.0177 / 00001000 |
+| target pos 4, ITI 6 s, nextseg OFF | 0.03720 / 0.03846 / **-0.034 / 11111111** | n/a |
+=> BR480 Branch nextseg selectivity is order- and ITI-invariant (1.5-12 s) and requires nextseg inhibition (OFF -> all samples fire, target not max). Margin only ~2 % of target ltz. Not reproduced at S25/S50/S100.
