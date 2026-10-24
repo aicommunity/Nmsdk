@@ -18,7 +18,7 @@ sys.path.insert(0, str(ST / "scripts"))
 sys.path.insert(0, str(NM / "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools"))
 OUT = Path(sys.argv[1]); SPEC = json.loads(Path(sys.argv[2]).read_text()) if Path(sys.argv[2]).is_file() else json.loads(sys.argv[2])
 OUT.mkdir(parents=True, exist_ok=True)
-os.environ.setdefault("TIMELEARNER_MATRIX_RUNS_ROOT", str(OUT / "work"))
+os.environ["TIMELEARNER_MATRIX_RUNS_ROOT"] = str(OUT / "work")  # always inside the job dir (dispatcher accounting, offload)
 Path(os.environ["TIMELEARNER_MATRIX_RUNS_ROOT"]).mkdir(parents=True, exist_ok=True)
 from repro_cold_lib import get_tag, set_tag, set_tag_all, ensure_tag_after  # noqa
 STEP = 2000

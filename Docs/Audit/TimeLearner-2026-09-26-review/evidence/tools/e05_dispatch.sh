@@ -16,9 +16,12 @@ mkdir -p "$ROOT/state/started" "$ROOT/state/done" "$ROOT/jobs"
 [[ -f "$TSV" ]] || echo -e "label\thost\tstatus\tstart_local\tend_local\tpid\tout" >"$TSV"
 log() { echo "$(date '+%F %T %Z') $*" >>"$LOG"; }
 echo $$ >"$ROOT/dispatch.pid"
-log "DISPATCH_START pid=$$ host=$(hostname) slots=$SLOTS min_mem=${MIN_MEM_MB}MB sys_max=${SYS_MAX_PCT}% data=${DATA_DIR:-none} console=${NMSDK_CONSOLE:-default}"
+log "DISPATCH_START reserve=${RESERVE_PATTERN:-none}:${RESERVE_N:-0} pid=$$ host=$(hostname) slots=$SLOTS min_mem=${MIN_MEM_MB}MB sys_max=${SYS_MAX_PCT}% data=${DATA_DIR:-none} console=${NMSDK_CONSOLE:-default}"
 mine_alive() { local n=0 f p; for f in "$ROOT"/state/started/*; do [[ -e "$f" ]] || continue; p=$(cut -f1 "$f"); [[ -e "$ROOT/state/done/$(basename "$f")" ]] && continue; kill -0 "$p" 2>/dev/null && n=$((n+1)); done; echo $n; }
-others() { local n; n=$(pgrep -f NeuroModelerConsole -a 2>/dev/null | grep -v -F "$ROOT/" | wc -l); echo "${n:-0}"; }
+# other campaigns: count their Consoles; while RESERVE_PATTERN process (e.g. REPASS run_iti.py) is alive, reserve at least RESERVE_N slots for it
+RESERVE_PATTERN="${RESERVE_PATTERN:-}"; RESERVE_N="${RESERVE_N:-0}"
+others() { local n; n=$(pgrep -f NeuroModelerConsole -a 2>/dev/null | grep -v -F -e "$ROOT/" -e "/runs/e05_" | wc -l); n=${n:-0}
+  if [[ -n "$RESERVE_PATTERN" ]] && pgrep -f "$RESERVE_PATTERN" >/dev/null 2>&1 && [[ "$n" -lt "$RESERVE_N" ]]; then n=$RESERVE_N; fi; echo "$n"; }
 mem_ok() { local a; a=$(awk '/MemAvailable/{print int($2/1024)}' /proc/meminfo); [[ "$a" -ge "$MIN_MEM_MB" ]] || { echo "mem_avail=${a}MB"; return 1; }
   local sw; sw=$(vmstat 2 2 | tail -1 | awk '{print $7+$8}'); [[ "$sw" -le "$MAX_SWAP_PGS" ]] || { echo "swapping si+so=$sw"; return 1; }; return 0; }
 disk_ok() { local u; u=$(df -P / | awk 'NR==2{gsub("%","",$5);print $5}'); [[ "$u" -lt "$SYS_MAX_PCT" ]] || { echo "DISK_LOW sys_used=${u}%"; return 1; }
@@ -37,6 +40,7 @@ while :; do
   if [[ -z "$next" ]]; then [[ "$last_wait" != idle ]] && log "QUEUE_EMPTY (append to queue.tsv to continue)"; last_wait=idle; sleep "$POLL"; continue; fi
   m=$(mine_alive); o=$(others); why=""
   if [[ $((m+o)) -ge "$SLOTS" ]]; then why="slots busy own=$m other=$o slots=$SLOTS"; fi
+  if [[ -z "$why" ]]; then la=$(awk '{print int($1)}' /proc/loadavg); [[ "$la" -le $((2*SLOTS)) ]] || why="load1=$la>2*slots"; fi
   [[ -z "$why" ]] && { r=$(mem_ok) || why="$r"; }
   [[ -z "$why" ]] && { r=$(disk_ok) || why="$r"; }
   if [[ -n "$why" ]]; then [[ "$last_wait" != "$why" ]] && log "WAIT $next: $why"; last_wait="$why"; sleep "$POLL"; continue; fi
