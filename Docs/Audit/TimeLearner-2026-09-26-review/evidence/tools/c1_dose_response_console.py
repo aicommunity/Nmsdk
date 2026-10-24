@@ -52,6 +52,17 @@ PSI_CLASSES = {
 }
 
 
+def jsonable(obj: object) -> object:
+    """Recursively convert Path (and nested dict/list) for json.dumps."""
+    if isinstance(obj, Path):
+        return str(obj)
+    if isinstance(obj, dict):
+        return {str(k): jsonable(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [jsonable(v) for v in obj]
+    return obj
+
+
 def patch_xml(path: Path, **tags: str) -> None:
     t = path.read_text(encoding="utf-8", errors="replace")
     for k, v in tags.items():
@@ -155,11 +166,8 @@ def prepare_case(out: Path, *, template: Path, meta: dict) -> Path:
                 scale_inh_resistances(model, float(meta["w"]))
             if meta.get("inh_input_off") == "1":
                 unlink_inh_inputs(model)
-    meta_json = {
-        k: (str(v) if isinstance(v, Path) else v) for k, v in meta.items()
-    }
     (out / "c1_meta.json").write_text(
-        json.dumps(meta_json, indent=2) + "\n", encoding="utf-8"
+        json.dumps(jsonable(meta), indent=2) + "\n", encoding="utf-8"
     )
     return out / "Test"
 
@@ -267,13 +275,25 @@ def main() -> int:
     ap.add_argument("--series", default="all", choices=("all", "psi", "nextseg", "segei", "combo"))
     ap.add_argument("--limit", type=int, default=8)
     ap.add_argument("--tsec", type=float, default=40.0)
-    ap.add_argument("--timeout", type=int, default=180)
+    # Wall-clock: alone on M40, gen Test -t40 ≈ 540s (smoke 2026-10-24); under
+    # parallel load need more headroom. 180s caused universal TIMEOUT (no hang).
+    ap.add_argument("--timeout", type=int, default=900)
     ap.add_argument("--host-tag", default="local")
+    ap.add_argument(
+        "--only",
+        default="",
+        help="Comma-separated job ids to run (smoke); empty = all",
+    )
     args = ap.parse_args()
     if not CONSOLE.is_file():
         raise SystemExit(f"missing Console {CONSOLE}")
 
     jobs = build_jobs(args.series)
+    if args.only.strip():
+        want = {x.strip() for x in args.only.split(",") if x.strip()}
+        jobs = [j for j in jobs if j["id"] in want]
+        if not jobs:
+            raise SystemExit(f"--only matched nothing; want={sorted(want)}")
     args.out_root.mkdir(parents=True, exist_ok=True)
     manifest = args.out_root / "C1_MANIFEST.tsv"
     rows: list[dict] = []
@@ -291,16 +311,20 @@ def main() -> int:
             "log": str(log),
             "rc": rc,
             "elapsed_s": round(time.time() - t0, 1),
-            "meta": json.dumps(job, sort_keys=True),
+            "meta": json.dumps(jsonable(job), sort_keys=True),
         }
 
-    print(f"C1 jobs={len(jobs)} limit={args.limit} out={args.out_root}")
+    print(
+        f"C1 jobs={len(jobs)} limit={args.limit} timeout={args.timeout}s "
+        f"out={args.out_root}",
+        flush=True,
+    )
     with ThreadPoolExecutor(max_workers=max(1, args.limit)) as ex:
         futs = [ex.submit(one, j) for j in jobs]
         for fut in as_completed(futs):
             row = fut.result()
             rows.append(row)
-            print(f"DONE {row['id']} rc={row['rc']} et={row['elapsed_s']}s")
+            print(f"DONE {row['id']} rc={row['rc']} et={row['elapsed_s']}s", flush=True)
 
     with manifest.open("w", newline="") as f:
         w = csv.DictWriter(
