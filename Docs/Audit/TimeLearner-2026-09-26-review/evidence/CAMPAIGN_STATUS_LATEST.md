@@ -2,7 +2,7 @@
 
 **Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H dual-host/disk/offload)  
 **Ветка:** `plan/2026-10-25-dendrite-limits`  
-**Обновлено:** 2026-10-24T18:05Z
+**Обновлено:** 2026-10-24T18:10Z
 
 Метрика: `sep_margin` + детекция цели; Done_exact / Done_BE раздельно. H0 TauH0 — вне приоритета.
 
@@ -23,8 +23,8 @@
 | Блок | Статус | Note |
 | --- | --- | --- |
 | §0 F1–F5 | **done** (pushed) | PulseLib `2e5308e`, Bin `b7706a07` |
-| §H dual-host / disk / registry | **in progress** | plan §H; `RUN_REGISTRY/`; `disk_watch_offload.sh` |
-| M40 sync + build + br25_nextseg ctrl | **in progress** | stash сохранён на .17; fetch ветки |
+| §H dual-host / disk / registry | **done** (pushed) | `RUN_REGISTRY/`; `disk_watch_offload.sh`; Data BLOCK |
+| M40 sync + build + br25_nextseg ctrl | **running** | HEAD `5d917bb`; Console `7f2d9cc0…`; ctrl SoftCold active; stash@{0} сохранён |
 | W0 br25_nextseg ×3 (.11) | **running** | параллельно genasym |
 | genasym SoftCold (.11) | **running** — не стопать | |
 | C1 / W1–W2 | **pending** | после W0 PASS + M40 ctrl |
