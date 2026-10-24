@@ -109,13 +109,19 @@ Mod: `gen`, `preinh`, `nextseg`, `segei`, `preinh_nextseg`, `preinh_segei`, `nex
 
 Сводная таблица Acc/Need/fires по всей Done-сетке (72) с Train/Test ссылками; явный вердикт: есть ли хоть один SoftCold PASS; гипотеза почему Classic S50/S100 не сходятся; next action (не silent re-run без гипотезы).
 
+### 4.4 Follow-up после harvest (обязательный узкий разбор)
+
+1. **Wiring-audit L=1** — сверка NS/EI flags и Model SHA gen↔segei; не cold.
+2. **Контроль без Inh** — интерпретировать `gen` (NS=0,EI=0) из той же сетки vs HIST AsymRm SoftCold PASS.
+3. **Узкий cold AsymRm-swap** (только по явному execute): Classic S25 gen, `NeuronClassName=AsymRm`, тот же fan-out — отделить SymInh от clone InhGrid.
+
 ---
 
 ## 5. Статус
 
 | Шаг | Статус |
 | --- | --- |
-| Этот документ | done (+ §4 Diag) |
+| Этот документ | done (+ §4 Diag + §4.4) |
 | PulseLib NextSeg Classic + SegEI Classic/Branch + SymInh | done (40f09a2) |
 | Bin EXP сетка | done (01baf8d4, 72 EXP) |
 | SoftCold Classic 48 | **очередь Done** (48/48); после disk_stop re-run S25/S50 закрыты |
@@ -123,5 +129,7 @@ Mod: `gen`, `preinh`, `nextseg`, `segei`, `preinh_nextseg`, `preinh_segei`, `nex
 | RESULTS (Done/reasons) | done → [`CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md`](CLASSIC_BRANCH_INH_RESULTS_2026-10-24.ru.md) |
 | Diag harvest Acc/Need/mid/fires | **done** — [`INH_GRID_DIAG_HARVEST_2026-10-24.tsv`](INH_GRID_DIAG_HARVEST_2026-10-24.tsv) |
 | Diag `not_converged` root cause | **done** — L=1 stall / TipR+rmax_stall; см. DIAG §3 |
-| Evidence DIAG + Acc в RESULTS | **done** — [`INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md`](INH_GRID_SOFTCOLD_DIAG_2026-10-24.ru.md); SoftCold PASS **0/72** |
+| Evidence DIAG + Acc в RESULTS | **done** — SoftCold PASS **0/72** |
+| Wiring-audit L=1 + контроль `gen` | **done** — DIAG §6; flags OK; gen=SymInh culpable axis |
+| Узкий cold AsymRm-swap S25 gen | **pending** — ждать «запускай» / execute |
 | Branch×N0 | вне Done-сетки (как в постановке) |

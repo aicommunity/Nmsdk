@@ -88,3 +88,37 @@ Branch сходится **чаще Classic** на длинных Span (S100: 8/8
 | SoftCold PASS | **0** — реестр SUCCESSFUL не трогаем |
 
 Next action: выбрать одну гипотезу из §4 и оформить узкий cold (не 72), либо wiring-audit L=1; silent full re-run запрещён постановкой Diag.
+
+---
+
+## 6. Follow-up (2026-10-24): wiring-audit L=1 + контроль без Inh
+
+Постановка: гипотезы §4.3–4.4 — проверить, не сломан ли Ensure*Inh/Model у L=1 stall, и отделяет ли `gen` (NS=0,EI=0) на SymInh «Inh ломает» от «SymInh сам не селективен».
+
+### 6.1 Wiring / flags — **не баг разводки**
+
+По `SelectivityInhGrid/EXP_classic_S{25,50,100}_*_InhGrid_N0/Train`:
+
+| Проверка | Результат |
+| --- | --- |
+| `EnableNextSegmentInhibition` / `EnableSegExcInh` | Совпадают с именем Mod (gen=0/0, nextseg=1/0, segei=0/1, all=1/1, …) на всех Span |
+| `SegExcInhDelta` / `Alpha` | везде \(d=8\), \(\alpha=1.0\) |
+| Model SHA gen vs segei | **идентичны** (SegEI/NextSeg только Parameters) |
+| Model preinh vs gen | отличается `UsePresynapticInhibition=1`, `InhibitionCoeff=2.5` (ожидаемо) |
+| Active neuron | `NeuronClassName=NSPNeuronGenSymInhC1e9` (AsymRm в Model — библиотечный хвост, не active) |
+
+**Вывод:** Classic S100 `segei`/`all` с `L=1 1 1 1` — это **динамический stall при включённом SegEI (и комбинациях)**, а не отсутствующие Inh-линки в XML. Починка wiring cold-сетки не требуется. Линейный оракул \(m_8<0\) из постановки согласуется с тем, что SegEI может блокировать полезный рост на длинном Span.
+
+### 6.2 Контроль без Inh (гипотеза §4.4) — **уже в сетке**
+
+`inh_c25_gen_{n0,n1}` и `inh_b25_gen_n1`: NS=0, EI=0, preinh off → это контроль «только SymInh». Результат тот же, что у SegEI/NextSeg/preinh: `converged_posttune_finalized`, fires=`00000000`, Acc=7/8, mid=`cpp_nonseparable`.
+
+HIST SoftCold AsymRm `SelectivityAsymRm/EXP_span25ms_packA_gen_posttune` (`NeuronClassName=NSPNeuronGenAsymRmD001C1e9`) в каноне давал PASS fires=`10000000` (см. `POST_TRAIN_VERIFY.ru.md` V3). Значит доминирующая ось провала InhGrid — **замена нейрона на SymInh**, а не три механизма торможения.
+
+### 6.3 Уточнённый next action
+
+1. **Узкий cold (рекомендуется):** один case Classic S25 `gen` с `NeuronClassName→AsymRmD001C1e9` на том же InhGrid fan-out / PostTune ON — проверить, возвращается ли PASS без Inh. При PASS — SymInh culpable; при FAIL — виноват clone/fan-out InhGrid, не Rm_inh.
+2. **Не делать:** re-grid×72, wiring-patch Model, silent pack.
+3. Опционально позже: SymInh + SegEI \(\alpha\!\downarrow\) / \(d\!\downarrow\) только после (1).
+
+Статус follow-up: wiring-audit **закрыт**; контроль без Inh **снят с evidence сетки** (gen=FAIL); узкий AsymRm-swap cold — **не запускался** (нужен явный execute).

@@ -185,3 +185,7 @@ Train/Test: [`EXP_branch_S{25,50,100}_*_InhGrid_N1`](../../../Bin/Configs/SpikeS
 
 **Итог addendum:** ни Classic, ни Branch не дали Цель=да; Branch сходится на S100, Classic — нет; единственный «плюс» SegEI на Classic — чаще дойти до finalize на S50 N0, без улучшения fires.
 
+### Follow-up wiring + контроль (DIAG §6)
+
+Wiring-audit: флаги NS/EI по Mod корректны; Model gen≡segei (SegEI не в линках). L=1 — динамика SegEI, не Ensure*Inh. Контроль `gen` (без Inh) на SymInh даёт тот же FAIL Acc=7/`00000000`, тогда как HIST AsymRm SoftCold S25 gen — PASS: ось провала — **SymInh**, не PSI/NextSeg/SegEI. Узкий AsymRm-swap cold не запускался.
+
