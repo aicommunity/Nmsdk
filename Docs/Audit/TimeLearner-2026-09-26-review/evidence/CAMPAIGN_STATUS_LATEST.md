@@ -1,20 +1,16 @@
 # Campaign status — latest
 
-**Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H dual-host/disk/offload)  
+**Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H)  
 **Ветка:** `plan/2026-10-25-dendrite-limits`  
-**Обновлено:** 2026-10-24T18:10Z
+**Обновлено:** 2026-10-24T15:10Z
 
-Метрика: `sep_margin` + детекция цели; Done_exact / Done_BE раздельно. H0 TauH0 — вне приоритета.
+Метрика: `sep_margin` + детекция цели; Done_exact / Done_BE раздельно. Data cleanup — у Тима; **offload не трогаем**.
 
 ---
 
-## BLOCK: offload на `/media/user/Data`
+## BLOCK offload (эскалация Тиму)
 
-На M40 `/media/user/Data` сейчас **~89% used / ~11% free** (&lt; порога **15% free** из плана §H3).
-
-**Действие:** перенос в `/media/user/Data/TLAgent-offload/…` **не выполнять**, пока free% ≥ 15. Скрипт `evidence/tools/disk_watch_offload.sh` при `check`/`offload` вернёт `BLOCK_OFFLOAD`. Активные Console **не** убивать.
-
-Нужна ручная очистка Data (или другой том) — затем снять блок в этом файле.
+`/media/user/Data` free ~11% (&lt;15%). Не rsync. Активные Console не kill.
 
 ---
 
@@ -22,19 +18,20 @@
 
 | Блок | Статус | Note |
 | --- | --- | --- |
-| §0 F1–F5 | **done** (pushed) | PulseLib `2e5308e`, Bin `b7706a07` |
-| §H dual-host / disk / registry | **done** (pushed) | `RUN_REGISTRY/`; `disk_watch_offload.sh`; Data BLOCK |
-| M40 sync + build + br25_nextseg ctrl | **running** | HEAD `5d917bb`; Console `7f2d9cc0…`; ctrl SoftCold active; stash@{0} сохранён |
-| W0 br25_nextseg ×3 (.11) | **running** | параллельно genasym |
-| genasym SoftCold (.11) | **running** — не стопать | |
-| C1 / W1–W2 | **pending** | после W0 PASS + M40 ctrl |
+| §0 F1–F5 | **done** | pushed |
+| §H dual-host / disk / registry | **done** | Data BLOCK |
+| W0 SoftCold br25_nextseg ×3 (.11) | **running** | Test-phase на 2 reps; 3-й в очереди launcher |
+| W0 SoftCold ctrl (.17) | **running** | Train `-t 320` |
+| W0 R0 replay (.17) | **starting** | HIST nextseg IsNeedToTrain=0; не ждёт SoftCold |
+| C1 Console dose (.17) | **starting** | LIMIT=8 (12−2 free−1 SoftCold); raw only; interpret after W0 ctrl PASS |
+| genasym (.11) | **running** | не стопать |
+| C1 interpret / W1 | **pending** | после W0 PASS |
 
 ---
 
-## Диск сейчас
+## Диск / ядра
 
-| FS | Host | Avail / free% | Действие |
-| --- | --- | --- | --- |
-| `/home/user` | Elder-1 | ~186G (~41% free) | OK; warn&lt;80G → offload done (не kill) |
-| `/` | M40 | ~138G | OK |
-| `/media/user/Data` | M40 | ~407G / **~11% free** | **BLOCK offload** |
+| Host | cores | consoles≈ | spare target | home Avail |
+| --- | ---: | ---: | --- | --- |
+| Elder-1 | 8 | ~5 | keep ≥2 | ~186G |
+| M40 | 12 | 1 SoftCold + R0/C1 queue ≤8 | keep ≥2 | ~138G; Data BLOCK |
