@@ -11,8 +11,8 @@
 
 Лаунчер: [`INH_GRID_LAUNCH_CASES.sh`](INH_GRID_LAUNCH_CASES.sh) (ожидание Avail≥85 G перед стартом кейса; `cpu_gate` с timeout 90 s). Offload lanes → `/media/user/Data/TLAgent-offload/elder1-lanes-20261024/`.
 
-## Статус (обновление mid-run)
+## Статус (финал)
 
-- Elder-1: Classic S25×8 **ALL_DONE** (лаунчер закрыт; notes в основном `exit_1` после полного verify — не disk_stop).
-- `.17`: Classic S50×16 — **12/16 done** (`not_converged`), хвост 4 running: `segei`/`preinh_segei` ×N0/N1. EventsLog периодически trim’ится при Avail&lt;105 G.
-- Offload Elder-1 lanes/TLAgent → Data выполнен; Avail Elder-1 ≫80 G.
+- Elder-1: Classic S25×8 **ALL_DONE** (8×`exit_1`).
+- M40/`.17`: Classic S50×16 **ALL_DONE** (14×`not_converged`, 2×`exit_1`).
+- 5‑мин монитор остановлен после закрытия очереди.
