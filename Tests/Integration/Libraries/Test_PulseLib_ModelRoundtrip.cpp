@@ -149,9 +149,14 @@ TEST(TimeLearnerNativeRoundtrip, XmlPreservesFullGraphParametersCachesAndImpulse
     ASSERT_TRUE(before["valid"].toBool());
     USerStorageXML xml;
     ASSERT_TRUE(xml.Create("RoundtripFixture"));
-    ASSERT_TRUE(source->SaveComponent(&xml, true, ptParameter | ptState));
+    // CheckMask requires both a type and a visibility group. Type-only masks
+    // serialize an empty parameter section even when SaveComponent succeeds.
+    ASSERT_TRUE(source->SaveComponent(&xml, true, ptPubParameter | ptPubState | pgSystem));
     std::string xmlText;
     ASSERT_TRUE(xml.Save(xmlText));
+    ASSERT_NE(xmlText.find("<UseElementDefaults"), std::string::npos);
+    ASSERT_NE(xmlText.find("<Capacity"), std::string::npos);
+    ASSERT_NE(xmlText.find("<Resistance"), std::string::npos);
     WriteFixture("native-graph.xml", xmlText);
     WriteGraph("source.json", source);
     ASSERT_TRUE(xml.SelectNode(source->GetName()));
