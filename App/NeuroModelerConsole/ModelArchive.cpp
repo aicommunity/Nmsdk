@@ -10,6 +10,7 @@
 #include <functional>
 #include <map>
 #include <set>
+#include <typeinfo>
 
 namespace NmsdkTools {
 namespace {
@@ -316,7 +317,7 @@ try
     archive["sha256"] = CanonicalModelDataSha256(archive);
     return archive;
 }
-catch(const UException& error) { Fail("native_archive_export_failed",QString::fromStdString(error.CreateLogMessage())); }
+catch(const UException& error) { Fail("native_archive_export_failed",QString::fromStdString(std::string(typeid(error).name())+": "+error.what())); }
 
 UEPtr<UContainer> ImportModelArchive(const QJsonObject& archive, UEPtr<UStorage> storage,
     UEPtr<UEnvironment> environment, const QString& implementationId)
@@ -383,5 +384,5 @@ try
     if(!dynamic_pointer_cast<NMSDK::NPulseNeuron>(imported.object)) Fail("unsupported_archive_model", "NPulseNeuron graph required");
     return imported.Release();
 }
-catch(const UException& error) { Fail("native_archive_import_failed",QString::fromStdString(error.CreateLogMessage())); }
+catch(const UException& error) { Fail("native_archive_import_failed",QString::fromStdString(std::string(typeid(error).name())+": "+error.what())); }
 }
