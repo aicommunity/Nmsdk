@@ -98,24 +98,29 @@ QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model)
                 value["read_error"] = true;
             }
             if(auto input = dynamic_cast<UIPropertyInput*>(property.Get()))
-                value["connected"] = input->IsConnected();
-            if(auto output = dynamic_cast<UIPropertyOutput*>(property.Get()))
             {
-                for(size_t i = 0; i < output->GetNumConnectors(); ++i)
+                value["connected"] = input->IsConnected() || input->UsesExternalDataSource();
+                value["bindings_inspectable"] = input->CanInspectDataSources();
+                const auto sources = input->GetDataSources();
+                if((input->IsConnected() || input->UsesExternalDataSource()) &&
+                   (!input->CanInspectDataSources() || sources.empty()))
+                    diagnostics.append(QString::fromStdString(entry.path + ":" + name + ": connected property has no inspectable data source"));
+                for(size_t i = 0; i < sources.size(); ++i)
                 {
-                    auto target = output->GetConnectorProperty(int(i));
-                    auto found = propertyPaths.find(target);
+                    auto found = propertyPaths.find(sources[i]);
                     QJsonObject link;
-                    link["source"] = QString::fromStdString(entry.path + ":" + name);
+                    link["target"] = QString::fromStdString(entry.path + ":" + name);
+                    link["target_slot"] = int(i);
+                    link["binding_kind"] = input->UsesExternalDataSource() ? "external_data_source" : "property_pointer";
                     if(found == propertyPaths.end())
                     {
-                        link["target"] = QString::fromStdString(output->GetConnectorInputName(int(i)));
+                        link["source"] = QJsonValue(QJsonValue::Null);
                         link["resolved_in_scope"] = false;
-                        diagnostics.append(QString::fromStdString(entry.path + ":" + name + ": unresolved connector"));
+                        diagnostics.append(QString::fromStdString(entry.path + ":" + name + ": null or out-of-scope data source"));
                     }
                     else
                     {
-                        link["target"] = QString::fromStdString(found->second);
+                        link["source"] = QString::fromStdString(found->second);
                         link["resolved_in_scope"] = true;
                     }
                     links.append(link);

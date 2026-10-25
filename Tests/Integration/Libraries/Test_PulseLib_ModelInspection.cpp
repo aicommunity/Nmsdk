@@ -9,6 +9,79 @@
 #include <limits>
 
 namespace {
+class BindingGraph : public RDK::UNet
+{
+public:
+    template<typename T, unsigned int Kind>
+    class InspectableProperty : public RDK::UProperty<T, BindingGraph, Kind>
+    {
+    public:
+        using RDK::UProperty<T, BindingGraph, Kind>::UProperty;
+        // Test the protected external-source path used by GetData; no new
+        // production mutation API is introduced for this diagnostic fixture.
+        void UseExternal(RDK::UVBaseDataProperty<T>* source) { this->ExternalDataSource = source; }
+    };
+    RDK::UProperty<double, BindingGraph, RDK::ptOutput | RDK::ptPubState> First, Second;
+    InspectableProperty<double, RDK::ptInput | RDK::ptPubState> Scalar;
+    RDK::UProperty<std::vector<double>, BindingGraph, RDK::ptInput | RDK::ptPubState> Vector;
+    BindingGraph() : First("First", this), Second("Second", this),
+                     Scalar("Scalar", this), Vector("Vector", this)
+    {
+        Name = "Bindings";
+        First = 3.; Second = 7.;
+    }
+};
+
+TEST(TimeLearnerModelInspection, ReadsScalarAndVectorDirectBindingsInSlotOrder)
+{
+    NmsdkTests::InitEngineForPulseLibTests();
+    RDK::UEPtr<BindingGraph> model(new BindingGraph);
+    model->Scalar.SetPointer(0, &model->First);
+    model->Vector.SetPointer(0, &model->Second);
+    model->Vector.SetPointer(1, &model->First);
+    const auto before = model->Vector.GetData();
+    ASSERT_EQ(before, (std::vector<double>{7., 3.}));
+    const auto report = NmsdkTools::InspectModel(model);
+    EXPECT_TRUE(report["valid"].toBool()) << QJsonDocument(report).toJson().constData();
+    const auto links = report["links"].toArray();
+    ASSERT_EQ(links.size(), 3);
+    int checked = 0;
+    for(const auto& value : links)
+    {
+        const auto link = value.toObject();
+        if(link["target"] == "Bindings:Vector")
+        {
+            const int slot = link["target_slot"].toInt();
+            EXPECT_EQ(link["source"].toString(), slot == 0 ? "Bindings:Second" : "Bindings:First");
+            ++checked;
+        }
+    }
+    EXPECT_EQ(checked, 2);
+    EXPECT_EQ(model->Vector.GetData(), before);
+    EXPECT_DOUBLE_EQ(model->Scalar.GetData(), 3.);
+}
+
+TEST(TimeLearnerModelInspection, ExternalSourceHasNativePrecedenceAndOutsideSourceIsInvalid)
+{
+    NmsdkTests::InitEngineForPulseLibTests();
+    RDK::UEPtr<BindingGraph> model(new BindingGraph);
+    model->Scalar.SetPointer(0, &model->First);
+    model->Scalar.UseExternal(&model->Second);
+    EXPECT_DOUBLE_EQ(model->Scalar.GetData(), 7.);
+    auto report = NmsdkTools::InspectModel(model);
+    ASSERT_TRUE(report["valid"].toBool()) << QJsonDocument(report).toJson().constData();
+    ASSERT_EQ(report["links"].toArray().size(), 1);
+    const auto link = report["links"].toArray()[0].toObject();
+    EXPECT_EQ(link["source"].toString(), "Bindings:Second");
+    EXPECT_EQ(link["binding_kind"].toString(), "external_data_source");
+    BindingGraph outside;
+    model->Scalar.UseExternal(&outside.First);
+    report = NmsdkTools::InspectModel(model);
+    EXPECT_FALSE(report["valid"].toBool());
+    EXPECT_TRUE(report["links"].toArray()[0].toObject()["source"].isNull());
+    EXPECT_DOUBLE_EQ(model->Scalar.GetData(), 3.);
+}
+
 TEST(TimeLearnerModelInspection, ReadsActualStorageImageWithoutChangingIt)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
