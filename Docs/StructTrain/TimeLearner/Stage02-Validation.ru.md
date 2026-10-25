@@ -12,7 +12,7 @@ Console и Test_PulseLib_StorageComponents собираются в выбран�
 Elder-1 evidence: Reports/StructTrain/TimeLearner/s02-elder1, commit
 8b54226 (полный SHA хранится в Git). M40 evidence: branch
 evidence/timelearner-s02-m40, commit 800fb96. Последний пакет также содержит
-проверки следующего этапа наблюдений и войдёт с соответствующим merge.
+проверки следующего этапа наблюдений; пакет объединён в develop.
 
 M40 manifest фиксирует 28 фактически отображённых executable files процесса
 после инициализации без Calculate. Процесс был создан только для диагностики
