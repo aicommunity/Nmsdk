@@ -204,8 +204,47 @@ def train_gate():
                 g["ok"] = False; g["reasons"].append(f"{k} missing in Train XML")
             elif not all(same(x) for x in vals):
                 g["ok"] = False; g["reasons"].append(f"{k}={vals} in Train XML, expected {v[0]}")
+    # 2026-10-25 12:30 MSK: audit-based checks (D problems 1/4 + nextseg degeneracy)
+    if not work or not (work / "Train").is_dir():
+        g["ok"] = False; g["reasons"].append("no Train work dir"); return g
+    au = work / "Train" / "TimeLearnerTrainingAudit.log"
+    recs = []
+    if au.is_file():
+        for line in open(au, errors="replace"):
+            kv = dict(x.split("=", 1) for x in line.strip().split(";") if "=" in x)
+            if kv.get("kind"):
+                recs.append(kv)
+    g["audit_records"] = len(recs)
+    if not recs:
+        g["ok"] = False; g["reasons"].append("no TimeLearnerTrainingAudit records"); return g
+    want_nm = {"N0": "0", "N1": "1"}.get(mode)
+    nms = sorted({r.get("normalization_mode") for r in recs if r.get("normalization_mode") is not None})
+    g["audit_normalization_mode"] = nms
+    if want_nm is not None and nms != [want_nm]:
+        g["ok"] = False; g["reasons"].append(f"audit normalization_mode={nms}, spec mode {mode} -> {want_nm}")
+    L = lambda v: [int(float(x)) for x in (v or "").strip("[]").replace(",", " ").split()]
+    first = L(recs[0].get("length_before")); last = L(recs[-1].get("length_after"))
+    g["audit_L_first"] = first; g["audit_L_last"] = last
+    if not first or any(x != 1 for x in first):
+        g["ok"] = False; g["reasons"].append(f"training did not start from cold L=1 (first length_before={first})")
+    fl = (get_tag((work / "Train" / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace"), "DendriteLength") or "").split()
+    g["final_L"] = fl
+    if not fl or len(fl) < 2 or any(int(float(x)) <= 1 for x in fl[:-1]):
+        # all dendrites except the reference (last) one must have grown; L=1 1 1 1 / 9 1 1 1 = stalled learner
+        iters = len({r.get("iter") for r in recs})
+        g["ok"] = False; g["reasons"].append(f"train_stalled: final L={' '.join(fl)} after {iters} audit iterations (non-reference dendrite not grown)")
+    # learner flags actually used in Train == template (spec) flags
+    tp = (tpl / "Train" / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace")
+    g["train_learner_flags"] = {}
+    for k in ("EnableNextSegmentInhibition", "EnableSegExcInh", "NormalizationMode"):
+        want = get_tag(tp, k)
+        got = sorted({x.strip() for rel in ("Model_00.xml", "Parameters_00.xml") if (work / "Train" / rel).is_file()
+                      for x in re.findall(r"<%s\b[^>]*>([^<]*)</%s>" % (k, k), (work / "Train" / rel).read_text(encoding="utf-8", errors="replace"))})
+        g["train_learner_flags"][k] = {"template": want, "train_xml": got}
+        if want is not None and got and got != [want.strip()]:
+            g["ok"] = False; g["reasons"].append(f"Train {k}={got}, template {want}")
     return g
-if not SPEC.get("reuse_work"):
+if True:  # 2026-10-25 12:30 MSK: gate also for reuse_work re-tests
     GATE = train_gate()
     log("TRAIN_GATE", json.dumps(GATE))
     if not GATE["ok"]:
@@ -216,8 +255,6 @@ if not SPEC.get("reuse_work"):
         (OUT / "INVALID").write_text("\n".join(GATE["reasons"]) + "\n")
         log("RESULT", json.dumps({"job_valid": False, "invalid_reasons": GATE["reasons"]}))
         sys.exit(3)
-else:
-    GATE = {"ok": None, "reasons": ["reuse_work: training not re-run, gate not applied"]}
 
 # ---------- extra tests ----------
 ISI = [[0.000520833, 0.00416667, 0.00833333, 0.0125]]
@@ -236,6 +273,52 @@ def row_of(times, off):
 
 TESTSRC = None  # set below: work/Test (trained) or OUT/be_Test (best-effort transfer of refused structure)
 INH_OFF = {"UsePresynapticInhibition": "0", "InhibitionCoeff": "0", "EnableNextSegmentInhibition": "0", "EnableSegExcInh": "0"}
+# 2026-10-25 12:30 MSK fix (D problems 2/3/4): the Test Model_00.xml had no EnableNextSegmentInhibition/EnableSegExcInh
+# (-> ADefault false at Test BuildStructure: no InhSynapse wired, on==off) and NormalizationMode=1 even for N0.
+# Smoke (D_c100_segei_n1 gate05): as-is m8=-1.558, 0 inh links; synced segei=1: 8 inh links, target max 0; segei=0: -1.558;
+# nextseg=1: -1.812. D_c100_gen_n1 gate05: N1 -0.107 vs N0 -0.391.
+LEARNER_SYNC = (("EnableNextSegmentInhibition", BTYPE), ("EnableSegExcInh", BTYPE), ("SegExcInhDelta", ITYPE), ("SegExcInhAlpha", DTYPE), ("NormalizationMode", ITYPE))
+def sync_learner_tags(tp, tm):
+    for k, ty in LEARNER_SYNC:
+        v = get_tag(tp, k)
+        if v is None:
+            continue
+        tm = set_tag_all(tm, k, v) if get_tag(tm, k) is not None else ensure_tag_after(tm, "EnableDebug", k, v.strip(), ty)
+    return tm
+def test_gate(name, d, rb, inh_off):
+    tp = (d / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace")
+    tm = (d / "Model_00.xml").read_text(encoding="utf-8", errors="replace")
+    g = {"ok": True, "reasons": []}
+    for k, _ in LEARNER_SYNC:
+        g[k] = [get_tag(tp, k), get_tag(tm, k)]
+        if get_tag(tp, k) is not None and (get_tag(tm, k) or "").strip() != get_tag(tp, k).strip():
+            g["ok"] = False; g["reasons"].append(f"{name}: Model {k}={get_tag(tm, k)} != Parameters {get_tag(tp, k)}")
+    want_nm = {"N0": "0", "N1": "1"}.get(mode)
+    if want_nm is not None and (get_tag(tm, "NormalizationMode") or "").strip() != want_nm:
+        g["ok"] = False; g["reasons"].append(f"{name}: Model NormalizationMode={get_tag(tm, 'NormalizationMode')}, spec {mode}")
+    inh = exc = 0
+    for f in sorted(glob.glob(str(d / "EventsLog" / "*INFO*"))):
+        for line in open(f, errors="replace"):
+            if "LinkSynapseToDataset" in line:
+                if "InhSynapse" in line and "connected=1" in line:
+                    inh += 1
+                elif "ExcSynapse" in line:
+                    exc += 1
+    want_inh = any((get_tag(tm, k) or "0").strip() in ("1", "true") for k in ("EnableNextSegmentInhibition", "EnableSegExcInh"))
+    g.update({"inh_links": inh, "exc_links": exc, "want_inh": want_inh})
+    if exc == 0:
+        g["ok"] = False; g["reasons"].append(f"{name}: no ExcSynapse LinkSynapseToDataset lines (EnableDebug off or no build)")
+    elif want_inh != (inh > 0):
+        g["ok"] = False; g["reasons"].append(f"{name}: inh flag {want_inh} but {inh} InhSynapse dataset links")
+    want_cls = SPEC.get("neuron_off") if (inh_off and SPEC.get("neuron_off")) else SPEC.get("neuron")
+    if want_cls and rb.get("built_neuron_class") != [want_cls]:
+        g["ok"] = False; g["reasons"].append(f"{name}: built class {rb.get('built_neuron_class')} != {want_cls}")
+    if (get_tag(tm, "DendriteLength") or "").split() != (res.get("final_L") or "").split():
+        g["ok"] = False; g["reasons"].append(f"{name}: Test L={get_tag(tm, 'DendriteLength')} != trained L={res.get('final_L')}")
+    res.setdefault("test_gate", {})[name] = g
+    if not g["ok"]:
+        res["job_valid"] = False; res.setdefault("invalid_reasons", []).extend(g["reasons"])
+    return g
 def run_test(name, samples, classes, delay, inh_off=False):
     src = TESTSRC
     d = OUT / "xt" / name
@@ -245,6 +328,7 @@ def run_test(name, samples, classes, delay, inh_off=False):
     (d / "Test" / "SelectivityLog").mkdir(exist_ok=True)
     patch_ini(d / "Test" / "Project.ini")
     data = "\n".join(f"{x:.9g}" for r in samples for x in r)
+    texts = {}
     for rel in ("Parameters_00.xml", "Model_00.xml"):
         p = d / "Test" / rel; t = p.read_text(encoding="utf-8", errors="replace")
         if samples is not None:
@@ -256,7 +340,10 @@ def run_test(name, samples, classes, delay, inh_off=False):
                 t = set_tag_all(t, k, v)
             if SPEC.get("neuron_off"):  # PSI off = same structure, non-Preinh class of the same family
                 t = set_tag_all(t, "NeuronClassName", SPEC["neuron_off"])
-        p.write_text(t, encoding="utf-8")
+        texts[rel] = t
+    texts["Model_00.xml"] = sync_learner_tags(texts["Parameters_00.xml"], texts["Model_00.xml"])
+    for rel, t in texts.items():
+        (d / "Test" / rel).write_text(t, encoding="utf-8")
     tsec = str(int(8 * (float(delay) + 0.05) + 15 if float(delay) >= 1.0 else 8 * (float(delay) + 0.2) + 25))  # short ITI: ~13 s warm-up before trial 0 (itiS 17 s gave 2 rows)
     with open(d / "console.log", "w") as f:
         pr = subprocess.Popen([CONSOLE, "-c", str(d / "Test" / "Project.ini"), "-s", "-t", tsec, "-x"], stdout=f, stderr=subprocess.STDOUT, cwd=str(d / "Test"))
@@ -267,7 +354,9 @@ def run_test(name, samples, classes, delay, inh_off=False):
     r = d / "Test" / "SelectivityLog" / "results.csv"
     rows = list(csv.DictReader(r.open())) if r.is_file() else []
     log("XT", name, "rc", rc, "rows", len(rows), " ".join(f"{x['trial']}:{x['target_class']}:{x['neuron_fired']}:{float(x['ltz_potential_max']):.5f}" for x in rows))
-    return rows, readback(d / "Test")
+    rb = readback(d / "Test")
+    log("TEST_GATE", name, json.dumps(test_gate(name, d / "Test", rb, inh_off)))
+    return rows, rb
 
 def orig_samples():
     t = (TESTSRC / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace")
@@ -302,7 +391,8 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
         rbt = res["readback_train"]
         res["be_check"] = {"L": (rbb.get("Model.DendriteLength") or "").split() == (res["final_L"] or "").split(),
                            "C": rbb.get("Model.MembraneCapacity") == rbt.get("Model.MembraneCapacity"),
-                           "tips": rbb.get("Model.TipSynapseResistance") == rbt.get("Model.TipSynapseResistance")}
+                           "tips": rbb.get("Model.TipSynapseResistance") == rbt.get("Model.TipSynapseResistance"),
+                           "grown": any(int(float(x)) > 1 for x in (res["final_L"] or "").split()[:-1])}
         if all(res["be_check"].values()):
             TESTSRC = be; res["metrics_basis"] = "be_transfer_rejected_structure"
     if res["metrics_basis"] == "TEMPLATE_untrained":
@@ -414,5 +504,5 @@ if work and (work / "Test" / "Parameters_00.xml").is_file() and not res.get("ski
         m8_run("itiS_off", others[:3] + [tgt_i] + others[3:], "0.3" if span == 100 else "0.2", True)
 res["wall_total_s"] = round(time.time() - t0)
 (OUT / "result.json").write_text(json.dumps(res, indent=1, default=str))
-log("RESULT", json.dumps({k: res.get(k) for k in ("job_valid", "train_valid", "metrics_basis", "be_check", "m_S4", "m_S8", "m8_gate05", "gate05_dt_ok", "m8_iti6", "m8_itiS", "m8_gate05_t7", "m8_gate05_off", "m8_iti6_off", "m8_phase8_gate", "phase8_gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
+log("RESULT", json.dumps({k: res.get(k) for k in ("job_valid", "invalid_reasons", "train_valid", "metrics_basis", "be_check", "m_S4", "m_S8", "m8_gate05", "gate05_dt_ok", "m8_iti6", "m8_itiS", "m8_gate05_t7", "m8_gate05_off", "m8_iti6_off", "m8_phase8_gate", "phase8_gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
 log("JOB_DONE")
