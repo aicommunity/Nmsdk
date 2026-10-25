@@ -24,18 +24,30 @@ DebugSysEventsMask и CalculationDurationThreshold исключены. Имен�
 во время расчёта вместе с проводимостями и не является неизменяемым параметром
 модели. Перенос такой динамики потребовал бы отдельного checkpoint.
 
-Поддержаны bool, строка, signed/unsigned integer, IEEE754 double, векторы
-double/int/string и MDMatrix double/int. Значения double хранятся как 16 hex-цифр
+Поддержаны bool, строка и пара строк (включая штатный AverageInput),
+signed/unsigned integer, IEEE754 double, векторы double/int/string и MDMatrix
+double/int. Неоднозначное преобразование невалидной UTF8 строки запрещено.
+Значения double хранятся как 16 hex-цифр
 IEEE754 binary64, `-0` канонизируется в `+0`; NaN/Inf запрещены. Integer хранится
 десятичной строкой без потери uint64 через JSON double. Вектора сохраняют порядок,
 матрицы — обе размерности и значения, в том числе для пустых размерностей.
-RTTI/typeid имена и адреса памяти в fingerprint не попадают.
+RTTI/typeid имена и адреса памяти в fingerprint не попадают. Проверяются также
+полнота и отсутствие дубликатов индексов мембран и каналов относительно детей.
 
 SHA256 считается от канонического length-framed UTF8 представления. Оно кодирует
 тип каждого JSON значения, число элементов, упорядоченные ключи и точные байты
 строк. Поэтому форматирование JSON и различия печати чисел Qt5/Qt6 не должны
 менять fingerprint. Результат сохраняет также саму сравниваемую модель;
 одного hash без описания недостаточно для разбора расхождения.
+
+`VerifyModelIdentity(expected, model)` сначала проверяет schema/kind/encoding,
+валидность и полноту обязательных полей ожидаемого описания, затем повторно
+вычисляет его hash. После этого независимо снимается actual identity. Результат
+разделяет `valid` и `match`: валидная иная модель даёт model_mismatch с первым
+отличающимся путём; повреждённый hash даёт expected_digest_mismatch, а
+неподдерживаемая схема — invalid_expected_identity. Подстановка hash от другой
+структуры не заменяет проверку данных. Native XML regression использует этот
+production verifier после штатного Load/Init, а не тестовую копию алгоритма.
 
 Узлы должны пройти native Init/Build до вызова. Сам IdentifyModel не вызывает
 Build/Init/Reset/Calculate. Unknown parameter type, отсутствующий или внешний
