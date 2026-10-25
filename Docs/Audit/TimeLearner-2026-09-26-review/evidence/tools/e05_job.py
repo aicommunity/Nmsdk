@@ -201,7 +201,7 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["test_is_trained"] = (res["test_L"] or "").split() == (res["final_L"] or "").split()
     TESTSRC = work / "Test"
     res["metrics_basis"] = "trained_test" if res["test_is_trained"] else "TEMPLATE_untrained"
-    if not res["test_is_trained"] and int(SPEC.get("be_transfer", 0))  # default OFF: be_Test runs but PatternResponseAnalyzer writes no rows (overlay alone insufficient, needs phase9-style patching) - UNVERIFIED:
+    if not res["test_is_trained"] and int(SPEC.get("be_transfer", 0)):  # default OFF: be_Test runs but PatternResponseAnalyzer writes no rows (overlay alone insufficient, needs phase9-style patching) - UNVERIFIED
         # C++ refused -> posttune skipped the gate -> Test = template. Build a best-effort Test from the refused Train neuron.
         be = OUT / "be_Test"
         if be.exists():
