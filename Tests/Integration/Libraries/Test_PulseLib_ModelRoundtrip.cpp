@@ -131,6 +131,8 @@ TEST(TimeLearnerNativeRoundtrip, CopyPreservesFullGraphParametersCachesAndImpuls
     const auto after = NmsdkTools::InspectModel(target);
     ASSERT_TRUE(after["valid"].toBool()) << QJsonDocument(after["diagnostics"].toArray()).toJson().constData();
     EXPECT_EQ(before["links"], after["links"]);
+    EXPECT_EQ(before["nodes"].toArray()[0].toObject()["child_order"],
+              after["nodes"].toArray()[0].toObject()["child_order"]);
     EXPECT_EQ(before["nodes"].toArray().size(), after["nodes"].toArray().size());
     CheckIndividualValues(target);
     CompareNativeImpulse(source, target);
@@ -171,9 +173,31 @@ TEST(TimeLearnerNativeRoundtrip, XmlPreservesFullGraphParametersCachesAndImpulse
     const auto after = NmsdkTools::InspectModel(target);
     ASSERT_TRUE(after["valid"].toBool()) << QJsonDocument(after["diagnostics"].toArray()).toJson().constData();
     EXPECT_EQ(before["links"], after["links"]);
+    EXPECT_EQ(before["nodes"].toArray()[0].toObject()["child_order"],
+              after["nodes"].toArray()[0].toObject()["child_order"]);
     EXPECT_EQ(before["nodes"].toArray().size(), after["nodes"].toArray().size());
     CheckIndividualValues(target);
     CompareNativeImpulse(source, target);
     core.storage->ReturnObject(target); core.storage->ReturnObject(source);
+}
+
+TEST(TimeLearnerNativeRoundtrip, ModeZeroRebuildPreservesExplicitSiblingOrder)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto neuron = TakeAsymmetricGraph();
+    ASSERT_TRUE(neuron);
+    SetIndividualValues(neuron);
+    const auto before = NmsdkTools::InspectModel(neuron);
+    // Public structural setter invalidates Ready, forcing a real native Build.
+    neuron->NumDendriteMembranePartsVec = std::vector<int>{1, 2};
+    ASSERT_FALSE(neuron->IsReady());
+    neuron->Build();
+    const auto after = NmsdkTools::InspectModel(neuron);
+    EXPECT_TRUE(after["valid"].toBool());
+    EXPECT_EQ(before["nodes"].toArray()[0].toObject()["child_order"],
+              after["nodes"].toArray()[0].toObject()["child_order"]);
+    EXPECT_EQ(before["links"], after["links"]);
+    CheckIndividualValues(neuron);
+    core.storage->ReturnObject(neuron);
 }
 }
