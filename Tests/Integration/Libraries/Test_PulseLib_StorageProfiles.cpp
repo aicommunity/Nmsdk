@@ -298,6 +298,10 @@ TEST(TimeLearnerStorageProfiles, ScalarStructureModeOneSurvivesGrowthAndXml)
  EXPECT_EQ(restored->NumSomaMembraneParts.GetData(), 2);
  EXPECT_EQ(restored->NumDendriteMembraneParts.GetData(), 3);
  EXPECT_TRUE(restored->GetComponent("Dendrite2_3", true));
+ restored->NumSomaMembraneParts = 3;
+ restored->Build(); restored->Init();
+ EXPECT_TRUE(restored->GetComponent("Dendrite3_3", true));
+ EXPECT_EQ(restored->NumDendriteMembraneParts.GetData(), 3);
  ValidGraph(restored);
  Artifact(specification.name + ".json", QJsonDocument(NmsdkTools::InspectModel(restored)).toJson().toStdString());
  core.storage->ReturnObject(restored); core.storage->ReturnObject(source);
