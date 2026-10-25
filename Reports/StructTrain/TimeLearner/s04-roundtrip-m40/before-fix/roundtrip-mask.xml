@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="2" failures="1" disabled="0" errors="0" time="1.981" timestamp="2026-10-25T18:54:54.773" name="AllTests">
+  <testsuite name="TimeLearnerNativeRoundtrip" tests="2" failures="1" disabled="0" skipped="0" errors="0" time="1.981" timestamp="2026-10-25T18:54:54.773">
+    <testcase name="CopyPreservesFullGraphParametersCachesAndImpulse" file="/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ModelRoundtrip.cpp" line="118" status="run" result="completed" time="1.196" timestamp="2026-10-25T18:54:54.773" classname="TimeLearnerNativeRoundtrip" />
+    <testcase name="XmlPreservesFullGraphParametersCachesAndImpulse" file="/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ModelRoundtrip.cpp" line="140" status="run" result="completed" time="0.785" timestamp="2026-10-25T18:54:55.970" classname="TimeLearnerNativeRoundtrip">
+      <failure message="/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ModelRoundtrip.cpp:173&#x0A;Expected equality of these values:&#x0A;  before[&quot;links&quot;]&#x0A;    Which is: 24-byte object &lt;FF-FF FF-FF FF-FF FF-FF B0-A8 7E-80 E9-5A 00-00 80-00 00-00 FD-7F 00-00&gt;&#x0A;  after[&quot;links&quot;]&#x0A;    Which is: 24-byte object &lt;FF-FF FF-FF FF-FF FF-FF F0-86 B8-80 E9-5A 00-00 80-00 00-00 FD-7F 00-00&gt;&#x0A;" type=""><![CDATA[/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ModelRoundtrip.cpp:173
+Expected equality of these values:
+  before["links"]
+    Which is: 24-byte object <FF-FF FF-FF FF-FF FF-FF B0-A8 7E-80 E9-5A 00-00 80-00 00-00 FD-7F 00-00>
+  after["links"]
+    Which is: 24-byte object <FF-FF FF-FF FF-FF FF-FF F0-86 B8-80 E9-5A 00-00 80-00 00-00 FD-7F 00-00>
+]]></failure>
+      <failure message="/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ModelRoundtrip.cpp:112&#x0A;Expected: (maxDifference) &lt;= (1e-12), actual: 0.00010098689993054411 vs 9.9999999999999998e-13&#x0A;worst tick=22&#x0A;" type=""><![CDATA[/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ModelRoundtrip.cpp:112
+Expected: (maxDifference) <= (1e-12), actual: 0.00010098689993054411 vs 9.9999999999999998e-13
+worst tick=22
+]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>
