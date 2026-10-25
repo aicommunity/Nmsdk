@@ -14,7 +14,9 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_ModelRoundtrip.cpp
     Test_PulseLib_ClassImages.cpp
     Test_PulseLib_StorageProfiles.cpp
+    Test_PulseLib_ModelIdentity.cpp
     ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelInspection.cpp
+    ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelIdentity.cpp
     Test_PulseLib_Main.cpp
 )
 

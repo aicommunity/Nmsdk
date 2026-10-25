@@ -74,10 +74,23 @@ Native проверки выявили и закрыли три общих де�
 Артефакты: s04-profiles-elder1, s04-shutdown-elder1, s04-profiles-m40.
 Это не полная миграция всех физических моделей или реализация ModelSpec.
 
-Согласованные develop merge: Rdk b15f4384c4516c865afc59a83b487acd477744d0,
+Согласованные merge подэтапа 4.6: Rdk b15f4384c4516c865afc59a83b487acd477744d0,
 PulseLib 77cc52d06852cef0ddcd256a528283dd90631f49,
-Bin 83ab62fcb40f62affd83f66ae68fcd557de55d53. Корень содержит эти gitlinks.
+Bin 83ab62fcb40f62affd83f66ae68fcd557de55d53. Подэтап 5.1 далее обновляет PulseLib.
 Все изменения вводятся merge commits; tested SHA сохранены в manifests.
+
+## Этап 5 — в работе; подэтап 5.1 принят
+
+Добавлены semantic model identity и production verifier expected → actual
+native graph. Исправлено различие membrane index после fresh Build и XML Load.
+На обоих серверах прошли семь адресных cases, четыре maintained CTest suites и
+реальные Classic/Branch CLI controls. Fingerprints совпали между Qt5/Qt6 для
+всех шести сохранённых случаев. PulseLib merge:
+4af8184275e182b943bb43df7447f8f7a065d73d.
+
+Полный ModelArchive, перенос definitions в свежий storage, явные boundary ports,
+calibration/conversion metadata и реальный Train → frozen Test остаются открыты.
+Подробности: [Stage05-Progress](Stage05-Progress.ru.md).
 
 ## Серверы
 
