@@ -120,6 +120,45 @@ TEST(TimeLearnerModelIdentity, NonfiniteAndOutsideBindingsCannotProduceFingerpri
     core.storage->ReturnObject(outside); core.storage->ReturnObject(graph);
 }
 
+TEST(TimeLearnerModelIdentity, DoesNotInitializeAnUnreadyModel)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto graph = Graph(); ASSERT_TRUE(graph);
+    graph->UnInit(); ASSERT_FALSE(graph->IsInit());
+    const auto report = NmsdkTools::IdentifyModel(graph);
+    EXPECT_FALSE(report["valid"].toBool()); EXPECT_FALSE(report.contains("sha256"));
+    EXPECT_FALSE(graph->IsInit());
+    graph->Init(); EXPECT_FALSE(Digest(graph).isEmpty());
+    core.storage->ReturnObject(graph);
+}
+
+class UnsupportedIdentityGraph : public IdentityGraph
+{
+public:
+    UProperty<std::list<double>, UnsupportedIdentityGraph, ptPubParameter> Unsupported;
+    UProperty<std::string, UnsupportedIdentityGraph, ptPubParameter> ApiKey;
+    UnsupportedIdentityGraph() : Unsupported("Unsupported",this), ApiKey("ApiKey",this)
+    { ApiKey = "must-not-be-written"; }
+    UnsupportedIdentityGraph* New(void) override { return new UnsupportedIdentityGraph; }
+};
+
+TEST(TimeLearnerModelIdentity, UnsupportedParametersFailClosedAndCredentialsAreExcluded)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    const std::string name = "TimeLearnerUnsupportedIdentityGraph";
+    core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* { return new UnsupportedIdentityGraph; }, name), name);
+    auto graph = dynamic_pointer_cast<UnsupportedIdentityGraph>(core.storage->TakeObject(name));
+    ASSERT_TRUE(graph); graph->SetEnvironment(core.environment); graph->Init();
+    const auto report = NmsdkTools::IdentifyModel(graph);
+    EXPECT_FALSE(report["valid"].toBool()); EXPECT_FALSE(report.contains("sha256"));
+    const auto serialized = QJsonDocument(report).toJson();
+    EXPECT_TRUE(serialized.contains("unsupported_parameter_type"));
+    EXPECT_TRUE(serialized.contains("excluded_credential_property"));
+    EXPECT_FALSE(serialized.contains("must-not-be-written"));
+    core.storage->ReturnObject(graph);
+}
+
 TEST(TimeLearnerModelIdentity, NativeAsymmetricXmlRoundtripRetainsFullSemanticModel)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();

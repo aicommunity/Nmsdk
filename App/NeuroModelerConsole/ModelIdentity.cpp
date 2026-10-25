@@ -131,6 +131,14 @@ bool Excluded(const std::string& name)
     return name == "Name" || name == "Id" || name == "Coord" ||
            name == "DebugSysEventsMask" || name == "CalculationDurationThreshold";
 }
+
+bool Sensitive(const std::string& name)
+{
+    const auto normalized = QString::fromStdString(name).toLower();
+    return normalized == "password" || normalized == "apikey" || normalized == "api_key" ||
+           normalized == "accesstoken" || normalized == "access_token" ||
+           normalized == "secretkey" || normalized == "secret_key";
+}
 }
 
 QJsonObject IdentifyModel(UEPtr<UContainer> model)
@@ -167,6 +175,7 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
                 {
                     try
                     {
+                        if(Sensitive(name)) throw std::runtime_error("excluded_credential_property");
                         // Bound parameters get their value from the source;
                         // sampling that source's dynamic value is not model identity.
                         QJsonObject parameter;
