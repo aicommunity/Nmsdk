@@ -41,8 +41,13 @@ regression; native hook order и storage-image reuse также проверен
 PulseLib CTest прошли; реальные Classic/Branch Test-проекты дали 499/364 bindings
 без неразрешённых источников. Readback не выдаётся за model export/checkpoint.
 
-Согласованные develop merge: Rdk 4b8cc245b02241964859e1211cdb9c012b2c06f6,
-PulseLib d43383ab4e1f6bc3def4e231231645159efe1fa6,
+Подэтап 4.3: исправлена перестановка Soma/LT в режиме явного графа нейрона 0.
+На обоих серверах native Copy/XML/повторный Build: 3/3 и полный CTest; сохранены
+400-точечные импульсные трассы каждой пары source/target. Growth/default-profile
+и независимая fresh/reuse воспроизводимость остаются в работе.
+
+Согласованные develop merge: Rdk 297f4716938fdd6f930100ef772385d8e37c3894,
+PulseLib 6b2b9a9bd07739cbc1dfe807ea70014bb791b273,
 Bin 7136679740c5aa97def6fd3700b7b781d97af8f2. Корень содержит эти gitlinks.
 Все изменения вводятся merge commits; tested SHA сохранены в manifests.
 
