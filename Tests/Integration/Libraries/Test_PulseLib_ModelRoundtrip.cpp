@@ -210,4 +210,29 @@ TEST(TimeLearnerNativeRoundtrip, ModeZeroRebuildPreservesExplicitSiblingOrder)
     CheckIndividualValues(neuron);
     core.storage->ReturnObject(neuron);
 }
+
+TEST(TimeLearnerNativeRoundtrip, ResetMakesWarmAndUncalculatedGraphsRespondEqually)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto warm = TakeAsymmetricGraph();
+    auto fresh = TakeAsymmetricGraph();
+    ASSERT_TRUE(warm); ASSERT_TRUE(fresh);
+    SetIndividualValues(warm); SetIndividualValues(fresh);
+    core.environment->CreateModel("NModel");
+    auto model = core.environment->GetModel();
+    ASSERT_TRUE(model);
+    model->SetGlobalTimeStep(2000);
+    warm->Name = "Warm";
+    ASSERT_NE(model->AddComponent(warm), ForbiddenId);
+    core.environment->ModelInit();
+    for(int tick = 0; tick < 20; ++tick)
+    {
+        model->Calculate();
+        core.environment->IncreaseModelTimeByStep();
+    }
+    model->DelComponent("Warm", false);
+    // Both graphs next enter exactly the same native Init/Reset/probe path.
+    CompareNativeImpulse(warm, fresh, "warm-vs-fresh.csv");
+    core.storage->ReturnObject(fresh); core.storage->ReturnObject(warm);
+}
 }
