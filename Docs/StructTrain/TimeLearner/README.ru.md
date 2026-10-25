@@ -12,6 +12,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Контракт наблюдений и оценки](ObservationContract.ru.md).
 - [Readback фактического графа модели](ModelInspection.ru.md).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
+- [Перенос модели: выполненная часть и оставшиеся проверки](Stage05-Progress.ru.md).
+- [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Явные физические storage-профили](../../../Libraries/Nmsdk-PulseLib/Docs/Analysis/TimeLearnerStorageProfiles.ru.md).
 
 Inventory перечисляет declarations, исходные выражения defaults и исторические
