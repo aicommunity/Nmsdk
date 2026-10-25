@@ -16,8 +16,12 @@
 ### Структура сборки
 
 Все скомпилированные файлы размещаются в:
-- **Исполняемые файлы:** `Bin/Platform/<OS>/`
-- **Библиотеки:** `Bin/Platform/<OS>/Lib.CMake/`
+- **Исполняемые файлы:** `<binaryDir>/runtime/` (`NMSDK_DEPLOY_ROOT`)
+- **Библиотеки:** `<binaryDir>/runtime/Lib.CMake/`
+
+Ресурсы отдельно задаются `NMSDK_RESOURCE_ROOT` (default `<sourceDir>/Bin`).
+Для старого layout явно задайте `-DNMSDK_DEPLOY_ROOT=<sourceDir>/Bin/Platform/<OS>`.
+Console принимает `--app-ini`, поэтому расположение binary не определяет RTlibs.
 
 ### Основные цели сборки
 
@@ -53,7 +57,7 @@ flowchart TB
     Detect --> SelectSys["Выбор системных абстракций<br/>System/Qt, System/Win, System/Gcc"]
     SelectSys --> Compile["Компиляция<br/>gcc/clang/msvc"]
     Compile --> Link["Линковка<br/>rdk.static.qt + библиотеки"]
-    Link --> Deploy["Деплой<br/>Bin/Platform/OS/"]
+    Link --> Deploy["Деплой<br/>NMSDK_DEPLOY_ROOT"]
     
     Config --> LoadLibs["Загрузка библиотек<br/>RdkLoadPredefinedLibraries"]
     LoadLibs --> Compile
@@ -145,8 +149,11 @@ The Nmsdk project uses **CMake** as the main build system. The project supports 
 ### Build Structure
 
 All compiled files are placed in:
-- **Executables:** `Bin/Platform/<OS>/`
-- **Libraries:** `Bin/Platform/<OS>/Lib.CMake/`
+- **Executables:** `<binaryDir>/runtime/` (`NMSDK_DEPLOY_ROOT`)
+- **Libraries:** `<binaryDir>/runtime/Lib.CMake/`
+
+Resources use `NMSDK_RESOURCE_ROOT`, defaulting to `<sourceDir>/Bin`, independently
+of executable placement. Set `NMSDK_DEPLOY_ROOT` explicitly for the legacy layout.
 
 ### Main Build Targets
 
@@ -164,7 +171,7 @@ The build process follows these steps:
 2. **Platform Detection**: Determines which system abstraction implementation to use (Qt/Win/Gcc)
 3. **Compilation**: Compiles all source files with C++20 standard
 4. **Linking**: Links libraries and executables together
-5. **Deployment**: Copies binaries and resources to `Bin/Platform/<OS>/`
+5. **Deployment**: Writes binaries to `NMSDK_DEPLOY_ROOT`; resource paths remain explicit.
 
 The flowchart in the Russian section illustrates the complete build pipeline, including the selection of system abstractions and the dependency chain between modules.
 
@@ -224,7 +231,7 @@ flowchart TB
     Detect --> SelectSys["Выбор системных абстракций<br/>System/Qt, System/Win, System/Gcc"]
     SelectSys --> Compile["Компиляция<br/>gcc/clang/msvc"]
     Compile --> Link["Линковка<br/>rdk.static.qt + библиотеки"]
-    Link --> Deploy["Деплой<br/>Bin/Platform/OS/"]
+    Link --> Deploy["Деплой<br/>NMSDK_DEPLOY_ROOT"]
     
     Config --> LoadLibs["Загрузка библиотек<br/>RdkLoadPredefinedLibraries"]
     LoadLibs --> Compile

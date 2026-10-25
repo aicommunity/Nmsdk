@@ -16,3 +16,9 @@ configure/build roots на сервере и проверка runtime разме
 Runtime manifest должен фиксировать executable, loaded libraries, build flags,
 source commits, effective ini и resource root; само наличие нового пути этого
 manifest не заменяет.
+
+Модуль `Scripts.StructTrain.TimeLearner.runtime` сохраняет manifest по явным
+аргументам --root/--executable/--app-ini/--cache/--output. Файл создаётся только
+при отсутствии прежнего. Без --pid перечисляются resolved ldd dependencies;
+это не утверждение о plugins, загружаемых позже. --pid добавляет executable
+mappings после проверки соответствия процесса заявленному binary.
