@@ -10,7 +10,7 @@ usage: e05_job.py OUT JSON_SPEC
 spec keys: label kind(classic|branch) span(50|100) mod(preinh|gen) mode(N0|N1) L "a b c d" maxdl est(opt)
            ov{OverrideMembraneCapacity..} jitter dlog{DynamicsLogHead,DynamicsLogEvery,DynamicsLogComponentState}
            reuse_work(opt: existing *_work dir -> skip training, re-test only) reuse_result(opt: old result.json for row)
-           be_transfer(default 1): if C++ refused training, Test is still the template -> build OUT/be_Test from Train
+           be_transfer(default 0, EXPERIMENTAL - analyzer gives 0 rows): if C++ refused training, Test is still the template -> build OUT/be_Test from Train
 2026-10-25 03:40 MSK fixes: train_valid / test_is_trained flags (Classic refusals tested the TEMPLATE before),
   best-effort transfer of refused structure, phase8 gate keys renamed (dt 0.05 ms), gate05 dt check,
   jitter documented as ineffective (C++ canonicalises last tip to TipResistanceCanonLast; Console deterministic).
@@ -201,7 +201,7 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["test_is_trained"] = (res["test_L"] or "").split() == (res["final_L"] or "").split()
     TESTSRC = work / "Test"
     res["metrics_basis"] = "trained_test" if res["test_is_trained"] else "TEMPLATE_untrained"
-    if not res["test_is_trained"] and int(SPEC.get("be_transfer", 1)):
+    if not res["test_is_trained"] and int(SPEC.get("be_transfer", 0))  # default OFF: be_Test runs but PatternResponseAnalyzer writes no rows (overlay alone insufficient, needs phase9-style patching) - UNVERIFIED:
         # C++ refused -> posttune skipped the gate -> Test = template. Build a best-effort Test from the refused Train neuron.
         be = OUT / "be_Test"
         if be.exists():
