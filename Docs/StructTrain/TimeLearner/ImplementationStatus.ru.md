@@ -43,11 +43,16 @@ PulseLib CTest прошли; реальные Classic/Branch Test-проекты
 
 Подэтап 4.3: исправлена перестановка Soma/LT в режиме явного графа нейрона 0.
 На обоих серверах native Copy/XML/повторный Build: 3/3 и полный CTest; сохранены
-400-точечные импульсные трассы каждой пары source/target. Growth/default-profile
-и независимая fresh/reuse воспроизводимость остаются в работе.
+400-точечные импульсные трассы каждой пары source/target.
+
+Подэтап 4.4: исправлены rest outputs NConstGenerator и NPulseSynapseCommon до
+первого Calculate. 9/9 lifecycle/roundtrip tests и полный CTest прошли на обоих
+серверах; warm/fresh, Copy и XML traces совпадают. Сохранены failing baseline
+с binary provenance и passing traces. Growth/default-profile и расширенная
+fresh/reuse матрица остаются в работе; научное A/B не заменяется unit-тестами.
 
 Согласованные develop merge: Rdk 297f4716938fdd6f930100ef772385d8e37c3894,
-PulseLib 6b2b9a9bd07739cbc1dfe807ea70014bb791b273,
+PulseLib 735fea58af4b1815dc332c7d38af5bf4f68d0855,
 Bin 7136679740c5aa97def6fd3700b7b781d97af8f2. Корень содержит эти gitlinks.
 Все изменения вводятся merge commits; tested SHA сохранены в manifests.
 
