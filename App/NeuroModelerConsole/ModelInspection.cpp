@@ -158,7 +158,10 @@ QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model)
             return QJsonValue(QString::fromStdString(found->second));
         };
         if(auto neuron = dynamic_cast<NMSDK::NPulseNeuronCommon*>(component.Get()))
+        {
             for(auto membrane : neuron->Membranes) cachedMembranes.append(cachePath(membrane));
+            node["cached_ltzone"] = neuron->GetLTZone() ? cachePath(neuron->GetLTZone()) : QJsonValue(QJsonValue::Null);
+        }
         if(auto membrane = dynamic_cast<NMSDK::NPulseMembraneCommon*>(component.Get()))
             for(size_t i = 0; i < membrane->GetNumChannels(); ++i)
                 cachedChannels.append(cachePath(membrane->GetChannel(i)));
