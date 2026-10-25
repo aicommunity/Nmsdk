@@ -185,13 +185,13 @@ A1_E5_b_p025_r2	10.245.1.11	A1_E5_b_p025_r2	A1	done	~/e05_runs/series/jobs/A1_E5
 A1_E2c10_b_p05_r2	10.245.1.11	A1_E2c10_b_p05_r2	A1	done	~/e05_runs/series/jobs/A1_E2c10_b_p05_r2					C1e-10: L 161 129 73 1 (was 89 73 57), m(S/4) +0.104, m8 -0.113, no detection; 13:05 MSK
 NSR_E2_c_N1_f1	10.245.1.11	NSR_E2_c_N1_f1	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E2_c_N1_f1					C++ refusal phase=4 reason=1, rmax 1e10 stall, final_L 393 337 217 1, Test=template; 13:05 MSK
 NSR_E5_c_N1_f1	10.245.1.11	NSR_E5_c_N1_f1	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E5_c_N1_f1					not converged train_t 640, final_L 209 185 105 1 = NS_E5_c, tip R d1,d2 = rmax 1e10, Test=template; 15:05 MSK
-NSR_E2_c_N0_f1	10.245.1.11	NSR_E2_c_N0_f1	NSR	queued	~/e05_runs/series/jobs/NSR_E2_c_N0_f1					normsync comparison, HOLD removed 09:37 MSK
-NSR_E5_c_N0_f1	10.245.1.11	NSR_E5_c_N0_f1	NSR	queued	~/e05_runs/series/jobs/NSR_E5_c_N0_f1					normsync comparison, HOLD removed 09:37 MSK
+NSR_E2_c_N0_f1	10.245.1.11	NSR_E2_c_N0_f1	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E2_c_N0_f1					not converged train_t 1280, final_L 417 337 217 1 = NS_E2_c_N0, NormalizationMode 0, Test=template; 16:05 MSK
+NSR_E5_c_N0_f1	10.245.1.11	NSR_E5_c_N0_f1	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E5_c_N0_f1					not converged train_t 640, final_L 209 185 105 1 = NS_E5_c_N0, tip R 8.6e7, NormalizationMode 0, Test=template; 16:05 MSK
 NSR_E1_c_N1_f1_frz	10.245.1.11	NSR_E1_c_N1_f1_frz	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E1_c_N1_f1_frz					FreezeTip reached Train XML; not converged, final_L 49 47 29 1 = f0/f1/f2, Test=template; 15:05 MSK
 NSR_E1_c_N1_f2	10.245.1.11	NSR_E1_c_N1_f2	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E1_c_N1_f2					C++ refusal phase=4 reason=1, final_L 49 47 29 1 = f0/f1, Test=template; 13:05 MSK
 NSC_E2_c_N0_t1	10.245.1.11	NSC_E2_c_N0_t1	NSC	queued	~/e05_runs/series/jobs/NSC_E2_c_N0_t1					normsync comparison, HOLD removed 09:37 MSK
-NSC_E5_c_N0_t1	10.245.1.11	NSC_E5_c_N0_t1	NSC	queued	~/e05_runs/series/jobs/NSC_E5_c_N0_t1					normsync comparison, HOLD removed 09:37 MSK
-NSC_E5_c_N0_t0	10.245.1.11	NSC_E5_c_N0_t0	NSC	queued	~/e05_runs/series/jobs/NSC_E5_c_N0_t0					normsync comparison, HOLD removed 09:37 MSK
+NSC_E5_c_N0_t1	10.245.1.11	NSC_E5_c_N0_t1	NSC	done_no_metrics	~/e05_runs/series/jobs/NSC_E5_c_N0_t1					rs2 trim=1: not converged, final_L 209 185 105 1, C unchanged 7.5e-11, Test=template; 16:05 MSK
+NSC_E5_c_N0_t0	10.245.1.11	NSC_E5_c_N0_t0	NSC	done_no_metrics	~/e05_runs/series/jobs/NSC_E5_c_N0_t0					rs2 trim=0: not converged, final_L 209 185 105 1 = NSR_E5_c_N0_f1, Test=template; 16:05 MSK
 NSR_E1_b_N1_f0	10.245.1.17	NSR_E1_b_N1_f0	NSR	done	$DATA/runs/E05_series/jobs/NSR_E1_b_N1_f0					m8 -0.238 L 28 21 14 1, no detection (WIP 552ce27); 12:05 MSK
 NSR_E1_b_N1_f2	10.245.1.17	NSR_E1_b_N1_f2	NSR	done	$DATA/runs/E05_series/jobs/NSR_E1_b_N1_f2					m8 -0.339 L 23 20 13 1, worse than f0; 12:05 MSK
 NSR_E2_b_N1_f1	10.245.1.17	NSR_E2_b_N1_f1	NSR	done	$DATA/runs/E05_series/jobs/NSR_E2_b_N1_f1					L 73 57 41 1 (ERR-06), m8 -0.3416 = baseline; 12:05 MSK
