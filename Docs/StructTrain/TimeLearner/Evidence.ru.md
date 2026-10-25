@@ -1,0 +1,60 @@
+# История и уровень доказательности
+
+## Август
+
+Визуально подтверждённые 4/8, 5/8 и 6/8 сохраняются как валидные наблюдения
+исходного протокола. Saved-state replay, cold retrain и перенос на другой порядок
+или ITI проверяются раздельно. Новый strict gate не отменяет старую точность.
+
+| Контроль | Root commit с согласованными gitlinks | Источник |
+|---|---|---|
+| Phase A 4/8–6/8 | de02a3809395dd0bbd11e2ba792bfc04a51c89f3 | Bin/Configs/SpikeSamples/StructTrain/SelectivityPhaseA/REPORT.md |
+| PSI k-sweep | bf2a68955c83b2540e1bc68d00aaa63eefa6541b | Bin/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib |
+| Branch amp-eq/NextSeg | 50b0cac1ade4f468be82a3d35e4ac6f5514ceb56 | Bin/Configs/SpikeSamples/StructTrain/TimeNeuronTimeLearnerBranch/Train/REPORT_ampeq_nextseginh.md |
+
+Phase A прямо отмечает зависимость LTZ peak от порога: offline threshold sweep
+по spiking trace не предсказывает корректно повторный запуск с новым порогом.
+
+## Волны аудитов
+
+Август: Phase A, PSI, Branch, FastResponse/FastSpan, LTZ calibration, AsymRm.
+Сентябрь: PHASE5–12, изменение gate, PostTune и cold/load/reset проверки.
+Октябрь: AmpNorm EOL, resistance bounds, SoftCold 49, расширенная матрица,
+диагностика Classic N1, измерения кабеля, E05, NSR/NSC и D.
+Для каждой волны необходимо отдельно восстановить версии кода, критериев и
+Train/Test artifacts. Число PASS из разных gate не суммируется.
+
+## Root 895dea071600eafe489c97dffc8147383587e51c
+
+Коммит меняет три отчётных файла, 23 добавления и 7 удалений; raw results не
+добавлены. Численные сводки требуют привязки к опубликованным артефактам.
+
+- NSR_E1_b_N1_f1_r2 имел resync_count=0 в прежней записи: это не испытание
+  выполненного resync. Позднее описание «no effect» не усиливает этот вывод.
+- NSR f2 хуже f0 в конкретном случае; общая невозможность не доказана.
+- NSC_E1_b_N0_t1 не завершил обучение, Test оставался шаблонным. Причинный вывод
+  о вреде C-trim требует валидной парной проверки.
+- NSR Branch frz invalid: параметр Classic отсутствует в Branch.
+- Classic E5 N0/N1 имеют одинаковые L, но разные Rs; сравнение полного результата
+  не состоялось из-за незавершённого Train.
+- WIP e05_job 552ce27 применялся к заданиям .17, стартовавшим после 11:20; ранний
+  f1_r2 нельзя автоматически приписывать этой версии.
+- D остановлена 25.10 в 11:22. Невалидная постановка не является отрицательным
+  научным результатом.
+
+## Подтверждённые code findings
+
+| ID | Компонент | Свидетельство | Требуемая проверка |
+|---|---|---|---|
+| TL-001 | Branch AllSynapsesNormalized | проверяет ActivePulseIndex; -1 оставляет пустой gate | испортить ранее committed input, fresh verify |
+| TL-002 | Branch parallel conversion | mutable bool, повторное включение training сбрасывает его | save/load, повторный conversion, clipping |
+| TL-003 | Branch PostTune rebuild | parent C или fallback 1e-9 | heterogeneous storage roundtrip |
+| TL-004 | C trim | baseline читается из parent C | эквивалентная child physics |
+| TL-005 | StructuralAmp tracker | знак вместо амплитуды, неполный revision | drift, C/dt invalidation, несколько brackets |
+| TL-006 | scorer | target row0, incomplete/duplicates/bad tokens | schema и permutation tests |
+| TL-007 | queue fingerprint | stall_autosave_n отсутствует при восстановлении | production serialization roundtrip |
+| TL-008 | process limiter | только точное имя executable | suffix binaries, owned PID |
+| TL-009 | publisher | push check=False и rsync | child push failure, Git closure |
+
+Эти findings являются результатом проверки кода. Runtime-causality и исправление
+не считаются доказанными до соответствующих серверных тестов.
