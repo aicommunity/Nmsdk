@@ -207,7 +207,7 @@ void CheckSnapshot(const QJsonObject& snapshot)
     CheckXmlNode(xml, "$", nodes);
 }
 
-UEPtr<UNet> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> storage, UEPtr<UEnvironment> environment)
+UEPtr<UContainer> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> storage, UEPtr<UEnvironment> environment)
 {
     CheckSnapshot(snapshot);
     auto object = Take(storage, environment, snapshot["component_class"].toString());
@@ -221,7 +221,7 @@ UEPtr<UNet> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> storage, U
         Fail("native_model_load_failed", object->GetName().c_str());
     object->Init();
     RequireMatch(snapshot["identity"].toObject(), object);
-    lease.Release(); return object;
+    return lease.Release();
 }
 
 struct ImageSource { QString kind, base; UEPtr<UContainer> prototype; };
