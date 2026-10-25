@@ -88,3 +88,27 @@
 br480 через e05_job не поддерживается (span только 50/100). Branch E2/E5 до разбора deadlock бессмысленен. Оценка: 45–65 мин на прогон, с ожиданием слотов результаты 10:30–12:00 MSK.
 
 Метрики для сравнения: число событий потери sync при неизменных L, ошибки прихода на первом sync и в конце, sep_margin, m(S/4), detection, L.
+## 7. Компенсация: этап 1 (ResyncAfterNormalization) и этап 2 (SyncCapacitanceTrim), статус 25.10 09:45 MSK
+
+### 7.1 Код (PulseLib, ветка plan/2026-10-25-dendrite-limits)
+
+- `10f0e6d` — `ResyncAfterNormalization` (int, по умолчанию 0 = старое поведение; 1 = перемер после правки TipR/Rs/N; 2 = 1 + полный сброс). Classic: sentinel DendLastAbsDt, лог `ResyncAfterNormalization: event`; Branch: переоткрытие пульса после правки. Аудит: `resync_after_norm`, `resync_count`.
+- `24d3e45` — `SyncCapacitanceTrim` (int, по умолчанию 0). Ёмкость по дендритам `DendriteCapacitance` (C_k, пусто = C класса), подгон остаточной ошибки прихода после перемера: шаг `gain·err/(cnt·R)`, |δC/C| ≤ `SyncCapTrimMaxRel`=0.3, τ=R·C ≥ max(`SyncCapTrimMinTau`=0.75 мс, dt), не более `SyncCapTrimMaxSteps`=8 шагов, допуск `SyncCapTrimTolerance`=0.5 мс (квант шага). Аудит: `sync_cap_trim`, `sync_cap_trim_count`, `dend_cap`.
+- `652e094` — лог шага подгонки `SyncCapacitanceTrim: ...` без условия EnableDebug (как у этапа 1).
+- Отдельные бинарники (основной Bin не тронут: .11 fec2901b…, .17 10bcd5db…): .11 `~/normsync/build_rs/…rs1`, `~/normsync/build_rs2b/…rs2` (sha 400e30d3…); .17 `~/normsync/build_rs/…rs1`, `~/normsync/build_rs2/…rs2` (sha b349d819…).
+- Ограничение E2/E5: τ = R·C0 = 0.75 мс уже на полу, поэтому подгонка там может только увеличивать C (замедлять).
+
+### 7.2 Smoke этапа 1: флаг НЕ дошёл до обучения (дефект харнесса)
+
+NSR_E1_c_N1_f1, NSR_E1_c_N1_f0, NSR_E1_b_N1_f1 (.11, 09:10–09:24 MSK) отработали, но:
+
+- флаг есть в шаблоне и в Test XML, в Train XML после обучения его нет; в аудите обучения нет полей `resync_after_norm`, лога `ResyncAfterNormalization: event` нет;
+- результаты бит-в-бит равны базе: E1_c f1 = f0 = E1_c_s1 (отказ, L 49 47 29 1), E1_b f1 = E1_b_s1 (L 28 21 14 1, m(S/4) −0.153).
+
+Причина: `e05_job.py` выставляет `NMSDK_CONSOLE` из spec `console` ПОСЛЕ `from repro_cold_lib import …`, а `repro_cold_lib.NM = resolve_console(...)` вычисляется при импорте. Поэтому обучение (posttune_verify) идёт консолью диспетчера (`NMSDK_CONSOLE=~/e05_bin/NeuroModelerConsole.e05b` на .11 и .17), а spec `console` применяется только к доп. тестам. По ps все Train-консоли — e05b.
+
+Побочный вывод: это касается и серии A1 (spec console e05c, `RminNoImproveMinProgress`): в Train XML A1_E2_b_p025/p05, A1_E2c10_b_p05, A1_E5_b_p025/p05 свойства нет, т.е. обучение шло без него.
+
+Исправление (копия, чужой e05_job.py не менялся): `~/normsync/e05_job_ns.py` — перенос двух строк установки `NMSDK_CONSOLE` выше импорта `repro_cold_lib`. Диспетчер берёт фиксированный `JOB`, поэтому через общую очередь копию не запустить.
+
+Мои NSR_*/NSC_* в очередях .11 и .17 переведены в `#HOLD normsync` (не запущены), NS_* (база на e05b) продолжают работать.
