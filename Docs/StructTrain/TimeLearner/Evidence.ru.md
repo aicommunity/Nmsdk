@@ -59,6 +59,7 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 | TL-011 | Rdk UStorage cleanup | native события Parent, Child, Child при одном ClearObjectsStorage | code fix: корни ownership forest; failing/passing baseline в s04-profiles-elder1 |
 | TL-012 | Rdk channel destruction | ASan: NPulseGenerator::AReset читает Environment после его delete в ChannelDestroy | code fix + runtime ASan 122 cases, pooled probe и failing baseline опубликованы в s04-profiles-m40 |
 | TL-013 | PulseLib membrane index | fresh/Load одинакового графа давали разные порядки Membranes | native Build формирует индекс по таблице детей; полное identity source/restored, seven cases и raw baseline в s05-identity-* |
+| TL-014 | Rdk UStorage::DelClass | static finding: ClassesStorage.erase(I) предшествует чтению I->second в текущем b15f4384c4516c865afc59a83b487acd477744d0 | требуется native reproducer/ASan и исправление владельца; rollback registration через этот путь пока не используется |
 
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.

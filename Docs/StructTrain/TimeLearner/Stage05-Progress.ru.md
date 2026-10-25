@@ -1,8 +1,9 @@
 # Этап 5: перенос обученной модели
 
-**Этап целиком не завершён.** Принят только подэтап 5.1 — описание и проверка
-идентичности фактического native графа. Полный экспорт обученного состояния,
-storage definitions, явные внешние порты и Train → Test pipeline ещё отсутствуют.
+**Этап целиком не завершён.** Приняты 5.1 (идентичность native графа) и 5.2
+(native archive замкнутой физической модели с storage definitions). Полный
+экспорт реального learner state, явные внешние порты, checkpoint контроллера
+и Train → frozen Test pipeline ещё не реализованы.
 
 ## Подэтап 5.1 — semantic model identity
 
@@ -52,10 +53,54 @@ s05-identity-m40. M40 содержит исходный failing log, source/post
 включая gzip и полные данные source/restored. Принятый PulseLib develop merge:
 4af8184275e182b943bb43df7447f8f7a065d73d. Tested SHA не заменяются merge SHA.
 
-## Следующая реализация — полный ModelArchive
+## Подэтап 5.2 — native ModelArchive и восстановление definitions
 
-Нужно реализовать единый versioned архив с native graph XML и проверяемыми
-зависимостями storage, а не набор parent overlays. Он должен включать profiles,
+Реализованы ExportModelArchive/ImportModelArchive. Архив содержит native XML
+физической модели и всех зависимостей storage, полную identity и metadata;
+схема, payload/XML hashes, обязательные параметры, классы/число/порядок детей и
+dependency closure проверяются до регистрации. Нативные C++-фабрики должны
+существовать в runtime и сверяются с сохранённым effective image. Производные
+образы создаются из сохранённых definitions без перезаписи existing prototypes.
+После native Load/Init обязательно проверяется actual identity.
+
+Состав, ограничения и владение результатом: [ModelArchive.ru.md](ModelArchive.ru.md).
+API сохраняет supplied metadata с раздельными model_spec/learned_solo/recognition,
+training/calibration/conversion; он не производит автоматически доказательство
+сходимости. Declared calibration проверяется по действительной LTZone и её
+threshold. Новый CLI `export` пока не объявляется доступным пустым stub.
+
+На обоих серверах проверен root 46f707c249cfcc3d4765d6630744367c19e30412:
+
+- Пять parent tests прошли; FreshProcessImport — helper, пропущенный в parent
+  и фактически исполняемый в двух отдельных child processes.
+- Native archive содержит 41 узел и 34 определения классов (7 native_required,
+  27 derived_image), отдельные body/LT C, individual Rs/C, три синапса и PSI.
+- При 2000/20000 Гц новый процесс, где custom-образов ещё нет, восстанавливает
+  модель, сверяет все параметры/связи и получает тот же неплоский отклик.
+- Удаление обязательного Rs, узла и смена класса отвергаются до загрузки даже
+  с пересчитанными hashes. Удаление связей explicit mode 0 отвергается при
+  сравнении actual graph; это не проверка одной лишь контрольной суммы.
+- Четыре maintained CTest suites прошли. Полный PulseLib suite: 135 cases,
+  134 passed и один helper skipped; два child imports выполняются внутри parent
+  controls. Skipped helper не считается дополнительным passing test.
+
+Отдельно выполнен реальный перенос M40 → Elder-1 через Git. Источник:
+13e3830ae8cd2afc6b15e1a3f8b4af9bfeab578c, paths/blobs и hashes сохранены в
+archive-cross-git-transfer.json.gz. Два новых процесса .11 импортировали
+произведённые на .17 архивы, сохранив identity и waveform: 200/2000 отсчётов,
+max pairwise error=0 при 2000/20000 Гц. Исходники и данные не передавались scp/rsync.
+
+Артефакты опубликованы в s05-archive-m40 и s05-archive-elder1. Metadata явно
+model_spec/not_trained: это implementation/characterization controls, а не
+результаты cold train или распознавания. Initial logs сохраняют исправленные
+ошибки нового fixture: conversion UEPtr и отдельный NModel, не установленный
+в Environment. Runner теперь использует current model и одинаковое начало
+model time; эти ошибки не приписываются алгоритмам learner. Нового ASan run нет.
+
+## Оставшаяся реализация полного переноса learner → Test
+
+Native graph XML и definitions уже реализованы в 5.2. Следует завершить общий
+контур с реальным learner adapter, а не набором parent overlays. Он включает profiles,
 морфологию, реальные Ns/TipRs/C/связи, частоту, targets/references, порог с
 calibration provenance и solo/recognition/conversion сведения. Сохранённая модель
 не является controller checkpoint или checkpoint незаконченной физической пробы.
@@ -78,8 +123,15 @@ import for Test:
     freeze model and calibration, then enable evaluation
 ```
 
-Нельзя обещать полноценный Train → Test по результату семи tests 5.1. Остаются
-непроверенными регистрация архива в свежем storage/процессе, отсутствие используемого
-профиля/узла/класса/связи, все физические семейства, полный frozen waveform
-roundtrip и интеграция экспорта с реальным learner/runner. Тест неизменности
-модели при probes и checkpoint на границе этапа также ещё предстоит выполнить.
+Нельзя обещать полноценный Train → Test по результатам 5.1/5.2. Для реального
+learner остаются явные external stimulus ports, захват target/reference и
+certificate/calibration/conversion provenance из владельцев, вся матрица
+физических семейств/режимов, controller checkpoint на границе этапа и frozen
+evaluation через общий ProbeSpec/Observation. Изменение solo → recognition и
+PostTune должно заново привязывать сертификат к конкретному состоянию.
+
+Registration transaction ещё не замкнута: ошибка может оставить новые unused
+immutable образы; import storage после неё нельзя переиспользовать без проверки.
+Подтверждённый чтением кода риск DelClass (TL-014) требует native reproducer/ASan
+и исправления в Rdk до безопасного rollback отдельных definitions. Существующие
+prototypes в 5.2 не заменяются; полный cold pipeline пока не запускается.
