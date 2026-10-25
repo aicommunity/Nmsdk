@@ -1,5 +1,10 @@
 # Ход реализации
 
+**План целиком не выполнен.** Проверка по полному принятому плану:
+[PlanCompletionAudit-2026-10-25](PlanCompletionAudit-2026-10-25.ru.md).
+Формулировки «принято в develop» ниже означают принятие конкретных изменений,
+а не автоматическое выполнение всех требований исходного этапа.
+
 ## Исходная точка
 
 До изменений root был 895dea071600eafe489c97dffc8147383587e51c, PulseLib checkout
@@ -23,13 +28,16 @@
 Зафиксированы контракты и исходный inventory; семантическая проверка всех
 публичных параметров и полный evidence ledger ещё не завершены.
 
-## Этапы 2 и 3 — приняты в develop
+## Этапы 2 и 3 — проверенные компоненты приняты; полная приёмка открыта
 
 Этап 2 проверен на Elder-1/Qt5 и M40/Qt6: отдельные runtime, explicit ini,
 нативный CTest, dependency provenance и 28 executable mappings idle Console на
 M40. Этап 3: 90 Python tests, пять C++ collector cases, реальный C++ CSV → Python
 roundtrip и полный PulseLib CTest. Подробности: Stage02-Validation.ru.md и
 Stage03-Validation.ru.md. Это не научные результаты обучения.
+Автоматический runtime capture перед настоящим Train, полный published run bundle
+и сквозной controller/runner контур ещё не реализованы. Проверка scorer/collector
+не означает завершения всех аналитических путей и native trial boundary проверки.
 
 Подэтап 4.1 принят: NPulseSynapse::AReset обновляет step coefficients после
 изменения частоты. Сохранён failing baseline на активном/Init-компоненте и passing

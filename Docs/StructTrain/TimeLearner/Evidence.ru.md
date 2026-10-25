@@ -51,7 +51,7 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 | TL-003 | Branch PostTune rebuild | parent C или fallback 1e-9 | heterogeneous storage roundtrip |
 | TL-004 | C trim | baseline читается из parent C | эквивалентная child physics |
 | TL-005 | StructuralAmp tracker | знак вместо амплитуды, неполный revision | drift, C/dt invalidation, несколько brackets |
-| TL-006 | scorer | target row0, incomplete/duplicates/bad tokens | schema и permutation tests |
+| TL-006 | scorer | исходный дефект target row0, incomplete/duplicates/bad tokens | исправленный scorer/collector проверен на этапе 3; сквозная интеграция runner открыта |
 | TL-007 | queue fingerprint | stall_autosave_n отсутствует при восстановлении | production serialization roundtrip |
 | TL-008 | process limiter | только точное имя executable | suffix binaries, owned PID |
 | TL-009 | publisher | push check=False и rsync | child push failure, Git closure |
