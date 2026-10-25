@@ -11,6 +11,9 @@
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
+#include <locale>
+#include <sstream>
 
 namespace {
 using namespace RDK;
@@ -74,7 +77,7 @@ void CheckIndividualValues(UEPtr<NPulseNeuron> neuron)
     EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(), 123e6);
 }
 
-void CompareNativeImpulse(UEPtr<NPulseNeuron> source, UEPtr<NPulseNeuron> target)
+void CompareNativeImpulse(UEPtr<NPulseNeuron> source, UEPtr<NPulseNeuron> target, const std::string& artifact)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     core.environment->CreateModel("NModel");
@@ -95,6 +98,9 @@ void CompareNativeImpulse(UEPtr<NPulseNeuron> source, UEPtr<NPulseNeuron> target
     std::vector<double> waveform;
     double maxDifference = 0.;
     int worstTick = -1;
+    std::ostringstream trace;
+    trace.imbue(std::locale::classic());
+    trace << std::setprecision(17) << "tick,time_s,stimulus,source_soma2_exc,target_soma2_exc\n";
     for(int tick = 0; tick < 400; ++tick)
     {
         const double stimulus = tick >= 10 && tick < 12 ? 1. : 0.;
@@ -105,11 +111,13 @@ void CompareNativeImpulse(UEPtr<NPulseNeuron> source, UEPtr<NPulseNeuron> target
         const double a = outputA->Output(0, 0), b = outputB->Output(0, 0);
         EXPECT_TRUE(std::isfinite(a)); EXPECT_TRUE(std::isfinite(b));
         if(std::abs(a - b) > maxDifference) { maxDifference = std::abs(a - b); worstTick = tick; }
+        trace << tick << ',' << tick / 2000. << ',' << stimulus << ',' << a << ',' << b << '\n';
         waveform.push_back(a);
     }
     const auto range = std::minmax_element(waveform.begin(), waveform.end());
     EXPECT_GT(*range.second - *range.first, 1e-8) << "A flat response cannot validate an impulse roundtrip";
     EXPECT_LE(maxDifference, 1e-12) << "worst tick=" << worstTick;
+    WriteFixture(artifact, trace.str());
     CheckIndividualValues(source); CheckIndividualValues(target);
     model->DelComponent("Target", false);
     model->DelComponent("Source", false);
@@ -135,7 +143,7 @@ TEST(TimeLearnerNativeRoundtrip, CopyPreservesFullGraphParametersCachesAndImpuls
               after["nodes"].toArray()[0].toObject()["child_order"]);
     EXPECT_EQ(before["nodes"].toArray().size(), after["nodes"].toArray().size());
     CheckIndividualValues(target);
-    CompareNativeImpulse(source, target);
+    CompareNativeImpulse(source, target, "copy-impulse.csv");
     core.storage->ReturnObject(target); core.storage->ReturnObject(source);
 }
 
@@ -177,7 +185,7 @@ TEST(TimeLearnerNativeRoundtrip, XmlPreservesFullGraphParametersCachesAndImpulse
               after["nodes"].toArray()[0].toObject()["child_order"]);
     EXPECT_EQ(before["nodes"].toArray().size(), after["nodes"].toArray().size());
     CheckIndividualValues(target);
-    CompareNativeImpulse(source, target);
+    CompareNativeImpulse(source, target, "xml-impulse.csv");
     core.storage->ReturnObject(target); core.storage->ReturnObject(source);
 }
 
