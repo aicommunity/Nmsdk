@@ -6,7 +6,7 @@
 652e0942f82029af388e432c004fc4a477387cb3, Bin checkout
 78bcb00fe0ca1575ba3c9627b7c8c247d7c901de. Root-recorded PulseLib был
 02cc0c749a979961586263ac305fbec4b9006c90. Локальных изменений файлов не было.
-Rdk остаётся b3b2472dc347899af266cd46e64bca2a6ea16fea.
+Исходный Rdk: b3b2472dc347899af266cd46e64bca2a6ea16fea.
 
 ## Этап 0 — выполнен
 
@@ -23,14 +23,33 @@ Rdk остаётся b3b2472dc347899af266cd46e64bca2a6ea16fea.
 Зафиксированы контракты и исходный inventory; семантическая проверка всех
 публичных параметров и полный evidence ledger ещё не завершены.
 
+## Этапы 2 и 3 — приняты в develop
+
+Этап 2 проверен на Elder-1/Qt5 и M40/Qt6: отдельные runtime, explicit ini,
+нативный CTest, dependency provenance и 28 executable mappings idle Console на
+M40. Этап 3: 90 Python tests, пять C++ collector cases, реальный C++ CSV → Python
+roundtrip и полный PulseLib CTest. Подробности: Stage02-Validation.ru.md и
+Stage03-Validation.ru.md. Это не научные результаты обучения.
+
+Подэтап 4.1 принят: NPulseSynapse::AReset обновляет step coefficients после
+изменения частоты. Сохранён failing baseline на активном/Init-компоненте и passing
+regression; native hook order и storage-image reuse также проверены.
+Этап 4 целиком не завершён: см. Stage04-Progress.ru.md.
+
+Согласованные develop merge: Rdk 0bd049a346be4ceedcf120df6c468adc8c823a39,
+PulseLib d43383ab4e1f6bc3def4e231231645159efe1fa6,
+Bin 7136679740c5aa97def6fd3700b7b781d97af8f2. Корень содержит эти gitlinks.
+Все изменения вводятся merge commits; tested SHA сохранены в manifests.
+
 ## Серверы
 
 После уточнения адреса и аутентификации доступ к обоим серверам через jump host
-проверен. На .11 и .17 продолжают работать старые NSR/NSC jobs. Их исходные деревья
-и runtime нельзя обновлять. Новая сборка должна использовать отдельный checkout
-и отдельный deploy root. Активные процессы не останавливались.
+проверен. При начале реализации на .11/.17 работали старые NSR/NSC jobs. Их
+исходные деревья и runtime не обновлялись, процессы не останавливались. Новые
+сборки выполнялись в отдельных checkout и deploy roots.
 
 ## Остальные этапы
 
-Этапы 2–12 не считаются выполненными. Pending проверки не обозначаются PASS,
+Этап 1 требует завершения semantic/evidence review; этап 4 требует оставшихся
+lifecycle/graph проверок; этапы 5–12 ещё не завершены. Pending не обозначается PASS,
 version 2 не объявляется production-ready до серверной проверки.
