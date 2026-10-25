@@ -14,6 +14,7 @@
 - [Getting Started](Getting-Started.md) - пути для разных ролей пользователей
 - [Troubleshooting](Troubleshooting/Troubleshooting-Guide.md) - устранение неполадок
 - [Documentation Audit](Audit/README.md) - отчёты аудита документации
+- [TimeLearner: текущий план и реализация](StructTrain/TimeLearner/README.ru.md) — контракты, этапы и серверные проверки структурного обучения
 - [DETAILED ClDesc / Favorites](ClDesc-Detailed-Methodology.md) — как курировать описания классов и избранные свойства
 - [Генерация алиасов свойств](PropertyAliasGeneration.md) — автоген aliases vs primary Favorites
 
