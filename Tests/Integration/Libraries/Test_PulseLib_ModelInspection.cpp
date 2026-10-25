@@ -21,9 +21,9 @@ public:
         // production mutation API is introduced for this diagnostic fixture.
         void UseExternal(RDK::UVBaseDataProperty<T>* source) { this->ExternalDataSource = source; }
     };
-    RDK::UProperty<double, BindingGraph, RDK::ptOutput | RDK::ptPubState> First, Second;
-    InspectableProperty<double, RDK::ptInput | RDK::ptPubState> Scalar;
-    RDK::UProperty<std::vector<double>, BindingGraph, RDK::ptInput | RDK::ptPubState> Vector;
+    RDK::UProperty<double, BindingGraph, ptOutput | ptPubState> First, Second;
+    InspectableProperty<double, ptInput | ptPubState> Scalar;
+    RDK::UProperty<std::vector<double>, BindingGraph, ptInput | ptPubState> Vector;
     BindingGraph() : First("First", this), Second("Second", this),
                      Scalar("Scalar", this), Vector("Vector", this)
     {
