@@ -13,7 +13,7 @@ PulseLib CTest. На Elder-1 дополнительно проверены пя�
 Это синтетический unit fixture; он не включается в научный реестр PASS.
 
 Артефакты опубликованы через Git в ветках evidence/timelearner-s02-m40 и
-evidence/timelearner-s03-s04-elder1. Они будут собраны в develop вместе с
+evidence/timelearner-s03-s04-elder1 и объединены в develop вместе с
 принятыми подэтапами. Исходные manifests сохраняют фактические tested commits,
 а не подменяются последующими merge SHA.
 

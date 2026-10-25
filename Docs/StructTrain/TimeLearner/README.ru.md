@@ -8,6 +8,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Решения и обязательные контракты](Decisions.ru.md).
 - [История и доказательства](Evidence.ru.md).
 - [Машинный inventory исходников](source_inventory.json).
+- [Контракт наблюдений и оценки](ObservationContract.ru.md).
+- [Readback фактического графа модели](ModelInspection.ru.md).
 
 Inventory перечисляет declarations, исходные выражения defaults и исторические
 script blobs. Это не runtime readback. Поле `semantic_review=pending` не означает

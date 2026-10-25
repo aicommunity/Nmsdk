@@ -3,6 +3,9 @@
 #include <QTimer>
 #include <QDir>
 #include <QFileInfo>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <QString>
 #include <QDebug>
 #include <iostream>
@@ -10,11 +13,13 @@
 #include <cmath>
 #include <utility>
 #include <vector>
+#include <stdexcept>
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
 #include "ClDescGenerator.h"
+#include "ModelInspection.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 #include "../../../Rdk/Core/Application/UAppCore.h"
 // Use base RDK classes without Qt dependencies for console build
@@ -71,6 +76,8 @@ const QCommandLineOption checkConfigOption(QStringList() << "check-config" << "v
                                           "path");
 const QCommandLineOption appIniOption(QStringList() << "app-ini",
                                      "Application ini containing explicit resource paths.", "path");
+const QCommandLineOption inspectModelOption(QStringList() << "inspect-model",
+                                           "Write effective loaded model readback and exit without calculation.", "json-path");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
@@ -83,6 +90,7 @@ parser.addOption(clDescClassOption);
 parser.addOption(clDescForceOption);
 parser.addOption(checkConfigOption);
 parser.addOption(appIniOption);
+parser.addOption(inspectModelOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -105,7 +113,7 @@ parser.addOption(appIniOption);
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
          option == "--cldesc-class" || option == "-K" ||
-         option == "--check-config" || option == "--validate-config" || option == "--app-ini";
+         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -121,7 +129,7 @@ parser.addOption(appIniOption);
       option == "--cldesc-lexicon" || option == "-l" ||
       option == "--cldesc-library" || option == "-C" ||
       option == "--cldesc-class" || option == "-K" ||
-      option == "--check-config" || option == "--validate-config" || option == "--app-ini")
+      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model")
    {
     if(shouldSkipValue(option) && !token.contains('=') && i + 1 < original.size())
      ++i;
@@ -144,6 +152,14 @@ parser.addOption(appIniOption);
 const bool cliGenerateClDesc = parser.isSet(generateClDescOption);
 const QString cliCheckConfig = parser.value(checkConfigOption).trimmed();
 const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
+const QString inspectionPath = parser.value(inspectModelOption).trimmed();
+if(parser.isSet(inspectModelOption) &&
+   (inspectionPath.isEmpty() || cliConfigPath.isEmpty() || cliStartCalc || cliSaveProject || cliExitAfterCalc ||
+    parser.isSet(calcTimeOption) || cliGenerateClDesc || !cliCheckConfig.isEmpty()))
+{
+ qCritical() << "--inspect-model requires --config and cannot be combined with calculation or another inspection mode";
+ return 2;
+}
 const QStringList cliLibraryFilters = parser.values(clDescLibraryOption);
 const QStringList cliClassFilters = parser.values(clDescClassOption);
  double cliCalcTimeSec = 0.0;
@@ -280,6 +296,8 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   AppCore.autoexecLastProjectFlag = 0;
  }
  // Defer StartChannel until after MaxCalcTime is applied (see below).
+ if(!inspectionPath.isEmpty())
+  AppCore.autoStartProjectFlag = 0;
  const bool wantStartCalc = cliStartCalc;
  if(cliCalcTimeSec > 0.0)
   AppCore.calcTimeIntervalSec = cliCalcTimeSec;
@@ -292,6 +310,49 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
  {
   qCritical() << "Error: failed to open project:" << cliConfigPath;
   return 1;
+ }
+
+ if(!inspectionPath.isEmpty())
+ {
+  try
+  {
+   QJsonArray channels;
+   bool valid = true;
+   const int count = std::max(1, AppCore.application.GetProjectConfig().NumChannels);
+   for(int channel = 0; channel < count; ++channel)
+   {
+    auto environment = RDK::GetEnvironmentLock(channel);
+    if(!environment || !environment->GetModel())
+     throw std::runtime_error("project channel has no loaded model");
+    // Use the same native initialization boundary as execution. The readback
+    // routine itself never rebuilds or resets a model and never calculates.
+    environment->ModelInit();
+    auto snapshot = NmsdkTools::InspectModel(environment->GetModel());
+    snapshot["channel"] = channel;
+    snapshot["inspection_phase"] = "post_native_init_without_calculation";
+    valid = valid && snapshot["valid"].toBool() && environment->GetModel()->IsInit();
+    channels.append(snapshot);
+   }
+   QJsonObject document;
+   document["schema_version"] = 1;
+   document["kind"] = "project_effective_model_readback";
+   document["valid"] = valid;
+   document["channels"] = channels;
+   if(!QDir().mkpath(QFileInfo(inspectionPath).absolutePath()))
+    throw std::runtime_error("cannot create inspection directory");
+   QFile output(inspectionPath);
+   if(!output.open(QIODevice::WriteOnly | QIODevice::NewOnly))
+    throw std::runtime_error("inspection output exists or cannot be created");
+   const QByteArray bytes = QJsonDocument(document).toJson(QJsonDocument::Indented);
+   if(output.write(bytes) != bytes.size() || !output.flush())
+    throw std::runtime_error("cannot write complete inspection output");
+   return valid ? 0 : 3;
+  }
+  catch(const std::exception& exception)
+  {
+   qCritical() << "Model inspection failed:" << exception.what();
+   return 3;
+  }
  }
 
  // Apply calc-time before starting channels so --calc-time / --exit-after-calc work.
