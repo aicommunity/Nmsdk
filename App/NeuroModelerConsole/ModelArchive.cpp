@@ -1,6 +1,7 @@
 #include "ModelArchive.h"
 #include "../../../Rdk/Core/Engine/UClassImageRegistry.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include <QCryptographicHash>
 #include <QJsonArray>
 #include <cmath>
@@ -100,6 +101,15 @@ std::set<QString> Classes(const QJsonObject& identity)
 
 void ValidateMetadata(const QJsonObject& metadata, const QJsonObject& identity)
 {
+    QString rate;
+    for(const auto& entry : identity["model"].toObject()["nodes"].toArray())
+    {
+        const auto node = entry.toObject(); const auto frequency = RequiredString(node,"frequency_hz");
+        bool ok = false;
+        if(frequency.toUInt(&ok) == 0 || !ok || (!rate.isEmpty() && rate != frequency))
+            Fail("unsupported_multirate_archive", node["path"].toString());
+        rate = frequency;
+    }
     RequiredString(metadata, "implementation_id");
     const auto state = RequiredString(metadata, "state_kind");
     if(state != "model_spec" && state != "learned_solo" && state != "recognition") Fail("invalid_state_kind", state);
@@ -272,6 +282,7 @@ QJsonObject ImageSnapshot(UEPtr<UStorage> storage, UEPtr<UEnvironment> environme
 QJsonObject ExportModelArchive(UEPtr<UContainer> model, const QJsonObject& metadata)
 {
     if(!model || !model->GetStorage() || !model->GetEnvironment()) Fail("invalid_archive_context", "model/storage/environment");
+    if(!dynamic_pointer_cast<NMSDK::NPulseNeuron>(model)) Fail("unsupported_archive_model", "NPulseNeuron graph required");
     auto storage = model->GetStorage(); auto environment = model->GetEnvironment();
     auto graph = Snapshot(model); CheckSnapshot(graph);
     ValidateMetadata(metadata, graph["identity"].toObject());
@@ -365,6 +376,8 @@ UEPtr<UContainer> ImportModelArchive(const QJsonObject& archive, UEPtr<UStorage>
             RegisterClassImage(storage, name.toStdString(), candidate.object);
         }
     }
-    return LoadSnapshot(graph, storage, environment);
+    Lease imported{storage,LoadSnapshot(graph, storage, environment)};
+    if(!dynamic_pointer_cast<NMSDK::NPulseNeuron>(imported.object)) Fail("unsupported_archive_model", "NPulseNeuron graph required");
+    return imported.Release();
 }
 }
