@@ -23,6 +23,16 @@ using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 
+void Artifact(const std::string& name, const std::string& content)
+{
+ const char* directory = std::getenv("TIMELEARNER_PROFILE_TEST_DIR");
+ if(!directory) return;
+ const auto path = std::filesystem::path(directory) / name;
+ std::filesystem::create_directories(path.parent_path());
+ std::ofstream file(path, std::ios::binary); file << content;
+ ASSERT_TRUE(file.good()) << path.string();
+}
+
 template<class T> UEPtr<T> Take(const std::string& name)
 {
  const auto& core = NmsdkTests::InitEngineForPulseLibTests();
@@ -204,7 +214,93 @@ TEST_P(ProfileGrowth, NativeGrowthAndXmlPreserveLearnedValuesAndSeparateLtPhysic
  EXPECT_DOUBLE_EQ(restoredChannel->Capacity.GetData(), 1.41e-9);
  EXPECT_EQ(restoredTip->GetNumExcitatorySynapses(), 3u);
  Frequency(restored, frequency); ValidGraph(restored);
+ Artifact(specification.name + ".json", QJsonDocument(NmsdkTools::InspectModel(restored)).toJson().toStdString());
+ std::string serialized; ASSERT_TRUE(xml.Save(serialized));
+ Artifact(specification.name + ".xml", serialized);
  core.storage->ReturnObject(restored); core.storage->ReturnObject(neuron);
+}
+
+class ProfileWaveform : public ::testing::TestWithParam<unsigned int> {};
+
+TEST_P(ProfileWaveform, DeclaredBaselineMatchesLegacyPhysicalResponse)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ const unsigned int frequency = GetParam();
+ StorageProfileSpec specification;
+ specification.name = "TLProfileUnit_Wave_" + std::to_string(frequency);
+ specification.frequencyHz = frequency;
+ const auto profile = RegisterStorageProfile(core.storage, core.environment, specification);
+ auto source = Take<NPulseNeuron>(specification.neuronBaseClass);
+ auto target = Take<NPulseNeuron>(profile.neuronClass);
+ ASSERT_TRUE(source); ASSERT_TRUE(target);
+ core.environment->CreateModel("NModel");
+ auto model = core.environment->GetModel(); ASSERT_TRUE(model);
+ source->Name = "Legacy"; target->Name = "Profile";
+ for(auto neuron : {source, target})
+ {
+  neuron->NumSomaMembraneParts = 2;
+  neuron->StructureBuildMode = 2;
+  neuron->NumDendriteMembranePartsVec = std::vector<int>{1, 2};
+  neuron->Build();
+  ASSERT_NE(model->AddComponent(neuron), ForbiddenId);
+ }
+ model->SetGlobalTimeStep(frequency);
+ core.environment->ModelInit(); model->Reset();
+ auto a = source->GetComponentL<NPulseSynapse>("Dendrite2_2.ExcSynapse1", true);
+ auto b = target->GetComponentL<NPulseSynapse>("Dendrite2_2.ExcSynapse1", true);
+ auto outputA = source->GetComponentL<NPulseChannel>("Soma2.ExcChannel", true);
+ auto outputB = target->GetComponentL<NPulseChannel>("Soma2.ExcChannel", true);
+ ASSERT_TRUE(a); ASSERT_TRUE(b); ASSERT_TRUE(outputA); ASSERT_TRUE(outputB);
+ ASSERT_FALSE(a->Input.IsConnected()); ASSERT_FALSE(b->Input.IsConnected());
+ double maxError = 0.; std::vector<double> response;
+ std::ostringstream trace; trace.imbue(std::locale::classic());
+ trace << std::setprecision(17) << "tick,tick_start_s,stimulus,legacy_soma2_exc,profile_soma2_exc\n";
+ for(unsigned int tick = 0; tick < frequency / 10; ++tick)
+ {
+  const double time = double(tick) / frequency;
+  const double stimulus = time >= .005 && time < .006 ? 1. : 0.;
+  a->Input.Assign(1, 1, stimulus); b->Input.Assign(1, 1, stimulus);
+  model->Calculate(); core.environment->IncreaseModelTimeByStep();
+  const double x = outputA->Output(0,0), y = outputB->Output(0,0);
+  ASSERT_TRUE(std::isfinite(x)); ASSERT_TRUE(std::isfinite(y));
+  maxError = std::max(maxError, std::abs(x-y)); response.push_back(x);
+  trace << tick << ',' << time << ',' << stimulus << ',' << x << ',' << y << '\n';
+ }
+ const auto range = std::minmax_element(response.begin(), response.end());
+ EXPECT_GT(*range.second - *range.first, 1e-8);
+ EXPECT_LE(maxError, 1e-12);
+ Frequency(source, frequency); Frequency(target, frequency);
+ ValidGraph(source); ValidGraph(target);
+ Artifact(specification.name + ".csv", trace.str());
+ model->DelComponent("Profile", false); model->DelComponent("Legacy", false);
+ core.storage->ReturnObject(target); core.storage->ReturnObject(source);
+}
+
+INSTANTIATE_TEST_SUITE_P(SingleRateBaseline, ProfileWaveform, ::testing::Values(2000u, 20000u));
+
+TEST(TimeLearnerStorageProfiles, ScalarStructureModeOneSurvivesGrowthAndXml)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ StorageProfileSpec specification; specification.name = "TLProfileUnit_ScalarMode";
+ const auto profile = RegisterStorageProfile(core.storage, core.environment, specification);
+ auto source = Take<NPulseNeuron>(profile.neuronClass); ASSERT_TRUE(source);
+ source->StructureBuildMode = 1;
+ source->NumSomaMembraneParts = 2;
+ source->NumDendriteMembraneParts = 3;
+ source->Build(); source->Init();
+ ASSERT_TRUE(source->GetComponent("Dendrite2_3", true));
+ USerStorageXML xml; ASSERT_TRUE(xml.Create("ScalarGrowth"));
+ ASSERT_TRUE(source->SaveComponent(&xml, true, ptPubParameter | ptPubState | pgSystem));
+ ASSERT_TRUE(xml.SelectNode(source->GetName()));
+ auto restored = Take<NPulseNeuron>(profile.neuronClass); ASSERT_TRUE(restored);
+ ASSERT_TRUE(restored->LoadComponent(&xml, true)); restored->Init();
+ EXPECT_EQ(restored->StructureBuildMode.GetData(), 1);
+ EXPECT_EQ(restored->NumSomaMembraneParts.GetData(), 2);
+ EXPECT_EQ(restored->NumDendriteMembraneParts.GetData(), 3);
+ EXPECT_TRUE(restored->GetComponent("Dendrite2_3", true));
+ ValidGraph(restored);
+ Artifact(specification.name + ".json", QJsonDocument(NmsdkTools::InspectModel(restored)).toJson().toStdString());
+ core.storage->ReturnObject(restored); core.storage->ReturnObject(source);
 }
 
 INSTANTIATE_TEST_SUITE_P(SingleRateBodyAndLt, ProfileGrowth,
