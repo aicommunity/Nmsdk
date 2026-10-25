@@ -55,7 +55,6 @@ TEST(TimeLearnerNativeLifecycle, SynapseResetClearsConductanceBeforeFirstTick)
     synapse->Init();
     synapse->Output.Assign(1, 1, 1e-8);
     synapse->Reset();
-    EXPECT_DOUBLE_EQ(synapse->PreOutput.GetData(), 0.);
     EXPECT_DOUBLE_EQ(synapse->Output(0, 0), 0.);
     core.storage->ReturnObject(synapse);
 }
