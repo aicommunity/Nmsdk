@@ -130,4 +130,46 @@ TEST(TimeLearnerClassImages, ContradictingParentDefaultsCannotSilentlyErasePhysi
  EXPECT_DOUBLE_EQ(channel->Capacity.GetData(), 1.37e-9);
  core.storage->ReturnObject(source);
 }
+
+TEST(TimeLearnerClassImages, DeleteUnusedImageAndReuseItsName)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto source = Channel(1.17e-9);
+ ASSERT_TRUE(source);
+ const std::string name = "TimeLearnerUnit_DeleteUnused";
+ RegisterClassImage(core.storage, name, source);
+ const auto id = core.storage->FindClassId(name);
+ core.storage->DelClass(id);
+ EXPECT_FALSE(core.storage->CheckClass(id));
+ EXPECT_FALSE(core.storage->CheckClass(name));
+ EXPECT_THROW(core.storage->DelClass(id), UStorage::EClassIdNotExist);
+ source->Capacity = 1.29e-9;
+ EXPECT_TRUE(RegisterClassImage(core.storage, name, source).created);
+ auto instance = dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(name));
+ ASSERT_TRUE(instance);
+ EXPECT_DOUBLE_EQ(instance->Capacity.GetData(), 1.29e-9);
+ core.storage->ReturnObject(instance);
+ core.storage->ReturnObject(source);
+}
+
+TEST(TimeLearnerClassImages, DeleteReturnedImageRefusesOutstandingLease)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto source = Channel(1.19e-9);
+ ASSERT_TRUE(source);
+ const std::string name = "TimeLearnerUnit_DeleteReturned";
+ RegisterClassImage(core.storage, name, source);
+ const auto id = core.storage->FindClassId(name);
+ auto instance = dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(name));
+ ASSERT_TRUE(instance);
+ EXPECT_THROW(core.storage->DelClass(id), UStorage::EObjectStorageNotEmpty);
+ ASSERT_TRUE(core.storage->CheckClass(name));
+ EXPECT_DOUBLE_EQ(instance->Capacity.GetData(), 1.19e-9);
+ core.storage->ReturnObject(instance);
+ instance = 0; // ReturnObject releases the lease; this is not an owning pointer.
+ core.storage->DelClass(id);
+ EXPECT_FALSE(core.storage->CheckClass(id));
+ EXPECT_FALSE(core.storage->CheckClass(name));
+ core.storage->ReturnObject(source);
+}
 }
