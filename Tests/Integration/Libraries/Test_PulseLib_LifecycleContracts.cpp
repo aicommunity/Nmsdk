@@ -146,4 +146,38 @@ TEST(TimeLearnerNativeLifecycle, StorageImageSurvivesFreshTakeAndReuse)
         core.storage->ReturnObject(neuron);
     }
 }
+// Free can call DisconnectAll -> Build -> Reset. Keep this otherwise unused
+// pooled object unready until the test main performs native channel shutdown.
+// ASan then verifies the Environment lifetime even when this test runs alone.
+class ShutdownEnvironmentReader : public UNet
+{
+public:
+    volatile double capturedTime = 0.;
+    ShutdownEnvironmentReader* New(void) override { return new ShutdownEnvironmentReader; }
+    void Invalidate() { Ready = false; }
+protected:
+    bool AReset() override
+    {
+        if(Environment) capturedTime = Environment->GetTime().GetDoubleTime();
+        return true;
+    }
+};
+
+TEST(TimeLearnerNativeLifecycle, PooledRebuildRequiresEnvironmentThroughChannelShutdown)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* { return new ShutdownEnvironmentReader; }, "ShutdownEnvironmentReader"),
+        "ShutdownEnvironmentReader");
+    auto probe = dynamic_pointer_cast<ShutdownEnvironmentReader>(
+        core.storage->TakeObject("ShutdownEnvironmentReader"));
+    ASSERT_TRUE(probe);
+    probe->SetEnvironment(core.environment);
+    probe->Init();
+    core.storage->ReturnObject(probe);
+    // ReturnObject changes Activity through the native path and can Build.
+    // Invalidate only after returning it so teardown must perform the rebuild.
+    probe->Invalidate();
+    EXPECT_FALSE(probe->IsReady());
+}
 } // namespace
