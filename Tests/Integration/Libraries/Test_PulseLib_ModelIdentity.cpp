@@ -219,6 +219,11 @@ TEST(TimeLearnerModelIdentity, NativeAsymmetricXmlRoundtripRetainsFullSemanticMo
     Artifact("asymmetric-restored.json", NmsdkTools::IdentifyModel(restored));
     EXPECT_EQ(Digest(restored), original);
     EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(NmsdkTools::IdentifyModel(source), restored)["match"].toBool());
+    const auto completeIndex = restored->Membranes;
+    restored->Membranes.pop_back();
+    auto invalid = NmsdkTools::IdentifyModel(restored);
+    EXPECT_FALSE(invalid["valid"].toBool()); EXPECT_FALSE(invalid.contains("sha256"));
+    restored->Membranes = completeIndex;
     auto restoredSynapse = restored->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse2", true);
     ASSERT_TRUE(restoredSynapse); restoredSynapse->Resistance = 334e6;
     EXPECT_NE(Digest(restored), original); restoredSynapse->Resistance = 333e6;
