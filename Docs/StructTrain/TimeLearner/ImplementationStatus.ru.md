@@ -36,7 +36,12 @@ Stage03-Validation.ru.md. Это не научные результаты обу
 regression; native hook order и storage-image reuse также проверены.
 Этап 4 целиком не завершён: см. Stage04-Progress.ru.md.
 
-Согласованные develop merge: Rdk 0bd049a346be4ceedcf120df6c468adc8c823a39,
+Подэтап 4.2: native effective graph readback проверен на обоих серверах, включая
+прямые связи свойств и внутренние ссылки нейрона. 4/4 targeted tests и полный
+PulseLib CTest прошли; реальные Classic/Branch Test-проекты дали 499/364 bindings
+без неразрешённых источников. Readback не выдаётся за model export/checkpoint.
+
+Согласованные develop merge: Rdk 4b8cc245b02241964859e1211cdb9c012b2c06f6,
 PulseLib d43383ab4e1f6bc3def4e231231645159efe1fa6,
 Bin 7136679740c5aa97def6fd3700b7b781d97af8f2. Корень содержит эти gitlinks.
 Все изменения вводятся merge commits; tested SHA сохранены в manifests.
