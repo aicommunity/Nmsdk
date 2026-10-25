@@ -17,7 +17,7 @@ description: >-
 cmake --preset linux-gcc-debug-local
 
 cmake --build build/linux-gcc-debug-local \
-  --target Nmsdk-PulseLib.core NeuroModelerConsole -j"$(nproc)"
+  --target Nmsdk-PulseLib.qt NeuroModelerConsole -j2
 ```
 
 Полный preset:
@@ -28,13 +28,17 @@ cmake --build --preset linux-gcc-debug
 
 ## Выходы
 
-- Binary: `Bin/Platform/Linux/NeuroModelerConsole`
+- Binary: `<binaryDir>/runtime/NeuroModelerConsole` by default. Experiments use
+  an isolated checkout and explicit `-DNMSDK_DEPLOY_ROOT=/path/to/runtime`.
+- Resources: `-DNMSDK_RESOURCE_ROOT=/checkout/Bin`; Console accepts `--app-ini`.
+- TimeLearner builds/experiments run only on 10.245.1.11/10.245.1.17 via
+  10.245.1.12, login `user`. Sources/results are synchronized through Git.
 - После сборки для provenance/реестра:
 
 ```bash
-sha256sum Bin/Platform/Linux/NeuroModelerConsole | cut -c1-16
+sha256sum build/linux-gcc-debug-local/runtime/NeuroModelerConsole | cut -c1-16
 # или полный SHA-256
-sha256sum Bin/Platform/Linux/NeuroModelerConsole
+sha256sum build/linux-gcc-debug-local/runtime/NeuroModelerConsole
 ```
 
 Также зафиксировать commit PulseLib (`Libraries/Nmsdk-PulseLib`) и Bin при обновлении реестра.

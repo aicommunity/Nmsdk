@@ -1,5 +1,9 @@
 # Development Reports (Historical Archive)
 
+Current TimeLearner reproducibility artifacts are maintained separately in
+[StructTrain/TimeLearner](StructTrain/TimeLearner/README.md). That subtree is
+tracked explicitly; the historical notes below describe the older archive.
+
 > **Historical development reports (2024–2025).** Not maintained against current code.
 > For current architecture see [Docs/Overview/Architecture-Overview.md](../Docs/Overview/Architecture-Overview.md).
 > For build system see [Docs/Build-And-Deploy/Build-System.md](../Docs/Build-And-Deploy/Build-System.md).
