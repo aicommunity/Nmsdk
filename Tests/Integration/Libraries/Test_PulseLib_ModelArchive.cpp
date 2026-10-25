@@ -60,7 +60,11 @@ UEPtr<NPulseNeuron> Prepared(unsigned int frequency)
 QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
-    auto model = dynamic_pointer_cast<UNet>(core.storage->TakeObject("NModel"));
+    // Environment advances time using its current model's rate. A detached
+    // NModel is insufficient and would leave Model null or use an old rate.
+    core.environment->DestroyModel();
+    if(!core.environment->CreateModel("NModel")) throw std::runtime_error("fixture environment model unavailable");
+    auto model = dynamic_pointer_cast<UNet>(core.environment->GetModel());
     if(!model) throw std::runtime_error("fixture model unavailable");
     model->SetEnvironment(core.environment);
     const auto name = neuron->GetName();
@@ -83,7 +87,7 @@ QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency)
         if(!std::isfinite(value)) throw std::runtime_error("nonfinite archive waveform");
         trace.append(value);
     }
-    model->DelComponent(name, false); core.storage->ReturnObject(model);
+    model->DelComponent(name, false); core.environment->DestroyModel();
     return trace;
 }
 
