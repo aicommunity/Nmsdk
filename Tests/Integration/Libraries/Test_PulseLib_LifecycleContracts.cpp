@@ -23,6 +23,7 @@ class LifecycleTrace : public UNet
 public:
     std::vector<std::string> hooks;
     int samples = 0;
+    void InvalidateStructure() { Ready = false; }
 protected:
     bool ABuild() override { hooks.push_back("build"); return true; }
     bool AReset() override { hooks.push_back("reset"); samples = 0; return true; }
@@ -77,7 +78,7 @@ TEST(TimeLearnerNativeLifecycle, BuildResetAndCalculateHaveObservableNativeOrder
     trace->hooks.clear();
     trace->Build();
     EXPECT_TRUE(trace->hooks.empty());
-    trace->SetReady(false);
+    trace->InvalidateStructure();
     trace->Build();
     EXPECT_EQ(trace->hooks, (std::vector<std::string>{"build", "reset"}));
     trace->hooks.clear();
