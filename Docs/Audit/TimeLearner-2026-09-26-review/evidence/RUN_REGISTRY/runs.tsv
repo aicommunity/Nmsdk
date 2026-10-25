@@ -178,17 +178,17 @@ NSR_E1_c_N1_f0_r2	10.245.1.11	NSR_E1_c_N1_f0_r2	NSR	done	~/e05_runs/series/jobs/
 NSC_E1_c_N1_t1	10.245.1.11	NSC_E1_c_N1_t1	NSC	done	~/e05_runs/series/jobs/NSC_E1_c_N1_t1					smoke OK 10:11 MSK: gate ok, 21 trims, C_k +17.7/+30/+23/0 %, L 43 32 21 1, still refusal
 NSR_E1_b_N1_f1_r2	10.245.1.17	NSR_E1_b_N1_f1_r2	NSR	done	$DATA/runs/E05_series/jobs/NSR_E1_b_N1_f1_r2					bit-identical to f0 (m8 -0.2377): Resync=1 no effect; 12:05 MSK
 NSC_E1_b_N0_t1	10.245.1.17	NSC_E1_b_N0_t1	NSC	done_no_metrics	$DATA/runs/E05_series/jobs/NSC_E1_b_N0_t1					not converged, final_L 1 1 11 1, Test=template; 12:05 MSK
-A1_E2_b_p05_r2	10.245.1.11	A1_E2_b_p05_r2	A1	queued	~/e05_runs/series/jobs/A1_E2_b_p05_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
-A1_E2_b_p025_r2	10.245.1.11	A1_E2_b_p025_r2	A1	queued	~/e05_runs/series/jobs/A1_E2_b_p025_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
-A1_E5_b_p05_r2	10.245.1.11	A1_E5_b_p05_r2	A1	queued	~/e05_runs/series/jobs/A1_E5_b_p05_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
-A1_E5_b_p025_r2	10.245.1.11	A1_E5_b_p025_r2	A1	queued	~/e05_runs/series/jobs/A1_E5_b_p025_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
-A1_E2c10_b_p05_r2	10.245.1.11	A1_E2c10_b_p05_r2	A1	queued	~/e05_runs/series/jobs/A1_E2c10_b_p05_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
-NSR_E2_c_N1_f1	10.245.1.11	NSR_E2_c_N1_f1	NSR	queued	~/e05_runs/series/jobs/NSR_E2_c_N1_f1					normsync comparison, HOLD removed 09:37 MSK
+A1_E2_b_p05_r2	10.245.1.11	A1_E2_b_p05_r2	A1	done	~/e05_runs/series/jobs/A1_E2_b_p05_r2					L 273 249 137 1 (theory 400 334 200), m(S/4) -0.048, m8 -0.144, no detection; = p025 bitwise; 13:05 MSK
+A1_E2_b_p025_r2	10.245.1.11	A1_E2_b_p025_r2	A1	done	~/e05_runs/series/jobs/A1_E2_b_p025_r2					L 273 249 137 1, bit-identical to p05, m8 -0.144, no detection; 13:05 MSK
+A1_E5_b_p05_r2	10.245.1.11	A1_E5_b_p05_r2	A1	done	~/e05_runs/series/jobs/A1_E5_b_p05_r2					L 153 137 73 1 (was 73 57 41), m(S/4) +0.075, m8 -0.099 all pause controls, no detection; = p025 bitwise; 13:05 MSK
+A1_E5_b_p025_r2	10.245.1.11	A1_E5_b_p025_r2	A1	done	~/e05_runs/series/jobs/A1_E5_b_p025_r2					L 153 137 73 1, bit-identical to p05, m8 -0.099, no detection; 13:05 MSK
+A1_E2c10_b_p05_r2	10.245.1.11	A1_E2c10_b_p05_r2	A1	done	~/e05_runs/series/jobs/A1_E2c10_b_p05_r2					C1e-10: L 161 129 73 1 (was 89 73 57), m(S/4) +0.104, m8 -0.113, no detection; 13:05 MSK
+NSR_E2_c_N1_f1	10.245.1.11	NSR_E2_c_N1_f1	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E2_c_N1_f1					C++ refusal phase=4 reason=1, rmax 1e10 stall, final_L 393 337 217 1, Test=template; 13:05 MSK
 NSR_E5_c_N1_f1	10.245.1.11	NSR_E5_c_N1_f1	NSR	queued	~/e05_runs/series/jobs/NSR_E5_c_N1_f1					normsync comparison, HOLD removed 09:37 MSK
 NSR_E2_c_N0_f1	10.245.1.11	NSR_E2_c_N0_f1	NSR	queued	~/e05_runs/series/jobs/NSR_E2_c_N0_f1					normsync comparison, HOLD removed 09:37 MSK
 NSR_E5_c_N0_f1	10.245.1.11	NSR_E5_c_N0_f1	NSR	queued	~/e05_runs/series/jobs/NSR_E5_c_N0_f1					normsync comparison, HOLD removed 09:37 MSK
 NSR_E1_c_N1_f1_frz	10.245.1.11	NSR_E1_c_N1_f1_frz	NSR	queued	~/e05_runs/series/jobs/NSR_E1_c_N1_f1_frz					normsync comparison, HOLD removed 09:37 MSK
-NSR_E1_c_N1_f2	10.245.1.11	NSR_E1_c_N1_f2	NSR	queued	~/e05_runs/series/jobs/NSR_E1_c_N1_f2					normsync comparison, HOLD removed 09:37 MSK
+NSR_E1_c_N1_f2	10.245.1.11	NSR_E1_c_N1_f2	NSR	done_no_metrics	~/e05_runs/series/jobs/NSR_E1_c_N1_f2					C++ refusal phase=4 reason=1, final_L 49 47 29 1 = f0/f1, Test=template; 13:05 MSK
 NSC_E2_c_N0_t1	10.245.1.11	NSC_E2_c_N0_t1	NSC	queued	~/e05_runs/series/jobs/NSC_E2_c_N0_t1					normsync comparison, HOLD removed 09:37 MSK
 NSC_E5_c_N0_t1	10.245.1.11	NSC_E5_c_N0_t1	NSC	queued	~/e05_runs/series/jobs/NSC_E5_c_N0_t1					normsync comparison, HOLD removed 09:37 MSK
 NSC_E5_c_N0_t0	10.245.1.11	NSC_E5_c_N0_t0	NSC	queued	~/e05_runs/series/jobs/NSC_E5_c_N0_t0					normsync comparison, HOLD removed 09:37 MSK
@@ -198,10 +198,11 @@ NSR_E2_b_N1_f1	10.245.1.17	NSR_E2_b_N1_f1	NSR	done	$DATA/runs/E05_series/jobs/NS
 NSR_E5_b_N1_f1	10.245.1.17	NSR_E5_b_N1_f1	NSR	done	$DATA/runs/E05_series/jobs/NSR_E5_b_N1_f1					L 73 57 41 1 (ERR-06), m8 -0.3413; 12:05 MSK
 NSR_E1_b_N0_f1	10.245.1.17	NSR_E1_b_N0_f1	NSR	queued	$DATA/runs/E05_series/jobs/NSR_E1_b_N0_f1					normsync comparison, HOLD removed 09:38 MSK
 NSR_E1_b_N0_f0	10.245.1.17	NSR_E1_b_N0_f0	NSR	queued	$DATA/runs/E05_series/jobs/NSR_E1_b_N0_f0					normsync comparison, HOLD removed 09:38 MSK
-NSR_E5_b_N0_f1	10.245.1.17	NSR_E5_b_N0_f1	NSR	queued	$DATA/runs/E05_series/jobs/NSR_E5_b_N0_f1					normsync comparison, HOLD removed 09:38 MSK
-NSR_E5_b_N0_f0	10.245.1.17	NSR_E5_b_N0_f0	NSR	queued	$DATA/runs/E05_series/jobs/NSR_E5_b_N0_f0					normsync comparison, HOLD removed 09:38 MSK
+NSR_E5_b_N0_f1	10.245.1.17	NSR_E5_b_N0_f1	NSR	invalid	$DATA/runs/E05_series/jobs/NSR_E5_b_N0_f1					rc=3 train_stalled L 1 1 97 1 (N0 Branch: 2 of 3 dendrites not grown; WIP 552ce27); 13:05 MSK
+NSR_E5_b_N0_f0	10.245.1.17	NSR_E5_b_N0_f0	NSR	invalid	$DATA/runs/E05_series/jobs/NSR_E5_b_N0_f0					rc=3 train_stalled L 1 1 97 1, same as f1 (WIP 552ce27); 13:05 MSK
 NSR_E1_b_N1_f1_frz	10.245.1.17	NSR_E1_b_N1_f1_frz	NSR	invalid	$DATA/runs/E05_series/jobs/NSR_E1_b_N1_f1_frz					rc=3 FreezeTipResistanceAfterFirstSync missing in Train XML; 12:05 MSK
-NSC_E5_b_N0_t1	10.245.1.17	NSC_E5_b_N0_t1	NSC	queued	$DATA/runs/E05_series/jobs/NSC_E5_b_N0_t1					normsync comparison, HOLD removed 09:38 MSK
+NSC_E5_b_N0_t1	10.245.1.17	NSC_E5_b_N0_t1	NSC	invalid	$DATA/runs/E05_series/jobs/NSC_E5_b_N0_t1					rc=3 train_stalled L 1 1 97 1, same as NSR f0/f1 (WIP 552ce27); 13:05 MSK
 NSC_E1_b_N0_t0	10.245.1.17	NSC_E1_b_N0_t0	NSC	queued	$DATA/runs/E05_series/jobs/NSC_E1_b_N0_t0					normsync comparison, HOLD removed 09:38 MSK
 NS_E5_c_N1	Elder-1	NS_E5_c_N1	NS	done_no_metrics	/home/user/e05_runs/series/jobs/NS_E5_c_N1					not converged train_t 640, L 209 185 105 1, Test=template; 12:05 MSK
 NS_E5_c_N0	Elder-1	NS_E5_c_N0	NS	done_no_metrics	/home/user/e05_runs/series/jobs/NS_E5_c_N0					not converged train_t 640, L 209 185 105 1, Test=template; 12:05 MSK
+NS_E2_c_N0	10.245.1.11	NS_E2_c_N0	NS	done_no_metrics	~/e05_runs/series/jobs/NS_E2_c_N0					not converged train_t 1280, final_L 417 337 217 1, Test=template 52 48 27 1; 13:05 MSK
