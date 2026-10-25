@@ -2,11 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 message(STATUS "Libraries integration tests directory created")
 
-if(WIN32)
-    set(PULSELIB_TEST_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/Bin/Platform/Win")
-else()
-    set(PULSELIB_TEST_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/Bin/Platform/Linux")
-endif()
+set(PULSELIB_TEST_OUTPUT_DIR "${DEPLOY_ROOT}")
 
 add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_StorageComponents.cpp
@@ -45,6 +41,7 @@ set_target_properties(Test_PulseLib_StorageComponents PROPERTIES
 )
 
 add_test(NAME PulseLib_StorageComponents COMMAND Test_PulseLib_StorageComponents)
+set_tests_properties(PulseLib_StorageComponents PROPERTIES WORKING_DIRECTORY "${DEPLOY_ROOT}")
 
 add_executable(PulseLibIntervalTuner
     PulseLibIntervalTuner.cpp

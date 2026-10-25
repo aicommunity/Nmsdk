@@ -59,14 +59,20 @@ endif()
 # Unified Qt5/Qt6 selection and creation of Nmsdk::Qt::* aliases
 include("${CMAKE_SOURCE_DIR}/cmake/SelectQt.cmake")
 
-# Place binaries and libraries into Bin/Platform/<OS>
+# Each build owns its runtime. Source resources remain in Bin, independently
+# of executable placement. Explicitly set NMSDK_DEPLOY_ROOT for legacy layouts.
 if (WIN32)
   set(PLATFORM_DIR "Win")
 else()
   set(PLATFORM_DIR "Linux")
 endif()
 
-set(DEPLOY_ROOT "${CMAKE_SOURCE_DIR}/Bin/Platform/${PLATFORM_DIR}")
+set(NMSDK_DEPLOY_ROOT "${CMAKE_BINARY_DIR}/runtime" CACHE PATH "Runtime directory owned by this build")
+get_filename_component(DEPLOY_ROOT "${NMSDK_DEPLOY_ROOT}" ABSOLUTE BASE_DIR "${CMAKE_BINARY_DIR}")
+set(NMSDK_RESOURCE_ROOT "${CMAKE_SOURCE_DIR}/Bin" CACHE PATH "Root containing RTlibs, ClDesc and Configs")
+file(MAKE_DIRECTORY "${DEPLOY_ROOT}")
+configure_file("${CMAKE_SOURCE_DIR}/cmake/NeuroModelerConsole.ini.in"
+               "${DEPLOY_ROOT}/NeuroModelerConsole.ini" @ONLY)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${DEPLOY_ROOT}/Lib.CMake")
