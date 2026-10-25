@@ -1,5 +1,13 @@
 # Controller v2 — SPEC FINAL (дендритный контур, 2026-10-23)
 
+> **Историческая спецификация; не текущий контракт реализации.** Принятый
+> [план рефакторинга](../../../StructTrain/TimeLearner/RefactoringPlan.ru.md)
+> пересматривает общую амплитудную цель, автоматические числовые tolerances,
+> объединение Done и качества распознавания, а также обязательную robustness
+> как условие convergence. Исходная цель — CapturedPerInput. Численные остатки,
+> scientific evaluation и устойчивость к изменению протокола учитываются
+> раздельно. Текст ниже сохраняет историческое решение от 23.10.
+
 **Статус:** **SPEC FINAL** для дендритного Controller v2 (Classic+Branch, `ControllerVersion=2`). Закрывает блокеры mid A–D, числовые tol VERIFY/Done и policy CL-N1@480 из [`CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md). **Не** является go-ahead на merge C++ v2 без отдельного R8 A/B; **не** включает аксонный тренер F1b (фаза A после ворот D / H0).
 
 **Постановка.** Evidence 2026-10-20…23 (E1.0–E1.5, H2/H3 silent-Test, D1/CL-N1 H1, F3-R8, стратегия 23.10, H0a τ(Cm) table) достаточно, чтобы зафиксировать production-выбор mid, константы tol и классификацию stall на Span480 без ожидания axon PASS. Все нормативные разделы DRAFT §1–§4, §5 guidance, §6 default-off / KeepDone / F3 / W3 **наследуются**; ниже — только решения, которые переводят DRAFT → FINAL.
