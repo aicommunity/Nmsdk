@@ -235,4 +235,22 @@ TEST(TimeLearnerNativeRoundtrip, ResetMakesWarmAndUncalculatedGraphsRespondEqual
     CompareNativeImpulse(warm, fresh, "warm-vs-fresh.csv");
     core.storage->ReturnObject(fresh); core.storage->ReturnObject(warm);
 }
+
+TEST(TimeLearnerNativeRoundtrip, CopyIntoInitializedTargetRequiresFreshNativeInitialization)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto source = TakeAsymmetricGraph();
+    auto target = TakeAsymmetricGraph();
+    ASSERT_TRUE(source); ASSERT_TRUE(target);
+    SetIndividualValues(source);
+    ASSERT_TRUE(target->IsInit());
+    ASSERT_TRUE(source->Copy(target, core.storage, false));
+    EXPECT_FALSE(target->IsInit()) << "Replacing the graph invalidates its previous initialization";
+    target->Init();
+    const auto readback = NmsdkTools::InspectModel(target);
+    ASSERT_TRUE(readback["valid"].toBool()) << QJsonDocument(readback["diagnostics"].toArray()).toJson().constData();
+    CheckIndividualValues(target);
+    CompareNativeImpulse(source, target, "initialized-copy-impulse.csv");
+    core.storage->ReturnObject(target); core.storage->ReturnObject(source);
+}
 }

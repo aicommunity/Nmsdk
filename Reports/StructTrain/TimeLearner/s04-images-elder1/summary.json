@@ -1,0 +1,23 @@
+{
+  "kind": "native_class_image_and_copy_lifecycle_regression",
+  "scientific_recognition_result": false,
+  "tested_root": "5c26aa5d9c976725c27444751b276b4730040cbb",
+  "host": "10.245.1.11",
+  "targeted_tests": 15,
+  "ctest_suites": 4,
+  "scope": [
+    "separate native image copy",
+    "equivalent-name idempotence",
+    "different-physics collision",
+    "nonfinite and external-binding rejection",
+    "heterogeneous explicit graph",
+    "contradicting uniform parent defaults rejected",
+    "initialized-target copy invalidates InitFlag",
+    "native Init/Build and impulse equivalence"
+  ],
+  "limitations": [
+    "No production learner profile migration yet",
+    "Not a dynamic checkpoint or portable scientific fingerprint",
+    "Runtime manifests list resolved dependencies only"
+  ]
+}

@@ -95,7 +95,54 @@ manifests в s04-reset-elder1 и s04-reset-m40. Tested root:
 исторические replay выполняются с их точными commits. Влияние на августовское
 обучение и устойчивость к порядку/ITI остаётся предметом научного A/B этапа 11.
 
+Подэтап 4.5: добавлен opt-in RegisterClassImage в Rdk. Он создаёт отдельную
+native копию образа и проверяет параметры/структуру/слоты связей после Init;
+возврат исходника в storage не меняет зарегистрированный образ. Совпадающее
+имя допускается только при эквивалентном описании поддерживаемого prototype;
+другая физика, nonfinite и внешние bindings отклоняются до регистрации.
+Противоречие parent defaults с индивидуальными C не исправляется молча —
+результат native Copy/Init обязан совпасть с заявленным исходным образом.
+Описание служит process-local проверке; portable scientific fingerprint и
+полный export профилей остаются отдельными задачами.
+
+При проверке воспроизведён общий дефект UContainer::Copy: InitFlag получателя
+оставался от прежнего графа. Реальный нейрон после pool/copy мог сохранять
+cached LTZone вне именованного дерева. Исправление выполнено в общем владельце:
+native UnInit перед заменой графа и invalidation Ready после CopyComponents.
+UNet затем восстанавливает связи; BreakLinks/DisconnectAll могут штатно Build
+получателя, поэтому Ready после производного Copy не обязан быть false.
+InitFlag остаётся false, и новый граф проходит native Init перед исполнением.
+Дополнительных Calculate и learner-specific «пробуждений» Build нет.
+
+На обоих серверах прошли 15 targeted tests и четыре maintained CTest suites:
+PulseLib_StorageComponents, UContainer_Components, Test_UComponent_Lifecycle,
+Test_UComponent_Properties. Новый общий fixture использует зарегистрированную
+storage factory: вариант без storage не исполнял реальный Build и был исправлен.
+Legacy UStorage unit target по умолчанию отключён проектом и не засчитывается.
+Artifacts: Reports/StructTrain/TimeLearner/s04-images-elder1 и s04-images-m40;
+M40/before-fix содержит failing native baseline и runtime binary provenance.
+Baseline root 6165ebc9c4ba67be01b3b108d7c2a806df6591d6; accepted source root
+5c26aa5d9c976725c27444751b276b4730040cbb; tested Rdk
+86ba939a5c81365845f5bda80bdad0e3a10511bf; Rdk merge
+c80200bf1cd2bc8beec35546d3022da86afd35c9.
+
+Следующий подэтап — применение registry к декларативной физике и росту:
+
+1. NPulseMembrane сейчас использует один SynapseClassName для Exc/Inh. Для
+   разных исходных Rs нужны отдельные optional ExcSynapseClassName и
+   InhSynapseClassName с пустым default/fallback к старому полю. Native Build
+   должен выбирать соответствующий образ через существующий AddMissingComponent;
+   старые конфиги сохраняют прежний выбор класса.
+2. Зарегистрировать снизу вверх профили каналов и синапсов, мембран и нейрона;
+   uniform C/Rm/kinetics/PSI должны приходить из образов. У новых профилей не
+   должно быть повторного UseElementDefaults, стирающего learned Rs/C.
+3. Проверить на реальном growth, что старые индивидуальные Rs/C сохраняются,
+   новые сегменты и Exc/Inh синапсы получают именно выбранные классы/параметры,
+   включая LTMembrane отдельно. Проверять частоту до финального Init.
+4. Включить экспорт определений профилей и semantic model comparison в этап 5;
+   process-local descriptor registry не подменяет ModelSpec/ConditionSpec.
+
 Этап 4 целиком остаётся в работе: нужны расширенные Copy/XML/growth/rebuild,
-heterogeneous profiles, коллизии образов, scalar/vector parameter assignment,
+heterogeneous profiles, интеграция проверки коллизий в запуск, scalar/vector assignment,
 multirate характеристика и сопоставление readback с ModelSpec. Прежние слабые fixtures
 не засчитываются как доказательство этих контрактов.
