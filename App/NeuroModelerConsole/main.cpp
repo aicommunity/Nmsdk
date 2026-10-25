@@ -20,6 +20,7 @@
 #include <boost/program_options/parsers.hpp>
 #include "ClDescGenerator.h"
 #include "ModelInspection.h"
+#include "ModelIdentity.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 #include "../../../Rdk/Core/Application/UAppCore.h"
 // Use base RDK classes without Qt dependencies for console build
@@ -78,6 +79,8 @@ const QCommandLineOption appIniOption(QStringList() << "app-ini",
                                      "Application ini containing explicit resource paths.", "path");
 const QCommandLineOption inspectModelOption(QStringList() << "inspect-model",
                                            "Write effective loaded model readback and exit without calculation.", "json-path");
+const QCommandLineOption identityModelOption(QStringList() << "model-identity",
+                                            "Write semantic model identity and exit without calculation.", "json-path");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
@@ -91,6 +94,7 @@ parser.addOption(clDescForceOption);
 parser.addOption(checkConfigOption);
 parser.addOption(appIniOption);
 parser.addOption(inspectModelOption);
+parser.addOption(identityModelOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -113,7 +117,7 @@ parser.addOption(inspectModelOption);
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
          option == "--cldesc-class" || option == "-K" ||
-         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model";
+         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -129,7 +133,7 @@ parser.addOption(inspectModelOption);
       option == "--cldesc-lexicon" || option == "-l" ||
       option == "--cldesc-library" || option == "-C" ||
       option == "--cldesc-class" || option == "-K" ||
-      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model")
+      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity")
    {
     if(shouldSkipValue(option) && !token.contains('=') && i + 1 < original.size())
      ++i;
@@ -152,12 +156,14 @@ parser.addOption(inspectModelOption);
 const bool cliGenerateClDesc = parser.isSet(generateClDescOption);
 const QString cliCheckConfig = parser.value(checkConfigOption).trimmed();
 const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
-const QString inspectionPath = parser.value(inspectModelOption).trimmed();
-if(parser.isSet(inspectModelOption) &&
+const bool wantIdentity = parser.isSet(identityModelOption);
+const QString inspectionPath = parser.value(wantIdentity ? identityModelOption : inspectModelOption).trimmed();
+if((parser.isSet(inspectModelOption) || wantIdentity) &&
    (inspectionPath.isEmpty() || cliConfigPath.isEmpty() || cliStartCalc || cliSaveProject || cliExitAfterCalc ||
-    parser.isSet(calcTimeOption) || cliGenerateClDesc || !cliCheckConfig.isEmpty()))
+    parser.isSet(calcTimeOption) || cliGenerateClDesc || !cliCheckConfig.isEmpty() ||
+    (parser.isSet(inspectModelOption) && wantIdentity)))
 {
- qCritical() << "--inspect-model requires --config and cannot be combined with calculation or another inspection mode";
+ qCritical() << "Model inspection requires --config and cannot be combined with calculation or another inspection mode";
  return 2;
 }
 const QStringList cliLibraryFilters = parser.values(clDescLibraryOption);
@@ -327,7 +333,8 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
     // Use the same native initialization boundary as execution. The readback
     // routine itself never rebuilds or resets a model and never calculates.
     environment->ModelInit();
-    auto snapshot = NmsdkTools::InspectModel(environment->GetModel());
+    auto snapshot = wantIdentity ? NmsdkTools::IdentifyModel(environment->GetModel())
+                                 : NmsdkTools::InspectModel(environment->GetModel());
     snapshot["channel"] = channel;
     snapshot["inspection_phase"] = "post_native_init_without_calculation";
     valid = valid && snapshot["valid"].toBool() && environment->GetModel()->IsInit();
@@ -335,7 +342,7 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
    }
    QJsonObject document;
    document["schema_version"] = 1;
-   document["kind"] = "project_effective_model_readback";
+   document["kind"] = wantIdentity ? "project_semantic_model_identity" : "project_effective_model_readback";
    document["valid"] = valid;
    document["channels"] = channels;
    if(!QDir().mkpath(QFileInfo(inspectionPath).absolutePath()))
