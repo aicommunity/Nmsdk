@@ -1,0 +1,31 @@
+Note: Google Test filter = TimeLearnerNativeLifecycle.*
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from TimeLearnerNativeLifecycle
+[ RUN      ] TimeLearnerNativeLifecycle.ResetRefreshesSynapseStepCoefficients
+/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_LifecycleContracts.cpp:53: Failure
+Expected equality of these values:
+  synapse.SecretionSteps()
+    Which is: 2
+  20.0
+    Which is: 20
+/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_LifecycleContracts.cpp:54: Failure
+Expected equality of these values:
+  synapse.DissociationSteps()
+    Which is: 4
+  40.0
+    Which is: 40
+[  FAILED  ] TimeLearnerNativeLifecycle.ResetRefreshesSynapseStepCoefficients (1047 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.BuildResetAndCalculateHaveObservableNativeOrder
+[       OK ] TimeLearnerNativeLifecycle.BuildResetAndCalculateHaveObservableNativeOrder (0 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.StorageImageSurvivesFreshTakeAndReuse
+[       OK ] TimeLearnerNativeLifecycle.StorageImageSurvivesFreshTakeAndReuse (9 ms)
+[----------] 3 tests from TimeLearnerNativeLifecycle (1057 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (1057 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] TimeLearnerNativeLifecycle.ResetRefreshesSynapseStepCoefficients
+
+ 1 FAILED TEST
