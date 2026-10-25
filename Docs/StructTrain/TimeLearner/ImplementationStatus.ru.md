@@ -51,7 +51,13 @@ PulseLib CTest прошли; реальные Classic/Branch Test-проекты
 с binary provenance и passing traces. Growth/default-profile и расширенная
 fresh/reuse матрица остаются в работе; научное A/B не заменяется unit-тестами.
 
-Согласованные develop merge: Rdk 297f4716938fdd6f930100ef772385d8e37c3894,
+Подэтап 4.5: opt-in registry проверяет отдельную native копию образа, коллизии
+имён и сохранность физики. Исправлен общий UContainer::Copy: инициализация
+прежнего графа больше не сохраняется после замены детей. На обоих серверах
+15 targeted cases и четыре maintained Rdk/PulseLib CTest suites прошли.
+Применение registry к production profiles, росту и versioned export ещё впереди.
+
+Согласованные develop merge: Rdk c80200bf1cd2bc8beec35546d3022da86afd35c9,
 PulseLib 735fea58af4b1815dc332c7d38af5bf4f68d0855,
 Bin 7136679740c5aa97def6fd3700b7b781d97af8f2. Корень содержит эти gitlinks.
 Все изменения вводятся merge commits; tested SHA сохранены в manifests.
