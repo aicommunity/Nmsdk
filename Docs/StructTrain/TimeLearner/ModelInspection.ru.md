@@ -18,10 +18,19 @@ configuration и effective graph учитываются раздельно.
 
 JSON schema 1 содержит именованное дерево компонентов и классы, actual child
 order, frequency, flags Init/Ready/Activity, параметры/состояния через штатный
-serializer Rdk, connected flags, разрешённые output→input connectors, effective
+serializer Rdk, connected flags, прямые property bindings с индексами входов, effective
 C/R/TC/PSI и соответствие cached membrane/channel pointers именованному графу.
 NaN/Inf не заменяются нулём: выдаются null с diagnostics и valid=false. Ссылка
-кэша/connector за пределы полного графа также делает readback невалидным.
+кэша/источника за пределы полного графа также делает readback невалидным.
+
+Источники читаются через read-only API UIPropertyInput::GetDataSources, а не
+реестр UItem connectors: прямой SetPointer не обязан создавать UItem. UVProperty
+отражает приоритет ExternalDataSource над ConnectedOutputs, как native GetData;
+порядок vector slots сохраняется. Неизвестная реализация connected property,
+пустой или неразрешённый источник запрещает valid=true. API не вызывает GetData
+и не заполняет lazy cache; общий serializer параметров может штатно читать данные.
+Снимок выполняется при остановленном расчёте и без параллельного изменения графа.
+Изменение виртуального интерфейса требует согласованной пересборки Rdk и модулей.
 
 Это readback, а не model export или checkpoint. Generic rdk_value сохраняет
 нативное представление Rdk, которое может быть текстом скаляра или XML массива.
