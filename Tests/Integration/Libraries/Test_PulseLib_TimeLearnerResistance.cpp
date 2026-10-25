@@ -448,14 +448,15 @@ public:
         NoImproveCount.assign(count, 7);
         InvalidPeakNoActionCount.assign(count, 2);
         DendLastAbsDt.assign(count, 0.0005);
+        Dissynchronization.assign(count, 0.0005);
         DendStatus.assign(count, 1);
         SynapseStatus.assign(count, -1);
         AmpDifference.assign(count, 0.125);
     }
 
-    void ReopenAfterStructuralChangeForTest()
+    void ReopenAfterStructuralChangeForTest(int edited_pulse = -1)
     {
-        InvalidatePulseSyncAfterStructuralChange();
+        InvalidatePulseSyncAfterStructuralChange(edited_pulse);
     }
 
     bool AllPulsesSyncedForTest() const
@@ -596,6 +597,142 @@ public:
         return DendBestEffortSynced.at(static_cast<size_t>(pulse));
     }
 
+    // Mode=1 TipR@Rmin + length sign-flip thrash (D2 residual / br25_preinh).
+    void SetRminLengthThrashState(const std::vector<int>& lengths, int active)
+    {
+        SetOrderState(lengths, active, 100, true, false);
+        NormalizationMode = 1;
+        EnableRmaxLengthEscape = false;
+        ResistanceMin = 2.88e6;
+        ResistanceMax = 1.0e10;
+        ResistanceMinByInput = std::vector<double>(lengths.size(), 2.88e6);
+        TipSynapseResistance = std::vector<double>(lengths.size(), 2.88e6);
+        PeakSeen.assign(lengths.size(), false);
+        PeakSeen.at(static_cast<size_t>(active)) = true;
+        InitialSomaPotential.assign(lengths.size(), 0.015);
+        MaxIterSomaAmp.assign(lengths.size(), 0.01);
+        MaxIterSomaAmp.at(static_cast<size_t>(active)) = 0.01;
+        NumSynapse.assign(lengths.size(), 1);
+        // Force delay_use path: EstDelayPerSeg * (L-1) yields |dt| > SyncTol
+        // with opposite sign vs PrevDissynchronization (thrash).
+        EstDelayPerSeg = 0.01;
+        ExpectedPulseRelTimes.assign(lengths.size(), 0.0);
+        ExpectedPulseRelTimes.at(static_cast<size_t>(active)) = 0.08;
+        PeakRel.assign(lengths.size(), 0.0);
+        PeakRel.at(static_cast<size_t>(active)) = 0.48;
+        StoredPeakRel.assign(lengths.size(), 0.0);
+        StoredPeakRel.back() = 0.4945;
+        DelayFromPulse.assign(lengths.size(), 0.0);
+        // delay_k ≈ delay_len so DelayUseOf returns cable estimate.
+        const int L = lengths.at(static_cast<size_t>(active));
+        DelayFromPulse.at(static_cast<size_t>(active)) = EstDelayPerSeg * double(L - 1);
+        PrevPeakRel.assign(lengths.size(), 0.0);
+        PrevPeakRel.back() = 0.4945;
+        HasPrevPeakSnapshot = true;
+        PulseSynced.assign(lengths.size(), false);
+        PulseSynced.back() = true;
+        // needed = 0.4945 - 0.08 = 0.4145; delay_use ≈ 0.01*(L-1)
+        // For L=17 → delay=0.16 → dt=+0.2545; set prev_dt negative smaller | |.
+        PrevDissynchronization.assign(lengths.size(), 0.0);
+        PrevDissynchronization.at(static_cast<size_t>(active)) = -0.30;
+        Dissynchronization.assign(lengths.size(), 0.0);
+        Dissynchronization.at(static_cast<size_t>(active)) = 0.2545;
+        LastLengthDelta = 1;
+        LastLengthDeltaDendrite = active;
+        NoImproveCount.assign(lengths.size(), 0);
+        MDMatrix<double> pattern;
+        pattern.Assign(static_cast<int>(lengths.size()), 1, 0.0);
+        for (int i = 0; i < int(lengths.size()); ++i)
+            pattern(i, 0) = ExpectedPulseRelTimes.at(static_cast<size_t>(i));
+        InputPattern = pattern;
+        PrevInputPattern = pattern;
+    }
+
+    void SetRminOppositeStepState(double est_delay_per_seg)
+    {
+        EstDelayPerSeg = est_delay_per_seg;
+        const int active = ActivePulseIndex;
+        const auto lengths = DendriteLength.GetData();
+        const int L = lengths.at(static_cast<size_t>(active));
+        DelayFromPulse.at(static_cast<size_t>(active)) =
+            est_delay_per_seg * double(L - 1);
+        // Keep LastLengthDelta=+1 so opposite dt<0 triggers thrash BE.
+        LastLengthDelta = 1;
+        LastLengthDeltaDendrite = active;
+        PrevDissynchronization.at(static_cast<size_t>(active)) = 0.20;
+    }
+
+    // Force |dt| into (SyncTol, SyncTol*kRminLengthTolFactor] at TipR@Rmin.
+    void SetRminRelaxedBandState(double target_abs_dt)
+    {
+        const int active = ActivePulseIndex;
+        SyncTolerance = 0.00104;
+        const auto lengths = DendriteLength.GetData();
+        const int L = lengths.at(static_cast<size_t>(active));
+        // needed = StoredPeakRel[ref] - expected ≈ 0.4945 - 0.08 = 0.4145
+        // delay_len = EstDelayPerSeg*(L-1); choose EstDelay so |needed-delay|=target.
+        const double needed = 0.4145;
+        EstDelayPerSeg = (needed - target_abs_dt) / double(std::max(1, L - 1));
+        DelayFromPulse.at(static_cast<size_t>(active)) =
+            EstDelayPerSeg * double(L - 1);
+        LastLengthDelta = 0;
+        LastLengthDeltaDendrite = -1;
+        PrevDissynchronization.at(static_cast<size_t>(active)) = target_abs_dt;
+    }
+
+    // PeakSeen=1, SomaPeakValid=0, TipR@Rmin, |model dt| in relaxed band.
+    void SetInvalidPeakRminRelaxedState(double target_abs_dt)
+    {
+        SetRminLengthThrashState({17, 13, 3, 1}, 0);
+        SetRminRelaxedBandState(target_abs_dt);
+        SomaPeakValid.assign(4, false);
+        PeakSeen.assign(4, false);
+        PeakSeen[0] = true;
+        // Collapsed but non-zero amp so peak_attempted is true.
+        MaxIterSomaAmp.assign(4, 0.0);
+        MaxIterSomaAmp[0] = 1.0e-7;
+        InitialSomaPotential.assign(4, 0.015);
+        InitialSomaPotential[0] = 0.015;
+    }
+
+    // Mode=0 amp-collapse at the early N floor with a measured peak (D7).
+    // lengths must encode whether L[active] > L[active+1] (seg_ok) or not.
+    void SetMode0EarlyAmpCollapseState(
+        const std::vector<int>& lengths,
+        int active,
+        int synapses)
+    {
+        SetOrderState(lengths, active, 100, true, false);
+        NormalizationMode = 0;
+        PeakSeen.assign(lengths.size(), false);
+        PeakSeen.at(static_cast<size_t>(active)) = true;
+        InitialSomaPotential.assign(lengths.size(), 0.015);
+        MaxIterSomaAmp.assign(lengths.size(), 0.0);
+        MaxIterSomaAmp.at(static_cast<size_t>(active)) = 1.0e-9;
+        {
+            std::vector<int> num_synapses(lengths.size(), 1);
+            num_synapses.at(static_cast<size_t>(active)) = synapses;
+            NumSynapse = num_synapses;
+        }
+        // dt > SyncTolerance so timing-only accept is not taken; force the
+        // early-floor / grow branch. DelayLenOf uses EstDelayPerSeg * (L-1).
+        EstDelayPerSeg = 0.001;
+        ExpectedPulseRelTimes.assign(lengths.size(), 0.0);
+        ExpectedPulseRelTimes.at(static_cast<size_t>(active)) = 0.08;
+        PeakRel.assign(lengths.size(), 0.0);
+        PeakRel.at(static_cast<size_t>(active)) = 0.48;
+        StoredPeakRel.assign(lengths.size(), 0.0);
+        StoredPeakRel.back() = 0.4945;
+        DelayFromPulse.assign(lengths.size(), 0.0);
+        DelayFromPulse.at(static_cast<size_t>(active)) = 0.05;
+        PrevPeakRel.assign(lengths.size(), 0.0);
+        PrevPeakRel.back() = 0.4945;
+        HasPrevPeakSnapshot = true;
+        PulseSynced.assign(lengths.size(), false);
+        PulseSynced.back() = true;
+        NoImproveCount.assign(lengths.size(), 0);
+    }
+
     double InvalidPeakModelTimingError(int pulse) const
     {
         const size_t index = static_cast<size_t>(pulse);
@@ -614,6 +751,18 @@ public:
     void SetDissynchronization(int pulse, double value)
     {
         Dissynchronization.at(static_cast<size_t>(pulse)) = value;
+    }
+
+    void ClearPeakAttemptForTest(int pulse)
+    {
+        if (pulse < int(MaxIterSomaAmp.size()))
+            MaxIterSomaAmp[static_cast<size_t>(pulse)] = 0.0;
+        if (int(PeakSeen.size()) != NumInputDendrite.GetData())
+            PeakSeen.assign(static_cast<size_t>(NumInputDendrite.GetData()), false);
+        else
+            PeakSeen[static_cast<size_t>(pulse)] = false;
+        if (pulse < int(SomaPeakValid.size()))
+            SomaPeakValid[static_cast<size_t>(pulse)] = false;
     }
 
     double DissynchronizationAt(int pulse) const
@@ -771,6 +920,30 @@ TEST(BranchStructuralSyncInvalidationTest, ReopensCommittedPulsesAndReferenceAnc
         << "the reference pulse must be measured again before the earlier pulses are retuned";
 }
 
+TEST(BranchStructuralSyncInvalidationTest, ScopedReopenKeepsAnchorWhenEarlierPulseEdited)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetOrderState({1, 12, 6, 1}, 1, 100);
+    learner.SetCommittedPulseStatesForTest();
+    ASSERT_TRUE(learner.AllPulsesSyncedForTest());
+
+    learner.ReopenAfterStructuralChangeForTest(1);
+
+    EXPECT_FALSE(learner.PulseSyncedForTest(0));
+    EXPECT_FALSE(learner.PulseSyncedForTest(1));
+    EXPECT_TRUE(learner.PulseSyncedForTest(2))
+        << "later committed pulses stay synced after an earlier structural edit";
+    EXPECT_TRUE(learner.PulseSyncedForTest(3))
+        << "anchor stays synced so SelectActive returns the edited pulse";
+    EXPECT_EQ(learner.SelectedPulseForTest(), 1);
+    // Scoped ±1 length edits must keep the no-improve streak; clearing it on
+    // every invalidate freezes W10 @25 ms in an L=5↔6 oscillation.
+    EXPECT_EQ(learner.NoImproveCountForTest(0), 7);
+    EXPECT_EQ(learner.NoImproveCountForTest(1), 7);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountForTest(0), 2);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountForTest(1), 2);
+}
+
 TEST(BranchSegmentOrderTransitionTest, RefreshesTimingErrorBeforeOrderRepairReturn)
 {
     BranchSegmentOrderHarness learner;
@@ -808,6 +981,86 @@ TEST(BranchSegmentOrderTransitionTest, RepairsOrderAfterConfirmedAmpCollapseWith
     EXPECT_EQ(learner.FailureReason(), 0);
 }
 
+TEST(BranchEarlyAmpCollapseSegOrderTest, DoesNotArmBestEffortWhenOrderBroken)
+{
+    // M0 abort class: N>=8 amp-collapse with L[k]<=L[k+1] must grow, not BE.
+    BranchSegmentOrderHarness learner;
+    learner.SetMode0EarlyAmpCollapseState({1, 65, 89, 1}, 1, 8);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_FALSE(learner.IsBestEffortSynced(1))
+        << "early Mode=0 BE must wait until L[k]>L[k+1] (D7)";
+    EXPECT_EQ(learner.LengthStatus(1), 1)
+        << "broken seg-order must keep requesting +L";
+    EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchEarlyAmpCollapseSegOrderTest, ArmsBestEffortAfterOrderRestored)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetMode0EarlyAmpCollapseState({1, 90, 89, 1}, 1, 8);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_TRUE(learner.IsBestEffortSynced(1))
+        << "early Mode=0 BE is legal once L[k]>L[k+1]";
+    EXPECT_EQ(learner.LengthStatus(1), 0);
+    EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchRminLengthThrashTest, ArmsBestEffortOnSignFlipAtRmin)
+{
+    // br25_preinh class: TipR@Rmin, L order ok, sign-flip thrash → BE not idle.
+    BranchSegmentOrderHarness learner;
+    learner.SetRminLengthThrashState({17, 13, 3, 1}, 0);
+
+    ASSERT_TRUE(learner.DecideLength(0));
+    EXPECT_TRUE(learner.IsBestEffortSynced(0))
+        << "TipR@Rmin length thrash must arm BE so PulseSynced can commit (D2)";
+    EXPECT_EQ(learner.LengthStatus(0), 0);
+    EXPECT_EQ(learner.FailureReason(), 0);
+}
+
+TEST(BranchRminLengthThrashTest, ArmsBestEffortOnOppositeLengthStepAtRmin)
+{
+    // Cold br25_preinh: last apply +1, next status wants -1 (or vice versa) at Rmin.
+    BranchSegmentOrderHarness learner;
+    learner.SetRminLengthThrashState({18, 13, 3, 1}, 0);
+    // needed≈0.4145; EstDelayPerSeg=0.03 → delay_len=0.51 → dt<0 while
+    // LastLengthDelta=+1 → opposite-direction thrash BE.
+    learner.SetRminOppositeStepState(0.03);
+
+    ASSERT_TRUE(learner.DecideLength(0));
+    EXPECT_TRUE(learner.IsBestEffortSynced(0))
+        << "opposite ±L after TipR@Rmin apply must arm BE (D2 cold path)";
+    EXPECT_EQ(learner.LengthStatus(0), 0);
+}
+
+TEST(BranchRminLengthThrashTest, AcceptsRminRelaxedTimingBandWithoutLengthStep)
+{
+    // Cold: |dt|≈0.00129 > SyncTol≈0.00104 but < SyncTol*4 → stop ±L, arm BE.
+    BranchSegmentOrderHarness learner;
+    learner.SetRminLengthThrashState({17, 13, 3, 1}, 0);
+    learner.SetRminRelaxedBandState(0.00129);
+
+    ASSERT_TRUE(learner.DecideLength(0));
+    EXPECT_EQ(learner.LengthStatus(0), 0)
+        << "TipR@Rmin must not ±L inside SyncTol*kRminLengthTolFactor";
+    EXPECT_TRUE(learner.IsBestEffortSynced(0))
+        << "relaxed Rmin band outside tight SyncTol still needs BE for Finish";
+}
+
+TEST(BranchRminLengthThrashTest, InvalidPeakPathAcceptsRminRelaxedBand)
+{
+    // Cold br25_preinh: PeakSeen=1, SomaPeakValid=0, TipR@Rmin, |dt| in band.
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakRminRelaxedState(0.00129);
+
+    ASSERT_TRUE(learner.DecideLength(0));
+    EXPECT_EQ(learner.LengthStatus(0), 0);
+    EXPECT_TRUE(learner.IsBestEffortSynced(0))
+        << "invalid-peak path must BE at TipR@Rmin inside relaxed timing band";
+}
+
 TEST(BranchSegmentOrderTransitionTest, RefusesOrderRepairAtMaxLengthAfterAmpCollapse)
 {
     BranchSegmentOrderHarness learner;
@@ -833,11 +1086,12 @@ TEST(BranchSegmentOrderTransitionTest, RefusesWhenMaxLengthCannotRestoreOrder)
 TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionBurstsAtRmin)
 {
     BranchSegmentOrderHarness learner;
-    learner.SetInvalidPeakNoActionState(1.0e6, false);
+    // Timing already ok: length cannot help, TipR@Rmin, amp collapsed → refuse.
+    learner.SetInvalidPeakNoActionState(1.0e6, true);
     ASSERT_NEAR(learner.TipResistance(1), learner.MinimumResistance(), 1e-9);
     ASSERT_FALSE(learner.IsPulsePeakValid(1));
     ASSERT_TRUE(learner.IsReferencePulseSynced());
-    ASSERT_GT(std::fabs(learner.InvalidPeakModelTimingError(1)), 0.02);
+    ASSERT_NEAR(learner.InvalidPeakModelTimingError(1), 0.0, 1e-12);
 
     for (int burst = 1; burst < 3; ++burst)
     {
@@ -854,6 +1108,36 @@ TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionBurstsAtRmin)
     EXPECT_EQ(learner.Phase(), 5);
     EXPECT_EQ(learner.LengthStatus(1), 0)
         << "the refusal must preserve the no-length-change-without-peak contract";
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, TriesLengthWhenTimingStillWrongDespiteCollapsedAmp)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(1.0e6, false);
+    ASSERT_GT(std::fabs(learner.InvalidPeakModelTimingError(1)), 0.02);
+
+    ASSERT_TRUE(learner.DecideLength(1));
+    EXPECT_EQ(learner.FailureReason(), 0);
+    EXPECT_EQ(learner.Phase(), 0);
+    EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 0)
+        << "collapsed amp with |dt|>tol must try length before InvalidPeakNoRecovery";
+    EXPECT_EQ(learner.LengthStatus(1), 1);
+}
+
+TEST(BranchInvalidPeakNoRecoveryTest, DoesNotCountUnmeasuredBurstsTowardRefusal)
+{
+    BranchSegmentOrderHarness learner;
+    learner.SetInvalidPeakNoActionState(1.0e6, false);
+    learner.ClearPeakAttemptForTest(1);
+
+    for (int burst = 0; burst < 5; ++burst)
+    {
+        ASSERT_TRUE(learner.DecideLength(1));
+        EXPECT_EQ(learner.FailureReason(), 0);
+        EXPECT_EQ(learner.Phase(), 0);
+        EXPECT_EQ(learner.InvalidPeakNoActionCountAt(1), 0)
+            << "empty PeakSeen/MaxAmp windows must not arm InvalidPeakNoRecovery";
+    }
 }
 
 TEST(BranchInvalidPeakNoRecoveryTest, RefusesWhenTimingMatchesButAmplitudeCannotRecover)
@@ -880,8 +1164,10 @@ TEST(BranchInvalidPeakNoRecoveryTest, RefusesWhenTimingMatchesButAmplitudeCannot
 TEST(BranchInvalidPeakNoRecoveryTest, RefusesAfterRepeatedNoActionAboveRmin)
 {
     BranchSegmentOrderHarness learner;
-    learner.SetInvalidPeakNoActionState(2.0e6, false);
+    // Invalid peak blocks TipR feedback even above Rmin; with timing ok refuse.
+    learner.SetInvalidPeakNoActionState(2.0e6, true);
     ASSERT_GT(learner.TipResistance(1), learner.MinimumResistance());
+    ASSERT_NEAR(learner.InvalidPeakModelTimingError(1), 0.0, 1e-12);
 
     for (int burst = 1; burst < 3; ++burst)
     {
@@ -1841,6 +2127,12 @@ public:
     bool Decide() { return ChangeSynapseStatus(0); }
     int PendingCountChange() const { return SynapseStatus[0]; }
     bool IsAmpNormalized() const { return AllSynapsesNormalized(); }
+
+    void SetUnmeasuredPeakState()
+    {
+        MaxIterSomaAmp = {0.0, 0.0};
+        PeakSeen.assign(2, false);
+    }
 };
 
 class BranchStructuralDeadTipHarness : public NMSDK::NNeuronTimeLearnerBranch
@@ -1868,13 +2160,19 @@ public:
     bool Decide() { return ChangeSynapseStatus(0); }
     int PendingCountChange() const { return SynapseStatus[0]; }
     bool IsAmpNormalized() const { return AllSynapsesNormalized(); }
+
+    void SetUnmeasuredPeakState()
+    {
+        MaxIterSomaAmp = {0.0, 0.0};
+        PeakSeen.assign(2, false);
+    }
 };
 
 TEST(StructuralDeadTipRecoveryTest, ClassicContinuesAddingBelowTheStructuralCap)
 {
     ClassicStructuralDeadTipHarness learner;
     learner.Default();
-    learner.SetDeadTipState(8);
+    learner.SetDeadTipState(3);
 
     ASSERT_TRUE(learner.Decide());
     EXPECT_EQ(learner.PendingCountChange(), 1)
@@ -1913,11 +2211,46 @@ TEST(StructuralDeadTipRecoveryTest, BranchContinuesAddingBelowTheStructuralCap)
 {
     BranchStructuralDeadTipHarness learner;
     learner.Default();
-    learner.SetDeadTipState(8);
+    learner.SetDeadTipState(3);
 
     ASSERT_TRUE(learner.Decide());
     EXPECT_EQ(learner.PendingCountChange(), 1)
-        << "a best-effort timing estimate must not suppress the only structural amplitude control";
+        << "below kEarlyAmpCollapseSynapseFloor, unmeasurable amp may still request +N";
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchStopsAddingAtEarlyAmpCollapseFloor)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0)
+        << "Mode=0 must not climb N past the early amp-collapse floor on noise-floor amp";
+}
+
+TEST(StructuralDeadTipRecoveryTest, BranchDoesNotAddWhenPeakWasNeverMeasured)
+{
+    BranchStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+    learner.SetUnmeasuredPeakState();
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0)
+        << "PeakLocked/unmeasured bursts must not grow N from Initial-vs-zero amp";
+}
+
+TEST(StructuralDeadTipRecoveryTest, ClassicDoesNotAddWhenPeakWasNeverMeasured)
+{
+    ClassicStructuralDeadTipHarness learner;
+    learner.Default();
+    learner.SetDeadTipState(8);
+    learner.SetUnmeasuredPeakState();
+
+    ASSERT_TRUE(learner.Decide());
+    EXPECT_EQ(learner.PendingCountChange(), 0)
+        << "PeakLocked/unmeasured bursts must not grow N from Initial-vs-zero amp";
 }
 
 TEST(StructuralDeadTipRecoveryTest, BranchStopsAddingAtTheStructuralCap)
@@ -1934,7 +2267,7 @@ TEST(StructuralDeadTipRecoveryTest, BranchDoesNotAcceptUnmeasurableAmplitudeBelo
 {
     BranchStructuralDeadTipHarness learner;
     learner.Default();
-    learner.SetDeadTipState(8);
+    learner.SetDeadTipState(3);
 
     EXPECT_FALSE(learner.IsAmpNormalized());
 }
