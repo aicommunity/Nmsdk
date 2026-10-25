@@ -188,8 +188,10 @@ TEST(TimeLearnerNativeRoundtrip, ModeZeroRebuildPreservesExplicitSiblingOrder)
     ASSERT_TRUE(neuron);
     SetIndividualValues(neuron);
     const auto before = NmsdkTools::InspectModel(neuron);
-    // Public structural setter invalidates Ready, forcing a real native Build.
-    neuron->NumDendriteMembranePartsVec = std::vector<int>{1, 2};
+    // A changed public structural parameter forces Build. Equal assignment
+    // can be suppressed by UProperty and must not be used to "wake" a setter.
+    // Mode 0 does not regenerate the graph from this length parameter.
+    neuron->NumDendriteMembraneParts = neuron->NumDendriteMembraneParts.GetData() + 1;
     ASSERT_FALSE(neuron->IsReady());
     neuron->Build();
     const auto after = NmsdkTools::InspectModel(neuron);
