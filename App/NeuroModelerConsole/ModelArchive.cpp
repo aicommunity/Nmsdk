@@ -145,7 +145,7 @@ void ValidateMetadata(const QJsonObject& metadata, const QJsonObject& identity)
     const std::set<QString> calibrationStatuses{"fixed","calibrated","nonseparable","invalid"};
     if(!calibrationStatuses.count(calibrationStatus)) Fail("invalid_calibration_metadata", calibrationStatus);
     RequiredString(calibration, "protocol");
-    if(!calibration["threshold"].isDouble() || !std::isfinite(calibration["threshold"].toDouble()) || calibration["threshold"].toDouble() <= 0.)
+    if(!calibration["threshold"].isDouble() || !std::isfinite(calibration["threshold"].toDouble()))
         Fail("invalid_calibration_metadata", "threshold");
     const auto ltPath = RequiredString(calibration, "ltzone_path");
     bool actualLtZone = false, matchedThreshold = false;
