@@ -2,6 +2,7 @@
 #include <QCommandLineParser>
 #include <QTimer>
 #include <QDir>
+#include <QFileInfo>
 #include <QString>
 #include <QDebug>
 #include <iostream>
@@ -68,6 +69,8 @@ const QCommandLineOption clDescForceOption(QStringList() << "F" << "cldesc-force
 const QCommandLineOption checkConfigOption(QStringList() << "check-config" << "validate-config",
                                           "Validate configuration file and exit with error code.",
                                           "path");
+const QCommandLineOption appIniOption(QStringList() << "app-ini",
+                                     "Application ini containing explicit resource paths.", "path");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
@@ -79,6 +82,7 @@ parser.addOption(clDescLibraryOption);
 parser.addOption(clDescClassOption);
 parser.addOption(clDescForceOption);
 parser.addOption(checkConfigOption);
+parser.addOption(appIniOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -101,24 +105,25 @@ parser.addOption(checkConfigOption);
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
          option == "--cldesc-class" || option == "-K" ||
-         option == "--check-config" || option == "--validate-config";
+         option == "--check-config" || option == "--validate-config" || option == "--app-ini";
   };
 
   for(int i=1; i<original.size(); ++i)
   {
    const QString token = original[i];
-   if(token == "--config" || token == "-c" ||
-      token == "--start-calc" || token == "-s" ||
-      token == "--calc-time" || token == "-t" ||
-      token == "--exit-after-calc" || token == "-x" ||
-      token == "--save-project" || token == "-S" ||
-      token == "--generate-cldesc" || token == "-g" ||
-      token == "--cldesc-lexicon" || token == "-l" ||
-      token == "--cldesc-library" || token == "-C" ||
-      token == "--cldesc-class" || token == "-K" ||
-      token == "--check-config" || token == "--validate-config")
+   const QString option = token.section('=', 0, 0);
+   if(option == "--config" || option == "-c" ||
+      option == "--start-calc" || option == "-s" ||
+      option == "--calc-time" || option == "-t" ||
+      option == "--exit-after-calc" || option == "-x" ||
+      option == "--save-project" || option == "-S" ||
+      option == "--generate-cldesc" || option == "-g" ||
+      option == "--cldesc-lexicon" || option == "-l" ||
+      option == "--cldesc-library" || option == "-C" ||
+      option == "--cldesc-class" || option == "-K" ||
+      option == "--check-config" || option == "--validate-config" || option == "--app-ini")
    {
-    if(shouldSkipValue(token) && i + 1 < original.size())
+    if(shouldSkipValue(option) && !token.contains('=') && i + 1 < original.size())
      ++i;
     continue;
    }
@@ -153,12 +158,26 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
  RDK::UAppCore<RDK::UApplication, RDK::UEngineControl, RDK::UProject, RDK::UServerControl, RDK::UTestManager, RDK::URpcDispatcher, RDK::URpcDecoderInternal, RDK::URpcDecoderCommon, RDK::UServerTransportTcp, RDK::UProjectDeployer> AppCore;
 
  std::string default_user_name;
+ QString applicationIni = parser.value(appIniOption).trimmed();
+ if(applicationIni.isEmpty() && !parser.isSet(appIniOption))
+  applicationIni = qEnvironmentVariable("NMSDK_APP_INI").trimmed();
+ const bool explicitApplicationIni = parser.isSet(appIniOption) || !applicationIni.isEmpty();
+ if(explicitApplicationIni && (applicationIni.isEmpty() || !QFileInfo(applicationIni).isFile()))
+ {
+  qCritical() << "Error: application ini does not exist:" << applicationIni;
+  return 2;
+ }
+ if(applicationIni.isEmpty())
+ {
+  const QString adjacentIni = QCoreApplication::applicationDirPath() + "/NeuroModelerConsole.ini";
+  applicationIni = QFileInfo(adjacentIni).isFile() ? adjacentIni : "NeuroModelerConsole.ini";
+ }
  QString name = qgetenv("USER");
  if (name.isEmpty())
      name = qgetenv("USERNAME");
  default_user_name = name.toLocal8Bit().constData();
 
- int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), "NeuroModelerConsole.ini",
+ int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), applicationIni.toLocal8Bit().constData(),
                (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
                forwardedArgc, forwardedArgv);
 
@@ -403,9 +422,9 @@ if(cliGenerateClDesc)
   return 2;
  }
 
- const QString workspaceRoot = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath(QStringLiteral("../../../"));
- const QString clDescPath = QDir(workspaceRoot).absoluteFilePath(QStringLiteral("Bin/ClDesc/"));
- const QString libsPath = QDir(workspaceRoot).absoluteFilePath(QStringLiteral("Bin/RTlibs/"));
+ const QString libsPath = QString::fromStdString(AppCore.application.GetLibrariesPath());
+ const QString clDescPath = QString::fromStdString(AppCore.application.GetClDescPath());
+ const QString workspaceRoot = QDir(libsPath).absoluteFilePath(QStringLiteral("../"));
  QDir().mkpath(clDescPath);
 
  AppCore.application.SetClDescPath(clDescPath.toStdString());
