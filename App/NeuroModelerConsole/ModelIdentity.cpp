@@ -30,7 +30,12 @@ QString F64(double value)
 template<class T> QJsonValue Scalar(T value) { return QString::fromStdString(std::to_string(value)); }
 template<> QJsonValue Scalar<double>(double value) { return F64(value); }
 template<> QJsonValue Scalar<bool>(bool value) { return value; }
-template<> QJsonValue Scalar<std::string>(std::string value) { return QString::fromStdString(value); }
+template<> QJsonValue Scalar<std::string>(std::string value)
+{
+    const auto text = QString::fromStdString(value);
+    if(text.toUtf8().toStdString() != value) throw std::runtime_error("invalid_utf8_parameter");
+    return text;
+}
 
 template<class T>
 bool Simple(UIProperty* property, const char* kind, QJsonObject& result)
@@ -73,6 +78,12 @@ bool Matrix(UIProperty* property, const char* kind, QJsonObject& result)
 QJsonObject Value(UIProperty* property)
 {
     QJsonObject result;
+    if(auto pair = dynamic_cast<UVBaseDataProperty<std::pair<std::string,std::string>>*>(property))
+    {
+        result["type"] = "utf8_pair";
+        QJsonArray values; values.append(Scalar(pair->GetData().first)); values.append(Scalar(pair->GetData().second));
+        result["value"] = values; return result;
+    }
     if(Simple<bool>(property, "boolean", result) || Simple<double>(property, "binary64", result) ||
        Simple<int>(property, "signed_integer", result) || Simple<long>(property, "signed_integer", result) ||
        Simple<long long>(property, "signed_integer", result) ||

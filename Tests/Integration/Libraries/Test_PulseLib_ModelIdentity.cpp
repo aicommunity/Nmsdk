@@ -25,11 +25,12 @@ public:
     UProperty<double, IdentityGraph, ptPubParameter> Gain;
     UProperty<std::vector<double>, IdentityGraph, ptPubParameter> Weights;
     UProperty<MDMatrix<int>, IdentityGraph, ptPubParameter> Mapping;
+    UProperty<std::pair<std::string,std::string>, IdentityGraph, ptPubParameter> LinkName;
     UProperty<double, IdentityGraph, ptPubState | ptOutput> First, Second;
     UProperty<std::vector<double>, IdentityGraph, ptPubState | ptInput> Input;
-    IdentityGraph() : Gain("Gain", this), Weights("Weights", this), Mapping("Mapping", this),
+    IdentityGraph() : Gain("Gain", this), Weights("Weights", this), Mapping("Mapping", this), LinkName("LinkName", this),
                       First("First", this), Second("Second", this), Input("Input", this)
-    { Gain = 1e-9; Weights = std::vector<double>{1., 2.}; Mapping->Assign(2, 3, 0); }
+    { Gain = 1e-9; Weights = std::vector<double>{1., 2.}; Mapping->Assign(2, 3, 0); LinkName = std::make_pair(std::string("Node"),std::string("Output")); }
     IdentityGraph* New(void) override { return new IdentityGraph; }
 };
 
@@ -89,6 +90,8 @@ TEST(TimeLearnerModelIdentity, IgnoresDynamicsAndRootNameButRetainsEveryPhysical
     graph->Weights = std::vector<double>{1.,2.}; EXPECT_EQ(Digest(graph), initial);
     graph->Mapping(1,2) = 7; EXPECT_NE(Digest(graph), initial);
     graph->Mapping(1,2) = 0; EXPECT_EQ(Digest(graph), initial);
+    graph->LinkName = std::make_pair(std::string("Other"),std::string("Output")); EXPECT_NE(Digest(graph), initial);
+    graph->LinkName = std::make_pair(std::string("Node"),std::string("Output")); EXPECT_EQ(Digest(graph), initial);
     graph->SetGlobalTimeStep(20000); graph->Init(); EXPECT_NE(Digest(graph), initial);
     graph->SetGlobalTimeStep(2000); graph->Init(); EXPECT_EQ(Digest(graph), initial);
     Artifact("canonical-fixture.json", NmsdkTools::IdentifyModel(graph));
