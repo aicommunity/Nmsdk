@@ -4,6 +4,17 @@
 **Ветка:** 2026-10-24T21:45Z (00:45 MSK 25.10)
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
+## E05 hourly 2026-10-25 05:05 MSK (02:05Z) - .17 idle gap, E5off_c control, REPASS e11 near end
+
+- .17 was idle 04:26-05:02 MSK (E05 queue exhausted, all E0-E5 points done, no new series without Tim). Queued E5off_c_s0_r BE3q/BE3i6/BE3g5 = Classic S50 tau 0.75 ms WITHOUT inhibition (completes the E5 inhibition on/off pair for Classic; E5_c_s1_r skipped: seed replicate is bit-identical). Started 05:02.
+- Finished since 04:05: E5off_c_s0_r and E5_c_s1_r Classic trains (final L 209 185 105 1, no metrics: refused, tests only via BE3); x11 BE3i6/BE3g5 for E1/E2/E3off/E4off and E3weak/E4/E5 BE3* on .17 - all negative, consistent with the 04:05 entry (m8_iti6 = m8_gate05: E1 -0.144, E2/E3off/E3weak -0.508/-0.509, E4/E4off -0.151, E5 -0.653).
+- Branch summary unchanged: only E4(off)_b m_S4 +0.072 and E5off_b m_S4 +0.036 are positive at short ITI; at ITI 6 s E4_b -0.103, E5off_b +0.036 (fired none, margin 3.6% of target response, no spike detection) -> no target detection.
+- REPASS_ITI6 .11: 73/74 dirs done, last batch jobs_013 (inh_c50 gen/nextseg, 6 Console) running; analyzed cases: 0 order-invariant positive.
+- Disk 05:00 MSK: .11 / 126 GB free (72% used); .17 / 115 GB free; /media/user/Data 404 GB free (89% used, >5% threshold). No archiving needed.
+- Load: .11 6 Console / 8 cores (REPASS), .17 2-3 Console / 12 cores (only remaining approved control).
+
+---
+
 ## E05 hourly 2026-10-25 04:05 MSK (01:05Z) - BE3 re-tests of refused Classic structures
 
 **BE3 (best-effort transfer v3, verified: be_check L/C/tips all true, analyzer rows present).** Classic Train structures tested at dt 0.5 ms, target not first (q = S/4,S/8; i6 = ITI 6 s; g5 = gate05):
