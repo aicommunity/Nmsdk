@@ -4,6 +4,15 @@
 **Ветка:** 2026-10-24T21:45Z (00:45 MSK 25.10)
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
+## E05 hourly 2026-10-25 06:10 MSK (03:10Z) - E05 series closed, REPASS_ITI6 .11 final
+
+- E5off_c_s0_r BE3 (Classic S50 tau 0.75 ms, NO inhibition; train_valid true, be_check L/C/tips true): m_S4 -0.468, m_S8 0.0, m8_iti6 -0.653, m8_gate05 -0.653 - bit-equal to E5_c (with inhibition). Inhibition has no effect in Classic at S50 as well (pair now complete: E4_c==E4off_c, E5_c==E5off_c). Finished 05:11 MSK.
+- REPASS_ITI6_e11 ALL_DONE 05:28 MSK (run_iti.py, ITI 6 s, ref + target pos4). Valid outcome: 13 cases with results.csv (S25 family br25*, inh_c25*), all sep < 0 in both orders (max -0.0002, min -0.0134); inh_c25_genasym_n0 timed out (rc 124, both orders). 32 cases (all inh_c50_* and inh_c100_*, 64 runs) gave NO_RESULTS: Console ran ~5 min but wrote no SelectivityLog/results.csv; their source *_work/Test dirs have no posttune_complete.flag (only posttune_mid_dbg.txt), i.e. the 23.10 inhibition-grid trainings for S50/S100 never produced a completed trained Test. These are VOID, not negative - no conclusion about S50/S100 inhibition from REPASS. Only order/ITI-invariant positive in all REPASS (both hosts) remains W08 / br480_tiprmin (see W08ctrl, m +0.018..0.020, lost with nextseg OFF).
+- Series E0-E5 fully executed; queues empty. .17 idle since 05:11, .11 idle since 05:28 MSK. No new series launched (needs Tim): Branch stop criterion (L 73/57/41 vs 400/334/200), Classic rmax refusal / amplitude attenuation on long dendrites, real replicate variability, retraining of S50/S100 inhibition grid if still wanted.
+- Disk 06:08 MSK: .11 / 118 GB free (74% used); .17 / 115 GB free (47%); /media/user/Data 404 GB free (89% used, above 5% threshold). No archiving needed.
+
+---
+
 ## E05 hourly 2026-10-25 05:05 MSK (02:05Z) - .17 idle gap, E5off_c control, REPASS e11 near end
 
 - .17 was idle 04:26-05:02 MSK (E05 queue exhausted, all E0-E5 points done, no new series without Tim). Queued E5off_c_s0_r BE3q/BE3i6/BE3g5 = Classic S50 tau 0.75 ms WITHOUT inhibition (completes the E5 inhibition on/off pair for Classic; E5_c_s1_r skipped: seed replicate is bit-identical). Started 05:02.
