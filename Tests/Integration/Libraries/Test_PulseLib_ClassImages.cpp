@@ -1,0 +1,131 @@
+#include <gtest/gtest.h>
+#include "../../../Rdk/Core/Engine/UClassImageRegistry.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
+#include "../../../App/NeuroModelerConsole/ModelInspection.h"
+#include "../Support/ConsoleLikeInit.h"
+#include <QJsonArray>
+#include <limits>
+
+namespace {
+using namespace RDK;
+using namespace NMSDK;
+
+UEPtr<NPulseChannel> Channel(double capacity)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto channel = dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject("NPExcChannelBio"));
+ if(channel)
+ {
+  channel->SetEnvironment(core.environment);
+  channel->SetGlobalTimeStep(2000);
+  channel->Capacity = capacity;
+  channel->Init();
+ }
+ return channel;
+}
+
+TEST(TimeLearnerClassImages, OwnsSeparateImageAndAllowsEquivalentAliasRegistration)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto source = Channel(1.23e-9);
+ ASSERT_TRUE(source);
+ const std::string name = "TimeLearnerUnit_ImageChannel";
+ const auto result = RegisterClassImage(core.storage, name, source);
+ EXPECT_TRUE(result.created);
+ const auto originalClass = source->GetClass();
+ source->Capacity = 9e-9;
+ core.storage->ReturnObject(source);
+ auto instance = dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(name));
+ ASSERT_TRUE(instance);
+ instance->SetEnvironment(core.environment);
+ instance->Init();
+ EXPECT_NE(instance->GetClass(), originalClass);
+ EXPECT_DOUBLE_EQ(instance->Capacity.GetData(), 1.23e-9);
+ EXPECT_EQ(DescribeClassImage(instance), result.descriptor);
+ const auto repeat = RegisterClassImage(core.storage, name, instance);
+ EXPECT_FALSE(repeat.created);
+ EXPECT_EQ(repeat.descriptor, result.descriptor);
+ core.storage->ReturnObject(instance);
+}
+
+TEST(TimeLearnerClassImages, CollisionCannotChangeAlreadyCreatedInstances)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto first = Channel(1e-9);
+ auto other = Channel(2e-9);
+ ASSERT_TRUE(first); ASSERT_TRUE(other);
+ const std::string name = "TimeLearnerUnit_CollisionChannel";
+ RegisterClassImage(core.storage, name, first);
+ auto instance = dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(name));
+ ASSERT_TRUE(instance);
+ try { RegisterClassImage(core.storage, name, other); FAIL() << "collision accepted"; }
+ catch(const ClassImageError& error) { EXPECT_EQ(error.code, "image_name_collision"); }
+ EXPECT_DOUBLE_EQ(instance->Capacity.GetData(), 1e-9);
+ core.storage->ReturnObject(instance);
+ core.storage->ReturnObject(other); core.storage->ReturnObject(first);
+}
+
+TEST(TimeLearnerClassImages, NonfiniteParameterAndExternalBindingAreRejected)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto source = Channel(1e-9), outside = Channel(2e-9);
+ ASSERT_TRUE(source); ASSERT_TRUE(outside);
+ source->Capacity.SetDataDirect(std::numeric_limits<double>::quiet_NaN());
+ try { RegisterClassImage(core.storage, "TimeLearnerUnit_Nonfinite", source); FAIL(); }
+ catch(const ClassImageError& error) { EXPECT_EQ(error.code, "nonfinite_parameter"); }
+ EXPECT_FALSE(core.storage->CheckClass("TimeLearnerUnit_Nonfinite"));
+ source->Capacity = 1e-9;
+ source->Capacity.SetPointer(0, &outside->Capacity);
+ try { RegisterClassImage(core.storage, "TimeLearnerUnit_ExternalBinding", source); FAIL(); }
+ catch(const ClassImageError& error) { EXPECT_EQ(error.code, "external_or_null_binding"); }
+ EXPECT_FALSE(core.storage->CheckClass("TimeLearnerUnit_ExternalBinding"));
+ source->Capacity.ResetPointer(0, &outside->Capacity);
+ core.storage->ReturnObject(outside); core.storage->ReturnObject(source);
+}
+
+TEST(TimeLearnerClassImages, NativeCopyKeepsExplicitHeterogeneousGraph)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto source = dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject("NSPNeuronGenAsymRmD001C1e9"));
+ ASSERT_TRUE(source);
+ source->SetEnvironment(core.environment);
+ source->SetGlobalTimeStep(2000);
+ source->Init();
+ source->StructureBuildMode = 0;
+ source->UseElementDefaults = false;
+ auto channel = source->GetComponentL<NPulseChannel>("Soma1.ExcChannel", true);
+ ASSERT_TRUE(channel);
+ channel->Capacity = 1.37e-9;
+ const auto registration = RegisterClassImage(core.storage, "TimeLearnerUnit_ExplicitNeuron", source);
+ core.storage->ReturnObject(source);
+ auto restored = dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject("TimeLearnerUnit_ExplicitNeuron"));
+ ASSERT_TRUE(restored);
+ restored->SetEnvironment(core.environment);
+ restored->Init();
+ EXPECT_EQ(DescribeClassImage(restored), registration.descriptor);
+ EXPECT_TRUE(NmsdkTools::InspectModel(restored)["valid"].toBool());
+ auto restoredChannel = restored->GetComponentL<NPulseChannel>("Soma1.ExcChannel", true);
+ ASSERT_TRUE(restoredChannel);
+ EXPECT_DOUBLE_EQ(restoredChannel->Capacity.GetData(), 1.37e-9);
+ core.storage->ReturnObject(restored);
+}
+
+TEST(TimeLearnerClassImages, ContradictingParentDefaultsCannotSilentlyErasePhysics)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ auto source = dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject("NSPNeuronGenAsymRmD001C1e9"));
+ ASSERT_TRUE(source);
+ source->SetEnvironment(core.environment);
+ source->Init();
+ ASSERT_TRUE(source->UseElementDefaults.GetData());
+ auto channel = source->GetComponentL<NPulseChannel>("Soma1.ExcChannel", true);
+ ASSERT_TRUE(channel);
+ channel->Capacity = 1.37e-9;
+ try { RegisterClassImage(core.storage, "TimeLearnerUnit_Contradiction", source); FAIL(); }
+ catch(const ClassImageError& error) { EXPECT_EQ(error.code, "native_copy_mismatch"); }
+ EXPECT_FALSE(core.storage->CheckClass("TimeLearnerUnit_Contradiction"));
+ EXPECT_DOUBLE_EQ(channel->Capacity.GetData(), 1.37e-9);
+ core.storage->ReturnObject(source);
+}
+}
