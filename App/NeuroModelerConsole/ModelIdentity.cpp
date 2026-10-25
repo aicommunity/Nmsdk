@@ -139,6 +139,35 @@ bool Sensitive(const std::string& name)
            normalized == "accesstoken" || normalized == "access_token" ||
            normalized == "secretkey" || normalized == "secret_key";
 }
+
+QString FirstDifference(const QJsonValue& a, const QJsonValue& b, const QString& path)
+{
+    if(a.type() != b.type()) return path;
+    if(a.isObject())
+    {
+        const auto x = a.toObject(), y = b.toObject();
+        for(auto i = x.begin(); i != x.end(); ++i)
+        {
+            if(!y.contains(i.key())) return path + "." + i.key();
+            const auto difference = FirstDifference(i.value(), y[i.key()], path + "." + i.key());
+            if(!difference.isEmpty()) return difference;
+        }
+        for(auto i = y.begin(); i != y.end(); ++i)
+            if(!x.contains(i.key())) return path + "." + i.key();
+    }
+    else if(a.isArray())
+    {
+        const auto x = a.toArray(), y = b.toArray();
+        if(x.size() != y.size()) return path + ".size";
+        for(int i = 0; i < x.size(); ++i)
+        {
+            const auto difference = FirstDifference(x[i], y[i], path + "[" + QString::number(i) + "]");
+            if(!difference.isEmpty()) return difference;
+        }
+    }
+    else if(a != b) return path;
+    return {};
+}
 }
 
 QJsonObject IdentifyModel(UEPtr<UContainer> model)
@@ -256,6 +285,46 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
         QByteArray canonical; Canonical(canonical, semantic);
         result["sha256"] = QString::fromLatin1(QCryptographicHash::hash(canonical, QCryptographicHash::Sha256).toHex());
     }
+    return result;
+}
+
+QJsonObject VerifyModelIdentity(const QJsonObject& expected, UEPtr<UContainer> model)
+{
+    QJsonObject result;
+    result["schema_version"] = 1; result["kind"] = "model_identity_verification";
+    result["valid"] = false; result["match"] = false;
+    if(expected["schema_version"] != QJsonValue(1) ||
+       expected["kind"] != QJsonValue("semantic_model_identity") ||
+       expected["canonical_encoding"] != QJsonValue("length-framed-utf8-binary64-v1") ||
+       expected["valid"] != QJsonValue(true) || !expected["diagnostics"].isArray() ||
+       !expected["diagnostics"].toArray().isEmpty() || !expected["model"].isObject() ||
+       expected["model"].toObject()["schema_version"] != QJsonValue(1))
+    {
+        result["reason"] = "invalid_expected_identity"; return result;
+    }
+    const auto semantic = expected["model"].toObject();
+    if(!semantic["nodes"].isArray() || semantic["nodes"].toArray().isEmpty() ||
+       !semantic["bindings"].isArray() || !semantic["caches"].isArray())
+    {
+        result["reason"] = "invalid_expected_identity"; return result;
+    }
+    QByteArray canonical; Canonical(canonical, semantic);
+    const auto recomputed = QString::fromLatin1(QCryptographicHash::hash(canonical, QCryptographicHash::Sha256).toHex());
+    if(expected["sha256"].toString() != recomputed)
+    {
+        result["reason"] = "expected_digest_mismatch"; return result;
+    }
+    const auto actual = IdentifyModel(model);
+    if(!actual["valid"].toBool())
+    {
+        result["reason"] = "actual_identity_invalid"; result["diagnostics"] = actual["diagnostics"]; return result;
+    }
+    result["valid"] = true;
+    result["expected_sha256"] = recomputed; result["actual_sha256"] = actual["sha256"];
+    const auto difference = FirstDifference(semantic, actual["model"], "model");
+    const bool match = difference.isEmpty() && expected["sha256"] == actual["sha256"];
+    result["match"] = match; result["reason"] = match ? "identical" : "model_mismatch";
+    if(!difference.isEmpty()) result["first_difference"] = difference;
     return result;
 }
 }
