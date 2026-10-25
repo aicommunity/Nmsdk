@@ -41,17 +41,17 @@ TEST(TimeLearnerNativeLifecycle, ResetRefreshesSynapseStepCoefficients)
     synapse.Default();
     synapse.SecretionTC = .001;
     synapse.DissociationTC = .002;
-    synapse.SetTimeStep(2000);
+    synapse.SetGlobalTimeStep(2000);
     synapse.Init();
     synapse.Reset();
     EXPECT_DOUBLE_EQ(synapse.SecretionSteps(), 2.0);
     EXPECT_DOUBLE_EQ(synapse.DissociationSteps(), 4.0);
-    synapse.SetTimeStep(20000);
+    synapse.SetGlobalTimeStep(20000);
     synapse.Reset();
     EXPECT_DOUBLE_EQ(synapse.SecretionSteps(), 20.0);
     EXPECT_DOUBLE_EQ(synapse.DissociationSteps(), 40.0);
     // Returning to the previous frequency follows the same native reset path.
-    synapse.SetTimeStep(2000);
+    synapse.SetGlobalTimeStep(2000);
     synapse.Reset();
     EXPECT_DOUBLE_EQ(synapse.SecretionSteps(), 2.0);
 }
