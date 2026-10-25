@@ -4,6 +4,8 @@
 #include <QCryptographicHash>
 #include <QJsonArray>
 #include <cmath>
+#include <cstring>
+#include <cstdint>
 #include <functional>
 #include <map>
 #include <set>
@@ -134,6 +136,22 @@ void ValidateMetadata(const QJsonObject& metadata, const QJsonObject& identity)
     RequiredString(calibration, "protocol");
     if(!calibration["threshold"].isDouble() || !std::isfinite(calibration["threshold"].toDouble()) || calibration["threshold"].toDouble() <= 0.)
         Fail("invalid_calibration_metadata", "threshold");
+    const auto ltPath = RequiredString(calibration, "ltzone_path");
+    bool actualLtZone = false, matchedThreshold = false;
+    for(const auto& entry : identity["model"].toObject()["caches"].toArray())
+        actualLtZone = actualLtZone || entry.toObject()["cached_ltzone"].toString() == ltPath;
+    for(const auto& entry : identity["model"].toObject()["nodes"].toArray())
+    {
+        const auto node = entry.toObject();
+        if(node["path"].toString() != ltPath) continue;
+        const auto data = node["parameters"].toObject()["Threshold"].toObject()["data"].toObject();
+        const auto text = data["value"].toString(); bool ok = false;
+        const std::uint64_t bits = text.toULongLong(&ok,16); double threshold;
+        std::memcpy(&threshold,&bits,sizeof(threshold));
+        matchedThreshold = ok && text.size() == 16 && data["type"].toString() == "binary64" &&
+            threshold == calibration["threshold"].toDouble();
+    }
+    if(!actualLtZone || !matchedThreshold) Fail("calibration_model_mismatch", ltPath);
     const auto conversion = metadata["conversion"].toObject();
     const auto mode = RequiredString(conversion, "mode");
     if(mode != "none" && mode != "parallel") Fail("invalid_conversion_metadata", mode);
