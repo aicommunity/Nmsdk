@@ -173,8 +173,11 @@ TEST(TimeLearnerNativeLifecycle, PooledRebuildRequiresEnvironmentThroughChannelS
         core.storage->TakeObject("ShutdownEnvironmentReader"));
     ASSERT_TRUE(probe);
     probe->SetEnvironment(core.environment);
-    probe->Init(); probe->Invalidate();
+    probe->Init();
     core.storage->ReturnObject(probe);
+    // ReturnObject changes Activity through the native path and can Build.
+    // Invalidate only after returning it so teardown must perform the rebuild.
+    probe->Invalidate();
     EXPECT_FALSE(probe->IsReady());
 }
 } // namespace
