@@ -139,12 +139,17 @@ class NativeArchive : public ::testing::TestWithParam<unsigned int> {};
 TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    const char* phase = "prepare";
+    try {
     auto model = Prepared(GetParam());
+    phase = "export";
     auto archive = NmsdkTools::ExportModelArchive(model,Metadata());
     ASSERT_GT(archive["class_definitions"].toArray().size(),0);
+    phase = "waveform";
     const auto waveform = Waveform(model,GetParam());
     EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(),model)["match"].toBool());
     QJsonObject fixture{{"archive",archive},{"frequency_hz",int(GetParam())},{"waveform",waveform}};
+    phase = "child";
     QTemporaryDir temporary; ASSERT_TRUE(temporary.isValid());
     QString directory = temporary.path();
     if(const char* artifacts = std::getenv("TIMELEARNER_ARCHIVE_TEST_DIR"))
@@ -171,6 +176,9 @@ TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess)
     EXPECT_EQ(child.exitCode(),0) << log.constData();
     if(child.exitCode()==0) EXPECT_LE(Read(output)["max_pairwise_error"].toDouble(),1e-12);
     core.storage->ReturnObject(model);
+    }
+    catch(const RDK::UException& error) { FAIL() << phase << ": " << error.CreateLogMessage(); }
+    catch(const std::exception& error) { FAIL() << phase << ": " << error.what(); }
 }
 INSTANTIATE_TEST_SUITE_P(SingleRate,NativeArchive,::testing::Values(2000u,20000u));
 

@@ -280,6 +280,7 @@ QJsonObject ImageSnapshot(UEPtr<UStorage> storage, UEPtr<UEnvironment> environme
 }
 
 QJsonObject ExportModelArchive(UEPtr<UContainer> model, const QJsonObject& metadata)
+try
 {
     if(!model || !model->GetStorage() || !model->GetEnvironment()) Fail("invalid_archive_context", "model/storage/environment");
     if(!dynamic_pointer_cast<NMSDK::NPulseNeuron>(model)) Fail("unsupported_archive_model", "NPulseNeuron graph required");
@@ -315,9 +316,11 @@ QJsonObject ExportModelArchive(UEPtr<UContainer> model, const QJsonObject& metad
     archive["sha256"] = CanonicalModelDataSha256(archive);
     return archive;
 }
+catch(const UException& error) { Fail("native_archive_export_failed",QString::fromStdString(error.CreateLogMessage())); }
 
 UEPtr<UContainer> ImportModelArchive(const QJsonObject& archive, UEPtr<UStorage> storage,
     UEPtr<UEnvironment> environment, const QString& implementationId)
+try
 {
     if(!storage || !environment) Fail("invalid_archive_context", "storage/environment");
     if(archive["schema_version"] != QJsonValue(1) || archive["kind"].toString() != "timelearner_model_archive" ||
@@ -380,4 +383,5 @@ UEPtr<UContainer> ImportModelArchive(const QJsonObject& archive, UEPtr<UStorage>
     if(!dynamic_pointer_cast<NMSDK::NPulseNeuron>(imported.object)) Fail("unsupported_archive_model", "NPulseNeuron graph required");
     return imported.Release();
 }
+catch(const UException& error) { Fail("native_archive_import_failed",QString::fromStdString(error.CreateLogMessage())); }
 }
