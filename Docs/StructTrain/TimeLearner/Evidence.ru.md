@@ -57,7 +57,7 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 | TL-009 | publisher | push check=False и rsync | child push failure, Git closure |
 | TL-010 | Rdk UNet XML property order | scalar L=3 восстанавливалась как 0 после setter StructureBuildMode | code fix + native scalar growth/XML и общий setter regression; подэтап 4.6 |
 | TL-011 | Rdk UStorage cleanup | native события Parent, Child, Child при одном ClearObjectsStorage | code fix: корни ownership forest; failing/passing baseline в s04-profiles-elder1 |
-| TL-012 | Rdk channel destruction | ASan: NPulseGenerator::AReset читает Environment после его delete в ChannelDestroy | code fix порядка уничтожения; финальная ASan приёмка и публикация в работе |
+| TL-012 | Rdk channel destruction | ASan: NPulseGenerator::AReset читает Environment после его delete в ChannelDestroy | code fix + runtime ASan 122 cases, pooled probe и failing baseline опубликованы в s04-profiles-m40 |
 
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.

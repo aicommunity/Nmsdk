@@ -126,7 +126,8 @@ Baseline root 6165ebc9c4ba67be01b3b108d7c2a806df6591d6; accepted source root
 86ba939a5c81365845f5bda80bdad0e3a10511bf; Rdk merge
 c80200bf1cd2bc8beec35546d3022da86afd35c9.
 
-Следующий подэтап — применение registry к декларативной физике и росту:
+Постановка подэтапа 4.6 — применение registry к декларативной физике и росту
+(результат описан ниже):
 
 1. NPulseMembrane сейчас использует один SynapseClassName для Exc/Inh. Для
    разных исходных Rs нужны отдельные optional ExcSynapseClassName и
@@ -147,7 +148,7 @@ heterogeneous profiles, интеграция проверки коллизий �
 multirate характеристика и сопоставление readback с ModelSpec. Прежние слабые fixtures
 не засчитываются как доказательство этих контрактов.
 
-## Подэтап 4.6 — физические storage-профили и рост (приёмка в работе)
+## Подэтап 4.6 — проверены физические storage-профили и рост
 
 Реализована цепочка образов Channel/Synapse → Membrane → Neuron в
 PulseLib/Core/TimeLearner/StorageProfiles. Физика задаётся рецептом до Train;
@@ -166,13 +167,28 @@ fallback к прежнему SynapseClassName. Их ClDesc добавлены в
 Полный прогон на M40 выявил аварию при shutdown после 121 успешных assertions.
 Общая проверка Rdk отдельно воспроизвела повторный Free: Parent, Child, Child.
 ClearObjectsStorage изменён на снимок корней владения и единственный native Free
-на корень. Причинная достаточность для аварии M40 ещё проверяется; один PASS на
-другом сервере её не доказывает. Baseline сохраняется, запускается ASan.
+на корень. ASan отдельно установил heap-use-after-free: ChannelDestroy удалял
+Environment до storage; последующий Reset генератора читал освобождённую среду.
+Теперь текущая модель освобождается при живой среде, затем уничтожается storage,
+затем Environment и logger. Native bool-контракт и scheduler не менялись.
 
-На Elder-1 root 075e5ec5f945923a2ad373468581312433e6f7f1 прошли 10 профильных
-проверок, общий regression очистки и четыре maintained CTest suites. Приёмка
-подэтапа и merge пока не выполнены: ожидается проверка M40 и Git-публикация
-артефактов. Нельзя считать текущие файлы отчёта published runtime evidence.
+На обоих серверах root 12f450c91755d268180a08d6b04f264f20bff273 прошли 11
+адресных проверок (10 profile cases и pooled shutdown probe), четыре maintained
+CTest suites. На M40 полный ASan run прошёл 122 tests и shutdown; отдельно прошли
+пробы Environment lifetime и очистки storage. ASAN_OPTIONS:
+detect_leaks=0:halt_on_error=1 — отсутствие всех утечек не утверждается.
+
+Артефакты опубликованы через Git: s04-profiles-elder1, s04-shutdown-elder1 и
+s04-profiles-m40 в Reports/StructTrain/TimeLearner. Сохранены failing baselines,
+runtime manifests, XML/readback, build/test logs и реальные waveform CSV.
+На каждой частоте сравниваются ненулевые отклики: 200/2000 отсчётов при
+2000/20000 Гц, max pairwise error=0. Все 196 хешируемых артефактов раздела
+проверены после локального checkout, включая gzip-потоки.
+
+Принятые child develop merge: Rdk b15f4384c4516c865afc59a83b487acd477744d0,
+PulseLib 77cc52d06852cef0ddcd256a528283dd90631f49,
+Bin 83ab62fcb40f62affd83f66ae68fcd557de55d53. Исходные tested SHA в manifests
+сохранены; merge commits их не подменяют.
 
 Рецепт не извлекает автоматически любую legacy-физику. Неописанные поля
 наследуются от объявленного базового образа; default — конкретный Asym baseline.

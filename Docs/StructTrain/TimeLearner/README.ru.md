@@ -11,6 +11,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Машинный inventory исходников](source_inventory.json).
 - [Контракт наблюдений и оценки](ObservationContract.ru.md).
 - [Readback фактического графа модели](ModelInspection.ru.md).
+- [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
+- [Явные физические storage-профили](../../../Libraries/Nmsdk-PulseLib/Docs/Analysis/TimeLearnerStorageProfiles.ru.md).
 
 Inventory перечисляет declarations, исходные выражения defaults и исторические
 script blobs. Это не runtime readback. Поле `semantic_review=pending` не означает
