@@ -8,6 +8,7 @@
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QCryptographicHash>
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
@@ -111,6 +112,32 @@ QJsonObject Read(const QString& path)
 void Seal(QJsonObject& archive)
 { archive.remove("sha256"); archive["sha256"] = NmsdkTools::CanonicalModelDataSha256(archive); }
 
+void ExpectImportFailure(const QJsonObject& archive, const char* reason)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    try {
+        auto unexpected = NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1");
+        core.storage->ReturnObject(unexpected); ADD_FAILURE() << "invalid archive accepted";
+    }
+    catch(const NmsdkTools::ModelArchiveError& error) { EXPECT_EQ(error.code,reason); }
+}
+
+QJsonObject EditXml(const QJsonObject& archive, const std::vector<std::string>& path, int edit)
+{
+    auto result = archive; auto graph = result["graph"].toObject();
+    USerStorageXML xml;
+    if(!xml.Load(graph["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph") ||
+       !xml.SelectNode(graph["component_name"].toString().toStdString())) throw std::runtime_error("fixture native XML unavailable");
+    for(const auto& node : path) if(!xml.SelectNode(node)) throw std::runtime_error("fixture XML edit path unavailable: "+node);
+    if(edit==0) xml.DelNode();
+    else if(edit==1) xml.SetNodeAttribute("Class","NPSynapse");
+    else xml.DelNodeInternalContent();
+    std::string text; if(!xml.Save(text)) throw std::runtime_error("fixture XML Save failed");
+    graph["native_xml"] = QString::fromStdString(text);
+    graph["native_xml_sha256"] = QString::fromLatin1(QCryptographicHash::hash(QByteArray::fromStdString(text),QCryptographicHash::Sha256).toHex());
+    result["graph"] = graph; Seal(result); return result;
+}
+
 TEST(TimeLearnerModelArchive, FreshProcessImport)
 {
     const char* input = std::getenv("TIMELEARNER_ARCHIVE_CHILD_INPUT");
@@ -204,6 +231,35 @@ TEST(TimeLearnerModelArchive, RejectsMalformedArchiveBeforeRegistration)
     EXPECT_EQ(core.storage->GetNumClasses(),classes);
     auto imported = NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1");
     ASSERT_TRUE(imported);
+    core.storage->ReturnObject(imported); core.storage->ReturnObject(model);
+}
+
+TEST(TimeLearnerModelArchive, RejectsLostGraphInformationEvenWithUpdatedFileHashes)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests(); auto model = Prepared(2000);
+    auto archive = NmsdkTools::ExportModelArchive(model,Metadata());
+    const auto classes = core.storage->GetNumClasses();
+    ExpectImportFailure(EditXml(archive,{"Components","Dendrite2_3","Components","ExcSynapse2","Parameters","Resistance"},0),"missing_archive_parameter");
+    ExpectImportFailure(EditXml(archive,{"Components","Dendrite2_2"},0),"archive_child_count_mismatch");
+    ExpectImportFailure(EditXml(archive,{"Components","Dendrite2_3","Components","ExcSynapse2"},1),"archive_node_class_mismatch");
+    EXPECT_EQ(core.storage->GetNumClasses(),classes);
+    model->StructureBuildMode = 0;
+    ASSERT_TRUE(model->CreateLink("PosGenerator","Output","Dendrite1_1.ExcSynapse1","Input"));
+    archive = NmsdkTools::ExportModelArchive(model,Metadata());
+    ExpectImportFailure(EditXml(archive,{"Links"},2),"archive_model_mismatch");
+    core.storage->ReturnObject(model);
+}
+
+TEST(TimeLearnerModelArchive, CalibrationMustMatchActualZoneWithoutInventingAThresholdSignRule)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests(); auto model = Prepared(2000);
+    auto metadata = Metadata(); auto calibration = metadata["calibration"].toObject();
+    calibration["threshold"] = .123; metadata["calibration"] = calibration;
+    EXPECT_THROW(NmsdkTools::ExportModelArchive(model,metadata),NmsdkTools::ModelArchiveError);
+    model->GetLTZone()->Threshold = 0.; calibration["threshold"] = 0.; metadata["calibration"] = calibration;
+    const auto archive = NmsdkTools::ExportModelArchive(model,metadata);
+    auto imported = NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1");
+    ASSERT_TRUE(imported); EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(),imported)["match"].toBool());
     core.storage->ReturnObject(imported); core.storage->ReturnObject(model);
 }
 }
