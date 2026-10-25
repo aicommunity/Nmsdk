@@ -1,12 +1,104 @@
 # Статус аудита TimeLearner Cold 2026-09-26
 
-Дата обновления: 2026-10-17 19:26 MSK.
+Дата обновления: 2026-10-19 (цикл N+1 **cold closeout**; старт цикла PostTune-fix / оси NeuronModel).  
+Канон группировки: [RESULT_GROUPING_HIERARCHY…](evidence/RESULT_GROUPING_HIERARCHY.ru.md).  
+План: [POST_P0_SYNTHESIS…](POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md) · execute: [N1_EXECUTE_READY…](N1_EXECUTE_READY.ru.md).  
+PulseLib `20c3e22`. Хосты `.11` ≤8 / `.17` ≤12. Монитор N+1 остановлен ~11:20.  
+**Sync `.17`:** 2026-10-19 root `54464c7fa`+ / PulseLib **`d52dc1c`** / Bin `f8f8d49f`+W48 queue.  
+**Cold PostTune-fix closeout:** PASS×3 ON **3/3** fires=`10000000` (`tl-ptfix-passx3-v4-17-…`). Политика: tiny-gap best-effort mid; silent mid для Test inference; **без** auto KeepDone TipR (D3 gen → явный KeepDone tip-mode / PostTune OFF, A2.1). Сводка: [POSTTUNE_FIX_COLD_SUMMARY…](evidence/POSTTUNE_FIX_COLD_SUMMARY_2026-10-19.ru.md). Монитор `AGENT_LOOP_TICK_ptfix` остановлен.
 
-## Текущий статус: аудит приостановлен
+Ниже результаты сгруппированы по иерархии **Trainer×Mode → Span → NeuronModel → Mod** (колонки PostTune ON/OFF). Исторический нарратив dual-track сохранён после этой сводки и не отменяет факты таблиц.
 
-По просьбе пользователя текущий аудит остановлен после промежуточного анализа. Новые сборки и обучающие запуски не выполняются. Подтверждённые результаты, разбор предположения о `MaxDendriteLength` и подробный порядок возобновления собраны в [промежуточном анализе и плане дальнейших исследований](INTERIM_ANALYSIS_AND_NEXT_RESEARCH_PLAN_2026-10-17.ru.md). Архивные изменения остаются открытыми кандидатами и не считаются отвергнутыми.
+---
 
-## Сводка на 2026-10-17
+## Trainer=Branch · Mode=N1 (равн. BR-M1 track)
+
+### Span=25 мс · NeuronModel=baseline (W10 Branch)
+
+| Mod | PostTune OFF: Need / fires / detected | PostTune ON: Need / fires / detected / notes | SHA / Host / RUN_ID |
+|---|---|---|---|
+| gen | 0 / `10110000` / **detected** (A2.1) | 0 / `00000000` silence; thr=`1` NonSeparable (N+1 D3) | PL `20c3e22`; OFF `.11` `tl-m1-n1-a21-ptoff-…`; ON `.17` `tl-m1-n1-d3-silence-…` |
+| preinh | 0 / `00000000` / silence (A2.1); TipR×0.75 A2.3 тоже silence | 0 / `00000000` silence; thr=`1` (N+1 D3) | те же RUN |
+| nextseg | — (PASS исторически с PostTune штатным путём) | **PASS** fires=`10000000` (PASS×3 d2v4) | `tl-m1-pass-regress-d2v4-17-…` / `.17` |
+
+A2.3 (TipR×0.75 post-Need=0) у gen дал all-fire `11111111` и не снял silence у preinh: глобальный TipR-down не лечит preinh и портит уже частичный gen.
+
+### Span=50 мс · NeuronModel=baseline
+
+| Mod | PostTune OFF | PostTune ON | SHA / Host / RUN_ID |
+|---|---|---|---|
+| preinh | — | **PASS** fires=`10000000` | PASS×3 d2v4 `.17` |
+| nextseg | — | Incomplete BR-D6 PeakSeen all0 L stuck1 | `tl-m1-n1-d6-br50ns-…` `.11` Need=1 |
+| gen | — | исторически Need=0+silence; в cold фикса — отдельно | HIST |
+
+### Span=100 мс · NeuronModel=baseline
+
+| Mod | PostTune OFF | PostTune ON | SHA / Host / RUN_ID |
+|---|---|---|---|
+| preinh | — | **PASS** fires=`10000000` | PASS×3 d2v4 |
+| nextseg | — | Incomplete BR-D6 peak-blind | M1-ext |
+| gen | — | канона `br100_gen` в W10 нет (дыра матрицы) | — |
+
+### NeuronModel=FastSpan (Branch)
+
+Конфигов Branch×FastSpan **ещё нет** — дыра плана PostTune-цикла (`SelectivityBranchFastSpan/`, волна W48).
+
+---
+
+## Trainer=Branch · Mode=N0 (равн. BR-M0 track)
+
+### Span=480 мс · NeuronModel=baseline W04
+
+| Mod | Итог | Host / RUN_ID |
+|---|---|---|
+| PSIoff W04 | Need=1, peak0=0, D7_bad=0 → класс BR-D6 pulse0; BR-D7 закрыт | `.11` `tl-m0-d7-20261018-20-27` |
+
+---
+
+## Trainer=Classic · Mode=N0
+
+### Span=25 мс · NeuronModel=baseline W01
+
+| Mod | PostTune / Test | Итог | Host / RUN_ID |
+|---|---|---|---|
+| PSIoff | N+1 cold | Need=1, incomplete (`CL-stall-short`) | `.17` `tl-cl-n1-w01-20261019-10-04` |
+
+### Span=50 мс · NeuronModel=baseline W01
+
+| Mod | PostTune / Test | Итог | Host / RUN_ID |
+|---|---|---|---|
+| PSIoff | N+1 cold | Need=0, fires=`00000000`, `cpp_nonseparable` (`CL-Need0-silent`) | `.17` `tl-cl-n1-w01-…` |
+
+### NeuronModel=AsymRm / FastSpan
+
+AsymRm и FastSpan Classic — в HIST матрице; в cold N+1 не входили. Мини-сетка для PostTune-фикса — см. план §4 B/C.
+
+---
+
+## Trainer=Classic · Mode=N1
+
+Исторически broken path (`CL-N1-stall`); в мини-набор N+1 **не** входил. Для контроля фикса — ≥1 short N1 в §4D (допустимо broken как исход).
+
+---
+
+## Дефекты и инфраструктура (кратко)
+
+| Дефект | Итог |
+|---|---|
+| BR-D7 / BR-D2 / P4 sync | ✅ закрыты |
+| BR-D3 / BR-D6 | открыты (PostTune mid / peak-blind) |
+| A2.4 thr=1 | следующий разбор runtime vs репортёр |
+| PASS×3 | **не** arm’ился в N+1 closeout — ждать Branch PostTune-фикс / явный arm |
+
+Артефакты: [SYNTHESIS…](POST_P0_SYNTHESIS_AND_NEXT_CYCLE_2026-10-19.ru.md), [ALGORITHM…](ALGORITHM_UNDERSTANDING_AND_NEXT_PLAN_2026-10-18.ru.md), [M0-C](evidence/M0C_W04_CURRENT_REPEAT_2026-10-17.ru.md), [M1 Branch](evidence/M1_BOUNDARY_MAP_2026-10-17.ru.md), [Classic](evidence/CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md), [иерархия](evidence/RESULT_GROUPING_HIERARCHY.ru.md).
+
+## Сводка dual-track (2026-10-17/18) — историческая
+
+**M1 (Mode=1):** seed `W10_HIST_br25_nextseg` на `.17` — Need=0, 8/8, FP=0. Сосед `br25_preinh` тоже PASS. Границы: NextSeg@50/100 Incomplete; `br50_gen`/W34 N1 — Need=0+silence; W32 MARGIN_HALF Incomplete (исторический PASS не удержан); W03 — all-fire (PSI off) / silence (PSI 25); N0 boundary Incomplete.
+
+**M0 (Mode=0):** повтор `W04_BR480_N0_PSIoff` Step=86 МОм на `.11` — Need=1, lengths `[1,75,89,1]`, failure_reason=0, Test не оценивался; совпадает с matched Step86M. Amp-ref на входе 1 есть, пик на активном этапе слаб/невалиден, best_effort=0, MaxLen не достигнут → класс *ограничение алгоритма/протокола под тестовыми условиями*.
+
+Историческая сводка матрицы 312 и ранние W10-контроли ниже сохранены для контекста.
 
 Полная матрица из 312 опытов выполнена на предыдущем снимке исходников; она дала 32 обучения с `Need=0`, 9 завершений после PostTrain, 16 отказов тренера и 255 случаев незавершения к остановке. Качество отдельно: 4 PASS, 25 FAIL, 12 ошибок оценщика; 271 случай не оценивался. Эти числа не следует переносить на текущую ветку.
 
