@@ -26,10 +26,13 @@ OUT = Path(sys.argv[1]); SPEC = json.loads(Path(sys.argv[2]).read_text()) if Pat
 OUT.mkdir(parents=True, exist_ok=True)
 os.environ["TIMELEARNER_MATRIX_RUNS_ROOT"] = str(OUT / "work")  # always inside the job dir (dispatcher accounting, offload)
 Path(os.environ["TIMELEARNER_MATRIX_RUNS_ROOT"]).mkdir(parents=True, exist_ok=True)
-from repro_cold_lib import get_tag, set_tag, set_tag_all, ensure_tag_after  # noqa
-STEP = 2000
+# 2026-10-25 09:40 MSK fix: the per-job console must be set BEFORE importing repro_cold_lib, because
+# repro_cold_lib.NM (= Train console used by posttune_verify) is resolved at import time. Before this fix
+# spec "console" reached only the extra tests; Train ran on the dispatcher console (e05b).
 if SPEC.get("console"):  # per-job console (e.g. PulseLib e05c with RminNoImproveMinProgress); also seen by posttune_verify
     os.environ["NMSDK_CONSOLE"] = os.path.expanduser(SPEC["console"])
+from repro_cold_lib import get_tag, set_tag, set_tag_all, ensure_tag_after  # noqa
+STEP = 2000
 CONSOLE = os.environ.get("NMSDK_CONSOLE") or str(NM / "Bin/Platform/Linux/NeuroModelerConsole")
 kind, span = SPEC["kind"], int(SPEC["span"])
 mod, mode = SPEC.get("mod", "preinh"), SPEC.get("mode", "N1")
@@ -161,6 +164,61 @@ if not SPEC.get("reuse_work"):
 log("ROW", json.dumps({k: row.get(k) for k in ("verdict", "train_status", "training_convergence", "separation_quality", "detection_quality",
                                                   "target_detected", "fires", "metrics", "sep_margin", "done_be", "run_dir")}, default=str))
 
+
+# ---------- gate: Train console + expected learner flags in Train XML (2026-10-25) ----------
+def _sha(p):
+    import hashlib
+    try:
+        return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+    except OSError:
+        return None
+def train_gate():
+    g = {"ok": True, "reasons": []}
+    used = str(getattr(mod_pv, "NM", ""))  # posttune_verify builds the Train cmd from this module global
+    g["train_console"] = used
+    if SPEC.get("console"):
+        want = os.path.expanduser(SPEC["console"])
+        g["spec_console"] = want
+        if os.path.realpath(used) != os.path.realpath(want) and _sha(used) != _sha(want):
+            g["ok"] = False; g["reasons"].append(f"train console {used} != spec console {want}")
+    exp = dict(SPEC.get("lset", {}))
+    exp.update({k: [v, "d"] for k, v in SPEC.get("expect_train_tags", {}).items()})
+    g["flags"] = {}
+    if exp:
+        if not work or not (work / "Train").is_dir():
+            g["ok"] = False; g["reasons"].append("no Train work dir"); return g
+        for k, v in exp.items():
+            seen = []
+            for rel in ("Model_00.xml", "Parameters_00.xml"):
+                p = work / "Train" / rel
+                if p.is_file():
+                    seen += re.findall(r"<%s\b[^>]*>([^<]*)</%s>" % (k, k), p.read_text(encoding="utf-8", errors="replace"))
+            vals = sorted(set(x.strip() for x in seen))
+            g["flags"][k] = vals
+            def same(x):
+                try:
+                    return abs(float(x) - float(v[0])) <= 1e-12 * max(1.0, abs(float(v[0])))
+                except ValueError:
+                    return x == str(v[0])
+            if not vals:
+                g["ok"] = False; g["reasons"].append(f"{k} missing in Train XML")
+            elif not all(same(x) for x in vals):
+                g["ok"] = False; g["reasons"].append(f"{k}={vals} in Train XML, expected {v[0]}")
+    return g
+if not SPEC.get("reuse_work"):
+    GATE = train_gate()
+    log("TRAIN_GATE", json.dumps(GATE))
+    if not GATE["ok"]:
+        bad = {"job_valid": False, "invalid_reasons": GATE["reasons"], "train_gate": GATE, "console": os.environ.get("NMSDK_CONSOLE", ""),
+               "spec": SPEC, "work": str(work), "row": {k: row.get(k) for k in ("train_status", "training_convergence")},
+               "metrics_basis": "INVALID_train_gate", "wall_total_s": round(time.time() - t0)}
+        (OUT / "result.json").write_text(json.dumps(bad, indent=1, default=str))
+        (OUT / "INVALID").write_text("\n".join(GATE["reasons"]) + "\n")
+        log("RESULT", json.dumps({"job_valid": False, "invalid_reasons": GATE["reasons"]}))
+        sys.exit(3)
+else:
+    GATE = {"ok": None, "reasons": ["reuse_work: training not re-run, gate not applied"]}
+
 # ---------- extra tests ----------
 ISI = [[0.000520833, 0.00416667, 0.00833333, 0.0125]]
 def times_target():
@@ -222,6 +280,7 @@ res = {"console": os.environ.get("NMSDK_CONSOLE", ""), "spec": SPEC, "src": SRC.
                                        "target_detected", "fires", "metrics", "delay_residue", "amp_over_target", "sync_exit", "amp_be",
                                        "done_be", "sep_margin", "sep_gap", "sep_tgt", "sep_max_foil", "run_dir", "gate_ok")}}
 res["jitter"] = J; res["jitter_effective"] = False if J else None
+res["train_gate"] = GATE; res["job_valid"] = GATE["ok"] is not False
 if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["readback_train"] = readback(work / "Train"); res["readback_test"] = readback(work / "Test")
     res["final_L"] = get_tag((work / "Train" / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace"), "DendriteLength")
@@ -355,5 +414,5 @@ if work and (work / "Test" / "Parameters_00.xml").is_file() and not res.get("ski
         m8_run("itiS_off", others[:3] + [tgt_i] + others[3:], "0.3" if span == 100 else "0.2", True)
 res["wall_total_s"] = round(time.time() - t0)
 (OUT / "result.json").write_text(json.dumps(res, indent=1, default=str))
-log("RESULT", json.dumps({k: res.get(k) for k in ("train_valid", "metrics_basis", "be_check", "m_S4", "m_S8", "m8_gate05", "gate05_dt_ok", "m8_iti6", "m8_itiS", "m8_gate05_t7", "m8_gate05_off", "m8_iti6_off", "m8_phase8_gate", "phase8_gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
+log("RESULT", json.dumps({k: res.get(k) for k in ("job_valid", "train_valid", "metrics_basis", "be_check", "m_S4", "m_S8", "m8_gate05", "gate05_dt_ok", "m8_iti6", "m8_itiS", "m8_gate05_t7", "m8_gate05_off", "m8_iti6_off", "m8_phase8_gate", "phase8_gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
 log("JOB_DONE")
