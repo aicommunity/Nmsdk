@@ -4,6 +4,13 @@
 **Ветка:** plan/2026-10-25-dendrite-limits (Nmsdk, Bin, PulseLib)  
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
+## hourly 2026-10-25 11:05 MSK (08:05Z) - D grid 12/32 done, all negative, D methodology suspicious
+
+- Load: .11 7 Console (dispatcher slots 7) / 8 cores, .17 11 / 12 cores (dispatcher slots 11), load avg 9.8 / 13.0. Disk: .11 / 108 GB free (76%), .17 / 101 GB free (54%), /media/user/Data 393 GB free (89%). No archiving needed.
+- D done 12/32 (.17 9, .11 3). No target detection: m8_iti6 all <= 0 (c100: gen -0.106, preinh -0.054, preinh_segei -0.058, segei -1.57, nextseg n0/n1 -0.575 and preinh_nextseg n0/n1 -0.568 both be_transfer_rejected_structure; c50: gen_n1 -1.29, preinh_nextseg_n1 / preinh_segei_n1 -0.0078, nextseg_segei_n1 -0.0067). Only m_S4 +0.0075 for c50 preinh_* at short ITI, gone at ITI 6 s.
+- Red flags (old errors): (1) c50 Classic final_L = test_L = 25 22 14 1 = initial template L: Train did not grow the dendrites at all although train_valid true. (2) c50 preinh_nextseg_n1 and preinh_segei_n1 bit-identical; nextseg_segei_n1 inh-on m8_iti6 == m8_gate05_off (-0.00668) -> nextseg/segei flags have no effect. (3) readback_test: Parameters.EnableNextSegmentInhibition/EnableSegExcInh set, but Model.* = None and Parameters.UsePresyn_n1 = 0 vs Model 140/196 -> Test model may not carry the inhibition flags. (4) c100 n0 == n1 bit-identical for nextseg and preinh_nextseg -> N0/N1 mode may not reach the model. D results are NOT a valid negative on inhibition until (1)-(4) are checked. Registry rows for D still 'queued' - to be updated by the A/D/E worker.
+- Remaining D jobs keep running (cores busy); no new jobs queued by this check.
+
 ## normsync 2026-10-25 09:40 MSK (06:40Z) - e05_job console fix + TRAIN_GATE, A1 invalid -> rerun
 
 - Bug: e05_job.py set NMSDK_CONSOLE from spec console AFTER importing repro_cold_lib (NM resolved at import) -> every Train ran on the dispatcher console (e05b); spec console reached only the extra tests. Invalid: A1 x5 (RminNoImproveMinProgress absent from Train XML) and NSR smoke x3. Fixed in 5c8f25124 (console set before import) + TRAIN_GATE after Train: Train console == spec console and spec lset keys present in Train XML, else job_valid=false, INVALID file, tests skipped, rc=3. Running jobs unaffected.
