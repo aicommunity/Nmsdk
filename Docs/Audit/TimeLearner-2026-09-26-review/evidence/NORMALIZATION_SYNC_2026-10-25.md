@@ -88,7 +88,7 @@
 br480 через e05_job не поддерживается (span только 50/100). Branch E2/E5 до разбора deadlock бессмысленен. Оценка: 45–65 мин на прогон, с ожиданием слотов результаты 10:30–12:00 MSK.
 
 Метрики для сравнения: число событий потери sync при неизменных L, ошибки прихода на первом sync и в конце, sep_margin, m(S/4), detection, L.
-## 7. Компенсация: этап 1 (ResyncAfterNormalization) и этап 2 (SyncCapacitanceTrim), статус 25.10 09:45 MSK
+## 7. Компенсация: этап 1 (ResyncAfterNormalization) и этап 2 (SyncCapacitanceTrim), статус 25.10 09:31 MSK
 
 ### 7.1 Код (PulseLib, ветка plan/2026-10-25-dendrite-limits)
 
@@ -112,3 +112,27 @@ NSR_E1_c_N1_f1, NSR_E1_c_N1_f0, NSR_E1_b_N1_f1 (.11, 09:10–09:24 MSK) отра
 Исправление (копия, чужой e05_job.py не менялся): `~/normsync/e05_job_ns.py` — перенос двух строк установки `NMSDK_CONSOLE` выше импорта `repro_cold_lib`. Диспетчер берёт фиксированный `JOB`, поэтому через общую очередь копию не запустить.
 
 Мои NSR_*/NSC_* в очередях .11 и .17 переведены в `#HOLD normsync` (не запущены), NS_* (база на e05b) продолжают работать.
+
+### 7.3 Исправление e05_job.py и гейт (25.10 09:40 MSK, решение Тима: вариант 1)
+
+Коммит `5c8f25124` (корневой репозиторий, ветка плана; на .11 и .17 рабочие копии на этом коммите, md5 файла совпадает: 2fca3050…). До правки незакоммиченных изменений в файле не было.
+
+- Установка `NMSDK_CONSOLE` из spec `console` перенесена выше `from repro_cold_lib import …`. Теперь `repro_cold_lib.NM` (консоль, которой posttune_verify запускает Train) = консоль задания.
+- Гейт `TRAIN_GATE` сразу после Train, до тестов:
+  1. консоль Train (`posttune_verify.NM`) совпадает с spec `console` (по realpath или sha256);
+  2. каждый ключ `lset` (а также `expect_train_tags`, если задан) есть в `work/Train/Model_00.xml` или `Parameters_00.xml` с тем же значением. Бинарник, который не знает свойство, выбрасывает его при сохранении Train XML.
+- Если гейт не пройден: в `result.json` пишутся `job_valid=false` и `invalid_reasons`, создаётся файл `INVALID`, строка `RESULT {"job_valid": false, …}`, тесты не запускаются, rc=3. Если пройден: `job_valid=true`, полный `train_gate` в result.json, `job_valid` в строке RESULT.
+- Проверка на старых заданиях (офлайн): NSR_E1_c_N1_f1 → invalid («train console e05b != spec rs1», «ResyncAfterNormalization missing in Train XML»); A1_E5_b_p05 → invalid («e05b != e05c», «RminNoImproveMinProgress missing»); E1_b_s1 (без console/lset) → ok.
+- Уже запущенные задания не затронуты: правка действует только на новые.
+
+### 7.4 Что заново поставлено в очередь (09:50 MSK)
+
+Smoke (стоят перед ожидающими D, по ~12 мин):
+- .11: NSR_E1_c_N1_f1_r2, NSR_E1_c_N1_f0_r2 (контроль бит-идентичности с E1_c_s1), NSC_E1_c_N1_t1;
+- .17: NSR_E1_b_N1_f1_r2, NSC_E1_b_N0_t1.
+
+После D:
+- .11: A1_*_r2 ×5 (консоль e05c; off-тесты через класс: S100 → NSPNeuronGenAsymRmD001C25e11TauH0_S100, S50 → NSPNeuronGenAsymRmD001C1e10TauH0_S50), затем NSR B11 ×6, NSC C11 ×3 (E2/E5 Classic N0, t1/t0);
+- .17: NSR B17 ×9 (Branch N0/N1, E1/E2/E5, f0/f1/f2, frz), NSC E5_b_N0_t1, E1_b_N0_t0.
+
+Сетка D (D_c50_*, D_c100_*): особая консоль не нужна. Все 32 задания Classic, lset нет, а e05c отличается от e05b только Branch-свойством `RminNoImproveMinProgress` (по умолчанию 0 = старое поведение). Поэтому ожидающие D, которые теперь обучаются на e05c, сопоставимы с уже идущими на e05b. Оставлено как есть.

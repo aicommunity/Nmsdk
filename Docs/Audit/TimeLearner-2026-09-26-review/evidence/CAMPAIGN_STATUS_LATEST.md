@@ -4,6 +4,13 @@
 **Ветка:** plan/2026-10-25-dendrite-limits (Nmsdk, Bin, PulseLib)  
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
+## normsync 2026-10-25 09:55 MSK (06:55Z) - e05_job console fix + TRAIN_GATE, A1 invalid -> rerun
+
+- Bug: e05_job.py set NMSDK_CONSOLE from spec console AFTER importing repro_cold_lib (NM resolved at import) -> every Train ran on the dispatcher console (e05b); spec console reached only the extra tests. Invalid: A1 x5 (RminNoImproveMinProgress absent from Train XML) and NSR smoke x3. Fixed in 5c8f25124 (console set before import) + TRAIN_GATE after Train: Train console == spec console and spec lset keys present in Train XML, else job_valid=false, INVALID file, tests skipped, rc=3. Running jobs unaffected.
+- Requeued: smoke NSR_E1_c_N1_f1_r2/f0_r2 + NSC_E1_c_N1_t1 (.11), NSR_E1_b_N1_f1_r2 + NSC_E1_b_N0_t1 (.17) ahead of pending D; then A1_*_r2 x5 on .11 (e05c, off tests via class), NSR/NSC comparison (.11 9, .17 11).
+- D grid: all 32 Classic, no lset; e05c differs from e05b only by the Branch-only RminNoImproveMinProgress (default 0) -> no special console needed, left as is.
+- Details: NORMALIZATION_SYNC_2026-10-25.md section 7.3-7.4.
+
 ## A/D/E 2026-10-25 08:55 MSK (05:55Z) - plan PLAN_2026-10-25_A_D_E.md
 
 - E DONE: phase8_tiprmin_gate.py time step from config (default 2000, Bin 78bcb00f); verified = gate05 (-0.3416). Affected (0.05 ms, diagnostic): m8_phase8_gate E2_b_s2_itiS/itiS2 +0.0004, E4_b_s2_r -0.1510, E5_b_s2_r -0.0324, plus phase8 gate ROW fires and inference-mid threshold. m_S4, m8_gate05, m8_iti6, m8_itiS unaffected.
