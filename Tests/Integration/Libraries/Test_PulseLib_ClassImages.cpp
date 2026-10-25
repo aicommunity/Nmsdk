@@ -5,6 +5,7 @@
 #include "../../../App/NeuroModelerConsole/ModelInspection.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <limits>
 
 namespace {
@@ -104,7 +105,8 @@ TEST(TimeLearnerClassImages, NativeCopyKeepsExplicitHeterogeneousGraph)
  restored->SetEnvironment(core.environment);
  restored->Init();
  EXPECT_EQ(DescribeClassImage(restored), registration.descriptor);
- EXPECT_TRUE(NmsdkTools::InspectModel(restored)["valid"].toBool());
+ const auto readback = NmsdkTools::InspectModel(restored);
+ EXPECT_TRUE(readback["valid"].toBool()) << QJsonDocument(readback["diagnostics"].toArray()).toJson().constData();
  auto restoredChannel = restored->GetComponentL<NPulseChannel>("Soma1.ExcChannel", true);
  ASSERT_TRUE(restoredChannel);
  EXPECT_DOUBLE_EQ(restoredChannel->Capacity.GetData(), 1.37e-9);
