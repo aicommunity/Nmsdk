@@ -30,7 +30,8 @@ QJsonObject Metadata()
     metadata["implementation_id"] = "native-archive-fixture-v1";
     metadata["state_kind"] = "model_spec";
     metadata["training"] = QJsonObject{{"status", "not_trained"}};
-    metadata["calibration"] = QJsonObject{{"status", "fixed"}, {"protocol", "declared-fixture"}, {"threshold", .0117}};
+    metadata["calibration"] = QJsonObject{{"status", "fixed"}, {"protocol", "declared-fixture"},
+        {"ltzone_path", "$.LTZone"}, {"threshold", .0117}};
     metadata["conversion"] = QJsonObject{{"mode", "none"}};
     return metadata;
 }
@@ -64,6 +65,7 @@ QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency)
     model->SetEnvironment(core.environment);
     const auto name = neuron->GetName();
     if(model->AddComponent(neuron) == ForbiddenId) throw std::runtime_error("fixture attach failed");
+    core.environment->GetTime().SetTime(0); // declared probe origin, not archived dynamics
     model->SetGlobalTimeStep(frequency); model->Init(); model->Reset();
     auto channel = neuron->GetComponentL<NPulseChannel>("Soma2.ExcChannel", true);
     QJsonArray trace;
