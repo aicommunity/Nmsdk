@@ -1,5 +1,7 @@
 #include "ModelIdentity.h"
 #include "ModelInspection.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuronCommon.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembraneCommon.h"
 #include <QCryptographicHash>
 #include <QJsonArray>
 #include <cmath>
@@ -189,6 +191,26 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
             if(!component->IsReady() || !component->IsInit())
                 diagnostics.append(node.path + ": model_not_ready_or_initialized");
             if(component->GetTimeStep() == 0) diagnostics.append(node.path + ": invalid_frequency");
+            if(auto neuron = dynamic_cast<NMSDK::NPulseNeuronCommon*>(component.Get()))
+            {
+                std::set<const NMSDK::NPulseMembraneCommon*> expected, actual;
+                for(int i = 0; i < component->GetNumComponents(); ++i)
+                    if(auto membrane = dynamic_pointer_cast<NMSDK::NPulseMembraneCommon>(component->GetComponentByIndex(i)))
+                        expected.insert(membrane.Get());
+                for(const auto* membrane : neuron->Membranes) actual.insert(membrane);
+                if(actual != expected || actual.size() != neuron->Membranes.size())
+                    diagnostics.append(node.path + ": incomplete_or_duplicate_membrane_index");
+            }
+            if(auto membrane = dynamic_cast<NMSDK::NPulseMembraneCommon*>(component.Get()))
+            {
+                std::set<const NMSDK::NPulseChannelCommon*> expected, actual;
+                for(int i = 0; i < component->GetNumComponents(); ++i)
+                    if(auto channel = dynamic_pointer_cast<NMSDK::NPulseChannelCommon>(component->GetComponentByIndex(i)))
+                        expected.insert(channel.Get());
+                for(size_t i = 0; i < membrane->GetNumChannels(); ++i) actual.insert(membrane->GetChannel(i));
+                if(actual != expected || actual.size() != membrane->GetNumChannels())
+                    diagnostics.append(node.path + ": incomplete_or_duplicate_channel_index");
+            }
             QJsonObject object, parameters;
             object["path"] = node.path;
             object["class"] = QString::fromStdString(component->GetCompClassName());
@@ -308,7 +330,10 @@ QJsonObject VerifyModelIdentity(const QJsonObject& expected, UEPtr<UContainer> m
     {
         result["reason"] = "invalid_expected_identity"; return result;
     }
-    QByteArray canonical; Canonical(canonical, semantic);
+    QByteArray canonical;
+    try { Canonical(canonical, semantic); }
+    catch(const std::exception&)
+    { result["reason"] = "invalid_expected_identity"; return result; }
     const auto recomputed = QString::fromLatin1(QCryptographicHash::hash(canonical, QCryptographicHash::Sha256).toHex());
     if(expected["sha256"].toString() != recomputed)
     {
