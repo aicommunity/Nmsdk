@@ -4,6 +4,18 @@
 **Ветка:** 2026-10-24T21:45Z (00:45 MSK 25.10)
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
+## E05 series audit 2026-10-25 03:45 MSK (00:45Z) - problems A-D
+
+**A. Seed replicates identical.** No seed exists: e05_job `jitter` multiplies only the LAST tip (TipSynapseResistance[-1], L=1 dendrite); C++ SoftCold reset canonicalises it to TipResistanceCanonLast=86000000 (audit `reset_complete tip_r=[...,86000000]`), Console is deterministic. Bit-identical pairs: E2_b s0n/s1/s2, E1_b s1/s2, E3off_b s0/s1, E4off_b s0/s1, E3weak_b s0_r/s1_r, E4_b s0n_r/s1_r, E5_b s0_r/s1_r; Classic E1_c s0/s1/s2, E3off_c, E4off_c, E4_c same final L. Fix: jitter flagged `jitter_effective=false`, comma parse fixed; s1/s2 replicates dropped/killed. Real variability needs Tim's choice (pattern jitter / excitatory tips / init L).
+**B. Classic: no metrics.** Genuine C++ refusal `cpp_training_failure_1` (tip R at rmax 1e10 on 1-2 dendrites, e.g. E4off_c tips `1e10 1e10 3.15e7 8.6e7`, E2_c `4.4e7 1e10 6.2e8`) although delay sync reached (residue 3.5 ms < tol 4.17 ms). posttune -> SKIP_GATE -> Test stays the template (L 52 48 27 1, Capacity 1e-9, NPMembraneBio, UsePresynapticInhibition 0). Old e05_job tested this template. Fix: `train_valid`, `test_is_trained`, `metrics_basis`; tests skipped on template. Best-effort transfer (`be_transfer`, Neuron-block overlay) builds a Test but analyzer writes 0 rows -> default OFF, UNVERIFIED.
+**C. Branch: L stops early, no detection.** Overrides reach Train and Test (readback + full Test=Train neuron: Capacity, Preinh2_5 classes, InhSyn R). Branch stops at L 73 57 41 1 (S100 & S50, C 7.5e-11) / 89 73 57 1 (C 1e-10) via its per-dendrite sync criterion, far below L_expect (400 334 200 1 / 200 168 101 1). Inhibition has NO effect on Branch results (E4_b == E4off_b, E3off_b == E3weak_b bit-identical). Note: L_expect key is never applied (code reads L_init) and is irrelevant after SoftCold (L -> 1 1 1 1). Needs Tim decision (C++ Branch trainer criterion).
+**D. gate05 vs gate.** gate05 verified at dt 0.5 ms (xt/gate05/Test/Project.ini Default/Global 2000; new key `gate05_dt_ok`). Old `gate_GlobalTimeStep`=20000 read the phase8 Test (dt 0.05 ms) - renamed `phase8_gate_GlobalTimeStep`, `m8_gate` -> `m8_phase8_gate` (diagnostic). m8_gate05 == m8_iti6 in Branch is expected (responses order/ITI-independent at these settings).
+
+**Valid results (Branch, dt 0.5 ms, target not first):** none detects the target. E4(off)_b m_S4 +0.072, m_S8 +0.029, m8_iti6 -0.103; E5off_b m_S4 +0.036 (= m8_iti6), E2_b m_S4 0.0 / m8_iti6 -0.342; E1_b m_S4 -0.153; E5_b -0.129; E3off/E3weak_b -5e-5. Neuron silent in tests (Branch Test FixedLTZThreshold 1).
+
+**Queue actions:** killed (provable duplicates) .11: E2_c_s2, E3off_c_s2, E4off_c_s2; .17: E3weak_c_s1_r, E3weak_c_s2_r, E4_c_s2_r, E5_c_s2_r, E5off_c_s1_r, E3weak_b_s2_r. Dropped from queue: .11 E4off_b_s2, E1_b_s0r; .17 E5off_c_s2_r, E5off_b_s2_r. Own BE/BE2 re-test jobs killed and disabled (0 rows). Kept: Classic representatives E3weak_c_s0_r, E5off_c_s0_r, E5_c_s1_r (.17), REPASS_ITI6 (.11). Every kill logged in dispatch.log (AGENT_KILL).
+**Open for Tim:** Branch trainer stop criterion; how replicates should vary; Classic rmax refusal (raise rmax / accept refused structure / proper transfer); phase8 dt 0.05 ms gate (unchanged, pending).
+
 Метрика: `sep_margin` + детекция цели; Done_exact / Done_BE раздельно.
 
 ---
