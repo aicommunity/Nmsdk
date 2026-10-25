@@ -19,7 +19,7 @@ configuration и effective graph учитываются раздельно.
 JSON schema 1 содержит именованное дерево компонентов и классы, actual child
 order, frequency, flags Init/Ready/Activity, параметры/состояния через штатный
 serializer Rdk, connected flags, прямые property bindings с индексами входов, effective
-C/R/TC/PSI и соответствие cached membrane/channel pointers именованному графу.
+C/R/TC/PSI и соответствие cached membrane/channel/LTZone pointers именованному графу.
 NaN/Inf не заменяются нулём: выдаются null с diagnostics и valid=false. Ссылка
 кэша/источника за пределы полного графа также делает readback невалидным.
 
