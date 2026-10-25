@@ -173,11 +173,11 @@ D_c50_all_n1	10.245.1.11	D_c50_all_n1	D	queued	~/e05_runs/series/jobs/D_c50_all_
 NSR_E1_c_N1_f1	10.245.1.11	NSR_E1_c_N1_f1	NSR	done_invalid	~/e05_runs/series/jobs/NSR_E1_c_N1_f1					stage1 smoke; Train ran on dispatcher console e05b (NMSDK_CONSOLE set after repro_cold_lib import), flag only in Test -> bit-identical to baseline
 NSR_E1_c_N1_f0	10.245.1.11	NSR_E1_c_N1_f0	NSR	done_invalid	~/e05_runs/series/jobs/NSR_E1_c_N1_f0					stage1 smoke; Train ran on dispatcher console e05b (NMSDK_CONSOLE set after repro_cold_lib import), flag only in Test -> bit-identical to baseline
 NSR_E1_b_N1_f1	10.245.1.11	NSR_E1_b_N1_f1	NSR	done_invalid	~/e05_runs/series/jobs/NSR_E1_b_N1_f1					stage1 smoke; Train ran on dispatcher console e05b (NMSDK_CONSOLE set after repro_cold_lib import), flag only in Test -> bit-identical to baseline
-NSR_E1_c_N1_f1_r2	10.245.1.11	NSR_E1_c_N1_f1_r2	NSR	queued	~/e05_runs/series/jobs/NSR_E1_c_N1_f1_r2					stage1 smoke rerun after console fix, rs1, flag 1
-NSR_E1_c_N1_f0_r2	10.245.1.11	NSR_E1_c_N1_f0_r2	NSR	queued	~/e05_runs/series/jobs/NSR_E1_c_N1_f0_r2					stage1 smoke rerun, rs1 flag 0, bit-identity vs E1_c_s1
-NSC_E1_c_N1_t1	10.245.1.11	NSC_E1_c_N1_t1	NSC	queued	~/e05_runs/series/jobs/NSC_E1_c_N1_t1					stage2 smoke Classic, rs2 (build_rs2b), Resync 1 + Trim 1
-NSR_E1_b_N1_f1_r2	10.245.1.17	NSR_E1_b_N1_f1_r2	NSR	queued	$DATA/runs/E05_series/jobs/NSR_E1_b_N1_f1_r2					stage1 smoke rerun after console fix, rs1, flag 1
-NSC_E1_b_N0_t1	10.245.1.17	NSC_E1_b_N0_t1	NSC	queued	$DATA/runs/E05_series/jobs/NSC_E1_b_N0_t1					stage2 smoke Branch N0, rs2, Resync 1 + Trim 1
+NSR_E1_c_N1_f1_r2	10.245.1.11	NSR_E1_c_N1_f1_r2	NSR	done	~/e05_runs/series/jobs/NSR_E1_c_N1_f1_r2					smoke OK 10:01 MSK: gate ok, 10 resync events, refusal L 49 47 29 1 = f0 = E1_c_s1
+NSR_E1_c_N1_f0_r2	10.245.1.11	NSR_E1_c_N1_f0_r2	NSR	done	~/e05_runs/series/jobs/NSR_E1_c_N1_f0_r2					smoke OK 10:03 MSK: gate ok, 0 events, refusal L 49 47 29 1 = E1_c_s1
+NSC_E1_c_N1_t1	10.245.1.11	NSC_E1_c_N1_t1	NSC	done	~/e05_runs/series/jobs/NSC_E1_c_N1_t1					smoke OK 10:11 MSK: gate ok, 21 trims, C_k +17.7/+30/+23/0 %, L 43 32 21 1, still refusal
+NSR_E1_b_N1_f1_r2	10.245.1.17	NSR_E1_b_N1_f1_r2	NSR	done	$DATA/runs/E05_series/jobs/NSR_E1_b_N1_f1_r2					smoke 09:59 MSK: gate ok, resync_count=0 (trigger never met), = E1_b_s1
+NSC_E1_b_N0_t1	10.245.1.17	NSC_E1_b_N0_t1	NSC	running	$DATA/runs/E05_series/jobs/NSC_E1_b_N0_t1					smoke started 09:49 MSK: gate flags in Train XML; first trim iter>=119; result pending
 A1_E2_b_p05_r2	10.245.1.11	A1_E2_b_p05_r2	A1	queued	~/e05_runs/series/jobs/A1_E2_b_p05_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
 A1_E2_b_p025_r2	10.245.1.11	A1_E2_b_p025_r2	A1	queued	~/e05_runs/series/jobs/A1_E2_b_p025_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
 A1_E5_b_p05_r2	10.245.1.11	A1_E5_b_p05_r2	A1	queued	~/e05_runs/series/jobs/A1_E5_b_p05_r2					rerun after e05_job console fix 5c8f25124, console e05c, TRAIN_GATE, off tests via NeuronClassName
