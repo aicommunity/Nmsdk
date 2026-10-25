@@ -8,10 +8,29 @@
 #include <QJsonDocument>
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
+#include <filesystem>
+#include <fstream>
 
 namespace {
 using namespace RDK;
 using namespace NMSDK;
+
+void WriteFixture(const std::string& name, const std::string& content)
+{
+    const char* directory = std::getenv("TIMELEARNER_ROUNDTRIP_TEST_DIR");
+    if(!directory) return;
+    const auto path = std::filesystem::path(directory) / name;
+    std::filesystem::create_directories(path.parent_path());
+    std::ofstream file(path, std::ios::binary);
+    file << content;
+    ASSERT_TRUE(file.good()) << path.string();
+}
+
+void WriteGraph(const std::string& name, UEPtr<NPulseNeuron> model)
+{
+    WriteFixture(name, QJsonDocument(NmsdkTools::InspectModel(model)).toJson().toStdString());
+}
 
 UEPtr<NPulseNeuron> TakeAsymmetricGraph()
 {
@@ -74,6 +93,8 @@ void CompareNativeImpulse(UEPtr<NPulseNeuron> source, UEPtr<NPulseNeuron> target
     ASSERT_TRUE(inputA); ASSERT_TRUE(inputB); ASSERT_TRUE(outputA); ASSERT_TRUE(outputB);
     ASSERT_FALSE(inputA->Input.IsConnected()); ASSERT_FALSE(inputB->Input.IsConnected());
     std::vector<double> waveform;
+    double maxDifference = 0.;
+    int worstTick = -1;
     for(int tick = 0; tick < 400; ++tick)
     {
         const double stimulus = tick >= 10 && tick < 12 ? 1. : 0.;
@@ -83,11 +104,12 @@ void CompareNativeImpulse(UEPtr<NPulseNeuron> source, UEPtr<NPulseNeuron> target
         core.environment->IncreaseModelTimeByStep();
         const double a = outputA->Output(0, 0), b = outputB->Output(0, 0);
         EXPECT_TRUE(std::isfinite(a)); EXPECT_TRUE(std::isfinite(b));
-        EXPECT_NEAR(a, b, 1e-12) << "tick=" << tick;
+        if(std::abs(a - b) > maxDifference) { maxDifference = std::abs(a - b); worstTick = tick; }
         waveform.push_back(a);
     }
     const auto range = std::minmax_element(waveform.begin(), waveform.end());
     EXPECT_GT(*range.second - *range.first, 1e-8) << "A flat response cannot validate an impulse roundtrip";
+    EXPECT_LE(maxDifference, 1e-12) << "worst tick=" << worstTick;
     CheckIndividualValues(source); CheckIndividualValues(target);
     model->DelComponent("Target", false);
     model->DelComponent("Source", false);
@@ -128,10 +150,19 @@ TEST(TimeLearnerNativeRoundtrip, XmlPreservesFullGraphParametersCachesAndImpulse
     USerStorageXML xml;
     ASSERT_TRUE(xml.Create("RoundtripFixture"));
     ASSERT_TRUE(source->SaveComponent(&xml, true, ptParameter | ptState));
+    std::string xmlText;
+    ASSERT_TRUE(xml.Save(xmlText));
+    WriteFixture("native-graph.xml", xmlText);
+    WriteGraph("source.json", source);
     ASSERT_TRUE(xml.SelectNode(source->GetName()));
     target->Name = source->GetName();
     ASSERT_TRUE(target->LoadComponent(&xml, true));
+    WriteGraph("loaded-before-init.json", target);
+    EXPECT_FALSE(target->UseElementDefaults.GetData());
+    EXPECT_EQ(target->StructureBuildMode.GetData(), 0);
+    CheckIndividualValues(target);
     target->Init();
+    WriteGraph("loaded-after-init.json", target);
     const auto after = NmsdkTools::InspectModel(target);
     ASSERT_TRUE(after["valid"].toBool()) << QJsonDocument(after["diagnostics"].toArray()).toJson().constData();
     EXPECT_EQ(before["links"], after["links"]);

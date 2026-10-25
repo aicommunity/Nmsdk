@@ -34,8 +34,8 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
     if (g_initialized)
         return g_result;
 
-    // Предполагаем, что тестовый бинарник и NeuroModelerConsole.ini лежат в Bin/Platform/Win
-    // (как и сама NeuroModelerConsole). CWD при запуске теста — та же папка.
+    // CTest запускает бинарник из изолированного DEPLOY_ROOT, где CMake создаёт
+    // NeuroModelerConsole.ini с явными путями ресурсов.
     const std::string appPath = "Test_PulseLib_StorageComponents.exe";
     const std::string iniFile = "NeuroModelerConsole.ini";
 
@@ -50,7 +50,7 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
     char** argv = nullptr;
 
     // Настраиваем только системный каталог до инициализации ядра
-    // (относительно текущего Bin/Platform/Win).
+    // (относительно текущего runtime directory).
     // Core_SetSystemDir — C API из rdk_init.h (глобальная область видимости).
     Core_SetSystemDir(".");
 
