@@ -10,6 +10,8 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_TimeLearnerResistance.cpp
     Test_PulseLib_Observations.cpp
     Test_PulseLib_LifecycleContracts.cpp
+    Test_PulseLib_ModelInspection.cpp
+    ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelInspection.cpp
     Test_PulseLib_Main.cpp
 )
 
