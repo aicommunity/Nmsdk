@@ -9,6 +9,11 @@ Metrics -> OUT/result.json (sep_margin audit, m(S/4), m(S/8), m8 (gate + iti6), 
 usage: e05_job.py OUT JSON_SPEC
 spec keys: label kind(classic|branch) span(50|100) mod(preinh|gen) mode(N0|N1) L "a b c d" maxdl est(opt)
            ov{OverrideMembraneCapacity..} jitter dlog{DynamicsLogHead,DynamicsLogEvery,DynamicsLogComponentState}
+           reuse_work(opt: existing *_work dir -> skip training, re-test only) reuse_result(opt: old result.json for row)
+           be_transfer(default 1): if C++ refused training, Test is still the template -> build OUT/be_Test from Train
+2026-10-25 03:40 MSK fixes: train_valid / test_is_trained flags (Classic refusals tested the TEMPLATE before),
+  best-effort transfer of refused structure, phase8 gate keys renamed (dt 0.05 ms), gate05 dt check,
+  jitter documented as ineffective (C++ canonicalises last tip to TipResistanceCanonLast; Console deterministic).
 """
 import sys, os, json, re, shutil, subprocess, time, csv, glob
 from pathlib import Path
@@ -110,17 +115,23 @@ def reset_then_patch(train, **kw):
         t = patch_xml(p.read_text(encoding="utf-8", errors="replace"), with_L=False)
         tip = get_tag(t, "TipSynapseResistance")
         if tip and J:
-            vals = [float(x) for x in tip.replace(",", " ").split()]
+            # NOTE: ineffective - C++ reset canonicalises the last tip (TipResistanceCanonLast); kept only for audit
+            vals = [float(x.replace(",", ".")) for x in tip.split()]
             vals[-1] *= (1.0 + J)
             t = set_tag(t, "TipSynapseResistance", " ".join(f"{v:.17g}" for v in vals), 1)
         p.write_text(t, encoding="utf-8")
     log("POST_RESET", json.dumps(readback(train)))
 mod_pv.soft_cold_reset_train = reset_then_patch
 t0 = time.time()
-row = mod_pv.run_case(case, train_t=TRAIN_T)
+if SPEC.get("reuse_work"):
+    work = Path(SPEC["reuse_work"])
+    old = json.loads(Path(SPEC["reuse_result"]).read_text()) if SPEC.get("reuse_result") else {}
+    row = dict(old.get("row") or {})
+    log("REUSE", work, "old_row", json.dumps(row, default=str)[:400])
+else:
+    row = mod_pv.run_case(case, train_t=TRAIN_T)
 wall_train = time.time() - t0
-work = None
-if True:
+if not SPEC.get("reuse_work"):
     cands = sorted(Path(os.environ["TIMELEARNER_MATRIX_RUNS_ROOT"]).glob(f"{case}_*_work"))
     work = cands[-1] if cands else None
 log("ROW", json.dumps({k: row.get(k) for k in ("verdict", "train_status", "training_convergence", "separation_quality", "detection_quality",
@@ -141,8 +152,9 @@ def foils(D):
 def row_of(times, off):
     return [off + times[0]] + [times[i] - times[i - 1] for i in range(1, 4)]
 
+TESTSRC = None  # set below: work/Test (trained) or OUT/be_Test (best-effort transfer of refused structure)
 def run_test(name, samples, classes, delay):
-    src = work / "Test"
+    src = TESTSRC
     d = OUT / "xt" / name
     if d.exists():
         shutil.rmtree(d)
@@ -170,7 +182,7 @@ def run_test(name, samples, classes, delay):
     return rows, readback(d / "Test")
 
 def orig_samples():
-    t = (work / "Test" / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace")
+    t = (TESTSRC / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace")
     vals = [float(x) for x in get_tag(t, "MatrixData").split()]
     cls = [int(float(x)) for x in get_tag(t, "MatrixClasses").split()]
     return [vals[i * 4:(i + 1) * 4] for i in range(8)], cls
@@ -179,10 +191,49 @@ res = {"console": os.environ.get("NMSDK_CONSOLE", ""), "spec": SPEC, "src": SRC.
        "row": {k: row.get(k) for k in ("verdict", "train_status", "training_convergence", "separation_quality", "detection_quality",
                                        "target_detected", "fires", "metrics", "delay_residue", "amp_over_target", "sync_exit", "amp_be",
                                        "done_be", "sep_margin", "sep_gap", "sep_tgt", "sep_max_foil", "run_dir", "gate_ok")}}
+res["jitter"] = J; res["jitter_effective"] = False if J else None
 if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["readback_train"] = readback(work / "Train"); res["readback_test"] = readback(work / "Test")
     res["final_L"] = get_tag((work / "Train" / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace"), "DendriteLength")
     res["test_L"] = get_tag((work / "Test" / "Parameters_00.xml").read_text(encoding="utf-8", errors="replace"), "DendriteLength")
+    ts = str(row.get("train_status") or "")
+    res["train_valid"] = bool(ts) and not (ts.startswith("cpp_training") or "refus" in ts or "fail" in ts)
+    res["test_is_trained"] = (res["test_L"] or "").split() == (res["final_L"] or "").split()
+    TESTSRC = work / "Test"
+    res["metrics_basis"] = "trained_test" if res["test_is_trained"] else "TEMPLATE_untrained"
+    if not res["test_is_trained"] and int(SPEC.get("be_transfer", 1)):
+        # C++ refused -> posttune skipped the gate -> Test = template. Build a best-effort Test from the refused Train neuron.
+        be = OUT / "be_Test"
+        if be.exists():
+            shutil.rmtree(be)
+        shutil.copytree(work / "Test", be, ignore=shutil.ignore_patterns("SelectivityLog", "EventsLog", "StatisticLog", "*.log"))
+        for rel in ("Parameters_00.xml", "Model_00.xml"):
+            tr = (work / "Train" / rel).read_text(encoding="utf-8", errors="replace")
+            te = (be / rel).read_text(encoding="utf-8", errors="replace")
+            keep = {k: get_tag(te, k) for k in ("FixedLTZThreshold", "UseFixedLTZThreshold")}
+            mn = re.search(r'(<Neuron Class="[^"]+">.*?</Neuron>)', tr, re.S)
+            if mn:
+                te, nsub = re.subn(r'<Neuron Class="[^"]+">.*?</Neuron>', lambda _m: mn.group(1), te, count=1, flags=re.S)
+                log("BE_OVERLAY", rel, "neuron_block", nsub)
+            # learner-level copies (as phase8 prepare_test): structure tags outside the Neuron block
+            for k in ("NeuronClassName", "MembraneCapacity", "DendriteLength", "NumSynapse", "NormalizationMode", "NumDendriteMembranePartsVec",
+                      "NumInputDendrite", "ResistanceMin", "ResistanceMax", "SynapseResistanceBase", "TipSynapseResistance"):
+                v = get_tag(tr, k)
+                if v is not None and get_tag(te, k) is not None:
+                    te = set_tag_all(te, k, v)
+            te = set_tag_all(te, "IsNeedToTrain", "0")
+            for k, v in keep.items():
+                if v is not None:
+                    te = set_tag_all(te, k, v)
+            (be / rel).write_text(te, encoding="utf-8")
+        rbb = readback(be)
+        res["be_readback"] = {k: rbb.get(k) for k in ("Parameters.DendriteLength", "Model.DendriteLength", "Model.TipSynapseResistance", "Model.MembraneCapacity", "Model.OverrideInhSynapseResistance")}
+        if (rbb.get("Model.DendriteLength") or "").split() == (res["final_L"] or "").split():
+            TESTSRC = be; res["metrics_basis"] = "BEST_EFFORT_refused_structure"
+    if res["metrics_basis"] == "TEMPLATE_untrained":
+        res["skip_tests"] = "Test is the untrained template (training refused, best-effort transfer unavailable) -> no metrics"
+    log("VALIDITY", json.dumps({k: res.get(k) for k in ("train_valid", "test_is_trained", "metrics_basis", "final_L", "test_L")}))
+if work and (work / "Test" / "Parameters_00.xml").is_file() and not res.get("skip_tests"):
     smp, cls = orig_samples(); off = smp[0][0]
     tgt_i = cls.index(1) if 1 in cls else 0
     tt, _ = times_target()
@@ -227,14 +278,15 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["m8_gate05"] = (min(tg) - max(fo)) / min(tg) if tg and fo and min(tg) else None
     res["gate05_target_fired"] = [int(x["neuron_fired"]) for x in rows if x["target_class"] == "1"]
     res["gate05_foils_fired"] = sum(int(x["neuron_fired"]) for x in rows if x["target_class"] == "0")
-    res["gate_GlobalTimeStep"] = readback(work / "Test").get("GlobalTimeStep")
+    res["gate05_dt_ok"] = rb.get("GlobalTimeStep") == str(STEP) and rb.get("DefaultTimeStep") == str(STEP)
+    res["phase8_gate_GlobalTimeStep"] = readback(work / "Test").get("GlobalTimeStep")  # phase8/9 gate Test (20000 = 0.05 ms): NOT the series dt
     # gate test m8 (posttune_verify Test as run, Delay 1.5, original order; dt per gate_GlobalTimeStep, 20000 = 0.05 ms -> diagnostic only)
     g = work / "Test" / "SelectivityLog" / "results.csv"
     if g.is_file():
         rows = list(csv.DictReader(g.open()))
         tg = [float(x["ltz_potential_max"]) for x in rows if x["target_class"] == "1"]
         fo = [float(x["ltz_potential_max"]) for x in rows if x["target_class"] == "0"]
-        res["m8_gate"] = (min(tg) - max(fo)) / min(tg) if tg and fo and min(tg) else None
+        res["m8_phase8_gate"] = (min(tg) - max(fo)) / min(tg) if tg and fo and min(tg) else None  # diagnostic only (dt per phase8_gate_GlobalTimeStep)
     # dynamics log: 'now' step check
     dyn = sorted(work.glob("Train/**/*TrainingDynamics*"))
     res["dyn_logs"] = [(str(p.relative_to(work)), p.stat().st_size) for p in dyn][:4]
@@ -251,5 +303,5 @@ if work and (work / "Test" / "Parameters_00.xml").is_file():
     res["dyn_now_min_step"] = steps[0] if steps else None
 res["wall_total_s"] = round(time.time() - t0)
 (OUT / "result.json").write_text(json.dumps(res, indent=1, default=str))
-log("RESULT", json.dumps({k: res.get(k) for k in ("m_S4", "m_S8", "m8_gate05", "m8_iti6", "m8_gate", "gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
+log("RESULT", json.dumps({k: res.get(k) for k in ("train_valid", "metrics_basis", "m_S4", "m_S8", "m8_gate05", "gate05_dt_ok", "m8_iti6", "m8_phase8_gate", "phase8_gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
 log("JOB_DONE")
