@@ -133,3 +133,40 @@ E05_E5offc_BE3_20261025T0202Z	M40	E5off_c_s0_r BE3q/i6/g5 (Classic S50 no-inh co
 E05_E5offc_BE3_20261025T0202Z	M40	E5off_c_s0_r BE3q/i6/g5 (Classic S50 no-inh control)	E05	done	/media/user/Data/TLAgent-20261020/runs/E05_series				2026-10-25T02:11Z	m_S4 -0.468, m8_iti6 = m8_gate05 -0.653, bit-equal to E5_c (inhibition no effect)
 REPASS_ITI6_e11_final	Elder-1	REPASS ITI 6 s final harvest (ALL_DONE 02:28Z)	REPASS	done	/home/user/TLAgent-20261020/runs/REPASS_ITI6_e11_20261024T2011Z				2026-10-25T03:10Z	13 S25 cases all sep<0 both orders; 1 timeout (inh_c25_genasym_n0); 32 inh_c50/c100 cases NO_RESULTS (source Test without posttune_complete) = void
 NS_queue_2026-10-25	Elder-1	NS_E2_c_N0 NS_E4_c_N0 NS_E5_c_N0 NS_E5_c_N1 (normalization-sync N0 vs N1, owner normsync)	NS	queued	/home/user/e05_runs/series/jobs				2026-10-25T05:43Z	queued 08:43 MSK via e05_dispatch; see NORMALIZATION_SYNC_2026-10-25.md
+A1_E2_b_p05	10.245.1.11	A1_E2_b_p05	A1	running	~/e05_runs/series/jobs/A1_E2_b_p05					RminNoImproveMinProgress e05c
+A1_E2_b_p025	10.245.1.11	A1_E2_b_p025	A1	running	~/e05_runs/series/jobs/A1_E2_b_p025					RminNoImproveMinProgress e05c
+A1_E5_b_p05	10.245.1.11	A1_E5_b_p05	A1	running	~/e05_runs/series/jobs/A1_E5_b_p05					RminNoImproveMinProgress e05c
+A1_E5_b_p025	10.245.1.11	A1_E5_b_p025	A1	running	~/e05_runs/series/jobs/A1_E5_b_p025					RminNoImproveMinProgress e05c
+A1_E2c10_b_p05	10.245.1.11	A1_E2c10_b_p05	A1	running	~/e05_runs/series/jobs/A1_E2c10_b_p05					RminNoImproveMinProgress e05c
+D_c100_gen_n0	10.245.1.17	D_c100_gen_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_gen_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_gen_n1	10.245.1.17	D_c100_gen_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_gen_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_preinh_n0	10.245.1.17	D_c100_preinh_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_preinh_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_preinh_n1	10.245.1.17	D_c100_preinh_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_preinh_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_nextseg_n0	10.245.1.17	D_c100_nextseg_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_nextseg_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_nextseg_n1	10.245.1.17	D_c100_nextseg_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_nextseg_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_segei_n0	10.245.1.17	D_c100_segei_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_segei_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_segei_n1	10.245.1.17	D_c100_segei_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_segei_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_preinh_nextseg_n0	10.245.1.17	D_c100_preinh_nextseg_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_preinh_nextseg_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_preinh_nextseg_n1	10.245.1.17	D_c100_preinh_nextseg_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_preinh_nextseg_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_preinh_segei_n0	10.245.1.17	D_c100_preinh_segei_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_preinh_segei_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_preinh_segei_n1	10.245.1.17	D_c100_preinh_segei_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_preinh_segei_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_nextseg_segei_n0	10.245.1.17	D_c100_nextseg_segei_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_nextseg_segei_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_nextseg_segei_n1	10.245.1.17	D_c100_nextseg_segei_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_nextseg_segei_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_all_n0	10.245.1.17	D_c100_all_n0	D	queued	$DATA/runs/E05_series/jobs/D_c100_all_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c100_all_n1	10.245.1.17	D_c100_all_n1	D	queued	$DATA/runs/E05_series/jobs/D_c100_all_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_gen_n0	10.245.1.17	D_c50_gen_n0	D	queued	$DATA/runs/E05_series/jobs/D_c50_gen_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_gen_n1	10.245.1.17	D_c50_gen_n1	D	queued	$DATA/runs/E05_series/jobs/D_c50_gen_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_preinh_n0	10.245.1.17	D_c50_preinh_n0	D	queued	$DATA/runs/E05_series/jobs/D_c50_preinh_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_preinh_n1	10.245.1.17	D_c50_preinh_n1	D	queued	$DATA/runs/E05_series/jobs/D_c50_preinh_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_nextseg_n0	10.245.1.17	D_c50_nextseg_n0	D	queued	$DATA/runs/E05_series/jobs/D_c50_nextseg_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_nextseg_n1	10.245.1.17	D_c50_nextseg_n1	D	queued	$DATA/runs/E05_series/jobs/D_c50_nextseg_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_segei_n0	10.245.1.17	D_c50_segei_n0	D	queued	$DATA/runs/E05_series/jobs/D_c50_segei_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_segei_n1	10.245.1.17	D_c50_segei_n1	D	queued	$DATA/runs/E05_series/jobs/D_c50_segei_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_preinh_nextseg_n0	10.245.1.11	D_c50_preinh_nextseg_n0	D	queued	~/e05_runs/series/jobs/D_c50_preinh_nextseg_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_preinh_nextseg_n1	10.245.1.11	D_c50_preinh_nextseg_n1	D	queued	~/e05_runs/series/jobs/D_c50_preinh_nextseg_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_preinh_segei_n0	10.245.1.11	D_c50_preinh_segei_n0	D	queued	~/e05_runs/series/jobs/D_c50_preinh_segei_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_preinh_segei_n1	10.245.1.11	D_c50_preinh_segei_n1	D	queued	~/e05_runs/series/jobs/D_c50_preinh_segei_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_nextseg_segei_n0	10.245.1.11	D_c50_nextseg_segei_n0	D	queued	~/e05_runs/series/jobs/D_c50_nextseg_segei_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_nextseg_segei_n1	10.245.1.11	D_c50_nextseg_segei_n1	D	queued	~/e05_runs/series/jobs/D_c50_nextseg_segei_n1					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_all_n0	10.245.1.11	D_c50_all_n0	D	queued	~/e05_runs/series/jobs/D_c50_all_n0					InhGrid retrain PSI via class, dt 0.5 ms
+D_c50_all_n1	10.245.1.11	D_c50_all_n1	D	queued	~/e05_runs/series/jobs/D_c50_all_n1					InhGrid retrain PSI via class, dt 0.5 ms

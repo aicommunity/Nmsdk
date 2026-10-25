@@ -1,8 +1,14 @@
 # Campaign status — latest
 
 **Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H)  
-**Ветка:** 2026-10-24T21:45Z (00:45 MSK 25.10)
+**Ветка:** plan/2026-10-25-dendrite-limits (Nmsdk, Bin, PulseLib)  
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
+
+## A/D/E 2026-10-25 08:55 MSK (05:55Z) - plan PLAN_2026-10-25_A_D_E.md
+
+- E DONE: phase8_tiprmin_gate.py time step from config (default 2000, Bin 78bcb00f); verified = gate05 (-0.3416). Affected (0.05 ms, diagnostic): m8_phase8_gate E2_b_s2_itiS/itiS2 +0.0004, E4_b_s2_r -0.1510, E5_b_s2_r -0.0324, plus phase8 gate ROW fires and inference-mid threshold. m_S4, m8_gate05, m8_iti6, m8_itiS unaffected.
+- A: cause = TipR at Rmin -> NoImproveCount++ on every length apply, limit 2 -> best-effort at L 73/57/41 although |dt| still falling. Flag RminNoImproveMinProgress (PulseLib 02cc0c7, default 0 = old). A1 x5 running on .11 since 08:37 (console e05c).
+- D: inhibition XML patches are dead (BuildStructure rebuilds neuron from NeuronClassName); old InhGrid configs were SymInhC1e9 for all mods -> PSI never active. Fixed via NeuronClassName (e05_job e706927c4), check on/off -0.3416 vs -0.2748. 32 jobs: .17 24 (16 c100 + 8 c50, from 08:48), .11 8 c50 (queued). train_t 2x, be_transfer 1.
 
 ## E05 hourly 2026-10-25 06:10 MSK (03:10Z) - E05 series closed, REPASS_ITI6 .11 final
 
