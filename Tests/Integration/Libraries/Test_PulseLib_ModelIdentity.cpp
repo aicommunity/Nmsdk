@@ -64,6 +64,15 @@ void Artifact(const std::string& name, const QJsonObject& document)
     ASSERT_TRUE(file.good());
 }
 
+void MembraneIndexMatchesNativeOrder(UEPtr<NPulseNeuron> neuron)
+{
+    std::vector<NPulseMembraneCommon*> expected;
+    for(int i = 0; i < neuron->GetNumComponents(); ++i)
+        if(auto membrane = dynamic_pointer_cast<NPulseMembraneCommon>(neuron->GetComponentByIndex(i)))
+            expected.push_back(membrane.Get());
+    EXPECT_EQ(neuron->Membranes, expected);
+}
+
 TEST(TimeLearnerModelIdentity, IgnoresDynamicsAndRootNameButRetainsEveryPhysicalBit)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
@@ -175,6 +184,7 @@ TEST(TimeLearnerModelIdentity, NativeAsymmetricXmlRoundtripRetainsFullSemanticMo
     auto channel = tip->GetComponentL<NPulseChannel>("ExcChannel", true);
     ASSERT_TRUE(synapse); ASSERT_TRUE(channel);
     synapse->Resistance = 333e6; channel->Capacity = 1.41e-9;
+    MembraneIndexMatchesNativeOrder(source);
     const auto original = Digest(source);
     USerStorageXML xml; ASSERT_TRUE(xml.Create("ModelIdentityFixture"));
     ASSERT_TRUE(source->SaveComponent(&xml, true, ptPubParameter | ptPubState | pgSystem));
@@ -182,6 +192,8 @@ TEST(TimeLearnerModelIdentity, NativeAsymmetricXmlRoundtripRetainsFullSemanticMo
     auto restored = dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(profile.neuronClass));
     ASSERT_TRUE(restored); restored->SetEnvironment(core.environment);
     ASSERT_TRUE(restored->LoadComponent(&xml,true)); restored->Init();
+    MembraneIndexMatchesNativeOrder(restored);
+    Artifact("asymmetric-restored.json", NmsdkTools::IdentifyModel(restored));
     EXPECT_EQ(Digest(restored), original);
     auto restoredSynapse = restored->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse2", true);
     ASSERT_TRUE(restoredSynapse); restoredSynapse->Resistance = 334e6;
