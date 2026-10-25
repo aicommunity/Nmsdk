@@ -177,7 +177,7 @@ TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess)
     if(child.exitCode()==0) EXPECT_LE(Read(output)["max_pairwise_error"].toDouble(),1e-12);
     core.storage->ReturnObject(model);
     }
-    catch(const RDK::UException& error) { FAIL() << phase << ": " << error.CreateLogMessage(); }
+    catch(const RDK::UException& error) { FAIL() << phase << ": " << typeid(error).name() << ": " << error.what(); }
     catch(const std::exception& error) { FAIL() << phase << ": " << error.what(); }
 }
 INSTANTIATE_TEST_SUITE_P(SingleRate,NativeArchive,::testing::Values(2000u,20000u));
