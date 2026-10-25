@@ -2,6 +2,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuronCommon.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembraneCommon.h"
 
 #include <QJsonArray>
@@ -165,6 +166,11 @@ QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model)
         if(auto membrane = dynamic_cast<NMSDK::NPulseMembraneCommon*>(component.Get()))
             for(size_t i = 0; i < membrane->GetNumChannels(); ++i)
                 cachedChannels.append(cachePath(membrane->GetChannel(i)));
+        if(auto neuron = dynamic_cast<NMSDK::NPulseNeuron*>(component.Get()))
+        {
+            node["cached_positive_generator"] = neuron->GetPosGenerator() ? cachePath(neuron->GetPosGenerator()) : QJsonValue(QJsonValue::Null);
+            node["cached_negative_generator"] = neuron->GetNegGenerator() ? cachePath(neuron->GetNegGenerator()) : QJsonValue(QJsonValue::Null);
+        }
         node["cached_membranes"] = cachedMembranes;
         node["cached_channels"] = cachedChannels;
         QJsonArray children;
