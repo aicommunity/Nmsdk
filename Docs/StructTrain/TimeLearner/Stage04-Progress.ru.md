@@ -61,10 +61,39 @@ Hash того baseline binary до пересборки не был снят; э
 
 Ограничения 4.3: это pairwise source→target проверка после native Reset, не
 универсальный checkpoint и не проверка growth с UseElementDefaults=true.
-Исходные waveform двух отдельных fixtures различаются (диапазоны 0.1938155 и
+На момент приёмки 4.3 исходные waveform двух отдельных fixtures различались (диапазоны 0.1938155 и
 0.00233225); равенство между независимыми fresh/reuse инициализациями этими
 тестами не устанавливается. Это отдельный обязательный контроль следующего
-подэтапа, а не основание объявлять все Reset/reuse контракты подтверждёнными.
+подэтапа; выявленные причины и исправление описаны ниже. Это не основание
+объявлять все Reset/reuse контракты подтверждёнными.
+
+Подэтап 4.4: до исправления NConstGenerator::AReset оставлял Output прежним,
+только взводя update flag; NPulseSynapseCommon сбрасывал PreOutput, но оставлял
+публичную проводимость Output. Потребители до первого native Calculate видели
+старое состояние. Source-only/synapse-only native tests воспроизвели оба дефекта;
+warm/fresh impulse test дал max difference 0.18559469050032673 после одинакового
+Init/Reset. Baseline root 85be9bfd907e36ac05ecf80d7f76acee9c30f7e4 сохранён
+в s04-reset-m40/before-fix вместе с runtime manifest и binary hash.
+
+Исправление на уровне владельцев: constant source публикует Amplitude в Reset,
+synapse обнуляет проводимость вместе с секрецией. Общий scheduler, computing
+order, storage physics и bool lifecycle не изменены. Это не требование нулевого
+rest-state: первый soma potential в тесте −1, constant generator output +1/−1.
+
+После исправления на обоих серверах 9/9 targeted lifecycle/roundtrip cases и
+полный PulseLib CTest прошли. Copy, XML и warm/fresh traces по 400 отсчётов при
+2000 Гц совпадают (max pairwise error=0) и имеют одинаковый ненулевой диапазон
+0.0023322486553478683. Сохранены исходные CSV, native XML/readback, checksums и
+manifests в s04-reset-elder1 и s04-reset-m40. Tested root:
+9e8086af724ff1b8eb851daeb3c6ec3f0e41cf7a; PulseLib code:
+9d8bac51ca526ea5d3bd27d6646c9260c5f1e55a; accepted merge:
+735fea58af4b1815dc332c7d38af5bf4f68d0855.
+
+Это исправляет проверенную зависимость первого тика от прежнего состояния,
+но не доказывает полную эквивалентность всех storage reuse/profile/frequency
+комбинаций. Первый отклик старых конфигураций в новом binary может измениться;
+исторические replay выполняются с их точными commits. Влияние на августовское
+обучение и устойчивость к порядку/ITI остаётся предметом научного A/B этапа 11.
 
 Этап 4 целиком остаётся в работе: нужны расширенные Copy/XML/growth/rebuild,
 heterogeneous profiles, коллизии образов, scalar/vector parameter assignment,

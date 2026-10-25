@@ -17,6 +17,7 @@ test report is not a trained-model result.
 | Frequency/lifecycle and native CSV collector | [Elder-1](s03-s04-elder1/README.md) |
 | Effective model graph and indexed property bindings | [Elder-1](s04-inspection-elder1/README.md), [M40](s04-inspection-m40/README.md) |
 | Native Copy/XML, explicit order and impulse traces | [Elder-1](s04-roundtrip-elder1/README.md), [M40](s04-roundtrip-m40/README.md) |
+| Rest outputs and warm/fresh Reset equivalence | [Elder-1](s04-reset-elder1/README.md), [M40](s04-reset-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md).
