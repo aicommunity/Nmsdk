@@ -4,6 +4,18 @@
 **Ветка:** plan/2026-10-25-dendrite-limits (Nmsdk, Bin, PulseLib)  
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
+## 11:22 MSK: D остановлена по решению Тима до рефакторинга
+
+- Решение Тима 25.10 11:22 MSK: сетка торможения D (InhGrid S50/S100, 32 задания D_c50_*/D_c100_* в очередях E05 .11/.17) остановлена до большого рефакторинга. Не чинить и не перезапускать. Досчитываются только A1_*_r2 (Branch, RminNoImproveMinProgress) и NSR_*/NSC_* (normsync). Новых заданий не добавлялось.
+- **D итог (32): завершено 15, прервано 13, снято из очереди 4.**
+  - Завершены (rc=0): .17 12 (D_c100: gen_n1, preinh_n1, segei_n1, nextseg_n0/n1, preinh_nextseg_n0/n1, preinh_segei_n1, nextseg_segei_n1, all_n0, all_n1 (досчитался сам в 11:24); D_c50_gen_n1); .11 3 (D_c50: preinh_nextseg_n1, preinh_segei_n1, nextseg_segei_n1).
+  - Прерваны 11:24-11:25 MSK (SIGTERM группе процессов задания; SIGKILL не понадобился): .11 5 (D_c50: all_n0, all_n1, nextseg_segei_n0, preinh_nextseg_n0, preinh_segei_n0); .17 8 (D_c100: gen_n0, preinh_n0, segei_n0, preinh_segei_n0, nextseg_segei_n0; D_c50: gen_n0, preinh_n0, preinh_n1). В диспетчере они отмечены rc=NA. Каталоги сохранены, в каждом файл STOPPED_BY_DECISION_2026-10-25. Результаты неполные, в сводках не использовать.
+  - Сняты из очереди (.17): D_c50_nextseg_n0/n1, D_c50_segei_n0/n1. Строки в queue.tsv закомментированы префиксом `# STOPPED_BY_DECISION_2026-10-25`, бэкап queue.tsv.bak_decision_1122.
+- Смоук-проверки прерванного разбора D (.17 runs/E05_smoke_flags, RT_segei_n1 / RT_nextseg_n1) закончились сами до остановки, дальше не ведутся.
+- Незавершённая правка e05_job.py из разбора D (аудит-гейты Train/Test, синхронизация флагов learner в Test Model) закоммичена как WIP без проверки: 552ce27. На .17 рабочий файл изменён в 11:20 MSK, поэтому NSR/NSC на .17, стартовавшие после этого, идут уже с этими гейтами. На .11 задания идут на 5c8f251, рабочую копию .11 не обновляли, пока очередь не закончится.
+- .11: NS_E2_c_N0 и NS_E5_c_N1 (normsync N0, не D) досчитываются. NS_E4_c_N0 не входит в список разрешённых заданий и снят с очереди как `# HOLD_BY_DECISION_2026-10-25`.
+- **Досчитывается:** .11: A1_*_r2 x5 (старт 11:24-11:26), NS x2 (идут с 08:43/09:10), в очереди NSR x6 + NSC x3 (7 слотов). .17: NSR x8 + NSC x2 идут, в очереди NSC_E1_b_N0_t0 (11 слотов). Оценка: .17 до ~13:30-14:30 MSK (NSC_E1_b_N0_t1 идёт с 09:49), .11 до ~15:00-16:00 MSK (A1 r1 шли 32-38 мин, r2 может идти дольше; NS ~2.5 ч на задание; NSR/NSC на .11 начнутся только после освобождения слотов).
+- Диспетчеры E05 (.11 pid 1696167, .17 pid 183987) работают дальше и берут только оставшиеся A1_r2/NSR/NSC.
 ## hourly 2026-10-25 11:05 MSK (08:05Z) - D grid 12/32 done, all negative, D methodology suspicious
 
 - Load: .11 7 Console (dispatcher slots 7) / 8 cores, .17 11 / 12 cores (dispatcher slots 11), load avg 9.8 / 13.0. Disk: .11 / 108 GB free (76%), .17 / 101 GB free (54%), /media/user/Data 393 GB free (89%). No archiving needed.
