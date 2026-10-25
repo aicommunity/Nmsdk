@@ -55,6 +55,9 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 | TL-007 | queue fingerprint | stall_autosave_n отсутствует при восстановлении | production serialization roundtrip |
 | TL-008 | process limiter | только точное имя executable | suffix binaries, owned PID |
 | TL-009 | publisher | push check=False и rsync | child push failure, Git closure |
+| TL-010 | Rdk UNet XML property order | scalar L=3 восстанавливалась как 0 после setter StructureBuildMode | code fix + native scalar growth/XML и общий setter regression; подэтап 4.6 |
+| TL-011 | Rdk UStorage cleanup | native события Parent, Child, Child при одном ClearObjectsStorage | code fix: корни ownership forest; failing/passing baseline в s04-profiles-elder1 |
+| TL-012 | Rdk channel destruction | ASan: NPulseGenerator::AReset читает Environment после его delete в ChannelDestroy | code fix порядка уничтожения; финальная ASan приёмка и публикация в работе |
 
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
