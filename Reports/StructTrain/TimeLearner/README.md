@@ -19,6 +19,8 @@ test report is not a trained-model result.
 | Native Copy/XML, explicit order and impulse traces | [Elder-1](s04-roundtrip-elder1/README.md), [M40](s04-roundtrip-m40/README.md) |
 | Rest outputs and warm/fresh Reset equivalence | [Elder-1](s04-reset-elder1/README.md), [M40](s04-reset-m40/README.md) |
 | Checked class images and common Copy lifecycle | [Elder-1](s04-images-elder1/README.md), [M40](s04-images-m40/README.md) |
+| Physical profiles, role-specific synapses, growth and scalar XML | [Elder-1](s04-profiles-elder1/README.md), [M40](s04-profiles-m40/README.md) |
+| Channel shutdown lifetime and ownership cleanup | [Elder-1 final](s04-shutdown-elder1/README.md), [M40 ASan before/after](s04-profiles-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md).

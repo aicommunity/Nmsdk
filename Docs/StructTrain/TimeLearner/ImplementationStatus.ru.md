@@ -63,11 +63,20 @@ fresh/reuse матрица остаются в работе; научное A/B 
 имён и сохранность физики. Исправлен общий UContainer::Copy: инициализация
 прежнего графа больше не сохраняется после замены детей. На обоих серверах
 15 targeted cases и четыре maintained Rdk/PulseLib CTest suites прошли.
-Применение registry к production profiles, росту и versioned export ещё впереди.
+Полный versioned export и карта всех production-профилей ещё впереди.
 
-Согласованные develop merge: Rdk c80200bf1cd2bc8beec35546d3022da86afd35c9,
-PulseLib 735fea58af4b1815dc332c7d38af5bf4f68d0855,
-Bin 7136679740c5aa97def6fd3700b7b781d97af8f2. Корень содержит эти gitlinks.
+Подэтап 4.6: реализованы явные физические storage-рецепты, отдельные Exc/Inh
+образы синапсов и body/LT. Рост сохраняет learned Rs/C; устранены Ns wakeup toggles.
+Native проверки выявили и закрыли три общих дефекта: XML setter order,
+повторный Free при очистке storage и Environment use-after-free при shutdown.
+На обоих серверах прошли 11 адресных проверок и четыре CTest suites, на M40 —
+полный ASan run 122 cases через shutdown (leak detection выключен).
+Артефакты: s04-profiles-elder1, s04-shutdown-elder1, s04-profiles-m40.
+Это не полная миграция всех физических моделей или реализация ModelSpec.
+
+Согласованные develop merge: Rdk b15f4384c4516c865afc59a83b487acd477744d0,
+PulseLib 77cc52d06852cef0ddcd256a528283dd90631f49,
+Bin 83ab62fcb40f62affd83f66ae68fcd557de55d53. Корень содержит эти gitlinks.
 Все изменения вводятся merge commits; tested SHA сохранены в manifests.
 
 ## Серверы
