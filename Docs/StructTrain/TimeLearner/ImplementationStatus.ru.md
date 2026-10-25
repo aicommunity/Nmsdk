@@ -88,8 +88,14 @@ native graph. Исправлено различие membrane index после fr
 всех шести сохранённых случаев. PulseLib merge:
 4af8184275e182b943bb43df7447f8f7a065d73d.
 
-Полный ModelArchive, перенос definitions в свежий storage, явные boundary ports,
-calibration/conversion metadata и реальный Train → frozen Test остаются открыты.
+Подэтап 5.2: native ModelArchive переносит замкнутую физическую модель и
+definitions в свежий процесс. На обоих серверах прошли пять parent controls с
+двумя child imports и четыре CTest suites. Реальный Git-перенос M40 → Elder-1
+дал совпадение identity и 200/2000 waveform samples (max error=0).
+Источник 41 узел, 34 class definitions; metadata model_spec/not_trained.
+
+Явные boundary ports, реальные learner metadata/certificate adapters, безопасный
+registration rollback, controller checkpoint и Train → frozen Test остаются открыты.
 Подробности: [Stage05-Progress](Stage05-Progress.ru.md).
 
 ## Серверы
@@ -103,4 +109,4 @@ calibration/conversion metadata и реальный Train → frozen Test ост
 
 Этап 1 требует завершения semantic/evidence review; этап 4 требует оставшихся
 lifecycle/graph проверок; этапы 5–12 ещё не завершены. Pending не обозначается PASS,
-version 2 не объявляется production-ready до серверной проверки.
+version 2 не объявляется production-ready до всей обязательной проверки.

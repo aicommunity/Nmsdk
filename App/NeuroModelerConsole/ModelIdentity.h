@@ -3,6 +3,8 @@
 #include "../../../Rdk/Deploy/Include/rdk.h"
 
 namespace NmsdkTools {
+// Version-1 length-framed UTF8/binary64 encoding shared by identity and archive.
+QString CanonicalModelDataSha256(const QJsonValue& data);
 // Read-only semantic identity of a complete, ready, self-contained graph.
 // Dynamic state, names/IDs of the root and presentation/diagnostic settings are
 // excluded. Unsupported parameter types or unresolved bindings invalidate it.

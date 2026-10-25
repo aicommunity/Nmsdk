@@ -183,6 +183,12 @@ QString FirstDifference(const QJsonValue& a, const QJsonValue& b, const QString&
 }
 }
 
+QString CanonicalModelDataSha256(const QJsonValue& data)
+{
+    QByteArray canonical; Canonical(canonical, data);
+    return QString::fromLatin1(QCryptographicHash::hash(canonical, QCryptographicHash::Sha256).toHex());
+}
+
 QJsonObject IdentifyModel(UEPtr<UContainer> model)
 {
     QJsonObject result; result["schema_version"] = 1; result["kind"] = "semantic_model_identity";
@@ -315,8 +321,7 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
     result["model"] = semantic; result["diagnostics"] = diagnostics; result["valid"] = diagnostics.isEmpty();
     if(diagnostics.isEmpty())
     {
-        QByteArray canonical; Canonical(canonical, semantic);
-        result["sha256"] = QString::fromLatin1(QCryptographicHash::hash(canonical, QCryptographicHash::Sha256).toHex());
+        result["sha256"] = CanonicalModelDataSha256(semantic);
     }
     return result;
 }
