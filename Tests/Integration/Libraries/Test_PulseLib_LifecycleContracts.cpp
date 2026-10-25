@@ -3,6 +3,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembraneCommon.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NConstGenerator.h"
 #include "../Support/ConsoleLikeInit.h"
 
 #include <string>
@@ -31,6 +32,33 @@ protected:
     bool ACalculate() override { hooks.push_back("calculate"); ++samples; return true; }
     bool AAfterCalculate() override { hooks.push_back("after"); return true; }
 };
+
+TEST(TimeLearnerNativeLifecycle, ConstantSourceResetPublishesRestValueBeforeFirstTick)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto source = dynamic_pointer_cast<NMSDK::NConstGenerator>(core.storage->TakeObject("NPNeuronPosCGenerator"));
+    ASSERT_TRUE(source);
+    source->SetEnvironment(core.environment);
+    source->Init();
+    source->Output.Assign(1, 1, 0.);
+    source->Reset();
+    EXPECT_DOUBLE_EQ(source->Output(0, 0), source->Amplitude.GetData());
+    core.storage->ReturnObject(source);
+}
+
+TEST(TimeLearnerNativeLifecycle, SynapseResetClearsConductanceBeforeFirstTick)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto synapse = dynamic_pointer_cast<NMSDK::NPulseSynapse>(core.storage->TakeObject("NPSynapse"));
+    ASSERT_TRUE(synapse);
+    synapse->SetEnvironment(core.environment);
+    synapse->Init();
+    synapse->Output.Assign(1, 1, 1e-8);
+    synapse->Reset();
+    EXPECT_DOUBLE_EQ(synapse->PreOutput.GetData(), 0.);
+    EXPECT_DOUBLE_EQ(synapse->Output(0, 0), 0.);
+    core.storage->ReturnObject(synapse);
+}
 
 TEST(TimeLearnerNativeLifecycle, ResetRefreshesSynapseStepCoefficients)
 {
