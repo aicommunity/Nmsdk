@@ -8,6 +8,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_StorageComponents.cpp
     Test_PulseLib_NeuronGrowth.cpp
     Test_PulseLib_TimeLearnerResistance.cpp
+    Test_PulseLib_Observations.cpp
     Test_PulseLib_Main.cpp
 )
 
