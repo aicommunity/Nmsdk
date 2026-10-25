@@ -1,0 +1,45 @@
+Note: Google Test filter = TimeLearnerClassImages.*:TimeLearnerNativeRoundtrip.*:TimeLearnerNativeLifecycle.*
+[==========] Running 15 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 5 tests from TimeLearnerNativeLifecycle
+[ RUN      ] TimeLearnerNativeLifecycle.ConstantSourceResetPublishesRestValueBeforeFirstTick
+[       OK ] TimeLearnerNativeLifecycle.ConstantSourceResetPublishesRestValueBeforeFirstTick (434 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.SynapseResetClearsConductanceBeforeFirstTick
+[       OK ] TimeLearnerNativeLifecycle.SynapseResetClearsConductanceBeforeFirstTick (0 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.ResetRefreshesSynapseStepCoefficients
+[       OK ] TimeLearnerNativeLifecycle.ResetRefreshesSynapseStepCoefficients (0 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.BuildResetAndCalculateHaveObservableNativeOrder
+[       OK ] TimeLearnerNativeLifecycle.BuildResetAndCalculateHaveObservableNativeOrder (0 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.StorageImageSurvivesFreshTakeAndReuse
+[       OK ] TimeLearnerNativeLifecycle.StorageImageSurvivesFreshTakeAndReuse (4 ms)
+[----------] 5 tests from TimeLearnerNativeLifecycle (439 ms total)
+
+[----------] 5 tests from TimeLearnerNativeRoundtrip
+[ RUN      ] TimeLearnerNativeRoundtrip.CopyPreservesFullGraphParametersCachesAndImpulse
+[       OK ] TimeLearnerNativeRoundtrip.CopyPreservesFullGraphParametersCachesAndImpulse (768 ms)
+[ RUN      ] TimeLearnerNativeRoundtrip.XmlPreservesFullGraphParametersCachesAndImpulse
+[       OK ] TimeLearnerNativeRoundtrip.XmlPreservesFullGraphParametersCachesAndImpulse (791 ms)
+[ RUN      ] TimeLearnerNativeRoundtrip.ModeZeroRebuildPreservesExplicitSiblingOrder
+[       OK ] TimeLearnerNativeRoundtrip.ModeZeroRebuildPreservesExplicitSiblingOrder (11 ms)
+[ RUN      ] TimeLearnerNativeRoundtrip.ResetMakesWarmAndUncalculatedGraphsRespondEqually
+[       OK ] TimeLearnerNativeRoundtrip.ResetMakesWarmAndUncalculatedGraphsRespondEqually (776 ms)
+[ RUN      ] TimeLearnerNativeRoundtrip.CopyIntoInitializedTargetRequiresFreshNativeInitialization
+[       OK ] TimeLearnerNativeRoundtrip.CopyIntoInitializedTargetRequiresFreshNativeInitialization (758 ms)
+[----------] 5 tests from TimeLearnerNativeRoundtrip (3106 ms total)
+
+[----------] 5 tests from TimeLearnerClassImages
+[ RUN      ] TimeLearnerClassImages.OwnsSeparateImageAndAllowsEquivalentAliasRegistration
+[       OK ] TimeLearnerClassImages.OwnsSeparateImageAndAllowsEquivalentAliasRegistration (0 ms)
+[ RUN      ] TimeLearnerClassImages.CollisionCannotChangeAlreadyCreatedInstances
+[       OK ] TimeLearnerClassImages.CollisionCannotChangeAlreadyCreatedInstances (0 ms)
+[ RUN      ] TimeLearnerClassImages.NonfiniteParameterAndExternalBindingAreRejected
+[       OK ] TimeLearnerClassImages.NonfiniteParameterAndExternalBindingAreRejected (0 ms)
+[ RUN      ] TimeLearnerClassImages.NativeCopyKeepsExplicitHeterogeneousGraph
+[       OK ] TimeLearnerClassImages.NativeCopyKeepsExplicitHeterogeneousGraph (7 ms)
+[ RUN      ] TimeLearnerClassImages.ContradictingParentDefaultsCannotSilentlyErasePhysics
+[       OK ] TimeLearnerClassImages.ContradictingParentDefaultsCannotSilentlyErasePhysics (4 ms)
+[----------] 5 tests from TimeLearnerClassImages (12 ms total)
+
+[----------] Global test environment tear-down
+[==========] 15 tests from 3 test suites ran. (3558 ms total)
+[  PASSED  ] 15 tests.
