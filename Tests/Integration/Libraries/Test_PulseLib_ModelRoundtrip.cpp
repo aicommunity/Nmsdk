@@ -100,7 +100,7 @@ void CompareNativeImpulse(UEPtr<NPulseNeuron> source, UEPtr<NPulseNeuron> target
     int worstTick = -1;
     std::ostringstream trace;
     trace.imbue(std::locale::classic());
-    trace << std::setprecision(17) << "tick,time_s,stimulus,source_soma2_exc,target_soma2_exc\n";
+    trace << std::setprecision(17) << "tick,tick_start_s,stimulus,source_soma2_exc,target_soma2_exc\n";
     for(int tick = 0; tick < 400; ++tick)
     {
         const double stimulus = tick >= 10 && tick < 12 ? 1. : 0.;
