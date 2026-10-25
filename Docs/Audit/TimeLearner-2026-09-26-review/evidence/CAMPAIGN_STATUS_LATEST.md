@@ -4,6 +4,25 @@
 **Ветка:** 2026-10-24T21:45Z (00:45 MSK 25.10)
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
 
+## E05 hourly 2026-10-25 04:05 MSK (01:05Z) - BE3 re-tests of refused Classic structures
+
+**BE3 (best-effort transfer v3, verified: be_check L/C/tips all true, analyzer rows present).** Classic Train structures tested at dt 0.5 ms, target not first (q = S/4,S/8; i6 = ITI 6 s; g5 = gate05):
+- E1_c (S100, tau 2 ms, refused): L 49 47 29 1; m_S4 -0.048, m_S8 -0.009, m8_iti6 -0.144, m8_gate05 -0.144. FAIL as predicted.
+- E2_c (tau 0.75 ms, Rm_inh 1e7, refused): L 393 337 217 1 (predicted 400 334 200); m_S4 -0.265, m_S8 0.000.
+- E3off_c / E3weak_c (no/weak inhibition, refused): L 393 345 217 1; m_S4 -0.267, m8_gate05 -0.508.
+- E4_c == E4off_c (C 1e-10, refused): L 201 177 105 1 (predicted 200 168 101); m_S4 -0.207, m_S8 -0.219, m8_iti6 -0.151, m8_gate05 -0.151. Inhibition on/off bit-equal in metrics.
+- E5_c (S50, tau 0.75 ms; train_valid TRUE): L 209 185 105 1; m_S4 -0.468, m8_iti6 -0.653, m8_gate05 -0.653. FAIL as predicted (boundary control).
+
+**Interpretation.** (1) Classic structural learning reaches the theoretically expected L (delay-sync residue within tol) for E2 and E4, so dendrite length / MaxDendriteLength is NOT the limit at dt 0.5 ms. What fails is selectivity: every trained structure responds more to samples than to the target (m < 0). Hypothesis to verify: E0 Console/segsim amplitude ratio 0.36-0.40 at L 200-400 means long dendrites attenuate the signal much more than in segsim; tip R compensates up to rmax 1e10 -> C++ refusal, and the summed peak at the soma loses the coincidence advantage of the target. (2) Inhibition (pre/post, nextseg) has no measurable effect in either trainer at these settings (E4_c == E4off_c; E4_b == E4off_b; E3off_b == E3weak_b). Consistent with REPASS_ITI6.
+
+**REPASS_ITI6 .11:** 46/74 cases done, max sep -0.0004 (no case > 0); batch jobs_009 running (6 Console). .17 REPASS done earlier (see 02:20 entry).
+
+**Series E0-E5 status:** all planned points executed; queues empty on both hosts (.11 busy with REPASS, .17 finishing last Classic trains E5off_c_s0_r, E5_c_s1_r and x11 BE3g5). No new series launched: further points (Branch stop criterion, real replicate variability, Classic rmax / attenuation) need Tim's decision. Next-plan draft: open questions listed in the 00:45Z audit section.
+
+**Disk 04:00 MSK:** .11 / 134 GB free (70%); .17 / 115 GB free (47%); /media/user/Data 402 GB free (89% used, threshold 5% not reached).
+
+---
+
 ## E05 series audit 2026-10-25 03:45 MSK (00:45Z) - problems A-D
 
 **A. Seed replicates identical.** No seed exists: e05_job `jitter` multiplies only the LAST tip (TipSynapseResistance[-1], L=1 dendrite); C++ SoftCold reset canonicalises it to TipResistanceCanonLast=86000000 (audit `reset_complete tip_r=[...,86000000]`), Console is deterministic. Bit-identical pairs: E2_b s0n/s1/s2, E1_b s1/s2, E3off_b s0/s1, E4off_b s0/s1, E3weak_b s0_r/s1_r, E4_b s0n_r/s1_r, E5_b s0_r/s1_r; Classic E1_c s0/s1/s2, E3off_c, E4off_c, E4_c same final L. Fix: jitter flagged `jitter_effective=false`, comma parse fixed; s1/s2 replicates dropped/killed. Real variability needs Tim's choice (pattern jitter / excitatory tips / init L).
