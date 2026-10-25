@@ -28,11 +28,15 @@ os.environ["TIMELEARNER_MATRIX_RUNS_ROOT"] = str(OUT / "work")  # always inside 
 Path(os.environ["TIMELEARNER_MATRIX_RUNS_ROOT"]).mkdir(parents=True, exist_ok=True)
 from repro_cold_lib import get_tag, set_tag, set_tag_all, ensure_tag_after  # noqa
 STEP = 2000
+if SPEC.get("console"):  # per-job console (e.g. PulseLib e05c with RminNoImproveMinProgress); also seen by posttune_verify
+    os.environ["NMSDK_CONSOLE"] = os.path.expanduser(SPEC["console"])
 CONSOLE = os.environ.get("NMSDK_CONSOLE") or str(NM / "Bin/Platform/Linux/NeuroModelerConsole")
 kind, span = SPEC["kind"], int(SPEC["span"])
 mod, mode = SPEC.get("mod", "preinh"), SPEC.get("mode", "N1")
-SRC = ST / "SelectivityTauCm" / f"EXP_{kind}_S{span}_{mod}_TauH0_{mode}"
-TRAIN_T = {50: 640, 100: 1280}[span]
+# 2026-10-25 (plan A/D/E): spec "src" (path rel. to StructTrain or absolute) and "base_case" (posttune_verify CASES key)
+# allow non-TauH0 sources (SelectivityInhGrid); "train_t" overrides the sim-time budget.
+SRC = (Path(SPEC["src"]) if os.path.isabs(SPEC["src"]) else ST / SPEC["src"]) if SPEC.get("src") else ST / "SelectivityTauCm" / f"EXP_{kind}_S{span}_{mod}_TauH0_{mode}"
+TRAIN_T = int(SPEC.get("train_t") or {50: 640, 100: 1280}[span])
 DTYPE = ' Type="d" PType="257" IoType="17"'
 ITYPE = ' Type="i" PType="257" IoType="17"'
 BTYPE = ' Type="b" PType="257" IoType="17"'
@@ -57,6 +61,8 @@ def patch_xml(t, with_L=True):
             t = ensure_tag_after(t, "EnableDebug", "InitEstDelayPerSeg", repr(float(SPEC["est"])), DTYPE)  # Branch: initial adaptive estimate (PulseLib e05b)
         for k, v in SPEC.get("ov", {}).items():
             t = ensure_tag_after(t, "EnableDebug", k, repr(float(v)), DTYPE)
+        for k, v in SPEC.get("lset", {}).items():  # learner property {name: [value, d|i|b]} (e.g. RminNoImproveMinProgress, PulseLib e05c)
+            t = ensure_tag_after(t, "EnableDebug", k, str(v[0]), {"d": DTYPE, "i": ITYPE, "b": BTYPE}[v[1]])
         for k, v in SPEC.get("dlog", {}).items():
             t = ensure_tag_after(t, "EnableDebug", k, str(int(v)), BTYPE if k == "DynamicsLogComponentState" else ITYPE)
     return t
@@ -70,8 +76,13 @@ def readback(d):
         t = p.read_text(encoding="utf-8", errors="replace")
         for k in ("NeuronClassName", "DendriteLength", "MaxDendriteLength", "EstDelayPerSeg", "InitEstDelayPerSeg", "MembraneCapacity", "TipSynapseResistance",
                   "OverrideMembraneCapacity", "OverrideExcMembraneResistance", "OverrideInhMembraneResistance",
-                  "OverrideExcSynapseResistance", "OverrideInhSynapseResistance", "DynamicsLogHead", "DynamicsLogEvery"):
+                  "OverrideExcSynapseResistance", "OverrideInhSynapseResistance", "DynamicsLogHead", "DynamicsLogEvery",
+                  "RminNoImproveMinProgress", "NormalizationMode", "EnablePostTrainTuning", "EnableNextSegmentInhibition", "EnableSegExcInh"):
             r[f"{rel[:-7]}.{k}"] = get_tag(t, k)
+        # inhibition readback (D): presynaptic inhibition lives in the synapse flags, not in InhSynapse overrides
+        r[f"{rel[:-7]}.UsePresyn_n1"] = len(re.findall(r"<UsePresynapticInhibition\b[^>]*>\s*1\s*<", t))
+        r[f"{rel[:-7]}.UsePresyn_n"] = len(re.findall(r"<UsePresynapticInhibition\b", t))
+        r[f"{rel[:-7]}.InhCoeff_nz"] = len([x for x in re.findall(r"<InhibitionCoeff\b[^>]*>([^<]*)<", t) if x.strip() and float(x.split()[0].replace(",", ".")) != 0.0])
     ini = (d / "Project.ini").read_text() if (d / "Project.ini").is_file() else ""
     m = re.search(r"<DefaultTimeStep>(\d+)<", ini); r["DefaultTimeStep"] = m.group(1) if m else None
     m = re.search(r"<GlobalTimeStep>(\d+)<", ini); r["GlobalTimeStep"] = m.group(1) if m else None
@@ -100,7 +111,7 @@ log("TEMPLATE", SRC.name, "->", tpl, json.dumps(readback(tpl / "Train")))
 
 import posttune_verify as mod_pv
 case = f"e05_{SPEC['label']}"
-base_key = f"h0_{kind[0]}{span}_{mod}_{mode.lower()}_{SPEC.get('pt', 'pton')}"
+base_key = SPEC.get("base_case") or f"h0_{kind[0]}{span}_{mod}_{mode.lower()}_{SPEC.get('pt', 'pton')}"
 mod_pv.CASES[case] = dict(mod_pv.CASES[base_key]); mod_pv.CASES[case]["root"] = tpl
 log("BASE_CASE", base_key, {k: v for k, v in mod_pv.CASES[case].items() if k != "h0_meta"})
 _orig = mod_pv.soft_cold_reset_train
@@ -154,7 +165,8 @@ def row_of(times, off):
     return [off + times[0]] + [times[i] - times[i - 1] for i in range(1, 4)]
 
 TESTSRC = None  # set below: work/Test (trained) or OUT/be_Test (best-effort transfer of refused structure)
-def run_test(name, samples, classes, delay):
+INH_OFF = {"UsePresynapticInhibition": "0", "InhibitionCoeff": "0", "EnableNextSegmentInhibition": "0", "EnableSegExcInh": "0"}
+def run_test(name, samples, classes, delay, inh_off=False):
     src = TESTSRC
     d = OUT / "xt" / name
     if d.exists():
@@ -169,6 +181,9 @@ def run_test(name, samples, classes, delay):
             t = re.sub(r'(<MatrixData Type="MDMatrix&lt;d&gt;" Rows="32" Cols="1"[^>]*>)[^<]*(</MatrixData>)', lambda m: m.group(1) + data + m.group(2), t)
             t = re.sub(r'(<MatrixClasses Type="MDMatrix&lt;i&gt;" Rows="1" Cols="8"[^>]*>)[^<]*(</MatrixClasses>)', lambda m: m.group(1) + "\n".join(map(str, classes)) + m.group(2), t)
         t = re.sub(r'(<Delay Type="d" PType="257" IoType="17">)1\.5(</Delay>)', r'\g<1>%s\g<2>' % delay, t)
+        if inh_off:  # all inhibition mechanisms off in the trained Test (structure unchanged)
+            for k, v in INH_OFF.items():
+                t = set_tag_all(t, k, v)
         p.write_text(t, encoding="utf-8")
     tsec = str(int(8 * (float(delay) + 0.05) + 15 if float(delay) >= 1.0 else 8 * (float(delay) + 0.2) + 25))  # short ITI: ~13 s warm-up before trial 0 (itiS 17 s gave 2 rows)
     with open(d / "console.log", "w") as f:
@@ -300,7 +315,31 @@ if work and (work / "Test" / "Parameters_00.xml").is_file() and not res.get("ski
                     break
     steps = sorted({round(b - a, 7) for a, b in zip(nows, nows[1:]) if b > a})
     res["dyn_now_min_step"] = steps[0] if steps else None
+    # D extras (2026-10-25): second target position (last, pos 7) and inhibition on/off pairs
+    def m8_run(name, pm, delay, inh_off=False):
+        rows, rb = run_test(name, [smp[i] for i in pm], [cls[i] for i in pm], delay, inh_off)
+        tg = [float(x["ltz_potential_max"]) for x in rows if x["target_class"] == "1"]
+        fo = [float(x["ltz_potential_max"]) for x in rows if x["target_class"] == "0"]
+        res[f"{name}_perm"] = pm; res[f"{name}_rows"] = len(rows)
+        res[f"m8_{name}"] = (min(tg) - max(fo)) / min(tg) if tg and fo and min(tg) else None
+        res[f"{name}_target_max"] = tg; res[f"{name}_foil_max"] = max(fo) if fo else None
+        res[f"{name}_target_fired"] = [int(x["neuron_fired"]) for x in rows if x["target_class"] == "1"]
+        res[f"{name}_foils_fired"] = sum(int(x["neuron_fired"]) for x in rows if x["target_class"] == "0")
+        res[f"readback_{name}"] = {k: rb.get(k) for k in rb if k.split(".")[-1] in ("DefaultTimeStep", "GlobalTimeStep", "UsePresyn_n1", "UsePresyn_n", "InhCoeff_nz", "EnableNextSegmentInhibition", "EnableSegExcInh")}
+        res[f"readback_{name}"].update({"DefaultTimeStep": rb.get("DefaultTimeStep"), "GlobalTimeStep": rb.get("GlobalTimeStep")})
+        return tg, fo
+    perm7 = others + [tgt_i]
+    if "gate05_t7" in TESTS:
+        m8_run("gate05_t7", perm7, "1.5")
+    if "gate05_off" in TESTS:
+        m8_run("gate05_off", perm5, "1.5", True)
+    if "iti6_off" in TESTS:
+        m8_run("iti6_off", perm, "6.0", True)
+    if "iti6_t7" in TESTS:
+        m8_run("iti6_t7", perm7, "6.0")
+    if "itiS" in TESTS and "itiS_off" in TESTS:
+        m8_run("itiS_off", others[:3] + [tgt_i] + others[3:], "0.3" if span == 100 else "0.2", True)
 res["wall_total_s"] = round(time.time() - t0)
 (OUT / "result.json").write_text(json.dumps(res, indent=1, default=str))
-log("RESULT", json.dumps({k: res.get(k) for k in ("train_valid", "metrics_basis", "be_check", "m_S4", "m_S8", "m8_gate05", "gate05_dt_ok", "m8_iti6", "m8_itiS", "m8_phase8_gate", "phase8_gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
+log("RESULT", json.dumps({k: res.get(k) for k in ("train_valid", "metrics_basis", "be_check", "m_S4", "m_S8", "m8_gate05", "gate05_dt_ok", "m8_iti6", "m8_itiS", "m8_gate05_t7", "m8_gate05_off", "m8_iti6_off", "m8_phase8_gate", "phase8_gate_GlobalTimeStep", "final_L", "dyn_now_min_step", "wall_total_s")}, default=str))
 log("JOB_DONE")
