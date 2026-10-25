@@ -39,10 +39,12 @@ TEST(TimeLearnerNativeLifecycle, ResetRefreshesSynapseStepCoefficients)
     synapse.SetStorage(core.storage);
     synapse.SetEnvironment(core.environment);
     synapse.Default();
+    synapse.Activity = true; // TakeObject activates instances; this fixture allocates directly.
     synapse.SecretionTC = .001;
     synapse.DissociationTC = .002;
     synapse.SetGlobalTimeStep(2000);
     synapse.Init();
+    ASSERT_TRUE(synapse.IsInit());
     synapse.Reset();
     EXPECT_DOUBLE_EQ(synapse.SecretionSteps(), 2.0);
     EXPECT_DOUBLE_EQ(synapse.DissociationSteps(), 4.0);
@@ -70,6 +72,7 @@ TEST(TimeLearnerNativeLifecycle, BuildResetAndCalculateHaveObservableNativeOrder
     trace->SetStorage(core.storage);
     trace->SetEnvironment(core.environment);
     trace->Default();
+    trace->Activity = true;
     trace->Name = "LifecycleTrace";
     ASSERT_NE(model->AddComponent(trace), ForbiddenId);
     trace->SetGlobalTimeStep(model->GetTimeStep());
@@ -103,7 +106,7 @@ TEST(TimeLearnerNativeLifecycle, StorageImageSurvivesFreshTakeAndReuse)
         auto neuron = dynamic_pointer_cast<NMSDK::NPulseNeuron>(component);
         ASSERT_TRUE(neuron);
         // Do not Default here: TakeObject already applies the class image.
-        auto membrane = neuron->GetComponentL<NMSDK::NPulseMembraneCommon>("Dendrite1_1", true);
+        auto membrane = neuron->GetComponentL<NMSDK::NPulseMembraneCommon>("Soma1", true);
         ASSERT_TRUE(membrane);
         auto channel = membrane->GetComponentL<NMSDK::NPulseChannel>("ExcChannel", true);
         ASSERT_TRUE(channel);
