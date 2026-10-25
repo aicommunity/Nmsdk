@@ -1,0 +1,48 @@
+Note: Google Test filter = TimeLearnerClassImages.*:TimeLearnerNativeRoundtrip.CopyIntoInitialized*
+[==========] Running 6 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from TimeLearnerNativeRoundtrip
+[ RUN      ] TimeLearnerNativeRoundtrip.CopyIntoInitializedTargetRequiresFreshNativeInitialization
+/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ModelRoundtrip.cpp:248: Failure
+Value of: target->IsInit()
+  Actual: true
+Expected: false
+Replacing the graph invalidates its previous initialization
+
+[  FAILED  ] TimeLearnerNativeRoundtrip.CopyIntoInitializedTargetRequiresFreshNativeInitialization (1235 ms)
+[----------] 1 test from TimeLearnerNativeRoundtrip (1235 ms total)
+
+[----------] 5 tests from TimeLearnerClassImages
+[ RUN      ] TimeLearnerClassImages.OwnsSeparateImageAndAllowsEquivalentAliasRegistration
+[       OK ] TimeLearnerClassImages.OwnsSeparateImageAndAllowsEquivalentAliasRegistration (0 ms)
+[ RUN      ] TimeLearnerClassImages.CollisionCannotChangeAlreadyCreatedInstances
+[       OK ] TimeLearnerClassImages.CollisionCannotChangeAlreadyCreatedInstances (0 ms)
+[ RUN      ] TimeLearnerClassImages.NonfiniteParameterAndExternalBindingAreRejected
+[       OK ] TimeLearnerClassImages.NonfiniteParameterAndExternalBindingAreRejected (0 ms)
+[ RUN      ] TimeLearnerClassImages.NativeCopyKeepsExplicitHeterogeneousGraph
+/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ClassImages.cpp:109: Failure
+Value of: readback["valid"].toBool()
+  Actual: false
+Expected: true
+[
+    "PNeuron: cached component is outside the named graph"
+]
+
+
+[  FAILED  ] TimeLearnerClassImages.NativeCopyKeepsExplicitHeterogeneousGraph (8 ms)
+[ RUN      ] TimeLearnerClassImages.ContradictingParentDefaultsCannotSilentlyErasePhysics
+/home/user/timelearner-refactor/source/Tests/Integration/Libraries/Test_PulseLib_ClassImages.cpp:127: Failure
+Failed
+
+[  FAILED  ] TimeLearnerClassImages.ContradictingParentDefaultsCannotSilentlyErasePhysics (4 ms)
+[----------] 5 tests from TimeLearnerClassImages (12 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 2 test suites ran. (1248 ms total)
+[  PASSED  ] 3 tests.
+[  FAILED  ] 3 tests, listed below:
+[  FAILED  ] TimeLearnerNativeRoundtrip.CopyIntoInitializedTargetRequiresFreshNativeInitialization
+[  FAILED  ] TimeLearnerClassImages.NativeCopyKeepsExplicitHeterogeneousGraph
+[  FAILED  ] TimeLearnerClassImages.ContradictingParentDefaultsCannotSilentlyErasePhysics
+
+ 3 FAILED TESTS
