@@ -141,6 +141,29 @@ TEST(TimeLearnerModelIdentity, DoesNotInitializeAnUnreadyModel)
     core.storage->ReturnObject(graph);
 }
 
+TEST(TimeLearnerModelIdentity, VerifiesStoredDataBeforeComparingTheActualGraph)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto graph = Graph(); ASSERT_TRUE(graph);
+    const auto expected = NmsdkTools::IdentifyModel(graph);
+    auto check = NmsdkTools::VerifyModelIdentity(expected, graph);
+    EXPECT_TRUE(check["valid"].toBool()); EXPECT_TRUE(check["match"].toBool());
+    graph->Gain = 2e-9;
+    check = NmsdkTools::VerifyModelIdentity(expected, graph);
+    EXPECT_TRUE(check["valid"].toBool()); EXPECT_FALSE(check["match"].toBool());
+    EXPECT_EQ(check["reason"].toString(), "model_mismatch");
+    EXPECT_TRUE(check["first_difference"].toString().contains("Gain"));
+    auto corrupt = expected; corrupt["sha256"] = QString(64, '0');
+    check = NmsdkTools::VerifyModelIdentity(corrupt, graph);
+    EXPECT_FALSE(check["valid"].toBool()); EXPECT_FALSE(check["match"].toBool());
+    EXPECT_EQ(check["reason"].toString(), "expected_digest_mismatch");
+    corrupt = expected; corrupt["schema_version"] = 999;
+    EXPECT_FALSE(NmsdkTools::VerifyModelIdentity(corrupt, graph)["valid"].toBool());
+    corrupt = expected; auto model = corrupt["model"].toObject(); model["nodes"] = QJsonArray{}; corrupt["model"] = model;
+    EXPECT_FALSE(NmsdkTools::VerifyModelIdentity(corrupt, graph)["valid"].toBool());
+    core.storage->ReturnObject(graph);
+}
+
 class UnsupportedIdentityGraph : public IdentityGraph
 {
 public:
@@ -195,6 +218,7 @@ TEST(TimeLearnerModelIdentity, NativeAsymmetricXmlRoundtripRetainsFullSemanticMo
     MembraneIndexMatchesNativeOrder(restored);
     Artifact("asymmetric-restored.json", NmsdkTools::IdentifyModel(restored));
     EXPECT_EQ(Digest(restored), original);
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(NmsdkTools::IdentifyModel(source), restored)["match"].toBool());
     auto restoredSynapse = restored->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse2", true);
     ASSERT_TRUE(restoredSynapse); restoredSynapse->Resistance = 334e6;
     EXPECT_NE(Digest(restored), original); restoredSynapse->Resistance = 333e6;

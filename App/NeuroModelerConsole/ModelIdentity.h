@@ -8,4 +8,7 @@ namespace NmsdkTools {
 // excluded. Unsupported parameter types or unresolved bindings invalidate it.
 // The code/runtime identity and controller certificate remain separate records.
 QJsonObject IdentifyModel(RDK::UEPtr<RDK::UContainer> model);
+// Validate the archived identity itself, then compare against an independently
+// captured native model. Never trust a stored hash without checking its data.
+QJsonObject VerifyModelIdentity(const QJsonObject& expected, RDK::UEPtr<RDK::UContainer> model);
 }
