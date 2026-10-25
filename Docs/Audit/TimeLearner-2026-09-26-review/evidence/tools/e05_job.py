@@ -50,6 +50,8 @@ def patch_ini(p):
     p.write_text(t)
 
 def patch_xml(t, with_L=True):
+    if SPEC.get("neuron"):  # D: PSI only via neuron class (BuildStructure rebuilds synapses from NeuronClassName; XML synapse flags are overwritten)
+        t = set_tag_all(t, "NeuronClassName", SPEC["neuron"])
     if with_L and SPEC.get("L_init"):
         t = set_tag_all(t, "DendriteLength", SPEC["L_init"])
     if SPEC.get("maxdl"):
@@ -95,6 +97,16 @@ def readback(d):
         except OSError:
             pass
     r["override_log"] = ov[:2] + (ov[-2:] if len(ov) > 2 else [])
+    built = []
+    for f in sorted(glob.glob(str(d / "EventsLog" / "*INFO*"))):
+        try:
+            for line in open(f, errors="replace"):
+                m = re.search(r"NeuronClass=(\S+)", line)
+                if m:
+                    built.append(m.group(1))
+        except OSError:
+            pass
+    r["built_neuron_class"] = sorted(set(built))  # what BuildStructure actually instantiated (authoritative for PSI)
     r["override_log_n"] = len(ov)
     return r
 
@@ -184,6 +196,8 @@ def run_test(name, samples, classes, delay, inh_off=False):
         if inh_off:  # all inhibition mechanisms off in the trained Test (structure unchanged)
             for k, v in INH_OFF.items():
                 t = set_tag_all(t, k, v)
+            if SPEC.get("neuron_off"):  # PSI off = same structure, non-Preinh class of the same family
+                t = set_tag_all(t, "NeuronClassName", SPEC["neuron_off"])
         p.write_text(t, encoding="utf-8")
     tsec = str(int(8 * (float(delay) + 0.05) + 15 if float(delay) >= 1.0 else 8 * (float(delay) + 0.2) + 25))  # short ITI: ~13 s warm-up before trial 0 (itiS 17 s gave 2 rows)
     with open(d / "console.log", "w") as f:
@@ -325,7 +339,7 @@ if work and (work / "Test" / "Parameters_00.xml").is_file() and not res.get("ski
         res[f"{name}_target_max"] = tg; res[f"{name}_foil_max"] = max(fo) if fo else None
         res[f"{name}_target_fired"] = [int(x["neuron_fired"]) for x in rows if x["target_class"] == "1"]
         res[f"{name}_foils_fired"] = sum(int(x["neuron_fired"]) for x in rows if x["target_class"] == "0")
-        res[f"readback_{name}"] = {k: rb.get(k) for k in rb if k.split(".")[-1] in ("DefaultTimeStep", "GlobalTimeStep", "UsePresyn_n1", "UsePresyn_n", "InhCoeff_nz", "EnableNextSegmentInhibition", "EnableSegExcInh")}
+        res[f"readback_{name}"] = {k: rb.get(k) for k in rb if k.split(".")[-1] in ("NeuronClassName", "built_neuron_class", "DefaultTimeStep", "GlobalTimeStep", "UsePresyn_n1", "UsePresyn_n", "InhCoeff_nz", "EnableNextSegmentInhibition", "EnableSegExcInh")}
         res[f"readback_{name}"].update({"DefaultTimeStep": rb.get("DefaultTimeStep"), "GlobalTimeStep": rb.get("GlobalTimeStep")})
         return tg, fo
     perm7 = others + [tgt_i]
