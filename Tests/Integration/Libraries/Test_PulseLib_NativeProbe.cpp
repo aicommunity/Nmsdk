@@ -64,7 +64,9 @@ template<class Learner> void NativeProbe(unsigned frequency,bool editDuringProbe
     const auto initialRevision=before["sha256"].toString().toStdString();
     auto revision=initialRevision;
     ProbeSpec spec;spec.runId="native_characterization";spec.trialId=name;spec.sampleId="native_burst";
-    spec.patternHash=NmsdkTools::CanonicalModelDataSha256(QJsonArray{.01,.08,.16,.24}).toStdString();
+    QJsonArray configuredPattern;
+    for(int i=0;i<learner->InputPattern.GetRows();++i)configuredPattern.append(learner->InputPattern(i,0));
+    spec.patternHash=NmsdkTools::CanonicalModelDataSha256(configuredPattern).toStdString();
     spec.modelRevision=revision;spec.begin=core.environment->GetTime().GetDoubleTime();
     spec.end=.56;spec.maximumSampleGap=1./frequency;spec.maximumSamples=frequency;
     for(const auto& soma:somas)spec.baseline.push_back(soma->SumPotential(0,0));
@@ -113,7 +115,10 @@ template<class Learner> void NativeProbe(unsigned frequency,bool editDuringProbe
         EXPECT_EQ(after["sha256"],before["sha256"]);EXPECT_TRUE(result.valid);
         for(const auto& peak:result.peaks)EXPECT_EQ(peak.validity,PeakValidity::Valid);
     }
-    QJsonArray peaks,stimuli,reasons,baseline;
+    QJsonArray peaks,stimuli,reasons,baseline,windows;
+    for(const auto& window:spec.windows)windows.append(QJsonObject{
+        {"input_id",QString::fromStdString(window.inputId)}, {"stimulus_id",QString::fromStdString(window.stimulusId)},
+        {"channel",int(window.channel)},{"begin",window.begin},{"end",window.end}});
     for(double v:spec.baseline)baseline.append(v);
     for(const auto& reason:result.reasons)reasons.append(QString::fromStdString(reason));
     for(const auto& event:result.stimuli)stimuli.append(QJsonObject{{"id",QString::fromStdString(event.id)},{"time",event.time}});
@@ -124,9 +129,13 @@ template<class Learner> void NativeProbe(unsigned frequency,bool editDuringProbe
         {"candidate_count",int(peak.candidateCount)}});
     QJsonObject observation{{"schema_version",1},{"kind","native_frozen_characterization_probe"},
         {"run_id",QString::fromStdString(spec.runId)},{"trial_id",QString::fromStdString(spec.trialId)},
-        {"sample_id",QString::fromStdString(spec.sampleId)},{"pattern_sha256",QString::fromStdString(spec.patternHash)},
+        {"sample_id",QString::fromStdString(spec.sampleId)},{"configured_pattern_sha256",QString::fromStdString(spec.patternHash)},
+        {"observed_stimulus_sha256",NmsdkTools::CanonicalModelDataSha256(stimuli)},
         {"model_before",before},{"model_after",after},{"frequency_hz",int(frequency)},
         {"window_begin",spec.begin},{"window_end",spec.end},{"maximum_sample_gap",spec.maximumSampleGap},
+        {"minimum_amplitude",spec.minimumAmplitude},{"maximum_samples",int(spec.maximumSamples)},
+        {"measurement_mode","signed_deviation_from_declared_baseline"},{"reset_policy","native_cold_then_frozen"},
+        {"peak_windows",windows},{"end_reason",QString::fromStdString(result.endReason)},
         {"baseline",baseline},{"complete",result.complete},{"valid",result.valid},{"reasons",reasons},
         {"actual_stimuli",stimuli},{"peaks",peaks},{"sample_count",int(result.sampleCount)},
         {"spikes_observed",false},{"scientific_training_result",false}};
