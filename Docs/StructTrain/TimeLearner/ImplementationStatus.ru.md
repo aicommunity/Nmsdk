@@ -128,6 +128,11 @@ characterization проверена в обоих learner при 2000/20000; о�
 ещё не подключён. Полный CTest выявил и помог исправить TL-017/018 в Rdk
 storage metadata/identity: [ProbeMeasurement](ProbeMeasurement.ru.md).
 
+Вынесен stateful FinalVerificationSession и immutable references/certificate:
+[FinalVerification](FinalVerification.ru.md). Он проверяет весь свежий sweep,
+текущий anchor и исходные tolerances; session API ещё не подключён к train/search
+циклу обоих learner. TL-001 в legacy и полная матрица остаются открытыми.
+
 Этап 1 требует завершения semantic/evidence review; этап 4 требует оставшихся
 lifecycle/graph проверок; этапы 5–12 ещё не завершены. Pending не обозначается PASS,
 version 2 не объявляется production-ready до всей обязательной проверки.

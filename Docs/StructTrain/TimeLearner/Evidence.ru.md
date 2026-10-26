@@ -46,7 +46,7 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 
 | ID | Компонент | Свидетельство | Требуемая проверка |
 |---|---|---|---|
-| TL-001 | Branch AllSynapsesNormalized | проверяет ActivePulseIndex; -1 оставляет пустой gate | испортить ранее committed input, fresh verify |
+| TL-001 | Branch AllSynapsesNormalized | проверяет ActivePulseIndex; -1 оставляет пустой gate | открыто в legacy; отдельный FinalVerificationSession реализует fresh all-input sweep, но production wiring и native N>1 committed-input corruption ещё требуются; FinalVerification.ru.md |
 | TL-002 | Branch parallel conversion | mutable bool, повторное включение training сбрасывает его | save/load, повторный conversion, clipping |
 | TL-003 | Branch PostTune rebuild | parent C или fallback 1e-9 | heterogeneous storage roundtrip |
 | TL-004 | C trim | baseline читается из parent C | эквивалентная child physics |
