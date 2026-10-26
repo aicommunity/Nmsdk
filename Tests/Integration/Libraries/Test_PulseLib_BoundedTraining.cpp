@@ -227,6 +227,31 @@ TEST(BoundedTraining, SingleInputStillRequiresRealFinalProbe)
     ASSERT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_EQ(session.IssuedProbes(),1u);
 }
 
+TEST(BoundedTraining, RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.bounds[0].maximumSynapses=1;
+    for(bool externalChange:{false,true})
+    {
+        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+        for(unsigned i=0;i<2;++i)
+        {
+            const auto action=session.NextAction();ASSERT_TRUE(action);
+            const auto prepared=Prepare(p,action->inputIndex,"initial",0);session.Arm(action->serial,prepared);
+            session.Consume(Observe(p,prepared,action->inputIndex,action->runId,action->trialId,{.03,.03},Raw(2)),"initial");
+        }
+        const auto edit=session.NextAction();ASSERT_TRUE(edit);ASSERT_EQ(edit->kind,TrainingActionKind::Edit);
+        ASSERT_EQ(edit->parameters[0].length,2);
+        session.DeclineEdit(edit->serial,"unsafe_candidate",externalChange?"external_change":"initial");
+        if(externalChange){EXPECT_EQ(session.Status(),TrainingStatus::InvalidModel);EXPECT_FALSE(session.Certificate());continue;}
+        EXPECT_EQ(session.ModelEpoch(),0u);EXPECT_EQ(session.AppliedEdits(),0u);
+        const auto next=session.NextAction();ASSERT_TRUE(next);ASSERT_EQ(next->kind,TrainingActionKind::Edit);
+        EXPECT_EQ(next->parameters[0].length,3);session.Applied(next->serial,next->parameters,"accepted_length_3");
+        DriveTraining(session,p,[](const auto& a,auto& delay,auto&){delay[0]=a.parameters[0].length==3?.13:.03;});
+        EXPECT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_EQ(session.AppliedEdits(),1u);
+        ASSERT_EQ(session.Rejected().size(),1u);EXPECT_EQ(session.Rejected()[0].reason,"edit_rejected:unsafe_candidate");
+    }
+}
+
 TEST(BoundedTraining, MissingAmbiguousOrIncompletePeaksCannotDriveEdits)
 {
     const auto p=Protocol();auto cfg=Configuration();
