@@ -1,9 +1,9 @@
 # Этап 5: перенос обученной модели
 
-**Этап целиком не завершён.** Приняты 5.1 (идентичность native графа) и 5.2
-(native archive замкнутой физической модели с storage definitions). Полный
-экспорт реального learner state, явные внешние порты, checkpoint контроллера
-и Train → frozen Test pipeline ещё не реализованы.
+**Этап целиком не завершён.** Приняты 5.1 (идентичность native графа), 5.2
+(native archive замкнутой физической модели с storage definitions) и 5.3
+(явные stimulus-порты). Полный экспорт реального learner state, checkpoint
+контроллера и Train → frozen Test pipeline ещё не реализованы.
 
 ## Подэтап 5.1 — semantic model identity
 
@@ -99,6 +99,16 @@ model time; эти ошибки не приписываются алгоритм
 
 ## Оставшаяся реализация полного переноса learner → Test
 
+Подэтап 5.3: ModelBoundary.ru.md описывает versioned stimulus ports, native
+Connect/BreakLinks, независимый Test-источник и полный контроль slots. На обоих
+серверах 16 targeted cases (15 passed, один helper skipped, четыре child imports)
+и 4/4 CTest suites прошли; полный PulseLib — 140 cases, 139 passed, один helper
+skipped. На M40 также прошли 4/4 ASan suites с detect_leaks=0. Два новых процесса
+M40 импортировали портовые архивы Elder-1 через Git и сохранили identity и
+200/2000 waveform samples с max error=0. Raw logs, начальные исправленные ошибки
+новой реализации, runtime manifests и модели доступны в s05-ports-*.
+Эти проверки по-прежнему имеют metadata model_spec/not_trained.
+
 Native graph XML и definitions уже реализованы в 5.2. Следует завершить общий
 контур с реальным learner adapter, а не набором parent overlays. Он включает profiles,
 морфологию, реальные Ns/TipRs/C/связи, частоту, targets/references, порог с
@@ -124,7 +134,7 @@ import for Test:
 ```
 
 Нельзя обещать полноценный Train → Test по результатам 5.1/5.2. Для реального
-learner остаются явные external stimulus ports, захват target/reference и
+learner остаются подключение API stimulus ports к реальному adapter, захват target/reference и
 certificate/calibration/conversion provenance из владельцев, вся матрица
 физических семейств/режимов, controller checkpoint на границе этапа и frozen
 evaluation через общий ProbeSpec/Observation. Изменение solo → recognition и
