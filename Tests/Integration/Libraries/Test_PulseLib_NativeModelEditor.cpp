@@ -6,6 +6,7 @@
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ModelIdentity.h"
 #include "TimeLearner/ModelInspection.h"
+#include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QFile>
 #include <QDir>
@@ -16,6 +17,7 @@
 #include <locale>
 #include <cstdlib>
 #include <type_traits>
+#include <limits>
 
 namespace {
 using namespace RDK;
@@ -251,6 +253,170 @@ TEST(NativeModelEditor,HeterogeneousClassicBankCannotBeFlattened)
 { CheckHeterogeneousBank<NNeuronTimeLearner>(); }
 TEST(NativeModelEditor,HeterogeneousBranchBankCannotBeFlattened)
 { CheckHeterogeneousBank<NNeuronTimeLearnerBranch>(); }
+
+template<class Learner> NativeTrainingPlan TrainingPlan(EditingRig<Learner>& rig,double sync=.02)
+{
+    NativeTrainingPlan plan;auto& p=plan.protocol;
+    p.schemaVersion=3;p.routing=rig.branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
+    p.revision="native_service_burst_v1";p.sampleId="target";p.originStimulusId="pulse0";
+    QJsonArray pattern;for(double value:rig.isi)pattern.append(value);
+    p.patternHash=NmsdkTools::CanonicalModelDataSha256(pattern).toStdString();
+    p.maximumSampleGap=1./rig.frequency;p.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+    p.stimulusProfile=StimulusProfile{rig.source->GetCompClassName(),rig.source->Amplitude.GetData(),
+        rig.source->PulseLength.GetData(),double(rig.source->GetTimeStep()),rig.source->FrequencyDeviation.GetData(),
+        rig.source->UseTransitSignal.GetData(),rig.source->UsePatternOutput.GetData()};
+    auto& request=plan.probe;request.routing=p.routing;request.protocolRevision=p.revision;request.expectedInputIsi=rig.isi;
+    auto& spec=request.specification;spec.schemaVersion=3;spec.waveAssignment=p.waveAssignment;
+    spec.sampleId=p.sampleId;spec.patternHash=p.patternHash;spec.stimulusProfile=p.stimulusProfile;
+    spec.end=rig.duration;spec.maximumSampleGap=p.maximumSampleGap;
+    spec.maximumSamples=std::size_t((rig.duration+.01)*rig.frequency);
+    double onset=0.;
+    for(std::size_t i=0;i<rig.inputCount;++i)
+    {
+        const auto input="input"+std::to_string(i),stimulus="pulse"+std::to_string(i);
+        p.inputs.push_back({input,stimulus});p.stimulusIds.push_back(stimulus);spec.expectedStimulusIds.push_back(stimulus);
+        onset+=rig.isi[i];plan.inputWindows.push_back({input,rig.branch?0u:i,onset,onset+.065,stimulus});
+    }
+    plan.maximumReferenceProbes=rig.inputCount+1;plan.maximumModelSeconds=20.;plan.maximumWallSeconds=600.;
+    auto& search=plan.search;search.runId=rig.name+"/automatic";search.tolerances.sync=sync;
+    search.normalization=rig.normalization?Normalization::TipResistance:Normalization::SynapseCount;
+    search.maximumProbes=64;search.maximumEdits=16;search.maximumCandidatesPerInput=4;
+    search.maximumSweeps=1;search.resistanceSubdivisionDepth=0;
+    const auto values=rig.learner->ReadNativeParameters();
+    for(std::size_t i=0;i<values.size();++i)
+    {
+        const bool anchor=i+1==values.size();const auto& v=values[i];
+        search.bounds.push_back({v.length,anchor?v.length:v.length+1,1,rig.normalization||anchor?1:2,
+            v.resistance,rig.normalization&&!anchor?v.resistance*2.:v.resistance});
+    }
+    return plan;
+}
+
+template<class Learner> void RunNativeTraining(int normalization)
+{
+    EditingRig<Learner> rig(2000,normalization,"automatic_service");
+    auto plan=TrainingPlan(rig);std::size_t observations=0,frames=0;
+    std::string trial;std::ostringstream trace;
+    plan.probe.onPrepared=[&](const PreparedVerificationProbe&,const ProbeSpec& spec) {
+        trial=spec.trialId;trace.str({});trace.clear();trace.imbue(std::locale::classic());
+        trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+    };
+    plan.probe.onSample=[&](const NativeProbeSample& sample) {
+        ++frames;trace<<sample.time<<','<<sample.stimulus;
+        for(double value:sample.potentials)trace<<','<<value;trace<<'\n';
+    };
+    plan.observationSink=[&](const NativeProbeResult& result) {
+        ++observations;
+        ASSERT_TRUE(result.observation);EXPECT_EQ(result.observation->specification.trialId,trial);
+        const auto evidence=EncodeNativeProbeEvidence(result);
+        EXPECT_EQ(evidence["observation"].toObject()["specification"].toObject()["trial_id"].toString(),QString::fromStdString(trial));
+        Artifact(rig.name+"_service_"+std::to_string(observations)+".json",QJsonDocument(evidence).toJson());
+        Artifact(rig.name+"_service_"+std::to_string(observations)+".csv",QByteArray::fromStdString(trace.str()));
+    };
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {
+        ASSERT_LT(ticks,40000u);
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    }
+    const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::SearchUnresolved)<<service.Reason();
+    ASSERT_TRUE(service.References());EXPECT_EQ(service.References()->Inputs().size(),2u);
+    ASSERT_TRUE(service.Search());EXPECT_GE(service.Search()->AppliedEdits(),1u);
+    EXPECT_EQ(service.Search()->Status(),TrainingStatus::SearchUnresolved);
+    ASSERT_TRUE(service.Certificate());EXPECT_FALSE(service.Certificate()->Exact());
+    EXPECT_TRUE(service.Certificate()->Matches(rig.Revision(),*service.References(),plan.search.tolerances,
+        ModelStateKind::LearnedSolo,service.Search()->ModelEpoch()));
+    EXPECT_EQ(observations,service.IssuedReferenceProbes()+service.Search()->IssuedProbes());EXPECT_GT(frames,0u);
+    // Reset keeps the physical model and captured goal. It must not invoke
+    // legacy XML anchor reload or return to an untrained structure.
+    const auto before=rig.Revision();const auto references=service.References()->Inputs();
+    rig.learner->Reset();EXPECT_EQ(rig.Revision(),before);
+    ASSERT_TRUE(rig.learner->NativeTrainingController().References());
+    EXPECT_EQ(rig.learner->NativeTrainingController().References()->Inputs(),references);
+    EXPECT_EQ(rig.learner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    Artifact(rig.name+"_service_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
+}
+TEST(NativeTrainingService,ClassicN0SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearner>(0);}
+TEST(NativeTrainingService,BranchN0SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeTrainingService,ClassicN1SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearner>(1);}
+TEST(NativeTrainingService,BranchN1SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearnerBranch>(1);}
+
+TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,1,"service_exact_warm");rig.learner->CalculateMode=0;
+    auto plan=TrainingPlan(rig,.2);
+    for(auto& bound:plan.search.bounds){bound.maximumLength=bound.minimumLength;bound.maximumResistance=bound.minimumResistance;}
+    const auto run=[&] {
+        rig.learner->BeginNativeTraining(plan);
+        for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+        {ASSERT_LT(ticks,20000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    };
+    run();const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());
+    EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());EXPECT_TRUE(service.Certificate()->Exact());
+    const auto captured=service.References()->Inputs();const auto hash=rig.Revision();
+    rig.learner->Reset();EXPECT_EQ(rig.Revision(),hash);ASSERT_TRUE(service.Certificate());
+    run();EXPECT_EQ(service.Outcome(),TrainingStatus::Exact);EXPECT_EQ(service.IssuedReferenceProbes(),0u);
+    ASSERT_TRUE(service.References());EXPECT_EQ(service.References()->Inputs(),captured);
+    auto pattern=rig.learner->InputPattern.GetData();pattern(1,0)+=.01;rig.learner->InputPattern=pattern;
+    EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    EXPECT_NE(service.Outcome(),TrainingStatus::Exact);
+}
+
+template<class Learner> void StopNativeTraining()
+{
+    EditingRig<Learner> rig(2000,0,"service_external_stop");auto plan=TrainingPlan(rig);
+    std::vector<NativeProbeResult> recorded;plan.observationSink=[&](const auto& result){recorded.push_back(result);};
+    const auto before=rig.Revision();rig.learner->BeginNativeTraining(plan);
+    for(unsigned i=0;i<10;++i){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    EXPECT_EQ(rig.learner->NativeProbeState(),NativeProbeStatus::Running);
+    rig.learner->IsNeedToTrain=false;const auto& service=rig.learner->NativeTrainingController();
+    EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);
+    EXPECT_FALSE(service.Certificate());EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());
+    ASSERT_EQ(recorded.size(),1u);ASSERT_TRUE(recorded[0].requestedSpecification);
+    ASSERT_TRUE(recorded[0].observation);EXPECT_FALSE(recorded[0].observation->complete);
+    EXPECT_EQ(recorded[0].status,NativeProbeStatus::Cancelled);EXPECT_EQ(rig.Revision(),before);
+    Artifact(rig.name+"_cancelled.json",QJsonDocument(EncodeNativeProbeEvidence(recorded[0])).toJson());
+}
+TEST(NativeTrainingService,ClassicExternalStopPreservesCensoredEvidence){StopNativeTraining<NNeuronTimeLearner>();}
+TEST(NativeTrainingService,BranchExternalStopPreservesCensoredEvidence){StopNativeTraining<NNeuronTimeLearnerBranch>();}
+
+TEST(NativeTrainingService,ModelTimeBudgetCannotManufactureConvergence)
+{
+    EditingRig<NNeuronTimeLearnerBranch> rig(2000,1,"service_deadline");auto plan=TrainingPlan(rig);
+    plan.maximumModelSeconds=.002;std::vector<NativeProbeResult> recorded;
+    plan.observationSink=[&](const auto& result){recorded.push_back(result);};rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,20u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::BudgetExhausted);
+    EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());ASSERT_EQ(recorded.size(),1u);
+    EXPECT_EQ(recorded[0].status,NativeProbeStatus::Cancelled);
+    Artifact(rig.name+"_budget.json",QJsonDocument(EncodeNativeProbeEvidence(recorded[0])).toJson());
+}
+
+TEST(NativeTrainingService,DeclaredPatternHashMustMatchTheActualNativeDataset)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"service_spoofed_hash");auto plan=TrainingPlan(rig);
+    plan.protocol.patternHash=plan.probe.specification.patternHash="unverified_declared_hash";
+    std::vector<NativeProbeResult> recorded;plan.observationSink=[&](const auto& result){recorded.push_back(result);};
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,20u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);
+    EXPECT_EQ(service.Reason(),"native_pattern_hash_mismatch");EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    ASSERT_EQ(recorded.size(),1u);ASSERT_TRUE(recorded[0].requestedSpecification);
+    EXPECT_FALSE(recorded[0].requestedSpecification->trialId.empty());
+    Artifact(rig.name+"_rejected.json",QJsonDocument(EncodeNativeProbeEvidence(recorded[0])).toJson());
+}
+
+TEST(NativeTrainingService,EvidenceEncoderRejectsNonfiniteNumbers)
+{
+    NativeProbeResult result;result.requestedSpecification=ProbeSpec{};
+    result.requestedSpecification->end=std::numeric_limits<double>::infinity();
+    EXPECT_THROW(EncodeNativeProbeEvidence(result),std::invalid_argument);
+}
 
 TEST(NativeIntegration, ActualSecretionWeightPsiAndTimeStepAreUsed)
 {
