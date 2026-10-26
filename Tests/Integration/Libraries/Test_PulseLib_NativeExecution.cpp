@@ -598,6 +598,62 @@ TEST(NativeBoundedTraining, Classic20000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3,false,true);}
 TEST(NativeBoundedTraining, Branch20000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3,false,true);}
+
+TEST(NativeBranchAliasing, CoincidentLabelsExposeOneEffectivePhysicalBank)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
+    core.environment->SetUseIndTimeStepFlag(false);
+    for(int normalization:{0,1})
+    {
+        ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();ASSERT_TRUE(model);
+        StorageProfileSpec profile;profile.name="BranchAlias_N"+std::to_string(normalization);
+        profile.frequencyHz=2000;profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
+        const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
+        auto learner=dynamic_pointer_cast<NNeuronTimeLearnerBranch>(core.storage->TakeObject("NNeuronTimeLearnerBranch"));
+        ASSERT_TRUE(learner);learner->Name="Learner";learner->StructureBuildMode=1;
+        learner->NumInputDendrite=2;learner->NeuronClassName=registered.neuronClass;
+        learner->DendriteLength=std::vector<int>{1,1};learner->NormalizationMode=normalization;
+        learner->NumSynapse=std::vector<int>{1,normalization==0?2:1};
+        learner->TipSynapseResistance=std::vector<double>{86e6,43e6};learner->CalculateMode=1;
+        learner->EnablePostTrainTuning=false;learner->AutoCalibrateFixedLTZThreshold=false;
+        MDMatrix<double> pattern;pattern.Assign(2,1,0.);pattern(0,0)=.01;pattern(1,0)=.08;learner->InputPattern=pattern;
+        UEPtr<UContainer> component=learner;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+        model->SetGlobalTimeStep(2000);model->Init();model->Reset();
+        auto neuron=learner->GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
+        auto membrane=neuron->GetComponentL<NPulseMembrane>("Dendrite1_1",true);ASSERT_TRUE(membrane);
+        auto physical=membrane->GetComponentL<NPulseSynapseCommon>("ExcSynapse1",true);ASSERT_TRUE(physical);
+        EXPECT_EQ(learner->DendriteLength.GetData(),(std::vector<int>{1,1}));
+        if(normalization==0)
+        {
+            EXPECT_EQ(membrane->NumExcitatorySynapses.GetData(),2);
+            EXPECT_EQ(learner->NumSynapse.GetData(),(std::vector<int>{1,2}));
+            // Both input labels resolve this same bank; requested Ns[0]=1 is
+            // not an independently implemented count for physical input 0.
+            EXPECT_NE(membrane->NumExcitatorySynapses.GetData(),learner->NumSynapse[0]);
+        }
+        else
+        {
+            EXPECT_EQ(membrane->NumExcitatorySynapses.GetData(),1);
+            const auto requested=learner->TipSynapseResistance.GetData();ASSERT_EQ(requested.size(),2u);
+            EXPECT_NE(requested[0],requested[1]);
+            EXPECT_EQ(physical->Resistance.GetData(),requested[1]);
+            EXPECT_NE(physical->Resistance.GetData(),requested[0]);
+        }
+        if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            QJsonArray requestedCounts,requestedResistances;
+            for(int value:learner->NumSynapse.GetData())requestedCounts.append(value);
+            for(double value:learner->TipSynapseResistance.GetData())requestedResistances.append(value);
+            QFile file(QString::fromLocal8Bit(output)+"/BranchAlias_N"+QString::number(normalization)+".json");
+            ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));const auto bytes=QJsonDocument(QJsonObject{
+                {"requested_counts",requestedCounts},{"requested_resistances",requestedResistances},
+                {"physical_bank","Neuron.Dendrite1_1"},{"physical_count",membrane->NumExcitatorySynapses.GetData()},
+                {"physical_first_resistance",physical->Resistance.GetData()},{"scientific_training_result",false}}).toJson();
+            ASSERT_EQ(file.write(bytes),bytes.size());
+        }
+        dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
+    }
+}
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeLearnerExecution,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
