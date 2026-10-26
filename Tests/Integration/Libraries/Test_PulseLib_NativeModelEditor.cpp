@@ -5,6 +5,7 @@
 #include "NPulseSynapse.h"
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ModelIdentity.h"
+#include "TimeLearner/ModelInspection.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QFile>
 #include <QDir>
@@ -60,6 +61,12 @@ template<class Learner> struct EditingRig {
         UEPtr<UContainer> component=learner;
         if(model->AddComponent(component)==ForbiddenId)throw std::runtime_error("editor_fixture_attach");
         model->SetGlobalTimeStep(f);model->Init();model->Reset();
+        Artifact(name+"_startup_before.json",QJsonDocument(NmsdkTools::InspectModel(learner)).toJson());
+        // The native scheduler completes ordinary lazy child initialization.
+        // Capture fresh handles afterwards; the probe itself resets its physical
+        // subtree before arming, so this is not training or a dynamic checkpoint.
+        model->Calculate();environment->IncreaseModelTimeByStep();
+        Artifact(name+"_startup_after.json",QJsonDocument(NmsdkTools::InspectModel(learner)).toJson());
         neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);
         source=learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
         if(!neuron || !source)throw std::runtime_error("editor_fixture_graph");ports.emplace(&source->Output,"burst");
