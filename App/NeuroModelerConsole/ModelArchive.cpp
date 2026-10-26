@@ -4,6 +4,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include <QCryptographicHash>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <cmath>
 #include <cstring>
 #include <cstdint>
@@ -46,7 +47,8 @@ UEPtr<UNet> Take(UEPtr<UStorage> storage, UEPtr<UEnvironment> environment, const
 QJsonObject Identity(UEPtr<UContainer> model, const ModelBoundarySources& boundarySources = {})
 {
     auto identity = IdentifyModel(model, boundarySources);
-    if(!identity["valid"].toBool()) Fail("invalid_model_identity", model->GetName().c_str());
+    if(!identity["valid"].toBool()) Fail("invalid_model_identity", QString::fromStdString(model->GetName()) + ": " +
+        QString::fromUtf8(QJsonDocument(identity["diagnostics"].toArray()).toJson(QJsonDocument::Compact)));
     return identity;
 }
 
