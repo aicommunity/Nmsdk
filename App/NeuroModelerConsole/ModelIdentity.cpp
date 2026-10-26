@@ -315,7 +315,9 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model, const ModelBoundarySources& b
         }
         // The inspector additionally checks cached neuron/membrane pointers.
         if(usedPorts.size() != boundarySources.size()) diagnostics.append("unused_boundary_source");
-        const auto readback = InspectModel(model, boundarySources);
+        // Typed parameters/bindings were already read above. Inspect caches and
+        // graph structure without serializing unrelated dynamic state again.
+        const auto readback = InspectModel(model, boundarySources,ModelInspectionDetail::Structure);
         if(!readback["valid"].toBool())
             for(const auto& diagnostic : readback["diagnostics"].toArray()) diagnostics.append(diagnostic);
         const QString root = QString::fromStdString(model->GetName());
