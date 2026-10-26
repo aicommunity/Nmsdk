@@ -1,8 +1,9 @@
-# Сопоставление волн пачке: рабочий подэтап
+# Сопоставление волн пачке: проверенный измерительный подэтап
 
 Ветка stage07/burst-assignment ответвлена от принятого develop
-aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157. Реализация ниже ещё не прошла
-серверную приёмку и не включает configured ControllerVersion=2 или основной поиск.
+aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157. Реализация прошла указанную ниже
+адресную и серверную приёмку. Configured ControllerVersion=2 и основной поиск
+этим подэтапом не реализованы.
 
 ## Недостаточность одного окна
 
@@ -48,7 +49,7 @@ channel 0, а native prepared context сообщает фактический se
 он должен совпасть с запрошенным индексом verifier. Native preflight отклоняет
 неправильный channel, selector↔stimulus mapping и усечённое ожидаемое число
 стимулов до предъявления. Это исключает capture reference другого входа при
-формально верных ID/числах. Новые guards и отрицательные controls проверяются
+формально верных ID/числах. Новые guards и отрицательные controls проверены
 отдельно от снимка 9357c93; прежние 269-case данные остаются данными его кода.
 
 ## Область применимости
@@ -106,5 +107,24 @@ completed: меняется validity наблюдения, а не факт ис
 e46a00b2dbb11c54daf727ede0d14ba60a8e6552: 46 адресных tests прошли на обоих
 серверах. Неправильный Classic channel и Branch selector дают ожидаемые
 native_input_channel_mismatch/native_solo_selector_mismatch до arm и до первого
-sample. Full CTest и новый ASan этого снимка выполняются отдельно. Подэтап пока
-не объединён в develop; older manifests не переименовываются в новую closure.
+sample. Full CTest этого снимка прошёл на обоих серверах: четыре maintained
+suites, PulseLib 273 cases, 264 pass, 9 standard skips. M40 ASan — 48 адресных
+tests, detect_leaks=0. Пакеты s07-burst-final-elder1/m40 опубликованы; проверены
+386 artifact hashes. Older manifests не переименовываются в новую closure.
+
+После интеграции принятого model API из PulseLib отдельно проверен root
+4bd02ff03a6169a92a579b0fa27b40d05aaf0354 / PulseLib
+dc62a3e70426c4e97fa696e3f5e23f1b12f97611. На обоих серверах 61 адресный case
+дал 60 pass и один стандартный helper skip; четыре NativeArchive parents явно
+выполнили fresh child processes. Все 16 native burst CSV, model hashes и
+валидность/статусы совпали с предыдущим снимком до переноса. Проверены ещё 130
+artifact hashes в s07-burst-combined-elder1/m40. Это проверка взаимодействия
+изменений, не повторный full CTest или ASan совместной closure.
+
+Итоговые пакеты:
+[Elder-1 full](../../../Reports/StructTrain/TimeLearner/s07-burst-final-elder1/README.md),
+[M40 full/ASan](../../../Reports/StructTrain/TimeLearner/s07-burst-final-m40/README.md),
+[Elder-1 combined](../../../Reports/StructTrain/TimeLearner/s07-burst-combined-elder1/README.md),
+[M40 combined](../../../Reports/StructTrain/TimeLearner/s07-burst-combined-m40/README.md).
+Все проверки source/result transfer выполнены через Git; локально проверялись
+хеши и целостность gzip как данные, без численных прогонов.
