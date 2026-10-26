@@ -417,7 +417,9 @@ TEST_P(NativeDatasetEvents, AdjacentPulsesRemainDistinctWithoutOutputEdges)
         }
         core.environment->IncreaseModelTimeByStep();
     }
-    ASSERT_EQ(events.size(),4);EXPECT_LT(edges,4u);
+    EXPECT_EQ(events.size(),4);EXPECT_LT(edges,4u);
+    std::cout<<"native_dataset_events frequency="<<GetParam()<<" edges="<<edges
+             <<" events="<<QJsonDocument(events).toJson(QJsonDocument::Compact).constData()<<std::endl;
     for(int i=1;i<events.size();++i)EXPECT_GT(events[i].toDouble(),events[i-1].toDouble());
     if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
     {
