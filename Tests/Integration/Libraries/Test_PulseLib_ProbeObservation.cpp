@@ -33,10 +33,13 @@ TEST(TimeLearnerProbe, UsesExplicitRestStateAndMeasuredPlateauWithoutInterpolati
     ASSERT_TRUE(result.valid);EXPECT_TRUE(result.complete);ASSERT_EQ(result.peaks.size(),6u);
     for(const auto& peak:result.peaks)
     {
-        EXPECT_EQ(peak.validity,PeakValidity::Valid);EXPECT_NEAR(peak.amplitude,.02,1e-14);
-        EXPECT_DOUBLE_EQ(peak.rawPotential,2.02);EXPECT_DOUBLE_EQ(peak.time,.4);
-        EXPECT_DOUBLE_EQ(peak.plateauEnd,.5);EXPECT_EQ(peak.candidateCount,1u);
-        EXPECT_NEAR(peak.delayFromStimulus,.3,1e-14);
+        EXPECT_EQ(peak.validity,PeakValidity::Valid);
+        ASSERT_TRUE(peak.amplitude);ASSERT_TRUE(peak.time);ASSERT_TRUE(peak.rawPotential);
+        ASSERT_TRUE(peak.plateauEnd);ASSERT_TRUE(peak.delayFromStimulus);
+        EXPECT_NEAR(*peak.amplitude,.02,1e-14);
+        EXPECT_DOUBLE_EQ(*peak.rawPotential,2.02);EXPECT_DOUBLE_EQ(*peak.time,.4);
+        EXPECT_DOUBLE_EQ(*peak.plateauEnd,.5);EXPECT_EQ(peak.candidateCount,1u);
+        EXPECT_NEAR(*peak.delayFromStimulus,.3,1e-14);
     }
     EXPECT_FALSE(result.specification.recordSpikes); // Unknown spike response.
 }
@@ -53,6 +56,7 @@ TEST(TimeLearnerProbe, DistinguishesMissingAmbiguousAndClippedPeaks)
         recorder.RecordStimulus("pulse",.1);auto result=recorder.Close(1.,"model_1","closed");
         EXPECT_TRUE(result.complete);EXPECT_FALSE(result.valid);
         ASSERT_EQ(result.peaks.size(),1u);EXPECT_EQ(result.peaks[0].validity,test.second);
+        EXPECT_FALSE(result.peaks[0].time);EXPECT_FALSE(result.peaks[0].amplitude);
     }
 }
 
@@ -96,6 +100,7 @@ TEST(TimeLearnerProbe, StimulusCompletenessAndUniqueIdsAreRequired)
         if(mode==2)recorder.RecordStimulus("unknown",.1);
         auto result=recorder.Close(1.,"model_1","closed");EXPECT_FALSE(result.valid);
         EXPECT_TRUE(Has(result,mode==1?"duplicate_stimulus_id":"missing_stimulus"));
+        if(mode!=1)EXPECT_FALSE(result.peaks[0].delayFromStimulus);
     }
 }
 
@@ -133,7 +138,7 @@ TEST(TimeLearnerProbe, PeakBeforeActualStimulusCannotBecomeAnAcceptedDelay)
     recorder.RecordStimulus("pulse",.6);auto result=recorder.Close(1.,"model_1","closed");
     EXPECT_TRUE(result.complete);EXPECT_FALSE(result.valid);
     EXPECT_TRUE(Has(result,"peak_precedes_stimulus:input"));
-    EXPECT_LT(result.peaks[0].delayFromStimulus,0.);
+    ASSERT_TRUE(result.peaks[0].delayFromStimulus);EXPECT_LT(*result.peaks[0].delayFromStimulus,0.);
 }
 
 TEST(TimeLearnerProbe, LateSpikeIsRetainedAndDisabledCaptureIsNotASilentResponse)
