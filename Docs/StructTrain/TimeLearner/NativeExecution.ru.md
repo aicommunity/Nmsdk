@@ -118,3 +118,16 @@ learner, сохраняя исходный обход hooks и порядок д
 прошёл на обоих серверах 57 адресных тестов и 4/4 lifecycle tests, включая
 OwnerUnInit обеих топологий. Полные CTest, ASan, legacy A/B и Git-публикация
 этих данных остаются обязательными перед merge.
+
+На обоих серверах primary CSV четырёх общих случаев a7→a9 (Classic/Branch,
+N=1/2 при 2000 Гц) побайтово совпали; base/effective semantic identities также
+совпали. Анализ сохранён в s07-native-executor-optimization-a7-a9.json. Это
+подтверждает отсутствие изменения этих waveform при ускорении inspector;
+schema 1 старых наблюдений не превращается в schema 2 и проверяется отдельно.
+
+ASan runtime root 089866d374da64c807d0a5b682b02c05826a9720 на M40 прошёл 51
+адресный тест и 4 lifecycle checks (detect_leaks=0). Покрыты удаление синапса
+обеих топологий, Reset/Build/UnInit, ошибки callbacks/source и Branch N=2 native
+final verification. Это не полный ASan CTest и не утверждение об отсутствии
+утечек. Elder-1 также прошёл оба новых Branch N=2 controls (2000/20000 Гц).
+Полные CTest и legacy A/B ещё выполняются; публикация Git-артефактов открыта.
