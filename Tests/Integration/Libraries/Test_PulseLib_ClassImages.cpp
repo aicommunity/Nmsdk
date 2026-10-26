@@ -67,6 +67,25 @@ TEST(TimeLearnerClassImages, CollisionCannotChangeAlreadyCreatedInstances)
  core.storage->ReturnObject(other); core.storage->ReturnObject(first);
 }
 
+TEST(TimeLearnerClassImages, EnvironmentAssignmentRemovesPreviousTimeStepVisibility)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ core.environment->SetUseIndTimeStepFlag(false);
+ auto source=Channel(1.17e-9);ASSERT_TRUE(source);
+ source->ChangeUseIndTimeStepMode(true); // Simulate an object returned by an individual-rate channel.
+ ASSERT_NE(source->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+ source->SetEnvironment(core.environment);
+ EXPECT_EQ(source->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+ EXPECT_EQ(source->GetTimeStep(),2000);
+ const std::string name="TimeLearnerUnit_EnvironmentModeImage";
+ const auto image=RegisterClassImage(core.storage,name,source);
+ auto copy=dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(name));ASSERT_TRUE(copy);
+ copy->SetEnvironment(core.environment);copy->Init();
+ EXPECT_EQ(DescribeClassImage(copy),image.descriptor);
+ EXPECT_DOUBLE_EQ(copy->Capacity.GetData(),1.17e-9);
+ core.storage->ReturnObject(copy);core.storage->ReturnObject(source);
+}
+
 TEST(TimeLearnerClassImages, NonfiniteParameterAndExternalBindingAreRejected)
 {
  const auto& core = NmsdkTests::InitEngineForPulseLibTests();
