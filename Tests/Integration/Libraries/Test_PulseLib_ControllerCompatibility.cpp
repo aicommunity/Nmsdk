@@ -8,11 +8,15 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QDir>
+#include <QFileInfo>
+#include <QProcess>
+#include <QProcessEnvironment>
 #include <cmath>
 #include <cstring>
 #include <cstdint>
 #include <cstdlib>
 #include <algorithm>
+#include <typeinfo>
 
 namespace {
 using namespace RDK;
@@ -29,6 +33,7 @@ template<class Learner> QJsonObject State(UEPtr<Learner> learner, unsigned tick)
 {
     return {{"tick",int(tick)}, {"phase",learner->TrainingPhase.GetData()},
         {"need",learner->IsNeedToTrain.GetData()}, {"lengths",Array(learner->DendriteLength.GetData())},
+        {"ready",learner->IsReady()}, {"initialized",learner->IsInit()},
         {"synapses",Array(learner->NumSynapse.GetData())},
         {"tip_rs",Array(learner->TipSynapseResistance.GetData())},
         {"references",Array(learner->InitialSomaPotential.GetData())},
@@ -69,7 +74,9 @@ template<class Learner> void RunNativeControl(const Case& spec, const QString& n
     model->SetGlobalTimeStep(spec.frequency); model->Init();
     learner->ResetToUntrainedState=true; model->Reset();
     ASSERT_TRUE(model->IsReady()); ASSERT_TRUE(model->IsInit());
-    ASSERT_TRUE(learner->IsReady()); ASSERT_TRUE(learner->IsInit());
+    // A structural Reset can invalidate Ready. The native scheduler owns the
+    // next Build; do not add an extra learner-specific wake-up Build here.
+    ASSERT_TRUE(learner->IsInit());
     ASSERT_EQ(learner->NormalizationMode.GetData(),spec.normalization);
     auto generator=learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
     ASSERT_TRUE(generator);
@@ -131,8 +138,33 @@ TEST_P(NativeControllerCompatibility, NativeBurstObservationsAndDecisions)
     if(!std::getenv("TIMELEARNER_COMPAT_OUTPUT")) GTEST_SKIP() << "Explicit bounded native A/B run; not a convergence or scientific PASS";
     const auto spec=GetParam();
     const auto name=QString("%1-N%2-f%3").arg(spec.branch ? "Branch" : "Classic").arg(spec.normalization).arg(spec.frequency);
-    if(spec.branch) RunNativeControl<NNeuronTimeLearnerBranch>(spec,name);
-    else RunNativeControl<NNeuronTimeLearner>(spec,name);
+    if(!std::getenv("TIMELEARNER_COMPAT_CHILD"))
+    {
+        QProcess child; auto environment=QProcessEnvironment::systemEnvironment();
+        environment.insert("TIMELEARNER_COMPAT_CHILD","1"); child.setProcessEnvironment(environment);
+#if defined(_WIN32)
+        child.setProgram(QFileInfo("Test_PulseLib_StorageComponents.exe").absoluteFilePath());
+#else
+        child.setProgram(QFileInfo("Test_PulseLib_StorageComponents").absoluteFilePath());
+#endif
+        const auto* test=::testing::UnitTest::GetInstance()->current_test_info();
+        child.setArguments({"--gtest_filter="+QString::fromUtf8(test->test_suite_name())+"."+QString::fromUtf8(test->name())});
+        child.setProcessChannelMode(QProcess::MergedChannels); child.start();
+        ASSERT_TRUE(child.waitForStarted(10000));
+        if(!child.waitForFinished(600000)) { child.kill(); child.waitForFinished(5000); FAIL()<<"Owned compatibility child timed out"; }
+        const auto log=child.readAll();
+        QDir().mkpath(QString::fromLocal8Bit(std::getenv("TIMELEARNER_COMPAT_OUTPUT")));
+        QFile file(QString::fromLocal8Bit(std::getenv("TIMELEARNER_COMPAT_OUTPUT"))+"/"+name+"-native.txt");
+        ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly)); ASSERT_EQ(file.write(log),log.size());
+        EXPECT_EQ(child.exitStatus(),QProcess::NormalExit)<<log.constData();
+        EXPECT_EQ(child.exitCode(),0)<<log.constData();
+        return;
+    }
+    try {
+        if(spec.branch) RunNativeControl<NNeuronTimeLearnerBranch>(spec,name);
+        else RunNativeControl<NNeuronTimeLearner>(spec,name);
+    }
+    catch(const UException& error) { FAIL()<<typeid(error).name()<<": "<<error.what(); }
 }
 INSTANTIATE_TEST_SUITE_P(TopologiesModesRates,NativeControllerCompatibility,::testing::Values(
     Case{false,0,2000},Case{false,1,2000},Case{true,0,2000},Case{true,1,2000},
