@@ -43,16 +43,17 @@ UEPtr<UNet> Take(UEPtr<UStorage> storage, UEPtr<UEnvironment> environment, const
     return object;
 }
 
-QJsonObject Identity(UEPtr<UContainer> model)
+QJsonObject Identity(UEPtr<UContainer> model, const ModelBoundarySources& boundarySources = {})
 {
-    auto identity = IdentifyModel(model);
+    auto identity = IdentifyModel(model, boundarySources);
     if(!identity["valid"].toBool()) Fail("invalid_model_identity", model->GetName().c_str());
     return identity;
 }
 
-void RequireMatch(const QJsonObject& identity, UEPtr<UContainer> model)
+void RequireMatch(const QJsonObject& identity, UEPtr<UContainer> model,
+                  const ModelBoundarySources& boundarySources = {})
 {
-    auto check = VerifyModelIdentity(identity, model);
+    auto check = VerifyModelIdentity(identity, model, boundarySources);
     if(!check["valid"].toBool() || !check["match"].toBool())
         Fail("archive_model_mismatch", check["reason"].toString() + ": " + check["first_difference"].toString());
 }
@@ -60,11 +61,11 @@ void RequireMatch(const QJsonObject& identity, UEPtr<UContainer> model)
 QString XmlDigest(const QString& xml)
 { return QString::fromLatin1(QCryptographicHash::hash(xml.toUtf8(), QCryptographicHash::Sha256).toHex()); }
 
-QJsonObject Snapshot(UEPtr<UContainer> model)
+QJsonObject Snapshot(UEPtr<UContainer> model, const ModelBoundarySources& boundarySources = {})
 {
     auto net = dynamic_pointer_cast<UNet>(model);
     if(!net) Fail("unsupported_archive_graph", "UNet required");
-    auto identity = Identity(model);
+    auto identity = Identity(model, boundarySources);
     USerStorageXML xml;
     if(!xml.Create(GraphRoot) || !net->SaveComponent(&xml, true, ptPubParameter | ptPubState | pgSystem))
         Fail("archive_serialization_failed", model->GetName().c_str());
@@ -215,7 +216,8 @@ void CheckSnapshot(const QJsonObject& snapshot)
     const auto text = RequiredString(snapshot, "native_xml");
     if(snapshot["native_xml_sha256"].toString() != XmlDigest(text)) Fail("native_xml_digest_mismatch", "graph");
     const auto identity = snapshot["identity"].toObject();
-    if(!identity["valid"].toBool() || identity["schema_version"] != QJsonValue(1) ||
+    if(!identity["valid"].toBool() || (identity["schema_version"] != QJsonValue(1) && identity["schema_version"] != QJsonValue(2)) ||
+       identity["model"].toObject()["schema_version"] != identity["schema_version"] ||
        identity["kind"].toString() != "semantic_model_identity" ||
        identity["canonical_encoding"].toString() != "length-framed-utf8-binary64-v1" ||
        !identity["diagnostics"].isArray() || !identity["diagnostics"].toArray().isEmpty() ||
@@ -236,9 +238,32 @@ void CheckSnapshot(const QJsonObject& snapshot)
     CheckXmlNode(xml, "$", nodes);
 }
 
-UEPtr<UContainer> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> storage, UEPtr<UEnvironment> environment)
+std::map<QString, UIPropertyOutput*> BoundaryOutputs(const QJsonObject& identity,
+                                                    const ModelBoundarySources& sources)
+{
+    std::map<QString, UIPropertyOutput*> outputs;
+    for(const auto& source : sources)
+    {
+        auto output = dynamic_cast<const UIPropertyOutput*>(source.first);
+        if(!output || !(source.first->GetType() & ptOutput) ||
+           !dynamic_cast<const UVBaseDataProperty<MDMatrix<double>>*>(source.first) ||
+           source.second.trimmed().isEmpty() || !outputs.emplace(source.second,const_cast<UIPropertyOutput*>(output)).second)
+            Fail("invalid_boundary_sources", "distinct matrix-double outputs required");
+    }
+    QJsonArray expected;
+    for(const auto& output : outputs) expected.append(QJsonObject{{"id",output.first},{"type","matrix_binary64"}});
+    const auto semantic = identity["model"].toObject();
+    if((outputs.empty() && identity["schema_version"] != QJsonValue(1)) ||
+       (!outputs.empty() && (identity["schema_version"] != QJsonValue(2) || semantic["stimulus_ports"] != QJsonValue(expected))))
+        Fail("boundary_sources_mismatch", "archive ports must match supplied outputs exactly");
+    return outputs;
+}
+
+UEPtr<UContainer> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> storage, UEPtr<UEnvironment> environment,
+                              const ModelBoundarySources& boundarySources = {})
 {
     CheckSnapshot(snapshot);
+    const auto outputs = BoundaryOutputs(snapshot["identity"].toObject(),boundarySources);
     auto object = Take(storage, environment, snapshot["component_class"].toString());
     Lease lease{storage, object};
     object->UnInit();
@@ -249,7 +274,24 @@ UEPtr<UContainer> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> stor
     if(!object->LoadComponent(&xml, true, &diagnostics) || !diagnostics.errors.empty() || !diagnostics.warnings.empty())
         Fail("native_model_load_failed", object->GetName().c_str());
     object->Init();
-    RequireMatch(snapshot["identity"].toObject(), object);
+    const auto bindings = snapshot["identity"].toObject()["model"].toObject()["bindings"].toArray();
+    for(const auto& entry : bindings)
+    {
+        const auto binding = entry.toObject();
+        if(binding["kind"].toString() != "stimulus_port") continue;
+        const auto target = binding["target"].toString(); const auto separator = target.lastIndexOf(':');
+        const auto path = target.left(separator); const auto name = target.mid(separator+1).toStdString();
+        bool ok = false; const int slot = binding["slot"].toString().toInt(&ok);
+        auto source = outputs.find(binding["source"].toString());
+        if(separator < 1 || (path != "$" && !path.startsWith("$.")) || !ok || slot < 0 ||
+           slot >= bindings.size() || source == outputs.end()) Fail("invalid_boundary_binding", target);
+        UEPtr<UContainer> owner = path == "$" ? static_pointer_cast<UContainer>(object) : object->GetComponentL(path.mid(2).toStdString(),true);
+        auto property = owner ? owner->FindProperty(name) : UEPtr<UIProperty>();
+        auto input = property ? dynamic_cast<UIPropertyInput*>(property.Get()) : nullptr;
+        if(!input || !(property->GetType() & ptInput) || !input->SetPointer(slot,source->second))
+            Fail("boundary_binding_failed", target);
+    }
+    RequireMatch(snapshot["identity"].toObject(), object,boundarySources);
     return lease.Release();
 }
 
@@ -280,17 +322,18 @@ QJsonObject ImageSnapshot(UEPtr<UStorage> storage, UEPtr<UEnvironment> environme
 }
 }
 
-QJsonObject ExportModelArchive(UEPtr<UContainer> model, const QJsonObject& metadata)
+QJsonObject ExportModelArchive(UEPtr<UContainer> model, const QJsonObject& metadata,
+                               const ModelBoundarySources& boundarySources)
 try
 {
     if(!model || !model->GetStorage() || !model->GetEnvironment()) Fail("invalid_archive_context", "model/storage/environment");
     if(!dynamic_pointer_cast<NMSDK::NPulseNeuron>(model)) Fail("unsupported_archive_model", "NPulseNeuron graph required");
     auto storage = model->GetStorage(); auto environment = model->GetEnvironment();
-    auto graph = Snapshot(model); CheckSnapshot(graph);
+    auto graph = Snapshot(model,boundarySources); CheckSnapshot(graph);
     ValidateMetadata(metadata, graph["identity"].toObject());
     // Prove the native serializer represents this graph, including direct links
     // regenerated by native Build, before emitting an apparently usable archive.
-    Lease rehearsal{storage, LoadSnapshot(graph, storage, environment)};
+    Lease rehearsal{storage, LoadSnapshot(graph, storage, environment,boundarySources)};
     QJsonArray definitions; std::set<QString> done, visiting;
     std::function<void(const QString&)> capture = [&](const QString& name) {
         if(done.count(name)) return;
@@ -310,8 +353,8 @@ try
     };
     for(const auto& name : Classes(graph["identity"].toObject())) capture(name);
     QJsonObject archive;
-    archive["schema_version"] = 1; archive["kind"] = "timelearner_model_archive";
-    archive["encoding"] = "native-xml-and-model-identity-v1";
+    archive["schema_version"] = boundarySources.empty() ? 1 : 2; archive["kind"] = "timelearner_model_archive";
+    archive["encoding"] = boundarySources.empty() ? "native-xml-and-model-identity-v1" : "native-xml-and-model-identity-v2";
     archive["dynamic_checkpoint"] = false;
     archive["metadata"] = metadata; archive["graph"] = graph; archive["class_definitions"] = definitions;
     archive["sha256"] = CanonicalModelDataSha256(archive);
@@ -320,12 +363,13 @@ try
 catch(const UException& error) { Fail("native_archive_export_failed",QString::fromStdString(std::string(typeid(error).name())+": "+error.what())); }
 
 UEPtr<UContainer> ImportModelArchive(const QJsonObject& archive, UEPtr<UStorage> storage,
-    UEPtr<UEnvironment> environment, const QString& implementationId)
+    UEPtr<UEnvironment> environment, const QString& implementationId, const ModelBoundarySources& boundarySources)
 try
 {
     if(!storage || !environment) Fail("invalid_archive_context", "storage/environment");
-    if(archive["schema_version"] != QJsonValue(1) || archive["kind"].toString() != "timelearner_model_archive" ||
-       archive["encoding"].toString() != "native-xml-and-model-identity-v1" || archive["dynamic_checkpoint"] != QJsonValue(false))
+    const int version = boundarySources.empty() ? 1 : 2;
+    if(archive["schema_version"] != QJsonValue(version) || archive["kind"].toString() != "timelearner_model_archive" ||
+       archive["encoding"].toString() != QString("native-xml-and-model-identity-v%1").arg(version) || archive["dynamic_checkpoint"] != QJsonValue(false))
         Fail("unsupported_archive_schema", "header");
     auto payload = archive; payload.remove("sha256");
     if(archive["sha256"].toString() != CanonicalModelDataSha256(payload)) Fail("archive_digest_mismatch", "payload");
@@ -333,6 +377,7 @@ try
     if(implementationId.isEmpty() || metadata["implementation_id"].toString() != implementationId)
         Fail("implementation_identity_mismatch", "runtime");
     const auto graph = archive["graph"].toObject(); CheckSnapshot(graph);
+    BoundaryOutputs(graph["identity"].toObject(),boundarySources);
     ValidateMetadata(metadata, graph["identity"].toObject());
     if(!archive["class_definitions"].isArray()) Fail("missing_class_definitions", "array required");
     std::set<QString> declared;
@@ -344,6 +389,8 @@ try
         const auto definition = entry.toObject(); const auto name = RequiredString(definition,"name");
         if(declared.count(name)) Fail("duplicate_class_definition", name);
         auto snapshot = definition["snapshot"].toObject(); CheckSnapshot(snapshot);
+        if(snapshot["identity"].toObject()["schema_version"] != QJsonValue(1))
+            Fail("image_has_boundary_ports", name);
         const auto kind = RequiredString(definition,"kind");
         auto dependencies = Classes(snapshot["identity"].toObject()); dependencies.erase(name);
         if(kind == "derived_image")
@@ -380,7 +427,7 @@ try
             RegisterClassImage(storage, name.toStdString(), candidate.object);
         }
     }
-    Lease imported{storage,LoadSnapshot(graph, storage, environment)};
+    Lease imported{storage,LoadSnapshot(graph, storage, environment,boundarySources)};
     if(!dynamic_pointer_cast<NMSDK::NPulseNeuron>(imported.object)) Fail("unsupported_archive_model", "NPulseNeuron graph required");
     return imported.Release();
 }

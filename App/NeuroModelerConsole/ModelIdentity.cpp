@@ -189,11 +189,12 @@ QString CanonicalModelDataSha256(const QJsonValue& data)
     return QString::fromLatin1(QCryptographicHash::hash(canonical, QCryptographicHash::Sha256).toHex());
 }
 
-QJsonObject IdentifyModel(UEPtr<UContainer> model)
+QJsonObject IdentifyModel(UEPtr<UContainer> model, const ModelBoundarySources& boundarySources)
 {
-    QJsonObject result; result["schema_version"] = 1; result["kind"] = "semantic_model_identity";
+    const int version = boundarySources.empty() ? 1 : 2;
+    QJsonObject result; result["schema_version"] = version; result["kind"] = "semantic_model_identity";
     result["canonical_encoding"] = "length-framed-utf8-binary64-v1";
-    QJsonArray diagnostics, serializedNodes, bindings, caches;
+    QJsonArray diagnostics, serializedNodes, bindings, caches, ports;
     try
     {
         std::vector<Node> nodes; std::set<const UContainer*> seen;
@@ -202,6 +203,19 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
         for(const auto& node : nodes)
             for(const auto& property : node.component->GetPropertiesList())
                 propertyPaths[property.second.Property.Get()] = node.path + ":" + QString::fromStdString(property.first);
+        std::map<QString, QJsonObject> orderedPorts;
+        std::set<const UIProperty*> usedPorts;
+        for(const auto& boundary : boundarySources)
+        {
+            const auto* source = boundary.first;
+            const auto name = boundary.second;
+            if(!source || name.trimmed().isEmpty() || orderedPorts.count(name) || propertyPaths.count(source) ||
+               !(source->GetType() & ptOutput) || !dynamic_cast<const UIPropertyOutput*>(source) ||
+               !dynamic_cast<const UVBaseDataProperty<MDMatrix<double>>*>(source))
+                throw std::runtime_error("invalid_or_unsupported_boundary_source");
+            orderedPorts[name] = QJsonObject{{"id", name}, {"type", "matrix_binary64"}};
+        }
+        for(const auto& port : orderedPorts) ports.append(port.second);
         for(const auto& node : nodes)
         {
             auto component = node.component;
@@ -262,11 +276,22 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
                     for(size_t i = 0; i < sources.size(); ++i)
                     {
                         const auto found = propertyPaths.find(sources[i]);
-                        if(found == propertyPaths.end()) { diagnostics.append(path + ": external_or_null_binding"); continue; }
                         QJsonObject binding;
                         binding["target"] = path; binding["slot"] = QString::number(qulonglong(i));
-                        binding["source"] = found->second;
-                        binding["kind"] = input->UsesExternalDataSource() ? "external_data_source" : "property_pointer";
+                        if(found == propertyPaths.end())
+                        {
+                            auto boundary = boundarySources.find(sources[i]);
+                            if(boundary == boundarySources.end() || input->UsesExternalDataSource())
+                            { diagnostics.append(path + ": external_or_null_binding"); continue; }
+                            binding["source"] = boundary->second;
+                            binding["kind"] = "stimulus_port";
+                            usedPorts.insert(sources[i]);
+                        }
+                        else
+                        {
+                            binding["source"] = found->second;
+                            binding["kind"] = input->UsesExternalDataSource() ? "external_data_source" : "property_pointer";
+                        }
                         bindings.append(binding);
                     }
                 }
@@ -289,7 +314,8 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
             serializedNodes.append(object);
         }
         // The inspector additionally checks cached neuron/membrane pointers.
-        const auto readback = InspectModel(model);
+        if(usedPorts.size() != boundarySources.size()) diagnostics.append("unused_boundary_source");
+        const auto readback = InspectModel(model, boundarySources);
         if(!readback["valid"].toBool())
             for(const auto& diagnostic : readback["diagnostics"].toArray()) diagnostics.append(diagnostic);
         const QString root = QString::fromStdString(model->GetName());
@@ -316,7 +342,8 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
     }
     catch(const std::exception& error) { diagnostics.append(QString::fromUtf8(error.what())); }
     QJsonObject semantic;
-    semantic["schema_version"] = 1; semantic["nodes"] = serializedNodes;
+    semantic["schema_version"] = version; semantic["nodes"] = serializedNodes;
+    if(version == 2) semantic["stimulus_ports"] = ports;
     semantic["bindings"] = bindings; semantic["caches"] = caches;
     result["model"] = semantic; result["diagnostics"] = diagnostics; result["valid"] = diagnostics.isEmpty();
     if(diagnostics.isEmpty())
@@ -326,17 +353,19 @@ QJsonObject IdentifyModel(UEPtr<UContainer> model)
     return result;
 }
 
-QJsonObject VerifyModelIdentity(const QJsonObject& expected, UEPtr<UContainer> model)
+QJsonObject VerifyModelIdentity(const QJsonObject& expected, UEPtr<UContainer> model,
+                               const ModelBoundarySources& boundarySources)
 {
     QJsonObject result;
     result["schema_version"] = 1; result["kind"] = "model_identity_verification";
     result["valid"] = false; result["match"] = false;
-    if(expected["schema_version"] != QJsonValue(1) ||
+    const int version = boundarySources.empty() ? 1 : 2;
+    if(expected["schema_version"] != QJsonValue(version) ||
        expected["kind"] != QJsonValue("semantic_model_identity") ||
        expected["canonical_encoding"] != QJsonValue("length-framed-utf8-binary64-v1") ||
        expected["valid"] != QJsonValue(true) || !expected["diagnostics"].isArray() ||
        !expected["diagnostics"].toArray().isEmpty() || !expected["model"].isObject() ||
-       expected["model"].toObject()["schema_version"] != QJsonValue(1))
+       expected["model"].toObject()["schema_version"] != QJsonValue(version))
     {
         result["reason"] = "invalid_expected_identity"; return result;
     }
@@ -355,7 +384,7 @@ QJsonObject VerifyModelIdentity(const QJsonObject& expected, UEPtr<UContainer> m
     {
         result["reason"] = "expected_digest_mismatch"; return result;
     }
-    const auto actual = IdentifyModel(model);
+    const auto actual = IdentifyModel(model, boundarySources);
     if(!actual["valid"].toBool())
     {
         result["reason"] = "actual_identity_invalid"; result["diagnostics"] = actual["diagnostics"]; return result;
