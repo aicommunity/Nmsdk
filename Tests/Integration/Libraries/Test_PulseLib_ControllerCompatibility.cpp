@@ -186,4 +186,40 @@ TEST_P(NativeControllerCompatibility, NativeBurstObservationsAndDecisions)
 INSTANTIATE_TEST_SUITE_P(TopologiesModesRates,NativeControllerCompatibility,::testing::Values(
     Case{false,0,2000},Case{false,1,2000},Case{true,0,2000},Case{true,1,2000},
     Case{false,0,20000},Case{false,1,20000},Case{true,0,20000},Case{true,1,20000}));
+
+class NativeLiveRebuildInitialization : public ::testing::TestWithParam<std::pair<int,unsigned>> {};
+TEST_P(NativeLiveRebuildInitialization, ColdResetReplacementCalculatesRealInput)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel(); ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto model=core.environment->GetModel(); ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    auto learner=dynamic_pointer_cast<NNeuronTimeLearner>(core.storage->TakeObject("NNeuronTimeLearner"));
+    ASSERT_TRUE(learner); learner->SetEnvironment(core.environment); learner->Name="LiveClassic";
+    learner->StructureBuildMode=1; learner->NumInputDendrite=4; learner->NeuronClassName="NSPNeuronGen";
+    learner->NormalizationMode=GetParam().first; learner->CalculateMode=1;
+    learner->EnablePostTrainTuning=false;
+    MDMatrix<double> pattern; pattern.Assign(4,1,0.); pattern(0,0)=.01; pattern(1,0)=.08; pattern(2,0)=.16; pattern(3,0)=.24;
+    learner->InputPattern=pattern;
+    UEPtr<UContainer> component=learner; ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    const auto frequency=GetParam().second; model->SetGlobalTimeStep(frequency); model->Init();
+    learner->ResetToUntrainedState=true; model->Reset();
+    double maximum=0.; bool stimulusSeen=false;
+    for(unsigned tick=0;tick<frequency/12;++tick)
+    {
+        model->Calculate(); core.environment->IncreaseModelTimeByStep();
+        auto neuron=learner->GetComponentL<NPulseNeuron>("Neuron",true); ASSERT_TRUE(neuron);
+        EXPECT_TRUE(neuron->IsInit()); EXPECT_EQ(neuron->GetTimeStep(),frequency);
+        auto generator=learner->GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true); ASSERT_TRUE(generator);
+        stimulusSeen=stimulusSeen || (generator->Output.GetData().GetSize() && generator->Output(0,0)>0.);
+        const auto& values=learner->SomaNeuronAmplitude.GetData();
+        for(int i=0;i<values.GetSize();++i)
+        { ASSERT_TRUE(std::isfinite(values.Data[i])); maximum=std::max(maximum,values.Data[i]); }
+    }
+    EXPECT_TRUE(stimulusSeen); EXPECT_GT(maximum,1e-6);
+    EXPECT_EQ(learner->NormalizationMode.GetData(),GetParam().first);
+    dynamic_pointer_cast<UNet>(model)->BreakLinks(); core.environment->DestroyModel();
+}
+INSTANTIATE_TEST_SUITE_P(ModesRates,NativeLiveRebuildInitialization,::testing::Values(
+    std::make_pair(0,2000u),std::make_pair(1,2000u),std::make_pair(0,20000u),std::make_pair(1,20000u)));
 }
