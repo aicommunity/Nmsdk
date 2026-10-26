@@ -32,6 +32,7 @@ test report is not a trained-model result.
 | Global/individual runtime policy, detached Copy and N1 growth | [Elder-1](s04-frequency-final-elder1/README.md), [M40](s04-frequency-final-m40/README.md) |
 | Shared legacy policies: eight native baseline/A-B cases and graph comparisons | [Elder-1](s06-shared-elder1/README.md), [M40](s06-shared-m40/README.md) |
 | Bounded probe observations, raw native soma and storage metadata regressions | [Elder-1](s06-probe-elder1/README.md), [M40 + targeted ASan](s06-probe-m40/README.md) |
+| Fresh all-input verification API and native N=1 reference/verification certificates | [Elder-1](s07-verification-elder1/README.md), [M40 + targeted ASan](s07-verification-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md) and
