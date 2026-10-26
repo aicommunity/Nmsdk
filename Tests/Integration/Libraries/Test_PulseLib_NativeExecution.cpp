@@ -23,7 +23,7 @@ using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
 enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude };
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -32,7 +32,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     core.environment->GetTime().SetTime(0);
     ASSERT_GE(inputCount,1u);ASSERT_LE(inputCount,6u);
     const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
-        (interference==Interference::None?"":"_fault"+std::to_string(int(interference)));
+        (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
+        (observationSchema==3?"_whole_burst":"");
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
@@ -83,6 +84,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     request.activeInput=active;request.inputId="input"+std::to_string(active);request.protocolRevision="native_burst_N"+std::to_string(inputCount)+"_v1";
     request.baseModelRevision=base;request.expectedInputIsi=isi;request.readModelRevision=readRevision;
     auto& spec=request.specification;spec.runId=name;spec.trialId=name+"/probe0";spec.sampleId="sample0";
+    spec.schemaVersion=observationSchema;
+    if(observationSchema==3)spec.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
     spec.patternHash=NmsdkTools::CanonicalModelDataSha256(configuredPattern).toStdString();
     spec.end=duration;spec.maximumSampleGap=1./frequency;spec.maximumSamples=std::size_t((duration+.1)*frequency);
     for(unsigned i=0;i<inputCount;++i)
@@ -154,7 +157,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     for(const auto& reason:result->reasons)std::cout<<name<<" adapter_reason="<<reason<<std::endl;
     if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
     {
-        QJsonArray events,reasons,peaks,adapterReasons;
+        QJsonArray events,reasons,peaks,adapterReasons,assignments;
         for(const auto& reason:result->reasons)adapterReasons.append(QString::fromStdString(reason));
         if(result->observation)
         {
@@ -163,6 +166,14 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             for(const auto& reason:observed.reasons)reasons.append(QString::fromStdString(reason));
             for(const auto& peak:observed.peaks)peaks.append(QJsonObject{{"input_id",QString::fromStdString(peak.inputId)},
                 {"validity",PeakValidityName(peak.validity)},{"raw_potential",peak.rawPotential?QJsonValue(*peak.rawPotential):QJsonValue(QJsonValue::Null)}});
+            for(const auto& assignment:observed.burstAssignments)
+            {
+                QJsonArray waves;
+                for(const auto& wave:assignment.waves)waves.append(QJsonObject{{"stimulus_id",QString::fromStdString(wave.stimulusId)},
+                    {"time",wave.time},{"plateau_end",wave.plateauEnd},{"raw_potential",wave.rawPotential},{"amplitude",wave.amplitude}});
+                assignments.append(QJsonObject{{"channel",int(assignment.channel)},
+                    {"validity",PeakValidityName(assignment.validity)},{"waves",waves}});
+            }
         }
         QJsonValue source=QJsonValue(QJsonValue::Null);
         if(result->observation && result->observation->specification.stimulusProfile)
@@ -186,6 +197,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             {"status",NativeProbeStatusName(result->status)},{"adapter_reasons",adapterReasons},
             {"requires_fresh_verification",result->requiresFreshVerification},
             {"complete",result->observation && result->observation->complete},
+            {"burst_assignments",assignments},
             {"valid",result->observation && result->observation->valid},{"reasons",reasons},{"peaks",peaks},
             {"actual_stimuli",events},{"native_ticks",int(ticks)},{"sampled_frames",int(sampled)},
             {"revision_reads",int(revisionReads)},{"scientific_training_result",false}}).toJson();
@@ -217,6 +229,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     {
         VerificationProtocol protocol;protocol.routing=prototype.routing;protocol.revision=prototype.protocolRevision;
         protocol.schemaVersion=observed.schemaVersion;protocol.stimulusProfile=observed.specification.stimulusProfile;
+        protocol.waveAssignment=observed.specification.waveAssignment;
         protocol.sampleId=observed.specification.sampleId;protocol.patternHash=observed.specification.patternHash;
         protocol.originStimulusId="pulse0";protocol.maximumSampleGap=1./frequency;
         protocol.stimulusIds=observed.specification.expectedStimulusIds;
@@ -346,6 +359,14 @@ TEST_P(NativeLearnerExecution, QueueUsesNativeSchedulerAndRestoresModel)
     if(GetParam().first)ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(GetParam().second);
     else ExecuteProbeThroughLearner<NNeuronTimeLearner>(GetParam().second);
 }
+TEST(NativeBurstAssignment, Classic2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3);}
+TEST(NativeBurstAssignment, Branch2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3);}
+TEST(NativeBurstAssignment, Classic20000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3);}
+TEST(NativeBurstAssignment, Branch20000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3);}
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeLearnerExecution,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
