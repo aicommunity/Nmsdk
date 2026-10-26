@@ -111,7 +111,8 @@ cases требуют opt-in, а FreshProcessImport является helper: эт
 [M40](../../../Reports/StructTrain/TimeLearner/s07-native-edits-m40/README.md).
 В исходной адресной публикации проверены 1079 artifact hashes и raw gzip payloads;
 полные CTest и последующие A10/A11 опубликованы отдельным дополнением с собственными
-hashes и tested SHAs. Финальные правки A11 не повторяют весь CTest: они затрагивают
+hashes и tested SHAs. Итогом проверены 2275 artifact hashes и raw gzip payloads
+двух пакетов. Финальные правки A11 не повторяют весь CTest: они затрагивают
 native edit API и проверены его адресной матрицей. Диагностический probe JSON этих
 fixtures не является полным production serializer: точный протокол находится
 в immutable source, первичные временные ряды — в CSV. На основании отсутствующих
