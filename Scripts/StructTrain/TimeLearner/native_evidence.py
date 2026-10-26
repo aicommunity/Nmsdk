@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-AUDITOR_VERSION = 1
+AUDITOR_VERSION = 2
 
 
 class EvidenceError(ValueError):
@@ -92,6 +92,8 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
     require(not packet["reasons"] and not observation["reasons"] and
             not packet["requires_fresh_verification"], "contradictory_validity")
     require(spec["wave_assignment"] == "ordered_whole_burst", "unsupported_wave_assignment")
+    require("peak_selection" not in spec and (requested is None or "peak_selection" not in requested),
+            "unknown_peak_selection_for_legacy_evidence")
     require(number(spec["minimum_amplitude"]) > 0, "invalid_minimum_amplitude")
     require(requested is not None and requested["time_frame"] == "relative_to_trial_start" and
             number(requested["begin"]) == 0 and equal(requested["end"], end - begin), "requested_window_mismatch")
@@ -223,6 +225,32 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
                     "wave_is_not_the_measured_trace_maximum")
             require(equal(at(number(wave["time"]))[channel + 2], wave["raw_potential"]), "raw_peak_trace_mismatch")
             require(equal(at(number(wave["plateau_end"]))[channel + 2], wave["raw_potential"]), "plateau_trace_mismatch")
+    # Version-1 evidence uses the native isolated-window rule in addition to
+    # whole-burst assignment. A global assignment alone cannot certify a
+    # window containing several response maxima or a clipped larger wave.
+    for window in windows:
+        channel = count(window["channel"])
+        indices = [i for i, time in enumerate(times)
+                   if not after(number(window["begin"]), time) and not after(time, number(window["end"]))]
+        require(len(indices) >= 3, "incomplete_peak_window")
+        signal = [values[i][channel + 2] - baseline[channel] for i in indices]
+        maximum = max(range(len(signal)), key=signal.__getitem__)
+        last = maximum
+        while last + 1 < len(signal) and signal[last + 1] == signal[maximum]:
+            last += 1
+        require(maximum > 0 and last + 1 < len(signal), "clipped_window_maximum")
+        candidates, index = 0, 1
+        while index + 1 < len(signal):
+            finish = index
+            while finish + 1 < len(signal) and signal[finish + 1] == signal[index]:
+                finish += 1
+            if finish + 1 < len(signal) and signal[index] >= number(spec["minimum_amplitude"]) and signal[index] > signal[index - 1] and signal[finish] > signal[finish + 1]:
+                candidates += 1
+            index = finish + 1
+        require(candidates == 1, "ambiguous_isolated_peak_window")
+        peak = peaks[window["input_id"]]
+        require(equal(times[indices[maximum]], peak["time"]) and equal(times[indices[last]], peak["plateau_end"]),
+                "isolated_window_peak_mismatch")
     return {"valid_observation": True, "trace_checked": True, "trial_id": spec["trial_id"],
             "sample_count": len(values), "native_status": status, "evaluation_verdict": None}
 
