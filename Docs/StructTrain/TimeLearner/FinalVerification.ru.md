@@ -91,6 +91,15 @@ manifests до запуска, binary hashes и полные logs/XML. NumericCh
 
 ## Оставшаяся работа
 
+Рабочий [NativeProbeExecutor](NativeExecution.ru.md) уже подключает пробы к
+обоим learner и проверяется в отдельном подэтапе. Native N=2 Classic/Branch
+использует настоящие повторные пробы; это не означает переключения legacy
+EndOfLearning на данный verifier. Для production поиска дополнительно требуется
+глобальное сопоставление волн импульсам при меняющейся морфологии Classic:
+объявленное окно и stimulus ID сами по себе не доказывают происхождение пика.
+Случаи с задержанной ранней волной, пропущенным пиком и перекрытием должны
+отклоняться либо разрешаться по измеренным данным, без model-delay fallback.
+
 Не завершены: production wiring в NNeuronTimeLearner/Branch, общий train/search
 action loop, настоящий base/effective ModelSpec producer, final native sweep
 N>1 с правильным Branch mute и повреждением ранее committed input, normalizer

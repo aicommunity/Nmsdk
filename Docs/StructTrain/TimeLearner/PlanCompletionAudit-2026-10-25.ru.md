@@ -11,6 +11,11 @@ learner относится к старому снимку: Classic BuildStructur
 алгоритмы, реальный Train→Test, миграция scripts/runner, научная матрица и
 семантический inventory остаются обязательной частью активной цели.
 
+Следующий проверенный подэтап — [native executor](NativeExecution.ru.md):
+пробы обоих learner, Branch solo routing, source schema 2 и финальный проход
+N=2 проверены на серверах с full CTest, targeted ASan и legacy A/B. Это уточняет
+текущий объём реализации, но не закрывает исходные этапы 6/7 или весь план.
+
 Проверен снимок корня d9150b1837600df662740db4c5c6e31c11c7aeee,
 PulseLib 735fea58af4b1815dc332c7d38af5bf4f68d0855,
 Bin 7136679740c5aa97def6fd3700b7b781d97af8f2,

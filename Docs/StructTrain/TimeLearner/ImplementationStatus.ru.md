@@ -7,13 +7,17 @@
 Формулировки «принято в develop» ниже означают принятие конкретных изменений,
 а не автоматическое выполнение всех требований исходного этапа.
 
-Последний проверенный подэтап: повторные native-пробы и фактические времена
-импульсов, TL-019/020. На двух серверах прошли шесть адресных controls и четыре
-maintained CTest suites (PulseLib 210: 201 pass, 9 skip); M40 ASan — 6/6 с
-detect_leaks=0. Первичные traces и версии до/после исправления опубликованы через
-Git в s07-pulse-elder1/m40. См. [ProbeMeasurement](ProbeMeasurement.ru.md).
-Production-dispatch нового контроллера, Branch solo adapters и основной bounded
-search всё ещё открыты; эти проверки не означают завершения этапов 6/7.
+Последний проверенный подэтап: внутренний native executor подключён к обоим
+learner через штатный scheduler, включая transient Branch solo routing,
+контроль lifecycle, schema 2 typed source profile и native FinalVerification.
+На обоих серверах прошли четыре maintained CTest suites (PulseLib 247: 238 pass,
+9 skip), 34 native execution controls и восемь отдельных строгих legacy A/B.
+M40 ASan: 51 адресный тест и 4 lifecycle checks, detect_leaks=0. Primary data,
+negative baselines и runtime manifests опубликованы через Git в
+s07-native-executor-elder1/m40; проверены 867 artifact hashes.
+См. [NativeExecution](NativeExecution.ru.md). Основной bounded search, глобальное
+burst-wave assignment Classic и production ControllerVersion=2 остаются
+открытыми; этот подэтап не завершает исходные этапы 6/7.
 
 ## Исходная точка
 

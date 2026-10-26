@@ -41,7 +41,8 @@ void Number(QJsonObject& destination, const char* name, double value,
 }
 }
 
-QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model, const ModelBoundarySources& boundarySources)
+QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model, const ModelBoundarySources& boundarySources,
+                        ModelInspectionDetail detail)
 {
     if(!model) throw std::runtime_error("no model to inspect");
     std::vector<Entry> entries;
@@ -95,7 +96,7 @@ QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model, const ModelBoundaryS
                     value["redacted"] = true;
                     diagnostics.append(QString::fromStdString(entry.path + ":" + name + ": excluded credential property"));
                 }
-                else
+                else if(detail==ModelInspectionDetail::Full)
                 {
                     component->GetPropertyValue(name, serialized);
                     value["rdk_value"] = QString::fromStdString(serialized);
