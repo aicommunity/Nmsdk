@@ -118,9 +118,9 @@ registration rollback, controller checkpoint и Train → frozen Test остаю
 эффективные частоты при legacy model clock=20000. Последующее исправление
 общего режима Rdk и его ограниченная проверка описаны в
 [FrequencyContract](FrequencyContract.ru.md); полная uniform-rate матрица ещё
-не доказана. Общая управляющая математика сохранена в
-отдельной неподключённой ветке; перенос общего контроллера не объявляется
-завершённым: [Stage06-Progress](Stage06-Progress.ru.md).
+не доказана. Общие legacy-политики подключены к обеим топологиям и проверены
+строгим native A/B на обоих серверах. Перенос полного контроллера и исправление
+алгоритмов не объявляются завершёнными: [Stage06-Progress](Stage06-Progress.ru.md).
 
 Этап 1 требует завершения semantic/evidence review; этап 4 требует оставшихся
 lifecycle/graph проверок; этапы 5–12 ещё не завершены. Pending не обозначается PASS,
