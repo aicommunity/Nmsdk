@@ -1,5 +1,10 @@
 # Этап 4: подтверждённый подэтап и оставшиеся проверки
 
+Последующая проверка TL-016 и исправление общего режима при присоединении
+поддеревьев: [FrequencyContract](FrequencyContract.ru.md). Она отделяет
+global-rate экземпляры от detached storage-образов и individual-rate моделей.
+Весь этап 4 по этому локальному исправлению не считается завершённым.
+
 Последующее дополнение: [LiveRebuildInit](LiveRebuildInit.ru.md) описывает TL-015
 (исправление Init нового Classic Neuron) и новый открытый TL-016 — смешанные
 частоты legacy-элементов после создания/growth. Восемь bounded native controls,
