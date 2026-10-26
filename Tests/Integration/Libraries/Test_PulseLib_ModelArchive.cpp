@@ -94,6 +94,17 @@ QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency, NConstGene
     return trace;
 }
 
+void ConnectBoundary(UEPtr<NPulseNeuron> neuron, NConstGenerator* source)
+{
+    for(int i=1;i<=3;++i)
+    {
+        auto connector = dynamic_pointer_cast<UConnector>(neuron->GetComponentL("Dendrite2_3.ExcSynapse"+std::to_string(i),true));
+        ASSERT_TRUE(connector); int slot = 0;
+        ASSERT_TRUE(source->Connect(connector,"Output","Input",slot));
+        ASSERT_EQ(slot,0);
+    }
+}
+
 void Write(const QString& path, const QJsonObject& object)
 {
     QFile file(path);
@@ -174,6 +185,7 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
     const char* output = std::getenv("TIMELEARNER_ARCHIVE_CHILD_OUTPUT");
     if(output) Write(QString::fromLocal8Bit(output), QJsonObject{{"max_pairwise_error",error},{"samples",actual.size()},
         {"identity",NmsdkTools::IdentifyModel(model,ports)},{"waveform",actual}});
+    dynamic_pointer_cast<UNet>(model)->BreakLinks();
     model->Free(); // Release boundary bindings before returning the external source.
     core.storage->ReturnObject(model);
     if(boundary) core.storage->ReturnObject(boundary);
@@ -194,8 +206,7 @@ void TransferFixture(unsigned int frequency, bool withBoundary)
         ASSERT_TRUE(boundary); boundary->SetEnvironment(core.environment); boundary->Init();
         boundary->Name = "OriginalTrainingSource";
         ports[&boundary->Output] = "training_burst";
-        for(int i=1;i<=3;++i)
-            ASSERT_TRUE(model->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse"+std::to_string(i),true)->Input.SetPointer(0,&boundary->Output));
+        ConnectBoundary(model,boundary.Get());
         EXPECT_FALSE(NmsdkTools::IdentifyModel(model)["valid"].toBool());
     }
     phase = "export";
@@ -233,7 +244,7 @@ void TransferFixture(unsigned int frequency, bool withBoundary)
     EXPECT_EQ(child.exitStatus(),QProcess::NormalExit) << log.constData();
     EXPECT_EQ(child.exitCode(),0) << log.constData();
     if(child.exitCode()==0) EXPECT_LE(Read(output)["max_pairwise_error"].toDouble(),1e-12);
-    model->Free(); core.storage->ReturnObject(model);
+    model->BreakLinks(); model->Free(); core.storage->ReturnObject(model);
     if(boundary) core.storage->ReturnObject(boundary);
     }
     catch(const RDK::UException& error) { FAIL() << phase << ": " << typeid(error).name() << ": " << error.what(); }
@@ -254,8 +265,7 @@ TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
     replacement->SetEnvironment(core.environment); replacement->Init();
     NmsdkTools::ModelBoundarySources ports{{&source->Output,"burst"}};
     EXPECT_FALSE(NmsdkTools::IdentifyModel(model,ports)["valid"].toBool()); // unused declaration
-    for(int i=1;i<=3;++i)
-        ASSERT_TRUE(model->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse"+std::to_string(i),true)->Input.SetPointer(0,&source->Output));
+    ConnectBoundary(model,source.Get());
     const auto identity = NmsdkTools::IdentifyModel(model,ports);
     ASSERT_TRUE(identity["valid"].toBool()) << QJsonDocument(identity).toJson().constData();
     source->Output.Assign(1,1,17.); // A sampled stimulus is not model identity.
@@ -272,8 +282,8 @@ TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
     const auto trace = Waveform(restored,2000,replacement.Get());
     EXPECT_EQ(trace.size(),200);
     EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(identity,model,ports)["match"].toBool());
-    restored->Free(); core.storage->ReturnObject(restored);
-    model->Free(); core.storage->ReturnObject(model);
+    dynamic_pointer_cast<UNet>(restored)->BreakLinks(); restored->Free(); core.storage->ReturnObject(restored);
+    model->BreakLinks(); model->Free(); core.storage->ReturnObject(model);
     core.storage->ReturnObject(replacement); core.storage->ReturnObject(source);
 }
 
