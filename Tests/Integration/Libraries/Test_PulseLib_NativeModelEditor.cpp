@@ -418,6 +418,19 @@ TEST(NativeTrainingService,EvidenceEncoderRejectsNonfiniteNumbers)
     EXPECT_THROW(EncodeNativeProbeEvidence(result),std::invalid_argument);
 }
 
+TEST(NativeTrainingService,InvalidSearchDomainIsRejectedBeforeAnyReferenceProbe)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"service_invalid_domain");auto plan=TrainingPlan(rig);
+    plan.search.bounds[0].maximumSynapses=129;unsigned observations=0;
+    plan.observationSink=[&](const auto&){++observations;};const auto before=rig.Revision();
+    rig.learner->BeginNativeTraining(plan);const auto& service=rig.learner->NativeTrainingController();
+    EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidModel);
+    EXPECT_EQ(service.Reason(),"invalid_per_input_search_bounds");EXPECT_EQ(service.IssuedReferenceProbes(),0u);
+    EXPECT_EQ(observations,0u);EXPECT_EQ(rig.Revision(),before);
+    rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    EXPECT_EQ(service.IssuedReferenceProbes(),0u);EXPECT_EQ(observations,0u);
+}
+
 TEST(NativeIntegration, ActualSecretionWeightPsiAndTimeStepAreUsed)
 {
     EditingRig<NNeuronTimeLearner> rig(2000,0,"integration_bound");
