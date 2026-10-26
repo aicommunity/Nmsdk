@@ -161,3 +161,13 @@ Git-пакеты: [Elder-1](../../../Reports/StructTrain/TimeLearner/s07-native-
 Все 867 artifact hashes, gzip integrity и 863 raw payload hashes проверены
 локально только как данные; численные проверки выполнялись на серверах.
 Отрицательный a3 Reset baseline имеется на M40; его не приписывают Elder-1.
+
+## Git closure подэтапа
+
+Rdk develop merge: 8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6; PulseLib develop
+merge: 98c5a7d0d217c77696856105689f32ab3e7f7aba. Оба имеют два родителя и
+опубликованы до корневого объединения. Bin остаётся
+e78596e9639a841cd1989d73df7fe614419770ce. Core Rdk совпадает с проверенным
+a6b94092d0016b6a941bd6fd403725ae5c395538, Core PulseLib — с
+37bbc77bcfc418dfd6053aa267d71e18bbad63ff. Документальный PulseLib commit
+64cd3c70338e7439febf8fdde24facc582271241 не меняет production-код.
