@@ -14,7 +14,8 @@ public:
 // Complete self-contained native graph plus immutable image dependency closure.
 // metadata declares implementation_id, state_kind, training, calibration and
 // conversion. This is not a physical/controller mid-probe checkpoint.
-QJsonObject ExportModelArchive(RDK::UEPtr<RDK::UContainer> model, const QJsonObject& metadata);
+QJsonObject ExportModelArchive(RDK::UEPtr<RDK::UContainer> model, const QJsonObject& metadata,
+                               const ModelBoundarySources& boundarySources = {});
 
 // Returns a newly acquired model only after native Load/Init and full identity
 // verification. Caller owns the instance and must Free/ReturnObject it.
@@ -22,5 +23,6 @@ QJsonObject ExportModelArchive(RDK::UEPtr<RDK::UContainer> model, const QJsonObj
 // registered unused images may remain; discard that import storage before retry.
 RDK::UEPtr<RDK::UContainer> ImportModelArchive(
     const QJsonObject& archive, RDK::UEPtr<RDK::UStorage> storage,
-    RDK::UEPtr<RDK::UEnvironment> environment, const QString& implementationId);
+    RDK::UEPtr<RDK::UEnvironment> environment, const QString& implementationId,
+    const ModelBoundarySources& boundarySources = {});
 }

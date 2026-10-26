@@ -41,7 +41,7 @@ void Number(QJsonObject& destination, const char* name, double value,
 }
 }
 
-QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model)
+QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model, const ModelBoundarySources& boundarySources)
 {
     if(!model) throw std::runtime_error("no model to inspect");
     std::vector<Entry> entries;
@@ -56,6 +56,14 @@ QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model)
             propertyPaths[property.second.Property.Get()] = entry.path + ":" + property.first;
     }
     QJsonArray nodes, links, diagnostics;
+    std::set<QString> portNames;
+    std::set<const UIProperty*> usedPorts;
+    for(const auto& source : boundarySources)
+        if(!source.first || propertyPaths.count(source.first) || source.second.trimmed().isEmpty() ||
+           !portNames.insert(source.second).second || !(source.first->GetType() & ptOutput) ||
+           !dynamic_cast<const UIPropertyOutput*>(source.first) ||
+           !dynamic_cast<const UVBaseDataProperty<MDMatrix<double>>*>(source.first))
+            diagnostics.append("invalid_or_unsupported_boundary_source");
     for(const auto& entry : entries)
     {
         auto component = entry.component;
@@ -115,9 +123,13 @@ QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model)
                     link["binding_kind"] = input->UsesExternalDataSource() ? "external_data_source" : "property_pointer";
                     if(found == propertyPaths.end())
                     {
-                        link["source"] = QJsonValue(QJsonValue::Null);
+                        auto boundary = boundarySources.find(sources[i]);
+                        link["source"] = boundary == boundarySources.end() ? QJsonValue(QJsonValue::Null) : QJsonValue(boundary->second);
                         link["resolved_in_scope"] = false;
-                        diagnostics.append(QString::fromStdString(entry.path + ":" + name + ": null or out-of-scope data source"));
+                        link["declared_boundary"] = boundary != boundarySources.end();
+                        if(boundary != boundarySources.end()) usedPorts.insert(sources[i]);
+                        if(boundary == boundarySources.end())
+                            diagnostics.append(QString::fromStdString(entry.path + ":" + name + ": null or out-of-scope data source"));
                     }
                     else
                     {
@@ -181,6 +193,7 @@ QJsonObject InspectModel(RDK::UEPtr<RDK::UContainer> model)
         nodes.append(node);
     }
     QJsonObject result;
+    if(usedPorts.size() != boundarySources.size()) diagnostics.append("unused_boundary_source");
     result["schema_version"] = 1;
     result["kind"] = "effective_model_readback";
     result["lifecycle_mutated_by_inspector"] = false;

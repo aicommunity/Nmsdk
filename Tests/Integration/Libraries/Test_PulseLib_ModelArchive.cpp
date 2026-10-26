@@ -5,6 +5,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NConstGenerator.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -58,7 +59,7 @@ UEPtr<NPulseNeuron> Prepared(unsigned int frequency)
     return neuron;
 }
 
-QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency)
+QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency, NConstGenerator* boundary = nullptr)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     // Environment advances time using its current model's rate. A detached
@@ -77,11 +78,12 @@ QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency)
     for(unsigned int tick = 0; tick < frequency / 10; ++tick)
     {
         const double time = double(tick) / frequency, stimulus = time >= .005 && time < .006 ? 1. : 0.;
+        if(boundary) boundary->Output.Assign(1,1,stimulus);
         for(int i = 1; i <= 3; ++i)
         {
             auto synapse = neuron->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse" + std::to_string(i),true);
-            if(!synapse || synapse->Input.IsConnected()) throw std::runtime_error("fixture stimulus port invalid");
-            synapse->Input.Assign(1,1,stimulus);
+            if(!synapse || synapse->Input.IsConnected() != bool(boundary)) throw std::runtime_error("fixture stimulus port invalid");
+            if(!boundary) synapse->Input.Assign(1,1,stimulus);
         }
         model->Calculate(); core.environment->IncreaseModelTimeByStep();
         const double value = channel->Output(0,0);
@@ -146,11 +148,20 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
     const auto fixture = Read(QString::fromLocal8Bit(input)), archive = fixture["archive"].toObject();
     const auto modelClass = archive["graph"].toObject()["component_class"].toString().toStdString();
     ASSERT_FALSE(core.storage->CheckClass(modelClass));
-    auto model = NmsdkTools::ImportModelArchive(archive, core.storage, core.environment, "native-archive-fixture-v1");
+    UEPtr<NConstGenerator> boundary;
+    NmsdkTools::ModelBoundarySources ports;
+    if(fixture["stimulus_port"].isString())
+    {
+        boundary = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
+        ASSERT_TRUE(boundary); boundary->SetEnvironment(core.environment); boundary->Init();
+        boundary->Name = "IndependentTestStimulus";
+        ports[&boundary->Output] = fixture["stimulus_port"].toString();
+    }
+    auto model = NmsdkTools::ImportModelArchive(archive, core.storage, core.environment, "native-archive-fixture-v1",ports);
     ASSERT_TRUE(model);
     const auto expectedIdentity = archive["graph"].toObject()["identity"].toObject();
-    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(expectedIdentity, model)["match"].toBool());
-    const auto actual = Waveform(model, static_cast<unsigned int>(fixture["frequency_hz"].toInt()));
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(expectedIdentity, model,ports)["match"].toBool());
+    const auto actual = Waveform(model, static_cast<unsigned int>(fixture["frequency_hz"].toInt()),boundary.Get());
     const auto expected = fixture["waveform"].toArray(); ASSERT_EQ(actual.size(),expected.size());
     double error = 0., low = 0., high = 0.;
     for(int i=0;i<actual.size();++i)
@@ -159,27 +170,42 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
         low = std::min(low,expected[i].toDouble()); high = std::max(high,expected[i].toDouble());
     }
     EXPECT_GT(high-low,1e-8); EXPECT_LE(error,1e-12);
-    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(expectedIdentity,model)["match"].toBool());
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(expectedIdentity,model,ports)["match"].toBool());
     const char* output = std::getenv("TIMELEARNER_ARCHIVE_CHILD_OUTPUT");
     if(output) Write(QString::fromLocal8Bit(output), QJsonObject{{"max_pairwise_error",error},{"samples",actual.size()},
-        {"identity",NmsdkTools::IdentifyModel(model)},{"waveform",actual}});
+        {"identity",NmsdkTools::IdentifyModel(model,ports)},{"waveform",actual}});
+    model->Free(); // Release boundary bindings before returning the external source.
     core.storage->ReturnObject(model);
+    if(boundary) core.storage->ReturnObject(boundary);
 }
 
 class NativeArchive : public ::testing::TestWithParam<unsigned int> {};
-TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess)
+void TransferFixture(unsigned int frequency, bool withBoundary)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     const char* phase = "prepare";
     try {
-    auto model = Prepared(GetParam());
+    auto model = Prepared(frequency);
+    UEPtr<NConstGenerator> boundary;
+    NmsdkTools::ModelBoundarySources ports;
+    if(withBoundary)
+    {
+        boundary = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
+        ASSERT_TRUE(boundary); boundary->SetEnvironment(core.environment); boundary->Init();
+        boundary->Name = "OriginalTrainingSource";
+        ports[&boundary->Output] = "training_burst";
+        for(int i=1;i<=3;++i)
+            ASSERT_TRUE(model->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse"+std::to_string(i),true)->Input.SetPointer(0,&boundary->Output));
+        EXPECT_FALSE(NmsdkTools::IdentifyModel(model)["valid"].toBool());
+    }
     phase = "export";
-    auto archive = NmsdkTools::ExportModelArchive(model,Metadata());
+    auto archive = NmsdkTools::ExportModelArchive(model,Metadata(),ports);
     ASSERT_GT(archive["class_definitions"].toArray().size(),0);
     phase = "waveform";
-    const auto waveform = Waveform(model,GetParam());
-    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(),model)["match"].toBool());
-    QJsonObject fixture{{"archive",archive},{"frequency_hz",int(GetParam())},{"waveform",waveform}};
+    const auto waveform = Waveform(model,frequency,boundary.Get());
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(),model,ports)["match"].toBool());
+    QJsonObject fixture{{"archive",archive},{"frequency_hz",int(frequency)},{"waveform",waveform}};
+    if(withBoundary) fixture["stimulus_port"] = "training_burst";
     phase = "child";
     QTemporaryDir temporary; ASSERT_TRUE(temporary.isValid());
     QString directory = temporary.path();
@@ -187,8 +213,9 @@ TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess)
     {
         directory = QString::fromLocal8Bit(artifacts); std::filesystem::create_directories(directory.toStdString());
     }
-    const auto input = directory + "/archive-fixture-" + QString::number(GetParam()) + ".json";
-    const auto output = directory + "/import-verification-" + QString::number(GetParam()) + ".json";
+    const auto prefix = withBoundary ? "/boundary-" : "/archive-";
+    const auto input = directory + prefix + "fixture-" + QString::number(frequency) + ".json";
+    const auto output = directory + prefix + "import-verification-" + QString::number(frequency) + ".json";
     Write(input,fixture);
     QProcess child; auto environment = QProcessEnvironment::systemEnvironment();
     environment.insert("TIMELEARNER_ARCHIVE_CHILD_INPUT",input); environment.insert("TIMELEARNER_ARCHIVE_CHILD_OUTPUT",output);
@@ -206,12 +233,49 @@ TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess)
     EXPECT_EQ(child.exitStatus(),QProcess::NormalExit) << log.constData();
     EXPECT_EQ(child.exitCode(),0) << log.constData();
     if(child.exitCode()==0) EXPECT_LE(Read(output)["max_pairwise_error"].toDouble(),1e-12);
-    core.storage->ReturnObject(model);
+    model->Free(); core.storage->ReturnObject(model);
+    if(boundary) core.storage->ReturnObject(boundary);
     }
     catch(const RDK::UException& error) { FAIL() << phase << ": " << typeid(error).name() << ": " << error.what(); }
     catch(const std::exception& error) { FAIL() << phase << ": " << error.what(); }
 }
+TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess) { TransferFixture(GetParam(),false); }
+TEST_P(NativeArchive, TransfersDeclaredExternalStimulusIntoFreshNativeProcess) { TransferFixture(GetParam(),true); }
 INSTANTIATE_TEST_SUITE_P(SingleRate,NativeArchive,::testing::Values(2000u,20000u));
+
+TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto model = Prepared(2000);
+    auto source = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
+    auto replacement = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
+    ASSERT_TRUE(source); ASSERT_TRUE(replacement);
+    source->SetEnvironment(core.environment); source->Init();
+    replacement->SetEnvironment(core.environment); replacement->Init();
+    NmsdkTools::ModelBoundarySources ports{{&source->Output,"burst"}};
+    EXPECT_FALSE(NmsdkTools::IdentifyModel(model,ports)["valid"].toBool()); // unused declaration
+    for(int i=1;i<=3;++i)
+        ASSERT_TRUE(model->GetComponentL<NPulseSynapse>("Dendrite2_3.ExcSynapse"+std::to_string(i),true)->Input.SetPointer(0,&source->Output));
+    const auto identity = NmsdkTools::IdentifyModel(model,ports);
+    ASSERT_TRUE(identity["valid"].toBool()) << QJsonDocument(identity).toJson().constData();
+    source->Output.Assign(1,1,17.); // A sampled stimulus is not model identity.
+    EXPECT_EQ(identity["sha256"],NmsdkTools::IdentifyModel(model,ports)["sha256"]);
+    auto duplicate = ports; duplicate[&replacement->Output] = "burst";
+    EXPECT_FALSE(NmsdkTools::IdentifyModel(model,duplicate)["valid"].toBool());
+    EXPECT_FALSE(NmsdkTools::IdentifyModel(model,{{nullptr,"burst"}})["valid"].toBool());
+    auto archive = NmsdkTools::ExportModelArchive(model,Metadata(),ports);
+    EXPECT_THROW(NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1"),NmsdkTools::ModelArchiveError);
+    EXPECT_THROW(NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1",{{&replacement->Output,"wrong"}}),NmsdkTools::ModelArchiveError);
+    auto restored = NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1",{{&replacement->Output,"burst"}});
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(identity,restored,{{&replacement->Output,"burst"}})["match"].toBool());
+    EXPECT_FALSE(NmsdkTools::VerifyModelIdentity(identity,restored,ports)["match"].toBool());
+    const auto trace = Waveform(restored,2000,replacement.Get());
+    EXPECT_EQ(trace.size(),200);
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(identity,model,ports)["match"].toBool());
+    restored->Free(); core.storage->ReturnObject(restored);
+    model->Free(); core.storage->ReturnObject(model);
+    core.storage->ReturnObject(replacement); core.storage->ReturnObject(source);
+}
 
 TEST(TimeLearnerModelArchive, RejectsMalformedArchiveBeforeRegistration)
 {
