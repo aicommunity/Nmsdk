@@ -44,6 +44,20 @@ TEST(TimeLearnerProbe, UsesExplicitRestStateAndMeasuredPlateauWithoutInterpolati
     EXPECT_FALSE(result.specification.recordSpikes); // Unknown spike response.
 }
 
+TEST(TimeLearnerProbe, NativeSchemaRequiresFiniteSourcePhysicsWithoutInventingLegacyEvidence)
+{
+    auto s=Specification();s.schemaVersion=2;EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+    ProbeRecorder recorder(s);Samples(recorder,onePeak);recorder.RecordStimulus("pulse",.1);
+    const auto measured=recorder.Close(1.,"model_1","closed");
+    ASSERT_TRUE(measured.valid);EXPECT_EQ(measured.schemaVersion,2u);
+    EXPECT_EQ(measured.specification.stimulusProfile,s.stimulusProfile);
+    s.stimulusProfile->amplitude=std::numeric_limits<double>::quiet_NaN();
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s.stimulusProfile->amplitude=1.;s.schemaVersion=1;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
+
 TEST(TimeLearnerProbe, DistinguishesMissingAmbiguousAndClippedPeaks)
 {
     const std::vector<std::pair<std::vector<double>,PeakValidity>> cases{
