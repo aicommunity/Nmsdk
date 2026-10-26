@@ -73,7 +73,7 @@ BoundedTrainingConfig Configuration(std::size_t n=2,Normalization normalization=
     cfg.bounds.assign(n,{1,3,1,128,1.,100.});return cfg;
 }
 using Response=std::function<void(const TrainingAction&,std::vector<double>&,std::vector<double>&)>;
-void Run(BoundedTrainingSession& session,const VerificationProtocol& protocol,const Response& response={})
+void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& protocol,const Response& response={})
 {
     std::size_t iterations=0;
     while(auto action=session.NextAction())
@@ -100,7 +100,7 @@ TEST(BoundedTraining, MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInp
     {
         const auto p=Protocol(2,routing);auto cfg=Configuration();
         BoundedTrainingSession session(References(p),cfg,std::vector<InputParameters>(2,{1,1,10.}));
-        Run(session,p,[](const TrainingAction& a,auto& delay,auto&) {
+        DriveTraining(session,p,[](const TrainingAction& a,auto& delay,auto&) {
             // Deliberately nonmonotone: length 2 is worse than length 1;
             // length 3 synchronizes. Prediction/bisection cannot certify this.
             delay[0]=a.parameters[0].length==3?.13:a.parameters[0].length==2?.01:.03;
@@ -121,7 +121,7 @@ TEST(BoundedTraining, IndependentResistanceBoundsAndNoCommonIntersection)
     cfg.bounds={{1,1,1,1,1.,2.},{1,1,1,1,10.,20.},{1,1,1,1,100.,200.}};
     cfg.tolerances.sync=1.;
     BoundedTrainingSession session(References(p),cfg,{{1,1,1.5},{1,1,15.},{1,1,150.}});
-    Run(session,p,[](const TrainingAction& a,auto&,auto& raw) {
+    DriveTraining(session,p,[](const TrainingAction& a,auto&,auto& raw) {
         raw[0]+=(a.parameters[0].resistance==2.?0.:.001);
         raw[1]+=(a.parameters[1].resistance==20.?0.:.001);
     });
@@ -136,7 +136,7 @@ TEST(BoundedTraining, Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesEx
     for(bool exactAtCap:{false,true})
     {
         BoundedTrainingSession session(References(p),cfg,{{1,127,10.},{1,1,10.}});
-        Run(session,p,[&](const TrainingAction& a,auto&,auto& raw) {
+        DriveTraining(session,p,[&](const TrainingAction& a,auto&,auto& raw) {
             raw[0]+=exactAtCap && a.parameters[0].synapses==128?0.:.0001;
         });
         EXPECT_EQ(session.Status(),exactAtCap?TrainingStatus::Exact:TrainingStatus::SearchUnresolved);
@@ -150,7 +150,7 @@ TEST(BoundedTraining, LaterSharedPhysicsDamageCannotInheritLocalSuccess)
     const auto p=Protocol(3,ProbeRouting::BranchSoloBurst);auto cfg=Configuration(3);
     cfg.tolerances.sync=1.;cfg.maximumCandidatesPerInput=2;
     BoundedTrainingSession session(References(p),cfg,std::vector<InputParameters>(3,{1,1,10.}));
-    Run(session,p,[](const TrainingAction& a,auto&,auto& raw) {
+    DriveTraining(session,p,[](const TrainingAction& a,auto&,auto& raw) {
         // Each local probe succeeds; the independent final sweep exposes damage
         // to an earlier committed input. No local flag can bypass that sweep.
         if(a.finalVerification)raw[1]+=.001;
@@ -162,7 +162,7 @@ TEST(BoundedTraining, LaterSharedPhysicsDamageCannotInheritLocalSuccess)
 TEST(BoundedTraining, SearchBudgetAndExternalStopNeverCreateCertificate)
 {
     const auto p=Protocol();auto cfg=Configuration();cfg.maximumProbes=1;
-    BoundedTrainingSession budget(References(p),cfg,{{1,1,10.},{1,1,10.}});Run(budget,p);
+    BoundedTrainingSession budget(References(p),cfg,{{1,1,10.},{1,1,10.}});DriveTraining(budget,p);
     EXPECT_EQ(budget.Status(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(budget.Certificate());
     cfg.maximumProbes=100;
     BoundedTrainingSession stopped(References(p),cfg,{{1,1,10.},{1,1,10.}});
@@ -173,7 +173,7 @@ TEST(BoundedTraining, SearchBudgetAndExternalStopNeverCreateCertificate)
 TEST(BoundedTraining, AppliedReadbackAndProbeRevisionAreMandatory)
 {
     const auto p=Protocol();auto cfg=Configuration();BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
-    Run(session,p); // Constant delays cannot synchronize these two inputs.
+    DriveTraining(session,p); // Constant delays cannot synchronize these two inputs.
     EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
     BoundedTrainingSession bad(References(p),cfg,{{1,1,10.},{1,1,10.}});
     auto action=bad.NextAction();ASSERT_TRUE(action);const auto prepared=Prepare(p,action->inputIndex,"initial",0);
@@ -197,7 +197,7 @@ TEST(BoundedTraining, SingleInputStillRequiresRealFinalProbe)
 {
     const auto p=Protocol(1);auto cfg=Configuration(1);
     BoundedTrainingSession session(References(p),cfg,{{1,1,10.}});EXPECT_FALSE(session.Certificate());
-    EXPECT_EQ(session.Status(),TrainingStatus::Verifying);Run(session,p);
+    EXPECT_EQ(session.Status(),TrainingStatus::Verifying);DriveTraining(session,p);
     ASSERT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_EQ(session.IssuedProbes(),1u);
 }
 

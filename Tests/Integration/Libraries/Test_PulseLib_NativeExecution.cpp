@@ -24,6 +24,39 @@ using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
 enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude,WrongObservationChannel,WrongSoloSelector };
 
+QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const ProbeObservation& observation)
+{
+    const auto& s=observation.specification;QJsonArray stimuli,windows,peaks,assignments,baseline;
+    for(const auto& event:observation.stimuli)stimuli.append(QJsonObject{{"id",QString::fromStdString(event.id)},{"time",event.time}});
+    for(double value:s.baseline)baseline.append(value);
+    for(const auto& window:s.windows)windows.append(QJsonObject{{"input_id",QString::fromStdString(window.inputId)},
+        {"stimulus_id",QString::fromStdString(window.stimulusId)},{"channel",int(window.channel)},
+        {"begin",window.begin},{"end",window.end}});
+    for(const auto& peak:observation.peaks)peaks.append(QJsonObject{{"input_id",QString::fromStdString(peak.inputId)},
+        {"stimulus_id",QString::fromStdString(peak.stimulusId)},{"validity",PeakValidityName(peak.validity)},
+        {"raw",peak.rawPotential?QJsonValue(*peak.rawPotential):QJsonValue(QJsonValue::Null)},
+        {"amplitude",peak.amplitude?QJsonValue(*peak.amplitude):QJsonValue(QJsonValue::Null)},
+        {"time",peak.time?QJsonValue(*peak.time):QJsonValue(QJsonValue::Null)},
+        {"plateau_end",peak.plateauEnd?QJsonValue(*peak.plateauEnd):QJsonValue(QJsonValue::Null)}});
+    for(const auto& assignment:observation.burstAssignments)
+    {
+        QJsonArray waves;
+        for(const auto& wave:assignment.waves)waves.append(QJsonObject{{"stimulus_id",QString::fromStdString(wave.stimulusId)},
+            {"raw",wave.rawPotential},{"amplitude",wave.amplitude},{"time",wave.time},{"plateau_end",wave.plateauEnd}});
+        assignments.append(QJsonObject{{"channel",int(assignment.channel)},{"validity",PeakValidityName(assignment.validity)},{"waves",waves}});
+    }
+    return {{"schema",int(observation.schemaVersion)},{"run_id",QString::fromStdString(s.runId)},
+        {"trial_id",QString::fromStdString(s.trialId)},{"sample_id",QString::fromStdString(s.sampleId)},
+        {"pattern_hash",QString::fromStdString(s.patternHash)},{"base_model_revision",QString::fromStdString(context.baseModelRevision)},
+        {"effective_model_revision",QString::fromStdString(context.effectiveModelRevision)},{"epoch",int(context.modelEpoch)},
+        {"protocol_revision",QString::fromStdString(context.protocolRevision)},
+        {"selected_input_index",context.selectedInputIndex?QJsonValue(int(*context.selectedInputIndex)):QJsonValue(QJsonValue::Null)},
+        {"complete",observation.complete},{"valid",observation.valid},{"begin",s.begin},{"end",s.end},
+        {"maximum_sample_gap",s.maximumSampleGap},{"minimum_amplitude",s.minimumAmplitude},
+        {"sample_count",int(observation.sampleCount)},{"baseline",baseline},{"windows",windows},
+        {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
+}
+
 template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
@@ -396,7 +429,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         protocol.sampleId=observed.specification.sampleId;protocol.patternHash=observed.specification.patternHash;
         protocol.maximumSampleGap=1./frequency;protocol.stimulusIds=observed.specification.expectedStimulusIds;
         for(unsigned i=0;i<inputCount;++i)protocol.inputs.push_back({"input"+std::to_string(i),"pulse"+std::to_string(i)});
-        std::vector<ReferenceEvidence> captured;
+        std::vector<ReferenceEvidence> captured;QJsonArray referenceArtifacts;
         std::vector<UEPtr<NPulseSynapseCommon>> physicalSynapses;
         std::vector<InputParameters> parameters;
         for(unsigned i=0;i<inputCount;++i)
@@ -410,13 +443,28 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             reference.specification.stimulusProfile=protocol.stimulusProfile;
             reference.specification.windows={{reference.inputId,branch?0u:i,onsets[i]-.001,onsets[i]+.06,"pulse"+std::to_string(i)}};
             std::optional<PreparedVerificationProbe> prepared;
-            reference.onPrepared=[&](const auto& actual,const ProbeSpec&){prepared=actual;};reference.onSample={};
+            reference.onPrepared=[&](const auto& actual,const ProbeSpec&){prepared=actual;};
+            std::ostringstream referenceSamples;referenceSamples.imbue(std::locale::classic());
+            referenceSamples<<std::setprecision(17)<<"time,stimulus";
+            for(unsigned channel=0;channel<(branch?1u:inputCount);++channel)referenceSamples<<",soma"<<channel;
+            referenceSamples<<'\n';
+            reference.onSample=[&](const NativeProbeSample& sample) {
+                referenceSamples<<sample.time<<','<<sample.stimulus;
+                for(double value:sample.potentials)referenceSamples<<','<<value;referenceSamples<<'\n';
+            };
             learner->QueueNativeProbe(std::move(reference));unsigned steps=0;
             while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
             {ASSERT_LT(steps++,unsigned((duration+.1)*frequency));model->Calculate();core.environment->IncreaseModelTimeByStep();}
             const auto referenceResult=learner->TakeNativeProbeResult();ASSERT_TRUE(referenceResult);ASSERT_TRUE(prepared);
             ASSERT_EQ(referenceResult->status,NativeProbeStatus::Completed);ASSERT_TRUE(referenceResult->observation);
             ASSERT_TRUE(referenceResult->observation->valid);captured.push_back({*prepared,*referenceResult->observation});
+            referenceArtifacts.append(BoundedProbeArtifact(*prepared,*referenceResult->observation));
+            if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+            {
+                QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_train_reference_"+QString::number(i)+".csv");
+                ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));const auto bytes=QByteArray::fromStdString(referenceSamples.str());
+                ASSERT_EQ(file.write(bytes),bytes.size());
+            }
         }
         const auto references=CapturedReferences::Capture(protocol,captured);
         BoundedTrainingConfig cfg;cfg.runId=name+"/bounded_training";cfg.normalization=Normalization::TipResistance;
@@ -468,6 +516,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             training.Consume(*measured->observation,measured->currentBaseRevision);
             actions.append(QJsonObject{{"serial",int(action->serial)},{"kind","probe"},{"input",int(action->inputIndex)},
                 {"final",action->finalVerification},{"model_revision",QString::fromStdString(measured->currentBaseRevision)},
+                {"observation",BoundedProbeArtifact(*measured->prepared,*measured->observation)},
                 {"valid",measured->observation->valid},{"complete",measured->observation->complete}});
             if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
             {
@@ -481,11 +530,21 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         EXPECT_TRUE(training.Certificate()->Matches(base,references,cfg.tolerances,ModelStateKind::LearnedSolo,training.ModelEpoch()));
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
         {
+            QJsonArray residuals;
+            for(const auto& residual:training.Certificate()->Residuals())residuals.append(QJsonObject{
+                {"input_id",QString::fromStdString(residual.inputId)},{"trial_id",QString::fromStdString(residual.trialId)},
+                {"target_raw",residual.targetRawPotential},{"measured_raw",residual.measuredRawPotential},
+                {"amplitude_residual",residual.amplitudeResidual},{"amplitude_tolerance",residual.amplitudeTolerance},
+                {"timing_low",residual.timingResidualLow},{"timing_high",residual.timingResidualHigh}});
             QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_bounded_training.json");
             ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));const auto bytes=QJsonDocument(QJsonObject{
                 {"status",TrainingStatusName(training.Status())},{"sync_tolerance",cfg.tolerances.sync},
                 {"amplitude_absolute",cfg.tolerances.amplitudeAbsolute},{"probes",int(training.IssuedProbes())},
-                {"edits",int(training.AppliedEdits())},{"actions",actions},{"scientific_training_result",false}}).toJson();
+                {"initial_model_revision",QString::fromStdString(cfg.initialModelRevision)},
+                {"reference_model_revision",QString::fromStdString(references.InitialModelRevision())},
+                {"final_model_revision",QString::fromStdString(training.ModelRevision())},{"final_model_epoch",int(training.ModelEpoch())},
+                {"edits",int(training.AppliedEdits())},{"actions",actions},{"references",referenceArtifacts},
+                {"residuals",residuals},{"scientific_training_result",false}}).toJson();
             ASSERT_EQ(file.write(bytes),bytes.size());
         }
     }
