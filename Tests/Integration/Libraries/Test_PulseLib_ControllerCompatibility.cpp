@@ -11,6 +11,7 @@
 #include <cstring>
 #include <cstdint>
 #include <cstdlib>
+#include <algorithm>
 
 namespace {
 using namespace RDK;
@@ -74,10 +75,15 @@ template<class Learner> void Run(const Case& spec, const QString& name)
     QJsonArray events; events.append(State(learner,0));
     QCryptographicHash waveform(QCryptographicHash::Sha256);
     const unsigned ticks=unsigned(2.25*spec.frequency);
-    double low=0.,high=0.,previousIteration=-1.; bool decision=false;
+    double low=0.,high=0.,previousIteration=-1.,previousStimulus=0.; bool decision=false;
+    QJsonArray stimulusOnsets;
     for(unsigned tick=0;tick<ticks;++tick)
     {
         model->Calculate(); core.environment->IncreaseModelTimeByStep();
+        const double stimulus=generator->Output.GetData().GetSize() ? generator->Output(0,0) : 0.;
+        ASSERT_TRUE(std::isfinite(stimulus));
+        if(stimulus>0. && previousStimulus<=0.) stimulusOnsets.append(int(tick));
+        previousStimulus=stimulus;
         const auto& amplitudes=learner->SomaNeuronAmplitude.GetData();
         for(int i=0;i<amplitudes.GetSize();++i)
         {
@@ -94,12 +100,13 @@ template<class Learner> void Run(const Case& spec, const QString& name)
         }
     }
     events.append(State(learner,ticks));
-    EXPECT_GE(generator->PulseCounter.GetData(),4);
+    EXPECT_GE(stimulusOnsets.size(),4);
     EXPECT_GT(high-low,1e-8);
     EXPECT_TRUE(decision) << "fixture must execute a real structural decision, not merely tick an idle model";
     QJsonObject result{{"schema_version",1},{"kind","native_legacy_controller_compatibility_control"},
         {"case",name},{"model_ticks",int(ticks)},{"frequency_hz",int(spec.frequency)},
         {"pulse_count",generator->PulseCounter.GetData()},{"events",events},
+        {"actual_stimulus_onset_ticks",stimulusOnsets},
         {"waveform_sha256",QString::fromLatin1(waveform.result().toHex())},
         {"scientific_training_result",false}};
     if(const char* baseline=std::getenv("TIMELEARNER_COMPAT_BASELINE"))
