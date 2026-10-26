@@ -269,4 +269,26 @@ TEST(BoundedTraining, MissingAmbiguousOrIncompletePeaksCannotDriveEdits)
         EXPECT_EQ(session.AppliedEdits(),0u);EXPECT_TRUE(session.Evidence().empty());EXPECT_FALSE(session.Certificate());
     }
 }
+
+TEST(BoundedTraining, ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments)
+{
+    const auto p=Protocol(4,ProbeRouting::BranchSoloBurst);auto cfg=Configuration(4);
+    for(auto& b:cfg.bounds){b.maximumLength=4;b.maximumSynapses=1;}
+    BoundedTrainingSession session(References(p),cfg,std::vector<InputParameters>(4,{1,1,10.}));
+    DriveTraining(session,p,[](const TrainingAction& action,auto& delay,auto&) {
+        for(std::size_t i=0;i<action.parameters.size();++i)
+        {
+            EXPECT_EQ(action.parameters[i].synapses,1);EXPECT_EQ(action.parameters[i].resistance,10.);
+            delay[i]=.03+.1*(action.parameters[i].length-1);
+            if(i)EXPECT_GE(action.parameters[i-1].length,action.parameters[i].length);
+        }
+        EXPECT_EQ(action.parameters.back().length,1);
+    });
+    ASSERT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_TRUE(session.Certificate());
+    EXPECT_EQ(session.Parameters(),(std::vector<InputParameters>{{4,1,10.},{3,1,10.},{2,1,10.},{1,1,10.}}));
+    ASSERT_GE(session.Evidence().size(),2u);EXPECT_EQ(session.Evidence()[0].inputIndex,2u);
+    auto firstGrowth=std::find_if(session.Evidence().begin(),session.Evidence().end(),[](const auto& e){return e.inputIndex==2 && e.parameters.length==2;});
+    ASSERT_NE(firstGrowth,session.Evidence().end());EXPECT_EQ(firstGrowth->parameterChangeCost,3.);
+    EXPECT_EQ(session.Certificate()->Residuals().size(),4u);
+}
 }
