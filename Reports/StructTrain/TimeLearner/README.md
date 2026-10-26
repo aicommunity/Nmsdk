@@ -40,6 +40,7 @@ test report is not a trained-model result.
 | Combined shared model API and schema-3 observations: native waveform/identity checks | [Elder-1](s07-burst-combined-elder1/README.md), [M40](s07-burst-combined-m40/README.md) |
 | Bounded candidate controller, actual R normalization and shared Branch bank readback | [Elder-1](s07-bounded-elder1/README.md), [M40 + targeted ASan](s07-bounded-m40/README.md) |
 | Native structural preview/apply, observer/foreign-bank preservation and coupled cold Branch edit | [Elder-1](s07-native-edits-elder1/README.md), [M40 + targeted ASan](s07-native-edits-m40/README.md) |
+| Shared native reference/search/final-verification API and independent primary-data audit | [Elder-1](s06-native-service-elder1/README.md), [M40 + targeted ASan](s06-native-service-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md) and

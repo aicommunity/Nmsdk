@@ -100,3 +100,14 @@ emissions и Multi dimensions; сведения и первичные traces н�
 Различия Classic round-robin и Branch reverse/mute не заменяются общим
 single-pulse протоколом. Совместимость старого кода и исправление алгоритмов
 должны иметь разные commits и разные критерии проверки.
+
+Последующий explicit API BeginNativeTraining уже выполняет общий capture →
+bounded search → independent final gate через native hooks, без ручного цикла
+действий в тесте: [NativeTrainingService](NativeTrainingService.ru.md). Проверены
+Classic/Branch × N0/N1 с реальными L/Ns/Rs edits и честным SearchUnresolved на
+ограниченной области; фиксированный Exact/warm control имеет отдельный sync
+tolerance 0.2 с. Root 2fd45d4424360d7834ba094f875ddeda678c1625: 65 addressed
+pass на обоих серверах, 8 M40 ASan. Retention/state export diagnostics и
+production root evidence auditor имеют отдельные snapshots и проверки.
+Configured dispatch, новые builders и полная алгоритмическая/физическая матрица
+по-прежнему обязательны; statements выше описывают свои исторические подэтапы.
