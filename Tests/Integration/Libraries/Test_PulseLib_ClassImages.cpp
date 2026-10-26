@@ -67,6 +67,44 @@ TEST(TimeLearnerClassImages, CollisionCannotChangeAlreadyCreatedInstances)
  core.storage->ReturnObject(other); core.storage->ReturnObject(first);
 }
 
+TEST(TimeLearnerClassImages, EnvironmentAssignmentRemovesPreviousTimeStepVisibility)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ core.environment->SetUseIndTimeStepFlag(false);
+ auto source=Channel(1.17e-9);ASSERT_TRUE(source);
+ source->ChangeUseIndTimeStepMode(true); // Simulate an object returned by an individual-rate channel.
+ ASSERT_NE(source->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+ source->SetEnvironment(core.environment);
+ EXPECT_EQ(source->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+ EXPECT_EQ(source->GetTimeStep(),2000);
+ const std::string name="TimeLearnerUnit_EnvironmentModeImage";
+ const auto image=RegisterClassImage(core.storage,name,source);
+ auto copy=dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(name));ASSERT_TRUE(copy);
+ copy->SetEnvironment(core.environment);copy->Init();
+ EXPECT_EQ(DescribeClassImage(copy),image.descriptor);
+ EXPECT_DOUBLE_EQ(copy->Capacity.GetData(),1.17e-9);
+ core.storage->ReturnObject(copy);core.storage->ReturnObject(source);
+}
+
+TEST(TimeLearnerClassImages, EquivalentPhysicsRemainsIdempotentAcrossTimeStepVisibilityModes)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ core.environment->SetUseIndTimeStepFlag(true);
+ auto source=Channel(1.19e-9);ASSERT_TRUE(source);
+ const std::string name="TimeLearnerUnit_ModeIndependentImage";
+ const auto first=RegisterClassImage(core.storage,name,source);EXPECT_TRUE(first.created);
+ for(bool individual:{false,true,false})
+ {
+  core.environment->SetUseIndTimeStepFlag(individual);source->SetEnvironment(core.environment);
+  EXPECT_NO_THROW({const auto repeated=RegisterClassImage(core.storage,name,source);EXPECT_FALSE(repeated.created);});
+ }
+ // Numeric frequency still belongs to the image physics and cannot be ignored.
+ source->SetGlobalTimeStep(20000);
+ try {RegisterClassImage(core.storage,name,source);FAIL()<<"different rate accepted";}
+ catch(const ClassImageError& error){EXPECT_EQ(error.code,"image_name_collision");}
+ core.storage->ReturnObject(source);
+}
+
 TEST(TimeLearnerClassImages, NonfiniteParameterAndExternalBindingAreRejected)
 {
  const auto& core = NmsdkTests::InitEngineForPulseLibTests();

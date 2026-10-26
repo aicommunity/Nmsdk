@@ -31,6 +31,7 @@ test report is not a trained-model result.
 | Global-rate replacement defect baseline | [M40: two failures and two individual controls](s04-frequency-baseline-m40/README.md) |
 | Global/individual runtime policy, detached Copy and N1 growth | [Elder-1](s04-frequency-final-elder1/README.md), [M40](s04-frequency-final-m40/README.md) |
 | Shared legacy policies: eight native baseline/A-B cases and graph comparisons | [Elder-1](s06-shared-elder1/README.md), [M40](s06-shared-m40/README.md) |
+| Bounded probe observations, raw native soma and storage metadata regressions | [Elder-1](s06-probe-elder1/README.md), [M40 + targeted ASan](s06-probe-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md) and
