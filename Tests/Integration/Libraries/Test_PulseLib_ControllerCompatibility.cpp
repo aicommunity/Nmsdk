@@ -4,6 +4,7 @@
 #include "../Support/ConsoleLikeInit.h"
 #include <QCryptographicHash>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QJsonArray>
 #include <QFile>
 #include <QDir>
