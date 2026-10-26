@@ -466,6 +466,23 @@ template<class Generator> void ActualEmissionHistory(unsigned frequency,const st
     EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
     model->Calculate();ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
     EXPECT_EQ(generator->OutputPulseTimes(0,0),core.environment->GetTime().GetDoubleTime());
+    if constexpr(std::is_same<Generator,NPulseGeneratorMulti>::value)
+    {
+        // Native setters own dimensions; no forced extra Build/Init sequence.
+        MDMatrix<double> delays;delays.Assign(1,2,0.);delays(0,1)=.002;
+        generator->Delays=delays;
+        EXPECT_EQ(generator->PulseCount.GetData(),2);
+        for(unsigned i=0;i<frequency/250;++i)
+        { core.environment->IncreaseModelTimeByStep();model->Calculate(); }
+        EXPECT_EQ(generator->PulseCounters->size(),2u);
+        ASSERT_EQ(generator->OutputPulseTimes.GetCols(),2);
+        EXPECT_NEAR(generator->OutputPulseTimes(0,1)-generator->OutputPulseTimes(0,0),.002,1./frequency+1e-12);
+        generator->PulseCount=1;
+        core.environment->IncreaseModelTimeByStep();model->Calculate();
+        EXPECT_EQ(generator->Delays.GetCols(),1);
+        EXPECT_EQ(generator->PulseCounters->size(),1u);
+        ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
+    }
     core.environment->DestroyModel();
 }
 TEST_P(NativeGeneratorPulseTimes, EmptyHistoryAndActualZeroTimeAreDistinct)
