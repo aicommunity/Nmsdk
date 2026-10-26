@@ -49,9 +49,31 @@ incomplete/nonfinite observation, mismatch эффективных парамет
 production default 0.02 с.
 
 На снимке root 5f3737013ec3c18d3514f1d3292e1367181cb9e0 / PulseLib
-1cccb7e (полный SHA в Git/runtime manifest) восемь контролируемых сценариев
-прошли на обоих серверах. Native Classic 2000 Гц прошёл на обоих серверах;
-остальные native cases продолжают выполняться. Это промежуточный результат,
-не приёмка ветки. Первая попытка root 25cafe0e остановилась при компиляции
+1cccb7eeceac91c45bdf245c5b30d7dc7d2785e4 прошли 29 адресных cases на обоих серверах:
+восемь контролируемых сценариев, 17 FinalVerification и четыре native Classic/
+Branch × 2000/20000. Каждый native training case выполнил одну коррекцию Rs,
+шесть свежих проб и восстановил исходный физический fingerprint с новой epoch.
+Primary artifact validation проверяет соответствие CSV sample count/timestamps,
+связь наблюдений с действиями, references и остатками сертификата.
+
+Root 067a4dba91b0e1a2bca83d8c73850baa9c0aa9b7 / PulseLib
+c33085f37ad7ce64ec446e05765dab0b742fd81d прошёл 27 cases на обоих серверах:
+девять контролируемых сценариев, 17 FinalVerification и native Branch N0/N1
+shared-bank fixture. Он включает проверку явного deadline. Это не повторный
+full CTest и не полная структурная или физическая матрица.
+
+Первая попытка root 25cafe0e остановилась при компиляции
 тестового helper из-за перекрытия имени GoogleTest::Run; production core
-скомпилирован. Исправление и первичные данные сохраняются отдельно.
+скомпилирован. A3 (efd9b71b4d81f958c05ddf79142cf0f734c8a949) дал 26 pass и один
+failure: fixture ошибочно предполагал порядок legacy записей Rs при Reset.
+В A4 проверяется actual shared bank без предположения о последнем writer.
+Production shared-bank legality в A3 и A4 одинакова. Все попытки сохранены,
+успешные manifests не подставляются вместо неуспешных.
+
+[Elder-1 evidence](../../../Reports/StructTrain/TimeLearner/s07-bounded-elder1/README.md) и
+[M40 evidence](../../../Reports/StructTrain/TimeLearner/s07-bounded-m40/README.md)
+опубликованы через Git; локально проверены 206 artifact hashes и raw gzip payloads.
+На M40 прошли 27 targeted ASan cases, detect_leaks=0; leak freedom не заявляется.
+Конфигурационный dispatch,
+полные structural edit adapters, C-trim, trained-state export и научная матрица
+по-прежнему обязательны; описанный поиск их не заменяет.
