@@ -6,6 +6,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGeneratorMulti.h"
 #include "../../../App/NeuroModelerConsole/ModelIdentity.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
@@ -19,6 +20,7 @@
 #include <locale>
 #include <cstdlib>
 #include <algorithm>
+#include <cmath>
 
 namespace {
 using namespace RDK;
@@ -244,6 +246,251 @@ TEST_P(NativeFinalVerification, FreshSingleInputConstraintCertificate)
     else VerifyNativeSingleInput<NNeuronTimeLearner>(GetParam().second);
 }
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeFinalVerification,::testing::Values(
+    std::make_pair(false,2000u),std::make_pair(true,2000u),
+    std::make_pair(false,20000u),std::make_pair(true,20000u)));
+
+class NativeProbeRestart : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
+template<class Learner> void RepeatedNativeProbes(unsigned frequency)
+{
+    const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto model=core.environment->GetModel();ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_restart";
+    StorageProfileSpec profile;profile.name="NativeRestart_"+name;profile.frequencyHz=frequency;
+    profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
+    const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
+    auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
+    ASSERT_TRUE(learner);learner->Name="ProbeControl";learner->StructureBuildMode=1;
+    learner->NumInputDendrite=4;learner->NeuronClassName=registered.neuronClass;
+    learner->CalculateMode=1;learner->NormalizationMode=1;
+    learner->EnablePostTrainTuning=false;learner->AutoCalibrateFixedLTZThreshold=false;
+    MDMatrix<double> pattern;pattern.Assign(4,1,0.);
+    const double gaps[]{.01,.08,.16,.24},onsets[]{.01,.09,.25,.49};
+    for(unsigned i=0;i<4;++i)pattern(i,0)=gaps[i];learner->InputPattern=pattern;
+    UEPtr<UContainer> component=learner;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    model->SetGlobalTimeStep(frequency);model->Init();
+    learner->ResetToUntrainedState=true;model->Reset();
+    model->Calculate();core.environment->IncreaseModelTimeByStep();learner->IsNeedToTrain=false;
+    auto neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
+    auto dataset=learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    auto generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
+    NmsdkTools::ModelBoundarySources ports{{&generator->Output,"burst"}};
+    const auto identity=NmsdkTools::IdentifyModel(neuron,ports);ASSERT_TRUE(identity["valid"].toBool());
+    const auto revision=identity["sha256"].toString().toStdString();
+    std::vector<UEPtr<NPulseMembrane>> somas;
+    for(unsigned i=0;i<(branch?1u:4u);++i)
+    {
+        auto soma=neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);
+        ASSERT_TRUE(soma);somas.push_back(soma);
+    }
+    QJsonArray trials,configuredPattern;std::vector<std::vector<double>> reference;
+    for(double gap:gaps)configuredPattern.append(gap);
+    const auto patternHash=NmsdkTools::CanonicalModelDataSha256(configuredPattern).toStdString();
+    const auto phase=learner->TrainingPhase.GetData();
+    // Different idle intervals; the same built graph is reused throughout.
+    const double starts[]{.1,.9,2.};
+    dataset->StateGeneration=0;
+    for(unsigned trial=0;trial<3;++trial)
+    {
+        while(core.environment->GetTime().GetDoubleTime()+.25/frequency<starts[trial])
+        { model->Calculate();core.environment->IncreaseModelTimeByStep(); }
+        // Legal boundary: do not Build, reset the learner, or reset model time.
+        neuron->Reset();dataset->Reset();dataset->StateGeneration=2;
+        const double begin=core.environment->GetTime().GetDoubleTime();
+        ProbeSpec spec;spec.runId=name;spec.trialId=name+"_"+std::to_string(trial);
+        spec.sampleId="native_burst";spec.patternHash=patternHash;
+        spec.modelRevision=revision;spec.begin=begin;spec.end=begin+.56;
+        spec.maximumSampleGap=1./frequency;spec.maximumSamples=frequency;
+        for(const auto& soma:somas)spec.baseline.push_back(soma->SumPotential(0,0));
+        for(unsigned i=0;i<4;++i)
+        {
+            const auto id="pulse"+std::to_string(i);spec.expectedStimulusIds.push_back(id);
+            spec.windows.push_back({"input"+std::to_string(i),branch?0u:i,begin+onsets[i]-.001,begin+onsets[i]+.06,id});
+        }
+        ProbeRecorder recorder(spec);unsigned count=0;double lastEmission=begin-1.;
+        std::vector<std::vector<double>> waveform;QJsonArray stimuli;
+        std::ostringstream trace;trace.imbue(std::locale::classic());
+        trace<<std::setprecision(17)<<"native_tick_start_s,relative_time_s,stimulus";
+        for(unsigned i=0;i<somas.size();++i)trace<<",raw_soma_"<<i;trace<<'\n';
+        double now=begin;
+        while(now<spec.end)
+        {
+            now=core.environment->GetTime().GetDoubleTime();model->Calculate();
+            // Dataset resets the generator for every pulse. Read actual native
+            // emission times, not PulseCounter or a rising edge of Output.
+            for(int i=0;i<generator->OutputPulseTimes.GetCols();++i)
+            {
+                const double time=generator->OutputPulseTimes(0,i);
+                if(time>=begin && time>lastEmission)
+                {
+                    recorder.RecordStimulus("pulse"+std::to_string(count++),time);
+                    stimuli.append(time-begin);lastEmission=time;
+                }
+            }
+            std::vector<double> values;
+            trace<<now<<','<<now-begin<<','<<generator->Output(0,0);
+            for(const auto& soma:somas){values.push_back(soma->SumPotential(0,0));trace<<','<<values.back();}
+            trace<<'\n';
+            waveform.push_back(values);recorder.Observe(now,values,revision);
+            core.environment->IncreaseModelTimeByStep();
+        }
+        const auto actual=NmsdkTools::IdentifyModel(neuron,ports);ASSERT_TRUE(actual["valid"].toBool());
+        const auto observation=recorder.Close(now,actual["sha256"].toString().toStdString(),"window_closed");
+        ASSERT_TRUE(observation.complete);ASSERT_TRUE(observation.valid);ASSERT_EQ(count,4u);
+        EXPECT_EQ(actual["sha256"],identity["sha256"]);EXPECT_FALSE(learner->IsNeedToTrain.GetData());
+        EXPECT_EQ(learner->TrainingPhase.GetData(),phase);
+        EXPECT_NEAR(dataset->GetSampleStartTime(),begin,1e-12);
+        for(unsigned i=0;i<4;++i)EXPECT_NEAR(stimuli[int(i)].toDouble(),onsets[i],1./frequency+1e-12);
+        double maximumDifference=0.;
+        const auto compared=trial?std::min(reference.size(),waveform.size()):waveform.size();
+        if(trial==0)reference=waveform;
+        else
+        {
+            // Accumulated absolute-clock rounding can change the final sample
+            // count by one; common relative samples still prove native response.
+            ASSERT_GE(compared,static_cast<std::size_t>(.55*frequency));
+            for(std::size_t i=0;i<compared;++i)for(unsigned c=0;c<somas.size();++c)
+                maximumDifference=std::max(maximumDifference,std::abs(waveform[i][c]-reference[i][c]));
+            EXPECT_LE(maximumDifference,1e-10)<<"trial="<<trial;
+        }
+        const auto csvName=spec.trialId+".csv";
+        if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
+        {
+            const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+            QFile csv(directory+"/"+QString::fromStdString(csvName));ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+            const auto bytes=QByteArray::fromStdString(trace.str());ASSERT_EQ(csv.write(bytes),bytes.size());
+        }
+        trials.append(QJsonObject{{"trial_id",QString::fromStdString(spec.trialId)},
+            {"begin",begin},{"end",now},{"sample_count",int(observation.sampleCount)},
+            {"complete",observation.complete},{"valid",observation.valid},{"actual_relative_stimuli",stimuli},
+            {"configured_pattern_sha256",QString::fromStdString(patternHash)},
+            {"waveform_file",QString::fromStdString(csvName)},{"compared_samples",int(compared)},
+            {"maximum_raw_potential_difference",maximumDifference},{"comparison_tolerance",1e-10},
+            {"model_before",identity},{"model_after",actual}});
+        dataset->StateGeneration=0;
+    }
+    if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
+    {
+        const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+        QFile file(directory+"/"+QString::fromStdString(name)+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const auto bytes=QJsonDocument(QJsonObject{{"schema_version",1},{"kind","native_repeated_probe_control"},
+            {"frequency_hz",int(frequency)},{"trials",trials},{"scientific_training_result",false}}).toJson();
+        ASSERT_EQ(file.write(bytes),bytes.size());
+    }
+    dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
+}
+TEST_P(NativeProbeRestart, DatasetAndPhysicalResetAtNonzeroModelTime)
+{
+    if(GetParam().first)RepeatedNativeProbes<NNeuronTimeLearnerBranch>(GetParam().second);
+    else RepeatedNativeProbes<NNeuronTimeLearner>(GetParam().second);
+}
+INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeProbeRestart,::testing::Values(
+    std::make_pair(false,2000u),std::make_pair(true,2000u),
+    std::make_pair(false,20000u),std::make_pair(true,20000u)));
+
+class NativeDatasetEvents : public ::testing::TestWithParam<unsigned> {};
+TEST_P(NativeDatasetEvents, NoSyntheticZeroTimestampBeforeFirstEmission)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    auto dataset=dynamic_pointer_cast<NDatasetMatrix>(core.storage->TakeObject("NDatasetMatrix"));ASSERT_TRUE(dataset);
+    dataset->Name="Dataset";dataset->NumSamples=1;dataset->NumFeatures=1;dataset->MaxSpikesPerFeature=4;
+    MDMatrix<double> pattern;pattern.Assign(4,1,.001);pattern(0,0)=.01;dataset->MatrixData=pattern;
+    dataset->Delay=1.;dataset->StateGeneration=2;
+    UEPtr<UContainer> component=dataset;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    model->SetGlobalTimeStep(GetParam());model->Init();model->Reset();
+    auto generator=dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
+    generator->PulseLength=.001;
+    unsigned edges=0;double previous=0.,lastEmission=-1.;QJsonArray events;
+    for(unsigned tick=0;tick<GetParam()/25;++tick)
+    {
+        model->Calculate();
+        const auto output=generator->Output(0,0);if(output>0. && previous<=0.)++edges;previous=output;
+        for(int i=0;i<generator->OutputPulseTimes.GetCols();++i)
+        {
+            const auto time=generator->OutputPulseTimes(0,i);
+            if(time>lastEmission){events.append(time);lastEmission=time;}
+        }
+        core.environment->IncreaseModelTimeByStep();
+    }
+    EXPECT_EQ(events.size(),4);EXPECT_EQ(edges,4u);
+    if(!events.isEmpty())EXPECT_GT(events[0].toDouble(),0.);
+    std::cout<<"native_dataset_events frequency="<<GetParam()<<" edges="<<edges
+             <<" events="<<QJsonDocument(events).toJson(QJsonDocument::Compact).constData()<<std::endl;
+    for(int i=1;i<events.size();++i)EXPECT_GT(events[i].toDouble(),events[i-1].toDouble());
+    if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
+    {
+        const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+        QFile file(directory+"/DatasetEvents_"+QString::number(GetParam())+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const auto bytes=QJsonDocument(QJsonObject{{"kind","native_dataset_stimulus_events"},
+            {"frequency_hz",int(GetParam())},{"rising_edges",int(edges)},
+            {"actual_stimuli",events},{"scientific_training_result",false}}).toJson();
+        ASSERT_EQ(file.write(bytes),bytes.size());
+    }
+    core.environment->DestroyModel();
+}
+INSTANTIATE_TEST_SUITE_P(Rates,NativeDatasetEvents,::testing::Values(2000u,20000u));
+
+class NativeGeneratorPulseTimes : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
+template<class Generator> void ActualEmissionHistory(unsigned frequency,const std::string& className)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    auto generator=dynamic_pointer_cast<Generator>(core.storage->TakeObject(className));ASSERT_TRUE(generator);
+    generator->Name="Generator";
+    UEPtr<UContainer> component=generator;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    model->SetGlobalTimeStep(frequency);model->Init();model->Reset();
+    if constexpr(std::is_same<Generator,NPulseGeneratorMulti>::value)
+    {
+        std::cout<<"native_multi_after_init count="<<generator->PulseCount.GetData()
+                 <<" delays="<<generator->Delays.GetCols()<<" counters="<<generator->PulseCounters->size()<<std::endl;
+        EXPECT_EQ(generator->PulseCount.GetData(),1);
+        EXPECT_EQ(generator->Delays.GetCols(),1);
+        EXPECT_EQ(generator->PulseCounters->size(),1u);
+    }
+    EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
+    generator->Frequency=100.;model->Calculate();
+    ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
+    EXPECT_EQ(generator->OutputPulseTimes(0,0),0.); // Real emission, not a sentinel.
+    core.environment->IncreaseModelTimeByStep();
+    generator->Frequency=0.;model->Calculate();
+    EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
+    generator->Frequency=100.;generator->Reset();
+    EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
+    model->Calculate();ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
+    EXPECT_EQ(generator->OutputPulseTimes(0,0),core.environment->GetTime().GetDoubleTime());
+    if constexpr(std::is_same<Generator,NPulseGeneratorMulti>::value)
+    {
+        // Native setters own dimensions; no forced extra Build/Init sequence.
+        MDMatrix<double> delays;delays.Assign(1,2,0.);delays(0,1)=.002;
+        generator->Delays=delays;
+        EXPECT_EQ(generator->PulseCount.GetData(),2);
+        for(unsigned i=0;i<frequency/250;++i)
+        { core.environment->IncreaseModelTimeByStep();model->Calculate(); }
+        EXPECT_EQ(generator->PulseCounters->size(),2u);
+        ASSERT_EQ(generator->OutputPulseTimes.GetCols(),2);
+        EXPECT_NEAR(generator->OutputPulseTimes(0,1)-generator->OutputPulseTimes(0,0),.002,1./frequency+1e-12);
+        generator->PulseCount=1;
+        core.environment->IncreaseModelTimeByStep();model->Calculate();
+        EXPECT_EQ(generator->Delays.GetCols(),1);
+        EXPECT_EQ(generator->PulseCounters->size(),1u);
+        ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
+    }
+    core.environment->DestroyModel();
+}
+TEST_P(NativeGeneratorPulseTimes, EmptyHistoryAndActualZeroTimeAreDistinct)
+{
+    if(GetParam().first)ActualEmissionHistory<NPulseGeneratorMulti>(GetParam().second,"NPulseGeneratorMulti");
+    else ActualEmissionHistory<NPulseGenerator>(GetParam().second,"NPGenerator");
+}
+INSTANTIATE_TEST_SUITE_P(VariantsAndRates,NativeGeneratorPulseTimes,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
 }

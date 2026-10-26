@@ -213,3 +213,10 @@ Bin 83ab62fcb40f62affd83f66ae68fcd557de55d53. Исходные tested SHA в man
 Полная карта применяемых моделей, ModelSpec/export, произвольная смена профиля
 живого графа и multirate остаются открыты. Проверки отклика не являются
 результатами обучения или независимой оценки распознавания.
+
+Дополнительно принят подэтап TL-019/020: пустая event history Single/Multi,
+публикация реальной истории Multi и native dimension ownership PulseCount/Delays.
+Проверены default count=1, реальные события в t=0, выключение/Reset и переходы
+1→2→1 через scheduler. Полные сведения: [ProbeMeasurement](ProbeMeasurement.ru.md),
+раздел серверной проверки повторных проб. Это не проверка всех Multi Copy/XML,
+не поддержка его случайной ветви и не исправление RNG при Reset.
