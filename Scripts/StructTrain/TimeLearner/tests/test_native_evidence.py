@@ -82,6 +82,17 @@ class NativeEvidenceTest(unittest.TestCase):
         with self.assertRaises(EvidenceError):
             audit_probe(packet, self.path.with_suffix(".csv"))
 
+    def test_isolated_window_cannot_select_one_of_multiple_waves(self):
+        packet = copy.deepcopy(self.packet)
+        spec = packet["observation"]["specification"]
+        spec["windows"][0]["begin"] = spec["begin"]
+        spec["windows"][0]["end"] = spec["end"]
+        requested = packet["requested_specification"]
+        requested["windows"][0]["begin"] = 0
+        requested["windows"][0]["end"] = requested["end"]
+        with self.assertRaises(EvidenceError):
+            audit_probe(packet, self.path.with_suffix(".csv"))
+
     def test_nonfinite_and_damaged_csv_tokens(self):
         with self.path.with_suffix(".csv").open(newline="") as stream:
             original = list(csv.reader(stream))
