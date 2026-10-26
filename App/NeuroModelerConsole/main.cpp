@@ -19,8 +19,8 @@
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
 #include "ClDescGenerator.h"
-#include "ModelInspection.h"
-#include "ModelIdentity.h"
+#include "TimeLearner/ModelInspection.h"
+#include "TimeLearner/ModelIdentity.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 #include "../../../Rdk/Core/Application/UAppCore.h"
 // Use base RDK classes without Qt dependencies for console build

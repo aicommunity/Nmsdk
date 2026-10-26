@@ -5,7 +5,7 @@
 доступность нового контура обучения. Явные порты добавляются в подэтапе 5.3
 (ModelBoundary.ru.md); реальный learner adapter ещё нужен.
 
-`App/NeuroModelerConsole/ModelArchive` сохраняет физический граф NPulseNeuron
+`Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelArchive` сохраняет физический граф NPulseNeuron
 (Classic и Branch используют этот класс), его параметры/связи и полное замыкание
 storage-зависимостей. Первая версия требует единой частоты и замкнутой границы
 модели. Версия 2 принимает явно объявленные matrix-double stimulus-порты;
