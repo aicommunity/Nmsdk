@@ -178,3 +178,20 @@ storage metadata/identity: [ProbeMeasurement](ProbeMeasurement.ru.md).
 Этап 1 требует завершения semantic/evidence review; этап 4 требует оставшихся
 lifecycle/graph проверок; этапы 5–12 ещё не завершены. Pending не обозначается PASS,
 version 2 не объявляется production-ready до всей обязательной проверки.
+
+Следующие принятые подэтапы описаны отдельно: общий model graph API перенесён
+в PulseLib, schema 3 связывает всю пачку с реальными входами, bounded decision
+kernel выполняет конечный поиск и независимый final gate. См.
+[ModelGraphOwnership](ModelGraphOwnership.ru.md), [BurstAssignment](BurstAssignment.ru.md),
+[BoundedTraining](BoundedTraining.ru.md). Это уточняет прежние строки о неподключённом
+final gate: kernel уже использует его, но configured ControllerVersion=2 и
+полный native structural Train ещё не реализованы.
+
+В рабочей ветке stage07/native-structural-edits добавлен общий preview/apply
+L/Ns/Rs на границе native-проб. Исправлены guard внешнего наблюдателя и
+холодный Branch N>2 candidate. Root bbc81c3d857ceedc188275087354a31f74c71bdb:
+36 адресных cases на каждом сервере и 36 M40 ASan, detect_leaks=0.
+Root 4a27a579b5fff61e025ed200f627aa0482f06e1a: отдельный native four-input
+coupled edit прошёл на обоих серверах; полные CTest этого снимка проверяются.
+Приёмка и merge ветки ещё не объявлены. Подробности:
+[NativeModelEdits](NativeModelEdits.ru.md). Полные этапы 6 и 7 остаются открытыми.
