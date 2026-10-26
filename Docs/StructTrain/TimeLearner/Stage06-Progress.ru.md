@@ -6,6 +6,11 @@
 Отдельно выявлен TL-016 — mixed effective rates после создания/growth legacy
 элементов. Это ограничивает пригодность baseline для проверки нового контура.
 
+Следующее исправление общего режима Rdk описано в
+[FrequencyContract](FrequencyContract.ru.md). Для дальнейшего A/B используются
+новые baseline с явным режимом и readback частот после структурных изменений;
+старые mixed-rate traces не переименовываются в uniform-rate результаты.
+
 В root добавлен opt-in native compatibility control. Каждый case запускает
 отдельный процесс, считает actual stimulus edges и полный hash soma samples,
 сохраняет последовательность состояний, параметры и отдельный effective graph.

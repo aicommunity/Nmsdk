@@ -18,6 +18,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Явные stimulus-порты и native lifecycle внешних связей](ModelBoundary.ru.md).
 - [Удаление образов: два ASan дефекта и проверка исправления](StorageCleanup.ru.md).
 - [Classic live rebuild: Init нового нейрона и открытый вопрос частот](LiveRebuildInit.ru.md).
+- [Общий и индивидуальный шаг: контракт создания поддеревьев](FrequencyContract.ru.md).
 - [Общий контроллер: подготовка baseline и оставшиеся изменения](Stage06-Progress.ru.md).
 - [Явные физические storage-профили](../../../Libraries/Nmsdk-PulseLib/Docs/Analysis/TimeLearnerStorageProfiles.ru.md).
 

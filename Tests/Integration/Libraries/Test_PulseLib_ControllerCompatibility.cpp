@@ -18,6 +18,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include <typeinfo>
+#include <type_traits>
 
 namespace {
 using namespace RDK;
@@ -225,4 +226,91 @@ TEST_P(NativeLiveRebuildInitialization, ColdResetReplacementCalculatesRealInput)
 }
 INSTANTIATE_TEST_SUITE_P(ModesRates,NativeLiveRebuildInitialization,::testing::Values(
     std::make_pair(0,2000u),std::make_pair(1,2000u),std::make_pair(0,20000u),std::make_pair(1,20000u)));
+
+// Exercise the Environment contract, not just the root's nominal clock.
+// A newly allocated/rebuilt subtree must inherit the global rate, whereas
+// explicitly enabled individual rates remain part of the legacy model.
+class NativeLiveRebuildFrequency : public ::testing::TestWithParam<std::pair<bool,bool>> {};
+
+void CountRates(UEPtr<UContainer> node, unsigned expected, unsigned& total, unsigned& different)
+{
+    ++total;
+    if(node->GetTimeStep()!=expected) ++different;
+    for(int i=0;i<node->GetNumComponents();++i)
+        CountRates(node->GetComponentByIndex(i),expected,total,different);
+}
+
+template<class Learner> void CheckRebuildFrequency(bool individual)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();
+    core.environment->SetUseIndTimeStepFlag(individual);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto model=core.environment->GetModel(); ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(
+        std::is_same<Learner,NNeuronTimeLearner>::value ? "NNeuronTimeLearner" : "NNeuronTimeLearnerBranch"));
+    ASSERT_TRUE(learner); learner->Name="FrequencyControl";
+    learner->StructureBuildMode=1; learner->NumInputDendrite=4;
+    learner->NeuronClassName="NSPNeuronGen"; learner->CalculateMode=1;
+    learner->EnablePostTrainTuning=false; learner->NormalizationMode=1;
+    MDMatrix<double> pattern; pattern.Assign(4,1,0.);
+    pattern(0,0)=.01; pattern(1,0)=.08; pattern(2,0)=.16; pattern(3,0)=.24;
+    learner->InputPattern=pattern;
+    UEPtr<UContainer> component=learner;
+    ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    model->SetGlobalTimeStep(20000); model->Init();
+    learner->ResetToUntrainedState=true; model->Reset();
+    model->Calculate(); core.environment->IncreaseModelTimeByStep();
+    auto neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    ASSERT_TRUE(neuron); EXPECT_TRUE(neuron->IsInit());
+    unsigned total=0,different=0;
+    CountRates(neuron,20000,total,different);
+    std::cout << "Effective frequency readback: individual=" << individual
+              << " root=" << model->GetTimeStep() << " neuron_nodes=" << total
+              << " neuron_nodes_not_20000=" << different << std::endl;
+    EXPECT_GT(total,4u);
+    EXPECT_EQ(model->GetTimeStep(),20000);
+    if(individual)
+        EXPECT_GT(different,0u) << "positive compatibility control must retain image-specific rates";
+    else
+        EXPECT_EQ(different,0u) << "new children must obey the declared Environment global-rate mode";
+    dynamic_pointer_cast<UNet>(model)->BreakLinks(); core.environment->DestroyModel();
+    core.environment->SetUseIndTimeStepFlag(false);
+}
+
+TEST_P(NativeLiveRebuildFrequency, EnvironmentModeAppliesToReplacementSubtree)
+{
+    if(GetParam().first) CheckRebuildFrequency<NNeuronTimeLearnerBranch>(GetParam().second);
+    else CheckRebuildFrequency<NNeuronTimeLearner>(GetParam().second);
+}
+INSTANTIATE_TEST_SUITE_P(TopologiesClockModes,NativeLiveRebuildFrequency,::testing::Values(
+    std::make_pair(false,false),std::make_pair(false,true),
+    std::make_pair(true,false),std::make_pair(true,true)));
+
+TEST(NativeEnvironmentFrequency, CreationOverloadsAndModeSwitchPreserveDeclaredPolicy)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();
+    core.environment->SetUseIndTimeStepFlag(true);
+    for(bool byId : {false,true})
+    {
+        ASSERT_TRUE(byId ? core.environment->CreateModel(core.storage->FindClassId("NModel"))
+                         : core.environment->CreateModel("NModel"));
+        auto model=core.environment->GetModel(); ASSERT_TRUE(model);
+        EXPECT_NE(model->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+        model->SetGlobalTimeStep(20000);
+        auto child=dynamic_pointer_cast<UContainer>(core.storage->TakeObject("NModel"));
+        ASSERT_TRUE(child); child->Name="IndividualChild"; child->SetGlobalTimeStep(5000);
+        ASSERT_NE(model->AddComponent(child),ForbiddenId);
+        EXPECT_EQ(child->GetTimeStep(),5000);
+        core.environment->SetUseIndTimeStepFlag(false);
+        EXPECT_EQ(model->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+        EXPECT_EQ(child->GetTimeStep(),20000);
+        core.environment->SetUseIndTimeStepFlag(true);
+        EXPECT_EQ(child->GetTimeStep(),20000) << "enabling individual mode must not restore unrelated old defaults";
+        core.environment->DestroyModel();
+    }
+    core.environment->SetUseIndTimeStepFlag(false);
+}
 }

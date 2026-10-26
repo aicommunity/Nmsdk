@@ -28,6 +28,8 @@ test report is not a trained-model result.
 | Silent Classic live replacement: baseline | [Elder-1](s04-live-init-baseline-elder1/README.md), [M40 graph diagnostic](s04-live-init-baseline-m40/README.md) |
 | Native replacement Init fix; legacy mixed rates disclosed | [Elder-1](s04-live-init-fixed-elder1/README.md), [M40](s04-live-init-fixed-m40/README.md) |
 | Final cold-reset initialization/response regressions | [Elder-1](s04-live-init-final-elder1/README.md), [M40 + targeted ASan](s04-live-init-final-m40/README.md) |
+| Global-rate replacement defect baseline | [M40: two failures and two individual controls](s04-frequency-baseline-m40/README.md) |
+| Global/individual runtime policy, detached Copy and N1 growth | [Elder-1](s04-frequency-final-elder1/README.md), [M40](s04-frequency-final-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md) and
