@@ -13,6 +13,7 @@
 #include <sstream>
 #include <iomanip>
 #include <locale>
+#include <cmath>
 
 namespace {
 using namespace RDK;
@@ -21,37 +22,44 @@ using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
 enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild };
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
     ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();ASSERT_TRUE(model);
     core.environment->GetTime().SetTime(0);
-    const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_native_executor"+
+    ASSERT_GE(inputCount,1u);ASSERT_LE(inputCount,6u);
+    const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)));
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
     auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
     ASSERT_TRUE(learner);learner->Name="Learner";learner->StructureBuildMode=1;
-    learner->NumInputDendrite=2;learner->NeuronClassName=registered.neuronClass;
-    learner->DendriteLength=std::vector<int>{2,1};
+    learner->NumInputDendrite=inputCount;learner->NeuronClassName=registered.neuronClass;
+    std::vector<int> lengths;for(unsigned i=0;i<inputCount;++i)lengths.push_back(int(inputCount-i));
+    learner->DendriteLength=lengths;
     learner->CalculateMode=1;learner->NormalizationMode=1;
     learner->EnablePostTrainTuning=false;learner->AutoCalibrateFixedLTZThreshold=false;
-    MDMatrix<double> pattern;pattern.Assign(2,1,0.);pattern(0,0)=.01;pattern(1,0)=.08;learner->InputPattern=pattern;
+    const double gaps[]{.01,.08,.16,.24,.32,.40};
+    std::vector<double> isi,onsets;double onset=0.;QJsonArray configuredPattern;
+    MDMatrix<double> pattern;pattern.Assign(inputCount,1,0.);
+    for(unsigned i=0;i<inputCount;++i)
+    {pattern(i,0)=gaps[i];isi.push_back(gaps[i]);onset+=gaps[i];onsets.push_back(onset);configuredPattern.append(gaps[i]);}
+    learner->InputPattern=pattern;const double duration=onset+.08;
     UEPtr<UContainer> component=learner;ASSERT_NE(model->AddComponent(component),ForbiddenId);
     model->SetGlobalTimeStep(frequency);model->Init();model->Reset();
     model->Calculate();core.environment->IncreaseModelTimeByStep();
     auto neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
     auto generator=learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(generator);
-    ASSERT_EQ(learner->DendriteLength.GetData(),(std::vector<int>{2,1}));
-    ASSERT_TRUE(neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true));
+    ASSERT_EQ(learner->DendriteLength.GetData(),lengths);
+    ASSERT_TRUE(neuron->template GetComponentL<NPulseMembrane>("Dendrite1_"+std::to_string(inputCount),true));
     int active=0;
-    if(branch)
+    if(branch && inputCount>1)
     {
-        auto point0=neuron->template GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse1",true);
-        auto point1=neuron->template GetComponentL<NPulseSynapseCommon>("Dendrite1_1.ExcSynapse1",true);
+        auto point0=neuron->template GetComponentL<NPulseSynapseCommon>("Dendrite1_"+std::to_string(inputCount)+".ExcSynapse1",true);
+        auto point1=neuron->template GetComponentL<NPulseSynapseCommon>("Dendrite1_"+std::to_string(inputCount-1)+".ExcSynapse1",true);
         ASSERT_TRUE(point0);ASSERT_TRUE(point1);
         if(point0->Input.IsConnected() && !point1->Input.IsConnected())active=1;
     }
@@ -67,30 +75,32 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     const auto base=readRevision();bool armed=false;
     std::ostringstream trace;trace.imbue(std::locale::classic());
     trace<<std::setprecision(17)<<"native_tick_start_s,stimulus";
-    for(unsigned i=0;i<(branch?1u:2u);++i)trace<<",raw_soma_"<<i;trace<<'\n';
+    for(unsigned i=0;i<(branch?1u:inputCount);++i)trace<<",raw_soma_"<<i;trace<<'\n';
     unsigned sampled=0,sourceEvents=0;
     NativeProbeRequest request;request.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
-    request.activeInput=active;request.inputId="input"+std::to_string(active);request.protocolRevision="native_two_input_burst_v1";
-    request.baseModelRevision=base;request.expectedInputIsi={.01,.08};request.readModelRevision=readRevision;
+    request.activeInput=active;request.inputId="input"+std::to_string(active);request.protocolRevision="native_burst_N"+std::to_string(inputCount)+"_v1";
+    request.baseModelRevision=base;request.expectedInputIsi=isi;request.readModelRevision=readRevision;
     auto& spec=request.specification;spec.runId=name;spec.trialId=name+"/probe0";spec.sampleId="sample0";
-    spec.patternHash=NmsdkTools::CanonicalModelDataSha256(QJsonArray{.01,.08}).toStdString();
-    spec.end=.17;spec.maximumSampleGap=1./frequency;spec.maximumSamples=frequency;
-    spec.expectedStimulusIds={"pulse0","pulse1"};
-    if(branch)spec.windows={{request.inputId,0,active?.089:.009,active?.15:.07,"pulse"+std::to_string(active)}};
-    else spec.windows={{"input0",0,.009,.07,"pulse0"},{"input1",1,.089,.15,"pulse1"}};
+    spec.patternHash=NmsdkTools::CanonicalModelDataSha256(configuredPattern).toStdString();
+    spec.end=duration;spec.maximumSampleGap=1./frequency;spec.maximumSamples=std::size_t((duration+.1)*frequency);
+    for(unsigned i=0;i<inputCount;++i)
+    {
+        const auto id="pulse"+std::to_string(i);spec.expectedStimulusIds.push_back(id);
+        if(!branch || int(i)==active)spec.windows.push_back({"input"+std::to_string(i),branch?0u:i,onsets[i]-.001,onsets[i]+.06,id});
+    }
     request.onPrepared=[&](const PreparedVerificationProbe& declaration,const ProbeSpec& actual) {
         armed=true;EXPECT_EQ(declaration.baseModelRevision,base);
         EXPECT_EQ(actual.modelRevision,declaration.effectiveModelRevision);
         EXPECT_GE(actual.begin,1./frequency);
-        EXPECT_EQ(actual.baseline.size(),branch?1u:2u);
+        EXPECT_EQ(actual.baseline.size(),branch?1u:inputCount);
         if(branch)
         {
-            EXPECT_NE(declaration.effectiveModelRevision,base);
-            for(int input=0;input<2;++input)
+            if(inputCount>1)EXPECT_NE(declaration.effectiveModelRevision,base);
+            for(unsigned input=0;input<inputCount;++input)
             {
                 auto synapse=neuron->template GetComponentL<NPulseSynapseCommon>(
-                    input?"Dendrite1_1.ExcSynapse1":"Dendrite1_2.ExcSynapse1",true);
-                ASSERT_TRUE(synapse);EXPECT_EQ(synapse->Input.IsConnected(),input==active);
+                    "Dendrite1_"+std::to_string(inputCount-input)+".ExcSynapse1",true);
+                ASSERT_TRUE(synapse);EXPECT_EQ(synapse->Input.IsConnected(),int(input)==active);
             }
         }
     };
@@ -99,11 +109,12 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         trace<<sample.time<<','<<sample.stimulus;
         for(const auto value:sample.potentials)trace<<','<<value;trace<<'\n';
     };
+    const auto prototype=request;
     learner->QueueNativeProbe(std::move(request));ASSERT_TRUE(learner->NativeProbeOwnsControl());
     unsigned ticks=0;
     while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
     {
-        ASSERT_LT(ticks++,frequency);
+        ASSERT_LT(ticks++,unsigned((duration+.1)*frequency));
         model->Calculate();core.environment->IncreaseModelTimeByStep();
         if(interference!=Interference::None && ticks==frequency/25)
         {
@@ -154,6 +165,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             {"model_before",before},{"model_after",normal?QJsonValue(NmsdkTools::IdentifyModel(neuron,ports)):QJsonValue(QJsonValue::Null)},
             {"effective_revision",result->prepared?QJsonValue(QString::fromStdString(result->prepared->effectiveModelRevision)):QJsonValue(QJsonValue::Null)},
             {"current_base_revision",QString::fromStdString(result->currentBaseRevision)},
+            {"input_count",int(inputCount)},{"frequency_hz",int(frequency)},
             {"status",NativeProbeStatusName(result->status)},{"adapter_reasons",adapterReasons},
             {"requires_fresh_verification",result->requiresFreshVerification},
             {"complete",result->observation && result->observation->complete},
@@ -177,13 +189,83 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     ASSERT_TRUE(result->observation);const auto& observed=*result->observation;
     for(const auto& reason:observed.reasons)std::cout<<name<<" observation_reason="<<reason<<std::endl;
     EXPECT_TRUE(armed);ASSERT_TRUE(observed.complete);ASSERT_TRUE(observed.valid);
-    EXPECT_EQ(observed.stimuli.size(),2u);EXPECT_EQ(observed.sampleCount,ticks);
-    EXPECT_EQ(sampled,ticks);EXPECT_EQ(sourceEvents,2u);
+    EXPECT_EQ(observed.stimuli.size(),inputCount);EXPECT_EQ(observed.sampleCount,ticks);
+    EXPECT_EQ(sampled,ticks);EXPECT_EQ(sourceEvents,inputCount);
     EXPECT_GE(revisionReads,2*ticks);
     EXPECT_EQ(result->currentBaseRevision,base);
     EXPECT_EQ(readRevision(),base);
     EXPECT_EQ(learner->TrainingPhase.GetData(),phase);EXPECT_EQ(learner->IsNeedToTrain.GetData(),need);
     EXPECT_TRUE(learner->NativeProbeOwnsControl()); // No implicit legacy resume.
+    if(interference==Interference::None && (inputCount==1 || (!branch && inputCount==2)))
+    {
+        VerificationProtocol protocol;protocol.routing=prototype.routing;protocol.revision=prototype.protocolRevision;
+        protocol.sampleId=observed.specification.sampleId;protocol.patternHash=observed.specification.patternHash;
+        protocol.originStimulusId="pulse0";protocol.maximumSampleGap=1./frequency;
+        protocol.stimulusIds=observed.specification.expectedStimulusIds;
+        std::vector<ReferenceEvidence> evidence;
+        for(unsigned i=0;i<inputCount;++i)
+        {
+            const auto id="input"+std::to_string(i);protocol.inputs.push_back({id,"pulse"+std::to_string(i)});
+            auto declaration=*result->prepared;declaration.inputId=id;
+            evidence.push_back({declaration,observed}); // Classic shares the full reference burst.
+        }
+        const auto references=CapturedReferences::Capture(protocol,evidence);
+        VerificationConfig configuration;configuration.runId=name+"/final_verification";
+        configuration.currentModelRevision=base;configuration.maximumProbes=inputCount;
+        FinalVerificationSession verification(references,configuration);unsigned completed=0;
+        while(const auto next=verification.NextRequest())
+        {
+            auto fresh=prototype;fresh.specification.runId=next->runId;fresh.specification.trialId=next->trialId;
+            fresh.inputId=next->inputId;fresh.protocolRevision=next->protocolRevision;fresh.modelEpoch=next->epoch;
+            fresh.onPrepared=[&](const PreparedVerificationProbe& actual,const ProbeSpec&) {
+                verification.Arm(actual);EXPECT_TRUE(verification.WaitingForObservation());
+            };
+            std::ostringstream verificationTrace;verificationTrace.imbue(std::locale::classic());
+            verificationTrace<<std::setprecision(17)<<"native_tick_start_s,stimulus";
+            for(unsigned i=0;i<(branch?1u:inputCount);++i)verificationTrace<<",raw_soma_"<<i;verificationTrace<<'\n';
+            fresh.onSample=[&](const NativeProbeSample& sample) {
+                verificationTrace<<sample.time<<','<<sample.stimulus;
+                for(double value:sample.potentials)verificationTrace<<','<<value;verificationTrace<<'\n';
+            };
+            learner->QueueNativeProbe(std::move(fresh));unsigned verificationTicks=0;
+            while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
+            {
+                ASSERT_LT(verificationTicks++,unsigned((duration+.1)*frequency));
+                model->Calculate();core.environment->IncreaseModelTimeByStep();
+            }
+            const auto measured=learner->TakeNativeProbeResult();ASSERT_TRUE(measured);
+            ASSERT_EQ(measured->status,NativeProbeStatus::Completed);ASSERT_TRUE(measured->observation);
+            ASSERT_TRUE(measured->observation->complete);ASSERT_TRUE(measured->observation->valid);
+            verification.Consume(*measured->observation,measured->currentBaseRevision);
+            if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+            {
+                QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_verify_"+QString::number(completed)+".csv");
+                ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                const auto bytes=QByteArray::fromStdString(verificationTrace.str());ASSERT_EQ(file.write(bytes),bytes.size());
+            }
+            ++completed;
+        }
+        ASSERT_EQ(completed,inputCount);ASSERT_TRUE(verification.Certificate());
+        const auto& certificate=*verification.Certificate();
+        EXPECT_EQ(verification.Status(),inputCount==1?VerificationStatus::Exact:VerificationStatus::OutsideTolerance);
+        EXPECT_EQ(certificate.Exact(),inputCount==1);
+        EXPECT_TRUE(certificate.Matches(base,references,configuration.tolerances,ModelStateKind::LearnedSolo,verification.ModelEpoch()));
+        EXPECT_FALSE(certificate.Matches(base,references,configuration.tolerances,ModelStateKind::Recognition,verification.ModelEpoch()));
+        for(const auto& residual:certificate.Residuals())EXPECT_LE(std::abs(residual.amplitudeResidual),1e-12);
+        if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            QJsonArray residuals;
+            for(const auto& residual:certificate.Residuals())residuals.append(QJsonObject{
+                {"input_id",QString::fromStdString(residual.inputId)},{"trial_id",QString::fromStdString(residual.trialId)},
+                {"amplitude_residual",residual.amplitudeResidual},{"timing_low",residual.timingResidualLow},{"timing_high",residual.timingResidualHigh}});
+            QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_certificate.json");
+            ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+            const auto bytes=QJsonDocument(QJsonObject{{"kind","native_executor_final_verification"},
+                {"status",VerificationStatusName(verification.Status())},{"exact",certificate.Exact()},
+                {"model_revision",QString::fromStdString(base)},{"input_count",int(inputCount)},
+                {"residuals",residuals},{"scientific_training_result",false}}).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
+        }
+    }
     // Native Reset releases control and preserves the learned physical graph.
     learner->Reset();EXPECT_FALSE(learner->NativeProbeOwnsControl());
     EXPECT_EQ(learner->NativeProbeState(),NativeProbeStatus::Idle);
@@ -225,4 +307,24 @@ TEST(NativeLearnerProbeInvalidation, ClassicNoopBuildDoesNotInvalidateProbe)
 { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::NoopOwnerBuild); }
 TEST(NativeLearnerProbeInvalidation, BranchNoopBuildDoesNotInvalidateProbe)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::NoopOwnerBuild); }
+TEST(NativeLearnerDimensions, ClassicSingleInput2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,1); }
+TEST(NativeLearnerDimensions, BranchSingleInput2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,1); }
+TEST(NativeLearnerDimensions, ClassicSingleInput20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,1); }
+TEST(NativeLearnerDimensions, BranchSingleInput20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,1); }
+TEST(NativeLearnerDimensions, ClassicFourInputs2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,4); }
+TEST(NativeLearnerDimensions, BranchFourInputs2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,4); }
+TEST(NativeLearnerDimensions, ClassicFourInputs20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,4); }
+TEST(NativeLearnerDimensions, BranchFourInputs20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,4); }
+TEST(NativeLearnerDimensions, ClassicSixInputs2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,6); }
+TEST(NativeLearnerDimensions, BranchSixInputs2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,6); }
 }
