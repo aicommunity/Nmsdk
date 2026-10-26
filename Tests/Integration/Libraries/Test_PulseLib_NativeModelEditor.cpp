@@ -329,6 +329,12 @@ template<class Learner> void RunNativeTraining(int normalization)
     EXPECT_TRUE(service.Certificate()->Matches(rig.Revision(),*service.References(),plan.search.tolerances,
         ModelStateKind::LearnedSolo,service.Search()->ModelEpoch()));
     EXPECT_EQ(observations,service.IssuedReferenceProbes()+service.Search()->IssuedProbes());EXPECT_GT(frames,0u);
+    auto summary=EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters());
+    summary["implementation_control"]=true;
+    EXPECT_TRUE(summary["certificate_matches_actual_model"].toBool());
+    EXPECT_FALSE(summary["certificate"].toObject()["exact"].toBool());
+    EXPECT_EQ(summary["actual_parameters"],summary["accepted_parameters"]);
+    Artifact(rig.name+"_training_summary.json",QJsonDocument(summary).toJson());
     // Reset keeps the physical model and captured goal. It must not invoke
     // legacy XML anchor reload or return to an untrained structure.
     const auto before=rig.Revision();const auto references=service.References()->Inputs();
