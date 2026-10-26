@@ -23,6 +23,7 @@ test report is not a trained-model result.
 | Channel shutdown lifetime and ownership cleanup | [Elder-1 final](s04-shutdown-elder1/README.md), [M40 ASan before/after](s04-profiles-m40/README.md) |
 | Semantic identity, native XML and cross-Qt fingerprints | [Elder-1](s05-identity-elder1/README.md), [M40](s05-identity-m40/README.md) |
 | Native archive, image definitions and fresh-process/cross-host replay | [Elder-1 + Git transfer](s05-archive-elder1/README.md), [M40 source](s05-archive-m40/README.md) |
+| Native image deletion and two heap-use-after-free regressions | [Elder-1](s05-cleanup-elder1/README.md), [M40 ASan before/after](s05-cleanup-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md).
