@@ -136,5 +136,17 @@ Root 90d11d1990221753e6b494dbf40d83964b7d0fa3 (state diagnostics) прошёл 3
 diagnostic failure не смешиваются. См. NativeTrainingService.ru.md и пакеты
 s06-native-service-elder1/m40. Полный V2 и научная матрица остаются открытыми.
 
+TL-028: auditor v1 проверял global assignment и совпадение записанного пика с
+CSV, но не требовал isolated-window maximum rule C++ recorder. Подмена узкого
+окна широким с двумя реальными максимумами ошибочно оставалась valid в Python.
+Root 036b3a072023801f0562ba306dfc8743776991f1 воспроизводит expected failure
+на каждом сервере. Root 7c65d7c6ffa3991c2fa77e775a5fe9aec07dedd1, auditor v2,
+проверяет локальный maximum/plateau, clipping и число кандидатов в самом окне:
+13/13 tests на каждом сервере. Ранее сохранённые 56 narrow-window traces и
+четыре отрицательных сертификата на каждом сервере согласованны также с v2.
+Это дефект нового Python-аудитора, не native C++ measurement и не опровержение
+исторических результатов. Расширенный assigned-wave policy должен иметь явную
+новую версию; пока он не реализован. Пакеты s06-native-service-elder1/m40.
+
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
