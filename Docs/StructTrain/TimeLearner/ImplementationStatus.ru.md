@@ -15,6 +15,14 @@ Git в s07-pulse-elder1/m40. См. [ProbeMeasurement](ProbeMeasurement.ru.md).
 Production-dispatch нового контроллера, Branch solo adapters и основной bounded
 search всё ещё открыты; эти проверки не означают завершения этапов 6/7.
 
+В рабочей ветке stage07/native-probe-executor реализовано подключение проб
+к обоим learner через штатный scheduler, включая transient Branch solo routing,
+контроль lifecycle и schema 2 typed source profile. Проверяются адресные случаи
+и native цепочка FinalVerification. Этот подэтап пока не принят в develop:
+нужны полная серверная приёмка, ASan, legacy A/B и публикация первичных данных.
+См. [NativeExecution](NativeExecution.ru.md); основной bounded search и
+production ControllerVersion=2 остаются открытыми.
+
 ## Исходная точка
 
 До изменений root был 895dea071600eafe489c97dffc8147383587e51c, PulseLib checkout
