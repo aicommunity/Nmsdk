@@ -16,6 +16,18 @@ learner относится к старому снимку: Classic BuildStructur
 N=2 проверены на серверах с full CTest, targeted ASan и legacy A/B. Это уточняет
 текущий объём реализации, но не закрывает исходные этапы 6/7 или весь план.
 
+Последующее дополнение: [schema 3](BurstAssignment.ru.md) проверяет всю пачку
+и физическое владение входами, [bounded kernel](BoundedTraining.ru.md) реализует
+ограниченный поиск и независимый fresh final gate. В рабочем подэтапе
+[native edits](NativeModelEdits.ru.md) L/Ns/Rs применяются через preview и native
+Build физического поддерева. Исправлены отказ external-observer guard и coupled
+candidate холодного Branch N>2; проверка scoped случаев не завершает этап 7.
+Поэтому исторические строки таблицы «не реализован» ниже следует читать вместе
+с этими дополнениями. Configured ControllerVersion=2, полный Train→Test,
+динамические Rs domains, C-trim/physics matrix, conversion/PostTune/calibration,
+миграция всех scripts, production runner/publisher и научная серия остаются
+открыты. Количество выполненных integration cases не заменяет эти требования.
+
 Проверен снимок корня d9150b1837600df662740db4c5c6e31c11c7aeee,
 PulseLib 735fea58af4b1815dc332c7d38af5bf4f68d0855,
 Bin 7136679740c5aa97def6fd3700b7b781d97af8f2,

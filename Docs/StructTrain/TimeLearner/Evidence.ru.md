@@ -82,5 +82,42 @@ fixture A4 проверяет сам shared bank и фактические зн�
 исторических результатов. Пакеты s07-bounded-elder1/m40, 27 targeted M40 ASan
 checks с detect_leaks=0 и документ BoundedTraining.ru.md.
 
+TL-024: новый NativeModelEditor первоначально проверял только property reverse
+cache при удалении сегмента. Root 409ad59c0c727553b8c4e2d58cda4cf93e1cbb13
+на обоих серверах прошёл 34/35 cases: shrink удалял источник external observer,
+подключённого UItem.Connect. Исправление PulseLib
+15deaed88148bf0325a5638b288d622861007630 проверяет
+также native connectors и реальные inbound GetDataSources owner tree. Root
+b0cd47e4acc335416bff8c3a516d446cfafbed83 прошёл 35/35 с native Connect и прямым
+SetPointer. Root bbc81c3d857ceedc188275087354a31f74c71bdb прошёл 36/36 на обоих
+серверах и M40 ASan 36/36, detect_leaks=0. Это ошибка нового адаптера, не дефект
+Rdk или опровержение исторических результатов. NativeModelEdits.ru.md.
+
+TL-025: исходный bounded kernel предлагал только одну новую позицию Branch.
+При cold N>2 и всех L=1 reverse-order рост активного входа блокировался ещё
+не посещёнными предшествующими точками. PulseLib
+24006f7892aa3fc909ebd2f68ad3b50222a41606 предлагает явный coupled candidate,
+сохраняя anchor, последующие входы, bounds и физическую совместимость банков.
+Root bbc81c3d857ceedc188275087354a31f74c71bdb проверяет controlled four-input
+search; root 4a27a579b5fff61e025ed200f627aa0482f06e1a дополнительно проверяет
+native [1,1,1,1] → [2,2,2,1] и свежую пробу на обоих серверах. Полный native cold
+Train и scientific matrix ещё не проверены. BoundedTraining.ru.md.
+
+TL-026: native InputParameters представляет одно Rs на банк, но исходный readback
+читал только ExcSynapse1. Неоднородный банк нельзя представлять этим значением.
+Дополнительно Transform применял learned Rs только первому синапсу: новые члены
+N0 банка могли сохранять сопротивление storage вместо объявленного Rs входа.
+Это code findings нового edit API, а не runtime-объяснение старых экспериментов.
+PulseLib 8f8620836ae0453dfc6140f1a6e7e1369f107f51 запрещает lossy readback;
+a87fdd56f677b421d498dbe4cffcb257c19a0159 применяет Rs ко всему owned-банку
+и проверяет complete readback preview. Root
+1044112a3f26c9cc37fb36ce0e0af402ebb627de: 41 addressed pass на каждом сервере,
+2 M40 ASan. Root 1e980f9103920c6012afe810d1e4be23929c80dc: 43 addressed pass
+на каждом сервере, 4 M40 ASan (detect_leaks=0). Проверены сохранность rejected
+heterogeneous bank и declared bank Rs после growth/shrink при 2000/20000.
+Исходный runtime failure именно этого Rs-дефекта не воспроизводился отдельным
+старым бинарником; evidence подтверждает исправленный путь и отрицательный guard.
+NativeModelEdits.ru.md и Git-пакеты s07-native-edits-elder1/m40.
+
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
