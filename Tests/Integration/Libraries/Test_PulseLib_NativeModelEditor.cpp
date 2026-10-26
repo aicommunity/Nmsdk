@@ -213,4 +213,47 @@ TEST(NativeIntegration, ActualSecretionWeightPsiAndTimeStepAreUsed)
     EXPECT_FALSE(badCapacity.valid);EXPECT_EQ(badCapacity.reason,"channel_step_not_certified_strictly_stable");
     channel->Capacity=capacity;EXPECT_TRUE(AssessNativeIntegration(rig.neuron,rig.source->Amplitude.GetData()).valid);
 }
+
+TEST(NativeModelEditor, ExplicitGraphPreservesUnownedBanksAndRejectsMissingAttachments)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"explicit_graph_ownership");
+    auto initial=rig.Probe();ASSERT_EQ(initial.status,NativeProbeStatus::Completed);
+    // Configure the existing graph through ordinary component setters. This is
+    // setup, not an extra Build sequence performed by the editor.
+    rig.learner->StructureBuildMode=0;rig.learner->Build();
+    rig.neuron->StructureBuildMode=0;rig.neuron->Build();rig.neuron->Init();rig.neuron->Reset();
+    rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    auto unowned=rig.neuron->GetComponentL<NPulseSynapse>("Dendrite1_1.ExcSynapse1",true);ASSERT_TRUE(unowned);
+    unowned->Resistance=321e6;
+    ASSERT_TRUE(rig.neuron->CreateLink("NegGenerator","Output","Dendrite1_1.ExcSynapse1","Input",-1,true));
+    const auto source=unowned->Input.GetDataSources();ASSERT_EQ(source.size(),1u);
+    auto parameters=rig.learner->ReadNativeParameters();parameters[0].synapses=2;
+    const auto edit=rig.learner->ApplyNativeParameters(parameters);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    EXPECT_EQ(unowned->Resistance.GetData(),321e6);EXPECT_EQ(unowned->Input.GetDataSources(),source);
+    EXPECT_EQ(rig.neuron->GetComponentL<NPulseSynapse>("Dendrite1_1.ExcSynapse1",true).Get(),unowned.Get());
+    const auto before=rig.Revision();parameters[0].length=3;
+    const auto missing=rig.learner->ApplyNativeParameters(parameters);
+    EXPECT_EQ(missing.status,NativeEditStatus::Rejected);EXPECT_EQ(missing.reason,"attachment_outside_explicit_graph");
+    EXPECT_FALSE(missing.modelMayHaveChanged);EXPECT_EQ(rig.Revision(),before);
+    const auto observation=rig.Probe();ASSERT_EQ(observation.status,NativeProbeStatus::Completed);
+    ASSERT_TRUE(observation.observation);EXPECT_TRUE(observation.observation->valid);
+}
+
+TEST(NativeModelEditor, ShrinkCannotSilentlyDeleteAnExternalObservationSource)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"external_observer");
+    const auto initial=rig.Probe();ASSERT_EQ(initial.status,NativeProbeStatus::Completed);
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    auto tap=dynamic_pointer_cast<NPulseGeneratorTransit>(core.storage->TakeObject("NPulseGeneratorTransit"));ASSERT_TRUE(tap);
+    tap->Name="ExternalTap";UEPtr<UContainer> component=tap;ASSERT_NE(rig.model->AddComponent(component),ForbiddenId);tap->Init();
+    auto monitored=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(monitored);
+    int slot=0;ASSERT_TRUE(monitored->Connect(tap.Get(),"Output","Input",slot,true));
+    const auto before=rig.Revision();const auto sources=tap->Input.GetDataSources();ASSERT_EQ(sources.size(),1u);
+    auto parameters=rig.learner->ReadNativeParameters();parameters[0].length=1;
+    const auto rejected=rig.learner->ApplyNativeParameters(parameters);
+    EXPECT_EQ(rejected.status,NativeEditStatus::Rejected)<<rejected.reason;
+    EXPECT_EQ(rejected.reason,"edit_would_remove_external_observation_source");
+    EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(rig.Revision(),before);
+    EXPECT_EQ(tap->Input.GetDataSources(),sources);
+}
 }
