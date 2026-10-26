@@ -7,7 +7,7 @@
 Формулировки «принято в develop» ниже означают принятие конкретных изменений,
 а не автоматическое выполнение всех требований исходного этапа.
 
-Последний проверенный подэтап: внутренний native executor подключён к обоим
+Проверенный измерительный подэтап: внутренний native executor подключён к обоим
 learner через штатный scheduler, включая transient Branch solo routing,
 контроль lifecycle, schema 2 typed source profile и native FinalVerification.
 На обоих серверах прошли четыре maintained CTest suites (PulseLib 247: 238 pass,
@@ -18,6 +18,14 @@ s07-native-executor-elder1/m40; проверены 867 artifact hashes.
 См. [NativeExecution](NativeExecution.ru.md). Основной bounded search, глобальное
 burst-wave assignment Classic и production ControllerVersion=2 остаются
 открытыми; этот подэтап не завершает исходные этапы 6/7.
+
+Общие native graph API перенесены из Console в PulseLib.core. Console и tests
+используют одну реализацию identity/readback/archive; тела семи файлов сохранены
+после механической нормализации includes/export. На обоих серверах: 18 pass и
+один helper skip, отдельно четыре fresh-process parent controls, шесть sole Core
+symbols и два сравнения native waveform/identity. Пакеты опубликованы в Git.
+См. [ModelGraphOwnership](ModelGraphOwnership.ru.md). Это подготовка producer
+модели для контроллера, а не завершение обученного state export или main search.
 
 ## Исходная точка
 

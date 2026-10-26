@@ -1,6 +1,8 @@
 # Идентичность фактической модели
 
-`App/NeuroModelerConsole/ModelIdentity` — общий read-only контроль для этапа 5.
+`Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelIdentity` — общий read-only контроль
+для этапа 5. Адресная проверка переноса из Console:
+[ModelGraphOwnership](ModelGraphOwnership.ru.md).
 Это ещё не полный model export/import и не сертификат обучения. API
 `IdentifyModel(model)` возвращает `semantic_model_identity`, schema_version=1.
 Ошибки чтения, неполный граф или неподдерживаемое представление запрещают SHA256.

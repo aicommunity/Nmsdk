@@ -2,7 +2,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/StorageProfiles.h"
-#include "../../../App/NeuroModelerConsole/ModelIdentity.h"
+#include "TimeLearner/ModelIdentity.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
 #include <QJsonArray>
