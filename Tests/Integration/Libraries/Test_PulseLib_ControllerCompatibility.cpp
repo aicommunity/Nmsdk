@@ -90,6 +90,12 @@ template<class Learner> void RunNativeControl(const Case& spec, const QString& n
     for(unsigned tick=0;tick<ticks;++tick)
     {
         model->Calculate(); core.environment->IncreaseModelTimeByStep();
+        if(tick==0)
+        {
+            auto actual=learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+            ASSERT_TRUE(actual);
+            EXPECT_TRUE(actual->IsInit()) << "native scheduler must receive an initialized replacement neuron before the first stimulus";
+        }
         const double stimulus=generator->Output.GetData().GetSize() ? generator->Output(0,0) : 0.;
         ASSERT_TRUE(std::isfinite(stimulus));
         if(stimulus>0. && previousStimulus<=0.) stimulusOnsets.append(int(tick));
