@@ -23,7 +23,7 @@ using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
 enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude };
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -33,7 +33,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     ASSERT_GE(inputCount,1u);ASSERT_LE(inputCount,6u);
     const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
-        (observationSchema==3?"_whole_burst":"");
+        (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"");
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
@@ -44,7 +44,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     learner->DendriteLength=lengths;
     learner->CalculateMode=1;learner->NormalizationMode=1;
     learner->EnablePostTrainTuning=false;learner->AutoCalibrateFixedLTZThreshold=false;
-    const double gaps[]{.01,.08,.16,.24,.32,.40};
+    double gaps[]{.01,.08,.16,.24,.32,.40};
+    if(mergedBurst){ASSERT_EQ(inputCount,2u);gaps[1]=.001;}
     std::vector<double> isi,onsets;double onset=0.;QJsonArray configuredPattern;
     MDMatrix<double> pattern;pattern.Assign(inputCount,1,0.);
     for(unsigned i=0;i<inputCount;++i)
@@ -217,6 +218,25 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     ASSERT_EQ(result->status,NativeProbeStatus::Completed);
     ASSERT_TRUE(result->observation);const auto& observed=*result->observation;
     for(const auto& reason:observed.reasons)std::cout<<name<<" observation_reason="<<reason<<std::endl;
+    if(mergedBurst)
+    {
+        ASSERT_TRUE(observed.complete);ASSERT_EQ(observed.stimuli.size(),2u);
+        EXPECT_EQ(result->currentBaseRevision,base);EXPECT_EQ(readRevision(),base);
+        if(observationSchema==2)
+        {
+            // Two real emissions have merged into one physical response wave.
+            // WindowOnly labels that same response independently for each input.
+            EXPECT_TRUE(observed.valid);EXPECT_TRUE(observed.burstAssignments.empty());
+        }
+        else
+        {
+            EXPECT_FALSE(observed.valid);ASSERT_FALSE(observed.burstAssignments.empty());
+            for(const auto& assignment:observed.burstAssignments)
+            {EXPECT_EQ(assignment.validity,PeakValidity::Missing);EXPECT_LT(assignment.waves.size(),2u);}
+        }
+        learner->Reset();EXPECT_FALSE(learner->NativeProbeOwnsControl());
+        dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();return;
+    }
     EXPECT_TRUE(armed);ASSERT_TRUE(observed.complete);ASSERT_TRUE(observed.valid);
     EXPECT_EQ(observed.stimuli.size(),inputCount);EXPECT_EQ(observed.sampleCount,ticks);
     EXPECT_EQ(sampled,ticks);EXPECT_EQ(sourceEvents,inputCount);
@@ -367,6 +387,14 @@ TEST(NativeBurstAssignment, Classic20000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3);}
 TEST(NativeBurstAssignment, Branch20000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3);}
+TEST(NativeBurstAssignment, MergedClassicWindowOnly2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,2,true);}
+TEST(NativeBurstAssignment, MergedClassicWholeBurst2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,true);}
+TEST(NativeBurstAssignment, MergedBranchWindowOnly2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,2,true);}
+TEST(NativeBurstAssignment, MergedBranchWholeBurst2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,true);}
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeLearnerExecution,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
