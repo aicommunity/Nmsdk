@@ -13,3 +13,10 @@ A8: 36 addressed cases pass, adding controlled four-input cold Branch coupled ca
 The local integration assessment checks the supported channel/synapse equations, Weight, PSI, secretion, averaging and actual slots. It is not a spectral stability proof of the coupled nonlinear network. Dynamic Rs-grid regeneration for each new L, C-trim, full inhibition/model matrix, trained-state transfer, configured controller dispatch and scientific experiments remain required.
 
 Raw trace CSV, diagnostic observation JSON, model readbacks, startup graphs, rejected-observer evidence, XML results and logs are retained. Diagnostic probe JSON is not a complete production ProbeSpec/Observation serialization; exact fixture protocol/expectations remain in the immutable source and CSV. Do not infer missing production-run metadata. SHA256SUMS.json validates compressed files; validation.json records uncompressed hashes. Sources and artifacts transfer only through Git.
+
+
+Final follow-up: A9 four maintained CTest suites pass (PulseLib 302 cases: 293 passed, nine skipped; 18 other Rdk cases passed). The eight compatibility cases are opt-in and remain skipped here, and the fresh-process helper skip is not counted as tested behavior. Full raw CTest details are preserved.
+
+A10: 41 addressed cases pass on both hosts after rejecting heterogeneous per-bank Rs readback. A11: 43 addressed cases pass on both hosts after applying learned Rs to every owned-bank member and checking effective preview readback before live edits. The N0 functional controls now change both Ns and declared Rs; additional N0 20000 Hz controls verify all new bank members, preserved child physics and fresh post-growth/shrink responses. These controls exercise the actuator, not a change to the N0 optimization objective.
+
+Existing heterogeneous bank resistance is rejected unchanged; full ModelArchive may still represent it. The one-Rs-per-bank search API must not silently flatten it. Final A11 does not repeat full CTest: the changes are restricted to native edit readback/application, covered by the addressed matrix on the two hosts. Source/runtime manifests explicitly distinguish A9, A10 and A11.
