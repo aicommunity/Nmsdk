@@ -20,7 +20,7 @@ using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
-enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit };
+enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude };
 
 template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2)
 {
@@ -130,6 +130,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 break;
             }
             case Interference::SourceAmplitude:generator->Amplitude=1.5;break;
+            case Interference::TinySourceAmplitude:generator->Amplitude=1.+1e-12;break;
             case Interference::SourceFrequency:generator->Frequency=100.;break;
             case Interference::Pattern:
                 learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true)->MatrixData(0,0)=.02;break;
@@ -162,6 +163,14 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             for(const auto& peak:observed.peaks)peaks.append(QJsonObject{{"input_id",QString::fromStdString(peak.inputId)},
                 {"validity",PeakValidityName(peak.validity)},{"raw_potential",peak.rawPotential?QJsonValue(*peak.rawPotential):QJsonValue(QJsonValue::Null)}});
         }
+        QJsonValue source=QJsonValue(QJsonValue::Null);
+        if(result->observation && result->observation->specification.stimulusProfile)
+        {
+            const auto& p=*result->observation->specification.stimulusProfile;
+            source=QJsonObject{{"class",QString::fromStdString(p.generatorClass)},
+                {"amplitude",p.amplitude},{"pulse_length_s",p.pulseLength},{"frequency_hz",p.frequencyHz},
+                {"frequency_deviation",p.frequencyDeviation},{"transit",p.useTransitSignal},{"pattern_output",p.usePatternOutput}};
+        }
         const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
         QFile csv(directory+"/"+QString::fromStdString(name)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
         const auto wave=QByteArray::fromStdString(trace.str());ASSERT_EQ(csv.write(wave),wave.size());
@@ -172,6 +181,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             {"effective_revision",result->prepared?QJsonValue(QString::fromStdString(result->prepared->effectiveModelRevision)):QJsonValue(QJsonValue::Null)},
             {"current_base_revision",QString::fromStdString(result->currentBaseRevision)},
             {"input_count",int(inputCount)},{"frequency_hz",int(frequency)},
+            {"observation_schema",result->observation?int(result->observation->schemaVersion):0},{"stimulus_profile",source},
             {"status",NativeProbeStatusName(result->status)},{"adapter_reasons",adapterReasons},
             {"requires_fresh_verification",result->requiresFreshVerification},
             {"complete",result->observation && result->observation->complete},
@@ -205,6 +215,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     if(interference==Interference::None && (inputCount==1 || (!branch && inputCount==2)))
     {
         VerificationProtocol protocol;protocol.routing=prototype.routing;protocol.revision=prototype.protocolRevision;
+        protocol.schemaVersion=observed.schemaVersion;protocol.stimulusProfile=observed.specification.stimulusProfile;
         protocol.sampleId=observed.specification.sampleId;protocol.patternHash=observed.specification.patternHash;
         protocol.originStimulusId="pulse0";protocol.maximumSampleGap=1./frequency;
         protocol.stimulusIds=observed.specification.expectedStimulusIds;
@@ -222,6 +233,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         while(const auto next=verification.NextRequest())
         {
             auto fresh=prototype;fresh.specification.runId=next->runId;fresh.specification.trialId=next->trialId;
+            fresh.specification.stimulusProfile=protocol.stimulusProfile;
             fresh.inputId=next->inputId;fresh.protocolRevision=next->protocolRevision;fresh.modelEpoch=next->epoch;
             fresh.onPrepared=[&](const PreparedVerificationProbe& actual,const ProbeSpec&) {
                 verification.Arm(actual);EXPECT_TRUE(verification.WaitingForObservation());
@@ -343,4 +355,6 @@ TEST(NativeLearnerProbeInvalidation, ClassicOwnerUnInitCancelsProbe)
 { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::OwnerUnInit); }
 TEST(NativeLearnerProbeInvalidation, BranchOwnerUnInitCancelsProbe)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::OwnerUnInit); }
+TEST(NativeLearnerProbeInvalidation, BranchTinySourceChangeCannotHideInFormattedSnapshot)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::TinySourceAmplitude); }
 }
