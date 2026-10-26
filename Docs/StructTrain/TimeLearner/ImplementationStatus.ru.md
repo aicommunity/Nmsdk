@@ -15,7 +15,7 @@ learner через штатный scheduler, включая transient Branch sol
 M40 ASan: 51 адресный тест и 4 lifecycle checks, detect_leaks=0. Primary data,
 negative baselines и runtime manifests опубликованы через Git в
 s07-native-executor-elder1/m40; проверены 867 artifact hashes.
-См. [NativeExecution](NativeExecution.ru.md). Основной bounded search, глобальное
+См. [NativeExecution](NativeExecution.ru.md). Основной bounded search и
 production ControllerVersion=2 остаются
 открытыми; этот подэтап не завершает исходные этапы 6/7.
 
