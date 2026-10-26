@@ -10,8 +10,8 @@
 Реализованы общий API `IdentifyModel`/`VerifyModelIdentity` и отдельный Console CLI
 `--model-identity`. Формат и ограничения: [ModelIdentity.ru.md](ModelIdentity.ru.md).
 
-Перенос реализации и native archive в PulseLib для использования контроллером
-проверяется отдельным механическим изменением: [ModelGraphOwnership](ModelGraphOwnership.ru.md).
+Реализация и native archive перенесены в PulseLib для использования контроллером;
+механическое изменение проверено отдельно: [ModelGraphOwnership](ModelGraphOwnership.ru.md).
 Сравниваются параметры каждого узла, частоты, вычислительный порядок, все
 действительные binding slots, aliases и индексы дочерних компонентов. Динамика
 не подменяет параметры модели. Код/runtime identity остаётся отдельным manifest.
