@@ -24,6 +24,8 @@ using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 class NativeTimeLearnerProbe : public ::testing::TestWithParam<std::tuple<bool,unsigned,bool>> {};
+QJsonValue ObservedNumber(const std::optional<double>& value)
+{ return value?QJsonValue(*value):QJsonValue(QJsonValue::Null); }
 
 template<class Learner> void NativeProbe(unsigned frequency,bool editDuringProbe)
 {
@@ -124,8 +126,9 @@ template<class Learner> void NativeProbe(unsigned frequency,bool editDuringProbe
     for(const auto& event:result.stimuli)stimuli.append(QJsonObject{{"id",QString::fromStdString(event.id)},{"time",event.time}});
     for(const auto& peak:result.peaks)peaks.append(QJsonObject{{"input_id",QString::fromStdString(peak.inputId)},
         {"stimulus_id",QString::fromStdString(peak.stimulusId)},{"validity",PeakValidityName(peak.validity)},
-        {"amplitude",peak.amplitude},{"raw_potential",peak.rawPotential},{"peak_time",peak.time},
-        {"plateau_end",peak.plateauEnd},{"delay_from_actual_stimulus",peak.delayFromStimulus},
+        {"amplitude",ObservedNumber(peak.amplitude)},{"raw_potential",ObservedNumber(peak.rawPotential)},
+        {"peak_time",ObservedNumber(peak.time)},{"plateau_end",ObservedNumber(peak.plateauEnd)},
+        {"delay_from_actual_stimulus",ObservedNumber(peak.delayFromStimulus)},
         {"candidate_count",int(peak.candidateCount)}});
     QJsonObject observation{{"schema_version",1},{"kind","native_frozen_characterization_probe"},
         {"run_id",QString::fromStdString(spec.runId)},{"trial_id",QString::fromStdString(spec.trialId)},
