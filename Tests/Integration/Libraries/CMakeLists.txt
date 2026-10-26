@@ -22,9 +22,6 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_NativeProbe.cpp
     Test_PulseLib_NativeExecution.cpp
     Test_PulseLib_FinalVerification.cpp
-    ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelInspection.cpp
-    ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelIdentity.cpp
-    ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelArchive.cpp
     Test_PulseLib_Main.cpp
 )
 

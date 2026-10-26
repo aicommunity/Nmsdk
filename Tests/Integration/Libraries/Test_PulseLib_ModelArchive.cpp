@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../../../App/NeuroModelerConsole/ModelArchive.h"
+#include "TimeLearner/ModelArchive.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/StorageProfiles.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"

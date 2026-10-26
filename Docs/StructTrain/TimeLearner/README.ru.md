@@ -15,6 +15,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Перенос модели: выполненная часть и оставшиеся проверки](Stage05-Progress.ru.md).
 - [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Native ModelArchive: формат, API и ограничения](ModelArchive.ru.md).
+- [Единый владелец native graph API: рабочий перенос в PulseLib](ModelGraphOwnership.ru.md).
 - [Явные stimulus-порты и native lifecycle внешних связей](ModelBoundary.ru.md).
 - [Удаление образов: два ASan дефекта и проверка исправления](StorageCleanup.ru.md).
 - [Classic live rebuild: Init нового нейрона и открытый вопрос частот](LiveRebuildInit.ru.md).

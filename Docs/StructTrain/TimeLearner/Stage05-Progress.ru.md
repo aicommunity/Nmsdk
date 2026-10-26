@@ -7,8 +7,11 @@
 
 ## Подэтап 5.1 — semantic model identity
 
-Реализованы `IdentifyModel` и `VerifyModelIdentity` в Console, отдельный CLI
+Реализованы общий API `IdentifyModel`/`VerifyModelIdentity` и отдельный Console CLI
 `--model-identity`. Формат и ограничения: [ModelIdentity.ru.md](ModelIdentity.ru.md).
+
+Перенос реализации и native archive в PulseLib для использования контроллером
+проверяется отдельным механическим изменением: [ModelGraphOwnership](ModelGraphOwnership.ru.md).
 Сравниваются параметры каждого узла, частоты, вычислительный порядок, все
 действительные binding slots, aliases и индексы дочерних компонентов. Динамика
 не подменяет параметры модели. Код/runtime identity остаётся отдельным manifest.
