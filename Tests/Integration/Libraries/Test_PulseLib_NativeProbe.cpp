@@ -6,6 +6,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGeneratorMulti.h"
 #include "../../../App/NeuroModelerConsole/ModelIdentity.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
@@ -391,7 +392,7 @@ INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeProbeRestart,::testing::Values
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
 
 class NativeDatasetEvents : public ::testing::TestWithParam<unsigned> {};
-TEST_P(NativeDatasetEvents, AdjacentPulsesRemainDistinctWithoutOutputEdges)
+TEST_P(NativeDatasetEvents, NoSyntheticZeroTimestampBeforeFirstEmission)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
@@ -417,7 +418,8 @@ TEST_P(NativeDatasetEvents, AdjacentPulsesRemainDistinctWithoutOutputEdges)
         }
         core.environment->IncreaseModelTimeByStep();
     }
-    EXPECT_EQ(events.size(),4);EXPECT_LT(edges,4u);
+    EXPECT_EQ(events.size(),4);EXPECT_EQ(edges,4u);
+    if(!events.isEmpty())EXPECT_GT(events[0].toDouble(),0.);
     std::cout<<"native_dataset_events frequency="<<GetParam()<<" edges="<<edges
              <<" events="<<QJsonDocument(events).toJson(QJsonDocument::Compact).constData()<<std::endl;
     for(int i=1;i<events.size();++i)EXPECT_GT(events[i].toDouble(),events[i-1].toDouble());
@@ -425,7 +427,7 @@ TEST_P(NativeDatasetEvents, AdjacentPulsesRemainDistinctWithoutOutputEdges)
     {
         const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
         QFile file(directory+"/DatasetEvents_"+QString::number(GetParam())+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-        const auto bytes=QJsonDocument(QJsonObject{{"kind","native_adjacent_stimulus_events"},
+        const auto bytes=QJsonDocument(QJsonObject{{"kind","native_dataset_stimulus_events"},
             {"frequency_hz",int(GetParam())},{"rising_edges",int(edges)},
             {"actual_stimuli",events},{"scientific_training_result",false}}).toJson();
         ASSERT_EQ(file.write(bytes),bytes.size());
@@ -433,4 +435,37 @@ TEST_P(NativeDatasetEvents, AdjacentPulsesRemainDistinctWithoutOutputEdges)
     core.environment->DestroyModel();
 }
 INSTANTIATE_TEST_SUITE_P(Rates,NativeDatasetEvents,::testing::Values(2000u,20000u));
+
+class NativeGeneratorPulseTimes : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
+template<class Generator> void ActualEmissionHistory(unsigned frequency,const std::string& className)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    auto generator=dynamic_pointer_cast<Generator>(core.storage->TakeObject(className));ASSERT_TRUE(generator);
+    generator->Name="Generator";
+    UEPtr<UContainer> component=generator;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    model->SetGlobalTimeStep(frequency);model->Init();model->Reset();
+    EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
+    generator->Frequency=100.;model->Calculate();
+    ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
+    EXPECT_EQ(generator->OutputPulseTimes(0,0),0.); // Real emission, not a sentinel.
+    core.environment->IncreaseModelTimeByStep();
+    generator->Frequency=0.;model->Calculate();
+    EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
+    generator->Frequency=100.;generator->Reset();
+    EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
+    model->Calculate();ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
+    EXPECT_EQ(generator->OutputPulseTimes(0,0),core.environment->GetTime().GetDoubleTime());
+    core.environment->DestroyModel();
+}
+TEST_P(NativeGeneratorPulseTimes, EmptyHistoryAndActualZeroTimeAreDistinct)
+{
+    if(GetParam().first)ActualEmissionHistory<NPulseGeneratorMulti>(GetParam().second,"NPulseGeneratorMulti");
+    else ActualEmissionHistory<NPulseGenerator>(GetParam().second,"NPGenerator");
+}
+INSTANTIATE_TEST_SUITE_P(VariantsAndRates,NativeGeneratorPulseTimes,::testing::Values(
+    std::make_pair(false,2000u),std::make_pair(true,2000u),
+    std::make_pair(false,20000u),std::make_pair(true,20000u)));
 }
