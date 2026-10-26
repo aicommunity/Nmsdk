@@ -16,7 +16,7 @@ M40 ASan: 51 адресный тест и 4 lifecycle checks, detect_leaks=0. Pr
 negative baselines и runtime manifests опубликованы через Git в
 s07-native-executor-elder1/m40; проверены 867 artifact hashes.
 См. [NativeExecution](NativeExecution.ru.md). Основной bounded search, глобальное
-burst-wave assignment Classic и production ControllerVersion=2 остаются
+production ControllerVersion=2 остаются
 открытыми; этот подэтап не завершает исходные этапы 6/7.
 
 Общие native graph API перенесены из Console в PulseLib.core. Console и tests
@@ -26,6 +26,15 @@ burst-wave assignment Classic и production ControllerVersion=2 остаются
 symbols и два сравнения native waveform/identity. Пакеты опубликованы в Git.
 См. [ModelGraphOwnership](ModelGraphOwnership.ru.md). Это подготовка producer
 модели для контроллера, а не завершение обученного state export или main search.
+
+Измерительная schema 3 добавляет whole-burst assignment и physical input
+ownership. Полная приёмка отдельного снимка: 273 cases (264 pass, 9 skip) в
+PulseLib и четыре maintained suites на каждом сервере; M40 ASan 48 checks.
+После объединения с model API проверены ещё 61 addressed cases (60 pass, один
+helper skip) и 16 совпадающих native waveform/identity/outcome pairs на каждом
+сервере. См. [BurstAssignment](BurstAssignment.ru.md). Это внутренний API;
+ControllerVersion=2, основной поиск, trained-state export и широкая physics/
+inhibition applicability остаются обязательной незавершённой частью плана.
 
 ## Исходная точка
 
