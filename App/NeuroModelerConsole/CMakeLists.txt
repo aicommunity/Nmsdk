@@ -19,9 +19,6 @@ target_include_directories(NeuroModelerConsole
 
 target_sources(NeuroModelerConsole PRIVATE
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/main.cpp
-  ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelInspection.cpp
-  ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelIdentity.cpp
-  ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ModelArchive.cpp
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ClDescGenerator.cpp
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/PropertyAliasAnalyzer.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp

@@ -4,7 +4,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
-#include "../../../App/NeuroModelerConsole/ModelInspection.h"
+#include "TimeLearner/ModelInspection.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>

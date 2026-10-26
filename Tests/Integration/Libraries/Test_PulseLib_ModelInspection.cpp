@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../../../App/NeuroModelerConsole/ModelInspection.h"
+#include "TimeLearner/ModelInspection.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../Support/ConsoleLikeInit.h"

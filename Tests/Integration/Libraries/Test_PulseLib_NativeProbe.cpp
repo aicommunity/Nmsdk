@@ -7,7 +7,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGeneratorMulti.h"
-#include "../../../App/NeuroModelerConsole/ModelIdentity.h"
+#include "TimeLearner/ModelIdentity.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
 #include <QJsonArray>
