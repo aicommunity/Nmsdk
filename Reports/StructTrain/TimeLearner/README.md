@@ -24,8 +24,10 @@ test report is not a trained-model result.
 | Semantic identity, native XML and cross-Qt fingerprints | [Elder-1](s05-identity-elder1/README.md), [M40](s05-identity-m40/README.md) |
 | Native archive, image definitions and fresh-process/cross-host replay | [Elder-1 + Git transfer](s05-archive-elder1/README.md), [M40 source](s05-archive-m40/README.md) |
 | Native image deletion and two heap-use-after-free regressions | [Elder-1](s05-cleanup-elder1/README.md), [M40 ASan before/after](s05-cleanup-m40/README.md) |
+| Typed stimulus ports and cross-host native replay | [Elder-1 source](s05-ports-elder1/README.md), [M40 ASan + Git replay](s05-ports-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
-[Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md).
+[Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md) and
+[Stage05-Progress](../../../Docs/StructTrain/TimeLearner/Stage05-Progress.ru.md).
 Source commits in manifests describe the tested source closure; subsequent merge
 commits are not substituted into historical manifests.

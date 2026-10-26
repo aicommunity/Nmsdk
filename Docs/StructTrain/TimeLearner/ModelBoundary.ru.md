@@ -1,8 +1,9 @@
 # Явные stimulus-порты физической модели
 
-Статус: реализация в отдельной ветке refactor/timelearner-s05-boundary-ports,
-серверная приёмка продолжается. Это часть этапа 5; ControllerVersion=2 и новый
-контур обучения данным изменением не вводятся.
+Статус: подэтап 5.3 проверен на обоих серверах, под ASan на M40 и при реальном
+переносе Elder-1 → M40 через Git. Это часть этапа 5; ControllerVersion=2 и новый
+контур обучения данным изменением не вводятся. Полная матрица профилей/режимов
+и интеграция реального learner остаются открыты.
 
 Замкнутый ModelIdentity/ModelArchive версии 1 сохраняет прежний формат и hash.
 Для модели с явно объявленными внешними источниками используется schema_version=2
@@ -56,3 +57,26 @@ process import, но ещё не заменяют реальный learner adapt
 владельцев, связать implementation_id с runtime provenance и замкнуть общий
 ProbeSpec/Observation/frozen runner. Контроллерный checkpoint и общая транзакция
 регистрации образов остаются отдельными незавершёнными требованиями.
+
+## Серверная приёмка
+
+Проверен root b94cfacea5593a8aff07c9c6870fd3c8150d6a59. На .11 и .17:
+16 targeted cases, 15 passed и один helper skipped; четыре child imports реально
+выполняются в новых процессах. Четыре maintained CTest suites прошли. Полный
+PulseLib: 140 cases, 139 passed, один helper skipped. На M40 те же четыре suites
+прошли под ASAN_OPTIONS=detect_leaks=0; leak-freedom не утверждается.
+
+Архивы .11 из e35aa128cf10fd7b9d0f29fcd05291bc0056a3d2 извлечены на .17
+через Git. Два независимых процесса восстановили physical identity и неплоский
+отклик: 200/2000 samples, max pairwise error=0 при 2000/20000 Гц. Замкнутые
+identity версии 1 совпадают с принятым подэтапом 5.2. Новый портовый граф содержит
+41 узел и три подключения к одному именованному burst-порту.
+
+Исходные логи неудачных попыток также сохранены: неверное имя образа нового
+fixture, оставшиеся прямые pointers и добавление второго native слота. Они
+относятся к реализации новых fixtures/API, а не к работе старого learner.
+Итоговые API/fixtures используют native Connect и BreakLinks; граф целиком
+сверяется после восстановления объявленного списка input slots.
+
+Артефакты: Reports/StructTrain/TimeLearner/s05-ports-elder1 и s05-ports-m40.
+Metadata — model_spec/not_trained; результаты не являются Train или научным PASS.
