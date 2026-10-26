@@ -25,6 +25,9 @@ test report is not a trained-model result.
 | Native archive, image definitions and fresh-process/cross-host replay | [Elder-1 + Git transfer](s05-archive-elder1/README.md), [M40 source](s05-archive-m40/README.md) |
 | Native image deletion and two heap-use-after-free regressions | [Elder-1](s05-cleanup-elder1/README.md), [M40 ASan before/after](s05-cleanup-m40/README.md) |
 | Typed stimulus ports and cross-host native replay | [Elder-1 source](s05-ports-elder1/README.md), [M40 ASan + Git replay](s05-ports-m40/README.md) |
+| Silent Classic live replacement: baseline | [Elder-1](s04-live-init-baseline-elder1/README.md), [M40 graph diagnostic](s04-live-init-baseline-m40/README.md) |
+| Native replacement Init fix; legacy mixed rates disclosed | [Elder-1](s04-live-init-fixed-elder1/README.md), [M40](s04-live-init-fixed-m40/README.md) |
+| Final cold-reset initialization/response regressions | [Elder-1](s04-live-init-final-elder1/README.md), [M40 + targeted ASan](s04-live-init-final-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md) and

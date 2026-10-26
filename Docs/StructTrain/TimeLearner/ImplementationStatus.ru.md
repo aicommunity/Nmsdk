@@ -112,6 +112,14 @@ registration rollback, controller checkpoint и Train → frozen Test остаю
 
 ## Остальные этапы
 
+При подготовке этапа 6 найден и исправлен TL-015: live Classic Build оставлял
+новый Neuron неинициализированным. Native controls и raw graph/readbacks:
+[LiveRebuildInit](LiveRebuildInit.ru.md). Обнаружен также TL-016: смешанные
+эффективные частоты при legacy model clock=20000; uniform-rate поддержка этим
+не доказана и остаётся открытой. Общая управляющая математика сохранена в
+отдельной неподключённой ветке; перенос общего контроллера не объявляется
+завершённым: [Stage06-Progress](Stage06-Progress.ru.md).
+
 Этап 1 требует завершения semantic/evidence review; этап 4 требует оставшихся
 lifecycle/graph проверок; этапы 5–12 ещё не завершены. Pending не обозначается PASS,
 version 2 не объявляется production-ready до всей обязательной проверки.
