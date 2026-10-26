@@ -96,7 +96,10 @@ definitions в свежий процесс. На обоих серверах п�
 дал совпадение identity и 200/2000 waveform samples (max error=0).
 Источник 41 узел, 34 class definitions; metadata model_spec/not_trained.
 
-Явные boundary ports, реальные learner metadata/certificate adapters, безопасный
+API boundary ports (5.3) проверен: native Connect/BreakLinks, независимый источник,
+два сервера, 4/4 CTest suites и M40 ASan, реальный Git replay Elder-1 → M40.
+Границы проверки и raw artifacts: [ModelBoundary](ModelBoundary.ru.md).
+Подключение API к реальному learner, metadata/certificate adapters, безопасный
 registration rollback, controller checkpoint и Train → frozen Test остаются открыты.
 Подробности: [Stage05-Progress](Stage05-Progress.ru.md).
 

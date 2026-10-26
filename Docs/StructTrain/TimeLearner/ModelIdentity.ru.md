@@ -69,9 +69,10 @@ fingerprint; положительный итог требует валиднос
 выходной файл не перезаписывается. Пустое описание вместо неподдерживаемого
 параметра не допускается.
 
-Граница модели пока должна быть замкнутой. Необъявленный внешний stimulus
-binding не отбрасывается ради получения hash. Для model export отдельного
-нейрона предстоит ввести и проверить явные входные порты и ProbeSpec, передать
+Версия 1 остаётся замкнутой; версия 2 описывает явные stimulus-порты (см.
+ModelBoundary.ru.md). Необъявленный внешний stimulus binding не отбрасывается
+ради получения hash. Для model export реального обученного
+нейрона предстоит связать порты с адаптером learner и ProbeSpec, передать
 storage definitions, training targets/references, calibration provenance и
 solo/recognition conversion state. Code/runtime fingerprints и scorer version
 остаются отдельными составляющими RunManifest/ConditionSpec; этот hash не
