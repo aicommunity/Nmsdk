@@ -152,7 +152,7 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
     NmsdkTools::ModelBoundarySources ports;
     if(fixture["stimulus_port"].isString())
     {
-        boundary = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
+        boundary = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NPNeuronPosCGenerator"));
         ASSERT_TRUE(boundary); boundary->SetEnvironment(core.environment); boundary->Init();
         boundary->Name = "IndependentTestStimulus";
         ports[&boundary->Output] = fixture["stimulus_port"].toString();
@@ -190,7 +190,7 @@ void TransferFixture(unsigned int frequency, bool withBoundary)
     NmsdkTools::ModelBoundarySources ports;
     if(withBoundary)
     {
-        boundary = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
+        boundary = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NPNeuronPosCGenerator"));
         ASSERT_TRUE(boundary); boundary->SetEnvironment(core.environment); boundary->Init();
         boundary->Name = "OriginalTrainingSource";
         ports[&boundary->Output] = "training_burst";
@@ -247,8 +247,8 @@ TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     auto model = Prepared(2000);
-    auto source = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
-    auto replacement = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));
+    auto source = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NPNeuronPosCGenerator"));
+    auto replacement = dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NPNeuronPosCGenerator"));
     ASSERT_TRUE(source); ASSERT_TRUE(replacement);
     source->SetEnvironment(core.environment); source->Init();
     replacement->SetEnvironment(core.environment); replacement->Init();
