@@ -126,4 +126,34 @@ TEST(TimeLearnerProbe, RejectsUnknownSchemaAndInvalidWindowOrDimensions)
     s=Specification();s.expectedStimulusIds={"pulse","pulse"};EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
     s=Specification();s.modelRevision.clear();EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
 }
+
+TEST(TimeLearnerProbe, PeakBeforeActualStimulusCannotBecomeAnAcceptedDelay)
+{
+    ProbeRecorder recorder(Specification());Samples(recorder,onePeak);
+    recorder.RecordStimulus("pulse",.6);auto result=recorder.Close(1.,"model_1","closed");
+    EXPECT_TRUE(result.complete);EXPECT_FALSE(result.valid);
+    EXPECT_TRUE(Has(result,"peak_precedes_stimulus:input"));
+    EXPECT_LT(result.peaks[0].delayFromStimulus,0.);
+}
+
+TEST(TimeLearnerProbe, LateSpikeIsRetainedAndDisabledCaptureIsNotASilentResponse)
+{
+    auto s=Specification();s.recordSpikes=true;ProbeRecorder enabled(s);Samples(enabled,onePeak);
+    enabled.RecordStimulus("pulse",.1);enabled.RecordSpike(0,.9);
+    const auto observed=enabled.Close(1.,"model_1","closed");ASSERT_TRUE(observed.valid);
+    ASSERT_EQ(observed.spikes.size(),1u);EXPECT_DOUBLE_EQ(observed.spikes[0].time,.9);
+    s.recordSpikes=false;ProbeRecorder disabled(s);Samples(disabled,onePeak);
+    disabled.RecordStimulus("pulse",.1);disabled.RecordSpike(0,.9);
+    EXPECT_TRUE(Has(disabled.Close(1.,"model_1","closed"),"unexpected_spike_channel"));
+}
+
+TEST(TimeLearnerProbe, RejectsWrongSampleDimensionAndWritesAfterClosure)
+{
+    ProbeRecorder recorder(Specification());recorder.Observe(0.,{2.,2.},"model_1");
+    Samples(recorder,onePeak);recorder.RecordStimulus("pulse",.1);
+    const auto result=recorder.Close(1.,"model_1","closed");
+    EXPECT_FALSE(result.valid);EXPECT_TRUE(Has(result,"invalid_sample"));
+    EXPECT_THROW(recorder.Observe(2.,{2.},"model_1"),std::logic_error);
+    EXPECT_THROW(recorder.Close(2.,"model_1","closed"),std::logic_error);
+}
 }
