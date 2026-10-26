@@ -21,7 +21,9 @@ std::size_t Index(const VerificationProtocol& p,const std::string& id)
 }
 PreparedVerificationProbe Prepared(const VerificationRequest& r)
 {
-    return {r.routing,r.inputId,r.protocolRevision,r.baseModelRevision,"effective:"+r.trialId,r.epoch};
+    PreparedVerificationProbe result{r.routing,r.inputId,r.protocolRevision,r.baseModelRevision,"effective:"+r.trialId,r.epoch};
+    if(r.routing==ProbeRouting::BranchSoloBurst)result.selectedInputIndex=r.inputIndex;
+    return result;
 }
 ProbeObservation Observation(const VerificationProtocol& p,const PreparedVerificationProbe& context,
     const std::string& run,const std::string& trial,std::vector<double> raw={},
@@ -58,9 +60,26 @@ CapturedReferences References(const VerificationProtocol& p,std::vector<double> 
     for(std::size_t i=0;i<p.inputs.size();++i)
     {
         PreparedVerificationProbe context{p.routing,p.inputs[i].id,p.revision,"initial_model","reference_effective_"+std::to_string(i),0};
+        if(p.schemaVersion==3 && p.routing==ProbeRouting::BranchSoloBurst)context.selectedInputIndex=i;
         evidence.push_back({context,Observation(p,context,"capture","reference_"+std::to_string(i),raw,{},baseline)});
     }
     return CapturedReferences::Capture(p,evidence);
+}
+ProbeObservation FullClassicPair(const VerificationProtocol& p,const PreparedVerificationProbe& context,
+    const std::string& run,const std::string& trial,bool wrongChannel=false)
+{
+    ProbeSpec s;s.schemaVersion=p.schemaVersion;s.waveAssignment=p.waveAssignment;s.stimulusProfile=p.stimulusProfile;
+    s.runId=run;s.trialId=trial;s.sampleId=p.sampleId;s.patternHash=p.patternHash;s.modelRevision=context.effectiveModelRevision;
+    s.begin=0.;s.end=1.;s.maximumSampleGap=.05;s.maximumSamples=21;s.baseline={0.,0.};s.expectedStimulusIds=p.stimulusIds;
+    s.windows={{"i0",wrongChannel?1u:0u,wrongChannel?.3:.5,wrongChannel?.5:.7,"p0"},{"i1",1,.5,.7,"p1"}};
+    ProbeRecorder recorder(s);
+    for(int tick=0;tick<=20;++tick)
+    {
+        const auto triangle=[&](int center){return std::max(0.,1.-std::abs(tick-center)/2.);};
+        recorder.Observe(double(tick)/20.,{.01*(triangle(12)+triangle(16)),.011*(triangle(8)+triangle(12))},context.effectiveModelRevision);
+    }
+    recorder.RecordStimulus("p0",.05);recorder.RecordStimulus("p1",.1);
+    return recorder.Close(1.,context.effectiveModelRevision,"window_closed");
 }
 VerificationConfig Configuration(std::size_t maximum=32)
 {VerificationConfig c;c.runId="verification_attempt";c.currentModelRevision="learned_model";c.maximumProbes=maximum;return c;}
@@ -279,6 +298,53 @@ TEST(FinalVerification, WholeBurstPolicyBindsReferencesAndCertificate)
         }
         invalid.Consume(data,r->baseModelRevision);
         EXPECT_EQ(invalid.Status(),VerificationStatus::InvalidObservation);EXPECT_FALSE(invalid.Certificate());
+    }
+}
+
+TEST(FinalVerification, Schema3RequiresOwnPhysicalChannelAndCompleteModelDimensions)
+{
+    auto p=Protocol(2);p.schemaVersion=3;p.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+    p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+    std::vector<ReferenceEvidence> good,bad;
+    for(std::size_t i=0;i<2;++i)
+    {
+        PreparedVerificationProbe context{p.routing,p.inputs[i].id,p.revision,"initial_model","reference_effective",0};
+        auto correct=FullClassicPair(p,context,"capture","good");ASSERT_TRUE(correct.valid);
+        auto wrong=FullClassicPair(p,context,"capture","wrong",true);ASSERT_TRUE(wrong.valid);
+        good.push_back({context,correct});bad.push_back({context,wrong});
+    }
+    const auto refs=CapturedReferences::Capture(p,good);
+    EXPECT_THROW(CapturedReferences::Capture(p,bad),std::invalid_argument);
+    FinalVerificationSession session(refs,Configuration());
+    while(auto r=session.NextRequest())
+    {
+        const auto context=Prepared(*r);session.Arm(context);
+        session.Consume(FullClassicPair(p,context,r->runId,r->trialId),r->baseModelRevision);
+    }
+    EXPECT_EQ(session.Status(),VerificationStatus::Exact);
+    auto reordered=p;std::swap(reordered.inputs[0].stimulusId,reordered.inputs[1].stimulusId);
+    EXPECT_THROW(CapturedReferences::Capture(reordered,good),std::invalid_argument);
+    auto one=Protocol(1);one.schemaVersion=3;one.waveAssignment=p.waveAssignment;one.stimulusProfile=p.stimulusProfile;
+    PreparedVerificationProbe context{one.routing,"i0",one.revision,"initial_model","reference_effective",0};
+    auto extra=Observation(one,context,"capture","extra_dimension");ASSERT_TRUE(extra.valid);
+    extra.specification.baseline.push_back(0.);
+    EXPECT_THROW(CapturedReferences::Capture(one,{{context,extra}}),std::invalid_argument);
+}
+
+TEST(FinalVerification, Schema3BranchRequiresActualSelectedInputBeforeArming)
+{
+    auto p=Protocol(1,ProbeRouting::BranchSoloBurst);p.schemaVersion=3;p.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+    p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+    const auto refs=References(p);FinalVerificationSession valid(refs,Configuration());Complete(valid,p);
+    ASSERT_EQ(valid.Status(),VerificationStatus::Exact);
+    for(bool missing:{false,true})
+    {
+        FinalVerificationSession invalid(refs,Configuration());const auto r=invalid.NextRequest();ASSERT_TRUE(r);
+        auto context=Prepared(*r);
+        if(missing)context.selectedInputIndex.reset();else context.selectedInputIndex=1;
+        invalid.Arm(context);EXPECT_EQ(invalid.Status(),VerificationStatus::InvalidObservation);
+        EXPECT_FALSE(invalid.WaitingForObservation());EXPECT_FALSE(invalid.Certificate());
+        ASSERT_EQ(invalid.Rejected().size(),1u);EXPECT_EQ(invalid.Rejected()[0].reason,"prepared_physical_input_mismatch");
     }
 }
 
