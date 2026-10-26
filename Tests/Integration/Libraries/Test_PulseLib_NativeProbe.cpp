@@ -447,6 +447,14 @@ template<class Generator> void ActualEmissionHistory(unsigned frequency,const st
     generator->Name="Generator";
     UEPtr<UContainer> component=generator;ASSERT_NE(model->AddComponent(component),ForbiddenId);
     model->SetGlobalTimeStep(frequency);model->Init();model->Reset();
+    if constexpr(std::is_same<Generator,NPulseGeneratorMulti>::value)
+    {
+        std::cout<<"native_multi_after_init count="<<generator->PulseCount.GetData()
+                 <<" delays="<<generator->Delays.GetCols()<<" counters="<<generator->PulseCounters->size()<<std::endl;
+        EXPECT_EQ(generator->PulseCount.GetData(),1);
+        EXPECT_EQ(generator->Delays.GetCols(),1);
+        EXPECT_EQ(generator->PulseCounters->size(),1u);
+    }
     EXPECT_EQ(generator->OutputPulseTimes.GetCols(),0);
     generator->Frequency=100.;model->Calculate();
     ASSERT_EQ(generator->OutputPulseTimes.GetCols(),1);
