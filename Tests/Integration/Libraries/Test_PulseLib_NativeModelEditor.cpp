@@ -41,8 +41,9 @@ template<class Learner> struct EditingRig {
     UEPtr<NPulseGeneratorTransit> source;
     NmsdkTools::ModelBoundarySources ports;
     std::size_t serial=0;
-    double duration=.08;
-    EditingRig(unsigned f,int mode,const std::string& suffix):frequency(f),normalization(mode)
+    double duration=.18;
+    std::vector<double> isi{.01,.08};bool tightBurst=false;
+    EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false):frequency(f),normalization(mode),tightBurst(tight)
     {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);
@@ -57,7 +58,8 @@ template<class Learner> struct EditingRig {
         learner->NeuronClassName=registered.neuronClass;learner->DendriteLength=std::vector<int>{2,1};
         learner->NormalizationMode=mode;learner->CalculateMode=1;learner->EnablePostTrainTuning=false;
         learner->AutoCalibrateFixedLTZThreshold=false;
-        MDMatrix<double> pattern;pattern.Assign(2,1,0.);pattern(0,0)=.005;pattern(1,0)=.03;learner->InputPattern=pattern;
+        if(tight){duration=.08;isi={.005,.03};}
+        MDMatrix<double> pattern;pattern.Assign(2,1,0.);pattern(0,0)=isi[0];pattern(1,0)=isi[1];learner->InputPattern=pattern;
         UEPtr<UContainer> component=learner;
         if(model->AddComponent(component)==ForbiddenId)throw std::runtime_error("editor_fixture_attach");
         model->SetGlobalTimeStep(f);model->Init();model->Reset();
@@ -81,13 +83,14 @@ template<class Learner> struct EditingRig {
     {
         NativeProbeRequest request;request.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
         request.activeInput=int(input);request.inputId="input"+std::to_string(input);request.protocolRevision="editing_burst_v1";
-        request.baseModelRevision=Revision();request.readModelRevision=[this]{return Revision();};request.expectedInputIsi={.005,.03};
+        request.baseModelRevision=Revision();request.readModelRevision=[this]{return Revision();};request.expectedInputIsi=isi;
         auto& s=request.specification;s.schemaVersion=3;s.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
         s.runId=action?action->runId:name;s.trialId=action?action->trialId:name+"/trial/"+std::to_string(++serial);
-        s.sampleId="target";s.patternHash="editing_pattern_005_030";s.end=duration;s.maximumSampleGap=1./frequency;
+        s.sampleId="target";s.patternHash=NmsdkTools::CanonicalModelDataSha256(QJsonArray{isi[0],isi[1]}).toStdString();
+        s.end=duration;s.maximumSampleGap=1./frequency;
         s.maximumSamples=std::size_t((duration+.01)*frequency);s.expectedStimulusIds={"pulse0","pulse1"};
-        const double onset=input==0?.005:.035;
-        s.windows={{request.inputId,branch?0u:input,onset,onset+.025,"pulse"+std::to_string(input)}};
+        const double onset=isi[0]+(input==0?0.:isi[1]);
+        s.windows={{request.inputId,branch?0u:input,onset,onset+(tightBurst?.025:.065),"pulse"+std::to_string(input)}};
         if(action)request.modelEpoch=action->modelEpoch;
         if(session)request.onPrepared=[&](const auto& prepared,const ProbeSpec&){session->Arm(action->serial,prepared);};
         std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
@@ -171,6 +174,21 @@ TEST(NativeModelEditor, ClassicN0_20000){CheckEdits<NNeuronTimeLearner>(20000,0)
 TEST(NativeModelEditor, BranchN0_20000){CheckEdits<NNeuronTimeLearnerBranch>(20000,0);}
 TEST(NativeModelEditor, ClassicN1_20000){CheckEdits<NNeuronTimeLearner>(20000,1);}
 TEST(NativeModelEditor, BranchN1_20000){CheckEdits<NNeuronTimeLearnerBranch>(20000,1);}
+
+TEST(NativeModelEditor, TightBurstAfterGrowthRemainsAnExplicitInvalidObservation)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"tight_burst_after_growth",true);
+    const auto first=rig.Probe();ASSERT_EQ(first.status,NativeProbeStatus::Completed);ASSERT_TRUE(first.observation);
+    ASSERT_TRUE(first.observation->valid);
+    const auto soma=rig.neuron->GetComponentL<NPulseChannel>("Soma1.ExcChannel",true);ASSERT_TRUE(soma);soma->Capacity=1.41e-9;
+    auto parameters=rig.learner->ReadNativeParameters();parameters[0].length=3;parameters[0].synapses=3;
+    const auto edit=rig.learner->ApplyNativeParameters(parameters);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    const auto measured=rig.Probe();ASSERT_EQ(measured.status,NativeProbeStatus::Completed);ASSERT_TRUE(measured.observation);
+    EXPECT_TRUE(measured.observation->complete);EXPECT_FALSE(measured.observation->valid);
+    ASSERT_EQ(measured.observation->stimuli.size(),2u);ASSERT_EQ(measured.observation->burstAssignments.size(),1u);
+    EXPECT_EQ(measured.observation->burstAssignments[0].validity,PeakValidity::Missing);
+    EXPECT_LT(measured.observation->burstAssignments[0].waves.size(),2u);
+}
 
 TEST(NativeIntegration, ActualSecretionWeightPsiAndTimeStepAreUsed)
 {
