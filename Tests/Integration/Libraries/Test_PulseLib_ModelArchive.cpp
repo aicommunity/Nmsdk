@@ -273,7 +273,11 @@ TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
     auto duplicate = ports; duplicate[&replacement->Output] = "burst";
     EXPECT_FALSE(NmsdkTools::IdentifyModel(model,duplicate)["valid"].toBool());
     EXPECT_FALSE(NmsdkTools::IdentifyModel(model,{{nullptr,"burst"}})["valid"].toBool());
+    const auto listeners = source->GetNumAConnectors("Output");
     auto archive = NmsdkTools::ExportModelArchive(model,Metadata(),ports);
+    EXPECT_DOUBLE_EQ(source->Output(0,0),17.);
+    EXPECT_EQ(source->GetNumAConnectors("Output"),listeners);
+    EXPECT_TRUE(source->IsReady()); EXPECT_TRUE(source->IsInit());
     EXPECT_THROW(NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1"),NmsdkTools::ModelArchiveError);
     EXPECT_THROW(NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1",{{&replacement->Output,"wrong"}}),NmsdkTools::ModelArchiveError);
     auto restored = NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1",{{&replacement->Output,"burst"}});
