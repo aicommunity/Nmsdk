@@ -18,6 +18,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include <typeinfo>
+#include <type_traits>
 
 namespace {
 using namespace RDK;
@@ -286,4 +287,30 @@ TEST_P(NativeLiveRebuildFrequency, EnvironmentModeAppliesToReplacementSubtree)
 INSTANTIATE_TEST_SUITE_P(TopologiesClockModes,NativeLiveRebuildFrequency,::testing::Values(
     std::make_pair(false,false),std::make_pair(false,true),
     std::make_pair(true,false),std::make_pair(true,true)));
+
+TEST(NativeEnvironmentFrequency, CreationOverloadsAndModeSwitchPreserveDeclaredPolicy)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();
+    core.environment->SetUseIndTimeStepFlag(true);
+    for(bool byId : {false,true})
+    {
+        ASSERT_TRUE(byId ? core.environment->CreateModel(core.storage->FindClassId("NModel"))
+                         : core.environment->CreateModel("NModel"));
+        auto model=core.environment->GetModel(); ASSERT_TRUE(model);
+        EXPECT_NE(model->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+        model->SetGlobalTimeStep(20000);
+        auto child=dynamic_pointer_cast<UContainer>(core.storage->TakeObject("NModel"));
+        ASSERT_TRUE(child); child->Name="IndividualChild"; child->SetGlobalTimeStep(5000);
+        ASSERT_NE(model->AddComponent(child),ForbiddenId);
+        EXPECT_EQ(child->GetTimeStep(),5000);
+        core.environment->SetUseIndTimeStepFlag(false);
+        EXPECT_EQ(model->FindProperty("TimeStep")->GetType() & pgPublic,0u);
+        EXPECT_EQ(child->GetTimeStep(),20000);
+        core.environment->SetUseIndTimeStepFlag(true);
+        EXPECT_EQ(child->GetTimeStep(),20000) << "enabling individual mode must not restore unrelated old defaults";
+        core.environment->DestroyModel();
+    }
+    core.environment->SetUseIndTimeStepFlag(false);
+}
 }
