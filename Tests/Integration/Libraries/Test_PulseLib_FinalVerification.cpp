@@ -30,7 +30,7 @@ ProbeObservation Observation(const VerificationProtocol& p,const PreparedVerific
     const auto n=p.inputs.size();if(raw.empty())raw=Raw(n);if(centers.empty())centers.assign(n,12);
     const auto active=Index(p,context.inputId);const bool branch=p.routing==ProbeRouting::BranchSoloBurst;
     ProbeSpec s;s.runId=run;s.trialId=trial;s.sampleId=p.sampleId;s.patternHash=p.patternHash;
-    s.schemaVersion=p.schemaVersion;s.stimulusProfile=p.stimulusProfile;
+    s.schemaVersion=p.schemaVersion;s.stimulusProfile=p.stimulusProfile;s.waveAssignment=p.waveAssignment;
     s.modelRevision=context.effectiveModelRevision;s.begin=0.;s.end=1.;s.maximumSampleGap=.05;
     s.maximumSamples=21;s.minimumAmplitude=p.minimumAmplitude;s.expectedStimulusIds=p.stimulusIds;
     s.baseline.assign(branch?1:n,baseline);
@@ -254,6 +254,32 @@ TEST(FinalVerification, CapturingReferencesRequiresAllInputsAndOneInitialModel)
         evidence.push_back({prepared,Observation(p,prepared,"capture","ref"+std::to_string(i))});
     }
     EXPECT_THROW(CapturedReferences::Capture(p,evidence),std::invalid_argument);
+}
+
+TEST(FinalVerification, WholeBurstPolicyBindsReferencesAndCertificate)
+{
+    auto p=Protocol(1);p.schemaVersion=3;p.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+    p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+    const auto refs=References(p);FinalVerificationSession session(refs,Configuration());Complete(session,p);
+    ASSERT_EQ(session.Status(),VerificationStatus::Exact);ASSERT_TRUE(session.Certificate());
+    EXPECT_EQ(session.Certificate()->Protocol().waveAssignment,WaveAssignmentPolicy::OrderedWholeBurst);
+    EXPECT_EQ(session.Certificate()->Protocol().schemaVersion,3u);
+    for(int fault=0;fault<5;++fault)
+    {
+        FinalVerificationSession invalid(refs,Configuration());auto r=invalid.NextRequest();ASSERT_TRUE(r);
+        const auto prepared=Prepared(*r);invalid.Arm(prepared);
+        auto data=Observation(p,prepared,r->runId,r->trialId);ASSERT_TRUE(data.valid);
+        switch(fault)
+        {
+        case 0:data.burstAssignments.clear();break;
+        case 1:data.burstAssignments[0].waves[0].stimulusId="other";break;
+        case 2:data.burstAssignments[0].waves[0].time+=.05;break;
+        case 3:data.burstAssignments[0].validity=PeakValidity::Ambiguous;break;
+        case 4:data.specification.waveAssignment=WaveAssignmentPolicy::WindowOnly;break;
+        }
+        invalid.Consume(data,r->baseModelRevision);
+        EXPECT_EQ(invalid.Status(),VerificationStatus::InvalidObservation);EXPECT_FALSE(invalid.Certificate());
+    }
 }
 
 TEST(FinalVerification, UnknownOrChangedRuntimeContextInvalidatesPreviouslyVerifiedInputs)
