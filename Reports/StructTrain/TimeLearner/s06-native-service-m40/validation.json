@@ -38,6 +38,30 @@
       "tests": 8
     }
   },
+  "auditor_window_regression": {
+    "auditor_version": 2,
+    "expected_failure": {
+      "errors": 0,
+      "expected_failure_reproducer": true,
+      "failures": 1,
+      "scope": "auditor incorrectly accepts isolated window containing multiple waves",
+      "skipped": 0,
+      "source": "036b3a072023801f0562ba306dfc8743776991f1",
+      "tests": 1
+    },
+    "fixed_tests": {
+      "analysis_source": "7c65d7c6ffa3991c2fa77e775a5fe9aec07dedd1",
+      "errors": 0,
+      "failures": 0,
+      "module_sha256": "1b96297ec6c74824215d2816a2f56008522c43799b640c3ad89a51605da4adf3",
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "python_executable": "/usr/bin/python3.12",
+      "skipped": 0,
+      "tests": 13
+    },
+    "negative_certificates_audited": 4,
+    "primary_probes_audited": 56
+  },
   "evaluation_verdict": null,
   "host": "m40",
   "model_bound_summaries_audited": 4,
@@ -2606,6 +2630,26 @@
     "s06-service-asan-a2/runtime.json": {
       "bytes": 16026,
       "sha256": "ef788bf290f8490e9ded915ccf4fbf72f6dedf093c176e81292b9408021ec169"
+    },
+    "s07-assigned-wave-a0/reproducer.json": {
+      "bytes": 244,
+      "sha256": "e8f8c9d45b555b7d112770d7aceb7300c383cab6feb5a1406d99959ea05af3d5"
+    },
+    "s07-assigned-wave-a0/tests.log": {
+      "bytes": 959,
+      "sha256": "87672bf1e1a1a4c51f77eaeffeb130fe63810d321d50040508a497f50ea4ed39"
+    },
+    "s07-assigned-wave-a1/audit.json": {
+      "bytes": 19875,
+      "sha256": "29987912f55214f3cb6fa92f43ae35823003360ecbdda9a843a222b65c458b6c"
+    },
+    "s07-assigned-wave-a1/tests.json": {
+      "bytes": 329,
+      "sha256": "05806a76ce2e7288196996bb5cb98a3153721c6680c6b4ae5353ec8d8bc8d58f"
+    },
+    "s07-assigned-wave-a1/tests.log": {
+      "bytes": 2214,
+      "sha256": "e338e9fc8f98279047a07ccc7bfd81921d94f0ffbc92a0a734d4fff0c503bbe1"
     }
   },
   "schema_version": 1
