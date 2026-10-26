@@ -222,6 +222,13 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         if(result->observation)EXPECT_FALSE(result->observation->valid);
         EXPECT_TRUE(result->requiresFreshVerification);
         EXPECT_TRUE(learner->NativeProbeOwnsControl());
+        if(interference==Interference::WrongObservationChannel || interference==Interference::WrongSoloSelector)
+        {
+            const std::string expectedReason=interference==Interference::WrongObservationChannel?
+                "native_input_channel_mismatch":"native_solo_selector_mismatch";
+            EXPECT_NE(std::find(result->reasons.begin(),result->reasons.end(),expectedReason),result->reasons.end());
+            EXPECT_FALSE(armed);EXPECT_EQ(sampled,0u);
+        }
         if(interference==Interference::DeleteSynapse)EXPECT_TRUE(result->currentBaseRevision.empty());
         dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();return;
     }
