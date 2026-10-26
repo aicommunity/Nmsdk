@@ -60,13 +60,40 @@ source/паттерна/параметров, callback errors, отмена и �
 поведения после hooks/Build/Init wrappers. Пока эти gates не пройдены, API нельзя
 выдавать за проверенную версию контроллера 2.
 
-Source parameters проверяются в рамках пробы отдельно от neuron semantic hash;
-Frequency/Delay принадлежат Dataset playback. Production-сериализатор условий
-должен также связать source physics и фактическое расписание с протоколом между
-пробами. Внутренний Rdk string snapshot не является новым научным fingerprint.
+Native observation schema 2 содержит typed StimulusProfile: класс источника,
+amplitude, pulse length, frequency Hz, frequency deviation и transit/pattern
+режимы. Recorder требует конечный полный профиль, а FinalVerification связывает
+его с references и каждой последующей пробой. Native request может задать
+ожидаемый профиль; несовпадение отклоняется до предъявления. Внутри пробы профиль
+сравнивается по настоящим численным значениям, включая изменения меньше точности
+строкового форматирования. Schema 1 сохраняется для прежнего внутреннего контура
+и контролируемых сигналов, без выдуманного source profile. Верификация не
+смешивает схемы; recognition CSV остаётся отдельной schema 4.
+
+Frequency/Delay генератора принадлежат Dataset playback. Production-сериализатор
+условий должен включать typed source profile и фактическое расписание.
+Внутренний Rdk string snapshot не является новым научным fingerprint.
 Transient stimuli нельзя смешивать с retarget обучающей цели.
 
 ControllerVersion=2, основной bounded search N0/N1, экспорт сертификата и полного
 обученного состояния, conversion/PostTune/calibration и новый experiment runner
 ещё не реализованы этим изменением. Сам native result не является сертификатом
 сходимости или результатом распознавания.
+
+## Промежуточные серверные результаты
+
+Root ad9e54d прошёл 3/3 Rdk lifecycle checks и 4/4 native controls на двух
+серверах, включая отклонение Reset при неизменном semantic hash. Root c143fcf
+прошёл 16/16 native controls на двух серверах: вмешательства source/pattern,
+pooled removal, external stop и реальные/no-op Build. Root 5b72f21 прошёл
+28/28 native controls на обоих серверах: N=1/2/4/6, 2000/20000 в объявленных
+случаях, реальные отдельные точки Branch, native FinalVerification для N=1
+и Classic N=2. N=1 даёт Exact constraint certificate; исходная N=2 модель —
+OutsideTolerance по времени при совпадающих raw targets. Это frozen исходные
+модели, не завершённое обучение и не распознавание.
+
+Новые schema 2/source-profile, callbacks/UnInit и ускоренный structural inspector
+проверяются отдельно от этих снимков. Их незавершённая проверка не закрывается
+результатом старой schema 1. Полные SHA, runtime provenance, первичные CSV/JSON,
+negative baselines и публикация Git-артефактов обязательны перед merge подэтапа;
+пока результаты находятся в серверных readbacks рабочего контура.

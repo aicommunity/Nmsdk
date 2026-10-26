@@ -99,6 +99,12 @@ XML/logs, исходные полные failing suites и cross-mode failure. Н
 
 ## Оставшиеся ограничения
 
+Рабочая интеграция в native hooks обоих learner описана отдельно:
+[NativeExecution](NativeExecution.ru.md). Она ещё не принята в develop.
+В ней schema 2 связывает физику генератора между references и probes; schema 1
+ниже остаётся описанием принятого внутреннего API и его исторических controls,
+без добавления отсутствующих source-полей задним числом.
+
 ### Проверяемая граница повторной native-пробы
 
 Добавлен `NativeProbeRestart.DatasetAndPhysicalResetAtNonzeroModelTime`:
