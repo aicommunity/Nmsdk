@@ -15,7 +15,7 @@ learner через штатный scheduler, включая transient Branch sol
 M40 ASan: 51 адресный тест и 4 lifecycle checks, detect_leaks=0. Primary data,
 negative baselines и runtime manifests опубликованы через Git в
 s07-native-executor-elder1/m40; проверены 867 artifact hashes.
-См. [NativeExecution](NativeExecution.ru.md). Основной bounded search, глобальное
+См. [NativeExecution](NativeExecution.ru.md). Основной bounded search и
 production ControllerVersion=2 остаются
 открытыми; этот подэтап не завершает исходные этапы 6/7.
 
@@ -35,6 +35,19 @@ helper skip) и 16 совпадающих native waveform/identity/outcome pairs
 сервере. См. [BurstAssignment](BurstAssignment.ru.md). Это внутренний API;
 ControllerVersion=2, основной поиск, trained-state export и широкая physics/
 inhibition applicability остаются обязательной незавершённой частью плана.
+
+В ветке stage07/bounded-controller реализован общий BoundedTrainingSession:
+целые L/Ns и ограниченная сетка Rs, индивидуальные bounds, свежая опорная проба
+после каждого изменения, ranking измеренных остатков и независимый финальный
+проход. Root 5f3737013ec3c18d3514f1d3292e1367181cb9e0 прошёл 29 адресных tests на
+обоих серверах, включая настоящую коррекцию Rs Classic/Branch × 2000/20000 Гц.
+Это проверка нормализации с фиксированными длинами и явным sync tolerance 0.2 с,
+а не синхронизация при default 0.02 с. Root 067a4dba91b0e1a2bca83d8c73850baa9c0aa9b7
+прошёл 27 адресных tests на обоих серверах после добавления deadline и защиты
+общего Branch-банка; M40 ASan — ещё 27 cases, detect_leaks=0. Пакеты обоих
+серверов опубликованы через Git, проверены 206 artifact hashes и gzip payloads.
+Подключение ControllerVersion=2, структурные адаптеры и
+полная алгоритмическая матрица всё ещё нужны. См. [BoundedTraining](BoundedTraining.ru.md).
 
 ## Исходная точка
 

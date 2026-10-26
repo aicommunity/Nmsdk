@@ -69,5 +69,18 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 | TL-021 | native probe lifecycle validation | root 2298736b2a801323ffc101f93ef9dfe55161c85d на M40: Neuron.Reset во время Classic/Branch пробы не менял semantic hash, но наблюдение ошибочно оставалось valid; a8 root d5e122b4d32e2fc5214c74ae4e28f1b40edb0081 дополнительно выявил обход BeforeUnInit в UContainer | исправлено process-local lifecycle observations и live graph membership; 34 native cases, четыре full CTest suites и восемь legacy A/B на каждом сервере, M40 ASan 51+4. Evidence в s07-native-executor-elder1/m40. Прямые Init/UnInit сохраняют штатный обход hooks. Дефект нового адаптера, не ошибочность Reset модели; NativeExecution.ru.md |
 | TL-022 | peak labels, whole-burst assignment and physical ownership | WindowOnly принимает задержанную раннюю волну под ID следующего стимула; native ISI=1 мс сливает два стимула в один максимум; одной подписи недостаточно также для physical channel/Branch selector | schema 3 и физические guards проверены: root 2b97f4fbb74776a8f44f254a5910fe59ba1e51f4, 46 адресных checks и 4 full CTest suites на обоих серверах, M40 ASan 48. После переноса model API root 4bd02ff03a6169a92a579b0fa27b40d05aaf0354: 61 addressed cases, 60 pass + helper skip. Git-пакеты s07-burst-final/combined-elder1/m40. Broad physics applicability и configured dispatch ещё открыты; BurstAssignment.ru.md. Исторические criteria не переписываются |
 
+TL-023: в native Branch совпадающие точки подключения являются одним физическим
+банком. В readback root 067a4dba91b0e1a2bca83d8c73850baa9c0aa9b7 на обоих серверах
+N0 requested Ns=[1,2] реализован как общий Ns=2, N1 requested Rs=[86e6,43e6]
+не реализуется как два независимых сопротивления. Поэтому новый controller
+принимает эффективные значения банка и запрещает несовместимую локальную
+поправку, скрыто меняющую другой вход или anchor. При разрешённом росте позиции
+могут разделиться; при фиксированных позициях остаётся честный unresolved.
+Legacy поведение не переписано. Один тест A3 предполагал последний writer до
+Reset, но реальный Reset/mute выбирает другую запись: исходный failure сохранён,
+fixture A4 проверяет сам shared bank и фактические значения. Это не опровержение
+исторических результатов. Пакеты s07-bounded-elder1/m40, 27 targeted M40 ASan
+checks с detect_leaks=0 и документ BoundedTraining.ru.md.
+
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.

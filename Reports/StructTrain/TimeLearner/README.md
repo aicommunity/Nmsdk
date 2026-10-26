@@ -38,6 +38,7 @@ test report is not a trained-model result.
 | Sole PulseLib owner of native graph identity/readback/archive; addressed linkage and process controls | [Elder-1](s06-model-owner-elder1/README.md), [M40](s06-model-owner-m40/README.md) |
 | Whole-burst schema 3, merged-response counterexample and physical input ownership | [Elder-1 full](s07-burst-final-elder1/README.md), [M40 full/ASan](s07-burst-final-m40/README.md) |
 | Combined shared model API and schema-3 observations: native waveform/identity checks | [Elder-1](s07-burst-combined-elder1/README.md), [M40](s07-burst-combined-m40/README.md) |
+| Bounded candidate controller, actual R normalization and shared Branch bank readback | [Elder-1](s07-bounded-elder1/README.md), [M40 + targeted ASan](s07-bounded-m40/README.md) |
 
 Acceptance scope and pending controls are tracked in
 [Stage04-Progress](../../../Docs/StructTrain/TimeLearner/Stage04-Progress.ru.md) and
