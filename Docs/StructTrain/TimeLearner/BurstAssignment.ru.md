@@ -59,3 +59,16 @@ Single-pulse characterization остаётся отдельной пробой, 
 Существующий native executor принимает schema 3 через тот же scheduler/reset/
 routing путь. Проверки реальных Classic/Branch при 2000/20000 готовятся отдельно
 от контролируемого примера; до их результата численная интеграция не заявляется.
+
+## Промежуточные результаты
+
+Root a312505 (полный SHA в runtime manifest) на M40 прошёл 40 адресных tests:
+семь контролируемых assignment cases, 14 recorder regressions, 15 final-verifier
+cases и четыре native Classic/Branch × 2000/20000. Это ещё не full CTest или
+полная физическая матрица. Elder-1 тот же снимок продолжает проверять.
+
+В следующем диагностическом fixture два стимула разделены 1 мс, без изменения
+storage physics. Сравниваются WindowOnly и OrderedWholeBurst на настоящем
+нейроне: ожидаемое слияние двух волн должно оставаться явным missing/ambiguous
+assignment, даже если локальное окно содержит измеримый максимум. Первичные
+CSV/JSON сохраняются раздельно; результат этого нового fixture ещё не получен.
