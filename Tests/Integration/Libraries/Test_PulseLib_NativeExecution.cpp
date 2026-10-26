@@ -395,6 +395,18 @@ TEST(NativeBurstAssignment, MergedBranchWindowOnly2000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,2,true);}
 TEST(NativeBurstAssignment, MergedBranchWholeBurst2000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,true);}
+TEST(NativeBurstAssignment, ClassicSingle2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,1,3);}
+TEST(NativeBurstAssignment, BranchSingle2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,1,3);}
+TEST(NativeBurstAssignment, ClassicFour2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,4,3);}
+TEST(NativeBurstAssignment, BranchFour2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,4,3);}
+TEST(NativeBurstAssignment, ClassicSix2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,6,3);}
+TEST(NativeBurstAssignment, BranchSix2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,6,3);}
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeLearnerExecution,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
