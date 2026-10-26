@@ -103,5 +103,21 @@ search; root 4a27a579b5fff61e025ed200f627aa0482f06e1a дополнительно
 native [1,1,1,1] → [2,2,2,1] и свежую пробу на обоих серверах. Полный native cold
 Train и scientific matrix ещё не проверены. BoundedTraining.ru.md.
 
+TL-026: native InputParameters представляет одно Rs на банк, но исходный readback
+читал только ExcSynapse1. Неоднородный банк нельзя представлять этим значением.
+Дополнительно Transform применял learned Rs только первому синапсу: новые члены
+N0 банка могли сохранять сопротивление storage вместо объявленного Rs входа.
+Это code findings нового edit API, а не runtime-объяснение старых экспериментов.
+PulseLib 8f8620836ae0453dfc6140f1a6e7e1369f107f51 запрещает lossy readback;
+a87fdd56f677b421d498dbe4cffcb257c19a0159 применяет Rs ко всему owned-банку
+и проверяет complete readback preview. Root
+1044112a3f26c9cc37fb36ce0e0af402ebb627de: 41 addressed pass на каждом сервере,
+2 M40 ASan. Root 1e980f9103920c6012afe810d1e4be23929c80dc: 43 addressed pass
+на каждом сервере, 4 M40 ASan (detect_leaks=0). Проверены сохранность rejected
+heterogeneous bank и declared bank Rs после growth/shrink при 2000/20000.
+Исходный runtime failure именно этого Rs-дефекта не воспроизводился отдельным
+старым бинарником; evidence подтверждает исправленный путь и отрицательный guard.
+NativeModelEdits.ru.md и Git-пакеты s07-native-edits-elder1/m40.
+
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
