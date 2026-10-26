@@ -16,8 +16,9 @@ using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
+enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild };
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,bool resetDuringProbe=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -25,7 +26,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,bool 
     ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();ASSERT_TRUE(model);
     core.environment->GetTime().SetTime(0);
     const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_native_executor"+
-        (resetDuringProbe?"_physical_reset":"");
+        (interference==Interference::None?"":"_fault"+std::to_string(int(interference)));
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
@@ -92,18 +93,42 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,bool 
     {
         ASSERT_LT(ticks++,frequency);
         model->Calculate();core.environment->IncreaseModelTimeByStep();
-        if(resetDuringProbe && ticks==frequency/25)
+        if(interference!=Interference::None && ticks==frequency/25)
         {
-            const auto physicalBefore=readRevision();neuron->Reset();
-            EXPECT_EQ(readRevision(),physicalBefore); // Same spec, different physical history.
+            switch(interference)
+            {
+            case Interference::PhysicalReset:
+            {
+                const auto physicalBefore=readRevision();neuron->Reset();
+                EXPECT_EQ(readRevision(),physicalBefore); // Same spec, different physical history.
+                break;
+            }
+            case Interference::SourceAmplitude:generator->Amplitude=1.5;break;
+            case Interference::SourceFrequency:generator->Frequency=100.;break;
+            case Interference::Pattern:
+                learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true)->MatrixData(0,0)=.02;break;
+            case Interference::DeleteSynapse:
+                neuron->template GetComponentL<NPulseMembrane>("Dendrite1_1",true)->DelComponent("ExcSynapse1",true);break;
+            case Interference::ExternalStop:
+                learner->IsNeedToTrain=false;EXPECT_EQ(learner->InputPattern(0,0),.01);
+                EXPECT_EQ(learner->TrainingPhase.GetData(),phase);EXPECT_EQ(readRevision(),base);break;
+            case Interference::OwnerBuild:
+                learner->DendriteLength=std::vector<int>{2,1};learner->Build();break;
+            case Interference::None:break;
+            }
         }
     }
     const auto result=learner->TakeNativeProbeResult();ASSERT_TRUE(result);
     for(const auto& reason:result->reasons)std::cout<<name<<" adapter_reason="<<reason<<std::endl;
-    if(resetDuringProbe)
+    if(interference!=Interference::None)
     {
-        EXPECT_EQ(result->status,NativeProbeStatus::Rejected);
+        const auto expected=interference==Interference::ExternalStop || interference==Interference::OwnerBuild
+            ?NativeProbeStatus::Cancelled:NativeProbeStatus::Rejected;
+        EXPECT_EQ(result->status,expected);
         if(result->observation)EXPECT_FALSE(result->observation->valid);
+        EXPECT_TRUE(result->requiresFreshVerification);
+        EXPECT_TRUE(learner->NativeProbeOwnsControl());
+        if(interference==Interference::DeleteSynapse)EXPECT_TRUE(result->currentBaseRevision.empty());
         dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();return;
     }
     ASSERT_EQ(result->status,NativeProbeStatus::Completed);
@@ -146,7 +171,27 @@ INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeLearnerExecution,::testing::Va
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
 TEST(NativeLearnerProbeInvalidation, ClassicPhysicalResetWithUnchangedModelHash)
-{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,true); }
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::PhysicalReset); }
 TEST(NativeLearnerProbeInvalidation, BranchPhysicalResetWithUnchangedModelHash)
-{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,true); }
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::PhysicalReset); }
+TEST(NativeLearnerProbeInvalidation, ClassicSourceAmplitudeChange)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::SourceAmplitude); }
+TEST(NativeLearnerProbeInvalidation, BranchSourceAmplitudeChange)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::SourceAmplitude); }
+TEST(NativeLearnerProbeInvalidation, ClassicSourceFrequencyChange)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::SourceFrequency); }
+TEST(NativeLearnerProbeInvalidation, BranchPatternChange)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::Pattern); }
+TEST(NativeLearnerProbeInvalidation, ClassicDeletedSynapse)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::DeleteSynapse); }
+TEST(NativeLearnerProbeInvalidation, BranchDeletedSynapse)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::DeleteSynapse); }
+TEST(NativeLearnerProbeInvalidation, ClassicExternalStopPreservesTargetAndThreshold)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::ExternalStop); }
+TEST(NativeLearnerProbeInvalidation, BranchExternalStopPreservesTargetAndThreshold)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::ExternalStop); }
+TEST(NativeLearnerProbeInvalidation, ClassicImplicitResetDuringBuildKeepsControl)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::OwnerBuild); }
+TEST(NativeLearnerProbeInvalidation, BranchImplicitResetDuringBuildKeepsControl)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::OwnerBuild); }
 }
