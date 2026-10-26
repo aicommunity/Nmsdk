@@ -288,33 +288,65 @@ UEPtr<UContainer> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> stor
         Fail("native_model_load_failed", object->GetName().c_str());
     object->Init();
     const auto bindings = snapshot["identity"].toObject()["model"].toObject()["bindings"].toArray();
+    std::set<QString> portTargets;
     for(const auto& entry : bindings)
+        if(entry.toObject()["kind"].toString() == "stimulus_port") portTargets.insert(entry.toObject()["target"].toString());
+    auto endpoint = [&](const QString& path) -> std::pair<UEPtr<UContainer>,std::string> {
+        const auto separator = path.lastIndexOf(':'); const auto component = path.left(separator);
+        if(separator < 1 || (component != "$" && !component.startsWith("$."))) Fail("invalid_boundary_binding",path);
+        auto owner = component == "$" ? static_pointer_cast<UContainer>(object) : object->GetComponentL(component.mid(2).toStdString(),true);
+        return {owner,path.mid(separator+1).toStdString()};
+    };
+    for(const auto& target : portTargets)
     {
-        const auto binding = entry.toObject();
-        if(binding["kind"].toString() != "stimulus_port") continue;
-        const auto target = binding["target"].toString(); const auto separator = target.lastIndexOf(':');
-        const auto path = target.left(separator); const auto name = target.mid(separator+1).toStdString();
-        bool ok = false; const int slot = binding["slot"].toString().toInt(&ok);
-        auto source = outputs.find(binding["source"].toString());
-        if(separator < 1 || (path != "$" && !path.startsWith("$.")) || !ok || slot < 0 ||
-           slot >= bindings.size() || source == outputs.end()) Fail("invalid_boundary_binding", target);
-        UEPtr<UContainer> owner = path == "$" ? static_pointer_cast<UContainer>(object) : object->GetComponentL(path.mid(2).toStdString(),true);
+        auto destination = endpoint(target); auto owner = destination.first; const auto& name = destination.second;
         auto property = owner ? owner->FindProperty(name) : UEPtr<UIProperty>();
         auto input = property ? dynamic_cast<UIPropertyInput*>(property.Get()) : nullptr;
-        auto sourceItem = dynamic_cast<UItem*>(source->second->GetOwner());
         auto connector = dynamic_pointer_cast<UConnector>(owner);
-        int actualSlot = slot;
-        if(!input || !(property->GetType() & ptInput) || !sourceItem || !connector)
+        if(!input || !(property->GetType() & ptInput) || !connector || input->UsesExternalDataSource())
             Fail("boundary_binding_failed", target + ": invalid native endpoint");
-        if(!sourceItem->IsReady() || !sourceItem->IsInit())
-            Fail("boundary_binding_failed", target + ": source not initialized and ready");
-        // Native Load/Build may already have restored the same connection.
-        // Connect is idempotent for that pair; forced duplication would append
-        // a second native slot even though the expected port is unchanged.
-        if(!sourceItem->Connect(connector,source->second->GetName(),name,actualSlot,false))
-            Fail("boundary_binding_failed", target + ": native Connect failed");
-        if(actualSlot != slot)
-            Fail("boundary_binding_failed", target + QString(": expected slot %1, native slot %2").arg(slot).arg(actualSlot));
+        // Build may supply the profile's default source. This explicitly
+        // declared input owns its complete archived slot list, including any
+        // internal sources mixed with ports. Other inputs are left to native
+        // Load/Build and the final complete graph comparison.
+        std::vector<UCItem> previous; connector->GetCItem(name,previous);
+        for(int i=int(previous.size())-1;i>=0;--i)
+            previous[i].Item->Disconnect(connector,previous[i].Name,name,i);
+        const auto direct = input->GetDataSources();
+        for(int i=int(direct.size())-1;i>=0;--i)
+            if(!input->ResetPointer(i,const_cast<UIPropertyOutput*>(dynamic_cast<const UIPropertyOutput*>(direct[i]))))
+                Fail("boundary_binding_failed",target + ": cannot detach previous direct source");
+        std::map<int,QJsonObject> expected;
+        for(const auto& entry : bindings)
+        {
+            const auto binding = entry.toObject();
+            if(binding["target"].toString() != target) continue;
+            bool ok=false; const int slot=binding["slot"].toString().toInt(&ok);
+            if(!ok || slot < 0 || slot >= bindings.size() || !expected.emplace(slot,binding).second)
+                Fail("invalid_boundary_binding",target);
+        }
+        int next=0;
+        for(const auto& entry : expected)
+        {
+            if(entry.first != next++) Fail("invalid_boundary_binding",target + ": noncontiguous slots");
+            const auto binding=entry.second; UIPropertyOutput* output=nullptr;
+            if(binding["kind"].toString() == "stimulus_port")
+            {
+                auto source=outputs.find(binding["source"].toString());
+                if(source != outputs.end()) output=source->second;
+            }
+            else if(binding["kind"].toString() == "property_pointer")
+            {
+                auto source=endpoint(binding["source"].toString());
+                if(source.first) output=dynamic_cast<UIPropertyOutput*>(source.first->FindProperty(source.second).Get());
+            }
+            auto sourceItem=output ? dynamic_cast<UItem*>(output->GetOwner()) : nullptr;
+            if(!sourceItem || !sourceItem->IsReady() || !sourceItem->IsInit())
+                Fail("boundary_binding_failed",target + ": missing/unready source");
+            int actualSlot=entry.first;
+            if(!sourceItem->Connect(connector,output->GetName(),name,actualSlot,true) || actualSlot != entry.first)
+                Fail("boundary_binding_failed",target + ": native Connect slot mismatch");
+        }
     }
     RequireMatch(snapshot["identity"].toObject(), object,boundarySources);
     return lease.Release();
