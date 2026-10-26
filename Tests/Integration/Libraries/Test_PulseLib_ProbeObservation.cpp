@@ -130,6 +130,15 @@ TEST(TimeLearnerProbe, RejectsUnknownSchemaAndInvalidWindowOrDimensions)
     s=Specification();s.windows[0].end=2.;EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
     s=Specification();s.expectedStimulusIds={"pulse","pulse"};EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
     s=Specification();s.modelRevision.clear();EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=Specification();s.begin=-1e308;s.end=1e308;EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
+
+TEST(TimeLearnerProbe, FiniteTimestampsCannotHideAnOverflowedInterval)
+{
+    ProbeRecorder recorder(Specification());recorder.Observe(-1e308,{2.},"model_1");
+    recorder.Observe(1e308,{2.},"model_1");
+    auto result=recorder.Close(1.,"model_1","closed");
+    EXPECT_FALSE(result.valid);EXPECT_TRUE(Has(result,"nonfinite_sample_interval"));
 }
 
 TEST(TimeLearnerProbe, PeakBeforeActualStimulusCannotBecomeAnAcceptedDelay)
