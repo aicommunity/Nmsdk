@@ -67,7 +67,12 @@ Exact/warm/Reset, остановки и бюджеты прошли. Failure в�
 base revision, хотя модель ещё не была подготовлена и revision был unknown.
 Следующая правка сохраняет исходную причину первой и различает unavailable
 и changed revision. Она также переносит общий bounds/protocol preflight до
-первых reference-проб. Проверка этой правки ещё не является выполненной.
+первых reference-проб. Root 2fd45d4424360d7834ba094f875ddeda678c1625 прошёл
+65 адресных cases на обоих серверах: 11 service, 11 bounded kernel, 17 final
+verification, четыре native editor, 20 прежних lifecycle invalidation и два
+шестивходовых controls. M40 ASan проверяется отдельно. Дополнение root
+27068892e86095e67feb2a4bf904ca5171c090d1 сохраняет также полные reference
+observations после Reset/warm restart; его отдельная проверка ещё выполняется.
 
 Exact/warm control намеренно использует фиксированную структуру и sync tolerance
 0.2 с: это проверка orchestration и lifecycle, не сходимость при default 0.02 с.
@@ -80,3 +85,18 @@ checkpoint/export bindings, полный физический и inhibition на
 conversion/PostTune/calibration, runner и научная матрица. Временный API явно
 отклоняет запрошенные C-trim/PostTune/calibration и UseElementDefaults=true;
 поддержка этих режимов остаётся целью, а не отменяется этим ограничением.
+
+Перед scientific matrix требуется закрыть ещё две конкретные задачи. Окна
+контрольного fixture [onset,onset+0.065] нельзя переносить в production как
+универсальное правило: корректная кабельная задержка может превосходить это
+окно или следующий ISI. Нужна явная проверенная политика измерения assigned
+whole-burst wave либо revision-bound адаптация окна с ограниченным recovery;
+прогноз задержки не должен подтверждать существование пика. Текущий service API
+принимает объявленные caller окна и не заявляет такого автоматического решения.
+
+Также full semantic identity сейчас вычисляется до/после каждого native tick.
+Шестивходовой Classic control при 2000 Гц занимает примерно 150 секунд wall
+на 1.29 секунды model time. До большой матрицы следует измерить этот overhead
+и реализовать эквивалентный typed observer параметров/связей/кэшей, сохранив
+строгую проверку полной ревизии на границах. Нельзя заменять её константным
+hash, округлёнными строками или недоказанным счётчиком только собственных edits.
