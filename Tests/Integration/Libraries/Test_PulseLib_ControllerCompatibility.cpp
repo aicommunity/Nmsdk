@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
-#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGeneratorTransit.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QCryptographicHash>
 #include <QJsonDocument>
@@ -31,7 +30,7 @@ template<class Learner> QJsonObject State(UEPtr<Learner> learner, unsigned tick)
         {"synapses",Array(learner->NumSynapse.GetData())},
         {"tip_rs",Array(learner->TipSynapseResistance.GetData())},
         {"references",Array(learner->InitialSomaPotential.GetData())},
-        {"iteration",learner->StimulusIterTrace.GetSize() ? learner->StimulusIterTrace(0,0) : -1.},
+        {"iteration",learner->StimulusIterTrace.GetData().GetSize() ? learner->StimulusIterTrace(0,0) : -1.},
         {"failure",learner->TrainingFailureReason.GetData()}};
 }
 
@@ -86,7 +85,7 @@ template<class Learner> void Run(const Case& spec, const QString& name)
             ASSERT_TRUE(std::isfinite(value)); HashDouble(waveform,value);
             low=std::min(low,value); high=std::max(high,value);
         }
-        const double iteration=learner->StimulusIterTrace.GetSize() ? learner->StimulusIterTrace(0,0) : -1.;
+        const double iteration=learner->StimulusIterTrace.GetData().GetSize() ? learner->StimulusIterTrace(0,0) : -1.;
         if(iteration != previousIteration)
         {
             events.append(State(learner,tick)); previousIteration=iteration;
