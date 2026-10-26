@@ -88,9 +88,11 @@ CSV/JSON сохраняются раздельно. Root 9d795e2d1142868b01d72fd
 нейрона для распознавания. Root 9357c93 прошёл на обоих серверах ещё шесть
 native schema 3 controls: Classic/Branch × N=1/4/6 при 2000 Гц. N=1 проходит
 реальную повторную FinalVerification с Exact constraint certificate; N=4/6
-проверяют всю последовательность на каждом используемом канале. Full CTest
-на обоих серверах и адресный M40 ASan запущены; их итог и публикация пакета
-пока ожидаются. Подэтап не объединён в develop.
+проверяют всю последовательность на каждом используемом канале. Для этого
+снимка прошли четыре maintained CTest suites на обоих серверах (PulseLib 269:
+260 pass, 9 standard skips) и 44 адресных M40 ASan tests с detect_leaks=0.
+Пакеты s07-burst-elder1/m40 опубликованы в Git; проверены 440 artifact hashes.
+Эти результаты относятся к 9357c93 до дополнительных owner guards.
 
 Отдельный анализ первичных файлов на обоих серверах подтвердил побайтовое
 совпадение CSV WindowOnly/WholeBurst и одинаковые actual stimulus timestamps
@@ -98,3 +100,11 @@ native schema 3 controls: Classic/Branch × N=1/4/6 при 2000 Гц. N=1 про
 s07-burst-merged-waveform-comparison.json. Execution status в обоих режимах
 completed: меняется validity наблюдения, а не факт исполнения окна. Этот
 пример не меняет исторический критерий и не отменяет августовские 4/8–6/8.
+
+Усиленная привязка physical input проверена отдельно на root
+2b97f4fbb74776a8f44f254a5910fe59ba1e51f4 / PulseLib
+e46a00b2dbb11c54daf727ede0d14ba60a8e6552: 46 адресных tests прошли на обоих
+серверах. Неправильный Classic channel и Branch selector дают ожидаемые
+native_input_channel_mismatch/native_solo_selector_mismatch до arm и до первого
+sample. Full CTest и новый ASan этого снимка выполняются отдельно. Подэтап пока
+не объединён в develop; older manifests не переименовываются в новую closure.
