@@ -24,6 +24,95 @@ bool Has(const ProbeObservation& o,const std::string& reason)
 { return std::find(o.reasons.begin(),o.reasons.end(),reason)!=o.reasons.end(); }
 const std::vector<double> onePeak{0.,0.,0.,.01,.02,.02,.01,0.,0.,0.,0.};
 
+ProbeSpec BurstSpecification(unsigned schema=3)
+{
+    auto s=Specification();s.schemaVersion=schema;s.maximumSampleGap=.05;s.maximumSamples=21;
+    s.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+    s.expectedStimulusIds={"p0","p1"};s.windows={{"i1",0,.3,.55,"p1"}};
+    if(schema==3)s.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+    return s;
+}
+std::vector<double> TwoWaves()
+{
+    std::vector<double> v(21,0.);v[7]=.01;v[8]=.02;v[9]=.01;
+    v[15]=.015;v[16]=.03;v[17]=.015;return v;
+}
+ProbeObservation BurstObservation(ProbeSpec s,std::vector<double> v=TwoWaves(),
+    std::vector<StimulusObservation> events={{"p0",.1},{"p1",.3}})
+{
+    ProbeRecorder recorder(s);
+    for(std::size_t i=0;i<v.size();++i)recorder.Observe(double(i)/20.,{2.+v[i]},"model_1");
+    for(const auto& event:events)recorder.RecordStimulus(event.id,event.time);
+    return recorder.Close(1.,"model_1","closed");
+}
+TEST(TimeLearnerBurstAssignment, HistoricalWindowOnlyCanMislabelAnEarlierDelayedWave)
+{
+    const auto old=BurstObservation(BurstSpecification(2));
+    ASSERT_TRUE(old.valid);ASSERT_EQ(old.peaks.size(),1u);
+    EXPECT_EQ(old.peaks[0].stimulusId,"p1");EXPECT_DOUBLE_EQ(*old.peaks[0].time,.4);
+    // This constructed trace's p0 wave is at .4, p1 wave at .8. A window
+    // label and positive delay alone do not establish the wave's origin.
+    const auto current=BurstObservation(BurstSpecification());
+    EXPECT_FALSE(current.valid);EXPECT_TRUE(current.complete);
+    EXPECT_TRUE(Has(current,"burst_window_assignment_mismatch:i1"));
+    EXPECT_EQ(current.peaks[0].validity,PeakValidity::Ambiguous);EXPECT_FALSE(current.peaks[0].time);
+    ASSERT_EQ(current.burstAssignments.size(),1u);ASSERT_EQ(current.burstAssignments[0].waves.size(),2u);
+    EXPECT_EQ(current.burstAssignments[0].waves[0].stimulusId,"p0");
+    EXPECT_EQ(current.burstAssignments[0].waves[1].stimulusId,"p1");
+}
+TEST(TimeLearnerBurstAssignment, UsesMeasuredWholeSequenceWithCorrectWindow)
+{
+    auto s=BurstSpecification();s.windows[0].begin=.7;s.windows[0].end=.9;
+    const auto o=BurstObservation(s);ASSERT_TRUE(o.valid);ASSERT_EQ(o.peaks.size(),1u);
+    EXPECT_DOUBLE_EQ(*o.peaks[0].time,.8);EXPECT_DOUBLE_EQ(*o.peaks[0].rawPotential,2.03);
+    EXPECT_DOUBLE_EQ(*o.peaks[0].delayFromStimulus,.8-.3);
+}
+TEST(TimeLearnerBurstAssignment, MissingAndExtraWavesCannotBeRelabelled)
+{
+    auto missing=TwoWaves();missing[15]=missing[16]=missing[17]=0.;
+    const auto m=BurstObservation(BurstSpecification(),missing);
+    EXPECT_FALSE(m.valid);EXPECT_EQ(m.peaks[0].validity,PeakValidity::Missing);
+    EXPECT_TRUE(Has(m,"burst_missing:0"));
+    auto extra=TwoWaves();extra[2]=.01;
+    const auto e=BurstObservation(BurstSpecification(),extra);
+    EXPECT_FALSE(e.valid);EXPECT_EQ(e.peaks[0].validity,PeakValidity::Ambiguous);
+    EXPECT_TRUE(Has(e,"burst_ambiguous:0"));
+    for(const auto& w:e.burstAssignments[0].waves)EXPECT_TRUE(w.stimulusId.empty());
+}
+TEST(TimeLearnerBurstAssignment, BoundaryAndPlateauRemainMeasured)
+{
+    auto clipped=TwoWaves();clipped[15]=clipped[16]=clipped[17]=0.;
+    clipped[18]=.01;clipped[19]=.02;clipped[20]=.03;
+    const auto c=BurstObservation(BurstSpecification(),clipped);
+    EXPECT_FALSE(c.valid);EXPECT_TRUE(Has(c,"burst_clipped:0"));
+    auto s=BurstSpecification();s.windows[0].inputId="i0";s.windows[0].stimulusId="p0";
+    auto plateau=TwoWaves();plateau[9]=.02;plateau[10]=.01;
+    const auto p=BurstObservation(s,plateau);ASSERT_TRUE(p.valid);
+    EXPECT_DOUBLE_EQ(*p.peaks[0].time,.4);EXPECT_DOUBLE_EQ(*p.peaks[0].plateauEnd,.45);
+}
+TEST(TimeLearnerBurstAssignment, SourceOrderAndSimultaneousEventsDoNotCreateAnAssignment)
+{
+    for(const auto& events:std::vector<std::vector<StimulusObservation>>{
+        {{"p1",.1},{"p0",.3}},{{"p0",.1},{"p1",.1}}})
+    {
+        const auto o=BurstObservation(BurstSpecification(),TwoWaves(),events);
+        EXPECT_FALSE(o.valid);EXPECT_TRUE(Has(o,"burst_ambiguous:0"));
+    }
+}
+TEST(TimeLearnerBurstAssignment, ExplicitSchemaCannotRetroactivelyChangeHistoricalCriteria)
+{
+    auto s=BurstSpecification();s.schemaVersion=2;EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s.schemaVersion=3;s.waveAssignment=WaveAssignmentPolicy::WindowOnly;EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;s.stimulusProfile.reset();EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
+TEST(TimeLearnerBurstAssignment, SamplesOutsideTheDeclaredBurstDoNotAddAResponseWave)
+{
+    auto s=BurstSpecification();s.begin=.2;s.windows[0].begin=.7;s.windows[0].end=.9;
+    auto trace=TwoWaves();trace[2]=.01;
+    const auto o=BurstObservation(s,trace,{{"p0",.3},{"p1",.5}});
+    ASSERT_TRUE(o.valid);EXPECT_EQ(o.burstAssignments[0].waves.size(),2u);
+}
+
 TEST(TimeLearnerProbe, UsesExplicitRestStateAndMeasuredPlateauWithoutInterpolation)
 {
     auto s=Specification();s.windows.clear();

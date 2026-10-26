@@ -23,6 +23,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Общий контроллер: подготовка baseline и оставшиеся изменения](Stage06-Progress.ru.md).
 - [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
 - [Нативный исполнитель проб Classic/Branch: рабочий подэтап и gates](NativeExecution.ru.md).
+- [Полная последовательность волн и physical input ownership: schema 3](BurstAssignment.ru.md).
 - [Фактические события генератора, пустая история и Multi dimensions](../../../Libraries/Nmsdk-PulseLib/Docs/Analysis/TimeLearnerPulseEvents.ru.md).
 - [Финальная верификация всех входов и привязка сертификата](FinalVerification.ru.md).
 - [Явные физические storage-профили](../../../Libraries/Nmsdk-PulseLib/Docs/Analysis/TimeLearnerStorageProfiles.ru.md).
