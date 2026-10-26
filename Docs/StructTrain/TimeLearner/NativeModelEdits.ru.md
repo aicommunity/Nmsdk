@@ -90,6 +90,15 @@ PulseLib и добавляет native fixture четырёх входов. На 
 этого снимка и ASan нового fixture выполняются отдельно; результат будет
 зафиксирован в evidence без переноса статуса от предыдущего снимка.
 
+Адресные попытки опубликованы через Git:
+[Elder-1](../../../Reports/StructTrain/TimeLearner/s07-native-edits-elder1/README.md),
+[M40](../../../Reports/StructTrain/TimeLearner/s07-native-edits-m40/README.md).
+Проверены 1079 artifact hashes и raw gzip payloads. ASan нового four-input
+fixture также прошёл (1/1); detect_leaks=0. Диагностический probe JSON этих
+fixtures не является полным production serializer: точный протокол находится
+в immutable source, первичные временные ряды — в CSV. На основании отсутствующих
+полей нельзя достраивать доказательства полноценного научного run.
+
 Возможность перестроения сетки Rs по новым границам для каждого предложенного L,
 продолжение поиска после всех физических ограничений, полная матрица inhibition,
 конфигурационный dispatch и export состояния остаются частью общего плана.

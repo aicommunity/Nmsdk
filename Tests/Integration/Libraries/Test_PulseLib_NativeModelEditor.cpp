@@ -217,6 +217,33 @@ TEST(NativeModelEditor, CoupledColdBranchFourInputsUseSharedPhysicalBanks)
     Artifact(rig.name+"_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
 }
 
+template<class Learner> void CheckHeterogeneousBank()
+{
+    EditingRig<Learner> rig(2000,0,"heterogeneous_bank");
+    const auto first=rig.Probe();ASSERT_EQ(first.status,NativeProbeStatus::Completed);
+    auto values=rig.learner->ReadNativeParameters();values[0].synapses=2;
+    const auto edit=rig.learner->ApplyNativeParameters(values);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    auto second=rig.neuron->template GetComponentL<NPulseSynapse>("Dendrite1_2.ExcSynapse2",true);ASSERT_TRUE(second);
+    second->Resistance=values[0].resistance*1.1;
+    const auto before=rig.Revision();
+    EXPECT_THROW(rig.learner->ReadNativeParameters(),std::runtime_error);
+    const auto rejected=rig.learner->ApplyNativeParameters(values);
+    EXPECT_EQ(rejected.status,NativeEditStatus::Rejected);
+    EXPECT_EQ(rejected.reason,"heterogeneous_native_input_bank_resistance");
+    EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(rig.Revision(),before);
+    EXPECT_EQ(second->Resistance.GetData(),values[0].resistance*1.1);
+    Artifact(rig.name+"_rejection.json",QJsonDocument(QJsonObject{
+        {"status",NativeEditStatusName(rejected.status)},{"reason",QString::fromStdString(rejected.reason)},
+        {"may_have_changed",rejected.modelMayHaveChanged},{"before",QString::fromStdString(before)},
+        {"after",QString::fromStdString(rig.Revision())},
+        {"first_rs",values[0].resistance},{"second_rs",second->Resistance.GetData()}}).toJson());
+}
+
+TEST(NativeModelEditor,HeterogeneousClassicBankCannotBeFlattened)
+{ CheckHeterogeneousBank<NNeuronTimeLearner>(); }
+TEST(NativeModelEditor,HeterogeneousBranchBankCannotBeFlattened)
+{ CheckHeterogeneousBank<NNeuronTimeLearnerBranch>(); }
+
 TEST(NativeIntegration, ActualSecretionWeightPsiAndTimeStepAreUsed)
 {
     EditingRig<NNeuronTimeLearner> rig(2000,0,"integration_bound");
