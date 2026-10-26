@@ -51,7 +51,7 @@ Spike API проверен адресно; native spike capture/recognition зд
 
 На root 0ade87374662709ca40720b16be2e4d280e9d50d адресные 17 checks проходили,
 но полный CTest на обоих серверах не мог зарегистрировать пять новых neuron
-profiles. Диагностический root 69e2df9 с Rdk
+profiles. Диагностический root 69e2df9c0c2cf4d256ea649a01e7ebd7af18c1ee с Rdk
 84920e75e07f3940e5f30ea3c7dc2eab26657aa6 уточнил причину:
 `$:TimeStep:property_type(expected=769,actual=513)`.
 
@@ -78,7 +78,7 @@ type bits и численная частота не исключаются. Пр
 copy diagnostic называет узел/свойство/типы без вывода значений произвольных
 параметров. Это исправления владельца Rdk, а не learner-specific wakeup logic.
 
-## Оставшиеся ограничения
+## Проверки и артефакты
 
 Финальный проверенный root: 2cc43c02df48c071194bc056739d0d77850d0d28,
 PulseLib a30bc0cd559eaf9f7ed9bf29b068358f1879ad9b,
@@ -97,6 +97,12 @@ XML/logs, исходные полные failing suites и cross-mode failure. Н
 исходных timestamps. Успешные и неуспешные промежуточные сборки подписаны
 собственной source closure и не выдаются за финальный tested root.
 
+## Оставшиеся ограничения
+
+CapturedPerInput сохраняет сравнение с rawPotential, соответствующим прежней
+InitialSomaPotential. Дополнительное amplitude=peak−baseline нельзя молча
+превращать в другую математическую цель. Новый recorder хранит оба значения.
+
 Recorder обнаруживает только revision, переданную адаптером. Cache требует
 владения всеми model edits; start/end hash сам по себе не доказывает отсутствия
 неучтённого изменения и восстановления внутри пробы. Native fixture использует
@@ -107,3 +113,16 @@ producer revision всей ModelSpec/reset policy ещё предстоит по
 историческим replay августа или доказательством сходимости. Ни valid peak,
 ни complete process не превращаются в Exact/Done. Августовские визуальные
 4/8–6/8 сохраняют свою доказательность исходного протокола.
+
+## Принятая Git closure
+
+| Репозиторий | Develop merge |
+|---|---|
+| Rdk | f924023e78eb2f0775cca301272606b98de0f8f1 |
+| PulseLib | dddd1d1187f22ff03832a5f44837a9ae47199b04 |
+| Bin | 1c1c2e5064373b47d523fd6735aebe6785f2787d — без изменений этого подэтапа |
+
+Child commits опубликованы до корневого merge. Production Core совпадает с
+проверенными e7690e4a (Rdk) и a30bc0cd (PulseLib); после них менялись только
+документы. Все 933 artifact hashes и gzip payloads проверены локально как
+данные; численные/интеграционные проверки выполнялись на указанных серверах.
