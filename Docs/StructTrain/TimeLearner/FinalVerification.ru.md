@@ -99,3 +99,13 @@ serialization и Train→Test, conversion/PostTune/calibration и общая м�
 JSON fixture не объявляется production exporter или controller checkpoint.
 Исторические августовские наблюдения 4/8–6/8 сохраняются отдельно от этих
 implementation checks.
+
+## Принятая Git closure
+
+PulseLib develop merge: bd79c6d62bd8a254b773e0b0fd9a393a5bb4c4e2,
+опубликован до корневого merge. Production Core совпадает с проверенным
+db78ded793330d95e617624e969ee72b42d75ab5; последующие child commits меняют
+документы. Rdk остаётся f924023e78eb2f0775cca301272606b98de0f8f1,
+Bin — 1c1c2e5064373b47d523fd6735aebe6785f2787d. Все 1034 опубликованных
+artifact hashes и gzip payloads проверены локально как данные; численные
+проверки выполнялись на указанных серверах.
