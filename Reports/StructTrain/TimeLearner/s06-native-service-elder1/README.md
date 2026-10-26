@@ -17,3 +17,8 @@ Production root module Scripts/StructTrain/TimeLearner/native_evidence.py audits
 This is an addressed integration run, not a repeated full CTest or the complete mode/physics matrix. Configured ControllerVersion=2/builders, adaptive or assigned-wave window policy, dynamic Rs domains, complete state import/export, C-trim, conversion/PostTune/calibration, experiment runner and scientific controls remain required. State summaries are diagnostics, not checkpoint files. Some stop/budget controls retain diagnostic packets without CSV and are not eligible as complete response trials.
 
 Tested source/runtime manifests are per attempt. Compressed-file checksums and uncompressed hashes are retained. Git is the sole transfer path.
+
+
+Auditor follow-up (version 2): source 036b3a072023801f0562ba306dfc8743776991f1 reproduces one expected test failure on this host. A fabricated widened isolated window containing both actual waves was accepted by auditor v1, although native C++ would classify that window as ambiguous. This was a validator gap; the previously published real narrow-window packets remain valid, and it is not evidence of a false native training certificate.
+
+Source 7c65d7c6ffa3991c2fa77e775a5fe9aec07dedd1 enforces the actual isolated-window maximum/plateau rule in addition to global whole-burst assignment. All 13 data/corruption tests pass. The same 56 real traces and four negative certificates are revalidated. New assigned-wave selection will require an explicit separately versioned policy; widening an old isolated window is not sufficient.
