@@ -20,7 +20,7 @@ using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
-enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild };
+enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit };
 
 template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2)
 {
@@ -65,9 +65,10 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     }
     const auto phase=learner->TrainingPhase.GetData();const auto need=learner->IsNeedToTrain.GetData();
     const NmsdkTools::ModelBoundarySources ports{{&generator->Output,"burst"}};
-    std::size_t revisionReads=0;
+    std::size_t revisionReads=0;bool revisionFailure=false;
     const auto readRevision=[&]() {
-        ++revisionReads;const auto identity=NmsdkTools::IdentifyModel(neuron,ports);
+        ++revisionReads;if(revisionFailure)throw std::runtime_error("injected_revision_failure");
+        const auto identity=NmsdkTools::IdentifyModel(neuron,ports);
         if(!identity["valid"].toBool())throw std::runtime_error("invalid_native_identity");
         return identity["sha256"].toString().toStdString();
     };
@@ -89,6 +90,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         if(!branch || int(i)==active)spec.windows.push_back({"input"+std::to_string(i),branch?0u:i,onsets[i]-.001,onsets[i]+.06,id});
     }
     request.onPrepared=[&](const PreparedVerificationProbe& declaration,const ProbeSpec& actual) {
+        if(interference==Interference::PrepareFailure)throw std::runtime_error("injected_prepare_failure");
         armed=true;EXPECT_EQ(declaration.baseModelRevision,base);
         EXPECT_EQ(actual.modelRevision,declaration.effectiveModelRevision);
         EXPECT_GE(actual.begin,1./frequency);
@@ -105,6 +107,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         }
     };
     request.onSample=[&](const NativeProbeSample& sample) {
+        if(interference==Interference::SampleFailure && sampled==10)throw std::runtime_error("injected_sample_failure");
         ++sampled;sourceEvents+=unsigned(sample.newStimuli.size());
         trace<<sample.time<<','<<sample.stimulus;
         for(const auto value:sample.potentials)trace<<','<<value;trace<<'\n';
@@ -138,6 +141,9 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             case Interference::OwnerBuild:
                 learner->DendriteLength=std::vector<int>{3,1};ASSERT_FALSE(learner->IsReady());learner->Build();break;
             case Interference::NoopOwnerBuild:learner->Build();break;
+            case Interference::RevisionFailure:revisionFailure=true;break;
+            case Interference::OwnerUnInit:learner->UnInit();break;
+            case Interference::PrepareFailure:case Interference::SampleFailure:break;
             case Interference::None:break;
             }
         }
@@ -176,7 +182,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     }
     if(interference!=Interference::None && interference!=Interference::NoopOwnerBuild)
     {
-        const auto expected=interference==Interference::ExternalStop || interference==Interference::OwnerBuild
+        const auto expected=interference==Interference::ExternalStop || interference==Interference::OwnerBuild || interference==Interference::OwnerUnInit
             ?NativeProbeStatus::Cancelled:NativeProbeStatus::Rejected;
         EXPECT_EQ(result->status,expected);
         if(result->observation)EXPECT_FALSE(result->observation->valid);
@@ -327,4 +333,14 @@ TEST(NativeLearnerDimensions, ClassicSixInputs2000)
 { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,6); }
 TEST(NativeLearnerDimensions, BranchSixInputs2000)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,6); }
+TEST(NativeLearnerProbeInvalidation, ClassicPreparationCallbackFailure)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::PrepareFailure); }
+TEST(NativeLearnerProbeInvalidation, BranchSampleSinkFailure)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::SampleFailure); }
+TEST(NativeLearnerProbeInvalidation, ClassicRevisionProviderFailure)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::RevisionFailure); }
+TEST(NativeLearnerProbeInvalidation, ClassicOwnerUnInitCancelsProbe)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::OwnerUnInit); }
+TEST(NativeLearnerProbeInvalidation, BranchOwnerUnInitCancelsProbe)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::OwnerUnInit); }
 }
