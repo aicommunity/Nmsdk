@@ -32,6 +32,30 @@
       "tests": 39
     }
   },
+  "auditor_window_regression": {
+    "auditor_version": 2,
+    "expected_failure": {
+      "errors": 0,
+      "expected_failure_reproducer": true,
+      "failures": 1,
+      "scope": "auditor incorrectly accepts isolated window containing multiple waves",
+      "skipped": 0,
+      "source": "036b3a072023801f0562ba306dfc8743776991f1",
+      "tests": 1
+    },
+    "fixed_tests": {
+      "analysis_source": "7c65d7c6ffa3991c2fa77e775a5fe9aec07dedd1",
+      "errors": 0,
+      "failures": 0,
+      "module_sha256": "1b96297ec6c74824215d2816a2f56008522c43799b640c3ad89a51605da4adf3",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "python_executable": "/usr/bin/python3.10",
+      "skipped": 0,
+      "tests": 13
+    },
+    "negative_certificates_audited": 4,
+    "primary_probes_audited": 56
+  },
   "evaluation_verdict": null,
   "host": "elder1",
   "model_bound_summaries_audited": 4,
@@ -2388,6 +2412,26 @@
     "s06-service-analysis-a1/tests.log": {
       "bytes": 1578,
       "sha256": "e42054bd6bd5282514bf64504427416fa78d03f99685acdb758d7649d4e6d323"
+    },
+    "s07-assigned-wave-a0/reproducer.json": {
+      "bytes": 244,
+      "sha256": "e8f8c9d45b555b7d112770d7aceb7300c383cab6feb5a1406d99959ea05af3d5"
+    },
+    "s07-assigned-wave-a0/tests.log": {
+      "bytes": 845,
+      "sha256": "772a09636c8d0ea79a34c7999dca9a7ea5b30bab487fa6da04b6a209773ea33f"
+    },
+    "s07-assigned-wave-a1/audit.json": {
+      "bytes": 19875,
+      "sha256": "29987912f55214f3cb6fa92f43ae35823003360ecbdda9a843a222b65c458b6c"
+    },
+    "s07-assigned-wave-a1/tests.json": {
+      "bytes": 330,
+      "sha256": "470b1132ab2441e6fc96c595e0a162204b71894226e8d10fc5f25d26d66f7c4f"
+    },
+    "s07-assigned-wave-a1/tests.log": {
+      "bytes": 1722,
+      "sha256": "f0d7a5add58d623d93f37c2a6ef73e4a337cf682633ad4b3ccb612013d0a2c14"
     }
   },
   "schema_version": 1
