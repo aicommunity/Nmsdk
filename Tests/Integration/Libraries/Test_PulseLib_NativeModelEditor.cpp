@@ -241,13 +241,16 @@ TEST(NativeModelEditor, ExplicitGraphPreservesUnownedBanksAndRejectsMissingAttac
 
 TEST(NativeModelEditor, ShrinkCannotSilentlyDeleteAnExternalObservationSource)
 {
-    EditingRig<NNeuronTimeLearner> rig(2000,0,"external_observer");
+  for(bool direct:{false,true})
+  {
+    EditingRig<NNeuronTimeLearner> rig(2000,0,direct?"external_observer_direct":"external_observer_native");
     const auto initial=rig.Probe();ASSERT_EQ(initial.status,NativeProbeStatus::Completed);
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     auto tap=dynamic_pointer_cast<NPulseGeneratorTransit>(core.storage->TakeObject("NPulseGeneratorTransit"));ASSERT_TRUE(tap);
     tap->Name="ExternalTap";UEPtr<UContainer> component=tap;ASSERT_NE(rig.model->AddComponent(component),ForbiddenId);tap->Init();
     auto monitored=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(monitored);
-    int slot=0;ASSERT_TRUE(monitored->Connect(tap.Get(),"Output","Input",slot,true));
+    if(direct)ASSERT_TRUE(tap->Input.SetPointer(0,&monitored->Output));
+    else {int slot=0;ASSERT_TRUE(monitored->Connect(tap.Get(),"Output","Input",slot,true));}
     const auto before=rig.Revision();const auto sources=tap->Input.GetDataSources();ASSERT_EQ(sources.size(),1u);
     auto parameters=rig.learner->ReadNativeParameters();parameters[0].length=1;
     const auto rejected=rig.learner->ApplyNativeParameters(parameters);
@@ -255,5 +258,13 @@ TEST(NativeModelEditor, ShrinkCannotSilentlyDeleteAnExternalObservationSource)
     EXPECT_EQ(rejected.reason,"edit_would_remove_external_observation_source");
     EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(rig.Revision(),before);
     EXPECT_EQ(tap->Input.GetDataSources(),sources);
+    Artifact(rig.name+"_observer_guard.json",QJsonDocument(QJsonObject{
+        {"binding_kind",direct?"SetPointer":"UItem.Connect"},{"status",NativeEditStatusName(rejected.status)},
+        {"reason",QString::fromStdString(rejected.reason)},{"may_have_changed",rejected.modelMayHaveChanged},
+        {"native_reverse_count",monitored->GetNumAConnectors("Output")},
+        {"property_reverse_count",int(monitored->Output.GetNumConnectors())},
+        {"observer_preserved",tap->Input.GetDataSources()==sources},
+        {"before",QString::fromStdString(before)},{"after",QString::fromStdString(rig.Revision())}}).toJson());
+  }
 }
 }
