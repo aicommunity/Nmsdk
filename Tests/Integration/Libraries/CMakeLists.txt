@@ -23,6 +23,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_NativeExecution.cpp
     Test_PulseLib_FinalVerification.cpp
     Test_PulseLib_BoundedTraining.cpp
+    Test_PulseLib_NativeModelEditor.cpp
     Test_PulseLib_Main.cpp
 )
 
