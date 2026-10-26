@@ -68,6 +68,13 @@ missing peaks и поведение при уменьшении pulse counter с
 
 ## Оставшаяся работа
 
+Принятая PulseLib develop closure:
+0d8253871fd058e314a9c4852ee52f34a065284f, опубликована до корневого merge.
+Production Core совпадает с проверенным 6abc7e9c86e0ec52593b62f8995b1556e748b671;
+последующий 5e742918 меняет только ссылки компонентов в документации. Rdk и Bin
+этим подэтапом не изменены. Все 704 опубликованных artifact hashes и gzip
+payloads проверены локально как данные; численные тесты выполнялись на серверах.
+
 Остаются общие ProbeSpec/Observation, revision invalidation, независимая final
 проверка всех входов, bounded search и topology adapters с native scheduler.
 Различия Classic round-robin и Branch reverse/mute не заменяются общим
