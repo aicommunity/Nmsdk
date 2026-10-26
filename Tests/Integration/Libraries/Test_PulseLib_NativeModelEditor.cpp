@@ -357,11 +357,17 @@ TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
     ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());
     EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());EXPECT_TRUE(service.Certificate()->Exact());
     const auto captured=service.References()->Inputs();const auto hash=rig.Revision();
+    ASSERT_EQ(service.ReferenceObservations().size(),2u);
+    const auto originalReferenceTrial=service.ReferenceObservations()[0].observation.specification.trialId;
     rig.learner->Reset();EXPECT_EQ(rig.Revision(),hash);ASSERT_TRUE(service.Certificate());
+    ASSERT_EQ(service.ReferenceObservations().size(),2u);
     run();EXPECT_EQ(service.Outcome(),TrainingStatus::Exact);EXPECT_EQ(service.IssuedReferenceProbes(),0u);
     ASSERT_TRUE(service.References());EXPECT_EQ(service.References()->Inputs(),captured);
+    ASSERT_EQ(service.ReferenceObservations().size(),2u);
+    EXPECT_EQ(service.ReferenceObservations()[0].observation.specification.trialId,originalReferenceTrial);
     auto pattern=rig.learner->InputPattern.GetData();pattern(1,0)+=.01;rig.learner->InputPattern=pattern;
     EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    EXPECT_TRUE(service.ReferenceObservations().empty());
     EXPECT_NE(service.Outcome(),TrainingStatus::Exact);
 }
 
