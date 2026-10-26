@@ -246,4 +246,124 @@ TEST_P(NativeFinalVerification, FreshSingleInputConstraintCertificate)
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeFinalVerification,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
+
+class NativeProbeRestart : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
+template<class Learner> void RepeatedNativeProbes(unsigned frequency)
+{
+    const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto model=core.environment->GetModel();ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_restart";
+    StorageProfileSpec profile;profile.name="NativeRestart_"+name;profile.frequencyHz=frequency;
+    profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
+    const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
+    auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
+    ASSERT_TRUE(learner);learner->Name="ProbeControl";learner->StructureBuildMode=1;
+    learner->NumInputDendrite=4;learner->NeuronClassName=registered.neuronClass;
+    learner->CalculateMode=1;learner->NormalizationMode=1;
+    learner->EnablePostTrainTuning=false;learner->AutoCalibrateFixedLTZThreshold=false;
+    MDMatrix<double> pattern;pattern.Assign(4,1,0.);
+    const double gaps[]{.01,.08,.16,.24},onsets[]{.01,.09,.25,.49};
+    for(unsigned i=0;i<4;++i)pattern(i,0)=gaps[i];learner->InputPattern=pattern;
+    UEPtr<UContainer> component=learner;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    model->SetGlobalTimeStep(frequency);model->Init();
+    learner->ResetToUntrainedState=true;model->Reset();
+    model->Calculate();core.environment->IncreaseModelTimeByStep();learner->IsNeedToTrain=false;
+    auto neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
+    auto dataset=learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    auto generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
+    NmsdkTools::ModelBoundarySources ports{{&generator->Output,"burst"}};
+    const auto identity=NmsdkTools::IdentifyModel(neuron,ports);ASSERT_TRUE(identity["valid"].toBool());
+    const auto revision=identity["sha256"].toString().toStdString();
+    std::vector<UEPtr<NPulseMembrane>> somas;
+    for(unsigned i=0;i<(branch?1u:4u);++i)
+    {
+        auto soma=neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);
+        ASSERT_TRUE(soma);somas.push_back(soma);
+    }
+    QJsonArray trials;std::vector<std::vector<double>> reference;
+    // Different idle intervals; the same built graph is reused throughout.
+    const double starts[]{.1,.9,2.};
+    dataset->StateGeneration=0;
+    for(unsigned trial=0;trial<3;++trial)
+    {
+        while(core.environment->GetTime().GetDoubleTime()+.25/frequency<starts[trial])
+        { model->Calculate();core.environment->IncreaseModelTimeByStep(); }
+        // Legal boundary: do not Build, reset the learner, or reset model time.
+        neuron->Reset();dataset->Reset();dataset->StateGeneration=2;
+        const double begin=core.environment->GetTime().GetDoubleTime();
+        ProbeSpec spec;spec.runId=name;spec.trialId=name+"_"+std::to_string(trial);
+        spec.sampleId="native_burst";spec.patternHash="fixed_4_isi_for_restart_control";
+        spec.modelRevision=revision;spec.begin=begin;spec.end=begin+.56;
+        spec.maximumSampleGap=1./frequency;spec.maximumSamples=frequency;
+        for(const auto& soma:somas)spec.baseline.push_back(soma->SumPotential(0,0));
+        for(unsigned i=0;i<4;++i)
+        {
+            const auto id="pulse"+std::to_string(i);spec.expectedStimulusIds.push_back(id);
+            spec.windows.push_back({"input"+std::to_string(i),branch?0u:i,begin+onsets[i]-.001,begin+onsets[i]+.06,id});
+        }
+        ProbeRecorder recorder(spec);unsigned count=0;double lastEmission=begin-1.;
+        std::vector<std::vector<double>> waveform;QJsonArray stimuli;
+        double now=begin;
+        while(now<spec.end)
+        {
+            now=core.environment->GetTime().GetDoubleTime();model->Calculate();
+            // Dataset resets the generator for every pulse. Read actual native
+            // emission times, not PulseCounter or a rising edge of Output.
+            for(int i=0;i<generator->OutputPulseTimes.GetCols();++i)
+            {
+                const double time=generator->OutputPulseTimes(0,i);
+                if(time>=begin && time>lastEmission)
+                {
+                    recorder.RecordStimulus("pulse"+std::to_string(count++),time);
+                    stimuli.append(time-begin);lastEmission=time;
+                }
+            }
+            std::vector<double> values;for(const auto& soma:somas)values.push_back(soma->SumPotential(0,0));
+            waveform.push_back(values);recorder.Observe(now,values,revision);
+            core.environment->IncreaseModelTimeByStep();
+        }
+        const auto actual=NmsdkTools::IdentifyModel(neuron,ports);ASSERT_TRUE(actual["valid"].toBool());
+        const auto observation=recorder.Close(now,actual["sha256"].toString().toStdString(),"window_closed");
+        ASSERT_TRUE(observation.complete);ASSERT_TRUE(observation.valid);ASSERT_EQ(count,4u);
+        EXPECT_EQ(actual["sha256"],identity["sha256"]);EXPECT_FALSE(learner->IsNeedToTrain.GetData());
+        EXPECT_NEAR(dataset->GetSampleStartTime(),begin,1e-12);
+        for(unsigned i=0;i<4;++i)EXPECT_NEAR(stimuli[int(i)].toDouble(),onsets[i],1./frequency+1e-12);
+        if(trial==0)reference=waveform;
+        else
+        {
+            // Accumulated absolute-clock rounding can change the final sample
+            // count by one; common relative samples still prove native response.
+            const auto common=std::min(reference.size(),waveform.size());
+            ASSERT_GE(common,static_cast<std::size_t>(.55*frequency));
+            for(std::size_t i=0;i<common;++i)for(unsigned c=0;c<somas.size();++c)
+                EXPECT_NEAR(waveform[i][c],reference[i][c],1e-10)<<"trial="<<trial<<" sample="<<i;
+        }
+        trials.append(QJsonObject{{"trial_id",QString::fromStdString(spec.trialId)},
+            {"begin",begin},{"end",now},{"sample_count",int(observation.sampleCount)},
+            {"complete",observation.complete},{"valid",observation.valid},{"actual_relative_stimuli",stimuli},
+            {"model_before",identity},{"model_after",actual}});
+        dataset->StateGeneration=0;
+    }
+    if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
+    {
+        const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+        QFile file(directory+"/"+QString::fromStdString(name)+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const auto bytes=QJsonDocument(QJsonObject{{"schema_version",1},{"kind","native_repeated_probe_control"},
+            {"frequency_hz",int(frequency)},{"trials",trials},{"scientific_training_result",false}}).toJson();
+        ASSERT_EQ(file.write(bytes),bytes.size());
+    }
+    dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
+}
+TEST_P(NativeProbeRestart, DatasetAndPhysicalResetAtNonzeroModelTime)
+{
+    if(GetParam().first)RepeatedNativeProbes<NNeuronTimeLearnerBranch>(GetParam().second);
+    else RepeatedNativeProbes<NNeuronTimeLearner>(GetParam().second);
+}
+INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeProbeRestart,::testing::Values(
+    std::make_pair(false,2000u),std::make_pair(true,2000u),
+    std::make_pair(false,20000u),std::make_pair(true,20000u)));
 }
