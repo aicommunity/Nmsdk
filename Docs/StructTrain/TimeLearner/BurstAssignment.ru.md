@@ -41,6 +41,16 @@ raw−baseline, causal timing и соответствие выбранного p
 Одного valid=true недостаточно. Изменение policy/schema не переносит старые
 references или certificate в новый протокол.
 
+Дополнительная проверка перед приёмкой связала input с физическим владельцем.
+Для schema 3 порядок inputs совпадает с порядком actual stimuli; Classic input i
+измеряется на soma channel i, с полной размерностью baseline N. Branch использует
+channel 0, а native prepared context сообщает фактический selectedInputIndex;
+он должен совпасть с запрошенным индексом verifier. Native preflight отклоняет
+неправильный channel, selector↔stimulus mapping и усечённое ожидаемое число
+стимулов до предъявления. Это исключает capture reference другого входа при
+формально верных ID/числах. Новые guards и отрицательные controls проверяются
+отдельно от снимка 9357c93; прежние 269-case данные остаются данными его кода.
+
 ## Область применимости
 
 Это проверка наблюдаемой последовательности при предположении одного
