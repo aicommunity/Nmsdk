@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <locale>
 #include <cmath>
+#include <algorithm>
 
 namespace {
 using namespace RDK;
@@ -212,7 +213,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     EXPECT_EQ(readRevision(),base);
     EXPECT_EQ(learner->TrainingPhase.GetData(),phase);EXPECT_EQ(learner->IsNeedToTrain.GetData(),need);
     EXPECT_TRUE(learner->NativeProbeOwnsControl()); // No implicit legacy resume.
-    if(interference==Interference::None && (inputCount==1 || (!branch && inputCount==2)))
+    if(interference==Interference::None && inputCount<=2)
     {
         VerificationProtocol protocol;protocol.routing=prototype.routing;protocol.revision=prototype.protocolRevision;
         protocol.schemaVersion=observed.schemaVersion;protocol.stimulusProfile=observed.specification.stimulusProfile;
@@ -224,7 +225,50 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         {
             const auto id="input"+std::to_string(i);protocol.inputs.push_back({id,"pulse"+std::to_string(i)});
             auto declaration=*result->prepared;declaration.inputId=id;
-            evidence.push_back({declaration,observed}); // Classic shares the full reference burst.
+            if(!branch || int(i)==active)
+                evidence.push_back({declaration,observed}); // Only Classic shares the full reference burst.
+            else
+            {
+                // Branch references require a real isolated probe of each attachment.
+                // Relabelling the active input's observation would hide routing errors.
+                auto reference=prototype;reference.activeInput=int(i);reference.inputId=id;
+                reference.specification.trialId=name+"/reference/"+id;
+                reference.specification.stimulusProfile=protocol.stimulusProfile;
+                reference.specification.windows={{id,0u,onsets[i]-.001,onsets[i]+.06,"pulse"+std::to_string(i)}};
+                std::optional<PreparedVerificationProbe> prepared;
+                reference.onPrepared=[&](const PreparedVerificationProbe& actual,const ProbeSpec&) {
+                    prepared=actual;EXPECT_EQ(actual.inputId,id);
+                    for(unsigned input=0;input<inputCount;++input)
+                    {
+                        auto synapse=neuron->template GetComponentL<NPulseSynapseCommon>(
+                            "Dendrite1_"+std::to_string(inputCount-input)+".ExcSynapse1",true);
+                        ASSERT_TRUE(synapse);EXPECT_EQ(synapse->Input.IsConnected(),input==i);
+                    }
+                };
+                std::ostringstream referenceTrace;referenceTrace.imbue(std::locale::classic());
+                referenceTrace<<std::setprecision(17)<<"native_tick_start_s,stimulus,raw_soma_0\n";
+                reference.onSample=[&](const NativeProbeSample& sample) {
+                    ASSERT_EQ(sample.potentials.size(),1u);
+                    referenceTrace<<sample.time<<','<<sample.stimulus<<','<<sample.potentials[0]<<'\n';
+                };
+                learner->QueueNativeProbe(std::move(reference));unsigned referenceTicks=0;
+                while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
+                {
+                    ASSERT_LT(referenceTicks++,unsigned((duration+.1)*frequency));
+                    model->Calculate();core.environment->IncreaseModelTimeByStep();
+                }
+                const auto captured=learner->TakeNativeProbeResult();ASSERT_TRUE(captured);ASSERT_TRUE(prepared);
+                ASSERT_EQ(captured->status,NativeProbeStatus::Completed);ASSERT_TRUE(captured->observation);
+                ASSERT_TRUE(captured->observation->complete);ASSERT_TRUE(captured->observation->valid);
+                ASSERT_EQ(captured->currentBaseRevision,base);
+                evidence.push_back({*prepared,*captured->observation});
+                if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+                {
+                    QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_reference_"+QString::number(i)+".csv");
+                    ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                    const auto bytes=QByteArray::fromStdString(referenceTrace.str());ASSERT_EQ(file.write(bytes),bytes.size());
+                }
+            }
         }
         const auto references=CapturedReferences::Capture(protocol,evidence);
         VerificationConfig configuration;configuration.runId=name+"/final_verification";
@@ -235,6 +279,13 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             auto fresh=prototype;fresh.specification.runId=next->runId;fresh.specification.trialId=next->trialId;
             fresh.specification.stimulusProfile=protocol.stimulusProfile;
             fresh.inputId=next->inputId;fresh.protocolRevision=next->protocolRevision;fresh.modelEpoch=next->epoch;
+            if(branch)
+            {
+                const auto position=std::find_if(protocol.inputs.begin(),protocol.inputs.end(),[&](const auto& input) {return input.id==next->inputId;});
+                ASSERT_NE(position,protocol.inputs.end());const auto index=unsigned(position-protocol.inputs.begin());
+                fresh.activeInput=int(index);
+                fresh.specification.windows={{next->inputId,0u,onsets[index]-.001,onsets[index]+.06,"pulse"+std::to_string(index)}};
+            }
             fresh.onPrepared=[&](const PreparedVerificationProbe& actual,const ProbeSpec&) {
                 verification.Arm(actual);EXPECT_TRUE(verification.WaitingForObservation());
             };
@@ -275,6 +326,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             QJsonArray residuals;
             for(const auto& residual:certificate.Residuals())residuals.append(QJsonObject{
                 {"input_id",QString::fromStdString(residual.inputId)},{"trial_id",QString::fromStdString(residual.trialId)},
+                {"target_raw_potential",residual.targetRawPotential},{"measured_raw_potential",residual.measuredRawPotential},
                 {"amplitude_residual",residual.amplitudeResidual},{"timing_low",residual.timingResidualLow},{"timing_high",residual.timingResidualHigh}});
             QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_certificate.json");
             ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
