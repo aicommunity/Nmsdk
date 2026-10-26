@@ -130,6 +130,32 @@ TEST(TimeLearnerModelInspection, ReadsActualStorageImageWithoutChangingIt)
     core.storage->ReturnObject(model);
 }
 
+TEST(TimeLearnerModelInspection, StructuralReadbackPreservesGraphWithoutFormattingDynamicValues)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    auto model=RDK::dynamic_pointer_cast<NMSDK::NPulseNeuron>(core.storage->TakeObject("NSPNeuronGenAsymRmD001C1e9"));
+    ASSERT_TRUE(model);model->SetEnvironment(core.environment);model->Init();model->Reset();
+    const auto lifecycle=model->ObserveLifecycle();
+    const auto full=NmsdkTools::InspectModel(model);
+    const auto structure=NmsdkTools::InspectModel(model,{},NmsdkTools::ModelInspectionDetail::Structure);
+    ASSERT_TRUE(full["valid"].toBool());ASSERT_TRUE(structure["valid"].toBool());
+    EXPECT_EQ(full["links"],structure["links"]);EXPECT_EQ(full["diagnostics"],structure["diagnostics"]);
+    auto stripped=full["nodes"].toArray();unsigned values=0;
+    for(int i=0;i<stripped.size();++i)
+    {
+        auto node=stripped[i].toObject();auto properties=node["properties"].toObject();
+        for(const auto& name:properties.keys())
+        {
+            auto property=properties[name].toObject();
+            if(property.contains("rdk_value")){++values;property.remove("rdk_value");}
+            properties[name]=property;
+        }
+        node["properties"]=properties;stripped[i]=node;
+    }
+    EXPECT_GT(values,100u);EXPECT_EQ(stripped,structure["nodes"].toArray());
+    EXPECT_TRUE(lifecycle.IsCurrent());core.storage->ReturnObject(model);
+}
+
 TEST(TimeLearnerModelInspection, InvalidPhysicsIsNotHiddenByAnImplicitRebuild)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();

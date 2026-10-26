@@ -1,5 +1,16 @@
 # Readback фактической модели
 
+C++ detail `Structure` добавлен для проверки
+графа/связей/cache pointers без строкового форматирования property values.
+ModelIdentity уже самостоятельно читает typed parameters, поэтому повторная
+сериализация динамических состояний ему не нужна. Default `Full` и Console
+readback сохраняют все значения. Оптимизация не вводит слепой cache revision:
+структура, параметры и связи по-прежнему проверяются на каждом запросе.
+Semantic hashes и primary CSV четырёх общих случаев a7→a9 побайтово совпали
+на обоих серверах. Восемь отдельных legacy A/B на каждом сервере также сохранили
+полные наблюдения/решения, waveform hashes и graph/parameter projection.
+Результаты и границы проверки: [NativeExecution](NativeExecution.ru.md).
+
 Новый Console режим:
 
 ```text

@@ -30,6 +30,7 @@ ProbeObservation Observation(const VerificationProtocol& p,const PreparedVerific
     const auto n=p.inputs.size();if(raw.empty())raw=Raw(n);if(centers.empty())centers.assign(n,12);
     const auto active=Index(p,context.inputId);const bool branch=p.routing==ProbeRouting::BranchSoloBurst;
     ProbeSpec s;s.runId=run;s.trialId=trial;s.sampleId=p.sampleId;s.patternHash=p.patternHash;
+    s.schemaVersion=p.schemaVersion;s.stimulusProfile=p.stimulusProfile;
     s.modelRevision=context.effectiveModelRevision;s.begin=0.;s.end=1.;s.maximumSampleGap=.05;
     s.maximumSamples=21;s.minimumAmplitude=p.minimumAmplitude;s.expectedStimulusIds=p.stimulusIds;
     s.baseline.assign(branch?1:n,baseline);
@@ -88,6 +89,32 @@ TEST(FinalVerification, RequiresEveryInputAndMeasuredReferenceForDimensionsOneTh
             ASSERT_TRUE(session.Certificate());EXPECT_EQ(session.Certificate()->Residuals().size(),n);
             EXPECT_TRUE(session.Certificate()->Exact());
         }
+}
+
+TEST(FinalVerification, NativeSourcePhysicsCannotChangeBetweenReferencesAndVerification)
+{
+    auto p=Protocol(1);p.schemaVersion=2;p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+    const auto references=References(p);
+    FinalVerificationSession good(references,Configuration());Complete(good,p);
+    ASSERT_EQ(good.Status(),VerificationStatus::Exact);
+    for(int factor=0;factor<6;++factor)
+    {
+        FinalVerificationSession session(references,Configuration());const auto r=session.NextRequest();ASSERT_TRUE(r);
+        const auto prepared=Prepared(*r);session.Arm(prepared);auto changed=p;
+        switch(factor)
+        {
+        case 0:changed.stimulusProfile->amplitude+=1e-12;break;
+        case 1:changed.stimulusProfile->pulseLength*=2.;break;
+        case 2:changed.stimulusProfile->frequencyHz*=10.;break;
+        case 3:changed.stimulusProfile->generatorClass="other_image";break;
+        case 4:changed.stimulusProfile->useTransitSignal=true;break;
+        case 5:changed.schemaVersion=1;changed.stimulusProfile.reset();break;
+        }
+        auto measured=Observation(changed,prepared,r->runId,r->trialId);
+        ASSERT_TRUE(measured.valid); // Identical peaks cannot validate a different source.
+        session.Consume(measured,r->baseModelRevision);
+        EXPECT_EQ(session.Status(),VerificationStatus::InvalidObservation);EXPECT_FALSE(session.Certificate());
+    }
 }
 
 TEST(FinalVerification, LocalSuccessDoesNotReplaceFreshGlobalSweep)
