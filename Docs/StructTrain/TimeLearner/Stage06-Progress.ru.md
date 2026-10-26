@@ -80,8 +80,11 @@ payloads проверены локально как данные; численн
 измерений и native characterization adapter, не готовый controller action loop.
 При полном тестировании исправлены TL-017/018 в Rdk storage metadata/identity.
 
-Остаются production-подключение ProbeRecorder и revision invalidation, независимая final
-проверка всех входов, bounded search и topology adapters с native scheduler.
+Общий stateful final-verification контур реализован отдельно:
+[FinalVerification](FinalVerification.ru.md). Он ещё не заменяет legacy gate.
+
+Остаются production-подключение ProbeRecorder/FinalVerification и revision
+producers, полный bounded search и topology adapters с native scheduler.
 Различия Classic round-robin и Branch reverse/mute не заменяются общим
 single-pulse протоколом. Совместимость старого кода и исправление алгоритмов
 должны иметь разные commits и разные критерии проверки.
