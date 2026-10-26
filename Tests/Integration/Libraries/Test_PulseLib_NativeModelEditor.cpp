@@ -143,7 +143,10 @@ template<class Learner> void CheckEdits(unsigned frequency,int normalization)
     const auto lt=rig.neuron->template GetComponentL<NPulseChannel>("LTMembrane.ExcChannel",true);ASSERT_TRUE(lt);
     soma->Capacity=1.41e-9;const double ltCapacity=lt->Capacity.GetData();
     const auto phase=rig.learner->TrainingPhase.GetData();const auto need=rig.learner->IsNeedToTrain.GetData();
-    values[0].length=3;if(normalization==0)values[0].synapses=3;else values[0].resistance*=1.1;
+    values[0].length=3;if(normalization==0)values[0].synapses=3;
+    // Exercise the declared bank Rs also for N0: all newly created bank members
+    // must get this learned value, while their other storage physics survives.
+    values[0].resistance*=1.1;
     const auto beforeEdit=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
     const auto edit=rig.learner->ApplyNativeParameters(values);
     Artifact(rig.name+"_edit.json",QJsonDocument(QJsonObject{{"status",NativeEditStatusName(edit.status)},
@@ -151,6 +154,11 @@ template<class Learner> void CheckEdits(unsigned frequency,int normalization)
         {"before",beforeEdit},{"after",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)}}).toJson());
     ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
     EXPECT_EQ(edit.effective,values);EXPECT_TRUE(rig.learner->IsReady());EXPECT_TRUE(rig.learner->IsInit());
+    for(int k=1;k<=values[0].synapses;++k)
+    {
+        auto member=rig.neuron->template GetComponentL<NPulseSynapse>("Dendrite1_3.ExcSynapse"+std::to_string(k),true);
+        ASSERT_TRUE(member);EXPECT_EQ(member->Resistance.GetData(),values[0].resistance);
+    }
     EXPECT_EQ(rig.learner->DendriteLength.GetData(),(std::vector<int>{3,1}));
     EXPECT_EQ(rig.learner->TrainingPhase.GetData(),phase);EXPECT_EQ(rig.learner->IsNeedToTrain.GetData(),need);
     EXPECT_EQ(soma->Capacity.GetData(),1.41e-9);EXPECT_EQ(lt->Capacity.GetData(),ltCapacity);
