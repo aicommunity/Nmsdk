@@ -40,4 +40,12 @@ incomplete/nonfinite observation, mismatch эффективных парамет
 с возвратом к исходному fingerprint на Classic/Branch при 2000/20000 Гц через
 штатные scheduler/Reset/routing. В этом fixture длины фиксированы и sync tolerance
 явно равен 0.2 с: он изолирует нормализацию Rs и не доказывает синхронизацию при
-production default 0.02 с. Результаты серверных проверок ещё не получены.
+production default 0.02 с.
+
+На снимке root 5f3737013ec3c18d3514f1d3292e1367181cb9e0 / PulseLib
+1cccb7e (полный SHA в Git/runtime manifest) восемь контролируемых сценариев
+прошли на обоих серверах. Native Classic 2000 Гц прошёл на обоих серверах;
+остальные native cases продолжают выполняться. Это промежуточный результат,
+не приёмка ветки. Первая попытка root 25cafe0e остановилась при компиляции
+тестового helper из-за перекрытия имени GoogleTest::Run; production core
+скомпилирован. Исправление и первичные данные сохраняются отдельно.

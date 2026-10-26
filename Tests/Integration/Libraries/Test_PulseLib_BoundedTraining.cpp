@@ -168,6 +168,9 @@ TEST(BoundedTraining, SearchBudgetAndExternalStopNeverCreateCertificate)
     BoundedTrainingSession stopped(References(p),cfg,{{1,1,10.},{1,1,10.}});
     ASSERT_TRUE(stopped.NextAction());stopped.ExternalStop();
     EXPECT_EQ(stopped.Status(),TrainingStatus::ExternalStop);EXPECT_FALSE(stopped.NextAction());EXPECT_FALSE(stopped.Certificate());
+    BoundedTrainingSession deadline(References(p),cfg,{{1,1,10.},{1,1,10.}});
+    ASSERT_TRUE(deadline.NextAction());deadline.ExhaustBudget();
+    EXPECT_EQ(deadline.Status(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(deadline.NextAction());EXPECT_FALSE(deadline.Certificate());
 }
 
 TEST(BoundedTraining, AppliedReadbackAndProbeRevisionAreMandatory)
