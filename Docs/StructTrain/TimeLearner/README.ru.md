@@ -20,6 +20,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Classic live rebuild: Init нового нейрона и открытый вопрос частот](LiveRebuildInit.ru.md).
 - [Общий и индивидуальный шаг: контракт создания поддеревьев](FrequencyContract.ru.md).
 - [Общий контроллер: подготовка baseline и оставшиеся изменения](Stage06-Progress.ru.md).
+- [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
 - [Явные физические storage-профили](../../../Libraries/Nmsdk-PulseLib/Docs/Analysis/TimeLearnerStorageProfiles.ru.md).
 
 Inventory перечисляет declarations, исходные выражения defaults и исторические

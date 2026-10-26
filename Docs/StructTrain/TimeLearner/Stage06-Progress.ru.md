@@ -75,7 +75,12 @@ Production Core совпадает с проверенным 6abc7e9c86e0ec52593
 этим подэтапом не изменены. Все 704 опубликованных artifact hashes и gzip
 payloads проверены локально как данные; численные тесты выполнялись на серверах.
 
-Остаются общие ProbeSpec/Observation, revision invalidation, независимая final
+Общие ProbeSpec/Observation и bounded recorder реализованы и проверены на
+физических soma streams: [ProbeMeasurement](ProbeMeasurement.ru.md). Это API
+измерений и native characterization adapter, не готовый controller action loop.
+При полном тестировании исправлены TL-017/018 в Rdk storage metadata/identity.
+
+Остаются production-подключение ProbeRecorder и revision invalidation, независимая final
 проверка всех входов, bounded search и topology adapters с native scheduler.
 Различия Classic round-robin и Branch reverse/mute не заменяются общим
 single-pulse протоколом. Совместимость старого кода и исправление алгоритмов
