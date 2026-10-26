@@ -7,6 +7,14 @@
 Формулировки «принято в develop» ниже означают принятие конкретных изменений,
 а не автоматическое выполнение всех требований исходного этапа.
 
+Последний проверенный подэтап: повторные native-пробы и фактические времена
+импульсов, TL-019/020. На двух серверах прошли шесть адресных controls и четыре
+maintained CTest suites (PulseLib 210: 201 pass, 9 skip); M40 ASan — 6/6 с
+detect_leaks=0. Первичные traces и версии до/после исправления опубликованы через
+Git в s07-pulse-elder1/m40. См. [ProbeMeasurement](ProbeMeasurement.ru.md).
+Production-dispatch нового контроллера, Branch solo adapters и основной bounded
+search всё ещё открыты; эти проверки не означают завершения этапов 6/7.
+
 ## Исходная точка
 
 До изменений root был 895dea071600eafe489c97dffc8147383587e51c, PulseLib checkout
