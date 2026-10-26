@@ -85,6 +85,13 @@ payloads проверены локально как данные; численн
 
 Остаются production-подключение ProbeRecorder/FinalVerification и revision
 producers, полный bounded search и topology adapters с native scheduler.
+
+Для этого подключения проверена native-граница повторной пробы: на одном графе
+Dataset/Neuron Reset без learner Reset и повторного Build, при ненулевом времени
+и разных паузах. В ходе проверки исправлены TL-019/020 в фактической истории
+emissions и Multi dimensions; сведения и первичные traces находятся в
+[ProbeMeasurement](ProbeMeasurement.ru.md). Branch solo-routing этой серией не
+проверяется; готовый native restart не заменяет production-dispatch контроллера.
 Различия Classic round-robin и Branch reverse/mute не заменяются общим
 single-pulse протоколом. Совместимость старого кода и исправление алгоритмов
 должны иметь разные commits и разные критерии проверки.
