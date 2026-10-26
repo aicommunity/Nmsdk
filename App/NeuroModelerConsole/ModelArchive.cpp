@@ -308,7 +308,10 @@ UEPtr<UContainer> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> stor
             Fail("boundary_binding_failed", target + ": invalid native endpoint");
         if(!sourceItem->IsReady() || !sourceItem->IsInit())
             Fail("boundary_binding_failed", target + ": source not initialized and ready");
-        if(!sourceItem->Connect(connector,source->second->GetName(),name,actualSlot,true))
+        // Native Load/Build may already have restored the same connection.
+        // Connect is idempotent for that pair; forced duplication would append
+        // a second native slot even though the expected port is unchanged.
+        if(!sourceItem->Connect(connector,source->second->GetName(),name,actualSlot,false))
             Fail("boundary_binding_failed", target + ": native Connect failed");
         if(actualSlot != slot)
             Fail("boundary_binding_failed", target + QString(": expected slot %1, native slot %2").arg(slot).arg(actualSlot));
