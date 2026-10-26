@@ -197,3 +197,15 @@ coupled edit и четыре полных поддерживаемых CTest sui
 правки root 1e980f9103920c6012afe810d1e4be23929c80dc прошли 43 addressed cases
 на каждом сервере и 4 M40 ASan, detect_leaks=0. Подробности:
 [NativeModelEdits](NativeModelEdits.ru.md). Полные этапы 6 и 7 остаются открытыми.
+
+Explicit BeginNativeTraining соединяет capture/search/fresh final gate внутри
+Before/After hooks обоих learner: [NativeTrainingService](NativeTrainingService.ru.md).
+Root 2fd45d4424360d7834ba094f875ddeda678c1625: 65 addressed pass на каждом
+сервере, 8 M40 ASan (detect_leaks=0). Retention A3: 31/31; state-summary A4:
+39/39 на каждом сервере. Root analysis module: 12/12, 56 real CSV/observations
+и четыре отрицательных сертификата на каждом сервере. Это actual structural
+search API, а не только ручное выполнение действий тестом. Однако configured
+ControllerVersion=2, новые builders, длинные окна/assigned-wave policy,
+динамические Rs domains и полный Train→Test остаются открытыми. Поэтому прежняя
+строка «полный native structural Train не реализован» не означает отсутствие
+этого ограниченного рабочего API; весь этап и production-ready V2 ещё не приняты.

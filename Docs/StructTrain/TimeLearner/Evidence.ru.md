@@ -119,5 +119,22 @@ heterogeneous bank и declared bank Rs после growth/shrink при 2000/2000
 старым бинарником; evidence подтверждает исправленный путь и отрицательный guard.
 NativeModelEdits.ru.md и Git-пакеты s07-native-edits-elder1/m40.
 
+TL-027: native executor ранее проверял численное соответствие Dataset заявленному
+expectedInputIsi, но не соответствие patternHash фактической матрице. Новая
+проверка вычисляет canonical hash самой Dataset. В root
+75e7fedb6c9ae6f040143393683f4bb4c8dee13b поддельный hash уже блокировался, однако
+отказ ошибочно назывался native_base_revision_changed: до подготовки revision
+не был доступен. Это runtime-подтверждённый дефект диагностики нового контура,
+не свидетельство фактического изменения модели. Root
+2fd45d4424360d7834ba094f875ddeda678c1625 сохраняет исходную причину первой и
+различает unavailable/changed. На каждом сервере прошли 65 addressed cases;
+M40 ASan 8/8, detect_leaks=0. В A1 был 41 pass + один failure, он сохранён.
+Root 90d11d1990221753e6b494dbf40d83964b7d0fa3 (state diagnostics) прошёл 39/39
+на каждом сервере. Root auditor 99cacf35326548a9f2d4f3ed2cad143497dc7a2b:
+12/12, 56 реальных CSV/observations и четыре отрицательных сертификата на каждом
+сервере. Code finding об исходном отсутствии hash gate и воспроизведённый
+diagnostic failure не смешиваются. См. NativeTrainingService.ru.md и пакеты
+s06-native-service-elder1/m40. Полный V2 и научная матрица остаются открытыми.
+
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
