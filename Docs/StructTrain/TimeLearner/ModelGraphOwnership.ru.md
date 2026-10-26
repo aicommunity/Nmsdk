@@ -33,3 +33,17 @@ RecognitionState/certificate export или mid-probe checkpoint. Незавер�
 transaction импорта storage-образов остаётся отдельным требованием этапа 5.
 Ветки объединяются merge-коммитами после независимой приёмки; rebase/cherry-pick
 для переноса изменений между ветками не используются.
+
+## Промежуточная проверка M40
+
+Root 2694796a522a55d3b0b6c7b57d2c96eaf6ad0613 / PulseLib 2fc96a0
+прошли изолированную серверную сборку Console и интеграционного executable.
+19 адресных cases дали 18 pass и один штатный skip fresh-process helper;
+четыре parent NativeArchive controls затем явно выполнили fresh children при
+2000/20000 и прошли отдельно. Численные тесты локально не запускались.
+
+nm подтвердил по одному определению всех шести public API в PulseLib.core.
+Primary CSV двух Classic/Branch native controls при 2000 и semantic model/
+effective hashes совпали с прежним runtime до переноса. Результаты сохранены
+в s06-model-owner-a1-linkage-and-waveform.json. Elder-1 строится из отдельного
+recursive checkout; Git-публикация пакета и приёмка ветки ещё открыты.
