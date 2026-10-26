@@ -60,6 +60,8 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 | TL-012 | Rdk channel destruction | ASan: NPulseGenerator::AReset читает Environment после его delete в ChannelDestroy | code fix + runtime ASan 122 cases, pooled probe и failing baseline опубликованы в s04-profiles-m40 |
 | TL-013 | PulseLib membrane index | fresh/Load одинакового графа давали разные порядки Membranes | native Build формирует индекс по таблице детей; полное identity source/restored, seven cases и raw baseline в s05-identity-* |
 | TL-014 | Rdk UStorage::DelClass | два ASan heap-use-after-free: чтение удалённой фабрики и списка возвращённых экземпляров в b15f4384c4516c865afc59a83b487acd477744d0 | исправление 2317f3147c1193dbe2097ea2a242c8d0ab7b049b; 7 native controls и 4 CTest на обоих серверах, M40 под ASan; s05-cleanup-*; общая transaction импорта ещё не реализована |
+| TL-015 | Classic live BuildStructure | новый Neuron Ready=true/Init=false; реальные Dataset edges, но нулевые soma/references до extraction | PulseLib ccb399c6bdcdace2814833155416ca82ab736ec2: native Init нового поддерева; восемь bounded native controls и четыре CTest suites на обоих серверах; LiveRebuildInit.ru.md |
+| TL-016 | effective frequency legacy creation/growth | model/controller=20000 после двух пачек не означает uniform tree: Classic N1 на M40 15 nodes×20000 + 64×2000 | открыто: storage/image frequency и growth contract; fixed readbacks/validation в s04-live-init-fixed-*; эти прогоны не сертифицируют uniform-rate controller v2 |
 
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
