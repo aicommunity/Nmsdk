@@ -10,13 +10,16 @@
 #include <QFile>
 #include <type_traits>
 #include <cstdlib>
+#include <sstream>
+#include <iomanip>
+#include <locale>
 
 namespace {
 using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
-enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild };
+enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild };
 
 template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None)
 {
@@ -62,6 +65,10 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     };
     const auto before=NmsdkTools::IdentifyModel(neuron,ports);ASSERT_TRUE(before["valid"].toBool());
     const auto base=readRevision();bool armed=false;
+    std::ostringstream trace;trace.imbue(std::locale::classic());
+    trace<<std::setprecision(17)<<"native_tick_start_s,stimulus";
+    for(unsigned i=0;i<(branch?1u:2u);++i)trace<<",raw_soma_"<<i;trace<<'\n';
+    unsigned sampled=0,sourceEvents=0;
     NativeProbeRequest request;request.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
     request.activeInput=active;request.inputId="input"+std::to_string(active);request.protocolRevision="native_two_input_burst_v1";
     request.baseModelRevision=base;request.expectedInputIsi={.01,.08};request.readModelRevision=readRevision;
@@ -86,6 +93,11 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 ASSERT_TRUE(synapse);EXPECT_EQ(synapse->Input.IsConnected(),input==active);
             }
         }
+    };
+    request.onSample=[&](const NativeProbeSample& sample) {
+        ++sampled;sourceEvents+=unsigned(sample.newStimuli.size());
+        trace<<sample.time<<','<<sample.stimulus;
+        for(const auto value:sample.potentials)trace<<','<<value;trace<<'\n';
     };
     learner->QueueNativeProbe(std::move(request));ASSERT_TRUE(learner->NativeProbeOwnsControl());
     unsigned ticks=0;
@@ -113,14 +125,44 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 learner->IsNeedToTrain=false;EXPECT_EQ(learner->InputPattern(0,0),.01);
                 EXPECT_EQ(learner->TrainingPhase.GetData(),phase);EXPECT_EQ(readRevision(),base);break;
             case Interference::OwnerBuild:
-                learner->DendriteLength=std::vector<int>{2,1};learner->Build();break;
+                learner->DendriteLength=std::vector<int>{3,1};ASSERT_FALSE(learner->IsReady());learner->Build();break;
+            case Interference::NoopOwnerBuild:learner->Build();break;
             case Interference::None:break;
             }
         }
     }
     const auto result=learner->TakeNativeProbeResult();ASSERT_TRUE(result);
     for(const auto& reason:result->reasons)std::cout<<name<<" adapter_reason="<<reason<<std::endl;
-    if(interference!=Interference::None)
+    if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    {
+        QJsonArray events,reasons,peaks,adapterReasons;
+        for(const auto& reason:result->reasons)adapterReasons.append(QString::fromStdString(reason));
+        if(result->observation)
+        {
+            const auto& observed=*result->observation;
+            for(const auto& event:observed.stimuli)events.append(QJsonObject{{"id",QString::fromStdString(event.id)},{"time",event.time}});
+            for(const auto& reason:observed.reasons)reasons.append(QString::fromStdString(reason));
+            for(const auto& peak:observed.peaks)peaks.append(QJsonObject{{"input_id",QString::fromStdString(peak.inputId)},
+                {"validity",PeakValidityName(peak.validity)},{"raw_potential",peak.rawPotential?QJsonValue(*peak.rawPotential):QJsonValue(QJsonValue::Null)}});
+        }
+        const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+        QFile csv(directory+"/"+QString::fromStdString(name)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const auto wave=QByteArray::fromStdString(trace.str());ASSERT_EQ(csv.write(wave),wave.size());
+        QFile file(directory+"/"+QString::fromStdString(name)+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const bool normal=interference==Interference::None || interference==Interference::NoopOwnerBuild;
+        const auto bytes=QJsonDocument(QJsonObject{{"schema_version",1},{"kind","native_learner_probe_execution"},
+            {"model_before",before},{"model_after",normal?QJsonValue(NmsdkTools::IdentifyModel(neuron,ports)):QJsonValue(QJsonValue::Null)},
+            {"effective_revision",result->prepared?QJsonValue(QString::fromStdString(result->prepared->effectiveModelRevision)):QJsonValue(QJsonValue::Null)},
+            {"current_base_revision",QString::fromStdString(result->currentBaseRevision)},
+            {"status",NativeProbeStatusName(result->status)},{"adapter_reasons",adapterReasons},
+            {"requires_fresh_verification",result->requiresFreshVerification},
+            {"complete",result->observation && result->observation->complete},
+            {"valid",result->observation && result->observation->valid},{"reasons",reasons},{"peaks",peaks},
+            {"actual_stimuli",events},{"native_ticks",int(ticks)},{"sampled_frames",int(sampled)},
+            {"revision_reads",int(revisionReads)},{"scientific_training_result",false}}).toJson();
+        ASSERT_EQ(file.write(bytes),bytes.size());
+    }
+    if(interference!=Interference::None && interference!=Interference::NoopOwnerBuild)
     {
         const auto expected=interference==Interference::ExternalStop || interference==Interference::OwnerBuild
             ?NativeProbeStatus::Cancelled:NativeProbeStatus::Rejected;
@@ -136,27 +178,12 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     for(const auto& reason:observed.reasons)std::cout<<name<<" observation_reason="<<reason<<std::endl;
     EXPECT_TRUE(armed);ASSERT_TRUE(observed.complete);ASSERT_TRUE(observed.valid);
     EXPECT_EQ(observed.stimuli.size(),2u);EXPECT_EQ(observed.sampleCount,ticks);
+    EXPECT_EQ(sampled,ticks);EXPECT_EQ(sourceEvents,2u);
     EXPECT_GE(revisionReads,2*ticks);
     EXPECT_EQ(result->currentBaseRevision,base);
     EXPECT_EQ(readRevision(),base);
     EXPECT_EQ(learner->TrainingPhase.GetData(),phase);EXPECT_EQ(learner->IsNeedToTrain.GetData(),need);
     EXPECT_TRUE(learner->NativeProbeOwnsControl()); // No implicit legacy resume.
-    if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
-    {
-        QJsonArray events,reasons,peaks;
-        for(const auto& event:observed.stimuli)events.append(QJsonObject{{"id",QString::fromStdString(event.id)},{"time",event.time}});
-        for(const auto& reason:observed.reasons)reasons.append(QString::fromStdString(reason));
-        for(const auto& peak:observed.peaks)peaks.append(QJsonObject{{"input_id",QString::fromStdString(peak.inputId)},
-            {"validity",PeakValidityName(peak.validity)},{"raw_potential",peak.rawPotential?QJsonValue(*peak.rawPotential):QJsonValue(QJsonValue::Null)}});
-        const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
-        QFile file(directory+"/"+QString::fromStdString(name)+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-        const auto bytes=QJsonDocument(QJsonObject{{"schema_version",1},{"kind","native_learner_probe_execution"},
-            {"model_before",before},{"model_after",NmsdkTools::IdentifyModel(neuron,ports)},
-            {"effective_revision",QString::fromStdString(result->prepared->effectiveModelRevision)},
-            {"complete",observed.complete},{"valid",observed.valid},{"reasons",reasons},{"peaks",peaks},
-            {"actual_stimuli",events},{"native_ticks",int(ticks)},{"revision_reads",int(revisionReads)},
-            {"scientific_training_result",false}}).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
-    }
     // Native Reset releases control and preserves the learned physical graph.
     learner->Reset();EXPECT_FALSE(learner->NativeProbeOwnsControl());
     EXPECT_EQ(learner->NativeProbeState(),NativeProbeStatus::Idle);
@@ -194,4 +221,8 @@ TEST(NativeLearnerProbeInvalidation, ClassicImplicitResetDuringBuildKeepsControl
 { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::OwnerBuild); }
 TEST(NativeLearnerProbeInvalidation, BranchImplicitResetDuringBuildKeepsControl)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::OwnerBuild); }
+TEST(NativeLearnerProbeInvalidation, ClassicNoopBuildDoesNotInvalidateProbe)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::NoopOwnerBuild); }
+TEST(NativeLearnerProbeInvalidation, BranchNoopBuildDoesNotInvalidateProbe)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::NoopOwnerBuild); }
 }
