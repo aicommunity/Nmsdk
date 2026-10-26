@@ -118,9 +118,9 @@ TEST(BoundedTraining, MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInp
 TEST(BoundedTraining, IndependentResistanceBoundsAndNoCommonIntersection)
 {
     const auto p=Protocol(3,ProbeRouting::BranchSoloBurst);auto cfg=Configuration(3,Normalization::TipResistance);
-    cfg.bounds={{1,1,1,1,1.,2.},{1,1,1,1,10.,20.},{1,1,1,1,100.,200.}};
+    cfg.bounds={{3,3,1,1,1.,2.},{2,2,1,1,10.,20.},{1,1,1,1,100.,200.}};
     cfg.tolerances.sync=1.;
-    BoundedTrainingSession session(References(p),cfg,{{1,1,1.5},{1,1,15.},{1,1,150.}});
+    BoundedTrainingSession session(References(p),cfg,{{3,1,1.5},{2,1,15.},{1,1,150.}});
     DriveTraining(session,p,[](const TrainingAction& a,auto&,auto& raw) {
         raw[0]+=(a.parameters[0].resistance==2.?0.:.001);
         raw[1]+=(a.parameters[1].resistance==20.?0.:.001);
