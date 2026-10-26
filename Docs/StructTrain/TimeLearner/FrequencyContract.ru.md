@@ -73,3 +73,12 @@ Raw traces, состояния, binary64 waveform hashes, XML/logs, pre-test man
 сходимости. Обязательная матрица физических моделей, export/import реального
 learner и Controller v2 остаются в работе. Границы дальнейшего приёма должны
 опираться на опубликованные runtime manifests, XML/logs и readback после роста.
+
+## Принятая closure
+
+Rdk develop merge: 74a7f5167eeca8bff2416061547ed35388287358, опубликован до
+корневого merge. Production C++ совпадает с проверенным
+9cb00e640f857b4533518669c8ada01c80efc44e; последующий e2bb3c2f меняет только
+руководство. PulseLib и Bin этим подэтапом не изменялись. Локальная проверка
+576 опубликованных artifact hashes и распаковки gzip прошла; локальные
+численные/интеграционные тесты не выполнялись.
