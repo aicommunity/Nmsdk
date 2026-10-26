@@ -3,6 +3,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ModelIdentity.h"
+#include "TimeLearner/BoundedTraining.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -23,7 +24,7 @@ using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
 enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude,WrongObservationChannel,WrongSoloSelector };
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -33,7 +34,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     ASSERT_GE(inputCount,1u);ASSERT_LE(inputCount,6u);
     const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
-        (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"");
+        (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"");
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
@@ -386,6 +387,108 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 {"residuals",residuals},{"scientific_training_result",false}}).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
         }
     }
+    if(boundedTraining)
+    {
+        ASSERT_EQ(inputCount,2u);ASSERT_EQ(observationSchema,3u);ASSERT_FALSE(mergedBurst);
+        VerificationProtocol protocol;protocol.schemaVersion=3;protocol.routing=prototype.routing;
+        protocol.revision=prototype.protocolRevision;protocol.stimulusProfile=observed.specification.stimulusProfile;
+        protocol.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;protocol.originStimulusId="pulse0";
+        protocol.sampleId=observed.specification.sampleId;protocol.patternHash=observed.specification.patternHash;
+        protocol.maximumSampleGap=1./frequency;protocol.stimulusIds=observed.specification.expectedStimulusIds;
+        for(unsigned i=0;i<inputCount;++i)protocol.inputs.push_back({"input"+std::to_string(i),"pulse"+std::to_string(i)});
+        std::vector<ReferenceEvidence> captured;
+        std::vector<UEPtr<NPulseSynapseCommon>> physicalSynapses;
+        std::vector<InputParameters> parameters;
+        for(unsigned i=0;i<inputCount;++i)
+        {
+            const auto path="Dendrite"+std::to_string(branch?1:i+1)+"_"+std::to_string(lengths[i])+".ExcSynapse1";
+            const auto synapse=neuron->template GetComponentL<NPulseSynapseCommon>(path,true);ASSERT_TRUE(synapse);
+            physicalSynapses.push_back(synapse);parameters.push_back({lengths[i],1,synapse->Resistance.GetData()});
+            // Capture every reference through a new, actual native burst.
+            auto reference=prototype;reference.inputId=protocol.inputs[i].id;reference.activeInput=int(i);
+            reference.specification.trialId=name+"/bounded_reference/"+std::to_string(i);
+            reference.specification.stimulusProfile=protocol.stimulusProfile;
+            reference.specification.windows={{reference.inputId,branch?0u:i,onsets[i]-.001,onsets[i]+.06,"pulse"+std::to_string(i)}};
+            std::optional<PreparedVerificationProbe> prepared;
+            reference.onPrepared=[&](const auto& actual,const ProbeSpec&){prepared=actual;};reference.onSample={};
+            learner->QueueNativeProbe(std::move(reference));unsigned steps=0;
+            while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
+            {ASSERT_LT(steps++,unsigned((duration+.1)*frequency));model->Calculate();core.environment->IncreaseModelTimeByStep();}
+            const auto referenceResult=learner->TakeNativeProbeResult();ASSERT_TRUE(referenceResult);ASSERT_TRUE(prepared);
+            ASSERT_EQ(referenceResult->status,NativeProbeStatus::Completed);ASSERT_TRUE(referenceResult->observation);
+            ASSERT_TRUE(referenceResult->observation->valid);captured.push_back({*prepared,*referenceResult->observation});
+        }
+        const auto references=CapturedReferences::Capture(protocol,captured);
+        BoundedTrainingConfig cfg;cfg.runId=name+"/bounded_training";cfg.normalization=Normalization::TipResistance;
+        cfg.maximumProbes=64;cfg.maximumEdits=16;cfg.maximumCandidatesPerInput=8;cfg.resistanceSubdivisionDepth=2;
+        // This adapter integration isolates R normalization. Fixed lengths do
+        // not synchronize the fixture at the production default .02 seconds.
+        cfg.tolerances.sync=.2;
+        for(const auto& p:parameters)cfg.bounds.push_back({p.length,p.length,1,1,p.resistance,p.resistance*2.});
+        physicalSynapses[0]->Resistance=parameters[0].resistance*2.;
+        parameters[0].resistance=physicalSynapses[0]->Resistance.GetData();
+        auto declared=learner->TipSynapseResistance.GetData();declared[0]=parameters[0].resistance;
+        learner->TipSynapseResistance.SetDataDirect(declared);
+        cfg.initialModelRevision=readRevision();ASSERT_NE(cfg.initialModelRevision,base);
+        BoundedTrainingSession training(references,cfg,parameters);QJsonArray actions;
+        while(const auto action=training.NextAction())
+        {
+            ASSERT_LT(actions.size(),100);
+            if(action->kind==TrainingActionKind::Edit)
+            {
+                for(unsigned i=0;i<inputCount;++i)
+                {
+                    EXPECT_EQ(action->parameters[i].length,lengths[i]);EXPECT_EQ(action->parameters[i].synapses,1);
+                    physicalSynapses[i]->Resistance=action->parameters[i].resistance;
+                    parameters[i].resistance=physicalSynapses[i]->Resistance.GetData();declared[i]=parameters[i].resistance;
+                }
+                learner->TipSynapseResistance.SetDataDirect(declared);
+                training.Applied(action->serial,parameters,readRevision());
+                actions.append(QJsonObject{{"serial",int(action->serial)},{"kind","edit"},{"model_revision",QString::fromStdString(readRevision())}});
+                continue;
+            }
+            auto probe=prototype;probe.inputId=protocol.inputs[action->inputIndex].id;
+            probe.activeInput=int(action->inputIndex);probe.baseModelRevision=action->baseModelRevision;probe.modelEpoch=action->modelEpoch;
+            probe.specification.runId=action->runId;probe.specification.trialId=action->trialId;
+            probe.specification.stimulusProfile=protocol.stimulusProfile;
+            probe.specification.windows={{probe.inputId,branch?0u:action->inputIndex,
+                onsets[action->inputIndex]-.001,onsets[action->inputIndex]+.06,protocol.stimulusIds[action->inputIndex]}};
+            probe.onPrepared=[&](const auto& prepared,const ProbeSpec&){training.Arm(action->serial,prepared);};
+            std::ostringstream samples;samples.imbue(std::locale::classic());samples<<std::setprecision(17)<<"time,stimulus";
+            for(unsigned i=0;i<(branch?1u:inputCount);++i)samples<<",soma"<<i;samples<<'\n';
+            probe.onSample=[&](const NativeProbeSample& sample) {
+                samples<<sample.time<<','<<sample.stimulus;for(double value:sample.potentials)samples<<','<<value;samples<<'\n';
+            };
+            learner->QueueNativeProbe(std::move(probe));unsigned steps=0;
+            while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
+            {ASSERT_LT(steps++,unsigned((duration+.1)*frequency));model->Calculate();core.environment->IncreaseModelTimeByStep();}
+            const auto measured=learner->TakeNativeProbeResult();ASSERT_TRUE(measured);
+            ASSERT_EQ(measured->status,NativeProbeStatus::Completed);ASSERT_TRUE(measured->observation);
+            ASSERT_TRUE(measured->observation->valid);
+            training.Consume(*measured->observation,measured->currentBaseRevision);
+            actions.append(QJsonObject{{"serial",int(action->serial)},{"kind","probe"},{"input",int(action->inputIndex)},
+                {"final",action->finalVerification},{"model_revision",QString::fromStdString(measured->currentBaseRevision)},
+                {"valid",measured->observation->valid},{"complete",measured->observation->complete}});
+            if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+            {
+                QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_train_"+QString::number(action->serial)+".csv");
+                ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));const auto bytes=QByteArray::fromStdString(samples.str());
+                ASSERT_EQ(file.write(bytes),bytes.size());
+            }
+        }
+        ASSERT_EQ(training.Status(),TrainingStatus::Exact);ASSERT_TRUE(training.Certificate());
+        EXPECT_GE(training.AppliedEdits(),1u);EXPECT_EQ(readRevision(),base);
+        EXPECT_TRUE(training.Certificate()->Matches(base,references,cfg.tolerances,ModelStateKind::LearnedSolo,training.ModelEpoch()));
+        if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_bounded_training.json");
+            ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));const auto bytes=QJsonDocument(QJsonObject{
+                {"status",TrainingStatusName(training.Status())},{"sync_tolerance",cfg.tolerances.sync},
+                {"amplitude_absolute",cfg.tolerances.amplitudeAbsolute},{"probes",int(training.IssuedProbes())},
+                {"edits",int(training.AppliedEdits())},{"actions",actions},{"scientific_training_result",false}}).toJson();
+            ASSERT_EQ(file.write(bytes),bytes.size());
+        }
+    }
     // Native Reset releases control and preserves the learned physical graph.
     learner->Reset();EXPECT_FALSE(learner->NativeProbeOwnsControl());
     EXPECT_EQ(learner->NativeProbeState(),NativeProbeStatus::Idle);
@@ -428,6 +531,14 @@ TEST(NativeBurstAssignment, ClassicWrongPhysicalChannel)
 {ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::WrongObservationChannel,2,3);}
 TEST(NativeBurstAssignment, BranchWrongPhysicalSelector)
 {ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::WrongSoloSelector,2,3);}
+TEST(NativeBoundedTraining, Classic2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,true);}
+TEST(NativeBoundedTraining, Branch2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,false,true);}
+TEST(NativeBoundedTraining, Classic20000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3,false,true);}
+TEST(NativeBoundedTraining, Branch20000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3,false,true);}
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeLearnerExecution,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
