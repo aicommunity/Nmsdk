@@ -66,7 +66,7 @@ template<class Learner> struct EditingRig {
     }
     ~EditingRig(){if(auto net=dynamic_pointer_cast<UNet>(model))net->BreakLinks();environment->DestroyModel();}
     std::string Revision() const {
-        auto identity=NmsdkTools::IdentifyModel(neuron,ports);
+        auto identity=NmsdkTools::IdentifyModel(neuron.Get(),ports);
         if(!identity["valid"].toBool())throw std::runtime_error("editor_fixture_identity");
         return identity["sha256"].toString().toStdString();
     }
@@ -127,7 +127,11 @@ template<class Learner> void CheckEdits(unsigned frequency,int normalization)
     soma->Capacity=1.41e-9;const double ltCapacity=lt->Capacity.GetData();
     const auto phase=rig.learner->TrainingPhase.GetData();const auto need=rig.learner->IsNeedToTrain.GetData();
     values[0].length=3;if(normalization==0)values[0].synapses=3;else values[0].resistance*=1.1;
+    const auto beforeEdit=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
     const auto edit=rig.learner->ApplyNativeParameters(values);
+    Artifact(rig.name+"_edit.json",QJsonDocument(QJsonObject{{"status",NativeEditStatusName(edit.status)},
+        {"reason",QString::fromStdString(edit.reason)},{"may_have_changed",edit.modelMayHaveChanged},
+        {"before",beforeEdit},{"after",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)}}).toJson());
     ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
     EXPECT_EQ(edit.effective,values);EXPECT_TRUE(rig.learner->IsReady());EXPECT_TRUE(rig.learner->IsInit());
     EXPECT_EQ(rig.learner->DendriteLength.GetData(),(std::vector<int>{3,1}));
