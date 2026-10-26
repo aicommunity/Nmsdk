@@ -6,9 +6,10 @@
 namespace NmsdkTools {
 // Version-1 length-framed UTF8/binary64 encoding shared by identity and archive.
 QString CanonicalModelDataSha256(const QJsonValue& data);
-// Read-only semantic identity of a complete, ready, self-contained graph.
+// Read-only semantic identity of a complete, ready graph. Version 1 is closed;
+// version 2 records explicitly declared external matrix-double stimulus ports.
 // Dynamic state, names/IDs of the root and presentation/diagnostic settings are
-// excluded. Unsupported parameter types or unresolved bindings invalidate it.
+// excluded. Unsupported parameter types, unused ports or undeclared bindings invalidate it.
 // The code/runtime identity and controller certificate remain separate records.
 QJsonObject IdentifyModel(RDK::UEPtr<RDK::UContainer> model,
                          const ModelBoundarySources& boundarySources = {});
