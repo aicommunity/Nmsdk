@@ -55,3 +55,9 @@ fresh child processes. Все 68 artifact hashes и 64 raw payload hashes про
 локально только как данные. Измерения выполнены на серверах; source/results
 переданы через Git. Последующие документальные commits не меняют исходники
 относительно проверенного снимка.
+
+PulseLib develop merge: 6480310a4ea83a444871164f0ffd787a99a66385, опубликован
+до согласования корневого gitlink. Rdk остаётся
+8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6, Bin —
+e78596e9639a841cd1989d73df7fe614419770ce. Source/test code относительно
+2694796a522a55d3b0b6c7b57d2c96eaf6ad0613 не меняется.
