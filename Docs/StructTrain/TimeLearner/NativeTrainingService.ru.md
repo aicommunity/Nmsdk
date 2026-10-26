@@ -70,9 +70,32 @@ base revision, хотя модель ещё не была подготовлен
 первых reference-проб. Root 2fd45d4424360d7834ba094f875ddeda678c1625 прошёл
 65 адресных cases на обоих серверах: 11 service, 11 bounded kernel, 17 final
 verification, четыре native editor, 20 прежних lifecycle invalidation и два
-шестивходовых controls. M40 ASan проверяется отдельно. Дополнение root
+шестивходовых controls. M40 ASan: 8/8, detect_leaks=0. Дополнение root
 27068892e86095e67feb2a4bf904ca5171c090d1 сохраняет также полные reference
-observations после Reset/warm restart; его отдельная проверка ещё выполняется.
+observations после Reset/warm restart; 31/31 прошли на каждом сервере. Root
+90d11d1990221753e6b494dbf40d83964b7d0fa3 добавляет полный state summary с
+конфигурацией, кандидатами, readback и численными остатками сертификата;
+39/39 прошли на каждом сервере. Summary не является checkpoint/import-форматом.
+
+Корневой модуль Scripts/StructTrain/TimeLearner/native_evidence.py проверен
+на root 99cacf35326548a9f2d4f3ed2cad143497dc7a2b: 12 тестов на каждом сервере
+используют реальные C++ пакеты, включая повреждение данных и перестановку
+references/residuals. Проверены 56 CSV/observations и четыре свежих отрицательных
+сертификата на каждом сервере: candidate↔anchor epochs/revisions, действительные
+максимумы и timestamps, Raw CapturedPerInput, signed residuals и допуски.
+Модуль не производит recognition/evaluation verdict. CLI отдельной пробы:
+
+```text
+python -m Scripts.StructTrain.TimeLearner.native_evidence trial.json --trace trial.csv
+```
+
+Source анализа, interpreter и hash модуля сохранены отдельно от C++ runtime.
+Все попытки, включая исходный failure, опубликованы через Git:
+[Elder-1](../../../Reports/StructTrain/TimeLearner/s06-native-service-elder1/README.md),
+[M40](../../../Reports/StructTrain/TimeLearner/s06-native-service-m40/README.md).
+ASan A2 предшествует A3 retention и A4 диагностическому encoder; их normal
+проверки представлены собственными snapshots. Полный CTest или завершённая
+V2 physics matrix этим набором не заявляются.
 
 Exact/warm control намеренно использует фиксированную структуру и sync tolerance
 0.2 с: это проверка orchestration и lifecycle, не сходимость при default 0.02 с.
