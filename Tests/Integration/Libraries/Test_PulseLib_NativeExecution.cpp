@@ -636,8 +636,17 @@ TEST(NativeBranchAliasing, CoincidentLabelsExposeOneEffectivePhysicalBank)
             EXPECT_EQ(membrane->NumExcitatorySynapses.GetData(),1);
             const auto requested=learner->TipSynapseResistance.GetData();ASSERT_EQ(requested.size(),2u);
             EXPECT_NE(requested[0],requested[1]);
-            EXPECT_EQ(physical->Resistance.GetData(),requested[1]);
-            EXPECT_NE(physical->Resistance.GetData(),requested[0]);
+            auto input0=neuron->GetComponentL<NPulseSynapseCommon>("Dendrite1_"+
+                std::to_string(learner->DendriteLength[0])+".ExcSynapse1",true);
+            auto input1=neuron->GetComponentL<NPulseSynapseCommon>("Dendrite1_"+
+                std::to_string(learner->DendriteLength[1])+".ExcSynapse1",true);
+            ASSERT_TRUE(input0);ASSERT_TRUE(input1);ASSERT_EQ(input0.Get(),input1.Get());
+            const std::vector<double> effective{input0->Resistance.GetData(),input1->Resistance.GetData()};
+            EXPECT_NE(effective,requested);
+            // Reset/mute may select a different last writer; that phase detail
+            // cannot turn a single physical resistance into two independent R.
+            const auto saved=input0->Resistance.GetData();input0->Resistance=requested[1];
+            EXPECT_EQ(input1->Resistance.GetData(),requested[1]);input0->Resistance=saved;
         }
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
         {
