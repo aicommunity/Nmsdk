@@ -19,6 +19,7 @@
 #include <locale>
 #include <cstdlib>
 #include <algorithm>
+#include <cmath>
 
 namespace {
 using namespace RDK;
@@ -284,7 +285,10 @@ template<class Learner> void RepeatedNativeProbes(unsigned frequency)
         auto soma=neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);
         ASSERT_TRUE(soma);somas.push_back(soma);
     }
-    QJsonArray trials;std::vector<std::vector<double>> reference;
+    QJsonArray trials,configuredPattern;std::vector<std::vector<double>> reference;
+    for(double gap:gaps)configuredPattern.append(gap);
+    const auto patternHash=NmsdkTools::CanonicalModelDataSha256(configuredPattern).toStdString();
+    const auto phase=learner->TrainingPhase.GetData();
     // Different idle intervals; the same built graph is reused throughout.
     const double starts[]{.1,.9,2.};
     dataset->StateGeneration=0;
@@ -296,7 +300,7 @@ template<class Learner> void RepeatedNativeProbes(unsigned frequency)
         neuron->Reset();dataset->Reset();dataset->StateGeneration=2;
         const double begin=core.environment->GetTime().GetDoubleTime();
         ProbeSpec spec;spec.runId=name;spec.trialId=name+"_"+std::to_string(trial);
-        spec.sampleId="native_burst";spec.patternHash="fixed_4_isi_for_restart_control";
+        spec.sampleId="native_burst";spec.patternHash=patternHash;
         spec.modelRevision=revision;spec.begin=begin;spec.end=begin+.56;
         spec.maximumSampleGap=1./frequency;spec.maximumSamples=frequency;
         for(const auto& soma:somas)spec.baseline.push_back(soma->SumPotential(0,0));
@@ -307,6 +311,9 @@ template<class Learner> void RepeatedNativeProbes(unsigned frequency)
         }
         ProbeRecorder recorder(spec);unsigned count=0;double lastEmission=begin-1.;
         std::vector<std::vector<double>> waveform;QJsonArray stimuli;
+        std::ostringstream trace;trace.imbue(std::locale::classic());
+        trace<<std::setprecision(17)<<"native_tick_start_s,relative_time_s,stimulus";
+        for(unsigned i=0;i<somas.size();++i)trace<<",raw_soma_"<<i;trace<<'\n';
         double now=begin;
         while(now<spec.end)
         {
@@ -322,7 +329,10 @@ template<class Learner> void RepeatedNativeProbes(unsigned frequency)
                     stimuli.append(time-begin);lastEmission=time;
                 }
             }
-            std::vector<double> values;for(const auto& soma:somas)values.push_back(soma->SumPotential(0,0));
+            std::vector<double> values;
+            trace<<now<<','<<now-begin<<','<<generator->Output(0,0);
+            for(const auto& soma:somas){values.push_back(soma->SumPotential(0,0));trace<<','<<values.back();}
+            trace<<'\n';
             waveform.push_back(values);recorder.Observe(now,values,revision);
             core.environment->IncreaseModelTimeByStep();
         }
@@ -330,21 +340,34 @@ template<class Learner> void RepeatedNativeProbes(unsigned frequency)
         const auto observation=recorder.Close(now,actual["sha256"].toString().toStdString(),"window_closed");
         ASSERT_TRUE(observation.complete);ASSERT_TRUE(observation.valid);ASSERT_EQ(count,4u);
         EXPECT_EQ(actual["sha256"],identity["sha256"]);EXPECT_FALSE(learner->IsNeedToTrain.GetData());
+        EXPECT_EQ(learner->TrainingPhase.GetData(),phase);
         EXPECT_NEAR(dataset->GetSampleStartTime(),begin,1e-12);
         for(unsigned i=0;i<4;++i)EXPECT_NEAR(stimuli[int(i)].toDouble(),onsets[i],1./frequency+1e-12);
+        double maximumDifference=0.;
+        const auto compared=trial?std::min(reference.size(),waveform.size()):waveform.size();
         if(trial==0)reference=waveform;
         else
         {
             // Accumulated absolute-clock rounding can change the final sample
             // count by one; common relative samples still prove native response.
-            const auto common=std::min(reference.size(),waveform.size());
-            ASSERT_GE(common,static_cast<std::size_t>(.55*frequency));
-            for(std::size_t i=0;i<common;++i)for(unsigned c=0;c<somas.size();++c)
-                EXPECT_NEAR(waveform[i][c],reference[i][c],1e-10)<<"trial="<<trial<<" sample="<<i;
+            ASSERT_GE(compared,static_cast<std::size_t>(.55*frequency));
+            for(std::size_t i=0;i<compared;++i)for(unsigned c=0;c<somas.size();++c)
+                maximumDifference=std::max(maximumDifference,std::abs(waveform[i][c]-reference[i][c]));
+            EXPECT_LE(maximumDifference,1e-10)<<"trial="<<trial;
+        }
+        const auto csvName=spec.trialId+".csv";
+        if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
+        {
+            const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+            QFile csv(directory+"/"+QString::fromStdString(csvName));ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+            const auto bytes=QByteArray::fromStdString(trace.str());ASSERT_EQ(csv.write(bytes),bytes.size());
         }
         trials.append(QJsonObject{{"trial_id",QString::fromStdString(spec.trialId)},
             {"begin",begin},{"end",now},{"sample_count",int(observation.sampleCount)},
             {"complete",observation.complete},{"valid",observation.valid},{"actual_relative_stimuli",stimuli},
+            {"configured_pattern_sha256",QString::fromStdString(patternHash)},
+            {"waveform_file",QString::fromStdString(csvName)},{"compared_samples",int(compared)},
+            {"maximum_raw_potential_difference",maximumDifference},{"comparison_tolerance",1e-10},
             {"model_before",identity},{"model_after",actual}});
         dataset->StateGeneration=0;
     }
@@ -366,4 +389,46 @@ TEST_P(NativeProbeRestart, DatasetAndPhysicalResetAtNonzeroModelTime)
 INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeProbeRestart,::testing::Values(
     std::make_pair(false,2000u),std::make_pair(true,2000u),
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
+
+class NativeDatasetEvents : public ::testing::TestWithParam<unsigned> {};
+TEST_P(NativeDatasetEvents, AdjacentPulsesRemainDistinctWithoutOutputEdges)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();ASSERT_TRUE(model);
+    core.environment->GetTime().SetTime(0);
+    auto dataset=dynamic_pointer_cast<NDatasetMatrix>(core.storage->TakeObject("NDatasetMatrix"));ASSERT_TRUE(dataset);
+    dataset->Name="Dataset";dataset->NumSamples=1;dataset->NumFeatures=1;dataset->MaxSpikesPerFeature=4;
+    MDMatrix<double> pattern;pattern.Assign(4,1,.001);pattern(0,0)=.01;dataset->MatrixData=pattern;
+    dataset->Delay=1.;dataset->StateGeneration=2;
+    UEPtr<UContainer> component=dataset;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    model->SetGlobalTimeStep(GetParam());model->Init();model->Reset();
+    auto generator=dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
+    generator->PulseLength=.001;
+    unsigned edges=0;double previous=0.,lastEmission=-1.;QJsonArray events;
+    for(unsigned tick=0;tick<GetParam()/25;++tick)
+    {
+        model->Calculate();
+        const auto output=generator->Output(0,0);if(output>0. && previous<=0.)++edges;previous=output;
+        for(int i=0;i<generator->OutputPulseTimes.GetCols();++i)
+        {
+            const auto time=generator->OutputPulseTimes(0,i);
+            if(time>lastEmission){events.append(time);lastEmission=time;}
+        }
+        core.environment->IncreaseModelTimeByStep();
+    }
+    ASSERT_EQ(events.size(),4);EXPECT_LT(edges,4u);
+    for(int i=1;i<events.size();++i)EXPECT_GT(events[i].toDouble(),events[i-1].toDouble());
+    if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
+    {
+        const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+        QFile file(directory+"/DatasetEvents_"+QString::number(GetParam())+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const auto bytes=QJsonDocument(QJsonObject{{"kind","native_adjacent_stimulus_events"},
+            {"frequency_hz",int(GetParam())},{"rising_edges",int(edges)},
+            {"actual_stimuli",events},{"scientific_training_result",false}}).toJson();
+        ASSERT_EQ(file.write(bytes),bytes.size());
+    }
+    core.environment->DestroyModel();
+}
+INSTANTIATE_TEST_SUITE_P(Rates,NativeDatasetEvents,::testing::Values(2000u,20000u));
 }
