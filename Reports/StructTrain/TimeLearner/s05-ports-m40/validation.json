@@ -1,0 +1,30 @@
+{
+  "tested_root": "b94cfacea5593a8aff07c9c6870fd3c8150d6a59",
+  "targeted_cases": 16,
+  "targeted_passed": 15,
+  "helper_skipped": 1,
+  "fresh_child_imports": 4,
+  "release_ctest_suites": 4,
+  "asan_ctest_suites": 4,
+  "asan_options": "detect_leaks=0",
+  "full_pulselib_cases": 140,
+  "full_pulselib_passed": 139,
+  "full_helper_skipped": 1,
+  "git_cross_host_source_commit": "e35aa128cf10fd7b9d0f29fcd05291bc0056a3d2",
+  "cross_host": [
+    {
+      "frequency_hz": 2000,
+      "samples": 200,
+      "max_pairwise_error": 0,
+      "model_identity": "ced65f487586e92d2efd0e48f63ae6ac8f3ae6e577cf0994c7a621703cdab7ae"
+    },
+    {
+      "frequency_hz": 20000,
+      "samples": 2000,
+      "max_pairwise_error": 0,
+      "model_identity": "7a08fdd2ffb36202f768dec410d3200b558ccc62aaa225b9e37a5872a807b607"
+    }
+  ],
+  "scientific_training_result": false,
+  "controller_version_2_implemented": false
+}
