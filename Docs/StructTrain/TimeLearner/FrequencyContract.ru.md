@@ -59,6 +59,16 @@ global Classic 44/44 и Branch 14/14 узлов имеют 20000; individual с�
 CTest suites прошли. Последующий root 59c54e2 добавляет проверку CreateModel
 по имени и ID, видимости TimeStep и переключения режима.
 
+Финальный root 59c54e27c89146798d79cd8889b1e76b6c087102 с Rdk
+9cb00e640f857b4533518669c8ada01c80efc44e проверен на обоих серверах: пять
+адресных integration cases, три Rdk fixtures и 4/4 maintained CTest suites.
+Дополнительно два N1 burst controls при общем clock=20000 прошли по три
+модельных секунды с фактическими структурными решениями. После роста все 79
+узлов Classic и 49 узлов Branch имеют 20000 Гц и Init=true, readback valid.
+Raw traces, состояния, binary64 waveform hashes, XML/logs, pre-test manifests
+и SHA256 опубликованы в `s04-frequency-final-elder1` и
+`s04-frequency-final-m40`. Отдельного ASan прогона этой правки нет.
+
 Это проверка реализации частоты, не завершённый Train и не сертификат
 сходимости. Обязательная матрица физических моделей, export/import реального
 learner и Controller v2 остаются в работе. Границы дальнейшего приёма должны

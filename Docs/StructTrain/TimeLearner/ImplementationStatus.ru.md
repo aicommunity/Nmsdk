@@ -115,8 +115,10 @@ registration rollback, controller checkpoint и Train → frozen Test остаю
 При подготовке этапа 6 найден и исправлен TL-015: live Classic Build оставлял
 новый Neuron неинициализированным. Native controls и raw graph/readbacks:
 [LiveRebuildInit](LiveRebuildInit.ru.md). Обнаружен также TL-016: смешанные
-эффективные частоты при legacy model clock=20000; uniform-rate поддержка этим
-не доказана и остаётся открытой. Общая управляющая математика сохранена в
+эффективные частоты при legacy model clock=20000. Последующее исправление
+общего режима Rdk и его ограниченная проверка описаны в
+[FrequencyContract](FrequencyContract.ru.md); полная uniform-rate матрица ещё
+не доказана. Общая управляющая математика сохранена в
 отдельной неподключённой ветке; перенос общего контроллера не объявляется
 завершённым: [Stage06-Progress](Stage06-Progress.ru.md).
 
