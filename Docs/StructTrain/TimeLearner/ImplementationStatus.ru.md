@@ -122,6 +122,12 @@ registration rollback, controller checkpoint и Train → frozen Test остаю
 строгим native A/B на обоих серверах. Перенос полного контроллера и исправление
 алгоритмов не объявляются завершёнными: [Stage06-Progress](Stage06-Progress.ru.md).
 
+Также введены ProbeSpec/Observation и bounded recorder с фактическими пиками,
+неполнотой, revision mismatch и явными unknown значениями. Native frozen
+characterization проверена в обоих learner при 2000/20000; общий controller
+ещё не подключён. Полный CTest выявил и помог исправить TL-017/018 в Rdk
+storage metadata/identity: [ProbeMeasurement](ProbeMeasurement.ru.md).
+
 Этап 1 требует завершения semantic/evidence review; этап 4 требует оставшихся
 lifecycle/graph проверок; этапы 5–12 ещё не завершены. Pending не обозначается PASS,
 version 2 не объявляется production-ready до всей обязательной проверки.

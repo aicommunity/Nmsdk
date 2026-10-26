@@ -1,5 +1,11 @@
 # Этап 4: подтверждённый подэтап и оставшиеся проверки
 
+Последующие TL-017/018: [ProbeMeasurement](ProbeMeasurement.ru.md) фиксирует
+зависимость class-image регистрации от pooled TimeStep visibility и ложную
+коллизию при смене Environment mode. Исправления Rdk проверены на обоих серверах
+полным CTest, дополнительными native controls и ограниченным ASan на M40.
+Этим не закрываются оставшиеся OpenProject/CloneChannel и multirate проверки.
+
 Последующая проверка TL-016 и исправление общего режима при присоединении
 поддеревьев: [FrequencyContract](FrequencyContract.ru.md). Она отделяет
 global-rate экземпляры от detached storage-образов и individual-rate моделей.
