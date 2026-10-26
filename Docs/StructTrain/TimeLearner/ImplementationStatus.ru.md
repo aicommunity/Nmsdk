@@ -27,6 +27,15 @@ symbols и два сравнения native waveform/identity. Пакеты оп
 См. [ModelGraphOwnership](ModelGraphOwnership.ru.md). Это подготовка producer
 модели для контроллера, а не завершение обученного state export или main search.
 
+Измерительная schema 3 добавляет whole-burst assignment и physical input
+ownership. Полная приёмка отдельного снимка: 273 cases (264 pass, 9 skip) в
+PulseLib и четыре maintained suites на каждом сервере; M40 ASan 48 checks.
+После объединения с model API проверены ещё 61 addressed cases (60 pass, один
+helper skip) и 16 совпадающих native waveform/identity/outcome pairs на каждом
+сервере. См. [BurstAssignment](BurstAssignment.ru.md). Это внутренний API;
+ControllerVersion=2, основной поиск, trained-state export и широкая physics/
+inhibition applicability остаются обязательной незавершённой частью плана.
+
 ## Исходная точка
 
 До изменений root был 895dea071600eafe489c97dffc8147383587e51c, PulseLib checkout
