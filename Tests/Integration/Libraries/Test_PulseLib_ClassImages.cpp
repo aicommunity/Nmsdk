@@ -86,6 +86,22 @@ TEST(TimeLearnerClassImages, EnvironmentAssignmentRemovesPreviousTimeStepVisibil
  core.storage->ReturnObject(copy);core.storage->ReturnObject(source);
 }
 
+TEST(TimeLearnerClassImages, EquivalentPhysicsRemainsIdempotentAcrossTimeStepVisibilityModes)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ core.environment->SetUseIndTimeStepFlag(true);
+ auto source=Channel(1.19e-9);ASSERT_TRUE(source);
+ const std::string name="TimeLearnerUnit_ModeIndependentImage";
+ const auto first=RegisterClassImage(core.storage,name,source);EXPECT_TRUE(first.created);
+ core.environment->SetUseIndTimeStepFlag(false);source->SetEnvironment(core.environment);
+ EXPECT_NO_THROW({const auto repeated=RegisterClassImage(core.storage,name,source);EXPECT_FALSE(repeated.created);});
+ // Numeric frequency still belongs to the image physics and cannot be ignored.
+ source->SetGlobalTimeStep(20000);
+ try {RegisterClassImage(core.storage,name,source);FAIL()<<"different rate accepted";}
+ catch(const ClassImageError& error){EXPECT_EQ(error.code,"image_name_collision");}
+ core.storage->ReturnObject(source);
+}
+
 TEST(TimeLearnerClassImages, NonfiniteParameterAndExternalBindingAreRejected)
 {
  const auto& core = NmsdkTests::InitEngineForPulseLibTests();
