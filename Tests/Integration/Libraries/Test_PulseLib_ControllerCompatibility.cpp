@@ -46,7 +46,7 @@ void HashDouble(QCryptographicHash& hash, double value)
 struct Case { bool branch; int normalization; unsigned frequency; };
 class NativeControllerCompatibility : public ::testing::TestWithParam<Case> {};
 
-template<class Learner> void Run(const Case& spec, const QString& name)
+template<class Learner> void RunNativeControl(const Case& spec, const QString& name)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     core.environment->DestroyModel();
@@ -130,8 +130,8 @@ TEST_P(NativeControllerCompatibility, NativeBurstObservationsAndDecisions)
     if(!std::getenv("TIMELEARNER_COMPAT_OUTPUT")) GTEST_SKIP() << "Explicit bounded native A/B run; not a convergence or scientific PASS";
     const auto spec=GetParam();
     const auto name=QString("%1-N%2-f%3").arg(spec.branch ? "Branch" : "Classic").arg(spec.normalization).arg(spec.frequency);
-    if(spec.branch) Run<NNeuronTimeLearnerBranch>(spec,name);
-    else Run<NNeuronTimeLearner>(spec,name);
+    if(spec.branch) RunNativeControl<NNeuronTimeLearnerBranch>(spec,name);
+    else RunNativeControl<NNeuronTimeLearner>(spec,name);
 }
 INSTANTIATE_TEST_SUITE_P(TopologiesModesRates,NativeControllerCompatibility,::testing::Values(
     Case{false,0,2000},Case{false,1,2000},Case{true,0,2000},Case{true,1,2000},
