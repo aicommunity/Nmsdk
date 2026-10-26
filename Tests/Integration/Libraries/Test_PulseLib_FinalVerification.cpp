@@ -228,4 +228,21 @@ TEST(FinalVerification, CapturingReferencesRequiresAllInputsAndOneInitialModel)
     }
     EXPECT_THROW(CapturedReferences::Capture(p,evidence),std::invalid_argument);
 }
+
+TEST(FinalVerification, UnknownOrChangedRuntimeContextInvalidatesPreviouslyVerifiedInputs)
+{
+    const auto p=Protocol(2);const auto refs=References(p);
+    for(bool knownEdit:{false,true})
+    {
+        FinalVerificationSession session(refs,Configuration());auto first=session.NextRequest();auto prepared=Prepared(*first);
+        session.Arm(prepared);session.Consume(Observation(p,prepared,first->runId,first->trialId),first->baseModelRevision);
+        ASSERT_EQ(session.AcceptedInputs(),1u);
+        auto second=session.NextRequest();prepared=Prepared(*second);session.Arm(prepared);
+        auto data=Observation(p,prepared,second->runId,second->trialId);
+        if(knownEdit){data.reasons={"model_revision_changed"};data.valid=false;}
+        session.Consume(data,knownEdit?second->baseModelRevision:std::string{});
+        EXPECT_EQ(session.AcceptedInputs(),0u);EXPECT_EQ(session.Status(),VerificationStatus::InvalidObservation);
+        EXPECT_FALSE(session.Certificate());EXPECT_EQ(session.ModelEpoch(),1u);
+    }
+}
 }
