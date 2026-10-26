@@ -62,12 +62,13 @@ template<class Learner> void RunNativeControl(const Case& spec, const QString& n
     auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(spec.branch ? "NNeuronTimeLearnerBranch" : "NNeuronTimeLearner"));
     ASSERT_TRUE(learner); learner->SetEnvironment(core.environment);
     learner->Name="ControllerControl";
-    learner->StructureBuildMode=1; learner->NumInputDendrite=2;
-    learner->NeuronClassName="NSPNeuronGenAsymRmD001C1e9";
+    learner->StructureBuildMode=1; learner->NumInputDendrite=4;
+    learner->NeuronClassName="NSPNeuronGen";
     learner->MaxDendriteLength=8; learner->NormalizationMode=spec.normalization;
     learner->CalculateMode=1; learner->ExperimentMode=false;
     learner->EnablePostTrainTuning=false; learner->AutoCalibrateFixedLTZThreshold=false;
-    MDMatrix<double> pattern; pattern.Assign(2,1,0.); pattern(0,0)=.01; pattern(1,0)=.05;
+    MDMatrix<double> pattern; pattern.Assign(4,1,0.);
+    pattern(0,0)=.01; pattern(1,0)=.08; pattern(2,0)=.16; pattern(3,0)=.24;
     learner->InputPattern=pattern;
     UEPtr<UContainer> component=learner;
     ASSERT_NE(model->AddComponent(component),ForbiddenId);
@@ -82,7 +83,7 @@ template<class Learner> void RunNativeControl(const Case& spec, const QString& n
     ASSERT_TRUE(generator);
     QJsonArray events; events.append(State(learner,0));
     QCryptographicHash waveform(QCryptographicHash::Sha256);
-    const unsigned ticks=unsigned(2.25*spec.frequency);
+    const unsigned ticks=3*spec.frequency;
     double low=0.,high=0.,previousIteration=-1.,previousStimulus=0.; bool decision=false;
     QJsonArray stimulusOnsets;
     for(unsigned tick=0;tick<ticks;++tick)
@@ -108,11 +109,13 @@ template<class Learner> void RunNativeControl(const Case& spec, const QString& n
         }
     }
     events.append(State(learner,ticks));
-    EXPECT_GE(stimulusOnsets.size(),4);
+    EXPECT_GE(stimulusOnsets.size(),8);
     EXPECT_GT(high-low,1e-8);
     EXPECT_TRUE(decision) << "fixture must execute a real structural decision, not merely tick an idle model";
     QJsonObject result{{"schema_version",1},{"kind","native_legacy_controller_compatibility_control"},
         {"case",name},{"model_ticks",int(ticks)},{"frequency_hz",int(spec.frequency)},
+        {"neuron_class","NSPNeuronGen"},{"input_pattern",QJsonArray{.01,.08,.16,.24}},
+        {"waveform_min",low},{"waveform_max",high},
         {"pulse_count",generator->PulseCounter.GetData()},{"events",events},
         {"actual_stimulus_onset_ticks",stimulusOnsets},
         {"waveform_sha256",QString::fromLatin1(waveform.result().toHex())},
