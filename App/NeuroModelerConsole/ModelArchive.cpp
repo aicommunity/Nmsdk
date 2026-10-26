@@ -304,10 +304,14 @@ UEPtr<UContainer> LoadSnapshot(const QJsonObject& snapshot, UEPtr<UStorage> stor
         auto sourceItem = dynamic_cast<UItem*>(source->second->GetOwner());
         auto connector = dynamic_pointer_cast<UConnector>(owner);
         int actualSlot = slot;
-        if(!input || !(property->GetType() & ptInput) || !sourceItem || !connector ||
-           !sourceItem->IsReady() || !sourceItem->IsInit() ||
-           !sourceItem->Connect(connector,source->second->GetName(),name,actualSlot,true) || actualSlot != slot)
-            Fail("boundary_binding_failed", target);
+        if(!input || !(property->GetType() & ptInput) || !sourceItem || !connector)
+            Fail("boundary_binding_failed", target + ": invalid native endpoint");
+        if(!sourceItem->IsReady() || !sourceItem->IsInit())
+            Fail("boundary_binding_failed", target + ": source not initialized and ready");
+        if(!sourceItem->Connect(connector,source->second->GetName(),name,actualSlot,true))
+            Fail("boundary_binding_failed", target + ": native Connect failed");
+        if(actualSlot != slot)
+            Fail("boundary_binding_failed", target + QString(": expected slot %1, native slot %2").arg(slot).arg(actualSlot));
     }
     RequireMatch(snapshot["identity"].toObject(), object,boundarySources);
     return lease.Release();
