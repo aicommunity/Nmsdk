@@ -1,8 +1,8 @@
-# Native executor: рабочая интеграция, приёмка открыта
+# Native executor: проверенный внутренний контур
 
-Код находится в ветках stage07/native-probe-executor корня/PulseLib и
-stage07/lifecycle-observation Rdk. В develop этот подэтап ещё не принят.
-Последняя принятая closure остаётся 71a1b7f4412a8e769ec487104b7b8b94675f98f0.
+Подэтап разработан в stage07/native-probe-executor корня/PulseLib и
+stage07/lifecycle-observation Rdk. Серверная приёмка описанного ниже внутреннего
+API выполнена. Это не завершённый общий контроллер или весь этап 7.
 
 ## Путь исполнения
 
@@ -53,12 +53,12 @@ Executor должен проверять lifetime/текущий live graph пе
 
 ## Открытые проверки и ограничения
 
-Нужны адресные отрицательные случаи Reset/Build/UnInit/Copy/deletion, изменения
-source/паттерна/параметров, callback errors, отмена и повторная очередь; native
-цепочка FinalVerification; размерности 1/2/4/>4, совпадающие attach points и
-торможение; полный CTest на обоих серверах и ASan. Требуется отдельное A/B legacy
-поведения после hooks/Build/Init wrappers. Пока эти gates не пройдены, API нельзя
-выдавать за проверенную версию контроллера 2.
+Проверены Reset/Build/UnInit/deletion, source/паттерн, callback errors, external
+stop, повторные очереди native FinalVerification и размерности 1/2/4/6 в явно
+заданных сочетаниях частот. Copy/retarget во время пробы, совпадающие attach
+points, вся матрица торможения и physics ещё требуют отдельных controls.
+Полный CTest, ASan и восемь bounded legacy A/B пройдены в указанном ниже объёме;
+они не разрешают объявлять API готовой версией контроллера 2.
 
 Native observation schema 2 содержит typed StimulusProfile: класс источника,
 amplitude, pulse length, frequency Hz, frequency deviation и transit/pattern
@@ -93,10 +93,9 @@ OutsideTolerance по времени при совпадающих raw targets. 
 модели, не завершённое обучение и не распознавание.
 
 Новые schema 2/source-profile, callbacks/UnInit и ускоренный structural inspector
-проверяются отдельно от этих снимков. Их незавершённая проверка не закрывается
-результатом старой schema 1. Полные SHA, runtime provenance, первичные CSV/JSON,
-negative baselines и публикация Git-артефактов обязательны перед merge подэтапа;
-пока результаты находятся в серверных readbacks рабочего контура.
+проверены отдельно от этих снимков. Старые schema 1 observations сохраняют свою
+схему. Полные SHA, runtime provenance, первичные CSV/JSON и negative baselines
+опубликованы в пакетах финальной приёмки ниже.
 
 Рабочий контроль Branch N=2 расширен: недостающая reference снимается отдельной
 native solo-пробой с проверкой фактических связей выбранной точки. Затем verifier
@@ -107,7 +106,7 @@ target и measured raw potential. На M40 root
 089866d374da64c807d0a5b682b02c05826a9720 прошёл оба случая 2000/20000 Гц.
 Повторные raw amplitudes совпали со своими references (разные между входами);
 timing residual первого входа -0.0705/-0.07005 с, второго — 0. Итог в обоих
-случаях OutsideTolerance, без Exact. Elder-1 и полная приёмка ещё выполняются.
+случаях OutsideTolerance, без Exact. Elder-1 также прошёл оба случая.
 
 В промежуточном a8 два теста OwnerUnInit выявили особенность общего lifecycle:
 UContainer вызывает AUnInit напрямую и обходит UModule::BeforeUnInit. Добавление
@@ -117,7 +116,7 @@ learner, сохраняя исходный обход hooks и порядок д
 проверяет этот обход. Root d2b67279eb56a8a8bfa5a8752cb9d1a90db4908a (a9)
 прошёл на обоих серверах 57 адресных тестов и 4/4 lifecycle tests, включая
 OwnerUnInit обеих топологий. Полные CTest, ASan, legacy A/B и Git-публикация
-этих данных остаются обязательными перед merge.
+этих данных выполнены на финальном снимке ниже.
 
 На обоих серверах primary CSV четырёх общих случаев a7→a9 (Classic/Branch,
 N=1/2 при 2000 Гц) побайтово совпали; base/effective semantic identities также
@@ -130,4 +129,35 @@ ASan runtime root 089866d374da64c807d0a5b682b02c05826a9720 на M40 прошёл
 обеих топологий, Reset/Build/UnInit, ошибки callbacks/source и Branch N=2 native
 final verification. Это не полный ASan CTest и не утверждение об отсутствии
 утечек. Elder-1 также прошёл оба новых Branch N=2 controls (2000/20000 Гц).
-Полные CTest и legacy A/B ещё выполняются; публикация Git-артефактов открыта.
+Полные CTest и legacy A/B пройдены, пакеты доступны через Git.
+
+## Финальная приёмка подэтапа
+
+Проверенный root: 089866d374da64c807d0a5b682b02c05826a9720, PulseLib
+37bbc77bcfc418dfd6053aa267d71e18bbad63ff, Rdk
+a6b94092d0016b6a941bd6fd403725ae5c395538, Bin
+e78596e9639a841cd1989d73df7fe614419770ce. Последующие изменения до merge
+затрагивают только документы, gitlinks на документальные commits и артефакты;
+production/test code относительно этого снимка не меняется.
+
+На обоих серверах прошли четыре maintained CTest suites. PulseLib: 247 cases,
+238 passed, 9 skipped (восемь opt-in legacy controls и fresh-process helper,
+вызываемый parent fixtures). Все 34 native execution cases выполнены; восемь
+native final-verification controls выдали Exact для N=1 и OutsideTolerance для
+N=2. Эти исходные frozen модели не выдаются за завершённый Train.
+
+Отдельно прошли восемь baseline и восемь строгих legacy A/B на каждом сервере:
+Classic/Branch × N0/N1 × 2000/20000, три модельные секунды. Сравниваются весь
+JSON наблюдений/решений и binary64 soma waveform hash. Дополнительный анализ
+подтвердил одинаковые graph/order/cache pointers, bindings, physics и значения
+ptParameter. Только rdk_value прочих свойств исключены из этой metadata-проекции.
+Baseline runtime привязан к a9f985a3b3a3a436e01205ddb50341952d57c83e; его binary,
+ini и resolved libraries повторно проверены по прежнему manifest до исполнения.
+Новую source closure к старому executable не приписывают.
+
+Git-пакеты: [Elder-1](../../../Reports/StructTrain/TimeLearner/s07-native-executor-elder1/README.md),
+[M40](../../../Reports/StructTrain/TimeLearner/s07-native-executor-m40/README.md).
+Включены full CTest logs, XML, primary CSV/JSON, runtime manifests и SHA256.
+Все 867 artifact hashes, gzip integrity и 863 raw payload hashes проверены
+локально только как данные; численные проверки выполнялись на серверах.
+Отрицательный a3 Reset baseline имеется на M40; его не приписывают Elder-1.

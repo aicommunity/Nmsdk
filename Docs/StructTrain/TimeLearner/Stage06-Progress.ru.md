@@ -83,8 +83,13 @@ payloads проверены локально как данные; численн
 Общий stateful final-verification контур реализован отдельно:
 [FinalVerification](FinalVerification.ru.md). Он ещё не заменяет legacy gate.
 
-Остаются production-подключение ProbeRecorder/FinalVerification и revision
-producers, полный bounded search и topology adapters с native scheduler.
+Остаются configured production-dispatch общего train/search action loop,
+revision producers этого пути и полный bounded search.
+
+Последующий подэтап подключил внутренний native executor к обоим learner,
+включая Branch solo routing и native FinalVerification N=2. Серверные gates,
+ASan и повторное legacy A/B опубликованы в [NativeExecution](NativeExecution.ru.md).
+Это не configured dispatch ControllerVersion=2 и не основной bounded search.
 
 Для этого подключения проверена native-граница повторной пробы: на одном графе
 Dataset/Neuron Reset без learner Reset и повторного Build, при ненулевом времени
