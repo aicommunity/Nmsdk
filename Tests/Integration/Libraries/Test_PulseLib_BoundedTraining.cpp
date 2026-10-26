@@ -173,6 +173,29 @@ TEST(BoundedTraining, SearchBudgetAndExternalStopNeverCreateCertificate)
     EXPECT_EQ(deadline.Status(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(deadline.NextAction());EXPECT_FALSE(deadline.Certificate());
 }
 
+TEST(BoundedTraining, CoincidentBranchInputsCannotHideChangesToTheFixedAnchor)
+{
+    const auto p=Protocol(2,ProbeRouting::BranchSoloBurst);auto cfg=Configuration();cfg.tolerances.sync=1.;
+    cfg.bounds.assign(2,{1,3,1,2,1.,100.});
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+    DriveTraining(session,p,[](const TrainingAction& action,auto&,auto& raw) {
+        if(action.parameters[0].length==action.parameters[1].length)
+        {
+            EXPECT_EQ(action.parameters[0].synapses,action.parameters[1].synapses);
+            EXPECT_EQ(action.parameters[0].resistance,action.parameters[1].resistance);
+        }
+        raw[0]+=action.parameters[0].synapses==2?0.:.0001;
+    });
+    ASSERT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_GT(session.Parameters()[0].length,1);
+    EXPECT_EQ(session.Parameters()[0].synapses,2);EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+    cfg.bounds[0].maximumLength=1;
+    BoundedTrainingSession tied(References(p),cfg,{{1,1,10.},{1,1,10.}});
+    DriveTraining(tied,p,[](const auto&,auto&,auto& raw){raw[0]+=.0001;});
+    EXPECT_EQ(tied.Status(),TrainingStatus::SearchUnresolved);EXPECT_EQ(tied.AppliedEdits(),0u);
+    EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,2,10.},{1,1,10.}})),std::invalid_argument);
+    EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,1,11.},{1,1,10.}})),std::invalid_argument);
+}
+
 TEST(BoundedTraining, AppliedReadbackAndProbeRevisionAreMandatory)
 {
     const auto p=Protocol();auto cfg=Configuration();BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
