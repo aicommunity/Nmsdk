@@ -2,6 +2,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../Support/ConsoleLikeInit.h"
+#include "../../../App/NeuroModelerConsole/ModelInspection.h"
 #include <QCryptographicHash>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -132,6 +133,13 @@ template<class Learner> void RunNativeControl(const Case& spec, const QString& n
     ASSERT_TRUE(QDir().mkpath(output));
     QFile file(output+"/"+name+".json"); ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
     const auto bytes=QJsonDocument(result).toJson(); ASSERT_EQ(file.write(bytes),bytes.size());
+    auto neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    ASSERT_TRUE(neuron);
+    NmsdkTools::ModelBoundarySources ports{{&generator->Output,"burst"}};
+    QFile readback(output+"/"+name+"-readback.json");
+    ASSERT_TRUE(readback.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+    const auto graph=QJsonDocument(NmsdkTools::InspectModel(neuron,ports)).toJson();
+    ASSERT_EQ(readback.write(graph),graph.size());
     dynamic_pointer_cast<UNet>(model)->BreakLinks();
     core.environment->DestroyModel();
 }
