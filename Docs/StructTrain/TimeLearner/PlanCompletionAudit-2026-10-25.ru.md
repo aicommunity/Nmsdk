@@ -28,6 +28,16 @@ candidate холодного Branch N>2; проверка scoped случаев 
 миграция всех scripts, production runner/publisher и научная серия остаются
 открыты. Количество выполненных integration cases не заменяет эти требования.
 
+Следующий принятый API-подэтап [NativeTrainingService](NativeTrainingService.ru.md)
+соединяет capture, реальные структурные edits и fresh final gate внутри обоих
+learner. Caller больше не исполняет каждое действие тестовым циклом. Проверены
+65 addressed cases на каждом сервере, 8 M40 ASan; последующие snapshots отдельно
+проверяют retention/diagnostic state. Корневой auditor проверил 56 настоящих
+CSV/observations и четыре отрицательных сертификата на каждом сервере, 12 data
+tests. Это уточняет выполнение этапов 3/6/7, но не заменяет configured V2,
+динамические Rs domains, adaptive/assigned-wave измерения, complete Train→Test
+и прочие открытые этапы. Исходная таблица ниже сохраняется аудитом своего снимка.
+
 Проверен снимок корня d9150b1837600df662740db4c5c6e31c11c7aeee,
 PulseLib 735fea58af4b1815dc332c7d38af5bf4f68d0855,
 Bin 7136679740c5aa97def6fd3700b7b781d97af8f2,

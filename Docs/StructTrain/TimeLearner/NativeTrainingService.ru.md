@@ -96,6 +96,8 @@ Source анализа, interpreter и hash модуля сохранены от�
 ASan A2 предшествует A3 retention и A4 диагностическому encoder; их normal
 проверки представлены собственными snapshots. Полный CTest или завершённая
 V2 physics matrix этим набором не заявляются.
+Локально проверены 1233 compressed artifact hashes и raw gzip payloads двух
+Git-пакетов. Результаты численного анализа и тестов получены только на серверах.
 
 Exact/warm control намеренно использует фиксированную структуру и sync tolerance
 0.2 с: это проверка orchestration и lifecycle, не сходимость при default 0.02 с.
