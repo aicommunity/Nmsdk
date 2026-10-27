@@ -32,10 +32,22 @@ M40 → Elder-1 и пять Elder-1 → M40. Во всех случаях сов
 Прежние ad-hoc проверки могли использовать defaults вместо заявленного ini;
 это ограничение прежней runtime доказательности сохранено в отчётах.
 
-Расширенная matrix A7 (20 кГц, configured sources, N=1/4/6), ASan, полный
-maintained CTest после shared harness изменения и независимый полный аудит
-сертификатов по исходным CSV ещё не приняты. Последний реализован в root-модуле
+Расширенная matrix A7 завершена на обоих серверах: 16 pass + 1 role-helper skip,
+регрессии 43 pass + 1 helper skip, failures/errors=0. Root
+`4cc548656857bd97d927c16fdd070c7608e091f0`; данные опубликованы evidence commits
+`490fa673044044343a4b75c3a669491416c4674b` (Elder-1) и
+`29bc99bf9fb8a03fd020b7dda3a5f88fddc04ce7` (M40). Это Classic/Branch × N0/N1
+при 2/20 кГц, configured sources, N=1/4/6. Локально повторно проверены 6288
+stored SHA и 6284 raw payloads пакетов A1–A7 с cross-host дополнением.
+
+ASan, полный maintained CTest после shared harness изменения и независимый
+полный аудит сертификатов по исходным CSV ещё не приняты. Последний реализован в root-модуле
 `Scripts/StructTrain/TimeLearner/learned_evidence.py`, серверные tests ожидаются.
+Full CTest A8 остановлен до тестов из-за ошибочного имени отсутствующего root
+target; исходники не менялись. На Elder-1 запущен A9 на root
+`270c62ce55a80a9efea6e434bba8ca5664a821af` с четырьмя фактически поддерживаемыми
+suites, затем Python tests/audit. На M40 выполняется ASan A1 на root `4cc54865…`,
+12 реальных 2-кГц случаев и служебный helper, detect_leaks=0. Запуск не равен PASS.
 Поэтому последующие строки «подготовлены» описывают исходную постановку и не
 отменяют приведённые выше уже завершённые адресные проверки.
 
