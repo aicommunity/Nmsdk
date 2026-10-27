@@ -29,6 +29,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Native builder/adoption: проверенный C++ API, lifecycle и границы приёмки](NativeModelBuilder.ru.md).
 - [Configured ControllerVersion=2: cold JSON/XML, checks и ограничения](ConfiguredNativeController.ru.md).
 - [Семантика трёх новых configured properties в обоих learner](ConfiguredPropertyContracts.ru.md).
+- [Семантика исходных управляющих свойств и class selectors: 16 записей](LegacyControlPropertyContracts.ru.md).
+- [Текущий прогресс semantic property review](PropertyReview.json).
 - [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
 - [Нативный исполнитель проб Classic/Branch: рабочий подэтап и gates](NativeExecution.ru.md).
 - [Полная последовательность волн и physical input ownership: schema 3](BurstAssignment.ru.md).

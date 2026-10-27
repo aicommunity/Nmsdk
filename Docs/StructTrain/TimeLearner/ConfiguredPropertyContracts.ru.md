@@ -3,7 +3,10 @@
 Проверены исходники PulseLib `025d809f7b86cc79e18ddd711c6adc40e2396bf8`
 двух классов: `NNeuronTimeLearner` и `NNeuronTimeLearnerBranch`. Этот обзор
 касается трёх свойств каждого класса. Он не закрывает review 211 записей
-первоначального inventory и не заменяет их отдельную проверку.
+первоначального inventory и не заменяет их отдельную проверку. Code review
+16 исходных записей теперь зафиксирован отдельно в
+[LegacyControlPropertyContracts](LegacyControlPropertyContracts.ru.md) и
+[PropertyReview.json](PropertyReview.json); 195 остаются непроверенными.
 
 | Свойство обоих классов | Тип, единицы, Default | Владелец и setter | Build/Calculate/Reset | Сохранение и ограничения |
 |---|---|---|---|---|
