@@ -3,6 +3,8 @@
 Этот раздел содержит поддерживаемую спецификацию рефакторинга двух компонентов:
 Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
+Работа приостановлена пользователем: [точка продолжения и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
+
 - [План и условия приёмки](RefactoringPlan.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
 - [Актуальный статус всех этапов: сверка Git, кода и серверных A9/A15/property-A2 результатов 27.10](CurrentStatus-2026-10-27.ru.md).

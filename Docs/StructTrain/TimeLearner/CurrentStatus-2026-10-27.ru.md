@@ -1,5 +1,9 @@
 # Состояние полного плана: повторная сверка 27.10.2026
 
+**Работа приостановлена пользователем.** Оба post-fix full CTest остановлены
+как interrupted_by_user, не приняты. Код и промежуточные данные сохранены.
+Точка продолжения: [ResumeAfterPause](ResumeAfterPause-2026-10-27.ru.md).
+
 **План не завершён. Полностью принят этап 0. Частично выполнены этапы 1–7,
 9, 10 и 12. Этапы 8 и 11 по новой спецификации не выполнены.**
 Готовые API и адресные тесты не означают завершения соответствующего этапа.
@@ -96,9 +100,11 @@ scalar/matrix/vector bindings, Copy внутренних связей, construct
 CSV/JSON; это не отменяет transport failures. Исходные failed runs опубликованы
 в тех же Git-пакетах. Runtime старых заданий не изменялся.
 
-**Повторные post-fix full suites запущены на обоих workers:**
+**Повторные post-fix full suites остановлены пользователем на обоих workers:**
 `readbacks/s05-pooled-full-a1`, root `f3b45cb9300e4dd43f9d4c4d212e366b75195af1`.
-Их успешность ещё не установлена. До приёмки Rdk/PulseLib/root feature не закрываются.
+CTest exit=8, PulseLib INTERRUPT; полного PASS нет. До приёмки
+Rdk/PulseLib/root feature не закрываются. Новый test-only audit-default
+reproducer в root 2063e41e ещё не запускался.
 
 ## Очерёдность оставшейся работы
 
