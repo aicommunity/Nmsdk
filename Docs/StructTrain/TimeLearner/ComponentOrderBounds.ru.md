@@ -12,8 +12,9 @@ Rdk test-only commit `e2bcd8da5bab016bd3fd703c42e519e56b633081`, root
 
 ```text
 result = index + step                  # int может переполниться
-for i = index .. result inclusive:
-    children[i] = children[i + 1]      # чтение за концом при result=N−1
+if result > index:
+    for i = index .. result inclusive:
+        children[i] = children[i + 1]  # чтение за концом при result=N−1
 children[result] = moved
 ```
 
@@ -36,8 +37,12 @@ Rdk `2cfda44d738f6291914217dba9cd223acae35bfd`, root
 reject invalid source index
 destination = wide_integer(index) + step
 result = clamp(destination, 0, N−1)
-for i = index .. result exclusive:
-    children[i] = children[i + 1]
+if result > index:
+    for i = index .. result exclusive:
+        children[i] = children[i + 1]
+else:
+    for i = index down to result exclusive:
+        children[i] = children[i − 1]
 children[result] = moved
 invalidate active order cache and rebuild ID lookup
 
@@ -59,9 +64,22 @@ M40 A1 fixed: **13/13 native UContainer tests прошли под ASan**, detect
 абсолютная позиция и недопустимые исходные indices. Остальные десять tests —
 имеющиеся Copy/frequency/cache/lifetime проверки.
 
-Обычная сборка на Elder-1 ещё проверяется. Native learned-state rollback tests
-с искусственной ошибкой после attach нового Dataset, полный CTest и обновлённый
-ASan подэтап также ещё выполняются. Нет утверждения об успешности запущенных
-проверок. Все результаты должны быть опубликованы через Git до принятия Rdk
-branch в develop, затем согласованного root merge. Исторические manifests
-продолжают указывать свои исходные Rdk SHA.
+Обычная сборка Elder-1 также прошла 13/13 без skips/failures/errors. Оба пакета
+опубликованы через Git: `Reports/StructTrain/TimeLearner/s04-order-bounds-elder1`
+и `s04-order-bounds-m40`. Evidence commits:
+`05b6b465da38bd23d3644e1707f932187c966469` и
+`0d28c349fc32e409f263c41f4c6b8aaf9a87fcf6`. Локально проверены 26 stored SHA
+и 22 raw payloads, включая failing baseline.
+
+Native import rollback на M40 A13/A14 проверяет ошибку после attach нового
+Dataset: прежние объекты, порядок, связи и waveform восстанавливаются. A12 дал
+ложное расхождение из-за dangling QJsonValueRef самого нового fixture; A13
+сохраняет owning JSON и проходит оба случая, production rollback не менялся.
+A14 на root `51c54abb95881ced0942e5cfd14928609da00ac6` проходит 5/5 learned-state,
+13/13 UContainer и 9/9 Python tests; независимый аудит — 62 training trials и
+четыре rollback probes. Повторная обычная проверка Elder-1 и расширенный ASan
+ещё выполняются. Нет утверждения об успешности запущенных проверок.
+
+Полный CTest и итоговое объединение веток пока не завершены. Исторические
+manifests продолжают указывать свои исходные Rdk SHA; этот узкий подэтап
+не означает завершения общей lifecycle/physics матрицы.
