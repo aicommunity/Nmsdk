@@ -33,6 +33,7 @@ ProbeObservation Observation(const VerificationProtocol& p,const PreparedVerific
     const auto active=Index(p,context.inputId);const bool branch=p.routing==ProbeRouting::BranchSoloBurst;
     ProbeSpec s;s.runId=run;s.trialId=trial;s.sampleId=p.sampleId;s.patternHash=p.patternHash;
     s.schemaVersion=p.schemaVersion;s.stimulusProfile=p.stimulusProfile;s.waveAssignment=p.waveAssignment;
+    s.peakSelection=p.peakSelection;
     s.modelRevision=context.effectiveModelRevision;s.begin=0.;s.end=1.;s.maximumSampleGap=.05;
     s.maximumSamples=21;s.minimumAmplitude=p.minimumAmplitude;s.expectedStimulusIds=p.stimulusIds;
     s.baseline.assign(branch?1:n,baseline);
@@ -69,9 +70,12 @@ ProbeObservation FullClassicPair(const VerificationProtocol& p,const PreparedVer
     const std::string& run,const std::string& trial,bool wrongChannel=false)
 {
     ProbeSpec s;s.schemaVersion=p.schemaVersion;s.waveAssignment=p.waveAssignment;s.stimulusProfile=p.stimulusProfile;
+    s.peakSelection=p.peakSelection;
     s.runId=run;s.trialId=trial;s.sampleId=p.sampleId;s.patternHash=p.patternHash;s.modelRevision=context.effectiveModelRevision;
     s.begin=0.;s.end=1.;s.maximumSampleGap=.05;s.maximumSamples=21;s.baseline={0.,0.};s.expectedStimulusIds=p.stimulusIds;
     s.windows={{"i0",wrongChannel?1u:0u,wrongChannel?.3:.5,wrongChannel?.5:.7,"p0"},{"i1",1,.5,.7,"p1"}};
+    if(p.peakSelection==PeakSelectionPolicy::AssignedBurstWave)
+        for(auto& window:s.windows){window.begin=0.;window.end=1.;}
     ProbeRecorder recorder(s);
     for(int tick=0;tick<=20;++tick)
     {
@@ -329,6 +333,34 @@ TEST(FinalVerification, Schema3RequiresOwnPhysicalChannelAndCompleteModelDimensi
     auto extra=Observation(one,context,"capture","extra_dimension");ASSERT_TRUE(extra.valid);
     extra.specification.baseline.push_back(0.);
     EXPECT_THROW(CapturedReferences::Capture(one,{{context,extra}}),std::invalid_argument);
+}
+
+TEST(FinalVerification, AssignedPolicyBindsReferencesAndCertificateAndRejectsPolicyChanges)
+{
+    auto p=Protocol(2);p.schemaVersion=3;p.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+    p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+    p.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    std::vector<ReferenceEvidence> evidence;
+    for(std::size_t i=0;i<2;++i)
+    {
+        PreparedVerificationProbe ctx{p.routing,p.inputs[i].id,p.revision,"initial_model","reference_effective",0};
+        auto o=FullClassicPair(p,ctx,"capture","ref"+std::to_string(i));ASSERT_TRUE(o.valid);
+        evidence.push_back({ctx,o});
+    }
+    const auto refs=CapturedReferences::Capture(p,evidence);FinalVerificationSession session(refs,Configuration());
+    while(auto r=session.NextRequest())
+    {
+        const auto ctx=Prepared(*r);session.Arm(ctx);
+        session.Consume(FullClassicPair(p,ctx,r->runId,r->trialId),r->baseModelRevision);
+    }
+    ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    EXPECT_EQ(session.Certificate()->Protocol().peakSelection,PeakSelectionPolicy::AssignedBurstWave);
+    auto changed=p;changed.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+    EXPECT_THROW(CapturedReferences::Capture(changed,evidence),std::invalid_argument);
+    auto legacy=p;legacy.schemaVersion=2;legacy.waveAssignment=WaveAssignmentPolicy::WindowOnly;
+    EXPECT_THROW(ValidateVerificationProtocol(legacy),std::invalid_argument);
+    auto unknown=p;unknown.peakSelection=static_cast<PeakSelectionPolicy>(42);
+    EXPECT_THROW(ValidateVerificationProtocol(unknown),std::invalid_argument);
 }
 
 TEST(FinalVerification, Schema3BranchRequiresActualSelectedInputBeforeArming)

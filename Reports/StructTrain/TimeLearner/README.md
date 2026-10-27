@@ -13,6 +13,7 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Explicit assigned-wave selection, native wide-window traces and backward evidence audit | [Elder-1](s07-assigned-selection-elder1/README.md), [M40](s07-assigned-selection-m40/README.md) |
 | Isolated runtime, Qt5/Qt6, observations | [Elder-1](s02-elder1/README.md), [M40](s02-m40/README.md) |
 | Frequency/lifecycle and native CSV collector | [Elder-1](s03-s04-elder1/README.md) |
 | Effective model graph and indexed property bindings | [Elder-1](s04-inspection-elder1/README.md), [M40](s04-inspection-m40/README.md) |
