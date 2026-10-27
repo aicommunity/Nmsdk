@@ -11,3 +11,5 @@ The independent Python semantic serializer matches all three native digests (pac
 Git is the only artifact transfer path. All attempts are retained with compressed and raw SHA256. No credentials or executable is committed.
 
 Cross-host supplement: five certified completed states imported from the other worker through Git, each with exact model hash/certificate and byte-identical frozen CSV. Target runtime is A6; source evidence commit is preserved in the cross-host validation. Downloaded evidence is referenced by Git commit rather than duplicated. This supersedes the earlier pending cross-host statement above.
+
+A7 supplement: 16 real learned-state cases plus one role-helper skip pass; 43 regressions plus one helper skip pass. The cases cover both topologies/normalizations at 2000/20000 Hz, configured V2 source training and dimensions 1/4/6 including shared Branch attachments. Broader timing tolerances in dimensional controls are explicit, not default-tolerance convergence claims. Full maintained CTest, Python certificate audit and ASan are still pending.
