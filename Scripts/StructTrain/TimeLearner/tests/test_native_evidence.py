@@ -85,9 +85,15 @@ class NativeEvidenceTest(unittest.TestCase):
     def test_isolated_window_cannot_select_one_of_multiple_waves(self):
         packet = copy.deepcopy(self.packet)
         spec = packet["observation"]["specification"]
+        self.assertGreater(len(spec["expected_stimulus_ids"]), 1,
+                           "this corruption control requires a real multi-wave burst")
         spec["windows"][0]["begin"] = spec["begin"]
         spec["windows"][0]["end"] = spec["end"]
         requested = packet["requested_specification"]
+        # The source may already use assigned selection and a whole-burst
+        # window. Explicitly test isolated semantics rather than a no-op edit.
+        if packet["evidence_schema_version"] == 2:
+            spec["peak_selection"] = requested["peak_selection"] = "isolated_window"
         requested["windows"][0]["begin"] = 0
         requested["windows"][0]["end"] = requested["end"]
         with self.assertRaises(EvidenceError):
@@ -139,7 +145,11 @@ class NativeEvidenceTest(unittest.TestCase):
     def test_peak_selection_is_part_of_the_training_protocol(self):
         packets = copy.deepcopy(self.packets)
         trial = self.summaries[0]["certificate"]["residuals"][0]["trial_id"]
-        packets[trial]["observation"]["specification"]["peak_selection"] = "assigned_burst_wave"
+        specification = packets[trial]["observation"]["specification"]
+        original = specification["peak_selection"]
+        specification["peak_selection"] = ("isolated_window" if original == "assigned_burst_wave"
+                                             else "assigned_burst_wave")
+        self.assertNotEqual(specification["peak_selection"], original)
         with self.assertRaises(EvidenceError):
             audit_training_summary(self.summaries[0], packets, "pulse0")
 

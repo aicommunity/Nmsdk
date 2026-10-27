@@ -11,7 +11,16 @@ read-only adoption и сохраняющий модель forced Build. На roo
 на каждом сервере прошли 29/29 новых и 68/68 регрессионных проверок;
 M40 ASan — 21/21, независимый Python-аудит — по 18/18 без skips.
 Cold Ns/inhibition controls завершены; A1/A2/A3 primary artifacts сохранены в Git.
-См. [NativeModelBuilder](NativeModelBuilder.ru.md). Configured V2 ещё отсутствует.
+См. [NativeModelBuilder](NativeModelBuilder.ru.md).
+
+Следующий принятый подэтап подключает configured `ControllerVersion=2`:
+строгий JSON, cold Build и native XML Load запускают общий controller без
+внешнего BeginNativeTraining. A3: по 14/14 configured и 21/21 regressions;
+широкая A2: по 97/97 regressions. M40 ASan: A2 12/12, A3 9/9. Исправлены
+две no-op corruption mutations; Python — по 18/18 на assigned и isolated data
+на каждом сервере. Полный trained-state transfer, reconfiguration/retarget,
+optional modes и научная матрица ещё открыты.
+См. [ConfiguredNativeController](ConfiguredNativeController.ru.md).
 
 Проверка ревизии actual model ускорена через typed observer с полными boundary
 captures: [ModelRevisionObserver](ModelRevisionObserver.ru.md). На каждом

@@ -622,6 +622,159 @@ TEST(NativeColdTrainingService,BranchN0){RunNativeTraining<NNeuronTimeLearnerBra
 TEST(NativeColdTrainingService,ClassicN1){RunNativeTraining<NNeuronTimeLearner>(1,true);}
 TEST(NativeColdTrainingService,BranchN1){RunNativeTraining<NNeuronTimeLearnerBranch>(1,true);}
 
+template<class Learner> ConfiguredNativeTraining Configuration(EditingRig<Learner>& rig)
+{
+    const auto plan=TrainingPlan(rig);ConfiguredNativeTraining c;
+    NativeEditSpec policy;policy.maximumCableLength=8;policy.normalization=plan.search.normalization;
+    c.model=DescribeNativeLearnerModel(*rig.learner,rig.branch,plan.search.normalization,rig.learner->DendriteLength.GetData(),policy);
+    c.model.allowMutedInputBaseline=false;c.runId=plan.search.runId;c.protocolRevision=plan.protocol.revision;
+    c.sampleId=plan.protocol.sampleId;c.stimulusProfile=*plan.protocol.stimulusProfile;
+    c.duration=rig.duration;c.maximumSampleGap=plan.protocol.maximumSampleGap;c.minimumAmplitude=plan.protocol.minimumAmplitude;
+    c.maximumSamples=plan.probe.specification.maximumSamples;c.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(std::size_t i=0;i<rig.inputCount;++i)c.windows.emplace_back(0.,rig.duration);
+    c.search=plan.search;c.maximumReferenceProbes=plan.maximumReferenceProbes;c.maximumModelSeconds=plan.maximumModelSeconds;
+    c.maximumWallSeconds=plan.maximumWallSeconds;return c;
+}
+template<class Learner> void ConfiguredTraining(int normalization,bool fromXml=false)
+{
+    EditingRig<Learner> rig(2000,normalization,fromXml?"configured_file":"configured_service");const auto configuration=Configuration(rig);
+    const auto encoded=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(encoded.toStdString())),EncodeConfiguredNativeTraining(configuration));
+    auto oldNeuron=rig.neuron;const double time=rig.environment->GetTime().GetDoubleTime();
+    rig.learner->ControllerVersion=2;rig.learner->ControllerConfiguration=encoded.toStdString();
+    if(fromXml)
+    {
+        // Save a cold declaration before V2 Build. Exercise the actual native
+        // file loader rather than assigning properties on the receiving object.
+        USerStorageXML storage;ASSERT_TRUE(storage.Create("ConfiguredColdLearner"));
+        ASSERT_FALSE(rig.learner->ConfiguredModelInitialized.GetData());
+        ASSERT_TRUE(rig.learner->SaveComponent(&storage,true,ptPubParameter|ptPubState|pgSystem));
+        std::string serialized;ASSERT_TRUE(storage.Save(serialized));Artifact(rig.name+"_cold_configuration.xml",QByteArray::fromStdString(serialized));
+        ASSERT_TRUE(storage.SelectNode(rig.learner->GetName()));
+        const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+        auto loaded=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(loaded);
+        loaded->SetEnvironment(rig.environment);loaded->SetGlobalTimeStep(2000);loaded->Name="Learner";
+        rig.model->DelComponent("Learner",true);UEPtr<UContainer> node=loaded;
+        ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);ASSERT_TRUE(loaded->LoadComponent(&storage,true));rig.learner=loaded;
+    }
+    ASSERT_TRUE(rig.learner->Build());ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
+    EXPECT_TRUE(rig.learner->ConfiguredModelInitialized.GetData());
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    if(!fromXml)ASSERT_NE(rig.neuron.Get(),oldNeuron.Get());rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    rig.learner->Init();EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),time);
+    std::size_t observations=0;std::ostringstream trace;
+    ConfiguredNativeEvidenceSinks sinks;
+    sinks.onPrepared=[&](const auto&,const auto&) {
+        trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+    };
+    sinks.onSample=[&](const NativeProbeSample& sample) {
+        trace<<sample.time<<','<<sample.stimulus;for(double v:sample.potentials)trace<<','<<v;trace<<'\n';
+    };
+    sinks.onObservation=[&](const NativeProbeResult& result) {
+        ++observations;const auto prefix=rig.name+(fromXml?"_xmlprobe_":"_service_");
+        Artifact(prefix+std::to_string(observations)+".json",QJsonDocument(EncodeNativeProbeEvidence(result)).toJson());
+        Artifact(prefix+std::to_string(observations)+".csv",QByteArray::fromStdString(trace.str()));
+    };
+    rig.learner->SetConfiguredNativeEvidenceSinks(std::move(sinks));
+    // No BeginNativeTraining/ConstructNativeModel API invocation. Native Build
+    // consumes serialized parameters, and the scheduler starts the controller.
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,40000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::SearchUnresolved)<<service.Reason();
+    ASSERT_TRUE(service.References());ASSERT_TRUE(service.Certificate());EXPECT_FALSE(service.Certificate()->Exact());
+    ASSERT_TRUE(service.Search());EXPECT_GT(service.Search()->AppliedEdits(),0u);
+    EXPECT_EQ(observations,service.IssuedReferenceProbes()+service.Search()->IssuedProbes());
+    EXPECT_TRUE(service.Certificate()->Matches(rig.Revision(),*service.References(),configuration.search.tolerances,
+        ModelStateKind::LearnedSolo,service.ModelEpoch()));
+    Artifact(rig.name+"_configuration.json",encoded);
+    Artifact(rig.name+(fromXml?"_xml_summary.json":"_training_summary.json"),QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
+    const auto hash=rig.Revision();const auto references=service.References()->Inputs();
+    EXPECT_FALSE(rig.learner->SetControllerConfiguration(encoded.toStdString()+" "));
+    EXPECT_FALSE(rig.learner->SetControllerVersion(1));
+    ASSERT_TRUE(rig.learner->SetNeuronClassName(rig.learner->NeuronClassName.GetData()));rig.learner->Build();
+    EXPECT_EQ(rig.Revision(),hash);rig.learner->Reset();EXPECT_EQ(rig.Revision(),hash);
+    ASSERT_TRUE(service.References());EXPECT_EQ(service.References()->Inputs(),references);
+    Artifact(rig.name+"_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
+}
+TEST(ConfiguredNativeTraining,ClassicN0){ConfiguredTraining<NNeuronTimeLearner>(0);}
+TEST(ConfiguredNativeTraining,BranchN0){ConfiguredTraining<NNeuronTimeLearnerBranch>(0);}
+TEST(ConfiguredNativeTraining,ClassicN1){ConfiguredTraining<NNeuronTimeLearner>(1);}
+TEST(ConfiguredNativeTraining,BranchN1){ConfiguredTraining<NNeuronTimeLearnerBranch>(1);}
+TEST(ConfiguredNativeTraining,ClassicColdXmlStartsTheController){ConfiguredTraining<NNeuronTimeLearner>(0,true);}
+TEST(ConfiguredNativeTraining,BranchColdXmlStartsTheController){ConfiguredTraining<NNeuronTimeLearnerBranch>(1,true);}
+
+TEST(ConfiguredNativeTraining,StrictCodecRejectsDuplicateUnknownAndCorruptFields)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"configured_invalid_codec");const auto c=Configuration(rig);
+    const auto valid=EncodeConfiguredNativeTraining(c);const auto bytes=QJsonDocument(valid).toJson(QJsonDocument::Compact);
+    auto duplicate=bytes;duplicate.insert(1,"\"schema_version\":1,");
+    EXPECT_THROW(ParseConfiguredNativeTraining(duplicate.toStdString()),std::invalid_argument);
+    duplicate=bytes;duplicate.insert(1,"\"run\\u005fid\":\"duplicate\",");
+    EXPECT_THROW(ParseConfiguredNativeTraining(duplicate.toStdString()),std::invalid_argument);
+    auto invalid=valid;invalid["unknown"]=true;EXPECT_THROW(DecodeConfiguredNativeTraining(invalid),std::invalid_argument);
+    invalid=valid;invalid["maximum_samples"]=2.5;EXPECT_THROW(DecodeConfiguredNativeTraining(invalid),std::invalid_argument);
+    invalid=valid;invalid["record_spikes"]=0;EXPECT_THROW(DecodeConfiguredNativeTraining(invalid),std::invalid_argument);
+    invalid=valid;auto model=invalid["model"].toObject();auto inputs=model["inputs"].toArray();auto input=inputs[0].toObject();
+    input["resistance"]=QJsonValue(QJsonValue::Null);inputs[0]=input;model["inputs"]=inputs;invalid["model"]=model;
+    const auto omitted=DecodeConfiguredNativeTraining(invalid);EXPECT_FALSE(omitted.model.inputs[0].resistance);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(omitted),invalid);
+    EXPECT_THROW(ParseConfiguredNativeTraining("{}"),std::invalid_argument);
+}
+TEST(ConfiguredNativeTraining,MissingConfigurationAndLoadedMarkerFailWithoutColdReset)
+{
+    EditingRig<NNeuronTimeLearnerBranch> rig(2000,0,"configured_saved_state_guard");
+    const auto before=rig.Revision();const auto c=Configuration(rig);
+    EXPECT_EQ(rig.learner->ControllerVersion.GetData(),1);EXPECT_FALSE(rig.learner->SetControllerVersion(3));
+    rig.learner->ControllerVersion=2;EXPECT_TRUE(rig.learner->Build());
+    EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::InvalidModel);EXPECT_EQ(rig.Revision(),before);
+    rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();
+    rig.learner->ConfiguredModelInitialized.SetDataDirect(true);EXPECT_TRUE(rig.learner->Build());
+    EXPECT_EQ(rig.learner->NativeModelEditFailure(),"configured_trained_model_requires_explicit_state_import");
+    EXPECT_EQ(rig.Revision(),before);EXPECT_FALSE(rig.learner->NativeTrainingController().References());
+}
+
+template<class Learner> void ConfiguredLoadGuard(bool xml,bool copyState=false)
+{
+    EditingRig<Learner> rig(2000,0,xml?"configured_xml_guard":copyState?"configured_state_copy_guard":"configured_parameter_copy_guard");
+    const auto configuration=QJsonDocument(EncodeConfiguredNativeTraining(Configuration(rig))).toJson(QJsonDocument::Compact).toStdString();
+    rig.learner->ControllerVersion=2;rig.learner->ControllerConfiguration=configuration;
+    rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty());
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
+    channel->Capacity=1.37e-9;rig.learner->IsNeedToTrain=false;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    auto target=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(target);
+    target->SetEnvironment(rig.environment);target->SetGlobalTimeStep(2000);
+    if(xml)
+    {
+        USerStorageXML storage;ASSERT_TRUE(storage.Create("ConfiguredLearnerGuard"));
+        ASSERT_TRUE(rig.learner->SaveComponent(&storage,true,ptPubParameter|ptPubState|pgSystem));
+        std::string serialized;ASSERT_TRUE(storage.Save(serialized));
+        Artifact(rig.name+"_learner.xml",QByteArray::fromStdString(serialized));
+        ASSERT_TRUE(storage.SelectNode(rig.learner->GetName()));target->Name=rig.learner->GetName();
+        ASSERT_TRUE(target->LoadComponent(&storage,true));
+    }
+    else ASSERT_TRUE(rig.learner->Copy(target,core.storage,copyState));
+    EXPECT_EQ(target->ControllerVersion.GetData(),2);EXPECT_TRUE(target->ConfiguredModelInitialized.GetData());
+    EXPECT_EQ(target->ControllerConfiguration.GetData(),configuration);EXPECT_TRUE(target->Build());
+    EXPECT_EQ(target->NativeModelEditFailure(),"configured_trained_model_requires_explicit_state_import");
+    auto loaded=target->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(loaded);
+    auto capacity=loaded->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(capacity);
+    EXPECT_EQ(capacity->Capacity.GetData(),1.37e-9);EXPECT_FALSE(target->NativeTrainingController().References());
+    Artifact(rig.name+"_guard.json",QJsonDocument(QJsonObject{{"operation",xml?"xml_load":copyState?"copy_state":"copy_parameters"},
+        {"diagnostic",QString::fromStdString(target->NativeModelEditFailure())},{"preserved_capacity",capacity->Capacity.GetData()}}).toJson());
+    target->BreakLinks();core.storage->ReturnObject(target);
+}
+TEST(ConfiguredNativeTraining,ClassicXmlLoadDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearner>(true);}
+TEST(ConfiguredNativeTraining,BranchXmlLoadDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearnerBranch>(true);}
+TEST(ConfiguredNativeTraining,ClassicCopyWithoutStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearner>(false);}
+TEST(ConfiguredNativeTraining,BranchCopyWithoutStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearnerBranch>(false);}
+TEST(ConfiguredNativeTraining,ClassicCopyWithStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearner>(false,true);}
+TEST(ConfiguredNativeTraining,BranchCopyWithStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearnerBranch>(false,true);}
+
 TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {
     EditingRig<NNeuronTimeLearner> rig(2000,1,"service_exact_warm");rig.learner->CalculateMode=0;

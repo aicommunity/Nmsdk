@@ -13,6 +13,7 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Configured ControllerVersion=2 cold JSON/XML dispatch, saved-state guards and policy-independent corruption controls | [Elder-1](s06-configured-controller-elder1/README.md), [M40 + ASan](s06-configured-controller-m40/README.md) |
 | Explicit cold native builder/adoption, preserved forced Build, multi-synapse and inhibition routing; A1/A2/A3 | [Elder-1](s06-native-builder-elder1/README.md), [M40 + ASan](s06-native-builder-m40/README.md) |
 | Actual typed revision observer, lifecycle/property replacement and native full-provider A/B | [Elder-1](s06-model-observer-elder1/README.md), [M40](s06-model-observer-m40/README.md) |
 | Explicit assigned-wave selection, native wide-window traces and backward evidence audit | [Elder-1](s07-assigned-selection-elder1/README.md), [M40](s07-assigned-selection-m40/README.md) |
