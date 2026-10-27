@@ -103,6 +103,10 @@ Git-пакеты: [Elder-1](../../../Reports/StructTrain/TimeLearner/s06-native-
 Локально после Git-получения повторно проверены 3754 stored hashes и 3750 raw
 gzip payloads, ошибок нет: [машинная сводка](NativeModelBuilder.validation.json).
 PulseLib merge в develop: `5f1a6076edfe2e306e507013a82dc7574ec735d7`.
+Root merge в develop: `feb18e9b5d1cf7d0459bc8fedd8649f73fde6daf`.
+Оба опубликованы; независимые recursive checkouts на обоих серверах восстановили
+этот root с точными gitlinks, чистыми деревьями корня и всех сабмодулей.
+Сборочные source/runtime остаются на исходном test SHA, а не подменяются merge SHA.
 Включены runtime/source manifests, XML/logs всех попыток, primary CSV/model JSON,
 результаты независимого анализа, stored/raw SHA256. Это evidence harness;
 production runner/publisher исходного этапа 10 ещё не готов.
