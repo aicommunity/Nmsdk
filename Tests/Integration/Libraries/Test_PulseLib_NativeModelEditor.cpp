@@ -1024,7 +1024,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             probe.baseModelRevision=oldHash.toString().toStdString();probe.modelEpoch=0;
             probe.specification.runId=rig.name+"/rollback";probe.specification.trialId=rig.name+"/rollback/"+phase;
             probe.specification.windows={plan.inputWindows[0]};probe.onPrepared={};
-            probe.readModelRevision=[=]{return NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}})["sha256"].toString().toStdString();};
+            probe.readModelRevision=[=]{return NmsdkTools::IdentifyModel(oldNeuron.Get(),{{&oldSource->Output,"burst"}})["sha256"].toString().toStdString();};
             probe.readFullModelRevision=probe.readModelRevision;
             probe.onSample=[&](const NativeProbeSample& sample){samples.push_back(sample);};
             rollback->QueueNativeProbe(std::move(probe));
