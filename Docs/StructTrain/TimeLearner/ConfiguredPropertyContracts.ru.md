@@ -4,9 +4,11 @@
 двух классов: `NNeuronTimeLearner` и `NNeuronTimeLearnerBranch`. Этот обзор
 касается трёх свойств каждого класса. Он не закрывает review 211 записей
 первоначального inventory и не заменяет их отдельную проверку. Code review
-16 исходных записей теперь зафиксирован отдельно в
+исходных записей теперь зафиксирован отдельно в
 [LegacyControlPropertyContracts](LegacyControlPropertyContracts.ru.md) и
-[PropertyReview.json](PropertyReview.json); 195 остаются непроверенными.
+[TimingAndTargetPropertyContracts](TimingAndTargetPropertyContracts.ru.md) и
+[PropertyReview.json](PropertyReview.json); code catalog теперь покрывает все
+211 исходных записей, runtime/property matrix остаётся незавершённой.
 
 | Свойство обоих классов | Тип, единицы, Default | Владелец и setter | Build/Calculate/Reset | Сохранение и ограничения |
 |---|---|---|---|---|

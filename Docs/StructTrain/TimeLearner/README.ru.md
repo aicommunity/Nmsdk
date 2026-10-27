@@ -30,7 +30,14 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Configured ControllerVersion=2: cold JSON/XML, checks и ограничения](ConfiguredNativeController.ru.md).
 - [Семантика трёх новых configured properties в обоих learner](ConfiguredPropertyContracts.ru.md).
 - [Семантика исходных управляющих свойств и class selectors: 16 записей](LegacyControlPropertyContracts.ru.md).
+- [Семантика цели, структуры и времени: ещё 29 исходных записей](TimingAndTargetPropertyContracts.ru.md).
+- [Семантика диагностик: 38 исходных записей](DiagnosticPropertyContracts.ru.md).
+- [Нормализация и повторные измерения: 34 исходные записи](NormalizationPropertyContracts.ru.md).
+- [Порог, PostTune и калибровка: 44 исходные записи](CalibrationPropertyContracts.ru.md).
+- [C-trim, physical overrides и торможение: 35 исходных записей](PhysicsPropertyContracts.ru.md).
+- [Cold reset, experiment dispatch и logging: 15 исходных записей](ResetAndLoggingPropertyContracts.ru.md).
 - [Текущий прогресс semantic property review](PropertyReview.json).
+- [Полнота code catalog: 211 исходных и 6 новых свойств](PropertyReview.coverage.json).
 - [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
 - [Нативный исполнитель проб Classic/Branch: рабочий подэтап и gates](NativeExecution.ru.md).
 - [Полная последовательность волн и physical input ownership: schema 3](BurstAssignment.ru.md).
