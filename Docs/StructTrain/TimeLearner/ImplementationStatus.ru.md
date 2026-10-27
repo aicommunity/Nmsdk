@@ -1,5 +1,12 @@
 # Ход реализации
 
+Последующее измерительное изменение:
+[AssignedWaveSelection](AssignedWaveSelection.ru.md). Явный assigned выбор
+поддерживает широкое окно при полной measured burst assignment; isolated
+семантика сохранена. На .11/.17: 56/56 addressed C++ и 18/18 Python без skips.
+Это уточняет прежний pending assigned-wave policy ниже: автоматическая
+длительность окон, большие исторические длины и configured V2 ещё открыты.
+
 **План целиком не выполнен.** Проверка по полному принятому плану:
 [PlanCompletionAudit-2026-10-25](PlanCompletionAudit-2026-10-25.ru.md).
 Последующее устранение TL-014 и его серверная проверка описаны в

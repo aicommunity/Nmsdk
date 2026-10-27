@@ -1,5 +1,12 @@
 # Проверка полноты выполнения принятого плана
 
+Следующее уточнение: [AssignedWaveSelection](AssignedWaveSelection.ru.md)
+добавляет явный assigned whole-burst выбор с реальными соседними samples,
+привязкой политики к references/certificate и evidence envelope 2. На обоих
+серверах 56/56 C++ и 18/18 Python без skips. Прежний isolated-критерий сохранён.
+Это закрывает отдельную pending policy ниже; adaptive duration, performance,
+configured V2 и все остальные перечисленные gates остаются открытыми.
+
 Дополнение 26.10: исходная таблица ниже является аудитом явно указанного
 снимка, а не неизменяемым описанием текущего кода. После неё приняты native
 storage-профили/growth, model identity/archive/ports и исправления TL-014/015;
