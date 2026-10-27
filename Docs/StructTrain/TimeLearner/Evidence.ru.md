@@ -162,8 +162,11 @@ TL-030: штатное перемещение компонента вперёд 
 e2bcd8da5bab016bd3fd703c42e519e56b633081 воспроизводит failing order check и
 ASan heap-buffer-overflow на M40. Исправление Rdk
 2cfda44d738f6291914217dba9cd223acae35bfd проходит 13/13 native tests под ASan,
-detect_leaks=0. Обычная сборка на втором сервере, integration и Git-публикация
-ещё не приняты. См. ComponentOrderBounds.ru.md. Причинная связь с историческими
+detect_leaks=0, и 13/13 в обычной сборке Elder-1. A14 дополнительно проверяет
+native import/rollback/frozen response на обоих серверах; Git-пакеты доступны.
+Rdk develop merge ef4f033704d54f11d06e4da2b3518c313f3a9992 опубликован,
+его tree совпадает с tested feature tree. Полный CTest ещё выполняется.
+См. ComponentOrderBounds.ru.md. Причинная связь с историческими
 экспериментами не установлена; их результаты этим finding не отменяются.
 
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
