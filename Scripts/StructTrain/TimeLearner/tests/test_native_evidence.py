@@ -136,6 +136,61 @@ class NativeEvidenceTest(unittest.TestCase):
         with self.assertRaises(EvidenceError):
             audit_training_summary(self.summaries[0], packets, "pulse0")
 
+    def test_peak_selection_is_part_of_the_training_protocol(self):
+        packets = copy.deepcopy(self.packets)
+        trial = self.summaries[0]["certificate"]["residuals"][0]["trial_id"]
+        packets[trial]["observation"]["specification"]["peak_selection"] = "assigned_burst_wave"
+        with self.assertRaises(EvidenceError):
+            audit_training_summary(self.summaries[0], packets, "pulse0")
+
+
+class AssignedNativeEvidenceTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        directory = os.environ.get("TIMELEARNER_ASSIGNED_EVIDENCE_DIR")
+        if not directory:
+            raise unittest.SkipTest("requires actual assigned-window C++ output")
+        cls.paths = sorted(Path(directory).glob("*assigned_window*_evidence.json"))
+        if len(cls.paths) != 4:
+            raise RuntimeError("requires Classic/Branch isolated and assigned native output")
+
+    def test_actual_policies_have_different_measurement_validity(self):
+        for path in self.paths:
+            packet = load(path)
+            trace = Path(str(path).replace("_evidence.json", ".csv"))
+            result = audit_probe(packet, trace)
+            assigned = packet["observation"]["specification"]["peak_selection"] == "assigned_burst_wave"
+            self.assertEqual(result["valid_observation"], assigned)
+            self.assertEqual(result["trace_checked"], assigned)
+            self.assertIsNone(result["evaluation_verdict"])
+
+    def test_policy_cannot_be_injected_into_legacy_envelope(self):
+        path = next(p for p in self.paths if load(p)["observation"]["valid"])
+        packet = load(path)
+        packet["evidence_schema_version"] = 1
+        with self.assertRaises(EvidenceError):
+            audit_probe(packet, Path(str(path).replace("_evidence.json", ".csv")))
+
+    def test_assigned_policy_still_requires_neighbour_samples(self):
+        path = next(p for p in self.paths if load(p)["observation"]["valid"])
+        packet = load(path)
+        spec = packet["observation"]["specification"]
+        peak = packet["observation"]["peaks"][0]
+        # Strictly smaller than peak.time, yet later than the previous sample.
+        begin = peak["time"] - spec["maximum_sample_gap"] / 2
+        spec["windows"][0]["begin"] = begin
+        packet["requested_specification"]["windows"][0]["begin"] = begin - spec["begin"]
+        with self.assertRaises(EvidenceError):
+            audit_probe(packet, Path(str(path).replace("_evidence.json", ".csv")))
+
+    def test_unknown_or_changed_policy_is_rejected(self):
+        path = next(p for p in self.paths if load(p)["observation"]["valid"])
+        for value in ("unknown", "isolated_window"):
+            packet = load(path)
+            packet["observation"]["specification"]["peak_selection"] = value
+            with self.assertRaises(EvidenceError):
+                audit_probe(packet, Path(str(path).replace("_evidence.json", ".csv")))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -86,12 +86,14 @@ template<class Learner> struct EditingRig {
         if(!identity["valid"].toBool())throw std::runtime_error("editor_fixture_identity");
         return identity["sha256"].toString().toStdString();
     }
-    NativeProbeResult Probe(std::size_t input=0,const TrainingAction* action=nullptr,BoundedTrainingSession* session=nullptr)
+    NativeProbeResult Probe(std::size_t input=0,const TrainingAction* action=nullptr,BoundedTrainingSession* session=nullptr,
+        PeakSelectionPolicy selection=PeakSelectionPolicy::IsolatedWindow,bool wide=false)
     {
         NativeProbeRequest request;request.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
         request.activeInput=int(input);request.inputId="input"+std::to_string(input);request.protocolRevision="editing_burst_v1";
         request.baseModelRevision=Revision();request.readModelRevision=[this]{return Revision();};request.expectedInputIsi=isi;
         auto& s=request.specification;s.schemaVersion=3;s.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+        s.peakSelection=selection;
         s.runId=action?action->runId:name;s.trialId=action?action->trialId:name+"/trial/"+std::to_string(++serial);
         QJsonArray actualPattern;for(double value:isi)actualPattern.append(value);
         s.sampleId="target";s.patternHash=NmsdkTools::CanonicalModelDataSha256(actualPattern).toStdString();
@@ -100,6 +102,7 @@ template<class Learner> struct EditingRig {
         for(std::size_t i=0;i<inputCount;++i)s.expectedStimulusIds.push_back("pulse"+std::to_string(i));
         double onset=0.;for(std::size_t i=0;i<=input;++i)onset+=isi[i];
         s.windows={{request.inputId,branch?0u:input,onset,onset+(tightBurst?.025:.065),"pulse"+std::to_string(input)}};
+        if(wide){s.windows[0].begin=0.;s.windows[0].end=duration;}
         if(action)request.modelEpoch=action->modelEpoch;
         if(session)request.onPrepared=[&](const auto& prepared,const ProbeSpec&){session->Arm(action->serial,prepared);};
         std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
@@ -116,6 +119,7 @@ template<class Learner> struct EditingRig {
         }
         auto result=learner->TakeNativeProbeResult();if(!result)throw std::runtime_error("missing_editor_fixture_result");
         Artifact(name+"_probe_"+std::to_string(++serial)+".csv",QByteArray::fromStdString(trace.str()));
+        if(wide)Artifact(name+"_probe_"+std::to_string(serial)+"_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*result)).toJson());
         QJsonArray reasons,peaks;
         for(const auto& reason:result->reasons)reasons.append(QString::fromStdString(reason));
         if(result->observation)
@@ -133,6 +137,33 @@ template<class Learner> struct EditingRig {
         return *result;
     }
 };
+
+template<class Learner> void AssignedNativeWindow()
+{
+    EditingRig<Learner> rig(2000,0,"assigned_window");const auto before=rig.Revision();
+    const auto isolated=rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true);
+    ASSERT_TRUE(isolated.observation);EXPECT_FALSE(isolated.observation->valid);
+    ASSERT_EQ(isolated.observation->peaks.size(),1u);
+    EXPECT_EQ(isolated.observation->peaks[0].validity,PeakValidity::Ambiguous);
+    const auto assigned=rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true);
+    ASSERT_EQ(assigned.status,NativeProbeStatus::Completed);ASSERT_TRUE(assigned.observation);
+    ASSERT_TRUE(assigned.observation->valid);ASSERT_EQ(assigned.observation->burstAssignments.size(),1u);
+    const auto& waves=assigned.observation->burstAssignments[0].waves;ASSERT_EQ(waves.size(),2u);
+    ASSERT_EQ(assigned.observation->peaks.size(),1u);const auto& peak=assigned.observation->peaks[0];
+    EXPECT_EQ(peak.time,waves[1].time);EXPECT_EQ(peak.rawPotential,waves[1].rawPotential);
+    EXPECT_EQ(peak.stimulusId,"pulse1");EXPECT_EQ(assigned.observation->specification.peakSelection,PeakSelectionPolicy::AssignedBurstWave);
+    EXPECT_EQ(rig.Revision(),before);
+    // The selected policy changes measurement, never the physical response.
+    const auto& oldWaves=isolated.observation->burstAssignments[0].waves;ASSERT_EQ(oldWaves.size(),waves.size());
+    for(std::size_t i=0;i<waves.size();++i)
+    {
+        EXPECT_DOUBLE_EQ(oldWaves[i].rawPotential,waves[i].rawPotential);
+        EXPECT_NEAR(oldWaves[i].time-isolated.observation->specification.begin,
+            waves[i].time-assigned.observation->specification.begin,1e-12);
+    }
+}
+TEST(NativeAssignedWindow,ClassicMeasuresTheAssignedWaveWithoutChangingPhysics){AssignedNativeWindow<NNeuronTimeLearner>();}
+TEST(NativeAssignedWindow,BranchMeasuresTheAssignedWaveWithoutChangingPhysics){AssignedNativeWindow<NNeuronTimeLearnerBranch>();}
 template<class Learner> void CheckEdits(unsigned frequency,int normalization)
 {
     EditingRig<Learner> rig(frequency,normalization,"native_model_edit");auto values=rig.learner->ReadNativeParameters();
