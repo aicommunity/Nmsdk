@@ -2,11 +2,11 @@
   "schema_version": 1,
   "source_inventory": "source_inventory.json",
   "source_inventory_records": 211,
-  "reviewed_original_records": 16,
-  "remaining_original_records": 195,
+  "reviewed_original_records": 211,
+  "remaining_original_records": 0,
   "new_configured_records": 6,
   "new_configured_contract": "ConfiguredPropertyContracts.ru.md",
-  "scope": "Semantic code review progress; not runtime acceptance of all properties",
+  "scope": "Semantic code catalog complete for 211 original declarations; runtime acceptance remains partial; six configured declarations reviewed separately",
   "records": [
     {
       "component": "NNeuronTimeLearner",
@@ -151,6 +151,1761 @@
       "runtime_acceptance": "partial; see per-property controls and remaining matrix",
       "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
       "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "Delay",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "NumInputDendrite",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "MaxDendriteLength",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "InputPattern",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TipSynapseResistance",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "DendriteLength",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "InitialSomaPotential",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "NumSynapse",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "IterationGap",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "AutoScaleIterationGap",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncTolerance",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PeakMeasureMargin",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "DelayAgreeMarginMin",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EstDelayPerSeg",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "Delay",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "NumInputDendrite",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "MaxDendriteLength",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "InputPattern",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "TipSynapseResistance",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DendriteLength",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "InitialSomaPotential",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "NumSynapse",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "IterationGap",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "AutoScaleIterationGap",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncTolerance",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PeakMeasureMargin",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DelayAgreeMarginMin",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "InitEstDelayPerSeg",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "RminNoImproveMinProgress",
+      "code_review": "reviewed",
+      "contract": "TimingAndTargetPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; effective protocol and full matrix acceptance pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "mode-dependent; native declaration/protocol owns effective values"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "DendriteNeuronAmplitude",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SomaNeuronAmplitude",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "Output",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "AmpDtTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TipSynapseResistanceTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceStatusTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "NoImproveResistanceTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EffectiveGainTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "DendriteLengthTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "LastAbsDtTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "StimulusIterTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceMin",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceMinRatio",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceMinByInput",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceMaxByInput",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceMinRatioByInput",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceMax",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TrainingPhase",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TrainingFailureReason",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DendriteNeuronAmplitude",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SomaNeuronAmplitude",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "Output",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "AmpDtTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "TipSynapseResistanceTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceStatusTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "NoImproveResistanceTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EffectiveGainTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DendriteLengthTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "LastAbsDtTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "StimulusIterTrace",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceMin",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceMinRatio",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceMinByInput",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceMaxByInput",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceMinRatioByInput",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceMax",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "TrainingPhase",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "TrainingFailureReason",
+      "code_review": "reviewed",
+      "contract": "DiagnosticPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; watcher/native diagnostic freshness matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "effective_experiment_factor": false
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SynapseResistanceStep",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "NormalizationMode",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "AcceptQuantizedAmpUnderTarget",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResetNeuronBeforeTrainBurst",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "RminLengthTolFactor",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "DisableMidbandWalkToRmin",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PreferConfiguredResistanceMinFloor",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ConfiguredResistanceMin",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "CorrectAttenuationGammaForTipR",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SynapseResistanceBase",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EnableRmaxLengthEscape",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "MaxSynapseToMembraneResistanceRatio",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "AttenuationGamma",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "AutoEstimateAttenuationGamma",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "FreezeTipResistanceAfterFirstSync",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TipResistanceFrozenAfterSync",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResyncAfterNormalization",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResyncAfterNormalizationCount",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResistanceAdjustGain",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SynapseResistanceStep",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "NormalizationMode",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "AcceptQuantizedAmpUnderTarget",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResetNeuronBeforeTrainBurst",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "CorrectAttenuationGammaForTipR",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SynapseResistanceBase",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EnableRmaxLengthEscape",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "MaxSynapseToMembraneResistanceRatio",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "AttenuationGamma",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "AutoEstimateAttenuationGamma",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "UsePerInputAttenuationGamma",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "AttenuationGammaByInput",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResistanceAdjustGain",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResyncAfterNormalization",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResyncAfterNormalizationCount",
+      "code_review": "reviewed",
+      "contract": "NormalizationPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "LTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "FixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TrainingLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "UseFixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "AutoCalibrateFixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "CalibrateLTZThresholdMode",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "CalibrateLTZThresholdFraction",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "CalibrateLTZThresholdMin",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "CalibrateLTZThresholdMax",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "CalibratedFixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EnablePostTrainTuning",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PostTrainTipResistanceMode",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EnablePostTrainMidThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PostTrainMidMetric",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TipResistanceCanonFloor",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "TipResistanceCanonLast",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PostTrainSilentThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "UseCandidateMidOnNonSeparableTest",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PostTrainSyntheticFoilCount",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PostTrainTipSearchIters",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PostTrainTuneComplete",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "PostTuneResult",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "LTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "FixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "TrainingLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "UseFixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "AutoCalibrateFixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "CalibrateLTZThresholdMode",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "CalibrateLTZThresholdFraction",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "CalibrateLTZThresholdMin",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "CalibrateLTZThresholdMax",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "CalibratedFixedLTZThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EnablePostTrainTuning",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PostTrainTipResistanceMode",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EnablePostTrainMidThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PostTrainMidMetric",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "TipResistanceCanonFloor",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "TipResistanceCanonLast",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PostTrainSilentThreshold",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "UseCandidateMidOnNonSeparableTest",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PostTrainSyntheticFoilCount",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PostTrainTipSearchIters",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PostTrainTuneComplete",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "PostTuneResult",
+      "code_review": "reviewed",
+      "contract": "CalibrationPropertyContracts.ru.md",
+      "runtime_acceptance": "legacy partial controls only; new native calibration/PostTune not implemented",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "legacy protocol conditional; diagnostics are not factors; V2 optional modes rejected"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EnableNextSegmentInhibition",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EnableSegExcInh",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SegExcInhDelta",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SegExcInhAlpha",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncCapacitanceTrim",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncCapTrimTolerance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncCapTrimMaxRel",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncCapTrimMinTau",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncCapTrimGain",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncCapTrimMaxSteps",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "DendriteCapacitance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "SyncCapTrimCount",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "OverrideMembraneCapacity",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "OverrideExcMembraneResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "OverrideInhMembraneResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "OverrideExcSynapseResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "OverrideInhSynapseResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncCapacitanceTrim",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncCapTrimTolerance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncCapTrimMaxRel",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncCapTrimMinTau",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncCapTrimGain",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncCapTrimMaxSteps",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DendriteCapacitance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SyncCapTrimCount",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "OverrideMembraneCapacity",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "OverrideExcMembraneResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "OverrideInhMembraneResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "OverrideExcSynapseResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "OverrideInhSynapseResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EnableNextSegmentInhibition",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EnableSegExcInh",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SegExcInhDelta",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "SegExcInhAlpha",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "NextSegInhResistance",
+      "code_review": "reviewed",
+      "contract": "PhysicsPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; heterogeneous C-trim and full inhibition/profile matrix pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "native storage/explicit edit policy; legacy overrides and trim are not supported V2 factors"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ResetToUntrainedState",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "UseLoadedTipResistanceOnUntrainedReset",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ExperimentNum",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "ExperimentMode",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EnableDebug",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "name": "EnableTrainingAudit",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ResetToUntrainedState",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "UseLoadedTipResistanceOnUntrainedReset",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ExperimentNum",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "ExperimentMode",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EnableDebug",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "EnableTrainingAudit",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DynamicsLogHead",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DynamicsLogEvery",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "name": "DynamicsLogComponentState",
+      "code_review": "reviewed",
+      "contract": "ResetAndLoggingPropertyContracts.ru.md",
+      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
+      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
     }
   ]
 }

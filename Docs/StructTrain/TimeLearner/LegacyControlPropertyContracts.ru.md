@@ -4,8 +4,9 @@
 NativeTrainingService в PulseLib `025d809f7b86cc79e18ddd711c6adc40e2396bf8`.
 Это **code review 16 из 211 исходных записей**, восемь свойств каждого класса.
 Исторический source_inventory.json не переписывается: его pending относится к
-моменту создания. Текущий прогресс фиксирует PropertyReview.json. Остальные
-195 исходных записей требуют семантической проверки. Шесть новых configured
+моменту создания. Совокупный code review всех 211 исходных записей фиксирует
+PropertyReview.json; runtime matrix остаётся отдельной незавершённой приёмкой.
+Шесть новых configured
 properties описаны отдельно в ConfiguredPropertyContracts.ru.md.
 
 Все перечисленные свойства — `ptPubParameter`, сохраняются штатным XML и
