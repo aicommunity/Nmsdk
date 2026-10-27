@@ -40,14 +40,45 @@ M40 → Elder-1 и пять Elder-1 → M40. Во всех случаях сов
 при 2/20 кГц, configured sources, N=1/4/6. Локально повторно проверены 6288
 stored SHA и 6284 raw payloads пакетов A1–A7 с cross-host дополнением.
 
-ASan, полный maintained CTest после shared harness изменения и независимый
-полный аудит сертификатов по исходным CSV ещё не приняты. Последний реализован в root-модуле
-`Scripts/StructTrain/TimeLearner/learned_evidence.py`, серверные tests ожидаются.
-Full CTest A8 остановлен до тестов из-за ошибочного имени отсутствующего root
-target; исходники не менялись. На Elder-1 запущен A9 на root
-`270c62ce55a80a9efea6e434bba8ca5664a821af` с четырьмя фактически поддерживаемыми
-suites, затем Python tests/audit. На M40 выполняется ASan A1 на root `4cc54865…`,
-12 реальных 2-кГц случаев и служебный helper, detect_leaks=0. Запуск не равен PASS.
+## A14: независимые первичные данные и фактический rollback
+
+Root `51c54abb95881ced0942e5cfd14928609da00ac6`, Rdk
+`2cfda44d738f6291914217dba9cd223acae35bfd`: на **каждом** сервере прошли 5/5
+learned-state cases, 13/13 UContainer cases и 9/9 Python tests, без skips/errors.
+Независимый анализ `learned_evidence.py` на каждом сервере проверил 62 исходных
+training JSON/CSV, сертификаты и все три digest, а также четыре rollback probes.
+
+Ошибка подключения нового Neuron вводится после подключения нового Dataset.
+Тест требует вернуть прежние объекты, их порядок, fingerprint и waveform;
+не ограничивается отказом preflight. Импортированное Exact-состояние также
+продолжает обучение с прежними references и нулём новых reference captures.
+Протокол Exact-control по-прежнему имеет явный SyncTolerance=0.2.
+
+Оба A14 Git-пакета опубликованы: Elder-1 commit
+`0b556b9dde5338625525707eee2ad96956e4c237`, M40
+`12bfc0943ac36b58e8bbdee6cd51f35f68f91d96`. Сохранены и ошибки подготовки:
+A8 отсутствующий root target, A10/ASan A2 — compile error нового callback,
+A12 — dangling QJsonValueRef в новом fixture. В A13 owning JSON устраняет
+ложные rollback failures; production rollback не менялся. Позднее тип owning
+QJsonValue задан явно. Эти ошибки тестов не приписываются алгоритму обучения.
+
+Обнаруженный при ревизии общий выход за границу в native component move —
+отдельный подтверждённый дефект Rdk. Исправление проверено на обоих серверах,
+включая ASan, и принято в Rdk develop merge
+`ef4f033704d54f11d06e4da2b3518c313f3a9992`. Корневая рабочая ветка сохраняет этот
+gitlink; tested SHA в manifests не заменяется merge SHA. Подробности:
+[ComponentOrderBounds](ComponentOrderBounds.ru.md).
+
+## Ещё не завершённые gates
+
+Полный maintained CTest после shared harness изменения и итоговый ASan ещё
+не приняты. Elder-1 A9 использует root `270c62ce…`; M40 A15 — root `51c54abb…`.
+Оба процесса проверены живыми; запуск не равен PASS. ASan A1 завершился с
+11 pass, 1 helper skip и 1 failure Classic N=6: честное исчерпание 600 секунд
+без сертификата. В dimensional transport fixture явно задан новый конечный
+бюджет 1800 wall seconds; физические допуски и model-time budget не изменены.
+ASan A3 root `51c54abb…`: Classic N0, Branch N0 с actual rollback и Exact warm
+continuation прошли; Classic N=6 ещё выполняется, весь набор не принят.
 Поэтому последующие строки «подготовлены» описывают исходную постановку и не
 отменяют приведённые выше уже завершённые адресные проверки.
 
