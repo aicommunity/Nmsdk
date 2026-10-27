@@ -999,7 +999,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         EXPECT_EQ(resumed.IssuedReferenceProbes(),0u);EXPECT_EQ(resumed.References()->Inputs(),references);
         EXPECT_EQ(resumed.SessionAttempt(),attempt+1);EXPECT_GT(warmObservations,0u);
         EXPECT_EQ(test->ReadNativeParameters(),parameters);
-        Artifact(rig.name+"_warm_learned_state.json",QJsonDocument(test->ExportNativeLearnedState(implementation)).toJson());
+        Artifact(rig.name+"_warm_boundary.json",QJsonDocument(test->ExportNativeLearnedState(implementation)).toJson());
     }
 }
 TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}
