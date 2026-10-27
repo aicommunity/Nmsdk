@@ -398,4 +398,40 @@ TEST(ModelRevisionObserver, ActualGraphReadCostIsRecordedWithoutChangingIdentity
         {"frequency_hz",2000},{"measurement_only",true},{"dynamics_calculated",false}});
     core.storage->ReturnObject(neuron);
 }
+class ReplaceableObserverGraph : public ObserverGraph {
+    std::unique_ptr<UIProperty> extra;
+public:
+    ReplaceableObserverGraph(){Replace(false);}
+    ~ReplaceableObserverGraph() override{DelLookupProperty("Extra");extra.reset();}
+    void Replace(bool integer)
+    {
+        if(extra){DelLookupProperty("Extra");extra.reset();}
+        if(integer){auto value=new UProperty<int,ReplaceableObserverGraph,ptPubParameter>("Extra",this);*value=7;extra.reset(value);}
+        else {auto value=new UProperty<double,ReplaceableObserverGraph,ptPubParameter>("Extra",this);*value=7.;extra.reset(value);}
+    }
+    ReplaceableObserverGraph* New(void) override{return new ReplaceableObserverGraph;}
+};
+TEST(ModelRevisionObserver, PropertyReplacementChecksMembershipAndTypeBeforeDereferencingOldReaders)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string name="TimeLearnerReplaceableObserverGraph";
+    if(!core.storage->CheckClass(name))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]()->UComponent*{return new ReplaceableObserverGraph;},name),name);
+    auto graph=dynamic_pointer_cast<ReplaceableObserverGraph>(core.storage->TakeObject(name));ASSERT_TRUE(graph);
+    graph->SetEnvironment(core.environment);graph->SetGlobalTimeStep(2000);graph->Init();
+    NmsdkTools::ModelRevisionObserver observer;const auto initial=observer.Read(graph);
+    const auto lifetime=graph->ObserveLifecycle();
+    graph->Replace(true);ASSERT_TRUE(lifetime.IsCurrent());CompareObserved(observer,graph);EXPECT_NE(observer.Read(graph),initial);
+    graph->Replace(false);CompareObserved(observer,graph);EXPECT_EQ(observer.Read(graph),initial);
+    core.storage->ReturnObject(graph);
+}
+TEST(ModelRevisionObserver, DestroyedDeclaredSourceIsRejectedBeforeReadingItsStaleProperty)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto graph=ObservedGraph();
+    auto source=new ObserverGraph;source->SetEnvironment(core.environment);source->SetGlobalTimeStep(2000);source->Init();
+    graph->Matrix.SetPointer(0,&source->MatrixSource);NmsdkTools::ModelBoundarySources ports{{&source->MatrixSource,"stimulus"}};
+    NmsdkTools::ModelRevisionObserver observer;CompareObserved(observer,graph,ports);
+    graph->Matrix.ResetPointer(0,&source->MatrixSource);delete source;
+    EXPECT_THROW(observer.Read(graph,ports),std::runtime_error);
+    CompareObserved(observer,graph);core.storage->ReturnObject(graph);
+}
 }
