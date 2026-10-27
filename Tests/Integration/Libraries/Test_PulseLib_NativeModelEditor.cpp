@@ -13,6 +13,10 @@
 #include <QDir>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QCoreApplication>
+#include <QProcess>
+#include <QProcessEnvironment>
+#include <QTemporaryDir>
 #include <sstream>
 #include <iomanip>
 #include <locale>
@@ -776,6 +780,60 @@ TEST(ConfiguredNativeTraining,BranchCopyWithoutStateDoesNotColdReset){Configured
 TEST(ConfiguredNativeTraining,ClassicCopyWithStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearner>(false,true);}
 TEST(ConfiguredNativeTraining,BranchCopyWithStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearnerBranch>(false,true);}
 
+TEST(NativeLearnedState,FreshProcessImport)
+{
+    const auto input=std::getenv("TIMELEARNER_LEARNED_IMPORT");
+    if(!input)GTEST_SKIP()<<"Executed by completed-state fresh-process parent or cross-host control";
+    const auto output=std::getenv("TIMELEARNER_LEARNED_OUTPUT");ASSERT_TRUE(output);
+    QFile file(QString::fromLocal8Bit(input));ASSERT_TRUE(file.open(QIODevice::ReadOnly));
+    const auto package=ParseNativeLearnedState(file.readAll().toStdString());
+    const auto c=DecodeConfiguredNativeTraining(package["configuration"].toObject());
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    EXPECT_FALSE(core.storage->CheckClass(c.model.neuronClass));
+    core.environment->DestroyModel();ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto model=core.environment->GetModel();model->SetGlobalTimeStep(c.model.frequencyHz);
+    auto learner=dynamic_pointer_cast<UNet>(core.storage->TakeObject(c.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(learner);
+    learner->Name="FrozenLearner";UEPtr<UContainer> component=learner;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    learner->SetGlobalTimeStep(c.model.frequencyHz);
+    const auto run=[&]<class Learner>(UEPtr<Learner> target) {
+        const auto result=target->ImportNativeLearnedState(package,"native-learned-boundary-fixture-v1");
+        ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;target->Build();target->Init();
+        ASSERT_TRUE(target->NativeModelEditFailure().empty())<<target->NativeModelEditFailure();
+        auto neuron=target->template GetComponentL<NPulseNeuron>("Neuron",true);
+        auto source=target->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(neuron);ASSERT_TRUE(source);
+        const auto identity=NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}});
+        ASSERT_EQ(identity["sha256"],package["model_revision"]);ASSERT_TRUE(target->NativeTrainingController().Certificate());
+        ASSERT_FALSE(target->IsNeedToTrain.GetData());
+        if(const auto start=std::getenv("TIMELEARNER_LEARNED_START_US"))core.environment->GetTime().SetTime(std::stoull(start));
+        auto request=target->NativeTrainingController().Plan().probe;
+        request.activeInput=0;request.inputId=target->NativeTrainingController().References()->Protocol().inputs[0].id;
+        request.baseModelRevision=package["model_revision"].toString().toStdString();request.modelEpoch=target->NativeTrainingController().ModelEpoch();
+        request.specification.runId="fresh-learned-import";request.specification.trialId="fresh-learned-import/probe";
+        request.specification.windows={target->NativeTrainingController().Plan().inputWindows[0]};
+        auto observer=std::make_shared<NmsdkTools::ModelRevisionObserver>();
+        request.readModelRevision=[=]{return observer->Read(neuron.Get(),{{&source->Output,"burst"}}).toStdString();};
+        request.readFullModelRevision=[=]{return observer->Read(neuron.Get(),{{&source->Output,"burst"}},true).toStdString();};
+        std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(c.model.branch?1:c.model.inputs.size());++i)trace<<",soma"<<i;trace<<'\n';
+        request.onSample=[&](const NativeProbeSample& sample) {
+            trace<<sample.time<<','<<sample.stimulus;for(double value:sample.potentials)trace<<','<<value;trace<<'\n';
+        };
+        target->QueueNativeProbe(std::move(request));
+        for(unsigned tick=0;target->NativeProbeState()==NativeProbeStatus::Queued || target->NativeProbeState()==NativeProbeStatus::Running;++tick)
+        {ASSERT_LT(tick,unsigned((c.duration+.02)*c.model.frequencyHz));model->Calculate();core.environment->IncreaseModelTimeByStep();}
+        const auto probe=target->TakeNativeProbeResult();ASSERT_TRUE(probe);ASSERT_EQ(probe->status,NativeProbeStatus::Completed);
+        ASSERT_TRUE(probe->observation);ASSERT_TRUE(probe->observation->valid);
+        EXPECT_EQ(NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}})["sha256"],package["model_revision"]);
+        QJsonObject record{{"model",identity},{"certificate",EncodeTrainingCertificate(*target->NativeTrainingController().Certificate())},
+            {"probe",EncodeNativeProbeEvidence(*probe)},{"need",target->IsNeedToTrain.GetData()}};
+        QFile json(QString::fromLocal8Bit(output));ASSERT_TRUE(json.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        ASSERT_GT(json.write(QJsonDocument(record).toJson()),0);json.close();
+        QFile csv(QString::fromLocal8Bit(output)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_GT(csv.write(QByteArray::fromStdString(trace.str())),0);
+    };
+    if(c.model.branch)run(dynamic_pointer_cast<NNeuronTimeLearnerBranch>(learner));else run(dynamic_pointer_cast<NNeuronTimeLearner>(learner));
+    dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
+}
+
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
 {
     EditingRig<Learner> rig(2000,normalization,sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance",false,2,true);
@@ -831,10 +889,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
     request.baseModelRevision=original;request.modelEpoch=service.ModelEpoch();request.specification.runId=rig.name+"/frozen";
     request.specification.trialId=rig.name+"/frozen/test";request.specification.windows={plan.inputWindows[0]};
     auto observer=std::make_shared<NmsdkTools::ModelRevisionObserver>();
-    request.readModelRevision=[=]{return observer->Read(testNeuron,{{&testSource->Output,"burst"}}).toStdString();};
-    request.readFullModelRevision=[=]{return observer->Read(testNeuron,{{&testSource->Output,"burst"}},true).toStdString();};
+    request.readModelRevision=[=]{return observer->Read(testNeuron.Get(),{{&testSource->Output,"burst"}}).toStdString();};
+    request.readFullModelRevision=[=]{return observer->Read(testNeuron.Get(),{{&testSource->Output,"burst"}},true).toStdString();};
     request.onPrepared={};request.onSample=[&](const NativeProbeSample& frame){importedFrames.push_back(frame);};
-    test->QueueNativeProbe(std::move(request));
+    const auto frozenStart=rig.environment->GetTime().GetTime();test->QueueNativeProbe(std::move(request));
     const auto waveform=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
         [&](const NativeProbeSample& frame){originalFrames.push_back(frame);});
     ASSERT_EQ(waveform.status,NativeProbeStatus::Completed);ASSERT_TRUE(waveform.observation);ASSERT_TRUE(waveform.observation->valid);
@@ -852,6 +910,21 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
     Artifact(rig.name+"_frozen_test.csv",QByteArray::fromStdString(frozen.str()));
     Artifact(rig.name+"_frozen_test_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*importedProbe)).toJson());
     EXPECT_EQ(test->ReadNativeParameters(),parameters);EXPECT_EQ(rig.Revision(),original);
+    QTemporaryDir directory;ASSERT_TRUE(directory.isValid());
+    const auto path=directory.path()+"/learned.json",output=directory.path()+"/imported.json";
+    QFile serialized(path);ASSERT_TRUE(serialized.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+    ASSERT_GT(serialized.write(QJsonDocument(package).toJson()),0);serialized.close();
+    QProcess child;auto childEnv=QProcessEnvironment::systemEnvironment();
+    childEnv.insert("TIMELEARNER_LEARNED_IMPORT",path);childEnv.insert("TIMELEARNER_LEARNED_OUTPUT",output);
+    childEnv.insert("TIMELEARNER_LEARNED_START_US",QString::number(frozenStart));child.setProcessEnvironment(childEnv);
+    child.setProgram(QCoreApplication::applicationFilePath());child.setArguments({"--gtest_filter=NativeLearnedState.FreshProcessImport"});
+    child.start();ASSERT_TRUE(child.waitForStarted(30000));ASSERT_TRUE(child.waitForFinished(120000));
+    Artifact(rig.name+"_fresh_process.log",child.readAllStandardOutput()+child.readAllStandardError());ASSERT_EQ(child.exitCode(),0);
+    QFile loaded(output);ASSERT_TRUE(loaded.open(QIODevice::ReadOnly));const auto record=QJsonDocument::fromJson(loaded.readAll()).object();
+    EXPECT_EQ(record["model"].toObject()["sha256"],package["model_revision"]);EXPECT_EQ(record["certificate"].toObject(),certificate);
+    Artifact(rig.name+"_fresh_process.json",QJsonDocument(record).toJson());
+    QFile csv(output+".csv");ASSERT_TRUE(csv.open(QIODevice::ReadOnly));const auto freshTrace=csv.readAll();
+    EXPECT_EQ(freshTrace,QByteArray::fromStdString(frozen.str()));Artifact(rig.name+"_fresh_process.csv",freshTrace);
     // The receiver must not turn this finished boundary into a new cold run.
     for(unsigned i=0;i<8;++i){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     EXPECT_FALSE(test->IsNeedToTrain.GetData());EXPECT_EQ(test->ReadNativeParameters(),parameters);
