@@ -71,14 +71,21 @@ gitlink; tested SHA в manifests не заменяется merge SHA. Подро
 
 ## Ещё не завершённые gates
 
-Полный maintained CTest после shared harness изменения и итоговый ASan ещё
-не приняты. Elder-1 A9 использует root `270c62ce…`; M40 A15 — root `51c54abb…`.
+Полный maintained CTest после shared harness изменения ещё
+не принят. Elder-1 A9 использует root `270c62ce…`; M40 A15 — root `51c54abb…`.
 Оба процесса проверены живыми; запуск не равен PASS. ASan A1 завершился с
 11 pass, 1 helper skip и 1 failure Classic N=6: честное исчерпание 600 секунд
 без сертификата. В dimensional transport fixture явно задан новый конечный
 бюджет 1800 wall seconds; физические допуски и model-time budget не изменены.
-ASan A3 root `51c54abb…`: Classic N0, Branch N0 с actual rollback и Exact warm
-continuation прошли; Classic N=6 ещё выполняется, весь набор не принят.
+ASan A3 root `51c54abb…` завершён: **4/4 прошли**, без skips/errors/failures,
+detect_leaks=0. Это Classic N0, Branch N0 с actual rollback, Exact warm
+continuation и Classic N=6. Последний занял около 786 секунд. Независимый
+Python audit проверил четыре пакета, 56 первичных training trials и четыре
+rollback probes. Evidence commit `dfae0e745bc00b8c80e952682c0cf7f27e28831e`
+опубликован и объединён в root feature; локально проверены stored/raw SHA.
+Этот адресный набор не является полной sanitizer physics/mode matrix и не
+подтверждает отсутствие всех утечек. В Git-пакетах learned-state на данный
+момент проверены 7748 stored SHA и 7744 raw payloads; общий этап 5 не закрыт.
 Поэтому последующие строки «подготовлены» описывают исходную постановку и не
 отменяют приведённые выше уже завершённые адресные проверки.
 
