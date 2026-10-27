@@ -5,6 +5,12 @@
 
 #include <stdexcept>
 #include <string>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#if defined(_WIN32)
+#include <windows.h>
+#endif
 
 namespace NmsdkTests {
 
@@ -26,18 +32,37 @@ using AppCoreType = RDK::UAppCore<
 ConsoleInitResult g_result;
 bool g_initialized = false;
 AppCoreType* g_appCore = nullptr;
+std::string g_executable;
 
 } // namespace
+
+void SetPulseLibTestExecutable(const std::string& argv0)
+{
+#if defined(__linux__)
+    g_executable=std::filesystem::canonical("/proc/self/exe").string();
+#elif defined(_WIN32)
+    std::wstring path(32768,L'\0');const auto size=GetModuleFileNameW(nullptr,path.data(),DWORD(path.size()));
+    if(!size || size>=path.size())throw std::runtime_error("PulseLib test executable path unavailable");
+    path.resize(size);g_executable=std::filesystem::path(path).string();
+#else
+    if(argv0.empty())throw std::runtime_error("PulseLib test executable requires argv[0]");
+    g_executable=std::filesystem::canonical(argv0).string();
+#endif
+}
+const std::string& PulseLibTestExecutable()
+{if(g_executable.empty())SetPulseLibTestExecutable({});return g_executable;}
 
 const ConsoleInitResult& InitEngineForPulseLibTests()
 {
     if (g_initialized)
         return g_result;
 
-    // CTest запускает бинарник из изолированного DEPLOY_ROOT, где CMake создаёт
-    // NeuroModelerConsole.ini с явными путями ресурсов.
-    const std::string appPath = "Test_PulseLib_StorageComponents.exe";
-    const std::string iniFile = "NeuroModelerConsole.ini";
+    const std::string appPath=PulseLibTestExecutable();
+    const auto runtime=std::filesystem::path(appPath).parent_path();
+    const std::string iniFile=(runtime/"NeuroModelerConsole.ini").string();
+    if(!std::filesystem::is_regular_file(iniFile))throw std::runtime_error("PulseLib test runtime ini is missing: "+iniFile);
+    if(!std::ifstream(std::filesystem::path(iniFile)))throw std::runtime_error("PulseLib test runtime ini cannot be read: "+iniFile);
+    std::cerr<<"PulseLibTestRuntime executable="<<appPath<<" ini="<<iniFile<<'\n';
 
     // Для интеграционных тестов PulseLib мы НЕ создаём файловые логи,
     // чтобы избежать конфликтов glog/файловых логгеров и лишнего шума.
@@ -52,7 +77,7 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
     // Настраиваем только системный каталог до инициализации ядра
     // (относительно текущего runtime directory).
     // Core_SetSystemDir — C API из rdk_init.h (глобальная область видимости).
-    Core_SetSystemDir(".");
+    Core_SetSystemDir(runtime.string().c_str());
 
     if (!g_appCore)
         g_appCore = new AppCoreType();

@@ -13,7 +13,6 @@
 #include <QDir>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QCoreApplication>
 #include <QProcess>
 #include <QProcessEnvironment>
 #include <QTemporaryDir>
@@ -917,7 +916,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
     QProcess child;auto childEnv=QProcessEnvironment::systemEnvironment();
     childEnv.insert("TIMELEARNER_LEARNED_IMPORT",path);childEnv.insert("TIMELEARNER_LEARNED_OUTPUT",output);
     childEnv.insert("TIMELEARNER_LEARNED_START_US",QString::number(frozenStart));child.setProcessEnvironment(childEnv);
-    child.setProgram(QCoreApplication::applicationFilePath());child.setArguments({"--gtest_filter=NativeLearnedState.FreshProcessImport"});
+    child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));child.setArguments({"--gtest_filter=NativeLearnedState.FreshProcessImport"});
     child.start();ASSERT_TRUE(child.waitForStarted(30000));ASSERT_TRUE(child.waitForFinished(120000));
     Artifact(rig.name+"_fresh_process.log",child.readAllStandardOutput()+child.readAllStandardError());ASSERT_EQ(child.exitCode(),0);
     QFile loaded(output);ASSERT_TRUE(loaded.open(QIODevice::ReadOnly));const auto record=QJsonDocument::fromJson(loaded.readAll()).object();

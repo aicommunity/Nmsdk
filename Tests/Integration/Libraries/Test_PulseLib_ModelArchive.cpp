@@ -231,11 +231,7 @@ void TransferFixture(unsigned int frequency, bool withBoundary)
     QProcess child; auto environment = QProcessEnvironment::systemEnvironment();
     environment.insert("TIMELEARNER_ARCHIVE_CHILD_INPUT",input); environment.insert("TIMELEARNER_ARCHIVE_CHILD_OUTPUT",output);
     child.setProcessEnvironment(environment);
-#if defined(_WIN32)
-    child.setProgram(QFileInfo("Test_PulseLib_StorageComponents.exe").absoluteFilePath());
-#else
-    child.setProgram(QFileInfo("Test_PulseLib_StorageComponents").absoluteFilePath());
-#endif
+    child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));
     child.setArguments({"--gtest_filter=TimeLearnerModelArchive.FreshProcessImport"});
     child.setProcessChannelMode(QProcess::MergedChannels); child.start();
     ASSERT_TRUE(child.waitForStarted(10000));
