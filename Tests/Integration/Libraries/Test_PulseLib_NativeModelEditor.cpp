@@ -781,7 +781,21 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
     EditingRig<Learner> rig(2000,normalization,sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance",false,2,true);
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
     auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
-    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}rig.learner->BeginNativeTraining(plan);
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    std::ostringstream trace;std::size_t observations=0;
+    plan.probe.onPrepared=[&](const auto&,const auto&) {
+        trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+    };
+    plan.probe.onSample=[&](const NativeProbeSample& sample) {
+        trace<<sample.time<<','<<sample.stimulus;for(double value:sample.potentials)trace<<','<<value;trace<<'\n';
+    };
+    plan.observationSink=[&](const NativeProbeResult& result) {
+        const auto base=rig.name+"_state_trial_"+std::to_string(++observations);
+        Artifact(base+".json",QJsonDocument(EncodeNativeProbeEvidence(result)).toJson());
+        Artifact(base+".csv",QByteArray::fromStdString(trace.str()));
+    };
+    rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
     {ASSERT_LT(ticks,40000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();ASSERT_TRUE(service.Certificate())<<service.Reason();
