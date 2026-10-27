@@ -32,6 +32,10 @@ CSV/packets, восемь отрицательных сертификатов и
 gzip payloads без ошибок. [Машинная сводка](NativeModelBuilder.validation.json).
 PulseLib объединён и опубликован в develop merge commit
 `5f1a6076edfe2e306e507013a82dc7574ec735d7`; root сохраняет этот точный gitlink.
+Root merge: `feb18e9b5d1cf7d0459bc8fedd8649f73fde6daf`, опубликован в develop.
+На обоих серверах отдельный recursive checkout восстановил его с чистыми
+деревьями и точными gitlinks. Это приёмка builder API-подэтапа, а не всех
+требований этапов 4/6 или всего плана.
 
 ### Исторический промежуточный статус A2 (до финальной проверки)
 
