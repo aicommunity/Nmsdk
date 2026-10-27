@@ -148,5 +148,23 @@ Root 036b3a072023801f0562ba306dfc8743776991f1 воспроизводит expecte
 исторических результатов. Расширенный assigned-wave policy должен иметь явную
 новую версию; пока он не реализован. Пакеты s06-native-service-elder1/m40.
 
+TL-029: shared PulseLib test harness разрешал executable/ini относительно CWD
+и предполагал QCoreApplication. S05 A4/A5 сохраняют fresh-process failures;
+root a222ac7c4b386451137ef17e4a5a0af6996c8d9b разрешает actual executable и
+соседний runtime ini; 7186788be098a58091a14025d664647e5d9eb2cd инициализирует
+корневой NModel нового helper штатно. A6/A7 проходят адресные переносы на обоих
+серверах. Прежние ad-hoc numerical controls не отменены, но утверждение об их
+соответствии заявленному ini ограничено. Full maintained CTest ещё проверяется;
+NativeLearnedState.ru.md.
+
+TL-030: штатное перемещение компонента вперёд в конец читало за границей
+вектора; вычисление int destination могло переполняться. Native test-only Rdk
+e2bcd8da5bab016bd3fd703c42e519e56b633081 воспроизводит failing order check и
+ASan heap-buffer-overflow на M40. Исправление Rdk
+2cfda44d738f6291914217dba9cd223acae35bfd проходит 13/13 native tests под ASan,
+detect_leaks=0. Обычная сборка на втором сервере, integration и Git-публикация
+ещё не приняты. См. ComponentOrderBounds.ru.md. Причинная связь с историческими
+экспериментами не установлена; их результаты этим finding не отменяются.
+
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
