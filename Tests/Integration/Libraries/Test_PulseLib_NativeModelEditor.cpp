@@ -9,6 +9,7 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "../Support/ConsoleLikeInit.h"
+#include "../../../Rdk/Core/Engine/UComponentFactory.h"
 #include <QFile>
 #include <QDir>
 #include <QJsonArray>
@@ -29,6 +30,18 @@ namespace {
 using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
+template<class Learner> class ImportRollbackLearner : public Learner {
+public:
+    bool failNeuronAttach=false;
+    ImportRollbackLearner* New(void) override { return new ImportRollbackLearner; }
+protected:
+    void ABeforeAddComponent(UEPtr<UContainer> child,UEPtr<UIPointer> pointer=0) override
+    {
+        Learner::ABeforeAddComponent(child,pointer);
+        if(failNeuronAttach && child->GetName()=="Neuron")
+        {failNeuronAttach=false;throw std::runtime_error("injected_import_neuron_attach_failure");}
+    }
+};
 void Artifact(const std::string& name,const QByteArray& data)
 {
     if(const auto directory=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
@@ -980,6 +993,67 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     ASSERT_TRUE(tap->Input.SetPointer(0,&testSource->Output));rejectWithoutMutation(package);
     ASSERT_EQ(tap->Input.GetDataSources().size(),1u);EXPECT_EQ(tap->Input.GetDataSources().front(),&testSource->Output);tap->Input.DetachFrom();
     Artifact(rig.name+"_imported_model.json",QJsonDocument(identity).toJson());
+    if(frequency==2000 && inputs==2 && normalization==0 && !configured)
+    {
+        // Use the native component factory and actual replacement path. The
+        // one-shot hook fails only after the new dataset has been attached;
+        // adding the old objects back must remain possible during rollback.
+        using FaultOwner=ImportRollbackLearner<Learner>;
+        const auto className=std::string(rig.branch?"LearnedImportRollbackBranch":"LearnedImportRollbackClassic");
+        core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+            +[]() -> UComponent* {return new FaultOwner;},className),className);
+        auto rollback=dynamic_pointer_cast<FaultOwner>(core.storage->TakeObject(className));ASSERT_TRUE(rollback);
+        rollback->Name="RollbackLearner";UEPtr<UContainer> childNode=rollback;ASSERT_NE(rig.model->AddComponent(childNode),ForbiddenId);
+        rollback->SetGlobalTimeStep(frequency);rollback->IsNeedToTrain.SetDataDirect(false);
+        rollback->EnablePostTrainTuning=false;rollback->AutoCalibrateFixedLTZThreshold=false;
+        const auto declaration=DecodeConfiguredNativeTraining(package["configuration"].toObject()).model;
+        const auto constructed=rollback->ConstructNativeModel(declaration);
+        ASSERT_EQ(constructed.status,NativeModelBuildStatus::Constructed)<<constructed.reason;rollback->Build();rollback->Init();
+        auto oldNeuron=rollback->template GetComponentL<NPulseNeuron>("Neuron",true);
+        auto oldDataset=rollback->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+        auto oldSource=oldDataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(oldSource);
+        const auto oldHash=NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}})["sha256"];
+        const auto oldParameters=rollback->ReadNativeParameters();std::vector<NameT> oldOrder;rollback->GetComponentsList(oldOrder);
+        const auto measure=[&](const std::string& phase,std::vector<NativeProbeSample>& samples) {
+            auto probe=plan.probe;probe.activeInput=0;probe.inputId=plan.protocol.inputs[0].id;
+            probe.baseModelRevision=oldHash.toString().toStdString();probe.modelEpoch=0;
+            probe.specification.runId=rig.name+"/rollback";probe.specification.trialId=rig.name+"/rollback/"+phase;
+            probe.specification.windows={plan.inputWindows[0]};probe.onPrepared={};
+            probe.readModelRevision=[=]{return NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}})["sha256"].toString().toStdString();};
+            probe.readFullModelRevision=probe.readModelRevision;
+            probe.onSample=[&](const NativeProbeSample& sample){samples.push_back(sample);};
+            rollback->QueueNativeProbe(std::move(probe));
+            for(unsigned tick=0;rollback->NativeProbeState()==NativeProbeStatus::Queued || rollback->NativeProbeState()==NativeProbeStatus::Running;++tick)
+            {ASSERT_LT(tick,unsigned((rig.duration+.02)*frequency));rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+            const auto result=rollback->TakeNativeProbeResult();ASSERT_TRUE(result);ASSERT_EQ(result->status,NativeProbeStatus::Completed);
+            ASSERT_TRUE(result->observation);ASSERT_TRUE(result->observation->valid);
+            Artifact(rig.name+"_rollback_"+phase+"_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*result)).toJson());
+            std::ostringstream csv;csv.imbue(std::locale::classic());csv<<std::setprecision(17)<<"time,stimulus";
+            for(std::size_t i=0;i<(rig.branch?1u:inputs);++i)csv<<",soma"<<i;csv<<'\n';
+            for(const auto& sample:samples){csv<<sample.time<<','<<sample.stimulus;for(double p:sample.potentials)csv<<','<<p;csv<<'\n';}
+            Artifact(rig.name+"_rollback_"+phase+".csv",QByteArray::fromStdString(csv.str()));
+        };
+        std::vector<NativeProbeSample> before,after;measure("before",before);ASSERT_FALSE(before.empty());
+        rollback->failNeuronAttach=true;
+        const auto failed=rollback->ImportNativeLearnedState(package,implementation);
+        EXPECT_EQ(failed.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(failed.modelMayHaveChanged);
+        EXPECT_EQ(failed.reason,"injected_import_neuron_attach_failure");EXPECT_FALSE(rollback->failNeuronAttach);
+        EXPECT_EQ(rollback->template GetComponentL<NPulseNeuron>("Neuron",true),oldNeuron);
+        EXPECT_EQ(rollback->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true),oldDataset);
+        std::vector<NameT> restoredOrder;rollback->GetComponentsList(restoredOrder);EXPECT_EQ(restoredOrder,oldOrder);
+        EXPECT_EQ(NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}})["sha256"],oldHash);
+        EXPECT_EQ(rollback->ReadNativeParameters(),oldParameters);EXPECT_TRUE(rollback->NativeModelEditFailure().empty());
+        EXPECT_FALSE(rollback->NativeTrainingController().Certificate());EXPECT_FALSE(rollback->NativeTrainingController().References());
+        measure("after",after);ASSERT_EQ(before.size(),after.size());
+        for(std::size_t i=0;i<before.size();++i)
+        {
+            EXPECT_EQ(before[i].stimulus,after[i].stimulus);EXPECT_EQ(before[i].potentials,after[i].potentials);
+            EXPECT_NEAR(before[i].time-before[0].time,after[i].time-after[0].time,32*std::numeric_limits<double>::epsilon()*std::max(1.,after[i].time));
+        }
+        Artifact(rig.name+"_rollback.json",QJsonDocument(QJsonObject{{"reason",QString::fromStdString(failed.reason)},
+            {"changed",failed.modelMayHaveChanged},{"before",oldHash},
+            {"after",NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}})["sha256"]}}).toJson());
+    }
     if(sync==.2 && inputs==2)
     {
         // Resume from the imported completed boundary with the retained goal.
