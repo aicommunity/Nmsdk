@@ -1,5 +1,13 @@
 # Проверка полноты выполнения принятого плана
 
+Проверка полной ревизии на каждом tick ускорена через
+[ModelRevisionObserver](ModelRevisionObserver.ru.md): actual typed reads и
+membership/lifetime guards, полные boundary captures, native A/B 2000/20000 Гц
+с одинаковыми stimulus/soma arrays и model hashes. На каждом сервере 85/85
+основных C++ cases, 12/12 replacement/lifetime, 20/20 fallback regressions,
+18/18 Python. Это устраняет измеренный overhead узкого места в scoped моделях;
+большие production graphs и остальные требования плана остаются открытыми.
+
 Следующее уточнение: [AssignedWaveSelection](AssignedWaveSelection.ru.md)
 добавляет явный assigned whole-burst выбор с реальными соседними samples,
 привязкой политики к references/certificate и evidence envelope 2. На обоих
