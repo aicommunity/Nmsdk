@@ -78,19 +78,27 @@ Native reproducer выявил сохранение старых внешних 
 Return→Take reuse и Copy. Исправление выполняется в Rdk с сохранением внутренних
 связей и штатных Build/Reset/Default. Strict model identity не ослабляется.
 
-**Новое исправление адресно прошло, интеграционно ещё не принято.** На .11
+**Новое исправление прошло адресные unit и integration проверки; полный gate открыт.** На .11
 `readbacks/s04-property-fixed-a2`: **18/18 UContainer tests passed**,
 failures/errors/skips=0. Root `f3b45cb9300e4dd43f9d4c4d212e366b75195af1`,
 Rdk `1223bcc18cf1ba106e8f8a17f20cce8c000c104d`. Проверены external
 scalar/matrix/vector bindings, Copy внутренних связей, constructor wiring и
-обычный lifecycle. XML непосредственно прочитан на сервере; evidence package
-ещё не опубликован. Нужны sanitizer/integration проверки и повтор full suite.
+обычный lifecycle. На .17 18/18 прошли под ASan (detect_leaks=0). На .11
+последовательно прошли 25 builder и пять learned-state tests: 30/30; дополнительно
+18/18 UContainer и 9/9 Python. Проверены 62 training trials и четыре rollback probes.
+Оба evidence packages опубликованы через Git; локально проверены 3856 stored SHA
+и 3852 raw payloads. См. [PooledPropertyBindings](PooledPropertyBindings.ru.md).
 
-**Полный maintained CTest .17 A15 ещё выполняется.** Root
+**Полный maintained CTest .17 A15 также не прошёл.** Root
 `51c54abb95881ced0942e5cfd14928609da00ac6`, `readbacks/s05-learned-a15`:
-три быстрые suites прошли, PulseLib процесс жив (PID 3227213, около 77 минут
-на момент сверки). Итогового CTest XML нет. Используется зафиксированная версия
-без нового pooled-binding fix; runtime не изменялся. Запуск не считается PASS.
+три быстрые suites прошли, PulseLib: 395 tests, 370 pass, 10 skip, те же 15 failures.
+На обоих workers independently проверены по 16 исходных trainings и 208 trial
+CSV/JSON; это не отменяет transport failures. Исходные failed runs опубликованы
+в тех же Git-пакетах. Runtime старых заданий не изменялся.
+
+**Повторные post-fix full suites запущены на обоих workers:**
+`readbacks/s05-pooled-full-a1`, root `f3b45cb9300e4dd43f9d4c4d212e366b75195af1`.
+Их успешность ещё не установлена. До приёмки Rdk/PulseLib/root feature не закрываются.
 
 ## Очерёдность оставшейся работы
 

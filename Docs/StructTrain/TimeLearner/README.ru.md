@@ -15,6 +15,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Readback фактического графа модели](ModelInspection.ru.md).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
 - [Native component order: подтверждённый выход за границу и исправление Rdk](ComponentOrderBounds.ru.md).
+- [Pooled property bindings: full-suite отказы, исправление Rdk и проверки](PooledPropertyBindings.ru.md).
 - [Перенос модели: выполненная часть и оставшиеся проверки](Stage05-Progress.ru.md).
 - [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Типизированный наблюдатель фактической ревизии и native A/B скорости](ModelRevisionObserver.ru.md).

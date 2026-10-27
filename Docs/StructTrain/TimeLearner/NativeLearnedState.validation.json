@@ -83,11 +83,11 @@
   },
   "rdk_develop_merge": "ef4f033704d54f11d06e4da2b3518c313f3a9992",
   "full_maintained_suites_pending": [
-    "m40/s05-learned-a15",
-    "post-pooled-binding-fix full-suite acceptance on both workers"
+    "elder1/s05-pooled-full-a1",
+    "m40/s05-pooled-full-a1"
   ],
   "latest_server_readback_2026_10_27": {
-    "scope": "direct remote readback; these new results are not yet a published Git evidence package",
+    "scope": "direct remote readback; A9/A15 failures and addressed property fix results are now published in s04-property-bindings evidence packages",
     "elder1_a9": {
       "status": "failed",
       "ctest_suites": 4,
@@ -105,13 +105,19 @@
       "skipped": 0,
       "source": "f3b45cb9300e4dd43f9d4c4d212e366b75195af1",
       "rdk": "1223bcc18cf1ba106e8f8a17f20cce8c000c104d",
-      "integration_acceptance": false
+      "integration_acceptance": "addressed 30/30 native and 9/9 Python pass; full suite pending"
     },
     "m40_a15": {
-      "status": "running_at_readback",
+      "status": "failed",
       "source": "51c54abb95881ced0942e5cfd14928609da00ac6",
       "completed_fast_suites": 3,
-      "terminal_verdict": null
+      "ctest_suites": 4,
+      "failed_suites": 1,
+      "pulselib_tests": 395,
+      "pulselib_passed": 370,
+      "pulselib_skipped": 10,
+      "pulselib_failed": 15,
+      "terminal_verdict": "failed"
     }
   },
   "evaluation_verdict": null,
