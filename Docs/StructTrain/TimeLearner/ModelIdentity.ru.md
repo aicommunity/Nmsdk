@@ -1,5 +1,10 @@
 # Идентичность фактической модели
 
+Ускорение повторных чтений без изменения этого fingerprint:
+[ModelRevisionObserver](ModelRevisionObserver.ru.md). Process-local pointer/type
+guards не входят в hash; они разрешают повторное использование полного capture
+только после сравнения actual typed parameters и фактического графа.
+
 `Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelIdentity` — общий read-only контроль
 для этапа 5. Адресная проверка переноса из Console:
 [ModelGraphOwnership](ModelGraphOwnership.ru.md).
