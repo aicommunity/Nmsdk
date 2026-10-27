@@ -13,6 +13,7 @@
 #include <filesystem>
 #include <fstream>
 #include <limits>
+#include <chrono>
 
 namespace {
 using namespace RDK;
@@ -237,5 +238,164 @@ TEST(TimeLearnerModelIdentity, NativeAsymmetricXmlRoundtripRetainsFullSemanticMo
     Artifact("asymmetric-source.json", NmsdkTools::IdentifyModel(source));
     Artifact("asymmetric-reordered.json", NmsdkTools::IdentifyModel(restored));
     core.storage->ReturnObject(restored); core.storage->ReturnObject(source);
+}
+
+class ObserverGraph : public IdentityGraph {
+public:
+    UProperty<bool,ObserverGraph,ptPubParameter> Flag;
+    UProperty<int,ObserverGraph,ptPubParameter> Int;
+    UProperty<long,ObserverGraph,ptPubParameter> Long;
+    UProperty<long long,ObserverGraph,ptPubParameter> LongLong;
+    UProperty<unsigned int,ObserverGraph,ptPubParameter> UInt;
+    UProperty<unsigned long,ObserverGraph,ptPubParameter> ULong;
+    UProperty<unsigned long long,ObserverGraph,ptPubParameter> ULongLong;
+    UProperty<std::string,ObserverGraph,ptPubParameter> Text;
+    UProperty<std::vector<int>,ObserverGraph,ptPubParameter> Indices;
+    UProperty<std::vector<std::string>,ObserverGraph,ptPubParameter> Labels;
+    UProperty<MDMatrix<double>,ObserverGraph,ptPubParameter|ptInput> Matrix;
+    UProperty<MDMatrix<double>,ObserverGraph,ptPubState|ptOutput> MatrixSource;
+    ObserverGraph():Flag("Flag",this),Int("Int",this),Long("Long",this),LongLong("LongLong",this),
+        UInt("UInt",this),ULong("ULong",this),ULongLong("ULongLong",this),Text("Text",this),
+        Indices("Indices",this),Labels("Labels",this),Matrix("Matrix",this),MatrixSource("MatrixSource",this)
+    {Flag=false;Int=0;Long=0;LongLong=0;UInt=0;ULong=0;ULongLong=0;Text="alpha";
+     Indices=std::vector<int>{0,1};Labels=std::vector<std::string>{"a","b"};Matrix->Assign(2,3,0.);MatrixSource->Assign(2,3,1.);}
+    ObserverGraph* New(void) override{return new ObserverGraph;}
+};
+UEPtr<ObserverGraph> ObservedGraph()
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string name="TimeLearnerObserverGraph";
+    if(!core.storage->CheckClass(name))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]()->UComponent*{return new ObserverGraph;},name),name);
+    auto graph=dynamic_pointer_cast<ObserverGraph>(core.storage->TakeObject(name));
+    if(!graph)throw std::runtime_error("observer_fixture");
+    graph->SetEnvironment(core.environment);graph->SetGlobalTimeStep(2000);graph->Init();return graph;
+}
+void CompareObserved(NmsdkTools::ModelRevisionObserver& observer,UEPtr<UContainer> model,
+    const NmsdkTools::ModelBoundarySources& ports={})
+{
+    const auto actual=NmsdkTools::IdentifyModel(model,ports);
+    if(actual["valid"].toBool())EXPECT_EQ(observer.Read(model,ports),actual["sha256"].toString());
+    else EXPECT_THROW(observer.Read(model,ports),std::runtime_error);
+}
+TEST(ModelRevisionObserver, MatchesFullIdentityAcrossAllSupportedTypedParameterFamilies)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto graph=ObservedGraph();
+    NmsdkTools::ModelRevisionObserver observer;CompareObserved(observer,graph);
+    const auto edit=[&](auto change){const auto before=observer.FullReads();change();CompareObserved(observer,graph);EXPECT_EQ(observer.FullReads(),before+1);};
+    edit([&]{graph->Flag=true;});edit([&]{graph->Int=-13;});edit([&]{graph->Long=17;});
+    edit([&]{graph->LongLong=std::numeric_limits<long long>::min();});
+    edit([&]{graph->UInt=std::numeric_limits<unsigned int>::max();});
+    edit([&]{graph->ULong=std::numeric_limits<unsigned long>::max();});
+    edit([&]{graph->ULongLong=std::numeric_limits<unsigned long long>::max();});
+    edit([&]{graph->Gain=std::nextafter(graph->Gain.GetData(),std::numeric_limits<double>::infinity());});
+    edit([&]{graph->Text="beta";});edit([&]{graph->LinkName=std::make_pair(std::string("x"),std::string("y"));});
+    edit([&]{graph->Weights=std::vector<double>{2.,1.};});edit([&]{graph->Indices=std::vector<int>{1,0};});
+    edit([&]{graph->Labels=std::vector<std::string>{"b","a"};});
+    edit([&]{graph->Mapping(1,2)=7;});edit([&]{graph->Matrix(1,2)=std::nextafter(0.,1.);});
+    edit([&]{graph->Matrix->Assign(3,2,0.);});edit([&]{graph->Mapping->Assign(3,2,7);});
+    CompareObserved(observer,graph);EXPECT_GT(observer.CacheHits(),0u);core.storage->ReturnObject(graph);
+}
+TEST(ModelRevisionObserver, DoesNotHashDynamicsButDetectsMasksBindingsAliasesAndActivity)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto graph=ObservedGraph();
+    NmsdkTools::ModelRevisionObserver observer;CompareObserved(observer,graph);const auto initial=observer.Read(graph);
+    graph->Name="RenamedObserverRoot";graph->Coord=MVector<double,3>(3,4,5);graph->First=17.;
+    CompareObserved(observer,graph);EXPECT_EQ(observer.Read(graph),initial);EXPECT_EQ(observer.FullReads(),1u);
+    graph->Matrix.SetPointer(0,&graph->MatrixSource);CompareObserved(observer,graph);const auto bound=observer.Read(graph);
+    graph->MatrixSource(0,0)=19.;CompareObserved(observer,graph);EXPECT_EQ(observer.Read(graph),bound);
+    graph->Matrix.ResetPointer(0,&graph->MatrixSource);CompareObserved(observer,graph);
+    graph->Input.SetPointer(0,&graph->First);graph->Input.SetPointer(1,&graph->Second);CompareObserved(observer,graph);
+    graph->Input.ResetPointer(0,&graph->First);graph->Input.ResetPointer(0,&graph->Second);
+    graph->Input.SetPointer(0,&graph->Second);graph->Input.SetPointer(1,&graph->First);CompareObserved(observer,graph);
+    ASSERT_TRUE(graph->AddPropertyAlias("ExternalInput","","Input",ptPubInput));CompareObserved(observer,graph);
+    graph->ClearPropertyAliases();CompareObserved(observer,graph);
+    ASSERT_TRUE(graph->ChangeLookupPropertyType("Gain",ptPubState));CompareObserved(observer,graph);
+    ASSERT_TRUE(graph->ChangeLookupPropertyType("Gain",ptPubParameter));CompareObserved(observer,graph);
+    graph->Activity=false;CompareObserved(observer,graph);graph->Activity=true;CompareObserved(observer,graph);
+    graph->Input.ResetPointer(0,&graph->Second);graph->Input.ResetPointer(0,&graph->First);
+    core.storage->ReturnObject(graph);
+}
+TEST(ModelRevisionObserver, InvalidNumbersAndUnknownBindingsNeverReuseAValidHash)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto graph=ObservedGraph(),outside=ObservedGraph();
+    NmsdkTools::ModelRevisionObserver observer;CompareObserved(observer,graph);
+    graph->Gain=std::numeric_limits<double>::quiet_NaN();CompareObserved(observer,graph);
+    graph->Gain=0.;CompareObserved(observer,graph);const auto full=observer.FullReads();
+    graph->Gain=-0.;CompareObserved(observer,graph);EXPECT_EQ(observer.FullReads(),full);
+    graph->Weights=std::vector<double>{std::numeric_limits<double>::infinity()};CompareObserved(observer,graph);
+    graph->Weights=std::vector<double>{1.};CompareObserved(observer,graph);
+    graph->Matrix(0,0)=std::numeric_limits<double>::infinity();CompareObserved(observer,graph);
+    graph->Matrix(0,0)=0.;CompareObserved(observer,graph);
+    graph->Input.SetPointer(0,&outside->First);CompareObserved(observer,graph);
+    graph->Input.ResetPointer(0,&outside->First);CompareObserved(observer,graph);
+    graph->UnInit();CompareObserved(observer,graph);EXPECT_FALSE(graph->IsInit());
+    graph->Init();CompareObserved(observer,graph);graph->Reset();CompareObserved(observer,graph);
+    graph->SetGlobalTimeStep(20000);graph->Init();CompareObserved(observer,graph);
+    const auto before=observer.FullReads();observer.Read(graph,{},true);EXPECT_EQ(observer.FullReads(),before+1);
+    observer.Clear();CompareObserved(observer,graph);
+    core.storage->ReturnObject(outside);core.storage->ReturnObject(graph);
+}
+TEST(ModelRevisionObserver, RealNativeGraphCachesOrderGrowthAndReuseMatchTheFullInspector)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();StorageProfileSpec spec;spec.name="ObserverNativeProfile";
+    spec.ltMembrane=spec.body;spec.ltMembrane->excChannel.capacity=.3e-9;
+    const auto profile=RegisterStorageProfile(core.storage,core.environment,spec);
+    auto neuron=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(profile.neuronClass));ASSERT_TRUE(neuron);
+    neuron->SetEnvironment(core.environment);neuron->SetGlobalTimeStep(2000);
+    neuron->NumSomaMembraneParts=2;neuron->StructureBuildMode=2;neuron->NumDendriteMembranePartsVec=std::vector<int>{1,3};neuron->Init();
+    NmsdkTools::ModelRevisionObserver observer;CompareObserved(observer,neuron);
+    auto channel=neuron->GetComponentL<NPulseChannel>("Dendrite2_3.ExcChannel",true);ASSERT_TRUE(channel);
+    channel->Capacity=std::nextafter(channel->Capacity.GetData(),std::numeric_limits<double>::infinity());CompareObserved(observer,neuron);
+    const auto membranes=neuron->Membranes;neuron->Membranes.pop_back();CompareObserved(observer,neuron);
+    neuron->Membranes=membranes;CompareObserved(observer,neuron);
+    const double timeConstant=channel->TimeConstant.GetData();channel->TimeConstant=std::numeric_limits<double>::quiet_NaN();CompareObserved(observer,neuron);
+    channel->TimeConstant=timeConstant;CompareObserved(observer,neuron);
+    neuron->SetComponentPosition("LTMembrane",0);CompareObserved(observer,neuron);
+    neuron->NumDendriteMembranePartsVec=std::vector<int>{2,4};neuron->Build();neuron->Init();CompareObserved(observer,neuron);
+    neuron->NumDendriteMembranePartsVec=std::vector<int>{1,1};neuron->Build();neuron->Init();CompareObserved(observer,neuron);
+    core.storage->ReturnObject(neuron);
+    neuron=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(profile.neuronClass));ASSERT_TRUE(neuron);
+    neuron->SetEnvironment(core.environment);neuron->SetGlobalTimeStep(2000);neuron->Init();CompareObserved(observer,neuron);
+    core.storage->ReturnObject(neuron);
+}
+TEST(ModelRevisionObserver, DeclaredPortsAndUnsupportedModelsAreCheckedWithoutStaleParameterReads)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto graph=ObservedGraph(),source=ObservedGraph();
+    graph->Matrix.SetPointer(0,&source->MatrixSource);
+    NmsdkTools::ModelBoundarySources ports{{&source->MatrixSource,"stimulus"}};
+    NmsdkTools::ModelRevisionObserver observer;CompareObserved(observer,graph,ports);const auto initial=observer.Read(graph,ports);
+    source->MatrixSource(0,0)=17.;CompareObserved(observer,graph,ports);EXPECT_EQ(observer.Read(graph,ports),initial);
+    auto renamed=ports;renamed.begin()->second="other_port";CompareObserved(observer,graph,renamed);
+    EXPECT_NE(observer.Read(graph,renamed),initial);CompareObserved(observer,graph,ports);
+    graph->Matrix.ResetPointer(0,&source->MatrixSource);CompareObserved(observer,graph,ports);
+    CompareObserved(observer,graph); // valid again only without the unused port
+    graph->Matrix.SetPointer(0,&source->MatrixSource);CompareObserved(observer,graph,ports);
+    source->Reset();CompareObserved(observer,graph,ports);
+    graph->Matrix.ResetPointer(0,&source->MatrixSource);CompareObserved(observer,graph);
+    core.storage->ReturnObject(source);core.storage->ReturnObject(graph);
+    auto unsupported=new UnsupportedIdentityGraph;unsupported->SetEnvironment(core.environment);unsupported->Init();
+    EXPECT_THROW(observer.Read(unsupported),std::runtime_error);delete unsupported;
+}
+
+TEST(ModelRevisionObserver, ActualGraphReadCostIsRecordedWithoutChangingIdentityOrDynamics)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();StorageProfileSpec spec;spec.name="ObserverBenchmarkProfile";
+    const auto profile=RegisterStorageProfile(core.storage,core.environment,spec);
+    auto neuron=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(profile.neuronClass));ASSERT_TRUE(neuron);
+    neuron->SetEnvironment(core.environment);neuron->SetGlobalTimeStep(2000);neuron->StructureBuildMode=2;
+    neuron->NumSomaMembraneParts=6;neuron->NumDendriteMembranePartsVec=std::vector<int>{2,3,4,5,6,7};neuron->Init();
+    NmsdkTools::ModelRevisionObserver observer;const auto hash=observer.Read(neuron);
+    const auto started=std::chrono::steady_clock::now();constexpr unsigned reads=128;
+    for(unsigned i=0;i<reads;++i)ASSERT_EQ(NmsdkTools::IdentifyModel(neuron)["sha256"].toString(),hash);
+    const auto middle=std::chrono::steady_clock::now();
+    for(unsigned i=0;i<reads;++i)ASSERT_EQ(observer.Read(neuron),hash);
+    const auto finished=std::chrono::steady_clock::now();
+    EXPECT_EQ(observer.FullReads(),1u);EXPECT_EQ(observer.CacheHits(),reads);
+    Artifact("observer-read-cost.json",QJsonObject{{"kind","model_revision_observer_cost"},{"reads",int(reads)},
+        {"model_sha256",hash},{"nodes",NmsdkTools::IdentifyModel(neuron)["model"].toObject()["nodes"].toArray().size()},
+        {"full_seconds",std::chrono::duration<double>(middle-started).count()},
+        {"observer_seconds",std::chrono::duration<double>(finished-middle).count()},
+        {"frequency_hz",2000},{"measurement_only",true},{"dynamics_calculated",false}});
+    core.storage->ReturnObject(neuron);
 }
 }
