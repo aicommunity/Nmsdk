@@ -67,6 +67,48 @@ TEST(TimeLearnerBurstAssignment, UsesMeasuredWholeSequenceWithCorrectWindow)
     EXPECT_DOUBLE_EQ(*o.peaks[0].time,.8);EXPECT_DOUBLE_EQ(*o.peaks[0].rawPotential,2.03);
     EXPECT_DOUBLE_EQ(*o.peaks[0].delayFromStimulus,.8-.3);
 }
+TEST(TimeLearnerBurstAssignment, AssignedPolicySelectsTheActualLaterWaveInAWideWindow)
+{
+    auto s=BurstSpecification();s.windows[0].begin=0.;s.windows[0].end=1.;
+    const auto isolated=BurstObservation(s);EXPECT_FALSE(isolated.valid);
+    EXPECT_EQ(isolated.peaks[0].validity,PeakValidity::Ambiguous);
+    s.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    const auto assigned=BurstObservation(s);ASSERT_TRUE(assigned.valid);
+    EXPECT_EQ(assigned.peaks[0].candidateCount,1u);
+    EXPECT_DOUBLE_EQ(*assigned.peaks[0].time,.8);
+    EXPECT_DOUBLE_EQ(*assigned.peaks[0].delayFromStimulus,.8-.3);
+    // The earlier wave at .4 is after p1's actual onset too. The full
+    // measured sequence, not onset or a delay estimate, selects p1's wave.
+    s.windows[0].stimulusId="p0";
+    const auto first=BurstObservation(s);ASSERT_TRUE(first.valid);
+    EXPECT_DOUBLE_EQ(*first.peaks[0].time,.4);
+}
+TEST(TimeLearnerBurstAssignment, AssignedPolicyRequiresSamplesAroundTheSelectedPlateau)
+{
+    auto s=BurstSpecification();s.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(const auto bounds:std::vector<std::pair<double,double>>{{.751,.9},{.7,.849},{0.,.6}})
+    {
+        s.windows[0].begin=bounds.first;s.windows[0].end=bounds.second;
+        const auto o=BurstObservation(s);EXPECT_FALSE(o.valid);
+        EXPECT_EQ(o.peaks[0].validity,PeakValidity::Clipped);EXPECT_FALSE(o.peaks[0].time);
+    }
+    s.windows[0].begin=.75;s.windows[0].end=.9;
+    auto trace=TwoWaves();trace[17]=.03;trace[18]=.01;
+    const auto plateau=BurstObservation(s,trace);ASSERT_TRUE(plateau.valid);
+    EXPECT_DOUBLE_EQ(*plateau.peaks[0].time,.8);EXPECT_DOUBLE_EQ(*plateau.peaks[0].plateauEnd,.85);
+}
+TEST(TimeLearnerBurstAssignment, AssignedPolicyCannotFillMissingWavesOrChangeHistoricalSchemas)
+{
+    auto s=BurstSpecification();s.windows[0].begin=0.;s.windows[0].end=1.;
+    s.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    auto missing=TwoWaves();missing[15]=missing[16]=missing[17]=0.;
+    EXPECT_FALSE(BurstObservation(s,missing).valid);
+    auto extra=TwoWaves();extra[2]=.01;EXPECT_FALSE(BurstObservation(s,extra).valid);
+    s.schemaVersion=2;s.waveAssignment=WaveAssignmentPolicy::WindowOnly;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=BurstSpecification();s.peakSelection=static_cast<PeakSelectionPolicy>(123);
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
 TEST(TimeLearnerBurstAssignment, MissingAndExtraWavesCannotBeRelabelled)
 {
     auto missing=TwoWaves();missing[15]=missing[16]=missing[17]=0.;
