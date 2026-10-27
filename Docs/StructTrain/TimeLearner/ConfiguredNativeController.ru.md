@@ -38,6 +38,13 @@ Build отклоняет состояние с `configured_trained_model_require
 versioned trained-state import/export остаётся следующим обязательным шагом;
 marker не является checkpoint и не доказывает обученность.
 
+Guard помечен и Parameter, и State: Rdk Copy(false) вызывает Build после
+копирования параметров, до копирования состояния. State-only marker оказался бы
+слишком поздним. При восстановлении нового экземпляра property setter допускает
+загрузку самой декларации независимо от порядка полей, но Build удерживает
+диагностику до полного trained-state import. Подготовлены реальные XML Load,
+Copy(false) и Copy(true) controls для обеих топологий с heterogeneous child C.
+
 Подготовлены Classic/Branch × N0/N1 configured searches, строгий codec roundtrip,
 corruption controls, защита от незаметного cold reset и сохранность после Build/Reset.
 Проверки не должны вызывать BeginNativeTraining для запуска configured поиска.
