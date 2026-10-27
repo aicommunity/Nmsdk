@@ -127,6 +127,7 @@ template<class Learner> struct EditingRig {
             model->Calculate();environment->IncreaseModelTimeByStep();
         }
         auto result=learner->TakeNativeProbeResult();if(!result)throw std::runtime_error("missing_editor_fixture_result");
+        if(useObserver){EXPECT_GE(observer->FullReads(),6u);EXPECT_GT(observer->CacheHits(),100u);}
         Artifact(name+"_probe_"+std::to_string(++serial)+".csv",QByteArray::fromStdString(trace.str()));
         if(wide)Artifact(name+"_probe_"+std::to_string(serial)+"_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*result)).toJson());
         if(useObserver)Artifact(name+"_observer_counts_"+std::to_string(serial)+".json",QJsonDocument(QJsonObject{
