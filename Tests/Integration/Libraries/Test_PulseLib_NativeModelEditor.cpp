@@ -1018,7 +1018,9 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         auto oldDataset=rollback->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
         auto oldSource=oldDataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(oldSource);
         const auto oldIdentity=NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}});
-        const auto oldHash=oldIdentity["sha256"];
+        // Store an owning value. Indexing a temporary non-const QJsonObject
+        // and deducing auto would retain a dangling QJsonValueRef instead.
+        const QJsonValue oldHash=oldIdentity["sha256"];
         Artifact(rig.name+"_rollback_before_model.json",QJsonDocument(oldIdentity).toJson());
         const auto oldParameters=rollback->ReadNativeParameters();std::vector<NameT> oldOrder;rollback->GetComponentsList(oldOrder);
         const auto measure=[&](const std::string& phase,std::vector<NativeProbeSample>& samples) {
