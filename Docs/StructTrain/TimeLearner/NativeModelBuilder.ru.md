@@ -4,8 +4,9 @@
 A3 на обоих серверах — 29/29 новых и 68/68 регрессионных; M40 ASan — 21/21,
 detect_leaks=0. Дополнительные Ns>1/inhibition controls и независимый аудит
 первичных данных завершены. Артефакты A1/A2/A3 сохранены в Git.
-Configured ControllerVersion=2
-и сериализация полного learner state этим документом не объявляются готовыми.
+Configured ControllerVersion=2 подключён последующим cold-подэтапом:
+[ConfiguredNativeController](ConfiguredNativeController.ru.md).
+Сериализация полного learner state ещё не готова.
 
 ## Две явные операции
 
@@ -124,8 +125,9 @@ neuron 0/1/2, learner 0/1, N0/N1 и N=6. Новая модель получае�
 сохранность node identity/heterogeneous C/learned Rs, отказ до live replacement
 при неверном spec/listener, read-only adoption и cold native service search.
 
-Остаются configured ControllerVersion=2, portable ModelSpec codec и полный
-trained-state import/export, геометрически зависимые Rs domains, вся physics/
+Configured cold frontend и portable cold ModelSpec codec реализованы отдельно.
+Остаются полный trained-state import/export и его storage dependency closure,
+геометрически зависимые Rs domains, вся physics/
 inhibition матрица, C-trim/PostTune/calibration и научные контроли. В частности,
 optional NativeModelDeclaration — process-local ownership, не controller checkpoint
 и не обещание прозрачного Copy/XML всего learner до отдельной реализации codec.
