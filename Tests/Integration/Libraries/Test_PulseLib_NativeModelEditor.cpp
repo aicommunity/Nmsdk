@@ -7,6 +7,7 @@
 #include "TimeLearner/ModelIdentity.h"
 #include "TimeLearner/ModelInspection.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
+#include "TimeLearner/NativeLearnedState.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QFile>
 #include <QDir>
@@ -774,6 +775,55 @@ TEST(ConfiguredNativeTraining,ClassicCopyWithoutStateDoesNotColdReset){Configure
 TEST(ConfiguredNativeTraining,BranchCopyWithoutStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearnerBranch>(false);}
 TEST(ConfiguredNativeTraining,ClassicCopyWithStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearner>(false,true);}
 TEST(ConfiguredNativeTraining,BranchCopyWithStateDoesNotColdReset){ConfiguredLoadGuard<NNeuronTimeLearnerBranch>(false,true);}
+
+template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
+{
+    EditingRig<Learner> rig(2000,normalization,sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance",false,2,true);
+    auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
+    auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,40000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();ASSERT_TRUE(service.Certificate())<<service.Reason();
+    if(sync==.2)EXPECT_TRUE(service.Certificate()->Exact());
+    ASSERT_EQ(service.ReferencePackets().size(),2u);ASSERT_EQ(service.FinalPackets().size(),2u);
+    for(const auto& packet:service.ReferencePackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
+    for(const auto& packet:service.FinalPackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
+    const auto original=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();const auto references=service.References()->Inputs();
+    const auto certificate=EncodeTrainingCertificate(*service.Certificate());
+    const std::string implementation="native-learned-boundary-fixture-v1";
+    const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    Artifact(rig.name+"_learned_state.json",QJsonDocument(package).toJson());
+    EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson(QJsonDocument::Compact).toStdString()),package);
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    auto test=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(test);
+    test->Name="TestLearner";UEPtr<UContainer> node=test;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);test->SetGlobalTimeStep(2000);
+    const auto imported=test->ImportNativeLearnedState(package,implementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
+    ASSERT_TRUE(test->NativeModelEditFailure().empty())<<test->NativeModelEditFailure();
+    auto testNeuron=test->template GetComponentL<NPulseNeuron>("Neuron",true);
+    auto testSource=test->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(testNeuron);ASSERT_TRUE(testSource);
+    const auto identity=NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}});
+    EXPECT_EQ(identity["sha256"].toString().toStdString(),original);EXPECT_EQ(test->ReadNativeParameters(),parameters);
+    ASSERT_TRUE(test->NativeTrainingController().Certificate());EXPECT_EQ(EncodeTrainingCertificate(*test->NativeTrainingController().Certificate()),certificate);
+    EXPECT_EQ(test->NativeTrainingController().References()->Inputs(),references);EXPECT_FALSE(test->IsNeedToTrain.GetData());
+    auto importedChannel=testNeuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(importedChannel);
+    EXPECT_EQ(importedChannel->Capacity.GetData(),1.41e-9);
+    // The receiver must not turn this finished boundary into a new cold run.
+    for(unsigned i=0;i<8;++i){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    EXPECT_FALSE(test->IsNeedToTrain.GetData());EXPECT_EQ(test->ReadNativeParameters(),parameters);
+    test->Reset();EXPECT_EQ(test->NativeTrainingController().References()->Inputs(),references);
+    EXPECT_EQ(test->ExportNativeLearnedState(implementation)["model_revision"],package["model_revision"]);
+    auto corrupted=package;corrupted["model_revision"]="corrupt";
+    const auto rejected=test->ImportNativeLearnedState(corrupted,implementation);EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);
+    EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(test->ReadNativeParameters(),parameters);
+    Artifact(rig.name+"_imported_model.json",QJsonDocument(identity).toJson());
+}
+TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}
+TEST(NativeLearnedState,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeLearnedState,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1);}
+TEST(NativeLearnedState,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeLearnedState,ExactCertificateWithExplicitPointTwoTolerance){LearnedBoundary<NNeuronTimeLearner>(1,.2);}
 
 TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {
