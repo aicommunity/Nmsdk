@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "scope": "A1-A7 and cross-host supplement only; full stage 5 pending",
+  "scope": "published A1-A14 attempts and cross-host supplements only; full stage 5 pending",
   "packages": {
     "elder1": {
-      "stored_hashes_verified": 3144,
-      "raw_payloads_verified": 3142,
+      "stored_hashes_verified": 3379,
+      "raw_payloads_verified": 3377,
       "cross_host": {
         "cases": 5,
         "direction": "m40-to-elder1",
@@ -28,11 +28,19 @@
           }
         },
         "source": "4cc548656857bd97d927c16fdd070c7608e091f0"
+      },
+      "a14": {
+        "evaluation_verdict": null,
+        "learned_cases": 5,
+        "primary_trials": 62,
+        "python_tests": 9,
+        "rollback_probes": 4,
+        "source": "51c54abb95881ced0942e5cfd14928609da00ac6"
       }
     },
     "m40": {
-      "stored_hashes_verified": 3144,
-      "raw_payloads_verified": 3142,
+      "stored_hashes_verified": 4171,
+      "raw_payloads_verified": 4169,
       "cross_host": {
         "cases": 5,
         "direction": "elder1-to-m40",
@@ -56,7 +64,22 @@
           }
         },
         "source": "4cc548656857bd97d927c16fdd070c7608e091f0"
+      },
+      "a14": {
+        "evaluation_verdict": null,
+        "learned_cases": 5,
+        "primary_trials": 62,
+        "python_tests": 9,
+        "rollback_probes": 4,
+        "source": "51c54abb95881ced0942e5cfd14928609da00ac6"
       }
     }
-  }
+  },
+  "rdk_develop_merge": "ef4f033704d54f11d06e4da2b3518c313f3a9992",
+  "full_maintained_suites_pending": [
+    "elder1/s05-learned-a9",
+    "m40/s05-learned-a15"
+  ],
+  "asan_pending": "m40/s05-learned-asan-a3",
+  "evaluation_verdict": null
 }
