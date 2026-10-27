@@ -13,6 +13,7 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Explicit cold native builder/adoption, preserved forced Build, multi-synapse and inhibition routing; A1/A2/A3 | [Elder-1](s06-native-builder-elder1/README.md), [M40 + ASan](s06-native-builder-m40/README.md) |
 | Actual typed revision observer, lifecycle/property replacement and native full-provider A/B | [Elder-1](s06-model-observer-elder1/README.md), [M40](s06-model-observer-m40/README.md) |
 | Explicit assigned-wave selection, native wide-window traces and backward evidence audit | [Elder-1](s07-assigned-selection-elder1/README.md), [M40](s07-assigned-selection-m40/README.md) |
 | Isolated runtime, Qt5/Qt6, observations | [Elder-1](s02-elder1/README.md), [M40](s02-m40/README.md) |
