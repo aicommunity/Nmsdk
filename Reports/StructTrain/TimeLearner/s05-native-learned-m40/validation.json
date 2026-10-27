@@ -73,11 +73,16 @@
       "source": "7186788be098a58091a14025d664647e5d9eb2cd"
     }
   },
+  "cross_host": {
+    "cases": 5,
+    "direction": "elder1-to-m40",
+    "source_evidence_commit": "dcbb81a2bd082690b6a56bc1a47ef2f629d33308",
+    "traces_byte_exact": true
+  },
   "evaluation_verdict": null,
   "host": "m40",
   "limitations": [
     "A7 broad matrix not included",
-    "No learned-state cross-host replay yet",
     "No current branch ASan yet",
     "No full maintained CTest after shared runtime harness change",
     "No full learned certificate primary-data Python audit yet"
@@ -8094,6 +8099,90 @@
     "s05-learned-a6/source-before.txt": {
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N0_learned_boundary.log": {
+      "bytes": 702,
+      "sha256": "35c92e046f72074ef730558f1145f1aa2e5d4d209bb7cb5249b15bf40e864fcd"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N0_learned_boundary_imported.json": {
+      "bytes": 130592,
+      "sha256": "2f754d6affec0eb361878ae3253a9d291df3860209ab1f6c733a6924797f8c00"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N0_learned_boundary_imported.json.csv": {
+      "bytes": 14690,
+      "sha256": "0919e2c2285c9af1e7559d3fc54337588bd92f8c269f68afb95b10ebef05a623"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N0_learned_boundary_input.json": {
+      "bytes": 1156873,
+      "sha256": "ae3b4a29285d5593088aaa377a02a064cbd37f079873e3cbc19df47c9615cca0"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N1_learned_boundary.log": {
+      "bytes": 702,
+      "sha256": "225d3c8e35146b27b130d03f88019ff681b6e6bedfed5a22b8557c9adfd61f2d"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N1_learned_boundary_imported.json": {
+      "bytes": 130604,
+      "sha256": "876bc34b291c2bffa89f44db4200427461bdb7ad470128cd17e03c0b8691196e"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N1_learned_boundary_imported.json.csv": {
+      "bytes": 12882,
+      "sha256": "801c0438106671e5dec6f7f50eb960b894f764bca80b9aa1099f542da2bbf3e1"
+    },
+    "s05-learned-crosshost-a1/Branch_2000_N1_learned_boundary_input.json": {
+      "bytes": 1156875,
+      "sha256": "356f9e5206e1608ede8b470625b461d66ddfc8b2b0a7bb680c587b79d3ad5309"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N0_learned_boundary.log": {
+      "bytes": 702,
+      "sha256": "716e5d1daaed68f91dc86adc069c00710bc08a5a7baac3cb641e6055727ef850"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N0_learned_boundary_imported.json": {
+      "bytes": 180813,
+      "sha256": "2c35b1c20504c1dfdb564fbe6dc817056c169b4120f8bf44d7e96589583f37de"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N0_learned_boundary_imported.json.csv": {
+      "bytes": 21879,
+      "sha256": "5d92034e80fed0dd00860f4758ffd8de29d671113b6a0d6bc94e74b76e89eae7"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N0_learned_boundary_input.json": {
+      "bytes": 1246739,
+      "sha256": "41804999c34ee3a109a436403b18380b25e4f3f9c71ad6aef2352ab1ff550e2a"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary.log": {
+      "bytes": 702,
+      "sha256": "2381b7638988849a778da71e72680009aa5827bffe30bdd8663abc9531f6afae"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary_explicit_tolerance.log": {
+      "bytes": 702,
+      "sha256": "c359ce02ccd960bb8e69a79c804afe5e3df2e610bc3e7ccf72a07b04b5f02889"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary_explicit_tolerance_imported.json": {
+      "bytes": 182081,
+      "sha256": "25c90f8d37640367be09f384211e0acc1070cbf15b89eea60eac51ebdda87dab"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary_explicit_tolerance_imported.json.csv": {
+      "bytes": 20555,
+      "sha256": "68e39bff76f39526a7005df550b28548c49c070b7a8474d3b21d3a7e7dd5abbe"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary_explicit_tolerance_input.json": {
+      "bytes": 1251895,
+      "sha256": "ec8e80e29923532d88bbd54414cf57e5b1b14eedf6f84813311cf10430b2e66b"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary_imported.json": {
+      "bytes": 180833,
+      "sha256": "4abbac02e94f1256104716eef4ea8417a7a1f4cf85dcdc67f691c5ef5dd4f143"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary_imported.json.csv": {
+      "bytes": 22598,
+      "sha256": "cbb2b0c86cfacc57055acb7af84058e334e9f00b75c6690373518e85ec48fcec"
+    },
+    "s05-learned-crosshost-a1/Classic_2000_N1_learned_boundary_input.json": {
+      "bytes": 1246852,
+      "sha256": "12d01bf8965b31d05548c27994fc449ed61b53b415df2caff5b6742095546e5c"
+    },
+    "s05-learned-crosshost-a1/validation.json": {
+      "bytes": 10425,
+      "sha256": "ccda96ce3712188e2507e2a443e18f066b5094117a2705e13c99229c1e904d30"
     }
   },
   "schema_version": 1,
