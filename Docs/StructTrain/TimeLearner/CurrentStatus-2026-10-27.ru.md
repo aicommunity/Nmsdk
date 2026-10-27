@@ -1,112 +1,109 @@
-# Сводный статус полного плана: повторная проверка 27.10.2026
+# Состояние полного плана: повторная сверка 27.10.2026
 
-Последующее A14 дополнение: на обоих серверах прошли 5/5 learned-state,
-13/13 UContainer и 9/9 Python tests. На каждом независимо проверены 62 первичные
-training trials и четыре rollback probes; пакеты опубликованы через Git.
-Исправлен подтверждённый общий выход за границу при перестановке компонентов;
-Rdk develop merge `ef4f033704d54f11d06e4da2b3518c313f3a9992` принят. PulseLib/root
-develop ещё не обновлены текущей stage05 веткой. Полные CTest и ASan ещё
-выполняются; весь этап 5 и весь план остаются незавершёнными. Подробности и
-исправленные ошибки fixtures: [NativeLearnedState](NativeLearnedState.ru.md),
-[ComponentOrderBounds](ComponentOrderBounds.ru.md).
+**План не завершён. Полностью принят этап 0. Частично выполнены этапы 1–7,
+9, 10 и 12. Этапы 8 и 11 по новой спецификации не выполнены.**
+Готовые API и адресные тесты не означают завершения соответствующего этапа.
+ControllerVersion=2 пока нельзя рекомендовать для всей экспериментальной матрицы.
 
-Последующее дополнение: A1–A6 и межсерверный learned-state replay уже
-опубликованы через Git. Пять пакетов в каждом направлении дали побайтное
-совпадение frozen CSV, модели и сертификата; локально проверены 4052 stored SHA
-и 4048 raw payloads. См. [NativeLearnedState](NativeLearnedState.ru.md) и
-[машинную проверку](NativeLearnedState.validation.json). Это уточняет pending
-публикации/cross-host ниже, но не меняет классификацию полных этапов.
+Эта сводка заменяет прежний текст с устаревшими промежуточными дополнениями.
+Перепроверены Git, код, опубликованные manifests, непосредственно серверные
+XML/логи A9, A15 и property-fixed-A2. Новые сборки для ответа о статусе не
+запускались. Работающий A15 не прерывался. Старые отчёты относятся к своим SHA.
 
-Этот снимок отвечает на вопрос о завершении всего утверждённого плана, а не
-отдельных API-подэтапов. Основание: чтение текущего кода, Git, предыдущих отчётов
-и повторное чтение серверных A6 XML. Новых сборок и экспериментов в ходе этой
-проверки не запускалось. Старые промежуточные статусы относятся к своим SHA.
+## Git: рабочие ветки и принятый develop
 
-**Полностью принят этап 0. Частично выполнены этапы 1–7, 9, 10 и 12.
-Этапы 8 и 11 по новой спецификации не выполнены. Весь план не завершён;
-версию 2 пока нельзя объявлять рекомендуемой для всей экспериментальной матрицы.**
+Снимок перед коммитом этой сводки: деревья чистые, root gitlinks совпадают
+с фактическими child HEAD.
 
-## Проверенный Git-снимок
-
-| Репозиторий | Текущая рабочая версия | Принятый develop |
+| Репозиторий | Рабочий HEAD | Принятый develop |
 |---|---|---|
-| Root | `dad2cad9de1421617c8a37b30d02c849ef5c23b6` | `68b77ac542cbd21479eab45c474b3603591add97` |
+| Root | `f3b45cb9300e4dd43f9d4c4d212e366b75195af1` | `68b77ac542cbd21479eab45c474b3603591add97` |
 | PulseLib | `025d809f7b86cc79e18ddd711c6adc40e2396bf8` | `c1d5b177278f1eb347c1ebc725555837c36642bb` |
 | Bin | `f5e1d0200127223981daa71da22cf5ee02fdbc60` | та же версия |
-| Rdk | `8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6` | та же версия |
+| Rdk | `1223bcc18cf1ba106e8f8a17f20cce8c000c104d` | `ef4f033704d54f11d06e4da2b3518c313f3a9992` |
 
-Root и PulseLib: `stage05/native-trained-state`. Деревья чистые на начало аудита,
-root gitlinks совпадают с фактическими child HEAD. Эта ветка ещё не объединена
-в develop. Поэтому «реализовано в ветке», «проверено» и «принято» ниже разделены.
+Root/PulseLib: `stage05/native-trained-state`; Rdk:
+`stage04/pooled-property-bindings`. Эти изменения ещё не приняты в develop.
+Отдельный Rdk component-order fix уже принят. Следующие merge: после приёмки,
+дочерние репозитории → root, merge commits без переписывания истории.
 
-## Статус этапов
+## Сверка с этапами утверждённого плана
 
-| Этап | Статус | Завершённые части | Незавершённые требования |
+| Этап | Статус | Сделано | Осталось |
 |---|---|---|---|
-| 0. Исходное объединение | Выполнен | Начальные merge commits, согласованные gitlinks, develop hints, child-first публикация и recursive checkout | Для новых изменений продолжать ту же процедуру; текущую stage05 ещё предстоит принять |
-| 1. Доказательства и параметры | Частично | Исходные SHA, исторические опорные commits, inventory, контракты, журнал найденных дефектов | Полный ledger экспериментов с августа и всех волн аудита; semantic review 211 исходных записей параметров и разбор 324 script candidates |
-| 2. Сборки и runtime | Частично | Изолированные deploy roots на двух серверах, manifests, ресурсы, tracked Reports, Git-передача проверенных пакетов | Полный автоматический production run bundle и загруженные зависимости настоящего Train; повторная проверка общей тестовой инфраструктуры после последнего исправления пути ini |
-| 3. Наблюдения и scorer | Частично | Строгие схемы, ID/метки, completeness, nonfinite, размерности >4, native burst assignment, отрицательные проверки | Один production-путь Train → calibration → frozen Test → итоговая оценка; замена всех конкурирующих старых анализаторов |
-| 4. Lifecycle/storage | Частично | Исправления Copy/XML/frequency/lifetime, immutable profiles, graph/link readback, builder, рост и сохранение индивидуальных Rs/C в проверенных случаях | Полная matrix профилей, режимов, Load/Copy/reuse и heterogeneous physics; устранение оставшихся legacy overrides; распространение profiles на реальные конфиги |
-| 5. Model export и Train→Test | Частично | Принят physical ModelArchive с image closure, ports, fresh/cross-host roundtrip. В рабочей ветке реализован certified learned-state package с повторным вычислением сертификата | Приёмка новой ветки: расширенная matrix, ASan, независимый аудит, Git-публикация, cross-host learned-state replay и merge. Также diagnostic/budget/external-stop states, recognition/conversion/calibration/PostTune transport |
-| 6. Общий контроллер | Частично | NativeTrainingService, adapters, native Before/After scheduler, builder, configured V2 cold JSON/XML; default legacy V1 сохранён | Configured reconfiguration/retarget, полный перенос всех режимов и integration matrix; окончательная compatibility приёмка |
-| 7. Алгоритмы | Частично | CapturedPerInput, измеренные signed residuals, invalidation, bounded L/Ns/Rs, topology order, integration checks, независимый final sweep | Динамические per-L Rs domains, длительности окон/recovery, полный N0 spread/repeatability и quantized/best-effort контракт, optional heterogeneous C-trim, полная физическая/inhibition matrix |
-| 8. Conversion/PostTune/calibration | Не выполнен по новой спецификации | Исторический код сохранён; его наличие не означает приёмки | Immutable идемпотентное Solo→Recognition преобразование, transactional все PostTune, rollback, Same-Matrix и independent frozen calibration, реальное подтверждение порога |
-| 9. Новый пакет и миграция | Частично | Root inventory/runtime/native evidence modules и tests | Главный CLI содержит только inventory; нужны остальные команды, lossless config adapter, полный migration manifest и удаление старых scripts из Bin/PulseLib/Docs |
-| 10. Очереди/provenance/publisher | Частично | Runtime identities и проверенная Git-публикация отдельных evidence packages | Production ConditionSpec/serializer, runner, owned PID/leases/locks/crash recovery, fail-closed publisher полного run; ручной test harness их не заменяет |
-| 11. Научные контрольные эксперименты | Не выполнен | Implementation tests, characterization и ограниченные compatibility A/B | Исторический replay, cold retrain, научное legacy/V2 сравнение, настоящий order/ITI sweep, полная physics/mode matrix и опубликованная карта результатов |
-| 12. Документация | Частично | Поддерживаемая спецификация и документы принятых подэтапов, исправления профильных материалов | Сквозная актуализация всех root/submodule/config/ClDesc материалов, удаление ссылок на старые scripts, единая итоговая спецификация после завершения реализации |
+| **0. Исходное объединение** | **Полностью** | Начальные merge commits, согласованные gitlinks, develop hints, проверка публикации и recursive checkout | Приёмка текущих feature-веток относится к следующим этапам |
+| **1. Доказательства/параметры** | Частично | Исходные SHA, исторические опорные commits, inventory, дефекты, контракты | Полный ledger с августа и всех аудитов; semantic review исходных 211 записей параметров и 324 script candidates. Шесть новых configured properties описаны отдельно и не закрывают старый inventory |
+| **2. Сборки/runtime** | Частично | Изолированные runtime двух серверов, manifests, ресурсы, tracked Reports, Git evidence packages | Автоматический production run bundle, реально загруженные зависимости Train, окончательная приёмка общей тестовой инфраструктуры |
+| **3. Наблюдения/scorer** | Частично | Строгие схемы, метки/ID, completeness, nonfinite, размерности >4, native burst assignment и отрицательные проверки | Один production-путь Train → calibration → frozen Test → оценка; замена конкурирующих старых анализаторов |
+| **4. Lifecycle/storage** | Частично | Исправления Copy/XML/frequency/lifetime, immutable profiles, graph/link readback, builder/growth, сохранение индивидуальных Rs/C в проверенных случаях; принят component-order fix | Приёмка pooled-binding fix; полная Load/Copy/reuse и heterogeneous physics matrix; оставшиеся legacy overrides; profiles в рабочих конфигах |
+| **5. Export/import, Train→Test** | Частично | Принят physical ModelArchive. В feature реализован certified completed-state пакет с references, финальными пробами и повторной проверкой сертификата; fresh-process/cross-host перенос и rollback адресно проверены | Устранить full-suite отказы, принять ветку; diagnostic/budget/external-stop состояния, recognition/conversion/calibration/PostTune transport и сквозной production Train→Test |
+| **6. Общий контроллер** | Частично | NativeTrainingService, адаптеры, native scheduler, builder, configured V2 cold JSON/XML; default legacy V1 | Configured reconfiguration/retarget, все режимы и окончательная compatibility/integration matrix |
+| **7. Алгоритмы** | Частично | CapturedPerInput, измеренные signed residuals, invalidation, bounded L/Ns/Rs, topology order, independent final verification | Динамические per-L Rs domains, окна/recovery, полный N0 spread/repeatability и quantized/best-effort контракт, optional heterogeneous C-trim, полная physics/inhibition matrix |
+| **8. Conversion/PostTune/calibration** | **Не выполнен по новой спецификации** | Исторический код сохранён; это не приёмка новой архитектуры | Immutable идемпотентный Solo→Recognition, транзакционные все PostTune/rollback, Same-Matrix и independent frozen calibration, реальное подтверждение порога |
+| **9. Пакет/migration scripts** | Частично | Корневые inventory/runtime/native evidence modules и tests | CLI сейчас предоставляет только inventory; остальные команды, lossless config adapter, полный migration manifest и удаление старых scripts из Bin/PulseLib/Docs |
+| **10. Очереди/provenance/publisher** | Частично | Runtime identities и Git-публикация отдельных проверочных пакетов | Production ConditionSpec/serializer, runner, owned PID, leases/locks/crash recovery, fail-closed publisher полного run. Ручные test scripts их не заменяют |
+| **11. Научные контрольные серии** | **Не выполнен** | Implementation tests, characterization, ограниченные compatibility A/B | Исторический replay, cold retrain, научное legacy/V2 сравнение, order/ITI sweep, полная physics/mode matrix и карта результатов |
+| **12. Документация** | Частично | План, контракты, документы принятых подэтапов и адресные исправления | Сквозное обновление root/submodules/config/ClDesc, удаление ссылок на прежние scripts и единая итоговая спецификация |
 
-## Последняя рабочая ветка: что действительно проверено
+## Подтверждённые адресные результаты
 
-На обоих серверах source остаётся на root
-`7186788be098a58091a14025d664647e5d9eb2cd`, PulseLib
-`025d809f7b86cc79e18ddd711c6adc40e2396bf8`.
-Повторно прочитаны `/home/user/timelearner-refactor/readbacks/s05-learned-a6/`
-`results.xml` и `regression.xml`:
+Результат относится к проверенному SHA и не переносится автоматически на последний HEAD.
+Подробности: [NativeLearnedState](NativeLearnedState.ru.md),
+[validation manifest](NativeLearnedState.validation.json),
+[ComponentOrderBounds](ComponentOrderBounds.ru.md).
 
-| Сервер | Новый learned-state набор | Регрессии | Failures/errors |
-|---|---|---|---|
-| Elder-1 / .11 | 5 pass + 1 служебный skip | 43 pass + 1 служебный skip | 0/0 |
-| M40 / .17 | 5 pass + 1 служебный skip | 43 pass + 1 служебный skip | 0/0 |
+| Проверка | Результат | Ограничение вывода |
+|---|---|---|
+| A7, оба сервера, root `4cc548656857bd97d927c16fdd070c7608e091f0` | На каждом 16 learned-state pass + 1 helper skip; 43 regression pass + 1 helper skip | Classic/Branch × N0/N1, 2/20 кГц, configured sources, N=1/4/6; адресная transport matrix |
+| Cross-host A6 | По пять пакетов в каждом направлении, frozen CSV побайтно совпали | Перенос модели, не научный verdict распознавания |
+| A14, оба сервера, root `51c54abb95881ced0942e5cfd14928609da00ac6` | На каждом 5/5 native, 13/13 UContainer, 9/9 Python; независимо проверены 62 training trials и четыре rollback probes | Реальная ошибка attach и откат графа/отклика; Exact warm continuation без recapture |
+| ASan A3, .17, тот же root | 4/4 pass; Python audit четырёх пакетов, 56 training trials, четырёх rollback probes | detect_leaks=0; не полная sanitizer matrix и не доказательство отсутствия утечек |
+| Component-order bounds | Дефект воспроизведён; обычная и ASan проверки пройдены; Rdk develop merge `ef4f033704d54f11d06e4da2b3518c313f3a9992` принят | Закрыт отдельный дефект Rdk, а не весь этап 4 |
 
-Это Classic/Branch × N0/N1 и отдельный Exact-control с явным SyncTolerance=0.2.
-Проверены перенос references и сертификата, heterogeneous child C, импорт в
-свежий процесс, совпадение frozen traces, сохранение после Reset и отказ ряда
-повреждённых пакетов. Это не результат научного распознавания и не подтверждение
-сходимости при default 0.02.
+В опубликованных learned-state пакетах ранее проверены 7748 stored SHA и 7744
+raw payloads. Эти числа не включают новые неопубликованные результаты ниже.
+Exact-control использует явный SyncTolerance=0.2; dimensional fixtures также
+имеют явно расширенные допуски. Это не подтверждение сходимости при default 0.02.
 
-Следующий root `dad2cad9…` расширяет tests до 20 кГц, configured sources,
-N=1/4/6. Каталога A7 на обоих серверах нет: эти новые проверки ещё не запускались.
-Чужие процессы не исследовались; принадлежащих этому build/test checkout активных
-процессов при проверке не обнаружено.
+## Блокеры и незавершённые проверки: непосредственный серверный readback
 
-Новые A6 артефакты пока не опубликованы завершённым Git evidence package.
-ASan, cross-host именно learned-state transfer и полная maintained CTest проверка
-последнего shared harness ещё не завершены. Предыдущие physical archive
-cross-host проверки не заменяют новую приёмку.
+**Полный maintained CTest .11 A9 не прошёл.** Root
+`270c62ce55a80a9efea6e434bba8ca5664a821af`, каталог
+`readbacks/s05-learned-a9`: три suites прошли, PulseLib suite не прошла.
+Внутри PulseLib: **395 tests, 370 passed, 10 skipped, 15 failed**.
+Отказы learned-state export/import сопровождаются null/external property binding
+в Dataset/Generator. Адресные зелёные наборы не отменяют этот отказ.
 
-## Обнаруженное уточнение доказательности runtime
+Native reproducer выявил сохранение старых внешних прямых связей свойств при
+Return→Take reuse и Copy. Исправление выполняется в Rdk с сохранением внутренних
+связей и штатных Build/Reset/Default. Strict model identity не ослабляется.
 
-В текущей ветке исправлен test harness: executable и соседний runtime ini
-разрешаются по фактическому пути процесса, независимо от CWD. Ранее часть
-ad-hoc запусков из source могла пользоваться defaults вместо заявленного ini.
-Это ограничивает прежнее утверждение об изоляции ini именно для таких запусков;
-их физические проверки нельзя автоматически считать недействительными, но
-соответствие заявленному runtime ini требует нового подтверждения. A6 использует
-исправленный путь. Полный maintained набор после изменения общего harness нужен.
+**Новое исправление адресно прошло, интеграционно ещё не принято.** На .11
+`readbacks/s04-property-fixed-a2`: **18/18 UContainer tests passed**,
+failures/errors/skips=0. Root `f3b45cb9300e4dd43f9d4c4d212e366b75195af1`,
+Rdk `1223bcc18cf1ba106e8f8a17f20cce8c000c104d`. Проверены external
+scalar/matrix/vector bindings, Copy внутренних связей, constructor wiring и
+обычный lifecycle. XML непосредственно прочитан на сервере; evidence package
+ещё не опубликован. Нужны sanitizer/integration проверки и повтор full suite.
 
-## Последовательность оставшейся работы
+**Полный maintained CTest .17 A15 ещё выполняется.** Root
+`51c54abb95881ced0942e5cfd14928609da00ac6`, `readbacks/s05-learned-a15`:
+три быстрые suites прошли, PulseLib процесс жив (PID 3227213, около 77 минут
+на момент сверки). Итогового CTest XML нет. Используется зафиксированная версия
+без нового pooled-binding fix; runtime не изменялся. Запуск не считается PASS.
 
-1. Завершить приёмку текущего certified learned-state подэтапа и принять child → root.
-2. Закрыть недостающие состояния переноса, configured управление и алгоритмические
-   ограничения этапов 4–7; проверять реальные компоненты и первичные данные.
-3. Реализовать и проверить conversion, PostTune и калибровку этапа 8.
-4. Довести root CLI/runner/очереди/publisher, удалить прежние scripts с Git manifest.
+## Очерёдность оставшейся работы
+
+1. Закрыть pooled-binding дефект Rdk: integration regression, sanitizer, повторный
+   maintained CTest; опубликовать положительные и отрицательные данные.
+2. Принять certified-state подэтап child → root, затем добавить недостающие
+   состояния переноса и закончить configured control/алгоритмические части 4–7.
+3. Реализовать новую conversion/PostTune/calibration архитектуру этапа 8.
+4. Довести CLI/runner/очереди/publisher; удалить прежние scripts с Git manifest.
 5. Провести исторические и научные контрольные серии этапа 11.
-6. Закончить evidence/property review и сквозную документационную приёмку.
+6. Завершить evidence/property review и сквозную документационную приёмку,
+   выполняя их также по ходу технических этапов.
 
-Документацию и ledger обновлять по ходу каждого пункта. Августовские визуально
-подтверждённые 4/8–6/8 сохраняют статус наблюдений исходного протокола; устойчивость
-к перестановкам и увеличенному ITI тогда не проверялась. Получение 8/8 не является
-условием завершения рефакторинга. Серия D автоматически не возобновляется.
+Августовские визуальные 4/8–6/8 сохраняют статус рабочих наблюдений исходного
+протокола; перестановки и увеличение ITI тогда не проверялись. Получение 8/8
+не является условием завершения. Серия D автоматически не возобновляется.
