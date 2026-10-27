@@ -86,6 +86,10 @@ payloads без ошибок: [машинная сводка](ConfiguredNativeCo
 Опубликованные merge commits develop: PulseLib
 `c1d5b177278f1eb347c1ebc725555837c36642bb`, Bin
 `f5e1d0200127223981daa71da22cf5ee02fdbc60`. Root фиксирует именно эти gitlinks.
+Root merge develop: `a69e5aa24a868088243d13b8a184a33767e2d432`.
+На обоих серверах отдельный recursive checkout восстановил этот root с точными
+gitlinks и чистыми деревьями корня/сабмодулей. Исходники и runtime самих проверок
+сохраняют исходные test SHA; merge SHA не подставляется в их manifests.
 
 ## Открытые требования
 
