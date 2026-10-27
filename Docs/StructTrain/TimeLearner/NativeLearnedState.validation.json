@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "scope": "A1-A6 and cross-host supplement only; full stage 5 pending",
+  "packages": {
+    "elder1": {
+      "stored_hashes_verified": 2026,
+      "raw_payloads_verified": 2024,
+      "cross_host": {
+        "cases": 5,
+        "direction": "m40-to-elder1",
+        "source_evidence_commit": "d408ced735501c311d312e48dc51f838a9ff60ae",
+        "traces_byte_exact": true
+      }
+    },
+    "m40": {
+      "stored_hashes_verified": 2026,
+      "raw_payloads_verified": 2024,
+      "cross_host": {
+        "cases": 5,
+        "direction": "elder1-to-m40",
+        "source_evidence_commit": "dcbb81a2bd082690b6a56bc1a47ef2f629d33308",
+        "traces_byte_exact": true
+      }
+    }
+  }
+}
