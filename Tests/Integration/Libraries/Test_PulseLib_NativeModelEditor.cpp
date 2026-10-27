@@ -823,6 +823,35 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
     EXPECT_EQ(test->NativeTrainingController().References()->Inputs(),references);EXPECT_FALSE(test->IsNeedToTrain.GetData());
     auto importedChannel=testNeuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(importedChannel);
     EXPECT_EQ(importedChannel->Capacity.GetData(),1.41e-9);
+    // Both independent generators are armed on the same native tick. Compare
+    // actual complete stimuli/soma traces, without nested Calculate or a
+    // reconstructed analytical waveform. Only trial IDs differ.
+    std::vector<NativeProbeSample> originalFrames,importedFrames;
+    auto request=plan.probe;request.activeInput=0;request.inputId=plan.protocol.inputs[0].id;
+    request.baseModelRevision=original;request.modelEpoch=service.ModelEpoch();request.specification.runId=rig.name+"/frozen";
+    request.specification.trialId=rig.name+"/frozen/test";request.specification.windows={plan.inputWindows[0]};
+    auto observer=std::make_shared<NmsdkTools::ModelRevisionObserver>();
+    request.readModelRevision=[=]{return observer->Read(testNeuron,{{&testSource->Output,"burst"}}).toStdString();};
+    request.readFullModelRevision=[=]{return observer->Read(testNeuron,{{&testSource->Output,"burst"}},true).toStdString();};
+    request.onPrepared={};request.onSample=[&](const NativeProbeSample& frame){importedFrames.push_back(frame);};
+    test->QueueNativeProbe(std::move(request));
+    const auto waveform=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+        [&](const NativeProbeSample& frame){originalFrames.push_back(frame);});
+    ASSERT_EQ(waveform.status,NativeProbeStatus::Completed);ASSERT_TRUE(waveform.observation);ASSERT_TRUE(waveform.observation->valid);
+    const auto importedProbe=test->TakeNativeProbeResult();ASSERT_TRUE(importedProbe);ASSERT_EQ(importedProbe->status,NativeProbeStatus::Completed);
+    ASSERT_TRUE(importedProbe->observation);ASSERT_TRUE(importedProbe->observation->valid);
+    ASSERT_EQ(originalFrames.size(),importedFrames.size());ASSERT_FALSE(originalFrames.empty());
+    std::ostringstream frozen;frozen.imbue(std::locale::classic());frozen<<std::setprecision(17)<<"time,stimulus";
+    for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)frozen<<",soma"<<i;frozen<<'\n';
+    for(std::size_t i=0;i<originalFrames.size();++i)
+    {
+        EXPECT_EQ(originalFrames[i].time,importedFrames[i].time);EXPECT_EQ(originalFrames[i].stimulus,importedFrames[i].stimulus);
+        EXPECT_EQ(originalFrames[i].potentials,importedFrames[i].potentials);
+        const auto& frame=importedFrames[i];frozen<<frame.time<<','<<frame.stimulus;for(double value:frame.potentials)frozen<<','<<value;frozen<<'\n';
+    }
+    Artifact(rig.name+"_frozen_test.csv",QByteArray::fromStdString(frozen.str()));
+    Artifact(rig.name+"_frozen_test_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*importedProbe)).toJson());
+    EXPECT_EQ(test->ReadNativeParameters(),parameters);EXPECT_EQ(rig.Revision(),original);
     // The receiver must not turn this finished boundary into a new cold run.
     for(unsigned i=0;i<8;++i){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     EXPECT_FALSE(test->IsNeedToTrain.GetData());EXPECT_EQ(test->ReadNativeParameters(),parameters);
