@@ -1,7 +1,7 @@
 """Audit completed learned-state evidence against original native CSV trials.
 
 This is an evidence audit, not a replacement for native archive import, storage
-validation, cryptographic package validation or recognition evaluation.
+validation or recognition evaluation.
 """
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from .native_evidence import audit_probe, audit_training_summary, load, require
+from .model_identity import canonical_model_sha256
 
 AUDITOR_VERSION = 1
 
@@ -22,6 +23,8 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
             package.get("schema_version") == 1, "unknown_learned_state_schema")
     require(package["state_kind"] == "learned_solo" and package["dynamic_checkpoint"] is False,
             "unsupported_learned_state_kind")
+    require(package["sha256"] == canonical_model_sha256({k: v for k, v in package.items() if k != "sha256"}),
+            "package_digest_mismatch")
     require(package["training_outcome"] in {"exact", "search_unresolved"}, "unsupported_completed_outcome")
     require(bool(packets) and set(packets) == set(traces), "missing_primary_trace")
     audits = {trial: audit_probe(packet, traces[trial]) for trial, packet in packets.items()}
@@ -58,6 +61,10 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
     for trial in final_ids:
         require(audits[trial]["valid_observation"] is True, "invalid_final_primary")
     archive = package["neuron"]
+    require(archive["sha256"] == canonical_model_sha256({k: v for k, v in archive.items() if k != "sha256"}),
+            "archive_digest_mismatch")
+    identity = archive["graph"]["identity"]
+    require(identity["sha256"] == canonical_model_sha256(identity["model"]), "model_digest_mismatch")
     require(archive["graph"]["identity"]["sha256"] == package["model_revision"], "archive_revision_mismatch")
     metadata = archive["metadata"]
     require(metadata["state_kind"] == "learned_solo" and metadata["conversion"]["mode"] == "none" and
@@ -67,7 +74,7 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
     return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True,
             "primary_trials": len(packets), "embedded_trials": sum(map(len, embedded.values())),
             "exact": native["exact"], "model_revision": package["model_revision"],
-            "native_import_verified": False, "package_digest_verified": False,
+            "native_import_verified": False, "package_digest_verified": True,
             "evaluation_verdict": None}
 
 
