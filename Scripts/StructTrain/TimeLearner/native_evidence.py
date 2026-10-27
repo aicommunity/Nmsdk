@@ -1,7 +1,7 @@
 """Audit native training evidence against primary traces; no selectivity verdict.
 
 This format is independent of the recognition CSV schemas. It supports the
-version-1 C++ ProbeEvidenceJson producer and schema-3 training observations.
+version-1/2 C++ ProbeEvidenceJson producer and schema-3 training observations.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-AUDITOR_VERSION = 2
+AUDITOR_VERSION = 3
 
 
 class EvidenceError(ValueError):
@@ -67,7 +67,7 @@ def load(path: Path) -> dict[str, Any]:
 
 def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str, Any]:
     require(packet.get("kind") == "timelearner_native_probe_evidence" and
-            packet.get("evidence_schema_version") == 1, "unknown_native_evidence_schema")
+            packet.get("evidence_schema_version") in (1, 2), "unknown_native_evidence_schema")
     status = packet["native_status"]
     require(status in {"idle", "queued", "running", "completed", "rejected", "cancelled"}, "unknown_native_status")
     observation = packet["observation"]
@@ -92,8 +92,14 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
     require(not packet["reasons"] and not observation["reasons"] and
             not packet["requires_fresh_verification"], "contradictory_validity")
     require(spec["wave_assignment"] == "ordered_whole_burst", "unsupported_wave_assignment")
-    require("peak_selection" not in spec and (requested is None or "peak_selection" not in requested),
-            "unknown_peak_selection_for_legacy_evidence")
+    if packet["evidence_schema_version"] == 1:
+        require("peak_selection" not in spec and (requested is None or "peak_selection" not in requested),
+                "unknown_peak_selection_for_legacy_evidence")
+        selection = "isolated_window"
+    else:
+        selection = spec.get("peak_selection")
+        require(selection in {"isolated_window", "assigned_burst_wave"} and requested is not None and
+                requested.get("peak_selection") == selection, "unknown_or_changed_peak_selection")
     require(number(spec["minimum_amplitude"]) > 0, "invalid_minimum_amplitude")
     require(requested is not None and requested["time_frame"] == "relative_to_trial_start" and
             number(requested["begin"]) == 0 and equal(requested["end"], end - begin), "requested_window_mismatch")
@@ -225,14 +231,20 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
                     "wave_is_not_the_measured_trace_maximum")
             require(equal(at(number(wave["time"]))[channel + 2], wave["raw_potential"]), "raw_peak_trace_mismatch")
             require(equal(at(number(wave["plateau_end"]))[channel + 2], wave["raw_potential"]), "plateau_trace_mismatch")
-    # Version-1 evidence uses the native isolated-window rule in addition to
-    # whole-burst assignment. A global assignment alone cannot certify a
-    # window containing several response maxima or a clipped larger wave.
+    # Both policies require actual samples around the selected plateau.
+    # Only explicit assigned_burst_wave permits several maxima in a window.
     for window in windows:
         channel = count(window["channel"])
         indices = [i for i, time in enumerate(times)
                    if not after(number(window["begin"]), time) and not after(time, number(window["end"]))]
         require(len(indices) >= 3, "incomplete_peak_window")
+        peak = peaks[window["input_id"]]
+        if selection == "assigned_burst_wave":
+            first = next((i for i in indices if equal(times[i], peak["time"])), None)
+            finish = next((i for i in indices if equal(times[i], peak["plateau_end"])), None)
+            require(first is not None and finish is not None and
+                    first - 1 in indices and finish + 1 in indices, "clipped_assigned_wave")
+            continue
         signal = [values[i][channel + 2] - baseline[channel] for i in indices]
         maximum = max(range(len(signal)), key=signal.__getitem__)
         last = maximum
@@ -248,7 +260,6 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
                 candidates += 1
             index = finish + 1
         require(candidates == 1, "ambiguous_isolated_peak_window")
-        peak = peaks[window["input_id"]]
         require(equal(times[indices[maximum]], peak["time"]) and equal(times[indices[last]], peak["plateau_end"]),
                 "isolated_window_peak_mismatch")
     return {"valid_observation": True, "trace_checked": True, "trial_id": spec["trial_id"],
@@ -280,11 +291,16 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
     require(bool(refs) and len({r["input_id"] for r in refs}) == len(refs), "duplicate_or_missing_reference")
     targets: dict[str, float] = {}
     indices: dict[int, str] = {}
+    selections: set[str] = set()
 
     def measured(trial: str, input_id: str) -> tuple[dict[str, Any], float, float, float]:
         require(trial in packets, "missing_trial:" + trial)
         packet = packets[trial]
         observation = packet["observation"]
+        selection = observation["specification"].get("peak_selection", "isolated_window")
+        require(selection in {"isolated_window", "assigned_burst_wave"}, "unknown_peak_selection")
+        selections.add(selection)
+        require(len(selections) == 1, "training_peak_selection_changed")
         require(packet["native_status"] == "completed" and observation is not None and
                 observation["complete"] is True and observation["valid"] is True, "unusable_measurement")
         require(packet["prepared"]["input_id"] == input_id, "measured_input_mismatch")
@@ -330,6 +346,7 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
 
     certificate = summary["certificate"]
     require(certificate is not None and certificate["schema_version"] == 1, "missing_or_unknown_certificate")
+    require(certificate.get("peak_selection", "isolated_window") in selections, "certificate_peak_selection_mismatch")
     require(certificate["model_revision"] == summary["actual_model_revision"] and
             certificate["model_epoch"] == summary["model_epoch"] and
             certificate["reference_model_revision"] == summary["reference_model_revision"] and
