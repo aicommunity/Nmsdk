@@ -47,6 +47,7 @@ template<class Learner> struct EditingRig {
     NmsdkTools::ModelBoundarySources ports;
     std::size_t serial=0;
     double duration=.18;
+    double constructionTime=0.;
     std::vector<double> isi{.01,.08};bool tightBurst=false;
     EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2,
                bool cold=false,int neuronMode=2,int learnerMode=1)
@@ -73,6 +74,7 @@ template<class Learner> struct EditingRig {
         UEPtr<UContainer> component=learner;
         if(model->AddComponent(component)==ForbiddenId)throw std::runtime_error("editor_fixture_attach");
         model->SetGlobalTimeStep(f);
+        constructionTime=environment->GetTime().GetDoubleTime();
         if(cold)
         {
             NativeModelSpec initial;initial.branch=branch;initial.frequencyHz=f;initial.neuronClass=registered.neuronClass;
@@ -182,7 +184,7 @@ template<class Learner> void ColdModel(unsigned frequency,int neuronMode,int lea
     const auto suffix="cold_mode"+std::to_string(neuronMode)+"_learner"+std::to_string(learnerMode)+"_inputs"+std::to_string(inputs);
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,true,neuronMode,learnerMode);
     EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());
-    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),0.); // No warm-up Calculate.
+    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),rig.constructionTime); // No warm-up time advance.
     EXPECT_EQ(rig.neuron->StructureBuildMode.GetData(),neuronMode);
     EXPECT_EQ(rig.learner->StructureBuildMode.GetData(),learnerMode);
     const auto first=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
@@ -198,7 +200,7 @@ template<class Learner> void ColdModel(unsigned frequency,int neuronMode,int lea
     else if(inputs>2)for(auto& p:values)p.resistance=values[0].resistance;
     const auto edit=rig.learner->ApplyNativeParameters(values);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
     const auto before=rig.Revision();EXPECT_EQ(channel->Capacity.GetData(),1.41e-9);
-    rig.learner->NeuronClassName=rig.learner->NeuronClassName.GetData();ASSERT_FALSE(rig.learner->IsReady());
+    ASSERT_TRUE(rig.learner->SetNeuronClassName(rig.learner->NeuronClassName.GetData()));ASSERT_FALSE(rig.learner->IsReady());
     EXPECT_TRUE(rig.learner->Build());ASSERT_TRUE(rig.learner->IsReady());
     EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
     EXPECT_EQ(rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),oldNeuron);
@@ -258,6 +260,17 @@ TEST(NativeModelBuilder,AdoptionPreservesEffectiveIndividualPhysicsAndRejectsWro
     const auto adopted=rig.learner->AdoptNativeModel(s);ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
     EXPECT_EQ(adopted.modelRevision,before);rig.learner->Build();EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());
     EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(channel->Capacity.GetData(),1.37e-9);
+}
+TEST(NativeModelBuilder,AdoptsLegacyBranchMutedBaselineWithoutChangingBindings)
+{
+    EditingRig<NNeuronTimeLearnerBranch> rig(2000,0,"adopt_muted_baseline");
+    NativeEditSpec policy;policy.maximumCableLength=8;
+    auto s=DescribeNativeLearnerModel(*rig.learner,true,Normalization::SynapseCount,rig.learner->DendriteLength.GetData(),policy);
+    ASSERT_TRUE(s.allowMutedInputBaseline);const auto before=rig.Revision();
+    const auto adopted=rig.learner->AdoptNativeModel(s);ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
+    rig.learner->Build();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty());EXPECT_EQ(rig.Revision(),before);
+    const auto measured=rig.Probe();ASSERT_EQ(measured.status,NativeProbeStatus::Completed);
+    ASSERT_TRUE(measured.observation);EXPECT_TRUE(measured.observation->valid);EXPECT_EQ(rig.Revision(),before);
 }
 
 template<class Learner> void AssignedNativeWindow()
