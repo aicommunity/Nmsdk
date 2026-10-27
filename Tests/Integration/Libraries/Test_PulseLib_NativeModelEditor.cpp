@@ -18,6 +18,7 @@
 #include <cstdlib>
 #include <type_traits>
 #include <limits>
+#include <chrono>
 
 namespace {
 using namespace RDK;
@@ -87,11 +88,18 @@ template<class Learner> struct EditingRig {
         return identity["sha256"].toString().toStdString();
     }
     NativeProbeResult Probe(std::size_t input=0,const TrainingAction* action=nullptr,BoundedTrainingSession* session=nullptr,
-        PeakSelectionPolicy selection=PeakSelectionPolicy::IsolatedWindow,bool wide=false)
+        PeakSelectionPolicy selection=PeakSelectionPolicy::IsolatedWindow,bool wide=false,bool useObserver=false,
+        std::function<void(const NativeProbeSample&)> sampleSink={})
     {
         NativeProbeRequest request;request.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
         request.activeInput=int(input);request.inputId="input"+std::to_string(input);request.protocolRevision="editing_burst_v1";
         request.baseModelRevision=Revision();request.readModelRevision=[this]{return Revision();};request.expectedInputIsi=isi;
+        auto observer=std::make_shared<NmsdkTools::ModelRevisionObserver>();
+        if(useObserver)
+        {
+            request.readModelRevision=[this,observer]{return observer->Read(neuron,ports).toStdString();};
+            request.readFullModelRevision=[this,observer]{return observer->Read(neuron,ports,true).toStdString();};
+        }
         auto& s=request.specification;s.schemaVersion=3;s.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
         s.peakSelection=selection;
         s.runId=action?action->runId:name;s.trialId=action?action->trialId:name+"/trial/"+std::to_string(++serial);
@@ -109,6 +117,7 @@ template<class Learner> struct EditingRig {
         for(unsigned i=0;i<(branch?1u:inputCount);++i)trace<<",soma"<<i;trace<<'\n';
         request.onSample=[&](const NativeProbeSample& sample) {
             trace<<sample.time<<','<<sample.stimulus;for(double potential:sample.potentials)trace<<','<<potential;trace<<'\n';
+            if(sampleSink)sampleSink(sample);
         };
         const auto trial=s.trialId;
         learner->QueueNativeProbe(std::move(request));unsigned ticks=0;
@@ -118,8 +127,11 @@ template<class Learner> struct EditingRig {
             model->Calculate();environment->IncreaseModelTimeByStep();
         }
         auto result=learner->TakeNativeProbeResult();if(!result)throw std::runtime_error("missing_editor_fixture_result");
+        if(useObserver){EXPECT_GE(observer->FullReads(),6u);EXPECT_GT(observer->CacheHits(),100u);}
         Artifact(name+"_probe_"+std::to_string(++serial)+".csv",QByteArray::fromStdString(trace.str()));
         if(wide)Artifact(name+"_probe_"+std::to_string(serial)+"_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*result)).toJson());
+        if(useObserver)Artifact(name+"_observer_counts_"+std::to_string(serial)+".json",QJsonDocument(QJsonObject{
+            {"full_reads",double(observer->FullReads())},{"cache_hits",double(observer->CacheHits())}}).toJson());
         QJsonArray reasons,peaks;
         for(const auto& reason:result->reasons)reasons.append(QString::fromStdString(reason));
         if(result->observation)
@@ -164,6 +176,31 @@ template<class Learner> void AssignedNativeWindow()
 }
 TEST(NativeAssignedWindow,ClassicMeasuresTheAssignedWaveWithoutChangingPhysics){AssignedNativeWindow<NNeuronTimeLearner>();}
 TEST(NativeAssignedWindow,BranchMeasuresTheAssignedWaveWithoutChangingPhysics){AssignedNativeWindow<NNeuronTimeLearnerBranch>();}
+
+template<class Learner> void CompareNativeRevisionProviders(unsigned frequency)
+{
+    EditingRig<Learner> rig(frequency,0,"revision_observer_ab");const auto hash=rig.Revision();
+    std::vector<std::vector<double>> fullSamples,observedSamples;
+    const auto capture=[](auto& output){return [&output](const NativeProbeSample& s){auto frame=s.potentials;frame.push_back(s.stimulus);output.push_back(std::move(frame));};};
+    const auto start=std::chrono::steady_clock::now();
+    const auto full=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,capture(fullSamples));
+    const auto middle=std::chrono::steady_clock::now();
+    const auto observed=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,capture(observedSamples));
+    const auto end=std::chrono::steady_clock::now();
+    ASSERT_EQ(full.status,NativeProbeStatus::Completed);ASSERT_EQ(observed.status,NativeProbeStatus::Completed);
+    ASSERT_TRUE(full.observation);ASSERT_TRUE(observed.observation);EXPECT_TRUE(full.observation->valid);EXPECT_TRUE(observed.observation->valid);
+    EXPECT_EQ(fullSamples,observedSamples);EXPECT_EQ(rig.Revision(),hash);
+    EXPECT_EQ(full.currentBaseRevision,observed.currentBaseRevision);
+    Artifact(rig.name+"_ab.json",QJsonDocument(QJsonObject{{"kind","native_revision_provider_ab"},
+        {"frequency_hz",int(frequency)},{"branch",rig.branch},{"waveform_equal",fullSamples==observedSamples},
+        {"sample_count",int(fullSamples.size())},{"model_revision",QString::fromStdString(hash)},
+        {"full_seconds",std::chrono::duration<double>(middle-start).count()},
+        {"observer_seconds",std::chrono::duration<double>(end-middle).count()}}).toJson());
+}
+TEST(NativeRevisionObserver,Classic2000){CompareNativeRevisionProviders<NNeuronTimeLearner>(2000);}
+TEST(NativeRevisionObserver,Branch2000){CompareNativeRevisionProviders<NNeuronTimeLearnerBranch>(2000);}
+TEST(NativeRevisionObserver,Classic20000){CompareNativeRevisionProviders<NNeuronTimeLearner>(20000);}
+TEST(NativeRevisionObserver,Branch20000){CompareNativeRevisionProviders<NNeuronTimeLearnerBranch>(20000);}
 template<class Learner> void CheckEdits(unsigned frequency,int normalization)
 {
     EditingRig<Learner> rig(frequency,normalization,"native_model_edit");auto values=rig.learner->ReadNativeParameters();
@@ -473,6 +510,28 @@ TEST(NativeTrainingService,InvalidSearchDomainIsRejectedBeforeAnyReferenceProbe)
     rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
     EXPECT_EQ(service.IssuedReferenceProbes(),0u);EXPECT_EQ(observations,0u);
 }
+
+template<class Learner> void ObserverSeesExternalPhysicsEdit()
+{
+    EditingRig<Learner> rig(2000,0,"observer_external_physics");auto plan=TrainingPlan(rig);
+    auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
+    const double capacity=channel->Capacity.GetData();unsigned samples=0;std::vector<NativeProbeResult> recorded;
+    plan.probe.onSample=[&](const NativeProbeSample&) {
+        if(++samples==10)channel->Capacity=std::nextafter(capacity,std::numeric_limits<double>::infinity());
+    };
+    plan.observationSink=[&](const NativeProbeResult& result){recorded.push_back(result);};
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);
+    EXPECT_EQ(service.Reason(),"model_revision_changed");EXPECT_EQ(samples,10u);
+    EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());ASSERT_EQ(recorded.size(),1u);
+    ASSERT_TRUE(recorded[0].observation);EXPECT_FALSE(recorded[0].observation->valid);
+    EXPECT_TRUE(recorded[0].requiresFreshVerification);
+    Artifact(rig.name+"_rejected.json",QJsonDocument(EncodeNativeProbeEvidence(recorded[0])).toJson());
+}
+TEST(NativeTrainingService,ClassicObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearner>();}
+TEST(NativeTrainingService,BranchObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearnerBranch>();}
 
 TEST(NativeIntegration, ActualSecretionWeightPsiAndTimeStepAreUsed)
 {

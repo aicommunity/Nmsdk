@@ -1,5 +1,11 @@
 # Ход реализации
 
+Проверка ревизии actual model ускорена через typed observer с полными boundary
+captures: [ModelRevisionObserver](ModelRevisionObserver.ru.md). На каждом
+сервере прошли 85/85 основных cases, 12/12 replacement/lifetime, 20/20 old
+provider regressions и 18/18 Python. Это уменьшает overhead будущей матрицы,
+не закрывая configured V2 или физические/научные требования исходного плана.
+
 Последующее измерительное изменение:
 [AssignedWaveSelection](AssignedWaveSelection.ru.md). Явный assigned выбор
 поддерживает широкое окно при полной measured burst assignment; isolated
