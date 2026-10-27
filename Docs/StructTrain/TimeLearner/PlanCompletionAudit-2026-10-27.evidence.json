@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "as_of_local_date": "2026-10-27",
+  "timezone": "Europe/Moscow",
+  "scope": "read-only source/status and stored artifact integrity audit; not a new build, test run, training or scientific acceptance",
+  "source_baseline": "c2aa03e7dfdb3a24ddc42276015d9f3e5cfcf450",
+  "repositories": {
+    "root": {
+      "path": ".",
+      "head": "c2aa03e7dfdb3a24ddc42276015d9f3e5cfcf450",
+      "status": ""
+    },
+    "PulseLib": {
+      "path": "Libraries/Nmsdk-PulseLib",
+      "head": "38e977c674f999675d469198269c8937c83cce5e",
+      "status": ""
+    },
+    "Bin": {
+      "path": "Bin",
+      "head": "e78596e9639a841cd1989d73df7fe614419770ce",
+      "status": ""
+    },
+    "Rdk": {
+      "path": "Rdk",
+      "head": "8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6",
+      "status": ""
+    }
+  },
+  "artifact_integrity": {
+    "manifests": 56,
+    "stored_entries_checked": 7809,
+    "raw_validation_manifests": 10,
+    "raw_payloads_checked": 4571,
+    "unhandled_raw_layouts": [],
+    "errors": []
+  },
+  "stored_inventory": {
+    "repositories": {
+      "root": {
+        "path": ".",
+        "commit": "2450e1a28ff824b48c6f0684b15ad1e84e1bcdd9"
+      },
+      "PulseLib": {
+        "path": "Libraries/Nmsdk-PulseLib",
+        "commit": "4feda750b674536fbd680cab416cd6f53930f947"
+      },
+      "Bin": {
+        "path": "Bin",
+        "commit": "24df8c836e596472f96b3f01ab0397c97c37cd0d"
+      }
+    },
+    "properties": 211,
+    "property_statuses": {
+      "pending": 211
+    },
+    "script_candidates": 324,
+    "script_statuses": {
+      "review_required": 324
+    }
+  },
+  "current_path_heuristic_script_candidates": {
+    "root": {
+      "count": 99,
+      "under_docs": 98
+    },
+    "PulseLib": {
+      "count": 0,
+      "under_docs": 0
+    },
+    "Bin": {
+      "count": 226,
+      "under_docs": 0
+    }
+  },
+  "limitations": [
+    "Path heuristic is not a completed semantic script inventory or removal manifest.",
+    "Stored checksums prove availability/integrity of listed bytes, not scientific correctness or completeness of the original plan.",
+    "Raw payloads were checked only for validation.json/raw_files layouts; other layouts remain governed by stored checksums.",
+    "Existing test reports refer to their tested source SHAs; no new tests were executed by this audit."
+  ],
+  "server_readbacks": [
+    {
+      "host": "10.245.1.11",
+      "closure_head": "c2aa03e7dfdb3a24ddc42276015d9f3e5cfcf450",
+      "closure_status": "",
+      "recursive_gitlinks": [
+        "e78596e9639a841cd1989d73df7fe614419770ce Bin (remotes/origin/develop)",
+        " 85e4494e8596b0998feebff7da2f8d421a6df66f Libraries/Nmsdk-MotionControlLib (dev-205-g85e4494)",
+        " 38e977c674f999675d469198269c8937c83cce5e Libraries/Nmsdk-PulseLib (dev-495-g38e977c)",
+        " 2927cad5a7456b301217b7abb228f12c9a359ea9 Libraries/Rdk-BasicLib (dev-56-g2927cad)",
+        " c471297811367abd348c6258bdaeaf8e1a40c7bd Libraries/Rdk-CvBasicLib (dev-81-gc471297)",
+        " de40b008e990105856726e01230dde19f42a90a9 Libraries/Rdk-HardwareLib (remotes/origin/codex/hardwarelib-audit-fixes-20261008)",
+        " 8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6 Rdk (Don't_use!-1082-g8846c142)"
+      ],
+      "build_source_head": "87e444b67ef471d79cb8277630472ee1a090226c",
+      "build_source_status": "",
+      "active_owned_build_test_processes": []
+    },
+    {
+      "host": "10.245.1.17",
+      "closure_head": "c2aa03e7dfdb3a24ddc42276015d9f3e5cfcf450",
+      "closure_status": "",
+      "recursive_gitlinks": [
+        "e78596e9639a841cd1989d73df7fe614419770ce Bin (remotes/origin/develop)",
+        " 85e4494e8596b0998feebff7da2f8d421a6df66f Libraries/Nmsdk-MotionControlLib (dev-205-g85e4494)",
+        " 38e977c674f999675d469198269c8937c83cce5e Libraries/Nmsdk-PulseLib (dev-495-g38e977c)",
+        " 2927cad5a7456b301217b7abb228f12c9a359ea9 Libraries/Rdk-BasicLib (dev-56-g2927cad)",
+        " c471297811367abd348c6258bdaeaf8e1a40c7bd Libraries/Rdk-CvBasicLib (dev-81-gc471297)",
+        " de40b008e990105856726e01230dde19f42a90a9 Libraries/Rdk-HardwareLib (remotes/origin/codex/hardwarelib-audit-fixes-20261008)",
+        " 8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6 Rdk (Don't_use!-1082-g8846c142)"
+      ],
+      "build_source_head": "87e444b67ef471d79cb8277630472ee1a090226c",
+      "build_source_status": "",
+      "active_owned_build_test_processes": []
+    }
+  ],
+  "goal_readback": {
+    "status": "usageLimited",
+    "objective_achieved": false,
+    "source": "get_goal",
+    "status_changed_by_audit": false
+  }
+}
