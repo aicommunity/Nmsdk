@@ -789,6 +789,7 @@ TEST(NativeLearnedState,FreshProcessImport)
     const auto c=DecodeConfiguredNativeTraining(package["configuration"].toObject());
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     EXPECT_FALSE(core.storage->CheckClass(c.model.neuronClass));
+    core.environment->SetUseIndTimeStepFlag(false);
     core.environment->DestroyModel();ASSERT_TRUE(core.environment->CreateModel("NModel"));
     auto model=core.environment->GetModel();model->SetGlobalTimeStep(c.model.frequencyHz);
     auto learner=dynamic_pointer_cast<UNet>(core.storage->TakeObject(c.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(learner);
@@ -796,7 +797,7 @@ TEST(NativeLearnedState,FreshProcessImport)
     learner->SetGlobalTimeStep(c.model.frequencyHz);
     const auto run=[&]<class Learner>(UEPtr<Learner> target) {
         const auto result=target->ImportNativeLearnedState(package,"native-learned-boundary-fixture-v1");
-        ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;target->Build();target->Init();
+        ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;target->Build();target->Init();model->Init();model->Reset();
         ASSERT_TRUE(target->NativeModelEditFailure().empty())<<target->NativeModelEditFailure();
         auto neuron=target->template GetComponentL<NPulseNeuron>("Neuron",true);
         auto source=target->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(neuron);ASSERT_TRUE(source);
@@ -932,6 +933,32 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
     auto corrupted=package;corrupted["model_revision"]="corrupt";
     const auto rejected=test->ImportNativeLearnedState(corrupted,implementation);EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);
     EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(test->ReadNativeParameters(),parameters);
+    const auto resign=[](QJsonObject value) {
+        value.remove("sha256");value["sha256"]=NmsdkTools::CanonicalModelDataSha256(value);return value;
+    };
+    const auto rejectWithoutMutation=[&](const QJsonObject& value) {
+        const auto result=test->ImportNativeLearnedState(value,implementation);
+        EXPECT_EQ(result.status,NativeModelBuildStatus::Rejected)<<result.reason;EXPECT_FALSE(result.modelMayHaveChanged);
+        EXPECT_EQ(test->ReadNativeParameters(),parameters);
+        EXPECT_EQ(NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}})["sha256"],package["model_revision"]);
+        ASSERT_TRUE(test->NativeTrainingController().Certificate());EXPECT_EQ(EncodeTrainingCertificate(*test->NativeTrainingController().Certificate()),certificate);
+    };
+    corrupted=package;auto claim=corrupted["certificate"].toObject();claim["exact"]=!claim["exact"].toBool();corrupted["certificate"]=claim;
+    rejectWithoutMutation(resign(corrupted));
+    corrupted=package;auto finals=corrupted["final_packets"].toArray();ASSERT_FALSE(finals.isEmpty());finals.removeLast();corrupted["final_packets"]=finals;
+    rejectWithoutMutation(resign(corrupted));
+    corrupted=package;auto refs=corrupted["reference_packets"].toArray();auto packet=refs[0].toObject();auto observation=packet["observation"].toObject();
+    auto peaks=observation["peaks"].toArray();auto peak=peaks[0].toObject();peak["raw_potential"]=peak["raw_potential"].toDouble()+.001;
+    peaks[0]=peak;observation["peaks"]=peaks;packet["observation"]=observation;refs[0]=packet;corrupted["reference_packets"]=refs;
+    rejectWithoutMutation(resign(corrupted));
+    corrupted=package;auto archive=corrupted["neuron"].toObject();auto definitions=archive["class_definitions"].toArray();
+    const auto rootClass=package["configuration"].toObject()["model"].toObject()["neuron_class"].toString();bool removed=false;
+    for(int i=0;i<definitions.size();++i)if(definitions[i].toObject()["name"].toString()==rootClass){definitions.removeAt(i);removed=true;break;}
+    ASSERT_TRUE(removed);archive["class_definitions"]=definitions;corrupted["neuron"]=resign(archive);rejectWithoutMutation(resign(corrupted));
+    auto tap=dynamic_pointer_cast<NPulseGeneratorTransit>(core.storage->TakeObject("NPulseGeneratorTransit"));ASSERT_TRUE(tap);
+    tap->Name="ImportedSourceListener";UEPtr<UContainer> tapNode=tap;ASSERT_NE(rig.model->AddComponent(tapNode),ForbiddenId);tap->Init();
+    ASSERT_TRUE(tap->Input.SetPointer(0,&testSource->Output));rejectWithoutMutation(package);
+    ASSERT_EQ(tap->Input.GetDataSources().size(),1u);EXPECT_EQ(tap->Input.GetDataSources().front(),&testSource->Output);tap->Input.DetachFrom();
     Artifact(rig.name+"_imported_model.json",QJsonDocument(identity).toJson());
 }
 TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}
