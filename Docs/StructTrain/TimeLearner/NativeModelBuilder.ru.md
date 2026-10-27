@@ -58,6 +58,24 @@ Legacy inhibition properties не заменяют эту декларацию. 
 frontend должен адресно преобразовывать/проверять факторы, а не объявлять
 неиспользованное legacy свойство действующим фактором.
 
+Compatibility adoption описывает разрешённый Branch muted baseline явно.
+Фактическое состояние каждого банка остаётся в semantic model hash; допускается
+либо весь bank на объявленном source, либо весь bank штатно выключен. Foreign
+source и частично подключённый bank не принимаются. Новое холодное создание
+по умолчанию подключает все declared banks; эта политика не меняется задним числом.
+
+## Первая серверная попытка
+
+Root `3904cd40aa1fcb6f1540c950c7ba17e99f88e161`: на обоих серверах 24 новых
+cases, 18 failed из-за двух неверных предположений fixture (Environment time
+сохраняется; equal-value UProperty assignment не вызывает setter). Два
+negative/adoption controls и все четыре cold service searches прошли.
+Отдельные 68 regressions: 63 passed, пять Branch service cases отклонены новым
+слишком строгим требованием fully-connected baseline. Это ошибка нового
+валидатора; она не приписывается старым научным результатам. Исходные logs
+сохраняются. Следующая попытка исправляет fixture и явно допускает проверенный
+muted baseline, не ослабляя запрет foreign/partial bindings.
+
 ## Проверки и оставшаяся работа
 
 Подготовлены actual storage/Environment проверки Classic/Branch, 2000/20000 Гц,
