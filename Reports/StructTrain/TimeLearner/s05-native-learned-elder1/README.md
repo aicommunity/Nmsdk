@@ -9,3 +9,5 @@ Earlier ad-hoc test initialization could read defaults instead of the claimed ru
 The independent Python semantic serializer matches all three native digests (package, archive, model) for all five A6 packages. It does not replace storage/native import or complete primary-data certificate auditing. The broad A7 matrix, ASan, cross-host learned-state replay, all status/calibration/conversion transport and full stage-5 acceptance remain pending.
 
 Git is the only artifact transfer path. All attempts are retained with compressed and raw SHA256. No credentials or executable is committed.
+
+Cross-host supplement: five certified completed states imported from the other worker through Git, each with exact model hash/certificate and byte-identical frozen CSV. Target runtime is A6; source evidence commit is preserved in the cross-host validation. Downloaded evidence is referenced by Git commit rather than duplicated. This supersedes the earlier pending cross-host statement above.
