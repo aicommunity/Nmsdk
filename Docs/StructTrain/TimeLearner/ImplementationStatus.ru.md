@@ -6,6 +6,13 @@
 контуры этапов 8 и 11 не выполнены. Ниже сохранён журнал конкретных подэтапов
 и исторических snapshots; его ранние формулировки не заменяют новую сводку.
 
+Текущая рабочая ветка `stage06/native-model-builder` добавляет cold construction,
+read-only adoption и сохраняющий модель forced Build. На root `51f8579e`
+на каждом сервере прошли 25/25 новых и 68/68 регрессионных проверок.
+Подэтап ещё не объединён в develop; ASan, дополнительные cold Ns/inhibition
+controls и Git-публикация первичных артефактов остаются открытыми.
+См. [NativeModelBuilder](NativeModelBuilder.ru.md). Configured V2 ещё отсутствует.
+
 Проверка ревизии actual model ускорена через typed observer с полными boundary
 captures: [ModelRevisionObserver](ModelRevisionObserver.ru.md). На каждом
 сервере прошли 85/85 основных cases, 12/12 replacement/lifetime, 20/20 old

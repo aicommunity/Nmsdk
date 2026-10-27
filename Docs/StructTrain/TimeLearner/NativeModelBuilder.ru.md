@@ -1,7 +1,9 @@
 # Native ModelSpec, cold construction и reuse
 
-Рабочий подэтап `stage06/native-model-builder`. Реализация подготовлена;
-серверная проверка этой редакции ещё ожидается. Configured ControllerVersion=2
+Рабочий подэтап `stage06/native-model-builder`. A2 на обоих серверах прошёл
+25/25 новых проверок и 68/68 регрессионных. Полная приёмка подэтапа ещё открыта:
+дополнительные Ns>1/inhibition controls, ASan, независимый аудит данных,
+публикация артефактов и merge в develop. Configured ControllerVersion=2
 и сериализация полного learner state этим документом не объявляются готовыми.
 
 ## Две явные операции
@@ -78,7 +80,14 @@ muted baseline, не ослабляя запрет foreign/partial bindings.
 
 ## Проверки и оставшаяся работа
 
-Подготовлены actual storage/Environment проверки Classic/Branch, 2000/20000 Гц,
+На root `51f8579e81909f00170508e99028825230bfd5b9`, PulseLib
+`37e8cc47a50712daf98186dae933836b7218a974` завершена попытка A2:
+на каждом сервере 25 новых cases и 68 regressions, без failures/errors/disabled.
+Повторное чтение XML и source HEAD подтверждено отдельно от вывода задания.
+Первичные A1/A2 пакеты пока не опубликованы в Git; это не завершённая приёмка.
+См. [актуальную сводку](PlanCompletionAudit-2026-10-27.ru.md).
+
+Пройдены actual storage/Environment проверки Classic/Branch, 2000/20000 Гц,
 neuron 0/1/2, learner 0/1, N0/N1 и N=6. Новая модель получает первую пробу без
 предварительного Calculate. Проверяются forced Build, Reset, UnInit/Init,
 сохранность node identity/heterogeneous C/learned Rs, отказ до live replacement

@@ -23,6 +23,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Classic live rebuild: Init нового нейрона и открытый вопрос частот](LiveRebuildInit.ru.md).
 - [Общий и индивидуальный шаг: контракт создания поддеревьев](FrequencyContract.ru.md).
 - [Общий контроллер: подготовка baseline и оставшиеся изменения](Stage06-Progress.ru.md).
+- [Native builder/adoption: рабочая ветка, адресные проверки и открытая приёмка](NativeModelBuilder.ru.md).
 - [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
 - [Нативный исполнитель проб Classic/Branch: рабочий подэтап и gates](NativeExecution.ru.md).
 - [Полная последовательность волн и physical input ownership: schema 3](BurstAssignment.ru.md).
