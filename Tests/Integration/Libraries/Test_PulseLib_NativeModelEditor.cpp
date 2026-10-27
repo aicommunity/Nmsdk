@@ -882,6 +882,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     for(const auto& packet:service.FinalPackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
     const auto original=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();const auto references=service.References()->Inputs();
     const auto certificate=EncodeTrainingCertificate(*service.Certificate());
+    Artifact(rig.name+"_learned_summary.json",QJsonDocument(EncodeNativeTrainingState(service,original,parameters)).toJson());
     const std::string implementation="native-learned-boundary-fixture-v1";
     const auto package=rig.learner->ExportNativeLearnedState(implementation);
     Artifact(rig.name+"_learned_state.json",QJsonDocument(package).toJson());
@@ -979,6 +980,27 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     ASSERT_TRUE(tap->Input.SetPointer(0,&testSource->Output));rejectWithoutMutation(package);
     ASSERT_EQ(tap->Input.GetDataSources().size(),1u);EXPECT_EQ(tap->Input.GetDataSources().front(),&testSource->Output);tap->Input.DetachFrom();
     Artifact(rig.name+"_imported_model.json",QJsonDocument(identity).toJson());
+    if(sync==.2 && inputs==2)
+    {
+        // Resume from the imported completed boundary with the retained goal.
+        // A new session must verify the model, not recapture amplitudes from
+        // the learned geometry and silently redefine the original objective.
+        auto warm=test->NativeTrainingController().Plan();warm.probe.onPrepared={};warm.probe.onSample={};
+        std::size_t warmObservations=0;
+        warm.observationSink=[&](const NativeProbeResult& packet) {
+            Artifact(rig.name+"_warm_trial_"+std::to_string(++warmObservations)+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
+        };
+        const auto attempt=test->NativeTrainingController().SessionAttempt();
+        test->BeginNativeTraining(std::move(warm));
+        for(unsigned ticks=0;test->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+        {ASSERT_LT(ticks,60000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+        const auto& resumed=test->NativeTrainingController();
+        ASSERT_TRUE(resumed.Certificate())<<resumed.Reason();EXPECT_TRUE(resumed.Certificate()->Exact());
+        EXPECT_EQ(resumed.IssuedReferenceProbes(),0u);EXPECT_EQ(resumed.References()->Inputs(),references);
+        EXPECT_EQ(resumed.SessionAttempt(),attempt+1);EXPECT_GT(warmObservations,0u);
+        EXPECT_EQ(test->ReadNativeParameters(),parameters);
+        Artifact(rig.name+"_warm_learned_state.json",QJsonDocument(test->ExportNativeLearnedState(implementation)).toJson());
+    }
 }
 TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}
 TEST(NativeLearnedState,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0);}
