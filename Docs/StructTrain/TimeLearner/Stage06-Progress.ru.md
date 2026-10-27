@@ -111,3 +111,9 @@ pass на обоих серверах, 8 M40 ASan. Retention/state export diagno
 production root evidence auditor имеют отдельные snapshots и проверки.
 Configured dispatch, новые builders и полная алгоритмическая/физическая матрица
 по-прежнему обязательны; statements выше описывают свои исторические подэтапы.
+
+Следующее уточнение: [ModelRevisionObserver](ModelRevisionObserver.ru.md)
+подключён в native service для actual typed проверки каждого tick с полными
+captures на границах. Native A/B Classic/Branch 2000/20000 Гц сохраняет полные
+stimulus/soma arrays и model hash, сокращая measured overhead. Это ускорение
+существующего контракта identity, а не новый критерий сходимости.
