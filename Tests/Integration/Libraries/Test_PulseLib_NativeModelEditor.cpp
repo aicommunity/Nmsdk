@@ -19,6 +19,7 @@
 #include <type_traits>
 #include <limits>
 #include <chrono>
+#include <algorithm>
 
 namespace {
 using namespace RDK;
@@ -46,8 +47,10 @@ template<class Learner> struct EditingRig {
     NmsdkTools::ModelBoundarySources ports;
     std::size_t serial=0;
     double duration=.18;
+    double constructionTime=0.;
     std::vector<double> isi{.01,.08};bool tightBurst=false;
-    EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2)
+    EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2,
+               bool cold=false,int neuronMode=2,int learnerMode=1)
         :frequency(f),normalization(mode),inputCount(inputs),tightBurst(tight)
     {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();environment=core.environment;
@@ -59,7 +62,7 @@ template<class Learner> struct EditingRig {
         const auto registered=RegisterStorageProfile(core.storage,environment,profile);
         learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
         if(!learner)throw std::runtime_error("editor_fixture_learner");
-        learner->Name="Learner";learner->StructureBuildMode=1;learner->NumInputDendrite=int(inputCount);
+        learner->Name="Learner";learner->StructureBuildMode=learnerMode;learner->NumInputDendrite=int(inputCount);
         std::vector<int> lengths(inputCount,1);if(inputCount==2)lengths[0]=2;
         learner->NeuronClassName=registered.neuronClass;learner->DendriteLength=lengths;
         learner->NormalizationMode=mode;learner->CalculateMode=1;learner->EnablePostTrainTuning=false;
@@ -70,12 +73,38 @@ template<class Learner> struct EditingRig {
         for(std::size_t i=0;i<inputCount;++i)pattern(int(i),0)=isi[i];learner->InputPattern=pattern;
         UEPtr<UContainer> component=learner;
         if(model->AddComponent(component)==ForbiddenId)throw std::runtime_error("editor_fixture_attach");
-        model->SetGlobalTimeStep(f);model->Init();model->Reset();
+        model->SetGlobalTimeStep(f);
+        constructionTime=environment->GetTime().GetDoubleTime();
+        if(cold)
+        {
+            NativeModelSpec initial;initial.branch=branch;initial.frequencyHz=f;initial.neuronClass=registered.neuronClass;
+            initial.neuronStructureMode=neuronMode;initial.normalization=mode?Normalization::TipResistance:Normalization::SynapseCount;
+            initial.editPolicy.normalization=initial.normalization;initial.editPolicy.maximumCableLength=8;
+            initial.editPolicy.preserveAllocatedCable=learnerMode==0;initial.initialIsi=isi;
+            for(int length:lengths)initial.inputs.push_back({length,1,std::nullopt});
+            if(neuronMode==1)initial.allocatedCableLengths.assign(branch?1:inputCount,3);
+            if(neuronMode==0)
+            {
+                auto prototype=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(registered.neuronClass));
+                if(!prototype)throw std::runtime_error("native_explicit_profile");
+                prototype->SetEnvironment(environment);prototype->UnInit();prototype->SetGlobalTimeStep(f);
+                prototype->StructureBuildMode=2;prototype->NumSomaMembraneParts=branch?1:int(inputCount);
+                prototype->NumDendriteMembranePartsVec=branch?std::vector<int>{*std::max_element(lengths.begin(),lengths.end())}:lengths;
+                prototype->Build();prototype->Init();prototype->StructureBuildMode=0;prototype->Build();prototype->Init();
+                initial.neuronClass=name+"_ExplicitImage";RegisterClassImage(core.storage,initial.neuronClass,prototype);
+                core.storage->ReturnObject(prototype);
+            }
+            const auto result=learner->ConstructNativeModel(initial);
+            Artifact(name+"_construction.json",QJsonDocument(QJsonObject{{"status",NativeModelBuildStatusName(result.status)},
+                {"reason",QString::fromStdString(result.reason)},{"revision",QString::fromStdString(result.modelRevision)}}).toJson());
+            if(result.status!=NativeModelBuildStatus::Constructed)throw std::runtime_error("native_cold_construction:"+result.reason);
+        }
+        model->Init();model->Reset();
         Artifact(name+"_startup_before.json",QJsonDocument(NmsdkTools::InspectModel(learner)).toJson());
         // The native scheduler completes ordinary lazy child initialization.
         // Capture fresh handles afterwards; the probe itself resets its physical
         // subtree before arming, so this is not training or a dynamic checkpoint.
-        model->Calculate();environment->IncreaseModelTimeByStep();
+        if(!cold){model->Calculate();environment->IncreaseModelTimeByStep();}
         Artifact(name+"_startup_after.json",QJsonDocument(NmsdkTools::InspectModel(learner)).toJson());
         neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);
         source=learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
@@ -149,6 +178,178 @@ template<class Learner> struct EditingRig {
         return *result;
     }
 };
+
+template<class Learner> void ColdModel(unsigned frequency,int neuronMode,int learnerMode,int normalization,std::size_t inputs=2)
+{
+    const auto suffix="cold_mode"+std::to_string(neuronMode)+"_learner"+std::to_string(learnerMode)+"_inputs"+std::to_string(inputs);
+    EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,true,neuronMode,learnerMode);
+    EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());
+    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),rig.constructionTime); // No warm-up time advance.
+    EXPECT_EQ(rig.neuron->StructureBuildMode.GetData(),neuronMode);
+    EXPECT_EQ(rig.learner->StructureBuildMode.GetData(),learnerMode);
+    const auto first=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
+    ASSERT_EQ(first.status,NativeProbeStatus::Completed);ASSERT_TRUE(first.observation);ASSERT_TRUE(first.observation->valid);
+    const auto oldNeuron=rig.neuron.Get();
+    const auto oldDataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get();
+    auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
+    auto lt=rig.neuron->template GetComponentL<NPulseChannel>("LTMembrane.ExcChannel",true);ASSERT_TRUE(lt);
+    const double ltCapacity=lt->Capacity.GetData();channel->Capacity=1.41e-9;
+    auto values=rig.learner->ReadNativeParameters();values[0].resistance*=1.1;
+    // Split coincident labels only through a valid coupled attachment edit.
+    if(inputs==2 && neuronMode!=0)values[0].length=3;
+    else if(inputs>2)for(auto& p:values)p.resistance=values[0].resistance;
+    const auto edit=rig.learner->ApplyNativeParameters(values);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    const auto before=rig.Revision();EXPECT_EQ(channel->Capacity.GetData(),1.41e-9);
+    ASSERT_TRUE(rig.learner->SetNeuronClassName(rig.learner->NeuronClassName.GetData()));ASSERT_FALSE(rig.learner->IsReady());
+    EXPECT_TRUE(rig.learner->Build());ASSERT_TRUE(rig.learner->IsReady());
+    EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
+    EXPECT_EQ(rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),oldNeuron);
+    EXPECT_EQ(rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get(),oldDataset);
+    EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(channel->Capacity.GetData(),1.41e-9);EXPECT_EQ(lt->Capacity.GetData(),ltCapacity);
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),values);
+    rig.learner->Reset();EXPECT_EQ(rig.Revision(),before);
+    rig.learner->UnInit();rig.learner->Init();EXPECT_EQ(rig.Revision(),before);
+    const auto final=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
+    ASSERT_EQ(final.status,NativeProbeStatus::Completed);ASSERT_TRUE(final.observation);EXPECT_TRUE(final.observation->valid);
+    Artifact(rig.name+"_preserved_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
+}
+TEST(NativeModelBuilder,ClassicVector2000){ColdModel<NNeuronTimeLearner>(2000,2,1,0);}
+TEST(NativeModelBuilder,BranchVector2000){ColdModel<NNeuronTimeLearnerBranch>(2000,2,1,0);}
+TEST(NativeModelBuilder,ClassicVector20000){ColdModel<NNeuronTimeLearner>(20000,2,1,0);}
+TEST(NativeModelBuilder,BranchVector20000){ColdModel<NNeuronTimeLearnerBranch>(20000,2,1,0);}
+TEST(NativeModelBuilder,ClassicScalar2000){ColdModel<NNeuronTimeLearner>(2000,1,1,0);}
+TEST(NativeModelBuilder,BranchScalar2000){ColdModel<NNeuronTimeLearnerBranch>(2000,1,1,0);}
+TEST(NativeModelBuilder,ClassicScalar20000){ColdModel<NNeuronTimeLearner>(20000,1,1,0);}
+TEST(NativeModelBuilder,BranchScalar20000){ColdModel<NNeuronTimeLearnerBranch>(20000,1,1,0);}
+TEST(NativeModelBuilder,ClassicExplicit2000){ColdModel<NNeuronTimeLearner>(2000,0,0,0);}
+TEST(NativeModelBuilder,BranchExplicit2000){ColdModel<NNeuronTimeLearnerBranch>(2000,0,0,0);}
+TEST(NativeModelBuilder,ClassicExplicit20000){ColdModel<NNeuronTimeLearner>(20000,0,0,0);}
+TEST(NativeModelBuilder,BranchExplicit20000){ColdModel<NNeuronTimeLearnerBranch>(20000,0,0,0);}
+TEST(NativeModelBuilder,ClassicParametric2000){ColdModel<NNeuronTimeLearner>(2000,2,0,1);}
+TEST(NativeModelBuilder,BranchParametric2000){ColdModel<NNeuronTimeLearnerBranch>(2000,2,0,1);}
+TEST(NativeModelBuilder,ClassicParametric20000){ColdModel<NNeuronTimeLearner>(20000,2,0,1);}
+TEST(NativeModelBuilder,BranchParametric20000){ColdModel<NNeuronTimeLearnerBranch>(20000,2,0,1);}
+TEST(NativeModelBuilder,ClassicSixInputs){ColdModel<NNeuronTimeLearner>(2000,2,1,0,6);}
+TEST(NativeModelBuilder,BranchSixSharedInputs){ColdModel<NNeuronTimeLearnerBranch>(2000,2,1,0,6);}
+
+template<class Learner> void ColdDeclaredBanks(bool inhibition)
+{
+    EditingRig<Learner> rig(2000,0,inhibition?"cold_declared_inhibition":"cold_multiple_synapses",false,2,true);
+    NativeEditSpec policy;policy.maximumCableLength=8;
+    auto spec=DescribeNativeLearnerModel(*rig.learner,rig.branch,Normalization::SynapseCount,
+        rig.learner->DendriteLength.GetData(),policy);
+    spec.allocatedCableLengths.clear();
+    for(std::size_t i=0;i<spec.inputs.size();++i)
+    {spec.inputs[i].synapses=inhibition?1:3;spec.inputs[i].resistance=inhibition?86e6:258e6*(i+1);}
+    if(inhibition)for(std::size_t i=0;i<spec.inputs.size();++i)
+        for(int offset:{1,2})spec.editPolicy.inhibition.push_back({i,offset,8600e6});
+    const auto built=rig.learner->ConstructNativeModel(spec);
+    ASSERT_EQ(built.status,NativeModelBuildStatus::Constructed)<<built.reason;
+    rig.model->Init();rig.model->Reset();
+    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),rig.constructionTime);
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    ASSERT_TRUE(rig.neuron);ASSERT_TRUE(rig.source);rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    const auto path=[&](std::size_t input,int position,const std::string& member) {
+        return "Dendrite"+std::to_string(rig.branch?1:input+1)+"_"+std::to_string(position)+"."+member;
+    };
+    for(std::size_t i=0;i<spec.inputs.size();++i)for(int k=1;k<=spec.inputs[i].synapses;++k)
+    {
+        auto member=rig.neuron->template GetComponentL<NPulseSynapse>(path(i,spec.inputs[i].attachment,"ExcSynapse"+std::to_string(k)),true);
+        ASSERT_TRUE(member);EXPECT_EQ(member->Resistance.GetData(),*spec.inputs[i].resistance);
+        ASSERT_EQ(member->Input.GetDataSources().size(),1u);
+        EXPECT_EQ(member->Input.GetDataSources().front(),&rig.source->Output);
+    }
+    const auto checkRouting=[&](int activeLength) {
+        auto active=rig.neuron->template GetComponentL<NPulseSynapse>(path(0,activeLength,"ExcSynapse1"),true);
+        ASSERT_TRUE(active);ASSERT_EQ(active->Input.GetDataSources().size(),1u);
+        EXPECT_EQ(active->Input.GetDataSources().front(),&rig.source->Output);
+        if(rig.branch)
+        {
+            auto other=rig.neuron->template GetComponentL<NPulseSynapse>(path(1,1,"ExcSynapse1"),true);
+            ASSERT_TRUE(other);EXPECT_TRUE(other->Input.GetDataSources().empty());
+        }
+        if(inhibition)for(std::size_t i=0;i<2;++i)for(int offset:{1,2})
+        {
+            const int position=(i?1:activeLength)+offset;
+            auto member=rig.neuron->template GetComponentL<NPulseSynapse>(path(i,position,"InhSynapse1"),true);
+            ASSERT_TRUE(member);
+            const bool selected=!rig.branch || position==activeLength+1 || position==activeLength+2;
+            if(selected){ASSERT_EQ(member->Input.GetDataSources().size(),1u);EXPECT_EQ(member->Input.GetDataSources().front(),&rig.source->Output);}
+            else EXPECT_TRUE(member->Input.GetDataSources().empty());
+        }
+    };
+    const auto before=rig.Revision();bool inspected=false;
+    const auto first=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+        [&](const NativeProbeSample&){if(!inspected){inspected=true;checkRouting(2);}});
+    ASSERT_TRUE(inspected);ASSERT_EQ(first.status,NativeProbeStatus::Completed);ASSERT_TRUE(first.observation);
+    EXPECT_TRUE(first.observation->complete);EXPECT_EQ(rig.Revision(),before);
+    // Routing/physical graph checks remain meaningful if inhibition changes the
+    // measured wave assignment; such an observation must retain its actual validity.
+    if(!inhibition)EXPECT_TRUE(first.observation->valid);
+    if(inhibition)
+    {
+        auto parameters=rig.learner->ReadNativeParameters();parameters[0].length=3;parameters[0].resistance*=1.1;
+        const auto edited=rig.learner->ApplyNativeParameters(parameters);
+        ASSERT_EQ(edited.status,NativeEditStatus::Applied)<<edited.reason;
+        for(std::size_t i=0;i<2;++i)for(int offset:{1,2})
+        {
+            auto member=rig.neuron->template GetComponentL<NPulseSynapse>(path(i,parameters[i].length+offset,"InhSynapse1"),true);
+            ASSERT_TRUE(member);EXPECT_DOUBLE_EQ(member->Resistance.GetData(),8600e6*(i?1.:1.1));
+        }
+        const auto revised=rig.Revision();inspected=false;
+        const auto after=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+            [&](const NativeProbeSample&){if(!inspected){inspected=true;checkRouting(3);}});
+        ASSERT_TRUE(inspected);ASSERT_EQ(after.status,NativeProbeStatus::Completed);ASSERT_TRUE(after.observation);
+        EXPECT_TRUE(after.observation->complete);EXPECT_EQ(rig.Revision(),revised);
+    }
+    Artifact(rig.name+"_declared_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
+}
+TEST(NativeModelBuilder,ClassicColdMultipleSynapses){ColdDeclaredBanks<NNeuronTimeLearner>(false);}
+TEST(NativeModelBuilder,BranchColdMultipleSynapses){ColdDeclaredBanks<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeModelBuilder,ClassicColdDeclaredInhibition){ColdDeclaredBanks<NNeuronTimeLearner>(true);}
+TEST(NativeModelBuilder,BranchColdDeclaredInhibition){ColdDeclaredBanks<NNeuronTimeLearnerBranch>(true);}
+
+TEST(NativeModelBuilder,InvalidSpecAndExternalListenersRejectBeforeReplacingTheLiveModel)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"cold_rejection");const auto before=rig.Revision();
+    NativeEditSpec policy;policy.maximumCableLength=8;
+    auto s=DescribeNativeLearnerModel(*rig.learner,false,Normalization::SynapseCount,rig.learner->DendriteLength.GetData(),policy);
+    auto invalid=s;invalid.initialIsi[0]=std::numeric_limits<double>::quiet_NaN();
+    auto rejected=rig.learner->ConstructNativeModel(invalid);EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);
+    EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(rig.Revision(),before);
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    auto tap=dynamic_pointer_cast<NPulseGeneratorTransit>(core.storage->TakeObject("NPulseGeneratorTransit"));ASSERT_TRUE(tap);
+    tap->Name="ColdExternalListener";UEPtr<UContainer> node=tap;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);tap->Init();
+    ASSERT_TRUE(tap->Input.SetPointer(0,&rig.source->Output));const auto inputs=tap->Input.GetDataSources();
+    rejected=rig.learner->ConstructNativeModel(s);EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);
+    EXPECT_EQ(rejected.reason,"native_cold_replace_has_external_listener");EXPECT_EQ(rig.Revision(),before);
+    EXPECT_EQ(tap->Input.GetDataSources(),inputs);
+}
+
+TEST(NativeModelBuilder,AdoptionPreservesEffectiveIndividualPhysicsAndRejectsWrongOverlay)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,1,"native_adoption");
+    auto channel=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.37e-9;
+    NativeEditSpec policy;policy.normalization=Normalization::TipResistance;policy.maximumCableLength=8;
+    auto s=DescribeNativeLearnerModel(*rig.learner,false,Normalization::TipResistance,rig.learner->DendriteLength.GetData(),policy);
+    const auto before=rig.Revision();auto wrong=s;wrong.inputs[0].resistance=*wrong.inputs[0].resistance*1.1;
+    auto rejected=rig.learner->AdoptNativeModel(wrong);EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_EQ(rig.Revision(),before);
+    const auto adopted=rig.learner->AdoptNativeModel(s);ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
+    EXPECT_EQ(adopted.modelRevision,before);rig.learner->Build();EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());
+    EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(channel->Capacity.GetData(),1.37e-9);
+}
+TEST(NativeModelBuilder,AdoptsLegacyBranchMutedBaselineWithoutChangingBindings)
+{
+    EditingRig<NNeuronTimeLearnerBranch> rig(2000,0,"adopt_muted_baseline");
+    NativeEditSpec policy;policy.maximumCableLength=8;
+    auto s=DescribeNativeLearnerModel(*rig.learner,true,Normalization::SynapseCount,rig.learner->DendriteLength.GetData(),policy);
+    ASSERT_TRUE(s.allowMutedInputBaseline);const auto before=rig.Revision();
+    const auto adopted=rig.learner->AdoptNativeModel(s);ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
+    rig.learner->Build();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty());EXPECT_EQ(rig.Revision(),before);
+    const auto measured=rig.Probe();ASSERT_EQ(measured.status,NativeProbeStatus::Completed);
+    ASSERT_TRUE(measured.observation);EXPECT_TRUE(measured.observation->valid);EXPECT_EQ(rig.Revision(),before);
+}
 
 template<class Learner> void AssignedNativeWindow()
 {
@@ -360,9 +561,9 @@ template<class Learner> NativeTrainingPlan TrainingPlan(EditingRig<Learner>& rig
     return plan;
 }
 
-template<class Learner> void RunNativeTraining(int normalization)
+template<class Learner> void RunNativeTraining(int normalization,bool cold=false)
 {
-    EditingRig<Learner> rig(2000,normalization,"automatic_service");
+    EditingRig<Learner> rig(2000,normalization,cold?"automatic_cold_service":"automatic_service",false,2,cold);
     auto plan=TrainingPlan(rig);std::size_t observations=0,frames=0;
     std::string trial;std::ostringstream trace;
     plan.probe.onPrepared=[&](const PreparedVerificationProbe&,const ProbeSpec& spec) {
@@ -416,6 +617,10 @@ TEST(NativeTrainingService,ClassicN0SearchAndFreshNegativeFinalGate){RunNativeTr
 TEST(NativeTrainingService,BranchN0SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeTrainingService,ClassicN1SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearner>(1);}
 TEST(NativeTrainingService,BranchN1SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeColdTrainingService,ClassicN0){RunNativeTraining<NNeuronTimeLearner>(0,true);}
+TEST(NativeColdTrainingService,BranchN0){RunNativeTraining<NNeuronTimeLearnerBranch>(0,true);}
+TEST(NativeColdTrainingService,ClassicN1){RunNativeTraining<NNeuronTimeLearner>(1,true);}
+TEST(NativeColdTrainingService,BranchN1){RunNativeTraining<NNeuronTimeLearnerBranch>(1,true);}
 
 TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {
