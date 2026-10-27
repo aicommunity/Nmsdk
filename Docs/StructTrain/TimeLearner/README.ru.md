@@ -5,7 +5,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
 - [План и условия приёмки](RefactoringPlan.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
-- [Сверка полноты всего плана](PlanCompletionAudit-2026-10-25.ru.md).
+- [Актуальный статус всех этапов: перепроверка 27.10](PlanCompletionAudit-2026-10-27.ru.md).
+- [Исходная сверка 25.10 и журнал последующих дополнений](PlanCompletionAudit-2026-10-25.ru.md).
 - [Решения и обязательные контракты](Decisions.ru.md).
 - [История и доказательства](Evidence.ru.md).
 - [Машинный inventory исходников](source_inventory.json).
