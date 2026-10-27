@@ -870,6 +870,11 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         // explicit broad timing tolerance; not convergence at default 0.02.
         for(auto& b:plan.search.bounds){b.maximumLength=b.minimumLength;b.maximumSynapses=b.minimumSynapses;b.maximumResistance=b.minimumResistance;}
         plan.maximumModelSeconds=120.;
+        // This is a dimensional transport/trace control, not a wall-time
+        // benchmark. Keep a declared finite budget that accommodates the
+        // instrumented six-input graph. The 600-second ASan failure is kept
+        // as a separate attempt; physical tolerances/model-time stay intact.
+        plan.maximumWallSeconds=1800.;
     }
     std::ostringstream trace;std::size_t observations=0;
     plan.probe.onPrepared=[&](const auto&,const auto&) {
