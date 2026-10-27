@@ -1,9 +1,10 @@
 # Native ModelSpec, cold construction и reuse
 
-Рабочий подэтап `stage06/native-model-builder`. A2 на обоих серверах прошёл
-25/25 новых проверок и 68/68 регрессионных. Полная приёмка подэтапа ещё открыта:
-дополнительные Ns>1/inhibition controls, ASan, независимый аудит данных,
-публикация артефактов и merge в develop. Configured ControllerVersion=2
+Подэтап `stage06/native-model-builder` прошёл адресную серверную проверку:
+A3 на обоих серверах — 29/29 новых и 68/68 регрессионных; M40 ASan — 21/21,
+detect_leaks=0. Дополнительные Ns>1/inhibition controls и независимый аудит
+первичных данных завершены. Артефакты A1/A2/A3 сохранены в Git.
+Configured ControllerVersion=2
 и сериализация полного learner state этим документом не объявляются готовыми.
 
 ## Две явные операции
@@ -80,11 +81,37 @@ muted baseline, не ослабляя запрет foreign/partial bindings.
 
 ## Проверки и оставшаяся работа
 
+Финальная нормальная серия A3 на root
+`c1f90650bf7e5e01b848fbb5a278950ae927e641`: на каждом сервере 29/29 новых
+и 68/68 регрессионных cases без failures/skips. Дополнительно проверены cold
+Ns=3 с индивидуальными Rs, inhibition offsets 1/2, реальные Branch solo bindings,
+growth и scaling тормозных Rs от объявленного начального отношения.
+
+Независимый анализ на каждом сервере: 18/18 maintained Python checks без skips,
+56 cold-service и 56 legacy-graph-service CSV/packets, по четыре отрицательных
+сертификата каждого контура. Все 42 builder-probe packets согласованы с CSV;
+наблюдения valid/complete. Это не scientific PASS и не полная mode/physics matrix.
+Первая A1, последующая A2 и финальная A3 сохраняются отдельно, включая failures.
+
+M40 ASan: 21/21 addressed cases, без ошибок AddressSanitizer, detect_leaks=0.
+Под ASan проверены neuron modes при 2000 Гц, N=6, новые Ns/inhibition controls,
+negative/adoption controls и четыре cold searches. 20000 Гц покрыты нормальной
+A3; отсутствие всех утечек не заявляется.
+
+Git-пакеты: [Elder-1](../../../Reports/StructTrain/TimeLearner/s06-native-builder-elder1/README.md),
+[M40](../../../Reports/StructTrain/TimeLearner/s06-native-builder-m40/README.md).
+Локально после Git-получения повторно проверены 3754 stored hashes и 3750 raw
+gzip payloads, ошибок нет: [машинная сводка](NativeModelBuilder.validation.json).
+PulseLib merge в develop: `5f1a6076edfe2e306e507013a82dc7574ec735d7`.
+Включены runtime/source manifests, XML/logs всех попыток, primary CSV/model JSON,
+результаты независимого анализа, stored/raw SHA256. Это evidence harness;
+production runner/publisher исходного этапа 10 ещё не готов.
+
 На root `51f8579e81909f00170508e99028825230bfd5b9`, PulseLib
 `37e8cc47a50712daf98186dae933836b7218a974` завершена попытка A2:
 на каждом сервере 25 новых cases и 68 regressions, без failures/errors/disabled.
 Повторное чтение XML и source HEAD подтверждено отдельно от вывода задания.
-Первичные A1/A2 пакеты пока не опубликованы в Git; это не завершённая приёмка.
+Первичные A1/A2 пакеты опубликованы вместе с финальной A3, а не заменены ею.
 См. [актуальную сводку](PlanCompletionAudit-2026-10-27.ru.md).
 
 Пройдены actual storage/Environment проверки Classic/Branch, 2000/20000 Гц,
