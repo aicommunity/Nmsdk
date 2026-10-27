@@ -39,8 +39,8 @@
       }
     },
     "m40": {
-      "stored_hashes_verified": 4171,
-      "raw_payloads_verified": 4169,
+      "stored_hashes_verified": 4369,
+      "raw_payloads_verified": 4367,
       "cross_host": {
         "cases": 5,
         "direction": "elder1-to-m40",
@@ -72,6 +72,12 @@
         "python_tests": 9,
         "rollback_probes": 4,
         "source": "51c54abb95881ced0942e5cfd14928609da00ac6"
+      },
+      "asan_a3": {
+        "cases": 4,
+        "evaluation_verdict": null,
+        "primary_trials": 56,
+        "rollback_probes": 4
       }
     }
   },
@@ -80,6 +86,6 @@
     "elder1/s05-learned-a9",
     "m40/s05-learned-a15"
   ],
-  "asan_pending": "m40/s05-learned-asan-a3",
-  "evaluation_verdict": null
+  "evaluation_verdict": null,
+  "asan_scope": "four addressed cases, detect_leaks=0; full sanitizer physics/mode coverage not claimed"
 }
