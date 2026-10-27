@@ -232,6 +232,84 @@ TEST(NativeModelBuilder,BranchParametric20000){ColdModel<NNeuronTimeLearnerBranc
 TEST(NativeModelBuilder,ClassicSixInputs){ColdModel<NNeuronTimeLearner>(2000,2,1,0,6);}
 TEST(NativeModelBuilder,BranchSixSharedInputs){ColdModel<NNeuronTimeLearnerBranch>(2000,2,1,0,6);}
 
+template<class Learner> void ColdDeclaredBanks(bool inhibition)
+{
+    EditingRig<Learner> rig(2000,0,inhibition?"cold_declared_inhibition":"cold_multiple_synapses",false,2,true);
+    NativeEditSpec policy;policy.maximumCableLength=8;
+    auto spec=DescribeNativeLearnerModel(*rig.learner,rig.branch,Normalization::SynapseCount,
+        rig.learner->DendriteLength.GetData(),policy);
+    spec.allocatedCableLengths.clear();
+    for(std::size_t i=0;i<spec.inputs.size();++i)
+    {spec.inputs[i].synapses=inhibition?1:3;spec.inputs[i].resistance=inhibition?86e6:258e6*(i+1);}
+    if(inhibition)for(std::size_t i=0;i<spec.inputs.size();++i)
+        for(int offset:{1,2})spec.editPolicy.inhibition.push_back({i,offset,8600e6});
+    const auto built=rig.learner->ConstructNativeModel(spec);
+    ASSERT_EQ(built.status,NativeModelBuildStatus::Constructed)<<built.reason;
+    rig.model->Init();rig.model->Reset();
+    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),rig.constructionTime);
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    ASSERT_TRUE(rig.neuron);ASSERT_TRUE(rig.source);rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    const auto path=[&](std::size_t input,int position,const std::string& member) {
+        return "Dendrite"+std::to_string(rig.branch?1:input+1)+"_"+std::to_string(position)+"."+member;
+    };
+    for(std::size_t i=0;i<spec.inputs.size();++i)for(int k=1;k<=spec.inputs[i].synapses;++k)
+    {
+        auto member=rig.neuron->template GetComponentL<NPulseSynapse>(path(i,spec.inputs[i].attachment,"ExcSynapse"+std::to_string(k)),true);
+        ASSERT_TRUE(member);EXPECT_EQ(member->Resistance.GetData(),*spec.inputs[i].resistance);
+        ASSERT_EQ(member->Input.GetDataSources().size(),1u);
+        EXPECT_EQ(member->Input.GetDataSources().front(),&rig.source->Output);
+    }
+    const auto checkRouting=[&](int activeLength) {
+        auto active=rig.neuron->template GetComponentL<NPulseSynapse>(path(0,activeLength,"ExcSynapse1"),true);
+        ASSERT_TRUE(active);ASSERT_EQ(active->Input.GetDataSources().size(),1u);
+        EXPECT_EQ(active->Input.GetDataSources().front(),&rig.source->Output);
+        if(rig.branch)
+        {
+            auto other=rig.neuron->template GetComponentL<NPulseSynapse>(path(1,1,"ExcSynapse1"),true);
+            ASSERT_TRUE(other);EXPECT_TRUE(other->Input.GetDataSources().empty());
+        }
+        if(inhibition)for(std::size_t i=0;i<2;++i)for(int offset:{1,2})
+        {
+            const int position=(i?1:activeLength)+offset;
+            auto member=rig.neuron->template GetComponentL<NPulseSynapse>(path(i,position,"InhSynapse1"),true);
+            ASSERT_TRUE(member);
+            const bool selected=!rig.branch || position==activeLength+1 || position==activeLength+2;
+            if(selected){ASSERT_EQ(member->Input.GetDataSources().size(),1u);EXPECT_EQ(member->Input.GetDataSources().front(),&rig.source->Output);}
+            else EXPECT_TRUE(member->Input.GetDataSources().empty());
+        }
+    };
+    const auto before=rig.Revision();bool inspected=false;
+    const auto first=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+        [&](const NativeProbeSample&){if(!inspected){inspected=true;checkRouting(2);}});
+    ASSERT_TRUE(inspected);ASSERT_EQ(first.status,NativeProbeStatus::Completed);ASSERT_TRUE(first.observation);
+    EXPECT_TRUE(first.observation->complete);EXPECT_EQ(rig.Revision(),before);
+    // Routing/physical graph checks remain meaningful if inhibition changes the
+    // measured wave assignment; such an observation must retain its actual validity.
+    if(!inhibition)EXPECT_TRUE(first.observation->valid);
+    if(inhibition)
+    {
+        auto parameters=rig.learner->ReadNativeParameters();parameters[0].length=3;parameters[0].resistance*=1.1;
+        const auto edited=rig.learner->ApplyNativeParameters(parameters);
+        ASSERT_EQ(edited.status,NativeEditStatus::Applied)<<edited.reason;
+        for(std::size_t i=0;i<2;++i)for(int offset:{1,2})
+        {
+            auto member=rig.neuron->template GetComponentL<NPulseSynapse>(path(i,parameters[i].length+offset,"InhSynapse1"),true);
+            ASSERT_TRUE(member);EXPECT_DOUBLE_EQ(member->Resistance.GetData(),8600e6*(i?1.:1.1));
+        }
+        const auto revised=rig.Revision();inspected=false;
+        const auto after=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+            [&](const NativeProbeSample&){if(!inspected){inspected=true;checkRouting(3);}});
+        ASSERT_TRUE(inspected);ASSERT_EQ(after.status,NativeProbeStatus::Completed);ASSERT_TRUE(after.observation);
+        EXPECT_TRUE(after.observation->complete);EXPECT_EQ(rig.Revision(),revised);
+    }
+    Artifact(rig.name+"_declared_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
+}
+TEST(NativeModelBuilder,ClassicColdMultipleSynapses){ColdDeclaredBanks<NNeuronTimeLearner>(false);}
+TEST(NativeModelBuilder,BranchColdMultipleSynapses){ColdDeclaredBanks<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeModelBuilder,ClassicColdDeclaredInhibition){ColdDeclaredBanks<NNeuronTimeLearner>(true);}
+TEST(NativeModelBuilder,BranchColdDeclaredInhibition){ColdDeclaredBanks<NNeuronTimeLearnerBranch>(true);}
+
 TEST(NativeModelBuilder,InvalidSpecAndExternalListenersRejectBeforeReplacingTheLiveModel)
 {
     EditingRig<NNeuronTimeLearner> rig(2000,0,"cold_rejection");const auto before=rig.Revision();
