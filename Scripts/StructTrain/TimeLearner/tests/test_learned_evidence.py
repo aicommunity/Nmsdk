@@ -6,6 +6,7 @@ from pathlib import Path
 
 from Scripts.StructTrain.TimeLearner.learned_evidence import audit_learned_state, load_case
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError
+from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256
 
 
 class LearnedEvidenceTest(unittest.TestCase):
@@ -24,11 +25,15 @@ class LearnedEvidenceTest(unittest.TestCase):
                 result = audit_learned_state(*case)
                 self.assertTrue(result["certificate_consistent"])
                 self.assertFalse(result["native_import_verified"])
+                self.assertTrue(result["package_digest_verified"])
                 self.assertIsNone(result["evaluation_verdict"])
 
     def reject(self, edit):
         case = copy.deepcopy(self.cases[0])
         edit(*case)
+        # Re-sign the envelope so corruption controls exercise the semantic
+        # checks, not just the outer digest. Nested archive digests stay intact.
+        case[0]["sha256"] = canonical_model_sha256({k: v for k, v in case[0].items() if k != "sha256"})
         with self.assertRaises(EvidenceError):
             audit_learned_state(*case)
 
