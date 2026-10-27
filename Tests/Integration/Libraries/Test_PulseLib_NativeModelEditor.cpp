@@ -1017,7 +1017,9 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         auto oldNeuron=rollback->template GetComponentL<NPulseNeuron>("Neuron",true);
         auto oldDataset=rollback->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
         auto oldSource=oldDataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(oldSource);
-        const auto oldHash=NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}})["sha256"];
+        const auto oldIdentity=NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}});
+        const auto oldHash=oldIdentity["sha256"];
+        Artifact(rig.name+"_rollback_before_model.json",QJsonDocument(oldIdentity).toJson());
         const auto oldParameters=rollback->ReadNativeParameters();std::vector<NameT> oldOrder;rollback->GetComponentsList(oldOrder);
         const auto measure=[&](const std::string& phase,std::vector<NativeProbeSample>& samples) {
             auto probe=plan.probe;probe.activeInput=0;probe.inputId=plan.protocol.inputs[0].id;
@@ -1030,9 +1032,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             rollback->QueueNativeProbe(std::move(probe));
             for(unsigned tick=0;rollback->NativeProbeState()==NativeProbeStatus::Queued || rollback->NativeProbeState()==NativeProbeStatus::Running;++tick)
             {ASSERT_LT(tick,unsigned((rig.duration+.02)*frequency));rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
-            const auto result=rollback->TakeNativeProbeResult();ASSERT_TRUE(result);ASSERT_EQ(result->status,NativeProbeStatus::Completed);
-            ASSERT_TRUE(result->observation);ASSERT_TRUE(result->observation->valid);
+            const auto result=rollback->TakeNativeProbeResult();ASSERT_TRUE(result);
             Artifact(rig.name+"_rollback_"+phase+"_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*result)).toJson());
+            ASSERT_EQ(result->status,NativeProbeStatus::Completed)<<QJsonDocument(EncodeNativeProbeEvidence(*result)).toJson().constData();
+            ASSERT_TRUE(result->observation);ASSERT_TRUE(result->observation->valid);
             std::ostringstream csv;csv.imbue(std::locale::classic());csv<<std::setprecision(17)<<"time,stimulus";
             for(std::size_t i=0;i<(rig.branch?1u:inputs);++i)csv<<",soma"<<i;csv<<'\n';
             for(const auto& sample:samples){csv<<sample.time<<','<<sample.stimulus;for(double p:sample.potentials)csv<<','<<p;csv<<'\n';}
@@ -1041,6 +1044,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         std::vector<NativeProbeSample> before,after;measure("before",before);ASSERT_FALSE(before.empty());
         rollback->failNeuronAttach=true;
         const auto failed=rollback->ImportNativeLearnedState(package,implementation);
+        Artifact(rig.name+"_rollback_after_model.json",QJsonDocument(NmsdkTools::IdentifyModel(oldNeuron,{{&oldSource->Output,"burst"}})).toJson());
         EXPECT_EQ(failed.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(failed.modelMayHaveChanged);
         EXPECT_EQ(failed.reason,"injected_import_neuron_attach_failure");EXPECT_FALSE(rollback->failNeuronAttach);
         EXPECT_EQ(rollback->template GetComponentL<NPulseNeuron>("Neuron",true),oldNeuron);
