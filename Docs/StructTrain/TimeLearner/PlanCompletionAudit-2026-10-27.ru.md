@@ -11,7 +11,29 @@
 Это классификация по условиям приёмки целых этапов, а не процент объёма работы:
 этапы существенно различаются по сложности и зависимости друг от друга.
 
-## Последующая перепроверка: рабочая ветка native-model-builder
+## Дополнение: финальная адресная проверка native-model-builder
+
+После A2 завершён A3 на root `c1f90650bf7e5e01b848fbb5a278950ae927e641`,
+с тем же PulseLib `37e8cc47a50712daf98186dae933836b7218a974`:
+на каждом сервере **29/29 новых и 68/68 регрессионных**, M40 ASan **21/21**
+(detect_leaks=0). Добавлены cold Ns=3/individual Rs, тормозные offsets,
+фактическая Branch solo routing, growth и scaling тормозных сопротивлений.
+Независимый Python-аудит на каждом сервере: 18/18 tests без skips, 112 service
+CSV/packets, восемь отрицательных сертификатов и 42 valid/complete builder probes.
+
+Все A1/A2/A3 артефакты, включая неуспешную A1, опубликованы через Git в
+`Reports/StructTrain/TimeLearner/s06-native-builder-elder1` и
+`s06-native-builder-m40`. Финальная сводка и ограничения:
+[NativeModelBuilder](NativeModelBuilder.ru.md). Это проверенный C++ API-подэтап
+этапов 4/6; configured V2, portable trained-state codec и полная matrix остаются
+открыты. Классификация целых этапов 0–12 **не изменилась**.
+
+Локальная перепроверка полученных Git-пакетов: 3754 stored hashes и 3750 raw
+gzip payloads без ошибок. [Машинная сводка](NativeModelBuilder.validation.json).
+PulseLib объединён и опубликован в develop merge commit
+`5f1a6076edfe2e306e507013a82dc7574ec735d7`; root сохраняет этот точный gitlink.
+
+### Исторический промежуточный статус A2 (до финальной проверки)
 
 После исходного снимка ниже появились изменения в root
 `51f8579e81909f00170508e99028825230bfd5b9` и PulseLib
