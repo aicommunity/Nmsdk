@@ -1,25 +1,61 @@
 {
   "schema_version": 1,
-  "scope": "A1-A6 and cross-host supplement only; full stage 5 pending",
+  "scope": "A1-A7 and cross-host supplement only; full stage 5 pending",
   "packages": {
     "elder1": {
-      "stored_hashes_verified": 2026,
-      "raw_payloads_verified": 2024,
+      "stored_hashes_verified": 3144,
+      "raw_payloads_verified": 3142,
       "cross_host": {
         "cases": 5,
         "direction": "m40-to-elder1",
         "source_evidence_commit": "d408ced735501c311d312e48dc51f838a9ff60ae",
         "traces_byte_exact": true
+      },
+      "a7": {
+        "accepted": true,
+        "results": {
+          "regression.xml": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 1,
+            "tests": 44
+          },
+          "results.xml": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 1,
+            "tests": 17
+          }
+        },
+        "source": "4cc548656857bd97d927c16fdd070c7608e091f0"
       }
     },
     "m40": {
-      "stored_hashes_verified": 2026,
-      "raw_payloads_verified": 2024,
+      "stored_hashes_verified": 3144,
+      "raw_payloads_verified": 3142,
       "cross_host": {
         "cases": 5,
         "direction": "elder1-to-m40",
         "source_evidence_commit": "dcbb81a2bd082690b6a56bc1a47ef2f629d33308",
         "traces_byte_exact": true
+      },
+      "a7": {
+        "accepted": true,
+        "results": {
+          "regression.xml": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 1,
+            "tests": 44
+          },
+          "results.xml": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 1,
+            "tests": 17
+          }
+        },
+        "source": "4cc548656857bd97d927c16fdd070c7608e091f0"
       }
     }
   }
