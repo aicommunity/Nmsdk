@@ -11,7 +11,27 @@
 Это классификация по условиям приёмки целых этапов, а не процент объёма работы:
 этапы существенно различаются по сложности и зависимости друг от друга.
 
-## Дополнение: финальная адресная проверка native-model-builder
+## Последующее дополнение: configured native cold controller
+
+Подключены `ControllerVersion` (default 1) и `ControllerConfiguration`:
+версия 2 создаёт native storage-owned модель и запускает общий training service
+из штатного scheduler. Проверено настоящее cold XML Load без прямого вызова
+BeginNativeTraining. Классификация целых этапов остаётся прежней: этапы 4/6/7
+частичны, полный trained-state import и вся physics/mode matrix не завершены.
+
+Финальный root test SHA `cb9e035b390390746ada5caa2c500917b8884612`:
+по 14/14 configured и 21/21 addressed native regressions на обоих серверах;
+предшествующий A2 — по 12/12 и 97/97. M40 ASan: A2 12/12, A3 9/9,
+detect_leaks=0. Исправлены две ошибки corruption fixtures, которые не меняли
+фактическую assigned policy; production auditor не ослаблялся. Python-набор
+прошёл по 18/18 на assigned и isolated данных на каждом сервере без skips.
+Первичные CSV, все попытки и отрицательные сертификаты опубликованы через Git.
+
+Полная сводка, scope и открытые требования:
+[ConfiguredNativeController](ConfiguredNativeController.ru.md). Ниже сохранены
+предшествующие снимки; их утверждения об отсутствии V2 относятся к своим SHA.
+
+## Предшествующее дополнение: native-model-builder
 
 После A2 завершён A3 на root `c1f90650bf7e5e01b848fbb5a278950ae927e641`,
 с тем же PulseLib `37e8cc47a50712daf98186dae933836b7218a974`:
@@ -117,9 +137,9 @@ HEAD совпадает, status чистый, все gitlinks согласова
 | **1. Реестр доказательств, режимов, дефектов** | Частично | Есть исходные SHA/gitlinks, августовские опорные commits, журнал исправлений и уровней доказательности. Нет полного поэкспериментного ledger с августа и завершённого semantic review всех параметров/аудитов. В сохранённом inventory все 211 записей параметров — `semantic_review=pending`, все 324 script candidates — `review_required`. Это исходный inventory, не текущая завершённая экспертиза. |
 | **2. Изолированные сборки/runtime** | Частично | Настраиваемый deploy root, отдельные ресурсы/ini, code/build/runtime manifests, tracked Reports и Git-передача проверены на двух серверах и Qt5/Qt6. Осталось автоматически собирать полный production run bundle перед/после настоящего Train: данные, модель, события, фактически загруженные библиотеки и все стадии одного run. Самостоятельный runtime recorder не заменяет runner. |
 | **3. Наблюдения/scorer** | Частично, основная измерительная реализация проверена | Recognition schema 4, strict scorer, labels/IDs/completeness/nonfinite, arbitrary soma dimension; отдельные native training schemas и auditor. Есть реальные CSV и corruption tests, whole-burst assignment, explicit assigned-wave selection. Нет единого production-пути Train→calibration→frozen Test→единственный verdict для всех старых и новых анализаторов. Историческая метрика остаётся отдельной. |
-| **4. Lifecycle/storage/эффективная модель** | Частично, большая проверенная основа | Исправлены подтверждённые общие Copy/XML/frequency/lifetime дефекты; есть native profiles, checked image registry, graph/cache/link readback, rest/reset, growth и individual physics controls. Native editor сохраняет чужие банки/наблюдателей и learned Rs/C в проверенных случаях. Не завершены вся profile/mode/load/reuse матрица и новый builder/repeated Build contract. Legacy parent overrides/wake passes остаются. Новые production profiles не распространены на всю экспериментальную матрицу. |
+| **4. Lifecycle/storage/эффективная модель** | Частично, большая проверенная основа | Исправлены подтверждённые общие Copy/XML/frequency/lifetime дефекты; есть native profiles, checked image registry, graph/cache/link readback, rest/reset, growth и individual physics controls. Native editor сохраняет чужие банки/наблюдателей и learned Rs/C в проверенных случаях. Builder/repeated Build принят адресным подэтапом; вся profile/mode/load/reuse матрица ещё не завершена. Legacy parent overrides/wake passes остаются. Новые production profiles не распространены на всю экспериментальную матрицу. |
 | **5. Полный экспорт модели и Train→Test** | Частично, physical archive реализован | Полный native physical graph, определения зависимых storage images, external stimulus ports, semantic fingerprint, fresh-process и cross-host Git roundtrips проверены. Нет законченного producer/consumer полного обученного состояния двух learner: references/certificate/controller boundary/conversion/calibration вместе с моделью. `EncodeNativeTrainingState` — diagnostics, не checkpoint/import. Реальный сквозной Train→Test ещё не принят. |
-| **6. Общий контроллер** | Частично, рабочий explicit API | Общий `NativeTrainingService`, topology adapters, scheduler Before/After, budgets, external stop, Reset/warm/retarget и native edits работают; локальные действия не исполняются вручную тестовым циклом. Общие legacy helpers имеют отдельные compatibility A/B. Нет configured `ControllerVersion=2`, нового исходного builder и всей production mode matrix. |
+| **6. Общий контроллер** | Частично, рабочий explicit API | Общий `NativeTrainingService`, topology adapters, scheduler Before/After, budgets, external stop, Reset/warm/retarget и native edits работают; локальные действия не исполняются вручную тестовым циклом. Общие legacy helpers имеют отдельные compatibility A/B. Native builder и configured V2 cold JSON/XML frontend подключены последующими подэтапами; полный trained-state transfer, reconfiguration и вся production mode matrix ещё не завершены. |
 | **7. Алгоритмы обучения** | Частично, bounded native контур проверен | CapturedPerInput raw references, signed measured residuals, missing/ambiguous/clipped handling, model revision invalidation, Classic round-robin/Branch reverse, bounded L/Ns/Rs, physical bank/alias rules, actual integration assessment и независимый final sweep реализованы. Не готовы динамические Rs domains по каждому L, production длительности окон/recovery, весь N0 repeatability/spread и quantized/best-effort контракт, optional C-trim и полная физическая/inhibition матрица. Четыре native поиска пока проверены на ограниченной области L=2..3 и возвращают честный SearchUnresolved. |
 | **8. Conversion/PostTune/calibration** | **Не выполнен по новой спецификации** | Старые реализации существуют, но нет нового immutable Solo→Recognition conversion с idempotent load/save, полного transactional PostTune commit/rollback и законченного Same-Matrix/frozen calibration pipeline с реальным threshold confirmation. Текущий новый training API явно отклоняет C-trim/PostTune/calibration. Поддержка не отменена — остаётся обязательной. |
 | **9. Пакет экспериментов и миграция** | Частично, основа | Root package содержит inventory, runtime, native evidence auditor и tests. Главный CLI пока поддерживает только `inventory`; runtime/auditor имеют отдельные module CLI. Нет остальных production-команд, полного lossless config adapter и законченного deletion/migration manifest. Старые активные/исторические scripts остаются в Bin/Docs. |
@@ -179,14 +199,15 @@ payloads** в десяти поддерживаемых `validation.json/raw_fil
 целостность перечисленных опубликованных bytes, но не полноту всех требований
 плана и не правильность научных выводов автоматически.
 
-## Конкретные открытые стыки, проверенные по коду
+## Стыки исходного снимка и последующие уточнения
 
-- `ControllerVersion` отсутствует в production learner properties/dispatch.
-  Новый API сам по себе не переключает существующие XML-конфигурации на V2.
+- На исходном снимке `ControllerVersion` отсутствовал. Теперь cold V2 JSON/XML
+  frontend подключён отдельным подэтапом; существующие XML без версии остаются V1.
+  Полный trained-state transfer и все режимы V2 ещё не завершены.
 - Оба legacy `BuildStructure` пересоздают `Neuron`; native training ownership
-  ещё не заменяет `ABuild` новым read-only/reuse builder. При `Ready=false`
-  повторный Build требует отдельного исправления и runtime-проверки сохранности
-  learned/heterogeneous state. Простой no-op Build готового объекта — другой случай.
+  заменяет `ABuild` новым read-only/reuse builder в последующем подэтапе;
+  forced Build при `Ready=false` проверен на сохранность learned/heterogeneous
+  state. Legacy BuildStructure продолжает пересоздавать граф для совместимости.
 - Legacy Branch `AllSynapsesNormalized` продолжает проверять только active input.
   В новом API отдельный final verifier уже обходит все входы, но старый путь этим
   не переписан и не объявляется исправленным.
@@ -211,8 +232,9 @@ migration manifest не выполнены; исходные 324 записи н
 
 ## Приоритет дальнейшей реализации
 
-1. Закончить production-путь модели: native initial builder/adopt/repeated Build,
-   storage-owned physics, configured `ControllerVersion=2`, строгий readback.
+1. Закончить production-путь модели после принятых builder и configured cold V2:
+   full trained-state transport, storage dependency closure, reconfiguration и
+   внедрение в пользовательские конфигурации с полным effective readback.
    Параллельно закрывать semantic property/evidence review, а не переносить pending
    в PASS автоматически.
 2. Закончить алгоритмы: geometry-dependent Rs domains, production окна/recovery,
