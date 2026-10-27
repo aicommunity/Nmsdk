@@ -1,5 +1,10 @@
 # Проверка полноты выполнения принятого плана
 
+**Актуальная поэтапная сводка — [перепроверка 27.10](PlanCompletionAudit-2026-10-27.ru.md).**
+Этот файл сохраняет аудит исходного снимка и накопительные дополнения.
+В частности, исторические строки «контроллер/поиск не реализованы» ниже
+не описывают уже принятый explicit native API текущего кода.
+
 Проверка полной ревизии на каждом tick ускорена через
 [ModelRevisionObserver](ModelRevisionObserver.ru.md): actual typed reads и
 membership/lifetime guards, полные boundary captures, native A/B 2000/20000 Гц
