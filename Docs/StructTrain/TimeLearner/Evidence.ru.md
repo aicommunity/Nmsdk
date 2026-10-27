@@ -157,6 +157,19 @@ root a222ac7c4b386451137ef17e4a5a0af6996c8d9b разрешает actual executab
 соответствии заявленному ini ограничено. Full maintained CTest ещё проверяется;
 NativeLearnedState.ru.md.
 
+TL-031: full maintained CTest Elder-1 A9 и M40 A15 воспроизводят по 15
+learned-state export/import failures среди 395 PulseLib tests. Native reproducer
+подтверждает старые direct property sources при Return/Take и replacement Copy.
+Rdk 1223bcc18cf1ba106e8f8a17f20cce8c000c104d очищает внешние источники на этих
+границах, сохраняя internal wiring и обычные Build/Reset/Default. На Elder-1
+18/18 unit, 30/30 последовательных builder/learned-state integration, 9/9 Python;
+на M40 18/18 unit под ASan, detect_leaks=0. Два исправления matrix-accessor fixture
+сохранены отдельно от production defect. В failed full runs независимо проверены
+по 16 source trainings и 208 trial CSV/JSON; успешный Train не отменяет failed
+transport. Git evidence packages s04-property-bindings-elder1/m40 опубликованы.
+Post-fix full CTest пока выполняется; Rdk feature не принята в develop.
+См. PooledPropertyBindings.ru.md. Исторические научные результаты этим не опровергаются.
+
 TL-030: штатное перемещение компонента вперёд в конец читало за границей
 вектора; вычисление int destination могло переполняться. Native test-only Rdk
 e2bcd8da5bab016bd3fd703c42e519e56b633081 воспроизводит failing order check и
