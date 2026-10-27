@@ -834,12 +834,30 @@ TEST(NativeLearnedState,FreshProcessImport)
     dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
 }
 
-template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
+template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false)
 {
-    EditingRig<Learner> rig(2000,normalization,sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance",false,2,true);
+    auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
+    if(inputs!=2)suffix+="_inputs"+std::to_string(inputs);if(configured)suffix+="_configured";
+    EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured);
+    std::optional<ConfiguredNativeTraining> configuredPlan;
+    if(configured)
+    {
+        configuredPlan=Configuration(rig);configuredPlan->search.tolerances.sync=sync;
+        rig.learner->ControllerVersion=2;rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(*configuredPlan)).toJson(QJsonDocument::Compact).toStdString();
+        rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    }
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
     auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    if(inputs>2)
+    {
+        // A dimensional transport control, with declared fixed geometry and
+        // explicit broad timing tolerance; not convergence at default 0.02.
+        for(auto& b:plan.search.bounds){b.maximumLength=b.minimumLength;b.maximumSynapses=b.minimumSynapses;b.maximumResistance=b.minimumResistance;}
+        plan.maximumModelSeconds=120.;
+    }
     std::ostringstream trace;std::size_t observations=0;
     plan.probe.onPrepared=[&](const auto&,const auto&) {
         trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
@@ -853,12 +871,13 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
         Artifact(base+".json",QJsonDocument(EncodeNativeProbeEvidence(result)).toJson());
         Artifact(base+".csv",QByteArray::fromStdString(trace.str()));
     };
-    rig.learner->BeginNativeTraining(plan);
+    if(configured)rig.learner->SetConfiguredNativeEvidenceSinks({plan.probe.onPrepared,plan.probe.onSample,plan.observationSink});
+    else rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
-    {ASSERT_LT(ticks,40000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();ASSERT_TRUE(service.Certificate())<<service.Reason();
-    if(sync==.2)EXPECT_TRUE(service.Certificate()->Exact());
-    ASSERT_EQ(service.ReferencePackets().size(),2u);ASSERT_EQ(service.FinalPackets().size(),2u);
+    if(sync==.2 && inputs==2)EXPECT_TRUE(service.Certificate()->Exact());
+    ASSERT_EQ(service.ReferencePackets().size(),inputs);ASSERT_EQ(service.FinalPackets().size(),inputs);
     for(const auto& packet:service.ReferencePackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
     for(const auto& packet:service.FinalPackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
     const auto original=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();const auto references=service.References()->Inputs();
@@ -869,7 +888,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02)
     EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson(QJsonDocument::Compact).toStdString()),package);
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     auto test=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(test);
-    test->Name="TestLearner";UEPtr<UContainer> node=test;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);test->SetGlobalTimeStep(2000);
+    test->Name="TestLearner";UEPtr<UContainer> node=test;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);test->SetGlobalTimeStep(frequency);
     const auto imported=test->ImportNativeLearnedState(package,implementation);
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
     ASSERT_TRUE(test->NativeModelEditFailure().empty())<<test->NativeModelEditFailure();
@@ -966,6 +985,17 @@ TEST(NativeLearnedState,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeLearnedState,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1);}
 TEST(NativeLearnedState,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1);}
 TEST(NativeLearnedState,ExactCertificateWithExplicitPointTwoTolerance){LearnedBoundary<NNeuronTimeLearner>(1,.2);}
+TEST(NativeLearnedState,ClassicN0_20000){LearnedBoundary<NNeuronTimeLearner>(0,.02,20000);}
+TEST(NativeLearnedState,BranchN0_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,20000);}
+TEST(NativeLearnedState,ClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000);}
+TEST(NativeLearnedState,BranchN1_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,20000);}
+TEST(NativeLearnedState,ClassicConfiguredN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true);}
+TEST(NativeLearnedState,BranchConfiguredN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true);}
+TEST(NativeLearnedState,ClassicOneInput){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,1);}
+TEST(NativeLearnedState,BranchOneInput){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,1);}
+TEST(NativeLearnedState,BranchFourInputsExplicitPointFiveTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.5,2000,4);}
+TEST(NativeLearnedState,ClassicSixInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearner>(0,1.,2000,6);}
+TEST(NativeLearnedState,BranchSixSharedInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6);}
 
 TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {
