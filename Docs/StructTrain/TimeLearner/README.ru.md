@@ -24,6 +24,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
 - [Нативный исполнитель проб Classic/Branch: рабочий подэтап и gates](NativeExecution.ru.md).
 - [Полная последовательность волн и physical input ownership: schema 3](BurstAssignment.ru.md).
+- [Явный выбор назначенной волны в широком окне](AssignedWaveSelection.ru.md).
 - [Общий ограниченный поиск, фактические банки и границы приёмки](BoundedTraining.ru.md).
 - [Native изменения L/Ns/Rs, preview и сохранность чужих связей](NativeModelEdits.ru.md).
 - [Общая native-служба capture/search/final verification и аудит первичных данных](NativeTrainingService.ru.md).
