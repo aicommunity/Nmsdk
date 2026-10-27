@@ -80,6 +80,13 @@ A14 на root `51c54abb95881ced0942e5cfd14928609da00ac6` проходит 5/5 le
 четыре rollback probes. Повторная обычная проверка Elder-1 и расширенный ASan
 ещё выполняются. Нет утверждения об успешности запущенных проверок.
 
-Полный CTest и итоговое объединение веток пока не завершены. Исторические
-manifests продолжают указывать свои исходные Rdk SHA; этот узкий подэтап
-не означает завершения общей lifecycle/physics матрицы.
+Elder-1 A14 также прошёл 5/5 learned-state, 13/13 UContainer и 9/9 Python tests,
+с независимым аудитом 62 training trials и четырёх rollback probes. Rdk branch
+принята в develop merge `ef4f033704d54f11d06e4da2b3518c313f3a9992`; его tree SHA
+`d5fbbfe16fdd25b6bfdf43bc8349bb5af050cc47` совпадает с tree tested feature commit,
+remote develop SHA повторно проверен через ls-remote. Root feature записывает
+точный merge gitlink, но PulseLib/root develop ещё не обновлены этим подэтапом.
+
+Полный CTest пока не завершён. Исторические manifests продолжают указывать
+свои исходные Rdk SHA; этот узкий подэтап не означает завершения общей
+lifecycle/physics матрицы.
