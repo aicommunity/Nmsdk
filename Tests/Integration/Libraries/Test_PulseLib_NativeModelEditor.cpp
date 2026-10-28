@@ -1170,6 +1170,14 @@ TEST(NativeRecognitionState,FreshProcessImport)
     core.environment->SetUseIndTimeStepFlag(false);core.environment->DestroyModel();
     ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();
     model->SetGlobalTimeStep(configuration.model.frequencyHz);
+    // Generator Reset captures the current clock. Set the declared onset before
+    // importing/initializing the physical tree, never after its Reset.
+    const double begin=spec["begin"].toDouble(-1.),end=spec["end"].toDouble(-1.);
+    ASSERT_TRUE(std::isfinite(begin) && std::isfinite(end) && begin>=0. && end>begin);
+    const auto beginUs=std::llround(begin*1.e6);ASSERT_GE(beginUs,0);
+    core.environment->GetTime().SetTime(static_cast<unsigned long long>(beginUs));
+    ASSERT_FALSE(Detail::After(begin,core.environment->GetTime().GetDoubleTime()));
+    ASSERT_FALSE(Detail::After(core.environment->GetTime().GetDoubleTime(),begin));
     auto state=PrepareNativeRecognitionState(package,core.storage,core.environment,"native-learned-boundary-fixture-v1");
     ASSERT_TRUE(state->neuron);ASSERT_TRUE(state->dataset);
     auto generator=state->dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
@@ -1178,12 +1186,6 @@ TEST(NativeRecognitionState,FreshProcessImport)
     {ASSERT_NE(model->AddComponent(node),ForbiddenId);node->Init();node->Reset();}
     const auto revision=[&]{return NmsdkTools::IdentifyModel(state->neuron,{{&generator->Output,"burst"}}).value("sha256");};
     ASSERT_EQ(revision(),package["model_revision"]);
-    const double begin=spec["begin"].toDouble(-1.),end=spec["end"].toDouble(-1.);
-    ASSERT_TRUE(std::isfinite(begin) && std::isfinite(end) && begin>=0. && end>begin);
-    const auto beginUs=std::llround(begin*1.e6);ASSERT_GE(beginUs,0);
-    core.environment->GetTime().SetTime(static_cast<unsigned long long>(beginUs));
-    ASSERT_FALSE(Detail::After(begin,core.environment->GetTime().GetDoubleTime()));
-    ASSERT_FALSE(Detail::After(core.environment->GetTime().GetDoubleTime(),begin));
     const auto channels=configuration.model.branch?1u:configuration.model.inputs.size();
     ASSERT_EQ(spec["channels"].toDouble(),double(channels));
     ASSERT_DOUBLE_EQ(spec["maximum_sample_gap"].toDouble(),1./configuration.model.frequencyHz);
