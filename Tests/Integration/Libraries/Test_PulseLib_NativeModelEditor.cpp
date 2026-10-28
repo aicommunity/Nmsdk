@@ -93,7 +93,7 @@ template<class Learner> struct EditingRig {
     std::vector<double> isi{.01,.08};bool tightBurst=false;
     EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2,
                bool cold=false,int neuronMode=2,int learnerMode=1,bool domainInhibitionProfile=false,
-               const std::string& learnerClass={})
+               const std::string& learnerClass={},int initialFirstSynapses=1)
         :frequency(f),normalization(mode),inputCount(inputs),tightBurst(tight)
     {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();environment=core.environment;
@@ -126,7 +126,8 @@ template<class Learner> struct EditingRig {
             initial.neuronStructureMode=neuronMode;initial.normalization=mode?Normalization::TipResistance:Normalization::SynapseCount;
             initial.editPolicy.normalization=initial.normalization;initial.editPolicy.maximumCableLength=8;
             initial.editPolicy.preserveAllocatedCable=learnerMode==0;initial.initialIsi=isi;
-            for(int length:lengths)initial.inputs.push_back({length,1,std::nullopt});
+            for(std::size_t i=0;i<lengths.size();++i)
+                initial.inputs.push_back({lengths[i],i==0?initialFirstSynapses:1,std::nullopt});
             if(neuronMode==1)initial.allocatedCableLengths.assign(branch?1:inputCount,3);
             if(neuronMode==0)
             {
@@ -1839,11 +1840,9 @@ void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bo
     if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
         +[]() -> UComponent* {return new PostTuneRebuildBranch;},image),image);
     const auto suffix="posttune_native_mode"+std::to_string(mode)+(failAttach?"_rollback":listener?"_listener":"");
-    EditingRig<PostTuneRebuildBranch> rig(frequency,normalization,suffix,false,2,true,2,1,false,image);
+    EditingRig<PostTuneRebuildBranch> rig(frequency,normalization,suffix,false,2,true,2,1,false,image,normalization==0?3:1);
     if(normalization==0)
     {
-        auto requested=rig.learner->ReadNativeParameters();requested[0].synapses=3;
-        const auto edit=rig.learner->ApplyNativeParameters(requested);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
         ASSERT_TRUE(rig.neuron->GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse3",true));
     }
     auto exc=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
