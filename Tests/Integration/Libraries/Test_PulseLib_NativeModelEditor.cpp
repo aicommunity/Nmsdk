@@ -1104,6 +1104,125 @@ TEST(NativeLearnedState,BranchFourInputsExplicitPointFiveTolerance){LearnedBound
 TEST(NativeLearnedState,ClassicSixInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearner>(0,1.,2000,6);}
 TEST(NativeLearnedState,BranchSixSharedInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6);}
 
+enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial };
+template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label)
+{
+    EditingRig<Learner> rig(2000,1,"stopped_"+label);auto plan=TrainingPlan(rig);
+    if(scenario==StoppedCase::BudgetEarly)plan.maximumModelSeconds=.002;
+    if(scenario==StoppedCase::BudgetSearch)plan.search.maximumProbes=3;
+    if(scenario==StoppedCase::InvalidProbe)plan.probe.onPrepared=[](const auto&,const auto&) {
+        throw std::runtime_error("injected_stopped_probe_failure");
+    };
+    rig.learner->BeginNativeTraining(plan);bool changed=false;
+    for(unsigned ticks=0;;++ticks)
+    {
+        ASSERT_LT(ticks,40000u);const auto& service=rig.learner->NativeTrainingController();
+        if(service.State()==NativeTrainingState::Finished)break;
+        const bool partial=service.ReferencePackets().size()==1;
+        if(scenario==StoppedCase::ChangedPartial && partial && !changed)
+        {
+            auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
+            ASSERT_TRUE(channel);channel->Capacity=1.43e-9;changed=true;
+        }
+        if((scenario==StoppedCase::Early && ticks==10) || (scenario==StoppedCase::Partial && partial) ||
+           (scenario==StoppedCase::Search && service.Search() && service.Search()->AppliedEdits()>0) ||
+           (scenario==StoppedCase::Final && service.FinalPackets().size()==1))
+        {rig.learner->IsNeedToTrain=false;break;}
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    }
+    const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_FALSE(service.Certificate());
+    const auto expected=(scenario==StoppedCase::BudgetEarly || scenario==StoppedCase::BudgetSearch)?TrainingStatus::BudgetExhausted:
+        (scenario==StoppedCase::ChangedPartial?TrainingStatus::InvalidModel:
+         (scenario==StoppedCase::InvalidProbe?TrainingStatus::InvalidObservation:TrainingStatus::ExternalStop));
+    ASSERT_EQ(service.Outcome(),expected)<<service.Reason();
+    if(scenario==StoppedCase::Early || scenario==StoppedCase::BudgetEarly || scenario==StoppedCase::InvalidProbe)
+        EXPECT_TRUE(service.ReferencePackets().empty());
+    if(scenario==StoppedCase::Partial || scenario==StoppedCase::ChangedPartial)EXPECT_EQ(service.ReferencePackets().size(),1u);
+    if(scenario==StoppedCase::Search || scenario==StoppedCase::BudgetSearch || scenario==StoppedCase::Final)ASSERT_TRUE(service.References());
+    if(scenario==StoppedCase::Final)EXPECT_EQ(service.FinalPackets().size(),1u);
+    ASSERT_FALSE(service.ObservedPackets().empty());
+    const std::string implementation="native-stopped-boundary-fixture-v1";
+    const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    EXPECT_EQ(package["kind"],QJsonValue("timelearner_stopped_state"));EXPECT_TRUE(package["certificate"].isNull());
+    EXPECT_EQ(package["reason"].toString().toStdString(),service.Reason());
+    EXPECT_EQ(package["observed_packets"].toArray().size(),int(service.ObservedPackets().size()));
+    EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson().toStdString()),package);
+    Artifact(rig.name+"_stopped_state.json",QJsonDocument(package).toJson());
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    auto test=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(test);
+    test->Name="StoppedTest";UEPtr<UContainer> node=test;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);test->SetGlobalTimeStep(rig.frequency);
+    const auto imported=test->ImportNativeLearnedState(package,implementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
+    const auto& restored=test->NativeTrainingController();ASSERT_FALSE(restored.Certificate());
+    EXPECT_EQ(restored.Outcome(),expected);EXPECT_EQ(restored.Reason(),service.Reason());EXPECT_FALSE(test->IsNeedToTrain.GetData());
+    EXPECT_EQ(test->ReadNativeParameters(),rig.learner->ReadNativeParameters());
+    auto testNeuron=test->template GetComponentL<NPulseNeuron>("Neuron",true);
+    auto testSource=test->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(testNeuron);ASSERT_TRUE(testSource);
+    const auto importedRevision=[&]{return NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}})["sha256"].toString().toStdString();};
+    EXPECT_EQ(importedRevision(),rig.Revision());
+    const auto resign=[](QJsonObject value){value.remove("sha256");value["sha256"]=NmsdkTools::CanonicalModelDataSha256(value);return value;};
+    const auto reject=[&](QJsonObject value) {
+        const auto result=test->ImportNativeLearnedState(resign(value),implementation);
+        EXPECT_EQ(result.status,NativeModelBuildStatus::Rejected)<<result.reason;EXPECT_FALSE(result.modelMayHaveChanged);
+        EXPECT_EQ(importedRevision(),rig.Revision());EXPECT_FALSE(restored.Certificate());EXPECT_EQ(restored.Outcome(),expected);
+    };
+    auto corrupt=package;corrupt["training_outcome"]="exact";reject(corrupt);
+    corrupt=package;corrupt["certificate"]=QJsonObject{{"exact",true}};reject(corrupt);
+    corrupt=package;corrupt["reference_complete"]=!package["reference_complete"].toBool();reject(corrupt);
+    corrupt=package;corrupt["capture_revision"]="wrong-capture";reject(corrupt);
+    // Frozen evaluation uses the real native scheduler. Neither stopped model
+    // may restart its controller or manufacture a successful certificate.
+    std::vector<NativeProbeSample> originalFrames,importedFrames;
+    auto request=plan.probe;request.activeInput=0;request.inputId=plan.protocol.inputs[0].id;
+    request.baseModelRevision=rig.Revision();request.modelEpoch=restored.ModelEpoch();
+    request.specification.runId=rig.name+"/frozen";request.specification.trialId=rig.name+"/frozen/test";
+    request.specification.windows={plan.inputWindows[0]};request.onPrepared={};
+    auto observer=std::make_shared<NmsdkTools::ModelRevisionObserver>();
+    request.readModelRevision=[=]{return observer->Read(testNeuron.Get(),{{&testSource->Output,"burst"}}).toStdString();};
+    request.readFullModelRevision=[=]{return observer->Read(testNeuron.Get(),{{&testSource->Output,"burst"}},true).toStdString();};
+    request.onSample=[&](const auto& frame){importedFrames.push_back(frame);};test->QueueNativeProbe(std::move(request));
+    const auto originalProbe=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+        [&](const auto& frame){originalFrames.push_back(frame);});
+    ASSERT_EQ(originalProbe.status,NativeProbeStatus::Completed);const auto frozen=test->TakeNativeProbeResult();ASSERT_TRUE(frozen);
+    ASSERT_EQ(frozen->status,NativeProbeStatus::Completed);ASSERT_FALSE(originalFrames.empty());ASSERT_EQ(originalFrames.size(),importedFrames.size());
+    for(std::size_t i=0;i<originalFrames.size();++i)
+    {EXPECT_EQ(originalFrames[i].time,importedFrames[i].time);EXPECT_EQ(originalFrames[i].stimulus,importedFrames[i].stimulus);EXPECT_EQ(originalFrames[i].potentials,importedFrames[i].potentials);}
+    Artifact(rig.name+"_frozen_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*frozen)).toJson());
+    EXPECT_EQ(importedRevision(),rig.Revision());EXPECT_FALSE(restored.Certificate());
+    // A warm attempt is a new search from an explicit boundary, never a
+    // continuation of a half-integrated probe. Complete goals are retained.
+    const bool complete=bool(restored.References());const auto previousAttempt=restored.SessionAttempt();
+    const auto capture=complete?restored.References()->Inputs():std::vector<CapturedInputReference>{};
+    test->Reset();test->BeginNativeTraining(plan);
+    if(scenario==StoppedCase::ChangedPartial)
+    {
+        EXPECT_EQ(restored.State(),NativeTrainingState::Finished);EXPECT_EQ(restored.Outcome(),TrainingStatus::InvalidModel);
+        EXPECT_EQ(restored.Reason(),"incomplete_reference_capture_requires_original_model_or_explicit_cold_restart");
+        EXPECT_FALSE(restored.References());EXPECT_EQ(restored.SessionAttempt(),previousAttempt);
+    }
+    else
+    {
+        EXPECT_EQ(restored.SessionAttempt(),previousAttempt+1);EXPECT_FALSE(restored.Certificate());
+        if(complete){ASSERT_TRUE(restored.References());EXPECT_EQ(restored.References()->Inputs(),capture);EXPECT_EQ(restored.IssuedReferenceProbes(),0u);}
+        else EXPECT_FALSE(restored.References());
+        test->IsNeedToTrain=false;
+    }
+    Artifact(rig.name+"_restored_summary.json",QJsonDocument(EncodeNativeTrainingState(restored,importedRevision(),test->ReadNativeParameters())).toJson());
+}
+#define STOPPED_CASE(Name,Value) \
+TEST(NativeStoppedState,Classic##Name){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::Value,#Name);} \
+TEST(NativeStoppedState,Branch##Name){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::Value,#Name);}
+STOPPED_CASE(Early,Early)
+STOPPED_CASE(Partial,Partial)
+STOPPED_CASE(BudgetEarly,BudgetEarly)
+STOPPED_CASE(BudgetSearch,BudgetSearch)
+STOPPED_CASE(Search,Search)
+STOPPED_CASE(Final,Final)
+STOPPED_CASE(InvalidProbe,InvalidProbe)
+STOPPED_CASE(ChangedPartial,ChangedPartial)
+#undef STOPPED_CASE
+
 TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {
     EditingRig<NNeuronTimeLearner> rig(2000,1,"service_exact_warm");rig.learner->CalculateMode=0;
