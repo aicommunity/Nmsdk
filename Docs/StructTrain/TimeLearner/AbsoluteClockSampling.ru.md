@@ -58,13 +58,13 @@ planned duration с уже вычтенным absolute end-begin. Это отд�
 проверки requested window. Рабочая правка сравнивает absolute end с
 begin+requested duration; новый отрицательный контроль меняет duration на один
 sampling period. Старый A2 Python failure сохраняется, новые immutable data
-проверяются отдельно без повторного C++ запуска. M40 ASan A2 ещё выполняется.
+проверяются отдельно без повторного C++ запуска. M40 ASan A2 также завершил 52/52 C++ cases; corrected Python 25/25.
 
 Elder-1 corrected data audit A3 (Python aeff4a9d) завершён: 25/25 tests,
 восемь clock probes, шесть learned packages / 84 primary trials и 20 stopped
 packages / 66 primary trials. Все восемь clock CSV byte-exact к pre-fix baseline
 на каждом worker: исправление не меняет физическую динамику. M40 native clock
-группа прошла 8/8 под ASan; остальная seeded regression ещё работает.
+группа и весь seeded regression прошли под ASan (52/52 cases).
 
 [Elder-1 addressed package](../../../Reports/StructTrain/TimeLearner/s07-clock-fixed-elder1/README.md),
 `c964ebc6531461bb19f2fbb7f7751d3dfe8b4d74`, 1025 stored / 1023 raw hashes,
@@ -76,8 +76,11 @@ packages / 66 primary trials. Все восемь clock CSV byte-exact к pre-fi
 96766538 (от d4c0cf0 отличается только документацией) запущен на обоих workers
 в новых immutable runtime, без test-only clock seed. Прежние failed jobs
 подтверждены terminal, их каталоги и manifests сохранены. Новые три Rdk groups
-прошли, PulseLib parent работает. Приёмка и develop merge ещё не выполнены.
+прошли; PulseLib parent завершён: 442 cases, 432 pass / 10 helper skips /
+0 failures на каждом worker. Corrected full-data Python source 75e020f6:
+58/58 tests без skips. [Приёмка и артефакты](FullClockAcceptance.ru.md).
+PulseLib develop merge 32cb44bba481ca5ddb7d54e0288d5fa04695a9bb опубликован.
 
 Причинная связь с августовскими экспериментами
-не установлена; их визуальные 4/8–6/8 не отменяются. Этап 8 отложен до разбора
-текущей full-suite регрессии.
+не установлена; их визуальные 4/8–6/8 не отменяются. Full-suite sampling regression исправлена; новые recognition APIs проверяются
+отдельно и не получают автоматически приёмку всех режимов этапа 8.

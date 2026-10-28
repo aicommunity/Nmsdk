@@ -4,7 +4,7 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-## Принятая отправная точка develop
+## Предыдущая принятая отправная точка develop
 
 | Репозиторий | Опубликованный merge SHA |
 |---|---|
@@ -26,6 +26,23 @@ maintained CTest suites: PulseLib 397 cases, 387 pass / 10 skip / 0 failures;
 commit `43b16d63796cfa5ae8a886c69008af2ab333f231`; локально проверены 7 stored /
 5 raw hashes. Первая ошибка отсутствующего root object устранена явным fetch
 в тот же clone и сохранена как preparation error.
+
+## Новая приёмка stopped/domain/clock regression
+
+Normal full source aeff4a9d / PulseLib 96766538 завершён на обоих workers:
+4/4 maintained CTest groups, PulseLib 442 cases, 432 pass / 10 helper skips /
+0 failures. Исправленный independent Python harness 75e020f6 проверил 58/58
+cases без skips: 16 completed / 208 primary trials, 20 stopped / 66 trials,
+8 shifted-clock probes и 81 physical-domain record. Старый Python setup error
+«ровно четыре summaries» сохранён отдельно; новые cold/configured summaries
+анализируются дополнительно, обязательные baseline cases проверяются явно.
+
+Оба полных пакета опубликованы; локально проверены по 2552 stored / 2550 raw
+hashes. PulseLib merge develop `32cb44bba481ca5ddb7d54e0288d5fa04695a9bb`
+опубликован; его отличие от tested 96766538 — только документация. Корневая
+ветка приёмки записывает точный gitlink этого merge. Это приёмка указанной
+regression scope, не завершение этапов 4–8 или всего плана.
+[Источники и ограничения](FullClockAcceptance.ru.md).
 
 ## Последующие проверенные и рабочие подэтапы
 
@@ -102,9 +119,9 @@ comparison и отклоняет неразрешимый timestamp scale. Pytho
 Все восемь clock CSV на каждом worker byte-exact к baseline. Старые четыре
 Python subtest errors A2 сохранены: потребовалась также endpoint-проверка requested
 duration. Elder-1 package опубликован, 1025 stored / 1023 raw hashes проверены.
-M40 native seeded ASan ещё работает. Новый full normal gate aeff4a9d,
-`s07-clock-full-normal-a3`, работает на обоих workers в отдельных runtime;
-три Rdk groups pass, PulseLib parent не завершён. Приёмка ещё не пройдена.
+M40 native seeded ASan завершён: 52/52 native и 25/25 corrected Python. Новый full normal gate aeff4a9d,
+`s07-clock-full-normal-a3`, завершён на обоих workers; результаты новой
+приёмки приведены выше.
 [Причина, evidence и ограничения](AbsoluteClockSampling.ru.md).
 
 ## Незакрытый объём исходных этапов
@@ -115,9 +132,9 @@ M40 native seeded ASan ещё работает. Новый full normal gate aeff
 | 2 | Production runtime/worker protocol, полная loaded-library provenance, isolated builds всех нужных targets, воспроизводимый run bundle |
 | 3 | Сквозная schema/scorer/adapters matrix и единственный production verdict; повреждённые/неполные данные не дают PASS |
 | 4 | Полный охват lifecycle/storage/growth/heterogeneous physics, все поддерживаемые конфигурации и режимы |
-| 5 | Recognition/conversion/PostTune/calibration transfer, полный physical matrix; stopped-state merge; run-level diagnostics для аварийных nonfinite данных |
+| 5 | Recognition/conversion/PostTune/calibration transfer, полный physical matrix; run-level diagnostics для аварийных nonfinite данных |
 | 6 | Завершение общего controller/adapters, configured retarget/reconfiguration и всех совместимых режимов |
-| 7 | Приёмка dynamic N1 domains; N0 repeatability/quantization; полный поиск/recovery, physics/inhibition/C-trim matrix и честные причины остановки |
+| 7 | Полная mode/physics matrix dynamic N1 domains; N0 repeatability/quantization; полный поиск/recovery, physics/inhibition/C-trim matrix и честные причины остановки |
 | 8 | Immutable Solo→Recognition conversion, transactional PostTune, real-threshold calibration и независимый frozen Test |
 | 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, recognition analysis и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
 | 10 | ConditionSpec, fingerprints, owned-process leases/queues/cancellation и fail-closed Git publisher; удаление rsync/scp pipeline |
