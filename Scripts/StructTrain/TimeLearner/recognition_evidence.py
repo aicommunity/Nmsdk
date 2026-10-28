@@ -217,3 +217,51 @@ def load_case(path: Path) -> tuple:
     return (load(path), load_solo(path.with_name(stem + "_learned_state.json")),
             load(path.with_name(stem + "_recognition_probe_spec.json")),
             load(path.with_name(stem + "_recognition_roundtrip.json")), path.with_name(stem + "_recognition_roundtrip.csv"))
+
+
+def audit_fresh_recognition_transport(source_case: tuple, observation: dict, trace: Path) -> dict:
+    """Compare an actual fresh-process waveform with independently audited source data.
+
+    This verifies transport evidence, not process provenance, native XML execution
+    or recognition quality. Integration XML/runtime manifests establish execution.
+    """
+    try:
+        source_audit = audit_recognition_state(*source_case)
+        package, _, spec, _, paired_trace = source_case
+        require(set(observation) == {"kind", "schema_version", "trial_id", "model_revision", "complete",
+                "sample_count", "last_sample_time", "emitted", "soma_variation", "frozen_after", "scientific_verdict"},
+                "fresh_transport_field_set_mismatch")
+        require(observation["kind"] == "native_recognition_fresh_process_observation" and
+                type(observation["schema_version"]) is int and observation["schema_version"] == 1,
+                "unknown_fresh_transport_schema")
+        require(observation["complete"] is True and observation["emitted"] is True and
+                observation["scientific_verdict"] is None, "incomplete_fresh_transport")
+        require(observation["trial_id"] == spec["trial_id"] and observation["model_revision"] ==
+                observation["frozen_after"] == package["model_revision"], "fresh_transport_identity_mismatch")
+        channels = count(spec["channels"])
+        with paired_trace.open(encoding="utf-8", newline="") as stream:
+            source_rows = list(csv.reader(stream))
+        indices = [0, 1] + [3 + 2*i for i in range(channels)]
+        expected = [[row[i] for i in indices] for row in source_rows[1:]]
+        with trace.open(encoding="utf-8", newline="") as stream:
+            rows = list(csv.reader(stream))
+        header = ["time", "stimulus"] + [f"soma{i}" for i in range(channels)]
+        require(bool(rows) and rows[0] == header and all(len(row) == len(header) for row in rows[1:]),
+                "damaged_fresh_transport_csv")
+        values = [[float(item) for item in row] for row in rows[1:]]
+        require(len(values) == len(expected) == count(observation["sample_count"]) and
+                all(math.isfinite(item) for row in values for item in row), "invalid_fresh_transport_samples")
+        require(values == [[float(item) for item in row] for row in expected], "fresh_transport_waveform_mismatch")
+        variation = max(max(row[2+i] for row in values) - min(row[2+i] for row in values) for i in range(channels))
+        require(equal(observation["last_sample_time"], values[-1][0]) and
+                equal(observation["soma_variation"], variation) and variation > 1e-6, "fresh_transport_summary_mismatch")
+        projected = ",".join(header) + "\n" + "".join(",".join(row) + "\n" for row in expected)
+        return {"auditor_version": AUDITOR_VERSION, "source_audit": source_audit, "complete": True,
+                "sample_count": len(values), "waveform_values_exact": True,
+                "waveform_bytes_exact": trace.read_bytes() == projected.encode("utf-8"),
+                "frozen_model_revision": package["model_revision"], "native_import_verified": False,
+                "process_provenance_verified": False, "spikes_known": False, "evaluation_verdict": None}
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, IndexError, OverflowError, struct.error) as error:
+        raise EvidenceError("malformed_fresh_recognition_evidence:" + str(error)) from error
