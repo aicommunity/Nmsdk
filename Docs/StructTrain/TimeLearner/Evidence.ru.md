@@ -157,6 +157,17 @@ root a222ac7c4b386451137ef17e4a5a0af6996c8d9b разрешает actual executab
 соответствии заявленному ini ограничено. Full maintained CTest ещё проверяется;
 NativeLearnedState.ru.md.
 
+TL-033: sampling-gap comparison терял absolute timestamp scale при вычитании.
+Full root 157a5301 / PulseLib e875ca5 дал на каждом worker по 22 failures из
+430 PulseLib cases; три Rdk groups pass. Начало поздних probes >128 s делает
+roundoff delta больше прежнего допуска. Baseline f712e865 на двух workers,
+M40 ASan: девять ожидаемых failures из десяти; восемь реальных Classic/Branch
+probes при 131/1000000 s и 2000/20000 Hz, dropped-frame control pass.
+Рабочая PulseLib d4c0cf0 использует absolute endpoints в sampling/coverage и
+resolution guard; 52-case seeded regression и data audit пока выполняются.
+Это не принятое runtime исправление и не причинное объяснение августа.
+См. AbsoluteClockSampling.ru.md; все failure bundles опубликованы через Git.
+
 TL-032: explicit Default обоих learner сохранял EnableTrainingAudit=true.
 M40 ASan baseline root bde7032a2af0fe2c670453809f0baa50d25f7cd6 воспроизводит
 два failure, только на direct Default; ordinary Build/Reset и stock Return/Take

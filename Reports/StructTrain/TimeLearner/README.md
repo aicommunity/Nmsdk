@@ -13,6 +13,7 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Failed full gate: 22/430 failures per worker; real absolute-clock baseline 9/10 expected failures, mapped-process manifests retained | [Elder-1](s07-clock-failure-elder1/README.md), [M40 + ASan baseline](s07-clock-failure-m40/README.md) |
 | Physical domain schema 2: 22 native / 15 Python per worker; independent a/b/endpoints; aligned byte-exact 68 normal / 44 ASan trial controls | [Elder-1](s07-domain-physics-elder1/README.md), [M40 ASan](s07-domain-physics-m40/README.md), [aligned 2/20 kHz](s07-domain-physics-matrix-elder1/README.md) |
 | Maintained native analyze CLI: 20 tests and 27 actual calls per worker; I/O vs evidence status and explicit legacy adapter | [Elder-1 A2](s07-domain-cli-status-elder1/README.md), [M40 A2](s07-domain-cli-status-m40/README.md) |
 | Earlier read-only API/editor ASan A2 now terminal: all 12 pass; distinct from later controller/serialization sources | [M40 terminal supplement](s07-domain-preview-full-m40/README.md) |

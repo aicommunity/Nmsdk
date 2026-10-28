@@ -61,12 +61,14 @@ Learning/export regressions на каждом worker: 22/22 native, 9/9 Python,
 Все перечисленные hashes проверены локально, исходные данные доступны в Git.
 
 Полный проход четырёх maintained groups для root 157a5301 / PulseLib e875ca5
-работает на обоих workers: M40 `s07-domain-full-normal-a4`, Elder-1
-`s07-domain-full-normal-a5`. Elder-1 A4 остановился до тестов: в cache был
-выключен BUILD_TESTING и отсутствовали Rdk targets. A5 явно включает его;
-ошибка подготовки A4 сохранена. На обоих workers три Rdk groups уже прошли,
-PulseLib parent ещё работает. До terminal результата full run и проверки
-первичных данных подэтап не принят в develop.
+**завершён с отказом на обоих workers**: M40 `s07-domain-full-normal-a4`,
+Elder-1 `s07-domain-full-normal-a5`. Три Rdk groups pass; PulseLib parent:
+430 cases, 22 failures, 10 skips. Одинаковые отказы: configured Classic N1,
+six-input Branch transport и все 20 stopped-state controls. Native observations
+при absolute time >128 s получают ложный sample_gap. Подэтап не принят.
+Elder-1 A4 preparation failure из-за выключенного BUILD_TESTING сохранён отдельно.
+Full failure / targeted clock baseline опубликованы: Elder-1 2211 stored / 2209 raw,
+M40 2207 / 2205; контрольные суммы проверены локально.
 [Детали](DynamicResistanceDomains.ru.md).
 
 **Проверяемые основания N1 decisions** (`stage07/domain-decision-evidence`):
@@ -87,6 +89,16 @@ verdict всегда null. Code 0 не означает convergence. I/O process
 от invalid evidence. По 7 stored / 5 raw hashes проверены; native binary для
 этого подэтапа не перестраивался.
 [Границы подэтапа](DomainDecisionEvidence.ru.md).
+
+**Absolute-clock sampling regression** (`stage07/absolute-clock-sampling`):
+baseline f712e865 на обоих workers, M40 ASan: 9 failures из 10 cases, включая
+восемь реальных probes на двух origins и частотах. Dropped-frame control проходит.
+Рабочая PulseLib d4c0cf0 сохраняет масштаб absolute endpoints в sampling/coverage
+comparison и отклоняет неразрешимый timestamp scale. Python auditor version 4
+не переопределяет старые invalid flags. Проверка root 241db725: 52 selected cases,
+явный test-only initial clock 131 s, fresh-process stopped/import controls и
+независимый data audit — выполняется нормально и под ASan. Приёмка ещё не пройдена.
+[Причина, evidence и ограничения](AbsoluteClockSampling.ru.md).
 
 ## Незакрытый объём исходных этапов
 
