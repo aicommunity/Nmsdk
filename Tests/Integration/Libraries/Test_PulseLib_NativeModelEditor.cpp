@@ -578,6 +578,46 @@ template<class Learner> NativeTrainingPlan TrainingPlan(EditingRig<Learner>& rig
     return plan;
 }
 
+template<class Learner> void NativeResistanceDomainSearch()
+{
+    EditingRig<Learner> rig(2000,1,"effective_resistance_domain");auto plan=TrainingPlan(rig);
+    plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    for(auto& bound:plan.search.bounds)bound.maximumLength=bound.minimumLength;
+    plan.search.bounds[0].minimumResistance=.5e6;plan.search.bounds[0].maximumResistance=1.e9;
+    plan.search.maximumCandidatesPerInput=3;plan.search.resistanceSubdivisionDepth=0;
+    std::size_t observations=0;std::ostringstream trace;
+    plan.probe.onPrepared=[&](const auto&,const auto&) {
+        trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+    };
+    plan.probe.onSample=[&](const auto& frame) {
+        trace<<frame.time<<','<<frame.stimulus;for(double value:frame.potentials)trace<<','<<value;trace<<'\n';
+    };
+    plan.observationSink=[&](const auto& packet) {
+        const auto stem=rig.name+"_domain_trial_"+std::to_string(++observations);
+        Artifact(stem+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
+        Artifact(stem+".csv",QByteArray::fromStdString(trace.str()));
+    };
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,40000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();ASSERT_TRUE(service.Search())<<service.Reason();
+    Artifact(rig.name+"_domain_summary.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
+    EXPECT_GE(service.Search()->AppliedEdits(),1u);EXPECT_GE(service.Search()->Evidence().size(),2u);
+    for(const auto& rejected:service.Search()->Rejected())
+    {
+        EXPECT_EQ(rejected.reason.find("channel_step_not_certified_strictly_stable"),std::string::npos)
+            <<"candidate mesh must use effective physical domain: "<<rejected.reason;
+        EXPECT_EQ(rejected.reason.find("candidate_outside_effective_resistance_interval"),std::string::npos)
+            <<"candidate mesh must use effective physical domain: "<<rejected.reason;
+    }
+    // Convergence is reported from actual residuals, not required by this
+    // candidate-domain fixture in either direction.
+}
+TEST(NativeResistanceDomains,ClassicSearchUsesEffectiveDomain){NativeResistanceDomainSearch<NNeuronTimeLearner>();}
+TEST(NativeResistanceDomains,BranchSearchUsesEffectiveDomain){NativeResistanceDomainSearch<NNeuronTimeLearnerBranch>();}
+
 template<class Learner> void RunNativeTraining(int normalization,bool cold=false)
 {
     EditingRig<Learner> rig(2000,normalization,cold?"automatic_cold_service":"automatic_service",false,2,cold);
