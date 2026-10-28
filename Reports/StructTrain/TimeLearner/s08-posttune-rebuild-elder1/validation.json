@@ -1,0 +1,2046 @@
+{
+  "actual_live_mappings_snapshot_count": 26,
+  "baseline_build_kind": "normal",
+  "baseline_expected_failures": 8,
+  "baseline_pulselib": "593b69cf3754c85013527522757f380c04e2efe5",
+  "baseline_root": "8d23ed533b23f0bf25082545a174b5621292c794",
+  "build_kind": "normal",
+  "entire_stage8_complete": false,
+  "evaluation_verdict": null,
+  "host": "elder1",
+  "native_cases": 10,
+  "one_pass_stimuli_verified": true,
+  "paired_samples": 10090,
+  "python_tests": 7,
+  "raw_before_after_samples": 20180,
+  "raw_files": {
+    "s08-posttune-native-baseline-a1/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-baseline-a1/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "6197ca901ca0c34249cfc0e571fb393362a275cf312080031524cc346d07c837"
+    },
+    "s08-posttune-native-baseline-a1/build.log": {
+      "bytes": 3246,
+      "sha256": "49ef1ac2b1a79e83fe94e208a7bf9f44442cc13fc67f727e72e156fb08e61eea"
+    },
+    "s08-posttune-native-baseline-a1/checkout.log": {
+      "bytes": 777,
+      "sha256": "fbbebbe005c55e5794f0597021059755516e0e069c7df9fd574755d3b59a15c3"
+    },
+    "s08-posttune-native-baseline-a1/configure.log": {
+      "bytes": 1194,
+      "sha256": "5884db4bfb1bf2eb9c1dca09007485e6e9fe8efdd0174e0764727d5119e95330"
+    },
+    "s08-posttune-native-baseline-a1/controller.log": {
+      "bytes": 21636,
+      "sha256": "d5ef731f402fb28e1b748dd18998430969d75fb89bcb274fb143899024eef993"
+    },
+    "s08-posttune-native-baseline-a1/controller.xml": {
+      "bytes": 45160,
+      "sha256": "ea82f4f8006d0c721530563999a81ecf366f5996cfa062b5fe37bdad1f68e49c"
+    },
+    "s08-posttune-native-baseline-a1/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "cc9f77dd74b2c2317d082b40d9b1038e703adfd33cc7990b7835ddac0022b3ad"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 195346,
+      "sha256": "94d40fe41754ba799e1e36579d72eb63c2a63028b7d390e5d681a4d1576ae754"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 195346,
+      "sha256": "94d40fe41754ba799e1e36579d72eb63c2a63028b7d390e5d681a4d1576ae754"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 132574,
+      "sha256": "eceff405a66f94d8587e567eb641a891e2851d35966a86f0e268fe423e38d8ab"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 499,
+      "sha256": "de55a4dd26e216c45db5aea3214ebc71a38ab600d2129d4487ed55e08c54c6a2"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 630,
+      "sha256": "b767394f753237e248b0d4a7a308c0cd565efe235574267f206508abd1f3b6b7"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7208fa3575eb2790d6904f5b2b24dc7b48e9e17398d77f48fb6e5d13c95b8f2d"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_20000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "d2f48b3d65fb51ff07a3114f19533f315255e9c12fc611bbe6ac2718c516f988"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 195246,
+      "sha256": "ae8c4d4608c5cd297b846255671bac6fda3102e13e5361520aec2d84eae070c8"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 195246,
+      "sha256": "ae8c4d4608c5cd297b846255671bac6fda3102e13e5361520aec2d84eae070c8"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode0_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode0_before_observation.json": {
+      "bytes": 498,
+      "sha256": "88f5c3ba93ad536416261cf393c3150b8e68a506e754e2067b45a84d77d0aee3"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode0_before_spec.json": {
+      "bytes": 629,
+      "sha256": "8be363647c00d0cb1524e18c890031aa0194ad4ea1a96dfcd81a156f2b4f9a37"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "306f5648f61498af88daef535f3ff80d052fb717609759a2fdbf071241aaff57"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode0_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode0_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode1_before.csv": {
+      "bytes": 13220,
+      "sha256": "5f4b23e919accdec1191488401cb58feb922a3ee85b4abc0a891f7120895b478"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode1_before_observation.json": {
+      "bytes": 499,
+      "sha256": "0c227fab87bc4558f8af0eedb7925bdda3d22d90a13164419e57e35e1eda3c5a"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode1_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9c525d454614993b4efca5bf86ead7bbf32dcc4f515fb8a2fce33f5c68de0fec"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode1_construction.json": {
+      "bytes": 134,
+      "sha256": "9689542ad5ceba0b8858be652ebe04b065f2de34fc062df6e5c4473efedbe574"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode1_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode1_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode2_before.csv": {
+      "bytes": 13240,
+      "sha256": "54cefc4e7d9457ff7411003b48ec4c2094996a3f25e6aaeff242bbf30986dd68"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode2_before_observation.json": {
+      "bytes": 499,
+      "sha256": "3b4d172dd659473e21c519ee60597625e4e1e30e12b58cf15e390bfd48e98cce"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode2_before_spec.json": {
+      "bytes": 629,
+      "sha256": "7c4e5885dc9fd4d4565700ebc8200132385a2995d5785eb3b6caa2ec0580504e"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode2_construction.json": {
+      "bytes": 134,
+      "sha256": "77702244dbac312f9a582805aec96d27ebd8772f5d0bc2207a5d07738c0080f8"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode2_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode2_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 498,
+      "sha256": "3df16bf19bbe8853adf95c7935218cf149788fc3ddab9fe8bd5887683fc12603"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9f69903120b725a8d50417ab3e165793512ab5e8b70f6226dae3251f4ecb42ef"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7d7e9529b8338947ef4401fe19557798b1c467b88e1d274ea525e0274efc4667"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode4_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode4_before_observation.json": {
+      "bytes": 498,
+      "sha256": "36557545c441c42addd650c3a3b165731be2ae4bde9ab1ff36ccce428c0b26fb"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode4_before_spec.json": {
+      "bytes": 629,
+      "sha256": "2534589f24c524b1a20711d455abc82e653d8950e147d79c932aa589bac65e67"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode4_construction.json": {
+      "bytes": 134,
+      "sha256": "6994a34d57fd809a02b2e0ec5961177e2c109b9fccd25743c10e99ed9823c280"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode4_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-baseline-a1/native/Branch_2000_N1_posttune_native_mode4_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-baseline-a1/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-baseline-a1/runtime.json": {
+      "bytes": 7596,
+      "sha256": "a4b7c2df9f4d9f512112726c237d3a4c315209b6b27c1d639f31aac218fc6f6a"
+    },
+    "s08-posttune-native-baseline-a2/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-baseline-a2/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "c7ccfaa52d57729429488d07d949728411bb4bda1326253495825e404cf8cdc9"
+    },
+    "s08-posttune-native-baseline-a2/build.log": {
+      "bytes": 2990,
+      "sha256": "0687c4656a79818e313bb6d0132affc37e65c78e59e0eedcdfb1ed2732c4252f"
+    },
+    "s08-posttune-native-baseline-a2/checkout.log": {
+      "bytes": 654,
+      "sha256": "8e12ec5a13cffa99144b2fe4a365af76f2f810248969bcfc6cbfd01f63328721"
+    },
+    "s08-posttune-native-baseline-a2/configure.log": {
+      "bytes": 1194,
+      "sha256": "f5cb67d73172edfe869d0bdcfce5466202a2ef868dca34b823a4115ee8ff318b"
+    },
+    "s08-posttune-native-baseline-a2/controller.log": {
+      "bytes": 24599,
+      "sha256": "d5ee7ffc91a547452f85e6a48ee2898773f3abee132c40c4205d6993dffacbf7"
+    },
+    "s08-posttune-native-baseline-a2/controller.xml": {
+      "bytes": 51429,
+      "sha256": "03e37f0b355f9295bfedf0dd49ab35f0636ff9e2e6be9fcc9a4182fb4368680d"
+    },
+    "s08-posttune-native-baseline-a2/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N0_posttune_native_mode0_before.csv": {
+      "bytes": 131286,
+      "sha256": "9d8d01a7c02551769e613416606fd4ebc7e7bbaccfd62f08933e119637536bd8"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N0_posttune_native_mode0_before_observation.json": {
+      "bytes": 500,
+      "sha256": "65888b4d6f20c5e99d1ee52b98a4833e204ebfd03ff7b36a77c4650a9cee00bf"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N0_posttune_native_mode0_before_spec.json": {
+      "bytes": 630,
+      "sha256": "9f83de93cda2f9ca07ca99d53bf5d17c5b8ff41447c8e645c04d3b15c01a5219"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "20e7166f4a9348e171e7b4d6c12295d1d82b9cf0457c6a70b59063239ec997a9"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 209448,
+      "sha256": "7cc415a04b0214035e3fba554586d6efa54378df16eb70f7f8a5de1f0839cab2"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 209448,
+      "sha256": "7cc415a04b0214035e3fba554586d6efa54378df16eb70f7f8a5de1f0839cab2"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 132574,
+      "sha256": "eceff405a66f94d8587e567eb641a891e2851d35966a86f0e268fe423e38d8ab"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 499,
+      "sha256": "de55a4dd26e216c45db5aea3214ebc71a38ab600d2129d4487ed55e08c54c6a2"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 630,
+      "sha256": "b767394f753237e248b0d4a7a308c0cd565efe235574267f206508abd1f3b6b7"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7208fa3575eb2790d6904f5b2b24dc7b48e9e17398d77f48fb6e5d13c95b8f2d"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_20000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N0_posttune_native_mode0_before.csv": {
+      "bytes": 12917,
+      "sha256": "3400104d17c711606e2832548fa3511fac1dc5d62e996ab55296e203c214bb81"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N0_posttune_native_mode0_before_observation.json": {
+      "bytes": 498,
+      "sha256": "18de7e615aa4f6a1e95b09cddc0f6caf9542fa84ba84e70a872429f98c12dc54"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N0_posttune_native_mode0_before_spec.json": {
+      "bytes": 629,
+      "sha256": "1132c039146f4fbd2355b0454f8f33eaaf58c384264a0f828e227406f038c9c3"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "bf2a769ff0bf69bf29f891b48fad53a6ce8021f20230a90495541a633fd8f7fd"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 209342,
+      "sha256": "63e704ac9999035734415a664e2ca10fc17e406053b97419db4c4c9fe04b7db9"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 209342,
+      "sha256": "63e704ac9999035734415a664e2ca10fc17e406053b97419db4c4c9fe04b7db9"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode0_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode0_before_observation.json": {
+      "bytes": 498,
+      "sha256": "88f5c3ba93ad536416261cf393c3150b8e68a506e754e2067b45a84d77d0aee3"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode0_before_spec.json": {
+      "bytes": 629,
+      "sha256": "8be363647c00d0cb1524e18c890031aa0194ad4ea1a96dfcd81a156f2b4f9a37"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "306f5648f61498af88daef535f3ff80d052fb717609759a2fdbf071241aaff57"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode0_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode0_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode1_before.csv": {
+      "bytes": 13220,
+      "sha256": "5f4b23e919accdec1191488401cb58feb922a3ee85b4abc0a891f7120895b478"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode1_before_observation.json": {
+      "bytes": 499,
+      "sha256": "0c227fab87bc4558f8af0eedb7925bdda3d22d90a13164419e57e35e1eda3c5a"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode1_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9c525d454614993b4efca5bf86ead7bbf32dcc4f515fb8a2fce33f5c68de0fec"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode1_construction.json": {
+      "bytes": 134,
+      "sha256": "9689542ad5ceba0b8858be652ebe04b065f2de34fc062df6e5c4473efedbe574"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode1_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode1_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode2_before.csv": {
+      "bytes": 13240,
+      "sha256": "54cefc4e7d9457ff7411003b48ec4c2094996a3f25e6aaeff242bbf30986dd68"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode2_before_observation.json": {
+      "bytes": 499,
+      "sha256": "3b4d172dd659473e21c519ee60597625e4e1e30e12b58cf15e390bfd48e98cce"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode2_before_spec.json": {
+      "bytes": 629,
+      "sha256": "7c4e5885dc9fd4d4565700ebc8200132385a2995d5785eb3b6caa2ec0580504e"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode2_construction.json": {
+      "bytes": 134,
+      "sha256": "77702244dbac312f9a582805aec96d27ebd8772f5d0bc2207a5d07738c0080f8"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode2_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode2_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 498,
+      "sha256": "3df16bf19bbe8853adf95c7935218cf149788fc3ddab9fe8bd5887683fc12603"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9f69903120b725a8d50417ab3e165793512ab5e8b70f6226dae3251f4ecb42ef"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7d7e9529b8338947ef4401fe19557798b1c467b88e1d274ea525e0274efc4667"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode4_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode4_before_observation.json": {
+      "bytes": 498,
+      "sha256": "36557545c441c42addd650c3a3b165731be2ae4bde9ab1ff36ccce428c0b26fb"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode4_before_spec.json": {
+      "bytes": 629,
+      "sha256": "2534589f24c524b1a20711d455abc82e653d8950e147d79c932aa589bac65e67"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode4_construction.json": {
+      "bytes": 134,
+      "sha256": "6994a34d57fd809a02b2e0ec5961177e2c109b9fccd25743c10e99ed9823c280"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode4_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-baseline-a2/native/Branch_2000_N1_posttune_native_mode4_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-baseline-a2/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-baseline-a2/runtime.json": {
+      "bytes": 7596,
+      "sha256": "81012542219fe37bed351e716400c77d9cf13482ed3942e8ad58d7a63db72491"
+    },
+    "s08-posttune-native-normal-a1/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-normal-a1/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "98fdc52c2f601ca58ee397ac5dfe86d043e133010651de80869817d3cd4ab19e"
+    },
+    "s08-posttune-native-normal-a1/build.log": {
+      "bytes": 6524,
+      "sha256": "49d94ee3c07c9444c6c55986c08a10fad3c9d5664c9a555b8342caada8dd4ecc"
+    },
+    "s08-posttune-native-normal-a1/checkout.log": {
+      "bytes": 791,
+      "sha256": "6c4b57b5a2dd0c2578026cc78e5c6495d897ab13397fb529b26746160f1af22e"
+    },
+    "s08-posttune-native-normal-a1/configure.log": {
+      "bytes": 1202,
+      "sha256": "ac8f755b4e3fd71b3fadb13adcd783e64eed6dc627e11812c9ef3a919c3c48d4"
+    },
+    "s08-posttune-native-normal-a1/controller.log": {
+      "bytes": 9101,
+      "sha256": "69db18ce9d735a5985db8bbfd1c82d0d90e4e2719bfac036ea48aa919f4f1aa1"
+    },
+    "s08-posttune-native-normal-a1/controller.xml": {
+      "bytes": 18522,
+      "sha256": "81046fa52229fe01c2ebca8600f4a81269bc021a4ff2e98ffa7bf9f7e9c9b17c"
+    },
+    "s08-posttune-native-normal-a1/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_20000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7208fa3575eb2790d6904f5b2b24dc7b48e9e17398d77f48fb6e5d13c95b8f2d"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_20000_N1_posttune_native_mode3_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_20000_N1_posttune_native_mode3_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_20000_N1_posttune_native_mode3_probe_2.json": {
+      "bytes": 289,
+      "sha256": "d6d6fda3149cc8150e5729f84b8074953fcce344b44ef0c920bdaa6a8a1fbe9b"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_20000_N1_posttune_native_mode3_probe_2_evidence.json": {
+      "bytes": 1412,
+      "sha256": "f08fde6ac5b23741a2bade79ba94fee4f500c125376e3745863e2f8233ca4bab"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_20000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_20000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "306f5648f61498af88daef535f3ff80d052fb717609759a2fdbf071241aaff57"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode0_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode0_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode0_probe_2.json": {
+      "bytes": 288,
+      "sha256": "3cc8b0cdaa6c0b9bddec4e8d29b9b848f5761a7d9336a0547f2e7aa4506b2bc1"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode0_probe_2_evidence.json": {
+      "bytes": 1410,
+      "sha256": "f07716e57957b2f0770d6faceae4ade3aa0afc77bf2e5a0cdd5594755e176c0a"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode0_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode0_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode1_construction.json": {
+      "bytes": 134,
+      "sha256": "9689542ad5ceba0b8858be652ebe04b065f2de34fc062df6e5c4473efedbe574"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode1_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode1_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode1_probe_2.json": {
+      "bytes": 288,
+      "sha256": "12ab97fee5b400acedf232f3bc1b871ca652fcacac25bfab609e5ea0e2e5322f"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode1_probe_2_evidence.json": {
+      "bytes": 1410,
+      "sha256": "9a447b95a456282e6aac8b2ac83e20777f24551cdb2324ce1ab8d086bdb84979"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode1_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode1_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode2_construction.json": {
+      "bytes": 134,
+      "sha256": "77702244dbac312f9a582805aec96d27ebd8772f5d0bc2207a5d07738c0080f8"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode2_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode2_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode2_probe_2.json": {
+      "bytes": 288,
+      "sha256": "ac21081c7369e36094ccb766fb6815c2837111ba7b89087465ebfbd0c30c9999"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode2_probe_2_evidence.json": {
+      "bytes": 1410,
+      "sha256": "32e28113560a3270e405d372fd76ba39a4d6e52ace0d2d23aaa5b9f44a6cd974"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode2_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode2_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7d7e9529b8338947ef4401fe19557798b1c467b88e1d274ea525e0274efc4667"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_listener_construction.json": {
+      "bytes": 134,
+      "sha256": "59671b88d22d6d293b05e966918aec5b82956e8554d9729c97b516b9ab5e7bd5"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_listener_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_listener_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_listener_probe_2.json": {
+      "bytes": 297,
+      "sha256": "d3045cea53d6e632e8b4dbe16fc533fb0db7c7c6f7803e5f3a71e55b95564cc6"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_listener_probe_2_evidence.json": {
+      "bytes": 1428,
+      "sha256": "1a4a08cb72ce87b4f31a32da8f83ccdb621aa0ec88738b2fe9426c029ed7f37f"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_listener_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_listener_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_probe_2.json": {
+      "bytes": 288,
+      "sha256": "82b22e7261e358fef06bba116416a721774f61c74d7f058401475c5a9cd6961d"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_probe_2_evidence.json": {
+      "bytes": 1410,
+      "sha256": "ad503f89eb57e8600d4947685d0512dc42e083fe3540ea49caa13a6001ac0bca"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_rollback_construction.json": {
+      "bytes": 134,
+      "sha256": "fe01e05b35d52f4d6c23f0a9db962d5fe131db887c08284cac1ffe3d5d1afafe"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_rollback_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_rollback_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_rollback_probe_2.json": {
+      "bytes": 297,
+      "sha256": "a5da315be9ee7ba58c95a4a4187d59853c4dc4b6e46c5ca6d336885beec79741"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_rollback_probe_2_evidence.json": {
+      "bytes": 1428,
+      "sha256": "daf95fafbebf02b7e3e294394799410c4ae6602b9592628a8c736049461e6f99"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode4_construction.json": {
+      "bytes": 134,
+      "sha256": "6994a34d57fd809a02b2e0ec5961177e2c109b9fccd25743c10e99ed9823c280"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode4_observer_counts_2.json": {
+      "bytes": 45,
+      "sha256": "d190c02337d67699b5df62ec95edece1537a57d50d65942e71f93b06c5845d87"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode4_probe_2.csv": {
+      "bytes": 20,
+      "sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode4_probe_2.json": {
+      "bytes": 288,
+      "sha256": "8be2847a1939f8f4eb4bdc84e7bbea4610e12a04e38820d49563fa04de295155"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode4_probe_2_evidence.json": {
+      "bytes": 1410,
+      "sha256": "ed5a61222b97f5e86bed5f76372f27617bc0cf240443cfed3fc3803a9d9e8203"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode4_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a1/native/Branch_2000_N1_posttune_native_mode4_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a1/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-normal-a1/runtime.json": {
+      "bytes": 7587,
+      "sha256": "329681e10fbf98ab7917f437e41eafd466c170e38299a6b42bc6584a79043c72"
+    },
+    "s08-posttune-native-normal-a2/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-normal-a2/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "096652352f952fccf80325417586dfe89c268e77cd1ca15eefbf4320dc6ef337"
+    },
+    "s08-posttune-native-normal-a2/build.log": {
+      "bytes": 3103,
+      "sha256": "1c41e0ad3d2dfbde754c950674442d480c028487cfa58a61c799908dba638688"
+    },
+    "s08-posttune-native-normal-a2/checkout.log": {
+      "bytes": 810,
+      "sha256": "7c27afe868053faa495989bc16032000481e0fbfa3a3006ec886944b005da8e0"
+    },
+    "s08-posttune-native-normal-a2/configure.log": {
+      "bytes": 1202,
+      "sha256": "d0a441e1373a538787f3136ffaf0816fc46b361601daa6ae07db5c0370f7022e"
+    },
+    "s08-posttune-native-normal-a2/controller.log": {
+      "bytes": 2038,
+      "sha256": "3e03de37af30f0780b59c0d698577789971c36ffc1bc4a2594854e7c9189ab62"
+    },
+    "s08-posttune-native-normal-a2/controller.xml": {
+      "bytes": 2747,
+      "sha256": "060347bf3829b9de46073db7d6651256f180aeaf4b8ffca297e13418fb616c5a"
+    },
+    "s08-posttune-native-normal-a2/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_after.csv": {
+      "bytes": 131963,
+      "sha256": "0c7610161f5ae38cf8329a57a63f4fe5194a893ab11262cb0f70e49f2267b95e"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_after_observation.json": {
+      "bytes": 499,
+      "sha256": "81b3bc776ac301bbf787125ba44e8769261afee186434424494739e35d433f41"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_after_spec.json": {
+      "bytes": 536,
+      "sha256": "316ac57ecd3c305d7071ebcc8d93d707691f27b25457bbaab0cd571d74249306"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 131963,
+      "sha256": "0c7610161f5ae38cf8329a57a63f4fe5194a893ab11262cb0f70e49f2267b95e"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 500,
+      "sha256": "b749a3fea16700e74437a723b9c1057eaa5ab8eb650616ef698d5134945e56a2"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 537,
+      "sha256": "9b073a44c10e70e554fd0a0516a27bec4544270fcb7d230604d6e3c42c5b59ba"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7208fa3575eb2790d6904f5b2b24dc7b48e9e17398d77f48fb6e5d13c95b8f2d"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_reconstruction.json": {
+      "bytes": 245818,
+      "sha256": "18e6bd2989fb90e297c003f18c50f50aefc1ddaea074ffa42b2acaa5ece6d8a2"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_20000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_after.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_after_observation.json": {
+      "bytes": 497,
+      "sha256": "5071cf5a9101515d390b4b7959539d66961ea82b68cc614aa05d528ba2531d8d"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_after_spec.json": {
+      "bytes": 535,
+      "sha256": "b50201dea5bcb2529c4b0da229801deb62cc87ae62b44e326b86a687db45257d"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_before.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_before_observation.json": {
+      "bytes": 498,
+      "sha256": "8103965ea3a3d9406f3f662b7b66bdd78c388f521c2933c2b508be4c44e7aa3e"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_before_spec.json": {
+      "bytes": 536,
+      "sha256": "d4b99fa16e5705916ab250d13bf948af0f6316d1b841c3394e1718648fac2846"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "306f5648f61498af88daef535f3ff80d052fb717609759a2fdbf071241aaff57"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "f51de7881324a6bad91f104033783e3cbd9687ca8e4f968a1a9ebdc2133aa437"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode0_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_after.csv": {
+      "bytes": 13176,
+      "sha256": "39665042223b75b0bd5d76994c6979ecfc2d191135ff4de528e8ede7cc8c4ff5"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_after_observation.json": {
+      "bytes": 498,
+      "sha256": "7a17623d6ba559530ef4255f560d33b0108ecb1d634ebe8667d586e846370d42"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_after_spec.json": {
+      "bytes": 535,
+      "sha256": "a76d667014620effdaa5b7ed284fa1b63b5f39b93fcc95731df5b18816e8d7c5"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_before.csv": {
+      "bytes": 13176,
+      "sha256": "39665042223b75b0bd5d76994c6979ecfc2d191135ff4de528e8ede7cc8c4ff5"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_before_observation.json": {
+      "bytes": 499,
+      "sha256": "8ebc9725d2642f7d059816a730a80cc850b9a2f0c8a767456e6896abcefffe76"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_before_spec.json": {
+      "bytes": 536,
+      "sha256": "86f6414a2d93d28bb596578f46930d556be1357346bcac6273e424ad03023d8c"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_construction.json": {
+      "bytes": 134,
+      "sha256": "9689542ad5ceba0b8858be652ebe04b065f2de34fc062df6e5c4473efedbe574"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "7c3dafcd244d54c3f61cc8a1a5fbf32b1195e85866f703856347920af536b366"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode1_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_after.csv": {
+      "bytes": 13201,
+      "sha256": "e2f31334ed4ebdd20d3bb2f1a141fa63afe488140fc7971e025fb9ae3ec5d64e"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_after_observation.json": {
+      "bytes": 498,
+      "sha256": "683f3c3dcb8a628fc44a452bebe65037627690861336ec895fef1e3b4ce39db7"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_after_spec.json": {
+      "bytes": 535,
+      "sha256": "15ed62d51f910c5c79bad4c24d18fe91b27f9c87de6e3fb4a5b450c227f9b7fb"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_before.csv": {
+      "bytes": 13201,
+      "sha256": "e2f31334ed4ebdd20d3bb2f1a141fa63afe488140fc7971e025fb9ae3ec5d64e"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_before_observation.json": {
+      "bytes": 499,
+      "sha256": "d51f364ab068e97f7a9be5f3feb4656330d1029558ebc582b15a71ef160d66dc"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_before_spec.json": {
+      "bytes": 536,
+      "sha256": "218df1e6c5174daeaeca7180391aede6b229bd950dbda7f8a614ac20abcedaaa"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_construction.json": {
+      "bytes": 134,
+      "sha256": "77702244dbac312f9a582805aec96d27ebd8772f5d0bc2207a5d07738c0080f8"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "a999523f0cb5049a8fce9086e7f0f4422235362e055f7881435123bb3e501623"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode2_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_after.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_after_observation.json": {
+      "bytes": 497,
+      "sha256": "c99fcc1ab686f03c708b85744ea1e450fe28362e87c8f2e165d4f7675d47812a"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_after_spec.json": {
+      "bytes": 535,
+      "sha256": "b7d9e0beadb085b35312cd3afe1ab43811a8e48e1c94259eb1d77adb14afeb18"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 498,
+      "sha256": "faee5f47af91220b50e6b2412c6f28efd2086d339cbe19730b90c860c10f4018"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 536,
+      "sha256": "998d15cb44296a7eccf420277d71f04b24ebb5c6c470e9416483b237f1dd8fdb"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7d7e9529b8338947ef4401fe19557798b1c467b88e1d274ea525e0274efc4667"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_after.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_after_observation.json": {
+      "bytes": 506,
+      "sha256": "35587dbb66d6bbf6c2458b4c32ae55e5dcd48e838e8047145993dcfa02a72509"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_after_spec.json": {
+      "bytes": 544,
+      "sha256": "c78bccca809287b866dda5b2c302af48679877c7eeb066cefe2ad28c612678b8"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_before.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_before_observation.json": {
+      "bytes": 507,
+      "sha256": "3d61dbbd1a0f73a7f6002bd58ad9f6d8aca74e2b96e6c2cae6b53c16fe65e9d1"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_before_spec.json": {
+      "bytes": 545,
+      "sha256": "5d154d5babec0d9ac5825c471051bb9979e75b5260203ad1cdd5c7e7c8ddc608"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_construction.json": {
+      "bytes": 134,
+      "sha256": "59671b88d22d6d293b05e966918aec5b82956e8554d9729c97b516b9ab5e7bd5"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_reconstruction.json": {
+      "bytes": 246440,
+      "sha256": "06daf155a0cf0bc2a8107847797466dae9842b5d1d6a6579c2002d0ae6b7ff3d"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_listener_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "6c4a7a3399e0d09a4115630f13e471f2a54fcdd74e2b4b51f049077f25f7f8ef"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_after.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_after_observation.json": {
+      "bytes": 506,
+      "sha256": "27365514348dc6031c52fea633d854c6623c24cb2b57703db1566551a14f9560"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_after_spec.json": {
+      "bytes": 544,
+      "sha256": "4b73a18baa222eb5fd4726e1f59a995b613b6ef27944eb58632b6db9b47d9050"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_before.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_before_observation.json": {
+      "bytes": 507,
+      "sha256": "ae7da42219cd4b6c63ca91e946810f14ec91ae315572a857dccc647e94da5a91"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_before_spec.json": {
+      "bytes": 545,
+      "sha256": "ca4d7a2e861123d03347868681baf5666b351237ceff7ac764b8b9fbaa8666f9"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_construction.json": {
+      "bytes": 134,
+      "sha256": "fe01e05b35d52f4d6c23f0a9db962d5fe131db887c08284cac1ffe3d5d1afafe"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_reconstruction.json": {
+      "bytes": 246440,
+      "sha256": "35410a44eb76d2ae2b93a4bf7cc410adbf5fa3a1e876a49ed619682366e8e0d0"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_after.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_after_observation.json": {
+      "bytes": 497,
+      "sha256": "c310fb2c324a99c020d721dc79c970f1d0abecc3149e03b842847a21d84d017f"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_after_spec.json": {
+      "bytes": 535,
+      "sha256": "243985b9f351f38d02561c3b5819864bfe015905f29b8b62cbabaf419e9ee37d"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_before.csv": {
+      "bytes": 12997,
+      "sha256": "31bf9dd062d8eb766254c61d0dca1e7cbdf99b3c138e7c849f4e38b5a044cc07"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_before_observation.json": {
+      "bytes": 498,
+      "sha256": "086ac3126414270e636b06a735689a076f4d90de2016931b6922420e090bff9c"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_before_spec.json": {
+      "bytes": 536,
+      "sha256": "d44a7dbbf69b24ece20b41e30e90f0c5f244e75f7ca9c4978343299a9e9d8a7f"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_construction.json": {
+      "bytes": 134,
+      "sha256": "6994a34d57fd809a02b2e0ec5961177e2c109b9fccd25743c10e99ed9823c280"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "090cab4a297c0e506e816efebb2cfe34d86c799d14c289e0c164dc39f62dbab0"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a2/native/Branch_2000_N1_posttune_native_mode4_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a2/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-normal-a2/python-evidence.log": {
+      "bytes": 9879,
+      "sha256": "9b40ef4d4e34e4de5b00ab50d630a908bced024ee26ff1856ddc07fd73ab17de"
+    },
+    "s08-posttune-native-normal-a2/runtime.json": {
+      "bytes": 7587,
+      "sha256": "9f6f560de1181def47186b2ac8cf8c2d07d7f4052289bc1a3eb29a1a4130aa1b"
+    },
+    "s08-posttune-native-normal-a3/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-normal-a3/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "96ec95c209abf24e2fdd0ced256e12b1272a15936b34947b9b0f27b8801de052"
+    },
+    "s08-posttune-native-normal-a3/build.log": {
+      "bytes": 2974,
+      "sha256": "e437ffbb5fc578b8158f4f7e5012be550c22300451328ef65f924126cc5dba85"
+    },
+    "s08-posttune-native-normal-a3/checkout.log": {
+      "bytes": 666,
+      "sha256": "e8601bdba2f939ddda6fa11359bb36bf7ebb45bb2deb26aac3fa5d258d4324f3"
+    },
+    "s08-posttune-native-normal-a3/configure.log": {
+      "bytes": 1202,
+      "sha256": "4e72fff64aac323beb2e8fd5adff8d5c027599092bd1bd9e54ddf820b8b34779"
+    },
+    "s08-posttune-native-normal-a3/controller.log": {
+      "bytes": 3223,
+      "sha256": "0e6e1a8aa4c7f88ac9cd0d95a4ec28b223c490f2e157ddf030647bc629adcad7"
+    },
+    "s08-posttune-native-normal-a3/controller.xml": {
+      "bytes": 4916,
+      "sha256": "576afe3195ba0173173632a02eba3422433cc28d776981d0ee5eb61b500108e6"
+    },
+    "s08-posttune-native-normal-a3/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "cc9f77dd74b2c2317d082b40d9b1038e703adfd33cc7990b7835ddac0022b3ad"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 195346,
+      "sha256": "94d40fe41754ba799e1e36579d72eb63c2a63028b7d390e5d681a4d1576ae754"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 195346,
+      "sha256": "94d40fe41754ba799e1e36579d72eb63c2a63028b7d390e5d681a4d1576ae754"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_after.csv": {
+      "bytes": 132574,
+      "sha256": "eceff405a66f94d8587e567eb641a891e2851d35966a86f0e268fe423e38d8ab"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_after_observation.json": {
+      "bytes": 498,
+      "sha256": "1077bc798062d7d91d1d711ef9bf4c20bceb3ba52dcf9c1ce419d625d05827da"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_after_spec.json": {
+      "bytes": 629,
+      "sha256": "619f475d80613c013e0ee5663dc46ddb9d05db3dfc7a1fcfe110a00001a366a0"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 132574,
+      "sha256": "eceff405a66f94d8587e567eb641a891e2851d35966a86f0e268fe423e38d8ab"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 499,
+      "sha256": "de55a4dd26e216c45db5aea3214ebc71a38ab600d2129d4487ed55e08c54c6a2"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 630,
+      "sha256": "b767394f753237e248b0d4a7a308c0cd565efe235574267f206508abd1f3b6b7"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7208fa3575eb2790d6904f5b2b24dc7b48e9e17398d77f48fb6e5d13c95b8f2d"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_reconstruction.json": {
+      "bytes": 245818,
+      "sha256": "18e6bd2989fb90e297c003f18c50f50aefc1ddaea074ffa42b2acaa5ece6d8a2"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_20000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "d2f48b3d65fb51ff07a3114f19533f315255e9c12fc611bbe6ac2718c516f988"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 195246,
+      "sha256": "ae8c4d4608c5cd297b846255671bac6fda3102e13e5361520aec2d84eae070c8"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 195246,
+      "sha256": "ae8c4d4608c5cd297b846255671bac6fda3102e13e5361520aec2d84eae070c8"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_after_observation.json": {
+      "bytes": 497,
+      "sha256": "4d6e14a8f3ac1f46d683bebb92af7514d1bc0dbaf0bc11bc644e6e89dfac1cfc"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_after_spec.json": {
+      "bytes": 628,
+      "sha256": "9d80b84118812d6f9e979000dda832daac8b93111ab30b670147957d95e74602"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_before_observation.json": {
+      "bytes": 498,
+      "sha256": "88f5c3ba93ad536416261cf393c3150b8e68a506e754e2067b45a84d77d0aee3"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_before_spec.json": {
+      "bytes": 629,
+      "sha256": "8be363647c00d0cb1524e18c890031aa0194ad4ea1a96dfcd81a156f2b4f9a37"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "306f5648f61498af88daef535f3ff80d052fb717609759a2fdbf071241aaff57"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "f51de7881324a6bad91f104033783e3cbd9687ca8e4f968a1a9ebdc2133aa437"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode0_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_after.csv": {
+      "bytes": 13220,
+      "sha256": "5f4b23e919accdec1191488401cb58feb922a3ee85b4abc0a891f7120895b478"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_after_observation.json": {
+      "bytes": 498,
+      "sha256": "ff47849c2d8496d1e59c594b904d5e68c520fea17b9a22eae93306293f99b15b"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_after_spec.json": {
+      "bytes": 628,
+      "sha256": "9e1f3b6979e0d7e0fc91bda4406addb3f46f9489277c4d0e385c50c4acc22786"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_before.csv": {
+      "bytes": 13220,
+      "sha256": "5f4b23e919accdec1191488401cb58feb922a3ee85b4abc0a891f7120895b478"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_before_observation.json": {
+      "bytes": 499,
+      "sha256": "0c227fab87bc4558f8af0eedb7925bdda3d22d90a13164419e57e35e1eda3c5a"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9c525d454614993b4efca5bf86ead7bbf32dcc4f515fb8a2fce33f5c68de0fec"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_construction.json": {
+      "bytes": 134,
+      "sha256": "9689542ad5ceba0b8858be652ebe04b065f2de34fc062df6e5c4473efedbe574"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "7c3dafcd244d54c3f61cc8a1a5fbf32b1195e85866f703856347920af536b366"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode1_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_after.csv": {
+      "bytes": 13240,
+      "sha256": "54cefc4e7d9457ff7411003b48ec4c2094996a3f25e6aaeff242bbf30986dd68"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_after_observation.json": {
+      "bytes": 498,
+      "sha256": "e2d0bbe182ad08ec3cd77626a73b52f864dbb1f125bc40f5fee8173aee97768e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_after_spec.json": {
+      "bytes": 628,
+      "sha256": "a9d68a42fec83fdf4f3d43ee936af499be24257fc152d94a92c7f2c2e0da66d9"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_before.csv": {
+      "bytes": 13240,
+      "sha256": "54cefc4e7d9457ff7411003b48ec4c2094996a3f25e6aaeff242bbf30986dd68"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_before_observation.json": {
+      "bytes": 499,
+      "sha256": "3b4d172dd659473e21c519ee60597625e4e1e30e12b58cf15e390bfd48e98cce"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_before_spec.json": {
+      "bytes": 629,
+      "sha256": "7c4e5885dc9fd4d4565700ebc8200132385a2995d5785eb3b6caa2ec0580504e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_construction.json": {
+      "bytes": 134,
+      "sha256": "77702244dbac312f9a582805aec96d27ebd8772f5d0bc2207a5d07738c0080f8"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "a999523f0cb5049a8fce9086e7f0f4422235362e055f7881435123bb3e501623"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode2_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_after_observation.json": {
+      "bytes": 497,
+      "sha256": "3a86edc290bce050d392d0afc03e90af3ab2be6d1498505cb0336f34f6d5ec3d"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_after_spec.json": {
+      "bytes": 628,
+      "sha256": "4b9f412bcc18e9a47e02e307e8be45d9e8973853243ef5e041a570c85bae9fe3"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 498,
+      "sha256": "3df16bf19bbe8853adf95c7935218cf149788fc3ddab9fe8bd5887683fc12603"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9f69903120b725a8d50417ab3e165793512ab5e8b70f6226dae3251f4ecb42ef"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7d7e9529b8338947ef4401fe19557798b1c467b88e1d274ea525e0274efc4667"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_after_observation.json": {
+      "bytes": 506,
+      "sha256": "5eb829efc9015db07a77b014d6d31a33d37af1ed44c81524c71b7550312bf9c0"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_after_spec.json": {
+      "bytes": 637,
+      "sha256": "5074819be509b02614b4465f827087d55ce0cc1dd13e931dc4c00bba6f1fd0c2"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_before_observation.json": {
+      "bytes": 507,
+      "sha256": "b778ed71f479c9f3e693f45580bac4c5858e8abeb401994cc49dbc64c660297e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_before_spec.json": {
+      "bytes": 638,
+      "sha256": "8056d7ff21180abe0473483461026af71a2f17d8dc7896f51766e9e17bccffdd"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_construction.json": {
+      "bytes": 134,
+      "sha256": "59671b88d22d6d293b05e966918aec5b82956e8554d9729c97b516b9ab5e7bd5"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_reconstruction.json": {
+      "bytes": 246440,
+      "sha256": "06daf155a0cf0bc2a8107847797466dae9842b5d1d6a6579c2002d0ae6b7ff3d"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_listener_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "6c4a7a3399e0d09a4115630f13e471f2a54fcdd74e2b4b51f049077f25f7f8ef"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_after_observation.json": {
+      "bytes": 506,
+      "sha256": "6743dbceee696a79476c30733c13758e2f87efb14b09384b27dd020503f050d1"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_after_spec.json": {
+      "bytes": 637,
+      "sha256": "1e3d3e025c30411e1f195d011c8654e87fc3eb81d6f81f68c00fe7d29b15487f"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_before_observation.json": {
+      "bytes": 507,
+      "sha256": "46261b19895e717f10d0722c2117de389400f091c0a9ed3f68a8d788b2887a33"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_before_spec.json": {
+      "bytes": 638,
+      "sha256": "ece4448ed3a98d1fbea04d7c4715be4864e2057db146921b2635e9a9eb0b56af"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_construction.json": {
+      "bytes": 134,
+      "sha256": "fe01e05b35d52f4d6c23f0a9db962d5fe131db887c08284cac1ffe3d5d1afafe"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_reconstruction.json": {
+      "bytes": 246440,
+      "sha256": "35410a44eb76d2ae2b93a4bf7cc410adbf5fa3a1e876a49ed619682366e8e0d0"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_after_observation.json": {
+      "bytes": 497,
+      "sha256": "d0bd82c92b4778ab19d2db079002d72615fa197a6a5812c627787e8a66ce9cac"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_after_spec.json": {
+      "bytes": 628,
+      "sha256": "2dfe5c7f8ff8e2f49151aa438ab4023ea02f388a7a8fc23048d283d4b8880c19"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_before_observation.json": {
+      "bytes": 498,
+      "sha256": "36557545c441c42addd650c3a3b165731be2ae4bde9ab1ff36ccce428c0b26fb"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_before_spec.json": {
+      "bytes": 629,
+      "sha256": "2534589f24c524b1a20711d455abc82e653d8950e147d79c932aa589bac65e67"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_construction.json": {
+      "bytes": 134,
+      "sha256": "6994a34d57fd809a02b2e0ec5961177e2c109b9fccd25743c10e99ed9823c280"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "090cab4a297c0e506e816efebb2cfe34d86c799d14c289e0c164dc39f62dbab0"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a3/native/Branch_2000_N1_posttune_native_mode4_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a3/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-posttune-native-normal-a3/runtime.json": {
+      "bytes": 7587,
+      "sha256": "15cce15a8324223b82484754ed9113f348356b897a7ad32bf27b23a777d41c15"
+    },
+    "s08-posttune-native-normal-a4/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-normal-a4/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "2d9339278a9b0d4b0ad9924f2679dfdc95273ede22465ef980f95452f1fde880"
+    },
+    "s08-posttune-native-normal-a4/build.log": {
+      "bytes": 2974,
+      "sha256": "fa7a5da883b5e24e60f8a62232da44a3e802dcb4d2f89633f98f7ce2b808e981"
+    },
+    "s08-posttune-native-normal-a4/checkout.log": {
+      "bytes": 648,
+      "sha256": "1842674eaf84fd0d46f824edf05140e9bc74b7882a32ab750dc2dd20c27404d5"
+    },
+    "s08-posttune-native-normal-a4/configure.log": {
+      "bytes": 1202,
+      "sha256": "0909345e39cc23c79dec06f7f6ed12645c9bf302eef3743158464257768ef919"
+    },
+    "s08-posttune-native-normal-a4/controller.log": {
+      "bytes": 2355,
+      "sha256": "7c778a7e76e439ced6fa101ac7dd1c74bcf14af59035ec22af6697368d6008b2"
+    },
+    "s08-posttune-native-normal-a4/controller.xml": {
+      "bytes": 3378,
+      "sha256": "2d5fd920e62a6d33f56a01ae990a417493f17c630f748497bd0f617b07c95b3c"
+    },
+    "s08-posttune-native-normal-a4/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-normal-a4/loaded-process-files.json": {
+      "bytes": 5288,
+      "sha256": "121e30993b2eea0b84eee50a6fa52e685ca1c9a2c53edb0b6ed48bdf4183ef57"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_after.csv": {
+      "bytes": 131286,
+      "sha256": "9d8d01a7c02551769e613416606fd4ebc7e7bbaccfd62f08933e119637536bd8"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_after_observation.json": {
+      "bytes": 499,
+      "sha256": "2e27e3f18d5db399590a7a6a42d73f5949fe04d640626b903c758882f26b4d2d"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_after_spec.json": {
+      "bytes": 629,
+      "sha256": "322617e15300e0e5b169cf13b92c24a956c48752d2005fff8cce972aaae9cb3a"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_before.csv": {
+      "bytes": 131286,
+      "sha256": "9d8d01a7c02551769e613416606fd4ebc7e7bbaccfd62f08933e119637536bd8"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_before_observation.json": {
+      "bytes": 500,
+      "sha256": "65888b4d6f20c5e99d1ee52b98a4833e204ebfd03ff7b36a77c4650a9cee00bf"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_before_spec.json": {
+      "bytes": 630,
+      "sha256": "9f83de93cda2f9ca07ca99d53bf5d17c5b8ff41447c8e645c04d3b15c01a5219"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "20e7166f4a9348e171e7b4d6c12295d1d82b9cf0457c6a70b59063239ec997a9"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_reconstruction.json": {
+      "bytes": 269050,
+      "sha256": "e81cf6d272b72fc5b237dd0d5f7b363c5147028752472536c4876a66baf80cb4"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 209448,
+      "sha256": "7cc415a04b0214035e3fba554586d6efa54378df16eb70f7f8a5de1f0839cab2"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 209448,
+      "sha256": "7cc415a04b0214035e3fba554586d6efa54378df16eb70f7f8a5de1f0839cab2"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_after.csv": {
+      "bytes": 132574,
+      "sha256": "eceff405a66f94d8587e567eb641a891e2851d35966a86f0e268fe423e38d8ab"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_after_observation.json": {
+      "bytes": 498,
+      "sha256": "1077bc798062d7d91d1d711ef9bf4c20bceb3ba52dcf9c1ce419d625d05827da"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_after_spec.json": {
+      "bytes": 629,
+      "sha256": "619f475d80613c013e0ee5663dc46ddb9d05db3dfc7a1fcfe110a00001a366a0"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 132574,
+      "sha256": "eceff405a66f94d8587e567eb641a891e2851d35966a86f0e268fe423e38d8ab"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 499,
+      "sha256": "de55a4dd26e216c45db5aea3214ebc71a38ab600d2129d4487ed55e08c54c6a2"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 630,
+      "sha256": "b767394f753237e248b0d4a7a308c0cd565efe235574267f206508abd1f3b6b7"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7208fa3575eb2790d6904f5b2b24dc7b48e9e17398d77f48fb6e5d13c95b8f2d"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_reconstruction.json": {
+      "bytes": 245818,
+      "sha256": "18e6bd2989fb90e297c003f18c50f50aefc1ddaea074ffa42b2acaa5ece6d8a2"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_20000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195352,
+      "sha256": "9c2f82af09601db5d3c3361626de0b3234dcb7ff8c8d9190c40406a5a8cd53c3"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_after.csv": {
+      "bytes": 12917,
+      "sha256": "3400104d17c711606e2832548fa3511fac1dc5d62e996ab55296e203c214bb81"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_after_observation.json": {
+      "bytes": 497,
+      "sha256": "b05475c89e774dabf10f6967663036519cb3168c5b243896814d2f752e7bb03a"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_after_spec.json": {
+      "bytes": 628,
+      "sha256": "57e781dbcc30abab73e2080a5b4074bac4a0c5e3170c38411aa018eaf39d063b"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_before.csv": {
+      "bytes": 12917,
+      "sha256": "3400104d17c711606e2832548fa3511fac1dc5d62e996ab55296e203c214bb81"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_before_observation.json": {
+      "bytes": 498,
+      "sha256": "18de7e615aa4f6a1e95b09cddc0f6caf9542fa84ba84e70a872429f98c12dc54"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_before_spec.json": {
+      "bytes": 629,
+      "sha256": "1132c039146f4fbd2355b0454f8f33eaaf58c384264a0f828e227406f038c9c3"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "bf2a769ff0bf69bf29f891b48fad53a6ce8021f20230a90495541a633fd8f7fd"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_reconstruction.json": {
+      "bytes": 268850,
+      "sha256": "7aaaf32b7511c32b40827c1b0b09d8a3e662de3d3d095d66c3a9e8137b78477f"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_startup_after.json": {
+      "bytes": 209342,
+      "sha256": "63e704ac9999035734415a664e2ca10fc17e406053b97419db4c4c9fe04b7db9"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N0_posttune_native_mode0_startup_before.json": {
+      "bytes": 209342,
+      "sha256": "63e704ac9999035734415a664e2ca10fc17e406053b97419db4c4c9fe04b7db9"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_after_observation.json": {
+      "bytes": 497,
+      "sha256": "4d6e14a8f3ac1f46d683bebb92af7514d1bc0dbaf0bc11bc644e6e89dfac1cfc"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_after_spec.json": {
+      "bytes": 628,
+      "sha256": "9d80b84118812d6f9e979000dda832daac8b93111ab30b670147957d95e74602"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_before_observation.json": {
+      "bytes": 498,
+      "sha256": "88f5c3ba93ad536416261cf393c3150b8e68a506e754e2067b45a84d77d0aee3"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_before_spec.json": {
+      "bytes": 629,
+      "sha256": "8be363647c00d0cb1524e18c890031aa0194ad4ea1a96dfcd81a156f2b4f9a37"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_construction.json": {
+      "bytes": 134,
+      "sha256": "306f5648f61498af88daef535f3ff80d052fb717609759a2fdbf071241aaff57"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "f51de7881324a6bad91f104033783e3cbd9687ca8e4f968a1a9ebdc2133aa437"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode0_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "731f4fb03d6bc3a744c27b1cb91f09abb264d242c9437292b3c4bc8aca328445"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_after.csv": {
+      "bytes": 13220,
+      "sha256": "5f4b23e919accdec1191488401cb58feb922a3ee85b4abc0a891f7120895b478"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_after_observation.json": {
+      "bytes": 498,
+      "sha256": "ff47849c2d8496d1e59c594b904d5e68c520fea17b9a22eae93306293f99b15b"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_after_spec.json": {
+      "bytes": 628,
+      "sha256": "9e1f3b6979e0d7e0fc91bda4406addb3f46f9489277c4d0e385c50c4acc22786"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_before.csv": {
+      "bytes": 13220,
+      "sha256": "5f4b23e919accdec1191488401cb58feb922a3ee85b4abc0a891f7120895b478"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_before_observation.json": {
+      "bytes": 499,
+      "sha256": "0c227fab87bc4558f8af0eedb7925bdda3d22d90a13164419e57e35e1eda3c5a"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9c525d454614993b4efca5bf86ead7bbf32dcc4f515fb8a2fce33f5c68de0fec"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_construction.json": {
+      "bytes": 134,
+      "sha256": "9689542ad5ceba0b8858be652ebe04b065f2de34fc062df6e5c4473efedbe574"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "7c3dafcd244d54c3f61cc8a1a5fbf32b1195e85866f703856347920af536b366"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode1_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "d5dcfef1387c5633c6419b8346e3b886e01eaa7cb00561516f21f706fc9bba18"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_after.csv": {
+      "bytes": 13240,
+      "sha256": "54cefc4e7d9457ff7411003b48ec4c2094996a3f25e6aaeff242bbf30986dd68"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_after_observation.json": {
+      "bytes": 498,
+      "sha256": "e2d0bbe182ad08ec3cd77626a73b52f864dbb1f125bc40f5fee8173aee97768e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_after_spec.json": {
+      "bytes": 628,
+      "sha256": "a9d68a42fec83fdf4f3d43ee936af499be24257fc152d94a92c7f2c2e0da66d9"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_before.csv": {
+      "bytes": 13240,
+      "sha256": "54cefc4e7d9457ff7411003b48ec4c2094996a3f25e6aaeff242bbf30986dd68"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_before_observation.json": {
+      "bytes": 499,
+      "sha256": "3b4d172dd659473e21c519ee60597625e4e1e30e12b58cf15e390bfd48e98cce"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_before_spec.json": {
+      "bytes": 629,
+      "sha256": "7c4e5885dc9fd4d4565700ebc8200132385a2995d5785eb3b6caa2ec0580504e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_construction.json": {
+      "bytes": 134,
+      "sha256": "77702244dbac312f9a582805aec96d27ebd8772f5d0bc2207a5d07738c0080f8"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "a999523f0cb5049a8fce9086e7f0f4422235362e055f7881435123bb3e501623"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode2_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "58dae4b983d323f4e9390cc81ff51038f5052a0db4a00606b9731e2bbacef8ff"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_after_observation.json": {
+      "bytes": 497,
+      "sha256": "3a86edc290bce050d392d0afc03e90af3ab2be6d1498505cb0336f34f6d5ec3d"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_after_spec.json": {
+      "bytes": 628,
+      "sha256": "4b9f412bcc18e9a47e02e307e8be45d9e8973853243ef5e041a570c85bae9fe3"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_before_observation.json": {
+      "bytes": 498,
+      "sha256": "3df16bf19bbe8853adf95c7935218cf149788fc3ddab9fe8bd5887683fc12603"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_before_spec.json": {
+      "bytes": 629,
+      "sha256": "9f69903120b725a8d50417ab3e165793512ab5e8b70f6226dae3251f4ecb42ef"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_construction.json": {
+      "bytes": 134,
+      "sha256": "7d7e9529b8338947ef4401fe19557798b1c467b88e1d274ea525e0274efc4667"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_after_observation.json": {
+      "bytes": 506,
+      "sha256": "5eb829efc9015db07a77b014d6d31a33d37af1ed44c81524c71b7550312bf9c0"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_after_spec.json": {
+      "bytes": 637,
+      "sha256": "5074819be509b02614b4465f827087d55ce0cc1dd13e931dc4c00bba6f1fd0c2"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_before_observation.json": {
+      "bytes": 507,
+      "sha256": "b778ed71f479c9f3e693f45580bac4c5858e8abeb401994cc49dbc64c660297e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_before_spec.json": {
+      "bytes": 638,
+      "sha256": "8056d7ff21180abe0473483461026af71a2f17d8dc7896f51766e9e17bccffdd"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_construction.json": {
+      "bytes": 134,
+      "sha256": "59671b88d22d6d293b05e966918aec5b82956e8554d9729c97b516b9ab5e7bd5"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_reconstruction.json": {
+      "bytes": 246440,
+      "sha256": "06daf155a0cf0bc2a8107847797466dae9842b5d1d6a6579c2002d0ae6b7ff3d"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_listener_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5ec99bd1651888f5f60bb3634bd6676d81fe1a2197bf336711f6d3bcdf15139f"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "6c4a7a3399e0d09a4115630f13e471f2a54fcdd74e2b4b51f049077f25f7f8ef"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_after_observation.json": {
+      "bytes": 506,
+      "sha256": "6743dbceee696a79476c30733c13758e2f87efb14b09384b27dd020503f050d1"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_after_spec.json": {
+      "bytes": 637,
+      "sha256": "1e3d3e025c30411e1f195d011c8654e87fc3eb81d6f81f68c00fe7d29b15487f"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_before_observation.json": {
+      "bytes": 507,
+      "sha256": "46261b19895e717f10d0722c2117de389400f091c0a9ed3f68a8d788b2887a33"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_before_spec.json": {
+      "bytes": 638,
+      "sha256": "ece4448ed3a98d1fbea04d7c4715be4864e2057db146921b2635e9a9eb0b56af"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_construction.json": {
+      "bytes": 134,
+      "sha256": "fe01e05b35d52f4d6c23f0a9db962d5fe131db887c08284cac1ffe3d5d1afafe"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_reconstruction.json": {
+      "bytes": 246440,
+      "sha256": "35410a44eb76d2ae2b93a4bf7cc410adbf5fa3a1e876a49ed619682366e8e0d0"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_after.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_rollback_startup_before.json": {
+      "bytes": 195666,
+      "sha256": "5d15f3ead181b46c1001fd5f86125e69e66c7b6d8b4186efc3a13d5256cde84e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode3_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "8bc4477b456284c842bc5203c37783732afc4e2f907f6d06a5d79b7786c95410"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_after.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_after_observation.json": {
+      "bytes": 497,
+      "sha256": "d0bd82c92b4778ab19d2db079002d72615fa197a6a5812c627787e8a66ce9cac"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_after_spec.json": {
+      "bytes": 628,
+      "sha256": "2dfe5c7f8ff8e2f49151aa438ab4023ea02f388a7a8fc23048d283d4b8880c19"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_before.csv": {
+      "bytes": 13062,
+      "sha256": "aedd4a4cb0a89a83428b8acece77fcd516c3b2491b943d8ced1486462dd1ca3e"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_before_observation.json": {
+      "bytes": 498,
+      "sha256": "36557545c441c42addd650c3a3b165731be2ae4bde9ab1ff36ccce428c0b26fb"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_before_spec.json": {
+      "bytes": 629,
+      "sha256": "2534589f24c524b1a20711d455abc82e653d8950e147d79c932aa589bac65e67"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_construction.json": {
+      "bytes": 134,
+      "sha256": "6994a34d57fd809a02b2e0ec5961177e2c109b9fccd25743c10e99ed9823c280"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_reconstruction.json": {
+      "bytes": 245630,
+      "sha256": "090cab4a297c0e506e816efebb2cfe34d86c799d14c289e0c164dc39f62dbab0"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_startup_after.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a4/native/Branch_2000_N1_posttune_native_mode4_startup_before.json": {
+      "bytes": 195252,
+      "sha256": "989ffc9d2a7915a3a23b509d03e133370787156ad916ebc3712789f7fc7d6728"
+    },
+    "s08-posttune-native-normal-a4/primary-audit.json": {
+      "bytes": 3724,
+      "sha256": "e0f248aa9c36f09a5d7a7ba6ca9579ce661438363dcfb57b820d494f20377547"
+    },
+    "s08-posttune-native-normal-a4/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-posttune-native-normal-a4/python-evidence.log": {
+      "bytes": 105,
+      "sha256": "11fd13aaac6e9346ee736ac310df0f8ab5e173f158c9b4dc9f18916869ea52e2"
+    },
+    "s08-posttune-native-normal-a4/runtime.json": {
+      "bytes": 7587,
+      "sha256": "da4fdd30243d27de56b44ff54494b1e485013109dafbd554cf794eb07b2138bc"
+    }
+  },
+  "root": "e7ee0104f5677e812ffd3b91c45074667ba1ffca",
+  "schema_version": 1,
+  "source_closure": {
+    "Bin": {
+      "head": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+      "recorded_gitlink": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "head": "d862127d849953b2c7928e87c803a016a0da06d9",
+      "recorded_gitlink": "d862127d849953b2c7928e87c803a016a0da06d9",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "head": "1812624ff75c60f03ad57c10b379d3e3848590bc",
+      "recorded_gitlink": "1812624ff75c60f03ad57c10b379d3e3848590bc",
+      "status": ""
+    },
+    "root": {
+      "head": "e7ee0104f5677e812ffd3b91c45074667ba1ffca",
+      "status": ""
+    }
+  },
+  "stages": [
+    {
+      "attempt": "s08-posttune-native-normal-a1",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "8",
+        "name": "AllTests",
+        "tests": "8",
+        "time": "1.372",
+        "timestamp": "2026-10-28T22:39:24.262"
+      },
+      "process_exit_status": 1
+    },
+    {
+      "attempt": "s08-posttune-native-normal-a2",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "8",
+        "time": "18.985",
+        "timestamp": "2026-10-28T22:46:49.635"
+      },
+      "process_exit_status": 1
+    },
+    {
+      "attempt": "s08-posttune-native-normal-a3",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "2",
+        "name": "AllTests",
+        "tests": "10",
+        "time": "49.071",
+        "timestamp": "2026-10-28T22:52:36.552"
+      },
+      "process_exit_status": 1
+    },
+    {
+      "attempt": "s08-posttune-native-normal-a4",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "10",
+        "time": "88.008",
+        "timestamp": "2026-10-28T22:59:17.742"
+      },
+      "process_exit_status": 0
+    },
+    {
+      "attempt": "s08-posttune-native-baseline-a1",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "8",
+        "name": "AllTests",
+        "tests": "8",
+        "time": "21.99",
+        "timestamp": "2026-10-28T22:54:48.833"
+      },
+      "process_exit_status": 1
+    },
+    {
+      "attempt": "s08-posttune-native-baseline-a2",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "8",
+        "name": "AllTests",
+        "tests": "8",
+        "time": "40.382",
+        "timestamp": "2026-10-28T23:00:08.416"
+      },
+      "process_exit_status": 1
+    }
+  ],
+  "whole_posttune_selection_verified": false
+}
