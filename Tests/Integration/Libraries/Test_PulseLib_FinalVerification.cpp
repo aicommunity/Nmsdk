@@ -27,18 +27,19 @@ PreparedVerificationProbe Prepared(const VerificationRequest& r)
 }
 ProbeObservation Observation(const VerificationProtocol& p,const PreparedVerificationProbe& context,
     const std::string& run,const std::string& trial,std::vector<double> raw={},
-    std::vector<int> centers={},double baseline=0.,bool plateau=false)
+    std::vector<int> centers={},double baseline=0.,bool plateau=false,double origin=0.,double period=.05)
 {
     const auto n=p.inputs.size();if(raw.empty())raw=Raw(n);if(centers.empty())centers.assign(n,12);
     const auto active=Index(p,context.inputId);const bool branch=p.routing==ProbeRouting::BranchSoloBurst;
     ProbeSpec s;s.runId=run;s.trialId=trial;s.sampleId=p.sampleId;s.patternHash=p.patternHash;
     s.schemaVersion=p.schemaVersion;s.stimulusProfile=p.stimulusProfile;s.waveAssignment=p.waveAssignment;
     s.peakSelection=p.peakSelection;
-    s.modelRevision=context.effectiveModelRevision;s.begin=0.;s.end=1.;s.maximumSampleGap=.05;
+    const double duration=20.*period;
+    s.modelRevision=context.effectiveModelRevision;s.begin=origin;s.end=origin+duration;s.maximumSampleGap=period;
     s.maximumSamples=21;s.minimumAmplitude=p.minimumAmplitude;s.expectedStimulusIds=p.stimulusIds;
     s.baseline.assign(branch?1:n,baseline);
     for(std::size_t i=0;i<n;++i)
-        if(!branch || i==active)s.windows.push_back({p.inputs[i].id,branch?0:i,0.,1.,p.inputs[i].stimulusId});
+        if(!branch || i==active)s.windows.push_back({p.inputs[i].id,branch?0:i,s.begin,s.end,p.inputs[i].stimulusId});
     ProbeRecorder recorder(s);
     for(int tick=0;tick<=20;++tick)
     {
@@ -50,10 +51,20 @@ ProbeObservation Observation(const VerificationProtocol& p,const PreparedVerific
                 if(plateau && tick==centers[i]+1)shape=1.;
                 values[branch?0:i]=baseline+(raw[i]-baseline)*shape;
             }
-        recorder.Observe(double(tick)/20.,values,context.effectiveModelRevision);
+        recorder.Observe(origin+double(tick)/20.*duration,values,context.effectiveModelRevision);
     }
-    for(std::size_t i=0;i<n;++i)recorder.RecordStimulus(p.stimulusIds[i],double(i+1)/20.);
-    return recorder.Close(1.,context.effectiveModelRevision,"window_closed");
+    for(std::size_t i=0;i<n;++i)recorder.RecordStimulus(p.stimulusIds[i],origin+double(i+1)/20.*duration);
+    return recorder.Close(s.end,context.effectiveModelRevision,"window_closed");
+}
+TEST(TimeLearnerClock,FinalMeasurementCoverageUsesAbsoluteEndpoints)
+{
+    for(double origin:{131.,1000000.})for(double period:{.0005,.00005})
+    {
+        auto protocol=Protocol(1);protocol.maximumSampleGap=period;
+        PreparedVerificationProbe context{protocol.routing,"i0",protocol.revision,"initial","effective",0};
+        const auto observation=Observation(protocol,context,"clock","clock_trial",{},{},0.,false,origin,period);
+        ASSERT_TRUE(observation.valid);EXPECT_NO_THROW(ValidateProbeMeasurement(protocol,0,context,observation));
+    }
 }
 CapturedReferences References(const VerificationProtocol& p,std::vector<double> raw={},double baseline=0.)
 {

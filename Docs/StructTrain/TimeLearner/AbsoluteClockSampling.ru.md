@@ -26,6 +26,16 @@ timestamps, сохранять отказ для реально пропущен
 физический timestep либо математическую цель. Увеличение физического допуска
 и обнуление production clock перед каждой пробой не являются исправлением.
 
-Новый baseline ещё не выполнен. Причинная связь с августовскими экспериментами
+Normal baseline root f712e865 на Elder-1 воспроизвёл 9 failures из 10 cases:
+один recorder origin control и все восемь native probes. Dropped-frame control
+проходит. M40 ASan baseline ещё выполняется. Рабочее исправление сохраняет
+масштаб исходных absolute endpoints в sample-gap и final coverage comparisons.
+При sampling period, неразличимом на фоне timestamp roundoff, specification
+отклоняется; это не разрешение большого физического интервала. Production
+Python auditor получает version 4 с той же границей и не пересертифицирует
+старые invalid observations. Новые проверки включают реальные probes,
+missing/duplicate frame и недостаточную разрешимость времени.
+
+Причинная связь с августовскими экспериментами
 не установлена; их визуальные 4/8–6/8 не отменяются. Этап 8 отложен до разбора
 текущей full-suite регрессии.
