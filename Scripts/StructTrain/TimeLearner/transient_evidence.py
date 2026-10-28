@@ -45,7 +45,8 @@ def audit_transient_presentation(spec: dict, observation: dict, trace: Path) -> 
         require(channels == (1 if spec["topology"] == "branch" else len(goal)), "wrong_transient_channel_dimension")
         with trace.open(encoding="utf-8", newline="") as stream:
             rows = list(csv.reader(stream))
-        header = ["time", "stimulus"] + [f"soma{i}" for i in range(channels)]
+        header = (["time", "stimulus"] + [f"soma{i}" for i in range(channels)] +
+                  [f"training_goal{i}" for i in range(len(goal))] + [f"presented_isi{i}" for i in range(len(pattern))])
         require(bool(rows) and rows[0] == header and all(len(row) == len(header) for row in rows[1:]), "damaged_transient_csv")
         values = [[float(value) for value in row] for row in rows[1:]]
         require(3 <= len(values) == count(observation["sample_count"]) <= count(spec["maximum_samples"]) and
@@ -53,6 +54,9 @@ def audit_transient_presentation(spec: dict, observation: dict, trace: Path) -> 
         require(equal(values[0][0], begin) and not after(end, values[-1][0]) and not after(values[-1][0], end + gap) and
                 equal(values[-1][0], observation["last_sample_time"]), "incomplete_transient_window")
         require(all(b[0] > a[0] and not after(b[0], a[0] + gap) for a, b in zip(values, values[1:])), "transient_sample_gap")
+        offset = 2 + channels
+        require(all(row[offset:offset+len(goal)] == goal and row[offset+len(goal):] == pattern for row in values),
+                "transient_goal_or_stimulus_changed_during_trial")
         previous = 0.
         onsets = []
         for row in values:
