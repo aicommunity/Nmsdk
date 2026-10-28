@@ -1183,7 +1183,10 @@ TEST(NativeRecognitionState,FreshProcessImport)
     auto generator=state->dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
     state->dataset->Name="RecognitionReplayData";state->neuron->Name="RecognitionReplayNeuron";
     for(UEPtr<UContainer> node:{UEPtr<UContainer>(state->dataset.Get()),UEPtr<UContainer>(state->neuron.Get())})
-    {ASSERT_NE(model->AddComponent(node),ForbiddenId);node->Init();node->Reset();}
+    {ASSERT_NE(model->AddComponent(node),ForbiddenId);}
+    // The fresh root has no initialized parent fixture. Initialize the complete
+    // tree natively; initializing its children alone does not arm its scheduler.
+    model->Init();model->Reset();ASSERT_TRUE(model->IsInit());
     const auto revision=[&]{return NmsdkTools::IdentifyModel(state->neuron,{{&generator->Output,"burst"}}).value("sha256");};
     ASSERT_EQ(revision(),package["model_revision"]);
     const auto channels=configuration.model.branch?1u:configuration.model.inputs.size();
