@@ -34,3 +34,9 @@ unknown/incomplete transport не принимается. Spikes остаютс�
 Это ещё не единый recognition scorer, не анализ исторического spiking CSV и
 не полный production runner. Старые запускатели будут удалены после замены
 их действующих функций и записи commit/blob в migration manifest.
+
+`analyze <case_reconstruction.json> --format posttune-reconstruction` проверяет
+фактический graph/heterogeneous C и полные parallel traces до/после native
+реконструкции/rollback. Проверяются объявленная one-pass Dataset policy и
+stimulus timestamps. Это evidence audit; native execution и научный PASS
+команда не утверждает. Требуется полный комплект spec/observation/CSV файлов.

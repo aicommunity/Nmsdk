@@ -51,7 +51,20 @@ A2 выполняет параллельное предъявление обыч
 свежую пару trial IDs, stimulus timestamps/число импульсов, sampling gaps и
 полные до/после waveforms. Native execution и scientific verdict он не подменяет.
 
-Проверка A2 ещё не выполнена. Эти cases не заменяют полный поиск SearchSynthetic,
+A2 normal и ASan: 8/8 native cases прошли, graph/C/Rs/order и waveforms
+сохранились, injection rollback и listener guard сработали. Но independent
+Python stage отверг все восемь positive subcases по stimulus_count_mismatch:
+Dataset по умолчанию повторял пачку, а spec подразумевал одиночное предъявление.
+CPP pass не подменяет валидность протокола; A2 сохранён как pipeline failure.
+
+A3 задаёт штатный StateGeneration=2, AdvanceSampleAfterBurst=true,
+LoopSamples=false и продолжает окно до declared end после окончания генерации.
+Эти значения записываются до ticks. Добавлены N0 controls с тремя фактическими
+синапсами при 2000/20000 Гц: прежний rebuild принудительно создавал только один
+синапс на сегменте. Новый clone сохраняет обученное число и граф. Analyze CLI
+получает format=posttune-reconstruction, с null scientific verdict.
+
+Проверка A3 ещё не выполнена. Эти cases не заменяют полный поиск SearchSynthetic,
 транзакцию выбора/отката всех PostTune candidates, научную оценку, реальную
 калибровку порога или независимый Test. Они адресуют конкретную реконструкцию
 Branch; legacy математическая цель и правила выбора режимов этим не меняются.
