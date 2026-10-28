@@ -41,15 +41,21 @@
         "attempt": "s08-boundary-normal-a1",
         "observed_cmake_pid": 3225129,
         "session_id": 1437,
-        "observed_native_pid": 3227868
+        "observed_native_pid": 3227868,
+        "dependent_audit_pid": 3230976,
+        "dependent_audit_session_id": 23521
       },
       "10.245.1.17": {
         "attempt": "s08-boundary-asan-a1",
         "observed_cmake_pid": 587564,
         "session_id": 62516,
-        "observed_native_pid": 591682
+        "observed_native_pid": 591682,
+        "dependent_audit_pid": 594032,
+        "dependent_audit_session_id": 16766
       }
     },
-    "python_root": "c174c98b237cd241fbae1d46850d7cbdc0d0c100"
+    "python_root": "c174c98b237cd241fbae1d46850d7cbdc0d0c100",
+    "audit_attempt": "s08-boundary-data-a1",
+    "audit_policy": "wait for the specific native process and terminal success; never restart native job; separate immutable Python worktree"
   }
 }
