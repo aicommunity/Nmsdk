@@ -157,6 +157,16 @@ root a222ac7c4b386451137ef17e4a5a0af6996c8d9b разрешает actual executab
 соответствии заявленному ini ограничено. Full maintained CTest ещё проверяется;
 NativeLearnedState.ru.md.
 
+TL-032: explicit Default обоих learner сохранял EnableTrainingAudit=true.
+M40 ASan baseline root bde7032a2af0fe2c670453809f0baa50d25f7cd6 воспроизводит
+два failure, только на direct Default; ordinary Build/Reset и stock Return/Take
+assertions проходят. PulseLib 4919bac2bd359118b13310862e54bcd24492967d явно
+задаёт false в ADefault. Root 7fb92a4a57b9773ff56996cf2c7b8c75b2746cd8:
+8/8 lifecycle и 18/18 UContainer passed на обоих workers, также ASan M40,
+detect_leaks=0. Git packages s04-audit-default-elder1/m40 опубликованы.
+Full A2 shell preparation failure сохранён; Full A3 ещё выполняется. Физика,
+tolerances и общий lifecycle Rdk не изменялись. См. AuditFlagDefault.ru.md.
+
 TL-031: full maintained CTest Elder-1 A9 и M40 A15 воспроизводят по 15
 learned-state export/import failures среди 395 PulseLib tests. Native reproducer
 подтверждает старые direct property sources при Return/Take и replacement Copy.
