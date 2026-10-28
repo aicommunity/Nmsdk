@@ -7,3 +7,5 @@ Git cross-host control imports all 16 earlier M40 ASan A2 packages from evidence
 Builds use a separate Git-only checkout/cache/runtime, leaving the full maintained-suite source and runtime untouched. The known broken main-checkout metadata on Elder-1 is not repaired or used here. Shared clones resolve exact recorded gitlinks and retain clean build source closures.
 
 Latest ASan extension, completed-state/service regressions, reverse cross-host transfer and full maintained suites are separate gates. Full stage 5 and the full refactoring plan remain incomplete. Raw and compressed SHA256 records accompany every artifact; no executables or credentials are stored.
+
+Supplement: on the same A2 binary, all 22 native service/cold-training/completed-state regressions pass. Nine independent certified-evidence Python tests pass on five genuine completed packages and 62 primary trials. This verifies the old certified path after the stopped-state changes; it does not replace the full maintained-suite gate.
