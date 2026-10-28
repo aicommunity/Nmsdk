@@ -1,4 +1,11 @@
 {
+  "before_after": {
+    "baseline_evidence_commit": "45d7fb05e98b880a2c34b2ef6d9ecc21e1746c48",
+    "baseline_source_root": "157a5301ed418d61f4ccd86829ba483308c4300c",
+    "byte_exact_csv": 44,
+    "byte_exact_probe_json": 44,
+    "primary_trials": 44
+  },
   "build_kind": "ASan detect_leaks=0, Qt6/GCC13",
   "domain_assessments": 11,
   "evaluation_verdict": null,
@@ -16,6 +23,10 @@
   "primary_trials": 44,
   "python_tests": 15,
   "raw_files": {
+    "before-after.json": {
+      "bytes": 15163,
+      "sha256": "3cc4a8eeff7a2cc5845c45b32ea904b49f601a24444ae71c99a5212005cf9bc3"
+    },
     "build-exit-status.txt": {
       "bytes": 2,
       "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
@@ -618,7 +629,7 @@
     }
   },
   "schema_version": 1,
-  "scope": "ASan of N1 effective-domain controller, arithmetic guards and shared Branch geometry; original primary observations",
+  "scope": "Independent physical N1 domain evidence, native/controller guards and original primary observations",
   "source_closure": {
     "Bin": {
       "head": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
