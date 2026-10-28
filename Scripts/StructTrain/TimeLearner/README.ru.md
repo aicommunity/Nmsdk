@@ -16,6 +16,9 @@ python -m Scripts.StructTrain.TimeLearner analyze case_stopped_state.json --form
 diagnostic в stderr и exit code 2. Code 0 означает завершённый анализ записи,
 но не Exact, пригодность domain либо успешное распознавание: эти признаки
 содержатся отдельно внутри `analysis`; `evaluation_verdict` остаётся null.
+Ошибки содержимого имеют validity=invalid. Ошибка файловой операции, включая
+существующий output, имеет execution=process_error / validity=unknown:
+сбой записи не доказывает повреждение исходных данных.
 
 Для исторической domain schema 1 требуется `--allow-legacy`; результат всегда
 с `physics_verified=false`. Нельзя подставлять этот адаптер в другой формат.

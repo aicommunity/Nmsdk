@@ -57,9 +57,14 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 with args.output.open("x", encoding="utf-8") as output:
                     output.write(text)
-        except (EvidenceError, OSError, ValueError) as error:
+        except (EvidenceError, ValueError) as error:
             print(json.dumps({"kind": "timelearner_analysis", "schema_version": 1,
                               "execution": "completed", "validity": "invalid", "reason": str(error),
+                              "evaluation_verdict": None}, ensure_ascii=False), file=sys.stderr)
+            return 2
+        except OSError as error:
+            print(json.dumps({"kind": "timelearner_analysis", "schema_version": 1,
+                              "execution": "process_error", "validity": "unknown", "reason": str(error),
                               "evaluation_verdict": None}, ensure_ascii=False), file=sys.stderr)
             return 2
     return 0

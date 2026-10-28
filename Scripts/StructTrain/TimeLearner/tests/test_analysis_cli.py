@@ -52,7 +52,8 @@ class AnalysisCliTest(unittest.TestCase):
             self.assertEqual(path.read_text(), "prior-result")
         self.assertEqual(code, 2)
         self.assertFalse(output)
-        self.assertEqual(json.loads(error)["validity"], "invalid")
+        self.assertEqual(json.loads(error)["validity"], "unknown")
+        self.assertEqual(json.loads(error)["execution"], "process_error")
 
     def test_probe_cannot_omit_primary_trace(self):
         code, output, error = self.invoke(self.source, "--format", "probe")
