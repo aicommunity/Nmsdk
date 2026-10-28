@@ -13,7 +13,17 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Addressed absolute-clock correction: 52 native cases at seeded 131 s, 25 corrected data tests, 8 clock / 84 learned / 66 stopped primary trials; full gate pending | [Elder-1](s07-clock-fixed-elder1/README.md) |
+| Failed full gate: 22/430 failures per worker; real absolute-clock baseline 9/10 expected failures, mapped-process manifests retained | [Elder-1](s07-clock-failure-elder1/README.md), [M40 + ASan baseline](s07-clock-failure-m40/README.md) |
+| Physical domain schema 2: 22 native / 15 Python per worker; independent a/b/endpoints; aligned byte-exact 68 normal / 44 ASan trial controls | [Elder-1](s07-domain-physics-elder1/README.md), [M40 ASan](s07-domain-physics-m40/README.md), [aligned 2/20 kHz](s07-domain-physics-matrix-elder1/README.md) |
+| Maintained native analyze CLI: 20 tests and 27 actual calls per worker; I/O vs evidence status and explicit legacy adapter | [Elder-1 A2](s07-domain-cli-status-elder1/README.md), [M40 A2](s07-domain-cli-status-m40/README.md) |
+| Earlier read-only API/editor ASan A2 now terminal: all 12 pass; distinct from later controller/serialization sources | [M40 terminal supplement](s07-domain-preview-full-m40/README.md) |
+| Effective N1 controller: 20/20 normal cases and 68 primary trials per worker; 18/18 ASan cases and 44 primary trials on M40 | [Elder-1](s07-domain-controller-elder1/README.md), [M40](s07-domain-controller-m40/README.md), [ASan](s07-domain-asan-m40/README.md) |
+| Effective-domain controller learning/export regressions: 22 native, 9 Python, five completed packages / 62 original trials per worker | [Elder-1](s07-domain-learning-elder1/README.md), [M40](s07-domain-learning-m40/README.md) |
+| Read-only physical domain preview: normal API/editor checks and scoped ASan; earlier compile failure retained | [Elder-1](s07-domain-preview-elder1/README.md), [M40](s07-domain-preview-m40/README.md) |
 | Post-fix maintained gate: 4/4 suites per worker, PulseLib 387 pass + 10 skip, 16 completed packages / 208 primary trials per worker | [Elder-1](s05-pooled-full-elder1/README.md), [M40](s05-pooled-full-m40/README.md) |
+| N1 mesh ignores effective Rs domain: two expected native failures and 20 verified primary trials per worker; fix pending | [Elder-1](s07-domain-baseline-elder1/README.md), [M40 ASan](s07-domain-baseline-m40/README.md) |
+| Diagnostic stopped solo state: new-guard regression, 20 native cases and 66 primary trials per worker, fresh-process/bidirectional Git replay and completed-state regressions | [M40 + ASan](s05-stopped-m40/README.md), [Elder-1](s05-stopped-elder1/README.md) |
 | Configured ControllerVersion=2 cold JSON/XML dispatch, saved-state guards and policy-independent corruption controls | [Elder-1](s06-configured-controller-elder1/README.md), [M40 + ASan](s06-configured-controller-m40/README.md) |
 | Explicit cold native builder/adoption, preserved forced Build, multi-synapse and inhibition routing; A1/A2/A3 | [Elder-1](s06-native-builder-elder1/README.md), [M40 + ASan](s06-native-builder-m40/README.md) |
 | Actual typed revision observer, lifecycle/property replacement and native full-provider A/B | [Elder-1](s06-model-observer-elder1/README.md), [M40](s06-model-observer-m40/README.md) |

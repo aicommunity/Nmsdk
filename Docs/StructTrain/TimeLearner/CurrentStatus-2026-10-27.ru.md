@@ -1,12 +1,28 @@
 # Состояние полного плана: повторная сверка 27.10.2026
 
+Актуальная систематизированная сводка: [28.10](CurrentStatus-2026-10-28.ru.md).
+Ниже сохранён исходный snapshot 27.10 с историческими дополнениями.
+
 **Работа возобновлена пользователем 28.10.2026.** Оба прежних post-fix full CTest
 сохранены как interrupted_by_user, не приняты. Audit-default defect воспроизведён
 и исправлен: по 8/8 lifecycle и 18/18 UContainer passed на обоих workers,
-дополнительно те же группы под ASan M40. Оба full A3 завершены: 4/4 suites,
+дополнительно те же группы под ASan M40. Оба full A3 завершились: 4/4 suites,
 PulseLib 387 pass + 10 skip, 0 failures/errors; по 9 Python tests и 208 primary
-trials. Child merges в develop выполнены; root фиксирует их согласованные gitlinks.
+trials. Принят root develop `2ad95250fb91c32826399702081c636852a0d56a` с child
+merge commits; свежий recursive checkout семи сабмодулей проверен на M40.
 См. [PooledFullAcceptance](PooledFullAcceptance.ru.md). Это не весь этап 4/5.
+В отдельной ветке `stage05/stopped-training-state` реализуется диагностический
+перенос остановленного обучения, включая неполный capture и censored evidence.
+Первый ASan A1: 2 pass / 14 failures; обнаружен stale capture plan после
+InvalidateTarget, исправлен PulseLib `652c8f3`. Исправленные 16/16 cases прошли
+на M40 ASan и Elder-1 normally. Последующая версия root 57b36592 / PulseLib 12c5ef5
+прошла 20/20 native и 10/10 Python на каждом worker, по 66 primary trials.
+Git-transfer: 16 пакетов M40→Elder-1 и 20 Elder-1→M40, byte-exact frozen CSV.
+На последней версии Elder-1 прошли также 22 native regressions и 9 Python
+проверок сертифицированного пути по 62 primary trials. Все пакеты опубликованы;
+локально проверены 2317 stored и 2313 raw hashes. Этот более поздний snapshot
+не входит в full source 7fb92a4; scoped проверки завершены, merge в develop ещё
+не выполнен. Это не весь этап 5. См. [StoppedTrainingState](StoppedTrainingState.ru.md).
 Историческая точка остановки: [ResumeAfterPause](ResumeAfterPause-2026-10-27.ru.md).
 
 **План не завершён. Полностью принят этап 0. Частично выполнены этапы 1–7,
@@ -21,7 +37,7 @@ XML/логи A9, A15 и property-fixed-A2. Новые сборки для отв
 
 ## Git: рабочие ветки и принятый develop
 
-Исторический снимок перед коммитом сводки 27.10; актуальные child merges см. в
+Исторический снимок перед коммитом сводки 27.10; актуальная приёмка 28.10 —
 PooledFullAcceptance. На этом историческом снимке деревья чистые, gitlinks совпадают
 с фактическими child HEAD.
 
