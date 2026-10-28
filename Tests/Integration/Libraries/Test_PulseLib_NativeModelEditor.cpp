@@ -38,6 +38,10 @@ using namespace NMSDK::TimeLearner;
 template<class Learner> class ImportRollbackLearner : public Learner {
 public:
     bool failNeuronAttach=false;
+    void RefreshGraphAliases() {
+        this->Neuron=this->template GetComponentL<NPulseNeuron>("Neuron",true);
+        this->Dataset=this->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    }
     ImportRollbackLearner* New(void) override { return new ImportRollbackLearner; }
 protected:
     void ABeforeAddComponent(UEPtr<UContainer> child,UEPtr<UIPointer> pointer=0) override
@@ -1954,6 +1958,99 @@ TEST(PostTuneTransientStimulus,Classic2000){PostTuneTransientStimulus<NNeuronTim
 TEST(PostTuneTransientStimulus,Branch2000){PostTuneTransientStimulus<NNeuronTimeLearnerBranch>(2000);}
 TEST(PostTuneTransientStimulus,Classic20000){PostTuneTransientStimulus<NNeuronTimeLearner>(20000);}
 TEST(PostTuneTransientStimulus,Branch20000){PostTuneTransientStimulus<NNeuronTimeLearnerBranch>(20000);}
+
+template<class Learner> void PostTuneGraphBoundary(unsigned frequency,int normalization,bool failAttach=false)
+{
+    using Owner=ImportRollbackLearner<Learner>;
+    constexpr bool branch=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const std::string image=branch?"PostTuneBoundaryBranchFixture":"PostTuneBoundaryClassicFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new Owner;},image),image);
+    EditingRig<Owner> rig(frequency,normalization,"posttune_boundary"+std::string(failAttach?"_attach_failure":""),
+        false,2,true,2,1,false,image,normalization==0?3:1);
+    auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
+    auto second=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(second);
+    channel->Capacity=1.3e-9;second->Capacity=1.7e-9;rig.neuron->MembraneCapacity=0.;
+    dataset->Delay=.013;dataset->AdvanceSampleAfterBurst=false;dataset->LoopSamples=true;
+    const auto originalRevision=rig.Revision();
+    const auto savedDataset=NmsdkTools::IdentifyModel(dataset);
+    const double amplitude=rig.source->Amplitude.GetData();
+    const auto checkpoint=NativeLearnerGraphCheckpoint::Capture(*rig.learner);ASSERT_TRUE(checkpoint);
+    std::vector<NativeProbeSample> before,after;
+    rig.environment->GetTime().SetTime(1000000);
+    const auto baseline=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const auto& frame){before.push_back(frame);});
+    ASSERT_EQ(baseline.status,NativeProbeStatus::Completed);ASSERT_FALSE(before.empty());
+    ASSERT_EQ(rig.Revision(),originalRevision);
+    channel->Capacity=2.7e-9;second->Capacity=3.1e-9;
+    auto synapse=rig.neuron->template GetComponentL<NPulseSynapseCommon>("Dendrite1_1.ExcSynapse1",true);ASSERT_TRUE(synapse);
+    synapse->Resistance=synapse->Resistance.GetData()*1.25;
+    auto pattern=dataset->MatrixData.GetData();pattern(0,0)+=.003;dataset->SetMatrixData(pattern);
+    dataset->Delay=.05;dataset->AdvanceSampleAfterBurst=true;dataset->LoopSamples=false;
+    rig.source->Amplitude=amplitude*.8;
+    const auto candidate=rig.Revision();ASSERT_NE(candidate,originalRevision);
+    const auto refresh=[&] {
+        rig.learner->RefreshGraphAliases();
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+        rig.source=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+        rig.ports={{&rig.source->Output,"burst"}};
+    };
+    if(failAttach)
+    {
+        const auto current=rig.neuron.Get();const auto clock=rig.environment->GetTime().GetTime();
+        rig.learner->failNeuronAttach=true;
+        const auto rejected=checkpoint->Restore(*rig.learner);refresh();
+        EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected)<<rejected.reason;
+        EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(rig.neuron.Get(),current);
+        EXPECT_EQ(rig.Revision(),candidate);EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
+    }
+    const auto clock=rig.environment->GetTime().GetTime();
+    const auto restored=checkpoint->Restore(*rig.learner);refresh();
+    ASSERT_EQ(restored.status,NativeModelBuildStatus::Adopted)<<restored.reason;
+    EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);EXPECT_EQ(rig.Revision(),originalRevision);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(dataset),savedDataset);
+    EXPECT_DOUBLE_EQ(dataset->Delay.GetData(),.013);EXPECT_TRUE(dataset->LoopSamples.GetData());
+    EXPECT_FALSE(dataset->AdvanceSampleAfterBurst.GetData());EXPECT_DOUBLE_EQ(rig.source->Amplitude.GetData(),amplitude);
+    EXPECT_EQ(dataset->MatrixData.GetRows(),2);EXPECT_DOUBLE_EQ(dataset->MatrixData(0,0),rig.isi[0]);
+    EXPECT_DOUBLE_EQ(dataset->MatrixData(1,0),rig.isi[1]);
+    EXPECT_DOUBLE_EQ(rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true)->Capacity.GetData(),1.3e-9);
+    EXPECT_DOUBLE_EQ(rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true)->Capacity.GetData(),1.7e-9);
+    if(normalization==0)ASSERT_TRUE(rig.neuron->template GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse3",true));
+    rig.environment->GetTime().SetTime(1000000);
+    const auto replay=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const auto& frame){after.push_back(frame);});
+    ASSERT_EQ(replay.status,NativeProbeStatus::Completed);ASSERT_EQ(before.size(),after.size());
+    bool exact=true;
+    for(std::size_t i=0;i<before.size();++i)
+    {
+        const bool same=before[i].time==after[i].time && before[i].stimulus==after[i].stimulus && before[i].potentials==after[i].potentials;
+        EXPECT_TRUE(same)<<i;exact=exact && same;
+    }
+    // Repeated rollback is derived from the same immutable boundary, not from
+    // the state left by the preceding replay.
+    const auto repeated=checkpoint->Restore(*rig.learner);refresh();
+    EXPECT_EQ(repeated.status,NativeModelBuildStatus::Adopted)<<repeated.reason;
+    EXPECT_EQ(rig.Revision(),originalRevision);
+    Artifact(rig.name+"_boundary.json",QJsonDocument(QJsonObject{
+        {"kind","native_posttune_graph_boundary"},{"schema_version",1},{"frequency_hz",int(frequency)},
+        {"normalization",normalization},{"branch",branch},{"injected_attach_failure",failAttach},
+        {"source_identity",checkpoint->NeuronIdentity()},{"restored_identity",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)},
+        {"dataset_identity",savedDataset},{"sample_pairs",double(before.size())},{"waveform_exact",exact},
+        {"controller_checkpoint",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(NativePostTuneGraphBoundary,ClassicN0_2000){PostTuneGraphBoundary<NNeuronTimeLearner>(2000,0);}
+TEST(NativePostTuneGraphBoundary,BranchN0_2000){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(2000,0);}
+TEST(NativePostTuneGraphBoundary,ClassicN1_2000){PostTuneGraphBoundary<NNeuronTimeLearner>(2000,1);}
+TEST(NativePostTuneGraphBoundary,BranchN1_2000){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(2000,1);}
+TEST(NativePostTuneGraphBoundary,ClassicN0_20000){PostTuneGraphBoundary<NNeuronTimeLearner>(20000,0);}
+TEST(NativePostTuneGraphBoundary,BranchN0_20000){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(20000,0);}
+TEST(NativePostTuneGraphBoundary,ClassicN1_20000){PostTuneGraphBoundary<NNeuronTimeLearner>(20000,1);}
+TEST(NativePostTuneGraphBoundary,BranchN1_20000){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(20000,1);}
+TEST(NativePostTuneGraphBoundary,ClassicAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearner>(2000,1,true);}
+TEST(NativePostTuneGraphBoundary,BranchAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(2000,1,true);}
 
 void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bool listener=false,int normalization=1)
 {
