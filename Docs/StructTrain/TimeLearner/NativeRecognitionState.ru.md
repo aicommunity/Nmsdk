@@ -72,14 +72,24 @@ sample_count/complete/end и обе model revisions. Положительный 
 `recognition_evidence.py` независимо проверяет Source solo proof, factor/clipping,
 разрешённые изменения graph/bindings, неизменность images и остальных properties,
 полноту frozen CSV. Native import и scientific selectivity он не подменяет.
-Новые schema-1 наблюдения и corruption/CLI controls ещё проверяются отдельно;
-старый fixture v0 не получает полноту schema 1 задним числом.
+Elder-1 normal A4: все 11 native и 23 Python tests прошли; независимо проверены
+восемь recognition packages, 108 исходных training trials и 3528 полных paired
+samples schema 1. [Артефакты](../../../Reports/StructTrain/TimeLearner/s08-recognition-elder1/README.md)
+опубликованы commit `e235f898596b7fe6e9b5ed6291f15329d45683e2`; локально проверены
+336 stored / 334 raw hashes. Старый fixture v0 не получает полноту schema 1
+задним числом. ASan A4 M40 пока работает; новый source не принят в develop.
 
-Проверки выполняются только на workers. Пока ни сборка, ни runtime приёмка новой
-реализации не завершены. Первая normal сборка A1 прошла; первый fixture затем
+Проверки выполняются только на workers. Normal адресная проверка завершена;
+полная приёмка этапа и ASan A4 ещё не завершены. Первая normal сборка A1 прошла; первый fixture затем
 упал в сравнении QJsonValueRef: test lambda возвращала ссылку на элемент временного
 QJsonObject. Рабочая правка возвращает самостоятельный QJsonValue; production
 conversion math этим не меняется. A1 сохраняется как crash, не как пройденный test.
 PostTune transactions, реальная калибровка порога,
 независимый evaluation protocol/scorer, вся physical/mode matrix и подключение
 production runner остаются открытыми требованиями полного этапа 8.
+
+Свежий процесс recognition import добавлен как отдельный replay fixture,
+который получает опубликованные package/spec, создаёт штатный NModel без learner,
+загружает native graph и возвращает single-model waveform с тем же absolute
+началом окна. Его нужно отдельно собрать и сравнить с исходной paired trace
+на обоих workers; наличие fixture не является доказательством переноса.

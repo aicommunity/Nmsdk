@@ -62,3 +62,5 @@ Acceptance scope and pending controls are tracked in
 [Stage05-Progress](../../../Docs/StructTrain/TimeLearner/Stage05-Progress.ru.md).
 Source commits in manifests describe the tested source closure; subsequent merge
 commits are not substituted into historical manifests.
+
+- [Elder-1: native recognition conversion, complete schema-1 frozen transport](s08-recognition-elder1/README.md) — 11 native / 23 Python; 108 source trials, 3528 paired samples; scientific verdict null.

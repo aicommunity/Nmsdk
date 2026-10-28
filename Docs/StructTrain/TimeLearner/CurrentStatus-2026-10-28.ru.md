@@ -101,11 +101,21 @@ comparison и отклоняет неразрешимый timestamp scale. Pytho
 25/25 tests, восемь clock probes, 6 learned / 84 trials и 20 stopped / 66 trials.
 Все восемь clock CSV на каждом worker byte-exact к baseline. Старые четыре
 Python subtest errors A2 сохранены: потребовалась также endpoint-проверка requested
-duration. Elder-1 package опубликован, 1025 stored / 1023 raw hashes проверены.
-M40 native seeded ASan ещё работает. Новый full normal gate aeff4a9d,
+duration. Оба addressed packages опубликованы: по 1025 stored / 1023 raw hashes
+проверены; M40 native seeded ASan завершён 52/52, corrected Python 25/25. Новый full normal gate aeff4a9d,
 `s07-clock-full-normal-a3`, работает на обоих workers в отдельных runtime;
 три Rdk groups pass, PulseLib parent не завершён. Приёмка ещё не пройдена.
 [Причина, evidence и ограничения](AbsoluteClockSampling.ru.md).
+
+**Immutable Solo→Recognition** (`stage08/recognition-conversion`): native API
+сохраняет source solo, явные bounds/clipping/activation и scope сертификата.
+Повторный import не масштабирует текущие Rs. Root a7a4ced6 / PulseLib 74ab08f:
+Elder-1 normal A4 — 11/11 native, 23/23 Python; восемь packages, 108 source trials,
+3528 полных paired frozen samples schema 1. Пакет опубликован, 336 stored /
+334 raw hashes проверены локально. M40 ASan A4 работает. Добавлен отдельный
+fresh-process replay fixture, пока без runtime-подтверждения; PostTune, настоящая
+калибровка и независимый scientific Test ещё не готовы.
+[Контракт и ограничения](NativeRecognitionState.ru.md).
 
 ## Незакрытый объём исходных этапов
 
@@ -118,8 +128,8 @@ M40 native seeded ASan ещё работает. Новый full normal gate aeff
 | 5 | Recognition/conversion/PostTune/calibration transfer, полный physical matrix; stopped-state merge; run-level diagnostics для аварийных nonfinite данных |
 | 6 | Завершение общего controller/adapters, configured retarget/reconfiguration и всех совместимых режимов |
 | 7 | Приёмка dynamic N1 domains; N0 repeatability/quantization; полный поиск/recovery, physics/inhibition/C-trim matrix и честные причины остановки |
-| 8 | Immutable Solo→Recognition conversion, transactional PostTune, real-threshold calibration и независимый frozen Test |
-| 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, recognition analysis и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
+| 8 | Завершить cross-process/worker приёмку Solo→Recognition; transactional PostTune, real-threshold calibration и независимый frozen Test |
+| 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, production recognition evaluation и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
 | 10 | ConditionSpec, fingerprints, owned-process leases/queues/cancellation и fail-closed Git publisher; удаление rsync/scp pipeline |
 | 11 | Исторический saved replay и cold retrain, legacy/v2 comparison, actual order/ITI controls и полная научная матрица |
 | 12 | Сквозная актуализация root/PulseLib/Bin/Rdk/config/ClDesc и устранение конкурирующих актуальных спецификаций |
