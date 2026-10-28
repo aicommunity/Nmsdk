@@ -21,6 +21,15 @@ def analyze(args: argparse.Namespace) -> dict:
     elif args.format == "stopped-solo":
         from .stopped_evidence import audit_stopped_state, load_case
         result = audit_stopped_state(*load_case(source))
+    elif args.format == "recognition":
+        from .recognition_evidence import audit_recognition_state, load_case
+        result = audit_recognition_state(*load_case(source))
+    elif args.format == "posttune-reconstruction":
+        from .posttune_evidence import audit_reconstruction, load_case
+        result = audit_reconstruction(*load_case(source))
+    elif args.format == "posttune-transient":
+        from .transient_evidence import audit_transient_presentation, load_case
+        result = audit_transient_presentation(*load_case(source))
     elif args.format == "probe":
         require(args.trace is not None, "primary_probe_trace_required")
         result = audit_probe(load(source), args.trace.resolve(strict=True))
@@ -39,7 +48,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "posttune-reconstruction", "posttune-transient"), required=True)
     analysis.add_argument("--trace", type=Path, help="original primary CSV, required for probe")
     analysis.add_argument("--allow-legacy", action="store_true", help="descriptive domain schema-1 adapter only")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
