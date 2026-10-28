@@ -25,7 +25,7 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
             "missing_stop_or_capture_identity")
     count(package["capture_epoch"]); count(package["model_epoch"])
     require(count(package["session_attempt"]) > 0, "missing_attempt")
-    require(summary["state"] == "finished" and summary["certificate"] is None
+    require(summary["state"] == "finished" and summary["model_state_kind"] == "diagnostic" and summary["certificate"] is None
             and summary["certificate_matches_actual_model"] is False
             and package["model_revision"] == summary["actual_model_revision"]
             and package["model_epoch"] == summary["model_epoch"]
