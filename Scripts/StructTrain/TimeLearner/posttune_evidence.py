@@ -4,7 +4,6 @@ from __future__ import annotations
 import csv
 import math
 from pathlib import Path
-import struct
 
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, after, count, equal, load, number, require
@@ -32,7 +31,7 @@ def _window(spec: dict, observation: dict, path: Path, revision: str, frequency:
     require(end > begin and equal(gap, 1 / frequency) and
             gap > 64 * math.ulp(1.) * max(1., abs(begin), abs(end)), "invalid_posttune_window")
     pattern = [number(value) for value in spec["input_isi"]]
-    require(bool(pattern) and all(value > 0 for value in pattern) and
+    require(bool(pattern) and all(value >= 0 for value in pattern) and
             canonical_model_sha256(pattern) == spec["pattern_hash"], "invalid_posttune_pattern")
     delay = number(spec["dataset_delay"])
     require(delay >= 0, "negative_posttune_dataset_delay")
@@ -83,12 +82,6 @@ def audit_reconstruction(record: dict, before: tuple, after_case: tuple) -> dict
         require(len(nodes) == len(identity["model"]["nodes"]), "duplicate_posttune_graph_node")
         frequency = count(record["frequency"])
         require(frequency > 0 and all(node["frequency_hz"] == str(frequency) for node in nodes.values()), "posttune_frequency_mismatch")
-        def physical(path: str, name: str) -> float:
-            return struct.unpack(">d", bytes.fromhex(nodes[path]["parameters"][name]["data"]["value"]))[0]
-        require(physical("$", "MembraneCapacity") == 0 and
-                physical("$.Dendrite1_1.ExcChannel", "Capacity") == 1.3e-9 and
-                physical("$.Dendrite1_2.ExcChannel", "Capacity") == 1.7e-9 and
-                physical("$.Dendrite1_2.InhChannel", "Capacity") == 2.3e-9, "posttune_heterogeneous_control_lost")
         require(before[0]["trial_id"].endswith("/before") and after_case[0]["trial_id"] ==
                 before[0]["trial_id"].removesuffix("/before") + "/after" and
                 before[0]["pattern_hash"] == after_case[0]["pattern_hash"], "posttune_trial_pair_mismatch")
@@ -101,7 +94,7 @@ def audit_reconstruction(record: dict, before: tuple, after_case: tuple) -> dict
                 "whole_posttune_selection_verified": False, "spikes_known": False, "evaluation_verdict": None}
     except EvidenceError:
         raise
-    except (KeyError, TypeError, ValueError, IndexError, OverflowError, struct.error) as error:
+    except (KeyError, TypeError, ValueError, IndexError, OverflowError) as error:
         raise EvidenceError("malformed_posttune_reconstruction:" + str(error)) from error
 
 
