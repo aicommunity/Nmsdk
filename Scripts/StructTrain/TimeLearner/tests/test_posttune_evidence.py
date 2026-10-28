@@ -6,6 +6,7 @@ import io
 import json
 import os
 from pathlib import Path
+import struct
 import tempfile
 import unittest
 
@@ -32,6 +33,18 @@ class PostTuneEvidenceTest(unittest.TestCase):
         for record, _, _ in n0:
             if "$.Dendrite1_2.ExcSynapse3" not in {node["path"] for node in record["before_model"]["model"]["nodes"]}:
                 raise RuntimeError("N0 control did not actually create the third synapse")
+        # These exact capacities are a positive integration control, not a
+        # restriction on production reconstruction evidence for other profiles.
+        for record, _, _ in cls.cases:
+            for key in ("before_model", "after_model"):
+                nodes = {node["path"]: node for node in record[key]["model"]["nodes"]}
+                for path, name, expected in (("$", "MembraneCapacity", 0.),
+                        ("$.Dendrite1_1.ExcChannel", "Capacity", 1.3e-9),
+                        ("$.Dendrite1_2.ExcChannel", "Capacity", 1.7e-9),
+                        ("$.Dendrite1_2.InhChannel", "Capacity", 2.3e-9)):
+                    actual = struct.unpack(">d", bytes.fromhex(nodes[path]["parameters"][name]["data"]["value"]))[0]
+                    if actual != expected:
+                        raise RuntimeError("heterogeneous physical control was not actually preserved")
 
     def test_actual_parallel_transport(self):
         for case in self.cases:
