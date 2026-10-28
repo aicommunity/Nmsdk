@@ -48,7 +48,7 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 |---|---|---|---|
 | TL-001 | Branch AllSynapsesNormalized | проверяет ActivePulseIndex; -1 оставляет пустой gate | открыто в legacy; отдельный FinalVerificationSession реализует fresh all-input sweep, но production wiring и native N>1 committed-input corruption ещё требуются; FinalVerification.ru.md |
 | TL-002 | Branch parallel conversion | mutable bool, повторное включение training сбрасывает его | save/load, повторный conversion, clipping |
-| TL-003 | Branch PostTune rebuild | parent C или fallback 1e-9 | heterogeneous storage roundtrip |
+| TL-003 | Branch PostTune rebuild | parent C/fallback 1e-9, потеря child physics и N0 bank consistency | runtime baseline по 8 failures; native reconstruction d862127: по 10 C++ / 7 Python на workers, ASan M40; PostTuneNativeRebuild.ru.md; full candidate transaction ещё открыта |
 | TL-004 | C trim | baseline читается из parent C | эквивалентная child physics |
 | TL-005 | StructuralAmp tracker | знак вместо амплитуды, неполный revision | drift, C/dt invalidation, несколько brackets |
 | TL-006 | scorer | исходный дефект target row0, incomplete/duplicates/bad tokens | исправленный scorer/collector проверен на этапе 3; сквозная интеграция runner открыта |
@@ -154,8 +154,8 @@ root a222ac7c4b386451137ef17e4a5a0af6996c8d9b разрешает actual executab
 соседний runtime ini; 7186788be098a58091a14025d664647e5d9eb2cd инициализирует
 корневой NModel нового helper штатно. A6/A7 проходят адресные переносы на обоих
 серверах. Прежние ad-hoc numerical controls не отменены, но утверждение об их
-соответствии заявленному ini ограничено. Full maintained CTest ещё проверяется;
-NativeLearnedState.ru.md.
+соответствии заявленному ini ограничено. Позднейшие full maintained groups пройдены на обоих workers;
+PooledFullAcceptance.ru.md и FullClockAcceptance.ru.md. NativeLearnedState.ru.md.
 
 TL-033: sampling-gap comparison терял absolute timestamp scale при вычитании.
 Full root 157a5301 / PulseLib e875ca5 дал на каждом worker по 22 failures из
@@ -164,8 +164,11 @@ roundoff delta больше прежнего допуска. Baseline f712e865 �
 M40 ASan: девять ожидаемых failures из десяти; восемь реальных Classic/Branch
 probes при 131/1000000 s и 2000/20000 Hz, dropped-frame control pass.
 Рабочая PulseLib d4c0cf0 использует absolute endpoints в sampling/coverage и
-resolution guard; 52-case seeded regression и data audit пока выполняются.
-Это не принятое runtime исправление и не причинное объяснение августа.
+resolution guard; 52-case seeded regression и corrected data audit пройдены.
+Full native aeff4a9d: четыре maintained groups pass на обоих workers, PulseLib
+442 cases, 432 pass / 10 helper skips, 58 independent Python tests. Принято
+в develop root b6212753 / PulseLib 32cb44bb; FullClockAcceptance.ru.md.
+Причинная связь с августом не установлена.
 См. AbsoluteClockSampling.ru.md; все failure bundles опубликованы через Git.
 
 TL-032: explicit Default обоих learner сохранял EnableTrainingAudit=true.
@@ -206,7 +209,8 @@ ASan heap-buffer-overflow на M40. Исправление Rdk
 detect_leaks=0, и 13/13 в обычной сборке Elder-1. A14 дополнительно проверяет
 native import/rollback/frozen response на обоих серверах; Git-пакеты доступны.
 Rdk develop merge ef4f033704d54f11d06e4da2b3518c313f3a9992 опубликован,
-его tree совпадает с tested feature tree. Полный CTest ещё выполняется.
+его tree совпадает с tested feature tree. Позднейший полный контроль
+пройден: PooledFullAcceptance.ru.md и FullClockAcceptance.ru.md.
 См. ComponentOrderBounds.ru.md. Причинная связь с историческими
 экспериментами не установлена; их результаты этим finding не отменяются.
 

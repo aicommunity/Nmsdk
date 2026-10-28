@@ -68,3 +68,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 из migration manifest.
 
 - [Native Solo→Recognition: storage/import, conversion и границы проверки](NativeRecognitionState.ru.md).
+
+- [PostTune: native graph reconstruction, actual parallel transport и открытая candidate transaction](PostTuneNativeRebuild.ru.md).
