@@ -62,9 +62,23 @@ Domain evidence выводится отдельно в training summary. Нов�
 матрица — 14 arithmetic/controller + шесть native cases, 20/20 на каждом.
 Четыре native searches при 2/20 кГц и два shared/separated Branch controls
 дали по 68 primary trials и 15 domain assessments; production Python-аудит
-подтвердил наблюдения и имеющиеся final certificates. Последняя публикация,
-ASan и learning/export regressions controller ещё не завершены; исправление
-пока не принято в develop.
+подтвердил наблюдения и имеющиеся final certificates. Controller evidence
+опубликована: Elder-1 `1969585a72d3d09d6e6583f443d980e717575046`, M40
+`b902086fad6b6723e3c2f393c108cfbd3a13054b`, по 232 stored / 230 raw hashes.
+
+ASan controller M40 A3: 18/18 cases (14 arithmetic, четыре native при 2 кГц),
+44 actual primary trials и 11 domain assessments. Пакет
+`45d7fb05e98b880a2c34b2ef6d9ecc21e1746c48`, 114 stored / 112 raw hashes.
+Learning/export regressions нового controller на обоих workers: 22/22 native,
+9/9 Python, пять actual packages и 62 primary trials; commits
+`0a8d90b86e2f6a417c6f095dd213eeea951adcd5` и
+`ab494d522a9a134a35990c14d639fc72e086d39c`, по 508 stored / 506 raw hashes.
+Все эти compressed/raw hashes проверены локально.
+
+Full maintained groups текущего source ещё выполняются, исправление пока
+не принято в develop. Production auditor проверяет исходные пробы и residuals;
+он пока не пересчитывает физическое происхождение domain coefficients из
+графа. Это отдельное незакрытое требование к decision provenance.
 
 ## Не переносить условную границу как универсальную
 
