@@ -1188,6 +1188,10 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     corrupt=package;corrupt["certificate"]=QJsonObject{{"exact",true}};reject(corrupt);
     corrupt=package;corrupt["reference_complete"]=!package["reference_complete"].toBool();reject(corrupt);
     corrupt=package;corrupt["capture_revision"]="wrong-capture";reject(corrupt);
+    corrupt=package;auto duplicate=corrupt["observed_packets"].toArray();ASSERT_FALSE(duplicate.isEmpty());
+    duplicate.append(duplicate[0]);corrupt["observed_packets"]=duplicate;reject(corrupt);
+    if(!package["final_packets"].toArray().isEmpty())
+    {corrupt=package;corrupt["observed_packets"]=QJsonArray{};reject(corrupt);}
     // Frozen evaluation uses the real native scheduler. Neither stopped model
     // may restart its controller or manufacture a successful certificate.
     std::vector<NativeProbeSample> originalFrames,importedFrames;
