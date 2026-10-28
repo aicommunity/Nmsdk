@@ -51,7 +51,11 @@ c2507722 прошёл два исходных native controller cases на ка�
 независимый audit проверил по 24 primary trials и четыре domain assessments.
 Нижняя эффективная граница реально измерена. Расширенный source 157a5301:
 14 arithmetic/controller tests и шесть native cases (2/20 кГц, shared/separated
-Branch geometry) проверяются на обоих workers. Подэтап ещё не принят.
+Branch geometry) прошли на обоих workers, всего по 20/20. Независимый production
+аудит проверил по 68 primary trials и 15 domain assessments; запрещённых
+integration edits нет. Последние controller-артефакты ещё готовятся к Git
+публикации; ASan и перенос/learning regressions нового controller не завершены.
+Подэтап ещё не принят.
 [Детали](DynamicResistanceDomains.ru.md).
 
 ## Незакрытый объём исходных этапов

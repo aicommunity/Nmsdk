@@ -58,7 +58,13 @@ singleton geometry с существующим общим Rs. Best candidate с�
 реализация preview требует явного edit и новой пробы, а не подмены scope.
 Domain evidence выводится отдельно в training summary. Новые controller tests
 усилены требованием реально измерить эффективную нижнюю границу; их runtime
-проверка ещё не выполнена. Исправление controller пока не принято.
+проверка завершилась на обоих workers: исходные два cases проходят, новая
+матрица — 14 arithmetic/controller + шесть native cases, 20/20 на каждом.
+Четыре native searches при 2/20 кГц и два shared/separated Branch controls
+дали по 68 primary trials и 15 domain assessments; production Python-аудит
+подтвердил наблюдения и имеющиеся final certificates. Последняя публикация,
+ASan и learning/export regressions controller ещё не завершены; исправление
+пока не принято в develop.
 
 ## Не переносить условную границу как универсальную
 
