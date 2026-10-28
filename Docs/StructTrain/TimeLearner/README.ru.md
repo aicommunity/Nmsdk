@@ -25,6 +25,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Остановленное обучение: диагностический перенос без сертификата, текущая проверка](StoppedTrainingState.ru.md).
 - [Эффективные N1 области: дефект mesh и текущая реализация preview](DynamicResistanceDomains.ru.md).
 - [Независимая проверка физических оснований N1 decisions, рабочий подэтап](DomainDecisionEvidence.ru.md).
+- [False sampling gaps при большом absolute clock: full failures и исправление](AbsoluteClockSampling.ru.md).
 - [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Типизированный наблюдатель фактической ревизии и native A/B скорости](ModelRevisionObserver.ru.md).
 - [Native ModelArchive: формат, API и ограничения](ModelArchive.ru.md).
