@@ -53,9 +53,20 @@ c2507722 прошёл два исходных native controller cases на ка�
 14 arithmetic/controller tests и шесть native cases (2/20 кГц, shared/separated
 Branch geometry) прошли на обоих workers, всего по 20/20. Независимый production
 аудит проверил по 68 primary trials и 15 domain assessments; запрещённых
-integration edits нет. Последние controller-артефакты ещё готовятся к Git
-публикации; ASan и перенос/learning regressions нового controller не завершены.
-Подэтап ещё не принят.
+integration edits нет. Controller-пакеты опубликованы: по 232 stored / 230 raw
+hashes проверены локально. Новый ASan проход M40 завершён: 18/18 cases,
+44 primary trials и 11 domain assessments, пакет 114 stored / 112 raw hashes.
+Learning/export regressions на каждом worker: 22/22 native, 9/9 Python,
+пять learned packages / 62 primary trials; по 508 stored / 506 raw hashes.
+Все перечисленные hashes проверены локально, исходные данные доступны в Git.
+
+Полный проход четырёх maintained groups для root 157a5301 / PulseLib e875ca5
+работает на обоих workers: M40 `s07-domain-full-normal-a4`, Elder-1
+`s07-domain-full-normal-a5`. Elder-1 A4 остановился до тестов: в cache был
+выключен BUILD_TESTING и отсутствовали Rdk targets. A5 явно включает его;
+ошибка подготовки A4 сохранена. На обоих workers три Rdk groups уже прошли,
+PulseLib parent ещё работает. До terminal результата full run и проверки
+первичных данных подэтап не принят в develop.
 [Детали](DynamicResistanceDomains.ru.md).
 
 ## Незакрытый объём исходных этапов

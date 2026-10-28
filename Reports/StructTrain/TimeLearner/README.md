@@ -13,6 +13,9 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Effective N1 controller: 20/20 normal cases and 68 primary trials per worker; 18/18 ASan cases and 44 primary trials on M40 | [Elder-1](s07-domain-controller-elder1/README.md), [M40](s07-domain-controller-m40/README.md), [ASan](s07-domain-asan-m40/README.md) |
+| Effective-domain controller learning/export regressions: 22 native, 9 Python, five completed packages / 62 original trials per worker | [Elder-1](s07-domain-learning-elder1/README.md), [M40](s07-domain-learning-m40/README.md) |
+| Read-only physical domain preview: normal API/editor checks and scoped ASan; earlier compile failure retained | [Elder-1](s07-domain-preview-elder1/README.md), [M40](s07-domain-preview-m40/README.md) |
 | Post-fix maintained gate: 4/4 suites per worker, PulseLib 387 pass + 10 skip, 16 completed packages / 208 primary trials per worker | [Elder-1](s05-pooled-full-elder1/README.md), [M40](s05-pooled-full-m40/README.md) |
 | N1 mesh ignores effective Rs domain: two expected native failures and 20 verified primary trials per worker; fix pending | [Elder-1](s07-domain-baseline-elder1/README.md), [M40 ASan](s07-domain-baseline-m40/README.md) |
 | Diagnostic stopped solo state: new-guard regression, 20 native cases and 66 primary trials per worker, fresh-process/bidirectional Git replay and completed-state regressions | [M40 + ASan](s05-stopped-m40/README.md), [Elder-1](s05-stopped-elder1/README.md) |

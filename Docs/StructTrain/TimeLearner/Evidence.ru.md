@@ -164,7 +164,9 @@ assertions проходят. PulseLib 4919bac2bd359118b13310862e54bcd24492967d �
 задаёт false в ADefault. Root 7fb92a4a57b9773ff56996cf2c7b8c75b2746cd8:
 8/8 lifecycle и 18/18 UContainer passed на обоих workers, также ASan M40,
 detect_leaks=0. Git packages s04-audit-default-elder1/m40 опубликованы.
-Full A2 shell preparation failure сохранён; Full A3 ещё выполняется. Физика,
+Full A2 shell preparation failure сохранён; Full A3 завершён на обоих workers:
+четыре maintained suites pass, PulseLib 387 pass / 10 skip. Принято в develop,
+см. PooledFullAcceptance.ru.md. Физика,
 tolerances и общий lifecycle Rdk не изменялись. См. AuditFlagDefault.ru.md.
 
 TL-031: full maintained CTest Elder-1 A9 и M40 A15 воспроизводят по 15
@@ -177,7 +179,12 @@ Rdk 1223bcc18cf1ba106e8f8a17f20cce8c000c104d очищает внешние ис�
 сохранены отдельно от production defect. В failed full runs независимо проверены
 по 16 source trainings и 208 trial CSV/JSON; успешный Train не отменяет failed
 transport. Git evidence packages s04-property-bindings-elder1/m40 опубликованы.
-Post-fix full CTest пока выполняется; Rdk feature не принята в develop.
+Post-fix full CTest A3 завершён на обоих workers: четыре maintained suites pass,
+PulseLib 387 pass / 10 skip, 16 packages / 208 primary trials на каждом.
+Rdk develop merge 1812624ff75c60f03ad57c10b379d3e3848590bc принят, его tree
+совпадает с tested 1223bcc; root develop 2ad95250fb91c32826399702081c636852a0d56a.
+См. PooledFullAcceptance.ru.md. Эти проверки не включают более поздние
+stopped-state и dynamic-domain extensions.
 См. PooledPropertyBindings.ru.md. Исторические научные результаты этим не опровергаются.
 
 TL-030: штатное перемещение компонента вперёд в конец читало за границей
