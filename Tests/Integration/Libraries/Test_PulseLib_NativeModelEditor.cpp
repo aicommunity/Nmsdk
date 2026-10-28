@@ -73,7 +73,10 @@ public:
     PostTuneStimulusLearner* New(void) override {return new PostTuneStimulusLearner;}
     void ArmPresentations(const std::vector<std::vector<double>>& patterns)
     {
-        this->TrainingPhase=4;this->PostTrainTuneComplete=false;
+        // The public legacy phase values differ: Classic PostTune=3,
+        // Branch PostTune=4 (Branch reserves 3 for parallel calibration).
+        this->TrainingPhase=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value?4:3;
+        this->PostTrainTuneComplete=false;
         this->PostTuneFreeRunActive=false;this->ResetNeuronBeforeTrainBurst=false;
         this->PostTunePatterns=patterns;this->PostTuneTargetIsi=patterns.front();
     }
@@ -1880,6 +1883,7 @@ template<class Learner> void PostTuneTransientStimulus(unsigned frequency)
         const unsigned maximum=unsigned(std::ceil(.22*frequency))+3;
         const auto presented=values(dataset->MatrixData.GetData());
         const QJsonObject spec{{"kind","posttune_transient_presentation"},{"schema_version",1},
+            {"topology",branch?"branch":"classic"},
             {"trial_id",QString::fromStdString(stem)},{"training_goal",values(goal)},{"presented_isi",presented},
             {"pattern_hash",NmsdkTools::CanonicalModelDataSha256(presented)},
             {"begin",begin},{"end",end},{"maximum_sample_gap",1./frequency},{"maximum_samples",double(maximum)},
