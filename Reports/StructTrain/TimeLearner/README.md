@@ -13,6 +13,9 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Physical domain schema 2: 22 native / 15 Python per worker; independent a/b/endpoints; aligned byte-exact 68 normal / 44 ASan trial controls | [Elder-1](s07-domain-physics-elder1/README.md), [M40 ASan](s07-domain-physics-m40/README.md), [aligned 2/20 kHz](s07-domain-physics-matrix-elder1/README.md) |
+| Maintained native analyze CLI: 20 tests and 27 actual calls per worker; I/O vs evidence status and explicit legacy adapter | [Elder-1 A2](s07-domain-cli-status-elder1/README.md), [M40 A2](s07-domain-cli-status-m40/README.md) |
+| Earlier read-only API/editor ASan A2 now terminal: all 12 pass; distinct from later controller/serialization sources | [M40 terminal supplement](s07-domain-preview-full-m40/README.md) |
 | Effective N1 controller: 20/20 normal cases and 68 primary trials per worker; 18/18 ASan cases and 44 primary trials on M40 | [Elder-1](s07-domain-controller-elder1/README.md), [M40](s07-domain-controller-m40/README.md), [ASan](s07-domain-asan-m40/README.md) |
 | Effective-domain controller learning/export regressions: 22 native, 9 Python, five completed packages / 62 original trials per worker | [Elder-1](s07-domain-learning-elder1/README.md), [M40](s07-domain-learning-m40/README.md) |
 | Read-only physical domain preview: normal API/editor checks and scoped ASan; earlier compile failure retained | [Elder-1](s07-domain-preview-elder1/README.md), [M40](s07-domain-preview-m40/README.md) |

@@ -40,9 +40,12 @@ declared scaled/fixed inhibition, отдельный диапазон актив
 После compile correction `39179da` прямые четыре preview/storage-profile tests
 прошли нормально на Elder-1 и под M40 ASan, detect_leaks=0. Elder-1 также прошёл
 восемь editor regressions N0/N1 при 2/20 кГц, всего 12 cases. Более длинный
-M40 ASan regression run продолжается в неизменяемом runtime; отдельный четырёх-
-case ASan job использует тот же binary с собственным output. Эти данные ещё
-готовятся к публикации. Compile failure A1 сохраняется отдельно.
+M40 ASan regression A2 впоследствии завершился: 12/12, 5089.73 s; terminal
+[supplement](../../../Reports/StructTrain/TimeLearner/s07-domain-preview-full-m40/README.md)
+`93ce1329e03bb62bfea8e1d5ef5ad4d81fb6eb1f`, 127 stored / 125 raw hashes проверены
+локально. Более ранний scoped четырёх-case пакет использует тот же binary,
+но остаётся самостоятельной попыткой; его тогдашний pending не переписывается.
+Compile failure A1 сохраняется отдельно.
 
 Текущая production реализация `e875ca5` подключает Native N1 к явным controller
 domain actions. Standalone kernel сохраняет declared-only API по умолчанию;
@@ -78,7 +81,10 @@ Learning/export regressions нового controller на обоих workers: 22/
 Full maintained groups текущего source ещё выполняются, исправление пока
 не принято в develop. Production auditor проверяет исходные пробы и residuals;
 он пока не пересчитывает физическое происхождение domain coefficients из
-графа. Это отдельное незакрытое требование к decision provenance.
+графа. Последующий отдельный
+[подэтап physical decision evidence](DomainDecisionEvidence.ru.md) добавляет такой
+пересчёт schema-2 preview и проверяет его нормально / ASan; исторические
+schema-1 записи не получают это доказательство задним числом.
 
 ## Не переносить условную границу как универсальную
 

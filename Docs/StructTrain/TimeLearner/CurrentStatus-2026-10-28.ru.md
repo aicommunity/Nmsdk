@@ -73,9 +73,19 @@ PulseLib parent ещё работает. До terminal результата full
 подготовлена domain schema 2 с полным immutable preview и явным ownership,
 независимый Python-пересчёт физических bounds и corruption controls. Root
 `37c57e1a3573328a670ebf260652a5db42b0ce7c`, PulseLib
-`34a00239cf9a368961daef9c0cca7106c3cb9b3c`. Новые normal / ASan проверки
-в отдельных runtime ещё выполняются. Полные прогоны root 157a5301 не изменены
-и не объявляются покрытием этой более поздней сериализации.
+`34a00239cf9a368961daef9c0cca7106c3cb9b3c`: на каждом worker прошли 22 native /
+15 Python, по 44 primary trials и 17 independently recomputed physical records.
+M40 ASan подтвердил byte-exact 44 CSV/probe JSON к предыдущему controller.
+Elder-1 aligned A2 дополнительно: 20 cases при 2/20 кГц, 68 byte-exact trials
+и 15 physical records. Пакеты опубликованы, hashes проверены локально.
+Полные прогоны root 157a5301 не изменены и не объявляются покрытием этой
+более поздней сериализации.
+
+**Native analyze CLI**: root 268cc0b9, по 20 Python tests и 27 actual CLI calls
+на каждом worker. Поддержаны domain/probe/learned-solo/stopped-solo; scientific
+verdict всегда null. Code 0 не означает convergence. I/O process_error отделён
+от invalid evidence. По 7 stored / 5 raw hashes проверены; native binary для
+этого подэтапа не перестраивался.
 [Границы подэтапа](DomainDecisionEvidence.ru.md).
 
 ## Незакрытый объём исходных этапов
@@ -90,7 +100,7 @@ PulseLib parent ещё работает. До terminal результата full
 | 6 | Завершение общего controller/adapters, configured retarget/reconfiguration и всех совместимых режимов |
 | 7 | Приёмка dynamic N1 domains; N0 repeatability/quantization; полный поиск/recovery, physics/inhibition/C-trim matrix и честные причины остановки |
 | 8 | Immutable Solo→Recognition conversion, transactional PostTune, real-threshold calibration и независимый frozen Test |
-| 9 | Все production CLI команды и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
+| 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, recognition analysis и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
 | 10 | ConditionSpec, fingerprints, owned-process leases/queues/cancellation и fail-closed Git publisher; удаление rsync/scp pipeline |
 | 11 | Исторический saved replay и cold retrain, legacy/v2 comparison, actual order/ITI controls и полная научная матрица |
 | 12 | Сквозная актуализация root/PulseLib/Bin/Rdk/config/ClDesc и устранение конкурирующих актуальных спецификаций |
