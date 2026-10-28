@@ -580,9 +580,9 @@ template<class Learner> NativeTrainingPlan TrainingPlan(EditingRig<Learner>& rig
     return plan;
 }
 
-template<class Learner> void NativeResistanceDomainSearch()
+template<class Learner> void NativeResistanceDomainSearch(unsigned frequency=2000)
 {
-    EditingRig<Learner> rig(2000,1,"effective_resistance_domain");auto plan=TrainingPlan(rig);
+    EditingRig<Learner> rig(frequency,1,"effective_resistance_domain");auto plan=TrainingPlan(rig);
     plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
     for(auto& bound:plan.search.bounds)bound.maximumLength=bound.minimumLength;
@@ -603,7 +603,7 @@ template<class Learner> void NativeResistanceDomainSearch()
     };
     rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
-    {ASSERT_LT(ticks,40000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*rig.frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();ASSERT_TRUE(service.Search())<<service.Reason();
     Artifact(rig.name+"_domain_summary.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
     EXPECT_GE(service.Search()->AppliedEdits(),1u);EXPECT_GE(service.Search()->Evidence().size(),2u);
@@ -626,6 +626,65 @@ template<class Learner> void NativeResistanceDomainSearch()
 }
 TEST(NativeResistanceDomains,ClassicSearchUsesEffectiveDomain){NativeResistanceDomainSearch<NNeuronTimeLearner>();}
 TEST(NativeResistanceDomains,BranchSearchUsesEffectiveDomain){NativeResistanceDomainSearch<NNeuronTimeLearnerBranch>();}
+TEST(NativeResistanceDomains,ClassicSearchUsesEffectiveDomain20000){NativeResistanceDomainSearch<NNeuronTimeLearner>(20000);}
+TEST(NativeResistanceDomains,BranchSearchUsesEffectiveDomain20000){NativeResistanceDomainSearch<NNeuronTimeLearnerBranch>(20000);}
+
+void NativeBranchDomainGeometry(bool canSeparate)
+{
+    EditingRig<NNeuronTimeLearnerBranch> rig(2000,1,canSeparate?"domain_separated_banks":"domain_locked_banks",false,4,true);
+    auto plan=TrainingPlan(rig,0.);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    const auto initial=rig.learner->ReadNativeParameters();
+    for(std::size_t i=0;i+1<plan.search.bounds.size();++i)
+    {
+        auto& b=plan.search.bounds[i];b.maximumLength=canSeparate?3:2;
+        b.minimumResistance=.5e6;b.maximumResistance=1.e9;
+    }
+    plan.search.maximumCandidatesPerInput=12;
+    struct Recording { std::size_t trials=0;std::ostringstream trace; };
+    const auto recording=std::make_shared<Recording>();const auto stem=rig.name;
+    plan.probe.onPrepared=[recording](const auto&,const auto&) {
+        recording->trace.str({});recording->trace.clear();recording->trace.imbue(std::locale::classic());
+        recording->trace<<std::setprecision(17)<<"time,stimulus,soma0\n";
+    };
+    plan.probe.onSample=[recording](const auto& frame) {
+        recording->trace<<frame.time<<','<<frame.stimulus;for(double v:frame.potentials)recording->trace<<','<<v;recording->trace<<'\n';
+    };
+    plan.observationSink=[recording,stem](const auto& packet) {
+        const auto name=stem+"_geometry_trial_"+std::to_string(++recording->trials);
+        Artifact(name+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
+        Artifact(name+".csv",QByteArray::fromStdString(recording->trace.str()));
+    };
+    rig.learner->BeginNativeTraining(plan);bool measured=false;
+    for(unsigned ticks=0;;++ticks)
+    {
+        ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*rig.frequency)+100u);
+        const auto& service=rig.learner->NativeTrainingController();
+        if(service.Search())for(const auto& e:service.Search()->Evidence())
+        {
+            if(e.inputIndex!=2 || e.fullParameters.size()!=4 || e.fullParameters[2].length!=2)continue;
+            if(canSeparate)measured=measured || (e.fullParameters[1].length>2 && e.parameters.resistance!=initial[2].resistance);
+            else measured=measured || e.fullParameters[1].length==2;
+        }
+        if(measured){rig.learner->IsNeedToTrain=false;break;}
+        if(service.State()==NativeTrainingState::Finished)break;
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    }
+    const auto& service=rig.learner->NativeTrainingController();
+    Artifact(rig.name+"_geometry_summary.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
+    ASSERT_TRUE(service.Search())<<service.Reason();EXPECT_TRUE(measured)<<service.Reason();
+    EXPECT_EQ(rig.learner->ReadNativeParameters().back(),initial.back());
+    bool found=false;for(const auto& d:service.Search()->Domains())
+    {
+        if(d.inputIndex!=2 || d.geometry.size()!=4 || d.geometry[2].length!=2 || d.status!=ResistanceDomainStatus::Available)continue;
+        if(canSeparate && d.geometry[1].length>2 && !d.lockedBySharedBank)found=true;
+        if(!canSeparate && d.geometry[1].length==2 && d.lockedBySharedBank)
+        {found=true;EXPECT_EQ(d.minimumResistance,d.maximumResistance);EXPECT_EQ(d.minimumResistance,initial[2].resistance);}
+    }
+    EXPECT_TRUE(found);EXPECT_FALSE(service.Certificate());
+}
+TEST(NativeResistanceDomains,BranchBoundedSharedBanksKeepSingletonGeometry){NativeBranchDomainGeometry(false);}
+TEST(NativeResistanceDomains,BranchFreeUpstreamBanksCanSeparateForRsSearch){NativeBranchDomainGeometry(true);}
 
 template<class Learner> void NativeDomainPreview()
 {
