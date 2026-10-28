@@ -1037,7 +1037,7 @@ TEST(NativeLearnedState,FreshProcessImport)
     dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
 }
 
-enum class RecognitionCase { Identity,Scaled,Clipped };
+enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict };
 template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
@@ -1046,8 +1046,24 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
     if(scenario!=RecognitionCase::Identity)
     {
         spec.mode=RecognitionConversionMode::HistoricalBranchN1;
-        for(const auto& p:parameters)spec.resistanceBounds.push_back(scenario==RecognitionCase::Clipped?
-            RecognitionResistanceBounds{p.resistance*1.5,p.resistance*1.5}:RecognitionResistanceBounds{1.e6,1.e12});
+        for(std::size_t i=0;i<parameters.size();++i)
+        {
+            const auto& p=parameters[i];const double fixed=p.resistance*(scenario==RecognitionCase::SharedConflict?1.1+.1*double(i):1.5);
+            spec.resistanceBounds.push_back(scenario==RecognitionCase::Clipped || scenario==RecognitionCase::SharedConflict?
+                RecognitionResistanceBounds{fixed,fixed}:RecognitionResistanceBounds{1.e6,1.e12});
+        }
+    }
+    if(scenario==RecognitionCase::SharedConflict)
+    {
+        ASSERT_GT(parameters.size(),1u);EXPECT_EQ(parameters[0].length,parameters[1].length);
+        std::string reason;try {ConvertNativeSoloToRecognition(source,spec,core.storage,core.environment,implementation);}
+        catch(const std::exception& error){reason=error.what();}
+        EXPECT_EQ(reason,"shared_recognition_bank_conflict");
+        EXPECT_EQ(source,sourceCopy);EXPECT_EQ(rig.Revision(),original);EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+        EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
+        Artifact(rig.name+"_recognition_rejected.json",QJsonDocument(QJsonObject{{"reason",QString::fromStdString(reason)},
+            {"source_sha256",source["sha256"]},{"source_revision",source["model_revision"]},{"source_unchanged",rig.Revision()==original}}).toJson());
+        return;
     }
     const auto recognition=ConvertNativeSoloToRecognition(source,spec,core.storage,core.environment,implementation);
     const auto repeated=ConvertNativeSoloToRecognition(source,spec,core.storage,core.environment,implementation);
@@ -1383,6 +1399,28 @@ TEST(NativeRecognitionState,BranchN1HistoricalScale){LearnedBoundary<NNeuronTime
 TEST(NativeRecognitionState,BranchN1ExplicitClipping){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::Clipped);}
 TEST(NativeRecognitionState,BranchN1SingleInput){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,1,false,RecognitionCase::Scaled);}
 TEST(NativeRecognitionState,BranchN0SixSharedInputs){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6,false,RecognitionCase::Identity);}
+TEST(NativeRecognitionState,ConflictingSharedBankIsRejectedWithoutChangingSource)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,1.,2000,4,false,RecognitionCase::SharedConflict);}
+TEST(NativeRecognitionState,SpecIsStrictAndRoundtrips)
+{
+    NativeRecognitionSpec spec;const auto identity=EncodeNativeRecognitionSpec(spec);
+    EXPECT_EQ(EncodeNativeRecognitionSpec(DecodeNativeRecognitionSpec(identity)),identity);
+    spec.mode=RecognitionConversionMode::HistoricalBranchN1;spec.resistanceBounds={{1.e6,1.e9},{2.e6,2.e9}};
+    const auto scaled=EncodeNativeRecognitionSpec(spec);EXPECT_EQ(EncodeNativeRecognitionSpec(DecodeNativeRecognitionSpec(scaled)),scaled);
+    auto invalid=scaled;invalid["reserved"]=1;EXPECT_THROW(DecodeNativeRecognitionSpec(invalid),std::invalid_argument);
+    invalid=scaled;invalid["schema_version"]=2;EXPECT_THROW(DecodeNativeRecognitionSpec(invalid),std::invalid_argument);
+    spec.resistanceBounds[0]={2.,1.};EXPECT_THROW(EncodeNativeRecognitionSpec(spec),std::invalid_argument);
+    spec.mode=RecognitionConversionMode::Identity;spec.resistanceBounds={{1.,2.}};
+    EXPECT_THROW(EncodeNativeRecognitionSpec(spec),std::invalid_argument);
+}
+TEST(NativeRecognitionState,StoppedPackageCannotBecomeCompletedRecognition)
+{
+    const QJsonObject stopped{{"kind","timelearner_stopped_state"},{"state_kind","diagnostic"}};
+    std::string reason;
+    try {ConvertNativeSoloToRecognition(stopped,{},UEPtr<UStorage>{},UEPtr<UEnvironment>{},"test");}
+    catch(const std::invalid_argument& error){reason=error.what();}
+    EXPECT_EQ(reason,"recognition_requires_completed_solo");
+}
 
 enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial };
 template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false)
