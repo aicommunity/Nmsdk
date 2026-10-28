@@ -1251,7 +1251,7 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     EXPECT_EQ(stoppedAgain["model_revision"],package["model_revision"]);
     EXPECT_EQ(stoppedAgain["reference_complete"].toBool(),complete);
     if(scenario!=StoppedCase::ChangedPartial)EXPECT_EQ(stoppedAgain["session_attempt"].toDouble(),double(previousAttempt+1));
-    Artifact(rig.name+"_warm_stopped_state.json",QJsonDocument(stoppedAgain).toJson());
+    Artifact(rig.name+"_warm_boundary.json",QJsonDocument(stoppedAgain).toJson());
     Artifact(rig.name+"_restored_summary.json",QJsonDocument(EncodeNativeTrainingState(restored,importedRevision(),test->ReadNativeParameters())).toJson());
 }
 #define STOPPED_CASE(Name,Value) \
