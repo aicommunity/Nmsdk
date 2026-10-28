@@ -9,6 +9,10 @@
 
 namespace NmsdkTests {
 
+// Actual executable identity; independent of CWD and filename suffixes.
+void SetPulseLibTestExecutable(const std::string& argv0);
+const std::string& PulseLibTestExecutable();
+
 struct ConsoleInitResult
 {
     RDK::UEPtr<RDK::UStorage>     storage;
