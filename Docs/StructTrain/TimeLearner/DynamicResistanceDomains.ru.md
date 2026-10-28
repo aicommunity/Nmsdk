@@ -15,8 +15,30 @@ preview, проверяет его интегратор и вычисляет `m
 следующий кандидат не использует границы изменённой геометрии. Новый native
 fixture задаёт внешний диапазон 0.5 MOhm–1 GOhm и бюджет три кандидата при
 фиксированной геометрии; ожидается, что внутренний физический диапазон будет
-проверен до расходования бюджета на заведомо запрещённую точку. Runtime baseline
-ещё не выполнен; scientific convergence этим тестом не требуется.
+проверен до расходования бюджета на заведомо запрещённую точку.
+
+Runtime baseline root `fda22b8d99e7a65bb8f97ac4d2ce288219ced9c0`, PulseLib
+`87e6c2247f0cd962609bc40a04fd92dafa024a0b` (tree равен 12c5ef5): на каждом
+worker два tests / два ожидаемых failures, строго по одному assertion на test.
+Native preflight отклоняет mesh Rs как `channel_step_not_certified_strictly_stable`;
+запрещённый Rs не применяется. Остальные assertions, включая фактический edit
+и не менее двух измеренных кандидатов, прошли. Это дефект бюджета поиска, а не
+подтверждённая неустойчивость применённой модели. Scientific convergence не требуется.
+Production Python-аудит проверил по 20 actual trial JSON/CSV и final certificates.
+Артефакты: [Elder-1](../../../Reports/StructTrain/TimeLearner/s07-domain-baseline-elder1/README.md),
+commit `a37d00b9071a338fd01259750e28f82b15a9ab85`;
+[M40 ASan](../../../Reports/StructTrain/TimeLearner/s07-domain-baseline-m40/README.md),
+commit `35693008140819edeef8b77d3fb2f729372ffd77`.
+Локально проверено по 57 stored и 55 raw hashes. Controller ещё не исправлен;
+expected-failure tests не принимаются в develop.
+
+Рабочая реализация PulseLib `4be5bc8` добавляет read-only
+`AssessNativeResistanceDomain` обоих learner и native preview API: учтены
+declared scaled/fixed inhibition, отдельный диапазон активного входа и shared-bank
+ограничения. Live graph проверяется после уничтожения preview; отсутствие области
+не называется PhysicalInfeasible. TrainingParameters выделены отдельно, `fada6b6`.
+Прямые preview/storage-profile tests ещё не приняты. API ещё не подключён к mesh;
+исходные два controller tests должны оставаться red.
 
 ## Не переносить условную границу как универсальную
 
@@ -77,3 +99,20 @@ search box не доказывает PhysicalInfeasible. Если изменяе
 области разных входов; отсутствие конечной области; безопасное сохранение live
 graph при отказе; unchanged anchor; реальные measured residuals и fresh final
 gate. Тесты выполняются только на заданных серверах, исходники/артефакты через Git.
+
+## Ограничения подключения контроллера
+
+- Branch geometry для изменения Rs может требовать разнести ещё не посещённые
+  совпадающие upstream attachments. Совпадение с фиксированным downstream/anchor
+  bank даёт locked Rs; anchor не меняется. Preview описывает весь предлагаемый граф.
+- После каждого effective edit область запрашивается заново. Дедупликация mesh
+  учитывает geometry/physics scope и весь вектор параметров, особенно при
+  shrink/growth heterogeneous модели. Возможный scope — identity preview на
+  фиксированном reference Rs с учётом всех связанных inhibitory Rs.
+- Declared bounds и tolerances неизменны; derived intervals являются отдельным
+  evidence. Отсутствующий native N1 provider не заменяется статическими bounds.
+- Assessment является отдельным controller action через адаптер, без Calculate
+  и без зачёта физической пробы. Preview и отброшенные geometry имеют конечный
+  бюджет; число candidate/probe/edit действий остаётся ограниченным.
+- Baseline, все фактически измеренные точки и fresh final gate различимы.
+  Clipping, отсутствие interval и исчерпание mesh не создают Exact.
