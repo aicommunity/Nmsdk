@@ -69,6 +69,15 @@ PulseLib parent ещё работает. До terminal результата full
 первичных данных подэтап не принят в develop.
 [Детали](DynamicResistanceDomains.ru.md).
 
+**Проверяемые основания N1 decisions** (`stage07/domain-decision-evidence`):
+подготовлена domain schema 2 с полным immutable preview и явным ownership,
+независимый Python-пересчёт физических bounds и corruption controls. Root
+`37c57e1a3573328a670ebf260652a5db42b0ce7c`, PulseLib
+`34a00239cf9a368961daef9c0cca7106c3cb9b3c`. Новые normal / ASan проверки
+в отдельных runtime ещё выполняются. Полные прогоны root 157a5301 не изменены
+и не объявляются покрытием этой более поздней сериализации.
+[Границы подэтапа](DomainDecisionEvidence.ru.md).
+
 ## Незакрытый объём исходных этапов
 
 | Этап | Что ещё требуется |
