@@ -1246,6 +1246,12 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
         else EXPECT_FALSE(restored.References());
         test->IsNeedToTrain=false;
     }
+    const auto stoppedAgain=test->ExportNativeLearnedState(implementation);
+    EXPECT_EQ(stoppedAgain["kind"],QJsonValue("timelearner_stopped_state"));EXPECT_TRUE(stoppedAgain["certificate"].isNull());
+    EXPECT_EQ(stoppedAgain["model_revision"],package["model_revision"]);
+    EXPECT_EQ(stoppedAgain["reference_complete"].toBool(),complete);
+    if(scenario!=StoppedCase::ChangedPartial)EXPECT_EQ(stoppedAgain["session_attempt"].toDouble(),double(previousAttempt+1));
+    Artifact(rig.name+"_warm_stopped_state.json",QJsonDocument(stoppedAgain).toJson());
     Artifact(rig.name+"_restored_summary.json",QJsonDocument(EncodeNativeTrainingState(restored,importedRevision(),test->ReadNativeParameters())).toJson());
 }
 #define STOPPED_CASE(Name,Value) \
