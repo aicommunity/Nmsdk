@@ -21,6 +21,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [EnableTrainingAudit: воспроизведённый Default defect и отличие от stock reuse](AuditFlagDefault.ru.md).
 - [Перенос модели: выполненная часть и оставшиеся проверки](Stage05-Progress.ru.md).
 - [Остановленное обучение: диагностический перенос без сертификата, текущая проверка](StoppedTrainingState.ru.md).
+- [Эффективные N1 области: дефект mesh и текущая реализация preview](DynamicResistanceDomains.ru.md).
 - [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Типизированный наблюдатель фактической ревизии и native A/B скорости](ModelRevisionObserver.ru.md).
 - [Native ModelArchive: формат, API и ограничения](ModelArchive.ru.md).

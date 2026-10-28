@@ -25,6 +25,7 @@
 #include <limits>
 #include <chrono>
 #include <algorithm>
+#include <cmath>
 
 namespace {
 using namespace RDK;
@@ -67,7 +68,7 @@ template<class Learner> struct EditingRig {
     double constructionTime=0.;
     std::vector<double> isi{.01,.08};bool tightBurst=false;
     EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2,
-               bool cold=false,int neuronMode=2,int learnerMode=1)
+               bool cold=false,int neuronMode=2,int learnerMode=1,bool domainInhibitionProfile=false)
         :frequency(f),normalization(mode),inputCount(inputs),tightBurst(tight)
     {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();environment=core.environment;
@@ -75,6 +76,7 @@ template<class Learner> struct EditingRig {
         if(!environment->CreateModel("NModel"))throw std::runtime_error("editor_fixture_model");model=environment->GetModel();
         name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(f)+"_N"+std::to_string(mode)+"_"+suffix;
         StorageProfileSpec profile;profile.name=name;profile.frequencyHz=f;profile.neuronBaseClass="NSPNeuronGen";
+        if(domainInhibitionProfile)profile.body.inhChannel.capacity=.15e-9;
         profile.initialThreshold=1.;profile.ltMembrane=profile.body;profile.ltMembrane->excChannel.capacity=.3e-9;
         const auto registered=RegisterStorageProfile(core.storage,environment,profile);
         learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
@@ -617,6 +619,69 @@ template<class Learner> void NativeResistanceDomainSearch()
 }
 TEST(NativeResistanceDomains,ClassicSearchUsesEffectiveDomain){NativeResistanceDomainSearch<NNeuronTimeLearner>();}
 TEST(NativeResistanceDomains,BranchSearchUsesEffectiveDomain){NativeResistanceDomainSearch<NNeuronTimeLearnerBranch>();}
+
+template<class Learner> void NativeDomainPreview()
+{
+    EditingRig<Learner> rig(2000,1,"domain_preview");auto values=rig.learner->ReadNativeParameters();const auto original=values;
+    const auto early=rig.learner->AssessNativeResistanceDomain(values,0);
+    EXPECT_EQ(early.status,ResistanceDomainStatus::Unsupported);EXPECT_EQ(early.reason,"native_domain_requires_consumed_probe_boundary");
+    const auto first=rig.Probe();ASSERT_EQ(first.status,NativeProbeStatus::Completed);
+    const auto before=rig.Revision();values[0].resistance=.5e6;
+    const auto domain=rig.learner->AssessNativeResistanceDomain(values,0);
+    ASSERT_EQ(domain.status,ResistanceDomainStatus::Available)<<domain.reason;
+    EXPECT_FALSE(domain.modelMayHaveChanged);EXPECT_EQ(domain.baseModelRevision,before);EXPECT_FALSE(domain.previewModelRevision.empty());
+    EXPECT_GT(domain.minimumResistance,values[0].resistance);EXPECT_LT(domain.minimumResistance,original[0].resistance);
+    EXPECT_GT(domain.maximumResistance,original[0].resistance);EXPECT_FALSE(domain.lockedBySharedBank);EXPECT_FALSE(domain.channels.empty());
+    EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(rig.learner->ReadNativeParameters(),original);
+    values[0].resistance=1.e9;const auto other=rig.learner->AssessNativeResistanceDomain(values,0);
+    ASSERT_EQ(other.status,ResistanceDomainStatus::Available)<<other.reason;
+    EXPECT_NEAR(other.minimumResistance,domain.minimumResistance,domain.minimumResistance*32*std::numeric_limits<double>::epsilon());
+    EXPECT_EQ(other.maximumResistance,domain.maximumResistance);EXPECT_EQ(rig.Revision(),before);
+    values[0].resistance=domain.minimumResistance;
+    const auto applied=rig.learner->ApplyNativeParameters(values);ASSERT_EQ(applied.status,NativeEditStatus::Applied)<<applied.reason;
+    const auto assessment=AssessNativeIntegration(rig.neuron,rig.source->Amplitude.GetData());EXPECT_TRUE(assessment.valid)<<assessment.reason;
+    const auto probe=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
+    EXPECT_EQ(probe.status,NativeProbeStatus::Completed);
+    QJsonArray channels;for(const auto& c:domain.channels)channels.append(QJsonObject{{"path",QString::fromStdString(c.path)},
+        {"variable_coefficient",c.variableCoefficient},{"fixed_conductance",c.fixedConductance},{"minimum_resistance",c.minimumResistance}});
+    Artifact(rig.name+"_domain_preview.json",QJsonDocument(QJsonObject{{"status",ResistanceDomainStatusName(domain.status)},
+        {"reason",QString::fromStdString(domain.reason)},{"base_revision",QString::fromStdString(before)},
+        {"preview_revision",QString::fromStdString(domain.previewModelRevision)},{"minimum_resistance",domain.minimumResistance},
+        {"maximum_resistance",domain.maximumResistance},{"channels",channels}}).toJson());
+}
+TEST(NativeResistanceDomains,ClassicReadonlyPreview){NativeDomainPreview<NNeuronTimeLearner>();}
+TEST(NativeResistanceDomains,BranchReadonlyPreview){NativeDomainPreview<NNeuronTimeLearnerBranch>();}
+
+template<class Learner> void NativeDomainInhibition()
+{
+    EditingRig<Learner> rig(2000,1,"domain_inhibition",false,2,true,2,1,true);
+    NativeEditSpec policy;policy.normalization=Normalization::TipResistance;policy.maximumCableLength=8;
+    auto spec=DescribeNativeLearnerModel(*rig.learner,rig.branch,Normalization::TipResistance,rig.learner->DendriteLength.GetData(),policy);
+    spec.allocatedCableLengths.clear();
+    for(std::size_t i=0;i<spec.inputs.size();++i)spec.editPolicy.inhibition.push_back({i,1,*spec.inputs[i].resistance});
+    double minimum[2]{};
+    for(int scaled=0;scaled!=2;++scaled)
+    {
+        spec.scaleInhibitionWithInput=scaled!=0;const auto built=rig.learner->ConstructNativeModel(spec);
+        ASSERT_EQ(built.status,NativeModelBuildStatus::Constructed)<<built.reason;rig.model->Init();rig.model->Reset();
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+        const auto initial=rig.Probe();ASSERT_NE(initial.status,NativeProbeStatus::Running);
+        const auto before=rig.Revision();auto values=rig.learner->ReadNativeParameters();values[0].resistance=.5e6;
+        const auto domain=rig.learner->AssessNativeResistanceDomain(values,0);
+        ASSERT_EQ(domain.status,ResistanceDomainStatus::Available)<<domain.reason;minimum[scaled]=domain.minimumResistance;
+        EXPECT_EQ(rig.Revision(),before);EXPECT_FALSE(domain.modelMayHaveChanged);
+        bool variableInhibition=false;for(const auto& c:domain.channels)if(c.path.find("InhChannel")!=std::string::npos)variableInhibition=true;
+        EXPECT_EQ(variableInhibition,scaled!=0);
+        Artifact(rig.name+(scaled?"_scaled_domain.json":"_fixed_domain.json"),QJsonDocument(QJsonObject{
+            {"minimum_resistance",domain.minimumResistance},{"maximum_resistance",domain.maximumResistance},
+            {"scaled_inhibition",scaled!=0},{"variable_inhibition",variableInhibition}}).toJson());
+    }
+    EXPECT_GT(minimum[1],minimum[0]);
+}
+TEST(NativeResistanceDomains,ClassicScaledInhibitionDomain){NativeDomainInhibition<NNeuronTimeLearner>();}
+TEST(NativeResistanceDomains,BranchScaledInhibitionDomain){NativeDomainInhibition<NNeuronTimeLearnerBranch>();}
 
 template<class Learner> void RunNativeTraining(int normalization,bool cold=false)
 {
