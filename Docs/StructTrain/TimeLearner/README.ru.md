@@ -3,9 +3,13 @@
 Этот раздел содержит поддерживаемую спецификацию рефакторинга двух компонентов:
 Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
+Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
+
 - [План и условия приёмки](RefactoringPlan.ru.md).
+- [Приёмка 28.10: full post-fix gate, native completed state и child merges](PooledFullAcceptance.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
-- [Актуальный статус всех этапов: перепроверка 27.10](PlanCompletionAudit-2026-10-27.ru.md).
+- [Актуальный статус всех этапов: сверка Git, кода и серверных A9/A15/property-A2 результатов 27.10](CurrentStatus-2026-10-27.ru.md).
+- [Предшествующий аудит 27.10 и история дополнений](PlanCompletionAudit-2026-10-27.ru.md).
 - [Исходная сверка 25.10 и журнал последующих дополнений](PlanCompletionAudit-2026-10-25.ru.md).
 - [Решения и обязательные контракты](Decisions.ru.md).
 - [История и доказательства](Evidence.ru.md).
@@ -13,6 +17,9 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Контракт наблюдений и оценки](ObservationContract.ru.md).
 - [Readback фактического графа модели](ModelInspection.ru.md).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
+- [Native component order: подтверждённый выход за границу и исправление Rdk](ComponentOrderBounds.ru.md).
+- [Pooled property bindings: full-suite отказы, исправление Rdk и проверки](PooledPropertyBindings.ru.md).
+- [EnableTrainingAudit: воспроизведённый Default defect и отличие от stock reuse](AuditFlagDefault.ru.md).
 - [Перенос модели: выполненная часть и оставшиеся проверки](Stage05-Progress.ru.md).
 - [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Типизированный наблюдатель фактической ревизии и native A/B скорости](ModelRevisionObserver.ru.md).
@@ -25,6 +32,16 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Общий контроллер: подготовка baseline и оставшиеся изменения](Stage06-Progress.ru.md).
 - [Native builder/adoption: проверенный C++ API, lifecycle и границы приёмки](NativeModelBuilder.ru.md).
 - [Configured ControllerVersion=2: cold JSON/XML, checks и ограничения](ConfiguredNativeController.ru.md).
+- [Семантика трёх новых configured properties в обоих learner](ConfiguredPropertyContracts.ru.md).
+- [Семантика исходных управляющих свойств и class selectors: 16 записей](LegacyControlPropertyContracts.ru.md).
+- [Семантика цели, структуры и времени: ещё 29 исходных записей](TimingAndTargetPropertyContracts.ru.md).
+- [Семантика диагностик: 38 исходных записей](DiagnosticPropertyContracts.ru.md).
+- [Нормализация и повторные измерения: 34 исходные записи](NormalizationPropertyContracts.ru.md).
+- [Порог, PostTune и калибровка: 44 исходные записи](CalibrationPropertyContracts.ru.md).
+- [C-trim, physical overrides и торможение: 35 исходных записей](PhysicsPropertyContracts.ru.md).
+- [Cold reset, experiment dispatch и logging: 15 исходных записей](ResetAndLoggingPropertyContracts.ru.md).
+- [Текущий прогресс semantic property review](PropertyReview.json).
+- [Полнота code catalog: 211 исходных и 6 новых свойств](PropertyReview.coverage.json).
 - [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
 - [Нативный исполнитель проб Classic/Branch: рабочий подэтап и gates](NativeExecution.ru.md).
 - [Полная последовательность волн и physical input ownership: schema 3](BurstAssignment.ru.md).

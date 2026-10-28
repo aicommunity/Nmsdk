@@ -5,6 +5,7 @@
 
 int main(int argc, char** argv)
 {
+    NmsdkTests::SetPulseLibTestExecutable(argc>0 && argv[0]?argv[0]:"");
 #if defined(_WIN32)
     // Подавляем вывод на stderr (туда пишет glog),
     // чтобы интеграционные тесты PulseLib не флудили
