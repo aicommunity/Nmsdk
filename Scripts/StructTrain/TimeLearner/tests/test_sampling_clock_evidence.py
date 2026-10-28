@@ -50,6 +50,13 @@ class SamplingClockEvidenceTest(unittest.TestCase):
     def test_duplicate_time(self):
         self.corrupt_trace(lambda p, rows: rows[30].__setitem__(0, rows[29][0]))
 
+    def test_changed_requested_duration_by_one_period(self):
+        packet, path = self.cases[0]
+        packet = copy.deepcopy(packet)
+        packet["requested_specification"]["end"] += packet["requested_specification"]["maximum_sample_gap"]
+        with self.assertRaises(EvidenceError):
+            audit_probe(packet, path)
+
     def test_unresolvable_sampling_period(self):
         packet, path = self.cases[0]
         packet = copy.deepcopy(packet)
