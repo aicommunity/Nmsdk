@@ -1883,12 +1883,13 @@ template<class Learner> void PostTuneTransientStimulus(unsigned frequency)
             {"trial_id",QString::fromStdString(stem)},{"training_goal",values(goal)},{"presented_isi",presented},
             {"pattern_hash",NmsdkTools::CanonicalModelDataSha256(presented)},
             {"begin",begin},{"end",end},{"maximum_sample_gap",1./frequency},{"maximum_samples",double(maximum)},
+            {"channels",branch?1:2},
             {"generation_mode",2},{"advance_sample_after_burst",true},{"loop_samples",false},
             {"model_revision",QString::fromStdString(original)},{"record_spikes",false}};
         Artifact(stem+"_spec.json",QJsonDocument(spec).toJson());
         std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
         for(std::size_t i=0;i<(branch?1u:2u);++i)trace<<",soma"<<i;trace<<'\n';
-        QJsonArray onsets;double previous=0.,last=begin;
+        QJsonArray onsets,presentedAtFirst;int phaseAtFirst=-1;double previous=0.,last=begin;
         std::vector<double> lower(branch?1u:2u,std::numeric_limits<double>::infinity()),upper(branch?1u:2u,-std::numeric_limits<double>::infinity());
         bool complete=false;unsigned samples=0;
         for(unsigned tick=0;tick<maximum;++tick)
@@ -1897,7 +1898,11 @@ template<class Learner> void PostTuneTransientStimulus(unsigned frequency)
             ASSERT_TRUE(std::isfinite(stimulus));trace<<time<<','<<stimulus;
             if(stimulus>0. && previous<=0.)
             {
-                if(onsets.isEmpty())rig.learner->ObserveFirstPulse(time);
+                if(onsets.isEmpty())
+                {
+                    presentedAtFirst=values(dataset->MatrixData.GetData());phaseAtFirst=rig.learner->TrainingPhase.GetData();
+                    rig.learner->ObserveFirstPulse(time);
+                }
                 onsets.append(time);
             }
             previous=stimulus;
@@ -1923,6 +1928,8 @@ template<class Learner> void PostTuneTransientStimulus(unsigned frequency)
         QJsonObject observation{{"kind","posttune_transient_observation"},{"schema_version",1},
             {"trial_id",spec["trial_id"]},{"complete",complete},{"sample_count",double(samples)},
             {"last_sample_time",last},{"onsets",onsets},{"expected_relative_times",expectedTimes},
+            {"presented_at_first",presentedAtFirst},{"presented_after",values(dataset->MatrixData.GetData())},
+            {"phase_at_first",phaseAtFirst},{"phase_after",rig.learner->TrainingPhase.GetData()},
             {"training_goal_after",values(rig.learner->InputPattern.GetData())},{"material_goal_after",values(rig.neuron->TrainingPattern.GetData())},
             {"goal_preserved",goalPreserved},{"frozen_after",QString::fromStdString(rig.Revision())},
             {"scientific_verdict",QJsonValue(QJsonValue::Null)}};
