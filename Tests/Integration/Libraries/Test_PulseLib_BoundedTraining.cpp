@@ -73,7 +73,8 @@ BoundedTrainingConfig Configuration(std::size_t n=2,Normalization normalization=
     cfg.bounds.assign(n,{1,3,1,128,1.,100.});return cfg;
 }
 using Response=std::function<void(const TrainingAction&,std::vector<double>&,std::vector<double>&)>;
-void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& protocol,const Response& response={})
+using DomainProvider=std::function<ResistanceDomainAssessment(const TrainingAction&)>;
+void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& protocol,const Response& response={},const DomainProvider& domain={})
 {
     std::size_t iterations=0;
     while(auto action=session.NextAction())
@@ -83,6 +84,10 @@ void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& p
         if(action->kind==TrainingActionKind::Edit)
         {
             session.Applied(action->serial,action->parameters,"model"+std::to_string(action->serial));continue;
+        }
+        if(action->kind==TrainingActionKind::ResistanceDomain)
+        {
+            ASSERT_TRUE(bool(domain));session.AssessedDomain(action->serial,domain(*action),action->baseModelRevision);continue;
         }
         const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
         session.Arm(action->serial,prepared);EXPECT_FALSE(session.NextAction());
@@ -128,6 +133,63 @@ TEST(BoundedTraining, IndependentResistanceBoundsAndNoCommonIntersection)
     ASSERT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_EQ(session.Parameters()[0].resistance,2.);
     EXPECT_EQ(session.Parameters()[1].resistance,20.);EXPECT_EQ(session.Parameters()[2].resistance,150.);
     ASSERT_FALSE(session.Evidence().empty());EXPECT_EQ(session.Evidence().front().inputIndex,1u);
+}
+
+TEST(BoundedTraining, IndependentEffectiveDomainsDoNotRequireACommonInterval)
+{
+    const auto p=Protocol(3,ProbeRouting::BranchSoloBurst);auto cfg=Configuration(3,Normalization::TipResistance);
+    cfg.bounds={{3,3,1,1,1.,2.},{2,2,1,1,10.,20.},{1,1,1,1,100.,200.}};cfg.tolerances.sync=1.;
+    BoundedTrainingSession session(References(p),cfg,{{3,1,1.5},{2,1,15.},{1,1,150.}},true);
+    // This is an explicit synthetic arithmetic adapter, not physical evidence.
+    // Native storage/preview integration is covered by NativeResistanceDomains.
+    DriveTraining(session,p,[](const auto& a,auto&,auto& raw) {
+        raw[0]+=(a.parameters[0].resistance==2.?0.:.001);raw[1]+=(a.parameters[1].resistance==20.?0.:.001);
+    },[](const auto& a) {
+        ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;d.baseModelRevision=a.baseModelRevision;
+        d.previewModelRevision="scope"+std::to_string(a.inputIndex);d.geometry=a.parameters;d.inputIndex=a.inputIndex;
+        d.minimumResistance=a.inputIndex?18.:1.7;d.maximumResistance=a.inputIndex?20.:2.;return d;
+    });
+    ASSERT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_EQ(session.Parameters()[0].resistance,2.);
+    EXPECT_EQ(session.Parameters()[1].resistance,20.);EXPECT_EQ(session.Parameters().back().resistance,150.);
+    EXPECT_FALSE(session.Domains().empty());
+}
+
+TEST(BoundedTraining, EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit)
+{
+    const auto p=Protocol();const auto cfg=Configuration(2,Normalization::TipResistance);
+    for(int fault=0;fault!=4;++fault)
+    {
+        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}},true);
+        for(int probe=0;probe!=2;++probe)
+        {
+            const auto a=session.NextAction();ASSERT_TRUE(a);ASSERT_EQ(a->kind,TrainingActionKind::Probe);
+            const auto prepared=Prepare(p,a->inputIndex,a->baseModelRevision,a->modelEpoch);session.Arm(a->serial,prepared);
+            session.Consume(Observe(p,prepared,a->inputIndex,a->runId,a->trialId,{.03,.03},Raw(2)),a->baseModelRevision);
+        }
+        const auto a=session.NextAction();ASSERT_TRUE(a);ASSERT_EQ(a->kind,TrainingActionKind::ResistanceDomain);
+        ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;d.baseModelRevision=a->baseModelRevision;
+        d.previewModelRevision="scope";d.geometry=a->parameters;d.inputIndex=a->inputIndex;d.minimumResistance=2.;d.maximumResistance=90.;
+        if(fault==0)d.baseModelRevision="stale";
+        if(fault==1)++d.geometry[0].length;
+        if(fault==2)d.minimumResistance=std::numeric_limits<double>::quiet_NaN();
+        if(fault==3){d.status=ResistanceDomainStatus::Failed;d.modelMayHaveChanged=true;}
+        session.AssessedDomain(a->serial,d,a->baseModelRevision);
+        EXPECT_EQ(session.Status(),TrainingStatus::InvalidModel);EXPECT_EQ(session.AppliedEdits(),0u);EXPECT_FALSE(session.Certificate());
+    }
+}
+
+TEST(BoundedTraining, EmptyEffectiveDomainsRemainSearchUnresolvedWithFreshFinalMeasurements)
+{
+    const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);cfg.maximumCandidatesPerInput=2;
+    for(auto& b:cfg.bounds)b.maximumLength=2;
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}},true);
+    DriveTraining(session,p,{},[](const auto& a) {
+        ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Unavailable;d.reason="synthetic_policy_no_interval";
+        d.baseModelRevision=a.baseModelRevision;d.geometry=a.parameters;d.inputIndex=a.inputIndex;return d;
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);ASSERT_TRUE(session.Certificate());
+    EXPECT_FALSE(session.Certificate()->Exact());EXPECT_EQ(session.Certificate()->Residuals().size(),2u);
+    EXPECT_EQ(session.AppliedEdits(),0u);EXPECT_FALSE(session.Domains().empty());
 }
 
 TEST(BoundedTraining, Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact)

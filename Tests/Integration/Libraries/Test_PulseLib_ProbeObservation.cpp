@@ -24,6 +24,39 @@ bool Has(const ProbeObservation& o,const std::string& reason)
 { return std::find(o.reasons.begin(),o.reasons.end(),reason)!=o.reasons.end(); }
 const std::vector<double> onePeak{0.,0.,0.,.01,.02,.02,.01,0.,0.,0.,0.};
 
+ProbeObservation ClockObservation(double origin,double step,bool omitFrame)
+{
+    auto s=Specification();s.begin=origin;s.end=origin+10.*step;s.maximumSampleGap=step;
+    s.windows[0].begin=s.begin;s.windows[0].end=s.end;ProbeRecorder recorder(s);
+    for(std::size_t i=0;i<onePeak.size();++i)
+        if(!omitFrame || i!=7)recorder.Observe(origin+double(i)*step,{2.+onePeak[i]},"model_1");
+    recorder.RecordStimulus("pulse",origin+step);
+    return recorder.Close(s.end,"model_1","closed");
+}
+TEST(TimeLearnerClock,RecorderAbsoluteOriginsPreserveDeclaredSampling)
+{
+    for(double origin:{131.,1000000.})for(double step:{.0005,.00005})
+    {
+        SCOPED_TRACE(::testing::Message()<<"origin="<<origin<<" step="<<step);
+        const auto o=ClockObservation(origin,step,false);
+        EXPECT_TRUE(o.complete);EXPECT_TRUE(o.valid);EXPECT_FALSE(Has(o,"sample_gap"));
+    }
+}
+TEST(TimeLearnerClock,RecorderAbsoluteOriginsStillRejectDroppedFrames)
+{
+    for(double origin:{131.,1000000.})for(double step:{.0005,.00005})
+    {
+        const auto o=ClockObservation(origin,step,true);
+        EXPECT_FALSE(o.complete);EXPECT_FALSE(o.valid);EXPECT_TRUE(Has(o,"sample_gap"));
+    }
+}
+TEST(TimeLearnerClock,UnresolvableTimestampScaleIsRejected)
+{
+    auto s=Specification();s.begin=1.e12;s.end=s.begin+1.;s.maximumSampleGap=.0005;
+    s.windows[0].begin=s.begin;s.windows[0].end=s.end;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
+
 ProbeSpec BurstSpecification(unsigned schema=3)
 {
     auto s=Specification();s.schemaVersion=schema;s.maximumSampleGap=.05;s.maximumSamples=21;

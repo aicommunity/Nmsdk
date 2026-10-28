@@ -35,9 +35,14 @@ class NativeEvidenceTest(unittest.TestCase):
             if trial in cls.packets:
                 raise RuntimeError("duplicate native trial ID")
             cls.packets[trial] = packet
-        cls.summaries = [load(p) for p in sorted(cls.directory.glob("*_training_summary.json"))]
-        if len(cls.summaries) != 4:
-            raise RuntimeError("requires Classic/Branch x N0/N1 summary evidence")
+        summary_paths = sorted(cls.directory.glob("*_training_summary.json"))
+        required = {f"{topology}_2000_N{normalization}_automatic_service_training_summary.json"
+                    for topology in ("Classic", "Branch") for normalization in (0, 1)}
+        if not required.issubset({p.name for p in summary_paths}):
+            raise RuntimeError("requires every Classic/Branch x N0/N1 automatic-service summary")
+        # A full run also contains cold-start and configured-service controls.
+        # Audit every supplied summary instead of rejecting those extra cases.
+        cls.summaries = [load(p) for p in summary_paths]
 
     def test_actual_native_traces(self):
         for result in self.audits:

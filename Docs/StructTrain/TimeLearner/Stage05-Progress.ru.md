@@ -150,3 +150,19 @@ TL-014 теперь подтверждён двумя native ASan reproducer и 
 проверку cleanup, но не доказывает атомарность всего импорта и корректность
 удаления произвольного графа зависимых образов. Существующие prototypes в 5.2
 не заменяются; полный cold pipeline пока не запускается.
+
+## Уточнение 28.10: остановленная solo-модель
+
+Текущие [native completed-state проверки](NativeLearnedState.ru.md) уже
+передают actual Dataset/stimulus, captured references и replay-проверяемый
+сертификат. Поэтому перечисленные выше «остаётся подключение API» относятся
+к исходному 5.2 snapshot, а не к отсутствию нынешнего solo API. Полный этап 5
+по-прежнему открыт: recognition/conversion, PostTune/calibration, весь набор
+физических семейств и production runner ещё не покрыты.
+
+В отдельной ветке добавляется [диагностический stopped state](StoppedTrainingState.ru.md)
+с null certificate, в том числе до завершения capture. Проверяются сохранение
+partial/censored observations, fresh-process frozen response и warm restart
+без замены исходной цели. Первые ASan-результаты и неудачная попытка A1 ведутся
+отдельно от приёмки сертифицированной границы; перенос stopped state не означает
+завершённое обучение или положительную оценку распознавания.
