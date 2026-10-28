@@ -3,7 +3,7 @@
 Этот раздел содержит поддерживаемую спецификацию рефакторинга двух компонентов:
 Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
-Работа приостановлена пользователем: [точка продолжения и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
+Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
 
 - [План и условия приёмки](RefactoringPlan.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
@@ -18,6 +18,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
 - [Native component order: подтверждённый выход за границу и исправление Rdk](ComponentOrderBounds.ru.md).
 - [Pooled property bindings: full-suite отказы, исправление Rdk и проверки](PooledPropertyBindings.ru.md).
+- [EnableTrainingAudit: воспроизведённый Default defect и отличие от stock reuse](AuditFlagDefault.ru.md).
 - [Перенос модели: выполненная часть и оставшиеся проверки](Stage05-Progress.ru.md).
 - [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Типизированный наблюдатель фактической ревизии и native A/B скорости](ModelRevisionObserver.ru.md).
