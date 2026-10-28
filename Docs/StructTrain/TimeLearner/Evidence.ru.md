@@ -216,3 +216,11 @@ Rdk develop merge ef4f033704d54f11d06e4da2b3518c313f3a9992 опубликова�
 
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
+
+TL-034: оба legacy PushPostTunePattern подменяли InputPattern временным stimulus.
+Correct pre-fix f9a30cb7 / PulseLib 6e28d203: 4/4 expected failures normal на
+обоих workers. Fixed a5ada26f / PulseLib 0e1b01ae: 4/4 native; independent bb4a3511
+8/8 Python, Elder normal / M40 ASan; 8 complete presentations, 19368 samples.
+8 общих waveform projections byte-exact. Полный поиск/retarget/calibration этим
+не подтверждены. См. PostTuneTransientStimulus.ru.md; ранняя неправильная фаза
+Classic является fixture error, не доказательством lifecycle defect.

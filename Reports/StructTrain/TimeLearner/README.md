@@ -71,3 +71,5 @@ commits are not substituted into historical manifests.
 - [Accepted clock-regression recursive source closure](s07-accepted-closure-m40/README.md): root b6212753, seven exact clean submodules; metadata only.
 
 - [Elder native PostTune reconstruction](s08-posttune-rebuild-elder1/README.md), [M40 ASan](s08-posttune-rebuild-m40/README.md): 10 native / 7 Python tests and 10090 waveform pairs per worker; eight pre-fix baseline failures; failed fixtures and one-pass stimulus evidence preserved.
+
+- [Elder transient PostTune goal](s08-transient-elder1/README.md), [M40 ASan](s08-transient-m40/README.md): four native cases, eight Python tests, eight complete presentations / 19368 samples per worker; corrected pre-fix baseline and byte-exact common waveforms.
