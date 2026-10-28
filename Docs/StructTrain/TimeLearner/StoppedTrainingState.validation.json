@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "scope": "targeted N1 diagnostic solo-state transfer, 2000 Hz; latest integrity/N0/configured extension pending",
+  "tested_root": "f199c40c000c6118f61267439f8fe92dbf33c313",
+  "tested_pulselib": "652c8f3fe39f87ee37523ca7d697936b53c474de",
+  "m40": {
+    "attempt": "s05-stopped-asan-a2",
+    "native_tests": 16,
+    "native_failures": 0,
+    "fresh_process_cases": 16,
+    "asan": true,
+    "leak_detection": false,
+    "python_tests": 10,
+    "primary_trials": 54,
+    "invalid_or_censored_trials": 6,
+    "evidence_commit": "65d1b867144aeecaef526fda556319ae258cd372",
+    "stored_hashes_verified": 398,
+    "raw_payloads_verified": 396
+  },
+  "elder1": {
+    "attempt": "s05-stopped-normal-a1",
+    "native_tests": 16,
+    "native_failures": 0,
+    "publication": "pending"
+  },
+  "latest_attempts": {
+    "m40": "s05-stopped-asan-a3",
+    "elder1": "s05-stopped-normal-a2",
+    "expected_native_cases": 20,
+    "status": "running"
+  },
+  "evaluation_verdict": null,
+  "full_stage5_complete": false,
+  "merged_to_develop": false
+}
