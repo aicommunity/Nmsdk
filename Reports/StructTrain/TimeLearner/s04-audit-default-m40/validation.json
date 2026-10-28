@@ -1,0 +1,293 @@
+{
+  "attempts": {
+    "s04-audit-default-baseline-a1": {
+      "failures": 2,
+      "ordinary_build_reset_failure": false,
+      "source_closure": {
+        "Bin": {
+          "head": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+          "recorded_gitlink": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "head": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+          "recorded_gitlink": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "head": "1223bcc18cf1ba106e8f8a17f20cce8c000c104d",
+          "recorded_gitlink": "1223bcc18cf1ba106e8f8a17f20cce8c000c104d",
+          "status": ""
+        },
+        "root": {
+          "head": "bde7032a2af0fe2c670453809f0baa50d25f7cd6",
+          "status": ""
+        }
+      },
+      "status": "expected_default_failure",
+      "stock_reuse_failure": false,
+      "tests": 2
+    },
+    "s04-audit-default-fixed-a1": {
+      "asan": true,
+      "container.xml": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "18",
+        "time": "0.005",
+        "timestamp": "2026-10-28T12:27:52.963"
+      },
+      "lifecycle.xml": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "8",
+        "time": "4.961",
+        "timestamp": "2026-10-28T12:27:47.762"
+      },
+      "source_closure": {
+        "Bin": {
+          "head": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+          "recorded_gitlink": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "head": "4919bac2bd359118b13310862e54bcd24492967d",
+          "recorded_gitlink": "4919bac2bd359118b13310862e54bcd24492967d",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "head": "1223bcc18cf1ba106e8f8a17f20cce8c000c104d",
+          "recorded_gitlink": "1223bcc18cf1ba106e8f8a17f20cce8c000c104d",
+          "status": ""
+        },
+        "root": {
+          "head": "7fb92a4a57b9773ff56996cf2c7b8c75b2746cd8",
+          "status": ""
+        }
+      },
+      "status": "addressed_pass"
+    },
+    "s05-pooled-full-a2": {
+      "asan": false,
+      "container.xml": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "18",
+        "time": "0.",
+        "timestamp": "2026-10-28T12:28:11.011"
+      },
+      "full_launch": "preparation_failure",
+      "lifecycle.xml": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "8",
+        "time": "0.789",
+        "timestamp": "2026-10-28T12:28:10.175"
+      },
+      "source_closure": {
+        "Bin": {
+          "head": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+          "recorded_gitlink": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "head": "4919bac2bd359118b13310862e54bcd24492967d",
+          "recorded_gitlink": "4919bac2bd359118b13310862e54bcd24492967d",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "head": "1223bcc18cf1ba106e8f8a17f20cce8c000c104d",
+          "recorded_gitlink": "1223bcc18cf1ba106e8f8a17f20cce8c000c104d",
+          "status": ""
+        },
+        "root": {
+          "head": "7fb92a4a57b9773ff56996cf2c7b8c75b2746cd8",
+          "status": ""
+        }
+      },
+      "status": "addressed_pass"
+    }
+  },
+  "evaluation_verdict": null,
+  "host": "m40",
+  "raw_files": {
+    "s04-audit-default-baseline-a1/build.log": {
+      "bytes": 31654,
+      "sha256": "ff01159d3e06fc8a5d8af057f79c22f5e358b1fcc2e480127bbed6e23f678b53"
+    },
+    "s04-audit-default-baseline-a1/checkout.log": {
+      "bytes": 198,
+      "sha256": "41aecd636d06279efdd050bebbad43f00d8e364ea71ec4f313e7b8b46f78ebf6"
+    },
+    "s04-audit-default-baseline-a1/configure.log": {
+      "bytes": 1308,
+      "sha256": "61538c3af1503cfc5b07ad21e2e847dba0678c9f1d1ad6cbe4a52b92e555c6ff"
+    },
+    "s04-audit-default-baseline-a1/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s04-audit-default-baseline-a1/results.log": {
+      "bytes": 1709,
+      "sha256": "d831dc1fcd6b2cbd9e41a38deca49dac86089c07de81859ec697b011c5fa8fc4"
+    },
+    "s04-audit-default-baseline-a1/results.xml": {
+      "bytes": 2242,
+      "sha256": "2278c8151e9ae81a534921db8c310794ae206eedef0e1aeee7225711fbcd675d"
+    },
+    "s04-audit-default-baseline-a1/runtime.json": {
+      "bytes": 16112,
+      "sha256": "b79c0a20be9a2c6689cb475b90f5380c9348f0e89cfe3508bc6684d16bd9da39"
+    },
+    "s04-audit-default-baseline-a1/validation.json": {
+      "bytes": 167,
+      "sha256": "ecd8eabdb9e4f0c614915ce61168938cace1fdbab4f2d0839b119f59dd2236e3"
+    },
+    "s04-audit-default-fixed-a1/addressed-validation.json": {
+      "bytes": 475,
+      "sha256": "b18f9349800877bbfbb4924e4cb435b91f5fb511a5d09ed84146f32572c5e460"
+    },
+    "s04-audit-default-fixed-a1/build.log": {
+      "bytes": 6071,
+      "sha256": "b74be77754881986d04f288a972a72463c20f04f21bd7138ab1e478a3f860ac9"
+    },
+    "s04-audit-default-fixed-a1/checkout.log": {
+      "bytes": 432,
+      "sha256": "27c423d1caffb2c1fbc514d3e581a48e8c4e7bbabd485b5a15c6b30505eebce7"
+    },
+    "s04-audit-default-fixed-a1/configure.log": {
+      "bytes": 1414,
+      "sha256": "0c27b76b0d3bc61ef62010ad8c3a7cfd962a0ebeea6bd86d12d44b8efcf8a552"
+    },
+    "s04-audit-default-fixed-a1/container.log": {
+      "bytes": 4127,
+      "sha256": "14a5ab5a467dcc0a56cef28af321d801c7f7a43b72c8ca67cc936de0ec46a0ff"
+    },
+    "s04-audit-default-fixed-a1/container.xml": {
+      "bytes": 7125,
+      "sha256": "d97c88ed501a1440a69470392486ff570c5fffacdf4c84f57df3b885058e1e9d"
+    },
+    "s04-audit-default-fixed-a1/lifecycle.log": {
+      "bytes": 2010,
+      "sha256": "eae9e96f1f4d0067ee2bbb0c5b2245363b3f216769a1d6c3b07e7b5d6ab9c843"
+    },
+    "s04-audit-default-fixed-a1/lifecycle.xml": {
+      "bytes": 2944,
+      "sha256": "4efb521bfe0112a8119cddc0b8530c8c100b766229b5a27edf5ac205f8a3b520"
+    },
+    "s04-audit-default-fixed-a1/runtime.json": {
+      "bytes": 16103,
+      "sha256": "fedbe4193febc9236d7026b77fc39bc29fb8b6610371afae2ec7268fbe966357"
+    },
+    "s05-pooled-full-a2/addressed-validation.json": {
+      "bytes": 472,
+      "sha256": "d8bb03535b70d9e05d1880df3f53981d395c2bb4eb6731a60d3044b862b2f750"
+    },
+    "s05-pooled-full-a2/build.log": {
+      "bytes": 5224,
+      "sha256": "cd7bd6ed76e8760ad6cfa1ce5a4cc39e62983820ae74a7f12e4d9257a310617c"
+    },
+    "s05-pooled-full-a2/checkout.log": {
+      "bytes": 462,
+      "sha256": "c24dc8805e2bf03676b4779ad5f6f46527b44d1ebad8b1b6552a4f73fd738b1e"
+    },
+    "s05-pooled-full-a2/configure.log": {
+      "bytes": 1386,
+      "sha256": "11c47ac825552c37741c9550e2864047997362b2f5aedd34546009a5ff58c237"
+    },
+    "s05-pooled-full-a2/container.log": {
+      "bytes": 4127,
+      "sha256": "dfe273ba4aba2b7e55ff167ce34dca7a9df7131be1d0b60d349b6251058e2259"
+    },
+    "s05-pooled-full-a2/container.xml": {
+      "bytes": 6792,
+      "sha256": "aa80196ae25661a06d2c2b545636b4e4a0a9b5a4ac8170b3adb2c9b83a84e36c"
+    },
+    "s05-pooled-full-a2/full-launch-error.json": {
+      "bytes": 235,
+      "sha256": "e6207cbabb8220c8b17ff39f5a4b409d09bb6f838da2e0ebb877b06a22209929"
+    },
+    "s05-pooled-full-a2/lifecycle.log": {
+      "bytes": 1988,
+      "sha256": "f5372bead6623d091efad18a19b398f8a1299bfb96a97926c48ebbcea13034b4"
+    },
+    "s05-pooled-full-a2/lifecycle.xml": {
+      "bytes": 2801,
+      "sha256": "f7ce34e9a5ae18c4013242705070342cf4ea4aa7d583e2a18ad64a76c88d7d85"
+    },
+    "s05-pooled-full-a2/runtime.json": {
+      "bytes": 7892,
+      "sha256": "94f41a492268bb85797fa4958e19fe28158ad4074f0c58f821452c238c2cfdfe"
+    }
+  },
+  "schema_version": 1,
+  "scope": "explicit audit Default correction; native lifecycle/regressions only; full maintained suite A3 pending"
+}
