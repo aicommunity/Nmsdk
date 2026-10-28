@@ -63,4 +63,6 @@ Acceptance scope and pending controls are tracked in
 Source commits in manifests describe the tested source closure; subsequent merge
 commits are not substituted into historical manifests.
 
-- [Elder-1: native recognition conversion, complete schema-1 frozen transport](s08-recognition-elder1/README.md) — 11 native / 23 Python; 108 source trials, 3528 paired samples; scientific verdict null.
+- [Elder-1 full native clock-regression gate](s07-clock-full-elder1/README.md), [M40 full gate](s07-clock-full-m40/README.md): 4/4 CTest groups, PulseLib 442 cases (10 helper skips), 58 independent Python tests per worker.
+
+- [Elder-1 recognition conversion](s08-recognition-elder1/README.md), [M40 ASan](s08-recognition-m40/README.md): 11 native / 23 Python; 108 source trials and 3528 complete paired samples per worker; scientific verdict null.

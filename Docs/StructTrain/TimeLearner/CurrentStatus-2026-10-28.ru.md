@@ -8,12 +8,13 @@
 
 | Репозиторий | Опубликованный merge SHA |
 |---|---|
-| Root | `2ad95250fb91c32826399702081c636852a0d56a` |
-| PulseLib | `caf19a343b62e96c5076e84b6c4c2710114128bc` |
+| Root | `b62127538694a3442771598420fd78fa7e405c8b` |
+| PulseLib | `32cb44bba481ca5ddb7d54e0288d5fa04695a9bb` |
 | Rdk | `1812624ff75c60f03ad57c10b379d3e3848590bc` |
 | Bin, без новых изменений | `f5e1d0200127223981daa71da22cf5ee02fdbc60` |
 
-Приняты pooled direct-property / Copy lifetime corrections, явный audit Default
+Предыдущий develop 2ad95250: приняты pooled direct-property / Copy lifetime
+corrections, явный audit Default
 и native completed solo-state transport. На обоих workers прошли четыре
 maintained CTest suites: PulseLib 397 cases, 387 pass / 10 skip / 0 failures;
 по 9 Python tests, 16 обученных пакетов и 208 primary JSON/CSV trials.
@@ -26,6 +27,23 @@ maintained CTest suites: PulseLib 397 cases, 387 pass / 10 skip / 0 failures;
 commit `43b16d63796cfa5ae8a886c69008af2ab333f231`; локально проверены 7 stored /
 5 raw hashes. Первая ошибка отсутствующего root object устранена явным fetch
 в тот же clone и сохранена как preparation error.
+
+## Новая приёмка stopped/domain/clock regression
+
+Normal full source aeff4a9d / PulseLib 96766538 завершён на обоих workers:
+4/4 maintained CTest groups, PulseLib 442 cases, 432 pass / 10 helper skips /
+0 failures. Исправленный independent Python harness 75e020f6 проверил 58/58
+cases без skips: 16 completed / 208 primary trials, 20 stopped / 66 trials,
+8 shifted-clock probes и 81 physical-domain record. Старый Python setup error
+«ровно четыре summaries» сохранён отдельно; новые cold/configured summaries
+анализируются дополнительно, обязательные baseline cases проверяются явно.
+
+Оба полных пакета опубликованы; локально проверены по 2552 stored / 2550 raw
+hashes. PulseLib merge develop `32cb44bba481ca5ddb7d54e0288d5fa04695a9bb`
+опубликован; его отличие от tested 96766538 — только документация. Корневая
+ветка приёмки записывает точный gitlink этого merge. Это приёмка указанной
+regression scope, не завершение этапов 4–8 или всего плана.
+[Источники и ограничения](FullClockAcceptance.ru.md).
 
 ## Последующие проверенные и рабочие подэтапы
 
@@ -101,20 +119,27 @@ comparison и отклоняет неразрешимый timestamp scale. Pytho
 25/25 tests, восемь clock probes, 6 learned / 84 trials и 20 stopped / 66 trials.
 Все восемь clock CSV на каждом worker byte-exact к baseline. Старые четыре
 Python subtest errors A2 сохранены: потребовалась также endpoint-проверка requested
-duration. Оба addressed packages опубликованы: по 1025 stored / 1023 raw hashes
-проверены; M40 native seeded ASan завершён 52/52, corrected Python 25/25. Новый full normal gate aeff4a9d,
-`s07-clock-full-normal-a3`, работает на обоих workers в отдельных runtime;
-три Rdk groups pass, PulseLib parent не завершён. Приёмка ещё не пройдена.
+duration. Elder-1 package опубликован, 1025 stored / 1023 raw hashes проверены.
+M40 native seeded ASan завершён: 52/52 native и 25/25 corrected Python. Новый full normal gate aeff4a9d,
+`s07-clock-full-normal-a3`, завершён на обоих workers; результаты новой
+приёмки приведены выше.
 [Причина, evidence и ограничения](AbsoluteClockSampling.ru.md).
 
 **Immutable Solo→Recognition** (`stage08/recognition-conversion`): native API
 сохраняет source solo, явные bounds/clipping/activation и scope сертификата.
 Повторный import не масштабирует текущие Rs. Root a7a4ced6 / PulseLib 74ab08f:
-Elder-1 normal A4 — 11/11 native, 23/23 Python; восемь packages, 108 source trials,
-3528 полных paired frozen samples schema 1. Пакет опубликован, 336 stored /
-334 raw hashes проверены локально. M40 ASan A4 работает. Добавлен отдельный
-fresh-process replay fixture, пока без runtime-подтверждения; PostTune, настоящая
-калибровка и независимый scientific Test ещё не готовы.
+на Elder-1 normal и M40 ASan A4 прошли по 11/11 native, 23/23 Python; восемь
+packages, 108 source trials, 3528 полных paired frozen samples schema 1.
+Опубликованы по 336 stored / 334 raw files; hashes проверены локально.
+Root ca2f095b: отдельный fresh-process replay на каждом worker — 8/8 native
+children, 29/29 Python, все 3528 samples byte-exact к Git-пакету Elder-1.
+Тем самым M40 проверяет перенос Elder Qt5→M40 Qt6 под ASan. Трассы не содержат
+spike observations и не доказывают scientific selectivity. Предыдущие A1/A2
+failures инициализации свежего root сохраняются. Публикация replay packages
+есть в Git; локальное включение и hashes фиксируются в отдельном merge.
+Develop prerequisites объединены в рабочую recognition-ветку через merge,
+без изменения tested Core 74ab08f. Весь этап 8 ещё не принят: PostTune,
+настоящая калибровка, independent scientific Test и полная матрица открыты.
 [Контракт и ограничения](NativeRecognitionState.ru.md).
 
 ## Незакрытый объём исходных этапов
@@ -125,11 +150,11 @@ fresh-process replay fixture, пока без runtime-подтверждения
 | 2 | Production runtime/worker protocol, полная loaded-library provenance, isolated builds всех нужных targets, воспроизводимый run bundle |
 | 3 | Сквозная schema/scorer/adapters matrix и единственный production verdict; повреждённые/неполные данные не дают PASS |
 | 4 | Полный охват lifecycle/storage/growth/heterogeneous physics, все поддерживаемые конфигурации и режимы |
-| 5 | Recognition/conversion/PostTune/calibration transfer, полный physical matrix; stopped-state merge; run-level diagnostics для аварийных nonfinite данных |
+| 5 | Recognition/conversion/PostTune/calibration transfer, полный physical matrix; run-level diagnostics для аварийных nonfinite данных |
 | 6 | Завершение общего controller/adapters, configured retarget/reconfiguration и всех совместимых режимов |
-| 7 | Приёмка dynamic N1 domains; N0 repeatability/quantization; полный поиск/recovery, physics/inhibition/C-trim matrix и честные причины остановки |
-| 8 | Завершить cross-process/worker приёмку Solo→Recognition; transactional PostTune, real-threshold calibration и независимый frozen Test |
-| 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, production recognition evaluation и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
+| 7 | Полная mode/physics matrix dynamic N1 domains; N0 repeatability/quantization; полный поиск/recovery, physics/inhibition/C-trim matrix и честные причины остановки |
+| 8 | Полная матрица/production wiring Solo→Recognition; transactional PostTune, real-threshold calibration и независимый frozen Test |
+| 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, recognition analysis и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
 | 10 | ConditionSpec, fingerprints, owned-process leases/queues/cancellation и fail-closed Git publisher; удаление rsync/scp pipeline |
 | 11 | Исторический saved replay и cold retrain, legacy/v2 comparison, actual order/ITI controls и полная научная матрица |
 | 12 | Сквозная актуализация root/PulseLib/Bin/Rdk/config/ClDesc и устранение конкурирующих актуальных спецификаций |

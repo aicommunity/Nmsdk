@@ -1,35 +1,30 @@
 {
   "schema_version": 1,
-  "scope": "last verified live process handles; revalidate before acting",
-  "root": "aeff4a9d73c02b7672352ecb1b7a4b1cd8de9224",
-  "pulselib": "967665382687abe82dbfd30ce54b712881ebf04c",
+  "scope": "terminal evidence verified on both workers; no active job claimed",
   "workers": {
     "10.245.1.11": {
       "full_attempt": "s07-clock-full-normal-a3",
-      "source": "/home/user/timelearner-refactor/source-stopped-normal-a1",
-      "cache": "/home/user/timelearner-refactor/build-stopped-normal-a1",
-      "runtime": "/home/user/timelearner-refactor/runtime-s07-clock-full-normal-a3",
-      "verified_live_parent_pid": 3002413,
-      "time_seed_enabled": false
+      "process_exit_status": 0,
+      "ctest_groups_passed": 4,
+      "native_parent_cases": 442,
+      "native_helper_skips": 10,
+      "independent_audit": "s07-clock-full-data-a4",
+      "python_tests_passed": 58
     },
     "10.245.1.17": {
       "full_attempt": "s07-clock-full-normal-a3",
-      "source": "/home/user/timelearner-refactor/source",
-      "cache": "/home/user/timelearner-refactor/build-s02",
-      "runtime": "/home/user/timelearner-refactor/runtime-s07-clock-full-normal-a3",
-      "verified_live_parent_pid": 334450,
-      "time_seed_enabled": false,
-      "seeded_addressed_attempt": "s07-clock-fixed-asan-a2",
-      "seeded_source": "/home/user/timelearner-refactor/source-order-baseline-a1",
-      "seeded_cache": "/home/user/timelearner-refactor/build-order-baseline-a1",
-      "seeded_runtime": "/home/user/timelearner-refactor/runtime-s07-clock-fixed-asan-a2",
-      "seeded_verified_live_parent_pid": 320296,
-      "seeded_native_root": "241db7256f0b6595b8e3d239d66d2bbd6d1a6762",
-      "seeded_initial_model_time_us": 131000000
+      "process_exit_status": 0,
+      "ctest_groups_passed": 4,
+      "native_parent_cases": 442,
+      "native_helper_skips": 10,
+      "independent_audit": "s07-clock-full-data-a4",
+      "python_tests_passed": 58
     }
   },
+  "native_root": "aeff4a9d73c02b7672352ecb1b7a4b1cd8de9224",
+  "python_root": "75e020f60781b36992174c16dfaf7265b75a1bf1",
+  "pulselib_develop_merge": "32cb44bba481ca5ddb7d54e0288d5fa04695a9bb",
   "do_not_restart_on_observation_timeout": true,
-  "do_not_change_live_source_cache_runtime": true,
-  "acceptance": "pending",
+  "entire_plan_complete": false,
   "evaluation_verdict": null
 }
