@@ -5,6 +5,12 @@
 и исправлен: по 8/8 lifecycle и 18/18 UContainer passed на обоих workers,
 дополнительно те же группы под ASan M40. Новые full suites A3 выполняются.
 Полная приёмка ещё открыта. См. [AuditFlagDefault](AuditFlagDefault.ru.md).
+В отдельной ветке `stage05/stopped-training-state` реализуется диагностический
+перенос остановленного обучения, включая неполный capture и censored evidence.
+Первый ASan A1: 2 pass / 14 failures; обнаружен stale capture plan после
+InvalidateTarget, исправлен PulseLib `652c8f3`. Исправленная A2 проверяется;
+обычная проверка на Elder-1 выполняется в новом отдельном checkout.
+Это ещё не принятый подэтап. См. [StoppedTrainingState](StoppedTrainingState.ru.md).
 Историческая точка остановки: [ResumeAfterPause](ResumeAfterPause-2026-10-27.ru.md).
 
 **План не завершён. Полностью принят этап 0. Частично выполнены этапы 1–7,
