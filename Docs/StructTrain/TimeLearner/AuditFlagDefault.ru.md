@@ -1,5 +1,10 @@
 # EnableTrainingAudit: явный Default и штатный reuse
 
+Актуально 28.10: оба A3 full runs завершились успешно; исправление включено
+в PulseLib develop merge `caf19a343b62e96c5076e84b6c4c2710114128bc`.
+Подробности и ограничения: [PooledFullAcceptance](PooledFullAcceptance.ru.md).
+Промежуточный readback «процессы живы» ниже относится ко времени до завершения.
+
 ## Подтверждение исходного дефекта
 
 M40, `s04-audit-default-baseline-a1`, root

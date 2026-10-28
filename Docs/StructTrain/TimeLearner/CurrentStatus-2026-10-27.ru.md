@@ -3,8 +3,10 @@
 **Работа возобновлена пользователем 28.10.2026.** Оба прежних post-fix full CTest
 сохранены как interrupted_by_user, не приняты. Audit-default defect воспроизведён
 и исправлен: по 8/8 lifecycle и 18/18 UContainer passed на обоих workers,
-дополнительно те же группы под ASan M40. Новые full suites A3 выполняются.
-Полная приёмка ещё открыта. См. [AuditFlagDefault](AuditFlagDefault.ru.md).
+дополнительно те же группы под ASan M40. Оба full A3 завершены: 4/4 suites,
+PulseLib 387 pass + 10 skip, 0 failures/errors; по 9 Python tests и 208 primary
+trials. Child merges в develop выполнены; root фиксирует их согласованные gitlinks.
+См. [PooledFullAcceptance](PooledFullAcceptance.ru.md). Это не весь этап 4/5.
 Историческая точка остановки: [ResumeAfterPause](ResumeAfterPause-2026-10-27.ru.md).
 
 **План не завершён. Полностью принят этап 0. Частично выполнены этапы 1–7,
@@ -19,7 +21,8 @@ XML/логи A9, A15 и property-fixed-A2. Новые сборки для отв
 
 ## Git: рабочие ветки и принятый develop
 
-Снимок перед коммитом этой сводки: деревья чистые, root gitlinks совпадают
+Исторический снимок перед коммитом сводки 27.10; актуальные child merges см. в
+PooledFullAcceptance. На этом историческом снимке деревья чистые, gitlinks совпадают
 с фактическими child HEAD.
 
 | Репозиторий | Рабочий HEAD | Принятый develop |
