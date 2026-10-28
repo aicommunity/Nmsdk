@@ -66,3 +66,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 запускатели удаляются после замены production-пути; wrappers на старых местах
 не сохраняются. Для восстановления истории используются repository, commit и blob
 из migration manifest.
+
+- [Native Solo→Recognition: storage/import, conversion и границы проверки](NativeRecognitionState.ru.md).
