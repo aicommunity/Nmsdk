@@ -198,6 +198,29 @@ template<class Learner> struct EditingRig {
     }
 };
 
+template<class Learner> void NativeAbsoluteClockProbe(unsigned frequency,double origin)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    struct ClockRestore {
+        UEPtr<UEnvironment> environment;ULongTime previous;
+        ~ClockRestore(){environment->GetTime().SetTime(previous);}
+    } restore{core.environment,core.environment->GetTime().GetTime()};
+    core.environment->GetTime().SetTime(ULongTime(origin*1000000.));
+    EditingRig<Learner> rig(frequency,1,"absolute_clock_"+std::to_string(int(origin)));
+    const auto result=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
+    ASSERT_EQ(result.status,NativeProbeStatus::Completed);ASSERT_TRUE(result.observation);
+    EXPECT_TRUE(result.observation->complete);EXPECT_TRUE(result.observation->valid);
+    for(const auto& reason:result.observation->reasons)ADD_FAILURE()<<reason;
+}
+TEST(NativeSamplingClock,Classic2000At131){NativeAbsoluteClockProbe<NNeuronTimeLearner>(2000,131.);}
+TEST(NativeSamplingClock,Branch2000At131){NativeAbsoluteClockProbe<NNeuronTimeLearnerBranch>(2000,131.);}
+TEST(NativeSamplingClock,Classic20000At131){NativeAbsoluteClockProbe<NNeuronTimeLearner>(20000,131.);}
+TEST(NativeSamplingClock,Branch20000At131){NativeAbsoluteClockProbe<NNeuronTimeLearnerBranch>(20000,131.);}
+TEST(NativeSamplingClock,Classic2000AtMillion){NativeAbsoluteClockProbe<NNeuronTimeLearner>(2000,1000000.);}
+TEST(NativeSamplingClock,Branch2000AtMillion){NativeAbsoluteClockProbe<NNeuronTimeLearnerBranch>(2000,1000000.);}
+TEST(NativeSamplingClock,Classic20000AtMillion){NativeAbsoluteClockProbe<NNeuronTimeLearner>(20000,1000000.);}
+TEST(NativeSamplingClock,Branch20000AtMillion){NativeAbsoluteClockProbe<NNeuronTimeLearnerBranch>(20000,1000000.);}
+
 template<class Learner> void ColdModel(unsigned frequency,int neuronMode,int learnerMode,int normalization,std::size_t inputs=2)
 {
     const auto suffix="cold_mode"+std::to_string(neuronMode)+"_learner"+std::to_string(learnerMode)+"_inputs"+std::to_string(inputs);
