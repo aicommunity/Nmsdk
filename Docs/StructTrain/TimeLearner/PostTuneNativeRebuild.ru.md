@@ -101,7 +101,8 @@ controls остаются в C++/Python integration tests. Native расчёт �
 Транзакция пока охватывает только замену фактического physical graph.
 EnterPostTunePhase по-прежнему применяет mode adjustments до реконструкции;
 полный возврат к исходному Solo/Recognition при отказе последующего кандидата
-пока не реализован. Legacy PushPostTunePattern ещё меняет training InputPattern:
+пока не реализован. Подмена training InputPattern временным stimulus исправлена отдельным проверенным
+[подэтапом](PostTuneTransientStimulus.ru.md); произвольный retarget остаётся открыт:
 его следует заменить отдельным transient stimulus без retarget captured goal.
 
 Эти cases не заменяют полный поиск SearchSynthetic,

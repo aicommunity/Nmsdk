@@ -40,3 +40,9 @@ unknown/incomplete transport не принимается. Spikes остаютс�
 реконструкции/rollback. Проверяются объявленная one-pass Dataset policy и
 stimulus timestamps. Это evidence audit; native execution и научный PASS
 команда не утверждает. Требуется полный комплект spec/observation/CSV файлов.
+
+`analyze <case_transient.json> --format posttune-transient` проверяет закрытую
+схему полного transient presentation, actual onsets/relative arrival windows,
+сохранность training goal и raw presented ISI в каждом frame. Неполные окна,
+NaN, неизвестные схемы и скрытая временная подмена запрещают valid result.
+Native execution, training certificate и scientific PASS команда не утверждает.
