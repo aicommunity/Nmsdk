@@ -13,7 +13,7 @@ def audit_transient_presentation(spec: dict, observation: dict, trace: Path) -> 
     try:
         require(set(spec) == {"kind", "schema_version", "trial_id", "training_goal", "presented_isi", "pattern_hash",
                 "begin", "end", "maximum_sample_gap", "maximum_samples", "channels", "generation_mode",
-                "advance_sample_after_burst", "loop_samples", "model_revision", "record_spikes"}, "transient_spec_field_set")
+                "advance_sample_after_burst", "loop_samples", "model_revision", "record_spikes", "topology"}, "transient_spec_field_set")
         require(set(observation) == {"kind", "schema_version", "trial_id", "complete", "sample_count", "last_sample_time",
                 "onsets", "expected_relative_times", "training_goal_after", "material_goal_after", "goal_preserved",
                 "frozen_after", "scientific_verdict", "presented_at_first", "presented_after", "phase_at_first", "phase_after"}, "transient_observation_field_set")
@@ -31,16 +31,18 @@ def audit_transient_presentation(spec: dict, observation: dict, trace: Path) -> 
         require(observation["goal_preserved"] is True and
                 [number(value) for value in observation["training_goal_after"]] == goal and
                 [number(value) for value in observation["material_goal_after"]] == goal, "training_goal_modified_by_probe")
+        require(spec["topology"] in {"classic", "branch"}, "unknown_transient_topology")
+        phase = 4 if spec["topology"] == "branch" else 3
         require([number(value) for value in observation["presented_at_first"]] == pattern and
                 [number(value) for value in observation["presented_after"]] == pattern and
-                count(observation["phase_at_first"]) == count(observation["phase_after"]) == 4,
+                count(observation["phase_at_first"]) == count(observation["phase_after"]) == phase,
                 "transient_presented_state_changed")
         require(count(spec["generation_mode"]) == 2 and spec["advance_sample_after_burst"] is True and spec["loop_samples"] is False,
                 "transient_one_pass_policy_missing")
         begin, end, gap = (number(spec[key]) for key in ("begin", "end", "maximum_sample_gap"))
         require(end > begin and gap > 64 * math.ulp(1.) * max(1., abs(begin), abs(end)), "invalid_transient_window")
         channels = count(spec["channels"])
-        require(channels > 0, "missing_transient_channels")
+        require(channels == (1 if spec["topology"] == "branch" else len(goal)), "wrong_transient_channel_dimension")
         with trace.open(encoding="utf-8", newline="") as stream:
             rows = list(csv.reader(stream))
         header = ["time", "stimulus"] + [f"soma{i}" for i in range(channels)]
