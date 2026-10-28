@@ -40,8 +40,9 @@ cases без skips: 16 completed / 208 primary trials, 20 stopped / 66 trials,
 
 Оба полных пакета опубликованы; локально проверены по 2552 stored / 2550 raw
 hashes. PulseLib merge develop `32cb44bba481ca5ddb7d54e0288d5fa04695a9bb`
-опубликован; его отличие от tested 96766538 — только документация. Корневая
-ветка приёмки записывает точный gitlink этого merge. Это приёмка указанной
+опубликован; его отличие от tested 96766538 — только документация. Корневой develop merge b62127538694a3442771598420fd78fa7e405c8b записывает
+точный gitlink этого merge. Свежий recursive checkout на M40 подтверждает все
+семь gitlinks и чистое дерево; пакет 7f4211bd, 6 stored / 4 raw hashes проверены. Это приёмка указанной
 regression scope, не завершение этапов 4–8 или всего плана.
 [Источники и ограничения](FullClockAcceptance.ru.md).
 
@@ -135,8 +136,8 @@ Root ca2f095b: отдельный fresh-process replay на каждом worker 
 children, 29/29 Python, все 3528 samples byte-exact к Git-пакету Elder-1.
 Тем самым M40 проверяет перенос Elder Qt5→M40 Qt6 под ASan. Трассы не содержат
 spike observations и не доказывают scientific selectivity. Предыдущие A1/A2
-failures инициализации свежего root сохраняются. Публикация replay packages
-есть в Git; локальное включение и hashes фиксируются в отдельном merge.
+failures инициализации свежего root сохраняются. Replay packages включены через merge; локально проверены Elder-1
+1024 stored / 1022 raw и M40 694 / 692 hashes.
 Develop prerequisites объединены в рабочую recognition-ветку через merge,
 без изменения tested Core 74ab08f. Весь этап 8 ещё не принят: PostTune,
 настоящая калибровка, independent scientific Test и полная матрица открыты.

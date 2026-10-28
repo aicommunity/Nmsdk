@@ -72,15 +72,17 @@ sample_count/complete/end и обе model revisions. Положительный 
 `recognition_evidence.py` независимо проверяет Source solo proof, factor/clipping,
 разрешённые изменения graph/bindings, неизменность images и остальных properties,
 полноту frozen CSV. Native import и scientific selectivity он не подменяет.
-Elder-1 normal A4: все 11 native и 23 Python tests прошли; независимо проверены
+Elder-1 normal и M40 ASan A4: по 11 native и 23 Python tests прошли; независимо проверены
 восемь recognition packages, 108 исходных training trials и 3528 полных paired
 samples schema 1. [Артефакты](../../../Reports/StructTrain/TimeLearner/s08-recognition-elder1/README.md)
 опубликованы commit `e235f898596b7fe6e9b5ed6291f15329d45683e2`; локально проверены
-336 stored / 334 raw hashes. Старый fixture v0 не получает полноту schema 1
-задним числом. ASan A4 M40 пока работает; новый source не принят в develop.
+336 stored / 334 raw hashes на каждом worker. [M40 ASan artifacts](../../../Reports/StructTrain/TimeLearner/s08-recognition-m40/README.md),
+commit `262ee959d159692b98ac31b3dd2b95807cad68e6`, также проверены локально.
+Старый fixture v0 не получает полноту schema 1 задним числом. Recognition
+source ещё не принят в develop; normal full gate aeff4a9d его не включал.
 
-Проверки выполняются только на workers. Normal адресная проверка завершена;
-полная приёмка этапа и ASan A4 ещё не завершены. Первая normal сборка A1 прошла; первый fixture затем
+Проверки выполняются только на workers. Адресные normal и ASan A4 проверки
+завершены; полная приёмка этапа ещё не завершена. Первая normal сборка A1 прошла; первый fixture затем
 упал в сравнении QJsonValueRef: test lambda возвращала ссылку на элемент временного
 QJsonObject. Рабочая правка возвращает самостоятельный QJsonValue; production
 conversion math этим не меняется. A1 сохраняется как crash, не как пройденный test.
@@ -88,8 +90,34 @@ PostTune transactions, реальная калибровка порога,
 независимый evaluation protocol/scorer, вся physical/mode matrix и подключение
 production runner остаются открытыми требованиями полного этапа 8.
 
-Свежий процесс recognition import добавлен как отдельный replay fixture,
-который получает опубликованные package/spec, создаёт штатный NModel без learner,
-загружает native graph и возвращает single-model waveform с тем же absolute
-началом окна. Его нужно отдельно собрать и сравнить с исходной paired trace
-на обоих workers; наличие fixture не является доказательством переноса.
+## Свежий процесс и перенос между Qt5/Qt6
+
+Root `ca2f095b2a0d16b826c6ad0dd66e8e7afb9935f0`: по восемь настоящих child
+processes на Elder-1 normal и M40 ASan. Каждый получает package/spec через
+Git-пакет Elder-1, создаёт штатный NModel без learner, импортирует graph/images
+и dataset, выставляет declared clock до native Init/Reset всего дерева и
+выполняет один scheduler tick на один отсчёт. Child XML: восемь pass без skips.
+Single-model CSV побайтово совпадает с соответствующей проекцией исходного
+paired CSV: по 3528 полных samples на каждом worker. Тем самым проверен и
+перенос Elder Qt5→M40 Qt6. До/после model identity неизменна.
+
+Независимые production replay/source proof аудиторы и corruption controls:
+29/29 Python tests на каждом worker. Числовое совпадение и byte identity
+отмечаются отдельно; Python auditor не объявляет, что он исполнил native XML
+или аутентифицировал процесс. Выполнение подтверждается child XML, исходниками
+fixture и runtime manifests. Spikes по этим waveform не достраиваются.
+
+[Replay Elder-1](../../../Reports/StructTrain/TimeLearner/s08-recognition-replay-elder1/README.md),
+commit `334c70330fc651bcf11498afd0389221330fc31e`: 1024 stored / 1022 raw hashes;
+[Replay M40](../../../Reports/StructTrain/TimeLearner/s08-recognition-replay-m40/README.md),
+commit `5270659a26d9fa20cff7cfbe210dfbdcf32c3f3f`: 694 / 692. Все hashes проверены
+локально. Сохранены предыдущие A1/A2 replay failures: свежий root не был Init,
+поэтому scheduler не выдавал стимул. Перенос clock до Reset сам по себе этого
+не исправлял. A3 инициализирует всё дерево штатно; production conversion math,
+физические допуски и Rdk lifecycle при этом не изменялись.
+
+Accepted prerequisites объединены через --no-ff: PulseLib recognition branch
+`a1e884b8127eae45010b4a73b9dd0207502b3b89` включает develop 32cb44b; Core
+совпадает с tested 74ab08f. Корневая recognition branch включает develop
+`b62127538694a3442771598420fd78fa7e405c8b`. Эти merge не означают приёмку
+ещё отсутствующих PostTune/calibration/scientific evaluation режимов.

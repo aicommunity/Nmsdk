@@ -67,3 +67,9 @@ physics/mode matrix, N0 repeatability/quantization, остальные search/re
 production runner/migration и историческая/контрольная научная матрица.
 Связь выявленной sampling ошибки с августовскими результатами не установлена;
 визуальные 4/8–6/8 исходного протокола сохраняются как наблюдения.
+
+Корневой develop merge `b62127538694a3442771598420fd78fa7e405c8b` опубликован.
+[Свежий recursive checkout M40](../../../Reports/StructTrain/TimeLearner/s07-accepted-closure-m40/README.md),
+commit `7f4211bda15740e2886bc94771af7ff3f5478381`, подтвердил все семь точных
+gitlinks и чистое дерево. Локально проверены 6 stored / 4 raw hashes. Это
+проверка опубликованной source closure, не новая численная сборка.
