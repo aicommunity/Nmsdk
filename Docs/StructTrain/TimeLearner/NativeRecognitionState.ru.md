@@ -58,7 +58,22 @@ Classic/Branch N0/N1 identity, historical scale, clipping, N=1 и shared N=6.
 Они проверяют неизменность source, отсутствие physical ticks при преобразовании,
 повторяемость graph/decision, rejection подменённого record или recognition
 certificate, native roundtrip и парные frozen waveform traces с реальным
-стимулом/ненулевым откликом. Это ещё не запущенные результаты.
+стимулом/ненулевым откликом. В normal A2 все восемь прошли; source primary
+audit дал 9/9 Python tests, 108 primary trials и 3519 paired frozen samples
+старого fixture layout v0. Native archive regressions: 8 pass / 1 helper skip,
+четыре parent tests реально выполняют fresh-process transfer при 2/20 kHz.
+Отдельный A3 проверил ещё три cases: incompatible shared-bank conversion,
+strict spec codec и запрет stopped→completed recognition; все прошли.
+
+Следующая версия fixture заранее сохраняет declared frozen spec, закрывает
+окно по absolute end вместо усечённого duration*frequency и сохраняет actual
+sample_count/complete/end и обе model revisions. Положительный контроль требует
+изменения потенциала, поэтому постоянный ненулевой rest-state не даёт PASS.
+`recognition_evidence.py` независимо проверяет Source solo proof, factor/clipping,
+разрешённые изменения graph/bindings, неизменность images и остальных properties,
+полноту frozen CSV. Native import и scientific selectivity он не подменяет.
+Новые schema-1 наблюдения и corruption/CLI controls ещё проверяются отдельно;
+старый fixture v0 не получает полноту schema 1 задним числом.
 
 Проверки выполняются только на workers. Пока ни сборка, ни runtime приёмка новой
 реализации не завершены. Первая normal сборка A1 прошла; первый fixture затем

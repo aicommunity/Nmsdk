@@ -9,6 +9,7 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeRecognitionState.h"
+#include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
 #include <QFile>
@@ -1110,8 +1111,18 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
     a->dataset->StateGeneration=1;b->dataset->StateGeneration=1;
     std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus_a,stimulus_b";
     const auto somas=rig.branch?1u:rig.inputCount;for(std::size_t i=0;i<somas;++i)trace<<",soma_a"<<i<<",soma_b"<<i;trace<<'\n';
-    bool emitted=false;double maximum=0.;
-    for(unsigned tick=0;tick<unsigned((rig.duration+.01)*rig.frequency);++tick)
+    const double begin=rig.environment->GetTime().GetDoubleTime(),end=begin+rig.duration+.01;
+    const unsigned maximumFrames=unsigned(std::ceil((rig.duration+.01)*rig.frequency))+3;
+    const QJsonObject frozenSpec{{"kind","native_recognition_frozen_probe"},{"schema_version",1},
+        {"run_id",QString::fromStdString(rig.name)},{"trial_id",QString::fromStdString(rig.name+"/roundtrip")},
+        {"model_revision",recognition["model_revision"]},{"pattern_hash",source["protocol"].toObject()["pattern_hash"]},
+        {"begin",begin},{"end",end},{"maximum_sample_gap",1./rig.frequency},{"maximum_samples",double(maximumFrames)},
+        {"channels",double(somas)},{"record_spikes",false},{"measurement","paired_soma_transport"}};
+    Artifact(rig.name+"_recognition_probe_spec.json",QJsonDocument(frozenSpec).toJson());
+    bool emitted=false,complete=false;double maximum=0.,lastTime=begin;unsigned samples=0;
+    std::vector<double> minimumPotential(somas,std::numeric_limits<double>::infinity());
+    std::vector<double> maximumPotential(somas,-std::numeric_limits<double>::infinity());
+    for(unsigned tick=0;tick<maximumFrames;++tick)
     {
         rig.model->Calculate();const double time=rig.environment->GetTime().GetDoubleTime();
         const double x=sourceA->Output(0,0),y=sourceB->Output(0,0);EXPECT_DOUBLE_EQ(x,y);emitted=emitted || x>0.;trace<<time<<','<<x<<','<<y;
@@ -1120,15 +1131,21 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
             const auto path="Soma"+std::to_string(i+1);auto sa=a->neuron->template GetComponentL<NPulseMembrane>(path,true);
             auto sb=b->neuron->template GetComponentL<NPulseMembrane>(path,true);ASSERT_TRUE(sa);ASSERT_TRUE(sb);
             const double va=sa->SumPotential(0,0),vb=sb->SumPotential(0,0);EXPECT_DOUBLE_EQ(va,vb);
+            minimumPotential[i]=std::min(minimumPotential[i],va);maximumPotential[i]=std::max(maximumPotential[i],va);
             maximum=std::max(maximum,std::fabs(va));trace<<','<<va<<','<<vb;
         }
-        trace<<'\n';rig.environment->IncreaseModelTimeByStep();
+        trace<<'\n';lastTime=time;++samples;rig.environment->IncreaseModelTimeByStep();
+        if(!Detail::After(end,time)){complete=true;break;}
     }
-    EXPECT_TRUE(emitted);EXPECT_GT(maximum,1.e-6)<<"zero/uncalculated graphs cannot prove waveform roundtrip";
+    double variation=0.;for(std::size_t i=0;i<somas;++i)variation=std::max(variation,maximumPotential[i]-minimumPotential[i]);
+    EXPECT_TRUE(complete);EXPECT_TRUE(emitted);EXPECT_GT(variation,1.e-6)<<"a constant rest potential cannot prove waveform roundtrip";
     EXPECT_EQ(revision(a,sourceA),recognition["model_revision"]);EXPECT_EQ(revision(b,sourceB),recognition["model_revision"]);
     Artifact(rig.name+"_recognition_roundtrip.csv",QByteArray::fromStdString(trace.str()));
-    Artifact(rig.name+"_recognition_roundtrip.json",QJsonDocument(QJsonObject{{"model_revision",recognition["model_revision"]},
-        {"emitted",emitted},{"maximum_soma",maximum},{"frozen_after",revision(a,sourceA)},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    Artifact(rig.name+"_recognition_roundtrip.json",QJsonDocument(QJsonObject{{"kind","native_recognition_roundtrip_observation"},{"schema_version",1},
+        {"model_revision",recognition["model_revision"]},{"trial_id",frozenSpec["trial_id"]},{"complete",complete},
+        {"sample_count",double(samples)},{"last_sample_time",lastTime},{"emitted",emitted},{"maximum_soma",maximum},
+        {"soma_variation",variation},
+        {"frozen_after",revision(a,sourceA)},{"frozen_after_b",revision(b,sourceB)},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
 
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
