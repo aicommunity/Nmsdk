@@ -83,8 +83,8 @@
   },
   "rdk_develop_merge": "ef4f033704d54f11d06e4da2b3518c313f3a9992",
   "full_maintained_suites_pending": [
-    "elder1/s05-pooled-full-a1",
-    "m40/s05-pooled-full-a1"
+    "elder1/s05-pooled-full-a3",
+    "m40/s05-pooled-full-a3"
   ],
   "latest_server_readback_2026_10_27": {
     "scope": "direct remote readback; A9/A15 failures and addressed property fix results are now published in s04-property-bindings evidence packages",
@@ -129,5 +129,16 @@
     "accepted": false,
     "resume_document": "ResumeAfterPause-2026-10-27.ru.md",
     "new_audit_default_tests": "committed in 2063e41e; not run"
+  },
+  "resumed_2026_10_28": {
+    "source": "7fb92a4a57b9773ff56996cf2c7b8c75b2746cd8",
+    "pulselib": "4919bac2bd359118b13310862e54bcd24492967d",
+    "audit_default_addressed": "8 lifecycle and 18 UContainer pass on both workers and ASan M40",
+    "full_a2": "preparation_failure; never started",
+    "full_a3": "running at last readback",
+    "evidence": "s04-audit-default-elder1/m40",
+    "stored_hashes_checked": 41,
+    "raw_payloads_checked": 37,
+    "accepted_full_suite": false
   }
 }

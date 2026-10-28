@@ -1822,9 +1822,10 @@
       "name": "EnableTrainingAudit",
       "code_review": "reviewed",
       "contract": "ResetAndLoggingPropertyContracts.ru.md",
-      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
-      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
-      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+      "runtime_acceptance": "baseline direct Default failure reproduced; corrected lifecycle 8/8 on both workers and ASan M40; stock reuse was already valid",
+      "source_commit": "4919bac2bd359118b13310862e54bcd24492967d",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported",
+      "correction_evidence": "AuditFlagDefault.ru.md"
     },
     {
       "component": "NNeuronTimeLearnerBranch",
@@ -1876,9 +1877,10 @@
       "name": "EnableTrainingAudit",
       "code_review": "reviewed",
       "contract": "ResetAndLoggingPropertyContracts.ru.md",
-      "runtime_acceptance": "partial; reuse/default audit flag, capability and logging controls pending",
-      "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
-      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
+      "runtime_acceptance": "baseline direct Default failure reproduced; corrected lifecycle 8/8 on both workers and ASan M40; stock reuse was already valid",
+      "source_commit": "4919bac2bd359118b13310862e54bcd24492967d",
+      "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported",
+      "correction_evidence": "AuditFlagDefault.ru.md"
     },
     {
       "component": "NNeuronTimeLearnerBranch",

@@ -6,6 +6,12 @@ Code review последних **15 записей** исходного inventor
 проверены отдельно. Это завершение code catalog, а не всей runtime/property
 матрицы, не всего этапа 1 и не всего плана.
 
+Уточнение 28.10: PulseLib `4919bac2bd359118b13310862e54bcd24492967d` исправляет
+EnableTrainingAudit Default. Историческая строка таблицы ниже описывает старую
+версию; актуальный Default явно false, обычные Build/Reset сохраняют параметр.
+Исходный stock Return→Take не отказал: образ класса уже восстанавливал false.
+Baseline и исправленные native/ASan проверки: [AuditFlagDefault](AuditFlagDefault.ru.md).
+
 | Свойство | Тип/default/flags | Фактическая логика | Ограничения и необходимые проверки |
 |---|---|---|---|
 | ResetToUntrainedState, оба | bool, false, ptPubState; setter принимает value без действия | Legacy AReset считывает one-shot, очищает flag и отдельно вызывает ResetToUntrained; snapshot принимается только при cold-looking lengths, иначе создаётся исходная структура. Native-owned AReset выходит раньше этой legacy ветви | В native режиме это поле не выполняет cold reconstruction. Обычный Reset сохраняет модель/цель; новый cold reset должен быть отдельной явной операцией. Проверять loaded trained graph, snapshot validity и действительную declared initial state, а не L>1 как обязательный признак trained |

@@ -1,8 +1,10 @@
 # Состояние полного плана: повторная сверка 27.10.2026
 
 **Работа возобновлена пользователем 28.10.2026.** Оба прежних post-fix full CTest
-сохранены как interrupted_by_user, не приняты. Начата отдельная baseline-проверка
-audit-default в свободном ASan checkout на M40. Полная приёмка ещё открыта.
+сохранены как interrupted_by_user, не приняты. Audit-default defect воспроизведён
+и исправлен: по 8/8 lifecycle и 18/18 UContainer passed на обоих workers,
+дополнительно те же группы под ASan M40. Новые full suites A3 выполняются.
+Полная приёмка ещё открыта. См. [AuditFlagDefault](AuditFlagDefault.ru.md).
 Историческая точка остановки: [ResumeAfterPause](ResumeAfterPause-2026-10-27.ru.md).
 
 **План не завершён. Полностью принят этап 0. Частично выполнены этапы 1–7,
@@ -106,6 +108,14 @@ CSV/JSON; это не отменяет transport failures. Исходные fail
 CTest exit=8, PulseLib INTERRUPT; полного PASS нет. До приёмки
 Rdk/PulseLib/root feature не закрываются. Новый test-only audit-default
 reproducer в root 2063e41e ещё не запускался.
+
+Последнее предложение относится к моменту паузы 27.10: 28.10 baseline выполнен,
+дефект явного Default (не stock reuse) подтверждён и исправлен в PulseLib
+4919bac2bd359118b13310862e54bcd24492967d. Адресные проверки опубликованы.
+Full A2 не стартовал из-за shell preparation error; A3 на root
+7fb92a4a57b9773ff56996cf2c7b8c75b2746cd8 сейчас выполняется на обоих workers,
+используя проверенные immutable A2 binaries. Старые failed/interrupted runs
+не перезаписывались. До terminal PASS никакого merge/полной приёмки нет.
 
 ## Очерёдность оставшейся работы
 
