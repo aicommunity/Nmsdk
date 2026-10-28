@@ -13,6 +13,7 @@ test report is not a trained-model result.
 
 | Validation | Artifact directories |
 |---|---|
+| Post-fix maintained gate: 4/4 suites per worker, PulseLib 387 pass + 10 skip, 16 completed packages / 208 primary trials per worker | [Elder-1](s05-pooled-full-elder1/README.md), [M40](s05-pooled-full-m40/README.md) |
 | N1 mesh ignores effective Rs domain: two expected native failures and 20 verified primary trials per worker; fix pending | [Elder-1](s07-domain-baseline-elder1/README.md), [M40 ASan](s07-domain-baseline-m40/README.md) |
 | Diagnostic stopped solo state: new-guard regression, 20 native cases and 66 primary trials per worker, fresh-process/bidirectional Git replay and completed-state regressions | [M40 + ASan](s05-stopped-m40/README.md), [Elder-1](s05-stopped-elder1/README.md) |
 | Configured ControllerVersion=2 cold JSON/XML dispatch, saved-state guards and policy-independent corruption controls | [Elder-1](s06-configured-controller-elder1/README.md), [M40 + ASan](s06-configured-controller-m40/README.md) |

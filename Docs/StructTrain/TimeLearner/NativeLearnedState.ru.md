@@ -1,7 +1,9 @@
 # Native learned state: перенос завершённой границы обучения
 
-Рабочая ветка stage05/native-trained-state. Реализация подготовлена; серверная
-проверка и полная приёмка ещё не завершены. Этот документ не закрывает этап 5.
+Native completed solo-state API прошёл post-fix maintained gate на обоих workers:
+[приёмка 28.10](PooledFullAcceptance.ru.md). PulseLib/Rdk merge commits develop
+записаны там; закрываемая ветка root stage05/native-trained-state фиксирует их
+gitlinks. Этот документ не закрывает весь этап 5 или физическую/научную матрицу.
 
 Для остановленного обучения без сертификата предусмотрен отдельный
 [diagnostic stopped state](StoppedTrainingState.ru.md). Он не меняет смысл

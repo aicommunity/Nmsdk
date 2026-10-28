@@ -1,5 +1,11 @@
 # Связи свойств при повторном использовании объектов и Copy
 
+Актуально 28.10: post-fix A3 на обоих workers завершён успешно — 4/4 suites,
+PulseLib 387 pass + 10 skip, 0 failures/errors, 9 Python tests и 208 primary
+trials. Rdk merge в develop: `1812624ff75c60f03ad57c10b379d3e3848590bc`.
+Подробная область приёмки: [PooledFullAcceptance](PooledFullAcceptance.ru.md).
+Ниже сохранены исходные failures и промежуточные snapshots.
+
 ## Подтверждённый дефект
 
 Полный maintained CTest на Elder-1 A9 (root
@@ -88,7 +94,7 @@ Evidence опубликованы через Git и объединены в root
 ошибочные fixtures и независимый аудит; stored gzip и raw payload имеют
 раздельные SHA256. Бинарники и credentials не публикуются.
 
-Повторный post-fix full maintained CTest `s05-pooled-full-a1` запущен на обоих
+Историческое состояние перед паузой: post-fix CTest `s05-pooled-full-a1` запущен на обоих
 workers в изолированных runtime. До его завершения нельзя объявлять общую
 интеграционную приёмку пройденной. Rdk feature пока не принята в develop.
 Это не весь этап 4/5 и не научная проверка разделимости или августовских результатов.
