@@ -2075,7 +2075,7 @@ void RejectStalePostTuneBoundary(BoundaryRejection scenario)
     const auto before=rig.Revision();const auto clock=rig.environment->GetTime().GetTime();
     const auto neuron=rig.neuron.Get();std::vector<NameT> order;rig.learner->GetComponentsList(order);
     const auto rejected=checkpoint->Restore(scenario==BoundaryRejection::WrongOwner?*dynamic_pointer_cast<UNet>(rig.model):*rig.learner);
-    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected)<<rejected.reason;
+    ASSERT_EQ(rejected.status,NativeModelBuildStatus::Rejected)<<rejected.reason;
     EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_FALSE(rejected.reason.empty());
     EXPECT_EQ(rig.learner->GetComponent("Neuron",true).Get(),neuron);EXPECT_EQ(rig.Revision(),before);
     EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
