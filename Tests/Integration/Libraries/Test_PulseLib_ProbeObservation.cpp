@@ -50,6 +50,12 @@ TEST(TimeLearnerClock,RecorderAbsoluteOriginsStillRejectDroppedFrames)
         EXPECT_FALSE(o.complete);EXPECT_FALSE(o.valid);EXPECT_TRUE(Has(o,"sample_gap"));
     }
 }
+TEST(TimeLearnerClock,UnresolvableTimestampScaleIsRejected)
+{
+    auto s=Specification();s.begin=1.e12;s.end=s.begin+1.;s.maximumSampleGap=.0005;
+    s.windows[0].begin=s.begin;s.windows[0].end=s.end;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
 
 ProbeSpec BurstSpecification(unsigned schema=3)
 {

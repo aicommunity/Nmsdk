@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-AUDITOR_VERSION = 3
+AUDITOR_VERSION = 4
 
 
 class EvidenceError(ValueError):
@@ -201,7 +201,9 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
     gap = number(spec["maximum_sample_gap"])
     require(gap > 0 and count(spec["maximum_samples"]) >= len(values), "invalid_sample_budget")
     require(equal(times[0], begin) and equal(times[-1], end), "incomplete_trace_coverage")
-    require(all(b > a and not after(b - a, gap) for a, b in zip(times, times[1:])), "sample_gap_or_duplicate")
+    roundoff = 32 * sys.float_info.epsilon * max(1., abs(begin), abs(end))
+    require(gap > 2 * roundoff, "insufficient_probe_timestamp_resolution")
+    require(all(b > a and not after(b, a + gap) for a, b in zip(times, times[1:])), "sample_gap_or_duplicate")
 
     def at(time: float) -> list[float]:
         index = bisect.bisect_left(times, time)
