@@ -60,11 +60,51 @@ CPP pass не подменяет валидность протокола; A2 с�
 A3 задаёт штатный StateGeneration=2, AdvanceSampleAfterBurst=true,
 LoopSamples=false и продолжает окно до declared end после окончания генерации.
 Эти значения записываются до ticks. Добавлены N0 controls с тремя фактическими
-синапсами при 2000/20000 Гц: прежний rebuild принудительно создавал только один
-синапс на сегменте. Новый clone сохраняет обученное число и граф. Analyze CLI
+синапсами при 2000/20000 Гц: прежний rebuild принудительно применял
+single-input helper; baseline также выявил несогласованные Rs в N0 bank. Новый clone сохраняет обученное число и граф. Analyze CLI
 получает format=posttune-reconstruction, с null scientific verdict.
 
-Проверка A3 ещё не выполнена. Эти cases не заменяют полный поиск SearchSynthetic,
+A3 на обоих workers: 8 pass / 2 fixture failures. Новые N0 cases пытались
+изменить Ns до consumed-probe boundary; native guard верно запретил это.
+A4 создаёт Ns=3 в исходном ModelSpec штатно, без обхода контроля.
+
+## Подтверждённые A4/A5 и baseline
+
+Native root `e7ee0104f5677e812ffd3b91c45074667ba1ffca`, PulseLib
+`d862127d849953b2c7928e87c803a016a0da06d9`: normal Elder-1 и ASan M40,
+по 10/10 C++ cases, 7/7 Python tests, 10090 пар / 20180 raw waveform rows.
+Граф, параметры, полные окна и реальные времена/число стимулов согласованны.
+Native scheduler считает дерево один раз на tick. Модель frozen до/после.
+
+Explicit baseline root `8d23ed533b23f0bf25082545a174b5621292c794` фиксирует
+старую PulseLib `593b69cf3754c85013527522757f380c04e2efe5` и тот же fixture.
+На каждом worker восемь выбранных mode/physics/N0 cases отказали после старого
+rebuild. Потеря heterogeneous physics/identity и несогласованные Rs в N0 bank
+подтверждены runtime. Baseline A1 с двумя ошибками N0 setup сохранён отдельно.
+Причинной связи с историческими августовскими результатами это не устанавливает.
+
+[Elder artifacts](../../../Reports/StructTrain/TimeLearner/s08-posttune-rebuild-elder1/README.md),
+последний report commit `a1c9acba5e8b1b6b72f33ce6c3bee64b929c1bb2`;
+[M40 artifacts](../../../Reports/StructTrain/TimeLearner/s08-posttune-rebuild-m40/README.md),
+commit `10aae61f14202be06d4571705c4aa0d8aa40af3f`. На каждом по 483 stored /
+481 raw hashes проверены локально. Live executable mapping snapshot: 26 файлов
+на Elder и 73 на M40; это снимок одного момента, не полная история загрузок.
+
+Python-only A5 `1afdb2669363755e9ffd109b86d118598d00b8b1` проверил те же
+immutable A4 данные: по 7/7 tests и все 10 cases / 10090 пар. Generic auditor
+не требует fixture-ёмкостей 1.3/1.7/2.3 nF от произвольной модели: эти positive
+controls остаются в C++/Python integration tests. Native расчёт не повторялся.
+Старые A1/A2/A3 failures не переписаны, не переоценены как passed pipeline.
+
+## Открытый объём
+
+Транзакция пока охватывает только замену фактического physical graph.
+EnterPostTunePhase по-прежнему применяет mode adjustments до реконструкции;
+полный возврат к исходному Solo/Recognition при отказе последующего кандидата
+пока не реализован. Legacy PushPostTunePattern ещё меняет training InputPattern:
+его следует заменить отдельным transient stimulus без retarget captured goal.
+
+Эти cases не заменяют полный поиск SearchSynthetic,
 транзакцию выбора/отката всех PostTune candidates, научную оценку, реальную
 калибровку порога или независимый Test. Они адресуют конкретную реконструкцию
 Branch; legacy математическая цель и правила выбора режимов этим не меняются.

@@ -69,3 +69,5 @@ commits are not substituted into historical manifests.
 
 - [Elder-1 fresh-process recognition replay](s08-recognition-replay-elder1/README.md), [M40 cross-Qt ASan replay](s08-recognition-replay-m40/README.md): eight child imports, 29 Python tests, 3528 byte-exact samples per worker; failed A1/A2 setup preserved.
 - [Accepted clock-regression recursive source closure](s07-accepted-closure-m40/README.md): root b6212753, seven exact clean submodules; metadata only.
+
+- [Elder native PostTune reconstruction](s08-posttune-rebuild-elder1/README.md), [M40 ASan](s08-posttune-rebuild-m40/README.md): 10 native / 7 Python tests and 10090 waveform pairs per worker; eight pre-fix baseline failures; failed fixtures and one-pass stimulus evidence preserved.
