@@ -5,6 +5,10 @@ Native completed solo-state API прошёл post-fix maintained gate на об�
 записаны там; закрываемая ветка root stage05/native-trained-state фиксирует их
 gitlinks. Этот документ не закрывает весь этап 5 или физическую/научную матрицу.
 
+Для остановленного обучения без сертификата предусмотрен отдельный
+[diagnostic stopped state](StoppedTrainingState.ru.md). Он не меняет смысл
+описанного здесь completed-state сертификата и не подтверждает сходимость.
+
 ## Подтверждённое дополнение A6 и межсерверный перенос
 
 Root `7186788be098a58091a14025d664647e5d9eb2cd`, PulseLib

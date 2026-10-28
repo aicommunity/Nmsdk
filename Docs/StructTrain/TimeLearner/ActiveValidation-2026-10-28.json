@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "scope": "terminal evidence verified on both workers; no active job claimed",
+  "workers": {
+    "10.245.1.11": {
+      "full_attempt": "s07-clock-full-normal-a3",
+      "process_exit_status": 0,
+      "ctest_groups_passed": 4,
+      "native_parent_cases": 442,
+      "native_helper_skips": 10,
+      "independent_audit": "s07-clock-full-data-a4",
+      "python_tests_passed": 58
+    },
+    "10.245.1.17": {
+      "full_attempt": "s07-clock-full-normal-a3",
+      "process_exit_status": 0,
+      "ctest_groups_passed": 4,
+      "native_parent_cases": 442,
+      "native_helper_skips": 10,
+      "independent_audit": "s07-clock-full-data-a4",
+      "python_tests_passed": 58
+    }
+  },
+  "native_root": "aeff4a9d73c02b7672352ecb1b7a4b1cd8de9224",
+  "python_root": "75e020f60781b36992174c16dfaf7265b75a1bf1",
+  "pulselib_develop_merge": "32cb44bba481ca5ddb7d54e0288d5fa04695a9bb",
+  "do_not_restart_on_observation_timeout": true,
+  "entire_plan_complete": false,
+  "evaluation_verdict": null
+}

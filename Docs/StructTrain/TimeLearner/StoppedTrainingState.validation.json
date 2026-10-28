@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "scope": "targeted diagnostic solo-state transfer, N0/N1 and configured V2 controls, 2000 Hz; full maintained suites pending",
+  "tested_root": "57b365929f9e0ee9e10a7520fea78cd3d9fa415d",
+  "tested_pulselib": "12c5ef5f7e6e2ebda26cede86ad9005743899086",
+  "m40": {
+    "attempt": "s05-stopped-asan-a3",
+    "native_tests": 20,
+    "native_failures": 0,
+    "fresh_process_cases": 20,
+    "asan": true,
+    "leak_detection": false,
+    "python_tests": 10,
+    "primary_trials": 66,
+    "invalid_or_censored_trials": 6,
+    "evidence_commit": "32142f5959a1e0aa7749576d5fca44d444a8d44c",
+    "stored_hashes_verified": 943,
+    "raw_payloads_verified": 941
+  },
+  "elder1": {
+    "attempt": "s05-stopped-normal-a2",
+    "native_tests": 20,
+    "native_failures": 0,
+    "fresh_process_cases": 20,
+    "python_tests": 10,
+    "primary_trials": 66,
+    "native_regression_tests": 22,
+    "certified_python_regression_tests": 9,
+    "certified_regression_primary_trials": 62,
+    "evidence_commit": "e53f277f1c05468802dedcd695d1d139ac8b91ec",
+    "stored_hashes_verified": 1374,
+    "raw_payloads_verified": 1372
+  },
+  "latest_attempts": {
+    "m40": "s05-stopped-asan-a3",
+    "elder1": "s05-stopped-normal-a2",
+    "expected_native_cases": 20,
+    "status": "addressed_pass"
+  },
+  "cross_host": {
+    "m40_to_elder1": {"packages": 16, "byte_exact": true, "source_evidence_commit": "65d1b867144aeecaef526fda556319ae258cd372"},
+    "elder1_to_m40": {"packages": 20, "byte_exact": true, "source_evidence_commit": "76c61d01c0f2f5c3791ac87d4638c99e9c34bc96"}
+  },
+  "evaluation_verdict": null,
+  "full_stage5_complete": false,
+  "merged_to_develop": false
+}

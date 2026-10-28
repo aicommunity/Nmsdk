@@ -8,7 +8,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [План и условия приёмки](RefactoringPlan.ru.md).
 - [Приёмка 28.10: full post-fix gate, native completed state и child merges](PooledFullAcceptance.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
-- [Актуальный статус всех этапов: сверка Git, кода и серверных A9/A15/property-A2 результатов 27.10](CurrentStatus-2026-10-27.ru.md).
+- [Актуальный статус всех этапов на 28.10: принятый develop, scoped проверки и оставшаяся работа](CurrentStatus-2026-10-28.ru.md).
+- [Историческая сводка 27.10 и последующие дополнения](CurrentStatus-2026-10-27.ru.md).
 - [Предшествующий аудит 27.10 и история дополнений](PlanCompletionAudit-2026-10-27.ru.md).
 - [Исходная сверка 25.10 и журнал последующих дополнений](PlanCompletionAudit-2026-10-25.ru.md).
 - [Решения и обязательные контракты](Decisions.ru.md).
@@ -21,6 +22,10 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Pooled property bindings: full-suite отказы, исправление Rdk и проверки](PooledPropertyBindings.ru.md).
 - [EnableTrainingAudit: воспроизведённый Default defect и отличие от stock reuse](AuditFlagDefault.ru.md).
 - [Перенос модели: выполненная часть и оставшиеся проверки](Stage05-Progress.ru.md).
+- [Остановленное обучение: диагностический перенос без сертификата, текущая проверка](StoppedTrainingState.ru.md).
+- [Эффективные N1 области: дефект mesh и текущая реализация preview](DynamicResistanceDomains.ru.md).
+- [Независимая проверка физических оснований N1 decisions, рабочий подэтап](DomainDecisionEvidence.ru.md).
+- [False sampling gaps при большом absolute clock: full failures и исправление](AbsoluteClockSampling.ru.md).
 - [Semantic model identity и проверка фактического графа](ModelIdentity.ru.md).
 - [Типизированный наблюдатель фактической ревизии и native A/B скорости](ModelRevisionObserver.ru.md).
 - [Native ModelArchive: формат, API и ограничения](ModelArchive.ru.md).
