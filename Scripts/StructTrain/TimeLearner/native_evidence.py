@@ -102,7 +102,7 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
                 requested.get("peak_selection") == selection, "unknown_or_changed_peak_selection")
     require(number(spec["minimum_amplitude"]) > 0, "invalid_minimum_amplitude")
     require(requested is not None and requested["time_frame"] == "relative_to_trial_start" and
-            number(requested["begin"]) == 0 and equal(requested["end"], end - begin), "requested_window_mismatch")
+            number(requested["begin"]) == 0 and equal(end, begin + number(requested["end"])), "requested_window_mismatch")
     for key in ("schema_version", "run_id", "trial_id", "sample_id", "pattern_hash", "maximum_samples",
                 "maximum_sample_gap", "minimum_amplitude", "record_spikes", "expected_stimulus_ids", "wave_assignment"):
         require(requested[key] == spec[key], "requested_specification_mismatch:" + key)
