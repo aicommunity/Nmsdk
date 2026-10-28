@@ -97,7 +97,14 @@ baseline f712e865 на обоих workers, M40 ASan: 9 failures из 10 cases, �
 comparison и отклоняет неразрешимый timestamp scale. Python auditor version 4
 не переопределяет старые invalid flags. Проверка root 241db725: 52 selected cases,
 явный test-only initial clock 131 s, fresh-process stopped/import controls и
-независимый data audit — выполняется нормально и под ASan. Приёмка ещё не пройдена.
+независимый data audit: Elder-1 52/52 native; corrected Python source aeff4a9d —
+25/25 tests, восемь clock probes, 6 learned / 84 trials и 20 stopped / 66 trials.
+Все восемь clock CSV на каждом worker byte-exact к baseline. Старые четыре
+Python subtest errors A2 сохранены: потребовалась также endpoint-проверка requested
+duration. Elder-1 package опубликован, 1025 stored / 1023 raw hashes проверены.
+M40 native seeded ASan ещё работает. Новый full normal gate aeff4a9d,
+`s07-clock-full-normal-a3`, работает на обоих workers в отдельных runtime;
+три Rdk groups pass, PulseLib parent не завершён. Приёмка ещё не пройдена.
 [Причина, evidence и ограничения](AbsoluteClockSampling.ru.md).
 
 ## Незакрытый объём исходных этапов

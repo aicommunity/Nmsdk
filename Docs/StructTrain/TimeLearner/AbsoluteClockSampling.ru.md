@@ -60,6 +60,24 @@ begin+requested duration; новый отрицательный контроль
 sampling period. Старый A2 Python failure сохраняется, новые immutable data
 проверяются отдельно без повторного C++ запуска. M40 ASan A2 ещё выполняется.
 
+Elder-1 corrected data audit A3 (Python aeff4a9d) завершён: 25/25 tests,
+восемь clock probes, шесть learned packages / 84 primary trials и 20 stopped
+packages / 66 primary trials. Все восемь clock CSV byte-exact к pre-fix baseline
+на каждом worker: исправление не меняет физическую динамику. M40 native clock
+группа прошла 8/8 под ASan; остальная seeded regression ещё работает.
+
+[Elder-1 addressed package](../../../Reports/StructTrain/TimeLearner/s07-clock-fixed-elder1/README.md),
+`c964ebc6531461bb19f2fbb7f7751d3dfe8b4d74`, 1025 stored / 1023 raw hashes,
+проверены локально. Native source 241db725 и Python source aeff4a9d указаны
+раздельно. `exit-status.txt` A2 относится к C++ stage; ошибочный Python stage
+не выдаётся за общий pipeline PASS.
+
+Новый full normal gate `s07-clock-full-normal-a3` root aeff4a9d / PulseLib
+96766538 (от d4c0cf0 отличается только документацией) запущен на обоих workers
+в новых immutable runtime, без test-only clock seed. Прежние failed jobs
+подтверждены terminal, их каталоги и manifests сохранены. Новые три Rdk groups
+прошли, PulseLib parent работает. Приёмка и develop merge ещё не выполнены.
+
 Причинная связь с августовскими экспериментами
 не установлена; их визуальные 4/8–6/8 не отменяются. Этап 8 отложен до разбора
 текущей full-suite регрессии.
