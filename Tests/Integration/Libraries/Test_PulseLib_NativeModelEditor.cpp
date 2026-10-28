@@ -1833,13 +1833,19 @@ template<class Learner> void ObserverSeesExternalPhysicsEdit()
 TEST(NativeTrainingService,ClassicObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearner>();}
 TEST(NativeTrainingService,BranchObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearnerBranch>();}
 
-void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bool listener=false)
+void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bool listener=false,int normalization=1)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="PostTuneRebuildBranchFixture";
     if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
         +[]() -> UComponent* {return new PostTuneRebuildBranch;},image),image);
     const auto suffix="posttune_native_mode"+std::to_string(mode)+(failAttach?"_rollback":listener?"_listener":"");
-    EditingRig<PostTuneRebuildBranch> rig(frequency,1,suffix,false,2,true,2,1,false,image);
+    EditingRig<PostTuneRebuildBranch> rig(frequency,normalization,suffix,false,2,true,2,1,false,image);
+    if(normalization==0)
+    {
+        auto requested=rig.learner->ReadNativeParameters();requested[0].synapses=3;
+        const auto edit=rig.learner->ApplyNativeParameters(requested);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+        ASSERT_TRUE(rig.neuron->GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse3",true));
+    }
     auto exc=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
     auto other=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
     auto inh=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true);ASSERT_TRUE(exc);ASSERT_TRUE(other);ASSERT_TRUE(inh);
@@ -1852,7 +1858,10 @@ void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bo
     const auto measure=[&](const std::string& phase,std::vector<NativeProbeSample>& frames) {
         rig.environment->GetTime().SetTime(1000000);
         auto dataset=rig.learner->GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
-        dataset->Reset();rig.neuron->Reset();dataset->StateGeneration=1;
+        // One complete declared presentation, followed by the full response
+        // window. Dataset's default continuous policy would repeat the burst.
+        dataset->AdvanceSampleAfterBurst=true;dataset->LoopSamples=false;
+        dataset->Reset();rig.neuron->Reset();dataset->StateGeneration=2;
         auto soma=rig.neuron->GetComponentL<NPulseMembrane>("Soma1",true);ASSERT_TRUE(soma);
         const double begin=rig.environment->GetTime().GetDoubleTime(),end=begin+rig.duration;
         const unsigned maximumSamples=unsigned(std::ceil(rig.duration*frequency))+3;
@@ -1862,7 +1871,8 @@ void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bo
             {"trial_id",QString::fromStdString(rig.name+"/"+phase)},{"model_revision",QString::fromStdString(revision)},
             {"begin",begin},{"end",end},{"maximum_sample_gap",1./frequency},{"maximum_samples",double(maximumSamples)},
             {"channels",1},{"record_spikes",false},{"input_isi",pattern},{"dataset_delay",dataset->Delay.GetData()},
-            {"pattern_hash",NmsdkTools::CanonicalModelDataSha256(pattern)}};
+            {"pattern_hash",NmsdkTools::CanonicalModelDataSha256(pattern)},{"generation_mode",2},
+            {"advance_sample_after_burst",true},{"loop_samples",false}};
         Artifact(rig.name+"_"+phase+"_spec.json",QJsonDocument(spec).toJson());
         bool complete=false,emitted=false;double low=std::numeric_limits<double>::infinity(),high=-low;
         std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus,soma0\n";
@@ -1901,6 +1911,11 @@ void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bo
     EXPECT_EQ(rig.neuron.Get()==old.Get(),failAttach || listener);
     EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),before);
     EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.source->Output.GetNumConnectors(),connectors);
+    if(normalization==0)
+    {
+        ASSERT_EQ(rig.learner->ReadNativeParameters()[0].synapses,3);
+        ASSERT_TRUE(rig.neuron->GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse3",true));
+    }
     std::vector<NameT> afterOrder;rig.learner->GetComponentsList(afterOrder);EXPECT_EQ(afterOrder,order);
     EXPECT_DOUBLE_EQ(rig.neuron->MembraneCapacity.GetData(),0.);
     EXPECT_DOUBLE_EQ(rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true)->Capacity.GetData(),1.3e-9);
@@ -1926,6 +1941,8 @@ TEST(NativePostTuneReconstruction,FlatLastR){PostTuneReconstruction(2000,PostTra
 TEST(NativePostTuneReconstruction,KeepDone){PostTuneReconstruction(2000,PostTrainTune::kPostTipKeepDone);}
 TEST(NativePostTuneReconstruction,SearchSyntheticSeed){PostTuneReconstruction(2000,PostTrainTune::kPostTipSearchSynthetic);}
 TEST(NativePostTuneReconstruction,KeepDone20000){PostTuneReconstruction(20000,PostTrainTune::kPostTipKeepDone);}
+TEST(NativePostTuneReconstruction,N0PreservesMultipleSynapses){PostTuneReconstruction(2000,PostTrainTune::kPostTipOff,false,false,0);}
+TEST(NativePostTuneReconstruction,N0PreservesMultipleSynapses20000){PostTuneReconstruction(20000,PostTrainTune::kPostTipOff,false,false,0);}
 TEST(NativePostTuneReconstruction,AttachFailureRollsBack){PostTuneReconstruction(2000,PostTrainTune::kPostTipKeepDone,true);}
 TEST(NativePostTuneReconstruction,ExternalListenerRejectsBeforeReplacement){PostTuneReconstruction(2000,PostTrainTune::kPostTipKeepDone,false,true);}
 

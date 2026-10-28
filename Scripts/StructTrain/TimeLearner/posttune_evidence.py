@@ -12,7 +12,8 @@ from .native_evidence import EvidenceError, after, count, equal, load, number, r
 
 def _window(spec: dict, observation: dict, path: Path, revision: str, frequency: int) -> list[list[float]]:
     require(set(spec) == {"kind", "schema_version", "trial_id", "model_revision", "begin", "end",
-            "maximum_sample_gap", "maximum_samples", "channels", "record_spikes", "input_isi", "dataset_delay", "pattern_hash"},
+            "maximum_sample_gap", "maximum_samples", "channels", "record_spikes", "input_isi", "dataset_delay", "pattern_hash",
+            "generation_mode", "advance_sample_after_burst", "loop_samples"},
             "posttune_spec_field_set")
     require(set(observation) == {"kind", "schema_version", "trial_id", "model_revision", "frozen_after", "complete",
             "sample_count", "last_sample_time", "emitted", "soma_variation", "scientific_verdict"}, "posttune_observation_field_set")
@@ -25,6 +26,8 @@ def _window(spec: dict, observation: dict, path: Path, revision: str, frequency:
     require(observation["complete"] is True and observation["emitted"] is True and
             observation["scientific_verdict"] is None and spec["record_spikes"] is False and count(spec["channels"]) == 1,
             "incomplete_posttune_transport")
+    require(count(spec["generation_mode"]) == 2 and spec["advance_sample_after_burst"] is True and
+            spec["loop_samples"] is False, "posttune_requires_declared_single_presentation")
     begin, end, gap = (number(spec[key]) for key in ("begin", "end", "maximum_sample_gap"))
     require(end > begin and equal(gap, 1 / frequency) and
             gap > 64 * math.ulp(1.) * max(1., abs(begin), abs(end)), "invalid_posttune_window")
