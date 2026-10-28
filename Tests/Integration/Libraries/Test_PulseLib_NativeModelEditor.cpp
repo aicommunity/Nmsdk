@@ -1106,9 +1106,18 @@ TEST(NativeLearnedState,ClassicSixInputsExplicitOneTolerance){LearnedBoundary<NN
 TEST(NativeLearnedState,BranchSixSharedInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6);}
 
 enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial };
-template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label)
+template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false)
 {
-    EditingRig<Learner> rig(2000,1,"stopped_"+label);auto plan=TrainingPlan(rig);
+    EditingRig<Learner> rig(2000,normalization,"stopped_"+label);auto plan=TrainingPlan(rig);
+    if(configured)
+    {
+        const auto configuration=Configuration(rig);rig.learner->ControllerVersion=2;
+        rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact).toStdString();
+        rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");plan=MakeConfiguredNativeTrainingPlan(configuration);
+    }
     if(scenario==StoppedCase::BudgetEarly)plan.maximumModelSeconds=.002;
     if(scenario==StoppedCase::BudgetSearch)plan.search.maximumProbes=3;
     if(scenario==StoppedCase::InvalidProbe)plan.probe.onPrepared=[](const auto&,const auto&) {
@@ -1129,7 +1138,9 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
         Artifact(stem+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
         Artifact(stem+".csv",QByteArray::fromStdString(trace.str()));
     };
-    rig.learner->BeginNativeTraining(plan);bool changed=false;
+    if(configured)rig.learner->SetConfiguredNativeEvidenceSinks({plan.probe.onPrepared,plan.probe.onSample,plan.observationSink});
+    else rig.learner->BeginNativeTraining(plan);
+    bool changed=false;
     for(unsigned ticks=0;;++ticks)
     {
         ASSERT_LT(ticks,40000u);const auto& service=rig.learner->NativeTrainingController();
@@ -1188,6 +1199,10 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     corrupt=package;corrupt["certificate"]=QJsonObject{{"exact",true}};reject(corrupt);
     corrupt=package;corrupt["reference_complete"]=!package["reference_complete"].toBool();reject(corrupt);
     corrupt=package;corrupt["capture_revision"]="wrong-capture";reject(corrupt);
+    corrupt=package;auto duplicate=corrupt["observed_packets"].toArray();ASSERT_FALSE(duplicate.isEmpty());
+    duplicate.append(duplicate[0]);corrupt["observed_packets"]=duplicate;reject(corrupt);
+    if(!package["final_packets"].toArray().isEmpty())
+    {corrupt=package;corrupt["observed_packets"]=QJsonArray{};reject(corrupt);}
     // Frozen evaluation uses the real native scheduler. Neither stopped model
     // may restart its controller or manufacture a successful certificate.
     std::vector<NativeProbeSample> originalFrames,importedFrames;
@@ -1242,6 +1257,12 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
         else EXPECT_FALSE(restored.References());
         test->IsNeedToTrain=false;
     }
+    const auto stoppedAgain=test->ExportNativeLearnedState(implementation);
+    EXPECT_EQ(stoppedAgain["kind"],QJsonValue("timelearner_stopped_state"));EXPECT_TRUE(stoppedAgain["certificate"].isNull());
+    EXPECT_EQ(stoppedAgain["model_revision"],package["model_revision"]);
+    EXPECT_EQ(stoppedAgain["reference_complete"].toBool(),complete);
+    if(scenario!=StoppedCase::ChangedPartial)EXPECT_EQ(stoppedAgain["session_attempt"].toDouble(),double(previousAttempt+1));
+    Artifact(rig.name+"_warm_boundary.json",QJsonDocument(stoppedAgain).toJson());
     Artifact(rig.name+"_restored_summary.json",QJsonDocument(EncodeNativeTrainingState(restored,importedRevision(),test->ReadNativeParameters())).toJson());
 }
 #define STOPPED_CASE(Name,Value) \
@@ -1256,6 +1277,10 @@ STOPPED_CASE(Final,Final)
 STOPPED_CASE(InvalidProbe,InvalidProbe)
 STOPPED_CASE(ChangedPartial,ChangedPartial)
 #undef STOPPED_CASE
+TEST(NativeStoppedState,ClassicN0BudgetSearch){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::BudgetSearch,"N0BudgetSearch",0);}
+TEST(NativeStoppedState,BranchN0BudgetSearch){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::BudgetSearch,"N0BudgetSearch",0);}
+TEST(NativeStoppedState,ClassicConfiguredPartial){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::Partial,"ConfiguredPartial",1,true);}
+TEST(NativeStoppedState,BranchConfiguredPartial){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::Partial,"ConfiguredPartial",0,true);}
 
 TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {

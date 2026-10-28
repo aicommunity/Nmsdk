@@ -16,8 +16,8 @@ class StoppedEvidenceTest(unittest.TestCase):
         if not directory:
             raise unittest.SkipTest("requires actual native stopped-state artifacts")
         cls.cases = [load_case(p) for p in sorted(Path(directory).glob("*_stopped_state.json"))]
-        if len(cls.cases) != 16:
-            raise RuntimeError("requires eight stopped scenarios in both topologies")
+        if len(cls.cases) != 20:
+            raise RuntimeError("requires eight stopped scenarios in both topologies plus N0 and configured controls")
 
     def test_actual_primary_evidence(self):
         for case in self.cases:
