@@ -148,5 +148,49 @@ Root 036b3a072023801f0562ba306dfc8743776991f1 воспроизводит expecte
 исторических результатов. Расширенный assigned-wave policy должен иметь явную
 новую версию; пока он не реализован. Пакеты s06-native-service-elder1/m40.
 
+TL-029: shared PulseLib test harness разрешал executable/ini относительно CWD
+и предполагал QCoreApplication. S05 A4/A5 сохраняют fresh-process failures;
+root a222ac7c4b386451137ef17e4a5a0af6996c8d9b разрешает actual executable и
+соседний runtime ini; 7186788be098a58091a14025d664647e5d9eb2cd инициализирует
+корневой NModel нового helper штатно. A6/A7 проходят адресные переносы на обоих
+серверах. Прежние ad-hoc numerical controls не отменены, но утверждение об их
+соответствии заявленному ini ограничено. Full maintained CTest ещё проверяется;
+NativeLearnedState.ru.md.
+
+TL-032: explicit Default обоих learner сохранял EnableTrainingAudit=true.
+M40 ASan baseline root bde7032a2af0fe2c670453809f0baa50d25f7cd6 воспроизводит
+два failure, только на direct Default; ordinary Build/Reset и stock Return/Take
+assertions проходят. PulseLib 4919bac2bd359118b13310862e54bcd24492967d явно
+задаёт false в ADefault. Root 7fb92a4a57b9773ff56996cf2c7b8c75b2746cd8:
+8/8 lifecycle и 18/18 UContainer passed на обоих workers, также ASan M40,
+detect_leaks=0. Git packages s04-audit-default-elder1/m40 опубликованы.
+Full A2 shell preparation failure сохранён; Full A3 ещё выполняется. Физика,
+tolerances и общий lifecycle Rdk не изменялись. См. AuditFlagDefault.ru.md.
+
+TL-031: full maintained CTest Elder-1 A9 и M40 A15 воспроизводят по 15
+learned-state export/import failures среди 395 PulseLib tests. Native reproducer
+подтверждает старые direct property sources при Return/Take и replacement Copy.
+Rdk 1223bcc18cf1ba106e8f8a17f20cce8c000c104d очищает внешние источники на этих
+границах, сохраняя internal wiring и обычные Build/Reset/Default. На Elder-1
+18/18 unit, 30/30 последовательных builder/learned-state integration, 9/9 Python;
+на M40 18/18 unit под ASan, detect_leaks=0. Два исправления matrix-accessor fixture
+сохранены отдельно от production defect. В failed full runs независимо проверены
+по 16 source trainings и 208 trial CSV/JSON; успешный Train не отменяет failed
+transport. Git evidence packages s04-property-bindings-elder1/m40 опубликованы.
+Post-fix full CTest пока выполняется; Rdk feature не принята в develop.
+См. PooledPropertyBindings.ru.md. Исторические научные результаты этим не опровергаются.
+
+TL-030: штатное перемещение компонента вперёд в конец читало за границей
+вектора; вычисление int destination могло переполняться. Native test-only Rdk
+e2bcd8da5bab016bd3fd703c42e519e56b633081 воспроизводит failing order check и
+ASan heap-buffer-overflow на M40. Исправление Rdk
+2cfda44d738f6291914217dba9cd223acae35bfd проходит 13/13 native tests под ASan,
+detect_leaks=0, и 13/13 в обычной сборке Elder-1. A14 дополнительно проверяет
+native import/rollback/frozen response на обоих серверах; Git-пакеты доступны.
+Rdk develop merge ef4f033704d54f11d06e4da2b3518c313f3a9992 опубликован,
+его tree совпадает с tested feature tree. Полный CTest ещё выполняется.
+См. ComponentOrderBounds.ru.md. Причинная связь с историческими
+экспериментами не установлена; их результаты этим finding не отменяются.
+
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.

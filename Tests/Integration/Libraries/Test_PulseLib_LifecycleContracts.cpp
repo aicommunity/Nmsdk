@@ -4,6 +4,8 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembraneCommon.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NConstGenerator.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../Support/ConsoleLikeInit.h"
 
 #include <string>
@@ -180,4 +182,31 @@ TEST(TimeLearnerNativeLifecycle, PooledRebuildRequiresEnvironmentThroughChannelS
     probe->Invalidate();
     EXPECT_FALSE(probe->IsReady());
 }
+template<class Learner> void AuditFlagUsesNativeDefaultAndPool(const char* className)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(className));
+    ASSERT_TRUE(learner);learner->SetEnvironment(core.environment);
+    learner->SetGlobalTimeStep(2000);
+    EXPECT_FALSE(learner->EnableTrainingAudit.GetData());
+    learner->EnableTrainingAudit=true;
+    learner->Build();learner->Reset();
+    EXPECT_TRUE(learner->EnableTrainingAudit.GetData())
+        << "ordinary lifecycle preserves the explicit audit configuration";
+    learner->Default();
+    EXPECT_FALSE(learner->EnableTrainingAudit.GetData())
+        << "explicit Default must restore the fresh-class audit default";
+    learner->EnableTrainingAudit=true;
+    core.storage->ReturnObject(learner);
+    auto reused=dynamic_pointer_cast<Learner>(core.storage->TakeObject(className));
+    ASSERT_TRUE(reused);ASSERT_EQ(reused,learner);
+    EXPECT_FALSE(reused->EnableTrainingAudit.GetData())
+        << "pooled cold reuse must not inherit the previous run's audit flag";
+    reused->EnableTrainingAudit=false;
+    core.storage->ReturnObject(reused);
+}
+TEST(TimeLearnerNativeLifecycle, ClassicAuditFlagDefaultAndReuse)
+{AuditFlagUsesNativeDefaultAndPool<NMSDK::NNeuronTimeLearner>("NNeuronTimeLearner");}
+TEST(TimeLearnerNativeLifecycle, BranchAuditFlagDefaultAndReuse)
+{AuditFlagUsesNativeDefaultAndPool<NMSDK::NNeuronTimeLearnerBranch>("NNeuronTimeLearnerBranch");}
 } // namespace
