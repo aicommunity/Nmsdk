@@ -51,6 +51,15 @@ initial clock 131 s: recorder/final gate, реальные 2/20 kHz probes, 14 c
 `TIMELEARNER_TEST_MODEL_TIME_US` один раз до tests; child roles наследуют это
 условие. Production clock не обнуляется и per-probe timestep не меняется.
 
+Normal A2 завершил 52/52 C++ cases при initial clock 131 s. Последующий Python
+проход выполнил 24 tests, но четыре subtests shifted-clock observations при
+origin=1000000 s отказали на requested_window_mismatch: auditor ещё сравнивал
+planned duration с уже вычтенным absolute end-begin. Это отдельная ошибка
+проверки requested window. Рабочая правка сравнивает absolute end с
+begin+requested duration; новый отрицательный контроль меняет duration на один
+sampling period. Старый A2 Python failure сохраняется, новые immutable data
+проверяются отдельно без повторного C++ запуска. M40 ASan A2 ещё выполняется.
+
 Причинная связь с августовскими экспериментами
 не установлена; их визуальные 4/8–6/8 не отменяются. Этап 8 отложен до разбора
 текущей full-suite регрессии.
