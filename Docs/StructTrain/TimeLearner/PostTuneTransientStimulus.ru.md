@@ -73,3 +73,54 @@ Fixture вызывает production Push/Begin на настоящем native gr
 production wiring V2, реальный подбор/проверка порога и independent frozen Test
 остаются открытыми. Finalize legacy сохраняет собственную restore logic.
 Mid-probe checkpoint и произвольный warm continuation этим не подтверждены.
+
+## Уточнение следующей транзакции по текущему коду
+
+Read-only сверка 29.10: Branch EnterPostTunePhase вызывает parallel scaling для
+SearchSynthetic до сохранения PostTuneTipSnapshot, затем ApplyPostTrainTipMode
+до RebuildCableForPostTuneProbes. Успешный rollback последнего helper возвращает
+состояние непосредственно перед реконструкцией, которое уже содержит candidate
+edits. Поэтому это не rollback к началу PostTune. Classic также меняет режим
+до настройки пробы. Ни один из этих выводов не объявляется новым runtime defect:
+полная транзакция ещё не реализована и baseline отказа именно этой границы
+ещё не поставлен.
+
+Следующий подэтап должен различать source recognition state, выбранный best
+candidate и текущий speculative candidate. Snapshot в начале этапа должен
+предшествовать любому scaling/canonicalization. Достаточен checkpoint завершённой
+границы этапа; физическую динамику посреди пробы сохранять не обещаем.
+
+```text
+at legal completed boundary:
+    capture complete native neuron + dataset snapshots and boundary sources
+    capture threshold policy, training goal, conversion and controller state
+    validate source identity
+for each declared candidate:
+    construct from immutable source/best state through native import
+    apply candidate only before arming a new observation
+    validate effective model and numerical domain
+    observe complete window through scheduler
+    bind observation to candidate revision and presentation ID
+    retain best only with complete valid evidence
+on failure/cancellation:
+    restore source graph, dataset policy, thresholds and controller boundary
+    refresh all cached aliases; verify effective identity; native physical reset
+on selection:
+    commit selected state; invalidate source-only certificate/calibration
+    freshly verify final recognition state and chosen threshold separately
+```
+
+Нельзя восстанавливать только TipRs: сохранить реальные classes/children/C,
+Rs/Ns, связи и owner order, Dataset matrix/classes/one-pass/delay/generator
+настройки, исходные threshold properties, goal и provenance conversion.
+Контроллер хранит собственные counters/results, а не передаёт их neuron Reset.
+Восстановление физического графа не означает восстановления старого runtime clock.
+Не вводить nested Calculate или Build, предназначенный лишь для пробуждения.
+
+Приёмка через реальные Enter/Finalize и candidate loop: успех, rejection после
+изменения physics, setup failure после candidate edit, timeout, external stop,
+ошибка attach, повторный запуск; Classic/Branch, N0/N1 и все tip modes.
+Проверить source/committed graph identities, Dataset/threshold policy и новую
+полную waveform после rollback. Отдельные helper tests не заменяют эти controls.
+Исторический Same-Matrix и independent frozen Test должны иметь разные metadata;
+legacy поведение нельзя молча заменить новой научной задачей.
