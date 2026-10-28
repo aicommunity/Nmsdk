@@ -62,3 +62,5 @@ Acceptance scope and pending controls are tracked in
 [Stage05-Progress](../../../Docs/StructTrain/TimeLearner/Stage05-Progress.ru.md).
 Source commits in manifests describe the tested source closure; subsequent merge
 commits are not substituted into historical manifests.
+
+- [Elder-1 full native clock-regression gate](s07-clock-full-elder1/README.md), [M40 full gate](s07-clock-full-m40/README.md): 4/4 CTest groups, PulseLib 442 cases (10 helper skips), 58 independent Python tests per worker.
