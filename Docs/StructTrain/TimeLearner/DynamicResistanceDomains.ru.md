@@ -37,8 +37,28 @@ expected-failure tests не принимаются в develop.
 declared scaled/fixed inhibition, отдельный диапазон активного входа и shared-bank
 ограничения. Live graph проверяется после уничтожения preview; отсутствие области
 не называется PhysicalInfeasible. TrainingParameters выделены отдельно, `fada6b6`.
-Прямые preview/storage-profile tests ещё не приняты. API ещё не подключён к mesh;
-исходные два controller tests должны оставаться red.
+После compile correction `39179da` прямые четыре preview/storage-profile tests
+прошли нормально на Elder-1 и под M40 ASan, detect_leaks=0. Elder-1 также прошёл
+восемь editor regressions N0/N1 при 2/20 кГц, всего 12 cases. Более длинный
+M40 ASan regression run продолжается в неизменяемом runtime; отдельный четырёх-
+case ASan job использует тот же binary с собственным output. Эти данные ещё
+готовятся к публикации. Compile failure A1 сохраняется отдельно.
+
+Текущая production реализация `e875ca5` подключает Native N1 к явным controller
+domain actions. Standalone kernel сохраняет declared-only API по умолчанию;
+native N1 требует физический provider до reference capture. Mesh пересчитывается
+после effective edit; scope/candidate dedup учитывает preview identity и весь
+вектор параметров. Сохраняется исходная математическая цель CapturedPerInput,
+исходные допуски и независимый final sweep.
+
+Для Branch рассматриваются ordinary/shared и separated upstream geometry;
+locked downstream/anchor bank не меняется. При невозможности разделения остаётся
+singleton geometry с существующим общим Rs. Best candidate сохраняет полный
+вектор параметров. Если одинаковые L/Ns/Rs имеют разные stimulus bindings,
+реализация preview требует явного edit и новой пробы, а не подмены scope.
+Domain evidence выводится отдельно в training summary. Новые controller tests
+усилены требованием реально измерить эффективную нижнюю границу; их runtime
+проверка ещё не выполнена. Исправление controller пока не принято.
 
 ## Не переносить условную границу как универсальную
 

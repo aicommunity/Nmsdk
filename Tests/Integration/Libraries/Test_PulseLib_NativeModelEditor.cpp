@@ -607,6 +607,13 @@ template<class Learner> void NativeResistanceDomainSearch()
     const auto& service=rig.learner->NativeTrainingController();ASSERT_TRUE(service.Search())<<service.Reason();
     Artifact(rig.name+"_domain_summary.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
     EXPECT_GE(service.Search()->AppliedEdits(),1u);EXPECT_GE(service.Search()->Evidence().size(),2u);
+    ASSERT_FALSE(service.Search()->Domains().empty());
+    const auto& firstDomain=service.Search()->Domains().front();ASSERT_EQ(firstDomain.status,ResistanceDomainStatus::Available);
+    const auto lower=std::max(plan.search.bounds[0].minimumResistance,firstDomain.minimumResistance);
+    EXPECT_TRUE(std::any_of(service.Search()->Evidence().begin(),service.Search()->Evidence().end(),[&](const auto& candidate) {
+        return candidate.inputIndex==0 && candidate.parameters.resistance==lower;
+    }))<<"effective domain lower endpoint must be physically measured";
+    EXPECT_LE(service.Search()->Domains().size(),2*plan.search.maximumCandidatesPerInput+1);
     for(const auto& rejected:service.Search()->Rejected())
     {
         EXPECT_EQ(rejected.reason.find("channel_step_not_certified_strictly_stable"),std::string::npos)
