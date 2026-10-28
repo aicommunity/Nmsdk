@@ -72,3 +72,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [PostTune: native graph reconstruction, actual parallel transport и открытая candidate transaction](PostTuneNativeRebuild.ru.md).
 
 - [PostTune: неизменяемая цель и actual transient stimulus](PostTuneTransientStimulus.ru.md).
+
+- [PostTune: рабочая реализация отката графа и оставшаяся транзакция](PostTuneBoundaryTransaction.ru.md).
