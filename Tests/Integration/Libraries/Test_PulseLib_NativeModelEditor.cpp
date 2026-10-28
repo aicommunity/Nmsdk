@@ -1980,7 +1980,7 @@ template<class Learner> void PostTuneGraphBoundary(unsigned frequency,int normal
     const auto checkpoint=NativeLearnerGraphCheckpoint::Capture(*rig.learner);ASSERT_TRUE(checkpoint);
     std::vector<NativeProbeSample> before,after;
     rig.environment->GetTime().SetTime(1000000);
-    const auto baseline=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+    const auto baseline=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
         [&](const auto& frame){before.push_back(frame);});
     ASSERT_EQ(baseline.status,NativeProbeStatus::Completed);ASSERT_FALSE(before.empty());
     ASSERT_EQ(rig.Revision(),originalRevision);
@@ -2020,7 +2020,7 @@ template<class Learner> void PostTuneGraphBoundary(unsigned frequency,int normal
     EXPECT_DOUBLE_EQ(rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true)->Capacity.GetData(),1.7e-9);
     if(normalization==0)ASSERT_TRUE(rig.neuron->template GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse3",true));
     rig.environment->GetTime().SetTime(1000000);
-    const auto replay=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+    const auto replay=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
         [&](const auto& frame){after.push_back(frame);});
     ASSERT_EQ(replay.status,NativeProbeStatus::Completed);ASSERT_EQ(before.size(),after.size());
     bool exact=true;
