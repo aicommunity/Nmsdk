@@ -10,6 +10,7 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeRecognitionState.h"
+#include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
