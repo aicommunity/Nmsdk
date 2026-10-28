@@ -164,6 +164,14 @@ root a5ada26f: на Elder normal и M40 ASan по 4 native cases, 8 presentation
 fixtures сохранены как setup failures. Полная candidate transaction, V2 wiring,
 retarget и calibration открыты. [Подробности](PostTuneTransientStimulus.ru.md).
 
+**PostTune graph boundary — текущая работа**: root 8e7b9e88 / PulseLib
+436e7020 реализует immutable capture/restore нейрона вместе с Dataset и native
+портами. 24 selected controls запущены на Elder normal и M40 ASan; при последней
+проверке процессы живы, итог не объявлен. Независимый Python audit c174c98b ждёт
+terminal success этих же jobs. Полная controller/threshold transaction и
+production candidate-loop wiring ещё открыты.
+[Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
+
 ## Незакрытый объём исходных этапов
 
 | Этап | Что ещё требуется |
