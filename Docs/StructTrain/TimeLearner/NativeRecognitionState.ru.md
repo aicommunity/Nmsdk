@@ -61,6 +61,10 @@ certificate, native roundtrip и парные frozen waveform traces с реал
 стимулом/ненулевым откликом. Это ещё не запущенные результаты.
 
 Проверки выполняются только на workers. Пока ни сборка, ни runtime приёмка новой
-реализации не завершены. PostTune transactions, реальная калибровка порога,
+реализации не завершены. Первая normal сборка A1 прошла; первый fixture затем
+упал в сравнении QJsonValueRef: test lambda возвращала ссылку на элемент временного
+QJsonObject. Рабочая правка возвращает самостоятельный QJsonValue; production
+conversion math этим не меняется. A1 сохраняется как crash, не как пройденный test.
+PostTune transactions, реальная калибровка порога,
 независимый evaluation protocol/scorer, вся physical/mode matrix и подключение
 production runner остаются открытыми требованиями полного этапа 8.

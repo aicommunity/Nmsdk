@@ -1089,7 +1089,7 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
     for(UEPtr<UContainer> node:{UEPtr<UContainer>(a->dataset.Get()),UEPtr<UContainer>(a->neuron.Get()),
                              UEPtr<UContainer>(b->dataset.Get()),UEPtr<UContainer>(b->neuron.Get())})
     {ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);node->Init();node->Reset();}
-    const auto revision=[&](const auto& state,const auto& stimulus){return NmsdkTools::IdentifyModel(state->neuron,{{&stimulus->Output,"burst"}})["sha256"];};
+    const auto revision=[&](const auto& state,const auto& stimulus){return NmsdkTools::IdentifyModel(state->neuron,{{&stimulus->Output,"burst"}}).value("sha256");};
     EXPECT_EQ(revision(a,sourceA),recognition["model_revision"]);EXPECT_EQ(revision(b,sourceB),recognition["model_revision"]);
     a->dataset->StateGeneration=1;b->dataset->StateGeneration=1;
     std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus_a,stimulus_b";
