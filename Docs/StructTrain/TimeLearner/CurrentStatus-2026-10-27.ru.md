@@ -9,10 +9,13 @@
 перенос остановленного обучения, включая неполный capture и censored evidence.
 Первый ASan A1: 2 pass / 14 failures; обнаружен stale capture plan после
 InvalidateTarget, исправлен PulseLib `652c8f3`. Исправленные 16/16 cases прошли
-на M40 ASan и Elder-1 normally. M40 Python: 10/10, 54 primary trials, шесть
-invalid/censored; Git-пакет A1/A2 опубликован и проверен локально по hashes.
-Последующая версия на 20 cases с integrity/N0/configured V2 ещё проверяется.
-Полная приёмка подэтапа открыта. См. [StoppedTrainingState](StoppedTrainingState.ru.md).
+на M40 ASan и Elder-1 normally. Последующая версия root 57b36592 / PulseLib 12c5ef5
+прошла 20/20 native и 10/10 Python на каждом worker, по 66 primary trials.
+Git-transfer: 16 пакетов M40→Elder-1 и 20 Elder-1→M40, byte-exact frozen CSV.
+На последней версии Elder-1 прошли также 22 native regressions и 9 Python
+проверок сертифицированного пути по 62 primary trials. Все пакеты опубликованы;
+локально проверены 2317 stored и 2313 raw hashes. Full gate остаётся открытым;
+это ещё не весь этап 5. См. [StoppedTrainingState](StoppedTrainingState.ru.md).
 Историческая точка остановки: [ResumeAfterPause](ResumeAfterPause-2026-10-27.ru.md).
 
 **План не завершён. Полностью принят этап 0. Частично выполнены этапы 1–7,
