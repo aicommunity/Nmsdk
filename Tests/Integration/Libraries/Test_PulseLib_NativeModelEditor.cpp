@@ -1113,6 +1113,21 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     if(scenario==StoppedCase::InvalidProbe)plan.probe.onPrepared=[](const auto&,const auto&) {
         throw std::runtime_error("injected_stopped_probe_failure");
     };
+    std::size_t observations=0;std::ostringstream trace;
+    const auto prepare=plan.probe.onPrepared;
+    plan.probe.onPrepared=[&](const auto& prepared,const auto& spec) {
+        trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+        if(prepare)prepare(prepared,spec);
+    };
+    plan.probe.onSample=[&](const auto& frame) {
+        trace<<frame.time<<','<<frame.stimulus;for(double value:frame.potentials)trace<<','<<value;trace<<'\n';
+    };
+    plan.observationSink=[&](const auto& packet) {
+        const auto stem=rig.name+"_stopped_trial_"+std::to_string(++observations);
+        Artifact(stem+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
+        Artifact(stem+".csv",QByteArray::fromStdString(trace.str()));
+    };
     rig.learner->BeginNativeTraining(plan);bool changed=false;
     for(unsigned ticks=0;;++ticks)
     {
@@ -1149,6 +1164,7 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     EXPECT_EQ(package["observed_packets"].toArray().size(),int(service.ObservedPackets().size()));
     EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson().toStdString()),package);
     Artifact(rig.name+"_stopped_state.json",QJsonDocument(package).toJson());
+    Artifact(rig.name+"_stopped_summary.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     auto test=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(test);
     test->Name="StoppedTest";UEPtr<UContainer> node=test;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);test->SetGlobalTimeStep(rig.frequency);
