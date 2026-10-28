@@ -67,6 +67,20 @@ protected:
         {failNeuronAttach=false;throw std::runtime_error("injected_posttune_neuron_attach_failure");}
     }
 };
+template<class Learner> class PostTuneStimulusLearner : public Learner {
+public:
+    PostTuneStimulusLearner* New(void) override {return new PostTuneStimulusLearner;}
+    void ArmPresentations(const std::vector<std::vector<double>>& patterns)
+    {
+        this->TrainingPhase=4;this->PostTrainTuneComplete=false;
+        this->PostTuneFreeRunActive=false;this->ResetNeuronBeforeTrainBurst=false;
+        this->PostTunePatterns=patterns;this->PostTuneTargetIsi=patterns.front();
+    }
+    bool Present(int index){return this->PushPostTunePattern(index);}
+    void ObserveFirstPulse(double now){this->BeginTrainingIteration(now);}
+    std::vector<double> ExpectedTimes() const {return this->ExpectedPulseRelTimes;}
+    std::vector<double> CapturedTarget() const {return this->PostTuneTargetIsi;}
+};
 void Artifact(const std::string& name,const QByteArray& data)
 {
     if(const auto directory=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
@@ -1833,6 +1847,94 @@ template<class Learner> void ObserverSeesExternalPhysicsEdit()
 }
 TEST(NativeTrainingService,ClassicObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearner>();}
 TEST(NativeTrainingService,BranchObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearnerBranch>();}
+
+template<class Learner> void PostTuneTransientStimulus(unsigned frequency)
+{
+    using Owner=PostTuneStimulusLearner<Learner>;
+    constexpr bool branch=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const std::string image=branch?"PostTuneStimulusBranchFixture":"PostTuneStimulusClassicFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new Owner;},image),image);
+    EditingRig<Owner> rig(frequency,1,"posttune_transient",false,2,true,2,1,false,image);
+    const auto goal=rig.learner->InputPattern.GetData();rig.neuron->TrainingPattern=goal;
+    const std::vector<std::vector<double>> patterns{rig.isi,{.02,.12},{0.,.06}};
+    rig.learner->ArmPresentations(patterns);const auto original=rig.Revision();
+    const auto values=[](const MDMatrix<double>& matrix) {
+        QJsonArray result;for(int i=0;i<matrix.GetRows();++i)result.append(matrix(i,0));return result;
+    };
+    for(int index=1;index<3;++index)
+    {
+        rig.environment->GetTime().SetTime(1000000);
+        ASSERT_TRUE(rig.learner->Present(index));
+        auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+        EXPECT_EQ(values(dataset->MatrixData.GetData()),QJsonArray({patterns[index][0],patterns[index][1]}));
+        EXPECT_TRUE(NativeTrainingPatternEqual(rig.learner->InputPattern.GetData(),goal));
+        EXPECT_TRUE(NativeTrainingPatternEqual(rig.neuron->TrainingPattern.GetData(),goal));
+        EXPECT_EQ(rig.learner->CapturedTarget(),patterns.front());EXPECT_EQ(rig.Revision(),original);
+        dataset->AdvanceSampleAfterBurst=true;dataset->LoopSamples=false;dataset->StateGeneration=2;
+        dataset->Reset();rig.neuron->Reset();dataset->StateGeneration=2;
+        const auto stem=rig.name+"_presentation_"+std::to_string(index);
+        const double begin=rig.environment->GetTime().GetDoubleTime(),end=begin+.22;
+        const unsigned maximum=unsigned(std::ceil(.22*frequency))+3;
+        const auto presented=values(dataset->MatrixData.GetData());
+        const QJsonObject spec{{"kind","posttune_transient_presentation"},{"schema_version",1},
+            {"trial_id",QString::fromStdString(stem)},{"training_goal",values(goal)},{"presented_isi",presented},
+            {"pattern_hash",NmsdkTools::CanonicalModelDataSha256(presented)},
+            {"begin",begin},{"end",end},{"maximum_sample_gap",1./frequency},{"maximum_samples",double(maximum)},
+            {"generation_mode",2},{"advance_sample_after_burst",true},{"loop_samples",false},
+            {"model_revision",QString::fromStdString(original)},{"record_spikes",false}};
+        Artifact(stem+"_spec.json",QJsonDocument(spec).toJson());
+        std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(branch?1u:2u);++i)trace<<",soma"<<i;trace<<'\n';
+        QJsonArray onsets;double previous=0.,last=begin;
+        std::vector<double> lower(branch?1u:2u,std::numeric_limits<double>::infinity()),upper(branch?1u:2u,-std::numeric_limits<double>::infinity());
+        bool complete=false;unsigned samples=0;
+        for(unsigned tick=0;tick<maximum;++tick)
+        {
+            rig.model->Calculate();const double time=rig.environment->GetTime().GetDoubleTime(),stimulus=rig.source->Output(0,0);
+            ASSERT_TRUE(std::isfinite(stimulus));trace<<time<<','<<stimulus;
+            if(stimulus>0. && previous<=0.)
+            {
+                if(onsets.isEmpty())rig.learner->ObserveFirstPulse(time);
+                onsets.append(time);
+            }
+            previous=stimulus;
+            for(std::size_t i=0;i<(branch?1u:2u);++i)
+            {
+                auto soma=rig.neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);ASSERT_TRUE(soma);
+                const double value=soma->SumPotential(0,0);ASSERT_TRUE(std::isfinite(value));trace<<','<<value;
+                lower[i]=std::min(lower[i],value);upper[i]=std::max(upper[i],value);
+            }
+            trace<<'\n';last=time;++samples;rig.environment->IncreaseModelTimeByStep();
+            if(!Detail::After(end,time)){complete=true;break;}
+        }
+        EXPECT_TRUE(complete);ASSERT_EQ(onsets.size(),2);
+        double variation=0.;for(std::size_t i=0;i<lower.size();++i)variation=std::max(variation,upper[i]-lower[i]);EXPECT_GT(variation,1.e-6);
+        const auto expected=rig.learner->ExpectedTimes();ASSERT_EQ(expected.size(),2u);
+        EXPECT_DOUBLE_EQ(expected[0],0.);EXPECT_DOUBLE_EQ(expected[1],patterns[index][1]);
+        EXPECT_NEAR(onsets[1].toDouble()-onsets[0].toDouble(),expected[1],1./frequency+1.e-12);
+        const bool goalPreserved=NativeTrainingPatternEqual(rig.learner->InputPattern.GetData(),goal) &&
+            NativeTrainingPatternEqual(rig.neuron->TrainingPattern.GetData(),goal) && rig.learner->CapturedTarget()==patterns.front();
+        EXPECT_TRUE(goalPreserved);EXPECT_EQ(rig.Revision(),original);
+        QJsonArray expectedTimes;for(double value:expected)expectedTimes.append(value);
+        Artifact(stem+".csv",QByteArray::fromStdString(trace.str()));
+        QJsonObject observation{{"kind","posttune_transient_observation"},{"schema_version",1},
+            {"trial_id",spec["trial_id"]},{"complete",complete},{"sample_count",double(samples)},
+            {"last_sample_time",last},{"onsets",onsets},{"expected_relative_times",expectedTimes},
+            {"training_goal_after",values(rig.learner->InputPattern.GetData())},{"material_goal_after",values(rig.neuron->TrainingPattern.GetData())},
+            {"goal_preserved",goalPreserved},{"frozen_after",QString::fromStdString(rig.Revision())},
+            {"scientific_verdict",QJsonValue(QJsonValue::Null)}};
+        Artifact(stem+"_observation.json",QJsonDocument(observation).toJson());
+    }
+    const auto lastGoal=values(rig.learner->InputPattern.GetData());const auto clock=rig.environment->GetTime().GetTime();
+    EXPECT_FALSE(rig.learner->Present(-1));EXPECT_FALSE(rig.learner->Present(int(patterns.size())));
+    EXPECT_EQ(values(rig.learner->InputPattern.GetData()),lastGoal);EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
+}
+TEST(PostTuneTransientStimulus,Classic2000){PostTuneTransientStimulus<NNeuronTimeLearner>(2000);}
+TEST(PostTuneTransientStimulus,Branch2000){PostTuneTransientStimulus<NNeuronTimeLearnerBranch>(2000);}
+TEST(PostTuneTransientStimulus,Classic20000){PostTuneTransientStimulus<NNeuronTimeLearner>(20000);}
+TEST(PostTuneTransientStimulus,Branch20000){PostTuneTransientStimulus<NNeuronTimeLearnerBranch>(20000);}
 
 void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bool listener=false,int normalization=1)
 {
