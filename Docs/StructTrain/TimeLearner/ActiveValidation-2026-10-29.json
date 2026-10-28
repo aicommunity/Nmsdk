@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "scope": "terminal PostTune transient evidence; no active job claimed; earlier full regression in ActiveValidation-2026-10-28.json",
+  "native_root": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
+  "pulse_core": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
+  "pulse_documented": "8f248aa",
+  "python_root": "bb4a351185956365d483d1db5e2d7309bd39ab31",
+  "workers": {
+    "10.245.1.11": {
+      "build_kind": "normal",
+      "native_cases_passed": 4,
+      "python_tests_passed": 8,
+      "complete_presentations": 8,
+      "primary_samples": 19368,
+      "baseline_expected_failures": 4,
+      "byte_exact_common_waveforms": 8,
+      "report": "s08-transient-elder1",
+      "stored_checksums_verified": 198,
+      "raw_checksums_verified": 196
+    },
+    "10.245.1.17": {
+      "build_kind": "asan_detect_leaks_0",
+      "native_cases_passed": 4,
+      "python_tests_passed": 8,
+      "complete_presentations": 8,
+      "primary_samples": 19368,
+      "baseline_expected_failures": 4,
+      "byte_exact_common_waveforms": 8,
+      "report": "s08-transient-m40",
+      "stored_checksums_verified": 198,
+      "raw_checksums_verified": 196
+    }
+  },
+  "evaluation_verdict": null,
+  "full_stage_8_complete": false
+}
