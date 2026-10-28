@@ -2052,6 +2052,50 @@ TEST(NativePostTuneGraphBoundary,BranchN1_20000){PostTuneGraphBoundary<NNeuronTi
 TEST(NativePostTuneGraphBoundary,ClassicAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearner>(2000,1,true);}
 TEST(NativePostTuneGraphBoundary,BranchAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(2000,1,true);}
 
+enum class BoundaryRejection { OwnerReset,WrongOwner,OwnerMember,ExternalListener };
+void RejectStalePostTuneBoundary(BoundaryRejection scenario)
+{
+    EditingRig<NNeuronTimeLearnerBranch> rig(2000,1,"boundary_guard_"+std::to_string(int(scenario)),false,2,true);
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const auto checkpoint=NativeLearnerGraphCheckpoint::Capture(*rig.learner);ASSERT_TRUE(checkpoint);
+    UEPtr<NPulseGeneratorTransit> tap;
+    if(scenario==BoundaryRejection::OwnerReset)rig.learner->Reset();
+    if(scenario==BoundaryRejection::OwnerMember || scenario==BoundaryRejection::ExternalListener)
+    {
+        tap=dynamic_pointer_cast<NPulseGeneratorTransit>(core.storage->TakeObject("NPulseGeneratorTransit"));ASSERT_TRUE(tap);
+        tap->Name="BoundaryGuardTap";UEPtr<UContainer> component=tap;
+        auto& owner=scenario==BoundaryRejection::OwnerMember?static_cast<UNet&>(*rig.learner):*dynamic_pointer_cast<UNet>(rig.model);
+        ASSERT_NE(owner.AddComponent(component),ForbiddenId);tap->Init();
+        if(scenario==BoundaryRejection::ExternalListener)
+        {
+            auto channel=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
+            ASSERT_TRUE(tap->Input.SetPointer(0,&channel->Output));
+        }
+    }
+    const auto before=rig.Revision();const auto clock=rig.environment->GetTime().GetTime();
+    const auto neuron=rig.neuron.Get();std::vector<NameT> order;rig.learner->GetComponentsList(order);
+    const auto rejected=checkpoint->Restore(scenario==BoundaryRejection::WrongOwner?*dynamic_pointer_cast<UNet>(rig.model):*rig.learner);
+    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected)<<rejected.reason;
+    EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_FALSE(rejected.reason.empty());
+    EXPECT_EQ(rig.learner->GetComponent("Neuron",true).Get(),neuron);EXPECT_EQ(rig.Revision(),before);
+    EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
+    std::vector<NameT> after;rig.learner->GetComponentsList(after);EXPECT_EQ(after,order);
+    if(scenario==BoundaryRejection::OwnerReset)EXPECT_EQ(rejected.reason,"boundary_checkpoint_owner_lifecycle_changed");
+    if(scenario==BoundaryRejection::WrongOwner)EXPECT_EQ(rejected.reason,"boundary_checkpoint_context_changed");
+    if(scenario==BoundaryRejection::ExternalListener)
+    {
+        EXPECT_EQ(rejected.reason,"native_cold_replace_has_external_listener");
+        ASSERT_EQ(tap->Input.GetDataSources().size(),1u);tap->Input.DetachFrom();
+    }
+    Artifact(rig.name+"_guard.json",QJsonDocument(QJsonObject{{"kind","native_boundary_guard"},{"schema_version",1},
+        {"scenario",int(scenario)},{"reason",QString::fromStdString(rejected.reason)},
+        {"unchanged_revision",QString::fromStdString(before)},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(NativePostTuneBoundaryGuards,OwnerResetInvalidatesCheckpoint){RejectStalePostTuneBoundary(BoundaryRejection::OwnerReset);}
+TEST(NativePostTuneBoundaryGuards,DifferentOwnerCannotRestore){RejectStalePostTuneBoundary(BoundaryRejection::WrongOwner);}
+TEST(NativePostTuneBoundaryGuards,OwnerMembershipChangeIsRejected){RejectStalePostTuneBoundary(BoundaryRejection::OwnerMember);}
+TEST(NativePostTuneBoundaryGuards,ExternalListenerIsPreserved){RejectStalePostTuneBoundary(BoundaryRejection::ExternalListener);}
+
 void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bool listener=false,int normalization=1)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="PostTuneRebuildBranchFixture";
