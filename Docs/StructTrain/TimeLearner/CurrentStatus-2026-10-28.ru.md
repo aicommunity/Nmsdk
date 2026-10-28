@@ -4,16 +4,17 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-## Предыдущая принятая отправная точка develop
+## Принятая отправная точка develop
 
 | Репозиторий | Опубликованный merge SHA |
 |---|---|
-| Root | `2ad95250fb91c32826399702081c636852a0d56a` |
-| PulseLib | `caf19a343b62e96c5076e84b6c4c2710114128bc` |
+| Root | `b62127538694a3442771598420fd78fa7e405c8b` |
+| PulseLib | `32cb44bba481ca5ddb7d54e0288d5fa04695a9bb` |
 | Rdk | `1812624ff75c60f03ad57c10b379d3e3848590bc` |
 | Bin, без новых изменений | `f5e1d0200127223981daa71da22cf5ee02fdbc60` |
 
-Приняты pooled direct-property / Copy lifetime corrections, явный audit Default
+Предыдущий develop 2ad95250: приняты pooled direct-property / Copy lifetime
+corrections, явный audit Default
 и native completed solo-state transport. На обоих workers прошли четыре
 maintained CTest suites: PulseLib 397 cases, 387 pass / 10 skip / 0 failures;
 по 9 Python tests, 16 обученных пакетов и 208 primary JSON/CSV trials.
@@ -39,8 +40,9 @@ cases без skips: 16 completed / 208 primary trials, 20 stopped / 66 trials,
 
 Оба полных пакета опубликованы; локально проверены по 2552 stored / 2550 raw
 hashes. PulseLib merge develop `32cb44bba481ca5ddb7d54e0288d5fa04695a9bb`
-опубликован; его отличие от tested 96766538 — только документация. Корневая
-ветка приёмки записывает точный gitlink этого merge. Это приёмка указанной
+опубликован; его отличие от tested 96766538 — только документация. Корневой develop merge b62127538694a3442771598420fd78fa7e405c8b записывает
+точный gitlink этого merge. Свежий recursive checkout на M40 подтверждает все
+семь gitlinks и чистое дерево; пакет 7f4211bd, 6 stored / 4 raw hashes проверены. Это приёмка указанной
 regression scope, не завершение этапов 4–8 или всего плана.
 [Источники и ограничения](FullClockAcceptance.ru.md).
 
@@ -124,6 +126,36 @@ M40 native seeded ASan завершён: 52/52 native и 25/25 corrected Python.
 приёмки приведены выше.
 [Причина, evidence и ограничения](AbsoluteClockSampling.ru.md).
 
+**Immutable Solo→Recognition** (`stage08/recognition-conversion`): native API
+сохраняет source solo, явные bounds/clipping/activation и scope сертификата.
+Повторный import не масштабирует текущие Rs. Root a7a4ced6 / PulseLib 74ab08f:
+на Elder-1 normal и M40 ASan A4 прошли по 11/11 native, 23/23 Python; восемь
+packages, 108 source trials, 3528 полных paired frozen samples schema 1.
+Опубликованы по 336 stored / 334 raw files; hashes проверены локально.
+Root ca2f095b: отдельный fresh-process replay на каждом worker — 8/8 native
+children, 29/29 Python, все 3528 samples byte-exact к Git-пакету Elder-1.
+Тем самым M40 проверяет перенос Elder Qt5→M40 Qt6 под ASan. Трассы не содержат
+spike observations и не доказывают scientific selectivity. Предыдущие A1/A2
+failures инициализации свежего root сохраняются. Replay packages включены через merge; локально проверены Elder-1
+1024 stored / 1022 raw и M40 694 / 692 hashes.
+Develop prerequisites объединены в рабочую recognition-ветку через merge,
+без изменения tested Core 74ab08f. Весь этап 8 ещё не принят: PostTune,
+настоящая калибровка, independent scientific Test и полная матрица открыты.
+[Контракт и ограничения](NativeRecognitionState.ru.md).
+
+**Branch PostTune reconstruction / TL-003** (`stage08/posttune-native-rebuild`):
+реальный native graph заменяется через common snapshot/import с сохранением
+heterogeneous child physics и Rs/Ns, без 1 nF fallback и wake-pass Build.
+На обоих workers baseline старой implementation: восемь actual failures.
+Fixed e7ee0104 / PulseLib d862127: Elder normal и M40 ASan — по 10 C++ / 7 Python,
+10090 waveform pairs; N0 Ns=3 на 2/20 кГц, mode preparations, rollback и listener.
+Оба пакета опубликованы; по 483 stored / 481 raw hashes проверены локально.
+A5 generic auditor проверил immutable данные без новой симуляции. Все ошибки
+постановки A1/A2/A3 сохранены. Это не вся candidate transaction и не полный
+SearchSynthetic/calibration; legacy transient InputPattern mutation тоже открыта.
+Новый код пока в working branch, не в develop.
+[Контракт, исходники и ограничения](PostTuneNativeRebuild.ru.md).
+
 ## Незакрытый объём исходных этапов
 
 | Этап | Что ещё требуется |
@@ -135,8 +167,8 @@ M40 native seeded ASan завершён: 52/52 native и 25/25 corrected Python.
 | 5 | Recognition/conversion/PostTune/calibration transfer, полный physical matrix; run-level diagnostics для аварийных nonfinite данных |
 | 6 | Завершение общего controller/adapters, configured retarget/reconfiguration и всех совместимых режимов |
 | 7 | Полная mode/physics matrix dynamic N1 domains; N0 repeatability/quantization; полный поиск/recovery, physics/inhibition/C-trim matrix и честные причины остановки |
-| 8 | Immutable Solo→Recognition conversion, transactional PostTune, real-threshold calibration и независимый frozen Test |
-| 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, recognition analysis и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
+| 8 | Полная матрица/production wiring Solo→Recognition; полная транзакция выбора/отката PostTune candidates, real-threshold calibration и независимый frozen Test |
+| 9 | Помимо inventory и native подмножества analyze — остальные production CLI команды, scientific recognition evaluation и lossless config adapter; перенос активных инструментов и удаление исторических файлов из прежних деревьев с Git migration manifest |
 | 10 | ConditionSpec, fingerprints, owned-process leases/queues/cancellation и fail-closed Git publisher; удаление rsync/scp pipeline |
 | 11 | Исторический saved replay и cold retrain, legacy/v2 comparison, actual order/ITI controls и полная научная матрица |
 | 12 | Сквозная актуализация root/PulseLib/Bin/Rdk/config/ClDesc и устранение конкурирующих актуальных спецификаций |
