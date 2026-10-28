@@ -1851,14 +1851,39 @@ void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bo
     std::vector<NameT> order;rig.learner->GetComponentsList(order);const auto old=rig.neuron;
     const auto measure=[&](const std::string& phase,std::vector<NativeProbeSample>& frames) {
         rig.environment->GetTime().SetTime(1000000);
-        const auto probe=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
-            [&](const NativeProbeSample& sample){frames.push_back(sample);});
-        ASSERT_EQ(probe.status,NativeProbeStatus::Completed);ASSERT_TRUE(probe.observation);ASSERT_TRUE(probe.observation->valid);
-        ASSERT_FALSE(frames.empty());
+        auto dataset=rig.learner->GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+        dataset->Reset();rig.neuron->Reset();dataset->StateGeneration=1;
+        auto soma=rig.neuron->GetComponentL<NPulseMembrane>("Soma1",true);ASSERT_TRUE(soma);
+        const double begin=rig.environment->GetTime().GetDoubleTime(),end=begin+rig.duration;
+        const unsigned maximumSamples=unsigned(std::ceil(rig.duration*frequency))+3;
+        const auto revision=rig.Revision();NmsdkTools::ModelRevisionObserver observer;
+        QJsonArray pattern;for(int i=0;i<dataset->MatrixData.GetRows();++i)pattern.append(dataset->MatrixData(i,0));
+        const QJsonObject spec{{"kind","posttune_parallel_transport_spec"},{"schema_version",1},
+            {"trial_id",QString::fromStdString(rig.name+"/"+phase)},{"model_revision",QString::fromStdString(revision)},
+            {"begin",begin},{"end",end},{"maximum_sample_gap",1./frequency},{"maximum_samples",double(maximumSamples)},
+            {"channels",1},{"record_spikes",false},{"input_isi",pattern},{"dataset_delay",dataset->Delay.GetData()},
+            {"pattern_hash",NmsdkTools::CanonicalModelDataSha256(pattern)}};
+        Artifact(rig.name+"_"+phase+"_spec.json",QJsonDocument(spec).toJson());
+        bool complete=false,emitted=false;double low=std::numeric_limits<double>::infinity(),high=-low;
         std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus,soma0\n";
-        for(const auto& sample:frames){ASSERT_EQ(sample.potentials.size(),1u);trace<<sample.time<<','<<sample.stimulus<<','<<sample.potentials[0]<<'\n';}
+        for(unsigned tick=0;tick<maximumSamples;++tick)
+        {
+            rig.model->Calculate();NativeProbeSample sample;
+            sample.time=rig.environment->GetTime().GetDoubleTime();sample.stimulus=rig.source->Output(0,0);
+            const double value=soma->SumPotential(0,0);ASSERT_TRUE(std::isfinite(sample.stimulus) && std::isfinite(value));
+            sample.potentials={value};frames.push_back(sample);emitted=emitted || sample.stimulus>0.;low=std::min(low,value);high=std::max(high,value);
+            EXPECT_EQ(observer.Read(rig.neuron,rig.ports).toStdString(),revision);
+            trace<<sample.time<<','<<sample.stimulus<<','<<value<<'\n';rig.environment->IncreaseModelTimeByStep();
+            if(!Detail::After(end,sample.time)){complete=true;break;}
+        }
+        ASSERT_FALSE(frames.empty());EXPECT_TRUE(complete);EXPECT_TRUE(emitted);EXPECT_GT(high-low,1.e-6);
+        EXPECT_EQ(rig.Revision(),revision);
         Artifact(rig.name+"_"+phase+".csv",QByteArray::fromStdString(trace.str()));
-        Artifact(rig.name+"_"+phase+"_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(probe)).toJson());
+        Artifact(rig.name+"_"+phase+"_observation.json",QJsonDocument(QJsonObject{
+            {"kind","posttune_parallel_transport_observation"},{"schema_version",1},{"trial_id",spec["trial_id"]},
+            {"model_revision",QString::fromStdString(revision)},{"frozen_after",QString::fromStdString(rig.Revision())},
+            {"complete",complete},{"sample_count",double(frames.size())},{"last_sample_time",frames.back().time},
+            {"emitted",emitted},{"soma_variation",high-low},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     };
     std::vector<NativeProbeSample> baseline,reconstructed;measure("before",baseline);ASSERT_FALSE(baseline.empty());
     EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),before);
@@ -1889,7 +1914,8 @@ void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bo
         const bool same=baseline[i].time==reconstructed[i].time && baseline[i].stimulus==reconstructed[i].stimulus && baseline[i].potentials==reconstructed[i].potentials;
         EXPECT_TRUE(same)<<i;waveformExact=waveformExact && same;
     }
-    Artifact(rig.name+"_reconstruction.json",QJsonDocument(QJsonObject{{"mode",mode},{"frequency",double(frequency)},
+    Artifact(rig.name+"_reconstruction.json",QJsonDocument(QJsonObject{{"kind","posttune_native_reconstruction"},{"schema_version",1},
+        {"mode",mode},{"frequency",double(frequency)},
         {"reconstructed",rebuilt},{"injected_attach_failure",failAttach},{"external_listener",listener},
         {"before_model",before},{"after_model",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)},
         {"samples",double(baseline.size())},{"waveform_exact",waveformExact},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());

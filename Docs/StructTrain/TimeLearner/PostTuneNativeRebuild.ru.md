@@ -42,7 +42,16 @@ Bool Build/Calculate/Reset не используются как протокол
 Часы возвращаются к одинаковой test-only стартовой точке только внутри fixture;
 production learner часы не меняет.
 
-Проверки пока не выполнены. Эти cases не заменяют полный поиск SearchSynthetic,
+A1 normal сборка прошла; все восемь cases были корректно отклонены до
+реконструкции: fixture пытался запустить native solo probe при активном PostTune
+(`concurrent_native_posttune`). Это ошибка постановки fixture, защита не меняется.
+A2 выполняет параллельное предъявление обычным root scheduler без второго
+контроллера: spec сохраняется до ticks, raw CSV и complete observation после
+полного окна. Independent auditor сверяет semantic graph, heterogeneous C,
+свежую пару trial IDs, stimulus timestamps/число импульсов, sampling gaps и
+полные до/после waveforms. Native execution и scientific verdict он не подменяет.
+
+Проверка A2 ещё не выполнена. Эти cases не заменяют полный поиск SearchSynthetic,
 транзакцию выбора/отката всех PostTune candidates, научную оценку, реальную
 калибровку порога или независимый Test. Они адресуют конкретную реконструкцию
 Branch; legacy математическая цель и правила выбора режимов этим не меняются.
