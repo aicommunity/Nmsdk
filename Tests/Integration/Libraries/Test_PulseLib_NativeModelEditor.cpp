@@ -708,12 +708,7 @@ template<class Learner> void NativeDomainPreview()
     const auto assessment=AssessNativeIntegration(rig.neuron,rig.source->Amplitude.GetData());EXPECT_TRUE(assessment.valid)<<assessment.reason;
     const auto probe=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
     EXPECT_EQ(probe.status,NativeProbeStatus::Completed);
-    QJsonArray channels;for(const auto& c:domain.channels)channels.append(QJsonObject{{"path",QString::fromStdString(c.path)},
-        {"variable_coefficient",c.variableCoefficient},{"fixed_conductance",c.fixedConductance},{"minimum_resistance",c.minimumResistance}});
-    Artifact(rig.name+"_domain_preview.json",QJsonDocument(QJsonObject{{"status",ResistanceDomainStatusName(domain.status)},
-        {"reason",QString::fromStdString(domain.reason)},{"base_revision",QString::fromStdString(before)},
-        {"preview_revision",QString::fromStdString(domain.previewModelRevision)},{"minimum_resistance",domain.minimumResistance},
-        {"maximum_resistance",domain.maximumResistance},{"channels",channels}}).toJson());
+    Artifact(rig.name+"_domain_preview.json",QJsonDocument(EncodeResistanceDomainAssessment(domain)).toJson());
 }
 TEST(NativeResistanceDomains,ClassicReadonlyPreview){NativeDomainPreview<NNeuronTimeLearner>();}
 TEST(NativeResistanceDomains,BranchReadonlyPreview){NativeDomainPreview<NNeuronTimeLearnerBranch>();}
@@ -740,9 +735,8 @@ template<class Learner> void NativeDomainInhibition()
         EXPECT_EQ(rig.Revision(),before);EXPECT_FALSE(domain.modelMayHaveChanged);
         bool variableInhibition=false;for(const auto& c:domain.channels)if(c.path.find("InhChannel")!=std::string::npos)variableInhibition=true;
         EXPECT_EQ(variableInhibition,scaled!=0);
-        Artifact(rig.name+(scaled?"_scaled_domain.json":"_fixed_domain.json"),QJsonDocument(QJsonObject{
-            {"minimum_resistance",domain.minimumResistance},{"maximum_resistance",domain.maximumResistance},
-            {"scaled_inhibition",scaled!=0},{"variable_inhibition",variableInhibition}}).toJson());
+        Artifact(rig.name+(scaled?"_scaled_domain.json":"_fixed_domain.json"),
+            QJsonDocument(EncodeResistanceDomainAssessment(domain)).toJson());
     }
     EXPECT_GT(minimum[1],minimum[0]);
 }
