@@ -80,3 +80,20 @@ class TransientEvidenceTest(unittest.TestCase):
                     csv.writer(stream).writerows(rows)
                 with self.assertRaises(EvidenceError):
                     audit_transient_presentation(spec, observation, trace)
+
+    def test_mid_trial_goal_or_stimulus_change_cannot_hide_behind_restored_endpoint(self):
+        for role in ("goal", "stimulus"):
+            spec, observation, original = copy.deepcopy(self.cases[0])
+            with original.open(newline="") as stream:
+                rows = list(csv.reader(stream))
+            index = 2 + int(spec["channels"])
+            if role == "goal":
+                rows[20][index] = str(spec["presented_isi"][0])
+            else:
+                rows[20][index + len(spec["training_goal"]) + 1] = str(spec["training_goal"][1])
+            with tempfile.TemporaryDirectory() as directory:
+                trace = Path(directory) / "restored-endpoint.csv"
+                with trace.open("w", newline="") as stream:
+                    csv.writer(stream).writerows(rows)
+                with self.assertRaisesRegex(EvidenceError, "changed_during_trial"):
+                    audit_transient_presentation(spec, observation, trace)
