@@ -1892,7 +1892,10 @@ template<class Learner> void PostTuneTransientStimulus(unsigned frequency)
             {"model_revision",QString::fromStdString(original)},{"record_spikes",false}};
         Artifact(stem+"_spec.json",QJsonDocument(spec).toJson());
         std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
-        for(std::size_t i=0;i<(branch?1u:2u);++i)trace<<",soma"<<i;trace<<'\n';
+        for(std::size_t i=0;i<(branch?1u:2u);++i)trace<<",soma"<<i;
+        for(int i=0;i<goal.GetRows();++i)trace<<",training_goal"<<i;
+        for(int i=0;i<goal.GetRows();++i)trace<<",presented_isi"<<i;
+        trace<<'\n';
         QJsonArray onsets,presentedAtFirst;int phaseAtFirst=-1;double previous=0.,last=begin;
         std::vector<double> lower(branch?1u:2u,std::numeric_limits<double>::infinity()),upper(branch?1u:2u,-std::numeric_limits<double>::infinity());
         bool complete=false;unsigned samples=0;
@@ -1916,6 +1919,10 @@ template<class Learner> void PostTuneTransientStimulus(unsigned frequency)
                 const double value=soma->SumPotential(0,0);ASSERT_TRUE(std::isfinite(value));trace<<','<<value;
                 lower[i]=std::min(lower[i],value);upper[i]=std::max(upper[i],value);
             }
+            const auto& currentGoal=rig.learner->InputPattern.GetData();
+            const auto& currentStimulus=dataset->MatrixData.GetData();
+            for(int i=0;i<goal.GetRows();++i)trace<<','<<(currentGoal.GetRows()>i && currentGoal.GetCols()==1?currentGoal(i,0):std::numeric_limits<double>::quiet_NaN());
+            for(int i=0;i<goal.GetRows();++i)trace<<','<<(currentStimulus.GetRows()>i && currentStimulus.GetCols()==1?currentStimulus(i,0):std::numeric_limits<double>::quiet_NaN());
             trace<<'\n';last=time;++samples;rig.environment->IncreaseModelTimeByStep();
             if(!Detail::After(end,time)){complete=true;break;}
         }
