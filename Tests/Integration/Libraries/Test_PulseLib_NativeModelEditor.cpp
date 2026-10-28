@@ -3,6 +3,7 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "NPulseChannel.h"
 #include "NPulseSynapse.h"
+#include "NNeuronPostTrainTune.h"
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ModelIdentity.h"
 #include "TimeLearner/ModelInspection.h"
@@ -45,6 +46,27 @@ protected:
         {failNeuronAttach=false;throw std::runtime_error("injected_import_neuron_attach_failure");}
     }
 };
+class PostTuneRebuildBranch : public NNeuronTimeLearnerBranch {
+public:
+    bool failNeuronAttach=false;
+    PostTuneRebuildBranch* New(void) override {return new PostTuneRebuildBranch;}
+    void PreparePostTune(int mode)
+    {
+        TrainingPhase=4; // Public legacy TrainingPhase value: PostTune.
+        PostTrainTipResistanceMode=mode;
+        TipResistanceCanonFloor=3.e8;TipResistanceCanonLast=4.e8;
+        PostTuneTipSnapshot=TipSynapseResistance.GetData();PostTuneTrialTips=PostTuneTipSnapshot;
+        ApplyPostTrainTipMode(false);ApplyPulseGeneratorMute();
+    }
+    bool Reconstruct(){return RebuildCableForPostTuneProbes();}
+protected:
+    void ABeforeAddComponent(UEPtr<UContainer> child,UEPtr<UIPointer> pointer=0) override
+    {
+        NNeuronTimeLearnerBranch::ABeforeAddComponent(child,pointer);
+        if(failNeuronAttach && child->GetName()=="Neuron")
+        {failNeuronAttach=false;throw std::runtime_error("injected_posttune_neuron_attach_failure");}
+    }
+};
 void Artifact(const std::string& name,const QByteArray& data)
 {
     if(const auto directory=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
@@ -55,7 +77,7 @@ void Artifact(const std::string& name,const QByteArray& data)
     }
 }
 template<class Learner> struct EditingRig {
-    bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
+    bool branch=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value;
     unsigned frequency;int normalization;
     std::size_t inputCount=2;
     std::string name;
@@ -70,7 +92,8 @@ template<class Learner> struct EditingRig {
     double constructionTime=0.;
     std::vector<double> isi{.01,.08};bool tightBurst=false;
     EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2,
-               bool cold=false,int neuronMode=2,int learnerMode=1,bool domainInhibitionProfile=false)
+               bool cold=false,int neuronMode=2,int learnerMode=1,bool domainInhibitionProfile=false,
+               const std::string& learnerClass={})
         :frequency(f),normalization(mode),inputCount(inputs),tightBurst(tight)
     {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();environment=core.environment;
@@ -81,7 +104,8 @@ template<class Learner> struct EditingRig {
         if(domainInhibitionProfile)profile.body.inhChannel.capacity=.15e-9;
         profile.initialThreshold=1.;profile.ltMembrane=profile.body;profile.ltMembrane->excChannel.capacity=.3e-9;
         const auto registered=RegisterStorageProfile(core.storage,environment,profile);
-        learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
+        learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(learnerClass.empty()?
+            (branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"):learnerClass));
         if(!learner)throw std::runtime_error("editor_fixture_learner");
         learner->Name="Learner";learner->StructureBuildMode=learnerMode;learner->NumInputDendrite=int(inputCount);
         std::vector<int> lengths(inputCount,1);if(inputCount==2)lengths[0]=2;
@@ -1808,6 +1832,76 @@ template<class Learner> void ObserverSeesExternalPhysicsEdit()
 }
 TEST(NativeTrainingService,ClassicObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearner>();}
 TEST(NativeTrainingService,BranchObserverDetectsTinyExternalPhysicsChange){ObserverSeesExternalPhysicsEdit<NNeuronTimeLearnerBranch>();}
+
+void PostTuneReconstruction(unsigned frequency,int mode,bool failAttach=false,bool listener=false)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="PostTuneRebuildBranchFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new PostTuneRebuildBranch;},image),image);
+    const auto suffix="posttune_native_mode"+std::to_string(mode)+(failAttach?"_rollback":listener?"_listener":"");
+    EditingRig<PostTuneRebuildBranch> rig(frequency,1,suffix,false,2,true,2,1,false,image);
+    auto exc=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
+    auto other=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
+    auto inh=rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true);ASSERT_TRUE(exc);ASSERT_TRUE(other);ASSERT_TRUE(inh);
+    exc->Capacity=1.3e-9;other->Capacity=1.7e-9;inh->Capacity=2.3e-9;
+    // Parent zero is legal when physics is owned by heterogeneous child images.
+    // Rebuilding must never replace these capacities with a 1 nF fallback.
+    rig.neuron->MembraneCapacity=0.;rig.learner->PreparePostTune(mode);
+    const auto before=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);const auto parameters=rig.learner->ReadNativeParameters();
+    std::vector<NameT> order;rig.learner->GetComponentsList(order);const auto old=rig.neuron;
+    const auto measure=[&](const std::string& phase,std::vector<NativeProbeSample>& frames) {
+        rig.environment->GetTime().SetTime(1000000);
+        const auto probe=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+            [&](const NativeProbeSample& sample){frames.push_back(sample);});
+        ASSERT_EQ(probe.status,NativeProbeStatus::Completed);ASSERT_TRUE(probe.observation);ASSERT_TRUE(probe.observation->valid);
+        ASSERT_FALSE(frames.empty());
+        std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus,soma0\n";
+        for(const auto& sample:frames){ASSERT_EQ(sample.potentials.size(),1u);trace<<sample.time<<','<<sample.stimulus<<','<<sample.potentials[0]<<'\n';}
+        Artifact(rig.name+"_"+phase+".csv",QByteArray::fromStdString(trace.str()));
+        Artifact(rig.name+"_"+phase+"_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(probe)).toJson());
+    };
+    std::vector<NativeProbeSample> baseline,reconstructed;measure("before",baseline);ASSERT_FALSE(baseline.empty());
+    EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),before);
+    UEPtr<NPulseGeneratorTransit> tap;
+    if(listener)
+    {
+        tap=dynamic_pointer_cast<NPulseGeneratorTransit>(core.storage->TakeObject("NPulseGeneratorTransit"));ASSERT_TRUE(tap);
+        tap->Name="PostTuneExternalListener";UEPtr<UContainer> node=tap;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);tap->Init();
+        ASSERT_TRUE(tap->Input.SetPointer(0,&other->Output));
+    }
+    const auto connectors=rig.source->Output.GetNumConnectors();const auto clock=rig.environment->GetTime().GetTime();
+    rig.learner->failNeuronAttach=failAttach;const bool rebuilt=rig.learner->Reconstruct();
+    EXPECT_EQ(rebuilt,!failAttach && !listener);EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
+    rig.neuron=rig.learner->GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(rig.neuron);
+    EXPECT_EQ(rig.neuron.Get()==old.Get(),failAttach || listener);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),before);
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.source->Output.GetNumConnectors(),connectors);
+    std::vector<NameT> afterOrder;rig.learner->GetComponentsList(afterOrder);EXPECT_EQ(afterOrder,order);
+    EXPECT_DOUBLE_EQ(rig.neuron->MembraneCapacity.GetData(),0.);
+    EXPECT_DOUBLE_EQ(rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true)->Capacity.GetData(),1.3e-9);
+    EXPECT_DOUBLE_EQ(rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true)->Capacity.GetData(),1.7e-9);
+    EXPECT_DOUBLE_EQ(rig.neuron->GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true)->Capacity.GetData(),2.3e-9);
+    if(listener){ASSERT_EQ(tap->Input.GetDataSources().size(),1u);EXPECT_EQ(tap->Input.GetDataSources().front(),&other->Output);tap->Input.DetachFrom();}
+    measure("after",reconstructed);ASSERT_EQ(baseline.size(),reconstructed.size());
+    bool waveformExact=true;
+    for(std::size_t i=0;i<baseline.size();++i)
+    {
+        const bool same=baseline[i].time==reconstructed[i].time && baseline[i].stimulus==reconstructed[i].stimulus && baseline[i].potentials==reconstructed[i].potentials;
+        EXPECT_TRUE(same)<<i;waveformExact=waveformExact && same;
+    }
+    Artifact(rig.name+"_reconstruction.json",QJsonDocument(QJsonObject{{"mode",mode},{"frequency",double(frequency)},
+        {"reconstructed",rebuilt},{"injected_attach_failure",failAttach},{"external_listener",listener},
+        {"before_model",before},{"after_model",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)},
+        {"samples",double(baseline.size())},{"waveform_exact",waveformExact},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(NativePostTuneReconstruction,Off){PostTuneReconstruction(2000,PostTrainTune::kPostTipOff);}
+TEST(NativePostTuneReconstruction,CanonRmin){PostTuneReconstruction(2000,PostTrainTune::kPostTipCanonRmin);}
+TEST(NativePostTuneReconstruction,FlatLastR){PostTuneReconstruction(2000,PostTrainTune::kPostTipFlatLastR);}
+TEST(NativePostTuneReconstruction,KeepDone){PostTuneReconstruction(2000,PostTrainTune::kPostTipKeepDone);}
+TEST(NativePostTuneReconstruction,SearchSyntheticSeed){PostTuneReconstruction(2000,PostTrainTune::kPostTipSearchSynthetic);}
+TEST(NativePostTuneReconstruction,KeepDone20000){PostTuneReconstruction(20000,PostTrainTune::kPostTipKeepDone);}
+TEST(NativePostTuneReconstruction,AttachFailureRollsBack){PostTuneReconstruction(2000,PostTrainTune::kPostTipKeepDone,true);}
+TEST(NativePostTuneReconstruction,ExternalListenerRejectsBeforeReplacement){PostTuneReconstruction(2000,PostTrainTune::kPostTipKeepDone,false,true);}
 
 TEST(NativeIntegration, ActualSecretionWeightPsiAndTimeStepAreUsed)
 {
