@@ -50,7 +50,8 @@ class RecognitionOwnerEvidenceTest(unittest.TestCase):
             for key, value in (("recognition_certificate", {}), ("training_controller_installed", True),
                                ("need", True), ("frozen_after_owner", "0" * 64),
                                ("source_solo_sha256", "0" * 64), ("begin", case[3]["begin"] + 1),
-                               ("sample_count", case[3]["sample_count"] - 1), ("evaluation_verdict", "PASS")):
+                               ("sample_count", case[3]["sample_count"] - 1), ("evaluation_verdict", "PASS"),
+                               ("unknown_factor", "silently ignored")):
                 with self.subTest(case=case[3]["trial_id"], field=key):
                     changed = list(case)
                     changed[3] = copy.deepcopy(case[3])

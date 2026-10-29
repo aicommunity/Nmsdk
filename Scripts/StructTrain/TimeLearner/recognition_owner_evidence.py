@@ -13,6 +13,18 @@ from .recognition_evidence import audit_recognition_state
 
 def audit_owner_recognition(package, source_case, spec, observation, trace, imported, guard):
     try:
+        require(set(observation) == {"kind", "schema_version", "model_revision", "source_solo_revision",
+                "source_solo_sha256", "begin", "end", "last_sample_time", "maximum_sample_gap", "sample_count",
+                "channels", "inputs", "trial_id", "frozen_before", "frozen_after_owner", "frozen_after_reference",
+                "maximum_soma", "need", "complete", "emitted", "soma_variation", "record_spikes",
+                "recognition_certificate", "training_controller_installed", "rejected_certificate_reason", "evaluation_verdict"},
+                "recognition_owner_field_set_mismatch")
+        require(set(imported) == {"kind", "schema_version", "status", "reason", "model_may_have_changed", "installed", "evaluation_verdict"}
+                and set(guard) == {"kind", "schema_version", "physical_edit_detected", "reason", "evaluation_verdict"},
+                "recognition_owner_control_field_set_mismatch")
+        require(set(spec) == {"kind", "schema_version", "run_id", "trial_id", "model_revision", "pattern_hash",
+                "begin", "end", "maximum_sample_gap", "maximum_samples", "channels", "record_spikes", "measurement"},
+                "recognition_owner_probe_field_set_mismatch")
         require(observation.get("kind") == "native_recognition_owner_observation"
                 and type(observation.get("schema_version")) is int and observation["schema_version"] == 1,
                 "unknown_recognition_owner_schema")
