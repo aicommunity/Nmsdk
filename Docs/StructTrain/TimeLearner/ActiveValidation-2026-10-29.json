@@ -173,7 +173,7 @@
     "native_root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
     "session_id": 49214,
     "attempt": "s08-integrated-normal-a1",
-    "state": "both full native processes confirmed running; terminal results pending",
+    "state": "both native and independent audit processes completed exit zero; evidence published and all stored/raw hashes verified locally",
     "scope": "three maintained Rdk CTest targets plus full PulseLib parent, separate XML",
     "runtime": "/home/user/timelearner-refactor/runtime-s08-integrated-normal-a1",
     "workers": {
@@ -181,7 +181,9 @@
         "native_session_id": 49214,
         "observed_native_pid": 3623663,
         "python_waiter_session_id": 99128,
-        "cache": "/home/user/timelearner-refactor/build-order-fixed-normal-a1"
+        "cache": "/home/user/timelearner-refactor/build-order-fixed-normal-a1",
+        "process_state": "completed",
+        "independent_primary_data_audit_passed": true
       },
       "10.245.1.17": {
         "native_session_id": 8546,
@@ -190,12 +192,31 @@
         "cache": "/home/user/timelearner-refactor/build-s08-integrated-normal-a1",
         "source": "/home/user/timelearner-refactor/source-s08-integrated-normal-a1",
         "low_disk_period_observed": true,
-        "acceptance_requires_independent_primary_data_completeness": true
+        "acceptance_requires_independent_primary_data_completeness": true,
+        "process_state": "completed",
+        "independent_primary_data_audit_passed": true
       }
     },
     "python_root": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
     "python_audit_attempt": "s08-integrated-data-a1",
-    "python_scope": "13 modules; all required evidence directories explicit; fresh-process cross-worker replay remains separate"
+    "python_scope": "13 modules; all required evidence directories explicit; fresh-process cross-worker replay remains separate",
+    "native_tests_each": 491,
+    "native_passed_each": 480,
+    "native_helper_skips_each": 11,
+    "native_failures_each": 0,
+    "rdk_ctest_groups_each": 3,
+    "python_tests_each": 114,
+    "python_skips_each": 0,
+    "python_failures_each": 0,
+    "reports": {
+      "elder1": "bc37077f18adce02c9d90b2aecdc2b75fc8e6b4f",
+      "m40": "182191b9534f62257687b97b24f9f7fc936dd71e"
+    },
+    "local_hash_verification_each": {
+      "stored": 3268,
+      "raw": 3266
+    },
+    "develop_merged": false
   },
   "config_adapter": {
     "branch": "stage09/lossless-config-adapter",
@@ -237,5 +258,24 @@
     "active_jobs_moved": false,
     "raw_experiment_files_deleted": 0,
     "production_storage_scheduler_complete": false
+  },
+  "native_owner_config_bindings": {
+    "native_root": "1f819b429a292a575593203be3bfe6b42392c8c4",
+    "pulse_core": "cbbf56ce541027ef8e07d6be7a1841cf513b2b8e",
+    "worker": "10.245.1.17",
+    "build_kind": "asan_detect_leaks_0",
+    "native_tests_passed": 16,
+    "independent_json_readbacks": 16,
+    "baseline_a4_conflicting_expected_failures": 8,
+    "baseline_a4_matching_passes": 8,
+    "report_commit": "1c55f903d9d30e1367a30461c5f5f7b1a92f30c3",
+    "local_hash_verification": {
+      "stored": 467,
+      "raw": 465
+    },
+    "elder_validation_complete": false,
+    "editor_metadata_assignments_covered": false,
+    "runtime_control_flags_covered": false,
+    "develop_merged": false
   }
 }
