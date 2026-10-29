@@ -81,3 +81,20 @@ tests на workers и реальный native readback на M40 ASan прошл�
 множество run/trial IDs и sample/label/pattern hash из job spec. Размещение
 target первым в файле не требуется. Подробности и область серверной проверки —
 Docs/StructTrain/TimeLearner/FrozenRecognitionTrials.ru.md в корне.
+
+### Метрики и крупные графические отчёты
+
+`analyze evaluation.json.gz --format recognition-evaluation --model model.json.gz`
+оценивает объявленное полное множество trials по labels/IDs/hash паттерна.
+Критерий окна ответа задаётся явно; early target и любой foil spike во всём
+окне не скрываются. Reset policies выводятся отдельно. Глобальный scientific
+verdict требует общего runner/provenance и здесь остаётся null.
+
+`python3 -m Scripts.StructTrain.TimeLearner report evaluation.json.gz --model model.json.gz --output NEW_DIRECTORY`
+создаёт переносимый diagnostic index.html, primary данные, analysis.json,
+manifest и контрольные суммы. На каждую trial/soma пару — отдельные PNG
+1920×960, SVG/PDF overview и zoom-панели максимум по 100 native ticks.
+Рендерить на workers; требуется matplotlib. Существующий каталог не заменяется.
+Открывать полный PNG или vector-ссылку для анализа деталей. Schema-1 units
+помечены model units / SI unverified; финальная визуальная матрица не закрыта.
+Подробности: Docs/StructTrain/TimeLearner/VisualReportRenderer.ru.md.
