@@ -56,6 +56,11 @@ recognition/calibration, исторический replay, order/ITI и науч�
 
 PulseLib принят через merge commit develop
 `4db59424125dda426a29bc74faac565db871511f`; отличие от native c7266dcb —
-только документация. Корневой acceptance branch записывает этот точный gitlink
-и объединяется в develop отдельным merge commit. Свежий recursive checkout
-приёмочного root merge требует отдельного Git closure readback.
+только документация. Root develop merge `9e06c339a8186e3330303f6cd4fa829d09b74510` записывает
+этот точный gitlink. Свежий checkout на M40 подтверждает все семь gitlinks
+и чистое дерево. [Git closure](../../../Reports/StructTrain/TimeLearner/s08-accepted-closure-m40/README.md),
+evidence `7f21442575db614df55c781bb4c9b242c5fbea6e`: 5 stored / 2 raw hashes.
+Первоначально отдельные clones не были зарегистрированы через submodule init;
+эта setup error исправлена, recursive status повторно проверен. Первый HTTPS
+push отчёта не прошёл из-за отсутствия credentials; origin возвращён на
+штатный SSH transport, опубликованный commit проверен через ls-remote.
