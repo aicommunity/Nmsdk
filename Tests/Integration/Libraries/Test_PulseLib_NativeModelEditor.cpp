@@ -2136,9 +2136,9 @@ template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int no
 }
 class NativeOwnerConfigSource : public UNet {
 public:
-    UProperty<std::vector<double>,NativeOwnerConfigSource,ptOutput|ptPubState> Resistances;
+    UProperty<double,NativeOwnerConfigSource,ptOutput|ptPubState> Resistance0,Resistance1;
     UProperty<int,NativeOwnerConfigSource,ptOutput|ptPubState> MaximumLength;
-    NativeOwnerConfigSource():Resistances("Resistances",this),MaximumLength("MaximumLength",this){}
+    NativeOwnerConfigSource():Resistance0("Resistance0",this),Resistance1("Resistance1",this),MaximumLength("MaximumLength",this){}
     NativeOwnerConfigSource* New(void) override {return new NativeOwnerConfigSource;}
 };
 template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool importing,bool scalar)
@@ -2167,13 +2167,21 @@ template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool import
     ASSERT_NE(rig.model->AddComponent(component),ForbiddenId);source->Init();
     auto resistances=rig.learner->TipSynapseResistance.GetData();resistances[0]*=1.03125;
     const int maximum=rig.learner->MaxDendriteLength.GetData()+1;
-    source->Resistances=resistances;source->MaximumLength=maximum;
+    source->Resistance0=resistances[0];source->Resistance1=resistances[1];source->MaximumLength=maximum;
     if(scalar)ASSERT_TRUE(rig.learner->MaxDendriteLength.SetPointer(0,&source->MaximumLength));
-    else ASSERT_TRUE(rig.learner->TipSynapseResistance.SetPointer(0,&source->Resistances));
+    else
+    {
+        // A vector input collects scalar outputs; vector-to-vector SetPointer
+        // is not this Rdk input protocol and cannot establish this control.
+        ASSERT_TRUE(rig.learner->TipSynapseResistance.SetPointer(0,&source->Resistance0));
+        ASSERT_TRUE(rig.learner->TipSynapseResistance.SetPointer(1,&source->Resistance1));
+        ASSERT_EQ(rig.learner->TipSynapseResistance.GetData(),resistances);
+    }
     const auto old=rig.learner->GetComponent("Neuron",true).Get();
     const auto result=importing?rig.learner->ImportNativeLearnedState(package,"native_owner_binding_v1"):
         rig.learner->ConstructNativeModel(declaration);
-    QJsonArray before,after;for(double r:resistances)before.append(r);for(double r:source->Resistances.GetData())after.append(r);
+    QJsonArray before,after;for(double r:resistances)before.append(r);
+    after.append(source->Resistance0.GetData());after.append(source->Resistance1.GetData());
     Artifact(rig.name+"_owner_binding.json",QJsonDocument(QJsonObject{
         {"kind","native_owner_configuration_binding"},{"schema_version",1},{"importing",importing},{"scalar",scalar},
         {"status",NativeModelBuildStatusName(result.status)},{"reason",QString::fromStdString(result.reason)},
@@ -2182,7 +2190,8 @@ template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool import
         {"source_vector_before",before},{"source_vector_after",after},
         {"source_scalar_before",maximum},{"source_scalar_after",source->MaximumLength.GetData()},
         {"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
-    EXPECT_EQ(source->Resistances.GetData(),resistances);EXPECT_EQ(source->MaximumLength.GetData(),maximum);
+    EXPECT_EQ((std::vector<double>{source->Resistance0.GetData(),source->Resistance1.GetData()}),resistances);
+    EXPECT_EQ(source->MaximumLength.GetData(),maximum);
     ASSERT_EQ(result.status,NativeModelBuildStatus::Rejected)<<result.reason;
     EXPECT_FALSE(result.modelMayHaveChanged);EXPECT_EQ(rig.learner->GetComponent("Neuron",true).Get(),old);
 }
