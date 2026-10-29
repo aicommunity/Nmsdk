@@ -1086,9 +1086,160 @@ TEST(NativeLearnedState,FreshProcessImport)
     dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
 }
 
-enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict };
+
+enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled };
+
+template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
+    const auto sourceCopy=source;NativeRecognitionSpec spec;
+    const bool fresh=scenario==RecognitionCase::OwnedFreshIdentity || scenario==RecognitionCase::OwnedFreshScaled;
+    auto trainingOwner=rig.learner;auto trainingNeuron=rig.neuron;auto trainingGenerator=rig.source;
+    const auto trainingBefore=rig.Revision();
+    if(scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped || scenario==RecognitionCase::OwnedFreshScaled)
+    {
+        spec.mode=RecognitionConversionMode::HistoricalBranchN1;
+        for(const auto& p:rig.learner->ReadNativeParameters())
+            spec.resistanceBounds.push_back(scenario==RecognitionCase::OwnedClipped?
+                RecognitionResistanceBounds{1.5*p.resistance,1.5*p.resistance}:RecognitionResistanceBounds{1.e6,1.e12});
+    }
+    const auto package=ConvertNativeSoloToRecognition(source,spec,core.storage,core.environment,implementation);
+    Artifact(rig.name+"_owner_recognition_state.json",QJsonDocument(package).toJson());
+    auto reference=PrepareNativeRecognitionState(package,core.storage,core.environment,implementation);
+    rig.learner->IsNeedToTrain=false;
+    int beforeVersion=-1,beforeInputs=-1;
+    if(fresh)
+    {
+        auto target=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(target);
+        ASSERT_NE(target.Get(),trainingOwner.Get());beforeVersion=target->ControllerVersion.GetData();beforeInputs=target->NumInputDendrite.GetData();
+        EXPECT_EQ(beforeVersion,1);EXPECT_FALSE(target->ConfiguredModelInitialized.GetData());
+        EXPECT_FALSE(target->HasNativeRecognitionState());EXPECT_FALSE(target->NativeTrainingController().Certificate());
+        target->Name="RecognitionTestLearner";target->SetEnvironment(rig.environment);target->SetGlobalTimeStep(rig.frequency);
+        UEPtr<UContainer> node=target;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);rig.learner=target;
+    }
+    const auto clock=rig.environment->GetTime().GetTime();
+    auto refresh=[&] {
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    };
+    auto installed=rig.learner->ImportNativeRecognitionState(package,implementation);
+    Artifact(rig.name+"_owner_recognition_import.json",QJsonDocument(QJsonObject{
+        {"kind","native_recognition_owner_import"},{"schema_version",1},{"status",NativeModelBuildStatusName(installed.status)},
+        {"reason",QString::fromStdString(installed.reason)},{"model_may_have_changed",installed.modelMayHaveChanged},
+        {"installed",rig.learner->HasNativeRecognitionState()},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    ASSERT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;refresh();
+    ASSERT_TRUE(rig.learner->HasNativeRecognitionState());EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),reference->parameters);
+    EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());EXPECT_FALSE(rig.learner->NativeTrainingController().References());
+    EXPECT_EQ(rig.learner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());
+    rig.learner->Build();rig.learner->Init();rig.learner->Reset();
+    ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
+    EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),package);
+    EXPECT_THROW(rig.learner->ExportNativeLearnedState(implementation),std::logic_error);
+    EXPECT_THROW(rig.learner->BeginNativeTraining(TrainingPlan(rig)),std::logic_error);
+    EXPECT_THROW(rig.learner->QueueNativeProbe(NativeProbeRequest{}),std::logic_error);
+    EXPECT_FALSE(rig.learner->SetIsNeedToTrain(true));EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());
+    auto requested=reference->parameters;requested[0].resistance*=1.01;
+    auto blocked=rig.learner->ApplyNativeParameters(requested);EXPECT_EQ(blocked.status,NativeEditStatus::Rejected);
+    EXPECT_EQ(blocked.reason,"native_recognition_model_is_frozen");EXPECT_FALSE(blocked.modelMayHaveChanged);
+    // Reinstall from the same immutable source package, never scale live Rs again.
+    installed=rig.learner->ImportNativeRecognitionState(package,implementation);
+    ASSERT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;refresh();
+    rig.learner->Build();rig.learner->Init();rig.learner->Reset();
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),reference->parameters);
+    auto forged=package;forged["recognition_certificate"]=source["certificate"];forged.remove("sha256");
+    forged["sha256"]=NmsdkTools::CanonicalModelDataSha256(forged);
+    const auto beforeReject=rig.Revision();const auto rejected=rig.learner->ImportNativeRecognitionState(forged,implementation);
+    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(rejected.modelMayHaveChanged);
+    EXPECT_EQ(rig.Revision(),beforeReject);EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),package);
+    reference->dataset->Name="RecognitionReferenceData";reference->neuron->Name="RecognitionReferenceNeuron";
+    for(UEPtr<UContainer> node:{UEPtr<UContainer>(reference->dataset.Get()),UEPtr<UContainer>(reference->neuron.Get())})
+    {ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);node->Init();node->Reset();}
+    auto other=reference->dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(other);
+    auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    dataset->StateGeneration=1;reference->dataset->StateGeneration=1;
+    const double begin=rig.environment->GetTime().GetDoubleTime(),end=begin+rig.duration+.01;
+    const auto channels=rig.branch?1u:rig.inputCount;const auto frames=unsigned(std::ceil((rig.duration+.01)*rig.frequency))+3;
+    std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus_a,stimulus_b";
+    for(std::size_t i=0;i<channels;++i)trace<<",soma_a"<<i<<",soma_b"<<i;trace<<'\n';
+    const auto frozenBefore=rig.Revision();const auto trial=rig.name+"/owned-recognition";
+    Artifact(rig.name+"_owner_recognition_probe_spec.json",QJsonDocument(QJsonObject{
+        {"kind","native_recognition_frozen_probe"},{"schema_version",1},{"run_id",QString::fromStdString(rig.name)},
+        {"trial_id",QString::fromStdString(trial)},{"model_revision",package["model_revision"]},
+        {"pattern_hash",source["protocol"].toObject()["pattern_hash"]},{"begin",begin},{"end",end},
+        {"maximum_sample_gap",1./rig.frequency},{"maximum_samples",double(frames)},{"channels",double(channels)},
+        {"record_spikes",false},{"measurement","paired_soma_transport"}}).toJson());
+    bool complete=false,emitted=false;unsigned samples=0;double last=begin,variation=0.,maximum=0.;
+    std::vector<double> low(channels,std::numeric_limits<double>::infinity()),high(channels,-std::numeric_limits<double>::infinity());
+    for(unsigned tick=0;tick<frames;++tick)
+    {
+        rig.model->Calculate();last=rig.environment->GetTime().GetDoubleTime();
+        ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
+        const double a=rig.source->Output(0,0),b=other->Output(0,0);EXPECT_DOUBLE_EQ(a,b);emitted=emitted || a>0.;
+        trace<<last<<','<<a<<','<<b;
+        for(std::size_t i=0;i<channels;++i)
+        {
+            const auto path="Soma"+std::to_string(i+1);auto x=rig.neuron->template GetComponentL<NPulseMembrane>(path,true);
+            auto y=reference->neuron->template GetComponentL<NPulseMembrane>(path,true);ASSERT_TRUE(x);ASSERT_TRUE(y);
+            const double va=x->SumPotential(0,0),vb=y->SumPotential(0,0);EXPECT_DOUBLE_EQ(va,vb);
+            maximum=std::max(maximum,std::fabs(va));
+            low[i]=std::min(low[i],va);high[i]=std::max(high[i],va);trace<<','<<va<<','<<vb;
+        }
+        trace<<'\n';++samples;rig.environment->IncreaseModelTimeByStep();if(!Detail::After(end,last)){complete=true;break;}
+    }
+    for(std::size_t i=0;i<channels;++i)variation=std::max(variation,high[i]-low[i]);
+    EXPECT_TRUE(complete);EXPECT_TRUE(emitted);EXPECT_GT(variation,1.e-6);
+    const auto frozenAfter=rig.Revision();
+    const auto referenceAfter=NmsdkTools::IdentifyModel(reference->neuron,{{&other->Output,"burst"}})["sha256"].toString().toStdString();
+    EXPECT_EQ(frozenBefore,package["model_revision"].toString().toStdString());EXPECT_EQ(frozenAfter,frozenBefore);EXPECT_EQ(referenceAfter,frozenBefore);
+    EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),package);EXPECT_EQ(source,sourceCopy);
+    EXPECT_EQ(rig.learner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());
+    Artifact(rig.name+"_owner_recognition_wave.csv",QByteArray::fromStdString(trace.str()));
+    Artifact(rig.name+"_owner_recognition_observation.json",QJsonDocument(QJsonObject{
+        {"kind","native_recognition_owner_observation"},{"schema_version",2},{"model_revision",package["model_revision"]},
+        {"source_solo_revision",source["model_revision"]},{"source_solo_sha256",source["sha256"]},
+        {"begin",begin},{"end",end},{"last_sample_time",last},{"maximum_sample_gap",1./rig.frequency},
+        {"sample_count",double(samples)},{"channels",double(channels)},{"inputs",double(rig.inputCount)},
+        {"trial_id",QString::fromStdString(trial)},{"frozen_before",QString::fromStdString(frozenBefore)},
+        {"frozen_after_owner",QString::fromStdString(frozenAfter)},{"frozen_after_reference",QString::fromStdString(referenceAfter)},
+        {"maximum_soma",maximum},{"need",rig.learner->IsNeedToTrain.GetData()},
+        {"complete",complete},{"emitted",emitted},{"soma_variation",variation},{"record_spikes",false},
+        {"recognition_certificate",QJsonValue(QJsonValue::Null)},
+        {"training_controller_installed",bool(rig.learner->NativeTrainingController().Certificate()) ||
+            bool(rig.learner->NativeTrainingController().References()) || rig.learner->NativeTrainingController().State()!=NativeTrainingState::Idle},
+        {"rejected_certificate_reason",QString::fromStdString(rejected.reason)},
+        {"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    if(fresh)
+    {
+        const auto trainingAfter=NmsdkTools::IdentifyModel(trainingNeuron,{{&trainingGenerator->Output,"burst"}})["sha256"].toString().toStdString();
+        EXPECT_EQ(trainingBefore,trainingAfter);EXPECT_EQ(source,sourceCopy);
+        Artifact(rig.name+"_owner_recognition_transfer.json",QJsonDocument(QJsonObject{
+            {"kind","native_recognition_fresh_owner_transfer"},{"schema_version",1},
+            {"source_owner",QString::fromStdString(trainingOwner->GetName())},{"test_owner",QString::fromStdString(rig.learner->GetName())},
+            {"distinct_owners",trainingOwner.Get()!=rig.learner.Get()},{"target_controller_version_before",beforeVersion},
+            {"target_inputs_before",beforeInputs},{"target_controller_version_after",rig.learner->ControllerVersion.GetData()},
+            {"target_inputs_after",rig.learner->NumInputDendrite.GetData()},
+            {"source_model_before",QString::fromStdString(trainingBefore)},{"source_model_after",QString::fromStdString(trainingAfter)},
+            {"target_model",QString::fromStdString(frozenAfter)},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    }
+    // A direct physical edit is discovered before the next child calculation.
+    auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
+    channel->Capacity=channel->Capacity.GetData()*1.01;rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    EXPECT_EQ(rig.learner->NativeModelEditFailure(),"native_recognition_model_changed");
+    EXPECT_THROW(rig.learner->ExportNativeRecognitionState(implementation),std::logic_error);
+    Artifact(rig.name+"_owner_recognition_guard.json",QJsonDocument(QJsonObject{
+        {"kind","native_recognition_owner_guard"},{"schema_version",1},{"physical_edit_detected",!rig.learner->NativeModelEditFailure().empty()},
+        {"reason",QString::fromStdString(rig.learner->NativeModelEditFailure())},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+
 template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
 {
+    if(scenario==RecognitionCase::OwnedIdentity || scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped ||
+       scenario==RecognitionCase::OwnedFreshIdentity || scenario==RecognitionCase::OwnedFreshScaled)
+    {RecognitionOwnerChecks(rig,source,scenario);return;}
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
     const auto original=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
     const auto sourceCopy=source;const auto clock=rig.environment->GetTime().GetTime();NativeRecognitionSpec spec;
@@ -1273,13 +1424,114 @@ TEST(NativeRecognitionState,FreshProcessImport)
     dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
 }
 
+TEST(NativeRecognitionOwner,FreshProcessImport)
+{
+    const auto input=std::getenv("TIMELEARNER_RECOGNITION_OWNER_IMPORT");
+    if(!input)GTEST_SKIP()<<"Executed by immutable recognition replay job in a fresh process";
+    const auto specification=std::getenv("TIMELEARNER_RECOGNITION_OWNER_SPEC");ASSERT_TRUE(specification);
+    const auto output=std::getenv("TIMELEARNER_RECOGNITION_OWNER_OUTPUT");ASSERT_TRUE(output);
+    QFile file(QString::fromLocal8Bit(input));ASSERT_TRUE(file.open(QIODevice::ReadOnly));
+    const auto package=ParseNativeRecognitionState(file.readAll().toStdString());
+    QFile specFile(QString::fromLocal8Bit(specification));ASSERT_TRUE(specFile.open(QIODevice::ReadOnly));
+    QJsonParseError parseError;const auto document=QJsonDocument::fromJson(specFile.readAll(),&parseError);
+    ASSERT_EQ(parseError.error,QJsonParseError::NoError);ASSERT_TRUE(document.isObject());const auto spec=document.object();
+    ASSERT_EQ(spec["schema_version"],QJsonValue(1));ASSERT_EQ(spec["kind"],QJsonValue("native_recognition_frozen_probe"));
+    ASSERT_EQ(spec["measurement"],QJsonValue("paired_soma_transport"));ASSERT_EQ(spec["record_spikes"],QJsonValue(false));
+    ASSERT_EQ(spec["model_revision"],package["model_revision"]);
+    const auto sourceSolo=package["source_solo"].toObject();
+    ASSERT_EQ(spec["pattern_hash"],sourceSolo["protocol"].toObject()["pattern_hash"]);
+    const auto configuration=DecodeConfiguredNativeTraining(sourceSolo["configuration"].toObject());
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    EXPECT_FALSE(core.storage->CheckClass(configuration.model.neuronClass));
+    core.environment->SetUseIndTimeStepFlag(false);core.environment->DestroyModel();
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();
+    model->SetGlobalTimeStep(configuration.model.frequencyHz);
+    // Generator Reset captures the current clock. Set the declared onset before
+    // importing/initializing the physical tree, never after its Reset.
+    const double begin=spec["begin"].toDouble(-1.),end=spec["end"].toDouble(-1.);
+    ASSERT_TRUE(std::isfinite(begin) && std::isfinite(end) && begin>=0. && end>begin);
+    const auto beginUs=std::llround(begin*1.e6);ASSERT_GE(beginUs,0);
+    core.environment->GetTime().SetTime(static_cast<unsigned long long>(beginUs));
+    ASSERT_FALSE(Detail::After(begin,core.environment->GetTime().GetDoubleTime()));
+    ASSERT_FALSE(Detail::After(core.environment->GetTime().GetDoubleTime(),begin));
+    struct OwnedGraph {UEPtr<NPulseNeuron> neuron;UEPtr<NDatasetMatrix> dataset;};
+    auto state=std::make_unique<OwnedGraph>();UEPtr<UNet> owner;
+    std::function<std::string()> failure;std::function<QJsonObject()> exportState;
+    int beforeVersion=-1,afterVersion=-1;
+    const auto install=[&](auto learner) {
+        ASSERT_TRUE(learner);beforeVersion=learner->ControllerVersion.GetData();EXPECT_EQ(beforeVersion,1);
+        EXPECT_FALSE(learner->ConfiguredModelInitialized.GetData());EXPECT_FALSE(learner->HasNativeRecognitionState());
+        learner->Name="FreshRecognitionLearner";learner->SetEnvironment(core.environment);
+        learner->SetGlobalTimeStep(configuration.model.frequencyHz);UEPtr<UContainer> node=learner;
+        ASSERT_NE(model->AddComponent(node),ForbiddenId);
+        const auto result=learner->ImportNativeRecognitionState(package,"native-learned-boundary-fixture-v1");
+        ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
+        learner->Build();learner->Init();owner=learner;afterVersion=learner->ControllerVersion.GetData();
+        EXPECT_EQ(afterVersion,sourceSolo["controller_version"].toInt());
+        EXPECT_TRUE(learner->HasNativeRecognitionState());EXPECT_FALSE(learner->IsNeedToTrain.GetData());
+        EXPECT_FALSE(learner->NativeTrainingController().Certificate());EXPECT_FALSE(learner->NativeTrainingController().References());
+        state->neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        state->dataset=learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+        failure=[learner]{return learner->NativeModelEditFailure();};
+        exportState=[learner]{return learner->ExportNativeRecognitionState("native-learned-boundary-fixture-v1");};
+    };
+    if(configuration.model.branch)install(dynamic_pointer_cast<NNeuronTimeLearnerBranch>(core.storage->TakeObject("NNeuronTimeLearnerBranch")));
+    else install(dynamic_pointer_cast<NNeuronTimeLearner>(core.storage->TakeObject("NNeuronTimeLearner")));
+    ASSERT_TRUE(owner);ASSERT_TRUE(state->neuron);ASSERT_TRUE(state->dataset);
+    auto generator=state->dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
+    // The fresh root has no initialized parent fixture. Initialize the complete
+    // tree natively; initializing its children alone does not arm its scheduler.
+    model->Init();model->Reset();ASSERT_TRUE(model->IsInit());
+    const auto revision=[&]{return NmsdkTools::IdentifyModel(state->neuron,{{&generator->Output,"burst"}}).value("sha256");};
+    ASSERT_EQ(revision(),package["model_revision"]);const auto frozenBefore=revision();
+    ASSERT_TRUE(failure().empty())<<failure();ASSERT_EQ(exportState(),package);
+    const auto channels=configuration.model.branch?1u:configuration.model.inputs.size();
+    ASSERT_EQ(spec["channels"].toDouble(),double(channels));
+    ASSERT_DOUBLE_EQ(spec["maximum_sample_gap"].toDouble(),1./configuration.model.frequencyHz);
+    const double budget=spec["maximum_samples"].toDouble();
+    ASSERT_TRUE(std::isfinite(budget) && budget>=1. && budget==std::floor(budget) && budget<=1000000.);
+    state->dataset->StateGeneration=1;
+    std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+    for(std::size_t i=0;i<channels;++i)trace<<",soma"<<i;trace<<'\n';
+    bool complete=false,emitted=false;unsigned samples=0;double lastTime=begin,variation=0.;
+    std::vector<double> low(channels,std::numeric_limits<double>::infinity()),high(channels,-std::numeric_limits<double>::infinity());
+    for(unsigned tick=0;tick<unsigned(budget);++tick)
+    {
+        model->Calculate();ASSERT_TRUE(failure().empty())<<failure();const double time=core.environment->GetTime().GetDoubleTime(),stimulus=generator->Output(0,0);
+        ASSERT_TRUE(std::isfinite(time) && std::isfinite(stimulus));emitted=emitted || stimulus>0.;trace<<time<<','<<stimulus;
+        for(std::size_t i=0;i<channels;++i)
+        {
+            auto soma=state->neuron->GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);ASSERT_TRUE(soma);
+            const double value=soma->SumPotential(0,0);ASSERT_TRUE(std::isfinite(value));trace<<','<<value;
+            low[i]=std::min(low[i],value);high[i]=std::max(high[i],value);
+        }
+        trace<<'\n';lastTime=time;++samples;core.environment->IncreaseModelTimeByStep();
+        if(!Detail::After(end,time)){complete=true;break;}
+    }
+    for(std::size_t i=0;i<channels;++i)variation=std::max(variation,high[i]-low[i]);
+    ASSERT_TRUE(complete);ASSERT_TRUE(emitted);ASSERT_GT(variation,1.e-6);ASSERT_EQ(revision(),package["model_revision"]);
+    const QJsonObject record{{"kind","native_recognition_owner_fresh_process_observation"},{"schema_version",1},
+        {"trial_id",spec["trial_id"]},{"model_revision",package["model_revision"]},{"complete",complete},
+        {"sample_count",double(samples)},{"last_sample_time",lastTime},{"emitted",emitted},{"soma_variation",variation},
+        {"frozen_before",frozenBefore},{"frozen_after",revision()},
+        {"controller_version_before",beforeVersion},{"controller_version_after",afterVersion},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}};
+    EXPECT_EQ(exportState(),package);
+    QFile json(QString::fromLocal8Bit(output));ASSERT_TRUE(json.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+    ASSERT_GT(json.write(QJsonDocument(record).toJson()),0);json.close();
+    QFile csv(QString::fromLocal8Bit(output)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+    ASSERT_GT(csv.write(QByteArray::fromStdString(trace.str())),0);csv.close();
+    dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
+}
+
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
-    std::optional<RecognitionCase> recognition={})
+    std::optional<RecognitionCase> recognition={},bool automatic=false)
 {
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
-    if(inputs!=2)suffix+="_inputs"+std::to_string(inputs);if(configured)suffix+="_configured";
+    if(inputs!=2)suffix+="_inputs"+std::to_string(inputs);if(configured)suffix+="_configured";if(automatic)suffix+="_automatic";
     if(recognition)suffix+="_recognition_"+std::to_string(int(*recognition));
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured);
+    if(automatic)rig.learner->CalculateMode=0;
     std::optional<ConfiguredNativeTraining> configuredPlan;
     if(configured)
     {
@@ -1532,6 +1784,21 @@ TEST(NativeLearnedState,BranchOneInput){LearnedBoundary<NNeuronTimeLearnerBranch
 TEST(NativeLearnedState,BranchFourInputsExplicitPointFiveTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.5,2000,4);}
 TEST(NativeLearnedState,ClassicSixInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearner>(0,1.,2000,6);}
 TEST(NativeLearnedState,BranchSixSharedInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6);}
+
+TEST(NativeRecognitionOwner,ClassicFreshDestination){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedFreshIdentity);}
+TEST(NativeRecognitionOwner,BranchFreshDestination){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedFreshScaled);}
+TEST(NativeRecognitionOwner,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,BranchN1Scale){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::OwnedScaled);}
+TEST(NativeRecognitionOwner,BranchN1Clip){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::OwnedClipped);}
+TEST(NativeRecognitionOwner,BranchSingleInput){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,1,false,RecognitionCase::OwnedScaled);}
+TEST(NativeRecognitionOwner,BranchSixShared){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6,false,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,ClassicConfigured){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,BranchConfigured){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,ClassicAutomatic){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::OwnedIdentity,true);}
+TEST(NativeRecognitionOwner,BranchAutomatic){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity,true);}
 
 TEST(NativeRecognitionState,ClassicN0Identity){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::Identity);}
 TEST(NativeRecognitionState,BranchN0Identity){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::Identity);}
