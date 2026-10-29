@@ -170,10 +170,16 @@ retarget и calibration открыты. [Подробности](PostTuneTransie
 контролируемо прерван из-за стоимости fixture full hashing. Lifecycle baseline
 дал один ожидаемый failure после owner Reset. A2 root 325052a0 / PulseLib 32dc2e0:
 по 14/14 native на Elder normal и M40 ASan; independent A2 audit и публикация
-ожидают связи с jump host. Новая owner-policy реализация root 2a9357af / PulseLib
-d9b4199 пока не собрана; не покрывается старой приёмкой. Полная controller/threshold transaction и
+ожидают связи с jump host. Текущая owner-policy реализация root 912ef71b / PulseLib
+c7266dcb (9 новых tests) пока не собрана; не покрывается старой приёмкой. Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
+
+**Миграция исторических запускателей — первый пакет**: удалены семь одноразовых
+shell-файлов из Docs/evidence/metrics. Полные archive/last-change SHA, blob SHA-1
+и content SHA-256 записаны в [реестр](ScriptMigration.ru.md); wrappers/копий нет.
+Исторические результаты сохранены, ссылки исправлены на immutable Git versions.
+Активные Bin/PulseLib tools, физические модели и остальная миграция не завершены.
 
 ## Незакрытый объём исходных этапов
 

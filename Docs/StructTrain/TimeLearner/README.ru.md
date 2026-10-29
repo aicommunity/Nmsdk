@@ -14,7 +14,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Исходная сверка 25.10 и журнал последующих дополнений](PlanCompletionAudit-2026-10-25.ru.md).
 - [Решения и обязательные контракты](Decisions.ru.md).
 - [История и доказательства](Evidence.ru.md).
-- [Машинный inventory исходников](source_inventory.json).
+- [Первоначальный Git inventory (исторический снимок)](source_inventory.json).
 - [Контракт наблюдений и оценки](ObservationContract.ru.md).
 - [Readback фактического графа модели](ModelInspection.ru.md).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
@@ -74,3 +74,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [PostTune: неизменяемая цель и actual transient stimulus](PostTuneTransientStimulus.ru.md).
 
 - [PostTune: рабочая реализация отката графа и оставшаяся транзакция](PostTuneBoundaryTransaction.ru.md).
+
+- [Миграция скриптов: удаления и точные Git-источники](ScriptMigration.ru.md).
