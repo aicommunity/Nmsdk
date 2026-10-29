@@ -188,11 +188,54 @@
         "observed_native_pid": 1062506,
         "python_waiter_session_id": 9628,
         "cache": "/home/user/timelearner-refactor/build-s08-integrated-normal-a1",
-        "source": "/home/user/timelearner-refactor/source-s08-integrated-normal-a1"
+        "source": "/home/user/timelearner-refactor/source-s08-integrated-normal-a1",
+        "low_disk_period_observed": true,
+        "acceptance_requires_independent_primary_data_completeness": true
       }
     },
     "python_root": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
     "python_audit_attempt": "s08-integrated-data-a1",
     "python_scope": "13 modules; all required evidence directories explicit; fresh-process cross-worker replay remains separate"
+  },
+  "config_adapter": {
+    "branch": "stage09/lossless-config-adapter",
+    "native_root": "ccbf453f1d51638369c6b0afcf89cc1cbad166f4",
+    "rdk_tested": "8ebf64dd39571cb6f95f23cfc2b55f30972c591c",
+    "rdk_documented": "abc21b650471ef6d2e5ef9ba94429d34f3697323",
+    "python_tests_each_worker": 7,
+    "tracked_structtrain_project_ini_files": 1599,
+    "native_readback_host": "10.245.1.17",
+    "build_kind": "asan_detect_leaks_0",
+    "native_files": 4,
+    "native_values": 11,
+    "rdk_ctest_groups": 4,
+    "reports": {
+      "m40": "6210f02353cf2b3956a8a4ee93201607d870541a",
+      "elder1": "13c4328116f284d17b09d4af758b38e67e39a6fd"
+    },
+    "effective_component_preflight_complete": false,
+    "attempts": {
+      "a1": "reproduced native BOM plus declaration failure",
+      "a2": "shell launcher syntax error; not parser failure",
+      "a3": "build disk exhaustion; not parser failure",
+      "a4": "passed"
+    }
+  },
+  "m40_storage": {
+    "report_commit": "dc733b2a85685127b033889449d310fd8d77d941",
+    "data_mount": "/media/user/Data",
+    "data_device": "/dev/sda",
+    "policy": "user: only confirmed duplicates and caches; unique raw scientific traces retained",
+    "completed_runtime_count_moved": 10,
+    "moved_bytes": 5410721907,
+    "old_runtime_paths_preserved": true,
+    "immutable_git_pack_duplicate_copies_replaced": 191,
+    "released_pack_blocks_bytes": 18389184512,
+    "git_head_objects_readable": 75,
+    "stored_hashes_verified": 30,
+    "raw_hashes_verified": 28,
+    "active_jobs_moved": false,
+    "raw_experiment_files_deleted": 0,
+    "production_storage_scheduler_complete": false
   }
 }
