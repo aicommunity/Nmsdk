@@ -2137,8 +2137,8 @@ template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int no
 class NativeOwnerConfigSource : public UNet {
 public:
     UProperty<double,NativeOwnerConfigSource,ptOutput|ptPubState> Resistance0,Resistance1;
-    UProperty<int,NativeOwnerConfigSource,ptOutput|ptPubState> MaximumLength;
-    NativeOwnerConfigSource():Resistance0("Resistance0",this),Resistance1("Resistance1",this),MaximumLength("MaximumLength",this){}
+    UProperty<int,NativeOwnerConfigSource,ptOutput|ptPubState> MaximumLength,Integer0,Integer1;
+    NativeOwnerConfigSource():Resistance0("Resistance0",this),Resistance1("Resistance1",this),MaximumLength("MaximumLength",this),Integer0("Integer0",this),Integer1("Integer1",this){}
     NativeOwnerConfigSource* New(void) override {return new NativeOwnerConfigSource;}
 };
 template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool importing,bool scalar,bool matching=false)
@@ -2222,6 +2222,92 @@ template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool import
         EXPECT_EQ(EncodeTrainingCertificate(*rig.learner->NativeTrainingController().Certificate()),package["certificate"].toObject());
     }
 }
+
+// Native editor metadata uses the same Rdk collection protocol as construction:
+// each connected vector is assembled from real scalar output properties.
+template<class Learner> void NativeOwnerParameterBinding(int field,bool matching)
+{
+    const std::string property=field==0?"DendriteLength":field==1?"NumSynapse":"TipSynapseResistance";
+    EditingRig<Learner> rig(2000,field==2?1:0,"editor_binding_"+property+(matching?"_matching":"_conflict"),false,2,true);
+    const auto previous=rig.learner->ReadNativeParameters();auto requested=previous;
+    if(matching)
+    {
+        if(field==0)++requested[0].synapses;else ++requested[0].length;
+    }
+    else if(field==0)++requested[0].length;
+    else if(field==1)++requested[0].synapses;
+    else requested[0].resistance*=1.03125;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="NativeOwnerConfigSourceFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new NativeOwnerConfigSource;},image),image);
+    auto source=dynamic_pointer_cast<NativeOwnerConfigSource>(core.storage->TakeObject(image));ASSERT_TRUE(source);
+    source->Name="EditorConfigSource";UEPtr<UContainer> component=source;
+    ASSERT_NE(rig.model->AddComponent(component),ForbiddenId);source->Init();
+    source->Resistance0=previous[0].resistance;source->Resistance1=previous[1].resistance;
+    source->Integer0=field==0?previous[0].length:previous[0].synapses;
+    source->Integer1=field==0?previous[1].length:previous[1].synapses;
+    if(field==2)
+    {
+        ASSERT_TRUE(rig.learner->TipSynapseResistance.SetPointer(0,&source->Resistance0));
+        ASSERT_TRUE(rig.learner->TipSynapseResistance.SetPointer(1,&source->Resistance1));
+    }
+    else
+    {
+        auto& target=field==0?rig.learner->DendriteLength:rig.learner->NumSynapse;
+        ASSERT_TRUE(target.SetPointer(0,&source->Integer0));ASSERT_TRUE(target.SetPointer(1,&source->Integer1));
+    }
+    const auto before=rig.Revision();const auto result=rig.learner->ApplyNativeParameters(requested);const auto after=rig.Revision();
+    auto encode=[](const std::vector<InputParameters>& values){QJsonArray out;for(const auto& v:values)
+        out.append(QJsonObject{{"length",v.length},{"synapses",v.synapses},{"resistance",v.resistance}});return out;};
+    auto ints=[](const auto& values){QJsonArray out;for(auto v:values)out.append(v);return out;};
+    Artifact(rig.name+"_editor_binding.json",QJsonDocument(QJsonObject{
+        {"kind","native_owner_editor_binding"},{"schema_version",1},{"property",QString::fromStdString(property)},
+        {"matching",matching},{"status",NativeEditStatusName(result.status)},{"reason",QString::fromStdString(result.reason)},
+        {"model_may_have_changed",result.modelMayHaveChanged},{"model_before",QString::fromStdString(before)},
+        {"model_after",QString::fromStdString(after)},{"previous",encode(previous)},{"requested",encode(requested)},
+        {"effective",encode(result.effective)},{"owner_lengths",ints(rig.learner->DendriteLength.GetData())},
+        {"owner_counts",ints(rig.learner->NumSynapse.GetData())},{"owner_resistances",ints(rig.learner->TipSynapseResistance.GetData())},
+        {"source_integers",QJsonArray{source->Integer0.GetData(),source->Integer1.GetData()}},
+        {"source_resistances",QJsonArray{source->Resistance0.GetData(),source->Resistance1.GetData()}},
+        {"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    EXPECT_EQ(source->Integer0.GetData(),field==0?previous[0].length:previous[0].synapses);
+    EXPECT_EQ(source->Integer1.GetData(),field==0?previous[1].length:previous[1].synapses);
+    EXPECT_DOUBLE_EQ(source->Resistance0.GetData(),previous[0].resistance);EXPECT_DOUBLE_EQ(source->Resistance1.GetData(),previous[1].resistance);
+    if(matching)
+    {
+        ASSERT_EQ(result.status,NativeEditStatus::Applied)<<result.reason;
+        EXPECT_EQ(result.effective,requested);EXPECT_NE(before,after);
+        EXPECT_EQ(rig.learner->ReadNativeParameters(),requested);
+        for(std::size_t i=0;i<requested.size();++i)
+        {
+            EXPECT_EQ(rig.learner->DendriteLength.GetData()[i],requested[i].length);
+            EXPECT_EQ(rig.learner->NumSynapse.GetData()[i],requested[i].synapses);
+            EXPECT_DOUBLE_EQ(rig.learner->TipSynapseResistance.GetData()[i],requested[i].resistance);
+        }
+    }
+    else
+    {
+        ASSERT_EQ(result.status,NativeEditStatus::Rejected)<<result.reason;
+        EXPECT_EQ(result.reason,"native_model_owner_assignment_is_external:"+property);
+        EXPECT_FALSE(result.modelMayHaveChanged);EXPECT_EQ(before,after);
+        EXPECT_EQ(rig.learner->ReadNativeParameters(),previous);
+    }
+    if(field==2)EXPECT_EQ(rig.learner->TipSynapseResistance.GetDataSources(),(std::vector<const UIProperty*>{&source->Resistance0,&source->Resistance1}));
+    else EXPECT_EQ((field==0?rig.learner->DendriteLength:rig.learner->NumSynapse).GetDataSources(),(std::vector<const UIProperty*>{&source->Integer0,&source->Integer1}));
+}
+TEST(NativeOwnerParameterBindings,ClassicLengthConflict){NativeOwnerParameterBinding<NNeuronTimeLearner>(0,false);}
+TEST(NativeOwnerParameterBindings,BranchLengthConflict){NativeOwnerParameterBinding<NNeuronTimeLearnerBranch>(0,false);}
+TEST(NativeOwnerParameterBindings,ClassicCountConflict){NativeOwnerParameterBinding<NNeuronTimeLearner>(1,false);}
+TEST(NativeOwnerParameterBindings,BranchCountConflict){NativeOwnerParameterBinding<NNeuronTimeLearnerBranch>(1,false);}
+TEST(NativeOwnerParameterBindings,ClassicResistanceConflict){NativeOwnerParameterBinding<NNeuronTimeLearner>(2,false);}
+TEST(NativeOwnerParameterBindings,BranchResistanceConflict){NativeOwnerParameterBinding<NNeuronTimeLearnerBranch>(2,false);}
+TEST(NativeOwnerParameterBindings,ClassicLengthMatching){NativeOwnerParameterBinding<NNeuronTimeLearner>(0,true);}
+TEST(NativeOwnerParameterBindings,BranchLengthMatching){NativeOwnerParameterBinding<NNeuronTimeLearnerBranch>(0,true);}
+TEST(NativeOwnerParameterBindings,ClassicCountMatching){NativeOwnerParameterBinding<NNeuronTimeLearner>(1,true);}
+TEST(NativeOwnerParameterBindings,BranchCountMatching){NativeOwnerParameterBinding<NNeuronTimeLearnerBranch>(1,true);}
+TEST(NativeOwnerParameterBindings,ClassicResistanceMatching){NativeOwnerParameterBinding<NNeuronTimeLearner>(2,true);}
+TEST(NativeOwnerParameterBindings,BranchResistanceMatching){NativeOwnerParameterBinding<NNeuronTimeLearnerBranch>(2,true);}
+
 TEST(NativeOwnerConfigurationBindings,ClassicConstructVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(false,false);}
 TEST(NativeOwnerConfigurationBindings,BranchConstructVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(false,false);}
 TEST(NativeOwnerConfigurationBindings,ClassicConstructScalar){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(false,true);}
