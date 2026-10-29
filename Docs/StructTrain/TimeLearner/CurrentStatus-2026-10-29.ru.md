@@ -50,7 +50,8 @@ response criteria; global scientific verdict остаётся null. Это не 
 всех сом и общий input, overview и 100-tick zoom, PNG 1920×960 / SVG / PDF.
 Два сервера построили четыре профиля, по 16 trials / 24 trial-soma пары;
 по шесть адресных checks без пропусков. После просмотра A2 исправлено
-наложение legend; A3 перестроен через настоящий CLI, приёмка продолжается.
+наложение legend; A3 перестроен через настоящий CLI, 6/6 checks на каждом
+worker. Все 342/345 hashes проверены, адресные PNG просмотрены; полная приёмка продолжается.
 SI descriptors, continuous panorama, detail Y, полная физическая матрица и
 общая визуальная приёмка остаются открытыми.
 [Реализация и ограничения](VisualReportRenderer.ru.md).

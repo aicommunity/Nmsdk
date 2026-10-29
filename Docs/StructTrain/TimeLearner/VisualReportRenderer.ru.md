@@ -53,8 +53,15 @@ trial/soma пары. Source native observations — 127806a34, новых мод
 A2 отчёты: Elder 2c46f04f6cd31ca1b46b0bfa004307c27214ccd3 (338 hashes),
 M40 be7b8d5d784a482cccec14ae2db4e3510a194ee2 (343 hashes). Все локальные hashes
 проверены; A2 имеет описанное наложение legend и не является финальной
-визуальной приёмкой. A3 перестраивает все четыре профиля через настоящий CLI
-с исправленным layout; выполнение и приёмка пока не завершены.
+визуальной приёмкой. A3 перестроил все четыре профиля через настоящий CLI
+с исправленным layout; на обоих workers 6/6 checks без ошибок/пропусков,
+process status 0. Reports: Elder 8188472cd3d36f00c698b1b531815e84b43f1731
+(342 hashes), M40 8abf68a20c4abc03718b662ee4ed1e01b2dff6ee (345 hashes).
+Все hashes проверены локально. Просмотрены Elder Branch spiking target overview
+и M40 Classic Soma2 foil zoom-001/002: legend отделена от рамки, импульсы,
+фронты, хвост и отрицательный свободный диапазон не обрезаны. Молчаливый
+zoom-001 сохраняется рядом с zoom-002 с ответом. Это адресная PNG проверка;
+общая visual acceptance, полный vector/PDF просмотр и матрица ещё не закрыты.
 
 M40 использует отдельный /media/user/Data/TimeLearnerRefactor/plot-venv-a1,
 не системный Python. Matplotlib 3.9.4; фактический pip freeze и bootstrap/install
