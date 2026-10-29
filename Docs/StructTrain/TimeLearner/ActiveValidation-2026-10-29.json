@@ -401,9 +401,38 @@
     },
     "automatic_control_cases_runtime_validated": true,
     "initial_a2_cli_class_skip": "preserved; strict A3 provided real domain fixture and requires zero skips",
-    "fresh_destination_owner_verified": false,
-    "fresh_process_owner_verified": false,
+    "fresh_destination_owner_verified": true,
+    "fresh_process_owner_verified": true,
     "training_owner_reused_for_recognition": true,
-    "active_jobs": false
+    "active_jobs": false,
+    "fresh_owner_scope": "two configured 2 kHz profiles: Classic N0 identity, Branch N1 scaled; not full matrix or cross-worker owner replay"
+  },
+  "fresh_recognition_owner": {
+    "destination_native_root": "7de6128261792df123d5e8dd4afe29f4a4ded58b",
+    "replay_native_root": "abad4a68e0dcdf5f6c2c0d6db68eb81b2496a3dc",
+    "auditor_root": "ab4a2f7a7881ec489aec330e72cdbcc2ed6738fd",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "native_destination_cases_each": 2,
+    "fresh_process_cases_each": 2,
+    "python_tests_each": 12,
+    "python_skips_each": 0,
+    "source_trials_each": 28,
+    "paired_samples_each": 762,
+    "fresh_process_samples_each": 762,
+    "byte_exact_replay_each": true,
+    "reports": {
+      "elder1": "73b1427fd479e3a0d4c8d81799c859daec33fcf6",
+      "m40": "f079e7073cc58a06c276e131f9b264067ae7fbaa"
+    },
+    "hashes_each": {
+      "stored": 108,
+      "raw": 106
+    },
+    "active_jobs": false,
+    "scientific_evaluation_complete": false,
+    "develop_merged": false
   }
 }

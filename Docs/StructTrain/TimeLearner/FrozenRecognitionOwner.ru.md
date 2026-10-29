@@ -98,3 +98,28 @@ Reports/StructTrain/TimeLearner/s08-recognition-owner-{elder1,m40}.
 Это следующий обязательный transfer control до сквозного scientific Test.
 Ни один результат этих waveform controls не является spike/selectivity verdict.
 Все перечисленные server jobs завершены; активных jobs на этом checkpoint нет.
+
+## Новый destination и fresh process: последующая проверка
+
+Native source 7de6128261792df123d5e8dd4afe29f4a4ded58b: отдельные factory-created
+Test learners Classic N0 / Branch N1 с configured V2. На обоих workers 2/2
+cases pass. До import проверены default ControllerVersion=1, отсутствие
+ConfiguredModelInitialized/frozen state/certificate; после import восстановлен
+V2. Исходный Train graph сохраняет свой semantic hash.
+
+Fresh-process role source abad4a68e0dcdf5f6c2c0d6db68eb81b2496a3dc: по два
+новых процесса с пустым custom-class registry, native import в новый learner,
+полный Init/Reset дерева до onset; оба pass. Python auditor
+ab4a2f7a7881ec489aec330e72cdbcc2ed6738fd: по 12/12 tests без skips/errors,
+включая прежние owner/CLI regressions. Для новой пары проверены 28 primary
+training trials, 762 paired и 762 fresh-process samples; child CSV byte-exact.
+
+Пакеты s08-fresh-owner-elder1: 73b1427fd479e3a0d4c8d81799c859daec33fcf6,
+s08-fresh-owner-m40: f079e7073cc58a06c276e131f9b264067ae7fbaa. На каждом
+локально сверены 108 stored / 106 raw hashes. Это проверка двух объявленных
+2 kHz профилей; общая physics/frequency matrix и cross-worker owner replay
+не объявляются завершёнными. RecordSpikes=false и scientific verdict=null.
+
+Прежнее ограничение о непроверенном новом destination/fresh process для этой
+пары снято. Полный transient foil/spike runner, подтверждение выбранного порога,
+independent evaluation, PostTune и весь исходный план остаются открытыми.
