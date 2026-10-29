@@ -288,3 +288,44 @@ ControllerVersion=2 пока не рекомендуется для всей э�
 C-trim/PostTune Off; остальные режимы и полный исходный план сохраняются.
 На момент этого checkpoint все owner/editor native и Python jobs завершены;
 новых серверных заданий здесь не заявлено.
+
+## Последующая рабочая ветка frozen recognition owner
+
+Owner/BOM зависимости приняты: PulseLib develop 4e6be0cb, Rdk c903b9bb,
+root merge d7ee23f4. Свежий checkout M40 подтверждает семь точных gitlinks
+и чистое дерево, пакет 0cf41c15: 4 stored / 2 raw hashes проверены.
+Штатный remote SSH/HTTPS transport использован без переписывания истории.
+
+В новой ветке stage08/frozen-recognition-owner root6ff1d43a / PulseLib0b9d0ff
+реализован явный импорт recognition state в оба learner и frozen native hooks.
+Запущены восемь owner controls и четыре cold regressions на обоих workers;
+новая реализация ещё не принята. Дополнительные два configured V2 controls
+пока только в source. Подробности: FrozenRecognitionOwner.ru.md. Полного
+spike evaluation/calibration runner этот подэтап пока не даёт.
+
+## Frozen owner gates завершены, сквозной Test ещё открыт
+
+Рабочий Core PulseLib0b9d0ff: A1 по 12/12 native (8 owner + 4 cold),
+A2 root112acdae по 12/12 owner на Elder normal и M40 ASan, включая configured
+V2 и CalculateMode=0/1. Strict A3 по 8/8 Python без skips: 164 source trials /
+5052 paired samples на worker. Пакеты aa75bc2d / 8b9febb3 опубликованы;
+по 912 stored / 910 raw hashes проверены локально. Первый A2 CLI-class skip
+сохранён и устранён отдельным Python-only аудитом, native rerun не подменялся.
+
+Команда analyze --format recognition-owner доступна и проверена. Recognition
+certificate/scientific verdict остаются null. Текущие controls заменяют
+training learner на recognition; новый Test learner/fresh-process owner,
+transient foils, real spike timestamps и threshold confirmation ещё открыты.
+Этот working scope не принят в develop. См. FrozenRecognitionOwner.ru.md.
+Все jobs перечисленных попыток terminal; новая активная серия не заявляется.
+
+## Новые Test learners и fresh-process owner
+
+На обоих workers по 2/2 distinct Test learner cases и 2/2 fresh-process imports
+(7de61282 / abad4a68); независимый ab4a2f7a — по 12/12 Python tests без skips.
+Для пары Classic N0 / Branch N1 V2 проверены source graph immutability, factory
+defaults, полное восстановление и byte-exact 762 samples. Данные: 28 source trials,
+762 paired samples. Пакеты 73b1427f / f079e707: по 108 stored / 106 raw hashes
+сверены локально. См. FrozenRecognitionOwner.ru.md.
+Следующий блок — реальные spike timestamps и frozen transient presentations,
+затем threshold/calibration. На этом checkpoint все перечисленные jobs terminal.
