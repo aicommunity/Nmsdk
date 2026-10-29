@@ -1087,13 +1087,16 @@ TEST(NativeLearnedState,FreshProcessImport)
 }
 
 
-enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped };
+enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled };
 
 template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
     const auto sourceCopy=source;NativeRecognitionSpec spec;
-    if(scenario!=RecognitionCase::OwnedIdentity)
+    const bool fresh=scenario==RecognitionCase::OwnedFreshIdentity || scenario==RecognitionCase::OwnedFreshScaled;
+    auto trainingOwner=rig.learner;auto trainingNeuron=rig.neuron;auto trainingGenerator=rig.source;
+    const auto trainingBefore=rig.Revision();
+    if(scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped || scenario==RecognitionCase::OwnedFreshScaled)
     {
         spec.mode=RecognitionConversionMode::HistoricalBranchN1;
         for(const auto& p:rig.learner->ReadNativeParameters())
@@ -1104,6 +1107,15 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
     Artifact(rig.name+"_owner_recognition_state.json",QJsonDocument(package).toJson());
     auto reference=PrepareNativeRecognitionState(package,core.storage,core.environment,implementation);
     rig.learner->IsNeedToTrain=false;
+    int beforeVersion=-1,beforeInputs=-1;
+    if(fresh)
+    {
+        auto target=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(target);
+        ASSERT_NE(target.Get(),trainingOwner.Get());beforeVersion=target->ControllerVersion.GetData();beforeInputs=target->NumInputDendrite.GetData();
+        EXPECT_FALSE(target->HasNativeRecognitionState());EXPECT_FALSE(target->NativeTrainingController().Certificate());
+        target->Name="RecognitionTestLearner";target->SetEnvironment(rig.environment);target->SetGlobalTimeStep(rig.frequency);
+        UEPtr<UContainer> node=target;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);rig.learner=target;
+    }
     const auto clock=rig.environment->GetTime().GetTime();
     auto refresh=[&] {
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
@@ -1199,6 +1211,19 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
             bool(rig.learner->NativeTrainingController().References()) || rig.learner->NativeTrainingController().State()!=NativeTrainingState::Idle},
         {"rejected_certificate_reason",QString::fromStdString(rejected.reason)},
         {"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    if(fresh)
+    {
+        const auto trainingAfter=NmsdkTools::IdentifyModel(trainingNeuron,{{&trainingGenerator->Output,"burst"}})["sha256"].toString().toStdString();
+        EXPECT_EQ(trainingBefore,trainingAfter);EXPECT_EQ(source,sourceCopy);
+        Artifact(rig.name+"_owner_recognition_transfer.json",QJsonDocument(QJsonObject{
+            {"kind","native_recognition_fresh_owner_transfer"},{"schema_version",1},
+            {"source_owner",QString::fromStdString(trainingOwner->GetName())},{"test_owner",QString::fromStdString(rig.learner->GetName())},
+            {"distinct_owners",trainingOwner.Get()!=rig.learner.Get()},{"target_controller_version_before",beforeVersion},
+            {"target_inputs_before",beforeInputs},{"target_controller_version_after",rig.learner->ControllerVersion.GetData()},
+            {"target_inputs_after",rig.learner->NumInputDendrite.GetData()},
+            {"source_model_before",QString::fromStdString(trainingBefore)},{"source_model_after",QString::fromStdString(trainingAfter)},
+            {"target_model",QString::fromStdString(frozenAfter)},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    }
     // A direct physical edit is discovered before the next child calculation.
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
     channel->Capacity=channel->Capacity.GetData()*1.01;rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
@@ -1211,7 +1236,8 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
 
 template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
 {
-    if(scenario==RecognitionCase::OwnedIdentity || scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped)
+    if(scenario==RecognitionCase::OwnedIdentity || scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped ||
+       scenario==RecognitionCase::OwnedFreshIdentity || scenario==RecognitionCase::OwnedFreshScaled)
     {RecognitionOwnerChecks(rig,source,scenario);return;}
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
     const auto original=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
@@ -1658,6 +1684,8 @@ TEST(NativeLearnedState,BranchFourInputsExplicitPointFiveTolerance){LearnedBound
 TEST(NativeLearnedState,ClassicSixInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearner>(0,1.,2000,6);}
 TEST(NativeLearnedState,BranchSixSharedInputsExplicitOneTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6);}
 
+TEST(NativeRecognitionOwner,ClassicFreshDestination){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedFreshIdentity);}
+TEST(NativeRecognitionOwner,BranchFreshDestination){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedFreshScaled);}
 TEST(NativeRecognitionOwner,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
 TEST(NativeRecognitionOwner,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
 TEST(NativeRecognitionOwner,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
