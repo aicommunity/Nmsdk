@@ -1,6 +1,6 @@
 # Миграция скриптов TimeLearner
 
-Первый завершённый пакет удаления: семь исторических shell-файлов из Docs.
+Два пакета удаления: одиннадцать исторических shell-файлов из Docs.
 Это частичная миграция этапа 9; production runner/queue, активные анализаторы,
 физические модели и остальные исторические файлы пока не перенесены.
 
@@ -37,7 +37,24 @@ git show b62127538694a3442771598420fd78fa7e405c8b:Docs/Audit/TimeLearner-2026-09
 
 ## Проверка удаления и ограничения
 
-Каждый файл прочитан: это фиксированная историческая очередь, сборка или monitor
+Второй пакет — исторические InhGrid SoftCold/disk-stop launchers/monitors:
+
+| Старый путь относительно evidence | Git source |
+|---|---|
+| `INH_GRID_LAUNCH.sh` | [b6212753](https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH.sh) |
+| `INH_GRID_LAUNCH_CASES.sh` | [b6212753](https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH_CASES.sh) |
+| `inh_grid_logs/monitor_loop.sh` | [b6212753](https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_loop.sh) |
+| `inh_grid_logs/monitor_diskstop_rerun.sh` | [b6212753](https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_diskstop_rerun.sh) |
+
+Прочитаны все четыре файла и проверены архивные/current Git blobs. Они
+используют старые case-prefix pools, TSV и пути кампании, а monitor disk-stop
+может запускать старый auto-offload. Буквальный поиск в tracked root/submodule
+scripts/docs обнаружил только сами четыре файла и исторический отчёт 24.10.
+Его ссылка заменена на immutable Git source; измерения не изменены. Новые
+задания эти launchers не используют и историческая серия не возобновляется.
+Динамический вызов произвольного имени таким поиском не исключён.
+
+В первом пакете каждый файл прочитан: это фиксированная историческая очередь, сборка или monitor
 со старым `/home/user/Nmsdk`, датой/CASES/именами результатов. Поиск буквальных
 имён по tracked root/submodule trees обнаружил только три исторических документа
 и первоначальный inventory. Их команды помечены историческими; ссылки ведут

@@ -230,3 +230,25 @@ Correct pre-fix f9a30cb7 / PulseLib 6e28d203: 4/4 expected failures normal на
 8 общих waveform projections byte-exact. Полный поиск/retarget/calibration этим
 не подтверждены. См. PostTuneTransientStimulus.ru.md; ранняя неправильная фаза
 Classic является fixture error, не доказательством lifecycle defect.
+
+TL-035: native USerStorageXML::Load не принимал UTF-8 BOM вместе с declaration.
+Baseline root7db4d9737 / Rdk1812624f: три real patched Project.ini читаются,
+synthetic BOM+declaration отклонён; удаление любого элемента устраняет отказ
+на том же binary. Rdk8ebf64dd нормализует только начальный BOM: M40 ASan
+четыре Rdk CTest groups и native readback 4 файлов / 11 values успешны.
+Python lossless adapter: по 7 tests на workers, 1599 tracked StructTrain Project.ini
+byte-exact. Evidence 6210f023 / 13c43281, hashes сверены. A2 launcher syntax и
+A3 disk exhaustion сохранены отдельно; native Elder/wide и production preflight
+не заявлены. См. ConfigDocument.ru.md. Историческая научная причинность не установлена.
+
+TL-036: native construction/import/editor принимали изменение physical graph,
+когда связанные owner поля не могли принять required mirror values. Это не
+перезапись SetPointer sources: Rdk оставлял их значения неизменными.
+Construction/import cbbf56ce: M40 ASan 16 controls pass, evidence 1c55f903;
+Elder normal повторил 16 controls в editor-baseline A1. Editor A2 root03fd6e47
+на обоих workers: 6 conflict failures / 6 matching passes, actual Applied
+при несовпадающей metadata. Первый A1 пропускал consumed probe boundary —
+fixture error, не algorithm evidence. Editor fix 0ca75b3 прошёл на обоих workers 46/46 native,
+по 2/2 independent Python tests, 12 boundary probes / 4332 samples.
+Fixed пакеты 073b2906 / 37e6326c: по 530 stored / 528 raw hashes проверены. См. NativeOwnerBindings.ru.md. Причинность для исторических кампаний
+не установлена; полный lifecycle/control-flag audit этим не закрыт.

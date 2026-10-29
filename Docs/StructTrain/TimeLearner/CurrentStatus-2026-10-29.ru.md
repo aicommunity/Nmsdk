@@ -153,7 +153,7 @@ Fixed e7ee0104 / PulseLib d862127: Elder normal и M40 ASan — по 10 C++ / 7 
 A5 generic auditor проверил immutable данные без новой симуляции. Все ошибки
 постановки A1/A2/A3 сохранены. Это не вся candidate transaction и не полный
 SearchSynthetic/calibration. Подмена transient InputPattern исправлена следующим подэтапом.
-Подэтап принят в PulseLib develop 4db59424 после нового полного gate ниже.
+Новый код пока в working branch, не в develop.
 [Контракт, исходники и ограничения](PostTuneNativeRebuild.ru.md).
 
 **PostTune transient stimulus / TL-034**: production PulseLib 0e1b01ae,
@@ -169,18 +169,37 @@ retarget и calibration открыты. [Подробности](PostTuneTransie
 портами. A1 normal: 24/24 native и 10/10 Python, 16570 exact sample pairs. A1 ASan
 контролируемо прерван из-за стоимости fixture full hashing. Lifecycle baseline
 дал один ожидаемый failure после owner Reset. A2 root 325052a0 / PulseLib 32dc2e0:
-по 14/14 native на Elder normal и M40 ASan; independent A2 audit завершён
-на обоих workers: по 2 Python tests, 16570 exact pairs. Публикация 241c10f2 /
-45d55b03, stored/raw hashes 426/424 и 241/239 проверены локально.
-Owner-policy root 912ef71b / PulseLib c7266dcb: по 23 native controls
-и по 4 independent Python tests, 42 training packets / 8646 sample pairs.
-Пакеты 640a39df / ec944b44, по 324/322 hashes проверены локально.
-Полный gate и acceptance описаны ниже. Полная controller/threshold transaction и
+по 14/14 native на Elder normal и M40 ASan. После восстановления связи independent
+A2 audit прошёл на обоих workers: по 2 Python tests, 16570 exact sample pairs,
+20 Elder / 8 M40 CSV совпадают с полными A1. Пакеты опубликованы и получены через
+Git: Elder commit 241c10f2, 426 stored / 424 raw hashes; M40 45d55b03,
+241 / 239. Все hashes проверены локально.
+Текущая owner-policy реализация root 912ef71b / PulseLib c7266dcb:
+Elder normal завершил 23/23 native (9 новых + 14 regression), независимый
+664ced234 — 4/4 Python, 42 actual training packets и 8646 waveform sample pairs.
+M40 ASan также завершил 23/23 native и оба independent audits по 4/4 tests,
+42 packets / 8646 sample pairs. На каждом worker 20 graph CSV совпадают с
+предыдущим A2. Пакеты owner-policy опубликованы: Elder 640a39df, M40 ec944b44;
+на каждом локально сверены 324 stored / 322 raw hashes. Python A2 54b3d5607
+дополнительно проверяет sample-count summary против raw CSV. Новый PulseLib
+8683bbff отличается от native c7266dcb только обновлением документации.
+Отдельные normal full regression gates root 912ef71b завершились на обоих
+workers: по 491 cases / 480 pass / 11 helper skips / 0 failures, три Rdk CTest
+groups pass. Independent Python 54b3d560: по 114/114 tests без skips/failures.
+Оба пакета опубликованы (bc37077f / 182191b9), на каждом локально проверены
+3268 stored / 3266 raw hashes. Позднейшие owner-bindings и Rdk BOM изменения
+не относятся к этому native source. Merge проверенного scope в develop
+выполнен: PulseLib 4db59424, root 9e06c339. Свежий Git closure проверен
+на M40, evidence 7f214425 (первоначальная ошибка регистрации сабмодулей
+устранена; семь gitlinks и чистое дерево подтверждены).
+[Полная регрессия](IntegratedNativeRegression-2026-10-29.ru.md).
+Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
 
-**Миграция исторических запускателей — первый пакет**: удалены семь одноразовых
-shell-файлов из Docs/evidence/metrics. Полные archive/last-change SHA, blob SHA-1
+**Миграция исторических запускателей — два пакета**: удалены семь одноразовых
+shell-файлов из Docs/evidence/metrics и четыре InhGrid launchers/monitors.
+Полные archive/last-change SHA, blob SHA-1
 и content SHA-256 записаны в [реестр](ScriptMigration.ru.md); wrappers/копий нет.
 Исторические результаты сохранены, ссылки исправлены на immutable Git versions.
 Активные Bin/PulseLib tools, физические модели и остальная миграция не завершены.
@@ -195,23 +214,51 @@ EXP02 Test_avg1 найден в августовской истории. Это 
 **Идентичности условий/runtime — рабочий подэтап 10**: добавлен content-addressed
 ConditionSpec, отдельные matrix/attempt/analysis identities и runtime manifest
 schema 2 без deploy/resource/compiler path в identity flags. Сохранена полная
-provenance, старые manifests не пересчитываются. Tests подготовлены, но из-за
-недоступности jump host не выполнялись; runner/queue не подключены.
+provenance, старые manifests не пересчитываются. На обоих workers source
+670f2ff79 прошёл 18/18 Python tests и реальный перенос A2 executable/INI с
+переименованием binary в `.rs2`: production snapshot сохраняет identity;
+перенесённый binary запускается и перечисляет native tests. Нового численного
+прогона этот контроль не выполняет. Использован свежий чистый Git closure A2
+со всеми семью точными gitlinks. Пакеты c05b75ae / 976bdfcf опубликованы,
+на каждом проверены 14 stored / 12 raw hashes. Runner/queue не подключены.
 [Контракт и ограничения](ConditionIdentities.ru.md).
 
-## Новый полный gate и приёмка native scope
-
-На обоих workers normal source 912ef71b / PulseLib c7266dcb: 491 cases,
-480 pass / 11 helper skips / 0 failures; три выбранные Rdk CTest groups pass.
-Независимый Python source 54b3d560: по 114 tests без skips/failures/errors.
-Полные пакеты bc37077f / 182191b9 опубликованы, на каждом локально проверены
-3268 stored / 3266 raw hashes. PulseLib develop merge 4db59424 отличается
-от tested только документацией. Корневой acceptance branch записывает gitlink
-этого merge. Полные этапы 4–8 не завершены; последующие owner-binding и Rdk
-BOM/config изменения остаются отдельными рабочими ветками.
-[Полные результаты и ограничения](IntegratedNativeRegression-2026-10-29.ru.md).
+**Связанные owner-параметры — новый подэтап 4**: конфликт native construction/
+import с внешними scalar/vector источниками воспроизведён. Value-aware precommit
+проверка cbbf56ce допускает совпадающие read-only значения, отвергает конфликт
+до замены графа и не записывает в источники. M40 ASan: 16/16 tests; независимое
+чтение 16 primary JSON. Baseline A4: 8 ожидаемых failures + 8 matching passes.
+Пакет 1c55f903: 467 stored / 465 raw hashes сверены. Первый неверный vector
+fixture и его авария сохранены как ошибка fixture. Последующий editor fix 0ca75b3 прошёл на обоих workers 46/46 native и по
+2/2 independent Python tests (12 boundary probes / 4332 samples). Fixed пакеты
+073b2906 / 37e6326c: по 530 stored / 528 raw hashes проверены. Baseline
+2c08b5b4 / 1e9e52f2: по 331/329 hashes. Runtime control flags остаются
+открытыми. PulseLib develop merge 4e6be0cb опубликован; Core совпадает
+с проверенным 0ca75b3. Rdk develop c903b9bb принимает BOM correction: M40 ASan
+и Elder normal прошли четыре Rdk groups, на Elder отдельно 2 encoding tests.
+Elder BOM evidence fa39375f: 10 stored / 8 raw hashes проверены. Корневой
+acceptance branch записывает оба точных gitlinks; это не закрывает весь этап 4.
+[Ownership и ограничения](NativeOwnerBindings.ru.md).
 
 ## Незакрытый объём исходных этапов
+
+**Lossless config adapter**: в отдельной ветке stage09/lossless-config-adapter
+добавлены адресные text edits для настоящего Rdk dialect, включая `<00>`.
+По 7 Python tests на workers, 1599 tracked StructTrain Project.ini byte-exact;
+M40 ASan — native readback 4 файлов / 11 values и четыре выбранные Rdk CTest
+groups. Воспроизведён и исправлен общий BOM+declaration defect TL-035 в Rdk
+8ebf64dd; abc21b65 отличается только документацией. Native Elder/wide проверка,
+effective component preflight и production prepare/runner остаются открытыми.
+[Артефакты и неудачные попытки](ConfigDocument.ru.md).
+
+**M40 storage**: по уточнению пользователя сохраняются уникальные трассы.
+10 completed runtime / 5,41 GB перенесены на Data с per-file hash checks и
+сохранением старых путей. Устранены 191 byte-identical immutable Git pack copies,
+освобождено 18,39 GB; HEAD objects читаются в 75 затронутых Git directories.
+Maintenance journal опубликован, 30 stored / 28 raw hashes сверены. Рабочие
+full gates не перемещались; low-disk событие требует независимой проверки
+полноты их первичных данных. Production resource scheduler этим не реализован.
+[Журнал и размещение](M40Storage-2026-10-29.ru.md).
 
 | Этап | Что ещё требуется |
 |---|---|
@@ -232,12 +279,12 @@ BOM/config изменения остаются отдельными рабочи
 наблюдения исходного протокола. Научные 8/8 не являются условием завершения.
 ControllerVersion=2 пока не рекомендуется для всей экспериментальной матрицы.
 
-## Git closure новой приёмки
+## Следующий приоритет: сквозной эксперимент
 
-Root develop merge 9e06c339a8186e3330303f6cd4fa829d09b74510 опубликован
-после PulseLib merge 4db59424125dda426a29bc74faac565db871511f. Свежий
-checkout на M40 подтверждает семь точных gitlinks и чистое дерево; evidence
-7f21442575db614df55c781bb4c9b242c5fbea6e, 5 stored / 2 raw hashes проверены
-локально. Начальные setup/transport ошибки сохранены, исправлены и проверены
-повторно. Позднейшие owner-binding и BOM/config изменения остаются в отдельных
-рабочих ветках. Полный исходный план не завершён.
+[ExperimentReadiness.ru.md](ExperimentReadiness.ru.md) фиксирует четыре
+обязательных блока до первой ограниченной серии: конечная recognition model,
+полные frozen probes с реальными spike timestamps, threshold/control protocol
+и воспроизводимый Train→export→Test→analysis job. Initial scope допускает
+C-trim/PostTune Off; остальные режимы и полный исходный план сохраняются.
+На момент этого checkpoint все owner/editor native и Python jobs завершены;
+новых серверных заданий здесь не заявлено.
