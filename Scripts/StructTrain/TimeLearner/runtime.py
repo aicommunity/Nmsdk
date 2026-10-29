@@ -14,6 +14,9 @@ BUILD_KEYS = {"CMAKE_BUILD_TYPE", "CMAKE_C_COMPILER", "CMAKE_CXX_COMPILER",
               "QT_VERSION_MAJOR", "BUILD_SHARED_LIBS", "RDK_LLM_BUILD_EMBEDDED",
               "NO_MOTION_CONTROL", "NMSDK_DEPLOY_ROOT", "NMSDK_RESOURCE_ROOT"}
 
+LOCATION_BUILD_KEYS = {"CMAKE_C_COMPILER", "CMAKE_CXX_COMPILER",
+                       "NMSDK_DEPLOY_ROOT", "NMSDK_RESOURCE_ROOT"}
+
 
 def digest_file(path: Path) -> str:
     before = path.stat()
@@ -113,9 +116,27 @@ def build_flags(cache: Path) -> dict[str, str]:
     return result
 
 
+def runtime_content_identity(manifest: dict) -> dict:
+    """Version 2: file contents/semantic flags, independent of deployment paths.
+
+    File existence/integrity is checked by snapshot, not this pure projection.
+    Loader mappings remain a point-in-time observation, not lifetime closure.
+    Full paths and build flags are retained unchanged in the provenance record.
+    """
+    return {"kind": "timelearner_runtime_content", "schema_version": 2,
+            "executable": manifest["executable"]["sha256"],
+            "app_ini": manifest["app_ini"]["sha256"],
+            "resolved_libraries": sorted(r["sha256"] for r in manifest["resolved_libraries"]),
+            "build_flags": {key: value for key, value in manifest["build_flags"].items()
+                            if key not in LOCATION_BUILD_KEYS},
+            "compiler": manifest["compiler"]["sha256"],
+            "loaded_process_files": (sorted(r["sha256"] for r in manifest["loaded_process_files"])
+                                     if manifest["loaded_process_files"] is not None else None)}
+
+
 def snapshot(root: Path, executable: Path, app_ini: Path, cache: Path, pid: int | None = None) -> dict:
     executable = executable.resolve(strict=True)
-    manifest = {"schema_version": 1, "source_closure": source_closure(root),
+    manifest = {"schema_version": 2, "source_closure": source_closure(root),
                 "executable": file_record(executable), "app_ini": file_record(app_ini),
                 "build_flags": build_flags(cache), "resolved_libraries": resolved_libraries(executable),
                 "loader_environment": {k: os.environ[k] for k in ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM") if k in os.environ}}
@@ -124,15 +145,8 @@ def snapshot(root: Path, executable: Path, app_ini: Path, cache: Path, pid: int 
     manifest["compiler"]["version"] = subprocess.check_output([str(compiler), "--version"], text=True, timeout=15).strip()
     # Resolved dependencies are not claimed to include plugins loaded later.
     manifest["loaded_process_files"] = loaded_process_files(pid, executable) if pid is not None else None
-    manifest["runtime_fingerprint"] = digest_json({
-        "executable": manifest["executable"]["sha256"],
-        "app_ini": manifest["app_ini"]["sha256"],
-        "resolved_libraries": sorted(r["sha256"] for r in manifest["resolved_libraries"]),
-        "build_flags": manifest["build_flags"],
-        "compiler": manifest["compiler"]["sha256"],
-        "loaded_process_files": (sorted(r["sha256"] for r in manifest["loaded_process_files"])
-                                 if manifest["loaded_process_files"] is not None else None),
-    })
+    manifest["runtime_identity"] = runtime_content_identity(manifest)
+    manifest["runtime_fingerprint"] = digest_json(manifest["runtime_identity"])
     return manifest
 
 

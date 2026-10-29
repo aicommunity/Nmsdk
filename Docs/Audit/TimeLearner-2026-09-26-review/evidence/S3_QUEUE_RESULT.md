@@ -1,7 +1,11 @@
 # SoftCold S3.a+S3.b — итог очереди (2026-09-27)
 
+> Исторический документ. Запускатели этой очереди удалены из текущего дерева;
+> их версии доступны в [реестре миграции](../../../StructTrain/TimeLearner/ScriptMigration.ru.md).
+> Наблюдения и критерии отчёта не пересчитаны по новым правилам.
+
 Fix: `softcold_fix=2026-09-27_sbm2_strip_tip1`.  
-Скрипт: `metrics/run_S3_retest_after_softcold_fix.sh` → **DONE** 2026-09-27T23:57:16Z.  
+Скрипт: [metrics/run_S3_retest_after_softcold_fix.sh](https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_S3_retest_after_softcold_fix.sh) → **DONE** 2026-09-27T23:57:16Z.
 RC: [SOFTCOLD_DEFER_rcs_after_softcold_fix.txt](SOFTCOLD_DEFER_rcs_after_softcold_fix.txt)
 
 | case | rc | failure_class | tipr (XML/report) | note |
