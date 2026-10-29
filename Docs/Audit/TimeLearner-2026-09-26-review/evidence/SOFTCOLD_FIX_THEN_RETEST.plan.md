@@ -1,5 +1,9 @@
 # План: исправление SoftCold → проверка → retest затронутых кейсов
 
+> Исторический документ. Запускатели этой очереди удалены из текущего дерева;
+> их версии доступны в [реестре миграции](../../../StructTrain/TimeLearner/ScriptMigration.ru.md).
+> Наблюдения и критерии отчёта не пересчитаны по новым правилам.
+
 Статус: **done** (desync снят; Cold PASS нет). Анализ: [SOFTCOLD_PLAN_RESULT.md](SOFTCOLD_PLAN_RESULT.md).  
 `DONE_TAILS` 2026-09-30T10:05:51Z; AmpNorm: [AMPNORM_EOL_STUCK.ru.md](AMPNORM_EOL_STUCK.ru.md).  
 Fix: `2026-09-27_sbm2_strip_tip1`.
@@ -18,7 +22,7 @@ flowchart TD
 
 ## Phase S0 — стоп (done)
 
-- Остановлены `run_phase5_defer.sh`, `posttune_verify`, `NeuroModelerConsole`.
+- Остановлены [run_phase5_defer.sh](https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_phase5_defer.sh), `posttune_verify`, `NeuroModelerConsole`.
 - Лог: `evidence/metrics/phase5_defer.log` → `ABORTED … SoftCold fix first`.
 - Частичный rc-list: `_repro/SOFTCOLD_DEFER_rcs.txt` (не полный DEFER).
 
