@@ -58,3 +58,9 @@ Reports/StructTrain/TimeLearner/s03-spike-history-{elder1,m40}.
 
 Это scoped acceptance дефекта истории событий. Полная матрица LT-моделей и
 runner спайковых target/foil проб этим изменением не объявляются завершёнными.
+
+Принято через no-ff merges: PulseLib
+`a753603cc27e2f5580195e649fc672eeb5769618`, затем root
+`a28765c3e816bab09c08366510b35edfafff91f7`. PulseLib merge отличается от
+проверенного Core 1de63d0 только документацией. Дочерний commit опубликован
+до корневого gitlink; оба source/report commits доступны в origin.

@@ -4,10 +4,10 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-Последний принятый develop: root `f00989cb1fd98f126e37784ebb9b9f2d9e34b8ae`,
-PulseLib `9902545414b7381d328024caf28994d53f97f090`. Объединён проверенный
+Последний принятый develop: root `a28765c3e816bab09c08366510b35edfafff91f7`,
+PulseLib `a753603cc27e2f5580195e649fc672eeb5769618`. Объединён проверенный
 frozen-owner import/hold и перенос в новый Test learner/fresh process; область
-проверок не расширяется самим merge. Следующий подэтап `stage03/spike-history-reset`
+проверок не расширяется самим merge. Подэтап `stage03/spike-history-reset` также объединён в develop и
 исправляет фиктивные timestamps после Reset: baseline воспроизведён на обоих
 workers; fixed по 12/12 native pass, M40 ASan, native statuses=0. Outer-shell
 status=1 объяснён и воспроизведён отдельной диагностикой login .bash_logout.
