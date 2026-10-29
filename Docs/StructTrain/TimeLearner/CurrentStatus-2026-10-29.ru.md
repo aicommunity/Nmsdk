@@ -181,6 +181,13 @@ shell-файлов из Docs/evidence/metrics. Полные archive/last-change 
 Исторические результаты сохранены, ссылки исправлены на immutable Git versions.
 Активные Bin/PulseLib tools, физические модели и остальная миграция не завершены.
 
+**Августовские source anchors — уточнение этапа 1**: шесть условий и 65 файлов
+проверены по Git blob/content hashes. Для Branch разделены root данных 50b0cac1
+и следующий report-only root d8a1e711; исторический flat layout восстановлен.
+EXP02 Test_avg1 найден в августовской истории. Это metadata review, не новый
+численный replay и не проверка всех волн.
+[Источники и ограничения](HistoricalEvidenceAnchors.ru.md).
+
 ## Незакрытый объём исходных этапов
 
 | Этап | Что ещё требуется |
