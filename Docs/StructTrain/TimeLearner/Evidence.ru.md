@@ -10,7 +10,13 @@
 |---|---|---|
 | Phase A 4/8–6/8 | de02a3809395dd0bbd11e2ba792bfc04a51c89f3 | Bin/Configs/SpikeSamples/StructTrain/SelectivityPhaseA/REPORT.md |
 | PSI k-sweep | bf2a68955c83b2540e1bc68d00aaa63eefa6541b | Bin/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib |
-| Branch amp-eq/NextSeg | 50b0cac1ade4f468be82a3d35e4ac6f5514ceb56 | Bin/Configs/SpikeSamples/StructTrain/TimeNeuronTimeLearnerBranch/Train/REPORT_ampeq_nextseginh.md |
+| Branch amp-eq/NextSeg | 50b0cac1ade4f468be82a3d35e4ac6f5514ceb56 | flat Train/Test models + CSV; report added in root d8a1e711fc6edb0432ac09ad579860172e516db9, before later /Train layout |
+
+Уточнённые [Git-источники шести августовских условий](HistoricalEvidenceAnchors.ru.md)
+разделяют snapshot данных и commit отчёта. Проверены 65 адресованных файлов;
+это metadata review, не новый runtime replay. В частности, Branch report ещё
+не существовал в root 50b0cac1, а EXP02 Test_avg1 доступен в августовской истории,
+несмотря на отсутствие текущего каталога.
 
 Phase A прямо отмечает зависимость LTZ peak от порога: offline threshold sweep
 по spiking trace не предсказывает корректно повторный запуск с новым порогом.
@@ -48,7 +54,7 @@ Train/Test artifacts. Число PASS из разных gate не суммиру
 |---|---|---|---|
 | TL-001 | Branch AllSynapsesNormalized | проверяет ActivePulseIndex; -1 оставляет пустой gate | открыто в legacy; отдельный FinalVerificationSession реализует fresh all-input sweep, но production wiring и native N>1 committed-input corruption ещё требуются; FinalVerification.ru.md |
 | TL-002 | Branch parallel conversion | mutable bool, повторное включение training сбрасывает его | save/load, повторный conversion, clipping |
-| TL-003 | Branch PostTune rebuild | parent C или fallback 1e-9 | heterogeneous storage roundtrip |
+| TL-003 | Branch PostTune rebuild | parent C/fallback 1e-9, потеря child physics и N0 bank consistency | runtime baseline по 8 failures; native reconstruction d862127: по 10 C++ / 7 Python на workers, ASan M40; PostTuneNativeRebuild.ru.md; full candidate transaction ещё открыта |
 | TL-004 | C trim | baseline читается из parent C | эквивалентная child physics |
 | TL-005 | StructuralAmp tracker | знак вместо амплитуды, неполный revision | drift, C/dt invalidation, несколько brackets |
 | TL-006 | scorer | исходный дефект target row0, incomplete/duplicates/bad tokens | исправленный scorer/collector проверен на этапе 3; сквозная интеграция runner открыта |
@@ -154,8 +160,8 @@ root a222ac7c4b386451137ef17e4a5a0af6996c8d9b разрешает actual executab
 соседний runtime ini; 7186788be098a58091a14025d664647e5d9eb2cd инициализирует
 корневой NModel нового helper штатно. A6/A7 проходят адресные переносы на обоих
 серверах. Прежние ad-hoc numerical controls не отменены, но утверждение об их
-соответствии заявленному ini ограничено. Full maintained CTest ещё проверяется;
-NativeLearnedState.ru.md.
+соответствии заявленному ini ограничено. Позднейшие full maintained groups пройдены на обоих workers;
+PooledFullAcceptance.ru.md и FullClockAcceptance.ru.md. NativeLearnedState.ru.md.
 
 TL-033: sampling-gap comparison терял absolute timestamp scale при вычитании.
 Full root 157a5301 / PulseLib e875ca5 дал на каждом worker по 22 failures из
@@ -164,8 +170,11 @@ roundoff delta больше прежнего допуска. Baseline f712e865 �
 M40 ASan: девять ожидаемых failures из десяти; восемь реальных Classic/Branch
 probes при 131/1000000 s и 2000/20000 Hz, dropped-frame control pass.
 Рабочая PulseLib d4c0cf0 использует absolute endpoints в sampling/coverage и
-resolution guard; 52-case seeded regression и data audit пока выполняются.
-Это не принятое runtime исправление и не причинное объяснение августа.
+resolution guard; 52-case seeded regression и corrected data audit пройдены.
+Full native aeff4a9d: четыре maintained groups pass на обоих workers, PulseLib
+442 cases, 432 pass / 10 helper skips, 58 independent Python tests. Принято
+в develop root b6212753 / PulseLib 32cb44bb; FullClockAcceptance.ru.md.
+Причинная связь с августом не установлена.
 См. AbsoluteClockSampling.ru.md; все failure bundles опубликованы через Git.
 
 TL-032: explicit Default обоих learner сохранял EnableTrainingAudit=true.
@@ -206,9 +215,28 @@ ASan heap-buffer-overflow на M40. Исправление Rdk
 detect_leaks=0, и 13/13 в обычной сборке Elder-1. A14 дополнительно проверяет
 native import/rollback/frozen response на обоих серверах; Git-пакеты доступны.
 Rdk develop merge ef4f033704d54f11d06e4da2b3518c313f3a9992 опубликован,
-его tree совпадает с tested feature tree. Полный CTest ещё выполняется.
+его tree совпадает с tested feature tree. Позднейший полный контроль
+пройден: PooledFullAcceptance.ru.md и FullClockAcceptance.ru.md.
 См. ComponentOrderBounds.ru.md. Причинная связь с историческими
 экспериментами не установлена; их результаты этим finding не отменяются.
 
 Эти findings являются результатом проверки кода. Runtime-causality и исправление
 не считаются доказанными до соответствующих серверных тестов.
+
+TL-034: оба legacy PushPostTunePattern подменяли InputPattern временным stimulus.
+Correct pre-fix f9a30cb7 / PulseLib 6e28d203: 4/4 expected failures normal на
+обоих workers. Fixed a5ada26f / PulseLib 0e1b01ae: 4/4 native; independent bb4a3511
+8/8 Python, Elder normal / M40 ASan; 8 complete presentations, 19368 samples.
+8 общих waveform projections byte-exact. Полный поиск/retarget/calibration этим
+не подтверждены. См. PostTuneTransientStimulus.ru.md; ранняя неправильная фаза
+Classic является fixture error, не доказательством lifecycle defect.
+
+TL-035: native USerStorageXML::Load не принимал UTF-8 BOM вместе с declaration.
+Baseline root7db4d9737 / Rdk1812624f: три real patched Project.ini читаются,
+synthetic BOM+declaration отклонён; удаление любого элемента устраняет отказ
+на том же binary. Rdk8ebf64dd нормализует только начальный BOM: M40 ASan
+четыре Rdk CTest groups и native readback 4 файлов / 11 values успешны.
+Python lossless adapter: по 7 tests на workers, 1599 tracked StructTrain Project.ini
+byte-exact. Evidence 6210f023 / 13c43281, hashes сверены. A2 launcher syntax и
+A3 disk exhaustion сохранены отдельно; native Elder/wide и production preflight
+не заявлены. См. ConfigDocument.ru.md. Историческая научная причинность не установлена.

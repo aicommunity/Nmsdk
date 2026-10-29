@@ -1,5 +1,9 @@
 # SoftCold smoke S2 — 2026-09-27
 
+> Исторический документ. Запускатели этой очереди удалены из текущего дерева;
+> их версии доступны в [реестре миграции](../../../StructTrain/TimeLearner/ScriptMigration.ru.md).
+> Наблюдения и критерии отчёта не пересчитаны по новым правилам.
+
 Console `ec86430e…`. Fix: `softcold_fix=2026-09-27_sbm2_strip_tip1`.
 
 ## S2.1 Unit
@@ -29,4 +33,4 @@ Previously: TipR flat + L=1 for entire ~3.3 h poll budget (`timing_softcold_de
 
 ## Verdict
 
-S2 **PASS** → proceed S3 full SoftCold retest (`run_S3_retest_after_softcold_fix.sh`).
+S2 **PASS** → proceed S3 full SoftCold retest ([run_S3_retest_after_softcold_fix.sh](https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_S3_retest_after_softcold_fix.sh)).
