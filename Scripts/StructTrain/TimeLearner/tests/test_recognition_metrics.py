@@ -197,3 +197,12 @@ class RecognitionMetricsTest(unittest.TestCase):
         changed = copy.deepcopy(observations);changed[0]["samples"][0]["soma"][0] = float("nan")
         with self.assertRaises(EvidenceError):
             score_recognition_evaluation(spec, changed, package)
+
+    def test_diagnostic_source_cannot_pose_as_completed_training(self):
+        _, package, spec, observations, _ = self.cases[0]
+        changed = copy.deepcopy(package)
+        changed["source_solo"].update({"kind": "timelearner_stopped_state", "state_kind": "diagnostic",
+                                       "training_outcome": "external_stop", "certificate": None})
+        changed["sha256"] = canonical_model_sha256({k: v for k, v in changed.items() if k != "sha256"})
+        with self.assertRaises(EvidenceError):
+            score_recognition_evaluation(spec, observations, changed)
