@@ -76,3 +76,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [PostTune: рабочая реализация отката графа и оставшаяся транзакция](PostTuneBoundaryTransaction.ru.md).
 
 - [Миграция скриптов: удаления и точные Git-источники](ScriptMigration.ru.md).
+
+- [Август: точные Git-источники моделей, CSV и отдельные commits отчётов](HistoricalEvidenceAnchors.ru.md).
