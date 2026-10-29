@@ -103,5 +103,18 @@ evaluation specs ссылаются на соседние trial-N.json.gz и mod
 60a1bd6fa44be04ce8fb59f2f2813dad84373b74 / 4eb082dd4ae6a5dd9c7fa4d4516ccb3b17bbce70.
 
 A2 reports: Elder f1bd35dfa20a01e2c0a03a4a3372e528f7da3860,
-M40 ae44a2a511e3ac9fe2381ee8dc4c3df65f2e9eba. Полная локальная сверка
-контрольных сумм и объединение подэтапа ещё выполняются.
+M40 ae44a2a511e3ac9fe2381ee8dc4c3df65f2e9eba. Для каждого A1/A2 пакета
+локально проверены все 39 stored и 37 raw hashes, включая декомпрессию.
+
+Совместимость с принятым connected-stop auditor дополнительно проверена на
+source 102c1fc15a106060f1f5b37ecb149b0e752baba1: по 30/30 Python/CLI на
+обоих workers, без skips/failures/errors, process status 0. Reports:
+Elder 2cfcd3ee3944a5abc0da843bd4c3ae43dbddc669;
+M40 b4e5f744f829a3f50356874d13c539b8b0ae85ef.
+У каждого проверены все пять stored / четыре raw hashes. Это повторный анализ
+сохранённых native данных, а не новый физический эксперимент.
+
+Подэтап готов к merge в develop. Этап 3 остаётся частичным: исторические
+адаптеры, полная morphology/timing оценка и общий production verdict не закрыты.
+Обязательные крупные графические отчёты описаны в VisualTestReports.ru.md;
+их renderer и визуальная приёмка остаются отдельной незавершённой работой.
