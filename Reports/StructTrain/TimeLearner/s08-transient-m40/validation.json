@@ -1,0 +1,909 @@
+{
+  "baseline_build_kind": "normal",
+  "baseline_expected_failures": 4,
+  "baseline_root": "f9a30cb72b08e800cada41c6c547f2b63db0c9c9",
+  "build_kind": "asan",
+  "byte_exact_baseline_waveforms": 8,
+  "evaluation_verdict": null,
+  "host": "m40",
+  "native_cases": 4,
+  "native_root": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
+  "original_python_tests": 7,
+  "presentations": 8,
+  "primary_samples": 19368,
+  "python_root": "bb4a351185956365d483d1db5e2d7309bd39ab31",
+  "raw_files": {
+    "s08-transient-baseline-asan-a1/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "s08-transient-baseline-asan-a1/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "f5a6b2d9d5fe18c2db9d3ed8e53ad7d6a229ac9ccdb47d86ac59c7103b042c9f"
+    },
+    "s08-transient-baseline-asan-a1/build.log": {
+      "bytes": 8280,
+      "sha256": "3e8547fa159a6a44b1d4dfc4fa0313e3bded64efec5174e3eea137630bd5be17"
+    },
+    "s08-transient-baseline-asan-a1/checkout.log": {
+      "bytes": 805,
+      "sha256": "efe9f440bcf703de91fd967388ede0f1cc2c94d4f47b1ea3fe089c31c44a44e8"
+    },
+    "s08-transient-baseline-asan-a1/configure.log": {
+      "bytes": 1308,
+      "sha256": "c9ea85c1fe1498966cfd8fc4db214ce0c4d6e366f15b9b00ef2210395e4f8cf3"
+    },
+    "s08-transient-baseline-asan-a1/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "s08-transient-baseline-asan-a2/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-transient-baseline-asan-a2/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "2747cda27d27739449e5b54f5adc6c65f68b97c2f1e32c2cb8e65d7442e4a600"
+    },
+    "s08-transient-baseline-asan-a2/build.log": {
+      "bytes": 2258,
+      "sha256": "27107cdaa0c28cd3e1699f54fa4c777c046d283a28319545f193de54ca49d2e6"
+    },
+    "s08-transient-baseline-asan-a2/checkout.log": {
+      "bytes": 662,
+      "sha256": "a5d44bd895fce47c68fc848f8613289847bbd4b2588d8cda33d8588beca3c320"
+    },
+    "s08-transient-baseline-asan-a2/configure.log": {
+      "bytes": 1308,
+      "sha256": "a314a3257a8741cad4c93b309e0b36d3e149e14fcf360a9a2fb4a7b555934e00"
+    },
+    "s08-transient-baseline-asan-a2/controller.log": {
+      "bytes": 8931,
+      "sha256": "3dec79fc840911e92ed71b0a918170dd13f3ca01890a48f9127b409636bb1593"
+    },
+    "s08-transient-baseline-asan-a2/controller.xml": {
+      "bytes": 18325,
+      "sha256": "477c72b3647fb6e8094088b39ae5e7457b0e2469796b3e5c345a6da6bb60e31e"
+    },
+    "s08-transient-baseline-asan-a2/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8085e6472ec32d11f0202641819081ef9c2296618ff75dd461283f94762020eb"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 159749,
+      "sha256": "84bbfe57d12618fe063d1914ac803497239f4ae64264bcc7043a841286ee620a"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 616,
+      "sha256": "e657b3c0d1c7039382125dea3d24f7220e937a439d39137978d0ed572008eb44"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 652,
+      "sha256": "729521facb1d8d403cae66522859b04702b2cda010b6e19c38ea2975d5af26c6"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 168050,
+      "sha256": "f2f7f9898b30530307c129a29be5e0ba52e6598b7525bdb4527c54020e0d01bb"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 613,
+      "sha256": "972ef6acb46e03ff5758586786edac5e344f945c3194bb3e227b444c24d054d0"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 649,
+      "sha256": "3b8acc5b10900ae836d1163cf276f43de4da75ca4df541b5af1b5c62f4cc9d34"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "002a28e48e3f6eda15436dc051e9bfb705490d007744e8f724ce9598e5278946"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 15771,
+      "sha256": "2ce924dd6bde79a9131d79c97a0d08f78342973635ffa82c8bb0ee44bff14516"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 612,
+      "sha256": "582c4d2351033ecc0ecb32798f90b1898fe2088235c8072393c12cd2d0418da8"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 650,
+      "sha256": "92c1588f6002d217f89708d44c446ac67885cde48cd2bcd7cfc325295d675f74"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 16606,
+      "sha256": "b429ce5febd012003fccc2283ca7ab3cf6df553812de879bc852c7ef95d3f727"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 609,
+      "sha256": "6ccd1d320937f5f70316cebcf16e6f2f2815c52093ce096fcbb6ec473e66ae40"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 647,
+      "sha256": "93655507df66be8955511249ec35f517676da3657d6632faa3e87321e08f7245"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-baseline-asan-a2/native/Branch_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8b9a5cff7adc9f6444bc8edadd291fd8367f8badf404a0e57208083f401caf8c"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 259319,
+      "sha256": "4708895528b29e7f1f94cee99769877c79f625790f5daa56d9891bee3cb216d8"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 617,
+      "sha256": "35305bc594c67e55fcaa0e6945f8f43a129bb3058af99b2f46096ed13bc3e7dd"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 653,
+      "sha256": "30115b221307968737989a303170d46ad120ba77a3491e5a34ac8b17d50cefb7"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 259319,
+      "sha256": "4708895528b29e7f1f94cee99769877c79f625790f5daa56d9891bee3cb216d8"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 614,
+      "sha256": "805a504c33ddd07564db670447253d62e6dd7ef47d72ec6eeb9bbced797192ad"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 653,
+      "sha256": "548c76c0d679ceef3d061b4b3a1bbbeff3f5578989eab24b1a77f673895e782b"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "23337ef7b6e0170d08ef295923921a164e959ba9046aac207283b571f427784b"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 25747,
+      "sha256": "8c46c7d29b5ce36bc4bd7b700cd9c00c3126ab9f40dd0ccc6441a7e8edb9be86"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 613,
+      "sha256": "f6817cdf8ddff802588deaf51e35602dd73da91100558f332c7e4d087e4d4af0"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 651,
+      "sha256": "2d2efaf79171f8e24f9953df3b4db714911b167bf37882916b6f6f78efa13992"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 25747,
+      "sha256": "8c46c7d29b5ce36bc4bd7b700cd9c00c3126ab9f40dd0ccc6441a7e8edb9be86"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 610,
+      "sha256": "8a3349120565b1f3ad96316940377df3e58409df37f0da839f706e57ac7d93fb"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 651,
+      "sha256": "6e08c9334e1b31b8da5a2eed20fd857cb51ffde39491b95a5278e33043a6a142"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-baseline-asan-a2/native/Classic_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-baseline-asan-a2/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-transient-baseline-asan-a2/runtime.json": {
+      "bytes": 16115,
+      "sha256": "d689b997c5a342f691c8c86fc5599bc8a1a236e0bdc884a0bc1fee1c4030593f"
+    },
+    "s08-transient-baseline-normal-a3/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-transient-baseline-normal-a3/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "1c45c6dd0a2fe1e098038f4bed6d3ebf4a25ebc2e8848037bbfc04ad8fcaa099"
+    },
+    "s08-transient-baseline-normal-a3/build.log": {
+      "bytes": 5882,
+      "sha256": "3b5d8f684527723597c5a97d57dcd4979705280272e1bad2b2cb4ba8b241d70d"
+    },
+    "s08-transient-baseline-normal-a3/checkout.log": {
+      "bytes": 792,
+      "sha256": "a0028621b407a0d3cfc88566a7225e55a0d252b01c90a46e717102766b8683c8"
+    },
+    "s08-transient-baseline-normal-a3/configure.log": {
+      "bytes": 1280,
+      "sha256": "b8e328eb9fc0318e97859098da93d3420f8f572ded16deb754e9fe6b6c406473"
+    },
+    "s08-transient-baseline-normal-a3/controller.log": {
+      "bytes": 4551,
+      "sha256": "b0ec37c5d42a6a72c9ac85d32e828e4de38e1982e3120a932add0865a5686bbc"
+    },
+    "s08-transient-baseline-normal-a3/controller.xml": {
+      "bytes": 8867,
+      "sha256": "3e5f6ac2eda0dc8e58b9ee8512f9d7f436f280b4e5ccfd3305f6e01ab15da368"
+    },
+    "s08-transient-baseline-normal-a3/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8085e6472ec32d11f0202641819081ef9c2296618ff75dd461283f94762020eb"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 159749,
+      "sha256": "84bbfe57d12618fe063d1914ac803497239f4ae64264bcc7043a841286ee620a"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 784,
+      "sha256": "cef7bc1bbc30d6869fe4982da22884555cf13387863af38640a30bcf0bef0aaa"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 697,
+      "sha256": "564ee1164c40dcf328faec6516a2a8a7be7f040589b983110d92b35c798de284"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 168050,
+      "sha256": "f2f7f9898b30530307c129a29be5e0ba52e6598b7525bdb4527c54020e0d01bb"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 775,
+      "sha256": "202270cebdeac01a3707e04e98a7e53a887202c4c88c06f3f89adb78a24ac567"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 694,
+      "sha256": "278e1b353cc1f4aeff7d47df520314fd809c022ab77a935ecfd5def848a9451e"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "002a28e48e3f6eda15436dc051e9bfb705490d007744e8f724ce9598e5278946"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 15771,
+      "sha256": "2ce924dd6bde79a9131d79c97a0d08f78342973635ffa82c8bb0ee44bff14516"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 780,
+      "sha256": "b97e438444161285ebd896caf29181ffde6d3a90d89a7d6e8493d2355631e954"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 695,
+      "sha256": "c62472fdba50fd8b837688d6d20f67d907b28ca7afc79818ae594dace6e62e5c"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 16606,
+      "sha256": "b429ce5febd012003fccc2283ca7ab3cf6df553812de879bc852c7ef95d3f727"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 771,
+      "sha256": "858efa310eefb38834dad1add70ebab8e37a16a1c6bd47b09b4dbb5a2540eb1f"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 692,
+      "sha256": "8dbb86a9ed1115159e2b0835562ac8921298a9cc18397033bd9f62f7d89fa98d"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-baseline-normal-a3/native/Branch_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8b9a5cff7adc9f6444bc8edadd291fd8367f8badf404a0e57208083f401caf8c"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 250949,
+      "sha256": "b158052baeec2947c811992623320ff46e78de6ae4a2fe5eca1f324294a89eae"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 785,
+      "sha256": "0ff7963b8fc3323e3a9e41ce62549940c5d281580b6afe97f3fdcfe3f5289bab"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 699,
+      "sha256": "18f5c3ddf0d4660e01af3ca195d9e1926d9b903de780461f18dbb3c99ac45b42"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 267705,
+      "sha256": "0264698f3dfbfbf4940158cdca4f3b748f846543de3d224183ee34c62a73fd8d"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 776,
+      "sha256": "980c8bc45765b3549a583c2efc6d0f88f730d935c37fa1ead8a7dff96f04af31"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 696,
+      "sha256": "34ed9e35d0ebbdf774bf7d465aa46f156eace2f423b9d0f3e34ea471a7fc5fc0"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "23337ef7b6e0170d08ef295923921a164e959ba9046aac207283b571f427784b"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 24924,
+      "sha256": "a78aa8a216bd5a90cfb113bafefc5a93efc8185aea9ad2a99023f3673755e62e"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 781,
+      "sha256": "170a5372bbf972dd902e8cef0e459bc79104d2c23664045732087ad3e5fe0e1b"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 697,
+      "sha256": "4c6fa11e374241c39d257a26bbb9ccfc9b974ad9a6a85b3733d4b17fa88509d1"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 26576,
+      "sha256": "e034cc81c0d117cf26120a4680fee67595e0cd154a58b33a115e8d4384d017c3"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 772,
+      "sha256": "e2ed8461883e4c70e93b16e24550275e92e12b774a3a12277748922301aa2d18"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 694,
+      "sha256": "66851bc2f66dd61eb1086230f7664a1363a0640f02d1790c8393259c24cbec0c"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-baseline-normal-a3/native/Classic_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-baseline-normal-a3/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-transient-baseline-normal-a3/runtime.json": {
+      "bytes": 7934,
+      "sha256": "cfc5ab2a83bb6b0327e12571bfd2cc58c2502607ee8e3ae0e8754420a4ff5ace"
+    },
+    "s08-transient-data-a3/checkout.log": {
+      "bytes": 2048,
+      "sha256": "660eac7d1b5ab8ffdc8d706203335587e5d4532eee02f4706d64ca2cb7f97bb3"
+    },
+    "s08-transient-data-a3/primary-audit.json": {
+      "bytes": 7511,
+      "sha256": "2bd0f94715c57094e0d56a03645a8dd339a7484ccee55c51ef8a6d4d0d5673e7"
+    },
+    "s08-transient-data-a3/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-transient-data-a3/python-evidence.log": {
+      "bytes": 106,
+      "sha256": "9821e5bbb22631f55ad4c7d81f704f9ee7589d6a3d4126661452f4d29dfebe7b"
+    },
+    "s08-transient-fixed-asan-a1/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-transient-fixed-asan-a1/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "283b6f2da3e1c4128ebd7044c227841a9982aac06f65ce5eefbf0459484dac83"
+    },
+    "s08-transient-fixed-asan-a1/build.log": {
+      "bytes": 2537,
+      "sha256": "ae032051a4d3fce98cc1721ad094d3084f99920fbd8046c20b480e32b3ebb07d"
+    },
+    "s08-transient-fixed-asan-a1/checkout.log": {
+      "bytes": 820,
+      "sha256": "377150b9f3af35bb3a636232d033f6619e1c1cf83e68b45438dd57b76b94a952"
+    },
+    "s08-transient-fixed-asan-a1/configure.log": {
+      "bytes": 1308,
+      "sha256": "88d95fb0e5329e214363569fe6435d5639e87464e54e75dd561745d6ea0b418a"
+    },
+    "s08-transient-fixed-asan-a1/controller.log": {
+      "bytes": 4560,
+      "sha256": "ef98b8ae35b9f6b0b55b5da45dcc38a3d0de8282ef31043778c5c206a83fd871"
+    },
+    "s08-transient-fixed-asan-a1/controller.xml": {
+      "bytes": 8855,
+      "sha256": "d878c8ff30d4457621be3043297dc6bea97eb50d9cefe3d1e7499e7f65f5929e"
+    },
+    "s08-transient-fixed-asan-a1/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8085e6472ec32d11f0202641819081ef9c2296618ff75dd461283f94762020eb"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 159749,
+      "sha256": "84bbfe57d12618fe063d1914ac803497239f4ae64264bcc7043a841286ee620a"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 783,
+      "sha256": "b09d2a159296f1f4f4a0e4bb46d3a93298ce0ad994b1a72bafa105c11a5666b9"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 671,
+      "sha256": "3a3f47204d32534f06125ff5f60cf938edaf61631ad3eb8bb58581cb3c64f863"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 168050,
+      "sha256": "f2f7f9898b30530307c129a29be5e0ba52e6598b7525bdb4527c54020e0d01bb"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 777,
+      "sha256": "7cf8430df19c9e1b793fcb699c53e6844e32e85b6abd554afcd5e38fc281933b"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 668,
+      "sha256": "79c6cd7b6ef5023bbf0782ef6e88b56a309a84f1bdb3e7851dc878df2c306831"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "002a28e48e3f6eda15436dc051e9bfb705490d007744e8f724ce9598e5278946"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 15771,
+      "sha256": "2ce924dd6bde79a9131d79c97a0d08f78342973635ffa82c8bb0ee44bff14516"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 779,
+      "sha256": "208eaa8f3fa8e475e3f8548dd3ad626f89bded226d89ab6fc0647a0913e54340"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 669,
+      "sha256": "233433e0ddddad17d310f69a62adab52214e79d3c1c5a142dd4a1659caa6792a"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 16606,
+      "sha256": "b429ce5febd012003fccc2283ca7ab3cf6df553812de879bc852c7ef95d3f727"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 773,
+      "sha256": "822c3bdf3f4d396b99d7a352a7b53c270a3c6b5425ff782cbaada1a21ef40c99"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 666,
+      "sha256": "f9646ec52dd32c1abfc1215d67f497d44ba0991b1bd178a6e1fb4bbd43bc906a"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-fixed-asan-a1/native/Branch_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8b9a5cff7adc9f6444bc8edadd291fd8367f8badf404a0e57208083f401caf8c"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 259319,
+      "sha256": "4708895528b29e7f1f94cee99769877c79f625790f5daa56d9891bee3cb216d8"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 784,
+      "sha256": "975007f5f0cbc31c7ce57485e3bee5707291e972456159ec86d7c75add185ae7"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 672,
+      "sha256": "93d65b3681c6e52d0d6e51e1d369eace07360fabb48c78c573bc2b2e04838e67"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 259319,
+      "sha256": "4708895528b29e7f1f94cee99769877c79f625790f5daa56d9891bee3cb216d8"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 784,
+      "sha256": "93185a4e206cfc602d7908c25d90e3fb796e0543226b5429cb6f81c0bb28661a"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 672,
+      "sha256": "e550bcd1b37ef754a4e46cb2f7a48b8d7c8a2ded4e1508cf1bc5992c1c8825f2"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "23337ef7b6e0170d08ef295923921a164e959ba9046aac207283b571f427784b"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 25747,
+      "sha256": "8c46c7d29b5ce36bc4bd7b700cd9c00c3126ab9f40dd0ccc6441a7e8edb9be86"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 780,
+      "sha256": "de179827a549b14883b1d4debbd276b4904edebc5a7a9774f3211da72c276384"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 670,
+      "sha256": "c0475147a29b4dc5261d7a93d4363ba13dde582f4dd93ac621bffdf2b917a5c8"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 25747,
+      "sha256": "8c46c7d29b5ce36bc4bd7b700cd9c00c3126ab9f40dd0ccc6441a7e8edb9be86"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 780,
+      "sha256": "0874a58cdc1e0c39a26255db119f3aec37fbb8ef151800b60f611b438b06f0bf"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 670,
+      "sha256": "d9e478b6338d3f4d1ae6103358030fdf83f6939c734f3c497975e2679d6d98b9"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-fixed-asan-a1/native/Classic_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-fixed-asan-a1/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "s08-transient-fixed-asan-a1/runtime.json": {
+      "bytes": 16106,
+      "sha256": "5fc3d152ab56b79dc36c1a62adff9cd5a1dcecbf43f0bf3f947b1960af0ee0d9"
+    },
+    "s08-transient-fixed-asan-a2/build-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-transient-fixed-asan-a2/build-source-closure.json": {
+      "bytes": 1304,
+      "sha256": "dd84868180aeb677977d70578f85aac4d80df17fc726bad169aa6397364e6908"
+    },
+    "s08-transient-fixed-asan-a2/build.log": {
+      "bytes": 2237,
+      "sha256": "e9eaa67ce083e42edb2a150f57b5cc13964a867635bb51fe0bc185174665c8d8"
+    },
+    "s08-transient-fixed-asan-a2/checkout.log": {
+      "bytes": 681,
+      "sha256": "cad05a6b88393586de2dcaf89c70da81f887cb8e1113e2d31a7d623695794f04"
+    },
+    "s08-transient-fixed-asan-a2/configure.log": {
+      "bytes": 1308,
+      "sha256": "1a67844f58a7d0a97d6bd79b49ac96481443bcdf54ea7ecce076ab598c267a7c"
+    },
+    "s08-transient-fixed-asan-a2/controller.log": {
+      "bytes": 1081,
+      "sha256": "ded00360cb7a93bb6089a211bd2af9fce4804124f5c25495f0520d25b60eadb6"
+    },
+    "s08-transient-fixed-asan-a2/controller.xml": {
+      "bytes": 1535,
+      "sha256": "093cf3299cda85f90184473709e18bf72a39de4cf5257d17046cf014d2f51570"
+    },
+    "s08-transient-fixed-asan-a2/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8085e6472ec32d11f0202641819081ef9c2296618ff75dd461283f94762020eb"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 318245,
+      "sha256": "94fa70d7cada22efefee8253d9b8f67f9d4e974502da6b199218d4baa0bb1662"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 783,
+      "sha256": "b09d2a159296f1f4f4a0e4bb46d3a93298ce0ad994b1a72bafa105c11a5666b9"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 697,
+      "sha256": "564ee1164c40dcf328faec6516a2a8a7be7f040589b983110d92b35c798de284"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 383759,
+      "sha256": "9c9eb6541cea849645a0247daa957ed7d9d99cd8e7ecf8183d98fb4281bb790f"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 777,
+      "sha256": "7cf8430df19c9e1b793fcb699c53e6844e32e85b6abd554afcd5e38fc281933b"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 694,
+      "sha256": "278e1b353cc1f4aeff7d47df520314fd809c022ab77a935ecfd5def848a9451e"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195215,
+      "sha256": "bcc5ab27a0a1605d4bb49fd3f040060bc24534ad5bbbea1612283ba9880df6d3"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "002a28e48e3f6eda15436dc051e9bfb705490d007744e8f724ce9598e5278946"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 31707,
+      "sha256": "062d38ae1dc341cfb7e38a82de2d484d264d33670bf87ea40b875da22aaa1099"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 779,
+      "sha256": "208eaa8f3fa8e475e3f8548dd3ad626f89bded226d89ab6fc0647a0913e54340"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 695,
+      "sha256": "c62472fdba50fd8b837688d6d20f67d907b28ca7afc79818ae594dace6e62e5c"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 38275,
+      "sha256": "1673fd0389c1a71b8ccb7fad9c9a696866525348052d1f7551841baf413ea834"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 773,
+      "sha256": "822c3bdf3f4d396b99d7a352a7b53c270a3c6b5425ff782cbaada1a21ef40c99"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 692,
+      "sha256": "8dbb86a9ed1115159e2b0835562ac8921298a9cc18397033bd9f62f7d89fa98d"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-fixed-asan-a2/native/Branch_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 195115,
+      "sha256": "b06c0f4ac6c9ba89dc9ca784d14045488c7b8c61df6ab4cfa36214ebbee324f2"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "8b9a5cff7adc9f6444bc8edadd291fd8367f8badf404a0e57208083f401caf8c"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 409445,
+      "sha256": "f85ffae46318578fb86f161f7777202a721eb7bf90cfcb9ddd5e18e3e273b9ca"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 784,
+      "sha256": "5d68224dd061a12cc75ff97dc268e7297f0e07c7536f7170c7b8b176ea0cd608"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 699,
+      "sha256": "18f5c3ddf0d4660e01af3ca195d9e1926d9b903de780461f18dbb3c99ac45b42"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 483414,
+      "sha256": "139c5c1243190433c251f437956ac73f60ee1aca88966fe08b46fa301f0de287"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 778,
+      "sha256": "06932c7e0cb355a3865be9d6c54004eff1cc608727c4c6178e45dea864cdfd5b"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 696,
+      "sha256": "34ed9e35d0ebbdf774bf7d465aa46f156eace2f423b9d0f3e34ea471a7fc5fc0"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_20000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260160,
+      "sha256": "c24acfb1f97fe07ed3c14321c471de8cb5a54f10fd2360d7ea4dfa973b92128c"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_construction.json": {
+      "bytes": 134,
+      "sha256": "23337ef7b6e0170d08ef295923921a164e959ba9046aac207283b571f427784b"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_1.csv": {
+      "bytes": 40860,
+      "sha256": "bfcd74832bae008870e8f49df3f2a457d08fe89fca281f17be8f27aafbda611b"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_1_observation.json": {
+      "bytes": 780,
+      "sha256": "7c62338cd8bf152ca3f919b309286b18519787027204a6559586edfea94240f2"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_1_spec.json": {
+      "bytes": 697,
+      "sha256": "4c6fa11e374241c39d257a26bbb9ccfc9b974ad9a6a85b3733d4b17fa88509d1"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_2.csv": {
+      "bytes": 48245,
+      "sha256": "528d7f0edd7f2b671ab7fa75602a2da948779ece9c87d359760869a4436f886a"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_2_observation.json": {
+      "bytes": 774,
+      "sha256": "adf5f9734a986e8da86b8d8508aae7baa6daaabd7dc7a60e8ea71c4762ac0aa5"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_presentation_2_spec.json": {
+      "bytes": 694,
+      "sha256": "66851bc2f66dd61eb1086230f7664a1363a0640f02d1790c8393259c24cbec0c"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_startup_after.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-fixed-asan-a2/native/Classic_2000_N1_posttune_transient_startup_before.json": {
+      "bytes": 260022,
+      "sha256": "8ed052bdd2aa8e37160fe2c07659d27c48c8aa24d424fa041fdd8b4778c60b59"
+    },
+    "s08-transient-fixed-asan-a2/primary-audit.json": {
+      "bytes": 3774,
+      "sha256": "bf10e5b3eaa5fef2171bda020ef42861e33a213d9d5c1efde301c57b2f7b7368"
+    },
+    "s08-transient-fixed-asan-a2/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "s08-transient-fixed-asan-a2/python-evidence.log": {
+      "bytes": 105,
+      "sha256": "d2560999038a5a55e5555b1ab5b679a96f92f9f3092671fcd2dc197aa9996f22"
+    },
+    "s08-transient-fixed-asan-a2/runtime.json": {
+      "bytes": 16106,
+      "sha256": "237e4abbf88b8796e10aceb5fad4ee567cd6b5a4ccabdcacb01a79ab4bf7796f"
+    }
+  },
+  "schema_version": 1,
+  "source_closure": {
+    "Bin": {
+      "head": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+      "recorded_gitlink": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "head": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
+      "recorded_gitlink": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "head": "1812624ff75c60f03ad57c10b379d3e3848590bc",
+      "recorded_gitlink": "1812624ff75c60f03ad57c10b379d3e3848590bc",
+      "status": ""
+    },
+    "root": {
+      "head": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
+      "status": ""
+    }
+  },
+  "stages": [
+    {
+      "attempt": "s08-transient-baseline-asan-a1",
+      "native": null,
+      "process_exit_status": 2
+    },
+    {
+      "attempt": "s08-transient-baseline-asan-a2",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "4",
+        "name": "AllTests",
+        "tests": "4",
+        "time": "194.66",
+        "timestamp": "2026-10-28T23:33:09.885"
+      },
+      "process_exit_status": 1
+    },
+    {
+      "attempt": "s08-transient-baseline-normal-a3",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "4",
+        "name": "AllTests",
+        "tests": "4",
+        "time": "27.602",
+        "timestamp": "2026-10-28T23:50:56.677"
+      },
+      "process_exit_status": 1
+    },
+    {
+      "attempt": "s08-transient-fixed-asan-a1",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "2",
+        "name": "AllTests",
+        "tests": "4",
+        "time": "199.656",
+        "timestamp": "2026-10-28T23:39:59.772"
+      },
+      "process_exit_status": 1
+    },
+    {
+      "attempt": "s08-transient-fixed-asan-a2",
+      "native": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "4",
+        "time": "206.361",
+        "timestamp": "2026-10-28T23:47:47.972"
+      },
+      "process_exit_status": 0
+    },
+    {
+      "attempt": "s08-transient-data-a3",
+      "native": null,
+      "process_exit_status": 0
+    }
+  ],
+  "supplemental_python_tests": 8,
+  "whole_posttune_transaction_complete": false
+}
