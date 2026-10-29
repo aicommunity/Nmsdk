@@ -36,6 +36,16 @@ scalar SetPointer. Восходящий фронт/restart, initial-false и о�
 
 ## Предыдущая принятая отправная точка develop
 
+Подготовлен к merge строгий scorer `recognition-evaluation`: target определяется
+по метке и hash паттерна; обязательны полное множество trials и согласованные
+primary observations. Ранний target spike и поздний foil spike не скрываются;
+reset policies оцениваются отдельно. На обоих workers по 25/25 адресных и
+30/30 совместных Python/CLI тестов без пропусков. Все контрольные суммы шести
+отчётных пакетов проверены. Реальные контрольные данные дают отрицательные
+response criteria; global scientific verdict остаётся null. Это не исторические
+8-pattern опыты, не калибровка и не завершение этапа 3.
+[Постановка, результаты и ограничения](FrozenRecognitionMetrics.ru.md).
+
 | Репозиторий | Опубликованный merge SHA |
 |---|---|
 | Root | `b62127538694a3442771598420fd78fa7e405c8b` |
