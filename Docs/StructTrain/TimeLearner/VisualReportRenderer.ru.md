@@ -1,0 +1,81 @@
+# Первый production renderer native recognition отчётов
+
+Ветка stage09/visual-test-reports. Это реализация части VisualTestReports.ru.md,
+а не завершение этапов 9/11 или всей обязательной визуальной матрицы.
+
+## Реализованный путь
+
+`python3 -m Scripts.StructTrain.TimeLearner report evaluation.json.gz
+--model model.json.gz --output NEW_DIRECTORY` принимает schema-1 evaluation
+spec и полный recognition package. Новый каталог не заменяет существующий.
+До рендера применяется production scorer: ожидаемые IDs, labels, модель,
+timestamps и полнота анализируются тем же кодом, что в analyze.
+
+Для каждой ожидаемой trial/soma пары строятся отдельные PNG 1920×960, SVG
+и PDF: overview всего заявленного окна и последовательные zoom-панели максимум
+по 100 native ticks. При данной ширине осей один tick на zoom занимает минимум
+14 пикселей. Полная выборка сохраняется, decimation/interpolation отсутствуют.
+Разрыв более 1.5 dt разделяет линии; censored хвост обозначается серой областью.
+
+Синяя линия — фактический SomaN.SumPotential; оранжевая ступенчатая линия —
+фактические samples общего generator input на собственной Y-шкале. Фиолетовые
+вертикальные маркеры — зарегистрированные LT spike events. Порог не рисуется
+на soma axis без доказанного соответствия сигналов. Общий вход не превращается
+в N независимых каналов. Никакой вывод о сходимости не извлекается из рисунка.
+
+Schema 1 recorder не содержит физического unit descriptor. Адаптер сверяет
+пути $.Soma1..N с реальным сериализованным графом; Branch имеет одну сому.
+Значения подписываются model units / SI unverified. Автоматическое переименование
+в mV не производится. Требование проверки единиц для каждого физического
+класса остаётся открытым.
+
+Пределы Y общие для всех trials одного канала модели и включают отрицательные
+значения и extrema. В manifest сохранены точные пределы и временные окна.
+Переносимый index.html содержит ссылки на полный PNG/SVG/PDF и primary данные;
+внешние CDN/server не нужны. В primary сохраняются все наблюдения, model и spec,
+причём spec адресует соседние файлы. analysis.json воспроизводится из них.
+Контрольные суммы всех файлов находятся в SHA256SUMS.json.
+
+## Проверки и найденные ошибки
+
+Первый scale gate d9ecf261a выявил пустой последний zoom при округлении
+абсолютного времени 192 s; исправление 12d48355e не изменяет первичные timestamps.
+При просмотре PNG A2 обнаружено наложение второй строки legend на рамку;
+исправление a7e37f6e9 резервирует дополнительное место над axes.
+
+На source 12d48355e оба workers построили четыре контрольных профиля:
+Classic N0 / Branch N1, high/low storage threshold, 16 trials и все 24
+trial/soma пары. Source native observations — 127806a34, новых моделей не
+обучали. Шесть scale/primary-roundtrip/coverage/hash/raster/vector checks source
+41e24b3f7 прошли на каждом worker без skips/errors. Отдельный реальный report CLI
+на Branch spiking profile завершился с status 0 на обоих workers.
+
+A2 отчёты: Elder 2c46f04f6cd31ca1b46b0bfa004307c27214ccd3 (338 hashes),
+M40 be7b8d5d784a482cccec14ae2db4e3510a194ee2 (343 hashes). Все локальные hashes
+проверены; A2 имеет описанное наложение legend и не является финальной
+визуальной приёмкой. A3 перестраивает все четыре профиля через настоящий CLI
+с исправленным layout; выполнение и приёмка пока не завершены.
+
+M40 использует отдельный /media/user/Data/TimeLearnerRefactor/plot-venv-a1,
+не системный Python. Matplotlib 3.9.4; фактический pip freeze и bootstrap/install
+logs сохранены в A2. Elder использует доступный серверный matplotlib; версия
+записана в каждом manifest. Полный воспроизводимый dependency lock/runtime
+для общей инфраструктуры ещё требуется.
+
+## Открытые требования
+
+- Continuous panorama с фактическими ITI, reset events и незамаскированными gaps.
+- Отдельные detail Y views, когда общий диапазон скрывает слабый ответ.
+- Полные descriptors канала/единиц/routing из producer и проверка всех классов.
+- Diagnostic coverage отсутствующего trial/канала, NaN и неподдержанной схемы
+  с явной картой отсутствующих данных; текущий strict loader может отвергнуть
+  такие данные до построения отчёта, что не равно готовому partial report.
+- Реальные N>4, 20 kHz, все N0/N1/topology/physics режимы, отрицательный baseline,
+  late FP, длинный tail, order/ITI и continuous/reset matrix.
+- Просмотр финальных PNG и vector/PDF при целевом масштабе и фиксация визуальной
+  приёмки. Существование файлов и шесть автоматических checks её не заменяют.
+- Общий runner/report completeness/publisher gate и исторические adapters.
+
+Поэтому manifest имеет status=diagnostic, visual_acceptance_complete=false
+и evaluation_verdict=null. Исполнение renderer не доказывает новый научный
+результат и не пересматривает августовские 4/8–6/8.
