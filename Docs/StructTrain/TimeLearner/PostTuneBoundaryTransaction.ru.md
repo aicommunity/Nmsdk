@@ -153,3 +153,7 @@ packets и первичные CSV через реальные onPrepared/onSampl
 После отката дополнительно проверяется material Neuron.TrainingPattern.
 Новая версия остаётся unvalidated до серверной сборки; сохранять/публиковать
 Source SHA предыдущих A1/A2 как якобы её результаты запрещено.
+
+Текущий unvalidated owner-policy source для следующей сборки:
+root `912ef71b36fbc040c6177a82070a796ee5eb99de`, PulseLib
+`c7266dcb93ec51a765125bc30647cf1b59129c91` (девять tests).
