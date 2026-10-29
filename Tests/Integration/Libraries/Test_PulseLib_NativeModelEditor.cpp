@@ -1885,6 +1885,103 @@ TEST(NativeRecognitionState,StoppedPackageCannotBecomeCompletedRecognition)
     EXPECT_EQ(reason,"recognition_requires_completed_solo");
 }
 
+class ConnectedTrainingFlag : public UNet {
+public:
+    UProperty<bool,ConnectedTrainingFlag,ptOutput | ptPubState> Value;
+    ConnectedTrainingFlag():Value("Value",this){}
+    ConnectedTrainingFlag* New(void) override {return new ConnectedTrainingFlag;}
+};
+enum class ConnectedStopPoint { Early,Partial,Search,AfterSample,KeepTrue };
+template<class Learner> void ConnectedStop(ConnectedStopPoint point,int calculateMode)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    EditingRig<Learner> rig(2000,1,"connected_stop_"+std::to_string(int(point))+"_mode"+std::to_string(calculateMode),false,2,true);
+    rig.learner->CalculateMode=calculateMode;
+    const auto configuration=Configuration(rig);
+    rig.learner->ControllerVersion=2;
+    rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact).toStdString();
+    rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty());
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    UEPtr<ConnectedTrainingFlag> flag(new ConnectedTrainingFlag);
+    flag->SetStorage(core.storage);flag->SetEnvironment(core.environment);flag->Default();
+    flag->Name="ExternalTrainingFlag";flag->Activity=true;flag->SetGlobalTimeStep(rig.frequency);
+    UEPtr<UContainer> node=flag;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;
+    ASSERT_TRUE(rig.learner->IsNeedToTrain.SetPointer(0,&flag->Value));
+    ASSERT_TRUE(rig.learner->IsNeedToTrain.IsConnected());ASSERT_TRUE(rig.learner->IsNeedToTrain.GetData());
+    auto plan=TrainingPlan(rig);bool requested=false;std::size_t observations=0;
+    std::vector<InputParameters> parametersAtStop;
+    std::ostringstream trace;
+    plan.probe.onPrepared=[&](const auto&,const auto&) {
+        trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+    };
+    plan.probe.onSample=[&](const NativeProbeSample& frame) {
+        trace<<frame.time<<','<<frame.stimulus;for(double value:frame.potentials)trace<<','<<value;trace<<'\n';
+        if(point==ConnectedStopPoint::AfterSample && !requested)
+        {parametersAtStop=rig.learner->ReadNativeParameters();flag->Value=false;requested=true;}
+    };
+    plan.observationSink=[&](const NativeProbeResult& packet) {
+        const auto stem=rig.name+"_stop_trial_"+std::to_string(++observations);
+        Artifact(stem+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
+        Artifact(stem+".csv",QByteArray::fromStdString(trace.str()));
+    };
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;;++ticks)
+    {
+        ASSERT_LT(ticks,40000u);const auto& service=rig.learner->NativeTrainingController();
+        if(point==ConnectedStopPoint::KeepTrue && ticks==20)break;
+        if((point==ConnectedStopPoint::Early && ticks==10) ||
+           (point==ConnectedStopPoint::Partial && service.ReferencePackets().size()==1) ||
+           (point==ConnectedStopPoint::Search && service.Search() && service.Search()->AppliedEdits()>0))
+        {parametersAtStop=rig.learner->ReadNativeParameters();flag->Value=false;requested=true;}
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+        if(requested)break; // The stop must be observed in this native tick.
+        ASSERT_NE(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    }
+    const auto& service=rig.learner->NativeTrainingController();
+    const bool keep=point==ConnectedStopPoint::KeepTrue;
+    Artifact(rig.name+"_connected_stop.json",QJsonDocument(QJsonObject{
+        {"kind","native_connected_training_stop"},{"schema_version",1},{"calculate_mode",calculateMode},
+        {"controller_version",rig.learner->ControllerVersion.GetData()},
+        {"stop_point",int(point)},{"connected",rig.learner->IsNeedToTrain.IsConnected()},
+        {"source_value",flag->Value.GetData()},{"learner_need",rig.learner->IsNeedToTrain.GetData()},
+        {"stop_requested",requested},{"state",NativeTrainingStateName(service.State())},
+        {"outcome",TrainingStatusName(service.Outcome())},{"reason",QString::fromStdString(service.Reason())},
+        {"certificate_present",bool(service.Certificate())},{"reference_packets",double(service.ReferencePackets().size())},
+        {"observed_packets",double(service.ObservedPackets().size())},{"probe_state",NativeProbeStatusName(rig.learner->NativeProbeState())},
+        {"parameters_preserved",keep || parametersAtStop==rig.learner->ReadNativeParameters()},
+        {"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    EXPECT_EQ(flag->Value.GetData(),keep);EXPECT_EQ(rig.learner->IsNeedToTrain.GetData(),keep);
+    EXPECT_TRUE(rig.learner->IsNeedToTrain.IsConnected());EXPECT_FALSE(service.Certificate());
+    if(keep)
+    {EXPECT_EQ(service.State(),NativeTrainingState::CapturingReferences);EXPECT_EQ(service.Outcome(),TrainingStatus::Searching);}
+    else
+    {
+        ASSERT_EQ(service.State(),NativeTrainingState::Finished);
+        EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_EQ(service.Reason(),"external_stop");
+        EXPECT_EQ(rig.learner->ReadNativeParameters(),parametersAtStop);
+        EXPECT_NE(rig.learner->NativeProbeState(),NativeProbeStatus::Queued);EXPECT_NE(rig.learner->NativeProbeState(),NativeProbeStatus::Running);
+        const auto state=rig.learner->ExportNativeLearnedState("native-connected-stop-fixture-v1");
+        EXPECT_EQ(state["kind"].toString(),"timelearner_stopped_state");
+        Artifact(rig.name+"_stopped_state.json",QJsonDocument(state).toJson());
+    }
+    rig.learner->IsNeedToTrain.DetachFrom();
+    if(keep)rig.learner->IsNeedToTrain=false; // Local cleanup after the positive-control observation.
+}
+#define CONNECTED_STOP_TESTS(TOPOLOGY,TYPE,MODE) \
+TEST(NativeConnectedStop,TOPOLOGY##MODE##Early){ConnectedStop<TYPE>(ConnectedStopPoint::Early,MODE);} \
+TEST(NativeConnectedStop,TOPOLOGY##MODE##Partial){ConnectedStop<TYPE>(ConnectedStopPoint::Partial,MODE);} \
+TEST(NativeConnectedStop,TOPOLOGY##MODE##Search){ConnectedStop<TYPE>(ConnectedStopPoint::Search,MODE);} \
+TEST(NativeConnectedStop,TOPOLOGY##MODE##AfterSample){ConnectedStop<TYPE>(ConnectedStopPoint::AfterSample,MODE);} \
+TEST(NativeConnectedStop,TOPOLOGY##MODE##KeepTrue){ConnectedStop<TYPE>(ConnectedStopPoint::KeepTrue,MODE);}
+CONNECTED_STOP_TESTS(Classic,NNeuronTimeLearner,0)
+CONNECTED_STOP_TESTS(Classic,NNeuronTimeLearner,1)
+CONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,0)
+CONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,1)
+#undef CONNECTED_STOP_TESTS
+
 enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial };
 template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false)
 {
