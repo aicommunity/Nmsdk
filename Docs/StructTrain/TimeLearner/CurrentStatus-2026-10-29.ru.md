@@ -288,3 +288,17 @@ ControllerVersion=2 пока не рекомендуется для всей э�
 C-trim/PostTune Off; остальные режимы и полный исходный план сохраняются.
 На момент этого checkpoint все owner/editor native и Python jobs завершены;
 новых серверных заданий здесь не заявлено.
+
+## Последующая рабочая ветка frozen recognition owner
+
+Owner/BOM зависимости приняты: PulseLib develop 4e6be0cb, Rdk c903b9bb,
+root merge d7ee23f4. Свежий checkout M40 подтверждает семь точных gitlinks
+и чистое дерево, пакет 0cf41c15: 4 stored / 2 raw hashes проверены.
+Штатный remote SSH/HTTPS transport использован без переписывания истории.
+
+В новой ветке stage08/frozen-recognition-owner root6ff1d43a / PulseLib0b9d0ff
+реализован явный импорт recognition state в оба learner и frozen native hooks.
+Запущены восемь owner controls и четыре cold regressions на обоих workers;
+новая реализация ещё не принята. Дополнительные два configured V2 controls
+пока только в source. Подробности: FrozenRecognitionOwner.ru.md. Полного
+spike evaluation/calibration runner этот подэтап пока не даёт.

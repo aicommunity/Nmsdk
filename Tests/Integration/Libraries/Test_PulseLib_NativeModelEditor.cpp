@@ -1650,6 +1650,8 @@ TEST(NativeRecognitionOwner,BranchN1Scale){LearnedBoundary<NNeuronTimeLearnerBra
 TEST(NativeRecognitionOwner,BranchN1Clip){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::OwnedClipped);}
 TEST(NativeRecognitionOwner,BranchSingleInput){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,1,false,RecognitionCase::OwnedScaled);}
 TEST(NativeRecognitionOwner,BranchSixShared){LearnedBoundary<NNeuronTimeLearnerBranch>(0,1.,2000,6,false,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,ClassicConfigured){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedIdentity);}
+TEST(NativeRecognitionOwner,BranchConfigured){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedIdentity);}
 
 TEST(NativeRecognitionState,ClassicN0Identity){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::Identity);}
 TEST(NativeRecognitionState,BranchN0Identity){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::Identity);}
