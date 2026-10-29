@@ -53,10 +53,7 @@ def audit_owner_recognition(package, source_case, spec, observation, trace, impo
                 "recognition_owner_certificate_guard_missing")
         # Every mapped value is present in the original owner observation.
         # In particular, no frozen hash is inferred from the expected package.
-        paired = {key: observation[key] for key in ("model_revision", "trial_id", "complete",
-                  "sample_count", "last_sample_time", "emitted", "soma_variation", "maximum_soma")}
-        paired.update(kind="native_recognition_roundtrip_observation", schema_version=1, frozen_after=observation["frozen_after_owner"],
-                      frozen_after_b=observation["frozen_after_reference"], scientific_verdict=observation["evaluation_verdict"])
+        paired = paired_owner_observation(observation)
         result = audit_recognition_state(package, source_case, spec, paired, trace)
         return {"schema_version": 1, "owner_readback_consistent": True,
                 "conversion": result, "evaluation_verdict": None}
@@ -64,6 +61,16 @@ def audit_owner_recognition(package, source_case, spec, observation, trace, impo
         raise
     except (KeyError, TypeError, ValueError, IndexError, OverflowError) as error:
         raise EvidenceError("malformed_recognition_owner_evidence:" + str(error)) from error
+
+
+def paired_owner_observation(observation):
+    """Map measured owner fields to the common paired-transport representation."""
+    paired = {key: observation[key] for key in ("model_revision", "trial_id", "complete",
+              "sample_count", "last_sample_time", "emitted", "soma_variation", "maximum_soma")}
+    paired.update(kind="native_recognition_roundtrip_observation", schema_version=1,
+                  frozen_after=observation["frozen_after_owner"], frozen_after_b=observation["frozen_after_reference"],
+                  scientific_verdict=observation["evaluation_verdict"])
+    return paired
 
 
 def load_case(path: Path):
