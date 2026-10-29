@@ -4,6 +4,15 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
+Последний принятый develop: root `f00989cb1fd98f126e37784ebb9b9f2d9e34b8ae`,
+PulseLib `9902545414b7381d328024caf28994d53f97f090`. Объединён проверенный
+frozen-owner import/hold и перенос в новый Test learner/fresh process; область
+проверок не расширяется самим merge. Следующий подэтап `stage03/spike-history-reset`
+исправляет фиктивные timestamps после Reset: baseline воспроизведён на обоих
+workers, Elder fixed 12/12 gtest pass; terminal process status и M40 ещё
+не подтверждены после обрыва SSH. Подэтап не принят и не merged.
+[Дефект, проверки и действия после восстановления связи](SpikeHistoryReset.ru.md).
+
 ## Предыдущая принятая отправная точка develop
 
 | Репозиторий | Опубликованный merge SHA |
