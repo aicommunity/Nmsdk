@@ -10,7 +10,7 @@
     "network_configuration_changed": false,
     "active_native_jobs_claimed": false,
     "a2_native_rerun_required": false,
-    "next_gate": "finish M40 owner-policy ASan and publish; integrated normal regression running on Elder",
+    "next_gate": "finish integrated normal regressions and independent audits on both workers; no active network blocker",
     "connection_recovered": true,
     "historical_network_failure": true
   },
@@ -115,8 +115,8 @@
     "pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
     "server_build": "passed both workers",
     "native_cases_planned": 9,
-    "subsequent_lifecycle_callback_guard": "implemented; no server build yet",
-    "reason": "connection restored; Elder terminal pass, M40 ASan live",
+    "subsequent_lifecycle_callback_guard": "tested in native source c7266dcb on normal Elder and ASan M40",
+    "reason": "targeted normal Elder and ASan M40 completed and published; integrated normal regression pending",
     "latest_pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
     "subsequent_provenance_guard": "full reference/final/observed packets; negative control preserves certificate/status/epoch while changing reference trial IDs",
     "test_protocol": "2 kHz external CalculateMode=1 release; 20 kHz CalculateMode=0; explicit fixture sync tolerance 1 s; raw training proof captured",
@@ -130,20 +130,24 @@
         "primary_training_packets": 42,
         "sample_pairs": 8646,
         "report_commit": "640a39df9f5a83bff84a06294c1c5d10ee6a4913",
-        "report_local_hash_check": "324 stored / 322 raw verified"
+        "report_local_hash_check": "324 stored / 322 raw verified",
+        "graph_csv_equal_previous_a2": 20
       },
       "10.245.1.17": {
-        "session_id": 53674,
-        "observed_native_pid": 1038241,
-        "state": "running ASan",
-        "independent_audit_sessions": [
-          42053,
-          77347
-        ]
+        "native_passed": 23,
+        "native_exit_status": 0,
+        "native_terminal": true,
+        "python_tests_each_attempt": 4,
+        "primary_training_packets": 42,
+        "sample_pairs": 8646,
+        "graph_csv_equal_previous_a2": 20,
+        "report_commit": "ec944b447468c2d20ad308b069ef6136bc41aabc",
+        "report_local_hash_check": "324 stored / 322 raw verified"
       }
     },
     "python_a1": "664ced2346171cd6b50f3f79af217dde83dde86f",
-    "python_a2": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293"
+    "python_a2": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
+    "documented_pulse": "8683bbff4f587946239d3cb4ebde37869493cb93"
   },
   "unvalidated_condition_identities": {
     "scope": "ConditionSpec/content artifacts, matrix/analysis/attempt IDs; runtime content identity schema 2",
@@ -169,8 +173,26 @@
     "native_root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
     "session_id": 49214,
     "attempt": "s08-integrated-normal-a1",
-    "state": "started; terminal result not yet observed",
+    "state": "both full native processes confirmed running; terminal results pending",
     "scope": "three maintained Rdk CTest targets plus full PulseLib parent, separate XML",
-    "runtime": "/home/user/timelearner-refactor/runtime-s08-integrated-normal-a1"
+    "runtime": "/home/user/timelearner-refactor/runtime-s08-integrated-normal-a1",
+    "workers": {
+      "10.245.1.11": {
+        "native_session_id": 49214,
+        "observed_native_pid": 3623663,
+        "python_waiter_session_id": 99128,
+        "cache": "/home/user/timelearner-refactor/build-order-fixed-normal-a1"
+      },
+      "10.245.1.17": {
+        "native_session_id": 8546,
+        "observed_native_pid": 1062506,
+        "python_waiter_session_id": 9628,
+        "cache": "/home/user/timelearner-refactor/build-s08-integrated-normal-a1",
+        "source": "/home/user/timelearner-refactor/source-s08-integrated-normal-a1"
+      }
+    },
+    "python_root": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
+    "python_audit_attempt": "s08-integrated-data-a1",
+    "python_scope": "13 modules; all required evidence directories explicit; fresh-process cross-worker replay remains separate"
   }
 }

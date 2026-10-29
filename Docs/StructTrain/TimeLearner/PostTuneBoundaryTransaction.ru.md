@@ -174,6 +174,18 @@ Elder normal A1 завершён: 23/23 native cases, включая девят�
 training packets и 8646 owner waveform sample pairs. Это проверка первичных
 probes, привязки final trials к source certificate и точного waveform replay;
 полный training summary с повторным выводом всех условий сходимости не заявлен.
-M40 ASan A1 и его независимый анализ пока выполняются. Публикация owner-policy
-ещё ожидается. Новая Python-only проверка количества samples не требует
-повторного native прогона и будет иметь отдельный source/audit attempt.
+M40 ASan A1 также завершён: 23/23 native. Independent A1 и A2 — по 4/4 tests
+на обоих workers; Python A2 `54b3d56073ebbe9e2cc3ef9edacb5085bf817293`
+добавляет сверку sample-count summary с raw CSV, без повторного native расчёта.
+У каждого worker проверены 42 actual training packets / 8646 waveform pairs;
+20 graph CSV совпадают с предыдущим A2.
+
+Опубликованы [Elder owner artifacts](../../../Reports/StructTrain/TimeLearner/s08-owner-elder1/README.md)
+`640a39df9f5a83bff84a06294c1c5d10ee6a4913` и
+[M40 owner artifacts](../../../Reports/StructTrain/TimeLearner/s08-owner-m40/README.md)
+`ec944b447468c2d20ad308b069ef6136bc41aabc`. Локально сверены по 324 stored /
+322 raw hashes. Это адресная приёмка boundary API, не whole controller transaction.
+PulseLib `8683bbff4f587946239d3cb4ebde37869493cb93` меняет только документацию
+после native source c7266dcb. Full normal regressions root 912ef71b на обоих
+workers и последующий independent audit ещё выполняются; develop merge ожидает
+их результатов и сквозной проверки изменённого объёма.
