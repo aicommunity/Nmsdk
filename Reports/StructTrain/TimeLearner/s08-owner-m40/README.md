@@ -1,0 +1,11 @@
+# Native PostTune owner-policy boundary
+
+Native root 912ef71b36fbc040c6177a82070a796ee5eb99de / PulseLib c7266dcb93ec51a765125bc30647cf1b59129c91: 23 native tests pass, no skips. Nine owner-policy controls comprise six Classic/Branch N0/N1 at 2 kHz and N1 at 20 kHz, a connected external scalar, retarget preservation and changed reference provenance hidden behind an equal certificate/state/epoch. Fourteen graph/lifecycle regressions also pass. M40 uses ASan detect_leaks=0. The source certificate is real and remains scoped to LearnedSolo.
+
+The six positive controls complete actual native training with an explicitly widened fixture sync tolerance 1 second, then alter individual parameters and owner threshold policy, restore, and replay native waveforms. The source training proof is captured from actual onPrepared/onSample/observationSink. Independent Python audit validates all 42 training packets against their primary CSV, binds certificate final trial IDs and model identities, and checks all 8646 before/after waveform pairs byte-exact. It does not re-derive a complete training certificate from an exported training summary and does not prove default 0.02-second convergence.
+
+Python A1 source 664ced2346171cd6b50f3f79af217dde83dde86f passed four tests. Python-only A2 source 54b3d56073ebbe9e2cc3ef9edacb5085bf817293 strengthens the sample-count readback and passes four tests on the same immutable native data; no numerical rerun. Twenty graph-regression CSV files also equal the earlier A2 graph-boundary run on this worker. Changed reference IDs are explicitly a corruption/control operation on actual recorded packets, not fresh physical observations.
+
+All primary packets, raw waveforms, construction readbacks, model snapshots, runtime/build provenance, XML and both independent audit attempts are compressed losslessly with stored/raw SHA256. Executable, app.ini, compiler and resolved library hashes were rechecked before publication; this is not lifetime loaded-plugin closure.
+
+The owner boundary API is still not wired into a complete production PostTune candidate controller. Candidate selection/commit, calibration with actual selected threshold, recognition certificate and independent frozen evaluation remain open. The nine controls do not establish those larger requirements or scientific selectivity.
