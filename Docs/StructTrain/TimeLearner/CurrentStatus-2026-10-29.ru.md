@@ -217,6 +217,24 @@ provenance, старые manifests не пересчитываются. На о�
 
 ## Незакрытый объём исходных этапов
 
+**Lossless config adapter**: в отдельной ветке stage09/lossless-config-adapter
+добавлены адресные text edits для настоящего Rdk dialect, включая `<00>`.
+По 7 Python tests на workers, 1599 tracked StructTrain Project.ini byte-exact;
+M40 ASan — native readback 4 файлов / 11 values и четыре выбранные Rdk CTest
+groups. Воспроизведён и исправлен общий BOM+declaration defect TL-035 в Rdk
+8ebf64dd; abc21b65 отличается только документацией. Native Elder/wide проверка,
+effective component preflight и production prepare/runner остаются открытыми.
+[Артефакты и неудачные попытки](ConfigDocument.ru.md).
+
+**M40 storage**: по уточнению пользователя сохраняются уникальные трассы.
+10 completed runtime / 5,41 GB перенесены на Data с per-file hash checks и
+сохранением старых путей. Устранены 191 byte-identical immutable Git pack copies,
+освобождено 18,39 GB; HEAD objects читаются в 75 затронутых Git directories.
+Maintenance journal опубликован, 30 stored / 28 raw hashes сверены. Рабочие
+full gates не перемещались; low-disk событие требует независимой проверки
+полноты их первичных данных. Production resource scheduler этим не реализован.
+[Журнал и размещение](M40Storage-2026-10-29.ru.md).
+
 | Этап | Что ещё требуется |
 |---|---|
 | 1 | Полная история с августа, все audit waves и evidence levels; 211 исходных + 6 новых свойств code-reviewed, но не все runtime-validated; классификация всех старых инструментов |
