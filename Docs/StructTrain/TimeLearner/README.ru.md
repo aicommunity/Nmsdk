@@ -8,13 +8,13 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [План и условия приёмки](RefactoringPlan.ru.md).
 - [Приёмка 28.10: full post-fix gate, native completed state и child merges](PooledFullAcceptance.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
-- [Актуальный статус всех этапов на 28.10: принятый develop, scoped проверки и оставшаяся работа](CurrentStatus-2026-10-28.ru.md).
+- [Актуальный статус всех этапов на 29.10: принятый develop, scoped проверки и оставшаяся работа](CurrentStatus-2026-10-29.ru.md).
 - [Историческая сводка 27.10 и последующие дополнения](CurrentStatus-2026-10-27.ru.md).
 - [Предшествующий аудит 27.10 и история дополнений](PlanCompletionAudit-2026-10-27.ru.md).
 - [Исходная сверка 25.10 и журнал последующих дополнений](PlanCompletionAudit-2026-10-25.ru.md).
 - [Решения и обязательные контракты](Decisions.ru.md).
 - [История и доказательства](Evidence.ru.md).
-- [Машинный inventory исходников](source_inventory.json).
+- [Первоначальный Git inventory (исторический снимок)](source_inventory.json).
 - [Контракт наблюдений и оценки](ObservationContract.ru.md).
 - [Readback фактического графа модели](ModelInspection.ru.md).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
@@ -66,3 +66,13 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 запускатели удаляются после замены production-пути; wrappers на старых местах
 не сохраняются. Для восстановления истории используются repository, commit и blob
 из migration manifest.
+
+- [Native Solo→Recognition: storage/import, conversion и границы проверки](NativeRecognitionState.ru.md).
+
+- [PostTune: native graph reconstruction, actual parallel transport и открытая candidate transaction](PostTuneNativeRebuild.ru.md).
+
+- [PostTune: неизменяемая цель и actual transient stimulus](PostTuneTransientStimulus.ru.md).
+
+- [PostTune: рабочая реализация отката графа и оставшаяся транзакция](PostTuneBoundaryTransaction.ru.md).
+
+- [Миграция скриптов: удаления и точные Git-источники](ScriptMigration.ru.md).
