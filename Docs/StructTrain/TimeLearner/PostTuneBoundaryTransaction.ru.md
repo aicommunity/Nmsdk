@@ -126,3 +126,30 @@ SHA старых manifests и не объявлять новую owner-policy в
 
 Owner-policy версия с guard перед typed callbacks: PulseLib
 `d186b5746d1bfbec67874637f4f68f50b9387405`; также пока без серверной сборки.
+
+## Дополнительная сверка до сборки owner-policy версии
+
+Controller identity расширена полными reference/final/observed packets.
+Одного совпадения status/attempt/epoch и EncodeTrainingCertificate недостаточно:
+последний не содержит исходные reference trial IDs. Добавлен девятый negative
+control: production RestoreBoundary дважды проверяет настоящие наблюдения;
+во втором вызове намеренно изменяется только provenance reference IDs.
+Числа, certificate, reason, attempt и epoch остаются прежними. Старый owner
+boundary обязан отклонить возврат к предыдущему набору доказательств.
+Изменённые ID являются corruption control, не новыми наблюдёнными trials.
+Runtime результат этой проверки пока отсутствует.
+
+Исправлена постановка положительных tests: EditingRig использует CalculateMode=1,
+поэтому завершение NativeTrainingService не снимает внешний IsNeedToTrain.
+Теперь при 2 кГц flag явно снимается через штатный setter после проверенного
+Exact, а при 20 кГц тестируется автоматический CalculateMode=0. Это соблюдение
+общего контракта, а не изменение алгоритма или автоматического завершения.
+Fixture использует объявленный SyncTolerance=1 s, чтобы изолировать rollback
+от научного поиска синхронности; амплитудный критерий и native reference/final
+пробы настоящие. Такая fixture не проверяет сходимость при default 0.02 s.
+
+Для проверки происхождения source certificate сохраняются все native training
+packets и первичные CSV через реальные onPrepared/onSample/observationSink.
+После отката дополнительно проверяется material Neuron.TrainingPattern.
+Новая версия остаётся unvalidated до серверной сборки; сохранять/публиковать
+Source SHA предыдущих A1/A2 как якобы её результаты запрещено.

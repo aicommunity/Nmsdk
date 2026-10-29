@@ -88,9 +88,11 @@
     "root": "2a9357afa73e485d3461683c4ee7e597bb7fc176",
     "pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0",
     "server_build": "not_started",
-    "native_cases_planned": 8,
+    "native_cases_planned": 9,
     "subsequent_lifecycle_callback_guard": "implemented; no server build yet",
     "reason": "jump host 10.245.1.12 TCP/SSH timeout; no native test rerun needed for completed A2",
-    "latest_pulse": "d186b5746d1bfbec67874637f4f68f50b9387405"
+    "latest_pulse": "d186b5746d1bfbec67874637f4f68f50b9387405",
+    "subsequent_provenance_guard": "full reference/final/observed packets; negative control preserves certificate/status/epoch while changing reference trial IDs",
+    "test_protocol": "2 kHz external CalculateMode=1 release; 20 kHz CalculateMode=0; explicit fixture sync tolerance 1 s; raw training proof captured"
   }
 }

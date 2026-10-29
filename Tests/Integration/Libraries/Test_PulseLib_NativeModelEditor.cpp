@@ -2053,16 +2053,43 @@ TEST(NativePostTuneGraphBoundary,BranchN1_20000){PostTuneGraphBoundary<NNeuronTi
 TEST(NativePostTuneGraphBoundary,ClassicAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearner>(2000,1,true);}
 TEST(NativePostTuneGraphBoundary,BranchAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(2000,1,true);}
 
+void RecordPostTuneBoundaryTrainingProof(NativeTrainingPlan& plan,const std::string& caseName,std::size_t channels)
+{
+    struct Trace {std::ostringstream csv;std::string trial;std::size_t packet=0;};
+    auto trace=std::make_shared<Trace>();
+    plan.probe.onPrepared=[trace,channels](const PreparedVerificationProbe&,const ProbeSpec& spec) {
+        trace->trial=spec.trialId;trace->csv.str({});trace->csv.clear();trace->csv.imbue(std::locale::classic());
+        trace->csv<<std::setprecision(17)<<"time,stimulus";
+        for(std::size_t i=0;i<channels;++i)trace->csv<<",soma"<<i;trace->csv<<'\n';
+    };
+    plan.probe.onSample=[trace](const NativeProbeSample& sample) {
+        trace->csv<<sample.time<<','<<sample.stimulus;
+        for(double value:sample.potentials)trace->csv<<','<<value;trace->csv<<'\n';
+    };
+    plan.observationSink=[trace,caseName](const NativeProbeResult& result) {
+        const auto name=caseName+"_training_proof_"+std::to_string(++trace->packet);
+        Artifact(name+".json",QJsonDocument(EncodeNativeProbeEvidence(result)).toJson());
+        if(result.observation && result.observation->specification.trialId==trace->trial)
+            Artifact(name+".csv",QByteArray::fromStdString(trace->csv.str()));
+    };
+}
+
 template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int normalization)
 {
     EditingRig<Learner> rig(frequency,normalization,"posttune_owner_policy",false,2,true);
+    if(frequency==20000)rig.learner->CalculateMode=0;
     auto plan=TrainingPlan(rig);plan.search.tolerances.sync=1.;
+    RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
     rig.learner->BeginNativeTraining(plan);
     for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
     {ASSERT_LT(tick,50000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();
     ASSERT_TRUE(service.Certificate())<<service.Reason();ASSERT_TRUE(service.References());
     ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+    // CalculateMode=1 requires explicit release by its external owner. Stopping
+    // an already completed service retains the existing measured certificate.
+    if(rig.learner->CalculateMode.GetData()==1)rig.learner->IsNeedToTrain=false;
+    ASSERT_FALSE(rig.learner->IsNeedToTrain.GetData());ASSERT_TRUE(service.Certificate());
     const auto certificate=EncodeTrainingCertificate(*service.Certificate());
     const auto before=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
     const auto materialGoal=rig.neuron->TrainingPattern.GetData();
@@ -2104,6 +2131,7 @@ template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int no
     Artifact(rig.name+"_owner_policy.json",QJsonDocument(QJsonObject{{"kind","native_posttune_owner_policy"},{"schema_version",1},
         {"source_model",QString::fromStdString(before)},{"restored_model",QString::fromStdString(rig.Revision())},
         {"source_solo_certificate",certificate},{"certificate_scope","learned_solo"},
+        {"fixture_sync_tolerance",plan.search.tolerances.sync},{"calculate_mode",rig.learner->CalculateMode.GetData()},
         {"sample_pairs",double(baseline.size())},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
 TEST(NativePostTuneOwnerPolicy,ClassicN0_2000){NativePostTuneOwnerPolicy<NNeuronTimeLearner>(2000,0);}
@@ -2153,6 +2181,64 @@ TEST(NativePostTuneOwnerPolicy,RetargetIsNotOverwrittenByRollback)
     EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(rejected.modelMayHaveChanged);
     EXPECT_EQ(rejected.reason,"posttune_boundary_training_target_changed");
     EXPECT_EQ(rig.Revision(),before);EXPECT_DOUBLE_EQ(rig.learner->InputPattern(1,0),pattern(1,0));
+}
+
+class PostTuneProvenanceLearner : public NNeuronTimeLearner {
+public:
+    PostTuneProvenanceLearner* New(void) override {return new PostTuneProvenanceLearner;}
+    void ReplayBoundary(const std::string& referenceSuffix)
+    {
+        auto plan=NativeTrainingControl.Plan();auto references=NativeTrainingControl.ReferencePackets();
+        auto finals=NativeTrainingControl.FinalPackets();
+        const auto revision=NativeTrainingControl.Certificate()->ModelRevision();
+        const auto epoch=NativeTrainingControl.ModelEpoch(),attempt=NativeTrainingControl.SessionAttempt();
+        // Corruption/control metadata derived from ACTUAL observed packets;
+        // these are not newly observed trials or a scientific replay claim.
+        for(auto& packet:references)
+        {
+            if(packet.requestedSpecification)packet.requestedSpecification->trialId+=referenceSuffix;
+            packet.observation->specification.trialId+=referenceSuffix;
+        }
+        NativeTrainingControl.RestoreBoundary(std::move(plan),std::move(references),std::move(finals),revision,epoch,attempt);
+    }
+};
+TEST(NativePostTuneOwnerPolicy,EquivalentCertificateCannotHideChangedReferenceProvenance)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="PostTuneProvenanceFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new PostTuneProvenanceLearner;},image),image);
+    EditingRig<PostTuneProvenanceLearner> rig(2000,0,"posttune_owner_provenance",false,2,true,2,1,false,image);
+    auto plan=TrainingPlan(rig);plan.search.tolerances.sync=1.;
+    RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
+    {ASSERT_LT(tick,50000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    ASSERT_TRUE(rig.learner->NativeTrainingController().Certificate());
+    ASSERT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::Exact);
+    rig.learner->IsNeedToTrain=false;ASSERT_FALSE(rig.learner->IsNeedToTrain.GetData());
+    // Normalize to the real completed-boundary import semantics on both sides:
+    // reason/state/attempt/epoch/certificate remain equal after the second import.
+    rig.learner->ReplayBoundary("");
+    const auto& controller=rig.learner->NativeTrainingController();
+    const auto certificate=EncodeTrainingCertificate(*controller.Certificate());
+    const auto reason=controller.Reason(),revision=rig.Revision();
+    const auto attempt=controller.SessionAttempt(),epoch=controller.ModelEpoch();
+    const auto snapshot=NativePostTuneOwnerBoundary::Capture(*rig.learner);
+    const auto previousTrial=controller.ReferencePackets().front().observation->specification.trialId;
+    rig.learner->ReplayBoundary("/changed_provenance_control");
+    ASSERT_EQ(EncodeTrainingCertificate(*controller.Certificate()),certificate);
+    ASSERT_EQ(controller.Reason(),reason);ASSERT_EQ(controller.SessionAttempt(),attempt);ASSERT_EQ(controller.ModelEpoch(),epoch);
+    ASSERT_NE(controller.ReferencePackets().front().observation->specification.trialId,previousTrial);
+    const auto old=rig.neuron.Get();const auto rejected=snapshot->Restore(*rig.learner);
+    ASSERT_EQ(rejected.status,NativeModelBuildStatus::Rejected)<<rejected.reason;
+    EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(rejected.reason,"posttune_boundary_training_controller_changed");
+    EXPECT_EQ(rig.Revision(),revision);EXPECT_EQ(rig.learner->GetComponent("Neuron",true).Get(),old);
+    Artifact(rig.name+"_provenance_guard.json",QJsonDocument(QJsonObject{
+        {"kind","native_boundary_reference_provenance_guard"},{"schema_version",1},
+        {"same_certificate",certificate},{"previous_reference_trial",QString::fromStdString(previousTrial)},
+        {"new_reference_trial",QString::fromStdString(controller.ReferencePackets().front().observation->specification.trialId)},
+        {"metadata_corruption_control",true},{"reason",QString::fromStdString(rejected.reason)},
+        {"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
 
 enum class BoundaryRejection { OwnerReset,WrongOwner,OwnerMember,ExternalListener };
