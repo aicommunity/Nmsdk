@@ -20,6 +20,7 @@ TEST(RdkConfigDialect, ExternalPatchedLeavesReadBackThroughNativeStorage)
     for(const auto& value:cases)
     {
         const auto record=value.toObject();QFile source(record["file"].toString());
+        SCOPED_TRACE(source.fileName().toStdString());
         ASSERT_TRUE(source.open(QIODevice::ReadOnly))<<source.fileName().toStdString();
         const auto bytes=source.readAll();const auto rootName=record["root"].toString().toStdString();
         RDK::USerStorageXML storage;ASSERT_TRUE(storage.Load(std::string(bytes.constData(),bytes.size()),rootName));
