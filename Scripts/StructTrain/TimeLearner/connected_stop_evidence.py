@@ -28,6 +28,7 @@ def audit_connected_stop(packet, stopped_case=None):
         require(p["source_value"] is keep and p["stop_requested"] is (not keep), "connected_stop_request_mismatch")
         require(p["certificate_present"] is False, "false_connected_stop_certificate")
         refs, observed = count(p["reference_packets"]), count(p["observed_packets"])
+        require(refs == (1 if point == 1 else 2 if point == 2 else 0), "connected_stop_phase_mismatch")
         require(type(p["reason"]) is str and p["state"] in ("capturing_references", "searching", "finished")
                 and p["probe_state"] in ("idle", "queued", "running", "completed", "rejected", "cancelled"),
                 "unknown_connected_stop_state")

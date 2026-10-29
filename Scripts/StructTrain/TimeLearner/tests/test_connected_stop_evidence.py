@@ -26,7 +26,14 @@ class ConnectedStopEvidenceTest(unittest.TestCase):
     def case(self, root, name):
         packet = load(root / name)
         state = root / name.replace("_connected_stop.json", "_stopped_state.json")
-        return packet, load_case(state) if state.is_file() else None
+        case = load_case(state) if state.is_file() else None
+        expected_point = int(name.split("_connected_stop_")[1].split("_")[0])
+        expected_mode = int(name.split("_mode")[1].split("_")[0])
+        self.assertEqual(packet["stop_point"], expected_point)
+        self.assertEqual(packet["calculate_mode"], expected_mode)
+        if case:
+            self.assertEqual(case[0]["configuration"]["model"]["branch"], name.startswith("Branch_"))
+        return packet, case
 
     def test_baseline_proves_ignored_stops_and_positive_controls(self):
         results = [audit_connected_stop(*self.case(self.baseline, name)) for name in self.names]
