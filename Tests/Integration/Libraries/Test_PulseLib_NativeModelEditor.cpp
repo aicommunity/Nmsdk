@@ -1112,6 +1112,7 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
     {
         auto target=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(target);
         ASSERT_NE(target.Get(),trainingOwner.Get());beforeVersion=target->ControllerVersion.GetData();beforeInputs=target->NumInputDendrite.GetData();
+        EXPECT_EQ(beforeVersion,1);EXPECT_FALSE(target->ConfiguredModelInitialized.GetData());
         EXPECT_FALSE(target->HasNativeRecognitionState());EXPECT_FALSE(target->NativeTrainingController().Certificate());
         target->Name="RecognitionTestLearner";target->SetEnvironment(rig.environment);target->SetGlobalTimeStep(rig.frequency);
         UEPtr<UContainer> node=target;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);rig.learner=target;
