@@ -340,8 +340,39 @@
     "root_acceptance_branch": "stage04/native-owner-config-bindings",
     "pulse_develop": "4e6be0cbc0215805cd40b881600934e35c86430e",
     "rdk_develop": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
-    "root_merge_pending": true,
-    "fresh_recursive_closure_verified": false,
-    "full_stage_4_complete": false
+    "root_merge_pending": false,
+    "fresh_recursive_closure_verified": true,
+    "full_stage_4_complete": false,
+    "accepted_root": "d7ee23f48ef4f4938373bd1f1be8e2336d1eb40b",
+    "closure_report_commit": "0cf41c155d38589c3af9dff33b238669b1330d6a",
+    "closure_hashes": {
+      "stored": 4,
+      "raw": 2
+    }
+  },
+  "frozen_recognition_owner": {
+    "branch": "stage08/frozen-recognition-owner",
+    "native_root": "6ff1d43a9af8df7a97111ba04b259aa207454ce0",
+    "pulse_core": "0b9d0ff992238b6f72bc1046d50c5d80fecee6d7",
+    "state": "initial gate running; no runtime acceptance claimed",
+    "planned_cases": {
+      "new_owner": 8,
+      "cold_training_regression": 4
+    },
+    "workers": {
+      "10.245.1.11": {
+        "kind": "normal",
+        "session_id": 56145
+      },
+      "10.245.1.17": {
+        "kind": "asan_detect_leaks_0",
+        "session_id": 34267
+      }
+    },
+    "record_spikes": false,
+    "scientific_evaluation_complete": false,
+    "extra_configured_cases_in_working_source": 2,
+    "extra_configured_cases_runtime_validated": false,
+    "develop_merged": false
   }
 }
