@@ -229,8 +229,12 @@ import с внешними scalar/vector источниками воспроиз
 до замены графа и не записывает в источники. M40 ASan: 16/16 tests; независимое
 чтение 16 primary JSON. Baseline A4: 8 ожидаемых failures + 8 matching passes.
 Пакет 1c55f903: 467 stored / 465 raw hashes сверены. Первый неверный vector
-fixture и его авария сохранены как ошибка fixture. Elder, editor metadata и
-runtime control flags ещё не проверены; новый код не принят в develop.
+fixture и его авария сохранены как ошибка fixture. Последующий editor fix 0ca75b3 прошёл на обоих workers 46/46 native и по
+2/2 independent Python tests (12 boundary probes / 4332 samples). Fixed пакеты
+073b2906 / 37e6326c: по 530 stored / 528 raw hashes проверены. Baseline
+2c08b5b4 / 1e9e52f2: по 331/329 hashes. Runtime control flags остаются
+открытыми; новый код пока не принят в develop.
+[Ownership и ограничения](NativeOwnerBindings.ru.md).
 
 ## Незакрытый объём исходных этапов
 
@@ -270,3 +274,13 @@ full gates не перемещались; low-disk событие требует
 Серия D не возобновлялась. Августовские визуальные 4/8–6/8 сохраняются как
 наблюдения исходного протокола. Научные 8/8 не являются условием завершения.
 ControllerVersion=2 пока не рекомендуется для всей экспериментальной матрицы.
+
+## Следующий приоритет: сквозной эксперимент
+
+[ExperimentReadiness.ru.md](ExperimentReadiness.ru.md) фиксирует четыре
+обязательных блока до первой ограниченной серии: конечная recognition model,
+полные frozen probes с реальными spike timestamps, threshold/control protocol
+и воспроизводимый Train→export→Test→analysis job. Initial scope допускает
+C-trim/PostTune Off; остальные режимы и полный исходный план сохраняются.
+На момент этого checkpoint все owner/editor native и Python jobs завершены;
+новых серверных заданий здесь не заявлено.

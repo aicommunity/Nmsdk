@@ -285,5 +285,44 @@
     "editor_metadata_assignments_covered": false,
     "runtime_control_flags_covered": false,
     "develop_merged": false
-  }
+  },
+  "native_owner_editor_bindings": {
+    "native_root": "796a73075b930d634c905355541e47187aed6f5f",
+    "pulse_core": "0ca75b3e5b7354ee801645d5d0d73b3f942cb645",
+    "auditor_root": "07e66559a4030537ed24605fcdb676838b94b257",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "process_state": "completed_exit_zero",
+    "native_passed_each": 46,
+    "native_skips_each": 0,
+    "native_failures_each": 0,
+    "python_tests_each": 2,
+    "complete_boundary_probes_each": 12,
+    "boundary_samples_each": 4332,
+    "fixed_reports": {
+      "elder1": "073b2906e6926f026f9a2c55ee1b69475f49a9ff",
+      "m40": "37e6326c98bcd74d859ff3381acf90514763905a"
+    },
+    "fixed_hashes_each": {
+      "stored": 530,
+      "raw": 528
+    },
+    "baseline_reports": {
+      "elder1": "2c08b5b4c0a2fb7f359a31609e13d8d6a73f2d13",
+      "m40": "1e9e52f225b6cec1b5b8cde51b30b65c7abdd869"
+    },
+    "baseline_hashes_each": {
+      "stored": 331,
+      "raw": 329
+    },
+    "baseline_conflicting_expected_failures_each": 6,
+    "baseline_matching_passes_each": 6,
+    "initial_missing_probe_boundary_fixture_error": true,
+    "develop_merged": false,
+    "runtime_control_flags_complete": false
+  },
+  "next_experiment_gate_document": "ExperimentReadiness.ru.md",
+  "goal_complete": false
 }

@@ -248,6 +248,7 @@ Construction/import cbbf56ce: M40 ASan 16 controls pass, evidence 1c55f903;
 Elder normal повторил 16 controls в editor-baseline A1. Editor A2 root03fd6e47
 на обоих workers: 6 conflict failures / 6 matching passes, actual Applied
 при несовпадающей metadata. Первый A1 пропускал consumed probe boundary —
-fixture error, не algorithm evidence. Editor fix 0ca75b3 пока проходит серверный
-gate. См. NativeOwnerBindings.ru.md. Причинность для исторических кампаний
+fixture error, не algorithm evidence. Editor fix 0ca75b3 прошёл на обоих workers 46/46 native,
+по 2/2 independent Python tests, 12 boundary probes / 4332 samples.
+Fixed пакеты 073b2906 / 37e6326c: по 530 stored / 528 raw hashes проверены. См. NativeOwnerBindings.ru.md. Причинность для исторических кампаний
 не установлена; полный lifecycle/control-flag audit этим не закрыт.
