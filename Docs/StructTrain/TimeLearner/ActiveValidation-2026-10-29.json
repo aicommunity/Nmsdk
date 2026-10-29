@@ -555,9 +555,12 @@
     "user_requirement_date": "2026-10-29",
     "spec": "VisualTestReports.ru.md",
     "scope": "all tested patterns/trials and all somas; actual input-pulse overlay; readable full-window and zoom plots",
-    "renderer_implemented": false,
+    "renderer_implemented": true,
     "visual_acceptance_complete": false,
-    "required_for_plan_completion": true
+    "required_for_plan_completion": true,
+    "implementation_scope": "schema-1 diagnostic native recognition reports; all recorded soma pairs, overview and 100-tick zoom; full matrix and descriptors/panorama/detail views incomplete",
+    "develop_merged": false,
+    "renderer_root": "a7e37f6e9d5f7fbbe004881a7e60bd3751236b3a"
   },
   "frozen_recognition_metrics": {
     "scoped_accepted": true,
@@ -577,7 +580,7 @@
     "skips_each": 0,
     "combined_auditor_root": "102c1fc15a106060f1f5b37ecb149b0e752baba1",
     "criterion_satisfied_all_control_profiles": false,
-    "develop_merged": false,
+    "develop_merged": true,
     "primary_frames_each": 3856,
     "native_rerun": false,
     "scientific_verdict": null,
@@ -588,6 +591,7 @@
     ],
     "complete_trials_each": 16,
     "raw_hashes_each": 37,
-    "combined_python_cases_each": 30
+    "combined_python_cases_each": 30,
+    "accepted_root": "77d5bd2bf5b7a14b0069c928972c0813d1e9fe74"
   }
 }
