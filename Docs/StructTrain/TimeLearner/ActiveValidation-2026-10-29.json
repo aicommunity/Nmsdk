@@ -12,7 +12,7 @@
     "a2_native_rerun_required": false,
     "next_gate": "independent A2 audit and Git publication before newer owner-policy acceptance"
   },
-  "scope": "terminal PostTune transient evidence; no active job claimed; earlier full regression in ActiveValidation-2026-10-28.json",
+  "scope": "completed integrated native and independent audit gate; no active job claimed for this acceptance source",
   "native_root": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
   "pulse_core": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
   "pulse_documented": "8f248aa",
@@ -107,7 +107,9 @@
     "subsequent_provenance_guard": "full reference/final/observed packets; negative control preserves certificate/status/epoch while changing reference trial IDs",
     "test_protocol": "2 kHz external CalculateMode=1 release; 20 kHz CalculateMode=0; explicit fixture sync tolerance 1 s; raw training proof captured",
     "first_implementation_root": "2a9357afa73e485d3461683c4ee7e597bb7fc176",
-    "first_implementation_pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0"
+    "first_implementation_pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0",
+    "historical_checkpoint": true,
+    "superseded_by": "integrated_normal_regression"
   },
   "unvalidated_condition_identities": {
     "scope": "ConditionSpec/content artifacts, matrix/analysis/attempt IDs; runtime content identity schema 2",
@@ -117,6 +119,39 @@
       "Scripts.StructTrain.TimeLearner.tests.test_runtime"
     ],
     "runner_queue_integration": false,
-    "historical_schema_1_rewritten": false
+    "historical_schema_1_rewritten": false,
+    "historical_checkpoint": true,
+    "superseded_by": "integrated_normal_regression"
+  },
+  "integrated_normal_regression": {
+    "native_root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
+    "native_pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
+    "python_root": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "state": "completed and published, all stored/raw hashes verified locally",
+    "native_tests_each": 491,
+    "native_passed_each": 480,
+    "native_helper_skips_each": 11,
+    "native_failures_each": 0,
+    "rdk_ctest_groups_each": 3,
+    "python_tests_each": 114,
+    "python_failures_each": 0,
+    "python_errors_each": 0,
+    "python_skips_each": 0,
+    "reports": {
+      "elder1": "bc37077f18adce02c9d90b2aecdc2b75fc8e6b4f",
+      "m40": "182191b9534f62257687b97b24f9f7fc936dd71e"
+    },
+    "hashes_each": {
+      "stored": 3268,
+      "raw": 3266
+    },
+    "accepted_pulse_develop": "4db59424125dda426a29bc74faac565db871511f",
+    "root_acceptance_branch": "stage08/integrated-acceptance",
+    "fresh_recursive_closure_verified": false,
+    "full_plan_complete": false
   }
 }
