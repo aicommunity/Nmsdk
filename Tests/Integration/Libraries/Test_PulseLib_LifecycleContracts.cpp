@@ -4,6 +4,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembraneCommon.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NConstGenerator.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseLTZone.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../Support/ConsoleLikeInit.h"
@@ -59,6 +60,64 @@ TEST(TimeLearnerNativeLifecycle, SynapseResetClearsConductanceBeforeFirstTick)
     synapse->Reset();
     EXPECT_DOUBLE_EQ(synapse->Output(0, 0), 0.);
     core.storage->ReturnObject(synapse);
+}
+
+TEST(TimeLearnerNativeLifecycle, SpikeHistoryIsEmptyBeforeFirstTick)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto zone = dynamic_pointer_cast<NMSDK::NPulseLTZoneThreshold>(
+        core.storage->TakeObject("NPulseLTZoneThreshold"));
+    ASSERT_TRUE(zone);
+    zone->SetEnvironment(core.environment);
+    zone->SetGlobalTimeStep(2000);
+    zone->Init();
+    zone->Reset();
+    EXPECT_EQ(zone->OutputPulseTimes.GetCols(), 0);
+    core.storage->ReturnObject(zone);
+}
+
+TEST(TimeLearnerNativeLifecycle, SpikeHistoryResetRemovesEventsWithoutDiscardingZeroTimeSpike)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    struct ClockRestore {
+        UEPtr<UEnvironment> environment; ULongTime previous;
+        ~ClockRestore() { environment->GetTime().SetTime(previous); }
+    } restore{core.environment, core.environment->GetTime().GetTime()};
+    core.environment->CreateModel("NModel");
+    core.environment->ModelInit();
+    core.environment->GetTime().SetTime(0);
+    auto model = core.environment->GetModel();
+    ASSERT_TRUE(model);
+    auto zone = dynamic_pointer_cast<NMSDK::NPulseLTZoneThreshold>(
+        core.storage->TakeObject("NPulseLTZoneThreshold"));
+    ASSERT_TRUE(zone);
+    zone->SetEnvironment(core.environment);
+    zone->Name = "SpikeHistorySource";
+    zone->SetGlobalTimeStep(model->GetTimeStep());
+    zone->Threshold = 1.;
+    zone->ThresholdOff = .5;
+    zone->AvgInterval = 10.;
+    ASSERT_NE(model->AddComponent(zone), ForbiddenId);
+    zone->Init();
+    zone->Reset();
+    std::vector<MDMatrix<double>> input(1);
+    input[0].Assign(1, 1, 2.);
+    zone->Inputs = input;
+    const double onset = zone->GetTime().GetDoubleTime();
+    EXPECT_DOUBLE_EQ(onset, 0.);
+    model->Calculate(); // The native scheduler produces an actual rising edge.
+    ASSERT_EQ(zone->OutputPulseTimes.GetCols(), 1);
+    EXPECT_DOUBLE_EQ(zone->OutputPulseTimes(0, 0), onset);
+    core.environment->IncreaseModelTimeByStep();
+    model->Calculate(); // A sustained pulse must not create another onset.
+    EXPECT_EQ(zone->OutputPulseTimes.GetCols(), 1);
+    zone->Reset();
+    EXPECT_EQ(zone->OutputPulseTimes.GetCols(), 0);
+    input[0](0, 0) = 0.;
+    zone->Inputs = input;
+    model->Calculate();
+    EXPECT_EQ(zone->OutputPulseTimes.GetCols(), 0);
+    model->DelComponent("SpikeHistorySource", false);
 }
 
 TEST(TimeLearnerNativeLifecycle, ResetRefreshesSynapseStepCoefficients)
