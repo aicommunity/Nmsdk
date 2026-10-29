@@ -28,7 +28,7 @@ tests. Новый guard 0ca75b3 прошёл адресный gate на обои
 для измерений обучения. `PrepareNativeRecognitionState` готовит граф, но ещё
 не является сквозным production recognition runner. `BeginNativeTraining`
 явно отклоняет включённые C-trim и PostTune/calibration. CLI сейчас имеет
-`inventory` и `analyze`; наличие библиотечных классов не означает готовность
+`inventory`, `analyze` и diagnostic `report`; наличие библиотечных классов не означает готовность
 всех planned train/evaluate/publish команд.
 
 ## Начальная область допуска
@@ -87,8 +87,13 @@ PulseLib merge 9902545. Остальные три блока и полный и�
 Для ограниченной серии с заранее объявленным fixed-порогом автоматический
 подбор не является условием допуска: требуются явная fixed policy, фактический
 прогон и freeze модели. Полная калибровка остаётся требованием исходного плана.
-Ближайшие незакрытые gates — общий воспроизводимый job/runner и scientific
-scorer, внешний training stop, затем выбранный протокол калибровки и расширение
+Строгие response-window metrics объединены в develop (25/25 и совместные 30/30
+Python/CLI на обоих workers), но общий scientific verdict/provenance ещё требует
+runner. Connected training stop проверен для V2 N1, Classic/Branch,
+CalculateMode 0/1 и scalar SetPointer (57/57 native на каждом worker);
+initial-false/restart и остальные sharing режимы остаются открытыми.
+Ближайшие незакрытые gates — общий воспроизводимый job/runner, затем выбранный
+протокол калибровки и расширение
 матрицы. Наличие C++ trial API и analyze CLI не означает готовность train/evaluate
 CLI или всего этапа 8.
 
@@ -99,5 +104,10 @@ CLI или всего этапа 8.
 soma в ответ на все target/foil паттерны с наложенными фактическими входными
 импульсами. Нужны полный overview и подробные zoom views; миниатюрной сетки
 недостаточно. Production plot/report generator, его visual QA и Git-публикация
-assets добавлены к обязательным gates; пока они не реализованы, этот пункт
-остаётся открытым. [Масштабы, данные и приёмка](VisualTestReports.ru.md).
+assets добавлены к обязательным gates. Первый diagnostic renderer построил
+четыре native control profiles на обоих workers: 16 trials / 24 trial-soma пары,
+PNG 1920×960 и SVG/PDF, шесть checks без skips/errors. A3 после исправления
+layout опубликован и проверен по hashes, адресные PNG просмотрены. Полная
+visual matrix, descriptors/units, continuous panorama и detail Y остаются
+открытыми. [Масштабы, данные и приёмка](VisualTestReports.ru.md),
+[реализация и ограничения](VisualReportRenderer.ru.md).

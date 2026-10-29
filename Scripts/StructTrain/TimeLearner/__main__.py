@@ -65,10 +65,24 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--trace", type=Path, help="original primary CSV, required for probe")
     analysis.add_argument("--allow-legacy", action="store_true", help="descriptive domain schema-1 adapter only")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
+    report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
+    report.add_argument("source", type=Path, help="recognition evaluation spec")
+    report.add_argument("--model", type=Path, required=True)
+    report.add_argument("--output", type=Path, required=True, help="new directory; never overwritten")
     args = parser.parse_args(argv)
     if args.command == "inventory":
         from .inventory import write_inventory
         write_inventory(args.root.resolve(), args.output.resolve())
+    elif args.command == "report":
+        from .native_evidence import EvidenceError
+        from .reports import render_evaluation
+        try:
+            print(json.dumps(render_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True),
+                                               args.output.resolve()), ensure_ascii=False))
+        except (EvidenceError, OSError, ValueError, ImportError) as error:
+            print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",
+                              "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
+            return 2
     elif args.command == "analyze":
         from .native_evidence import EvidenceError
         try:
