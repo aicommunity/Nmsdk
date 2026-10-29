@@ -11,6 +11,7 @@
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeTrainingBindings.h"
+#include "TimeLearner/NativePostTuneBoundary.h"
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
@@ -2051,6 +2052,106 @@ TEST(NativePostTuneGraphBoundary,ClassicN1_20000){PostTuneGraphBoundary<NNeuronT
 TEST(NativePostTuneGraphBoundary,BranchN1_20000){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(20000,1);}
 TEST(NativePostTuneGraphBoundary,ClassicAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearner>(2000,1,true);}
 TEST(NativePostTuneGraphBoundary,BranchAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(2000,1,true);}
+
+template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int normalization)
+{
+    EditingRig<Learner> rig(frequency,normalization,"posttune_owner_policy",false,2,true);
+    auto plan=TrainingPlan(rig);plan.search.tolerances.sync=1.;
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
+    {ASSERT_LT(tick,50000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_TRUE(service.Certificate())<<service.Reason();ASSERT_TRUE(service.References());
+    ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+    const auto certificate=EncodeTrainingCertificate(*service.Certificate());
+    const auto before=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
+    const double threshold=rig.learner->LTZThreshold.GetData(),fixed=rig.learner->FixedLTZThreshold.GetData();
+    const double calibrated=rig.learner->CalibratedFixedLTZThreshold.GetData();
+    const bool useFixed=rig.learner->UseFixedLTZThreshold.GetData(),automatic=rig.learner->AutoCalibrateFixedLTZThreshold.GetData();
+    const auto saved=NativePostTuneOwnerBoundary::Capture(*rig.learner);ASSERT_TRUE(saved);
+    std::vector<NativeProbeSample> baseline,replay;
+    rig.environment->GetTime().SetTime(1000000);
+    const auto first=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+        [&](const auto& sample){baseline.push_back(sample);});
+    ASSERT_EQ(first.status,NativeProbeStatus::Completed);
+    auto candidate=parameters;
+    if(normalization==0)++candidate[0].synapses;else candidate[0].resistance*=1.1;
+    const auto edited=rig.learner->ApplyNativeParameters(candidate);
+    ASSERT_EQ(edited.status,NativeEditStatus::Applied)<<edited.reason;
+    rig.learner->UseFixedLTZThreshold.SetDataDirect(true);rig.learner->FixedLTZThreshold=fixed+.02;
+    rig.learner->LTZThreshold=threshold+.03;
+    rig.learner->CalibratedFixedLTZThreshold.SetDataDirect(calibrated+.04);
+    rig.learner->AutoCalibrateFixedLTZThreshold.SetDataDirect(!automatic);
+    const auto result=saved->Restore(*rig.learner);
+    ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    rig.source=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);rig.ports={{&rig.source->Output,"burst"}};
+    EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    EXPECT_DOUBLE_EQ(rig.learner->LTZThreshold.GetData(),threshold);EXPECT_DOUBLE_EQ(rig.learner->FixedLTZThreshold.GetData(),fixed);
+    EXPECT_DOUBLE_EQ(rig.learner->CalibratedFixedLTZThreshold.GetData(),calibrated);
+    EXPECT_EQ(rig.learner->UseFixedLTZThreshold.GetData(),useFixed);EXPECT_EQ(rig.learner->AutoCalibrateFixedLTZThreshold.GetData(),automatic);
+    ASSERT_TRUE(service.Certificate());ASSERT_TRUE(service.References());EXPECT_EQ(EncodeTrainingCertificate(*service.Certificate()),certificate);
+    EXPECT_TRUE(service.Certificate()->Matches(before,*service.References(),service.Certificate()->Tolerances(),ModelStateKind::LearnedSolo,service.ModelEpoch()));
+    rig.environment->GetTime().SetTime(1000000);
+    const auto second=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true,
+        [&](const auto& sample){replay.push_back(sample);});
+    ASSERT_EQ(second.status,NativeProbeStatus::Completed);ASSERT_EQ(baseline.size(),replay.size());
+    for(std::size_t i=0;i<baseline.size();++i)
+    {EXPECT_EQ(baseline[i].time,replay[i].time);EXPECT_EQ(baseline[i].stimulus,replay[i].stimulus);EXPECT_EQ(baseline[i].potentials,replay[i].potentials);}
+    Artifact(rig.name+"_owner_policy.json",QJsonDocument(QJsonObject{{"kind","native_posttune_owner_policy"},{"schema_version",1},
+        {"source_model",QString::fromStdString(before)},{"restored_model",QString::fromStdString(rig.Revision())},
+        {"source_solo_certificate",certificate},{"certificate_scope","learned_solo"},
+        {"sample_pairs",double(baseline.size())},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(NativePostTuneOwnerPolicy,ClassicN0_2000){NativePostTuneOwnerPolicy<NNeuronTimeLearner>(2000,0);}
+TEST(NativePostTuneOwnerPolicy,BranchN0_2000){NativePostTuneOwnerPolicy<NNeuronTimeLearnerBranch>(2000,0);}
+TEST(NativePostTuneOwnerPolicy,ClassicN1_2000){NativePostTuneOwnerPolicy<NNeuronTimeLearner>(2000,1);}
+TEST(NativePostTuneOwnerPolicy,BranchN1_2000){NativePostTuneOwnerPolicy<NNeuronTimeLearnerBranch>(2000,1);}
+TEST(NativePostTuneOwnerPolicy,ClassicN1_20000){NativePostTuneOwnerPolicy<NNeuronTimeLearner>(20000,1);}
+TEST(NativePostTuneOwnerPolicy,BranchN1_20000){NativePostTuneOwnerPolicy<NNeuronTimeLearnerBranch>(20000,1);}
+
+class PostTunePolicyOutput : public UNet {
+public:
+    UProperty<double,PostTunePolicyOutput,ptOutput|ptPubState> Value;
+    PostTunePolicyOutput():Value("Value",this){Value=.731;}
+    PostTunePolicyOutput* New(void) override {return new PostTunePolicyOutput;}
+};
+TEST(NativePostTuneOwnerPolicy,ConnectedPropertyRejectsRestoreBeforeAnyEdit)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,1,"posttune_owner_connected",false,2,true);
+    rig.learner->IsNeedToTrain.SetDataDirect(false);
+    const auto saved=NativePostTuneOwnerBoundary::Capture(*rig.learner);
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="PostTunePolicyOutputFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new PostTunePolicyOutput;},image),image);
+    auto output=dynamic_pointer_cast<PostTunePolicyOutput>(core.storage->TakeObject(image));ASSERT_TRUE(output);
+    output->Name="PostTunePolicySource";UEPtr<UContainer> component=output;
+    ASSERT_NE(rig.model->AddComponent(component),ForbiddenId);output->Init();
+    ASSERT_TRUE(rig.learner->FixedLTZThreshold.SetPointer(0,&output->Value));
+    const auto before=rig.Revision();const auto old=rig.neuron.Get();const double value=output->Value.GetData();
+    const auto rejected=saved->Restore(*rig.learner);
+    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(rejected.modelMayHaveChanged);
+    EXPECT_EQ(rejected.reason,"posttune_boundary_connected_owner_property");
+    EXPECT_DOUBLE_EQ(output->Value.GetData(),value);EXPECT_EQ(rig.Revision(),before);
+    EXPECT_EQ(rig.learner->GetComponent("Neuron",true).Get(),old);
+    EXPECT_THROW(NativePostTuneOwnerBoundary::Capture(*rig.learner),std::logic_error);
+    rig.learner->FixedLTZThreshold.DetachFrom();
+}
+TEST(NativePostTuneOwnerPolicy,RetargetIsNotOverwrittenByRollback)
+{
+    EditingRig<NNeuronTimeLearnerBranch> rig(2000,1,"posttune_owner_retarget",false,2,true);
+    rig.learner->IsNeedToTrain.SetDataDirect(false);
+    const auto saved=NativePostTuneOwnerBoundary::Capture(*rig.learner);
+    auto pattern=rig.learner->InputPattern.GetData();pattern(1,0)+=.01;rig.learner->InputPattern=pattern;
+    auto dataset=rig.learner->GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    rig.source=dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);rig.ports={{&rig.source->Output,"burst"}};
+    const auto before=rig.Revision();
+    const auto rejected=saved->Restore(*rig.learner);
+    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(rejected.modelMayHaveChanged);
+    EXPECT_EQ(rejected.reason,"posttune_boundary_training_target_changed");
+    EXPECT_EQ(rig.Revision(),before);EXPECT_DOUBLE_EQ(rig.learner->InputPattern(1,0),pattern(1,0));
+}
 
 enum class BoundaryRejection { OwnerReset,WrongOwner,OwnerMember,ExternalListener };
 void RejectStalePostTuneBoundary(BoundaryRejection scenario)
