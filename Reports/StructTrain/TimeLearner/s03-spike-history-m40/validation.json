@@ -1,0 +1,1189 @@
+{
+  "host": "m40",
+  "native": {
+    "baseline": {
+      "failures": 2,
+      "native_exit": 1,
+      "root": "9ecb3967fa30d813785a08a6ce509d622fc767ea",
+      "tests": 2,
+      "wrapper_exit": 1
+    },
+    "fixed": {
+      "failures": 0,
+      "native_exit": 0,
+      "root": "d13620e1e5734373d840fc4f2efe5db049d30c62",
+      "tests": 12,
+      "wrapper_exit": 1
+    }
+  },
+  "raw_files": {
+    "a1/shell.json": {
+      "bytes": 612,
+      "sha256": "839484a52aeea82866597891c8fbafdc00d5055c5ca8f3df20613810ed7d664e"
+    },
+    "a2/shell.json": {
+      "bytes": 640,
+      "sha256": "3aca8151c67a8f18aa764fc433f2a0337f70489e6ca22b5d3a651cc6db29655c"
+    },
+    "baseline/build.log": {
+      "bytes": 2322,
+      "sha256": "fabeb2ecb11f6353bdb395cfb7b45fe29dee8a4c47954f4442fbc258f64bb6ea"
+    },
+    "baseline/checkout.log": {
+      "bytes": 868,
+      "sha256": "44424fdeede10055d8c2b335c437030f6a9da1349450ba348d28ceba6975841f"
+    },
+    "baseline/configure.log": {
+      "bytes": 1308,
+      "sha256": "a1b8ae78f2db9ce9d7631ba655e8cd096323abd9ad4f1175ed349495a029ca7e"
+    },
+    "baseline/controller.log": {
+      "bytes": 1713,
+      "sha256": "9b2f0f1e59a2ff1106c46d74067eb13365c4dcf9c3cdc605ac0af25f8f747801"
+    },
+    "baseline/controller.xml": {
+      "bytes": 2071,
+      "sha256": "2dc9b442ef86a555c2dea95185718c56c88bf804799476bb2119ab88774f8a6b"
+    },
+    "baseline/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "baseline/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "baseline/runtime.json": {
+      "bytes": 22176,
+      "sha256": "97e39193cbc1d8902cbcb1247700e8a8705ee0a55f9e453cb57b62995ca761a3"
+    },
+    "fixed/build.log": {
+      "bytes": 2478,
+      "sha256": "69e68b91cad1eac3519ef01219eddbea67032c92daad7143b0a2b2054ed5cf0c"
+    },
+    "fixed/checkout.log": {
+      "bytes": 864,
+      "sha256": "968dcb045b676d266aa6523f96a8f5b6212a7d20c23a849bfdacd8fcbfbfb2c0"
+    },
+    "fixed/configure.log": {
+      "bytes": 1308,
+      "sha256": "236bfc510104a8dc6888047179ad7f9257c990790c5bdf1f2ab5221d90543214"
+    },
+    "fixed/controller.log": {
+      "bytes": 2823,
+      "sha256": "94921fb24880b1ff69ebaba81d452bed7ff96fc01f57df073055a419ec720687"
+    },
+    "fixed/controller.xml": {
+      "bytes": 4386,
+      "sha256": "586320c7d893d905de893cd28e6f14ab1df1be22015f6d074ac91e13f35300e4"
+    },
+    "fixed/exit-status.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_learned_state.json": {
+      "bytes": 1162625,
+      "sha256": "83fc694c2e0b53cff15129a5f296ebe082db519d102c1484a11191807e58977f"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_learned_summary.json": {
+      "bytes": 602587,
+      "sha256": "ed89fb4484c2e200f912ee5d529a7c87f7fdb4fbdd5c51bd207df4d1974fed90"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_owner_recognition_guard.json": {
+      "bytes": 192,
+      "sha256": "2dfe77c1ccd0b3bd7d756de65b834ecee11aa33ca7de0fa3fd662856a0f87fe8"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_owner_recognition_import.json": {
+      "bytes": 209,
+      "sha256": "95c3086e64f08a10164a5c6984e7422581b991f13a86621644f6ad69e2b9697a"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_owner_recognition_observation.json": {
+      "bytes": 1277,
+      "sha256": "f6249c7d921529241384aac0ba9ba335c653480ab520dcf786054245578a439a"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_owner_recognition_probe_spec.json": {
+      "bytes": 624,
+      "sha256": "54025dcaa7982abe9301646660e9b395ef37cabfbb41a31cedb2f3e371cf0e54"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_owner_recognition_state.json": {
+      "bytes": 2357776,
+      "sha256": "ad3b50d290a7f661609ffa46bb7bd71a67e7980555028737c52589297021026b"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_owner_recognition_transfer.json": {
+      "bytes": 642,
+      "sha256": "bda18c4b43acdd229783a79420684bc935fb312c3db3705e56f242ebc74df3d7"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_owner_recognition_wave.csv": {
+      "bytes": 24345,
+      "sha256": "03af4a16a2340cdd803f8d412b3ed170f12ec96f8800a57f3d454be13e15ef03"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_startup_after.json": {
+      "bytes": 196019,
+      "sha256": "4a6b2381c7ea691dd95f4887f8d03719abbc95630de0fda6e6cf51dc8a956439"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_startup_before.json": {
+      "bytes": 196016,
+      "sha256": "e3266d7c48c5f32b39a500ac8fe81aa494b3294036dcc21951a095ae81219795"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_1.csv": {
+      "bytes": 14187,
+      "sha256": "9b00287049a5b583025e42fe21e763fc06d26da16ff3840eb8c9f53276577f66"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_1.json": {
+      "bytes": 5926,
+      "sha256": "1b8f4ea761a6db57d54ed9914d7ddef4f29008bf2331d78903dc14008c98e1b2"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_10.csv": {
+      "bytes": 14785,
+      "sha256": "9bc14141c42168dd6198f8c082037f713341f5afe9c8abf10c979ce9fc8bedb8"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_10.json": {
+      "bytes": 5887,
+      "sha256": "8a93c610872fd2387e34e1b3a13f5ec92a197475ad0aa85ee3a97675107b0d03"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_11.csv": {
+      "bytes": 14699,
+      "sha256": "37a3606bd2cc9d66988b84d68fd9762c3c1ccf98813eafd56b231824b5c0f19f"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_11.json": {
+      "bytes": 5880,
+      "sha256": "a9bc2c2daa56b93f81cc5d7abb63b4896af074960dde4094c132dbad42baa587"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_12.csv": {
+      "bytes": 14689,
+      "sha256": "d73a34c72df6901d78cbccee8d4890bb195af70c2a7fe4225a984bfeb7b7bc08"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_12.json": {
+      "bytes": 5903,
+      "sha256": "70b5afd2777a9aef9095865576f9a80e12454c6558e5466a8beccd4d35acecf7"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_13.csv": {
+      "bytes": 14708,
+      "sha256": "a69c3ce83677f0e0ffc9b52bf98fb32bad660a34ad2e628c945a4739c8718178"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_13.json": {
+      "bytes": 5914,
+      "sha256": "b5c095f167f18b4c1bf39a4c5fc1c0929caee12405fc25d2fafc0cda698a82c8"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_14.csv": {
+      "bytes": 14689,
+      "sha256": "33306d9305a255e61c46481bc38f39e7e9edf403d085539f93559de8538dd120"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_14.json": {
+      "bytes": 5911,
+      "sha256": "37f2165c3cbf253250050004e8599f53e3c02f0906f57c7b6c765ac38bb0cd03"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_2.csv": {
+      "bytes": 14194,
+      "sha256": "18e12a70169ac836272f9a4194865ffa6af2f549e215c665baa2a57c5c17d92f"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_2.json": {
+      "bytes": 5909,
+      "sha256": "18ef86623ccf19b69f1f9036f11fa2bf0bfbf2edf8780b48015c075e852b7106"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_3.csv": {
+      "bytes": 14209,
+      "sha256": "5653e514150ade077a1785aadfd4abba47ce9ecaaee650ade7afa6ce46e9cfb1"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_3.json": {
+      "bytes": 5878,
+      "sha256": "306d15bd98441284c6a0e0968d0d242245ef2ca38d937b5c99a0e68f86f728e4"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_4.csv": {
+      "bytes": 14178,
+      "sha256": "f150b45ed7abcabf6cdd99be4b6bdfdcd6926610f939b0b962786395e86e5b91"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_4.json": {
+      "bytes": 5878,
+      "sha256": "7d6d0648fab9c5f09a37bf6fbbec42df7efed8181af79d34e8a3bb9539c2f54b"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_5.csv": {
+      "bytes": 14182,
+      "sha256": "328e2ec9a35654342bc2910f3aae9cb09bf7825f00f7487fe15ece7bc30d8ffa"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_5.json": {
+      "bytes": 5878,
+      "sha256": "945b143b8dda306310083c02b6a71d369f91fb5d127fa088210e26d22fa01ca5"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_6.csv": {
+      "bytes": 14244,
+      "sha256": "eff47ee8c0d6e827a03ef6a4fb538bcedd1b7a73b39091a8bb0dbb39454764e1"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_6.json": {
+      "bytes": 5883,
+      "sha256": "cb72c9f0cedd165e17c0aeb0ae5e3621be33b9d8792e11bf4dd0766c2106d36c"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_7.csv": {
+      "bytes": 14200,
+      "sha256": "bfdce684c4fd883fe4bfc4433bc5372ad511726ac8a4cae3dfc2d858fe2a8760"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_7.json": {
+      "bytes": 5885,
+      "sha256": "9565cafaba25e6778f104f4bd40d2439b36c4e596f53130607c8f5a034eba3de"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_8.csv": {
+      "bytes": 14646,
+      "sha256": "c820e20206d4bc96a5497f1f9f7563ff3086adad248d8c236070901dc4b9db34"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_8.json": {
+      "bytes": 5881,
+      "sha256": "5e67e328cd48797ab59a7552ac7c65f04328dbc2dad3513a8416e112c726e8ba"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_9.csv": {
+      "bytes": 14711,
+      "sha256": "e20d36b1914255a99c8b175c2df685f7502450c41dd47f500dc52fc55111d415"
+    },
+    "fixed/native/Branch_2000_N1_learned_boundary_configured_recognition_8_state_trial_9.json": {
+      "bytes": 5882,
+      "sha256": "b728e6a667cdb97654e1bd58e5412ea81bde3a4caf521b5c31b10368b53f0ad4"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_learned_state.json": {
+      "bytes": 1253407,
+      "sha256": "7853613e246f66cfe25eedb5e6f3b79f90af8b7f5e392abcdf6ad9ac39d9e882"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_learned_summary.json": {
+      "bytes": 10861,
+      "sha256": "c6de60c5e4248efba25e812b0d72bff3705b7afaaaa8ce3fe05a5c10527f3373"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_owner_recognition_guard.json": {
+      "bytes": 192,
+      "sha256": "2dfe77c1ccd0b3bd7d756de65b834ecee11aa33ca7de0fa3fd662856a0f87fe8"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_owner_recognition_import.json": {
+      "bytes": 209,
+      "sha256": "95c3086e64f08a10164a5c6984e7422581b991f13a86621644f6ad69e2b9697a"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_owner_recognition_observation.json": {
+      "bytes": 1262,
+      "sha256": "1927f0735bd08a5d5e1719545a44dc26f781f3290b9d7b5380af3325bf224774"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_owner_recognition_probe_spec.json": {
+      "bytes": 613,
+      "sha256": "befb54eb95223601583891d4a6833cd523f7a01aac64e4b3ea1b8d18cf6a2c19"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_owner_recognition_state.json": {
+      "bytes": 2543784,
+      "sha256": "6cfeccfc42fa5abc695f973b7bb4906addd885e57d0abcbc11db40be40d2417e"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_owner_recognition_transfer.json": {
+      "bytes": 642,
+      "sha256": "027d2dae04a80dfd014827fa06fe00a1056b7bede506d53876eee6c536efa113"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_owner_recognition_wave.csv": {
+      "bytes": 40007,
+      "sha256": "7f94b27595678bae70dbfd9e4b8ad5727c65ea4ed2add897de5d851c5e8e36ff"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_startup_after.json": {
+      "bytes": 261503,
+      "sha256": "f54d5dcbd59bfef12038b43d0483041d973443a9e913e0d501a2ddaaee416391"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_startup_before.json": {
+      "bytes": 261496,
+      "sha256": "e0110893babeb50f12bea92f204b13dc5fcba649a88298a0df3dbeb281d0e0eb"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_1.csv": {
+      "bytes": 22084,
+      "sha256": "f369d6386782c995525925f88de54eec558766a176c5e51122c7854123d9c523"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_1.json": {
+      "bytes": 5858,
+      "sha256": "f950503701b7c7913625854a1cddda5f1017f26564c1197dcadb9651c3d766bb"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_10.csv": {
+      "bytes": 20721,
+      "sha256": "e4a6601b1987ef7f6de303c185022e4d85d94ca9237210b7cb8ec45bef0782d3"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_10.json": {
+      "bytes": 5920,
+      "sha256": "a93829d0d0ead16251ac1660b2ac511b50d2d0be017af440b6c7ff7c338bc90a"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_11.csv": {
+      "bytes": 20864,
+      "sha256": "7d0acc1bdace8162bf03dbb6af3904fd6d02255e8e8d5253c649405ae0031b29"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_11.json": {
+      "bytes": 5930,
+      "sha256": "a9986322ea71240d8fc8ff3d114786e2c4b55f023fc1a195e38b6263ca788816"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_12.csv": {
+      "bytes": 21807,
+      "sha256": "9ffc15088bf2ad09e39acdb5eb3427ab0e04b939a36c8cb4075742af7d395b3d"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_12.json": {
+      "bytes": 5890,
+      "sha256": "78d3c8d907a26390dd81b955c6b72cf9b44e73eabc8fa9e8cadb6d27570c95bd"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_13.csv": {
+      "bytes": 21875,
+      "sha256": "fda483e8d645ae1daa4e8178b5b16b06a6c8de996b53a9d69cd74a915cdb22bd"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_13.json": {
+      "bytes": 5931,
+      "sha256": "9edcf60216b9ddb716e880a71f7cc8185f4decc755241fb3885c06d07c291c7d"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_14.csv": {
+      "bytes": 21860,
+      "sha256": "a8239403b5e076c9198801deedec24644a0067e5456cf6e7f8b2e9ff73bb7b74"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_14.json": {
+      "bytes": 5933,
+      "sha256": "9efa47ce1d56e678e9aa619d65976ac5e3e5c8fd1cca0dee4869a9d51a96fe3f"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_2.csv": {
+      "bytes": 22058,
+      "sha256": "687cce4b503d650d13e7ce0ce28583dadde6bc2033720e84a25028a7fec4075f"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_2.json": {
+      "bytes": 5922,
+      "sha256": "014db1c9c10e281814f835a5d69d7faa29c0907cb96de02dc422b06b58444c07"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_3.csv": {
+      "bytes": 22419,
+      "sha256": "66383c6a3a0533ccb3e3e3db483e9094079cd950cfa02bb65ea00aad26d0d589"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_3.json": {
+      "bytes": 5927,
+      "sha256": "2ff34579b86a388d84be1c584ee12203ba07f687381d882696e4403fcce6f891"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_4.csv": {
+      "bytes": 22835,
+      "sha256": "aee54039d737a35e1c4129160b8e136096db4d1841264110ab5b8bd19704b837"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_4.json": {
+      "bytes": 5897,
+      "sha256": "19260899c35bf3bf3c7aa3c86c33c7d1fae5e3bb8db0339d76c64459c37e20fc"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_5.csv": {
+      "bytes": 22808,
+      "sha256": "077821769f5527a405ad4e6efce0fd3ed451eae898af2b986f6a46c598bd085e"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_5.json": {
+      "bytes": 5921,
+      "sha256": "b640d22de673587eb017d5fa263b88b1dee194f56344d7aa94fc67ca8bbda800"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_6.csv": {
+      "bytes": 21895,
+      "sha256": "f58d26c792175d3be6873dee790bc0fa6233ac1c5bd6c4fd73c86b7760b29086"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_6.json": {
+      "bytes": 5900,
+      "sha256": "af49ade004fc4391ef98faf8fd2938bb330f10b554ff58aa9ad4dedec9b06fc2"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_7.csv": {
+      "bytes": 20802,
+      "sha256": "fb33eb7633b48702daad78f442c74595ee53ae0a9bf005e14aea1f8a7efc9a9e"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_7.json": {
+      "bytes": 5902,
+      "sha256": "54170e1ffe6933d35e45b1541a93a55740bd66baba47f2d7c24f66c6c966b519"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_8.csv": {
+      "bytes": 20811,
+      "sha256": "91ba1d981f0e08973de99ed01f95931e36a6ed0e92b06057d1dbf749fa06521b"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_8.json": {
+      "bytes": 5892,
+      "sha256": "abf76a702a6c3d0ad16eb0b6622dd98a7b3a625e7843cf6949fefcca588a46f8"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_9.csv": {
+      "bytes": 20733,
+      "sha256": "ae615584c584a85b787661e19da8895a52cb96f788dc866df3e5e1103b405388"
+    },
+    "fixed/native/Classic_2000_N0_learned_boundary_configured_recognition_7_state_trial_9.json": {
+      "bytes": 5899,
+      "sha256": "c1abe376731ebe922e4fdbc1ea12531e2d44782c2451192c68de5980a4433d21"
+    },
+    "fixed/process-exit-status.txt": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "fixed/runtime.json": {
+      "bytes": 22167,
+      "sha256": "e90e0fbc2b8034414751f5fa615b7f0a434b40e7fedf81ac6e6e7b9ea1e27d2e"
+    }
+  },
+  "runtime_rehashes": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-s03-spike-history-baseline-asan-a1/Test_PulseLib_StorageComponents",
+      "role": "baseline",
+      "sha256": "4069cd95ccbc180e24a05b675fe64a984829a0a6473127886bb5d2589a686874"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-s03-spike-history-baseline-asan-a1/NeuroModelerConsole.ini",
+      "role": "baseline",
+      "sha256": "75b72fd9e830e68c1adabceafd5de655d84028e394f36ac6e0d488aadbe40ad5"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Concurrent.so.6.4.2",
+      "role": "baseline",
+      "sha256": "3d9785d54fa680c5ece12e28dc4c7c45bcdc264f0676886f0faecf91fa43b194"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2",
+      "role": "baseline",
+      "sha256": "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2",
+      "role": "baseline",
+      "sha256": "dd9cf5568e5e7b3c3361e29f31dd8696b6037c24f87029a60b2cd837ca5c48cb"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6SerialPort.so.6.4.2",
+      "role": "baseline",
+      "sha256": "0cfb17c7e8d458f92cd29bbc7bfcaf51c84536b263dbdffa8507341dedc0c0bc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Sql.so.6.4.2",
+      "role": "baseline",
+      "sha256": "438bbff10919e04733c2de4514df25e83195146840484a0116b407aed1c63c42"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+      "role": "baseline",
+      "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libb2.so.1.0.4",
+      "role": "baseline",
+      "sha256": "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0",
+      "role": "baseline",
+      "sha256": "9c3860ffab5422410ff9e073d3e82267f00bc68ff1248cbb191640ee2ff045bc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.83.0",
+      "role": "baseline",
+      "sha256": "09037ffad090dc7cb2d3a8137ccc1781a3a4df65bc5184b54c4d995c060bb710"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.83.0",
+      "role": "baseline",
+      "sha256": "3a7decc1cafd2e0eeeab6dd7b503ba7628ac5e3308eea24460cb8e39cff75238"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.83.0",
+      "role": "baseline",
+      "sha256": "2c137b29a3740fb6d12a4c18823bc2b15215646c3ba3bb208b89782df28559f0"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.83.0",
+      "role": "baseline",
+      "sha256": "15f34bcb75dfb0fa30af13cf2b82fb7a9a8e0fbbadf7cabcd397dd65bde552f3"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0",
+      "role": "baseline",
+      "sha256": "2154e35ca6759a8ef39317b9a6b307b610ac44b0ac583e7000692eaa6de5bc75"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.83.0",
+      "role": "baseline",
+      "sha256": "dfb8b2e4e5d5d945a9ebdd6645816e2297d535cd6a7e529bd66a2f6332142270"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.1.0",
+      "role": "baseline",
+      "sha256": "f8cd338ec62f719333abd5cba29a6e0bdb4597dfdffed000ffb868b47e02f2e9"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.1.0",
+      "role": "baseline",
+      "sha256": "d5060475e7259904af3600d01e809710305b296441815bcaa540119a66530a70"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "role": "baseline",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcap.so.2.66",
+      "role": "baseline",
+      "sha256": "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcom_err.so.2.1",
+      "role": "baseline",
+      "sha256": "022943b3b11c860b049bce41342f1c2594941b7b401d95dfdf235521099fee08"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcrypto.so.3",
+      "role": "baseline",
+      "sha256": "6866ed711dab8927e1bf82bf1cd30e828bdfc34f3cc1e83b1c9eb01ce6c37d9a"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.8.0",
+      "role": "baseline",
+      "sha256": "83f783be410435ef15c7f0d30de9f0d11f2fc64b9ca0567fb956ab29842214c8"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcurl.so.4.8.0",
+      "role": "baseline",
+      "sha256": "3e51df20a6b52879ee83a207115a9bc6891092741ce2f5ec791606e6caf859fa"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libdouble-conversion.so.3.1",
+      "role": "baseline",
+      "sha256": "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libduktape.so.207",
+      "role": "baseline",
+      "sha256": "5733ea32f7c50e962e08b26b02f0656851525f3aa06f8b826459e27fa8711199"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4",
+      "role": "baseline",
+      "sha256": "00f593fe192f2851b8ce23b25cec2488d769beb5a8f63e8c9e563071e1075153"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "role": "baseline",
+      "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgflags.so.2.2.2",
+      "role": "baseline",
+      "sha256": "288df2caa66a2de606532a8796fe1efc93d07ec0c3ab41bc38743b70ba304a75"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0",
+      "role": "baseline",
+      "sha256": "d72a56593ae024d868cb7b494f7e48c76e90e4ced9498ab4da2eb3bece85bda3"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0",
+      "role": "baseline",
+      "sha256": "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libglog.so.0.6.0",
+      "role": "baseline",
+      "sha256": "cc080fc134a77c4a2e415e2143566aa925d01a858592a9e660eb5430c56bddf1"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.8000.0",
+      "role": "baseline",
+      "sha256": "556b3e8f3c18dbb0255971b1792a076dbd07338482927fe7f9f6c597b1801833"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgmp.so.10.5.0",
+      "role": "baseline",
+      "sha256": "0ccdfb6d6f5c039465f6d002cf7e4c072d48ac6a2cffc8dd6c748dec31592804"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgnutls.so.30.37.1",
+      "role": "baseline",
+      "sha256": "ddbae2995750875c07bc218d12a062d73f8250678f54dedda7e9be5068781c98"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0",
+      "role": "baseline",
+      "sha256": "7a8981c2df678797438cc92f246402b81d185604623d12ab71c1ff1c2840e9fc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "role": "baseline",
+      "sha256": "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2",
+      "role": "baseline",
+      "sha256": "c7aa00cf51646f7c32f196d329a562bc873ff32906c9caf6554ca489dd657507"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libhogweed.so.6.8",
+      "role": "baseline",
+      "sha256": "c3c606139d4f7776efa4dbd4a6b62e30c916b07a0cafd8c3ef173d6f093607e3"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2",
+      "role": "baseline",
+      "sha256": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicui18n.so.74.2",
+      "role": "baseline",
+      "sha256": "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2",
+      "role": "baseline",
+      "sha256": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libidn2.so.0.4.0",
+      "role": "baseline",
+      "sha256": "6e632fd9a3125db60bbc623719bbc17b0470330321c5b1c57f1ff7190e5551ad"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1",
+      "role": "baseline",
+      "sha256": "b37407fb2930939bf78b47267019cd201a8af1f4b6a3852249c849cf3a985798"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libkeyutils.so.1.10",
+      "role": "baseline",
+      "sha256": "f48214417757f18793ed6e180cc14ee1d6f04252a518fc7270e8ca1d0b4260fe"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libkrb5.so.3.3",
+      "role": "baseline",
+      "sha256": "fad617a72b5839d30143e7db03281279089def6f18788cbb0b7f86385301bf04"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1",
+      "role": "baseline",
+      "sha256": "936bae947a838bd47676a419dfcfb036d0163249215b58ec706ec7d46b7497aa"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/liblber.so.2.0.200",
+      "role": "baseline",
+      "sha256": "ddf14275b1fb70ba06510094071adcc1462e675f15ae6cdcadbf40c1dabe5a03"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libldap.so.2.0.200",
+      "role": "baseline",
+      "sha256": "a9829b999c95452eb0a34cc7b5349427b76dbf3e5d5c8672a5ca69e454c1b151"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5",
+      "role": "baseline",
+      "sha256": "26b37d25f7ca2a2d348de8ecabacda12e921cd933b21fa069a179760db77219d"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "role": "baseline",
+      "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libmount.so.1.1.0",
+      "role": "baseline",
+      "sha256": "7472255ae5799059b37ddd544788f5665dbd3e1cb78259f52180293039efc2a5"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libnettle.so.8.8",
+      "role": "baseline",
+      "sha256": "a245ed916229583d6fe0b07657b3ed945bc148c28cc08b5266295f620d2b91cc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libnghttp2.so.14.26.0",
+      "role": "baseline",
+      "sha256": "46764ab5b6ca7e353a322054f0bee45d9158a27f3e6a82a2fa4447f2ba9ba268"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libp11-kit.so.0.3.1",
+      "role": "baseline",
+      "sha256": "a59efd4792d3343dedea1d26a28f5597abfe3369082deb504c4802a31b014897"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpcre2-16.so.0.11.2",
+      "role": "baseline",
+      "sha256": "4dfa8a4023270763b8ca1654dc4f59f835393b1ae78085a19369228f8109a671"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2",
+      "role": "baseline",
+      "sha256": "e00576d71d81d3ba0cfa4903c835a44a8723aac96f72f79ff75200b4cff9071b"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libproxy.so.0.5.4",
+      "role": "baseline",
+      "sha256": "d6ece42d55aaf39d67bc6b37fba9a075ad78991f43a760b9bc85771c09523a27"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpsl.so.5.3.4",
+      "role": "baseline",
+      "sha256": "ae6c5a9aecc249fc66e03c16ec6c4385d09d7e12e0ea7694bb831ab4fee8133c"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libresolv.so.2",
+      "role": "baseline",
+      "sha256": "1d730ea434da5a5595bc6a961d7a9ace83e03703205df9644044b3dca79c362f"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/librtmp.so.1",
+      "role": "baseline",
+      "sha256": "15a2a75e8c437b9c99971b5ee10278ab110beef1a56d1d9e5d6759ea140e98ac"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libsasl2.so.2.0.25",
+      "role": "baseline",
+      "sha256": "a0f410ad093236856eee59c4ff2838dc04d932ea0993400f23ed77d67d85af34"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libselinux.so.1",
+      "role": "baseline",
+      "sha256": "0ec0843463f90e227b0e138e1f379774f50b5514bd7f5dbd4c8a87aca0aa6670"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libssh.so.4.9.6",
+      "role": "baseline",
+      "sha256": "b82bd54edb908605b8142be1a6d242df65501af0e9bb7581cc36ebf4d8a5ecfd"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libssl.so.3",
+      "role": "baseline",
+      "sha256": "a40e7b67489bbd257e432c700ff8f6a1ad796425b5eccecdc2930127fdd86624"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33",
+      "role": "baseline",
+      "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.3",
+      "role": "baseline",
+      "sha256": "59994414d0cdec4f678ef91eaaafc44b26b00bca507e4cc7978caaf79f584173"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libudev.so.1.7.8",
+      "role": "baseline",
+      "sha256": "0d6934adafb2ef3c640382440c14d6bd60f391e688c000796ffcea0c72849269"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libunistring.so.5.0.0",
+      "role": "baseline",
+      "sha256": "7bcf825cd449892db5105ad2aed91dcf94a27b796426600c765720c584c54dd1"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1",
+      "role": "baseline",
+      "sha256": "28e77a498f2f17f8cb883c91303f9901343ea0d8e34959d138dd462fcc9b201f"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.3",
+      "role": "baseline",
+      "sha256": "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5",
+      "role": "baseline",
+      "sha256": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "role": "baseline",
+      "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so",
+      "role": "baseline",
+      "sha256": "afe8aea2d1fbefa5c5037817db601bcfb774b7ac86aee4d1b8fa100912546add"
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "role": "baseline",
+      "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-s03-spike-history-fixed-asan-a1/Test_PulseLib_StorageComponents",
+      "role": "fixed",
+      "sha256": "dd981f044dd608cc1a4826bf6ce75a3534c8250fad83b1c39caa6af4f0f431ea"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-s03-spike-history-fixed-asan-a1/NeuroModelerConsole.ini",
+      "role": "fixed",
+      "sha256": "75b72fd9e830e68c1adabceafd5de655d84028e394f36ac6e0d488aadbe40ad5"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Concurrent.so.6.4.2",
+      "role": "fixed",
+      "sha256": "3d9785d54fa680c5ece12e28dc4c7c45bcdc264f0676886f0faecf91fa43b194"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2",
+      "role": "fixed",
+      "sha256": "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2",
+      "role": "fixed",
+      "sha256": "dd9cf5568e5e7b3c3361e29f31dd8696b6037c24f87029a60b2cd837ca5c48cb"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6SerialPort.so.6.4.2",
+      "role": "fixed",
+      "sha256": "0cfb17c7e8d458f92cd29bbc7bfcaf51c84536b263dbdffa8507341dedc0c0bc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Sql.so.6.4.2",
+      "role": "fixed",
+      "sha256": "438bbff10919e04733c2de4514df25e83195146840484a0116b407aed1c63c42"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+      "role": "fixed",
+      "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libb2.so.1.0.4",
+      "role": "fixed",
+      "sha256": "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0",
+      "role": "fixed",
+      "sha256": "9c3860ffab5422410ff9e073d3e82267f00bc68ff1248cbb191640ee2ff045bc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.83.0",
+      "role": "fixed",
+      "sha256": "09037ffad090dc7cb2d3a8137ccc1781a3a4df65bc5184b54c4d995c060bb710"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.83.0",
+      "role": "fixed",
+      "sha256": "3a7decc1cafd2e0eeeab6dd7b503ba7628ac5e3308eea24460cb8e39cff75238"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.83.0",
+      "role": "fixed",
+      "sha256": "2c137b29a3740fb6d12a4c18823bc2b15215646c3ba3bb208b89782df28559f0"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.83.0",
+      "role": "fixed",
+      "sha256": "15f34bcb75dfb0fa30af13cf2b82fb7a9a8e0fbbadf7cabcd397dd65bde552f3"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0",
+      "role": "fixed",
+      "sha256": "2154e35ca6759a8ef39317b9a6b307b610ac44b0ac583e7000692eaa6de5bc75"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.83.0",
+      "role": "fixed",
+      "sha256": "dfb8b2e4e5d5d945a9ebdd6645816e2297d535cd6a7e529bd66a2f6332142270"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.1.0",
+      "role": "fixed",
+      "sha256": "f8cd338ec62f719333abd5cba29a6e0bdb4597dfdffed000ffb868b47e02f2e9"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.1.0",
+      "role": "fixed",
+      "sha256": "d5060475e7259904af3600d01e809710305b296441815bcaa540119a66530a70"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "role": "fixed",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcap.so.2.66",
+      "role": "fixed",
+      "sha256": "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcom_err.so.2.1",
+      "role": "fixed",
+      "sha256": "022943b3b11c860b049bce41342f1c2594941b7b401d95dfdf235521099fee08"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcrypto.so.3",
+      "role": "fixed",
+      "sha256": "6866ed711dab8927e1bf82bf1cd30e828bdfc34f3cc1e83b1c9eb01ce6c37d9a"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.8.0",
+      "role": "fixed",
+      "sha256": "83f783be410435ef15c7f0d30de9f0d11f2fc64b9ca0567fb956ab29842214c8"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcurl.so.4.8.0",
+      "role": "fixed",
+      "sha256": "3e51df20a6b52879ee83a207115a9bc6891092741ce2f5ec791606e6caf859fa"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libdouble-conversion.so.3.1",
+      "role": "fixed",
+      "sha256": "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libduktape.so.207",
+      "role": "fixed",
+      "sha256": "5733ea32f7c50e962e08b26b02f0656851525f3aa06f8b826459e27fa8711199"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4",
+      "role": "fixed",
+      "sha256": "00f593fe192f2851b8ce23b25cec2488d769beb5a8f63e8c9e563071e1075153"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "role": "fixed",
+      "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgflags.so.2.2.2",
+      "role": "fixed",
+      "sha256": "288df2caa66a2de606532a8796fe1efc93d07ec0c3ab41bc38743b70ba304a75"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0",
+      "role": "fixed",
+      "sha256": "d72a56593ae024d868cb7b494f7e48c76e90e4ced9498ab4da2eb3bece85bda3"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0",
+      "role": "fixed",
+      "sha256": "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libglog.so.0.6.0",
+      "role": "fixed",
+      "sha256": "cc080fc134a77c4a2e415e2143566aa925d01a858592a9e660eb5430c56bddf1"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.8000.0",
+      "role": "fixed",
+      "sha256": "556b3e8f3c18dbb0255971b1792a076dbd07338482927fe7f9f6c597b1801833"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgmp.so.10.5.0",
+      "role": "fixed",
+      "sha256": "0ccdfb6d6f5c039465f6d002cf7e4c072d48ac6a2cffc8dd6c748dec31592804"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgnutls.so.30.37.1",
+      "role": "fixed",
+      "sha256": "ddbae2995750875c07bc218d12a062d73f8250678f54dedda7e9be5068781c98"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0",
+      "role": "fixed",
+      "sha256": "7a8981c2df678797438cc92f246402b81d185604623d12ab71c1ff1c2840e9fc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "role": "fixed",
+      "sha256": "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2",
+      "role": "fixed",
+      "sha256": "c7aa00cf51646f7c32f196d329a562bc873ff32906c9caf6554ca489dd657507"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libhogweed.so.6.8",
+      "role": "fixed",
+      "sha256": "c3c606139d4f7776efa4dbd4a6b62e30c916b07a0cafd8c3ef173d6f093607e3"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2",
+      "role": "fixed",
+      "sha256": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicui18n.so.74.2",
+      "role": "fixed",
+      "sha256": "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2",
+      "role": "fixed",
+      "sha256": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libidn2.so.0.4.0",
+      "role": "fixed",
+      "sha256": "6e632fd9a3125db60bbc623719bbc17b0470330321c5b1c57f1ff7190e5551ad"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1",
+      "role": "fixed",
+      "sha256": "b37407fb2930939bf78b47267019cd201a8af1f4b6a3852249c849cf3a985798"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libkeyutils.so.1.10",
+      "role": "fixed",
+      "sha256": "f48214417757f18793ed6e180cc14ee1d6f04252a518fc7270e8ca1d0b4260fe"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libkrb5.so.3.3",
+      "role": "fixed",
+      "sha256": "fad617a72b5839d30143e7db03281279089def6f18788cbb0b7f86385301bf04"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1",
+      "role": "fixed",
+      "sha256": "936bae947a838bd47676a419dfcfb036d0163249215b58ec706ec7d46b7497aa"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/liblber.so.2.0.200",
+      "role": "fixed",
+      "sha256": "ddf14275b1fb70ba06510094071adcc1462e675f15ae6cdcadbf40c1dabe5a03"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libldap.so.2.0.200",
+      "role": "fixed",
+      "sha256": "a9829b999c95452eb0a34cc7b5349427b76dbf3e5d5c8672a5ca69e454c1b151"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5",
+      "role": "fixed",
+      "sha256": "26b37d25f7ca2a2d348de8ecabacda12e921cd933b21fa069a179760db77219d"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "role": "fixed",
+      "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libmount.so.1.1.0",
+      "role": "fixed",
+      "sha256": "7472255ae5799059b37ddd544788f5665dbd3e1cb78259f52180293039efc2a5"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libnettle.so.8.8",
+      "role": "fixed",
+      "sha256": "a245ed916229583d6fe0b07657b3ed945bc148c28cc08b5266295f620d2b91cc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libnghttp2.so.14.26.0",
+      "role": "fixed",
+      "sha256": "46764ab5b6ca7e353a322054f0bee45d9158a27f3e6a82a2fa4447f2ba9ba268"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libp11-kit.so.0.3.1",
+      "role": "fixed",
+      "sha256": "a59efd4792d3343dedea1d26a28f5597abfe3369082deb504c4802a31b014897"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpcre2-16.so.0.11.2",
+      "role": "fixed",
+      "sha256": "4dfa8a4023270763b8ca1654dc4f59f835393b1ae78085a19369228f8109a671"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2",
+      "role": "fixed",
+      "sha256": "e00576d71d81d3ba0cfa4903c835a44a8723aac96f72f79ff75200b4cff9071b"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libproxy.so.0.5.4",
+      "role": "fixed",
+      "sha256": "d6ece42d55aaf39d67bc6b37fba9a075ad78991f43a760b9bc85771c09523a27"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpsl.so.5.3.4",
+      "role": "fixed",
+      "sha256": "ae6c5a9aecc249fc66e03c16ec6c4385d09d7e12e0ea7694bb831ab4fee8133c"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libresolv.so.2",
+      "role": "fixed",
+      "sha256": "1d730ea434da5a5595bc6a961d7a9ace83e03703205df9644044b3dca79c362f"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/librtmp.so.1",
+      "role": "fixed",
+      "sha256": "15a2a75e8c437b9c99971b5ee10278ab110beef1a56d1d9e5d6759ea140e98ac"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libsasl2.so.2.0.25",
+      "role": "fixed",
+      "sha256": "a0f410ad093236856eee59c4ff2838dc04d932ea0993400f23ed77d67d85af34"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libselinux.so.1",
+      "role": "fixed",
+      "sha256": "0ec0843463f90e227b0e138e1f379774f50b5514bd7f5dbd4c8a87aca0aa6670"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libssh.so.4.9.6",
+      "role": "fixed",
+      "sha256": "b82bd54edb908605b8142be1a6d242df65501af0e9bb7581cc36ebf4d8a5ecfd"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libssl.so.3",
+      "role": "fixed",
+      "sha256": "a40e7b67489bbd257e432c700ff8f6a1ad796425b5eccecdc2930127fdd86624"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33",
+      "role": "fixed",
+      "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.3",
+      "role": "fixed",
+      "sha256": "59994414d0cdec4f678ef91eaaafc44b26b00bca507e4cc7978caaf79f584173"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libudev.so.1.7.8",
+      "role": "fixed",
+      "sha256": "0d6934adafb2ef3c640382440c14d6bd60f391e688c000796ffcea0c72849269"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libunistring.so.5.0.0",
+      "role": "fixed",
+      "sha256": "7bcf825cd449892db5105ad2aed91dcf94a27b796426600c765720c584c54dd1"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1",
+      "role": "fixed",
+      "sha256": "28e77a498f2f17f8cb883c91303f9901343ea0d8e34959d138dd462fcc9b201f"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.3",
+      "role": "fixed",
+      "sha256": "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5",
+      "role": "fixed",
+      "sha256": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "role": "fixed",
+      "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libproxy/libpxbackend-1.0.so",
+      "role": "fixed",
+      "sha256": "afe8aea2d1fbefa5c5037817db601bcfb774b7ac86aee4d1b8fa100912546add"
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "role": "fixed",
+      "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    }
+  ],
+  "schema_version": 1,
+  "scientific_verdict": null,
+  "scope": "LTZone event history Default/Reset and two fresh-owner regressions; not a complete spike evaluation runner",
+  "shell_diagnostic": {
+    "cases": [
+      {
+        "mode": "login",
+        "returncode": 1,
+        "stderr": "",
+        "stdout": "observed_exit=1\n"
+      },
+      {
+        "mode": "nonlogin",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "observed_exit=0\n"
+      }
+    ],
+    "diagnostic_only": true,
+    "forced_parent_shlvl": 0,
+    "host": "m40",
+    "logout_files": [
+      {
+        "console_related_lines": [
+          "if [ \"$SHLVL\" = 1 ]; then",
+          "    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q"
+        ],
+        "path": "/home/user/.bash_logout",
+        "sha256": "26882b79471c25f945c970f8233d8ce29d54e9d5eedcd2884f88affa84a18f56"
+      }
+    ]
+  }
+}
