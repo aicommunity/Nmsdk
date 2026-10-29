@@ -120,3 +120,17 @@ Scope: Classic N0 / Branch N1, 2 kHz, два fixed-threshold storage profiles д
 остальная physics/frequency/mode matrix и полный план остаются открытыми.
 Отдельные Reset learner / unexpected-exception recovery сценарии ещё требуют
 адресных runtime controls; наличие обработки в коде не заменяет их проверку.
+
+Принято через no-ff: PulseLib `a95746bd0e1ec6d0f51dffe46f1ff7f654a93580`,
+затем root `d2d32dbc03faeaba15582d0e3c75e2f366577db4`. PulseLib merge
+отличается от tested Core 81ee217 только документацией. Дочерний commit
+опубликован до корневого gitlink. Рекомендация V2 для всей матрицы не вводится.
+
+Fresh recursive checkout d2d32dbc на M40 подтверждает семь зарегистрированных
+сабмодулей на точных gitlinks и чистое дерево. Каждый child commit получен из
+настроенного origin. Объекты Git используют read-only shared local storage;
+это не новый numerical run и не полная повторная сетевая загрузка. Пакет
+`a7a746fe1e35044b5bc1542874b36d81f778cbe1`,
+Reports/StructTrain/TimeLearner/s08-frozen-trials-accepted-closure-m40:
+4 stored / 2 raw hashes проверены; фактический recursive status содержит
+семь чистых записей, SHA совпадают с manifest и gitlinks.
