@@ -10,7 +10,13 @@
 |---|---|---|
 | Phase A 4/8–6/8 | de02a3809395dd0bbd11e2ba792bfc04a51c89f3 | Bin/Configs/SpikeSamples/StructTrain/SelectivityPhaseA/REPORT.md |
 | PSI k-sweep | bf2a68955c83b2540e1bc68d00aaa63eefa6541b | Bin/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib |
-| Branch amp-eq/NextSeg | 50b0cac1ade4f468be82a3d35e4ac6f5514ceb56 | Bin/Configs/SpikeSamples/StructTrain/TimeNeuronTimeLearnerBranch/Train/REPORT_ampeq_nextseginh.md |
+| Branch amp-eq/NextSeg | 50b0cac1ade4f468be82a3d35e4ac6f5514ceb56 | flat Train/Test models + CSV; report added in root d8a1e711fc6edb0432ac09ad579860172e516db9, before later /Train layout |
+
+Уточнённые [Git-источники шести августовских условий](HistoricalEvidenceAnchors.ru.md)
+разделяют snapshot данных и commit отчёта. Проверены 65 адресованных файлов;
+это metadata review, не новый runtime replay. В частности, Branch report ещё
+не существовал в root 50b0cac1, а EXP02 Test_avg1 доступен в августовской истории,
+несмотря на отсутствие текущего каталога.
 
 Phase A прямо отмечает зависимость LTZ peak от порога: offline threshold sweep
 по spiking trace не предсказывает корректно повторный запуск с новым порогом.
