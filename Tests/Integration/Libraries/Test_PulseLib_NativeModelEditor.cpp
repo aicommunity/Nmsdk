@@ -2229,6 +2229,9 @@ template<class Learner> void NativeOwnerParameterBinding(int field,bool matching
 {
     const std::string property=field==0?"DendriteLength":field==1?"NumSynapse":"TipSynapseResistance";
     EditingRig<Learner> rig(2000,field==2?1:0,"editor_binding_"+property+(matching?"_matching":"_conflict"),false,2,true);
+    const auto boundary=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
+    ASSERT_EQ(boundary.status,NativeProbeStatus::Completed);ASSERT_TRUE(boundary.observation);
+    ASSERT_TRUE(boundary.observation->complete);ASSERT_TRUE(boundary.observation->valid);
     const auto previous=rig.learner->ReadNativeParameters();auto requested=previous;
     if(matching)
     {
