@@ -318,3 +318,14 @@ training learner на recognition; новый Test learner/fresh-process owner,
 transient foils, real spike timestamps и threshold confirmation ещё открыты.
 Этот working scope не принят в develop. См. FrozenRecognitionOwner.ru.md.
 Все jobs перечисленных попыток terminal; новая активная серия не заявляется.
+
+## Новые Test learners и fresh-process owner
+
+На обоих workers по 2/2 distinct Test learner cases и 2/2 fresh-process imports
+(7de61282 / abad4a68); независимый ab4a2f7a — по 12/12 Python tests без skips.
+Для пары Classic N0 / Branch N1 V2 проверены source graph immutability, factory
+defaults, полное восстановление и byte-exact 762 samples. Данные: 28 source trials,
+762 paired samples. Пакеты 73b1427f / f079e707: по 108 stored / 106 raw hashes
+сверены локально. См. FrozenRecognitionOwner.ru.md.
+Следующий блок — реальные spike timestamps и frozen transient presentations,
+затем threshold/calibration. На этом checkpoint все перечисленные jobs terminal.

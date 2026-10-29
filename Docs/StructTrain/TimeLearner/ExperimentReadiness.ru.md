@@ -69,3 +69,8 @@ Import/hold внутри learner реализован в отдельной ра
 FrozenRecognitionOwner.ru.md). Это закрывает часть первого блока, но controls
 пока используют training owner; новый Test owner и fresh-process checks
 остаются необходимыми. Остальные три блока и полный исходный план сохраняются.
+
+Новый destination/fresh-process owner для Classic N0 и Branch N1 теперь
+проверен на обоих workers; детали и исходные данные — FrozenRecognitionOwner.ru.md.
+Это scoped transfer acceptance, а не вся первая строка physical matrix.
+Приоритет следующего шага: реальные spikes, transient foils и frozen windows.
