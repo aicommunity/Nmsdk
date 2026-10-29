@@ -1,5 +1,17 @@
 {
   "schema_version": 1,
+  "resume_checkpoint": {
+    "document": "ResumeCheckpoint-2026-10-29.ru.md",
+    "checked_at": "2026-10-29T06:36:44+03:00",
+    "goal_complete": false,
+    "connection_after_user_restoration": "two Paramiko SSH attempts, independent TCP and Windows OpenSSH timed out before authentication",
+    "jump_host": "10.245.1.12:22",
+    "selected_route": "10.245.1.0/24 via 192.168.192.254 on Ethernet 3",
+    "network_configuration_changed": false,
+    "active_native_jobs_claimed": false,
+    "a2_native_rerun_required": false,
+    "next_gate": "independent A2 audit and Git publication before newer owner-policy acceptance"
+  },
   "scope": "terminal PostTune transient evidence; no active job claimed; earlier full regression in ActiveValidation-2026-10-28.json",
   "native_root": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
   "pulse_core": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
