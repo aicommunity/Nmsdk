@@ -80,7 +80,7 @@ def score_recognition_evaluation(spec, observations, package):
                 and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
         zones = [node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]
                  if node["path"] == calibration["ltzone_path"]]
-        require(len(zones) == 1 and equal(_physical(zones[0], "Threshold"), calibration["threshold"]),
+        require(len(zones) == 1 and _physical(zones[0], "Threshold") == number(calibration["threshold"]),
                 "evaluation_effective_threshold_mismatch")
         # File locations and row order are not the semantic identity of the spec.
         semantic = {**spec, "trials": [{key: t[key] for key in t if key != "observation"}
@@ -88,7 +88,7 @@ def score_recognition_evaluation(spec, observations, package):
         result = {"schema_version": 1, "criterion": criterion, "evaluation_spec_digest": canonical_model_sha256(semantic),
                   "coverage_policy": spec["coverage_policy"], "run_id": spec["run_id"], "model_revision": spec["model_revision"],
                   "declared_training_outcome": source["training_outcome"], "source_training_evidence_checked": False,
-                  "calibration": calibration, "native_execution_verified": False,
+                  "calibration": calibration, "effective_threshold": _physical(zones[0], "Threshold"), "native_execution_verified": False,
                   "evaluation_verdict": None, "invalid_trial_ids": invalid}
         if invalid:
             return {**result, "validity": "invalid", "reason": "invalid_or_censored_trial", "pooled_counts": None,
