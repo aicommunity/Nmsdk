@@ -96,5 +96,15 @@
     "test_protocol": "2 kHz external CalculateMode=1 release; 20 kHz CalculateMode=0; explicit fixture sync tolerance 1 s; raw training proof captured",
     "first_implementation_root": "2a9357afa73e485d3461683c4ee7e597bb7fc176",
     "first_implementation_pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0"
+  },
+  "unvalidated_condition_identities": {
+    "scope": "ConditionSpec/content artifacts, matrix/analysis/attempt IDs; runtime content identity schema 2",
+    "server_tests": "not_started",
+    "modules": [
+      "Scripts.StructTrain.TimeLearner.tests.test_condition",
+      "Scripts.StructTrain.TimeLearner.tests.test_runtime"
+    ],
+    "runner_queue_integration": false,
+    "historical_schema_1_rewritten": false
   }
 }
