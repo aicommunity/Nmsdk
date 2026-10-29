@@ -230,3 +230,13 @@ Correct pre-fix f9a30cb7 / PulseLib 6e28d203: 4/4 expected failures normal на
 8 общих waveform projections byte-exact. Полный поиск/retarget/calibration этим
 не подтверждены. См. PostTuneTransientStimulus.ru.md; ранняя неправильная фаза
 Classic является fixture error, не доказательством lifecycle defect.
+
+TL-035: native USerStorageXML::Load не принимал UTF-8 BOM вместе с declaration.
+Baseline root7db4d9737 / Rdk1812624f: три real patched Project.ini читаются,
+synthetic BOM+declaration отклонён; удаление любого элемента устраняет отказ
+на том же binary. Rdk8ebf64dd нормализует только начальный BOM: M40 ASan
+четыре Rdk CTest groups и native readback 4 файлов / 11 values успешны.
+Python lossless adapter: по 7 tests на workers, 1599 tracked StructTrain Project.ini
+byte-exact. Evidence 6210f023 / 13c43281, hashes сверены. A2 launcher syntax и
+A3 disk exhaustion сохранены отдельно; native Elder/wide и production preflight
+не заявлены. См. ConfigDocument.ru.md. Историческая научная причинность не установлена.

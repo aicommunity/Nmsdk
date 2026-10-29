@@ -58,6 +58,7 @@ analysis и attempt identities. Это ещё не preflight/runner и не за
 [ConditionIdentities.ru.md](../../../Docs/StructTrain/TimeLearner/ConditionIdentities.ru.md).
 
 `config_document.py` добавляет lossless edits существующих text leaves с полным
-путём и обязательным expected-old. Numeric names `<00>` сохраняются. Серверная
-проверка пока открыта; это ещё не effective component preflight:
+путём и обязательным expected-old. Numeric names `<00>` сохраняются. По семь
+tests на workers и реальный native readback на M40 ASan прошли; BOM/declaration
+дефект исправлен в Rdk. Это ещё не effective component preflight:
 [ConfigDocument.ru.md](../../../Docs/StructTrain/TimeLearner/ConfigDocument.ru.md).
