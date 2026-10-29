@@ -77,12 +77,16 @@ def audit_editor_directory(directory: Path) -> dict:
     require({p.name for p in paths} == expected, "incomplete_owner_editor_matrix")
     results, samples = [], 0
     for path in paths:
-        results.append(audit_editor_binding(load(path)))
+        record = load(path)
+        results.append(audit_editor_binding(record))
         prefix = path.name.removesuffix("_editor_binding.json")
         packets = list(directory.glob(prefix + "_probe_*_evidence.json"))
         require(len(packets) == 1, "owner_edit_requires_one_primary_boundary_probe")
         packet = packets[0]
-        report = audit_probe(load(packet), packet.with_name(packet.name.replace("_evidence.json", ".csv")))
+        evidence = load(packet)
+        report = audit_probe(evidence, packet.with_name(packet.name.replace("_evidence.json", ".csv")))
+        require(evidence["prepared"]["base_model_revision"] == record["model_before"],
+                "owner_editor_boundary_model_mismatch")
         samples += report["sample_count"]
     return {"schema_version": 1, "cases": len(results), "matching": sum(r["matching"] for r in results),
             "boundary_samples": samples, "evaluation_verdict": None}
