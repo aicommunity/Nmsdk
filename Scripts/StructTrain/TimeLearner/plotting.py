@@ -45,7 +45,7 @@ def render_soma(observation, channel, label, limits, output: Path):
     with plt.rc_context({"font.size": 12, "axes.titlesize": 12, "svg.fonttype": "none"}):
         for name, left, right in time_views(observation["begin"], observation["end"], frequency):
             fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
-            fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.76)
+            fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.70)
             overlay = ax.twinx()
             ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
