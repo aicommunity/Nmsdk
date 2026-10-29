@@ -240,3 +240,14 @@ Python lossless adapter: по 7 tests на workers, 1599 tracked StructTrain Pro
 byte-exact. Evidence 6210f023 / 13c43281, hashes сверены. A2 launcher syntax и
 A3 disk exhaustion сохранены отдельно; native Elder/wide и production preflight
 не заявлены. См. ConfigDocument.ru.md. Историческая научная причинность не установлена.
+
+TL-036: native construction/import/editor принимали изменение physical graph,
+когда связанные owner поля не могли принять required mirror values. Это не
+перезапись SetPointer sources: Rdk оставлял их значения неизменными.
+Construction/import cbbf56ce: M40 ASan 16 controls pass, evidence 1c55f903;
+Elder normal повторил 16 controls в editor-baseline A1. Editor A2 root03fd6e47
+на обоих workers: 6 conflict failures / 6 matching passes, actual Applied
+при несовпадающей metadata. Первый A1 пропускал consumed probe boundary —
+fixture error, не algorithm evidence. Editor fix 0ca75b3 пока проходит серверный
+gate. См. NativeOwnerBindings.ru.md. Причинность для исторических кампаний
+не установлена; полный lifecycle/control-flag audit этим не закрыт.
