@@ -1089,6 +1089,51 @@ TEST(NativeLearnedState,FreshProcessImport)
 
 enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled };
 
+template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJsonObject& package)
+{
+    const auto target=rig.learner->InputPattern.GetData();const auto frozen=rig.Revision();
+    const std::string implementation="native-learned-boundary-fixture-v1";
+    auto make=[&](int index,bool foil,RecognitionResetPolicy policy) {
+        NativeRecognitionTrialRequest request;request.runId=rig.name+"_frozen";request.trialId="trial_"+std::to_string(index);
+        request.sampleId=foil?"foil_reverse":"training_target";request.label=foil?"foil":"target";
+        request.resetPolicy=policy;request.pattern=target;
+        if(foil)for(int row=0;row<target.GetRows();++row)request.pattern(row,0)=target(target.GetRows()-row-1,0);
+        QJsonArray values;double span=0.;
+        for(int row=0;row<target.GetRows();++row){values.append(request.pattern(row,0));span+=request.pattern(row,0);}
+        request.patternHash=NmsdkTools::CanonicalModelDataSha256(values).toStdString();
+        request.duration=std::ceil((span+.03)*rig.frequency)/rig.frequency;return request;
+    };
+    auto tick=[&] { rig.model->Calculate();rig.environment->IncreaseModelTimeByStep(); };
+    for(int i=0;i<4;++i)
+    {
+        auto request=make(i,i%2==1,i<2?RecognitionResetPolicy::PerTrial:RecognitionResetPolicy::PreserveNeuronDynamics);
+        rig.learner->QueueNativeRecognitionTrial(request);
+        EXPECT_THROW(rig.learner->QueueNativeRecognitionTrial(request),std::logic_error);
+        std::optional<NativeRecognitionTrialObservation> result;
+        for(int n=0;n<10000 && !result;++n){tick();result=rig.learner->TakeNativeRecognitionTrialResult();}
+        ASSERT_TRUE(result);Artifact(rig.name+"_frozen_trial_"+std::to_string(i)+".json",QJsonDocument(NativeRecognitionTrialJson(*result)).toJson());
+        ASSERT_TRUE(result->valid)<<result->reason;EXPECT_TRUE(result->complete);EXPECT_TRUE(result->armed);
+        EXPECT_EQ(result->stimulusTimes.size(),std::size_t(rig.inputCount));
+        EXPECT_EQ(result->samples.size(),std::size_t(std::round(request.duration*rig.frequency))+1);
+        EXPECT_EQ(result->modelBefore,frozen);EXPECT_EQ(result->modelAfter,frozen);
+        EXPECT_TRUE(NativeTrainingPatternEqual(rig.learner->InputPattern.GetData(),target));
+        EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),package);
+        EXPECT_THROW(rig.learner->QueueNativeRecognitionTrial(request),std::runtime_error);
+    }
+    auto cancelled=make(4,false,RecognitionResetPolicy::PerTrial);
+    rig.learner->QueueNativeRecognitionTrial(cancelled);tick();
+    rig.learner->CancelNativeRecognitionTrial("explicit_cancel");
+    auto stopped=rig.learner->TakeNativeRecognitionTrialResult();ASSERT_TRUE(stopped);
+    EXPECT_FALSE(stopped->valid);EXPECT_FALSE(stopped->complete);EXPECT_EQ(stopped->reason,"explicit_cancel");
+    Artifact(rig.name+"_frozen_trial_cancelled.json",QJsonDocument(NativeRecognitionTrialJson(*stopped)).toJson());
+    auto gap=make(5,false,RecognitionResetPolicy::PerTrial);rig.learner->QueueNativeRecognitionTrial(gap);tick();
+    rig.environment->IncreaseModelTimeByStep();tick();
+    auto dropped=rig.learner->TakeNativeRecognitionTrialResult();ASSERT_TRUE(dropped);
+    EXPECT_FALSE(dropped->valid);EXPECT_FALSE(dropped->complete);EXPECT_EQ(dropped->reason,"recognition_sample_gap");
+    Artifact(rig.name+"_frozen_trial_gap.json",QJsonDocument(NativeRecognitionTrialJson(*dropped)).toJson());
+    EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());EXPECT_EQ(rig.Revision(),frozen);
+}
+
 template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
@@ -1225,6 +1270,7 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
             {"source_model_before",QString::fromStdString(trainingBefore)},{"source_model_after",QString::fromStdString(trainingAfter)},
             {"target_model",QString::fromStdString(frozenAfter)},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     }
+    if(fresh)FrozenTrialChecks(rig,package);
     // A direct physical edit is discovered before the next child calculation.
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
     channel->Capacity=channel->Capacity.GetData()*1.01;rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
