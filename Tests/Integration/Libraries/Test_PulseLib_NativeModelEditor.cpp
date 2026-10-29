@@ -1895,7 +1895,7 @@ enum class ConnectedStopPoint { Early,Partial,Search,AfterSample,KeepTrue };
 template<class Learner> void ConnectedStop(ConnectedStopPoint point,int calculateMode)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
-    EditingRig<Learner> rig(2000,1,"connected_stop_"+std::to_string(int(point))+"_mode"+std::to_string(calculateMode),false,2,true);
+    EditingRig<Learner> rig(2000,1,"connected_stop_"+std::to_string(int(point))+"_mode"+std::to_string(calculateMode),false,2,false);
     rig.learner->CalculateMode=calculateMode;
     const auto configuration=Configuration(rig);
     rig.learner->ControllerVersion=2;
@@ -1923,7 +1923,7 @@ template<class Learner> void ConnectedStop(ConnectedStopPoint point,int calculat
         {parametersAtStop=rig.learner->ReadNativeParameters();flag->Value=false;requested=true;}
     };
     plan.observationSink=[&](const NativeProbeResult& packet) {
-        const auto stem=rig.name+"_stop_trial_"+std::to_string(++observations);
+        const auto stem=rig.name+"_stopped_trial_"+std::to_string(++observations);
         Artifact(stem+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
         Artifact(stem+".csv",QByteArray::fromStdString(trace.str()));
     };
@@ -1966,6 +1966,7 @@ template<class Learner> void ConnectedStop(ConnectedStopPoint point,int calculat
         const auto state=rig.learner->ExportNativeLearnedState("native-connected-stop-fixture-v1");
         EXPECT_EQ(state["kind"].toString(),"timelearner_stopped_state");
         Artifact(rig.name+"_stopped_state.json",QJsonDocument(state).toJson());
+        Artifact(rig.name+"_stopped_summary.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
     }
     rig.learner->IsNeedToTrain.DetachFrom();
     if(keep)rig.learner->IsNeedToTrain=false; // Local cleanup after the positive-control observation.
