@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "first retirement batch: seven historical root Docs shell launchers only; active tools/physics models and Bin/PulseLib remain to migrate",
+  "scope": "two retirement batches: eleven historical root Docs shell launchers/monitors; active tools/physics models and Bin/PulseLib remain to migrate",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -137,6 +137,82 @@
       "replacement": null,
       "reason": "One-off historical SoftCold/Full49 queue, build or monitor; fixed old workspace/cases/date; current package has no reference to this launcher.",
       "original_results": "preserved; archive_commit is a retrieval snapshot, not a claim about experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH.sh",
+      "action": "retired_historical",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "last_change_commit": "9910dde2543bcffd5123bca3bdda528a221ca9f3",
+      "blob_sha1": "7d688df2d9150b81b5ed8846a9ad06aabcc5b923",
+      "content_sha256": "63076d83d15115ad1852ba8cf25b62711f5214437436b2073c077bee6cf29ca7",
+      "bytes": 1986,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "b62127538694a3442771598420fd78fa7e405c8b:Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical InhGrid SoftCold/disk-stop campaign launcher or monitor; old paths/TSV/case-prefix pool and auto-offload policy. No current maintained package or submodule literal reference found; general runner replacement remains incomplete.",
+      "original_results": "preserved; source snapshot is for script retrieval, not actual experiment execution provenance"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH_CASES.sh",
+      "action": "retired_historical",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "last_change_commit": "e42603e086d7bb2a113e0301fbc59937524f73e9",
+      "blob_sha1": "46370404ce7fa0ec71b0396845a87a5e6be0130e",
+      "content_sha256": "00393e13a83862a89d935417547eee1b501844e6c5eca3543d9b4d0f62470968",
+      "bytes": 2466,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH_CASES.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "b62127538694a3442771598420fd78fa7e405c8b:Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH_CASES.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical InhGrid SoftCold/disk-stop campaign launcher or monitor; old paths/TSV/case-prefix pool and auto-offload policy. No current maintained package or submodule literal reference found; general runner replacement remains incomplete.",
+      "original_results": "preserved; source snapshot is for script retrieval, not actual experiment execution provenance"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_loop.sh",
+      "action": "retired_historical",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "last_change_commit": "df02bde2b4e9f2dc6c1d84adeea74080e0e9a7a8",
+      "blob_sha1": "06b9b2a8b6edc6da1588d147379d7f35802e1fc8",
+      "content_sha256": "1324650d9e0c725c7f5a87e24c99aa957649ffaffd81388585247d326e81e938",
+      "bytes": 1636,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_loop.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "b62127538694a3442771598420fd78fa7e405c8b:Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_loop.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical InhGrid SoftCold/disk-stop campaign launcher or monitor; old paths/TSV/case-prefix pool and auto-offload policy. No current maintained package or submodule literal reference found; general runner replacement remains incomplete.",
+      "original_results": "preserved; source snapshot is for script retrieval, not actual experiment execution provenance"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_diskstop_rerun.sh",
+      "action": "retired_historical",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "last_change_commit": "e42603e086d7bb2a113e0301fbc59937524f73e9",
+      "blob_sha1": "6cfdbe25b280874a034cd7555fbc775df8bb9138",
+      "content_sha256": "7079b0630d9ac27d9b0ef09d555951c113ed8dffa6a74c00b8325370615849ff",
+      "bytes": 2975,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/b62127538694a3442771598420fd78fa7e405c8b/Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_diskstop_rerun.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "b62127538694a3442771598420fd78fa7e405c8b:Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_diskstop_rerun.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical InhGrid SoftCold/disk-stop campaign launcher or monitor; old paths/TSV/case-prefix pool and auto-offload policy. No current maintained package or submodule literal reference found; general runner replacement remains incomplete.",
+      "original_results": "preserved; source snapshot is for script retrieval, not actual experiment execution provenance"
     }
   ],
   "reference_review": {
