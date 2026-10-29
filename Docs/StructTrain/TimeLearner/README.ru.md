@@ -82,3 +82,7 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [ConditionSpec и раздельные identities: рабочий codec, приёмка ещё открыта](ConditionIdentities.ru.md).
 
 - [Точка продолжения 29.10: точные sources, завершённые A2 и ожидающие проверки](ResumeCheckpoint-2026-10-29.ru.md).
+
+- [Lossless Rdk configs, numeric tags, native readback и UTF-8 BOM finding](ConfigDocument.ru.md).
+
+- [M40: перенос завершённых runtime и подтверждённая очистка дублей](M40Storage-2026-10-29.ru.md).

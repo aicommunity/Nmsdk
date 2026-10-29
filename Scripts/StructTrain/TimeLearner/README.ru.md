@@ -51,5 +51,14 @@ Native execution, training certificate и scientific PASS команда не у
 analysis и attempt identities. Это ещё не preflight/runner и не замена Bin queue.
 `runtime.py` создаёт manifest schema 2: deploy/resource/compiler paths исключены
 из content identity, полная provenance сохраняется. Историческая schema 1
-не пересчитывается. Эти новые изменения ожидают серверной проверки;
-см. Docs/StructTrain/TimeLearner/ConditionIdentities.ru.md.
+не пересчитывается. Source 670f2ff79 прошёл 18 Python tests на каждом worker
+и реальный relocation/startup A2 binary с суффиксом `.rs2`: production snapshot
+сохранил fingerprint. Это проверка integrity/loader scope; подключения к runner
+и очередям пока нет. Артефакты и ограничения:
+[ConditionIdentities.ru.md](../../../Docs/StructTrain/TimeLearner/ConditionIdentities.ru.md).
+
+`config_document.py` добавляет lossless edits существующих text leaves с полным
+путём и обязательным expected-old. Numeric names `<00>` сохраняются. По семь
+tests на workers и реальный native readback на M40 ASan прошли; BOM/declaration
+дефект исправлен в Rdk. Это ещё не effective component preflight:
+[ConfigDocument.ru.md](../../../Docs/StructTrain/TimeLearner/ConfigDocument.ru.md).

@@ -10,9 +10,11 @@
     "network_configuration_changed": false,
     "active_native_jobs_claimed": false,
     "a2_native_rerun_required": false,
-    "next_gate": "independent A2 audit and Git publication before newer owner-policy acceptance"
+    "next_gate": "finish integrated normal regressions and independent audits on both workers; no active network blocker",
+    "connection_recovered": true,
+    "historical_network_failure": true
   },
-  "scope": "completed integrated native and independent audit gate; no active job claimed for this acceptance source",
+  "scope": "historical transient plus completed graph-boundary A2, condition/runtime evidence and current owner-policy/integrated validation",
   "native_root": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
   "pulse_core": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
   "pulse_documented": "8f248aa",
@@ -67,8 +69,14 @@
         "a2_native_terminal": true,
         "a2_process_exit_status": 0,
         "a2_tests_passed": 14,
-        "a2_independent_audit": "not_started",
-        "a2_artifact_publication": "pending"
+        "a2_independent_audit": "passed",
+        "a2_artifact_publication": "published",
+        "a2_python_tests": 2,
+        "a2_sample_pairs": 16570,
+        "a2_old_csv_equal": 20,
+        "a2_report_commit": "241c10f2ec01a50e95f3f0d2edcc8273fc08a857",
+        "stored_hashes_verified": 426,
+        "raw_hashes_verified": 424
       },
       "10.245.1.17": {
         "attempt": "s08-boundary-asan-a1",
@@ -85,8 +93,14 @@
         "a2_native_terminal": true,
         "a2_process_exit_status": 0,
         "a2_tests_passed": 14,
-        "a2_independent_audit": "not_started",
-        "a2_artifact_publication": "pending"
+        "a2_independent_audit": "passed",
+        "a2_artifact_publication": "published",
+        "a2_python_tests": 2,
+        "a2_sample_pairs": 16570,
+        "a2_old_csv_equal": 8,
+        "a2_report_commit": "45d55b03d4c6d0d56aad964c62321bafa8591078",
+        "stored_hashes_verified": 241,
+        "raw_hashes_verified": 239
       }
     },
     "python_root": "c174c98b237cd241fbae1d46850d7cbdc0d0c100",
@@ -99,65 +113,235 @@
   "unvalidated_owner_policy": {
     "root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
     "pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
-    "server_build": "not_started",
+    "server_build": "passed both workers",
     "native_cases_planned": 9,
-    "subsequent_lifecycle_callback_guard": "implemented; no server build yet",
-    "reason": "jump host 10.245.1.12 TCP/SSH timeout; no native test rerun needed for completed A2",
+    "subsequent_lifecycle_callback_guard": "tested in native source c7266dcb on normal Elder and ASan M40",
+    "reason": "targeted normal Elder and ASan M40 completed and published; integrated normal regression pending",
     "latest_pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
     "subsequent_provenance_guard": "full reference/final/observed packets; negative control preserves certificate/status/epoch while changing reference trial IDs",
     "test_protocol": "2 kHz external CalculateMode=1 release; 20 kHz CalculateMode=0; explicit fixture sync tolerance 1 s; raw training proof captured",
     "first_implementation_root": "2a9357afa73e485d3461683c4ee7e597bb7fc176",
     "first_implementation_pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0",
-    "historical_checkpoint": true,
-    "superseded_by": "integrated_normal_regression"
+    "workers": {
+      "10.245.1.11": {
+        "native_passed": 23,
+        "native_exit_status": 0,
+        "python_tests_each_attempt": 4,
+        "primary_training_packets": 42,
+        "sample_pairs": 8646,
+        "report_commit": "640a39df9f5a83bff84a06294c1c5d10ee6a4913",
+        "report_local_hash_check": "324 stored / 322 raw verified",
+        "graph_csv_equal_previous_a2": 20
+      },
+      "10.245.1.17": {
+        "native_passed": 23,
+        "native_exit_status": 0,
+        "native_terminal": true,
+        "python_tests_each_attempt": 4,
+        "primary_training_packets": 42,
+        "sample_pairs": 8646,
+        "graph_csv_equal_previous_a2": 20,
+        "report_commit": "ec944b447468c2d20ad308b069ef6136bc41aabc",
+        "report_local_hash_check": "324 stored / 322 raw verified"
+      }
+    },
+    "python_a1": "664ced2346171cd6b50f3f79af217dde83dde86f",
+    "python_a2": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
+    "documented_pulse": "8683bbff4f587946239d3cb4ebde37869493cb93"
   },
   "unvalidated_condition_identities": {
     "scope": "ConditionSpec/content artifacts, matrix/analysis/attempt IDs; runtime content identity schema 2",
-    "server_tests": "not_started",
+    "server_tests": "18 passed on each worker",
     "modules": [
       "Scripts.StructTrain.TimeLearner.tests.test_condition",
       "Scripts.StructTrain.TimeLearner.tests.test_runtime"
     ],
     "runner_queue_integration": false,
     "historical_schema_1_rewritten": false,
-    "historical_checkpoint": true,
-    "superseded_by": "integrated_normal_regression"
+    "runtime_relocation": "real .rs2 binary startup and production snapshot identity equal on each worker",
+    "reports": {
+      "elder1": "c05b75aec4b8952002af3d4e91d4e07d60c8f96b",
+      "m40": "976bdfcf71fd67593450e08f303cfa90a0df01f1"
+    },
+    "local_hash_verification_each": {
+      "stored": 14,
+      "raw": 12
+    }
   },
   "integrated_normal_regression": {
+    "host": "10.245.1.11",
     "native_root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
-    "native_pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
+    "session_id": 49214,
+    "attempt": "s08-integrated-normal-a1",
+    "state": "both native and independent audit processes completed exit zero; evidence published and all stored/raw hashes verified locally",
+    "scope": "three maintained Rdk CTest targets plus full PulseLib parent, separate XML",
+    "runtime": "/home/user/timelearner-refactor/runtime-s08-integrated-normal-a1",
+    "workers": {
+      "10.245.1.11": {
+        "native_session_id": 49214,
+        "observed_native_pid": 3623663,
+        "python_waiter_session_id": 99128,
+        "cache": "/home/user/timelearner-refactor/build-order-fixed-normal-a1",
+        "process_state": "completed",
+        "independent_primary_data_audit_passed": true
+      },
+      "10.245.1.17": {
+        "native_session_id": 8546,
+        "observed_native_pid": 1062506,
+        "python_waiter_session_id": 9628,
+        "cache": "/home/user/timelearner-refactor/build-s08-integrated-normal-a1",
+        "source": "/home/user/timelearner-refactor/source-s08-integrated-normal-a1",
+        "low_disk_period_observed": true,
+        "acceptance_requires_independent_primary_data_completeness": true,
+        "process_state": "completed",
+        "independent_primary_data_audit_passed": true
+      }
+    },
     "python_root": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
-    "workers": [
-      "10.245.1.11",
-      "10.245.1.17"
-    ],
-    "state": "completed and published, all stored/raw hashes verified locally",
+    "python_audit_attempt": "s08-integrated-data-a1",
+    "python_scope": "13 modules; all required evidence directories explicit; fresh-process cross-worker replay remains separate",
     "native_tests_each": 491,
     "native_passed_each": 480,
     "native_helper_skips_each": 11,
     "native_failures_each": 0,
     "rdk_ctest_groups_each": 3,
     "python_tests_each": 114,
-    "python_failures_each": 0,
-    "python_errors_each": 0,
     "python_skips_each": 0,
+    "python_failures_each": 0,
     "reports": {
       "elder1": "bc37077f18adce02c9d90b2aecdc2b75fc8e6b4f",
       "m40": "182191b9534f62257687b97b24f9f7fc936dd71e"
     },
-    "hashes_each": {
+    "local_hash_verification_each": {
       "stored": 3268,
       "raw": 3266
     },
+    "develop_merged": true,
     "accepted_pulse_develop": "4db59424125dda426a29bc74faac565db871511f",
-    "root_acceptance_branch": "stage08/integrated-acceptance",
-    "fresh_recursive_closure_verified": true,
-    "full_plan_complete": false,
     "accepted_root_develop": "9e06c339a8186e3330303f6cd4fa829d09b74510",
+    "fresh_recursive_closure_verified": true,
     "closure_report_commit": "7f21442575db614df55c781bb4c9b242c5fbea6e",
     "closure_hashes": {
       "stored": 5,
       "raw": 2
     }
+  },
+  "config_adapter": {
+    "branch": "stage09/lossless-config-adapter",
+    "native_root": "ccbf453f1d51638369c6b0afcf89cc1cbad166f4",
+    "rdk_tested": "8ebf64dd39571cb6f95f23cfc2b55f30972c591c",
+    "rdk_documented": "abc21b650471ef6d2e5ef9ba94429d34f3697323",
+    "python_tests_each_worker": 7,
+    "tracked_structtrain_project_ini_files": 1599,
+    "native_readback_host": "10.245.1.17",
+    "build_kind": "asan_detect_leaks_0",
+    "native_files": 4,
+    "native_values": 11,
+    "rdk_ctest_groups": 4,
+    "reports": {
+      "m40": "6210f02353cf2b3956a8a4ee93201607d870541a",
+      "elder1": "13c4328116f284d17b09d4af758b38e67e39a6fd"
+    },
+    "effective_component_preflight_complete": false,
+    "attempts": {
+      "a1": "reproduced native BOM plus declaration failure",
+      "a2": "shell launcher syntax error; not parser failure",
+      "a3": "build disk exhaustion; not parser failure",
+      "a4": "passed"
+    },
+    "rdk_accepted_develop": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+    "normal_rdk_evidence": {
+      "host": "10.245.1.11",
+      "ctest_groups": 4,
+      "encoding_tests": 2,
+      "commit": "fa39375f17f3cb694a9a42c3d37c3d7c11c5a58b",
+      "stored_hashes": 10,
+      "raw_hashes": 8,
+      "wide_platform_verified": false
+    }
+  },
+  "m40_storage": {
+    "report_commit": "dc733b2a85685127b033889449d310fd8d77d941",
+    "data_mount": "/media/user/Data",
+    "data_device": "/dev/sda",
+    "policy": "user: only confirmed duplicates and caches; unique raw scientific traces retained",
+    "completed_runtime_count_moved": 10,
+    "moved_bytes": 5410721907,
+    "old_runtime_paths_preserved": true,
+    "immutable_git_pack_duplicate_copies_replaced": 191,
+    "released_pack_blocks_bytes": 18389184512,
+    "git_head_objects_readable": 75,
+    "stored_hashes_verified": 30,
+    "raw_hashes_verified": 28,
+    "active_jobs_moved": false,
+    "raw_experiment_files_deleted": 0,
+    "production_storage_scheduler_complete": false
+  },
+  "native_owner_config_bindings": {
+    "native_root": "1f819b429a292a575593203be3bfe6b42392c8c4",
+    "pulse_core": "cbbf56ce541027ef8e07d6be7a1841cf513b2b8e",
+    "worker": "10.245.1.17",
+    "build_kind": "asan_detect_leaks_0",
+    "native_tests_passed": 16,
+    "independent_json_readbacks": 16,
+    "baseline_a4_conflicting_expected_failures": 8,
+    "baseline_a4_matching_passes": 8,
+    "report_commit": "1c55f903d9d30e1367a30461c5f5f7b1a92f30c3",
+    "local_hash_verification": {
+      "stored": 467,
+      "raw": 465
+    },
+    "elder_validation_complete": false,
+    "editor_metadata_assignments_covered": false,
+    "runtime_control_flags_covered": false,
+    "develop_merged": true
+  },
+  "native_owner_editor_bindings": {
+    "native_root": "796a73075b930d634c905355541e47187aed6f5f",
+    "pulse_core": "0ca75b3e5b7354ee801645d5d0d73b3f942cb645",
+    "auditor_root": "07e66559a4030537ed24605fcdb676838b94b257",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "process_state": "completed_exit_zero",
+    "native_passed_each": 46,
+    "native_skips_each": 0,
+    "native_failures_each": 0,
+    "python_tests_each": 2,
+    "complete_boundary_probes_each": 12,
+    "boundary_samples_each": 4332,
+    "fixed_reports": {
+      "elder1": "073b2906e6926f026f9a2c55ee1b69475f49a9ff",
+      "m40": "37e6326c98bcd74d859ff3381acf90514763905a"
+    },
+    "fixed_hashes_each": {
+      "stored": 530,
+      "raw": 528
+    },
+    "baseline_reports": {
+      "elder1": "2c08b5b4c0a2fb7f359a31609e13d8d6a73f2d13",
+      "m40": "1e9e52f225b6cec1b5b8cde51b30b65c7abdd869"
+    },
+    "baseline_hashes_each": {
+      "stored": 331,
+      "raw": 329
+    },
+    "baseline_conflicting_expected_failures_each": 6,
+    "baseline_matching_passes_each": 6,
+    "initial_missing_probe_boundary_fixture_error": true,
+    "develop_merged": true,
+    "runtime_control_flags_complete": false,
+    "accepted_pulse_develop": "4e6be0cbc0215805cd40b881600934e35c86430e"
+  },
+  "next_experiment_gate_document": "ExperimentReadiness.ru.md",
+  "goal_complete": false,
+  "owner_bom_acceptance": {
+    "root_acceptance_branch": "stage04/native-owner-config-bindings",
+    "pulse_develop": "4e6be0cbc0215805cd40b881600934e35c86430e",
+    "rdk_develop": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+    "root_merge_pending": true,
+    "fresh_recursive_closure_verified": false,
+    "full_stage_4_complete": false
   }
 }
