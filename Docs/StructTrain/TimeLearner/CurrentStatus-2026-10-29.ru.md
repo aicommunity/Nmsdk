@@ -15,6 +15,16 @@ status=1 объяснён и воспроизведён отдельной ди�
 завершение всего этапа 3/4 или полного frozen recognition runner не утверждается.
 [Дефект, проверки и действия после восстановления связи](SpikeHistoryReset.ru.md).
 
+Новая scoped приёмка `stage08/frozen-recognition-trials`: общий native executor
+полных target/foil проб обоих learner и production analyze CLI. Source 127806a34 /
+Core 81ee217: на каждом worker 6/6 native и 12/12 Python без skips/errors,
+16 полных проб, 8 неполных контролей, 3864 кадров и 4 actual spikes. Протоколы
+reset-per-trial / preserve-neuron-dynamics и fixed thresholds 1 / 0.0001 заданы
+явно. Пакеты опубликованы, по 414 stored / 412 raw hashes проверены. Все jobs
+завершены. Это ещё не calibration/scientific metrics/production experiment job,
+вся physics/mode matrix или завершение этапа 8.
+[API, данные и ограничения](FrozenRecognitionTrials.ru.md).
+
 ## Предыдущая принятая отправная точка develop
 
 | Репозиторий | Опубликованный merge SHA |

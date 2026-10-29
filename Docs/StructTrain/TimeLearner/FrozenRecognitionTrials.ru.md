@@ -46,9 +46,10 @@ Multirate, внешние источники изменяемых protocol contr
 неподдерживаемые генераторы отвергаются, а не исправляются на каждом тике.
 
 Порог наследуется из imported recognition package и остаётся frozen. API выбора
-порога/калибровки ещё не реализован. Положительный spike-path нового executor,
-полная матрица LT-профилей, retarget, PostTune/C-trim и independent scientific
-evaluation не объявляются закрытыми адресным контролем молчаливой модели.
+порога/калибровки ещё не реализован. Полная матрица LT-профилей, retarget,
+PostTune/C-trim и independent scientific evaluation не объявляются закрытыми
+адресными fixed-threshold controls. Положительный spike-path проверен отдельно
+на двух заранее объявленных low-threshold storage-профилях (A5 ниже).
 
 ## Наблюдения и анализ
 
@@ -98,8 +99,24 @@ A4 root 63e8be6ac / Core 81ee217 добавляет diagnostic catch для не
 A5 root 127806a34d5caa07f4d9543c465fc6a497925e3e перемещает readback после
 configured native Build. Два прежних и два новых fixed-threshold профиля
 проверяют именно фактический дочерний LTZone. Порог положительного контроля
-задан в storage до Train; live-подмена в frozen Test не применяется. Проход
-запущен на обоих workers; его результат пока не подтверждён. Следующий
-independent gate требует четыре пакета, спайки у двух low-threshold моделей,
-согласованные первичные histories и ноль skips; полноту пакетов нельзя
-достраивать из предыдущего silent-only прохода.
+задан в storage до Train; live-подмена в frozen Test не применяется. На обоих
+workers завершён: по 6/6 native и 12/12 independent Python/CLI, ноль skips/errors.
+Четыре пакета дают 16 полных проб и 8 invalid cancel/gap controls, 3864 первичных
+кадра. Четыре actual spikes повторно собраны из исходных LT histories; обе
+low-threshold модели спайкуют, обе high-threshold модели молчат. Общий auditor
+проверяет четыре source proofs с 56 primary training trials и paired reference
+waveforms. M40 работает под ASan с detect_leaks=0. Process и native statuses=0.
+
+Пакеты: Elder `60a1bd6fa44be04ce8fb59f2f2813dad84373b74`, M40
+`4eb082dd4ae6a5dd9c7fa4d4516ccb3b17bbce70`; разделы
+Reports/StructTrain/TimeLearner/s08-frozen-trials-{elder1,m40}.
+На каждом локально проверены 414 stored / 412 raw hashes; перед публикацией
+повторно сверены 112 / 300 runtime path/hash records соответственно.
+Сохранены все A1–A5 и оба independent gates, включая ошибки постановки A1/A4.
+
+Scope: Classic N0 / Branch N1, 2 kHz, два fixed-threshold storage profiles для
+каждой топологии. Все jobs завершены. Это приёмка full-pattern native trial API
+и его data audit. Калибровка, production train/evaluate job, scientific metrics,
+остальная physics/frequency/mode matrix и полный план остаются открытыми.
+Отдельные Reset learner / unexpected-exception recovery сценарии ещё требуют
+адресных runtime controls; наличие обработки в коде не заменяет их проверку.

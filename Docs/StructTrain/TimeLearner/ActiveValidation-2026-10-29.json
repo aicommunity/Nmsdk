@@ -462,5 +462,38 @@
     "active_jobs": false,
     "accepted_root": "a28765c3e816bab09c08366510b35edfafff91f7",
     "accepted_pulse": "a753603cc27e2f5580195e649fc672eeb5769618"
+  },
+  "frozen_recognition_trials": {
+    "native_root": "127806a34d5caa07f4d9543c465fc6a497925e3e",
+    "pulse_core": "81ee217ceee27c54528b279d1033cc9e8536ea9e",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "native_tests_each": 6,
+    "python_tests_each": 12,
+    "skips_each": 0,
+    "full_trials_each": 16,
+    "invalid_controls_each": 8,
+    "primary_frames_each": 3864,
+    "actual_spikes_each": 4,
+    "source_training_trials_each": 56,
+    "profiles": "Classic N0 / Branch N1; 2 kHz; fixed storage thresholds 1 and 0.0001",
+    "reports": {
+      "elder1": "60a1bd6fa44be04ce8fb59f2f2813dad84373b74",
+      "m40": "4eb082dd4ae6a5dd9c7fa4d4516ccb3b17bbce70"
+    },
+    "stored_hashes_each": 414,
+    "raw_hashes_each": 412,
+    "runtime_hash_records": {
+      "elder1": 112,
+      "m40": 300
+    },
+    "active_jobs": false,
+    "scoped_accepted": true,
+    "develop_merged": false,
+    "scientific_verdict": null,
+    "full_stage_8_complete": false,
+    "remaining": "calibration; production job and scientific metrics; full mode/physics matrix; additional Reset/recovery controls"
   }
 }
