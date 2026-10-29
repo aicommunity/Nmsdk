@@ -75,8 +75,14 @@ Baseline относится к новому edit API, не объясняет а
 
 Fixed native source `325052a0802e431f45ed91619c089fbc0eef7922`, PulseLib
 `32dc2e0223cab8adca8280eb1c4586764b6a9c86` прошёл normal/ASan A2: по 14/14 native tests, terminal exit 0 возвращён
-сохранёнными SSH-сессиями. Independent A2 audit и публикация ещё ожидают
-восстановления новых подключений к jump host. Состав:
+сохранёнными SSH-сессиями. После восстановления связи independent A2 audit
+завершён на обоих workers: по 2/2 Python tests, 10 graph cases, 4 guards,
+16570 exact sample pairs; совпадают 20 Elder и 8 полных M40 A1 CSV. Пакеты
+[Elder](../../../Reports/StructTrain/TimeLearner/s08-boundary-elder1/README.md)
+`241c10f2ec01a50e95f3f0d2edcc8273fc08a857` и
+[M40](../../../Reports/StructTrain/TimeLearner/s08-boundary-m40/README.md)
+`45d55b03d4c6d0d56aad964c62321bafa8591078` опубликованы; локально проверены
+426 stored / 424 raw и 241 / 239 hashes соответственно. Состав:
 10 graph cases и 4 guards (owner Reset, другой owner, изменённое множество
 детей, внешний listener). Два waveform probes используют уже существующий
 production ModelRevisionObserver: фактические параметры/связи проверяются на
@@ -84,7 +90,7 @@ production ModelRevisionObserver: фактические параметры/св
 не изменение интегратора, Dataset protocol или амплитудной цели. Общие raw CSV
 с A1 должны сравниваться отдельно. Успех native tests не подменяет независимую проверку и доступность raw артефактов в Git.
 
-## Owner policy boundary — новая реализация, ещё без серверной проверки
+## Owner policy boundary — реализация и история до серверной проверки
 
 Root `2a9357afa73e485d3461683c4ee7e597bb7fc176` / PulseLib
 `d9b4199cfb6644962cff678763c98eaaecbfa7c0` добавляет NativePostTuneOwnerBoundary;
@@ -157,3 +163,17 @@ Source SHA предыдущих A1/A2 как якобы её результат�
 Текущий unvalidated owner-policy source для следующей сборки:
 root `912ef71b36fbc040c6177a82070a796ee5eb99de`, PulseLib
 `c7266dcb93ec51a765125bc30647cf1b59129c91` (девять tests).
+
+## Серверная проверка owner-policy после восстановления связи
+
+Приведённые выше пометки «ещё без сборки» описывают состояние до восстановления
+связи. Root 912ef71b / PulseLib c7266dcb теперь собран на обоих workers.
+Elder normal A1 завершён: 23/23 native cases, включая девять owner-policy и
+14 graph/guard regressions. Independent Python root
+`664ced2346171cd6b50f3f79af217dde83dde86f` проверил 4/4 tests, все 42 actual
+training packets и 8646 owner waveform sample pairs. Это проверка первичных
+probes, привязки final trials к source certificate и точного waveform replay;
+полный training summary с повторным выводом всех условий сходимости не заявлен.
+M40 ASan A1 и его независимый анализ пока выполняются. Публикация owner-policy
+ещё ожидается. Новая Python-only проверка количества samples не требует
+повторного native прогона и будет иметь отдельный source/audit attempt.

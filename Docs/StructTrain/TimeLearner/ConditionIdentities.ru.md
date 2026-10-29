@@ -1,8 +1,8 @@
 # Идентичности условий, runtime и анализа
 
-Рабочий подэтап 10; новый runner/queue/publisher ещё не реализован. Код и tests
-пока не выполнялись на серверах из-за недоступности jump host. Ниже контракт
-реализации, а не утверждение о завершённой приёмке.
+Рабочий подэтап 10; новый runner/queue/publisher ещё не реализован. Source
+`670f2ff79d843d72f0703783cab49defc4159274` прошёл адресные проверки ниже на обоих
+workers; это приёмка codec/relocation scope, а не всего этапа.
 
 ## ConditionSpec
 
@@ -83,7 +83,23 @@ resolved libraries, остальные flags и optional loaded mapping snapshot
 Подготовлены tests codec roundtrip/all refs, повреждения/duplicate/unknown schema,
 числовая канонизация, stall/presentation sensitivity, matrix isolation, scorer и
 attempt separation. Для runtime — relocation/suffix/compiler path, реальные
-content/flags changes и unknown/known mappings. Их выполнение ещё ожидается.
-Далее обязательны реальные worker relocation, producer/resume roundtrip,
+content/flags changes и unknown/known mappings. Все 18 tests прошли на Elder/M40.
+Дополнительно production snapshot на каждом worker прочитал настоящий A2 runtime
+до/после копирования executable/INI в другой каталог и добавления `.rs2` к имени.
+Bytes INI сохранены, deploy/resource flags различны, identity/fingerprint равны.
+Binary действительно запускается и перечисляет NativePostTuneGraphBoundary.
+Это loader/startup control, а не численный replay или история plugins.
+Для достоверного source closure создан чистый Git checkout root
+`325052a0802e431f45ed91619c089fbc0eef7922` со всеми семью точными gitlinks.
+Исходные executable/INI hashes сверены с A2; allowlisted cache восстановлен из
+сохранённых A2 flags, а не из изменившейся текущей сборки.
+
+Артефакты: [Elder](../../../Reports/StructTrain/TimeLearner/s10-identities-elder1/README.md)
+commit `c05b75aec4b8952002af3d4e91d4e07d60c8f96b` и
+[M40](../../../Reports/StructTrain/TimeLearner/s10-identities-m40/README.md)
+`976bdfcf71fd67593450e08f303cfa90a0df01f1`. На каждом локально проверены все
+14 stored / 12 raw hashes. Научный verdict отсутствует.
+
+Далее обязательны producer/resume roundtrip,
 подключение к prepare/runner/queue и fail-closed публикации. Старые Bin fingerprints
 не заменены этим модулем; TL-007 и весь этап 10 остаются открытыми.
