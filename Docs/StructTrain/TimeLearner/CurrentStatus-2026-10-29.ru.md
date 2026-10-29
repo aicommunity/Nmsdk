@@ -9,8 +9,10 @@ PulseLib `9902545414b7381d328024caf28994d53f97f090`. Объединён пров
 frozen-owner import/hold и перенос в новый Test learner/fresh process; область
 проверок не расширяется самим merge. Следующий подэтап `stage03/spike-history-reset`
 исправляет фиктивные timestamps после Reset: baseline воспроизведён на обоих
-workers, Elder fixed 12/12 gtest pass; terminal process status и M40 ещё
-не подтверждены после обрыва SSH. Подэтап не принят и не merged.
+workers; fixed по 12/12 native pass, M40 ASan, native statuses=0. Outer-shell
+status=1 объяснён и воспроизведён отдельной диагностикой login .bash_logout.
+Пакеты опубликованы; по 98 stored / 96 raw hashes проверены. Scoped fix принят;
+завершение всего этапа 3/4 или полного frozen recognition runner не утверждается.
 [Дефект, проверки и действия после восстановления связи](SpikeHistoryReset.ru.md).
 
 ## Предыдущая принятая отправная точка develop
