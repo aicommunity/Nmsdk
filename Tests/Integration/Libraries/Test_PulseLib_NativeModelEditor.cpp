@@ -116,7 +116,7 @@ template<class Learner> struct EditingRig {
     std::vector<double> isi{.01,.08};bool tightBurst=false;
     EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2,
                bool cold=false,int neuronMode=2,int learnerMode=1,bool domainInhibitionProfile=false,
-               const std::string& learnerClass={},int initialFirstSynapses=1)
+               const std::string& learnerClass={},int initialFirstSynapses=1,double initialThreshold=1.)
         :frequency(f),normalization(mode),inputCount(inputs),tightBurst(tight)
     {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();environment=core.environment;
@@ -125,7 +125,7 @@ template<class Learner> struct EditingRig {
         name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(f)+"_N"+std::to_string(mode)+"_"+suffix;
         StorageProfileSpec profile;profile.name=name;profile.frequencyHz=f;profile.neuronBaseClass="NSPNeuronGen";
         if(domainInhibitionProfile)profile.body.inhChannel.capacity=.15e-9;
-        profile.initialThreshold=1.;profile.ltMembrane=profile.body;profile.ltMembrane->excChannel.capacity=.3e-9;
+        profile.initialThreshold=initialThreshold;profile.ltMembrane=profile.body;profile.ltMembrane->excChannel.capacity=.3e-9;
         const auto registered=RegisterStorageProfile(core.storage,environment,profile);
         learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(learnerClass.empty()?
             (branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"):learnerClass));
@@ -1104,6 +1104,7 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
         request.duration=std::ceil((span+.03)*rig.frequency)/rig.frequency;return request;
     };
     auto tick=[&] { rig.model->Calculate();rig.environment->IncreaseModelTimeByStep(); };
+    std::size_t observedSpikes=0;
     for(int i=0;i<4;++i)
     {
         auto request=make(i,i%2==1,i<2?RecognitionResetPolicy::PerTrial:RecognitionResetPolicy::PreserveNeuronDynamics);
@@ -1116,10 +1117,12 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
         EXPECT_EQ(result->stimulusTimes.size(),std::size_t(rig.inputCount));
         EXPECT_EQ(result->samples.size(),std::size_t(std::round(request.duration*rig.frequency))+1);
         EXPECT_EQ(result->modelBefore,frozen);EXPECT_EQ(result->modelAfter,frozen);
+        observedSpikes+=result->spikeTimes.size();
         EXPECT_TRUE(NativeTrainingPatternEqual(rig.learner->InputPattern.GetData(),target));
         EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),package);
         EXPECT_THROW(rig.learner->QueueNativeRecognitionTrial(request),std::runtime_error);
     }
+    if(rig.name.find("spiking")!=std::string::npos)EXPECT_GT(observedSpikes,0u);
     auto cancelled=make(4,false,RecognitionResetPolicy::PerTrial);
     rig.learner->QueueNativeRecognitionTrial(cancelled);tick();
     rig.learner->CancelNativeRecognitionTrial("explicit_cancel");
@@ -1571,12 +1574,15 @@ TEST(NativeRecognitionOwner,FreshProcessImport)
 }
 
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
-    std::optional<RecognitionCase> recognition={},bool automatic=false)
+    std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.)
 {
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
     if(inputs!=2)suffix+="_inputs"+std::to_string(inputs);if(configured)suffix+="_configured";if(automatic)suffix+="_automatic";
     if(recognition)suffix+="_recognition_"+std::to_string(int(*recognition));
-    EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured);
+    if(initialThreshold!=1.)suffix+="_spiking";
+    EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold);
+    auto initialZone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(initialZone);
+    ASSERT_DOUBLE_EQ(initialZone->Threshold.GetData(),initialThreshold);
     if(automatic)rig.learner->CalculateMode=0;
     std::optional<ConfiguredNativeTraining> configuredPlan;
     if(configured)
@@ -1833,6 +1839,8 @@ TEST(NativeLearnedState,BranchSixSharedInputsExplicitOneTolerance){LearnedBounda
 
 TEST(NativeRecognitionOwner,ClassicFreshDestination){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedFreshIdentity);}
 TEST(NativeRecognitionOwner,BranchFreshDestination){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedFreshScaled);}
+TEST(NativeRecognitionOwner,ClassicSpikingFreshDestination){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedFreshIdentity,false,.0001);}
+TEST(NativeRecognitionOwner,BranchSpikingFreshDestination){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedFreshScaled,false,.0001);}
 TEST(NativeRecognitionOwner,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
 TEST(NativeRecognitionOwner,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
 TEST(NativeRecognitionOwner,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
