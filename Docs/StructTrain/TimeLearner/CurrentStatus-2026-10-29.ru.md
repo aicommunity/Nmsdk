@@ -188,6 +188,13 @@ EXP02 Test_avg1 найден в августовской истории. Это 
 численный replay и не проверка всех волн.
 [Источники и ограничения](HistoricalEvidenceAnchors.ru.md).
 
+**Идентичности условий/runtime — рабочий подэтап 10**: добавлен content-addressed
+ConditionSpec, отдельные matrix/attempt/analysis identities и runtime manifest
+schema 2 без deploy/resource/compiler path в identity flags. Сохранена полная
+provenance, старые manifests не пересчитываются. Tests подготовлены, но из-за
+недоступности jump host не выполнялись; runner/queue не подключены.
+[Контракт и ограничения](ConditionIdentities.ru.md).
+
 ## Незакрытый объём исходных этапов
 
 | Этап | Что ещё требуется |

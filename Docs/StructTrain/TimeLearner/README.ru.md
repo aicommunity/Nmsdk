@@ -78,3 +78,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [Миграция скриптов: удаления и точные Git-источники](ScriptMigration.ru.md).
 
 - [Август: точные Git-источники моделей, CSV и отдельные commits отчётов](HistoricalEvidenceAnchors.ru.md).
+
+- [ConditionSpec и раздельные identities: рабочий codec, приёмка ещё открыта](ConditionIdentities.ru.md).
