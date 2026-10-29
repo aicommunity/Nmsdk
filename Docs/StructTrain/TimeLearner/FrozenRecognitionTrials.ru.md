@@ -81,8 +81,25 @@ prototype не содержит новых первичных histories в ка�
 к окончательной схеме аудита.
 
 A3 root d29361696014663681cba61938b39684a8ec8d97 / PulseLib 3a64cf6:
-на Elder-1 4/4 native и 11/11 independent Python/CLI pass без skips/errors;
+на обоих workers 4/4 native и 11/11 independent Python/CLI pass без skips/errors;
 восемь полных проб, четыре неполных контроля, 1932 сохранённых кадра. Оба source
 proofs проверены общим conversion auditor (28 primary training trials). Во всех
-новых пробах spike count=0 при inherited threshold. M40 A3 ещё выполняется;
-публикация и полная адресная приёмка подэтапа не завершены.
+новых пробах spike count=0 при inherited threshold=1. Публикация и полная
+адресная приёмка подэтапа не завершены.
+
+A4 root 63e8be6ac / Core 81ee217 добавляет diagnostic catch для нестандартных
+исключений и два дополнительных storage-профиля с initialThreshold=0.0001.
+Оба workers остановили четыре owner cases до обучения: тест ошибочно сверял
+порог в legacy setup (100), до configured native Build. Это ошибка размещения
+новой проверки, а не доказательство дефекта cold storage construction.
+Исходные XML/logs сохраняются. Серверный readback пакетов A3 подтверждает
+реальный recognition threshold=1, а не legacy setup значение 100.
+
+A5 root 127806a34d5caa07f4d9543c465fc6a497925e3e перемещает readback после
+configured native Build. Два прежних и два новых fixed-threshold профиля
+проверяют именно фактический дочерний LTZone. Порог положительного контроля
+задан в storage до Train; live-подмена в frozen Test не применяется. Проход
+запущен на обоих workers; его результат пока не подтверждён. Следующий
+independent gate требует четыре пакета, спайки у двух low-threshold моделей,
+согласованные первичные histories и ноль skips; полноту пакетов нельзя
+достраивать из предыдущего silent-only прохода.
