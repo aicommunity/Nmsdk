@@ -33,6 +33,10 @@ def score_recognition_evaluation(spec, observations, package):
         require(type(spec["run_id"]) is str and bool(spec["run_id"]) and spec["model_revision"] == package["model_revision"],
                 "evaluation_model_or_run_mismatch")
         require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_evaluation_coverage")
+        source = package["source_solo"]
+        require(source["kind"] == "timelearner_completed_state" and source["state_kind"] == "learned_solo"
+                and source["dynamic_checkpoint"] is False and type(source["certificate"]) is dict
+                and source["training_outcome"] in ("exact", "search_unresolved"), "unsupported_evaluation_source_state")
         criterion = spec["criterion"]
         require(type(criterion) is dict and set(criterion) == CRITERION_FIELDS and
                 criterion["id"] == "post_anchor_target_whole_window_foil_v1" and
@@ -75,7 +79,6 @@ def score_recognition_evaluation(spec, observations, package):
         require(set(actual) == set(expected), "missing_evaluation_trial")
         invalid = sorted(key for key, audit in audits.items() if not audit["valid_observation"])
         calibration = package["neuron"]["metadata"]["calibration"]
-        source = package["source_solo"]
         require(calibration["status"] == "fixed" and calibration["protocol"] == "fixed-inherited-from-solo"
                 and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
         zones = [node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]
