@@ -4,7 +4,7 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-## Принятая отправная точка develop
+## Предыдущая принятая отправная точка develop
 
 | Репозиторий | Опубликованный merge SHA |
 |---|---|
@@ -153,7 +153,7 @@ Fixed e7ee0104 / PulseLib d862127: Elder normal и M40 ASan — по 10 C++ / 7 
 A5 generic auditor проверил immutable данные без новой симуляции. Все ошибки
 постановки A1/A2/A3 сохранены. Это не вся candidate transaction и не полный
 SearchSynthetic/calibration. Подмена transient InputPattern исправлена следующим подэтапом.
-Новый код пока в working branch, не в develop.
+Подэтап принят в PulseLib develop 4db59424 после нового полного gate ниже.
 [Контракт, исходники и ограничения](PostTuneNativeRebuild.ru.md).
 
 **PostTune transient stimulus / TL-034**: production PulseLib 0e1b01ae,
@@ -169,9 +169,13 @@ retarget и calibration открыты. [Подробности](PostTuneTransie
 портами. A1 normal: 24/24 native и 10/10 Python, 16570 exact sample pairs. A1 ASan
 контролируемо прерван из-за стоимости fixture full hashing. Lifecycle baseline
 дал один ожидаемый failure после owner Reset. A2 root 325052a0 / PulseLib 32dc2e0:
-по 14/14 native на Elder normal и M40 ASan; independent A2 audit и публикация
-ожидают связи с jump host. Текущая owner-policy реализация root 912ef71b / PulseLib
-c7266dcb (9 новых tests) пока не собрана; не покрывается старой приёмкой. Полная controller/threshold transaction и
+по 14/14 native на Elder normal и M40 ASan; independent A2 audit завершён
+на обоих workers: по 2 Python tests, 16570 exact pairs. Публикация 241c10f2 /
+45d55b03, stored/raw hashes 426/424 и 241/239 проверены локально.
+Owner-policy root 912ef71b / PulseLib c7266dcb: по 23 native controls
+и по 4 independent Python tests, 42 training packets / 8646 sample pairs.
+Пакеты 640a39df / ec944b44, по 324/322 hashes проверены локально.
+Полный gate и acceptance описаны ниже. Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
 
@@ -194,6 +198,18 @@ schema 2 без deploy/resource/compiler path в identity flags. Сохране�
 provenance, старые manifests не пересчитываются. Tests подготовлены, но из-за
 недоступности jump host не выполнялись; runner/queue не подключены.
 [Контракт и ограничения](ConditionIdentities.ru.md).
+
+## Новый полный gate и приёмка native scope
+
+На обоих workers normal source 912ef71b / PulseLib c7266dcb: 491 cases,
+480 pass / 11 helper skips / 0 failures; три выбранные Rdk CTest groups pass.
+Независимый Python source 54b3d560: по 114 tests без skips/failures/errors.
+Полные пакеты bc37077f / 182191b9 опубликованы, на каждом локально проверены
+3268 stored / 3266 raw hashes. PulseLib develop merge 4db59424 отличается
+от tested только документацией. Корневой acceptance branch записывает gitlink
+этого merge. Полные этапы 4–8 не завершены; последующие owner-binding и Rdk
+BOM/config изменения остаются отдельными рабочими ветками.
+[Полные результаты и ограничения](IntegratedNativeRegression-2026-10-29.ru.md).
 
 ## Незакрытый объём исходных этапов
 
