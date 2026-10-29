@@ -17,7 +17,9 @@ def time_views(begin, end, frequency):
     views = [("overview", begin, end)]
     tiles = math.ceil((end - begin) / width)
     for i in range(tiles):
-        views.append((f"zoom-{i+1:03d}", begin+i*width, min(end, begin+(i+1)*width)))
+        left, right = begin+i*width, min(end, begin+(i+1)*width)
+        if right > left:
+            views.append((f"zoom-{i+1:03d}", left, right))
     return views
 
 
