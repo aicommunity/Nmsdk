@@ -1186,7 +1186,7 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
     EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());
     Artifact(rig.name+"_owner_recognition_wave.csv",QByteArray::fromStdString(trace.str()));
     Artifact(rig.name+"_owner_recognition_observation.json",QJsonDocument(QJsonObject{
-        {"kind","native_recognition_owner_observation"},{"schema_version",1},{"model_revision",package["model_revision"]},
+        {"kind","native_recognition_owner_observation"},{"schema_version",2},{"model_revision",package["model_revision"]},
         {"source_solo_revision",source["model_revision"]},{"source_solo_sha256",source["sha256"]},
         {"begin",begin},{"end",end},{"last_sample_time",last},{"maximum_sample_gap",1./rig.frequency},
         {"sample_count",double(samples)},{"channels",double(channels)},{"inputs",double(rig.inputCount)},

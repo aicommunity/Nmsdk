@@ -26,7 +26,7 @@ def audit_owner_recognition(package, source_case, spec, observation, trace, impo
                 "begin", "end", "maximum_sample_gap", "maximum_samples", "channels", "record_spikes", "measurement"},
                 "recognition_owner_probe_field_set_mismatch")
         require(observation.get("kind") == "native_recognition_owner_observation"
-                and type(observation.get("schema_version")) is int and observation["schema_version"] == 1,
+                and type(observation.get("schema_version")) is int and observation["schema_version"] == 2,
                 "unknown_recognition_owner_schema")
         require(observation["recognition_certificate"] is None and observation["evaluation_verdict"] is None
                 and observation["training_controller_installed"] is False and observation["need"] is False
@@ -53,9 +53,9 @@ def audit_owner_recognition(package, source_case, spec, observation, trace, impo
                 "recognition_owner_certificate_guard_missing")
         # Every mapped value is present in the original owner observation.
         # In particular, no frozen hash is inferred from the expected package.
-        paired = {key: observation[key] for key in ("schema_version", "model_revision", "trial_id", "complete",
+        paired = {key: observation[key] for key in ("model_revision", "trial_id", "complete",
                   "sample_count", "last_sample_time", "emitted", "soma_variation", "maximum_soma")}
-        paired.update(kind="native_recognition_roundtrip_observation", frozen_after=observation["frozen_after_owner"],
+        paired.update(kind="native_recognition_roundtrip_observation", schema_version=1, frozen_after=observation["frozen_after_owner"],
                       frozen_after_b=observation["frozen_after_reference"], scientific_verdict=observation["evaluation_verdict"])
         result = audit_recognition_state(package, source_case, spec, paired, trace)
         return {"schema_version": 1, "owner_readback_consistent": True,
