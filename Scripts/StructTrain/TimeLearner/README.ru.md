@@ -46,3 +46,10 @@ stimulus timestamps. Это evidence audit; native execution и научный P
 сохранность training goal и raw presented ISI в каждом frame. Неполные окна,
 NaN, неизвестные схемы и скрытая временная подмена запрещают valid result.
 Native execution, training certificate и scientific PASS команда не утверждает.
+
+`condition.py` — рабочий общий codec content references/ConditionSpec, matrix,
+analysis и attempt identities. Это ещё не preflight/runner и не замена Bin queue.
+`runtime.py` создаёт manifest schema 2: deploy/resource/compiler paths исключены
+из content identity, полная provenance сохраняется. Историческая schema 1
+не пересчитывается. Эти новые изменения ожидают серверной проверки;
+см. Docs/StructTrain/TimeLearner/ConditionIdentities.ru.md.
