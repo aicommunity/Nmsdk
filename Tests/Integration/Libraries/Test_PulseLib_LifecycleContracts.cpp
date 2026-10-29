@@ -111,6 +111,18 @@ TEST(TimeLearnerNativeLifecycle, SpikeHistoryResetRemovesEventsWithoutDiscarding
     core.environment->IncreaseModelTimeByStep();
     model->Calculate(); // A sustained pulse must not create another onset.
     EXPECT_EQ(zone->OutputPulseTimes.GetCols(), 1);
+    core.environment->IncreaseModelTimeByStep();
+    input[0](0, 0) = 0.;
+    zone->Inputs = input;
+    model->Calculate();
+    core.environment->IncreaseModelTimeByStep();
+    input[0](0, 0) = 2.;
+    zone->Inputs = input;
+    const double secondOnset = zone->GetTime().GetDoubleTime();
+    model->Calculate();
+    ASSERT_EQ(zone->OutputPulseTimes.GetCols(), 2);
+    EXPECT_DOUBLE_EQ(zone->OutputPulseTimes(0, 0), onset);
+    EXPECT_DOUBLE_EQ(zone->OutputPulseTimes(0, 1), secondOnset);
     zone->Reset();
     EXPECT_EQ(zone->OutputPulseTimes.GetCols(), 0);
     input[0](0, 0) = 0.;
