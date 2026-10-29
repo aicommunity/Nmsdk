@@ -233,7 +233,11 @@ fixture и его авария сохранены как ошибка fixture. �
 2/2 independent Python tests (12 boundary probes / 4332 samples). Fixed пакеты
 073b2906 / 37e6326c: по 530 stored / 528 raw hashes проверены. Baseline
 2c08b5b4 / 1e9e52f2: по 331/329 hashes. Runtime control flags остаются
-открытыми; новый код пока не принят в develop.
+открытыми. PulseLib develop merge 4e6be0cb опубликован; Core совпадает
+с проверенным 0ca75b3. Rdk develop c903b9bb принимает BOM correction: M40 ASan
+и Elder normal прошли четыре Rdk groups, на Elder отдельно 2 encoding tests.
+Elder BOM evidence fa39375f: 10 stored / 8 raw hashes проверены. Корневой
+acceptance branch записывает оба точных gitlinks; это не закрывает весь этап 4.
 [Ownership и ограничения](NativeOwnerBindings.ru.md).
 
 ## Незакрытый объём исходных этапов

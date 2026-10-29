@@ -248,6 +248,16 @@
       "a2": "shell launcher syntax error; not parser failure",
       "a3": "build disk exhaustion; not parser failure",
       "a4": "passed"
+    },
+    "rdk_accepted_develop": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+    "normal_rdk_evidence": {
+      "host": "10.245.1.11",
+      "ctest_groups": 4,
+      "encoding_tests": 2,
+      "commit": "fa39375f17f3cb694a9a42c3d37c3d7c11c5a58b",
+      "stored_hashes": 10,
+      "raw_hashes": 8,
+      "wide_platform_verified": false
     }
   },
   "m40_storage": {
@@ -284,7 +294,7 @@
     "elder_validation_complete": false,
     "editor_metadata_assignments_covered": false,
     "runtime_control_flags_covered": false,
-    "develop_merged": false
+    "develop_merged": true
   },
   "native_owner_editor_bindings": {
     "native_root": "796a73075b930d634c905355541e47187aed6f5f",
@@ -320,9 +330,18 @@
     "baseline_conflicting_expected_failures_each": 6,
     "baseline_matching_passes_each": 6,
     "initial_missing_probe_boundary_fixture_error": true,
-    "develop_merged": false,
-    "runtime_control_flags_complete": false
+    "develop_merged": true,
+    "runtime_control_flags_complete": false,
+    "accepted_pulse_develop": "4e6be0cbc0215805cd40b881600934e35c86430e"
   },
   "next_experiment_gate_document": "ExperimentReadiness.ru.md",
-  "goal_complete": false
+  "goal_complete": false,
+  "owner_bom_acceptance": {
+    "root_acceptance_branch": "stage04/native-owner-config-bindings",
+    "pulse_develop": "4e6be0cbc0215805cd40b881600934e35c86430e",
+    "rdk_develop": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+    "root_merge_pending": true,
+    "fresh_recursive_closure_verified": false,
+    "full_stage_4_complete": false
+  }
 }
