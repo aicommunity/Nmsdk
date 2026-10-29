@@ -433,6 +433,32 @@
     },
     "active_jobs": false,
     "scientific_evaluation_complete": false,
-    "develop_merged": false
+    "develop_merged": true,
+    "accepted_root": "f00989cb1fd98f126e37784ebb9b9f2d9e34b8ae",
+    "accepted_pulse": "9902545414b7381d328024caf28994d53f97f090"
+  },
+  "spike_history_reset": {
+    "baseline_root": "9ecb3967fa30d813785a08a6ce509d622fc767ea",
+    "fixed_root": "d13620e1e5734373d840fc4f2efe5db049d30c62",
+    "baseline_expected_failures_each": 2,
+    "elder_fixed_gtest_passed": 12,
+    "elder_process_status_verified": true,
+    "m40_fixed_state": "terminal_native_pass",
+    "publication_complete": true,
+    "accepted": true,
+    "next_action": "scoped no-ff acceptance merge; implement complete frozen spike/foil observations",
+    "fixed_tests_each": 12,
+    "skips_each": 0,
+    "native_exit_each": 0,
+    "wrapper_exit_each": 1,
+    "wrapper_failure_cause": "login .bash_logout clear_console under set -e and SHLVL=1; controlled reproduction on both workers",
+    "develop_merged": false,
+    "reports": {
+      "elder1": "8e1569e7bcb41a531babe68d569d0661b37f9d4c",
+      "m40": "04a705c9d05967d3cf5ffd4d6eb96077f75d2f49"
+    },
+    "stored_hashes_each": 98,
+    "raw_hashes_each": 96,
+    "active_jobs": false
   }
 }
