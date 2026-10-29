@@ -1,6 +1,7 @@
 # Первый production renderer native recognition отчётов
 
-Ветка stage09/visual-test-reports. Это реализация части VisualTestReports.ru.md,
+Подэтап stage09/visual-test-reports объединён в develop:
+398dabf684181cddccaa37cb221227a38ad64295. Это реализация части VisualTestReports.ru.md,
 а не завершение этапов 9/11 или всей обязательной визуальной матрицы.
 
 ## Реализованный путь
@@ -40,6 +41,8 @@ Schema 1 recorder не содержит физического unit descriptor. 
 
 Первый scale gate d9ecf261a выявил пустой последний zoom при округлении
 абсолютного времени 192 s; исправление 12d48355e не изменяет первичные timestamps.
+Исходный провал двух tests (одна ошибка, process status 1) сохранён в report
+78983e9354de71496b51bdb3d5be2da275790867; все четыре stored hashes проверены.
 При просмотре PNG A2 обнаружено наложение второй строки legend на рамку;
 исправление a7e37f6e9 резервирует дополнительное место над axes.
 
