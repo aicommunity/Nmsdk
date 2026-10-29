@@ -76,3 +76,9 @@ Reports/StructTrain/TimeLearner/s06-connected-stop-{elder1,m40}.
 На каждом локально проверены 1069 stored / 1067 raw hashes; до публикации
 повторно сверены 84 / 225 runtime path/hash records соответственно.
 Это scoped acceptance описанного дефекта. Весь этап 6 остаётся частичным.
+
+No-ff acceptance merges: PulseLib `98308fc9b6c2d831578194d00fc76b173b62627b`,
+затем root `1845df823b1e7f656b1d01a040cad3b0e2555275`. PulseLib merge
+отличается от tested Core c99c47d только документацией. Дочерний commit
+опубликован до корневого gitlink. Восходящий внешний фронт не запускает старые
+задания или серию D автоматически.

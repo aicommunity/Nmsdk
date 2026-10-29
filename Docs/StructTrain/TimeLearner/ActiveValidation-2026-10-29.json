@@ -537,8 +537,26 @@
     "scope": "V2 N1 Classic/Branch CalculateMode 0/1 read-only scalar SetPointer; additional direct-setter/service/cold regressions",
     "active_jobs": false,
     "scoped_accepted": true,
-    "develop_merged": false,
+    "develop_merged": true,
     "full_stage_6_complete": false,
-    "scientific_verdict": null
+    "scientific_verdict": null,
+    "accepted_root": "1845df823b1e7f656b1d01a040cad3b0e2555275",
+    "accepted_pulse": "98308fc9b6c2d831578194d00fc76b173b62627b",
+    "recursive_source_closure": {
+      "verified": true,
+      "report_commit": "5eec69aeb563d596e3e088bbed6278985dff684b",
+      "children": 7,
+      "clean": true,
+      "stored_hashes": 4,
+      "raw_hashes": 2
+    }
+  },
+  "mandatory_visual_test_reports": {
+    "user_requirement_date": "2026-10-29",
+    "spec": "VisualTestReports.ru.md",
+    "scope": "all tested patterns/trials and all somas; actual input-pulse overlay; readable full-window and zoom plots",
+    "renderer_implemented": false,
+    "visual_acceptance_complete": false,
+    "required_for_plan_completion": true
   }
 }
