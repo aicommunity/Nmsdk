@@ -60,7 +60,7 @@ class OwnerBoundaryEvidenceTest(unittest.TestCase):
                 for wave in waves:
                     trace = wave.with_name(wave.name.replace("_evidence.json", ".csv"))
                     audit = audit_probe(load(wave), trace)
-                    self.assertTrue(audit)
+                    self.assertEqual(audit["sample_count"], record["sample_pairs"])
                     traces.append(trace.read_bytes())
                 self.assertEqual(traces[0], traces[1])
 
