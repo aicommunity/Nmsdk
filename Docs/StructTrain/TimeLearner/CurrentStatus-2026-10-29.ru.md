@@ -4,7 +4,7 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-Последний принятый develop: root `77d5bd2bf5b7a14b0069c928972c0813d1e9fe74`,
+Последний принятый develop: root `398dabf684181cddccaa37cb221227a38ad64295`,
 PulseLib `98308fc9b6c2d831578194d00fc76b173b62627b`. Объединён проверенный
 frozen-owner import/hold и перенос в новый Test learner/fresh process; область
 проверок не расширяется самим merge. Подэтап `stage03/spike-history-reset` также объединён в develop и
@@ -46,7 +46,7 @@ response criteria; global scientific verdict остаётся null. Это не 
 8-pattern опыты, не калибровка и не завершение этапа 3.
 [Постановка, результаты и ограничения](FrozenRecognitionMetrics.ru.md).
 
-В отдельной ветке реализован diagnostic report CLI: фактический SumPotential
+В develop объединён diagnostic report CLI: фактический SumPotential
 всех сом и общий input, overview и 100-tick zoom, PNG 1920×960 / SVG / PDF.
 Два сервера построили четыре профиля, по 16 trials / 24 trial-soma пары;
 по шесть адресных checks без пропусков. После просмотра A2 исправлено
