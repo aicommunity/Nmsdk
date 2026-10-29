@@ -25,6 +25,15 @@ reset-per-trial / preserve-neuron-dynamics и fixed thresholds 1 / 0.0001 зад
 вся physics/mode matrix или завершение этапа 8.
 [API, данные и ограничения](FrozenRecognitionTrials.ru.md).
 
+Scoped connected-stop fix: общий adapter/service читает реальный IsNeedToTrain
+до и после детей. На обоих workers baseline выявил 16 ignored stops из 20;
+fixed source 384927728 / Core c99c47d прошёл 57/57 native и 10/10 Python,
+28 новых + 66 прежних primary trials. Пакеты опубликованы, по 1069 stored /
+1067 raw hashes проверены. Scope: V2 N1, Classic/Branch, CalculateMode 0/1,
+scalar SetPointer. Восходящий фронт/restart, initial-false и остальные sharing
+режимы не объявляются проверенными. Этап 6 остаётся частичным.
+[Причина, алгоритм и проверки](ConnectedTrainingStop.ru.md).
+
 ## Предыдущая принятая отправная точка develop
 
 | Репозиторий | Опубликованный merge SHA |
