@@ -4,7 +4,7 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-## Принятая отправная точка develop
+## Предыдущая принятая отправная точка develop
 
 | Репозиторий | Опубликованный merge SHA |
 |---|---|
@@ -188,8 +188,11 @@ workers: по 491 cases / 480 pass / 11 helper skips / 0 failures, три Rdk CT
 groups pass. Independent Python 54b3d560: по 114/114 tests без skips/failures.
 Оба пакета опубликованы (bc37077f / 182191b9), на каждом локально проверены
 3268 stored / 3266 raw hashes. Позднейшие owner-bindings и Rdk BOM изменения
-не относятся к этому native source. Merge проверенного scope в develop ещё
-не выполнен. [Полная регрессия](IntegratedNativeRegression-2026-10-29.ru.md).
+не относятся к этому native source. Merge проверенного scope в develop
+выполнен: PulseLib 4db59424, root 9e06c339. Свежий Git closure проверен
+на M40, evidence 7f214425 (первоначальная ошибка регистрации сабмодулей
+устранена; семь gitlinks и чистое дерево подтверждены).
+[Полная регрессия](IntegratedNativeRegression-2026-10-29.ru.md).
 Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
