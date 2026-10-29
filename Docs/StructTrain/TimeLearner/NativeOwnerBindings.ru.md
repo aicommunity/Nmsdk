@@ -95,4 +95,6 @@ boundary probe JSON/CSV. Повреждённые числа, подмена с�
 Runtime control flags, внешнее снятие IsNeedToTrain через связанный сигнал,
 diagnostic output bindings, production recognition/PostTune wiring и полная
 матрица всех lifecycle/storage режимов остаются отдельными пунктами полного
-плана. Этот source не покрывается прежним full gate c7266dcb и не принят в develop.
+плана. Этот source не покрывается прежним full gate c7266dcb. PulseLib принят в develop
+через 4e6be0cbc0215805cd40b881600934e35c86430e после адресных gates;
+его отличие от проверенного Core 0ca75b3 — только документация.
