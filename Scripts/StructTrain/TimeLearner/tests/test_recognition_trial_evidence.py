@@ -17,8 +17,8 @@ class RecognitionTrialEvidenceTest(unittest.TestCase):
             raise unittest.SkipTest("requires real native frozen trials")
         cls.root = Path(root)
         cls.packages = sorted(cls.root.glob("*_owner_recognition_state.json"))
-        if len(cls.packages) != 2:
-            raise RuntimeError("requires Classic and Branch fresh-owner packages")
+        if len(cls.packages) != 4 or sum("_spiking_" in p.name for p in cls.packages) != 2:
+            raise RuntimeError("requires Classic/Branch silent and spiking storage profiles")
         cls.cases = []
         for path in cls.packages:
             prefix = path.name.removesuffix("_owner_recognition_state.json")
@@ -41,6 +41,17 @@ class RecognitionTrialEvidenceTest(unittest.TestCase):
                 result = audit_recognition_trial(trial, package)
                 self.assertFalse(result["valid_observation"])
                 self.assertFalse(result["complete"])
+
+    def test_actual_spiking_and_silent_profiles(self):
+        for path, package, trials, _ in self.cases:
+            spikes = sum(trial["spike_count"] for trial in trials)
+            threshold = package["neuron"]["metadata"]["calibration"]["threshold"]
+            if "_spiking_" in path.name:
+                self.assertEqual(threshold, .0001)
+                self.assertGreater(spikes, 0)
+            else:
+                self.assertEqual(threshold, 1.)
+                self.assertEqual(spikes, 0)
 
     def test_corrupt_fields_numbers_timestamps_and_model_rejected(self):
         for _, package, trials, _ in self.cases:
