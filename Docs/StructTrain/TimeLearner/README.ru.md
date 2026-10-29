@@ -80,3 +80,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [Август: точные Git-источники моделей, CSV и отдельные commits отчётов](HistoricalEvidenceAnchors.ru.md).
 
 - [ConditionSpec и раздельные identities: рабочий codec, приёмка ещё открыта](ConditionIdentities.ru.md).
+
+- [Точка продолжения 29.10: точные sources, завершённые A2 и ожидающие проверки](ResumeCheckpoint-2026-10-29.ru.md).
