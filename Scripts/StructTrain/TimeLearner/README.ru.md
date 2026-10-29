@@ -70,3 +70,14 @@ tests на workers и реальный native readback на M40 ASan прошл�
 полное paired waveform и negative controls. Требуются source trial JSON/CSV
 и schema-2 owner observation; schema-1 prototype без hash readbacks не получает
 достроенных значений. Это validation evidence, без scientific verdict и spikes.
+
+`analyze trial.json --format recognition-trial --model recognition_state.json`
+проверяет полную frozen-пробу по primary кадрам, включая реальные stimulus/LT
+истории событий, counts/timestamps, onset, покрытие окна и model hashes.
+Молчание может быть валидным отрицательным наблюдением. Отмена и пропуск кадров
+остаются `valid_observation=false`; успешное чтение согласованного файла не
+означает успешного распознавания. `evaluation_verdict` остаётся null.
+Проверка одной пробы не доказывает полноту матрицы; для неё требуется ожидаемое
+множество run/trial IDs и sample/label/pattern hash из job spec. Размещение
+target первым в файле не требуется. Подробности и область серверной проверки —
+Docs/StructTrain/TimeLearner/FrozenRecognitionTrials.ru.md в корне.

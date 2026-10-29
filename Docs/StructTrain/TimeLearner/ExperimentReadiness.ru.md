@@ -15,8 +15,8 @@ tests. Новый guard 0ca75b3 прошёл адресный gate на обои
 | Блок | Уже есть | Оставшееся условие допуска |
 |---|---|---|
 | Конечная recognition модель | Solo export/import, immutable conversion, frozen owner и новый Test learner/fresh-process transport проверены на обоих workers | Расширить проверенную пару Classic N0 / Branch N1 на объявленную матрицу первой серии; сохранить контроль effective graph и model hash в runner |
-| Полное предъявление и наблюдение | Native training probe и строгий аудит training JSON/CSV | Отдельный frozen recognition runner: все входы, полный pattern, real spike timestamps/count, onset, label/ID, полное окно и censoring; silent response остаётся валидным отрицательным результатом |
-| Порог и управление | Разделение статусов обучения; фиксированные настройки порога legacy; проверенные model boundaries | Реальный прогон выбранного порога, зафиксированные calibration protocol/data; проверка связанного внешнего IsNeedToTrain; frozen Test не меняет модель, target и порог |
+| Полное предъявление и наблюдение | Native frozen trial executor для обоих learner: полные target/foil, actual stimulus/spike histories, labels/IDs, окна и censoring; проверены молчание и реальные спайки | Подключить API к общему experiment job; расширить профили/порядок/ITI до объявленной матрицы; завершить versioned scientific metrics и expected-set preflight |
+| Порог и управление | Frozen inherited fixed thresholds 1 и 0.0001 проверены реальными прогонами через storage-профили | Подбор и проверка калиброванного порога, protocol/data provenance; проверка связанного внешнего IsNeedToTrain; матрица frozen guards |
 | Сквозной запуск | Immutable runtime manifests, Git closure, ConditionSpec; inventory/analyze CLI | Воспроизводимый job, связывающий Train → actual export → calibration → Test → strict analysis → Git artifacts; никакого шаблонного Test после неудачного переноса |
 
 Каждый блок закрывается реальными контрольными случаями и опубликованными
@@ -73,4 +73,21 @@ PulseLib merge 9902545. Остальные три блока и полный и�
 Новый destination/fresh-process owner для Classic N0 и Branch N1 теперь
 проверен на обоих workers; детали и исходные данные — FrozenRecognitionOwner.ru.md.
 Это scoped transfer acceptance, а не вся первая строка physical matrix.
-Приоритет следующего шага: реальные spikes, transient foils и frozen windows.
+Этот checkpoint предшествовал full-pattern trial gates, приведённым ниже.
+
+## После full-pattern trial gates
+
+Эти три измерительных требования реализованы общим native executor и проверены
+на обоих workers: по 6/6 native, 12/12 independent Python/CLI, 16 полных проб,
+8 неполных контролей, 3864 primary frames и 4 actual spikes. Положительный
+контроль использует неизменяемый storage-профиль с порогом, заданным до Train.
+Это не подбор порога и не результат разделимости.
+[Источники и ограничения](FrozenRecognitionTrials.ru.md).
+
+Для ограниченной серии с заранее объявленным fixed-порогом автоматический
+подбор не является условием допуска: требуются явная fixed policy, фактический
+прогон и freeze модели. Полная калибровка остаётся требованием исходного плана.
+Ближайшие незакрытые gates — общий воспроизводимый job/runner и scientific
+scorer, внешний training stop, затем выбранный протокол калибровки и расширение
+матрицы. Наличие C++ trial API и analyze CLI не означает готовность train/evaluate
+CLI или всего этапа 8.
