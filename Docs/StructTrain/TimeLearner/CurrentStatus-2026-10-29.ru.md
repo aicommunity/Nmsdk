@@ -183,8 +183,13 @@ M40 ASan также завершил 23/23 native и оба independent audits �
 на каждом локально сверены 324 stored / 322 raw hashes. Python A2 54b3d5607
 дополнительно проверяет sample-count summary против raw CSV. Новый PulseLib
 8683bbff отличается от native c7266dcb только обновлением документации.
-Начаты отдельные normal full regression gates root 912ef71b на обоих workers;
-они и следующие independent audits ещё не завершены, merge в develop не выполнен.
+Отдельные normal full regression gates root 912ef71b завершились на обоих
+workers: по 491 cases / 480 pass / 11 helper skips / 0 failures, три Rdk CTest
+groups pass. Independent Python 54b3d560: по 114/114 tests без skips/failures.
+Оба пакета опубликованы (bc37077f / 182191b9), на каждом локально проверены
+3268 stored / 3266 raw hashes. Позднейшие owner-bindings и Rdk BOM изменения
+не относятся к этому native source. Merge проверенного scope в develop ещё
+не выполнен. [Полная регрессия](IntegratedNativeRegression-2026-10-29.ru.md).
 Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
@@ -214,6 +219,15 @@ provenance, старые manifests не пересчитываются. На о�
 со всеми семью точными gitlinks. Пакеты c05b75ae / 976bdfcf опубликованы,
 на каждом проверены 14 stored / 12 raw hashes. Runner/queue не подключены.
 [Контракт и ограничения](ConditionIdentities.ru.md).
+
+**Связанные owner-параметры — новый подэтап 4**: конфликт native construction/
+import с внешними scalar/vector источниками воспроизведён. Value-aware precommit
+проверка cbbf56ce допускает совпадающие read-only значения, отвергает конфликт
+до замены графа и не записывает в источники. M40 ASan: 16/16 tests; независимое
+чтение 16 primary JSON. Baseline A4: 8 ожидаемых failures + 8 matching passes.
+Пакет 1c55f903: 467 stored / 465 raw hashes сверены. Первый неверный vector
+fixture и его авария сохранены как ошибка fixture. Elder, editor metadata и
+runtime control flags ещё не проверены; новый код не принят в develop.
 
 ## Незакрытый объём исходных этапов
 
