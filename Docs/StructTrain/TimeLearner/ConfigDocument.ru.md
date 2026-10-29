@@ -3,7 +3,7 @@
 Рабочий подэтап 9, ветка `stage09/lossless-config-adapter`. Реализация и fixtures
 прошли семь Python tests на каждом worker, включая корпус настоящих Project.ini.
 Native baseline на M40 ASan воспроизвёл отказ BOM + declaration; исправление Rdk
-ожидает проверки ниже. Runner/preflight и полная миграция старых
+прошло адресные проверки ниже. Runner/preflight и полная миграция старых
 config generators этим документом не объявляются завершёнными.
 
 `USerStorageXML::Load` использует native XMLNode parser. Он принимает числовые
@@ -60,6 +60,22 @@ declaration или обоих даёт успех. Исходные файлы �
 signature перед XMLNode::parseString. Обычный вход не копируется; исходный string
 не меняется. Изменения Build/Reset/Calculate или learner-specific подготовки нет.
 Две Rdk regression cases проверяют четыре сочетания BOM/declaration и отсутствие
-корня/контента. Требуются их серверное выполнение, повтор того же native file
-readback и адресные Rdk regressions. Старый полный gate root 912ef71b/Rdk181
-не является проверкой этого нового serialization source.
+корня/контента. Root `ccbf453f1d51638369c6b0afcf89cc1cbad166f4` / Rdk
+`8ebf64dd39571cb6f95f23cfc2b55f30972c591c` прошёл на M40 ASan четыре выбранные
+Rdk CTest groups и native readback четырёх файлов / одиннадцати значений.
+Python source 7db4d9737 (Elder) и ccbf453f1 (M40) прошёл по 7 tests; все 1599
+Project.ini корпуса StructTrain сохранены byte-exact. Их число также совпадает
+с tracked files точного Bin gitlink. Native Elder/wide-platform проверка нового
+serialization source здесь не заявлена; старый full gate root912/Rdk181 её не
+подменяет.
+
+Артефакты [M40](../../../Reports/StructTrain/TimeLearner/s09-config-m40/README.md)
+commit `6210f02353cf2b3956a8a4ee93201607d870541a` (92 stored / 90 raw hashes) и
+[Elder](../../../Reports/StructTrain/TimeLearner/s09-config-elder1/README.md)
+`13c4328116f284d17b09d4af758b38e67e39a6fd` (6 / 4) опубликованы и сверены
+локально. A1 сохраняет исходный parser failure; A2 — launcher syntax failure,
+A3 — build disk exhaustion. A4 успешен после удаления воспроизводимых архивов
+неудачных сборок и чистого временного clone уже опубликованного relocation.
+Первичные данные не удалены; cleanup manifests включены в пакет. Low-disk событие
+не позволяет принимать параллельный full run без независимой проверки полноты
+каждого первичного наблюдения.
