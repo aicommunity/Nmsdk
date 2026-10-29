@@ -27,18 +27,34 @@ Fixed root `d13620e1e5734373d840fc4f2efe5db049d30c62`, PulseLib
 `1de63d0` расширяет второй тест двумя раздельными rising edges с проверкой
 обоих timestamps, затем проверяет пустую историю после Reset и молчаливого тика.
 На Elder-1 получен native XML/log итог 12/12 pass: 10 lifecycle tests и два
-fresh-destination recognition controls. SSH transport вернул ненулевой статус;
-сохранённые process-exit/exit-status необходимо отдельно прочитать до приёмки.
-На M40 SSH оборвался; состояние сборки/процесса неизвестно. Это не основание
-повторно запускать задание. Повторное подключение остановилось на jump timeout.
+fresh-destination recognition controls. После восстановления VPN подтверждён
+M40 ASan: те же 12/12 pass, ноль skips/errors. Оба native процесса вернули 0;
+внешняя оболочка вернула 1. Задания завершены, повторно не запускались.
 
 Readbacks: Elder `/home/user/timelearner-refactor/readbacks/`, M40
 `/media/user/Data/TimeLearnerRefactor/readbacks/`; имена
 `s03-spike-history-{baseline,fixed}-{normal,asan}-a1`.
 Runtime каждой попытки отдельный и не обновляется работающим заданием.
 
-После восстановления связи: проверить исходные process statuses/XML и отсутствие
-skips, завершение M40 и ASan-диагностику; сохранить baseline и fixed runtime
-manifests, XML/logs и primary owner observations через Git с hashes. Только
-затем решать scoped acceptance и merge. Полная матрица LT-моделей и runner
-спайковых target/foil проб этим изменением не объявляются завершёнными.
+## Причина внешнего exit status и публикация
+
+Одинаковая диагностическая команда с успешным телом при parent SHLVL=0
+возвращает 1 через `bash -lc` и 0 через `bash --noprofile --norc -c` на обоих
+workers. `.bash_logout` вызывает `clear_console` при SHLVL=1; под `set -e`
+ошибка очистки консоли изменяет итог login shell. Это ошибка оболочки запуска,
+не ошибка native тестов. Исходный process status=1 не переписан. Первая
+диагностика A1 запускала вложенную оболочку с другим SHLVL и получила два нуля;
+её ошибочное ожидание сохранено. A2 явно задаёт SHLVL и воспроизводит причину.
+Следующие задания должны использовать non-login shell, собственное окружение
+и раздельные process/native statuses.
+
+Пакеты опубликованы: Elder `8e1569e7bcb41a531babe68d569d0661b37f9d4c`,
+M40 `04a705c9d05967d3cf5ffd4d6eb96077f75d2f49`, разделы
+Reports/StructTrain/TimeLearner/s03-spike-history-{elder1,m40}.
+Локально проверены по 98 stored / 96 raw hashes; до публикации на workers
+повторно проверены 56 / 150 runtime path/hash records соответственно.
+Включены baseline и fixed XML/logs, manifests, primary fresh-owner observations
+и обе короткие shell diagnostics. Native ASan ошибок в проверенном журнале нет.
+
+Это scoped acceptance дефекта истории событий. Полная матрица LT-моделей и
+runner спайковых target/foil проб этим изменением не объявляются завершёнными.
