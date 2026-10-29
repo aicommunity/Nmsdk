@@ -83,3 +83,46 @@ production ModelRevisionObserver: фактические параметры/св
 каждом тике, full identity выполняется на границах. Это оптимизация fixture,
 не изменение интегратора, Dataset protocol или амплитудной цели. Общие raw CSV
 с A1 должны сравниваться отдельно. Успех native tests не подменяет независимую проверку и доступность raw артефактов в Git.
+
+## Owner policy boundary — новая реализация, ещё без серверной проверки
+
+Root `2a9357afa73e485d3461683c4ee7e597bb7fc176` / PulseLib
+`d9b4199cfb6644962cff678763c98eaaecbfa7c0` добавляет NativePostTuneOwnerBoundary;
+последующее уточнение проверяет retained lifecycle до callback с typed owner.
+Эта версия ещё не собрана на серверах и не входит в native приёмку A2 выше.
+
+Scope ограничен native-owned моделью без активного обучения, незавершённой/
+непотреблённой пробы и legacy free-run. Capture требует остановленного управления.
+Source NativeTrainingService не копируется и не сбрасывается: запоминается его
+identity (state/outcome/attempt/epoch/capture/certificate), которая проверяется
+до rollback. Сохраняются owner mirrors L/Ns/Rs и bounds, threshold policy,
+phase/result flags, loaded individual Rs и related private bookkeeping.
+
+Перед восстановлением проверяются та же native declaration/configuration,
+неизменность training goal и отсутствие connected/external owner properties.
+SetDataDirect в Rdk может писать во внешний data source; поэтому такая связь
+является причиной rejection до изменения графа, а не игнорируется. Retarget не
+перезаписывается старым target. После native graph restore обновляются cached
+Neuron/Dataset aliases, owner values возвращаются адресно без setter и проверяются
+readback. Source solo certificate сохраняет прежний scope; recognition certificate
+из него не получается автоматически.
+
+Добавлены восемь production-path native tests: завершённое обучение до настоящего
+сертификата, изменение индивидуальных параметров и threshold policy, возврат
+исходных значений и waveform: Classic/Branch × N0/N1 при 2 кГц и N1 при
+20 кГц; отдельно
+connected scalar property и retarget. До сборки это постановка проверок,
+а не подтверждённая работоспособность.
+
+Новые подключения к jump host дают TCP/SSH timeout. A2 native jobs завершены,
+их повтор не требуется. После восстановления связи сначала выполнить независимый
+A2 audit и Git-публикацию, затем отдельную сборку owner-policy tests. Не менять
+SHA старых manifests и не объявлять новую owner-policy версию покрытой A2.
+
+Этот owner boundary не является полноценным legacy controller checkpoint.
+Общий Native PostTune controller со своей историей кандидатов, commit выбранной
+модели, real-threshold calibration и production wiring остаются следующими
+пунктами исходного плана; stage 8 не закрыт.
+
+Owner-policy версия с guard перед typed callbacks: PulseLib
+`d186b5746d1bfbec67874637f4f68f50b9387405`; также пока без серверной сборки.

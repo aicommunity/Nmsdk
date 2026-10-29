@@ -166,9 +166,12 @@ retarget и calibration открыты. [Подробности](PostTuneTransie
 
 **PostTune graph boundary — текущая работа**: root 8e7b9e88 / PulseLib
 436e7020 реализует immutable capture/restore нейрона вместе с Dataset и native
-портами. 24 selected controls запущены на Elder normal и M40 ASan; при последней
-проверке процессы живы, итог не объявлен. Независимый Python audit c174c98b ждёт
-terminal success этих же jobs. Полная controller/threshold transaction и
+портами. A1 normal: 24/24 native и 10/10 Python, 16570 exact sample pairs. A1 ASan
+контролируемо прерван из-за стоимости fixture full hashing. Lifecycle baseline
+дал один ожидаемый failure после owner Reset. A2 root 325052a0 / PulseLib 32dc2e0:
+по 14/14 native на Elder normal и M40 ASan; independent A2 audit и публикация
+ожидают связи с jump host. Новая owner-policy реализация root 2a9357af / PulseLib
+d9b4199 пока не собрана; не покрывается старой приёмкой. Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
 
