@@ -14,7 +14,7 @@ tests. Новый guard 0ca75b3 прошёл адресный gate на обои
 
 | Блок | Уже есть | Оставшееся условие допуска |
 |---|---|---|
-| Конечная recognition модель | Solo export/import, conversion и fresh-process transport; native graph preparation | Подключить конечное состояние к штатному выполнению learner/Test; сверить весь effective graph; исключить повторную conversion; зафиксировать hash модели |
+| Конечная recognition модель | Solo export/import, immutable conversion, frozen owner и новый Test learner/fresh-process transport проверены на обоих workers | Расширить проверенную пару Classic N0 / Branch N1 на объявленную матрицу первой серии; сохранить контроль effective graph и model hash в runner |
 | Полное предъявление и наблюдение | Native training probe и строгий аудит training JSON/CSV | Отдельный frozen recognition runner: все входы, полный pattern, real spike timestamps/count, onset, label/ID, полное окно и censoring; silent response остаётся валидным отрицательным результатом |
 | Порог и управление | Разделение статусов обучения; фиксированные настройки порога legacy; проверенные model boundaries | Реальный прогон выбранного порога, зафиксированные calibration protocol/data; проверка связанного внешнего IsNeedToTrain; frozen Test не меняет модель, target и порог |
 | Сквозной запуск | Immutable runtime manifests, Git closure, ConditionSpec; inventory/analyze CLI | Воспроизводимый job, связывающий Train → actual export → calibration → Test → strict analysis → Git artifacts; никакого шаблонного Test после неудачного переноса |
@@ -64,11 +64,11 @@ CLI команды продолжают оставаться deliverables эта
 
 ## Обновление после owner gates
 
-Import/hold внутри learner реализован в отдельной рабочей ветке и прошёл
-адресные native/independent gates на обоих workers (подробности в
-FrozenRecognitionOwner.ru.md). Это закрывает часть первого блока, но controls
-пока используют training owner; новый Test owner и fresh-process checks
-остаются необходимыми. Остальные три блока и полный исходный план сохраняются.
+Import/hold внутри learner прошёл адресные native/independent gates на обоих
+workers (подробности в FrozenRecognitionOwner.ru.md). После первоначальной
+проверки training owner проверены также новый Test owner и fresh process.
+Scoped implementation объединена в develop; root f00989cb1 записывает
+PulseLib merge 9902545. Остальные три блока и полный исходный план сохраняются.
 
 Новый destination/fresh-process owner для Classic N0 и Branch N1 теперь
 проверен на обоих workers; детали и исходные данные — FrozenRecognitionOwner.ru.md.
