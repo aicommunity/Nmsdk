@@ -177,7 +177,14 @@ Git: Elder commit 241c10f2, 426 stored / 424 raw hashes; M40 45d55b03,
 Текущая owner-policy реализация root 912ef71b / PulseLib c7266dcb:
 Elder normal завершил 23/23 native (9 новых + 14 regression), независимый
 664ced234 — 4/4 Python, 42 actual training packets и 8646 waveform sample pairs.
-M40 ASan пока выполняется; его результат и публикация owner-policy ещё открыты.
+M40 ASan также завершил 23/23 native и оба independent audits по 4/4 tests,
+42 packets / 8646 sample pairs. На каждом worker 20 graph CSV совпадают с
+предыдущим A2. Пакеты owner-policy опубликованы: Elder 640a39df, M40 ec944b44;
+на каждом локально сверены 324 stored / 322 raw hashes. Python A2 54b3d5607
+дополнительно проверяет sample-count summary против raw CSV. Новый PulseLib
+8683bbff отличается от native c7266dcb только обновлением документации.
+Начаты отдельные normal full regression gates root 912ef71b на обоих workers;
+они и следующие independent audits ещё не завершены, merge в develop не выполнен.
 Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
