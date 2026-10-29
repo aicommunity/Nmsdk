@@ -1581,8 +1581,6 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(recognition)suffix+="_recognition_"+std::to_string(int(*recognition));
     if(initialThreshold!=1.)suffix+="_spiking";
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold);
-    auto initialZone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(initialZone);
-    ASSERT_DOUBLE_EQ(initialZone->Threshold.GetData(),initialThreshold);
     if(automatic)rig.learner->CalculateMode=0;
     std::optional<ConfiguredNativeTraining> configuredPlan;
     if(configured)
@@ -1593,6 +1591,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
         rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
     }
+    auto initialZone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(initialZone);
+    ASSERT_DOUBLE_EQ(initialZone->Threshold.GetData(),initialThreshold);
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
     auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
