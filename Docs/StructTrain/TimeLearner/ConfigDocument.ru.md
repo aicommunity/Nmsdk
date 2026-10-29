@@ -1,7 +1,9 @@
 # Адресное редактирование конфигов Rdk
 
 Рабочий подэтап 9, ветка `stage09/lossless-config-adapter`. Реализация и fixtures
-пока ожидают серверного выполнения. Runner/preflight и полная миграция старых
+прошли семь Python tests на каждом worker, включая корпус настоящих Project.ini.
+Native baseline на M40 ASan воспроизвёл отказ BOM + declaration; исправление Rdk
+ожидает проверки ниже. Runner/preflight и полная миграция старых
 config generators этим документом не объявляются завершёнными.
 
 `USerStorageXML::Load` использует native XMLNode parser. Он принимает числовые
@@ -45,3 +47,19 @@ request этот helper явно skipped; положительная приём�
 с настоящим request. Это тест native serialization, не Train/Build/Reset и не
 проверка уже применённой физики нейрона. Численные полные gates прежнего source
 продолжаются в своих изолированных runtime и не покрывают этот новый source.
+
+## Native baseline и исправление владельца
+
+Root 7db4d9737 / Rdk 1812624f: первоначальный combined native readback завершился
+failure. Отдельные диагностические вызовы того же binary подтверждают успех
+трёх реальных patched Project.ini и отказ только synthetic BOM + declaration.
+У synthetic сохранены Unicode/escaped values: удаление только BOM, только
+declaration или обоих даёт успех. Исходные файлы и неудачная попытка сохранены.
+
+Исправление в ветке Rdk `stage04/xml-utf8-bom` удаляет только начальную UTF-8
+signature перед XMLNode::parseString. Обычный вход не копируется; исходный string
+не меняется. Изменения Build/Reset/Calculate или learner-specific подготовки нет.
+Две Rdk regression cases проверяют четыре сочетания BOM/declaration и отсутствие
+корня/контента. Требуются их серверное выполнение, повтор того же native file
+readback и адресные Rdk regressions. Старый полный gate root 912ef71b/Rdk181
+не является проверкой этого нового serialization source.
