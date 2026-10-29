@@ -8,9 +8,11 @@ from __future__ import annotations
 import argparse
 import bisect
 import csv
+import gzip
 import json
 import math
 import sys
+import zlib
 from pathlib import Path
 from typing import Any
 
@@ -59,7 +61,13 @@ def load(path: Path) -> dict[str, Any]:
     def invalid_constant(token: str) -> None:
         raise EvidenceError("nonfinite_json_token:" + token)
 
-    result = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=pairs,
+    raw = path.read_bytes()
+    if path.suffix == ".gz":
+        try:
+            raw = gzip.decompress(raw)
+        except (gzip.BadGzipFile, EOFError, zlib.error) as error:
+            raise EvidenceError("invalid_compressed_json") from error
+    result = json.loads(raw.decode("utf-8"), object_pairs_hook=pairs,
                         parse_constant=invalid_constant)
     require(isinstance(result, dict), "not_an_object")
     return result
