@@ -10,15 +10,15 @@ storage physics, измерения, export/import, pipeline и документ
 | 0 | --no-ff merge текущих PulseLib, Bin, root в develop; согласовать gitlinks | child commits опубликованы до root, чистая closure |
 | 1 | evidence ledger с августа, режимы, property inventory, defect status, script blobs | вывод прослеживается до SHA/path, old/new gates разделены |
 | 2 | изолированный deploy root для всех targets; runtime manifest; Reports exception | две сборки не перезаписывают runtime, artifacts доступны через Git |
-| 3 | строгая схема analyzer/scorer, IDs, completeness, timestamps, arbitrary N | permutation invariant, malformed/incomplete не дают PASS |
+| 3 | строгая схема analyzer/scorer, IDs, completeness, timestamps, arbitrary N; полные soma/stimulus traces для визуальных отчётов | permutation invariant, malformed/incomplete не дают PASS; все soma и фактические входные импульсы доступны без обрезки |
 | 4 | native storage/lifecycle fixtures; graph, caches, dt coefficients, reuse/load/growth | одинаковый effective graph и отклик, без learner-specific wakeup Build |
 | 5 | ModelSpec + LearnedSoloState + RecognitionState; полный native export/import | asymmetric/heterogeneous roundtrip, обнаружение потерянных узлов/связей |
 | 6 | общий event-driven controller и topology adapters без смены цели | compatibility A/B сохраняет решения на контрольных случаях |
 | 7 | valid measured peaks; signed residuals; bounded L/N/R searches; revision invalidation; optional C | no-peak, nonmonotonic, bounds, quantization, C/dt и stale-input tests |
 | 8 | idempotent parallel conversion, transactional PostTune, honest threshold calibration | save/load/rollback, реальный threshold confirm, frozen hash |
-| 9 | единый root Scripts package, CLI и адресный config adapter; удалить старые scripts | нет wrappers/альтернативных запускателей; история извлекается по manifest |
-| 10 | typed ConditionSpec, owned worker leases, fail-closed Git publisher | duplicate/crash/timeout/push-failure tests |
-| 11 | исторический replay, cold, v1/v2 A/B, order/ITI, режимы и модели | полные observations, валидные negative и unresolved отдельно |
+| 9 | единый root Scripts package, CLI, report/plot generator и адресный config adapter; удалить старые scripts | нет wrappers/альтернативных запускателей; история извлекается по manifest; читаемый visual report строится production-командой |
+| 10 | typed ConditionSpec, owned worker leases, fail-closed Git publisher; обязательные visual assets | duplicate/crash/timeout/push-failure tests; отсутствие требуемых графиков не позволяет объявить новый отчёт полным |
+| 11 | исторический replay, cold, v1/v2 A/B, order/ITI, режимы и модели; визуальная проверка всех паттернов | полные observations, валидные negative и unresolved отдельно; временные графики всех soma с наложенными реальными входными импульсами в читаемом масштабе |
 | 12 | актуализировать root/PulseLib/Bin docs и ClDesc; historical errata | одна поддерживаемая спецификация, нет ссылок на удалённый CLI |
 
 ## Физика и lifecycle
@@ -79,7 +79,7 @@ threshold подтверждается реальным прогоном; silent
 
 ## Pipeline и интерфейсы
 
-CLI: inventory, preflight, prepare, train, export, calibrate, evaluate, analyze,
+CLI: inventory, preflight, prepare, train, export, calibrate, evaluate, analyze, report,
 publish, history. Import не запускает работу. Новые команды вводятся по мере
 реализации; отсутствие команды не маскируется пустым успешным stub.
 
@@ -95,6 +95,14 @@ Diagnostic Test незавершённого Train маркируется отд
 удаляются после миграции; manifest хранит repo/fullSHA/path/blob.
 
 ## Проверки и merge
+
+Дополнение пользователя 29.10.2026: обязательные визуальные отчёты входят в
+приёмку новых экспериментов. Для каждой ожидаемой пробы каждого паттерна и всех
+soma нужны крупные временные графики мембранного потенциала с наложенными
+фактическими входными импульсами. Полное окно сопровождается увеличенными
+фрагментами, достаточными для анализа амплитуд, формы, задержек и узких импульсов.
+Мелкая сводная сетка не заменяет индивидуальные читаемые графики.
+Нормативная детализация: [VisualTestReports](VisualTestReports.ru.md).
 
 Обязательны Classic/Branch, N0/N1, N=1/2/4/>4, mode0/1, storage/load/reuse/growth,
 Neuron structure0/1/2, используемые физические классы/LT/inhibition combinations,

@@ -4,8 +4,8 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-Последний принятый develop: root `d2d32dbc03faeaba15582d0e3c75e2f366577db4`,
-PulseLib `a95746bd0e1ec6d0f51dffe46f1ff7f654a93580`. Объединён проверенный
+Последний принятый develop: root `1845df823b1e7f656b1d01a040cad3b0e2555275`,
+PulseLib `98308fc9b6c2d831578194d00fc76b173b62627b`. Объединён проверенный
 frozen-owner import/hold и перенос в новый Test learner/fresh process; область
 проверок не расширяется самим merge. Подэтап `stage03/spike-history-reset` также объединён в develop и
 исправляет фиктивные timestamps после Reset: baseline воспроизведён на обоих
@@ -24,6 +24,15 @@ reset-per-trial / preserve-neuron-dynamics и fixed thresholds 1 / 0.0001 зад
 завершены. Это ещё не calibration/scientific metrics/production experiment job,
 вся physics/mode matrix или завершение этапа 8.
 [API, данные и ограничения](FrozenRecognitionTrials.ru.md).
+
+Scoped connected-stop fix: общий adapter/service читает реальный IsNeedToTrain
+до и после детей. На обоих workers baseline выявил 16 ignored stops из 20;
+fixed source 384927728 / Core c99c47d прошёл 57/57 native и 10/10 Python,
+28 новых + 66 прежних primary trials. Пакеты опубликованы, по 1069 stored /
+1067 raw hashes проверены. Scope: V2 N1, Classic/Branch, CalculateMode 0/1,
+scalar SetPointer. Восходящий фронт/restart, initial-false и остальные sharing
+режимы не объявляются проверенными. Этап 6 остаётся частичным.
+[Причина, алгоритм и проверки](ConnectedTrainingStop.ru.md).
 
 ## Предыдущая принятая отправная точка develop
 

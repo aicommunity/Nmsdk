@@ -507,5 +507,56 @@
       "raw_hashes": 2,
       "method": "fresh shared Git objects; each child fetched from configured origin; actual recursive registered status checked"
     }
+  },
+  "connected_training_stop": {
+    "native_root": "38492772838dcb48afc1a3c44c0388ccb387c11c",
+    "pulse_core": "c99c47d89c24baf48879ace3d6ded635f8485272",
+    "auditor_root": "b236ee563d99e07250db584146a82e925ce231ce",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "baseline_cases_each": 20,
+    "baseline_missed_stops_each": 16,
+    "keep_true_controls_each": 4,
+    "native_fixed_cases_each": 57,
+    "python_cases_each": 10,
+    "skips_each": 0,
+    "new_primary_trials_each": 28,
+    "existing_primary_trials_each": 66,
+    "reports": {
+      "elder1": "8280a184e6e1e15a749119dfe08c4a646d48261c",
+      "m40": "406191506fa162a52780ffd12fb4ccc0b6d1006e"
+    },
+    "stored_hashes_each": 1069,
+    "raw_hashes_each": 1067,
+    "runtime_hash_records": {
+      "elder1": 84,
+      "m40": 225
+    },
+    "scope": "V2 N1 Classic/Branch CalculateMode 0/1 read-only scalar SetPointer; additional direct-setter/service/cold regressions",
+    "active_jobs": false,
+    "scoped_accepted": true,
+    "develop_merged": true,
+    "full_stage_6_complete": false,
+    "scientific_verdict": null,
+    "accepted_root": "1845df823b1e7f656b1d01a040cad3b0e2555275",
+    "accepted_pulse": "98308fc9b6c2d831578194d00fc76b173b62627b",
+    "recursive_source_closure": {
+      "verified": true,
+      "report_commit": "5eec69aeb563d596e3e088bbed6278985dff684b",
+      "children": 7,
+      "clean": true,
+      "stored_hashes": 4,
+      "raw_hashes": 2
+    }
+  },
+  "mandatory_visual_test_reports": {
+    "user_requirement_date": "2026-10-29",
+    "spec": "VisualTestReports.ru.md",
+    "scope": "all tested patterns/trials and all somas; actual input-pulse overlay; readable full-window and zoom plots",
+    "renderer_implemented": false,
+    "visual_acceptance_complete": false,
+    "required_for_plan_completion": true
   }
 }
