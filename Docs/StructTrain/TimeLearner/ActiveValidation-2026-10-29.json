@@ -10,9 +10,11 @@
     "network_configuration_changed": false,
     "active_native_jobs_claimed": false,
     "a2_native_rerun_required": false,
-    "next_gate": "independent A2 audit and Git publication before newer owner-policy acceptance"
+    "next_gate": "finish M40 owner-policy ASan and publish; integrated normal regression running on Elder",
+    "connection_recovered": true,
+    "historical_network_failure": true
   },
-  "scope": "terminal PostTune transient evidence; no active job claimed; earlier full regression in ActiveValidation-2026-10-28.json",
+  "scope": "historical transient plus completed graph-boundary A2, condition/runtime evidence and current owner-policy/integrated validation",
   "native_root": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
   "pulse_core": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
   "pulse_documented": "8f248aa",
@@ -67,8 +69,14 @@
         "a2_native_terminal": true,
         "a2_process_exit_status": 0,
         "a2_tests_passed": 14,
-        "a2_independent_audit": "not_started",
-        "a2_artifact_publication": "pending"
+        "a2_independent_audit": "passed",
+        "a2_artifact_publication": "published",
+        "a2_python_tests": 2,
+        "a2_sample_pairs": 16570,
+        "a2_old_csv_equal": 20,
+        "a2_report_commit": "241c10f2ec01a50e95f3f0d2edcc8273fc08a857",
+        "stored_hashes_verified": 426,
+        "raw_hashes_verified": 424
       },
       "10.245.1.17": {
         "attempt": "s08-boundary-asan-a1",
@@ -85,8 +93,14 @@
         "a2_native_terminal": true,
         "a2_process_exit_status": 0,
         "a2_tests_passed": 14,
-        "a2_independent_audit": "not_started",
-        "a2_artifact_publication": "pending"
+        "a2_independent_audit": "passed",
+        "a2_artifact_publication": "published",
+        "a2_python_tests": 2,
+        "a2_sample_pairs": 16570,
+        "a2_old_csv_equal": 8,
+        "a2_report_commit": "45d55b03d4c6d0d56aad964c62321bafa8591078",
+        "stored_hashes_verified": 241,
+        "raw_hashes_verified": 239
       }
     },
     "python_root": "c174c98b237cd241fbae1d46850d7cbdc0d0c100",
@@ -99,24 +113,64 @@
   "unvalidated_owner_policy": {
     "root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
     "pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
-    "server_build": "not_started",
+    "server_build": "passed both workers",
     "native_cases_planned": 9,
     "subsequent_lifecycle_callback_guard": "implemented; no server build yet",
-    "reason": "jump host 10.245.1.12 TCP/SSH timeout; no native test rerun needed for completed A2",
+    "reason": "connection restored; Elder terminal pass, M40 ASan live",
     "latest_pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
     "subsequent_provenance_guard": "full reference/final/observed packets; negative control preserves certificate/status/epoch while changing reference trial IDs",
     "test_protocol": "2 kHz external CalculateMode=1 release; 20 kHz CalculateMode=0; explicit fixture sync tolerance 1 s; raw training proof captured",
     "first_implementation_root": "2a9357afa73e485d3461683c4ee7e597bb7fc176",
-    "first_implementation_pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0"
+    "first_implementation_pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0",
+    "workers": {
+      "10.245.1.11": {
+        "native_passed": 23,
+        "native_exit_status": 0,
+        "python_tests_each_attempt": 4,
+        "primary_training_packets": 42,
+        "sample_pairs": 8646,
+        "report_commit": "640a39df9f5a83bff84a06294c1c5d10ee6a4913",
+        "report_local_hash_check": "324 stored / 322 raw verified"
+      },
+      "10.245.1.17": {
+        "session_id": 53674,
+        "observed_native_pid": 1038241,
+        "state": "running ASan",
+        "independent_audit_sessions": [
+          42053,
+          77347
+        ]
+      }
+    },
+    "python_a1": "664ced2346171cd6b50f3f79af217dde83dde86f",
+    "python_a2": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293"
   },
   "unvalidated_condition_identities": {
     "scope": "ConditionSpec/content artifacts, matrix/analysis/attempt IDs; runtime content identity schema 2",
-    "server_tests": "not_started",
+    "server_tests": "18 passed on each worker",
     "modules": [
       "Scripts.StructTrain.TimeLearner.tests.test_condition",
       "Scripts.StructTrain.TimeLearner.tests.test_runtime"
     ],
     "runner_queue_integration": false,
-    "historical_schema_1_rewritten": false
+    "historical_schema_1_rewritten": false,
+    "runtime_relocation": "real .rs2 binary startup and production snapshot identity equal on each worker",
+    "reports": {
+      "elder1": "c05b75aec4b8952002af3d4e91d4e07d60c8f96b",
+      "m40": "976bdfcf71fd67593450e08f303cfa90a0df01f1"
+    },
+    "local_hash_verification_each": {
+      "stored": 14,
+      "raw": 12
+    }
+  },
+  "integrated_normal_regression": {
+    "host": "10.245.1.11",
+    "native_root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
+    "session_id": 49214,
+    "attempt": "s08-integrated-normal-a1",
+    "state": "started; terminal result not yet observed",
+    "scope": "three maintained Rdk CTest targets plus full PulseLib parent, separate XML",
+    "runtime": "/home/user/timelearner-refactor/runtime-s08-integrated-normal-a1"
   }
 }

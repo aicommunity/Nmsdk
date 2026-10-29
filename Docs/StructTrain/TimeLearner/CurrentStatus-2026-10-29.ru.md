@@ -169,9 +169,16 @@ retarget и calibration открыты. [Подробности](PostTuneTransie
 портами. A1 normal: 24/24 native и 10/10 Python, 16570 exact sample pairs. A1 ASan
 контролируемо прерван из-за стоимости fixture full hashing. Lifecycle baseline
 дал один ожидаемый failure после owner Reset. A2 root 325052a0 / PulseLib 32dc2e0:
-по 14/14 native на Elder normal и M40 ASan; independent A2 audit и публикация
-ожидают связи с jump host. Текущая owner-policy реализация root 912ef71b / PulseLib
-c7266dcb (9 новых tests) пока не собрана; не покрывается старой приёмкой. Полная controller/threshold transaction и
+по 14/14 native на Elder normal и M40 ASan. После восстановления связи independent
+A2 audit прошёл на обоих workers: по 2 Python tests, 16570 exact sample pairs,
+20 Elder / 8 M40 CSV совпадают с полными A1. Пакеты опубликованы и получены через
+Git: Elder commit 241c10f2, 426 stored / 424 raw hashes; M40 45d55b03,
+241 / 239. Все hashes проверены локально.
+Текущая owner-policy реализация root 912ef71b / PulseLib c7266dcb:
+Elder normal завершил 23/23 native (9 новых + 14 regression), независимый
+664ced234 — 4/4 Python, 42 actual training packets и 8646 waveform sample pairs.
+M40 ASan пока выполняется; его результат и публикация owner-policy ещё открыты.
+Полная controller/threshold transaction и
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
 
@@ -191,8 +198,13 @@ EXP02 Test_avg1 найден в августовской истории. Это 
 **Идентичности условий/runtime — рабочий подэтап 10**: добавлен content-addressed
 ConditionSpec, отдельные matrix/attempt/analysis identities и runtime manifest
 schema 2 без deploy/resource/compiler path в identity flags. Сохранена полная
-provenance, старые manifests не пересчитываются. Tests подготовлены, но из-за
-недоступности jump host не выполнялись; runner/queue не подключены.
+provenance, старые manifests не пересчитываются. На обоих workers source
+670f2ff79 прошёл 18/18 Python tests и реальный перенос A2 executable/INI с
+переименованием binary в `.rs2`: production snapshot сохраняет identity;
+перенесённый binary запускается и перечисляет native tests. Нового численного
+прогона этот контроль не выполняет. Использован свежий чистый Git closure A2
+со всеми семью точными gitlinks. Пакеты c05b75ae / 976bdfcf опубликованы,
+на каждом проверены 14 stored / 12 raw hashes. Runner/queue не подключены.
 [Контракт и ограничения](ConditionIdentities.ru.md).
 
 ## Незакрытый объём исходных этапов
