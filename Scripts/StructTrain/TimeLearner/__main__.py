@@ -11,6 +11,7 @@ def analyze(args: argparse.Namespace) -> dict:
     from .native_evidence import EvidenceError, audit_probe, load, require
     require(args.format == "domain" or not args.allow_legacy, "legacy_adapter_is_only_for_domains")
     require(args.format == "probe" or args.trace is None, "trace_option_is_only_for_probes")
+    require(args.format == "recognition-trial" or args.model is None, "model_option_is_only_for_recognition_trials")
     source = args.source.resolve(strict=True)
     if args.format == "domain":
         from .domain_evidence import audit_resistance_domain
@@ -21,6 +22,10 @@ def analyze(args: argparse.Namespace) -> dict:
     elif args.format == "stopped-solo":
         from .stopped_evidence import audit_stopped_state, load_case
         result = audit_stopped_state(*load_case(source))
+    elif args.format == "recognition-trial":
+        from .recognition_trial_evidence import audit_recognition_trial
+        require(args.model is not None, "recognition_model_package_required")
+        result = audit_recognition_trial(load(source), load(args.model.resolve(strict=True)))
     elif args.format == "recognition-owner":
         from .recognition_owner_evidence import audit_owner_recognition, load_case
         result = audit_owner_recognition(*load_case(source))
@@ -51,7 +56,8 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "posttune-reconstruction", "posttune-transient"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "posttune-reconstruction", "posttune-transient"), required=True)
+    analysis.add_argument("--model", type=Path, help="recognition package required for recognition-trial")
     analysis.add_argument("--trace", type=Path, help="original primary CSV, required for probe")
     analysis.add_argument("--allow-legacy", action="store_true", help="descriptive domain schema-1 adapter only")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
