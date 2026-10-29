@@ -2065,6 +2065,7 @@ template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int no
     ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
     const auto certificate=EncodeTrainingCertificate(*service.Certificate());
     const auto before=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
+    const auto materialGoal=rig.neuron->TrainingPattern.GetData();
     const double threshold=rig.learner->LTZThreshold.GetData(),fixed=rig.learner->FixedLTZThreshold.GetData();
     const double calibrated=rig.learner->CalibratedFixedLTZThreshold.GetData();
     const bool useFixed=rig.learner->UseFixedLTZThreshold.GetData(),automatic=rig.learner->AutoCalibrateFixedLTZThreshold.GetData();
@@ -2088,6 +2089,7 @@ template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int no
     auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
     rig.source=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);rig.ports={{&rig.source->Output,"burst"}};
     EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    EXPECT_TRUE(NativeTrainingPatternEqual(rig.neuron->TrainingPattern.GetData(),materialGoal));
     EXPECT_DOUBLE_EQ(rig.learner->LTZThreshold.GetData(),threshold);EXPECT_DOUBLE_EQ(rig.learner->FixedLTZThreshold.GetData(),fixed);
     EXPECT_DOUBLE_EQ(rig.learner->CalibratedFixedLTZThreshold.GetData(),calibrated);
     EXPECT_EQ(rig.learner->UseFixedLTZThreshold.GetData(),useFixed);EXPECT_EQ(rig.learner->AutoCalibrateFixedLTZThreshold.GetData(),automatic);
