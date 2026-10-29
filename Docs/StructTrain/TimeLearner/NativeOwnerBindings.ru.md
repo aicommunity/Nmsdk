@@ -37,7 +37,7 @@ Construction/import исправлены в PulseLib `cbbf56ce541027ef8e07d6be7a
 JSON. Пакет `s04-owner-bindings-m40`, commit
 `1c55f903d9d30e1367a30461c5f5f7b1a92f30c3`, 467 stored / 465 raw hashes проверены.
 На Elder normal та же Core implementation прошла 16 controls в editor-baseline A1.
-Новая отдельная публикация этого Elder результата ещё требуется.
+Этот Elder контроль включён в baseline package 2c08b5b4 ниже.
 
 Editor baseline root `03fd6e4704859ea5b84db0f20b122b8bf068a121`, PulseLib
 Core cbbf56ce: на Elder normal и M40 ASan по 12 controls — 6 matching pass и
@@ -72,9 +72,21 @@ Native editor уже требует `preview parameters == requested` и точ�
 
 ## Приёмка и оставшаяся работа
 
-На workers запущен адресный gate: owner construction/import, 12 editor controls,
-старые native editor regressions 2/20 кГц и cold training controls.
-Пока он не завершён, editor fix считается исправленным в коде, а не принятым.
+На обоих workers завершён адресный gate: **46/46 native без skips/failures**
+(16 construction/import, 12 editor bindings, 14 editor regressions, 4 cold
+training). Elder normal, M40 ASan. По 2/2 Python tests из native source прошли;
+дополнительный auditor source 07e66559a4030537ed24605fcdb676838b94b257 также
+прошёл по 2/2 tests и связывает pre-edit модель с первичной boundary пробой.
+На каждом worker проверены 12 complete probes / 4332 samples.
+
+Fixed пакеты: [Elder](../../../Reports/StructTrain/TimeLearner/s04-editor-fixed-elder1/README.md)
+073b2906e6926f026f9a2c55ee1b69475f49a9ff и
+[M40](../../../Reports/StructTrain/TimeLearner/s04-editor-fixed-m40/README.md)
+37e6326c98bcd74d859ff3381acf90514763905a; по 530 stored / 528 raw hashes
+проверены локально. Baseline: 2c08b5b4c0a2fb7f359a31609e13d8d6a73f2d13 /
+1e9e52f225b6cec1b5b8cde51b30b65c7abdd869, по 331 stored / 329 raw hashes.
+Elder пакет после пересечения двух локальных Git index operations восстановлен
+из точного evidence commit; все hashes повторно проверены. История не переписана.
 `owner_binding_evidence.py` проверяет матрицу 12 primary readbacks и реальные
 boundary probe JSON/CSV. Повреждённые числа, подмена статуса, schema, hash,
 источника или metadata запрещают положительный validation result.
