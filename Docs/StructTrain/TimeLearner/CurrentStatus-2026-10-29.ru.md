@@ -302,3 +302,19 @@ root merge d7ee23f4. Свежий checkout M40 подтверждает семь
 новая реализация ещё не принята. Дополнительные два configured V2 controls
 пока только в source. Подробности: FrozenRecognitionOwner.ru.md. Полного
 spike evaluation/calibration runner этот подэтап пока не даёт.
+
+## Frozen owner gates завершены, сквозной Test ещё открыт
+
+Рабочий Core PulseLib0b9d0ff: A1 по 12/12 native (8 owner + 4 cold),
+A2 root112acdae по 12/12 owner на Elder normal и M40 ASan, включая configured
+V2 и CalculateMode=0/1. Strict A3 по 8/8 Python без skips: 164 source trials /
+5052 paired samples на worker. Пакеты aa75bc2d / 8b9febb3 опубликованы;
+по 912 stored / 910 raw hashes проверены локально. Первый A2 CLI-class skip
+сохранён и устранён отдельным Python-only аудитом, native rerun не подменялся.
+
+Команда analyze --format recognition-owner доступна и проверена. Recognition
+certificate/scientific verdict остаются null. Текущие controls заменяют
+training learner на recognition; новый Test learner/fresh-process owner,
+transient foils, real spike timestamps и threshold confirmation ещё открыты.
+Этот working scope не принят в develop. См. FrozenRecognitionOwner.ru.md.
+Все jobs перечисленных попыток terminal; новая активная серия не заявляется.

@@ -62,3 +62,11 @@ analysis и attempt identities. Это ещё не preflight/runner и не за
 tests на workers и реальный native readback на M40 ASan прошли; BOM/declaration
 дефект исправлен в Rdk. Это ещё не effective component preflight:
 [ConfigDocument.ru.md](../../../Docs/StructTrain/TimeLearner/ConfigDocument.ru.md).
+
+### Frozen owner observation audit
+
+`python -m Scripts.StructTrain.TimeLearner analyze CASE_owner_recognition_state.json --format recognition-owner`
+проверяет conversion/source proof, actual before/after owner/reference hashes,
+полное paired waveform и negative controls. Требуются source trial JSON/CSV
+и schema-2 owner observation; schema-1 prototype без hash readbacks не получает
+достроенных значений. Это validation evidence, без scientific verdict и spikes.

@@ -354,7 +354,7 @@
     "branch": "stage08/frozen-recognition-owner",
     "native_root": "6ff1d43a9af8df7a97111ba04b259aa207454ce0",
     "pulse_core": "0b9d0ff992238b6f72bc1046d50c5d80fecee6d7",
-    "state": "initial gate running; no runtime acceptance claimed",
+    "state": "A1/A2 native gates and strict A3 independent audits completed exit zero on both workers; published and hashes verified",
     "planned_cases": {
       "new_owner": 8,
       "cold_training_regression": 4
@@ -362,17 +362,48 @@
     "workers": {
       "10.245.1.11": {
         "kind": "normal",
-        "session_id": 56145
+        "session_id": 56145,
+        "state": "completed_exit_zero"
       },
       "10.245.1.17": {
         "kind": "asan_detect_leaks_0",
-        "session_id": 34267
+        "session_id": 34267,
+        "state": "completed_exit_zero"
       }
     },
     "record_spikes": false,
     "scientific_evaluation_complete": false,
     "extra_configured_cases_in_working_source": 2,
-    "extra_configured_cases_runtime_validated": false,
-    "develop_merged": false
+    "extra_configured_cases_runtime_validated": true,
+    "develop_merged": false,
+    "a1_native_passed_each": 12,
+    "a2_native_root": "112acdae1c21bb6e0b1667b3fffdeb90a02859b1",
+    "a2_native_passed_each": 12,
+    "a3_python_tests_each": 8,
+    "a3_skips_each": 0,
+    "source_trials_each": 164,
+    "paired_samples_each": 5052,
+    "a2_owner_observation_schema": 2,
+    "a1_prototype_missing_hash_fields_inferred": false,
+    "a1_source_proof_packages_each": 8,
+    "a1_source_trials_each": 108,
+    "reports": {
+      "elder1": "aa75bc2d82d2655aa0da4080fe896267645f3072",
+      "m40": "8b9febb3ce18548a4644d57aad89b10d0a1d4552"
+    },
+    "local_hash_verification_each": {
+      "stored": 912,
+      "raw": 910
+    },
+    "runtime_hash_records_rechecked": {
+      "elder1": 56,
+      "m40": 150
+    },
+    "automatic_control_cases_runtime_validated": true,
+    "initial_a2_cli_class_skip": "preserved; strict A3 provided real domain fixture and requires zero skips",
+    "fresh_destination_owner_verified": false,
+    "fresh_process_owner_verified": false,
+    "training_owner_reused_for_recognition": true,
+    "active_jobs": false
   }
 }
