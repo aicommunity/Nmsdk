@@ -4,8 +4,8 @@
 этапы 8 и 11 по новой спецификации не завершены. Scoped native API и зелёные
 тесты отдельных подэтапов не заменяют весь перечень требований.
 
-Последний принятый develop: root `a28765c3e816bab09c08366510b35edfafff91f7`,
-PulseLib `a753603cc27e2f5580195e649fc672eeb5769618`. Объединён проверенный
+Последний принятый develop: root `d2d32dbc03faeaba15582d0e3c75e2f366577db4`,
+PulseLib `a95746bd0e1ec6d0f51dffe46f1ff7f654a93580`. Объединён проверенный
 frozen-owner import/hold и перенос в новый Test learner/fresh process; область
 проверок не расширяется самим merge. Подэтап `stage03/spike-history-reset` также объединён в develop и
 исправляет фиктивные timestamps после Reset: baseline воспроизведён на обоих
@@ -15,7 +15,7 @@ status=1 объяснён и воспроизведён отдельной ди�
 завершение всего этапа 3/4 или полного frozen recognition runner не утверждается.
 [Дефект, проверки и действия после восстановления связи](SpikeHistoryReset.ru.md).
 
-Новая scoped приёмка `stage08/frozen-recognition-trials`: общий native executor
+Новая scoped приёмка `stage08/frozen-recognition-trials` объединена в develop: общий native executor
 полных target/foil проб обоих learner и production analyze CLI. Source 127806a34 /
 Core 81ee217: на каждом worker 6/6 native и 12/12 Python без skips/errors,
 16 полных проб, 8 неполных контролей, 3864 кадров и 4 actual spikes. Протоколы
