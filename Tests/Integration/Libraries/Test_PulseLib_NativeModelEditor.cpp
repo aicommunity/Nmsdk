@@ -2141,9 +2141,9 @@ public:
     NativeOwnerConfigSource():Resistance0("Resistance0",this),Resistance1("Resistance1",this),MaximumLength("MaximumLength",this){}
     NativeOwnerConfigSource* New(void) override {return new NativeOwnerConfigSource;}
 };
-template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool importing,bool scalar)
+template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool importing,bool scalar,bool matching=false)
 {
-    EditingRig<Learner> rig(2000,0,std::string("owner_binding_")+(importing?"import_":"construct_")+(scalar?"scalar":"vector"),false,2,true);
+    EditingRig<Learner> rig(2000,0,std::string("owner_binding_")+(importing?"import_":"construct_")+(scalar?"scalar":"vector")+(matching?"_matching":""),false,2,true);
     NativeEditSpec policy;policy.maximumCableLength=8;
     const auto declaration=DescribeNativeLearnerModel(*rig.learner,rig.branch,Normalization::SynapseCount,
         rig.learner->DendriteLength.GetData(),policy);
@@ -2165,8 +2165,8 @@ template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool import
     auto source=dynamic_pointer_cast<NativeOwnerConfigSource>(core.storage->TakeObject(image));ASSERT_TRUE(source);
     source->Name="OwnerConfigSource";UEPtr<UContainer> component=source;
     ASSERT_NE(rig.model->AddComponent(component),ForbiddenId);source->Init();
-    auto resistances=rig.learner->TipSynapseResistance.GetData();resistances[0]*=1.03125;
-    const int maximum=rig.learner->MaxDendriteLength.GetData()+1;
+    auto resistances=rig.learner->TipSynapseResistance.GetData();if(!matching)resistances[0]*=1.03125;
+    const int maximum=rig.learner->MaxDendriteLength.GetData()+(matching?0:1);
     source->Resistance0=resistances[0];source->Resistance1=resistances[1];source->MaximumLength=maximum;
     if(scalar)ASSERT_TRUE(rig.learner->MaxDendriteLength.SetPointer(0,&source->MaximumLength));
     else
@@ -2183,17 +2183,44 @@ template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool import
     QJsonArray before,after;for(double r:resistances)before.append(r);
     after.append(source->Resistance0.GetData());after.append(source->Resistance1.GetData());
     Artifact(rig.name+"_owner_binding.json",QJsonDocument(QJsonObject{
-        {"kind","native_owner_configuration_binding"},{"schema_version",1},{"importing",importing},{"scalar",scalar},
+        {"kind","native_owner_configuration_binding"},{"schema_version",1},{"importing",importing},{"scalar",scalar},{"matching",matching},
         {"status",NativeModelBuildStatusName(result.status)},{"reason",QString::fromStdString(result.reason)},
         {"model_may_have_changed",result.modelMayHaveChanged},
         {"graph_replaced",rig.learner->GetComponent("Neuron",true).Get()!=old},
         {"source_vector_before",before},{"source_vector_after",after},
         {"source_scalar_before",maximum},{"source_scalar_after",source->MaximumLength.GetData()},
+        {"requested_scalar",declaration.editPolicy.maximumCableLength},
+        {"owner_scalar_after",rig.learner->MaxDendriteLength.GetData()},
+        {"owner_vector_after",[&]{QJsonArray v;for(double r:rig.learner->TipSynapseResistance.GetData())v.append(r);return v;}()},
         {"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     EXPECT_EQ((std::vector<double>{source->Resistance0.GetData(),source->Resistance1.GetData()}),resistances);
     EXPECT_EQ(source->MaximumLength.GetData(),maximum);
-    ASSERT_EQ(result.status,NativeModelBuildStatus::Rejected)<<result.reason;
-    EXPECT_FALSE(result.modelMayHaveChanged);EXPECT_EQ(rig.learner->GetComponent("Neuron",true).Get(),old);
+    if(matching)
+    {
+        ASSERT_EQ(result.status,importing?NativeModelBuildStatus::Adopted:NativeModelBuildStatus::Constructed)<<result.reason;
+    }
+    else
+    {
+        ASSERT_EQ(result.status,NativeModelBuildStatus::Rejected)<<result.reason;
+        EXPECT_EQ(result.reason,std::string("native_model_owner_assignment_is_external:")+
+            (scalar?"MaxDendriteLength":"TipSynapseResistance"));
+        EXPECT_FALSE(result.modelMayHaveChanged);EXPECT_EQ(rig.learner->GetComponent("Neuron",true).Get(),old);
+    }
+    if(scalar)
+    {
+        EXPECT_TRUE(rig.learner->MaxDendriteLength.IsConnected());
+        EXPECT_EQ(rig.learner->MaxDendriteLength.GetDataSources(),(std::vector<const UIProperty*>{&source->MaximumLength}));
+    }
+    else
+    {
+        EXPECT_TRUE(rig.learner->TipSynapseResistance.IsConnected());
+        EXPECT_EQ(rig.learner->TipSynapseResistance.GetDataSources(),(std::vector<const UIProperty*>{&source->Resistance0,&source->Resistance1}));
+    }
+    if(importing)
+    {
+        ASSERT_TRUE(rig.learner->NativeTrainingController().Certificate());
+        EXPECT_EQ(EncodeTrainingCertificate(*rig.learner->NativeTrainingController().Certificate()),package["certificate"].toObject());
+    }
 }
 TEST(NativeOwnerConfigurationBindings,ClassicConstructVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(false,false);}
 TEST(NativeOwnerConfigurationBindings,BranchConstructVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(false,false);}
@@ -2203,6 +2230,14 @@ TEST(NativeOwnerConfigurationBindings,ClassicImportVector){RejectConnectedNative
 TEST(NativeOwnerConfigurationBindings,BranchImportVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(true,false);}
 TEST(NativeOwnerConfigurationBindings,ClassicImportScalar){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(true,true);}
 TEST(NativeOwnerConfigurationBindings,BranchImportScalar){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(true,true);}
+TEST(NativeOwnerConfigurationBindings,ClassicMatchingConstructVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(false,false,true);}
+TEST(NativeOwnerConfigurationBindings,BranchMatchingConstructVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(false,false,true);}
+TEST(NativeOwnerConfigurationBindings,ClassicMatchingConstructScalar){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(false,true,true);}
+TEST(NativeOwnerConfigurationBindings,BranchMatchingConstructScalar){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(false,true,true);}
+TEST(NativeOwnerConfigurationBindings,ClassicMatchingImportVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(true,false,true);}
+TEST(NativeOwnerConfigurationBindings,BranchMatchingImportVector){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(true,false,true);}
+TEST(NativeOwnerConfigurationBindings,ClassicMatchingImportScalar){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearner>(true,true,true);}
+TEST(NativeOwnerConfigurationBindings,BranchMatchingImportScalar){RejectConnectedNativeOwnerConfiguration<NNeuronTimeLearnerBranch>(true,true,true);}
 
 TEST(NativePostTuneOwnerPolicy,ClassicN0_2000){NativePostTuneOwnerPolicy<NNeuronTimeLearner>(2000,0);}
 TEST(NativePostTuneOwnerPolicy,BranchN0_2000){NativePostTuneOwnerPolicy<NNeuronTimeLearnerBranch>(2000,0);}
