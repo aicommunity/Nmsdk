@@ -182,8 +182,9 @@ M40 ASan пока выполняется; его результат и публ�
 production candidate-loop wiring ещё открыты.
 [Контракт, проверяемые сценарии и ограничения](PostTuneBoundaryTransaction.ru.md).
 
-**Миграция исторических запускателей — первый пакет**: удалены семь одноразовых
-shell-файлов из Docs/evidence/metrics. Полные archive/last-change SHA, blob SHA-1
+**Миграция исторических запускателей — два пакета**: удалены семь одноразовых
+shell-файлов из Docs/evidence/metrics и четыре InhGrid launchers/monitors.
+Полные archive/last-change SHA, blob SHA-1
 и content SHA-256 записаны в [реестр](ScriptMigration.ru.md); wrappers/копий нет.
 Исторические результаты сохранены, ссылки исправлены на immutable Git versions.
 Активные Bin/PulseLib tools, физические модели и остальная миграция не завершены.
