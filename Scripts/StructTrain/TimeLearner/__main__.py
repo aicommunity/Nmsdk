@@ -67,7 +67,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "probe", "probe-set"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "probe", "probe-diagnostic", "probe-set"), default="recognition-evaluation")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
     report.add_argument("--output", type=Path, required=True, help="new directory; never overwritten")
@@ -103,10 +103,11 @@ def main(argv: list[str] | None = None) -> int:
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
                 result = render_probe_set(args.source.resolve(strict=True), args.output.resolve())
-            elif args.format == "probe":
+            elif args.format in ("probe", "probe-diagnostic"):
                 from .probe_reports import render_probe
                 require(args.trace is not None and args.model is None, "probe_report_requires_trace_not_model")
-                result = render_probe(args.source.resolve(strict=True), args.trace.resolve(strict=True), args.output.resolve())
+                result = render_probe(args.source.resolve(strict=True), args.trace.resolve(strict=True), args.output.resolve(),
+                                      allow_incomplete=args.format=="probe-diagnostic")
             else:
                 require(args.model is not None and args.trace is None, "recognition_report_requires_model_not_trace")
                 result = render_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True), args.output.resolve())

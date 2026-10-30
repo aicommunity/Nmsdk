@@ -18,7 +18,8 @@ def detail_limits(samples, channel, left, right, shared):
     if not inside:
         return None
     begin, end = max(0, inside[0]-1), min(len(samples), inside[-1]+2)
-    values = [s["soma"][channel] for s in samples[begin:end]]
+    values = [s["soma"][channel] for s in samples[begin:end] if math.isfinite(s["soma"][channel])]
+    if not values:return None
     low, high = min(values), max(values)
     if 0 < high-low < .25*(shared[1]-shared[0]):
         return padded_limits(values)
@@ -104,7 +105,14 @@ def render_soma(observation, channel, label, limits, output: Path):
             overlay.set_ylabel("Input [native generator units]", color="#a34d00")
             overlay.tick_params(axis="y", colors="#a34d00")
             ax.grid(True, alpha=.25)
-            if not observation["complete"] and observation["closed_at"] < right:
+            if "unobserved_intervals" in observation:
+                labelled=False
+                for begin,end in observation["unobserved_intervals"]:
+                    if max(left,begin)<min(right,end):
+                        ax.axvspan(max(left,begin),min(right,end),color="gray",alpha=.25,
+                                   label=None if labelled else "Unobserved / censored")
+                        labelled=True
+            elif not observation["complete"] and observation["closed_at"] < right:
                 ax.axvspan(max(left, observation["closed_at"]), right, color="gray", alpha=.25,
                            label="Unobserved / censored")
             for event in observation["spike_times"]:
