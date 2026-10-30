@@ -98,3 +98,28 @@ python -m Scripts.StructTrain.TimeLearner analyze trial.json --format recognitio
 Полный CalibrationResult, выбор/подтверждение порога, controller loop,
 production wiring и все PostTune modes остаются обязательным продолжением.
 Исходные default tolerances, CapturedPerInput и Rdk bool-контракт не меняются.
+
+### Промежуточная runtime-сверка A2
+
+Elder native A2 завершён с exit 0: четыре 2-kHz cases, затем восемь expanded
+cases; aggregate XML проверяет точное множество 12 test IDs, без ошибок и
+пропусков. Первая независимая версия reader
+`148eef9d7c4d36fd84f62669159844d12d1e94f8` завершена: 47/47 tests, ноль
+skips/errors/failures, проверены 16 настоящих candidate packages. Raw результаты
+пока находятся в `/home/user/timelearner-refactor/readbacks/s08-threshold-candidate-normal-a2`
+и `s08-threshold-candidate-audit-normal-a1`; публикация compact primary artifacts,
+временные графики и приёмка подэтапа ещё не завершены.
+
+Следующий reader `ebb6407fd9b161f0723fc00c8941b8dd7589c3f1` добавляет явное
+calibration-only scoring и три проверки полного набора/перестановки строк/
+запрета frozen evaluation для candidate. Его normal gate пока выполняется
+(PID 971369). ASan native A2 на M40 прошёл 4/4 при 2 kHz и выполняет expanded
+часть (PID 2809841); новый ASan reader ожидает его завершения (PID 2822958).
+Эти PID — указатели для повторной проверки, не доказательства текущего liveness.
+
+Старый ожидающий ASan reader a1 отменён до tests в пользу нового reader.
+Его EXIT trap записал `0` при SIGTERM; это не PASS. Отдельный attempt-status
+сохраняет `interrupted_before_tests`, отсутствие validation.json и неизвестный
+OS exit code. Новый launcher явно обрабатывает TERM/INT и всё равно требует
+терминальный native status, точное множество JUnit cases и полноценный data gate.
+Не считать завершённый shell процесс, файл с нулём и научную приёмку одним статусом.
