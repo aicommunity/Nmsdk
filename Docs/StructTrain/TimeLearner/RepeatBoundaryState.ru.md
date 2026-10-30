@@ -132,3 +132,16 @@ M40 `bd79b0d31724f7230d658bcbc70bccdb5a0bdb25`.
 Контракт и ограничения: [NativeTestRunVisualReports](NativeTestRunVisualReports.ru.md).
 Визуальная проверка выбранных панелей и согласованные develop merges остаются
 условиями приёмки этого подэтапа. Полная матрица исходного плана не закрыта.
+
+Компонентный fix принят в PulseLib develop merge
+`086b04fb43bb57506558bfb6beba6250f61a6ce2` и опубликован. Diff Core от
+проверенного `7b5939c5744877ba1a762393d78f7183853fd5c0` пуст: последующие
+child changes относятся к документации. Root принимает компактные raw bundles,
+а полные новые graphics остаются M40 cache по решению пользователя. Все 34 outer
+и 8 inner hashes каждого компактного пакета проверены после Git-получения.
+Full M40 cache действительно восстановлен из архива: 3087 byte-identical PNG,
+338 probes / 507 pairs и 3/3 full graphical checks; receipt
+`15279ce361225406f8bc9809be7eeb54056e9e38` не содержит generated images.
+Scoped visual review относится к шести выбранным views каждого producer;
+полная visual/physics matrix не объявляется. Root merge/closure фиксируются
+отдельно после публикации точного child gitlink.

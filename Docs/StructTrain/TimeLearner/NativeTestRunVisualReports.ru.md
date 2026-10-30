@@ -95,3 +95,18 @@ M40 `bd79b0d31724f7230d658bcbc70bccdb5a0bdb25`.
 включая исходные native logs: изменение их формата нарушило бы вложенные hashes.
 Шесть PDF каждого набора имеют Poppler previews с source hashes. Их локальная
 визуальная проверка и итоговый develop merge пока не заявлены.
+
+Последующая scoped visual проверка записана в
+[NativeTestRunVisualReview-2026-10-30.json](NativeTestRunVisualReview-2026-10-30.json).
+Шесть Elder previews открыты с original detail; все шесть M40 previews
+побайтно совпадают с ними. Overview показывает actual pulses и полный ответ,
+peak zoom — форму пика; в выбранном peak-only tile onset лежит в соседнем
+фрагменте и overview. Partial tail остаётся явно неизвестным. Это не просмотр
+всех figures и не human/global visual acceptance.
+
+После вопроса об объёме пользователь выбрал компактный Git. Большие полные
+ветки 03d02cd/bd79b0d сохраняются как уже опубликованные, но не объединяются
+в source develop. Вместо них приняты компактные primary bundles с выбранными
+PNG; полные reports — воспроизводимый M40 cache. См.
+[CompactArtifactBundles](CompactArtifactBundles.ru.md) и
+[аудит объёма](ArtifactStorageAudit-2026-10-30.ru.md). Научные данные не удалены.

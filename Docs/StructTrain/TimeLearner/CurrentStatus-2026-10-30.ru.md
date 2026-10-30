@@ -83,12 +83,28 @@ worker; scoped просмотр четырёх Poppler previews). Он сохр�
 Прежние 132-пробные графики не подменяют новые A3 данные по совпадению IDs.
 Классификация целых этапов и оставшиеся требования ниже не изменились.
 
+Позднейшее уточнение: пользователь выбрал компактный Git вместо публикации
+всех производных PNG/SVG/PDF каждого gate. Первый native-fixture archive/cache
+путь прошёл на обоих workers 10/10 archive checks и 5/5 boundary evidence checks
+после extraction. Пакеты около 4.31 MB каждый сохраняют все primary data и
+модели, runtime/source provenance и шесть выбранных PNG. Верифицированы все
+34 outer / 8 inner hashes каждого пакета. Полный cache M40 реально восстановлен:
+338 probes / 507 pairs, 3087 byte-identical PNG и 3/3 graphical readback tests.
+См. [CompactArtifactBundles](CompactArtifactBundles.ru.md).
+
+PulseLib fix повторных boundary summaries принят в develop
+`086b04fb43bb57506558bfb6beba6250f61a6ce2`; Core byte-identical проверенному
+7b5939c. Root merge и fresh closure пока отмечаются отдельно. Ранее опубликованные
+полные новые graphical branches сохраняются в истории и не объединяются
+в source develop. Исторические 1.73 GB reports не удалялись; новая компактная
+политика сама по себе не очищает прежнюю историю и не завершает её аудит.
+
 1. Доказательства: закончить исторический реестр с августа, сопоставление волн
    аудитов и semantic review всех параметров/инструментов; не смешивать старые
    критерии с текущими.
 2. Lifecycle/storage/export: полная матрица reuse/Copy/Load/growth, heterogeneous
-   physics и частот, completed/stopped/warm состояния новой repeat policy,
-   full model transfer и независимый frozen Test.
+   physics и частот, более широкие N/repeat/profile combinations,
+   полный production model transfer и независимый frozen scientific Test.
 3. Алгоритмы: оставшаяся матрица N0/N1, invalid/ambiguous measurements,
    quantization, shared Branch effects и optional C-trim; final repeatability
    отдельно от локальных повторов кандидата.
