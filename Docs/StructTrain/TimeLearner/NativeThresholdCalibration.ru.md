@@ -338,3 +338,26 @@ JSON не допускаются в proof path.
 Новый code snapshot требует отдельного server gate; уже опубликованные gates
 предыдущего снимка не являются его проверкой. Calibrated state commit/export
 и полная транзакция остаются незавершёнными.
+
+## Native calibrated state: следующий непроверенный снимок
+
+Реализованы `CreateNativeCalibratedState` и native import формата
+`timelearner_calibrated_recognition_state` (schema 1). Пакет содержит исходный
+candidate и полные independently declared requests/raw observations двух матриц
+выбранного порога: успешный search и успешное свежее confirmation. При загрузке
+пересчитываются обе оценки и expected package; произвольный calibrated=true или
+переподписанный ложный claim не заменяет первичных данных.
+
+Физический model hash остаётся hash выбранного candidate, calibration provenance
+сохраняется отдельно. Solo certificate не превращается в recognition certificate.
+Внутренний calibrationConfirmed отделён от числового порога, включая zero.
+Весь grid selection и execution attestation этим форматом не подтверждаются:
+соответствующие поля явно false. Independent Test и PostTune также не заявлены.
+
+Code/test snapshot root `fc36f38bdf2b204cb448ba6971425c4ec26890f1`, PulseLib
+`353882b0391cb40d193599350f8b5dbac1df21e2`. Отдельные normal/ASan задания
+`s08-calibrated-state-normal-a1` / `s08-calibrated-state-asan-a1` ожидают завершения
+проверок persistence. До их завершения это реализованный, но непроверенный API,
+а не закрытие этапа 8. Python CLI/scorer ещё не принимают новый calibrated package;
+следующий обязательный шаг — независимая проверка proof и frozen evaluation через
+общий scorer, затем production selection/commit/rollback orchestration.
