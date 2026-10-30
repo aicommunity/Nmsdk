@@ -166,6 +166,16 @@ class ThresholdCandidateEvidenceTest(unittest.TestCase):
             with self.assertRaisesRegex(EvidenceError, "explicit_calibration_scoring"):
                 score_recognition_evaluation(self.specification(path, package), trials, package)
 
+    def test_scoring_does_not_modify_or_return_mutable_source_metadata(self):
+        path, package, _, trials, _ = self.cases[0]
+        spec = self.specification(path, package)
+        before, design = copy.deepcopy(package), copy.deepcopy(spec)
+        result = score_threshold_candidate(spec, trials, package)
+        result["calibration"]["protocol"] = "changed-in-analysis-client"
+        result["criterion"]["id"] = "changed-in-analysis-client"
+        self.assertEqual(package, before)
+        self.assertEqual(spec, design)
+
     def test_candidate_scoring_is_order_independent_and_requires_all_expected_trials(self):
         for path, package, _, trials, _ in self.cases:
             spec = self.specification(path, package)

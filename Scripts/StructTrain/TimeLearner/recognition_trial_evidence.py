@@ -25,14 +25,16 @@ def audit_recognition_trial(observation, package):
     try:
         o = observation
         require(type(package) is dict, "unsupported_trial_model_package")
+        require(type(o) is dict, "unknown_recognition_trial_schema")
+        schema = o.get("schema_version")
+        require(type(schema) is int and schema in (1, 2), "unknown_recognition_trial_schema")
         candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
         if candidate:
             from .threshold_candidate_evidence import audit_threshold_candidate
             audit_threshold_candidate(package)
         context = package["source_recognition"] if candidate else package
-        require(set(o) == FIELDS, "recognition_trial_field_set_mismatch")
-        require(o["kind"] == "native_recognition_trial" and type(o["schema_version"]) is int
-                and o["schema_version"] == 1, "unknown_recognition_trial_schema")
+        require(set(o) == FIELDS | ({"threshold_potential_source"} if schema == 2 else set()), "recognition_trial_field_set_mismatch")
+        require(o["kind"] == "native_recognition_trial", "unknown_recognition_trial_schema")
         require((candidate or package["kind"] == "timelearner_recognition_state") and type(package["schema_version"]) is int
                 and package["schema_version"] == 1 and package["state_kind"] == "recognition"
                 and package["dynamic_checkpoint"] is False and package["recognition_certificate"] is None,
@@ -42,6 +44,16 @@ def audit_recognition_trial(observation, package):
         identity = package["neuron"]["graph"]["identity"]
         require(canonical_model_sha256(identity["model"]) == identity["sha256"] == package["model_revision"],
                 "recognition_model_digest_mismatch")
+        if schema == 2:
+            descriptor = o["threshold_potential_source"]
+            if descriptor is None:
+                require(o["armed"] is False and o["samples"] == [], "missing_threshold_potential_source")
+            else:
+                path = package["neuron"]["metadata"]["calibration"]["ltzone_path"]
+                zones = [node for node in identity["model"]["nodes"] if node["path"] == path]
+                require(len(zones) == 1 and descriptor == {"path": path+".Potential", "class": zones[0]["class"],
+                    "sample_phase": "native_after_children", "units": "model_units_SI_unverified"},
+                    "threshold_potential_source_mismatch")
         require(o["evaluation_verdict"] is None, "unsupported_trial_verdict")
         for name in ("run_id", "trial_id", "sample_id", "pattern_hash", "reason"):
             require(type(o[name]) is str and bool(o[name]), "invalid_recognition_identity")
@@ -67,9 +79,11 @@ def audit_recognition_trial(observation, package):
         actual_events = {"stimulus_history": [], "spike_history": []}
         watermarks = {key: None for key in actual_events}
         for i, sample in enumerate(o["samples"]):
-            require(type(sample) is dict and set(sample) == {"time", "stimulus", "soma", "lt_output", "stimulus_history", "spike_history"},
+            require(type(sample) is dict and set(sample) == {"time", "stimulus", "soma", "lt_output", "stimulus_history", "spike_history"} |
+                    ({"lt_potential"} if schema == 2 else set()),
                     "invalid_recognition_sample_fields")
             time = number(sample["time"]);number(sample["stimulus"]);number(sample["lt_output"])
+            if schema == 2:number(sample["lt_potential"])
             for key in actual_events:
                 history = sample[key]
                 require(type(history) is list, "recognition_history_not_array")
@@ -117,10 +131,15 @@ def audit_recognition_trial(observation, package):
                 planned += number(isi)
                 require(not after(planned, actual) and not after(actual, planned + 1/frequency),
                         "recognition_stimulus_timestamp_mismatch")
-        return {"schema_version": 1, "valid_observation": o["valid"], "complete": o["complete"],
+        result = {"schema_version": 1, "valid_observation": o["valid"], "complete": o["complete"],
                 "run_id": o["run_id"], "trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],
                 "samples": len(o["samples"]), "spike_count": len(spikes), "reason": o["reason"],
                 "evaluation_verdict": None}
+        if schema == 2:
+            descriptor = o["threshold_potential_source"]
+            result["threshold_potential_source"] = None if descriptor is None else dict(descriptor)
+            result["threshold_potential_samples"] = len(o["samples"])
+        return result
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, OverflowError, ZeroDivisionError) as error:
