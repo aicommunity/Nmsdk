@@ -3,6 +3,7 @@
 The native run/runtime and source training evidence are audited separately.
 Silence is a valid response. No training/convergence/selectivity PASS is inferred.
 """
+import sys
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, after, count, equal, number, require
 
@@ -76,6 +77,8 @@ def audit_recognition_trial(observation, package):
         if o["armed"]:
             require(frequency > 0 and frequency == number(source_model["frequency_hz"]) and end > begin,
                     "invalid_recognition_clock")
+            require(1/frequency > 64*sys.float_info.epsilon*max(1., abs(begin), abs(end)),
+                    "unresolvable_recognition_sample_interval")
         actual_events = {"stimulus_history": [], "spike_history": []}
         watermarks = {key: None for key in actual_events}
         for i, sample in enumerate(o["samples"]):
@@ -99,6 +102,7 @@ def audit_recognition_trial(observation, package):
             for v in sample["soma"]:
                 number(v)
             require(o["armed"] and not after(begin, time) and not after(time, end), "recognition_sample_outside_window")
+            require(equal(time, begin+i/frequency), "recognition_sample_off_native_grid")
             if i == 0:
                 require(equal(time, begin), "recognition_missing_first_sample")
             else:
@@ -131,7 +135,7 @@ def audit_recognition_trial(observation, package):
                 planned += number(isi)
                 require(not after(planned, actual) and not after(actual, planned + 1/frequency),
                         "recognition_stimulus_timestamp_mismatch")
-        result = {"schema_version": 1, "valid_observation": o["valid"], "complete": o["complete"],
+        result = {"schema_version": 1, "auditor_version": 2, "valid_observation": o["valid"], "complete": o["complete"],
                 "run_id": o["run_id"], "trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],
                 "samples": len(o["samples"]), "spike_count": len(spikes), "reason": o["reason"],
                 "evaluation_verdict": None}

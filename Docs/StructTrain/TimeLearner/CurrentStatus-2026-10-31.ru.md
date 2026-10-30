@@ -71,6 +71,18 @@ links и restoration records. Для всех четырёх случаев по
 CSV и готовые CLI descriptors. Полные legacy-фазы 16-case gate и ASan a2
 проверяются отдельно. Это дополнение не завершает этап 8.
 
+Позднее завершён и сохранён [полный normal gate](../../../Reports/StructTrain/TimeLearner/s08-threshold-full-normal-a1/README.md):
+16/16 native и 29/29 independent tests, без skips/errors/failures. Отдельные 8/8
+proposal/link checks частично повторяют семь тестов первого reader; это не 37
+уникальных проверок. В архиве сохранены legacy primary data и неуспешные
+попытки с их настоящими причинами, без переименования в PASS.
+
+После этого baseline добавлен новый validator raw observations и native
+response assessment (root ad975bbeb / PulseLib 25cf6a5). Он уже собран и прошёл
+два 2000-Гц potential-контроля на Elder; 20-кГц/legacy/ASan и независимый readback
+нового Core ещё выполняются. Старый normal gate не является проверкой этого
+последующего изменения. Native calibrated commit/export по-прежнему открыт.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |

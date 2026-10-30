@@ -206,3 +206,10 @@ SEARCH/FRESH — descriptor `timelearner_threshold_measurement_set`, schema 1:
 для них существует отдельный calibration scorer. Candidate report явно помечен
 диагностическим, не сертифицирует обучение или scientific Test. Подробный контракт:
 Docs/StructTrain/TimeLearner/NativeThresholdCalibration.ru.md.
+
+`analyze ASSESSMENT.json --format native-calibration-assessment --evaluation EVALUATION.json --model CANDIDATE.json --source-solo CASE_learned_state.json`
+сопоставляет native response assessment с первичными observations и общим scorer.
+Проверяются полный набор, label/ID, reset policies, все spikes и response windows;
+true/false вместо числовых полей отклоняются. Raw observation auditor v2 требует
+ровно один отсчёт на native tick и различимый dt. Статус исполнения simulator
+и commit калиброванной модели этой командой не подтверждаются.

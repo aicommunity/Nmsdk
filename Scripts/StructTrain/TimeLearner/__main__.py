@@ -11,10 +11,20 @@ def analyze(args: argparse.Namespace) -> dict:
     from .native_evidence import EvidenceError, audit_probe, load, require
     require(args.format == "domain" or not args.allow_legacy, "legacy_adapter_is_only_for_domains")
     require(args.format == "probe" or args.trace is None, "trace_option_is_only_for_probes")
-    require(args.format in ("recognition-trial", "recognition-evaluation") or args.model is None, "model_option_is_only_for_recognition_trials")
-    require(args.format == "threshold-candidate" or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
+    require(args.format in ("recognition-trial", "recognition-evaluation", "native-calibration-assessment") or args.model is None, "model_option_is_only_for_recognition_trials")
+    require(args.format in ("threshold-candidate", "native-calibration-assessment") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
+    require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
     source = args.source.resolve(strict=True)
-    if args.format == "domain":
+    if args.format == "native-calibration-assessment":
+        from .native_calibration_evidence import audit_native_calibration_assessment
+        from .recognition_metrics import load_evaluation
+        from .learned_evidence import load_case
+        require(args.model is not None and args.evaluation is not None and args.source_solo is not None,
+                "native_calibration_requires_model_evaluation_and_source_evidence")
+        spec, observations = load_evaluation(args.evaluation.resolve(strict=True))
+        result = audit_native_calibration_assessment(load(source), spec, observations,
+            load(args.model.resolve(strict=True)), load_case(args.source_solo.resolve(strict=True)))
+    elif args.format == "domain":
         from .domain_evidence import audit_resistance_domain
         result = audit_resistance_domain(load(source), allow_legacy=args.allow_legacy)
     elif args.format == "learned-solo":
@@ -66,9 +76,10 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "posttune-reconstruction", "posttune-transient"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient"), required=True)
     analysis.add_argument("--model", type=Path, help="recognition package required for recognition trial/evaluation")
     analysis.add_argument("--source-solo", type=Path, help="original learned-state package with primary trial siblings, required for threshold candidate")
+    analysis.add_argument("--evaluation", type=Path, help="independently declared evaluation spec required for native calibration assessment")
     analysis.add_argument("--trace", type=Path, help="original primary CSV, required for probe")
     analysis.add_argument("--allow-legacy", action="store_true", help="descriptive domain schema-1 adapter only")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")

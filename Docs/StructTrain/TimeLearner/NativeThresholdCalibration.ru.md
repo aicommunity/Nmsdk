@@ -251,3 +251,35 @@ commit/export этим ещё не реализован.
 не выдаётся за это подтверждение. Same-Matrix и independent frozen evaluation
 остаются разными протоколами. Все данные этого контроля относятся к новой
 двухпаттерновой fixture, а не к историческим августовским 4/8–6/8.
+
+## Следующий рабочий подэтап: native решение по измеренным spikes
+
+Root `ad975bbeb5df18555d94329d3ee95f321921c171`, PulseLib
+`25cf6a5bfadc0ee72182cb924f1d0730cf6dc71b` добавляют общий validator закрытой
+raw observation и `AssessNativeThresholdResponses`. Validator сверяет объявленную
+request, точную native sample grid, полный интервал, finite значения и фактические
+event arrays с покадровыми histories. Старое `valid=true` не скрывает вставленный
+дополнительный отсчёт, потерянный frame или подменённый список spikes.
+
+Общее определение response window вынесено отдельным механическим commit;
+математическая цель не менялась. Native assessment вычисляет решения target/foil
+по измеренным spikes, хранит все окна и отдельные reset policies. Он не вызывает
+Calculate/Reset/Build, не меняет параметры и не присваивает calibrated=true.
+Сохранение окончательного calibrated model и полный controller transaction
+остаются следующими незакрытыми операциями.
+
+Этот новый Core пока прошёл два potential-контроля на 2000 Гц на Elder;
+полная native матрица проверяется заново. Прежние 16/29/8 результаты относятся
+к Core 7f17735, а не автоматически к новому Core. Отдельный Python adapter
+сопоставляет каждую native assessment с общим `score_threshold_candidate`,
+включая primary и полные матрицы. Сам raw observation auditor версии 2 теперь
+также проверяет native grid и различимость dt на текущем absolute clock.
+
+CLI независимой проверки:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner analyze ASSESSMENT.json --format native-calibration-assessment --evaluation EVALUATION.json --model CANDIDATE.json --source-solo CASE_learned_state.json
+```
+
+Expected evaluation spec и source CSV обязательны. Согласованность расчётов
+не выдаётся за подтверждение исполнения simulator, калибровку или training Exact.
