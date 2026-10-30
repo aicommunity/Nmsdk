@@ -25,7 +25,7 @@ CRITERION = {"id": "post_anchor_target_whole_window_foil_v1", "anchor": "last_st
              "begin_offset": 0., "end_offset": None, "reject_target_outside_window": True}
 
 
-def measurement(root, base, phase, candidate, selection=None):
+def measurement(root, base, phase, candidate, selection=None, *, include_robustness=False):
     prefix = base+"_"+phase
     design = load(root/(prefix+"_calibration_design.json"))
     if (design["kind"] != "native_threshold_potential_fixture_design" or
@@ -46,7 +46,7 @@ def measurement(root, base, phase, candidate, selection=None):
                "maximum_samples": 1000000,
                "reset_policy": "reset_per_trial" if i < 2 else "preserve_neuron_dynamics"}
         declared.append(row)
-        if i < 2:
+        if i < 2 or include_robustness:
             trials.append({k: v for k, v in row.items() if k not in ("pattern_isi", "maximum_samples")})
             trials[-1].update(presentation_index=i, observation=prefix+"_frozen_trial_"+str(i)+".json")
             observations.append(load(root/trials[-1]["observation"]))
