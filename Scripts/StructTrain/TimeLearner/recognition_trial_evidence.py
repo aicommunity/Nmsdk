@@ -24,10 +24,16 @@ def _events(values, begin, closed):
 def audit_recognition_trial(observation, package):
     try:
         o = observation
+        require(type(package) is dict, "unsupported_trial_model_package")
+        candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
+        if candidate:
+            from .threshold_candidate_evidence import audit_threshold_candidate
+            audit_threshold_candidate(package)
+        context = package["source_recognition"] if candidate else package
         require(set(o) == FIELDS, "recognition_trial_field_set_mismatch")
         require(o["kind"] == "native_recognition_trial" and type(o["schema_version"]) is int
                 and o["schema_version"] == 1, "unknown_recognition_trial_schema")
-        require(package["kind"] == "timelearner_recognition_state" and type(package["schema_version"]) is int
+        require((candidate or package["kind"] == "timelearner_recognition_state") and type(package["schema_version"]) is int
                 and package["schema_version"] == 1 and package["state_kind"] == "recognition"
                 and package["dynamic_checkpoint"] is False and package["recognition_certificate"] is None,
                 "unsupported_trial_model_package")
@@ -41,7 +47,7 @@ def audit_recognition_trial(observation, package):
             require(type(o[name]) is str and bool(o[name]), "invalid_recognition_identity")
         require(o["label"] in ("target", "foil") and o["reset_policy"] in
                 ("reset_per_trial", "preserve_neuron_dynamics"), "invalid_recognition_label_or_reset")
-        require(type(o["pattern_isi"]) is list and len(o["pattern_isi"]) == len(package["recognition_inputs"])
+        require(type(o["pattern_isi"]) is list and len(o["pattern_isi"]) == len(context["recognition_inputs"])
                 and bool(o["pattern_isi"]) and all(number(v) >= 0 for v in o["pattern_isi"]),
                 "invalid_recognition_pattern")
         require(canonical_model_sha256(o["pattern_isi"]) == o["pattern_hash"], "recognition_pattern_hash_mismatch")
@@ -53,7 +59,7 @@ def audit_recognition_trial(observation, package):
         frequency = number(o["frequency_hz"])
         budget = count(o["maximum_samples"])
         require(budget >= 2 and type(o["samples"]) is list and len(o["samples"]) <= budget, "invalid_recognition_budget")
-        source_model = package["source_solo"]["configuration"]["model"]
+        source_model = context["source_solo"]["configuration"]["model"]
         channels = 1 if source_model["branch"] else len(o["pattern_isi"])
         if o["armed"]:
             require(frequency > 0 and frequency == number(source_model["frequency_hz"]) and end > begin,
