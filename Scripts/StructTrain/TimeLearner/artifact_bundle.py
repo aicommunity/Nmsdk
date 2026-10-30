@@ -104,10 +104,10 @@ def pack_native_tests(contract, artifacts, output, selected_report):
                     "command": "python3 -m Scripts.StructTrain.TimeLearner report EXTRACTED/contract.json --format native-test-run --artifacts EXTRACTED --output NEW_CACHE"},
                 "scientific_verdict": None, "global_visual_acceptance": False}
     _write(output/"manifest.json", manifest)
-    verify_bundle(output)
     # A source changed during snapshot must not become a certified archive.
     require(all(_sha(sources[e["path"]]) == e["sha256"] for e in entries), "primary_source_changed_during_bundle")
     _write(output/"SHA256SUMS.json", {p.relative_to(output).as_posix(): _sha(p) for p in sorted(output.rglob("*")) if p.is_file()})
+    verify_bundle(output)
     return {"kind": manifest["kind"], "primary_files": len(entries), "archive_bytes": archive.stat().st_size,
             "uncompressed_bytes": sum(e["bytes"] for e in entries), "selected_figures": len(selected), "scientific_verdict": None}
 
@@ -120,7 +120,7 @@ def _read_archive(bundle, manifest, output=None, maximum_bytes=8*1024**3):
         require(type(entry) is dict and set(entry) == {"path", "bytes", "sha256", "role"}, "unknown_primary_bundle_entry")
         name = _name(entry["path"])
         require(name not in expected and type(entry["bytes"]) is int and entry["bytes"] >= 0
-                and re.fullmatch("[0-9a-f]{64}", entry["sha256"]) is not None
+                and type(entry["sha256"]) is str and re.fullmatch("[0-9a-f]{64}", entry["sha256"]) is not None
                 and entry["role"] in ("primary_trace", "native_record", "provenance"), "invalid_primary_bundle_entry")
         expected[name] = entry
     require(sum(e["bytes"] for e in entries) <= maximum_bytes, "primary_bundle_exceeds_extraction_budget")
@@ -151,14 +151,21 @@ def _read_archive(bundle, manifest, output=None, maximum_bytes=8*1024**3):
 
 def verify_bundle(bundle, maximum_bytes=8*1024**3):
     root = bundle.resolve(strict=True); manifest = load(root/"manifest.json")
-    require(manifest.get("kind") == "timelearner_primary_artifact_bundle" and type(manifest.get("schema_version")) is int
-            and manifest["schema_version"] == 1, "unknown_primary_artifact_bundle")
+    require(set(manifest) == {"kind", "schema_version", "archive", "files", "selected_figures", "inventory", "render_recipe",
+                             "scientific_verdict", "global_visual_acceptance"}
+            and manifest.get("kind") == "timelearner_primary_artifact_bundle" and type(manifest.get("schema_version")) is int
+            and manifest["schema_version"] == 1 and manifest["scientific_verdict"] is None
+            and manifest["global_visual_acceptance"] is False, "unknown_primary_artifact_bundle")
     archive = manifest["archive"]
-    require(archive["file"] == "primary.tar.gz" and not (root/archive["file"]).is_symlink()
+    require(type(archive) is dict and set(archive) == {"file", "bytes", "sha256"}
+            and archive["file"] == "primary.tar.gz" and type(archive["bytes"]) is int and archive["bytes"] > 0
+            and type(archive["sha256"]) is str and re.fullmatch("[0-9a-f]{64}", archive["sha256"]) is not None
+            and not (root/archive["file"]).is_symlink()
             and (root/archive["file"]).stat().st_size == archive["bytes"] and _sha(root/archive["file"]) == archive["sha256"],
             "primary_archive_checksum_mismatch")
     _read_archive(root, manifest, maximum_bytes=maximum_bytes)
     seen = set()
+    require(type(manifest["selected_figures"]) is list and bool(manifest["selected_figures"]), "missing_selected_bundle_figures")
     for figure in manifest["selected_figures"]:
         name = _name(figure["path"])
         require(name.startswith("selected/") and name.endswith(".png") and name not in seen, "invalid_bundle_selected_figure")
@@ -166,6 +173,13 @@ def verify_bundle(bundle, maximum_bytes=8*1024**3):
         require(path.resolve(strict=True).is_relative_to(root) and not path.is_symlink()
                 and path.stat().st_size == figure["bytes"] and _sha(path) == figure["sha256"], "selected_figure_checksum_mismatch")
         seen.add(name)
+    checksums = load(root/"SHA256SUMS.json")
+    require(set(checksums) == seen | {"manifest.json", "primary.tar.gz"}, "unexpected_primary_bundle_checksum_set")
+    actual_files = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file() and p != root/"SHA256SUMS.json"}
+    require(actual_files == set(checksums), "unaccounted_primary_bundle_file")
+    for name, expected in checksums.items():
+        path = root/_name(name)
+        require(not path.is_symlink() and type(expected) is str and _sha(path) == expected, "primary_bundle_file_checksum_mismatch")
     return manifest
 
 
