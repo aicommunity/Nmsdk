@@ -222,3 +222,32 @@ Descriptor `timelearner_threshold_measurement_set`, schema 1, содержит �
 переносимого каталога. Сохранённые scores не заменяют первичные наблюдения.
 Для confirm descriptor содержит ровно одну свежую матрицу. Source learned state
 по-прежнему проверяется вместе с исходными trial CSV, а не только по JSON digest.
+
+## Scoped результаты 31.10
+
+После duration-based исправления fixture полный normal gate на Elder прошёл
+16/16 native cases: potential Classic/Branch N1 при 2/20 кГц, legacy candidate
+Classic/Branch N0/N1 при 2/20 кГц и четыре owner/conversion regressions.
+Полная ASan матрица пока выполняется; этот normal результат её не заменяет.
+
+Независимые восемь proposal/CLI/link проверок reader
+`6b03832182e281d6d1c7534a84ba7b300035ec75` прошли без skips/errors/failures.
+Все четыре reset primary pair дали `confirmed` после отдельного native import
+и нового предъявления. В частности, на 20 кГц предложены и подтверждены пороги
+Classic 0.0031903129737191893 и Branch 0.00603317801091352 (model units).
+Fixture затем восстанавливает исходный recognition state; native calibrated
+commit/export этим ещё не реализован.
+
+[Primary bundle](../../../Reports/StructTrain/TimeLearner/s08-threshold-potential-normal-a3/README.md)
+содержит все 308 необходимых файлов (5.73 MB lossless archive), включая CSV
+обучения и CLI descriptors. [Независимый Git roundtrip на M40](../../../Reports/StructTrain/TimeLearner/s08-threshold-primary-roundtrip-m40-a1/README.md)
+проверил hashes всех членов архива и заново получил те же четыре selection и
+четыре confirmation JSON из извлечённых данных. Simulator в этом roundtrip
+не запускался. Это переносимость анализа, а не повтор native эксперимента.
+
+Предложение порога использует nonspiking trace только для выбора кандидата.
+Положительный исход определяется реальными spiking пробами выбранного порога,
+учитывающими обратное влияние спайка на динамику; offline sweep одной трассы
+не выдаётся за это подтверждение. Same-Matrix и independent frozen evaluation
+остаются разными протоколами. Все данные этого контроля относятся к новой
+двухпаттерновой fixture, а не к историческим августовским 4/8–6/8.
