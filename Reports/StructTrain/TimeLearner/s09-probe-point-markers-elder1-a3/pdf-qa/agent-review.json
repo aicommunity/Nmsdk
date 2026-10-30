@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_scoped_visual_review",
+  "schema_version": 1,
+  "renderer_root": "71c41c341777901b494e2f1a4f2aa593349dbd01",
+  "source_report_commit": "36c8d662f5c5bcd8131369976d979ab7cb9bb785",
+  "agent_visual_review_complete": true,
+  "human_visual_review_complete": false,
+  "global_visual_acceptance": false,
+  "inspection": "Worker Poppler previews at 160 dpi, 1920x960 pixels, inspected through view_image. Desktop viewport zoom not instrumented.",
+  "scope": "The two listed overview previews only; not the full test matrix or every zoom view.",
+  "observations": [
+    "Boundary glyphs are intact; no waveform or response is invented from one sample.",
+    "Labels and legends are readable and outside axes.",
+    "Actual censored prefix ends at recorded samples; grey tail remains unknown.",
+    "The coincident blue/orange zero-valued samples are real source values, with different marker shapes."
+  ],
+  "records": [
+    {
+      "source_relative": "diagnostic-figures/test_one_recorded_sample_remains_visible_in_both_actual_series/report/soma-001/overview.pdf",
+      "source_sha256": "4698c70d4842d691f52da284959bf3348070c2954db7653d6fb27d2cdd77e272",
+      "preview": "single-sample.png",
+      "preview_sha256": "c43be29a9b508d75b857fe997fd420970f7c019637775d8d26b03b543740337f",
+      "dpi": 160,
+      "pixel_width": 1920,
+      "pixel_height": 960
+    },
+    {
+      "source_relative": "diagnostic-figures/test_actual_censored_trace_cli_retains_samples_and_unknown_tail/Branch-diagnostic/soma-001/overview.pdf",
+      "source_sha256": "a6f5382448a509ab1094698cb3db20509d29aa470ccfd4b7e1aff22ecdb4b8dd",
+      "preview": "actual-partial.png",
+      "preview_sha256": "30b1f3c38755d42df40da92113bd076142f6d94f832f562a4c77a3ba685c625e",
+      "dpi": 160,
+      "pixel_width": 1920,
+      "pixel_height": 960
+    }
+  ]
+}

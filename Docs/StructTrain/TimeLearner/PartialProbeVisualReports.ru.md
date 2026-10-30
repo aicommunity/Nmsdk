@@ -87,3 +87,22 @@ Historical schema adapters и вся physics/frequency matrix остаются �
 различимые marker shapes soma/input; NaN по-прежнему разрывает данные. Отдельный
 wire control обрезает реальный trace до одного отсчёта и проверяет наличие
 обоих data markers внутри SVG axes, а не только существование файла.
+
+Финальный renderer `71c41c341777901b494e2f1a4f2aa593349dbd01` сохраняет
+обрезку самой waveform по рамке временного окна, но показывает целиком маркеры
+всех попавших в окно отсчётов, включая крайние. A1 имел обрезанный рамкой
+крайний marker; A2 снимал clipping со всей waveform и отклонён при проверке кода
+из-за риска выхода других временных фрагментов за axes. Эти варианты сохранены
+как история, не приняты как финальные визуальные результаты.
+
+A3 прошёл 24/24 tests на каждом worker, без skips/errors/failures. SVG проверка
+отдельно требует clipping waveform и отсутствие clipping у data markers.
+Reports: Elder `36c8d662f5c5bcd8131369976d979ab7cb9bb785`,
+M40 `244b9e252bb22d5a57f5804ae58b15c558be8bf6`;
+проверены все 635 первоначальных stored hashes каждого пакета.
+Просмотрены четыре Poppler previews: single-sample control и actual partial
+Branch на обоих workers. Крайние glyphs целы, легенда и подписи читаемы,
+неизмеренный хвост обозначен явно. Scoped agent review записан в каждом
+`pdf-qa/agent-review.json`; после добавления записи manifest содержит 636 файлов.
+Это не human review, не visual acceptance всей матрицы и не полный отчёт новых
+repeat-boundary A3 native trials: для них полный набор графиков ещё требуется.
