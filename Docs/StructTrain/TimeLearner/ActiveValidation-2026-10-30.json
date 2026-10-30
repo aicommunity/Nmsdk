@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-30",
+  "scope": "incremental N0 repeatability checkpoint; not a full plan completion audit",
+  "n0_candidate_repeats": {
+    "scoped_accepted": false,
+    "working_pulse": "c680529f075b6406fadee1159cb7d1638b44677e",
+    "scientific_verdict": null,
+    "working_root": "e4dd256c694997810b3947a435bfc4f1f8be3707",
+    "develop_merged": false,
+    "code_pulse": "8682435ce8518ef71e55a2fb8ed292f634c256d0",
+    "attempts": [
+      {
+        "status": "terminal",
+        "exit_status": 0,
+        "failures": 0,
+        "skips": 0,
+        "native_tests": 34,
+        "root": "a721fe4975a09f1d8473cef5f1054a286bc7b307",
+        "attempt": "a1",
+        "runtime": "/home/user/timelearner-refactor/runtime-s07-n0-repeats-normal-a1",
+        "worker": "10.245.1.11"
+      },
+      {
+        "attempt": "a1",
+        "root": "a721fe4975a09f1d8473cef5f1054a286bc7b307",
+        "supervisor_pid": 2430723,
+        "worker": "10.245.1.17",
+        "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-n0-repeats-asan-a1",
+        "status": "running_verified"
+      },
+      {
+        "attempt": "a2",
+        "root": "42d1b58803d6b2060bd8993b60f17c0d74577d5b",
+        "supervisor_pid": 628487,
+        "worker": "10.245.1.11",
+        "runtime": "/home/user/timelearner-refactor/runtime-s07-n0-repeats-normal-a2",
+        "status": "building_verified"
+      }
+    ],
+    "code_root": "ea05b20f59a3017fbd86cc9948f140d060760c74"
+  },
+  "schema_version": 1,
+  "goal_complete": false,
+  "accepted_root_before_stage": "8fc54ce013d06130009fa250b15304b816a3d620"
+}
