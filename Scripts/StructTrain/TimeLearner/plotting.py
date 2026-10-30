@@ -74,6 +74,7 @@ def render_soma(observation, channel, label, limits, output: Path):
 
     samples = observation["samples"]
     require(bool(samples), "no_primary_samples_for_plot")
+    sample_markers=observation.get("sample_markers",False) or len(samples)==1
     frequency = observation["frequency_hz"]
     times, soma, stimulus = [], [], []
     previous = None
@@ -99,6 +100,16 @@ def render_soma(observation, channel, label, limits, output: Path):
             ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
                          linewidth=1.2, label="Actual shared input (native samples)")
+            if sample_markers:
+                # Only visible samples get unclipped glyphs. The waveform itself
+                # stays clipped: disabling clipping for its full line would draw
+                # other time windows across labels and neighbouring panels.
+                visible=[i for i,time in enumerate(times) if left <= time <= right]
+                x=[times[i] for i in visible]
+                ax.plot(x,[soma[i] for i in visible],linestyle="none",color="#154c9a",
+                        marker="o",markersize=4,markerfacecolor="none",clip_on=False)
+                overlay.plot(x,[stimulus[i] for i in visible],linestyle="none",color="#d46200",
+                             alpha=.65,marker="x",markersize=3,clip_on=False)
             ax.set_xlim(left, right);ax.set_ylim(*y_limits)
             ax.set_xlabel("Native absolute time [s]")
             ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
@@ -136,6 +147,7 @@ def render_soma(observation, channel, label, limits, output: Path):
                          "png_width": 1920, "png_height": 960,
                          "minimum_native_tick_pixels_on_zoom": 14.208 if time_view != "overview" else None,
                          "downsampling": False, "y_scale": scale, "time_view": time_view,
+                         "sample_markers":bool(sample_markers),
                          "shared_y_limits": list(limits), "y_limits": list(y_limits)})
     return rows
 
