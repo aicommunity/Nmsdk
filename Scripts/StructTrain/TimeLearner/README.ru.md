@@ -120,6 +120,20 @@ schema 2 и `observation_policy=complete_or_partial` включает censored �
 Полнота CSV не превращается в валидность измерения. Подробности и серверные
 проверки: Docs/StructTrain/TimeLearner/PartialProbeVisualReports.ru.md.
 
+Для полного текущего native test run используется объявленный контракт cases,
+фаз и отдельных исполнений:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner report Scripts/StructTrain/TimeLearner/specs/repeat-boundary-native-v1.json --format native-test-run --artifacts IMMUTABLE_READBACK --output NEW_REPORT
+```
+
+`IMMUTABLE_READBACK` содержит `native.xml` и `native/`; выход находится вне
+этого каталога. Проверяются все ожидаемые фазы, recorder counters и packets/CSV,
+включая partial, warm и embedded fresh-process probes. Пропавшая фаза либо
+orphan CSV не могут молча уменьшить ожидаемое покрытие. Это адаптер конкретного
+native fixture suite, не замена общего experiment runner. Контракт и ограничения:
+Docs/StructTrain/TimeLearner/NativeTestRunVisualReports.ru.md.
+
 ### Git closure publication
 
 `python3 -m Scripts.StructTrain.TimeLearner publish publication.json --root CHECKOUT --output NEW_RECEIPT.json`

@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from ..native_evidence import EvidenceError, load
-from ..native_test_reports import inventory_native_test_run
+from ..native_test_reports import inventory_native_test_run, render_native_test_run
 
 
 class NativeTestReportsTest(unittest.TestCase):
@@ -89,3 +89,10 @@ class NativeTestReportsTest(unittest.TestCase):
         xml.write(path)
         with self.assertRaisesRegex(EvidenceError, "not_all_completed_successfully"):
             inventory_native_test_run(self.spec, root)
+
+    def test_render_cannot_write_into_immutable_native_artifacts(self):
+        root = self.copied_run()
+        output = root/"native/recursive-output"
+        with self.assertRaisesRegex(EvidenceError, "outside_immutable_artifacts"):
+            render_native_test_run(self.spec, root, output)
+        self.assertFalse(output.exists())
