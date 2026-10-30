@@ -83,6 +83,14 @@ def main(argv: list[str] | None = None) -> int:
     publication.add_argument("specification", type=Path)
     publication.add_argument("--root", type=Path, required=True)
     publication.add_argument("--output", type=Path, required=True, help="new receipt outside source tree")
+    calibration = commands.add_parser("calibrate", help="select/confirm a threshold from primary native measurements; does not execute a simulator")
+    calibration.add_argument("action", choices=("select", "confirm"))
+    calibration.add_argument("specification", type=Path)
+    calibration.add_argument("--measurements", type=Path, required=True, help="portable search measurement-set descriptor")
+    calibration.add_argument("--source-solo", type=Path, required=True, help="original learned-state package with primary trial siblings")
+    calibration.add_argument("--selection", type=Path, help="required for confirmation; recomputed against primary search evidence")
+    calibration.add_argument("--confirmation", type=Path, help="one fresh measurement-set descriptor required for confirmation")
+    calibration.add_argument("--output", type=Path, required=True, help="new result file; never overwritten")
     bundle = commands.add_parser("bundle", help="lossless primary archives; full plots remain in worker cache")
     bundle.add_argument("action", choices=("pack-native-tests", "verify", "extract"))
     bundle.add_argument("source", type=Path, help="native contract for pack; bundle directory otherwise")
@@ -133,6 +141,34 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, tarfile.TarError, EOFError) as error:
             print(json.dumps({"kind": "timelearner_primary_artifact_bundle", "status": "invalid",
                               "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "calibrate":
+        from .native_evidence import EvidenceError, load, require
+        from .learned_evidence import load_case
+        from .calibration import select_threshold, confirm_threshold
+        from .calibration_io import load_measurements
+        try:
+            require(args.action == "confirm" or (args.selection is None and args.confirmation is None),
+                    "selection_does_not_accept_confirmation_options")
+            spec = load(args.specification.resolve(strict=True))
+            measurements = load_measurements(args.measurements)
+            source = load_case(args.source_solo.resolve(strict=True))
+            if args.action == "select":
+                result = select_threshold(spec, measurements, source)
+            else:
+                require(args.selection is not None and args.confirmation is not None,
+                        "calibration_confirmation_requires_selection_and_fresh_measurement")
+                fresh = load_measurements(args.confirmation)
+                require(len(fresh) == 1, "calibration_confirmation_requires_one_measurement")
+                result = confirm_threshold(spec, measurements, source, load(args.selection.resolve(strict=True)), fresh[0])
+            with args.output.open("x", encoding="utf-8") as output:
+                json.dump(result, output, ensure_ascii=False, indent=2, allow_nan=False)
+                output.write("\n")
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"kind": "timelearner_calibration_analysis_error", "validity": "invalid",
+                              "reason": str(error), "calibrated": False, "evaluation_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "publish":
         from .native_evidence import EvidenceError, load

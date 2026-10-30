@@ -4,10 +4,15 @@ Schema-1 fixture designs require an explicit adapter; they never claim that the
 missing request fields were persisted by the original producer.
 """
 import copy
+import contextlib
+import gzip
+import io
+import json
 import math
 import os
 from pathlib import Path
 import unittest
+import tempfile
 
 from ..calibration import RULE, calibration_dataset_digest, select_threshold, confirm_threshold
 from ..learned_evidence import load_case
@@ -127,7 +132,7 @@ class NativeThresholdProposalEvidenceTest(unittest.TestCase):
             self.assertIsNone(confirmed["evaluation_verdict"])
 
     def test_resigned_forged_bracket_is_rejected(self):
-        _, source, characterization, proposal, _, _ = self.cases[0]
+        _, source, characterization, proposal, _, _ = next(row for row in self.cases if row[0].startswith("Branch_2000_"))
         for key in ("threshold", "lower_bound", "target_minimum_inside", "minimum_threshold"):
             changed = copy.deepcopy(proposal); changed[key] *= 1.01
             changed["sha256"] = sha({k: v for k, v in changed.items() if k != "sha256"})
@@ -150,3 +155,53 @@ class NativeThresholdProposalEvidenceTest(unittest.TestCase):
         reused = copy.deepcopy(search)
         reused["execution"].update(stage="confirmation", selection_sha256=selected["sha256"])
         with self.assertRaises(EvidenceError): confirm_threshold(spec, [search], source, selected, reused)
+
+    def test_production_cli_roundtrip_and_output_collision(self):
+        from ..__main__ import main
+        base, source, _, _, search, spec = next(row for row in self.cases if row[0].startswith("Branch_2000_"))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            def write(name, value):
+                (root/name).write_text(json.dumps(value, allow_nan=False), encoding="utf-8")
+            def bundle(name, m):
+                evaluation = copy.deepcopy(m["evaluation_spec"])
+                by_id = {o["trial_id"]: o for o in m["observations"]}
+                for row in evaluation["trials"]:
+                    row["observation"] = name+"-"+row["trial_id"]+".json.gz"
+                    (root/row["observation"]).write_bytes(gzip.compress(json.dumps(by_id[row["trial_id"]]).encode(), mtime=0))
+                write(name+"-evaluation.json", evaluation)
+                write(name+"-candidate.json", m["candidate"])
+                write(name+".json", {"kind": "timelearner_threshold_measurement_set", "schema_version": 1,
+                    "measurements": [{"candidate": name+"-candidate.json", "evaluation": name+"-evaluation.json", "execution": m["execution"]}]})
+            def invoke(*args):
+                output, error = io.StringIO(), io.StringIO()
+                with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+                    code = main(list(map(str, args)))
+                return code, output.getvalue(), error.getvalue()
+            write("spec.json", spec);bundle("search", search)
+            shared = [root/"spec.json", "--measurements", root/"search.json", "--source-solo", self.root/(base+"_learned_state.json")]
+            code, _, error = invoke("calibrate", "select", *shared, "--output", root/"selected.json")
+            self.assertEqual(code, 0, error)
+            selected = load(root/"selected.json")
+            self.assertEqual(selected, select_threshold(spec, [search], source))
+            bundle("confirmation", measurement(self.root, base, "proposal_confirmation", search["candidate"], selected["sha256"]))
+            args = ["calibrate", "confirm", *shared, "--selection", root/"selected.json",
+                    "--confirmation", root/"confirmation.json", "--output", root/"confirmed.json"]
+            code, _, error = invoke(*args)
+            self.assertEqual(code, 0, error)
+            self.assertEqual(load(root/"confirmed.json")["status"], "confirmed")
+            original = (root/"confirmed.json").read_bytes()
+            code, output, error = invoke(*args)
+            self.assertEqual(code, 2)
+            self.assertFalse(output)
+            self.assertIn("reason", json.loads(error))
+            self.assertEqual(original, (root/"confirmed.json").read_bytes())
+
+    def test_measurement_descriptor_cannot_escape_portable_bundle(self):
+        from ..calibration_io import load_measurements
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/"measurements.json"
+            for name in ("../candidate.json", "/tmp/candidate.json", "C:/candidate.json", "nested\\candidate.json"):
+                path.write_text(json.dumps({"kind": "timelearner_threshold_measurement_set", "schema_version": 1,
+                    "measurements": [{"candidate": name, "evaluation": name, "execution": {}}]}))
+                with self.assertRaises(EvidenceError): load_measurements(path)

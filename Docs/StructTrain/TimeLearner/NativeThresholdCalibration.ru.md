@@ -204,3 +204,21 @@ Design schema 2 заранее сохраняет все requests, criterion и 
 без потерь. В manifest явно указано отсутствие утверждения о калибровке;
 обычный recognition-evaluation по-прежнему не принимает candidate package.
 Полные рисунки хранятся как worker cache, а не публикуются массово в Git.
+
+## CLI анализа калибровки
+
+`calibrate select SPEC --measurements SEARCH_SET --source-solo LEARNED_STATE --output NEW_RESULT`
+выбирает кандидата по полному объявленному набору первичных проб.
+`calibrate confirm SPEC --measurements SEARCH_SET --source-solo LEARNED_STATE --selection RESULT --confirmation FRESH_SET --output NEW_CONFIRMATION`
+заново проверяет поиск и свежую подтверждающую матрицу. Эти команды анализируют
+реальные измерения; сами они не запускают simulator и не подтверждают native import.
+Отрицательный научный исход является корректным результатом анализа, а нарушение
+схемы или неполные данные завершаются кодом 2. Существующие результаты не затираются.
+
+Descriptor `timelearner_threshold_measurement_set`, schema 1, содержит массив
+`measurements`: каждый элемент задаёт относительные пути `candidate`, `evaluation`
+и объект `execution` (attempt_id, clock_id, stage, selection_sha256).
+Все ссылки, включая compressed observations из evaluation spec, остаются внутри
+переносимого каталога. Сохранённые scores не заменяют первичные наблюдения.
+Для confirm descriptor содержит ровно одну свежую матрицу. Source learned state
+по-прежнему проверяется вместе с исходными trial CSV, а не только по JSON digest.
