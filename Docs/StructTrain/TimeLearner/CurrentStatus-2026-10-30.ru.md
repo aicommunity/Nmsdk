@@ -37,8 +37,11 @@ PulseLib develop merge `b2b670a22f849e0d0d2b6789b8242308521b1c37`,
 Bin develop merge `cbb3bf453d82f58672541ed8a42f7b5da54a5508` опубликованы.
 Корневой develop merge `fbda0476dd6d3a1e29f27545217e80f86e103b03`
 опубликован; локальное дерево чистое и фактические child HEAD совпадают с
-gitlinks. Fresh recursive closure на M40 проверяется отдельно: одного root
-push и наличия child merges недостаточно для этого утверждения.
+gitlinks. Fresh recursive closure на M40 завершён: все семь сабмодулей
+восстановлены точно, tracked trees чистые. [Отчёт](../../../Reports/StructTrain/TimeLearner/s07-n0-closure-m40-a1/README.md)
+`ddc2a2764ed883cac72a41fe7f34973bbb0b37e4`, все 11 stored hashes
+проверены локально. Проверен именно root fbda0476d; последующие commits
+метаданных не объявляются повторными native-прогонами.
 
 Объединённые отчёты: [Elder](../../../Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/README.md),
 [M40](../../../Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/README.md).
