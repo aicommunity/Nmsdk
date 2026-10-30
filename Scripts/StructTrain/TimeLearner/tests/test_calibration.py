@@ -112,6 +112,15 @@ class CalibrationStudyEvidenceTest(unittest.TestCase):
         self.assertEqual(first["conditions_digest"], other["conditions_digest"])
         self.assertNotEqual(first["spec_digest"], other["spec_digest"])
 
+    def test_declared_trial_array_order_does_not_change_conditions(self):
+        group = self.groups[0]
+        first = select_threshold(group["spec"], group["measurements"], group["source"])
+        spec = copy.deepcopy(group["spec"]);spec["trials"].reverse()
+        other = select_threshold(spec, group["measurements"], group["source"])
+        self.assertEqual(first["conditions_digest"], other["conditions_digest"])
+        self.assertEqual(first["candidates"], other["candidates"])
+        self.assertEqual(first["status"], other["status"])
+
     def test_nonseparable_selection_cannot_be_confirmed(self):
         group = self.groups[0]
         result = select_threshold(group["spec"], group["measurements"], group["source"])

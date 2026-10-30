@@ -72,6 +72,7 @@ def _validate_spec(spec):
     # The common scorer validates the criterion enum/fields against actual
     # observations. Do not create a second response-window implementation here.
     semantic = {key: value for key, value in spec.items() if key not in ("calibration_id", "source_recognition_sha256")}
+    semantic["trials"] = sorted(spec["trials"], key=lambda trial: trial["presentation_index"])
     return thresholds[:budget], {"spec_digest": canonical_model_sha256(spec),
         "conditions_digest": canonical_model_sha256({"algorithm": ALGORITHM, "specification": semantic})}
 
