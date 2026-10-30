@@ -1,0 +1,41 @@
+Running main() from /home/user/Nmsdk/build/linux-gcc-release-local/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 13 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 6 tests from UModernDiagramLinkRouter
+[ RUN      ] UModernDiagramLinkRouter.AutoExternal_UsesCorridor
+[       OK ] UModernDiagramLinkRouter.AutoExternal_UsesCorridor (0 ms)
+[ RUN      ] UModernDiagramLinkRouter.ExternalDeep_OutsideEnvelopeClearsChain
+[       OK ] UModernDiagramLinkRouter.ExternalDeep_OutsideEnvelopeClearsChain (0 ms)
+[ RUN      ] UModernDiagramLinkRouter.AutoForward_Cubic
+[       OK ] UModernDiagramLinkRouter.AutoForward_Cubic (0 ms)
+[ RUN      ] UModernDiagramLinkRouter.AutoReverse_OrthogonalFromOutput
+[       OK ] UModernDiagramLinkRouter.AutoReverse_OrthogonalFromOutput (0 ms)
+[ RUN      ] UModernDiagramLinkRouter.MidRowPort_WorseThanOutsideForDeep
+[       OK ] UModernDiagramLinkRouter.MidRowPort_WorseThanOutsideForDeep (0 ms)
+[ RUN      ] UModernDiagramLinkRouter.LeftPocketFanOut_UsesVerticalBusNotEnvelope
+[       OK ] UModernDiagramLinkRouter.LeftPocketFanOut_UsesVerticalBusNotEnvelope (0 ms)
+[----------] 6 tests from UModernDiagramLinkRouter (0 ms total)
+
+[----------] 6 tests from UModernDiagramScopePath
+[ RUN      ] UModernDiagramScopePath.TopChild_StripsFullScopeBeforeFirstSegment
+[       OK ] UModernDiagramScopePath.TopChild_StripsFullScopeBeforeFirstSegment (0 ms)
+[ RUN      ] UModernDiagramScopePath.Dendrite85_SiblingChannelExport_IsOutgoingSink
+[       OK ] UModernDiagramScopePath.Dendrite85_SiblingChannelExport_IsOutgoingSink (0 ms)
+[ RUN      ] UModernDiagramScopePath.Dendrite85_InternalSynapseToChannel_NotOutgoingSink
+[       OK ] UModernDiagramScopePath.Dendrite85_InternalSynapseToChannel_NotOutgoingSink (0 ms)
+[ RUN      ] UModernDiagramScopePath.NeuronScope_SiblingDendriteLink_NotOutgoingSink
+[       OK ] UModernDiagramScopePath.NeuronScope_SiblingDendriteLink_NotOutgoingSink (0 ms)
+[ RUN      ] UModernDiagramScopePath.NeuronScope_NoLeaveNeuronExports_InStructTrainSample
+[       OK ] UModernDiagramScopePath.NeuronScope_NoLeaveNeuronExports_InStructTrainSample (0 ms)
+[ RUN      ] UModernDiagramScopePath.SinkLabel_DropsCurrentLevelName
+[       OK ] UModernDiagramScopePath.SinkLabel_DropsCurrentLevelName (0 ms)
+[----------] 6 tests from UModernDiagramScopePath (0 ms total)
+
+[----------] 1 test from ExternalSinkLayout
+[ RUN      ] ExternalSinkLayout.SinkTopLeft_IsRightOfSourceNotLeftPocket
+[       OK ] ExternalSinkLayout.SinkTopLeft_IsRightOfSourceNotLeftPocket (0 ms)
+[----------] 1 test from ExternalSinkLayout (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 13 tests from 3 test suites ran. (0 ms total)
+[  PASSED  ] 13 tests.

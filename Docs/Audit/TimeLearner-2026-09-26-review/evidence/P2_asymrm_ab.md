@@ -1,0 +1,19 @@
+# Phase 2 — AsymRm A/B SoftCold (eps-fixed Console) — **DONE**
+
+Console SHA-256: `ec86430e…` · PulseLib `f3763f3` · Bin `79cc592`.
+Queue window: 2026-09-26T16:57 → 2026-09-27T03:10 (~10 h). Host stayed up; metrics in `evidence/metrics/`.
+
+| case | status | Need | tipr | mid | failure_class | bundle |
+|------|--------|------|------|-----|---------------|--------|
+| asym25_preinh | **done** | **0** | canon | 1 (silent) | **gate_fail** | `asym25_preinh_20260926T110401Z` |
+| asym50_preinh | **done** | **1** | flat | missing | **train_incomplete** | `asym50_preinh_20260926T135742Z` |
+| asym100_preinh | **done** | **1** | flat | missing | **train_incomplete** | `asym100_preinh_20260926T172148Z` |
+| asym100_gen | **done** | **1** | flat | missing | **train_incomplete** | `asym100_gen_20260926T204506Z` |
+
+## Verdict (TL-01 / A/B)
+
+- Eps-fix **does** allow classic SoftCold to finish Train on **span25** (Need=0, tipr=canon), but PostTune remains NonSeparable → **gate_fail** (not PASS).
+- On **span50 / span100** SoftCold still hits poll budget (401 × ~30 s ≈ 3.3 h) with Need=1 → harness SIGTERM (−15) → `train_incomplete`, tipr stays cold flat `86e6×4`.
+- Therefore: eps fix is **necessary but not sufficient** for longer-span AsymRm Cold; do **not** claim Cold PASS from Need=0 on span25 alone.
+
+Queue log: `evidence/metrics/phase2_queue.log`.

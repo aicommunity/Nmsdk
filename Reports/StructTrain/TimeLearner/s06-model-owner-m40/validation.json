@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "host_label": "m40",
+  "tested_root": "2694796a522a55d3b0b6c7b57d2c96eaf6ad0613",
+  "source_closure": {
+    "root": {
+      "head": "2694796a522a55d3b0b6c7b57d2c96eaf6ad0613",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "e78596e9639a841cd1989d73df7fe614419770ce",
+      "head": "e78596e9639a841cd1989d73df7fe614419770ce",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "2fc96a00fa3c9eb14317933bd7cafbdf5ebf1211",
+      "head": "2fc96a00fa3c9eb14317933bd7cafbdf5ebf1211",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6",
+      "head": "8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6",
+      "status": ""
+    }
+  },
+  "targeted": {
+    "tests": 19,
+    "passed": 18,
+    "skipped": 1,
+    "xml": {
+      "tests": "19",
+      "failures": "0",
+      "errors": "0",
+      "time": "26.522"
+    }
+  },
+  "fresh_process_parents": {
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "time": "16.088"
+  },
+  "static_source_relocation": {
+    "schema_version": 1,
+    "kind": "static_source_relocation",
+    "normalization": "LF; omit include lines and export annotation RDK_LIB_TYPE only",
+    "claim": "source equality after these mechanical substitutions; no compiled or runtime claim",
+    "files": [
+      {
+        "old_repository": "root",
+        "old_commit": "aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157",
+        "old_path": "App/NeuroModelerConsole/ModelBoundary.h",
+        "old_blob": "1566b13339bfe0b611328d2a6218643b7dbfb566",
+        "new_repository": "PulseLib",
+        "new_path": "Core/TimeLearner/ModelBoundary.h",
+        "normalized_source_sha256": "bed89a8fa87ac0d3cf5154463420dc11121ca49e0be42867bba8f04ff576d4d2"
+      },
+      {
+        "old_repository": "root",
+        "old_commit": "aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157",
+        "old_path": "App/NeuroModelerConsole/ModelInspection.h",
+        "old_blob": "087295e7e02401b29b4c2c5f26836f37e5e70f12",
+        "new_repository": "PulseLib",
+        "new_path": "Core/TimeLearner/ModelInspection.h",
+        "normalized_source_sha256": "da3c5b451edcf804fb08daf46498869173e22c85f9edb9b2342fba2987c6fd62"
+      },
+      {
+        "old_repository": "root",
+        "old_commit": "aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157",
+        "old_path": "App/NeuroModelerConsole/ModelInspection.cpp",
+        "old_blob": "60f37daa4cefb9828d164dc93b4ec79b0b6e0694",
+        "new_repository": "PulseLib",
+        "new_path": "Core/TimeLearner/ModelInspection.cpp",
+        "normalized_source_sha256": "25d388b0010593094a81869d485aa21f430cde92071d6ceedeb8db79fd97e8e7"
+      },
+      {
+        "old_repository": "root",
+        "old_commit": "aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157",
+        "old_path": "App/NeuroModelerConsole/ModelIdentity.h",
+        "old_blob": "e12cb3190f8f6410874bd4eab2380578f18d870c",
+        "new_repository": "PulseLib",
+        "new_path": "Core/TimeLearner/ModelIdentity.h",
+        "normalized_source_sha256": "1406516daa34ce87178e271719e2dbb618913e6f14644496a3795e0d959f4f01"
+      },
+      {
+        "old_repository": "root",
+        "old_commit": "aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157",
+        "old_path": "App/NeuroModelerConsole/ModelIdentity.cpp",
+        "old_blob": "005970755bb888dfaf5e10470b57a08aaac4dfde",
+        "new_repository": "PulseLib",
+        "new_path": "Core/TimeLearner/ModelIdentity.cpp",
+        "normalized_source_sha256": "87fa8408e7e316edff9c7561e6c2b8c45c26a8e2e301c70ee5c0b0f87d236ced"
+      },
+      {
+        "old_repository": "root",
+        "old_commit": "aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157",
+        "old_path": "App/NeuroModelerConsole/ModelArchive.h",
+        "old_blob": "712c608810ad5d99e8c6a77db1cc01dc1e04d8a8",
+        "new_repository": "PulseLib",
+        "new_path": "Core/TimeLearner/ModelArchive.h",
+        "normalized_source_sha256": "a8be91d160df2b9d3d7bb7b7b67861c02bf0065e26c2294c33fff625c49f4126"
+      },
+      {
+        "old_repository": "root",
+        "old_commit": "aee8c2a0b64b2dcec5dbbe1d9f291ef9a8440157",
+        "old_path": "App/NeuroModelerConsole/ModelArchive.cpp",
+        "old_blob": "cb030b1f1a95b68aafeeee327db849af09956753",
+        "new_repository": "PulseLib",
+        "new_path": "Core/TimeLearner/ModelArchive.cpp",
+        "normalized_source_sha256": "cf107978505401cb83d6b08324fe6b0817033be8bde632fbf0e27ba20b37c339"
+      }
+    ]
+  },
+  "linkage_and_native_waveforms": {
+    "schema_version": 1,
+    "archive_file": "/home/user/timelearner-refactor/runtime-s06-model-owner-a1/Lib.CMake/libNmsdk-PulseLib.core.a",
+    "archive_sha256": "1df55ea44f3243c1279c78890120c961e6311e5b1b7f42e9cf47df1348fafde8",
+    "sole_library_definitions": [
+      {
+        "function": "ExportModelArchive",
+        "symbol": "000000000000a530 T NmsdkTools::ExportModelArchive(RDK::UEPtr<RDK::UContainer>, QJsonObject const&, std::map<RDK::UIProperty const*, QString, std::less<RDK::UIProperty const*>, std::allocator<std::pair<RDK::UIProperty const* const, QString> > > const&)"
+      },
+      {
+        "function": "ImportModelArchive",
+        "symbol": "000000000000b1c0 T NmsdkTools::ImportModelArchive(QJsonObject const&, RDK::UEPtr<RDK::UStorage>, RDK::UEPtr<RDK::UEnvironment>, QString const&, std::map<RDK::UIProperty const*, QString, std::less<RDK::UIProperty const*>, std::allocator<std::pair<RDK::UIProperty const* const, QString> > > const&)"
+      },
+      {
+        "function": "IdentifyModel",
+        "symbol": "0000000000005cc0 T NmsdkTools::IdentifyModel(RDK::UEPtr<RDK::UContainer>, std::map<RDK::UIProperty const*, QString, std::less<RDK::UIProperty const*>, std::allocator<std::pair<RDK::UIProperty const* const, QString> > > const&)"
+      },
+      {
+        "function": "VerifyModelIdentity",
+        "symbol": "000000000000ace0 T NmsdkTools::VerifyModelIdentity(QJsonObject const&, RDK::UEPtr<RDK::UContainer>, std::map<RDK::UIProperty const*, QString, std::less<RDK::UIProperty const*>, std::allocator<std::pair<RDK::UIProperty const* const, QString> > > const&)"
+      },
+      {
+        "function": "CanonicalModelDataSha256",
+        "symbol": "0000000000001450 T NmsdkTools::CanonicalModelDataSha256(QJsonValue const&)"
+      },
+      {
+        "function": "InspectModel",
+        "symbol": "00000000000031a0 T NmsdkTools::InspectModel(RDK::UEPtr<RDK::UContainer>, std::map<RDK::UIProperty const*, QString, std::less<RDK::UIProperty const*>, std::allocator<std::pair<RDK::UIProperty const* const, QString> > > const&, NmsdkTools::ModelInspectionDetail)"
+      }
+    ],
+    "native_comparisons": [
+      {
+        "case": "Classic_2000_N2_native_executor",
+        "semantic_model_sha256": "93497a757f06579726c3c92885e5932d2fe18f05e0680c4fa2e2d9eef7b4ce37",
+        "equal_primary_csv_sha256": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221"
+      },
+      {
+        "case": "Branch_2000_N2_native_executor",
+        "semantic_model_sha256": "75c76214235fa4bb3fa42855c8dfd2d095a61383782cd99b77bc5125d8563807",
+        "equal_primary_csv_sha256": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a"
+      }
+    ],
+    "scope": "one Core definition per API; two declared native waveforms/model identities unchanged; not full mode coverage"
+  },
+  "full_ctest_claim": false,
+  "asan_claim": false,
+  "scientific_training_result": false,
+  "raw_payload_sha256": {
+    "s06-model-owner-a1/Branch_2000_N2_native_executor.csv": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a",
+    "s06-model-owner-a1/Branch_2000_N2_native_executor.json": "819c69066ed76e7699a27cafa95b42b60cf303e88064a6ec6cf8be398596daaf",
+    "s06-model-owner-a1/Branch_2000_N2_native_executor_certificate.json": "2c011015c60f9c1ab14f59b6983c6f08224d61bafd3323dd01b824d81fffde23",
+    "s06-model-owner-a1/Branch_2000_N2_native_executor_reference_1.csv": "5505b584e54535732d9be4f1d40a1c4255d9e3cbe2453c3644f70833f6a3a707",
+    "s06-model-owner-a1/Branch_2000_N2_native_executor_verify_0.csv": "c3b0685c303533f08aa0bd94cc2b46f40ed9171f3432b367e65a378f1641bca3",
+    "s06-model-owner-a1/Branch_2000_N2_native_executor_verify_1.csv": "9bfef45f018df63ff6f896960a6680487451f7b6bab4dfef47984b9d65b14c33",
+    "s06-model-owner-a1/Classic_2000_N2_native_executor.csv": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221",
+    "s06-model-owner-a1/Classic_2000_N2_native_executor.json": "125106b09ba54f3b25b6f50529c87e2b412fa3890fa25c83816e2d82d27a6e29",
+    "s06-model-owner-a1/Classic_2000_N2_native_executor_certificate.json": "5389eb6c25a437b6bfaf9a1f7b7df2587afe25d2245995af36c9b1a8f3cd3804",
+    "s06-model-owner-a1/Classic_2000_N2_native_executor_verify_0.csv": "d69b64a5aa0d2c22510779a771e56876aa634fb6c0f417d28bddf8a12d514d2d",
+    "s06-model-owner-a1/Classic_2000_N2_native_executor_verify_1.csv": "082ecf53e27ad22348528594f5fab7cf188c094125ece012a0de6086efc820b2",
+    "s06-model-owner-a1/asymmetric-reordered.json": "6e24b0456a1bd0066ffdaacf9435607defa804cc4d540696f2d5f95aa8341427",
+    "s06-model-owner-a1/asymmetric-restored.json": "448a5ecfe938b8491333e393e61c73ef934d520d07f1a1319aa6930122a7ea12",
+    "s06-model-owner-a1/asymmetric-source.json": "448a5ecfe938b8491333e393e61c73ef934d520d07f1a1319aa6930122a7ea12",
+    "s06-model-owner-a1/canonical-fixture.json": "b8ba9293e3bdf46818e60ba8588da6f899416ff6f0903f103f4e0c3dfbde2dcf",
+    "s06-model-owner-a1-archive/archive-fixture-2000.json": "fbeffe1d9526587cbcaca2647c683aa86a91ab879e679171aa40909486ffca58",
+    "s06-model-owner-a1-archive/archive-fixture-20000.json": "aab25408a4c35febd87d0f2211dbb2775cc5c8cfefea6c08c0f73466868e0cad",
+    "s06-model-owner-a1-archive/archive-import-verification-2000.json": "ba7600aa545c1411506db7ad32ff68b614e535882b8e9c6497d42da57076c8fb",
+    "s06-model-owner-a1-archive/archive-import-verification-20000.json": "f234dd1aa6bdb25f157491d39d47308a091d1cdd94b096ca443923ef093e321f",
+    "s06-model-owner-a1-archive/boundary-fixture-2000.json": "3f2ec5721b99d302deefc9dde8c90297d12023e5232bf4607a6baf7cf1d6bccd",
+    "s06-model-owner-a1-archive/boundary-fixture-20000.json": "615adb9d0e0674812e83db345b549e57acaf99fe18104d030522ffb5577c9723",
+    "s06-model-owner-a1-archive/boundary-import-verification-2000.json": "1c5283832533384cd8748beb5de1c5bc9625ee4c37dff1927828aa3c32baec24",
+    "s06-model-owner-a1-archive/boundary-import-verification-20000.json": "930fa226e8034e89a27e6536e40da33196a4ef03f89f85cf24811678d25160fd",
+    "s06-model-owner-a1-archive.log": "98fbfe3bbc3cfb022008a865cffaab65e997f93cd604d185b93e705ffbe6a29a",
+    "s06-model-owner-a1-archive.xml": "7ee97dae2a0901827af143ad52ed2455c630b4068d05fd91ff019aadc1c08db4",
+    "s06-model-owner-a1-build.log": "9cfdd5a41cccb19ae1910628db38f08bbb3b004cca247cf1df5b21a24bba91a2",
+    "s06-model-owner-a1-clone.log": "2c724474c36dcd79cdd338c00055ad35c71f3ebdf5ae58f0c3d67b5fb70bc947",
+    "s06-model-owner-a1-configure.log": "90d48180171182b80dfed649f456a3cc88cdbf70398d09af51af03888c27312c",
+    "s06-model-owner-a1-linkage-and-waveform.json": "2793d8fb0690bccf804d81a6b84cfcdb8499314654da48e93aff26b7dc7c61cd",
+    "s06-model-owner-a1-runtime.json": "69a0ffe4a92a5112eef29b3fac1795bff142cfd241610ae9329b8fe7cceab24d",
+    "s06-model-owner-a1.log": "c68bdc8d313577caabefdfcad6e3ead6970d249443a33272485b5f304ddebab0",
+    "s06-model-owner-a1.xml": "7d674d2b7872c3c28539055902a11a518c089e48f42caf61a05ecd6dd9cba208"
+  }
+}

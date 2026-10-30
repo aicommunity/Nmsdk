@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "source_closure": {
+    "root": {
+      "head": "ef91f639bc66928ca965afd0d71ae69fa9586fe0",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "7136679740c5aa97def6fd3700b7b781d97af8f2",
+      "head": "7136679740c5aa97def6fd3700b7b781d97af8f2",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "5423fc32076ccba0cbea242708021278d9b7b214",
+      "head": "5423fc32076ccba0cbea242708021278d9b7b214",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "f28843fa66f9bc6fb1667e2b96fcde1651f7e8f9",
+      "head": "f28843fa66f9bc6fb1667e2b96fcde1651f7e8f9",
+      "status": ""
+    }
+  },
+  "executable": {
+    "path": "/home/user/timelearner-refactor/runtime-roundtrip/Test_PulseLib_StorageComponents",
+    "sha256": "7769d5d49a73ab0458eac232c561a84ea964607c5727ab734caff67f0d6875d6",
+    "size": 21802272
+  },
+  "app_ini": {
+    "path": "/home/user/timelearner-refactor/runtime-roundtrip/NeuroModelerConsole.ini",
+    "sha256": "dd9b51d9114beb1df408b0eb2155468e543096437e873358da68833940a89806",
+    "size": 422
+  },
+  "build_flags": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "CMAKE_CXX_COMPILER": "/usr/bin/c++",
+    "CMAKE_CXX_FLAGS": "",
+    "CMAKE_CXX_FLAGS_DEBUG": "-g",
+    "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+    "CMAKE_C_COMPILER": "/usr/bin/cc",
+    "NMSDK_DEPLOY_ROOT": "/home/user/timelearner-refactor/runtime-roundtrip",
+    "NMSDK_RESOURCE_ROOT": "/home/user/timelearner-refactor/source/Bin",
+    "NO_MOTION_CONTROL": "ON",
+    "RDK_LLM_BUILD_EMBEDDED": "OFF"
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2",
+      "sha256": "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390",
+      "size": 5275592
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libQt6SerialPort.so.6.4.2",
+      "sha256": "0cfb17c7e8d458f92cd29bbc7bfcaf51c84536b263dbdffa8507341dedc0c0bc",
+      "size": 117800
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libb2.so.1.0.4",
+      "sha256": "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093",
+      "size": 121128
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.83.0",
+      "sha256": "2c137b29a3740fb6d12a4c18823bc2b15215646c3ba3bb208b89782df28559f0",
+      "size": 137640
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.83.0",
+      "sha256": "15f34bcb75dfb0fa30af13cf2b82fb7a9a8e0fbbadf7cabcd397dd65bde552f3",
+      "size": 264376
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.83.0",
+      "sha256": "dfb8b2e4e5d5d945a9ebdd6645816e2297d535cd6a7e529bd66a2f6332142270",
+      "size": 129352
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "size": 2129424
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libcap.so.2.66",
+      "sha256": "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84",
+      "size": 51536
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libdouble-conversion.so.3.1",
+      "sha256": "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c",
+      "size": 79952
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+      "size": 183024
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgflags.so.2.2.2",
+      "sha256": "288df2caa66a2de606532a8796fe1efc93d07ec0c3ab41bc38743b70ba304a75",
+      "size": 130056
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0",
+      "sha256": "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4",
+      "size": 1343056
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libglog.so.0.6.0",
+      "sha256": "cc080fc134a77c4a2e415e2143566aa925d01a858592a9e660eb5430c56bddf1",
+      "size": 155096
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "sha256": "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1",
+      "size": 352304
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2",
+      "sha256": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+      "size": 30795392
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicui18n.so.74.2",
+      "sha256": "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b",
+      "size": 3455304
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2",
+      "sha256": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+      "size": 2140336
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5",
+      "sha256": "26b37d25f7ca2a2d348de8ecabacda12e921cd933b21fa069a179760db77219d",
+      "size": 202904
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+      "size": 952616
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpcre2-16.so.0.11.2",
+      "sha256": "4dfa8a4023270763b8ca1654dc4f59f835393b1ae78085a19369228f8109a671",
+      "size": 572064
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2",
+      "sha256": "e00576d71d81d3ba0cfa4903c835a44a8723aac96f72f79ff75200b4cff9071b",
+      "size": 625344
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33",
+      "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+      "size": 2592224
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libudev.so.1.7.8",
+      "sha256": "0d6934adafb2ef3c640382440c14d6bd60f391e688c000796ffcea0c72849269",
+      "size": 207288
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1",
+      "sha256": "28e77a498f2f17f8cb883c91303f9901343ea0d8e34959d138dd462fcc9b201f",
+      "size": 63776
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.3",
+      "sha256": "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242",
+      "size": 113000
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5",
+      "sha256": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+      "size": 755864
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+      "size": 236616
+    }
+  ],
+  "loader_environment": {},
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+    "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "size": 1027128,
+    "version": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  },
+  "loaded_process_files": null,
+  "runtime_fingerprint": "96b7853acbfcf436f0a04114300f75aa530f681bcebebedfe826b406c60b225b"
+}

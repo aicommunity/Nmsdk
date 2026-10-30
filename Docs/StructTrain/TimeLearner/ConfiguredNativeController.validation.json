@@ -1,0 +1,186 @@
+{
+  "evaluation_verdict": null,
+  "packages": {
+    "elder1": {
+      "analysis_tests": {
+        "analysis_source": "cb9e035b390390746ada5caa2c500917b8884612",
+        "module_sha256": "c130c95cddc4b9d78c6b58a4b342c603462be2434b6bca4cdcf2164257d1ecad",
+        "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+        "python_executable": "/usr/bin/python3.10",
+        "sets": {
+          "configured_assigned": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "tests": 18
+          },
+          "legacy_isolated": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "tests": 18
+          }
+        },
+        "test_module_sha256": "986999d295e263ce375a6787dcf647e1d373727529d7b516c7576c77ee9b8c53"
+      },
+      "attempts": {
+        "s06-configured-a1": {
+          "asan_detect_leaks": null,
+          "results": {
+            "regression.xml": {
+              "failures": 0,
+              "tests": 97
+            },
+            "results.xml": {
+              "failures": 0,
+              "tests": 6
+            }
+          },
+          "source": "17eff7e4d01dd7b542342302524c23637f1f8f6d"
+        },
+        "s06-configured-a2": {
+          "asan_detect_leaks": null,
+          "results": {
+            "regression.xml": {
+              "failures": 0,
+              "tests": 97
+            },
+            "results.xml": {
+              "failures": 0,
+              "tests": 12
+            }
+          },
+          "source": "e6b576d2a36a309a84f49e33ef359b216f8154bf"
+        },
+        "s06-configured-a3": {
+          "asan_detect_leaks": null,
+          "results": {
+            "regression.xml": {
+              "failures": 0,
+              "tests": 21
+            },
+            "results.xml": {
+              "failures": 0,
+              "tests": 14
+            }
+          },
+          "source": "cb9e035b390390746ada5caa2c500917b8884612"
+        }
+      },
+      "errors": 0,
+      "raw_checked": 2210,
+      "stored_checked": 2212
+    },
+    "m40": {
+      "analysis_tests": {
+        "analysis_source": "cb9e035b390390746ada5caa2c500917b8884612",
+        "module_sha256": "c130c95cddc4b9d78c6b58a4b342c603462be2434b6bca4cdcf2164257d1ecad",
+        "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+        "python_executable": "/usr/bin/python3.12",
+        "sets": {
+          "configured_assigned": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "tests": 18
+          },
+          "legacy_isolated": {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "tests": 18
+          }
+        },
+        "test_module_sha256": "986999d295e263ce375a6787dcf647e1d373727529d7b516c7576c77ee9b8c53"
+      },
+      "attempts": {
+        "s06-configured-a1": {
+          "asan_detect_leaks": null,
+          "results": {
+            "regression.xml": {
+              "failures": 0,
+              "tests": 97
+            },
+            "results.xml": {
+              "failures": 0,
+              "tests": 6
+            }
+          },
+          "source": "17eff7e4d01dd7b542342302524c23637f1f8f6d"
+        },
+        "s06-configured-a2": {
+          "asan_detect_leaks": null,
+          "results": {
+            "regression.xml": {
+              "failures": 0,
+              "tests": 97
+            },
+            "results.xml": {
+              "failures": 0,
+              "tests": 12
+            }
+          },
+          "source": "e6b576d2a36a309a84f49e33ef359b216f8154bf"
+        },
+        "s06-configured-a3": {
+          "asan_detect_leaks": null,
+          "results": {
+            "regression.xml": {
+              "failures": 0,
+              "tests": 21
+            },
+            "results.xml": {
+              "failures": 0,
+              "tests": 14
+            }
+          },
+          "source": "cb9e035b390390746ada5caa2c500917b8884612"
+        },
+        "s06-configured-asan-a2": {
+          "asan_detect_leaks": false,
+          "results": {
+            "results.xml": {
+              "failures": 0,
+              "tests": 12
+            }
+          },
+          "source": "e6b576d2a36a309a84f49e33ef359b216f8154bf"
+        },
+        "s06-configured-asan-a3": {
+          "asan_detect_leaks": false,
+          "results": {
+            "results.xml": {
+              "failures": 0,
+              "tests": 9
+            }
+          },
+          "source": "cb9e035b390390746ada5caa2c500917b8884612"
+        }
+      },
+      "errors": 0,
+      "raw_checked": 2468,
+      "stored_checked": 2470
+    }
+  },
+  "published_closure": {
+    "Bin": "f5e1d0200127223981daa71da22cf5ee02fdbc60",
+    "PulseLib": "c1d5b177278f1eb347c1ebc725555837c36642bb",
+    "Rdk": "8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6",
+    "remote_recursive_checkouts": {
+      "10.245.1.11": {
+        "clean_root_and_submodules": true,
+        "exact_gitlinks": true,
+        "exit_code": 0
+      },
+      "10.245.1.17": {
+        "clean_root_and_submodules": true,
+        "exact_gitlinks": true,
+        "exit_code": 0
+      }
+    },
+    "root": "a69e5aa24a868088243d13b8a184a33767e2d432"
+  },
+  "root_test_source": "cb9e035b390390746ada5caa2c500917b8884612",
+  "schema_version": 1,
+  "scope": "Local stored/raw Git artifact integrity; scoped configured cold V2, not complete plan acceptance"
+}

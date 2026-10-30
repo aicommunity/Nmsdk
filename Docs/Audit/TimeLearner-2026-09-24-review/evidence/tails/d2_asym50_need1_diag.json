@@ -1,0 +1,17 @@
+{
+  "case": "asym50",
+  "workdir": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym50_20260924T171141Z_work",
+  "learner": "NNeuronTimeLearner",
+  "NeuronClassName": "NSPNeuronGenAsymRmD001C1e9",
+  "Model_component": "NeuronTimeLearner Class=NNeuronTimeLearner",
+  "Train_IsNeedToTrain": "1",
+  "Train_FixedLTZThreshold": "1",
+  "Train_TipR": "20000000 20000000 20000000 86000000",
+  "train_flag_exists": false,
+  "flush_current_train_flag_applicable": false,
+  "reason": "PostTune Finalize not reached within train_t=320: no Train posttune_complete.flag; Need stayed 1; FixedLTZ still 1 (untuned). TipR already canon from soft_cold.",
+  "prior_train_status": "exited",
+  "prior_params_source": "nm_save",
+  "remediation": "CASES[asym50].train_t bumped 320\u2192640 with RESULT/provenance note; accept_run unchanged (Need\u22600 still fails).",
+  "new_train_t": 640.0
+}

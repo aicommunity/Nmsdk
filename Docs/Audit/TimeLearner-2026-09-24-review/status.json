@@ -1,0 +1,170 @@
+{
+  "review_date": "2026-09-24",
+  "scope": {
+    "root_baseline": "23e4e8231e2bd1c7201f724fd5510f824c229dad",
+    "root_reviewed": "14286c9ebf80193a3436790850ba39e3844fbe44",
+    "pulselib_reviewed": "d4149190aa30a99366eb453bd69306a0278c34f9",
+    "bin_reviewed": "9733281ccaf660785d4a77f95fcfd7cc82f392ca",
+    "rdk_reviewed": "c503a04090ea7aa8c4cd09f4abe8d86d68cd66d3"
+  },
+  "historical_audit": "main_findings_supported_with_documented_scope_limits",
+  "original_ids": {
+    "A01": "partial_boundary_contract_R01",
+    "A02": "partial_observation_window_R02",
+    "A03": "immutable_label_fixed_boundary_R01_separate",
+    "A04": "injective_matching_fixed_N1_limit_R07",
+    "A05": "original_foil_FP_fixed_schema_and_legacy_limits_R07",
+    "A06": "original_sum_ISI_fixed_schema_N_limits_R07",
+    "A07": "accepted_current_algorithm",
+    "A08": "partial_live_validity_timeout_R03_result_R04",
+    "A09": "reported_best_reprobe_setup_fallback_paths_fixed_end_to_end_R03_R05",
+    "A10": "partial_metric_collector_R05",
+    "A11": "reported_axon_off_by_one_fixed",
+    "A12": "deferred_small_step_assumption",
+    "A13": "registration_fixed_static_not_full_storage_runtime",
+    "A14": "segment_intersection_fixed_tested",
+    "A15": "reported_single_CLI_run_fixed_static_not_GUI_proof",
+    "A16": "partial_run_acceptance_and_stale_artifacts_R06"
+  },
+  "findings": {
+    "R01": {
+      "priority": 2,
+      "evidence": "isolated_coincident_boundary_transition",
+      "scheduler_reachability": "not_observed",
+      "scheduler_evidence": "evidence/tails/d1_r01_scheduler.json",
+      "remediation": "close_first_independent_of_stim_edge"
+    },
+    "R02": {
+      "priority": 1,
+      "evidence": "extracted_analyzer_methods",
+      "remediation": "EffectiveDatasetDelaySec_ge_1.55_plus_censored"
+    },
+    "R03": {
+      "priority": 1,
+      "evidence": "posttune_probes timeout=4 nan=5 stale\u2192NonSeparable mid=1",
+      "remediation": "SampleMetricState_and_no_mid_on_timeout"
+    },
+    "R04": {
+      "priority": 2,
+      "evidence": "posttune_probes double_train_result_reset Success\u2192NonSeparable",
+      "two_full_training_cycles_run": "probe_only",
+      "evidence_path": "evidence/tails/d1_r04_double_attempt.txt",
+      "remediation": "ClearPostTuneResult_on_attempt"
+    },
+    "R05": {
+      "priority": 2,
+      "evidence": "branch_ltz_mode live_max=0.2 sidechannel_absent=1",
+      "remediation": "removed_Branch_soma_sidechannel"
+    },
+    "R06": {
+      "priority": 1,
+      "evidence": "prepare_clean+crash e2e; phase9 removes stale Test flag; verifier fixtures reject empty fires",
+      "remediation": "prepare_clean_case_accept_run"
+    },
+    "R07": {
+      "priority": 2,
+      "evidence": "actual_python_metrics_invalid_input_and_N1_fixtures",
+      "remediation": "schema_csv_v3_ok_audit_strict_shape"
+    }
+  },
+  "verification": {
+    "gui": {
+      "pass": 13,
+      "fail": 0,
+      "evidence": "evidence/tails/gui.txt"
+    },
+    "original_counterexamples_excluding_A12": {
+      "pass": 9,
+      "fail": 0,
+      "evidence": "evidence/tails/ce_no_a12.txt"
+    },
+    "branch_probes": {
+      "pass": 8,
+      "fail": 0,
+      "evidence": "evidence/tails/branch.txt"
+    },
+    "verifier_unit": {
+      "pass": 24,
+      "fail": 0,
+      "evidence": "evidence/tails/verifier_unit.txt"
+    },
+    "additional_probes": "review-20260924 posttune/analyzer/verifier re-run after R01-R07; timeout/NaN/stale no longer Success mid; branch_ltz sidechannel_absent",
+    "full_console_or_cold_run_performed": true,
+    "production_source_sha_unchanged": false,
+    "documentation": {
+      "files": 22,
+      "local_links": 149,
+      "missing_destinations": 0
+    },
+    "console_sha256": "5e7829bf9beb1901336ed15b7595786d5708c40d0dd9c9f2f1329bff3c3a1b63",
+    "tails_floor_utc": "2026-09-24T17:00:19Z",
+    "claim_policy": "verified only with probe/bundle paths in evidence/tails"
+  },
+  "cold_follow_up": {
+    "status": "d4_matrix_completed_0_of_6_2026_09_25",
+    "console_sha256": "5e7829bf9beb1901336ed15b7595786d5708c40d0dd9c9f2f1329bff3c3a1b63",
+    "bin_gitlink": "0600e38a118f4b5b578187d0c4b1e0339537474f",
+    "pulselib_gitlink": "8d429e7463850b06163f177b42b17977baa38e45",
+    "fresh_run_bundles_available": true,
+    "declared_linux_console_available": true,
+    "results": {
+      "br25_gold_skip_train": "PASS",
+      "br25_soft_cold": "FAIL_NonSeparable_after_H2_flush",
+      "asym50_cold": "FAIL_Need1_no_train_flag_train_t_bumped_640"
+    },
+    "morphogenesis": {
+      "H1": "done",
+      "H2": "done",
+      "H3": "done_no_material_diff",
+      "H4": "done_no_differs",
+      "overlay": "skipped"
+    },
+    "debts": {
+      "D1": "done",
+      "D2": "done",
+      "D3": "done",
+      "D4": "done_0_of_6_pass",
+      "D5": "done",
+      "D6": "done"
+    },
+    "d4_matrix": {
+      "utc": "20260924T204259Z",
+      "pass_count": 0,
+      "n": 6,
+      "seven_pass_claim": false,
+      "evidence": "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/D4_matrix_summary.json"
+    },
+    "stale_flag_isolation_asym50": true,
+    "bundles": [
+      "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T165949Z_work",
+      "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T170503Z_work",
+      "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym50_20260924T171141Z_work"
+    ],
+    "evidence": [
+      "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/T2_summary.json",
+      "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/d1_n1_to_n8.json",
+      "Docs/Audit/TimeLearner-2026-09-24-review/evidence/tails/d2_asym50_need1_diag.json"
+    ]
+  },
+  "production_algorithms_modified_in_review": false,
+  "plan": "PLAN.ru.md",
+  "documentation_commits": {
+    "PulseLib": "8d429e7463850b06163f177b42b17977baa38e45",
+    "Bin": "452141572de27f8688a7ec06b6e8a9d5c693af10",
+    "root": "101553a3d24bd9347186383f56fbdfe1e1249a03"
+  },
+  "remediation_2026_09_24": {
+    "code_changes": "landed PulseLib 8d429e7 Bin 4521415; probes stubs updated for SampleState",
+    "R01": "code_fixed; analyzer boundaries probe re-run",
+    "R02": "code_fixed delay>=1.55; advance_window probe",
+    "R03": "code_fixed; posttune probes no Success mid on timeout/NaN",
+    "R04": "code_fixed; stale Success overwritten to NonSeparable",
+    "R05": "code_fixed; sidechannel absent confirmed",
+    "R06": "code_fixed_clean_workdir+flag_flush_Save_race; unit_tests_22",
+    "R07": "code_fixed; metrics_probes schema_ok",
+    "control_runs_P15": "completed; gold PASS soft_cold FAIL asym50 FAIL(Need1)",
+    "morphogenesis_P2": "H1 Canon\u2260sole; H2 flag_flush fixes TipR lag; NonSeparable remains; H3 soft-vs-strip queued",
+    "tails_plan": "TAILS_PLAN.ru.md",
+    "claim_policy": "verified only with probe/bundle paths; no cold PASS without fresh run-bundles"
+  }
+}

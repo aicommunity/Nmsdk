@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "scope": "terminal evidence verified on both workers; no active job claimed",
+  "workers": {
+    "10.245.1.11": {
+      "full_attempt": "s07-clock-full-normal-a3",
+      "process_exit_status": 0,
+      "ctest_groups_passed": 4,
+      "native_parent_cases": 442,
+      "native_helper_skips": 10,
+      "independent_audit": "s07-clock-full-data-a4",
+      "python_tests_passed": 58
+    },
+    "10.245.1.17": {
+      "full_attempt": "s07-clock-full-normal-a3",
+      "process_exit_status": 0,
+      "ctest_groups_passed": 4,
+      "native_parent_cases": 442,
+      "native_helper_skips": 10,
+      "independent_audit": "s07-clock-full-data-a4",
+      "python_tests_passed": 58
+    }
+  },
+  "native_root": "aeff4a9d73c02b7672352ecb1b7a4b1cd8de9224",
+  "python_root": "75e020f60781b36992174c16dfaf7265b75a1bf1",
+  "pulselib_develop_merge": "32cb44bba481ca5ddb7d54e0288d5fa04695a9bb",
+  "do_not_restart_on_observation_timeout": true,
+  "entire_plan_complete": false,
+  "evaluation_verdict": null,
+  "accepted_root_develop_merge": "b62127538694a3442771598420fd78fa7e405c8b",
+  "recognition": {
+    "native_root": "a7a4ced69f939424d7e2e592eeda0fc39d7c4e7a",
+    "replay_root": "ca2f095b2a0d16b826c6ad0dd66e8e7afb9935f0",
+    "workers_terminal": true,
+    "conversion_cpp_cases_per_worker": 11,
+    "conversion_python_tests_per_worker": 23,
+    "fresh_processes_per_worker": 8,
+    "replay_python_tests_per_worker": 29,
+    "byte_exact_samples_per_worker": 3528,
+    "merged_to_develop": false,
+    "whole_stage8_complete": false
+  },
+  "posttune_reconstruction": {
+    "native_root": "e7ee0104f5677e812ffd3b91c45074667ba1ffca",
+    "pulselib": "d862127d849953b2c7928e87c803a016a0da06d9",
+    "python_audit_root": "1afdb2669363755e9ffd109b86d118598d00b8b1",
+    "workers_terminal": true,
+    "cpp_cases_per_worker": 10,
+    "python_tests_per_worker": 7,
+    "paired_samples_per_worker": 10090,
+    "baseline_root": "8d23ed533b23f0bf25082545a174b5621292c794",
+    "baseline_expected_failures_per_worker": 8,
+    "whole_candidate_transaction_complete": false,
+    "merged_to_develop": false
+  }
+}

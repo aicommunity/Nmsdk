@@ -1,0 +1,15 @@
+---
+description: >-
+  Постановки и выводы TimeLearner/StructTrain экспериментов — развернутыми
+  предложениями; детали workflow в скилле structtrain-experiments.
+alwaysApply: true
+---
+
+# TimeLearner / StructTrain: стиль постановки
+
+При планировании, запуске и разборе экспериментов TimeLearner/StructTrain (матрица, dualtrack, PostTune, Docs/Audit/TimeLearner-*):
+
+1. **Всегда писать постановку и выводы развернутыми предложениями.**
+2. Следовать скиллу `.cursor/skills/structtrain-experiments/SKILL.md` (реестр, запреты, Branch vs Classic, cold vs docs-ready, PASS×3 arm).
+3. Группировать результаты по иерархии **Trainer×Mode → Span → NeuronModel → Mod** (колонки PostTune ON/OFF); канон — `Docs/Audit/TimeLearner-2026-09-26-review/evidence/RESULT_GROUPING_HIERARCHY.ru.md`. Не называть AsymRm/FastSpan «семьёй паттерна».
+4. В сводных таблицах результатов указывать ссылки на конфиги **Train** и **Test** для каждой строки (детали — скилл `structtrain-experiments`).

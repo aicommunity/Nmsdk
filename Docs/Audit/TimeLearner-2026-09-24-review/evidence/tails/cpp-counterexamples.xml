@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="9" failures="0" disabled="0" errors="0" time="0" timestamp="2026-09-24T19:56:52.437" name="AllTests">
+  <testsuite name="PostTuneAudit" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T19:56:52.437">
+    <testcase name="GapMustIncludeEveryFoil" file="/home/user/Nmsdk/Scripts/audit-probes/counterexamples.cpp" line="7" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="PostTuneAudit" />
+    <testcase name="NonFiniteMetricsMustNotBeAccepted" file="/home/user/Nmsdk/Scripts/audit-probes/counterexamples.cpp" line="16" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="PostTuneAudit" />
+  </testsuite>
+  <testsuite name="RouterAudit" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T19:56:52.437">
+    <testcase name="ThinObstacleMustBeDetectedBetweenSamples" file="/home/user/Nmsdk/Scripts/audit-probes/counterexamples.cpp" line="22" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="RouterAudit" />
+  </testsuite>
+  <testsuite name="AnalyzerAudit" tests="5" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T19:56:52.437">
+    <testcase name="FirstPulseResponseMustNotCountAsCompletePattern" file="/home/user/Nmsdk/build/audit-timelearner-make/extracted_probes.cpp" line="344" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="AnalyzerAudit" />
+    <testcase name="ThreePulseTargetMustBeSupported" file="/home/user/Nmsdk/build/audit-timelearner-make/extracted_probes.cpp" line="351" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="AnalyzerAudit" />
+    <testcase name="LateSpikeAfterTimelySpikeMustRemainCounted" file="/home/user/Nmsdk/build/audit-timelearner-make/extracted_probes.cpp" line="357" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="AnalyzerAudit" />
+    <testcase name="OneSpikeIsNotAResponseToEveryStimulus" file="/home/user/Nmsdk/build/audit-timelearner-make/extracted_probes.cpp" line="363" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="AnalyzerAudit" />
+    <testcase name="NextClassMustNotRelabelPreviousTrial" file="/home/user/Nmsdk/build/audit-timelearner-make/extracted_probes.cpp" line="366" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="AnalyzerAudit" />
+  </testsuite>
+  <testsuite name="AxonAudit" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T19:56:52.437">
+    <testcase name="IntegerDelayMustNotAddAnExtraStep" file="/home/user/Nmsdk/build/audit-timelearner-make/extracted_probes.cpp" line="372" status="run" result="completed" time="0" timestamp="2026-09-24T19:56:52.437" classname="AxonAudit" />
+  </testsuite>
+</testsuites>
