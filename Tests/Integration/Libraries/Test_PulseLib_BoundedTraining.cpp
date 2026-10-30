@@ -131,7 +131,8 @@ TEST(BoundedTrainingN0Repeats, BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepe
     BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
     DriveTraining(session,p);
     EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
-    EXPECT_TRUE(session.CandidateRepeats().empty());EXPECT_EQ(session.Evidence().size(),1u);
+    ASSERT_EQ(session.CandidateRepeats().size(),1u);EXPECT_FALSE(session.CandidateRepeats()[0].complete);
+    EXPECT_EQ(session.CandidateRepeats()[0].trialIds.size(),1u);EXPECT_EQ(session.Evidence().size(),1u);
     EXPECT_FALSE(session.Certificate());
 }
 

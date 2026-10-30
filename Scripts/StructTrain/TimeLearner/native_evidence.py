@@ -293,8 +293,12 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
     target/anchor label. ``packets`` contains unique trial IDs from this attempt.
     This checks a training certificate, never recognition/selectivity success.
     """
-    require(summary.get("kind") == "native_training_state_summary" and summary.get("schema_version") == 1,
+    schema = summary.get("schema_version")
+    require(summary.get("kind") == "native_training_state_summary" and type(schema) is int and schema in (1, 2),
             "unknown_training_summary_schema")
+    if schema == 1:
+        require("candidate_repeat_groups" not in summary and "n0_candidate_repeats" not in summary["configuration"],
+                "repeat_policy_requires_summary_schema_2")
     require(summary["contains_evaluation_verdict"] is False and summary["model_state_kind"] == "learned_solo",
             "unsupported_summary_state_kind")
     refs = summary["references"]
@@ -406,7 +410,57 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
                 packet["prepared"]["model_epoch"] == candidate["model_epoch"], "candidate_context_mismatch")
         check_residual(candidate, indices[index], candidate["trial_id"], candidate["anchor_trial_id"])
         require(number(candidate["parameter_change_cost"]) >= 0, "invalid_candidate_change_cost")
-    return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True, "exact": exact,
+    if schema == 2:
+        repeats = count(configuration["n0_candidate_repeats"])
+        require(configuration["normalization"] == "synapse_count" and 2 <= repeats <= 128,
+                "invalid_n0_repeat_policy")
+        candidates = {c["trial_id"]: c for c in summary["candidates"]}
+        require(len(candidates) == len(summary["candidates"]), "duplicate_candidate_trial")
+        covered, anchors_used = set(), set()
+        require(type(summary["candidate_repeat_groups"]) is list, "invalid_candidate_repeat_groups")
+        for group in summary["candidate_repeat_groups"]:
+            require(type(group) is dict and set(group) == {"input_index", "model_epoch", "model_revision", "full_parameters",
+                    "trial_ids", "anchor_trial_ids", "minimum_raw_potential", "maximum_raw_potential", "within_timing",
+                    "within_amplitude", "raw_potentials", "valid", "complete", "reason"}, "unknown_candidate_repeat_fields")
+            require(group["valid"] is True and type(group["complete"]) is bool and type(group["reason"]) is str
+                    and bool(group["reason"]), "invalid_candidate_repeat_status")
+            trials, anchors, values = group["trial_ids"], group["anchor_trial_ids"], group["raw_potentials"]
+            require(type(trials) is type(anchors) is type(values) is list and
+                    len(trials) == len(anchors) == len(values) and 0 < len(trials) <= repeats,
+                    "invalid_candidate_repeat_dimensions")
+            require(len(trials) == repeats if group["complete"] else len(trials) < repeats,
+                    "candidate_repeat_completeness_mismatch")
+            require(not group["complete"] or group["reason"] == "required_measurements_collected",
+                    "invalid_complete_repeat_reason")
+            require(len(set(trials)) == len(trials) and len(set(anchors)) == len(anchors)
+                    and not covered.intersection(trials) and not anchors_used.intersection(anchors), "reused_candidate_repeat_trial")
+            index = count(group["input_index"])
+            count(group["model_epoch"])
+            require(all(type(t) is str and t for t in trials+anchors), "invalid_candidate_repeat_trial_id")
+            require(index in indices and index + 1 < len(refs) and len(group["full_parameters"]) == len(refs),
+                    "invalid_candidate_repeat_input")
+            for i, parameters in enumerate(group["full_parameters"]):
+                parameters_legal(parameters, i)
+            expected_raw, timing_flags, amplitude_flags = [], [], []
+            for trial, anchor_trial, value in zip(trials, anchors, values):
+                require(trial in candidates, "repeat_trial_not_in_candidates")
+                candidate = candidates[trial]
+                require(candidate["input_index"] == index and candidate["model_epoch"] == group["model_epoch"]
+                        and candidate["model_revision"] == group["model_revision"]
+                        and candidate["full_parameters"] == group["full_parameters"]
+                        and candidate["anchor_trial_id"] == anchor_trial, "candidate_repeat_context_mismatch")
+                _, raw, _, _ = measured(trial, indices[index])
+                require(equal(value, raw), "candidate_repeat_raw_not_measured")
+                expected_raw.append(raw);timing_flags.append(candidate["within_timing"]);amplitude_flags.append(candidate["within_amplitude"])
+            require(equal(group["minimum_raw_potential"], min(expected_raw)) and
+                    equal(group["maximum_raw_potential"], max(expected_raw)), "candidate_repeat_range_mismatch")
+            require(group["within_timing"] is all(timing_flags) and group["within_amplitude"] is all(amplitude_flags),
+                    "candidate_repeat_residual_flags_mismatch")
+            covered.update(trials);anchors_used.update(anchors)
+        require(covered == set(candidates), "candidate_repeat_coverage_incomplete")
+    repeat_validation = ({"training_summary_schema": 2, "candidate_repeat_groups_checked": len(summary["candidate_repeat_groups"])}
+                         if schema == 2 else {})
+    return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True, "exact": exact, **repeat_validation,
             "model_revision": certificate["model_revision"], "reference_count": len(refs),
             "candidate_count": len(summary["candidates"]), "evaluation_verdict": None}
 
