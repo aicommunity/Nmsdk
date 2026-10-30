@@ -74,7 +74,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "probe", "probe-diagnostic", "probe-set", "native-test-run"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "probe-set", "native-test-run"), default="recognition-evaluation")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
@@ -171,7 +171,8 @@ def main(argv: list[str] | None = None) -> int:
                                       allow_incomplete=args.format=="probe-diagnostic")
             else:
                 require(args.model is not None and args.trace is None, "recognition_report_requires_model_not_trace")
-                result = render_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True), args.output.resolve())
+                result = render_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True), args.output.resolve(),
+                                           calibration_probe=args.format == "threshold-candidate-evaluation")
             print(json.dumps(result, ensure_ascii=False))
         except (EvidenceError, OSError, ValueError, ImportError) as error:
             print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",

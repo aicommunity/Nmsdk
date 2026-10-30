@@ -195,3 +195,12 @@ PulseLib `7f177359e7664da3243ece9404e07508cb2dfdc2`:
 Design schema 2 заранее сохраняет все requests, criterion и bounds.
 Для уже полученных design schema 1 необходим явно ограниченный fixture adapter;
 недостающие поля нельзя выдавать за сохранённые до запуска.
+
+Для визуального анализа candidate-проб добавлен отдельный формат
+`report evaluation.json --format threshold-candidate-evaluation --model candidate.json --output NEW_DIR`.
+Он использует общий scorer калибровочных проб и штатные soma/input графики:
+полные отсчёты, общий масштаб амплитуды, обзор и временные окна с разрешением
+не менее восьми пикселей на native timestep. Первичные наблюдения сжимаются
+без потерь. В manifest явно указано отсутствие утверждения о калибровке;
+обычный recognition-evaluation по-прежнему не принимает candidate package.
+Полные рисунки хранятся как worker cache, а не публикуются массово в Git.
