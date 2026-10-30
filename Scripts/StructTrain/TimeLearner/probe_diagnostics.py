@@ -33,9 +33,9 @@ def _read_partial_probe(packet, trace):
     spec = observation["specification"] if observation is not None else requested
     with trace.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.reader(stream))
-    require(rows and len(rows[0]) >= 2 and rows[0] == ["time", "stimulus"]+
-            [f"soma{i}" for i in range(len(rows[0])-2)], "unknown_partial_trace_schema")
-    require(all(len(row) == len(rows[0]) for row in rows[1:]), "ragged_partial_trace")
+    require(not rows or (len(rows[0]) >= 2 and rows[0] == ["time", "stimulus"]+
+            [f"soma{i}" for i in range(len(rows[0])-2)]), "unknown_partial_trace_schema")
+    require(not rows or all(len(row) == len(rows[0]) for row in rows[1:]), "ragged_partial_trace")
     try:
         values = [[float(token) for token in row] for row in rows[1:]]
     except ValueError as error:
@@ -46,7 +46,8 @@ def _read_partial_probe(packet, trace):
         require(not values, "samples_without_observed_probe_context")
         return observation, spec, None, [], 0, {
             "context_observed": False, "raw_trace_checked": True, "sample_count": 0,
-            "recorded_header_channels": len(rows[0])-2, "recorded_window_complete": False,
+            "trace_header_present": bool(rows), "recorded_header_channels": len(rows[0])-2 if rows else None,
+            "recorded_window_complete": False,
             "first_sample_time": None, "last_sample_time": None,
             "unobserved_intervals": [], "nonfinite_cells": [], "reason": "no_observed_context"}
     require(type(observation["schema_version"]) is int and observation["schema_version"] == 3 and
@@ -76,7 +77,7 @@ def _read_partial_probe(packet, trace):
             "partial_stimulus_profile_mismatch")
     require(type(spec["baseline"]) is list, "invalid_partial_baseline_dimensions")
     channels = len(spec["baseline"])
-    require(channels > 0 and len(rows[0])-2 == channels, "partial_trace_channel_dimension_mismatch")
+    require(channels > 0 and (not rows or len(rows[0])-2 == channels), "partial_trace_channel_dimension_mismatch")
     require(len(values) == count(observation["sample_count"]), "partial_sample_count_mismatch")
     times = [row[0] for row in values]
     require(all(math.isfinite(t) for t in times) and all(b > a for a, b in zip(times, times[1:])) and
@@ -97,7 +98,8 @@ def _read_partial_probe(packet, trace):
         not after(end, times[-1]+1.5/frequency) and not any(
             after(b, a+1.5/frequency) for a, b in zip(times, times[1:])))
     quality = {"context_observed": True, "raw_trace_checked": True, "sample_count": len(samples),
-               "recorded_header_channels": channels, "first_sample_time": times[0] if times else None,
+               "trace_header_present": bool(rows), "recorded_header_channels": channels if rows else None,
+               "first_sample_time": times[0] if times else None,
                "last_sample_time": times[-1] if times else None, "unobserved_intervals": missing,
                "nonfinite_cells": nonfinite,
                "current_base_revision": packet.get("current_base_revision"),

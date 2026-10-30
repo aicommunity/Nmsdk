@@ -33,12 +33,18 @@ class ProbeDiagnosticsTest(unittest.TestCase):
     def copy_case(self, topology="Branch", kind="partial", name="probe"):
         if kind=="partial":
             source=next(iter(sorted(self.partial.glob(topology+"_*stopped_N0RepeatedEarly_stopped_trial_*.json"))))
-        elif kind=="unprepared":
+        elif kind in ("empty", "no_context"):
             source=next(iter(sorted(self.stopped.glob(topology+"_*stopped_InvalidProbe_stopped_trial_*.json"))))
         else:
             source=next(iter(sorted(self.complete.glob(topology+"_*configured_repeats_service_*.json"))))
         packet=self.root/(name+".json");trace=self.root/(name+".csv")
         shutil.copyfile(source,packet);shutil.copyfile(source.with_suffix('.csv'),trace)
+        if kind=="no_context":
+            # Declared wire mutation of a real zero-sample record, not a new
+            # native observation or a scientific no-response result.
+            value=load(packet);value.update(observation=None,prepared=None,native_status="rejected",
+                                            reasons=["synthetic_no_context_wire_control"])
+            packet.write_text(json.dumps(value))
         return packet,trace
 
     def test_actual_censored_trace_cli_retains_samples_and_unknown_tail(self):
@@ -66,8 +72,8 @@ class ProbeDiagnosticsTest(unittest.TestCase):
             svg=(output/overview["files"][1]).read_text()
             self.assertIn("Unobserved / censored",svg)
 
-    def test_actual_missing_observation_has_no_invented_soma_or_clock(self):
-        packet,trace=self.copy_case(kind="unprepared")
+    def test_no_context_wire_record_has_no_invented_soma_or_clock(self):
+        packet,trace=self.copy_case(kind="no_context")
         source=load(packet);self.assertIsNone(source["observation"])
         output=self.root/"report";result=render_probe(packet,trace,output,allow_incomplete=True)
         manifest=load(output/"manifest.json")
@@ -75,6 +81,26 @@ class ProbeDiagnosticsTest(unittest.TestCase):
         self.assertIsNone(manifest["observed_soma_count"]);self.assertIsNone(manifest["frequency_hz"])
         self.assertEqual(manifest["figures"],[]);self.assertFalse(manifest["trace_quality"]["context_observed"])
         self.assertEqual((output/"primary/trace.csv").read_bytes(),trace.read_bytes())
+
+    def test_actual_zero_sample_rejection_keeps_known_channels_without_curves(self):
+        packet,trace=self.copy_case(kind="empty")
+        source=load(packet);self.assertEqual(source["observation"]["sample_count"],0)
+        output=self.root/"report";result=render_probe(packet,trace,output,allow_incomplete=True)
+        manifest=load(output/"manifest.json")
+        self.assertEqual(result["plotted_soma_count"],0)
+        self.assertEqual(manifest["observed_soma_count"],1)
+        self.assertTrue(manifest["trace_quality"]["context_observed"])
+        self.assertFalse(manifest["trace_quality"]["recorded_window_complete"])
+        self.assertTrue(all(not f["views"] for f in manifest["figures"]))
+
+    def test_empty_trace_wire_record_remains_explicitly_unobserved(self):
+        packet,trace=self.copy_case(kind="no_context");trace.write_bytes(b'')
+        output=self.root/"report";render_probe(packet,trace,output,allow_incomplete=True)
+        manifest=load(output/"manifest.json")
+        self.assertFalse(manifest["trace_quality"]["trace_header_present"])
+        self.assertIsNone(manifest["trace_quality"]["recorded_header_channels"])
+        self.assertEqual((output/"primary/trace.csv").read_bytes(),b'')
+        self.assertEqual(manifest["figures"],[])
 
     def test_nonfinite_ordinate_is_preserved_as_a_gap_never_zero(self):
         packet,trace=self.copy_case()
@@ -107,7 +133,7 @@ class ProbeDiagnosticsTest(unittest.TestCase):
 
     def test_mixed_set_keeps_partial_policy_and_explicit_unknown_trial(self):
         trials=[]
-        for kind in ("complete","partial","unprepared"):
+        for kind in ("complete","partial","no_context"):
             packet,trace=self.copy_case(kind=kind,name=kind)
             trials.append({"trial_id":load(packet)["requested_specification"]["trial_id"],"packet":packet.name,"trace":trace.name})
         spec={"kind":"timelearner_probe_report_spec","schema_version":2,"observation_policy":"complete_or_partial","trials":trials}
