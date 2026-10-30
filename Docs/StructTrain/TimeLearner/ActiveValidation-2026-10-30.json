@@ -26,7 +26,9 @@
         "supervisor_pid": 2430723,
         "worker": "10.245.1.17",
         "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-n0-repeats-asan-a1",
-        "status": "running_verified"
+        "status": "terminal",
+        "native_tests": 34,
+        "exit_status": 0
       },
       {
         "attempt": "a2",
@@ -42,6 +44,14 @@
         "report_commit": "5fb83ecb2f5af3c7adf833ac57aca0b3a64f7edc",
         "verified_stored_hashes": 686,
         "verified_raw_hashes": 684
+      },
+      {
+        "root": "42d1b58803d6b2060bd8993b60f17c0d74577d5b",
+        "attempt": "a2",
+        "supervisor_pid": 2445427,
+        "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-n0-repeats-asan-a2",
+        "worker": "10.245.1.17",
+        "status": "building_verified"
       }
     ],
     "code_root": "ea05b20f59a3017fbd86cc9948f140d060760c74",
@@ -50,5 +60,5 @@
   "schema_version": 1,
   "goal_complete": false,
   "accepted_root_before_stage": "8fc54ce013d06130009fa250b15304b816a3d620",
-  "observed_at_utc": "2026-10-30T12:47:36.0195789Z"
+  "observed_at_utc": "2026-10-30T12:49:56.4151110Z"
 }

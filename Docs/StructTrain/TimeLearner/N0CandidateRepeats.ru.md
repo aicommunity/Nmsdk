@@ -102,9 +102,10 @@ Elder report 5fb83ecb2f5af3c7adf833ac57aca0b3a64f7edc опубликован, в
 stored / 684 raw hashes проверены локально, runtime files повторно хешированы
 после terminal jobs. Это primary component-validation пакет, не законченный
 научный отчёт: графики новых training trials и полный visual matrix остаются
-требованиями общей отчётности. M40 A1 на последней проверке продолжал native
-ASan tests; его A2 ещё не запускался. Scoped acceptance и develop merge пока
-не выполнены.
+требованиями общей отчётности. M40 A1 затем завершён: 34/34 native pass,
+ASan detect_leaks=0, process status 0. После terminal-проверки запущен M40 A2
+на том же root 42d1b58803d6b2060bd8993b60f17c0d74577d5b с полной новой
+схемой. Scoped acceptance и develop merge пока не выполнены.
 
 Текущий implementation root ea05b20f59a3017fbd86cc9948f140d060760c74 / Pulse
 8682435ce8518ef71e55a2fb8ed292f634c256d0 сохраняет partial history и добавляет
