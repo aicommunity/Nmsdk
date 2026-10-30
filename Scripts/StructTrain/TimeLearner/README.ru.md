@@ -109,3 +109,14 @@ checkouts, локальные branch tips и фактические remote tips.
 Spec/receipt хранить вне публикуемого checkout. Полный контракт и ограничения:
 Docs/StructTrain/TimeLearner/GitClosurePublisher.ru.md. Это ещё не сквозной
 experiment runner, очереди или доказательство полноты артефактов эксперимента.
+
+### Процесс задания
+
+`python3 -m Scripts.StructTrain.TimeLearner.process_runner --runtime-manifest runtime.json --working-directory RUNTIME --output NEW_ATTEMPT --wall-seconds 60 -- ARGUMENTS`
+запускает объявленный executable, проверяет runtime, сохраняет PID/start/boot
+identity, mappings, логи и результат. Timeout/cancel сигнализирует принадлежащему
+заданию процессу через pidfd. Cancel — файл NEW_ATTEMPT/cancel.request.
+`inspect_attempt` возвращает unknown при исчезновении процесса без результата;
+не перезапускать job автоматически из-за обрыва наблюдения. Пока ownership
+охватывает только launched executable, не fork/daemon tree. Контракт и
+оставшиеся ограничения: Docs/StructTrain/TimeLearner/OwnedProcessSupervisor.ru.md.
