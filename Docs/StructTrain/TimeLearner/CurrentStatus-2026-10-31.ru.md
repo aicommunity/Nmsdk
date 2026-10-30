@@ -120,6 +120,16 @@ defaults/типы, isolated IaF signed crossing, Classic/Branch N1 при 2000 �
 Повтор ASan исправленного снимка ожидает освобождения его отдельного build/source;
 основная длительная ASan-серия продолжается независимо.
 
+[Пакет signed normal gate](../../../Reports/StructTrain/TimeLearner/s08-threshold-contract-normal-a2/README.md)
+опубликован commit `cc9b53faccaef8ff3b8bfe2abab2e921b088752c`: 425 файлов,
+810680 bytes lossless archive, включая реальную диагностику неуспешной a1.
+Новая полная normal-матрица исправленного снимка 0afbf97c4 поставлена отдельно:
+`s08-threshold-signed-full-normal-a1` (16 native cases), затем
+`s08-threshold-signed-full-audit-normal-a1` (35 independent checks того же reader).
+Она охватывает 2000/20000 Гц, N0/N1 и регрессии native ownership/conversion;
+до завершения и публикации не считается PASS. Последующие изменения документации
+не изменяют зафиксированный code/runtime snapshot этих заданий.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |
