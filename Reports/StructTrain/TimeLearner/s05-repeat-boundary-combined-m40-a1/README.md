@@ -1,0 +1,5 @@
+# Combined repeated-boundary and visual pipeline checks
+
+Source b2f357bcc75264a233524bfb30153b5d95816d6c on m40: 92/92 production Python checks, no skips/errors/failures, terminal status 0. Native C++ producer A3 is not rerun or relabelled by this readback. Includes original completed/stopped repeated-policy transfer, warm actual traces, independent numeric auditors, process/publisher/identity/runtime regressions, complete/partial plotting and whole-suite expected observation coverage. Actual A3 inventory has 51 native cases, 26 phases, 52 standalone executions and 338 primary probes; imported-process reused IDs remain separate source-bound groups.
+
+Full A3 native evidence is in sibling s05-repeat-boundary-{elder1,m40}-a3 directories at commits e5d97b47325fb871584ce61e46d402b3df7c2562 and fb73b3e5bcdef4612640631f8060310e44e08749. The old 132-probe visual set is separately source-bound; it is not substituted for all new A3 observations. New full A3 graphical rendering and visual acceptance remain pending. No scientific PASS, SI verification, full physics/mode matrix or stage completion is claimed. Compressed launchers are provenance snapshots.
