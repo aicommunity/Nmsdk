@@ -1144,9 +1144,24 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
     if(recorded)recorded->clear();
     if(declaredRequests)
     {
+        ASSERT_TRUE(recordThresholdPotential);
         declaredRequests->clear();for(int i=0;i<4;++i)declaredRequests->push_back(make(i,i%2==1,i<2?RecognitionResetPolicy::PerTrial:RecognitionResetPolicy::PreserveNeuronDynamics));
+        QJsonArray trialDesign;
+        for(const auto& q:*declaredRequests)
+        {
+            QJsonArray pattern;for(int row=0;row<q.pattern.GetRows();++row)pattern.append(q.pattern(row,0));
+            trialDesign.append(QJsonObject{{"trial_id",QString::fromStdString(q.trialId)},
+                {"sample_id",QString::fromStdString(q.sampleId)},{"label",QString::fromStdString(q.label)},
+                {"pattern_isi",pattern},{"pattern_hash",QString::fromStdString(q.patternHash)},
+                {"duration",q.duration},{"maximum_samples",double(q.maximumSamples)},
+                {"reset_policy",q.resetPolicy==RecognitionResetPolicy::PerTrial?"reset_per_trial":"preserve_neuron_dynamics"}});
+        }
         Artifact(rig.name+"_calibration_design.json",QJsonDocument(QJsonObject{{"kind","native_threshold_potential_fixture_design"},
-            {"schema_version",1},{"run_id",QString::fromStdString(rig.name+"_frozen")},{"model_revision",package["model_revision"]},
+            {"schema_version",2},{"run_id",QString::fromStdString(rig.name+"_frozen")},{"model_revision",package["model_revision"]},
+            {"declared_trials",trialDesign},{"observation_schema_version",2},
+            {"proposal_threshold_bounds",QJsonObject{{"minimum",1.e-6},{"maximum",1.}}},
+            {"criterion",QJsonObject{{"id","post_anchor_target_whole_window_foil_v1"},{"anchor","last_stimulus"},
+                {"begin_offset",0.},{"end_offset",QJsonValue(QJsonValue::Null)},{"reject_target_outside_window",true}}},
             {"primary_trial_ids",QJsonArray{"trial_0","trial_1"}},
             {"robustness_trial_ids",QJsonArray{"trial_2","trial_3"}},{"foil_rule","first_isi_preserved_remaining_isi_times_8"},
             {"calibration_scope","reset_per_trial"},{"record_threshold_potential",true}}).toJson());
@@ -1159,7 +1174,11 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
         std::optional<NativeRecognitionTrialObservation> result;
         std::vector<std::pair<double,double>> independentPotential;
         auto zone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
-        for(int n=0;n<10000 && !result;++n)
+        // The dispersed foil can exceed 10000 ticks at 20 kHz. Close the
+        // declared physical window; a fixed tick cap changes the protocol.
+        const auto requiredTicks=std::size_t(std::ceil(request.duration*rig.frequency))+2;
+        ASSERT_LE(requiredTicks,request.maximumSamples+1);
+        for(std::size_t n=0;n<requiredTicks && !result;++n)
         {
             const auto time=rig.environment->GetTime().GetDoubleTime();tick();
             if(recordThresholdPotential)independentPotential.emplace_back(time,zone->Potential.GetData());

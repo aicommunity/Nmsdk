@@ -172,6 +172,26 @@ native тике. При measured proposal выполняются отдельн�
 imports из одного source; затем восстанавливается original recognition state.
 Fixture сама не заявляет Calibrated по наличию gap или spike.
 
-Эти schema-2/proposal изменения ещё не собраны. Поддержка V2 optional modes,
+Schema-2/proposal собраны на обоих workers; полная матрица пока не принята. Поддержка V2 optional modes,
 публикация compact primary data и обязательные читаемые soma/input графики,
 а также полный общий PostTune/calibration controller остаются открытыми.
+
+
+## Проверка 2026-10-31: окно пробы при 20 кГц
+
+Elder, producer root `d5709b0d818f5000f16bf30548bbc9664a82122e`,
+PulseLib `7f177359e7664da3243ece9404e07508cb2dfdc2`:
+оба NativeThresholdPotential случая при 2000 Гц прошли; оба при 20000 Гц
+завершились ошибкой ожидания результата. Legacy-фазы после этого не запускались.
+Это не полная приёмка. ASan-задание M40 проверяется отдельно.
+
+В fixture обнаружен фиксированный предел 10000 тиков: для растянутого foil
+при 20000 Гц он короче объявленного окна. Незавершённая проба затем закономерно
+запрещает import следующей модели (`native_recognition_import_requires_idle_boundary`).
+Исправление fixture вычисляет предел по duration × frequency с запасом двух
+тиков и проверяет maximumSamples. Production executor и физика не изменены.
+До повторной серверной проверки исправление считается неподтверждённым.
+
+Design schema 2 заранее сохраняет все requests, criterion и bounds.
+Для уже полученных design schema 1 необходим явно ограниченный fixture adapter;
+недостающие поля нельзя выдавать за сохранённые до запуска.
