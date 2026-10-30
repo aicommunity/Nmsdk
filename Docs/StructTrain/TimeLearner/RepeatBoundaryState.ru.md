@@ -78,6 +78,13 @@ warm summary: прежний fixture сохранял только JSON этой
 
 ## Оставшиеся требования
 
+Elder fixed A2 на root `7369ae85cc914c5e3f05d919c35fd9b8890d9d97` прошёл
+51/51 native tests без ошибок. Его post-audit остановился из-за неверного
+выбора `_service_` вместо `_xmlprobe_` для XML-load fixture; это не отказ
+алгоритма или native import. Selector исправлен в final audit и source-bound
+plot check. Elder A3 содержит также warm CSV; M40 A3 выполняет тот же C++ код
+с warm logging. Отдельные producer/auditor SHA должны сохраняться при readback.
+
 Нужны результаты fixed native/ASan, независимый Python audit, необходимые
 временные графики и согласованные develop merges. Частота 20000, N>4, все
 PostTune/calibration/conversion варианты и полный controller checkpoint не

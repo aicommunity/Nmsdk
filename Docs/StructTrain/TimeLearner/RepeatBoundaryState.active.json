@@ -32,12 +32,17 @@
     {
       "worker": "10.245.1.11",
       "attempt": "a2",
-      "status": "running_verified",
+      "status": "terminal",
       "root": "7369ae85cc914c5e3f05d919c35fd9b8890d9d97",
       "supervisor_pid": 702240,
       "expected_native_tests": 51,
       "expected_python_tests": 76,
-      "runtime": "/home/user/timelearner-refactor/runtime-s05-repeat-boundary-normal-a2"
+      "runtime": "/home/user/timelearner-refactor/runtime-s05-repeat-boundary-normal-a2",
+      "native_tests": 51,
+      "failed_native_tests": 0,
+      "native_exit_status": 0,
+      "process_exit_status": 1,
+      "post_audit_error": "Configured XML-load profiles use _xmlprobe_ filenames, not _service_; corrected in final audit"
     },
     {
       "worker": "10.245.1.17",
@@ -47,7 +52,18 @@
       "supervisor_pid": 2523734,
       "expected_native_tests": 51,
       "expected_python_tests": 77,
-      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s05-repeat-boundary-asan-a3"
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s05-repeat-boundary-asan-a3",
+      "post_audit_readback_required": "Audit with corrected XML-load selector and source-bound plot test at 02cf1542d after native job terminal; C++ source unchanged from 8d73c0fd5"
+    },
+    {
+      "worker": "10.245.1.11",
+      "attempt": "a3",
+      "expected_python_tests": 77,
+      "supervisor_pid": 712744,
+      "status": "running_verified",
+      "expected_native_tests": 51,
+      "runtime": "/home/user/timelearner-refactor/runtime-s05-repeat-boundary-normal-a3",
+      "root": "02cf1542de6edfd67aa9da15798d34dd1b0eb08f"
     }
   ],
   "open_gates": [
@@ -58,5 +74,5 @@
     "submodule then root no-ff merges",
     "full plan 0-12 remains incomplete"
   ],
-  "observed_at_utc": "2026-10-30T14:13:55.3252684Z"
+  "observed_at_utc": "2026-10-30T14:16:45.7411448Z"
 }
