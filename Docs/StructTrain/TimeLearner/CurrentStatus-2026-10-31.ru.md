@@ -130,6 +130,18 @@ defaults/типы, isolated IaF signed crossing, Classic/Branch N1 при 2000 �
 до завершения и публикации не считается PASS. Последующие изменения документации
 не изменяют зафиксированный code/runtime snapshot этих заданий.
 
+Следующее изменение — native чтение сохранённых проб с повторной проверкой
+raw samples/events и независимой request. Код PulseLib
+`fece852167f617f0166b6ea794daae9a7beda47a`, root test commit
+`61886fb803a65bf9eec89435f3634e601ad4c159`; документированный снимок
+`158727b7275e3d3c702bdeb78f98f2d489a5d11f` / PulseLib
+`efd343a9add299c60410e93caec07eb9b3513266`. Поставлены отдельные задания
+`s08-calibration-persistence-normal-a1` и `s08-calibration-persistence-asan-a1`
+на Classic/Branch N1 при 2000 Гц. Они ожидают освобождения соответствующего
+source/build; до терминального результата не считаются PASS.
+Это prerequisite для calibrated model import, но сам final calibrated
+commit/export и production transaction ещё не реализованы.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |
