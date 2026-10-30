@@ -10,6 +10,7 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeRecognitionState.h"
+#include "TimeLearner/NativeThresholdCandidate.h"
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativePostTuneBoundary.h"
 #include "TimeLearner/NumericChecks.h"
@@ -1114,7 +1115,7 @@ TEST(NativeLearnedState,FreshProcessImport)
 }
 
 
-enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled };
+enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled,ThresholdCandidates };
 
 template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJsonObject& package)
 {
@@ -1311,8 +1312,53 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
         {"reason",QString::fromStdString(rig.learner->NativeModelEditFailure())},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
 
+template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,const QJsonObject& solo)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const std::string implementation="native-learned-boundary-fixture-v1";
+    const auto source=ConvertNativeSoloToRecognition(solo,NativeRecognitionSpec{},core.storage,core.environment,implementation);
+    const auto sourceCopy=source;const auto original=rig.Revision();
+    Artifact(rig.name+"_threshold_source.json",QJsonDocument(source).toJson());
+    for(double invalid:{0.,-1.,std::numeric_limits<double>::infinity(),std::numeric_limits<double>::quiet_NaN()})
+        EXPECT_THROW(CreateNativeThresholdCandidate(source,invalid,core.storage,core.environment,implementation),std::invalid_argument);
+    const auto baseName=rig.name;
+    for(double threshold:{1.e-4,1.})
+    {
+        const auto candidateClock=rig.environment->GetTime().GetTime();
+        const auto candidate=CreateNativeThresholdCandidate(source,threshold,core.storage,core.environment,implementation);
+        EXPECT_EQ(source,sourceCopy);EXPECT_EQ(rig.environment->GetTime().GetTime(),candidateClock);
+        // The source learner has not been replaced or calculated by construction.
+        if(threshold==1.e-4)EXPECT_EQ(rig.Revision(),original);
+        const auto repeated=CreateNativeThresholdCandidate(source,threshold,core.storage,core.environment,implementation);
+        EXPECT_EQ(candidate,repeated);
+        EXPECT_THROW(CreateNativeThresholdCandidate(candidate,threshold,core.storage,core.environment,implementation),std::invalid_argument);
+        auto forged=candidate;auto record=forged["candidate_record"].toObject();record["calibrated"]=true;forged["candidate_record"]=record;
+        forged.remove("sha256");forged["sha256"]=NmsdkTools::CanonicalModelDataSha256(forged);
+        EXPECT_THROW(PrepareNativeRecognitionState(forged,core.storage,core.environment,implementation),std::invalid_argument);
+        rig.learner->IsNeedToTrain=false;
+        const auto installed=rig.learner->ImportNativeRecognitionState(candidate,implementation);
+        ASSERT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+        rig.learner->Build();rig.learner->Init();rig.learner->Reset();
+        ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
+        auto zone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
+        EXPECT_DOUBLE_EQ(zone->Threshold.GetData(),threshold);
+        EXPECT_EQ(rig.Revision(),candidate["model_revision"].toString().toStdString());
+        EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());
+        rig.name=baseName+(threshold<.001?(rig.frequency==2000?"_candidate_spiking":"_candidate_low"):"_candidate_high");
+        Artifact(rig.name+"_recognition_candidate.json",QJsonDocument(candidate).toJson());
+        FrozenTrialChecks(rig,candidate);
+        EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),candidate);
+        EXPECT_EQ(source,sourceCopy);
+    }
+    rig.name=baseName;
+}
+
 template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
 {
+    if(scenario==RecognitionCase::ThresholdCandidates){ThresholdCandidateChecks(rig,source);return;}
     if(scenario==RecognitionCase::OwnedIdentity || scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped ||
        scenario==RecognitionCase::OwnedFreshIdentity || scenario==RecognitionCase::OwnedFreshScaled)
     {RecognitionOwnerChecks(rig,source,scenario);return;}
@@ -1881,6 +1927,14 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     }
 }
 TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}
+TEST(NativeThresholdCandidate,ClassicN0_2000){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
+TEST(NativeThresholdCandidate,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
+TEST(NativeThresholdCandidate,BranchN0_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
+TEST(NativeThresholdCandidate,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
+TEST(NativeThresholdCandidate,ClassicN0_20000){LearnedBoundary<NNeuronTimeLearner>(0,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
+TEST(NativeThresholdCandidate,ClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
+TEST(NativeThresholdCandidate,BranchN0_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
+TEST(NativeThresholdCandidate,BranchN1_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
 TEST(NativeLearnedState,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeLearnedState,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1);}
 TEST(NativeLearnedState,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1);}
