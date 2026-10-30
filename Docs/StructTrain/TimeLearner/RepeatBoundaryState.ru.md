@@ -103,5 +103,15 @@ Elder final A3 на root `02cf1542de6edfd67aa9da15798d34dd1b0eb08f` заверш
 51/51 native и 77/77 Python tests без skips/errors, process status 0.
 Проверены новые warm CSV, сохранённые цели, полные исходные/imported proofs,
 диагностические stops, повторный source-bound readback старых графиков и
-совместимость прежних N0/N1 пакетов. M40 ASan A3 ещё выполняется; результаты
-этого одного worker не заменяют его проверку или всю матрицу полного плана.
+совместимость прежних N0/N1 пакетов.
+
+M40 ASan A3 также завершил 51/51 native tests. Его исходный post-audit сохранил
+ошибку XML selector; отдельный readback на auditor root 02cf1542d прошёл 77/77
+tests без skips/errors, process status 0. Native producer root 8d73c0fd5
+содержит тот же C++ код и gitlinks: это проверено до readback, без нового
+запуска моделей. [Elder пакет](../../../Reports/StructTrain/TimeLearner/s05-repeat-boundary-elder1-a3/README.md)
+`e5d97b47325fb871584ce61e46d402b3df7c2562`,
+[M40 пакет](../../../Reports/StructTrain/TimeLearner/s05-repeat-boundary-m40-a3/README.md)
+`fb73b3e5bcdef4612640631f8060310e44e08749` опубликованы;
+все 1986/1089 stored hashes проверены локально. Полные новые временные графики,
+объединённый Python gate и согласованные develop merges остаются открыты.

@@ -47,13 +47,18 @@
     {
       "worker": "10.245.1.17",
       "attempt": "a3",
-      "status": "running_verified",
+      "status": "terminal",
       "root": "8d73c0fd575aeeedd163479aa7065245915056d9",
       "supervisor_pid": 2523734,
       "expected_native_tests": 51,
       "expected_python_tests": 77,
       "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s05-repeat-boundary-asan-a3",
-      "post_audit_readback_required": "Audit with corrected XML-load selector and source-bound plot test at 02cf1542d after native job terminal; C++ source unchanged from 8d73c0fd5"
+      "post_audit_readback_required": "Audit with corrected XML-load selector and source-bound plot test at 02cf1542d after native job terminal; C++ source unchanged from 8d73c0fd5",
+      "native_tests": 51,
+      "failed_native_tests": 0,
+      "native_exit_status": 0,
+      "process_exit_status": 1,
+      "post_audit_error": "Temporary XML-load selector; corrected independent readback passed without native restart"
     },
     {
       "worker": "10.245.1.11",
@@ -73,17 +78,34 @@
     }
   ],
   "open_gates": [
-    "terminal fixed native and ASan results",
-    "independent primary-data Python audit",
-    "new warm CSV and summary",
-    "published source-bound time plots",
+    "full source-bound visual reports of all new native trials",
+    "combined controller and renderer Python gate",
     "submodule then root no-ff merges",
     "full plan 0-12 remains incomplete"
   ],
-  "observed_at_utc": "2026-10-30T14:45:07.0225139Z",
+  "observed_at_utc": "2026-10-30T16:20:23.3881702Z",
   "baseline_report_commits": [
     "779d34e7b3522db4c07cd24233de82a6f54518dc",
     "b5e0c526bfad1edf2772c9adbbf774402584478f"
   ],
-  "baseline_verified_stored_hashes_per_worker": 338
+  "baseline_verified_stored_hashes_per_worker": 338,
+  "final_m40_readback": {
+    "skips": 0,
+    "cpp_source_equivalent": true,
+    "process_exit_status": 0,
+    "producer_root": "8d73c0fd575aeeedd163479aa7065245915056d9",
+    "python_tests": 77,
+    "status": "terminal",
+    "errors": 0,
+    "failures": 0,
+    "root": "02cf1542de6edfd67aa9da15798d34dd1b0eb08f"
+  },
+  "final_report_commits": [
+    "e5d97b47325fb871584ce61e46d402b3df7c2562",
+    "fb73b3e5bcdef4612640631f8060310e44e08749"
+  ],
+  "final_stored_hashes_verified": {
+    "m40": 1089,
+    "elder1": 1986
+  }
 }
