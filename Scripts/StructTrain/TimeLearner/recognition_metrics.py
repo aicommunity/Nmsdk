@@ -4,6 +4,7 @@ Computes response criteria, not simulator execution/provenance or convergence.
 Historical CSV scores remain separate; this format never rewrites their meaning.
 """
 from collections import defaultdict
+import copy
 from pathlib import Path
 
 from .model_identity import canonical_model_sha256
@@ -96,10 +97,10 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
         # File locations and row order are not the semantic identity of the spec.
         semantic = {**spec, "trials": [{key: t[key] for key in t if key != "observation"}
                                        for t in sorted(expected.values(), key=lambda t: t["trial_id"])]}
-        result = {"schema_version": 1, "criterion": criterion, "evaluation_spec_digest": canonical_model_sha256(semantic),
+        result = {"schema_version": 1, "criterion": copy.deepcopy(criterion), "evaluation_spec_digest": canonical_model_sha256(semantic),
                   "coverage_policy": spec["coverage_policy"], "run_id": spec["run_id"], "model_revision": spec["model_revision"],
                   "declared_training_outcome": source["training_outcome"], "source_training_evidence_checked": False,
-                  "calibration": calibration, "effective_threshold": _physical(zones[0], "Threshold"), "native_execution_verified": False,
+                  "calibration": copy.deepcopy(calibration), "effective_threshold": _physical(zones[0], "Threshold"), "native_execution_verified": False,
                   "evaluation_verdict": None, "invalid_trial_ids": invalid}
         if candidate:
             result["calibration_probe"] = True

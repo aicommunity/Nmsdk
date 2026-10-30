@@ -123,3 +123,55 @@ calibration-only scoring и три проверки полного набора/
 OS exit code. Новый launcher явно обрабатывает TERM/INT и всё равно требует
 терминальный native status, точное множество JUnit cases и полноценный data gate.
 Не считать завершённый shell процесс, файл с нулём и научную приёмку одним статусом.
+
+## Выбор и подтверждение: реализация data contract
+
+`calibration.py` принимает явную grid specification, balanced target/foil design
+для каждого reset policy, source package/model hashes и отдельный attempt/clock
+context. Все пробы проверяет общий scorer. Отсутствующий кандидат, цензурированная
+проба, другой source или изменённый dataset запрещают выбор. Порядок строк и
+массивов не подменяет presentation_index; порядок thresholds является явным
+tie-break. Scientific conditions digest отделён от calibration attempt ID.
+
+На полном проверенном prefix grid выбирается реально измеренный кандидат без
+target violations и FP. Иначе результат — NonSeparable на объявленной полной
+сетке либо BudgetExhausted на её ограниченном prefix. Состояние после выбора
+остаётся PendingConfirmation. Подтверждение повторно проверяет selection,
+тот же immutable candidate и полный новый trial set с другим run ID. В пределах
+одних часов новые пробы должны быть позже поиска; между разными clock scopes
+абсолютные model times не сравниваются и требуется другой attempt.
+
+Native execution/provenance и статистическая независимость не доказываются
+именами ID или JSON: соответствующие flags остаются false. Production runner
+ещё должен выполнить rebuild/import/probes/commit/rollback и связать receipts.
+Положительный путь confirmation пока не принят реальным integration gate.
+
+## Измеренный LTZone bracket: рабочее расширение
+
+Вместо предложения порога по soma sum добавлен opt-in raw observation schema 2:
+`recordThresholdPotential` сохраняет реальную `LTZone.Potential` после штатного
+расчёта детей, её model path/class и явные model units (SI не подтверждены).
+Schema 1 не дополняется выдуманными значениями. Изменение не добавляет Calculate
+и не записывает настройки на каждом тике. Включение внешнего source у Potential
+отвергается; nonfinite измерение не сохраняется как действительное.
+
+`ProposeNativeThreshold` проверяет заранее объявленный полный набор и допускает
+только nonspiking characterization. Нижняя граница учитывает весь foil window
+и запрещённые target-outside ответы; верхняя — минимум target peaks в нужном
+окне. Порог предлагается внутри измеренного bracket и явных bounds. Допустимый
+endpoint не теряется при integer/double quantization. NoGap/NoRepresentable
+не являются PhysicalInfeasible и не означают успешную калибровку. Предложенный
+порог обязательно проверяется реальными spiking пробами и свежим импортом.
+
+Новые fixture cases явно отделяют primary reset-per-trial pair от continuous
+robustness pair до предъявлений. Foil сохраняет first ISI и увеличивает остальные
+в восемь раз; это новый контролируемый dataset, не историческая восьмёрка.
+Все primary/robustness/cancel/gap observations сохраняются. Каждый записанный
+Potential сравнивается с независимым чтением настоящего компонента на каждом
+native тике. При measured proposal выполняются отдельные search и confirmation
+imports из одного source; затем восстанавливается original recognition state.
+Fixture сама не заявляет Calibrated по наличию gap или spike.
+
+Эти schema-2/proposal изменения ещё не собраны. Поддержка V2 optional modes,
+публикация compact primary data и обязательные читаемые soma/input графики,
+а также полный общий PostTune/calibration controller остаются открытыми.
