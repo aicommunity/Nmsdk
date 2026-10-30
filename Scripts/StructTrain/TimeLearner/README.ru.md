@@ -113,6 +113,13 @@ Y limits каждого soma по всем пробам. Доступны overvi
 subset spec не доказывает полноту кампании. Схема, данные, серверные проверки
 и открытые ограничения: Docs/StructTrain/TimeLearner/NativeProbeVisualReports.ru.md.
 
+Для явно неполной пробы используется `--format probe-diagnostic`. Набор с
+schema 2 и `observation_policy=complete_or_partial` включает censored и
+невалидные наблюдения с серыми неизвестными интервалами и явным качеством данных.
+Пустое наблюдение не получает придуманную кривую; NaN ординаты остаются разрывами.
+Полнота CSV не превращается в валидность измерения. Подробности и серверные
+проверки: Docs/StructTrain/TimeLearner/PartialProbeVisualReports.ru.md.
+
 ### Git closure publication
 
 `python3 -m Scripts.StructTrain.TimeLearner publish publication.json --root CHECKOUT --output NEW_RECEIPT.json`
