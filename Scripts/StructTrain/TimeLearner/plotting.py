@@ -97,11 +97,19 @@ def render_soma(observation, channel, label, limits, output: Path):
             fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
             fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.70)
             overlay = ax.twinx()
-            ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label,
-                    marker="o" if sample_markers else None,markersize=4,markerfacecolor="none",clip_on=not sample_markers)
+            ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
-                         linewidth=1.2, label="Actual shared input (native samples)",
-                         marker="x" if sample_markers else None,markersize=3,clip_on=not sample_markers)
+                         linewidth=1.2, label="Actual shared input (native samples)")
+            if sample_markers:
+                # Only visible samples get unclipped glyphs. The waveform itself
+                # stays clipped: disabling clipping for its full line would draw
+                # other time windows across labels and neighbouring panels.
+                visible=[i for i,time in enumerate(times) if left <= time <= right]
+                x=[times[i] for i in visible]
+                ax.plot(x,[soma[i] for i in visible],linestyle="none",color="#154c9a",
+                        marker="o",markersize=4,markerfacecolor="none",clip_on=False)
+                overlay.plot(x,[stimulus[i] for i in visible],linestyle="none",color="#d46200",
+                             alpha=.65,marker="x",markersize=3,clip_on=False)
             ax.set_xlim(left, right);ax.set_ylim(*y_limits)
             ax.set_xlabel("Native absolute time [s]")
             ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
