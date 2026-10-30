@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import threading
 import time
@@ -103,3 +104,29 @@ class OwnedProcessTest(unittest.TestCase):
                        self.root/"resistant",.2,terminate_grace_seconds=.05)
         self.assertEqual(result["execution"],"timeout",result)
         self.assertEqual(result["returncode"],-9)
+
+    def test_runtime_change_during_execution_invalidates_provenance(self):
+        manifest=self.manifest();output=self.root/"mutated"
+        def change():
+            deadline=time.monotonic()+5
+            while time.monotonic()<deadline:
+                if (output/"owned-process.json").exists():
+                    self.ini.write_text("changed during actual process");return
+                time.sleep(.01)
+        thread=threading.Thread(target=change);thread.start()
+        result=execute(manifest,[".3"],self.root,output,3);thread.join()
+        self.assertEqual(result["execution"],"process_error",result)
+        self.assertEqual(result["runtime_provenance"],"invalid_or_incomplete_runtime")
+        self.assertIn("runtime_content_changed",result["reason"])
+
+    def test_actual_module_cli_produces_execution_receipt(self):
+        manifest=self.manifest();source=self.root/"runtime.json";source.write_text(json.dumps(manifest))
+        output=self.root/"cli"
+        command=[sys.executable,"-m","Scripts.StructTrain.TimeLearner.process_runner",
+                 "--runtime-manifest",str(source),"--working-directory",str(self.root),
+                 "--output",str(output),"--wall-seconds","3","--",".1"]
+        completed=subprocess.run(command,capture_output=True,text=True)
+        self.assertEqual(completed.returncode,0,completed.stderr)
+        result=json.loads((output/"result.json").read_text())
+        self.assertEqual(result["execution"],"completed")
+        self.assertIsNone(result["scientific_verdict"])
