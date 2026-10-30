@@ -142,6 +142,23 @@ source/build; до терминального результата не счит
 Это prerequisite для calibrated model import, но сам final calibrated
 commit/export и production transaction ещё не реализованы.
 
+Следующий code snapshot реализует native calibrated export/import:
+root `fc36f38bdf2b204cb448ba6971425c4ec26890f1`, PulseLib
+`353882b0391cb40d193599350f8b5dbac1df21e2`. Это proof выбранного candidate
+с двумя успешными полными матрицами search/fresh confirmation, а не проверка
+всей сетки или independent Test. Сохраняются raw observations и requests;
+import пересчитывает proof и сверяет весь пакет, сохраняет физический model hash,
+solo proof и recognition certificate=null. Calibration status отделён от
+числового порога. Добавлены native import/export/Reset/frozen-probe и reject
+controls; их normal/ASan задания поставлены после persistence gates.
+
+Root `14949e46ee91f9df658b9951656fd789875cfe55` добавляет независимый Python
+reader/CLI proof и 5 tests на actual packages. Reader gates
+`s08-calibrated-state-audit-normal-a1` / `s08-calibrated-state-audit-asan-a1`
+ожидают соответствующих native gates. Пока это code-implemented,
+runtime-unverified добавка: accepted calibrated export, production transaction,
+full PostTune, frozen evaluation scorer нового формата и весь этап 8 не закрыты.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |

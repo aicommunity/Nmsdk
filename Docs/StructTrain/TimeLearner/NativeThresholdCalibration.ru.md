@@ -358,6 +358,19 @@ Code/test snapshot root `fc36f38bdf2b204cb448ba6971425c4ec26890f1`, PulseLib
 `353882b0391cb40d193599350f8b5dbac1df21e2`. Отдельные normal/ASan задания
 `s08-calibrated-state-normal-a1` / `s08-calibrated-state-asan-a1` ожидают завершения
 проверок persistence. До их завершения это реализованный, но непроверенный API,
-а не закрытие этапа 8. Python CLI/scorer ещё не принимают новый calibrated package;
-следующий обязательный шаг — независимая проверка proof и frozen evaluation через
-общий scorer, затем production selection/commit/rollback orchestration.
+а не закрытие этапа 8.
+
+Root `14949e46ee91f9df658b9951656fd789875cfe55` добавляет независимый reader
+`calibrated_evidence.audit_calibrated_state`, проверяющий обе матрицы через общий
+scorer, source CSV и существующий audit native assessment. CLI:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner analyze CALIBRATED.json --format calibrated-state --source-solo CASE_learned_state.json
+```
+
+Пять адресных tests ожидают actual native packages из двух новых controls.
+Reader не подтверждает simulator execution, grid selection или native import;
+его поля явно отделяют согласованность первичных данных от этих утверждений.
+Frozen evaluation scorer пока не принимает calibrated package. Следующий
+обязательный шаг — его интеграция с проверенным proof, затем production
+selection/commit/rollback orchestration, полный PostTune и независимый Test.
