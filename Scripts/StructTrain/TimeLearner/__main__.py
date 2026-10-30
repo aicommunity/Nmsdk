@@ -83,10 +83,24 @@ def main(argv: list[str] | None = None) -> int:
     bundle.add_argument("--selected-report", type=Path, help="completed full native report with checked PDF previews")
     bundle.add_argument("--output", type=Path, help="new bundle or extraction directory")
     bundle.add_argument("--maximum-bytes", type=int, default=8*1024**3, help="maximum uncompressed extraction bytes")
+    history = commands.add_parser("history", help="resolve historical root SHA after generated-report cleanup")
+    history.add_argument("action", choices=("resolve",))
+    history.add_argument("revision")
+    history.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
+    history.add_argument("--map", type=Path)
     args = parser.parse_args(argv)
     if args.command == "inventory":
         from .inventory import write_inventory
         write_inventory(args.root.resolve(), args.output.resolve())
+    elif args.command == "history":
+        from .history import resolve_revision
+        from .native_evidence import EvidenceError
+        try:
+            print(json.dumps(resolve_revision(args.root, args.revision, args.map), ensure_ascii=False))
+            return 0
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"kind":"nmsdk_root_revision_resolution","status":"invalid","reason":str(error),"scientific_verdict":None}),file=sys.stderr)
+            return 2
     elif args.command == "bundle":
         from .artifact_bundle import pack_native_tests, verify_bundle, extract_bundle
         from .native_evidence import EvidenceError, require
