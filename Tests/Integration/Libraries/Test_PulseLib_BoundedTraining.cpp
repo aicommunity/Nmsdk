@@ -99,6 +99,62 @@ void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& p
     }
 }
 
+TEST(BoundedTrainingN0Repeats, SecondObservationCanRejectAnApparentlyExactCandidate)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration();cfg.n0CandidateRepeats=2;
+        cfg.tolerances.sync=1.;cfg.bounds={{2,2,1,2,1.,100.},{1,1,1,1,1.,100.}};
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
+        std::size_t initialSamples=0;
+        DriveTraining(session,p,[&](const TrainingAction& action,auto&,auto& raw) {
+            if(!action.finalVerification && action.inputIndex==0 && action.parameters[0].synapses==1)
+                if(++initialSamples==2)raw[0]+=.002;
+        });
+        ASSERT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_TRUE(session.Certificate());
+        EXPECT_EQ(session.Parameters()[0].synapses,2);
+        ASSERT_EQ(session.CandidateRepeats().size(),2u);
+        const auto& first=session.CandidateRepeats()[0];
+        EXPECT_FALSE(first.withinAmplitude);EXPECT_EQ(first.trialIds.size(),2u);
+        EXPECT_NE(first.trialIds[0],first.trialIds[1]);EXPECT_NE(first.anchorTrialIds[0],first.anchorTrialIds[1]);
+        EXPECT_NEAR(first.maximumRawPotential-first.minimumRawPotential,.002,1e-12);
+        EXPECT_EQ(first.fullParameters[0].synapses,1);
+        EXPECT_EQ(session.CandidateRepeats()[1].fullParameters[0].synapses,2);
+        EXPECT_TRUE(session.CandidateRepeats()[1].withinAmplitude);
+    }
+}
+
+TEST(BoundedTrainingN0Repeats, BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.n0CandidateRepeats=2;cfg.maximumProbes=2;
+    cfg.tolerances.sync=1.;
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+    DriveTraining(session,p);
+    EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+    ASSERT_EQ(session.CandidateRepeats().size(),1u);EXPECT_FALSE(session.CandidateRepeats()[0].complete);
+    EXPECT_EQ(session.CandidateRepeats()[0].trialIds.size(),1u);EXPECT_EQ(session.Evidence().size(),1u);
+    EXPECT_FALSE(session.Certificate());
+}
+
+TEST(BoundedTrainingN0Repeats, Cap128CanPassWithTwoActualMeasurements)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.n0CandidateRepeats=2;cfg.tolerances.sync=1.;
+    BoundedTrainingSession session(References(p),cfg,{{1,128,10.},{1,1,10.}});
+    DriveTraining(session,p);
+    EXPECT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_EQ(session.CandidateRepeats().size(),1u);
+    EXPECT_EQ(session.CandidateRepeats()[0].fullParameters[0].synapses,128);
+    EXPECT_EQ(session.CandidateRepeats()[0].trialIds.size(),2u);
+}
+
+TEST(BoundedTrainingN0Repeats, NoOpN1AndInvalidRepeatCountsAreRejected)
+{
+    const auto p=Protocol();auto cfg=Configuration();
+    for(const std::size_t repeats:{std::size_t(0),std::size_t(129)})
+    {cfg.n0CandidateRepeats=repeats;EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,1,10.},{1,1,10.}})),std::invalid_argument);}
+    cfg=Configuration(2,Normalization::TipResistance);cfg.n0CandidateRepeats=2;
+    EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,1,10.},{1,1,10.}})),std::invalid_argument);
+}
+
 TEST(BoundedTraining, MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate)
 {
     for(auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})

@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_scoped_visual_review",
+  "schema_version": 1,
+  "review_date": "2026-10-30",
+  "reviewer": "Codex visual inspection",
+  "method": "Opened source-bound Poppler PNG previews at 1920x960",
+  "source_plot_report_commit": "83b9651c4c5f6fa7c15ef30e03381d3b68d82d3c",
+  "records": [
+    {
+      "preview": "classic-overview.png",
+      "preview_sha256": "a0720ebdcf98ff8e3a4dd680f8e04fa4a771a729ec590af6ebec47edced2ab6f",
+      "source_pdf_sha256": "f4b5acbeb361b386617d04741b3ca6fd70fbc586333d7abc84f543a51b9ab97c",
+      "axes_and_legend_readable": true,
+      "stimulus_and_soma_distinguishable": true,
+      "visible_label_overlap": false,
+      "visible_curve_clipping": false
+    },
+    {
+      "preview": "branch-zoom.png",
+      "preview_sha256": "5ad56cdc396dc7ff9ff6d8390fc61cb254499c92ed518ea399c3860c45ae3e02",
+      "source_pdf_sha256": "bbd3b681d5c9eea330855bcabe5e78ab64bab179fbcd82adb58eb8c892815034",
+      "axes_and_legend_readable": true,
+      "stimulus_and_soma_distinguishable": true,
+      "visible_label_overlap": false,
+      "visible_curve_clipping": false
+    }
+  ],
+  "reviewed_preview_count": 2,
+  "scope": "Only the two listed previews; no claim about all figures or physics matrix",
+  "human_visual_review_complete": false,
+  "global_visual_acceptance": false,
+  "scientific_verdict": null
+}
