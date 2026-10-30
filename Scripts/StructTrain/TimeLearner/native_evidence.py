@@ -308,13 +308,16 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     require(type(summary.get("schema_version")) is int and summary["schema_version"] == schema,
             "configuration_summary_repeat_schema_mismatch")
     search, measured = configuration["search"], summary["configuration"]
+    normalization = configuration["model"]["normalization"]
+    require(normalization in ("N0", "N1") and
+            measured["normalization"] == {"N0": "synapse_count", "N1": "tip_resistance"}[normalization],
+            "configuration_summary_normalization_mismatch")
     if schema == 1:
         require("n0_candidate_repeats" not in search and "n0_candidate_repeats" not in measured,
                 "legacy_configuration_contains_repeat_factor")
         return 1
     repeats = count(search["n0_candidate_repeats"])
-    require(configuration["model"]["normalization"] == "N0" and
-            measured["normalization"] == "synapse_count" and 2 <= repeats <= 128 and
+    require(normalization == "N0" and 2 <= repeats <= 128 and
             count(measured["n0_candidate_repeats"]) == repeats, "configuration_summary_repeat_policy_mismatch")
     return repeats
 

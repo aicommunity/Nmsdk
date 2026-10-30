@@ -18,7 +18,8 @@ Baseline root `a6cfc24acf00f5bf8a235ad7872741bb9e05da3f` / Pulse develop
 `b2b670a22f849e0d0d2b6789b8242308521b1c37`: Elder воспроизвёл все десять
 отказов, каждый ровно в двух новых проверках сводки. Прочие проверки native
 импорта, графа, frozen отклика, fresh-process и warm boundary не дали отдельных
-отказов. M40 ASan baseline ещё выполняется; итог фиксируется отдельно.
+отказов. M40 ASan baseline также завершён с десятью отказами; точные
+assertion locations и post-run runtime readback проверяются до fixed run.
 
 ## Контракт исправления
 
@@ -64,6 +65,12 @@ Baseline root `a6cfc24acf00f5bf8a235ad7872741bb9e05da3f` / Pulse develop
 Python-проверки используют эти реальные JSON/CSV, сравнивают исходные и imported
 summaries, full package hashes, primary packet identity, partial raw samples и
 явно повреждённые копии metadata. Synthetic mutations не являются научными runs.
+Для warm completed attempt добавлены actual CSV каждого измерения и отдельная
+warm summary: прежний fixture сохранял только JSON этой фазы, чего недостаточно
+для обязательных временны́х графиков. Это требует отдельного native-прогона,
+а не восстановления waveform из reference/final JSON. Проверка старых полных
+графиков дополнительно сравнивает каждый embedded packet/CSV с actual source;
+одного совпадения trial ID недостаточно для связи рисунка с запуском.
 Исходная неуспешная baseline попытка сохраняется. Ошибка её post-run скрипта
 при JSON-сериализации возвращаемого Path — отдельный инфраструктурный дефект;
 она не заменяет двадцать native assertion failures. Повторный readback runtime
