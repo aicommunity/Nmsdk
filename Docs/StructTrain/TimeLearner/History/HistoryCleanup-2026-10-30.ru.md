@@ -31,5 +31,6 @@ recorded runtime/binary identity и критерий опыта остаются
 Удаление derived files не является пересмотром августовских 4/8–6/8, изменением
 физики или заявлением о завершении всего рефакторинга.
 
-Статус этого документа до публикации: подготовленная и проверенная offline copy.
-Receipt замены origin и всех clones записывается отдельно после выполнения.
+Статус: origin и все 14 корневых копий заменены; 253 worktrees и восемь stash сохранены.
+Проверены fresh recursive checkout и 25/25 production tests без пропусков.
+[Итоговый receipt](../../../../Reports/StructTrain/TimeLearner/s10-root-history-cleanup-a1/README.md).
