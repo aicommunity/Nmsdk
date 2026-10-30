@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_pdf_visual_qa",
+  "schema_version": 1,
+  "host": "m40",
+  "records": [
+    {
+      "label": "classic-overview",
+      "source_relative": "cases/Classic_2000_N0_configured_repeats/report/probe-0000/soma-002/overview.pdf",
+      "source_sha256": "f4b5acbeb361b386617d04741b3ca6fd70fbc586333d7abc84f543a51b9ab97c",
+      "preview": "classic-overview.png",
+      "dpi": 160
+    },
+    {
+      "label": "branch-zoom",
+      "source_relative": "cases/Branch_2000_N0_configured_repeats/report/probe-0008/soma-001/zoom-002.pdf",
+      "source_sha256": "bbd3b681d5c9eea330855bcabe5e78ab64bab179fbcd82adb58eb8c892815034",
+      "preview": "branch-zoom.png",
+      "dpi": 160
+    }
+  ],
+  "human_visual_review_complete": false,
+  "scientific_verdict": null,
+  "source_plot_report_commit": "83b9651c4c5f6fa7c15ef30e03381d3b68d82d3c",
+  "spike_policy_auditor_root": "7b808c11e0d53234ae449790caa6b9f0e949a291",
+  "spike_policy_gate_tests": 2
+}
