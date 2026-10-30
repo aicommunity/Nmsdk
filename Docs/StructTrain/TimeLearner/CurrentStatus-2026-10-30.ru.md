@@ -125,3 +125,16 @@ PulseLib fix повторных boundary summaries принят в develop
 
 Все эти требования остаются в исходной цели. Новый набор адресных проверок
 закрывает конкретный подэтап, а не целые этапы 1–12 автоматически.
+
+## Очистка истории и замыкание повторной границы
+
+Опубликован исходный develop merge `243778a0b51c77e4014459f7e8d7feac4ee5601c`;
+после удаления производных отчётов его адрес
+`12c1192b89fe4af4f6d356114e61316489e43b71`. Актуальная история содержит
+проверенный resolver старых SHA. Origin и все 14 root copies заменены с backups,
+сохранены 253 worktrees и восемь stash; сабмодули не переписаны.
+Fresh recursive checkout develop `a67b1323a449255081c81ed47d4ccc1a368fc985`
+восстановил точные семь gitlinks; 25/25 checks и оба compact bundles приняты.
+Это замыкание Git/data, без нового запуска C++ или научного опыта.
+[Receipt](../../../Reports/StructTrain/TimeLearner/s10-root-history-cleanup-a1/README.md).
+Открытые этапы общего плана сохраняются.
