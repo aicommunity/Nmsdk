@@ -115,6 +115,17 @@ soma нужны крупные временные графики мембран�
 неразличимые детали требуют дополнительных zoom-панелей и повторной приёмки.
 Нормативная детализация: [VisualTestReports](VisualTestReports.ru.md).
 
+Уточнение пользователя 30.10.2026 о хранении: source Git должен оставаться
+компактным. В нём публикуются lossless compressed primary data, полные модели,
+конфиги, события/метрики, runtime/code manifests и выбранные контрольные figures.
+Все требуемые крупные графики по-прежнему строятся, но полный переносимый report
+хранится как воспроизводимый кэш на M40. Receipt связывает его с raw hashes,
+версией renderer и runtime; потеря cache компенсируется регенерацией из Git.
+Наличие только абсолютного пути к утраченным первичным данным не допускается.
+Не публиковать полный PNG/SVG/PDF набор каждого implementation gate в source Git.
+Уже опубликованная история сохраняется без переписывания. Контракт нового
+bundle/extract/regenerate пути и проверки входят в этапы 2/9/10/11/12.
+
 Обязательны Classic/Branch, N0/N1, N=1/2/4/>4, mode0/1, storage/load/reuse/growth,
 Neuron structure0/1/2, используемые физические классы/LT/inhibition combinations,
 2000/20000 Hz, reset/continuous, Ctrim off/on, все PostTune, malformed observations,

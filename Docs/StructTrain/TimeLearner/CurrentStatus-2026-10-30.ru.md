@@ -67,12 +67,44 @@ Reports tree. Это обнаружено до root develop merge; незаве�
 
 ## Что остаётся до завершения полного плана
 
+Позднее дополнение 30.10: readable partial renderer принят адресным подэтапом
+в root develop `f5926a3ba48cd10cc772855bbdaf5580e9f0f4a0` (по 24/24 tests на
+worker; scoped просмотр четырёх Poppler previews). Он сохраняет крайние glyphs
+и обрезку waveform внутри временного окна. Требование фактического масштаба
+просмотра усилено в плане; preview не заменяет полноразмерные панели.
+
+Рабочая repeated-boundary ветка получила по 92/92 combined readback tests
+на обоих workers: root `b2f357bcc75264a233524bfb30153b5d95816d6c`.
+Дополнительный native-test catalog проверяет точные 51 test ID, 26 фаз,
+52 отдельных исполнения, 338 проб и 507 trial–soma пар на worker.
+[Контракт и scope](NativeTestRunVisualReports.ru.md).
+Полные новые графики строятся отдельно; до их readback/визуальной проверки
+и согласованного child → root merge repeated-boundary подэтап не принят.
+Прежние 132-пробные графики не подменяют новые A3 данные по совпадению IDs.
+Классификация целых этапов и оставшиеся требования ниже не изменились.
+
+Позднейшее уточнение: пользователь выбрал компактный Git вместо публикации
+всех производных PNG/SVG/PDF каждого gate. Первый native-fixture archive/cache
+путь прошёл на обоих workers 10/10 archive checks и 5/5 boundary evidence checks
+после extraction. Пакеты около 4.31 MB каждый сохраняют все primary data и
+модели, runtime/source provenance и шесть выбранных PNG. Верифицированы все
+34 outer / 8 inner hashes каждого пакета. Полный cache M40 реально восстановлен:
+338 probes / 507 pairs, 3087 byte-identical PNG и 3/3 graphical readback tests.
+См. [CompactArtifactBundles](CompactArtifactBundles.ru.md).
+
+PulseLib fix повторных boundary summaries принят в develop
+`086b04fb43bb57506558bfb6beba6250f61a6ce2`; Core byte-identical проверенному
+7b5939c. Root merge и fresh closure пока отмечаются отдельно. Ранее опубликованные
+полные новые graphical branches сохраняются в истории и не объединяются
+в source develop. Исторические 1.73 GB reports не удалялись; новая компактная
+политика сама по себе не очищает прежнюю историю и не завершает её аудит.
+
 1. Доказательства: закончить исторический реестр с августа, сопоставление волн
    аудитов и semantic review всех параметров/инструментов; не смешивать старые
    критерии с текущими.
 2. Lifecycle/storage/export: полная матрица reuse/Copy/Load/growth, heterogeneous
-   physics и частот, completed/stopped/warm состояния новой repeat policy,
-   full model transfer и независимый frozen Test.
+   physics и частот, более широкие N/repeat/profile combinations,
+   полный production model transfer и независимый frozen scientific Test.
 3. Алгоритмы: оставшаяся матрица N0/N1, invalid/ambiguous measurements,
    quantization, shared Branch effects и optional C-trim; final repeatability
    отдельно от локальных повторов кандидата.

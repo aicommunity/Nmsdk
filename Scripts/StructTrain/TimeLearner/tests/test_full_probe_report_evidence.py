@@ -24,12 +24,22 @@ class FullProbeReportEvidenceTest(unittest.TestCase):
             expected.update(r['trial_id'] for r in summary['certificate']['residuals'])
             expected.update(r['trial_id'] for r in summary['candidates'])
             expected.update(r['anchor_trial_id'] for r in summary['candidates'])
+            primary={}
+            marker='_xmlprobe_' if source.name.endswith('_xml_summary.json') else '_service_'
+            for path in self.native.glob(prefix+marker+'*.json'):
+                packet=load(path);trial=packet['requested_specification']['trial_id']
+                self.assertNotIn(trial,primary)
+                primary[trial]=(packet,path.with_suffix('.csv'))
+            self.assertEqual(set(primary),expected)
             directory=self.root/'cases'/prefix/'report';manifest=load(directory/'manifest.json')
             self.assertEqual({r['trial_id'] for r in manifest['reports']},expected)
             self.assertEqual(len(manifest['reports']),len(expected))
             for entry in manifest['reports']:
                 report=directory/entry['folder'];item=load(report/'manifest.json')
                 packet=load(report/'primary/probe.json')
+                source_packet,trace=primary[entry['trial_id']]
+                self.assertEqual(packet,source_packet)
+                self.assertEqual((report/'primary/trace.csv').read_bytes(),trace.read_bytes())
                 self.assertIs(packet['observation']['specification']['record_spikes'],False)
                 self.assertIsNone(packet['observation']['spike_count'])
                 self.assertIs(item['spike_recording_enabled'],False)

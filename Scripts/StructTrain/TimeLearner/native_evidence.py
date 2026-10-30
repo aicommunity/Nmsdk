@@ -16,7 +16,7 @@ import zlib
 from pathlib import Path
 from typing import Any
 
-AUDITOR_VERSION = 4
+AUDITOR_VERSION = 5
 
 
 class EvidenceError(ValueError):
@@ -285,6 +285,43 @@ def audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str, 
         raise EvidenceError("malformed_native_evidence:" + str(error)) from error
 
 
+def validate_search_history_availability(summary: dict[str, Any]) -> bool | None:
+    """Absent legacy marker means unknown, never a fabricated retained search."""
+    retained = summary.get("search_history_retained")
+    if "search_history_retained" in summary:
+        require(type(retained) is bool, "invalid_search_history_marker")
+    if summary.get("schema_version") == 2:
+        require(type(summary.get("candidate_repeat_groups")) is list, "invalid_candidate_repeat_groups")
+    if retained is False:
+        require(all(summary[name] == [] for name in ("candidates", "rejections", "resistance_domains")) and
+                not any(name in summary for name in ("accepted_parameters", "search_probes", "applied_edits")),
+                "unretained_search_contains_history")
+        require(not summary.get("candidate_repeat_groups"), "unretained_search_contains_repeat_groups")
+    return retained
+
+
+def validate_configured_repeat_policy(configuration: dict[str, Any], summary: dict[str, Any]) -> int:
+    """Bind the declared repeat factor to evidence, without replacing the native codec."""
+    schema = configuration.get("schema_version")
+    require(configuration.get("kind") == "timelearner_native_cold_configuration" and
+            type(schema) is int and schema in (1, 2), "unknown_repeat_configuration_schema")
+    require(type(summary.get("schema_version")) is int and summary["schema_version"] == schema,
+            "configuration_summary_repeat_schema_mismatch")
+    search, measured = configuration["search"], summary["configuration"]
+    normalization = configuration["model"]["normalization"]
+    require(normalization in ("N0", "N1") and
+            measured["normalization"] == {"N0": "synapse_count", "N1": "tip_resistance"}[normalization],
+            "configuration_summary_normalization_mismatch")
+    if schema == 1:
+        require("n0_candidate_repeats" not in search and "n0_candidate_repeats" not in measured,
+                "legacy_configuration_contains_repeat_factor")
+        return 1
+    repeats = count(search["n0_candidate_repeats"])
+    require(normalization == "N0" and 2 <= repeats <= 128 and
+            count(measured["n0_candidate_repeats"]) == repeats, "configuration_summary_repeat_policy_mismatch")
+    return repeats
+
+
 def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
                            origin_stimulus_id: str) -> dict[str, Any]:
     """Compare exported certificate/candidates with independently audited probes.
@@ -301,6 +338,7 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
                 "repeat_policy_requires_summary_schema_2")
     require(summary["contains_evaluation_verdict"] is False and summary["model_state_kind"] == "learned_solo",
             "unsupported_summary_state_kind")
+    history_retained = validate_search_history_availability(summary)
     refs = summary["references"]
     require(bool(refs) and len({r["input_id"] for r in refs}) == len(refs), "duplicate_or_missing_reference")
     targets: dict[str, float] = {}
@@ -382,7 +420,12 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
         exact = check_residual(residual, input_id, residual["trial_id"], residuals[anchor_id]["trial_id"]) and exact
     require(certificate["exact"] is exact, "certificate_exact_mismatch")
     require((summary["outcome"] == "exact") == exact, "outcome_certificate_mismatch")
-    require(summary["actual_parameters"] == summary["accepted_parameters"], "accepted_actual_parameters_mismatch")
+    # Restored model boundaries carry reference/final proof and actual graph
+    # parameters, not an accepted search snapshot. All proof, bounds and primary
+    # measurement checks still apply; missing history is never called measured.
+    if history_retained is not False:
+        require("accepted_parameters" in summary, "missing_retained_search_parameters")
+        require(summary["actual_parameters"] == summary["accepted_parameters"], "accepted_actual_parameters_mismatch")
     configuration = summary["configuration"]
     bounds = configuration["bounds"]
     require(len(bounds) == len(summary["actual_parameters"]) == len(refs), "parameter_dimension_mismatch")
@@ -417,7 +460,6 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
         candidates = {c["trial_id"]: c for c in summary["candidates"]}
         require(len(candidates) == len(summary["candidates"]), "duplicate_candidate_trial")
         covered, anchors_used = set(), set()
-        require(type(summary["candidate_repeat_groups"]) is list, "invalid_candidate_repeat_groups")
         for group in summary["candidate_repeat_groups"]:
             require(type(group) is dict and set(group) == {"input_index", "model_epoch", "model_revision", "full_parameters",
                     "trial_ids", "anchor_trial_ids", "minimum_raw_potential", "maximum_raw_potential", "within_timing",
@@ -461,6 +503,7 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
     repeat_validation = ({"training_summary_schema": 2, "candidate_repeat_groups_checked": len(summary["candidate_repeat_groups"])}
                          if schema == 2 else {})
     return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True, "exact": exact, **repeat_validation,
+            "search_history_retained": history_retained,
             "model_revision": certificate["model_revision"], "reference_count": len(refs),
             "candidate_count": len(summary["candidates"]), "evaluation_verdict": None}
 

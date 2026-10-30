@@ -102,11 +102,15 @@ NaN, missing ticks и censored хвост видны как разрывы/от�
   и versioned analysis. Создаёт переносимый HTML/Markdown index, крупные overview,
   zoom views, vector exports, previews и manifest рисунков. Ссылки относительные;
   отчёт открывается из чистого checkout без CDN, сервера или внешних файлов.
-- Этап 10: публиковать изображения, индексы, plot manifest и необходимые primary
-  data через Git в Reports/StructTrain/TimeLearner. Для больших traces допустимо
-  сжатие с checksum. Отсутствие графика любой ожидаемой trial/soma пары делает
-  новый итоговый отчёт неполным. Diagnostic/partial отчёт публикуется с этим
-  статусом; пустой placeholder не подтверждает полноту измерения.
+- Этап 10, уточнён пользователем 30.10.2026: компактный Git хранит lossless
+  compressed primary data, модели, конфиги, метрики, manifests и выбранные
+  контрольные figures в Reports/StructTrain/TimeLearner. Полный переносимый
+  report всех ожидаемых trial/soma пар — воспроизводимый cache на M40.
+  Сохранять renderer/runtime recipe и hashes; проверить реальную распаковку и
+  регенерацию. Отсутствие требуемого графика в полном cache делает именно этот
+  report неполным; хранение выбранных рисунков в Git не выдаётся за просмотр
+  всей матрицы. Diagnostic/partial статус сохраняется. Пустой placeholder не
+  подтверждает измерение, а cache path не заменяет опубликованные raw data.
 - Этап 12: описать CLI, каналы/единицы, правила X/Y scaling, zoom и чтение отчёта;
   связать рисунки с критериями оценки, не подменяя визуализацией numeric validation.
 

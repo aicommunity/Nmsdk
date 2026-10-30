@@ -120,6 +120,39 @@ schema 2 и `observation_policy=complete_or_partial` включает censored �
 Полнота CSV не превращается в валидность измерения. Подробности и серверные
 проверки: Docs/StructTrain/TimeLearner/PartialProbeVisualReports.ru.md.
 
+Для полного текущего native test run используется объявленный контракт cases,
+фаз и отдельных исполнений:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner report Scripts/StructTrain/TimeLearner/specs/repeat-boundary-native-v1.json --format native-test-run --artifacts IMMUTABLE_READBACK --output NEW_REPORT
+```
+
+`IMMUTABLE_READBACK` содержит `native.xml` и `native/`; выход находится вне
+этого каталога. Проверяются все ожидаемые фазы, recorder counters и packets/CSV,
+включая partial, warm и embedded fresh-process probes. Пропавшая фаза либо
+orphan CSV не могут молча уменьшить ожидаемое покрытие. Это адаптер конкретного
+native fixture suite, не замена общего experiment runner. Контракт и ограничения:
+Docs/StructTrain/TimeLearner/NativeTestRunVisualReports.ru.md.
+
+### Компактные первичные данные в Git
+
+По выбранной пользователем политике полный PNG/SVG/PDF набор остаётся
+воспроизводимым кэшем M40. В Git сохраняются lossless primary archive, модели,
+конфиги, метрики/manifests и выбранные source-bound PNG:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner bundle pack-native-tests CONTRACT.json --artifacts IMMUTABLE_READBACK --selected-report COMPLETE_CACHED_REPORT --output NEW_BUNDLE
+python3 -m Scripts.StructTrain.TimeLearner bundle verify BUNDLE
+python3 -m Scripts.StructTrain.TimeLearner bundle extract BUNDLE --output NEW_EXTRACTED
+```
+
+`--maximum-bytes` задаёт явный budget uncompressed bytes для pack/verify/extract
+(default 8 GiB). Превышение budget, повреждение payload/metadata, paths/links,
+неучтённый файл или несовпадающий выбранный рисунок запрещают успешную проверку.
+Из распакованных данных строится полный report версией renderer из manifest;
+научный verdict не следует из наличия архива. Контракт и scope:
+Docs/StructTrain/TimeLearner/CompactArtifactBundles.ru.md.
+
 ### Git closure publication
 
 `python3 -m Scripts.StructTrain.TimeLearner publish publication.json --root CHECKOUT --output NEW_RECEIPT.json`
