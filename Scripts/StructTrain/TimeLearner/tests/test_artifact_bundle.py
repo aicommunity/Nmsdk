@@ -108,6 +108,11 @@ class ArtifactBundleTest(unittest.TestCase):
             extract_bundle(bundle, self.root/"bad", maximum_bytes=1)
         self.assertFalse((self.root/"bad").exists())
 
+    def test_pack_honors_explicit_byte_budget_before_creating_output(self):
+        with self.assertRaisesRegex(EvidenceError, "extraction_budget"):
+            pack_native_tests(self.contract, self.source, self.root/"bad", self.report, maximum_bytes=1)
+        self.assertFalse((self.root/"bad").exists())
+
     def test_metadata_only_corruption_cannot_hide_behind_unchanged_archive(self):
         bundle = self.pack(); value = load(bundle/"manifest.json")
         value["inventory"]["trials"] += 1

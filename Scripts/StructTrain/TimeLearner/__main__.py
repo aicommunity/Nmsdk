@@ -97,7 +97,7 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.artifacts is not None and args.selected_report is not None and args.output is not None,
                         "native_bundle_requires_artifacts_selected_report_and_output")
                 result = pack_native_tests(args.source.resolve(strict=True), args.artifacts.resolve(strict=True),
-                                          args.output.resolve(), args.selected_report.resolve(strict=True))
+                                          args.output.resolve(), args.selected_report.resolve(strict=True), args.maximum_bytes)
             else:
                 require(args.artifacts is None and args.selected_report is None, "unexpected_bundle_source_options")
                 if args.action == "extract":
