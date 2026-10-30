@@ -11,7 +11,7 @@ import signal
 import subprocess
 import time
 
-from .native_evidence import require
+from .native_evidence import EvidenceError, load, require
 from .runtime import digest_file, digest_json, loaded_process_files, runtime_content_identity
 
 
@@ -99,7 +99,11 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
                 _write(output/"owned-process.json", owned)
                 mappings = loaded_process_files(process.pid, executable)
                 _write(output/"loaded-files.json", mappings)
-            except (FileNotFoundError, ProcessLookupError, RuntimeError) as error:
+            except RuntimeError as error:
+                if "no executable mappings" not in str(error):
+                    raise EvidenceError("loaded_runtime_integrity_failure:"+str(error)) from error
+                mapping_error = str(error)
+            except (FileNotFoundError, ProcessLookupError) as error:
                 mapping_error = str(error)  # a fast exit is not evidence of loaded-file closure
             while process.poll() is None:
                 if cancel.exists():
@@ -141,3 +145,30 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
               "ownership_scope": "launched_executable_only", "scientific_verdict": None}
     _write(output/"result.json", result)
     return result
+
+
+def main(argv=None):
+    import argparse
+    import sys
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--runtime-manifest", type=Path, required=True)
+    parser.add_argument("--working-directory", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--wall-seconds", type=float, required=True)
+    parser.add_argument("--cancel-file", type=Path)
+    parser.add_argument("arguments", nargs=argparse.REMAINDER)
+    args = parser.parse_args(argv)
+    arguments = args.arguments[1:] if args.arguments[:1] == ["--"] else args.arguments
+    try:
+        result = execute(load(args.runtime_manifest), arguments, args.working_directory, args.output,
+                         args.wall_seconds, args.cancel_file)
+        print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+        return 0 if result["execution"] == "completed" else 2
+    except (EvidenceError, OSError, KeyError, TypeError, ValueError) as error:
+        print(json.dumps({"kind": "timelearner_process_result", "execution": "process_error",
+                          "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
