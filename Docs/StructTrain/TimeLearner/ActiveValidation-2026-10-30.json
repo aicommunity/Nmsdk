@@ -88,5 +88,82 @@
   "schema_version": 1,
   "goal_complete": false,
   "accepted_root_before_stage": "8fc54ce013d06130009fa250b15304b816a3d620",
-  "observed_at_utc": "2026-10-30T13:55:55.2511297Z"
+  "observed_at_utc": "2026-10-30T13:55:55.2511297Z",
+  "repeat_boundary_visual_extension": {
+    "scope": "Working feature; not full plan or full visual matrix acceptance",
+    "pulse_feature": "7b5939c5744877ba1a762393d78f7183853fd5c0",
+    "pulse_develop_merge_pending": true,
+    "renderer_scoped_develop_merge": "f5926a3ba48cd10cc772855bbdaf5580e9f0f4a0",
+    "combined_root": "b2f357bcc75264a233524bfb30153b5d95816d6c",
+    "combined_tests_per_worker": 92,
+    "combined_errors": 0,
+    "combined_skips": 0,
+    "combined_reports": [
+      {
+        "worker": "elder1",
+        "commit": "a19ece3191c0c1fd3693bf09cad89a3f0b2b69b9",
+        "stored_hashes_verified": 630
+      },
+      {
+        "worker": "m40",
+        "commit": "66e9d7ea225419ecbf470e8eb924cdbbec4f5f9a",
+        "stored_hashes_verified": 630
+      }
+    ],
+    "immutable_input_guard": {
+      "root": "fb01871cf2158ece735ab45e148fc20fc33594cd",
+      "tests_per_worker": 7,
+      "errors": 0,
+      "skips": 0,
+      "reports": [
+        {
+          "worker": "elder1",
+          "commit": "ccc7e9cc4bb3872a17dcc15f21b433be42883c50",
+          "stored_hashes_verified": 6
+        },
+        {
+          "worker": "m40",
+          "commit": "1a51ad1a7b6d9641acd1b574607421d442fe2c7e",
+          "stored_hashes_verified": 6
+        }
+      ]
+    },
+    "expected_native_cases": 51,
+    "expected_phases": 26,
+    "expected_standalone_executions": 52,
+    "expected_primary_probes_per_producer": 338,
+    "expected_trial_soma_pairs_per_producer": 507,
+    "full_visual_jobs": [
+      {
+        "last_observation": "live process confirmed; 2892 SVG files; not accepted as complete",
+        "render_worker": "10.245.1.17",
+        "pid": 2649672,
+        "producer": "elder1",
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-elder1-a1"
+      },
+      {
+        "last_observation": "live process confirmed; 2835 SVG files; not accepted as complete",
+        "render_worker": "10.245.1.17",
+        "pid": 2649685,
+        "producer": "m40",
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-m40-a1"
+      }
+    ],
+    "dependent_readback": {
+      "expected_tests_per_producer": 10,
+      "worker": "10.245.1.17",
+      "pid": 2656993,
+      "last_observation": "live process confirmed; waits for exact render jobs to exit successfully",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-readback-a1"
+    },
+    "dependent_publication": {
+      "worker": "10.245.1.17",
+      "published": false,
+      "pid": 2658504,
+      "last_observation": "live process confirmed; waits for successful full readback",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-publication-a1"
+    },
+    "global_visual_acceptance": false,
+    "scientific_verdict": null
+  }
 }
