@@ -48,7 +48,7 @@ def _validate_spec(spec):
     require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_calibration_coverage")
     require(type(spec["thresholds"]) is list and bool(spec["thresholds"]), "empty_calibration_grid")
     thresholds = [number(value) for value in spec["thresholds"]]
-    require(all(value > 0 for value in thresholds) and len(set(thresholds)) == len(thresholds), "invalid_calibration_threshold_grid")
+    require(len(set(thresholds)) == len(thresholds), "invalid_calibration_threshold_grid")
     budget = count(spec["maximum_candidates"])
     require(budget > 0, "invalid_calibration_budget")
     trials = spec["trials"]

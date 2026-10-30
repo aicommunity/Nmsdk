@@ -29,7 +29,7 @@
 
 ```text
 freeze source recognition state and calibration data/design
-for each declared finite positive threshold within bounds/budget:
+for each declared finite threshold within model/protocol bounds and budget:
     derive candidate from the same immutable source
     native import, initialization and declared reset policy
     execute every expected full target/foil trial through native scheduler
@@ -59,7 +59,8 @@ Historical Same-Matrix и Frozen Independent — разные маркирова
 строит low/high threshold candidates, выполняет native owner import и штатные
 Build/Init/Reset, полные target/foil пробы и cancel/gap controls. Проверяются
 неизменность source, отсутствие Calculate при создании, повторяемость package,
-rejection NaN/Inf/nonpositive/nested/подменённого record и frozen graph hashes.
+rejection NaN/Inf/nested/подменённого record и frozen graph hashes. Исходный
+positive-only v1 также отклонял nonpositive; пересмотр этого ограничения см. ниже.
 Для low threshold при 2000 Гц требуется реальный spike в контрольных пробах.
 
 Первоначальная версия root `72b967641ac8aeb89b0b7821adc455597917bbaf` /
@@ -283,3 +284,26 @@ python3 -m Scripts.StructTrain.TimeLearner analyze ASSESSMENT.json --format nati
 
 Expected evaluation spec и source CSV обязательны. Согласованность расчётов
 не выдаётся за подтверждение исполнения simulator, калибровку или training Exact.
+
+## Пересмотр диапазона порога и проверка роли LT-зоны
+
+CreateClassSamples (`NPulseLibrary.cpp`) регистрирует штатные IaF/Cable LT images
+с Threshold=-0.055 и ThresholdOff=-0.07. Поэтому ограничение threshold>0 в новом
+калибраторе не является общим физическим контрактом. Рабочий
+`explicit-native-threshold-v2` принимает конечные signed значения, а
+`nonspiking-native-ltz-bracket-v2` — конечные signed bounds. Старые v1 records
+читаются с прежней областью допустимости. Структура JSON schema 1 сохраняется;
+семантическая версия алгоритма явно записана в record. Baseline диапазон 1e-6..1
+не расширяется автоматически при повторе старых экспериментов.
+
+Наличие Threshold не означает, что он управляет spikes: frequency-encoding
+NPSimple и continuous LT-зоны требуют другой постановки. Новый preflight helper
+проверяет фактическую C++ реализацию (stock Threshold и leaky NPulseLTZone),
+а не строковое имя образа. В частности, stock `NPulseLTZoneIzhikevich` является
+образом NPulseLTZoneThreshold; отдельный одноимённый C++ класс — другая реализация.
+Unknown overrides не получают выдуманный threshold operand; требуется адаптер.
+Ordinary frozen schema-1 observation и чтение legacy v1 packages сохраняются.
+
+Исправление требует нового server gate. Изолированный IaF LT-zone control
+проверяет signed threshold и реальный spike через штатный scheduler; он не
+подтверждает структурное обучение всей IaF модели и не содержит фиктивной сомы.

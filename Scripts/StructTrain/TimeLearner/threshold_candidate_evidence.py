@@ -61,7 +61,11 @@ def audit_threshold_candidate(package, source_case=None):
                 and package["implementation_id"] == source["implementation_id"] and
                 package["dataset"] == source["dataset"], "threshold_candidate_context_changed")
         threshold = number(package["threshold"])
-        require(threshold > 0, "invalid_threshold_candidate_value")
+        actual_record = package["candidate_record"]
+        require(type(actual_record) is dict and actual_record.get("algorithm") in
+                ("explicit-native-threshold-v1", "explicit-native-threshold-v2"), "unknown_threshold_candidate_algorithm")
+        algorithm = actual_record["algorithm"]
+        require(algorithm == "explicit-native-threshold-v2" or threshold > 0, "invalid_threshold_candidate_value")
         base, archive = source["neuron"], package["neuron"]
         before = _graph(base, source["model_revision"])
         after = _graph(archive, package["model_revision"])
@@ -80,11 +84,10 @@ def audit_threshold_candidate(package, source_case=None):
         zones[0]["parameters"]["Threshold"]["data"]["value"] = struct.pack(">d", threshold).hex()
         expected_identity["sha256"] = canonical_model_sha256(expected_identity["model"])
         require(after["identity"] == expected_identity, "threshold_candidate_changed_other_physics")
-        record = {"schema_version": 1, "algorithm": "explicit-native-threshold-v1",
+        record = {"schema_version": 1, "algorithm": algorithm,
                   "source_recognition_sha256": source["sha256"], "source_model_revision": source["model_revision"],
                   "model_revision": package["model_revision"], "ltzone_path": path,
                   "original_threshold": original, "threshold": threshold, "calibrated": False}
-        actual_record = package["candidate_record"]
         require(type(actual_record) is dict and actual_record == record and
                 type(actual_record["schema_version"]) is int and actual_record["calibrated"] is False,
                 "threshold_candidate_record_mismatch")
