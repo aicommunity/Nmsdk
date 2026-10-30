@@ -29,7 +29,7 @@ def _write(path, value):
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False)+"\n", encoding="utf-8")
 
 
-def pack_native_tests(contract, artifacts, output, selected_report):
+def pack_native_tests(contract, artifacts, output, selected_report, maximum_bytes=8*1024**3):
     root = artifacts.resolve(strict=True); report = selected_report.resolve(strict=True)
     require(not output.resolve().is_relative_to(root) and not output.resolve().is_relative_to(report),
             "bundle_output_must_be_outside_sources")
@@ -47,6 +47,8 @@ def pack_native_tests(contract, artifacts, output, selected_report):
     entries = [{"path": _name(name), "bytes": p.stat().st_size, "sha256": _sha(p),
                 "role": "primary_trace" if p.suffix == ".csv" else "native_record" if name.startswith("native/") else "provenance"}
                for name, p in sorted(sources.items())]
+    require(type(maximum_bytes) is int and maximum_bytes > 0
+            and sum(e["bytes"] for e in entries) <= maximum_bytes, "primary_bundle_exceeds_extraction_budget")
     # Bind selected figures to packets/CSV from THIS producer, including /probe
     # wrappers. Equal trial IDs alone do not establish this association.
     rendered = load(report/"report/manifest.json")
@@ -59,7 +61,7 @@ def pack_native_tests(contract, artifacts, output, selected_report):
         for index, trial in enumerate(expected["trials"]):
             primary[folder+f"/probe-{index:04d}"] = trial
     qa = load(report/"pdf-qa/manifest.json")
-    require(qa.get("kind") == "timelearner_full_native_visual_pdf_qa" and qa.get("schema_version") == 1
+    require(qa.get("kind") == "timelearner_full_native_visual_pdf_qa" and type(qa.get("schema_version")) is int and qa["schema_version"] == 1
             and type(qa.get("records")) is list and bool(qa["records"]), "unknown_selected_figure_source")
     selected = []; names = set(); runtime = None
     for item in qa["records"]:
@@ -107,7 +109,7 @@ def pack_native_tests(contract, artifacts, output, selected_report):
     # A source changed during snapshot must not become a certified archive.
     require(all(_sha(sources[e["path"]]) == e["sha256"] for e in entries), "primary_source_changed_during_bundle")
     _write(output/"SHA256SUMS.json", {p.relative_to(output).as_posix(): _sha(p) for p in sorted(output.rglob("*")) if p.is_file()})
-    verify_bundle(output)
+    verify_bundle(output, maximum_bytes)
     return {"kind": manifest["kind"], "primary_files": len(entries), "archive_bytes": archive.stat().st_size,
             "uncompressed_bytes": sum(e["bytes"] for e in entries), "selected_figures": len(selected), "scientific_verdict": None}
 
