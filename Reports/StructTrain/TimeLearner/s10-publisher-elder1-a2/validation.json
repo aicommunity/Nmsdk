@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "host": "elder1",
+  "root": "e3a916fabca0fa7aa7559e7c6573e01b36b3669d",
+  "addressed_tests": 8,
+  "combined_tests": 26,
+  "skips": 0,
+  "failures": 0,
+  "errors": 0,
+  "raw_files": {
+    "a1/python.log": {
+      "sha256": "9c28b032e5ec51a8c754974762c6650a07b6abc4e159ad164a1aa7be92a145e3",
+      "bytes": 831
+    },
+    "a1/checkout.log": {
+      "sha256": "1c5bc6bffbf6611e39b9b9f25c4b5d33616ecd8ebacdad5c9328b0bf3f448e12",
+      "bytes": 194
+    },
+    "a1/process-exit-status.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "a2/combined.log": {
+      "sha256": "4da7b91119b546ec9ce60dde2683db94369d26886f73ac635b7dc482dc53eee4",
+      "bytes": 3511
+    },
+    "a2/combined.status.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "a2/python.log": {
+      "sha256": "53c5e8f6f206b0ea1d92c6d402c9cbc40a1f021392c4d8409c4c130d92f3b46b",
+      "bytes": 1075
+    },
+    "a2/checkout.log": {
+      "sha256": "69a4e8f83aa2f4e89ee16f2d0bbea061ffc80a165c54f5a7b917f801288d28af",
+      "bytes": 194
+    },
+    "a2/process-exit-status.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    }
+  },
+  "scope": "actual local Git working/bare repos and receive hooks, actual publish CLI receipt, existing runtime/condition regressions",
+  "external_git_server_fault_matrix_verified": false,
+  "scientific_verdict": null
+}
