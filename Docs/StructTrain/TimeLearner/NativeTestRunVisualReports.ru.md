@@ -77,3 +77,21 @@ Inventory различает 507 известных/рисуемых пар на
 частичные trials не превращаются в complete. Полное построение A3 графиков
 запущено отдельно на Data-диске M40 из Git-пакетов обоих producers, без новых
 native расчётов. Результат рендера и последующего readback здесь пока не принят.
+
+Последующее завершение исполнения: оба full render и зависимый readback
+завершились с process status 0. Для каждого producer построены все 338 проб /
+507 trial–soma пар; проверены 12925 nested stored hashes. Reader
+`fb01871cf2158ece735ab45e148fc20fc33594cd` выполнил по 10/10 addressed tests
+на каждом наборе, без skips/errors/failures: семь catalog/immutable-input controls
+и три полных readback checks. Эти проверки сравнивают каждый packet/CSV с
+оригиналом, проверяют все 507 наборов figures, PNG dimensions, zoom scale,
+vector exports и hashes всех файлов. Изменений физики или нового обучения нет.
+
+Git-публикация выполнена fail-closed после успешного readback:
+Elder `03d02cd5abb6923274fb83cd17361cc591a3666f`,
+M40 `bd79b0d31724f7230d658bcbc70bccdb5a0bdb25`.
+Каждый внешний пакет содержит 12954 stored hashes и около 684 MB исходных
+данных/рисунков. Вложенный portable report копируется без преобразования,
+включая исходные native logs: изменение их формата нарушило бы вложенные hashes.
+Шесть PDF каждого набора имеют Poppler previews с source hashes. Их локальная
+визуальная проверка и итоговый develop merge пока не заявлены.
