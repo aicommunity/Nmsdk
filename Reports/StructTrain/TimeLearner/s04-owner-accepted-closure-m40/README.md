@@ -1,5 +1,0 @@
-# Accepted owner and BOM source closure: M40
-
-A fresh root checkout of d7ee23f48ef4f4938373bd1f1be8e2336d1eb40b and all seven submodules was constructed from Git. Every child commit was explicitly fetched from its actual remote, checked out at the root-recorded gitlink, and verified clean. Recursive submodule status contains exactly seven matching gitlinks; the root was clean before adding this report. The clone shares immutable Git object storage with existing local repositories; this is a fresh working tree, not a claim of independent physical pack storage. All origins are reset to actual remote repository URLs.
-
-PulseLib develop merge 4e6be0cbc0215805cd40b881600934e35c86430e is recorded, Rdk remains tested c903b9bba4a31e604f9740ae6f6ed52a4e7de74a. This checkout includes the separately validated owner-binding and BOM/config work; no recognition runner is assumed. This is Git-closure validation, no numerical rerun and no whole-plan completion. Owner gates (46 native plus independent primary-data audits each) are in s04-editor-fixed-elder1 and s04-editor-fixed-m40; Rdk BOM narrow gates are in s04-bom-elder1 and s09-config-m40.

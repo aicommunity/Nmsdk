@@ -1,9 +1,0 @@
-# Frozen recognition response metrics: elder1
-
-Auditor source f2cf8b4ad passes 24 tests without skips/failures/errors: twelve metrics controls, seven primary-trial controls, five existing CLI regressions. Four model packages, sixteen complete native trials and 3856 primary frames are checked. Existing source/conversion audits additionally validate 56 primary training trials. Native observations are reused from root 127806a34 and the linked published native report; no new training or physical replay is claimed.
-
-The explicit fixture criterion is post-anchor target response / whole-window foil response, version 1, anchored at the last actual stimulus with a declared 0 to 20 ms target window. High-threshold profiles yield TP=0, FP=0, FN=2, TN=2. Low-threshold profiles yield TP=0, FP=1, FN=2, TN=1; their target spike is early for the declared window. Both reset policies fail this particular criterion. These dimensional integration controls are not the historical eight-pattern experiments and do not revise August's 4/8-6/8 observations.
-
-Evaluation specs, models, complete native observations and actual production CLI output are self-contained in cases/. Existing gzip assets keep their names rather than being double-compressed; the strict JSON loader reads gzip directly. The evaluation.json.gz files refer to adjacent trial-N.json.gz files and can be analyzed with --format recognition-evaluation --model model.json.gz after a clean Git checkout.
-
-Tests cover row permutation, missing/duplicate IDs, labels, incomplete windows, early target and late foil responses, continuous-stream gaps, changed threshold/calibration claims, malformed gzip and duplicate/nonfinite JSON. Synthetic mutations test response rules and are never counted as native runs. Reset policies are reported separately; pooled accuracy is descriptive. Native execution/provenance remains an external gate and the global evaluation verdict stays null until the production runner binds it.
