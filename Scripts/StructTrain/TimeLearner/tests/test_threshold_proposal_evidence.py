@@ -18,7 +18,7 @@ from ..calibration import RULE, calibration_dataset_digest, select_threshold, co
 from ..learned_evidence import load_case
 from ..model_identity import canonical_model_sha256 as sha
 from ..native_evidence import EvidenceError, load
-from ..threshold_proposal_evidence import audit_threshold_proposal
+from ..threshold_proposal_evidence import audit_threshold_proposal, audit_threshold_proposal_execution
 
 
 CRITERION = {"id": "post_anchor_target_whole_window_foil_v1", "anchor": "last_stimulus",
@@ -130,6 +130,25 @@ class NativeThresholdProposalEvidenceTest(unittest.TestCase):
             self.assertEqual(confirmed["calibrated"], confirmed["status"] == "confirmed")
             self.assertFalse(confirmed["native_execution_verified"])
             self.assertIsNone(confirmed["evaluation_verdict"])
+
+    def test_proposal_candidate_execution_and_restoration_links(self):
+        for base, source, characterization, proposal, search, _ in self.cases:
+            if search is None:
+                continue
+            record = load(self.root/(base+"_proposal_protocol.json"))
+            restored = load(self.root/(base+"_proposal_restoration.json"))
+            kwargs = {"characterization": characterization["candidate"], "search_run_id": search["evaluation_spec"]["run_id"],
+                      "confirmation_run_id": base+"_proposal_confirmation_frozen"}
+            actual = audit_threshold_proposal_execution(record, proposal, search["candidate"], restored, source, **kwargs)
+            self.assertTrue(actual["declared_links_consistent"])
+            self.assertFalse(actual["native_execution_verified"])
+            for field in ("candidate_sha256", "proposal_sha256", "source_recognition_sha256", "confirmation_run_id"):
+                bad = copy.deepcopy(record);bad[field] = "wrong"
+                with self.assertRaises(EvidenceError):
+                    audit_threshold_proposal_execution(bad, proposal, search["candidate"], restored, source, **kwargs)
+            bad = copy.deepcopy(restored);bad["restored"] = 1
+            with self.assertRaises(EvidenceError):
+                audit_threshold_proposal_execution(record, proposal, search["candidate"], bad, source, **kwargs)
 
     def test_resigned_forged_bracket_is_rejected(self):
         _, source, characterization, proposal, _, _ = next(row for row in self.cases if row[0].startswith("Branch_2000_"))

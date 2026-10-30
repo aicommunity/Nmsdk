@@ -14,6 +14,41 @@ FIELDS = {"kind", "schema_version", "algorithm", "model_revision", "training_pat
           "trials", "calibrated", "evaluation_verdict", "sha256"}
 
 
+def audit_threshold_proposal_execution(record, proposal, candidate, restoration, source_case, *, characterization, search_run_id, confirmation_run_id):
+    """Check declared links and final restoration; this is not process execution proof."""
+    try:
+        audit_threshold_candidate(candidate, source_case)
+        audit_threshold_candidate(characterization, source_case)
+        source = candidate["source_recognition"]
+        require(characterization["source_recognition"] == source and proposal["model_revision"] == characterization["model_revision"],
+                "threshold_proposal_characterization_source_changed")
+        require(proposal["sha256"] == canonical_model_sha256({k: v for k, v in proposal.items() if k != "sha256"}) and
+                proposal["status"] == "proposed" and number(proposal["threshold"]) == number(candidate["threshold"]),
+                "threshold_proposal_candidate_changed")
+        require(type(search_run_id) is str and bool(search_run_id) and type(confirmation_run_id) is str and
+                bool(confirmation_run_id) and search_run_id != confirmation_run_id, "invalid_threshold_proposal_run_ids")
+        expected = {"kind": "native_threshold_proposal_execution", "schema_version": 1,
+                    "source_recognition_sha256": source["sha256"], "proposal_sha256": proposal["sha256"],
+                    "candidate_sha256": candidate["sha256"], "primary_policy": "reset_per_trial",
+                    "search_run_id": search_run_id, "confirmation_run_id": confirmation_run_id,
+                    "confirmation_policy": "fresh_native_import_from_same_source",
+                    "final_state_policy": "restore_original_recognition", "calibrated": False}
+        require(type(record) is dict and type(record.get("schema_version")) is int and
+                record.get("calibrated") is False and record == expected, "threshold_proposal_execution_links_changed")
+        expected_restoration = {"kind": "native_threshold_proposal_restoration", "schema_version": 1,
+                    "model_revision": source["model_revision"], "source_recognition_sha256": source["sha256"],
+                    "restored": True, "calibrated": False}
+        require(type(restoration) is dict and type(restoration.get("schema_version")) is int and
+                restoration.get("restored") is True and restoration.get("calibrated") is False and
+                restoration == expected_restoration, "threshold_proposal_restoration_changed")
+        return {"declared_links_consistent": True, "restoration_record_consistent": True,
+                "native_execution_verified": False, "calibrated": False, "evaluation_verdict": None}
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, IndexError) as error:
+        raise EvidenceError("malformed_threshold_proposal_execution:"+str(error)) from error
+
+
 def audit_threshold_proposal(proposal, expected_spec, observations, characterization, source_case, *, minimum_threshold, maximum_threshold):
     try:
         require(type(proposal) is dict and set(proposal) == FIELDS and
