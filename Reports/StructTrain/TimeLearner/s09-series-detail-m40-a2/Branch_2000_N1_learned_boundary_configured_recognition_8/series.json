@@ -1,0 +1,96 @@
+[
+  {
+    "descriptor": {
+      "index": 0,
+      "path": "$.Soma1.SumPotential",
+      "class": "Branch_2000_N1_learned_boundary_configured_recognition_8_Body_Membrane",
+      "units": "model_units_SI_unverified",
+      "adapter": "native_recognition_schema_1"
+    },
+    "timeline": [
+      {
+        "presentation_index": 0,
+        "trial_id": "trial_0",
+        "sample_id": "training_target",
+        "label": "target",
+        "begin": 5.9265,
+        "planned_end": 6.0465,
+        "last_observed": 6.0465,
+        "reset_policy": "reset_per_trial",
+        "reset_boundary": 5.9265,
+        "exact_reset_timestamp": null,
+        "onset_to_onset_seconds": null,
+        "last_to_first_stimulus_seconds": null,
+        "unobserved_gap": null
+      },
+      {
+        "presentation_index": 1,
+        "trial_id": "trial_1",
+        "sample_id": "foil_reverse",
+        "label": "foil",
+        "begin": 6.047,
+        "planned_end": 6.167,
+        "last_observed": 6.167,
+        "reset_policy": "reset_per_trial",
+        "reset_boundary": 6.047,
+        "exact_reset_timestamp": null,
+        "onset_to_onset_seconds": 0.1905000000000001,
+        "last_to_first_stimulus_seconds": 0.11050000000000004,
+        "unobserved_gap": null
+      },
+      {
+        "presentation_index": 2,
+        "trial_id": "trial_2",
+        "sample_id": "training_target",
+        "label": "target",
+        "begin": 6.1675,
+        "planned_end": 6.2875000000000005,
+        "last_observed": 6.2875,
+        "reset_policy": "preserve_neuron_dynamics",
+        "reset_boundary": null,
+        "exact_reset_timestamp": null,
+        "onset_to_onset_seconds": 0.050499999999999545,
+        "last_to_first_stimulus_seconds": 0.04049999999999976,
+        "unobserved_gap": null
+      },
+      {
+        "presentation_index": 3,
+        "trial_id": "trial_3",
+        "sample_id": "foil_reverse",
+        "label": "foil",
+        "begin": 6.288,
+        "planned_end": 6.408,
+        "last_observed": 6.408,
+        "reset_policy": "preserve_neuron_dynamics",
+        "reset_boundary": null,
+        "exact_reset_timestamp": null,
+        "onset_to_onset_seconds": 0.1905000000000001,
+        "last_to_first_stimulus_seconds": 0.11050000000000004,
+        "unobserved_gap": null
+      }
+    ],
+    "views": [
+      {
+        "view": "series-overview",
+        "begin": 5.9265,
+        "end": 6.408,
+        "first_presentation": 0,
+        "last_presentation": 3,
+        "files": [
+          "series-soma-001/series-overview.png",
+          "series-soma-001/series-overview.svg",
+          "series-soma-001/series-overview.pdf"
+        ],
+        "y_scale": "shared",
+        "y_limits": [
+          -0.00040749961417382966,
+          0.0055012447913467
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "downsampling": false,
+        "clock_compression": false
+      }
+    ]
+  }
+]
