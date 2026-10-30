@@ -1,0 +1,98 @@
+{
+  "review_date": "2026-09-23",
+  "source_root_head": "0a7e65cbd74d74a65300488737249c2cc14dae47",
+  "source_pulselib_head": "9a6cee0b984c795b7116e446492f31165056b4f4",
+  "source_bin_head": "2d1d02143b30ee04b6cee45976df704c9138f953",
+  "branch_probes": {
+    "tests": "8",
+    "failures": "3",
+    "errors": "0",
+    "timestamp": "2026-09-23T02:40:14.509"
+  },
+  "source_sha256": "dae09f9012a4bc8cee99cf1de667eef9c6af3358c25934c55df54327ce96e9d0",
+  "A07": "accepted current algorithm contract; not a defect; no required split",
+  "A12": "deferred numerical limitation; sufficiently small step assumed",
+  "A08": "partially addressed in Branch; validity/error handling and TL remain",
+  "A09": "normal Branch best reprobe fixed; setup/fallback provenance and TL remain",
+  "full_cold_training_run": false,
+  "framework_adapter_limit": "unchanged method bodies; minimal framework/IO/setup adapters",
+  "unrelated_changes_excluded": [
+    ".vscode/launch.json",
+    ".vscode/tasks.json",
+    "Bin/Configs/SpikeSamples/Hardware/03-ArduinoFirmata/*.xml"
+  ],
+  "markdown_links": {
+    "tracked": 1918,
+    "additional": 5,
+    "broken": 0
+  },
+  "diff_check_worktree": {
+    ".": {
+      "code": 0,
+      "output": ""
+    },
+    "Rdk": {
+      "code": 0,
+      "output": ""
+    },
+    "Bin": {
+      "code": 0,
+      "output": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "code": 0,
+      "output": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "code": 0,
+      "output": ""
+    }
+  },
+  "protected_unrelated_files": {
+    "./.vscode/launch.json": {
+      "working_sha256": "9e43cbfd63a329ebf14447d1f57c41267bef9e4266280d05aca4393131a89692",
+      "index_sha256": "832197c22dbe7ebd3b9e3861446efe0cf07f90950334349c3cdb80c7b66d927c"
+    },
+    "./.vscode/tasks.json": {
+      "working_sha256": "4ac418b2aee0236a65254178eadb3aa5f04f06fdec8cec0b37f059236add8208",
+      "index_sha256": "801c0a96cadad0c25e692d9f4ea37a9afcc782f3d002991e3d004c14e8bba3be"
+    },
+    "Bin/Configs/SpikeSamples/Hardware/03-ArduinoFirmata/History.xml": {
+      "working_sha256": "ffa45b053297523ebb0dfda547e8c21b9fbc5fc4b4a628000363cf99aa4ccdda",
+      "index_sha256": "663294170c00ae188ad0dfd08869b4e75ff1409e2ad2f9b8cecb72e67814d5e3"
+    },
+    "Bin/Configs/SpikeSamples/Hardware/03-ArduinoFirmata/Interface.xml": {
+      "working_sha256": "687217b39b73b02043f05cbe0c51e25e8cd7b862a49b2ec568eed46bc7ddbe6e",
+      "index_sha256": "e7ebb41b4d7130fe74798f605cdba11eb1f77fd24a408a87fba2e5844a3d1539"
+    },
+    "Bin/Configs/SpikeSamples/Hardware/03-ArduinoFirmata/Model_00.xml": {
+      "working_sha256": "dc506842c627b135e4707fe56a502058cad22a6e0b0d2faa42a5a8a266525622",
+      "index_sha256": "f9b9180928e61c90a74b6075a981eb06faba36d1ac715574384e7833e54c97b0"
+    },
+    "Bin/Configs/SpikeSamples/Hardware/03-ArduinoFirmata/Parameters_00.xml": {
+      "working_sha256": "a4a5bcd2712bb3d1b130c3ff368f51c87006e51d9bac3ecfd1c1a7944d955bee",
+      "index_sha256": "c486a9bdb28007c543caa7a4c318f3e8f4f22dbe02216686805dcab82032b211"
+    }
+  },
+  "verification_utc": "2026-09-22T23:37:55.600626+00:00",
+  "documentation_commits": [
+    {
+      "module": "Rdk",
+      "commit": "aeedfb80d9d34d5c7a1cd25bfad042ec0362f1f7"
+    },
+    {
+      "module": "Bin",
+      "commit": "d2361191bdcc582e82eb1071571d185f6b35c79f"
+    },
+    {
+      "module": "Libraries/Nmsdk-PulseLib",
+      "commit": "17854a4fabd53841d8840d382a2186ba1cadbd80"
+    },
+    {
+      "module": "Libraries/Rdk-HardwareLib",
+      "commit": "043b883174fdf6fbb229e66f0fae941a5c1cb0ea"
+    }
+  ],
+  "unrelated_working_and_staged_content_preserved": true,
+  "bin_unmerged_index_after_resolution": ""
+}

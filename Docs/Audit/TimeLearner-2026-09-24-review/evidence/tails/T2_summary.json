@@ -1,0 +1,38 @@
+{
+  "utc": "2026-09-24T18:41:48Z",
+  "console_sha256": "5e7829bf9beb1901336ed15b7595786d5708c40d0dd9c9f2f1329bff3c3a1b63",
+  "cases": {
+    "br25_gold_skip_train": {
+      "rc": 0,
+      "verdict": "PASS",
+      "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T165949Z_work",
+      "fires": "10000000",
+      "mid": "0.0718001",
+      "mid_source": "cpp",
+      "tipr": "canon"
+    },
+    "br25_soft_cold": {
+      "rc": 1,
+      "verdict": "FAIL",
+      "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_20260924T170503Z_work",
+      "notes": [
+        "Train flag tipr=canon result=2 NonSeparable landscape_ok=0",
+        "Parameters TipR ended flat 8.6e7x4 (soft_cold TIPR_COLD); Need=1",
+        "gate_rc=1 fires_missing tipr_class=flat expect=canon"
+      ]
+    },
+    "asym50_cold": {
+      "rc": 1,
+      "verdict": "FAIL_accept_Need1",
+      "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/asym50_20260924T171141Z_work",
+      "notes": [
+        "train status=exited Need=1 \u2014 accept_run rejects",
+        "gate_rc=0 fires=10000000 tipr=canon mid=0.0100962 cpp",
+        "mid != archive stale 0.0116458 \u2014 R06 clean workdir isolation OK"
+      ]
+    }
+  },
+  "stale_flag_isolation": true,
+  "morphogenesis_P2_triggered": true,
+  "reason": "soft_cold br25_on FAIL after R01-R07"
+}

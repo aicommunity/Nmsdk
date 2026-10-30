@@ -1,0 +1,741 @@
+{
+  "case": "W04_BR480_N1_PSIoff",
+  "status": "abort_tipr_rmax_stall",
+  "training_convergence": "not_converged_at_stop",
+  "failure_class": "train_incomplete",
+  "fail_notes": [
+    "child_rc=1",
+    "train_incomplete:abort_tipr_rmax_stall",
+    "Need=1",
+    "tipr_class=other expect=canon"
+  ],
+  "final_tip_r": "86000000 292585.48714753258 10000000000 86000000",
+  "final_lengths": "1 9 6 1",
+  "provenance": {
+    "root_git": "81a87429678ac445208febe53b6db2f44b61bbef",
+    "gitlinks": {
+      "Libraries/Nmsdk-PulseLib": "28c32e9803a34eb840eb45fd7d800decae1f5102",
+      "Bin": "810bb66284e6d7ace4964969d2a8304e4bee287d",
+      "Rdk": "b3b2472dc347899af266cd46e64bca2a6ea16fea"
+    },
+    "binary_sha256": "cd6d8ae8b157c1d00a0319251c2bbb3d91c7360c16e5e3299c512a2b5d5d78b5",
+    "source_changed_during_run": false,
+    "source_sha256": {
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearner.cpp": "8f3abcd064ad236e2db04fa4911df8d43da27c6064ffa26c50e3f5355461b667",
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearner.h": "48c08fb6355af469334a8c7da94aa2311c2b46f135cfebd7a86050262c2d3eeb",
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearnerBranch.cpp": "2cdd8a44f3ac381b7f70e9b077554c842dce6a3da0d15a6da80ed9af1ba88078",
+      "Libraries\\Nmsdk-PulseLib\\Core\\NNeuronTimeLearnerBranch.h": "5eeb1846736efeeef21cd2a8a27628c4c6a626e9c26af32f40b8db156b86e0ec"
+    },
+    "input_config_sha256_before": {
+      "Train/Parameters_00.xml": "ff444a1a909fe71f480ebf79de25d7f1648156ed1758fecb7e4559b1ebefca75",
+      "Train/Model_00.xml": "50c88b8d780ee57e14482f658e1d6432b624fdd1e4cc710973d3f78de346fa9a",
+      "Test/Parameters_00.xml": "20ff9c7a647cc6676569bf5a59914922c311f0a1052f9e98744f90c89f17e330",
+      "Test/Model_00.xml": "dc32658b8bafbe13d42587a6d3647258870e06cf53e70e266813eb62ea44077a"
+    },
+    "input_config_sha256_after": {
+      "Train/Parameters_00.xml": "959eeba690811f94ae6f1957736c9f3e469703171e15d72a9df4125af8955426",
+      "Train/Model_00.xml": "61757e7f2d70cbdef1b566f6bc20349fb73aac00469c43c8a93aeff6f058385c",
+      "Test/Parameters_00.xml": "20ff9c7a647cc6676569bf5a59914922c311f0a1052f9e98744f90c89f17e330",
+      "Test/Model_00.xml": "dc32658b8bafbe13d42587a6d3647258870e06cf53e70e266813eb62ea44077a"
+    },
+    "training_audit_sha256": "6cec1287bfb77b3e25e3067f52bcf86d63d1b00ba9afa81df867846508ebb6f8"
+  },
+  "raw_run_relative_path": "Bin/Configs/SpikeSamples/StructTrain/_repro/TimeLearnerMatrixRuns/local-W04-current28c-20261013-03/W04/W04_BR480_N1_PSIoff/attempt-0001",
+  "state_transitions": [
+    {
+      "kind": "reset",
+      "iter": 0,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 3,
+      "gamma": -1.0,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        86000000.0,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_valid": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "last_abs_dt": [
+        1.501,
+        1.501,
+        1.501,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 1,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": -1.0,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        57647523.95906498,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        9,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        0.015781441636540494
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        0.015781441636540494
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.4945,
+        0.4145,
+        0.24000000000000005,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 2,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.2978208482297845,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        57647523.95906498,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        9,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.001456839649124908,
+        1.62458711131519e-05
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        0.015781441636540494
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.014324626950194541,
+        0.015765195765427342
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.4945,
+        0.4145,
+        0.2145,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 3,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.2978208482297845,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        17515109.4110281,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        13,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.001456839649124908,
+        1.62458711131519e-05
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        0.015781441636540494
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.014324626950194541,
+        0.015765195765427342
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.4945,
+        0.4145,
+        0.15914999999999996,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 4,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.38847157701376656,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        17515109.4110281,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        6,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        1.1783640843199272e-05,
+        0.0010257256574657259
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        0.015781441636540494
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.01576968295847625,
+        0.014755715979074768
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.4945,
+        0.4145,
+        0.3659749999999999,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        -1,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 11,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.7414192316686459,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        512399.12129707285,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        6,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0002774753409949815,
+        0.2507047094506586
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        0.2507047094506586
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.015503991258324468,
+        0.0
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.4945,
+        0.4145,
+        0.004031249999999931,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 12,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.710418210939027,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        315874.56495436805,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        6,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0006494845517236447,
+        3.312036806890628e-05
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        0.2507047094506586
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.015131982047595804,
+        0.2506715890825897
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.4945,
+        0.4145,
+        0.004031249999999931,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 13,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 2,
+      "gamma": 0.710418210939027,
+      "tip_r": [
+        86000000.0,
+        86000000.0,
+        10000000000.0,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        1,
+        6,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        588903.4867215322,
+        588903.4867215322
+      ],
+      "initial_amp": [
+        0.0,
+        0.0,
+        0.01578146659931945,
+        588903.4867215322
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        -588903.4709400656,
+        0.0
+      ],
+      "peak_valid": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "last_abs_dt": [
+        0.4945,
+        0.4145,
+        0.004031249999999931,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 15,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 1,
+      "gamma": 0.710418210939027,
+      "tip_r": [
+        86000000.0,
+        292585.4871475326,
+        10000000000.0,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        9,
+        6,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.01582857240620872,
+        2.3347541677765093e-09,
+        0.015781441636548044
+      ],
+      "initial_amp": [
+        0.0,
+        0.01582857240620872,
+        0.01578146659931945,
+        588903.4867215322
+      ],
+      "amp_dt": [
+        0.0,
+        0.0,
+        0.01578146426456528,
+        588903.4709400906
+      ],
+      "peak_valid": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "last_abs_dt": [
+        0.24725,
+        0.15274999999999828,
+        0.004031249999999931,
+        1.501
+      ],
+      "length_status": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "iteration",
+      "iter": 54,
+      "phase": 0,
+      "need": 1,
+      "active_pulse": 1,
+      "gamma": 0.710418210939027,
+      "tip_r": [
+        86000000.0,
+        292585.4871475326,
+        10000000000.0,
+        86000000.0
+      ],
+      "length_after": [
+        1,
+        9,
+        6,
+        1
+      ],
+      "peak_amp": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_amp": [
+        0.0,
+        0.01582857240620872,
+        0.01578146659931945,
+        588903.4867215322
+      ],
+      "amp_dt": [
+        0.0,
+        0.01582857240620872,
+        0.01578146659931945,
+        588903.4867215322
+      ],
+      "peak_valid": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "last_abs_dt": [
+        0.24725,
+        0.2463999999999999,
+        0.004031249999999931,
+        1.501
+      ],
+      "length_status": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "res_status": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "low_rs_segment6_progression": [
+    {
+      "iter": 4,
+      "length_index2": 6,
+      "rs_index2": 17515109.4110281,
+      "amp_index2": 1.1783640843199272e-05,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.38847157701376656
+    },
+    {
+      "iter": 5,
+      "length_index2": 6,
+      "rs_index2": 10527879.032644428,
+      "amp_index2": 4.2378099994522245e-05,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.38847157701376656
+    },
+    {
+      "iter": 6,
+      "length_index2": 6,
+      "rs_index2": 6334942.363359278,
+      "amp_index2": 6.826126275405464e-05,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.38847157701376656
+    },
+    {
+      "iter": 7,
+      "length_index2": 6,
+      "rs_index2": 3817686.81608128,
+      "amp_index2": 0.00010413993132529775,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.38847157701376656
+    },
+    {
+      "iter": 8,
+      "length_index2": 6,
+      "rs_index2": 2304602.112655157,
+      "amp_index2": 0.00014457909424958615,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.5534959923666597
+    },
+    {
+      "iter": 9,
+      "length_index2": 6,
+      "rs_index2": 1393490.5257052323,
+      "amp_index2": 0.000183679676854398,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.6546510852541644
+    },
+    {
+      "iter": 10,
+      "length_index2": 6,
+      "rs_index2": 844104.3080172386,
+      "amp_index2": 0.0002267855938966612,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.7128109484543319
+    },
+    {
+      "iter": 11,
+      "length_index2": 6,
+      "rs_index2": 512399.12129707285,
+      "amp_index2": 0.0002774753409949815,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.7414192316686459
+    },
+    {
+      "iter": 12,
+      "length_index2": 6,
+      "rs_index2": 315874.56495436805,
+      "amp_index2": 0.0006494845517236447,
+      "target_index2": 0.01578146659931945,
+      "gamma": 0.710418210939027
+    }
+  ],
+  "interpretation": "The shared attenuation gamma learned from the active input at index 2 after its low-Rs/low-amplitude trajectory was then used for a different input index 1. The latter 1->9 length growth multiplied 86 Mohm by exp(-0.710418*8), yielding 292585.49 ohm. The trace establishes the cross-input state transfer; it does not establish that gamma=0.710418 is a valid cable-only estimate."
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "host": "10.245.1.17",
+  "tested_root": "769869eadee9ba48031beaef843f5e2d83f819e3",
+  "scientific_training_result": false,
+  "native_single_input_certificates": {
+    "Branch_20000_N1_certificate": {
+      "model_revision": "0b377c8f53d5b8d54cfe9ef6672d7a093bbb14c56e7ee18fc62b33f9f9b7f150",
+      "exact": true,
+      "reference_trial_id": "Branch_20000_N1_frozen-reference",
+      "verification_trial_id": "Branch_20000_N1_frozen-reference-verification/verify/0/1",
+      "amplitude_residual": 0,
+      "timing_residual_low": 0,
+      "timing_residual_high": 0
+    },
+    "Branch_2000_N1_certificate": {
+      "model_revision": "1cedffe3aaa5034c5cb67a216e85181879a2099e5c519421410a0c8621d011f6",
+      "exact": true,
+      "reference_trial_id": "Branch_2000_N1_frozen-reference",
+      "verification_trial_id": "Branch_2000_N1_frozen-reference-verification/verify/0/1",
+      "amplitude_residual": 0,
+      "timing_residual_low": 0,
+      "timing_residual_high": 0
+    },
+    "Classic_20000_N1_certificate": {
+      "model_revision": "8b2f262206b8a1208e206d0b841752cdf96301920a02cd36951113c813f3083d",
+      "exact": true,
+      "reference_trial_id": "Classic_20000_N1_frozen-reference",
+      "verification_trial_id": "Classic_20000_N1_frozen-reference-verification/verify/0/1",
+      "amplitude_residual": 0,
+      "timing_residual_low": 0,
+      "timing_residual_high": 0
+    },
+    "Classic_2000_N1_certificate": {
+      "model_revision": "4e454f69d6d5c1412611b6c4c3c1e940034b148dea9ea6c5459a40736f53ac39",
+      "exact": true,
+      "reference_trial_id": "Classic_2000_N1_frozen-reference",
+      "verification_trial_id": "Classic_2000_N1_frozen-reference-verification/verify/0/1",
+      "amplitude_residual": 0,
+      "timing_residual_low": 0,
+      "timing_residual_high": 0
+    }
+  },
+  "asan": {
+    "options": "detect_leaks=0",
+    "targeted": {
+      "tests": "15",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "9.922",
+      "timestamp": "2026-10-26T11:22:28.523",
+      "name": "AllTests"
+    },
+    "full_asan_ctest": false,
+    "leak_freedom_claim": false
+  },
+  "targeted": {
+    "tests": "17",
+    "failures": "0",
+    "disabled": "0",
+    "errors": "0",
+    "time": "8.72",
+    "timestamp": "2026-10-26T11:14:37.064",
+    "name": "AllTests"
+  }
+}

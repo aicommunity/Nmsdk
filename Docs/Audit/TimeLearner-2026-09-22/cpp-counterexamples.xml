@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="10" failures="10" disabled="0" errors="0" time="0.001" timestamp="2026-09-22T20:50:35.282" name="AllTests">
+  <testsuite name="PostTuneAudit" tests="2" failures="2" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-22T20:50:35.282">
+    <testcase name="GapMustIncludeEveryFoil" file="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp" line="7" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.282" classname="PostTuneAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp:13&#x0A;The difference between gap and -0.1 is 0.40000000000000002, which exceeds 1e-12, where&#x0A;gap evaluates to 0.29999999999999999,&#x0A;-0.1 evaluates to -0.10000000000000001, and&#x0A;1e-12 evaluates to 9.9999999999999998e-13.&#x0A;mid=0.34999999999999998" type=""><![CDATA[E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp:13
+The difference between gap and -0.1 is 0.40000000000000002, which exceeds 1e-12, where
+gap evaluates to 0.29999999999999999,
+-0.1 evaluates to -0.10000000000000001, and
+1e-12 evaluates to 9.9999999999999998e-13.
+mid=0.34999999999999998]]></failure>
+    </testcase>
+    <testcase name="NonFiniteMetricsMustNotBeAccepted" file="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp" line="16" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.282" classname="PostTuneAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp:19&#x0A;Value of: NMSDK::PostTrainTune::LandscapeOk( 0.5, {std::numeric_limits&lt;double&gt;::quiet_NaN()})&#x0A;  Actual: true&#x0A;Expected: false" type=""><![CDATA[E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp:19
+Value of: NMSDK::PostTrainTune::LandscapeOk( 0.5, {std::numeric_limits<double>::quiet_NaN()})
+  Actual: true
+Expected: false]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="RouterAudit" tests="1" failures="1" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-22T20:50:35.282">
+    <testcase name="ThinObstacleMustBeDetectedBetweenSamples" file="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp" line="22" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.282" classname="RouterAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp:26&#x0A;Expected: (UModernDiagramLinkRouter::obstacleHitsOnPolyline(line, obstacles)) &gt; (0), actual: 0 vs 0" type=""><![CDATA[E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp:26
+Expected: (UModernDiagramLinkRouter::obstacleHitsOnPolyline(line, obstacles)) > (0), actual: 0 vs 0]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AnalyzerAudit" tests="5" failures="5" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-22T20:50:35.282">
+    <testcase name="FirstPulseResponseMustNotCountAsCompletePattern" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="303" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.282" classname="AnalyzerAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:308&#x0A;Expected equality of these values:&#x0A;  a.closed[0].fired&#x0A;    Which is: 1&#x0A;  0" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:308
+Expected equality of these values:
+  a.closed[0].fired
+    Which is: 1
+  0]]></failure>
+    </testcase>
+    <testcase name="ThreePulseTargetMustBeSupported" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="310" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.282" classname="AnalyzerAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:314&#x0A;Expected equality of these values:&#x0A;  a.closed[0].fired&#x0A;    Which is: 0&#x0A;  1" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:314
+Expected equality of these values:
+  a.closed[0].fired
+    Which is: 0
+  1]]></failure>
+    </testcase>
+    <testcase name="LateSpikeAfterTimelySpikeMustRemainCounted" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="316" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.282" classname="AnalyzerAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:320&#x0A;Expected equality of these values:&#x0A;  a.closed[0].count&#x0A;    Which is: 1&#x0A;  2" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:320
+Expected equality of these values:
+  a.closed[0].count
+    Which is: 1
+  2]]></failure>
+    </testcase>
+    <testcase name="OneSpikeIsNotAResponseToEveryStimulus" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="322" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.282" classname="AnalyzerAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:323&#x0A;Expected equality of these values:&#x0A;  NPatternResponseAnalyzer::ClassifyResponseMorphology({.375},{0,.125,.25,.375})&#x0A;    Which is: &quot;per_stim&quot;&#x0A;  &quot;single&quot;" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:323
+Expected equality of these values:
+  NPatternResponseAnalyzer::ClassifyResponseMorphology({.375},{0,.125,.25,.375})
+    Which is: "per_stim"
+  "single"]]></failure>
+    </testcase>
+    <testcase name="NextClassMustNotRelabelPreviousTrial" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="325" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.283" classname="AnalyzerAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:329&#x0A;Expected equality of these values:&#x0A;  a.closed[0].label&#x0A;    Which is: 0&#x0A;  1" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:329
+Expected equality of these values:
+  a.closed[0].label
+    Which is: 0
+  1]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AxonAudit" tests="2" failures="2" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-22T20:50:35.283">
+    <testcase name="IntegerDelayMustNotAddAnExtraStep" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="331" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.283" classname="AxonAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:334&#x0A;Expected equality of these values:&#x0A;  out[2]&#x0A;    Which is: 0&#x0A;  1" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:334
+Expected equality of these values:
+  out[2]
+    Which is: 0
+  1]]></failure>
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:334&#x0A;Expected equality of these values:&#x0A;  out[3]&#x0A;    Which is: 1&#x0A;  0" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:334
+Expected equality of these values:
+  out[3]
+    Which is: 1
+  0]]></failure>
+    </testcase>
+    <testcase name="PositiveTauShouldNotDivergeWithoutAStabilityGuard" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="336" status="run" result="completed" time="0" timestamp="2026-09-22T20:50:35.283" classname="AxonAudit">
+      <failure message="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:339&#x0A;Expected: (f.Output.v) &lt;= (1), actual: 244 vs 1" type=""><![CDATA[E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp:339
+Expected: (f.Output.v) <= (1), actual: 244 vs 1]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

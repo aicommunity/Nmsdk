@@ -1,0 +1,1 @@
+Native model readback implementation tests; no Calculate and no recognition claim. Four targeted tests and full PulseLib CTest passed. Manifests retain tested source commits. Runtime manifest lists resolved libraries only; dynamically loaded plugins are not claimed complete. Initial build log includes a fixture compile error corrected before the final run.

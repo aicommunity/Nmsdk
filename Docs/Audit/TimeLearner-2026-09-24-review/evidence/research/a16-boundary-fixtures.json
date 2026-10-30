@@ -1,0 +1,58 @@
+{
+  "search_revert_changed_own_snapshot": {
+    "row_fail": false,
+    "train_status": "done_search_diff",
+    "mid_source": "cpp",
+    "tipr_vs_snapshot": "diff_after_revert",
+    "tipr_class": "search",
+    "fail_notes": [],
+    "verdict_exit": 0,
+    "need": "0"
+  },
+  "search_no_train_flag_or_snapshot": {
+    "row_fail": false,
+    "train_status": "exited",
+    "mid_source": "cpp",
+    "tipr_vs_snapshot": "unknown",
+    "tipr_class": "search",
+    "fail_notes": [],
+    "verdict_exit": 0,
+    "need": "1"
+  },
+  "keep_arbitrary_weights_incomplete_train": {
+    "row_fail": false,
+    "train_status": "incomplete",
+    "mid_source": "cpp",
+    "tipr_vs_snapshot": "",
+    "tipr_class": "keep",
+    "fail_notes": [],
+    "verdict_exit": 0,
+    "need": "1"
+  },
+  "empty_fires_not_rejected": {
+    "row_fail": false,
+    "train_status": "done",
+    "mid_source": "cpp",
+    "tipr_vs_snapshot": "",
+    "tipr_class": "canon",
+    "fail_notes": [],
+    "verdict_exit": 0,
+    "need": "0"
+  },
+  "nonfinite_numeric_equal": true,
+  "nonfinite_negative_mid_cpp": "cpp",
+  "stale_test_flag_in_phase9": {
+    "returned_threshold": "0.0116458",
+    "flag_retained": true,
+    "test_threshold": "0.0116458",
+    "will_skip_fresh_inference": true,
+    "reported_mid_source": "cpp",
+    "fixture_source": "tracked Asym50 Test flag, last commit b8cef72 (2026-09-22)"
+  },
+  "stale_live_after_train_crash": {
+    "train_status": "exited",
+    "tipr": "91 92 93 94",
+    "lengths": "9 8 7 1",
+    "need": "1"
+  }
+}
