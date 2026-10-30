@@ -60,7 +60,14 @@ verdict не подменяются наличием HTML/PNG. Model revisions �
 Механическое выделение общего loader выполнено отдельным commit
 `f2294039845b0305f66e94bb67044a8bebdbd7f1`: на Elder 15/15 прежних tests
 без skips/errors. Новые адресные проверки используют реальные cancelled и
-rejected packets обоих топологий и явно помеченные повреждённые копии. До
+rejected packets, а также явно помеченные повреждённые копии. Реальный rejected
+fixture имеет observation с нулём samples; отсутствие observation проверяется
+отдельным synthetic wire control, а не объявляется новым native-наблюдением.
+Добавлен actual Classic frozen trace с шестью soma из ранее опубликованного
+pooled-full контроля: каждая soma получает отдельные крупные figures. Его
+широкий timing tolerance служил transport/dimension control, а не доказательством
+сходимости при default 0.02. На Elder первый diagnostic gate прошёл 22/22 tests
+без skips/errors; six-soma extension проверяется следующим gate. До
 публикации результатов и визуального просмотра новый подэтап не принят.
 Historical schema adapters и вся physics/frequency matrix остаются отдельными
 требованиями полного плана.
