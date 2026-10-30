@@ -47,9 +47,8 @@ scoped visual review и scientific verdict остаются разными ос�
 полных cached reports проверяется coverage всех ожидаемых trial/soma пар;
 выбранные Git figures являются только контрольной выборкой.
 
-Реализация и адресные tests пока находятся в рабочей ветке. До серверных
-roundtrip/corruption checks и реальной регенерации эта спецификация не является
-объявлением завершённого перехода всей инфраструктуры на компактную политику.
+Первый native-fixture путь проверен на серверах. Это не объявление завершённого
+перехода всей инфраструктуры и всех historical adapters на компактную политику.
 
 На source `675cc30bd3bbeddb2cda52d7e6b1df9c79f63b80` оба workers выполнили
 10/10 addressed tests без skips/errors/failures и 5/5 реальных learned/stopped/
@@ -67,10 +66,9 @@ raw archive 3568715 bytes (919 files / 63697162 uncompressed bytes).
 разница числа provenance files не означает потерю expected native trials.
 Проверены локально все 34 outer и 8 inner stored hashes каждого пакета.
 
-Full-cache regeneration запущена на M40 отдельно, из A1 archive с SHA,
-побайтно совпадающим с A3. Ожидаются все 338 probes / 507 pairs и сравнение
-3087 PNG с исходным cache. Полные generated files не будут опубликованы снова;
-в Git сохраняется только regeneration receipt. Итог этого job пока не принят.
+Full-cache regeneration выполнена на M40 отдельно, из A1 archive с SHA,
+побайтно совпадающим с A3. Полные generated files не опубликованы снова;
+в Git сохраняется только regeneration receipt.
 
 Regeneration завершилась с status 0. Извлечённый archive
 `c48d8232ec77f6bd98f26fb152544031a0cdbe3cddc4e8fdff5ebaf533fd2b81`
