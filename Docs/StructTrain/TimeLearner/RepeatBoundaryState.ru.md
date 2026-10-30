@@ -21,6 +21,15 @@ Baseline root `a6cfc24acf00f5bf8a235ad7872741bb9e05da3f` / Pulse develop
 отказов. M40 ASan baseline также завершён с десятью отказами; точные
 assertion locations и post-run runtime readback проверяются до fixed run.
 
+Baseline-пакеты опубликованы с полными первичными данными и XML failures:
+[Elder](../../../Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-elder1-a1/README.md)
+`779d34e7b3522db4c07cd24233de82a6f54518dc`,
+[M40](../../../Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-m40-a1/README.md)
+`b5e0c526bfad1edf2772c9adbbf774402584478f`.
+Все 338 stored hashes каждого пакета проверены локально. Native XML каждого
+подтверждает ровно двадцать assertion failures на строках 1609/1610 baseline
+fixture; terminal runtime readback выполнен успешно перед fixed run.
+
 ## Контракт исправления
 
 - Новые сводки schema 1/2 содержат boolean `search_history_retained`.
