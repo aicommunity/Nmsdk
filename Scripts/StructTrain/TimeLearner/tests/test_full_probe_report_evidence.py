@@ -30,6 +30,9 @@ class FullProbeReportEvidenceTest(unittest.TestCase):
             for entry in manifest['reports']:
                 report=directory/entry['folder'];item=load(report/'manifest.json')
                 packet=load(report/'primary/probe.json')
+                self.assertIs(packet['observation']['specification']['record_spikes'],False)
+                self.assertIsNone(packet['observation']['spike_count'])
+                self.assertIs(item['spike_recording_enabled'],False)
                 self.assertEqual(audit_probe(packet,report/'primary/trace.csv')['trial_id'],entry['trial_id'])
                 channels=len(packet['observation']['specification']['baseline'])
                 self.assertEqual({f['channel'] for f in item['figures']},set(range(channels)))
