@@ -83,6 +83,33 @@ response assessment (root ad975bbeb / PulseLib 25cf6a5). Он уже собра�
 нового Core ещё выполняются. Старый normal gate не является проверкой этого
 последующего изменения. Native calibrated commit/export по-прежнему открыт.
 
+Последующий полный normal gate этого изменения завершился: root
+`ad975bbeb5df18555d94329d3ee95f321921c171`, PulseLib
+`25cf6a5bfadc0ee72182cb924f1d0730cf6dc71b` — 16/16 native cases;
+независимый reader root `1ef44e2e6c5ce40339f9aeaa5e4426810e36844b` —
+35/35 Python tests без failures/errors/skips. Проверены 64 native response
+assessments, включая primary и полные наборы. Их
+[переносимый Git-пакет](../../../Reports/StructTrain/TimeLearner/s08-threshold-assessment-normal-a1/README.md)
+опубликован commit `de019b2b14f4b7cf6efb4e6220e1838257da0e5f`:
+897 файлов в lossless архиве 8251508 bytes, с размерами и SHA256 каждого файла.
+ASan этого изменения
+ожидает завершения предшествующего задания, без изменения его активного runtime.
+
+Новый signed-threshold contract (`88b48711a51dbcdb079d2386bac9d699885cb533`,
+PulseLib `dd353680407e903b7dcb0b1e55dda9eacc17fcef`) пока не принят.
+Попытка Elder `s08-threshold-contract-normal-a1` завершилась с 1/6 PASS:
+storage aliases проверены, но четыре candidate/potential cases встретили
+`unknown_threshold_candidate_algorithm`, а isolated IaF control —
+незарегистрированное имя `NConstGenerator`. Причины: `auto` сохранил
+`QJsonValueRef` на временный объект вместо значения; тест использовал C++ имя
+вместо storage-образа. Исправления: PulseLib
+`479084f4c35d61f60ef9b37eb0da246bc8dec87a`, root
+`0afbf97c4ba9df4591eebe9a41fb916e02d1903e`, образ `NCGenerator`.
+Повторная попытка `s08-threshold-contract-normal-a2` выполняется отдельно;
+неуспешная попытка сохраняется и не считается PASS. Изолированная ASan-сборка
+первого снимка выполняется в собственных source/build/runtime на диске Data M40;
+она не подменяет проверку исправленного снимка.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |
