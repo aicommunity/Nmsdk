@@ -67,7 +67,8 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "probe", "probe-diagnostic", "probe-set"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "probe", "probe-diagnostic", "probe-set", "native-test-run"), default="recognition-evaluation")
+    report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
     report.add_argument("--output", type=Path, required=True, help="new directory; never overwritten")
@@ -75,10 +76,43 @@ def main(argv: list[str] | None = None) -> int:
     publication.add_argument("specification", type=Path)
     publication.add_argument("--root", type=Path, required=True)
     publication.add_argument("--output", type=Path, required=True, help="new receipt outside source tree")
+    bundle = commands.add_parser("bundle", help="lossless primary archives; full plots remain in worker cache")
+    bundle.add_argument("action", choices=("pack-native-tests", "verify", "extract"))
+    bundle.add_argument("source", type=Path, help="native contract for pack; bundle directory otherwise")
+    bundle.add_argument("--artifacts", type=Path)
+    bundle.add_argument("--selected-report", type=Path, help="completed full native report with checked PDF previews")
+    bundle.add_argument("--output", type=Path, help="new bundle or extraction directory")
+    bundle.add_argument("--maximum-bytes", type=int, default=8*1024**3, help="maximum uncompressed extraction bytes")
     args = parser.parse_args(argv)
     if args.command == "inventory":
         from .inventory import write_inventory
         write_inventory(args.root.resolve(), args.output.resolve())
+    elif args.command == "bundle":
+        from .artifact_bundle import pack_native_tests, verify_bundle, extract_bundle
+        from .native_evidence import EvidenceError, require
+        import tarfile
+        try:
+            require(args.maximum_bytes > 0, "invalid_extraction_budget")
+            if args.action == "pack-native-tests":
+                require(args.artifacts is not None and args.selected_report is not None and args.output is not None,
+                        "native_bundle_requires_artifacts_selected_report_and_output")
+                result = pack_native_tests(args.source.resolve(strict=True), args.artifacts.resolve(strict=True),
+                                          args.output.resolve(), args.selected_report.resolve(strict=True), args.maximum_bytes)
+            else:
+                require(args.artifacts is None and args.selected_report is None, "unexpected_bundle_source_options")
+                if args.action == "extract":
+                    require(args.output is not None, "bundle_extraction_requires_output")
+                    result = extract_bundle(args.source.resolve(strict=True), args.output.resolve(), args.maximum_bytes)
+                else:
+                    require(args.output is None, "bundle_verification_has_no_output")
+                    value = verify_bundle(args.source.resolve(strict=True), args.maximum_bytes)
+                    result = {"kind": "timelearner_primary_bundle_verification", "files": len(value["files"]),
+                              "archive_sha256": value["archive"]["sha256"], "scientific_verdict": None}
+            print(json.dumps(result, ensure_ascii=False)); return 0
+        except (EvidenceError, OSError, ValueError, tarfile.TarError, EOFError) as error:
+            print(json.dumps({"kind": "timelearner_primary_artifact_bundle", "status": "invalid",
+                              "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
     elif args.command == "publish":
         from .native_evidence import EvidenceError, load
         from .publisher import publish_closure
@@ -99,7 +133,13 @@ def main(argv: list[str] | None = None) -> int:
         from .reports import render_evaluation
         try:
             from .native_evidence import require
-            if args.format == "probe-set":
+            require(args.format == "native-test-run" or args.artifacts is None, "artifacts_option_is_only_for_native_test_run")
+            if args.format == "native-test-run":
+                from .native_test_reports import render_native_test_run
+                require(args.artifacts is not None and args.trace is None and args.model is None,
+                        "native_test_run_requires_artifacts_not_model_or_trace")
+                result = render_native_test_run(args.source.resolve(strict=True), args.artifacts.resolve(strict=True), args.output.resolve())
+            elif args.format == "probe-set":
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
                 result = render_probe_set(args.source.resolve(strict=True), args.output.resolve())

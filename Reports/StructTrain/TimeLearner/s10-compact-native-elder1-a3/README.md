@@ -1,0 +1,7 @@
+# Compact native evidence: elder1
+
+Producer data, models/configurations and terminal/runtime/source provenance are preserved losslessly in primary-bundle/primary.tar.gz, with per-file raw SHA256 and six source-bound selected PNG figures. Full SVG/PDF/PNG reports remain reproducible M40 cache. Source 675cc30bd3bbeddb2cda52d7e6b1df9c79f63b80 passed 10/10 archive/corruption/metadata/path/budget tests plus 5/5 real learned/stopped/warm evidence checks after extraction, no skips/errors/failures. Actual pack/verify/extract CLI completed; a one-byte pack budget failed with status 2 before creating output. Raw archive SHA is identical to A1 used for the separate full-cache regeneration job.
+
+The archive retains all 338 actual probes and 507 trial-soma pairs from the 51-case A3 fixture suite. No native model was rerun. Run bundle verify/extract and the recorded renderer recipe to recreate the full report. The full regeneration receipt is separate and remains pending until recorded. Earlier archive checks A1 8/8 and A2 9/9 are preserved as scoped history. Neither a compact bundle nor selected figures imply scientific PASS, global visual acceptance or full refactoring-stage completion.
+
+[Open the selected figures](index.html). Panels retain their 1920-pixel width with scrolling and direct PNG links; full reports remain reproducible cache.
