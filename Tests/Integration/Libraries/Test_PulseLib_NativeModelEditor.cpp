@@ -1770,8 +1770,10 @@ void RepeatedBoundarySummary(const NativeTrainingService& service,const std::str
     Artifact(artifact,QJsonDocument(summary).toJson());
 }
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
-    std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1)
+    std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
+    double fixtureWallSeconds=600.)
 {
+    ASSERT_TRUE(std::isfinite(fixtureWallSeconds) && fixtureWallSeconds>0.);
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
     if(inputs!=2)suffix+="_inputs"+std::to_string(inputs);if(configured)suffix+="_configured";if(automatic)suffix+="_automatic";
     if(recognition)suffix+="_recognition_"+std::to_string(int(*recognition));
@@ -1783,6 +1785,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(configured)
     {
         configuredPlan=Configuration(rig);configuredPlan->search.tolerances.sync=sync;
+        configuredPlan->maximumWallSeconds=fixtureWallSeconds;
         configuredPlan->search.n0CandidateRepeats=n0Repeats;
         rig.learner->ControllerVersion=2;rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(*configuredPlan)).toJson(QJsonDocument::Compact).toStdString();
         rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
@@ -1793,6 +1796,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     ASSERT_DOUBLE_EQ(initialZone->Threshold.GetData(),initialThreshold);
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
     auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    plan.maximumWallSeconds=fixtureWallSeconds;
     plan.search.n0CandidateRepeats=n0Repeats;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
     if(inputs>2)
@@ -2038,18 +2042,26 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     }
 }
 TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}
-TEST(NativeThresholdCandidate,ClassicN0_2000){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
-TEST(NativeThresholdPotential,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdPotential);}
-TEST(NativeThresholdPotential,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdPotential);}
-TEST(NativeThresholdPotential,ClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000,2,true,RecognitionCase::ThresholdPotential);}
-TEST(NativeThresholdPotential,BranchN1_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,20000,2,true,RecognitionCase::ThresholdPotential);}
-TEST(NativeThresholdCandidate,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
-TEST(NativeThresholdCandidate,BranchN0_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
-TEST(NativeThresholdCandidate,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdCandidates);}
-TEST(NativeThresholdCandidate,ClassicN0_20000){LearnedBoundary<NNeuronTimeLearner>(0,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
-TEST(NativeThresholdCandidate,ClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
-TEST(NativeThresholdCandidate,BranchN0_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
-TEST(NativeThresholdCandidate,BranchN1_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,20000,2,true,RecognitionCase::ThresholdCandidates);}
+template<class Learner> void CalibrationBoundaryFixture(int normalization,unsigned frequency,bool potential=false)
+{
+    // Explicit transport-fixture allowance, recorded in configuration/state.
+    // ASan at 20 kHz exhausted 600 s while building the source model. Production
+    // defaults, model-time budget, tolerances and search bounds are unchanged.
+    LearnedBoundary<Learner>(normalization,.02,frequency,2,true,
+        potential?RecognitionCase::ThresholdPotential:RecognitionCase::ThresholdCandidates,false,1.,1,1800.);
+}
+TEST(NativeThresholdCandidate,ClassicN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(0,2000);}
+TEST(NativeThresholdPotential,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
+TEST(NativeThresholdPotential,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
+TEST(NativeThresholdPotential,ClassicN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,20000,true);}
+TEST(NativeThresholdPotential,BranchN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,20000,true);}
+TEST(NativeThresholdCandidate,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000);}
+TEST(NativeThresholdCandidate,BranchN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(0,2000);}
+TEST(NativeThresholdCandidate,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000);}
+TEST(NativeThresholdCandidate,ClassicN0_20000){CalibrationBoundaryFixture<NNeuronTimeLearner>(0,20000);}
+TEST(NativeThresholdCandidate,ClassicN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,20000);}
+TEST(NativeThresholdCandidate,BranchN0_20000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(0,20000);}
+TEST(NativeThresholdCandidate,BranchN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,20000);}
 TEST(NativeLearnedState,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeLearnedState,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1);}
 TEST(NativeLearnedState,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1);}
