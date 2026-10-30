@@ -5,12 +5,36 @@ import io
 import json
 import os
 from pathlib import Path
+import tempfile
 import unittest
 
 from ..calibrated_evidence import audit_calibrated_state
 from ..learned_evidence import load_case
 from ..model_identity import canonical_model_sha256 as sha
 from ..native_evidence import EvidenceError, load
+from ..recognition_metrics import score_recognition_evaluation, score_threshold_candidate
+from ..recognition_trial_evidence import audit_recognition_trial
+
+
+def frozen_measurement(path, package):
+    # Explicit adapter for NativeCalibratedState's GTest protocol: after import
+    # it repeats the same four declared requests with a new fixed run/name.
+    # Durations/patterns come from the saved prior design, never end-begin or
+    # an observed waveform. This fixture is not independent held-out data.
+    base = path.name.removesuffix("_calibrated_state.json")
+    design = load(path.with_name(base+"_proposal_confirmation_calibration_design.json"))
+    if design["schema_version"] != 2 or len(design["declared_trials"]) != 4:
+        raise RuntimeError("requires the full saved native declaration")
+    trials, observations = [], []
+    for index, request in enumerate(design["declared_trials"]):
+        name = base+"_calibrated_frozen_trial_"+str(index)+".json"
+        trials.append({**{key: request[key] for key in
+                         ("trial_id", "sample_id", "label", "pattern_hash", "reset_policy", "duration")},
+                       "presentation_index": index, "observation": name})
+        observations.append(load(path.with_name(name)))
+    return {"kind": "timelearner_recognition_evaluation_spec", "schema_version": 1,
+            "run_id": base+"_calibrated_frozen", "model_revision": package["model_revision"],
+            "coverage_policy": "per_trial_windows", "criterion": design["criterion"], "trials": trials}, observations
 
 
 def resign(package):
@@ -75,3 +99,46 @@ class CalibratedEvidenceTest(unittest.TestCase):
         result = json.loads(output.getvalue())["analysis"]
         self.assertTrue(result["calibration_evidence_consistent"])
         self.assertFalse(result["native_execution_verified"])
+
+    def test_frozen_response_is_recomputed_without_changing_the_model(self):
+        for path, package, _, _ in self.cases:
+            before = sha(package);spec, observations = frozen_measurement(path, package)
+            result = score_recognition_evaluation(spec, observations, package)
+            physical = score_threshold_candidate(spec, observations, package["source_candidate"])
+            self.assertEqual(result["pooled_counts"], physical["pooled_counts"])
+            self.assertEqual(result["trials"], physical["trials"])
+            self.assertTrue(result["calibration_evidence_checked"])
+            self.assertFalse(result["statistical_independence_verified"])
+            self.assertFalse(result["evaluation_partition_verified"])
+            self.assertIsNone(result["evaluation_verdict"])
+            self.assertEqual(sha(package), before)
+            self.assertTrue(audit_recognition_trial(observations[0], package)["calibration_evidence_checked"])
+
+    def test_calibration_run_cannot_be_relabelled_as_frozen_evaluation(self):
+        path, package, _, _ = self.cases[0];spec, observations = frozen_measurement(path, package)
+        spec["run_id"] = package["calibration_proof"]["confirmation"]["requests"][0]["run_id"]
+        with self.assertRaisesRegex(EvidenceError, "reuses_calibration_run"):
+            score_recognition_evaluation(spec, observations, package)
+
+    def test_unconfirmed_or_forged_models_cannot_enter_frozen_scoring(self):
+        path, package, _, _ = self.cases[0];spec, observations = frozen_measurement(path, package)
+        with self.assertRaisesRegex(EvidenceError, "explicit_calibration_scoring"):
+            score_recognition_evaluation(spec, observations, package["source_candidate"])
+        changed = copy.deepcopy(package);changed["calibration_proof"]["execution_attested"] = True
+        with self.assertRaises(EvidenceError): score_recognition_evaluation(spec, observations, resign(changed))
+
+    def test_production_frozen_evaluation_cli_keeps_calibration_and_test_separate(self):
+        from ..__main__ import main
+        path, package, _, _ = self.cases[0];spec, observations = frozen_measurement(path, package)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for index, (trial, observation) in enumerate(zip(spec["trials"], observations)):
+                name = "trial-"+str(index)+".json";trial["observation"] = name
+                (root/name).write_text(json.dumps(observation, allow_nan=False))
+            (root/"evaluation.json").write_text(json.dumps(spec, allow_nan=False))
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                main(["analyze", str(root/"evaluation.json"), "--format", "recognition-evaluation", "--model", str(path)])
+            result = json.loads(output.getvalue())["analysis"]
+            self.assertTrue(result["calibration_evidence_checked"])
+            self.assertIsNone(result["evaluation_verdict"])
