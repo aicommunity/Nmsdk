@@ -1,0 +1,100 @@
+{
+    "accepted_parameters": [
+        {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+        },
+        {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+        }
+    ],
+    "actual_model_revision": "a5fdde376ecb6252b39490e66d772b1b42a26806bcb938cc6d76b173f1a5fc78",
+    "actual_parameters": [
+        {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+        },
+        {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+        }
+    ],
+    "applied_edits": 0,
+    "candidate_repeat_groups": [
+    ],
+    "candidates": [
+    ],
+    "certificate": null,
+    "certificate_matches_actual_model": false,
+    "configuration": {
+        "bounds": [
+            {
+                "maximum_length": 3,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 2,
+                "minimum_length": 2,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            },
+            {
+                "maximum_length": 1,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 1,
+                "minimum_length": 1,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            }
+        ],
+        "maximum_candidates_per_input": 4,
+        "maximum_edits": 16,
+        "maximum_invalid_observations": 0,
+        "maximum_probes": 64,
+        "maximum_sweeps": 1,
+        "n0_candidate_repeats": 2,
+        "normalization": "synapse_count",
+        "resistance_subdivision_depth": 0,
+        "run_id": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate/automatic/session/6"
+    },
+    "contains_evaluation_verdict": false,
+    "kind": "native_training_state_summary",
+    "model_epoch": 0,
+    "model_state_kind": "diagnostic",
+    "outcome": "external_stop",
+    "reason": "external_stop",
+    "reference_model_epoch": 0,
+    "reference_model_revision": "a5fdde376ecb6252b39490e66d772b1b42a26806bcb938cc6d76b173f1a5fc78",
+    "reference_probes": 0,
+    "references": [
+        {
+            "effective_model_revision": "b3934b35981f4c7ca70206182766a5c6a38070b4f86f2b4866e8423f260b0900",
+            "input_id": "input0",
+            "raw_potential": 0.0033828893825672557,
+            "run_id": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate/automatic/session/5/capture/5",
+            "trial_id": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate/automatic/session/5/capture/5/1"
+        },
+        {
+            "effective_model_revision": "0c9d06b7817615ff20fbee615e2227e49b9bd4a155167bc0d240ccd02a1f2696",
+            "input_id": "input1",
+            "raw_potential": 0.004602018844406253,
+            "run_id": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate/automatic/session/5/capture/5",
+            "trial_id": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate/automatic/session/5/capture/5/2"
+        }
+    ],
+    "rejections": [
+    ],
+    "resistance_domains": [
+    ],
+    "schema_version": 2,
+    "search_probes": 0,
+    "state": "finished",
+    "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+    }
+}

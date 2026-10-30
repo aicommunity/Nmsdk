@@ -1,0 +1,156 @@
+{
+    "current_base_revision": "42a3150f17b431ac1784e41f1676a88dc631581f2199e7e8517ade47971115f0",
+    "evidence_schema_version": 2,
+    "kind": "timelearner_native_probe_evidence",
+    "native_status": "completed",
+    "observation": {
+        "burst_assignments": [
+            {
+                "channel": 0,
+                "validity": "valid",
+                "waves": [
+                    {
+                        "amplitude": 0.002968945525607114,
+                        "plateau_end": 8.886,
+                        "raw_potential": 0.002968945525607114,
+                        "relative_to_trial_start": 0.03249999999999886,
+                        "stimulus_id": "pulse0",
+                        "time": 8.886
+                    },
+                    {
+                        "amplitude": 0.003021484416234066,
+                        "plateau_end": 8.9655,
+                        "raw_potential": 0.003021484416234066,
+                        "relative_to_trial_start": 0.1120000000000001,
+                        "stimulus_id": "pulse1",
+                        "time": 8.9655
+                    }
+                ]
+            }
+        ],
+        "complete": true,
+        "end_reason": "window_closed",
+        "first_stimulus_time": 8.864,
+        "peaks": [
+            {
+                "amplitude": 0.002968945525607114,
+                "candidate_count": 1,
+                "delay_from_stimulus": 0.021999999999998465,
+                "input_id": "input0",
+                "plateau_end": 8.886,
+                "raw_potential": 0.002968945525607114,
+                "relative_to_trial_start": 0.03249999999999886,
+                "stimulus_id": "pulse0",
+                "time": 8.886,
+                "validity": "valid"
+            }
+        ],
+        "reasons": [
+        ],
+        "sample_count": 361,
+        "schema_version": 3,
+        "specification": {
+            "baseline": [
+                0
+            ],
+            "begin": 8.8535,
+            "effective_model_revision": "36cf1cca5206aa0f057ae36e1c1c006eb1e5e231ea3e232334eebc211fe0fe94",
+            "end": 9.0335,
+            "expected_stimulus_ids": [
+                "pulse0",
+                "pulse1"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 380,
+            "minimum_amplitude": 1e-06,
+            "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+            "peak_selection": "assigned_burst_wave",
+            "record_spikes": false,
+            "run_id": "Branch_2000_N0_learned_boundary_configured_repeat2",
+            "sample_id": "target",
+            "schema_version": 3,
+            "stimulus_profile": {
+                "amplitude": 1,
+                "frequency_deviation": 0,
+                "frequency_hz": 2000,
+                "generator_class": "NPulseGeneratorTransit",
+                "pulse_length": 0.001,
+                "use_pattern_output": false,
+                "use_transit_signal": false
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Branch_2000_N0_learned_boundary_configured_repeat2/trial/1",
+            "wave_assignment": "ordered_whole_burst",
+            "windows": [
+                {
+                    "begin": 8.8535,
+                    "channel": 0,
+                    "end": 9.0335,
+                    "input_id": "input0",
+                    "stimulus_id": "pulse0"
+                }
+            ]
+        },
+        "spike_count": null,
+        "spikes": [
+        ],
+        "stimuli": [
+            {
+                "id": "pulse0",
+                "relative_to_trial_start": 0.010500000000000398,
+                "time": 8.864
+            },
+            {
+                "id": "pulse1",
+                "relative_to_trial_start": 0.09050000000000047,
+                "time": 8.944
+            }
+        ],
+        "valid": true
+    },
+    "prepared": {
+        "base_model_revision": "42a3150f17b431ac1784e41f1676a88dc631581f2199e7e8517ade47971115f0",
+        "effective_model_revision": "36cf1cca5206aa0f057ae36e1c1c006eb1e5e231ea3e232334eebc211fe0fe94",
+        "input_id": "input0",
+        "model_epoch": 0,
+        "protocol_revision": "editing_burst_v1",
+        "routing": "branch_solo_burst",
+        "selected_input_index": 0
+    },
+    "reasons": [
+    ],
+    "requested_specification": {
+        "baseline": [
+        ],
+        "begin": 0,
+        "effective_model_revision": "",
+        "end": 0.18,
+        "expected_stimulus_ids": [
+            "pulse0",
+            "pulse1"
+        ],
+        "maximum_sample_gap": 0.0005,
+        "maximum_samples": 380,
+        "minimum_amplitude": 1e-06,
+        "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+        "peak_selection": "assigned_burst_wave",
+        "record_spikes": false,
+        "run_id": "Branch_2000_N0_learned_boundary_configured_repeat2",
+        "sample_id": "target",
+        "schema_version": 3,
+        "stimulus_profile": null,
+        "time_frame": "relative_to_trial_start",
+        "trial_id": "Branch_2000_N0_learned_boundary_configured_repeat2/trial/1",
+        "wave_assignment": "ordered_whole_burst",
+        "windows": [
+            {
+                "begin": 0,
+                "channel": 0,
+                "end": 0.18,
+                "input_id": "input0",
+                "stimulus_id": "pulse0"
+            }
+        ]
+    },
+    "requires_fresh_verification": false
+}
