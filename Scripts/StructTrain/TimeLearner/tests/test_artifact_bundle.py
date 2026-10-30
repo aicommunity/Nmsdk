@@ -108,6 +108,14 @@ class ArtifactBundleTest(unittest.TestCase):
             extract_bundle(bundle, self.root/"bad", maximum_bytes=1)
         self.assertFalse((self.root/"bad").exists())
 
+    def test_metadata_only_corruption_cannot_hide_behind_unchanged_archive(self):
+        bundle = self.pack(); value = load(bundle/"manifest.json")
+        value["inventory"]["trials"] += 1
+        (bundle/"manifest.json").write_text(json.dumps(value))
+        with self.assertRaisesRegex(EvidenceError, "bundle_file_checksum_mismatch"):
+            extract_bundle(bundle, self.root/"bad")
+        self.assertFalse((self.root/"bad").exists())
+
     def test_compact_archive_contains_required_model_and_runtime_records(self):
         bundle = self.pack(); manifest = verify_bundle(bundle)
         paths = {item["path"] for item in manifest["files"]}
