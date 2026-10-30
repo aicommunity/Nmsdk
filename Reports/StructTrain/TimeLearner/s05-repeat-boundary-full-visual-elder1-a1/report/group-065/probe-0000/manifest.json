@@ -1,0 +1,178 @@
+{
+  "kind": "timelearner_native_probe_visual_report",
+  "schema_version": 2,
+  "status": "diagnostic",
+  "run_id": "fresh-learned-import",
+  "trial_id": "fresh-learned-import/probe",
+  "sample_id": "target",
+  "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+  "base_model_revision": "7cdb1bec3101d2cd7317878d2033d4d63732537ed2bf21d93fd1361be500d312",
+  "observed_model_revision": "80d9fb536303d8a799f8b1341d4ada7268c288010d4edf1be56aac8648356609",
+  "frequency_hz": 2000.0,
+  "figures": [
+    {
+      "channel": 0,
+      "source_column": "soma0",
+      "signal": "native NPulseMembrane SumPotential",
+      "units": "model_units_SI_unverified",
+      "views": [
+        {
+          "view": "overview",
+          "begin": 51.887,
+          "end": 52.067,
+          "files": [
+            "soma-001/overview.png",
+            "soma-001/overview.svg",
+            "soma-001/overview.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": null,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "overview",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ],
+          "y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ]
+        },
+        {
+          "view": "zoom-001",
+          "begin": 51.887,
+          "end": 51.937,
+          "files": [
+            "soma-001/zoom-001.png",
+            "soma-001/zoom-001.svg",
+            "soma-001/zoom-001.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-001",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ],
+          "y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ]
+        },
+        {
+          "view": "zoom-002",
+          "begin": 51.937,
+          "end": 51.987,
+          "files": [
+            "soma-001/zoom-002.png",
+            "soma-001/zoom-002.svg",
+            "soma-001/zoom-002.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-002",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ],
+          "y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ]
+        },
+        {
+          "view": "zoom-003",
+          "begin": 51.987,
+          "end": 52.037,
+          "files": [
+            "soma-001/zoom-003.png",
+            "soma-001/zoom-003.svg",
+            "soma-001/zoom-003.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ],
+          "y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ]
+        },
+        {
+          "view": "zoom-004",
+          "begin": 52.037,
+          "end": 52.067,
+          "files": [
+            "soma-001/zoom-004.png",
+            "soma-001/zoom-004.svg",
+            "soma-001/zoom-004.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ],
+          "y_limits": [
+            -0.00022733082224505097,
+            0.003068966100308188
+          ]
+        }
+      ]
+    }
+  ],
+  "primary_audit": {
+    "valid_observation": true,
+    "trace_checked": true,
+    "trial_id": "fresh-learned-import/probe",
+    "sample_count": 361,
+    "native_status": "completed",
+    "evaluation_verdict": null
+  },
+  "spike_recording_enabled": false,
+  "source_packet_sha256": "61f54dd61e8d2e4cb8dfc333a943738ffd6e40a27a5292d36a0dc53902522899",
+  "source_trace_sha256": "44831588aa44f66cc8556cedc45ef8df239b8bcae753013bc30ecaddfe1f81f0",
+  "runtime": {
+    "python": "3.12.3",
+    "matplotlib": "3.9.4",
+    "backend": "Agg"
+  },
+  "comparison_scope": "explicit shared probe set",
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null,
+  "trace_quality": {
+    "context_observed": true,
+    "raw_trace_checked": true,
+    "sample_count": 361,
+    "recorded_window_complete": true,
+    "first_sample_time": 51.887,
+    "last_sample_time": 52.067,
+    "unobserved_intervals": [],
+    "nonfinite_cells": [],
+    "reason": "complete_audited_observation"
+  },
+  "observed_soma_count": 1
+}
