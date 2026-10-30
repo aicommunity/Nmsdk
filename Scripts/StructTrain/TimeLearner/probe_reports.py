@@ -15,7 +15,7 @@ from .native_evidence import audit_probe, load, number, require
 from .plotting import padded_limits, render_soma
 
 
-def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_limits=None):
+def _read_probe_data(packet_path: Path, trace_path: Path):
     packet = load(packet_path)
     audit = audit_probe(packet, trace_path)
     require(audit["valid_observation"] is True, "probe_plot_requires_complete_audited_primary_trace")
@@ -32,6 +32,11 @@ def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_l
                for row in rows[1:]]
     count = len(spec["baseline"])
     require(all(len(row["soma"]) == count for row in samples), "probe_plot_channel_dimension_mismatch")
+    return packet, audit, observation, spec, frequency, samples, count
+
+
+def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_limits=None):
+    packet, audit, observation, spec, frequency, samples, count = _read_probe_data(packet_path, trace_path)
     output.mkdir(parents=True, exist_ok=False)
     primary = output/"primary";primary.mkdir()
     packet_bytes=packet_path.read_bytes()
@@ -106,19 +111,15 @@ def render_probe_set(specification: Path, output: Path):
         require(type(trial["trial_id"]) is str and trial["trial_id"] and trial["trial_id"] not in seen,
                 "duplicate_or_invalid_probe_report_trial")
         packet_path,trace_path=artifact(trial["packet"]),artifact(trial["trace"])
-        packet=load(packet_path);audit=audit_probe(packet,trace_path)
+        packet,audit,_,actual,_,samples,count=_read_probe_data(packet_path,trace_path)
         require(audit["valid_observation"] is True and audit["trial_id"]==trial["trial_id"], "probe_report_expected_trial_mismatch")
-        actual=packet["observation"]["specification"]
-        require(actual["record_spikes"] is False, "native_training_probe_spike_capture_not_supported")
         if profile is None:
             profile=actual["stimulus_profile"];routing=packet["prepared"]["routing"]
             amplitudes=[[] for _ in actual["baseline"]]
         require(actual["stimulus_profile"]==profile and packet["prepared"]["routing"]==routing
                 and len(actual["baseline"])==len(amplitudes), "incompatible_probe_comparison_profile")
-        with trace_path.open(newline="",encoding="utf-8") as stream:
-            rows=list(csv.reader(stream))
-        for row in rows[1:]:
-            for channel,value in enumerate(row[2:]):amplitudes[channel].append(float(value))
+        for sample in samples:
+            for channel,value in enumerate(sample["soma"]):amplitudes[channel].append(value)
         prepared.append((trial,packet_path,trace_path));seen.add(trial["trial_id"])
     limits=[padded_limits(values) for values in amplitudes]
     output.mkdir(parents=True,exist_ok=False)
