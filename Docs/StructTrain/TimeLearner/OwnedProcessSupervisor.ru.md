@@ -87,4 +87,4 @@ process/runtime/condition/publisher tests без skips/failures/errors; все p
 statuses 0. Reports: Elder f80ea87d8502902d3086d98fa0129a8df42d8918;
 M40 37588a9c6b3f411250cf77d48acbd2737c0fd6d6. В каждом пакете локально
 проверены все 9 stored / 7 raw hashes, включая декомпрессию. Подэтап готов
-к merge; полный этап 10 остаётся незавершённым.
+к приёмке в полном runner. Объединён в develop: 54e9fa8ece12e43571814ca04704e7529b23b4cd; полный этап 10 остаётся незавершённым.
