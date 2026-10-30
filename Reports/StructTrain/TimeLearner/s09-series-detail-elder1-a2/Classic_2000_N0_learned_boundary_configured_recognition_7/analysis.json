@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "criterion": {
+    "id": "post_anchor_target_whole_window_foil_v1",
+    "anchor": "last_stimulus",
+    "begin_offset": 0.0,
+    "end_offset": 0.02,
+    "reject_target_outside_window": true
+  },
+  "evaluation_spec_digest": "61673468143990428c8cd751a3544eaf4ae97cfdb3202d15266b6fd5899ca658",
+  "coverage_policy": "per_trial_windows",
+  "run_id": "Classic_2000_N0_learned_boundary_configured_recognition_7_frozen",
+  "model_revision": "ee731d30aa8f4bab57674668441e495d8f883b84e44462b9017245b5cd0ef775",
+  "declared_training_outcome": "search_unresolved",
+  "source_training_evidence_checked": false,
+  "calibration": {
+    "ltzone_path": "$.LTZone",
+    "protocol": "fixed-inherited-from-solo",
+    "source_solo_sha256": "8587888f8da90392d399d998d78461d583c171b9286b4fbfb5c88d28b21c5114",
+    "status": "fixed",
+    "threshold": 1
+  },
+  "effective_threshold": 1.0,
+  "native_execution_verified": false,
+  "evaluation_verdict": null,
+  "invalid_trial_ids": [],
+  "validity": "valid",
+  "reason": "complete_declared_evaluation",
+  "pooled_counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 2,
+    "TN": 2,
+    "targets": 2,
+    "foils": 2,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.5,
+    "target_hit_rate": 0.0,
+    "foil_response_rate": 0.0
+  },
+  "by_reset_policy": {
+    "reset_per_trial": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 1,
+      "targets": 1,
+      "foils": 1,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.5,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0,
+      "criterion_satisfied": false,
+      "criterion_assessed": true
+    },
+    "preserve_neuron_dynamics": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 1,
+      "targets": 1,
+      "foils": 1,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.5,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0,
+      "criterion_satisfied": false,
+      "criterion_assessed": true
+    }
+  },
+  "trials": [
+    {
+      "trial_id": "trial_0",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 0,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 2.8105,
+      "response_end": 2.8305000000000002,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FN"
+    },
+    {
+      "trial_id": "trial_1",
+      "sample_id": "foil_reverse",
+      "label": "foil",
+      "presentation_index": 1,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 2.931,
+      "response_end": 2.951,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 2,
+      "reset_policy": "preserve_neuron_dynamics",
+      "response_begin": 3.0515,
+      "response_end": 3.0715,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FN"
+    },
+    {
+      "trial_id": "trial_3",
+      "sample_id": "foil_reverse",
+      "label": "foil",
+      "presentation_index": 3,
+      "reset_policy": "preserve_neuron_dynamics",
+      "response_begin": 3.172,
+      "response_end": 3.192,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    }
+  ]
+}
