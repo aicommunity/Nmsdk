@@ -68,7 +68,9 @@ def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_l
                  "sample_id": spec["sample_id"], "trial_id": "/".join(spec["trial_id"].split("/")[-2:]), "label": "training probe",
                  "model_before": spec["effective_model_revision"], "reset_policy": "native probe; see primary specification",
                  "spike_times": []}  # unknown, explicitly labelled; this producer cannot capture spikes
-        if quality is not None:chart["unobserved_intervals"]=quality["unobserved_intervals"]
+        if quality is not None:
+            chart["unobserved_intervals"]=quality["unobserved_intervals"]
+            chart["sample_markers"]=not quality["recorded_window_complete"]
         label=f"Soma{channel+1}.SumPotential (CSV soma{channel})"
         limits=padded_limits(values) if comparison_limits is None else comparison_limits[channel]
         require(limits[0] < min(values) <= max(values) < limits[1], "probe_comparison_limits_clip_primary_data")

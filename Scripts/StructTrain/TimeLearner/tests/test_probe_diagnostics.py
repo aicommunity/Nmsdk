@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 
 from ..native_evidence import EvidenceError, load
 from ..probe_reports import render_probe, render_probe_set
@@ -128,6 +129,28 @@ class ProbeDiagnosticsTest(unittest.TestCase):
         self.assertEqual((output/"primary/trace.csv").read_bytes(),original)
         self.assertEqual(manifest["source_trace_sha256"],hashlib.sha256(original).hexdigest())
         self.assertFalse(manifest["trace_quality"]["recorded_window_complete"])
+
+    def test_one_recorded_sample_remains_visible_in_both_actual_series(self):
+        packet,trace=self.copy_case();value=load(packet)
+        with trace.open(newline='') as stream:rows=list(csv.reader(stream))
+        with trace.open('w',newline='') as stream:csv.writer(stream).writerows(rows[:2])
+        value["observation"]["sample_count"]=1
+        value["reasons"].append("synthetic_one_sample_censoring_control")
+        packet.write_text(json.dumps(value));output=self.root/"report"
+        render_probe(packet,trace,output,allow_incomplete=True)
+        manifest=load(output/"manifest.json");self.assertEqual(manifest["trace_quality"]["sample_count"],1)
+        view=next(v for v in manifest["figures"][0]["views"] if v["view"]=="overview")
+        svg=ET.parse(output/view["files"][1]).getroot()
+        parents={child:parent for parent in svg.iter() for child in parent}
+        def under(node,identity):
+            while node is not None:
+                if node.get('id')==identity:return True
+                node=parents.get(node)
+            return False
+        for identity,color in (("axes_1","#154c9a"),("axes_2","#d46200")):
+            markers=[n for n in svg.iter() if n.tag.endswith('use') and color in n.get('style','') and under(n,identity)]
+            self.assertEqual(len(markers),1,(identity,markers))
+        self.assertTrue(view["sample_markers"])
 
     def test_invalid_schema_clock_and_counts_still_reject_diagnostic(self):
         packet,trace=self.copy_case();source=load(packet);original=trace.read_text()
