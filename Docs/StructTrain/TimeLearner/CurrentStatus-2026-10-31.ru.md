@@ -1,0 +1,84 @@
+# Состояние рефакторинга на 31.10.2026
+
+План 0–12 остаётся активным. Полностью принят этап 0; остальные этапы имеют
+незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
+а не переоценка исторических результатов по новым критериям.
+
+## Отправная точка и незавершённая ветка
+
+Принятый root develop: `8446ce2fc6775bb157cc4423665cba1319af228f`.
+Gitlinks: PulseLib `086b04fb43bb57506558bfb6beba6250f61a6ce2`,
+Bin `cbb3bf453d82f58672541ed8a42f7b5da54a5508`,
+Rdk `c903b9bba4a31e604f9740ae6f6ed52a4e7de74a`.
+
+Рабочая ветка `codex/timelearner-threshold-calibration` содержит новые native
+threshold candidate/proposal API, schema-2 наблюдения фактического LTZone.Potential,
+независимые Python проверки, CLI select/confirm и candidate visual reports.
+Она не объединена в develop: полная normal/ASan матрица и публикация её
+первичных данных ещё не приняты. Наличие API не означает готовность всего
+production calibration/PostTune controller.
+
+## Проверенные новые факты
+
+1. Разрешённая очистка тяжёлых производных отчётов завершена в origin и 14
+   корневых Git-копиях с сохранением файлов, восьми stash и резервных bundles.
+   Истории сабмодулей не переписывались. Проверены изменённые trees, свежий
+   recursive checkout и старые → новые root SHA.
+   [Отчёт](../../../Reports/StructTrain/TimeLearner/s10-root-history-cleanup-a1/README.md).
+2. В обычном native candidate gate a2 прошли 12/12 cases. Independent reader
+   подтвердил derivation и primary source CSV; последующие pure-data selection
+   проверки сохранили NonSeparable для исходного двухпорогового набора.
+   ASan a2 не принят: два 20-кГц source setups исчерпали 600-секундный wall budget.
+   Для новых transport/calibration fixtures явно объявлены 1800 секунд;
+   математические допуски и production default не менялись.
+3. В новом potential gate на обоих workers прошли Classic/Branch N1 при 2000 Гц.
+   Независимый reader `6d9bf22fc4f32ea404abd0a6dd6abe09c795841d` воспроизвёл
+   bracket из настоящих LTZone frames и исходного learned-state CSV proof.
+   Предложенные пороги: Classic 0.003336969230622544, Branch 0.006293579947234118.
+   Общий timing scorer подтвердил отдельные свежие reset-per-trial пробы обоих
+   кандидатов. CLI reader `2528cf27d89ab1b8c0646deb2e3f79f756435aa9` реально
+   выполнил select/confirm этих двух случаев на Elder. Это новый dispersed
+   двухпаттерновый контроль; не историческая восьмёрка и не общая разделимость.
+4. Первый 20-кГц potential gate обнаружил ошибку fixture: предел 10000 тиков
+   обрывал ожидание полного растянутого foil window, оставляя executor busy.
+   В `2f773b934e6285655875b024fdc6e2f6aff3efd9` ожидание вычисляется из duration
+   и frequency. На момент снимка исправленный Classic 20 кГц прошёл на Elder;
+   Branch и оставшиеся фазы ещё проверяются. Старый M40 a1 остановлен явно после
+   подтверждения этого дефекта; SIGTERM и owned PID записаны отдельно. Его exit 1
+   не является ASan finding или полным результатом матрицы. Новый ASan a2
+   запущен после завершения старого задания, в отдельном runtime.
+5. Candidate renderer реально построил четыре Branch N1 2000-Гц предъявления
+   с наложенными actual input samples; прошли 3/3 readback проверки. Сохранены
+   общий Y-scale, overview и увеличенные окна не менее восьми пикселей на tick.
+   Выбранные target overview/detail просмотрены; весь 178-файловый cache этим
+   просмотром не объявляется визуально принятым.
+   [Компактный отчёт](../../../Reports/StructTrain/TimeLearner/s08-threshold-candidate-report-pilot-a1/README.md):
+   82 primary/metadata files в архиве 342668 bytes и три выбранных PNG.
+
+Подробности API, ограничений и CLI: [NativeThresholdCalibration](NativeThresholdCalibration.ru.md).
+Python результаты `native_execution_verified=false` не заменяют native gate.
+Незавершённые gates не являются PASS; их артефакты ещё должны быть опубликованы
+в Git перед приёмкой и child → root merge.
+
+## Остаток полного плана
+
+| Этап | Что ещё требуется для полной приёмки |
+|---|---|
+| 0 | Принят; для новых этапов сохраняется --no-ff child → root workflow. |
+| 1 | Закончить исторический реестр с августа и review волн аудитов; связать semantic catalog с полной runtime/mode coverage. |
+| 2 | Сквозной immutable runtime настоящего experiment runner, полный переносимый scientific run bundle; адресные runtime tests уже существуют. |
+| 3 | Распространить единый строгий scorer и expected-trial contracts на все активные experiment/analysis пути; закрыть весь размерный и corrupted-data контроль. |
+| 4 | Полная lifecycle/storage/growth/reuse/Copy/Load и heterogeneous/profile/frequency матрица, включая ограничения multirate. |
+| 5 | Полная production model transfer матрица всех режимов, calibration provenance и independent frozen Test; имеющиеся native export/import fixtures не закрывают весь этап. |
+| 6 | Завершить общий controller/adapters во всех заявленных режимах и compatibility A/B; configured native API уже реализован. |
+| 7 | Полная N0/N1, ambiguous/invalid, quantization, bounds и shared Branch матрица; optional C-trim и final repeatability по плану. |
+| 8 | Завершить native calibration transaction/commit/rollback и final calibrated export, все PostTune modes и реальную frozen independent оценку; текущие candidate/proposal APIs являются подэтапом. |
+| 9 | Полный production CLI preflight/prepare/train/export/calibrate/evaluate, job specs и завершённая миграция с удалением старых tools; calibrate select/confirm пока является анализом измерений. |
+| 10 | Сквозная scheduler/lease/PID/recovery и fail-closed публикация настоящих jobs на двух workers; текущие process/publisher/ConditionSpec проверки не закрывают всю интеграцию. |
+| 11 | Исторический saved-state replay, cold retrain, legacy/V2 A/B, реальные permutations/ITI/reset policies и вся матрица моделей. |
+| 12 | Актуализация всех затронутых root/submodule/config/ClDesc документов и сквозная проверка единственности актуальной спецификации после миграции. |
+
+Серия D не возобновляется автоматически. Августовские визуально подтверждённые
+4/8–6/8 остаются рабочими наблюдениями исходного протокола. Научные 8/8 не
+являются условием завершения рефакторинга. Изменения порога не переносят
+сертификат solo Exact на новую recognition модель.
