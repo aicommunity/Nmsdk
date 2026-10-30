@@ -1600,19 +1600,33 @@ TEST(NativeRecognitionOwner,FreshProcessImport)
     dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
 }
 
+void RepeatedBoundarySummary(const NativeTrainingService& service,const std::string& revision,
+    const std::vector<InputParameters>& parameters,const std::string& artifact)
+{
+    EXPECT_EQ(service.Configuration().n0CandidateRepeats,2u);EXPECT_FALSE(service.Search());
+    const auto summary=EncodeNativeTrainingState(service,revision,parameters);
+    EXPECT_EQ(summary["schema_version"],QJsonValue(2));
+    EXPECT_EQ(summary["search_history_retained"],QJsonValue(false));
+    EXPECT_TRUE(summary["candidate_repeat_groups"].isArray());
+    EXPECT_TRUE(summary["candidate_repeat_groups"].toArray().isEmpty());
+    EXPECT_TRUE(summary["candidates"].toArray().isEmpty());
+    Artifact(artifact,QJsonDocument(summary).toJson());
+}
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
-    std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.)
+    std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1)
 {
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
     if(inputs!=2)suffix+="_inputs"+std::to_string(inputs);if(configured)suffix+="_configured";if(automatic)suffix+="_automatic";
     if(recognition)suffix+="_recognition_"+std::to_string(int(*recognition));
     if(initialThreshold!=1.)suffix+="_spiking";
+    if(n0Repeats>1)suffix+="_repeat"+std::to_string(n0Repeats);
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold);
     if(automatic)rig.learner->CalculateMode=0;
     std::optional<ConfiguredNativeTraining> configuredPlan;
     if(configured)
     {
         configuredPlan=Configuration(rig);configuredPlan->search.tolerances.sync=sync;
+        configuredPlan->search.n0CandidateRepeats=n0Repeats;
         rig.learner->ControllerVersion=2;rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(*configuredPlan)).toJson(QJsonDocument::Compact).toStdString();
         rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
@@ -1622,6 +1636,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     ASSERT_DOUBLE_EQ(initialZone->Threshold.GetData(),initialThreshold);
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
     auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    plan.search.n0CandidateRepeats=n0Repeats;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
     if(inputs>2)
     {
@@ -1653,7 +1668,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
     {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();ASSERT_TRUE(service.Certificate())<<service.Reason();
-    if(sync==.2 && inputs==2)EXPECT_TRUE(service.Certificate()->Exact());
+    if(sync==.2 && inputs==2 && n0Repeats==1)EXPECT_TRUE(service.Certificate()->Exact());
     ASSERT_EQ(service.ReferencePackets().size(),inputs);ASSERT_EQ(service.FinalPackets().size(),inputs);
     for(const auto& packet:service.ReferencePackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
     for(const auto& packet:service.FinalPackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
@@ -1662,6 +1677,11 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     Artifact(rig.name+"_learned_summary.json",QJsonDocument(EncodeNativeTrainingState(service,original,parameters)).toJson());
     const std::string implementation="native-learned-boundary-fixture-v1";
     const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    if(n0Repeats>1)
+    {
+        EXPECT_EQ(package["configuration"].toObject()["schema_version"],QJsonValue(2));
+        EXPECT_EQ(package["configuration"].toObject()["search"].toObject()["n0_candidate_repeats"],QJsonValue(2));
+    }
     Artifact(rig.name+"_learned_state.json",QJsonDocument(package).toJson());
     EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson(QJsonDocument::Compact).toStdString()),package);
     if(recognition){RecognitionChecks(rig,package,*recognition);return;}
@@ -1671,6 +1691,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     const auto imported=test->ImportNativeLearnedState(package,implementation);
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
     ASSERT_TRUE(test->NativeModelEditFailure().empty())<<test->NativeModelEditFailure();
+    if(n0Repeats>1)RepeatedBoundarySummary(test->NativeTrainingController(),original,parameters,rig.name+"_imported_summary.json");
     auto testNeuron=test->template GetComponentL<NPulseNeuron>("Neuron",true);
     auto testSource=test->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(testNeuron);ASSERT_TRUE(testSource);
     const auto identity=NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}});
@@ -1858,6 +1879,10 @@ TEST(NativeLearnedState,ClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.
 TEST(NativeLearnedState,BranchN1_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,20000);}
 TEST(NativeLearnedState,ClassicConfiguredN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true);}
 TEST(NativeLearnedState,BranchConfiguredN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true);}
+TEST(NativeLearnedState,ClassicConfiguredN0Repeated){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,{},false,1.,2);}
+TEST(NativeLearnedState,BranchConfiguredN0Repeated){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,{},false,1.,2);}
+TEST(NativeLearnedState,ClassicConfiguredN0RepeatedWarm){LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,true,{},false,1.,2);}
+TEST(NativeLearnedState,BranchConfiguredN0RepeatedWarm){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.2,2000,2,true,{},false,1.,2);}
 TEST(NativeLearnedState,ClassicOneInput){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,1);}
 TEST(NativeLearnedState,BranchOneInput){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,1);}
 TEST(NativeLearnedState,BranchFourInputsExplicitPointFiveTolerance){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.5,2000,4);}
@@ -2010,13 +2035,14 @@ CONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,0)
 CONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,1)
 #undef CONNECTED_STOP_TESTS
 
-enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial };
-template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false)
+enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial, RepeatPartial };
+template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false,unsigned n0Repeats=1)
 {
     EditingRig<Learner> rig(2000,normalization,"stopped_"+label);auto plan=TrainingPlan(rig);
+    plan.search.n0CandidateRepeats=n0Repeats;
     if(configured)
     {
-        const auto configuration=Configuration(rig);rig.learner->ControllerVersion=2;
+        auto configuration=Configuration(rig);configuration.search.n0CandidateRepeats=n0Repeats;rig.learner->ControllerVersion=2;
         rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact).toStdString();
         rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty())<<rig.learner->NativeModelEditFailure();
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
@@ -2058,12 +2084,19 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
         }
         if((scenario==StoppedCase::Early && ticks==10) || (scenario==StoppedCase::Partial && partial) ||
            (scenario==StoppedCase::Search && service.Search() && service.Search()->AppliedEdits()>0) ||
+           (scenario==StoppedCase::RepeatPartial && service.Search() && !service.Search()->Evidence().empty()) ||
            (scenario==StoppedCase::Final && service.FinalPackets().size()==1))
         {rig.learner->IsNeedToTrain=false;break;}
         rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
     }
     const auto& service=rig.learner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_FALSE(service.Certificate());
+    if(scenario==StoppedCase::RepeatPartial)
+    {
+        ASSERT_TRUE(service.Search());ASSERT_EQ(service.Search()->CandidateRepeats().size(),1u);
+        const auto& group=service.Search()->CandidateRepeats().front();
+        EXPECT_FALSE(group.complete);EXPECT_EQ(group.trialIds.size(),1u);EXPECT_EQ(group.rawPotentials.size(),1u);
+    }
     const auto expected=(scenario==StoppedCase::BudgetEarly || scenario==StoppedCase::BudgetSearch)?TrainingStatus::BudgetExhausted:
         (scenario==StoppedCase::ChangedPartial?TrainingStatus::InvalidModel:
          (scenario==StoppedCase::InvalidProbe?TrainingStatus::InvalidObservation:TrainingStatus::ExternalStop));
@@ -2088,6 +2121,7 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     const auto imported=test->ImportNativeLearnedState(package,implementation);
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
     const auto& restored=test->NativeTrainingController();ASSERT_FALSE(restored.Certificate());
+    if(n0Repeats>1)RepeatedBoundarySummary(restored,package["model_revision"].toString().toStdString(),test->ReadNativeParameters(),rig.name+"_imported_summary.json");
     EXPECT_EQ(restored.Outcome(),expected);EXPECT_EQ(restored.Reason(),service.Reason());EXPECT_FALSE(test->IsNeedToTrain.GetData());
     EXPECT_EQ(test->ReadNativeParameters(),rig.learner->ReadNativeParameters());
     auto testNeuron=test->template GetComponentL<NPulseNeuron>("Neuron",true);
@@ -2186,6 +2220,12 @@ TEST(NativeStoppedState,ClassicN0BudgetSearch){StoppedBoundary<NNeuronTimeLearne
 TEST(NativeStoppedState,BranchN0BudgetSearch){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::BudgetSearch,"N0BudgetSearch",0);}
 TEST(NativeStoppedState,ClassicConfiguredPartial){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::Partial,"ConfiguredPartial",1,true);}
 TEST(NativeStoppedState,BranchConfiguredPartial){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::Partial,"ConfiguredPartial",0,true);}
+TEST(NativeStoppedState,ClassicN0RepeatedEarly){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::Early,"N0RepeatedEarly",0,true,2);}
+TEST(NativeStoppedState,BranchN0RepeatedEarly){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::Early,"N0RepeatedEarly",0,true,2);}
+TEST(NativeStoppedState,ClassicN0RepeatedCapture){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::Partial,"N0RepeatedCapture",0,true,2);}
+TEST(NativeStoppedState,BranchN0RepeatedCapture){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::Partial,"N0RepeatedCapture",0,true,2);}
+TEST(NativeStoppedState,ClassicN0RepeatedHalfCandidate){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::RepeatPartial,"N0RepeatedHalfCandidate",0,true,2);}
+TEST(NativeStoppedState,BranchN0RepeatedHalfCandidate){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::RepeatPartial,"N0RepeatedHalfCandidate",0,true,2);}
 
 TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {
