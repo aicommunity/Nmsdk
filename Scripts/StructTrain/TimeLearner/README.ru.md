@@ -98,3 +98,14 @@ manifest и контрольные суммы. На каждую trial/soma па
 Открывать полный PNG или vector-ссылку для анализа деталей. Schema-1 units
 помечены model units / SI unverified; финальная визуальная матрица не закрыта.
 Подробности: Docs/StructTrain/TimeLearner/VisualReportRenderer.ru.md.
+
+### Git closure publication
+
+`python3 -m Scripts.StructTrain.TimeLearner publish publication.json --root CHECKOUT --output NEW_RECEIPT.json`
+публикует подготовленные commits всех сабмодулей, затем корня, без force и
+переписывания истории. Проверяет committed gitlinks/.gitmodules, чистые exact
+checkouts, локальные branch tips и фактические remote tips. Любая ошибка
+останавливает дальнейшую публикацию; receipt отделён от научного verdict.
+Spec/receipt хранить вне публикуемого checkout. Полный контракт и ограничения:
+Docs/StructTrain/TimeLearner/GitClosurePublisher.ru.md. Это ещё не сквозной
+experiment runner, очереди или доказательство полноты артефактов эксперимента.
