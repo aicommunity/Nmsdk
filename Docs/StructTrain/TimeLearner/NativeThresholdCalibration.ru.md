@@ -318,3 +318,7 @@ Server gate `s08-threshold-contract-normal-a2` на Elder завершён: 6/6 
 storage-имени генератора; обе причины исправлены в указанном снимке.
 ASan исправленного снимка поставлен после завершения отдельного задания
 предыдущего снимка; активные source/build/runtime не обновляются.
+[Переносимый пакет normal gate](../../../Reports/StructTrain/TimeLearner/s08-threshold-contract-normal-a2/README.md)
+содержит модели, первичные данные, manifests и диагностику обеих попыток.
+Полная повторная матрица 16 native / 35 independent checks исправленного снимка
+выполняется отдельно и не подменяется ограниченным 6/6 gate.
