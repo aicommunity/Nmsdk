@@ -1,0 +1,71 @@
+{
+    "actual_model_revision": "134ffc53e6f8289371735db97e09e5dc4d5fcb1b94a2bf64eb965ece82909bb4",
+    "actual_parameters": [
+        {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+        },
+        {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+        }
+    ],
+    "candidate_repeat_groups": [
+    ],
+    "candidates": [
+    ],
+    "certificate": null,
+    "certificate_matches_actual_model": false,
+    "configuration": {
+        "bounds": [
+            {
+                "maximum_length": 3,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 2,
+                "minimum_length": 2,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            },
+            {
+                "maximum_length": 1,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 1,
+                "minimum_length": 1,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            }
+        ],
+        "maximum_candidates_per_input": 4,
+        "maximum_edits": 16,
+        "maximum_invalid_observations": 0,
+        "maximum_probes": 64,
+        "maximum_sweeps": 1,
+        "n0_candidate_repeats": 2,
+        "normalization": "synapse_count",
+        "resistance_subdivision_depth": 0,
+        "run_id": "Classic_2000_N0_stopped_N0RepeatedEarly/automatic/session/9"
+    },
+    "contains_evaluation_verdict": false,
+    "kind": "native_training_state_summary",
+    "model_epoch": 0,
+    "model_state_kind": "diagnostic",
+    "outcome": "external_stop",
+    "reason": "external_stop",
+    "reference_probes": 0,
+    "references": [
+    ],
+    "rejections": [
+    ],
+    "resistance_domains": [
+    ],
+    "schema_version": 2,
+    "search_history_retained": false,
+    "state": "finished",
+    "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+    }
+}
