@@ -150,6 +150,10 @@ class ProbeDiagnosticsTest(unittest.TestCase):
         for identity,color in (("axes_1","#154c9a"),("axes_2","#d46200")):
             markers=[n for n in svg.iter() if n.tag.endswith('use') and color in n.get('style','') and under(n,identity)]
             self.assertEqual(len(markers),1,(identity,markers))
+            node=markers[0]
+            while node is not None:
+                self.assertIsNone(node.get('clip-path'), (identity,node.attrib))
+                node=parents.get(node)
         self.assertTrue(view["sample_markers"])
 
     def test_invalid_schema_clock_and_counts_still_reject_diagnostic(self):
