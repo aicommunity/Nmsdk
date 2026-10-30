@@ -26,6 +26,13 @@ def audit_recognition_trial(observation, package):
     try:
         o = observation
         require(type(package) is dict, "unsupported_trial_model_package")
+        if package.get("kind") == "timelearner_calibrated_recognition_state":
+            from .calibrated_evidence import audit_calibrated_state
+            audit_calibrated_state(package)
+            # The proof audit establishes exact equality of candidate/final
+            # physical graph and serialized model; only provenance differs.
+            result = audit_recognition_trial(observation, package["source_candidate"])
+            return {**result, "calibrated_model_sha256": package["sha256"], "calibration_evidence_checked": True}
         require(type(o) is dict, "unknown_recognition_trial_schema")
         schema = o.get("schema_version")
         require(type(schema) is int and schema in (1, 2), "unknown_recognition_trial_schema")

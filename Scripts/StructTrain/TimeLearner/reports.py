@@ -24,7 +24,9 @@ def render_evaluation(source: Path, model: Path, output: Path, *, calibration_pr
     package = load(model)
     scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
     analysis = scorer(spec, observations, package)
-    context = package["source_recognition"] if calibration_probe else package
+    calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
+    context = package["source_candidate"]["source_recognition"] if calibrated else (
+        package["source_recognition"] if calibration_probe else package)
     # Descriptors: native binding enumerates Soma1..N (Branch has one soma).
     count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
     nodes = {node["path"]: node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]}
@@ -87,6 +89,7 @@ def render_evaluation(source: Path, model: Path, output: Path, *, calibration_pr
     manifest = {"kind": "timelearner_visual_report", "schema_version": 1,
                 "purpose": "threshold_candidate_diagnostic" if calibration_probe else "recognition_evaluation_diagnostic",
                 "calibration_claim": False,
+                "source_calibration_evidence_checked": analysis.get("calibration_evidence_checked", False),
                 "run_id": spec["run_id"], "model_revision": spec["model_revision"],
                 "status": "diagnostic", "observation_validity": analysis["validity"],
                 "expected_trial_soma_pairs": len(spec["trials"])*count, "figures": figures,

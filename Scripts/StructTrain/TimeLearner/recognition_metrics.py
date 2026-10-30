@@ -31,12 +31,22 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
     try:
         require(type(package) is dict, "unsupported_evaluation_model_package")
         candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
+        calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
         require(candidate is calibration_probe, "threshold_candidates_require_explicit_calibration_scoring")
-        context = package["source_recognition"] if candidate else package
+        calibrated_audit = None
+        if calibrated:
+            from .calibrated_evidence import audit_calibrated_state
+            calibrated_audit = audit_calibrated_state(package)
+        physical_package = package["source_candidate"] if calibrated else package
+        context = physical_package["source_recognition"] if candidate or calibrated else package
         require(set(spec) == SPEC_FIELDS and spec["kind"] == "timelearner_recognition_evaluation_spec"
                 and type(spec["schema_version"]) is int and spec["schema_version"] == 1, "unknown_evaluation_spec")
         require(type(spec["run_id"]) is str and bool(spec["run_id"]) and spec["model_revision"] == package["model_revision"],
                 "evaluation_model_or_run_mismatch")
+        if calibrated:
+            calibration_runs = {o["run_id"] for phase in ("search", "confirmation")
+                                for o in package["calibration_proof"][phase]["observations"]}
+            require(spec["run_id"] not in calibration_runs, "frozen_evaluation_reuses_calibration_run")
         require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_evaluation_coverage")
         source = context["source_solo"]
         require(source["kind"] == "timelearner_completed_state" and source["state_kind"] == "learned_solo"
@@ -70,7 +80,10 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
                 "incomplete_evaluation_positions_or_labels")
         actual, audits = {}, {}
         for observation in observations:
-            audit = audit_recognition_trial(observation, package)
+            # The calibrated proof was checked once above. Its physical graph
+            # equals this candidate exactly; avoid rescoring the entire proof
+            # once per evaluation trial. Direct trial auditing still checks it.
+            audit = audit_recognition_trial(observation, physical_package)
             trial_id = audit["trial_id"]
             require(audit["run_id"] == spec["run_id"] and trial_id in expected and trial_id not in actual,
                     "unexpected_or_duplicate_evaluation_trial")
@@ -87,7 +100,7 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
         if candidate:
             from .threshold_candidate_evidence import audit_threshold_candidate
             audit_threshold_candidate(package)
-        else:
+        elif not calibrated:
             require(calibration["status"] == "fixed" and calibration["protocol"] == "fixed-inherited-from-solo"
                     and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
         zones = [node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]
@@ -104,6 +117,10 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
                   "evaluation_verdict": None, "invalid_trial_ids": invalid}
         if candidate:
             result["calibration_probe"] = True
+        if calibrated:
+            result.update(calibration_evidence_checked=calibrated_audit["calibration_evidence_consistent"],
+                          calibration_proof_sha256=package["calibration_proof"]["sha256"],
+                          statistical_independence_verified=False, evaluation_partition_verified=False)
         if invalid:
             return {**result, "validity": "invalid", "reason": "invalid_or_censored_trial", "pooled_counts": None,
                     "by_reset_policy": {}, "trials": []}
