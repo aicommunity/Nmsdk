@@ -6,7 +6,7 @@ never infers a complete expected set from whichever files happen to exist.
 import hashlib
 import html
 import json
-import re
+import math
 import shutil
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -47,6 +47,8 @@ def inventory_native_test_run(specification, artifact_root):
     root = artifact_root.resolve(strict=True)
     native = _artifact(root, "native")
     require(native.is_dir(), "native_test_primary_directory_missing")
+    require(all(p.is_file() and not p.is_symlink() for p in native.iterdir()),
+            "native_test_primary_must_contain_only_regular_files")
     junit = ET.parse(_artifact(root, "native.xml")).getroot()
     cases = list(junit.iter("testcase"))
     actual = [c.get("classname", "")+"/"+c.get("name", "") for c in cases]
@@ -118,7 +120,7 @@ def inventory_native_test_run(specification, artifact_root):
             "fixture_contract": spec["fixture_contract"], "tests": len(cases), "groups": groups,
             "trials": sum(len(g["trials"]) for g in groups),
             "known_trial_soma_pairs": sum(e["channels"] for g in groups for e in g["trials"]),
-            "rendered_trial_soma_pairs": sum(e["plottable_channels"] for g in groups for e in g["trials"]),
+            "plottable_trial_soma_pairs": sum(e["plottable_channels"] for g in groups for e in g["trials"]),
             "data_complete": all(e["data_complete"] for g in groups for e in g["trials"]),
             "visual_acceptance_complete": False, "scientific_verdict": None}
 
@@ -131,7 +133,7 @@ def _read_probe_data_from_value(packet, trace):
         _write(path, packet)
         data = _read_probe_data(path, trace, allow_incomplete=True)
     _, _, _, _, _, samples, channels, quality = data
-    finite = sum(any(__import__("math").isfinite(s["soma"][i]) for s in samples) for i in range(channels))
+    finite = sum(any(math.isfinite(s["soma"][i]) for s in samples) for i in range(channels))
     return (*data[:-1], {"plottable_channels": finite,
                         "complete": quality["recorded_window_complete"] and data[1]["valid_observation"] is True})
 
@@ -146,7 +148,7 @@ def render_native_test_run(specification, artifact_root, output):
     shutil.copytree(root/"native", primary/"native")
     shutil.copyfile(root/"native.xml", primary/"native.xml")
     shutil.copyfile(specification, output/"native-test-spec.json")
-    links = []
+    links = []; rendered_pairs = 0
     for i, group in enumerate(inventory["groups"]):
         prepared = output/f"group-{i:03d}-input"; prepared.mkdir()
         trials = []
@@ -163,8 +165,11 @@ def render_native_test_run(specification, artifact_root, output):
         result = render_probe_set(prepared/"spec.json", folder)
         require(result["trials"] == len(trials) and result["trial_soma_pairs"] == sum(e["plottable_channels"] for e in group["trials"]),
                 "native_test_rendered_coverage_mismatch")
+        rendered_pairs += result["trial_soma_pairs"]
         group["report"] = folder.name+"/index.html"
         links.append('<li><a href="'+group["report"]+'">'+html.escape(group["identity"])+"</a></li>")
+    require(rendered_pairs == inventory["plottable_trial_soma_pairs"], "native_test_total_rendered_coverage_mismatch")
+    inventory["rendered_trial_soma_pairs"] = rendered_pairs
     _write(output/"manifest.json", inventory)
     (output/"index.html").write_text('<!doctype html><meta charset="utf-8"><title>Native test run</title>'
         '<style>body{font:18px sans-serif;margin:2em}</style><h1>All declared native test observations</h1>'
