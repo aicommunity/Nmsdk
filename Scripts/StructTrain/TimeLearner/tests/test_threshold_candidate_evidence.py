@@ -1,6 +1,7 @@
 """Native candidate packages and full primary observations; no synthetic pass fixture."""
 import copy
 import hashlib
+import math
 import os
 import json
 from pathlib import Path
@@ -12,6 +13,7 @@ from ..learned_evidence import load_case
 from ..model_identity import canonical_model_sha256
 from ..native_evidence import EvidenceError, load
 from ..recognition_trial_evidence import audit_recognition_trial
+from ..recognition_metrics import score_recognition_evaluation, score_threshold_candidate
 from ..threshold_candidate_evidence import audit_threshold_candidate
 
 
@@ -126,3 +128,48 @@ class ThresholdCandidateEvidenceTest(unittest.TestCase):
         self.assertEqual(response.returncode, 0, response.stderr)
         self.assertTrue(json.loads(response.stdout)["analysis"]["valid_observation"])
         self.assertIsNone(json.loads(response.stdout)["evaluation_verdict"])
+
+    @staticmethod
+    def specification(path, package):
+        prefix = path.name.removesuffix("_recognition_candidate.json")
+        original = package["source_recognition"]["source_solo"]["configuration"]["model"]
+        pattern = original["initial_isi"]
+        frequency = original["frequency_hz"]
+        duration = math.ceil((sum(pattern)+.03)*frequency)/frequency
+        trials = []
+        for i in range(4):
+            target = i % 2 == 0
+            trials.append({"trial_id": f"trial_{i}", "sample_id": "training_target" if target else "foil_reverse",
+                           "label": "target" if target else "foil",
+                           "pattern_hash": canonical_model_sha256(pattern if target else list(reversed(pattern))),
+                           "reset_policy": "reset_per_trial" if i < 2 else "preserve_neuron_dynamics",
+                           "presentation_index": i, "duration": duration,
+                           "observation": prefix+f"_frozen_trial_{i}.json"})
+        return {"kind": "timelearner_recognition_evaluation_spec", "schema_version": 1,
+                "run_id": prefix+"_frozen", "model_revision": package["model_revision"],
+                "coverage_policy": "per_trial_windows", "trials": trials,
+                "criterion": {"id": "post_anchor_target_whole_window_foil_v1", "anchor": "last_stimulus",
+                              "begin_offset": 0., "end_offset": None, "reject_target_outside_window": True}}
+
+    def test_candidate_matrix_scores_without_a_calibration_claim(self):
+        for path, package, _, trials, _ in self.cases:
+            result = score_threshold_candidate(self.specification(path, package), trials, package)
+            self.assertEqual(result["validity"], "valid")
+            self.assertTrue(result["calibration_probe"])
+            self.assertEqual(result["calibration"]["protocol"], "threshold-candidate-not-calibrated")
+            self.assertEqual(sum(result["pooled_counts"][key] for key in ("TP", "TN", "FP", "FN")), 4)
+            self.assertEqual(set(result["by_reset_policy"]), {"reset_per_trial", "preserve_neuron_dynamics"})
+            self.assertIsNone(result["evaluation_verdict"])
+
+    def test_unconfirmed_candidates_cannot_enter_frozen_evaluation(self):
+        for path, package, _, trials, _ in self.cases:
+            with self.assertRaisesRegex(EvidenceError, "explicit_calibration_scoring"):
+                score_recognition_evaluation(self.specification(path, package), trials, package)
+
+    def test_candidate_scoring_is_order_independent_and_requires_all_expected_trials(self):
+        for path, package, _, trials, _ in self.cases:
+            spec = self.specification(path, package)
+            first = score_threshold_candidate(spec, trials, package)
+            self.assertEqual(first, score_threshold_candidate(spec, list(reversed(trials)), package))
+            for incomplete in (trials[:-1], trials+[trials[0]]):
+                with self.assertRaises(EvidenceError):score_threshold_candidate(spec, incomplete, package)

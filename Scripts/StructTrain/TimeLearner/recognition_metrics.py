@@ -26,14 +26,18 @@ def _counts(rows):
             "foil_response_rate": counts["FP"]/foils if foils else None}
 
 
-def score_recognition_evaluation(spec, observations, package):
+def _score_recognition(spec, observations, package, *, calibration_probe):
     try:
+        require(type(package) is dict, "unsupported_evaluation_model_package")
+        candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
+        require(candidate is calibration_probe, "threshold_candidates_require_explicit_calibration_scoring")
+        context = package["source_recognition"] if candidate else package
         require(set(spec) == SPEC_FIELDS and spec["kind"] == "timelearner_recognition_evaluation_spec"
                 and type(spec["schema_version"]) is int and spec["schema_version"] == 1, "unknown_evaluation_spec")
         require(type(spec["run_id"]) is str and bool(spec["run_id"]) and spec["model_revision"] == package["model_revision"],
                 "evaluation_model_or_run_mismatch")
         require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_evaluation_coverage")
-        source = package["source_solo"]
+        source = context["source_solo"]
         require(source["kind"] == "timelearner_completed_state" and source["state_kind"] == "learned_solo"
                 and source["dynamic_checkpoint"] is False and type(source["certificate"]) is dict
                 and source["training_outcome"] in ("exact", "search_unresolved"), "unsupported_evaluation_source_state")
@@ -47,7 +51,7 @@ def score_recognition_evaluation(spec, observations, package):
         require(start >= 0 and (stop is None or stop >= start), "invalid_response_window")
         require(type(spec["trials"]) is list and len(spec["trials"]) >= 2, "incomplete_evaluation_design")
         expected, positions, samples = {}, set(), {}
-        target_hash = canonical_model_sha256(package["source_solo"]["configuration"]["model"]["initial_isi"])
+        target_hash = canonical_model_sha256(source["configuration"]["model"]["initial_isi"])
         for trial in spec["trials"]:
             require(type(trial) is dict and set(trial) == TRIAL_FIELDS, "unknown_expected_trial_fields")
             for key in ("trial_id", "sample_id", "pattern_hash", "observation"):
@@ -79,8 +83,12 @@ def score_recognition_evaluation(spec, observations, package):
         require(set(actual) == set(expected), "missing_evaluation_trial")
         invalid = sorted(key for key, audit in audits.items() if not audit["valid_observation"])
         calibration = package["neuron"]["metadata"]["calibration"]
-        require(calibration["status"] == "fixed" and calibration["protocol"] == "fixed-inherited-from-solo"
-                and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
+        if candidate:
+            from .threshold_candidate_evidence import audit_threshold_candidate
+            audit_threshold_candidate(package)
+        else:
+            require(calibration["status"] == "fixed" and calibration["protocol"] == "fixed-inherited-from-solo"
+                    and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
         zones = [node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]
                  if node["path"] == calibration["ltzone_path"]]
         require(len(zones) == 1 and _physical(zones[0], "Threshold") == number(calibration["threshold"]),
@@ -93,6 +101,8 @@ def score_recognition_evaluation(spec, observations, package):
                   "declared_training_outcome": source["training_outcome"], "source_training_evidence_checked": False,
                   "calibration": calibration, "effective_threshold": _physical(zones[0], "Threshold"), "native_execution_verified": False,
                   "evaluation_verdict": None, "invalid_trial_ids": invalid}
+        if candidate:
+            result["calibration_probe"] = True
         if invalid:
             return {**result, "validity": "invalid", "reason": "invalid_or_censored_trial", "pooled_counts": None,
                     "by_reset_policy": {}, "trials": []}
@@ -137,6 +147,19 @@ def score_recognition_evaluation(spec, observations, package):
         raise
     except (KeyError, TypeError, ValueError, OverflowError, ZeroDivisionError) as error:
         raise EvidenceError("malformed_recognition_evaluation:" + str(error)) from error
+
+
+def score_recognition_evaluation(spec, observations, package):
+    """Frozen evaluation; unconfirmed threshold candidates are rejected."""
+    return _score_recognition(spec, observations, package, calibration_probe=False)
+
+
+def score_threshold_candidate(spec, observations, package):
+    """Same complete label/ID/window criterion, explicitly for calibration data.
+
+    A measured criterion match is not selection, confirmation or calibration.
+    """
+    return _score_recognition(spec, observations, package, calibration_probe=True)
 
 
 def load_evaluation(path: Path):
