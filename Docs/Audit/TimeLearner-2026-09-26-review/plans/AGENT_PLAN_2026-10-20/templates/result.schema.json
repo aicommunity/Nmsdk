@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AGENT_PLAN_2026-10-20 task result",
+  "type": "object",
+  "required": ["task", "host", "status", "started_utc", "finished_utc", "provenance", "checks"],
+  "properties": {
+    "task": {"type": "string", "pattern": "^(A0|A1|A2|A3|B1|B2|C1|C2|D1|D2|D2b|E0|E1|E2|F1a|F1b|G1)$"},
+    "host": {"type": "string"},
+    "status": {"enum": ["DONE", "DONE_WITH_DEVIATIONS", "STOPPED", "FAILED_INFRA"]},
+    "started_utc": {"type": "string"},
+    "finished_utc": {"type": "string"},
+    "run_ids": {"type": "array", "items": {"type": "string"}},
+    "provenance": {
+      "type": "object",
+      "required": ["root", "bin", "pulselib", "console_sha256"],
+      "properties": {
+        "root": {"type": "string"}, "bin": {"type": "string"}, "pulselib": {"type": "string"},
+        "rdk": {"type": "string"}, "console_sha256": {"type": "string"}, "bin_refresh_commit": {"type": "string"}
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "expected", "actual", "verdict"],
+        "properties": {
+          "name": {"type": "string"}, "expected": {}, "actual": {},
+          "verdict": {"enum": ["MATCH", "DEVIATION", "NOT_RUN"]}, "note": {"type": "string"}
+        }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["run_id", "case", "training_convergence", "separation_quality"],
+        "properties": {
+          "run_id": {"type": "string"}, "case": {"type": "string"}, "arm": {"type": "string"}, "repeat": {"type": "integer"},
+          "train_status": {"type": "string"}, "training_convergence": {"type": "string"}, "fires": {"type": "string"},
+          "separation_quality": {"type": "string"}, "detection_quality": {"type": "string"},
+          "DendriteLength": {"type": "string"}, "TipSynapseResistance": {"type": "string"}, "FixedLTZThreshold": {"type": "string"},
+          "train_params": {"type": ["object", "null"]}
+        }
+      }
+    },
+    "verdicts": {"type": "object", "additionalProperties": {"type": "string"}},
+    "stop_reason": {"type": ["string", "null"]},
+    "artifacts": {"type": "array", "items": {"type": "object", "properties": {"path": {"type": "string"}, "sha256": {"type": "string"}}}}
+  }
+}

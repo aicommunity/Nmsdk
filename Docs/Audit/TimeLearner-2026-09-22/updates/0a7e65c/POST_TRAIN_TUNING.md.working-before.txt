@@ -1,0 +1,51 @@
+# Post-train tuning in the teacher module
+
+[Russian contract and property table](POST_TRAIN_TUNING.ru.md) · [Current implementation audit](AUDIT_2026-09-22.md)
+
+Checked against PulseLib fd79b0fb. Both learners perform joint synchronization and amplitude normalization in phase 0. Phase 1 is unused, Done is 2; PostTune is 3 for TimeLearner and 4 for Branch. Branch phase 3 is legacy CalibrateLtz with PostTune disabled. Best-effort exits mean Done is not a selectivity certificate.
+
+Defaults: EnablePostTrainTuning=true, AutoScaleIterationGap=true. Old XML inherits these defaults. Disabling PostTune alone does not reproduce an older binary's behavior.
+
+Tip modes: 0 Off; 1 CanonRmin (2e7 for first N−1 tips, 8.6e7 last); 2 FlatLastR (8.6e7 all); 3 KeepDone; 4 SearchSynthetic. Branch search still calls ScaleTipR for its fallback snapshot. Search selects candidates using LandscapeOk and gap, but currently may compute the final threshold using metrics from a different last-tested candidate.
+
+Timing: gap=span+settle+slack; dataset delay=settle+slack. AutoScale=1 ignores the XML floor; AutoScale=0 takes max(configured, physical). See [timing](docs/TIMING_AND_GAP.ru.md).
+
+Inference-mid probes the current Test Matrix, treating its first N rows as target regardless of MatrixClasses, then resets and evaluates that same matrix. This is calibration/resubstitution, not held-out evaluation. Mid uses the highest foil below target and can exclude larger foils; inference may commit a threshold despite an invalid landscape. Branch free-run also ignores explicit LTZ metric selection. These are open defects, described in the audit.
+
+The [saved verification table](_repro/POSTTUNE_VERIFY_RESULT.md) contains two skip_train smoke cases and one done_search_diff case. It does not demonstrate all cold-training cases in the [verification plan](POST_TRAIN_VERIFY.ru.md). The verifier does not currently enforce every declared fires/TipR expectation or reject all stale child-run results.
+
+<<<<<<< Updated upstream
+0 Off · 1 CanonRmin `2e7×(N−1)+8.6e7` · 2 FlatLastR `8.6e7×N` · 3 KeepDone · 4 SearchSynthetic (trial BestTips if `landscape_ok`; free-run fail → `free_run_reject_best` → KeepDone/ScaleTipR)
+
+## Timing
+
+`AutoScaleIterationGap=true` (default): `EffectiveIterationGap = span + settle + slack` — XML `IterationGap=1.5` does not raise the floor.  
+Canon: [`docs/TIMING_AND_GAP.ru.md`](docs/TIMING_AND_GAP.ru.md).
+
+## Mid probes (phase8 / phase9 / pack A parity)
+
+**TipR** in Train PostTune; **silent mid** in Test inference (same C++, no Python tiprmin/mid).
+
+| Class | Mid metric | Gate |
+|-------|------------|------|
+| Branch | shared soma amp (`soma_amp_sum`) | `phase8 --skip-tipr-mid` |
+| TL | LTZ peak (Auto) | `phase9 --skip-tipr-mid` |
+
+Train free-run may leave `FixedLTZ=1.0` when landscape is bad; Test `MaybeStartInferenceMidProbes` plays Matrix pack A as-is and writes mid + `posttune_complete.flag`. Gate two-pass when thr is silent.
+
+SearchSynthetic (mode=4) runs **only** in the Train PostTune loop (`PostTrainTipSearchIters=12`). BestTips update when trial `LandscapeOk` and `gap > BestGap`; after `apply_best`, Train free-run mid must also pass — else `free_run_reject_best` → snapshot (`search_reverted=1`). Train always leaves **silent** mid after Search so Test C++ inference mid can run.  
+**Test-only / `--skip-train` smoke ≠ Search validation**. Accept via `posttune_verify --case br100_search` (no skip-train): TipR≠keep **or** `search_reverted=1`; mid `cpp`; fires **`10000000`**. See [`POST_TRAIN_VERIFY.ru.md`](POST_TRAIN_VERIFY.ru.md) §V5b.
+
+Mid: `0.5*(tgt+max_foil_below)` else `tgt*0.99`.
+
+Verify P0: Branch25 CanonRmin / off / AsymRm25 FlatLastR → fires `10000000` — [`_repro/POSTTUNE_VERIFY_RESULT.md`](_repro/POSTTUNE_VERIFY_RESULT.md).
+
+AutoScale emergency rollback: set `AutoScaleIterationGap=0` (or ADefault false + pin on posttune clones only). See [`docs/TIMING_AND_GAP.ru.md`](docs/TIMING_AND_GAP.ru.md).
+
+## Scripts
+
+`post_train_hygiene` skips Python tiprmin when PostTune TipR already canon/flat.  
+`phase8_tiprmin_gate.py --skip-tipr-mid` / `phase9_preinh_bc_gate.py --skip-tipr-mid`: C++ inference mid then gate.
+=======
+The phase8/phase9 --skip-tipr-mid gates use C++ mid and may run Test twice when the initial threshold is silent. Record all overrides and data provenance; use separate calibration and held-out test data after fixing the measurement defects.
+>>>>>>> Stashed changes

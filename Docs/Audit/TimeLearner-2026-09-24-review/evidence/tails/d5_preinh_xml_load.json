@@ -1,0 +1,49 @@
+{
+  "exp": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/EXP_span50ms_packC_preinh_C1e9",
+  "workdir": "/tmp/d5_preinh_load_14298",
+  "validate_config_rc": 0,
+  "run_rc_timeout_or_exit": 124,
+  "class_name_target": "NSPNeuronGenPreinh2_5AsymRmD001C1e9",
+  "classes_in_xml": [
+    "NSPNeuronGenPreinh2_5AsymRmD001C1e9"
+  ],
+  "tags_before": {
+    "NeuronClassName": "NSPNeuronGenPreinh2_5AsymRmD001C1e9",
+    "MembraneClassName": "NPMembraneBio",
+    "Capacitance": null,
+    "TimeConstant": null,
+    "Threshold": "0.050000000000000003",
+    "MembraneResistance": null
+  },
+  "tags_after": {
+    "NeuronClassName": "NSPNeuronGenPreinh2_5AsymRmD001C1e9",
+    "MembraneClassName": "NPMembraneBio",
+    "Capacitance": null,
+    "TimeConstant": null,
+    "Threshold": "0.050000000000000003",
+    "MembraneResistance": null
+  },
+  "mtime_params_before": 1789378674,
+  "mtime_params_after": 1789378674,
+  "mtime_model_before": 1789378674,
+  "mtime_model_after": 1789378674,
+  "save_touched_params": false,
+  "validate_log_tail": "Configuration validation results:\n  Model exists: Yes\n  Model empty: Yes\n  Components count per channel: [0]=3\n  Channels loaded: 1/1\n  Errors: 0\n  Warnings: 0\n\nConfiguration is VALID\n",
+  "run_log_tail": "*** Aborted at 1790279928 (unix time) try \"date -d @1790279928\" if you are using GNU date ***\nPC: @                0x0 (unknown)\n*** SIGTERM (@0x3e80000383c) received by PID 14397 (TID 0x739f47097f40) from PID 14396; stack trace: ***\n    @     0x739f478a1046 (unknown)\n    @     0x739f46a42520 (unknown)\n    @     0x739f46b18c0f __poll\n    @     0x739f46375426 (unknown)\n    @     0x739f4631d3e3 g_main_context_iteration\n    @     0x739f475130b8 QEventDispatcherGlib::processEvents()\n    @     0x739f474b875b QEventLoop::exec()\n    @     0x739f474c0cf4 QCoreApplication::exec()\n    @     0x55fbf59b5275 main\n    @     0x739f46a29d90 (unknown)\n    @     0x739f46a29e40 __libc_start_main\n    @     0x55fbf59b8a15 _start\n",
+  "model_Cap_samples": [
+    "1.0000000000000001e-09",
+    "1.0000000000000001e-09",
+    "1.0000000000000001e-09",
+    "1.0000000000000001e-09",
+    "1.0000000000000001e-09",
+    "1.0000000000000001e-09",
+    "1.0000000000000001e-09",
+    "1.0000000000000001e-09"
+  ],
+  "model_TC_samples": [],
+  "model_Threshold_samples": [
+    "0.050000000000000003"
+  ],
+  "model_Preinh_token_count": 2,
+  "ApplyElementDefaults_registered": "NSPNeuronGenPreinh2_5AsymRmD001C1e9 in NPulseLibrary.cpp"
+}
