@@ -35,17 +35,24 @@ class NativeCalibrationEvidenceTest(unittest.TestCase):
             spec = fixtures.specification(path, candidate)
             cls.add_scopes(path.parent, prefix, candidate, source, spec, observations)
         root = Path(root)
+        proposed = 0
         for top in ("Classic", "Branch"):
             for frequency in ("2000", "20000"):
                 base = top+"_"+frequency+"_N1_learned_boundary_configured_recognition_10"
                 source = load_case(root/(base+"_learned_state.json"))
+                has_proposal = load(root/(base+"_threshold_proposal.json"))["threshold"] is not None
+                proposed += has_proposal
                 for phase in ("candidate_low", "candidate_high", "proposal_search", "proposal_confirmation"):
+                    if phase.startswith("proposal_") and not has_proposal:
+                        if (root/(base+"_"+phase+"_calibration_assessment.json")).exists():
+                            raise RuntimeError("assessment exists for an undeclared proposal")
+                        continue
                     candidate_path = base+"_"+phase+"_recognition_candidate.json" if phase.startswith("candidate_") else base+"_proposal_candidate.json"
                     candidate = load(root/candidate_path)
                     m = measurement(root, base, phase, candidate, include_robustness=True)
                     cls.add_scopes(root, base+"_"+phase, candidate, source, m["evaluation_spec"], m["observations"])
-        if len(cls.cases) != 64:
-            raise RuntimeError("requires 32 complete candidate matrices and 32 explicitly scoped primary pairs")
+        if len(cls.cases) != 48+4*proposed:
+            raise RuntimeError("requires every complete matrix and scoped primary pair; NoGap does not create a candidate")
 
     @classmethod
     def add_scopes(cls, root, prefix, candidate, source, spec, observations):
@@ -56,7 +63,7 @@ class NativeCalibrationEvidenceTest(unittest.TestCase):
             scoped = observations[:2] if primary else observations
             cls.cases.append((root/name, load(root/name), scoped_spec, scoped, candidate, source))
 
-    def test_all_64_native_assessments_agree_with_primary_scorer(self):
+    def test_all_declared_native_assessments_agree_with_primary_scorer(self):
         for _, assessment, spec, observations, candidate, source in self.cases:
             result = audit_native_calibration_assessment(assessment, spec, observations, candidate, source)
             self.assertTrue(result["native_criterion_consistent"])
