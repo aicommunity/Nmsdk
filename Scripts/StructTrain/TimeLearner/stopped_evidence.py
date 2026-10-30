@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 
 from .model_identity import canonical_model_sha256
-from .native_evidence import audit_probe, count, load, number, require
+from .native_evidence import (audit_probe, count, load, number, require,
+                              validate_configured_repeat_policy, validate_search_history_availability)
 
 OUTCOMES = {"external_stop", "budget_exhausted", "invalid_model", "invalid_observation", "search_unresolved"}
 
@@ -33,6 +34,8 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
             and package["trained_inputs"] == summary["actual_parameters"]
             and package["training_outcome"] == summary["outcome"]
             and package["reason"] == summary["reason"], "package_summary_mismatch")
+    repeats = validate_configured_repeat_policy(package["configuration"], summary)
+    retained = validate_search_history_availability(summary)
     require(bool(packets) and set(packets) == set(traces), "missing_primary_trace")
     observed = package["observed_packets"]
     require(isinstance(observed, list) and len(observed) == len(packets), "missing_observed_attempt")
@@ -89,7 +92,8 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
     require(training["captured_per_input"] == raw
             and training["target_pattern"] == package["configuration"]["model"]["initial_isi"],
             "archive_target_or_reference_mismatch")
-    return {"auditor_version": 1, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
+    return {"auditor_version": 2, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
+            "n0_candidate_repeats": repeats, "search_history_retained": retained,
             "primary_trials": len(packets), "reference_trials": len(references), "final_trials": len(final_ids),
             "invalid_or_censored_trials": sum(not a["valid_observation"] for a in audits.values()),
             "certificate_present": False, "native_import_verified": False, "evaluation_verdict": None}

@@ -10,10 +10,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .native_evidence import audit_probe, audit_training_summary, load, require
+from .native_evidence import audit_probe, audit_training_summary, load, require, validate_configured_repeat_policy
 from .model_identity import canonical_model_sha256
 
-AUDITOR_VERSION = 1
+AUDITOR_VERSION = 2
 
 
 def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
@@ -38,6 +38,7 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
     require(protocol["schema_version"] == 3 and protocol["revision"] == certificate["protocol_revision"],
             "package_protocol_mismatch")
     config = package["configuration"]
+    repeats = validate_configured_repeat_policy(config, summary)
     require(config["search"]["tolerances"] == summary["tolerances"] and
             config["search"]["bounds"] == summary["configuration"]["bounds"], "package_configuration_mismatch")
     reference_ids = {ref["trial_id"] for ref in summary["references"]}
@@ -74,6 +75,7 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
     return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True,
             "primary_trials": len(packets), "embedded_trials": sum(map(len, embedded.values())),
             "exact": native["exact"], "model_revision": package["model_revision"],
+            "n0_candidate_repeats": repeats, "search_history_retained": native["search_history_retained"],
             "native_import_verified": False, "package_digest_verified": True,
             "evaluation_verdict": None}
 
