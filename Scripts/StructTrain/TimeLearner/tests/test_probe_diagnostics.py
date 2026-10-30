@@ -18,10 +18,10 @@ from ..probe_reports import render_probe, render_probe_set
 class ProbeDiagnosticsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        names=("TIMELEARNER_PARTIAL_PROBE_DIR", "TIMELEARNER_STOPPED_EVIDENCE_DIR", "TIMELEARNER_N0_REPEATS_DIR")
+        names=("TIMELEARNER_PARTIAL_PROBE_DIR", "TIMELEARNER_STOPPED_EVIDENCE_DIR", "TIMELEARNER_N0_REPEATS_DIR", "TIMELEARNER_SIX_SOMA_DIR")
         if not all(os.environ.get(n) for n in names):
             raise unittest.SkipTest("requires actual partial, unprepared and complete native probes")
-        cls.partial,cls.stopped,cls.complete=(Path(os.environ[n]) for n in names)
+        cls.partial,cls.stopped,cls.complete,cls.six=(Path(os.environ[n]) for n in names)
 
     def setUp(self):
         output=os.environ.get("TIMELEARNER_DIAGNOSTIC_PLOT_DIR")
@@ -71,6 +71,20 @@ class ProbeDiagnosticsTest(unittest.TestCase):
             with Image.open(output/overview["files"][0]) as image:self.assertEqual(image.size,(1920,960))
             svg=(output/overview["files"][1]).read_text()
             self.assertIn("Unobserved / censored",svg)
+
+    def test_actual_six_soma_trace_has_six_individual_full_size_figures(self):
+        from PIL import Image
+        stem="Classic_2000_N0_learned_boundary_explicit_tolerance_inputs6_frozen_test"
+        packet,trace=self.six/(stem+"_evidence.json"),self.six/(stem+".csv")
+        self.assertEqual(len(load(packet)["observation"]["specification"]["baseline"]),6)
+        output=self.root/"report";result=render_probe(packet,trace,output)
+        manifest=load(output/"manifest.json")
+        self.assertEqual(result["soma_count"],6)
+        self.assertEqual({f["channel"] for f in manifest["figures"]},set(range(6)))
+        for figure in manifest["figures"]:
+            overview=next(v for v in figure["views"] if v["view"]=="overview")
+            with Image.open(output/overview["files"][0]) as image:self.assertEqual(image.size,(1920,960))
+        self.assertEqual((output/"primary/trace.csv").read_bytes(),trace.read_bytes())
 
     def test_no_context_wire_record_has_no_invented_soma_or_clock(self):
         packet,trace=self.copy_case(kind="no_context")
