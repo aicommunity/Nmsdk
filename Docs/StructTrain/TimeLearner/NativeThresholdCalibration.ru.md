@@ -269,8 +269,10 @@ Calculate/Reset/Build, не меняет параметры и не присва
 Сохранение окончательного calibrated model и полный controller transaction
 остаются следующими незакрытыми операциями.
 
-Этот новый Core пока прошёл два potential-контроля на 2000 Гц на Elder;
-полная native матрица проверяется заново. Прежние 16/29/8 результаты относятся
+Этот новый Core прошёл на Elder полную матрицу 16/16 native и 35/35 independent
+Python tests; [первичные данные и метаданные](../../../Reports/StructTrain/TimeLearner/s08-threshold-assessment-normal-a1/README.md)
+содержат все 64 native assessments. ASan остаётся отдельной незакрытой проверкой.
+Прежние 16/29/8 результаты относятся
 к Core 7f17735, а не автоматически к новому Core. Отдельный Python adapter
 сопоставляет каждую native assessment с общим `score_threshold_candidate`,
 включая primary и полные матрицы. Сам raw observation auditor версии 2 теперь
@@ -304,6 +306,15 @@ NPSimple и continuous LT-зоны требуют другой постанов�
 Unknown overrides не получают выдуманный threshold operand; требуется адаптер.
 Ordinary frozen schema-1 observation и чтение legacy v1 packages сохраняются.
 
-Исправление требует нового server gate. Изолированный IaF LT-zone control
-проверяет signed threshold и реальный spike через штатный scheduler; он не
-подтверждает структурное обучение всей IaF модели и не содержит фиктивной сомы.
+Server gate `s08-threshold-contract-normal-a2` на Elder завершён: 6/6 native
+и 6/6 independent Python checks, без failures/errors/skips. Проверенный root
+`0afbf97c4ba9df4591eebe9a41fb916e02d1903e`, PulseLib
+`479084f4c35d61f60ef9b37eb0da246bc8dec87a`. Изолированный IaF LT-zone control
+подтверждает signed threshold и реальный spike через штатный scheduler;
+он не подтверждает структурное обучение всей IaF модели и не содержит фиктивной
+сомы. Дополнительно проверены 8 zero/negative roundtrips, 4 legacy-v1 roundtrips
+и 2 signed-bound proposals на реальных frames Classic/Branch при 2000 Гц.
+Первая normal попытка была неуспешной из-за dangling QJsonValueRef и ошибочного
+storage-имени генератора; обе причины исправлены в указанном снимке.
+ASan исправленного снимка поставлен после завершения отдельного задания
+предыдущего снимка; активные source/build/runtime не обновляются.
