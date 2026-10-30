@@ -1,0 +1,144 @@
+{
+    "current_base_revision": "a0c1381b8ae7a584879dc3c51a72d12e11e851efdf8b6c014839e1e69136f7bf",
+    "evidence_schema_version": 2,
+    "kind": "timelearner_native_probe_evidence",
+    "native_status": "rejected",
+    "observation": {
+        "burst_assignments": [
+            {
+                "channel": 0,
+                "validity": "incomplete",
+                "waves": [
+                ]
+            }
+        ],
+        "complete": false,
+        "end_reason": "injected_stopped_probe_failure",
+        "first_stimulus_time": null,
+        "peaks": [
+            {
+                "amplitude": null,
+                "candidate_count": 0,
+                "delay_from_stimulus": null,
+                "input_id": "input0",
+                "plateau_end": null,
+                "raw_potential": null,
+                "relative_to_trial_start": null,
+                "stimulus_id": "pulse0",
+                "time": null,
+                "validity": "incomplete"
+            }
+        ],
+        "reasons": [
+            "incomplete_observation",
+            "missing_stimulus",
+            "burst_incomplete:0",
+            "peak_incomplete:input0",
+            "injected_stopped_probe_failure"
+        ],
+        "sample_count": 0,
+        "schema_version": 3,
+        "specification": {
+            "baseline": [
+                0
+            ],
+            "begin": 10.679,
+            "effective_model_revision": "a9664da4dd13f0b991800ec9d1a96728a9eaec06b41b8c1cb3b3a192e5a119fd",
+            "end": 10.859,
+            "expected_stimulus_ids": [
+                "pulse0",
+                "pulse1"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 380,
+            "minimum_amplitude": 1e-06,
+            "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Branch_2000_N1_stopped_InvalidProbe/automatic/session/7/capture/7",
+            "sample_id": "target",
+            "schema_version": 3,
+            "stimulus_profile": {
+                "amplitude": 1,
+                "frequency_deviation": 0,
+                "frequency_hz": 2000,
+                "generator_class": "NPulseGeneratorTransit",
+                "pulse_length": 0.001,
+                "use_pattern_output": false,
+                "use_transit_signal": false
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Branch_2000_N1_stopped_InvalidProbe/automatic/session/7/capture/7/1",
+            "wave_assignment": "ordered_whole_burst",
+            "windows": [
+                {
+                    "begin": 10.689,
+                    "channel": 0,
+                    "end": 10.754,
+                    "input_id": "input0",
+                    "stimulus_id": "pulse0"
+                }
+            ]
+        },
+        "spike_count": null,
+        "spikes": [
+        ],
+        "stimuli": [
+        ],
+        "valid": false
+    },
+    "prepared": {
+        "base_model_revision": "a0c1381b8ae7a584879dc3c51a72d12e11e851efdf8b6c014839e1e69136f7bf",
+        "effective_model_revision": "a9664da4dd13f0b991800ec9d1a96728a9eaec06b41b8c1cb3b3a192e5a119fd",
+        "input_id": "input0",
+        "model_epoch": 0,
+        "protocol_revision": "native_service_burst_v1",
+        "routing": "branch_solo_burst",
+        "selected_input_index": 0
+    },
+    "reasons": [
+        "injected_stopped_probe_failure"
+    ],
+    "requested_specification": {
+        "baseline": [
+        ],
+        "begin": 0,
+        "effective_model_revision": "",
+        "end": 0.18,
+        "expected_stimulus_ids": [
+            "pulse0",
+            "pulse1"
+        ],
+        "maximum_sample_gap": 0.0005,
+        "maximum_samples": 380,
+        "minimum_amplitude": 1e-06,
+        "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+        "peak_selection": "isolated_window",
+        "record_spikes": false,
+        "run_id": "Branch_2000_N1_stopped_InvalidProbe/automatic/session/7/capture/7",
+        "sample_id": "target",
+        "schema_version": 3,
+        "stimulus_profile": {
+            "amplitude": 1,
+            "frequency_deviation": 0,
+            "frequency_hz": 2000,
+            "generator_class": "NPulseGeneratorTransit",
+            "pulse_length": 0.001,
+            "use_pattern_output": false,
+            "use_transit_signal": false
+        },
+        "time_frame": "relative_to_trial_start",
+        "trial_id": "Branch_2000_N1_stopped_InvalidProbe/automatic/session/7/capture/7/1",
+        "wave_assignment": "ordered_whole_burst",
+        "windows": [
+            {
+                "begin": 0.01,
+                "channel": 0,
+                "end": 0.075,
+                "input_id": "input0",
+                "stimulus_id": "pulse0"
+            }
+        ]
+    },
+    "requires_fresh_verification": true
+}
