@@ -110,6 +110,16 @@ storage aliases проверены, но четыре candidate/potential cases 
 первого снимка выполняется в собственных source/build/runtime на диске Data M40;
 она не подменяет проверку исправленного снимка.
 
+Уточнение после завершения повтора: `s08-threshold-contract-normal-a2` прошёл
+6/6 native и 6/6 independent Python checks, без skips/errors/failures, на root
+`0afbf97c4ba9df4591eebe9a41fb916e02d1903e` / PulseLib
+`479084f4c35d61f60ef9b37eb0da246bc8dec87a`. Подтверждены фактические storage
+defaults/типы, isolated IaF signed crossing, Classic/Branch N1 при 2000 Гц,
+8 signed и 4 legacy-v1 model roundtrips, 2 signed-bound proposals.
+Это ограниченный normal gate, а не полная IaF/profile или ASan приёмка.
+Повтор ASan исправленного снимка ожидает освобождения его отдельного build/source;
+основная длительная ASan-серия продолжается независимо.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |
