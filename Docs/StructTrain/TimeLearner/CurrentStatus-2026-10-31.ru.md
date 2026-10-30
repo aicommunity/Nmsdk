@@ -60,6 +60,17 @@ Python результаты `native_execution_verified=false` не заменя�
 Незавершённые gates не являются PASS; их артефакты ещё должны быть опубликованы
 в Git перед приёмкой и child → root merge.
 
+Последующее уточнение 31.10: все четыре potential cases на Elder теперь прошли
+при 2000/20000 Гц. Reader `6b03832182e281d6d1c7534a84ba7b300035ec75` прошёл
+8/8 проверок без skips/errors/failures, включая CLI, source/proposal/candidate
+links и restoration records. Для всех четырёх случаев получено `confirmed`
+по полным первичным reset-per-trial данным; fixture затем восстанавливает исходную
+модель, а не устанавливает native calibrated state.
+[Переносимый пакет](../../../Reports/StructTrain/TimeLearner/s08-threshold-potential-normal-a3/README.md)
+сохраняет 308 primary/metadata files в lossless архиве 5730080 bytes, исходные
+CSV и готовые CLI descriptors. Полные legacy-фазы 16-case gate и ASan a2
+проверяются отдельно. Это дополнение не завершает этап 8.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |
