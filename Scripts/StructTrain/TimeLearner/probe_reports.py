@@ -20,6 +20,7 @@ def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_l
     audit = audit_probe(packet, trace_path)
     require(audit["valid_observation"] is True, "probe_plot_requires_complete_audited_primary_trace")
     observation = packet["observation"];spec = observation["specification"]
+    require(spec["record_spikes"] is False, "native_training_probe_spike_capture_not_supported")
     profile = spec.get("stimulus_profile")
     require(type(profile) is dict, "probe_plot_frequency_not_recorded")
     frequency = number(profile["frequency_hz"])
@@ -44,7 +45,7 @@ def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_l
                  "closed_at": spec["end"], "complete": observation["complete"], "valid": observation["valid"],
                  "sample_id": spec["sample_id"], "trial_id": "/".join(spec["trial_id"].split("/")[-2:]), "label": "training probe",
                  "model_before": spec["effective_model_revision"], "reset_policy": "native probe; see primary specification",
-                 "spike_times": [s["time"] for s in observation["spikes"] if s["channel"] == channel] if spec["record_spikes"] else []}
+                 "spike_times": []}  # unknown, explicitly labelled; this producer cannot capture spikes
         label=f"Soma{channel+1}.SumPotential (CSV soma{channel})"
         values=[s["soma"][channel] for s in samples]
         limits=padded_limits(values) if comparison_limits is None else comparison_limits[channel]
@@ -108,6 +109,7 @@ def render_probe_set(specification: Path, output: Path):
         packet=load(packet_path);audit=audit_probe(packet,trace_path)
         require(audit["valid_observation"] is True and audit["trial_id"]==trial["trial_id"], "probe_report_expected_trial_mismatch")
         actual=packet["observation"]["specification"]
+        require(actual["record_spikes"] is False, "native_training_probe_spike_capture_not_supported")
         if profile is None:
             profile=actual["stimulus_profile"];routing=packet["prepared"]["routing"]
             amplitudes=[[] for _ in actual["baseline"]]

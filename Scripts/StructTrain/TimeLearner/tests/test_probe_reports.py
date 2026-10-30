@@ -83,3 +83,13 @@ class ProbeReportsTest(unittest.TestCase):
         tokens=rows[1].split(',');tokens[2]='NaN';rows[1]=','.join(tokens);trace.write_text('\n'.join(rows)+'\n')
         with self.assertRaises(EvidenceError):render_probe_set(path,directory/'report')
         self.assertFalse((directory/'report').exists())
+
+    def test_unsupported_spike_claim_is_not_shown_as_measured_silence(self):
+        directory,path,spec=self.prepare('Branch')
+        packet_path=directory/spec['trials'][0]['packet'];packet=load(packet_path)
+        packet['observation']['specification']['record_spikes']=True
+        packet['requested_specification']['record_spikes']=True
+        packet['observation']['spike_count']=0
+        packet_path.write_text(json.dumps(packet))
+        with self.assertRaises(EvidenceError):render_probe_set(path,directory/'report')
+        self.assertFalse((directory/'report').exists())
