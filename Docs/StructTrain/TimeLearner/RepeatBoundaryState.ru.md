@@ -1,0 +1,77 @@
+# Повторы N0 и перенос состояния на границе этапа
+
+Подэтап `codex/timelearner-repeat-boundary`, начат 30.10.2026. Это продолжение
+проверки [политики повторов N0](N0CandidateRepeats.ru.md), а не приёмка всей
+матрицы export/import или controller checkpoint посреди пробы.
+
+## Выявленный дефект
+
+`RestoreBoundary` / `RestoreStoppedBoundary` штатно восстанавливают модель,
+references, certificate либо диагностическую остановку, но не объект поиска.
+`EncodeNativeTrainingState` выбирал schema 2 по сохранённой политике повторов,
+а обязательный `candidate_repeat_groups` создавал только при наличии Search.
+После импорта получалась сводка schema 2 без этого массива. Также отсутствовала
+явная граница между историей поиска и proof конечного графа; выдавать actual
+parameters за снимок принятого кандидата при отсутствии Search нельзя.
+
+Baseline root `a6cfc24acf00f5bf8a235ad7872741bb9e05da3f` / Pulse develop
+`b2b670a22f849e0d0d2b6789b8242308521b1c37`: Elder воспроизвёл все десять
+отказов, каждый ровно в двух новых проверках сводки. Прочие проверки native
+импорта, графа, frozen отклика, fresh-process и warm boundary не дали отдельных
+отказов. M40 ASan baseline ещё выполняется; итог фиксируется отдельно.
+
+## Контракт исправления
+
+- Новые сводки schema 1/2 содержат boolean `search_history_retained`.
+  `true` означает доступность текущего объекта Search и его записей;
+  `false` — отсутствие сохранённого Search, а не нулевую стоимость обучения.
+  В старых сводках отсутствие поля остаётся unknown.
+- Schema 2 всегда содержит массив `candidate_repeat_groups`, в том числе
+  пустой при отсутствии Search. Идентификаторы и значения не выдумываются.
+- При `search_history_retained=false` отсутствуют `accepted_parameters`,
+  `search_probes`, `applied_edits`; candidates/rejections/domains/groups пусты.
+  Для completed boundary анализ проверяет сохранённые reference/final packets,
+  certificate, model binding, допуски и допустимость actual parameters.
+  Он не утверждает наличие измеренной истории поиска.
+- Удаление marker не разрешает пропуск обычных search fields: legacy unknown
+  по-прежнему требует имеющийся снимок accepted parameters. False marker с
+  непустой историей, неверный тип marker или неподтверждённые группы отвергаются.
+- Декларация повторов в full model package связывается со schema/factor сводки.
+  Изменение repeat factor и пересчёт package checksum не скрывают расхождение.
+- Native evidence auditor получает версию 5; learned/stopped auditors — 2.
+  Исторические результаты не пересчитываются молча под тем же идентификатором.
+
+Математическая цель, допуски, порядок предъявлений, storage physics и lifecycle
+не меняются. Частичная группа до Stop сохраняется в исходной истории; модельный
+архив не объявляется checkpoint этой группы. Warm attempt начинает новый поиск
+на сохранённой цели, а не продолжает незавершённую интеграцию.
+
+## Матрица адресных проверок
+
+Обе топологии, configured V2 N0 repeats=2:
+
+1. Completed Train → import → native Build/Init/Reset → frozen сравнение
+   полных stimulus/soma traces и fresh-process import.
+2. То же с явным SyncTolerance=0.2 для warm boundary control; это не доказательство
+   сходимости при исходном 0.02. Сохранённые references и номер новой попытки
+   проверяются отдельно.
+3. Stop до первого завершённого reference.
+4. Stop после первого reference (незавершённый capture).
+5. Stop после первого из двух измерений кандидата: incomplete group из одного
+   sample, без сертификата. Импорт и новый warm attempt сохраняют диагностический
+   статус и физическую модель.
+
+Python-проверки используют эти реальные JSON/CSV, сравнивают исходные и imported
+summaries, full package hashes, primary packet identity, partial raw samples и
+явно повреждённые копии metadata. Synthetic mutations не являются научными runs.
+Исходная неуспешная baseline попытка сохраняется. Ошибка её post-run скрипта
+при JSON-сериализации возвращаемого Path — отдельный инфраструктурный дефект;
+она не заменяет двадцать native assertion failures. Повторный readback runtime
+сохраняется отдельным файлом после завершения.
+
+## Оставшиеся требования
+
+Нужны результаты fixed native/ASan, независимый Python audit, необходимые
+временные графики и согласованные develop merges. Частота 20000, N>4, все
+PostTune/calibration/conversion варианты и полный controller checkpoint не
+закрываются десятью addressed cases автоматически. Общий план остаётся активным.
