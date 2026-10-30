@@ -2,7 +2,10 @@
 import copy
 import hashlib
 import os
+import json
 from pathlib import Path
+import subprocess
+import sys
 import unittest
 
 from ..learned_evidence import load_case
@@ -103,3 +106,23 @@ class ThresholdCandidateEvidenceTest(unittest.TestCase):
                 changed = copy.deepcopy(package);changed[field] = value
                 with self.assertRaises(EvidenceError):
                     audit_threshold_candidate(signed(changed), source)
+
+    def test_cli_requires_primary_source_and_audits_real_candidate_trials(self):
+        path, _, _, _, _ = self.cases[0]
+        prefix = path.name.removesuffix("_recognition_candidate.json")
+        base = prefix.rsplit("_candidate_", 1)[0]
+        source = path.with_name(base+"_learned_state.json")
+        command = [sys.executable, "-m", "Scripts.StructTrain.TimeLearner", "analyze", str(path),
+                   "--format", "threshold-candidate"]
+        missing = subprocess.run(command, capture_output=True, text=True)
+        self.assertEqual(missing.returncode, 2)
+        self.assertIn("threshold_candidate_source_evidence_required", missing.stderr)
+        checked = subprocess.run(command+["--source-solo", str(source)], capture_output=True, text=True)
+        self.assertEqual(checked.returncode, 0, checked.stderr)
+        self.assertTrue(json.loads(checked.stdout)["analysis"]["source_training_and_conversion_checked"])
+        trial = path.with_name(prefix+"_frozen_trial_0.json")
+        response = subprocess.run([sys.executable, "-m", "Scripts.StructTrain.TimeLearner", "analyze", str(trial),
+                                   "--format", "recognition-trial", "--model", str(path)], capture_output=True, text=True)
+        self.assertEqual(response.returncode, 0, response.stderr)
+        self.assertTrue(json.loads(response.stdout)["analysis"]["valid_observation"])
+        self.assertIsNone(json.loads(response.stdout)["evaluation_verdict"])
