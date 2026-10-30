@@ -102,7 +102,7 @@ M40 1e1ce1d85f7a297a31c04e57c4fad67750ef81ed. Все 398 hashes каждого �
 и Soma1 trial-0 zoom-003-detail: легенды не перекрывают график, отдельный
 Y-scale подписан, форму слабого хвоста можно сравнить с исходным shared view.
 Это адресная PNG проверка, не полная visual/physics matrix или vector/PDF QA.
-Подэтап подготовлен к merge; полный stage 9/11 остаётся незавершённым.
+Подэтап объединён в develop: 75d09a6d7ea75ef067d85384ac7d29f014a93188; полный stage 9/11 остаётся незавершённым.
 
 - Native continuous coverage/ITI/reset matrix и точные reset event descriptors.
   Actual-clock panorama и дополнительные detail Y views уже реализованы
