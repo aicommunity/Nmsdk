@@ -1,0 +1,7 @@
+# Partial native probe reports and six-soma coverage
+
+Renderer 9abd0b0049071eabc233cd644f7bfe3fd5dde7dc on elder1: 23/23 tests, no skips/errors/failures. Default complete-probe, scale, CLI and full 132-trial/198-pair readbacks remain green. New diagnostic controls use actual cancelled Classic/Branch records, actual zero-sample rejection and an actual six-soma frozen trace. Explicit copied-metadata/NaN/no-context controls are synthetic wire faults, not new model measurements or scientific no-response results.
+
+Positive native figures are under diagnostic-figures/test_actual_censored_trace_cli_retains_samples_and_unknown_tail and test_actual_six_soma_trace_has_six_individual_full_size_figures. Six-soma source comes from the previously published pooled-full dimensional transport control with a declared broad timing tolerance; this does not establish default-tolerance convergence. Other test folders include declared corrupted-copy controls. No classification verdict, SI-unit validation or full physics-matrix acceptance is claimed.
+
+Two unchanged PDFs were independently rendered by worker Poppler at 160 dpi. Source hashes are in pdf-qa/manifest.json; agent visual review is pending until recorded separately. Run launchers are compressed provenance snapshots; supported commands live in Scripts/StructTrain/TimeLearner.
