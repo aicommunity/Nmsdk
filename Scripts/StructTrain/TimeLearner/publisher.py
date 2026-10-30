@@ -8,6 +8,7 @@ import json
 import os
 import re
 import subprocess
+from urllib.parse import urlsplit
 
 from .native_evidence import EvidenceError, require
 
@@ -31,6 +32,39 @@ def _links(directory, commit):
             require(kind == "commit", "invalid_gitlink_type")
             links[name.decode("utf-8")] = sha
     return links
+
+
+def _repository_identity(url):
+    """Equivalent SSH/HTTPS transport for one host/path; no guessed relative URLs."""
+    if "://" in url:
+        parsed = urlsplit(url)
+        if parsed.scheme == "file":
+            require(not parsed.netloc, "unsupported_file_remote_host")
+            return ("file", str(Path(parsed.path).resolve()))
+        require(parsed.scheme in ("ssh", "https", "http", "git") and parsed.hostname
+                and not parsed.query and not parsed.fragment, "unsupported_repository_url")
+        default = {"ssh": 22, "https": 443, "http": 80, "git": 9418}[parsed.scheme]
+        host = parsed.hostname.lower() if parsed.port in (None, default) else parsed.hostname.lower()+":"+str(parsed.port)
+        return (host, parsed.path.strip("/").removesuffix(".git"))
+    scp = re.fullmatch(r"(?:[^/@:]+@)?([^/:]+):(.+)", url)
+    if scp:
+        return (scp[1].lower(), scp[2].strip("/").removesuffix(".git"))
+    require(Path(url).is_absolute(), "relative_repository_urls_require_explicit_resolution")
+    return ("file", str(Path(url).resolve()))
+
+
+def _module_urls(directory, commit):
+    result = subprocess.run(["git", "-C", str(directory), "config", "--null", "--blob", commit+":.gitmodules",
+                             "--get-regexp", r"^submodule\..*\.path$"], capture_output=True, timeout=120)
+    require(result.returncode == 0, "missing_or_invalid_committed_gitmodules")
+    urls = {}
+    for record in result.stdout.split(b"\0"):
+        if not record:
+            continue
+        key, value = record.decode("utf-8").split("\n", 1)
+        require(value not in urls, "duplicate_committed_submodule_path")
+        urls[value] = _git(directory, "config", "--blob", commit+":.gitmodules", "--get", key[:-5]+".url")
+    return urls
 
 
 def publication_plan(root: Path, specification):
@@ -70,9 +104,18 @@ def publication_plan(root: Path, specification):
         require(name in records, "missing_child_publication:"+name)
         visited.add(name)
         directory, record = records[name]
-        for relative, commit in sorted(_links(directory, record["commit"]).items()):
+        links = _links(directory, record["commit"])
+        urls = _module_urls(directory, record["commit"]) if links else {}
+        require(set(urls) == set(links), "committed_submodule_paths_disagree_with_gitlinks")
+        for relative, commit in sorted(links.items()):
             child = relative if name == "." else name+"/"+relative
             require(child in records and records[child][1]["commit"] == commit, "gitlink_commit_mismatch:"+child)
+            child_directory, child_record = records[child]
+            remote = child_record["remote"]
+            push_url = _git(child_directory, "remote", "get-url", "--push", remote)
+            fetch_url = _git(child_directory, "remote", "get-url", remote)
+            require(_repository_identity(urls[relative]) == _repository_identity(push_url) == _repository_identity(fetch_url),
+                    "child_remote_differs_from_committed_gitmodules:"+child)
             visit(child)
         ordered.append((directory, record))
 

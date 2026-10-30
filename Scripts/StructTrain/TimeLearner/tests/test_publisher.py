@@ -1,7 +1,9 @@
 """Real local Git repositories and receive hooks, executed on validation workers."""
 from pathlib import Path
 import copy
+import json
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -83,11 +85,31 @@ class PublisherTest(unittest.TestCase):
             self.assertEqual(result["publication"],"failed")
             self.assertEqual(result["repositories_published_before_failure"],[])
 
-    def test_dirty_source_and_extra_repository_are_rejected(self):
+    def test_dirty_source_is_rejected(self):
         (self.root/"unpublished.txt").write_text("not in commit")
         result=publish_closure(self.root,self.spec)
         self.assertEqual(result["publication"],"failed")
         self.assertIn("dirty_publication",result["reason"])
+
+    def test_wrong_child_remote_does_not_claim_checkout_reproducibility(self):
+        git(self.root/"A","remote","set-url","origin",str(self.base/"B.git"))
+        result=publish_closure(self.root,self.spec)
+        self.assertEqual(result["publication"],"failed")
+        self.assertIn("child_remote_differs",result["reason"])
+        self.assertEqual(result["repositories_published_before_failure"],[])
+
+    def test_real_cli_receipt_and_existing_receipt_guard(self):
+        spec=self.base/"publication.json";spec.write_text(json.dumps(self.spec))
+        receipt=self.base/"receipt.json"
+        command=[sys.executable,"-m","Scripts.StructTrain.TimeLearner","publish",str(spec),
+                 "--root",str(self.root),"--output",str(receipt)]
+        result=subprocess.run(command,capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertEqual(json.loads(receipt.read_text())["publication"],"published")
+        before=receipt.read_bytes()
+        result=subprocess.run(command,capture_output=True,text=True)
+        self.assertEqual(result.returncode,2)
+        self.assertEqual(receipt.read_bytes(),before)
 
     def test_existing_lock_requires_explicit_recovery(self):
         lock=self.root/".git/timelearner-publication.lock";lock.mkdir()
