@@ -86,3 +86,8 @@ Regeneration завершилась с status 0. Извлечённый archive
 остальные historical adapters, migration старых caches и вся physics/mode matrix
 не считаются завершёнными. Ранее опубликованные тяжёлые ветки не объединены
 в source develop; их история сохраняется без изменения.
+
+Для быстрого просмотра выбранных изображений добавлены небольшие wrapper
+`index.html` в обоих компактных report directories: изображения имеют ширину
+1920 px, horizontal scroll и прямую PNG ссылку. Wrapper manifest обновлён с
+34 до 35 hashes; сам primary bundle и его восемь внутренних hashes не изменены.
