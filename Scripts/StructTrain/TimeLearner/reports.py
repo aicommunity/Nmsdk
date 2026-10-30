@@ -12,7 +12,7 @@ import platform
 
 from .native_evidence import load, require
 from .recognition_metrics import load_evaluation, score_recognition_evaluation
-from .plotting import render_soma
+from .plotting import render_soma, render_series
 
 
 def _write(path, value):
@@ -70,14 +70,27 @@ def render_evaluation(source: Path, model: Path, output: Path):
                              f'<a href="{png}">full PNG</a></p><img src="{png}" alt="{view["view"]}">')
     _write(primary/"evaluation.json", copied_spec)
     _write(output/"analysis.json", analysis)
+    # Preserve actual presentation order and gaps in a separate series view.
+    ordered = [by_id[t["trial_id"]] for t in sorted(spec["trials"], key=lambda t: t["presentation_index"])]
+    series = []
+    for descriptor in descriptors:
+        folder = output/f'series-soma-{descriptor["index"]+1:03d}'
+        rendered = render_series(ordered, descriptor["index"], descriptor["path"],
+                                 limits[descriptor["index"]], folder)
+        for view in rendered["views"]:
+            view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
+        series.append({"descriptor": descriptor, **rendered})
+    _write(output/"series.json", series)
     import matplotlib
     manifest = {"kind": "timelearner_visual_report", "schema_version": 1,
                 "run_id": spec["run_id"], "model_revision": spec["model_revision"],
                 "status": "diagnostic", "observation_validity": analysis["validity"],
                 "expected_trial_soma_pairs": len(spec["trials"])*count, "figures": figures,
+                "series": series,
                 "runtime": {"python": platform.python_version(), "matplotlib": matplotlib.__version__},
-                "limitations": ["SI units not recorded in observation schema 1", "continuous panorama not implemented",
-                                "automatic weak-response detail scaling not implemented", "visual acceptance pending"],
+                "limitations": ["SI units not recorded in observation schema 1",
+
+                                "visual acceptance pending"],
                 "visual_acceptance_complete": False, "evaluation_verdict": None}
     _write(output/"manifest.json", manifest)
     (output/"index.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8">'
@@ -88,6 +101,8 @@ def render_evaluation(source: Path, model: Path, output: Path):
         '<a href="primary/model.json">model</a>. <a href="analysis.json">Metrics</a>. '
         'SI units unverified; diagnostic report, visual acceptance pending. '
         'Click full PNG/SVG/PDF for readable scale. Purple dotted markers: actual LT spike events.</p>'
+        +'<h2>Presentation-order series</h2><p><a href="series.json">timing table and series manifest</a></p>'
+        +''.join(f'<p>{v["view"]}: <a href="{p}">{p}</a></p>' for item in series for v in item["views"] for p in v["files"])
         +"\n".join(links)+'</html>\n', encoding="utf-8")
     sums = {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(output.rglob("*")) if p.is_file()}
