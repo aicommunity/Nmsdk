@@ -1,0 +1,136 @@
+{
+  "kind": "timelearner_probe_set_visual_report",
+  "schema_version": 2,
+  "status": "diagnostic",
+  "expected_trials": [
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/capture/7/1",
+      "packet": "probe-0000/primary/probe.json",
+      "trace": "probe-0000/primary/trace.csv"
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/capture/7/2",
+      "packet": "probe-0001/primary/probe.json",
+      "trace": "probe-0001/primary/trace.csv"
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/1",
+      "packet": "probe-0002/primary/probe.json",
+      "trace": "probe-0002/primary/trace.csv"
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/2",
+      "packet": "probe-0003/primary/probe.json",
+      "trace": "probe-0003/primary/trace.csv"
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/3",
+      "packet": "probe-0004/primary/probe.json",
+      "trace": "probe-0004/primary/trace.csv"
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/4",
+      "packet": "probe-0005/primary/probe.json",
+      "trace": "probe-0005/primary/trace.csv"
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/final/0/verify/0/1",
+      "packet": "probe-0006/primary/probe.json",
+      "trace": "probe-0006/primary/trace.csv"
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/final/0/verify/0/2",
+      "packet": "probe-0007/primary/probe.json",
+      "trace": "probe-0007/primary/trace.csv"
+    }
+  ],
+  "reports": [
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/capture/7/1",
+      "folder": "probe-0000",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/capture/7/2",
+      "folder": "probe-0001",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/1",
+      "folder": "probe-0002",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/2",
+      "folder": "probe-0003",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/3",
+      "folder": "probe-0004",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/search/4",
+      "folder": "probe-0005",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/final/0/verify/0/1",
+      "folder": "probe-0006",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    },
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/automatic/session/7/final/0/verify/0/2",
+      "folder": "probe-0007",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    }
+  ],
+  "common_y_limits": [
+    [
+      -0.0003088988800918191,
+      0.004170134881239558
+    ]
+  ],
+  "comparison_profile": {
+    "amplitude": 1,
+    "frequency_deviation": 0,
+    "frequency_hz": 2000,
+    "generator_class": "NPulseGeneratorTransit",
+    "pulse_length": 0.001,
+    "use_pattern_output": false,
+    "use_transit_signal": false
+  },
+  "routing": "branch_solo_burst",
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null,
+  "data_complete": true,
+  "observation_policy": "complete_or_partial",
+  "rendered_trial_soma_pairs": 8,
+  "known_trial_soma_pairs": 8,
+  "unknown_soma_trials": []
+}
