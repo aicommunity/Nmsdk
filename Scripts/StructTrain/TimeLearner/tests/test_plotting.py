@@ -1,6 +1,6 @@
 import unittest
 
-from Scripts.StructTrain.TimeLearner.plotting import time_views
+from Scripts.StructTrain.TimeLearner.plotting import time_views, series_timeline
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError
 
 
@@ -22,3 +22,15 @@ class PlotScaleTest(unittest.TestCase):
         for args in ((0, 0, 2000), (1, 0, 2000), (0, 1, 0), (0, 1, float("nan"))):
             with self.assertRaises(EvidenceError):
                 time_views(*args)
+
+    def test_series_retains_real_gaps_and_reset_boundaries(self):
+        def trial(i, start, end, reset, stimuli):
+            return {"trial_id": f"t{i}", "sample_id": f"s{i}", "label": "target",
+                    "begin": start, "end": end, "closed_at": end,
+                    "reset_policy": reset, "frequency_hz": 2000.,
+                    "stimulus_times": stimuli}
+        rows = series_timeline([trial(0, 0., .1, "reset_per_trial", [.01]),
+                                trial(1, .25, .35, "preserve_neuron_dynamics", [.26])])
+        self.assertEqual(rows[1]["unobserved_gap"], [.1, .25])
+        self.assertEqual(rows[1]["onset_to_onset_seconds"], .25)
+        self.assertIsNone(rows[0]["exact_reset_timestamp"])
