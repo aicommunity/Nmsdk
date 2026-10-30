@@ -72,13 +72,34 @@ unknown spikes, duplicate/wrong/missing trials и NaN. Elder input — native ro
 a721fe4975a09f1d8473cef5f1054a286bc7b307 (terminal N0 A1). Это не один и тот же
 native run; version-specific provenance не смешивается.
 
-На Elder строится полный набор восьми native cases / 132 primary trials,
-включая references, search anchors/inputs и fresh final gate. До окончания,
-публикации hashes и визуального QA этот набор не считается принятым. M40 N0 A2
-пока выполняет ASan native tests; строить его окончательные графики следует
-только после terminal status и primary audit.
+Обновление 30.10.2026: оба native A2 задания завершены. На каждом worker
+опубликованы все восемь cases: 132 primary trials / 198 trial–soma пар,
+включая references, search anchors/inputs и fresh final gate. Множество ID
+сверено с summaries; это полный набор данного native контроля, а не всей
+исследовательской матрицы или исторического эксперимента с восемью паттернами.
 
-Открыты: итоговая публикация/визуальная приёмка полного набора, реальный N>4,
+- Elder: commit `3b5cbeb818de7300ab9d1ad1b5725aad3a7b09ff`,
+  [полные рисунки](../../../Reports/StructTrain/TimeLearner/s09-n0-full-probes-elder1-a1/README.md).
+- M40: commit `83b9651c4c5f6fa7c15ef30e03381d3b68d82d3c`,
+  [полные рисунки](../../../Reports/StructTrain/TimeLearner/s09-n0-full-probes-m40-a1/README.md).
+
+Source `ae5dbc3fdae94cb58e9c18bf589d79151c35b520` прошёл по 15/15 tests
+без skips/errors на обоих workers. Дополнительный полный readback при
+`7b808c11e0d53234ae449790caa6b9f0e949a291` — по 2/2 на каждом worker:
+все 132 пробы / 198 пар, включая явную неизвестность spike count при
+`record_spikes=false`. Нативные входные данные обоих — root
+`42d1b58803d6b2060bd8993b60f17c0d74577d5b`; это отдельный provenance
+от версии renderer. Отчёты не добавляют научного PASS к SearchUnresolved.
+
+Просмотрены четыре source-bound Poppler previews: Classic overview и Branch
+zoom с каждого worker. Это крупные 1920×960 панели с различимыми импульсами,
+формой ответа, читаемыми осями и легендой без пересечений. Исходные векторные
+PDF не менялись; их hashes привязаны к опубликованным commits. Результат
+просмотра ограничен этими четырьмя панелями, а не всеми рисунками матрицы:
+[Elder QA](../../../Reports/StructTrain/TimeLearner/s09-n0-pdf-qa-elder1-a1/README.md),
+[M40 QA](../../../Reports/StructTrain/TimeLearner/s09-n0-pdf-qa-m40-a1/README.md).
+
+Открыты: визуальная приёмка всей матрицы, реальный N>4,
 вся physics/frequency matrix, достоверные unit descriptors, partial/censored
 invalid-trace diagnostic adapters и общий report completeness gate в runner.
 Первый adapter требует complete valid primary observations и явно отказывает
