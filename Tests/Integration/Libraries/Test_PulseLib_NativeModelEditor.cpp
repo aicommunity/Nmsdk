@@ -12,6 +12,7 @@
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeThresholdCandidate.h"
 #include "TimeLearner/NativeCalibrationProposal.h"
+#include "TimeLearner/NativeCalibrationAssessment.h"
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativePostTuneBoundary.h"
 #include "TimeLearner/NumericChecks.h"
@@ -1144,8 +1145,9 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
     if(recorded)recorded->clear();
     if(declaredRequests)
     {
-        ASSERT_TRUE(recordThresholdPotential);
         declaredRequests->clear();for(int i=0;i<4;++i)declaredRequests->push_back(make(i,i%2==1,i<2?RecognitionResetPolicy::PerTrial:RecognitionResetPolicy::PreserveNeuronDynamics));
+        if(recordThresholdPotential)
+        {
         QJsonArray trialDesign;
         for(const auto& q:*declaredRequests)
         {
@@ -1165,6 +1167,7 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
             {"primary_trial_ids",QJsonArray{"trial_0","trial_1"}},
             {"robustness_trial_ids",QJsonArray{"trial_2","trial_3"}},{"foil_rule","first_isi_preserved_remaining_isi_times_8"},
             {"calibration_scope","reset_per_trial"},{"record_threshold_potential",true}}).toJson());
+        }
     }
     for(int i=0;i<4;++i)
     {
@@ -1222,6 +1225,51 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
     EXPECT_FALSE(dropped->valid);EXPECT_FALSE(dropped->complete);EXPECT_EQ(dropped->reason,"recognition_sample_gap");
     Artifact(rig.name+"_frozen_trial_gap.json",QJsonDocument(NativeRecognitionTrialJson(*dropped)).toJson());
     EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());EXPECT_EQ(rig.Revision(),frozen);
+}
+
+void CalibrationAssessmentChecks(const std::string& name,
+    const std::vector<NativeRecognitionTrialRequest>& expected,
+    const std::vector<NativeRecognitionTrialObservation>& observations,const std::string& targetHash)
+{
+    ASSERT_EQ(expected.size(),4u);ASSERT_EQ(observations.size(),4u);
+    const auto assessed=AssessNativeThresholdResponses(expected,observations,targetHash,CalibrationResponseWindow{});
+    if(name.find("_candidate_high")!=std::string::npos)
+    {
+        EXPECT_FALSE(assessed.criterionMet);EXPECT_EQ(assessed.targetViolations,2u);
+        EXPECT_EQ(assessed.foilResponses,0u);
+    }
+    Artifact(name+"_calibration_assessment.json",QJsonDocument(assessed.evidence).toJson());
+    std::vector<NativeRecognitionTrialRequest> primary(expected.begin(),expected.begin()+2);
+    std::vector<NativeRecognitionTrialObservation> measured(observations.begin(),observations.begin()+2);
+    const auto primaryResult=AssessNativeThresholdResponses(primary,measured,targetHash,CalibrationResponseWindow{});
+    Artifact(name+"_primary_calibration_assessment.json",QJsonDocument(primaryResult.evidence).toJson());
+    auto reordered=observations;std::reverse(reordered.begin(),reordered.end());
+    EXPECT_EQ(AssessNativeThresholdResponses(expected,reordered,targetHash,CalibrationResponseWindow{}).evidence,assessed.evidence);
+    // Corrupt real observations without changing the physical model or filling
+    // missing samples from an expected waveform. The production validator must
+    // reject even when the stale complete/valid flags are still true.
+    auto damaged=observations;damaged[0].samples[0].somaPotentials[0]=std::numeric_limits<double>::quiet_NaN();
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    damaged=observations;damaged[0].samples[0].spikeHistory.push_back(std::numeric_limits<double>::quiet_NaN());
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    damaged=observations;
+    if(damaged[0].spikeTimes.empty())damaged[0].spikeTimes.push_back(damaged[0].begin);else damaged[0].spikeTimes.pop_back();
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    damaged=observations;damaged[0].stimulusTimes[0]+=2./damaged[0].frequencyHz;
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    damaged=observations;damaged[0].samples.erase(damaged[0].samples.begin()+1);
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    damaged=observations;auto extra=damaged[0].samples.front();extra.time+=.25/damaged[0].frequencyHz;
+    damaged[0].samples.insert(damaged[0].samples.begin()+1,extra);
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    damaged=observations;damaged[0].complete=false;
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    damaged=observations;damaged.pop_back();
+    EXPECT_THROW(AssessNativeThresholdResponses(expected,damaged,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    auto wrong=expected;wrong[0].maximumSamples-=1;
+    EXPECT_THROW(AssessNativeThresholdResponses(wrong,observations,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
+    wrong=expected;std::swap(wrong[0],wrong[1]);
+    EXPECT_THROW(AssessNativeThresholdResponses(wrong,observations,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
 }
 
 template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
@@ -1411,8 +1459,9 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
         Artifact(rig.name+"_recognition_candidate.json",QJsonDocument(candidate).toJson());
         std::vector<NativeRecognitionTrialRequest> declared;
         std::vector<NativeRecognitionTrialObservation> observations;
-        FrozenTrialChecks(rig,candidate,recordThresholdPotential,recordThresholdPotential?&declared:nullptr,
-            recordThresholdPotential?&observations:nullptr);
+        FrozenTrialChecks(rig,candidate,recordThresholdPotential,&declared,&observations);
+        const auto trainingHash=solo["protocol"].toObject()["pattern_hash"].toString().toStdString();
+        CalibrationAssessmentChecks(rig.name,declared,observations,trainingHash);
         if(recordThresholdPotential && threshold==1.)
         {
             const auto hash=solo["protocol"].toObject()["pattern_hash"].toString().toStdString();
@@ -1465,7 +1514,9 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
             rig.learner->Build();rig.learner->Init();rig.learner->Reset();
             rig.name=baseName+"_"+phase;
             std::vector<NativeRecognitionTrialRequest> requests;
-            FrozenTrialChecks(rig,candidate,true,&requests);
+            std::vector<NativeRecognitionTrialObservation> observations;
+            FrozenTrialChecks(rig,candidate,true,&requests,&observations);
+            CalibrationAssessmentChecks(rig.name,requests,observations,solo["protocol"].toObject()["pattern_hash"].toString().toStdString());
         }
     }
     if(recordThresholdPotential)
