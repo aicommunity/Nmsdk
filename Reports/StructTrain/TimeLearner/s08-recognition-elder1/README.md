@@ -1,9 +1,0 @@
-# Native solo to recognition conversion: Elder-1 normal A4
-
-Root a7a4ced69f939424d7e2e592eeda0fc39d7c4e7a / PulseLib 74ab08f0747fb9ea8834911cd97255bed9193a36. All eleven production-path C++ cases and twenty-three Python tests pass. Eight complete recognition packages retain their actual source learned states and 108 primary training observations. Identity Classic/Branch N0/N1, historical Branch N1 scaling, explicit clipping, N=1, six shared inputs, conflicting shared-bank rejection, strict spec and stopped-state rejection are covered.
-
-Independent production analysis recomputes historical factors, effective bounds and permitted graph/binding changes from source evidence; unchanged image definitions, source certificate scope and inherited fixed threshold are checked. Frozen transport has a declared pre-run spec and schema-1 completion observation: 3528 actual paired samples, native scheduler stimulus, nonconstant soma response and both unchanged model identities. Corruption tests reject resigned unauthorized model changes, incomplete/censored windows, missing middle samples, changed models, paired mismatch and constant nonzero rest traces.
-
-The paired waveform check uses two independent native imports in one process. Cross-process/cross-Qt recognition replay is not claimed. No spikes are recorded by this transport fixture. No scientific selectivity, completed PostTune/calibration, whole physical matrix, full maintained gate or develop acceptance is implied. Existing historical v0 traces remain separate; they are not upgraded to schema-1 completeness.
-
-All primary JSON/CSV, actual learned and recognition models, child training proofs, declared frozen specs/observations, runtime/build provenance and logs are compressed losslessly. Stored and raw checksums are recorded. ASan and full unfiltered gates are separate runs.
