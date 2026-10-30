@@ -988,6 +988,23 @@ TEST(ConfiguredNativeTraining,StrictCodecRejectsDuplicateUnknownAndCorruptFields
     EXPECT_EQ(EncodeConfiguredNativeTraining(omitted),invalid);
     EXPECT_THROW(ParseConfiguredNativeTraining("{}"),std::invalid_argument);
 }
+TEST(ConfiguredNativeTrainingN0Repeats,Schema2DeclaresPolicyAndSchema1DoesNotSilentlyChange)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"configured_repeat_codec");auto c=Configuration(rig);
+    const auto legacy=EncodeConfiguredNativeTraining(c);EXPECT_EQ(legacy["schema_version"],QJsonValue(1));
+    EXPECT_EQ(DecodeConfiguredNativeTraining(legacy).search.n0CandidateRepeats,1u);
+    c.search.n0CandidateRepeats=2;const auto repeated=EncodeConfiguredNativeTraining(c);
+    EXPECT_EQ(repeated["schema_version"],QJsonValue(2));
+    EXPECT_EQ(DecodeConfiguredNativeTraining(repeated).search.n0CandidateRepeats,2u);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(repeated)),repeated);
+    auto invalid=repeated;invalid["schema_version"]=1;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(invalid),std::invalid_argument);
+    for(const auto value:{QJsonValue(true),QJsonValue(1),QJsonValue(129),QJsonValue(2.5)})
+    {
+        invalid=repeated;auto search=invalid["search"].toObject();search["n0_candidate_repeats"]=value;invalid["search"]=search;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(invalid),std::invalid_argument);
+    }
+}
 TEST(ConfiguredNativeTraining,MissingConfigurationAndLoadedMarkerFailWithoutColdReset)
 {
     EditingRig<NNeuronTimeLearnerBranch> rig(2000,0,"configured_saved_state_guard");
