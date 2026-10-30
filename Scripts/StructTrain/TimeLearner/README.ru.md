@@ -1,8 +1,10 @@
 # Поддерживаемый пакет TimeLearner
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
-Import не запускает эксперименты. Сейчас реализованы `inventory` и native
-подмножество `analyze`; остальные команды runner/migration ещё не готовы.
+Import не запускает эксперименты. Реализованы `inventory`, native-подмножество
+`analyze`, `report`, `bundle`, `publish`, `history resolve` и анализ измерений
+`calibrate select/confirm`. Runtime/process supervisor также имеют module CLI.
+Сквозные prepare/train/export/evaluate, scheduler и полная миграция ещё не готовы.
 
 ```text
 python -m Scripts.StructTrain.TimeLearner analyze record.json --format domain
@@ -31,8 +33,10 @@ conversion record и declared frozen transport spec/observation/CSV schema 1.
 unknown/incomplete transport не принимается. Spikes остаются unknown, а не 0;
 это проверка переноса/состояния, не recognition selectivity verdict.
 
-Это ещё не единый recognition scorer, не анализ исторического spiking CSV и
-не полный production runner. Старые запускатели будут удалены после замены
+Для полных frozen trials общий строгий scorer доступен как
+`analyze EVALUATION_SPEC --format recognition-evaluation --model RECOGNITION_PACKAGE`.
+Исторический spiking CSV и полный production runner ещё не мигрированы.
+Старые запускатели будут удалены после замены
 их действующих функций и записи commit/blob в migration manifest.
 
 `analyze <case_reconstruction.json> --format posttune-reconstruction` проверяет
@@ -174,3 +178,31 @@ identity, mappings, логи и результат. Timeout/cancel сигнал�
 не перезапускать job автоматически из-за обрыва наблюдения. Пока ownership
 охватывает только launched executable, не fork/daemon tree. Контракт и
 оставшиеся ограничения: Docs/StructTrain/TimeLearner/OwnedProcessSupervisor.ru.md.
+
+### Измеренный порог
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner calibrate select SPEC.json --measurements SEARCH.json --source-solo CASE_learned_state.json --output NEW_SELECTION.json
+python3 -m Scripts.StructTrain.TimeLearner calibrate confirm SPEC.json --measurements SEARCH.json --source-solo CASE_learned_state.json --selection NEW_SELECTION.json --confirmation FRESH.json --output NEW_CONFIRMATION.json
+python3 -m Scripts.StructTrain.TimeLearner report EVALUATION.json --format threshold-candidate-evaluation --model CANDIDATE.json --output NEW_CACHE
+```
+
+Это анализ реальных native measurements и диагностические рисунки. Команды
+не исполняют Train, не устанавливают calibrated state в learner и не подтверждают
+native import. Положительное подтверждение требует полной свежей матрицы с
+отдельным run ID; silence, пропуски и search reuse не превращаются в успех.
+Выбранный порог сам по себе ещё не является результатом калибровки.
+
+SEARCH/FRESH — descriptor `timelearner_threshold_measurement_set`, schema 1:
+`measurements` содержит `candidate`, `evaluation` (относительные пути внутри
+каталога descriptor) и `execution` (attempt_id, clock_id, stage, selection_sha256).
+Подтверждающий descriptor содержит ровно один measurement. Первичные observations
+допускают JSON.gz; источники learned-state проверяются по настоящим sibling CSV.
+Ошибки дают code 2 без положительного результата; NonSeparable или BudgetExhausted
+являются допустимыми результатами анализа, различимыми в JSON при code 0.
+Существующие выходные файлы не заменяются.
+
+Обычный recognition-evaluation scorer намеренно отвергает threshold candidates:
+для них существует отдельный calibration scorer. Candidate report явно помечен
+диагностическим, не сертифицирует обучение или scientific Test. Подробный контракт:
+Docs/StructTrain/TimeLearner/NativeThresholdCalibration.ru.md.
