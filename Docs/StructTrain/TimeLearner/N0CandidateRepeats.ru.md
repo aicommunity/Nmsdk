@@ -89,9 +89,26 @@ A1 root a721fe4975a09f1d8473cef5f1054a286bc7b307 / Pulse
 runtime, Elder Release и M40 ASan. Его ранний group format не содержит ещё
 partial reason; это не финальная схема.
 
+На Elder A1 завершён: 34/34 native pass без skips/errors, process status 0.
+Elder A2 на root 42d1b58803d6b2060bd8993b60f17c0d74577d5b / Pulse
+8682435ce8518ef71e55a2fb8ed292f634c256d0 прошёл 35/35 native и 38/38
+Python/infrastructure tests без skips/failures/errors. Независимо проверены
+восемь сводок и все 132 primary JSON/CSV trials; repeated profiles дают
+48 trials и десять полных candidate groups. Реальные fixtures сохраняют
+search_unresolved и отрицательный fresh final certificate. Synthetic controls
+отдельно проверяют второй sample и Ns128; это не новые научные результаты.
+
+Elder report 5fb83ecb2f5af3c7adf833ac57aca0b3a64f7edc опубликован, все 686
+stored / 684 raw hashes проверены локально, runtime files повторно хешированы
+после terminal jobs. Это primary component-validation пакет, не законченный
+научный отчёт: графики новых training trials и полный visual matrix остаются
+требованиями общей отчётности. M40 A1 на последней проверке продолжал native
+ASan tests; его A2 ещё не запускался. Scoped acceptance и develop merge пока
+не выполнены.
+
 Текущий implementation root ea05b20f59a3017fbd86cc9948f140d060760c74 / Pulse
 8682435ce8518ef71e55a2fb8ed292f634c256d0 сохраняет partial history и добавляет
-строгий primary auditor. Пока A1 жив, его исходники/runtime не обновляются.
+строгий primary auditor. Пока M40 A1 жив, его исходники/runtime не обновляются.
 Следующий прогон возможен только после подтверждённого завершения A1.
 
 Нужны результаты native/ASan, primary audit и regressions; затем согласованные
