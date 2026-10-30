@@ -75,7 +75,7 @@ Native primary JSON/CSV по-прежнему обязательны; один s
 Export/import всех completed/stopped вариантов и checkpoint history с новой
 политикой требуют отдельной проверки; пока эта часть не считается закрытой.
 
-## Реализация и проверки в работе
+## Реализация и адресная проверка
 
 Core: BoundedTraining.h/.cpp, ConfiguredNativeTraining.cpp, ProbeEvidenceJson.cpp.
 Root: native_evidence.py, test_n0_repeat_evidence.py, Test_PulseLib_BoundedTraining.cpp,
@@ -84,35 +84,36 @@ apparently exact candidate; поиск Ns2 вместо Ns1 в Classic/Branch; N
 пройти по реальным residuals; budget до второго повтора не выдаёт certificate;
 схемы и N1 no-op rejection; configured native пары обеих топологий.
 
-A1 root a721fe4975a09f1d8473cef5f1054a286bc7b307 / Pulse
-76eab65b530b0c67a2f6db25affaa5def69721e8 строится на обоих workers в новых
-runtime, Elder Release и M40 ASan. Его ранний group format не содержит ещё
-partial reason; это не финальная схема.
+A1 root `a721fe4975a09f1d8473cef5f1054a286bc7b307` / Pulse
+`76eab65b530b0c67a2f6db25affaa5def69721e8`: по 34/34 native tests на обоих
+workers без skips/errors. Его ранний group format ещё не содержит partial reason;
+это сохранённая промежуточная версия, не финальная схема.
 
-На Elder A1 завершён: 34/34 native pass без skips/errors, process status 0.
-Elder A2 на root 42d1b58803d6b2060bd8993b60f17c0d74577d5b / Pulse
-8682435ce8518ef71e55a2fb8ed292f634c256d0 прошёл 35/35 native и 38/38
-Python/infrastructure tests без skips/failures/errors. Независимо проверены
-восемь сводок и все 132 primary JSON/CSV trials; repeated profiles дают
-48 trials и десять полных candidate groups. Реальные fixtures сохраняют
-search_unresolved и отрицательный fresh final certificate. Synthetic controls
-отдельно проверяют второй sample и Ns128; это не новые научные результаты.
+A2 root `42d1b58803d6b2060bd8993b60f17c0d74577d5b` / Pulse
+`8682435ce8518ef71e55a2fb8ed292f634c256d0`: Elder Release и M40 ASan
+(detect_leaks=0) завершили по 35/35 native и 38/38 Python/infrastructure tests
+без skips/failures/errors, process status 0. На каждом worker независимо
+проверены восемь summaries и все 132 primary JSON/CSV trials; repeated profiles
+дают 48 trials и десять полных candidate groups. Реальные fixtures сохраняют
+SearchUnresolved и отрицательный fresh final certificate. Synthetic controls
+проверяют второй sample и Ns128 отдельно от научных наблюдений.
 
-Elder report 5fb83ecb2f5af3c7adf833ac57aca0b3a64f7edc опубликован, все 686
-stored / 684 raw hashes проверены локально, runtime files повторно хешированы
-после terminal jobs. Это primary component-validation пакет, не законченный
-научный отчёт: графики новых training trials и полный visual matrix остаются
-требованиями общей отчётности. M40 A1 затем завершён: 34/34 native pass,
-ASan detect_leaks=0, process status 0. После terminal-проверки запущен M40 A2
-на том же root 42d1b58803d6b2060bd8993b60f17c0d74577d5b с полной новой
-схемой. Scoped acceptance и develop merge пока не выполнены.
+- Elder report: `5fb83ecb2f5af3c7adf833ac57aca0b3a64f7edc`.
+- M40 report: `9045b211253b7ad9b17e2a0049e34faf12d55883`.
 
-Текущий implementation root ea05b20f59a3017fbd86cc9948f140d060760c74 / Pulse
-8682435ce8518ef71e55a2fb8ed292f634c256d0 сохраняет partial history и добавляет
-строгий primary auditor. Пока M40 A1 жив, его исходники/runtime не обновляются.
-Следующий прогон возможен только после подтверждённого завершения A1.
+В каждом отчёте локально проверены все 686 stored / 684 raw hashes;
+файлы runtime повторно хешированы после завершения. Все задания terminal;
+старые формулировки о продолжающемся A1/A2 больше не актуальны.
 
-Нужны результаты native/ASan, primary audit и regressions; затем согласованные
-merge commits PulseLib → root. Полная матрица N0, final repeatability, storage,
-conversion/calibration/PostTune и научные эксперименты остаются требованиями
-полного плана, а не автоматически закрываются этим изменением.
+[Полные временные графики](NativeProbeVisualReports.ru.md) опубликованы для
+всех 132 trials / 198 trial–soma пар каждого worker, включая references,
+search anchors/inputs и final gate. Проверяется точное множество trial IDs,
+primary hashes, общий Y-scale и неизвестность spikes при record_spikes=false.
+Крупные overview/zoom PNG, SVG и PDF сохраняют исходные значения и фактический
+input waveform. Просмотр четырёх контрольных панелей не закрывает визуальную
+приёмку всей матрицы.
+
+Согласованные develop merges и проверка объединённого Python-контура выполняются
+после этой адресной проверки. Полная матрица N0, final repeatability, storage,
+новый completed/stopped export/import и warm continuation, conversion/calibration/
+PostTune и научные эксперименты остаются требованиями полного плана.
