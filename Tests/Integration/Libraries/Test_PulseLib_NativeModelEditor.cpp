@@ -2167,7 +2167,7 @@ TEST(NativeThresholdContract,SignedIaFImageProducesMeasuredSpike)
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
     ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();
-    auto source=dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));ASSERT_TRUE(source);
+    auto source=dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NCGenerator"));ASSERT_TRUE(source);
     source->Name="Stimulus";UEPtr<UContainer> generator=source;ASSERT_NE(model->AddComponent(generator),ForbiddenId);
     auto zone=dynamic_pointer_cast<NPulseLTZoneCommon>(core.storage->TakeObject("NPulseLTZoneIaF"));ASSERT_TRUE(zone);
     zone->Name="LTZone";UEPtr<UContainer> component=zone;ASSERT_NE(model->AddComponent(component),ForbiddenId);
