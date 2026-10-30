@@ -1852,9 +1852,19 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         // A new session must verify the model, not recapture amplitudes from
         // the learned geometry and silently redefine the original objective.
         auto warm=test->NativeTrainingController().Plan();warm.probe.onPrepared={};warm.probe.onSample={};
-        std::size_t warmObservations=0;
+        std::size_t warmObservations=0;std::ostringstream warmTrace;
+        warm.probe.onPrepared=[&](const auto&,const auto&) {
+            warmTrace.str({});warmTrace.clear();warmTrace.imbue(std::locale::classic());
+            warmTrace<<std::setprecision(17)<<"time,stimulus";
+            for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)warmTrace<<",soma"<<i;warmTrace<<'\n';
+        };
+        warm.probe.onSample=[&](const NativeProbeSample& frame) {
+            warmTrace<<frame.time<<','<<frame.stimulus;for(double value:frame.potentials)warmTrace<<','<<value;warmTrace<<'\n';
+        };
         warm.observationSink=[&](const NativeProbeResult& packet) {
-            Artifact(rig.name+"_warm_trial_"+std::to_string(++warmObservations)+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
+            const auto stem=rig.name+"_warm_trial_"+std::to_string(++warmObservations);
+            Artifact(stem+".json",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());
+            Artifact(stem+".csv",QByteArray::fromStdString(warmTrace.str()));
         };
         const auto attempt=test->NativeTrainingController().SessionAttempt();
         test->BeginNativeTraining(std::move(warm));
@@ -1866,6 +1876,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         EXPECT_EQ(resumed.SessionAttempt(),attempt+1);EXPECT_GT(warmObservations,0u);
         EXPECT_EQ(test->ReadNativeParameters(),parameters);
         Artifact(rig.name+"_warm_boundary.json",QJsonDocument(test->ExportNativeLearnedState(implementation)).toJson());
+        Artifact(rig.name+"_warm_summary.json",QJsonDocument(EncodeNativeTrainingState(resumed,
+            NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}})["sha256"].toString().toStdString(),test->ReadNativeParameters())).toJson());
     }
 }
 TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}

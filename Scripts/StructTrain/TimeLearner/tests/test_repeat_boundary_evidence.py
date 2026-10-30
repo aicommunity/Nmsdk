@@ -55,6 +55,27 @@ class RepeatBoundaryEvidenceTest(unittest.TestCase):
                 peak, = [p for p in packet["observation"]["peaks"] if p["input_id"] == input_id]
                 self.assertEqual(group["raw_potentials"], [peak["raw_potential"]])
 
+    def test_warm_attempt_keeps_original_goal_and_records_actual_traces(self):
+        cases = [p for p in self.completed if "explicit_tolerance" in p.name]
+        self.assertEqual(len(cases), 2)
+        for path in cases:
+            original, _, packets, traces = load_learned(path)
+            stem = path.name.removesuffix("_learned_state.json")
+            package = load(path.with_name(stem+"_warm_boundary.json"))
+            summary = load(path.with_name(stem+"_warm_summary.json"))
+            paths = list(self.root.glob(stem+"_warm_trial_*.json"))
+            self.assertTrue(paths)
+            for primary in paths:
+                packet = load(primary);trial = packet["requested_specification"]["trial_id"]
+                self.assertNotIn(trial, packets)
+                packets[trial], traces[trial] = packet, primary.with_suffix(".csv")
+            result = audit_learned_state(package, summary, packets, traces)
+            self.assertIs(result["search_history_retained"], True)
+            self.assertEqual(result["n0_candidate_repeats"], 2)
+            self.assertEqual(package["session_attempt"], original["session_attempt"]+1)
+            self.assertEqual(package["reference_packets"], original["reference_packets"])
+            self.assertEqual(summary["reference_probes"], 0)
+
     def test_missing_history_cannot_be_relabelled_as_measured_search(self):
         path = self.completed[0]
         package, summary, packets, traces = load_learned(path)
