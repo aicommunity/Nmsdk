@@ -159,6 +159,21 @@ reader/CLI proof и 5 tests на actual packages. Reader gates
 runtime-unverified добавка: accepted calibrated export, production transaction,
 full PostTune, frozen evaluation scorer нового формата и весь этап 8 не закрыты.
 
+Frozen scorer/direct trial audit/report adapter теперь реализованы в root
+`b22c15fec9038185b38c47e7889736e39ac30734`. Они проверяют calibrated proof,
+оценивают последующие actual probes и запрещают reuse calibration run ID;
+независимость Test автоматически не присваивается. Новые 9-test reader gates
+`s08-calibrated-frozen-audit-{normal,asan}-a1` ожидают native outputs. Отдельный
+35-test gate `s08-calibrated-scorer-regression-normal-a1` уже выполняется на
+сохранённых предыдущих native данных для проверки compatibility scorer.
+
+На M40 поставлен `s08-calibrated-frozen-report-a1`, root
+`590526997b7afd244c93292277b3ef862fba23c5`: после native и 9-test reader acceptance
+он построит два полных отчёта всех четырёх последующих probes Classic/Branch
+и выполнит 3 проверки первичных данных/покрытия/масштаба/хешей. Полные рисунки
+остаются кэшем на Data; это не публикация больших PNG/SVG/PDF в Git.
+До окончания gates и публикации артефактов эти изменения runtime-unverified.
+
 ## Остаток полного плана
 
 | Этап | Что ещё требуется для полной приёмки |

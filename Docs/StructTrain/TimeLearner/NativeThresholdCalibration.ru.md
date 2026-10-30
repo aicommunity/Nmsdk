@@ -371,6 +371,26 @@ python3 -m Scripts.StructTrain.TimeLearner analyze CALIBRATED.json --format cali
 Пять адресных tests ожидают actual native packages из двух новых controls.
 Reader не подтверждает simulator execution, grid selection или native import;
 его поля явно отделяют согласованность первичных данных от этих утверждений.
-Frozen evaluation scorer пока не принимает calibrated package. Следующий
-обязательный шаг — его интеграция с проверенным proof, затем production
-selection/commit/rollback orchestration, полный PostTune и независимый Test.
+Root `b22c15fec9038185b38c47e7889736e39ac30734` добавляет поддержку calibrated
+package в обычный frozen scorer, direct trial auditor и visual report adapter.
+Scorer проверяет proof один раз, затем использует тот же physical candidate
+для общего raw auditor; точное равенство physics установлено audit пакета.
+Calibration run IDs запрещено использовать как отдельный frozen evaluation run.
+Новые метрики вычисляются из новых actual observations, без наследования успеха
+calibration. Statistical independence и partition separation остаются unverified.
+Неподтверждённые candidates по-прежнему требуют отдельного calibration scorer.
+
+Reader matrix расширена с 5 до 9 tests; старые 5-test gates сохраняют свой снимок.
+Отдельный regression gate проверяет 35 прежних candidate/calibration/proposal/native
+assessment tests на новых Python исходниках и уже сохранённых native данных.
+Root `590526997b7afd244c93292277b3ef862fba23c5` добавляет 3 report readback checks:
+пересчёт metrics, полное покрытие всех 4 trials каждой сомой, реальные PNG 1920×960,
+SVG/PDF, отсутствие downsampling, zoom не менее 8 px/native tick и hashes всех
+файлов. Два полных отчёта сохраняются кэшем M40, не массовыми изображениями в Git.
+Дизайн последующих fixture-проб берётся из сохранённого confirmation design;
+явный adapter меняет только фиксированный run/name после native import.
+Это Same-Matrix diagnostic, а не заявленный independent held-out Test.
+
+Все эти добавки пока ожидают отдельных gates. Следующие обязательные шаги —
+production selection/commit/rollback orchestration, полный PostTune,
+независимый Test, переносимые Git-артефакты и приёмка остальных режимов.

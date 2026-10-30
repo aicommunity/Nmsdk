@@ -213,3 +213,18 @@ Docs/StructTrain/TimeLearner/NativeThresholdCalibration.ru.md.
 true/false вместо числовых полей отклоняются. Raw observation auditor v2 требует
 ровно один отсчёт на native tick и различимый dt. Статус исполнения simulator
 и commit калиброванной модели этой командой не подтверждаются.
+
+`analyze CALIBRATED.json --format calibrated-state --source-solo CASE_learned_state.json`
+проверяет proof сохранённого `timelearner_calibrated_recognition_state`:
+две успешные полные матрицы выбранного candidate, fresh run, raw observations,
+source CSV и точное сохранение физического графа. Это анализ сохранённых данных;
+команда не исполняет native import, не проверяет всю сетку и не запускает Test.
+
+`recognition-evaluation` и обычный `report` принимают такой calibrated package,
+повторно проверяют proof и оценивают новые полные observations тем же scorer.
+Calibration run нельзя выдать за новый frozen evaluation run. Результат отдельно
+содержит calibration evidence consistency и свежие response metrics; statistical
+independence и partition separation автоматически не подтверждаются.
+Сам отчёт остаётся диагностическим и не создаёт новую калибровку.
+Проверки этих новых путей ещё выполняются на серверах; production native
+selection/commit/rollback CLI остаётся незавершённым.
