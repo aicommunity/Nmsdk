@@ -1,6 +1,6 @@
 import unittest
 
-from Scripts.StructTrain.TimeLearner.plotting import time_views, series_timeline
+from Scripts.StructTrain.TimeLearner.plotting import time_views, series_timeline, detail_limits
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError
 
 
@@ -34,3 +34,11 @@ class PlotScaleTest(unittest.TestCase):
         self.assertEqual(rows[1]["unobserved_gap"], [.1, .25])
         self.assertEqual(rows[1]["onset_to_onset_seconds"], .25)
         self.assertIsNone(rows[0]["exact_reset_timestamp"])
+
+    def test_detail_preserves_negative_values_and_bracketing_samples(self):
+        samples = [{"time": i*.001, "soma": [-.02+i*.00001]} for i in range(8)]
+        limits = detail_limits(samples, 0, .002, .004, (-1., 1.))
+        self.assertIsNotNone(limits)
+        self.assertLess(limits[0], samples[1]["soma"][0])
+        self.assertGreater(limits[1], samples[5]["soma"][0])
+        self.assertIsNone(detail_limits(samples, 0, 1., 2., (-1., 1.)))

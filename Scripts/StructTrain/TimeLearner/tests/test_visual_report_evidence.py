@@ -47,7 +47,7 @@ class VisualReportEvidenceTest(unittest.TestCase):
                         self.assertEqual(image.size, (1920, 960))
                     self.assertIn("<svg", svg.read_text())
                     self.assertTrue(pdf.read_bytes().startswith(b"%PDF-"))
-                    if view["view"] != "overview":
+                    if view.get("time_view", view["view"]) != "overview":
                         self.assertGreaterEqual(view["minimum_native_tick_pixels_on_zoom"], 8)
                         self.assertLessEqual(view["end"]-view["begin"], .050000001)
 
