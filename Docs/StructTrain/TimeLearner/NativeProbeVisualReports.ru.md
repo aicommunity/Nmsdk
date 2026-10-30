@@ -99,8 +99,12 @@ PDF не менялись; их hashes привязаны к опубликов�
 [Elder QA](../../../Reports/StructTrain/TimeLearner/s09-n0-pdf-qa-elder1-a1/README.md),
 [M40 QA](../../../Reports/StructTrain/TimeLearner/s09-n0-pdf-qa-m40-a1/README.md).
 
-Открыты: визуальная приёмка всей матрицы, реальный N>4,
-вся physics/frequency matrix, достоверные unit descriptors, partial/censored
-invalid-trace diagnostic adapters и общий report completeness gate в runner.
-Первый adapter требует complete valid primary observations и явно отказывает
-в остальных случаях; это ещё не полное выполнение VisualTestReports.ru.md.
+Дополнение: [явная partial/censored policy](PartialProbeVisualReports.ru.md)
+проверена по 23/23 tests на обоих workers, включая реальный Classic trace с
+шестью soma. Default complete-only adapter сохраняет прежнюю строгость;
+диагностический режим не создаёт certificate или научный PASS.
+
+Открыты: визуальная приёмка всей матрицы, вся physics/frequency matrix,
+достоверные unit descriptors, исторические схемы и общий report completeness
+gate в runner. Один six-soma transport control не закрывает все большие
+размерности, режимы и частоты. Это ещё не полное выполнение VisualTestReports.ru.md.
