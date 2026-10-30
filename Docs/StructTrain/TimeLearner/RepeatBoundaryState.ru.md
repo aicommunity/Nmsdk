@@ -98,3 +98,10 @@ plot check. Elder A3 содержит также warm CSV; M40 A3 выполня
 временные графики и согласованные develop merges. Частота 20000, N>4, все
 PostTune/calibration/conversion варианты и полный controller checkpoint не
 закрываются десятью addressed cases автоматически. Общий план остаётся активным.
+
+Elder final A3 на root `02cf1542de6edfd67aa9da15798d34dd1b0eb08f` завершён:
+51/51 native и 77/77 Python tests без skips/errors, process status 0.
+Проверены новые warm CSV, сохранённые цели, полные исходные/imported proofs,
+диагностические stops, повторный source-bound readback старых графиков и
+совместимость прежних N0/N1 пакетов. M40 ASan A3 ещё выполняется; результаты
+этого одного worker не заменяют его проверку или всю матрицу полного плана.
