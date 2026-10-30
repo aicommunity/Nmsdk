@@ -53,7 +53,8 @@ def audit_threshold_proposal(proposal, expected_spec, observations, characteriza
     try:
         require(type(proposal) is dict and set(proposal) == FIELDS and
                 proposal["kind"] == "timelearner_threshold_proposal" and type(proposal["schema_version"]) is int and
-                proposal["schema_version"] == 1 and proposal["algorithm"] == "nonspiking-native-ltz-bracket-v1" and
+                proposal["schema_version"] == 1 and proposal["algorithm"] in
+                ("nonspiking-native-ltz-bracket-v1", "nonspiking-native-ltz-bracket-v2") and
                 proposal["calibrated"] is False and proposal["evaluation_verdict"] is None, "unknown_threshold_proposal")
         require(proposal["sha256"] == canonical_model_sha256({k: v for k, v in proposal.items() if k != "sha256"}),
                 "threshold_proposal_digest_mismatch")
@@ -69,7 +70,9 @@ def audit_threshold_proposal(proposal, expected_spec, observations, characteriza
                 proposal["training_pattern_hash"] == characterization["source_recognition"]["source_solo"]["protocol"]["pattern_hash"],
                 "threshold_proposal_source_mismatch")
         lower_limit, upper_limit = number(proposal["minimum_threshold"]), number(proposal["maximum_threshold"])
-        require(0 < lower_limit <= upper_limit and lower_limit == number(minimum_threshold) and upper_limit == number(maximum_threshold),
+        require(lower_limit <= upper_limit and
+                (proposal["algorithm"] == "nonspiking-native-ltz-bracket-v2" or lower_limit > 0) and
+                lower_limit == number(minimum_threshold) and upper_limit == number(maximum_threshold),
                 "invalid_threshold_proposal_bounds")
         for key in ("target_minimum_inside", "foil_maximum_full", "target_maximum_outside", "lower_bound", "upper_bound", "threshold"):
             if proposal[key] is not None:number(proposal[key])

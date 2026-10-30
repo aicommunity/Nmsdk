@@ -3,6 +3,7 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "NPulseChannel.h"
 #include "NPulseSynapse.h"
+#include "NConstGenerator.h"
 #include "NNeuronPostTrainTune.h"
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ModelIdentity.h"
@@ -13,6 +14,7 @@
 #include "TimeLearner/NativeThresholdCandidate.h"
 #include "TimeLearner/NativeCalibrationProposal.h"
 #include "TimeLearner/NativeCalibrationAssessment.h"
+#include "TimeLearner/NativeThresholdSupport.h"
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativePostTuneBoundary.h"
 #include "TimeLearner/NumericChecks.h"
@@ -1426,8 +1428,16 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
     const auto source=ConvertNativeSoloToRecognition(solo,NativeRecognitionSpec{},core.storage,core.environment,implementation);
     const auto sourceCopy=source;const auto original=rig.Revision();
     Artifact(rig.name+"_threshold_source.json",QJsonDocument(source).toJson());
-    for(double invalid:{0.,-1.,std::numeric_limits<double>::infinity(),std::numeric_limits<double>::quiet_NaN()})
+    for(double invalid:{std::numeric_limits<double>::infinity(),-std::numeric_limits<double>::infinity(),std::numeric_limits<double>::quiet_NaN()})
         EXPECT_THROW(CreateNativeThresholdCandidate(source,invalid,core.storage,core.environment,implementation),std::invalid_argument);
+    for(double finiteThreshold:{0.,-1.})
+    {
+        const auto signedCandidate=CreateNativeThresholdCandidate(source,finiteThreshold,core.storage,core.environment,implementation);
+        auto prepared=PrepareNativeRecognitionState(signedCandidate,core.storage,core.environment,implementation);
+        auto zone=prepared->neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
+        EXPECT_DOUBLE_EQ(zone->Threshold.GetData(),finiteThreshold);EXPECT_EQ(source,sourceCopy);
+        EXPECT_EQ(rig.Revision(),original);
+    }
     const auto baseName=rig.name;
     std::optional<NativeThresholdProposal> pendingProposal;
     for(double threshold:{1.e-4,1.})
@@ -1439,6 +1449,19 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
         if(threshold==1.e-4)EXPECT_EQ(rig.Revision(),original);
         const auto repeated=CreateNativeThresholdCandidate(source,threshold,core.storage,core.environment,implementation);
         EXPECT_EQ(candidate,repeated);
+        if(threshold==1.e-4)
+        {
+            auto legacy=candidate;auto legacyRecord=legacy["candidate_record"].toObject();
+            legacyRecord["algorithm"]="explicit-native-threshold-v1";legacy["candidate_record"]=legacyRecord;
+            auto archive=legacy["neuron"].toObject();auto metadata=archive["metadata"].toObject();
+            auto calibration=metadata["calibration"].toObject();calibration["candidate_record"]=legacyRecord;
+            metadata["calibration"]=calibration;archive["metadata"]=metadata;archive.remove("sha256");
+            archive["sha256"]=NmsdkTools::CanonicalModelDataSha256(archive);legacy["neuron"]=archive;
+            legacy.remove("sha256");legacy["sha256"]=NmsdkTools::CanonicalModelDataSha256(legacy);
+            auto loaded=PrepareNativeRecognitionState(legacy,core.storage,core.environment,implementation);
+            EXPECT_EQ(loaded->modelRevision,candidate["model_revision"].toString().toStdString());
+            Artifact(baseName+"_legacy_v1_candidate.json",QJsonDocument(legacy).toJson());
+        }
         EXPECT_THROW(CreateNativeThresholdCandidate(candidate,threshold,core.storage,core.environment,implementation),std::invalid_argument);
         auto forged=candidate;auto record=forged["candidate_record"].toObject();record["calibrated"]=true;forged["candidate_record"]=record;
         forged.remove("sha256");forged["sha256"]=NmsdkTools::CanonicalModelDataSha256(forged);
@@ -1471,6 +1494,8 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
             const auto proposal=ProposeNativeThreshold(primary,measured,hash,CalibrationResponseWindow{},1.e-6,1.);
             pendingProposal=proposal;
             Artifact(baseName+"_threshold_proposal.json",QJsonDocument(proposal.evidence).toJson());
+            const auto signedBounds=ProposeNativeThreshold(primary,measured,hash,CalibrationResponseWindow{},-.1,1.);
+            Artifact(baseName+"_signed_bounds_threshold_proposal.json",QJsonDocument(signedBounds.evidence).toJson());
             std::reverse(measured.begin(),measured.end());
             EXPECT_EQ(ProposeNativeThreshold(primary,measured,hash,CalibrationResponseWindow{},1.e-6,1.).evidence,proposal.evidence);
             if(proposal.threshold)
@@ -2112,6 +2137,58 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     }
 }
 TEST(NativeLearnedState,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0);}
+TEST(NativeThresholdContract,StorageAliasesUseActualImplementations)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    QJsonArray checked;
+    for(const std::string name:{"NPulseLTZoneThreshold","NPulseLTZoneThresholdBio","NPulseLTZoneThresholdBio2",
+        "NPLTZone","NPulseLTZoneIzhikevich","NPulseLTZoneIaF","NPulseLTZoneCable","NPSimpleLTZone","NCLTZone","NCSimpleLTZone"})
+    {
+        auto zone=dynamic_pointer_cast<NPulseLTZoneCommon>(core.storage->TakeObject(name));ASSERT_TRUE(zone)<<name;
+        const bool supported=SupportsNativeScalarSpikeThreshold(*zone);
+        if(name=="NPSimpleLTZone" || name=="NCLTZone" || name=="NCSimpleLTZone")
+        {EXPECT_FALSE(supported)<<name;EXPECT_THROW(RequireNativeScalarSpikeThreshold(*zone),std::invalid_argument);}
+        else EXPECT_TRUE(supported)<<name;
+        if(name=="NPulseLTZoneIzhikevich")EXPECT_NE(dynamic_cast<NPulseLTZoneThreshold*>(zone.Get()),nullptr);
+        if(name=="NPulseLTZoneIaF" || name=="NPulseLTZoneCable")EXPECT_DOUBLE_EQ(zone->Threshold.GetData(),-.055);
+        checked.append(QJsonObject{{"image",QString::fromStdString(name)},{"scalar_spike_threshold_supported",supported},
+            {"threshold",zone->Threshold.GetData()}});
+        core.storage->ReturnObject(zone);
+    }
+    Artifact("native_threshold_storage_contract.json",QJsonDocument(QJsonObject{{"kind","native_threshold_storage_contract"},
+        {"schema_version",1},{"images",checked},{"calibrated",false}}).toJson());
+}
+TEST(NativeThresholdContract,SignedIaFImageProducesMeasuredSpike)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();
+    auto source=dynamic_pointer_cast<NConstGenerator>(core.storage->TakeObject("NConstGenerator"));ASSERT_TRUE(source);
+    source->Name="Stimulus";UEPtr<UContainer> generator=source;ASSERT_NE(model->AddComponent(generator),ForbiddenId);
+    auto zone=dynamic_pointer_cast<NPulseLTZoneCommon>(core.storage->TakeObject("NPulseLTZoneIaF"));ASSERT_TRUE(zone);
+    zone->Name="LTZone";UEPtr<UContainer> component=zone;ASSERT_NE(model->AddComponent(component),ForbiddenId);
+    int slot=0;ASSERT_TRUE(source->Connect(zone,"Output","Inputs",slot,true));
+    model->SetGlobalTimeStep(2000);model->Build();model->Init();model->Reset();
+    EXPECT_DOUBLE_EQ(zone->Threshold.GetData(),-.055);EXPECT_DOUBLE_EQ(zone->ThresholdOff.GetData(),-.07);
+    QJsonArray frames;
+    for(double input:{-.07,-.05,-.071})
+    {
+        source->Amplitude=input;
+        const auto time=core.environment->GetTime().GetDoubleTime();model->Calculate();
+        EXPECT_DOUBLE_EQ(zone->Potential.GetData(),input);
+        frames.append(QJsonObject{{"time",time},{"input",input},{"decision_potential",zone->Potential.GetData()},
+            {"lt_output",zone->Output(0,0)},{"spike_count",zone->OutputPulseTimes.GetCols()}});
+        if(input==-.07)EXPECT_EQ(zone->OutputPulseTimes.GetCols(),0);
+        if(input==-.05){EXPECT_EQ(zone->OutputPulseTimes.GetCols(),1);EXPECT_GT(zone->Output(0,0),0.);}
+        if(input==-.071){EXPECT_EQ(zone->OutputPulseTimes.GetCols(),1);EXPECT_DOUBLE_EQ(zone->Output(0,0),0.);}
+        core.environment->IncreaseModelTimeByStep();
+    }
+    Artifact("native_signed_threshold_control.json",QJsonDocument(QJsonObject{{"kind","native_signed_threshold_control"},
+        {"schema_version",1},{"image","NPulseLTZoneIaF"},{"threshold",zone->Threshold.GetData()},{"frames",frames},
+        {"scope","isolated LTZone component; no soma or pattern-recognition claim"},{"calibrated",false}}).toJson());
+    dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
+}
+
 template<class Learner> void CalibrationBoundaryFixture(int normalization,unsigned frequency,bool potential=false)
 {
     // Explicit transport-fixture allowance, recorded in configuration/state.
