@@ -1,0 +1,11 @@
+# G1 S1 pilot extract (superseded by G1_S1_GOOD_WAVES_EXTRACT_2026-10-21.tsv — 3 reps × hierarchy cols)
+# G1 S1 pilot extract: W01 W13 W33 rep3 launch.exit=0; tick130 2026-10-21T17:08:49Z
+# wave=W01 run_id=G1.S1.W01-11-20261021T113257Z-15892 launch.exit=0
+wave	case	attempt	train_status	training_convergence	fires	separation_quality	detection_quality	training_failure_reason	training_failure_phase	DendriteLength	TipSynapseResistance	FixedLTZThreshold	sep_margin	delay_residue	amp_over_target	sync_exit	done_be	metrics
+W01	W01_CL50_N0_PSIoff	attempt-0001	done	converged_need0	00000000	fail	target_not_detected	-	-	27 22 15 1	86000000 86000000 86000000 86000000	1	-	-	-	-	-	ok=0 n=8 acc=7 target_hit=0 fire_all=0 mode=silent fires=00000000 matches=01111111 fa=0
+# wave=W13 run_id=G1.S1.W13-11-20261021T073758Z-3533 launch.exit=0
+wave	case	attempt	train_status	training_convergence	fires	separation_quality	detection_quality	training_failure_reason	training_failure_phase	DendriteLength	TipSynapseResistance	FixedLTZThreshold	sep_margin	delay_residue	amp_over_target	sync_exit	done_be	metrics
+W13	W13_HIST_ltz50_gen	attempt-0001	done	converged_posttune_finalized	00000000	fail	target_not_detected	-	-	25 22 15 1	20000000 20000000 20000000 86000000	1	-	-	-	-	-	ok=0 n=8 acc=7 target_hit=0 fire_all=0 mode=silent fires=00000000 matches=01111111 fa=0
+# wave=W33 run_id=G1.S1.W33-11-20261021T120726Z-15166 launch.exit=0
+wave	case	attempt	train_status	training_convergence	fires	separation_quality	detection_quality	training_failure_reason	training_failure_phase	DendriteLength	TipSynapseResistance	FixedLTZThreshold	sep_margin	delay_residue	amp_over_target	sync_exit	done_be	metrics
+W33	W33_CL50_N0_PSIoff_POST	attempt-0001	done_flag_flush	converged_posttune_finalized	00000000	fail	target_not_detected	-	-	27 22 15 1	20000000 20000000 20000000 86000000	1	-	-	-	-	-	ok=0 n=8 acc=7 target_hit=0 fire_all=0 mode=silent fires=00000000 matches=01111111 fa=0
