@@ -87,7 +87,7 @@ tests без skips/failures/errors, все process statuses 0.
 Reports: Elder 6b9ba782067637e53a09be84c36af1f8609488a4;
 M40 852154adcfe0f1450f137c85a37eafcb54eba229. В каждом пакете локально
 проверены все 10 stored / 8 raw hashes, включая декомпрессию. Подэтап
-подготовлен к merge; полный этап 10 не завершён.
+объединён в develop: 1ce9eb6a3390a6f553b81ffa72bde7e285f7f930; полный этап 10 не завершён.
 
 Открыты: внешний production Git server fault matrix, relative URL resolution,
 одновременная смена refs, crash/stale recovery, scheduler ownership и сквозная
