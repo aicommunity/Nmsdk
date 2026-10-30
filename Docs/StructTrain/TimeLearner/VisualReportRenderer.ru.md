@@ -74,8 +74,39 @@ logs сохранены в A2. Elder использует доступный с�
 
 ## Открытые требования
 
-- Continuous panorama с фактическими ITI, reset events и незамаскированными gaps.
-- Отдельные detail Y views, когда общий диапазон скрывает слабый ответ.
+Рабочее продолжение от 30.10.2026: ветка stage09/visual-series-and-detail,
+implementation 1b9a41c3299b2f4b3fb653478a101f4419dce1ba, auditor
+fd80b9ec43d8ac1d13c1163abf8a0d8414a5f127. Добавлены panorama для каждой
+записанной сомы с исходным абсолютным временем и дополнительные local-detail
+Y views, когда размах выбранного фрагмента меньше четверти общего диапазона.
+Общий сопоставимый график всегда остаётся рядом; нормировки нет. Для границ
+detail учитываются соседние bracketing samples. Пока проверки выполняются,
+это не принятая замена перечисленных ниже требований.
+
+Series timeline сохраняет фактические onset-to-onset и last-to-first stimulus
+интервалы, порядок и policy boundary. Неизмеренные промежутки видны серым:
+их нельзя интерпретировать как отсутствие ответа в ITI. Точный timestamp
+физического Reset schema 1 не содержит, поэтому он остаётся null; зелёная
+граница обозначает только заявленную reset-per-trial policy. Нельзя называть
+полученную панораму доказательством continuous coverage при разрывах наблюдения.
+
+На Elder первый прогон implementation 1b9a41c32 прошёл три scale/timeline
+теста и построил Classic spiking report с восемью trial/soma парами, status 0.
+На обоих workers запущена проверка четырёх профилей через настоящий report CLI
+с auditor fd80b9ec4: на каждом worker прошли 16 адресных checks, ноль
+skips/failures/errors, process status 0. Каждый пакет содержит четыре профиля,
+16 trials и все 24 trial/soma пары. Новых native моделей не обучали.
+Reports: Elder 7cb89e8e4b8554501ef19ed8e367d6af95835069;
+M40 1e1ce1d85f7a297a31c04e57c4fad67750ef81ed. Все 398 hashes каждого пакета
+проверены локально. Просмотрены Elder Classic spiking Soma2 series overview
+и Soma1 trial-0 zoom-003-detail: легенды не перекрывают график, отдельный
+Y-scale подписан, форму слабого хвоста можно сравнить с исходным shared view.
+Это адресная PNG проверка, не полная visual/physics matrix или vector/PDF QA.
+Подэтап подготовлен к merge; полный stage 9/11 остаётся незавершённым.
+
+- Native continuous coverage/ITI/reset matrix и точные reset event descriptors.
+  Actual-clock panorama и дополнительные detail Y views уже реализованы
+  в описанном подэтапе; grey gap policy отдельно проверена synthetic control.
 - Полные descriptors канала/единиц/routing из producer и проверка всех классов.
 - Diagnostic coverage отсутствующего trial/канала, NaN и неподдержанной схемы
   с явной картой отсутствующих данных; текущий strict loader может отвергнуть
