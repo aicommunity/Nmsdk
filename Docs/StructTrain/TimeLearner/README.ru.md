@@ -48,6 +48,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Текущий прогресс semantic property review](PropertyReview.json).
 - [Полнота code catalog: 211 исходных и 6 новых свойств](PropertyReview.coverage.json).
 - [Общий измеритель проб, native soma и storage-зависимости](ProbeMeasurement.ru.md).
+- [Повторы кандидатов N0: исходная цель, версия схем и адресные проверки](N0CandidateRepeats.ru.md).
+- [Крупные графики всех обучающих проб и фактических входных импульсов](NativeProbeVisualReports.ru.md).
 - [Нативный исполнитель проб Classic/Branch: рабочий подэтап и gates](NativeExecution.ru.md).
 - [Полная последовательность волн и physical input ownership: schema 3](BurstAssignment.ru.md).
 - [Явный выбор назначенной волны в широком окне](AssignedWaveSelection.ru.md).
