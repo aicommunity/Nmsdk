@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "scope": "Repeated-N0 completed/stopped boundary summaries and warm trace recording; not whole plan",
+  "goal_complete": false,
+  "scoped_accepted": false,
+  "branch": "codex/timelearner-repeat-boundary",
+  "baseline_root": "a6cfc24acf00f5bf8a235ad7872741bb9e05da3f",
+  "baseline_pulse": "b2b670a22f849e0d0d2b6789b8242308521b1c37",
+  "fixed_pulse": "7b5939c5744877ba1a762393d78f7183853fd5c0",
+  "attempts": [
+    {
+      "worker": "10.245.1.11",
+      "attempt": "a1",
+      "status": "terminal",
+      "native_tests": 10,
+      "failed_native_tests": 10,
+      "assertions_per_case": 2,
+      "secondary_post_run_error": "Path JSON serialization",
+      "runtime_terminal_readback": "runtime-after-readback.json"
+    },
+    {
+      "worker": "10.245.1.17",
+      "attempt": "a1",
+      "status": "terminal",
+      "native_tests": 10,
+      "failed_native_tests": 10,
+      "assertions_per_case": 2,
+      "secondary_post_run_error": "Path JSON serialization",
+      "runtime_terminal_readback": "runtime-after-readback.json"
+    },
+    {
+      "worker": "10.245.1.11",
+      "attempt": "a2",
+      "status": "running_verified",
+      "root": "7369ae85cc914c5e3f05d919c35fd9b8890d9d97",
+      "supervisor_pid": 702240,
+      "expected_native_tests": 51,
+      "expected_python_tests": 76,
+      "runtime": "/home/user/timelearner-refactor/runtime-s05-repeat-boundary-normal-a2"
+    },
+    {
+      "worker": "10.245.1.17",
+      "attempt": "a3",
+      "status": "running_verified",
+      "root": "8d73c0fd575aeeedd163479aa7065245915056d9",
+      "supervisor_pid": 2523734,
+      "expected_native_tests": 51,
+      "expected_python_tests": 77,
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s05-repeat-boundary-asan-a3"
+    }
+  ],
+  "open_gates": [
+    "terminal fixed native and ASan results",
+    "independent primary-data Python audit",
+    "new warm CSV and summary",
+    "published source-bound time plots",
+    "submodule then root no-ff merges",
+    "full plan 0-12 remains incomplete"
+  ],
+  "observed_at_utc": "2026-10-30T14:13:55.3252684Z"
+}
