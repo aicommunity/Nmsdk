@@ -1,0 +1,118 @@
+{
+  "kind": "timelearner_scoped_full_native_visual_review",
+  "schema_version": 1,
+  "renderer_root": "b2f357bcc75264a233524bfb30153b5d95816d6c",
+  "reader_root": "fb01871cf2158ece735ab45e148fc20fc33594cd",
+  "agent_visual_review_complete": true,
+  "human_visual_review_complete": false,
+  "global_visual_acceptance": false,
+  "scientific_verdict": null,
+  "scope": "Six selected panels per producer; not every one of the 507 trial-soma pairs or the physics/mode matrix",
+  "inspection": "Elder six worker Poppler previews inspected with view_image detail=original, 1920x960 at 160 dpi; all six M40 previews verified byte-identical. Application viewport zoom not instrumented.",
+  "observations": [
+    "Overview shows both actual input pulses and the somatic rise, peaks and decay on the same absolute time axis.",
+    "Peak zoom resolves waveform shape; preceding input onset lies in the adjacent tile and overview, not in this peak-only tile.",
+    "Classic, Branch, fresh-process and warm examples retain original amplitudes and readable distinct Y scales for soma and input.",
+    "Partial example shows only recorded zero-valued prefix and an explicitly unknown grey tail.",
+    "No title/legend/axis overlap or clipped extrema was found in these selected panels.",
+    "Byte-identical cross-producer previews are not independent randomized scientific replications."
+  ],
+  "reports": [
+    {
+      "commit": "03d02cd5abb6923274fb83cd17361cc591a3666f",
+      "producer": "elder1",
+      "records": [
+        {
+          "source_relative": "report/group-000/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "6c60867633c161d6aade3f4c671ce7b6d35ccf2471e71dde00faa7439238bd07",
+          "preview": "classic-overview.png",
+          "dpi": 160,
+          "preview_sha256": "a0d5ee14d9e29561a32b7c8a8ca4fe44ac845d4d493127b36e4100558ea30dc9"
+        },
+        {
+          "source_relative": "report/group-000/probe-0000/soma-001/zoom-003.pdf",
+          "source_sha256": "7b47367b9a29f082be3dd4bc0fb845d08d2eda980b441f97f3da2f67be160789",
+          "preview": "classic-peak-zoom.png",
+          "dpi": 160,
+          "preview_sha256": "917a37de5a63f3142e9b7cc4c47779b142939489bccf986e243e5d544e3fcd8e"
+        },
+        {
+          "source_relative": "report/group-013/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "e74e45049428f52213655cb356098081e9d651604176e327a6a487aa9d8cd487",
+          "preview": "branch-overview.png",
+          "dpi": 160,
+          "preview_sha256": "df0ef830da0d4f95a5e1be9fe0937656c067b7a129d501f5e3739813c104650b"
+        },
+        {
+          "source_relative": "report/group-009/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "85aed91253e93bb8b94b8d74d841db052f0db809731f7f780ce1e8c39bc1bf3b",
+          "preview": "partial-overview.png",
+          "dpi": 160,
+          "preview_sha256": "b2d851e210d78a989e9cfe46d64556095fd9c5ee9dd79c4ad622680d20afed6e"
+        },
+        {
+          "source_relative": "report/group-027/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "4ae2c237f9111836da97375fac448539f7d93b62df9f17f1b0bea50a9593c0f7",
+          "preview": "fresh-process-overview.png",
+          "dpi": 160,
+          "preview_sha256": "ec35b04e8dee491c629a60b158996430cc64a347882c9d66f25c042a9df6ae98"
+        },
+        {
+          "source_relative": "report/group-012/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "410bfa9f09fc2b5553e2e8da5290903a3d36ea8b86d15d748342d7ea4d9a60f1",
+          "preview": "warm-overview.png",
+          "dpi": 160,
+          "preview_sha256": "eda3394fa4efc800c6126509be05cfb8b9cc09fa91bd892cabdd6a108361b687"
+        }
+      ]
+    },
+    {
+      "commit": "bd79b0d31724f7230d658bcbc70bccdb5a0bdb25",
+      "producer": "m40",
+      "records": [
+        {
+          "source_relative": "report/group-000/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "6c60867633c161d6aade3f4c671ce7b6d35ccf2471e71dde00faa7439238bd07",
+          "preview": "classic-overview.png",
+          "dpi": 160,
+          "preview_sha256": "a0d5ee14d9e29561a32b7c8a8ca4fe44ac845d4d493127b36e4100558ea30dc9"
+        },
+        {
+          "source_relative": "report/group-000/probe-0000/soma-001/zoom-003.pdf",
+          "source_sha256": "7b47367b9a29f082be3dd4bc0fb845d08d2eda980b441f97f3da2f67be160789",
+          "preview": "classic-peak-zoom.png",
+          "dpi": 160,
+          "preview_sha256": "917a37de5a63f3142e9b7cc4c47779b142939489bccf986e243e5d544e3fcd8e"
+        },
+        {
+          "source_relative": "report/group-013/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "d04607d7de70adc7d57ca2b236bbfadcf486fabbcddd7ae7652dce7d92db95cb",
+          "preview": "branch-overview.png",
+          "dpi": 160,
+          "preview_sha256": "df0ef830da0d4f95a5e1be9fe0937656c067b7a129d501f5e3739813c104650b"
+        },
+        {
+          "source_relative": "report/group-009/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "2102d2eaf986a7b36ffe9b94a8a2c22daff7e0115fe6cb4e75c2407994010d33",
+          "preview": "partial-overview.png",
+          "dpi": 160,
+          "preview_sha256": "b2d851e210d78a989e9cfe46d64556095fd9c5ee9dd79c4ad622680d20afed6e"
+        },
+        {
+          "source_relative": "report/group-027/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "21801b7aa1be68a895f5336759d360a50ebdbbd7698b315c70659796e4bb75ff",
+          "preview": "fresh-process-overview.png",
+          "dpi": 160,
+          "preview_sha256": "ec35b04e8dee491c629a60b158996430cc64a347882c9d66f25c042a9df6ae98"
+        },
+        {
+          "source_relative": "report/group-012/probe-0000/soma-001/overview.pdf",
+          "source_sha256": "dab4088bec2e50463ad260c1c388f284076ee7b01d9c997526c0201614345f64",
+          "preview": "warm-overview.png",
+          "dpi": 160,
+          "preview_sha256": "eda3394fa4efc800c6126509be05cfb8b9cc09fa91bd892cabdd6a108361b687"
+        }
+      ]
+    }
+  ]
+}

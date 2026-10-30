@@ -115,3 +115,20 @@ tests без skips/errors, process status 0. Native producer root 8d73c0fd5
 `fb73b3e5bcdef4612640631f8060310e44e08749` опубликованы;
 все 1986/1089 stored hashes проверены локально. Полные новые временные графики,
 объединённый Python gate и согласованные develop merges остаются открыты.
+
+Последующее дополнение: combined source
+`b2f357bcc75264a233524bfb30153b5d95816d6c` прошёл 92/92 tests на обоих
+workers без skips/errors/failures. Отдельный immutable-input guard reader
+`fb01871cf2158ece735ab45e148fc20fc33594cd` прошёл по 7/7 addressed checks.
+Полные новые A3 graphics построены из Git-пакетов и source-bound проверены:
+по 338 проб и 507 trial–soma пар, 10/10 full graphical/catalog readback tests,
+без нового native расчёта. Включены warm CSV, исходные и импортированные frozen
+пробы, отдельные fresh-process исполнения, rollback и partial observations.
+Наблюдение, список его файлов и численная валидность остаются разными осями.
+
+Полные графические пакеты опубликованы:
+Elder `03d02cd5abb6923274fb83cd17361cc591a3666f`,
+M40 `bd79b0d31724f7230d658bcbc70bccdb5a0bdb25`.
+Контракт и ограничения: [NativeTestRunVisualReports](NativeTestRunVisualReports.ru.md).
+Визуальная проверка выбранных панелей и согласованные develop merges остаются
+условиями приёмки этого подэтапа. Полная матрица исходного плана не закрыта.
