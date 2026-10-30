@@ -67,7 +67,17 @@ fixture имеет observation с нулём samples; отсутствие obser
 pooled-full контроля: каждая soma получает отдельные крупные figures. Его
 широкий timing tolerance служил transport/dimension control, а не доказательством
 сходимости при default 0.02. На Elder первый diagnostic gate прошёл 22/22 tests
-без skips/errors; six-soma extension проверяется следующим gate. До
-публикации результатов и визуального просмотра новый подэтап не принят.
+без skips/errors. Final renderer `9abd0b0049071eabc233cd644f7bfe3fd5dde7dc`
+прошёл по 23/23 tests на обоих workers, включая actual six-soma control.
+Пакеты: [Elder](../../../Reports/StructTrain/TimeLearner/s09-probe-diagnostics-elder1-a2/README.md)
+`2aeafe06bd451fb6f5e2b9d0d9a483eea2bb4f2d`,
+[M40](../../../Reports/StructTrain/TimeLearner/s09-probe-diagnostics-m40-a2/README.md)
+`5bb64774268ef3815e457e0eda06a7c0e6254a84`.
+Локально проверены 1162/609 первоначальных stored hashes; добавленные записи
+agent visual review и обновлённые manifests содержат 1163/610 файлов.
+Открыты четыре source-bound Poppler previews: actual partial Branch и soma 6
+на каждом worker. Подписи читаемы, легенда не перекрывает axes, цензурированный
+хвост явно неизвестен. Это scoped agent QA; human review не заявлен.
+Приёмка данного адаптера не является полной визуальной приёмкой матрицы.
 Historical schema adapters и вся physics/frequency matrix остаются отдельными
 требованиями полного плана.
