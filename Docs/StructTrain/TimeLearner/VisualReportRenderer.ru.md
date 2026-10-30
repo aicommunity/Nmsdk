@@ -93,11 +93,20 @@ Series timeline сохраняет фактические onset-to-onset и last
 На Elder первый прогон implementation 1b9a41c32 прошёл три scale/timeline
 теста и построил Classic spiking report с восемью trial/soma парами, status 0.
 На обоих workers запущена проверка четырёх профилей через настоящий report CLI
-с auditor fd80b9ec4: ожидается 16 адресных checks на worker. Результаты ещё
-не приняты и в develop этот рабочий подэтап не объединён.
+с auditor fd80b9ec4: на каждом worker прошли 16 адресных checks, ноль
+skips/failures/errors, process status 0. Каждый пакет содержит четыре профиля,
+16 trials и все 24 trial/soma пары. Новых native моделей не обучали.
+Reports: Elder 7cb89e8e4b8554501ef19ed8e367d6af95835069;
+M40 1e1ce1d85f7a297a31c04e57c4fad67750ef81ed. Все 398 hashes каждого пакета
+проверены локально. Просмотрены Elder Classic spiking Soma2 series overview
+и Soma1 trial-0 zoom-003-detail: легенды не перекрывают график, отдельный
+Y-scale подписан, форму слабого хвоста можно сравнить с исходным shared view.
+Это адресная PNG проверка, не полная visual/physics matrix или vector/PDF QA.
+Подэтап подготовлен к merge; полный stage 9/11 остаётся незавершённым.
 
-- Continuous panorama с фактическими ITI, reset events и незамаскированными gaps.
-- Отдельные detail Y views, когда общий диапазон скрывает слабый ответ.
+- Native continuous coverage/ITI/reset matrix и точные reset event descriptors.
+  Actual-clock panorama и дополнительные detail Y views уже реализованы
+  в описанном подэтапе; grey gap policy отдельно проверена synthetic control.
 - Полные descriptors канала/единиц/routing из producer и проверка всех классов.
 - Diagnostic coverage отсутствующего trial/канала, NaN и неподдержанной схемы
   с явной картой отсутствующих данных; текущий strict loader может отвергнуть
