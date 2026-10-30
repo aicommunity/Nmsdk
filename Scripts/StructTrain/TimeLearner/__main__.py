@@ -69,10 +69,29 @@ def main(argv: list[str] | None = None) -> int:
     report.add_argument("source", type=Path, help="recognition evaluation spec")
     report.add_argument("--model", type=Path, required=True)
     report.add_argument("--output", type=Path, required=True, help="new directory; never overwritten")
+    publication = commands.add_parser("publish", help="publish exact Git closure children-first; no scientific verdict")
+    publication.add_argument("specification", type=Path)
+    publication.add_argument("--root", type=Path, required=True)
+    publication.add_argument("--output", type=Path, required=True, help="new receipt outside source tree")
     args = parser.parse_args(argv)
     if args.command == "inventory":
         from .inventory import write_inventory
         write_inventory(args.root.resolve(), args.output.resolve())
+    elif args.command == "publish":
+        from .native_evidence import EvidenceError, load
+        from .publisher import publish_closure
+        try:
+            # Reserve the receipt before any push; never overwrite an old result.
+            with args.output.open("x", encoding="utf-8") as receipt:
+                result = publish_closure(args.root, load(args.specification))
+                json.dump(result, receipt, ensure_ascii=False, indent=2, allow_nan=False)
+                receipt.write("\n")
+            print(json.dumps(result, ensure_ascii=False))
+            return 0 if result["publication"] == "published" else 2
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"kind": "timelearner_git_publication_result", "publication": "failed",
+                              "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
     elif args.command == "report":
         from .native_evidence import EvidenceError
         from .reports import render_evaluation
