@@ -113,7 +113,13 @@ primary hashes, общий Y-scale и неизвестность spikes при r
 input waveform. Просмотр четырёх контрольных панелей не закрывает визуальную
 приёмку всей матрицы.
 
-Согласованные develop merges и проверка объединённого Python-контура выполняются
-после этой адресной проверки. Полная матрица N0, final repeatability, storage,
+После адресной проверки объединённый Python-контур прошёл по 53/53 tests на
+обоих workers без skips/errors. PulseLib develop merge
+`b2b670a22f849e0d0d2b6789b8242308521b1c37`, Bin merge
+`cbb3bf453d82f58672541ed8a42f7b5da54a5508`, root develop merge
+`fbda0476dd6d3a1e29f27545217e80f86e103b03` опубликованы. Исходники Core и
+native тестов совпадают с A2; production Python совпадает с combined gate.
+Fresh recursive closure отмечается отдельно в [снимке состояния](CurrentStatus-2026-10-30.ru.md).
+Полная матрица N0, final repeatability, storage,
 новый completed/stopped export/import и warm continuation, conversion/calibration/
 PostTune и научные эксперименты остаются требованиями полного плана.

@@ -6,6 +6,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
 
 - [План и условия приёмки](RefactoringPlan.ru.md).
+- [Состояние 30.10: принятые подэтапы, доказательства и полный остаток плана](CurrentStatus-2026-10-30.ru.md).
 - [Приёмка 28.10: full post-fix gate, native completed state и child merges](PooledFullAcceptance.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
 - [Актуальный статус всех этапов на 29.10: принятый develop, scoped проверки и оставшаяся работа](CurrentStatus-2026-10-29.ru.md).
