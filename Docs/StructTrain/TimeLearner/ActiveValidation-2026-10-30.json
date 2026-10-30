@@ -92,7 +92,7 @@
   "repeat_boundary_visual_extension": {
     "scope": "Working feature; not full plan or full visual matrix acceptance",
     "pulse_feature": "7b5939c5744877ba1a762393d78f7183853fd5c0",
-    "pulse_develop_merge_pending": true,
+    "pulse_develop_merge_pending": false,
     "renderer_scoped_develop_merge": "f5926a3ba48cd10cc772855bbdaf5580e9f0f4a0",
     "combined_root": "b2f357bcc75264a233524bfb30153b5d95816d6c",
     "combined_tests_per_worker": 92,
@@ -135,33 +135,101 @@
     "expected_trial_soma_pairs_per_producer": 507,
     "full_visual_jobs": [
       {
-        "last_observation": "live process confirmed; 2892 SVG files; not accepted as complete",
+        "last_observation": "terminal 0; 338 probes and 507 pairs rendered and verified",
         "render_worker": "10.245.1.17",
         "pid": 2649672,
         "producer": "elder1",
-        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-elder1-a1"
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-elder1-a1",
+        "status": "terminal",
+        "exit_status": 0
       },
       {
-        "last_observation": "live process confirmed; 2835 SVG files; not accepted as complete",
+        "last_observation": "terminal 0; 338 probes and 507 pairs rendered and verified",
         "render_worker": "10.245.1.17",
         "pid": 2649685,
         "producer": "m40",
-        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-m40-a1"
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-m40-a1",
+        "status": "terminal",
+        "exit_status": 0
       }
     ],
     "dependent_readback": {
       "expected_tests_per_producer": 10,
       "worker": "10.245.1.17",
       "pid": 2656993,
-      "last_observation": "live process confirmed; waits for exact render jobs to exit successfully",
-      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-readback-a1"
+      "last_observation": "terminal 0; 10/10 checks for each producer",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-readback-a1",
+      "status": "terminal",
+      "exit_status": 0
     },
     "dependent_publication": {
       "worker": "10.245.1.17",
-      "published": false,
+      "published": true,
       "pid": 2658504,
-      "last_observation": "live process confirmed; waits for successful full readback",
-      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-publication-a1"
+      "last_observation": "terminal 0; published before compact policy selection",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-repeat-boundary-full-visual-publication-a1",
+      "status": "terminal",
+      "exit_status": 0,
+      "merge_into_source_develop": false
+    },
+    "global_visual_acceptance": false,
+    "scientific_verdict": null,
+    "pulse_develop_merge": "086b04fb43bb57506558bfb6beba6250f61a6ce2",
+    "root_merge_pending": true
+  },
+  "compact_artifact_policy": {
+    "selected_by_user": true,
+    "policy": "Lossless primary/model/config/metrics/manifests and selected figures in Git; full reports are reproducible M40 cache",
+    "old_history_rewritten": false,
+    "tested_root": "675cc30bd3bbeddb2cda52d7e6b1df9c79f63b80",
+    "workers": [
+      {
+        "skips": 0,
+        "outer_hashes_verified": 34,
+        "worker": "10.245.1.11",
+        "inner_hashes_verified": 8,
+        "failures": 0,
+        "archive_bytes": 3564176,
+        "exit_status": 0,
+        "bundle_bytes": 4305162,
+        "errors": 0,
+        "tests": 10,
+        "commit": "4f2cace7774bb924b5ef459f36194fb43d7cfa6a",
+        "post_extraction_evidence_tests": 5,
+        "archive_sha256": "f7d21c0ede9c6a9cfc714b2b7d7aef29f71f4010f4c62c093e5628e4f3f770d6"
+      },
+      {
+        "skips": 0,
+        "outer_hashes_verified": 34,
+        "worker": "10.245.1.17",
+        "inner_hashes_verified": 8,
+        "failures": 0,
+        "archive_bytes": 3568715,
+        "exit_status": 0,
+        "bundle_bytes": 4309587,
+        "errors": 0,
+        "tests": 10,
+        "commit": "cea2df871ff34fe9f027e513e8bae065e5691899",
+        "post_extraction_evidence_tests": 5,
+        "archive_sha256": "c48d8232ec77f6bd98f26fb152544031a0cdbe3cddc4e8fdff5ebaf533fd2b81"
+      }
+    ],
+    "full_cache_regeneration": {
+      "skips": 0,
+      "tests": 3,
+      "trials": 338,
+      "trial_soma_pairs": 507,
+      "worker": "10.245.1.17",
+      "receipt_commit": "15279ce361225406f8bc9809be7eeb54056e9e38",
+      "exit_status": 0,
+      "reader_root": "3e93f19b144517284a413889354c2e70b833a12a",
+      "images_republished": false,
+      "errors": 0,
+      "status": "terminal",
+      "all_png_byte_identical": true,
+      "failures": 0,
+      "compared_pngs": 3087,
+      "renderer_root": "b2f357bcc75264a233524bfb30153b5d95816d6c"
     },
     "global_visual_acceptance": false,
     "scientific_verdict": null
