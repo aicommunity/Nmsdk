@@ -14,6 +14,7 @@
 #include "TimeLearner/NativeThresholdCandidate.h"
 #include "TimeLearner/NativeCalibrationProposal.h"
 #include "TimeLearner/NativeCalibrationAssessment.h"
+#include "TimeLearner/NativeRecognitionObservationValidation.h"
 #include "TimeLearner/NativeThresholdSupport.h"
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativePostTuneBoundary.h"
@@ -1235,6 +1236,37 @@ void CalibrationAssessmentChecks(const std::string& name,
 {
     ASSERT_EQ(expected.size(),4u);ASSERT_EQ(observations.size(),4u);
     const auto assessed=AssessNativeThresholdResponses(expected,observations,targetHash,CalibrationResponseWindow{});
+    std::vector<NativeRecognitionTrialObservation> loaded;
+    for(std::size_t i=0;i<expected.size();++i)
+    {
+        const auto encoded=NativeRecognitionTrialJson(observations[i]);
+        const auto text=QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString();
+        loaded.push_back(ParseNativeRecognitionObservation(text,expected[i]));
+        EXPECT_EQ(NativeRecognitionTrialJson(loaded.back()),encoded);
+        auto changed=encoded;changed["spike_count"]=false;
+        EXPECT_THROW(DecodeNativeRecognitionObservation(changed,expected[i]),std::invalid_argument);
+        changed=encoded;changed["censored"]=true;
+        EXPECT_THROW(DecodeNativeRecognitionObservation(changed,expected[i]),std::invalid_argument);
+        changed=encoded;changed["unrecognized_claim"]=true;
+        EXPECT_THROW(DecodeNativeRecognitionObservation(changed,expected[i]),std::invalid_argument);
+        changed=encoded;changed.remove("relative_stimulus_times");
+        EXPECT_THROW(DecodeNativeRecognitionObservation(changed,expected[i]),std::invalid_argument);
+        changed=encoded;auto frames=changed["samples"].toArray();auto frame=frames[0].toObject();
+        frame["soma"]=QJsonArray{QJsonValue(QJsonValue::Null)};frames[0]=frame;changed["samples"]=frames;
+        EXPECT_THROW(DecodeNativeRecognitionObservation(changed,expected[i]),std::invalid_argument);
+        auto other=expected[i];other.duration+=1./observations[i].frequencyHz;
+        EXPECT_THROW(DecodeNativeRecognitionObservation(encoded,other),std::invalid_argument);
+        other=expected[i];other.maximumSamples+=1;
+        EXPECT_THROW(DecodeNativeRecognitionObservation(encoded,other),std::invalid_argument);
+        EXPECT_THROW(ParseNativeRecognitionObservation(text,expected[i],text.size()-1),std::invalid_argument);
+        const auto duplicated=std::string("{\"kind\":\"native_recognition_trial\",")+text.substr(1);
+        EXPECT_THROW(ParseNativeRecognitionObservation(duplicated,expected[i]),std::invalid_argument);
+    }
+    EXPECT_EQ(AssessNativeThresholdResponses(expected,loaded,targetHash,CalibrationResponseWindow{}).evidence,assessed.evidence);
+    Artifact(name+"_calibration_persistence.json",QJsonDocument(QJsonObject{
+        {"kind","native_calibration_observation_roundtrip"},{"schema_version",1},
+        {"trials",int(loaded.size())},{"assessment_sha256",assessed.evidence["sha256"]},
+        {"equal",true},{"calibrated",false}}).toJson());
     if(name.find("_candidate_high")!=std::string::npos)
     {
         EXPECT_FALSE(assessed.criterionMet);EXPECT_EQ(assessed.targetViolations,2u);
@@ -2206,6 +2238,8 @@ TEST(NativeThresholdPotential,ClassicN1_2000){CalibrationBoundaryFixture<NNeuron
 TEST(NativeThresholdPotential,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
 TEST(NativeThresholdPotential,ClassicN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,20000,true);}
 TEST(NativeThresholdPotential,BranchN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,20000,true);}
+TEST(NativeCalibrationPersistence,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
+TEST(NativeCalibrationPersistence,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
 TEST(NativeThresholdCandidate,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000);}
 TEST(NativeThresholdCandidate,BranchN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(0,2000);}
 TEST(NativeThresholdCandidate,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000);}
