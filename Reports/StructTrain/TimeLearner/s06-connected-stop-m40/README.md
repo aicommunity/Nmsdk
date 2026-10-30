@@ -1,9 +1,0 @@
-# Connected native training stop: m40
-
-Baseline 01bf64842: 20 native cases, 16 missed stop failures and four keep-true controls pass. A real bool output of another native component is bound to IsNeedToTrain using SetPointer. Changing that source does not invoke the learner setter. V2 N1, Classic/Branch, CalculateMode 0/1 are covered at early probe, partial reference capture, search after an edit and inside the sample callback.
-
-Fixed source 384927728 / Core c99c47d: all 57 native cases pass without skips/errors, including 20 connected controls and 37 existing service/cold/stopped regressions. The common adapter reads the actual flag and the common service checks it before actions and after native children. Stop cancels and retains the observation, yields ExternalStop, preserves individual parameters and exports a diagnostic model without a convergence certificate. The source flag is not overwritten by the new logic. Keep-true snapshots precede separate local teardown cancellation.
-
-Independent auditor b236ee563: 10 tests, zero skips/failures/errors. Sixteen stops are independently verified against 16 stopped-model packages and 28 primary trials; 20 existing stopped regressions retain 66 primary trials. All mode/topology, capture-phase, source/learner bool, packet counts and null-certificate claims are cross-checked. Setup attempt 93df1bbe3 failed all 20 cases at a legitimate ControllerVersion ownership guard; it is retained as fixture error rather than defect evidence.
-
-Original XML/logs, immutable runtime manifests, diagnostic packages, summaries and primary trial JSON/CSV are retained losslessly; runtime file hashes are rechecked. This closes the declared connected-stop defect, not all alias mechanisms, initial-false startup, rising-edge restart/retarget, scientific evaluation or the whole plan.
