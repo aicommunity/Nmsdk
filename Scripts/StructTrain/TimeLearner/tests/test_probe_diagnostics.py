@@ -154,6 +154,9 @@ class ProbeDiagnosticsTest(unittest.TestCase):
             while node is not None:
                 self.assertIsNone(node.get('clip-path'), (identity,node.attrib))
                 node=parents.get(node)
+            waveforms=[n for n in svg.iter() if n.tag.endswith('path') and color in n.get('style','')
+                       and under(n,identity) and n.get('clip-path')]
+            self.assertTrue(waveforms, "waveform must remain clipped to the plotted time window")
         self.assertTrue(view["sample_markers"])
 
     def test_invalid_schema_clock_and_counts_still_reject_diagnostic(self):
