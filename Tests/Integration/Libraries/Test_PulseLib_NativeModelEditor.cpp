@@ -890,9 +890,10 @@ template<class Learner> ConfiguredNativeTraining Configuration(EditingRig<Learne
     c.search=plan.search;c.maximumReferenceProbes=plan.maximumReferenceProbes;c.maximumModelSeconds=plan.maximumModelSeconds;
     c.maximumWallSeconds=plan.maximumWallSeconds;return c;
 }
-template<class Learner> void ConfiguredTraining(int normalization,bool fromXml=false)
+template<class Learner> void ConfiguredTraining(int normalization,bool fromXml=false,bool n0Repeats=false)
 {
-    EditingRig<Learner> rig(2000,normalization,fromXml?"configured_file":"configured_service");const auto configuration=Configuration(rig);
+    EditingRig<Learner> rig(2000,normalization,n0Repeats?"configured_repeats":fromXml?"configured_file":"configured_service");auto configuration=Configuration(rig);
+    if(n0Repeats)configuration.search.n0CandidateRepeats=2;
     const auto encoded=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact);
     EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(encoded.toStdString())),EncodeConfiguredNativeTraining(configuration));
     auto oldNeuron=rig.neuron;const double time=rig.environment->GetTime().GetDoubleTime();
@@ -941,6 +942,13 @@ template<class Learner> void ConfiguredTraining(int normalization,bool fromXml=f
     ASSERT_EQ(service.Outcome(),TrainingStatus::SearchUnresolved)<<service.Reason();
     ASSERT_TRUE(service.References());ASSERT_TRUE(service.Certificate());EXPECT_FALSE(service.Certificate()->Exact());
     ASSERT_TRUE(service.Search());EXPECT_GT(service.Search()->AppliedEdits(),0u);
+    if(n0Repeats)
+    {
+        ASSERT_FALSE(service.Search()->CandidateRepeats().empty());
+        for(const auto& group:service.Search()->CandidateRepeats())
+        {EXPECT_EQ(group.trialIds.size(),2u);EXPECT_EQ(group.anchorTrialIds.size(),2u);}
+        EXPECT_EQ(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())["schema_version"],QJsonValue(2));
+    }
     EXPECT_EQ(observations,service.IssuedReferenceProbes()+service.Search()->IssuedProbes());
     EXPECT_TRUE(service.Certificate()->Matches(rig.Revision(),*service.References(),configuration.search.tolerances,
         ModelStateKind::LearnedSolo,service.ModelEpoch()));
@@ -958,6 +966,8 @@ TEST(ConfiguredNativeTraining,ClassicN0){ConfiguredTraining<NNeuronTimeLearner>(
 TEST(ConfiguredNativeTraining,BranchN0){ConfiguredTraining<NNeuronTimeLearnerBranch>(0);}
 TEST(ConfiguredNativeTraining,ClassicN1){ConfiguredTraining<NNeuronTimeLearner>(1);}
 TEST(ConfiguredNativeTraining,BranchN1){ConfiguredTraining<NNeuronTimeLearnerBranch>(1);}
+TEST(ConfiguredNativeTrainingN0Repeats,ClassicNativePairs){ConfiguredTraining<NNeuronTimeLearner>(0,false,true);}
+TEST(ConfiguredNativeTrainingN0Repeats,BranchNativePairs){ConfiguredTraining<NNeuronTimeLearnerBranch>(0,false,true);}
 TEST(ConfiguredNativeTraining,ClassicColdXmlStartsTheController){ConfiguredTraining<NNeuronTimeLearner>(0,true);}
 TEST(ConfiguredNativeTraining,BranchColdXmlStartsTheController){ConfiguredTraining<NNeuronTimeLearnerBranch>(1,true);}
 
@@ -977,6 +987,23 @@ TEST(ConfiguredNativeTraining,StrictCodecRejectsDuplicateUnknownAndCorruptFields
     const auto omitted=DecodeConfiguredNativeTraining(invalid);EXPECT_FALSE(omitted.model.inputs[0].resistance);
     EXPECT_EQ(EncodeConfiguredNativeTraining(omitted),invalid);
     EXPECT_THROW(ParseConfiguredNativeTraining("{}"),std::invalid_argument);
+}
+TEST(ConfiguredNativeTrainingN0Repeats,Schema2DeclaresPolicyAndSchema1DoesNotSilentlyChange)
+{
+    EditingRig<NNeuronTimeLearner> rig(2000,0,"configured_repeat_codec");auto c=Configuration(rig);
+    const auto legacy=EncodeConfiguredNativeTraining(c);EXPECT_EQ(legacy["schema_version"],QJsonValue(1));
+    EXPECT_EQ(DecodeConfiguredNativeTraining(legacy).search.n0CandidateRepeats,1u);
+    c.search.n0CandidateRepeats=2;const auto repeated=EncodeConfiguredNativeTraining(c);
+    EXPECT_EQ(repeated["schema_version"],QJsonValue(2));
+    EXPECT_EQ(DecodeConfiguredNativeTraining(repeated).search.n0CandidateRepeats,2u);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(repeated)),repeated);
+    auto invalid=repeated;invalid["schema_version"]=1;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(invalid),std::invalid_argument);
+    for(const auto value:{QJsonValue(true),QJsonValue(1),QJsonValue(129),QJsonValue(2.5)})
+    {
+        invalid=repeated;auto search=invalid["search"].toObject();search["n0_candidate_repeats"]=value;invalid["search"]=search;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(invalid),std::invalid_argument);
+    }
 }
 TEST(ConfiguredNativeTraining,MissingConfigurationAndLoadedMarkerFailWithoutColdReset)
 {

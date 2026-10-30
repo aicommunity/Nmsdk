@@ -99,6 +99,20 @@ manifest и контрольные суммы. На каждую trial/soma па
 помечены model units / SI unverified; финальная визуальная матрица не закрыта.
 Подробности: Docs/StructTrain/TimeLearner/VisualReportRenderer.ru.md.
 
+Обучающие native probes имеют отдельный адаптер без выдуманных target/foil labels:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner report probe.json --format probe --trace probe.csv --output NEW_REPORT
+python3 -m Scripts.StructTrain.TimeLearner report report-spec.json --format probe-set --output NEW_REPORT_SET
+```
+
+`probe-set` проверяет явные trial IDs, сохраняет portable spec и использует общие
+Y limits каждого soma по всем пробам. Доступны overview, 100-tick zoom и явно
+подписанный detail для слабого ответа; actual input waveform берётся из CSV.
+При отсутствии регистрации spikes count остаётся unknown. Полнота отдельного
+subset spec не доказывает полноту кампании. Схема, данные, серверные проверки
+и открытые ограничения: Docs/StructTrain/TimeLearner/NativeProbeVisualReports.ru.md.
+
 ### Git closure publication
 
 `python3 -m Scripts.StructTrain.TimeLearner publish publication.json --root CHECKOUT --output NEW_RECEIPT.json`
