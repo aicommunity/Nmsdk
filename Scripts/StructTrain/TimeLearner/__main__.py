@@ -67,7 +67,8 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "probe", "probe-diagnostic", "probe-set"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "probe", "probe-diagnostic", "probe-set", "native-test-run"), default="recognition-evaluation")
+    report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
     report.add_argument("--output", type=Path, required=True, help="new directory; never overwritten")
@@ -99,7 +100,13 @@ def main(argv: list[str] | None = None) -> int:
         from .reports import render_evaluation
         try:
             from .native_evidence import require
-            if args.format == "probe-set":
+            require(args.format == "native-test-run" or args.artifacts is None, "artifacts_option_is_only_for_native_test_run")
+            if args.format == "native-test-run":
+                from .native_test_reports import render_native_test_run
+                require(args.artifacts is not None and args.trace is None and args.model is None,
+                        "native_test_run_requires_artifacts_not_model_or_trace")
+                result = render_native_test_run(args.source.resolve(strict=True), args.artifacts.resolve(strict=True), args.output.resolve())
+            elif args.format == "probe-set":
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
                 result = render_probe_set(args.source.resolve(strict=True), args.output.resolve())
