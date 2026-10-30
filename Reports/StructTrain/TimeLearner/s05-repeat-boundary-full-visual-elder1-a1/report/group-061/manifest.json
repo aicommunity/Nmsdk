@@ -1,0 +1,45 @@
+{
+  "kind": "timelearner_probe_set_visual_report",
+  "schema_version": 2,
+  "status": "diagnostic",
+  "expected_trials": [
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/trial/1",
+      "packet": "probe-0000/primary/probe.json",
+      "trace": "probe-0000/primary/trace.csv"
+    }
+  ],
+  "reports": [
+    {
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2/trial/1",
+      "folder": "probe-0000",
+      "soma_count": 1,
+      "plotted_soma_count": 1,
+      "observed_soma_count": 1,
+      "data_complete": true
+    }
+  ],
+  "common_y_limits": [
+    [
+      -0.00024171875329872527,
+      0.003263203169532791
+    ]
+  ],
+  "comparison_profile": {
+    "amplitude": 1,
+    "frequency_deviation": 0,
+    "frequency_hz": 2000,
+    "generator_class": "NPulseGeneratorTransit",
+    "pulse_length": 0.001,
+    "use_pattern_output": false,
+    "use_transit_signal": false
+  },
+  "routing": "branch_solo_burst",
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null,
+  "data_complete": true,
+  "observation_policy": "complete_or_partial",
+  "rendered_trial_soma_pairs": 1,
+  "known_trial_soma_pairs": 1,
+  "unknown_soma_trials": []
+}

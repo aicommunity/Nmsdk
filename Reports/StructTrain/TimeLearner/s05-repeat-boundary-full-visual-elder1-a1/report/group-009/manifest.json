@@ -1,0 +1,49 @@
+{
+  "kind": "timelearner_probe_set_visual_report",
+  "schema_version": 2,
+  "status": "diagnostic",
+  "expected_trials": [
+    {
+      "trial_id": "Classic_2000_N0_stopped_N0RepeatedEarly/automatic/session/9/capture/9/1",
+      "packet": "probe-0000/primary/probe.json",
+      "trace": "probe-0000/primary/trace.csv"
+    }
+  ],
+  "reports": [
+    {
+      "trial_id": "Classic_2000_N0_stopped_N0RepeatedEarly/automatic/session/9/capture/9/1",
+      "folder": "probe-0000",
+      "soma_count": 2,
+      "plotted_soma_count": 2,
+      "observed_soma_count": 2,
+      "data_complete": false
+    }
+  ],
+  "common_y_limits": [
+    [
+      -1e-12,
+      1e-12
+    ],
+    [
+      -1e-12,
+      1e-12
+    ]
+  ],
+  "comparison_profile": {
+    "amplitude": 1,
+    "frequency_deviation": 0,
+    "frequency_hz": 2000,
+    "generator_class": "NPulseGeneratorTransit",
+    "pulse_length": 0.001,
+    "use_pattern_output": false,
+    "use_transit_signal": false
+  },
+  "routing": "classic_burst",
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null,
+  "data_complete": false,
+  "observation_policy": "complete_or_partial",
+  "rendered_trial_soma_pairs": 2,
+  "known_trial_soma_pairs": 2,
+  "unknown_soma_trials": []
+}

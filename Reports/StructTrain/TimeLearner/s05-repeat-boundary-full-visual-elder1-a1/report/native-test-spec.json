@@ -1,0 +1,426 @@
+{
+  "kind": "timelearner_native_test_report_spec",
+  "schema_version": 1,
+  "fixture_contract": "repeat-boundary-a3-native-51-root-8d73c0f-core-7b5939c",
+  "expected_test_ids": [
+    "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+    "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+    "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+    "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+    "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+    "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+    "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+    "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+    "BoundedTraining/EmptyEffectiveDomainsRemainSearchUnresolvedWithFreshFinalMeasurements",
+    "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+    "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+    "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+    "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+    "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+    "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+    "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+    "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+    "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+    "ConfiguredNativeTraining/ClassicN0",
+    "ConfiguredNativeTraining/BranchN0",
+    "ConfiguredNativeTraining/ClassicN1",
+    "ConfiguredNativeTraining/BranchN1",
+    "ConfiguredNativeTraining/ClassicColdXmlStartsTheController",
+    "ConfiguredNativeTraining/BranchColdXmlStartsTheController",
+    "ConfiguredNativeTraining/StrictCodecRejectsDuplicateUnknownAndCorruptFields",
+    "ConfiguredNativeTraining/MissingConfigurationAndLoadedMarkerFailWithoutColdReset",
+    "ConfiguredNativeTraining/ClassicXmlLoadDoesNotColdReset",
+    "ConfiguredNativeTraining/BranchXmlLoadDoesNotColdReset",
+    "ConfiguredNativeTraining/ClassicCopyWithoutStateDoesNotColdReset",
+    "ConfiguredNativeTraining/BranchCopyWithoutStateDoesNotColdReset",
+    "ConfiguredNativeTraining/ClassicCopyWithStateDoesNotColdReset",
+    "ConfiguredNativeTraining/BranchCopyWithStateDoesNotColdReset",
+    "ConfiguredNativeTrainingN0Repeats/ClassicNativePairs",
+    "ConfiguredNativeTrainingN0Repeats/BranchNativePairs",
+    "ConfiguredNativeTrainingN0Repeats/Schema2DeclaresPolicyAndSchema1DoesNotSilentlyChange",
+    "NativeLearnedState/ClassicN0",
+    "NativeLearnedState/BranchN0",
+    "NativeLearnedState/ClassicN1",
+    "NativeLearnedState/BranchN1",
+    "NativeLearnedState/ClassicConfiguredN0Repeated",
+    "NativeLearnedState/BranchConfiguredN0Repeated",
+    "NativeLearnedState/ClassicConfiguredN0RepeatedWarm",
+    "NativeLearnedState/BranchConfiguredN0RepeatedWarm",
+    "NativeStoppedState/ClassicN0BudgetSearch",
+    "NativeStoppedState/BranchN0BudgetSearch",
+    "NativeStoppedState/ClassicN0RepeatedEarly",
+    "NativeStoppedState/BranchN0RepeatedEarly",
+    "NativeStoppedState/ClassicN0RepeatedCapture",
+    "NativeStoppedState/BranchN0RepeatedCapture",
+    "NativeStoppedState/ClassicN0RepeatedHalfCandidate",
+    "NativeStoppedState/BranchN0RepeatedHalfCandidate"
+  ],
+  "phases": [
+    {
+      "summary": "Classic_2000_N0_configured_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N0_configured_service_service_"
+    },
+    {
+      "summary": "Classic_2000_N1_configured_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N1_configured_service_service_"
+    },
+    {
+      "summary": "Classic_2000_N0_configured_repeats_training_summary.json",
+      "probe_prefix": "Classic_2000_N0_configured_repeats_service_"
+    },
+    {
+      "summary": "Classic_2000_N0_configured_file_xml_summary.json",
+      "probe_prefix": "Classic_2000_N0_configured_file_xmlprobe_"
+    },
+    {
+      "summary": "Classic_2000_N0_learned_boundary_learned_summary.json",
+      "probe_prefix": "Classic_2000_N0_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Classic_2000_N1_learned_boundary_learned_summary.json",
+      "probe_prefix": "Classic_2000_N1_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_learned_boundary_configured_repeat2_learned_summary.json",
+      "probe_prefix": "Classic_2000_N0_learned_boundary_configured_repeat2_state_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_learned_summary.json",
+      "probe_prefix": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_state_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_stopped_N0BudgetSearch_stopped_summary.json",
+      "probe_prefix": "Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_stopped_N0RepeatedEarly_stopped_summary.json",
+      "probe_prefix": "Classic_2000_N0_stopped_N0RepeatedEarly_stopped_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_stopped_N0RepeatedCapture_stopped_summary.json",
+      "probe_prefix": "Classic_2000_N0_stopped_N0RepeatedCapture_stopped_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_summary.json",
+      "probe_prefix": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_warm_summary.json",
+      "probe_prefix": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_warm_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_configured_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N0_configured_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N1_configured_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N1_configured_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N0_configured_repeats_training_summary.json",
+      "probe_prefix": "Branch_2000_N0_configured_repeats_service_"
+    },
+    {
+      "summary": "Branch_2000_N1_configured_file_xml_summary.json",
+      "probe_prefix": "Branch_2000_N1_configured_file_xmlprobe_"
+    },
+    {
+      "summary": "Branch_2000_N0_learned_boundary_learned_summary.json",
+      "probe_prefix": "Branch_2000_N0_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Branch_2000_N1_learned_boundary_learned_summary.json",
+      "probe_prefix": "Branch_2000_N1_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_learned_boundary_configured_repeat2_learned_summary.json",
+      "probe_prefix": "Branch_2000_N0_learned_boundary_configured_repeat2_state_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_learned_summary.json",
+      "probe_prefix": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_state_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_stopped_N0BudgetSearch_stopped_summary.json",
+      "probe_prefix": "Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_stopped_N0RepeatedEarly_stopped_summary.json",
+      "probe_prefix": "Branch_2000_N0_stopped_N0RepeatedEarly_stopped_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_stopped_N0RepeatedCapture_stopped_summary.json",
+      "probe_prefix": "Branch_2000_N0_stopped_N0RepeatedCapture_stopped_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_summary.json",
+      "probe_prefix": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_warm_summary.json",
+      "probe_prefix": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_warm_trial_"
+    }
+  ],
+  "standalone": [
+    {
+      "packet": "Classic_2000_N0_learned_boundary_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N0_learned_boundary_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_frozen_test.csv"
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N1_learned_boundary_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N1_learned_boundary_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N1_learned_boundary_frozen_test.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_configured_repeat2_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_configured_repeat2_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_configured_repeat2_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N0_learned_boundary_configured_repeat2_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_configured_repeat2_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_configured_repeat2_frozen_test.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_frozen_test.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0BudgetSearch_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0BudgetSearch_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0BudgetSearch_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N0_stopped_N0BudgetSearch_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0BudgetSearch_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0BudgetSearch_frozen.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedEarly_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedEarly_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedEarly_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedEarly_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedEarly_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedEarly_frozen.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedCapture_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedCapture_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedCapture_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedCapture_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedCapture_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedCapture_frozen.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_probe_2.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_fresh_process.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_frozen.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_rollback_before_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_rollback_before.csv"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_rollback_after_evidence.json",
+      "json_pointer": "",
+      "trace": "Classic_2000_N0_learned_boundary_rollback_after.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N0_learned_boundary_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_frozen_test.csv"
+    },
+    {
+      "packet": "Branch_2000_N1_learned_boundary_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N1_learned_boundary_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N1_learned_boundary_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N1_learned_boundary_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N1_learned_boundary_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N1_learned_boundary_frozen_test.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_configured_repeat2_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_configured_repeat2_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_configured_repeat2_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N0_learned_boundary_configured_repeat2_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_configured_repeat2_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_configured_repeat2_frozen_test.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_frozen_test_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_repeat2_frozen_test.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0BudgetSearch_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0BudgetSearch_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0BudgetSearch_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N0_stopped_N0BudgetSearch_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0BudgetSearch_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0BudgetSearch_frozen.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedEarly_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedEarly_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedEarly_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedEarly_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedEarly_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedEarly_frozen.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedCapture_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedCapture_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedCapture_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedCapture_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedCapture_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedCapture_frozen.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_probe_2_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_probe_2.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_fresh_process.json",
+      "json_pointer": "/probe",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_fresh_process.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_frozen_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_frozen.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_rollback_before_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_rollback_before.csv"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_rollback_after_evidence.json",
+      "json_pointer": "",
+      "trace": "Branch_2000_N0_learned_boundary_rollback_after.csv"
+    }
+  ]
+}
