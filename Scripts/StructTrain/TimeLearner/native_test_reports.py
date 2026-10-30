@@ -139,8 +139,9 @@ def _read_probe_data_from_value(packet, trace):
 
 
 def render_native_test_run(specification, artifact_root, output):
-    inventory = inventory_native_test_run(specification, artifact_root)
     root = artifact_root.resolve(strict=True)
+    require(not output.resolve().is_relative_to(root), "native_test_output_must_be_outside_immutable_artifacts")
+    inventory = inventory_native_test_run(specification, artifact_root)
     output.mkdir(parents=True, exist_ok=False)
     primary = output/"primary"; primary.mkdir()
     # Preserve original wrappers as well as extracted /probe values. Import in
