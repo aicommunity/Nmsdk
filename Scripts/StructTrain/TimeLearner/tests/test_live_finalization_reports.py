@@ -128,3 +128,12 @@ class LiveFinalizationReportsTest(unittest.TestCase):
             with self.assertRaises(EvidenceError):
                 render_live_finalization(changed_path, wrong_path, output)
             self.assertFalse(output.exists())
+            positive = self.native/next(row["source"] for row in self.records if row["source"].endswith("_local_0.json"))
+            wrong = deepcopy(inventory)
+            missing = positive.stem+"_state_trial_2.json"
+            self.assertTrue(any(item["path"] == missing for item in wrong["files"]))
+            wrong["files"] = [item for item in wrong["files"] if item["path"] != missing]
+            wrong_path.write_text(json.dumps(wrong));output = root/"missing-trial-ordinal"
+            with self.assertRaisesRegex(EvidenceError, "missing_live_report_trial_ordinal"):
+                render_live_finalization(positive, wrong_path, output)
+            self.assertFalse(output.exists())
