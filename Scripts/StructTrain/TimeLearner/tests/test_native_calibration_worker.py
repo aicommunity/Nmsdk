@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import subprocess
 import tempfile
 import unittest
 
@@ -146,3 +147,55 @@ class NativeCalibrationWorkerTest(unittest.TestCase):
                 snapshot = output/"input/source"/source.name
                 self.assertEqual(load(snapshot), job["source_recognition"]["source_solo"])
                 self.assertEqual(len(result["artifacts"]), len([p for p in output.rglob("*") if p.is_file()])-1)
+
+    def test_model_tick_budget_is_a_diagnostic_stop_with_source_restored(self):
+        for top, case, job, source, _ in self.cases:
+            if case != "success":
+                continue
+            with tempfile.TemporaryDirectory() as directory:
+                saved = os.environ.get("TIMELEARNER_NATIVE_CALIBRATION_CLI_OUTPUT")
+                root = Path(saved)/(top+"-tick-control") if saved else Path(directory)
+                root.mkdir(parents=True, exist_ok=True)
+                changed = copy.deepcopy(job);changed["maximum_model_ticks"] = 1;resign(changed)
+                save(root/"job.json", changed)
+                output = root/"attempt"
+                result = run_job(root/"job.json", source, self.root/"runtime-before.json", output, 300)
+                self.assertEqual(result["execution"], "process_error")
+                self.assertEqual(result["validity"], "unverified_execution")
+                native = load(output/"native/execution.json")
+                self.assertEqual(native["execution"], "model_tick_budget_exhausted")
+                self.assertEqual(native["model_ticks"], 1)
+                self.assertEqual(native["calibration_status"], "cancelled")
+                self.assertEqual(load(output/"native/model.json"), job["source_recognition"])
+                diagnostic = audit_execution(output/"native", changed, load_case(source))
+                self.assertFalse(diagnostic["full_grid_model_binding_verified"])
+                self.assertFalse(audit_run_manifest(output/"run-manifest.json")["full_grid_model_binding_verified"])
+
+    def test_native_console_strict_parser_and_mode_conflicts_leave_no_output(self):
+        _, _, job, _, _ = self.cases[0]
+        runtime = load(self.root/"runtime-before.json")
+        executable = runtime["executable"]["path"];ini = runtime["app_ini"]["path"]
+        with tempfile.TemporaryDirectory() as directory:
+            saved = os.environ.get("TIMELEARNER_NATIVE_CALIBRATION_CLI_OUTPUT")
+            root = Path(saved)/"native-strict-controls" if saved else Path(directory)
+            root.mkdir(parents=True, exist_ok=True)
+            unknown = copy.deepcopy(job);unknown["trials"][0]["unused_parameter"] = 1;resign(unknown)
+            bad_digest = copy.deepcopy(job);bad_digest["sha256"] = "0"*64
+            raw = json.dumps(job)
+            cases = [("duplicate", '{"maximum_model_ticks":'+str(job["maximum_model_ticks"])+','+raw[1:], [], "duplicate_native_configuration_key"),
+                     ("request-field", json.dumps(unknown), [], "calibration_proof_request_encoding_mismatch"),
+                     ("digest", json.dumps(bad_digest), [], "job_digest_mismatch"),
+                     ("mode", raw, ["--config", "unused-project.ini"], "excludes project execution/inspection modes")]
+            results = []
+            for name, raw, extra, reason in cases:
+                path = root/(name+".json");path.write_text(raw, encoding="utf-8")
+                target = root/(name+"-output")
+                done = subprocess.run([executable, "--app-ini", ini, "--timelearner-calibrate", str(path),
+                    "--timelearner-output", str(target), *extra], cwd=Path(executable).parent,
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=30)
+                (root/(name+".log")).write_bytes(done.stdout)
+                self.assertEqual(done.returncode, 2, done.stdout.decode(errors="replace"))
+                self.assertIn(reason, done.stdout.decode(errors="replace"))
+                self.assertFalse(target.exists())
+                results.append({"case": name, "returncode": done.returncode, "reason": reason, "output_created": False})
+            save(root/"validation.json", {"native_rejection_controls": results, "evaluation_verdict": None})
