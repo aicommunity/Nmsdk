@@ -200,3 +200,88 @@ TEST(NativeFinalizationBoundary,PublicEnumsUseExplicitMapping)
     EXPECT_THROW(NativePostTuneModeFromPublic(77),std::invalid_argument);
     EXPECT_THROW(NativePostTuneMetricFromPublic(77),std::invalid_argument);
 }
+
+namespace {
+template<class Owner> void ManagedFinalization(int calculateMode)
+{
+    const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
+    if(!directory)GTEST_SKIP()<<"Requires original native source/model primaries";
+    constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
+    const auto name=std::string(branch?"Branch":"Classic")+"_managed_finalization_"+std::to_string(calculateMode);
+    const QDir root(QString::fromLocal8Bit(directory));
+    const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
+    const auto original=job["source_recognition"].toObject();
+    const auto implementation=job["implementation_id"].toString().toStdString();
+    NativeThresholdGridSpec grid;grid.confirmation=DecodeNativeThresholdConfirmationSpec(job["specification"].toObject());
+    for(const auto& q:job["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(q.toObject()));
+    auto specification=DecodeNativePostTuneControls(job["post_tune"].toObject(),grid);
+    specification.mode=NativePostTuneControllerMode::KeepDone;
+    specification.canonicalFloor=specification.canonicalLast=0.;specification.resistanceBounds.clear();
+    specification.finalization=NativePostTuneFinalization::KeepFixedThreshold;specification.weightProbeThreshold=2.;
+    specification.calibration.maximumCandidates=0;specification.calibration.thresholds.clear();
+    specification.calibration.confirmation.attemptId+="/"+name;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
+    EXPECT_EQ(NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
+        "ManagedFinalizationOwner",[&](auto storage,auto environment,auto model,auto owner) {
+        model->Init();model->Reset();
+        EXPECT_EQ(owner->ImportNativeLearnedState(original["source_solo"].toObject(),implementation).status,NativeModelBuildStatus::Adopted);
+        owner->Build();owner->Init();owner->CalculateMode=calculateMode;
+        UEPtr<ExternalFinalizationFlag> flag=new ExternalFinalizationFlag;
+        flag->SetStorage(storage);flag->SetEnvironment(environment);flag->Default();flag->Name="ManagedRequest";
+        flag->Activity=true;flag->SetGlobalTimeStep(2000);UEPtr<UContainer> node=flag;
+        EXPECT_NE(model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;
+        EXPECT_TRUE(owner->IsNeedToTrain.SetPointer(0,&flag->Value));
+        owner->EnablePostTrainTuning=true;owner->AutoCalibrateFixedLTZThreshold=true;
+        owner->EnablePostTrainMidThreshold=false;owner->PostTrainTipResistanceMode=PostTrainTune::kPostTipKeepDone;
+        const auto boundary=CaptureNativeFinalizationBoundary(*owner,implementation);
+        const auto source=ConvertNativeSoloToRecognition(boundary.Solo(),DecodeNativeRecognitionSpec(original["conversion_spec"].toObject()),
+            storage,environment,implementation);
+        EXPECT_EQ(owner->ImportNativeRecognitionState(source,implementation).status,NativeModelBuildStatus::Rejected);
+        const auto installed=owner->ImportNativeFinalizationState(source,implementation,boundary);
+        EXPECT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;
+        if(installed.status!=NativeModelBuildStatus::Adopted)return 2;
+        owner->Build();owner->Init();
+        EXPECT_EQ(owner->NativeFinalizationIntent(),boundary.Document());
+        NativePostTuneTransaction<Owner> transaction(*owner,specification,implementation);
+        struct Detach {NativePostTuneTransaction<Owner>& t;~Detach(){t.InterruptOwnerLifecycle("fixture_exit");}} detach{transaction};
+        transaction.Advance();std::size_t ticks=0;
+        const auto maximum=std::size_t(job["maximum_model_ticks"].toDouble());
+        while(!transaction.Done() && ticks<maximum) {
+            model->Calculate();environment->IncreaseModelTimeByStep();++ticks;transaction.Advance();
+            EXPECT_TRUE(flag->Value.GetData());EXPECT_TRUE(owner->IsNeedToTrain.GetData());
+            EXPECT_TRUE(owner->EnablePostTrainTuning.GetData());EXPECT_TRUE(owner->AutoCalibrateFixedLTZThreshold.GetData());
+            EXPECT_EQ(owner->CalculateMode.GetData(),calculateMode);
+        }
+        EXPECT_EQ(transaction.Status(),NativePostTuneTransactionStatus::WeightsSelected)<<transaction.Reason();
+        if(transaction.Status()!=NativePostTuneTransactionStatus::WeightsSelected)return 2;
+        EXPECT_EQ(owner->NativeFinalizationIntent(),boundary.Document());
+        const auto final=owner->ExportNativeRecognitionState(implementation);
+        EXPECT_EQ(owner->ReplaceNativeRecognitionState(original,implementation).status,NativeModelBuildStatus::Rejected);
+        EXPECT_EQ(owner->ExportNativeRecognitionState(implementation),final);
+        flag->Value=false; // Only the real external provider clears the request.
+        model->Calculate();environment->IncreaseModelTimeByStep();
+        EXPECT_FALSE(flag->Value.GetData());EXPECT_FALSE(owner->IsNeedToTrain.GetData());
+        EXPECT_THROW(owner->ExportNativeRecognitionState(implementation),std::logic_error);
+        const auto stopped=owner->ReplaceNativeRecognitionState(final,implementation);
+        EXPECT_EQ(stopped.status,NativeModelBuildStatus::Rejected);
+        EXPECT_EQ(stopped.reason,"native_finalization_external_stop");
+        // Explicit transition to frozen evaluation, never automatic success.
+        const auto frozen=owner->ImportNativeRecognitionState(final,implementation);
+        EXPECT_EQ(frozen.status,NativeModelBuildStatus::Adopted)<<frozen.reason;
+        EXPECT_TRUE(owner->NativeFinalizationIntent().isEmpty());EXPECT_FALSE(flag->Value.GetData());
+        if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+            EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
+            NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+".json",
+                {{"kind","native_managed_finalization_control"},{"schema_version",1},{"boundary",boundary.Document()},
+                 {"transaction",transaction.Report()},{"selected_package",final},{"external_stop_reason",QString::fromStdString(stopped.reason)},
+                 {"calculate_mode",calculateMode},{"provider_after_stop",flag->Value.GetData()},
+                 {"configured_phase_dispatch_implemented",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+        }
+        return ::testing::Test::HasFailure()?2:0;
+    }),0);
+}
+}
+TEST(NativeFinalizationOwnership,ClassicAutomatic){ManagedFinalization<NNeuronTimeLearner>(0);}
+TEST(NativeFinalizationOwnership,ClassicExternal){ManagedFinalization<NNeuronTimeLearner>(1);}
+TEST(NativeFinalizationOwnership,BranchAutomatic){ManagedFinalization<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeFinalizationOwnership,BranchExternal){ManagedFinalization<NNeuronTimeLearnerBranch>(1);}
