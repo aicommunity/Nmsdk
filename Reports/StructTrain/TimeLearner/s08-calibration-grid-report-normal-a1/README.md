@@ -1,0 +1,9 @@
+# Complete native calibration grid: readable soma/input reports
+
+M40 imported all 431 source members through Git and verified every size/hash. Renderer 4b714c75730de140ba713c4bf09e06fc9d6db7b7 produced sixteen transaction/context reports: all ten completed matrices and thirty trial/soma pairs. Twenty-seven checks passed without skips/errors/failures: five report, five plotting, eight transaction and nine calibrated-state regressions. They are checks over the same deterministic fixtures, not independent scientific experiments.
+
+Every completed candidate and fresh confirming matrix has full native soma/input observations, actual input overlays, readable overview/zoom and presentation-order plots in PNG/SVG/PDF. The twelve selected PNG show target last-input detail and foil overview for the two grid candidates and confirmation, Classic/Branch soma channel 1. All other soma channels/views remain in the reproducible M40 cache. Incomplete cancellation/context probes retain raw diagnostic records; no complete response plots are invented. All units remain model units with SI unverified.
+
+The full lossless primary bundle is s08-calibration-grid-normal-a2 at source evidence commit recorded in manifest.json. Extract its archive, then run report TRANSACTION.json --format calibration-transaction --output CACHE_DIR with the declared renderer and plotting environment. Metadata archive preserves every report/analysis/series/checksum/HTML index plus actual gate logs and Git import verification. Bulk graphics and duplicated primary/binaries are excluded from Git. Full cache location is recorded as a convenience, not the sole data source.
+
+Selected images have not yet received manual visual QA; full visual acceptance remains false. Engineering calibration consistency does not establish converged source training, independent Test, August replay, all-mode ASan acceptance or stage 8 completion. Scientific verdict is null.
