@@ -14,8 +14,16 @@ Recorder только читает after-children данные; не меняе�
 [Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-trace-normal-a1/README.md),
 [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-trace-asan-a1/README.md):
 по 133 members, полные original source runs / 84 artifacts. Это saved Solo replay;
-исходный Train остаётся search_unresolved. Новые temporal reports, target-reference
-formula, spiking confirmation и automatic dispatch ещё открыты.
+исходный Train остаётся search_unresolved. Target-reference formula, spiking confirmation и automatic dispatch ещё открыты.
+
+[Solo temporal proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-visual-asan-a1/README.md):
+8 reports / 20 channel-trace pairs (12 soma, 8 LTZone), input overlays, no downsampling,
+2/2 report checks; 8 original traces unchanged. Git: 44 metadata members / 73124 bytes
+и 8 PNG; full PNG/SVG/PDF cache на M40 Data. Все hashes и 8 primary bindings проверены.
+Выбранные 1920×960 soma/real-spiking LTZ overview/first zoom просмотрены.
+Остальные каналы, partial cases и tiles имеют пока автоматическую проверку.
+Это один training pattern, не all-pattern recognition. Threshold=0 вызывает spike
+в нулевой момент до первого входа: контроль recorder, не успешная детекция.
 
 Предыдущий подэтап — active-request finalization import.
 Active-request import (PulseLib ec3d7b4 / root c0496d253): normal 44/44 (191.796 s).
