@@ -1,11 +1,42 @@
 """Clock-only entry seam; imported finished state, not live Train dispatch."""
-from .finalization_boundary_evidence import audit_boundary
+from copy import deepcopy
+
+from .finalization_boundary_evidence import _comparable, audit_boundary
 from .finalization_ownership_evidence import _replay_source
 from .native_evidence import EvidenceError, equal, number, require
 from .recognition_evidence import audit_recognition_source
 
 FIELDS={"kind","schema_version","boundary","recognition_package","calculate_mode","capture_time","entry_time",
         "clock_only_advance","live_train_handoff_implemented","scientific_verdict"}
+
+
+def audit_clock_projection(record, projection):
+    """Allow only the existing empty feedback-cache transition before the clock.
+
+    Clock advancement itself must preserve the complete serialized boundary.
+    Hash validation precedes the narrowly shared XML normalization.
+    """
+    try:
+        require(type(projection) is dict and set(projection) ==
+                {"initial", "repeat_without_clock", "after_clock"}, "unknown_clock_projection")
+        initial, repeated, after = (projection[key] for key in
+                                   ("initial", "repeat_without_clock", "after_clock"))
+        for boundary in (initial, repeated, after):
+            audit_boundary(boundary)
+        require(initial == record["boundary"], "clock_projection_source_mismatch")
+        require(repeated == after, "clock_advance_changed_boundary")
+        before, repeat = deepcopy(initial), deepcopy(repeated)
+        before["source_solo"] = _comparable(before["source_solo"])
+        repeat["source_solo"] = _comparable(repeat["source_solo"])
+        del before["sha256"], repeat["sha256"]
+        require(before == repeat, "repeated_capture_changed_model")
+        return {"boundary_projections_checked": 3, "clock_boundary_byte_values_equal": True,
+                "repeated_export_cache_rule": "existing_empty_feedback_to_zero_only",
+                "scientific_verdict": None}
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, IndexError) as error:
+        raise EvidenceError("malformed_clock_projection:" + str(error)) from error
 
 
 def audit_clock_handoff(record, original_source_case):
