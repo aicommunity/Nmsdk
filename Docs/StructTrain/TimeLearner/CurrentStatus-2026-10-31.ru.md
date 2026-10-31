@@ -59,8 +59,16 @@ de51a21. Ветка создана от develop с --no-ff merge сохранё�
 18 PostTune и 6 прямых calibration jobs, дополнительные CLI/tick-stop/strict
 controls; 4/4 PostTune reader (112.103 s), 8/8 calibration worker (234.799 s)
 и 4/4 provenance (15.333 s), без skips. Source binary ffd5b15a2, Python 74f49a5f0.
-Полный ASan primary bundle ещё не опубликован; этот факт не закрывает waveform
-reports, N0/profile/frequency/dimension matrix, learner dispatch или весь этап 8.
+ASan primary bundle опубликован в 88c47ddf: 1089 members / 6054552 bytes;
+все member hashes локально сверены после Git transport.
+Его producer применил production staging/helper и committed-blob verification;
+финальный push root остаётся manual. Этот факт не закрывает waveform reports,
+N0/profile/frequency/dimension matrix, learner dispatch или весь этап 8.
+
+Начат следующий адресный gate N0: source fe45166a1, тот же реальный native
+fixture, обе топологии, 2000 Гц, два входа, исходные физика/допуски. Elder
+`s08-native-posttune-controller-n0-normal-a1`, supervisor 1623116. Это не новая
+научная серия; до native/reader terminal outcomes N0-проверка не принята.
 
 Исправление publication prerequsite: [schema 2 artifact closure](GitArtifactPublication.ru.md)
 source 1113fd0fe прошёл 16/16 Git tests на каждом worker (Elder 4.560 s,
