@@ -9,10 +9,19 @@ Do not store credentials, binaries or working directories. Distinguish execution
 validity, convergence, calibration and scientific evaluation. An implementation
 test report is not a trained-model result.
 
+Current storage policy: keep compressed lossless primary data, models, metrics,
+runtime/provenance receipts and selected figures in Git. Reproduce full readable
+PNG/SVG/PDF reports in the M40 cache. A cache path is supplementary; it does not
+replace the primary data needed to reproduce a published result. Selected visual
+review does not imply acceptance of an entire report collection.
+
 ## Implementation evidence
 
 | Validation | Artifact directories |
 |---|---|
+| Saved-model calibration ownership: six reproduced baseline failures; fixed 8 native + 4 independent checks per worker; source training remains unresolved | [Normal](s08-calibration-ownership-normal-a1/README.md), [ASan](s08-calibration-ownership-asan-a1/README.md) |
+| Native threshold-grid transaction, commit/rollback and context controls: 2 native + 17 independent per worker; full worker/PostTune matrix remains open | [Normal](s08-calibration-grid-normal-a2/README.md), [ASan](s08-calibration-grid-asan-a3/README.md) |
+| All-grid soma/input report metadata and selected figures: 16 reports, 10 complete matrices, 30 trial/soma pairs per dataset; full cache on M40 | [Normal](s08-calibration-grid-report-normal-a1/README.md), [ASan](s08-calibration-grid-report-asan-a1/README.md) |
 | Addressed absolute-clock correction: 52 native cases at seeded 131 s, 25 corrected data tests, 8 clock / 84 learned / 66 stopped primary trials; full gate pending | [Elder-1](s07-clock-fixed-elder1/README.md) |
 | Failed full gate: 22/430 failures per worker; real absolute-clock baseline 9/10 expected failures, mapped-process manifests retained | [Elder-1](s07-clock-failure-elder1/README.md), [M40 + ASan baseline](s07-clock-failure-m40/README.md) |
 | Physical domain schema 2: 22 native / 15 Python per worker; independent a/b/endpoints; aligned byte-exact 68 normal / 44 ASan trial controls | [Elder-1](s07-domain-physics-elder1/README.md), [M40 ASan](s07-domain-physics-m40/README.md), [aligned 2/20 kHz](s07-domain-physics-matrix-elder1/README.md) |
