@@ -50,6 +50,21 @@ receipts. На baseline все шесть controls действительно у
 gates, а не первоначальный неуспешный publisher. Текущая правка PulseLib
 0dc84fb — только документация поверх проверенного кода fad7aed.
 
+[Ownership visual receipt](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-report-normal-a2/README.md)
+опубликован в fdcc9028; четыре выбранных PNG добавлены в 71e17496. M40 построил
+шесть полных candidate/confirmation matrices: 18 trial/soma pairs; ещё три
+complete externally consumed probe/soma pairs получили диагностические графики.
+9/9 checks прошли (четыре ownership и пять plotting regressions), это повтор
+частично перекрывающихся checks, а не девять новых независимых экспериментов.
+Все графики имеют native input overlay, overview и 100-tick zoom без decimation;
+полные PNG/SVG/PDF остаются cache на M40. Четыре selected overview просмотрены
+в исходном размере: подписи, входы и пики читаемы. Полный visual acceptance false.
+Первая попытка renderer использовала system Python без matplotlib; вторая
+прошла проверки/рендеринг, но остановилась при git add вне sparse patterns.
+Использованы существующий plotting-venv и адресный git add --sparse; отказы
+и исходные runner/logs сохранены в harness-attempts.tar.xz. Прогоны native
+и построение готовых графиков при исправлении публикации не повторялись.
+
 Дополнительная проверка реализации `ce7e81e002c802412ce50c1f2b2f76ffa7215b2a`
 (root `0f53ab4ec420b921f766cbd78a7fd10d248b8a86`) связывает proof не только
 с model hash/frequency, но и с реальными soma bindings и LTZone path/class.
