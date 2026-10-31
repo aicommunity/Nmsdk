@@ -45,11 +45,15 @@ class LiveFinalizationReportsTest(unittest.TestCase):
                     continue
                 training = load(folder/"training/manifest.json")
                 self.assertEqual(len(training["reports"]), len(packets))
+                previous_begin = float("-inf")
                 for entry, packet in zip(training["reports"], packets):
                     probe = folder/"training"/entry["folder"]
                     self.assertEqual(load(probe/"primary/probe.json"), load(packet))
                     self.assertEqual((probe/"primary/trace.csv").read_bytes(), packet.with_suffix(".csv").read_bytes())
                     item = load(probe/"manifest.json")
+                    begin = load(packet)["observation"]["specification"]["begin"]
+                    self.assertGreater(begin, previous_begin)
+                    previous_begin = begin
                     with packet.with_suffix(".csv").open(encoding="utf-8") as stream:
                         self.assertEqual(item["trace_quality"]["sample_count"], sum(1 for _ in stream)-1)
                     self.assertEqual(len(item["figures"]), len(load(packet)["observation"]["specification"]["baseline"]))

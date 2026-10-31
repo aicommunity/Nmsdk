@@ -63,7 +63,12 @@ def _read_live_report_source(source: Path, inventory: Path):
     package = artifact(source.stem+"_"+suffix+"_state.json")
     summary = artifact(source.stem+"_"+suffix+"_summary.json")
     trial_prefix = source.stem+("_stopped_trial_" if scenario == 2 else "_state_trial_")
-    packets = sorted(name for name in by_name if name.startswith(trial_prefix) and name.endswith(".json"))
+    packets = [name for name in by_name if name.startswith(trial_prefix) and name.endswith(".json")]
+    ordinal_pattern = re.compile(re.escape(trial_prefix)+r"([1-9][0-9]*)\.json")
+    require(all(ordinal_pattern.fullmatch(name) for name in packets), "invalid_live_report_trial_ordinal")
+    packets.sort(key=lambda name: int(ordinal_pattern.fullmatch(name)[1]))
+    require([int(ordinal_pattern.fullmatch(name)[1]) for name in packets] == list(range(1, len(packets)+1)),
+            "missing_live_report_trial_ordinal")
     require(bool(packets) and {p.name for p in source.parent.glob(trial_prefix+"*.json")} == set(packets),
             "live_report_primary_trial_set_changed")
     needed = [source.name, package.name, summary.name]
