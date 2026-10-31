@@ -41,7 +41,7 @@ class PostTuneTransactionReportsTest(unittest.TestCase):
                 by_id = {o["trial_id"]: o for o in candidate["matrix"]["observations"]}
                 self.assertEqual(observations, [by_id[q["trial_id"]] for q in spec["trials"]])
                 self.assertEqual(item["measured_gap"], candidate["measured_gap"])
-            if raw["calibration"] is None:
+            if not raw["calibration"]:
                 self.assertIsNone(outer["calibration"])
             else:
                 self.assertEqual(load(path/"calibration/primary/transaction.json.gz"), raw["calibration"])

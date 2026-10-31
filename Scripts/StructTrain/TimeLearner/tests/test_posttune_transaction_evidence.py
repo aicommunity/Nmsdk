@@ -67,6 +67,13 @@ class PostTuneTransactionEvidenceTest(unittest.TestCase):
     def test_forged_finite_gap(self):
         r = self.example();r["candidates"][0]["measured_gap"] += .1;self.reject(r)
 
+    def test_absent_child_is_an_explicit_empty_object(self):
+        for value in (None, [], "", False):
+            with self.subTest(value=value):
+                r = copy.deepcopy(next(r for _, r in self.records if not r["calibration"]))
+                r["calibration"] = value
+                self.reject(r)
+
     def test_missing_foil(self):
         r = self.example();r["candidates"][0]["matrix"]["observations"].pop();self.reject(r)
 
