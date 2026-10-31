@@ -146,3 +146,35 @@ threshold grid/fresh confirmation. Требуются исходный transacti
 normal native gate. До фактического серверного render/test и ручного просмотра
 новых рисунков эта часть не принята. Полные cache сохраняются на диске Data M40;
 в Git публикуются сжатые primary/metadata и только явно выбранные рисунки.
+
+## Штатная операция Console: реализация до серверной приёмки
+
+`NeuroModelerConsole --timelearner-posttune job.json --timelearner-output <new-directory>`
+добавлен отдельной операцией, взаимоисключающей с Train/export/evaluate/calibrate
+и выполнением проекта. После штатного `UAppCore.Init` используется свежий owner,
+полный native import/readback и тот же `NativePostTuneTransaction`, без тестового
+кода, вложенного Calculate или перезаписи runtime. Цикл исполнения, отмена,
+ограничение модельных тиков и запись артефактов общие с calibration operation.
+Пока серверная сборка и настоящие Console jobs не пройдены, это реализация,
+а не принятая возможность production pipeline. Связывание с публичными свойствами
+learner, Python runner и продолжение checkpoint остаются отдельными открытыми пунктами.
+
+Вход `timelearner_native_post_tune_job`, schema 1, имеет точные поля прежнего
+`timelearner_native_calibration_job` и дополнительный объект `post_tune`:
+
+| Поле | Контракт |
+|---|---|
+| `mode` | `off`, `keep_done`, `canon_rmin`, `flat_last_r`, `search_synthetic`; не single-candidate API |
+| `metric` | Явно `auto`, `ltzone` или `soma_sum` |
+| `canonical_floor`, `canonical_last`, `resistance_bounds` | Те же mode-specific условия и per-input bounds, что у native-контроллера; unused значения не применяются |
+| `search_passes`, `maximum_candidates` | Целые 1–128 и 1–4096 соответственно; это budget поиска весов |
+| `maximum_recorded_samples` | Целое 1–100000000; физический budget, включая калибровку |
+| `minimum_positive_gap` | Конечное неотрицательное число в единицах выбранной метрики |
+
+Верхнеуровневые `thresholds`, `maximum_candidates`, `specification`, `trials`
+задают реальную последующую калибровку. SHA256 подписывает весь job. Неизвестные
+поля/режимы отвергаются. Output содержит исходный job, полный transaction,
+действительную конечную модель и signed execution с `post_tune_status`.
+`completed/search_unresolved` — допустимый отрицательный исход выполнения,
+а не успешная классификация. При tick limit применяется native Cancel/rollback;
+завершение процесса без terminal artifacts само по себе не подтверждает rollback.
