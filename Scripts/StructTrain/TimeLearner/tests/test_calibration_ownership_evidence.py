@@ -10,7 +10,7 @@ import unittest
 
 from ..calibration_transaction_evidence import audit_native_calibration_transaction
 from ..learned_evidence import load_case
-from ..native_evidence import load
+from ..native_evidence import equal, load
 from ..recognition_trial_evidence import audit_recognition_trial
 from ..threshold_candidate_evidence import audit_threshold_candidate
 
@@ -81,8 +81,9 @@ class NativeCalibrationOwnershipEvidenceTest(unittest.TestCase):
             self.assertIs(observation["valid"], True)
             request = record["transaction"]["active_matrix"]["requests"][0]
             for key, value in request.items():
-                if key not in {"maximum_samples", "record_threshold_potential"}:
+                if key not in {"duration", "maximum_samples", "record_threshold_potential"}:
                     self.assertEqual(observation[key], value)
+            self.assertTrue(equal(observation["end"]-observation["begin"], request["duration"]))
             self.assertEqual(record["transaction"]["active_matrix"]["observations"], [])
 
     def test_normal_flow_commits_only_the_freshly_confirmed_package(self):
