@@ -2,6 +2,7 @@
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeSoloThresholdTrace.h"
+#include "TimeLearner/NativeTrainingThresholdReference.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerJobSupport.h"
 #include <cstdlib>
@@ -55,7 +56,9 @@ template<class Owner> void Measure(Scenario scenario)
         std::size_t samples=0,prepares=0;
         q.onPrepared=[&](const auto&,const auto&){++prepares;};
         q.onSample=[&](const auto&){++samples;};
+        auto confirmationRequest=q;
         const auto captured=NativeSoloThresholdTrace::Attach(*owner,q);
+        EXPECT_THROW(ProposeNativeTrainingThreshold(*captured,{},q.baseModelRevision),std::logic_error);
         owner->QueueNativeProbe(std::move(q));
         std::optional<NativeProbeResult> result;
         const auto maximum=std::size_t(job["maximum_model_ticks"].toDouble());
@@ -75,6 +78,7 @@ template<class Owner> void Measure(Scenario scenario)
             const auto report=captured->Interrupt("learner_reset_discarded_result");
             EXPECT_TRUE(report["native_probe"].isNull());EXPECT_FALSE(report["complete"].toBool());
             EXPECT_FALSE(report["proposal_eligible"].toBool());EXPECT_EQ(report["samples"].toArray().size(),int(samples));
+            EXPECT_TRUE(ProposeNativeTrainingThreshold(*captured,{},"cancelled-model")["threshold"].isNull());
             if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
                 EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
                 NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+".json",report);
@@ -99,9 +103,73 @@ template<class Owner> void Measure(Scenario scenario)
             EXPECT_EQ(result->currentBaseRevision,result->prepared->baseModelRevision);
         }
         EXPECT_THROW(captured->Finish(*result),std::logic_error);
+        QJsonArray references;
+        if(scenario==Scenario::Complete) {
+            std::vector<double> positive;
+            for(const auto& f:report["samples"].toArray()) {
+                const auto value=f.toObject()["lt_potential"].toDouble();if(value>0.)positive.push_back(value);
+            }
+            EXPECT_GT(positive.size(),1u);if(positive.empty())return 2;
+            const auto limits=std::minmax_element(positive.begin(),positive.end());
+            const auto low=*limits.first,high=*limits.second;
+            const auto current=revision(true);
+            for(const auto mode:{NativeTrainingThresholdMode::GapFraction,NativeTrainingThresholdMode::PeakFraction}) {
+                const auto proposal=ProposeNativeTrainingThreshold(*captured,{mode,.5,-1.,1.},current);
+                EXPECT_DOUBLE_EQ(proposal["threshold"].toDouble(),mode==NativeTrainingThresholdMode::PeakFraction?
+                    high*.5:low+.5*(high-low));
+                EXPECT_DOUBLE_EQ(proposal["positive_minimum"].toDouble(),low);
+                EXPECT_DOUBLE_EQ(proposal["positive_maximum"].toDouble(),high);
+                EXPECT_EQ(proposal["positive_samples"].toInt(),int(positive.size()));
+                EXPECT_FALSE(proposal["calibrated"].toBool());references.append(proposal);
+            }
+            const auto upper=ProposeNativeTrainingThreshold(*captured,{NativeTrainingThresholdMode::PeakFraction,.5,0.,high*.25},current);
+            const auto lower=ProposeNativeTrainingThreshold(*captured,{NativeTrainingThresholdMode::PeakFraction,.5,high*2.,high*3.},current);
+            EXPECT_TRUE(upper["clipped"].toBool());EXPECT_DOUBLE_EQ(upper["threshold"].toDouble(),high*.25);
+            EXPECT_TRUE(lower["clipped"].toBool());EXPECT_DOUBLE_EQ(lower["threshold"].toDouble(),high*2.);
+            references.append(upper);references.append(lower);
+            const auto stale=ProposeNativeTrainingThreshold(*captured,{},current+"-changed");
+            EXPECT_TRUE(stale["threshold"].isNull());EXPECT_EQ(stale["reason"],QJsonValue("source_model_changed"));
+            references.append(stale);
+            EXPECT_THROW(ProposeNativeTrainingThreshold(*captured,{NativeTrainingThresholdMode::GapFraction,.5,1.,0.},current),std::invalid_argument);
+            // The proposal API is read-only, including copies of its source.
+            auto edited=captured->ClosedReport();edited["proposal_eligible"]=false;
+            EXPECT_EQ(captured->ClosedReport(),report);EXPECT_EQ(revision(true),current);
+
+            // Real Solo burst at the selected threshold through the same native
+            // scheduler. This records physical feedback/spikes; it is not a
+            // final parallel-recognition or target/foil calibration verdict.
+            zone->Threshold=references[0].toObject()["threshold"].toDouble();
+            confirmationRequest.specification.runId=name+"-threshold-confirmation";
+            confirmationRequest.specification.trialId="actual-selected-threshold-burst";
+            confirmationRequest.baseModelRevision=revision(true);
+            confirmationRequest.onPrepared={};confirmationRequest.onSample={};
+            const auto confirmation=NativeSoloThresholdTrace::Attach(*owner,confirmationRequest);
+            owner->QueueNativeProbe(std::move(confirmationRequest));
+            std::optional<NativeProbeResult> confirmed;
+            for(std::size_t tick=0;!confirmed && tick<maximum;++tick) {
+                model->Calculate();environment->IncreaseModelTimeByStep();confirmed=owner->TakeNativeProbeResult();
+            }
+            EXPECT_TRUE(confirmed);if(!confirmed)return 2;
+            const auto measured=confirmation->Finish(*confirmed);
+            EXPECT_TRUE(measured["complete"].toBool());EXPECT_TRUE(measured["valid"].toBool());
+            EXPECT_FALSE(measured["spike_times"].toArray().isEmpty());
+            EXPECT_DOUBLE_EQ(measured["source"].toObject()["threshold"].toDouble(),references[0].toObject()["threshold"].toDouble());
+            if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+                const auto folder=QString::fromLocal8Bit(output)+"/threshold-references";
+                EXPECT_TRUE(QDir().mkpath(folder));
+                NmsdkWorker::Write(folder,QString::fromStdString(name)+"-confirmation.json",measured);
+            }
+        } else {
+            const auto proposal=ProposeNativeTrainingThreshold(*captured,{},revision(true));
+            EXPECT_TRUE(proposal["threshold"].isNull());references.append(proposal);
+        }
         if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
             EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
             NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+".json",report);
+            const auto folder=QString::fromLocal8Bit(output)+"/threshold-references";
+            EXPECT_TRUE(QDir().mkpath(folder));
+            NmsdkWorker::Write(folder,QString::fromStdString(name)+"-proposals.json",
+                QJsonObject{{"source_trace_sha256",report["sha256"]},{"proposals",references}});
         }
         return ::testing::Test::HasFailure()?2:0;
     }),0);
