@@ -147,3 +147,22 @@ python -m Scripts.StructTrain.TimeLearner report CONTROL.json --format native-li
 реальном invalid-design control: analysis, no-data report, missing inventory
 и model overlay; primary hashes не изменились, новых numeric runs0.
 Это не production Train-job declaration и не отдельный научный эксперимент.
+
+## Явная отмена: реализация, проверка ожидается
+
+`CancelNativeLiveFinalization(reason)` вызывается между тиками. При активном
+Train используется штатный ExternalStop, закрывающий текущую пробу и передающий
+частичные samples в evidence sink. Полученное stopped diagnostic состояние не
+превращается в recognition. До старта и в queued boundary отмена не импортирует
+модель. Отмена внутри PostTune использует общий transactional cancel/rollback;
+терминальный live execution при этом сохраняет отдельный PostTune status cancelled.
+
+Отмена не вызывает Calculate, не увеличивает model time и не записывает
+подключённый внешний IsNeedToTrain. Cancelled declaration не запускается снова
+при оставшемся true provider; повторный Cancel не изменяет terminal report.
+Физические дочерние компоненты продолжают рассчитываться штатным scheduler.
+До старта boundary отсутствует: шаблонное состояние не выдаётся за Train result.
+
+Добавлены восемь native controls: Classic/Branch × armed/training/queued/PostTune.
+Это пока непроверенная реализация: серверные сборки и runtime receipts ожидаются.
+Production job schema2 остаётся отдельной незавершённой задачей.
