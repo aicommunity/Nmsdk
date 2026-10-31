@@ -411,3 +411,11 @@ explicit v2 calibrate сохраняют исходные transaction/model byte
 252 artifact entries, все hashes повторно проверены после merge. Shared design
 validator также прошёл 4/4 portable regression tests на всех 18 прежних runs.
 Это не приёмка полной матрицы или этапа 8.
+
+Все шесть новых production ASan runs также прошли реальный CLI
+report --format posttune-run: 62 полные trial-soma реакции. Полный cache
+2979 files / 304534961 bytes хранится на M40 Data; 210 metadata members /
+674200 compressed bytes находятся в [Git bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-visual-asan-a1/README.md).
+Все cache/member hashes проверены. Полная ручная визуальная приёмка этих
+62 реакций остаётся открытой; предыдущие selected roundtrip PNG описывают
+свои отдельные пробы и не заменяют эту проверку.
