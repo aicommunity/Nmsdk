@@ -489,3 +489,17 @@ Renderer строит весовые графики с измерительно�
 final-model с конечной физикой. Каждая группа использует существующий renderer
 всех soma channels/паттернов с реальными входными импульсами и detail views.
 Runtime-проверки reader и этих новых отчётов ещё ожидаются.
+
+
+Первичная normal проверка typed API на root 800ca40e81f38c2adc2f9e9bcfc84978e12a4072 /
+PulseLib 09f72c78295b1244303658c6b58f60f741796c52 прошла: 20/20 native tests,
+126.287 s, без skips (8 новых final-boundary controls, 8 прежних fixed cases,
+4 codec controls). ASan того же source ещё выполняется. Это не приёмка более
+позднего production schema-3 job, reader или visual report.
+
+Production Console и worker получили opt-in job schema_version=3 с
+post_tune.schema_version=3 и обязательным weight_probe_threshold (число либо null).
+Число задаёт отдельную физику измерения; null сохраняет наследование и прежнюю
+schema 1/2 transaction. Условия/fingerprint включают явную декларацию. Старые
+job schema 1/2 продолжают означать прежнюю задачу. Сериализация нового поля
+через v1/v2 отвергается. Приёмка codec/Console/worker пока ожидается.
