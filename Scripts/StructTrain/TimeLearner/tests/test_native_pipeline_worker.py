@@ -119,3 +119,32 @@ class NativePipelineWorkerTest(unittest.TestCase):
             self.assertEqual(execution["execution"], "model_tick_budget_exhausted")
             self.assertEqual(execution["model_ticks"], 1)
             self.assertEqual(len(load(native/"evaluation.json")["trials"]), len(job["trials"]))
+
+    def test_actual_cold_training_budget_cannot_be_exported_as_completed(self):
+        output = os.environ.get("TIMELEARNER_PIPELINE_TRAINING_CONTROL_OUTPUT")
+        if not output:
+            self.skipTest("requires a new persistent native training controls directory")
+        out = Path(output);out.mkdir(exist_ok=False)
+        for case in ("Classic-N0", "Branch-N1"):
+            original = self.root/(case+"-train");runtime = load(original/"process/runtime.json")
+            job = load(original/"input/job.json");job["maximum_model_ticks"] = 1;resign(job)
+            path = out/(case+"-job.json");save(path, job);native = out/case
+            def invoke(mode, specification, folder, logfile):
+                with logfile.open("wb") as stream:
+                    return subprocess.run([runtime["executable"]["path"], "--app-ini", runtime["app_ini"]["path"],
+                        "--timelearner-"+mode, str(specification), "--timelearner-output", str(folder)],
+                        cwd=Path(runtime["executable"]["path"]).parent, stdout=stream, stderr=subprocess.STDOUT, timeout=120)
+            self.assertEqual(invoke("train", path, native, out/(case+".log")).returncode, 2)
+            audit = audit_execution("train", native, job)
+            self.assertFalse(audit["completed_boundary"])
+            execution = load(native/"execution.json")
+            self.assertEqual(execution["execution"], "model_tick_budget_exhausted")
+            self.assertEqual(execution["model_ticks"], 1)
+            stopped = load(native/"train_stopped_state.json")
+            export_job = resign({"kind": "timelearner_native_recognition_export_job", "schema_version": 1,
+                "implementation_id": job["implementation_id"], "source_solo": stopped,
+                "conversion_spec": {"schema_version": 1, "mode": "identity", "resistance_bounds": []}})
+            export_path = out/(case+"-stopped-export-job.json");save(export_path, export_job)
+            destination = out/(case+"-forbidden-export")
+            self.assertEqual(invoke("export", export_path, destination, out/(case+"-stopped-export.log")).returncode, 2)
+            self.assertFalse(destination.exists())
