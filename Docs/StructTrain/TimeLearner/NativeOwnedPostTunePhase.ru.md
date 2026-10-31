@@ -133,3 +133,35 @@ owned_posttune_worker_checks выполняет явные классы в по�
 не запускаются до появления реальных CLI probes. Любой skip запрещает успех.
 Начальный skip сохраняется; исправление setup не меняет код моделей и не
 превращает неудачную попытку в успешную.
+
+
+## Подтверждённые ограничения следующего live Train handoff
+
+Повторное чтение NativeTrainingService::Finish/SyncOutcome и
+NativeLearnedState::Export подтверждает: State=Finished имеет также остановка
+по бюджету/внешнему запросу/невалидному наблюдению. Completed learned boundary
+требует воспроизводимой reference/final evidence и сертификата; SearchUnresolved
+с сертификатом отличается от stopped diagnostic. Нельзя запускать обычный
+Recognition Test только по Finished или Need=0.
+
+В обоих learner ACalculate после AfterTick сейчас снимает Need при
+CalculateMode=0. SetIsNeedToTrain(false→true) намеренно сбрасывает control state
+для нового обучения; применять этот публичный setter как восстановление
+Finished запрещено. Replay fixtures восстанавливали административный флаг
+однократно, но это не реализация живого handoff.
+
+Будущий dispatcher должен проверять завершённую boundary до административного
+закрытия локального запроса, сохранять исходные controls/session/protocol/pattern
+как immutable value и ставить следующее действие в очередь. Structural edits
+и native import выполняются до детей следующего tick, а не из callback измерения.
+Подключённый provider не изменяется. При отсутствии декларации finalization
+сохраняется нынешний compatibility-путь завершения.
+
+До снятия guards optional modes нужны реальные проверки: перенос completed
+boundary через единственный outer-clock advance без лишнего расчёта детей;
+отказ при изменении физики/controls/bindings между capture и entry; stop/reset/
+retarget во время ожидания; отсутствие certificate→stopped diagnostic без
+шаблонного обученного Test. Сравнение полной native archive нельзя ослаблять
+ради удобства handoff; разрешённая empty→zero feedback-cache нормализация
+остаётся единственным уже проверенным исключением. Эти проверки и сам
+live dispatcher ещё не реализованы.
