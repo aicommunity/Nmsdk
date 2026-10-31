@@ -11,6 +11,7 @@ from .model_identity import canonical_model_sha256 as sha
 from .native_evidence import EvidenceError, after, count, equal, number, require
 from .recognition_evidence import audit_recognition_derivation, _derive_post_tune
 from .recognition_trial_evidence import audit_recognition_trial
+from .threshold_candidate_evidence import audit_threshold_candidate
 
 FIELDS = {"kind", "schema_version", "algorithm", "source_recognition", "mode", "metric", "canonical_floor",
           "canonical_last", "resistance_bounds", "minimum_positive_gap", "search_passes", "maximum_candidates",
@@ -20,6 +21,8 @@ FIELDS = {"kind", "schema_version", "algorithm", "source_recognition", "mode", "
           "calibrated_package", "dynamic_checkpoint", "statistical_independence_verified", "evaluation_verdict", "sha256"}
 FIXED_FIELDS = {"finalization", "calibration_status", "selected_package", "selection_proof_embedded_in_model",
                 "recognition_success_confirmed"}
+PROBE_FIELDS = {"weight_probe_threshold", "weight_measurement_candidates", "final_model_matrix",
+                "recorded_final_samples", "final_threshold_responses_observed"}
 
 
 def _semantic(rows):
@@ -52,19 +55,29 @@ def _matrix(row, design, run_id, metric):
         end = number(o["end"]) if end is None else max(end, number(o["end"]))
     require(targets and foils, "unbalanced_post_tune_matrix")
     gap = number(min(targets)-max(foils))
-    require(equal(gap, number(row["measured_gap"])), "post_tune_gap_not_replayed")
+    if "measured_gap" in row:
+        require(equal(gap, number(row["measured_gap"])), "post_tune_gap_not_replayed")
     return gap, samples, begin, end
 
 
 def audit_posttune_transaction(report, source_case):
     try:
         r = report
-        fixed = type(r) is dict and type(r.get("schema_version")) is int and r["schema_version"] == 2
-        require(type(r) is dict and set(r) == FIELDS | (FIXED_FIELDS if fixed else set()) and
+        explicit_probe = type(r) is dict and type(r.get("schema_version")) is int and r["schema_version"] == 3
+        fixed = type(r) is dict and type(r.get("schema_version")) is int and (
+            r["schema_version"] == 2 or (explicit_probe and r.get("finalization") == "keep_fixed_threshold"))
+        extras = (FIXED_FIELDS if fixed else {"finalization"} if explicit_probe else set()) | (PROBE_FIELDS if explicit_probe else set())
+        require(type(r) is dict and set(r) == FIELDS | extras and
                 r["kind"] == "native_post_tune_transaction" and type(r["schema_version"]) is int and
-                r["schema_version"] == (2 if fixed else 1) and r["algorithm"] == (
+                r["schema_version"] == (3 if explicit_probe else 2 if fixed else 1) and r["algorithm"] == (
+                    "bounded-coordinate-explicit-weight-threshold-native-driver-v1" if explicit_probe else
                     "bounded-coordinate-fixed-threshold-native-driver-v1" if fixed else
                     "bounded-coordinate-full-pattern-native-calibration-v1"), "unknown_post_tune_transaction")
+        if explicit_probe:
+            require(r["finalization"] in {"calibrate", "keep_fixed_threshold"} and
+                    type(r["weight_measurement_candidates"]) is list and
+                    type(r["final_threshold_responses_observed"]) is bool, "invalid_post_tune_probe_threshold_declaration")
+            number(r["weight_probe_threshold"])
         if fixed:
             require(r["finalization"] == "keep_fixed_threshold" and r["calibration_status"] == "fixed" and
                     r["selection_proof_embedded_in_model"] is False and r["recognition_success_confirmed"] is False,
@@ -122,11 +135,21 @@ def audit_posttune_transaction(report, source_case):
                     len({number(t) for t in r["thresholds"]}) == len(r["thresholds"]) and
                     1 <= count(r["maximum_calibration_candidates"]) <= 256, "invalid_post_tune_threshold_grid")
         rows, gaps, samples, previous_end = r["candidates"], [], 0, None
+        if explicit_probe:
+            require(len(r["weight_measurement_candidates"]) == len(rows), "missing_post_tune_measurement_models")
         for i, row in enumerate(rows):
             require(type(row) is dict and set(row) == {"candidate", "matrix", "measured_gap"} and
                     row["candidate"]["source_solo"] == source["source_solo"], "invalid_post_tune_candidate")
             audit_recognition_derivation(row["candidate"], source_case)
-            gap, n, begin, end = _matrix(row, design, r["confirmation_specification"]["attempt_id"]+"/weights/"+str(i), metric)
+            measured = row
+            if explicit_probe:
+                model = r["weight_measurement_candidates"][i]
+                audit_threshold_candidate(model, source_case)
+                require(model["source_recognition"] == row["candidate"] and
+                        equal(number(model["threshold"]), number(r["weight_probe_threshold"])),
+                        "post_tune_measurement_threshold_or_source_changed")
+                measured = {**row, "candidate": model}
+            gap, n, begin, end = _matrix(measured, design, r["confirmation_specification"]["attempt_id"]+"/weights/"+str(i), metric)
             require(previous_end is None or after(begin, previous_end), "post_tune_weight_matrices_overlap")
             previous_end = end;gaps.append(gap);samples += n
         selected = max(range(len(gaps)), key=gaps.__getitem__) if gaps else None
@@ -145,7 +168,8 @@ def audit_posttune_transaction(report, source_case):
         if closed:
             require(len(rows)+len(rejected) == proposals and count(r["recorded_weight_samples"]) == samples,
                     "incomplete_closed_post_tune_search")
-            require(r["active_matrix"] == {"requests": [], "observations": []}, "closed_post_tune_has_active_matrix")
+            final_phase = explicit_probe and fixed and selected is not None and gaps[selected] > number(r["minimum_positive_gap"])
+            require(final_phase or r["active_matrix"] == {"requests": [], "observations": []}, "closed_post_tune_has_active_matrix")
             rejects = {q["proposal"]: q["reason"] for q in rejected};seen=set();measured=0;best=None
             for i in range(proposals):
                 mode = "canon_rmin" if r["mode"] == "search_synthetic" and i == 0 else (
@@ -200,6 +224,23 @@ def audit_posttune_transaction(report, source_case):
                         "fixed_post_tune_changed_threshold_origin")
             else:
                 require(r["selected_package"] is None, "fixed_post_tune_noncommitted_selection_claim")
+        final_samples = 0
+        if explicit_probe:
+            require(type(r["final_model_matrix"]) is dict and set(r["final_model_matrix"]) == {"requests", "observations"},
+                    "invalid_post_tune_final_model_matrix")
+            if fixed and status == "weights_selected":
+                require(r["final_threshold_responses_observed"] is True and
+                        r["active_matrix"] == {"requests": [], "observations": []}, "missing_post_tune_final_responses")
+                _, final_samples, begin, _ = _matrix({"candidate": r["selected_package"], "matrix": r["final_model_matrix"]},
+                    design, confirmation["attempt_id"]+"/final-model", metric)
+                require(previous_end is not None and after(begin, previous_end), "post_tune_final_matrix_not_fresh")
+                require(count(r["recorded_final_samples"]) == final_samples, "post_tune_final_sample_count_changed")
+            else:
+                require(r["final_model_matrix"] == {"requests": [], "observations": []} and
+                        r["final_threshold_responses_observed"] is (status == "calibrated"),
+                        "post_tune_unverified_final_matrix_claim")
+            require(count(r["recorded_final_samples"])+count(r["recorded_weight_samples"]) <= count(r["maximum_recorded_samples"]),
+                    "post_tune_total_recording_budget_changed")
         if r["reason"] == "no_positive_measured_gap":
             require(selected is None or gaps[selected] <= number(r["minimum_positive_gap"]), "post_tune_false_no_gap")
         return {"schema_version": r["schema_version"], "recorded_search_consistent": True, "status": status,
@@ -207,6 +248,8 @@ def audit_posttune_transaction(report, source_case):
                 "proposal_sequence_verified": sequence_verified, "native_physics_rejections_verified": physics_rejections_verified,
                 "calibration_audit": child_audit, "native_execution_verified": False, "owner_restoration_verified": False,
                 "partial_observations_validated": False, "statistical_independence_verified": False, "evaluation_verdict": None,
+                **({"weight_probe_threshold": r["weight_probe_threshold"], "complete_final_samples": final_samples,
+                    "final_threshold_responses_observed": r["final_threshold_responses_observed"]} if explicit_probe else {}),
                 **({"calibration_policy": "fixed", "calibration_status": "unverified" if status == "recovery_required" else "fixed",
                     "weight_selection_only": True, "recognition_success_confirmed": False} if fixed else {})}
     except EvidenceError:
