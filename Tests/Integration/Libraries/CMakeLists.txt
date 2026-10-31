@@ -26,6 +26,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_NativeModelEditor.cpp
     Test_PulseLib_CalibrationOwnership.cpp
     Test_PulseLib_PostTuneConfiguration.cpp
+    Test_PulseLib_FixedPostTune.cpp
     Test_PulseLib_ConfigDialect.cpp
     Test_PulseLib_Main.cpp
 )

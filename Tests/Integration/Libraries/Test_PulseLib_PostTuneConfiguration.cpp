@@ -100,4 +100,19 @@ TEST(NativePostTuneConfiguration,RejectsUnrepresentableBudgetsAndNonfiniteContro
     spec.mode=NativePostTuneControllerMode::Off;spec.metric=static_cast<NativePostTuneMetric>(99);
     EXPECT_THROW(EncodeNativePostTuneControls(spec),std::invalid_argument);
 }
+TEST(NativePostTuneConfiguration,SchemaTwoKeepsFinalizationExplicit)
+{
+    NativePostTuneTransactionSpec spec;spec.finalization=NativePostTuneFinalization::KeepFixedThreshold;
+    EXPECT_THROW(EncodeNativePostTuneControls(spec),std::invalid_argument);
+    const auto encoded=EncodeNativePostTuneControlsV2(spec);
+    EXPECT_EQ(encoded["schema_version"],QJsonValue(2));EXPECT_EQ(encoded["finalization"],QJsonValue("keep_fixed_threshold"));
+    EXPECT_EQ(DecodeNativePostTuneControlsV2(encoded,{}).finalization,NativePostTuneFinalization::KeepFixedThreshold);
+    EXPECT_THROW(DecodeNativePostTuneControls(encoded,{}),std::invalid_argument);
+    for(const auto& version:{QJsonValue(1),QJsonValue(3),QJsonValue(true),QJsonValue("2")})
+    {auto wrong=encoded;wrong["schema_version"]=version;EXPECT_THROW(DecodeNativePostTuneControlsV2(wrong,{}),std::invalid_argument);}
+    auto wrong=encoded;wrong["finalization"]="silent_is_success";
+    EXPECT_THROW(DecodeNativePostTuneControlsV2(wrong,{}),std::invalid_argument);
+    spec.finalization=NativePostTuneFinalization::Calibrate;
+    EXPECT_EQ(DecodeNativePostTuneControlsV2(EncodeNativePostTuneControlsV2(spec),{}).finalization,NativePostTuneFinalization::Calibrate);
+}
 }

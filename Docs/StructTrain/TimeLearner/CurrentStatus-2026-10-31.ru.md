@@ -4,6 +4,12 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
+Текущий непроверенный подэтап: typed PostTune schema 2 отделяет выбор весов
+с неизменным порогом от threshold calibration (`weights_selected`, не Calibrated
+и не научный PASS). Добавлены восемь native controls и четвёртый codec case;
+серверная проверка ожидается. Production Console/Python и learner properties
+пока не подключены к новой схеме; старые schema-1 jobs остаются исходным API.
+
 Последний механический подэтап: `NativePostTuneConfiguration` выделяет общий
 typed codec девяти PostTune controls из Console в PulseLib. Root d48837f1 /
 PulseLib 30f737c8: 3/3 native cases без skips, все 18 исходных production jobs,
