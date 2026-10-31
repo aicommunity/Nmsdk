@@ -96,3 +96,26 @@ def render_calibration_transaction(source: Path, output: Path):
     _write(output/"SHA256SUMS.json", sums)
     return {"kind": manifest["kind"], "status": "diagnostic", "completed_matrices": len(matrices),
             "trial_soma_pairs": pairs, "files": len(sums), "evaluation_verdict": None}
+
+
+def render_calibration_run(source: Path, output: Path):
+    """Render the full grid only after auditing the portable run/primary closure."""
+    plotting_runtime()
+    from .native_calibration_worker import audit_run_manifest
+    audit = audit_run_manifest(source)
+    run = load(source)
+    require(run["execution"] == "completed", "incomplete_calibration_run_has_no_complete_report")
+    result = render_calibration_transaction(source.parent/"native/transaction.json", output)
+    _write(output/"run-binding.json", {"kind": "calibration_report_run_binding", "schema_version": 1,
+        "run_manifest_sha256": run["sha256"], "attempt_id": run["attempt_id"],
+        "runtime_fingerprint": run["runtime_fingerprint"], "source_primary_checked": True,
+        "run_audit": audit, "visual_acceptance_complete": False, "evaluation_verdict": None})
+    index = output/"index.html";text = index.read_text(encoding="utf-8")
+    require(text.count("</html>") == 1, "unknown_calibration_report_index")
+    index.write_text(text.replace("</html>", '<p>Portable run and source primaries audited: '
+        '<a href="run-binding.json">model/grid/runtime binding</a>. '
+        'This does not establish independent Test or scientific PASS.</p></html>'), encoding="utf-8")
+    sums = {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(output.rglob("*")) if p.is_file() and p.name != "SHA256SUMS.json"}
+    _write(output/"SHA256SUMS.json", sums)
+    return {**result, "source_primary_checked": True, "run_evidence_consistent": True, "files": len(sums)}
