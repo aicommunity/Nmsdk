@@ -114,14 +114,36 @@ N1: 0/1. Все четыре исхода search_unresolved, все frozen obser
 ASan использован с detect_leaks=0: это не проверка утечек.
 
 Normal owned CLI reader `cfb09d3c2fa7e5eaa52d0387b663bd6a55a1c610`
-прошёл 12 операций и 12 portable audits. Первый reader 27fc5e3 завершился
+прошёл 12 операций и 12 portable audits; ASan reader c8bb72b прошёл тот же набор 12/12. Первый reader 27fc5e3 завершился
 отказом из-за неверного ожидания session ID; исправление не меняло native
 бинарник. Контроль c8bb72b: 6/6, 12.967 s, без skips, включая rehashed cold
 readback, удаление target из дизайна, повреждение mapping и подмену команды;
 реальный one-tick Test сохраняет полный expected design и возвращает status 2.
+Усиленный контроль b839e879: 7/7 без skips на normal/ASan
+(18.248 / 45.504 s). Дополнительно проверены реальные one-tick cold Train
+Classic-N0/Branch-N1 и запрет экспорта stopped state в recognition.
 
 Компактный [normal primary bundle](../../../Reports/StructTrain/TimeLearner/s09-native-pipeline-normal-a1/README.md)
 содержит 211 файлов / 371128 bytes; отдельная механическая extraction-проверка
-содержит 47 файлов / 694388 bytes. Публикация остальных CLI/ASan/controls и
-новые графики этого контура отслеживаются в CurrentStatus. Это не replay августа,
-не полные 8 паттернов и не приёмка всех этапов.
+содержит 47 файлов / 694388 bytes.
+[Owned normal bundle](../../../Reports/StructTrain/TimeLearner/s09-native-pipeline-owned-normal-a1/README.md):
+633 файла / 758980 bytes; [ASan](../../../Reports/StructTrain/TimeLearner/s09-native-pipeline-owned-asan-a1/README.md):
+794 файла / 1118296 bytes. Все member hashes проверены после получения через Git.
+
+[Графики fixed evaluation](../../../Reports/StructTrain/TimeLearner/s09-native-pipeline-report-normal-a2/README.md):
+4 полные матрицы target+foil × все сомы, 12 trial/soma pairs, 5 plotting checks.
+Metadata archive содержит 29 файлов / 52776 bytes. Git хранит восемь выбранных
+PNG; все восемь просмотрены в исходном размере 1920×960. Полный cache на M40,
+общая visual acceptance false. Зум 100 native ticks сохраняет ≥14.208 пикселя
+на тик и реальные отсчёты без прореживания. Совпадение N0/N1 overview
+в этом bounded unresolved fixture не доказывает эквивалентность алгоритмов.
+
+Дополнительный normal interoperation-прогон применил full-grid calibration
+и последующий frozen Test к двум фактическим cold N1 моделям этого pipeline.
+Оба исторически объявленных grid дали NonSeparable, source Train остался
+SearchUnresolved. Это отрицательный результат конкретной сетки и протокола,
+не доказательство физической невозможности разделения при любом пороге.
+Положительный calibrated-state путь на этой новой cold паре и графики новых
+калибровочных проб остаются открытыми; fixed-evaluation графики не подменяют их.
+
+Это не replay августа, не полные 8 паттернов и не приёмка всех этапов.
