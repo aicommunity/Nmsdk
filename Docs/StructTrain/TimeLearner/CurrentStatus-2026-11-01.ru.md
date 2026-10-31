@@ -191,29 +191,55 @@ root6659caaf57744489e2cd2b615f7e17a3bfb9003d. Read-only capture выполняе
 пока задаётся API, а не production job/ControllerConfiguration. Target-reference,
 C-trim и legacy nonseparable fallback остаются явно запрещёнными в новом пути.
 
-На серверах запущены первые сборки и 6-case smoke: normal PID2180613,
-ASan PID1251, readbacks s08-native-live-finalization-{normal,asan}-a1.
-Normal native: 6/6 (116.425 s), включая два настоящих холодных перехода и
-четыре clock controls. Classic: Train SearchUnresolved, затем WeightsSelected,
-capture2.5305 → entry2.531 при 2000 Hz, 3206 owner phase ticks и две полные
-frozen reactions. Reader root5afe5b96311c871d09aab0c63d463caa17a9e0d5:
-2/2 (32.255 s), без skips; runtime before/after совпал до следующей сборки.
-Supervisor a1 закономерно status1 из-за ошибочного glob-счётчика: он включил
-вспомогательные Train JSON вместе с двумя control records. Native XML/process
-receipts подтверждены отдельно в reader/native-prerequisite.json; failed
-supervisor не переименован в PASS. Primary пока ожидают компактной публикации.
+Первая normal/ASan пара (root6659caaf5 / PulseLib69eba48): native6/6,
+116.425 / 663.040 s; по два cold fixed handoff и четыре clock controls.
+Readers по2/2 без skips: 32.255 / 25.665 s. На обоих initial supervisor status1
+сохранён: широкий glob включил вспомогательные Train JSON. Успешный native
+XML/process receipt проверен отдельно; supervisor не переименован в PASS.
 
-Normal a2 PID2189614 проверяет root5afe5b963 / PulseLibcf530be, 31 case:
-16 live controls, четыре clock и 11 lifecycle. Добавлены startup-failure и
-multirate guards, счётчик control records использует точный filename contract.
-На последней проверке a2 действительно собирается. ASan a1 PID1251 жив:
-четыре clock controls прошли, выполняется холодный Classic. Его queued reader
-PID10286 ожидает терминального native XML/process receipt. Source/runtime
-работающих заданий не обновляются; широкая приёмка dispatcher ещё не получена.
+Normal addressed source root5afe5b963 / PulseLibcf530be: 31/31 (345.452 s),
+16 live controls, четыре clock и11 lifecycle, terminal0. Два stopped-primary
+follow-ups rootf0cf989cb на том же PulseLibcf530be прошли2/2 (1.834 s): добавлены
+native summary и partial CSV/state для независимой проверки остановки.
+Composed view выбирает только эти два новых stopped records, остальные14
+live records оставляет из первоначального31-case gate. Каждый файл связан
+с точным producer/SHA; исходные stopped records также сохранены.
 
-Scoped Console acceptance и Git publication завершены. Следующее: связать живой Train с
-capture/conversion/reference/PostTune/calibration/frozen Test. Нынешние replay
-API не заменяют этот handoff. Остаются полная physics/mode/frequency/dimension
+Полный normal reader rootf31d6a3de:4/4 без skips,106.192 s с построением
+composed view и проверкой двух native gates. Проверены четыре completed
+и12 rejected controls,32 corrupt completed и60 corrupt rejection controls.
+Отдельный maintained native_execution_gate проверен на реальных первых
+receipts: по2/2 на workers, десять corrupt controls, включая auxiliary JSON,
+подмену executable/runtime, PID identity, лишний argument и failed supervisor.
+Его начальные Path setup и неверное ожидание числового start_ticks сохранены;
+production runner правильно хранит /proc identity десятичной строкой.
+
+[Normal compact proof](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-normal-a1/README.md),
+commita7ef72e14f8a43fff916a460d126cc6bf25db03b:599 members /351871673 raw bytes
+→1943492 compressed bytes. Все outer/member hashes локально проверены после
+--no-ff merge; два original profile/design portable runs /84 artifacts включены
+отдельно от свежих Train primary. Это не31 тест нового follow-up executable:
+разные source snapshots указаны явно. В develop новый dispatcher ещё не принят.
+
+Четыре completed controls сохранили Train SearchUnresolved. Fixed: оба
+WeightsSelected; grid policy: оба SearchUnresolved с восстановленной исходной
+recognition-моделью. Во всех четырёх frozen replay target0 spikes /foil0 spikes.
+Это молчание с FN, не успешная классификация и не доказательство улучшения
+разделимости. Матрица содержит два паттерна и не сравнима с августовским8-case
+протоколом как одинаковый научный опыт. Temporal report acceptance ещё открыта.
+
+ASan full regression PID20741 действительно жив: rootf0cf989cb /
+PulseLibcf530be, ожидаются95 cases (75 прежних +4clock +16live), runtime не
+обновляется. Последняя проверка: завершены managed ownership controls,
+выполняется NativeOwnedPostTune. No terminal receipt, broad ASan acceptance
+и compact publication пока нет.
+
+## Следующий обязательный объём
+
+Scoped Console acceptance и Git publication завершены. Programmatic live
+handoff реализован и адресно проверен на normal; требуются broad ASan/visual
+acceptance, production job/CLI declaration, target-reference/parallel-peak фазы
+и независимый frozen Test. Same-matrix replay не заменяет independent evaluation. Остаются полная physics/mode/frequency/dimension
 матрица, UnInit/Cancel/multirate negative controls, N0/N1/C-trim алгоритмические
 проверки, миграция всех tools, scheduler/recovery/publisher integration,
 исторический replay/cold retrain, permutations/ITI и полная документация.
