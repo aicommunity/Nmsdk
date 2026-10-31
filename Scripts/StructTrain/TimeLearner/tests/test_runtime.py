@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from Scripts.StructTrain.TimeLearner.runtime import build_flags, digest_file, parse_ldd, digest_json, runtime_content_identity
+from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError, load, load_json
 
 
 class RuntimeProvenanceTest(unittest.TestCase):
@@ -26,8 +27,23 @@ class RuntimeProvenanceTest(unittest.TestCase):
     def test_cache_allowlist_does_not_collect_credentials(self):
         with tempfile.TemporaryDirectory() as name:
             path = Path(name) / "CMakeCache.txt"
-            path.write_text("CMAKE_BUILD_TYPE:STRING=Release\nAPI_PASSWORD:STRING=secret\n", encoding="utf-8")
-            self.assertEqual(build_flags(path), {"CMAKE_BUILD_TYPE": "Release"})
+            path.write_text("CMAKE_BUILD_TYPE:STRING=RelWithDebInfo\nAPI_PASSWORD:STRING=secret\n"
+                            "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O1 -g1 -fsanitize=address\n"
+                            "CMAKE_EXE_LINKER_FLAGS:STRING=-fsanitize=address\n", encoding="utf-8")
+            self.assertEqual(build_flags(path), {"CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O1 -g1 -fsanitize=address",
+                "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address"})
+
+    def test_runtime_mapping_arrays_use_the_same_strict_json_reader(self):
+        with tempfile.TemporaryDirectory() as name:
+            path = Path(name)/"loaded-files.json"
+            path.write_text('[{"path":"/a/console","size":1,"sha256":"abc"}]', encoding="utf-8")
+            self.assertIsInstance(load_json(path), list)
+            with self.assertRaisesRegex(EvidenceError, "not_an_object"):
+                load(path)
+            path.write_text('[{"path":"/a","p\\u0061th":"/b"}]', encoding="utf-8")
+            with self.assertRaisesRegex(EvidenceError, "duplicate_json_key"):
+                load_json(path)
 
 
 
@@ -58,6 +74,9 @@ class RuntimeContentIdentityTest(unittest.TestCase):
             self.assertNotEqual(before, digest_json(runtime_content_identity(changed)))
         changed = copy.deepcopy(original); changed["build_flags"]["CMAKE_CXX_FLAGS"] = "-O3"
         self.assertNotEqual(before, digest_json(runtime_content_identity(changed)))
+        for key in ("CMAKE_CXX_FLAGS_RELWITHDEBINFO", "CMAKE_EXE_LINKER_FLAGS"):
+            changed = copy.deepcopy(original);changed["build_flags"][key] = "-fsanitize=address"
+            self.assertNotEqual(before, digest_json(runtime_content_identity(changed)))
 
     def test_mapping_snapshot_is_not_equated_with_unknown_mappings(self):
         original = self.manifest(); known = copy.deepcopy(original)

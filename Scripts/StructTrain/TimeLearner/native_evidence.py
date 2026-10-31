@@ -50,7 +50,8 @@ def equal(a: Any, b: Any) -> bool:
     return not after(a, b) and not after(b, a)
 
 
-def load(path: Path) -> dict[str, Any]:
+def load_json(path: Path) -> Any:
+    """Strict JSON value reader, including runtime mapping arrays."""
     def pairs(items: list[tuple[str, Any]]) -> dict[str, Any]:
         result: dict[str, Any] = {}
         for key, value in items:
@@ -69,6 +70,11 @@ def load(path: Path) -> dict[str, Any]:
             raise EvidenceError("invalid_compressed_json") from error
     result = json.loads(raw.decode("utf-8"), object_pairs_hook=pairs,
                         parse_constant=invalid_constant)
+    return result
+
+
+def load(path: Path) -> dict[str, Any]:
+    result = load_json(path)
     require(isinstance(result, dict), "not_an_object")
     return result
 

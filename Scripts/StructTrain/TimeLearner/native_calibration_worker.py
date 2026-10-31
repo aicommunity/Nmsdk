@@ -13,7 +13,7 @@ from .calibration import RULE, _validate_spec, calibration_dataset_digest
 from .calibration_transaction_evidence import audit_native_calibration_transaction
 from .learned_evidence import load_case
 from .model_identity import canonical_model_sha256 as sha
-from .native_evidence import EvidenceError, count, equal, load, number, require
+from .native_evidence import EvidenceError, count, equal, load, load_json, number, require
 from .process_runner import execute, verify_runtime
 from .recognition_evidence import audit_recognition_source
 
@@ -241,7 +241,7 @@ def audit_run_manifest(path):
             "worker_run_process_scope_changed")
     if process["execution"] == "completed":
         owned = load(root/"process/owned-process.json")
-        loaded = load(root/"process/loaded-files.json")
+        loaded = load_json(root/"process/loaded-files.json")
         expected_executable = {key: runtime["executable"][key] for key in ("path", "size", "sha256")}
         require(owned["executable"] == runtime["executable"]["path"] and
                 owned["executable_sha256"] == runtime["executable"]["sha256"] and

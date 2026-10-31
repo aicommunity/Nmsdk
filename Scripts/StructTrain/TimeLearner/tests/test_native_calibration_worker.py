@@ -199,3 +199,44 @@ class NativeCalibrationWorkerTest(unittest.TestCase):
                 self.assertFalse(target.exists())
                 results.append({"case": name, "returncode": done.returncode, "reason": reason, "output_created": False})
             save(root/"validation.json", {"native_rejection_controls": results, "evaluation_verdict": None})
+
+
+class NativeCalibrationRunProvenanceTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        directory = os.environ.get("TIMELEARNER_NATIVE_CALIBRATION_RUN_DIR")
+        if not directory:
+            raise unittest.SkipTest("requires both saved owned production calibration runs")
+        cls.paths = [Path(directory)/top/"run-manifest.json" for top in ("Classic", "Branch")]
+        for path in cls.paths:
+            if not path.is_file():
+                raise RuntimeError("missing actual production run manifest")
+
+    def test_actual_runs_bind_process_arguments_executable_and_primary_model(self):
+        for path in self.paths:
+            self.assertTrue(audit_run_manifest(path)["full_grid_model_binding_verified"])
+
+    def changed(self, path, filename, mutate, reason):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)/"attempt";shutil.copytree(path.parent, root)
+            target = root/filename;value = json.loads(target.read_bytes());mutate(value);save(target, value)
+            manifest = load(root/"run-manifest.json")
+            record = next(r for r in manifest["artifacts"] if r["path"] == filename)
+            raw = target.read_bytes();record["bytes"] = len(raw);record["sha256"] = hashlib.sha256(raw).hexdigest()
+            save(root/"run-manifest.json", resign(manifest))
+            with self.assertRaisesRegex(EvidenceError, reason):
+                audit_run_manifest(root/"run-manifest.json")
+
+    def test_rehashed_unrelated_process_arguments_are_rejected(self):
+        for path in self.paths:
+            self.changed(path, "process/request.json", lambda value: value["arguments"].__setitem__(3, "/unrelated/job.json"),
+                         "worker_run_process_scope_changed")
+
+    def test_rehashed_owned_executable_replacement_is_rejected(self):
+        for path in self.paths:
+            self.changed(path, "process/owned-process.json", lambda value: value.update(executable="/unrelated/console"),
+                         "worker_run_owned_runtime_changed")
+
+    def test_rehashed_missing_executable_mapping_is_rejected(self):
+        for path in self.paths:
+            self.changed(path, "process/loaded-files.json", lambda value: value.clear(), "worker_run_owned_runtime_changed")
