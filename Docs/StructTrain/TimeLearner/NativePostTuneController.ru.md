@@ -238,8 +238,14 @@ phase plan должен использовать тот же codec. Calibration 
 новые defaults или независимую partition. Pure type/budget validation отделена
 от проверки физики/модели в `NativePostTuneTransaction` до live edits.
 Это подготовка общего пути, не реализация learner dispatch: optional-mode
-guard остаётся. Три новых native codec cases и A/B production Console пока
-ожидают серверной проверки.
+guard остаётся. На root `d48837f1ad9e49029493932ddabffe214c2827c5` / PulseLib
+`30f737c8e445bc76be21c1e37eec1d1b99b90a6e` три native codec cases прошли без
+skips, включая все 18 опубликованных jobs и независимые numeric bindings.
+Два owned Console A/B (Classic Auto и Branch SearchSynthetic) прошли portable
+audits: transaction и конечная модель побайтно совпали с исходным Git bundle.
+[Primary proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-codec-normal-a1/README.md):
+103 members / 630420 bytes; все member hashes перепроверены после merge.
+ASan codec пока не проверен; текущий ASan N0 использует прежний immutable source.
 
 Проверка текущего кода показывает, что подключение нельзя свести к удалению
 `configured_native_optional_mode_not_yet_supported`:
@@ -247,6 +253,9 @@ guard остаётся. Три новых native codec cases и A/B production C
 - `ConfiguredNativeOwner.h::PrepareConfiguredNativeOwner` сейчас явно отвергает
   C-trim, PostTune и auto calibration. Этот guard должен остаться до появления
   полного объявленного phase plan и адресных проверок; Console API его не отменяет.
+- `BeginNativeTraining` обоих learner также отдельно отвергает PostTune/auto
+  calibration. Снятие только guard в Prepare не включает фазы и создаст ошибку
+  после cold Build. Оба пути должны использовать один сохранённый phase plan.
 - `NativeRecognitionOwner.h::InstallNativeRecognitionState` устанавливает новый
   recognition context и очищает training service/probe. Solo proof, outcome и
   исходные optional controls требуется сохранить **до** первого import. Хранить
@@ -263,6 +272,17 @@ guard остаётся. Три новых native codec cases и A/B production C
   Нельзя добавлять reentrant import/rollback из Reset hook или подменять
   физический reset сбросом всего phase plan. Explicit Reset, implicit Reset из
   Build/Init, внешний stop и retarget нуждаются в отдельных native проверках.
+- `UContainer::Calculate` вызывает BeforeCalculate до пересоздания active-child
+  cache; ACalculate вызывается после расчёта детей. Это определяет допустимую
+  границу queued import перед следующими children. Проверить необходимо и
+  родительский scheduler: нельзя запрашивать ComponentReCalculation и повторно
+  рассчитывать уже прошедшие дети того же tick.
+- Текущий `NativePostTuneTransaction::FinishWeights` всегда делегирует threshold
+  grid/fresh confirmation после положительного измеренного gap. Его нельзя
+  выдавать за поддержку комбинации PostTune on / auto calibration off. Для
+  fixed-threshold варианта нужен отдельно объявленный финальный протокол и
+  соответствующий результат; успешная weight-фаза не является Calibrated или
+  научным PASS. Отсутствие положительного gap остаётся честным unresolved.
 
 Требуемый порядок перехода: сохранить versioned Solo и честный training outcome;
 сохранить объявленный phase plan отдельно от physical/owner mirrors; завершить
