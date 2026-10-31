@@ -182,6 +182,23 @@ commitbef73f6655838833d5f145a0be2fe38b58fb7472. После очистки df: 75
 
 ## Следующий обязательный объём
 
+Начата реализация [живого dispatcher](NativeLiveFinalization.ru.md):
+PulseLib69eba48208629a2462243e21fc6046b4d132041d,
+root6659caaf57744489e2cd2b615f7e17a3bfb9003d. Read-only capture выполняется
+после естественного завершения Train, а conversion/import/owned PostTune —
+перед детьми следующего tick. Исходный outcome и immutable request сохраняются;
+остановка без сертификата не создаёт recognition-модель. Runtime declaration
+пока задаётся API, а не production job/ControllerConfiguration. Target-reference,
+C-trim и legacy nonseparable fallback остаются явно запрещёнными в новом пути.
+
+На серверах запущены первые сборки и 6-case smoke: normal PID2180613,
+ASan PID1251, readbacks s08-native-live-finalization-{normal,asan}-a1.
+Последняя проверка: оба supervisor живы, изменённые learner скомпилированы,
+собираются интеграционные tests. Это ещё не passing evidence. Новый reader
+root761c1f7c505696436601b2838d916319641d9a72 ожидает фактические fresh Train
+CSV/packets, проверяет declared phases, next-tick clock и frozen replay;
+он также пока не выполнен. Source/runtime активных заданий не обновляются.
+
 Scoped Console acceptance и Git publication завершены. Следующее: связать живой Train с
 capture/conversion/reference/PostTune/calibration/frozen Test. Нынешние replay
 API не заменяют этот handoff. Остаются полная physics/mode/frequency/dimension
