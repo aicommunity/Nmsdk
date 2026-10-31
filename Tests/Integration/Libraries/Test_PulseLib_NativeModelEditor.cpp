@@ -1636,9 +1636,16 @@ template<class Learner> void PostTuneTransactionChecks(EditingRig<Learner>& rig,
     };
     restore();auto invalid=spec;invalid.calibration.trials.pop_back();
     EXPECT_THROW((Transaction(*rig.learner,invalid,implementation)),std::exception);
+    invalid=spec;const auto originalPattern=invalid.calibration.trials.front().pattern;
+    invalid.calibration.trials.front().pattern.Resize(originalPattern.GetRows(),2,0.);
+    for(int i=0;i<originalPattern.GetRows();++i)for(int column=0;column<2;++column)
+        invalid.calibration.trials.front().pattern(i,column)=originalPattern(i,0);
+    EXPECT_THROW((Transaction(*rig.learner,invalid,implementation)),std::exception);
     EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),source);
     spec.mode=NativePostTuneControllerMode::Off;run(spec,"off",NativePostTuneTransactionStatus::Calibrated);
     spec.mode=NativePostTuneControllerMode::KeepDone;run(spec,"keep",NativePostTuneTransactionStatus::Calibrated);
+    auto metric=spec;metric.metric=NativePostTuneMetric::Auto;run(metric,"auto_metric");
+    metric.metric=NativePostTuneMetric::SomaSum;run(metric,"soma_metric");
     auto silent=spec;silent.calibration.thresholds={1.};silent.calibration.maximumCandidates=1;
     run(silent,"silent",NativePostTuneTransactionStatus::SearchUnresolved);
     auto budget=spec;budget.maximumRecordedSamples=1;

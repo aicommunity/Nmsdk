@@ -24,8 +24,8 @@ class PostTuneTransactionEvidenceTest(unittest.TestCase):
             raise RuntimeError("requires both real Classic/Branch primary training sources")
         cls.records = [(p, load(p)) for p in root.glob("*_post_tune_*.json")
                        if load(p).get("kind") == "native_post_tune_transaction"]
-        if len(cls.records) != 20:
-            raise RuntimeError("requires five modes and five negative/cancel/ownership controls per topology")
+        if len(cls.records) != 24:
+            raise RuntimeError("requires five modes, two metric variants and five negative/cancel/ownership controls per topology")
 
     def audit(self, report):
         return audit_posttune_transaction(report, self.sources[report["source_recognition"]["source_solo"]["sha256"]][1])
@@ -39,7 +39,7 @@ class PostTuneTransactionEvidenceTest(unittest.TestCase):
         with self.assertRaises(EvidenceError):
             self.audit(report)
 
-    def test_all_twenty_actual_reports(self):
+    def test_all_twenty_four_actual_reports(self):
         for _, r in self.records:
             with self.subTest(mode=r["mode"], status=r["status"]):
                 a = self.audit(r)
