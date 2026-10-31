@@ -37,21 +37,8 @@ def calibration_dataset_digest(coverage_policy, criterion, trials):
                                    "trials": sorted(trials, key=lambda trial: trial["presentation_index"])})
 
 
-def _validate_spec(spec):
-    require(type(spec) is dict and set(spec) == SPEC_FIELDS and
-            spec["kind"] == "timelearner_threshold_calibration_spec" and type(spec["schema_version"]) is int
-            and spec["schema_version"] == 1, "unknown_calibration_spec")
-    _text(spec["calibration_id"]);_text(spec["data_partition_id"])
-    require(spec["protocol"] in ("historical_same_matrix", "frozen_independent_calibration"), "unknown_calibration_protocol")
-    require(spec["selection_rule"] == RULE, "unknown_calibration_selection_rule")
-    _digest(spec["source_recognition_sha256"]);_digest(spec["source_model_revision"])
-    require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_calibration_coverage")
-    require(type(spec["thresholds"]) is list and bool(spec["thresholds"]), "empty_calibration_grid")
-    thresholds = [number(value) for value in spec["thresholds"]]
-    require(len(set(thresholds)) == len(thresholds), "invalid_calibration_threshold_grid")
-    budget = count(spec["maximum_candidates"])
-    require(budget > 0, "invalid_calibration_budget")
-    trials = spec["trials"]
+def validate_trial_design(trials):
+    """Validate the shared target/foil probe design without inventing a threshold grid."""
     require(type(trials) is list and len(trials) >= 2, "incomplete_calibration_design")
     ids, positions, policies = set(), set(), {}
     for trial in trials:
@@ -67,6 +54,24 @@ def _validate_spec(spec):
         policies.setdefault(trial["reset_policy"], set()).add(trial["label"])
     require(positions == set(range(len(trials))) and all(labels == {"target", "foil"} for labels in policies.values()),
             "calibration_requires_targets_and_foils_in_each_reset_policy")
+
+
+def _validate_spec(spec):
+    require(type(spec) is dict and set(spec) == SPEC_FIELDS and
+            spec["kind"] == "timelearner_threshold_calibration_spec" and type(spec["schema_version"]) is int
+            and spec["schema_version"] == 1, "unknown_calibration_spec")
+    _text(spec["calibration_id"]);_text(spec["data_partition_id"])
+    require(spec["protocol"] in ("historical_same_matrix", "frozen_independent_calibration"), "unknown_calibration_protocol")
+    require(spec["selection_rule"] == RULE, "unknown_calibration_selection_rule")
+    _digest(spec["source_recognition_sha256"]);_digest(spec["source_model_revision"])
+    require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_calibration_coverage")
+    require(type(spec["thresholds"]) is list and bool(spec["thresholds"]), "empty_calibration_grid")
+    thresholds = [number(value) for value in spec["thresholds"]]
+    require(len(set(thresholds)) == len(thresholds), "invalid_calibration_threshold_grid")
+    budget = count(spec["maximum_candidates"])
+    require(budget > 0, "invalid_calibration_budget")
+    trials = spec["trials"]
+    validate_trial_design(trials)
     require(_digest(spec["dataset_digest"]) == calibration_dataset_digest(spec["coverage_policy"], spec["criterion"], trials),
             "calibration_dataset_digest_mismatch")
     # The common scorer validates the criterion enum/fields against actual

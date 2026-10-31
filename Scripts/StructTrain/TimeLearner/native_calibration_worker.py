@@ -9,7 +9,7 @@ import json
 from functools import wraps
 
 from .calibrated_evidence import REQUEST_FIELDS
-from .calibration import RULE, _validate_spec, calibration_dataset_digest
+from .calibration import RULE, _validate_spec, calibration_dataset_digest, validate_trial_design
 from .calibration_transaction_evidence import audit_native_calibration_transaction
 from .learned_evidence import load_case
 from .model_identity import canonical_model_sha256 as sha
@@ -65,8 +65,16 @@ def validate_job(job, source_case, *, post_tune=False):
     fields = JOB_FIELDS | ({"post_tune"} if post_tune else set())
     kind = "timelearner_native_post_tune_job" if post_tune else "timelearner_native_calibration_job"
     require(type(job) is dict and set(job) == fields and job["kind"] == kind
-            and type(job["schema_version"]) is int and job["schema_version"] == 1, "unknown_native_calibration_job")
+            and type(job["schema_version"]) is int and job["schema_version"] in ((1, 2) if post_tune else (1,)), "unknown_native_calibration_job")
     _digest(job)
+    controls_v2 = post_tune and job["schema_version"] == 2
+    if controls_v2:
+        require(type(job["post_tune"]) is dict and
+                set(job["post_tune"]) == POST_TUNE_FIELDS | {"schema_version", "finalization"} and
+                type(job["post_tune"]["schema_version"]) is int and job["post_tune"]["schema_version"] == 2 and
+                job["post_tune"]["finalization"] in {"calibrate", "keep_fixed_threshold"},
+                "unknown_worker_post_tune_v2_specification")
+    fixed = controls_v2 and job["post_tune"]["finalization"] == "keep_fixed_threshold"
     source = job["source_recognition"]
     audit_recognition_source(source, source_case)
     model = source["source_solo"]["configuration"]["model"]
@@ -97,7 +105,21 @@ def validate_job(job, source_case, *, post_tune=False):
             "criterion": full_criterion, "trials": design, "thresholds": job["thresholds"],
             "maximum_candidates": job["maximum_candidates"], "selection_rule": RULE}
     spec["dataset_digest"] = calibration_dataset_digest("per_trial_windows", full_criterion, design)
-    _, identity = _validate_spec(spec)
+    if fixed:
+        require(job["thresholds"] == [] and count(job["maximum_candidates"]) == 0,
+                "fixed_post_tune_has_unused_calibration_grid")
+        number(source["neuron"]["metadata"]["calibration"]["threshold"])
+        require(declaration["protocol"] in {"historical_same_matrix", "frozen_independent_calibration"},
+                "unknown_worker_probe_protocol")
+        validate_trial_design(design)
+        # This is probe-design identity, not a fabricated threshold-calibration spec.
+        spec = {"kind": "timelearner_fixed_weight_probe_design", "schema_version": 1,
+                "source_recognition_sha256": source["sha256"], "source_model_revision": source["model_revision"],
+                "coverage_policy": "per_trial_windows", "criterion": full_criterion, "trials": design,
+                "protocol": declaration["protocol"], "data_partition_id": declaration["data_partition_id"]}
+        identity = {"conditions_digest": sha(spec)}
+    else:
+        _, identity = _validate_spec(spec)
     require(len(job["thresholds"]) <= 256 and count(job["maximum_candidates"]) <= 256, "worker_grid_budget_limit")
     target = source["source_solo"]["protocol"]["pattern_hash"]
     samples = {}
@@ -117,7 +139,7 @@ def validate_job(job, source_case, *, post_tune=False):
         p = job["post_tune"]
         require(source["kind"] == "timelearner_recognition_state" and source["conversion_spec"]["schema_version"] == 1,
                 "post_tune_worker_requires_unmodified_base_recognition")
-        require(type(p) is dict and set(p) == POST_TUNE_FIELDS and
+        require(type(p) is dict and set(p) == POST_TUNE_FIELDS | ({"schema_version", "finalization"} if controls_v2 else set()) and
                 p["mode"] in {"off", "keep_done", "canon_rmin", "flat_last_r", "search_synthetic"} and
                 p["metric"] in {"auto", "ltzone", "soma_sum"}, "unknown_worker_post_tune_specification")
         edit = p["mode"] in {"canon_rmin", "flat_last_r", "search_synthetic"}
@@ -175,12 +197,19 @@ def audit_execution(directory, job, source_case, *, post_tune=False):
             report[maximum_field] == job["maximum_candidates"] and report["trials"] == job["trials"] and
             declaration == job["specification"], "worker_declared_design_changed")
     if post_tune:
-        require({key: report[key] for key in POST_TUNE_FIELDS} == job["post_tune"], "worker_post_tune_conditions_changed")
+        require({key: report[key] for key in POST_TUNE_FIELDS} ==
+                {key: job["post_tune"][key] for key in POST_TUNE_FIELDS}, "worker_post_tune_conditions_changed")
+        fixed = job["schema_version"] == 2 and job["post_tune"]["finalization"] == "keep_fixed_threshold"
+        require(report["schema_version"] == (2 if fixed else 1) and
+                (not fixed or report["finalization"] == job["post_tune"]["finalization"]),
+                "worker_post_tune_finalization_changed")
     require(execution["post_tune_status" if post_tune else "calibration_status"] == report["status"] and execution["transaction_sha256"] == report["sha256"] and
             execution["model_sha256"] == model["sha256"] and execution["model_revision"] == model["model_revision"],
             "worker_model_result_binding_changed")
     if report["status"] == "calibrated":
         require(model == report["calibrated_package"], "worker_committed_model_changed")
+    elif post_tune and report["status"] == "weights_selected":
+        require(model == report["selected_package"], "worker_selected_model_changed")
     elif report["source_restored"]:
         require(model == job["source_recognition"], "worker_restored_model_changed")
     require(execution["execution"] in {"completed", "cancelled", "model_tick_budget_exhausted"}, "unknown_worker_execution_status")
