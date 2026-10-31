@@ -73,3 +73,10 @@ local/connected request, stop без сертификата и control/reset/sto
 Остаются production job/CLI declaration, независимый evidence reader живого
 перехода, all-pattern temporal reports, target-reference/parallel-peak фазы,
 вся физическая/режимная матрица и independent frozen evaluation.
+
+Первый проверяемый source: root6659caaf5 / PulseLib69eba48; normal PID2180613,
+ASan PID1251, readbacks s08-native-live-finalization-{normal,asan}-a1. Отдельный
+reader добавлен в root761c1f7c5; его runtime-приёмка ожидается. Следующая версия
+PulseLibcf530be дополнительно завершает live state при ошибке до Start и
+проверяет uniform frequency до Train; добавлены invalid-design/multirate fixtures.
+Она не подменяет source уже работающих заданий и пока не проверена на сервере.

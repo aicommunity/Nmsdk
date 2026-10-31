@@ -409,7 +409,7 @@ TEST(NativeFinalizationClockHandoff,BranchAutomatic){ManagedFinalization<NNeuron
 TEST(NativeFinalizationClockHandoff,BranchExternal){ManagedFinalization<NNeuronTimeLearnerBranch>(1,false,true,false,true);}
 
 namespace {
-enum class LiveScenario { Fixed, Calibrate, Stopped, ControlDrift, ResetQueued, StopQueued };
+enum class LiveScenario { Fixed, Calibrate, Stopped, ControlDrift, ResetQueued, StopQueued, InvalidDesign, Multirate };
 template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario scenario)
 {
     const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
@@ -427,6 +427,10 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
     NativeThresholdGridSpec grid;grid.confirmation=DecodeNativeThresholdConfirmationSpec(job["specification"].toObject());
     grid.confirmation.attemptId=name+"/post_tune";
     for(const auto& value:job["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(value.toObject()));
+    if(scenario==LiveScenario::InvalidDesign) {
+        EXPECT_GE(grid.trials.size(),2u);
+        grid.trials[1]=grid.trials.front();grid.trials[1].trialId+="/second-target";
+    }
     if(scenario==LiveScenario::Calibrate) {
         for(const auto& value:job["thresholds"].toArray())grid.thresholds.push_back(value.toDouble());
         grid.maximumCandidates=std::size_t(job["maximum_candidates"].toDouble());
@@ -478,6 +482,8 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
                 }
                 EXPECT_TRUE(stream.good());
             }});
+        if(scenario==LiveScenario::Multirate)
+            owner->template GetComponentL<NPulseNeuron>("Neuron",true)->SetGlobalTimeStep(1000);
         if(!connected)owner->IsNeedToTrain=true;
         bool queued=false,intervention=false;QJsonObject summary;
         std::size_t ticks=0;const std::size_t maximum=200000;
@@ -502,7 +508,12 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
         }
         EXPECT_TRUE(owner->NativeLiveFinalizationDone())<<owner->NativeLiveFinalizationReport()["reason"].toString().toStdString();
         const auto live=owner->NativeLiveFinalizationReport();QJsonObject final;NativeCalibrationMatrix frozen;
-        if(scenario==LiveScenario::Stopped) {
+        if(scenario==LiveScenario::InvalidDesign || scenario==LiveScenario::Multirate) {
+            EXPECT_FALSE(queued);EXPECT_FALSE(owner->HasNativeRecognitionState());EXPECT_EQ(trial,0u);
+            EXPECT_EQ(live["status"],QJsonValue("failed"));
+            EXPECT_EQ(live["reason"],QJsonValue(scenario==LiveScenario::InvalidDesign?
+                "unbalanced_live_finalization_design":"native_owned_post_tune_requires_uniform_frequency_tree"));
+        } else if(scenario==LiveScenario::Stopped) {
             EXPECT_FALSE(queued);EXPECT_FALSE(owner->HasNativeRecognitionState());
             EXPECT_EQ(live["status"],QJsonValue("stopped_diagnostic"));
             EXPECT_TRUE(live["boundary"].toObject()["diagnostic_only"].toBool());
@@ -552,3 +563,7 @@ TEST(NativeLiveFinalization,ClassicQueuedReset){LiveFinalization<NNeuronTimeLear
 TEST(NativeLiveFinalization,BranchQueuedReset){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::ResetQueued);}
 TEST(NativeLiveFinalization,ClassicQueuedStop){LiveFinalization<NNeuronTimeLearner>(1,true,LiveScenario::StopQueued);}
 TEST(NativeLiveFinalization,BranchQueuedStop){LiveFinalization<NNeuronTimeLearnerBranch>(1,true,LiveScenario::StopQueued);}
+TEST(NativeLiveFinalization,ClassicInvalidDesign){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::InvalidDesign);}
+TEST(NativeLiveFinalization,BranchInvalidDesign){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::InvalidDesign);}
+TEST(NativeLiveFinalization,ClassicMultirate){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::Multirate);}
+TEST(NativeLiveFinalization,BranchMultirate){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::Multirate);}
