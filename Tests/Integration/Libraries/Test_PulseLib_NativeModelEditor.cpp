@@ -2794,6 +2794,77 @@ CONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,0)
 CONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,1)
 #undef CONNECTED_STOP_TESTS
 
+template<class Learner> void TrainingIntentLifecycle(int mode,bool connected)
+{
+    EditingRig<Learner> rig(2000,1,"request_intent_"+std::to_string(mode)+(connected?"_connected":"_local"));
+    auto plan=TrainingPlan(rig);plan.maximumModelSeconds=.01;
+    rig.learner->CalculateMode=mode;rig.learner->CalibrateLTZThresholdFraction=.37;
+    UEPtr<ConnectedTrainingFlag> flag;
+    if(connected) {
+        const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+        flag=UEPtr<ConnectedTrainingFlag>(new ConnectedTrainingFlag);
+        flag->SetStorage(core.storage);flag->SetEnvironment(core.environment);flag->Default();
+        flag->Name="RequestIntentProvider";flag->Activity=true;flag->SetGlobalTimeStep(rig.frequency);
+        UEPtr<UContainer> node=flag;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;
+        ASSERT_TRUE(rig.learner->IsNeedToTrain.SetPointer(0,&flag->Value));
+    }
+    EXPECT_TRUE(rig.learner->NativeTrainingRequest().isEmpty());
+    rig.learner->BeginNativeTraining(plan);
+    const auto first=rig.learner->NativeTrainingRequest();ASSERT_FALSE(first.isEmpty());
+    EXPECT_EQ(first["kind"],QJsonValue("native_training_request_intent"));
+    auto unsignedFirst=first;unsignedFirst.remove("sha256");
+    EXPECT_EQ(first["sha256"],QJsonValue(NmsdkTools::CanonicalModelDataSha256(unsignedFirst)));
+    const auto controls=first["controls"].toObject(),parameters=controls["parameters"].toObject();
+    EXPECT_EQ(parameters["CalculateMode"],QJsonValue(mode));EXPECT_TRUE(parameters["IsNeedToTrain"].toBool());
+    EXPECT_DOUBLE_EQ(parameters["CalibrateLTZThresholdFraction"].toDouble(),.37);
+    EXPECT_EQ(controls["bindings"].toObject()["IsNeedToTrain"].toObject()["connected"],QJsonValue(connected));
+    // A later control edit is observable separately; it cannot rewrite the
+    // declaration that a future finalization driver must validate.
+    rig.learner->CalibrateLTZThresholdFraction=.63;
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks) {
+        ASSERT_LT(ticks,100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    }
+    EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::BudgetExhausted);
+    EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);
+    EXPECT_EQ(rig.learner->IsNeedToTrain.GetData(),connected || mode==1);
+    if(flag)EXPECT_TRUE(flag->Value.GetData());
+    auto edited=rig.learner->NativeTrainingRequest();edited["controls"]=QJsonObject{};
+    EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);
+    const auto bad=rig.learner->ImportNativeLearnedState(QJsonObject{},"request-intent-test");
+    EXPECT_NE(bad.status,NativeModelBuildStatus::Adopted);EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);
+    const auto geometry=rig.learner->ReadNativeParameters();rig.learner->Reset();
+    EXPECT_TRUE(rig.learner->NativeTrainingRequest().isEmpty());EXPECT_EQ(rig.learner->ReadNativeParameters(),geometry);
+    rig.learner->BeginNativeTraining(plan);const auto second=rig.learner->NativeTrainingRequest();ASSERT_FALSE(second.isEmpty());
+    EXPECT_GT(second["session_attempt"].toDouble(),first["session_attempt"].toDouble());
+    EXPECT_DOUBLE_EQ(second["controls"].toObject()["parameters"].toObject()["CalibrateLTZThresholdFraction"].toDouble(),.63);
+    if(flag)flag->Value=false;else rig.learner->IsNeedToTrain=false;
+    rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+    EXPECT_EQ(rig.learner->NativeTrainingRequest(),second);EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());
+    rig.learner->Reset();if(flag)flag->Value=true;
+    rig.learner->BeginNativeTraining(plan);const auto third=rig.learner->NativeTrainingRequest();ASSERT_FALSE(third.isEmpty());
+    const auto unchanged=rig.learner->InputPattern.GetData();rig.learner->InputPattern=unchanged;
+    EXPECT_EQ(rig.learner->NativeTrainingRequest(),third);
+    auto changed=unchanged;changed(0,0)+=.001;rig.learner->InputPattern=changed;
+    EXPECT_TRUE(rig.learner->NativeTrainingRequest().isEmpty());
+    Artifact(rig.name+"_request_intent.json",QJsonDocument(QJsonObject{
+        {"kind","native_training_request_intent_lifecycle"},{"schema_version",1},
+        {"calculate_mode",mode},{"connected",connected},{"first",first},{"second",second},{"third",third},
+        {"after_retarget",rig.learner->NativeTrainingRequest()},
+        {"final_outcome",TrainingStatusName(rig.learner->NativeTrainingController().Outcome())},
+        {"final_reason",QString::fromStdString(rig.learner->NativeTrainingController().Reason())},
+        {"calibrated",false},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    if(flag)rig.learner->IsNeedToTrain.DetachFrom();
+}
+#define TRAINING_INTENT_TESTS(TOPOLOGY,TYPE) \
+TEST(NativeTrainingIntent,TOPOLOGY##Local0){TrainingIntentLifecycle<TYPE>(0,false);} \
+TEST(NativeTrainingIntent,TOPOLOGY##Local1){TrainingIntentLifecycle<TYPE>(1,false);} \
+TEST(NativeTrainingIntent,TOPOLOGY##Connected0){TrainingIntentLifecycle<TYPE>(0,true);} \
+TEST(NativeTrainingIntent,TOPOLOGY##Connected1){TrainingIntentLifecycle<TYPE>(1,true);}
+TRAINING_INTENT_TESTS(Classic,NNeuronTimeLearner)
+TRAINING_INTENT_TESTS(Branch,NNeuronTimeLearnerBranch)
+#undef TRAINING_INTENT_TESTS
+
 enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial, RepeatPartial };
 template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false,unsigned n0Repeats=1)
 {
