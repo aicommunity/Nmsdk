@@ -55,6 +55,23 @@ def render_solo_threshold_trace(source: Path, output: Path):
     views = render_soma(lt_observation, 0, "Native LTZone.Potential",
                         padded_limits([f["lt_potential"] for f in samples]), folder,
                         potential_axis_label="LTZone.Potential [model units; SI unverified]")
+    # Keep the full recovery view and add a separately labelled amplitude view
+    # when negative spike recovery masks a real positive threshold crossing.
+    potentials = [f["lt_potential"] for f in samples]
+    positive = [p for p in potentials if p > 0]
+    threshold = report["source"]["threshold"]
+    if min(potentials) < 0 and positive and threshold >= 0:
+        detail = folder/"positive-threshold-detail"
+        detail.mkdir()
+        extra = render_soma(lt_observation, 0, "Native LTZone.Potential (positive threshold detail)",
+                            padded_limits([0., threshold, *positive]), detail,
+                            potential_axis_label="LTZone.Potential [model units; SI unverified]",
+                            reference_level=threshold)
+        for view in extra:
+            view["files"] = [detail.name+"/"+name for name in view["files"]]
+            view["view"] = "positive-threshold-detail-"+view["view"]
+            view["y_scale"] = "positive_threshold_detail"
+        views.extend(extra)
     figures.append({"source": "lt_potential", "channel": None, "directory": folder.name, "views": views})
     manifest = {"kind": "native_solo_threshold_visual_report", "schema_version": 1,
                 "source_file_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),

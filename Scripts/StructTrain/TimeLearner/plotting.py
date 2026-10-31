@@ -82,7 +82,8 @@ def time_views(begin, end, frequency):
 
 
 def render_soma(observation, channel, label, limits, output: Path, *,
-                potential_axis_label="Soma SumPotential [model units; SI unverified]"):
+                potential_axis_label="Soma SumPotential [model units; SI unverified]",
+                reference_level=None):
     # Lazy backend import: inventory/analyze and module import need no GUI/backend.
     import matplotlib
     matplotlib.use("Agg")
@@ -114,6 +115,10 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.70)
             overlay = ax.twinx()
             ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
+            if reference_level is not None:
+                require(math.isfinite(reference_level), "nonfinite_plot_reference_level")
+                ax.axhline(reference_level, color="#477a32", linestyle="--", linewidth=1.,
+                           label="Actual scalar spike threshold")
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
                          linewidth=1.2, label="Actual shared input (native samples)")
             if sample_markers:
@@ -168,6 +173,8 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                          "downsampling": False, "y_scale": scale, "time_view": time_view,
                          "sample_markers":bool(sample_markers),
                          "shared_y_limits": list(limits), "y_limits": list(y_limits)})
+            if reference_level is not None:
+                rows[-1]["reference_level"] = reference_level
     return rows
 
 
