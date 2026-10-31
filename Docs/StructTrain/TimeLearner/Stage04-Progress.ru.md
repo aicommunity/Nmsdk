@@ -282,5 +282,12 @@ Leak detection выключен; полнота mapped-file lifetime не зая
 
 Rdk объединён через --no-ff в develop: 027f7f8353608f83b55f3857a2f6c39138df4c65;
 доступность commit в origin проверена. Корневой gitlink обновлён на этот merge.
-Это приёмка только раннего bool-контракта; публикация raw proof выполняется
-отдельно, полный lifecycle/storage этап и configured phase dispatch остаются открыты.
+Это приёмка только раннего bool-контракта. Raw proof опубликованы:
+[normal](../../../Reports/StructTrain/TimeLearner/s04-uninitialized-bool-fixed-normal-a3/README.md)
+(e7307aa37c062f1d16e68ad0de7ae7695614d5c4, 161 members / 740316 bytes) и
+[ASan + negative control](../../../Reports/StructTrain/TimeLearner/s04-uninitialized-bool-fixed-asan-a3/README.md)
+(bacc85856de3fb7399a5f1d7ed10226b89e5de9b, 181 members / 761828 bytes).
+Все члены архивов и SHA256SUMS перепроверены после --no-ff merges в root
+feature. В каждом proof сохранены два полных portable source snapshots /
+84 artifact entries. Полный lifecycle/storage этап и configured phase dispatch
+остаются открыты.

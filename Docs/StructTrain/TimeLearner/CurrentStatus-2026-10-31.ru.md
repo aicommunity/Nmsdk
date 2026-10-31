@@ -38,7 +38,13 @@ M40 ASan 15/15 (45.143 s), без skips. Исправление меняет т�
 для отрицательного контроля и не является успешным model run.
 Вызовы проведены через owned production process runner, actual test runtime
 captured before/after, loaded files captured; full lifetime attestation не заявлена.
-Компактные raw proof публикуются; полный этап 4 не закрыт.
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s04-uninitialized-bool-fixed-normal-a3/README.md):
+161 members / 740316 compressed bytes;
+[ASan proof и отрицательный контроль](../../../Reports/StructTrain/TimeLearner/s04-uninitialized-bool-fixed-asan-a3/README.md):
+181 members / 761828 bytes. Все archive/member hashes и inventories проверены
+после --no-ff merge; в каждом proof два полных portable source snapshots /
+84 artifact entries. Rdk develop merge 027f7f8353608f83b55f3857a2f6c39138df4c65
+доступен в origin, точный root gitlink обновлён. Полный этап 4 не закрыт.
 Первый fixture ошибочно включал Reset от Activity=false в интервал наблюдения;
 его failed runs сохранены и не принимаются как passing evidence.
 [Подробности и ограничения](Stage04-Progress.ru.md#уточнение-native-проверки-3110).
