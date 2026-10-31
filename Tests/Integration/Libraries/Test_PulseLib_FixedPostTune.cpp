@@ -43,8 +43,7 @@ template<class Owner> void FixedPostTune(Scenario scenario)
     spec.calibration.confirmation.attemptId+="/"+name;
     if(scenario==Scenario::Budget)spec.maximumRecordedSamples=1;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
-    NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
-        "FixedPostTuneOwner",[&](auto storage,auto environment,auto model,auto owner) {
+    const auto exercise=[&](auto storage,auto environment,auto model,auto owner) {
         ASSERT_EQ(owner->ImportNativeRecognitionState(source,implementation).status,NativeModelBuildStatus::Adopted);
         owner->Build();owner->Init();model->Init();model->Reset();
         ASSERT_EQ(owner->ExportNativeRecognitionState(implementation),source);
@@ -124,7 +123,12 @@ template<class Owner> void FixedPostTune(Scenario scenario)
         Save(name+"_roundtrip",{{"kind","native_fixed_post_tune_roundtrip"},{"schema_version",1},
             {"selected_package",chosen},{"observations",replay},{"subsequent_calibration",calibration.Report()},
             {"package_after",owner->ExportNativeRecognitionState(implementation)},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}});
-    });
+    };
+    const auto result=NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
+        "FixedPostTuneOwner",[&](auto storage,auto environment,auto model,auto owner) {
+            exercise(storage,environment,model,owner);return ::testing::Test::HasFatalFailure()?2:0;
+        });
+    EXPECT_EQ(result,0);
 }
 }
 TEST(NativeFixedPostTune,ClassicSelectionRoundtripAndLaterCalibration){FixedPostTune<NNeuronTimeLearner>(Scenario::Selection);}
