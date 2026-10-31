@@ -322,7 +322,8 @@ Schema 1 по умолчанию продолжает Calibrate и сохран�
 
 `Encode/DecodeNativePostTuneControlsV2` явно записывают schema 2 и finalization.
 Попытка сохранить fixed-режим старым codec запрещена, чтобы не потерять фактор.
-Production Console/job/worker пока принимают только прежний schema-1 job.
+Production Console/job/worker root 2d6ab1a0 добавляют explicit schema-2 job;
+серверная проверка ещё не принята. Schema 1 остаётся прежним API.
 Python analyze/report transaction уже поддерживают schema-2 native reports;
 это не поддержка production fixed job. При lifecycle interference raw fixed
 обозначает объявленную политику, а derived calibration status — `unverified`;
