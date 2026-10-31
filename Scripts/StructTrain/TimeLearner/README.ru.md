@@ -290,3 +290,11 @@ Source этих контрольных моделей имеет search_unresolv
 стартовый снимок процесса, без обещания полного позднего plugin census.
 Контракт, ограничения и адресная приёмка:
 [NativeCalibrationWorker](../../../Docs/StructTrain/TimeLearner/NativeCalibrationWorker.ru.md).
+# Native Train/export/evaluate
+
+Добавлены production команды `train`, `export`, `evaluate` и
+`analyze --format pipeline-run`: [контракт, CLI и ограничения](../../../Docs/StructTrain/TimeLearner/NativePipelineWorker.ru.md).
+Это отдельные owned Console операции с immutable runtime и сохранёнными primary
+data, без шаблонного Test fallback. Первый выпуск требует optional modes Off
+и reset-per-trial evaluation. Общая очередь и полная матрица остаются открытыми.
+

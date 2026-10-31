@@ -85,3 +85,5 @@ commits are not substituted into historical manifests.
 - [Elder native PostTune reconstruction](s08-posttune-rebuild-elder1/README.md), [M40 ASan](s08-posttune-rebuild-m40/README.md): 10 native / 7 Python tests and 10090 waveform pairs per worker; eight pre-fix baseline failures; failed fixtures and one-pass stimulus evidence preserved.
 
 - [Elder transient PostTune goal](s08-transient-elder1/README.md), [M40 ASan](s08-transient-m40/README.md): four native cases, eight Python tests, eight complete presentations / 19368 samples per worker; corrected pre-fix baseline and byte-exact common waveforms.
+
+Native production additions: [cold Train/export/frozen evaluation normal](s09-native-pipeline-normal-a1/README.md), [separate mechanical worker support extraction](s08-worker-support-normal-a1/README.md). The terminal older [threshold assessment ASan 16+35 gate](s08-threshold-assessment-asan-a1/README.md) is published separately; it does not accept later source versions.
