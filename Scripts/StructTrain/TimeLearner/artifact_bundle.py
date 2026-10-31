@@ -7,7 +7,8 @@ import shutil
 import tarfile
 from pathlib import Path
 
-from .native_evidence import load, require
+from .native_evidence import load, require, parse_json_bytes
+from .model_identity import canonical_model_sha256
 from .native_test_reports import inventory_native_test_run
 
 
@@ -27,6 +28,48 @@ def _name(value):
 
 def _write(path, value):
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False)+"\n", encoding="utf-8")
+
+
+def verify_packaged_run_closure(files):
+    """Check that archived byte snapshots preserve each included run manifest.
+
+    This is an inclusion/integrity gate after the production run audit, not a
+    scientific validity or arbitrary-process attestation. Cache exclusions must
+    never remove input/source just because a code cache also uses that name.
+    """
+    require(type(files) is dict and files and all(type(raw) is bytes for raw in files.values()),
+            "invalid_packaged_run_snapshot")
+    for name in files:_name(name)
+    manifests = [name for name in files if Path(name).name == "run-manifest.json"]
+    require(bool(manifests), "missing_packaged_run_manifests")
+    artifacts = 0
+    for name in manifests:
+        run = parse_json_bytes(files[name])
+        require(type(run) is dict and run.get("kind") in {"timelearner_post_tune_run_manifest", "timelearner_calibration_run_manifest"}
+                and type(run.get("schema_version")) is int and run["schema_version"] == 1,
+                "unknown_packaged_run_manifest")
+        require(run.get("sha256") == canonical_model_sha256({k: v for k, v in run.items() if k != "sha256"}),
+                "packaged_run_manifest_digest_changed")
+        rows = run.get("artifacts")
+        require(type(rows) is list and 0 < len(rows) <= 100000, "invalid_packaged_run_inventory")
+        prefix = name.removesuffix("run-manifest.json")
+        expected = set()
+        for row in rows:
+            require(type(row) is dict and set(row) == {"path", "bytes", "sha256"}, "invalid_packaged_run_artifact")
+            path = prefix+_name(row["path"])
+            require(path not in expected and type(row["bytes"]) is int and row["bytes"] >= 0 and
+                    type(row["sha256"]) is str and re.fullmatch("[0-9a-f]{64}", row["sha256"]),
+                    "invalid_packaged_run_artifact")
+            expected.add(path)
+            require(path in files, "packaged_run_missing_artifact:"+path)
+            require(len(files[path]) == row["bytes"] and hashlib.sha256(files[path]).hexdigest() == row["sha256"],
+                    "packaged_run_artifact_bytes_changed:"+path)
+        require({path for path in files if path.startswith(prefix) and path != name} == expected,
+                "packaged_run_has_unrecorded_artifacts")
+        require(type(run.get("source_package_path")) is str and prefix+_name(run["source_package_path"]) in expected,
+                "packaged_run_missing_source_package")
+        artifacts += len(expected)
+    return {"run_snapshots_verified": len(manifests), "artifact_entries_verified": artifacts, "scientific_verdict": None}
 
 
 def pack_native_tests(contract, artifacts, output, selected_report, maximum_bytes=8*1024**3):
