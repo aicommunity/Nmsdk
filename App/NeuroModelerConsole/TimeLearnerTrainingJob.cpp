@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 #include <locale>
+#include <memory>
 #include <sstream>
 
 namespace {
