@@ -502,3 +502,32 @@ frequency guards; владение очередью/instance в этих доп�
 не доказано. Проверить запрет чужого Take/rollback и отсутствие зависания,
 используя готовые source archives без нового Train. Это следующий проверочный
 сценарий, а не заявление о воспроизведённом runtime-дефекте.
+
+## Замыкание нового cold pipeline подэтапа
+
+Normal/ASan interoperation дополнительно использовал две фактические cold N1
+модели: full-grid calibration → frozen Test. По четыре owned фазы и portable
+audits на worker прошли. Обе объявленные сетки дали NonSeparable; это результат
+конкретного grid/protocol, не утверждение о невозможности любого порога.
+Source training SearchUnresolved сохранён; положительный calibrated model path
+на этой новой cold паре и графики новых calibration-grid probes остаются открытыми.
+
+Опубликованы normal 3c087349 (231 файл / 619464 bytes) и ASan de48870a
+(231 / 635736); оба архива и все member hashes проверены после Git fetch.
+Они также сохраняют усиленные b839e879 controls 7/7, включая реальный
+one-tick cold Train и запрет recognition export диагностической модели.
+Предыдущие 6/6 и новые 7/7 перекрываются; это не 13 уникальных проверок.
+
+Docs-only PulseLib 9068da76494667acc990713d273a2bacae64f49b сохраняет Core
+проверенного a5671e96 без изменений. Bin 1e9a1389cc37e1a4e54b860184eac3ae25b310d1
+уточняет границу legacy PostTune и нового worker. Новые gitlinks не подменяют
+фактические source closures опубликованных бинарников. Все перечисленные
+server jobs/publishers имеют terminal 0; общая приёмка этапов 1–12 открыта.
+
+Полный fixed-evaluation cache: M40
+`/media/user/Data/TimeLearnerRefactor/readbacks/s09-native-pipeline-report-normal-a2/reports`.
+Git содержит только compressed primaries, metadata и восемь selected PNG;
+все восемь просмотрены, полная visual acceptance остаётся false. Elder root
+filesystem при последней проверке имел около 475 MiB свободного места; перед
+новой сборкой нужна отдельная инвентаризация и освобождение подтверждённых
+дубликатов/кэшей. Уникальные исходные результаты не удалять.
