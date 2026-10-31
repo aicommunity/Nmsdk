@@ -29,11 +29,11 @@ production calibration/PostTune controller.
 |---|---|
 | Potential baseline, PulseLib 7f17735 | 16 native, 29 independent и отдельные 8 частично перекрывающихся checks прошли; compact bundles опубликованы. Это собственный снимок. |
 | Raw validator/assessment, PulseLib 25cf6a5 | 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Полная ASan приёмка открыта. |
-| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate завершён с exit 0. Его reader a1 обнаружил ошибку glob в test setup; исправленный reader a2 выполняется на тех же данных, без повторного Train. ASan a2 выполняется. |
+| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate завершён. Его reader a1 обнаружил ошибку glob; reader a2 проверяет те же данные без нового Train. Отдельный ASan 6/6 native + 6/6 Python завершён с exit 0; это не полный ASan 16-case matrix. |
 | Persisted observations, PulseLib fece852 | Normal gate прошёл 2/2 Classic/Branch при 2000 Гц с roundtrip/corruption checks; исходные результаты ещё не опубликованы отдельным пакетом. ASan ожидает свой source/build. |
-| Calibrated state, PulseLib 353882b → ce7e81e | На первом снимке 353882b normal gate прошёл 2/2; import/export/Reset/frozen probes подтверждены. Усиленный ce7e81e прошёл syntax-only; его native a2 и ASan ещё не приняты. |
-| Frozen scorer/report, root b22c15fec | 9/9 actual-package checks на normal 353882b прошли (56.934 s); отдельные старые 5/5 — частично перекрывающийся запуск, не 14 уникальных tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5 (697.340 s), отдельно от нового 16-case gate. Readers ce7e81e/ASan и report checks ещё ожидаются. |
-| Полные calibrated reports, root 590526997 | M40 job ожидает native и reader acceptance; затем построит все 4 patterns × все сомы Classic/Branch. 3 report checks ещё не выполнены. Полные изображения — cache, не bulk Git. |
+| Calibrated state, PulseLib 353882b → ce7e81e | Normal 2/2 прошли на обоих снимках. Усиленный ce7e81e проверил import/export/Reset/frozen probes и отказы при неправильных bindings. Данные и модели опубликованы commit 9746ea4; ASan этого API ещё выполняется. |
+| Frozen scorer/report, root b22c15fec | 9/9 checks прошли на normal ce7e81e (55.393 s); прежние 5/5 и 9/9 не складываются как уникальные tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5, отдельно от нового 16-case gate. ASan readers ещё ожидаются. |
+| Полные calibrated reports, root ff432f559 | M40 построил Classic/Branch: 4 предъявления двух паттернов × все сомы, 12 trial/soma pairs, 164 PNG и SVG/PDF. 3 report + 5 plotting checks прошли. Git содержит 12 выбранных PNG и метаданные; полный cache — M40. Четыре графика просмотрены вручную. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
 Дополнительная проверка реализации `ce7e81e002c802412ce50c1f2b2f76ffa7215b2a`
@@ -64,6 +64,29 @@ Reader fix root `d5c74bad03f46cc66d5b1271ea923f05bce5c0b5`: glob
 Общий math test проверяет оба домена по тем же actual frames. Собственный
 35-test reader `s08-threshold-signed-full-audit-normal-a2` выполняется на ранее
 успешном native gate; а1 и его диагностика сохраняются как неуспешная попытка.
+
+[Calibrated normal bundle](../../../Reports/StructTrain/TimeLearner/s08-calibrated-normal-a2/README.md)
+опубликован commit `9746ea4ba908b3030762fd6c276809142f27b8ce`: 581 файл,
+1797464 bytes lossless primary archive с source CSV, обеими версиями моделей,
+raw proof, gates и готовыми frozen evaluation specs/metrics.
+[Visual bundle](../../../Reports/StructTrain/TimeLearner/s08-calibrated-report-normal-a2/README.md)
+опубликован commit `5feb102f26df96188ed20d7a9d0076eb679b69b5`:
+12 выбранных PNG и 26740-byte metadata archive; полный cache не загружен в Git.
+Git-only перенос на M40 проверил все 581 member hashes; метрики воспроизведены.
+
+В этом двухпаттерновом контроле обе reset-per-trial пары удовлетворяют criterion.
+В последующих preserve-dynamics пробах target даёт outside spike и FN;
+суммарно TP=1,FN=1,TN=2,FP=0, accuracy=3/4. Позиция/порядок и reset policy
+не разделены: причинный эффект одного reset этим не доказан. Это не August replay
+и не восьмипаттерновая матрица. Model/threshold hashes остаются frozen.
+
+Первый normal report attempt использовал system Python без matplotlib и завершился
+с exit 1. `ff432f5599982b6a7495d6c9a9feaad2e692a273` добавил Agg/PIL preflight
+до создания выходного каталога во всех четырёх renderer entry points;
+отрицательный контроль проверяет отсутствие partial report при missing backend.
+Повтор использовал существующий M40 plot-venv-a1, runtime/interpreter versions
+сохранены. Старый queued ASan report остановлен до генерации (143, причина записана)
+и заменён исправленным a2, ожидающим ASan модели/reader. Native jobs не прерывались.
 
 ## Журнал проверок и уточнений за день
 

@@ -228,3 +228,11 @@ independence и partition separation автоматически не подтв�
 Сам отчёт остаётся диагностическим и не создаёт новую калибровку.
 Проверки этих новых путей ещё выполняются на серверах; production native
 selection/commit/rollback CLI остаётся незавершённым.
+
+Renderer entry points заранее проверяют headless matplotlib/Agg и Pillow до
+создания report directory. Недостающий backend даёт структурированный отказ,
+не оставляя partial report из-за этой ошибки. Manifest сохраняет фактический
+Python executable и версии matplotlib/Pillow. На M40 используется существующий
+`/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python`; system Python
+этого сервера не содержит matplotlib. Interpreter нового worker должен быть
+явно выбран и проверен; старый системный путь не является его настройкой.
