@@ -4,6 +4,20 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
+Новый подэтап в feature-ветке: [PostTune как фаза native owner](NativeOwnedPostTunePhase.ru.md).
+PulseLib ecdbd9944f46a45efafba7d1547b2fbd3e75d084; исправленный native fixture root
+4820405e5a6cba98007b0e6816f5a243d307e05a. Продвижение перед детьми, явное владение
+внутренним lifecycle, запрет конкурирующих model/trial операций и отдельное
+административное завершение реализованы. Это ещё runtime-unverified и не принято
+в develop. На момент записи normal/a4 (PID2079697) и ASan/a3 (PID4080438) живы;
+readers ждут именно их терминальных receipts. Две первые normal попытки завершились
+71/75: четыре ошибки подготовки local replay, без ослабления production-контрактов.
+Normal/a3 остановлен preflight по диску; удалены только 56 неиспользуемых GNU ar
+кэшей (601710782 bytes), 14 ELF сохранили SHA-256. Отменённые ASan/a1 и ожидавший
+его a2 сохранены диагностически; EXIT trap zero у отменённого supervisor не PASS.
+Новые десять сценариев и независимые reader/report checks пока не засчитываются.
+Автоматический переход из живого Train остаётся открытым.
+
 Последний адресно проверенный подэтап — связь train-time request с finalization.
 Production CaptureNativeFinalizationBoundary проверяет session/run/protocol/pattern,
 исходные controls и их bindings; различаться может только живое значение Need.
