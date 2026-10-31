@@ -115,4 +115,25 @@ TEST(NativePostTuneConfiguration,SchemaTwoKeepsFinalizationExplicit)
     spec.finalization=NativePostTuneFinalization::Calibrate;
     EXPECT_EQ(DecodeNativePostTuneControlsV2(EncodeNativePostTuneControlsV2(spec),{}).finalization,NativePostTuneFinalization::Calibrate);
 }
+TEST(NativePostTuneConfiguration,SchemaThreeKeepsMeasurementPhysicsExplicit)
+{
+    NativePostTuneTransactionSpec spec;spec.finalization=NativePostTuneFinalization::KeepFixedThreshold;
+    auto encoded=EncodeNativePostTuneControlsV3(spec);
+    EXPECT_EQ(encoded["schema_version"],QJsonValue(3));EXPECT_TRUE(encoded["weight_probe_threshold"].isNull());
+    EXPECT_FALSE(DecodeNativePostTuneControlsV3(encoded,{}).weightProbeThreshold);
+    for(double threshold:{-0.1,0.,2.})
+    {
+        spec.weightProbeThreshold=threshold;encoded=EncodeNativePostTuneControlsV3(spec);
+        const auto decoded=DecodeNativePostTuneControlsV3(encoded,{});
+        ASSERT_TRUE(decoded.weightProbeThreshold);EXPECT_EQ(*decoded.weightProbeThreshold,threshold);
+        EXPECT_EQ(decoded.finalization,NativePostTuneFinalization::KeepFixedThreshold);
+        EXPECT_THROW(EncodeNativePostTuneControls(spec),std::invalid_argument);
+        EXPECT_THROW(EncodeNativePostTuneControlsV2(spec),std::invalid_argument);
+        EXPECT_THROW(DecodeNativePostTuneControlsV2(encoded,{}),std::invalid_argument);
+    }
+    for(const auto& value:{QJsonValue(true),QJsonValue("2"),QJsonValue(QJsonObject{})})
+    {auto invalid=encoded;invalid["weight_probe_threshold"]=value;EXPECT_THROW(DecodeNativePostTuneControlsV3(invalid,{}),std::invalid_argument);}
+    auto missing=encoded;missing.remove("weight_probe_threshold");EXPECT_THROW(DecodeNativePostTuneControlsV3(missing,{}),std::invalid_argument);
+    spec.weightProbeThreshold=std::numeric_limits<double>::infinity();EXPECT_THROW(EncodeNativePostTuneControlsV3(spec),std::invalid_argument);
+}
 }

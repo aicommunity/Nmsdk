@@ -10,6 +10,7 @@ from ..model_identity import canonical_model_sha256 as sha
 from ..native_evidence import EvidenceError, load
 from ..posttune_transaction_evidence import audit_posttune_transaction
 from ..recognition_metrics import score_recognition_evaluation
+from ..native_calibration_worker import validate_job
 
 
 class PostTuneProbeThresholdEvidenceTest(unittest.TestCase):
@@ -23,11 +24,13 @@ class PostTuneProbeThresholdEvidenceTest(unittest.TestCase):
         if len(cls.records) != 8:
             raise RuntimeError("requires eight actual final-boundary controls")
         cls.sources = {}
+        cls.jobs = []
         for name in ("Classic-auto_metric", "Branch-synthetic"):
             folder = Path(source)/(name+"-legacy")
             manifest = load(folder/"run-manifest.json")
             path = folder/manifest["source_package_path"]
             cls.sources[load(path)["sha256"]] = load_case(path)
+            cls.jobs.append(load(folder/"input/job.json"))
 
     def audit(self, report):
         return audit_posttune_transaction(report, self.sources[report["source_recognition"]["source_solo"]["sha256"]])
@@ -80,3 +83,22 @@ class PostTuneProbeThresholdEvidenceTest(unittest.TestCase):
                           final_threshold_responses_observed=True,
                           final_model_matrix={"requests": [], "observations": []})
             self.reject(report)
+
+    def test_production_schema_three_preflight_binds_measurement_physics(self):
+        for original in self.jobs:
+            job = copy.deepcopy(original)
+            job["schema_version"] = 3
+            job["post_tune"].update(schema_version=3, finalization="keep_fixed_threshold", weight_probe_threshold=2.,
+                                    mode="keep_done", canonical_floor=0., canonical_last=0., resistance_bounds=[])
+            job.update(thresholds=[], maximum_candidates=0)
+            source = self.sources[job["source_recognition"]["source_solo"]["sha256"]]
+            job["sha256"] = sha({k: v for k, v in job.items() if k != "sha256"})
+            proof = validate_job(job, source, post_tune=True)
+            other = copy.deepcopy(job);other["post_tune"]["weight_probe_threshold"] = 1.
+            other["sha256"] = sha({k: v for k, v in other.items() if k != "sha256"})
+            self.assertNotEqual(proof["conditions_digest"], validate_job(other, source, post_tune=True)["conditions_digest"])
+            for value in (True, "2"):
+                wrong = copy.deepcopy(job);wrong["post_tune"]["weight_probe_threshold"] = value
+                wrong["sha256"] = sha({k: v for k, v in wrong.items() if k != "sha256"})
+                with self.assertRaises(EvidenceError):
+                    validate_job(wrong, source, post_tune=True)

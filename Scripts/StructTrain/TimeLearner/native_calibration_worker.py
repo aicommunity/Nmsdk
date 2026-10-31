@@ -65,13 +65,15 @@ def validate_job(job, source_case, *, post_tune=False):
     fields = JOB_FIELDS | ({"post_tune"} if post_tune else set())
     kind = "timelearner_native_post_tune_job" if post_tune else "timelearner_native_calibration_job"
     require(type(job) is dict and set(job) == fields and job["kind"] == kind
-            and type(job["schema_version"]) is int and job["schema_version"] in ((1, 2) if post_tune else (1,)), "unknown_native_calibration_job")
+            and type(job["schema_version"]) is int and job["schema_version"] in ((1, 2, 3) if post_tune else (1,)), "unknown_native_calibration_job")
     _digest(job)
-    controls_v2 = post_tune and job["schema_version"] == 2
+    controls_v2 = post_tune and job["schema_version"] >= 2
+    controls_v3 = post_tune and job["schema_version"] == 3
+    probe_fields = {"weight_probe_threshold"} if controls_v3 else set()
     if controls_v2:
         require(type(job["post_tune"]) is dict and
-                set(job["post_tune"]) == POST_TUNE_FIELDS | {"schema_version", "finalization"} and
-                type(job["post_tune"]["schema_version"]) is int and job["post_tune"]["schema_version"] == 2 and
+                set(job["post_tune"]) == POST_TUNE_FIELDS | {"schema_version", "finalization"} | probe_fields and
+                type(job["post_tune"]["schema_version"]) is int and job["post_tune"]["schema_version"] == job["schema_version"] and
                 job["post_tune"]["finalization"] in {"calibrate", "keep_fixed_threshold"},
                 "unknown_worker_post_tune_v2_specification")
     fixed = controls_v2 and job["post_tune"]["finalization"] == "keep_fixed_threshold"
@@ -139,9 +141,11 @@ def validate_job(job, source_case, *, post_tune=False):
         p = job["post_tune"]
         require(source["kind"] == "timelearner_recognition_state" and source["conversion_spec"]["schema_version"] == 1,
                 "post_tune_worker_requires_unmodified_base_recognition")
-        require(type(p) is dict and set(p) == POST_TUNE_FIELDS | ({"schema_version", "finalization"} if controls_v2 else set()) and
+        require(type(p) is dict and set(p) == POST_TUNE_FIELDS | ({"schema_version", "finalization"} if controls_v2 else set()) | probe_fields and
                 p["mode"] in {"off", "keep_done", "canon_rmin", "flat_last_r", "search_synthetic"} and
                 p["metric"] in {"auto", "ltzone", "soma_sum"}, "unknown_worker_post_tune_specification")
+        if controls_v3 and p["weight_probe_threshold"] is not None:
+            number(p["weight_probe_threshold"])
         edit = p["mode"] in {"canon_rmin", "flat_last_r", "search_synthetic"}
         floor = p["mode"] in {"canon_rmin", "search_synthetic"}
         require((number(p["canonical_floor"]) > 0 if floor else number(p["canonical_floor"]) == 0) and
@@ -199,10 +203,14 @@ def audit_execution(directory, job, source_case, *, post_tune=False):
     if post_tune:
         require({key: report[key] for key in POST_TUNE_FIELDS} ==
                 {key: job["post_tune"][key] for key in POST_TUNE_FIELDS}, "worker_post_tune_conditions_changed")
-        fixed = job["schema_version"] == 2 and job["post_tune"]["finalization"] == "keep_fixed_threshold"
-        require(report["schema_version"] == (2 if fixed else 1) and
+        fixed = job["schema_version"] >= 2 and job["post_tune"]["finalization"] == "keep_fixed_threshold"
+        explicit_probe = job["schema_version"] == 3 and job["post_tune"]["weight_probe_threshold"] is not None
+        require(report["schema_version"] == (3 if explicit_probe else 2 if fixed else 1) and
                 (not fixed or report["finalization"] == job["post_tune"]["finalization"]),
                 "worker_post_tune_finalization_changed")
+        if explicit_probe:
+            require(report["weight_probe_threshold"] == job["post_tune"]["weight_probe_threshold"] and
+                    report["finalization"] == job["post_tune"]["finalization"], "worker_weight_probe_physics_changed")
     require(execution["post_tune_status" if post_tune else "calibration_status"] == report["status"] and execution["transaction_sha256"] == report["sha256"] and
             execution["model_sha256"] == model["sha256"] and execution["model_revision"] == model["model_revision"],
             "worker_model_result_binding_changed")

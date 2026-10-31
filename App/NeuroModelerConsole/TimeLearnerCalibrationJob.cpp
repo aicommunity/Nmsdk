@@ -40,21 +40,22 @@ Job Read(const QString& path,bool postTune=false)
     Require(d.size()==int(keys.size()),"job_field_set_mismatch");for(const auto& key:keys)Require(d.contains(key),"job_missing_field");
     const auto schema=Number(d["schema_version"]);
     Require(d["kind"]==QJsonValue(postTune?"timelearner_native_post_tune_job":"timelearner_native_calibration_job") &&
-        (schema==1. || (postTune && schema==2.)),"unsupported_calibration_job");
+        (schema==1. || (postTune && (schema==2. || schema==3.))),"unsupported_calibration_job");
     Require(Signed(d)==d,"job_digest_mismatch");
     j.ownerClass=Text(d["owner_class"]);j.implementation=Text(d["implementation_id"]);
     Require(j.ownerClass=="NNeuronTimeLearner" || j.ownerClass=="NNeuronTimeLearnerBranch","unsupported_calibration_job_owner");
     j.frequency=unsigned(Count(d["frequency_hz"],1,1000000000));
     j.maximumTicks=Count(d["maximum_model_ticks"],1,1000000000);
     j.source=Object(d["source_recognition"]);
-    j.grid.maximumCandidates=Count(d["maximum_candidates"],schema==2.?0:1,256);
+    j.grid.maximumCandidates=Count(d["maximum_candidates"],schema>=2.?0:1,256);
     j.grid.confirmation=DecodeNativeThresholdConfirmationSpec(Object(d["specification"]));
     for(const auto& value:Array(d["thresholds"]))j.grid.thresholds.push_back(Number(value));
     for(const auto& value:Array(d["trials"]))j.grid.trials.push_back(DecodeNativeCalibrationRequest(Object(value)));
     j.isPostTune=postTune;
     if(postTune)
     {
-        j.postTune=schema==2.?DecodeNativePostTuneControlsV2(Object(d["post_tune"]),j.grid):
+        j.postTune=schema==3.?DecodeNativePostTuneControlsV3(Object(d["post_tune"]),j.grid):
+            schema==2.?DecodeNativePostTuneControlsV2(Object(d["post_tune"]),j.grid):
             DecodeNativePostTuneControls(Object(d["post_tune"]),j.grid);
         const bool fixed=j.postTune.finalization==NativePostTuneFinalization::KeepFixedThreshold;
         Require(!fixed || (j.grid.thresholds.empty() && j.grid.maximumCandidates==0),
