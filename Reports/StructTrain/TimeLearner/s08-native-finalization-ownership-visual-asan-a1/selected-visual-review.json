@@ -1,0 +1,64 @@
+{
+  "kind": "native_managed_finalization_selected_visual_review",
+  "schema_version": 1,
+  "figures": [
+    {
+      "path": "selected/01-Classic_managed_finalization_0-weights-0000-overview.png",
+      "cache_path": "Classic_managed_finalization_0/posttune/weights-0000/trial-0000-soma-001/overview.png",
+      "bytes": 153820,
+      "sha256": "b9750b87664276c60c6a92acd29c6cfaa93fababc12ba747452cc11183716e2b"
+    },
+    {
+      "path": "selected/02-Classic_managed_finalization_0-weights-0000-zoom-001.png",
+      "cache_path": "Classic_managed_finalization_0/posttune/weights-0000/trial-0000-soma-001/zoom-001.png",
+      "bytes": 141892,
+      "sha256": "18030421575a339a8aeb45f18327e763f2acd3c8028e98ad56cf232d61410f54"
+    },
+    {
+      "path": "selected/03-Classic_managed_finalization_0-final-model-overview.png",
+      "cache_path": "Classic_managed_finalization_0/posttune/final-model/trial-0000-soma-001/overview.png",
+      "bytes": 154816,
+      "sha256": "4db4c814ca268ab50037fe39d09d125722a43e561c81eacf3573928019f04571"
+    },
+    {
+      "path": "selected/04-Classic_managed_finalization_0-final-model-zoom-001.png",
+      "cache_path": "Classic_managed_finalization_0/posttune/final-model/trial-0000-soma-001/zoom-001.png",
+      "bytes": 142309,
+      "sha256": "85d1746f32ef81bb4d2957cf818926f4ed242dc05e9ad3d0282f9d6683d3c76a"
+    },
+    {
+      "path": "selected/05-Branch_managed_finalization_0-weights-0000-overview.png",
+      "cache_path": "Branch_managed_finalization_0/posttune/weights-0000/trial-0000-soma-001/overview.png",
+      "bytes": 151664,
+      "sha256": "abca49a8d0050c2998612e2e027ced50ba0d7daa01fcccfc6f986d34c2b8996c"
+    },
+    {
+      "path": "selected/06-Branch_managed_finalization_0-weights-0000-zoom-001.png",
+      "cache_path": "Branch_managed_finalization_0/posttune/weights-0000/trial-0000-soma-001/zoom-001.png",
+      "bytes": 140846,
+      "sha256": "cdb9b0019b24713496d95195fb7a50a1f3d04c0e167118984e24e08948199452"
+    },
+    {
+      "path": "selected/07-Branch_managed_finalization_0-final-model-overview.png",
+      "cache_path": "Branch_managed_finalization_0/posttune/final-model/trial-0000-soma-001/overview.png",
+      "bytes": 151794,
+      "sha256": "b92d3726f1234d51a9b7d023a8282a82fc6df768fff75747ef62f3e4a1b1ff23"
+    },
+    {
+      "path": "selected/08-Branch_managed_finalization_0-final-model-zoom-001.png",
+      "cache_path": "Branch_managed_finalization_0/posttune/final-model/trial-0000-soma-001/zoom-001.png",
+      "bytes": 140703,
+      "sha256": "0a052dd67bea8cc2e803436d3b9dd0f82b543e1ea4b9d8f2b744efa9a8d71e03"
+    }
+  ],
+  "selected_visual_review_complete": true,
+  "full_visual_acceptance_complete": false,
+  "scope": "Eight original-resolution target/first-soma overview/detail PNGs, Classic/Branch, weight and final model, CalculateMode=0.",
+  "findings": [
+    "Axes, legends, soma traces and native input impulses are readable in 1920x960.",
+    "Different measurement/final model revisions are visible; no SI-unit conversion or recognition success is inferred.",
+    "Native soma samples are joined by lines while input is stepped; apparent sub-tick onset offsets do not prove causal lead.",
+    "Foils, second Classic soma, mode-1 figures, all remaining detail tiles, full cache and SVG/PDF have automatic coverage checks only."
+  ],
+  "scientific_verdict": null
+}
