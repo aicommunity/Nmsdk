@@ -5,11 +5,15 @@
 #include "TimeLearner/NativeFinalizationBoundary.h"
 #include "TimeLearner/NativeFinalizationControlPolicy.h"
 #include "TimeLearner/NativeTrainingBindings.h"
+#include "TimeLearner/NativeLiveFinalization.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerJobSupport.h"
 #include <cstdlib>
 #include <optional>
 #include <type_traits>
+#include <fstream>
+#include <iomanip>
+#include <locale>
 #include <QCryptographicHash>
 
 namespace {
@@ -403,3 +407,148 @@ TEST(NativeFinalizationClockHandoff,ClassicAutomatic){ManagedFinalization<NNeuro
 TEST(NativeFinalizationClockHandoff,ClassicExternal){ManagedFinalization<NNeuronTimeLearner>(1,false,true,false,true);}
 TEST(NativeFinalizationClockHandoff,BranchAutomatic){ManagedFinalization<NNeuronTimeLearnerBranch>(0,false,true,false,true);}
 TEST(NativeFinalizationClockHandoff,BranchExternal){ManagedFinalization<NNeuronTimeLearnerBranch>(1,false,true,false,true);}
+
+namespace {
+enum class LiveScenario { Fixed, Calibrate, Stopped, ControlDrift, ResetQueued, StopQueued };
+template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario scenario)
+{
+    const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
+    if(!directory)GTEST_SKIP()<<"Requires profile/design source; training itself is cold";
+    constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
+    const std::string name=std::string(branch?"Branch":"Classic")+"_live_finalization_"+
+        std::to_string(mode)+(connected?"_connected":"_local")+"_"+std::to_string(int(scenario));
+    const QDir root(QString::fromLocal8Bit(directory));
+    const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
+    const auto oldSolo=job["source_recognition"].toObject()["source_solo"].toObject();
+    const auto implementation=job["implementation_id"].toString().toStdString();
+    auto configuration=DecodeConfiguredNativeTraining(oldSolo["configuration"].toObject());
+    configuration.runId=name;
+    if(scenario==LiveScenario::Stopped)configuration.maximumModelSeconds=1./2000.;
+    NativeThresholdGridSpec grid;grid.confirmation=DecodeNativeThresholdConfirmationSpec(job["specification"].toObject());
+    grid.confirmation.attemptId=name+"/post_tune";
+    for(const auto& value:job["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(value.toObject()));
+    if(scenario==LiveScenario::Calibrate) {
+        for(const auto& value:job["thresholds"].toArray())grid.thresholds.push_back(value.toDouble());
+        grid.maximumCandidates=std::size_t(job["maximum_candidates"].toDouble());
+    }
+    auto spec=DecodeNativePostTuneControls(job["post_tune"].toObject(),grid);
+    spec.mode=NativePostTuneControllerMode::KeepDone;spec.canonicalFloor=spec.canonicalLast=0.;spec.resistanceBounds.clear();
+    spec.finalization=scenario==LiveScenario::Calibrate?NativePostTuneFinalization::Calibrate:NativePostTuneFinalization::KeepFixedThreshold;
+    spec.weightProbeThreshold=2.;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
+    EXPECT_EQ(NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
+        "LiveFinalizationOwner",[&](auto storage,auto environment,auto model,auto owner) {
+        owner->ControllerVersion=2;owner->CalculateMode=mode;owner->StructureBuildMode=1;
+        owner->EnablePostTrainTuning=true;owner->AutoCalibrateFixedLTZThreshold=false;owner->SyncCapacitanceTrim=0;
+        owner->EnablePostTrainMidThreshold=scenario==LiveScenario::Calibrate;
+        owner->PostTrainTipResistanceMode=PostTrainTune::kPostTipKeepDone;owner->PostTrainMidMetric=int(spec.metric);
+        owner->PostTrainSilentThreshold=2.;owner->UseCandidateMidOnNonSeparableTest=false;
+        owner->ConfigureNativeFinalization({DecodeNativeRecognitionSpec(job["source_recognition"].toObject()["conversion_spec"].toObject()),spec,implementation});
+        owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact).toStdString();
+        owner->IsNeedToTrain=false;owner->Build();owner->Init();model->Init();model->Reset();
+        EXPECT_TRUE(owner->NativeModelEditFailure().empty())<<owner->NativeModelEditFailure();
+        if(!owner->NativeModelEditFailure().empty())return 2;
+        EXPECT_FALSE(owner->HasNativeRecognitionState());
+        EXPECT_EQ(owner->NativeTrainingController().State(),NativeTrainingState::Idle);
+        const auto initial=owner->ReadNativeParameters();
+        for(std::size_t i=0;i<initial.size();++i) {
+            EXPECT_EQ(initial[i].length,configuration.model.inputs[i].attachment);
+            EXPECT_EQ(initial[i].synapses,configuration.model.inputs[i].synapses);
+        }
+        UEPtr<ExternalFinalizationFlag> flag;
+        if(connected) {
+            flag=new ExternalFinalizationFlag;flag->SetStorage(storage);flag->SetEnvironment(environment);flag->Default();
+            flag->Name="LiveRequest";flag->Activity=true;flag->SetGlobalTimeStep(2000);
+            UEPtr<UContainer> node=flag;EXPECT_NE(model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;
+            EXPECT_TRUE(owner->IsNeedToTrain.SetPointer(0,&flag->Value));
+        }
+        const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT");
+        if(output)EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
+        std::vector<NativeProbeSample> samples;std::size_t trial=0;
+        owner->SetConfiguredNativeEvidenceSinks({[&](const auto&,const auto&){samples.clear();},
+            [&](const auto& sample){samples.push_back(sample);},[&](const auto& result) {
+                ++trial;if(!output)return;
+                const auto stem=name+"_state_trial_"+std::to_string(trial);
+                NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(stem)+".json",EncodeNativeProbeEvidence(result));
+                const auto path=QDir(QString::fromLocal8Bit(output)).filePath(QString::fromStdString(stem)+".csv");
+                std::ofstream stream(path.toStdString());stream.imbue(std::locale::classic());stream<<std::setprecision(17);
+                stream<<"time,stimulus";for(std::size_t i=0;i<(branch?1:initial.size());++i)stream<<",soma"<<i;stream<<'\n';
+                for(const auto& sample:samples) {
+                    stream<<sample.time<<','<<sample.stimulus;for(double v:sample.potentials)stream<<','<<v;stream<<'\n';
+                }
+                EXPECT_TRUE(stream.good());
+            }});
+        if(!connected)owner->IsNeedToTrain=true;
+        bool queued=false,intervention=false;QJsonObject summary;
+        std::size_t ticks=0;const std::size_t maximum=200000;
+        while(!owner->NativeLiveFinalizationDone() && ticks<maximum) {
+            model->Calculate();environment->IncreaseModelTimeByStep();++ticks;
+            const auto live=owner->NativeLiveFinalizationReport();
+            if(live["status"]==QJsonValue("queued") && !queued) {
+                queued=true;EXPECT_FALSE(owner->HasNativeRecognitionState());
+                EXPECT_TRUE(owner->IsNeedToTrain.GetData());
+                const auto solo=live["boundary"].toObject()["source_solo"].toObject();
+                EXPECT_EQ(solo["kind"],QJsonValue("timelearner_completed_state"));
+                summary=EncodeNativeTrainingState(owner->NativeTrainingController(),solo["model_revision"].toString().toStdString(),owner->ReadNativeParameters());
+                if(output) {
+                    NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_learned_state.json",solo);
+                    NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_learned_summary.json",summary);
+                }
+                if(scenario==LiveScenario::ControlDrift){owner->PostTrainMidMetric=(int(spec.metric)+1)%3;intervention=true;}
+                if(scenario==LiveScenario::ResetQueued){owner->Reset();intervention=true;}
+                if(scenario==LiveScenario::StopQueued){if(connected)flag->Value=false;else owner->IsNeedToTrain=false;intervention=true;}
+            }
+            if(connected && scenario!=LiveScenario::StopQueued)EXPECT_TRUE(flag->Value.GetData());
+        }
+        EXPECT_TRUE(owner->NativeLiveFinalizationDone())<<owner->NativeLiveFinalizationReport()["reason"].toString().toStdString();
+        const auto live=owner->NativeLiveFinalizationReport();QJsonObject final;NativeCalibrationMatrix frozen;
+        if(scenario==LiveScenario::Stopped) {
+            EXPECT_FALSE(queued);EXPECT_FALSE(owner->HasNativeRecognitionState());
+            EXPECT_EQ(live["status"],QJsonValue("stopped_diagnostic"));
+            EXPECT_TRUE(live["boundary"].toObject()["diagnostic_only"].toBool());
+        } else if(scenario==LiveScenario::ControlDrift || scenario==LiveScenario::StopQueued || scenario==LiveScenario::ResetQueued) {
+            EXPECT_TRUE(queued);EXPECT_TRUE(intervention);EXPECT_FALSE(owner->HasNativeRecognitionState());
+            EXPECT_EQ(live["status"],QJsonValue(scenario==LiveScenario::ResetQueued?"interrupted":"failed"));
+        } else {
+            EXPECT_TRUE(queued);EXPECT_EQ(live["status"],QJsonValue("completed"));
+            EXPECT_TRUE(owner->HasNativeRecognitionState());
+            EXPECT_FALSE(live["post_tune_execution"].toObject()["advance_times"].toArray().isEmpty());
+            EXPECT_EQ(owner->IsNeedToTrain.GetData(),connected || mode!=0);
+            final=owner->ExportNativeRecognitionState(implementation);
+            for(auto q:grid.trials) {
+                q.runId=name+"/frozen-replay";q.trialId+="/frozen-replay";
+                owner->QueueNativeRecognitionTrial(q);std::optional<NativeRecognitionTrialObservation> observed;
+                for(std::size_t i=0;i<5000 && !observed;++i) {
+                    model->Calculate();environment->IncreaseModelTimeByStep();observed=owner->TakeNativeRecognitionTrialResult();
+                }
+                EXPECT_TRUE(observed.has_value());if(!observed)return 2;
+                EXPECT_TRUE(observed->complete);EXPECT_TRUE(observed->valid);
+                EXPECT_EQ(owner->ExportNativeRecognitionState(implementation),final);
+                frozen.requests.push_back(q);frozen.observations.push_back(std::move(*observed));
+            }
+        }
+        if(output)NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+".json",
+            {{"kind","native_live_finalization_control"},{"schema_version",1},{"scenario",int(scenario)},
+             {"calculate_mode",mode},{"connected",connected},{"cold_training",true},{"live",live},
+             {"training_summary",summary},{"final_package",final},{"frozen_replay",EncodeNativeCalibrationMatrix(frozen)},
+             {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+        return ::testing::Test::HasFailure()?2:0;
+    },[&](auto storage,auto environment) {
+        // Only registers the original physical images. Neither learned graph,
+        // learned parameters nor the saved training controller is installed.
+        auto source=PrepareNativeLearnedState(oldSolo,storage,environment,implementation);
+    }),0);
+}
+}
+TEST(NativeLiveFinalization,ClassicAutomaticFixed){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::Fixed);}
+TEST(NativeLiveFinalization,BranchAutomaticFixed){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::Fixed);}
+TEST(NativeLiveFinalization,ClassicConnectedCalibrate){LiveFinalization<NNeuronTimeLearner>(1,true,LiveScenario::Calibrate);}
+TEST(NativeLiveFinalization,BranchConnectedCalibrate){LiveFinalization<NNeuronTimeLearnerBranch>(1,true,LiveScenario::Calibrate);}
+TEST(NativeLiveFinalization,ClassicStopped){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::Stopped);}
+TEST(NativeLiveFinalization,BranchStopped){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::Stopped);}
+TEST(NativeLiveFinalization,ClassicQueuedControlDrift){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::ControlDrift);}
+TEST(NativeLiveFinalization,BranchQueuedControlDrift){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::ControlDrift);}
+TEST(NativeLiveFinalization,ClassicQueuedReset){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::ResetQueued);}
+TEST(NativeLiveFinalization,BranchQueuedReset){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::ResetQueued);}
+TEST(NativeLiveFinalization,ClassicQueuedStop){LiveFinalization<NNeuronTimeLearner>(1,true,LiveScenario::StopQueued);}
+TEST(NativeLiveFinalization,BranchQueuedStop){LiveFinalization<NNeuronTimeLearnerBranch>(1,true,LiveScenario::StopQueued);}
