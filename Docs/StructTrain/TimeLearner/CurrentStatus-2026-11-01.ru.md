@@ -37,8 +37,9 @@ PulseLib принят через --no-ff в develop:
 3e371dc90884025baa10a27976a8c1e7770897f3; remote reachability проверена.
 Bin97dd1943a059e67888d56380c5409f3d3997d086 и
 Rdk027f7f8353608f83b55f3857a2f6c39138df4c65 не изменялись.
-Корневой feature записывает child merge. Полный scoped visual gate нового
-Console-пути завершён ниже; root develop merge выполняется после фиксации receipts.
+Корневой develop merge539eafb287feb87e5a39f3ae8d9f6cc4f574a821 опубликован,
+remote reachability проверена. Он записывает согласованные child gitlinks и
+все принятые ниже scoped proofs. Следующая ветка: codex/timelearner-live-finalization.
 Код работающих серверных checkout не обновляется.
 
 ## Временные графики
@@ -165,6 +166,19 @@ Scientific verdict=null; полный этап 8 остаётся открыт.
 блоков (39370752 bytes). Receipt хранит каждый anchor и hash. Активные модели,
 текущий runtime, пользовательские файлы и исторические уникальные логи сохранены.
 Все cleanup receipts включаются в proof нового worker.
+
+Дополнение после clock gate: automatic Git GC дважды остановился на полном
+диске Elder, оставив временные tmp_pack. После проверки отсутствия открытых
+handles удалены только эти два неиспользуемых временных файла (250044416 и
+239501312 bytes); завершённые pack/index сохранены. Automatic gc отключён
+только в owned source clone. Дополнительно удалены 20 распакованных JSON-дублей
+завершённого Console corpus (556261102 bytes), каждый побайтно сверён с
+опубликованным primary archive; все 1452 members архива заранее проверены из
+Git на M40. Для повторного reader этого Elder corpus сначала восстановить
+указанные archive members. Подписанные исходные manifests не изменены.
+[Per-file receipts](../../../Reports/StructTrain/TimeLearner/s02-elder-verified-cache-cleanup-20261101/README.md),
+commitbef73f6655838833d5f145a0be2fe38b58fb7472. После очистки df: 759 MiB.
+Уникальные primary и пользовательские исторические данные сохранены.
 
 ## Следующий обязательный объём
 
