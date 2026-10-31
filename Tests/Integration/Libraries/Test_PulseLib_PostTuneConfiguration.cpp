@@ -38,6 +38,20 @@ TEST(NativePostTuneConfiguration,AllEighteenPublishedProductionJobs)
         ASSERT_EQ(job["sha256"].toString(),NmsdkTools::CanonicalModelDataSha256(unsignedJob));
         const auto grid=Grid(job);
         const auto decoded=DecodeNativePostTuneControls(job["post_tune"].toObject(),grid);
+        const auto controlsObject=job["post_tune"].toObject();
+        EXPECT_EQ(decoded.canonicalFloor,controlsObject["canonical_floor"].toDouble());
+        EXPECT_EQ(decoded.canonicalLast,controlsObject["canonical_last"].toDouble());
+        EXPECT_EQ(decoded.minimumPositiveGap,controlsObject["minimum_positive_gap"].toDouble());
+        EXPECT_EQ(decoded.searchPasses,unsigned(controlsObject["search_passes"].toDouble()));
+        EXPECT_EQ(decoded.maximumCandidates,std::size_t(controlsObject["maximum_candidates"].toDouble()));
+        EXPECT_EQ(decoded.maximumRecordedSamples,std::size_t(controlsObject["maximum_recorded_samples"].toDouble()));
+        ASSERT_EQ(decoded.resistanceBounds.size(),std::size_t(controlsObject["resistance_bounds"].toArray().size()));
+        for(std::size_t i=0;i<decoded.resistanceBounds.size();++i)
+        {
+            const auto bound=controlsObject["resistance_bounds"].toArray()[int(i)].toObject();
+            EXPECT_EQ(decoded.resistanceBounds[i].minimum,bound["minimum"].toDouble());
+            EXPECT_EQ(decoded.resistanceBounds[i].maximum,bound["maximum"].toDouble());
+        }
         EXPECT_EQ(EncodeNativePostTuneControls(decoded),job["post_tune"].toObject());
         EXPECT_EQ(decoded.calibration.thresholds,grid.thresholds);
         EXPECT_EQ(decoded.calibration.maximumCandidates,grid.maximumCandidates);
