@@ -8,6 +8,8 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
 #include "../Support/ConsoleLikeInit.h"
+#include "../../../App/NeuroModelerConsole/TimeLearnerJobSupport.h"
+#include <cstdlib>
 
 #include <string>
 #include <vector>
@@ -35,6 +37,48 @@ protected:
     bool ACalculate() override { hooks.push_back("calculate"); ++samples; return true; }
     bool AAfterCalculate() override { hooks.push_back("after"); return true; }
 };
+
+TEST(RdkLifecycleBoolean, UninitializedContainerSkipsWithoutBooleanError)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
+    const auto exercise=[&](auto storage,auto environment,auto model) {
+        UEPtr<LifecycleTrace> parent(new LifecycleTrace),child(new LifecycleTrace);
+        parent->SetStorage(storage);parent->SetEnvironment(environment);parent->Default();parent->Name="BeforeInitParent";
+        parent->SetGlobalTimeStep(2000);parent->Activity=true;
+        child->SetStorage(storage);child->SetEnvironment(environment);child->Default();child->Name="ReadyChild";
+        child->Activity=true;ASSERT_NE(parent->AddComponent(child),ForbiddenId);child->SetGlobalTimeStep(2000);child->Init();
+        ASSERT_TRUE(child->IsInit());ASSERT_FALSE(parent->IsInit());
+        parent->hooks.clear();child->hooks.clear();
+        const bool ready=parent->IsReady();const auto lifecycle=parent->ObserveLifecycle(),childLifecycle=child->ObserveLifecycle();
+        const double time=environment->GetTime().GetDoubleTime();
+        parent->Activity=false;const bool inactive=parent->Calculate();
+        EXPECT_TRUE(inactive);EXPECT_FALSE(parent->IsInit());EXPECT_EQ(parent->IsReady(),ready);
+        parent->Activity=true;const bool uninitialized=parent->Calculate();
+        EXPECT_TRUE(uninitialized);EXPECT_FALSE(parent->IsInit());EXPECT_EQ(parent->IsReady(),ready);
+        EXPECT_TRUE(lifecycle.IsCurrent());EXPECT_TRUE(childLifecycle.IsCurrent());
+        EXPECT_TRUE(parent->hooks.empty());EXPECT_TRUE(child->hooks.empty());
+        EXPECT_EQ(parent->samples,0);EXPECT_EQ(child->samples,0);
+        EXPECT_DOUBLE_EQ(environment->GetTime().GetDoubleTime(),time);
+        const bool skipped=parent->hooks.empty() && child->hooks.empty() && parent->samples==0 && child->samples==0;
+        parent->Init();ASSERT_TRUE(parent->IsInit());ASSERT_TRUE(child->IsInit());
+        parent->hooks.clear();child->hooks.clear();
+        const bool initialized=parent->Calculate();EXPECT_TRUE(initialized);
+        EXPECT_EQ(parent->samples,1);EXPECT_EQ(child->samples,1);
+        const std::vector<std::string> expected{"before","calculate","after"};
+        EXPECT_EQ(parent->hooks,expected);EXPECT_EQ(child->hooks,expected);
+        if(const auto directory=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            ASSERT_TRUE(QDir().mkpath(QString::fromLocal8Bit(directory)));
+            NmsdkWorker::Write(QString::fromLocal8Bit(directory),"uninitialized-container.json",
+                QJsonObject{{"kind","rdk_uninitialized_calculate_boolean_control"},{"schema_version",1},
+                    {"inactive_return",inactive},{"uninitialized_return",uninitialized},{"uninitialized_children_skipped",skipped},
+                    {"initialized_return",initialized},{"parent_calculate_calls",parent->samples},
+                    {"child_calculate_calls",child->samples},{"global_clock_unchanged",environment->GetTime().GetDoubleTime()==time},
+                    {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+        }
+    };
+    ASSERT_EQ(NmsdkWorker::WithFreshModel(2000,[&](auto storage,auto environment,auto model){exercise(storage,environment,model);return 0;}),0);
+}
 
 TEST(TimeLearnerNativeLifecycle, ConstantSourceResetPublishesRestValueBeforeFirstTick)
 {
