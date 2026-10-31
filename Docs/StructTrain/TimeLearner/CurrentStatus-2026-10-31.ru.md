@@ -14,10 +14,10 @@ Rdk `c903b9bba4a31e604f9740ae6f6ed52a4e7de74a`.
 Рабочая ветка `codex/timelearner-threshold-calibration` содержит native
 candidate/proposal/assessment API, schema-2 наблюдения LTZone.Potential,
 чтение raw observations, calibrated model export/import, независимый Python
-proof audit, frozen scoring/report adapter и CLI анализа/select/confirm.
-Она не объединена в develop: полная normal/ASan матрица и публикация её
-первичных данных ещё не приняты. Наличие API не означает готовность всего
-production calibration/PostTune controller.
+proof audit, frozen scoring/report adapter и CLI анализа/select/confirm/run.
+Она не объединена в develop: полная матрица режимов/частот/физик ещё не принята.
+Есть проверенный isolated native calibration worker; весь Train→Test pipeline
+и PostTune controller этим автоматически не принимаются.
 
 ## Оперативный статус после последней перепроверки
 
@@ -34,10 +34,39 @@ production calibration/PostTune controller.
 | Calibrated state, PulseLib 353882b → ce7e81e | Normal 2/2 прошли на обоих снимках. Усиленный ce7e81e проверил import/export/Reset/frozen probes и отказы при неправильных bindings. Данные и модели опубликованы commit 9746ea4; ASan 2/2 прошёл на обоих снимках, включая усиленный ce7e81e. ASan bundle a4984f1 опубликован. |
 | Frozen scorer/report, root b22c15fec | 9/9 checks прошли на normal ce7e81e (55.393 s); прежние 5/5 и 9/9 не складываются как уникальные tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5, отдельно от нового 16-case gate. ASan 9/9 прошёл на ce7e81e; данные опубликованы в a4984f1. Это тот же scoped набор, а не полная mode/profile matrix. |
 | Полные calibrated reports, root ff432f559 | M40 построил Classic/Branch: 4 предъявления двух паттернов × все сомы, 12 trial/soma pairs, 164 PNG и SVG/PDF. 3 report + 5 plotting checks прошли на normal и ASan данных. Git содержит 12 выбранных PNG и метаданные; полный cache — M40. Четыре графика просмотрены вручную. |
-| Native grid transaction, PulseLib dcc266a → c36e272 | Normal 2/2 прошли на обоих снимках, включая native commit, rollback/cancel и clock/frequency guards. Independent 17/17 (8 transaction + 9 calibrated regressions) прошли; bundle 2dc5825 опубликован. ASan 2/2 native + 17/17 checks прошли (350520ae); ASan reports 27/27 прошли (838c1963). Production CLI/worker и явная связка экспортированной модели с полным CalibrationResult/RunManifest остаются открытыми. |
+| Native grid transaction, PulseLib dcc266a → c36e272 | Normal 2/2 прошли на обоих снимках, включая native commit, rollback/cancel и clock/frequency guards. Independent 17/17 (8 transaction + 9 calibrated regressions) прошли; bundle 2dc5825 опубликован. ASan 2/2 native + 17/17 checks прошли (350520ae); ASan reports 27/27 прошли (838c1963). Связка модели с полным grid через RunManifest и isolated CLI добавлены ниже; общий Train/export/evaluate pipeline остаётся открытым. |
 | Владение калибровочной пробой, PulseLib b167d7a → fad7aed | Baseline: 0/6 воспроизвели три дефекта обоих learner. Исправленный root 0b89622 прошёл normal 8/8 (47.989 s) и ASan 8/8 (310.405 s), включая normal grid flow и удержание старого context token. Reader 322b118 прошёл 4/4 на каждом наборе (19.848 / 17.200 s). Lossless primary bundles опубликованы: normal 56b64713, ASan 5998cc72. Это scoped ownership acceptance; source training search_unresolved, production worker и полная матрица остаются открытыми. |
-| Production calibration worker, PulseLib a5671e9 / root 8aae62d | На Elder завершены шесть настоящих Console jobs Classic/Branch: Calibrated, NonSeparable, BudgetExhausted для каждого owner. Strict job decoder использует общие codecs saved proof. Reader 0d8494b прошёл 6/6 за 100.727 s, включая два реальных owned `calibrate run`. Уточнённый reader 819f0d9 проверяет portable RunManifest и подмену runtime binding; его gate выполняется. ASan Console build/jobs и публикация первичных данных пока не приняты. Полный Train/export/evaluate scheduler и PostTune matrix не готовы. |
+| Production calibration worker, PulseLib a5671e9 | Normal root 8aae62d и ASan root b103835 выполнили по шесть Console jobs Classic/Branch N1/2000 Hz: Calibrated, NonSeparable, BudgetExhausted для каждого owner. Portable reader 819f0d9 прошёл по 6/6 (137.657 / 201.645 s), включая два настоящих owned CLI run на worker. Более ранний reader 0d8494b прошёл перекрывающиеся 6/6 (100.727 / 172.595 s). Controls 29c15a6: 2/2 на worker; provenance/runtime 4244160: 11/11 на worker. Все первичные bundles опубликованы: normal d663fd43 + d879109a, ASan 1d248c88. Общий Train/export/evaluate scheduler и полный PostTune/mode/profile matrix остаются открытыми. |
+| Production calibration visual reports, root 9c2fe4c | M40 проверил 437 Git-bundle members и построил 10 reports, 22 complete matrices, 66 trial/soma pairs. 19/19 checks прошли (16 provenance/runtime/plotting + 3 report). Metadata archive 98940 bytes, выбранные PNG опубликованы в 8636b892; ещё три input/rise tiles добавлены в b787779f без нового рендеринга. Все 11 selected PNG просмотрены в исходном размере; полная visual acceptance false. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
+
+Production worker: [контракт и CLI](NativeCalibrationWorker.ru.md),
+[normal primary](../../../Reports/StructTrain/TimeLearner/s08-calibration-worker-normal-a1/README.md),
+[normal controls/runtime flags](../../../Reports/StructTrain/TimeLearner/s08-calibration-worker-controls-normal-a1/README.md),
+[ASan primary](../../../Reports/StructTrain/TimeLearner/s08-calibration-worker-asan-a1/README.md),
+[все временные графики и selected QA](../../../Reports/StructTrain/TimeLearner/s08-calibration-worker-report-normal-a1/README.md).
+Архивы содержат соответственно 437 / 116 / 543 файла, занимают
+2861700 / 190588 / 3073972 bytes. Raw observations, модели и исходные CSV
+доступны в Git; полный PNG/SVG/PDF cache — на M40.
+
+Normal/ASan подтвердили одинаковые physical revisions Classic
+00d2a426b0686efba5da9ea5d2378d8008e5fb9b19dc1fb347bf9d2c4584ddd1 и Branch
+c07c70fb7841e84a8968e95772c734856150d5eff5244c953f1bcd313e8f9893,
+пороги и все полные fresh-confirmation observations. Это deterministic fixture
+с двумя паттернами, не независимые retrains, не августовский replay и не Exact:
+source Train сохраняет search_unresolved. Schema-1 model proof не содержит
+весь grid; новая полная привязка проверяется через RunManifest/transaction.
+
+Первая normal Console build попытка завершилась из-за отсутствующего include
+публичных accessor declarations GetStorage/GetEnvironment; native тогда не
+исполнялся. После исправления прошли шесть jobs. Normal provenance-a4 прошёл
+11/11, затем metadata export остановился из-за выключенного compile database.
+Экспорт включён после завершения jobs, без пересборки/повтора тестов, с проверкой
+неизменных executable/app-ini hashes. Исходный exit 1 и recovery receipt сохранены.
+Старые runtime manifests не подменены: RelWithDebInfo/linker flags и четыре
+compile-unit rules записаны отдельно. ASan flags подтверждены actual compile
+database; leak detection выключен. Поздний полный plugin census ещё не реализован.
+Текущий PulseLib 0c6d057 добавляет только документацию поверх кода a5671e9.
 
 Ownership bundles: [normal](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-normal-a1/README.md)
 и [ASan](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-asan-a1/README.md).
