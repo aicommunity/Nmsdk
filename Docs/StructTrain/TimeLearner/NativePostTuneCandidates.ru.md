@@ -7,6 +7,18 @@ TL-037. Normal A2 root `149a1af0aea88b523871a4e3f6a72fc0bf217c2b` прошёл
 (31.088 s), без skips. Core — PulseLib `de51a21`, точный SHA записан в closure.
 Это адресная приёмка кандидатов, не полного PostTune-контроллера.
 
+Завершён и ASan: 5/5 native (526.211 s), 4/4 conversion regressions, 8/8 reader
+(26.405 s), no skips; четыре CSV byte-identical normal. Lossless bundle
+`b5f41edd1a4e2f29f7449786a11ada5b4e4baa7a`: 264 files / 349112 bytes, все хэши
+проверены. Production Console прошёл 40 отдельных export/evaluate операций и
+4 independent checks; [данные](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-worker-normal-a1/README.md).
+Все 20 fixed-threshold evaluations молчат и на target, и на foil.
+
+Новые [измерительный controller](NativePostTuneController.ru.md) и его normal gate
+уже существуют отдельно от candidate API. Старые «следующий/open» ниже описывают
+последовательность первого implementation snapshot; текущие незавершённые
+требования — ASan/полная matrix, public dispatch, continuation и новые visuals.
+
 Первая A1 root `8ff51ae2f4648532a931230023001490f509f2be` имела три отказа:
 общий test helper ошибочно требовал Branch N1 factor=2 и при identity conversion
 Classic/Branch N0, Classic N1. Проверка ограничена фактическим scaled-режимом.
