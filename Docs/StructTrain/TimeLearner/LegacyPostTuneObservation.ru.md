@@ -54,3 +54,22 @@ Legacy same-matrix/sample-0 политика остаётся историчес
 production native evaluation использует строгие label/ID/hash. Новый V2
 worker по-прежнему не включает legacy PostTune автоматически. Полный
 transactional PostTune controller, C-trim и обязательная matrix остаются открытыми.
+
+## Воспроизведено на normal и ASan
+
+Оба baseline jobs завершены: восемь cases, шесть ожидаемых failures
+(PreviousResult, PreviousSamples, MissingFoil × Classic/Branch), две NaN
+проверки прошли. Native return code 1 сохранён; supervisor terminal 0 означает
+лишь успешную проверку ожидаемого отказа, а не восемь прошедших тестов.
+При MissingFoil оба learner ошибочно дали Result=Success, threshold=0.25
+и AllSamplesValid=true. На Elder 1.350 s, на M40 ASan 7.330 s; leak detection
+отключён. Это causal regression текущего legacy пути, не объяснение августа.
+
+PulseLib 39810a760103d2e5d5a5b9e6ae6575290522b20c начинает новую inference
+попытку с None/Complete=false, чистыми validity и margin diagnostics; для
+объявленной сохранённой матрицы создаются новые sample states нужного размера.
+Скалярные допуски, модели, входной порядок и waveform scheduler не менялись.
+До серверной проверки это исправление в коде. Дополнительно поставлены четыре
+реальных free-run waveform cases: Classic/Branch, 2000/20000 Гц. Они сохраняют
+реальные soma/stimulus CSV, выбранную метрику, sample index и финальные состояния;
+не требуют научного Success и проверяют сохранность цели и индивидуальных L/Ns/R.
