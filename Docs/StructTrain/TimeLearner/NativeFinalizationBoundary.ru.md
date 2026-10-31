@@ -109,8 +109,8 @@ cache transition: результаты и причина сохранены. П�
 включённому artifact. Первая упаковка отклонена именно из-за неполной closure;
 полный набор берётся из ранее опубликованных Git primaries с проверкой SHA.
 
-Временные отчёты новых replay records пока не подготовлены. Configured dispatcher,
-автоматическое подключение к hooks и снятие guards optional modes остаются открыты.
+Configured dispatcher, автоматическое подключение к hooks и снятие guards optional
+modes остаются открыты. Временные отчёты replay описаны ниже.
 
 Компактные первичные доказательства:
 [normal](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-normal-a1/README.md)
@@ -121,3 +121,32 @@ native attempts, отклонённую первую упаковку, 14 нез
 После --no-ff merge проверены все inventory/archive/member SHA. Reader source:
 e50af3eef91b2da932b086b8d9cab2f81fac1969. Это проверка целостности и условий
 capture/replay, не полная аттестация mapped-file lifetime или обучения fixtures.
+
+## Временные графики replay
+
+[Visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-visual-asan-a1/README.md)
+содержит метаданные четырёх отчётов: Classic/Branch × plain/connected, оба исходных
+target/foil patterns и все каналы сомы — 12 полных trial-soma pairs. Все native
+samples сохранены, входные импульсы наложены на SumPotential. PNG 1920×960,
+overview и detail; detail не менее 8 pixels/native tick. Источник — реальные a4
+наблюдения, никаких новых численных прогонов для отчётов не выполнялось.
+
+Renderer root 52bd7ff2f43ec828714df8758bc468c0e97fff0b. Более поздний root
+a32c3590a4689dbc52a9009d7d2f0b6a23e79ec2 проверяет backend до создания output;
+три серверных report tests прошли за 1.031 s, без skips. Проверены точные waveform
+samples, полнота patterns/channels, overlay, PNG/SVG/PDF и масштабы. Неполная
+проба и недоступный backend не создают output tree.
+
+Полный cache — M40 Data `/media/user/Data/TimeLearnerRefactor/cache/s08-native-finalization-boundary-asan-a1`:
+576 files / 51389834 bytes. Git: 38 metadata members / 30840 bytes и четыре PNG.
+После --no-ff merge проверены все inventory/archive/member/PNG hashes и 12 bindings
+к трём исходным файлам каждого отчёта: replay, capture comparison, fixture job.
+
+Четыре выбранных target/first-soma overview/detail Classic и Branch просмотрены
+в исходном 1920×960: подписи, шкалы и обе кривые читаемы, импульсы различимы.
+Full cache, foil/остальные somas/connected figures и SVG/PDF вручную не приняты.
+SumPotential соединяет точки линиями, вход изображён ступенчато; видимый sub-tick
+сдвиг начала не доказывает причинного опережения. Единицы модели SI-unverified.
+Эти imported-model controls не доказывают успешного обучения, independent Test
+или завершения configured finalization. Для queued/stopped controls нет
+выдуманных waveform-проб. Итогового scientific verdict нет.

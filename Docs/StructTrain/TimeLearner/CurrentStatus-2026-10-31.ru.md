@@ -10,7 +10,7 @@ PulseLib f8929f9: normal 24/24 (20.492 s), ASan 24/24 (128.163 s), без skips.
 external-stop diagnostic и полный объявленный двухпаттерновый recognition replay.
 Сравнение сохраняет весь XML, разрешая только измеренный переход пустого feedback
 cache в нулевой 1×1 двух NPMembraneBio images. Configured phase dispatch ещё не
-реализован, optional guards сохранены; temporal reports новых replay ещё открыты.
+реализован, optional guards сохранены.
 См. [NativeFinalizationBoundary](NativeFinalizationBoundary.ru.md).
 Сохранены и проверены [normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-normal-a1/README.md)
 и [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-asan-a1/README.md):
@@ -18,6 +18,12 @@ cache в нулевой 1×1 двух NPMembraneBio images. Configured phase dis
 84 artifact entries в каждом. На каждом worker независимый reader выполнил
 14 consistency checks и отклонил 16 corrupt controls. После --no-ff merges все
 inventory/archive/member hashes проверены; scientific verdict отсутствует.
+[Временные отчёты replay](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-visual-asan-a1/README.md):
+4 отчёта, 12 полных trial-soma pairs, все target/foil и soma channels; 3/3 report
+tests без skips. Полный cache M40 Data — 576 files / 51389834 bytes; Git —
+38 metadata members / 30840 bytes и 4 PNG. Hashes и source bindings проверены.
+Выбранные target/first-soma overview/detail Classic/Branch просмотрены при 1920×960;
+остальные изображения имеют автоматические проверки, без полной visual acceptance.
 
 Предыдущий подэтап: отдельная физика weight probe threshold и свежие реакции
 конечной модели. Source root 800ca40e / PulseLib 09f72c7: normal 20/20 native
