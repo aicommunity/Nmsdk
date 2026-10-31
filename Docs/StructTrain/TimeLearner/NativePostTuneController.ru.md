@@ -178,3 +178,17 @@ learner, Python runner и продолжение checkpoint остаются о�
 `completed/search_unresolved` — допустимый отрицательный исход выполнения,
 а не успешная классификация. При tick limit применяется native Cancel/rollback;
 завершение процесса без terminal artifacts само по себе не подтверждает rollback.
+
+Сборка Console root `ffd5b15a264f6d66e131230ddd301ef8ae754ea3` на Elder завершилась
+успешно в отдельном `runtime-s08-native-posttune-console-normal-a1`; новая операция
+присутствует в `--help`, runtime manifest сохранён. Это ещё не проверка выполнения jobs.
+Python-команда `posttune <job> --source-solo <state> --runtime-manifest <manifest>
+--wall-seconds <limit> --output <new-run>` использует общий owned-process runner
+и portable auditor calibration/PostTune, без второго цикла управления процессами.
+Схемы jobs/executions/run-manifest различаются явно; default calibration API
+сохранён. Preflight связывает physics, поиск весов, threshold design и модельный
+budget с condition digest; native effective capability остаётся проверкой Console.
+Новый `analyze --format posttune-run` повторно проверяет portable artifact closure,
+declared PostTune parameters, родительский search, полный child calibration и
+действительную конечную модель. Добавлены четыре проверки корпуса из 18 настоящих
+Console runs; их серверная приёмка ещё не выполнена.
