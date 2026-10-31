@@ -1,4 +1,5 @@
 #include "TimeLearnerCalibrationJob.h"
+#include "TimeLearnerJobSupport.h"
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeThresholdCalibrationTransaction.h"
@@ -15,31 +16,7 @@ namespace {
 using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
-void Require(bool value,const char* why){if(!value)throw std::invalid_argument(why);}
-QJsonObject Object(const QJsonValue& value)
-{Require(value.isObject(),"job_object_required");return value.toObject();}
-QJsonArray Array(const QJsonValue& value)
-{Require(value.isArray(),"job_array_required");return value.toArray();}
-std::string Text(const QJsonValue& value)
-{Require(value.isString() && !value.toString().trimmed().isEmpty(),"job_text_required");return value.toString().toStdString();}
-double Number(const QJsonValue& value)
-{Require(value.isDouble() && std::isfinite(value.toDouble()),"job_finite_number_required");return value.toDouble();}
-std::size_t Count(const QJsonValue& value,std::size_t minimum,std::size_t maximum)
-{
-    const double n=Number(value);
-    Require(n>=double(minimum) && n<=double(maximum) && std::floor(n)==n,"job_count_out_of_range");
-    return std::size_t(n);
-}
-QJsonObject Signed(QJsonObject value)
-{value.remove("sha256");value["sha256"]=NmsdkTools::CanonicalModelDataSha256(value);return value;}
-QJsonObject Write(const QString& directory,const char* name,const QJsonObject& value)
-{
-    const auto bytes=QJsonDocument(value).toJson();QFile file(QDir(directory).filePath(name));
-    Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"job_artifact_exists_or_unwritable");
-    Require(file.write(bytes)==bytes.size() && file.flush(),"job_artifact_write_failed");file.close();
-    return {{"path",name},{"bytes",double(bytes.size())},
-        {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}};
-}
+using namespace NmsdkWorker;
 struct Job {
     QJsonObject document,source;
     NativeThresholdGridSpec grid;
@@ -70,10 +47,6 @@ Job Read(const QString& path)
     for(const auto& value:Array(d["trials"]))j.grid.trials.push_back(DecodeNativeCalibrationRequest(Object(value)));
     return j;
 }
-struct ModelScope {
-    UEPtr<UEnvironment> environment;
-    ~ModelScope(){if(auto net=dynamic_pointer_cast<UNet>(environment->GetModel()))net->BreakLinks();environment->DestroyModel();}
-};
 template<class Owner> int Execute(const Job& job,const QString& output)
 {
     auto storage=RDK::GetStorage();auto environment=RDK::GetEnvironment();
