@@ -2,7 +2,22 @@
 from pathlib import Path
 import math
 
-from .native_evidence import require
+from .native_evidence import EvidenceError, require
+
+
+def plotting_runtime():
+    """Check the actual headless backend before a report creates any outputs."""
+    import platform
+    import sys
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot  # load native backend dependencies now
+        import PIL
+    except (ImportError, OSError, RuntimeError) as error:
+        raise EvidenceError("plotting_runtime_unavailable:"+str(error)) from error
+    return {"python": platform.python_version(), "python_executable": sys.executable,
+            "matplotlib": matplotlib.__version__, "pillow": PIL.__version__}
 
 
 def padded_limits(values):

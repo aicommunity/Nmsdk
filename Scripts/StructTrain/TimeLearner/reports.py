@@ -8,11 +8,10 @@ import gzip
 import hashlib
 import html
 import json
-import platform
 
 from .native_evidence import load, require
 from .recognition_metrics import load_evaluation, score_recognition_evaluation, score_threshold_candidate
-from .plotting import render_soma, render_series
+from .plotting import render_soma, render_series, plotting_runtime
 
 
 def _write(path, value):
@@ -20,6 +19,7 @@ def _write(path, value):
 
 
 def render_evaluation(source: Path, model: Path, output: Path, *, calibration_probe=False):
+    runtime = plotting_runtime()
     spec, observations = load_evaluation(source)
     package = load(model)
     scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
@@ -85,7 +85,6 @@ def render_evaluation(source: Path, model: Path, output: Path, *, calibration_pr
             view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
         series.append({"descriptor": descriptor, **rendered})
     _write(output/"series.json", series)
-    import matplotlib
     manifest = {"kind": "timelearner_visual_report", "schema_version": 1,
                 "purpose": "threshold_candidate_diagnostic" if calibration_probe else "recognition_evaluation_diagnostic",
                 "calibration_claim": False,
@@ -94,7 +93,7 @@ def render_evaluation(source: Path, model: Path, output: Path, *, calibration_pr
                 "status": "diagnostic", "observation_validity": analysis["validity"],
                 "expected_trial_soma_pairs": len(spec["trials"])*count, "figures": figures,
                 "series": series,
-                "runtime": {"python": platform.python_version(), "matplotlib": matplotlib.__version__},
+                "runtime": runtime,
                 "limitations": ["Soma SI units not recorded in native observations",
 
                                 "visual acceptance pending"],
