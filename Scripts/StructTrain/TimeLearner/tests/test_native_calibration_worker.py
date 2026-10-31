@@ -97,7 +97,8 @@ class NativeCalibrationWorkerTest(unittest.TestCase):
 
     def test_invalid_job_is_rejected_before_output_or_runtime_resolution(self):
         _, _, job, source, _ = self.cases[0]
-        for key, value in (("frequency_hz", True), ("maximum_model_ticks", 0), ("owner_class", "NNeuronTimeLearnerBranch")):
+        for key, value in (("frequency_hz", True), ("maximum_model_ticks", 0), ("owner_class", "NNeuronTimeLearnerBranch"),
+                           ("source_recognition", []), ("trials", {}), ("specification", [])):
             with tempfile.TemporaryDirectory() as directory:
                 root = Path(directory);bad = copy.deepcopy(job);bad[key] = value;resign(bad)
                 save(root/"job.json", bad)
