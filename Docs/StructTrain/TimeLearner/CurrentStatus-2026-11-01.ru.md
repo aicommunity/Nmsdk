@@ -1,0 +1,111 @@
+# Состояние рефакторинга на 01.11.2026
+
+Цель 0–12 активна. Полностью принят только этап 0; остальные этапы имеют
+незакрытые требования. Полный остаток сохранён в
+[сводке 31.10](CurrentStatus-2026-10-31.ru.md#остаток-полного-плана) и
+[утверждённом плане](RefactoringPlan.ru.md). Эта запись добавляет проверенные
+подэтапы, не заменяя исходную постановку или обязательную матрицу.
+
+## Принято адресно: native owner PostTune
+
+Код PulseLib ecdbd9944f46a45efafba7d1547b2fbd3e75d084; fixtures root
+4820405e5a6cba98007b0e6816f5a243d307e05a. Обе топологии, N1/2000Hz,
+CalculateMode0/1, local/connected и два внешних Reset. Новая фаза продвигается
+в BeforeCalculate до штатного расчёта детей, без внешнего Advance или вложенного
+Calculate. Существующие storage/import/Build/Init/Reset пути сохранены; внутренний
+lifecycle отделён от внешнего прерывания. Административное завершение не означает
+Calibrated, Exact или успешное распознавание.
+
+| Проверка | Normal | ASan |
+|---|---|---|
+| Native integration gate | 75/75, 213.461 s | 75/75, 1445.556 s |
+| Independent reader | 2/2, 110.079 s с повторным audit | 2/2, 88.008 s с повторным audit |
+| Actual records / corrupt controls | 10 / 100 | 10 / 100 |
+| Archive members / compressed bytes | 836 / 4095348 | 569 / 2408564 |
+
+No skips; ASan leak checking выключен. Все outer/member hashes проверены,
+каждый пакет включает два исходных portable runs / 84 artifacts. Неудачные и
+отменённые попытки сохранены с отдельными причинами; EXIT-trap zero отменённого
+supervisor не используется как свидетельство успешного native выполнения.
+
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-normal-a1/README.md)
+commit864e7f1dd142173e0181e478f1de4be3be5e09eb;
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-asan-a1/README.md)
+commit eca0b84e2ff025b1d65f0672ef1b214502e3c139.
+
+PulseLib принят через --no-ff в develop:
+3e371dc90884025baa10a27976a8c1e7770897f3; remote reachability проверена.
+Bin97dd1943a059e67888d56380c5409f3d3997d086 и
+Rdk027f7f8353608f83b55f3857a2f6c39138df4c65 не изменялись.
+Корневой feature записывает child merge. Root develop merge ожидает отдельной
+приёмки нового Console-пути; код работающих серверных checkout не обновляется.
+
+## Временные графики
+
+[Visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-visual-asan-a1/README.md):
+10 отчётов, восемь completed и два interrupted; 48 полных trial-soma pairs.
+2/2 автоматических checks, render+checks 213.731 s; 305 source files неизменны.
+Все полные матрицы содержат каждый объявленный target/foil, все каналы сомы,
+реальные входы и исходные отсчёты. Полный cache: 2324 files / 197348346 bytes,
+M40 /media/user/Data/TimeLearnerRefactor/cache/s08-native-owned-posttune-asan-a2.
+Git: 111 metadata members / 90036 compressed bytes и восемь PNG / 1139977 bytes.
+Все metadata/PNG hashes и связь десяти source records с ASan primary проверены.
+
+Восемь выбранных first-soma target/foil overview/first zoom просмотрены в
+1920×960: наложение входов читается, подписи не обрезаны, легенды не перекрывают
+кривые. Принята только читаемость выбранных изображений; полный cache вручную
+не принят. Потенциал к концу части окон ещё не вернулся к rest-state. Данные
+после окна, continuous stream и большая ITI этим не подтверждены. Это fixed
+selection diagnostics, без научного PASS.
+[Точная область просмотра](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-visual-asan-a1/SELECTED_VISUAL_REVIEW.ru.md).
+
+## Production Console: ещё проверяется
+
+Root08ae95430014a6a6c8b92ebc040181372fd0f912, PulseLib8a71a855d3fa6ecf64ad6a64a69d1b37e918d449
+(тот же native код, дополнительные документы). Console PostTune теперь использует
+BeginNativePostTunePhase и обычные тики модели; standalone calibration сохраняет
+прежний driver. Execution schema2 связывает четвёртый phase-execution.json с
+подписанным execution, всеми model ticks, частотой и begin/end clock. Schema1
+поддерживается отдельно, без выдуманного phase receipt.
+
+Normal job: s08-native-owned-posttune-worker-normal-a1, supervisor PID2096495.
+ASan job: s08-native-owned-posttune-worker-asan-a1, supervisor PID4103970.
+Оба задания поставлены на 20 PostTune controls (18 старых режимов/метрик/лимитов
+и два schema3 fixed/probe cases), шесть standalone calibration regressions,
+4+3+12 checks production/CLI/negative controls. Новый reader также повторяет
+два прежних owner evidence tests до дальнейшего анализа. На момент записи
+normal уже выполнил 26 операций и проходит проверки; ASan ещё выполняет corpus.
+Это не объявлено принятой Console-реализацией до терминальных receipts,
+публикации полной Git closure и проверки её hashes.
+
+Новый schema1 compatibility reader на M40: 4/4, 120.024 s, 18 прежних portable
+runs из подтверждённого архива normal-a2. Исторические primary не изменялись.
+Эти повторы не являются новыми независимыми обучениями или доказательством
+улучшения классификации.
+
+## Место и данные
+
+Оригинальный normal owner-proof получен через Git на M40 Data и проверен по
+всем 836 members. На Elder удалены только его подтверждённые raw-копии:
+440 files / 487636124 bytes из двух неудачных attempts и, после повторного reader,
+224 files / 318706334 bytes из завершённого attempt. Все логические данные
+доступны в опубликованном lossless archive; уникальные primary не удалены.
+
+Дополнительно удалены 1262 ELF_REL .o файла трёх неиспользуемых owned build-кэшей,
+275639032 bytes; 17 CMakeCache/executable файлов сохранили hashes. Для 510
+идентичных immutable source snapshots завершённых runs применены hardlinks:
+пути, bytes и signed run manifests неизменны, освобождены их отдельные копии
+блоков (39370752 bytes). Receipt хранит каждый anchor и hash. Активные модели,
+текущий runtime, пользовательские файлы и исторические уникальные логи сохранены.
+Все cleanup receipts включаются в proof нового worker.
+
+## Следующий обязательный объём
+
+Завершить Console acceptance и Git publication; затем связать живой Train с
+capture/conversion/reference/PostTune/calibration/frozen Test. Нынешние replay
+API не заменяют этот handoff. Остаются полная physics/mode/frequency/dimension
+матрица, UnInit/Cancel/multirate negative controls, N0/N1/C-trim алгоритмические
+проверки, миграция всех tools, scheduler/recovery/publisher integration,
+исторический replay/cold retrain, permutations/ITI и полная документация.
+Серия D не возобновляется. Августовские визуальные 4/8–6/8 сохраняют исходную
+доказательность. Научные 8/8 не являются условием завершения рефакторинга.
