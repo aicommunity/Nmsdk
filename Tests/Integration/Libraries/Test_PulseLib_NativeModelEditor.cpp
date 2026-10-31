@@ -1158,7 +1158,7 @@ TEST(NativeLearnedState,FreshProcessImport)
 }
 
 
-enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled,ThresholdCandidates,ThresholdPotential,CalibratedThreshold,ThresholdGrid };
+enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled,ThresholdCandidates,ThresholdPotential,CalibratedThreshold,ThresholdGrid,PostTuneCandidates };
 
 template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJsonObject& package,
     bool recordThresholdPotential=false,std::vector<NativeRecognitionTrialRequest>* declaredRequests=nullptr,
@@ -1787,6 +1787,66 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
     }
 }
 
+template<class Learner> void PostTuneCandidateChecks(EditingRig<Learner>& rig,const QJsonObject& source,NativeRecognitionSpec& selected)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
+    if(rig.branch && source["configuration"].toObject()["model"].toObject()["normalization"]==QJsonValue("N1"))
+    {
+        selected.mode=RecognitionConversionMode::HistoricalBranchN1;
+        for(std::size_t i=0;i<rig.inputCount;++i)selected.resistanceBounds.push_back({1.e6,1.e12});
+    }
+    const auto base=ConvertNativeSoloToRecognition(source,selected,core.storage,core.environment,implementation);
+    const auto parameters=base["recognition_inputs"].toArray();ASSERT_FALSE(parameters.isEmpty());
+    Artifact(rig.name+"_post_tune_base.json",QJsonDocument(base).toJson());
+    const auto original=rig.Revision();const auto clock=rig.environment->GetTime().GetTime();
+    for(auto mode:{NativePostTuneMode::Off,NativePostTuneMode::KeepDone,NativePostTuneMode::CanonRmin,
+                  NativePostTuneMode::FlatLastR,NativePostTuneMode::SearchSyntheticCandidate})
+    {
+        NativePostTuneSpec post;post.mode=mode;post.sourceModelRevision=base["model_revision"].toString().toStdString();
+        const bool edit=mode!=NativePostTuneMode::Off && mode!=NativePostTuneMode::KeepDone;
+        if(mode==NativePostTuneMode::CanonRmin)post.canonicalFloor=parameters[0].toObject()["resistance"].toDouble()*.8;
+        if(mode==NativePostTuneMode::CanonRmin || mode==NativePostTuneMode::FlatLastR)
+            post.canonicalLast=parameters.last().toObject()["resistance"].toDouble()*1.2;
+        if(edit)for(const auto& v:parameters)
+        {
+            const double r=v.toObject()["resistance"].toDouble();
+            if(mode==NativePostTuneMode::SearchSyntheticCandidate)
+            {post.requestedResistances.push_back(r*.8);post.resistanceBounds.push_back({r*1.1,r*1.1});}
+            else post.resistanceBounds.push_back({1.e6,1.e12});
+        }
+        auto spec=selected;spec.postTune=post;
+        const auto encoded=EncodeNativeRecognitionSpec(spec);
+        EXPECT_EQ(EncodeNativeRecognitionSpec(DecodeNativeRecognitionSpec(encoded)),encoded);
+        const auto candidate=ConvertNativeSoloToRecognition(source,spec,core.storage,core.environment,implementation);
+        EXPECT_EQ(candidate,ConvertNativeSoloToRecognition(source,spec,core.storage,core.environment,implementation));
+        auto prepared=PrepareNativeRecognitionState(candidate,core.storage,core.environment,implementation);
+        ASSERT_TRUE(prepared);EXPECT_FALSE(prepared->calibrationConfirmed);
+        EXPECT_EQ(QString::fromStdString(prepared->modelRevision),candidate["model_revision"].toString());
+        EXPECT_TRUE(candidate["recognition_certificate"].isNull());
+        if(!edit)EXPECT_EQ(candidate["model_revision"],base["model_revision"]);
+        else EXPECT_NE(candidate["model_revision"],base["model_revision"]);
+        const auto decisions=candidate["conversion_record"].toObject()["post_tune"].toObject()["decisions"].toArray();
+        ASSERT_EQ(decisions.size(),parameters.size());
+        if(mode==NativePostTuneMode::SearchSyntheticCandidate)for(const auto& value:decisions)EXPECT_TRUE(value.toObject()["clipped"].toBool());
+        Artifact(rig.name+"_post_tune_candidate_"+std::to_string(int(mode))+".json",QJsonDocument(candidate).toJson());
+        auto invalid=spec;invalid.postTune->sourceModelRevision=std::string(64,'0');
+        EXPECT_THROW(ConvertNativeSoloToRecognition(source,invalid,core.storage,core.environment,implementation),std::invalid_argument);
+        auto forged=candidate;auto record=forged["conversion_record"].toObject();auto postRecord=record["post_tune"].toObject();
+        postRecord["selection_status"]="selected";record["post_tune"]=postRecord;forged["conversion_record"]=record;
+        forged.remove("sha256");forged["sha256"]=NmsdkTools::CanonicalModelDataSha256(forged);
+        EXPECT_THROW(PrepareNativeRecognitionState(forged,core.storage,core.environment,implementation),std::invalid_argument);
+        // Each candidate derives from the same base; never chain the selected edit.
+        selected.postTune.reset();
+    }
+    NativePostTuneSpec post;post.mode=NativePostTuneMode::CanonRmin;
+    post.sourceModelRevision=base["model_revision"].toString().toStdString();
+    post.canonicalFloor=parameters[0].toObject()["resistance"].toDouble()*.8;
+    post.canonicalLast=parameters.last().toObject()["resistance"].toDouble()*1.2;
+    for(int i=0;i<parameters.size();++i)post.resistanceBounds.push_back({1.e6,1.e12});
+    selected.postTune=post;
+    EXPECT_EQ(rig.Revision(),original);EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
+}
+
 template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
 {
     if(scenario==RecognitionCase::ThresholdCandidates){ThresholdCandidateChecks(rig,source);return;}
@@ -1799,7 +1859,8 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
     const auto original=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
     const auto sourceCopy=source;const auto clock=rig.environment->GetTime().GetTime();NativeRecognitionSpec spec;
-    if(scenario!=RecognitionCase::Identity)
+    if(scenario==RecognitionCase::PostTuneCandidates)PostTuneCandidateChecks(rig,source,spec);
+    else if(scenario!=RecognitionCase::Identity)
     {
         spec.mode=RecognitionConversionMode::HistoricalBranchN1;
         for(std::size_t i=0;i<parameters.size();++i)
@@ -2481,6 +2542,25 @@ TEST(NativeRecognitionOwner,ClassicAutomatic){LearnedBoundary<NNeuronTimeLearner
 TEST(NativeRecognitionOwner,BranchAutomatic){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity,true);}
 
 TEST(NativeRecognitionState,ClassicN0Identity){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::Identity);}
+TEST(NativePostTuneCandidates,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
+TEST(NativePostTuneCandidates,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
+TEST(NativePostTuneCandidates,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
+TEST(NativePostTuneCandidates,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
+TEST(NativePostTuneCandidates,StrictSpecification)
+{
+    NativeRecognitionSpec spec;NativePostTuneSpec post;post.sourceModelRevision=std::string(64,'a');spec.postTune=post;
+    const auto encoded=EncodeNativeRecognitionSpec(spec);
+    EXPECT_EQ(encoded["schema_version"],QJsonValue(2));
+    EXPECT_EQ(EncodeNativeRecognitionSpec(DecodeNativeRecognitionSpec(encoded)),encoded);
+    auto invalid=encoded;invalid["unused"]=0;EXPECT_THROW(DecodeNativeRecognitionSpec(invalid),std::invalid_argument);
+    invalid=encoded;auto p=invalid["post_tune"].toObject();p["mode"]="search_synthetic";invalid["post_tune"]=p;
+    EXPECT_THROW(DecodeNativeRecognitionSpec(invalid),std::invalid_argument);
+    spec.postTune->canonicalFloor=1.;EXPECT_THROW(EncodeNativeRecognitionSpec(spec),std::invalid_argument);
+    spec.postTune->canonicalFloor=0.;spec.postTune->requestedResistances={1.};
+    EXPECT_THROW(EncodeNativeRecognitionSpec(spec),std::invalid_argument);
+    spec.postTune->requestedResistances.clear();spec.postTune->sourceModelRevision=std::string(64,'A');
+    EXPECT_THROW(EncodeNativeRecognitionSpec(spec),std::invalid_argument);
+}
 TEST(NativeRecognitionState,BranchN0Identity){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::Identity);}
 TEST(NativeRecognitionState,ClassicN1Identity){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::Identity);}
 TEST(NativeRecognitionState,BranchN1Identity){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::Identity);}

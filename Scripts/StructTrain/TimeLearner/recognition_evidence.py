@@ -33,6 +33,55 @@ def _physical(node: dict, name: str) -> float:
     return number(struct.unpack(">d", bits)[0])
 
 
+def _audit_post_tune(spec: dict, record: dict, expected_model: dict, parameters: list, declaration: dict) -> list:
+    require(set(spec) == {"mode", "source_model_revision", "canonical_floor", "canonical_last",
+                          "requested_resistances", "resistance_bounds"}, "unknown_post_tune_spec")
+    mode = spec["mode"]
+    require(mode in {"off", "keep_done", "canon_rmin", "flat_last_r", "search_synthetic_candidate"}, "unknown_post_tune_mode")
+    revision = canonical_model_sha256(expected_model)
+    require(spec["source_model_revision"] == revision, "post_tune_source_revision_mismatch")
+    floor, last = number(spec["canonical_floor"]), number(spec["canonical_last"])
+    require((floor > 0 if mode == "canon_rmin" else floor == 0) and
+            (last > 0 if mode in {"canon_rmin", "flat_last_r"} else last == 0), "invalid_post_tune_canonical_values")
+    n = len(parameters)
+    requested, bounds = spec["requested_resistances"], spec["resistance_bounds"]
+    require(isinstance(requested, list) and isinstance(bounds, list), "invalid_post_tune_vectors")
+    require(len(requested) == (n if mode == "search_synthetic_candidate" else 0), "invalid_post_tune_request_dimension")
+    edit = mode not in {"off", "keep_done"}
+    require(len(bounds) == (n if edit else 0), "invalid_post_tune_bounds_dimension")
+    nodes = {node["path"]: node for node in expected_model["nodes"]}
+    banks, decisions, result = {}, [], []
+    for i, p in enumerate(parameters):
+        previous = number(p["resistance"])
+        value = (last if i + 1 == n else floor) if mode == "canon_rmin" else (
+            last if mode == "flat_last_r" else number(requested[i]) if mode == "search_synthetic_candidate" else previous)
+        require(value > 0, "invalid_post_tune_request")
+        root = f"$.Dendrite{1 if declaration['branch'] else i + 1}_{count(p['length'])}"
+        low = high = previous
+        if edit:
+            require(set(bounds[i]) == {"minimum", "maximum"}, "unknown_post_tune_bounds")
+            declared_low, declared_high = number(bounds[i]["minimum"]), number(bounds[i]["maximum"])
+            ratio, native_floor = number(declaration["maximum_resistance_ratio"]), number(declaration["configured_minimum_resistance"])
+            rm = _physical(nodes[root + ".ExcChannel"], "RestingResistance")
+            require(0 < declared_low <= declared_high and ratio >= 1 and native_floor >= 0 and rm > 0, "invalid_post_tune_bounds")
+            low, high = max(declared_low, rm / ratio, native_floor), min(declared_high, rm * ratio)
+            require(0 < low <= high, "empty_post_tune_bounds")
+        applied = max(low, min(high, value))
+        decisions.append({"input_index": i, "previous_resistance": previous, "requested_resistance": value,
+                          "minimum_resistance": low, "maximum_resistance": high, "applied_resistance": applied, "clipped": applied != value})
+        result.append({**p, "resistance": applied})
+        for k in range(1, count(p["synapses"]) + 1):
+            path = root + ".ExcSynapse" + str(k)
+            require(path not in banks or banks[path] == applied, "shared_post_tune_bank_conflict")
+            banks[path] = applied
+            nodes[path]["parameters"]["Resistance"]["data"]["value"] = struct.pack(">d", applied).hex()
+    expected = {"mode": mode, "source_model_revision": revision, "decisions": decisions,
+                "selection_status": "candidate_unmeasured", "calibration_status": "unconfirmed"}
+    require(record == expected and all(type(d["clipped"]) is bool and type(d["input_index"]) is int
+                                     for d in record["decisions"]), "post_tune_record_not_derived")
+    return result
+
+
 def _audit_derivation(package: dict, source_case: tuple) -> dict:
     require(set(package) == {"kind", "schema_version", "dynamic_checkpoint", "state_kind", "implementation_id",
                             "source_solo", "conversion_spec", "conversion_record", "recognition_inputs", "model_revision",
@@ -60,8 +109,10 @@ def _audit_derivation(package: dict, source_case: tuple) -> dict:
             "recognition_xml_digest_mismatch")
     require(archive["class_definitions"] == source["neuron"]["class_definitions"], "recognition_images_changed")
     conversion = package["conversion_spec"]
-    require(set(conversion) == {"schema_version", "mode", "resistance_bounds"} and
-            type(conversion["schema_version"]) is int and conversion["schema_version"] == 1, "unknown_conversion_spec")
+    require(type(conversion.get("schema_version")) is int and conversion["schema_version"] in {1, 2}, "unknown_conversion_spec")
+    post = conversion["schema_version"] == 2
+    require(set(conversion) == ({"schema_version", "mode", "resistance_bounds", "post_tune"} if post else
+                               {"schema_version", "mode", "resistance_bounds"}), "unknown_conversion_spec")
     mode = conversion["mode"]
     require(mode in {"identity", "historical_branch_n1_v1"}, "unknown_conversion_mode")
     params = source["trained_inputs"]
@@ -126,7 +177,6 @@ def _audit_derivation(package: dict, source_case: tuple) -> dict:
             banks[path] = applied
             require(_physical(original_nodes[path], "Resistance") == original, "source_bank_readback_mismatch")
             nodes[path]["parameters"]["Resistance"]["data"]["value"] = struct.pack(">d", applied).hex()
-    require(package["recognition_inputs"] == expected_parameters, "recognition_parameter_mismatch")
     original_edges = original_model["bindings"]
     activated = []
     for path in sorted(banks):
@@ -141,10 +191,16 @@ def _audit_derivation(package: dict, source_case: tuple) -> dict:
     require([edge for edge in model["bindings"] if edge["target"] not in added_targets] == original_edges,
             "conversion_changed_other_bindings")
     expected_model["bindings"] = model["bindings"]
+    if post:
+        expected_parameters = _audit_post_tune(conversion["post_tune"], package["conversion_record"]["post_tune"],
+                                              expected_model, expected_parameters, declaration)
+    require(package["recognition_inputs"] == expected_parameters, "recognition_parameter_mismatch")
     require(expected_model == model, "conversion_changed_other_physics_or_structure")
     record = package["conversion_record"]
-    require(set(record) == {"schema_version", "algorithm", "source_solo_sha256", "source_solo_identity", "result_identity",
-                           "decisions", "activated_synapses", "inhibition_policy"} and type(record["schema_version"]) is int and record["schema_version"] == 1 and
+    record_keys = {"schema_version", "algorithm", "source_solo_sha256", "source_solo_identity", "result_identity",
+                   "decisions", "activated_synapses", "inhibition_policy"}
+    require(set(record) == (record_keys | {"post_tune"} if post else record_keys) and
+            type(record["schema_version"]) is int and record["schema_version"] == (2 if post else 1) and
             record["algorithm"] == mode and record["source_solo_sha256"] == source["sha256"] and
             record["source_solo_identity"] == source["model_revision"] and record["result_identity"] == package["model_revision"] and
             record["activated_synapses"] == activated and record["inhibition_policy"] == "preserve_source", "conversion_record_mismatch")
