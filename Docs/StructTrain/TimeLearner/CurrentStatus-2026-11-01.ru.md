@@ -75,6 +75,15 @@ ASan job: s08-native-owned-posttune-worker-asan-a1, supervisor PID4103970.
 4+3+12 checks production/CLI/negative controls. Новый reader также повторяет
 два прежних owner evidence tests до дальнейшего анализа. На момент записи
 normal уже выполнил 26 операций и проходит проверки; ASan ещё выполняет corpus.
+Обновление normal: 26 операций, 4/4 PostTune checks, 3/3 owned-phase checks
+и 8 ordinary calibration checks прошли; один setup provenance-класса skipped.
+Исходный gate закономерно завершился status1, а не PASS. Причина — отсутствие
+отдельного env и неправильный порядок зависимых классов при module discovery.
+Новый maintained checker root e6eb2a76aa09c7498495893b8fa99014d278f916 выполняет
+явные классы в порядке 4+3+8+4 и сохраняет typed результаты каждой группы.
+Повторный normal reader PID2127180 и queued ASan reader PID4133904 проверяют
+сохранённые corpus, создавая отдельные CLI acceptance probes. Главные 26 операций
+повторно не запускаются. Начальный skip и неудачный gate сохраняются.
 Это не объявлено принятой Console-реализацией до терминальных receipts,
 публикации полной Git closure и проверки её hashes.
 
