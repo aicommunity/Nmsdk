@@ -1,0 +1,1645 @@
+{
+  "kind": "production_fixed_posttune_normal_proof",
+  "schema_version": 1,
+  "source_root": "2d6ab1a059005af30bc3d55a78c2192e6cbd9813",
+  "source_pulse": "4fecae12116e64534d84d0275e934b101b74cec6",
+  "owned_console_jobs": 6,
+  "controls": [
+    {
+      "name": "Classic-auto_metric-legacy",
+      "phase": "legacy",
+      "expected_status": "calibrated"
+    },
+    {
+      "name": "Classic-auto_metric-v2_calibrate",
+      "phase": "v2_calibrate",
+      "expected_status": "calibrated"
+    },
+    {
+      "name": "Classic-auto_metric-fixed",
+      "phase": "fixed",
+      "expected_status": "weights_selected"
+    },
+    {
+      "name": "Branch-synthetic-legacy",
+      "phase": "legacy",
+      "expected_status": "search_unresolved"
+    },
+    {
+      "name": "Branch-synthetic-v2_calibrate",
+      "phase": "v2_calibrate",
+      "expected_status": "search_unresolved"
+    },
+    {
+      "name": "Branch-synthetic-fixed",
+      "phase": "fixed",
+      "expected_status": "weights_selected"
+    }
+  ],
+  "preflight_tests": 3,
+  "preflight_seconds": 7.2,
+  "owned_worker_tests": 4,
+  "owned_worker_seconds": 42.897,
+  "shared_legacy_python_proof_commit": "0c91982450dc143233c4b05e1e746a3330aa86f5",
+  "negative_console_jobs": 4,
+  "negative_output_created": false,
+  "legacy_and_v2_calibration_transaction_and_model_byte_exact": true,
+  "asan_enabled": false,
+  "packaged_run_closure": {
+    "run_snapshots_verified": 6,
+    "artifact_entries_verified": 252,
+    "scientific_verdict": null
+  },
+  "learner_dispatch_implemented": false,
+  "normal_scoped_production_checked": true,
+  "full_stage_8_accepted": false,
+  "scientific_verdict": null,
+  "archive_sha256": "06ccbba4dd8b4d009ca41c9096b4f824a9a98afd9f74a1e7b162ca1679d64ffb",
+  "files": [
+    {
+      "path": "negative-controls/empty-calibrate-process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "negative-controls/empty-calibrate-process/owned-process.json",
+      "bytes": 411,
+      "sha256": "5427eac31470c4dc0a6908c815341f2e89ac9051b0fb467d2adda96f66c22a28"
+    },
+    {
+      "path": "negative-controls/empty-calibrate-process/request.json",
+      "bytes": 813,
+      "sha256": "40d04edce41899328ff3bd047213e995aa4c4b8b63ab836f15755bdd36d8bc31"
+    },
+    {
+      "path": "negative-controls/empty-calibrate-process/result.json",
+      "bytes": 451,
+      "sha256": "c31c40949194ddcd86fc21eb5161637fd04e74b6043ab859b5c745a732e848e3"
+    },
+    {
+      "path": "negative-controls/empty-calibrate-process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "negative-controls/empty-calibrate-process/stderr.log",
+      "bytes": 62,
+      "sha256": "f2268f7e57a1f66b1098540d4d9e412c700dc498963ff4e16f313fd5fdd8d571"
+    },
+    {
+      "path": "negative-controls/empty-calibrate-process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "negative-controls/empty-calibrate.json",
+      "bytes": 1917311,
+      "sha256": "68bb3e39b23816b754ec7120744616be20fc61a2ff6c5db4801ea2d0b0a1f8be"
+    },
+    {
+      "path": "negative-controls/outer-downgrade-process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "negative-controls/outer-downgrade-process/owned-process.json",
+      "bytes": 411,
+      "sha256": "413eefe43609cc74bd4f76eaa65ef227fbd0e647589081352fab03bc134402e8"
+    },
+    {
+      "path": "negative-controls/outer-downgrade-process/request.json",
+      "bytes": 813,
+      "sha256": "3363372910fcdd8c7daed5e1cac267a2af0ebf92ccfddaa15a0365825b7d92be"
+    },
+    {
+      "path": "negative-controls/outer-downgrade-process/result.json",
+      "bytes": 451,
+      "sha256": "ba15df3a1e18b0f295a0fa327a6e1e917bbca95ea2e12f430e16214973a13520"
+    },
+    {
+      "path": "negative-controls/outer-downgrade-process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "negative-controls/outer-downgrade-process/stderr.log",
+      "bytes": 49,
+      "sha256": "e066bfbc6d46393b053af4fffde577919e9973e15b38bdb3f4594dc36fd86688"
+    },
+    {
+      "path": "negative-controls/outer-downgrade-process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "negative-controls/outer-downgrade.json",
+      "bytes": 1917322,
+      "sha256": "398f03158c3184c854a0ad7379f4b1d9e8b09189722510a41fe99378e3111ee0"
+    },
+    {
+      "path": "negative-controls/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "negative-controls/runner.sh",
+      "bytes": 1911,
+      "sha256": "1e86d889767ba9417089677bb3e8ce6f35be15a347b158ede92b2b0e532b08d4"
+    },
+    {
+      "path": "negative-controls/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "negative-controls/supervisor.pid",
+      "bytes": 8,
+      "sha256": "b292528d13df8622cd7ff2f44446d13831e7ee8e6861d324f7e6770ab2383e31"
+    },
+    {
+      "path": "negative-controls/tests.log",
+      "bytes": 185,
+      "sha256": "eedd7737361f6ad519227569ce35cc071b72ffa51cbbb150bb818c14a4f9ed64"
+    },
+    {
+      "path": "negative-controls/unknown-finalization-process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "negative-controls/unknown-finalization-process/owned-process.json",
+      "bytes": 411,
+      "sha256": "2e71ecd00fe3f0ec95506745b235d838ddfce4bdf67bc1e84d0d0195b68bd90a"
+    },
+    {
+      "path": "negative-controls/unknown-finalization-process/request.json",
+      "bytes": 828,
+      "sha256": "33dd52ab6e02b2029b77a20a4f74129f6c67f68849ca17ef21133bf72ea0e423"
+    },
+    {
+      "path": "negative-controls/unknown-finalization-process/result.json",
+      "bytes": 451,
+      "sha256": "e63d445e121d74ae0bc3844362c131200d80c638cb68ec25f10875a309888c0f"
+    },
+    {
+      "path": "negative-controls/unknown-finalization-process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "negative-controls/unknown-finalization-process/stderr.log",
+      "bytes": 57,
+      "sha256": "6bd39dd9d90d2de9306dcaddeada27e8d4391d18911c9ea3197cc7ec2b5b264c"
+    },
+    {
+      "path": "negative-controls/unknown-finalization-process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "negative-controls/unknown-finalization.json",
+      "bytes": 1917311,
+      "sha256": "041420225829413226a99d79184d7cbadbcdd8ce27f5ba4258299828d6b2bf7d"
+    },
+    {
+      "path": "negative-controls/unused-grid-process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "negative-controls/unused-grid-process/owned-process.json",
+      "bytes": 411,
+      "sha256": "5310c3520dade9f48f9cc2dd3dfed0ffc315978115292587167ff5becaae5e4f"
+    },
+    {
+      "path": "negative-controls/unused-grid-process/request.json",
+      "bytes": 801,
+      "sha256": "897623b037ff7fadedd5970d6112ca44f1c43a53c78cba1ea3f57d81d8f9c14a"
+    },
+    {
+      "path": "negative-controls/unused-grid-process/result.json",
+      "bytes": 451,
+      "sha256": "1c54a7f5d4b1e3317756df9f421e0d81182006ae69a0154e2b0e6724b2e940ad"
+    },
+    {
+      "path": "negative-controls/unused-grid-process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "negative-controls/unused-grid-process/stderr.log",
+      "bytes": 70,
+      "sha256": "203bb372018f95a08621ae518e4e118c9ade9a1ba0e69d76b38b78b8c7912096"
+    },
+    {
+      "path": "negative-controls/unused-grid-process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "negative-controls/unused-grid.json",
+      "bytes": 1917333,
+      "sha256": "8bb62ec73e8c1685ccc9a2b19660551232244cae5605e5aa8d1a4ce827574410"
+    },
+    {
+      "path": "negative-controls/validation.json",
+      "bytes": 478,
+      "sha256": "437446d1930e4cd948ef90ed241337d0de27a8163fe474bc44b312416b181f08"
+    },
+    {
+      "path": "production-console/build.log",
+      "bytes": 3212,
+      "sha256": "7a24e6e200c142ecd361e96e0b1dba36e21c27c125610a533c05689922b5c9ad"
+    },
+    {
+      "path": "production-console/checkout.log",
+      "bytes": 599,
+      "sha256": "bcd156e097c8493e39a0d1b313399ba2ccc5e334e879395c3b11e442c1c4f4ce"
+    },
+    {
+      "path": "production-console/configure.log",
+      "bytes": 1203,
+      "sha256": "ebadbfddbb250c1facade6a03d8a77d7b5f37f9135b9f50137f6733031f9937d"
+    },
+    {
+      "path": "production-console/console.log",
+      "bytes": 478,
+      "sha256": "df140871e106b889b9fbd4e24b0e012bb42c4c676e7d2104d2dc5e5134dc9606"
+    },
+    {
+      "path": "production-console/jobs/Branch-synthetic-fixed.json",
+      "bytes": 1772102,
+      "sha256": "6774eaebdf6b7863a05b32e71fc94465a7a5ff89181d6110fced070fea16c48e"
+    },
+    {
+      "path": "production-console/jobs/Branch-synthetic-legacy.json",
+      "bytes": 1772051,
+      "sha256": "9c5f19ff8de296fab1e0bb697a209efc0b4d4fc80281b364b8ea09ee6fc07c42"
+    },
+    {
+      "path": "production-console/jobs/Branch-synthetic-v2_calibrate.json",
+      "bytes": 1772109,
+      "sha256": "bd513ff9ce5a07b39af0df345881bc2cece7c44420bef8ab1f7522484cb7b494"
+    },
+    {
+      "path": "production-console/jobs/Classic-auto_metric-fixed.json",
+      "bytes": 1917343,
+      "sha256": "d7d4c18403b8cc19c6ddf0cbe0ff3fff648d3d8e106d3116a755c441bb0801e3"
+    },
+    {
+      "path": "production-console/jobs/Classic-auto_metric-legacy.json",
+      "bytes": 1917288,
+      "sha256": "48998509897e8334dd74c867383473da0ee8aea0e5640385d0b34a0c9812c386"
+    },
+    {
+      "path": "production-console/jobs/Classic-auto_metric-v2_calibrate.json",
+      "bytes": 1917346,
+      "sha256": "3e4bd5528bed33d65aa2d632d12333709624ade8406cb24502c80b37d341da01"
+    },
+    {
+      "path": "production-console/live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "production-console/preflight-tests.log",
+      "bytes": 670,
+      "sha256": "93af89db3d53ac258b15508d2ad3d8b6505c2686c36818257365829a862b0cd0"
+    },
+    {
+      "path": "production-console/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "production-console/runner.sh",
+      "bytes": 5161,
+      "sha256": "b3fd64c0d3e8ee5f6ba2af965b8c56fdea66a6852aea6edb70c307164bf8ae6b"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/job.json",
+      "bytes": 1772102,
+      "sha256": "6774eaebdf6b7863a05b32e71fc94465a7a5ff89181d6110fced070fea16c48e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1162896,
+      "sha256": "843103d086b1bd55ae3661b952f8560673178f74f8f05a92e330580d79498863"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 602841,
+      "sha256": "684ce7071247c36dcb0b52d8e4e9b1c9c58b32b69a094e158fa81f05ee6f57ae"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 14639,
+      "sha256": "7e015be7ce9c2e46c5e7320a51b88ca2fceda416052948c02d81a6b6dbe5869f"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5922,
+      "sha256": "fce1c588d21aed388d4d40d5fd689e6cc14eadc285ec0777940a679fbf9c3ff3"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 14750,
+      "sha256": "2c8239c5fb392e5d336f00ccb68ff0a37a7672a8141f1447b1801f494e14caba"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "5712c1e7693af8e680b5a5818da4fd6922b6e763f1b8a18f8f81ca13cd0935b3"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 14685,
+      "sha256": "ef5ce86a70e579db26f5795c8ec573c48c02d2418e5f57bf098047456858edef"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5905,
+      "sha256": "6906db06b4bf8466eb03fbbba0d0f83027703328c967f14975184f125953b6ff"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 14697,
+      "sha256": "fef19f9d639f44cd6c828f99a596dec4bf240977a9a8fb81e117c8e1852ae4b0"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5897,
+      "sha256": "83e0ab90bd52b3fad6a0ad2ae29bc16aeef98896b281725e7c81481a07a45925"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 14720,
+      "sha256": "e62a8ea31f3a3e7994d52344f00e7431e56ab04e2bff46f35475ce63e87b2513"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5937,
+      "sha256": "3d3837cc4ee3f3770b209218a173b284d653777a0c3ce6a4baa87b51bdb4c237"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 14687,
+      "sha256": "3ecd4a7ea4d74bf23ff17dad81067f9eeda92016c82459796a5e61b8b58ebd9e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5931,
+      "sha256": "d06622319dbf2a79debc041b0e6f4ea6661fecf93627571d8d2090b50d247087"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 14720,
+      "sha256": "4dc7d2be71ba83caf0c8a3cc5707d11a7d18912f92910fcdc98efb54dfdaf637"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5924,
+      "sha256": "e5285014cc8b852b79b140fb62a3f7ee5bc84966791b3f88583cfe64a20b50a9"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 14708,
+      "sha256": "9befc9a953e3cc66475a8cf434b1e9202f30e4daf8c245cdbbbf83122827b76d"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5903,
+      "sha256": "69f045d8dd56ee9a542f154e3f640daedafc8ba454b36d5738d0d254b5080fbf"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 14695,
+      "sha256": "42e33e1006b8f52f24cac422c448028d3b35027b63e6bb8464e19b8f676c96e8"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5895,
+      "sha256": "1e7286d84875985e785a3ca143c3a3d46f218fdde93e55c16ba8c8277046fd78"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 14708,
+      "sha256": "8fa435d1d2477c04082337d05815fb97b364eb6f5c236c6ff6f86e30d3205f8f"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "57787b24030e8f61d8d4bf6d049f4dd9ed5d05c8cac2aedaff0572f5dcd86ec1"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 14724,
+      "sha256": "9c684d184d80e6169aa5506c1b138aed8dce567e9a734eb2cbf1588b2d220520"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5899,
+      "sha256": "7b790827a82cf64276c8cca108ef5b21a65c94b1a923e361a5884fa3d02cdf2a"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 14661,
+      "sha256": "b561e09dd2126ceac1b7021224231f15aebd853bd4bfe6436095e7a6ed56efd1"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5900,
+      "sha256": "732eef0eef0dd72da2520977d97e8aee16a4f1793b8497c201c0d073fc8630d5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 14625,
+      "sha256": "8b7ac56947f6ba4cdebe85b446d51ea9d96fc03660c158749d390c186a73a3f7"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5897,
+      "sha256": "f37705253c462af14c942f244dc2d65477de4db18c1ac50a7b1e6d19401dca8e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 14659,
+      "sha256": "8c70d299bdcaf23ed3e3d2e263c1472f0ac70a568347b2a6e862b751bbf9ad46"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5900,
+      "sha256": "016dde02d7a353c0348eabf8d558b6a1926ed311f844805cfed850acbd3cbdf5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/native/execution.json",
+      "bytes": 1501,
+      "sha256": "708e30f175b3e4c0465defc42e58c65cb7e505a434eeea7edb3dab3a248516f7"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/native/job.json",
+      "bytes": 2485933,
+      "sha256": "6a1d46f5c5751f6a86949d03a184063c966d5f3a03e92cf77b91a51a31d80cf7"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/native/model.json",
+      "bytes": 2361022,
+      "sha256": "3446f4cef42da7c37ae769bf03b1c911311c74add681ee7b9b3123fbc4896387"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/native/transaction.json",
+      "bytes": 16007141,
+      "sha256": "32789d3d4d9357bf6f00edc7021321784cdb04883e70eedea2dfb1468c9517d5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "fc1a4d76934466bae0bbed86946ab66f2d147893833a8205a8b5f43bb3dc763a"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/process/request.json",
+      "bytes": 833,
+      "sha256": "e444ab88687b4e8e61091e5cd360170996f068a97c4f6b4c647c1021a86f81db"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/process/result.json",
+      "bytes": 443,
+      "sha256": "006312c1ccb8ffcf238b75e52426abacf9f030f1964f23a331486656ec220f4b"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-fixed/run-manifest.json",
+      "bytes": 18045,
+      "sha256": "588dc9333e24db7696ddefba43f58bc0c818fc3c70ec8d9bf79c565e7ce4891f"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/job.json",
+      "bytes": 1772051,
+      "sha256": "9c5f19ff8de296fab1e0bb697a209efc0b4d4fc80281b364b8ea09ee6fc07c42"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1162896,
+      "sha256": "843103d086b1bd55ae3661b952f8560673178f74f8f05a92e330580d79498863"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 602841,
+      "sha256": "684ce7071247c36dcb0b52d8e4e9b1c9c58b32b69a094e158fa81f05ee6f57ae"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 14639,
+      "sha256": "7e015be7ce9c2e46c5e7320a51b88ca2fceda416052948c02d81a6b6dbe5869f"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5922,
+      "sha256": "fce1c588d21aed388d4d40d5fd689e6cc14eadc285ec0777940a679fbf9c3ff3"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 14750,
+      "sha256": "2c8239c5fb392e5d336f00ccb68ff0a37a7672a8141f1447b1801f494e14caba"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "5712c1e7693af8e680b5a5818da4fd6922b6e763f1b8a18f8f81ca13cd0935b3"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 14685,
+      "sha256": "ef5ce86a70e579db26f5795c8ec573c48c02d2418e5f57bf098047456858edef"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5905,
+      "sha256": "6906db06b4bf8466eb03fbbba0d0f83027703328c967f14975184f125953b6ff"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 14697,
+      "sha256": "fef19f9d639f44cd6c828f99a596dec4bf240977a9a8fb81e117c8e1852ae4b0"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5897,
+      "sha256": "83e0ab90bd52b3fad6a0ad2ae29bc16aeef98896b281725e7c81481a07a45925"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 14720,
+      "sha256": "e62a8ea31f3a3e7994d52344f00e7431e56ab04e2bff46f35475ce63e87b2513"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5937,
+      "sha256": "3d3837cc4ee3f3770b209218a173b284d653777a0c3ce6a4baa87b51bdb4c237"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 14687,
+      "sha256": "3ecd4a7ea4d74bf23ff17dad81067f9eeda92016c82459796a5e61b8b58ebd9e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5931,
+      "sha256": "d06622319dbf2a79debc041b0e6f4ea6661fecf93627571d8d2090b50d247087"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 14720,
+      "sha256": "4dc7d2be71ba83caf0c8a3cc5707d11a7d18912f92910fcdc98efb54dfdaf637"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5924,
+      "sha256": "e5285014cc8b852b79b140fb62a3f7ee5bc84966791b3f88583cfe64a20b50a9"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 14708,
+      "sha256": "9befc9a953e3cc66475a8cf434b1e9202f30e4daf8c245cdbbbf83122827b76d"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5903,
+      "sha256": "69f045d8dd56ee9a542f154e3f640daedafc8ba454b36d5738d0d254b5080fbf"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 14695,
+      "sha256": "42e33e1006b8f52f24cac422c448028d3b35027b63e6bb8464e19b8f676c96e8"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5895,
+      "sha256": "1e7286d84875985e785a3ca143c3a3d46f218fdde93e55c16ba8c8277046fd78"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 14708,
+      "sha256": "8fa435d1d2477c04082337d05815fb97b364eb6f5c236c6ff6f86e30d3205f8f"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "57787b24030e8f61d8d4bf6d049f4dd9ed5d05c8cac2aedaff0572f5dcd86ec1"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 14724,
+      "sha256": "9c684d184d80e6169aa5506c1b138aed8dce567e9a734eb2cbf1588b2d220520"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5899,
+      "sha256": "7b790827a82cf64276c8cca108ef5b21a65c94b1a923e361a5884fa3d02cdf2a"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 14661,
+      "sha256": "b561e09dd2126ceac1b7021224231f15aebd853bd4bfe6436095e7a6ed56efd1"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5900,
+      "sha256": "732eef0eef0dd72da2520977d97e8aee16a4f1793b8497c201c0d073fc8630d5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 14625,
+      "sha256": "8b7ac56947f6ba4cdebe85b446d51ea9d96fc03660c158749d390c186a73a3f7"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5897,
+      "sha256": "f37705253c462af14c942f244dc2d65477de4db18c1ac50a7b1e6d19401dca8e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 14659,
+      "sha256": "8c70d299bdcaf23ed3e3d2e263c1472f0ac70a568347b2a6e862b751bbf9ad46"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5900,
+      "sha256": "016dde02d7a353c0348eabf8d558b6a1926ed311f844805cfed850acbd3cbdf5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/native/execution.json",
+      "bytes": 1485,
+      "sha256": "dc76304facc90c30b5b63912b228072301c9abb3e63bd66848fb225dfa9bff47"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/native/job.json",
+      "bytes": 2485879,
+      "sha256": "0e143c8dbff8edbf2c6d7d34c5c53b0717cabfa52c59860e2eb5b3dee08e44b7"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/native/model.json",
+      "bytes": 2357881,
+      "sha256": "080094d6ad5c2bd0bec24e942c58c9273d79237502a6052ab8f74a3dfc3e2253"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/native/transaction.json",
+      "bytes": 26995911,
+      "sha256": "b5466ff1299e147e78b3cde3c8ec44e1927826fac49e80b2e50d3a5fed38a2f0"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "c7bb2e4920c61512cefb38ea91da227377bcd2337a7ad5115347a20b3732a4ca"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/process/request.json",
+      "bytes": 836,
+      "sha256": "f35ac2711416615f8f96c2935e076a6dadd5af89d7756bbc326b667b888f8c7b"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/process/result.json",
+      "bytes": 444,
+      "sha256": "adc6ba2d2d7836659f820381d3244d692221f8516245c1f67ec59b74e31c9061"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-legacy/run-manifest.json",
+      "bytes": 18416,
+      "sha256": "2cc5ab0ab9f31cc2512e8f925d60e0bfa5fa42fe09c6f5318e28f3168596ab8d"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/job.json",
+      "bytes": 1772109,
+      "sha256": "bd513ff9ce5a07b39af0df345881bc2cece7c44420bef8ab1f7522484cb7b494"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1162896,
+      "sha256": "843103d086b1bd55ae3661b952f8560673178f74f8f05a92e330580d79498863"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 602841,
+      "sha256": "684ce7071247c36dcb0b52d8e4e9b1c9c58b32b69a094e158fa81f05ee6f57ae"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 14639,
+      "sha256": "7e015be7ce9c2e46c5e7320a51b88ca2fceda416052948c02d81a6b6dbe5869f"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5922,
+      "sha256": "fce1c588d21aed388d4d40d5fd689e6cc14eadc285ec0777940a679fbf9c3ff3"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 14750,
+      "sha256": "2c8239c5fb392e5d336f00ccb68ff0a37a7672a8141f1447b1801f494e14caba"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "5712c1e7693af8e680b5a5818da4fd6922b6e763f1b8a18f8f81ca13cd0935b3"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 14685,
+      "sha256": "ef5ce86a70e579db26f5795c8ec573c48c02d2418e5f57bf098047456858edef"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5905,
+      "sha256": "6906db06b4bf8466eb03fbbba0d0f83027703328c967f14975184f125953b6ff"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 14697,
+      "sha256": "fef19f9d639f44cd6c828f99a596dec4bf240977a9a8fb81e117c8e1852ae4b0"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5897,
+      "sha256": "83e0ab90bd52b3fad6a0ad2ae29bc16aeef98896b281725e7c81481a07a45925"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 14720,
+      "sha256": "e62a8ea31f3a3e7994d52344f00e7431e56ab04e2bff46f35475ce63e87b2513"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5937,
+      "sha256": "3d3837cc4ee3f3770b209218a173b284d653777a0c3ce6a4baa87b51bdb4c237"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 14687,
+      "sha256": "3ecd4a7ea4d74bf23ff17dad81067f9eeda92016c82459796a5e61b8b58ebd9e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5931,
+      "sha256": "d06622319dbf2a79debc041b0e6f4ea6661fecf93627571d8d2090b50d247087"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 14720,
+      "sha256": "4dc7d2be71ba83caf0c8a3cc5707d11a7d18912f92910fcdc98efb54dfdaf637"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5924,
+      "sha256": "e5285014cc8b852b79b140fb62a3f7ee5bc84966791b3f88583cfe64a20b50a9"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 14708,
+      "sha256": "9befc9a953e3cc66475a8cf434b1e9202f30e4daf8c245cdbbbf83122827b76d"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5903,
+      "sha256": "69f045d8dd56ee9a542f154e3f640daedafc8ba454b36d5738d0d254b5080fbf"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 14695,
+      "sha256": "42e33e1006b8f52f24cac422c448028d3b35027b63e6bb8464e19b8f676c96e8"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5895,
+      "sha256": "1e7286d84875985e785a3ca143c3a3d46f218fdde93e55c16ba8c8277046fd78"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 14708,
+      "sha256": "8fa435d1d2477c04082337d05815fb97b364eb6f5c236c6ff6f86e30d3205f8f"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "57787b24030e8f61d8d4bf6d049f4dd9ed5d05c8cac2aedaff0572f5dcd86ec1"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 14724,
+      "sha256": "9c684d184d80e6169aa5506c1b138aed8dce567e9a734eb2cbf1588b2d220520"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5899,
+      "sha256": "7b790827a82cf64276c8cca108ef5b21a65c94b1a923e361a5884fa3d02cdf2a"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 14661,
+      "sha256": "b561e09dd2126ceac1b7021224231f15aebd853bd4bfe6436095e7a6ed56efd1"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5900,
+      "sha256": "732eef0eef0dd72da2520977d97e8aee16a4f1793b8497c201c0d073fc8630d5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 14625,
+      "sha256": "8b7ac56947f6ba4cdebe85b446d51ea9d96fc03660c158749d390c186a73a3f7"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5897,
+      "sha256": "f37705253c462af14c942f244dc2d65477de4db18c1ac50a7b1e6d19401dca8e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 14659,
+      "sha256": "8c70d299bdcaf23ed3e3d2e263c1472f0ac70a568347b2a6e862b751bbf9ad46"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5900,
+      "sha256": "016dde02d7a353c0348eabf8d558b6a1926ed311f844805cfed850acbd3cbdf5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/native/execution.json",
+      "bytes": 1485,
+      "sha256": "1227e1538d7a1fcd5b3f11cba4b6f8e3d9d55e87e533b5b5a2fa8ecfa6c50ee5"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/native/job.json",
+      "bytes": 2485945,
+      "sha256": "6bdcbe646d8691e68cc82bc78ad9d6543c16775fd44a07e7dffa3bfb6c4529df"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/native/model.json",
+      "bytes": 2357881,
+      "sha256": "080094d6ad5c2bd0bec24e942c58c9273d79237502a6052ab8f74a3dfc3e2253"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/native/transaction.json",
+      "bytes": 26995911,
+      "sha256": "b5466ff1299e147e78b3cde3c8ec44e1927826fac49e80b2e50d3a5fed38a2f0"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "bdc64455b30a4b209cc11b9c92d02af4d1f20b25ba7e829a9a7669df7cdb50fe"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/process/request.json",
+      "bytes": 854,
+      "sha256": "a3ea74d146d1e567d04e21f86d4a6ceab963487d9e3fa6da3b57109105090de3"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/process/result.json",
+      "bytes": 444,
+      "sha256": "12d871880ec009eec06928462254f9aa10536b81f6fd71fac0164d2f2d420f13"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Branch-synthetic-v2_calibrate/run-manifest.json",
+      "bytes": 18416,
+      "sha256": "3fb2c3d6261228d5203c5c04d066dbcb9e345e17820d6600fbab243f3206576b"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/job.json",
+      "bytes": 1917343,
+      "sha256": "d7d4c18403b8cc19c6ddf0cbe0ff3fff648d3d8e106d3116a755c441bb0801e3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1253734,
+      "sha256": "dbd812e2ca3d6c27ead3092e1a0c220de64643eaea479bf1224cf11f2eb1e03e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "2a172df9a5e3481142f18ec5af42cbfaa077b0bcc7ab3174b525cf70d518d2ef"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5877,
+      "sha256": "191e5334256098c686984095a06b7d4b7b4e0837f7067fb37d8573d43d4d9da2"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5912,
+      "sha256": "1723e517dec139c4cc9babf2beaecdeed3699b9ff949bfabc40b5a306cf7f3b5"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "315978ba44f40b6d305d7e685d26261436631746cfb080c08b5a154eb51505e3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5902,
+      "sha256": "286779360e58da03924b9b0545fc1a7a3e7138dbb7c755288557f38a11bbd3e5"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5963,
+      "sha256": "3ececc28d92650c2d0202b47169f3389239c273fa21402c1c359c2e8406f1e31"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5944,
+      "sha256": "fcedb412e495c8ee08575a11a74553ca97085a81a62feb96e27adbea5c2ca26e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5933,
+      "sha256": "8cf65996ac2291e2bc2ab2bbcda602dfceda468ee52f4f114b32cee090e02a51"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5902,
+      "sha256": "5128e0891f795b87044149fb6a6e6a9ec62b4b0f78ae6ad49db945a3c7f3feb6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5904,
+      "sha256": "01c135d87eb2785e3bccf924f274c7fc334c2c67fc78e3f6f884d24e497aa5d9"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "80b0c8ff7d4ad1f7058a037267c20989c35e58e81d1b02d564e20ef8fb19c304"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5910,
+      "sha256": "ae30479149db798ac6158228520d26cce80497997b7f1b7f3b8ba672f3a3d51b"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5910,
+      "sha256": "1a1cfb91272a17e4155753ddc66964f0c6c434b1282e53ee5c770efc0c8446e3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5910,
+      "sha256": "4e876afa2e35e504e65c745782a66cc5a70b42933680320d441c36df98b8b4a7"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5910,
+      "sha256": "2e6f8b014d6dfd7ac40bfa7937819caa16be06921d163c496531924472056148"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/native/execution.json",
+      "bytes": 1503,
+      "sha256": "4923c291cf973f69f640c945940d9d8e5e25c884310449a422f12f2769acb5e6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/native/job.json",
+      "bytes": 2682061,
+      "sha256": "2dfb55c6d85a0153bae09cae60de3fe9dd9306579f0f6db36f30162906348943"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/native/model.json",
+      "bytes": 2547145,
+      "sha256": "c085fcad2584c3a59cae60ee28b107c07d9c1c4f3ff31464a22c9b7307c48832"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/native/transaction.json",
+      "bytes": 9353081,
+      "sha256": "a6796dca03cba1779b035b679cd916be7c4cf264bad40869fbc1f05b0db4f71a"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "3122e87acb6d26c2e27810718a8c2e5ad941ff7f7c0521ed5975ee3948e562ee"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/process/request.json",
+      "bytes": 842,
+      "sha256": "cba87410f801a1d1a5a914fe3f77be1f4f297bc96ad1d98d8824d710d30b9499"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/process/result.json",
+      "bytes": 443,
+      "sha256": "153925bbabae63793e4c6625ef93ecee60e232958d8301c96360230c40d27bb6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-fixed/run-manifest.json",
+      "bytes": 18078,
+      "sha256": "89ffbd09044966c3b2b327221c22006b9cd48ef311763c5c264b357f046d5b39"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/job.json",
+      "bytes": 1917288,
+      "sha256": "48998509897e8334dd74c867383473da0ee8aea0e5640385d0b34a0c9812c386"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1253734,
+      "sha256": "dbd812e2ca3d6c27ead3092e1a0c220de64643eaea479bf1224cf11f2eb1e03e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "2a172df9a5e3481142f18ec5af42cbfaa077b0bcc7ab3174b525cf70d518d2ef"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5877,
+      "sha256": "191e5334256098c686984095a06b7d4b7b4e0837f7067fb37d8573d43d4d9da2"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5912,
+      "sha256": "1723e517dec139c4cc9babf2beaecdeed3699b9ff949bfabc40b5a306cf7f3b5"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "315978ba44f40b6d305d7e685d26261436631746cfb080c08b5a154eb51505e3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5902,
+      "sha256": "286779360e58da03924b9b0545fc1a7a3e7138dbb7c755288557f38a11bbd3e5"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5963,
+      "sha256": "3ececc28d92650c2d0202b47169f3389239c273fa21402c1c359c2e8406f1e31"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5944,
+      "sha256": "fcedb412e495c8ee08575a11a74553ca97085a81a62feb96e27adbea5c2ca26e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5933,
+      "sha256": "8cf65996ac2291e2bc2ab2bbcda602dfceda468ee52f4f114b32cee090e02a51"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5902,
+      "sha256": "5128e0891f795b87044149fb6a6e6a9ec62b4b0f78ae6ad49db945a3c7f3feb6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5904,
+      "sha256": "01c135d87eb2785e3bccf924f274c7fc334c2c67fc78e3f6f884d24e497aa5d9"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "80b0c8ff7d4ad1f7058a037267c20989c35e58e81d1b02d564e20ef8fb19c304"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5910,
+      "sha256": "ae30479149db798ac6158228520d26cce80497997b7f1b7f3b8ba672f3a3d51b"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5910,
+      "sha256": "1a1cfb91272a17e4155753ddc66964f0c6c434b1282e53ee5c770efc0c8446e3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5910,
+      "sha256": "4e876afa2e35e504e65c745782a66cc5a70b42933680320d441c36df98b8b4a7"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5910,
+      "sha256": "2e6f8b014d6dfd7ac40bfa7937819caa16be06921d163c496531924472056148"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/native/execution.json",
+      "bytes": 1482,
+      "sha256": "5bf112cce96d9541c18879d7fa146c89d76eb446946029be423c077730119af6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/native/job.json",
+      "bytes": 2682007,
+      "sha256": "ff61d6638c33607f49408660459d80d5a9f0fb8bf22f29d40f7611043069f6b7"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/native/model.json",
+      "bytes": 7228298,
+      "sha256": "0fcf33107b9df4493216d0b945a4dbe2ad561419dda6d1425b98ceb3f0d35423"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/native/transaction.json",
+      "bytes": 38868193,
+      "sha256": "a06e8a0134feddaf91aa689c802030b1c608da5515266d97642363ae454253ee"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "621aa50923434de84142e0f82228f7d373d76c59f38d63e8d4906bce01b080ed"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/process/request.json",
+      "bytes": 845,
+      "sha256": "07eab6bc17b46940ee0bc3feb9f089df23ec8bcd85626132ce917a4a3cd2474f"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/process/result.json",
+      "bytes": 444,
+      "sha256": "0ff8b64ad48e2e801423c08e64f5fef54eb935689aa690af809d1b0823a60020"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-legacy/run-manifest.json",
+      "bytes": 20319,
+      "sha256": "e0abad39d250ba595935d78262e3b8a112c1483b03ce0ed041e3edddcbc37dc9"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/job.json",
+      "bytes": 1917346,
+      "sha256": "3e4bd5528bed33d65aa2d632d12333709624ade8406cb24502c80b37d341da01"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1253734,
+      "sha256": "dbd812e2ca3d6c27ead3092e1a0c220de64643eaea479bf1224cf11f2eb1e03e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "2a172df9a5e3481142f18ec5af42cbfaa077b0bcc7ab3174b525cf70d518d2ef"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5877,
+      "sha256": "191e5334256098c686984095a06b7d4b7b4e0837f7067fb37d8573d43d4d9da2"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5912,
+      "sha256": "1723e517dec139c4cc9babf2beaecdeed3699b9ff949bfabc40b5a306cf7f3b5"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "315978ba44f40b6d305d7e685d26261436631746cfb080c08b5a154eb51505e3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5902,
+      "sha256": "286779360e58da03924b9b0545fc1a7a3e7138dbb7c755288557f38a11bbd3e5"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5963,
+      "sha256": "3ececc28d92650c2d0202b47169f3389239c273fa21402c1c359c2e8406f1e31"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5944,
+      "sha256": "fcedb412e495c8ee08575a11a74553ca97085a81a62feb96e27adbea5c2ca26e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5933,
+      "sha256": "8cf65996ac2291e2bc2ab2bbcda602dfceda468ee52f4f114b32cee090e02a51"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5902,
+      "sha256": "5128e0891f795b87044149fb6a6e6a9ec62b4b0f78ae6ad49db945a3c7f3feb6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5904,
+      "sha256": "01c135d87eb2785e3bccf924f274c7fc334c2c67fc78e3f6f884d24e497aa5d9"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "80b0c8ff7d4ad1f7058a037267c20989c35e58e81d1b02d564e20ef8fb19c304"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5910,
+      "sha256": "ae30479149db798ac6158228520d26cce80497997b7f1b7f3b8ba672f3a3d51b"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5910,
+      "sha256": "1a1cfb91272a17e4155753ddc66964f0c6c434b1282e53ee5c770efc0c8446e3"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5910,
+      "sha256": "4e876afa2e35e504e65c745782a66cc5a70b42933680320d441c36df98b8b4a7"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5910,
+      "sha256": "2e6f8b014d6dfd7ac40bfa7937819caa16be06921d163c496531924472056148"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/native/execution.json",
+      "bytes": 1482,
+      "sha256": "1b1eacc3f0f6a31215c44ddae13342afb0ac36db0d543d3a8ffa23cd5c255225"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/native/job.json",
+      "bytes": 2682073,
+      "sha256": "1f69a2ce6bc3a626668f43417f81cc2a9a3adb8c111dd0325f8a8a639ebaa6c1"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/native/model.json",
+      "bytes": 7228298,
+      "sha256": "0fcf33107b9df4493216d0b945a4dbe2ad561419dda6d1425b98ceb3f0d35423"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/native/transaction.json",
+      "bytes": 38868193,
+      "sha256": "a06e8a0134feddaf91aa689c802030b1c608da5515266d97642363ae454253ee"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "71bb0e0781aa9bc7cac008b9ec46b02847232133978b8a4a620cf76f174ac0bc"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/process/request.json",
+      "bytes": 863,
+      "sha256": "052e10eb15c70ea3ce912e2b5ac13175930f4373a5b3950e884f7f74c3cbdfdf"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/process/result.json",
+      "bytes": 443,
+      "sha256": "5cd8eb26e937c0e41d63ec0eb64b05319573bb544174426cc7158bc70efc6fe6"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/runs/Classic-auto_metric-v2_calibrate/run-manifest.json",
+      "bytes": 20319,
+      "sha256": "77f761d80210597f69f55da50a8373037e79846cf0a2d9602139934d27fd4ab1"
+    },
+    {
+      "path": "production-console/runs/controls.json",
+      "bytes": 779,
+      "sha256": "c6a8a0fce260607330c561aca92909877707bad3b6e59bc638c2874b6fad80d7"
+    },
+    {
+      "path": "production-console/runtime-after.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/runtime-before.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "production-console/source-closure.txt",
+      "bytes": 689,
+      "sha256": "a99960247ff7427448889cc152d0e6a2008456fa72b6a07af9496f91fb1f64ec"
+    },
+    {
+      "path": "production-console/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "production-console/supervisor.pid",
+      "bytes": 8,
+      "sha256": "348e0a3f0e5c4eed7bf2a29b4b25b6c35b026ae1fe592fe8bda6c4d4dd82c161"
+    },
+    {
+      "path": "production-console/worker-tests.log",
+      "bytes": 835,
+      "sha256": "e425735d615f889035b43a1a6734ce5b53b296ec25f998eadce3158aa30b543d"
+    }
+  ]
+}
