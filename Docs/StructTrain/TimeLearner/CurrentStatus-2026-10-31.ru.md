@@ -4,7 +4,25 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Последний адресно проверенный подэтап — immutable native training request.
+Последний адресно проверенный подэтап — связь train-time request с finalization.
+Production CaptureNativeFinalizationBoundary проверяет session/run/protocol/pattern,
+исходные controls и их bindings; различаться может только живое значение Need.
+С настоящим request создаётся boundary schema2, исторический импорт без request
+сохраняет schema1. Native root934a9c90f / PulseLib b46a796: normal 61/61
+(52.422 s), ASan 61/61 (336.200 s), без skips, leak checking выключен.
+В восьми N1/2000Hz Classic/Branch × CalculateMode0/1 × local/connected cases
+подтверждены отказ при drift без изменения модели и successful import при
+непустом intent с его очисткой. Independent readers: по 3/3 (3.334 / 3.002 s),
+24 snapshots / 8 records, 64 signed corrupt controls на worker. Дополнительно
+по 20 boundary compatibility checks: десять schema1 и десять schema2.
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-intent-binding-normal-a1/README.md)
+337 members / 968040 bytes и
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-intent-binding-asan-a1/README.md)
+337 members / 986948 bytes; все hashes проверены, исходные fixtures сохранены.
+Неуспешный compile/a1 из-за отсутствующего include в тесте также сохранён.
+Автоматический dispatcher и intent checkpoint/export ещё не подключены.
+
+Предыдущий подэтап — immutable native training request.
 В обоих learner BeginNativeTraining сохраняет исходные controls/bindings и
 идентичность сессии; поздний edit не переписывает запрос. Reset/retarget/new Start
 и успешная замена графа очищают intent, внешний stop сохраняет исходный запрос
@@ -16,10 +34,10 @@ Native root 6062fb58c / PulseLib 86cd843: normal 61/61 (50.707 s), ASan 61/61
 и [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-intent-asan-a1/README.md):
 по 321 members, 941804 / 954948 compressed bytes; все hashes проверены.
 Control-only короткий бюджет остаётся BudgetExhausted, внешний stop — ExternalStop.
-Отдельный positive-case «непустой intent → successful graph import» ещё не принят;
-код очистки реализован, общие import regressions не заменяют эту проверку.
-Intent checkpoint/export, сравнение original/current controls при переходе и
-configured dispatcher открыты. Полной приёмки этапа 8 по-прежнему нет.
+На этом предыдущем gate positive-case «непустой intent → successful graph import»
+ещё не был принят; он закрыт новым binding gate выше.
+Сравнение original/current controls подключено новым binding gate выше;
+intent checkpoint/export и configured dispatcher остаются открытыми. Полной приёмки этапа 8 по-прежнему нет.
 
 [Positive LTZ detail proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-threshold-visual-asan-a3/README.md):
 новый amplitude view с настоящей threshold line сохраняет полный negative

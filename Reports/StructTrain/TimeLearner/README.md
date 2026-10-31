@@ -2,6 +2,10 @@
 
 Latest scoped PostTune evidence:
 
+[Original request bound to finalization: normal](s08-native-training-intent-binding-normal-a1/README.md),
+[ASan](s08-native-training-intent-binding-asan-a1/README.md): 61/61 native, 3/3 reader, actual successful import and 20 schema compatibility checks per worker.
+Configured automatic phase dispatch remains open.
+
 [Live training request provenance: normal 61/61](s08-native-training-intent-normal-a1/README.md),
 [ASan 61/61](s08-native-training-intent-asan-a1/README.md), independent 24-snapshot/32-corruption readers.
 [Readable positive LTZ crossing and actual threshold, four reviewed PNGs](s08-native-training-threshold-visual-asan-a3/README.md).
