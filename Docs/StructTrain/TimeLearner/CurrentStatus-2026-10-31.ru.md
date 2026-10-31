@@ -4,7 +4,36 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Последний адресно проверенный подэтап — свежая Solo LTZ-трасса штатной burst-пробы.
+Последний адресно проверенный подэтап — target-only threshold reference.
+Сохранены gap_fraction / peak_fraction по строго положительным after-children
+LTZ samples, legacy span guard 1e-9 и оба clamps. API требует явные controls:
+public defaults Classic 0.85/0.0115/0.05 и Branch 0.99/0.0115/1.0 не менялись.
+Root 3d6bd14a6 / PulseLib 273ae17: initial normal 33/33 (26.766 s), ASan 33/33
+(170.859 s). После explicit-controls API root b922aaa20 / PulseLib 9096474:
+normal 8/8 (6.835 s), ASan 8/8 (44.246 s), без skips, leak checking выключен.
+Последние independent readers: по 4/4, normal 0.704 s / ASan 0.571 s;
+14 actual proposals, 2 actual выбранных Solo burst и 28 signed corrupt controls
+на worker. По одному spike при Classic threshold=0.0016869611261023931 и
+Branch threshold=0.0014856928851619267. Это не foil evaluation, final parallel
+recognition calibration или новое холодное Train. CapturedPerInput сохранён.
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-threshold-reference-normal-a2/README.md)
+186 members / 824904 bytes и
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-threshold-reference-asan-a1/README.md)
+180 members / 835872 bytes, каждый с полными original runs / 84 artifacts.
+Все hashes проверены. Дополнительно сохранён исходный normal/a1 proof.
+На Elder удалено 86079652 bytes подтверждённого GNU ar cache завершённого owned
+runtime; executable hashes неизменны, исторические данные не удалялись.
+
+[Selected-threshold temporal proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-threshold-visual-asan-a1/README.md):
+2 reports / 5 complete pairs, 8 metadata members / 32452 bytes + 8 PNG;
+M40 cache 110 files / 6426888 bytes, render/checks 8.010 s. Primary JSON неизменны;
+все hashes и proposal/confirmation bindings проверены. Soma/input overview/zoom
+читаемы, spike после первого входа. LTZ shared Y доминируется negative recovery:
+positive-amplitude detail ещё нужен для визуальной проверки crossing. Полная
+visual acceptance не заявляется. Следующий основной шаг — controlled phase
+orchestration, выбор исходного input и final recognition confirmation.
+
+Предыдущий подэтап — свежая Solo LTZ-трасса штатной burst-пробы.
 Native root a87bb8fc / PulseLib cd3e7d0: normal 33/33 (27.605 s), ASan 33/33
 (161.506 s), без skips, ASan leak checking выключен. Восемь новых сценариев:
 Classic/Branch × complete nonspiking, real spiking, Reset и изменение порога.
@@ -14,7 +43,8 @@ Recorder только читает after-children данные; не меняе�
 [Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-trace-normal-a1/README.md),
 [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-trace-asan-a1/README.md):
 по 133 members, полные original source runs / 84 artifacts. Это saved Solo replay;
-исходный Train остаётся search_unresolved. Target-reference formula, spiking confirmation и automatic dispatch ещё открыты.
+исходный Train остаётся search_unresolved. Target-reference formula и Solo spiking
+confirmation проверены ниже; final recognition confirmation и automatic dispatch открыты.
 
 [Solo temporal proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-visual-asan-a1/README.md):
 8 reports / 20 channel-trace pairs (12 soma, 8 LTZone), input overlays, no downsampling,

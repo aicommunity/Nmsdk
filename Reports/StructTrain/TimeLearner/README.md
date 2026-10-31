@@ -2,6 +2,12 @@
 
 Latest scoped PostTune evidence:
 
+[Target-only threshold formulas and actual selected-threshold Solo burst: normal](s08-native-training-threshold-reference-normal-a2/README.md),
+[ASan](s08-native-training-threshold-reference-asan-a1/README.md);
+[soma/input and LTZ visual reports](s08-native-training-threshold-visual-asan-a1/README.md).
+Final parallel recognition, foil evaluation, positive LTZ amplitude-detail view
+and configured phase orchestration remain open.
+
 [Fresh Solo LTZ burst traces: normal 33/33 and independent reader](s08-native-solo-threshold-trace-normal-a1/README.md),
 [ASan 33/33 and independent reader](s08-native-solo-threshold-trace-asan-a1/README.md).
 Eight actual controls per worker; source replay, not new Train. Threshold proposal,
