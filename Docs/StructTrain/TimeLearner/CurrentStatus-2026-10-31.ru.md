@@ -4,7 +4,15 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Текущий подэтап: immutable Train → finalization boundary. Root a282fe9a /
+Текущий подэтап — active-request finalization import.
+Новая реализация active-request import (PulseLib ec3d7b4 / root c0496d253)
+пока ожидает runtime-приёмки. Она сохраняет Need/CalculateMode/PostTune/AutoCalibrate
+и immutable intent при заменах recognition-кандидата, читает фактический external
+stop и не пишет в provider. Серверные задания s08-native-finalization-ownership-
+normal/asan-a1 запускают 44 адресных/регрессионных tests; до их завершения новая
+реализация не считается принятой. Configured dispatcher и optional guards не менялись.
+
+Ранее проверенная immutable boundary: root a282fe9a /
 PulseLib f8929f9: normal 24/24 (20.492 s), ASan 24/24 (128.163 s), без skips.
 Реальные Classic/Branch capture, connected external request, queued probe rejection,
 external-stop diagnostic и полный объявленный двухпаттерновый recognition replay.
