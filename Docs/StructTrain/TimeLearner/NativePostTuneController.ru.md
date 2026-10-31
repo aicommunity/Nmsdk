@@ -213,7 +213,13 @@ checks прошли; пропущенный из-за отсутствующей
 восстановлен отдельными четырьмя actual checks, без повторения native jobs.
 В архиве 1146 members / 5936272 bytes; все локально сверены. Source Train не
 становится Exact, калибровка этой пары не доказывает независимую классификацию.
-ASan Console собран отдельно и выполняет свой корпус; полная matrix не принята.
+ASan Console выполнил отдельный корпус: 18 PostTune jobs, 6 calibration regressions,
+дополнительные CLI/tick-stop/strict controls; 4/4 PostTune reader (112.103 s),
+8/8 calibration worker (234.799 s), 4/4 provenance (15.333 s), без skips.
+[Primary bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-console-asan-a1/README.md)
+88c47ddf сохраняет 1089 members / 6054552 bytes. Это replay сохранённых normal
+моделей, не новые независимые обучения. Полная matrix и новые production
+waveform reports остаются открытыми.
 
 ### Ограничения следующего связывания с learner properties
 
