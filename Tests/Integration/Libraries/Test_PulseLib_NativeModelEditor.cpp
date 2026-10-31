@@ -1896,7 +1896,7 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
     if(scenario==RecognitionCase::Identity || parameters.size()==1)EXPECT_EQ(recognition["model_revision"],source["model_revision"]);
     else EXPECT_NE(recognition["model_revision"],source["model_revision"]);
     const auto decisions=recognition["conversion_record"].toObject()["decisions"].toArray();ASSERT_EQ(decisions.size(),int(parameters.size()));
-    if(scenario!=RecognitionCase::Identity && parameters.size()>1)
+    if(spec.mode==RecognitionConversionMode::HistoricalBranchN1 && parameters.size()>1)
     {
         EXPECT_DOUBLE_EQ(decisions[0].toObject()["factor"].toDouble(),2.);
         if(scenario==RecognitionCase::Clipped)EXPECT_TRUE(decisions[0].toObject()["clipped"].toBool());

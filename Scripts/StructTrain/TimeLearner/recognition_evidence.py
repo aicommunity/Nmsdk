@@ -17,7 +17,7 @@ from .learned_evidence import audit_learned_state, load_case as load_solo
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, after, count, equal, load, number, require
 
-AUDITOR_VERSION = 1
+AUDITOR_VERSION = 2
 
 
 def _digest(envelope: dict) -> None:
