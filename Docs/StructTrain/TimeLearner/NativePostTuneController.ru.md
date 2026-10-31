@@ -586,3 +586,11 @@ Need после завершения не изменяет модель и не 
 Добавлены десять реальных native scenarios: Classic/Branch × CalculateMode0/1 ×
 local/connected и два Reset interrupt. На момент этого изменения они ещё не
 собраны и не выполнены; результаты предыдущих 61 checks их не подтверждают.
+
+
+Первый native gate выявил ошибку подготовки local fixture: публичное присваивание
+Need=true после импорта закономерно сбрасывает Finished для нового обучения.
+Для replay сохранённого Finished snapshot fixture восстанавливает локальное
+административное значение однократно через SetDataDirect, как native import.
+Это не проверка автоматического перехода живого Train в PostTune; такой переход
+по-прежнему открыт. Проверка finished boundary в production не ослабляется.
