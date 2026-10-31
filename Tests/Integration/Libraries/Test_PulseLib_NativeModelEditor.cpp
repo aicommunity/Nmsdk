@@ -2828,6 +2828,11 @@ template<class Learner> void TrainingIntentLifecycle(int mode,bool connected)
     EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);
     EXPECT_EQ(rig.learner->IsNeedToTrain.GetData(),connected || mode==1);
     if(flag)EXPECT_TRUE(flag->Value.GetData());
+    const auto unchangedModel=rig.Revision();std::string driftReason;
+    try {(void)CaptureNativeFinalizationBoundary(*rig.learner,"request-intent-test",true);}
+    catch(const std::logic_error& error){driftReason=error.what();}
+    EXPECT_EQ(driftReason,"native_training_request_controls_changed");
+    EXPECT_EQ(rig.Revision(),unchangedModel);EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);
     auto edited=rig.learner->NativeTrainingRequest();edited["controls"]=QJsonObject{};
     EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);
     const auto bad=rig.learner->ImportNativeLearnedState(QJsonObject{},"request-intent-test");
@@ -2841,6 +2846,13 @@ template<class Learner> void TrainingIntentLifecycle(int mode,bool connected)
     rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
     EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
     EXPECT_EQ(rig.learner->NativeTrainingRequest(),second);EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());
+    const auto stopped=CaptureNativeFinalizationBoundary(*rig.learner,"request-intent-test",true);
+    EXPECT_TRUE(stopped.DiagnosticOnly());EXPECT_EQ(stopped.Document()["schema_version"],QJsonValue(2));
+    EXPECT_EQ(stopped.Document()["training_request"],second);
+    const auto imported=rig.learner->ImportNativeLearnedState(stopped.Solo(),"request-intent-test");
+    EXPECT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    const auto afterImport=rig.learner->NativeTrainingRequest();EXPECT_TRUE(afterImport.isEmpty());
+    rig.learner->Build();rig.learner->Init();
     rig.learner->Reset();if(flag)flag->Value=true;
     rig.learner->BeginNativeTraining(plan);const auto third=rig.learner->NativeTrainingRequest();ASSERT_FALSE(third.isEmpty());
     const auto unchanged=rig.learner->InputPattern.GetData();rig.learner->InputPattern=unchanged;
@@ -2848,9 +2860,12 @@ template<class Learner> void TrainingIntentLifecycle(int mode,bool connected)
     auto changed=unchanged;changed(0,0)+=.001;rig.learner->InputPattern=changed;
     EXPECT_TRUE(rig.learner->NativeTrainingRequest().isEmpty());
     Artifact(rig.name+"_request_intent.json",QJsonDocument(QJsonObject{
-        {"kind","native_training_request_intent_lifecycle"},{"schema_version",1},
+        {"kind","native_training_request_intent_lifecycle"},{"schema_version",2},
         {"calculate_mode",mode},{"connected",connected},{"first",first},{"second",second},{"third",third},
         {"after_retarget",rig.learner->NativeTrainingRequest()},
+        {"control_drift_reason",QString::fromStdString(driftReason)},
+        {"stopped_boundary",stopped.Document()},{"import_adopted",imported.status==NativeModelBuildStatus::Adopted},
+        {"after_import",afterImport},
         {"final_outcome",TrainingStatusName(rig.learner->NativeTrainingController().Outcome())},
         {"final_reason",QString::fromStdString(rig.learner->NativeTrainingController().Reason())},
         {"calibrated",false},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
