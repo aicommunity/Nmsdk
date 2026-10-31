@@ -2,7 +2,15 @@
 
 Рабочая ветка `codex/timelearner-native-posttune`, этап 8 остаётся незавершённым.
 Это следующий алгоритмический слой после исправления границ legacy-наблюдений
-TL-037. До серверной проверки нижеописанное не является принятой реализацией.
+TL-037. Normal A2 root `149a1af0aea88b523871a4e3f6a72fc0bf217c2b` прошёл
+5/5 native cases (83.454 s), 4/4 conversion regressions и 8/8 independent checks
+(31.088 s), без skips. Core — PulseLib `de51a21`, точный SHA записан в closure.
+Это адресная приёмка кандидатов, не полного PostTune-контроллера.
+
+Первая A1 root `8ff51ae2f4648532a931230023001490f509f2be` имела три отказа:
+общий test helper ошибочно требовал Branch N1 factor=2 и при identity conversion
+Classic/Branch N0, Classic N1. Проверка ограничена фактическим scaled-режимом.
+Core между A1/A2 не менялся. Исходные отказы сохраняются вместе с A2.
 
 `NativeRecognitionSpec.postTune` задаёт одно преобразование неизменяемого solo
 сначала в исходную recognition-модель, затем в кандидат PostTune. Источник
@@ -38,6 +46,7 @@ identity. Импорт повторно выводит ожидаемый кан
 Корневой `recognition_evidence.py` независимо воспроизводит оба преобразования
 по фактическим дочерним параметрам и графу. Native import и научное качество
 не выводятся из проверки JSON: для них требуются отдельные execution/probe gates.
+Расширенный auditor имеет version 2; старые схемы продолжают читаться.
 
 Адресные проверки предусмотрены на реальных Classic/Branch N0/N1, 2000 Гц:
 пять режимов, повторное создание, native import, clipping, подмена источника и
@@ -45,6 +54,19 @@ identity. Импорт повторно выводит ожидаемый кан
 полные временные CSV фактической реакции сомы с входными импульсами. Независимый
 Python reader проверяет 20 кандидатов и четыре транспортных наблюдения, а также
 повреждение записи, C и сертификата. Сборка и выполнение — только на workers.
+
+Дополнительно реализован `report --format recognition-transport`: фактические
+сома/вход всех записанных тактов, обзор и тайлы по 100 тиков, без decimation.
+Показывается модель A; независимый reader проверяет поточечное равенство B.
+Full cache предназначен для M40, Git — сжатые primaries и выбранные рисунки.
+До выполнения renderer и ручного просмотра visual acceptance не заявляется.
+
+Console `--timelearner-export` использует тот же decoder conversion spec и
+поддерживает typed-кандидаты без особого XML-overlay. Следующий runtime gate
+создаёт 20 отдельных экспортов и 20 frozen evaluations (target/foil) через
+owned-process pipeline. Его код и четыре independent audit checks добавлены,
+исполнение ещё не принято. Это diagnostic evaluation с сохранённым исходным
+training outcome, а не разрешение PostTrainTune в автоматическом V2 Train.
 
 Открыты: общий измерительный поиск SearchSynthetic, транзакция commit/rollback
 всего PostTune с подтверждением выбранного порога реальными пробами, публичный
