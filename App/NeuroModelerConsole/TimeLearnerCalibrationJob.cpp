@@ -13,6 +13,7 @@
 #include <QJsonDocument>
 #include <iostream>
 #include <cmath>
+#include <memory>
 
 namespace {
 using namespace RDK;
@@ -73,30 +74,39 @@ template<class Owner> int Execute(const Job& job,const QString& output)
     Require(owner->GetTimeStep()==job.frequency,"job_import_frequency_mismatch");
     owner->Build();owner->Init();model->Init();model->Reset();
     Require(owner->ExportNativeRecognitionState(job.implementation)==job.source,"job_source_effective_readback_changed");
-    const auto run=[&](auto& transaction) {
+    std::unique_ptr<NativeThresholdCalibrationTransaction<Owner>> calibration;
+    if(job.isPostTune)owner->BeginNativePostTunePhase(job.postTune,job.implementation);
+    else calibration=std::make_unique<NativeThresholdCalibrationTransaction<Owner>>(*owner,job.grid,job.implementation);
+    const auto done=[&]{return job.isPostTune?owner->NativePostTunePhaseDone():calibration->Done();};
+    const auto cancel=[&](const std::string& reason) {
+        if(job.isPostTune)owner->CancelNativePostTunePhase(reason);else calibration->Cancel(reason);
+    };
     // Validate the effective model and entire declared design before reserving output.
     Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");
     QJsonArray artifacts;artifacts.append(Write(output,"job.json",job.document));
     const double begin=environment->GetTime().GetDoubleTime();std::size_t ticks=0;
     std::string execution="completed";
-    transaction.Advance();
-    while(!transaction.Done())
+    if(calibration)calibration->Advance();
+    while(!done())
     {
         if(QFileInfo::exists(QDir(output).filePath("cancel.request")))
-        {execution="cancelled";transaction.Cancel("worker_cancel_requested");break;}
+        {execution="cancelled";cancel("worker_cancel_requested");break;}
         if(ticks==job.maximumTicks)
-        {execution="model_tick_budget_exhausted";transaction.Cancel("worker_model_tick_budget_exhausted");break;}
+        {execution="model_tick_budget_exhausted";cancel("worker_model_tick_budget_exhausted");break;}
         // This is the native outer scheduler, once per tick. The controller
         // neither calculates children nor moves the physical clock itself.
-        model->Calculate();environment->IncreaseModelTimeByStep();++ticks;transaction.Advance();
+        model->Calculate();environment->IncreaseModelTimeByStep();++ticks;
+        if(calibration)calibration->Advance();
     }
-    const auto report=transaction.Report();const auto after=owner->ExportNativeRecognitionState(job.implementation);
-    Require(report["status"]!=QJsonValue("calibrated") || after==transaction.CalibratedPackage(),
+    const auto report=job.isPostTune?owner->NativePostTunePhaseReport():calibration->Report();
+    const auto after=owner->ExportNativeRecognitionState(job.implementation);
+    Require(report["status"]!=QJsonValue("calibrated") || after==report["calibrated_package"].toObject(),
         "job_calibrated_effective_readback_changed");
     Require(report["status"]!=QJsonValue("weights_selected") || after==report["selected_package"].toObject(),
         "job_selected_effective_readback_changed");
     artifacts.append(Write(output,"transaction.json",report));artifacts.append(Write(output,"model.json",after));
-    QJsonObject result{{"kind",job.isPostTune?"timelearner_native_post_tune_execution":"timelearner_native_calibration_execution"},{"schema_version",1},
+    if(job.isPostTune)artifacts.append(Write(output,"phase-execution.json",owner->NativePostTunePhaseExecution()));
+    QJsonObject result{{"kind",job.isPostTune?"timelearner_native_post_tune_execution":"timelearner_native_calibration_execution"},{"schema_version",job.isPostTune?2:1},
         {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},
         {"attempt_id",QString::fromStdString(job.grid.confirmation.attemptId)},
         {"source_recognition_sha256",job.source["sha256"]},{"model_sha256",after["sha256"]},
@@ -108,10 +118,7 @@ template<class Owner> int Execute(const Job& job,const QString& output)
     const auto status=report["status"].toString();
     return execution=="completed" && (status=="calibrated" || status=="weights_selected" || status=="budget_exhausted" ||
         status==(job.isPostTune?"search_unresolved":"nonseparable"))?0:2;
-    };
-    if(job.isPostTune)
-    {NativePostTuneTransaction<Owner> transaction(*owner,job.postTune,job.implementation);return run(transaction);}
-    NativeThresholdCalibrationTransaction<Owner> transaction(*owner,job.grid,job.implementation);return run(transaction);
+
     });
 }
 }

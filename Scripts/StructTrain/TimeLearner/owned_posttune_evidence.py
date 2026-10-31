@@ -15,6 +15,39 @@ EXECUTION = {"kind", "schema_version", "advance_phase", "frequency_hz", "advance
              "done", "dynamic_checkpoint", "evaluation_verdict"}
 
 
+def audit_owned_phase_execution(execution, frequency_hz, *, ticks=None, begin=None, end=None):
+    """Validate a receipt; optional worker clock binds every recorded tick count.
+
+    An unbound wrapper requires at least one tick. A cancelled production job
+    can have zero ticks, but still requires the exact declared begin/end clock.
+    This does not independently attest native scheduling or process origin.
+    """
+    require(type(execution) is dict and set(execution) == EXECUTION and
+            execution["kind"] == "native_owned_post_tune_execution" and type(execution["schema_version"]) is int and
+            execution["schema_version"] == 1 and execution["advance_phase"] == "owner_before_children" and
+            execution["done"] is True and execution["dynamic_checkpoint"] is False and
+            execution["evaluation_verdict"] is None, "invalid_owned_post_tune_execution")
+    frequency = number(execution["frequency_hz"])
+    require(frequency > 0 and frequency == number(frequency_hz), "owned_post_tune_frequency_mismatch")
+    times = execution["advance_times"]
+    require(type(times) is list and (bool(times) or ticks == 0), "missing_owned_post_tune_ticks")
+    times = [number(t) for t in times]
+    require((not times or times[0] >= 0) and all(b > a and equal(b-a, 1/frequency) for a, b in zip(times, times[1:])),
+            "owned_post_tune_tick_sequence_mismatch")
+    if ticks is not None:
+        require(type(ticks) is int and ticks >= 0 and len(times) == ticks and
+                equal(number(end)-number(begin), ticks/frequency) and
+                (equal(times[0], begin) and equal(times[-1]+1/frequency, end) if times else equal(begin, end)),
+                "owned_post_tune_worker_clock_mismatch")
+    else:
+        require(begin is None and end is None, "incomplete_owned_post_tune_worker_clock")
+    internal = execution["internal_lifecycle"]
+    require(type(internal) is dict and set(internal) <= {"learner_build", "learner_init", "learner_reset", "learner_uninit"}
+            and all(type(n) is int and n > 0 for n in internal.values()), "invalid_owned_post_tune_internal_lifecycle")
+    return {"recorded_phase_sequence_consistent": True, "ticks": len(times),
+            "worker_clock_bound": ticks is not None, "native_scheduler_execution_attested": False}
+
+
 def audit_owned_posttune(record, original_source_case):
     try:
         require(type(record) is dict and set(record) == FIELDS and
@@ -43,22 +76,8 @@ def audit_owned_posttune(record, original_source_case):
         source_case = (solo, *original_source_case[1:])
         learned = audit_learned_state(*source_case)
         execution = record["execution"]
-        require(type(execution) is dict and set(execution) == EXECUTION and
-                execution["kind"] == "native_owned_post_tune_execution" and type(execution["schema_version"]) is int and
-                execution["schema_version"] == 1 and execution["advance_phase"] == "owner_before_children" and
-                execution["done"] is True and execution["dynamic_checkpoint"] is False and
-                execution["evaluation_verdict"] is None, "invalid_owned_post_tune_execution")
-        frequency = number(execution["frequency_hz"])
-        require(frequency > 0 and frequency == solo["configuration"]["model"]["frequency_hz"],
-                "owned_post_tune_frequency_mismatch")
-        times = execution["advance_times"]
-        require(type(times) is list and bool(times), "missing_owned_post_tune_ticks")
-        times = [number(t) for t in times]
-        require(times[0] >= 0 and all(b > a and equal(b-a, 1/frequency) for a, b in zip(times, times[1:])),
-                "owned_post_tune_tick_sequence_mismatch")
-        internal = execution["internal_lifecycle"]
-        require(type(internal) is dict and set(internal) <= {"learner_build", "learner_init", "learner_reset", "learner_uninit"}
-                and all(type(n) is int and n > 0 for n in internal.values()), "invalid_owned_post_tune_internal_lifecycle")
+        audit_owned_phase_execution(execution, solo["configuration"]["model"]["frequency_hz"])
+        times, internal = execution["advance_times"], execution["internal_lifecycle"]
         report = record["transaction"]
         require(report["source_recognition"]["source_solo"] == solo, "owned_post_tune_transaction_source_mismatch")
         transaction = audit_posttune_transaction(report, source_case)

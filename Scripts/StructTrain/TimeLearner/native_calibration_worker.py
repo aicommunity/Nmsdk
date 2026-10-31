@@ -173,13 +173,14 @@ def audit_execution(directory, job, source_case, *, post_tune=False):
     fields = (EXECUTION_FIELDS-{"calibration_status"})|{"post_tune_status"} if post_tune else EXECUTION_FIELDS
     kind = "timelearner_native_post_tune_execution" if post_tune else "timelearner_native_calibration_execution"
     require(set(execution) == fields and execution["kind"] == kind
-            and type(execution["schema_version"]) is int and execution["schema_version"] == 1,
+            and type(execution["schema_version"]) is int and execution["schema_version"] in ((1, 2) if post_tune else (1,)),
             "unknown_native_calibration_execution")
     _digest(execution)
-    require(type(execution["artifacts"]) is list and len(execution["artifacts"]) == 3,
+    owned_phase = post_tune and execution["schema_version"] == 2
+    require(type(execution["artifacts"]) is list and len(execution["artifacts"]) == (4 if owned_phase else 3),
             "worker_artifact_closure_incomplete")
     records = {r["path"]: r for r in execution["artifacts"]}
-    require(set(records) == {"job.json", "model.json", "transaction.json"} and
+    require(set(records) == {"job.json", "model.json", "transaction.json"} | ({"phase-execution.json"} if owned_phase else set()) and
             all(records[name] == _record(directory/name, directory) for name in records), "worker_artifact_content_changed")
     require(load(directory/"job.json") == job and execution["job_sha256"] == job["sha256"] and
             execution["attempt_id"] == job["specification"]["attempt_id"] and
@@ -189,6 +190,11 @@ def audit_execution(directory, job, source_case, *, post_tune=False):
     ticks = count(execution["model_ticks"])
     require(ticks <= job["maximum_model_ticks"] and equal(number(execution["model_time_end"])-number(execution["model_time_begin"]),
             ticks/job["frequency_hz"]), "worker_model_clock_changed")
+    phase_audit = None
+    if owned_phase:
+        from .owned_posttune_evidence import audit_owned_phase_execution
+        phase_audit = audit_owned_phase_execution(load(directory/"phase-execution.json"), job["frequency_hz"],
+            ticks=ticks, begin=execution["model_time_begin"], end=execution["model_time_end"])
     report, model = load(directory/"transaction.json"), load(directory/"model.json")
     if post_tune:
         from .posttune_transaction_evidence import audit_posttune_transaction
@@ -224,7 +230,7 @@ def audit_execution(directory, job, source_case, *, post_tune=False):
     require(execution["execution"] == "completed" or (report["status"] in {"cancelled", "recovery_required"} and
             (execution["execution"] != "model_tick_budget_exhausted" or ticks == job["maximum_model_ticks"])),
             "worker_interrupted_positive_claim")
-    return {"execution_evidence_consistent": True, "full_grid_model_binding_verified": report["status"] == "calibrated",
+    return {**({"owned_phase_audit": phase_audit} if owned_phase else {}), "execution_evidence_consistent": True, "full_grid_model_binding_verified": report["status"] == "calibrated",
             "transaction_audit": audit, "native_execution_verified": False, "evaluation_verdict": None}
 
 
