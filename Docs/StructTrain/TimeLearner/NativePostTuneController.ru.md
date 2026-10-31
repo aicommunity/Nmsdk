@@ -277,12 +277,10 @@ ASan codec пока не проверен; текущий ASan N0 использ
   границу queued import перед следующими children. Проверить необходимо и
   родительский scheduler: нельзя запрашивать ComponentReCalculation и повторно
   рассчитывать уже прошедшие дети того же tick.
-- Текущий `NativePostTuneTransaction::FinishWeights` всегда делегирует threshold
-  grid/fresh confirmation после положительного измеренного gap. Его нельзя
-  выдавать за поддержку комбинации PostTune on / auto calibration off. Для
-  fixed-threshold варианта нужен отдельно объявленный финальный протокол и
-  соответствующий результат; успешная weight-фаза не является Calibrated или
-  научным PASS. Отсутствие положительного gap остаётся честным unresolved.
+- Schema 1 `NativePostTuneTransaction::FinishWeights` делегирует threshold
+  grid/fresh confirmation после положительного измеренного gap. Новая typed
+  ветка schema 2 `KeepFixedThreshold` описана ниже; это ещё не подключение
+  комбинации learner properties PostTune on / auto calibration off.
 
 Требуемый порядок перехода: сохранить versioned Solo и честный training outcome;
 сохранить объявленный phase plan отдельно от physical/owner mirrors; завершить
@@ -291,6 +289,45 @@ ASan codec пока не проверен; текущий ASan N0 использ
 фазы проверить фактическое состояние и сохранить новый результат. Ни один из
 этих переходов не вызывает Calculate из контроллера и не повышает прежний
 `search_unresolved` до Exact. Этот участок остаётся открытым требованием этапа 8.
+
+### Выбор весов с неизменным порогом: schema 2
+
+Добавлена явная typed-настройка `NativePostTuneFinalization::KeepFixedThreshold`.
+Она использует те же native full-pattern probes, выбор лучшего измеренного gap,
+integer/physical bounds, recording budget и rollback, но не создаёт threshold
+candidate и не запускает calibration transaction. После положительного gap:
+
+```text
+assert threshold(selected measured candidate) == threshold(source)
+import selected candidate through the native scope
+Build / Init / Reset and verify effective package
+emit weights_selected, calibration_status=fixed
+retain measured selection proof separately from the model archive
+leave recognition_success_confirmed=false and evaluation_verdict=null
+```
+
+Это успех выбора весов, а не детекции: молчащий target по-прежнему является FN
+при оценке. `CalibratedPackage()` остаётся пустым; `FinalPackage()` возвращает
+выбранный recognition candidate. Его исходный marker `candidate_unmeasured`
+не подменяется embedded proof: фактическое доказательство измерений и выбора
+находится в parent report. Source Solo, training outcome и отсутствие Exact
+для изменённой recognition-модели сохраняются. Отдельная последующая
+калибровка может стартовать с импортированной завершённой границы.
+
+Фиксированный режим требует пустого threshold grid и нулевого calibration
+candidate budget: неиспользуемый фактор отклоняется. Отсутствие положительного
+gap даёт unresolved, исчерпание recording budget — budget_exhausted; rollback,
+внешняя отмена и lifecycle interference используют прежний guarded scope.
+Schema 1 по умолчанию продолжает Calibrate и сохраняет прежний формат.
+
+`Encode/DecodeNativePostTuneControlsV2` явно записывают schema 2 и finalization.
+Попытка сохранить fixed-режим старым codec запрещена, чтобы не потерять фактор.
+Console и Python пока принимают только прежний production job; schema-2 native
+report пока должен отклоняться старыми auditors, а не получать положительный
+verdict. Восемь новых native controls проверяют оба learner, silent target,
+roundtrip waveform/parameters, следующую calibration phase, budget/cancel/reset.
+Они и четвёртый codec case пока ожидают серверной проверки. Это незавершённый
+подэтап, не поддержка всех properties/режимов и не приёмка этапа 8.
 
 ### Отчёт для production run manifest
 
