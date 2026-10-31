@@ -267,3 +267,20 @@ baseline a1 также использовал ошибочный fixture; его
 для Elder предварительный порог 1.25 GB, после сборки по-прежнему требуется
 более 1 GiB. До опубликованных raw evidence и проверки обоих workers этот
 подэтап остаётся открытым. Полный этап 4 этим gate не закрывается.
+
+
+### Адресный результат повторных проверок
+
+Fixed a3 завершились с terminal status=0: Elder normal 15/15 cases (8.373 s),
+M40 ASan 15/15 (45.143 s), без skips. Baseline ASan a2 на прежнем Rdk
+c903b9bb завершил supervisor=0 как ожидаемый отрицательный контроль:
+owned native process=1, один testcase и ровно один assertion failure
+«Value of: uninitialized / Actual: false / Expected: true».
+Остальные lifecycle assertions этого control прошли. Pre/post actual-test
+runtime manifests равны, production runner сохранил loaded-file provenance.
+Leak detection выключен; полнота mapped-file lifetime не заявлена.
+
+Rdk объединён через --no-ff в develop: 027f7f8353608f83b55f3857a2f6c39138df4c65;
+доступность commit в origin проверена. Корневой gitlink обновлён на этот merge.
+Это приёмка только раннего bool-контракта; публикация raw proof выполняется
+отдельно, полный lifecycle/storage этап и configured phase dispatch остаются открыты.

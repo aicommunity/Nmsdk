@@ -28,10 +28,20 @@ artifact inventories перепроверены после merge. Actual test ex
 129076 compressed bytes и 8 выбранных PNG. Все hashes проверены; выбранные
 PNG просмотрены в 1920×960, полный cache/PDF/SVG не принят.
 
-Дополнительно остаётся адресная проверка uninitialized UContainer::Calculate:
-в Rdk c903 ранний InitFlag=false путь возвращает false, вопреки принятому bool
-контракту. [Открытая проверка](Stage04-Progress.ru.md#открытая-проверка-3110-bool-при-неинициализированном-контейнере)
-не закрывается прошедшими initialized-native fixtures.
+Адресный bool-контракт uninitialized UContainer::Calculate проверен на
+исправленном fixture root 0fca58516941184549fb08ea23fa973e2ebdd30c / Rdk
+6084bfa703ebbe0d85d2a588dfe8f79c74cd1144: Elder normal 15/15 (8.373 s),
+M40 ASan 15/15 (45.143 s), без skips. Исправление меняет только ранний bool;
+пропуск children до Init, callbacks и штатный расчёт после Init сохранены.
+Старый Rdk c903 на том же исправленном test (root f34067c6) воспроизвёл
+ровно один assertion failure — false до Init. Process returncode=1 ожидаем
+для отрицательного контроля и не является успешным model run.
+Вызовы проведены через owned production process runner, actual test runtime
+captured before/after, loaded files captured; full lifetime attestation не заявлена.
+Компактные raw proof публикуются; полный этап 4 не закрыт.
+Первый fixture ошибочно включал Reset от Activity=false в интервал наблюдения;
+его failed runs сохранены и не принимаются как passing evidence.
+[Подробности и ограничения](Stage04-Progress.ru.md#уточнение-native-проверки-3110).
 
 Configured learner hooks/phase dispatch пока не подключены. Нельзя объединять
 AutoCalibrate, PostTrainMid и silent probe threshold в один флаг. У Branch
