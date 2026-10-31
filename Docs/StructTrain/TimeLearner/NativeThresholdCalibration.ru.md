@@ -3,6 +3,20 @@
 Ветка `codex/timelearner-threshold-calibration`. Это незавершённая реализация
 этапа 8, не разрешение optional modes для ControllerVersion=2.
 
+Текущий normal контроль export/import: 2/2 Classic/Branch N1 при 2000 Гц,
+9/9 independent proof/frozen checks; [готовые модели и первичные данные](../../../Reports/StructTrain/TimeLearner/s08-calibrated-normal-a2/README.md)
+и [выбранные графики с метаданными](../../../Reports/StructTrain/TimeLearner/s08-calibrated-report-normal-a2/README.md)
+опубликованы. M40 воспроизвёл metrics из Git-bundle, построил все 12 trial/soma pairs;
+3 report + 5 plotting checks прошли. Четыре выбранных графика просмотрены вручную,
+полная visual acceptance не заявлена. Последующие разделы сохраняют последовательность
+реализации и промежуточных gates; оперативная сводка — в CurrentStatus-2026-10-31.
+
+В двухпаттерновой fixture калибровка подтверждена на reset-per-trial primary pair.
+Позднейшие preserve-dynamics пробы дают target outside spike и FN: обе модели имеют
+TP=1,FN=1,TN=2,FP=0 по полному набору. Порядок/позиция и reset policy в нём
+совместно меняются, поэтому это не причинная оценка reset и не independent Test.
+August 4/8–6/8 и восьмипаттерновая scientific matrix этим не переоцениваются.
+
 ## Физический кандидат
 
 `CreateNativeThresholdCandidate` начинает с immutable recognition package,
