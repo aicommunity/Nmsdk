@@ -1,4 +1,4 @@
-# Неизменяемая граница Train → finalization: runtime-приёмка ожидается
+# Неизменяемая граница Train → finalization: адресные проверки
 
 NativeFinalizationBoundary хранит значения, а не ссылки на owner/storage или
 checkpoint динамики. CaptureNativeFinalizationBoundary читает настоящий экспорт
@@ -73,3 +73,39 @@ scheduler и не рекомендация включать ранее непо�
 снимка: для ControllerVersion=2 это штатный запрос новой сессии/ResetControl.
 Connected provider может иметь true без вызова setter; этот реальный случай
 проверяется отдельно. Принимается фактический request value, а не желаемый.
+
+## Серверные проверки 31.10: исходный экспорт и сравнение
+
+Root a282fe9a56cd49c09bc81da128b2f1e4c8283417, PulseLib
+f8929f906d24f8824450b9542445bcb9016f9337: Elder normal — 24/24,
+20.492 s; M40 ASan — 24/24, 128.163 s, без skips. Девять boundary tests,
+десять lifecycle regressions и пять configuration codec tests. ASan leak checking
+выключен; это не полная матрица этапа 8 и не доказательство качества распознавания.
+
+До усиления XML-сравнения попытка a3 также прошла 24/24 на обоих workers.
+Во всех восьми capture-comparison records a3 между before и captured/after
+изменялись только native XML двух class definitions NPMembraneBio:
+InputFeedbackSignal с Rows=0/Cols=0 без данных → Rows=1/Cols=1 со значением 0,
+а также связанные XML/package hashes. Граф/параметры, identities, references,
+training evidence и dataset совпали. Причина перехода внутри native allocation/
+reuse пока не установлена: Snapshot уже вычисляет Identity перед SaveComponent,
+поэтому гипотеза обратного порядка этих двух операций не подтверждается кодом.
+
+Текущий тест сохраняет XML целиком, проверяет его SHA и нормализует только
+указанное точное представление нулевого feedback в NPMembraneBio. Не разрешено
+исключать все native XML как volatile state: это могло бы скрыть потерю физики,
+не включённой в semantic identity. Первичные before/captured/after сохранены
+без нормализации. Независимый finalization_boundary_evidence.py сверяет их,
+binding к frozen source и полный объявленный набор target/foil replay trials;
+не проверяет этим происхождение обучения и не выдаёт scientific verdict.
+
+Попытка a1 остановилась на missing test include до запуска native tests.
+В a2 четыре full-package equality assertions не учитывали описанный feedback
+cache transition: результаты и причина сохранены. Последующие прогоны не
+переписывают эти неуспешные попытки. В proof входят полные исходные fixture runs,
+а не только локальные baseline jobs/models: run manifest проверяется по каждому
+включённому artifact. Первая упаковка отклонена именно из-за неполной closure;
+полный набор берётся из ранее опубликованных Git primaries с проверкой SHA.
+
+Временные отчёты новых replay records пока не подготовлены. Configured dispatcher,
+автоматическое подключение к hooks и снятие guards optional modes остаются открыты.
