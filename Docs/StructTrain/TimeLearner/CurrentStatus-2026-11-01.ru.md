@@ -37,8 +37,8 @@ PulseLib принят через --no-ff в develop:
 3e371dc90884025baa10a27976a8c1e7770897f3; remote reachability проверена.
 Bin97dd1943a059e67888d56380c5409f3d3997d086 и
 Rdk027f7f8353608f83b55f3857a2f6c39138df4c65 не изменялись.
-Корневой feature записывает child merge. Root develop merge ожидает отдельной
-приёмки нового Console-пути; код работающих серверных checkout не обновляется.
+Корневой feature записывает child merge. Root develop merge ожидает завершения
+полного visual gate нового Console-пути; код работающих серверных checkout не обновляется.
 
 ## Временные графики
 
@@ -86,6 +86,29 @@ normal уже выполнил 26 операций и проходит пров�
 повторно не запускаются. Начальный skip и неудачный gate сохраняются.
 Это не объявлено принятой Console-реализацией до терминальных receipts,
 публикации полной Git closure и проверки её hashes.
+
+Обновление после corrected checker: оба workers завершили 26 основных операций
+и 19/19 checks без skips. Normal 413.589 s; ASan 464.310 s. Runtime before/after
+совпал на каждом. Main 18 PostTune: 9 Calibrated, 7 SearchUnresolved,
+2 BudgetExhausted; два fixed cases — WeightsSelected с fresh final responses.
+Шесть standalone calibration controls сохранили schema1 и ожидаемые исходы.
+Первоначальный status1/setup skip оставлен в обоих пакетах, не переписан.
+
+| Production proof | Members | Compressed bytes | Portable runs / artifact entries |
+|---|---|---|---|
+| [Normal](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-worker-normal-a1/README.md), eeeac0a53d450e5e00a201e9081d630f83444145 | 1452 | 7067640 | 28 / 1196 |
+| [ASan](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-worker-asan-a1/README.md), 13dfee817c3fbd796dfb91e7e74e2e4614506fcd | 1515 | 7170828 | 28 / 1196 |
+
+Все outer/member hashes проверены локально, exact Git closure опубликована;
+пакеты объединены в feature через --no-ff. Extra CLI acceptance probes входят
+в 28 portable runs и не считаются независимыми научными обучениями.
+
+Отдельно выполняется production temporal report gate:
+s08-native-owned-posttune-worker-visual-asan-a1, PID4157957, renderer/test root
+504d6fac3be225102079541dc94a5a8f37fa9381. План: все 20 PostTune и шесть standalone
+calibration reports, 3+2 checks всех полных native samples, soma channels,
+реальных inputs и масштаба. Cache — M40 Data; большие PNG/SVG/PDF не публикуются
+в Git. Пока нет terminal receipt и выбранного visual QA — этот gate не принят.
 
 Новый schema1 compatibility reader на M40: 4/4, 120.024 s, 18 прежних portable
 runs из подтверждённого архива normal-a2. Исторические primary не изменялись.
