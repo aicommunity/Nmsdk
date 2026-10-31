@@ -158,3 +158,10 @@ TL-037 legacy inference observation: [normal expected failures](s08-posttune-obs
 TL-037 corrected [normal A2 primary gate](s08-posttune-observation-fixed-normal-a2/README.md): 12 native and 5 independent data checks; four actual legacy free-runs Classic/Branch x 2000/20000 Hz. Separate full-regression, ASan and visual gates remain open.
 
 TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttune-observation-regression-normal-a1/README.md), [ASan addressed 12+6 gate](s08-posttune-observation-fixed-asan-a2/README.md), [complete recorded soma/input report metadata and eleven manually reviewed selected panels](s08-posttune-observation-report-normal-a1/README.md). All four ASan CSVs equal normal primaries; reuse the waveform cache, without claiming independent scientific repetitions. Additional ASan 37-case regression remains open.
+
+
+- [Owned native PostTune, normal](s08-native-owned-posttune-normal-a1/README.md):
+  75/75 C++ checks, 2/2 independent reader checks, ten actual phase records and
+  100 corrupt-receipt controls. All 836 archive members verified; compressed
+  primary 4095348 bytes, original source closure two runs / 84 artifacts.
+  ASan/report acceptance and configured live-Train dispatch remain pending.

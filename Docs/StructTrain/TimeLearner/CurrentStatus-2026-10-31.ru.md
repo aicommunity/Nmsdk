@@ -19,8 +19,12 @@ Normal/a3 остановлен preflight по диску; удалены тол�
 no skips; independent reader status0, 2/2 (110.079 s вместе с повторным audit),
 десять actual records и сто corrupt-receipt controls. Runtime before/after совпал.
 Это проверка указанной матрицы на normal worker; ASan и visual reports ещё не
-приняты. Compact proof находится в процессе упаковки/публикации, не объявляется
-доступным в Git до проверки remote commit и полного archive inventory.
+приняты. [Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-normal-a1/README.md)
+опубликован commit864e7f1dd142173e0181e478f1de4be3be5e09eb и объединён в feature
+через --no-ff. Проверены outer hashes и все 836 members: 895994905 исходных bytes
+в архиве 4095348 bytes; source closure: два исходных runs / 84 artifacts. Это
+сжатые primary и receipts, без полных производных наборов изображений. ASan и
+визуальная приёмка pending; весь этап 8 и цель 0–12 остаются открытыми.
 Автоматический переход из живого Train остаётся открытым.
 
 Последний адресно проверенный подэтап — связь train-time request с finalization.
