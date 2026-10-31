@@ -8,6 +8,21 @@ Import не запускает эксперименты. Реализованы 
 Общий prepare, сквозной scheduler и полная миграция ещё не готовы; новые native
 операции имеют явно ограниченный контракт, описанный ниже.
 
+Добавлен `posttune JOB.json --source-solo CASE_learned_state.json --runtime-manifest
+RUNTIME.json --wall-seconds 900 --output NEW_RUN` и portable
+`analyze NEW_RUN/run-manifest.json --format posttune-run`. Он использует реальную
+Console-операцию `--timelearner-posttune` и общий owned runner калибровки, а не
+однократную генерацию кандидата. Сборка Console подтверждена; полный корпус
+18 новых jobs и регрессии прежней calibration operation ещё проходят приёмку.
+Условия и ограничения — в [контракте измерительного PostTune](../../../Docs/StructTrain/TimeLearner/NativePostTuneController.ru.md).
+
+`report TRANSACTION.json --format posttune-transaction --source-solo
+CASE_learned_state.json --output NEW_CACHE` строит графики всех завершённых
+weight matrices и actual threshold-grid/fresh-confirmation. Полные cache
+сохраняются на Data M40; в Git включаются компактные первичные данные/метаданные
+и выбранные проверенные рисунки. Этот renderer не превращает подбор параметров
+в independent Test и сохраняет partial probes без выдуманных полных графиков.
+
 ```text
 python -m Scripts.StructTrain.TimeLearner analyze record.json --format domain
 python -m Scripts.StructTrain.TimeLearner analyze trial.json --format probe --trace trial.csv
