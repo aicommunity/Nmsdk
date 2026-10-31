@@ -150,3 +150,34 @@ SumPotential соединяет точки линиями, вход изобра
 Эти imported-model controls не доказывают успешного обучения, independent Test
 или завершения configured finalization. Для queued/stopped controls нет
 выдуманных waveform-проб. Итогового scientific verdict нет.
+
+## Active-request import: реализация ожидает runtime-приёмки
+
+PulseLib ec3d7b4fc01efec5bfd727b3057e86a66bb6a94b, root
+c0496d2538054afd580fc46f00922144aabe630c добавляют явный
+ImportNativeFinalizationState(package, implementation, boundary). Этот путь
+требует завершённого исходного Solo, активного запроса, прежних controls/bindings,
+точного source_solo кандидата и повторной проверки исходной модели. XML остаётся
+точным, кроме документированного zero-feedback cache перехода двух image snapshots.
+Сравнение dataset не ослаблено; ни одного Calculate при entry нет.
+
+Managed recognition hold хранит immutable исходную границу. Need остаётся true,
+а CalculateMode и исходные PostTune/AutoCalibrate не заменяются frozen mirrors.
+Меняться могут только физические threshold mirrors; controls и bindings остальных
+параметров читаются заново. Реально снятый connected request даёт
+native_finalization_external_stop, даже если setter не вызывался. Значение provider
+не записывается и не восстанавливается силами learner.
+
+Общий transaction scope использует ReplaceNativeRecognitionState, сохраняющий
+текущую policy при import кандидатов/rollback. Прежний ImportNativeRecognitionState
+остаётся явным frozen import и по-прежнему требует Need=false у внешнего source.
+NativeFinalizationIntent возвращает value-copy исходного документа. Это не
+сохранение текущей физической динамики и не controller checkpoint.
+
+Четыре новых интеграционных сценария: Classic/Branch × CalculateMode 0/1,
+реальный connected request, полный fixed PostTune с разными measurement/final
+thresholds, отклонение чужого source, external stop и явный frozen import.
+Запущены совместно с capture/lifecycle/codec/fixed PostTune/threshold regressions;
+до получения результатов runtime-приёмка не заявляется. Automatic configured
+dispatcher, публичный mapping target-reference/mid/parallel-peak, full matrix и
+снятие optional guards этим не выполнены. Старые исторические verdict не меняются.
