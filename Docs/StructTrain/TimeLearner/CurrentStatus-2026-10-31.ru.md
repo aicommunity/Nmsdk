@@ -4,7 +4,28 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Текущий подэтап: InterruptOwnerLifecycle отдельно прерывает PostTune/calibration
+Текущий подэтап: отдельная физика weight probe threshold и свежие реакции
+конечной модели. Source root 800ca40e / PulseLib 09f72c7: normal 20/20 native
+(126.287 s), ASan 20/20 (834.511 s), без skips. Более поздний production source
+6787071f / PulseLib 56707d7: по 5 codec и 10 reader checks на обоих workers.
+Console cases и visual reports ещё проходят приёмку; proof пока не опубликован.
+Первый normal Console supervisor=1 вызван ошибочным ожиданием отрицательного
+Branch outcome в проверочном сценарии: сам Branch run valid/calibrated при
+0.006293579947234118, на двух calibration patterns. Maintained validator
+проверяет применение факторов/данные/A-B bytes, не предписывает научный исход.
+Configured learner hooks/phase dispatch и обязательная полная матрица открыты.
+[Подробности](NativePostTuneController.ru.md#результат-адресных-gates-3110-и-исправление-ожидаемого-исхода).
+
+[Read-only сверка Elder Bin/M40](../../../Reports/StructTrain/TimeLearner/s02-elder-bin-inventory-20261031/README.md)
+сохранена через Git (два gzip receipts, 90162 bytes), все hashes после merge
+проверены. Missing-by-inventory не доказывает глобальной уникальности.
+Исторические данные не переносились и не удалялись. На Elder отдельно очищен
+воспроизводимый static-link cache старых неактивных runtime: 789 путей .a,
+9.484 GB logical / около 3.05 GB реально освобождено; 224 executable hashes
+не изменились. Это cache cleanup, не заявление о дублировании всех файлов.
+Receipt пока находится в серверном readback и войдёт в compact proof.
+
+Ранее проверенный подэтап: InterruptOwnerLifecycle отдельно прерывает PostTune/calibration
 перед Reset/Default/teardown без доступа к owner и реентерабельного rollback.
 Root ba33ee20 / PulseLib 979aea4: Elder normal завершён — 16/16 lifecycle cases
 (69.737 s), 12/12 прежних fixed/codec regressions (68.354 s), 8/8 independent
