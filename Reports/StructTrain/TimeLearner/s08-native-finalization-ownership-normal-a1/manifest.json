@@ -1,0 +1,1586 @@
+{
+  "kind": "native_finalization_ownership_proof",
+  "schema_version": 1,
+  "build": "normal",
+  "native_a1_root": "c0496d2538054afd580fc46f00922144aabe630c",
+  "native_a1_pulse": "ec3d7b4fc01efec5bfd727b3057e86a66bb6a94b",
+  "native_a2_root": "a05416971e7cfacb0166d68d2fb9bbc4152cc55f",
+  "native_a2_pulse": "aca4b33be50a03796f486578be794fe014b6e739",
+  "reader_root": "8e3e6678664c2940063879b2dd6257e16ad76aa5",
+  "native_a1_gate": {
+    "kind": "native_finalization_ownership_gate",
+    "schema_version": 1,
+    "native_tests": 44,
+    "native_seconds": 191.796,
+    "test_names": [
+      [
+        "NativeFinalizationBoundary",
+        "BranchConnectedRequest"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "BranchPendingProbeRejects"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "BranchSnapshot"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "BranchStoppedIsDiagnostic"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicConnectedRequest"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicPendingProbeRejects"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicSnapshot"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicStoppedIsDiagnostic"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "PublicEnumsUseExplicitMapping"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "BranchAutomatic"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "BranchExternal"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "ClassicAutomatic"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "ClassicExternal"
+      ],
+      [
+        "NativeFixedPostTune",
+        "BranchBudget"
+      ],
+      [
+        "NativeFixedPostTune",
+        "BranchCancel"
+      ],
+      [
+        "NativeFixedPostTune",
+        "BranchResetDoesNotRollback"
+      ],
+      [
+        "NativeFixedPostTune",
+        "BranchSelectionRoundtripAndLaterCalibration"
+      ],
+      [
+        "NativeFixedPostTune",
+        "ClassicBudget"
+      ],
+      [
+        "NativeFixedPostTune",
+        "ClassicCancel"
+      ],
+      [
+        "NativeFixedPostTune",
+        "ClassicResetDoesNotRollback"
+      ],
+      [
+        "NativeFixedPostTune",
+        "ClassicSelectionRoundtripAndLaterCalibration"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "AllEighteenPublishedProductionJobs"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "RejectsUnknownFieldsEnumsAndTypes"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "RejectsUnrepresentableBudgetsAndNonfiniteControls"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "SchemaThreeKeepsMeasurementPhysicsExplicit"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "SchemaTwoKeepsFinalizationExplicit"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "BranchComplete"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "BranchFinalBudget"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "BranchFinalCancel"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "BranchFinalReset"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "ClassicComplete"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "ClassicFinalBudget"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "ClassicFinalCancel"
+      ],
+      [
+        "NativePostTuneProbeThreshold",
+        "ClassicFinalReset"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "BranchAuditFlagDefaultAndReuse"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "BuildResetAndCalculateHaveObservableNativeOrder"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "ClassicAuditFlagDefaultAndReuse"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "ConstantSourceResetPublishesRestValueBeforeFirstTick"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "PooledRebuildRequiresEnvironmentThroughChannelShutdown"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "ResetRefreshesSynapseStepCoefficients"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "SpikeHistoryIsEmptyBeforeFirstTick"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "SpikeHistoryResetRemovesEventsWithoutDiscardingZeroTimeSpike"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "StorageImageSurvivesFreshTakeAndReuse"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "SynapseResetClearsConductanceBeforeFirstTick"
+      ]
+    ],
+    "runtime_provenance": "loaded_files_captured",
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "native_a2_gate": {
+    "kind": "native_finalization_ownership_gate",
+    "schema_version": 1,
+    "native_tests": 18,
+    "native_seconds": 68.693,
+    "test_names": [
+      [
+        "NativeFinalizationBoundary",
+        "BranchConnectedRequest"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "BranchPendingProbeRejects"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "BranchSnapshot"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "BranchStoppedIsDiagnostic"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicConnectedRequest"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicPendingProbeRejects"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicSnapshot"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "ClassicStoppedIsDiagnostic"
+      ],
+      [
+        "NativeFinalizationBoundary",
+        "PublicEnumsUseExplicitMapping"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "BranchAutomatic"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "BranchExternal"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "ClassicAutomatic"
+      ],
+      [
+        "NativeFinalizationOwnership",
+        "ClassicExternal"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "AllEighteenPublishedProductionJobs"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "RejectsUnknownFieldsEnumsAndTypes"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "RejectsUnrepresentableBudgetsAndNonfiniteControls"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "SchemaThreeKeepsMeasurementPhysicsExplicit"
+      ],
+      [
+        "NativePostTuneConfiguration",
+        "SchemaTwoKeepsFinalizationExplicit"
+      ]
+    ],
+    "runtime_provenance": "loaded_files_captured",
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "reader_gate": {
+    "kind": "native_finalization_ownership_reader_gate",
+    "schema_version": 1,
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 23.19739990402013,
+    "source_root": "8e3e6678664c2940063879b2dd6257e16ad76aa5",
+    "scientific_verdict": null,
+    "cases": [
+      {
+        "case": "Branch_managed_finalization_0.json",
+        "audit": {
+          "schema_version": 1,
+          "calculate_mode": 0,
+          "training_source_audit": {
+            "auditor_version": 2,
+            "certificate_consistent": true,
+            "primary_trials": 14,
+            "embedded_trials": 4,
+            "exact": false,
+            "model_revision": "05a2987347ddef8885dfc6a51415e7011304eb7d8d79a48c3b01bf4369f487ba",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "evaluation_verdict": null
+          },
+          "original_training_calculate_mode": 1,
+          "original_training_source_sha256": "4a0a7212c788be07d213078c8e59c1f1972b13c8059b1731f050d3970e4d8df7",
+          "replayed_source_sha256": "6ff90ad2083b24e02fc8f1e2e3fb043cd6b1312be2565afcead463e9a0a7e24d",
+          "transaction_audit": {
+            "schema_version": 3,
+            "recorded_search_consistent": true,
+            "status": "weights_selected",
+            "measured_candidates": 1,
+            "selected_index": 0,
+            "complete_weight_samples": 1602,
+            "proposal_sequence_verified": true,
+            "native_physics_rejections_verified": true,
+            "calibration_audit": null,
+            "native_execution_verified": false,
+            "owner_restoration_verified": false,
+            "partial_observations_validated": false,
+            "statistical_independence_verified": false,
+            "evaluation_verdict": null,
+            "weight_probe_threshold": 2,
+            "complete_final_samples": 1602,
+            "final_threshold_responses_observed": true,
+            "calibration_policy": "fixed",
+            "calibration_status": "fixed",
+            "weight_selection_only": true,
+            "recognition_success_confirmed": false
+          },
+          "external_stop_record_consistent": true,
+          "native_control_execution_attested": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "case": "Branch_managed_finalization_1.json",
+        "audit": {
+          "schema_version": 1,
+          "calculate_mode": 1,
+          "training_source_audit": {
+            "auditor_version": 2,
+            "certificate_consistent": true,
+            "primary_trials": 14,
+            "embedded_trials": 4,
+            "exact": false,
+            "model_revision": "05a2987347ddef8885dfc6a51415e7011304eb7d8d79a48c3b01bf4369f487ba",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "evaluation_verdict": null
+          },
+          "original_training_calculate_mode": 1,
+          "original_training_source_sha256": "4a0a7212c788be07d213078c8e59c1f1972b13c8059b1731f050d3970e4d8df7",
+          "replayed_source_sha256": "df064fec74f4a72c53b44d695d553d2a0665a9f8eded301fc3a5018304cd9647",
+          "transaction_audit": {
+            "schema_version": 3,
+            "recorded_search_consistent": true,
+            "status": "weights_selected",
+            "measured_candidates": 1,
+            "selected_index": 0,
+            "complete_weight_samples": 1602,
+            "proposal_sequence_verified": true,
+            "native_physics_rejections_verified": true,
+            "calibration_audit": null,
+            "native_execution_verified": false,
+            "owner_restoration_verified": false,
+            "partial_observations_validated": false,
+            "statistical_independence_verified": false,
+            "evaluation_verdict": null,
+            "weight_probe_threshold": 2,
+            "complete_final_samples": 1602,
+            "final_threshold_responses_observed": true,
+            "calibration_policy": "fixed",
+            "calibration_status": "fixed",
+            "weight_selection_only": true,
+            "recognition_success_confirmed": false
+          },
+          "external_stop_record_consistent": true,
+          "native_control_execution_attested": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "case": "Classic_managed_finalization_0.json",
+        "audit": {
+          "schema_version": 1,
+          "calculate_mode": 0,
+          "training_source_audit": {
+            "auditor_version": 2,
+            "certificate_consistent": true,
+            "primary_trials": 14,
+            "embedded_trials": 4,
+            "exact": false,
+            "model_revision": "3b52682399cf645e905b35a9498d618f85518c5131acdd9787ebf3baebd6b16e",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "evaluation_verdict": null
+          },
+          "original_training_calculate_mode": 1,
+          "original_training_source_sha256": "894124c0262ca3d681e0668dc5e1e9309e2561cc68c85209cff4d629bcc035ca",
+          "replayed_source_sha256": "66388680199c2a228213b75335201d09511a4436851256c82ff722c7d38b368b",
+          "transaction_audit": {
+            "schema_version": 3,
+            "recorded_search_consistent": true,
+            "status": "weights_selected",
+            "measured_candidates": 1,
+            "selected_index": 0,
+            "complete_weight_samples": 1602,
+            "proposal_sequence_verified": true,
+            "native_physics_rejections_verified": true,
+            "calibration_audit": null,
+            "native_execution_verified": false,
+            "owner_restoration_verified": false,
+            "partial_observations_validated": false,
+            "statistical_independence_verified": false,
+            "evaluation_verdict": null,
+            "weight_probe_threshold": 2,
+            "complete_final_samples": 1602,
+            "final_threshold_responses_observed": true,
+            "calibration_policy": "fixed",
+            "calibration_status": "fixed",
+            "weight_selection_only": true,
+            "recognition_success_confirmed": false
+          },
+          "external_stop_record_consistent": true,
+          "native_control_execution_attested": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "case": "Classic_managed_finalization_1.json",
+        "audit": {
+          "schema_version": 1,
+          "calculate_mode": 1,
+          "training_source_audit": {
+            "auditor_version": 2,
+            "certificate_consistent": true,
+            "primary_trials": 14,
+            "embedded_trials": 4,
+            "exact": false,
+            "model_revision": "3b52682399cf645e905b35a9498d618f85518c5131acdd9787ebf3baebd6b16e",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "evaluation_verdict": null
+          },
+          "original_training_calculate_mode": 1,
+          "original_training_source_sha256": "894124c0262ca3d681e0668dc5e1e9309e2561cc68c85209cff4d629bcc035ca",
+          "replayed_source_sha256": "f14628c86537cd0a234d2c421e161a44af0df7f0df17bb6bb88e2bbc362f5513",
+          "transaction_audit": {
+            "schema_version": 3,
+            "recorded_search_consistent": true,
+            "status": "weights_selected",
+            "measured_candidates": 1,
+            "selected_index": 0,
+            "complete_weight_samples": 1602,
+            "proposal_sequence_verified": true,
+            "native_physics_rejections_verified": true,
+            "calibration_audit": null,
+            "native_execution_verified": false,
+            "owner_restoration_verified": false,
+            "partial_observations_validated": false,
+            "statistical_independence_verified": false,
+            "evaluation_verdict": null,
+            "weight_probe_threshold": 2,
+            "complete_final_samples": 1602,
+            "final_threshold_responses_observed": true,
+            "calibration_policy": "fixed",
+            "calibration_status": "fixed",
+            "weight_selection_only": true,
+            "recognition_success_confirmed": false
+          },
+          "external_stop_record_consistent": true,
+          "native_control_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    ]
+  },
+  "source_closure": {
+    "run_snapshots_verified": 2,
+    "artifact_entries_verified": 84,
+    "scientific_verdict": null
+  },
+  "frozen_compatibility": {
+    "kind": "native_finalization_frozen_compatibility",
+    "schema_version": 1,
+    "original_proof": "Reports/StructTrain/TimeLearner/s08-native-posttune-probe-normal-a1/",
+    "records": [
+      {
+        "path": "Branch_fixed_0_roundtrip.json",
+        "byte_exact": false,
+        "current_sha256": "f876586dcb59962d78f95e8d8d214f6b9c2c4b460419852dff3839be8cca8b2f",
+        "original_sha256": "ff855e2b4c5d7180dfe0559877e4dbec389a38c144d957b5b1b1ec8ea8140ae1"
+      },
+      {
+        "path": "Branch_fixed_0_transaction.json",
+        "byte_exact": false,
+        "current_sha256": "832945a64b52aec5fa45e13dd30b3da99be67a588dc1f1962aef482854ba518b",
+        "original_sha256": "23625c6724c9b6008d08aabf034f62043a10af567b3b7a705e4f835a649b2824"
+      },
+      {
+        "path": "Branch_fixed_1_transaction.json",
+        "byte_exact": true,
+        "current_sha256": "9edb8319fadff6418912d875e56caa118077a559daa5edce87b56a189eb495be",
+        "original_sha256": "9edb8319fadff6418912d875e56caa118077a559daa5edce87b56a189eb495be"
+      },
+      {
+        "path": "Branch_fixed_2_transaction.json",
+        "byte_exact": true,
+        "current_sha256": "8c7657a8708d70880768363a29687d2b15a1efaded73031460850be3d3967585",
+        "original_sha256": "8c7657a8708d70880768363a29687d2b15a1efaded73031460850be3d3967585"
+      },
+      {
+        "path": "Branch_fixed_3_transaction.json",
+        "byte_exact": true,
+        "current_sha256": "d84eb267977c3fa058a4b073895b1d48eedf2d98e51a5b4fc828375e95214b57",
+        "original_sha256": "d84eb267977c3fa058a4b073895b1d48eedf2d98e51a5b4fc828375e95214b57"
+      },
+      {
+        "path": "Classic_fixed_0_roundtrip.json",
+        "byte_exact": false,
+        "current_sha256": "576d70525106ed4dbcf0ad125a0f37e85fa0f6b00bfc6f876ff6bdcb139e11ef",
+        "original_sha256": "d08c2e28bab57391c782d4f0ab25518918ba1cac834be973de9ca34669436f16"
+      },
+      {
+        "path": "Classic_fixed_0_transaction.json",
+        "byte_exact": false,
+        "current_sha256": "302a6e7146347694e604394bff17c1630f96e56a82f1fa5e9d0839d5e7a32b2c",
+        "original_sha256": "55a14c1458287370ce955b7b1d9d5f3d4f61a5345e8fcb7140caf400714b889f"
+      },
+      {
+        "path": "Classic_fixed_1_transaction.json",
+        "byte_exact": true,
+        "current_sha256": "ccb3e5996cf583863fa3f640201202822123671638eb9ea289b39354dcd85cb0",
+        "original_sha256": "ccb3e5996cf583863fa3f640201202822123671638eb9ea289b39354dcd85cb0"
+      },
+      {
+        "path": "Classic_fixed_2_transaction.json",
+        "byte_exact": true,
+        "current_sha256": "ecfd97be0bdfe20a3d3c4105783f7c4d8a6c8833a1685b050d63c2fde056e6c5",
+        "original_sha256": "ecfd97be0bdfe20a3d3c4105783f7c4d8a6c8833a1685b050d63c2fde056e6c5"
+      },
+      {
+        "path": "Classic_fixed_3_transaction.json",
+        "byte_exact": true,
+        "current_sha256": "232b9dfb8616799872445a00338ffb2da75a5ccbcd28f39949e2e90b7a3de0b8",
+        "original_sha256": "232b9dfb8616799872445a00338ffb2da75a5ccbcd28f39949e2e90b7a3de0b8"
+      }
+    ],
+    "byte_exact": 6,
+    "scientific_verdict": null
+  },
+  "clock_isolation_fix_root": "87e36a376afe513c0355c468ba7eb8afa3829219",
+  "clock_isolation_fix_runtime_accepted": false,
+  "configured_phase_dispatch_implemented": false,
+  "full_stage_8_accepted": false,
+  "scientific_verdict": null,
+  "archive_sha256": "8b7d94be2dc9d5da627d143617fd2955abfcab35834bb914028d2b7d946017cd",
+  "files": [
+    {
+      "path": "compatibility/difference-details.json",
+      "bytes": 4565967,
+      "sha256": "7a3bce8e71453a96264401be99f0a4b06afd2b02fc113ee4ef17b057f4af3061"
+    },
+    {
+      "path": "compatibility/validation.json",
+      "bytes": 2965,
+      "sha256": "fdec0fddd9716256ce0199e61bf0a60bab38e278e0dab1f3e471f6ee156a8ac6"
+    },
+    {
+      "path": "failed-reader-a1/checkout.log",
+      "bytes": 167,
+      "sha256": "c4d712d3446dd18f67c8f043c02d285fe3639c71069ea9171465479e7cc8a19c"
+    },
+    {
+      "path": "failed-reader-a1/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "failed-reader-a1/runner.sh",
+      "bytes": 2741,
+      "sha256": "6ad40eafc1d488572ed21f68b4da00eb60d774c763a681b0d37e932d322b00ad"
+    },
+    {
+      "path": "failed-reader-a1/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "failed-reader-a1/supervisor.pid",
+      "bytes": 8,
+      "sha256": "4b743235c2ef5e488e4787e839a5a5576401a5d4e5e115f9d5295576e262a2ad"
+    },
+    {
+      "path": "failed-reader-a1/tests.log",
+      "bytes": 3119,
+      "sha256": "ccbecd430df455ea4db50a4ca657511358141e05f1f7fbb993ed22725bca7cde"
+    },
+    {
+      "path": "failed-reader-a1/validation.json",
+      "bytes": 267,
+      "sha256": "37b247edc9f8e09c5770b0f6be2013ce156ba0588d0cdf9ee86e0740bb0232f0"
+    },
+    {
+      "path": "failed-reader-a2/checkout.log",
+      "bytes": 195,
+      "sha256": "d58ca734efb9ecad2b7bfa7c29e36879afa2438b5a7ac5efc7547f16149b015b"
+    },
+    {
+      "path": "failed-reader-a2/process-exit-status.txt",
+      "bytes": 4,
+      "sha256": "56292515f7d3a7110811eb8de26b3f75f82a0766aa5a1fd66ebcfcb84fe6d5ff"
+    },
+    {
+      "path": "failed-reader-a2/runner.sh",
+      "bytes": 2710,
+      "sha256": "132f2c464b3d92e0486aa8cff7148037fd068051aa43ea65072a212b93fa89c4"
+    },
+    {
+      "path": "failed-reader-a2/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "failed-reader-a2/supervisor.pid",
+      "bytes": 8,
+      "sha256": "90c3b533aa866718617c5d5d8c5410e1f80353e4198ca8b11a1fddd87a79f178"
+    },
+    {
+      "path": "native-a1/build.log",
+      "bytes": 9241,
+      "sha256": "8b77cb7838961cad4ed957df0d31d719b8a99e274d86a05ea1298586cf0e3772"
+    },
+    {
+      "path": "native-a1/checkout.log",
+      "bytes": 599,
+      "sha256": "6f0a15fd868a408340aa547d0bc410c12bebc4335d01d977206bb85c45c84e01"
+    },
+    {
+      "path": "native-a1/configure.log",
+      "bytes": 1203,
+      "sha256": "4b88b74f0698d201e51a66e8747a62267d26b3ce2cc908e0da59d0238f935177"
+    },
+    {
+      "path": "native-a1/live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "native-a1/native-validation.json",
+      "bytes": 3990,
+      "sha256": "87ead8ec75c84f90f539cb73d12b7af70b1b06237621066e13549a331cdd9751"
+    },
+    {
+      "path": "native-a1/native.xml",
+      "bytes": 14788,
+      "sha256": "8b43a1052eab7322dc701619de36b4fc361acec0b61ed0a86067fded9cf329a5"
+    },
+    {
+      "path": "native-a1/native/Branch_finalization_boundary_0.json",
+      "bytes": 1235791,
+      "sha256": "9753012f861719f7c510e7fa9c0d2b69201122cd49fabc0a10ef4d24a874cc01"
+    },
+    {
+      "path": "native-a1/native/Branch_finalization_boundary_0_capture-comparison.json",
+      "bytes": 3680680,
+      "sha256": "a5dead764dc093babd7c69f1d8de694e44f7c9d54eeb1a381e96bc5e7650c35e"
+    },
+    {
+      "path": "native-a1/native/Branch_finalization_boundary_0_replay.json",
+      "bytes": 4473125,
+      "sha256": "3af1ec7a4b1499f544d1afcb240a4e6f7f5a0e1117fae6ca178da7d7bb1121f9"
+    },
+    {
+      "path": "native-a1/native/Branch_finalization_boundary_1.json",
+      "bytes": 1235952,
+      "sha256": "c16f6b76a4ecc6f996e0509e5fd21cddc5642e40a0649a8e132a41e596901478"
+    },
+    {
+      "path": "native-a1/native/Branch_finalization_boundary_1_capture-comparison.json",
+      "bytes": 3680680,
+      "sha256": "a5dead764dc093babd7c69f1d8de694e44f7c9d54eeb1a381e96bc5e7650c35e"
+    },
+    {
+      "path": "native-a1/native/Branch_finalization_boundary_1_replay.json",
+      "bytes": 4473344,
+      "sha256": "df781379e7d136dc6097bb3b58b7011d5324e84bf7209d9883fe53ddab679ea7"
+    },
+    {
+      "path": "native-a1/native/Branch_finalization_boundary_3.json",
+      "bytes": 1218299,
+      "sha256": "70c5c062497aa5354e3b42385b431c8436ba221a4bfb056153efb5474383e52c"
+    },
+    {
+      "path": "native-a1/native/Branch_fixed_0_roundtrip.json",
+      "bytes": 19136813,
+      "sha256": "f876586dcb59962d78f95e8d8d214f6b9c2c4b460419852dff3839be8cca8b2f"
+    },
+    {
+      "path": "native-a1/native/Branch_fixed_0_transaction.json",
+      "bytes": 16007324,
+      "sha256": "832945a64b52aec5fa45e13dd30b3da99be67a588dc1f1962aef482854ba518b"
+    },
+    {
+      "path": "native-a1/native/Branch_fixed_1_transaction.json",
+      "bytes": 2486228,
+      "sha256": "9edb8319fadff6418912d875e56caa118077a559daa5edce87b56a189eb495be"
+    },
+    {
+      "path": "native-a1/native/Branch_fixed_2_transaction.json",
+      "bytes": 2488289,
+      "sha256": "8c7657a8708d70880768363a29687d2b15a1efaded73031460850be3d3967585"
+    },
+    {
+      "path": "native-a1/native/Branch_fixed_3_transaction.json",
+      "bytes": 2486934,
+      "sha256": "d84eb267977c3fa058a4b073895b1d48eedf2d98e51a5b4fc828375e95214b57"
+    },
+    {
+      "path": "native-a1/native/Branch_managed_finalization_0.json",
+      "bytes": 17935337,
+      "sha256": "245e344d68de43668264132922afa7c2f84a4410ed8e80caed154c83687854cd"
+    },
+    {
+      "path": "native-a1/native/Branch_managed_finalization_1.json",
+      "bytes": 17935456,
+      "sha256": "bfe95dfc1a2975a717063d7691da6d6d5ef521debc58fad5279b1ce593b634ad"
+    },
+    {
+      "path": "native-a1/native/Branch_probe_threshold_0.json",
+      "bytes": 13417526,
+      "sha256": "0c98e4512636a079d41d35bca0a4f1611dcfc92f78d41d8095ecb8c38f3573e3"
+    },
+    {
+      "path": "native-a1/native/Branch_probe_threshold_1.json",
+      "bytes": 10157330,
+      "sha256": "7ae82a24e096a147cd7a422452756f5b1b532eec2479ffb7e5a9195357d56a97"
+    },
+    {
+      "path": "native-a1/native/Branch_probe_threshold_2.json",
+      "bytes": 10159405,
+      "sha256": "526ff419b228d78aea75d0d91b4b1e994b86af51adee88c283273fbf1a108be2"
+    },
+    {
+      "path": "native-a1/native/Branch_probe_threshold_3.json",
+      "bytes": 10157969,
+      "sha256": "142e40abfb7b493bfe815342ed137dba9f611d644d1e4653626d66998ea08c18"
+    },
+    {
+      "path": "native-a1/native/Classic_finalization_boundary_0.json",
+      "bytes": 1331490,
+      "sha256": "d36aec098b85d1ad532c0eef9422b9b9c3f7c995c7907070216387da4954749c"
+    },
+    {
+      "path": "native-a1/native/Classic_finalization_boundary_0_capture-comparison.json",
+      "bytes": 3967753,
+      "sha256": "5eb32036ecc7dbf89ef37d53f03f580abdbe9ec1b47d494873c890b188949f95"
+    },
+    {
+      "path": "native-a1/native/Classic_finalization_boundary_0_replay.json",
+      "bytes": 4845035,
+      "sha256": "6b48b64f232ee6b820e415e1a1a9730fc9f6a20be923723a2493bc5dc866cf6e"
+    },
+    {
+      "path": "native-a1/native/Classic_finalization_boundary_1.json",
+      "bytes": 1331651,
+      "sha256": "66f3b62ed104a622a5aabd5f234cf1fab97a03560e5252ce9dea9c2b600db53c"
+    },
+    {
+      "path": "native-a1/native/Classic_finalization_boundary_1_capture-comparison.json",
+      "bytes": 3967753,
+      "sha256": "5eb32036ecc7dbf89ef37d53f03f580abdbe9ec1b47d494873c890b188949f95"
+    },
+    {
+      "path": "native-a1/native/Classic_finalization_boundary_1_replay.json",
+      "bytes": 4845256,
+      "sha256": "d1417217e359144a2edfd20b97c80408980f97148a7f46f50adaf8741e2cd4a1"
+    },
+    {
+      "path": "native-a1/native/Classic_finalization_boundary_3.json",
+      "bytes": 1313936,
+      "sha256": "3bd20f50a6447b3ec14f69b8b572fab82db38da1d75876861402b2b605a6055c"
+    },
+    {
+      "path": "native-a1/native/Classic_fixed_0_roundtrip.json",
+      "bytes": 35644899,
+      "sha256": "576d70525106ed4dbcf0ad125a0f37e85fa0f6b00bfc6f876ff6bdcb139e11ef"
+    },
+    {
+      "path": "native-a1/native/Classic_fixed_0_transaction.json",
+      "bytes": 9353100,
+      "sha256": "302a6e7146347694e604394bff17c1630f96e56a82f1fa5e9d0839d5e7a32b2c"
+    },
+    {
+      "path": "native-a1/native/Classic_fixed_1_transaction.json",
+      "bytes": 2682596,
+      "sha256": "ccb3e5996cf583863fa3f640201202822123671638eb9ea289b39354dcd85cb0"
+    },
+    {
+      "path": "native-a1/native/Classic_fixed_2_transaction.json",
+      "bytes": 2684665,
+      "sha256": "ecfd97be0bdfe20a3d3c4105783f7c4d8a6c8833a1685b050d63c2fde056e6c5"
+    },
+    {
+      "path": "native-a1/native/Classic_fixed_3_transaction.json",
+      "bytes": 2683306,
+      "sha256": "232b9dfb8616799872445a00338ffb2da75a5ccbcd28f39949e2e90b7a3de0b8"
+    },
+    {
+      "path": "native-a1/native/Classic_managed_finalization_0.json",
+      "bytes": 19390239,
+      "sha256": "acbe1490b2d7fffc5e9b7a4376298104210837ec6f21d1dad49b4d1bb9f4c5ce"
+    },
+    {
+      "path": "native-a1/native/Classic_managed_finalization_1.json",
+      "bytes": 19390316,
+      "sha256": "df23e836756e09a692ddda53a814acb098af1c4b21d9cbebd81dc854f797a83e"
+    },
+    {
+      "path": "native-a1/native/Classic_probe_threshold_0.json",
+      "bytes": 14516151,
+      "sha256": "59989dd559c0fe8d2df61190413695c613482d32f234e755c672d9177afe37b1"
+    },
+    {
+      "path": "native-a1/native/Classic_probe_threshold_1.json",
+      "bytes": 10980672,
+      "sha256": "facd1e05444645856f3370ff3b43d55c10788599e16c2c6cb5cf6a67a031d127"
+    },
+    {
+      "path": "native-a1/native/Classic_probe_threshold_2.json",
+      "bytes": 10982768,
+      "sha256": "2fc0f65085ed3f8902bf356fd6f99025c5c7c32b8cb3a7109e4eebac7ea8362b"
+    },
+    {
+      "path": "native-a1/native/Classic_probe_threshold_3.json",
+      "bytes": 10981303,
+      "sha256": "ce9097d02633b7769be0d4e14a5ebf749d4bfc7be84a648a40bbbffd05d10e41"
+    },
+    {
+      "path": "native-a1/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "native-a1/process/loaded-files.json",
+      "bytes": 4523,
+      "sha256": "74f28fc03d13096ff54ee3cce2333c37ad1c078e0b461d5874144ec19cd18443"
+    },
+    {
+      "path": "native-a1/process/owned-process.json",
+      "bytes": 423,
+      "sha256": "c240f3e669916fe0b8f729822c0941f051e34ba4b2112ea47fff9a8f94ed8ce0"
+    },
+    {
+      "path": "native-a1/process/request.json",
+      "bytes": 667,
+      "sha256": "76ffa42e6e9929b6f93f355401bc7846dfeb26efa1034f073e23025ab0583c74"
+    },
+    {
+      "path": "native-a1/process/result.json",
+      "bytes": 444,
+      "sha256": "8b97dc3fbdbb8bbd9e45c131237b3ca0e10d400a7e71344e6a224e70a5872cd7"
+    },
+    {
+      "path": "native-a1/process/runtime.json",
+      "bytes": 12137,
+      "sha256": "d3beebcc164f05e3d01feb11a0baaa662d92415d2b6bb182516457a7e19df726"
+    },
+    {
+      "path": "native-a1/process/stderr.log",
+      "bytes": 259,
+      "sha256": "e75357a170bf1f24db8cee2555ede243b8889f1ab46da8fb0a4eaefd2fd8c45b"
+    },
+    {
+      "path": "native-a1/process/stdout.log",
+      "bytes": 7520,
+      "sha256": "e1822bf69b9f621809b02b02075d7f840bc500683d0066af22f82dbdc9e34f5a"
+    },
+    {
+      "path": "native-a1/runner.sh",
+      "bytes": 4519,
+      "sha256": "7c532a09f8997bf4fcf65927c632cddcba54a3d335a9cdd48dbd33e450f8ea37"
+    },
+    {
+      "path": "native-a1/runtime-after.json",
+      "bytes": 12137,
+      "sha256": "d3beebcc164f05e3d01feb11a0baaa662d92415d2b6bb182516457a7e19df726"
+    },
+    {
+      "path": "native-a1/runtime-before.json",
+      "bytes": 12137,
+      "sha256": "d3beebcc164f05e3d01feb11a0baaa662d92415d2b6bb182516457a7e19df726"
+    },
+    {
+      "path": "native-a1/source-closure.txt",
+      "bytes": 689,
+      "sha256": "df4c2aa74c36a9cb680f8ca52c540d373dc6a3c6c845614b7c420f28c024127c"
+    },
+    {
+      "path": "native-a1/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-a1/supervisor.pid",
+      "bytes": 8,
+      "sha256": "eba7ab761945c7d5a42bac9ff4165248afcafd1582bd6a3708b46cf106f33b78"
+    },
+    {
+      "path": "native-a1/validation.log",
+      "bytes": 3000,
+      "sha256": "d31ebf462cd6f2b93fe91ab343ee16813c735dce089b426cbfe4f3d47f9ff63f"
+    },
+    {
+      "path": "native-a2/build.log",
+      "bytes": 5007,
+      "sha256": "78b2556221d2ee6640d452fcb9981b9587011c69f4edd4b2b8d432c1f84ffb7f"
+    },
+    {
+      "path": "native-a2/checkout.log",
+      "bytes": 606,
+      "sha256": "ff4d7f6786ae62c9d916ae7c353fec01f10bda7c2db1bcb455cabe1a9711956d"
+    },
+    {
+      "path": "native-a2/configure.log",
+      "bytes": 1203,
+      "sha256": "c16a6553d097c602afdbab310ae33808e0056c0a04babd7a68b99495f5db12d0"
+    },
+    {
+      "path": "native-a2/live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "native-a2/native-validation.json",
+      "bytes": 1773,
+      "sha256": "2021ca24ae313bb92a61ab340fa57704d2bc6242fac1e692c1f05ce5498b4e63"
+    },
+    {
+      "path": "native-a2/native.xml",
+      "bytes": 6263,
+      "sha256": "e8fad420c5f4477e84abdead8224974704c7e45326b080b7fd6646ba61eb7ef4"
+    },
+    {
+      "path": "native-a2/native/Branch_finalization_boundary_0.json",
+      "bytes": 1235791,
+      "sha256": "9753012f861719f7c510e7fa9c0d2b69201122cd49fabc0a10ef4d24a874cc01"
+    },
+    {
+      "path": "native-a2/native/Branch_finalization_boundary_0_capture-comparison.json",
+      "bytes": 3680680,
+      "sha256": "a5dead764dc093babd7c69f1d8de694e44f7c9d54eeb1a381e96bc5e7650c35e"
+    },
+    {
+      "path": "native-a2/native/Branch_finalization_boundary_0_replay.json",
+      "bytes": 4471470,
+      "sha256": "fb41c900b4d129c660ab1959d479218564e42d22a44e92557a64f7c45b9c01f5"
+    },
+    {
+      "path": "native-a2/native/Branch_finalization_boundary_1.json",
+      "bytes": 1235952,
+      "sha256": "c16f6b76a4ecc6f996e0509e5fd21cddc5642e40a0649a8e132a41e596901478"
+    },
+    {
+      "path": "native-a2/native/Branch_finalization_boundary_1_capture-comparison.json",
+      "bytes": 3680680,
+      "sha256": "a5dead764dc093babd7c69f1d8de694e44f7c9d54eeb1a381e96bc5e7650c35e"
+    },
+    {
+      "path": "native-a2/native/Branch_finalization_boundary_1_replay.json",
+      "bytes": 4471649,
+      "sha256": "cfba0c9f90eec5f818f2903fca42d62ca447781dec3b20216361e85546919f16"
+    },
+    {
+      "path": "native-a2/native/Branch_finalization_boundary_3.json",
+      "bytes": 1218299,
+      "sha256": "70c5c062497aa5354e3b42385b431c8436ba221a4bfb056153efb5474383e52c"
+    },
+    {
+      "path": "native-a2/native/Branch_managed_finalization_0.json",
+      "bytes": 17932124,
+      "sha256": "aa633e671d9c16a710582b27d0da3bc01139eebafc79a955c5d94d5044466044"
+    },
+    {
+      "path": "native-a2/native/Branch_managed_finalization_1.json",
+      "bytes": 17932045,
+      "sha256": "3cce042fd36f7329f5d7bdfdd8b49b5b5d0f4ba4915fb927c5c9ac300331fd5d"
+    },
+    {
+      "path": "native-a2/native/Classic_finalization_boundary_0.json",
+      "bytes": 1331490,
+      "sha256": "d36aec098b85d1ad532c0eef9422b9b9c3f7c995c7907070216387da4954749c"
+    },
+    {
+      "path": "native-a2/native/Classic_finalization_boundary_0_capture-comparison.json",
+      "bytes": 3967753,
+      "sha256": "5eb32036ecc7dbf89ef37d53f03f580abdbe9ec1b47d494873c890b188949f95"
+    },
+    {
+      "path": "native-a2/native/Classic_finalization_boundary_0_replay.json",
+      "bytes": 4843377,
+      "sha256": "0aa5a5ef6dbd5a71d97f9e97110883489afa3bab43d9717574d70bb1e57e4f99"
+    },
+    {
+      "path": "native-a2/native/Classic_finalization_boundary_1.json",
+      "bytes": 1331651,
+      "sha256": "66f3b62ed104a622a5aabd5f234cf1fab97a03560e5252ce9dea9c2b600db53c"
+    },
+    {
+      "path": "native-a2/native/Classic_finalization_boundary_1_capture-comparison.json",
+      "bytes": 3967753,
+      "sha256": "5eb32036ecc7dbf89ef37d53f03f580abdbe9ec1b47d494873c890b188949f95"
+    },
+    {
+      "path": "native-a2/native/Classic_finalization_boundary_1_replay.json",
+      "bytes": 4843591,
+      "sha256": "870119201dfa523e83d992dbb5bb55cee78c8446590b742d3345a66ae2e18fe1"
+    },
+    {
+      "path": "native-a2/native/Classic_finalization_boundary_3.json",
+      "bytes": 1313936,
+      "sha256": "3bd20f50a6447b3ec14f69b8b572fab82db38da1d75876861402b2b605a6055c"
+    },
+    {
+      "path": "native-a2/native/Classic_managed_finalization_0.json",
+      "bytes": 19387029,
+      "sha256": "08a0da1f4ca7b8b20d4038857c958c4913d4129b7802f11eb7db993c23511569"
+    },
+    {
+      "path": "native-a2/native/Classic_managed_finalization_1.json",
+      "bytes": 19387044,
+      "sha256": "506ef8afa7609ce270190ab7ceb8558f980c07adaf26eee9529bcef86c85a83a"
+    },
+    {
+      "path": "native-a2/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "native-a2/process/loaded-files.json",
+      "bytes": 4523,
+      "sha256": "4c8ead4b6a049f0cb6100633bc59a92cc31184d39a2f8cbfd0f880d116d68fca"
+    },
+    {
+      "path": "native-a2/process/owned-process.json",
+      "bytes": 423,
+      "sha256": "886d0e598b2c3d043f028ac8f0589bfc157292a38b868fd5f18ab3761c0578dc"
+    },
+    {
+      "path": "native-a2/process/request.json",
+      "bytes": 585,
+      "sha256": "6c9382d49df39345b77f1d13cc7356e2607ef7c36c087cb032562c3f0621f1cd"
+    },
+    {
+      "path": "native-a2/process/result.json",
+      "bytes": 443,
+      "sha256": "47781cd372d24d22cdfc2198e84beb7787f49717b7730f48a17a98fb978be267"
+    },
+    {
+      "path": "native-a2/process/runtime.json",
+      "bytes": 12137,
+      "sha256": "07a6b18960e5c8aac100f8c09f69be6a2c7970c832f03d81be0670bc5f006dfe"
+    },
+    {
+      "path": "native-a2/process/stderr.log",
+      "bytes": 259,
+      "sha256": "e1b44489ada496874136e8322ef90e172c71e9a08905e5760f9e3f33de9fed8b"
+    },
+    {
+      "path": "native-a2/process/stdout.log",
+      "bytes": 3290,
+      "sha256": "aefacf74283ba3728fde32813b30f55e323d9805f2776c23de3d3fdeb6693edd"
+    },
+    {
+      "path": "native-a2/runner.sh",
+      "bytes": 4437,
+      "sha256": "2147124fafcb1327c6aa82dd6e870f8a8222a4e516bfcb529ce857a399ab324e"
+    },
+    {
+      "path": "native-a2/runtime-after.json",
+      "bytes": 12137,
+      "sha256": "07a6b18960e5c8aac100f8c09f69be6a2c7970c832f03d81be0670bc5f006dfe"
+    },
+    {
+      "path": "native-a2/runtime-before.json",
+      "bytes": 12137,
+      "sha256": "07a6b18960e5c8aac100f8c09f69be6a2c7970c832f03d81be0670bc5f006dfe"
+    },
+    {
+      "path": "native-a2/source-closure.txt",
+      "bytes": 689,
+      "sha256": "b504d50973527f771d0171c109563d4c3f08801ff3a3e07fa7016257f3a2bd1a"
+    },
+    {
+      "path": "native-a2/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-a2/supervisor.pid",
+      "bytes": 8,
+      "sha256": "0ed916d74ab5f6c8f73d79deedbc458d8f01cb8c4ac51835a896736f12df511d"
+    },
+    {
+      "path": "native-a2/validation.log",
+      "bytes": 1355,
+      "sha256": "60238890ae981e4d5ae2c959dc679c497be55027b3f5959cd876dd1b4acb2276"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/job.json",
+      "bytes": 1772051,
+      "sha256": "9c5f19ff8de296fab1e0bb697a209efc0b4d4fc80281b364b8ea09ee6fc07c42"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1162896,
+      "sha256": "843103d086b1bd55ae3661b952f8560673178f74f8f05a92e330580d79498863"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 602841,
+      "sha256": "684ce7071247c36dcb0b52d8e4e9b1c9c58b32b69a094e158fa81f05ee6f57ae"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 14639,
+      "sha256": "7e015be7ce9c2e46c5e7320a51b88ca2fceda416052948c02d81a6b6dbe5869f"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5922,
+      "sha256": "fce1c588d21aed388d4d40d5fd689e6cc14eadc285ec0777940a679fbf9c3ff3"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 14750,
+      "sha256": "2c8239c5fb392e5d336f00ccb68ff0a37a7672a8141f1447b1801f494e14caba"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "5712c1e7693af8e680b5a5818da4fd6922b6e763f1b8a18f8f81ca13cd0935b3"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 14685,
+      "sha256": "ef5ce86a70e579db26f5795c8ec573c48c02d2418e5f57bf098047456858edef"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5905,
+      "sha256": "6906db06b4bf8466eb03fbbba0d0f83027703328c967f14975184f125953b6ff"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 14697,
+      "sha256": "fef19f9d639f44cd6c828f99a596dec4bf240977a9a8fb81e117c8e1852ae4b0"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5897,
+      "sha256": "83e0ab90bd52b3fad6a0ad2ae29bc16aeef98896b281725e7c81481a07a45925"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 14720,
+      "sha256": "e62a8ea31f3a3e7994d52344f00e7431e56ab04e2bff46f35475ce63e87b2513"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5937,
+      "sha256": "3d3837cc4ee3f3770b209218a173b284d653777a0c3ce6a4baa87b51bdb4c237"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 14687,
+      "sha256": "3ecd4a7ea4d74bf23ff17dad81067f9eeda92016c82459796a5e61b8b58ebd9e"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5931,
+      "sha256": "d06622319dbf2a79debc041b0e6f4ea6661fecf93627571d8d2090b50d247087"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 14720,
+      "sha256": "4dc7d2be71ba83caf0c8a3cc5707d11a7d18912f92910fcdc98efb54dfdaf637"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5924,
+      "sha256": "e5285014cc8b852b79b140fb62a3f7ee5bc84966791b3f88583cfe64a20b50a9"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 14708,
+      "sha256": "9befc9a953e3cc66475a8cf434b1e9202f30e4daf8c245cdbbbf83122827b76d"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5903,
+      "sha256": "69f045d8dd56ee9a542f154e3f640daedafc8ba454b36d5738d0d254b5080fbf"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 14695,
+      "sha256": "42e33e1006b8f52f24cac422c448028d3b35027b63e6bb8464e19b8f676c96e8"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5895,
+      "sha256": "1e7286d84875985e785a3ca143c3a3d46f218fdde93e55c16ba8c8277046fd78"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 14708,
+      "sha256": "8fa435d1d2477c04082337d05815fb97b364eb6f5c236c6ff6f86e30d3205f8f"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "57787b24030e8f61d8d4bf6d049f4dd9ed5d05c8cac2aedaff0572f5dcd86ec1"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 14724,
+      "sha256": "9c684d184d80e6169aa5506c1b138aed8dce567e9a734eb2cbf1588b2d220520"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5899,
+      "sha256": "7b790827a82cf64276c8cca108ef5b21a65c94b1a923e361a5884fa3d02cdf2a"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 14661,
+      "sha256": "b561e09dd2126ceac1b7021224231f15aebd853bd4bfe6436095e7a6ed56efd1"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5900,
+      "sha256": "732eef0eef0dd72da2520977d97e8aee16a4f1793b8497c201c0d073fc8630d5"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 14625,
+      "sha256": "8b7ac56947f6ba4cdebe85b446d51ea9d96fc03660c158749d390c186a73a3f7"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5897,
+      "sha256": "f37705253c462af14c942f244dc2d65477de4db18c1ac50a7b1e6d19401dca8e"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 14659,
+      "sha256": "8c70d299bdcaf23ed3e3d2e263c1472f0ac70a568347b2a6e862b751bbf9ad46"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5900,
+      "sha256": "016dde02d7a353c0348eabf8d558b6a1926ed311f844805cfed850acbd3cbdf5"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/native/execution.json",
+      "bytes": 1485,
+      "sha256": "dc76304facc90c30b5b63912b228072301c9abb3e63bd66848fb225dfa9bff47"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/native/job.json",
+      "bytes": 2485879,
+      "sha256": "0e143c8dbff8edbf2c6d7d34c5c53b0717cabfa52c59860e2eb5b3dee08e44b7"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/native/model.json",
+      "bytes": 2357881,
+      "sha256": "080094d6ad5c2bd0bec24e942c58c9273d79237502a6052ab8f74a3dfc3e2253"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/native/transaction.json",
+      "bytes": 26995911,
+      "sha256": "b5466ff1299e147e78b3cde3c8ec44e1927826fac49e80b2e50d3a5fed38a2f0"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "c7bb2e4920c61512cefb38ea91da227377bcd2337a7ad5115347a20b3732a4ca"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/process/request.json",
+      "bytes": 836,
+      "sha256": "f35ac2711416615f8f96c2935e076a6dadd5af89d7756bbc326b667b888f8c7b"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/process/result.json",
+      "bytes": 444,
+      "sha256": "adc6ba2d2d7836659f820381d3244d692221f8516245c1f67ec59b74e31c9061"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "original-fixtures/Branch-synthetic/run-manifest.json",
+      "bytes": 18416,
+      "sha256": "2cc5ab0ab9f31cc2512e8f925d60e0bfa5fa42fe09c6f5318e28f3168596ab8d"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/job.json",
+      "bytes": 1917288,
+      "sha256": "48998509897e8334dd74c867383473da0ee8aea0e5640385d0b34a0c9812c386"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1253734,
+      "sha256": "dbd812e2ca3d6c27ead3092e1a0c220de64643eaea479bf1224cf11f2eb1e03e"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "2a172df9a5e3481142f18ec5af42cbfaa077b0bcc7ab3174b525cf70d518d2ef"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5877,
+      "sha256": "191e5334256098c686984095a06b7d4b7b4e0837f7067fb37d8573d43d4d9da2"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5912,
+      "sha256": "1723e517dec139c4cc9babf2beaecdeed3699b9ff949bfabc40b5a306cf7f3b5"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "315978ba44f40b6d305d7e685d26261436631746cfb080c08b5a154eb51505e3"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5902,
+      "sha256": "286779360e58da03924b9b0545fc1a7a3e7138dbb7c755288557f38a11bbd3e5"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5963,
+      "sha256": "3ececc28d92650c2d0202b47169f3389239c273fa21402c1c359c2e8406f1e31"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5944,
+      "sha256": "fcedb412e495c8ee08575a11a74553ca97085a81a62feb96e27adbea5c2ca26e"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5933,
+      "sha256": "8cf65996ac2291e2bc2ab2bbcda602dfceda468ee52f4f114b32cee090e02a51"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5902,
+      "sha256": "5128e0891f795b87044149fb6a6e6a9ec62b4b0f78ae6ad49db945a3c7f3feb6"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5904,
+      "sha256": "01c135d87eb2785e3bccf924f274c7fc334c2c67fc78e3f6f884d24e497aa5d9"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "80b0c8ff7d4ad1f7058a037267c20989c35e58e81d1b02d564e20ef8fb19c304"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5910,
+      "sha256": "ae30479149db798ac6158228520d26cce80497997b7f1b7f3b8ba672f3a3d51b"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5910,
+      "sha256": "1a1cfb91272a17e4155753ddc66964f0c6c434b1282e53ee5c770efc0c8446e3"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5910,
+      "sha256": "4e876afa2e35e504e65c745782a66cc5a70b42933680320d441c36df98b8b4a7"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5910,
+      "sha256": "2e6f8b014d6dfd7ac40bfa7937819caa16be06921d163c496531924472056148"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/native/execution.json",
+      "bytes": 1482,
+      "sha256": "5bf112cce96d9541c18879d7fa146c89d76eb446946029be423c077730119af6"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/native/job.json",
+      "bytes": 2682007,
+      "sha256": "ff61d6638c33607f49408660459d80d5a9f0fb8bf22f29d40f7611043069f6b7"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/native/model.json",
+      "bytes": 7228298,
+      "sha256": "0fcf33107b9df4493216d0b945a4dbe2ad561419dda6d1425b98ceb3f0d35423"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/native/transaction.json",
+      "bytes": 38868193,
+      "sha256": "a06e8a0134feddaf91aa689c802030b1c608da5515266d97642363ae454253ee"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/process/loaded-files.json",
+      "bytes": 4511,
+      "sha256": "d634dfc9b0b4ec95a6abb25ab222674de0a90ea67c5a7b39570ad821ceeca4d6"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/process/owned-process.json",
+      "bytes": 411,
+      "sha256": "621aa50923434de84142e0f82228f7d373d76c59f38d63e8d4906bce01b080ed"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/process/request.json",
+      "bytes": 845,
+      "sha256": "07eab6bc17b46940ee0bc3feb9f089df23ec8bcd85626132ce917a4a3cd2474f"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/process/result.json",
+      "bytes": 444,
+      "sha256": "0ff8b64ad48e2e801423c08e64f5fef54eb935689aa690af809d1b0823a60020"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/process/runtime.json",
+      "bytes": 12125,
+      "sha256": "4ca1b38a6942d9745f606ea26d2a5b1d1079f7489de348f57124bb3fd10b788e"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "original-fixtures/Classic-auto_metric/run-manifest.json",
+      "bytes": 20319,
+      "sha256": "e0abad39d250ba595935d78262e3b8a112c1483b03ce0ed041e3edddcbc37dc9"
+    },
+    {
+      "path": "reader-a3/checkout.log",
+      "bytes": 330,
+      "sha256": "ca4c602802e80234b5c3851fba46fdbeda6ae29cdf46cf7418ac7b64b13983a7"
+    },
+    {
+      "path": "reader-a3/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "reader-a3/runner.sh",
+      "bytes": 2740,
+      "sha256": "3d632543a157fed1c19f7ba46156d7ac6f29fca10ac4d76c319679c46baef549"
+    },
+    {
+      "path": "reader-a3/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reader-a3/supervisor.pid",
+      "bytes": 8,
+      "sha256": "f15ce226e98eb79358049f17148281b40bf7f6d0fa228382a961637f7f42fb97"
+    },
+    {
+      "path": "reader-a3/tests.log",
+      "bytes": 6898,
+      "sha256": "0b1c27b648331bdcaab22968c0261bd635ab2d66b2e2b4d8a9c6b6bea9671d74"
+    },
+    {
+      "path": "reader-a3/validation.json",
+      "bytes": 8293,
+      "sha256": "2bb460f533cbbd2a8106d2826b390845b31bc714a68e45e5070a83b20f9893d9"
+    }
+  ]
+}
