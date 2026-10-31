@@ -99,3 +99,7 @@ V2 calibration proof, training certificate или model hash отсутству�
 Масштабированные PNG/SVG/PDF строятся общим plotting.py; full interval, все
 сомы, реальные inputs и 100-tick zoom сохраняются. Физическое settling-окно
 этим диагностическим producer отдельно не сертифицируется.
+
+Baseline receipts опубликованы и проверены после Git fetch: [normal](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-baseline-normal-a1/README.md)
+(56 файлов / 40260 bytes, включая cleanup receipts) и [ASan](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-baseline-asan-a1/README.md)
+(46 / 17632). Это доказательства отказов исходного снимка, не полная приёмка fix.
