@@ -36,12 +36,6 @@ EXECUTION_FIELDS = {
 }
 
 
-def _context(package):
-    if package.get("kind") == "timelearner_calibrated_recognition_state":
-        return package["source_candidate"]["source_recognition"]
-    return package
-
-
 def _audit_source(job, source_case, mode):
     if mode == "export":
         require(job["source_solo"] == source_case[0], "pipeline_source_solo_changed")
@@ -239,3 +233,72 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         "independent_partition_verified": False, "evaluation_verdict": None}
     _write(output/"run-manifest.json", _signed(result))
     return result
+
+
+@_evidence_boundary
+def audit_run_manifest(path):
+    """Recompute portable source, native result and process/runtime bindings."""
+    path = Path(path).resolve(strict=True);root = path.parent
+    manifest = load(path);_digest(manifest)
+    require(set(manifest) == {"kind", "schema_version", "operation", "execution", "validity", "job_sha256",
+            "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
+            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} and
+            manifest["kind"] == "timelearner_native_pipeline_run_manifest" and
+            type(manifest["schema_version"]) is int and manifest["schema_version"] == 1 and
+            manifest["operation"] in FIELDS and manifest["independent_partition_verified"] is False and
+            manifest["evaluation_verdict"] is None, "unknown_native_pipeline_run_manifest")
+    records = manifest["artifacts"]
+    require(type(records) is list and all(type(r) is dict and set(r) == {"path", "bytes", "sha256"} and
+            type(r["path"]) is str for r in records), "pipeline_run_artifact_schema")
+    names = {r["path"] for r in records}
+    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in root.rglob("*")
+            if p.is_file() and p != path}, "pipeline_run_artifact_closure_changed")
+    for r in records:
+        relative = PurePosixPath(r["path"])
+        require(not relative.is_absolute() and ".." not in relative.parts and "\\" not in r["path"], "pipeline_artifact_escape")
+        actual = root/r["path"]
+        require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == r, "pipeline_run_artifact_changed")
+    mode = manifest["operation"];source = manifest["source_package_path"];source_case = None
+    if mode == "train":
+        require(source is None, "pipeline_cold_training_has_source")
+    else:
+        require(type(source) is str and source in names and PurePosixPath(source).parent == PurePosixPath("input/source"),
+                "pipeline_source_path_changed")
+        source_case = load_case(root/source)
+    job = load(root/"input/job.json")
+    require(manifest["job_sha256"] == job["sha256"] and validate_job(mode, job, source_case) == manifest["preflight"],
+            "pipeline_run_preflight_changed")
+    process, runtime = load(root/"process/result.json"), load(root/"process/runtime.json")
+    from .runtime import digest_json, runtime_content_identity
+    require(manifest["execution"] == process["execution"] and manifest["runtime_fingerprint"] ==
+            process["runtime_fingerprint"] == runtime["runtime_fingerprint"] == digest_json(runtime_content_identity(runtime)) and
+            manifest["source_closure"] == runtime["source_closure"], "pipeline_run_runtime_changed")
+    request = load(root/"process/request.json");arguments = request["arguments"]
+    require(type(arguments) is list and len(arguments) == 6 and all(type(a) is str for a in arguments) and
+            arguments[::2] == ["--app-ini", "--timelearner-"+mode, "--timelearner-output"] and
+            arguments[1] == runtime["app_ini"]["path"], "pipeline_process_arguments_changed")
+    output = PurePosixPath(arguments[5])
+    require(output.is_absolute() and output.name == "native" and
+            PurePosixPath(arguments[3]) == output.parent/"input/job.json" and
+            request["working_directory"] == str(PurePosixPath(runtime["executable"]["path"]).parent) and
+            number(request["maximum_wall_seconds"]) > 0 and request["model_time"] is None, "pipeline_process_scope_changed")
+    if process["execution"] == "completed":
+        from .native_evidence import load_json
+        owned = load(root/"process/owned-process.json");loaded = load_json(root/"process/loaded-files.json")
+        require(type(loaded) is list and all(type(r) is dict and set(r) == {"path", "size", "sha256"} and
+                type(r["path"]) is str and PurePosixPath(r["path"]).is_absolute() and
+                type(r["size"]) is int and r["size"] >= 0 and type(r["sha256"]) is str and
+                len(r["sha256"]) == 64 and all(c in "0123456789abcdef" for c in r["sha256"]) for r in loaded),
+                "pipeline_loaded_files_schema_changed")
+        require(len({r["path"] for r in loaded}) == len(loaded) and
+                {k: runtime["executable"][k] for k in ("path", "size", "sha256")} in loaded and
+                owned["executable"] == runtime["executable"]["path"] and
+                owned["executable_sha256"] == runtime["executable"]["sha256"] and
+                owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
+                process["returncode"] == 0 and process["ownership_scope"] == "launched_executable_only" and
+                process["runtime_provenance"] == "loaded_files_captured", "pipeline_owned_runtime_changed")
+    audit = audit_execution(mode, root/"native", job, source_case) if process["execution"] == "completed" else None
+    require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+            "pipeline_run_analysis_changed")
+    return {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
+            "independent_partition_verified": False, "evaluation_verdict": None}
