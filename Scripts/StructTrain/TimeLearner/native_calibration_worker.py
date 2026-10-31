@@ -6,13 +6,14 @@ data partitioning or replace the full experiment scheduler/ConditionSpec pipelin
 from pathlib import Path, PurePosixPath
 import hashlib
 import json
+from functools import wraps
 
 from .calibrated_evidence import REQUEST_FIELDS
 from .calibration import RULE, _validate_spec, calibration_dataset_digest
 from .calibration_transaction_evidence import audit_native_calibration_transaction
 from .learned_evidence import load_case
 from .model_identity import canonical_model_sha256 as sha
-from .native_evidence import count, equal, load, number, require
+from .native_evidence import EvidenceError, count, equal, load, number, require
 from .process_runner import execute, verify_runtime
 from .recognition_evidence import audit_recognition_source
 
@@ -24,6 +25,18 @@ EXECUTION_FIELDS = {"kind", "schema_version", "execution", "job_sha256", "attemp
                     "source_recognition_sha256", "model_sha256", "model_revision", "transaction_sha256",
                     "calibration_status", "frequency_hz", "model_ticks", "model_time_begin", "model_time_end",
                     "artifacts", "runtime_provenance_external", "evaluation_verdict", "sha256"}
+
+
+def _evidence_boundary(function):
+    @wraps(function)
+    def checked(*args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except EvidenceError:
+            raise
+        except (KeyError, TypeError, ValueError, IndexError, OverflowError, ZeroDivisionError) as error:
+            raise EvidenceError("malformed_native_calibration_worker:"+str(error)) from error
+    return checked
 
 
 def _signed(value):
@@ -45,6 +58,7 @@ def _record(path, root):
     return {"path": path.relative_to(root).as_posix(), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
 
 
+@_evidence_boundary
 def validate_job(job, source_case):
     require(type(job) is dict and set(job) == JOB_FIELDS and job["kind"] == "timelearner_native_calibration_job"
             and type(job["schema_version"]) is int and job["schema_version"] == 1, "unknown_native_calibration_job")
@@ -97,6 +111,7 @@ def validate_job(job, source_case):
             "specification_sha256": sha(spec), "conditions_digest": identity["conditions_digest"]}
 
 
+@_evidence_boundary
 def audit_execution(directory, job, source_case):
     directory = Path(directory)
     execution = load(directory/"execution.json")
@@ -137,6 +152,7 @@ def audit_execution(directory, job, source_case):
             "transaction_audit": audit, "native_execution_verified": False, "evaluation_verdict": None}
 
 
+@_evidence_boundary
 def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds):
     job_path, source_path = Path(job_path).resolve(strict=True), Path(source_path).resolve(strict=True)
     job = load(job_path)
@@ -176,6 +192,7 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds):
     return result
 
 
+@_evidence_boundary
 def audit_run_manifest(path):
     """Portable artifact audit; does not attest an arbitrary process record."""
     path = Path(path).resolve(strict=True);root = path.parent
@@ -188,7 +205,8 @@ def audit_run_manifest(path):
             manifest["evaluation_verdict"] is None, "unknown_calibration_run_manifest")
     records = manifest["artifacts"]
     require(type(records) is list and all(type(r) is dict and set(r) == {"path", "bytes", "sha256"} and
-            type(r["path"]) is str for r in records), "unknown_worker_artifact_record")
+            type(r["path"]) is str and type(r["bytes"]) is int and r["bytes"] >= 0 and
+            type(r["sha256"]) is str and len(r["sha256"]) == 64 for r in records), "unknown_worker_artifact_record")
     names = {r["path"] for r in records}
     require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in root.rglob("*")
             if p.is_file() and p != path}, "worker_run_artifact_closure_changed")
