@@ -1,0 +1,88 @@
+{
+  "kind": "legacy_inference_selected_visual_review",
+  "schema_version": 1,
+  "selected_png_count": 11,
+  "reviewed_original_resolution": [
+    1920,
+    960
+  ],
+  "selected": [
+    {
+      "path": "primary-bundle/selected/Branch-20000-soma1-overview.png",
+      "sha256": "5cf4a67c9220a290ac52b03e1baff95776268b80c48cbd13f284141c2a732074",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-20000-soma1-first-input-zoom.png",
+      "sha256": "0a4d208b3e90ab3e08bbdd465f2f372de44282c42774cbf97392e00db2072a51",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-20000-soma1-first-peak-zoom.png",
+      "sha256": "007546a661564937089db98d4e79de550bd4b7bc9b2058fdd33505475b984c88",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-20000-soma1-peak-previous-zoom.png",
+      "sha256": "9de24eaea9f6a98544a9fae933a2011e4124a332d448e94c8a72ecb76f534ea8",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-2000-soma1-overview.png",
+      "sha256": "7a192116b6b78ad84ba033d6864832eba27400f30466c363cdd8ff09afbd9326",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-2000-soma1-first-input-zoom.png",
+      "sha256": "99186d6960b1d28e66e97c387b3e2be340a302913629cb2afb7bc2f7981bda81",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-20000-soma1-overview.png",
+      "sha256": "5c44c88acef928f7b6a47b90ab4db1d5865e491694876ab096a17cfa9dcce1fa",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-20000-soma1-first-input-zoom.png",
+      "sha256": "00a7c5e33f1e171ce655608867aab8e86bd3a7238280bde4e7f20a08de0a42e6",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-20000-soma1-first-peak-zoom.png",
+      "sha256": "6691b69c5fcd2337a490da02cc735e249eda2adce131b6ff2b33a866ef749371",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-2000-soma1-overview.png",
+      "sha256": "2ce30ce98d10377cc9a9b4b43fc7e92aad55a2843abd49b12b4d9b0c52bd9594",
+      "reviewed": true,
+      "readable": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-2000-soma1-first-input-zoom.png",
+      "sha256": "3f88bdc3369699f0729134ed7083fa95ded718219ab494cb5766540015d2b071",
+      "reviewed": true,
+      "readable": true
+    }
+  ],
+  "observations": [
+    "All text, axes and legends are readable and unclipped at original resolution.",
+    "Overviews show all four actual inputs and both declared patterns; morphology needs the zoom tiles.",
+    "2000-Hz first-input zooms include the whole first rise and peak; 20000-Hz input and peak views must be read together.",
+    "Branch 20000-Hz peak lies close to a tile edge; the included previous zoom supplies its rising flank.",
+    "An absolute-time axis offset is explicitly printed on one Branch peak panel; add it to the tick labels.",
+    "Figure valid/complete refers only to the primary recorded trace audit, not a calibration certificate or verified physical settling.",
+    "SI units, model identity and spike timestamps remain explicitly unknown."
+  ],
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null
+}
