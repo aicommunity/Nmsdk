@@ -7,3 +7,5 @@ InterruptOwnerLifecycle only records RecoveryRequired and diagnostic history, wi
 All raw native reports, regressions, build/runtime receipts, original 18 job declarations and two complete portable source runs preserved. Internal run-closure and all member bytes verified before staging. Full visual acceptance and the complete stage 8 remain open.
 
 All ten prior fixed native JSON reports (eight parents and two roundtrip records) are byte-exact against original normal proof 655af8a4. See compatibility.json; this is a compatibility gate, not new scientific evidence.
+
+Actual native-test executable/dependency identity is captured separately after the completed tests. This is not a pre-run capture or owned-process/mapped-lifetime attestation of the original native invocations; Console runtime manifests do not substitute for test-binary identity. See native-test-provenance-scope.json.
