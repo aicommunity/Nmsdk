@@ -4,7 +4,16 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Текущий подэтап: отдельная физика weight probe threshold и свежие реакции
+Текущий подэтап: immutable Train → finalization boundary. Root a282fe9a /
+PulseLib f8929f9: normal 24/24 (20.492 s), ASan 24/24 (128.163 s), без skips.
+Реальные Classic/Branch capture, connected external request, queued probe rejection,
+external-stop diagnostic и полный объявленный двухпаттерновый recognition replay.
+Сравнение сохраняет весь XML, разрешая только измеренный переход пустого feedback
+cache в нулевой 1×1 двух NPMembraneBio images. Configured phase dispatch ещё не
+реализован, optional guards сохранены; temporal reports новых replay ещё открыты.
+См. [NativeFinalizationBoundary](NativeFinalizationBoundary.ru.md).
+
+Предыдущий подэтап: отдельная физика weight probe threshold и свежие реакции
 конечной модели. Source root 800ca40e / PulseLib 09f72c7: normal 20/20 native
 (126.287 s), ASan 20/20 (834.511 s), без skips. Более поздний production source
 6787071f / PulseLib 56707d7: по 5 codec и 10 reader checks на обоих workers.
