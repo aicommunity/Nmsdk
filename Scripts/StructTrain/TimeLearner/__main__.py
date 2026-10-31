@@ -10,7 +10,7 @@ from pathlib import Path
 def analyze(args: argparse.Namespace) -> dict:
     from .native_evidence import EvidenceError, audit_probe, load, require
     require(args.format == "domain" or not args.allow_legacy, "legacy_adapter_is_only_for_domains")
-    require(args.format == "probe" or args.trace is None, "trace_option_is_only_for_probes")
+    require(args.format in ("probe", "legacy-posttune-freerun") or args.trace is None, "trace_option_is_only_for_probes")
     require(args.format in ("recognition-trial", "recognition-evaluation", "native-calibration-assessment") or args.model is None, "model_option_is_only_for_recognition_trials")
     require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
     require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
@@ -77,6 +77,10 @@ def analyze(args: argparse.Namespace) -> dict:
     elif args.format == "probe":
         require(args.trace is not None, "primary_probe_trace_required")
         result = audit_probe(load(source), args.trace.resolve(strict=True))
+    elif args.format == "legacy-posttune-freerun":
+        from .legacy_posttune_evidence import audit_free_run
+        require(args.trace is not None, "legacy_posttune_primary_csv_required")
+        result = audit_free_run(source, args.trace.resolve(strict=True))
     else:
         raise EvidenceError("unsupported_analysis_format")
     return {"kind": "timelearner_analysis", "schema_version": 1,
@@ -99,7 +103,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "calibration-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "calibration-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun"), required=True)
     analysis.add_argument("--model", type=Path, help="recognition package required for recognition trial/evaluation")
     analysis.add_argument("--source-solo", type=Path, help="original learned-state package with primary trial siblings, required for threshold candidate")
     analysis.add_argument("--evaluation", type=Path, help="independently declared evaluation spec required for native calibration assessment")
@@ -108,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "probe-set", "native-test-run", "calibration-transaction", "calibration-run"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run"), default="recognition-evaluation")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
@@ -263,6 +267,10 @@ def main(argv: list[str] | None = None) -> int:
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
                 result = render_probe_set(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "legacy-posttune-freerun":
+                from .legacy_posttune_reports import render_free_run
+                require(args.trace is not None and args.model is None, "legacy_posttune_report_requires_trace_not_model")
+                result = render_free_run(args.source.resolve(strict=True), args.trace.resolve(strict=True), args.output.resolve())
             elif args.format in ("probe", "probe-diagnostic"):
                 from .probe_reports import render_probe
                 require(args.trace is not None and args.model is None, "probe_report_requires_trace_not_model")
