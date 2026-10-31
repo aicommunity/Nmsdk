@@ -4,7 +4,33 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Последний адресно проверенный подэтап — target-only threshold reference.
+Последний адресно проверенный подэтап — immutable native training request.
+В обоих learner BeginNativeTraining сохраняет исходные controls/bindings и
+идентичность сессии; поздний edit не переписывает запрос. Reset/retarget/new Start
+и успешная замена графа очищают intent, внешний stop сохраняет исходный запрос
+без утверждения сходимости. Исторический import не выдумывает train-time controls.
+Native root 6062fb58c / PulseLib 86cd843: normal 61/61 (50.707 s), ASan 61/61
+(316.845 s), без skips, leak checking выключен. Independent reader: по 2/2,
+0.040 / 0.033 s, 24 snapshots / 8 records и 32 signed corrupt controls на worker.
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-intent-normal-a1/README.md)
+и [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-intent-asan-a1/README.md):
+по 321 members, 941804 / 954948 compressed bytes; все hashes проверены.
+Control-only короткий бюджет остаётся BudgetExhausted, внешний stop — ExternalStop.
+Отдельный positive-case «непустой intent → successful graph import» ещё не принят;
+код очистки реализован, общие import regressions не заменяют эту проверку.
+Intent checkpoint/export, сравнение original/current controls при переходе и
+configured dispatcher открыты. Полной приёмки этапа 8 по-прежнему нет.
+
+[Positive LTZ detail proof](../../../Reports/StructTrain/TimeLearner/s08-native-training-threshold-visual-asan-a3/README.md):
+новый amplitude view с настоящей threshold line сохраняет полный negative
+recovery. Два report tests прошли, 2 reports / 5 pairs, sources unchanged.
+Git: 8 metadata members / 33844 bytes + 4 PNG; cache 140 files / 8352286 bytes.
+Все hashes и source/proposal bindings проверены. Четыре 1920×960 positive-detail
+overview/first zoom просмотрены: crossing читаем, legend не перекрывает axes.
+Промежуточный a2 имеет manual-QA defect legend overlap и помечен superseded.
+Полная visual acceptance остальных видов и scientific recognition не заявляются.
+
+Предыдущий подэтап — target-only threshold reference.
 Сохранены gap_fraction / peak_fraction по строго положительным after-children
 LTZ samples, legacy span guard 1e-9 и оба clamps. API требует явные controls:
 public defaults Classic 0.85/0.0115/0.05 и Branch 0.99/0.0115/1.0 не менялись.
@@ -29,7 +55,7 @@ runtime; executable hashes неизменны, исторические данн
 M40 cache 110 files / 6426888 bytes, render/checks 8.010 s. Primary JSON неизменны;
 все hashes и proposal/confirmation bindings проверены. Soma/input overview/zoom
 читаемы, spike после первого входа. LTZ shared Y доминируется negative recovery:
-positive-amplitude detail ещё нужен для визуальной проверки crossing. Полная
+В a1 positive-amplitude detail отсутствовал; это исправлено в a3 выше. Полная
 visual acceptance не заявляется. Следующий основной шаг — controlled phase
 orchestration, выбор исходного input и final recognition confirmation.
 

@@ -2,11 +2,16 @@
 
 Latest scoped PostTune evidence:
 
+[Live training request provenance: normal 61/61](s08-native-training-intent-normal-a1/README.md),
+[ASan 61/61](s08-native-training-intent-asan-a1/README.md), independent 24-snapshot/32-corruption readers.
+[Readable positive LTZ crossing and actual threshold, four reviewed PNGs](s08-native-training-threshold-visual-asan-a3/README.md).
+Automatic phase dispatch and intent checkpoints remain open.
+
 [Target-only threshold formulas and actual selected-threshold Solo burst: normal](s08-native-training-threshold-reference-normal-a2/README.md),
 [ASan](s08-native-training-threshold-reference-asan-a1/README.md);
 [soma/input and LTZ visual reports](s08-native-training-threshold-visual-asan-a1/README.md).
-Final parallel recognition, foil evaluation, positive LTZ amplitude-detail view
-and configured phase orchestration remain open.
+Final parallel recognition, foil evaluation and configured phase orchestration remain open;
+positive LTZ amplitude-detail is supplied by a3 above.
 
 [Fresh Solo LTZ burst traces: normal 33/33 and independent reader](s08-native-solo-threshold-trace-normal-a1/README.md),
 [ASan 33/33 and independent reader](s08-native-solo-threshold-trace-asan-a1/README.md).
