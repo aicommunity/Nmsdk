@@ -19,7 +19,9 @@ proof audit, frozen scoring/report adapter и CLI анализа/select/confirm/
 Есть проверенный isolated native calibration worker и scoped cold Train/export/evaluate; весь Train→Test pipeline
 и PostTune controller этим автоматически не принимаются.
 
-Новый контур: [NativePipelineWorker](NativePipelineWorker.ru.md).
+Новый контур: [NativePipelineWorker](NativePipelineWorker.ru.md). Текущая ветка
+`codex/timelearner-posttune-observation` продолжает TL-037; native sources работающих
+проверок остаются закреплены на e3fe5340 / PulseLib 39810a7.
 
 ## Оперативный статус после последней перепроверки
 
@@ -41,6 +43,7 @@ proof audit, frozen scoring/report adapter и CLI анализа/select/confirm/
 | Production calibration worker, PulseLib a5671e9 | Normal root 8aae62d и ASan root b103835 выполнили по шесть Console jobs Classic/Branch N1/2000 Hz: Calibrated, NonSeparable, BudgetExhausted для каждого owner. Portable reader 819f0d9 прошёл по 6/6 (137.657 / 201.645 s), включая два настоящих owned CLI run на worker. Более ранний reader 0d8494b прошёл перекрывающиеся 6/6 (100.727 / 172.595 s). Controls 29c15a6: 2/2 на worker; provenance/runtime 4244160: 11/11 на worker. Все первичные bundles опубликованы: normal d663fd43 + d879109a, ASan 1d248c88. Общий Train/export/evaluate scheduler и полный PostTune/mode/profile matrix остаются открытыми. |
 | Production calibration visual reports, root 9c2fe4c | M40 проверил 437 Git-bundle members и построил 10 reports, 22 complete matrices, 66 trial/soma pairs. 19/19 checks прошли (16 provenance/runtime/plotting + 3 report). Metadata archive 98940 bytes, выбранные PNG опубликованы в 8636b892; ещё три input/rise tiles добавлены в b787779f без нового рендеринга. Все 11 selected PNG просмотрены в исходном размере; полная visual acceptance false. |
 | Native cold Train/export/frozen evaluate, root d5ef1fa | Normal и ASan: по 4 случая / 12 native фаз, Classic/Branch × N0/N1 при 2000 Гц; все training outcomes search_unresolved, все complete frozen observations valid, модель неизменна. Normal primary опубликован (211 файлов / 371128 bytes). Owned CLI reader cfb09d3: 12/12 операций и portable audits; controls c8bb72b: 6/6 без skips (12.967 s), включая реальный one-tick incomplete Test. ASan CLI c8bb72b: те же 12/12. Owned bundles опубликованы: normal 8b4282f6 (633 файла / 758980 bytes), ASan 63a06e41 (794 / 1118296). Усиленные controls b839e879: 7/7 normal/ASan (18.248 / 45.504 s), включая остановленный cold Train и запрет его recognition export. All-pattern fixed evaluation reports 2eea76a: 4 матрицы / 12 пар, 5 plotting checks, 8 selected PNG просмотрены; полный cache на M40. Новые calibration-grid figures остаются открытыми; вся mode/profile/frequency matrix и этапы не приняты. |
+| TL-037 legacy inference attempt, PulseLib 39810a7 | Baseline normal/ASan: шесть expected failures из восьми, включая false Success/mid=0.25 при непосещённом foil; две NaN controls прошли. Fixed normal root e3fe5340: 12/12 native (220.780 s), 5/5 primary audits (4.165 s), 4 physical free-runs Classic/Branch × 2000/20000 Гц. Bundle 37678c32: 156 файлов / 1080412 bytes, все hashes проверены. ASan 20-кГц, отдельные 37 regressions и полный visual gate ещё выполняются; это не полный этап 8. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
 Production worker: [контракт и CLI](NativeCalibrationWorker.ru.md),

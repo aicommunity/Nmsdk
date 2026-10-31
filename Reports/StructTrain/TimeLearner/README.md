@@ -93,3 +93,5 @@ Owned cold pipeline: [normal 12 phases + controls](s09-native-pipeline-owned-nor
 Cold pipeline interoperation and stronger stopped-state controls: [normal](s09-native-pipeline-interoperation-normal-a1/README.md), [ASan](s09-native-pipeline-interoperation-asan-a1/README.md). Seven controls pass per worker; actual cold N1 calibration remains NonSeparable on the declared grids, with valid frozen negative evaluation. New calibration-grid visual acceptance remains open.
 
 TL-037 legacy inference observation: [normal expected failures](s08-posttune-observation-baseline-normal-a1/README.md), [ASan expected failures](s08-posttune-observation-baseline-asan-a1/README.md). Six failing controls per worker reproduce stale attempt status/evidence and missing-foil false Success; two NaN controls pass. These are baseline failure receipts, not passing fix gates.
+
+TL-037 corrected [normal A2 primary gate](s08-posttune-observation-fixed-normal-a2/README.md): 12 native and 5 independent data checks; four actual legacy free-runs Classic/Branch x 2000/20000 Hz. Separate full-regression, ASan and visual gates remain open.
