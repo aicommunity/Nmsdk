@@ -2,6 +2,11 @@
 
 Latest scoped PostTune evidence:
 
+[Fresh Solo LTZ burst traces: normal 33/33 and independent reader](s08-native-solo-threshold-trace-normal-a1/README.md),
+[ASan 33/33 and independent reader](s08-native-solo-threshold-trace-asan-a1/README.md).
+Eight actual controls per worker; source replay, not new Train. Threshold proposal,
+confirmation, automatic dispatch and new temporal plots remain open.
+
 Artifact publication prerequisite: [Elder 16 Git tests](s10-artifact-publication-elder-a1/README.md),
 [M40 16 Git tests](s10-artifact-publication-m40-a1/README.md). Schema 2 verifies
 declared committed blobs; upstream scientific completeness and full producer migration remain open.

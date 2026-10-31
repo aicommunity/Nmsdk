@@ -4,7 +4,20 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Текущий подэтап — active-request finalization import.
+Последний адресно проверенный подэтап — свежая Solo LTZ-трасса штатной burst-пробы.
+Native root a87bb8fc / PulseLib cd3e7d0: normal 33/33 (27.605 s), ASan 33/33
+(161.506 s), без skips, ASan leak checking выключен. Восемь новых сценариев:
+Classic/Branch × complete nonspiking, real spiking, Reset и изменение порога.
+Recorder только читает after-children данные; не меняет физику, routing и Reset.
+Независимый reader: по 2/2, восемь actual traces и десять re-signed corrupt controls
+на worker. Normal 0.192 s, ASan 0.156 s. Valid samples сверены с native peak audit.
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-trace-normal-a1/README.md),
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-solo-threshold-trace-asan-a1/README.md):
+по 133 members, полные original source runs / 84 artifacts. Это saved Solo replay;
+исходный Train остаётся search_unresolved. Новые temporal reports, target-reference
+formula, spiking confirmation и automatic dispatch ещё открыты.
+
+Предыдущий подэтап — active-request finalization import.
 Active-request import (PulseLib ec3d7b4 / root c0496d253): normal 44/44 (191.796 s).
 Ранний C-trim guard (PulseLib aca4b33 / root a05416971): normal 18/18 (68.693 s).
 Базовый ASan c0496d253: 44/44 (1353.853 s), без skips, leak checking выключен.
