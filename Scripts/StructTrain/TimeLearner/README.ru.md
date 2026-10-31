@@ -1,8 +1,12 @@
 # Поддерживаемый пакет TimeLearner
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
-Import не запускает эксперименты. Сейчас реализованы `inventory` и native
-подмножество `analyze`; остальные команды runner/migration ещё не готовы.
+Import не запускает эксперименты. Реализованы `inventory`, native-подмножество
+`analyze`, `report`, `bundle`, `publish`, `history resolve` и анализ измерений
+`calibrate run/select/confirm`, owned `train/export/evaluate` и portable
+`analyze --format pipeline-run`. Runtime/process supervisor также имеют module CLI.
+Общий prepare, сквозной scheduler и полная миграция ещё не готовы; новые native
+операции имеют явно ограниченный контракт, описанный ниже.
 
 ```text
 python -m Scripts.StructTrain.TimeLearner analyze record.json --format domain
@@ -31,8 +35,10 @@ conversion record и declared frozen transport spec/observation/CSV schema 1.
 unknown/incomplete transport не принимается. Spikes остаются unknown, а не 0;
 это проверка переноса/состояния, не recognition selectivity verdict.
 
-Это ещё не единый recognition scorer, не анализ исторического spiking CSV и
-не полный production runner. Старые запускатели будут удалены после замены
+Для полных frozen trials общий строгий scorer доступен как
+`analyze EVALUATION_SPEC --format recognition-evaluation --model RECOGNITION_PACKAGE`.
+Исторический spiking CSV и полный production runner ещё не мигрированы.
+Старые запускатели будут удалены после замены
 их действующих функций и записи commit/blob в migration manifest.
 
 `analyze <case_reconstruction.json> --format posttune-reconstruction` проверяет
@@ -53,8 +59,9 @@ analysis и attempt identities. Это ещё не preflight/runner и не за
 из content identity, полная provenance сохраняется. Историческая schema 1
 не пересчитывается. Source 670f2ff79 прошёл 18 Python tests на каждом worker
 и реальный relocation/startup A2 binary с суффиксом `.rs2`: production snapshot
-сохранил fingerprint. Это проверка integrity/loader scope; подключения к runner
-и очередям пока нет. Артефакты и ограничения:
+сохранил fingerprint. Теперь runtime/process supervisor подключены к native
+`calibrate run`; общая очередь всей кампании остаётся незавершённой.
+Runtime capture включает RelWithDebInfo/Minsize и linker flags. Артефакты и ограничения:
 [ConditionIdentities.ru.md](../../../Docs/StructTrain/TimeLearner/ConditionIdentities.ru.md).
 
 `config_document.py` добавляет lossless edits существующих text leaves с полным
@@ -174,3 +181,122 @@ identity, mappings, логи и результат. Timeout/cancel сигнал�
 не перезапускать job автоматически из-за обрыва наблюдения. Пока ownership
 охватывает только launched executable, не fork/daemon tree. Контракт и
 оставшиеся ограничения: Docs/StructTrain/TimeLearner/OwnedProcessSupervisor.ru.md.
+
+### Измеренный порог
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner calibrate select SPEC.json --measurements SEARCH.json --source-solo CASE_learned_state.json --output NEW_SELECTION.json
+python3 -m Scripts.StructTrain.TimeLearner calibrate confirm SPEC.json --measurements SEARCH.json --source-solo CASE_learned_state.json --selection NEW_SELECTION.json --confirmation FRESH.json --output NEW_CONFIRMATION.json
+python3 -m Scripts.StructTrain.TimeLearner report EVALUATION.json --format threshold-candidate-evaluation --model CANDIDATE.json --output NEW_CACHE
+```
+
+Это анализ реальных native measurements и диагностические рисунки. Команды
+не исполняют Train, не устанавливают calibrated state в learner и не подтверждают
+native import. Положительное подтверждение требует полной свежей матрицы с
+отдельным run ID; silence, пропуски и search reuse не превращаются в успех.
+Выбранный порог сам по себе ещё не является результатом калибровки.
+
+SEARCH/FRESH — descriptor `timelearner_threshold_measurement_set`, schema 1:
+`measurements` содержит `candidate`, `evaluation` (относительные пути внутри
+каталога descriptor) и `execution` (attempt_id, clock_id, stage, selection_sha256).
+Подтверждающий descriptor содержит ровно один measurement. Первичные observations
+допускают JSON.gz; источники learned-state проверяются по настоящим sibling CSV.
+Ошибки дают code 2 без положительного результата; NonSeparable или BudgetExhausted
+являются допустимыми результатами анализа, различимыми в JSON при code 0.
+Существующие выходные файлы не заменяются.
+
+Обычный recognition-evaluation scorer намеренно отвергает threshold candidates:
+для них существует отдельный calibration scorer. Candidate report явно помечен
+диагностическим, не сертифицирует обучение или scientific Test. Подробный контракт:
+Docs/StructTrain/TimeLearner/NativeThresholdCalibration.ru.md.
+
+`analyze ASSESSMENT.json --format native-calibration-assessment --evaluation EVALUATION.json --model CANDIDATE.json --source-solo CASE_learned_state.json`
+сопоставляет native response assessment с первичными observations и общим scorer.
+Проверяются полный набор, label/ID, reset policies, все spikes и response windows;
+true/false вместо числовых полей отклоняются. Raw observation auditor v2 требует
+ровно один отсчёт на native tick и различимый dt. Статус исполнения simulator
+и commit калиброванной модели этой командой не подтверждаются.
+
+`analyze CALIBRATED.json --format calibrated-state --source-solo CASE_learned_state.json`
+проверяет proof сохранённого `timelearner_calibrated_recognition_state`:
+две успешные полные матрицы выбранного candidate, fresh run, raw observations,
+source CSV и точное сохранение физического графа. Это анализ сохранённых данных;
+команда не исполняет native import, не проверяет всю сетку и не запускает Test.
+
+`recognition-evaluation` и обычный `report` принимают такой calibrated package,
+повторно проверяют proof и оценивают новые полные observations тем же scorer.
+Calibration run нельзя выдать за новый frozen evaluation run. Результат отдельно
+содержит calibration evidence consistency и свежие response metrics; statistical
+independence и partition separation автоматически не подтверждаются.
+Сам отчёт остаётся диагностическим и не создаёт новую калибровку.
+Native selection/commit/rollback доступен через `calibrate run` ниже. Его
+адресная приёмка не заменяет полный PostTune и научную матрицу режимов.
+
+Renderer entry points заранее проверяют headless matplotlib/Agg и Pillow до
+создания report directory. Недостающий backend даёт структурированный отказ,
+не оставляя partial report из-за этой ошибки. Manifest сохраняет фактический
+Python executable и версии matplotlib/Pillow. На M40 используется существующий
+`/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python`; system Python
+этого сервера не содержит matplotlib. Interpreter нового worker должен быть
+явно выбран и проверен; старый системный путь не является его настройкой.
+
+### Native calibration transaction evidence
+
+`analyze TRANSACTION.json --format calibration-transaction --source-solo CASE_learned_state.json`
+проверяет полный записанный grid через общий scorer, sole-edit derivation и
+source primary CSV. Свежая confirmation привязана к выбранному кандидату,
+источнику, всему завершённому поиску и заранее объявленному design.
+Частичный grid не даёт calibrated verdict; NonSeparable отличается от
+BudgetExhausted. Cancelled/Failed/RecoveryRequired — diagnostic-only; проверка
+не подтверждает физический rollback или подлинность native исполнения.
+
+Это анализ фактических результатов `NativeThresholdCalibrationTransaction`.
+Для запуска служит отдельный `calibrate run`; полный Train→Test pipeline и
+интеграция общей очереди остаются открытыми.
+
+`report TRANSACTION.json --format calibration-transaction --output CACHE_DIR`
+строит все завершённые candidate matrices и fresh confirmation: каждый
+паттерн и все soma channels, фактические входные импульсы, native-resolution
+overview/zoom/series в PNG/SVG/PDF. Пороговые данные остаются calibration
+diagnostics. Незавершённые пробы сохраняются как первичные данные, но не
+выдаются за полную реакцию. Backend и raw evidence проверяются до создания
+каталога. Полный отчёт предназначен для M40 cache; в Git сохраняются compact
+primary и выбранные рисунки согласно общей политике.
+
+### Production native calibration
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner calibrate run JOB.json \
+  --source-solo SOURCE_learned_state.json --runtime-manifest runtime.json \
+  --wall-seconds 600 --output NEW_ATTEMPT
+python3 -m Scripts.StructTrain.TimeLearner analyze \
+  NEW_ATTEMPT/run-manifest.json --format calibration-run
+python3 -m Scripts.StructTrain.TimeLearner report \
+  NEW_ATTEMPT/run-manifest.json --format calibration-run --output NEW_M40_CACHE
+```
+
+JOB schema 1 содержит полный source recognition package, явные thresholds,
+maximum_candidates, ordered NativeCalibrationRequests, response criterion,
+одну частоту дерева, maximum_model_ticks и canonical SHA. Preflight проверяет
+исходные primary CSV/JSON; worker сохраняет их snapshot, исполняет стандартную
+Console через pidfd supervisor и связывает итоговую модель с полным grid,
+fresh confirmation, runtime/process и hashes кода анализа. Повторное использование
+output запрещено. Подменённые declarations/model/provenance отклоняются даже
+после пересчёта внешних hashes.
+
+Model-tick budget и wall timeout различаются. Первый даёт диагностическую отмену
+с восстановлением source; незавершённый процесс не получает calibrated claim.
+Portable audit проверяет согласованность, не подлинность чужих execution records.
+Калибровка не повышает source Train до Exact и не подтверждает independent Test.
+Source этих контрольных моделей имеет search_unresolved. Runtime mappings —
+стартовый снимок процесса, без обещания полного позднего plugin census.
+Контракт, ограничения и адресная приёмка:
+[NativeCalibrationWorker](../../../Docs/StructTrain/TimeLearner/NativeCalibrationWorker.ru.md).
+# Native Train/export/evaluate
+
+Добавлены production команды `train`, `export`, `evaluate` и
+`analyze --format pipeline-run`: [контракт, CLI и ограничения](../../../Docs/StructTrain/TimeLearner/NativePipelineWorker.ru.md).
+Это отдельные owned Console операции с immutable runtime и сохранёнными primary
+data, без шаблонного Test fallback. Первый выпуск требует optional modes Off
+и reset-per-trial evaluation. Общая очередь и полная матрица остаются открытыми.
+

@@ -1,0 +1,719 @@
+{
+  "kind": "timelearner_native_worker_gate_bundle",
+  "schema_version": 1,
+  "validation": {
+    "native_jobs": 6,
+    "results": [
+      {
+        "topology": "Classic",
+        "case": "success",
+        "status": "calibrated",
+        "execution": {
+          "artifacts": [
+            {
+              "bytes": 2681678,
+              "path": "job.json",
+              "sha256": "dc7229c971b8c52131d32b90d643e1bf2ca97b87e398223a734b5195a7339ca2"
+            },
+            {
+              "bytes": 23149319,
+              "path": "transaction.json",
+              "sha256": "ce874a81ab65fc676fd130ca5e0a9db3a843e95c8d4cfd47b39a8064850c47cb"
+            },
+            {
+              "bytes": 7222091,
+              "path": "model.json",
+              "sha256": "86f6ac58b227487ebbd4c091c1fb9738ec541e5927c90d777d386d3d486cc020"
+            }
+          ],
+          "attempt_id": "Classic/production-worker/success",
+          "calibration_status": "calibrated",
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "frequency_hz": 2000,
+          "job_sha256": "49b5900f9449c06b0c61b1f548a051eaaccf05ffd9953ce71dfdd4ac2654183f",
+          "kind": "timelearner_native_calibration_execution",
+          "model_revision": "00d2a426b0686efba5da9ea5d2378d8008e5fb9b19dc1fb347bf9d2c4584ddd1",
+          "model_sha256": "7908c2bea1608fc51e4ed406e884a22a130722e67cd05c5641e96d0280f0673f",
+          "model_ticks": 4808,
+          "model_time_begin": 0,
+          "model_time_end": 2.404,
+          "runtime_provenance_external": true,
+          "schema_version": 1,
+          "sha256": "c087f15dba5bde24a6715b8def6fbe94ba3887a5c9c7d0fe766fc14c5c2059e8",
+          "source_recognition_sha256": "ffb40bd17fefc15014862ef722b2e8908500f3cc55255db18ddc0a66d88d024d",
+          "transaction_sha256": "fb89906812d39896434e82fdb85c2f6101f17dca587b99bb4bd556fe40e79964"
+        },
+        "audit": {
+          "schema_version": 1,
+          "transaction_evidence_consistent": true,
+          "status": "calibrated",
+          "diagnostic_only": false,
+          "negative_status_verified": false,
+          "calibrated": true,
+          "measured_candidates": 2,
+          "selected_index": 1,
+          "package_audit": {
+            "schema_version": 1,
+            "calibration_evidence_consistent": true,
+            "calibrated": true,
+            "model_revision": "00d2a426b0686efba5da9ea5d2378d8008e5fb9b19dc1fb347bf9d2c4584ddd1",
+            "threshold": 0.003336969230622544,
+            "source_audit": {
+              "schema_version": 1,
+              "source_recognition_sha256": "ffb40bd17fefc15014862ef722b2e8908500f3cc55255db18ddc0a66d88d024d",
+              "model_revision": "00d2a426b0686efba5da9ea5d2378d8008e5fb9b19dc1fb347bf9d2c4584ddd1",
+              "threshold": 0.003336969230622544,
+              "threshold_derivation_verified": true,
+              "source_training_and_conversion_checked": true,
+              "source_audit": {
+                "auditor_version": 1,
+                "conversion_math_verified": true,
+                "source_audit": {
+                  "auditor_version": 2,
+                  "certificate_consistent": true,
+                  "primary_trials": 14,
+                  "embedded_trials": 4,
+                  "exact": false,
+                  "model_revision": "d4be8814c58ffb09761839078a94275ebeedcd78a00c989f4fb23c3a9200cd85",
+                  "n0_candidate_repeats": 1,
+                  "search_history_retained": true,
+                  "native_import_verified": false,
+                  "package_digest_verified": true,
+                  "evaluation_verdict": null
+                },
+                "other_physics_preserved": true,
+                "native_import_verified": false,
+                "evaluation_verdict": null
+              },
+              "native_import_verified": false,
+              "calibrated": false,
+              "evaluation_verdict": null
+            },
+            "native_execution_verified": false,
+            "native_import_verified": false,
+            "grid_selection_verified": false,
+            "statistical_independence_verified": false,
+            "evaluation_verdict": null
+          },
+          "native_execution_verified": false,
+          "owner_restoration_verified": false,
+          "partial_observations_validated": false,
+          "statistical_independence_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "topology": "Classic",
+        "case": "nonseparable",
+        "status": "nonseparable",
+        "execution": {
+          "artifacts": [
+            {
+              "bytes": 2681653,
+              "path": "job.json",
+              "sha256": "fa5f70aa83154b254eaee61d5b3b9fa4e91990a035ee348c3c53159ff2b8c0cf"
+            },
+            {
+              "bytes": 8225013,
+              "path": "transaction.json",
+              "sha256": "4e0ae1fc4edd0c88c9183757432a745c23217dc3e115caf77d76224ff3d0017e"
+            },
+            {
+              "bytes": 2544357,
+              "path": "model.json",
+              "sha256": "964c3e5015460f0c3b24d61ecb817b69008c2c421af1b12648675323a9a63fcc"
+            }
+          ],
+          "attempt_id": "Classic/production-worker/nonseparable",
+          "calibration_status": "nonseparable",
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "frequency_hz": 2000,
+          "job_sha256": "85fffd367ec56fd44965cbc7e95dcbb993d7e0a139d240630d86943abd3041d5",
+          "kind": "timelearner_native_calibration_execution",
+          "model_revision": "d4be8814c58ffb09761839078a94275ebeedcd78a00c989f4fb23c3a9200cd85",
+          "model_sha256": "ffb40bd17fefc15014862ef722b2e8908500f3cc55255db18ddc0a66d88d024d",
+          "model_ticks": 1602,
+          "model_time_begin": 0,
+          "model_time_end": 0.801,
+          "runtime_provenance_external": true,
+          "schema_version": 1,
+          "sha256": "a1f72868d95cfd683c89c956e9a585027641ea847bf865a3b8ccf5432c5f6e06",
+          "source_recognition_sha256": "ffb40bd17fefc15014862ef722b2e8908500f3cc55255db18ddc0a66d88d024d",
+          "transaction_sha256": "9ce5dd787d2f635d7d0973f9bf5f62e8a456aadde69c638928c2307fedf790d7"
+        },
+        "audit": {
+          "schema_version": 1,
+          "transaction_evidence_consistent": true,
+          "status": "nonseparable",
+          "diagnostic_only": false,
+          "negative_status_verified": true,
+          "calibrated": false,
+          "measured_candidates": 1,
+          "selected_index": null,
+          "package_audit": null,
+          "native_execution_verified": false,
+          "owner_restoration_verified": false,
+          "partial_observations_validated": false,
+          "statistical_independence_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "topology": "Classic",
+        "case": "budget",
+        "status": "budget_exhausted",
+        "execution": {
+          "artifacts": [
+            {
+              "bytes": 2681677,
+              "path": "job.json",
+              "sha256": "df52d49a3634ec8b5a053dfde5d28560781adae5d915171945e2228f3e29001c"
+            },
+            {
+              "bytes": 8224999,
+              "path": "transaction.json",
+              "sha256": "7c1d5374b106635915070343c9dbefbce00ed54e6000dfdd4c5e61bec354f098"
+            },
+            {
+              "bytes": 2544357,
+              "path": "model.json",
+              "sha256": "964c3e5015460f0c3b24d61ecb817b69008c2c421af1b12648675323a9a63fcc"
+            }
+          ],
+          "attempt_id": "Classic/production-worker/budget",
+          "calibration_status": "budget_exhausted",
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "frequency_hz": 2000,
+          "job_sha256": "9f5cf7c613a19df7e02937548d5630b5d030bbfe0563a49c65e70bfdc08632af",
+          "kind": "timelearner_native_calibration_execution",
+          "model_revision": "d4be8814c58ffb09761839078a94275ebeedcd78a00c989f4fb23c3a9200cd85",
+          "model_sha256": "ffb40bd17fefc15014862ef722b2e8908500f3cc55255db18ddc0a66d88d024d",
+          "model_ticks": 1602,
+          "model_time_begin": 0,
+          "model_time_end": 0.801,
+          "runtime_provenance_external": true,
+          "schema_version": 1,
+          "sha256": "746ae203855306e6faadaf07c7c5fc5926ccceeb17e12039bd60ce6893f9ad33",
+          "source_recognition_sha256": "ffb40bd17fefc15014862ef722b2e8908500f3cc55255db18ddc0a66d88d024d",
+          "transaction_sha256": "829611e948f84b6f6fd3ab495be4b6bafb12c1b9a31c505f2776bc06e613ce48"
+        },
+        "audit": {
+          "schema_version": 1,
+          "transaction_evidence_consistent": true,
+          "status": "budget_exhausted",
+          "diagnostic_only": false,
+          "negative_status_verified": true,
+          "calibrated": false,
+          "measured_candidates": 1,
+          "selected_index": null,
+          "package_audit": null,
+          "native_execution_verified": false,
+          "owner_restoration_verified": false,
+          "partial_observations_validated": false,
+          "statistical_independence_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "topology": "Branch",
+        "case": "success",
+        "status": "calibrated",
+        "execution": {
+          "artifacts": [
+            {
+              "bytes": 2485323,
+              "path": "job.json",
+              "sha256": "f5afa15ebf05d9663b86e07c4ae06e67d40c4d66debab135033bde52e88014e3"
+            },
+            {
+              "bytes": 21337668,
+              "path": "transaction.json",
+              "sha256": "466f22c90fc229848c45d46ef44f4dfe1120a635fa679e130f0b768c4120d721"
+            },
+            {
+              "bytes": 6653770,
+              "path": "model.json",
+              "sha256": "29acba5f98e54ddd1f680fdd7d41cae2cb764042565eedf1b66cbdd124f7ed2a"
+            }
+          ],
+          "attempt_id": "Branch/production-worker/success",
+          "calibration_status": "calibrated",
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "frequency_hz": 2000,
+          "job_sha256": "fc199a59016610a1dda824f5adf07445ff701348d7a0629a5a4240817ab469a5",
+          "kind": "timelearner_native_calibration_execution",
+          "model_revision": "c07c70fb7841e84a8968e95772c734856150d5eff5244c953f1bcd313e8f9893",
+          "model_sha256": "f2811190ed4bc999606e3ada91b3a1dd769a94e5e93fc49fbc7bfaecd52fbb79",
+          "model_ticks": 4808,
+          "model_time_begin": 0,
+          "model_time_end": 2.404,
+          "runtime_provenance_external": true,
+          "schema_version": 1,
+          "sha256": "0fe84b490df2825b0db2f63387224bc2f1532878e9d8c6f9b7288148e6ee9264",
+          "source_recognition_sha256": "a56fec64aa1c6bd7f334ff8927de16cd62f2b1a61ad069e7fdb13a40e4e3c4fb",
+          "transaction_sha256": "8c1eccd71ea8160af27ed325211c1107ec51649390af9156908489cb6192d8a7"
+        },
+        "audit": {
+          "schema_version": 1,
+          "transaction_evidence_consistent": true,
+          "status": "calibrated",
+          "diagnostic_only": false,
+          "negative_status_verified": false,
+          "calibrated": true,
+          "measured_candidates": 2,
+          "selected_index": 1,
+          "package_audit": {
+            "schema_version": 1,
+            "calibration_evidence_consistent": true,
+            "calibrated": true,
+            "model_revision": "c07c70fb7841e84a8968e95772c734856150d5eff5244c953f1bcd313e8f9893",
+            "threshold": 0.006293579947234118,
+            "source_audit": {
+              "schema_version": 1,
+              "source_recognition_sha256": "a56fec64aa1c6bd7f334ff8927de16cd62f2b1a61ad069e7fdb13a40e4e3c4fb",
+              "model_revision": "c07c70fb7841e84a8968e95772c734856150d5eff5244c953f1bcd313e8f9893",
+              "threshold": 0.006293579947234118,
+              "threshold_derivation_verified": true,
+              "source_training_and_conversion_checked": true,
+              "source_audit": {
+                "auditor_version": 1,
+                "conversion_math_verified": true,
+                "source_audit": {
+                  "auditor_version": 2,
+                  "certificate_consistent": true,
+                  "primary_trials": 14,
+                  "embedded_trials": 4,
+                  "exact": false,
+                  "model_revision": "65f6cc5e55f38857dbdea7c72c126e0ff0495c18271e05bac93cec6585283e5f",
+                  "n0_candidate_repeats": 1,
+                  "search_history_retained": true,
+                  "native_import_verified": false,
+                  "package_digest_verified": true,
+                  "evaluation_verdict": null
+                },
+                "other_physics_preserved": true,
+                "native_import_verified": false,
+                "evaluation_verdict": null
+              },
+              "native_import_verified": false,
+              "calibrated": false,
+              "evaluation_verdict": null
+            },
+            "native_execution_verified": false,
+            "native_import_verified": false,
+            "grid_selection_verified": false,
+            "statistical_independence_verified": false,
+            "evaluation_verdict": null
+          },
+          "native_execution_verified": false,
+          "owner_restoration_verified": false,
+          "partial_observations_validated": false,
+          "statistical_independence_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "topology": "Branch",
+        "case": "nonseparable",
+        "status": "nonseparable",
+        "execution": {
+          "artifacts": [
+            {
+              "bytes": 2485298,
+              "path": "job.json",
+              "sha256": "a282eb1409e42a65b36ff952906a60f89685a9875fbc9be4a4d59350618cdf11"
+            },
+            {
+              "bytes": 7603001,
+              "path": "transaction.json",
+              "sha256": "dbb6771db4902a97234d531032cdaaad88d6438b78a1abbb708f51fce8816382"
+            },
+            {
+              "bytes": 2357884,
+              "path": "model.json",
+              "sha256": "cb58058938377bb986aa44455997334b7116aa69f90ebc49a23ae1717d637143"
+            }
+          ],
+          "attempt_id": "Branch/production-worker/nonseparable",
+          "calibration_status": "nonseparable",
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "frequency_hz": 2000,
+          "job_sha256": "d788b15ade126f2c689bb4a0bf34fab98e1cf78a7a5dc00af7688ec5a1cd0c11",
+          "kind": "timelearner_native_calibration_execution",
+          "model_revision": "65f6cc5e55f38857dbdea7c72c126e0ff0495c18271e05bac93cec6585283e5f",
+          "model_sha256": "a56fec64aa1c6bd7f334ff8927de16cd62f2b1a61ad069e7fdb13a40e4e3c4fb",
+          "model_ticks": 1602,
+          "model_time_begin": 0,
+          "model_time_end": 0.801,
+          "runtime_provenance_external": true,
+          "schema_version": 1,
+          "sha256": "14263d1da211b3d611cc045b3efedd03c753d2341df014e767fd8869587e2cd5",
+          "source_recognition_sha256": "a56fec64aa1c6bd7f334ff8927de16cd62f2b1a61ad069e7fdb13a40e4e3c4fb",
+          "transaction_sha256": "b78eb24175509b310e57f3037dcb24fcae9ba2cc339bd4803e3bc426c12e0e72"
+        },
+        "audit": {
+          "schema_version": 1,
+          "transaction_evidence_consistent": true,
+          "status": "nonseparable",
+          "diagnostic_only": false,
+          "negative_status_verified": true,
+          "calibrated": false,
+          "measured_candidates": 1,
+          "selected_index": null,
+          "package_audit": null,
+          "native_execution_verified": false,
+          "owner_restoration_verified": false,
+          "partial_observations_validated": false,
+          "statistical_independence_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "topology": "Branch",
+        "case": "budget",
+        "status": "budget_exhausted",
+        "execution": {
+          "artifacts": [
+            {
+              "bytes": 2485322,
+              "path": "job.json",
+              "sha256": "2c0c8c0dd8c95d133b1dc2b15304efb606ba448e5a9aeb221ce4173764e66c04"
+            },
+            {
+              "bytes": 7602987,
+              "path": "transaction.json",
+              "sha256": "08974cf3665c34d27b39c0134e5c851ffd899508c37a94106885e3d2cd1b64d9"
+            },
+            {
+              "bytes": 2357884,
+              "path": "model.json",
+              "sha256": "cb58058938377bb986aa44455997334b7116aa69f90ebc49a23ae1717d637143"
+            }
+          ],
+          "attempt_id": "Branch/production-worker/budget",
+          "calibration_status": "budget_exhausted",
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "frequency_hz": 2000,
+          "job_sha256": "a56cf864f13e7ec55e77b515db5bf9467e9610fac470e2eda8f20aa2dd3a89a0",
+          "kind": "timelearner_native_calibration_execution",
+          "model_revision": "65f6cc5e55f38857dbdea7c72c126e0ff0495c18271e05bac93cec6585283e5f",
+          "model_sha256": "a56fec64aa1c6bd7f334ff8927de16cd62f2b1a61ad069e7fdb13a40e4e3c4fb",
+          "model_ticks": 1602,
+          "model_time_begin": 0,
+          "model_time_end": 0.801,
+          "runtime_provenance_external": true,
+          "schema_version": 1,
+          "sha256": "50a4c0f1fbafe18691ed8608a4f0c3f0354136842a462437d1c00113c18acefc",
+          "source_recognition_sha256": "a56fec64aa1c6bd7f334ff8927de16cd62f2b1a61ad069e7fdb13a40e4e3c4fb",
+          "transaction_sha256": "32eef4db26c250743bfae47a225199ad69d15fd943d0dc8b194fa14d5a97e1aa"
+        },
+        "audit": {
+          "schema_version": 1,
+          "transaction_evidence_consistent": true,
+          "status": "budget_exhausted",
+          "diagnostic_only": false,
+          "negative_status_verified": true,
+          "calibrated": false,
+          "measured_candidates": 1,
+          "selected_index": null,
+          "package_audit": null,
+          "native_execution_verified": false,
+          "owner_restoration_verified": false,
+          "partial_observations_validated": false,
+          "statistical_independence_verified": false,
+          "evaluation_verdict": null
+        }
+      }
+    ],
+    "scientific_verdict": null
+  },
+  "source_closure": {
+    "root": {
+      "head": "dec422012b4131d3cc0916ccfe306b2771e2ef26",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "9af8a5c7cbcd94c76930b2b9928f2c307a98143b",
+      "head": "9af8a5c7cbcd94c76930b2b9928f2c307a98143b",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "0c6d0572677cd27e5d592dc5936f9686391c536d",
+      "head": "0c6d0572677cd27e5d592dc5936f9686391c536d",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+      "head": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+      "status": ""
+    }
+  },
+  "runtime_fingerprint": "ad218d22c653c8e93a303ce3debe08fccc53a529ad0133092976d07912ac79e8",
+  "archive_sha256": "c32c926ce80ac42d486354867771cd56bd4f126ff99c86a9913640f18cc3c89b",
+  "files": [
+    {
+      "path": "Branch-budget-job.json",
+      "bytes": 1085144,
+      "sha256": "37b245e3665d692eebb06a5858028b98e3161da625083798b7538de2f4f4b0dc"
+    },
+    {
+      "path": "Branch-budget.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Branch-budget/execution.json",
+      "bytes": 1485,
+      "sha256": "3a44d5b376ebf3967920de491ac33c9ce8d8be467d0d15ac7e1d057b25104d79"
+    },
+    {
+      "path": "Branch-budget/job.json",
+      "bytes": 2485322,
+      "sha256": "2c0c8c0dd8c95d133b1dc2b15304efb606ba448e5a9aeb221ce4173764e66c04"
+    },
+    {
+      "path": "Branch-budget/model.json",
+      "bytes": 2357884,
+      "sha256": "cb58058938377bb986aa44455997334b7116aa69f90ebc49a23ae1717d637143"
+    },
+    {
+      "path": "Branch-budget/transaction.json",
+      "bytes": 7602987,
+      "sha256": "08974cf3665c34d27b39c0134e5c851ffd899508c37a94106885e3d2cd1b64d9"
+    },
+    {
+      "path": "Branch-nonseparable-job.json",
+      "bytes": 1085130,
+      "sha256": "77a3c136f232b812219ea00a65dcd5f994f2fbb862b8d2d464e89f47aefedea2"
+    },
+    {
+      "path": "Branch-nonseparable.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Branch-nonseparable/execution.json",
+      "bytes": 1487,
+      "sha256": "8096f87b25774b918dfa149c2036844338fe0b70420b1a99576ab95fe88a00dc"
+    },
+    {
+      "path": "Branch-nonseparable/job.json",
+      "bytes": 2485298,
+      "sha256": "a282eb1409e42a65b36ff952906a60f89685a9875fbc9be4a4d59350618cdf11"
+    },
+    {
+      "path": "Branch-nonseparable/model.json",
+      "bytes": 2357884,
+      "sha256": "cb58058938377bb986aa44455997334b7116aa69f90ebc49a23ae1717d637143"
+    },
+    {
+      "path": "Branch-nonseparable/transaction.json",
+      "bytes": 7603001,
+      "sha256": "dbb6771db4902a97234d531032cdaaad88d6438b78a1abbb708f51fce8816382"
+    },
+    {
+      "path": "Branch-success-job.json",
+      "bytes": 1085145,
+      "sha256": "39342e2f1c4efd5b5b282a657d8d016654bdb9949bbc38133aed0736eba6df55"
+    },
+    {
+      "path": "Branch-success.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Branch-success/execution.json",
+      "bytes": 1481,
+      "sha256": "b586067be4aecad16d9fe9b6a9833ba6edc1f547b305eeb56fd2dfc18bcc5df5"
+    },
+    {
+      "path": "Branch-success/job.json",
+      "bytes": 2485323,
+      "sha256": "f5afa15ebf05d9663b86e07c4ae06e67d40c4d66debab135033bde52e88014e3"
+    },
+    {
+      "path": "Branch-success/model.json",
+      "bytes": 6653770,
+      "sha256": "29acba5f98e54ddd1f680fdd7d41cae2cb764042565eedf1b66cbdd124f7ed2a"
+    },
+    {
+      "path": "Branch-success/transaction.json",
+      "bytes": 21337668,
+      "sha256": "466f22c90fc229848c45d46ef44f4dfe1120a635fa679e130f0b768c4120d721"
+    },
+    {
+      "path": "Classic-budget-job.json",
+      "bytes": 1180983,
+      "sha256": "0cec7ba9284e41627f8e667f39545a34073a5b249dfcaa6ea402da02399275ee"
+    },
+    {
+      "path": "Classic-budget.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Classic-budget/execution.json",
+      "bytes": 1486,
+      "sha256": "6fb2668784b1b6d93c0a456671011dabd542c37df152acba4c67273093479798"
+    },
+    {
+      "path": "Classic-budget/job.json",
+      "bytes": 2681677,
+      "sha256": "df52d49a3634ec8b5a053dfde5d28560781adae5d915171945e2228f3e29001c"
+    },
+    {
+      "path": "Classic-budget/model.json",
+      "bytes": 2544357,
+      "sha256": "964c3e5015460f0c3b24d61ecb817b69008c2c421af1b12648675323a9a63fcc"
+    },
+    {
+      "path": "Classic-budget/transaction.json",
+      "bytes": 8224999,
+      "sha256": "7c1d5374b106635915070343c9dbefbce00ed54e6000dfdd4c5e61bec354f098"
+    },
+    {
+      "path": "Classic-nonseparable-job.json",
+      "bytes": 1180969,
+      "sha256": "63c55e2ba69463204190c4149a7e3ac36b8492374be671f96bd2460ff1bceab8"
+    },
+    {
+      "path": "Classic-nonseparable.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Classic-nonseparable/execution.json",
+      "bytes": 1488,
+      "sha256": "28c73863734e883a556d9a6652720d094353fe992202bdc0fbf8ed2d7498e5d2"
+    },
+    {
+      "path": "Classic-nonseparable/job.json",
+      "bytes": 2681653,
+      "sha256": "fa5f70aa83154b254eaee61d5b3b9fa4e91990a035ee348c3c53159ff2b8c0cf"
+    },
+    {
+      "path": "Classic-nonseparable/model.json",
+      "bytes": 2544357,
+      "sha256": "964c3e5015460f0c3b24d61ecb817b69008c2c421af1b12648675323a9a63fcc"
+    },
+    {
+      "path": "Classic-nonseparable/transaction.json",
+      "bytes": 8225013,
+      "sha256": "4e0ae1fc4edd0c88c9183757432a745c23217dc3e115caf77d76224ff3d0017e"
+    },
+    {
+      "path": "Classic-success-job.json",
+      "bytes": 1180984,
+      "sha256": "3e938a0326ae934230a1f7b0b4e2a2da5bc39184a102cfd9e3fb09edbebe3026"
+    },
+    {
+      "path": "Classic-success.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Classic-success/execution.json",
+      "bytes": 1482,
+      "sha256": "1c25dd9a6305dc094d3122863d24cb9f15f0e6c232bb3b1625f0ce33455cd034"
+    },
+    {
+      "path": "Classic-success/job.json",
+      "bytes": 2681678,
+      "sha256": "dc7229c971b8c52131d32b90d643e1bf2ca97b87e398223a734b5195a7339ca2"
+    },
+    {
+      "path": "Classic-success/model.json",
+      "bytes": 7222091,
+      "sha256": "86f6ac58b227487ebbd4c091c1fb9738ec541e5927c90d777d386d3d486cc020"
+    },
+    {
+      "path": "Classic-success/transaction.json",
+      "bytes": 23149319,
+      "sha256": "ce874a81ab65fc676fd130ca5e0a9db3a843e95c8d4cfd47b39a8064850c47cb"
+    },
+    {
+      "path": "build.log",
+      "bytes": 2954,
+      "sha256": "484df404f98bb00f0066d33a457c3ae56346f5c7bcb3a43b54498e3d0eba5c99"
+    },
+    {
+      "path": "checkout.log",
+      "bytes": 648,
+      "sha256": "c77b322604271cf6b07325c48a6272c5805ed7de2ddf73a07dd09e2a925a002d"
+    },
+    {
+      "path": "configure.log",
+      "bytes": 1203,
+      "sha256": "99ca40685d093d6f47abb8d7b582383d44f2368eb215bef98bf4b89952a7e191"
+    },
+    {
+      "path": "native.log",
+      "bytes": 102,
+      "sha256": "0f978239073aa36c74c3351e79ab8ee1d47a20e18a6bf617c416e4b05af6cbce"
+    },
+    {
+      "path": "process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "runner.sh",
+      "bytes": 5254,
+      "sha256": "b89bbb23ae90cc3d7493a541fb9dcc068cb5a257f904b8281938ecbd7f6e7197"
+    },
+    {
+      "path": "runtime-after.json",
+      "bytes": 125,
+      "sha256": "09da4a5c009455ba108b7b0c425fb6500f26d4e66b871b4a53044172835e5000"
+    },
+    {
+      "path": "runtime-before.json",
+      "bytes": 12118,
+      "sha256": "edb777755cc56e0dd0d5cf58b10864c59bc775ca229ecf2e6458fb470d4251da"
+    },
+    {
+      "path": "source-closure.txt",
+      "bytes": 651,
+      "sha256": "dc09a2d44e146f91456cd051f9ba10f6754ba3b2cf57f7a4c2d5707bda34ef5c"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 17414,
+      "sha256": "c541dfe8bfdaf4cc8d84963dc0b4407304f576640933aee624e11797e3b4b515"
+    }
+  ],
+  "scientific_verdict": null,
+  "all_visual_reports_accepted": false,
+  "whole_stage_accepted": false
+}
