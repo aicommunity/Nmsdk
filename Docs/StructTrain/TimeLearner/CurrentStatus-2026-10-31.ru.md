@@ -5,12 +5,20 @@
 а не переоценка исторических результатов по новым критериям.
 
 Текущий подэтап — active-request finalization import.
-Новая реализация active-request import (PulseLib ec3d7b4 / root c0496d253)
-пока ожидает runtime-приёмки. Она сохраняет Need/CalculateMode/PostTune/AutoCalibrate
+Active-request import (PulseLib ec3d7b4 / root c0496d253): normal 44/44 (191.796 s).
+Ранний C-trim guard (PulseLib aca4b33 / root a05416971): normal 18/18 (68.693 s).
+Базовый ASan c0496d253: 44/44 (1353.853 s), без skips, leak checking выключен.
+Реализация сохраняет Need/CalculateMode/PostTune/AutoCalibrate
 и immutable intent при заменах recognition-кандидата, читает фактический external
-stop и не пишет в provider. Серверные задания s08-native-finalization-ownership-
-normal/asan-a1 запускают 44 адресных/регрессионных tests; до их завершения новая
-реализация не считается принятой. Configured dispatcher и optional guards не менялись.
+stop и не пишет в provider. Независимый reader 2/2 (23.196 s), четыре actual
+transactions и 20 negative controls, с оригинальными Train primaries. Configured
+dispatcher и optional guards не менялись; полной приёмки этапа 8 нет.
+
+Сверка прежних fixed artifacts: 6/10 byte-exact; positive selection/roundtrip
+выявили перенос Environment clock между WithFreshModel jobs (три лишних шага).
+Clock isolation исправлен штатным Reset на пустой границе (root 87e36a376);
+normal 45/45 (196.890 s), ASan 45-case gate ещё ожидается. Научная эквивалентность четырёх
+различающихся прежних records пока не установлена; старые данные сохраняются.
 
 Ранее проверенная immutable boundary: root a282fe9a /
 PulseLib f8929f9: normal 24/24 (20.492 s), ASan 24/24 (128.163 s), без skips.

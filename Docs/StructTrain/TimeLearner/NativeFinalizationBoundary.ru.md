@@ -151,7 +151,7 @@ SumPotential соединяет точки линиями, вход изобра
 или завершения configured finalization. Для queued/stopped controls нет
 выдуманных waveform-проб. Итогового scientific verdict нет.
 
-## Active-request import: реализация ожидает runtime-приёмки
+## Active-request import: адресные normal и базовый ASan проверены
 
 PulseLib ec3d7b4fc01efec5bfd727b3057e86a66bb6a94b, root
 c0496d2538054afd580fc46f00922144aabe630c добавляют явный
@@ -177,7 +177,48 @@ NativeFinalizationIntent возвращает value-copy исходного до
 Четыре новых интеграционных сценария: Classic/Branch × CalculateMode 0/1,
 реальный connected request, полный fixed PostTune с разными measurement/final
 thresholds, отклонение чужого source, external stop и явный frozen import.
-Запущены совместно с capture/lifecycle/codec/fixed PostTune/threshold regressions;
-до получения результатов runtime-приёмка не заявляется. Automatic configured
+Normal: 44/44 tests на root c0496d253 (191.796 s), затем 18/18 на root a05416971
+(68.693 s), без skips. Второй прогон включает ранний отказ unsupported C-trim
+до model commit; не поддержанный trim не сбрасывается импортом в ноль. Базовый
+ASan на c0496d253 завершил 44/44 (1353.853 s), без skips, leak checking выключен.
+Новый guard и clock isolation отдельно проверяются в следующем ASan gate.
+Automatic configured
 dispatcher, публичный mapping target-reference/mid/parallel-peak, full matrix и
 снятие optional guards этим не выполнены. Старые исторические verdict не меняются.
+
+Независимый reader: root 8e3e6678664c2940063879b2dd6257e16ad76aa5,
+2/2 tests (23.196 s), четыре actual transactions и 20 negative controls.
+Проверены исходные Train summary/packets/CSV, сохранённый outcome search_unresolved,
+полные измерения весов и финальные реакции. Для каждого случая по 1602 weight и
+1602 final samples. Выбор весов не объявляется успешным распознаванием.
+
+Первый reader ошибочно требовал сохранения CalculateMode исходного Train (1)
+после явного post-import переключения replay в 0. Фактическая рекурсивная сверка
+обнаружила только этот semantic source delta для обоих mode-0 случаев. Теперь
+source lineage допускает только объявленный переход управления, записывает
+original_training_calculate_mode и calculate_mode отдельно; другие semantic
+параметры и training evidence остаются неизменными. Необъявленная смена режима
+отклоняется отдельным negative control. Failed reader и исходные данные сохранены.
+
+### Обнаруженная зависимость от часов предыдущего задания
+
+Шесть из десяти прежних fixed records byte-exact; четыре positive selection/
+roundtrip отличаются, в том числе абсолютным временем на 0.0015 s (три шага
+предшествующих lifecycle tests). Полные recursive differences сохранены; их
+waveform/научная эквивалентность пока не заявляется. WithFreshModel уничтожал
+модель, но не сбрасывал часы общего Environment: свежий job наследовал model
+time предыдущего теста. Это дефект общего production helper, не основание
+переписывать исторические измерения.
+
+Root 87e36a376afe513c0355c468ba7eb8afa3829219 исправляет начало job через
+штатный Environment.Reset после DestroyModel и до CreateModel. Проверяется
+фактическое нулевое время; bool Reset не используется как error channel. Новая
+проверка выполняет два последовательных fresh jobs по три native ticks. Для
+полной runtime-проверки изменения запущен отдельный 45-case gate; до его
+окончания исправление clock isolation не считается полностью принятым. Normal
+45/45 завершён (196.890 s), без skips, включая два последовательных fresh jobs.
+ASan 45-case gate следует после завершённого базового 44-case run. Промежуточный
+ожидавший 18-case ASan job отменён до checkout/runtime creation, вместо него
+проверяется сразу полная актуальная версия; receipt сохраняется. Работающий
+44-case run при этом не прерывался. Старые задания и runtime не обновляются.
+Полная историческая серия и серия D не запускаются.
