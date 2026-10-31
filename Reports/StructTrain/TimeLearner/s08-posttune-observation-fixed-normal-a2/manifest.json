@@ -1,0 +1,809 @@
+{
+  "kind": "legacy_posttune_observation_fixed_native_bundle",
+  "schema_version": 1,
+  "validation": {
+    "fixed-native": {
+      "root": "e3fe53408b861b49c0e0ddc6c3de9acc548a9e54",
+      "pulse": "39810a760103d2e5d5a5b9e6ae6575290522b20c",
+      "tests": 12,
+      "failed": [],
+      "native_returncode": 0,
+      "scientific_verdict": null
+    },
+    "independent-reader": {
+      "reader_root": "3d34217f29be3aa1fc2b961e7f872a1f34a05c1f",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "rendering_in_this_gate": false,
+      "scientific_verdict": null
+    }
+  },
+  "archive_sha256": "f9943d3f43724ef6ebe5808c37cc7384b4b290c28e3761794d1d1a320cb220ab",
+  "files": [
+    {
+      "path": "cancelled-fixture-a1/build.log",
+      "bytes": 3302,
+      "sha256": "df2d88edcb535c1a6d30d737d2a5e30a7be7aa5b9f3030cb66d98aeba5c776ed"
+    },
+    {
+      "path": "cancelled-fixture-a1/checkout.log",
+      "bytes": 643,
+      "sha256": "fb96d398bba6be55c832acff4e0d866dca9c7b02538840d75a66b8e84d56619c"
+    },
+    {
+      "path": "cancelled-fixture-a1/configure.log",
+      "bytes": 1203,
+      "sha256": "44197c2ba9fa2aee9c354ba2080f59c551960fbc888edd73245f4960590f26bb"
+    },
+    {
+      "path": "cancelled-fixture-a1/fixture-cancellation.json",
+      "bytes": 550,
+      "sha256": "f39693b5d5313690e3ec99a7dd2e3b50d8ba323fea381a72d27e5662f8d339be"
+    },
+    {
+      "path": "cancelled-fixture-a1/native-exit-status.txt",
+      "bytes": 4,
+      "sha256": "9d9b18720961e9b4689fd763b85e7b6f36160ccd3a8a1c9ddc5103bb0f66c396"
+    },
+    {
+      "path": "cancelled-fixture-a1/native.log",
+      "bytes": 4918,
+      "sha256": "f8c98ce753413f91e10f900f2a19e024eb37e4885aa86ca693a74623b0c6b758"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_construction.json",
+      "bytes": 134,
+      "sha256": "8085e6472ec32d11f0202641819081ef9c2296618ff75dd461283f94762020eb"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_presentation_1.csv",
+      "bytes": 318245,
+      "sha256": "94fa70d7cada22efefee8253d9b8f67f9d4e974502da6b199218d4baa0bb1662"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_presentation_1_observation.json",
+      "bytes": 783,
+      "sha256": "b09d2a159296f1f4f4a0e4bb46d3a93298ce0ad994b1a72bafa105c11a5666b9"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_presentation_1_spec.json",
+      "bytes": 697,
+      "sha256": "564ee1164c40dcf328faec6516a2a8a7be7f040589b983110d92b35c798de284"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_presentation_2.csv",
+      "bytes": 383759,
+      "sha256": "9c9eb6541cea849645a0247daa957ed7d9d99cd8e7ecf8183d98fb4281bb790f"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_presentation_2_observation.json",
+      "bytes": 777,
+      "sha256": "7cf8430df19c9e1b793fcb699c53e6844e32e85b6abd554afcd5e38fc281933b"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_presentation_2_spec.json",
+      "bytes": 694,
+      "sha256": "278e1b353cc1f4aeff7d47df520314fd809c022ab77a935ecfd5def848a9451e"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_startup_after.json",
+      "bytes": 195214,
+      "sha256": "309a9d42597fb621d0545de3f034182f81c69f993a805372aff62d82818c99dc"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_20000_N1_posttune_transient_startup_before.json",
+      "bytes": 195214,
+      "sha256": "309a9d42597fb621d0545de3f034182f81c69f993a805372aff62d82818c99dc"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_inference_physical_construction.json",
+      "bytes": 134,
+      "sha256": "45c691310cad9f3cdc9ebd98af17d692633df8897d8e414539b05ac0bb7d7618"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_inference_physical_startup_after.json",
+      "bytes": 195531,
+      "sha256": "cdf6c171f7508acd91274805e617fd84a2e9ebf474321e3f93594a1946c9ca07"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_inference_physical_startup_before.json",
+      "bytes": 195531,
+      "sha256": "cdf6c171f7508acd91274805e617fd84a2e9ebf474321e3f93594a1946c9ca07"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_0_construction.json",
+      "bytes": 134,
+      "sha256": "50e85b170f85217add4e4542bc675dd272a3594729c8e2af4133fe664ba988ef"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_0_start.json",
+      "bytes": 291,
+      "sha256": "99f29cce15fa80b009bb1a28987ee66688be828f8a7c5fe7dd7fe4de41b5337c"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_0_startup_after.json",
+      "bytes": 195301,
+      "sha256": "62add8a49a12c3d9160713e89cdbb5712a763b8f0eeff34617893039fafb638f"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_0_startup_before.json",
+      "bytes": 195301,
+      "sha256": "62add8a49a12c3d9160713e89cdbb5712a763b8f0eeff34617893039fafb638f"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_1_construction.json",
+      "bytes": 134,
+      "sha256": "82ee7484b921f7c6f65b442ebf7e23935cae5bcae8147424c6469c2777b7a0b0"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_1_start.json",
+      "bytes": 291,
+      "sha256": "f973b4f5e827c81ee162bd56c84419eae286d31af3692352ba42c82271fd0831"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_1_startup_after.json",
+      "bytes": 195301,
+      "sha256": "03d13e358276257f017fa07c9f658b8976a95f2dae7414f81017772fbe5c646e"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_1_startup_before.json",
+      "bytes": 195301,
+      "sha256": "03d13e358276257f017fa07c9f658b8976a95f2dae7414f81017772fbe5c646e"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_2_construction.json",
+      "bytes": 134,
+      "sha256": "8e5f8354cffc6913dd2b3a010f825014d8890cc1bd2f79a87fd770a4f14db76e"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_2_startup_after.json",
+      "bytes": 195301,
+      "sha256": "615810ae34f80c0d273a0cde46e8e21e6642c54f10dfdae5ec183eebc0d95413"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_2_startup_before.json",
+      "bytes": 195301,
+      "sha256": "615810ae34f80c0d273a0cde46e8e21e6642c54f10dfdae5ec183eebc0d95413"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_2_terminal.json",
+      "bytes": 290,
+      "sha256": "ccabfd4871aef1199a1a4a7e99dffcefb563dfd1443cc553326e67280616db63"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_3_construction.json",
+      "bytes": 134,
+      "sha256": "c821e75da4339d6b6d1c4bd2dc80e6d39e55fa5a4d42f26aa955fe486fcbdbfa"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_3_startup_after.json",
+      "bytes": 195301,
+      "sha256": "e7415cfef7b1ae3599cb92f77a45bd89fcc9ebed9f53cd1bcf34e86b80df47da"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_3_startup_before.json",
+      "bytes": 195301,
+      "sha256": "e7415cfef7b1ae3599cb92f77a45bd89fcc9ebed9f53cd1bcf34e86b80df47da"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_observation_3_terminal.json",
+      "bytes": 291,
+      "sha256": "4b47599c940919181555bc18b19f10ee3ccde3c2fb8b645850720b452835f30e"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_construction.json",
+      "bytes": 134,
+      "sha256": "002a28e48e3f6eda15436dc051e9bfb705490d007744e8f724ce9598e5278946"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_presentation_1.csv",
+      "bytes": 31707,
+      "sha256": "062d38ae1dc341cfb7e38a82de2d484d264d33670bf87ea40b875da22aaa1099"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_presentation_1_observation.json",
+      "bytes": 779,
+      "sha256": "208eaa8f3fa8e475e3f8548dd3ad626f89bded226d89ab6fc0647a0913e54340"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_presentation_1_spec.json",
+      "bytes": 696,
+      "sha256": "acb1072dc521b821db81f986df6826285994005442e7e9a642f1c496bdee43d0"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_presentation_2.csv",
+      "bytes": 38275,
+      "sha256": "1673fd0389c1a71b8ccb7fad9c9a696866525348052d1f7551841baf413ea834"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_presentation_2_observation.json",
+      "bytes": 773,
+      "sha256": "822c3bdf3f4d396b99d7a352a7b53c270a3c6b5425ff782cbaada1a21ef40c99"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_presentation_2_spec.json",
+      "bytes": 693,
+      "sha256": "a28c4d518fa71d34aac641d333103b37a3f65987e6e01a49e6c4b61a188d4f4e"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_startup_after.json",
+      "bytes": 195114,
+      "sha256": "fce002e3389001adaae9e356482b472d2be324d6a6dbbd26c5f5bc83fe9e1874"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Branch_2000_N1_posttune_transient_startup_before.json",
+      "bytes": 195114,
+      "sha256": "fce002e3389001adaae9e356482b472d2be324d6a6dbbd26c5f5bc83fe9e1874"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_inference_physical_construction.json",
+      "bytes": 134,
+      "sha256": "2254f792c52f8ed312da34445ffbc50f368b7de3c30a918f08c4a2ec3ac8b3a0"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_inference_physical_startup_after.json",
+      "bytes": 260738,
+      "sha256": "2a866d83f7fc7f777d69c07605af26102f4d3bea9d8b1e9ccd5cd05a6bbe04cf"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_inference_physical_startup_before.json",
+      "bytes": 260738,
+      "sha256": "2a866d83f7fc7f777d69c07605af26102f4d3bea9d8b1e9ccd5cd05a6bbe04cf"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_construction.json",
+      "bytes": 134,
+      "sha256": "8b9a5cff7adc9f6444bc8edadd291fd8367f8badf404a0e57208083f401caf8c"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_presentation_1.csv",
+      "bytes": 409445,
+      "sha256": "f85ffae46318578fb86f161f7777202a721eb7bf90cfcb9ddd5e18e3e273b9ca"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_presentation_1_observation.json",
+      "bytes": 784,
+      "sha256": "5d68224dd061a12cc75ff97dc268e7297f0e07c7536f7170c7b8b176ea0cd608"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_presentation_1_spec.json",
+      "bytes": 699,
+      "sha256": "18f5c3ddf0d4660e01af3ca195d9e1926d9b903de780461f18dbb3c99ac45b42"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_presentation_2.csv",
+      "bytes": 483414,
+      "sha256": "139c5c1243190433c251f437956ac73f60ee1aca88966fe08b46fa301f0de287"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_presentation_2_observation.json",
+      "bytes": 778,
+      "sha256": "06932c7e0cb355a3865be9d6c54004eff1cc608727c4c6178e45dea864cdfd5b"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_presentation_2_spec.json",
+      "bytes": 696,
+      "sha256": "34ed9e35d0ebbdf774bf7d465aa46f156eace2f423b9d0f3e34ea471a7fc5fc0"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_startup_after.json",
+      "bytes": 260159,
+      "sha256": "3e85a3477aa892a08c5e73e75042f2963d3d620209b0bc439e124525b2382835"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_20000_N1_posttune_transient_startup_before.json",
+      "bytes": 260159,
+      "sha256": "3e85a3477aa892a08c5e73e75042f2963d3d620209b0bc439e124525b2382835"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_inference_physical_construction.json",
+      "bytes": 134,
+      "sha256": "4fa0578d4039ca90e6fb847731116efb706a29b0273a4fdb29dd98387cc1d667"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_inference_physical_startup_after.json",
+      "bytes": 260600,
+      "sha256": "744a2fa2f01f31bdba32ed9e4d61d47fd82553da9711565db23600d2bb7952d3"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_inference_physical_startup_before.json",
+      "bytes": 260600,
+      "sha256": "744a2fa2f01f31bdba32ed9e4d61d47fd82553da9711565db23600d2bb7952d3"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_0_construction.json",
+      "bytes": 134,
+      "sha256": "36cac39be24f1c0827a038398045fc0c8dd11d97c401b6956c058bccbd3b287d"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_0_start.json",
+      "bytes": 292,
+      "sha256": "b27457173a618d43c08dfc7967dbf3aba14f19d73caf6710a6b96fb39a257f1a"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_0_startup_after.json",
+      "bytes": 260280,
+      "sha256": "b8b742dd090591639c5bbc132afbf7e8b93e868c527c0083071f53d272547fa8"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_0_startup_before.json",
+      "bytes": 260280,
+      "sha256": "b8b742dd090591639c5bbc132afbf7e8b93e868c527c0083071f53d272547fa8"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_1_construction.json",
+      "bytes": 134,
+      "sha256": "6deca0759e135558043e7317dbdded81167c79c13ee6012f02b121b97726e58f"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_1_start.json",
+      "bytes": 292,
+      "sha256": "6bc52e3a84e3a4fe131014302f9b2c9d4a1f282158f106a9de605c84a6dacb4b"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_1_startup_after.json",
+      "bytes": 260280,
+      "sha256": "8a4c738b1f712b75457b274745ca2c6074e79614144a560c9b9c0b331d3406a2"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_1_startup_before.json",
+      "bytes": 260280,
+      "sha256": "8a4c738b1f712b75457b274745ca2c6074e79614144a560c9b9c0b331d3406a2"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_2_construction.json",
+      "bytes": 134,
+      "sha256": "5bb7a5c8eb5bb49e5c2289be0013241dd997fa02fc4ac789ed0f1d9a491cc0bf"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_2_startup_after.json",
+      "bytes": 260280,
+      "sha256": "3193aaef61eff08794364e53f844e31476cd73fc337e1aba3e7f5af84f5678d4"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_2_startup_before.json",
+      "bytes": 260280,
+      "sha256": "3193aaef61eff08794364e53f844e31476cd73fc337e1aba3e7f5af84f5678d4"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_2_terminal.json",
+      "bytes": 291,
+      "sha256": "7e8f81c3d8ec0972a28d686eaa27d489c02b04764db7935373cb84fb64755209"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_3_construction.json",
+      "bytes": 134,
+      "sha256": "af12f1393a8472858257e69b6f93059bd282fa000c86602718935269d9c8a046"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_3_startup_after.json",
+      "bytes": 260280,
+      "sha256": "b95948742e05d30f3d7a6874d13e27af5eb2035c138ce88b498472785ce1e748"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_3_startup_before.json",
+      "bytes": 260280,
+      "sha256": "b95948742e05d30f3d7a6874d13e27af5eb2035c138ce88b498472785ce1e748"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_observation_3_terminal.json",
+      "bytes": 292,
+      "sha256": "8a9ff61aba488346eda548a838e6bbf4706bdacb760557487b1bacf1ac053406"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_construction.json",
+      "bytes": 134,
+      "sha256": "23337ef7b6e0170d08ef295923921a164e959ba9046aac207283b571f427784b"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_presentation_1.csv",
+      "bytes": 40860,
+      "sha256": "bfcd74832bae008870e8f49df3f2a457d08fe89fca281f17be8f27aafbda611b"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_presentation_1_observation.json",
+      "bytes": 780,
+      "sha256": "7c62338cd8bf152ca3f919b309286b18519787027204a6559586edfea94240f2"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_presentation_1_spec.json",
+      "bytes": 698,
+      "sha256": "046724b63cf62f707a6c9154c8289e27c4ae6d550360793d2c628a33b959bf95"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_presentation_2.csv",
+      "bytes": 48245,
+      "sha256": "528d7f0edd7f2b671ab7fa75602a2da948779ece9c87d359760869a4436f886a"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_presentation_2_observation.json",
+      "bytes": 774,
+      "sha256": "adf5f9734a986e8da86b8d8508aae7baa6daaabd7dc7a60e8ea71c4762ac0aa5"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_presentation_2_spec.json",
+      "bytes": 695,
+      "sha256": "b945369d62be16ef177c151f628987215c410c9166a20b4e66b907ae505045ee"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_startup_after.json",
+      "bytes": 260021,
+      "sha256": "53fe23ddebf4750c98d911df7e41486bb45958c8fe21457a7a10afd4af94064d"
+    },
+    {
+      "path": "cancelled-fixture-a1/native/Classic_2000_N1_posttune_transient_startup_before.json",
+      "bytes": 260021,
+      "sha256": "53fe23ddebf4750c98d911df7e41486bb45958c8fe21457a7a10afd4af94064d"
+    },
+    {
+      "path": "cancelled-fixture-a1/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "cancelled-fixture-a1/runner.sh",
+      "bytes": 3260,
+      "sha256": "f4e61543d5e70c28ed2244614ad9de2a848cb54a22e08ec494036622f0811950"
+    },
+    {
+      "path": "cancelled-fixture-a1/runtime-before.json",
+      "bytes": 12166,
+      "sha256": "427310f9dce2a0571147fb2004be4fb4f2c0913a87959ff2fc2de7ed031f3365"
+    },
+    {
+      "path": "cancelled-fixture-a1/source-closure.txt",
+      "bytes": 651,
+      "sha256": "cf6e7cf1c37633b18a39943f72c7b68b143749e315b34ddb99a52f0cb4ba9290"
+    },
+    {
+      "path": "cancelled-fixture-a1/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cancelled-fixture-a1/validation.log",
+      "bytes": 437,
+      "sha256": "43faf9ef709f073a3947c167f5002e54ff611e0eb9e591dece659accb67017e0"
+    },
+    {
+      "path": "fixed-native/build.log",
+      "bytes": 3062,
+      "sha256": "8b413cd703d3de411b9ad4c1e7957d5c64eabb75f28678c2062fdc50dec1c5c4"
+    },
+    {
+      "path": "fixed-native/checkout.log",
+      "bytes": 355,
+      "sha256": "e98a26b9273f8f48f0efbf2d855afd300dc3dc51bf6ed6662d1f4135aaa9af03"
+    },
+    {
+      "path": "fixed-native/configure.log",
+      "bytes": 1203,
+      "sha256": "bdfea72ab8358dc1b7a579c763f91a8c92dbde076097624a7d59450586146971"
+    },
+    {
+      "path": "fixed-native/native-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "fixed-native/native.log",
+      "bytes": 2481,
+      "sha256": "be3da8ab62ff164c079b3b0111fb6855ea95ebc23e99087d0c659cf8b3753eeb"
+    },
+    {
+      "path": "fixed-native/native.xml",
+      "bytes": 4193,
+      "sha256": "4100d14d5701daa2dd6999dda81272f4aa4e0264db68d6357c09916b2555461b"
+    },
+    {
+      "path": "fixed-native/native/Branch_20000_N1_posttune_inference_physical.csv",
+      "bytes": 4406161,
+      "sha256": "713e3361a4cd34d69d71217332687aeb97c14bb6cbbffb3702ea4ef5143ce48f"
+    },
+    {
+      "path": "fixed-native/native/Branch_20000_N1_posttune_inference_physical.json",
+      "bytes": 1001,
+      "sha256": "8ca52b0727e49eef46e9c8bc2e488a48425d4bcd3b61b9f98bf91f9d3eb33f21"
+    },
+    {
+      "path": "fixed-native/native/Branch_20000_N1_posttune_inference_physical_startup_after.json",
+      "bytes": 195485,
+      "sha256": "8cbad082000bbc76764bbc725a9cd15f70805b76a67834234aeaec7064516ccb"
+    },
+    {
+      "path": "fixed-native/native/Branch_20000_N1_posttune_inference_physical_startup_before.json",
+      "bytes": 195482,
+      "sha256": "2db06fdeb703f3bd89e24cdded2b6ad011a369cb4145283634cc968c37d61e5d"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_inference_physical.csv",
+      "bytes": 469090,
+      "sha256": "c88dcc9649fc21549745f83f367597febd41c54d898ecbf64914669416a54b11"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_inference_physical.json",
+      "bytes": 987,
+      "sha256": "1bb5ceb6602f161ecf8eb6f81e5a95005eed8beed21fa308f5f1883263b6d5c3"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_inference_physical_startup_after.json",
+      "bytes": 195384,
+      "sha256": "f36030ae9f2911b6c665d58ab22f5e83e20e72ad10a094e62ab58adc7f91be22"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_inference_physical_startup_before.json",
+      "bytes": 195381,
+      "sha256": "e1ced57a73e83c792596a2cbfc74c16bf2a61fd79ce5b402736d4b05aa37958e"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_0_construction.json",
+      "bytes": 134,
+      "sha256": "50e85b170f85217add4e4542bc675dd272a3594729c8e2af4133fe664ba988ef"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_0_start.json",
+      "bytes": 291,
+      "sha256": "99f29cce15fa80b009bb1a28987ee66688be828f8a7c5fe7dd7fe4de41b5337c"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_0_startup_after.json",
+      "bytes": 195301,
+      "sha256": "62add8a49a12c3d9160713e89cdbb5712a763b8f0eeff34617893039fafb638f"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_0_startup_before.json",
+      "bytes": 195301,
+      "sha256": "62add8a49a12c3d9160713e89cdbb5712a763b8f0eeff34617893039fafb638f"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_1_construction.json",
+      "bytes": 134,
+      "sha256": "82ee7484b921f7c6f65b442ebf7e23935cae5bcae8147424c6469c2777b7a0b0"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_1_start.json",
+      "bytes": 291,
+      "sha256": "f973b4f5e827c81ee162bd56c84419eae286d31af3692352ba42c82271fd0831"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_1_startup_after.json",
+      "bytes": 195301,
+      "sha256": "03d13e358276257f017fa07c9f658b8976a95f2dae7414f81017772fbe5c646e"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_1_startup_before.json",
+      "bytes": 195301,
+      "sha256": "03d13e358276257f017fa07c9f658b8976a95f2dae7414f81017772fbe5c646e"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_2_construction.json",
+      "bytes": 134,
+      "sha256": "8e5f8354cffc6913dd2b3a010f825014d8890cc1bd2f79a87fd770a4f14db76e"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_2_startup_after.json",
+      "bytes": 195301,
+      "sha256": "615810ae34f80c0d273a0cde46e8e21e6642c54f10dfdae5ec183eebc0d95413"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_2_startup_before.json",
+      "bytes": 195301,
+      "sha256": "615810ae34f80c0d273a0cde46e8e21e6642c54f10dfdae5ec183eebc0d95413"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_2_terminal.json",
+      "bytes": 290,
+      "sha256": "ccabfd4871aef1199a1a4a7e99dffcefb563dfd1443cc553326e67280616db63"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_3_construction.json",
+      "bytes": 134,
+      "sha256": "c821e75da4339d6b6d1c4bd2dc80e6d39e55fa5a4d42f26aa955fe486fcbdbfa"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_3_startup_after.json",
+      "bytes": 195301,
+      "sha256": "e7415cfef7b1ae3599cb92f77a45bd89fcc9ebed9f53cd1bcf34e86b80df47da"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_3_startup_before.json",
+      "bytes": 195301,
+      "sha256": "e7415cfef7b1ae3599cb92f77a45bd89fcc9ebed9f53cd1bcf34e86b80df47da"
+    },
+    {
+      "path": "fixed-native/native/Branch_2000_N1_posttune_observation_3_terminal.json",
+      "bytes": 291,
+      "sha256": "4b47599c940919181555bc18b19f10ee3ccde3c2fb8b645850720b452835f30e"
+    },
+    {
+      "path": "fixed-native/native/Classic_20000_N1_posttune_inference_physical.csv",
+      "bytes": 6284122,
+      "sha256": "0ab87f057d71e303ab9627f568d53f14d1d6064f7d05070c0775bddb28f1bc66"
+    },
+    {
+      "path": "fixed-native/native/Classic_20000_N1_posttune_inference_physical.json",
+      "bytes": 998,
+      "sha256": "3eb669f098e4882a3f9602b6361a975c582c049bdb9e7decff1eeb16099be398"
+    },
+    {
+      "path": "fixed-native/native/Classic_20000_N1_posttune_inference_physical_startup_after.json",
+      "bytes": 260862,
+      "sha256": "2012059676b5d7323f8683b7bc2aab26e5c3b39db0800a55f7fe64e64f10b710"
+    },
+    {
+      "path": "fixed-native/native/Classic_20000_N1_posttune_inference_physical_startup_before.json",
+      "bytes": 260857,
+      "sha256": "ae9d701f985c2da2782def588ff3b2d3ea1b12ab63a86b99974fa28311f44749"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_inference_physical.csv",
+      "bytes": 614662,
+      "sha256": "4f967b21d006800fcd4a02b7d04f0f768342368bae5b498b7edff5490ed28614"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_inference_physical.json",
+      "bytes": 989,
+      "sha256": "d9bddd3e3ee16d0567145941954141ac1e5212b97b459b35c610bc27ecc96c09"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_inference_physical_startup_after.json",
+      "bytes": 260723,
+      "sha256": "d83d661918a3790908cdca4661875e4ef556a8ece06fd7ea06fd8bebf1a41b60"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_inference_physical_startup_before.json",
+      "bytes": 260718,
+      "sha256": "b2d72525aded237f8c11a3381733b14bba9afc37b9fd32f64e457f5401047d05"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_0_construction.json",
+      "bytes": 134,
+      "sha256": "36cac39be24f1c0827a038398045fc0c8dd11d97c401b6956c058bccbd3b287d"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_0_start.json",
+      "bytes": 292,
+      "sha256": "b27457173a618d43c08dfc7967dbf3aba14f19d73caf6710a6b96fb39a257f1a"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_0_startup_after.json",
+      "bytes": 260280,
+      "sha256": "b8b742dd090591639c5bbc132afbf7e8b93e868c527c0083071f53d272547fa8"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_0_startup_before.json",
+      "bytes": 260280,
+      "sha256": "b8b742dd090591639c5bbc132afbf7e8b93e868c527c0083071f53d272547fa8"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_1_construction.json",
+      "bytes": 134,
+      "sha256": "6deca0759e135558043e7317dbdded81167c79c13ee6012f02b121b97726e58f"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_1_start.json",
+      "bytes": 292,
+      "sha256": "6bc52e3a84e3a4fe131014302f9b2c9d4a1f282158f106a9de605c84a6dacb4b"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_1_startup_after.json",
+      "bytes": 260280,
+      "sha256": "8a4c738b1f712b75457b274745ca2c6074e79614144a560c9b9c0b331d3406a2"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_1_startup_before.json",
+      "bytes": 260280,
+      "sha256": "8a4c738b1f712b75457b274745ca2c6074e79614144a560c9b9c0b331d3406a2"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_2_construction.json",
+      "bytes": 134,
+      "sha256": "5bb7a5c8eb5bb49e5c2289be0013241dd997fa02fc4ac789ed0f1d9a491cc0bf"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_2_startup_after.json",
+      "bytes": 260280,
+      "sha256": "3193aaef61eff08794364e53f844e31476cd73fc337e1aba3e7f5af84f5678d4"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_2_startup_before.json",
+      "bytes": 260280,
+      "sha256": "3193aaef61eff08794364e53f844e31476cd73fc337e1aba3e7f5af84f5678d4"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_2_terminal.json",
+      "bytes": 291,
+      "sha256": "7e8f81c3d8ec0972a28d686eaa27d489c02b04764db7935373cb84fb64755209"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_3_construction.json",
+      "bytes": 134,
+      "sha256": "af12f1393a8472858257e69b6f93059bd282fa000c86602718935269d9c8a046"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_3_startup_after.json",
+      "bytes": 260280,
+      "sha256": "b95948742e05d30f3d7a6874d13e27af5eb2035c138ce88b498472785ce1e748"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_3_startup_before.json",
+      "bytes": 260280,
+      "sha256": "b95948742e05d30f3d7a6874d13e27af5eb2035c138ce88b498472785ce1e748"
+    },
+    {
+      "path": "fixed-native/native/Classic_2000_N1_posttune_observation_3_terminal.json",
+      "bytes": 292,
+      "sha256": "8a9ff61aba488346eda548a838e6bbf4706bdacb760557487b1bacf1ac053406"
+    },
+    {
+      "path": "fixed-native/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "fixed-native/runner.sh",
+      "bytes": 3112,
+      "sha256": "743f310af63412d5a5a296c53582427b909330076d9ecedd8d8040958f4ebeb1"
+    },
+    {
+      "path": "fixed-native/runtime-after.json",
+      "bytes": 149,
+      "sha256": "e5ff35f536e8bbace0e9bc6b3377b4d7e5019679aca7aea67e902a025838f449"
+    },
+    {
+      "path": "fixed-native/runtime-before.json",
+      "bytes": 12166,
+      "sha256": "cbaf88a1fa3fac036a78a1da4d1a6df6efa4ec7a567c5a4cc388883651c35a1d"
+    },
+    {
+      "path": "fixed-native/source-closure.txt",
+      "bytes": 651,
+      "sha256": "cf6e7cf1c37633b18a39943f72c7b68b143749e315b34ddb99a52f0cb4ba9290"
+    },
+    {
+      "path": "fixed-native/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fixed-native/validation.json",
+      "bytes": 199,
+      "sha256": "2abc8ec6140303ec5f4ee348acfb5b5eea0cd3012b1ca31202fa1bcd8bbeae76"
+    },
+    {
+      "path": "fixed-native/validation.log",
+      "bytes": 185,
+      "sha256": "53e795af848b48a09801ef91e83b21c2a28c689fbf8533293517137b7398c9b7"
+    },
+    {
+      "path": "independent-reader/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "independent-reader/runner.sh",
+      "bytes": 1348,
+      "sha256": "21ca2cf5b21a3ec3d0384c9468a9c6381489bff20efb361db3645891a0fa7634"
+    },
+    {
+      "path": "independent-reader/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "independent-reader/tests.log",
+      "bytes": 879,
+      "sha256": "d8597d846055856c8a62a8e419b722bf653eb29efd2dc1f1a38a1a98a373d8d6"
+    },
+    {
+      "path": "independent-reader/validation.json",
+      "bytes": 189,
+      "sha256": "2c053b459d8d3633311c89b71303209871b11477d28ceab2b08a455ab4aaf0c5"
+    }
+  ],
+  "full_regression_gate_accepted": false,
+  "all_visual_reports_accepted": false,
+  "scientific_verdict": null
+}
