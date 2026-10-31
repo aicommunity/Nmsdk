@@ -1,0 +1,19 @@
+{
+  "kind": "selected_solo_trace_visual_review",
+  "schema_version": 1,
+  "reviewed_pngs": 8,
+  "resolution": [
+    1920,
+    960
+  ],
+  "coverage": "Classic/Branch complete soma[0] overview/first zoom, spiking LTZone overview/first zoom",
+  "findings": [
+    "Axes, waveform, actual input overlay and spike markers are readable.",
+    "Threshold-zero controls record a genuine spike at time zero before the first input; this is not a target hit or recognition success.",
+    "Spiking LTZ dynamics include negative recovery and cannot supply nonspiking reference extrema.",
+    "Connected waveform segments and step-input samples must not be interpreted as sub-tick causal timing."
+  ],
+  "full_visual_acceptance_complete": false,
+  "remaining": "Other channels, partial traces and remaining zooms have automated coverage only.",
+  "scientific_verdict": null
+}
