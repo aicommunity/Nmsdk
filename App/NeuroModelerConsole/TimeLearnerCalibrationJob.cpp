@@ -2,7 +2,7 @@
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeThresholdCalibrationTransaction.h"
-#include "../../../Rdk/Deploy/Include/rdk_engine_support.h"
+#include "../../../Rdk/Deploy/Include/rdk_cpp_init.h"
 #include <QCryptographicHash>
 #include <QFile>
 #include <QFileInfo>
