@@ -137,7 +137,7 @@ def main(argv: list[str] | None = None) -> int:
     calibration.add_argument("--selection", type=Path, help="required for confirmation; recomputed against primary search evidence")
     calibration.add_argument("--confirmation", type=Path, help="one fresh measurement-set descriptor required for confirmation")
     calibration.add_argument("--output", type=Path, required=True, help="new result file; never overwritten")
-    posttune = commands.add_parser("posttune", help="owned native measured weight search and real threshold confirmation")
+    posttune = commands.add_parser("posttune", help="owned native measured weight search with explicit fixed threshold or calibration")
     posttune.add_argument("specification", type=Path)
     posttune.add_argument("--source-solo", type=Path, required=True)
     posttune.add_argument("--runtime-manifest", type=Path, required=True)
