@@ -128,3 +128,22 @@ PostTune status properties. Их ptPubState=258 сверено с C++ declaratio
 не native UI/runtime test. Первая metadata-проверка A1 потеряла Unicode
 литерал в transport JSON через Windows stdin; ASCII-escaped JSON A2 прошёл
 без изменения правильных UTF-8 файлов репозитория. Полный ClDesc audit открыт.
+
+## Последующее завершение ASan и отчётов
+
+ASan A2 завершён: 12/12, 1555.310 s; leak detection=0. Stronger primary
+reader a153c052 прошёл 6/6 на normal/ASan (5.867 / 5.101 s), включая
+пересчёт peak из всех строк и отказ при подделке finite peak. Четыре CSV
+byte-identical между workers, metadata равны семантически; это deterministic
+control, не независимые retrains. Дополнительные normal 37/37 завершены
+(318.086 s), ASan 37-case процесс пока выполняется отдельно.
+
+Bundles: normal regression 9f5a3a178 (460 files / 777832 bytes); ASan A2
+ed4c9a947 (111 / 1004100). Visual 4572e32b прошёл 11/11 (728.200 s),
+поздний peak-audit того же Git-extracted source — 6/6 (4.663 s). Cache 8573
+files проверен по полному SHA closure. В Git только metadata archive
+348764 bytes / 29 members и 11 selected PNG; все 11 просмотрены. Branch
+20-кГц peak у границы тайла дополнен предыдущим; axis offset явно подписан.
+Полная visual acceptance false; старые 5-test и новые 6-test audits перекрываются
+и не складываются как независимые проверки. Новое изображение не превращает
+legacy BestEffort в Exact/Calibrated или научный PASS.

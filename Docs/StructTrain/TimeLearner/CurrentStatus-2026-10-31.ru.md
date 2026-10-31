@@ -43,7 +43,7 @@ proof audit, frozen scoring/report adapter и CLI анализа/select/confirm/
 | Production calibration worker, PulseLib a5671e9 | Normal root 8aae62d и ASan root b103835 выполнили по шесть Console jobs Classic/Branch N1/2000 Hz: Calibrated, NonSeparable, BudgetExhausted для каждого owner. Portable reader 819f0d9 прошёл по 6/6 (137.657 / 201.645 s), включая два настоящих owned CLI run на worker. Более ранний reader 0d8494b прошёл перекрывающиеся 6/6 (100.727 / 172.595 s). Controls 29c15a6: 2/2 на worker; provenance/runtime 4244160: 11/11 на worker. Все первичные bundles опубликованы: normal d663fd43 + d879109a, ASan 1d248c88. Общий Train/export/evaluate scheduler и полный PostTune/mode/profile matrix остаются открытыми. |
 | Production calibration visual reports, root 9c2fe4c | M40 проверил 437 Git-bundle members и построил 10 reports, 22 complete matrices, 66 trial/soma pairs. 19/19 checks прошли (16 provenance/runtime/plotting + 3 report). Metadata archive 98940 bytes, выбранные PNG опубликованы в 8636b892; ещё три input/rise tiles добавлены в b787779f без нового рендеринга. Все 11 selected PNG просмотрены в исходном размере; полная visual acceptance false. |
 | Native cold Train/export/frozen evaluate, root d5ef1fa | Normal и ASan: по 4 случая / 12 native фаз, Classic/Branch × N0/N1 при 2000 Гц; все training outcomes search_unresolved, все complete frozen observations valid, модель неизменна. Normal primary опубликован (211 файлов / 371128 bytes). Owned CLI reader cfb09d3: 12/12 операций и portable audits; controls c8bb72b: 6/6 без skips (12.967 s), включая реальный one-tick incomplete Test. ASan CLI c8bb72b: те же 12/12. Owned bundles опубликованы: normal 8b4282f6 (633 файла / 758980 bytes), ASan 63a06e41 (794 / 1118296). Усиленные controls b839e879: 7/7 normal/ASan (18.248 / 45.504 s), включая остановленный cold Train и запрет его recognition export. All-pattern fixed evaluation reports 2eea76a: 4 матрицы / 12 пар, 5 plotting checks, 8 selected PNG просмотрены; полный cache на M40. Новые calibration-grid figures остаются открытыми; вся mode/profile/frequency matrix и этапы не приняты. |
-| TL-037 legacy inference attempt, PulseLib 39810a7 | Baseline normal/ASan: шесть expected failures из восьми, включая false Success/mid=0.25 при непосещённом foil; две NaN controls прошли. Fixed normal root e3fe5340: 12/12 native (220.780 s), 5/5 primary audits (4.165 s), 4 physical free-runs Classic/Branch × 2000/20000 Гц. Bundle 37678c32: 156 файлов / 1080412 bytes, все hashes проверены. ASan 20-кГц, отдельные 37 regressions и полный visual gate ещё выполняются; это не полный этап 8. |
+| TL-037 legacy inference attempt, PulseLib 39810a7 | Baseline normal/ASan: шесть expected failures из восьми, включая false Success/mid=0.25 при непосещённом foil; две NaN controls прошли. Fixed normal root e3fe5340: 12/12 native (220.780 s), 5/5 primary audits (4.165 s), 4 physical free-runs Classic/Branch × 2000/20000 Гц. Bundle 37678c32: 156 файлов / 1080412 bytes, все hashes проверены. ASan 12/12 завершён (1555.310 s), stronger reader 6/6 (5.101 s); все четыре CSV byte-identical normal. Normal дополнительные 37/37 прошли (318.086 s), 6/6 peak-replay checks (5.867 s). Visual/render 11/11 + late peak 6/6, 11 selected PNG просмотрены; полный cache 8573 files на M40. Дополнительные 37 ASan regressions ещё выполняются; полный этап 8 открыт. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
 Production worker: [контракт и CLI](NativeCalibrationWorker.ru.md),
@@ -557,3 +557,39 @@ archive duplicates: 1238 путей / 955 unique inodes до операции; �
 каждым hardlink повторно сверяет полные SHA. Исходники, первичные результаты
 и native executables не удалялись. Оба receipts будут опубликованы вместе
 с baseline evidence.
+
+## TL-037: normal/ASan addressed gate и visual receipt
+
+Addressed A2: normal 12/12 (220.780 s), ASan 12/12 (1555.310 s), без
+failures/errors/skips; ASan leak detection выключен. Additional normal
+regressions: 37/37, 318.086 s, на том же A2 binary без пересборки. Это две
+разные native invocation, не один общий 49-case процесс. Core source остаётся
+39810a7; позднейший PulseLib d3dd2a4 меняет только documentation.
+
+Normal strengthened reader a153c052: 6/6, 5.867 s; ASan — 6/6, 5.101 s.
+Оба sample peaks пересчитываются из каждого реального CSV отсчёта, подделка
+конечного peak при finite/observed flags отвергается. Все четыре ASan CSV
+побайтово совпали с normal; metadata packets равны семантически. Это
+deterministic correspondence и основание повторно использовать normal
+waveform cache, не независимые научные повторения.
+
+Published receipts: [normal regressions/peak reader/ClDesc metadata](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-regression-normal-a1/README.md)
+9f5a3a178 (460 files / 777832 bytes), [ASan A2](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-fixed-asan-a2/README.md)
+ed4c9a947 (111 / 1004100). Все member hashes проверены после Git fetch.
+
+[Visual metadata и selected QA](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-report-normal-a1/README.md)
+4572e32b: 11 rendering/data/plot checks, 728.200 s; late stronger peak reader
+6/6, 4.663 s, без повторного рендеринга. Четыре полных physical runs, оба
+паттерна и шесть soma channels: 12 pattern/soma pairs. Cache содержит 8573
+файла PNG/SVG/PDF/HTML/primary/metadata на M40 Data; Git хранит 29 metadata
+members / 348764 bytes и 11 selected PNG. Все 11 просмотрены в исходном
+1920×960, подписи/входы/волны читаемы. Full-cache visual acceptance false.
+
+Source cache: `/media/user/Data/TimeLearnerRefactor/readbacks/s08-posttune-observation-report-normal-a1/reports`.
+Legacy producer не записывает model identity или spike times: они явно unknown,
+а validity/complete на графике относится к полноте записанных данных, не к
+V2 calibration proof или физическому settling. Между 2000/20000 Гц совпадение
+амплитуд не требуется и не заявляется. Сходимость и научный 8/8 не получены
+из этих диагностик. Отдельная 37-case ASan regression ещё выполняется на
+закреплённом A2 runtime; исходники/build/runtime не обновлять до terminal.
+Полный transactional PostTune, C-trim и обязательная mode/profile matrix открыты.
