@@ -4,6 +4,10 @@ Console исполняет объявленный threshold-grid на сохра
 Это подэтап этапов 8–10, не замена Train, PostTune, общей очереди экспериментов
 или полной матрицы моделей. Runtime-приёмка перечислена в CurrentStatus.
 
+Отдельный контур холодного Train, native export и frozen evaluation описан
+в [NativePipelineWorker](NativePipelineWorker.ru.md). Он использует общий
+TimeLearnerJobSupport, но имеет собственные jobs, статусы и primary evidence.
+
 ## Компоненты и lifecycle
 
 `App/NeuroModelerConsole/TimeLearnerCalibrationJob.{h,cpp}` использует стандартный
