@@ -61,11 +61,31 @@ A1 выявила неполную исходную упаковку до рен
 commit исправленного input в analysis clone; A3 fetch-ит оба commit явно.
 10/10 evidence/plot checks прошли за 27.621 s; native rerun не выполнялся.
 
-Production fixed job реализован в root 2d6ab1a0, но ещё не принят: серверная
-ASan сборка Console завершилась, 3/3 preflight tests прошли (5.996 s).
-Идут шесть owned Console controls: legacy, explicit v2 calibrate и fixed
-для каждого learner; сравнение legacy bytes, полная run closure и итоговые
-worker tests ещё ожидаются. Learner-property phase dispatch остаётся открытым.
+Production fixed job проверен на root 2d6ab1a059005af30bc3d55a78c2192e6cbd9813 /
+PulseLib 4fecae12116e64534d84d0275e934b101b74cec6. В каждой сборке прошли
+шесть настоящих owned Console operations: legacy, explicit v2 calibrate и fixed
+для Classic/Branch. Fixed: оба weights_selected; calibration: Classic calibrated,
+Branch search_unresolved. Legacy и explicit v2 calibrate сохранили transaction
+и model bytes исходных normal/ASan корпусов. Это две topology fixtures, а не
+полная матрица. Scientific verdict остаётся null.
+
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-normal-a1/README.md):
+3 preflight checks (7.200 s), 4 final worker checks (42.897 s), четыре реальных
+некорректных Console jobs отклонены до создания native output. 317 members /
+1535108 compressed bytes. [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-asan-a1/README.md):
+3 preflight checks (5.996 s), 4 final worker checks (35.309 s), те же четыре
+реальных отрицательных задания; 322 members / 1566548 bytes. Leak detection
+выключен. Final worker suite включает повтор трёх preflight checks, а не четыре
+дополнительных независимых теста. Новый shared design validator прошёл 4/4
+legacy portable tests на всех 18 исходных runs (124.647 s) на M40.
+
+Обе упаковки проверяют все шесть run snapshots и 252 artifact entries;
+все member hashes повторно проверены после локального --no-ff merge.
+Новый production fixed job не подключает learner-property phase dispatch:
+оба optional-mode guards остаются. Настройка фаз, безопасное продолжение,
+полная mode/profile/frequency matrix, единый ConditionSpec и полный publisher
+остаются открытыми. На M40 строятся отдельные run-bound visual reports шести
+новых ASan jobs; их полная визуальная приёмка ещё не получена.
 
 Новая команда `report --format posttune-run` (root `4c497f41d`) связывает
 графики с production run manifest. Все 18 normal production reports завершены:
