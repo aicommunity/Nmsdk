@@ -1,0 +1,5 @@
+# Native PostTune immutable candidates, normal A2
+
+Root 149a1af0aea88b523871a4e3f6a72fc0bf217c2b with PulseLib de51a21: five native cases, four legacy conversion regression cases, eight independent reader checks pass. Four real Classic/Branch N0/N1 training controls at 2000 Hz export all five candidate modes (20 archives), verify native import/idempotence/clipping and source/claim corruption refusal. CanonRmin additionally has two imported graphs with complete paired soma/input CSV transport. All candidates remain unmeasured/unconfirmed with no recognition certificate. Training outcome is retained, never upgraded by conversion.
+
+Initial A1 root 8ff51ae2f used a wrong shared test expectation: the Branch N1 scaling factor was demanded from three identity-conversion cases. Three failures are preserved, not reported as algorithm defects; the corrected A2 restricts the assertion to the actual historical conversion mode. Core code did not change. ASan, production Console controls, waveform visual acceptance and the complete PostTune search/commit/calibration controller remain separate gates. No scientific verdict is claimed.
