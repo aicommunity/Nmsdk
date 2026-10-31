@@ -3089,7 +3089,7 @@ template<class Learner> void PostTuneInferencePhysicalFreeRun(unsigned frequency
     using Owner=PostTuneObservationLearner<Learner>;
     constexpr bool branch=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
-    const std::string image=branch?"PostTuneObservationBranchFixture":"PostTuneObservationClassicFixture";
+    const std::string image=std::string(branch?"PostTunePhysicalBranchFixture":"PostTunePhysicalClassicFixture")+std::to_string(frequency);
     if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
         +[]() -> UComponent* {return new Owner;},image),image);
     // The numerical playback must dispatch through the actual legacy scheduler;
