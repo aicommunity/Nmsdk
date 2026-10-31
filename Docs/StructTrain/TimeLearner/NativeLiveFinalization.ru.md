@@ -111,3 +111,39 @@ ASan gate ещё работает. Полная матрица, production CLI, 
 receipts и явную supervisor policy. Корректность payload проверяют отдельные
 readers; origin JSON и полный lifetime loader closure этот checker не удостоверяет.
 Initial supervisor failure сохраняется даже при successful native receipts.
+
+## Временные отчёты и CLI: приёмка выполняется
+
+`live_finalization_reports` проверяет control и все нужные primary по inventory,
+затем отображает все записанные Train probes, измеренные PostTune/calibration
+матрицы и frozen replay. Остановка показывает только реальные partial samples;
+отказ до первой пробы не создаёт кривых или шаблонного recognition Test.
+PNG1920×960, полные samples, фактический общий вход, overview и подробные zooms.
+Train probes имеют общие per-soma Y limits; неизвестные spike responses не
+заменяются отсутствием спайков. Единицы SI остаются явно непроверенными.
+
+Первый renderer root3d679ec7f построил16 отчётов:213 training trial-soma pairs
+и42 recognition pairs,6928 cache files /447227287 bytes,516.173 s. Три проверки
+прошли и931 source files не изменились, но отдельная review обнаружила
+лексикографический порядок trial_1,trial_10,...,trial_2 в10 training reports.
+Этот cache не принят по требованию хронологии; прежний status0 не переписан.
+`chronology-review.json` хранит фактические begin times и причину отказа.
+
+Rootd16237f83 проверяет непрерывные числовые writer ordinals и возрастающее
+native время, отвергает пропущенную промежуточную пробу до output. Сейчас
+выполняется повторное построение normal visual-a2, PID53240, на тех же
+неизменяемых первичных данных; численное обучение не повторяется. Первичный
+cache/data и numeric runtime работающего ASan не обновляются.
+
+Корневой CLI (пока для native integration-control artifacts этого формата):
+
+```text
+python -m Scripts.StructTrain.TimeLearner analyze CONTROL.json --format native-live-finalization --primary-inventory INVENTORY.json
+python -m Scripts.StructTrain.TimeLearner report CONTROL.json --format native-live-finalization --primary-inventory INVENTORY.json --output NEW_REPORT
+```
+
+Нужны распакованные primary и inventory/composition со связанными SHA/размерами.
+Посторонние model/trace overlays запрещены. CLI root10032be3c прошёл2/2 на
+реальном invalid-design control: analysis, no-data report, missing inventory
+и model overlay; primary hashes не изменились, новых numeric runs0.
+Это не production Train-job declaration и не отдельный научный эксперимент.

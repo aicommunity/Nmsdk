@@ -230,9 +230,27 @@ recognition-моделью. Во всех четырёх frozen replay target0 s
 
 ASan full regression PID20741 действительно жив: rootf0cf989cb /
 PulseLibcf530be, ожидаются95 cases (75 прежних +4clock +16live), runtime не
-обновляется. Последняя проверка: завершены managed ownership controls,
-выполняется NativeOwnedPostTune. No terminal receipt, broad ASan acceptance
-и compact publication пока нет.
+обновляется. Последняя проверка: завершены managed/owned controls и два новых
+cold fixed handoff; выполняется ClassicConnectedCalibrate. Queued reader
+PID54868 ждёт именно этот terminal receipt, после чего проверит95-case coverage,
+process/runtime binding и4 payload tests (всего6 checks). No terminal receipt,
+broad ASan acceptance и compact publication пока нет.
+
+Временные отчёты нового handoff: первый normal cache (renderer3d679ec7f)
+содержит16 reports,213 training и42 recognition trial-soma pairs;3/3 checks,
+516.173 s,931 неизменённых source files. Он не принят по хронологии: отдельная
+review фактически обнаружила trial_10 перед trial_2 в10 training reports.
+Исправление rootd16237f83 сортирует по непрерывным числовым writer ordinals,
+проверяет возрастающий begin и отсутствие пропущенной промежуточной пробы.
+Visual-a2 PID53240 строится на тех же primary, без нового обучения; selected
+visual QA, compact metadata и публикация ещё ожидаются. Полные cache остаются
+на M40 Data. Старый status0 и отдельный chronology-review сохранены.
+
+CLI analyze/report --format native-live-finalization с обязательным
+--primary-inventory добавлен для этих native integration-control artifacts.
+На source10032be3c прошли2/2 checks (0.889 s), включая реальные no-data report,
+analysis и отказ missing inventory/model overlay до output. Source hashes
+не изменились; numerical runs0. Production Train-job declaration остаётся открыта.
 
 ## Следующий обязательный объём
 
