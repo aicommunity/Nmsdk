@@ -71,6 +71,13 @@ def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
                 "limitations": ["weight-selection data and same-matrix calibration are not independent Test",
                                 "SI soma units unverified", "visual acceptance pending",
                                 "partial probes retained without complete-response plots"]}
+    fixed_note = ""
+    if report["schema_version"] == 2:
+        manifest.update({"finalization": "keep_fixed_threshold", "calibration_status": "fixed",
+                         "recognition_success_confirmed": False})
+        fixed_note = ('<p>The threshold was preserved. Weights selected is a weight-phase outcome; '
+                      'a silent target remains a false negative. Calibration and successful recognition '
+                      'are not inferred from the measured analogue gap.</p>')
     _write(output/"manifest.json", manifest)
     note = '<p>No completed weight matrix is available.</p>' if not matrices else ''
     (output/"index.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8">'
@@ -81,7 +88,7 @@ def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
         'overview and readable detail views. Weight probes use the inherited threshold; their spike counts '
         'do not select weights or prove recognition. These data were used to select weights or calibrate '
         'the threshold and do not establish independent Test performance. Partial probes are retained '
-        'without inferred complete responses. Visual acceptance remains pending.</p>'+note+
+        'without inferred complete responses. Visual acceptance remains pending.</p>'+fixed_note+note+
         '<ul>'+"".join(links)+'</ul><p><a href="primary/transaction.json.gz">Lossless source transaction</a>; '
         '<a href="manifest.json">Audit, scope and limitations</a>.</p></html>\n', encoding="utf-8")
     sums = {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()

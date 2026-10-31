@@ -18,6 +18,8 @@ FIELDS = {"kind", "schema_version", "algorithm", "source_recognition", "mode", "
           "candidates", "rejected_proposals", "active_matrix", "thresholds", "maximum_calibration_candidates",
           "confirmation_specification", "selected_index", "calibration", "status", "reason", "source_restored",
           "calibrated_package", "dynamic_checkpoint", "statistical_independence_verified", "evaluation_verdict", "sha256"}
+FIXED_FIELDS = {"finalization", "calibration_status", "selected_package", "selection_proof_embedded_in_model",
+                "recognition_success_confirmed"}
 
 
 def _semantic(rows):
@@ -57,15 +59,23 @@ def _matrix(row, design, run_id, metric):
 def audit_posttune_transaction(report, source_case):
     try:
         r = report
-        require(type(r) is dict and set(r) == FIELDS and r["kind"] == "native_post_tune_transaction" and
-                type(r["schema_version"]) is int and r["schema_version"] == 1 and
-                r["algorithm"] == "bounded-coordinate-full-pattern-native-calibration-v1", "unknown_post_tune_transaction")
+        fixed = type(r) is dict and type(r.get("schema_version")) is int and r["schema_version"] == 2
+        require(type(r) is dict and set(r) == FIELDS | (FIXED_FIELDS if fixed else set()) and
+                r["kind"] == "native_post_tune_transaction" and type(r["schema_version"]) is int and
+                r["schema_version"] == (2 if fixed else 1) and r["algorithm"] == (
+                    "bounded-coordinate-fixed-threshold-native-driver-v1" if fixed else
+                    "bounded-coordinate-full-pattern-native-calibration-v1"), "unknown_post_tune_transaction")
+        if fixed:
+            require(r["finalization"] == "keep_fixed_threshold" and r["calibration_status"] == "fixed" and
+                    r["selection_proof_embedded_in_model"] is False and r["recognition_success_confirmed"] is False,
+                    "unsupported_fixed_post_tune_claim")
         require(r["sha256"] == sha({k: v for k, v in r.items() if k != "sha256"}), "post_tune_digest_mismatch")
         source = r["source_recognition"];audit_recognition_derivation(source, source_case)
         require(source["conversion_spec"]["schema_version"] == 1, "unsupported_post_tune_source_continuation")
         status = r["status"]
-        require(status in {"calibrated", "search_unresolved", "budget_exhausted", "cancelled", "failed", "recovery_required"} and
-                type(r["source_restored"]) is bool and r["source_restored"] is (status not in {"calibrated", "recovery_required"}) and
+        require(status in {"search_unresolved", "budget_exhausted", "cancelled", "failed", "recovery_required",
+                           "weights_selected" if fixed else "calibrated"} and
+                type(r["source_restored"]) is bool and r["source_restored"] is (status not in {"calibrated", "weights_selected", "recovery_required"}) and
                 type(r["reason"]) is str and r["dynamic_checkpoint"] is False and
                 r["statistical_independence_verified"] is False and r["evaluation_verdict"] is None, "unsupported_post_tune_claim")
         require(r["mode"] in {"off", "keep_done", "canon_rmin", "flat_last_r", "search_synthetic"} and
@@ -103,9 +113,14 @@ def audit_posttune_transaction(report, source_case):
                 confirmation["protocol"] in {"historical_same_matrix", "frozen_independent_calibration"} and
                 all(type(confirmation[k]) is str and confirmation[k].strip() for k in ("data_partition_id", "attempt_id", "clock_id")),
                 "invalid_post_tune_confirmation_scope")
-        require(type(r["thresholds"]) is list and 1 <= len(r["thresholds"]) <= 256 and
-                len({number(t) for t in r["thresholds"]}) == len(r["thresholds"]) and
-                1 <= count(r["maximum_calibration_candidates"]) <= 256, "invalid_post_tune_threshold_grid")
+        if fixed:
+            require(r["thresholds"] == [] and count(r["maximum_calibration_candidates"]) == 0,
+                    "fixed_post_tune_has_unused_calibration_grid")
+            number(source["neuron"]["metadata"]["calibration"]["threshold"])
+        else:
+            require(type(r["thresholds"]) is list and 1 <= len(r["thresholds"]) <= 256 and
+                    len({number(t) for t in r["thresholds"]}) == len(r["thresholds"]) and
+                    1 <= count(r["maximum_calibration_candidates"]) <= 256, "invalid_post_tune_threshold_grid")
         rows, gaps, samples, previous_end = r["candidates"], [], 0, None
         for i, row in enumerate(rows):
             require(type(row) is dict and set(row) == {"candidate", "matrix", "measured_gap"} and
@@ -130,6 +145,7 @@ def audit_posttune_transaction(report, source_case):
         if closed:
             require(len(rows)+len(rejected) == proposals and count(r["recorded_weight_samples"]) == samples,
                     "incomplete_closed_post_tune_search")
+            require(r["active_matrix"] == {"requests": [], "observations": []}, "closed_post_tune_has_active_matrix")
             rejects = {q["proposal"]: q["reason"] for q in rejected};seen=set();measured=0;best=None
             for i in range(proposals):
                 mode = "canon_rmin" if r["mode"] == "search_synthetic" and i == 0 else (
@@ -162,6 +178,7 @@ def audit_posttune_transaction(report, source_case):
         require(samples <= count(r["recorded_weight_samples"]) <= count(r["maximum_recorded_samples"]), "post_tune_sample_budget_changed")
         child = r["calibration"];child_audit = None
         require(type(child) is dict, "invalid_post_tune_calibration_container")
+        require(not fixed or not child, "fixed_post_tune_claims_calibration")
         if child:
             child_audit = audit_native_calibration_transaction(child, source_case)
             require(selected is not None and gaps[selected] > number(r["minimum_positive_gap"]) and
@@ -175,13 +192,22 @@ def audit_posttune_transaction(report, source_case):
                     r["calibrated_package"] == child["calibrated_package"], "post_tune_unconfirmed_commit")
         else:
             require(r["calibrated_package"] == {}, "post_tune_noncommitted_package_claim")
+        if fixed:
+            if status == "weights_selected":
+                require(sequence_verified and selected is not None and gaps[selected] > number(r["minimum_positive_gap"]) and
+                        r["selected_package"] == rows[selected]["candidate"], "fixed_post_tune_unmeasured_selection")
+                require(r["selected_package"]["neuron"]["metadata"]["calibration"] == source["neuron"]["metadata"]["calibration"],
+                        "fixed_post_tune_changed_threshold_origin")
+            else:
+                require(r["selected_package"] is None, "fixed_post_tune_noncommitted_selection_claim")
         if r["reason"] == "no_positive_measured_gap":
             require(selected is None or gaps[selected] <= number(r["minimum_positive_gap"]), "post_tune_false_no_gap")
-        return {"schema_version": 1, "recorded_search_consistent": True, "status": status,
+        return {"schema_version": r["schema_version"], "recorded_search_consistent": True, "status": status,
                 "measured_candidates": len(rows), "selected_index": selected, "complete_weight_samples": samples,
                 "proposal_sequence_verified": sequence_verified, "native_physics_rejections_verified": physics_rejections_verified,
                 "calibration_audit": child_audit, "native_execution_verified": False, "owner_restoration_verified": False,
-                "partial_observations_validated": False, "statistical_independence_verified": False, "evaluation_verdict": None}
+                "partial_observations_validated": False, "statistical_independence_verified": False, "evaluation_verdict": None,
+                **({"calibration_status": "fixed", "weight_selection_only": True, "recognition_success_confirmed": False} if fixed else {})}
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, IndexError, OverflowError, ZeroDivisionError) as error:
