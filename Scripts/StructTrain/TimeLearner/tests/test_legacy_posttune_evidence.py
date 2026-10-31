@@ -28,6 +28,7 @@ class LegacyPostTunePhysicalEvidenceTest(unittest.TestCase):
             result = audit_free_run(p, p.with_suffix(".csv"))
             self.assertTrue(result["primary_data_consistent"])
             self.assertEqual(result["observed_input_pulses"], 4)
+            self.assertTrue(result["sample_peaks_replayed"])
             self.assertFalse(result["calibration_validated"])
             self.assertFalse(result["physical_settling_verified"])
             self.assertIsNone(result["scientific_verdict"])
@@ -45,6 +46,14 @@ class LegacyPostTunePhysicalEvidenceTest(unittest.TestCase):
             with tempfile.TemporaryDirectory() as temporary:
                 path = Path(temporary)/"run.json";path.write_text(json.dumps(packet)+"\n")
                 with self.assertRaisesRegex(EvidenceError, "incomplete_sample_states"):
+                    audit_free_run(path, p.with_suffix(".csv"))
+
+    def test_finite_peak_summary_must_replay_from_actual_trace(self):
+        for p in self.paths:
+            packet = load(p);packet["states"][0]["peak"] += .125
+            with tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary)/"run.json";path.write_text(json.dumps(packet)+"\n")
+                with self.assertRaisesRegex(EvidenceError, "recorded_peak_changed"):
                     audit_free_run(path, p.with_suffix(".csv"))
 
     def test_changed_actual_onset_list_is_rejected(self):
