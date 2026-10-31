@@ -2598,6 +2598,8 @@ TEST(NativeCalibrationTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLea
 TEST(NativeCalibrationTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativePostTuneTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
 TEST(NativePostTuneTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
+TEST(NativePostTuneTransaction,ClassicN0_2000){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
+TEST(NativePostTuneTransaction,BranchN0_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
 TEST(NativeCalibratedState,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.);}
 TEST(NativeCalibratedState,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.);}
 TEST(NativeThresholdCandidate,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000);}

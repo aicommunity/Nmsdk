@@ -115,6 +115,13 @@ selected index или schema отвергаются. Partial/cancelled observati
 rejections не выводится из JSON. 19 checks включают 11 новых и 8 compatibility
 candidate checks; это не 19 независимых обучений.
 
+Следующая matrix-проверка добавляет `NativePostTuneTransaction.ClassicN0_2000`
+и `BranchN0_2000` в тот же реальный fixture. Сохраняются 2000 Гц, два входа,
+начальная физика, допуски, исходный protocol и native предложение порога по
+полной неспайковой характеристике. Меняется только normalization N1 → N0.
+До серверного выполнения эти cases не приняты; отсутствие положительного gap
+не должно переименовываться в доказательство физической невозможности модели.
+
 В normal fixture Off/KeepDone и Auto/Soma controls подтверждают пару у обеих
 топологий; Classic подтверждает также CanonRmin. Branch CanonRmin, оба FlatLastR
 и оба one-pass SearchSynthetic остаются `search_unresolved` на объявленной сетке
