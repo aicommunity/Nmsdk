@@ -10,7 +10,7 @@ from .learned_evidence import load_case
 from .native_evidence import load, require
 from .plotting import plotting_runtime
 from .posttune_transaction_evidence import audit_posttune_transaction
-from .recognition_metrics import score_recognition_evaluation
+from .recognition_metrics import score_recognition_evaluation, score_threshold_candidate
 from .reports import render_evaluation
 
 
@@ -32,7 +32,8 @@ def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
         model = report["weight_measurement_candidates"][index] if report["schema_version"] == 3 else row["candidate"]
         row = {**row, "candidate": model, "role": "weight_measurement"}
         spec = _spec(row["matrix"], model, criterion)
-        scored = score_recognition_evaluation(spec, row["matrix"]["observations"], model)
+        scorer = score_threshold_candidate if model["kind"] == "timelearner_recognition_threshold_candidate" else score_recognition_evaluation
+        scored = scorer(spec, row["matrix"]["observations"], model)
         require(scored["validity"] == "valid", "invalid_posttune_plot_matrix")
         jobs.append((f"weights-{index:04d}", row, spec))
     if report["schema_version"] == 3 and report.get("finalization") == "keep_fixed_threshold" and report["final_threshold_responses_observed"]:
@@ -57,7 +58,8 @@ def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
             (inputs/q["observation"]).write_bytes(gzip.compress(json.dumps(
                 observations[q["trial_id"]], ensure_ascii=False, allow_nan=False).encode("utf-8"), mtime=0))
         _write(inputs/"evaluation.json", spec)
-        result = render_evaluation(inputs/"evaluation.json", inputs/"model.json", output/name)
+        result = render_evaluation(inputs/"evaluation.json", inputs/"model.json", output/name,
+            calibration_probe=row["candidate"]["kind"] == "timelearner_recognition_threshold_candidate")
         item = {"name": name, "model_revision": row["candidate"]["model_revision"],
                 "measured_gap": row["measured_gap"], "role": row["role"], "report": name+"/index.html", "result": result}
         matrices.append(item)
