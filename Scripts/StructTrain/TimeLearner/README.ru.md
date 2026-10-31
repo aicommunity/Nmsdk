@@ -249,3 +249,12 @@ BudgetExhausted. Cancelled/Failed/RecoveryRequired — diagnostic-only; пров
 
 Это анализ фактических результатов `NativeThresholdCalibrationTransaction`,
 а не запуск калибровки из CLI. Production worker integration остаётся открытой.
+
+`report TRANSACTION.json --format calibration-transaction --output CACHE_DIR`
+строит все завершённые candidate matrices и fresh confirmation: каждый
+паттерн и все soma channels, фактические входные импульсы, native-resolution
+overview/zoom/series в PNG/SVG/PDF. Пороговые данные остаются calibration
+diagnostics. Незавершённые пробы сохраняются как первичные данные, но не
+выдаются за полную реакцию. Backend и raw evidence проверяются до создания
+каталога. Полный отчёт предназначен для M40 cache; в Git сохраняются compact
+primary и выбранные рисунки согласно общей политике.

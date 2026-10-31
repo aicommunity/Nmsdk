@@ -12,12 +12,14 @@ class PlotScaleTest(unittest.TestCase):
         from Scripts.StructTrain.TimeLearner.reports import render_evaluation
         from Scripts.StructTrain.TimeLearner.probe_reports import render_probe, render_probe_set
         from Scripts.StructTrain.TimeLearner.native_test_reports import render_native_test_run
+        from Scripts.StructTrain.TimeLearner.calibration_transaction_reports import render_calibration_transaction
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory);output = root/"report"
             calls = ((render_evaluation, (root/"evaluation.json", root/"model.json", output)),
                      (render_probe, (root/"probe.json", root/"trace.csv", output)),
                      (render_probe_set, (root/"spec.json", output)),
-                     (render_native_test_run, (root/"spec.json", root/"artifacts", output)))
+                     (render_native_test_run, (root/"spec.json", root/"artifacts", output)),
+                     (render_calibration_transaction, (root/"transaction.json", output)))
             for function, arguments in calls:
                 with self.subTest(renderer=function.__name__), patch.dict("sys.modules", {"matplotlib": None}):
                     with self.assertRaisesRegex(EvidenceError, "plotting_runtime_unavailable"):
