@@ -69,11 +69,19 @@ class NativeThresholdProposalEvidenceTest(unittest.TestCase):
         if not value:
             raise unittest.SkipTest("requires real complete threshold-potential fixtures")
         cls.root = Path(value)
-        paths = sorted(cls.root.glob("*_threshold_proposal.json"))
+        all_paths = sorted(cls.root.glob("*_threshold_proposal.json"))
         expected = {top+"_"+frequency+"_N1_learned_boundary_configured_recognition_10"
                     for top in ("Classic", "Branch") for frequency in ("2000", "20000")}
-        if {p.name.removesuffix("_threshold_proposal.json") for p in paths} != expected:
+        actual = {p.name.removesuffix("_threshold_proposal.json") for p in all_paths}
+        signed = {base+"_signed_bounds" for base in expected}
+        # V2 emits an additional, explicitly named signed-domain measurement
+        # from each same raw trace. It is not an extra base case or an unknown
+        # fixture. Require all four or none (legacy), never silently skip extras.
+        if actual not in (expected, expected|signed):
             raise RuntimeError("requires all four native topology/frequency proposal fixtures")
+        paths = [p for p in all_paths if p.name.removesuffix("_threshold_proposal.json") in expected]
+        cls.signed = {base: load(cls.root/(base+"_signed_bounds_threshold_proposal.json"))
+                      for base in expected if base+"_signed_bounds" in actual}
         cls.cases = []
         for path in paths:
             base = path.name.removesuffix("_threshold_proposal.json")
@@ -109,11 +117,17 @@ class NativeThresholdProposalEvidenceTest(unittest.TestCase):
                                         characterization["candidate"], source, minimum_threshold=1.e-6, maximum_threshold=1.)
 
     def test_actual_bracket_is_derived_from_primary_ltz_frames(self):
-        for _, source, characterization, proposal, _, _ in self.cases:
+        for base, source, characterization, proposal, _, _ in self.cases:
             result = self.audit(proposal, characterization, source)
             self.assertTrue(result["proposal_math_verified"])
             self.assertEqual(result["status"], proposal["status"])
             self.assertFalse(result["calibrated"])
+            if base in self.signed:
+                result = audit_threshold_proposal(self.signed[base], characterization["evaluation_spec"],
+                    characterization["observations"], characterization["candidate"], source,
+                    minimum_threshold=-.1, maximum_threshold=1.)
+                self.assertTrue(result["proposal_math_verified"])
+                self.assertFalse(result["calibrated"])
 
     def test_actual_fresh_confirmation_uses_common_timing_scorer(self):
         for base, source, _, _, search, spec in self.cases:
