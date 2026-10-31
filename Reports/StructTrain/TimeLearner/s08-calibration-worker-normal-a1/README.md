@@ -1,0 +1,7 @@
+# Production Console calibration: normal
+
+Elder passed six actual standard Console jobs: Classic/Branch each Calibrated, full-grid NonSeparable and prefix BudgetExhausted. No GTest bootstrap or alternate scheduler is used. Shared strict proof codecs decode declared job requests/specifications; the worker calculates the native model once per tick and calls the common transaction between ticks.
+
+Reader-a2 passed six tests, including actual calibrate run CLI calls for both topologies, primary snapshots, owned PID/runtime provenance, portable RunManifest analyze and rejection of a fully rehashed wrong runtime binding. Complete grid removal, model replacement and changed original declarations are also rejected. Reader-a1 passed an overlapping six tests before the portable manifest extension; its two actual CLI runs are preserved as a precursor format, not silently upgraded to the final manifest schema. Portable audits of both a2 runs passed again at packaging.
+
+The lossless archive contains all source primary CSV/models, all six native jobs and their observations/models, both readers including four owned CLI runs, runtime receipts and the initial compiler failure (missing public core accessor include, fixed before native execution). No binaries or full plot cache are stored. Source Train remains search_unresolved. Full scientific ConditionSpec, Train/export/evaluate scheduling, full PostTune/mode/profile matrix, all-pattern visual receipts and ASan acceptance remain separate gates. Scientific verdict is null.
