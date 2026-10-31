@@ -207,7 +207,8 @@ def audit_posttune_transaction(report, source_case):
                 "proposal_sequence_verified": sequence_verified, "native_physics_rejections_verified": physics_rejections_verified,
                 "calibration_audit": child_audit, "native_execution_verified": False, "owner_restoration_verified": False,
                 "partial_observations_validated": False, "statistical_independence_verified": False, "evaluation_verdict": None,
-                **({"calibration_status": "fixed", "weight_selection_only": True, "recognition_success_confirmed": False} if fixed else {})}
+                **({"calibration_policy": "fixed", "calibration_status": "unverified" if status == "recovery_required" else "fixed",
+                    "weight_selection_only": True, "recognition_success_confirmed": False} if fixed else {})}
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, IndexError, OverflowError, ZeroDivisionError) as error:

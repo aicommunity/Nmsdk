@@ -73,9 +73,12 @@ def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
                                 "partial probes retained without complete-response plots"]}
     fixed_note = ""
     if report["schema_version"] == 2:
-        manifest.update({"finalization": "keep_fixed_threshold", "calibration_status": "fixed",
+        manifest.update({"finalization": "keep_fixed_threshold", "calibration_policy": "fixed",
+                         "calibration_status": audit["calibration_status"],
                          "recognition_success_confirmed": False})
-        fixed_note = ('<p>The threshold was preserved. Weights selected is a weight-phase outcome; '
+        fixed_note = ('<p>Fixed-threshold finalization requested no threshold search. Only a selected package '
+                      'binds its preserved threshold; recovery-required does not attest the live owner state. '
+                      'Weights selected is a weight-phase outcome; '
                       'a silent target remains a false negative. Calibration and successful recognition '
                       'are not inferred from the measured analogue gap.</p>')
     _write(output/"manifest.json", manifest)
