@@ -50,7 +50,8 @@ def equal(a: Any, b: Any) -> bool:
     return not after(a, b) and not after(b, a)
 
 
-def load(path: Path) -> dict[str, Any]:
+def parse_json_bytes(raw: bytes) -> Any:
+    """The same strict decoder for files and already snapshotted archive bytes."""
     def pairs(items: list[tuple[str, Any]]) -> dict[str, Any]:
         result: dict[str, Any] = {}
         for key, value in items:
@@ -61,14 +62,24 @@ def load(path: Path) -> dict[str, Any]:
     def invalid_constant(token: str) -> None:
         raise EvidenceError("nonfinite_json_token:" + token)
 
+    result = json.loads(raw.decode("utf-8"), object_pairs_hook=pairs,
+                        parse_constant=invalid_constant)
+    return result
+
+
+def load_json(path: Path) -> Any:
+    """Strict JSON value reader, including runtime mapping arrays."""
     raw = path.read_bytes()
     if path.suffix == ".gz":
         try:
             raw = gzip.decompress(raw)
         except (gzip.BadGzipFile, EOFError, zlib.error) as error:
             raise EvidenceError("invalid_compressed_json") from error
-    result = json.loads(raw.decode("utf-8"), object_pairs_hook=pairs,
-                        parse_constant=invalid_constant)
+    return parse_json_bytes(raw)
+
+
+def load(path: Path) -> dict[str, Any]:
+    result = load_json(path)
     require(isinstance(result, dict), "not_an_object")
     return result
 

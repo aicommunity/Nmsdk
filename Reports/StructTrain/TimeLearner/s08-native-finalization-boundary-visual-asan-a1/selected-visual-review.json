@@ -1,0 +1,41 @@
+{
+  "kind": "native_finalization_boundary_selected_visual_review",
+  "schema_version": 1,
+  "reviewed": [
+    {
+      "path": "selected/01-Classic_finalization_boundary_0-overview.png",
+      "cache_path": "Classic_finalization_boundary_0/evaluation/trial-0000-soma-001/overview.png",
+      "bytes": 154441,
+      "sha256": "68582c92d78a338b182c037fdc6291e35168626a9ad33252895c0e1ccb58c6f3"
+    },
+    {
+      "path": "selected/02-Classic_finalization_boundary_0-zoom-001.png",
+      "cache_path": "Classic_finalization_boundary_0/evaluation/trial-0000-soma-001/zoom-001.png",
+      "bytes": 142118,
+      "sha256": "942ffaa4ddbc43cc1c20c5a3e5b68b250c431b6d33fa5dabf3db58c3d5e2115c"
+    },
+    {
+      "path": "selected/03-Branch_finalization_boundary_0-overview.png",
+      "cache_path": "Branch_finalization_boundary_0/evaluation/trial-0000-soma-001/overview.png",
+      "bytes": 151815,
+      "sha256": "b17e3a784e06f069735eb65a5c1839e0b152d77200afaa88139ce1cc7f2c79be"
+    },
+    {
+      "path": "selected/04-Branch_finalization_boundary_0-zoom-001.png",
+      "cache_path": "Branch_finalization_boundary_0/evaluation/trial-0000-soma-001/zoom-001.png",
+      "bytes": 140667,
+      "sha256": "1222e9152aac10eca5ac5417649cb64136dcaa2d4d6b1bf19f073a1351e9dea7"
+    }
+  ],
+  "inspection": "four original-resolution 1920x960 target-first-soma PNGs: Classic and Branch, overview and first detail",
+  "selected_visual_review_complete": true,
+  "all_cache_figures_reviewed": false,
+  "full_visual_acceptance_complete": false,
+  "findings": [
+    "Labels, axes and both curves are readable; recorded input impulses are visible against the soma trace.",
+    "Model units are SI-unverified, as labelled. No voltage-unit conversion is inferred.",
+    "Soma lines connect native samples, while input is stepped: apparent sub-tick onset differences do not prove causal lead.",
+    "This review does not inspect foil, second Classic soma, connected-case figures, SVG/PDF or all detail tiles. Those have automatic coverage checks only."
+  ],
+  "scientific_verdict": null
+}

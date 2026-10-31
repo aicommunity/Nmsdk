@@ -1,0 +1,254 @@
+{
+  "kind": "legacy_posttune_inference_failure_reproduction",
+  "schema_version": 1,
+  "validation": {
+    "root": "d8e2ad16d79d1309aef88887b5e9c388539542a4",
+    "pulse": "ded4b558af46bb2caa07587d1dce81cba2da7c11",
+    "tests": 8,
+    "failed": [
+      "ClassicPreviousResult",
+      "BranchPreviousResult",
+      "ClassicPreviousSamples",
+      "BranchPreviousSamples",
+      "ClassicMissingFoil",
+      "BranchMissingFoil"
+    ],
+    "native_returncode": 1,
+    "scientific_verdict": null
+  },
+  "archive_sha256": "5d0975f5b49894321bc414b0bc163a7adee8bbbcef664f2b0320b2cb0e22f821",
+  "files": [
+    {
+      "path": "baseline-native/build.log",
+      "bytes": 5700,
+      "sha256": "5ae966dbae39babdd3b42c69f53dc08215f671b7466258a893824cc81c416acd"
+    },
+    {
+      "path": "baseline-native/checkout.log",
+      "bytes": 970,
+      "sha256": "7b79a446e0fa954f5a3178b30348bb15f9a968945c074ae67cdabeb09d3fd9bf"
+    },
+    {
+      "path": "baseline-native/configure.log",
+      "bytes": 1355,
+      "sha256": "be42f146dc7fe116c4a38e1d883d4c93f64736be48137adbacef36136819f03f"
+    },
+    {
+      "path": "baseline-native/native-exit-status.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "baseline-native/native.log",
+      "bytes": 5457,
+      "sha256": "e8906652002b991cbf00bade8733ceb4af6ed0bfcd49c32b0a8700eafa5da44c"
+    },
+    {
+      "path": "baseline-native/native.xml",
+      "bytes": 10183,
+      "sha256": "9df80e2385a82007d82032dae985c085c93e28d5662904d635155e9c82913602"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_0_construction.json",
+      "bytes": 134,
+      "sha256": "50e85b170f85217add4e4542bc675dd272a3594729c8e2af4133fe664ba988ef"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_0_start.json",
+      "bytes": 291,
+      "sha256": "5bfa41901980d7c55d1129f30d532b0a752d3da4c54b63ce69bc0cd48c217277"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_0_startup_after.json",
+      "bytes": 195301,
+      "sha256": "62add8a49a12c3d9160713e89cdbb5712a763b8f0eeff34617893039fafb638f"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_0_startup_before.json",
+      "bytes": 195301,
+      "sha256": "62add8a49a12c3d9160713e89cdbb5712a763b8f0eeff34617893039fafb638f"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_1_construction.json",
+      "bytes": 134,
+      "sha256": "82ee7484b921f7c6f65b442ebf7e23935cae5bcae8147424c6469c2777b7a0b0"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_1_start.json",
+      "bytes": 289,
+      "sha256": "02a860cb5b3da100832b085b6833983bef22401ad991517cf6ca1539776b024a"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_1_startup_after.json",
+      "bytes": 195301,
+      "sha256": "03d13e358276257f017fa07c9f658b8976a95f2dae7414f81017772fbe5c646e"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_1_startup_before.json",
+      "bytes": 195301,
+      "sha256": "03d13e358276257f017fa07c9f658b8976a95f2dae7414f81017772fbe5c646e"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_2_construction.json",
+      "bytes": 134,
+      "sha256": "8e5f8354cffc6913dd2b3a010f825014d8890cc1bd2f79a87fd770a4f14db76e"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_2_startup_after.json",
+      "bytes": 195301,
+      "sha256": "615810ae34f80c0d273a0cde46e8e21e6642c54f10dfdae5ec183eebc0d95413"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_2_startup_before.json",
+      "bytes": 195301,
+      "sha256": "615810ae34f80c0d273a0cde46e8e21e6642c54f10dfdae5ec183eebc0d95413"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_2_terminal.json",
+      "bytes": 292,
+      "sha256": "932fe45926fee839f69044b83d6beca48652fb1c8470a49e606975496857ed5a"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_3_construction.json",
+      "bytes": 134,
+      "sha256": "c821e75da4339d6b6d1c4bd2dc80e6d39e55fa5a4d42f26aa955fe486fcbdbfa"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_3_startup_after.json",
+      "bytes": 195301,
+      "sha256": "e7415cfef7b1ae3599cb92f77a45bd89fcc9ebed9f53cd1bcf34e86b80df47da"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_3_startup_before.json",
+      "bytes": 195301,
+      "sha256": "e7415cfef7b1ae3599cb92f77a45bd89fcc9ebed9f53cd1bcf34e86b80df47da"
+    },
+    {
+      "path": "baseline-native/native/Branch_2000_N1_posttune_observation_3_terminal.json",
+      "bytes": 290,
+      "sha256": "4e7139b495b5b05b3c9e93f7d827f398601fae7d5e58940986ffd4d049ba72ba"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_0_construction.json",
+      "bytes": 134,
+      "sha256": "36cac39be24f1c0827a038398045fc0c8dd11d97c401b6956c058bccbd3b287d"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_0_start.json",
+      "bytes": 292,
+      "sha256": "f378de00541997dbd708597b45e957a6dbc070dcf8f647eb236d7c28d0946e82"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_0_startup_after.json",
+      "bytes": 260280,
+      "sha256": "b8b742dd090591639c5bbc132afbf7e8b93e868c527c0083071f53d272547fa8"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_0_startup_before.json",
+      "bytes": 260280,
+      "sha256": "b8b742dd090591639c5bbc132afbf7e8b93e868c527c0083071f53d272547fa8"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_1_construction.json",
+      "bytes": 134,
+      "sha256": "6deca0759e135558043e7317dbdded81167c79c13ee6012f02b121b97726e58f"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_1_start.json",
+      "bytes": 290,
+      "sha256": "e7d6e23347b9ea50f5c9fba0004e29f7962937d967f2b7f9d2c281c546a6fcc9"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_1_startup_after.json",
+      "bytes": 260280,
+      "sha256": "8a4c738b1f712b75457b274745ca2c6074e79614144a560c9b9c0b331d3406a2"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_1_startup_before.json",
+      "bytes": 260280,
+      "sha256": "8a4c738b1f712b75457b274745ca2c6074e79614144a560c9b9c0b331d3406a2"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_2_construction.json",
+      "bytes": 134,
+      "sha256": "5bb7a5c8eb5bb49e5c2289be0013241dd997fa02fc4ac789ed0f1d9a491cc0bf"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_2_startup_after.json",
+      "bytes": 260280,
+      "sha256": "3193aaef61eff08794364e53f844e31476cd73fc337e1aba3e7f5af84f5678d4"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_2_startup_before.json",
+      "bytes": 260280,
+      "sha256": "3193aaef61eff08794364e53f844e31476cd73fc337e1aba3e7f5af84f5678d4"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_2_terminal.json",
+      "bytes": 293,
+      "sha256": "ad792cbffba9f9c87c22d78c760d1c326b0ad9d0000554096d448c024eb92207"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_3_construction.json",
+      "bytes": 134,
+      "sha256": "af12f1393a8472858257e69b6f93059bd282fa000c86602718935269d9c8a046"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_3_startup_after.json",
+      "bytes": 260280,
+      "sha256": "b95948742e05d30f3d7a6874d13e27af5eb2035c138ce88b498472785ce1e748"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_3_startup_before.json",
+      "bytes": 260280,
+      "sha256": "b95948742e05d30f3d7a6874d13e27af5eb2035c138ce88b498472785ce1e748"
+    },
+    {
+      "path": "baseline-native/native/Classic_2000_N1_posttune_observation_3_terminal.json",
+      "bytes": 291,
+      "sha256": "b79b761aa4940a4fcc2384de718bbb0176d8842bcfc185e0c617668b36c35797"
+    },
+    {
+      "path": "baseline-native/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "baseline-native/runner.sh",
+      "bytes": 3202,
+      "sha256": "e3337d4cbf701bdb17380a805d260bad3872abb9a5a5bea13c014b10d68fef6c"
+    },
+    {
+      "path": "baseline-native/runtime-after.json",
+      "bytes": 155,
+      "sha256": "005eb181a072c81226ca0904bbafff3092b97de0a3c145efc7bfc41481a57fa4"
+    },
+    {
+      "path": "baseline-native/runtime-before.json",
+      "bytes": 24440,
+      "sha256": "ea0257e791df72319b203f54b957487181d4461564668519c8bbe41af9a4ec79"
+    },
+    {
+      "path": "baseline-native/source-closure.txt",
+      "bytes": 651,
+      "sha256": "70297f9dda9262a942d76f9944546bf2886ad7216f5c647e54bf5ddfcd9219c7"
+    },
+    {
+      "path": "baseline-native/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "baseline-native/validation.json",
+      "bytes": 367,
+      "sha256": "14d9f164a0a8b2c3bccb7bc46396599249894398cfb391aaff11b399400d05a0"
+    },
+    {
+      "path": "baseline-native/validation.log",
+      "bytes": 325,
+      "sha256": "f3cea98e1fe7a100d36ef4e79e627c7ea06ef955266ada544381cd3ad18fb5cf"
+    }
+  ],
+  "baseline_accepted_as_passing_tests": false,
+  "scientific_verdict": null
+}

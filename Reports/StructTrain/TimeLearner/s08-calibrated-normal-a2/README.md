@@ -1,0 +1,9 @@
+# Calibrated native model: normal evidence
+
+Two Classic/Branch N1 2000 Hz native cases passed on producer 0f53ab4ec420b921f766cbd78a7fd10d248b8a86 / PulseLib ce7e81e002c802412ce50c1f2b2f76ffa7215b2a. Nine independent checks passed on b22c15fec9038185b38c47e7889736e39ac30734. They include the earlier five tests, not fourteen unique tests. The separate two-case persistence gate also passed. The archive preserves both original and strengthened native snapshots, all source CSV, raw trials, models, proof, runtime/gate metadata and saved derived frozen evaluation specifications/metrics.
+
+Extract primary.tar.xz into a new directory, verifying manifest member hashes. Set TIMELEARNER_CALIBRATED_STATE_DIR to calibrated-native to rerun the declared nine-test reader. Each cases entry gives contained relative paths for CLI analyze --format calibrated-state --source-solo, analyze --format recognition-evaluation --model, and report --format recognition-evaluation --model. The saved design adapter repeats the same explicitly declared fixture patterns after native import with a distinct run ID. This is not held-out independent Test.
+
+Calibration was confirmed only on the declared reset-per-trial primary pair. Subsequent four-trial frozen metrics include both reset policies and are recomputed independently; calibration does not imply a positive robustness result. Models preserve candidate physics and source solo proof; they have no recognition training certificate. Numeric zero is not used as calibration status.
+
+Full visual reports are reproducible M40 cache; this bundle contains no bulk images/binaries. ASan, production grid selection/commit/rollback, complete PostTune/physical-profile matrix, independent Test and stage 8 remain open. Scientific verdict is null.

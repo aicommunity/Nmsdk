@@ -8,30 +8,34 @@ import gzip
 import hashlib
 import html
 import json
-import platform
 
 from .native_evidence import load, require
-from .recognition_metrics import load_evaluation, score_recognition_evaluation
-from .plotting import render_soma, render_series
+from .recognition_metrics import load_evaluation, score_recognition_evaluation, score_threshold_candidate
+from .plotting import render_soma, render_series, plotting_runtime
 
 
 def _write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False)+"\n", encoding="utf-8")
 
 
-def render_evaluation(source: Path, model: Path, output: Path):
+def render_evaluation(source: Path, model: Path, output: Path, *, calibration_probe=False):
+    runtime = plotting_runtime()
     spec, observations = load_evaluation(source)
     package = load(model)
-    analysis = score_recognition_evaluation(spec, observations, package)
+    scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
+    analysis = scorer(spec, observations, package)
+    calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
+    context = package["source_candidate"]["source_recognition"] if calibrated else (
+        package["source_recognition"] if calibration_probe else package)
     # Descriptors: native binding enumerates Soma1..N (Branch has one soma).
-    count = 1 if package["source_solo"]["configuration"]["model"]["branch"] else len(package["recognition_inputs"])
+    count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
     nodes = {node["path"]: node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]}
     descriptors = []
     for i in range(count):
         path = f"$.Soma{i+1}"
         require(path in nodes, "missing_native_soma_descriptor")
         descriptors.append({"index": i, "path": path+".SumPotential", "class": nodes[path]["class"],
-                            "units": "model_units_SI_unverified", "adapter": "native_recognition_schema_1"})
+                            "units": "model_units_SI_unverified", "adapter": "native_recognition_soma"})
     require(all(o["samples"] and all(len(s["soma"]) == count for s in o["samples"]) for o in observations),
             "missing_report_soma_samples")
     limits = []
@@ -81,14 +85,16 @@ def render_evaluation(source: Path, model: Path, output: Path):
             view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
         series.append({"descriptor": descriptor, **rendered})
     _write(output/"series.json", series)
-    import matplotlib
     manifest = {"kind": "timelearner_visual_report", "schema_version": 1,
+                "purpose": "threshold_candidate_diagnostic" if calibration_probe else "recognition_evaluation_diagnostic",
+                "calibration_claim": False,
+                "source_calibration_evidence_checked": analysis.get("calibration_evidence_checked", False),
                 "run_id": spec["run_id"], "model_revision": spec["model_revision"],
                 "status": "diagnostic", "observation_validity": analysis["validity"],
                 "expected_trial_soma_pairs": len(spec["trials"])*count, "figures": figures,
                 "series": series,
-                "runtime": {"python": platform.python_version(), "matplotlib": matplotlib.__version__},
-                "limitations": ["SI units not recorded in observation schema 1",
+                "runtime": runtime,
+                "limitations": ["Soma SI units not recorded in native observations",
 
                                 "visual acceptance pending"],
                 "visual_acceptance_complete": False, "evaluation_verdict": None}
@@ -96,7 +102,9 @@ def render_evaluation(source: Path, model: Path, output: Path):
     (output/"index.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8">'
         '<title>TimeLearner visual diagnostic report</title><style>body{font:18px sans-serif;margin:2em}'
         'img{display:block;width:100%;max-width:1920px}p{max-width:90em}</style>'
-        '<h1>TimeLearner visual diagnostic report</h1><p>Actual soma SumPotential and shared input samples. '
+        '<h1>TimeLearner visual diagnostic report</h1>'
+        + ('<p>Threshold candidate probe: this report does not certify calibration or independent evaluation.</p>' if calibration_probe else '')
+        + '<p>Actual soma SumPotential and shared input samples. '
         'Full primary data: <a href="primary/evaluation.json">evaluation</a>, '
         '<a href="primary/model.json">model</a>. <a href="analysis.json">Metrics</a>. '
         'SI units unverified; diagnostic report, visual acceptance pending. '

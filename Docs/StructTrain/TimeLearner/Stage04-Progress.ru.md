@@ -220,3 +220,74 @@ Bin 83ab62fcb40f62affd83f66ae68fcd557de55d53. Исходные tested SHA в man
 1→2→1 через scheduler. Полные сведения: [ProbeMeasurement](ProbeMeasurement.ru.md),
 раздел серверной проверки повторных проб. Это не проверка всех Multi Copy/XML,
 не поддержка его случайной ветви и не исправление RNG при Reset.
+
+
+## Открытая проверка 31.10: bool при неинициализированном контейнере
+
+При повторном чтении Rdk c903b9bb подтверждён исходный путь
+UContainer::Calculate: активный container при InitFlag=false пропускает
+вычисления и возвращает false. UModule::Calculate и прочие ранние выходы
+возвращают true. Это несоответствие принятому пользовательскому контракту
+lifecycle bool, а не доказательство корректной инициализации или обучения.
+
+Исправление Rdk 6084bfa703ebbe0d85d2a588dfe8f79c74cd1144 меняет только
+return false на true в этом раннем выходе. Документ Engine-Detailed уточняет
+порядок hooks, детей и пропуск неинициализированного контейнера. Адресный gate: реальный
+неинициализированный model/container со штатным дочерним компонентом; Calculate
+должен вернуть true, сохранив Init/Ready и пропуск children, без скрытого
+Build/Init. После штатного Init расчёт выполняется обычным scheduler.
+Исправлять только возврат этого раннего выхода; не создавать propagation
+ошибок через bool и не запускать children неинициализированного дерева.
+Эта открытая проверка не закрывается прошедшими initialized-native fixtures.
+
+
+### Уточнение native проверки 31.10
+
+Root 492944f266b829aad1840669d779a62d10ae807e / Rdk 6084bfa7 проверены
+на обоих workers, но эти запуски **не приняты**: terminal status=1.
+В normal XML прошли 14 из 15 cases, включая десять прежних lifecycle,
+Classic/Branch fixed-budget и два phase lifecycle controls. Новый bool control
+записал uninitialized_return=true, сохранение пропуска children и по одному
+вызову parent/child после Init, однако сам case упал на lifecycle.IsCurrent().
+Причина — ошибка fixture: revision захвачен до Activity=false; штатный
+SetActivity(false) вызывает Reset и меняет revision независимо от Calculate.
+Это не основание менять setter или общий lifecycle.
+
+Root 0fca58516941184549fb08ea23fa973e2ebdd30c разделяет наблюдения:
+сначала штатный setter, затем snapshot revision и Calculate. Неактивный и
+активный неинициализированный вызовы проверяются независимо. Исходный ASan
+baseline a1 также использовал ошибочный fixture; его текст «only boolean»
+не является доказательством единственной причины failure. Для корректного
+отрицательного контроля создан root f34067c64f8f4ab99b1ff7bfb6c7cc7f7d2a3b8c:
+тот же исправленный test с прежним Rdk c903b9bb, без изменений физики.
+
+Повторные fixed jobs a2 не дошли до тестов: Elder остановлен по запасу места
+(доступно чуть меньше 1.3 GB), M40 — по сокращённому SHA в fetch.
+Они не считаются повторными numerical trials. Jobs a3 используют полный SHA;
+для Elder предварительный порог 1.25 GB, после сборки по-прежнему требуется
+более 1 GiB. До опубликованных raw evidence и проверки обоих workers этот
+подэтап остаётся открытым. Полный этап 4 этим gate не закрывается.
+
+
+### Адресный результат повторных проверок
+
+Fixed a3 завершились с terminal status=0: Elder normal 15/15 cases (8.373 s),
+M40 ASan 15/15 (45.143 s), без skips. Baseline ASan a2 на прежнем Rdk
+c903b9bb завершил supervisor=0 как ожидаемый отрицательный контроль:
+owned native process=1, один testcase и ровно один assertion failure
+«Value of: uninitialized / Actual: false / Expected: true».
+Остальные lifecycle assertions этого control прошли. Pre/post actual-test
+runtime manifests равны, production runner сохранил loaded-file provenance.
+Leak detection выключен; полнота mapped-file lifetime не заявлена.
+
+Rdk объединён через --no-ff в develop: 027f7f8353608f83b55f3857a2f6c39138df4c65;
+доступность commit в origin проверена. Корневой gitlink обновлён на этот merge.
+Это приёмка только раннего bool-контракта. Raw proof опубликованы:
+[normal](../../../Reports/StructTrain/TimeLearner/s04-uninitialized-bool-fixed-normal-a3/README.md)
+(e7307aa37c062f1d16e68ad0de7ae7695614d5c4, 161 members / 740316 bytes) и
+[ASan + negative control](../../../Reports/StructTrain/TimeLearner/s04-uninitialized-bool-fixed-asan-a3/README.md)
+(bacc85856de3fb7399a5f1d7ed10226b89e5de9b, 181 members / 761828 bytes).
+Все члены архивов и SHA256SUMS перепроверены после --no-ff merges в root
+feature. В каждом proof сохранены два полных portable source snapshots /
+84 artifact entries. Полный lifecycle/storage этап и configured phase dispatch
+остаются открыты.
