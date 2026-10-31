@@ -1,0 +1,5 @@
+# Immutable native finalization boundary
+
+Actual Classic/Branch capture, connected request, queued probe rejection, and external-stop diagnostic controls. Four replay records contain both declared target/foil observations. The independent reader checks source equality, declared complete trials, raw XML with only the measured zero feedback cache representation normalized, and sixteen corrupt controls. It does not attest training evidence or scientific classification.
+
+All four native attempts are preserved: a1 compile fixture failure, a2 broad full-package equality failure, a3 semantic comparison, a4 strict complete-XML comparison. The sole observed a3 XML change was NPMembraneBio InputFeedbackSignal 0x0 to zero 1x1 in two image snapshots; physics/graph identities and all other fields matched. The cause inside native allocation/reuse has not been proven. No controller hooks or configured optional modes are enabled. Full stage 8 remains open. Plot report for these new replay records remains pending.
