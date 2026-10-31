@@ -6,6 +6,7 @@ import json
 
 from .finalization_boundary_evidence import audit_capture, audit_replay
 from .native_evidence import load, require
+from .plotting import plotting_runtime
 from .recognition_metrics import score_recognition_evaluation
 from .reports import render_evaluation
 
@@ -28,6 +29,7 @@ def render_boundary_replay(source: Path, comparison: Path, job: Path, output: Pa
     output = Path(output)
     require(all(not output.resolve().is_relative_to(p.parent.resolve()) for p in (source, comparison, job)),
             "boundary_report_must_be_outside_primary_directory")
+    plotting_runtime()  # Fail before creating the report tree if backend is unavailable.
     output.mkdir(parents=True, exist_ok=False)
     primary = output/"primary"
     primary.mkdir()
