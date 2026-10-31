@@ -2,9 +2,10 @@
 
 Code review **44 исходных записей** (22 × оба класса), PulseLib
 `025d809f7b86cc79e18ddd711c6adc40e2396bf8`. Это описание текущего legacy-кода,
-а не объявление реализации нового этапа 8. Native V2 пока явно отклоняет
-включённые PostTune и AutoCalibrate; completed-state codec сохраняет только
-фактический fixed threshold, не calibrated/PostTune controller checkpoint.
+а не объявление выполнения этапа 8. Указанные ниже запреты относятся к
+configured learner properties. Отдельные typed PostTune/calibration API, native
+model import и production jobs реализованы позднее; актуальная граница описана
+в дополнении 31.10 в конце документа. Cold declaration не является checkpoint.
 
 ## Порог и training-only калибровка
 
@@ -69,3 +70,55 @@ fresh final verification после изменения physics; CalibrationResul
 новый pipeline обязан хранить версии наблюдений/попыток и не терять первичные
 данные при калибровке. Offline sweep одного spiking CSV
 не заменяет такой run из-за обратного влияния spike на LTZ dynamics.
+
+## Дополнение 31.10: API и независимые владельцы фаз
+
+Typed NativePostTuneTransaction и NativeThresholdCalibrationTransaction,
+versioned recognition/calibrated packages и production schema-2 fixed jobs
+проверены отдельно: [текущий контроллер](NativePostTuneController.ru.md),
+[normal jobs](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-normal-a1/README.md),
+[ASan jobs](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-asan-a1/README.md).
+Это не подключённый dispatch перечисленных public properties. Оба optional
+mode guards в PrepareConfiguredNativeOwner и BeginNativeTraining остаются.
+
+Повторная проверка действующих consumer paths выявляет следующие обязательные
+различия для phase plan; объединять эти поля в один флаг запрещено:
+
+| Декларация | Фактический legacy consumer | Требование к новому phase plan |
+|---|---|---|
+| AutoCalibrateFixedLTZThreshold | CalibrateFixedLTZThresholdFromTraining использует LastSyncedMin/MaxLTZ и mode/fraction/clamps | Это target-reference threshold proposal. Не подменять его процедурой target/foil grid. Сохранять происхождение proposal и проверять выбранный порог настоящим прогоном |
+| Branch EndOfLearning при EnablePostTrainTuning=false | После optional target-reference процедуры всегда переходит в kPhaseCalibrateLtz; FinishTrainingIteration вызывает FinalizeAfterParallelCalibration и CalibrateFixedLTZThresholdFromParallelPeak | Эта parallel-peak калибровка не проверяет AutoCalibrate внутри своего consumer. AutoCalibrate=false и PostTune=false не гарантируют сохранение fixed threshold. Переход есть также при N0; только Rs scaling отдельно ограничен N1 |
+| EnablePostTrainMidThreshold | FinalizePostTuneMid использует PostTuneMetrics и valid sample states; может работать при AutoCalibrate=false | Это самостоятельная target/foil процедура PostTune. AutoCalibrate=false само по себе не означает отсутствие этого выбора порога |
+| PostTrainSilentThreshold | Применяется при PostTune/inference probes и некоторых отрицательных исходах | Порог изменяет LTZone dynamics. Явно отделить threshold измерения весов от порога конечной recognition-модели. Нельзя молча игнорировать несовпадение с inherited threshold |
+| PostTrainTipResistanceMode | NNeuronPostTrainTune.h: 0 Off, 1 CanonRmin, 2 FlatLastR, 3 KeepDone, 4 SearchSynthetic | Enum не совпадает по порядку с NativePostTuneControllerMode. Использовать явное сопоставление, не static_cast |
+| PostTrainMidMetric | 0 Auto, 1 LTZ, 2 Soma; Auto зависит от topology | Сохранить topology-dependent metric и измеряемый физический канал. Не сравнивать несовместимые единицы без записи источника |
+| PostTrainSyntheticFoilCount | Ограничивает BuildRecognitionProbePatterns / BuildSyntheticPatterns, а не число кандидатов Rs | Проверять действительный предъявленный набор и pattern hashes. Не связывать это поле с maximum_candidates поиска весов |
+| PostTrainTipSearchIters | Бюджет проходов SearchSynthetic | Отдельный budget от числа weight candidates, recorded samples, threshold candidates, model/wall time |
+
+Для Branch подтверждены цепочки EndOfLearning → kPhaseCalibrateLtz →
+FinalizeAfterParallelCalibration → CalibrateFixedLTZThresholdFromParallelPeak
+и отдельный IsParametricNormalization guard только в ScaleTipResistancesForParallelActivation.
+Следовательно, первоначальный конфиг с AutoCalibrate=false не является
+доказательством отсутствия runtime threshold selection. В историческом реестре
+указывать effective graph/threshold и фактическую фазу; при отсутствии конечного
+состояния сохранять unknown. Не отменять августовское наблюдение и не приписывать
+ему новый frozen-threshold протокол по одним исходным флагам.
+
+Native KeepFixedThreshold сейчас измеряет weights при наследуемом пороге и
+сохраняет этот же порог; это проверенная математическая задача данного API.
+Она соответствует public-config фазе только после явной проверки согласованности
+независимых mid/auto/silent controls. Не менять её скрыто ради подключения
+legacy defaults. Для отличающегося probe threshold требуется явно записанное
+состояние физики измерения, полный native import и проверка конечного порога;
+сертификат измерения нельзя переносить на другую threshold-физику.
+
+При recognition import VisitNativeRecognitionControls зеркалирует IsNeedToTrain,
+EnablePostTrainTuning, AutoCalibrate и threshold-поля, а InstallNativeRecognitionState
+очищает training service и NativeConfiguredPlan. Поэтому original phase declaration,
+завершённый Solo package и training outcome сохраняются до первого import в
+отдельном orchestration state. Последующая фаза не восстанавливает исходные
+flags из уже изменённых owner mirrors. Явный Reset/Default не запускает rollback
+или import из lifecycle hook; подготовленный InterruptOwnerLifecycle переводит
+контроллер в RecoveryRequired без доступа к owner. Normal приёмка detach API получена: 16 native, 12 прежних regressions и
+8 reader checks. ASan также завершён: 16 native, 12 regressions, 8 reader,
+без skips; leak detection off. Сам configured phase dispatch ещё не подключён.
