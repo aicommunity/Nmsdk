@@ -11,13 +11,18 @@ Active-request import (PulseLib ec3d7b4 / root c0496d253): normal 44/44 (191.796
 Реализация сохраняет Need/CalculateMode/PostTune/AutoCalibrate
 и immutable intent при заменах recognition-кандидата, читает фактический external
 stop и не пишет в provider. Независимый reader 2/2 (23.196 s), четыре actual
-transactions и 20 negative controls, с оригинальными Train primaries. Configured
-dispatcher и optional guards не менялись; полной приёмки этапа 8 нет.
+transactions и 20 negative controls, с оригинальными Train primaries.
+ASan reader также завершён: 2/2 (20.827 s), без skips, четыре transactions и
+20 negative controls. Опубликован [normal ownership proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-normal-a1/README.md):
+203 members / 2642116 bytes; все hashes после --no-ff merge проверены. Он хранит
+44-case/a1 и 18-case/a2; clock-isolated 45-case/a3 и ASan primaries ещё ожидают
+отдельной публикации. Configured dispatcher и optional guards не менялись;
+полной приёмки этапа 8 нет.
 
 Сверка прежних fixed artifacts: 6/10 byte-exact; positive selection/roundtrip
 выявили перенос Environment clock между WithFreshModel jobs (три лишних шага).
 Clock isolation исправлен штатным Reset на пустой границе (root 87e36a376);
-normal 45/45 (196.890 s), ASan 45-case gate ещё ожидается. Научная эквивалентность четырёх
+normal 45/45 (196.890 s), ASan 45-case gate ещё не завершён. Научная эквивалентность четырёх
 различающихся прежних records пока не установлена; старые данные сохраняются.
 
 Ранее проверенная immutable boundary: root a282fe9a /

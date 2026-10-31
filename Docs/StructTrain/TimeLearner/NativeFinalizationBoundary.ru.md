@@ -222,3 +222,14 @@ ASan 45-case gate следует после завершённого базов�
 проверяется сразу полная актуальная версия; receipt сохраняется. Работающий
 44-case run при этом не прерывался. Старые задания и runtime не обновляются.
 Полная историческая серия и серия D не запускаются.
+
+Независимый reader на ASan a1 также завершён: 2/2 tests, 20.827 s, без skips;
+четыре actual transactions и 20 negative controls. Новый clock-isolated ASan a3
+не смешивается с этим исходным набором данных.
+
+[Normal primary proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-normal-a1/README.md)
+содержит 203 members / 2642116 bytes: a1 44-case, a2 18-case, reader attempts,
+compatibility differences и два полных original portable runs / 84 artifacts.
+После --no-ff merge проверены все inventory/archive/member SHA. В этот proof
+ещё не входят отдельный clock-isolated normal a3 45-case run и новые ASan runs;
+их публикация остаётся обязательным следующим действием.
