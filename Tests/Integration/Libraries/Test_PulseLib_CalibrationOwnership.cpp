@@ -70,6 +70,7 @@ template<class Owner> void RecognitionOwnership(Interference interference)
     const auto tick=[&]{model->Calculate();core.environment->IncreaseModelTimeByStep();};
     const auto finishTrial=[&]{for(unsigned i=0;i<unsigned(spec.trials.front().duration*2000)+3;++i)tick();};
     std::optional<NativeRecognitionTrialObservation> external;
+    std::shared_ptr<const void> retainedContext;
     if(interference==Interference::NormalFlow)
     {
         for(unsigned count=0;!transaction.Done();++count)
@@ -96,7 +97,7 @@ template<class Owner> void RecognitionOwnership(Interference interference)
             const auto lifecycle=owner->ObserveLifecycle();
             // Retain the old token deliberately: merely testing weak.expired
             // would not detect replacement when another observer holds a lock.
-            const auto retained=owner->ObserveNativeRecognitionContext().lock();
+            retainedContext=owner->ObserveNativeRecognitionContext().lock();
             const auto replaced=owner->ImportNativeRecognitionState(candidate,implementation);
             ASSERT_EQ(replaced.status,NativeModelBuildStatus::Adopted)<<replaced.reason;
             // Import changes the recognition context without calling owner
