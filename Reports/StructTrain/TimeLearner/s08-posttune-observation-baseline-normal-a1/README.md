@@ -1,0 +1,5 @@
+# TL-037 baseline failure reproduction: normal
+
+Eight actual native-component fault-injection cases produce six expected failures: stale public Result, stale same-cardinality sample evidence, and missing foil accepted as zero (both Classic and Branch). Two pre-existing NaN controls pass. Native process returns 1; supervisor 0 only verifies this expected failure set and is not an eight-case PASS. Missing foil produces incorrect Success and mid=0.25. Source root d8e2ad16d79d1309aef88887b5e9c388539542a4 / PulseLib ded4b558af46bb2caa07587d1dce81cba2da7c11. ASan, where used, has leak detection disabled.
+
+Primary diagnostic JSON, complete JUnit failures, source closure, build and runtime records are lossless. These fault-injection controls write real typed component outputs and call the production observation tracker; no model ticks or fabricated physical CSV are claimed. They do not invalidate historical August observations. The physical free-run fixture and fix acceptance are separate gates.

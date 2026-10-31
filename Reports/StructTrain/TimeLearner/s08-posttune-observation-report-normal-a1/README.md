@@ -1,0 +1,9 @@
+# Actual legacy inference temporal soma/input reports
+
+Four actual physical free-runs (Classic/Branch x 2000/20000 Hz), target then foil, all six native soma channels / twelve pattern-soma pairs. Full recorded intervals, actual input samples and 100-tick zoom tiles preserve every sample without decimation; zoom resolution is at least 14.208 horizontal pixels per tick. Soma SI units, spike times and model identity were not recorded by this legacy producer and are not invented. Data consistency does not certify physical settling or a V2 calibration proof.
+
+Renderer snapshot 37678c324afdc8adbfa41e4b0b26c465749b2a44 passes eleven plotting/data/report checks (728.200 seconds). Source bundle 37678c32 has all 156 members checked before extraction. A later stronger peak replay reader a153c052 passes six checks (4.663 seconds) on the same extracted primaries without re-rendering. Full file closure and all report hashes are checked before packaging.
+
+Full PNG/SVG/PDF/HTML cache stays on M40: /media/user/Data/TimeLearnerRefactor/readbacks/s08-posttune-observation-report-normal-a1/reports. Git stores only metadata and selected PNG; raw data remain in s08-posttune-observation-fixed-normal-a2. Selected panels cover overview, first actual input and first-response peak; adjacent peak zooms are included when a peak is close to a tile edge. Manual selected review is tracked separately; full-cache visual acceptance stays false. No scientific result or whole-stage completion is claimed.
+
+All eleven selected PNG were manually reviewed at original 1920 x 960 resolution; selected-visual-review.json binds the exact hashes. Read 20-kHz overview, input and peak panels together; the Branch adjacent tile and printed axis offset preserve context. This is selected-panel QA, not visual acceptance of the entire 8573-file cache.
