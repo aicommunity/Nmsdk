@@ -29,6 +29,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_FixedPostTune.cpp
     Test_PulseLib_PhaseLifecycle.cpp
     Test_PulseLib_PostTuneProbeThreshold.cpp
+    Test_PulseLib_FinalizationBoundary.cpp
     Test_PulseLib_ConfigDialect.cpp
     Test_PulseLib_Main.cpp
 )

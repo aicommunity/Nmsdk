@@ -114,7 +114,7 @@ legacy defaults. Для отличающегося probe threshold требуе�
 
 При recognition import VisitNativeRecognitionControls зеркалирует IsNeedToTrain,
 EnablePostTrainTuning, AutoCalibrate и threshold-поля, а InstallNativeRecognitionState
-очищает training service и NativeConfiguredPlan. Поэтому original phase declaration,
+заменяет training service пустым и перезаписывает NativeConfiguredPlan восстановленной cold configuration из Solo. Поэтому original phase declaration,
 завершённый Solo package и training outcome сохраняются до первого import в
 отдельном orchestration state. Последующая фаза не восстанавливает исходные
 flags из уже изменённых owner mirrors. Явный Reset/Default не запускает rollback
@@ -131,3 +131,12 @@ candidate/revision. Root job schema 3 и worker поддерживают эту 
 но public-property phase mapping ещё не подключён. Native API: normal 20/20,
 ASan 20/20; codecs/reader на обоих workers прошли отдельно. Полная приёмка
 Console/visual evidence ожидается: [NativePostTuneController](NativePostTuneController.ru.md).
+
+
+Следующий dependency dispatch: [NativeFinalizationBoundary](NativeFinalizationBoundary.ru.md)
+сохраняет original controls вместе с реальными provider bindings и Solo/outcome.
+Runtime-приёмка пока ожидается; подключение к hooks не выполнено. Учитывать,
+что SetData может не вызвать setter при равенстве значения, а SetDataDirect при
+ExternalDataSource направляет запись в provider. Запретить восстановление
+исходных flags через writes в connected properties; читать запрос на каждом
+native boundary. Старый bool-контракт и физический scheduler этим API не меняются.
