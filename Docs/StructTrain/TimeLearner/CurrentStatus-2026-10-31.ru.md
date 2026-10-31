@@ -84,8 +84,13 @@ legacy portable tests на всех 18 исходных runs (124.647 s) на M4
 Новый production fixed job не подключает learner-property phase dispatch:
 оба optional-mode guards остаются. Настройка фаз, безопасное продолжение,
 полная mode/profile/frequency matrix, единый ConditionSpec и полный publisher
-остаются открытыми. На M40 строятся отдельные run-bound visual reports шести
-новых ASan jobs; их полная визуальная приёмка ещё не получена.
+остаются открытыми. Все шесть новых ASan run-bound reports построены:
+62 полные trial-soma реакции, 2979 cache files / 304534961 bytes на M40 Data.
+[Compact visual metadata](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-visual-asan-a1/README.md):
+210 members / 674200 compressed bytes, все hashes проверены после merge.
+Новые PNG в этот bundle не копировались; его полная ручная визуальная приёмка
+ещё не получена. Ранее просмотренные 12 roundtrip PNG относятся к своим пробам
+и не выдаются за проверку этих новых 62 реакций.
 
 Новая команда `report --format posttune-run` (root `4c497f41d`) связывает
 графики с production run manifest. Все 18 normal production reports завершены:
