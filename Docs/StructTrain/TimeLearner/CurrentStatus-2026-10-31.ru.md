@@ -20,8 +20,11 @@ proof audit, frozen scoring/report adapter и CLI анализа/select/confirm/
 и PostTune controller этим автоматически не принимаются.
 
 Новый контур: [NativePipelineWorker](NativePipelineWorker.ru.md). Текущая ветка
-`codex/timelearner-posttune-observation` продолжает TL-037; native sources работающих
-проверок остаются закреплены на e3fe5340 / PulseLib 39810a7.
+`codex/timelearner-native-posttune` продолжает TL-037 и содержит immutable
+PostTune candidates. Старый ASan regression runtime остаётся закреплён на
+e3fe5340 / PulseLib 39810a7; обновление его source/build разрешено только после
+terminal 0. Новые кандидаты normal проверены отдельно на root 149a1af0 / PulseLib
+de51a21. Ветка создана от develop с --no-ff merge сохранённых prerequisites.
 
 ## Оперативный статус после последней перепроверки
 
@@ -31,6 +34,7 @@ proof audit, frozen scoring/report adapter и CLI анализа/select/confirm/
 
 | Контур | Авторитетное состояние |
 |---|---|
+| Native PostTune candidates | [Typed immutable edits](NativePostTuneCandidates.ru.md): normal root 149a1af0 / PulseLib de51a21 — 5/5 native, 4/4 old conversion regressions, 8/8 independent checks; 20 candidates в пяти режимах, четыре paired native soma/input traces CanonRmin. A1 имеет три сохранённых ошибочных test expectations, исправление Core не требовалось. ASan, все 40 Console operations и renderer ещё не приняты. Полный SearchSynthetic/commit/rollback/calibration driver и публичный V2 Train dispatch остаются открытыми. |
 | Potential baseline, PulseLib 7f17735 | 16 native, 29 independent и отдельные 8 частично перекрывающихся checks прошли; compact bundles опубликованы. Это собственный снимок. |
 | Raw validator/assessment, PulseLib 25cf6a5 | Normal 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Длительный ASan gate root ad975bbe теперь завершён: 16/16 native и reader 1ef44e2 — 35/35 (548.849 s), оба terminal 0. ASan primary опубликован в 7c1abb0: 899 файлов / 8251032 bytes; локально проверены все member hashes. Visual acceptance этого старого gate открыта. Этот старый снимок не подменяет full-matrix приёмку последующих signed/calibrated/worker версий. |
 | Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate завершён. Его reader a1 обнаружил ошибку glob; исправленный reader a2 прошёл 35/35 на тех же данных без нового Train. Опубликован bundle e8305ced. Отдельный ASan 6/6 native + 6/6 Python завершён с exit 0; это не полный ASan 16-case matrix. |
