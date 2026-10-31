@@ -3,6 +3,7 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "NNeuronPostTrainTune.h"
 #include "TimeLearner/NativeFinalizationBoundary.h"
+#include "TimeLearner/NativeTrainingBindings.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerJobSupport.h"
 #include <cstdlib>
