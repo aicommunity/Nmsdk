@@ -161,6 +161,7 @@ def audit_posttune_transaction(report, source_case):
             sequence_verified = True
         require(samples <= count(r["recorded_weight_samples"]) <= count(r["maximum_recorded_samples"]), "post_tune_sample_budget_changed")
         child = r["calibration"];child_audit = None
+        require(type(child) is dict, "invalid_post_tune_calibration_container")
         if child:
             child_audit = audit_native_calibration_transaction(child, source_case)
             require(selected is not None and gaps[selected] > number(r["minimum_positive_gap"]) and

@@ -55,7 +55,7 @@ def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
         links.append('<li><a href="'+item["report"]+'">'+name+'</a>; measured '+
                      html.escape(report["metric"])+" gap "+html.escape(str(item["measured_gap"]))+'</li>')
     child = None
-    if report["calibration"] is not None:
+    if report["calibration"]:
         _write(primary/"calibration.json", report["calibration"])
         child = render_calibration_transaction(primary/"calibration.json", output/"calibration")
         links.append('<li><a href="calibration/index.html">Actual threshold grid and fresh confirmation</a></li>')
