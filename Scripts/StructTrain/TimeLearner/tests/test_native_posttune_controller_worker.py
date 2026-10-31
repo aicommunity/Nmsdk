@@ -54,7 +54,7 @@ class NativePostTuneControllerWorkerTest(unittest.TestCase):
 
     def test_preflight_rejects_unused_physics_bad_modes_and_unknown_fields(self):
         original, source = self.example()
-        for edit in ({"mode": "search_synthetic_candidate"}, {"metric": "unknown"},
+        for edit in ({"mode": "search_synthetic_candidate"}, {"metric": "unknown"}, {"canonical_floor": 1.},
                      {"maximum_recorded_samples": True}, {"unexpected": 1}, {"search_passes": 0}):
             with self.subTest(edit=edit):
                 job = copy.deepcopy(original);job["post_tune"].update(edit)
