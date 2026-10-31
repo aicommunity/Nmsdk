@@ -530,3 +530,39 @@ assertion не повторяется. Maintained posttune_probe_threshold_contr
 Первый renderer attempt остановлен до создания cache из-за отсутствующего
 matplotlib в системном Python. Повтор использует существующий plot-venv-a1;
 это исправление окружения, не новый numerical experiment.
+
+
+### Опубликованная приёмка API, Console и выбранных графиков
+
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-probe-normal-a1/README.md)
+(commit 3252a448c4cef8c9141ff530c27d53fc0c5cca1e) и
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-probe-asan-a1/README.md)
+(commit f54e9864592619d636ff01b8e1dfb86acd14cf30) объединены через --no-ff.
+Оба содержат 20 native, 5 codec, 10 independent reader checks, восемь actual
+owned Console runs, четыре malformed controls и по 10 полных portable run
+snapshots / 420 artifact entries. Normal: 594 members / 3883800 compressed bytes;
+ASan: 579 / 3919924. Все member/hash inventories проверены после merge.
+Все 10 прежних fixed native records побайтно совпали с оригиналом каждой сборки.
+
+На обоих workers actual outcomes совпали: Classic legacy/null — calibrated,
+Branch legacy/null — search_unresolved; explicit fixed-probe — weights_selected
+для обоих, explicit calibrated-probe KeepDone — calibrated для обоих.
+Это две предъявленные calibration patterns, не independent evaluation.
+Неверный expected Branch outcome устранён только в maintained auditor;
+восемь simulations не перезапускались ради исправления assertion.
+
+[Visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-probe-visual-asan-a1/README.md)
+(commit f0ece7ffee631d14a52b1d48feeff79a130558bc): 8 reports, 30 полных trial-soma
+реакций и два report checks (1.139 s), без skips. Cache 1419 files / 125326058
+bytes хранится на M40 Data; Git содержит 63 metadata members / 78004 bytes и
+8 выбранных PNG. Все hashes и привязки к ASan primary проверены. Выбранные
+first-soma target overview/detail (Classic/Branch × measurement/final) просмотрены
+в исходных 1920×960: читаемые axes/curves/native input overlays, без clipping.
+Линия сомы соединяет дискретные samples; выводы о причинности внутри timestep
+не делаются. Полный cache/PDF/SVG и остальные каналы/foil изображения вручную
+не приняты; они включены в автоматическую проверку coverage/dimensions/input.
+
+Открыто: configured-property phase dispatch, отдельные target-reference/parallel-peak
+предложения порога, их согласование с независимым mid-флагом и полная обязательная
+матрица режимов/частот/размерностей/физики. Этот адресный gate не закрывает этап 8
+и не делает V2 рекомендуемым для всех новых моделей.

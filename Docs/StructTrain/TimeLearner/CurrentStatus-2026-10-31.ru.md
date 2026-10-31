@@ -8,7 +8,13 @@
 конечной модели. Source root 800ca40e / PulseLib 09f72c7: normal 20/20 native
 (126.287 s), ASan 20/20 (834.511 s), без skips. Более поздний production source
 6787071f / PulseLib 56707d7: по 5 codec и 10 reader checks на обоих workers.
-Console cases и visual reports ещё проходят приёмку; proof пока не опубликован.
+Console: 8 owned cases и 4 invalid-type controls на каждом worker проверены
+без предписанного научного исхода. [Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-probe-normal-a1/README.md)
+— 594 members / 3883800 bytes;
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-probe-asan-a1/README.md)
+— 579 members / 3919924 bytes. Каждый содержит 10 complete portable run
+snapshots / 420 artifact entries. Все archive/member/inventory hashes проверены
+после --no-ff merges. Все 10 прежних fixed native JSON byte-exact для каждой сборки.
 Первый normal Console supervisor=1 вызван ошибочным ожиданием отрицательного
 Branch outcome в проверочном сценарии: сам Branch run valid/calibrated при
 0.006293579947234118, на двух calibration patterns. Maintained validator
@@ -23,7 +29,15 @@ Configured learner hooks/phase dispatch и обязательная полная
 воспроизводимый static-link cache старых неактивных runtime: 789 путей .a,
 9.484 GB logical / около 3.05 GB реально освобождено; 224 executable hashes
 не изменились. Это cache cleanup, не заявление о дублировании всех файлов.
-Receipt пока находится в серверном readback и войдёт в compact proof.
+Receipt включён в normal compact proof; научные primaries и исполняемые файлы не удалены.
+
+[Visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-probe-visual-asan-a1/README.md):
+8 native reports / 30 complete trial-soma pairs, 2 report checks без skips.
+Cache M40 Data: 1419 files / 125326058 bytes; Git — 63 metadata members /
+78004 bytes и 8 PNG. Все metadata, PNG и bindings к ASan primary проверены.
+Выбранные target/first-soma overview/detail для двух topology и двух физических
+состояний просмотрены в 1920×960. Полный cache/PDF/SVG вручную не принят;
+частичные финальные пробы не изображаются полными.
 
 Ранее проверенный подэтап: InterruptOwnerLifecycle отдельно прерывает PostTune/calibration
 перед Reset/Default/teardown без доступа к owner и реентерабельного rollback.
