@@ -503,3 +503,30 @@ post_tune.schema_version=3 и обязательным weight_probe_threshold (�
 schema 1/2 transaction. Условия/fingerprint включают явную декларацию. Старые
 job schema 1/2 продолжают означать прежнюю задачу. Сериализация нового поля
 через v1/v2 отвергается. Приёмка codec/Console/worker пока ожидается.
+
+
+### Результат адресных gates 31.10 и исправление ожидаемого исхода
+
+Typed API source root 800ca40e / PulseLib 09f72c7: normal 20/20 (126.287 s),
+ASan 20/20 (834.511 s), без skips. Production source root 6787071f / PulseLib
+56707d7: 5/5 codec cases на Elder (0.755 s) и M40 (3.553 s); 10/10 independent
+reader checks — normal 86.943 s, ASan 74.338 s. Full matrices и model revision
+проверяются отдельно для measurement/final threshold. Native old-schema
+регрессии включены; фактическая Git публикация этого нового proof ещё ожидается.
+
+Первый normal Console supervisor завершился с 1 из-за ошибочного assertion
+сценария: заранее ожидался SearchUnresolved для Branch calibrated-probe.
+Фактический owned run завершён/valid, native transaction и ребёнок вернули
+Calibrated при threshold=0.006293579947234118. Это результат двух предъявленных
+паттернов, с исходным training outcome; не независимый Test и не 8/8.
+Унаследованный Branch SearchSynthetic и новый KeepDone являются различными
+условиями, их результаты нельзя заранее отождествлять по topology.
+Все восемь expensive runs уже сохранены; численное выполнение ради изменения
+assertion не повторяется. Maintained posttune_probe_threshold_controls.py
+заново проверяет условия, portable artifact closure и A/B bytes legacy/null,
+а научный исход сохраняет измеренным. Четыре invalid-type Console controls
+проверяют отказ до создания output. Первый failed runner остаётся диагностикой.
+
+Первый renderer attempt остановлен до создания cache из-за отсутствующего
+matplotlib в системном Python. Повтор использует существующий plot-venv-a1;
+это исправление окружения, не новый numerical experiment.

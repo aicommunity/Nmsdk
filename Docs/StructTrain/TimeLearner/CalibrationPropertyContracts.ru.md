@@ -104,7 +104,7 @@ FinalizeAfterParallelCalibration → CalibrateFixedLTZThresholdFromParallelPeak
 состояния сохранять unknown. Не отменять августовское наблюдение и не приписывать
 ему новый frozen-threshold протокол по одним исходным флагам.
 
-Native KeepFixedThreshold сейчас измеряет weights при наследуемом пороге и
+Исходный Native KeepFixedThreshold измеряет weights при наследуемом пороге и
 сохраняет этот же порог; это проверенная математическая задача данного API.
 Она соответствует public-config фазе только после явной проверки согласованности
 независимых mid/auto/silent controls. Не менять её скрыто ради подключения
@@ -122,3 +122,12 @@ flags из уже изменённых owner mirrors. Явный Reset/Default �
 контроллер в RecoveryRequired без доступа к owner. Normal приёмка detach API получена: 16 native, 12 прежних regressions и
 8 reader checks. ASan также завершён: 16 native, 12 regressions, 8 reader,
 без skips; leak detection off. Сам configured phase dispatch ещё не подключён.
+
+
+Последующее API дополнение 31.10: weightProbeThreshold явно отделяет порог
+измерения весов от конечного порога. Fixed finalization требует свежую полную
+матрицу при конечном пороге; измерительные matrices сохраняют собственные
+candidate/revision. Root job schema 3 и worker поддерживают эту декларацию,
+но public-property phase mapping ещё не подключён. Native API: normal 20/20,
+ASan 20/20; codecs/reader на обоих workers прошли отдельно. Полная приёмка
+Console/visual evidence ожидается: [NativePostTuneController](NativePostTuneController.ru.md).
