@@ -140,7 +140,10 @@ def audit_execution(mode, directory, job, source_case=None):
         else:
             from .stopped_evidence import audit_stopped_state, load_case as load_stopped
             audit = audit_stopped_state(*load_stopped(directory/filename))
-        require(package["configuration"] == job["configuration"] and package["implementation_id"] == job["implementation_id"] and
+        # A fresh service gives the first attempt its native session/1 identity.
+        # The declared attempt id remains in execution.json; no physics changes.
+        effective_config = {**job["configuration"], "run_id": job["configuration"]["run_id"]+"/session/1"}
+        require(package["configuration"] == effective_config and package["implementation_id"] == job["implementation_id"] and
                 execution["package_sha256"] == package["sha256"] and execution["model_revision"] == package["model_revision"] and
                 execution["training_outcome"] == package["training_outcome"] and
                 execution["attempt_id"] == job["configuration"]["run_id"], "pipeline_training_model_changed")
