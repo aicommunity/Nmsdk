@@ -192,3 +192,36 @@ budget с condition digest; native effective capability остаётся про�
 declared PostTune parameters, родительский search, полный child calibration и
 действительную конечную модель. Добавлены четыре проверки корпуса из 18 настоящих
 Console runs; их серверная приёмка ещё не выполнена.
+
+### Ограничения следующего связывания с learner properties
+
+Проверка текущего кода показывает, что подключение нельзя свести к удалению
+`configured_native_optional_mode_not_yet_supported`:
+
+- `ConfiguredNativeOwner.h::PrepareConfiguredNativeOwner` сейчас явно отвергает
+  C-trim, PostTune и auto calibration. Этот guard должен остаться до появления
+  полного объявленного phase plan и адресных проверок; Console API его не отменяет.
+- `NativeRecognitionOwner.h::InstallNativeRecognitionState` устанавливает новый
+  recognition context и очищает training service/probe. Solo proof, outcome и
+  исходные optional controls требуется сохранить **до** первого import. Хранить
+  долгоживущий orchestration state в очищаемом training service нельзя.
+- `VisitNativeRecognitionControls` зеркалирует `IsNeedToTrain=false`,
+  `EnablePostTrainTuning=false`, auto calibration off и фиксированный threshold.
+  Последующие фазы не могут восстанавливать исходный план из этих transient mirrors.
+- `NNeuronTimeLearner::ACalculate` (и соответствующий Branch путь) сначала
+  обрабатывает recognition hold. Переход Training → Recognition меняет маршрут
+  расчёта; новый управляющий объект должен продолжать получать ровно один
+  boundary callback, после завершения callbacks прежнего context. Import не
+  должен уничтожить исполняющийся управляющий объект.
+- `ABeforeReset`, Build/Init и native import уже имеют lifecycle/edit guards.
+  Нельзя добавлять reentrant import/rollback из Reset hook или подменять
+  физический reset сбросом всего phase plan. Explicit Reset, implicit Reset из
+  Build/Init, внешний stop и retarget нуждаются в отдельных native проверках.
+
+Требуемый порядок перехода: сохранить versioned Solo и честный training outcome;
+сохранить объявленный phase plan отдельно от physical/owner mirrors; завершить
+старый native callback; поставить переход на допустимую границу; импортировать
+полную recognition-модель; передать её измерительному контроллеру; после каждой
+фазы проверить фактическое состояние и сохранить новый результат. Ни один из
+этих переходов не вызывает Calculate из контроллера и не повышает прежний
+`search_unresolved` до Exact. Этот участок остаётся открытым требованием этапа 8.
