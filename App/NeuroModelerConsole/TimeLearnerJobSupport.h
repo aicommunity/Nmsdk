@@ -56,7 +56,13 @@ template<class Work> int WithFreshModel(unsigned frequency,Work work)
     auto storage=RDK::GetStorage();auto environment=RDK::GetEnvironment();
     Require(bool(storage) && bool(environment),"job_requires_initialized_native_core");
     Require(!environment->GetModel() || environment->GetModel()->GetNumComponents()==0,"job_refuses_existing_model");
-    environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);
+    environment->DestroyModel();
+    // A fresh job owns a fresh model-time origin. DestroyModel does not reset
+    // Environment's clock; earlier jobs/tests must not shift its stimulus times.
+    // Use the native lifecycle while there is no physical model to reset.
+    environment->Reset();
+    Require(environment->GetTime().GetDoubleTime()==0.,"job_clock_reset_failed");
+    environment->SetUseIndTimeStepFlag(false);
     Require(environment->CreateModel("NModel"),"job_model_creation_failed");ModelScope scope{environment};
     auto model=environment->GetModel();model->SetGlobalTimeStep(frequency);
     return work(storage,environment,model);
