@@ -1,0 +1,1369 @@
+{
+  "kind": "timelearner_pipeline_interoperation_bundle",
+  "schema_version": 1,
+  "validation": {
+    "bounded-training-and-test": {
+      "reader_root": "b839e87952a0f3e04e30fd13474567371e8a1aab",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "calibration-and-frozen-evaluation": {
+      "reader_root": "b839e87952a0f3e04e30fd13474567371e8a1aab",
+      "native_root": "d5ef1fa18221f2ffb3e8efdeb32cccff059226e0",
+      "owned_native_phases": 4,
+      "portable_audits": 4,
+      "source_cold_cases": 2,
+      "results": [
+        {
+          "case": "Classic-N1",
+          "calibration_status": "nonseparable",
+          "training_outcome": "search_unresolved",
+          "frozen_metrics": {
+            "schema_version": 1,
+            "criterion": {
+              "anchor": "last_stimulus",
+              "begin_offset": 0,
+              "end_offset": null,
+              "id": "post_anchor_target_whole_window_foil_v1",
+              "reject_target_outside_window": true
+            },
+            "evaluation_spec_digest": "e0a936fb03825c0172437c4a30edb8a4969ecf57bde188f692055ba8774df664",
+            "coverage_policy": "per_trial_windows",
+            "run_id": "Classic-N1/post-calibration-frozen",
+            "model_revision": "34200bd7d0a214548ac2af0678c34e47a7727f45ceecc62b6fd41a60a4c65ec9",
+            "declared_training_outcome": "search_unresolved",
+            "source_training_evidence_checked": false,
+            "calibration": {
+              "ltzone_path": "$.LTZone",
+              "protocol": "fixed-inherited-from-solo",
+              "source_solo_sha256": "6e813da529f34824f75083356f14b7f2d5b7fda41ecfc1295e6aa7eee31929c8",
+              "status": "fixed",
+              "threshold": 1
+            },
+            "effective_threshold": 1.0,
+            "native_execution_verified": false,
+            "evaluation_verdict": null,
+            "invalid_trial_ids": [],
+            "validity": "valid",
+            "reason": "complete_declared_evaluation",
+            "pooled_counts": {
+              "TP": 0,
+              "FP": 0,
+              "FN": 1,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.5,
+              "target_hit_rate": 0.0,
+              "foil_response_rate": 0.0
+            },
+            "by_reset_policy": {
+              "reset_per_trial": {
+                "TP": 0,
+                "FP": 0,
+                "FN": 1,
+                "TN": 1,
+                "targets": 1,
+                "foils": 1,
+                "target_trials_with_outside_spikes": 0,
+                "accuracy": 0.5,
+                "target_hit_rate": 0.0,
+                "foil_response_rate": 0.0,
+                "criterion_satisfied": false,
+                "criterion_assessed": true
+              }
+            },
+            "trials": [
+              {
+                "trial_id": "trial_0",
+                "sample_id": "training_target",
+                "label": "target",
+                "presentation_index": 0,
+                "reset_policy": "reset_per_trial",
+                "response_begin": 0.0905,
+                "response_end": 0.12,
+                "spike_count": 0,
+                "window_spikes": [],
+                "early_spikes": [],
+                "late_spikes": [],
+                "classification": "FN"
+              },
+              {
+                "trial_id": "trial_1",
+                "sample_id": "foil_dispersed",
+                "label": "foil",
+                "presentation_index": 1,
+                "reset_policy": "reset_per_trial",
+                "response_begin": 0.771,
+                "response_end": 0.8005,
+                "spike_count": 0,
+                "window_spikes": [],
+                "early_spikes": [],
+                "late_spikes": [],
+                "classification": "TN"
+              }
+            ]
+          }
+        },
+        {
+          "case": "Branch-N1",
+          "calibration_status": "nonseparable",
+          "training_outcome": "search_unresolved",
+          "frozen_metrics": {
+            "schema_version": 1,
+            "criterion": {
+              "anchor": "last_stimulus",
+              "begin_offset": 0,
+              "end_offset": null,
+              "id": "post_anchor_target_whole_window_foil_v1",
+              "reject_target_outside_window": true
+            },
+            "evaluation_spec_digest": "f1899bce862aba39fb9d3ce446e331e43f2cd4308cea4c441c9784dd0da20275",
+            "coverage_policy": "per_trial_windows",
+            "run_id": "Branch-N1/post-calibration-frozen",
+            "model_revision": "74c05af15e001723cf357f778cf11d290ccb114ab3aac7671bab2deddcaf5274",
+            "declared_training_outcome": "search_unresolved",
+            "source_training_evidence_checked": false,
+            "calibration": {
+              "ltzone_path": "$.LTZone",
+              "protocol": "fixed-inherited-from-solo",
+              "source_solo_sha256": "49dc1748ada6e19d0916fc96d428ecaf5d63eab601fe3adcbde3ac6d4cf3d842",
+              "status": "fixed",
+              "threshold": 1
+            },
+            "effective_threshold": 1.0,
+            "native_execution_verified": false,
+            "evaluation_verdict": null,
+            "invalid_trial_ids": [],
+            "validity": "valid",
+            "reason": "complete_declared_evaluation",
+            "pooled_counts": {
+              "TP": 0,
+              "FP": 0,
+              "FN": 1,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.5,
+              "target_hit_rate": 0.0,
+              "foil_response_rate": 0.0
+            },
+            "by_reset_policy": {
+              "reset_per_trial": {
+                "TP": 0,
+                "FP": 0,
+                "FN": 1,
+                "TN": 1,
+                "targets": 1,
+                "foils": 1,
+                "target_trials_with_outside_spikes": 0,
+                "accuracy": 0.5,
+                "target_hit_rate": 0.0,
+                "foil_response_rate": 0.0,
+                "criterion_satisfied": false,
+                "criterion_assessed": true
+              }
+            },
+            "trials": [
+              {
+                "trial_id": "trial_0",
+                "sample_id": "training_target",
+                "label": "target",
+                "presentation_index": 0,
+                "reset_policy": "reset_per_trial",
+                "response_begin": 0.0905,
+                "response_end": 0.12,
+                "spike_count": 0,
+                "window_spikes": [],
+                "early_spikes": [],
+                "late_spikes": [],
+                "classification": "FN"
+              },
+              {
+                "trial_id": "trial_1",
+                "sample_id": "foil_dispersed",
+                "label": "foil",
+                "presentation_index": 1,
+                "reset_policy": "reset_per_trial",
+                "response_begin": 0.771,
+                "response_end": 0.8005,
+                "spike_count": 0,
+                "window_spikes": [],
+                "early_spikes": [],
+                "late_spikes": [],
+                "classification": "TN"
+              }
+            ]
+          }
+        }
+      ],
+      "independent_partition_verified": false,
+      "scientific_verdict": null
+    }
+  },
+  "archive_sha256": "1bb17a26706ab0f2e4087c2741d62ec5225e330ba844f3f213b2ec13f2333507",
+  "files": [
+    {
+      "path": "bounded-training-and-test/checkout.log",
+      "bytes": 370,
+      "sha256": "8037c1d6e9208fd74507f1516eb71beeaae6540f536eaf70b8b79efb5f0de47e"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1-job.json",
+      "bytes": 523564,
+      "sha256": "b151bae6dc3ea2ac196cc170f91527762206f4b0d6b9890bd69c9c027d4524f3"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1-stopped-export-job.json",
+      "bytes": 537218,
+      "sha256": "b56fc3182d56f5fd5fe0802451df170ad70d0d2e4a78871204a8488247ed75e5"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1-stopped-export.log",
+      "bytes": 60,
+      "sha256": "d0987f269ecca1355b24ce38517e7ed3a3a7ff413cc2f10677a865b0a0cf56e7"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1/execution.json",
+      "bytes": 1901,
+      "sha256": "d5bf1360a7f947645c9322b8c68024a155bcf11b0d7ca15d889d04e9ce5256fb"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1/initial-state.json",
+      "bytes": 124170,
+      "sha256": "33ae7d245e53df70962f2dd4ec3913e6c813725f656fdf09ffb14ec7910785e0"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1/job.json",
+      "bytes": 1172034,
+      "sha256": "7de97274895fe81d0726b6ec414a9321aa180bd267015027ffc191272ed1e4ce"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1/train_stopped_state.json",
+      "bytes": 1137903,
+      "sha256": "cab8c878abfd50da9fee154f0dca75452c85492c2cb3fbf013f0b0a545950add"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1/train_stopped_summary.json",
+      "bytes": 1904,
+      "sha256": "df4a92184eab6df7ca72c906ddc865fb6443f5953b2822764f4f0d5534ad37c6"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1/train_stopped_trial_1.csv",
+      "bytes": 26,
+      "sha256": "1c7a90858146622ceafdcc8b14695ae939d12f94c1d1e425463cd30cb10c4101"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Branch-N1/train_stopped_trial_1.json",
+      "bytes": 4786,
+      "sha256": "32a9a530a4284a839814d3ae91fb415e9b5ecebdfa76c19bd961cb59e794ae1c"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0-job.json",
+      "bytes": 571564,
+      "sha256": "ab039af4d75b1ca5a581f877140be5df5355b2b0d0f9178824ca17add0b5eb85"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0-stopped-export-job.json",
+      "bytes": 585130,
+      "sha256": "c8df918b9efb1955af02f011f620c13a28b6fc8c698970cb44f688a6e24560f5"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0-stopped-export.log",
+      "bytes": 60,
+      "sha256": "d0987f269ecca1355b24ce38517e7ed3a3a7ff413cc2f10677a865b0a0cf56e7"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0/execution.json",
+      "bytes": 1902,
+      "sha256": "59be467a885d85c033bac062716e2ee869d553db5b0b7bb6cf5609bc0e8eb563"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0/initial-state.json",
+      "bytes": 174854,
+      "sha256": "c2f7ff9a39950320b13f9ee352029172b23ac82299d05484bce8370a27d97667"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0/job.json",
+      "bytes": 1267766,
+      "sha256": "932df9c90de4a1b71877001d73c8072773d31262ce4277c756cab54ed2371f94"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0/train_stopped_state.json",
+      "bytes": 1228639,
+      "sha256": "005f50b4816b75834de044b3b8e3171cc08b5cce226f2cc5c8b9a160d21f331b"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0/train_stopped_summary.json",
+      "bytes": 1903,
+      "sha256": "712930cc5be6e6e1cded0ed4675675b13c21f901a77b6feac5388a899beb5fca"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0/train_stopped_trial_1.csv",
+      "bytes": 34,
+      "sha256": "ce06d81866b61bea349146a2838878987a3c2222821892464bde6444241ea57a"
+    },
+    {
+      "path": "bounded-training-and-test/native-training/Classic-N0/train_stopped_trial_1.json",
+      "bytes": 4808,
+      "sha256": "5430d48642d881b1aea6e377e000b8a00f7bd24f4ec4bb94a83f81536412ca66"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1-job.json",
+      "bytes": 1083713,
+      "sha256": "97b59bb5017b6b1cacba08a5b0145805d247da9dc066b7ec4dae83559735c1e5"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1/evaluation.json",
+      "bytes": 1265,
+      "sha256": "f0b45996de504b5abe3bffcfe37e2106ba5e85b4701619b6b5de44a782f2fc2e"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1/execution.json",
+      "bytes": 1610,
+      "sha256": "a1f1b0eac2fd788f489070bf8746c25760b542ddc08423c455e9bc8af17734ba"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1/job.json",
+      "bytes": 2483797,
+      "sha256": "bb9c34d28db46bd14399d882067f2c808be73443d737d1019dca4d1083e30e74"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1/model-after.json",
+      "bytes": 2356768,
+      "sha256": "14faf443bb8783155d0c44b3f8d46019e0b4ffe6f1499bd6a34fc98f2667e1b6"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1/model.json",
+      "bytes": 2356768,
+      "sha256": "14faf443bb8783155d0c44b3f8d46019e0b4ffe6f1499bd6a34fc98f2667e1b6"
+    },
+    {
+      "path": "bounded-training-and-test/native/Branch-N1/trial-0.json",
+      "bytes": 1576,
+      "sha256": "5f7593669721fae6e7a9915e1baaa7e59be28515d5b35655e9bce366d337ded3"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0-job.json",
+      "bytes": 1179665,
+      "sha256": "c51e63502d8a36c317fca0582bc586355eec739a4d13e29937dfb23d7bb37261"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0/evaluation.json",
+      "bytes": 1266,
+      "sha256": "98227ca0c8f7b7990c78ffd519d96cac9ec537d11a861432a05276ca3165a292"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0/execution.json",
+      "bytes": 1611,
+      "sha256": "908f1e66efc3213fe954a6be0a923e5d6c36ea6dde82348424301b7867f978b0"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0/job.json",
+      "bytes": 2680265,
+      "sha256": "a6d2fbe2df4f8f79a4664d370d6cb04a5b669705f8e142fbd5de13214dabb2d0"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0/model-after.json",
+      "bytes": 2543355,
+      "sha256": "0f06fd12d3e65cf59a13cd73b1a4badf08b91c9d72ff3ca4727f2376d88602ca"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0/model.json",
+      "bytes": 2543355,
+      "sha256": "0f06fd12d3e65cf59a13cd73b1a4badf08b91c9d72ff3ca4727f2376d88602ca"
+    },
+    {
+      "path": "bounded-training-and-test/native/Classic-N0/trial-0.json",
+      "bytes": 1597,
+      "sha256": "92ba76a00e5605206701cf5527b6c23f9513b5d7efb3b50697bd2a8f2c43f33e"
+    },
+    {
+      "path": "bounded-training-and-test/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "bounded-training-and-test/runner.sh",
+      "bytes": 1165,
+      "sha256": "bcbb8ac781b6503303a8965ef7a8d4abcd35d2530065c74ae54a3807ff3ce13c"
+    },
+    {
+      "path": "bounded-training-and-test/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-training-and-test/tests.log",
+      "bytes": 1561,
+      "sha256": "87adf83d4d22102a7f352b10c27139f5756ecc9d57fd30d2a8a522938d7fb524"
+    },
+    {
+      "path": "bounded-training-and-test/validation.json",
+      "bytes": 112,
+      "sha256": "dd59eda9f138af3a69577da7bdf5b9945b7a1a105bb7d9393ce50aeacada1d83"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/job.json",
+      "bytes": 1770474,
+      "sha256": "80846e8417f6d7b103631add5647ab421635f9bb000466f377503cda9f7db0fd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_learned_state.json",
+      "bytes": 1161817,
+      "sha256": "108a9bd4ade9b5ce8bfb25d57fe5a5d1d9d3f51804e3e1e339b08fe6d7ba2ca7"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_learned_summary.json",
+      "bytes": 602039,
+      "sha256": "5c0d1ff1bf17823841ba5ed0a1b436e360414c349d189ac33f22103afdb07f33"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_1.csv",
+      "bytes": 14395,
+      "sha256": "e4449af4e41b238e8a8a888db7adedabbb056f82b1363986889d8184ac128ce2"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_1.json",
+      "bytes": 5633,
+      "sha256": "6d29decce59a6df2195e04f6c8c7aa91606458e8e4f92fdfe11834e8822f8ecd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_10.csv",
+      "bytes": 13210,
+      "sha256": "1d97a1372798717272af71cb7b34fc3c2f20ebe2ee0da7c52aa3db0ac7a35ea6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_10.json",
+      "bytes": 5723,
+      "sha256": "f5ced0ce0c2033be1ea3c0c80af5bd29773cab993a62b5a7c37fddfb6ac76807"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_11.csv",
+      "bytes": 13230,
+      "sha256": "e41e85f6fb4fc03182d54d575d064d123b600d5e34fed866c137d7fa33085521"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_11.json",
+      "bytes": 5724,
+      "sha256": "1fca2f0d99cf91d9d39e94c3980b7e6fc5a00d06bafa7ec40c8c7e49f0c93002"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_12.csv",
+      "bytes": 14146,
+      "sha256": "126972b8ed59f0fc28837179b3c6ebea3cc2dd3dec890b3833d172ab8643d44d"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_12.json",
+      "bytes": 5696,
+      "sha256": "7eba118e15b81440536689e2dd2c65c7b4e2bb68806ae08fe25fe6b7c56fa572"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_13.csv",
+      "bytes": 14241,
+      "sha256": "36e2ffc17d12b0dea4d66e78420aecd40c2b19c54278c50d7f80495344a5b876"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_13.json",
+      "bytes": 5728,
+      "sha256": "f2913054b85f8ea0bc39f0be5aeada763ceee374942a64e5612765cf831187d5"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_14.csv",
+      "bytes": 14199,
+      "sha256": "733ba1e6cc1124b0faca238616a5ad166a11a33e876e314a78c0050e885ee141"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_14.json",
+      "bytes": 5737,
+      "sha256": "cdd9af9542c800fc92ba29a0cb21e47ca3b6c59a5e853c69b880bffc1e322523"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_2.csv",
+      "bytes": 14410,
+      "sha256": "f1574d6994baffee463c2b5b2d51e803b78ff2a970a01d691ec21c8ec404d9dd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_2.json",
+      "bytes": 5716,
+      "sha256": "45dfd80a7b640a094f366249f021dc5fa134b20b1bdf8d0aa7292b24e66dc4c9"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_3.csv",
+      "bytes": 14785,
+      "sha256": "67492a98db05f819cc2ee9ae834e222ee0c95739aab514079481142826cb7248"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_3.json",
+      "bytes": 5721,
+      "sha256": "e10f6d75556f3bc8e3ea74e1a1fcbd23f0c2622a90cc2ede8d767f1eb9ebc277"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_4.csv",
+      "bytes": 15174,
+      "sha256": "35ee200dcffa16831fc2d04d2ce562ca79985d269fdeb043e17ff37d7c6a1194"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_4.json",
+      "bytes": 5704,
+      "sha256": "d00447261929dd37d113f143e0bfd7620493038b6111b96d9681fe6ac6c4e0cd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_5.csv",
+      "bytes": 15189,
+      "sha256": "0a4e6c20b1bb37754cb87391474fd01732127cc6e326f8aecdf965fb9e42d392"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_5.json",
+      "bytes": 5696,
+      "sha256": "5b217e948fa11bd2257e0a881421ae1205e8b5dd1441fbeea82653927da1084e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_6.csv",
+      "bytes": 14326,
+      "sha256": "d5a927297ef84aace8d639cf640fa86a6ef0fff386a100709b6227834824f85b"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_6.json",
+      "bytes": 5703,
+      "sha256": "a156979280da30333af56e83aafa8c165984a552dbe8c8d2a19bbdad27abad24"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_7.csv",
+      "bytes": 13234,
+      "sha256": "817981e34683802821cf4668ee144a3cea728dd1acbd2cff69d3a2b460e98976"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_7.json",
+      "bytes": 5717,
+      "sha256": "b211694ffce5bee767e042144362a35012ecfab0285347135b9cc74a9e3dcce7"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_8.csv",
+      "bytes": 13160,
+      "sha256": "c23062ea27002133001420406fc6240673b4e71fe2ed04ce8ffb48005dd3f942"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_8.json",
+      "bytes": 5685,
+      "sha256": "f580f53240687300f6396bd3e3ef601c2ccf1e159c6a76d4dbb7b4db343bdb41"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_9.csv",
+      "bytes": 13193,
+      "sha256": "02d7c62691056da6ed4bf4e97ae894a8becb73a53af0a6c24a74ef7e2e25c432"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/input/source/train_state_trial_9.json",
+      "bytes": 5693,
+      "sha256": "410eeb860b4acfcc1170562852e91769030f06faf83eb8fe74534c5a32c83731"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/native/execution.json",
+      "bytes": 1478,
+      "sha256": "0449dc797a9bc9de86005e9675187197cc8034e953edc8f299f0f5e8a9069d4c"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/native/job.json",
+      "bytes": 2484192,
+      "sha256": "d1b5d5015614c2c2b69513afc694e2145ec9bf4f2d52ad5946582eaca3574da5"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/native/model.json",
+      "bytes": 2356768,
+      "sha256": "14faf443bb8783155d0c44b3f8d46019e0b4ffe6f1499bd6a34fc98f2667e1b6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/native/transaction.json",
+      "bytes": 12782139,
+      "sha256": "a16ac6bf387822b8993e7caea6442423a48e7c834cb960ecbea866532e5208e6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/process/loaded-files.json",
+      "bytes": 5711,
+      "sha256": "1b7073a600694cf89fa24e879da286f8139cc79d2a4a6aec978461d6002dc248"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/process/owned-process.json",
+      "bytes": 400,
+      "sha256": "b8465782e082df83e90c8f1925f609889c286d232715ec0fb0871c2e412df080"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/process/request.json",
+      "bytes": 787,
+      "sha256": "d521f8d0f1e907bd3623889714983d6bc86000166bd8861163cf98d306833fb7"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/process/result.json",
+      "bytes": 444,
+      "sha256": "2335e62e602b386f8edb4b408a599ac3eda89d17a68e19f8138855266a8460d4"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/process/runtime.json",
+      "bytes": 32017,
+      "sha256": "265f3be6f34508507883ed1630605174c5694aa03b1a06db868fef46906c3d99"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibrate/run-manifest.json",
+      "bytes": 15398,
+      "sha256": "abca7703339908310c9547856abec4ebeb84a68e4e720e5361e0ce1f2e1e6aa4"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-calibration-job.json",
+      "bytes": 1084024,
+      "sha256": "f4e58da0a6b69af4d62d042582f902adf83bb3285c584620c2ce4028448c6021"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/job.json",
+      "bytes": 1770141,
+      "sha256": "f735f35a4cf5d71f0a6c7365c0ef665fefa47d1af1d09e1f63236b0a4af2115a"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_learned_state.json",
+      "bytes": 1161817,
+      "sha256": "108a9bd4ade9b5ce8bfb25d57fe5a5d1d9d3f51804e3e1e339b08fe6d7ba2ca7"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_learned_summary.json",
+      "bytes": 602039,
+      "sha256": "5c0d1ff1bf17823841ba5ed0a1b436e360414c349d189ac33f22103afdb07f33"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_1.csv",
+      "bytes": 14395,
+      "sha256": "e4449af4e41b238e8a8a888db7adedabbb056f82b1363986889d8184ac128ce2"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_1.json",
+      "bytes": 5633,
+      "sha256": "6d29decce59a6df2195e04f6c8c7aa91606458e8e4f92fdfe11834e8822f8ecd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_10.csv",
+      "bytes": 13210,
+      "sha256": "1d97a1372798717272af71cb7b34fc3c2f20ebe2ee0da7c52aa3db0ac7a35ea6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_10.json",
+      "bytes": 5723,
+      "sha256": "f5ced0ce0c2033be1ea3c0c80af5bd29773cab993a62b5a7c37fddfb6ac76807"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_11.csv",
+      "bytes": 13230,
+      "sha256": "e41e85f6fb4fc03182d54d575d064d123b600d5e34fed866c137d7fa33085521"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_11.json",
+      "bytes": 5724,
+      "sha256": "1fca2f0d99cf91d9d39e94c3980b7e6fc5a00d06bafa7ec40c8c7e49f0c93002"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_12.csv",
+      "bytes": 14146,
+      "sha256": "126972b8ed59f0fc28837179b3c6ebea3cc2dd3dec890b3833d172ab8643d44d"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_12.json",
+      "bytes": 5696,
+      "sha256": "7eba118e15b81440536689e2dd2c65c7b4e2bb68806ae08fe25fe6b7c56fa572"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_13.csv",
+      "bytes": 14241,
+      "sha256": "36e2ffc17d12b0dea4d66e78420aecd40c2b19c54278c50d7f80495344a5b876"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_13.json",
+      "bytes": 5728,
+      "sha256": "f2913054b85f8ea0bc39f0be5aeada763ceee374942a64e5612765cf831187d5"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_14.csv",
+      "bytes": 14199,
+      "sha256": "733ba1e6cc1124b0faca238616a5ad166a11a33e876e314a78c0050e885ee141"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_14.json",
+      "bytes": 5737,
+      "sha256": "cdd9af9542c800fc92ba29a0cb21e47ca3b6c59a5e853c69b880bffc1e322523"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_2.csv",
+      "bytes": 14410,
+      "sha256": "f1574d6994baffee463c2b5b2d51e803b78ff2a970a01d691ec21c8ec404d9dd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_2.json",
+      "bytes": 5716,
+      "sha256": "45dfd80a7b640a094f366249f021dc5fa134b20b1bdf8d0aa7292b24e66dc4c9"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_3.csv",
+      "bytes": 14785,
+      "sha256": "67492a98db05f819cc2ee9ae834e222ee0c95739aab514079481142826cb7248"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_3.json",
+      "bytes": 5721,
+      "sha256": "e10f6d75556f3bc8e3ea74e1a1fcbd23f0c2622a90cc2ede8d767f1eb9ebc277"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_4.csv",
+      "bytes": 15174,
+      "sha256": "35ee200dcffa16831fc2d04d2ce562ca79985d269fdeb043e17ff37d7c6a1194"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_4.json",
+      "bytes": 5704,
+      "sha256": "d00447261929dd37d113f143e0bfd7620493038b6111b96d9681fe6ac6c4e0cd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_5.csv",
+      "bytes": 15189,
+      "sha256": "0a4e6c20b1bb37754cb87391474fd01732127cc6e326f8aecdf965fb9e42d392"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_5.json",
+      "bytes": 5696,
+      "sha256": "5b217e948fa11bd2257e0a881421ae1205e8b5dd1441fbeea82653927da1084e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_6.csv",
+      "bytes": 14326,
+      "sha256": "d5a927297ef84aace8d639cf640fa86a6ef0fff386a100709b6227834824f85b"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_6.json",
+      "bytes": 5703,
+      "sha256": "a156979280da30333af56e83aafa8c165984a552dbe8c8d2a19bbdad27abad24"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_7.csv",
+      "bytes": 13234,
+      "sha256": "817981e34683802821cf4668ee144a3cea728dd1acbd2cff69d3a2b460e98976"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_7.json",
+      "bytes": 5717,
+      "sha256": "b211694ffce5bee767e042144362a35012ecfab0285347135b9cc74a9e3dcce7"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_8.csv",
+      "bytes": 13160,
+      "sha256": "c23062ea27002133001420406fc6240673b4e71fe2ed04ce8ffb48005dd3f942"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_8.json",
+      "bytes": 5685,
+      "sha256": "f580f53240687300f6396bd3e3ef601c2ccf1e159c6a76d4dbb7b4db343bdb41"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_9.csv",
+      "bytes": 13193,
+      "sha256": "02d7c62691056da6ed4bf4e97ae894a8becb73a53af0a6c24a74ef7e2e25c432"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/input/source/train_state_trial_9.json",
+      "bytes": 5693,
+      "sha256": "410eeb860b4acfcc1170562852e91769030f06faf83eb8fe74534c5a32c83731"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/native/evaluation.json",
+      "bytes": 1271,
+      "sha256": "468131431993e625c45ad4472767afa1adf307d9f9fa616e3d588b6a44902990"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/native/execution.json",
+      "bytes": 1777,
+      "sha256": "9aad774ca949578fa9d3dab728e11a1ef380279068c6689620a66ae6796b4197"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/native/job.json",
+      "bytes": 2483819,
+      "sha256": "da735bd4ab439653b5afc8c381e79e581730fc5300a153d61ae14d7fc7889fde"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/native/model-after.json",
+      "bytes": 2356768,
+      "sha256": "14faf443bb8783155d0c44b3f8d46019e0b4ffe6f1499bd6a34fc98f2667e1b6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/native/model.json",
+      "bytes": 2356768,
+      "sha256": "14faf443bb8783155d0c44b3f8d46019e0b4ffe6f1499bd6a34fc98f2667e1b6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/native/trial-0.json",
+      "bytes": 78316,
+      "sha256": "434aee3b1b46f2f75422a60bcb7723b97a184cb916dccd126953f59628b2c8d1"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/native/trial-1.json",
+      "bytes": 441542,
+      "sha256": "0814bb4a1b2954a7165367f04a2ba98bd746045b7091e0a47a002eb9deb5a156"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/process/loaded-files.json",
+      "bytes": 5874,
+      "sha256": "763b605a96ce7515624e1536974b7142802d541bb601de3c1010d3f7c1eb2aca"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/process/owned-process.json",
+      "bytes": 400,
+      "sha256": "857cd7cddada476d5561920d79697fca30bfb577c7457c1f0a7b3acc801a83cd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/process/request.json",
+      "bytes": 783,
+      "sha256": "e82517b278b8f1ffae1b8fb098552fa98773c03401ae4d5715a3ece3967e0339"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/process/result.json",
+      "bytes": 444,
+      "sha256": "0580425557c06d792202e481b8e240692cd5a8562ff35db4d85f0c2caa3fb840"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/process/runtime.json",
+      "bytes": 32017,
+      "sha256": "265f3be6f34508507883ed1630605174c5694aa03b1a06db868fef46906c3d99"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluate/run-manifest.json",
+      "bytes": 17840,
+      "sha256": "16721adf3b35d889904789d50010009100564e65d9842fcbc40303c89b0da5fb"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Branch-N1-evaluation-job.json",
+      "bytes": 1083735,
+      "sha256": "c7cbce49f83db3b596950eaa63bc8b4560eea143ca6d41025a2e4163751f71c2"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/job.json",
+      "bytes": 1915961,
+      "sha256": "284c228e6591ab7ef7d7b00124476196e3573d85a31ff5816cd3b98905cf472b"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_learned_state.json",
+      "bytes": 1252725,
+      "sha256": "b19bede752d626f97d32a0a9e5db317cc8716aa2d16af411945b59f872782bb0"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_learned_summary.json",
+      "bytes": 824540,
+      "sha256": "d2198bf1513283adcff330dfe20225da5541bc3965d7e950e0a9f6cd057175a6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_1.csv",
+      "bytes": 22082,
+      "sha256": "2cf05522eb1db3c14ca99146f3052101c5e4b01902b78a3a0cf1cc0d3ba6e3ca"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_1.json",
+      "bytes": 5655,
+      "sha256": "c026242924eee2681867f42b418d2b1cacd17f45b950b09be61a1a7332b77a70"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_10.csv",
+      "bytes": 20897,
+      "sha256": "438acfd212ce774fcccc1e3a17f5e37e87fa842111afae8db5d20a7cdfd5db34"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_10.json",
+      "bytes": 5745,
+      "sha256": "834ca3b0db1d74c22c67615391995b45ffdbfa9f0576b4bb9524353ed391610a"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_11.csv",
+      "bytes": 20890,
+      "sha256": "9e0082c3f35ad928f5461bf8b71be547e5a004c7164f384a2d8c9168d1cd7d98"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_11.json",
+      "bytes": 5746,
+      "sha256": "81b807e93db120fd19768bde80bd265e3cf576a8f4750dc35aded27595699779"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_12.csv",
+      "bytes": 21833,
+      "sha256": "9d127a6d5fb48228f3238f9c86b8f0741c569afd157edc2607693ff825089cb9"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_12.json",
+      "bytes": 5718,
+      "sha256": "78bd764eea1e79abe153ca030971b5b8578044b98c0b06ad0049848731cdbabd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_13.csv",
+      "bytes": 21901,
+      "sha256": "4c0345cc95f36479e853f2d70fe87189080a18303410f161a1c319b9f027f4fc"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_13.json",
+      "bytes": 5739,
+      "sha256": "22fa14212b4ad220c70a7260af5ded64b5c9bf15fd9e4dc5521c5c2f131df873"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_14.csv",
+      "bytes": 21886,
+      "sha256": "06b5c60868390c7f70147156e8b3ec96deb815cda8b05e19740ba313337f933a"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_14.json",
+      "bytes": 5749,
+      "sha256": "e8843b33a7ca03ae3ff91a7338c8255cd708daedfdc72f5f801dd118577022f6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_2.csv",
+      "bytes": 22070,
+      "sha256": "d5ef565e53d447d5ff0fc814b93af74f6a556bdeaf9e8e73bf6052f6800cdcbc"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_2.json",
+      "bytes": 5738,
+      "sha256": "2a2ae5e900c1db2843d80ebd7b8ce353fe7d975cfe41c8ee836df2bdb42ce37d"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_3.csv",
+      "bytes": 22445,
+      "sha256": "631a288d5f0c6987c9e69f3ea386f378e794de214f83558c0fb4bd5c5b6e5c49"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_3.json",
+      "bytes": 5743,
+      "sha256": "16bff6a6ad927bafcb45e95a7066a83201cc8d2742bdeae1373f69d283ac655e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_4.csv",
+      "bytes": 22861,
+      "sha256": "ca9368db79a46bc3b1e53f27d401adfc0d4c3e2fd4504053bea635b1bce33789"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_4.json",
+      "bytes": 5726,
+      "sha256": "a9e7b304a8a0d2c49ab342e45fee0f28a8f056a9c4d8680399d62ca0e2525f64"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_5.csv",
+      "bytes": 22898,
+      "sha256": "0353b09de806017e071e8cca5bea79281d89e62bbeb99606944e64aa56d2efec"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_5.json",
+      "bytes": 5718,
+      "sha256": "3808b7ae5f0895b75471868399df43eb5ad82950eaf8936d97aeb1ba0fa62b3e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_6.csv",
+      "bytes": 22013,
+      "sha256": "ccc67b3e0a89ec9a3a85d774b546f5d19744bba313ad8738c09e943a0f8cacf9"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_6.json",
+      "bytes": 5725,
+      "sha256": "c6186778ceea72fc06575d7e137489b8f5e8a33b122df57f27151b1a80b88f90"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_7.csv",
+      "bytes": 20864,
+      "sha256": "daabd69120f5a769ea7bcc3e02ae678955a808dce88c451e9e2cd2a37a9f901f"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_7.json",
+      "bytes": 5739,
+      "sha256": "96b377dc37a9ba93c12189a41f27df9e08b26567920adb2339d01a382d0ea2da"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_8.csv",
+      "bytes": 20847,
+      "sha256": "4e6e6a0513e549f87576800775c9ba91e90587631197d08c97aef4d2b4afca99"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_8.json",
+      "bytes": 5707,
+      "sha256": "00556e94e50d21ab3763b6f03a30d5d9e5d58e0e7dc9b115935375563930b431"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_9.csv",
+      "bytes": 20909,
+      "sha256": "f17e97b481c4dc1fb9f6c6f904332e640336afe891eeda075cf05b9e446f34ce"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/input/source/train_state_trial_9.json",
+      "bytes": 5715,
+      "sha256": "de2fadda18cc146265b2338b47ee9f2d4fa5d60516787ff2747fd27ad2e0c033"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/native/execution.json",
+      "bytes": 1479,
+      "sha256": "a6487419a519a703fb93c53d3a4e19e6f3ac736f16b09c0eb106d59fa417fd1b"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/native/job.json",
+      "bytes": 2680621,
+      "sha256": "b54cc3de6fd9a58b9a403dce19f369f826d4af2bac9115cb2744b36f83dee630"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/native/model.json",
+      "bytes": 2543315,
+      "sha256": "4006ee200df3ce0e66b48c8542e514efe157b8ff5dee5f4915f833e70dd07288"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/native/transaction.json",
+      "bytes": 13829730,
+      "sha256": "1bf81dcd98a73ee6833123fe4a522056f58921d2588e2d3a9a1aab3ac6299687"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/process/loaded-files.json",
+      "bytes": 6214,
+      "sha256": "d5650da73de5e30fb9001fb9e33dc8356efbcfa177671f918ca87e3191b9955b"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/process/owned-process.json",
+      "bytes": 400,
+      "sha256": "c161ae1b738d083264b8210dc7d68f3416a87fa5cf32bdacbae59b5589d9feed"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/process/request.json",
+      "bytes": 790,
+      "sha256": "078c328a7648fcc5b5d970895eac704d0e25761f2b47e4e367ed9686f0d3171d"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/process/result.json",
+      "bytes": 444,
+      "sha256": "7f0b968e6ef7e0179990d2aa0bf95f81c390c0ebc1a837562f7d0cec01abfdb0"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/process/runtime.json",
+      "bytes": 32017,
+      "sha256": "265f3be6f34508507883ed1630605174c5694aa03b1a06db868fef46906c3d99"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibrate/run-manifest.json",
+      "bytes": 15399,
+      "sha256": "43576f4060c8ccb5f02a2d7ac2d7a1ef479bfc10b3c7dd265f91c98eb666f15e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-calibration-job.json",
+      "bytes": 1179937,
+      "sha256": "4dfcee0caa49b99c6689e9e3db9ab853ca4a10f32ce2d540197c3208159ed627"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/job.json",
+      "bytes": 1915627,
+      "sha256": "76c5ef8b14007674eceb337adebdcae7fbf05cf5e12c38b25608d489ffefc822"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_learned_state.json",
+      "bytes": 1252725,
+      "sha256": "b19bede752d626f97d32a0a9e5db317cc8716aa2d16af411945b59f872782bb0"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_learned_summary.json",
+      "bytes": 824540,
+      "sha256": "d2198bf1513283adcff330dfe20225da5541bc3965d7e950e0a9f6cd057175a6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_1.csv",
+      "bytes": 22082,
+      "sha256": "2cf05522eb1db3c14ca99146f3052101c5e4b01902b78a3a0cf1cc0d3ba6e3ca"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_1.json",
+      "bytes": 5655,
+      "sha256": "c026242924eee2681867f42b418d2b1cacd17f45b950b09be61a1a7332b77a70"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_10.csv",
+      "bytes": 20897,
+      "sha256": "438acfd212ce774fcccc1e3a17f5e37e87fa842111afae8db5d20a7cdfd5db34"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_10.json",
+      "bytes": 5745,
+      "sha256": "834ca3b0db1d74c22c67615391995b45ffdbfa9f0576b4bb9524353ed391610a"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_11.csv",
+      "bytes": 20890,
+      "sha256": "9e0082c3f35ad928f5461bf8b71be547e5a004c7164f384a2d8c9168d1cd7d98"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_11.json",
+      "bytes": 5746,
+      "sha256": "81b807e93db120fd19768bde80bd265e3cf576a8f4750dc35aded27595699779"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_12.csv",
+      "bytes": 21833,
+      "sha256": "9d127a6d5fb48228f3238f9c86b8f0741c569afd157edc2607693ff825089cb9"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_12.json",
+      "bytes": 5718,
+      "sha256": "78bd764eea1e79abe153ca030971b5b8578044b98c0b06ad0049848731cdbabd"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_13.csv",
+      "bytes": 21901,
+      "sha256": "4c0345cc95f36479e853f2d70fe87189080a18303410f161a1c319b9f027f4fc"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_13.json",
+      "bytes": 5739,
+      "sha256": "22fa14212b4ad220c70a7260af5ded64b5c9bf15fd9e4dc5521c5c2f131df873"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_14.csv",
+      "bytes": 21886,
+      "sha256": "06b5c60868390c7f70147156e8b3ec96deb815cda8b05e19740ba313337f933a"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_14.json",
+      "bytes": 5749,
+      "sha256": "e8843b33a7ca03ae3ff91a7338c8255cd708daedfdc72f5f801dd118577022f6"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_2.csv",
+      "bytes": 22070,
+      "sha256": "d5ef565e53d447d5ff0fc814b93af74f6a556bdeaf9e8e73bf6052f6800cdcbc"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_2.json",
+      "bytes": 5738,
+      "sha256": "2a2ae5e900c1db2843d80ebd7b8ce353fe7d975cfe41c8ee836df2bdb42ce37d"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_3.csv",
+      "bytes": 22445,
+      "sha256": "631a288d5f0c6987c9e69f3ea386f378e794de214f83558c0fb4bd5c5b6e5c49"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_3.json",
+      "bytes": 5743,
+      "sha256": "16bff6a6ad927bafcb45e95a7066a83201cc8d2742bdeae1373f69d283ac655e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_4.csv",
+      "bytes": 22861,
+      "sha256": "ca9368db79a46bc3b1e53f27d401adfc0d4c3e2fd4504053bea635b1bce33789"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_4.json",
+      "bytes": 5726,
+      "sha256": "a9e7b304a8a0d2c49ab342e45fee0f28a8f056a9c4d8680399d62ca0e2525f64"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_5.csv",
+      "bytes": 22898,
+      "sha256": "0353b09de806017e071e8cca5bea79281d89e62bbeb99606944e64aa56d2efec"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_5.json",
+      "bytes": 5718,
+      "sha256": "3808b7ae5f0895b75471868399df43eb5ad82950eaf8936d97aeb1ba0fa62b3e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_6.csv",
+      "bytes": 22013,
+      "sha256": "ccc67b3e0a89ec9a3a85d774b546f5d19744bba313ad8738c09e943a0f8cacf9"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_6.json",
+      "bytes": 5725,
+      "sha256": "c6186778ceea72fc06575d7e137489b8f5e8a33b122df57f27151b1a80b88f90"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_7.csv",
+      "bytes": 20864,
+      "sha256": "daabd69120f5a769ea7bcc3e02ae678955a808dce88c451e9e2cd2a37a9f901f"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_7.json",
+      "bytes": 5739,
+      "sha256": "96b377dc37a9ba93c12189a41f27df9e08b26567920adb2339d01a382d0ea2da"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_8.csv",
+      "bytes": 20847,
+      "sha256": "4e6e6a0513e549f87576800775c9ba91e90587631197d08c97aef4d2b4afca99"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_8.json",
+      "bytes": 5707,
+      "sha256": "00556e94e50d21ab3763b6f03a30d5d9e5d58e0e7dc9b115935375563930b431"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_9.csv",
+      "bytes": 20909,
+      "sha256": "f17e97b481c4dc1fb9f6c6f904332e640336afe891eeda075cf05b9e446f34ce"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/input/source/train_state_trial_9.json",
+      "bytes": 5715,
+      "sha256": "de2fadda18cc146265b2338b47ee9f2d4fa5d60516787ff2747fd27ad2e0c033"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/native/evaluation.json",
+      "bytes": 1272,
+      "sha256": "348710231d19200a5c7249edb4e74c0aa1899ad4bc8f4fdf41f58ec1683a8bd1"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/native/execution.json",
+      "bytes": 1778,
+      "sha256": "05fe368760d244a03eaae63b4635cde64cfbac15633ae8457040dedcef91d55c"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/native/job.json",
+      "bytes": 2680247,
+      "sha256": "960124f3789d1bc4d33d79b2f8118d3208e5f7a9c06b8eab497664ce8008b9f4"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/native/model-after.json",
+      "bytes": 2543315,
+      "sha256": "4006ee200df3ce0e66b48c8542e514efe157b8ff5dee5f4915f833e70dd07288"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/native/model.json",
+      "bytes": 2543315,
+      "sha256": "4006ee200df3ce0e66b48c8542e514efe157b8ff5dee5f4915f833e70dd07288"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/native/trial-0.json",
+      "bytes": 87423,
+      "sha256": "54f62185932353bfddbb730e8f41a75b7989a7c46fa2aee4dcc8d4d9e293c76e"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/native/trial-1.json",
+      "bytes": 495096,
+      "sha256": "6ab83673916f06e042b98cfdcc2ba099bb9a0d8d03803ae59049348fba9d357f"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/process/loaded-files.json",
+      "bytes": 5874,
+      "sha256": "763b605a96ce7515624e1536974b7142802d541bb601de3c1010d3f7c1eb2aca"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/process/owned-process.json",
+      "bytes": 400,
+      "sha256": "03732f0b750aab412f3fbf781bb37a4e8e4ed69699faf283c1eebf3c9dbc76c3"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/process/request.json",
+      "bytes": 786,
+      "sha256": "3daeff7f9423d417828d31160959954fa88a56b2f9e256ee36203a2017c41130"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/process/result.json",
+      "bytes": 444,
+      "sha256": "06a088184ffb61958a7742e7c9a4ca88d6f5682d246f375a741cef2f89039028"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/process/runtime.json",
+      "bytes": 32017,
+      "sha256": "265f3be6f34508507883ed1630605174c5694aa03b1a06db868fef46906c3d99"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluate/run-manifest.json",
+      "bytes": 17841,
+      "sha256": "12011f4b48a18d9e7d48b244905e668e0a891936b8a8aa28c137506139e2ef18"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/Classic-N1-evaluation-job.json",
+      "bytes": 1179647,
+      "sha256": "0879e48c51f71013ce714b96ba00513a086e3d087fd24f34b98c72beca0ce256"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/runner.sh",
+      "bytes": 3148,
+      "sha256": "57a08b6a18a7844f4140ec02292ac2d2b2c78e4f74b1f26995dc5005cf6986a2"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/validation.json",
+      "bytes": 6369,
+      "sha256": "3c98706d0966f79da052365b304f3428df796ced671e7e053d96150184d6a6f3"
+    },
+    {
+      "path": "calibration-and-frozen-evaluation/validation.log",
+      "bytes": 149,
+      "sha256": "313098ec089d0262a1e52c4f7cc073653f7cf999f73a3a9e2acbbd44353f222c"
+    }
+  ],
+  "whole_stage_accepted": false,
+  "all_visual_reports_accepted": false,
+  "scientific_verdict": null
+}
