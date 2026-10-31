@@ -49,11 +49,18 @@ TEST(RdkLifecycleBoolean, UninitializedContainerSkipsWithoutBooleanError)
         child->Activity=true;ASSERT_NE(parent->AddComponent(child),ForbiddenId);child->SetGlobalTimeStep(2000);child->Init();
         ASSERT_TRUE(child->IsInit());ASSERT_FALSE(parent->IsInit());
         parent->hooks.clear();child->hooks.clear();
-        const bool ready=parent->IsReady();const auto lifecycle=parent->ObserveLifecycle(),childLifecycle=child->ObserveLifecycle();
+        const bool ready=parent->IsReady();
         const double time=environment->GetTime().GetDoubleTime();
-        parent->Activity=false;const bool inactive=parent->Calculate();
+        // Activity=false performs a native Reset. Observe Calculate only after
+        // the setter has finished, rather than treating that Reset as a failure.
+        parent->Activity=false;
+        const auto inactiveLifecycle=parent->ObserveLifecycle(),inactiveChildLifecycle=child->ObserveLifecycle();
+        const bool inactive=parent->Calculate();
         EXPECT_TRUE(inactive);EXPECT_FALSE(parent->IsInit());EXPECT_EQ(parent->IsReady(),ready);
-        parent->Activity=true;const bool uninitialized=parent->Calculate();
+        EXPECT_TRUE(inactiveLifecycle.IsCurrent());EXPECT_TRUE(inactiveChildLifecycle.IsCurrent());
+        parent->Activity=true;
+        const auto lifecycle=parent->ObserveLifecycle(),childLifecycle=child->ObserveLifecycle();
+        const bool uninitialized=parent->Calculate();
         EXPECT_TRUE(uninitialized);EXPECT_FALSE(parent->IsInit());EXPECT_EQ(parent->IsReady(),ready);
         EXPECT_TRUE(lifecycle.IsCurrent());EXPECT_TRUE(childLifecycle.IsCurrent());
         EXPECT_TRUE(parent->hooks.empty());EXPECT_TRUE(child->hooks.empty());
