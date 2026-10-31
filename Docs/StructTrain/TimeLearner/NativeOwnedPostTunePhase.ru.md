@@ -119,3 +119,14 @@ Reader сохраняет schema1 compatibility, проверяет все по�
 Это production replay Recognition, а не автоматический handoff живого Train.
 Серверные build/18-mode Console corpus и re-signed corrupted-receipt checks пока
 не выполнены; наличие кода не считается подтверждением.
+
+
+Проверка Console выявила отдельную ошибку orchestration: при запуске всего
+модуля NativeCalibrationRunProvenanceTest сортировался до класса, создающего
+его два настоящих CLI runs, и без отдельного env был skipped. Fail-closed gate
+остановился, хотя 26 операций и 15 остальных checks прошли. Новый maintained
+owned_posttune_worker_checks выполняет явные классы в порядке 4+3+8+4, задаёт
+все paths и сохраняет typed результаты после каждой группы. Provenance checks
+не запускаются до появления реальных CLI probes. Любой skip запрещает успех.
+Начальный skip сохраняется; исправление setup не меняет код моделей и не
+превращает неудачную попытку в успешную.
