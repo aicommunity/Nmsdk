@@ -4,39 +4,58 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
-Текущий непроверенный подэтап: typed PostTune schema 2 отделяет выбор весов
-с неизменным порогом от threshold calibration (`weights_selected`, не Calibrated
-и не научный PASS). Добавлены восемь native controls и четвёртый codec case;
-серверная проверка ожидается. Production Console/Python и learner properties
-пока не подключены к новой схеме; старые schema-1 jobs остаются исходным API.
+Проверен подэтап native PostTune с фиксированным порогом: PulseLib
+`03d1ea86a0a9f0d7b861adb62bf7798a9c1a1c59`, normal source root
+`3d922ba2c3e433b15bdbe5d008036ec0a5e3191f`, ASan source root
+`38cd68a022814782eff667bedd60bdfe9a6950bc`. На Elder прошли 12/12 native
+cases (67.946 s), на M40 — 12/12 (401.903 s): четыре codec cases и восемь
+fixed-threshold controls для Classic/Branch, roundtrip, последующей отдельной
+калибровки, budget/cancel/Reset. Leak detection выключен. В каждой сборке
+два настоящих owned Console schema-1 A/B сохранили побайтно transaction и
+конечную модель соответствующего исходного production bundle. Новые 9/9
+reader/packaging checks проверяют реальные сохранённые данные; это не новые
+независимые обучения и не полная матрица.
 
-Последний механический подэтап: `NativePostTuneConfiguration` выделяет общий
-typed codec девяти PostTune controls из Console в PulseLib. Root d48837f1 /
-PulseLib 30f737c8: 3/3 native cases без skips, все 18 исходных production jobs,
-direct numeric bindings и отрицательные проверки полей/типов/budgets/nonfinite.
-Два настоящих owned Console A/B (Classic Auto, Branch SearchSynthetic) дали
-побайтно те же transaction и конечную модель, что исходный Git bundle 3c1751f9;
-portable run audits прошли. [Bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-codec-normal-a1/README.md):
-103 members / 630420 bytes, все hashes проверены после merge.
-Это не learner-property dispatch: оба optional-mode guards сохраняются.
-Fixed-threshold PostTune без auto calibration, отдельный phase plan и безопасное
-продолжение остаются обязательными незакрытыми требованиями. ASan codec пока
-не проверен: его job ждёт terminal 0 текущего ASan N0, после чего использует
-новый runtime и сравнивает результаты с исходным ASan bundle 88c47ddf,
-а не с normal binary другой сборки. Запущенный ASan N0 не обновлялся на codec;
-Classic N0 прошёл за 1758.697 s, Branch N0 ещё выполняется.
+Выбор весов возвращает `weights_selected`, сохраняет порог и training outcome,
+не создаёт threshold candidate или calibration proof. Silent target остаётся FN.
+Raw `calibration_status=fixed` задаёт политику; при `recovery_required` derived
+аудит возвращает `unverified`, поскольку восстановление live owner не доказано.
+[Normal bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-normal-a2/README.md):
+134 members / 1158144 compressed bytes; [ASan bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-asan-a1/README.md):
+117 members / 1154916 bytes. Все archive/member hashes повторно проверены
+после локального merge. Production Console/job/worker пока schema 1; fixed API
+не подключён к production job или learner properties. Оба optional-mode guards
+сохраняются. Отдельный configured phase plan, безопасное продолжение и полная
+mode/profile/frequency matrix остаются открытыми.
 
-Последнее дополнение: native N0 PostTune на Elder завершён — Classic и Branch,
-2/2 cases, 459.529 s, затем 12/12 independent evidence checks, 157.913 s,
-без skips. [Bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-normal-a1/README.md):
-220 файлов / 3601844 bytes сжатого primary; все member hashes перепроверены
-после Git merge на локальной машине. Source root `fe45166a132a97aefcd62318125604bb066b57ff`;
-24 parent controls: 9 calibrated, 7 search_unresolved, 4 cancelled,
-2 recovery_required, 2 budget_exhausted. Это N0/два входа/2000 Гц,
-не полная матрица и не доказательство восьмипаттерновой классификации.
+Исправлена ошибка упаковки normal fixed proof: глобальный фильтр каталога
+`source` исключил 60 необходимых файлов `runs/*/input/source` из commit
+`d447fc2eafa5461ffafecc37e8f11703f012b7eb`. Commit
+`655af8a4ee7e132ef7754181398bd6b709cd9392` сохраняет все прежние 71 member
+побайтно и добавляет потерянные primaries и repair receipts. Уникальные данные
+не терялись, native simulation не перезапускалась. Новый production gate
+`verify_packaged_run_closure` проверяет включённые run manifests, точное множество
+их файлов и bytes/hashes; обе fixed упаковки содержат два portable snapshots /
+84 artifact entries. Это integrity gate, не доказательство научной полноты.
 
-N0 ASan теперь выполняется отдельно на M40 в новом immutable runtime
-`runtime-s08-native-posttune-controller-n0-asan-a1`; приёмка ещё не получена.
+Shared codec предыдущего подэтапа также проверен под ASan:
+[109 members](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-codec-asan-a1/README.md),
+3/3 native cases и два byte-exact owned Console A/B. Normal proof:
+[103 members](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-codec-normal-a1/README.md).
+Все 18 исходных job declarations и numeric bindings проверены. Отдельный
+[ASan N0](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-asan-a1/README.md)
+завершён: 2/2 native (3351.650 s), 12/12 reader (136.129 s), 220 members /
+3604452 compressed bytes. [Normal N0](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-normal-a1/README.md):
+2/2 native (459.529 s), 12/12 reader (157.913 s), 220 members / 3601844 bytes.
+Оба N0 снимка: два входа, 2000 Гц, без приёмки остальных профилей и частот.
+
+Новая fixed visual серия ещё не принята. Попытка report A1 выявила неполную
+упаковку до рендеринга. A2 не получила в analysis clone commit исправленной
+упаковки; `git show` завершился ошибкой до извлечения данных. A3 явно fetch-ит
+оба immutable commits, восстановила и дважды проверила 134 member; прошли
+10/10 evidence/plot checks (27.621 s). Рендеринг идёт отдельно на M40 Data.
+Ни один из этих инфраструктурных отказов не является неудачным обучением.
+
 Новая команда `report --format posttune-run` (root `4c497f41d`) связывает
 графики с production run manifest. Все 18 normal production reports завершены:
 59 полных матриц, 178 trial-soma pairs, 8437 файлов в кэше M40 Data.

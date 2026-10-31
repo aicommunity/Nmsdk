@@ -322,12 +322,22 @@ Schema 1 по умолчанию продолжает Calibrate и сохран�
 
 `Encode/DecodeNativePostTuneControlsV2` явно записывают schema 2 и finalization.
 Попытка сохранить fixed-режим старым codec запрещена, чтобы не потерять фактор.
-Console и Python пока принимают только прежний production job; schema-2 native
-report пока должен отклоняться старыми auditors, а не получать положительный
-verdict. Восемь новых native controls проверяют оба learner, silent target,
-roundtrip waveform/parameters, следующую calibration phase, budget/cancel/reset.
-Они и четвёртый codec case пока ожидают серверной проверки. Это незавершённый
-подэтап, не поддержка всех properties/режимов и не приёмка этапа 8.
+Production Console/job/worker пока принимают только прежний schema-1 job.
+Python analyze/report transaction уже поддерживают schema-2 native reports;
+это не поддержка production fixed job. При lifecycle interference raw fixed
+обозначает объявленную политику, а derived calibration status — `unverified`;
+успешное восстановление live owner из sidecar не предполагается.
+
+Восемь native controls и четвёртый codec case прошли на Elder normal (12/12,
+67.946 s) и M40 ASan (12/12, 401.903 s; leak detection off). Проверены оба
+learner, silent target, roundtrip waveform/parameters, отдельная следующая
+calibration phase, budget/cancel/Reset. По два owned legacy Console A/B
+в каждой сборке сохранили исходные transaction/model bytes. Normal source
+root 3d922ba2, ASan source 38cd68a0, PulseLib 03d1ea86; latest readers b7cab734.
+[Normal](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-normal-a2/README.md)
+и [ASan](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-asan-a1/README.md)
+содержат полный источник каждого portable run. Это проверенный typed API,
+а не подключённый learner-property dispatch и не приёмка этапа 8.
 
 ### Отчёт для production run manifest
 
