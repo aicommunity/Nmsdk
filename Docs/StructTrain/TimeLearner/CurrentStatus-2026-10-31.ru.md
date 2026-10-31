@@ -4,6 +4,22 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
+Последний механический подэтап: `NativePostTuneConfiguration` выделяет общий
+typed codec девяти PostTune controls из Console в PulseLib. Root d48837f1 /
+PulseLib 30f737c8: 3/3 native cases без skips, все 18 исходных production jobs,
+direct numeric bindings и отрицательные проверки полей/типов/budgets/nonfinite.
+Два настоящих owned Console A/B (Classic Auto, Branch SearchSynthetic) дали
+побайтно те же transaction и конечную модель, что исходный Git bundle 3c1751f9;
+portable run audits прошли. [Bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-codec-normal-a1/README.md):
+103 members / 630420 bytes, все hashes проверены после merge.
+Это не learner-property dispatch: оба optional-mode guards сохраняются.
+Fixed-threshold PostTune без auto calibration, отдельный phase plan и безопасное
+продолжение остаются обязательными незакрытыми требованиями. ASan codec пока
+не проверен: его job ждёт terminal 0 текущего ASan N0, после чего использует
+новый runtime и сравнивает результаты с исходным ASan bundle 88c47ddf,
+а не с normal binary другой сборки. Запущенный ASan N0 не обновлялся на codec;
+Classic N0 прошёл за 1758.697 s, Branch N0 ещё выполняется.
+
 Последнее дополнение: native N0 PostTune на Elder завершён — Classic и Branch,
 2/2 cases, 459.529 s, затем 12/12 independent evidence checks, 157.913 s,
 без skips. [Bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-normal-a1/README.md):

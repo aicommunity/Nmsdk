@@ -16,6 +16,7 @@ exercise schema 2 beyond fixtures; the complete stage 10 remains open.
 - [Measured native search, real calibration and rollback: normal A2](s08-native-posttune-controller-normal-a2/README.md).
 - [The same native controller: ASan 10 native, 19 original and 20 later reader checks](s08-native-posttune-controller-asan-a2/README.md).
 - [N0 Classic/Branch measured PostTune: two native cases and 12 evidence checks](s08-native-posttune-controller-n0-normal-a1/README.md).
+- [Shared PostTune controls: all 18 original job declarations and two byte-exact Console A/B jobs](s08-native-posttune-codec-normal-a1/README.md).
 - [Verified duplicate-only Elder cache cleanup with retained Git and M40 primaries](s02-storage-dedup-elder-20261031-a1/README.md).
 - [All five typed candidate modes: normal](s08-native-posttune-candidates-normal-a2/README.md), [ASan](s08-native-posttune-candidates-asan-a1/README.md).
 - [Forty actual Console export/frozen-evaluation operations](s08-native-posttune-worker-normal-a1/README.md).
