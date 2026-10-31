@@ -89,3 +89,34 @@ def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
     _write(output/"SHA256SUMS.json", sums)
     return {"kind": manifest["kind"], "status": "diagnostic", "weight_matrices": len(matrices),
             "trial_soma_pairs": manifest["trial_soma_pairs"], "files": len(sums), "evaluation_verdict": None}
+
+
+def render_posttune_run(source: Path, output: Path):
+    """Bind every plotted matrix to a validated portable production run."""
+    from .native_calibration_worker import audit_run_manifest
+    plotting_runtime()
+    proof = audit_run_manifest(source, post_tune=True)
+    run = load(source)
+    require(run["execution"] == "completed", "incomplete_posttune_run_has_no_complete_report")
+    result = render_posttune_transaction(source.parent/"native/transaction.json",
+                                        source.parent/run["source_package_path"], output)
+    binding = {"kind": "timelearner_posttune_run_visual_binding", "schema_version": 1,
+               "run_manifest_sha256": run["sha256"], "attempt_id": run["attempt_id"],
+               "runtime_fingerprint": run["runtime_fingerprint"], "source_closure": run["source_closure"],
+               "source_primary_checked": True, "run_audit": proof,
+               "native_execution_verified": False, "visual_acceptance_complete": False, "evaluation_verdict": None}
+    _write(output/"run-binding.json", binding)
+    manifest = load(output/"manifest.json")
+    manifest["run_manifest_sha256"] = run["sha256"]
+    manifest["runtime_fingerprint"] = run["runtime_fingerprint"]
+    _write(output/"manifest.json", manifest)
+    index = output/"index.html"
+    text = index.read_text(encoding="utf-8")
+    require(text.count("</html>") == 1, "unknown_posttune_report_index")
+    index.write_text(text.replace("</html>", '<p>Production run, owned-process records, source primaries and actual final model audited: '
+        '<a href="run-binding.json">run/runtime/source binding</a>. Independent Test and scientific PASS are not inferred.</p></html>'),
+        encoding="utf-8")
+    sums = {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(output.rglob("*")) if p.is_file() and p != output/"SHA256SUMS.json"}
+    _write(output/"SHA256SUMS.json", sums)
+    return {**result, "files": len(sums), "run_evidence_consistent": True, "source_primary_checked": True}

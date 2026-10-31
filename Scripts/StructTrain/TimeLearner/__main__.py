@@ -117,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run"), default="recognition-evaluation")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
@@ -277,7 +277,11 @@ def main(argv: list[str] | None = None) -> int:
             from .native_evidence import require
             require(args.format == "native-test-run" or args.artifacts is None, "artifacts_option_is_only_for_native_test_run")
             require(args.format == "posttune-transaction" or args.source_solo is None, "report_source_solo_is_only_for_posttune")
-            if args.format == "posttune-transaction":
+            if args.format == "posttune-run":
+                from .posttune_transaction_reports import render_posttune_run
+                require(args.trace is None and args.model is None, "posttune_run_declares_its_models_and_observations")
+                result = render_posttune_run(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "posttune-transaction":
                 from .posttune_transaction_reports import render_posttune_transaction
                 require(args.source_solo is not None and args.trace is None and args.model is None,
                         "posttune_report_requires_source_solo_not_model_or_trace")
