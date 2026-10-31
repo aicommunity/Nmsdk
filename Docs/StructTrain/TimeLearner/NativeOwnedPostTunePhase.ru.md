@@ -105,3 +105,17 @@ Git получает компактные primary, metadata и выбранны�
 полная матрица физики/режимов/частот, independent Test, внешний UnInit/Cancel и
 неоднородная частота как отдельные отрицательные runtime controls. Цель плана
 0–12 сохраняется полностью.
+
+
+## Production Console: следующий подэтап, проверки ещё не выполнены
+
+Console PostTune переводится с внешнего Advance на BeginNativePostTunePhase и
+обычные тики outer model. Standalone calibration сохраняет существующий driver.
+Новый PostTune execution schema2 сохраняет прежние поля и добавляет четвёртый
+артефакт phase-execution.json; подписанный execution связывает его hash/размер.
+Reader сохраняет schema1 compatibility, проверяет все полные матрицы и дополнительно
+связывает число before-children вызовов с model_ticks, частотой и begin/end времени.
+Нулевой tick допустим только при явно связанном нулевом интервале отменённого job.
+Это production replay Recognition, а не автоматический handoff живого Train.
+Серверные build/18-mode Console corpus и re-signed corrupted-receipt checks пока
+не выполнены; наличие кода не считается подтверждением.
