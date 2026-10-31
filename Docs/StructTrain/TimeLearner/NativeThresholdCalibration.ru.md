@@ -457,3 +457,37 @@ N1/2000 Hz — normal 2/2 + 17/17 и ASan 2/2 + 17/17. All-pattern reports
 легендой прошёл все 27. В current normal подборке 16 PNG, в ASan — два.
 Выборочная visual QA не равна полной приёмке всей коллекции.
 Оперативные SHA, артефакты и оставшиеся требования перечислены в CurrentStatus.
+
+## Владение recognition-контекстом и результатами проб
+
+Baseline root `e2a1293768bbd09af2c6ce040b76d6670dbfc79b` воспроизвёл
+по три дефекта Classic/Branch на сохранённых реальных моделях (0/6):
+потребление чужого результата с откатом модели, бесконечное ожидание после
+внешнего чтения собственной пробы и незамеченный импорт идентичного пакета
+без owner Build/Reset. Совпадение physical hash не означает сохранность
+экземпляра recognition-контекста или владение очередью.
+
+PulseLib `fad7aed8c6ae9e32dea79001eec55c49904ff4d7` добавляет read-only
+наблюдение control block конкретного NativeRecognitionHold и проверяет
+run/trial identity до Take/Cancel. Executor запрещает повторное использование
+run/trial ID в одном контексте; новый контекст получает другой control block.
+Даже удерживаемый внешним наблюдателем старый token не позволяет принять
+заменённый контекст. Собственный import обновляет наблюдение. Потеря владения
+даёт RecoveryRequired без чтения чужого result или перезаписи его модели.
+Ephemeral token не входит в storage-профиль, fingerprint физики или checkpoint.
+
+Root `0b89622a25785cbe1055721832da55933cb4988c` прошёл 8/8 native
+контролей на Elder и 8/8 под ASan на M40: шесть interference controls и
+обычная полная калибровка обеих топологий. Reader
+`322b118fc376be121b072673dd48c38d25fe0765` прошёл 4/4 на каждом наборе:
+привязка к первичным source-моделям, сохранение candidate при interference,
+полнота externally consumed пробы и commit freshly confirmed package.
+Advance не продвигает clock. Это scoped regression acceptance, не полная
+mode/profile matrix, не независимый Test и не подтверждение Exact исходного
+обучения: сохранённый source имеет search_unresolved.
+
+Normal primary bundle: [ownership controls](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-normal-a1/README.md).
+ASan primary bundle: [ownership controls](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-asan-a1/README.md).
+Исходные неуспешные native controls и reader-a1, неверно ожидавший поле duration
+вместо сравнения границ observation с объявленным запросом, сохранены отдельно
+от принятой reader-a2 проверки. Ни один из этих отказов не является ASan finding.
