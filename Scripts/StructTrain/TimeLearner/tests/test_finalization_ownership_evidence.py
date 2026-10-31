@@ -50,9 +50,16 @@ class FinalizationOwnershipEvidenceTest(unittest.TestCase):
             changed = deepcopy(source[0])
             changed["model_revision"] = "different-model"
             changed["sha256"] = canonical_model_sha256({k: v for k, v in changed.items() if k != "sha256"})
+            replay_mode = deepcopy(record)
+            solo = replay_mode["boundary"]["source_solo"]
+            solo["calculate_mode"] = 1-solo["calculate_mode"]
+            solo["sha256"] = canonical_model_sha256({k: v for k, v in solo.items() if k != "sha256"})
+            boundary = replay_mode["boundary"]
+            boundary["sha256"] = canonical_model_sha256({k: v for k, v in boundary.items() if k != "sha256"})
             for name, data, original in (("controls", controls, source), ("provider", provider, source),
                                          ("missing_final_trial", missing, source),
-                                         ("source_model", record, (changed, *source[1:]))):
+                                         ("source_model", record, (changed, *source[1:])),
+                                         ("undeclared_replay_mode", replay_mode, source)):
                 with self.subTest(case=path.name, corruption=name):
                     with self.assertRaises(EvidenceError):
                         audit_managed_finalization(data, original)

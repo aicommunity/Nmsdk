@@ -26,11 +26,16 @@ def _snapshot(value):
     return {k: v for k, v in value.items() if k not in {"native_xml", "native_xml_sha256"}}
 
 
-def _replay_source(value):
+def _replay_source(value, calculate_mode=None):
     result = deepcopy(value)
     require(canonical_model_sha256({k: v for k, v in result.items() if k != "sha256"}) == result["sha256"],
             "managed_source_digest_mismatch")
     result.pop("sha256")
+    require(type(result["calculate_mode"]) is int and result["calculate_mode"] in (0, 1), "invalid_replay_source_calculate_mode")
+    if calculate_mode is not None:
+        # The declared runtime control is changed AFTER importing saved Train.
+        # Keep its original value in the audit result; do not relabel Train.
+        result["calculate_mode"] = calculate_mode
     archive = result["neuron"]
     require(canonical_model_sha256({k: v for k, v in archive.items() if k != "sha256"}) == archive["sha256"],
             "managed_source_archive_digest_mismatch")
@@ -61,7 +66,9 @@ def audit_managed_finalization(record, original_source_case):
     require(record["provider_after_stop"] is False and record["external_stop_reason"] == "native_finalization_external_stop",
             "managed_finalization_external_stop_mismatch")
     solo = boundary["source_solo"]
-    require(_replay_source(solo) == _replay_source(original_source_case[0]), "managed_original_source_lineage_mismatch")
+    require(solo["calculate_mode"] == record["calculate_mode"], "managed_replay_calculate_mode_mismatch")
+    require(_replay_source(solo) == _replay_source(original_source_case[0], record["calculate_mode"]),
+            "managed_original_source_lineage_mismatch")
     # The original packets/CSVs and summary are retained verbatim. Audit the
     # re-exported package against those primaries, never fabricate new Train.
     source_case = (solo, *original_source_case[1:])
@@ -71,5 +78,7 @@ def audit_managed_finalization(record, original_source_case):
             and record["selected_package"] == report["selected_package"], "managed_finalization_selected_source_mismatch")
     transaction = audit_posttune_transaction(report, source_case)
     return {"schema_version": 1, "calculate_mode": record["calculate_mode"], "training_source_audit": learned,
+            "original_training_calculate_mode": original_source_case[0]["calculate_mode"],
+            "original_training_source_sha256": original_source_case[0]["sha256"], "replayed_source_sha256": solo["sha256"],
             "transaction_audit": transaction, "external_stop_record_consistent": True,
             "native_control_execution_attested": False, "scientific_verdict": None}
