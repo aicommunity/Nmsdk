@@ -28,7 +28,7 @@ proof audit, frozen scoring/report adapter и CLI анализа/select/confirm/
 | Контур | Авторитетное состояние |
 |---|---|
 | Potential baseline, PulseLib 7f17735 | 16 native, 29 independent и отдельные 8 частично перекрывающихся checks прошли; compact bundles опубликованы. Это собственный снимок. |
-| Raw validator/assessment, PulseLib 25cf6a5 | 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Полная ASan приёмка открыта. |
+| Raw validator/assessment, PulseLib 25cf6a5 | Normal 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Длительный ASan gate root ad975bbe теперь завершён: 16/16 native и reader 1ef44e2 — 35/35 (548.849 s), оба terminal 0. Публикация первичных ASan данных ещё открыта. Этот старый снимок не подменяет full-matrix приёмку последующих signed/calibrated/worker версий. |
 | Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate завершён. Его reader a1 обнаружил ошибку glob; исправленный reader a2 прошёл 35/35 на тех же данных без нового Train. Опубликован bundle e8305ced. Отдельный ASan 6/6 native + 6/6 Python завершён с exit 0; это не полный ASan 16-case matrix. |
 | Persisted observations, PulseLib fece852 | Normal 2/2 Classic/Branch при 2000 Гц с roundtrip/corruption checks прошёл; данные включены в normal bundle 9746ea4. ASan 2/2 прошёл; первичные данные опубликованы в a4984f1. |
 | Calibrated state, PulseLib 353882b → ce7e81e | Normal 2/2 прошли на обоих снимках. Усиленный ce7e81e проверил import/export/Reset/frozen probes и отказы при неправильных bindings. Данные и модели опубликованы commit 9746ea4; ASan 2/2 прошёл на обоих снимках, включая усиленный ce7e81e. ASan bundle a4984f1 опубликован. |
@@ -67,6 +67,17 @@ source Train сохраняет search_unresolved. Schema-1 model proof не с�
 compile-unit rules записаны отдельно. ASan flags подтверждены actual compile
 database; leak detection выключен. Поздний полный plugin census ещё не реализован.
 Текущий PulseLib 0c6d057 добавляет только документацию поверх кода a5671e9.
+
+Завершение отдельной длительной ASan серии подтверждено по terminal files,
+четырём phase XML, native-validation.json и reader validation, а не по факту
+исчезновения PID. Runtime fingerprint e9810faff355e1a92441328dc452a07d67b71453519a7379008b1e2ee4fc1315
+относится к root ad975bbeb5df18555d94329d3ee95f321921c171 / PulseLib
+25cf6a5bfadc0ee72182cb924f1d0730cf6dc71b. Native gate покрывает N1 potential
+2000/20000 Hz, N0/N1 threshold candidates обеих топологий на обеих частотах,
+fresh destination и recognition conversion controls. Старый source/build/runtime
+сохранён; перед новым использованием этого каталога требуется публикация его
+самостоятельного primary bundle. Современный worker acceptance выше имеет
+другие root/PulseLib commits и собственные primary data.
 
 Ownership bundles: [normal](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-normal-a1/README.md)
 и [ASan](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-asan-a1/README.md).
