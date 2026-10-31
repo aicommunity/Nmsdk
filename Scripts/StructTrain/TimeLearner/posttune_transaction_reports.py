@@ -19,9 +19,17 @@ def _write(path, value):
 
 
 def render_posttune_transaction(source: Path, source_solo: Path, output: Path):
+    plotting_runtime()
+    return render_posttune_transaction_data(load(source), load_case(source_solo), output)
+
+
+def render_posttune_transaction_data(report, source_case, output: Path):
+    """Same production audit/renderer for an explicit re-exported source case.
+
+    The supplied summary/packets/CSVs still undergo the complete source audit;
+    this entry point does not create or overwrite historical source files.
+    """
     runtime = plotting_runtime()
-    report = load(source)
-    source_case = load_case(source_solo)
     audit = audit_posttune_transaction(report, source_case)
     criterion = report["confirmation_specification"]["criterion"]
     jobs = []
