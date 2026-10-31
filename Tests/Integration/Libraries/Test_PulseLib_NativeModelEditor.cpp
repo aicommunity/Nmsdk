@@ -98,6 +98,35 @@ public:
     std::vector<double> ExpectedTimes() const {return this->ExpectedPulseRelTimes;}
     std::vector<double> CapturedTarget() const {return this->PostTuneTargetIsi;}
 };
+template<class Learner> class PostTuneObservationLearner : public Learner {
+public:
+    PostTuneObservationLearner* New(void) override {return new PostTuneObservationLearner;}
+    void SeedPreviousInference(bool withCompletedSamples)
+    {
+        this->IsNeedToTrain.SetDataDirect(false);this->TrainingPhase=2;
+        this->EnablePostTrainTuning=true;this->EnablePostTrainMidThreshold=true;
+        this->PostTrainMidMetric=PostTrainTune::kMidMetricSoma;
+        this->FixedLTZThreshold.SetDataDirect(1.);this->PostTrainSilentThreshold=1.;
+        this->PostTrainTuneComplete=false;this->PostTuneInferenceMidDone=false;
+        this->PostTuneInferenceMidPending=false;this->PostTuneFreeRunActive=false;
+        this->PostTuneResult=PostTrainTune::kResultSuccess;
+        this->PostTuneRunInvalid=false;this->PostTuneRunTerminal=PostTrainTune::kResultNone;
+        this->PostTuneSampleState.clear();
+        if(withCompletedSamples)
+        {
+            PostTrainTune::SampleMetricState state;state.observed=true;state.finished=true;state.peak=.5;
+            this->PostTuneSampleState.assign(2,state);
+        }
+    }
+    bool StartMatrixInference(){return this->MaybeStartInferenceMidProbes();}
+    void ObserveLiveMetric(){this->UpdatePostTuneFreeRunPeak();}
+    bool AllSamplesValid() const {return PostTrainTune::AllSamplesValid(this->PostTuneSampleState);}
+    bool AnySampleObserved() const {
+        return std::any_of(this->PostTuneSampleState.begin(),this->PostTuneSampleState.end(),
+            [](const auto& state){return state.observed || state.finished;});
+    }
+    std::size_t SampleCount() const {return this->PostTuneSampleState.size();}
+};
 void Artifact(const std::string& name,const QByteArray& data)
 {
     if(const auto directory=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
@@ -2983,6 +3012,70 @@ TEST(PostTuneTransientStimulus,Classic2000){PostTuneTransientStimulus<NNeuronTim
 TEST(PostTuneTransientStimulus,Branch2000){PostTuneTransientStimulus<NNeuronTimeLearnerBranch>(2000);}
 TEST(PostTuneTransientStimulus,Classic20000){PostTuneTransientStimulus<NNeuronTimeLearner>(20000);}
 TEST(PostTuneTransientStimulus,Branch20000){PostTuneTransientStimulus<NNeuronTimeLearnerBranch>(20000);}
+
+enum class PostTuneObservationCase { PreviousResult,PreviousSamples,MissingFoil,Nonfinite };
+template<class Learner> void PostTuneInferenceObservation(PostTuneObservationCase scenario)
+{
+    using Owner=PostTuneObservationLearner<Learner>;
+    constexpr bool branch=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const std::string image=branch?"PostTuneObservationBranchFixture":"PostTuneObservationClassicFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new Owner;},image),image);
+    const std::string suffix="posttune_observation_"+std::to_string(int(scenario));
+    EditingRig<Owner> rig(2000,1,suffix,false,2,true,2,1,false,image);
+    auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    MDMatrix<double> matrix;matrix.Assign(4,1,0.);
+    matrix(0,0)=.01;matrix(1,0)=.08;matrix(2,0)=.01;matrix(3,0)=.20;
+    ASSERT_TRUE(dataset->SetMatrixData(matrix));
+    MDMatrix<int> labels;labels.Assign(1,2,0);labels(0,0)=1;ASSERT_TRUE(dataset->SetMatrixClasses(labels));
+    rig.learner->SeedPreviousInference(scenario!=PostTuneObservationCase::PreviousResult);
+    ASSERT_TRUE(rig.learner->StartMatrixInference());
+    const auto evidence=[&] {
+        return QJsonObject{{"kind","legacy_posttune_inference_observation_regression"},{"schema_version",1},
+            {"case",int(scenario)},{"topology",branch?"branch":"classic"},
+            {"result",rig.learner->PostTuneResult.GetData()},{"threshold",rig.learner->FixedLTZThreshold.GetData()},
+            {"sample_count",double(rig.learner->SampleCount())},{"any_sample_observed",rig.learner->AnySampleObserved()},
+            {"all_samples_valid",rig.learner->AllSamplesValid()},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
+    };
+    if(scenario==PostTuneObservationCase::PreviousResult || scenario==PostTuneObservationCase::PreviousSamples)
+    {
+        Artifact(rig.name+"_start.json",QJsonDocument(evidence()).toJson());
+        if(scenario==PostTuneObservationCase::PreviousResult)
+            EXPECT_EQ(rig.learner->PostTuneResult.GetData(),PostTrainTune::kResultNone);
+        else
+        {
+            EXPECT_EQ(rig.learner->SampleCount(),2u);
+            EXPECT_FALSE(rig.learner->AnySampleObserved());EXPECT_FALSE(rig.learner->AllSamplesValid());
+        }
+        return;
+    }
+    // Fault injection into real typed soma outputs and Dataset termination.
+    // No model tick or synthetic CSV is presented as a physical experiment.
+    for(std::size_t i=0;i<(branch?1u:2u);++i)
+    {
+        auto soma=rig.neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);ASSERT_TRUE(soma);
+        soma->SumPotential(0,0)=i==0?.5:0.;
+        if(scenario==PostTuneObservationCase::Nonfinite && i==0)
+            soma->SumPotential(0,0)=std::numeric_limits<double>::quiet_NaN();
+    }
+    dataset->Iteration.SetDataDirect(0);dataset->StateGeneration=2;
+    rig.learner->ObserveLiveMetric();
+    dataset->StateGeneration=0; // Foil was never visited in this attempt.
+    rig.learner->ObserveLiveMetric();
+    Artifact(rig.name+"_terminal.json",QJsonDocument(evidence()).toJson());
+    EXPECT_EQ(rig.learner->PostTuneResult.GetData(),PostTrainTune::kResultInvalidMetrics);
+    EXPECT_DOUBLE_EQ(rig.learner->FixedLTZThreshold.GetData(),1.);
+    EXPECT_FALSE(rig.learner->AllSamplesValid());
+}
+#define POSTTUNE_OBSERVATION_CASE(Name,Case) \
+TEST(LegacyPostTuneInferenceObservation,Classic##Name){PostTuneInferenceObservation<NNeuronTimeLearner>(PostTuneObservationCase::Case);} \
+TEST(LegacyPostTuneInferenceObservation,Branch##Name){PostTuneInferenceObservation<NNeuronTimeLearnerBranch>(PostTuneObservationCase::Case);}
+POSTTUNE_OBSERVATION_CASE(PreviousResult,PreviousResult)
+POSTTUNE_OBSERVATION_CASE(PreviousSamples,PreviousSamples)
+POSTTUNE_OBSERVATION_CASE(MissingFoil,MissingFoil)
+POSTTUNE_OBSERVATION_CASE(Nonfinite,Nonfinite)
+#undef POSTTUNE_OBSERVATION_CASE
 
 template<class Learner> void PostTuneGraphBoundary(unsigned frequency,int normalization,bool failAttach=false)
 {
