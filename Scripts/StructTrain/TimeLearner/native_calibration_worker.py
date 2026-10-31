@@ -228,6 +228,26 @@ def audit_run_manifest(path):
     require(manifest["execution"] == process["execution"] and manifest["runtime_fingerprint"] ==
             process["runtime_fingerprint"] == runtime["runtime_fingerprint"] == digest_json(runtime_content_identity(runtime))
             and manifest["source_closure"] == runtime["source_closure"], "worker_run_runtime_scope_changed")
+    request = load(root/"process/request.json")
+    arguments = request["arguments"]
+    require(type(arguments) is list and len(arguments) == 6 and all(type(v) is str for v in arguments) and
+            arguments[::2] == ["--app-ini", "--timelearner-calibrate", "--timelearner-output"] and
+            arguments[1] == runtime["app_ini"]["path"], "worker_run_process_arguments_changed")
+    original_output = PurePosixPath(arguments[5])
+    require(original_output.is_absolute() and original_output.name == "native" and
+            PurePosixPath(arguments[3]) == original_output.parent/"input/job.json" and
+            request["working_directory"] == str(PurePosixPath(runtime["executable"]["path"]).parent) and
+            number(request["maximum_wall_seconds"]) > 0 and request["model_time"] is None,
+            "worker_run_process_scope_changed")
+    if process["execution"] == "completed":
+        owned = load(root/"process/owned-process.json")
+        loaded = load(root/"process/loaded-files.json")
+        expected_executable = {key: runtime["executable"][key] for key in ("path", "size", "sha256")}
+        require(owned["executable"] == runtime["executable"]["path"] and
+                owned["executable_sha256"] == runtime["executable"]["sha256"] and
+                owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
+                type(loaded) is list and expected_executable in loaded and process["returncode"] == 0 and
+                process["ownership_scope"] == "launched_executable_only", "worker_run_owned_runtime_changed")
     audit = audit_execution(root/"native", job, source_case) if process["execution"] == "completed" else None
     require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution") and
             (not audit or process["runtime_provenance"] == "loaded_files_captured"), "worker_run_analysis_changed")
