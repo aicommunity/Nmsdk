@@ -16,9 +16,15 @@
 N0 ASan теперь выполняется отдельно на M40 в новом immutable runtime
 `runtime-s08-native-posttune-controller-n0-asan-a1`; приёмка ещё не получена.
 Новая команда `report --format posttune-run` (root `4c497f41d`) связывает
-графики с production run manifest. Генерация всех 18 normal production reports
-и последующие 3 binding/coverage checks + 5 plotting checks ещё выполняются
-на M40 Data; завершение и визуальная приёмка пока не заявляются.
+графики с production run manifest. Все 18 normal production reports завершены:
+59 полных матриц, 178 trial-soma pairs, 8437 файлов в кэше M40 Data.
+3 binding/coverage checks + 5 plotting checks прошли без skips (13.076 s).
+Повтор на root `7e8d97f3f`, включая backend guard обоих PostTune entry points:
+8/8, 12.419 s. [Compact bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-console-visual-normal-a1/README.md)
+содержит 422 metadata members / 335060 bytes и 12 PNG; все hashes проверены
+после Git merge. Все 12 PNG просмотрены в 1920×960; полный cache, PDF/SVG и
+научный результат этим не принимаются. У foil выбранная zoom-002 показывает
+межимпульсный спад; импульсы видны на overview и других плитках полного кэша.
 
 На Elder после проверки Git primary manifest, повторной проверки всех 907
 архивных members на M40 и отсутствия активных читателей удалены только 214
@@ -27,6 +33,13 @@ N0 ASan теперь выполняется отдельно на M40 в нов�
 фиксирует рост free bytes с 406204416 до 1146679296. Архив Git и полная
 копия M40 сохранены; уникальные primary data не удалялись. Новые объёмные
 задания на Elder до дальнейшего освобождения места не запускать.
+
+Затем новый N0 normal bundle восстановлен из Git на M40: 220 файлов /
+604878849 bytes проверены дважды. После отдельной проверки source manifest
+и отсутствия активных readers с Elder удалены ещё 206 дублирующих native
+файлов / 604854174 bytes. Git archive, полная M40 copy и Elder terminal logs
+сохранены. Free bytes выросли до 1745907712; новая квитанция включена в тот же
+раздел duplicate-only cleanup. Это не разрешение удалять уникальные трассы.
 
 ## Отправная точка и незавершённая ветка
 
