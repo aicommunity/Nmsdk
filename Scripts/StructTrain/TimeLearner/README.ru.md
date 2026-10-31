@@ -8,6 +8,10 @@ Import не запускает эксперименты. Реализованы 
 Общий prepare, сквозной scheduler и полная миграция ещё не готовы; новые native
 операции имеют явно ограниченный контракт, описанный ниже.
 
+`publish` принимает schema 2 с explicit push transport и обязательной проверкой
+checksum inventory по committed blobs. Producer helper умеет явно добавлять
+selected ignored/sparse artifacts. [Контракт, ограничения и приёмка](../../../Docs/StructTrain/TimeLearner/GitArtifactPublication.ru.md).
+
 Добавлен `posttune JOB.json --source-solo CASE_learned_state.json --runtime-manifest
 RUNTIME.json --wall-seconds 900 --output NEW_RUN` и portable
 `analyze NEW_RUN/run-manifest.json --format posttune-run`. Он использует реальную
