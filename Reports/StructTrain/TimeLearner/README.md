@@ -20,6 +20,7 @@ review does not imply acceptance of an entire report collection.
 | Validation | Artifact directories |
 |---|---|
 | Saved-model calibration ownership: six reproduced baseline failures; fixed 8 native + 4 independent checks per worker; source training remains unresolved | [Normal](s08-calibration-ownership-normal-a1/README.md), [ASan](s08-calibration-ownership-asan-a1/README.md) |
+| Ownership control soma/input reports: six complete matrices, 18 trial/soma pairs plus three complete externally consumed probe/soma plots; 9 overlapping checks, four selected overviews reviewed | [M40 cache receipt and selected PNG](s08-calibration-ownership-report-normal-a2/README.md) |
 | Native threshold-grid transaction, commit/rollback and context controls: 2 native + 17 independent per worker; full worker/PostTune matrix remains open | [Normal](s08-calibration-grid-normal-a2/README.md), [ASan](s08-calibration-grid-asan-a3/README.md) |
 | All-grid soma/input report metadata and selected figures: 16 reports, 10 complete matrices, 30 trial/soma pairs per dataset; full cache on M40 | [Normal](s08-calibration-grid-report-normal-a1/README.md), [ASan](s08-calibration-grid-report-asan-a1/README.md) |
 | Addressed absolute-clock correction: 52 native cases at seeded 131 s, 25 corrected data tests, 8 clock / 84 learned / 66 stopped primary trials; full gate pending | [Elder-1](s07-clock-fixed-elder1/README.md) |
