@@ -21,6 +21,7 @@
 #include "TimeLearner/NativeThresholdSupport.h"
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativePostTuneBoundary.h"
+#include "TimeLearner/NativeFinalizationBoundary.h"
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
