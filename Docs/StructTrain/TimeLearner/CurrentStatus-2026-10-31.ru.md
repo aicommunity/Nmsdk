@@ -531,3 +531,26 @@ Git содержит только compressed primaries, metadata и восемь
 filesystem при последней проверке имел около 475 MiB свободного места; перед
 новой сборкой нужна отдельная инвентаризация и освобождение подтверждённых
 дубликатов/кэшей. Уникальные исходные результаты не удалять.
+
+## Следующий рабочий подэтап: TL-037 legacy inference
+
+Ветка codex/timelearner-posttune-observation создана от develop с --no-ff merge
+проверенных calibration/transport prerequisites. Полный этап 8 открыт.
+[Повторная сверка и постановка](LegacyPostTuneObservation.ru.md) отличает
+старые уже исправленные findings от остаточного saved-matrix inference пути.
+На обоих workers baseline d8e2ad16 / PulseLib ded4b558 воспроизвёл 6 failures
+из 8: stale Result, stale sample evidence и false Success при непосещённом foil;
+две NaN controls прошли. PulseLib 39810a7 исправляет новый attempt scope.
+Full physical fixture A1 использовал неверный native-owned dispatch и остановлен
+с сохранением cancellation receipt; это не algorithm/ASan failure. Исправленный
+A2 root e3fe5340 проверяет 12 адресных cases через настоящий legacy scheduler;
+проверки ещё выполняются, source/build работающих jobs не меняются.
+
+Перед сборками Elder подтверждённо дедуплицированы только неактивные static
+archive duplicates: 1238 путей / 955 unique inodes до операции; свободное место
+выросло с 209297408 до 7338950656 bytes. Первичный inventory A2 остановился
+на /proc sshd permission до изменений. Исправленный A3 проверяет тип процесса
+до чтения exe, останавливается при обнаружении native/build activity и перед
+каждым hardlink повторно сверяет полные SHA. Исходники, первичные результаты
+и native executables не удалялись. Оба receipts будут опубликованы вместе
+с baseline evidence.

@@ -73,3 +73,29 @@ PulseLib 39810a760103d2e5d5a5b9e6ae6575290522b20c начинает новую in
 реальных free-run waveform cases: Classic/Branch, 2000/20000 Гц. Они сохраняют
 реальные soma/stimulus CSV, выбранную метрику, sample index и финальные состояния;
 не требуют научного Success и проверяют сохранность цели и индивидуальных L/Ns/R.
+
+## Физический fixture A1 и исправление постановки
+
+Root cb24c5e / PulseLib 39810a7: восемь fault-injection regressions на Elder
+прошли, но новый physical fixture ошибочно использовал NativeTrainingOwned
+construction. Такой owner штатно обходит legacy ACalculate; Classic2000
+достиг лимита 20000 ticks без завершения. Это ошибка fixture, не finding
+алгоритма и не ASan memory error. Оба A1 process остановлены через pidfd
+после проверки descendant ancestry, executable realpath и hash runtime;
+fixture-cancellation.json и частичные native logs сохранены. Полный 49-case
+A1 gate не принят.
+
+Root e3fe53408b861b49c0e0ddc6c3de9acc548a9e54 использует штатный legacy Build
+с отдельными class factories для physical cases и явно проверяет отсутствие
+NativeTrainingOwned. A2 сначала исполняет 12 адресных tests, без расширения
+на долгие regression suites до результата этого набора. Normal/ASan jobs
+выполняются отдельно; до terminal+raw audit полная приёмка не заявляется.
+
+Новый корневой анализатор/renderer `legacy-posttune-freerun` читает только
+реальные physical JSON/CSV. Он проверяет частоту, каждый tick, фактические
+импульсы, сумму сом, finite/finished sample states; не создаёт ProbeEvidence,
+V2 calibration proof, training certificate или model hash отсутствующего
+в legacy producer. Отсутствие spike markers означает «не записано».
+Масштабированные PNG/SVG/PDF строятся общим plotting.py; full interval, все
+сомы, реальные inputs и 100-tick zoom сохраняются. Физическое settling-окно
+этим диагностическим producer отдельно не сертифицируется.
