@@ -81,7 +81,8 @@ def time_views(begin, end, frequency):
     return views
 
 
-def render_soma(observation, channel, label, limits, output: Path):
+def render_soma(observation, channel, label, limits, output: Path, *,
+                potential_axis_label="Soma SumPotential [model units; SI unverified]"):
     # Lazy backend import: inventory/analyze and module import need no GUI/backend.
     import matplotlib
     matplotlib.use("Agg")
@@ -127,7 +128,7 @@ def render_soma(observation, channel, label, limits, output: Path):
                              alpha=.65,marker="x",markersize=3,clip_on=False)
             ax.set_xlim(left, right);ax.set_ylim(*y_limits)
             ax.set_xlabel("Native absolute time [s]")
-            ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
+            ax.set_ylabel(potential_axis_label)
             overlay.set_ylabel("Input [native generator units]", color="#a34d00")
             overlay.tick_params(axis="y", colors="#a34d00")
             ax.grid(True, alpha=.25)
