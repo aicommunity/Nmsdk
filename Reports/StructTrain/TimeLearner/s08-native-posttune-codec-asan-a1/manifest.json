@@ -1,0 +1,566 @@
+{
+  "kind": "native_posttune_configuration_mechanical_asan_proof",
+  "schema_version": 1,
+  "source_root": "d48837f1ad9e49029493932ddabffe214c2827c5",
+  "source_pulse": "30f737c8e445bc76be21c1e37eec1d1b99b90a6e",
+  "original_source_commit": "88c47ddfe0864db3f71e0f2cad5b8371465ca004",
+  "codec_cases": 3,
+  "codec_seconds": 3.487,
+  "original_production_jobs_decoded": 18,
+  "actual_owned_console_jobs": 2,
+  "leak_detection_enabled": false,
+  "legacy_parent_reader_checks": 13,
+  "legacy_parent_reader_seconds": 140.929,
+  "exact_transaction_and_model_bytes": true,
+  "archive_sha256": "7ec5ff0a73dd53a54f97a4d1af65458fc2342a71c61be3fdef9a17799285022f",
+  "files": [
+    {
+      "path": "baseline.json",
+      "bytes": 661,
+      "sha256": "6e59697795b15de723806502c7a0c1534e719485dff5c6de2b7f2489fd073fd0"
+    },
+    {
+      "path": "build.log",
+      "bytes": 4104,
+      "sha256": "7a60a3884149525b4cf91b1d25e35fd9389f53ef8d792a2103dd34a8d532ad2c"
+    },
+    {
+      "path": "checkout.log",
+      "bytes": 611,
+      "sha256": "1e56b7081e0837f681c1e6f5427d206eb41d34c1576b824870557f231773123b"
+    },
+    {
+      "path": "configure.log",
+      "bytes": 1355,
+      "sha256": "11a8104895c8f606829cb68b48daaa7315615d4eb727159e92403ee965a829c6"
+    },
+    {
+      "path": "console-ab.log",
+      "bytes": 597,
+      "sha256": "8ca3ae53d74210e7325388456c9ca80944b25b340b6e375fa6932b6c71683fa0"
+    },
+    {
+      "path": "disk-after.txt",
+      "bytes": 89,
+      "sha256": "67d126c0688182fdbffa5056e9a33378645e0893cde5abc863d0b4e985d9ef0c"
+    },
+    {
+      "path": "extract.log",
+      "bytes": 80,
+      "sha256": "948f9cebf0262a8f6e253dc960cb0eb18dc6f2b85e69d49d5a30250f484de946"
+    },
+    {
+      "path": "legacy-parent-reader-v38/checkout.log",
+      "bytes": 122,
+      "sha256": "e36089cea6b9fb6a8742ac950ceca05c023a5921e842a7651412cb11fc16001e"
+    },
+    {
+      "path": "legacy-parent-reader-v38/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "legacy-parent-reader-v38/reader.log",
+      "bytes": 2427,
+      "sha256": "f267b8116d1a7de76ca43ffd21809bc100a0d9f4d01bc9bb419d0996a0938f85"
+    },
+    {
+      "path": "legacy-parent-reader-v38/runner.sh",
+      "bytes": 838,
+      "sha256": "006dc2d5be9e796538361bf419f6982f43fe374f4d6219f339f6029dc4eaa9f1"
+    },
+    {
+      "path": "legacy-parent-reader-v38/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "legacy-parent-reader-v38/supervisor.pid",
+      "bytes": 8,
+      "sha256": "0205285ed05316888617dcbb6a20ea81bac0d36b8f952dc7322cde1ec823fb96"
+    },
+    {
+      "path": "live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "native.log",
+      "bytes": 912,
+      "sha256": "81e95610410b5a04fab9130177c059cae42febf4480a74bd1126c500a9ba50d5"
+    },
+    {
+      "path": "native.xml",
+      "bytes": 1396,
+      "sha256": "d32afce9f36aaedce125d65cbdee4a6940f852e1fb489b28f5b0686d45b6f3bf"
+    },
+    {
+      "path": "process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "runner.sh",
+      "bytes": 6359,
+      "sha256": "a2835de5546928b5188692200541ce08c300f56f2a5737ce3044c83ef7a188a2"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/job.json",
+      "bytes": 1772056,
+      "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1162896,
+      "sha256": "843103d086b1bd55ae3661b952f8560673178f74f8f05a92e330580d79498863"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 602841,
+      "sha256": "684ce7071247c36dcb0b52d8e4e9b1c9c58b32b69a094e158fa81f05ee6f57ae"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 14639,
+      "sha256": "7e015be7ce9c2e46c5e7320a51b88ca2fceda416052948c02d81a6b6dbe5869f"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5922,
+      "sha256": "fce1c588d21aed388d4d40d5fd689e6cc14eadc285ec0777940a679fbf9c3ff3"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 14750,
+      "sha256": "2c8239c5fb392e5d336f00ccb68ff0a37a7672a8141f1447b1801f494e14caba"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "5712c1e7693af8e680b5a5818da4fd6922b6e763f1b8a18f8f81ca13cd0935b3"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 14685,
+      "sha256": "ef5ce86a70e579db26f5795c8ec573c48c02d2418e5f57bf098047456858edef"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5905,
+      "sha256": "6906db06b4bf8466eb03fbbba0d0f83027703328c967f14975184f125953b6ff"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 14697,
+      "sha256": "fef19f9d639f44cd6c828f99a596dec4bf240977a9a8fb81e117c8e1852ae4b0"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5897,
+      "sha256": "83e0ab90bd52b3fad6a0ad2ae29bc16aeef98896b281725e7c81481a07a45925"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 14720,
+      "sha256": "e62a8ea31f3a3e7994d52344f00e7431e56ab04e2bff46f35475ce63e87b2513"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5937,
+      "sha256": "3d3837cc4ee3f3770b209218a173b284d653777a0c3ce6a4baa87b51bdb4c237"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 14687,
+      "sha256": "3ecd4a7ea4d74bf23ff17dad81067f9eeda92016c82459796a5e61b8b58ebd9e"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5931,
+      "sha256": "d06622319dbf2a79debc041b0e6f4ea6661fecf93627571d8d2090b50d247087"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 14720,
+      "sha256": "4dc7d2be71ba83caf0c8a3cc5707d11a7d18912f92910fcdc98efb54dfdaf637"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5924,
+      "sha256": "e5285014cc8b852b79b140fb62a3f7ee5bc84966791b3f88583cfe64a20b50a9"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 14708,
+      "sha256": "9befc9a953e3cc66475a8cf434b1e9202f30e4daf8c245cdbbbf83122827b76d"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5903,
+      "sha256": "69f045d8dd56ee9a542f154e3f640daedafc8ba454b36d5738d0d254b5080fbf"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 14695,
+      "sha256": "42e33e1006b8f52f24cac422c448028d3b35027b63e6bb8464e19b8f676c96e8"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5895,
+      "sha256": "1e7286d84875985e785a3ca143c3a3d46f218fdde93e55c16ba8c8277046fd78"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 14708,
+      "sha256": "8fa435d1d2477c04082337d05815fb97b364eb6f5c236c6ff6f86e30d3205f8f"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "57787b24030e8f61d8d4bf6d049f4dd9ed5d05c8cac2aedaff0572f5dcd86ec1"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 14724,
+      "sha256": "9c684d184d80e6169aa5506c1b138aed8dce567e9a734eb2cbf1588b2d220520"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5899,
+      "sha256": "7b790827a82cf64276c8cca108ef5b21a65c94b1a923e361a5884fa3d02cdf2a"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 14661,
+      "sha256": "b561e09dd2126ceac1b7021224231f15aebd853bd4bfe6436095e7a6ed56efd1"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5900,
+      "sha256": "732eef0eef0dd72da2520977d97e8aee16a4f1793b8497c201c0d073fc8630d5"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 14625,
+      "sha256": "8b7ac56947f6ba4cdebe85b446d51ea9d96fc03660c158749d390c186a73a3f7"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5897,
+      "sha256": "f37705253c462af14c942f244dc2d65477de4db18c1ac50a7b1e6d19401dca8e"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 14659,
+      "sha256": "8c70d299bdcaf23ed3e3d2e263c1472f0ac70a568347b2a6e862b751bbf9ad46"
+    },
+    {
+      "path": "runs/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5900,
+      "sha256": "016dde02d7a353c0348eabf8d558b6a1926ed311f844805cfed850acbd3cbdf5"
+    },
+    {
+      "path": "runs/Branch-synthetic/native/execution.json",
+      "bytes": 1490,
+      "sha256": "d29b05d76d8d92500b0373943ca7654e6bbba10a79e786b1f5d5fc66e5045dd7"
+    },
+    {
+      "path": "runs/Branch-synthetic/native/job.json",
+      "bytes": 2485874,
+      "sha256": "8f72f57d87cafaf1e04b3f125d50028a749cf64e23cbcbf241e99f83a9ce2459"
+    },
+    {
+      "path": "runs/Branch-synthetic/native/model.json",
+      "bytes": 2357871,
+      "sha256": "39d198c9f85022e175bc413cda215530a4674a6e160b7b39c7c5e9380c097469"
+    },
+    {
+      "path": "runs/Branch-synthetic/native/transaction.json",
+      "bytes": 26995980,
+      "sha256": "ae281d11b9581c507896901b4df8f1041c3e6f7edd565e24ce7a08ea8edacc41"
+    },
+    {
+      "path": "runs/Branch-synthetic/process/loaded-files.json",
+      "bytes": 6047,
+      "sha256": "6aa17d21cdbe35b2b7ff7b8dfeaebe924c8cf81f2c1eb4e4cfa52d59110ec336"
+    },
+    {
+      "path": "runs/Branch-synthetic/process/owned-process.json",
+      "bytes": 406,
+      "sha256": "f2c16e0a1f7f15dafddd22d62d084f8a04b2da9ede8a72fe009121b33a085585"
+    },
+    {
+      "path": "runs/Branch-synthetic/process/request.json",
+      "bytes": 790,
+      "sha256": "6440a0edde0336494fff1b926c4b93f7347d03fa4b65902acd2e1dfd25434f59"
+    },
+    {
+      "path": "runs/Branch-synthetic/process/result.json",
+      "bytes": 443,
+      "sha256": "89f0ff14c0a9f04137398400110bf8e39b1ded0c6e8d6f277e5b183d3a892382"
+    },
+    {
+      "path": "runs/Branch-synthetic/process/runtime.json",
+      "bytes": 31997,
+      "sha256": "e38b505a4834687a5f1e07e9d6a7499c60ce0f065647a5df51877d74a408504c"
+    },
+    {
+      "path": "runs/Branch-synthetic/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runs/Branch-synthetic/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runs/Branch-synthetic/run-manifest.json",
+      "bytes": 18421,
+      "sha256": "ce980edd44e3d6c4b5cf79823565fc65ea0c9c9928e778ba7c2d90cb86e275cc"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/job.json",
+      "bytes": 1917293,
+      "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1253734,
+      "sha256": "dbd812e2ca3d6c27ead3092e1a0c220de64643eaea479bf1224cf11f2eb1e03e"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "2a172df9a5e3481142f18ec5af42cbfaa077b0bcc7ab3174b525cf70d518d2ef"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5877,
+      "sha256": "191e5334256098c686984095a06b7d4b7b4e0837f7067fb37d8573d43d4d9da2"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5912,
+      "sha256": "1723e517dec139c4cc9babf2beaecdeed3699b9ff949bfabc40b5a306cf7f3b5"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "315978ba44f40b6d305d7e685d26261436631746cfb080c08b5a154eb51505e3"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5902,
+      "sha256": "286779360e58da03924b9b0545fc1a7a3e7138dbb7c755288557f38a11bbd3e5"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5963,
+      "sha256": "3ececc28d92650c2d0202b47169f3389239c273fa21402c1c359c2e8406f1e31"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5944,
+      "sha256": "fcedb412e495c8ee08575a11a74553ca97085a81a62feb96e27adbea5c2ca26e"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5933,
+      "sha256": "8cf65996ac2291e2bc2ab2bbcda602dfceda468ee52f4f114b32cee090e02a51"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5902,
+      "sha256": "5128e0891f795b87044149fb6a6e6a9ec62b4b0f78ae6ad49db945a3c7f3feb6"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5904,
+      "sha256": "01c135d87eb2785e3bccf924f274c7fc334c2c67fc78e3f6f884d24e497aa5d9"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "80b0c8ff7d4ad1f7058a037267c20989c35e58e81d1b02d564e20ef8fb19c304"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5910,
+      "sha256": "ae30479149db798ac6158228520d26cce80497997b7f1b7f3b8ba672f3a3d51b"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5910,
+      "sha256": "1a1cfb91272a17e4155753ddc66964f0c6c434b1282e53ee5c770efc0c8446e3"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5910,
+      "sha256": "4e876afa2e35e504e65c745782a66cc5a70b42933680320d441c36df98b8b4a7"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "runs/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5910,
+      "sha256": "2e6f8b014d6dfd7ac40bfa7937819caa16be06921d163c496531924472056148"
+    },
+    {
+      "path": "runs/Classic-auto_metric/native/execution.json",
+      "bytes": 1487,
+      "sha256": "d6fdef009af13d4aacc355614213af05ea98c6046ba666a86e01c047253a4a6a"
+    },
+    {
+      "path": "runs/Classic-auto_metric/native/job.json",
+      "bytes": 2682000,
+      "sha256": "d8cb5d8e0132cfadfcffaf318be0c4edc3ea824716b972584873ac7ff0e2ac4a"
+    },
+    {
+      "path": "runs/Classic-auto_metric/native/model.json",
+      "bytes": 7228361,
+      "sha256": "c7d989d94216cd8d2c0021a43e8825c7631b432b6d1984ae836acacbcd3972b0"
+    },
+    {
+      "path": "runs/Classic-auto_metric/native/transaction.json",
+      "bytes": 38868398,
+      "sha256": "832dfab6ea494615e39af734ca963a3aafe5f34ac91743347a8674c473efc6c2"
+    },
+    {
+      "path": "runs/Classic-auto_metric/process/loaded-files.json",
+      "bytes": 5717,
+      "sha256": "46074648d5dea5c28e820bacf07ce49552fb68a9b5a30dae72b3252764e22ccd"
+    },
+    {
+      "path": "runs/Classic-auto_metric/process/owned-process.json",
+      "bytes": 406,
+      "sha256": "bcdd3421addb2ba01654d7d6471236da67555ed911cdc06ece51085355c803c2"
+    },
+    {
+      "path": "runs/Classic-auto_metric/process/request.json",
+      "bytes": 799,
+      "sha256": "ac24052c2e4fdb6044b4c6b2170afac821d38227b5431da144511cb924229e80"
+    },
+    {
+      "path": "runs/Classic-auto_metric/process/result.json",
+      "bytes": 444,
+      "sha256": "11dfc7e71b28960a136fe1c44d9f7dc42cb92a8a35f749b2584160e0f7e2d85a"
+    },
+    {
+      "path": "runs/Classic-auto_metric/process/runtime.json",
+      "bytes": 31997,
+      "sha256": "e38b505a4834687a5f1e07e9d6a7499c60ce0f065647a5df51877d74a408504c"
+    },
+    {
+      "path": "runs/Classic-auto_metric/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runs/Classic-auto_metric/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runs/Classic-auto_metric/run-manifest.json",
+      "bytes": 20324,
+      "sha256": "1bcef6aed241d52a58330bed26bce4aed3059e4ee1bbb3891ae7eb1eb2cfb7e0"
+    },
+    {
+      "path": "runtime-before.json",
+      "bytes": 31997,
+      "sha256": "e38b505a4834687a5f1e07e9d6a7499c60ce0f065647a5df51877d74a408504c"
+    },
+    {
+      "path": "source-closure.txt",
+      "bytes": 689,
+      "sha256": "d0c7e0fbdabab2f45975dd5e42ea1f50940f49456b6c6b93aa35882cc66d876a"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "supervisor.pid",
+      "bytes": 8,
+      "sha256": "ff646e5018e15d2d5d4e7f42719984a97849d3d7479fbf03d9627bf92f13f113"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1033,
+      "sha256": "26d3f0d3c11690ed184c9a5007b99a3f25d1d3171516acc84f5149c1f369554e"
+    }
+  ],
+  "learner_dispatch_implemented": false,
+  "full_stage_8_accepted": false,
+  "scientific_verdict": null
+}
