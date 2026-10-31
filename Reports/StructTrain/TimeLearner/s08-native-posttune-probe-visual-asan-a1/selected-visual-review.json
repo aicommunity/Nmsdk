@@ -1,0 +1,107 @@
+{
+  "kind": "selected_probe_threshold_visual_review",
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "primary_proof_commit": "f54e9864592619d636ff01b8e1dfb86acd14cf30",
+  "primary_archive_sha256": "0d3c3a73c19aec44ed1e9cafa6b53f31de34340cf02790d0790aa8bc25f4b4b1",
+  "records": [
+    {
+      "path": "selected/Classic_weights-0000_overview.png",
+      "sha256": "e25dbb800419ec67c4d9757e444df97e5d3c27b6965c0d604320f3bb3108c555",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "weight_measurement",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    },
+    {
+      "path": "selected/Classic_weights-0000_detail.png",
+      "sha256": "21db729177616602c74cc3ab5815dae5ce2c4d49dc97582cfd10d2d8c7c74d06",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "weight_measurement",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    },
+    {
+      "path": "selected/Classic_final-model_overview.png",
+      "sha256": "cf854c8e252525c8ba9d1e270b03c9cee0f269825e76506d54482e90430755c4",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "final_model_responses",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    },
+    {
+      "path": "selected/Classic_final-model_detail.png",
+      "sha256": "03b0478b083ffa079ca5cfa05fb0c6d619f3c3d670cef613cf8293372c6cdf87",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "final_model_responses",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    },
+    {
+      "path": "selected/Branch_weights-0000_overview.png",
+      "sha256": "c1802a40e70ff68a798f257ba663f306472dff95765e6c4de009e680b0fc33f0",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "weight_measurement",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    },
+    {
+      "path": "selected/Branch_weights-0000_detail.png",
+      "sha256": "89bc7042bb364e8fa1465167b62bd2790d1132e4552e5232aa26bbfe748f088f",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "weight_measurement",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    },
+    {
+      "path": "selected/Branch_final-model_overview.png",
+      "sha256": "7064cbc742aa352e8f5b53750171945d7eda16d5464ef73a33aa21667088c885",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "final_model_responses",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    },
+    {
+      "path": "selected/Branch_final-model_detail.png",
+      "sha256": "ac2e040529c8f7aebd7debd303e9bc86dcd3eb24cb9497f0f2a5d7d0bf162237",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "role": "final_model_responses",
+      "readability_accepted": true,
+      "source_primary_binding_verified": true
+    }
+  ],
+  "scope": "First soma / target only: Classic and Branch, measurement and final model, overview and first detail view.",
+  "observations": [
+    "Soma and measured input overlays, axis labels and model identities are legible at 1920x960.",
+    "Overview shows both input pulses; detail resolves the first response without downsampling.",
+    "Potential remains in model units; SI units are not inferred.",
+    "Soma polyline connects native samples; the stepped input is sampled. No sub-tick causal inference."
+  ],
+  "full_cache_visually_accepted": false,
+  "pdf_svg_visually_accepted": false,
+  "scientific_verdict": null
+}
