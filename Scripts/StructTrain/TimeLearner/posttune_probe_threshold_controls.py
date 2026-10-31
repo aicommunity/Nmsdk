@@ -7,8 +7,7 @@ from pathlib import Path
 from .model_identity import canonical_model_sha256 as sha
 from .native_calibration_worker import audit_run_manifest
 from .native_evidence import load, number, require
-from .process_runner import execute
-from .runtime import verify_runtime
+from .process_runner import execute, verify_runtime
 
 
 CASES = {"Classic": "Classic-auto_metric", "Branch": "Branch-synthetic"}
