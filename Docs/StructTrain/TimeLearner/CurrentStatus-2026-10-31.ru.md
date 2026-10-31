@@ -35,8 +35,20 @@ production calibration/PostTune controller.
 | Frozen scorer/report, root b22c15fec | 9/9 checks прошли на normal ce7e81e (55.393 s); прежние 5/5 и 9/9 не складываются как уникальные tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5, отдельно от нового 16-case gate. ASan 9/9 прошёл на ce7e81e; данные опубликованы в a4984f1. Это тот же scoped набор, а не полная mode/profile matrix. |
 | Полные calibrated reports, root ff432f559 | M40 построил Classic/Branch: 4 предъявления двух паттернов × все сомы, 12 trial/soma pairs, 164 PNG и SVG/PDF. 3 report + 5 plotting checks прошли на normal и ASan данных. Git содержит 12 выбранных PNG и метаданные; полный cache — M40. Четыре графика просмотрены вручную. |
 | Native grid transaction, PulseLib dcc266a → c36e272 | Normal 2/2 прошли на обоих снимках, включая native commit, rollback/cancel и clock/frequency guards. Independent 17/17 (8 transaction + 9 calibrated regressions) прошли; bundle 2dc5825 опубликован. ASan 2/2 native + 17/17 checks прошли (350520ae); ASan reports 27/27 прошли (838c1963). Production CLI/worker и явная связка экспортированной модели с полным CalibrationResult/RunManifest остаются открытыми. |
-| Владение калибровочной пробой, PulseLib b167d7a → fad7aed | На исходном b167d7a реальные сохранённые модели Classic/Branch воспроизвели все шесть отрицательных контролей: чужой результат потреблялся с откатом модели; внешнее чтение собственного результата оставляло ожидание; импорт идентичного пакета без Build/Reset не обнаруживался. Исправление fad7aed проверяет идентичность recognition-контекста и принадлежность пробы до Take/Cancel. Root 0b89622 запускает по восемь normal/ASan контролей, включая обычную полную калибровку и удержание старого context token внешним наблюдателем. Приёмка исправления пока открыта; исходные 0/6 — воспроизведение дефекта, а не ASan finding и не научный результат. |
+| Владение калибровочной пробой, PulseLib b167d7a → fad7aed | Baseline: 0/6 воспроизвели три дефекта обоих learner. Исправленный root 0b89622 прошёл normal 8/8 (47.989 s) и ASan 8/8 (310.405 s), включая normal grid flow и удержание старого context token. Reader 322b118 прошёл 4/4 на каждом наборе (19.848 / 17.200 s). Lossless primary bundles опубликованы: normal 56b64713, ASan 5998cc72. Это scoped ownership acceptance; source training search_unresolved, production worker и полная матрица остаются открытыми. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
+
+Ownership bundles: [normal](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-normal-a1/README.md)
+и [ASan](../../../Reports/StructTrain/TimeLearner/s08-calibration-ownership-asan-a1/README.md).
+Они хранят 249 / 236 файлов в сжатых архивах 1674164 / 1612044 bytes,
+включая первичные source CSV/модели, raw observations, native XML/logs и runtime
+receipts. На baseline все шесть controls действительно упали; старый reader-a1
+с ошибкой обращения к duration не принят, исправленный reader-a2 проверял те
+же native данные без повторного Train. ASan publisher сначала завершился 128
+из-за отсутствия HTTPS credentials; тот же commit 5998cc72 затем опубликован
+через настроенный Git SSH с проверкой remote SHA. Приняты именно native/reader
+gates, а не первоначальный неуспешный publisher. Текущая правка PulseLib
+0dc84fb — только документация поверх проверенного кода fad7aed.
 
 Дополнительная проверка реализации `ce7e81e002c802412ce50c1f2b2f76ffa7215b2a`
 (root `0f53ab4ec420b921f766cbd78a7fd10d248b8a86`) связывает proof не только
