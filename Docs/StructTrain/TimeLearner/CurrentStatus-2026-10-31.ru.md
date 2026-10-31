@@ -284,13 +284,30 @@ Frozen scorer/direct trial audit/report adapter теперь реализова�
 
 Root b82fb74f15353b1bafd3a1df09334860ad4ad12b добавил JSON serialize/parse
 перед native import finite threshold candidates, включая -0.0. Baseline gate
-на Elder запущен отдельно от старой ASan матрицы; до terminal результата
-этот новый контракт не считается проверенным. ModelIdentity уже
+на Elder завершён: 2/2 native Classic/Branch прошли после JSON serialize/parse.
+Подтверждённого signed-zero дефекта нет. ModelIdentity уже
 канонизирует знак нуля; это дополнительная проверка, а не установленный дефект.
 
 В owner import PulseLib dd7cd4fd9982682403bc7799e61c0527f7d461d2 исправлен
 QJsonValueRef из временного QJsonObject при чтении calibration.threshold.
 Qt 5 non-const operator[] возвращает proxy: auto сохранял ссылку на объект,
 уничтоженный в конце выражения. Явный QJsonValue владеет значением.
-Отдельный runtime gate исправленного снимка ещё необходим; прежние
-успешные проверки не доказывают отсутствие undefined behavior.
+Исправленный root `8cfd72eb17c8b762eea590afa6018dfa363f932a` прошёл на Elder
+6/6 native (145460 ms) и 6/6 independent checks (11.818 s), без пропусков.
+Reader принимает либо полный исторический набор eight signed controls, либо
+полный новый twelve-file набор с четырьмя negative-zero controls; частичные
+наборы отклоняются. На M40 ASan job PID 3087746 использует отдельный runtime
+и не меняет старый 20-кГц процесс. До terminal acceptance его PASS не заявляется.
+Прежние успешные проверки не доказывают отсутствие undefined behavior.
+
+Перед сборкой на Elder выявлен недостаток места. Для двадцати дублирующихся
+статических библиотек в неактивных runtime проверены полные SHA256 и размер;
+дубли заменены hardlinks на сохранённые идентичные файлы. Освобождено
+215742184 bytes. Первичные данные не удалены; inventory и receipt сохранены
+в baseline readback. Каталоги активных экспериментов не затрагивались.
+
+[Normal JSON/owner evidence](../../../Reports/StructTrain/TimeLearner/s08-threshold-json-owner-normal-a1/README.md)
+опубликован commit `f42c1911fe8ac602ae921e933caf5c45117ac9fb`: 426 файлов,
+829348-byte архив. Восемнадцать package audits относятся к baseline/final
+данным, а не к восемнадцати независимым обучениям. ASan нового снимка
+остаётся отдельной незавершённой проверкой.
