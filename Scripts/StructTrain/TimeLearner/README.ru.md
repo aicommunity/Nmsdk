@@ -3,8 +3,10 @@
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 Import не запускает эксперименты. Реализованы `inventory`, native-подмножество
 `analyze`, `report`, `bundle`, `publish`, `history resolve` и анализ измерений
-`calibrate run/select/confirm`. Runtime/process supervisor также имеют module CLI.
-Сквозные prepare/train/export/evaluate, scheduler и полная миграция ещё не готовы.
+`calibrate run/select/confirm`, owned `train/export/evaluate` и portable
+`analyze --format pipeline-run`. Runtime/process supervisor также имеют module CLI.
+Общий prepare, сквозной scheduler и полная миграция ещё не готовы; новые native
+операции имеют явно ограниченный контракт, описанный ниже.
 
 ```text
 python -m Scripts.StructTrain.TimeLearner analyze record.json --format domain
