@@ -1463,16 +1463,18 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
     Artifact(rig.name+"_threshold_source.json",QJsonDocument(source).toJson());
     for(double invalid:{std::numeric_limits<double>::infinity(),-std::numeric_limits<double>::infinity(),std::numeric_limits<double>::quiet_NaN()})
         EXPECT_THROW(CreateNativeThresholdCandidate(source,invalid,core.storage,core.environment,implementation),std::invalid_argument);
-    for(double finiteThreshold:{0.,-1.})
+    for(double finiteThreshold:{0.,-0.,-1.})
     {
         const auto clock=rig.environment->GetTime().GetTime();
         const auto signedCandidate=CreateNativeThresholdCandidate(source,finiteThreshold,core.storage,core.environment,implementation);
-        auto prepared=PrepareNativeRecognitionState(signedCandidate,core.storage,core.environment,implementation);
+        // Exercise the persisted API, not only the in-memory QJsonObject.
+        const auto persisted=ParseNativeRecognitionState(QJsonDocument(signedCandidate).toJson().toStdString());
+        auto prepared=PrepareNativeRecognitionState(persisted,core.storage,core.environment,implementation);
         auto zone=prepared->neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
         EXPECT_DOUBLE_EQ(zone->Threshold.GetData(),finiteThreshold);EXPECT_EQ(source,sourceCopy);
         EXPECT_EQ(rig.Revision(),original);
         EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
-        Artifact(rig.name+(finiteThreshold==0.?"_numeric_domain_zero_candidate.json":"_numeric_domain_negative_candidate.json"),
+        Artifact(rig.name+(finiteThreshold==0.?(std::signbit(finiteThreshold)?"_numeric_domain_negative_zero_candidate.json":"_numeric_domain_zero_candidate.json"):"_numeric_domain_negative_candidate.json"),
             QJsonDocument(signedCandidate).toJson());
     }
     const auto baseName=rig.name;
