@@ -232,7 +232,12 @@ template<class Owner> void ManagedFinalization(int calculateMode,bool owned=fals
         flag->Activity=true;flag->SetGlobalTimeStep(2000);UEPtr<UContainer> node=flag;
         EXPECT_NE(model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;
         if(connected)EXPECT_TRUE(owner->IsNeedToTrain.SetPointer(0,&flag->Value));
-        else owner->IsNeedToTrain=true;
+        else {
+            // This fixture restores administrative request state around an
+            // imported finished Solo snapshot. The public false -> true setter
+            // intentionally starts new training and invalidates that boundary.
+            owner->IsNeedToTrain.SetDataDirect(true);
+        }
         owner->EnablePostTrainTuning=true;owner->AutoCalibrateFixedLTZThreshold=true;
         owner->EnablePostTrainMidThreshold=false;owner->PostTrainTipResistanceMode=PostTrainTune::kPostTipKeepDone;
         const auto boundary=CaptureNativeFinalizationBoundary(*owner,implementation);
