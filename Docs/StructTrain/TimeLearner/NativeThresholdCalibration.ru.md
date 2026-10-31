@@ -45,7 +45,7 @@ August 4/8–6/8 и восьмипаттерновая scientific matrix эти�
 Внутри recognition trial он frozen: прямая live-подмена порога запрещена.
 Создание/импорт не исполняют Calculate и не продвигают model time.
 
-## Обязательный следующий алгоритм
+## Протокол подбора порога и подтверждения
 
 ```text
 freeze source recognition state and calibration data/design
@@ -415,7 +415,7 @@ SVG/PDF, отсутствие downsampling, zoom не менее 8 px/native tic
 production selection/commit/rollback orchestration, полный PostTune,
 независимый Test, переносимые Git-артефакты и приёмка остальных режимов.
 
-## Native outer-loop grid driver: реализация до runtime acceptance
+## Native outer-loop grid driver: реализация и адресная приёмка
 
 Общий `NativeThresholdCalibrationTransaction<Owner>` связывает существующие
 candidate/probe/assessment/calibrated-state API в исполняемую последовательность.
@@ -435,8 +435,9 @@ raw samples, selected index, confirmation и итоговый package; model pro
 Добавлены отдельные реальные Classic/Branch integration cases: успешный grid
 с первым silent и вторым разделимым порогом, NonSeparable, BudgetExhausted,
 queued/running cancellation, RAII cancellation, запрет второго driver при занятом
-owner, неверный design и внешний Reset. Это ещё не доказанные PASS: необходимы
-серверные normal/ASan gates и независимая проверка полного transaction report.
+owner, неверный design и внешний Reset. Эти адресные controls прошли normal и ASan gates: 2 native + 17 independent
+checks на каждом серверном снимке; первичные данные доступны в связанных
+bundles. Это не приёмка всех режимов/моделей или всего этапа 8.
 Production CLI/worker интеграция и полная PostTune matrix остаются открытыми.
 
 Независимый `calibration_transaction_evidence.py` повторно оценивает каждую
@@ -447,3 +448,12 @@ confirmation. CLI `analyze --format calibration-transaction --source-solo ...`
 частичные/cancel/recovery records не становятся калибровкой. Даже согласованный
 отчёт не доказывает исполнение процесса или физический rollback; эти свойства
 принимаются отдельно по native integration/runtime evidence.
+
+Адресная grid приёмка: root c83f0ca4c / PulseLib c36e272, Classic/Branch
+N1/2000 Hz — normal 2/2 + 17/17 и ASan 2/2 + 17/17. All-pattern reports
+на обоих наборах: 16 records, 10 complete matrices, 30 trial/soma pairs.
+Первый normal renderer прошёл 27 checks; уточнение actual LT spike legend
+прошло 10 затронутых checks без повторного Train. ASan renderer с этой
+легендой прошёл все 27. В current normal подборке 16 PNG, в ASan — два.
+Выборочная visual QA не равна полной приёмке всей коллекции.
+Оперативные SHA, артефакты и оставшиеся требования перечислены в CurrentStatus.

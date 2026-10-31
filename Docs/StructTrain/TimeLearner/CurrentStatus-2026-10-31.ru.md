@@ -34,7 +34,7 @@ production calibration/PostTune controller.
 | Calibrated state, PulseLib 353882b → ce7e81e | Normal 2/2 прошли на обоих снимках. Усиленный ce7e81e проверил import/export/Reset/frozen probes и отказы при неправильных bindings. Данные и модели опубликованы commit 9746ea4; ASan 2/2 прошёл на обоих снимках, включая усиленный ce7e81e. ASan bundle a4984f1 опубликован. |
 | Frozen scorer/report, root b22c15fec | 9/9 checks прошли на normal ce7e81e (55.393 s); прежние 5/5 и 9/9 не складываются как уникальные tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5, отдельно от нового 16-case gate. ASan 9/9 прошёл на ce7e81e; данные опубликованы в a4984f1. Это тот же scoped набор, а не полная mode/profile matrix. |
 | Полные calibrated reports, root ff432f559 | M40 построил Classic/Branch: 4 предъявления двух паттернов × все сомы, 12 trial/soma pairs, 164 PNG и SVG/PDF. 3 report + 5 plotting checks прошли на normal и ASan данных. Git содержит 12 выбранных PNG и метаданные; полный cache — M40. Четыре графика просмотрены вручную. |
-| Native grid transaction, PulseLib dcc266a → c36e272 | Normal 2/2 прошли на обоих снимках, включая native commit, rollback/cancel и clock/frequency guards. Independent 17/17 (8 transaction + 9 calibrated regressions) прошли; bundle 2dc5825 опубликован. ASan нового driver ещё выполняется. Production CLI/worker и полный grid в standalone model proof остаются открытыми. |
+| Native grid transaction, PulseLib dcc266a → c36e272 | Normal 2/2 прошли на обоих снимках, включая native commit, rollback/cancel и clock/frequency guards. Independent 17/17 (8 transaction + 9 calibrated regressions) прошли; bundle 2dc5825 опубликован. ASan 2/2 native + 17/17 checks прошли (350520ae); ASan reports 27/27 прошли (838c1963). Production CLI/worker и явная связка экспортированной модели с полным CalibrationResult/RunManifest остаются открытыми. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
 Дополнительная проверка реализации `ce7e81e002c802412ce50c1f2b2f76ffa7215b2a`
@@ -386,3 +386,47 @@ commit `4d7051915400a193a9ecd3c3203b53bc1f22b020`, 302 файла / 669704 bytes
 Bin 9af8a5c7cbcd94c76930b2b9928f2c307a98143b также содержит только правки
 документации. Runtime evidence остаётся привязан к фактически собранным
 commits c83f0ca4c / c36e272 / 5e9d3784, без подмены происхождения.
+
+## Завершённая scoped ASan/visual приёмка grid driver
+
+ASan root c83f0ca4c / PulseLib c36e272: 2/2 native, 1411630 ms.
+Independent reader b1b8f0611: 17/17, 125.484 s.
+[ASan primary bundle](../../../Reports/StructTrain/TimeLearner/s08-calibration-grid-asan-a3/README.md)
+commit 350520aec8905eceee385b816004d0cecdbc4306: 230 файлов,
+1196712 bytes. Ошибка flags harness a2 сохранена отдельно; native tests
+исполнены исправленным a3. Leak detection выключен.
+
+[ASan all-pattern reports](../../../Reports/StructTrain/TimeLearner/s08-calibration-grid-report-asan-a1/README.md)
+commit 838c19639d899bba55f857dd9bb187d88b19b8b9: 16 reports, 10 матриц,
+30 trial/soma pairs; 27/27 checks, 142.008 s. Git содержит 108 metadata
+members в 70380 bytes и два выбранных PNG; полный cache — M40. Model revisions,
+пороги и raw fresh-confirmation observations совпали с normal контролем.
+Это deterministic повторяемость, а не независимые научные обучения.
+
+[Normal visual bundle](../../../Reports/StructTrain/TimeLearner/s08-calibration-grid-report-normal-a1/README.md)
+обновлён в 387d400eac055d8d8916dc493b523d47386724f6: 107 metadata members /
+69784 bytes, 16 выбранных PNG. Четыре текущих панели просмотрены вручную
+в исходном размере; два выбранных ASan counterparts побайтово идентичны
+проверенным normal PNG. Полная visual acceptance 1448-file cache не заявлена.
+
+Дополнительный receipt 8dfacdb23a12d919166fa8ad4269742c5a64a606 проверяет
+именно реально работающий процесс старого assessment job, а не только
+сохранённый baseline runtime. Hash /proc/PID/exe совпал с его собственным
+pre-run manifest; старый runtime/source/build не изменялись. Старый полный
+ASan gate продолжает отдельную серию и не считается завершённым по этим двум
+новым fixtures.
+
+Следующий обязательный блок: production native worker/CLI и RunManifest,
+явно связывающий модель, полный CalibrationResult/grid report и исходные
+данные проверяемыми SHA. Предпочтителен связанный immutable run bundle,
+сохраняющий метод выбора, данные, порог и confirmation; текущее отсутствие
+полного grid в standalone model proof не разрешает терять provenance.
+Полный PostTune и mode/profile/frequency matrix остаются открытыми.
+
+До расширения приёмки добавить adversarial regression очереди: внешний
+потребитель забирает результат пробы, ставит чужую пробу или импортирует
+тот же package без owner Build/Reset. Пока приняты owner Reset, clock и
+frequency guards; владение очередью/instance в этих дополнительных сценариях
+не доказано. Проверить запрет чужого Take/rollback и отсутствие зависания,
+используя готовые source archives без нового Train. Это следующий проверочный
+сценарий, а не заявление о воспроизведённом runtime-дефекте.
