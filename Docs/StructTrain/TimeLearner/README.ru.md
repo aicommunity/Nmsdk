@@ -11,6 +11,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Cold native Train/export/evaluate: production-команды и границы приёмки](NativePipelineWorker.ru.md).
 - [Повторная проверка границы наблюдений legacy PostTune inference](LegacyPostTuneObservation.ru.md).
 - [Native PostTune: сохраняемые кандидаты и незавершённый измерительный контур](NativePostTuneCandidates.ru.md).
+- [Фактические результаты классификации: положительный контроль и молчание последних кандидатов](ClassificationResults-2026-10-31.ru.md).
 - [Состояние 30.10: принятые подэтапы, доказательства и полный остаток плана](CurrentStatus-2026-10-30.ru.md).
 - [Приёмка 28.10: full post-fix gate, native completed state и child merges](PooledFullAcceptance.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
