@@ -26,8 +26,15 @@ class ThresholdContractEvidenceTest(unittest.TestCase):
         cls.root = Path(value)
         cls.signed = sorted(cls.root.glob("*_numeric_domain_*_candidate.json"))
         cls.legacy = sorted(cls.root.glob("*_legacy_v1_candidate.json"))
-        if len(cls.signed) != 8 or len(cls.legacy) != 4:
-            raise RuntimeError("requires Classic/Branch x legacy/dispersed x zero/negative and four v1 roundtrips")
+        bases = {path.name.removesuffix("_legacy_v1_candidate.json") for path in cls.legacy}
+        expected = {base+"_numeric_domain_"+domain+"_candidate.json"
+                    for base in bases for domain in ("zero", "negative")}
+        negative_zero = {base+"_numeric_domain_negative_zero_candidate.json" for base in bases}
+        actual = {path.name for path in cls.signed}
+        # Historical snapshots have eight files. New snapshots must carry all
+        # four persisted negative-zero controls; a partial extension is invalid.
+        if len(cls.legacy) != 4 or len(bases) != 4 or actual not in (expected, expected | negative_zero):
+            raise RuntimeError("requires complete Classic/Branch x legacy/dispersed signed-domain controls")
 
     def test_zero_and_negative_candidates_preserve_every_other_parameter(self):
         for path in self.signed:
@@ -37,6 +44,9 @@ class ThresholdContractEvidenceTest(unittest.TestCase):
             self.assertEqual(package["candidate_record"]["algorithm"], "explicit-native-threshold-v2")
             self.assertEqual(result["threshold"], 0. if "_zero_" in path.name else -1.)
             self.assertFalse(result["calibrated"])
+            if "_negative_zero_" in path.name:
+                positive_zero = load(path.with_name(base+"_numeric_domain_zero_candidate.json"))
+                self.assertEqual(package["model_revision"], positive_zero["model_revision"])
 
     def test_legacy_positive_only_records_still_match_native_archives(self):
         for path in self.legacy:
@@ -46,7 +56,7 @@ class ThresholdContractEvidenceTest(unittest.TestCase):
             self.assertTrue(result["threshold_derivation_verified"])
 
     def test_negative_candidate_cannot_be_relabelled_as_legacy_v1(self):
-        path = next(path for path in self.signed if "_negative_" in path.name)
+        path = next(path for path in self.signed if path.name.endswith("_numeric_domain_negative_candidate.json"))
         package = load(path);base = path.name.split("_numeric_domain_", 1)[0]
         record = package["candidate_record"];record["algorithm"] = "explicit-native-threshold-v1"
         package["neuron"]["metadata"]["calibration"]["candidate_record"] = copy.deepcopy(record)

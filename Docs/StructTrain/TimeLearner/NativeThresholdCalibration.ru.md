@@ -11,7 +11,13 @@
 полная visual acceptance не заявлена. Последующие разделы сохраняют последовательность
 реализации и промежуточных gates; оперативная сводка — в CurrentStatus-2026-10-31.
 
-В двухпаттерновой fixture калибровка подтверждена на reset-per-trial primary pair.
+ASan контроль persistence 2/2, calibrated state 2/2 и независимый reader 9/9
+также прошли; [первичные данные и модели](../../../Reports/StructTrain/TimeLearner/s08-calibrated-asan-a2/README.md)
+опубликованы. Report/plot checks 8/8 прошли и на ASan данных. Полная матрица
+всех режимов/частот/профилей остаётся открытой.
+
+Исходное обучение обеих моделей имеет `search_unresolved`; калибровка
+не создаёт сертификат сходимости. В двухпаттерновой fixture калибровка подтверждена на reset-per-trial primary pair.
 Позднейшие preserve-dynamics пробы дают target outside spike и FN: обе модели имеют
 TP=1,FN=1,TN=2,FP=0 по полному набору. Порядок/позиция и reset policy в нём
 совместно меняются, поэтому это не причинная оценка reset и не independent Test.

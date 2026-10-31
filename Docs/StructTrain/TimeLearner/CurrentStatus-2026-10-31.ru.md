@@ -29,18 +29,18 @@ production calibration/PostTune controller.
 |---|---|
 | Potential baseline, PulseLib 7f17735 | 16 native, 29 independent и отдельные 8 частично перекрывающихся checks прошли; compact bundles опубликованы. Это собственный снимок. |
 | Raw validator/assessment, PulseLib 25cf6a5 | 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Полная ASan приёмка открыта. |
-| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate завершён. Его reader a1 обнаружил ошибку glob; reader a2 проверяет те же данные без нового Train. Отдельный ASan 6/6 native + 6/6 Python завершён с exit 0; это не полный ASan 16-case matrix. |
-| Persisted observations, PulseLib fece852 | Normal 2/2 Classic/Branch при 2000 Гц с roundtrip/corruption checks прошёл; данные включены в normal bundle 9746ea4. ASan выполняется. |
-| Calibrated state, PulseLib 353882b → ce7e81e | Normal 2/2 прошли на обоих снимках. Усиленный ce7e81e проверил import/export/Reset/frozen probes и отказы при неправильных bindings. Данные и модели опубликованы commit 9746ea4; ASan этого API ещё выполняется. |
-| Frozen scorer/report, root b22c15fec | 9/9 checks прошли на normal ce7e81e (55.393 s); прежние 5/5 и 9/9 не складываются как уникальные tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5, отдельно от нового 16-case gate. ASan readers ещё ожидаются. |
-| Полные calibrated reports, root ff432f559 | M40 построил Classic/Branch: 4 предъявления двух паттернов × все сомы, 12 trial/soma pairs, 164 PNG и SVG/PDF. 3 report + 5 plotting checks прошли. Git содержит 12 выбранных PNG и метаданные; полный cache — M40. Четыре графика просмотрены вручную. |
+| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate завершён. Его reader a1 обнаружил ошибку glob; исправленный reader a2 прошёл 35/35 на тех же данных без нового Train. Опубликован bundle e8305ced. Отдельный ASan 6/6 native + 6/6 Python завершён с exit 0; это не полный ASan 16-case matrix. |
+| Persisted observations, PulseLib fece852 | Normal 2/2 Classic/Branch при 2000 Гц с roundtrip/corruption checks прошёл; данные включены в normal bundle 9746ea4. ASan 2/2 прошёл; первичные данные опубликованы в a4984f1. |
+| Calibrated state, PulseLib 353882b → ce7e81e | Normal 2/2 прошли на обоих снимках. Усиленный ce7e81e проверил import/export/Reset/frozen probes и отказы при неправильных bindings. Данные и модели опубликованы commit 9746ea4; ASan 2/2 прошёл на обоих снимках, включая усиленный ce7e81e. ASan bundle a4984f1 опубликован. |
+| Frozen scorer/report, root b22c15fec | 9/9 checks прошли на normal ce7e81e (55.393 s); прежние 5/5 и 9/9 не складываются как уникальные tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5, отдельно от нового 16-case gate. ASan 9/9 прошёл на ce7e81e; данные опубликованы в a4984f1. Это тот же scoped набор, а не полная mode/profile matrix. |
+| Полные calibrated reports, root ff432f559 | M40 построил Classic/Branch: 4 предъявления двух паттернов × все сомы, 12 trial/soma pairs, 164 PNG и SVG/PDF. 3 report + 5 plotting checks прошли на normal и ASan данных. Git содержит 12 выбранных PNG и метаданные; полный cache — M40. Четыре графика просмотрены вручную. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
 Дополнительная проверка реализации `ce7e81e002c802412ce50c1f2b2f76ffa7215b2a`
 (root `0f53ab4ec420b921f766cbd78a7fd10d248b8a86`) связывает proof не только
 с model hash/frequency, но и с реальными soma bindings и LTZone path/class.
 Неверный descriptor или лишние soma channels теперь отклоняются и native import,
-и Python auditor. Для этой добавки поставлены a2 native/9-test reader gates.
+и Python auditor. Для этой добавки a2 native 2/2 и reader 9/9 gates прошли на normal и ASan снимках; это не полная ASan матрица всех режимов.
 
 [Syntax evidence](../../../Reports/StructTrain/TimeLearner/s08-calibrated-syntax-m40-a2/README.md)
 содержит 22 metadata/log files в 7332-byte архиве, commit
@@ -62,8 +62,10 @@ Reader fix root `d5c74bad03f46cc66d5b1271ea923f05bce5c0b5`: glob
 базовых файла и либо полный набор четырёх signed-domain файлов, либо его
 отсутствие в legacy snapshots. Неизвестные/неполные наборы не игнорируются.
 Общий math test проверяет оба домена по тем же actual frames. Собственный
-35-test reader `s08-threshold-signed-full-audit-normal-a2` выполняется на ранее
-успешном native gate; а1 и его диагностика сохраняются как неуспешная попытка.
+35-test reader `s08-threshold-signed-full-audit-normal-a2` прошёл на ранее
+успешном native gate; а1 и его диагностика сохранены как неуспешная попытка.
+[Signed full normal bundle](../../../Reports/StructTrain/TimeLearner/s08-threshold-signed-full-normal-a1/README.md)
+содержит 942 файла в 8271552-byte архиве; producer и reader snapshots указаны раздельно.
 
 [Calibrated normal bundle](../../../Reports/StructTrain/TimeLearner/s08-calibrated-normal-a2/README.md)
 опубликован commit `9746ea4ba908b3030762fd6c276809142f27b8ce`: 581 файл,
@@ -74,7 +76,9 @@ raw proof, gates и готовыми frozen evaluation specs/metrics.
 12 выбранных PNG и 26740-byte metadata archive; полный cache не загружен в Git.
 Git-only перенос на M40 проверил все 581 member hashes; метрики воспроизведены.
 
-В этом двухпаттерновом контроле обе reset-per-trial пары удовлетворяют criterion.
+В этом двухпаттерновом контроле исходное обучение обеих моделей завершилось
+с `search_unresolved`; подтверждение калибровки не меняет этот статус.
+Обе reset-per-trial пары удовлетворяют criterion.
 В последующих preserve-dynamics пробах target даёт outside spike и FN;
 суммарно TP=1,FN=1,TN=2,FP=0, accuracy=3/4. Позиция/порядок и reset policy
 не разделены: причинный эффект одного reset этим не доказан. Это не August replay
@@ -86,7 +90,16 @@ Git-only перенос на M40 проверил все 581 member hashes; ме
 отрицательный контроль проверяет отсутствие partial report при missing backend.
 Повтор использовал существующий M40 plot-venv-a1, runtime/interpreter versions
 сохранены. Старый queued ASan report остановлен до генерации (143, причина записана)
-и заменён исправленным a2, ожидающим ASan модели/reader. Native jobs не прерывались.
+и заменён исправленным a2. Новый ASan report завершён: те же 3 report + 5 plotting
+checks прошли. Native jobs не прерывались. Полный cache хранится на M40;
+ручная visual acceptance всех ASan графиков не заявляется.
+
+[Calibrated ASan bundle](../../../Reports/StructTrain/TimeLearner/s08-calibrated-asan-a2/README.md)
+опубликован commit `a4984f1baeb1bb74b3e2cbbc938ec76f5c231f03`: 1171 файл,
+3093212 bytes. Включены persistence, обе версии calibrated native proofs,
+source CSV, модели, девять reader checks, frozen specs/metrics и report metadata.
+Normal и ASan модели имеют одинаковые semantic revisions и результаты 3/4.
+Это scoped воспроизводимость двух fixtures, не независимые случайные обучения.
 
 ## Журнал проверок и уточнений за день
 
@@ -266,3 +279,18 @@ Frozen scorer/direct trial audit/report adapter теперь реализова�
 4/8–6/8 остаются рабочими наблюдениями исходного протокола. Научные 8/8 не
 являются условием завершения рефакторинга. Изменения порога не переносят
 сертификат solo Exact на новую recognition модель.
+
+## Следующая проверка: persisted numeric boundary и Qt 5 owner import
+
+Root b82fb74f15353b1bafd3a1df09334860ad4ad12b добавил JSON serialize/parse
+перед native import finite threshold candidates, включая -0.0. Baseline gate
+на Elder запущен отдельно от старой ASan матрицы; до terminal результата
+этот новый контракт не считается проверенным. ModelIdentity уже
+канонизирует знак нуля; это дополнительная проверка, а не установленный дефект.
+
+В owner import PulseLib dd7cd4fd9982682403bc7799e61c0527f7d461d2 исправлен
+QJsonValueRef из временного QJsonObject при чтении calibration.threshold.
+Qt 5 non-const operator[] возвращает proxy: auto сохранял ссылку на объект,
+уничтоженный в конце выражения. Явный QJsonValue владеет значением.
+Отдельный runtime gate исправленного снимка ещё необходим; прежние
+успешные проверки не доказывают отсутствие undefined behavior.
