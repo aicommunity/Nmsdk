@@ -217,6 +217,11 @@ def audit_frozen_transport(package: dict, source: dict, spec: dict, observation:
             "soma_variation": variation, "spikes_known": False, "evaluation_verdict": None}
 
 
+def audit_recognition_source(package: dict, source_case: tuple) -> dict:
+    """Check conversion and complete solo primaries without inventing a frozen probe."""
+    return _audit_derivation(package, source_case)
+
+
 def audit_recognition_state(package: dict, source_case: tuple, spec: dict, observation: dict, trace: Path) -> dict:
     try:
         return _audit(package, source_case, spec, observation, trace)

@@ -104,10 +104,12 @@ def main(argv: list[str] | None = None) -> int:
     publication.add_argument("specification", type=Path)
     publication.add_argument("--root", type=Path, required=True)
     publication.add_argument("--output", type=Path, required=True, help="new receipt outside source tree")
-    calibration = commands.add_parser("calibrate", help="select/confirm a threshold from primary native measurements; does not execute a simulator")
-    calibration.add_argument("action", choices=("select", "confirm"))
+    calibration = commands.add_parser("calibrate", help="run a native Console calibration job or select/confirm from saved primary measurements")
+    calibration.add_argument("action", choices=("run", "select", "confirm"))
     calibration.add_argument("specification", type=Path)
-    calibration.add_argument("--measurements", type=Path, required=True, help="portable search measurement-set descriptor")
+    calibration.add_argument("--measurements", type=Path, help="portable search measurement-set descriptor for select/confirm")
+    calibration.add_argument("--runtime-manifest", type=Path, help="verified Console runtime required for run")
+    calibration.add_argument("--wall-seconds", type=float, help="owned process wall budget required for run")
     calibration.add_argument("--source-solo", type=Path, required=True, help="original learned-state package with primary trial siblings")
     calibration.add_argument("--selection", type=Path, help="required for confirmation; recomputed against primary search evidence")
     calibration.add_argument("--confirmation", type=Path, help="one fresh measurement-set descriptor required for confirmation")
@@ -169,6 +171,16 @@ def main(argv: list[str] | None = None) -> int:
         from .calibration import select_threshold, confirm_threshold
         from .calibration_io import load_measurements
         try:
+            if args.action == "run":
+                from .native_calibration_worker import run_job
+                require(args.runtime_manifest is not None and args.wall_seconds is not None and
+                        args.measurements is None and args.selection is None and args.confirmation is None,
+                        "native_calibration_requires_runtime_wall_budget_and_no_saved_measurements")
+                result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds)
+                print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+                return 0 if result["execution"] == "completed" and result["validity"] == "valid" else 2
+            require(args.runtime_manifest is None and args.wall_seconds is None and args.measurements is not None,
+                    "saved_calibration_requires_measurements_and_no_runtime")
             require(args.action == "confirm" or (args.selection is None and args.confirmation is None),
                     "selection_does_not_accept_confirmation_options")
             spec = load(args.specification.resolve(strict=True))
