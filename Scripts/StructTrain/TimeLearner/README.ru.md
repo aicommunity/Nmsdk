@@ -236,3 +236,16 @@ Python executable и версии matplotlib/Pillow. На M40 используе
 `/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python`; system Python
 этого сервера не содержит matplotlib. Interpreter нового worker должен быть
 явно выбран и проверен; старый системный путь не является его настройкой.
+
+### Native calibration transaction evidence
+
+`analyze TRANSACTION.json --format calibration-transaction --source-solo CASE_learned_state.json`
+проверяет полный записанный grid через общий scorer, sole-edit derivation и
+source primary CSV. Свежая confirmation привязана к выбранному кандидату,
+источнику, всему завершённому поиску и заранее объявленному design.
+Частичный grid не даёт calibrated verdict; NonSeparable отличается от
+BudgetExhausted. Cancelled/Failed/RecoveryRequired — diagnostic-only; проверка
+не подтверждает физический rollback или подлинность native исполнения.
+
+Это анализ фактических результатов `NativeThresholdCalibrationTransaction`,
+а не запуск калибровки из CLI. Production worker integration остаётся открытой.

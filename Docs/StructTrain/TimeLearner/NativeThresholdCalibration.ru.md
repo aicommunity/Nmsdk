@@ -438,3 +438,12 @@ queued/running cancellation, RAII cancellation, запрет второго driv
 owner, неверный design и внешний Reset. Это ещё не доказанные PASS: необходимы
 серверные normal/ASan gates и независимая проверка полного transaction report.
 Production CLI/worker интеграция и полная PostTune matrix остаются открытыми.
+
+Независимый `calibration_transaction_evidence.py` повторно оценивает каждую
+завершённую candidate matrix общим scorer, проверяет бюджет/порядок, source
+и объявленный design, first-success tie-break, весь search interval и fresh
+confirmation. CLI `analyze --format calibration-transaction --source-solo ...`
+принимает transaction report вместе с первичным source case. Diagnostic-only
+частичные/cancel/recovery records не становятся калибровкой. Даже согласованный
+отчёт не доказывает исполнение процесса или физический rollback; эти свойства
+принимаются отдельно по native integration/runtime evidence.
