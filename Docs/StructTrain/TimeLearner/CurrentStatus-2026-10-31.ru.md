@@ -55,6 +55,21 @@ de51a21. Ветка создана от develop с --no-ff merge сохранё�
 | TL-037 legacy inference attempt, PulseLib 39810a7 | Baseline normal/ASan: шесть expected failures из восьми, включая false Success/mid=0.25 при непосещённом foil; две NaN controls прошли. Fixed normal root e3fe5340: 12/12 native (220.780 s), 5/5 primary audits (4.165 s), 4 physical free-runs Classic/Branch × 2000/20000 Гц. Bundle 37678c32: 156 файлов / 1080412 bytes, все hashes проверены. ASan 12/12 завершён (1555.310 s), stronger reader 6/6 (5.101 s); все четыре CSV byte-identical normal. Normal дополнительные 37/37 прошли (318.086 s), 6/6 peak-replay checks (5.867 s). Visual/render 11/11 + late peak 6/6, 11 selected PNG просмотрены; полный cache 8573 files на M40. Дополнительные 37 ASan regressions завершились: 37/37, 2120.226 s, terminal 0; bundle 61fde19b содержит 448 files / 779744 bytes, все member hashes локально проверены. Их полная waveform visual acceptance и весь этап 8 остаются открытыми. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
+Дополнение: production Console ASan A1 завершился terminal 0 на M40:
+18 PostTune и 6 прямых calibration jobs, дополнительные CLI/tick-stop/strict
+controls; 4/4 PostTune reader (112.103 s), 8/8 calibration worker (234.799 s)
+и 4/4 provenance (15.333 s), без skips. Source binary ffd5b15a2, Python 74f49a5f0.
+Полный ASan primary bundle ещё не опубликован; этот факт не закрывает waveform
+reports, N0/profile/frequency/dimension matrix, learner dispatch или весь этап 8.
+
+Исправление publication prerequsite: [schema 2 artifact closure](GitArtifactPublication.ru.md)
+source 1113fd0fe прошёл 16/16 Git tests на каждом worker (Elder 4.560 s,
+M40 12.811 s). Receipts ebf7a635 / 0e0dcc8b; проверяются committed bytes,
+selected ignored/sparse files, явный push transport без изменения origin,
+symlink/duplicate/traversal и исходные objects при git replace. Producers этих
+receipts применили staging/verifier, но root push был manual. Полная миграция
+всех producers и весь этап 10 остаются открытыми.
+
 Хранение normal Console corpus: Git primary archive 3c1751f9 не изменён. Все
 1146 members / 962905002 bytes восстановлены из Git и сверены на Data M40:
 `/media/user/Data/TimeLearnerRefactor/readbacks/s08-native-posttune-console-offload-normal-a2/data`.

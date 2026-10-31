@@ -47,6 +47,13 @@ primary schema, присутствие всех trials внутри архива
 испытаниями нового publisher задним числом. Его интеграция во все producers,
 очереди, lock recovery и полная приёмка этапа 10 остаются открытыми.
 
-Добавлены реальные Git fixtures для schema 2 и сохранены проверки schema 1.
-Серверные результаты должны быть записаны отдельно после выполнения тестов;
-наличие этого документа не означает, что они уже прошли.
+Source `1113fd0fe6c87d04dd2bd182d63067e7a16ffd08` прошёл 16/16 реальных Git
+fixture tests на каждом сервере: Elder 4.560 s, M40 12.811 s, без skips.
+Сохранены schema-1 regressions и проверены schema-2 ошибки, включая missing
+ignored image до первого push, sparse staging, повреждение committed bytes,
+неправильный push repository, symlink, duplicate/traversal и git replace.
+Receipts: root commits `ebf7a6355fc66414602bff30a5ad68eb7e4ae1d1` и
+`0e0dcc8b0a9898b1c5d5a78dd4e2cfede6da285c`; их producers действительно
+использовали новый staging helper и committed-blob verifier. Финальный root push
+этих receipts выполнен вручную; это не доказывает полную интеграцию schema 2
+во все production publishers.

@@ -2,6 +2,10 @@
 
 Latest scoped PostTune evidence:
 
+Artifact publication prerequisite: [Elder 16 Git tests](s10-artifact-publication-elder-a1/README.md),
+[M40 16 Git tests](s10-artifact-publication-m40-a1/README.md). Schema 2 verifies
+declared committed blobs; upstream scientific completeness and full producer migration remain open.
+
 - [Production measured PostTune: 18 jobs and shared calibration regressions](s08-native-posttune-console-normal-a2/README.md).
 - [New controller: all 24 visual reports, 61 matrices, 184 trial-soma pairs](s08-native-posttune-controller-visual-normal-a3/README.md).
 - [Measured native search, real calibration and rollback: normal A2](s08-native-posttune-controller-normal-a2/README.md).
