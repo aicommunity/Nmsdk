@@ -234,6 +234,12 @@ template<class Owner> void ManagedFinalization(int calculateMode)
         owner->EnablePostTrainTuning=true;owner->AutoCalibrateFixedLTZThreshold=true;
         owner->EnablePostTrainMidThreshold=false;owner->PostTrainTipResistanceMode=PostTrainTune::kPostTipKeepDone;
         const auto boundary=CaptureNativeFinalizationBoundary(*owner,implementation);
+        auto unsupported=boundary.Document();auto controls=unsupported["controls"].toObject();
+        auto parameters=controls["parameters"].toObject();parameters["SyncCapacitanceTrim"]=1;
+        controls["parameters"]=parameters;unsupported["controls"]=controls;
+        try{CheckNativeFinalizationControls(*owner,unsupported);ADD_FAILURE()<<"Unsupported C-trim was accepted";}
+        catch(const std::logic_error& error){EXPECT_EQ(std::string(error.what()),"native_finalization_c_trim_not_yet_supported");}
+        EXPECT_EQ(ReadNativeFinalizationControls(*owner),boundary.Controls());
         const auto source=ConvertNativeSoloToRecognition(boundary.Solo(),DecodeNativeRecognitionSpec(original["conversion_spec"].toObject()),
             storage,environment,implementation);
         EXPECT_EQ(owner->ImportNativeRecognitionState(source,implementation).status,NativeModelBuildStatus::Rejected);
