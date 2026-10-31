@@ -1,0 +1,5 @@
+# Native fixed-threshold PostTune: ASan
+
+Twelve real native cases passed without skips: four codecs and eight Classic/Branch fixed weight-selection, roundtrip, later calibration, budget/cancel/Reset controls. Two owned legacy Console jobs retained byte-identical transactions and models relative to original ASan bundle 88c47ddf. Five original evidence checks and nine latest checks (four archive-closure plus five fixed-evidence checks) passed. Leak detection was disabled. The source runtime was isolated and unchanged during execution.
+
+All input/source primaries of the two portable runs are included and checked against their internal run manifests. Only the top-level duplicate baseline-source extraction is omitted; its reconstruction recipe and original Git source are retained. A silent target remains FN: weights_selected is not Calibrated, recognition PASS or training Exact. Production schema-2 jobs, learner-property dispatch, full mode/physics matrix and complete visual acceptance remain open.
