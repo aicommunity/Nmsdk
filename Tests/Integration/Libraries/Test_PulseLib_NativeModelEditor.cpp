@@ -126,6 +126,12 @@ public:
             [](const auto& state){return state.observed || state.finished;});
     }
     std::size_t SampleCount() const {return this->PostTuneSampleState.size();}
+    QJsonArray SampleStates() const {
+        QJsonArray result;for(const auto& s:this->PostTuneSampleState)
+            result.append(QJsonObject{{"peak",s.peak},{"observed",s.observed},{"finished",s.finished},{"finite_ok",s.finite_ok}});
+        return result;
+    }
+    double LiveMetric() const {return this->ReadPostTuneLiveMetric();}
 };
 void Artifact(const std::string& name,const QByteArray& data)
 {
@@ -3076,6 +3082,68 @@ POSTTUNE_OBSERVATION_CASE(PreviousSamples,PreviousSamples)
 POSTTUNE_OBSERVATION_CASE(MissingFoil,MissingFoil)
 POSTTUNE_OBSERVATION_CASE(Nonfinite,Nonfinite)
 #undef POSTTUNE_OBSERVATION_CASE
+
+template<class Learner> void PostTuneInferencePhysicalFreeRun(unsigned frequency)
+{
+    using Owner=PostTuneObservationLearner<Learner>;
+    constexpr bool branch=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const std::string image=branch?"PostTuneObservationBranchFixture":"PostTuneObservationClassicFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]() -> UComponent* {return new Owner;},image),image);
+    EditingRig<Owner> rig(frequency,1,"posttune_inference_physical",false,2,true,2,1,false,image);
+    auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    const auto goal=rig.learner->InputPattern.GetData();const auto before=rig.learner->ReadNativeParameters();
+    MDMatrix<double> matrix;matrix.Assign(4,1,0.);
+    matrix(0,0)=.01;matrix(1,0)=.08;matrix(2,0)=.01;matrix(3,0)=.20;
+    ASSERT_TRUE(dataset->SetMatrixData(matrix));
+    MDMatrix<int> labels;labels.Assign(1,2,0);labels(0,0)=1;ASSERT_TRUE(dataset->SetMatrixClasses(labels));
+    rig.learner->SeedPreviousInference(true);ASSERT_TRUE(rig.learner->StartMatrixInference());
+    const double begin=rig.environment->GetTime().GetDoubleTime();
+    std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+    for(std::size_t i=0;i<(branch?1u:2u);++i)trace<<",soma"<<i;
+    trace<<",dataset_iteration,state_generation,selected_metric\n";
+    QJsonArray stimulus;double previous=0.;std::size_t ticks=0;
+    while(!rig.learner->PostTrainTuneComplete.GetData())
+    {
+        ASSERT_LT(ticks,frequency*10u)<<"legacy free-run did not terminate";
+        rig.model->Calculate();const double time=rig.environment->GetTime().GetDoubleTime(),input=rig.source->Output(0,0);
+        if(input>0. && previous<=0.)stimulus.append(time);previous=input;
+        trace<<time<<','<<input;
+        for(std::size_t i=0;i<(branch?1u:2u);++i)
+        {
+            auto soma=rig.neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);ASSERT_TRUE(soma);
+            trace<<','<<soma->SumPotential(0,0);
+        }
+        trace<<','<<dataset->Iteration.GetData()<<','<<dataset->StateGeneration.GetData()<<','<<rig.learner->LiveMetric()<<'\n';
+        rig.environment->IncreaseModelTimeByStep();++ticks;
+    }
+    const auto after=rig.learner->ReadNativeParameters();
+    Artifact(rig.name+".csv",QByteArray::fromStdString(trace.str()));
+    Artifact(rig.name+".json",QJsonDocument(QJsonObject{
+        {"kind","legacy_posttune_physical_freerun"},{"schema_version",1},{"topology",branch?"branch":"classic"},
+        {"frequency_hz",int(frequency)},{"begin",begin},{"end",rig.environment->GetTime().GetDoubleTime()},
+        {"ticks",double(ticks)},{"soma_channels",branch?1:2},{"stimulus_times",stimulus},
+        {"pattern_isi",QJsonArray({QJsonArray({.01,.08}),QJsonArray({.01,.20})})},
+        {"sample_labels",QJsonArray({"target","foil"})},{"metric","simultaneous_soma_sum"},
+        {"states",rig.learner->SampleStates()},{"all_samples_valid",rig.learner->AllSamplesValid()},
+        {"result",rig.learner->PostTuneResult.GetData()},{"threshold",rig.learner->FixedLTZThreshold.GetData()},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    EXPECT_TRUE(rig.learner->AllSamplesValid());EXPECT_EQ(rig.learner->SampleCount(),2u);EXPECT_EQ(stimulus.size(),4);
+    EXPECT_TRUE(NativeTrainingPatternEqual(rig.learner->InputPattern.GetData(),goal));
+    ASSERT_EQ(before.size(),after.size());for(std::size_t i=0;i<before.size();++i)
+    {
+        EXPECT_EQ(before[i].length,after[i].length);EXPECT_EQ(before[i].synapses,after[i].synapses);
+        EXPECT_DOUBLE_EQ(before[i].resistance,after[i].resistance);
+    }
+    EXPECT_TRUE(rig.learner->PostTuneResult.GetData()==PostTrainTune::kResultSuccess ||
+                rig.learner->PostTuneResult.GetData()==PostTrainTune::kResultNonSeparable ||
+                rig.learner->PostTuneResult.GetData()==PostTrainTune::kResultBestEffort);
+}
+TEST(LegacyPostTunePhysicalFreeRun,Classic2000){PostTuneInferencePhysicalFreeRun<NNeuronTimeLearner>(2000);}
+TEST(LegacyPostTunePhysicalFreeRun,Branch2000){PostTuneInferencePhysicalFreeRun<NNeuronTimeLearnerBranch>(2000);}
+TEST(LegacyPostTunePhysicalFreeRun,Classic20000){PostTuneInferencePhysicalFreeRun<NNeuronTimeLearner>(20000);}
+TEST(LegacyPostTunePhysicalFreeRun,Branch20000){PostTuneInferencePhysicalFreeRun<NNeuronTimeLearnerBranch>(20000);}
 
 template<class Learner> void PostTuneGraphBoundary(unsigned frequency,int normalization,bool failAttach=false)
 {

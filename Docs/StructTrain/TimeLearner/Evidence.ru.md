@@ -252,3 +252,11 @@ fixture error, не algorithm evidence. Editor fix 0ca75b3 прошёл на о�
 по 2/2 independent Python tests, 12 boundary probes / 4332 samples.
 Fixed пакеты 073b2906 / 37e6326c: по 530 stored / 528 raw hashes проверены. См. NativeOwnerBindings.ru.md. Причинность для исторических кампаний
 не установлена; полный lifecycle/control-flag audit этим не закрыт.
+
+TL-037: новый legacy inference saved-matrix attempt переиспользовал публичный
+Result и SampleMetricState предыдущей попытки при равной размерности.
+Baseline root d8e2ad16 / PulseLib ded4b558: по шесть воспроизведённых failures
+из восьми cases normal/ASan; две NaN controls прошли. Непосещённый foil давал
+Success и mid=0.25. PulseLib 39810a7 сбрасывает attempt-scoped evidence/status;
+runtime-приёмка исправления пока не завершена. См. LegacyPostTuneObservation.ru.md.
+Историческая причинность для августа и остальных кампаний не установлена.
