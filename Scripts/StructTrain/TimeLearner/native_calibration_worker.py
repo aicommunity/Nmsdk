@@ -79,7 +79,7 @@ def validate_job(job, source_case):
             "criterion": full_criterion, "trials": design, "thresholds": job["thresholds"],
             "maximum_candidates": job["maximum_candidates"], "selection_rule": RULE}
     spec["dataset_digest"] = calibration_dataset_digest("per_trial_windows", full_criterion, design)
-    _validate_spec(spec)
+    _, identity = _validate_spec(spec)
     require(len(job["thresholds"]) <= 256 and count(job["maximum_candidates"]) <= 256, "worker_grid_budget_limit")
     target = source["source_solo"]["protocol"]["pattern_hash"]
     samples = {}
@@ -94,7 +94,7 @@ def validate_job(job, source_case):
         signature = (q["label"], q["pattern_hash"])
         require(samples.setdefault(q["sample_id"], signature) == signature, "worker_sample_collision")
     return {"job_sha256": job["sha256"], "primary_source_checked": True, "effective_model_checked": False,
-            "specification_sha256": sha(spec), "conditions_digest": _validate_spec(spec)[1]["conditions_digest"]}
+            "specification_sha256": sha(spec), "conditions_digest": identity["conditions_digest"]}
 
 
 def audit_execution(directory, job, source_case):
@@ -158,6 +158,9 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds):
     process = execute(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
         "--timelearner-calibrate", str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
         executable.parent, output/"process", maximum_wall_seconds)
+    verify_runtime(runtime)
+    require(process["execution"] != "completed" or process["runtime_provenance"] == "loaded_files_captured",
+            "worker_loaded_runtime_provenance_missing")
     audit = audit_execution(output/"native", job, source_case) if process["execution"] == "completed" else None
     analysis_code = [{"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                      for p in sorted(Path(__file__).parent.glob("*.py"))]
