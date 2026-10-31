@@ -117,10 +117,11 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction"), default="recognition-evaluation")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
+    report.add_argument("--source-solo", type=Path, help="original learned-state and adjacent primaries required for posttune-transaction")
     report.add_argument("--output", type=Path, required=True, help="new directory; never overwritten")
     publication = commands.add_parser("publish", help="publish exact Git closure children-first; no scientific verdict")
     publication.add_argument("specification", type=Path)
@@ -258,7 +259,14 @@ def main(argv: list[str] | None = None) -> int:
         try:
             from .native_evidence import require
             require(args.format == "native-test-run" or args.artifacts is None, "artifacts_option_is_only_for_native_test_run")
-            if args.format == "native-test-run":
+            require(args.format == "posttune-transaction" or args.source_solo is None, "report_source_solo_is_only_for_posttune")
+            if args.format == "posttune-transaction":
+                from .posttune_transaction_reports import render_posttune_transaction
+                require(args.source_solo is not None and args.trace is None and args.model is None,
+                        "posttune_report_requires_source_solo_not_model_or_trace")
+                result = render_posttune_transaction(args.source.resolve(strict=True),
+                    args.source_solo.resolve(strict=True), args.output.resolve())
+            elif args.format == "native-test-run":
                 from .native_test_reports import render_native_test_run
                 require(args.artifacts is not None and args.trace is None and args.model is None,
                         "native_test_run_requires_artifacts_not_model_or_trace")
