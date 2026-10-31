@@ -15,7 +15,8 @@
 evidence checks (157.913 s), без skips. Все 24 controls сохранены в
 [N0 primary bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-normal-a1/README.md).
 Целевая физика, допуски, full-matrix threshold proposal и fresh confirmation
-не менялись ради прохождения N0. ASan N0 запущен отдельно; пока не принят.
+не менялись ради прохождения N0. ASan N0 завершён: 2/2 native, 3351.650 s,
+12/12 reader, 136.129 s. [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-asan-a1/README.md).
 
 Контроллер действует между native ticks и не вызывает Calculate. Он принимает
 полностью импортированную исходную recognition-модель с conversion spec schema 1.
@@ -126,8 +127,8 @@ candidate checks; это не 19 независимых обучений.
 и `BranchN0_2000` в тот же реальный fixture. Сохраняются 2000 Гц, два входа,
 начальная физика, допуски, исходный protocol и native предложение порога по
 полной неспайковой характеристике. Меняется только normalization N1 → N0.
-До серверного выполнения эти cases не приняты; отсутствие положительного gap
-не должно переименовываться в доказательство физической невозможности модели.
+Эти cases выполнены normal и ASan; адресные результаты приведены выше.
+Отсутствие положительного gap не является доказательством физической невозможности модели.
 
 В normal fixture Off/KeepDone и Auto/Soma controls подтверждают пару у обеих
 топологий; Classic подтверждает также CanonRmin. Branch CanonRmin, оба FlatLastR
@@ -245,7 +246,8 @@ skips, включая все 18 опубликованных jobs и незав�
 audits: transaction и конечная модель побайтно совпали с исходным Git bundle.
 [Primary proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-codec-normal-a1/README.md):
 103 members / 630420 bytes; все member hashes перепроверены после merge.
-ASan codec пока не проверен; текущий ASan N0 использует прежний immutable source.
+ASan codec завершён отдельно после N0: 3/3 native и два byte-exact owned
+Console A/B, [109-member proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-codec-asan-a1/README.md).
 
 Проверка текущего кода показывает, что подключение нельзя свести к удалению
 `configured_native_optional_mode_not_yet_supported`:
@@ -365,3 +367,36 @@ SHA256SUMS охватывает также эту связь. Это прове�
 обоих PostTune entry points. [Compact evidence](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-console-visual-normal-a1/README.md):
 422 metadata members и 12 выбранных PNG. Все 12 PNG вручную просмотрены;
 это приёмка читаемости выборки, не полного кэша, PDF/SVG или независимого Test.
+
+### Production job schema 2: граница реализации
+
+Root 2d6ab1a059005af30bc3d55a78c2192e6cbd9813 добавляет explicit schema-2
+job в Console и owned worker. У job schema_version=2, внутри post_tune
+schema_version=2 и finalization=calibrate либо keep_fixed_threshold. Остальные
+девять controls не меняют смысл. Для fixed обязательны thresholds=[] и
+maximum_candidates=0; последний относится к калибровке, а отдельный
+post_tune.maximum_candidates продолжает ограничивать поиск весов.
+
+Команда остаётся штатной:
+
+```text
+python -m Scripts.StructTrain.TimeLearner posttune JOB.json \
+  --source-solo LEARNED_STATE.json --runtime-manifest RUNTIME.json \
+  --wall-seconds SECONDS --output NEW_RUN_DIRECTORY
+```
+
+Worker проверяет labelled design без фиктивной сетки калибровки. Общая функция
+validate_trial_design используется также прежним calibration validator;
+неизменённые schema-1 conditions/preflight должны подтверждаться реальными
+portable regression runs. Fixed design fingerprint не утверждает выполнения
+калибровки или независимого разделения данных. Единый научный ConditionSpec
+всех runner ещё не реализован; это scoped job identity, не закрытие этапа 10.
+
+Внешние execution и run manifest сохраняют schema 1. Fixed transaction
+возвращает schema 2/weights_selected; calibrate (включая новый explicit job)
+сохраняет прежний transaction schema 1. Worker связывает конечную модель с
+selected_package при weights_selected, с calibrated_package при calibrated
+или с исходной моделью при подтверждённом rollback. Модель selected не получает
+нового Exact или встроенного selection proof. Полная матрица режимов,
+normal/ASan production-приёмка и configured learner phase dispatch остаются
+незакрытыми до отдельных свидетельств.
