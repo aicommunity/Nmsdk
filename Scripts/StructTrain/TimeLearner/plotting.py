@@ -112,7 +112,10 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                 views.append((name+"-detail", left, right, detail, "local_detail", name))
         for name, left, right, y_limits, scale, time_view in views:
             fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
-            fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.70)
+            # A threshold adds a fourth legend row. Reserve its own band above
+            # the axes instead of drawing the input legend across the waveform.
+            fig.subplots_adjust(left=.12, right=.86, bottom=.16,
+                                top=.64 if reference_level is not None else .70)
             overlay = ax.twinx()
             ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
             if reference_level is not None:
