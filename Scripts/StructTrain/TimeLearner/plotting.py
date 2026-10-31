@@ -141,9 +141,12 @@ def render_soma(observation, channel, label, limits, output: Path):
             elif not observation["complete"] and observation["closed_at"] < right:
                 ax.axvspan(max(left, observation["closed_at"]), right, color="gray", alpha=.25,
                            label="Unobserved / censored")
+            labelled_spike = False
             for event in observation["spike_times"]:
                 if left <= event <= right:
-                    ax.axvline(event, color="#8c2c91", alpha=.5, linestyle=":")
+                    ax.axvline(event, color="#8c2c91", alpha=.5, linestyle=":",
+                               label=None if labelled_spike else "Actual LT spike event")
+                    labelled_spike = True
             fig.suptitle(f'{observation["sample_id"]} | {observation["label"]} | {observation["trial_id"]}\n'
                          f'{label} | {observation["reset_policy"]}\n'
                          f'{name} ({scale} Y) | valid={observation["valid"]}, complete={observation["complete"]} | '
@@ -186,6 +189,7 @@ def render_series(observations, channel, label, limits, output: Path):
             fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
             fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.70)
             overlay = ax.twinx()
+            labelled_spike = False
             for position, o in enumerate(selected):
                 # Separate trials explicitly, even on adjacent native ticks.
                 # Missing internal samples also break both lines.
@@ -211,7 +215,9 @@ def render_series(observations, channel, label, limits, output: Path):
                 color = "#3b893e" if row["reset_boundary"] is not None else "#666666"
                 ax.axvline(o["begin"], color=color, linestyle="--", alpha=.5)
                 for spike in o["spike_times"]:
-                    ax.axvline(spike, color="#8c2c91", alpha=.5, linestyle=":")
+                    ax.axvline(spike, color="#8c2c91", alpha=.5, linestyle=":",
+                               label=None if labelled_spike else "Actual LT spike event")
+                    labelled_spike = True
             ax.set_xlim(left, right);ax.set_ylim(*limits)
             ax.set_xlabel("Native absolute time [s]; gaps retain actual duration")
             ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
