@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_active_coexisting_runtime_verification",
+  "schema_version": 1,
+  "parent_pid": 2925779,
+  "parent_confirmed_live": true,
+  "actual_running_processes": [
+    {
+      "pid": 3132167,
+      "executable": "/media/user/Data/TimeLearnerRefactor/runtime-s08-threshold-assessment-asan-a1/Test_PulseLib_StorageComponents",
+      "actual_process_image_sha256": "d11615cea7f5d0bbc2b430dcfaa16f20dfc1002b7c6d44a712195685f567a6e8",
+      "command": "./Test_PulseLib_StorageComponents --gtest_filter=NativeThresholdCandidate.*_20000:NativeRecognitionOwner.ClassicFreshDestination:NativeRecognitionOwner.BranchFreshDestination:NativeRecognitionState.ClassicN0Identity:NativeRecognitionState.BranchN1HistoricalScale --gtest_output=xml:/media/user/Data/TimeLearnerRefactor/readbacks/s08-threshold-assessment-asan-a1/legacy-expanded.xml"
+    }
+  ],
+  "expected_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-threshold-assessment-asan-a1/runtime-before.json",
+  "expected_manifest_sha256": "e28468888796ae6b3c2ee36d46cafe3ca5510fa99a11551ac3c3d5d95fa1c98f",
+  "runtime_verified_after_grid_builds": true,
+  "note": "Earlier before/after checks referenced the completed potential baseline. This additional check validates the actual still-running assessment executable against its own pre-run manifest; its owned live process image equals the expected file. No active source/build/runtime was edited.",
+  "scientific_verdict": null
+}
