@@ -3,6 +3,7 @@
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeThresholdCalibrationTransaction.h"
+#include "TimeLearner/NativePostTuneTransaction.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_init.h"
 #include <QCryptographicHash>
 #include <QFile>
@@ -20,20 +21,23 @@ using namespace NmsdkWorker;
 struct Job {
     QJsonObject document,source;
     NativeThresholdGridSpec grid;
+    NativePostTuneTransactionSpec postTune;
+    bool isPostTune=false;
     std::string implementation,ownerClass;
     unsigned frequency=0;
     std::size_t maximumTicks=0;
 };
-Job Read(const QString& path)
+Job Read(const QString& path,bool postTune=false)
 {
     QFile file(path);Require(file.open(QIODevice::ReadOnly),"job_input_unreadable");
     Require(file.size()>0 && file.size()<=256*1024*1024,"job_input_size_out_of_range");
     Job j;j.document=ParseStrictNativeJsonObject(file.readAll().toStdString(),256*1024*1024);
     const auto& d=j.document;
-    const std::set<QString> keys{"kind","schema_version","owner_class","implementation_id","frequency_hz",
+    std::set<QString> keys{"kind","schema_version","owner_class","implementation_id","frequency_hz",
         "maximum_model_ticks","source_recognition","thresholds","maximum_candidates","specification","trials","sha256"};
+    if(postTune)keys.insert("post_tune");
     Require(d.size()==int(keys.size()),"job_field_set_mismatch");for(const auto& key:keys)Require(d.contains(key),"job_missing_field");
-    Require(d["kind"]==QJsonValue("timelearner_native_calibration_job") &&
+    Require(d["kind"]==QJsonValue(postTune?"timelearner_native_post_tune_job":"timelearner_native_calibration_job") &&
         Number(d["schema_version"])==1.,"unsupported_calibration_job");
     Require(Signed(d)==d,"job_digest_mismatch");
     j.ownerClass=Text(d["owner_class"]);j.implementation=Text(d["implementation_id"]);
@@ -45,6 +49,31 @@ Job Read(const QString& path)
     j.grid.confirmation=DecodeNativeThresholdConfirmationSpec(Object(d["specification"]));
     for(const auto& value:Array(d["thresholds"]))j.grid.thresholds.push_back(Number(value));
     for(const auto& value:Array(d["trials"]))j.grid.trials.push_back(DecodeNativeCalibrationRequest(Object(value)));
+    j.isPostTune=postTune;
+    if(postTune)
+    {
+        const auto p=Object(d["post_tune"]);
+        Keys(p,{"mode","metric","canonical_floor","canonical_last","resistance_bounds","search_passes",
+            "maximum_candidates","maximum_recorded_samples","minimum_positive_gap"});
+        auto& spec=j.postTune;const auto mode=Text(p["mode"]),metric=Text(p["metric"]);
+        if(mode=="off")spec.mode=NativePostTuneControllerMode::Off;
+        else if(mode=="keep_done")spec.mode=NativePostTuneControllerMode::KeepDone;
+        else if(mode=="canon_rmin")spec.mode=NativePostTuneControllerMode::CanonRmin;
+        else if(mode=="flat_last_r")spec.mode=NativePostTuneControllerMode::FlatLastR;
+        else {Require(mode=="search_synthetic","unknown_post_tune_job_mode");spec.mode=NativePostTuneControllerMode::SearchSynthetic;}
+        if(metric=="auto")spec.metric=NativePostTuneMetric::Auto;
+        else if(metric=="ltzone")spec.metric=NativePostTuneMetric::LTZone;
+        else {Require(metric=="soma_sum","unknown_post_tune_job_metric");spec.metric=NativePostTuneMetric::SomaSum;}
+        spec.canonicalFloor=Number(p["canonical_floor"]);spec.canonicalLast=Number(p["canonical_last"]);
+        spec.minimumPositiveGap=Number(p["minimum_positive_gap"]);
+        spec.searchPasses=unsigned(Count(p["search_passes"],1,128));
+        spec.maximumCandidates=Count(p["maximum_candidates"],1,4096);
+        spec.maximumRecordedSamples=Count(p["maximum_recorded_samples"],1,100000000);
+        for(const auto& value:Array(p["resistance_bounds"]))
+        {const auto bounds=Object(value);Keys(bounds,{"minimum","maximum"});
+            spec.resistanceBounds.push_back({Number(bounds["minimum"]),Number(bounds["maximum"])});}
+        spec.calibration=j.grid;
+    }
     return j;
 }
 template<class Owner> int Execute(const Job& job,const QString& output)
@@ -55,7 +84,7 @@ template<class Owner> int Execute(const Job& job,const QString& output)
     Require(owner->GetTimeStep()==job.frequency,"job_import_frequency_mismatch");
     owner->Build();owner->Init();model->Init();model->Reset();
     Require(owner->ExportNativeRecognitionState(job.implementation)==job.source,"job_source_effective_readback_changed");
-    NativeThresholdCalibrationTransaction<Owner> transaction(*owner,job.grid,job.implementation);
+    const auto run=[&](auto& transaction) {
     // Validate the effective model and entire declared design before reserving output.
     Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");
     QJsonArray artifacts;artifacts.append(Write(output,"job.json",job.document));
@@ -73,23 +102,36 @@ template<class Owner> int Execute(const Job& job,const QString& output)
         model->Calculate();environment->IncreaseModelTimeByStep();++ticks;transaction.Advance();
     }
     const auto report=transaction.Report();const auto after=owner->ExportNativeRecognitionState(job.implementation);
-    Require(transaction.Status()!=NativeCalibrationTransactionStatus::Calibrated || after==transaction.CalibratedPackage(),
+    Require(report["status"]!=QJsonValue("calibrated") || after==transaction.CalibratedPackage(),
         "job_calibrated_effective_readback_changed");
     artifacts.append(Write(output,"transaction.json",report));artifacts.append(Write(output,"model.json",after));
-    QJsonObject result{{"kind","timelearner_native_calibration_execution"},{"schema_version",1},
+    QJsonObject result{{"kind",job.isPostTune?"timelearner_native_post_tune_execution":"timelearner_native_calibration_execution"},{"schema_version",1},
         {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},
         {"attempt_id",QString::fromStdString(job.grid.confirmation.attemptId)},
         {"source_recognition_sha256",job.source["sha256"]},{"model_sha256",after["sha256"]},
         {"model_revision",after["model_revision"]},{"transaction_sha256",report["sha256"]},
-        {"calibration_status",report["status"]},{"frequency_hz",double(job.frequency)},
+        {job.isPostTune?"post_tune_status":"calibration_status",report["status"]},{"frequency_hz",double(job.frequency)},
         {"model_ticks",double(ticks)},{"model_time_begin",begin},{"model_time_end",environment->GetTime().GetDoubleTime()},
         {"artifacts",artifacts},{"runtime_provenance_external",true},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}};
     Write(output,"execution.json",Signed(result));
-    const auto status=transaction.Status();
-    return execution=="completed" && (status==NativeCalibrationTransactionStatus::Calibrated ||
-        status==NativeCalibrationTransactionStatus::NonSeparable || status==NativeCalibrationTransactionStatus::BudgetExhausted)?0:2;
+    const auto status=report["status"].toString();
+    return execution=="completed" && (status=="calibrated" || status=="budget_exhausted" ||
+        status==(job.isPostTune?"search_unresolved":"nonseparable"))?0:2;
+    };
+    if(job.isPostTune)
+    {NativePostTuneTransaction<Owner> transaction(*owner,job.postTune,job.implementation);return run(transaction);}
+    NativeThresholdCalibrationTransaction<Owner> transaction(*owner,job.grid,job.implementation);return run(transaction);
     });
 }
+}
+int RunTimeLearnerPostTuneJob(const QString& input,const QString& output)
+{
+    try
+    {
+        Require(!input.isEmpty() && !output.isEmpty(),"job_input_and_output_required");const auto job=Read(input,true);
+        return job.ownerClass=="NNeuronTimeLearner"?Execute<NNeuronTimeLearner>(job,output):Execute<NNeuronTimeLearnerBranch>(job,output);
+    }
+    catch(const std::exception& error){std::cerr<<"TimeLearner PostTune job: "<<error.what()<<'\n';return 2;}
 }
 int RunTimeLearnerCalibrationJob(const QString& input,const QString& output)
 {
