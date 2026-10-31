@@ -1,0 +1,5 @@
+# Ownership controls: native soma/input reports
+
+M40 verified and losslessly extracted the published normal primary bundle. Nine checks passed (four ownership evidence checks and five plotting regressions). Full calibrated transaction reports cover all six complete candidate/confirmation matrices, both patterns and every soma: 18 trial/soma pairs. Three additional complete externally consumed probe/soma pairs have diagnostic plots. Six interrupted/context-replaced transactions retain their raw diagnostic evidence and do not invent complete matrices.
+
+Every plot uses actual soma samples and overlaid native input samples/events. PNG is 1920 by 960; 100-tick zoom tiles provide at least 14.208 horizontal pixels per native tick without decimation. Full PNG/SVG/PDF reports remain reproducible M40 cache. Git stores metadata and four selected confirmation overviews. SI units are unverified; manual visual acceptance and the full original experiment matrix remain open. Scientific verdict is null.

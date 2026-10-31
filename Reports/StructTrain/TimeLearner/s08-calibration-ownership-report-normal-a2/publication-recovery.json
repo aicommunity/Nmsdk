@@ -1,0 +1,268 @@
+{
+  "renderer_validation": {
+    "kind": "ownership_visual_cache_receipt",
+    "schema_version": 1,
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "complete_transaction_matrices": 6,
+    "trial_soma_pairs": 18,
+    "consumed_probe_soma_pairs": 3,
+    "source_bundle": "56b6471311f8d85cfd2671ddb10f5c269952aa6a",
+    "renderer_root": "56b6471311f8d85cfd2671ddb10f5c269952aa6a",
+    "visual_acceptance_complete": false,
+    "evaluation_verdict": null,
+    "cache": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-ownership-report-normal-a2/reports",
+    "metadata_sha256": "b0a021dcdc0cb5b02e9fafa07aeb8ed3e58e8ae4814c1722d427524d1c23e351",
+    "metadata_files": [
+      {
+        "path": "Branch_ownership_0/SHA256SUMS.json",
+        "bytes": 275,
+        "sha256": "0f4f1a16457aaf7a38959b59ccb622ddf3f517c85de6c43ef9be4b0403062ad0"
+      },
+      {
+        "path": "Branch_ownership_0/manifest.json",
+        "bytes": 1399,
+        "sha256": "b7f8aa5fac46614494f5e9bfae3ac0eaf08ec79fb60f13a005c544c55e3639f3"
+      },
+      {
+        "path": "Branch_ownership_1-consumed-complete-soma-1/manifest.json",
+        "bytes": 3293,
+        "sha256": "6af089c8ff764d6bce98901a2363dec7c9c45a55cbf0ec7348a924a386f0b98d"
+      },
+      {
+        "path": "Branch_ownership_1/SHA256SUMS.json",
+        "bytes": 275,
+        "sha256": "7305d95e16a76c3c519ffdfa5a5c7c62e47ca6fc78efc2e74a965d6205e0d270"
+      },
+      {
+        "path": "Branch_ownership_1/manifest.json",
+        "bytes": 1399,
+        "sha256": "8c44d49696e7dae592a8c2c1dc9effb8315a73c14ee8a048ee72137223b20184"
+      },
+      {
+        "path": "Branch_ownership_2/SHA256SUMS.json",
+        "bytes": 275,
+        "sha256": "272a196fa948f3db3c2fe9a4a0485bf28fc39f1736a74a00b00ce699a543a7da"
+      },
+      {
+        "path": "Branch_ownership_2/manifest.json",
+        "bytes": 1399,
+        "sha256": "932a5de751856e0bff46592a5f91d41468cfa5363a83c92781f31301de91ed52"
+      },
+      {
+        "path": "Branch_ownership_3/SHA256SUMS.json",
+        "bytes": 37065,
+        "sha256": "6e2407e5c351561d7738d9032a9e398200d187449710ee9e60aeec04e8e0192c"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0000/SHA256SUMS.json",
+        "bytes": 10155,
+        "sha256": "4b1defcb765b8d687d07b4ee176d5c201c037595a596090f155f8c43f42a9446"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0000/analysis.json",
+        "bytes": 2928,
+        "sha256": "fb669ddc55e29b05a2cfdfd970b44e2ae7b3e1bc93be6b54dcccbdbceb1fa834"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0000/manifest.json",
+        "bytes": 24933,
+        "sha256": "6162ad7dcca268e183e3bbb635d7a5f4bd8774ec567e3261f5acee1cfe4deb82"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0000/series.json",
+        "bytes": 1879,
+        "sha256": "874125c9ccec06b02f34f6ee2295dd3fd8b78fb2f6c5e8ec289284f6e50f940b"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0001/SHA256SUMS.json",
+        "bytes": 10155,
+        "sha256": "b94179b8d15ba91e159018a52a235dfdc27f90a88ba82e782d7bbb9cf4aa1b94"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0001/analysis.json",
+        "bytes": 2991,
+        "sha256": "120ef2ffafd143475c952f6b108de09504f85241cbb95a1a66108c9eb92b5126"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0001/manifest.json",
+        "bytes": 24982,
+        "sha256": "2d83747e9cf8c5e63a8f12393550cd884390f9c0efb9e5628e0f99b60fc00dd5"
+      },
+      {
+        "path": "Branch_ownership_3/candidate-0001/series.json",
+        "bytes": 1870,
+        "sha256": "0f7bda986852e9e2d8d61fc35ad00e1a677a2c2959fe99b9fc9276e8cf8e702e"
+      },
+      {
+        "path": "Branch_ownership_3/fresh-confirmation/SHA256SUMS.json",
+        "bytes": 10155,
+        "sha256": "b7bb57f1542d00b2e4a431b99d8cfd334243eb44f5cca628fa61c4fcfc6726b3"
+      },
+      {
+        "path": "Branch_ownership_3/fresh-confirmation/analysis.json",
+        "bytes": 2994,
+        "sha256": "a637d82d3c2a3387b4128f1142b2cd849664c25801a3be290a8d9c089c6e29c0"
+      },
+      {
+        "path": "Branch_ownership_3/fresh-confirmation/manifest.json",
+        "bytes": 25005,
+        "sha256": "4d66efdd77c50192650e015d47e6e72226a6198463ac1680398baac09b4b8179"
+      },
+      {
+        "path": "Branch_ownership_3/fresh-confirmation/series.json",
+        "bytes": 1870,
+        "sha256": "aecd29084664d2ad4972ff389555d6e5e33b4b9a65eb7d9e1cb166246ad28974"
+      },
+      {
+        "path": "Branch_ownership_3/manifest.json",
+        "bytes": 3652,
+        "sha256": "1acb15a4525eb3f49aeb227cf4bac87bf2fc8fe1af43a1b61e1a3dbdaee47409"
+      },
+      {
+        "path": "Classic_ownership_0/SHA256SUMS.json",
+        "bytes": 275,
+        "sha256": "9fb679b9efba573c082358da35dd87f9c41e5c7bf6a96335d925ef3eef7442e9"
+      },
+      {
+        "path": "Classic_ownership_0/manifest.json",
+        "bytes": 1399,
+        "sha256": "2ef009c63c8a17bc8f67f8d1b81bf48e14697b6129cb17a3bb2717a1abfb3fc6"
+      },
+      {
+        "path": "Classic_ownership_1-consumed-complete-soma-1/manifest.json",
+        "bytes": 2704,
+        "sha256": "8ccdbd2106a66db04ca18990605f73d2e8ff863ce88a3814c9764aa388c5a454"
+      },
+      {
+        "path": "Classic_ownership_1-consumed-complete-soma-2/manifest.json",
+        "bytes": 2704,
+        "sha256": "7c82d9de0d6594f7a27fbd734e1a68c564b6259ce2d15c0d901fcd35efaea295"
+      },
+      {
+        "path": "Classic_ownership_1/SHA256SUMS.json",
+        "bytes": 275,
+        "sha256": "c7de4d4668c43d15894954e4a4147c4dc1b16ee898369aecede3c2b1c97ee937"
+      },
+      {
+        "path": "Classic_ownership_1/manifest.json",
+        "bytes": 1399,
+        "sha256": "dcd9fd71fc83b83258d2831524b95d35ff695eb191ace31aee6eab31acb8fbac"
+      },
+      {
+        "path": "Classic_ownership_2/SHA256SUMS.json",
+        "bytes": 275,
+        "sha256": "f9c27fbb180bc00396efc0b15768c59b87e8583d69b91f607346305e4594420f"
+      },
+      {
+        "path": "Classic_ownership_2/manifest.json",
+        "bytes": 1399,
+        "sha256": "def7799244a85859466f340410b54c0e7a1b1490b8d89cb294598d641e6a490f"
+      },
+      {
+        "path": "Classic_ownership_3/SHA256SUMS.json",
+        "bytes": 65304,
+        "sha256": "f3c2d4f5997455d1562eeef00083e138ef7f1c23a272943eff63d71397e67a5f"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0000/SHA256SUMS.json",
+        "bytes": 18558,
+        "sha256": "34ebee4c8e9833f1bd5599fe3035cd6e6fe47ea4152bf35f02c707dd2e23a0fc"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0000/analysis.json",
+        "bytes": 2928,
+        "sha256": "7b48a69eaa3535fe25c50aadab7981cc6776100af10e782a3a42b4519ba8cae0"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0000/manifest.json",
+        "bytes": 47163,
+        "sha256": "bcbf8e4c46641be6aabf03d59873f2f8ee3c0f521cbf244e67aa3a6de055acd7"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0000/series.json",
+        "bytes": 3763,
+        "sha256": "48ed46f2a4deab2d5d67ebd04080b67f0e296ba56ed474ab9bba7d871ab8be38"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0001/SHA256SUMS.json",
+        "bytes": 18558,
+        "sha256": "03c5ca7a5348501962b102a613c3f49f3af1ed206df82aed68c5a10fb736a58a"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0001/analysis.json",
+        "bytes": 3004,
+        "sha256": "8fc87b7c99915f8e9f344dc2f7351f32e1bf1c2ee8236745a862a5d2edd2c07a"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0001/manifest.json",
+        "bytes": 47131,
+        "sha256": "c7e0803204cdfc6a0c0ff9e9a75f55425028f508326c0cb943457c8104030eb0"
+      },
+      {
+        "path": "Classic_ownership_3/candidate-0001/series.json",
+        "bytes": 3763,
+        "sha256": "3b409eb85447723f5e171296411d8667a1e601e67382b831150295023b9bec2c"
+      },
+      {
+        "path": "Classic_ownership_3/fresh-confirmation/SHA256SUMS.json",
+        "bytes": 17880,
+        "sha256": "9256dd05a148fdfcb2541904987df0d1ba8db79b330f4da7c81294bde5a3c213"
+      },
+      {
+        "path": "Classic_ownership_3/fresh-confirmation/analysis.json",
+        "bytes": 2994,
+        "sha256": "484da2e80f07459c3043156f7f9df5575569a8dd4ea8b96d28bace4649f0bbad"
+      },
+      {
+        "path": "Classic_ownership_3/fresh-confirmation/manifest.json",
+        "bytes": 45399,
+        "sha256": "b0900d424a38f7736ccab4f6428f08682930b7c54718f0a4e27aac268e5d19ca"
+      },
+      {
+        "path": "Classic_ownership_3/fresh-confirmation/series.json",
+        "bytes": 3739,
+        "sha256": "fe50b3c7e141fe0b56034ff99b9350093068b1952522df0fdbf9bb19a49f1c47"
+      },
+      {
+        "path": "Classic_ownership_3/manifest.json",
+        "bytes": 3656,
+        "sha256": "d3bf1a24612df9b149bdb3e88d7944a47e09146469d72ccd7fc8ebb8d3f8d1d0"
+      },
+      {
+        "path": "report-records.json",
+        "bytes": 3344,
+        "sha256": "5624dfe753722c0b19f8ab55621087a85254c11f689672f7464333dcd725894d"
+      },
+      {
+        "path": "validation.json",
+        "bytes": 356,
+        "sha256": "43d414d073f48f28f9e3c5263fb37c3292cd3755007f79b70d2ba334b7d50c7c"
+      }
+    ],
+    "selected": [
+      {
+        "path": "selected/Branch-confirmation-foil.png",
+        "sha256": "3832ffedd4b7e346fa7a485a347f02930e01e068b857649ec71f74ba66ba5ffc"
+      },
+      {
+        "path": "selected/Branch-confirmation-target.png",
+        "sha256": "51dd03ecb2a4f1b0e85a68b50fa72544309382fa9066e69454f7bd7313ce4092"
+      },
+      {
+        "path": "selected/Classic-confirmation-foil.png",
+        "sha256": "69b64dafb8e64ffd0a5ee18fe856c7489827fe62b069ddba0a6ab79ad834790b"
+      },
+      {
+        "path": "selected/Classic-confirmation-target.png",
+        "sha256": "f122772861086ec709220691c471fb5bd92d377c79cc0e3c35994ea6174de54a"
+      }
+    ]
+  },
+  "first_attempt": "system Python without matplotlib; not accepted",
+  "second_attempt": "all 9 checks and rendering passed; publication stopped at sparse git add; no commit or push ran",
+  "recovery": "git add --sparse for explicit report directory, then ordinary commit and push; no native or rendering rerun",
+  "scientific_verdict": null
+}
