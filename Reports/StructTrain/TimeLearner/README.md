@@ -6,6 +6,9 @@ Artifact publication prerequisite: [Elder 16 Git tests](s10-artifact-publication
 [M40 16 Git tests](s10-artifact-publication-m40-a1/README.md). Schema 2 verifies
 declared committed blobs; upstream scientific completeness and full producer migration remain open.
 
+[Actual production eight-repository closure, primary/visual artifact checks and receipts](s10-production-closure-publication-a1/README.md)
+exercise schema 2 beyond fixtures; the complete stage 10 remains open.
+
 - [Production measured PostTune: 18 jobs and shared calibration regressions](s08-native-posttune-console-normal-a2/README.md).
 - [Production measured PostTune: completed ASan corpus](s08-native-posttune-console-asan-a1/README.md).
 - [All 18 production run-bound soma/input reports: 59 matrices, 178 trial-soma pairs](s08-native-posttune-console-visual-normal-a1/README.md).

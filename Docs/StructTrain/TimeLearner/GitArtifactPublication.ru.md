@@ -57,3 +57,21 @@ Receipts: root commits `ebf7a6355fc66414602bff30a5ad68eb7e4ae1d1` и
 использовали новый staging helper и committed-blob verifier. Финальный root push
 этих receipts выполнен вручную; это не доказывает полную интеграцию schema 2
 во все production publishers.
+
+### Реальная production closure
+
+После fixture tests выполнена идемпотентная публикация настоящего visual
+bundle `fd4f9f2b04755796b629bd6a39e26f94a520e7d6` через `publish_closure`
+schema 2: семь реальных дочерних репозиториев, затем корень. A1 проверял
+visual inventory; A2 — одновременно visual и lossless primary inventories.
+Child refs на момент проверки уже совпадали с gitlinks и не изменялись.
+Квитанции упакованы в commit `fb6baacd834dde7bebe253999503914279a39cd4`,
+который опубликован тем же production publisher с тремя artifact sets
+(visual, primary, receipts) и повторной проверкой восьми remote refs.
+
+[Артефакты и scope](../../../Reports/StructTrain/TimeLearner/s10-production-closure-publication-a1/README.md)
+сохраняют preflight, оба исходных результата и latest visual reader.
+Первый push visual producer был ручным; это отдельная проверка adoption,
+не утверждение о миграции всех producers. Квитанции фиксируют конкретные
+коммиты и состояние refs во время выполнения: дальнейшее продвижение веток
+не превращает их в проверку нового HEAD. Новые gitlinks требуют новой closure.

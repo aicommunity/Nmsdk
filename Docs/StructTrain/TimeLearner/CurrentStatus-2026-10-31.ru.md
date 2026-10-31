@@ -41,6 +41,15 @@ N0 ASan теперь выполняется отдельно на M40 в нов�
 сохранены. Free bytes выросли до 1745907712; новая квитанция включена в тот же
 раздел duplicate-only cleanup. Это не разрешение удалять уникальные трассы.
 
+Production publisher schema 2 проверен на настоящем visual bundle fd4f9f2b:
+восемь репозиториев, сначала семь детей, потом корень, затем повторная проверка
+remote refs. A1 проверял visual inventory; A2 — также исходный lossless primary
+bundle. [Квитанции](../../../Reports/StructTrain/TimeLearner/s10-production-closure-publication-a1/README.md)
+опубликованы тем же publisher в fb6baacd с тремя inventories (visual/primary/receipts).
+Все 20 members receipt archive проверены после Git merge. Первоначальный push
+visual producer был ручным: новая проверка идемпотентна и не означает миграцию
+всех producers, ConditionSpec или scheduler. Этап 10 остаётся частичным.
+
 ## Отправная точка и незавершённая ветка
 
 Принятый root develop: `8446ce2fc6775bb157cc4423665cba1319af228f`.
