@@ -75,7 +75,10 @@ def _audit_native_gate(specification, receipts):
     executable = {k: runtime["executable"][k] for k in ("path", "size", "sha256")}
     require(executable in loaded and owned["executable"] == executable["path"] and
             owned["executable_sha256"] == executable["sha256"] and count(owned["pid"]) > 0 and
-            count(owned["start_ticks"]) >= 0 and type(owned["boot_id"]) is str and bool(owned["boot_id"]),
+            # process_runner preserves the decimal /proc identity as a string;
+            # it is an opaque PID-reuse token, not a binary64 measurement.
+            type(owned["start_ticks"]) is str and re.fullmatch(r"(?:0|[1-9][0-9]*)", owned["start_ticks"]) and
+            type(owned["boot_id"]) is str and bool(owned["boot_id"]),
             "native_gate_owned_process_changed")
     arguments = receipts["request"]["arguments"]
     require(type(arguments) is list and len(arguments) == 2 and
