@@ -34,6 +34,7 @@ production calibration/PostTune controller.
 | Calibrated state, PulseLib 353882b → ce7e81e | Normal 2/2 прошли на обоих снимках. Усиленный ce7e81e проверил import/export/Reset/frozen probes и отказы при неправильных bindings. Данные и модели опубликованы commit 9746ea4; ASan 2/2 прошёл на обоих снимках, включая усиленный ce7e81e. ASan bundle a4984f1 опубликован. |
 | Frozen scorer/report, root b22c15fec | 9/9 checks прошли на normal ce7e81e (55.393 s); прежние 5/5 и 9/9 не складываются как уникальные tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5, отдельно от нового 16-case gate. ASan 9/9 прошёл на ce7e81e; данные опубликованы в a4984f1. Это тот же scoped набор, а не полная mode/profile matrix. |
 | Полные calibrated reports, root ff432f559 | M40 построил Classic/Branch: 4 предъявления двух паттернов × все сомы, 12 trial/soma pairs, 164 PNG и SVG/PDF. 3 report + 5 plotting checks прошли на normal и ASan данных. Git содержит 12 выбранных PNG и метаданные; полный cache — M40. Четыре графика просмотрены вручную. |
+| Native grid transaction, PulseLib dcc266a → c36e272 | Normal 2/2 прошли на обоих снимках, включая native commit, rollback/cancel и clock/frequency guards. Independent 17/17 (8 transaction + 9 calibrated regressions) прошли; bundle 2dc5825 опубликован. ASan нового driver ещё выполняется. Production CLI/worker и полный grid в standalone model proof остаются открытыми. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
 Дополнительная проверка реализации `ce7e81e002c802412ce50c1f2b2f76ffa7215b2a`
@@ -311,3 +312,60 @@ Reader принимает либо полный исторический наб�
 829348-byte архив. Восемнадцать package audits относятся к baseline/final
 данным, а не к восемнадцати независимым обучениям. ASan нового снимка
 остаётся отдельной незавершённой проверкой.
+
+## Native grid transaction: проверенный normal подэтап
+
+Реализован `NativeThresholdCalibrationTransaction<Owner>`: preflight полного
+объявленного design, immutable source, budget prefix, native import/lifecycle,
+очередь проб без вложенного Calculate, измеренный выбор, независимый rebuild
+и свежая confirmation, commit с export readback либо возврат source package.
+Текущий standalone model proof всё ещё содержит selected-candidate confirmation,
+а весь grid хранится отдельно в transaction report. Это ограничение явно
+помечено, не подменено флагом grid_selection_verified.
+
+Первый normal root `6f116ef54281a36fe5161ff3041f4eee27e3af7b` / PulseLib
+`dcc266aa1213fc88d9ee6d49b7230128f1c35326`: 2/2 native, 184034 ms;
+reader `aaf59e69006a0583dd4ffbedb208c70e7c76c906`: 17/17, 146.297 s.
+Следующий root `c83f0ca4c7f11cb1957d690f7297fdbaaf110c8a` / PulseLib
+`c36e27273b194752b3ad78184b8205c351bf3ce2`: 2/2 native, 193261 ms;
+reader `b1b8f0611c818afc0128ff7b04193b5ecac25191`: 17/17, 142.189 s.
+Вторая версия дополнительно связывает driver с storage/environment/frequency
+и монотонным model clock. Внешние Reset/clock/frequency изменения не разрешают
+перезаписать чужой контекст: результат RecoveryRequired с явной причиной.
+
+[Normal bundle](../../../Reports/StructTrain/TimeLearner/s08-calibration-grid-normal-a2/README.md)
+опубликован commit `2dc5825fbb76e5a95408507d10b644b0571d3302`: 431 файл,
+2351604 bytes. Включены оба снимка, source CSV/модели, raw matrices, runtime
+и native XML/logs, independent readers, 12 transaction records и четыре
+context-guard records текущей версии. Калибровка не меняет исходный
+`search_unresolved`. Это N1/2000 Hz двухпаттерновые engineering controls,
+не независимый Test и не августовское воспроизведение.
+
+Из того же Git-bundle M40 строит отчёты всех 16 records: все 10 завершённых
+матриц должны дать 30 trial/soma pairs с фактическими input pulses и полными
+overview/zoom/series. Renderer/CLI — root
+`4b714c75730de140ba713c4bf09e06fc9d6db7b7`; ожидается 27 checks,
+включая 5 report, 5 plotting и предыдущие 17 evidence checks. До terminal
+результата это не PASS. Полные графики остаются M40 cache, выбранные рисунки
+публикуются отдельно. Visual acceptance всей коллекции не заявляется.
+
+ASan attempt s08-calibration-grid-asan-a2 завершился 1 до запуска native tests:
+проверка compiler flags искала несуществующий NativeCalibrationTransaction.cpp
+вместо фактических owner/test compilation units. Это ошибка запускателя,
+не ошибка обучения и не ASan finding. Исправленный a3 использует те же
+неизменяемые source commits, проверяет реальные owner/candidate/test flags
+и исполняет отдельный native gate. Старый 20-кГц ASan runtime не менялся.
+
+Предыдущий JSON/Qt5-owner подэтап тоже получил ASan acceptance: 6 native +
+6 independent checks, [bundle](../../../Reports/StructTrain/TimeLearner/s08-threshold-json-owner-asan-a1/README.md)
+commit `4d7051915400a193a9ecd3c3203b53bc1f22b020`, 302 файла / 669704 bytes.
+Это Qt6 ASan regression, а не заявленное воспроизведение Qt5 dangling proxy.
+
+Для сборки Elder дополнительно дедуплицированы только побайтово проверенные
+статические библиотеки неактивных runtime: 281 путь заменён hardlinks на
+сохранённые экземпляры, около 2.66 GB расчётно освобождено. Inventory/receipt
+находятся в normal bundle; уникальные primary data не удалялись.
+
+Полный этап 8, production CLI/worker, full PostTune, standalone grid-proof
+сохранение, полная mode/profile/frequency matrix и независимые эксперименты
+остаются открытыми; новая feature ветка не объединена в develop.
