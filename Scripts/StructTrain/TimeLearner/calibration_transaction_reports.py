@@ -116,6 +116,6 @@ def render_calibration_run(source: Path, output: Path):
         '<a href="run-binding.json">model/grid/runtime binding</a>. '
         'This does not establish independent Test or scientific PASS.</p></html>'), encoding="utf-8")
     sums = {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-            for p in sorted(output.rglob("*")) if p.is_file() and p.name != "SHA256SUMS.json"}
+            for p in sorted(output.rglob("*")) if p.is_file() and p != output/"SHA256SUMS.json"}
     _write(output/"SHA256SUMS.json", sums)
     return {**result, "source_primary_checked": True, "run_evidence_consistent": True, "files": len(sums)}
