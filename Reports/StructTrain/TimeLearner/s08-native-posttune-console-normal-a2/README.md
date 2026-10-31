@@ -7,3 +7,5 @@ The same Console passed six direct calibration regressions, two extra public cal
 A1 failed the loader-environment guard before any native process started. A2 used the original runtime manifest and matching environment without rebuilding. Primary archive includes this rejected attempt and all final artifacts; analysis source is referenced by exact Git commits rather than duplicated.
 
 Production PostTune ASan, full profile/frequency/dimension matrix, all new production waveform reports, learner property dispatch and continuation remain open. This is scoped evidence, not stage 8 acceptance.
+
+Raw duplicate runs/calibration directories were removed from Elder after all 1146 archived members were reconstructed from Git and verified on Data M40. The retained full data are at /media/user/Data/TimeLearnerRefactor/readbacks/s08-native-posttune-console-offload-normal-a2/data; the primary archive is unchanged. See deduplication-receipt.json: 1031 duplicate files / 923722340 bytes removed only after byte/hash matching and an active-reader check; no unique primary results were removed.
