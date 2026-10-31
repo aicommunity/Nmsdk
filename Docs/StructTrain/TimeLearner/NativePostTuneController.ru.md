@@ -279,4 +279,10 @@ SHA256SUMS охватывает также эту связь. Это прове�
 `evaluation_verdict=null`. Same-matrix данные не становятся независимым Test.
 Полный cache хранится на M40 Data; в Git публикуются компактные первичные данные,
 модели, метрики, metadata и выбранные рисунки. Новая обёртка и три адресные
-проверки добавлены; серверная проверка всех 18 production reports пока ожидается.
+проверки выполнены на всех 18 production reports: 59 завершённых матриц,
+178 trial-soma pairs, 8437 cache files; 8/8 проверок (13.076 s), без skips.
+На последнем test revision `7e8d97f3f` те же 8/8 прошли за 12.419 s,
+включая отсутствие частичного output при недоступном plotting backend у
+обоих PostTune entry points. [Compact evidence](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-console-visual-normal-a1/README.md):
+422 metadata members и 12 выбранных PNG. Все 12 PNG вручную просмотрены;
+это приёмка читаемости выборки, не полного кэша, PDF/SVG или независимого Test.

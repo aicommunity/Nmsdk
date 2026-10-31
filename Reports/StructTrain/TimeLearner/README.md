@@ -8,6 +8,7 @@ declared committed blobs; upstream scientific completeness and full producer mig
 
 - [Production measured PostTune: 18 jobs and shared calibration regressions](s08-native-posttune-console-normal-a2/README.md).
 - [Production measured PostTune: completed ASan corpus](s08-native-posttune-console-asan-a1/README.md).
+- [All 18 production run-bound soma/input reports: 59 matrices, 178 trial-soma pairs](s08-native-posttune-console-visual-normal-a1/README.md).
 - [New controller: all 24 visual reports, 61 matrices, 184 trial-soma pairs](s08-native-posttune-controller-visual-normal-a3/README.md).
 - [Measured native search, real calibration and rollback: normal A2](s08-native-posttune-controller-normal-a2/README.md).
 - [The same native controller: ASan 10 native, 19 original and 20 later reader checks](s08-native-posttune-controller-asan-a2/README.md).
