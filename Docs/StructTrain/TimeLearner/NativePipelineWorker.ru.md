@@ -138,11 +138,15 @@ PNG; все восемь просмотрены в исходном размер
 на тик и реальные отсчёты без прореживания. Совпадение N0/N1 overview
 в этом bounded unresolved fixture не доказывает эквивалентность алгоритмов.
 
-Дополнительный normal interoperation-прогон применил full-grid calibration
+Дополнительные normal/ASan interoperation-прогоны применили full-grid calibration
 и последующий frozen Test к двум фактическим cold N1 моделям этого pipeline.
-Оба исторически объявленных grid дали NonSeparable, source Train остался
+На обоих workers две исторически объявленные сетки дали NonSeparable, source Train остался
 SearchUnresolved. Это отрицательный результат конкретной сетки и протокола,
 не доказательство физической невозможности разделения при любом пороге.
+[Normal interoperation bundle](../../../Reports/StructTrain/TimeLearner/s09-native-pipeline-interoperation-normal-a1/README.md)
+содержит 231 файл / 619464 bytes; [ASan](../../../Reports/StructTrain/TimeLearner/s09-native-pipeline-interoperation-asan-a1/README.md) —
+231 файл / 635736 bytes. Это отдельные lossless receipts новых 7/7 controls
+и четырёх owned фаз calibration/evaluation на каждом worker.
 Положительный calibrated-state путь на этой новой cold паре и графики новых
 калибровочных проб остаются открытыми; fixed-evaluation графики не подменяют их.
 
