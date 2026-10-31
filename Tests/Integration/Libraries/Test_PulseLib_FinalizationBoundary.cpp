@@ -241,12 +241,19 @@ template<class Owner> void ManagedFinalization(int calculateMode,bool owned=fals
         owner->EnablePostTrainTuning=true;owner->AutoCalibrateFixedLTZThreshold=true;
         owner->EnablePostTrainMidThreshold=false;owner->PostTrainTipResistanceMode=PostTrainTune::kPostTipKeepDone;
         const auto boundary=CaptureNativeFinalizationBoundary(*owner,implementation);
+        const auto repeated=clockGap?CaptureNativeFinalizationBoundary(*owner,implementation).Document():QJsonObject{};
         const double capturedTime=environment->GetTime().GetDoubleTime();
         if(clockGap)environment->IncreaseModelTimeByStep(); // no Calculate or structural edit
         const double entryTime=environment->GetTime().GetDoubleTime();
         if(clockGap) {
             EXPECT_NEAR(entryTime-capturedTime,1./2000.,1e-12);
-            EXPECT_EQ(CaptureNativeFinalizationBoundary(*owner,implementation).Document(),boundary.Document());
+            const auto afterClock=CaptureNativeFinalizationBoundary(*owner,implementation).Document();
+            if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+                EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
+                NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"-projection.json",
+                    {{"initial",boundary.Document()},{"repeat_without_clock",repeated},{"after_clock",afterClock}});
+            }
+            EXPECT_TRUE(afterClock==repeated)<<"Boundary changed after clock-only advance";
         }
         auto unsupported=boundary.Document();auto controls=unsupported["controls"].toObject();
         auto parameters=controls["parameters"].toObject();parameters["SyncCapacitanceTrim"]=1;
