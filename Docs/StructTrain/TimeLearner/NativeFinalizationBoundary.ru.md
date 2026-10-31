@@ -151,7 +151,7 @@ SumPotential соединяет точки линиями, вход изобра
 или завершения configured finalization. Для queued/stopped controls нет
 выдуманных waveform-проб. Итогового scientific verdict нет.
 
-## Active-request import: адресные normal и базовый ASan проверены
+## Active-request import и clock isolation: адресные normal/ASan проверены
 
 PulseLib ec3d7b4fc01efec5bfd727b3057e86a66bb6a94b, root
 c0496d2538054afd580fc46f00922144aabe630c добавляют явный
@@ -215,9 +215,10 @@ Root 87e36a376afe513c0355c468ba7eb8afa3829219 исправляет начало 
 фактическое нулевое время; bool Reset не используется как error channel. Новая
 проверка выполняет два последовательных fresh jobs по три native ticks. Для
 полной runtime-проверки изменения запущен отдельный 45-case gate; до его
-окончания исправление clock isolation не считается полностью принятым. Normal
-45/45 завершён (196.890 s), без skips, включая два последовательных fresh jobs.
-ASan 45-case gate следует после завершённого базового 44-case run. Промежуточный
+окончания исправление clock isolation не считалось принятым. Теперь normal
+45/45 завершён (196.890 s), ASan 45/45 (1370.820 s), без skips, включая два
+последовательных fresh jobs; leak checking выключен. Адресная двухсерверная
+проверка этого изменения закрыта, полные этапы 2/8 этим не объявляются выполненными. Промежуточный
 ожидавший 18-case ASan job отменён до checkout/runtime creation, вместо него
 проверяется сразу полная актуальная версия; receipt сохраняется. Работающий
 44-case run при этом не прерывался. Старые задания и runtime не обновляются.
@@ -231,5 +232,38 @@ ASan 45-case gate следует после завершённого базов�
 содержит 203 members / 2642116 bytes: a1 44-case, a2 18-case, reader attempts,
 compatibility differences и два полных original portable runs / 84 artifacts.
 После --no-ff merge проверены все inventory/archive/member SHA. В этот proof
-ещё не входят отдельный clock-isolated normal a3 45-case run и новые ASan runs;
-их публикация остаётся обязательным следующим действием.
+не входят отдельный clock-isolated normal a3 45-case run и новые ASan runs:
+это исторический proof предыдущего подэтапа. Новые полные доказательства —
+[normal clock-isolated](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-normal-a2/README.md)
+(150 members / 2028576 bytes) и
+[ASan clock-isolated](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-asan-a1/README.md)
+(219 members / 3453216 bytes). Каждый содержит два original portable runs /
+84 artifacts. Все archive/member/inventory SHA после --no-ff merges проверены.
+Reader gates на clock-isolated данных: normal 2/2 (23.695 s), ASan 2/2 (20.228 s),
+по четыре transactions и 20 negative controls. Происхождение Train не переписано.
+
+## Временные графики managed transactions
+
+[Visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-visual-asan-a1/README.md):
+четыре reports Classic/Branch × CalculateMode 0/1, 24 complete trial-soma pairs,
+оба target/foil и все soma channels при measurement и preserved final thresholds.
+Дополнительно прежний filename-based entry point построил реальный fixed report
+(ещё четыре control pairs). Все 60 original source files имеют прежние SHA.
+Общий data renderer получает actual replay source вместе с оригинальными
+summary/packets/CSV и повторно проводит полный audit; исторические файлы не
+подменяются ради loader. Ни модели, ни численные эксперименты при рендеринге
+не рассчитываются повторно.
+
+Root renderer eb58ac90344ca6ecc8a0952998e1702aa6879808; реальный gate 115.774 s.
+Cache M40 Data `/media/user/Data/TimeLearnerRefactor/cache/s08-native-finalization-ownership-asan-a1`:
+1334 files / 111753950 bytes. Git: 61 metadata members / 61320 bytes и восемь PNG.
+Проверены все hashes и 64 bindings к actual managed records, original model files
+и original CSV из полного ASan primary proof.
+
+Восемь выбранных target/first-soma overview/detail для обеих topology и двух
+состояний физики просмотрены в 1920×960: подписи, сома и реальные импульсы читаемы.
+Detail имеет ≥8 pixels/native tick, прореживания нет. Foil, другая Classic soma,
+mode-1 figures и остальные tiles/SVG/PDF вручную не приняты; они прошли coverage
+checks. SI units unverified; соединённые линиями samples не доказывают sub-tick
+опережение импульса. Source Train остаётся search_unresolved; weights_selected
+не означает recognition success. Configured dispatcher и full stage 8 открыты.

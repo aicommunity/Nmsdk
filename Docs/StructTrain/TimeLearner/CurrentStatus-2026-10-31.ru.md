@@ -15,15 +15,27 @@ transactions и 20 negative controls, с оригинальными Train primar
 ASan reader также завершён: 2/2 (20.827 s), без skips, четыре transactions и
 20 negative controls. Опубликован [normal ownership proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-normal-a1/README.md):
 203 members / 2642116 bytes; все hashes после --no-ff merge проверены. Он хранит
-44-case/a1 и 18-case/a2; clock-isolated 45-case/a3 и ASan primaries ещё ожидают
-отдельной публикации. Configured dispatcher и optional guards не менялись;
+44-case/a1 и 18-case/a2. Новые clock-isolated proofs опубликованы отдельно:
+[normal](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-normal-a2/README.md)
+150 members / 2028576 bytes и [ASan](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-asan-a1/README.md)
+219 members / 3453216 bytes. Каждый включает два полных original runs / 84 artifacts;
+все hashes проверены. Configured dispatcher и optional guards не менялись;
 полной приёмки этапа 8 нет.
 
 Сверка прежних fixed artifacts: 6/10 byte-exact; positive selection/roundtrip
 выявили перенос Environment clock между WithFreshModel jobs (три лишних шага).
 Clock isolation исправлен штатным Reset на пустой границе (root 87e36a376);
-normal 45/45 (196.890 s), ASan 45-case gate ещё не завершён. Научная эквивалентность четырёх
+normal 45/45 (196.890 s), ASan 45/45 (1370.820 s), без skips, leak checking выключен.
+Reader на новых данных: normal 2/2 (23.695 s), ASan 2/2 (20.228 s), по 20 corrupt controls.
+Научная эквивалентность четырёх
 различающихся прежних records пока не установлена; старые данные сохраняются.
+
+[Managed temporal proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-ownership-visual-asan-a1/README.md):
+4 reports / 24 complete pairs и дополнительный legacy API control / 4 pairs;
+60 source files неизменны. Cache M40 Data — 1334 files / 111753950 bytes; Git —
+61 metadata members / 61320 bytes и 8 PNG. Все hashes и 64 source bindings проверены.
+Выбранные target/first-soma overview/detail в двух физических состояниях просмотрены
+при 1920×960; полная visual acceptance остальных каналов/foil/mode1 не заявляется.
 
 Ранее проверенная immutable boundary: root a282fe9a /
 PulseLib f8929f9: normal 24/24 (20.492 s), ASan 24/24 (128.163 s), без skips.
