@@ -4,7 +4,9 @@ NativeFinalizationBoundary хранит значения, а не ссылки �
 checkpoint динамики. CaptureNativeFinalizationBoundary читает настоящий экспорт
 Solo, исходные phase parameters и фактические связи параметров (путь provider,
 имя свойства, порядок sources, connected/external kind). Getter не пишет во
-внешний источник и не вызывает Build/Init/Reset/Calculate.
+внешний источник и не вызывает Build/Init/Reset/Calculate исходного owner.
+Экспорт штатно создаёт и инициализирует отдельные rehearsal/image instances;
+это не прозрачный checkpoint динамики и не отсутствие любых storage-операций.
 
 Допустима только ready/initialized Solo-модель с Finished training service и
 полностью освобождённой границей probe: ни queued/running, ни непотреблённого
