@@ -35,7 +35,7 @@ def _text(value):
     return value
 
 
-def _matrix(matrix, assessment, criterion, candidate, source_case):
+def audit_native_calibration_matrix(matrix, assessment, criterion, candidate, source_case, *, require_success=True):
     require(type(matrix) is dict and set(matrix) == {"requests", "observations"}, "unknown_calibration_proof_matrix")
     requests, observations = matrix["requests"], matrix["observations"]
     require(type(requests) is list and 2 <= len(requests) <= 10000 and type(observations) is list
@@ -68,7 +68,8 @@ def _matrix(matrix, assessment, criterion, candidate, source_case):
             "model_revision": candidate["model_revision"], "coverage_policy": "per_trial_windows",
             "criterion": {"id": "post_anchor_target_whole_window_foil_v1", **criterion}, "trials": trials}
     result = audit_native_calibration_assessment(assessment, spec, observations, candidate, source_case)
-    require(result["criterion_met"] is True, "native_confirmation_criterion_not_met")
+    if require_success:
+        require(result["criterion_met"] is True, "native_confirmation_criterion_not_met")
     return run_id
 
 
@@ -100,8 +101,8 @@ def audit_calibrated_state(package, source_case=None):
         criterion = specification["criterion"]
         require(type(criterion) is dict and set(criterion) ==
                 {"anchor", "begin_offset", "end_offset", "reject_target_outside_window"}, "unknown_confirmation_criterion")
-        search_id = _matrix(proof["search"], proof["search_assessment"], criterion, candidate, source_case)
-        confirmation_id = _matrix(proof["confirmation"], proof["confirmation_assessment"], criterion, candidate, source_case)
+        search_id = audit_native_calibration_matrix(proof["search"], proof["search_assessment"], criterion, candidate, source_case)
+        confirmation_id = audit_native_calibration_matrix(proof["confirmation"], proof["confirmation_assessment"], criterion, candidate, source_case)
         require(search_id != confirmation_id, "native_confirmation_requires_fresh_run")
         search, confirmation = proof["search"], proof["confirmation"]
         semantic = lambda rows: [{k: v for k, v in row.items() if k not in {"run_id", "trial_id"}} for row in rows]
