@@ -40,7 +40,7 @@ def read_free_run(packet_path, trace_path):
             "legacy_posttune_invalid_terminal_status")
     header = ["time", "stimulus", *[f"soma{i}" for i in range(channels)],
               "dataset_iteration", "state_generation", "selected_metric"]
-    samples,stimulus_times = [],[];previous=0.
+    samples,stimulus_times = [],[];previous=0.;replayed_peaks = [0.,0.]
     with Path(trace_path).open(encoding="utf-8", newline="") as stream:
         rows = csv.reader(stream);require(next(rows, None) == header, "legacy_posttune_csv_header")
         for index,row in enumerate(rows):
@@ -50,6 +50,9 @@ def read_free_run(packet_path, trace_path):
             require(equal(time, begin+index/frequency), "legacy_posttune_sample_clock_or_gap")
             require(all(v == round(v) for v in values[-3:-1]), "legacy_posttune_noninteger_dataset_state")
             require(equal(sum(soma), values[-1]), "legacy_posttune_selected_metric_changed")
+            sample_index = int(values[-3])
+            require(0 <= sample_index < len(states), "legacy_posttune_sample_index_changed")
+            replayed_peaks[sample_index] = max(replayed_peaks[sample_index], values[-1])
             if stimulus > 0 and previous <= 0:stimulus_times.append(time)
             previous=stimulus
             samples.append({"time": time, "stimulus": stimulus, "soma": soma})
@@ -59,8 +62,11 @@ def read_free_run(packet_path, trace_path):
     for pattern,index in zip(packet["pattern_isi"], (0,2)):
         require(abs(stimulus_times[index+1]-stimulus_times[index]-pattern[1]) <= 1.01/frequency,
                 "legacy_posttune_presented_pattern_changed")
+    require(all(equal(value, state["peak"]) for value,state in zip(replayed_peaks,states)),
+            "legacy_posttune_recorded_peak_changed")
     audit = {"primary_data_consistent": True, "recorded_native_ticks": ticks, "soma_channels": channels,
              "declared_patterns": 2, "observed_input_pulses": 4, "result": packet["result"],
+             "sample_peaks_replayed": True, "peak_policy": "legacy_zero_floor_maximum_of_selected_soma_metric",
              "native_execution_verified": False, "calibration_validated": False,
              "physical_settling_verified": False, "scientific_verdict": None}
     return packet,samples,audit
