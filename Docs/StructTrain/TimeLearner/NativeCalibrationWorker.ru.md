@@ -77,6 +77,9 @@ python3 -m Scripts.StructTrain.TimeLearner calibrate run JOB.json \
 
 python3 -m Scripts.StructTrain.TimeLearner analyze \
   NEW_ATTEMPT/run-manifest.json --format calibration-run
+
+python3 -m Scripts.StructTrain.TimeLearner report \
+  NEW_ATTEMPT/run-manifest.json --format calibration-run --output NEW_M40_REPORT_CACHE
 ```
 
 Прямой native интерфейс: `NeuroModelerConsole --app-ini INI
@@ -106,3 +109,14 @@ transaction, не при загрузке отдельного model.json.
 independent Test или научный PASS. Digest calibration specification не подменяет
 полный ConditionSpec кампании. Train/export/evaluate, общая очередь/publisher,
 полный PostTune и физическая матрица остаются открытыми требованиями плана.
+
+Report проверяет полный RunManifest и первичные данные до создания output,
+после чего строит все завершённые candidate/confirmation matrices общим
+renderer: каждая проба и каждая сома, фактические входы, overview и 100-tick zoom
+без прореживания. Run-binding.json отдельно фиксирует проверку первичных данных;
+обычный transaction renderer сам по себе её не обещает. Полные PNG/SVG/PDF —
+в M40 cache; Git хранит primary archive, метаданные и выбранные изображения.
+
+Runtime mappings process_runner снимаются при старте процесса. Они не являются
+полным census всех потенциально загруженных позднее plugin libraries. Этот
+предел provenance сохраняется до отдельного расширения production runner.
