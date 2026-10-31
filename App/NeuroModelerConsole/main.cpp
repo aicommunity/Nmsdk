@@ -19,6 +19,7 @@
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
 #include "ClDescGenerator.h"
+#include "TimeLearnerCalibrationJob.h"
 #include "TimeLearner/ModelInspection.h"
 #include "TimeLearner/ModelIdentity.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
@@ -81,6 +82,10 @@ const QCommandLineOption inspectModelOption(QStringList() << "inspect-model",
                                            "Write effective loaded model readback and exit without calculation.", "json-path");
 const QCommandLineOption identityModelOption(QStringList() << "model-identity",
                                             "Write semantic model identity and exit without calculation.", "json-path");
+const QCommandLineOption timeLearnerJobOption(QStringList() << "timelearner-calibrate",
+                                            "Execute a declared native threshold calibration job.", "json-path");
+const QCommandLineOption timeLearnerOutputOption(QStringList() << "timelearner-output",
+                                               "New native calibration artifact directory.", "directory");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
@@ -95,6 +100,8 @@ parser.addOption(checkConfigOption);
 parser.addOption(appIniOption);
 parser.addOption(inspectModelOption);
 parser.addOption(identityModelOption);
+parser.addOption(timeLearnerJobOption);
+parser.addOption(timeLearnerOutputOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -117,7 +124,7 @@ parser.addOption(identityModelOption);
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
          option == "--cldesc-class" || option == "-K" ||
-         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity";
+         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-output";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -133,7 +140,7 @@ parser.addOption(identityModelOption);
       option == "--cldesc-lexicon" || option == "-l" ||
       option == "--cldesc-library" || option == "-C" ||
       option == "--cldesc-class" || option == "-K" ||
-      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity")
+      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-output")
    {
     if(shouldSkipValue(option) && !token.contains('=') && i + 1 < original.size())
      ++i;
@@ -158,6 +165,16 @@ const QString cliCheckConfig = parser.value(checkConfigOption).trimmed();
 const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
 const bool wantIdentity = parser.isSet(identityModelOption);
 const QString inspectionPath = parser.value(wantIdentity ? identityModelOption : inspectModelOption).trimmed();
+const bool nativeCalibration = parser.isSet(timeLearnerJobOption) || parser.isSet(timeLearnerOutputOption);
+if(nativeCalibration && (!parser.isSet(timeLearnerJobOption) || !parser.isSet(timeLearnerOutputOption) ||
+   parser.value(timeLearnerJobOption).trimmed().isEmpty() || parser.value(timeLearnerOutputOption).trimmed().isEmpty() ||
+   parser.isSet(configOption) || cliStartCalc || cliSaveProject || cliExitAfterCalc || parser.isSet(calcTimeOption) ||
+   cliGenerateClDesc || parser.isSet(checkConfigOption) || parser.isSet(inspectModelOption) || wantIdentity ||
+   parser.isSet(lexiconOption) || parser.isSet(clDescLibraryOption) || parser.isSet(clDescClassOption) || parser.isSet(clDescForceOption)))
+{
+ qCritical() << "Native calibration requires --timelearner-calibrate and --timelearner-output and excludes project execution/inspection modes";
+ return 2;
+}
 if((parser.isSet(inspectModelOption) || wantIdentity) &&
    (inspectionPath.isEmpty() || cliConfigPath.isEmpty() || cliStartCalc || cliSaveProject || cliExitAfterCalc ||
     parser.isSet(calcTimeOption) || cliGenerateClDesc || !cliCheckConfig.isEmpty() ||
@@ -205,6 +222,9 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
 
  if(init_res != 0)
   return init_res;
+
+ if(nativeCalibration)
+  return RunTimeLearnerCalibrationJob(parser.value(timeLearnerJobOption).trimmed(),parser.value(timeLearnerOutputOption).trimmed());
 
  // Обработка проверки конфигурации
  if(!cliCheckConfig.isEmpty())
