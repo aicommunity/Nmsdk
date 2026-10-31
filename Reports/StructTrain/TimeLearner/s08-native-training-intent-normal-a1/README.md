@@ -1,0 +1,5 @@
+Immutable native training request intent: normal
+
+61/61 native checks, including 8 live request lifecycle scenarios and 20 connected-stop controls. Two independent reader tests audit 24 original request snapshots in eight records and 32 re-signed corruptions. Early declared BudgetExhausted and ExternalStop remain explicit, not convergence. Reset, late control edits, failed import, new sessions and retarget exercised. Two complete original portable Train runs / 84 artifacts included.
+
+No automatic finalization dispatch, final parallel recognition calibration, foil evaluation or full stage 8 acceptance. Source Train remains search_unresolved; these are saved Solo replay probes, not independent cold training. Latest job reused a previously completed runtime/build after a live-process check; no live runtime was changed. ASan leak checking disabled in ASan runs. No invented waveform is supplied for control-only interrupted windows; genuine complete Solo regression traces and their immutable sources are retained. Intent model-export/checkpoint and automatic phase orchestration remain unsupported.
