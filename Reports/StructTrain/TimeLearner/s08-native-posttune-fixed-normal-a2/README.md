@@ -1,0 +1,7 @@
+# Native fixed-threshold PostTune: scoped proof
+
+Root 3d922ba2 / PulseLib 03d1ea86 passed 12 native cases without skips (67.946 s): four controls-codec cases and eight actual Classic/Branch fixed-threshold selection, budget, cancel and Reset controls. Both selected models survived native import/Build/Init/Reset; all replayed stimulus and soma samples matched within native double-comparison precision. Explicit later calibration completed as calibrated for Classic and nonseparable for Branch; it was not performed during fixed selection. Five independent Python checks at 38cd68a0 passed in 33.219 s. The real silent targets remained FN (TP0/FP0/FN1/TN1); weights_selected never means recognition success, calibrated or training Exact.
+
+Two genuine legacy owned Console A/B jobs retained byte-identical transaction and final model output. Source job inputs and complete source primaries are also present in native-fixed-a2/runs. Eighteen golden job declarations for the codec are reproducible from original bundle 3c1751f9; duplicate baseline-source extractions are omitted here. The failed A1 compilation and corrected callback fixture are preserved; no native simulation ran in A1.
+
+Only N1/two inputs/2000 Hz controls are accepted. Production schema-2 jobs, configured learner phase dispatch, full physical matrix, ASan fixed mode and new visual reports remain open. A verified static-link-cache duplicate cleanup receipt is included; all runtime executable bytes and one static-cache copy per hash were retained.
