@@ -1,0 +1,7 @@
+# Shared PostTune configuration: ASan mechanical production proof
+
+ASan with leak detection disabled. Root d48837f1 / PulseLib 30f737c8: the production Console now uses the common strict typed decoder instead of its own nine-control parser. No physical model, mathematical target, native scheduling or algorithm was changed. Three native codec cases passed without skips, including all 18 original published production jobs and direct numeric field bindings, malformed fields/types/budgets/nonfinite controls.
+
+Two actual owned Console A/B jobs, Classic-auto_metric and Branch-synthetic, used the original unchanged job documents and primary sources. Both transaction.json and final model.json matched the original Git primary bytes exactly; portable production run audits passed. The original source was reconstructed from commit 88c47ddfe0864db3f71e0f2cad5b8371465ca004. The baseline-source extraction is reproducible from that bundle and is not duplicated in this archive; extraction recipe and expected digests are preserved.
+
+Thirteen stronger parent-auditor checks at 38cd68a0 also passed on the original 24 normal parent transactions (140.929 s, no skips), without native rerun; their distinct receipts are included. This scoped mechanical acceptance does not implement learner-property phase dispatch, continuation, the full mode/profile/frequency matrix or independent scientific classification. The configured optional-mode guard remains.
