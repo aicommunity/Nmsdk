@@ -6,7 +6,8 @@ import re
 import unittest
 
 from ..learned_evidence import load_case
-from ..live_finalization_evidence import audit_completed_live_finalization
+from ..live_finalization_evidence import audit_completed_live_finalization, audit_pre_entry_live_finalization
+from ..stopped_evidence import load_case as load_stopped_case
 from ..model_identity import canonical_model_sha256 as sha
 from ..native_evidence import EvidenceError, load
 
@@ -52,3 +53,51 @@ class LiveFinalizationEvidenceTest(unittest.TestCase):
                 with self.subTest(case=p.name, corruption=label):
                     with self.assertRaises(EvidenceError):
                         audit_completed_live_finalization(changed, source)
+
+
+class LiveFinalizationRejectionEvidenceTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        root = os.environ.get("TIMELEARNER_LIVE_FINALIZATION_NATIVE")
+        if not root:
+            raise unittest.SkipTest("requires all twelve real pre-entry native controls")
+        cls.paths = [p for p in sorted(Path(root).glob("*.json")) if
+                     re.fullmatch(r"(?:Classic|Branch)_live_finalization_[01]_(?:local|connected)_[2-7]\.json", p.name)]
+        if len(cls.paths) != 12:
+            raise RuntimeError("requires both topologies and all six pre-entry negative scenarios")
+
+    @staticmethod
+    def source(p, record):
+        if record["scenario"] in (6, 7):
+            if list(p.parent.glob(p.stem+"_state_trial_*.json")) or list(p.parent.glob(p.stem+"_stopped_trial_*.json")):
+                raise RuntimeError("preflight rejected condition unexpectedly produced Train probes")
+            return None
+        if record["scenario"] == 2:
+            return load_stopped_case(p.with_name(p.stem+"_stopped_state.json"))
+        return load_case(p.with_name(p.stem+"_learned_state.json"))
+
+    def test_all_rejections_and_real_primary_sources(self):
+        seen = set()
+        for p in self.paths:
+            record = load(p)
+            with self.subTest(case=p.name):
+                result = audit_pre_entry_live_finalization(record, self.source(p, record))
+                self.assertTrue(result["no_recognition_evidence"])
+                self.assertFalse(result["actual_control_and_physics_interventions_attested"])
+                seen.add((p.name.split("_")[0], record["scenario"]))
+        self.assertEqual(seen, {(top, s) for top in ("Classic", "Branch") for s in range(2, 8)})
+
+    def test_resigned_early_stop_and_false_evaluation_controls_reject(self):
+        for p in self.paths:
+            record = load(p);source = self.source(p, record)
+            for name, mutate in (
+                ("false_model", lambda r: r.update(final_package={"unexpected": True})),
+                ("false_completion", lambda r: r["live"].update(status="completed")),
+                ("false_entry", lambda r: r["live"].update(entry_model_time=0)),
+                ("false_reason", lambda r: r["live"].update(reason="exact")),
+                ("false_verdict", lambda r: r.update(scientific_verdict=True)),
+            ):
+                changed = deepcopy(record);mutate(changed)
+                changed["live"]["sha256"] = sha({k: v for k, v in changed["live"].items() if k != "sha256"})
+                with self.subTest(case=p.name, corruption=name):
+                    with self.assertRaises(EvidenceError):audit_pre_entry_live_finalization(changed, source)

@@ -472,7 +472,7 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
         owner->SetConfiguredNativeEvidenceSinks({[&](const auto&,const auto&){samples.clear();},
             [&](const auto& sample){samples.push_back(sample);},[&](const auto& result) {
                 ++trial;if(!output)return;
-                const auto stem=name+"_state_trial_"+std::to_string(trial);
+                const auto stem=name+(scenario==LiveScenario::Stopped?"_stopped_trial_":"_state_trial_")+std::to_string(trial);
                 NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(stem)+".json",EncodeNativeProbeEvidence(result));
                 const auto path=QDir(QString::fromLocal8Bit(output)).filePath(QString::fromStdString(stem)+".csv");
                 std::ofstream stream(path.toStdString());stream.imbue(std::locale::classic());stream<<std::setprecision(17);
@@ -517,6 +517,12 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
             EXPECT_FALSE(queued);EXPECT_FALSE(owner->HasNativeRecognitionState());
             EXPECT_EQ(live["status"],QJsonValue("stopped_diagnostic"));
             EXPECT_TRUE(live["boundary"].toObject()["diagnostic_only"].toBool());
+            const auto stopped=live["boundary"].toObject()["source_solo"].toObject();
+            summary=EncodeNativeTrainingState(owner->NativeTrainingController(),stopped["model_revision"].toString().toStdString(),owner->ReadNativeParameters());
+            if(output) {
+                NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_stopped_state.json",stopped);
+                NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_stopped_summary.json",summary);
+            }
         } else if(scenario==LiveScenario::ControlDrift || scenario==LiveScenario::StopQueued || scenario==LiveScenario::ResetQueued) {
             EXPECT_TRUE(queued);EXPECT_TRUE(intervention);EXPECT_FALSE(owner->HasNativeRecognitionState());
             EXPECT_EQ(live["status"],QJsonValue(scenario==LiveScenario::ResetQueued?"interrupted":"failed"));
