@@ -9,6 +9,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <cmath>
+#include <functional>
 #include <set>
 
 namespace NmsdkWorker {
@@ -50,4 +51,29 @@ struct ModelScope {
     RDK::UEPtr<RDK::UEnvironment> environment;
     ~ModelScope(){if(auto net=RDK::dynamic_pointer_cast<RDK::UNet>(environment->GetModel()))net->BreakLinks();environment->DestroyModel();}
 };
+template<class Work> int WithFreshModel(unsigned frequency,Work work)
+{
+    auto storage=RDK::GetStorage();auto environment=RDK::GetEnvironment();
+    Require(bool(storage) && bool(environment),"job_requires_initialized_native_core");
+    Require(!environment->GetModel() || environment->GetModel()->GetNumComponents()==0,"job_refuses_existing_model");
+    environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);
+    Require(environment->CreateModel("NModel"),"job_model_creation_failed");ModelScope scope{environment};
+    auto model=environment->GetModel();model->SetGlobalTimeStep(frequency);
+    return work(storage,environment,model);
+}
+template<class Owner,class Work> int WithFreshOwner(const std::string& ownerClass,unsigned frequency,
+    const std::string& ownerName,Work work,
+    std::function<void(RDK::UEPtr<RDK::UStorage>,RDK::UEPtr<RDK::UEnvironment>)> prepare={})
+{
+    return WithFreshModel(frequency,[&](auto storage,auto environment,auto model) {
+    // Register immutable image dependencies before creating experiment instances.
+    if(prepare)prepare(storage,environment);
+    auto owner=RDK::dynamic_pointer_cast<Owner>(storage->TakeObject(ownerClass));
+    Require(bool(owner),"job_owner_creation_failed");owner->Name=ownerName;
+    RDK::UEPtr<RDK::UContainer> component=owner;
+    Require(model->AddComponent(component)!=RDK::ForbiddenId,"job_owner_attachment_failed");
+    owner->SetGlobalTimeStep(frequency);
+    return work(storage,environment,model,owner);
+    });
+}
 }

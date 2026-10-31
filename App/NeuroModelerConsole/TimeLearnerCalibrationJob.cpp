@@ -49,16 +49,7 @@ Job Read(const QString& path)
 }
 template<class Owner> int Execute(const Job& job,const QString& output)
 {
-    auto storage=RDK::GetStorage();auto environment=RDK::GetEnvironment();
-    Require(bool(storage) && bool(environment),"job_requires_initialized_native_core");
-    Require(!environment->GetModel() || environment->GetModel()->GetNumComponents()==0,"job_refuses_existing_model");
-    environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);
-    Require(environment->CreateModel("NModel"),"job_model_creation_failed");ModelScope scope{environment};
-    auto model=environment->GetModel();model->SetGlobalTimeStep(job.frequency);
-    auto owner=dynamic_pointer_cast<Owner>(storage->TakeObject(job.ownerClass));
-    Require(bool(owner),"job_owner_creation_failed");owner->Name="CalibrationOwner";
-    UEPtr<UContainer> component=owner;Require(model->AddComponent(component)!=ForbiddenId,"job_owner_attachment_failed");
-    owner->SetGlobalTimeStep(job.frequency);
+    return WithFreshOwner<Owner>(job.ownerClass,job.frequency,"CalibrationOwner",[&](auto storage,auto environment,auto model,auto owner) {
     const auto imported=owner->ImportNativeRecognitionState(job.source,job.implementation);
     if(imported.status!=NativeModelBuildStatus::Adopted)throw std::invalid_argument("job_import_failed:"+imported.reason);
     Require(owner->GetTimeStep()==job.frequency,"job_import_frequency_mismatch");
@@ -97,6 +88,7 @@ template<class Owner> int Execute(const Job& job,const QString& output)
     const auto status=transaction.Status();
     return execution=="completed" && (status==NativeCalibrationTransactionStatus::Calibrated ||
         status==NativeCalibrationTransactionStatus::NonSeparable || status==NativeCalibrationTransactionStatus::BudgetExhausted)?0:2;
+    });
 }
 }
 int RunTimeLearnerCalibrationJob(const QString& input,const QString& output)
