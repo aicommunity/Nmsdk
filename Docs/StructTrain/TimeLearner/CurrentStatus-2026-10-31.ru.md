@@ -344,10 +344,20 @@ context-guard records текущей версии. Калибровка не м�
 Из того же Git-bundle M40 строит отчёты всех 16 records: все 10 завершённых
 матриц должны дать 30 trial/soma pairs с фактическими input pulses и полными
 overview/zoom/series. Renderer/CLI — root
-`4b714c75730de140ba713c4bf09e06fc9d6db7b7`; ожидается 27 checks,
-включая 5 report, 5 plotting и предыдущие 17 evidence checks. До terminal
-результата это не PASS. Полные графики остаются M40 cache, выбранные рисунки
-публикуются отдельно. Visual acceptance всей коллекции не заявляется.
+`4b714c75730de140ba713c4bf09e06fc9d6db7b7`: 27/27 checks прошли за
+163.700 s, включая 5 report, 5 plotting и предыдущие 17 evidence checks.
+Полный cache содержит 1448 файлов. Метаданные и выбранные рисунки опубликованы
+в 3c785fec6bd321559608cbb93eac009cfefd6907; последующая подборка full-response/
+peak панелей — 6a8fa9fb884879298d8ad4e7fbdaa43af5a19e57. Visual acceptance
+всей коллекции не заявляется.
+
+Renderer `01faa730d4decf7c82ae0ea48c42fa622f41817f` дополнительно подписывает
+actual LT spike markers прямо в PNG/SVG/PDF и series legend. Перестроены те же
+16 отчётов / 10 матриц / 30 trial-soma pairs; 10/10 затронутых report/plot checks
+прошли за 15.606 s. Неизменённые 17 evidence checks и численное обучение ради
+легенды не повторялись. Обновлённая подборка сохраняет 16 PNG, включая Classic
+soma2, и заменяет прежние last-input-only панели общими видами с полным пиком.
+Предыдущие версии доступны в истории Git, bulk cache остаётся на M40.
 
 ASan attempt s08-calibration-grid-asan-a2 завершился 1 до запуска native tests:
 проверка compiler flags искала несуществующий NativeCalibrationTransaction.cpp
@@ -369,3 +379,10 @@ commit `4d7051915400a193a9ecd3c3203b53bc1f22b020`, 302 файла / 669704 bytes
 Полный этап 8, production CLI/worker, full PostTune, standalone grid-proof
 сохранение, полная mode/profile/frequency matrix и независимые эксперименты
 остаются открытыми; новая feature ветка не объединена в develop.
+
+Обновлены профильные заметки PulseLib/Bin с явным разделением legacy snapshots
+и native driver. PulseLib e8b004653d8ca03fb76d29357d21c6fe59c2b235 меняет
+только документацию: Core tree совпадает с проверенным c36e272 (dedba1ad).
+Bin 9af8a5c7cbcd94c76930b2b9928f2c307a98143b также содержит только правки
+документации. Runtime evidence остаётся привязан к фактически собранным
+commits c83f0ca4c / c36e272 / 5e9d3784, без подмены происхождения.
