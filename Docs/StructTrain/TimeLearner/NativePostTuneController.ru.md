@@ -253,3 +253,23 @@ waveform reports остаются открытыми.
 фазы проверить фактическое состояние и сохранить новый результат. Ни один из
 этих переходов не вызывает Calculate из контроллера и не повышает прежний
 `search_unresolved` до Exact. Этот участок остаётся открытым требованием этапа 8.
+
+### Отчёт для production run manifest
+
+`report RUN_MANIFEST --format posttune-run --output CACHE` сначала проверяет
+полную portable artifact closure запуска, условия задания, runtime fingerprint,
+owned-process evidence, исходные primary data и фактический результат native
+операции через production `audit_run_manifest`. После этого общий renderer
+строит все завершённые weight/threshold matrices и fresh confirmation: каждый
+паттерн, каждый канал сомы, фактические входные импульсы, обзор и временные
+увеличения без прореживания native samples. Partial probes сохраняются в
+первичных данных, но не выдаются за полные реакции.
+
+`run-binding.json` связывает рисунки с attempt, source closure и runtime;
+SHA256SUMS охватывает также эту связь. Это проверка согласованности сохранённых
+свидетельств, а не независимая аттестация произвольного process record:
+`native_execution_verified=false`, `visual_acceptance_complete=false`,
+`evaluation_verdict=null`. Same-matrix данные не становятся независимым Test.
+Полный cache хранится на M40 Data; в Git публикуются компактные первичные данные,
+модели, метрики, metadata и выбранные рисунки. Новая обёртка и три адресные
+проверки добавлены; серверная проверка всех 18 production reports пока ожидается.
