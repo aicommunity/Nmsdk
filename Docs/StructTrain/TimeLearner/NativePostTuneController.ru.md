@@ -477,3 +477,15 @@ final-cancel, final-reset. Проверяются реальные packages, р�
 roundtrip и отсутствие ложного calibration/recognition success для молчания.
 До серверной приёмки это исходная реализация, не подтверждённое исправление.
 Production job schema, reader/plots и configured dispatch ещё требуют интеграции.
+
+
+Schema-3 reader теперь отдельно проверяет derivation измерительного threshold
+candidate, соответствие объявленному weight threshold и принадлежность весовых
+наблюдений именно этой физике. Для успешного fixed результата необходимы полные
+свежие final_model_matrix responses и исходный конечный threshold provenance;
+перенос матрицы между revisions отвергается. Частичные final probes остаются
+диагностикой, без утверждения о restoration live owner.
+Renderer строит весовые графики с измерительной моделью и отдельную группу
+final-model с конечной физикой. Каждая группа использует существующий renderer
+всех soma channels/паттернов с реальными входными импульсами и detail views.
+Runtime-проверки reader и этих новых отчётов ещё ожидаются.
