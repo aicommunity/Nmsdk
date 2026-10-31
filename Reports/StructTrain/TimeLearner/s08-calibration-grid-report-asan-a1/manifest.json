@@ -648,5 +648,21 @@
     }
   ],
   "visual_acceptance_complete": false,
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "selected_manual_review": {
+    "method": "byte-identical to manually reviewed normal images",
+    "files": [
+      {
+        "file": "primary-bundle/selected/Classic-fresh-confirmation-target-full-response.png",
+        "normal_reference": "../s08-calibration-grid-report-normal-a1/primary-bundle/selected/Classic-fresh-confirmation-target-full-response.png",
+        "sha256": "27c76f7797793b42705c81356fe1526e43d82efebff5ca3b3dc5f1ea8f4d9b67"
+      },
+      {
+        "file": "primary-bundle/selected/Branch-fresh-confirmation-target-full-response.png",
+        "normal_reference": "../s08-calibration-grid-report-normal-a1/primary-bundle/selected/Branch-fresh-confirmation-target-full-response.png",
+        "sha256": "a94a2879091c2480110367bfe97aa9d293e94917fc17cb9c82bedcdd3cbe4e5c"
+      }
+    ],
+    "full_cache_reviewed": false
+  }
 }
