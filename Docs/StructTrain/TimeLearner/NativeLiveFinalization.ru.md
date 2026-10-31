@@ -1,7 +1,7 @@
 # Живой переход Train → финализация
 
-Реализация в ветке `codex/timelearner-live-finalization`; серверная приёмка
-нового dispatcher ещё не выполнена. Это продолжение полного плана 0–12,
+Реализация в ветке `codex/timelearner-live-finalization`; адресная normal
+приёмка и первичная ASan пара получены, широкая ASan/visual приёмка открыта. Это продолжение полного плана 0–12,
 а не закрытие этапов 6–8 или обязательной матрицы.
 
 `ConfigureNativeFinalization(NativeLiveFinalizationSpec)` задаёт неизменяемую
@@ -85,3 +85,29 @@ PulseLibcf530be дополнительно завершает live state при 
 reader — 2/2 без skips. Его supervisor status1 сохранён: ошибочный glob
 считал вспомогательные JSON вместе с control records. Native XML/process
 receipt и runtime equality проверены отдельно; это не полный accepted gate.
+
+## Адресный результат и независимая проверка
+
+Normal:31/31 и два stopped-serialization follow-ups2/2; полный reader4/4
+проверяет16 live records,32+60 повреждённых controls, реальные Train CSV,
+completed/stopped summaries и immutable boundary.
+[Compact proof](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-normal-a1/README.md)
+содержит599 members /1943492 compressed bytes; все hashes проверены после merge.
+Source snapshots перечислены отдельно: исходные31 cases root5afe5b963, два
+дополнения первичных данных rootf0cf989cb, один PulseLib corecf530be.
+Composed view не подменяет историю источников. Полные исходные данные сохранены.
+
+Оба fixed controls выбирают веса; оба grid controls завершаются SearchUnresolved
+с восстановлением source. Во всех четырёх frozen replay target иfoil молчат,
+Train остаётся SearchUnresolved. Functional pipeline success не является
+успешной классификацией. Первые ASan6/6 и reader2/2 подтверждены, broad95-case
+ASan gate ещё работает. Полная матрица, production CLI, independent Test
+и временные отчёты нового handoff остаются открытыми.
+
+Поддерживаемый receipt checker:
+`python -m Scripts.StructTrain.TimeLearner.native_execution_gate --spec SPEC --root RUN --runtime-after SNAPSHOT`.
+Декларативные coverage contracts находятся в `Specifications/native-live-finalization-*.json`.
+Он сверяет точные test IDs, полные имена control files, process/runtime/loader
+receipts и явную supervisor policy. Корректность payload проверяют отдельные
+readers; origin JSON и полный lifetime loader closure этот checker не удостоверяет.
+Initial supervisor failure сохраняется даже при successful native receipts.

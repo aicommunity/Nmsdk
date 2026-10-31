@@ -186,3 +186,11 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   exact full boundary preservation after one outer-clock step without Calculate,
   32 malformed-record and 16 re-signed projection controls. This uses imported
   finished Solo state; it does not implement live Train dispatch.
+
+- [Actual cold live Train handoff, normal](s08-native-live-finalization-normal-a1/README.md):
+  31 native cases plus two stopped-primary serialization follow-ups, four complete
+  reader tests, 16 live records and 92 malformed-payload controls. All 599 archive
+  members verified; compressed primary 1943492 bytes. Mixed fixture provenance
+  is explicit per file. All four frozen target/foil pairs are silent; this is
+  functional pipeline evidence, without classification success. Broad ASan,
+  temporal reports and full original stages remain open.
