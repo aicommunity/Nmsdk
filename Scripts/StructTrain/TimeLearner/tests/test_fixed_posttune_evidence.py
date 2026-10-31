@@ -51,6 +51,8 @@ class FixedPostTuneEvidenceTest(unittest.TestCase):
             proof = self.audit(report)
             self.assertTrue(proof["recorded_search_consistent"])
             self.assertTrue(proof["weight_selection_only"])
+            self.assertEqual(proof["calibration_policy"], "fixed")
+            self.assertEqual(proof["calibration_status"], "unverified" if report["status"] == "recovery_required" else "fixed")
             self.assertFalse(proof["recognition_success_confirmed"])
             self.assertFalse(proof["native_execution_verified"])
             self.assertIsNone(proof["evaluation_verdict"])
