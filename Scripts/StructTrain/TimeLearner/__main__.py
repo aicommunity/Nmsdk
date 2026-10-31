@@ -9,13 +9,21 @@ from pathlib import Path
 
 def analyze(args: argparse.Namespace) -> dict:
     from .native_evidence import EvidenceError, audit_probe, load, require
+    require(args.format == "native-live-finalization" or getattr(args, "primary_inventory", None) is None,
+            "primary_inventory_is_only_for_live_finalization")
     require(args.format == "domain" or not args.allow_legacy, "legacy_adapter_is_only_for_domains")
     require(args.format in ("probe", "legacy-posttune-freerun") or args.trace is None, "trace_option_is_only_for_probes")
     require(args.format in ("recognition-trial", "recognition-evaluation", "native-calibration-assessment") or args.model is None, "model_option_is_only_for_recognition_trials")
     require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction", "posttune-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
     require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
     source = args.source.resolve(strict=True)
-    if args.format == "native-calibration-assessment":
+    if args.format == "native-live-finalization":
+        from .live_finalization_reports import read_live_report_source
+        from .live_finalization_evidence import audit_completed_live_finalization, audit_pre_entry_live_finalization
+        require(args.primary_inventory is not None, "live_finalization_primary_inventory_required")
+        record, case, _, _ = read_live_report_source(source, args.primary_inventory.resolve(strict=True))
+        result = (audit_completed_live_finalization if record["scenario"] in (0, 1) else audit_pre_entry_live_finalization)(record, case)
+    elif args.format == "native-calibration-assessment":
         from .native_calibration_evidence import audit_native_calibration_assessment
         from .recognition_metrics import load_evaluation
         from .learned_evidence import load_case
@@ -108,7 +116,8 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization"), required=True)
+    analysis.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     analysis.add_argument("--model", type=Path, help="recognition package required for recognition trial/evaluation")
     analysis.add_argument("--source-solo", type=Path, help="original learned-state package with primary trial siblings, required for threshold candidate")
     analysis.add_argument("--evaluation", type=Path, help="independently declared evaluation spec required for native calibration assessment")
@@ -117,7 +126,8 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
@@ -277,7 +287,14 @@ def main(argv: list[str] | None = None) -> int:
             from .native_evidence import require
             require(args.format == "native-test-run" or args.artifacts is None, "artifacts_option_is_only_for_native_test_run")
             require(args.format == "posttune-transaction" or args.source_solo is None, "report_source_solo_is_only_for_posttune")
-            if args.format == "posttune-run":
+            require(args.format == "native-live-finalization" or args.primary_inventory is None,
+                    "primary_inventory_is_only_for_live_finalization")
+            if args.format == "native-live-finalization":
+                from .live_finalization_reports import render_live_finalization
+                require(args.primary_inventory is not None and args.trace is None and args.model is None,
+                        "live_report_requires_primary_inventory_and_no_model_or_trace_overlay")
+                result = render_live_finalization(args.source.resolve(strict=True), args.primary_inventory.resolve(strict=True), args.output.resolve())
+            elif args.format == "posttune-run":
                 from .posttune_transaction_reports import render_posttune_run
                 require(args.trace is None and args.model is None, "posttune_run_declares_its_models_and_observations")
                 result = render_posttune_run(args.source.resolve(strict=True), args.output.resolve())
@@ -335,7 +352,7 @@ def main(argv: list[str] | None = None) -> int:
                     output.write(text)
             if result["validity"] == "invalid":
                 return 2
-        except (EvidenceError, ValueError) as error:
+        except (EvidenceError, ValueError, OSError) as error:
             print(json.dumps({"kind": "timelearner_analysis", "schema_version": 1,
                               "execution": "completed", "validity": "invalid", "reason": str(error),
                               "evaluation_verdict": None}, ensure_ascii=False), file=sys.stderr)
