@@ -1,5 +1,18 @@
 # TimeLearner reproducibility artifacts
 
+Latest scoped PostTune evidence:
+
+- [Measured native search, real calibration and rollback: normal A2](s08-native-posttune-controller-normal-a2/README.md).
+- [All five typed candidate modes: normal](s08-native-posttune-candidates-normal-a2/README.md), [ASan](s08-native-posttune-candidates-asan-a1/README.md).
+- [Forty actual Console export/frozen-evaluation operations](s08-native-posttune-worker-normal-a1/README.md).
+- [Complete old candidate/transfer soma-input visual caches and selected figures](s08-native-posttune-visual-normal-a1/README.md).
+- [TL-037 additional 37 ASan regressions](s08-posttune-observation-regression-asan-a1/README.md).
+
+These gates do not accept the full mode/profile/frequency matrix or the complete
+refactoring plan. Old all-silent candidate evaluations and later calibrated
+two-pattern controller controls are distinct snapshots; neither establishes
+eight-pattern scientific classification.
+
 This maintained subtree is explicitly tracked in Git. Store a run manifest,
 complete trial observations, learned-model export and verification evidence here.
 Necessary large text traces may be compressed with their content digest and file

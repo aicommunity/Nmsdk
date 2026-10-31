@@ -1,7 +1,13 @@
 # Native PostTune: измерительный контроллер
 
 Рабочая реализация `NativePostTuneTransaction<Owner>` добавлена отдельно от
-механического выделения guards. До серверных gates ниже она не принята.
+механического выделения guards. Normal root
+`44a1598af2cfdd2fa1703d5ea70f8f1e8beabc9b` / PulseLib
+`c8a1995019be944acb0cbfd7f40d6ff7cba111c9` прошёл 10/10 native cases
+(501.475 s) и 19/19 independent checks (192.578 s), без skips.
+[Lossless primary bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-normal-a2/README.md)
+включает все 24 parent reports, raw matrices, модели и исходные неуспешные попытки.
+Это адресная приёмка N1/2000 Гц/двух входов, не полная mode/profile matrix.
 Этап 8 и исходный план 0–12 остаются открытыми.
 
 Контроллер действует между native ticks и не вызывает Calculate. Он принимает
@@ -92,9 +98,34 @@ gates; их первый запуск пропустил восемь ownership 
 fixture-переменной и не считается 10/10. Recovery сохраняет фактические два
 grid-контроля и выполняет восемь ownership controls отдельно на обоих binaries.
 
-Открыты: серверная приёмка этого контроллера, независимый report auditor и полные
+Открыты: ASan и расширенная серверная matrix этого контроллера, полные
 временные графики, Console/learner public dispatch и параметрический codec,
 continuation с уже завершённого PostTune/calibrated checkpoint, вся матрица
 N0/N1/частот/размерностей/физических профилей/общих attach positions и научная
 серия. Отказ от nested PostTune source сейчас явный; поддержку continuation нельзя
 считать реализованной только из-за существования model export/import.
+
+Текущий independent auditor `posttune_transaction_evidence.py` уже проверен на
+24 настоящих reports: replay signed peaks/gap, исходную физику кандидатов,
+coordinate proposals, duplicate clipping, selected index, labelled complete
+matrices и передачу в реальную калибровку. Перестановка observation rows не меняет
+результат; удаление foil, ложный gap/metric, изменение search condition, criterion,
+selected index или schema отвергаются. Partial/cancelled observations остаются
+диагностикой без доказательства полноты; валидность произвольных native physics
+rejections не выводится из JSON. 19 checks включают 11 новых и 8 compatibility
+candidate checks; это не 19 независимых обучений.
+
+В normal fixture Off/KeepDone и Auto/Soma controls подтверждают пару у обеих
+топологий; Classic подтверждает также CanonRmin. Branch CanonRmin, оба FlatLastR
+и оба one-pass SearchSynthetic остаются `search_unresolved` на объявленной сетке
+и восстанавливают source. Synthetic измеряет три уникальные модели, четыре
+предложения являются физическими дубликатами. Calibrated confirmations имеют
+TP1/FP0/FN0/TN1 на одной паре; source Train остаётся search_unresolved. Результаты
+не являются научной восьмипаттерновой серией или проверкой generalization.
+
+Механический scope A/B отдельно завершён на normal и ASan: у каждого бинарника
+два grid cases и восемь ownership controls, по четыре independent checks на каждый
+набор; все 28 CSV pairs и восемь ownership JSON совпали точно. Первый A1 с восьмью
+skips сохранён как непринятый, фактические grid cases восстановлены отдельным
+receipt. ASan самого нового PostTune-контроллера выполняется на закреплённом A2;
+его источники/runtime не обновляются до terminal outcome.
