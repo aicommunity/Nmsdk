@@ -112,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run"), default="recognition-evaluation")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
@@ -267,6 +267,10 @@ def main(argv: list[str] | None = None) -> int:
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
                 result = render_probe_set(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "recognition-transport":
+                from .recognition_transport_reports import render_transport
+                require(args.trace is None and args.model is None, "transport_report_declares_its_models_and_traces")
+                result = render_transport(args.source.resolve(strict=True), args.output.resolve())
             elif args.format == "legacy-posttune-freerun":
                 from .legacy_posttune_reports import render_free_run
                 require(args.trace is not None and args.model is None, "legacy_posttune_report_requires_trace_not_model")
