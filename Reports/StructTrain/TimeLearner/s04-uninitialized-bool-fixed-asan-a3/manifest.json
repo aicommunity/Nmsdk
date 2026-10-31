@@ -1,0 +1,1027 @@
+{
+  "kind": "rdk_uninitialized_boolean_contract_proof",
+  "schema_version": 1,
+  "source_root": "0fca58516941184549fb08ea23fa973e2ebdd30c",
+  "source_rdk": "6084bfa703ebbe0d85d2a588dfe8f79c74cd1144",
+  "build": "asan",
+  "validation": {
+    "kind": "rdk_uninitialized_boolean_fixed",
+    "schema_version": 1,
+    "native_tests": 15,
+    "native_seconds": 45.143,
+    "test_names": [
+      [
+        "NativeFixedPostTune",
+        "BranchBudget"
+      ],
+      [
+        "NativeFixedPostTune",
+        "ClassicBudget"
+      ],
+      [
+        "NativePhaseLifecycle",
+        "BranchWeightDestroy"
+      ],
+      [
+        "NativePhaseLifecycle",
+        "ClassicWeightDefault"
+      ],
+      [
+        "RdkLifecycleBoolean",
+        "UninitializedContainerSkipsWithoutBooleanError"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "BranchAuditFlagDefaultAndReuse"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "BuildResetAndCalculateHaveObservableNativeOrder"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "ClassicAuditFlagDefaultAndReuse"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "ConstantSourceResetPublishesRestValueBeforeFirstTick"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "PooledRebuildRequiresEnvironmentThroughChannelShutdown"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "ResetRefreshesSynapseStepCoefficients"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "SpikeHistoryIsEmptyBeforeFirstTick"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "SpikeHistoryResetRemovesEventsWithoutDiscardingZeroTimeSpike"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "StorageImageSurvivesFreshTakeAndReuse"
+      ],
+      [
+        "TimeLearnerNativeLifecycle",
+        "SynapseResetClearsConductanceBeforeFirstTick"
+      ]
+    ],
+    "control": {
+      "child_calculate_calls": 1,
+      "global_clock_unchanged": true,
+      "inactive_return": true,
+      "initialized_return": true,
+      "kind": "rdk_uninitialized_calculate_boolean_control",
+      "parent_calculate_calls": 1,
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "uninitialized_children_skipped": true,
+      "uninitialized_return": true
+    },
+    "runtime_provenance": "loaded_files_captured",
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "negative_control": {
+    "kind": "rdk_uninitialized_boolean_baseline",
+    "schema_version": 1,
+    "expected_failed_tests": 1,
+    "failure": "only boolean return before Init; children remain skipped; initialized scheduler calls both nodes once",
+    "control": {
+      "child_calculate_calls": 1,
+      "global_clock_unchanged": true,
+      "inactive_return": true,
+      "initialized_return": true,
+      "kind": "rdk_uninitialized_calculate_boolean_control",
+      "parent_calculate_calls": 1,
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "uninitialized_children_skipped": true,
+      "uninitialized_return": false
+    },
+    "owned_process_returncode": 1,
+    "runtime_provenance": "loaded_files_captured",
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "packaged_run_closure": {
+    "run_snapshots_verified": 2,
+    "artifact_entries_verified": 84,
+    "scientific_verdict": null
+  },
+  "full_stage_4_accepted": false,
+  "scientific_verdict": null,
+  "archive_sha256": "59c8ec1e0c9f003ee2791ed2ea25688aa307d42a2322dde0eec466567bf9fb57",
+  "files": [
+    {
+      "path": "baseline/baseline-validation.json",
+      "bytes": 748,
+      "sha256": "889340073d169af2867558c5ffe655c6723155acb555f33ef4c84c9e0bf33295"
+    },
+    {
+      "path": "baseline/build.log",
+      "bytes": 3769,
+      "sha256": "3c8ac1d8f2c85df8d5956c6d362f6f639406e0376659c72dc7c795fe6ffddb35"
+    },
+    {
+      "path": "baseline/checkout.log",
+      "bytes": 399,
+      "sha256": "ace75cc8af222a090ea871cafdd805cde7c57d62371473cdc4e63fa3c739ad14"
+    },
+    {
+      "path": "baseline/configure.log",
+      "bytes": 1355,
+      "sha256": "bac48d91a156efed2da83b7e59b3410d9760144bda5bc3b4d93a6b194f5e8cea"
+    },
+    {
+      "path": "baseline/live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "baseline/native.xml",
+      "bytes": 1185,
+      "sha256": "e7b069a81866f7a67c715e839ae7d20ed6d1a394709284423f9af593228a21da"
+    },
+    {
+      "path": "baseline/native/uninitialized-container.json",
+      "bytes": 360,
+      "sha256": "e1fe953f042a6b240c0a683726588f650d5b9375fe81bb998a94199ed0599f66"
+    },
+    {
+      "path": "baseline/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "baseline/process/loaded-files.json",
+      "bytes": 6386,
+      "sha256": "e6ac156a9e205cc2e7c345abeccbc1a8681b512a4f115c9562f2b76df5c06ed9"
+    },
+    {
+      "path": "baseline/process/owned-process.json",
+      "bytes": 424,
+      "sha256": "ff331427e4e8f41e0ef06c595aaecc0e4c7d7463e9067768f1186f522ba749e6"
+    },
+    {
+      "path": "baseline/process/request.json",
+      "bytes": 520,
+      "sha256": "426eb840930e34326dc90144114e13e69cb2c45a640f52d5b3c6417e9efaee64"
+    },
+    {
+      "path": "baseline/process/result.json",
+      "bytes": 450,
+      "sha256": "fc2a7b7f23d50c117edff9ec8307b6324e3f5f089e0fa01dee2291dfbad0a39f"
+    },
+    {
+      "path": "baseline/process/runtime.json",
+      "bytes": 24396,
+      "sha256": "1494cc062fd3c72f557f5b9c73054faadb23828e381f56ff9d1af7f52f013e2e"
+    },
+    {
+      "path": "baseline/process/stderr.log",
+      "bytes": 261,
+      "sha256": "bc298da2516067778d48aa5f9007263a7be25c4c97eed07e5e05f211765afe1d"
+    },
+    {
+      "path": "baseline/process/stdout.log",
+      "bytes": 890,
+      "sha256": "9bc48a8a9a70975db6f7b59ba3b151ac9324c0dd336818ba36420e58c558ea17"
+    },
+    {
+      "path": "baseline/runner.sh",
+      "bytes": 4431,
+      "sha256": "2b228cb9c366dbbc684274c656fd9d52b3d56e3be056b7100775ff7dda39e5c5"
+    },
+    {
+      "path": "baseline/runtime-after.json",
+      "bytes": 24396,
+      "sha256": "1494cc062fd3c72f557f5b9c73054faadb23828e381f56ff9d1af7f52f013e2e"
+    },
+    {
+      "path": "baseline/runtime-before.json",
+      "bytes": 24396,
+      "sha256": "1494cc062fd3c72f557f5b9c73054faadb23828e381f56ff9d1af7f52f013e2e"
+    },
+    {
+      "path": "baseline/source-closure.txt",
+      "bytes": 689,
+      "sha256": "ded34ae7be7f38ff45d7a80451b0bdfd2a1afa17d617073b40ebb27d69d2142c"
+    },
+    {
+      "path": "baseline/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "baseline/supervisor.pid",
+      "bytes": 8,
+      "sha256": "bccfc33e40436b8a57fe6cac100099d31f424dee8e3f6c2fd1cdaf0f2101757b"
+    },
+    {
+      "path": "baseline/validation.log",
+      "bytes": 684,
+      "sha256": "1834c6a804bf3dec09e26cfe8cdf268401edbc5994025a6eda8999a7a61ac347"
+    },
+    {
+      "path": "execution/build.log",
+      "bytes": 3812,
+      "sha256": "e847843194cb50ae335a54fcbaa9a661671e0eb874dec472e197941d405ae64b"
+    },
+    {
+      "path": "execution/checkout.log",
+      "bytes": 325,
+      "sha256": "1ab6d93b8996cffe7d9c7cc2376d63650df5399317ec4ee8e43fcbbe2bbced3e"
+    },
+    {
+      "path": "execution/configure.log",
+      "bytes": 1355,
+      "sha256": "4470f4115a9b4ec2cf21d610445258582dc4d0dad5c97a654020cb7cf3b16e1a"
+    },
+    {
+      "path": "execution/fixed-validation.json",
+      "bytes": 2008,
+      "sha256": "f9e8399fd0e8e3e4b823eac5a8a7b7acaa78c54b1ea0b235463dc2cf8050a413"
+    },
+    {
+      "path": "execution/live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "execution/native.xml",
+      "bytes": 5933,
+      "sha256": "7df5321b2a26384529c1c31ad7ed444e79ce819a9616db5dfd17b83c4ea45db5"
+    },
+    {
+      "path": "execution/native/Branch_fixed_1_transaction.json",
+      "bytes": 2486223,
+      "sha256": "ff76d4a870398f5b0c75dcf65bd205c7d555d6a46a54f632ffa04a357c3087ad"
+    },
+    {
+      "path": "execution/native/Branch_weights_2.json",
+      "bytes": 2612832,
+      "sha256": "352908641f5951a211bf81708351bb618b256e50fac14ed1efffc9bd14640baa"
+    },
+    {
+      "path": "execution/native/Classic_fixed_1_transaction.json",
+      "bytes": 2682589,
+      "sha256": "41a3055bc5f43aa7ad21dc94cce3278da654730f37c96e5a628f084646688574"
+    },
+    {
+      "path": "execution/native/Classic_weights_1.json",
+      "bytes": 2819085,
+      "sha256": "82e23a4eb1f098d48689d8fdfa08557b91a4c4c8483e6c41349409f91026043e"
+    },
+    {
+      "path": "execution/native/uninitialized-container.json",
+      "bytes": 359,
+      "sha256": "8a8ef2fa563842a974b07be5def44634ce676222c28f213ad5b9b10f860d6d95"
+    },
+    {
+      "path": "execution/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "execution/process/loaded-files.json",
+      "bytes": 6044,
+      "sha256": "7b358ed90c4cede3a06ce375b012179129e621cebe6207087138eb904ad2e387"
+    },
+    {
+      "path": "execution/process/owned-process.json",
+      "bytes": 421,
+      "sha256": "1aa0de48b47f1a6415a5b8a7ea4759a2aae37c6e9daa465a824b63a729ebf97e"
+    },
+    {
+      "path": "execution/process/request.json",
+      "bytes": 690,
+      "sha256": "161544e240381b3cf8564a717dcf1cb7e535d14bc38e468c951a1c451306010b"
+    },
+    {
+      "path": "execution/process/result.json",
+      "bytes": 444,
+      "sha256": "cae007c7a2b80acc762f7c571c8b36b49748d4f839919a142be1f5fe86aab994"
+    },
+    {
+      "path": "execution/process/runtime.json",
+      "bytes": 24387,
+      "sha256": "dabe165761080e4133ad01ffbc80cad3bf09f09e9639d772848053e0e19067b4"
+    },
+    {
+      "path": "execution/process/stderr.log",
+      "bytes": 255,
+      "sha256": "9a85468ca3c99e9c73c374b5e6ec783de5beb3e270845fa2b96ec4045de39770"
+    },
+    {
+      "path": "execution/process/stdout.log",
+      "bytes": 3272,
+      "sha256": "60143f7b783aa3a8644c5c6de15d844a675a505023a352c1766902945c100fb6"
+    },
+    {
+      "path": "execution/runner.sh",
+      "bytes": 5081,
+      "sha256": "305ec71f063ab8011e85d1bbfedce55c4929dd179f3ec89c2461731f478deccf"
+    },
+    {
+      "path": "execution/runtime-after.json",
+      "bytes": 24387,
+      "sha256": "dabe165761080e4133ad01ffbc80cad3bf09f09e9639d772848053e0e19067b4"
+    },
+    {
+      "path": "execution/runtime-before.json",
+      "bytes": 24387,
+      "sha256": "dabe165761080e4133ad01ffbc80cad3bf09f09e9639d772848053e0e19067b4"
+    },
+    {
+      "path": "execution/source-closure.txt",
+      "bytes": 689,
+      "sha256": "b62ea36ab9e6931a2531865e8fdc31ad81d7d134b7d33ae8c34562799112ac7f"
+    },
+    {
+      "path": "execution/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "execution/supervisor.pid",
+      "bytes": 8,
+      "sha256": "876e9c409288eca528aae48c84f04b366333010bd9566e04054e98ee716b05a5"
+    },
+    {
+      "path": "execution/validation.log",
+      "bytes": 1610,
+      "sha256": "054b04dfbd55c6a0f57750a4a5c0ca31de2988a0db0fb5ea36f4838cf7faf4d5"
+    },
+    {
+      "path": "fixtures/Branch-auto_metric/input/job.json",
+      "bytes": 1771877,
+      "sha256": "b7ee5acc1607f5d132ac2ba56263c3485b36e4961544390638dbb7cd3a6f5baa"
+    },
+    {
+      "path": "fixtures/Branch-canon/input/job.json",
+      "bytes": 1772049,
+      "sha256": "815ecd14ddb53fcc315e3a6ebf5e263f176d03b9d212f219ac59bc9fbbde2c04"
+    },
+    {
+      "path": "fixtures/Branch-flat/input/job.json",
+      "bytes": 1772042,
+      "sha256": "bacb594f579ea1bc14ef5f1febc4ac879738b9cc337d679e2e3e7630440935a3"
+    },
+    {
+      "path": "fixtures/Branch-keep/input/job.json",
+      "bytes": 1771872,
+      "sha256": "94c5093f0730d301f44399ed8db2adf3ee7c2595b1570a1db5c7d8063cea2a5a"
+    },
+    {
+      "path": "fixtures/Branch-off/input/job.json",
+      "bytes": 1771865,
+      "sha256": "5c62f6ba7f329b7b009a975794cecefc6ad1fb04f0ea4be6a174ada28b3f29c4"
+    },
+    {
+      "path": "fixtures/Branch-recording_budget/input/job.json",
+      "bytes": 1771878,
+      "sha256": "2bc36ae30c38fefa8aba918e206b43ef1d622984af0d2d338de1b3e84f25ed00"
+    },
+    {
+      "path": "fixtures/Branch-silent/input/job.json",
+      "bytes": 1771848,
+      "sha256": "afa906ceb896a1c5273ad6be6fae7171fc040ada5c25d016d2b4d89c91b29886"
+    },
+    {
+      "path": "fixtures/Branch-soma_metric/input/job.json",
+      "bytes": 1771881,
+      "sha256": "b7c1a36a173711c3209f9e5144e219464e4a3b1f43975316f4da53828df80102"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/job.json",
+      "bytes": 1772056,
+      "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1162896,
+      "sha256": "843103d086b1bd55ae3661b952f8560673178f74f8f05a92e330580d79498863"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 602841,
+      "sha256": "684ce7071247c36dcb0b52d8e4e9b1c9c58b32b69a094e158fa81f05ee6f57ae"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 14639,
+      "sha256": "7e015be7ce9c2e46c5e7320a51b88ca2fceda416052948c02d81a6b6dbe5869f"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5922,
+      "sha256": "fce1c588d21aed388d4d40d5fd689e6cc14eadc285ec0777940a679fbf9c3ff3"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 14750,
+      "sha256": "2c8239c5fb392e5d336f00ccb68ff0a37a7672a8141f1447b1801f494e14caba"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "5712c1e7693af8e680b5a5818da4fd6922b6e763f1b8a18f8f81ca13cd0935b3"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 14685,
+      "sha256": "ef5ce86a70e579db26f5795c8ec573c48c02d2418e5f57bf098047456858edef"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5905,
+      "sha256": "6906db06b4bf8466eb03fbbba0d0f83027703328c967f14975184f125953b6ff"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 14697,
+      "sha256": "fef19f9d639f44cd6c828f99a596dec4bf240977a9a8fb81e117c8e1852ae4b0"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5897,
+      "sha256": "83e0ab90bd52b3fad6a0ad2ae29bc16aeef98896b281725e7c81481a07a45925"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 14720,
+      "sha256": "e62a8ea31f3a3e7994d52344f00e7431e56ab04e2bff46f35475ce63e87b2513"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5937,
+      "sha256": "3d3837cc4ee3f3770b209218a173b284d653777a0c3ce6a4baa87b51bdb4c237"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 14687,
+      "sha256": "3ecd4a7ea4d74bf23ff17dad81067f9eeda92016c82459796a5e61b8b58ebd9e"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5931,
+      "sha256": "d06622319dbf2a79debc041b0e6f4ea6661fecf93627571d8d2090b50d247087"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 14720,
+      "sha256": "4dc7d2be71ba83caf0c8a3cc5707d11a7d18912f92910fcdc98efb54dfdaf637"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5924,
+      "sha256": "e5285014cc8b852b79b140fb62a3f7ee5bc84966791b3f88583cfe64a20b50a9"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 14708,
+      "sha256": "9befc9a953e3cc66475a8cf434b1e9202f30e4daf8c245cdbbbf83122827b76d"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5903,
+      "sha256": "69f045d8dd56ee9a542f154e3f640daedafc8ba454b36d5738d0d254b5080fbf"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 14695,
+      "sha256": "42e33e1006b8f52f24cac422c448028d3b35027b63e6bb8464e19b8f676c96e8"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5895,
+      "sha256": "1e7286d84875985e785a3ca143c3a3d46f218fdde93e55c16ba8c8277046fd78"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 14708,
+      "sha256": "8fa435d1d2477c04082337d05815fb97b364eb6f5c236c6ff6f86e30d3205f8f"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "57787b24030e8f61d8d4bf6d049f4dd9ed5d05c8cac2aedaff0572f5dcd86ec1"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 14724,
+      "sha256": "9c684d184d80e6169aa5506c1b138aed8dce567e9a734eb2cbf1588b2d220520"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5899,
+      "sha256": "7b790827a82cf64276c8cca108ef5b21a65c94b1a923e361a5884fa3d02cdf2a"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 14661,
+      "sha256": "b561e09dd2126ceac1b7021224231f15aebd853bd4bfe6436095e7a6ed56efd1"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5900,
+      "sha256": "732eef0eef0dd72da2520977d97e8aee16a4f1793b8497c201c0d073fc8630d5"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 14625,
+      "sha256": "8b7ac56947f6ba4cdebe85b446d51ea9d96fc03660c158749d390c186a73a3f7"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5897,
+      "sha256": "f37705253c462af14c942f244dc2d65477de4db18c1ac50a7b1e6d19401dca8e"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 14659,
+      "sha256": "8c70d299bdcaf23ed3e3d2e263c1472f0ac70a568347b2a6e862b751bbf9ad46"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/input/source/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5900,
+      "sha256": "016dde02d7a353c0348eabf8d558b6a1926ed311f844805cfed850acbd3cbdf5"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/native/execution.json",
+      "bytes": 1490,
+      "sha256": "d29b05d76d8d92500b0373943ca7654e6bbba10a79e786b1f5d5fc66e5045dd7"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/native/job.json",
+      "bytes": 2485874,
+      "sha256": "8f72f57d87cafaf1e04b3f125d50028a749cf64e23cbcbf241e99f83a9ce2459"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/native/model.json",
+      "bytes": 2357871,
+      "sha256": "39d198c9f85022e175bc413cda215530a4674a6e160b7b39c7c5e9380c097469"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/native/transaction.json",
+      "bytes": 26995980,
+      "sha256": "ae281d11b9581c507896901b4df8f1041c3e6f7edd565e24ce7a08ea8edacc41"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/process/loaded-files.json",
+      "bytes": 5888,
+      "sha256": "d431559586a58e22c877e815a32889cb406253f2b11bccafc9240b05ff037110"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/process/owned-process.json",
+      "bytes": 414,
+      "sha256": "c8c1f73641feaf40f0bc01e588d4a0331cd6141d179ce5d6c6eb9a0a0f86a287"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/process/request.json",
+      "bytes": 851,
+      "sha256": "f441e1679f1c9498b85333ce9a2e8050d8150be423299d12ccb2c1825bfb7778"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/process/result.json",
+      "bytes": 443,
+      "sha256": "eb9a5fb272e9668ab6f98b7636f03731b9c9f3084bb8ab7f50bcbb8db469d78d"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/process/runtime.json",
+      "bytes": 32021,
+      "sha256": "b6c22850a57abe9e515e28d82f7f1931722ec0267a08a6241c4553dee5535adc"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fixtures/Branch-synthetic/run-manifest.json",
+      "bytes": 18421,
+      "sha256": "5a4d0677824248654938804dc1bd84bf6ae0ad07f0a8f41a9c03c90e732a3773"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/job.json",
+      "bytes": 1917293,
+      "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1253734,
+      "sha256": "dbd812e2ca3d6c27ead3092e1a0c220de64643eaea479bf1224cf11f2eb1e03e"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "2a172df9a5e3481142f18ec5af42cbfaa077b0bcc7ab3174b525cf70d518d2ef"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5877,
+      "sha256": "191e5334256098c686984095a06b7d4b7b4e0837f7067fb37d8573d43d4d9da2"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5912,
+      "sha256": "1723e517dec139c4cc9babf2beaecdeed3699b9ff949bfabc40b5a306cf7f3b5"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "315978ba44f40b6d305d7e685d26261436631746cfb080c08b5a154eb51505e3"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5902,
+      "sha256": "286779360e58da03924b9b0545fc1a7a3e7138dbb7c755288557f38a11bbd3e5"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5963,
+      "sha256": "3ececc28d92650c2d0202b47169f3389239c273fa21402c1c359c2e8406f1e31"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5944,
+      "sha256": "fcedb412e495c8ee08575a11a74553ca97085a81a62feb96e27adbea5c2ca26e"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5933,
+      "sha256": "8cf65996ac2291e2bc2ab2bbcda602dfceda468ee52f4f114b32cee090e02a51"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5902,
+      "sha256": "5128e0891f795b87044149fb6a6e6a9ec62b4b0f78ae6ad49db945a3c7f3feb6"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5904,
+      "sha256": "01c135d87eb2785e3bccf924f274c7fc334c2c67fc78e3f6f884d24e497aa5d9"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "80b0c8ff7d4ad1f7058a037267c20989c35e58e81d1b02d564e20ef8fb19c304"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5910,
+      "sha256": "ae30479149db798ac6158228520d26cce80497997b7f1b7f3b8ba672f3a3d51b"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5910,
+      "sha256": "1a1cfb91272a17e4155753ddc66964f0c6c434b1282e53ee5c770efc0c8446e3"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5910,
+      "sha256": "4e876afa2e35e504e65c745782a66cc5a70b42933680320d441c36df98b8b4a7"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/input/source/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5910,
+      "sha256": "2e6f8b014d6dfd7ac40bfa7937819caa16be06921d163c496531924472056148"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/native/execution.json",
+      "bytes": 1487,
+      "sha256": "d6fdef009af13d4aacc355614213af05ea98c6046ba666a86e01c047253a4a6a"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/native/job.json",
+      "bytes": 2682000,
+      "sha256": "d8cb5d8e0132cfadfcffaf318be0c4edc3ea824716b972584873ac7ff0e2ac4a"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/native/model.json",
+      "bytes": 7228361,
+      "sha256": "c7d989d94216cd8d2c0021a43e8825c7631b432b6d1984ae836acacbcd3972b0"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/native/transaction.json",
+      "bytes": 38868398,
+      "sha256": "832dfab6ea494615e39af734ca963a3aafe5f34ac91743347a8674c473efc6c2"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/process/loaded-files.json",
+      "bytes": 5888,
+      "sha256": "d431559586a58e22c877e815a32889cb406253f2b11bccafc9240b05ff037110"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/process/owned-process.json",
+      "bytes": 414,
+      "sha256": "f26cbcb92476cd11eb337bbba05d195b938bfdf4bbcff971420ea2052c832667"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/process/request.json",
+      "bytes": 860,
+      "sha256": "8f5c0c20d98c25653ac1291ffdf53fca4cf48e5d99027615147e033a13747fa6"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/process/result.json",
+      "bytes": 444,
+      "sha256": "2d7335a4bb36b240b197d3c90e1c7e443eab0820769a955b5a9962e523d6cb56"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/process/runtime.json",
+      "bytes": 32021,
+      "sha256": "b6c22850a57abe9e515e28d82f7f1931722ec0267a08a6241c4553dee5535adc"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fixtures/Classic-auto_metric/run-manifest.json",
+      "bytes": 20324,
+      "sha256": "ce8049dacd69e369eb4f02ff9cb51cfd33906fb10393c9c483b57a21dc57e2fa"
+    },
+    {
+      "path": "fixtures/Classic-canon/input/job.json",
+      "bytes": 1917465,
+      "sha256": "3b73f4111a5836b6533fff44813cc2232daf9b1629841dc9076e49a0bd5c890f"
+    },
+    {
+      "path": "fixtures/Classic-flat/input/job.json",
+      "bytes": 1917458,
+      "sha256": "c87eef8ed6aea954839380494c186f555297ec5fa8741f7ef8d2aeb852527842"
+    },
+    {
+      "path": "fixtures/Classic-keep/input/job.json",
+      "bytes": 1917288,
+      "sha256": "775698d9f033aa0ea83f338d1527c5b73d46dc54ea29617d5fe89a41f8f049e3"
+    },
+    {
+      "path": "fixtures/Classic-off/input/job.json",
+      "bytes": 1917281,
+      "sha256": "821dc16f0cc692c510988e430d89994fa39d26ff1db4559efcd15297ed2095cd"
+    },
+    {
+      "path": "fixtures/Classic-recording_budget/input/job.json",
+      "bytes": 1917294,
+      "sha256": "55029106aca883baa12b97e521e90afb852e106f1b2cceaab80cc7c25716666c"
+    },
+    {
+      "path": "fixtures/Classic-silent/input/job.json",
+      "bytes": 1917264,
+      "sha256": "fd4d5ede3f00b69a62461e347257d4c9259a8396338782f7f417417620c55f38"
+    },
+    {
+      "path": "fixtures/Classic-soma_metric/input/job.json",
+      "bytes": 1917297,
+      "sha256": "a26649c718e82ea2fd852e77d652048fb681f57b358c59eb9803247539fcf77c"
+    },
+    {
+      "path": "fixtures/Classic-synthetic/input/job.json",
+      "bytes": 1917472,
+      "sha256": "1e52fc5163639eb9bd35b8aadee23ff5c7e5a710863c54b1d28f531dc5de5519"
+    },
+    {
+      "path": "fixtures/controls.json",
+      "bytes": 8557,
+      "sha256": "cb0ff84109c418bab607c30b33a20b0d68af246ab7a2c60d7ba3f2f89d09036a"
+    },
+    {
+      "path": "superseded/fixture-error-a1/build.log",
+      "bytes": 3742,
+      "sha256": "bd90699a4e6fe9050e57cf1df150a296186591ae65d9eea4805d7162c2da96b9"
+    },
+    {
+      "path": "superseded/fixture-error-a1/checkout.log",
+      "bytes": 555,
+      "sha256": "0de52f6e1f565bea00221ab2e9368f6a051f3dba922a55c1340fc186f33eac57"
+    },
+    {
+      "path": "superseded/fixture-error-a1/configure.log",
+      "bytes": 1355,
+      "sha256": "b9e7359b72f364e7366a2b353bae83ca6f1aab45b4cebc39a5dab888523ddef3"
+    },
+    {
+      "path": "superseded/fixture-error-a1/live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "superseded/fixture-error-a1/native.xml",
+      "bytes": 6445,
+      "sha256": "1defabb05304547754badc01ba90a2055bf30a270eba074b5384000755b8b47e"
+    },
+    {
+      "path": "superseded/fixture-error-a1/native/Branch_fixed_1_transaction.json",
+      "bytes": 2486223,
+      "sha256": "ff76d4a870398f5b0c75dcf65bd205c7d555d6a46a54f632ffa04a357c3087ad"
+    },
+    {
+      "path": "superseded/fixture-error-a1/native/Branch_weights_2.json",
+      "bytes": 2612832,
+      "sha256": "352908641f5951a211bf81708351bb618b256e50fac14ed1efffc9bd14640baa"
+    },
+    {
+      "path": "superseded/fixture-error-a1/native/Classic_fixed_1_transaction.json",
+      "bytes": 2682589,
+      "sha256": "41a3055bc5f43aa7ad21dc94cce3278da654730f37c96e5a628f084646688574"
+    },
+    {
+      "path": "superseded/fixture-error-a1/native/Classic_weights_1.json",
+      "bytes": 2819085,
+      "sha256": "82e23a4eb1f098d48689d8fdfa08557b91a4c4c8483e6c41349409f91026043e"
+    },
+    {
+      "path": "superseded/fixture-error-a1/native/uninitialized-container.json",
+      "bytes": 359,
+      "sha256": "8a8ef2fa563842a974b07be5def44634ce676222c28f213ad5b9b10f860d6d95"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process/loaded-files.json",
+      "bytes": 6383,
+      "sha256": "62241f36ca5866f4c4758d18cc690cfad70026a8302a34ce420bbb17717d0ee7"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process/owned-process.json",
+      "bytes": 421,
+      "sha256": "5db032be58c6fdbd676f3aa8ecad585c09b8862532613d0e68ad8933effa6add"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process/request.json",
+      "bytes": 690,
+      "sha256": "8cbf281aa7664d6c6a14cb818868f2bc1aeb5f271ccf8b3314c3eaca070649df"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process/result.json",
+      "bytes": 450,
+      "sha256": "9ee6828dfa43de7214c74e75f042864da243b88c5266599188d0787446ae04c0"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process/runtime.json",
+      "bytes": 24387,
+      "sha256": "f3b73e7bbd67b8128e14db7bd98d3fe646a5a644eae87c7d89072656350a3a70"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process/stderr.log",
+      "bytes": 255,
+      "sha256": "8d1f842fb7c128c151ccc919aab261493ba67f4506f9088beca08bb2c0a4686c"
+    },
+    {
+      "path": "superseded/fixture-error-a1/process/stdout.log",
+      "bytes": 3624,
+      "sha256": "1fba490848c8d0b46a7615f4eea92fb48762b8c8f9e4d152bea81eca9c231ba5"
+    },
+    {
+      "path": "superseded/fixture-error-a1/runner.sh",
+      "bytes": 5081,
+      "sha256": "999f9b220e2f3e511d154a567bba402505023fdf0d72e147a1dcaca3d7452f13"
+    },
+    {
+      "path": "superseded/fixture-error-a1/runtime-before.json",
+      "bytes": 24387,
+      "sha256": "f3b73e7bbd67b8128e14db7bd98d3fe646a5a644eae87c7d89072656350a3a70"
+    },
+    {
+      "path": "superseded/fixture-error-a1/source-closure.txt",
+      "bytes": 689,
+      "sha256": "2f91ff7ce6a5dd28204782361b46ba956e38d8ec023878023afc8b7f51284aa7"
+    },
+    {
+      "path": "superseded/fixture-error-a1/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "superseded/fixture-error-a1/supervisor.pid",
+      "bytes": 8,
+      "sha256": "20879b689b2e1f7f5325eab98800a2d9869cedfe47b15c2ae7ac98fec62ff0c1"
+    },
+    {
+      "path": "superseded/fixture-error-a1/validation.log",
+      "bytes": 89,
+      "sha256": "52fdfed770456fa53fd719f3072fbc2826bf9b2137069aefbf38a40d9beff342"
+    },
+    {
+      "path": "superseded/preflight-a2/checkout.log",
+      "bytes": 42,
+      "sha256": "7b0b372d939881fe567541218b59487f8efbb6839479720bbccb1e9777f41fef"
+    },
+    {
+      "path": "superseded/preflight-a2/live-source-check.json",
+      "bytes": 26,
+      "sha256": "b59348f90a249639a941323a6f0cceb5cf5be01490621fc1584328e0829bacee"
+    },
+    {
+      "path": "superseded/preflight-a2/process-exit-status.txt",
+      "bytes": 4,
+      "sha256": "56292515f7d3a7110811eb8de26b3f75f82a0766aa5a1fd66ebcfcb84fe6d5ff"
+    },
+    {
+      "path": "superseded/preflight-a2/runner.sh",
+      "bytes": 5050,
+      "sha256": "9c5f1fb3073e9a50d4024530c07e146247c27f5baad9b6d316e44050ed4336a7"
+    },
+    {
+      "path": "superseded/preflight-a2/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "superseded/preflight-a2/supervisor.pid",
+      "bytes": 8,
+      "sha256": "35f1855f9f2a9d2ebf0429b992a46ecf235df5cff830b30377358d4744063a4c"
+    }
+  ]
+}
