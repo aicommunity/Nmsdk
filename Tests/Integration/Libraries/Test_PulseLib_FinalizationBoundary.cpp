@@ -203,12 +203,12 @@ TEST(NativeFinalizationBoundary,PublicEnumsUseExplicitMapping)
 }
 
 namespace {
-template<class Owner> void ManagedFinalization(int calculateMode,bool owned=false,bool connected=true,bool interrupted=false)
+template<class Owner> void ManagedFinalization(int calculateMode,bool owned=false,bool connected=true,bool interrupted=false,bool clockGap=false)
 {
     const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
     if(!directory)GTEST_SKIP()<<"Requires original native source/model primaries";
     constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
-    const auto name=std::string(branch?"Branch":"Classic")+"_managed_finalization_"+std::to_string(calculateMode)+(owned?(connected?"_owned_connected":"_owned_local"):"")+(interrupted?"_reset":"");
+    const auto name=std::string(branch?"Branch":"Classic")+"_managed_finalization_"+std::to_string(calculateMode)+(owned?(connected?"_owned_connected":"_owned_local"):"")+(interrupted?"_reset":"")+(clockGap?"_clock_gap":"");
     const QDir root(QString::fromLocal8Bit(directory));
     const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
     const auto original=job["source_recognition"].toObject();
@@ -241,6 +241,13 @@ template<class Owner> void ManagedFinalization(int calculateMode,bool owned=fals
         owner->EnablePostTrainTuning=true;owner->AutoCalibrateFixedLTZThreshold=true;
         owner->EnablePostTrainMidThreshold=false;owner->PostTrainTipResistanceMode=PostTrainTune::kPostTipKeepDone;
         const auto boundary=CaptureNativeFinalizationBoundary(*owner,implementation);
+        const double capturedTime=environment->GetTime().GetDoubleTime();
+        if(clockGap)environment->IncreaseModelTimeByStep(); // no Calculate or structural edit
+        const double entryTime=environment->GetTime().GetDoubleTime();
+        if(clockGap) {
+            EXPECT_NEAR(entryTime-capturedTime,1./2000.,1e-12);
+            EXPECT_EQ(CaptureNativeFinalizationBoundary(*owner,implementation).Document(),boundary.Document());
+        }
         auto unsupported=boundary.Document();auto controls=unsupported["controls"].toObject();
         auto parameters=controls["parameters"].toObject();parameters["SyncCapacitanceTrim"]=1;
         controls["parameters"]=parameters;unsupported["controls"]=controls;
@@ -257,6 +264,22 @@ template<class Owner> void ManagedFinalization(int calculateMode,bool owned=fals
         if(installed.status!=NativeModelBuildStatus::Adopted)return 2;
         owner->Build();owner->Init();
         EXPECT_EQ(owner->NativeFinalizationIntent(),boundary.Document());
+        if(clockGap) {
+            EXPECT_TRUE(owner->IsNativeRecognitionTrialIdle());
+            EXPECT_TRUE(flag->Value.GetData());
+            const auto effective=owner->ExportNativeRecognitionState(implementation);
+            EXPECT_EQ(effective,source);
+            if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+                EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
+                NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+".json",
+                    {{"kind","native_finalization_clock_handoff"},{"schema_version",1},
+                     {"boundary",boundary.Document()},{"recognition_package",effective},
+                     {"calculate_mode",calculateMode},{"capture_time",capturedTime},{"entry_time",entryTime},
+                     {"clock_only_advance",true},{"live_train_handoff_implemented",false},
+                     {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+            }
+            return ::testing::Test::HasFailure()?2:0;
+        }
         if(owned) {
             owner->BeginNativePostTunePhase(specification,implementation);
             EXPECT_THROW(owner->BeginNativePostTunePhase(specification,implementation),std::logic_error);
@@ -368,3 +391,8 @@ TEST(NativeOwnedPostTune,BranchExternalConnected){ManagedFinalization<NNeuronTim
 TEST(NativeOwnedPostTune,BranchExternalLocal){ManagedFinalization<NNeuronTimeLearnerBranch>(1,true,false);}
 
 TEST(NativeOwnedPostTune,BranchResetInterrupt){ManagedFinalization<NNeuronTimeLearnerBranch>(0,true,true,true);}
+
+TEST(NativeFinalizationClockHandoff,ClassicAutomatic){ManagedFinalization<NNeuronTimeLearner>(0,false,true,false,true);}
+TEST(NativeFinalizationClockHandoff,ClassicExternal){ManagedFinalization<NNeuronTimeLearner>(1,false,true,false,true);}
+TEST(NativeFinalizationClockHandoff,BranchAutomatic){ManagedFinalization<NNeuronTimeLearnerBranch>(0,false,true,false,true);}
+TEST(NativeFinalizationClockHandoff,BranchExternal){ManagedFinalization<NNeuronTimeLearnerBranch>(1,false,true,false,true);}
