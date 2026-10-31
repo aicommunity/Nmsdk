@@ -29,10 +29,10 @@ production calibration/PostTune controller.
 |---|---|
 | Potential baseline, PulseLib 7f17735 | 16 native, 29 independent и отдельные 8 частично перекрывающихся checks прошли; compact bundles опубликованы. Это собственный снимок. |
 | Raw validator/assessment, PulseLib 25cf6a5 | 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Полная ASan приёмка открыта. |
-| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Повтор полного normal 16-case gate и ASan a2 ещё выполняются. |
+| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate теперь завершён с exit 0; его собственный reader и публикация новых primary data ещё не завершены. ASan a2 выполняется. |
 | Persisted observations, PulseLib fece852 | Код и проверки roundtrip/corruption добавлены; syntax compilation прошла. Native normal/ASan gates ожидают свой source/build. |
 | Calibrated state, PulseLib 353882b → ce7e81e | Export/import/proof/owner mirror реализованы. Шесть production units первого снимка прошли syntax-only; изменённый NativeCalibratedState.cpp ce7e81e отдельно прошёл syntax-only. Model runtime gates a1/a2 не завершены. |
-| Frozen scorer/report, root b22c15fec | Реализованы, 9-test actual-package readers ожидают native outputs. 35-test compatibility reader выполняется на сохранённых старых native данных. |
+| Frozen scorer/report, root b22c15fec | Реализованы, 9-test actual-package readers ожидают native outputs. 35/35 compatibility checks прошли без failures/errors/skips на старых native данных PulseLib 25cf6a5 (697.340 s); это не readback нового 16-case gate. |
 | Полные calibrated reports, root 590526997 | M40 job ожидает native и reader acceptance; затем построит все 4 patterns × все сомы Classic/Branch. 3 report checks ещё не выполнены. Полные изображения — cache, не bulk Git. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
