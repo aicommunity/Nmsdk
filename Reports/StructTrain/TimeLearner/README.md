@@ -19,6 +19,8 @@ review does not imply acceptance of an entire report collection.
 
 | Validation | Artifact directories |
 |---|---|
+| Standard production Console calibration: six jobs per worker, portable owned CLI/model/full-grid binding, bounded stop/parser controls and runtime flags; full experiment pipeline remains open | [Normal](s08-calibration-worker-normal-a1/README.md), [normal controls](s08-calibration-worker-controls-normal-a1/README.md), [ASan](s08-calibration-worker-asan-a1/README.md) |
+| Production calibration soma/input reports: 10 reports, 22 complete matrices, 66 trial/soma pairs, 19 checks; eleven selected overview/rise/peak PNG reviewed, full collection not accepted | [M40 report metadata and selected PNG](s08-calibration-worker-report-normal-a1/README.md) |
 | Saved-model calibration ownership: six reproduced baseline failures; fixed 8 native + 4 independent checks per worker; source training remains unresolved | [Normal](s08-calibration-ownership-normal-a1/README.md), [ASan](s08-calibration-ownership-asan-a1/README.md) |
 | Ownership control soma/input reports: six complete matrices, 18 trial/soma pairs plus three complete externally consumed probe/soma plots; 9 overlapping checks, four selected overviews reviewed | [M40 cache receipt and selected PNG](s08-calibration-ownership-report-normal-a2/README.md) |
 | Native threshold-grid transaction, commit/rollback and context controls: 2 native + 17 independent per worker; full worker/PostTune matrix remains open | [Normal](s08-calibration-grid-normal-a2/README.md), [ASan](s08-calibration-grid-asan-a3/README.md) |

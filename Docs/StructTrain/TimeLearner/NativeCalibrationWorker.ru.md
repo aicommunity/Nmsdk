@@ -36,7 +36,9 @@ audit complete matrices against primary source
 write RunManifest with runtime, process, scorer code and artifact closure
 ```
 
-Bool Build/Init/Reset/Calculate не используются как каналы ошибок. Worker не
+Bool Build/Reset/Calculate не используются как каналы ошибок; Init имеет штатный
+void-интерфейс и guard IsInit, поэтому инициализация parent не повторяет AInit
+у уже инициализированного learner. Worker не
 вызывает Calculate learner или детей отдельно от model scheduler. Driver
 выполняет собственные native imports/сбросы физики по существующему контракту.
 Исправляющих записей параметров на каждом тике нет. Mid-probe checkpoint не обещан.

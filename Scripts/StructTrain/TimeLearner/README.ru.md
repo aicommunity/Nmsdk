@@ -3,7 +3,7 @@
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 Import не запускает эксперименты. Реализованы `inventory`, native-подмножество
 `analyze`, `report`, `bundle`, `publish`, `history resolve` и анализ измерений
-`calibrate select/confirm`. Runtime/process supervisor также имеют module CLI.
+`calibrate run/select/confirm`. Runtime/process supervisor также имеют module CLI.
 Сквозные prepare/train/export/evaluate, scheduler и полная миграция ещё не готовы.
 
 ```text
@@ -57,8 +57,9 @@ analysis и attempt identities. Это ещё не preflight/runner и не за
 из content identity, полная provenance сохраняется. Историческая schema 1
 не пересчитывается. Source 670f2ff79 прошёл 18 Python tests на каждом worker
 и реальный relocation/startup A2 binary с суффиксом `.rs2`: production snapshot
-сохранил fingerprint. Это проверка integrity/loader scope; подключения к runner
-и очередям пока нет. Артефакты и ограничения:
+сохранил fingerprint. Теперь runtime/process supervisor подключены к native
+`calibrate run`; общая очередь всей кампании остаётся незавершённой.
+Runtime capture включает RelWithDebInfo/Minsize и linker flags. Артефакты и ограничения:
 [ConditionIdentities.ru.md](../../../Docs/StructTrain/TimeLearner/ConditionIdentities.ru.md).
 
 `config_document.py` добавляет lossless edits существующих text leaves с полным
@@ -226,8 +227,8 @@ Calibration run нельзя выдать за новый frozen evaluation run.
 содержит calibration evidence consistency и свежие response metrics; statistical
 independence и partition separation автоматически не подтверждаются.
 Сам отчёт остаётся диагностическим и не создаёт новую калибровку.
-Проверки этих новых путей ещё выполняются на серверах; production native
-selection/commit/rollback CLI остаётся незавершённым.
+Native selection/commit/rollback доступен через `calibrate run` ниже. Его
+адресная приёмка не заменяет полный PostTune и научную матрицу режимов.
 
 Renderer entry points заранее проверяют headless matplotlib/Agg и Pillow до
 создания report directory. Недостающий backend даёт структурированный отказ,
@@ -247,8 +248,9 @@ source primary CSV. Свежая confirmation привязана к выбран
 BudgetExhausted. Cancelled/Failed/RecoveryRequired — diagnostic-only; проверка
 не подтверждает физический rollback или подлинность native исполнения.
 
-Это анализ фактических результатов `NativeThresholdCalibrationTransaction`,
-а не запуск калибровки из CLI. Production worker integration остаётся открытой.
+Это анализ фактических результатов `NativeThresholdCalibrationTransaction`.
+Для запуска служит отдельный `calibrate run`; полный Train→Test pipeline и
+интеграция общей очереди остаются открытыми.
 
 `report TRANSACTION.json --format calibration-transaction --output CACHE_DIR`
 строит все завершённые candidate matrices и fresh confirmation: каждый
@@ -258,3 +260,33 @@ diagnostics. Незавершённые пробы сохраняются как
 выдаются за полную реакцию. Backend и raw evidence проверяются до создания
 каталога. Полный отчёт предназначен для M40 cache; в Git сохраняются compact
 primary и выбранные рисунки согласно общей политике.
+
+### Production native calibration
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner calibrate run JOB.json \
+  --source-solo SOURCE_learned_state.json --runtime-manifest runtime.json \
+  --wall-seconds 600 --output NEW_ATTEMPT
+python3 -m Scripts.StructTrain.TimeLearner analyze \
+  NEW_ATTEMPT/run-manifest.json --format calibration-run
+python3 -m Scripts.StructTrain.TimeLearner report \
+  NEW_ATTEMPT/run-manifest.json --format calibration-run --output NEW_M40_CACHE
+```
+
+JOB schema 1 содержит полный source recognition package, явные thresholds,
+maximum_candidates, ordered NativeCalibrationRequests, response criterion,
+одну частоту дерева, maximum_model_ticks и canonical SHA. Preflight проверяет
+исходные primary CSV/JSON; worker сохраняет их snapshot, исполняет стандартную
+Console через pidfd supervisor и связывает итоговую модель с полным grid,
+fresh confirmation, runtime/process и hashes кода анализа. Повторное использование
+output запрещено. Подменённые declarations/model/provenance отклоняются даже
+после пересчёта внешних hashes.
+
+Model-tick budget и wall timeout различаются. Первый даёт диагностическую отмену
+с восстановлением source; незавершённый процесс не получает calibrated claim.
+Portable audit проверяет согласованность, не подлинность чужих execution records.
+Калибровка не повышает source Train до Exact и не подтверждает independent Test.
+Source этих контрольных моделей имеет search_unresolved. Runtime mappings —
+стартовый снимок процесса, без обещания полного позднего plugin census.
+Контракт, ограничения и адресная приёмка:
+[NativeCalibrationWorker](../../../Docs/StructTrain/TimeLearner/NativeCalibrationWorker.ru.md).
