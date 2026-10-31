@@ -1,0 +1,7 @@
+# Native PostTune complete soma/input visual caches
+
+M40 rebuilt four CanonRmin paired-native import transports (six soma/pattern pairs) from Git bundle 2d304c2 and twenty complete frozen target/foil evaluation reports (sixty soma/pattern pairs) from Git bundle 6870d987. All cases, patterns and actual soma channels have full recorded native samples, input overlays, overview and 100-tick zooms. Frozen reports also preserve actual-order series and true recorded spike timestamps. No SI units are inferred. The paired transport producer did not record spikes; none are fabricated.
+
+The paired reader passes eight checks, report/plot six; frozen portable worker/plot passes nine checks. Every cache checksum and every expected frozen trial/channel combination was verified. This archive preserves HTML/manifest/analysis/checksum metadata plus selected PNG only; complete PNG/SVG/PDF and reproducible primaries remain on M40 caches listed in manifest. Git primary bundles retain source models, observations and lossless raw data.
+
+All twenty fixed-threshold evaluations are silent on target as well as foil (TP0 FP0 FN1 TN1); successful rendering/validity is not successful classification. These are the earlier candidate/transfer controls, not acceptance of the subsequently implemented PostTune search controller. Manual selected-image and full visual acceptance remain pending; no full stage or scientific verdict is claimed.
