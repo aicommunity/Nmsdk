@@ -103,3 +103,28 @@ V2 calibration proof, training certificate или model hash отсутству�
 Baseline receipts опубликованы и проверены после Git fetch: [normal](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-baseline-normal-a1/README.md)
 (56 файлов / 40260 bytes, включая cleanup receipts) и [ASan](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-baseline-asan-a1/README.md)
 (46 / 17632). Это доказательства отказов исходного снимка, не полная приёмка fix.
+
+## Scoped normal acceptance и текущие gates
+
+Normal A2 завершён: 12/12, 220.780 s. Независимый reader на четырёх настоящих
+physical CSV: 5/5 без skips, 4.165 s. [Primary bundle](../../../Reports/StructTrain/TimeLearner/s08-posttune-observation-fixed-normal-a2/README.md)
+commit 37678c324afdc8adbfa41e4b0b26c465749b2a44 содержит 156 файлов / 1080412 bytes;
+все member hashes проверены после Git fetch. Interrupted A1 сохранён отдельно
+в том же архиве и не объявляется green. Источники binary: root e3fe5340,
+PulseLib 39810a7, Bin 1e9a1389; позднейшие doc-only gitlinks их не подменяют.
+
+ASan A2 завершил восемь regression controls и оба physical 2000 Гц; серия
+20000 Гц ещё выполняется. Normal дополнительный 37-case gate исполняется
+на том же immutable A2 binary, без повторной сборки. M40 renderer получает
+normal primaries через Git, проверяет 156 members и строит все четыре
+полных free-run reports в Data cache. Все сомы, оба паттерна, реальные входы
+и каждый native tick сохраняются; 20-кГц 100-tick тайлы требуют большого
+кэша, который не публикуется в Git. До завершения и просмотра selected
+панелей visual acceptance не заявляется.
+
+Bin 97dd1943 уточняет фазы/причины отказа и добавляет ClDesc для двух public
+PostTune status properties. Их ptPubState=258 сверено с C++ declarations;
+оба XML прочитаны на сервере, дубли отсутствуют. Это metadata validation,
+не native UI/runtime test. Первая metadata-проверка A1 потеряла Unicode
+литерал в transport JSON через Windows stdin; ASCII-escaped JSON A2 прошёл
+без изменения правильных UTF-8 файлов репозитория. Полный ClDesc audit открыт.
