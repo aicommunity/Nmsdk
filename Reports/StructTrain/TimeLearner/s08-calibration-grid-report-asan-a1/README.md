@@ -1,0 +1,7 @@
+# Native calibration grid: ASan all-pattern visual cache
+
+M40 imported the complete ASan source bundle through Git, checking every member size/hash, then rendered all sixteen transaction/context reports: ten completed matrices, thirty trial/soma pairs, all target/foil patterns and actual shared inputs. Twenty-seven report/plot/transaction/calibrated checks passed without skips/failures/errors. Source runtime is c83f0ca4c / PulseLib c36e272, renderer 01faa730d4decf7c82ae0ea48c42fa622f41817f. LT spike events are explicitly labeled; soma units remain model units with SI unverified.
+
+The two selected full-resolution PNG show fresh target confirmation for Classic/Branch soma1. Full matrices, other soma channels, foil responses, zooms and actual-order series remain reproducible M40 cache. Source raw data/models are in s08-calibration-grid-asan-a3; metadata archive contains all report/analysis/series/HTML/checksum manifests, gate logs, Git import verification and explicit normal/ASan model/threshold/raw-confirmation comparisons. A matching deterministic result is not independent scientific retraining.
+
+Reproduce by extracting the referenced source archive and running report TRANSACTION.json --format calibration-transaction --output CACHE_DIR at the recorded renderer/plotting environment. No bulk graphics, binaries or duplicate primary are committed. Selected manual QA and full visual acceptance remain separate; complete mode/profile/frequency validation, production worker, PostTune and stage8 remain open. Scientific verdict is null.

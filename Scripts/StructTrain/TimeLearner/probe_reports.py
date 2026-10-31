@@ -14,7 +14,7 @@ import platform
 from pathlib import Path
 
 from .native_evidence import audit_probe, load, number, require
-from .plotting import padded_limits, render_soma
+from .plotting import padded_limits, render_soma, plotting_runtime
 
 
 def _read_probe_data(packet_path: Path, trace_path: Path, allow_incomplete=False):
@@ -45,6 +45,7 @@ def _read_probe_data(packet_path: Path, trace_path: Path, allow_incomplete=False
 
 
 def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_limits=None, allow_incomplete=False):
+    plotting_runtime()
     packet, audit, observation, spec, frequency, samples, count, quality = _read_probe_data(packet_path, trace_path, allow_incomplete)
     output.mkdir(parents=True, exist_ok=False)
     primary = output/"primary";primary.mkdir()
@@ -129,6 +130,7 @@ def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_l
 
 def render_probe_set(specification: Path, output: Path):
     """An expected trial set with common per-soma numeric axes, no inferred labels."""
+    plotting_runtime()
     spec=load(specification)
     allow_incomplete=spec.get("schema_version")==2 and spec.get("observation_policy")=="complete_or_partial"
     fields={"kind","schema_version","trials"}|({"observation_policy"} if allow_incomplete else set())

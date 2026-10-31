@@ -1,5 +1,66 @@
 # TimeLearner reproducibility artifacts
 
+Latest scoped PostTune evidence:
+
+[Original request bound to finalization: normal](s08-native-training-intent-binding-normal-a1/README.md),
+[ASan](s08-native-training-intent-binding-asan-a1/README.md): 61/61 native, 3/3 reader, actual successful import and 20 schema compatibility checks per worker.
+Configured automatic phase dispatch remains open.
+
+[Live training request provenance: normal 61/61](s08-native-training-intent-normal-a1/README.md),
+[ASan 61/61](s08-native-training-intent-asan-a1/README.md), independent 24-snapshot/32-corruption readers.
+[Readable positive LTZ crossing and actual threshold, four reviewed PNGs](s08-native-training-threshold-visual-asan-a3/README.md).
+Automatic phase dispatch and intent checkpoints remain open.
+
+[Target-only threshold formulas and actual selected-threshold Solo burst: normal](s08-native-training-threshold-reference-normal-a2/README.md),
+[ASan](s08-native-training-threshold-reference-asan-a1/README.md);
+[soma/input and LTZ visual reports](s08-native-training-threshold-visual-asan-a1/README.md).
+Final parallel recognition, foil evaluation and configured phase orchestration remain open;
+positive LTZ amplitude-detail is supplied by a3 above.
+
+[Fresh Solo LTZ burst traces: normal 33/33 and independent reader](s08-native-solo-threshold-trace-normal-a1/README.md),
+[ASan 33/33 and independent reader](s08-native-solo-threshold-trace-asan-a1/README.md).
+Eight actual controls per worker; source replay, not new Train. Threshold proposal,
+confirmation and automatic dispatch remain open.
+[Solo soma/LTZ temporal reports: all recorded channels and actual input](s08-native-solo-threshold-visual-asan-a1/README.md);
+eight selected PNGs reviewed, remaining views have automated coverage.
+
+Artifact publication prerequisite: [Elder 16 Git tests](s10-artifact-publication-elder-a1/README.md),
+[M40 16 Git tests](s10-artifact-publication-m40-a1/README.md). Schema 2 verifies
+declared committed blobs; upstream scientific completeness and full producer migration remain open.
+
+[Actual production eight-repository closure, primary/visual artifact checks and receipts](s10-production-closure-publication-a1/README.md)
+exercise schema 2 beyond fixtures; the complete stage 10 remains open.
+
+- [Native phase lifecycle detach: 16 normal controls, 12 regressions and compatibility](s08-native-phase-lifecycle-interrupt-normal-a1/README.md).
+- [The same lifecycle detach under ASan](s08-native-phase-lifecycle-interrupt-asan-a1/README.md).
+- [Lifecycle diagnostics and all 20 complete soma/input reactions; 8 reviewed PNG](s08-native-phase-lifecycle-visual-normal-a1/README.md).
+- [All six production schema-1/2 ASan visual reports: 62 complete trial-soma pairs](s08-native-posttune-fixed-console-visual-asan-a1/README.md).
+- [Production schema-2 fixed/calibrate and legacy: six owned normal jobs plus rejection gates](s08-native-posttune-fixed-console-normal-a1/README.md).
+- [The same production controls under ASan, with all 18 original portable regressions](s08-native-posttune-fixed-console-asan-a1/README.md).
+- [Fixed-threshold soma/input reports: 32 trial-soma pairs and 12 reviewed PNG](s08-native-posttune-fixed-visual-normal-a3/README.md).
+- [Fixed-threshold native PostTune: normal, repaired complete portable source closure](s08-native-posttune-fixed-normal-a2/README.md).
+- [Fixed-threshold native PostTune: 12 ASan cases, legacy A/B and latest reader gates](s08-native-posttune-fixed-asan-a1/README.md).
+- [N0 Classic/Branch PostTune: completed ASan and independent readers](s08-native-posttune-controller-n0-asan-a1/README.md).
+- [Shared PostTune codec: completed ASan and byte-exact owned Console A/B](s08-native-posttune-codec-asan-a1/README.md).
+- [Production measured PostTune: 18 jobs and shared calibration regressions](s08-native-posttune-console-normal-a2/README.md).
+- [Production measured PostTune: completed ASan corpus](s08-native-posttune-console-asan-a1/README.md).
+- [All 18 production run-bound soma/input reports: 59 matrices, 178 trial-soma pairs](s08-native-posttune-console-visual-normal-a1/README.md).
+- [New controller: all 24 visual reports, 61 matrices, 184 trial-soma pairs](s08-native-posttune-controller-visual-normal-a3/README.md).
+- [Measured native search, real calibration and rollback: normal A2](s08-native-posttune-controller-normal-a2/README.md).
+- [The same native controller: ASan 10 native, 19 original and 20 later reader checks](s08-native-posttune-controller-asan-a2/README.md).
+- [N0 Classic/Branch measured PostTune: two native cases and 12 evidence checks](s08-native-posttune-controller-n0-normal-a1/README.md).
+- [Shared PostTune controls: all 18 original job declarations and two byte-exact Console A/B jobs](s08-native-posttune-codec-normal-a1/README.md).
+- [Verified duplicate-only Elder cache cleanup with retained Git and M40 primaries](s02-storage-dedup-elder-20261031-a1/README.md).
+- [All five typed candidate modes: normal](s08-native-posttune-candidates-normal-a2/README.md), [ASan](s08-native-posttune-candidates-asan-a1/README.md).
+- [Forty actual Console export/frozen-evaluation operations](s08-native-posttune-worker-normal-a1/README.md).
+- [Complete old candidate/transfer soma-input visual caches and selected figures](s08-native-posttune-visual-normal-a1/README.md).
+- [TL-037 additional 37 ASan regressions](s08-posttune-observation-regression-asan-a1/README.md).
+
+These gates do not accept the full mode/profile/frequency matrix or the complete
+refactoring plan. Old all-silent candidate evaluations and later calibrated
+two-pattern controller controls are distinct snapshots; neither establishes
+eight-pattern scientific classification.
+
 This maintained subtree is explicitly tracked in Git. Store a run manifest,
 complete trial observations, learned-model export and verification evidence here.
 Necessary large text traces may be compressed with their content digest and file
@@ -9,10 +70,22 @@ Do not store credentials, binaries or working directories. Distinguish execution
 validity, convergence, calibration and scientific evaluation. An implementation
 test report is not a trained-model result.
 
+Current storage policy: keep compressed lossless primary data, models, metrics,
+runtime/provenance receipts and selected figures in Git. Reproduce full readable
+PNG/SVG/PDF reports in the M40 cache. A cache path is supplementary; it does not
+replace the primary data needed to reproduce a published result. Selected visual
+review does not imply acceptance of an entire report collection.
+
 ## Implementation evidence
 
 | Validation | Artifact directories |
 |---|---|
+| Standard production Console calibration: six jobs per worker, portable owned CLI/model/full-grid binding, bounded stop/parser controls and runtime flags; full experiment pipeline remains open | [Normal](s08-calibration-worker-normal-a1/README.md), [normal controls](s08-calibration-worker-controls-normal-a1/README.md), [ASan](s08-calibration-worker-asan-a1/README.md) |
+| Production calibration soma/input reports: 10 reports, 22 complete matrices, 66 trial/soma pairs, 19 checks; eleven selected overview/rise/peak PNG reviewed, full collection not accepted | [M40 report metadata and selected PNG](s08-calibration-worker-report-normal-a1/README.md) |
+| Saved-model calibration ownership: six reproduced baseline failures; fixed 8 native + 4 independent checks per worker; source training remains unresolved | [Normal](s08-calibration-ownership-normal-a1/README.md), [ASan](s08-calibration-ownership-asan-a1/README.md) |
+| Ownership control soma/input reports: six complete matrices, 18 trial/soma pairs plus three complete externally consumed probe/soma plots; 9 overlapping checks, four selected overviews reviewed | [M40 cache receipt and selected PNG](s08-calibration-ownership-report-normal-a2/README.md) |
+| Native threshold-grid transaction, commit/rollback and context controls: 2 native + 17 independent per worker; full worker/PostTune matrix remains open | [Normal](s08-calibration-grid-normal-a2/README.md), [ASan](s08-calibration-grid-asan-a3/README.md) |
+| All-grid soma/input report metadata and selected figures: 16 reports, 10 complete matrices, 30 trial/soma pairs per dataset; full cache on M40 | [Normal](s08-calibration-grid-report-normal-a1/README.md), [ASan](s08-calibration-grid-report-asan-a1/README.md) |
 | Addressed absolute-clock correction: 52 native cases at seeded 131 s, 25 corrected data tests, 8 clock / 84 learned / 66 stopped primary trials; full gate pending | [Elder-1](s07-clock-fixed-elder1/README.md) |
 | Failed full gate: 22/430 failures per worker; real absolute-clock baseline 9/10 expected failures, mapped-process manifests retained | [Elder-1](s07-clock-failure-elder1/README.md), [M40 + ASan baseline](s07-clock-failure-m40/README.md) |
 | Physical domain schema 2: 22 native / 15 Python per worker; independent a/b/endpoints; aligned byte-exact 68 normal / 44 ASan trial controls | [Elder-1](s07-domain-physics-elder1/README.md), [M40 ASan](s07-domain-physics-m40/README.md), [aligned 2/20 kHz](s07-domain-physics-matrix-elder1/README.md) |
@@ -73,3 +146,31 @@ commits are not substituted into historical manifests.
 - [Elder native PostTune reconstruction](s08-posttune-rebuild-elder1/README.md), [M40 ASan](s08-posttune-rebuild-m40/README.md): 10 native / 7 Python tests and 10090 waveform pairs per worker; eight pre-fix baseline failures; failed fixtures and one-pass stimulus evidence preserved.
 
 - [Elder transient PostTune goal](s08-transient-elder1/README.md), [M40 ASan](s08-transient-m40/README.md): four native cases, eight Python tests, eight complete presentations / 19368 samples per worker; corrected pre-fix baseline and byte-exact common waveforms.
+
+Native production additions: [cold Train/export/frozen evaluation normal](s09-native-pipeline-normal-a1/README.md), [separate mechanical worker support extraction](s08-worker-support-normal-a1/README.md). The terminal older [threshold assessment ASan 16+35 gate](s08-threshold-assessment-asan-a1/README.md) is published separately; it does not accept later source versions.
+
+Owned cold pipeline: [normal 12 phases + controls](s09-native-pipeline-owned-normal-a1/README.md), [ASan](s09-native-pipeline-owned-asan-a1/README.md), [all-pattern fixed-evaluation temporal soma/input reports](s09-native-pipeline-report-normal-a2/README.md) (4 matrices, all somas, eight manually reviewed selected PNG). Training is SearchUnresolved; full-cache visual acceptance and full original stages remain open.
+
+Cold pipeline interoperation and stronger stopped-state controls: [normal](s09-native-pipeline-interoperation-normal-a1/README.md), [ASan](s09-native-pipeline-interoperation-asan-a1/README.md). Seven controls pass per worker; actual cold N1 calibration remains NonSeparable on the declared grids, with valid frozen negative evaluation. New calibration-grid visual acceptance remains open.
+
+TL-037 legacy inference observation: [normal expected failures](s08-posttune-observation-baseline-normal-a1/README.md), [ASan expected failures](s08-posttune-observation-baseline-asan-a1/README.md). Six failing controls per worker reproduce stale attempt status/evidence and missing-foil false Success; two NaN controls pass. These are baseline failure receipts, not passing fix gates.
+
+TL-037 corrected [normal A2 primary gate](s08-posttune-observation-fixed-normal-a2/README.md): 12 native and 5 independent data checks; four actual legacy free-runs Classic/Branch x 2000/20000 Hz. Separate full-regression, ASan and visual gates remain open.
+
+TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttune-observation-regression-normal-a1/README.md), [ASan addressed 12+6 gate](s08-posttune-observation-fixed-asan-a2/README.md), [complete recorded soma/input report metadata and eleven manually reviewed selected panels](s08-posttune-observation-report-normal-a1/README.md). All four ASan CSVs equal normal primaries; reuse the waveform cache, without claiming independent scientific repetitions. Additional ASan 37-case regression remains open.
+
+
+- [Owned native PostTune, normal](s08-native-owned-posttune-normal-a1/README.md):
+  75/75 C++ checks, 2/2 independent reader checks, ten actual phase records and
+  100 corrupt-receipt controls. All 836 archive members verified; compressed
+  primary 4095348 bytes, original source closure two runs / 84 artifacts.
+  ASan/report acceptance and configured live-Train dispatch remain pending.
+
+
+- Production owned PostTune Console:
+  [normal](s08-native-owned-posttune-worker-normal-a1/README.md),
+  [ASan](s08-native-owned-posttune-worker-asan-a1/README.md): 20 PostTune + 6
+  standalone calibration controls per worker, ordered 19/19 checks, no skips.
+  Initial setup skips remain recorded. Complete 28-run closures / 1196 artifacts
+  each; all compressed archive members verified. Full production temporal report
+  gate remains pending; live Train handoff and full stage8 are not accepted.

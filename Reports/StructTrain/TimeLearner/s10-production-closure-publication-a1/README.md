@@ -1,0 +1,5 @@
+# Production Git closure: real eight-repository publication
+
+The exact 18-run visual bundle fd4f9f2b was republished through production publish_closure schema 2 with seven actual child repositories, children first, and the root last. All child branch tips already equalled the recorded gitlinks; no child history or source files used by active jobs were changed. A1 verified selected visual artifacts; A2 verified both the compact visual set and original lossless production primary bundle before pushes and checked all remote refs again afterwards. The initial visual producer push was manual: these are explicit idempotent production adoption checks, not a claim that every old producer already uses the publisher.
+
+Also preserved: latest eight report/plot checks at 7e8d97f3f (12.419 s, no skips), and M40 reconstruction of all 220 N0 normal primary files / 604878849 bytes from Git, verified twice before Elder duplicate removal. The full stage 10 scheduler/ConditionSpec/producer migration remains open.

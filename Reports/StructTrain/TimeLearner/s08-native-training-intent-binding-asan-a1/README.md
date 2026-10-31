@@ -1,0 +1,5 @@
+Original request -> finalization boundary: asan
+
+61/61 native checks and 3/3 independent reader tests. Eight lifecycle cases actually reject a late control edit without modifying the model, capture a schema-2 stopped diagnostic boundary, import its actual learned state and clear a nonempty request. Both topologies, CalculateMode 0/1, local and connected controls. Twenty-four snapshots, 64 re-signed corrupt-data controls, twenty schema compatibility checks (ten schema1 and ten schema2).
+
+Production capture validates original session/protocol/controls and source bindings; only the live Need value may differ. Imported historical models without a request retain schema1. No automatic phase dispatcher, intent checkpoint or full stage8 acceptance. Short-budget/stop controls do not claim convergence; saved Solo regressions retain their original outcome. Two original portable runs / 84 artifacts and six previous schema1 boundaries included. Initial compilation failed because the test lacked an explicit boundary header; the failed attempt is retained. Repaired gates have no skips; ASan leak detection disabled in the ASan run.

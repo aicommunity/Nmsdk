@@ -2,7 +2,22 @@
 from pathlib import Path
 import math
 
-from .native_evidence import require
+from .native_evidence import EvidenceError, require
+
+
+def plotting_runtime():
+    """Check the actual headless backend before a report creates any outputs."""
+    import platform
+    import sys
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot  # load native backend dependencies now
+        import PIL
+    except (ImportError, OSError, RuntimeError) as error:
+        raise EvidenceError("plotting_runtime_unavailable:"+str(error)) from error
+    return {"python": platform.python_version(), "python_executable": sys.executable,
+            "matplotlib": matplotlib.__version__, "pillow": PIL.__version__}
 
 
 def padded_limits(values):
@@ -66,7 +81,9 @@ def time_views(begin, end, frequency):
     return views
 
 
-def render_soma(observation, channel, label, limits, output: Path):
+def render_soma(observation, channel, label, limits, output: Path, *,
+                potential_axis_label="Soma SumPotential [model units; SI unverified]",
+                reference_level=None):
     # Lazy backend import: inventory/analyze and module import need no GUI/backend.
     import matplotlib
     matplotlib.use("Agg")
@@ -95,9 +112,16 @@ def render_soma(observation, channel, label, limits, output: Path):
                 views.append((name+"-detail", left, right, detail, "local_detail", name))
         for name, left, right, y_limits, scale, time_view in views:
             fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
-            fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.70)
+            # A threshold adds a fourth legend row. Reserve its own band above
+            # the axes instead of drawing the input legend across the waveform.
+            fig.subplots_adjust(left=.12, right=.86, bottom=.16,
+                                top=.64 if reference_level is not None else .70)
             overlay = ax.twinx()
             ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
+            if reference_level is not None:
+                require(math.isfinite(reference_level), "nonfinite_plot_reference_level")
+                ax.axhline(reference_level, color="#477a32", linestyle="--", linewidth=1.,
+                           label="Actual scalar spike threshold")
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
                          linewidth=1.2, label="Actual shared input (native samples)")
             if sample_markers:
@@ -112,7 +136,7 @@ def render_soma(observation, channel, label, limits, output: Path):
                              alpha=.65,marker="x",markersize=3,clip_on=False)
             ax.set_xlim(left, right);ax.set_ylim(*y_limits)
             ax.set_xlabel("Native absolute time [s]")
-            ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
+            ax.set_ylabel(potential_axis_label)
             overlay.set_ylabel("Input [native generator units]", color="#a34d00")
             overlay.tick_params(axis="y", colors="#a34d00")
             ax.grid(True, alpha=.25)
@@ -126,9 +150,12 @@ def render_soma(observation, channel, label, limits, output: Path):
             elif not observation["complete"] and observation["closed_at"] < right:
                 ax.axvspan(max(left, observation["closed_at"]), right, color="gray", alpha=.25,
                            label="Unobserved / censored")
+            labelled_spike = False
             for event in observation["spike_times"]:
                 if left <= event <= right:
-                    ax.axvline(event, color="#8c2c91", alpha=.5, linestyle=":")
+                    ax.axvline(event, color="#8c2c91", alpha=.5, linestyle=":",
+                               label=None if labelled_spike else "Actual LT spike event")
+                    labelled_spike = True
             fig.suptitle(f'{observation["sample_id"]} | {observation["label"]} | {observation["trial_id"]}\n'
                          f'{label} | {observation["reset_policy"]}\n'
                          f'{name} ({scale} Y) | valid={observation["valid"]}, complete={observation["complete"]} | '
@@ -149,6 +176,8 @@ def render_soma(observation, channel, label, limits, output: Path):
                          "downsampling": False, "y_scale": scale, "time_view": time_view,
                          "sample_markers":bool(sample_markers),
                          "shared_y_limits": list(limits), "y_limits": list(y_limits)})
+            if reference_level is not None:
+                rows[-1]["reference_level"] = reference_level
     return rows
 
 
@@ -171,6 +200,7 @@ def render_series(observations, channel, label, limits, output: Path):
             fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
             fig.subplots_adjust(left=.12, right=.86, bottom=.16, top=.70)
             overlay = ax.twinx()
+            labelled_spike = False
             for position, o in enumerate(selected):
                 # Separate trials explicitly, even on adjacent native ticks.
                 # Missing internal samples also break both lines.
@@ -196,7 +226,9 @@ def render_series(observations, channel, label, limits, output: Path):
                 color = "#3b893e" if row["reset_boundary"] is not None else "#666666"
                 ax.axvline(o["begin"], color=color, linestyle="--", alpha=.5)
                 for spike in o["spike_times"]:
-                    ax.axvline(spike, color="#8c2c91", alpha=.5, linestyle=":")
+                    ax.axvline(spike, color="#8c2c91", alpha=.5, linestyle=":",
+                               label=None if labelled_spike else "Actual LT spike event")
+                    labelled_spike = True
             ax.set_xlim(left, right);ax.set_ylim(*limits)
             ax.set_xlabel("Native absolute time [s]; gaps retain actual duration")
             ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
