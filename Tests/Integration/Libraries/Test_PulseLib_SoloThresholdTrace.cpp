@@ -38,6 +38,7 @@ template<class Owner> void Measure(Scenario scenario)
         const auto threshold=zone->Threshold.GetData();
         auto q=owner->NativeTrainingController().Plan().probe;
         q.specification.runId=name;q.specification.trialId="fresh-target-burst";
+        q.specification.windows={owner->NativeTrainingController().Plan().inputWindows.at(0)};
         q.activeInput=0;q.inputId=owner->NativeTrainingController().Plan().protocol.inputs[0].id;
         const auto life=owner->ObserveLifecycle();auto* pointer=owner.Get();
         auto observer=std::make_shared<NmsdkTools::ModelRevisionObserver>();
