@@ -454,3 +454,26 @@ NativeRecognitionTrialExecutor::Cancel сохраняет cancelled result до 
 отложенная фаза может потребить только принадлежащий ей cancelled result,
 проверив context/trial identity на следующей legal boundary. Нельзя выполнять
 новый import из Reset hook или стирать чужой результат ради продолжения.
+
+
+## Независимый weight probe threshold: новый подэтап, ещё не принят
+
+PulseLib 09f72c78295b1244303658c6b58f60f741796c52 добавляет явный
+NativePostTuneTransactionSpec.weightProbeThreshold. Нужен для последующего
+корректного отображения PostTrainSilentThreshold: измерение весов и конечная
+recognition-модель могут иметь разные пороги и физические revisions.
+Неявного изменения поведения прежних schema-1/2 transactions нет.
+
+При явном поле schema-3 report связывает весовые матрицы с отдельными
+weight_measurement_candidates. Конечные candidates строятся из immutable
+Solo и сохраняют исходный порог. Для fixed finalization после выбора выполняются
+новые полные пробы на конечной модели. WeightsSelected возникает только после
+их завершения; final_threshold_responses_observed не означает распознавание.
+Budget/cancel откатывают полный source, Reset/detach не выполняет import.
+
+Добавлены восемь native scenarios: Classic/Branch × complete, final-budget,
+final-cancel, final-reset. Проверяются реальные packages, разные revisions
+измерительной и конечной модели, принадлежность всех наблюдений, native
+roundtrip и отсутствие ложного calibration/recognition success для молчания.
+До серверной приёмки это исходная реализация, не подтверждённое исправление.
+Production job schema, reader/plots и configured dispatch ещё требуют интеграции.
