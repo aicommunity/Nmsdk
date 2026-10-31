@@ -64,12 +64,12 @@ class FinalizationClockEvidenceTest(unittest.TestCase):
                 changed=deepcopy(projection)
                 if name=="missing_projection":del changed["after_clock"]
                 elif name=="wrong_source":
-                    changed["initial"]["controls"]["parameters"]["SyncTolerance"]+=.01
+                    changed["initial"]["implementation_id"]+="-changed"
                     resign(changed["initial"])
                 else:
                     keys=("after_clock",) if name=="clock_controls" else ("repeat_without_clock","after_clock")
                     for key in keys:
-                        changed[key]["controls"]["parameters"]["SyncTolerance"]+=.01
+                        changed[key]["implementation_id"]+="-changed"
                         resign(changed[key])
                 with self.subTest(case=p.name,corruption=name):
                     with self.assertRaises(EvidenceError):audit_clock_projection(record,changed)
