@@ -58,7 +58,8 @@ template<class Owner> void Measure(Scenario scenario)
         q.onSample=[&](const auto&){++samples;};
         auto confirmationRequest=q;
         const auto captured=NativeSoloThresholdTrace::Attach(*owner,q);
-        EXPECT_THROW(ProposeNativeTrainingThreshold(*captured,{},q.baseModelRevision),std::logic_error);
+        const NativeTrainingThresholdSpec fixtureSpec{NativeTrainingThresholdMode::GapFraction,.5,-1.,1.};
+        EXPECT_THROW(ProposeNativeTrainingThreshold(*captured,fixtureSpec,q.baseModelRevision),std::logic_error);
         owner->QueueNativeProbe(std::move(q));
         std::optional<NativeProbeResult> result;
         const auto maximum=std::size_t(job["maximum_model_ticks"].toDouble());
@@ -78,7 +79,7 @@ template<class Owner> void Measure(Scenario scenario)
             const auto report=captured->Interrupt("learner_reset_discarded_result");
             EXPECT_TRUE(report["native_probe"].isNull());EXPECT_FALSE(report["complete"].toBool());
             EXPECT_FALSE(report["proposal_eligible"].toBool());EXPECT_EQ(report["samples"].toArray().size(),int(samples));
-            EXPECT_TRUE(ProposeNativeTrainingThreshold(*captured,{},"cancelled-model")["threshold"].isNull());
+            EXPECT_TRUE(ProposeNativeTrainingThreshold(*captured,fixtureSpec,"cancelled-model")["threshold"].isNull());
             if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
                 EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
                 NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+".json",report);
@@ -127,7 +128,7 @@ template<class Owner> void Measure(Scenario scenario)
             EXPECT_TRUE(upper["clipped"].toBool());EXPECT_DOUBLE_EQ(upper["threshold"].toDouble(),high*.25);
             EXPECT_TRUE(lower["clipped"].toBool());EXPECT_DOUBLE_EQ(lower["threshold"].toDouble(),high*2.);
             references.append(upper);references.append(lower);
-            const auto stale=ProposeNativeTrainingThreshold(*captured,{},current+"-changed");
+            const auto stale=ProposeNativeTrainingThreshold(*captured,fixtureSpec,current+"-changed");
             EXPECT_TRUE(stale["threshold"].isNull());EXPECT_EQ(stale["reason"],QJsonValue("source_model_changed"));
             references.append(stale);
             EXPECT_THROW(ProposeNativeTrainingThreshold(*captured,{NativeTrainingThresholdMode::GapFraction,.5,1.,0.},current),std::invalid_argument);
@@ -160,7 +161,7 @@ template<class Owner> void Measure(Scenario scenario)
                 NmsdkWorker::Write(folder,QString::fromStdString(name)+"-confirmation.json",measured);
             }
         } else {
-            const auto proposal=ProposeNativeTrainingThreshold(*captured,{},revision(true));
+            const auto proposal=ProposeNativeTrainingThreshold(*captured,fixtureSpec,revision(true));
             EXPECT_TRUE(proposal["threshold"].isNull());references.append(proposal);
         }
         if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
