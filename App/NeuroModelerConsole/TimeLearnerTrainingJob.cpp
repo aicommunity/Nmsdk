@@ -25,13 +25,16 @@ Job Read(const QString& path)
 {
     Job j;j.document=ReadDocument(path);const auto& d=j.document;
     Keys(d,{"kind","schema_version","owner_class","implementation_id","configuration",
-        "profile_archives","calculate_mode","structure_build_mode","maximum_model_ticks","sha256"});
+        "profile_archives","optional_modes","calculate_mode","structure_build_mode","maximum_model_ticks","sha256"});
     Require(d["kind"]==QJsonValue("timelearner_native_training_job") && Number(d["schema_version"])==1.,"unsupported_training_job");
     Require(Signed(d)==d,"job_digest_mismatch");j.implementation=Text(d["implementation_id"]);
     j.configuration=DecodeConfiguredNativeTraining(Object(d["configuration"]));j.ownerClass=Text(d["owner_class"]);
     Require(j.ownerClass==(j.configuration.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"),"training_job_owner_mismatch");
     j.profiles=Array(d["profile_archives"]);Require(j.profiles.size()<=32,"training_profile_budget_exceeded");
     for(const auto& profile:j.profiles)Object(profile);
+    const auto modes=Object(d["optional_modes"]);Keys(modes,{"sync_capacitance_trim","post_train_tuning","auto_calibrate_threshold"});
+    Require(Number(modes["sync_capacitance_trim"])==0. && modes["post_train_tuning"]==QJsonValue(false) &&
+        modes["auto_calibrate_threshold"]==QJsonValue(false),"training_optional_modes_not_yet_supported");
     j.calculateMode=int(Count(d["calculate_mode"],0,1));j.structureMode=int(Count(d["structure_build_mode"],0,1));
     j.maximumTicks=Count(d["maximum_model_ticks"],1,1000000000);return j;
 }
@@ -81,9 +84,10 @@ public:
             for(const auto& entry:{std::make_pair(pair.first,stem+".json"),std::make_pair(pair.second,stem+".csv")})
             {
                 QFile source(QDir(directory).filePath(entry.first));Require(source.rename(QDir(directory).filePath(entry.second)),"training_trace_finalize_failed");
-                Require(source.open(QIODevice::ReadOnly),"training_trace_readback_failed");const auto bytes=source.readAll();source.close();
-                records.append(QJsonObject{{"path",entry.second},{"bytes",double(bytes.size())},
-                    {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
+                Require(source.open(QIODevice::ReadOnly),"training_trace_readback_failed");const auto size=source.size();
+                QCryptographicHash hash(QCryptographicHash::Sha256);Require(hash.addData(&source),"training_trace_readback_failed");source.close();
+                records.append(QJsonObject{{"path",entry.second},{"bytes",double(size)},
+                    {"sha256",QString::fromLatin1(hash.result().toHex())}});
             }
         }
         return records;
@@ -94,6 +98,7 @@ template<class Owner> int Execute(const Job& job,const QString& output)
     const auto frequency=job.configuration.model.frequencyHz;
     return WithFreshOwner<Owner>(job.ownerClass,frequency,"TrainingOwner",[&](auto,auto environment,auto model,auto owner) {
         owner->ControllerVersion=2;owner->CalculateMode=job.calculateMode;owner->StructureBuildMode=job.structureMode;
+        owner->SyncCapacitanceTrim=0;owner->EnablePostTrainTuning=false;owner->AutoCalibrateFixedLTZThreshold=false;
         const auto encoded=QJsonDocument(EncodeConfiguredNativeTraining(job.configuration)).toJson(QJsonDocument::Compact).toStdString();
         owner->ControllerConfiguration=encoded;owner->IsNeedToTrain=false;
         Require(owner->ControllerVersion.GetData()==2 && owner->ControllerConfiguration.GetData()==encoded &&
