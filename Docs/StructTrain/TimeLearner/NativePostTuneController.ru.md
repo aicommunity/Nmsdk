@@ -230,6 +230,17 @@ waveform reports остаются открытыми.
 
 ### Ограничения следующего связывания с learner properties
 
+Подготовлен общий codec `NativePostTuneConfiguration`: точные девять controls
+существующего schema-1 production job кодируются/декодируются в PulseLib.
+Console использует этот путь вместо собственной копии разбора; configured
+phase plan должен использовать тот же codec. Calibration design передаётся
+отдельно и сохраняется целиком; codec не придумывает threshold grid, foil,
+новые defaults или независимую partition. Pure type/budget validation отделена
+от проверки физики/модели в `NativePostTuneTransaction` до live edits.
+Это подготовка общего пути, не реализация learner dispatch: optional-mode
+guard остаётся. Три новых native codec cases и A/B production Console пока
+ожидают серверной проверки.
+
 Проверка текущего кода показывает, что подключение нельзя свести к удалению
 `configured_native_optional_mode_not_yet_supported`:
 

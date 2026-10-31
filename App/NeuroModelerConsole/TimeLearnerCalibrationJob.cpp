@@ -4,6 +4,7 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeThresholdCalibrationTransaction.h"
 #include "TimeLearner/NativePostTuneTransaction.h"
+#include "TimeLearner/NativePostTuneConfiguration.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_init.h"
 #include <QCryptographicHash>
 #include <QFile>
@@ -51,29 +52,7 @@ Job Read(const QString& path,bool postTune=false)
     for(const auto& value:Array(d["trials"]))j.grid.trials.push_back(DecodeNativeCalibrationRequest(Object(value)));
     j.isPostTune=postTune;
     if(postTune)
-    {
-        const auto p=Object(d["post_tune"]);
-        Keys(p,{"mode","metric","canonical_floor","canonical_last","resistance_bounds","search_passes",
-            "maximum_candidates","maximum_recorded_samples","minimum_positive_gap"});
-        auto& spec=j.postTune;const auto mode=Text(p["mode"]),metric=Text(p["metric"]);
-        if(mode=="off")spec.mode=NativePostTuneControllerMode::Off;
-        else if(mode=="keep_done")spec.mode=NativePostTuneControllerMode::KeepDone;
-        else if(mode=="canon_rmin")spec.mode=NativePostTuneControllerMode::CanonRmin;
-        else if(mode=="flat_last_r")spec.mode=NativePostTuneControllerMode::FlatLastR;
-        else {Require(mode=="search_synthetic","unknown_post_tune_job_mode");spec.mode=NativePostTuneControllerMode::SearchSynthetic;}
-        if(metric=="auto")spec.metric=NativePostTuneMetric::Auto;
-        else if(metric=="ltzone")spec.metric=NativePostTuneMetric::LTZone;
-        else {Require(metric=="soma_sum","unknown_post_tune_job_metric");spec.metric=NativePostTuneMetric::SomaSum;}
-        spec.canonicalFloor=Number(p["canonical_floor"]);spec.canonicalLast=Number(p["canonical_last"]);
-        spec.minimumPositiveGap=Number(p["minimum_positive_gap"]);
-        spec.searchPasses=unsigned(Count(p["search_passes"],1,128));
-        spec.maximumCandidates=Count(p["maximum_candidates"],1,4096);
-        spec.maximumRecordedSamples=Count(p["maximum_recorded_samples"],1,100000000);
-        for(const auto& value:Array(p["resistance_bounds"]))
-        {const auto bounds=Object(value);Keys(bounds,{"minimum","maximum"});
-            spec.resistanceBounds.push_back({Number(bounds["minimum"]),Number(bounds["maximum"])});}
-        spec.calibration=j.grid;
-    }
+        j.postTune=DecodeNativePostTuneControls(Object(d["post_tune"]),j.grid);
     return j;
 }
 template<class Owner> int Execute(const Job& job,const QString& output)
