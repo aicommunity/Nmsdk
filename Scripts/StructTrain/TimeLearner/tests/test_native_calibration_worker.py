@@ -111,7 +111,11 @@ class NativeCalibrationWorkerTest(unittest.TestCase):
             if case != "success":
                 continue
             with tempfile.TemporaryDirectory() as directory:
-                output = Path(directory)/"attempt";stdout = io.StringIO()
+                saved = os.environ.get("TIMELEARNER_NATIVE_CALIBRATION_CLI_OUTPUT")
+                output = Path(saved)/top if saved else Path(directory)/"attempt"
+                if saved:
+                    output.parent.mkdir(parents=True, exist_ok=True)
+                stdout = io.StringIO()
                 with contextlib.redirect_stdout(stdout):
                     status = main(["calibrate", "run", str(self.root/(top+"-"+case+"-job.json")),
                         "--source-solo", str(source), "--runtime-manifest", str(self.root/"runtime-before.json"),
