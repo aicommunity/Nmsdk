@@ -414,3 +414,27 @@ SVG/PDF, отсутствие downsampling, zoom не менее 8 px/native tic
 Все эти добавки пока ожидают отдельных gates. Следующие обязательные шаги —
 production selection/commit/rollback orchestration, полный PostTune,
 независимый Test, переносимые Git-артефакты и приёмка остальных режимов.
+
+## Native outer-loop grid driver: реализация до runtime acceptance
+
+Общий `NativeThresholdCalibrationTransaction<Owner>` связывает существующие
+candidate/probe/assessment/calibrated-state API в исполняемую последовательность.
+Driver вызывается между model ticks; сам `Calculate` не вызывает и clock не
+продвигает. Каждый порог строится из одного immutable source, импортируется
+через штатный lifecycle и проверяется полным export readback. После полного
+budget prefix выбирается первый успешный кандидат, независимо перестраивается
+и проходит свежую полную подтверждающую матрицу. До подтверждения commit нет.
+
+Полный отрицательный grid и исчерпанный prefix различаются. Отмена/ошибка
+восстанавливают source package; при внешнем Reset или подмене owner возврат
+старого snapshot запрещён, выставляется RecoveryRequired. Dynamic checkpoint
+посреди пробы не обещается. Полный transaction report хранит candidate matrices,
+raw samples, selected index, confirmation и итоговый package; model proof schema 1
+по-прежнему не содержит grid и сохраняет grid-selection-unverified ограничение.
+
+Добавлены отдельные реальные Classic/Branch integration cases: успешный grid
+с первым silent и вторым разделимым порогом, NonSeparable, BudgetExhausted,
+queued/running cancellation, RAII cancellation, запрет второго driver при занятом
+owner, неверный design и внешний Reset. Это ещё не доказанные PASS: необходимы
+серверные normal/ASan gates и независимая проверка полного transaction report.
+Production CLI/worker интеграция и полная PostTune matrix остаются открытыми.
