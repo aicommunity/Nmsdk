@@ -1,7 +1,7 @@
 {
   "kind": "timelearner_calibration_grid_visual_evidence",
   "schema_version": 1,
-  "renderer_root": "4b714c75730de140ba713c4bf09e06fc9d6db7b7",
+  "renderer_root": "01faa730d4decf7c82ae0ea48c42fa622f41817f",
   "source_evidence_root": "2dc5825fbb76e5a95408507d10b644b0571d3302",
   "source_bundle": "Reports/StructTrain/TimeLearner/s08-calibration-grid-normal-a2",
   "git_import": {
@@ -11,6 +11,18 @@
     "scientific_verdict": null
   },
   "gate": {
+    "renderer_root": "01faa730d4decf7c82ae0ea48c42fa622f41817f",
+    "tests": 10,
+    "errors": 0,
+    "failures": 0,
+    "skips": 0,
+    "reports": 16,
+    "completed_matrices": 10,
+    "trial_soma_pairs": 30,
+    "visual_acceptance_complete": false,
+    "scientific_verdict": null
+  },
+  "previous_gate": {
     "renderer_root": "4b714c75730de140ba713c4bf09e06fc9d6db7b7",
     "tests": 27,
     "errors": 0,
@@ -22,30 +34,33 @@
     "visual_acceptance_complete": false,
     "scientific_verdict": null
   },
-  "cache_root": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports",
+  "previous_renderer_root": "4b714c75730de140ba713c4bf09e06fc9d6db7b7",
+  "previous_artifact_root": "6a8fa9fb884879298d8ad4e7fbdaa43af5a19e57",
+  "counting_note": "A1 passed 27 checks (5 report,5 plot,8 transaction,9 calibrated); A2 only changed LT spike legend and selected views, so the ten affected report/plot checks were repeated. Native/evidence algorithms were unchanged; no new Train was run.",
+  "cache_root": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports",
   "selected": [
     {
       "file": "primary-bundle/selected/Branch-candidate-0000-target.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0000-soma-001/zoom-002.png",
-      "sha256": "c27617c400d6dd59a37332f34eb12693add44242a390b6020081e03a6d70e7dc",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0000-soma-001/overview.png",
+      "sha256": "330b6c9ff66c6ffc9a82b1bc03bd25dc146f51e82f74e4905addc214fb95c395",
       "matrix": "candidate-0000",
       "presentation_index": 0,
       "soma_channel": 0,
       "view": {
-        "view": "zoom-002",
-        "begin": 25.1595,
-        "end": 25.209500000000002,
+        "view": "overview",
+        "begin": 25.1095,
+        "end": 25.2295,
         "files": [
-          "trial-0000-soma-001/zoom-002.png",
-          "trial-0000-soma-001/zoom-002.svg",
-          "trial-0000-soma-001/zoom-002.pdf"
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
-        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "minimum_native_tick_pixels_on_zoom": null,
         "downsampling": false,
         "y_scale": "shared",
-        "time_view": "zoom-002",
+        "time_view": "overview",
         "sample_markers": false,
         "shared_y_limits": [
           -0.0005181776018690165,
@@ -59,7 +74,7 @@
     },
     {
       "file": "primary-bundle/selected/Branch-candidate-0000-foil.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0001-soma-001/overview.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0001-soma-001/overview.png",
       "sha256": "cd04b1956ba8a7814534ceaf54a4d0bbe9815a38959309670199bcc5e84be7c5",
       "matrix": "candidate-0000",
       "presentation_index": 1,
@@ -92,26 +107,26 @@
     },
     {
       "file": "primary-bundle/selected/Branch-candidate-0001-target.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0000-soma-001/zoom-002.png",
-      "sha256": "89dca480db1a16f6c43a00c4718d0818972d78162fb84216682b0ebeb2cbc8e1",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0000-soma-001/overview.png",
+      "sha256": "264f04810fe1af2df0a271bf3412f0925b04e56471e4ab0db66f6c80dc357293",
       "matrix": "candidate-0001",
       "presentation_index": 0,
       "soma_channel": 0,
       "view": {
-        "view": "zoom-002",
-        "begin": 25.961000000000002,
-        "end": 26.011000000000003,
+        "view": "overview",
+        "begin": 25.911,
+        "end": 26.031000000000002,
         "files": [
-          "trial-0000-soma-001/zoom-002.png",
-          "trial-0000-soma-001/zoom-002.svg",
-          "trial-0000-soma-001/zoom-002.pdf"
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
-        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "minimum_native_tick_pixels_on_zoom": null,
         "downsampling": false,
         "y_scale": "shared",
-        "time_view": "zoom-002",
+        "time_view": "overview",
         "sample_markers": false,
         "shared_y_limits": [
           -0.0005181776018690165,
@@ -125,7 +140,7 @@
     },
     {
       "file": "primary-bundle/selected/Branch-candidate-0001-foil.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0001-soma-001/overview.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0001-soma-001/overview.png",
       "sha256": "5ff92a7360e7e9f12548e0632b3b8743de7ca30320c2ffe0a3180f49354457ea",
       "matrix": "candidate-0001",
       "presentation_index": 1,
@@ -157,27 +172,27 @@
       }
     },
     {
-      "file": "primary-bundle/selected/Branch-fresh-confirmation-target.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/zoom-002.png",
-      "sha256": "b9d0c035729556aa3dc62e94f51c751b01411d733e736d132e20e1fe0aad7cd3",
+      "file": "primary-bundle/selected/Branch-fresh-confirmation-target-full-response.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/overview.png",
+      "sha256": "a94a2879091c2480110367bfe97aa9d293e94917fc17cb9c82bedcdd3cbe4e5c",
       "matrix": "fresh-confirmation",
       "presentation_index": 0,
       "soma_channel": 0,
       "view": {
-        "view": "zoom-002",
-        "begin": 26.7625,
-        "end": 26.8125,
+        "view": "overview",
+        "begin": 26.7125,
+        "end": 26.8325,
         "files": [
-          "trial-0000-soma-001/zoom-002.png",
-          "trial-0000-soma-001/zoom-002.svg",
-          "trial-0000-soma-001/zoom-002.pdf"
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
-        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "minimum_native_tick_pixels_on_zoom": null,
         "downsampling": false,
         "y_scale": "shared",
-        "time_view": "zoom-002",
+        "time_view": "overview",
         "sample_markers": false,
         "shared_y_limits": [
           -0.0005181776018690165,
@@ -191,7 +206,7 @@
     },
     {
       "file": "primary-bundle/selected/Branch-fresh-confirmation-foil.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0001-soma-001/overview.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0001-soma-001/overview.png",
       "sha256": "0e29bf6611a9cbd9ce0ec6900127daaaf32505faa62839ee872ecee6fe677e5b",
       "matrix": "fresh-confirmation",
       "presentation_index": 1,
@@ -223,27 +238,60 @@
       }
     },
     {
-      "file": "primary-bundle/selected/Classic-candidate-0000-target.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0000-soma-001/zoom-002.png",
-      "sha256": "f775d7e60602e5c228bd3a86425cf2bc3ebe8951d108add605bf6bd90475ff7c",
-      "matrix": "candidate-0000",
+      "file": "primary-bundle/selected/Branch-fresh-confirmation-target-peak-detail.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/zoom-003.png",
+      "sha256": "098377b4123075b39a2a582d8df54aa88ba280d40946b0933101f0a28c376304",
+      "matrix": "fresh-confirmation",
       "presentation_index": 0,
       "soma_channel": 0,
       "view": {
-        "view": "zoom-002",
-        "begin": 10.601500000000001,
-        "end": 10.6515,
+        "view": "zoom-003",
+        "begin": 26.8125,
+        "end": 26.8325,
         "files": [
-          "trial-0000-soma-001/zoom-002.png",
-          "trial-0000-soma-001/zoom-002.svg",
-          "trial-0000-soma-001/zoom-002.pdf"
+          "trial-0000-soma-001/zoom-003.png",
+          "trial-0000-soma-001/zoom-003.svg",
+          "trial-0000-soma-001/zoom-003.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
         "minimum_native_tick_pixels_on_zoom": 14.208,
         "downsampling": false,
         "y_scale": "shared",
-        "time_view": "zoom-002",
+        "time_view": "zoom-003",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0005181776018690165,
+          0.006995397625231723
+        ],
+        "y_limits": [
+          -0.0005181776018690165,
+          0.006995397625231723
+        ]
+      }
+    },
+    {
+      "file": "primary-bundle/selected/Classic-candidate-0000-target.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0000-soma-001/overview.png",
+      "sha256": "3a3626b8f9ff3acaa88afcd2007d26d1d0c55b4966dc2fa77bd86dc1b7279d64",
+      "matrix": "candidate-0000",
+      "presentation_index": 0,
+      "soma_channel": 0,
+      "view": {
+        "view": "overview",
+        "begin": 10.5515,
+        "end": 10.6715,
+        "files": [
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
         "sample_markers": false,
         "shared_y_limits": [
           -0.00024171875329872527,
@@ -257,7 +305,7 @@
     },
     {
       "file": "primary-bundle/selected/Classic-candidate-0000-foil.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0001-soma-001/overview.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/trial-0001-soma-001/overview.png",
       "sha256": "65e0698a8aa2d69cb61227709ba51fa9e66ccf10cf9d3a0dcaf8398b2d463331",
       "matrix": "candidate-0000",
       "presentation_index": 1,
@@ -290,26 +338,26 @@
     },
     {
       "file": "primary-bundle/selected/Classic-candidate-0001-target.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0000-soma-001/zoom-002.png",
-      "sha256": "4dbbc7a0ae5184eabaf7ef6acbdf06eef2b1b6c7b4e03e9cffa4a05e677630ee",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0000-soma-001/overview.png",
+      "sha256": "6cf5ff4a8b8e3414459c8e0111f80b02dfb160e90c28cf1136ae53cacf21a093",
       "matrix": "candidate-0001",
       "presentation_index": 0,
       "soma_channel": 0,
       "view": {
-        "view": "zoom-002",
-        "begin": 11.403,
-        "end": 11.453,
+        "view": "overview",
+        "begin": 11.353,
+        "end": 11.472999999999999,
         "files": [
-          "trial-0000-soma-001/zoom-002.png",
-          "trial-0000-soma-001/zoom-002.svg",
-          "trial-0000-soma-001/zoom-002.pdf"
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
-        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "minimum_native_tick_pixels_on_zoom": null,
         "downsampling": false,
         "y_scale": "shared",
-        "time_view": "zoom-002",
+        "time_view": "overview",
         "sample_markers": false,
         "shared_y_limits": [
           -0.00024171875329872527,
@@ -323,7 +371,7 @@
     },
     {
       "file": "primary-bundle/selected/Classic-candidate-0001-foil.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0001-soma-001/overview.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/trial-0001-soma-001/overview.png",
       "sha256": "c0ef6616fdeb93b5c59c1aa0d585964a5349023da4b2737daa095059aef9ceee",
       "matrix": "candidate-0001",
       "presentation_index": 1,
@@ -355,27 +403,27 @@
       }
     },
     {
-      "file": "primary-bundle/selected/Classic-fresh-confirmation-target.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/zoom-002.png",
-      "sha256": "382c80e47e7d8ed486c655e37364b2c9839a9657c4c38a63df902fef1ac65125",
+      "file": "primary-bundle/selected/Classic-fresh-confirmation-target-full-response.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/overview.png",
+      "sha256": "27c76f7797793b42705c81356fe1526e43d82efebff5ca3b3dc5f1ea8f4d9b67",
       "matrix": "fresh-confirmation",
       "presentation_index": 0,
       "soma_channel": 0,
       "view": {
-        "view": "zoom-002",
-        "begin": 12.204500000000001,
-        "end": 12.2545,
+        "view": "overview",
+        "begin": 12.1545,
+        "end": 12.2745,
         "files": [
-          "trial-0000-soma-001/zoom-002.png",
-          "trial-0000-soma-001/zoom-002.svg",
-          "trial-0000-soma-001/zoom-002.pdf"
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
-        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "minimum_native_tick_pixels_on_zoom": null,
         "downsampling": false,
         "y_scale": "shared",
-        "time_view": "zoom-002",
+        "time_view": "overview",
         "sample_markers": false,
         "shared_y_limits": [
           -0.00024171875329872527,
@@ -389,7 +437,7 @@
     },
     {
       "file": "primary-bundle/selected/Classic-fresh-confirmation-foil.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0001-soma-001/overview.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0001-soma-001/overview.png",
       "sha256": "23f356252076bcc4a8685386d65446597a6580844ecf6921e99f6bdcb9b6ef38",
       "matrix": "fresh-confirmation",
       "presentation_index": 1,
@@ -421,43 +469,9 @@
       }
     },
     {
-      "file": "primary-bundle/selected/Classic-fresh-confirmation-target-full-response.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/overview.png",
-      "sha256": "5bb646d111618534443599dcee38021f7427fb2712f62402d4d712df190f93a9",
-      "matrix": "fresh-confirmation",
-      "presentation_index": 0,
-      "soma_channel": 0,
-      "view": {
-        "view": "overview",
-        "begin": 12.1545,
-        "end": 12.2745,
-        "files": [
-          "trial-0000-soma-001/overview.png",
-          "trial-0000-soma-001/overview.svg",
-          "trial-0000-soma-001/overview.pdf"
-        ],
-        "png_width": 1920,
-        "png_height": 960,
-        "minimum_native_tick_pixels_on_zoom": null,
-        "downsampling": false,
-        "y_scale": "shared",
-        "time_view": "overview",
-        "sample_markers": false,
-        "shared_y_limits": [
-          -0.00024171875329872527,
-          0.003263203169532791
-        ],
-        "y_limits": [
-          -0.00024171875329872527,
-          0.003263203169532791
-        ]
-      },
-      "selection_reason": "Complete response plus the measured soma-peak window; last-input-only zoom can clip the later peak."
-    },
-    {
       "file": "primary-bundle/selected/Classic-fresh-confirmation-target-peak-detail.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/zoom-003.png",
-      "sha256": "177ffbe939e23462cb0458152b3c909132eacb4a884e65bc5576cda439ac2d49",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/zoom-003.png",
+      "sha256": "6eb3083c0ad363d5ee101863a564e23be321e1df9d88b97e284e94ee1d1f35a4",
       "matrix": "fresh-confirmation",
       "presentation_index": 0,
       "soma_channel": 0,
@@ -485,24 +499,23 @@
           -0.00024171875329872527,
           0.003263203169532791
         ]
-      },
-      "selection_reason": "Complete response plus the measured soma-peak window; last-input-only zoom can clip the later peak."
+      }
     },
     {
-      "file": "primary-bundle/selected/Branch-fresh-confirmation-target-full-response.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/overview.png",
-      "sha256": "cce5e2f7bd5f2fe6094d8290eaad5ed1826ce4dd30d18db14848f78a2585e04b",
+      "file": "primary-bundle/selected/Classic-fresh-confirmation-soma2-target-full-response.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-002/overview.png",
+      "sha256": "90dea1f92a40c425c69cf927763da902fd74dc8f0b9f371c49c181f2ce4db9ad",
       "matrix": "fresh-confirmation",
       "presentation_index": 0,
-      "soma_channel": 0,
+      "soma_channel": 1,
       "view": {
         "view": "overview",
-        "begin": 26.7125,
-        "end": 26.8325,
+        "begin": 12.1545,
+        "end": 12.2745,
         "files": [
-          "trial-0000-soma-001/overview.png",
-          "trial-0000-soma-001/overview.svg",
-          "trial-0000-soma-001/overview.pdf"
+          "trial-0000-soma-002/overview.png",
+          "trial-0000-soma-002/overview.svg",
+          "trial-0000-soma-002/overview.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
@@ -512,31 +525,30 @@
         "time_view": "overview",
         "sample_markers": false,
         "shared_y_limits": [
-          -0.0005181776018690165,
-          0.006995397625231723
+          -0.00036816150755250023,
+          0.004970180351958753
         ],
         "y_limits": [
-          -0.0005181776018690165,
-          0.006995397625231723
+          -0.00036816150755250023,
+          0.004970180351958753
         ]
-      },
-      "selection_reason": "Complete response plus the measured soma-peak window; last-input-only zoom can clip the later peak."
+      }
     },
     {
-      "file": "primary-bundle/selected/Branch-fresh-confirmation-target-peak-detail.png",
-      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a1/reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-001/zoom-003.png",
-      "sha256": "dda181e67590f317cde476c08fb97c60788f9a96cc0fdfec3e43092948edfad4",
+      "file": "primary-bundle/selected/Classic-fresh-confirmation-soma2-target-peak-detail.png",
+      "cache_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-grid-report-normal-a2/reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/trial-0000-soma-002/zoom-003.png",
+      "sha256": "6866b9840ca8f2adf8f629b851ef3165eddfa1b88949a237eb908d81926f3fd6",
       "matrix": "fresh-confirmation",
       "presentation_index": 0,
-      "soma_channel": 0,
+      "soma_channel": 1,
       "view": {
         "view": "zoom-003",
-        "begin": 26.8125,
-        "end": 26.8325,
+        "begin": 12.2545,
+        "end": 12.2745,
         "files": [
-          "trial-0000-soma-001/zoom-003.png",
-          "trial-0000-soma-001/zoom-003.svg",
-          "trial-0000-soma-001/zoom-003.pdf"
+          "trial-0000-soma-002/zoom-003.png",
+          "trial-0000-soma-002/zoom-003.svg",
+          "trial-0000-soma-002/zoom-003.pdf"
         ],
         "png_width": 1920,
         "png_height": 960,
@@ -546,24 +558,23 @@
         "time_view": "zoom-003",
         "sample_markers": false,
         "shared_y_limits": [
-          -0.0005181776018690165,
-          0.006995397625231723
+          -0.00036816150755250023,
+          0.004970180351958753
         ],
         "y_limits": [
-          -0.0005181776018690165,
-          0.006995397625231723
+          -0.00036816150755250023,
+          0.004970180351958753
         ]
-      },
-      "selection_reason": "Complete response plus the measured soma-peak window; last-input-only zoom can clip the later peak."
+      }
     }
   ],
   "cache_files": 1448,
-  "archive_sha256": "8a2177cea9df661ed0183d44b1ac9758aa92703ab2cc0cdcca7315928e3a8b96",
+  "archive_sha256": "7280e41ce6053321ba97916fe86ee58c3c414f2e0231540c6feb70bdf86b85e5",
   "files": [
     {
       "path": "gate/checkout.log",
-      "bytes": 396,
-      "sha256": "b92069b567b3f4c1fc531fbf70164d051996fb026cf5b1fb10c5ea3a9ae3fb30"
+      "bytes": 383,
+      "sha256": "030edbb45296e3b8f5d5f7dc90fb6b16942983db882d2c111090c003feb7aa4d"
     },
     {
       "path": "gate/evidence-root.txt",
@@ -597,23 +608,23 @@
     },
     {
       "path": "gate/tests.log",
-      "bytes": 6048,
-      "sha256": "3956060ab081994ce960f1393a073ead35c15860a2267d01ed2816c3350c8ff4"
+      "bytes": 2210,
+      "sha256": "807396ab83c9aa5dc973929dd59d2149f88ee0a90b7344497f0447abb4b27be7"
     },
     {
       "path": "gate/validation.json",
       "bytes": 267,
-      "sha256": "41ca1d238f04ab8b2e257c15dd2e18936f10ca6611f320bcd4e36bd34dfbb1d6"
+      "sha256": "d9bdf9c4a7c1bf81c4d3f45eb21a90f531a5447f60722b9f1f0f46997b5046d0"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction/SHA256SUMS.json",
       "bytes": 12021,
-      "sha256": "47a5c3bf603a00349652bdf349dbca6cf90747e75c0c116bf29a5c239dc5a9f6"
+      "sha256": "f2c04066dd140ee67bdada5a07a4bfe8604bab9d51923c3d690fc1166d1af657"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction/candidate-0000/SHA256SUMS.json",
       "bytes": 9816,
-      "sha256": "e8506f4ccddffa5ffc7347a84da641eefc17f4381f5010307a2689b13cce7a81"
+      "sha256": "d34a8752c93dbb20736624879e0d079a8e7137813f6dfa28a5a8c68883fb4184"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction/candidate-0000/analysis.json",
@@ -693,12 +704,12 @@
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction/SHA256SUMS.json",
       "bytes": 12405,
-      "sha256": "0bb348a44f26b0eb580568a399b00b4934d0b77f807f86095408b5fe37787181"
+      "sha256": "2dfc73810bf5ff658798ef829b6a166c560561cb1aa62a0144038e77648ef7f4"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction/candidate-0000/SHA256SUMS.json",
       "bytes": 10155,
-      "sha256": "b7410be5de99f1cbbb75fed007d616d951d51c98e7dc1a9ea74790f32ba03c46"
+      "sha256": "26ebfe8b34362c95ae518b5b4d03a98758c0c08b6e3027d45b72e58392244785"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction/candidate-0000/analysis.json",
@@ -763,12 +774,12 @@
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/SHA256SUMS.json",
       "bytes": 36669,
-      "sha256": "94e2f65b3b7d7bc7c94d357748b73ddcf615fb845b0381c630fe4425547e30e0"
+      "sha256": "1c4a6842bf758c107d09f3f1588b2646423db336de449cefed345b17f73cab11"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/SHA256SUMS.json",
       "bytes": 10155,
-      "sha256": "3bec1babc5c00029f43fd2fe3a1ec8cca8950397d4856e3731c2dc51fd9c8e0b"
+      "sha256": "d43c2dd2fa4fb5f0ba41ecae9be14aa56b79741797cdbbceb11c64d0dccc4564"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/analysis.json",
@@ -793,7 +804,7 @@
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/SHA256SUMS.json",
       "bytes": 10155,
-      "sha256": "e6dd0620627dc7ed99fe93757c3b98223823a5f7e68f56741d35f8f27646c975"
+      "sha256": "3c76d3ebba5d50c22901e5fbcddf8972f5174c444df7a696cde8a6fb1db682d2"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/analysis.json",
@@ -818,7 +829,7 @@
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/SHA256SUMS.json",
       "bytes": 9816,
-      "sha256": "85a5d7f51d081d9c615a4f45575334691bf29d388b15c0d78e73854fd77b24c9"
+      "sha256": "7f9b29a1644ac0fd3f4e0ee3a32b31ce53ce2eb1d8afbccd8377888185ed9fbc"
     },
     {
       "path": "reports/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/analysis.json",
@@ -853,12 +864,12 @@
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction/SHA256SUMS.json",
       "bytes": 21978,
-      "sha256": "fdef7de2816f0f43d87041fcca016d2f4041afe01973624014555956d2372e99"
+      "sha256": "89aa5755f68996d2bfcac9f8bef2ef4235056d7ca27220a6fe6202cdd6888e4a"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction/candidate-0000/SHA256SUMS.json",
       "bytes": 18558,
-      "sha256": "94697721511ace371b3fa407e04d76a180816fbbc0b79d0f0086a9c4c475fe81"
+      "sha256": "7d8a3de7724a6685798ab92916f920677e69afdc732143b32a7c7dc6e25165df"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction/candidate-0000/analysis.json",
@@ -938,12 +949,12 @@
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction/SHA256SUMS.json",
       "bytes": 21978,
-      "sha256": "627d8a63e499994bb84dc701c5f918d84c90791f07eb627777d6aab67c16a550"
+      "sha256": "efea67de9b0ac0643a976bbf45926d2489feb18f7dd7e14cbc4ef09f49f949b1"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction/candidate-0000/SHA256SUMS.json",
       "bytes": 18558,
-      "sha256": "de13dc9bc6cf20074f877df92eb8af0be7e22089e5f564497b9ec47f2fd77dc5"
+      "sha256": "320aad9e0feebdb375b260e488a9dedc27aea8f22722abd1b2a4aae0aca3e16c"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction/candidate-0000/analysis.json",
@@ -1008,12 +1019,12 @@
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/SHA256SUMS.json",
       "bytes": 66096,
-      "sha256": "0ed562b580dab9bf9e67f9d84c44d79b98684a855aa459e2b2bca611c0640e6c"
+      "sha256": "ef2dd021a8709dd4a434ebe5819e09ff439de80152be8e04e1c5cac7d2af769f"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/SHA256SUMS.json",
       "bytes": 18558,
-      "sha256": "7c1ff0f677f465687998fa1ed5147ce055cbe2c834202ce87d9c4d6b7683c845"
+      "sha256": "49e0afde8a11f7adcdcc8d2a0c6ba9f619d35687daa4f2c382e527cc777c321e"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0000/analysis.json",
@@ -1038,7 +1049,7 @@
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/SHA256SUMS.json",
       "bytes": 18558,
-      "sha256": "0b093ea836f30a44160bf3c426042776af3e8951ab7da08fa171d1ff281cd7fe"
+      "sha256": "04f13a20b322870b474ddb262ca7411b670eeb2764f9c8361f8559848f920b64"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/candidate-0001/analysis.json",
@@ -1063,7 +1074,7 @@
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/SHA256SUMS.json",
       "bytes": 18558,
-      "sha256": "7be440cc059d3b7fd0fbcdcbad9d9b77dc2dc04b3f586c393d7845bffc062e81"
+      "sha256": "d533a53c10ec45d3431e5410e7a84136c20dbe32f69f70fc5cf9b051e6f7ef38"
     },
     {
       "path": "reports/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction/fresh-confirmation/analysis.json",
