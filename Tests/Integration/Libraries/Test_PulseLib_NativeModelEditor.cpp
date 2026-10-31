@@ -1599,6 +1599,12 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
             auto changed=confirmation;changed.requests[0].duration+=1./rig.frequency;
             EXPECT_THROW(CreateNativeCalibratedState(candidate,specification,search,changed,core.storage,core.environment,implementation),std::invalid_argument);
             changed=confirmation;
+            for(auto& observation:changed.observations)observation.thresholdPotentialPath="$.WrongZone.Potential";
+            EXPECT_THROW(CreateNativeCalibratedState(candidate,specification,search,changed,core.storage,core.environment,implementation),std::invalid_argument);
+            changed=confirmation;
+            for(auto& observation:changed.observations)for(auto& sample:observation.samples)sample.somaPotentials.push_back(0.);
+            EXPECT_THROW(CreateNativeCalibratedState(candidate,specification,search,changed,core.storage,core.environment,implementation),std::invalid_argument);
+            changed=confirmation;
             for(auto& observation:changed.observations)if(observation.request.label=="target")
             {
                 observation.spikeTimes.clear();for(auto& sample:observation.samples)sample.spikeHistory.clear();
