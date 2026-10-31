@@ -1,0 +1,18 @@
+{
+  "kind": "selected_training_threshold_visual_review",
+  "schema_version": 1,
+  "pngs": 8,
+  "resolution": [
+    1920,
+    960
+  ],
+  "coverage": "Classic/Branch soma[0] and LTZone, overview/first native-tick zoom",
+  "findings": [
+    "Soma waveforms and actual shared inputs readable; actual spike marker occurs after first input.",
+    "One actual spike per complete two-pulse burst. No foil or final parallel recognition is shown.",
+    "LTZone post-spike negative recovery dominates the current shared Y range: small positive threshold crossing needs a separate amplitude-detail view before threshold visual acceptance.",
+    "No sub-tick causal timing inferred from connected sample lines."
+  ],
+  "full_visual_acceptance_complete": false,
+  "scientific_verdict": null
+}
