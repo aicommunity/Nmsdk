@@ -15,7 +15,12 @@ readers ждут именно их терминальных receipts. Две п�
 Normal/a3 остановлен preflight по диску; удалены только 56 неиспользуемых GNU ar
 кэшей (601710782 bytes), 14 ELF сохранили SHA-256. Отменённые ASan/a1 и ожидавший
 его a2 сохранены диагностически; EXIT trap zero у отменённого supervisor не PASS.
-Новые десять сценариев и независимые reader/report checks пока не засчитываются.
+Обновление normal/a4: терминальный status0, 75/75 native checks (213.461 s),
+no skips; independent reader status0, 2/2 (110.079 s вместе с повторным audit),
+десять actual records и сто corrupt-receipt controls. Runtime before/after совпал.
+Это проверка указанной матрицы на normal worker; ASan и visual reports ещё не
+приняты. Compact proof находится в процессе упаковки/публикации, не объявляется
+доступным в Git до проверки remote commit и полного archive inventory.
 Автоматический переход из живого Train остаётся открытым.
 
 Последний адресно проверенный подэтап — связь train-time request с finalization.
