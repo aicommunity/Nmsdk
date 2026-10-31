@@ -491,3 +491,7 @@ ASan primary bundle: [ownership controls](../../../Reports/StructTrain/TimeLearn
 Исходные неуспешные native controls и reader-a1, неверно ожидавший поле duration
 вместо сравнения границ observation с объявленным запросом, сохранены отдельно
 от принятой reader-a2 проверки. Ни один из этих отказов не является ASan finding.
+
+Production entry point и переносимая связка модели с полным grid описаны в
+[NativeCalibrationWorker](NativeCalibrationWorker.ru.md). Их собственная runtime
+приёмка отделена от приведённых выше API/ownership gates.
