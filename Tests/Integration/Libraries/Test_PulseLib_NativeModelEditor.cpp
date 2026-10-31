@@ -132,6 +132,7 @@ public:
         return result;
     }
     double LiveMetric() const {return this->ReadPostTuneLiveMetric();}
+    bool IsNativeOwned() const {return this->NativeTrainingOwned;}
 };
 void Artifact(const std::string& name,const QByteArray& data)
 {
@@ -3091,7 +3092,10 @@ template<class Learner> void PostTuneInferencePhysicalFreeRun(unsigned frequency
     const std::string image=branch?"PostTuneObservationBranchFixture":"PostTuneObservationClassicFixture";
     if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
         +[]() -> UComponent* {return new Owner;},image),image);
-    EditingRig<Owner> rig(frequency,1,"posttune_inference_physical",false,2,true,2,1,false,image);
+    // The numerical playback must dispatch through the actual legacy scheduler;
+    // a native-owned graph intentionally bypasses the legacy PostTune tracker.
+    EditingRig<Owner> rig(frequency,1,"posttune_inference_physical",false,2,false,2,1,false,image);
+    ASSERT_FALSE(rig.learner->IsNativeOwned());
     auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
     const auto goal=rig.learner->InputPattern.GetData();const auto before=rig.learner->ReadNativeParameters();
     MDMatrix<double> matrix;matrix.Assign(4,1,0.);
