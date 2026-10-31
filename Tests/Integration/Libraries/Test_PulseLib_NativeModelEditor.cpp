@@ -16,6 +16,7 @@
 #include "TimeLearner/NativeCalibrationAssessment.h"
 #include "TimeLearner/NativeCalibratedState.h"
 #include "TimeLearner/NativeThresholdCalibrationTransaction.h"
+#include "TimeLearner/NativePostTuneTransaction.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
 #include "TimeLearner/NativeThresholdSupport.h"
 #include "TimeLearner/NativeTrainingBindings.h"
@@ -1158,7 +1159,7 @@ TEST(NativeLearnedState,FreshProcessImport)
 }
 
 
-enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled,ThresholdCandidates,ThresholdPotential,CalibratedThreshold,ThresholdGrid,PostTuneCandidates };
+enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentity,OwnedScaled,OwnedClipped,OwnedFreshIdentity,OwnedFreshScaled,ThresholdCandidates,ThresholdPotential,CalibratedThreshold,ThresholdGrid,PostTuneCandidates,PostTuneTransaction };
 
 template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJsonObject& package,
     bool recordThresholdPotential=false,std::vector<NativeRecognitionTrialRequest>* declaredRequests=nullptr,
@@ -1588,7 +1589,98 @@ template<class Learner> void ThresholdGridChecks(EditingRig<Learner>& rig,const 
     }
 }
 
-template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,const QJsonObject& solo,bool recordThresholdPotential=false,bool finalizeCalibration=false,bool runGrid=false)
+template<class Learner> void PostTuneTransactionChecks(EditingRig<Learner>& rig,const QJsonObject& source,
+    double threshold,const std::vector<NativeRecognitionTrialRequest>& design)
+{
+    using Transaction=NativePostTuneTransaction<Learner>;const std::string implementation="native-learned-boundary-fixture-v1";
+    const auto refresh=[&] {
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    };
+    const auto restore=[&] {
+        const auto result=rig.learner->ImportNativeRecognitionState(source,implementation);
+        ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
+        rig.learner->Build();rig.learner->Init();rig.learner->Reset();refresh();
+        ASSERT_EQ(rig.learner->ExportNativeRecognitionState(implementation),source);
+    };
+    NativePostTuneTransactionSpec spec;spec.metric=NativePostTuneMetric::LTZone;
+    spec.calibration.trials=design;spec.calibration.thresholds={1.,threshold};spec.calibration.maximumCandidates=2;
+    spec.calibration.confirmation.attemptId=rig.name+"/post-tune";
+    spec.calibration.confirmation.clockId=rig.name+"/native-clock";
+    spec.calibration.confirmation.dataPartitionId="declared-primary-pair";
+    const auto run=[&](NativePostTuneTransactionSpec job,const std::string& suffix,std::optional<NativePostTuneTransactionStatus> expected={}) {
+        restore();job.calibration.confirmation.attemptId+="/"+suffix;
+        const auto clock=rig.environment->GetTime().GetTime();Transaction transaction(*rig.learner,job,implementation);
+        EXPECT_EQ(clock,rig.environment->GetTime().GetTime());
+        for(unsigned tick=0;!transaction.Done();++tick)
+        {
+            ASSERT_LT(tick,100000u);const auto now=rig.environment->GetTime().GetTime();transaction.Advance();
+            EXPECT_EQ(now,rig.environment->GetTime().GetTime());refresh();
+            if(!transaction.Done()){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+        }
+        Artifact(rig.name+"_post_tune_"+suffix+".json",QJsonDocument(transaction.Report()).toJson());
+        if(expected)EXPECT_EQ(transaction.Status(),*expected)<<transaction.Reason();
+        else EXPECT_TRUE(transaction.Status()==NativePostTuneTransactionStatus::Calibrated ||
+            transaction.Status()==NativePostTuneTransactionStatus::SearchUnresolved ||
+            transaction.Status()==NativePostTuneTransactionStatus::BudgetExhausted)<<transaction.Reason();
+        if(transaction.Status()==NativePostTuneTransactionStatus::Calibrated)
+        {
+            EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),transaction.CalibratedPackage());
+            EXPECT_TRUE(transaction.CalibratedPackage()["recognition_certificate"].isNull());
+            const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+            auto loaded=PrepareNativeRecognitionState(transaction.CalibratedPackage(),core.storage,core.environment,implementation);
+            EXPECT_TRUE(loaded->calibrationConfirmed);
+        }
+        else EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),source);
+    };
+    restore();auto invalid=spec;invalid.calibration.trials.pop_back();
+    EXPECT_THROW((Transaction(*rig.learner,invalid,implementation)),std::exception);
+    EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),source);
+    spec.mode=NativePostTuneControllerMode::Off;run(spec,"off",NativePostTuneTransactionStatus::Calibrated);
+    spec.mode=NativePostTuneControllerMode::KeepDone;run(spec,"keep",NativePostTuneTransactionStatus::Calibrated);
+    auto silent=spec;silent.calibration.thresholds={1.};silent.calibration.maximumCandidates=1;
+    run(silent,"silent",NativePostTuneTransactionStatus::SearchUnresolved);
+    auto budget=spec;budget.maximumRecordedSamples=1;
+    run(budget,"recording_budget",NativePostTuneTransactionStatus::BudgetExhausted);
+    auto edited=spec;edited.mode=NativePostTuneControllerMode::CanonRmin;
+    const auto parameters=source["recognition_inputs"].toArray();
+    edited.canonicalFloor=parameters.first().toObject()["resistance"].toDouble()*.8;
+    edited.canonicalLast=parameters.last().toObject()["resistance"].toDouble()*1.2;
+    for(int i=0;i<parameters.size();++i)edited.resistanceBounds.push_back({1.e6,1.e12});
+    run(edited,"canon");edited.mode=NativePostTuneControllerMode::FlatLastR;edited.canonicalFloor=0.;run(edited,"flat");
+    edited.mode=NativePostTuneControllerMode::SearchSynthetic;edited.canonicalFloor=parameters.first().toObject()["resistance"].toDouble()*.8;
+    edited.searchPasses=1;edited.maximumCandidates=7;run(edited,"synthetic");
+    for(bool delegated:{false,true})
+    {
+        restore();auto job=spec;job.calibration.confirmation.attemptId+=delegated?"/child-cancel":"/weight-cancel";
+        Transaction transaction(*rig.learner,job,implementation);transaction.Advance();refresh();
+        if(delegated)for(unsigned tick=0;!transaction.IsCalibrating();++tick)
+        {
+            ASSERT_LT(tick,10000u);ASSERT_FALSE(transaction.Done())<<transaction.Reason();
+            rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();transaction.Advance();refresh();
+        }
+        const auto now=rig.environment->GetTime().GetTime();transaction.Cancel("explicit-cancel");refresh();
+        EXPECT_EQ(now,rig.environment->GetTime().GetTime());
+        EXPECT_EQ(transaction.Status(),NativePostTuneTransactionStatus::Cancelled)<<transaction.Reason();
+        EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),source);
+        Artifact(rig.name+(delegated?"_post_tune_child_cancel.json":"_post_tune_weight_cancel.json"),QJsonDocument(transaction.Report()).toJson());
+    }
+    restore();
+    {
+        Transaction transaction(*rig.learner,spec,implementation);transaction.Advance();refresh();
+        rig.learner->CancelNativeRecognitionTrial("foreign-consumer");rig.learner->TakeNativeRecognitionTrialResult();
+        auto foreign=design.front();foreign.runId="foreign-controller";foreign.trialId="foreign-trial";
+        rig.learner->QueueNativeRecognitionTrial(foreign);transaction.Advance();
+        EXPECT_EQ(transaction.Status(),NativePostTuneTransactionStatus::RecoveryRequired);
+        EXPECT_TRUE(rig.learner->HasNativeRecognitionTrialIdentity(foreign.runId,foreign.trialId));
+        Artifact(rig.name+"_post_tune_foreign_trial.json",QJsonDocument(transaction.Report()).toJson());
+        rig.learner->CancelNativeRecognitionTrial("explicit-foreign-cleanup");rig.learner->TakeNativeRecognitionTrialResult();
+    }
+    restore();
+}
+
+template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,const QJsonObject& solo,bool recordThresholdPotential=false,bool finalizeCalibration=false,bool runGrid=false,bool runPostTune=false)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     const std::string implementation="native-learned-boundary-fixture-v1";
@@ -1767,6 +1859,7 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
             FrozenTrialChecks(rig,calibrated,true);
             EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),calibrated);
             if(runGrid)ThresholdGridChecks(rig,source,*pendingProposal->threshold,search.requests);
+            if(runPostTune)PostTuneTransactionChecks(rig,source,*pendingProposal->threshold,search.requests);
         }
     }
     else if(finalizeCalibration)FAIL()<<"required primary-pair calibration control produced no candidate";
@@ -1853,6 +1946,7 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
     if(scenario==RecognitionCase::ThresholdPotential){ThresholdCandidateChecks(rig,source,true);return;}
     if(scenario==RecognitionCase::CalibratedThreshold){ThresholdCandidateChecks(rig,source,true,true);return;}
     if(scenario==RecognitionCase::ThresholdGrid){ThresholdCandidateChecks(rig,source,true,true,true);return;}
+    if(scenario==RecognitionCase::PostTuneTransaction){ThresholdCandidateChecks(rig,source,true,true,false,true);return;}
     if(scenario==RecognitionCase::OwnedIdentity || scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped ||
        scenario==RecognitionCase::OwnedFreshIdentity || scenario==RecognitionCase::OwnedFreshScaled)
     {RecognitionOwnerChecks(rig,source,scenario);return;}
@@ -2495,6 +2589,8 @@ TEST(NativeCalibrationPersistence,ClassicN1_2000){CalibrationBoundaryFixture<NNe
 TEST(NativeCalibrationPersistence,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
 TEST(NativeCalibrationTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativeCalibrationTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
+TEST(NativePostTuneTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
+TEST(NativePostTuneTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
 TEST(NativeCalibratedState,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.);}
 TEST(NativeCalibratedState,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.);}
 TEST(NativeThresholdCandidate,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000);}
