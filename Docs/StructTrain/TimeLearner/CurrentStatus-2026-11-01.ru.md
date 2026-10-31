@@ -37,8 +37,9 @@ PulseLib принят через --no-ff в develop:
 3e371dc90884025baa10a27976a8c1e7770897f3; remote reachability проверена.
 Bin97dd1943a059e67888d56380c5409f3d3997d086 и
 Rdk027f7f8353608f83b55f3857a2f6c39138df4c65 не изменялись.
-Корневой feature записывает child merge. Root develop merge ожидает завершения
-полного visual gate нового Console-пути; код работающих серверных checkout не обновляется.
+Корневой feature записывает child merge. Полный scoped visual gate нового
+Console-пути завершён ниже; root develop merge выполняется после фиксации receipts.
+Код работающих серверных checkout не обновляется.
 
 ## Временные графики
 
@@ -59,7 +60,7 @@ Git: 111 metadata members / 90036 compressed bytes и восемь PNG / 1139977
 selection diagnostics, без научного PASS.
 [Точная область просмотра](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-visual-asan-a1/SELECTED_VISUAL_REVIEW.ru.md).
 
-## Production Console: ещё проверяется
+## Production Console: адресная приёмка завершена
 
 Root08ae95430014a6a6c8b92ebc040181372fd0f912, PulseLib8a71a855d3fa6ecf64ad6a64a69d1b37e918d449
 (тот же native код, дополнительные документы). Console PostTune теперь использует
@@ -103,17 +104,51 @@ normal уже выполнил 26 операций и проходит пров�
 пакеты объединены в feature через --no-ff. Extra CLI acceptance probes входят
 в 28 portable runs и не считаются независимыми научными обучениями.
 
-Отдельно выполняется production temporal report gate:
+Завершён production temporal report gate:
 s08-native-owned-posttune-worker-visual-asan-a1, PID4157957, renderer/test root
 504d6fac3be225102079541dc94a5a8f37fa9381. План: все 20 PostTune и шесть standalone
 calibration reports, 3+2 checks всех полных native samples, soma channels,
 реальных inputs и масштаба. Cache — M40 Data; большие PNG/SVG/PDF не публикуются
-в Git. Пока нет terminal receipt и выбранного visual QA — этот gate не принят.
+в Git. Terminal status0: все 26 отчётов, 3+2 checks без skips, 1132.731 s.
+Кэш: 10418 файлов / 1107367233 байта. Опубликован
+[compact visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-owned-posttune-worker-visual-asan-a1/README.md),
+commit0507b652e9a752b3654bf4981588d34861de7570: 404 metadata members /
+400608 compressed bytes и восемь PNG / 1139977 bytes. Все outer/member hashes
+проверены локально. Восемь PNG побайтно совпали с ранее просмотренными при
+1920×960 native owner PNG; соответствия и точная область перенесённой приёмки
+читаемости записаны в SELECTED_VISUAL_REVIEW.json. Новый ручной просмотр и
+полная ручная приёмка кэша не заявляются. Научный verdict отсутствует.
 
 Новый schema1 compatibility reader на M40: 4/4, 120.024 s, 18 прежних portable
 runs из подтверждённого архива normal-a2. Исторические primary не изменялись.
 Эти повторы не являются новыми независимыми обучениями или доказательством
 улучшения классификации.
+
+## Переход через outer clock: проверенная предпосылка live handoff
+
+Source root62d6bf77e47897401a5709924fd960b59f62303a / PulseLib3e371dc.
+Normal 24/24 (28.916 s), ASan 24/24 (163.801 s), без skips; runtime before/after
+совпал. Четыре новых случая Classic/Branch × CalculateMode0/1 переводят
+Environment на один timestep без Calculate детей; conversion/import исходной
+completed boundary проходит. Это восстановленная finished Solo-модель, ещё не
+автоматический переход из живого Train.
+
+Reader root76048fcf59890fcae31c73779bd5dff47a4e127c: по 3/3 на обоих workers,
+четыре actual records, 32 повреждённых record controls и 16 re-signed projection
+controls. Полная boundary после шага времени точно равна повторному экспорту
+до шага. Первый и повторный экспорт различаются только ранее установленным
+empty→zero InputFeedbackSignal cache; вся XML и её hashes сохраняются и
+проверяются существующим узким правилом, новых исключений не введено.
+
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-clock-handoff-normal-a2/README.md),
+commitca8d2e7ea9aada9e3a5491ffaf8eec05401fd55d: 172 members / 934920 bytes;
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-clock-handoff-asan-a2/README.md),
+commit13d8fce27dab0a3b098fdd97ed7aefd495c649f4: 176 members / 948704 bytes.
+В каждом полные два исходных portable runs / 84 artifacts; все outer/member
+hashes проверены локально. Начальный native a1 упал на смешении first/repeated
+export, хотя import проходил; оба attempts сохранены. ASan reader a1 содержал
+KeyError в отрицательном fixture, исправление и неудачный attempt сохранены.
+Scientific verdict=null; полный этап 8 остаётся открыт.
 
 ## Место и данные
 
@@ -133,7 +168,7 @@ runs из подтверждённого архива normal-a2. Историч�
 
 ## Следующий обязательный объём
 
-Завершить Console acceptance и Git publication; затем связать живой Train с
+Scoped Console acceptance и Git publication завершены. Следующее: связать живой Train с
 capture/conversion/reference/PostTune/calibration/frozen Test. Нынешние replay
 API не заменяют этот handoff. Остаются полная physics/mode/frequency/dimension
 матрица, UnInit/Cancel/multirate negative controls, N0/N1/C-trim алгоритмические

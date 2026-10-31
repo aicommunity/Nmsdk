@@ -110,7 +110,7 @@ Git получает компактные primary, metadata и выбранны�
 0–12 сохраняется полностью.
 
 
-## Production Console: следующий подэтап, проверки ещё не выполнены
+## Production Console: адресная приёмка
 
 Console PostTune переводится с внешнего Advance на BeginNativePostTunePhase и
 обычные тики outer model. Standalone calibration сохраняет существующий driver.
@@ -120,8 +120,11 @@ Reader сохраняет schema1 compatibility, проверяет все по�
 связывает число before-children вызовов с model_ticks, частотой и begin/end времени.
 Нулевой tick допустим только при явно связанном нулевом интервале отменённого job.
 Это production replay Recognition, а не автоматический handoff живого Train.
-Серверные build/18-mode Console corpus и re-signed corrupted-receipt checks пока
-не выполнены; наличие кода не считается подтверждением.
+Серверные сборки выполнили по 26 операций и 19/19 checks без skips после
+исправления orchestration ниже. Оба proof опубликованы, hashes проверены.
+Полный visual gate: 26 отчётов, 5/5 checks; восемь выбранных PNG идентичны
+ранее просмотренным native owner PNG. Точные SHA, источники и ограничения
+зафиксированы в CurrentStatus-2026-11-01.ru.md. Полная матрица этим не закрыта.
 
 
 Проверка Console выявила отдельную ошибку orchestration: при запуске всего
@@ -163,5 +166,10 @@ boundary через единственный outer-clock advance без лишн
 retarget во время ожидания; отсутствие certificate→stopped diagnostic без
 шаблонного обученного Test. Сравнение полной native archive нельзя ослаблять
 ради удобства handoff; разрешённая empty→zero feedback-cache нормализация
-остаётся единственным уже проверенным исключением. Эти проверки и сам
-live dispatcher ещё не реализованы.
+остаётся единственным уже проверенным исключением. Clock-only предпосылка
+теперь проверена: 24/24 native normal и ASan, по 3/3 независимых reader tests;
+все три сериализованные проекции сохранены. Повторный экспорт без шага времени
+отделён от влияния самого clock; после clock полная boundary точно неизменна.
+Начальная ошибочная first/repeated assertion сохранена как failed attempt.
+Остальные перечисленные проверки живого перехода и сам live dispatcher
+ещё не реализованы.
