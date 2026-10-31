@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <optional>
 #include <type_traits>
+#include <QCryptographicHash>
 
 namespace {
 using namespace RDK;
@@ -24,10 +25,20 @@ enum class Scenario { Snapshot, Connected, QueuedProbe, Stopped };
 
 QJsonObject SemanticSolo(QJsonObject package)
 {
-    // Native XML also contains volatile state/cache fields. The declared
-    // model identities, image identities and all training evidence stay exact.
+    // Repeated native image allocation can initialize this one unconnected
+    // feedback cache. Do not discard other XML: it can contain physics that
+    // an incomplete semantic identity would otherwise fail to protect.
     const auto snapshot=[](QJsonObject value) {
-        value.remove("native_xml");value.remove("native_xml_sha256");return value;
+        const auto xml=value["native_xml"].toString();
+        const auto digest=[](const QString& text) {
+            return QString::fromLatin1(QCryptographicHash::hash(text.toUtf8(),QCryptographicHash::Sha256).toHex());
+        };
+        EXPECT_EQ(value["native_xml_sha256"].toString(),digest(xml));
+        if(value["component_class"]!=QJsonValue("NPMembraneBio"))return value;
+        const QString empty="<InputFeedbackSignal Type=\"MDMatrix&lt;d&gt;\" Rows=\"0\" Cols=\"0\" PType=\"266\" IoType=\"17\"></InputFeedbackSignal>";
+        const QString zero="<InputFeedbackSignal Type=\"MDMatrix&lt;d&gt;\" Rows=\"1\" Cols=\"1\" PType=\"266\" IoType=\"17\">0</InputFeedbackSignal>";
+        auto normalized=xml;normalized.replace(empty,zero);
+        value["native_xml"]=normalized;value["native_xml_sha256"]=digest(normalized);return value;
     };
     package.remove("sha256");auto neuron=package["neuron"].toObject();neuron.remove("sha256");
     neuron["graph"]=snapshot(neuron["graph"].toObject());
