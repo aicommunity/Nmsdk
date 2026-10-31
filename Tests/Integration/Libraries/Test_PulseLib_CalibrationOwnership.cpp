@@ -14,7 +14,7 @@ namespace {
 using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
-enum class Interference { ForeignResult,ConsumedResult,SamePackageImport };
+enum class Interference { ForeignResult,ConsumedResult,SamePackageImport,NormalFlow };
 
 // Uses a saved, measured production source and its predeclared requests. No
 // fresh Train and no copied simulator/algorithm body are involved.
@@ -48,6 +48,11 @@ template<class Owner> void RecognitionOwnership(Interference interference)
         spec.trials.push_back(std::move(q));
     }
     ASSERT_EQ(spec.trials.size(),2u);
+    if(interference==Interference::NormalFlow)
+    {
+        spec.thresholds.clear();for(const auto& v:record["thresholds"].toArray())spec.thresholds.push_back(v.toDouble());
+        spec.maximumCandidates=spec.thresholds.size();
+    }
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
     ASSERT_TRUE(core.environment->CreateModel("NModel"));auto model=core.environment->GetModel();
@@ -65,7 +70,14 @@ template<class Owner> void RecognitionOwnership(Interference interference)
     const auto tick=[&]{model->Calculate();core.environment->IncreaseModelTimeByStep();};
     const auto finishTrial=[&]{for(unsigned i=0;i<unsigned(spec.trials.front().duration*2000)+3;++i)tick();};
     std::optional<NativeRecognitionTrialObservation> external;
-    if(interference==Interference::ConsumedResult)
+    if(interference==Interference::NormalFlow)
+    {
+        for(unsigned count=0;!transaction.Done();++count)
+        {
+            ASSERT_LT(count,20000u);tick();transaction.Advance();
+        }
+    }
+    else if(interference==Interference::ConsumedResult)
     {
         finishTrial();external=owner->TakeNativeRecognitionTrialResult();ASSERT_TRUE(external);
         ASSERT_TRUE(external->valid)<<external->reason;
@@ -82,6 +94,9 @@ template<class Owner> void RecognitionOwnership(Interference interference)
         else
         {
             const auto lifecycle=owner->ObserveLifecycle();
+            // Retain the old token deliberately: merely testing weak.expired
+            // would not detect replacement when another observer holds a lock.
+            const auto retained=owner->ObserveNativeRecognitionContext().lock();
             const auto replaced=owner->ImportNativeRecognitionState(candidate,implementation);
             ASSERT_EQ(replaced.status,NativeModelBuildStatus::Adopted)<<replaced.reason;
             // Import changes the recognition context without calling owner
@@ -91,8 +106,16 @@ template<class Owner> void RecognitionOwnership(Interference interference)
     }
     const auto time=core.environment->GetTime().GetTime();transaction.Advance();
     EXPECT_EQ(core.environment->GetTime().GetTime(),time);
-    EXPECT_EQ(transaction.Status(),NativeCalibrationTransactionStatus::RecoveryRequired)<<transaction.Reason();
-    EXPECT_EQ(owner->ExportNativeRecognitionState(implementation),candidate);
+    if(interference==Interference::NormalFlow)
+    {
+        EXPECT_EQ(transaction.Status(),NativeCalibrationTransactionStatus::Calibrated)<<transaction.Reason();
+        EXPECT_TRUE(owner->ExportNativeRecognitionState(implementation)==transaction.CalibratedPackage());
+    }
+    else
+    {
+        EXPECT_EQ(transaction.Status(),NativeCalibrationTransactionStatus::RecoveryRequired)<<transaction.Reason();
+        EXPECT_TRUE(owner->ExportNativeRecognitionState(implementation)==candidate);
+    }
     bool foreignPreserved=true;
     if(interference==Interference::ForeignResult)
     {
@@ -106,7 +129,7 @@ template<class Owner> void RecognitionOwnership(Interference interference)
             {"topology",QString::fromStdString(top)},{"scenario",int(interference)},
             {"transaction",transaction.Report()},{"candidate_before",candidate},
             {"package_after",owner->ExportNativeRecognitionState(implementation)},
-            {"foreign_result_preserved",foreignPreserved},{"external_observation",NativeRecognitionTrialJson(*external)},
+            {"foreign_result_preserved",foreignPreserved},{"external_observation",external?QJsonValue(NativeRecognitionTrialJson(*external)):QJsonValue(QJsonValue::Null)},
             {"evaluation_verdict",QJsonValue(QJsonValue::Null)}};
         QFile out(QDir(QString::fromLocal8Bit(output)).filePath(QString::fromStdString(top)+"_ownership_"+QString::number(int(interference))+".json"));
         ASSERT_TRUE(out.open(QIODevice::WriteOnly|QIODevice::NewOnly));const auto bytes=QJsonDocument(result).toJson();
@@ -122,3 +145,6 @@ TEST(NativeCalibrationOwnership,ClassicConsumedResult){RecognitionOwnership<NNeu
 TEST(NativeCalibrationOwnership,BranchConsumedResult){RecognitionOwnership<NNeuronTimeLearnerBranch>(Interference::ConsumedResult);}
 TEST(NativeCalibrationOwnership,ClassicSamePackageImport){RecognitionOwnership<NNeuronTimeLearner>(Interference::SamePackageImport);}
 TEST(NativeCalibrationOwnership,BranchSamePackageImport){RecognitionOwnership<NNeuronTimeLearnerBranch>(Interference::SamePackageImport);}
+
+TEST(NativeCalibrationOwnership,ClassicNormalFlow){RecognitionOwnership<NNeuronTimeLearner>(Interference::NormalFlow);}
+TEST(NativeCalibrationOwnership,BranchNormalFlow){RecognitionOwnership<NNeuronTimeLearnerBranch>(Interference::NormalFlow);}
