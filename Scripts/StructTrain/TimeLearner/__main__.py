@@ -95,7 +95,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "probe-set", "native-test-run"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("recognition-evaluation", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "probe-set", "native-test-run", "calibration-transaction"), default="recognition-evaluation")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
     report.add_argument("--trace", type=Path, help="primary CSV required for probe report")
@@ -217,6 +217,10 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.artifacts is not None and args.trace is None and args.model is None,
                         "native_test_run_requires_artifacts_not_model_or_trace")
                 result = render_native_test_run(args.source.resolve(strict=True), args.artifacts.resolve(strict=True), args.output.resolve())
+            elif args.format == "calibration-transaction":
+                from .calibration_transaction_reports import render_calibration_transaction
+                require(args.trace is None and args.model is None, "calibration_transaction_declares_its_models_and_observations")
+                result = render_calibration_transaction(args.source.resolve(strict=True), args.output.resolve())
             elif args.format == "probe-set":
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
