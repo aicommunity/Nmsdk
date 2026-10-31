@@ -98,3 +98,8 @@ class PostTuneTransactionEvidenceTest(unittest.TestCase):
 
     def test_missing_accepted_proposal(self):
         r = self.example(synthetic=True);r["candidates"].pop();self.reject(r)
+
+    def test_closed_search_does_not_hide_an_active_matrix(self):
+        r = self.example(calibrated=True)
+        r["active_matrix"] = {"requests": [r["trials"][0]], "observations": []}
+        self.reject(r)
