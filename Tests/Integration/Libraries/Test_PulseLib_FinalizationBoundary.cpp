@@ -249,7 +249,9 @@ template<class Owner> void ManagedFinalization(int calculateMode,bool owned=fals
         EXPECT_EQ(ReadNativeFinalizationControls(*owner),boundary.Controls());
         const auto source=ConvertNativeSoloToRecognition(boundary.Solo(),DecodeNativeRecognitionSpec(original["conversion_spec"].toObject()),
             storage,environment,implementation);
-        EXPECT_EQ(owner->ImportNativeRecognitionState(source,implementation).status,NativeModelBuildStatus::Rejected);
+        // Ordinary frozen import owns local mirrors and may deliberately clear
+        // them. Only a live connected provider must reject that transition.
+        if(connected)EXPECT_EQ(owner->ImportNativeRecognitionState(source,implementation).status,NativeModelBuildStatus::Rejected);
         const auto installed=owner->ImportNativeFinalizationState(source,implementation,boundary);
         EXPECT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;
         if(installed.status!=NativeModelBuildStatus::Adopted)return 2;
