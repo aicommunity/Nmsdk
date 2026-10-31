@@ -13,6 +13,7 @@ from pathlib import Path
 
 from .native_evidence import count, load, require
 from .probe_reports import _read_probe_data, render_probe_set
+from .plotting import plotting_runtime
 
 
 KIND = "timelearner_native_probe_evidence"
@@ -139,6 +140,7 @@ def _read_probe_data_from_value(packet, trace):
 
 
 def render_native_test_run(specification, artifact_root, output):
+    plotting_runtime()
     root = artifact_root.resolve(strict=True)
     require(not output.resolve().is_relative_to(root), "native_test_output_must_be_outside_immutable_artifacts")
     inventory = inventory_native_test_run(specification, artifact_root)

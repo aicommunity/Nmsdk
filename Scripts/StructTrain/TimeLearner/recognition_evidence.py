@@ -33,7 +33,7 @@ def _physical(node: dict, name: str) -> float:
     return number(struct.unpack(">d", bits)[0])
 
 
-def _audit(package: dict, source_case: tuple, spec: dict, observation: dict, trace: Path) -> dict:
+def _audit_derivation(package: dict, source_case: tuple) -> dict:
     require(set(package) == {"kind", "schema_version", "dynamic_checkpoint", "state_kind", "implementation_id",
                             "source_solo", "conversion_spec", "conversion_record", "recognition_inputs", "model_revision",
                             "recognition_certificate", "dataset", "neuron", "sha256"}, "recognition_field_set_mismatch")
@@ -159,10 +159,25 @@ def _audit(package: dict, source_case: tuple, spec: dict, observation: dict, tra
     require(type(archive["metadata"]["recognition_schema_version"]) is int and
             all(number(value) > 0 for value in archive["metadata"]["conversion"]["factors"]), "invalid_recognition_metadata_types")
     require(metadata == archive["metadata"], "recognition_certificate_or_calibration_scope_mismatch")
-    frozen = audit_frozen_transport(package, source, spec, observation, trace)
     return {"auditor_version": AUDITOR_VERSION, "conversion_math_verified": True, "source_audit": source_audit,
-            "other_physics_preserved": True, "native_import_verified": False, "frozen_transport": frozen,
+            "other_physics_preserved": True, "native_import_verified": False,
             "evaluation_verdict": None}
+
+
+def _audit(package: dict, source_case: tuple, spec: dict, observation: dict, trace: Path) -> dict:
+    derived = _audit_derivation(package, source_case)
+    frozen = audit_frozen_transport(package, source_case[0], spec, observation, trace)
+    return {**derived, "frozen_transport": frozen}
+
+
+def audit_recognition_derivation(package: dict, source_case: tuple) -> dict:
+    """Conversion mathematics and actual solo proof, without a transport claim."""
+    try:
+        return _audit_derivation(package, source_case)
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, IndexError, OverflowError, struct.error) as error:
+        raise EvidenceError("malformed_recognition_derivation:" + str(error)) from error
 
 
 def audit_frozen_transport(package: dict, source: dict, spec: dict, observation: dict, trace: Path) -> dict:
@@ -200,6 +215,11 @@ def audit_frozen_transport(package: dict, source: dict, spec: dict, observation:
             "constant_or_unstimulated_frozen_pair")
     return {"complete": True, "sample_count": len(values), "paired_values_exact": True,
             "soma_variation": variation, "spikes_known": False, "evaluation_verdict": None}
+
+
+def audit_recognition_source(package: dict, source_case: tuple) -> dict:
+    """Check conversion and complete solo primaries without inventing a frozen probe."""
+    return _audit_derivation(package, source_case)
 
 
 def audit_recognition_state(package: dict, source_case: tuple, spec: dict, observation: dict, trace: Path) -> dict:

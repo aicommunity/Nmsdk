@@ -1,0 +1,68 @@
+{
+  "kind": "timelearner_selected_visual_review",
+  "schema_version": 1,
+  "selected_png_count": 8,
+  "reviewed_original_resolution": [
+    1920,
+    960
+  ],
+  "selected": [
+    {
+      "path": "primary-bundle/selected/Classic-N0-target-overview.png",
+      "sha256": "21bd4745af83c3e34795991003ef725ef448135d45d53dcc947ee65d9afe20a4",
+      "readable": true,
+      "reviewed": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-N1-target-overview.png",
+      "sha256": "21bd4745af83c3e34795991003ef725ef448135d45d53dcc947ee65d9afe20a4",
+      "readable": true,
+      "reviewed": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-N1-foil-overview.png",
+      "sha256": "641da3fc2ce3c514c3a6e99d7e145cd72bdd86b12df9f8e0575d70c81f60410c",
+      "readable": true,
+      "reviewed": true
+    },
+    {
+      "path": "primary-bundle/selected/Classic-N1-target-input-zoom.png",
+      "sha256": "44ef8bb71fbc6c2f97294d1ca0d4a33713e0feec0660eb429b7dcc4015f0a0cd",
+      "readable": true,
+      "reviewed": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-N0-target-overview.png",
+      "sha256": "b578a53e457056cc749b9164bf71840c269e7adc1973ba479e25d0e6ff598237",
+      "readable": true,
+      "reviewed": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-N1-target-overview.png",
+      "sha256": "b578a53e457056cc749b9164bf71840c269e7adc1973ba479e25d0e6ff598237",
+      "readable": true,
+      "reviewed": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-N1-foil-overview.png",
+      "sha256": "99f94c40af3ee9c2e1b91c0d8c4793c3e2f55768539206f2bfd45528b9ab4f6e",
+      "readable": true,
+      "reviewed": true
+    },
+    {
+      "path": "primary-bundle/selected/Branch-N1-target-input-zoom.png",
+      "sha256": "31d0af588c15e0d4259f878ed9307dfd8b159804a9ccc38aaef100fb3473ca6f",
+      "readable": true,
+      "reviewed": true
+    }
+  ],
+  "observations": [
+    "Actual inputs and Soma.SumPotential are distinguished on separate axes; text is readable and unclipped.",
+    "Target input zoom covers the first actual pulse and full first rise/peak; overview covers both pulses.",
+    "Foil overview spans 0.12..0.80 seconds; brief pulse/peak inspection must use the full-cache 100-tick zoom tiles.",
+    "N0/N1 overview equality in this bounded unresolved control does not demonstrate algorithm equivalence.",
+    "Only eight selected panels were reviewed; the complete cache was not visually accepted."
+  ],
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null
+}
