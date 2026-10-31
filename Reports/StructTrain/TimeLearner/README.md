@@ -164,7 +164,9 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   75/75 C++ checks, 2/2 independent reader checks, ten actual phase records and
   100 corrupt-receipt controls. All 836 archive members verified; compressed
   primary 4095348 bytes, original source closure two runs / 84 artifacts.
-  ASan/report acceptance and configured live-Train dispatch remain pending.
+  [ASan](s08-native-owned-posttune-asan-a1/README.md) also passed 75/75;
+  [selected visual acceptance](s08-native-owned-posttune-visual-asan-a1/README.md)
+  is published. Configured live-Train dispatch remains pending.
 
 
 - Production owned PostTune Console:
@@ -172,5 +174,15 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   [ASan](s08-native-owned-posttune-worker-asan-a1/README.md): 20 PostTune + 6
   standalone calibration controls per worker, ordered 19/19 checks, no skips.
   Initial setup skips remain recorded. Complete 28-run closures / 1196 artifacts
-  each; all compressed archive members verified. Full production temporal report
-  gate remains pending; live Train handoff and full stage8 are not accepted.
+  each; all compressed archive members verified.
+  [All 26 production temporal reports](s08-native-owned-posttune-worker-visual-asan-a1/README.md)
+  passed five checks; compact metadata and eight byte-identical previously reviewed
+  selected PNGs are published. Live Train handoff and full stage8 are not accepted.
+
+- Clock-only finalization seam:
+  [normal](s08-native-finalization-clock-handoff-normal-a2/README.md),
+  [ASan](s08-native-finalization-clock-handoff-asan-a2/README.md): 24/24 native
+  and 3/3 independent reader tests per worker. Four actual topology/mode records,
+  exact full boundary preservation after one outer-clock step without Calculate,
+  32 malformed-record and 16 re-signed projection controls. This uses imported
+  finished Solo state; it does not implement live Train dispatch.
