@@ -26,7 +26,29 @@ threshold `0.006293579947234118`.
 Нормальный и ASan контроль являются детерминированными повторениями реализации,
 не независимыми статистическими обучениями.
 
-## Последние кандидаты PostTune
+## Измерительный PostTune и production Console
+
+Более новый [production PostTune corpus](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-console-normal-a2/README.md)
+содержит 18 настоящих Console jobs Classic/Branch N1, двух входов, 2000 Гц:
+9 Calibrated, 7 SearchUnresolved, 2 BudgetExhausted. Здесь уже выполнены
+измерительный поиск/проверка весов, реальный threshold grid и fresh confirmation.
+Это другой протокол, чем фиксированный порог в ранних 20 evaluations ниже.
+Off/KeepDone/Auto/Soma подтверждают ту же двухпаттерновую пару у обеих топологий;
+Classic подтверждает также CanonRmin. Synthetic и другие отрицательные случаи
+не объявляются физически неразделимыми из-за неудачи выбранной сетки.
+
+[Графики native-контроллера](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-visual-normal-a3/SELECTED_VISUAL_REVIEW.ru.md)
+охватывают 24 диагностические транзакции и все 184 trial-soma pairs в полном
+cache. На выбранных fresh confirmations виден target spike и нет foil spike
+в объявленном окне. У части окон потенциал ещё не вернулся к rest-state:
+длинные хвосты, поздние события и continuous stream этим не подтверждены.
+
+Новые калибровки сохраняют исходный `search_unresolved` обучения. Вклад именно
+структурного обучения в разделение этой пары не установлен; для этого нужны
+сопоставимые baseline до/после обучения. Эти controls не являются независимыми
+обучениями или восьмипаттерновой серией.
+
+## Ранний контроль отдельных кандидатов PostTune
 
 [Сорок Console-операций](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-worker-normal-a1/README.md)
 root `c6410eecc67cdc27aa5d6c05ef40f81a174a4916` проверяют 20 export + 20 frozen

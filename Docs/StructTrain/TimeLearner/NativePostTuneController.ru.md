@@ -98,8 +98,8 @@ gates; их первый запуск пропустил восемь ownership 
 fixture-переменной и не считается 10/10. Recovery сохраняет фактические два
 grid-контроля и выполняет восемь ownership controls отдельно на обоих binaries.
 
-Открыты: ASan и расширенная серверная matrix этого контроллера, полные
-временные графики, Console/learner public dispatch и параметрический codec,
+Открыты: расширенная серверная matrix этого контроллера, полная visual QA,
+production Console ASan, learner property dispatch,
 continuation с уже завершённого PostTune/calibrated checkpoint, вся матрица
 N0/N1/частот/размерностей/физических профилей/общих attach positions и научная
 серия. Отказ от nested PostTune source сейчас явный; поддержку continuation нельзя
@@ -127,8 +127,11 @@ TP1/FP0/FN0/TN1 на одной паре; source Train остаётся search_u
 два grid cases и восемь ownership controls, по четыре independent checks на каждый
 набор; все 28 CSV pairs и восемь ownership JSON совпали точно. Первый A1 с восьмью
 skips сохранён как непринятый, фактические grid cases восстановлены отдельным
-receipt. ASan самого нового PostTune-контроллера выполняется на закреплённом A2;
-его источники/runtime не обновляются до terminal outcome.
+receipt. ASan нового PostTune-контроллера завершён на source 44a1598a / c8a1995:
+10/10 native (3733.602 s) и 19/19 исходного reader (158.845 s). Поздний строгий
+reader e9f3cc852 прошёл 20/20 на тех же данных (159.205 s), без native rerun.
+Leak detection выключен; этот gate не доказывает отсутствие утечек и не заменяет
+отдельный ASan production Console.
 
 ## Отчёты измерительного контроллера
 
@@ -142,12 +145,16 @@ threshold grid/fresh confirmation. Требуются исходный transacti
 подменяются полными графиками. Графики weight selection используют унаследованный
 порог и не доказывают распознавание; калибровка не становится independent Test.
 
-Реализация и четыре проверки полного cache добавлены отдельно от подтверждённого
-normal native gate. До фактического серверного render/test и ручного просмотра
-новых рисунков эта часть не принята. Полные cache сохраняются на диске Data M40;
-в Git публикуются сжатые primary/metadata и только явно выбранные рисунки.
+Серверный render завершён: 24 reports, 61 completed matrices, 184 trial-soma
+pairs; 4 новых и 5 plotting checks прошли (20.592 s), hashes 8668 cache files
+проверены. [Compact bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-visual-normal-a3/README.md)
+содержит 455 metadata members (445980 bytes), все они локально сверены; 16
+selected PNG просмотрены в исходном размере. Отдельный QA описывает конечные
+окна с ещё положительным потенциалом: settling/late events не подтверждены.
+Полные cache остаются на Data M40; полный manual/PDF/SVG QA и новые Console
+waveforms этим gate не приняты.
 
-## Штатная операция Console: реализация до серверной приёмки
+## Штатная операция Console: адресная normal-приёмка
 
 `NeuroModelerConsole --timelearner-posttune job.json --timelearner-output <new-directory>`
 добавлен отдельной операцией, взаимоисключающей с Train/export/evaluate/calibrate
@@ -155,8 +162,8 @@ normal native gate. До фактического серверного render/te
 полный native import/readback и тот же `NativePostTuneTransaction`, без тестового
 кода, вложенного Calculate или перезаписи runtime. Цикл исполнения, отмена,
 ограничение модельных тиков и запись артефактов общие с calibration operation.
-Пока серверная сборка и настоящие Console jobs не пройдены, это реализация,
-а не принятая возможность production pipeline. Связывание с публичными свойствами
+Сборка и настоящие Console jobs прошли адресную normal-приёмку, описанную ниже.
+Связывание с публичными свойствами
 learner, Python runner и продолжение checkpoint остаются отдельными открытыми пунктами.
 
 Вход `timelearner_native_post_tune_job`, schema 1, имеет точные поля прежнего
@@ -181,7 +188,7 @@ learner, Python runner и продолжение checkpoint остаются о�
 
 Сборка Console root `ffd5b15a264f6d66e131230ddd301ef8ae754ea3` на Elder завершилась
 успешно в отдельном `runtime-s08-native-posttune-console-normal-a1`; новая операция
-присутствует в `--help`, runtime manifest сохранён. Это ещё не проверка выполнения jobs.
+присутствует в `--help`, runtime manifest сохранён. Затем выполнены реальные jobs.
 Python-команда `posttune <job> --source-solo <state> --runtime-manifest <manifest>
 --wall-seconds <limit> --output <new-run>` использует общий owned-process runner
 и portable auditor calibration/PostTune, без второго цикла управления процессами.
@@ -190,8 +197,16 @@ Python-команда `posttune <job> --source-solo <state> --runtime-manifest <
 budget с condition digest; native effective capability остаётся проверкой Console.
 Новый `analyze --format posttune-run` повторно проверяет portable artifact closure,
 declared PostTune parameters, родительский search, полный child calibration и
-действительную конечную модель. Добавлены четыре проверки корпуса из 18 настоящих
-Console runs; их серверная приёмка ещё не выполнена.
+действительную конечную модель. [Корпус normal Console](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-console-normal-a2/README.md)
+опубликован в 3c1751f9: 18 PostTune jobs (9 Calibrated, 7 SearchUnresolved,
+2 BudgetExhausted), 6 прежних calibration regressions, 2 дополнительных public
+CLI jobs, 2 tick-stop controls и 4 native parser/mode rejections. Четыре новых
+reader checks прошли; поздняя ревизия повторила четыре. Восемь calibration worker
+checks прошли; пропущенный из-за отсутствующей fixture provenance class затем
+восстановлен отдельными четырьмя actual checks, без повторения native jobs.
+В архиве 1146 members / 5936272 bytes; все локально сверены. Source Train не
+становится Exact, калибровка этой пары не доказывает независимую классификацию.
+ASan Console собран отдельно и выполняет свой корпус; полная matrix не принята.
 
 ### Ограничения следующего связывания с learner properties
 
