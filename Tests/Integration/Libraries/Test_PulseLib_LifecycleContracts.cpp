@@ -331,4 +331,18 @@ TEST(TimeLearnerNativeLifecycle, ClassicAuditFlagDefaultAndReuse)
 {AuditFlagUsesNativeDefaultAndPool<NMSDK::NNeuronTimeLearner>("NNeuronTimeLearner");}
 TEST(TimeLearnerNativeLifecycle, BranchAuditFlagDefaultAndReuse)
 {AuditFlagUsesNativeDefaultAndPool<NMSDK::NNeuronTimeLearnerBranch>("NNeuronTimeLearnerBranch");}
+TEST(TimeLearnerNativeLifecycle, FreshJobsResetEnvironmentClockAtEmptyBoundary)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
+    for(int job=0;job<2;++job)
+    {
+        EXPECT_EQ(NmsdkWorker::WithFreshModel(2000,[&](auto,auto environment,auto model) {
+            EXPECT_EQ(environment->GetTime().GetDoubleTime(),0.);
+            EXPECT_EQ(model->GetNumComponents(),0);
+            for(int tick=0;tick<3;++tick){model->Calculate();environment->IncreaseModelTimeByStep();}
+            EXPECT_DOUBLE_EQ(environment->GetTime().GetDoubleTime(),3./2000.);
+            return 0;
+        }),0);
+    }
+}
 } // namespace
