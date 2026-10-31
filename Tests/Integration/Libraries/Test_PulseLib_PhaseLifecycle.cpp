@@ -30,6 +30,10 @@ template<class Owner,bool Weights,bool Nested=false> void Interrupt(Interruption
     std::unique_ptr<Transaction> transaction;QJsonObject stopped;std::size_t ticks=0;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
     const auto exercise=[&](auto storage,auto environment,auto model,auto owner) {
+        struct DetachBeforeNativeTeardown {
+            std::unique_ptr<Transaction>& transaction;
+            ~DetachBeforeNativeTeardown(){if(transaction)transaction->InterruptOwnerLifecycle("fixture_early_exit");}
+        } detach{transaction};
         ASSERT_EQ(owner->ImportNativeRecognitionState(job["source_recognition"].toObject(),implementation).status,NativeModelBuildStatus::Adopted);
         owner->Build();owner->Init();model->Init();model->Reset();
         if constexpr(Weights)
