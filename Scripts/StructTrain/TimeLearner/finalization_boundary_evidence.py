@@ -5,6 +5,7 @@ from hashlib import sha256
 from .model_identity import canonical_model_sha256
 from .native_evidence import equal, require
 from .recognition_trial_evidence import audit_recognition_trial_set
+from .training_intent_evidence import audit_training_intent
 
 
 def _digest(value):
@@ -14,7 +15,7 @@ def _digest(value):
 
 def audit_boundary(boundary):
     require(boundary["kind"] == "timelearner_finalization_boundary" and
-            type(boundary["schema_version"]) is int and boundary["schema_version"] == 1,
+            type(boundary["schema_version"]) is int and boundary["schema_version"] in (1, 2),
             "unknown_finalization_boundary_schema")
     _digest(boundary)
     solo = boundary["source_solo"]
@@ -30,6 +31,20 @@ def audit_boundary(boundary):
     controls = boundary["controls"]
     require(set(controls["parameters"]) == set(controls["bindings"]), "boundary_control_bindings_missing")
     p = controls["parameters"]
+    if boundary["schema_version"] == 2:
+        request = boundary["training_request"]
+        audit_training_intent(request)
+        require(request["session_attempt"] == solo["session_attempt"]
+                and request["run_id"] == solo["configuration"]["run_id"]
+                and request["protocol_revision"] == solo["protocol"]["revision"]
+                and request["pattern_hash"] == solo["protocol"]["pattern_hash"], "boundary_training_request_binding_mismatch")
+        original, current = dict(request["controls"]["parameters"]), dict(p)
+        original.pop("IsNeedToTrain")
+        current.pop("IsNeedToTrain")
+        require(original == current and request["controls"]["bindings"] == controls["bindings"],
+                "boundary_training_request_controls_changed")
+    else:
+        require("training_request" not in boundary, "training_request_in_legacy_boundary")
     require(boundary["phase_requests"] == {
         "target_reference": p["AutoCalibrateFixedLTZThreshold"], "post_tune": p["EnablePostTrainTuning"],
         "post_train_mid": p["EnablePostTrainMidThreshold"],

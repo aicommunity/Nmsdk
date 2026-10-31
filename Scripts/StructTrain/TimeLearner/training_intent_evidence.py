@@ -44,7 +44,7 @@ def audit_training_intent(value):
 
 def audit_training_intent_lifecycle(record):
     require(record["kind"] == "native_training_request_intent_lifecycle"
-            and type(record["schema_version"]) is int and record["schema_version"] == 1,
+            and type(record["schema_version"]) is int and record["schema_version"] in (1, 2),
             "unknown_training_intent_lifecycle")
     require(type(record["calculate_mode"]) is int and record["calculate_mode"] in (0, 1)
             and type(record["connected"]) is bool, "invalid_training_intent_lifecycle_condition")
@@ -62,6 +62,19 @@ def audit_training_intent_lifecycle(record):
             and record["final_reason"] == "training_target_changed_requires_new_plan",
             "training_intent_retarget_not_invalidated")
     require(record["calibrated"] is False and record["evaluation_verdict"] is None, "unsupported_intent_lifecycle_claim")
+    imported = False
+    if record["schema_version"] == 2:
+        from .finalization_boundary_evidence import audit_boundary
+        b = record["stopped_boundary"]
+        audit_boundary(b)
+        require(b["schema_version"] == 2 and b["training_request"] == record["second"]
+                and b["diagnostic_only"] is True and b["training_outcome"] == "external_stop",
+                "intent_lifecycle_boundary_mismatch")
+        require(record["control_drift_reason"] == "native_training_request_controls_changed"
+                and record["import_adopted"] is True and record["after_import"] == {},
+                "intent_lifecycle_import_or_drift_not_checked")
+        imported = True
     return {"schema_version": 1, "requests": 3, "calculate_mode": record["calculate_mode"],
             "connected": record["connected"], "execution_and_intermediate_assertions_attested": False,
+            "successful_import_recorded": imported,
             "calibrated": False, "evaluation_verdict": None}
