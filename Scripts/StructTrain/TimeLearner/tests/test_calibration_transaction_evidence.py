@@ -31,6 +31,12 @@ class NativeCalibrationTransactionEvidenceTest(unittest.TestCase):
             report = load(p)
             source = sources[report["source_recognition"]["source_solo"]["sha256"]]
             cls.cases.append((p, report, source))
+        cls.contexts = []
+        for p in sorted(cls.root.glob("*_grid_context_guard.json")):
+            report = load(p)
+            cls.contexts.append((p, report, sources[report["source_recognition"]["source_solo"]["sha256"]]))
+        if len(cls.contexts) not in (0, 4):
+            raise RuntimeError("requires the complete four-control context extension or a legacy snapshot")
         counts = {}
         for _, report, _ in cls.cases:
             counts[report["status"]] = counts.get(report["status"], 0)+1
@@ -41,7 +47,7 @@ class NativeCalibrationTransactionEvidenceTest(unittest.TestCase):
         return [(p, r, s) for p, r, s in self.cases if r["status"] == "calibrated"]
 
     def test_all_actual_transactions_and_primary_source_data(self):
-        for _, report, source in self.cases:
+        for _, report, source in self.cases+self.contexts:
             result = audit_native_calibration_transaction(report, source)
             self.assertTrue(result["transaction_evidence_consistent"])
             self.assertEqual(result["calibrated"], report["status"] == "calibrated")
@@ -75,7 +81,7 @@ class NativeCalibrationTransactionEvidenceTest(unittest.TestCase):
                 audit_native_calibration_transaction(resign(bad), source)
 
     def test_diagnostic_or_cancelled_state_cannot_be_relabelled_calibrated(self):
-        for _, report, source in self.cases:
+        for _, report, source in self.cases+self.contexts:
             if report["status"] == "calibrated": continue
             bad = copy.deepcopy(report);bad["calibrated"] = True
             with self.assertRaisesRegex(EvidenceError, "unsupported_calibration_transaction_claim"):
