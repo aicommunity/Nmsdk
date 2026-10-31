@@ -21,6 +21,8 @@ JOB_FIELDS = {"kind", "schema_version", "owner_class", "implementation_id", "fre
               "maximum_model_ticks", "source_recognition", "thresholds", "maximum_candidates",
               "specification", "trials", "sha256"}
 SPEC_FIELDS = {"protocol", "data_partition_id", "attempt_id", "clock_id", "criterion"}
+POST_TUNE_FIELDS = {"mode", "metric", "canonical_floor", "canonical_last", "resistance_bounds", "search_passes",
+                    "maximum_candidates", "maximum_recorded_samples", "minimum_positive_gap"}
 EXECUTION_FIELDS = {"kind", "schema_version", "execution", "job_sha256", "attempt_id",
                     "source_recognition_sha256", "model_sha256", "model_revision", "transaction_sha256",
                     "calibration_status", "frequency_hz", "model_ticks", "model_time_begin", "model_time_end",
@@ -59,8 +61,10 @@ def _record(path, root):
 
 
 @_evidence_boundary
-def validate_job(job, source_case):
-    require(type(job) is dict and set(job) == JOB_FIELDS and job["kind"] == "timelearner_native_calibration_job"
+def validate_job(job, source_case, *, post_tune=False):
+    fields = JOB_FIELDS | ({"post_tune"} if post_tune else set())
+    kind = "timelearner_native_post_tune_job" if post_tune else "timelearner_native_calibration_job"
+    require(type(job) is dict and set(job) == fields and job["kind"] == kind
             and type(job["schema_version"]) is int and job["schema_version"] == 1, "unknown_native_calibration_job")
     _digest(job)
     source = job["source_recognition"]
@@ -107,15 +111,42 @@ def validate_job(job, source_case):
         require(equal(ticks, round(ticks)) and ticks+1 <= q["maximum_samples"], "worker_trial_window_or_sample_budget")
         signature = (q["label"], q["pattern_hash"])
         require(samples.setdefault(q["sample_id"], signature) == signature, "worker_sample_collision")
-    return {"job_sha256": job["sha256"], "primary_source_checked": True, "effective_model_checked": False,
-            "specification_sha256": sha(spec), "conditions_digest": identity["conditions_digest"]}
+    result = {"job_sha256": job["sha256"], "primary_source_checked": True, "effective_model_checked": False,
+              "specification_sha256": sha(spec), "conditions_digest": identity["conditions_digest"]}
+    if post_tune:
+        p = job["post_tune"]
+        require(source["kind"] == "timelearner_recognition_state" and source["conversion_spec"]["schema_version"] == 1,
+                "post_tune_worker_requires_unmodified_base_recognition")
+        require(type(p) is dict and set(p) == POST_TUNE_FIELDS and
+                p["mode"] in {"off", "keep_done", "canon_rmin", "flat_last_r", "search_synthetic"} and
+                p["metric"] in {"auto", "ltzone", "soma_sum"}, "unknown_worker_post_tune_specification")
+        edit = p["mode"] in {"canon_rmin", "flat_last_r", "search_synthetic"}
+        floor = p["mode"] in {"canon_rmin", "search_synthetic"}
+        require((number(p["canonical_floor"]) > 0 if floor else number(p["canonical_floor"]) == 0) and
+                (number(p["canonical_last"]) > 0 if edit else number(p["canonical_last"]) == 0),
+                "unused_or_invalid_worker_post_tune_physics")
+        bounds = p["resistance_bounds"]
+        require(type(bounds) is list and len(bounds) == (len(source["recognition_inputs"]) if edit else 0) and
+                all(type(b) is dict and set(b) == {"minimum", "maximum"} and
+                    0 < number(b["minimum"]) <= number(b["maximum"]) for b in bounds), "invalid_worker_post_tune_bounds")
+        require(1 <= count(p["search_passes"]) <= 128 and 1 <= count(p["maximum_candidates"]) <= 4096 and
+                1 <= count(p["maximum_recorded_samples"]) <= 100000000 and number(p["minimum_positive_gap"]) >= 0,
+                "invalid_worker_post_tune_budget")
+        if p["metric"] == "ltzone" or (p["metric"] == "auto" and not model["branch"]):
+            require(all(q["record_threshold_potential"] for q in trials), "post_tune_metric_samples_required")
+        result["conditions_digest"] = sha({"grid_conditions_digest": identity["conditions_digest"], "post_tune": p,
+                                           "maximum_model_ticks": job["maximum_model_ticks"]})
+        result["post_tune_specification_sha256"] = sha(p)
+    return result
 
 
 @_evidence_boundary
-def audit_execution(directory, job, source_case):
+def audit_execution(directory, job, source_case, *, post_tune=False):
     directory = Path(directory)
     execution = load(directory/"execution.json")
-    require(set(execution) == EXECUTION_FIELDS and execution["kind"] == "timelearner_native_calibration_execution"
+    fields = (EXECUTION_FIELDS-{"calibration_status"})|{"post_tune_status"} if post_tune else EXECUTION_FIELDS
+    kind = "timelearner_native_post_tune_execution" if post_tune else "timelearner_native_calibration_execution"
+    require(set(execution) == fields and execution["kind"] == kind
             and type(execution["schema_version"]) is int and execution["schema_version"] == 1,
             "unknown_native_calibration_execution")
     _digest(execution)
@@ -133,11 +164,19 @@ def audit_execution(directory, job, source_case):
     require(ticks <= job["maximum_model_ticks"] and equal(number(execution["model_time_end"])-number(execution["model_time_begin"]),
             ticks/job["frequency_hz"]), "worker_model_clock_changed")
     report, model = load(directory/"transaction.json"), load(directory/"model.json")
-    audit = audit_native_calibration_transaction(report, source_case)
+    if post_tune:
+        from .posttune_transaction_evidence import audit_posttune_transaction
+        audit = audit_posttune_transaction(report, source_case)
+    else:
+        audit = audit_native_calibration_transaction(report, source_case)
+    maximum_field = "maximum_calibration_candidates" if post_tune else "maximum_candidates"
+    declaration = report["confirmation_specification"] if post_tune else {key: report[key] for key in SPEC_FIELDS}
     require(report["source_recognition"] == job["source_recognition"] and report["thresholds"] == job["thresholds"] and
-            report["maximum_candidates"] == job["maximum_candidates"] and report["trials"] == job["trials"] and
-            {key: report[key] for key in SPEC_FIELDS} == job["specification"], "worker_declared_design_changed")
-    require(execution["calibration_status"] == report["status"] and execution["transaction_sha256"] == report["sha256"] and
+            report[maximum_field] == job["maximum_candidates"] and report["trials"] == job["trials"] and
+            declaration == job["specification"], "worker_declared_design_changed")
+    if post_tune:
+        require({key: report[key] for key in POST_TUNE_FIELDS} == job["post_tune"], "worker_post_tune_conditions_changed")
+    require(execution["post_tune_status" if post_tune else "calibration_status"] == report["status"] and execution["transaction_sha256"] == report["sha256"] and
             execution["model_sha256"] == model["sha256"] and execution["model_revision"] == model["model_revision"],
             "worker_model_result_binding_changed")
     if report["status"] == "calibrated":
@@ -153,10 +192,10 @@ def audit_execution(directory, job, source_case):
 
 
 @_evidence_boundary
-def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds):
+def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds, *, post_tune=False):
     job_path, source_path = Path(job_path).resolve(strict=True), Path(source_path).resolve(strict=True)
     job = load(job_path)
-    preflight = validate_job(job, load_case(source_path))
+    preflight = validate_job(job, load_case(source_path), post_tune=post_tune)
     runtime = load(Path(runtime_path).resolve(strict=True)); executable = verify_runtime(runtime)
     require(number(maximum_wall_seconds) > 0, "invalid_worker_wall_budget")
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
@@ -169,18 +208,18 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds):
         require(not path.is_symlink() and path.is_file(), "worker_primary_missing_or_symlink")
         (primaries/path.name).write_bytes(path.read_bytes())
     source_case = load_case(primaries/source_path.name)
-    require(validate_job(job, source_case) == preflight, "worker_source_changed_during_snapshot")
+    require(validate_job(job, source_case, post_tune=post_tune) == preflight, "worker_source_changed_during_snapshot")
     _write(inputs/"job.json", job)
     process = execute(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
-        "--timelearner-calibrate", str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
+        "--timelearner-posttune" if post_tune else "--timelearner-calibrate", str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
         executable.parent, output/"process", maximum_wall_seconds)
     verify_runtime(runtime)
     require(process["execution"] != "completed" or process["runtime_provenance"] == "loaded_files_captured",
             "worker_loaded_runtime_provenance_missing")
-    audit = audit_execution(output/"native", job, source_case) if process["execution"] == "completed" else None
+    audit = audit_execution(output/"native", job, source_case, post_tune=post_tune) if process["execution"] == "completed" else None
     analysis_code = [{"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                      for p in sorted(Path(__file__).parent.glob("*.py"))]
-    result = {"kind": "timelearner_calibration_run_manifest", "schema_version": 1,
+    result = {"kind": "timelearner_post_tune_run_manifest" if post_tune else "timelearner_calibration_run_manifest", "schema_version": 1,
               "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
               "attempt_id": job["specification"]["attempt_id"], "job_sha256": job["sha256"],
               "source_package_path": (primaries/source_path.name).relative_to(output).as_posix(),
@@ -193,14 +232,14 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds):
 
 
 @_evidence_boundary
-def audit_run_manifest(path):
+def audit_run_manifest(path, *, post_tune=False):
     """Portable artifact audit; does not attest an arbitrary process record."""
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
     require(set(manifest) == {"kind", "schema_version", "execution", "validity", "attempt_id", "job_sha256",
             "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
             "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} and
-            manifest["kind"] == "timelearner_calibration_run_manifest" and type(manifest["schema_version"]) is int and
+            manifest["kind"] == ("timelearner_post_tune_run_manifest" if post_tune else "timelearner_calibration_run_manifest") and type(manifest["schema_version"]) is int and
             manifest["schema_version"] == 1 and manifest["independent_partition_verified"] is False and
             manifest["evaluation_verdict"] is None, "unknown_calibration_run_manifest")
     records = manifest["artifacts"]
@@ -221,7 +260,7 @@ def audit_run_manifest(path):
             PurePosixPath(manifest["source_package_path"]).parent == PurePosixPath("input/source"),
             "worker_source_package_path_changed")
     job = load(root/"input/job.json");source_case = load_case(root/manifest["source_package_path"])
-    require(validate_job(job, source_case) == manifest["preflight"] and manifest["job_sha256"] == job["sha256"] and
+    require(validate_job(job, source_case, post_tune=post_tune) == manifest["preflight"] and manifest["job_sha256"] == job["sha256"] and
             manifest["attempt_id"] == job["specification"]["attempt_id"], "worker_run_job_scope_changed")
     process, runtime = load(root/"process/result.json"), load(root/"process/runtime.json")
     from .runtime import digest_json, runtime_content_identity
@@ -231,7 +270,7 @@ def audit_run_manifest(path):
     request = load(root/"process/request.json")
     arguments = request["arguments"]
     require(type(arguments) is list and len(arguments) == 6 and all(type(v) is str for v in arguments) and
-            arguments[::2] == ["--app-ini", "--timelearner-calibrate", "--timelearner-output"] and
+            arguments[::2] == ["--app-ini", "--timelearner-posttune" if post_tune else "--timelearner-calibrate", "--timelearner-output"] and
             arguments[1] == runtime["app_ini"]["path"], "worker_run_process_arguments_changed")
     original_output = PurePosixPath(arguments[5])
     require(original_output.is_absolute() and original_output.name == "native" and
@@ -248,7 +287,7 @@ def audit_run_manifest(path):
                 owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
                 type(loaded) is list and expected_executable in loaded and process["returncode"] == 0 and
                 process["ownership_scope"] == "launched_executable_only", "worker_run_owned_runtime_changed")
-    audit = audit_execution(root/"native", job, source_case) if process["execution"] == "completed" else None
+    audit = audit_execution(root/"native", job, source_case, post_tune=post_tune) if process["execution"] == "completed" else None
     require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution") and
             (not audit or process["runtime_provenance"] == "loaded_files_captured"), "worker_run_analysis_changed")
     return {"run_evidence_consistent": True, "full_grid_model_binding_verified": bool(audit and

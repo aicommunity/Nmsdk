@@ -37,9 +37,9 @@ def analyze(args: argparse.Namespace) -> dict:
         from .recognition_metrics import load_evaluation, score_recognition_evaluation
         require(args.model is not None, "recognition_model_package_required")
         result = score_recognition_evaluation(*load_evaluation(source), load(args.model.resolve(strict=True)))
-    elif args.format == "calibration-run":
+    elif args.format in ("calibration-run", "posttune-run"):
         from .native_calibration_worker import audit_run_manifest
-        result = audit_run_manifest(source)
+        result = audit_run_manifest(source, post_tune=args.format == "posttune-run")
     elif args.format == "pipeline-run":
         from .native_pipeline_worker import audit_run_manifest
         result = audit_run_manifest(source)
@@ -108,7 +108,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun"), required=True)
     analysis.add_argument("--model", type=Path, help="recognition package required for recognition trial/evaluation")
     analysis.add_argument("--source-solo", type=Path, help="original learned-state package with primary trial siblings, required for threshold candidate")
     analysis.add_argument("--evaluation", type=Path, help="independently declared evaluation spec required for native calibration assessment")
@@ -137,6 +137,12 @@ def main(argv: list[str] | None = None) -> int:
     calibration.add_argument("--selection", type=Path, help="required for confirmation; recomputed against primary search evidence")
     calibration.add_argument("--confirmation", type=Path, help="one fresh measurement-set descriptor required for confirmation")
     calibration.add_argument("--output", type=Path, required=True, help="new result file; never overwritten")
+    posttune = commands.add_parser("posttune", help="owned native measured weight search and real threshold confirmation")
+    posttune.add_argument("specification", type=Path)
+    posttune.add_argument("--source-solo", type=Path, required=True)
+    posttune.add_argument("--runtime-manifest", type=Path, required=True)
+    posttune.add_argument("--wall-seconds", type=float, required=True)
+    posttune.add_argument("--output", type=Path, required=True, help="new run directory; never overwritten")
     bundle = commands.add_parser("bundle", help="lossless primary archives; full plots remain in worker cache")
     bundle.add_argument("action", choices=("pack-native-tests", "verify", "extract"))
     bundle.add_argument("source", type=Path, help="native contract for pack; bundle directory otherwise")
@@ -150,6 +156,17 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     history.add_argument("--map", type=Path)
     args = parser.parse_args(argv)
+    if args.command == "posttune":
+        from .native_evidence import EvidenceError
+        from .native_calibration_worker import run_job
+        try:
+            result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output,
+                             args.wall_seconds, post_tune=True)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result["validity"] == "valid" else 2
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"validity": "invalid", "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
     if args.command in ("train", "export", "evaluate"):
         from .native_evidence import EvidenceError, require
         from .native_pipeline_worker import run_job
