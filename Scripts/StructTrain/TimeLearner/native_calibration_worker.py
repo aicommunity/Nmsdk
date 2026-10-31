@@ -3,7 +3,7 @@
 This runs a saved recognition model. It does not perform Train, prove independent
 data partitioning or replace the full experiment scheduler/ConditionSpec pipeline.
 """
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import hashlib
 import json
 
@@ -167,9 +167,52 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds):
     result = {"kind": "timelearner_calibration_run_manifest", "schema_version": 1,
               "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
               "attempt_id": job["specification"]["attempt_id"], "job_sha256": job["sha256"],
+              "source_package_path": (primaries/source_path.name).relative_to(output).as_posix(),
               "runtime_fingerprint": runtime["runtime_fingerprint"], "source_closure": runtime["source_closure"],
               "preflight": preflight, "analysis": audit, "analysis_code": analysis_code,
               "artifacts": [_record(p, output) for p in sorted(output.rglob("*")) if p.is_file()],
               "independent_partition_verified": False, "evaluation_verdict": None}
     _write(output/"run-manifest.json", _signed(result))
     return result
+
+
+def audit_run_manifest(path):
+    """Portable artifact audit; does not attest an arbitrary process record."""
+    path = Path(path).resolve(strict=True);root = path.parent
+    manifest = load(path);_digest(manifest)
+    require(set(manifest) == {"kind", "schema_version", "execution", "validity", "attempt_id", "job_sha256",
+            "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
+            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} and
+            manifest["kind"] == "timelearner_calibration_run_manifest" and type(manifest["schema_version"]) is int and
+            manifest["schema_version"] == 1 and manifest["independent_partition_verified"] is False and
+            manifest["evaluation_verdict"] is None, "unknown_calibration_run_manifest")
+    records = manifest["artifacts"]
+    require(type(records) is list and all(type(r) is dict and set(r) == {"path", "bytes", "sha256"} and
+            type(r["path"]) is str for r in records), "unknown_worker_artifact_record")
+    names = {r["path"] for r in records}
+    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in root.rglob("*")
+            if p.is_file() and p != path}, "worker_run_artifact_closure_changed")
+    for record in records:
+        relative = PurePosixPath(record["path"])
+        require(not relative.is_absolute() and ".." not in relative.parts and "\\" not in record["path"],
+                "worker_artifact_path_escape")
+        actual = root/record["path"]
+        require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == record,
+                "worker_run_artifact_content_changed")
+    require(type(manifest["source_package_path"]) is str and manifest["source_package_path"] in names and
+            PurePosixPath(manifest["source_package_path"]).parent == PurePosixPath("input/source"),
+            "worker_source_package_path_changed")
+    job = load(root/"input/job.json");source_case = load_case(root/manifest["source_package_path"])
+    require(validate_job(job, source_case) == manifest["preflight"] and manifest["job_sha256"] == job["sha256"] and
+            manifest["attempt_id"] == job["specification"]["attempt_id"], "worker_run_job_scope_changed")
+    process, runtime = load(root/"process/result.json"), load(root/"process/runtime.json")
+    from .runtime import digest_json, runtime_content_identity
+    require(manifest["execution"] == process["execution"] and manifest["runtime_fingerprint"] ==
+            process["runtime_fingerprint"] == runtime["runtime_fingerprint"] == digest_json(runtime_content_identity(runtime))
+            and manifest["source_closure"] == runtime["source_closure"], "worker_run_runtime_scope_changed")
+    audit = audit_execution(root/"native", job, source_case) if process["execution"] == "completed" else None
+    require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution") and
+            (not audit or process["runtime_provenance"] == "loaded_files_captured"), "worker_run_analysis_changed")
+    return {"run_evidence_consistent": True, "full_grid_model_binding_verified": bool(audit and
+            audit["full_grid_model_binding_verified"]), "native_execution_verified": False,
+            "independent_partition_verified": False, "evaluation_verdict": None}

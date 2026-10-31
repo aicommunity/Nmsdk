@@ -12,7 +12,7 @@ import unittest
 
 from ..learned_evidence import load_case
 from ..model_identity import canonical_model_sha256 as sha
-from ..native_calibration_worker import audit_execution, run_job, validate_job
+from ..native_calibration_worker import audit_execution, audit_run_manifest, run_job, validate_job
 from ..native_evidence import EvidenceError, load
 
 
@@ -126,6 +126,20 @@ class NativeCalibrationWorkerTest(unittest.TestCase):
                 self.assertTrue(result["analysis"]["full_grid_model_binding_verified"])
                 self.assertFalse(result["independent_partition_verified"])
                 self.assertIsNone(result["evaluation_verdict"])
+                self.assertTrue(audit_run_manifest(output/"run-manifest.json")["full_grid_model_binding_verified"])
+                report_stdout = io.StringIO()
+                with contextlib.redirect_stdout(report_stdout):
+                    report_status = main(["analyze", str(output/"run-manifest.json"), "--format", "calibration-run"])
+                self.assertEqual(report_status, 0, report_stdout.getvalue())
+                self.assertTrue(json.loads(report_stdout.getvalue())["analysis"]["run_evidence_consistent"])
+                original = (output/"run-manifest.json").read_bytes()
+                try:
+                    forged = copy.deepcopy(result);forged["runtime_fingerprint"] = "0"*64
+                    save(output/"run-manifest.json", resign(forged))
+                    with self.assertRaisesRegex(EvidenceError, "worker_run_runtime_scope_changed"):
+                        audit_run_manifest(output/"run-manifest.json")
+                finally:
+                    (output/"run-manifest.json").write_bytes(original)
                 self.assertEqual(load(output/"process/owned-process.json")["executable"],
                                  load(self.root/"runtime-before.json")["executable"]["path"])
                 snapshot = output/"input/source"/source.name
