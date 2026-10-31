@@ -37,6 +37,9 @@ def analyze(args: argparse.Namespace) -> dict:
         from .recognition_metrics import load_evaluation, score_recognition_evaluation
         require(args.model is not None, "recognition_model_package_required")
         result = score_recognition_evaluation(*load_evaluation(source), load(args.model.resolve(strict=True)))
+    elif args.format == "calibration-run":
+        from .native_calibration_worker import audit_run_manifest
+        result = audit_run_manifest(source)
     elif args.format == "calibration-transaction":
         from .calibration_transaction_evidence import audit_native_calibration_transaction
         from .learned_evidence import load_case
@@ -86,7 +89,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "calibration-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient"), required=True)
     analysis.add_argument("--model", type=Path, help="recognition package required for recognition trial/evaluation")
     analysis.add_argument("--source-solo", type=Path, help="original learned-state package with primary trial siblings, required for threshold candidate")
     analysis.add_argument("--evaluation", type=Path, help="independently declared evaluation spec required for native calibration assessment")
