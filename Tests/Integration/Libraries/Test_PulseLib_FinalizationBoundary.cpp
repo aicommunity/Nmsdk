@@ -76,7 +76,6 @@ template<class Owner> void Boundary(Scenario scenario)
             UEPtr<UContainer> node=flag;ASSERT_NE(model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;
             ASSERT_TRUE(owner->IsNeedToTrain.SetPointer(0,&flag->Value));
         }
-        else owner->IsNeedToTrain=true;
         owner->EnablePostTrainTuning=true;owner->EnablePostTrainMidThreshold=false;
         owner->AutoCalibrateFixedLTZThreshold=true;owner->PostTrainTipResistanceMode=PostTrainTune::kPostTipKeepDone;
         owner->PostTrainSilentThreshold=2.;owner->PostTrainSyntheticFoilCount=3;owner->PostTrainTipSearchIters=7;
@@ -89,7 +88,7 @@ template<class Owner> void Boundary(Scenario scenario)
         EXPECT_EQ(ReadNativeFinalizationControls(*owner),controls);
         auto copy=frozen->Controls();copy["parameters"]=QJsonObject{};EXPECT_EQ(frozen->Controls(),controls);
         const auto parameters=frozen->Controls()["parameters"].toObject();
-        EXPECT_TRUE(parameters["IsNeedToTrain"].toBool());EXPECT_TRUE(parameters["EnablePostTrainTuning"].toBool());
+        EXPECT_EQ(parameters["IsNeedToTrain"].toBool(),bool(flag));EXPECT_TRUE(parameters["EnablePostTrainTuning"].toBool());
         EXPECT_FALSE(parameters["EnablePostTrainMidThreshold"].toBool());EXPECT_TRUE(parameters["AutoCalibrateFixedLTZThreshold"].toBool());
         if(flag)
         {
