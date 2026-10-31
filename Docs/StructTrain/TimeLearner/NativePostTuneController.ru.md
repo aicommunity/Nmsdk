@@ -325,7 +325,8 @@ Schema 1 по умолчанию продолжает Calibrate и сохран�
 `Encode/DecodeNativePostTuneControlsV2` явно записывают schema 2 и finalization.
 Попытка сохранить fixed-режим старым codec запрещена, чтобы не потерять фактор.
 Production Console/job/worker root 2d6ab1a0 добавляют explicit schema-2 job;
-серверная проверка ещё не принята. Schema 1 остаётся прежним API.
+scoped серверная проверка normal/ASan выполнена; подробности ниже.
+Schema 1 остаётся прежним API.
 Python analyze/report transaction уже поддерживают schema-2 native reports;
 это не поддержка production fixed job. При lifecycle interference raw fixed
 обозначает объявленную политику, а derived calibration status — `unverified`;
@@ -398,5 +399,15 @@ portable regression runs. Fixed design fingerprint не утверждает в�
 selected_package при weights_selected, с calibrated_package при calibrated
 или с исходной моделью при подтверждённом rollback. Модель selected не получает
 нового Exact или встроенного selection proof. Полная матрица режимов,
-normal/ASan production-приёмка и configured learner phase dispatch остаются
-незакрытыми до отдельных свидетельств.
+configured learner phase dispatch остаются незакрытыми. Scoped production
+normal/ASan проверка выполнена отдельно: по шесть actual owned jobs, 3 preflight
+checks и 4 final worker checks (включая повтор preflight), четыре actual Console
+rejections без native output. Обе topology fixtures: fixed weights_selected;
+Classic calibrate calibrated, Branch calibrate search_unresolved. Legacy и
+explicit v2 calibrate сохраняют исходные transaction/model bytes.
+[Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-normal-a1/README.md):
+317 members; [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-console-asan-a1/README.md):
+322 members, leak detection off. Каждая упаковка замыкает шесть run snapshots /
+252 artifact entries, все hashes повторно проверены после merge. Shared design
+validator также прошёл 4/4 portable regression tests на всех 18 прежних runs.
+Это не приёмка полной матрицы или этапа 8.

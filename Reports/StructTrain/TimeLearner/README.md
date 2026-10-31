@@ -9,6 +9,8 @@ declared committed blobs; upstream scientific completeness and full producer mig
 [Actual production eight-repository closure, primary/visual artifact checks and receipts](s10-production-closure-publication-a1/README.md)
 exercise schema 2 beyond fixtures; the complete stage 10 remains open.
 
+- [Production schema-2 fixed/calibrate and legacy: six owned normal jobs plus rejection gates](s08-native-posttune-fixed-console-normal-a1/README.md).
+- [The same production controls under ASan, with all 18 original portable regressions](s08-native-posttune-fixed-console-asan-a1/README.md).
 - [Fixed-threshold soma/input reports: 32 trial-soma pairs and 12 reviewed PNG](s08-native-posttune-fixed-visual-normal-a3/README.md).
 - [Fixed-threshold native PostTune: normal, repaired complete portable source closure](s08-native-posttune-fixed-normal-a2/README.md).
 - [Fixed-threshold native PostTune: 12 ASan cases, legacy A/B and latest reader gates](s08-native-posttune-fixed-asan-a1/README.md).
