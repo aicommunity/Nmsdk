@@ -57,6 +57,8 @@ class NativeCalibrationTransactionReportTest(unittest.TestCase):
                 folder = path/item["name"];manifest = load(folder/"manifest.json")
                 count = 1 if path.name.startswith("Branch") else 2
                 figures = manifest["figures"]
+                _, observations = load_evaluation(folder/"primary/evaluation.json")
+                by_id = {o["trial_id"]: o for o in observations}
                 self.assertEqual({(f["presentation_index"], f["descriptor"]["index"]) for f in figures},
                                  {(i, j) for i in range(2) for j in range(count)})
                 total += len(figures)
@@ -68,7 +70,11 @@ class NativeCalibrationTransactionReportTest(unittest.TestCase):
                             self.assertGreaterEqual(view["minimum_native_tick_pixels_on_zoom"], 8)
                         png, svg, pdf = (folder/p for p in view["files"])
                         with Image.open(png) as im: self.assertEqual(im.size, (1920, 960))
-                        self.assertIn("Actual shared input", svg.read_text())
+                        text = svg.read_text()
+                        self.assertIn("Actual shared input", text)
+                        spikes = by_id[figure["trial_id"]]["spike_times"]
+                        if any(view["begin"] <= event <= view["end"] for event in spikes):
+                            self.assertIn("Actual LT spike event", text)
                         self.assertTrue(pdf.read_bytes().startswith(b"%PDF-"))
         self.assertEqual(total, 30)
 
