@@ -40,6 +40,23 @@ class OwnedPostTuneWorkerTest(unittest.TestCase):
                 self.assertFalse(phase["dynamic_checkpoint"])
                 self.assertIsNone(phase["evaluation_verdict"])
 
+    def test_fixed_explicit_probe_jobs_keep_model_threshold_and_record_fresh_responses(self):
+        root = self.root.parent/"fixed-runs"
+        for topology in ("Classic", "Branch"):
+            folder = root/(topology+"-fixed")
+            with self.subTest(topology=topology):
+                audit = audit_run_manifest(folder/"run-manifest.json",post_tune=True)
+                self.assertTrue(audit["run_evidence_consistent"])
+                job, execution = load(folder/"input/job.json"), load(folder/"native/execution.json")
+                report = load(folder/"native/transaction.json")
+                self.assertEqual(job["schema_version"],3)
+                self.assertEqual(execution["schema_version"],2)
+                self.assertEqual(report["status"],"weights_selected")
+                self.assertEqual(report["finalization"],"keep_fixed_threshold")
+                self.assertTrue(report["final_threshold_responses_observed"])
+                self.assertFalse(report["recognition_success_confirmed"])
+                self.assertEqual(len(load(folder/"native/phase-execution.json")["advance_times"]),execution["model_ticks"])
+
     def test_resigned_corrupt_phase_receipts_reject(self):
         # Production source, report, model and responses remain byte-identical.
         # Re-sign the changed file inventory so semantic checks must reject it.
