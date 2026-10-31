@@ -23,8 +23,8 @@ Raw `calibration_status=fixed` задаёт политику; при `recovery_r
 [Normal bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-normal-a2/README.md):
 134 members / 1158144 compressed bytes; [ASan bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-asan-a1/README.md):
 117 members / 1154916 bytes. Все archive/member hashes повторно проверены
-после локального merge. Production Console/job/worker пока schema 1; fixed API
-не подключён к production job или learner properties. Оба optional-mode guards
+после локального merge. Production fixed job добавлен позднее в 2d6ab1a0, его приёмка описана ниже.
+Learner properties пока к fixed API не подключены. Оба optional-mode guards
 сохраняются. Отдельный configured phase plan, безопасное продолжение и полная
 mode/profile/frequency matrix остаются открытыми.
 
@@ -49,12 +49,23 @@ Shared codec предыдущего подэтапа также проверен
 2/2 native (459.529 s), 12/12 reader (157.913 s), 220 members / 3601844 bytes.
 Оба N0 снимка: два входа, 2000 Гц, без приёмки остальных профилей и частот.
 
-Новая fixed visual серия ещё не принята. Попытка report A1 выявила неполную
-упаковку до рендеринга. A2 не получила в analysis clone commit исправленной
-упаковки; `git show` завершился ошибкой до извлечения данных. A3 явно fetch-ит
-оба immutable commits, восстановила и дважды проверила 134 member; прошли
-10/10 evidence/plot checks (27.621 s). Рендеринг идёт отдельно на M40 Data.
-Ни один из этих инфраструктурных отказов не является неудачным обучением.
+Fixed visual A3 завершена: 12 отчётов / 32 полные trial-soma реакции,
+1530 cache files / 125632076 bytes на M40 Data. Все cache SHA256 проверены;
+в Git сохранены 122 metadata members / 145084 compressed bytes и 12 PNG.
+[Bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-fixed-visual-normal-a3/README.md)
+проверен после merge; все 12 PNG просмотрены в 1920×960. Обзор и первый zoom
+содержат фактические входные импульсы, оси/легенды/потенциал читаются. Полный
+cache, PDF/SVG и научный результат не приняты. Fixed roundtrip target остаётся FN;
+последующая отдельная calibration дала Classic calibrated, Branch nonseparable.
+A1 выявила неполную исходную упаковку до рендеринга; A2 не получила immutable
+commit исправленного input в analysis clone; A3 fetch-ит оба commit явно.
+10/10 evidence/plot checks прошли за 27.621 s; native rerun не выполнялся.
+
+Production fixed job реализован в root 2d6ab1a0, но ещё не принят: серверная
+ASan сборка Console завершилась, 3/3 preflight tests прошли (5.996 s).
+Идут шесть owned Console controls: legacy, explicit v2 calibrate и fixed
+для каждого learner; сравнение legacy bytes, полная run closure и итоговые
+worker tests ещё ожидаются. Learner-property phase dispatch остаётся открытым.
 
 Новая команда `report --format posttune-run` (root `4c497f41d`) связывает
 графики с production run manifest. Все 18 normal production reports завершены:
