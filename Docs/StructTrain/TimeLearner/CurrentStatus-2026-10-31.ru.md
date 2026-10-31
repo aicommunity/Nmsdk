@@ -29,10 +29,10 @@ production calibration/PostTune controller.
 |---|---|
 | Potential baseline, PulseLib 7f17735 | 16 native, 29 independent и отдельные 8 частично перекрывающихся checks прошли; compact bundles опубликованы. Это собственный снимок. |
 | Raw validator/assessment, PulseLib 25cf6a5 | 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Полная ASan приёмка открыта. |
-| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate теперь завершён с exit 0; его собственный reader и публикация новых primary data ещё не завершены. ASan a2 выполняется. |
-| Persisted observations, PulseLib fece852 | Код и проверки roundtrip/corruption добавлены; syntax compilation прошла. Native normal/ASan gates ожидают свой source/build. |
-| Calibrated state, PulseLib 353882b → ce7e81e | Export/import/proof/owner mirror реализованы. Шесть production units первого снимка прошли syntax-only; изменённый NativeCalibratedState.cpp ce7e81e отдельно прошёл syntax-only. Model runtime gates a1/a2 не завершены. |
-| Frozen scorer/report, root b22c15fec | Реализованы, 9-test actual-package readers ожидают native outputs. 35/35 compatibility checks прошли без failures/errors/skips на старых native данных PulseLib 25cf6a5 (697.340 s); это не readback нового 16-case gate. |
+| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Полный normal 16/16 gate завершён с exit 0. Его reader a1 обнаружил ошибку glob в test setup; исправленный reader a2 выполняется на тех же данных, без повторного Train. ASan a2 выполняется. |
+| Persisted observations, PulseLib fece852 | Normal gate прошёл 2/2 Classic/Branch при 2000 Гц с roundtrip/corruption checks; исходные результаты ещё не опубликованы отдельным пакетом. ASan ожидает свой source/build. |
+| Calibrated state, PulseLib 353882b → ce7e81e | На первом снимке 353882b normal gate прошёл 2/2; import/export/Reset/frozen probes подтверждены. Усиленный ce7e81e прошёл syntax-only; его native a2 и ASan ещё не приняты. |
+| Frozen scorer/report, root b22c15fec | 9/9 actual-package checks на normal 353882b прошли (56.934 s); отдельные старые 5/5 — частично перекрывающийся запуск, не 14 уникальных tests. 35/35 compatibility checks прошли на старых native данных 25cf6a5 (697.340 s), отдельно от нового 16-case gate. Readers ce7e81e/ASan и report checks ещё ожидаются. |
 | Полные calibrated reports, root 590526997 | M40 job ожидает native и reader acceptance; затем построит все 4 patterns × все сомы Classic/Branch. 3 report checks ещё не выполнены. Полные изображения — cache, не bulk Git. |
 | develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
 
@@ -55,6 +55,15 @@ remote branch SHA проверен, исходный failure log сохранё�
 Старая isolated ASan попытка root 88b48711a / PulseLib dd35368 завершилась
 5/6 native cases: единственный failure — незарегистрированное имя генератора.
 Это не полный PASS и не ASan finding; исправленный снимок проверяется отдельно.
+
+Reader fix root `d5c74bad03f46cc66d5b1271ea923f05bce5c0b5`: glob
+`*_threshold_proposal.json` раньше включал новые `*_signed_bounds_threshold_proposal.json`
+в четыре базовых случая и падал в setUpClass. Теперь допускаются ровно четыре
+базовых файла и либо полный набор четырёх signed-domain файлов, либо его
+отсутствие в legacy snapshots. Неизвестные/неполные наборы не игнорируются.
+Общий math test проверяет оба домена по тем же actual frames. Собственный
+35-test reader `s08-threshold-signed-full-audit-normal-a2` выполняется на ранее
+успешном native gate; а1 и его диагностика сохраняются как неуспешная попытка.
 
 ## Журнал проверок и уточнений за день
 
