@@ -10,7 +10,7 @@ import shutil
 from .calibration_transaction_reports import _spec
 from .learned_evidence import load_case
 from .live_finalization_evidence import audit_completed_live_finalization, audit_pre_entry_live_finalization
-from .native_evidence import load, require
+from .native_evidence import EvidenceError, load, require
 from .plotting import plotting_runtime
 from .posttune_transaction_reports import render_posttune_transaction_data
 from .probe_reports import render_probe_set
@@ -24,7 +24,7 @@ def _write(path, value):
     path.write_bytes(gzip.compress(raw, mtime=0) if path.suffix == ".gz" else raw)
 
 
-def read_live_report_source(source: Path, inventory: Path):
+def _read_live_report_source(source: Path, inventory: Path):
     """The published inventory declares the primary set; the directory does not."""
     source, inventory = Path(source), Path(inventory)
     declared = load(inventory)
@@ -74,6 +74,15 @@ def read_live_report_source(source: Path, inventory: Path):
     require(case[0]["configuration"]["model"]["branch"] is (identity[1] == "Branch"),
             "live_report_filename_topology_mismatch")
     return record, case, [source.parent/name for name in packets], [by_name[name] for name in needed]
+
+
+def read_live_report_source(source: Path, inventory: Path):
+    try:
+        return _read_live_report_source(source, inventory)
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, IndexError, OverflowError) as error:
+        raise EvidenceError("malformed_live_report_source:" + str(error)) from error
 
 
 def render_live_finalization(source: Path, inventory: Path, output: Path):
