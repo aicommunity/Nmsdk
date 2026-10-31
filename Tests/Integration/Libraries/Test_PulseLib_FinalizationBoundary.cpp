@@ -409,7 +409,7 @@ TEST(NativeFinalizationClockHandoff,BranchAutomatic){ManagedFinalization<NNeuron
 TEST(NativeFinalizationClockHandoff,BranchExternal){ManagedFinalization<NNeuronTimeLearnerBranch>(1,false,true,false,true);}
 
 namespace {
-enum class LiveScenario { Fixed, Calibrate, Stopped, ControlDrift, ResetQueued, StopQueued, InvalidDesign, Multirate };
+enum class LiveScenario { Fixed, Calibrate, Stopped, ControlDrift, ResetQueued, StopQueued, InvalidDesign, Multirate, CancelArmed, CancelTraining, CancelQueued, CancelPostTune };
 template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario scenario)
 {
     const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
@@ -472,7 +472,7 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
         owner->SetConfiguredNativeEvidenceSinks({[&](const auto&,const auto&){samples.clear();},
             [&](const auto& sample){samples.push_back(sample);},[&](const auto& result) {
                 ++trial;if(!output)return;
-                const auto stem=name+(scenario==LiveScenario::Stopped?"_stopped_trial_":"_state_trial_")+std::to_string(trial);
+                const auto stem=name+((scenario==LiveScenario::Stopped || scenario==LiveScenario::CancelTraining)?"_stopped_trial_":"_state_trial_")+std::to_string(trial);
                 NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(stem)+".json",EncodeNativeProbeEvidence(result));
                 const auto path=QDir(QString::fromLocal8Bit(output)).filePath(QString::fromStdString(stem)+".csv");
                 std::ofstream stream(path.toStdString());stream.imbue(std::locale::classic());stream<<std::setprecision(17);
@@ -485,10 +485,16 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
         if(scenario==LiveScenario::Multirate)
             owner->template GetComponentL<NPulseNeuron>("Neuron",true)->SetGlobalTimeStep(1000);
         if(!connected)owner->IsNeedToTrain=true;
+        if(scenario==LiveScenario::CancelArmed)owner->CancelNativeLiveFinalization("fixture_cancel");
         bool queued=false,intervention=false;QJsonObject summary;
         std::size_t ticks=0;const std::size_t maximum=200000;
         while(!owner->NativeLiveFinalizationDone() && ticks<maximum) {
             model->Calculate();environment->IncreaseModelTimeByStep();++ticks;
+            if(scenario==LiveScenario::CancelTraining && ticks==2) {
+                const double time=environment->GetTime().GetDoubleTime();
+                owner->CancelNativeLiveFinalization("fixture_cancel");intervention=true;
+                EXPECT_EQ(environment->GetTime().GetDoubleTime(),time);
+            }
             const auto live=owner->NativeLiveFinalizationReport();
             if(live["status"]==QJsonValue("queued") && !queued) {
                 queued=true;EXPECT_FALSE(owner->HasNativeRecognitionState());
@@ -500,15 +506,50 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
                     NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_learned_state.json",solo);
                     NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_learned_summary.json",summary);
                 }
+                if(scenario==LiveScenario::CancelQueued){owner->CancelNativeLiveFinalization("fixture_cancel");intervention=true;}
                 if(scenario==LiveScenario::ControlDrift){owner->PostTrainMidMetric=(int(spec.metric)+1)%3;intervention=true;}
                 if(scenario==LiveScenario::ResetQueued){owner->Reset();intervention=true;}
                 if(scenario==LiveScenario::StopQueued){if(connected)flag->Value=false;else owner->IsNeedToTrain=false;intervention=true;}
+            }
+            if(scenario==LiveScenario::CancelPostTune && live["status"]==QJsonValue("post_tune")) {
+                const double time=environment->GetTime().GetDoubleTime();
+                owner->CancelNativeLiveFinalization("fixture_cancel");intervention=true;
+                EXPECT_EQ(environment->GetTime().GetDoubleTime(),time);
             }
             if(connected && scenario!=LiveScenario::StopQueued)EXPECT_TRUE(flag->Value.GetData());
         }
         EXPECT_TRUE(owner->NativeLiveFinalizationDone())<<owner->NativeLiveFinalizationReport()["reason"].toString().toStdString();
         const auto live=owner->NativeLiveFinalizationReport();QJsonObject final;NativeCalibrationMatrix frozen;
-        if(scenario==LiveScenario::InvalidDesign || scenario==LiveScenario::Multirate) {
+        if(scenario==LiveScenario::CancelArmed || scenario==LiveScenario::CancelQueued) {
+            EXPECT_EQ(queued,scenario==LiveScenario::CancelQueued);
+            EXPECT_FALSE(owner->HasNativeRecognitionState());
+            EXPECT_EQ(live["status"],QJsonValue("cancelled"));EXPECT_EQ(live["reason"],QJsonValue("fixture_cancel"));
+            if(scenario==LiveScenario::CancelArmed) {
+                EXPECT_EQ(trial,0u);EXPECT_TRUE(live["boundary"].isNull());EXPECT_TRUE(live["training_request"].toObject().isEmpty());
+                EXPECT_EQ(owner->NativeTrainingController().State(),NativeTrainingState::Idle);
+            } else EXPECT_TRUE(intervention);
+        } else if(scenario==LiveScenario::CancelTraining) {
+            EXPECT_TRUE(intervention);EXPECT_FALSE(queued);EXPECT_FALSE(owner->HasNativeRecognitionState());
+            EXPECT_EQ(live["status"],QJsonValue("stopped_diagnostic"));
+            EXPECT_EQ(owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+            EXPECT_FALSE(owner->NativeTrainingController().Certificate().has_value());
+            EXPECT_GT(trial,0u);EXPECT_FALSE(owner->NativeTrainingController().ObservedPackets().empty());
+            EXPECT_TRUE(live["boundary"].toObject()["diagnostic_only"].toBool());
+            EXPECT_TRUE(live["entry_model_time"].isNull());
+            const auto stopped=live["boundary"].toObject()["source_solo"].toObject();
+            summary=EncodeNativeTrainingState(owner->NativeTrainingController(),stopped["model_revision"].toString().toStdString(),owner->ReadNativeParameters());
+            if(output) {
+                NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_stopped_state.json",stopped);
+                NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_stopped_summary.json",summary);
+            }
+        } else if(scenario==LiveScenario::CancelPostTune) {
+            EXPECT_TRUE(intervention);EXPECT_TRUE(queued);EXPECT_TRUE(owner->HasNativeRecognitionState());
+            EXPECT_EQ(live["status"],QJsonValue("completed"));
+            const auto phase=live["post_tune"].toObject();
+            EXPECT_EQ(phase["status"],QJsonValue("cancelled"));EXPECT_TRUE(phase["source_restored"].toBool());
+            EXPECT_EQ(owner->ExportNativeRecognitionState(implementation),phase["source_recognition"].toObject());
+            EXPECT_TRUE(live["post_tune_execution"].toObject()["done"].toBool());
+        } else if(scenario==LiveScenario::InvalidDesign || scenario==LiveScenario::Multirate) {
             EXPECT_FALSE(queued);EXPECT_FALSE(owner->HasNativeRecognitionState());EXPECT_EQ(trial,0u);
             EXPECT_EQ(live["status"],QJsonValue("failed"));
             EXPECT_EQ(live["reason"],QJsonValue(scenario==LiveScenario::InvalidDesign?
@@ -544,6 +585,19 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
                 frozen.requests.push_back(q);frozen.observations.push_back(std::move(*observed));
             }
         }
+        if(int(scenario)>=int(LiveScenario::CancelArmed)) {
+            // Cancel is idempotent, does not tick, never writes a connected flag,
+            // and an unchanged true provider cannot restart the cancelled plan.
+            const auto terminal=owner->NativeLiveFinalizationReport();
+            const double time=environment->GetTime().GetDoubleTime();
+            const auto trialCount=trial;owner->CancelNativeLiveFinalization("duplicate_cancel");
+            EXPECT_EQ(environment->GetTime().GetDoubleTime(),time);
+            EXPECT_EQ(owner->NativeLiveFinalizationReport(),terminal);
+            for(int i=0;i<2;++i){model->Calculate();environment->IncreaseModelTimeByStep();}
+            EXPECT_EQ(owner->NativeLiveFinalizationReport(),terminal);EXPECT_EQ(trial,trialCount);
+            if(connected)EXPECT_TRUE(flag->Value.GetData());
+            if(mode==0 && !connected)EXPECT_FALSE(owner->IsNeedToTrain.GetData());
+        }
         if(output)NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+".json",
             {{"kind","native_live_finalization_control"},{"schema_version",1},{"scenario",int(scenario)},
              {"calculate_mode",mode},{"connected",connected},{"cold_training",true},{"live",live},
@@ -573,3 +627,19 @@ TEST(NativeLiveFinalization,ClassicInvalidDesign){LiveFinalization<NNeuronTimeLe
 TEST(NativeLiveFinalization,BranchInvalidDesign){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::InvalidDesign);}
 TEST(NativeLiveFinalization,ClassicMultirate){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::Multirate);}
 TEST(NativeLiveFinalization,BranchMultirate){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::Multirate);}
+
+TEST(NativeLiveFinalization,ClassicCancelArmed){LiveFinalization<NNeuronTimeLearner>(1,true,LiveScenario::CancelArmed);}
+
+TEST(NativeLiveFinalization,BranchCancelArmed){LiveFinalization<NNeuronTimeLearnerBranch>(1,true,LiveScenario::CancelArmed);}
+
+TEST(NativeLiveFinalization,ClassicCancelTraining){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::CancelTraining);}
+
+TEST(NativeLiveFinalization,BranchCancelTraining){LiveFinalization<NNeuronTimeLearnerBranch>(0,false,LiveScenario::CancelTraining);}
+
+TEST(NativeLiveFinalization,ClassicCancelQueued){LiveFinalization<NNeuronTimeLearner>(1,true,LiveScenario::CancelQueued);}
+
+TEST(NativeLiveFinalization,BranchCancelQueued){LiveFinalization<NNeuronTimeLearnerBranch>(1,true,LiveScenario::CancelQueued);}
+
+TEST(NativeLiveFinalization,ClassicCancelPostTune){LiveFinalization<NNeuronTimeLearner>(1,true,LiveScenario::CancelPostTune);}
+
+TEST(NativeLiveFinalization,BranchCancelPostTune){LiveFinalization<NNeuronTimeLearnerBranch>(1,true,LiveScenario::CancelPostTune);}
