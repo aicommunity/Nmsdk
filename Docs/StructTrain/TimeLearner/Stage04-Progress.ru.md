@@ -230,10 +230,40 @@ UContainer::Calculate: активный container при InitFlag=false проп
 возвращают true. Это несоответствие принятому пользовательскому контракту
 lifecycle bool, а не доказательство корректной инициализации или обучения.
 
-Runtime-проверка и исправление ещё не выполнены. Адресный gate: реальный
+Исправление Rdk 6084bfa703ebbe0d85d2a588dfe8f79c74cd1144 меняет только
+return false на true в этом раннем выходе. Документ Engine-Detailed уточняет
+порядок hooks, детей и пропуск неинициализированного контейнера. Адресный gate: реальный
 неинициализированный model/container со штатным дочерним компонентом; Calculate
 должен вернуть true, сохранив Init/Ready и пропуск children, без скрытого
 Build/Init. После штатного Init расчёт выполняется обычным scheduler.
 Исправлять только возврат этого раннего выхода; не создавать propagation
 ошибок через bool и не запускать children неинициализированного дерева.
 Эта открытая проверка не закрывается прошедшими initialized-native fixtures.
+
+
+### Уточнение native проверки 31.10
+
+Root 492944f266b829aad1840669d779a62d10ae807e / Rdk 6084bfa7 проверены
+на обоих workers, но эти запуски **не приняты**: terminal status=1.
+В normal XML прошли 14 из 15 cases, включая десять прежних lifecycle,
+Classic/Branch fixed-budget и два phase lifecycle controls. Новый bool control
+записал uninitialized_return=true, сохранение пропуска children и по одному
+вызову parent/child после Init, однако сам case упал на lifecycle.IsCurrent().
+Причина — ошибка fixture: revision захвачен до Activity=false; штатный
+SetActivity(false) вызывает Reset и меняет revision независимо от Calculate.
+Это не основание менять setter или общий lifecycle.
+
+Root 0fca58516941184549fb08ea23fa973e2ebdd30c разделяет наблюдения:
+сначала штатный setter, затем snapshot revision и Calculate. Неактивный и
+активный неинициализированный вызовы проверяются независимо. Исходный ASan
+baseline a1 также использовал ошибочный fixture; его текст «only boolean»
+не является доказательством единственной причины failure. Для корректного
+отрицательного контроля создан root f34067c64f8f4ab99b1ff7bfb6c7cc7f7d2a3b8c:
+тот же исправленный test с прежним Rdk c903b9bb, без изменений физики.
+
+Повторные fixed jobs a2 не дошли до тестов: Elder остановлен по запасу места
+(доступно чуть меньше 1.3 GB), M40 — по сокращённому SHA в fetch.
+Они не считаются повторными numerical trials. Jobs a3 используют полный SHA;
+для Elder предварительный порог 1.25 GB, после сборки по-прежнему требуется
+более 1 GiB. До опубликованных raw evidence и проверки обоих workers этот
+подэтап остаётся открытым. Полный этап 4 этим gate не закрывается.
