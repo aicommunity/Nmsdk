@@ -1,0 +1,624 @@
+{
+  "kind": "timelearner_calibration_worker_normal_controls",
+  "schema_version": 1,
+  "flavor": "normal",
+  "base_normal_bundle": "d663fd43601712cff1e203e0c1fa0ed2f8f443e7",
+  "native_root": "8aae62d7699df149ca8dcd810fadb17347452997",
+  "native_pulse": "a5671e96b517c5f71ffba54433484d768870f32e",
+  "controls_reader_root": "29c15a6583315d887c00bb2d0cef5bb0f05a82bd",
+  "controls_tests": 2,
+  "provenance_reader_root": "4244160dd38e62f39fb46fb9ee5e5567d373c5b6",
+  "provenance_tests": 11,
+  "portable_audits": [
+    {
+      "scope": "Classic one-tick diagnostic",
+      "audit": {
+        "run_evidence_consistent": true,
+        "full_grid_model_binding_verified": false,
+        "native_execution_verified": false,
+        "independent_partition_verified": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "scope": "Branch one-tick diagnostic",
+      "audit": {
+        "run_evidence_consistent": true,
+        "full_grid_model_binding_verified": false,
+        "native_execution_verified": false,
+        "independent_partition_verified": false,
+        "evaluation_verdict": null
+      }
+    }
+  ],
+  "normal_asan_comparison": [],
+  "source_training_outcome": "search_unresolved",
+  "runtime_mapping_scope": "process launch executable mappings, not a complete late-plugin census",
+  "counting_note": "Two worker controls and eleven provenance/runtime tests overlap other gates; not independent scientific retrains.",
+  "archive_sha256": "e81c1425caef0bbbacf486e782cabbd934ba1feec3d5d075a0f8932c1d528874",
+  "files": [
+    {
+      "path": "bounded-and-strict-controls/checkout.log",
+      "bytes": 277,
+      "sha256": "e73656029188e42c184247835bbf9580a6b46d1514fa769a6cb6f262f6dd1de1"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/job.json",
+      "bytes": 1771591,
+      "sha256": "e1af6dd46017a80ccd497ff10bbfbd9ed9ac918750ed84c151bba910295f3873"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_learned_state.json",
+      "bytes": 1162899,
+      "sha256": "bc784da3c1cb5e63d1bc566b7820bba7c8fd243d380993a2540b04e03543142b"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_learned_summary.json",
+      "bytes": 602839,
+      "sha256": "d1577c3b424a091e7ecca556ce55e76a3e832e38418635359c17bc09d3c0b6f1"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.csv",
+      "bytes": 12871,
+      "sha256": "beac831b7213adf3cad06230594e6a3897994f59a0151c4ce4e60814045f6d93"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.json",
+      "bytes": 5920,
+      "sha256": "8bc672ea13ea68de4ef377dfe4e0d5e2838300214f9e31c409ee646191ea409d"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.csv",
+      "bytes": 14183,
+      "sha256": "7b3417bf627e39b11115f12b019621a0d949279175f2169313e792e8ff72481b"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.json",
+      "bytes": 5905,
+      "sha256": "4a9a175e2a9e53a11945498913d4d240144a47a431318491f0c0c6c1ed85c742"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.csv",
+      "bytes": 14072,
+      "sha256": "75eeafa7abdf933cdecfd3e08d602623cd59d1c7929c8ebc0dc7f7ed39e71317"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "c9827fd7427d8e572e7e54aa96ec7fa961993b76345b42966ce7c94e9198fde0"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.csv",
+      "bytes": 14052,
+      "sha256": "cccb107e693dd261e8dac4d08f55350478fd05ea893c253dfd160c3fc1123922"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.json",
+      "bytes": 5922,
+      "sha256": "958db9a9a6fed4f2d031a3d6672fc5dd8ea9335994b7886ea873d85b3465b7dc"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.csv",
+      "bytes": 14085,
+      "sha256": "8b85b39139e39a2b8adde77af48629984ab6cc49246c37a1c46b118358dbcd57"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.json",
+      "bytes": 5934,
+      "sha256": "cae7d1b8898c30057cbd6dbf5a83513791fd27724c90f094b3412fab3b5c971b"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.csv",
+      "bytes": 14070,
+      "sha256": "cd4483b83133e02b0577dba29480dd95298aaf19f7594d0deafb34200b195c24"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.json",
+      "bytes": 5934,
+      "sha256": "28e79b289a6498e7debd4ac42ece375239e481341bce8ffd383096e9edb32544"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.csv",
+      "bytes": 12859,
+      "sha256": "726909aa8fa0aa97fe935103f5211fe413e21f2b7e2cd15bf60660ec96b12759"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.json",
+      "bytes": 5929,
+      "sha256": "a0c9191b17e1baaa4a0def8363a144f98cf4f0cd82133d4f38ceb22590f4b137"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.csv",
+      "bytes": 12901,
+      "sha256": "b20c6ec29ed01f437fec3d892c1b486cf47e7fdcbeee5146b0eb541c3f62b9e2"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.json",
+      "bytes": 5917,
+      "sha256": "d27cb2364b5aab6cda00c1790123b9b17c2269b05c0215fee827f0f79cea68fe"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.csv",
+      "bytes": 12848,
+      "sha256": "ac179f5df9482e662641ab33c8a7788cf0defe7a0275ce5f97cf6c46e3c1caa3"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.json",
+      "bytes": 5888,
+      "sha256": "9836b8bf42cb3770e1ecf3cae88e0ac8b196650d41e5cefbd1b47351996e8fbf"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.csv",
+      "bytes": 12882,
+      "sha256": "52ec681dc3cafd83a4c4cec9f2094423cf5342040db3128cea20b8b34ea39f03"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.json",
+      "bytes": 5898,
+      "sha256": "dc309782de17cd9f2971d1ef248c41baf2a3d20056522c5fe4eca4ea9781065f"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.csv",
+      "bytes": 12954,
+      "sha256": "28c627b78484d611226fdfa774bfa54cb7c245942ef40ee93f84edb4cea46d6b"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.json",
+      "bytes": 5900,
+      "sha256": "9b35aba1119711de4d550a96aca1c6bb4553ced277d4efe4b60ef18707628cdf"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.csv",
+      "bytes": 12857,
+      "sha256": "eef79042925d556f895d61a259983783a83e1ff229a6ecf0ef28011fed2e057d"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.json",
+      "bytes": 5905,
+      "sha256": "22bf9ea25ef6a1ad0656e6f1d57e84e2d6fde39c6ade2187a24f5d61052950a8"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.csv",
+      "bytes": 12877,
+      "sha256": "495cbccdd31d91b31b72b29ab25c3baac9bb867e48ad8f8a42f15d476e4872ab"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.json",
+      "bytes": 5902,
+      "sha256": "4f879e9e7d97a56ef8d70e1763ff5081e2a249b5212eb4473f0967c7edef0b9e"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.csv",
+      "bytes": 14084,
+      "sha256": "3085dcbb10a6d6f9f56bab2c2dd218d722382439a16f6bb71475a038ce46aa5c"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/input/source/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.json",
+      "bytes": 5905,
+      "sha256": "ac169970532559972941a138ff5d711e187c96f35d6cdc4a77aa8d47ac8b3ce0"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/native/execution.json",
+      "bytes": 1495,
+      "sha256": "939d88410ba8b6b6ab68fe4c7221b36fddad9c3ea4446d6454a6d9151031a5d0"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/native/job.json",
+      "bytes": 2485319,
+      "sha256": "ecf4ecfc115dad091bbab7eb075ed2335af23a9dfb30605deadfcb8843b68509"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/native/model.json",
+      "bytes": 2357884,
+      "sha256": "cb58058938377bb986aa44455997334b7116aa69f90ebc49a23ae1717d637143"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/native/transaction.json",
+      "bytes": 2488737,
+      "sha256": "c9a1eeb6ebce6c785c99b6affabbf1fa69683cb36b019305410ef67fb5f6c590"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/process/loaded-files.json",
+      "bytes": 4500,
+      "sha256": "2aa01a5fbee854bdb7d9e89c7e2612cfa638002e2f62090b71c432be64c338d4"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/process/owned-process.json",
+      "bytes": 400,
+      "sha256": "a5946cf1b1ccfd001b2c09c24ed985676d11ab2a60ec1021723138c1d99c0387"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/process/request.json",
+      "bytes": 838,
+      "sha256": "302e7cd9fc525d39ecb46e5acf53bf60a7f1663da41e89ba4826bf8dd4607d8a"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/process/result.json",
+      "bytes": 451,
+      "sha256": "0f23bf5b683c5203b10304c226f9d6f6c6b93d40e2811e15fdc28a89426decbc"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/process/runtime.json",
+      "bytes": 10102,
+      "sha256": "396643783a1f4ff2f7bc6cd45195cd1177f5c4e4ab3b80e1d5cc0ecd6e412905"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/attempt/run-manifest.json",
+      "bytes": 16188,
+      "sha256": "682a3aed1d2348081e736e8e34ba044f73ae4089610210c1f2f4d90d01909a6e"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Branch-tick-control/job.json",
+      "bytes": 1085141,
+      "sha256": "7a03b12cf39d1d779ef5030979102fb06e8872fce447789736ffd3a07f638c13"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/job.json",
+      "bytes": 1917004,
+      "sha256": "749a2e9ae8ba938a13d1cabc92cc8ca45a62c22bcee976a27c11ba5de6f83716"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_learned_state.json",
+      "bytes": 1253734,
+      "sha256": "ed707853f00b705aef3c5b39ea7c69f56e3d2065fc4344f790f7bb25460a1418"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "41782a7ddcb23c70d1e09e4bb0d292ab160001e04c30df33a671c723198fb64f"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.json",
+      "bytes": 5877,
+      "sha256": "fec5c0e2f493072ac33d082b9e3725ffa9c70d8386330e03b7478f4f0cf07db1"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.json",
+      "bytes": 5912,
+      "sha256": "e17c61435d99a17e8ebb0eb721718faa4b9efb89f32e7178419eedb26eff1847"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.json",
+      "bytes": 5894,
+      "sha256": "741a0aa8feaa8b216df2f2174d0f73ca3c82c818b82d2648e6bfacdcc55660b9"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.json",
+      "bytes": 5902,
+      "sha256": "6f3dac3877261ea264918be703a3ff82ed9369fa4bef6c07d1b91ff37dc53c48"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.json",
+      "bytes": 5963,
+      "sha256": "330df735fd87d738a677e522bbd00e4f1947159c799d5332084715426e6a135c"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.json",
+      "bytes": 5944,
+      "sha256": "df47e73ea45c42189973803f58b93f6bfdbcc45df786da9889660063237d88d7"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.json",
+      "bytes": 5933,
+      "sha256": "3b25910121a0c59f676f4021593e7314fff53d287ce81030063ae8777b286eab"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.json",
+      "bytes": 5902,
+      "sha256": "e90ee2b14100bdf05151453589ceb2595dbdbddc4e2202ef2872f91c641e315f"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.json",
+      "bytes": 5904,
+      "sha256": "76bfce925ff67b7bb822025f9ed3403ed79558349340cf0afc703516fae35fa7"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.json",
+      "bytes": 5903,
+      "sha256": "3d8ad8c7624b6b7a8162b449514dd56ad9f883dd204b7aa50620e70cb20756d0"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.json",
+      "bytes": 5910,
+      "sha256": "b5fd12077c36a66a3cc2760b1b33c54053d7cca939bda46bce219a201af0f53a"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.json",
+      "bytes": 5910,
+      "sha256": "b9fdebfe10ea8fd77efcf53d39b4f44f7226b97a7e321f2c27dd6a2b5cb655f8"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.json",
+      "bytes": 5910,
+      "sha256": "9f6d62b019951cc44626e02063807e5568e36218eaec3944aed9df67b52e2d79"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/input/source/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.json",
+      "bytes": 5910,
+      "sha256": "32eb6813370ea5f4f02a8c824c1e83304e97d751551f1af2825484d6fe77d2c9"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/native/execution.json",
+      "bytes": 1496,
+      "sha256": "23c554f48ab2424819a0f57d66af2eda04e1d66e593b60d7f7a20c72a2ecbe54"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/native/job.json",
+      "bytes": 2681674,
+      "sha256": "bf71387d65d20e286cdcf75558add9c211f9af5ea0504b547c18ecc24101985d"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/native/model.json",
+      "bytes": 2544357,
+      "sha256": "964c3e5015460f0c3b24d61ecb817b69008c2c421af1b12648675323a9a63fcc"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/native/transaction.json",
+      "bytes": 2685132,
+      "sha256": "591fa76da47dd7323d7f9e11ecb63002680a18eb0951aa347d7ed0ff8a6f9291"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/process/loaded-files.json",
+      "bytes": 4500,
+      "sha256": "2aa01a5fbee854bdb7d9e89c7e2612cfa638002e2f62090b71c432be64c338d4"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/process/owned-process.json",
+      "bytes": 400,
+      "sha256": "ae9f97413a712ab4554f6036d18e34e378b8ea0c7247ae14c0ddf355f16af9ff"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/process/request.json",
+      "bytes": 841,
+      "sha256": "5f709d7c318cc5257d0e8ffe0b174f710838c1da82f66154f58232536bf65811"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/process/result.json",
+      "bytes": 451,
+      "sha256": "5de9af7f3e9c14efb33ba51af0488dc5ba87105c96b0945e7987ec18ab71ce83"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/process/runtime.json",
+      "bytes": 10102,
+      "sha256": "396643783a1f4ff2f7bc6cd45195cd1177f5c4e4ab3b80e1d5cc0ecd6e412905"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/attempt/run-manifest.json",
+      "bytes": 16220,
+      "sha256": "f3425b4c8b5ec3c28afd3715c34256dca4b6e8ed9326c509959c367615787237"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/Classic-tick-control/job.json",
+      "bytes": 1180980,
+      "sha256": "b726da07aa438e2e7ae2f78048dba67760d1f8207758a907796b49b97439d5c9"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/digest.json",
+      "bytes": 1180983,
+      "sha256": "4e626bff026804d7b1abc46991ed1aa15ad8b6c43a9698f37664d00fb4f106b3"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/digest.log",
+      "bytes": 49,
+      "sha256": "d4514545d7bc33a57b93bcec88c4cb923e9fddd0ee12368ff69abb5540ac099f"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/duplicate.json",
+      "bytes": 1181011,
+      "sha256": "14649bb74097bb92d42374bcdaf60ea7b98fe6bde4661264e0acd0d9202e8a29"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/duplicate.log",
+      "bytes": 64,
+      "sha256": "bd2cf75e5fb7827cf4eb290ff8d1c571abbc3b894fdf6b25a256c560e2c1e670"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/mode.json",
+      "bytes": 1180983,
+      "sha256": "e59a6e9ffd054d86e341dbf09f90e4df4ddd70b0fb2510427482d319d96a5c2d"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/mode.log",
+      "bytes": 125,
+      "sha256": "7d7ce4bf3ef0781e74388ceeacb67d3a7b9fab389d0c95e2a689cd1995ff06e4"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/request-field.json",
+      "bytes": 1181006,
+      "sha256": "67e6f5d3a50b02c6a5ff2015635a55925d3ec4e19afb35555f1603dc3e7ed3ac"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/request-field.log",
+      "bytes": 73,
+      "sha256": "39717bfc9f6bb2714be97593973a5c2453b4e6ef57b4ab62b3b663bd1391439e"
+    },
+    {
+      "path": "bounded-and-strict-controls/native-cli/native-strict-controls/validation.json",
+      "bytes": 511,
+      "sha256": "3d2c998c6a9f92e2eb0b4ffa59accf5423da9f3d25c668c2bbe15f53b39e37d7"
+    },
+    {
+      "path": "bounded-and-strict-controls/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "bounded-and-strict-controls/runner.sh",
+      "bytes": 1737,
+      "sha256": "9ba3de54d89c4ae1b04598ce594d6c9420ee98f882630cd8125cb541e52e3394"
+    },
+    {
+      "path": "bounded-and-strict-controls/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bounded-and-strict-controls/tests.log",
+      "bytes": 445,
+      "sha256": "06dace881c8d76c0d601aaf70eab6cad7d17bd171068201db60b2499e9cc49c6"
+    },
+    {
+      "path": "bounded-and-strict-controls/validation.json",
+      "bytes": 154,
+      "sha256": "e78a4fd5258e913c0c49a31cfcf0e7dd9da62dcc4c81bcf6eb8a0eb0a6739ca0"
+    },
+    {
+      "path": "portable-run-audits.json",
+      "bytes": 570,
+      "sha256": "f5ad8e16b2bc093bd9dc0ebfe4b2f791c1c357870e4971a19542abda141a68c8"
+    },
+    {
+      "path": "runtime-provenance/actual-compile-commands.json",
+      "bytes": 9189,
+      "sha256": "d6e13133cee17e1446e3f5f1c9bea81b84c2479e30c7c57f021a958f03c8dfdf"
+    },
+    {
+      "path": "runtime-provenance/checkout.log",
+      "bytes": 281,
+      "sha256": "b22e31b21552dc1beaffd7296b3823f64f2eb44f0f5f63700fd6546b79f4b537"
+    },
+    {
+      "path": "runtime-provenance/compile-database-export.log",
+      "bytes": 1203,
+      "sha256": "bedf16c0ce87f8d25f69d5bf1d95a9f13e9a97c8135bb27e142943f4c8d3e2ac"
+    },
+    {
+      "path": "runtime-provenance/metadata-recovery.json",
+      "bytes": 314,
+      "sha256": "a4d7afd96c2fe7eaba37a558e775eea676a4840073ee6adf0730001e7acf054a"
+    },
+    {
+      "path": "runtime-provenance/metadata-recovery.log",
+      "bytes": 73,
+      "sha256": "2e77da2df5af0957efc543ca00e3058229e84df0febf64ec9b1be0fdaf28a1ef"
+    },
+    {
+      "path": "runtime-provenance/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "runtime-provenance/runner.sh",
+      "bytes": 3250,
+      "sha256": "0f9b6daaf721fab284bdadc499f2a52ad61f4d3309e74e9046c0b881aa05716d"
+    },
+    {
+      "path": "runtime-provenance/runtime-enhanced.json",
+      "bytes": 12130,
+      "sha256": "54043eae8908ed7696de14500f0d6621dfcd8d4771e0cd07fb5eb4a5afec1a41"
+    },
+    {
+      "path": "runtime-provenance/runtime-metadata.log",
+      "bytes": 480,
+      "sha256": "4092e69a42945e03d3e0c9bfa6d96da41c43918a4632e878352fde241e68a55b"
+    },
+    {
+      "path": "runtime-provenance/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime-provenance/tests.log",
+      "bytes": 1734,
+      "sha256": "f93b59c998ecb58a8a6e2a80ca7060aefedc6f0fe143b8445eccb72fd488a95e"
+    },
+    {
+      "path": "runtime-provenance/validation.json",
+      "bytes": 273,
+      "sha256": "c38c0d3833681b8e9f2368ff5cb395f236e38928df5b96b16ca144dd25da8688"
+    }
+  ],
+  "full_experiment_pipeline_accepted": false,
+  "stage_8_accepted": false,
+  "scientific_verdict": null
+}
