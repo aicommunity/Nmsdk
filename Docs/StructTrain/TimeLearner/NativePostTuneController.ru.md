@@ -10,6 +10,13 @@
 Это адресная приёмка N1/2000 Гц/двух входов, не полная mode/profile matrix.
 Этап 8 и исходный план 0–12 остаются открытыми.
 
+Дополнительно N0 normal на source `fe45166a132a97aefcd62318125604bb066b57ff`
+прошёл два реальных native cases Classic/Branch (459.529 s) и 12 независимых
+evidence checks (157.913 s), без skips. Все 24 controls сохранены в
+[N0 primary bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-normal-a1/README.md).
+Целевая физика, допуски, full-matrix threshold proposal и fresh confirmation
+не менялись ради прохождения N0. ASan N0 запущен отдельно; пока не принят.
+
 Контроллер действует между native ticks и не вызывает Calculate. Он принимает
 полностью импортированную исходную recognition-модель с conversion spec schema 1.
 Для каждого кандидата заново выводит полную модель из immutable solo и исходного

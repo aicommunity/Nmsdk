@@ -4,6 +4,30 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
+Последнее дополнение: native N0 PostTune на Elder завершён — Classic и Branch,
+2/2 cases, 459.529 s, затем 12/12 independent evidence checks, 157.913 s,
+без skips. [Bundle](../../../Reports/StructTrain/TimeLearner/s08-native-posttune-controller-n0-normal-a1/README.md):
+220 файлов / 3601844 bytes сжатого primary; все member hashes перепроверены
+после Git merge на локальной машине. Source root `fe45166a132a97aefcd62318125604bb066b57ff`;
+24 parent controls: 9 calibrated, 7 search_unresolved, 4 cancelled,
+2 recovery_required, 2 budget_exhausted. Это N0/два входа/2000 Гц,
+не полная матрица и не доказательство восьмипаттерновой классификации.
+
+N0 ASan теперь выполняется отдельно на M40 в новом immutable runtime
+`runtime-s08-native-posttune-controller-n0-asan-a1`; приёмка ещё не получена.
+Новая команда `report --format posttune-run` (root `4c497f41d`) связывает
+графики с production run manifest. Генерация всех 18 normal production reports
+и последующие 3 binding/coverage checks + 5 plotting checks ещё выполняются
+на M40 Data; завершение и визуальная приёмка пока не заявляются.
+
+На Elder после проверки Git primary manifest, повторной проверки всех 907
+архивных members на M40 и отсутствия активных читателей удалены только 214
+побайтно совпадающих native cache files старого normal A2, 739918187 bytes.
+[Receipt](../../../Reports/StructTrain/TimeLearner/s02-storage-dedup-elder-20261031-a1/README.md)
+фиксирует рост free bytes с 406204416 до 1146679296. Архив Git и полная
+копия M40 сохранены; уникальные primary data не удалялись. Новые объёмные
+задания на Elder до дальнейшего освобождения места не запускать.
+
 ## Отправная точка и незавершённая ветка
 
 Принятый root develop: `8446ce2fc6775bb157cc4423665cba1319af228f`.
