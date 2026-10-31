@@ -87,3 +87,5 @@ commits are not substituted into historical manifests.
 - [Elder transient PostTune goal](s08-transient-elder1/README.md), [M40 ASan](s08-transient-m40/README.md): four native cases, eight Python tests, eight complete presentations / 19368 samples per worker; corrected pre-fix baseline and byte-exact common waveforms.
 
 Native production additions: [cold Train/export/frozen evaluation normal](s09-native-pipeline-normal-a1/README.md), [separate mechanical worker support extraction](s08-worker-support-normal-a1/README.md). The terminal older [threshold assessment ASan 16+35 gate](s08-threshold-assessment-asan-a1/README.md) is published separately; it does not accept later source versions.
+
+Owned cold pipeline: [normal 12 phases + controls](s09-native-pipeline-owned-normal-a1/README.md), [ASan](s09-native-pipeline-owned-asan-a1/README.md), [all-pattern fixed-evaluation temporal soma/input reports](s09-native-pipeline-report-normal-a2/README.md) (4 matrices, all somas, eight manually reviewed selected PNG). Training is SearchUnresolved; full-cache visual acceptance and full original stages remain open.
