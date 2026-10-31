@@ -22,6 +22,22 @@ public:
 };
 enum class Scenario { Snapshot, Connected, QueuedProbe, Stopped };
 
+QJsonObject SemanticSolo(QJsonObject package)
+{
+    // Native XML also contains volatile state/cache fields. The declared
+    // model identities, image identities and all training evidence stay exact.
+    const auto snapshot=[](QJsonObject value) {
+        value.remove("native_xml");value.remove("native_xml_sha256");return value;
+    };
+    package.remove("sha256");auto neuron=package["neuron"].toObject();neuron.remove("sha256");
+    neuron["graph"]=snapshot(neuron["graph"].toObject());
+    auto definitions=neuron["class_definitions"].toArray();
+    for(int i=0;i<definitions.size();++i)
+    {auto value=definitions[i].toObject();value["snapshot"]=snapshot(value["snapshot"].toObject());definitions[i]=value;}
+    neuron["class_definitions"]=definitions;package["neuron"]=neuron;
+    package["dataset"]=snapshot(package["dataset"].toObject());return package;
+}
+
 template<class Owner> void Boundary(Scenario scenario)
 {
     const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
@@ -83,9 +99,17 @@ template<class Owner> void Boundary(Scenario scenario)
         const auto before=owner->ExportNativeLearnedState(implementation),controls=ReadNativeFinalizationControls(*owner);
         const auto lifecycle=owner->ObserveLifecycle();const double clock=environment->GetTime().GetDoubleTime();
         frozen.emplace(CaptureNativeFinalizationBoundary(*owner,implementation));saved=frozen->Document();
-        EXPECT_FALSE(frozen->DiagnosticOnly());EXPECT_EQ(frozen->Solo(),before);EXPECT_EQ(frozen->Controls(),controls);
+        const auto afterCapture=owner->ExportNativeLearnedState(implementation);
+        if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            ASSERT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
+            NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_capture-comparison.json",
+                {{"kind","native_finalization_capture_comparison"},{"schema_version",1},{"before",before},{"captured",frozen->Solo()},
+                 {"after",afterCapture},{"semantic_equal",SemanticSolo(before)==SemanticSolo(frozen->Solo()) && SemanticSolo(before)==SemanticSolo(afterCapture)}});
+        }
+        EXPECT_FALSE(frozen->DiagnosticOnly());EXPECT_EQ(SemanticSolo(frozen->Solo()),SemanticSolo(before));EXPECT_EQ(frozen->Controls(),controls);
         EXPECT_TRUE(lifecycle.IsCurrent());EXPECT_DOUBLE_EQ(environment->GetTime().GetDoubleTime(),clock);
-        EXPECT_EQ(owner->ExportNativeLearnedState(implementation),before);
+        EXPECT_EQ(SemanticSolo(afterCapture),SemanticSolo(before));
         EXPECT_EQ(ReadNativeFinalizationControls(*owner),controls);
         auto copy=frozen->Controls();copy["parameters"]=QJsonObject{};EXPECT_EQ(frozen->Controls(),controls);
         const auto parameters=frozen->Controls()["parameters"].toObject();
@@ -97,8 +121,9 @@ template<class Owner> void Boundary(Scenario scenario)
             const auto binding=frozen->Controls()["bindings"].toObject()["IsNeedToTrain"].toObject();
             EXPECT_TRUE(binding["connected"].toBool());ASSERT_EQ(binding["sources"].toArray().size(),1);
             EXPECT_EQ(binding["sources"].toArray()[0].toObject()["property"],QJsonValue("Value"));
+            EXPECT_EQ(binding["sources"].toArray()[0].toObject()["owner_path"],QJsonValue(QString::fromStdString(flag->GetFullName())));
             EXPECT_EQ(owner->ImportNativeRecognitionState(recognition,implementation).status,NativeModelBuildStatus::Rejected);
-            EXPECT_TRUE(flag->Value.GetData());EXPECT_EQ(owner->ExportNativeLearnedState(implementation),before);
+            EXPECT_TRUE(flag->Value.GetData());EXPECT_EQ(SemanticSolo(owner->ExportNativeLearnedState(implementation)),SemanticSolo(before));
             flag->Value=false; // External request changes, never a write by capture/import.
         }
         ASSERT_EQ(owner->ImportNativeRecognitionState(recognition,implementation).status,NativeModelBuildStatus::Adopted);
