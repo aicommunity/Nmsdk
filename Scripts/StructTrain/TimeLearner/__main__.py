@@ -12,7 +12,7 @@ def analyze(args: argparse.Namespace) -> dict:
     require(args.format == "domain" or not args.allow_legacy, "legacy_adapter_is_only_for_domains")
     require(args.format in ("probe", "legacy-posttune-freerun") or args.trace is None, "trace_option_is_only_for_probes")
     require(args.format in ("recognition-trial", "recognition-evaluation", "native-calibration-assessment") or args.model is None, "model_option_is_only_for_recognition_trials")
-    require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
+    require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction", "posttune-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
     require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
     source = args.source.resolve(strict=True)
     if args.format == "native-calibration-assessment":
@@ -43,6 +43,11 @@ def analyze(args: argparse.Namespace) -> dict:
     elif args.format == "pipeline-run":
         from .native_pipeline_worker import audit_run_manifest
         result = audit_run_manifest(source)
+    elif args.format == "posttune-transaction":
+        from .posttune_transaction_evidence import audit_posttune_transaction
+        from .learned_evidence import load_case
+        require(args.source_solo is not None, "posttune_transaction_source_evidence_required")
+        result = audit_posttune_transaction(load(source), load_case(args.source_solo.resolve(strict=True)))
     elif args.format == "calibration-transaction":
         from .calibration_transaction_evidence import audit_native_calibration_transaction
         from .learned_evidence import load_case
@@ -103,7 +108,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "calibration-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun"), required=True)
     analysis.add_argument("--model", type=Path, help="recognition package required for recognition trial/evaluation")
     analysis.add_argument("--source-solo", type=Path, help="original learned-state package with primary trial siblings, required for threshold candidate")
     analysis.add_argument("--evaluation", type=Path, help="independently declared evaluation spec required for native calibration assessment")

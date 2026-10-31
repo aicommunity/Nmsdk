@@ -33,7 +33,7 @@ def _physical(node: dict, name: str) -> float:
     return number(struct.unpack(">d", bits)[0])
 
 
-def _audit_post_tune(spec: dict, record: dict, expected_model: dict, parameters: list, declaration: dict) -> list:
+def _derive_post_tune(spec: dict, expected_model: dict, parameters: list, declaration: dict) -> tuple:
     require(set(spec) == {"mode", "source_model_revision", "canonical_floor", "canonical_last",
                           "requested_resistances", "resistance_bounds"}, "unknown_post_tune_spec")
     mode = spec["mode"]
@@ -77,6 +77,11 @@ def _audit_post_tune(spec: dict, record: dict, expected_model: dict, parameters:
             nodes[path]["parameters"]["Resistance"]["data"]["value"] = struct.pack(">d", applied).hex()
     expected = {"mode": mode, "source_model_revision": revision, "decisions": decisions,
                 "selection_status": "candidate_unmeasured", "calibration_status": "unconfirmed"}
+    return result, expected
+
+
+def _audit_post_tune(spec: dict, record: dict, expected_model: dict, parameters: list, declaration: dict) -> list:
+    result, expected = _derive_post_tune(spec, expected_model, parameters, declaration)
     require(record == expected and all(type(d["clipped"]) is bool and type(d["input_index"]) is int
                                      for d in record["decisions"]), "post_tune_record_not_derived")
     return result
