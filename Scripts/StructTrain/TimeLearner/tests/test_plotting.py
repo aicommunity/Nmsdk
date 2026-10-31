@@ -1,10 +1,31 @@
 import unittest
+from pathlib import Path
+import tempfile
+from unittest.mock import patch
 
 from Scripts.StructTrain.TimeLearner.plotting import time_views, series_timeline, detail_limits
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError
 
 
 class PlotScaleTest(unittest.TestCase):
+    def test_missing_backend_does_not_leave_partial_report(self):
+        from Scripts.StructTrain.TimeLearner.reports import render_evaluation
+        from Scripts.StructTrain.TimeLearner.probe_reports import render_probe, render_probe_set
+        from Scripts.StructTrain.TimeLearner.native_test_reports import render_native_test_run
+        from Scripts.StructTrain.TimeLearner.calibration_transaction_reports import render_calibration_transaction, render_calibration_run
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);output = root/"report"
+            calls = ((render_evaluation, (root/"evaluation.json", root/"model.json", output)),
+                     (render_probe, (root/"probe.json", root/"trace.csv", output)),
+                     (render_probe_set, (root/"spec.json", output)),
+                     (render_native_test_run, (root/"spec.json", root/"artifacts", output)),
+                     (render_calibration_transaction, (root/"transaction.json", output)),
+                     (render_calibration_run, (root/"run-manifest.json", output)))
+            for function, arguments in calls:
+                with self.subTest(renderer=function.__name__), patch.dict("sys.modules", {"matplotlib": None}):
+                    with self.assertRaisesRegex(EvidenceError, "plotting_runtime_unavailable"):
+                        function(*arguments)
+                    self.assertFalse(output.exists())
     def test_each_zoom_resolves_one_tick_at_high_absolute_clock(self):
         for frequency in (2000, 20000):
             views = time_views(192., 192.12, frequency)
