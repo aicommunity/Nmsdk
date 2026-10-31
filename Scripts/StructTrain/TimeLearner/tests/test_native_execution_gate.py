@@ -30,6 +30,7 @@ class NativeExecutionGateTest(unittest.TestCase):
             ("auxiliary_json", lambda r: r["controls"].update({"unexpected_state_trial_1.json": {"kind": "native_live_finalization_control", "schema_version": 1}})),
             ("returncode", lambda r: r["process"].update(returncode=1)),
             ("owned_executable", lambda r: r["owned"].update(executable="/other/test")),
+            ("start_identity", lambda r: r["owned"].update(start_ticks="not-ticks")),
             ("loaded_empty", lambda r: r.update(loaded=[])),
             ("runtime_after", lambda r: r["runtime_after"].update(runtime_fingerprint="0"*64)),
             ("extra_args", lambda r: r["request"]["arguments"].append("--gtest_repeat=2")),
