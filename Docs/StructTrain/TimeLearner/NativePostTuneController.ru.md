@@ -419,3 +419,38 @@ report --format posttune-run: 62 полные trial-soma реакции. Пол�
 Все cache/member hashes проверены. Полная ручная визуальная приёмка этих
 62 реакций остаётся открытой; предыдущие selected roundtrip PNG описывают
 свои отдельные пробы и не заменяют эту проверку.
+
+### Lifecycle detach для будущего configured orchestration
+
+Добавлен InterruptOwnerLifecycle(reason) обоим transaction drivers. Это
+отдельная операция от Cancel: только terminal RecoveryRequired, сохранение
+диагностической истории и рекурсивное прерывание child calibration. Она не
+читает и не меняет owner, не отменяет физическую пробу и не выполняет import,
+Build/Init/Reset или rollback. Завершённые транзакции остаются неизменными.
+Native lifecycle отвечает за очистку; source_restored остаётся false.
+
+Source root ba33ee20 / PulseLib 979aea4: подготовлены 16 actual native cases
+Classic/Branch, включая Reset, Default, teardown и начатую вложенную calibration;
+три independent evidence checks запрещают fake restoration/success. На обоих
+серверах запущены новые immutable runtimes с прежними 12 fixed/codec regressions.
+Normal приёмка получена: 16/16 native (69.737 s), 12/12 прежних regressions
+(68.354 s), 8/8 reader (53.229 s), без skips.
+[Proof](../../../Reports/StructTrain/TimeLearner/s08-native-phase-lifecycle-interrupt-normal-a1/README.md):
+146 members, все hashes проверены после merge; 10 старых fixed JSON побайтно
+не изменились. [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-phase-lifecycle-interrupt-asan-a1/README.md):
+16/16 native (422.196 s), 12/12 regressions (409.622 s), 8/8 reader (44.282 s),
+без skips, leak detection off. 149 members и все artifact hashes проверены после
+merge; прежние 10 ASan fixed JSON также byte-exact. Actual native-test runtime
+identity захвачена отдельно после тестов, не является pre-run/owned-process
+аттестацией исходных native invocations.
+Visual normal: 16 reports / 20 полных trial-soma реакций; 130 metadata members
+и 8 просмотренных PNG. Полный cache/PDF/SVG остаётся непроверенным.
+Операция не подключает configured hooks или phase plan.
+Дополнительные ограничения сопоставления public controls:
+[CalibrationPropertyContracts](CalibrationPropertyContracts.ru.md#дополнение-3110-api-и-независимые-владельцы-фаз).
+
+NativeRecognitionTrialExecutor::Cancel сохраняет cancelled result до TakeResult.
+Поэтому detach перед Reset не объявляет recognition runner автоматически idle:
+отложенная фаза может потребить только принадлежащий ей cancelled result,
+проверив context/trial identity на следующей legal boundary. Нельзя выполнять
+новый import из Reset hook или стирать чужой результат ради продолжения.

@@ -4,6 +4,42 @@
 незакрытые требования. Это продолжение [снимка 30.10](CurrentStatus-2026-10-30.ru.md),
 а не переоценка исторических результатов по новым критериям.
 
+Текущий подэтап: InterruptOwnerLifecycle отдельно прерывает PostTune/calibration
+перед Reset/Default/teardown без доступа к owner и реентерабельного rollback.
+Root ba33ee20 / PulseLib 979aea4: Elder normal завершён — 16/16 lifecycle cases
+(69.737 s), 12/12 прежних fixed/codec regressions (68.354 s), 8/8 independent
+reader checks (53.229 s), без skips. [Normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-phase-lifecycle-interrupt-normal-a1/README.md):
+146 members / 1536012 compressed bytes; все hashes проверены после merge.
+Два полных portable source snapshots / 84 artifact entries сохранены.
+Все 10 прежних fixed parent/roundtrip JSON побайтно совпали с original normal
+proof; отдельная compatibility receipt опубликована.
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-phase-lifecycle-interrupt-asan-a1/README.md):
+16/16 lifecycle cases (422.196 s), 12/12 regressions (409.622 s), 8/8 reader
+(44.282 s), без skips; 149 members / 1554148 bytes. Leak detection выключен.
+Все 10 прежних ASan fixed JSON также побайтно не изменились. Оба архива и полные
+artifact inventories перепроверены после merge. Actual test executable/dependencies
+дополнительно зафиксированы после тестов; это не pre-run/owned-process attestation
+первоначальных native invocations, и Console manifest не заменяет test-binary identity.
+
+[Visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-phase-lifecycle-visual-normal-a1/README.md):
+16 отчётов, 20 завершённых trial-soma реакций; partial/unobserved пробы остаются
+диагностикой. После восстановления Git primary прошли 8 reader checks (47.353 s).
+Полный cache M40 Data: 1055 files / 87879026 bytes; Git: 130 metadata members /
+129076 compressed bytes и 8 выбранных PNG. Все hashes проверены; выбранные
+PNG просмотрены в 1920×960, полный cache/PDF/SVG не принят.
+
+Дополнительно остаётся адресная проверка uninitialized UContainer::Calculate:
+в Rdk c903 ранний InitFlag=false путь возвращает false, вопреки принятому bool
+контракту. [Открытая проверка](Stage04-Progress.ru.md#открытая-проверка-3110-bool-при-неинициализированном-контейнере)
+не закрывается прошедшими initialized-native fixtures.
+
+Configured learner hooks/phase dispatch пока не подключены. Нельзя объединять
+AutoCalibrate, PostTrainMid и silent probe threshold в один флаг. У Branch
+PostTune=false всё ещё входит в отдельную parallel-peak calibration phase,
+даже при AutoCalibrate=false; это не готовый frozen-threshold протокол.
+[Уточнённый контракт](CalibrationPropertyContracts.ru.md#дополнение-3110-api-и-независимые-владельцы-фаз)
+сохраняет различия, важные также для интерпретации исторических результатов.
+
 Проверен подэтап native PostTune с фиксированным порогом: PulseLib
 `03d1ea86a0a9f0d7b861adb62bf7798a9c1a1c59`, normal source root
 `3d922ba2c3e433b15bdbe5d008036ec0a5e3191f`, ASan source root
@@ -149,7 +185,12 @@ e3fe5340 / PulseLib 39810a7; обновление его source/build разре
 terminal 0. Новые кандидаты normal проверены отдельно на root 149a1af0 / PulseLib
 de51a21. Ветка создана от develop с --no-ff merge сохранённых prerequisites.
 
-## Оперативный статус после последней перепроверки
+## Ранний оперативный снимок 31.10 (история)
+
+Статусы ожидания в этом и следующих хронологических разделах относятся к моменту
+записи. Актуальные scoped results, полные SHA и ограничения находятся в начале
+файла; ранние постановки сохраняются как журнал и не являются второй актуальной
+спецификацией. Требования полного плана остаются обязательными.
 
 Реализованное в коде отделено от runtime acceptance. Нижний журнал сохраняет
 последовательность проверок: его ранние «ещё выполняется» относятся к моменту
@@ -521,7 +562,7 @@ Frozen scorer/direct trial audit/report adapter теперь реализова�
 являются условием завершения рефакторинга. Изменения порога не переносят
 сертификат solo Exact на новую recognition модель.
 
-## Следующая проверка: persisted numeric boundary и Qt 5 owner import
+## Историческая постановка: persisted numeric boundary и Qt 5 owner import
 
 Root b82fb74f15353b1bafd3a1df09334860ad4ad12b добавил JSON serialize/parse
 перед native import finite threshold candidates, включая -0.0. Baseline gate
@@ -700,7 +741,7 @@ filesystem при последней проверке имел около 475 Mi
 новой сборкой нужна отдельная инвентаризация и освобождение подтверждённых
 дубликатов/кэшей. Уникальные исходные результаты не удалять.
 
-## Следующий рабочий подэтап: TL-037 legacy inference
+## Историческая постановка: TL-037 legacy inference
 
 Ветка codex/timelearner-posttune-observation создана от develop с --no-ff merge
 проверенных calibration/transport prerequisites. Полный этап 8 открыт.
