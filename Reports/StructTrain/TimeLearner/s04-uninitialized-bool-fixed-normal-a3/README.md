@@ -1,0 +1,3 @@
+# Rdk uninitialized Calculate: normal
+
+Fifteen native tests passed without skips (8.373 s). Active uninitialized Calculate returns true without implicit initialization, callbacks or child calculation; initialized parent/child each calculate once. Activity setter Reset is observed separately. Actual test executable runtime is captured before/after the owned production process invocation; mapped files are captured, not full lifetime attestation. Includes raw failures from the superseded fixture and preflight attempts, complete source fixtures, and separately verified duplicate static archive cleanup receipt. Negative original-Rdk reproduction is a separate ASan control. This addresses the lifecycle boolean contract, not training convergence or complete stage 4 acceptance.
