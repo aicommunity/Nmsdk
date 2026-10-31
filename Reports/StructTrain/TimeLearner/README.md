@@ -165,3 +165,12 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   100 corrupt-receipt controls. All 836 archive members verified; compressed
   primary 4095348 bytes, original source closure two runs / 84 artifacts.
   ASan/report acceptance and configured live-Train dispatch remain pending.
+
+
+- Production owned PostTune Console:
+  [normal](s08-native-owned-posttune-worker-normal-a1/README.md),
+  [ASan](s08-native-owned-posttune-worker-asan-a1/README.md): 20 PostTune + 6
+  standalone calibration controls per worker, ordered 19/19 checks, no skips.
+  Initial setup skips remain recorded. Complete 28-run closures / 1196 artifacts
+  each; all compressed archive members verified. Full production temporal report
+  gate remains pending; live Train handoff and full stage8 are not accepted.
