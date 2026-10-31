@@ -193,11 +193,23 @@ C-trim и legacy nonseparable fallback остаются явно запрещё�
 
 На серверах запущены первые сборки и 6-case smoke: normal PID2180613,
 ASan PID1251, readbacks s08-native-live-finalization-{normal,asan}-a1.
-Последняя проверка: оба supervisor живы, изменённые learner скомпилированы,
-собираются интеграционные tests. Это ещё не passing evidence. Новый reader
-root761c1f7c505696436601b2838d916319641d9a72 ожидает фактические fresh Train
-CSV/packets, проверяет declared phases, next-tick clock и frozen replay;
-он также пока не выполнен. Source/runtime активных заданий не обновляются.
+Normal native: 6/6 (116.425 s), включая два настоящих холодных перехода и
+четыре clock controls. Classic: Train SearchUnresolved, затем WeightsSelected,
+capture2.5305 → entry2.531 при 2000 Hz, 3206 owner phase ticks и две полные
+frozen reactions. Reader root5afe5b96311c871d09aab0c63d463caa17a9e0d5:
+2/2 (32.255 s), без skips; runtime before/after совпал до следующей сборки.
+Supervisor a1 закономерно status1 из-за ошибочного glob-счётчика: он включил
+вспомогательные Train JSON вместе с двумя control records. Native XML/process
+receipts подтверждены отдельно в reader/native-prerequisite.json; failed
+supervisor не переименован в PASS. Primary пока ожидают компактной публикации.
+
+Normal a2 PID2189614 проверяет root5afe5b963 / PulseLibcf530be, 31 case:
+16 live controls, четыре clock и 11 lifecycle. Добавлены startup-failure и
+multirate guards, счётчик control records использует точный filename contract.
+На последней проверке a2 действительно собирается. ASan a1 PID1251 жив:
+четыре clock controls прошли, выполняется холодный Classic. Его queued reader
+PID10286 ожидает терминального native XML/process receipt. Source/runtime
+работающих заданий не обновляются; широкая приёмка dispatcher ещё не получена.
 
 Scoped Console acceptance и Git publication завершены. Следующее: связать живой Train с
 capture/conversion/reference/PostTune/calibration/frozen Test. Нынешние replay

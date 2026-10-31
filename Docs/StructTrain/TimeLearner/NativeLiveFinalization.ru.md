@@ -79,4 +79,9 @@ ASan PID1251, readbacks s08-native-live-finalization-{normal,asan}-a1. Отде�
 reader добавлен в root761c1f7c5; его runtime-приёмка ожидается. Следующая версия
 PulseLibcf530be дополнительно завершает live state при ошибке до Start и
 проверяет uniform frequency до Train; добавлены invalid-design/multirate fixtures.
-Она не подменяет source уже работающих заданий и пока не проверена на сервере.
+Она не подменяет source уже работающего ASan a1. После терминального normal a1
+и независимого reader запущена normal a2 на root5afe5b963 / PulseLibcf530be,
+31 case; результаты пока ожидаются. Первый normal native набор прошёл 6/6,
+reader — 2/2 без skips. Его supervisor status1 сохранён: ошибочный glob
+считал вспомогательные JSON вместе с control records. Native XML/process
+receipt и runtime equality проверены отдельно; это не полный accepted gate.
