@@ -5,6 +5,8 @@
 #include "TimeLearner/NativeCalibratedState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
 #include <iostream>
+#include <algorithm>
+#include <limits>
 #include <numeric>
 
 namespace {
