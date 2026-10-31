@@ -12,6 +12,12 @@ external-stop diagnostic и полный объявленный двухпатт
 cache в нулевой 1×1 двух NPMembraneBio images. Configured phase dispatch ещё не
 реализован, optional guards сохранены; temporal reports новых replay ещё открыты.
 См. [NativeFinalizationBoundary](NativeFinalizationBoundary.ru.md).
+Сохранены и проверены [normal proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-normal-a1/README.md)
+и [ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-asan-a1/README.md):
+по 202 members, 1014552 / 1029284 bytes, два complete portable source runs /
+84 artifact entries в каждом. На каждом worker независимый reader выполнил
+14 consistency checks и отклонил 16 corrupt controls. После --no-ff merges все
+inventory/archive/member hashes проверены; scientific verdict отсутствует.
 
 Предыдущий подэтап: отдельная физика weight probe threshold и свежие реакции
 конечной модели. Source root 800ca40e / PulseLib 09f72c7: normal 20/20 native

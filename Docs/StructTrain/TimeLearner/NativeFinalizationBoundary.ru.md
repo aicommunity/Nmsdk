@@ -111,3 +111,13 @@ cache transition: результаты и причина сохранены. П�
 
 Временные отчёты новых replay records пока не подготовлены. Configured dispatcher,
 автоматическое подключение к hooks и снятие guards optional modes остаются открыты.
+
+Компактные первичные доказательства:
+[normal](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-normal-a1/README.md)
+и [ASan](../../../Reports/StructTrain/TimeLearner/s08-native-finalization-boundary-asan-a1/README.md).
+По 202 members, соответственно 1014552 и 1029284 bytes. Каждый содержит все четыре
+native attempts, отклонённую первую упаковку, 14 независимых consistency checks,
+16 negative controls и два полных исходных portable runs / 84 artifact entries.
+После --no-ff merge проверены все inventory/archive/member SHA. Reader source:
+e50af3eef91b2da932b086b8d9cab2f81fac1969. Это проверка целостности и условий
+capture/replay, не полная аттестация mapped-file lifetime или обучения fixtures.
