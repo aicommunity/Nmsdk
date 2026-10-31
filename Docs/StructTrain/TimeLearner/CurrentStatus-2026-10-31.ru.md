@@ -11,14 +11,52 @@ Gitlinks: PulseLib `086b04fb43bb57506558bfb6beba6250f61a6ce2`,
 Bin `cbb3bf453d82f58672541ed8a42f7b5da54a5508`,
 Rdk `c903b9bba4a31e604f9740ae6f6ed52a4e7de74a`.
 
-Рабочая ветка `codex/timelearner-threshold-calibration` содержит новые native
-threshold candidate/proposal API, schema-2 наблюдения фактического LTZone.Potential,
-независимые Python проверки, CLI select/confirm и candidate visual reports.
+Рабочая ветка `codex/timelearner-threshold-calibration` содержит native
+candidate/proposal/assessment API, schema-2 наблюдения LTZone.Potential,
+чтение raw observations, calibrated model export/import, независимый Python
+proof audit, frozen scoring/report adapter и CLI анализа/select/confirm.
 Она не объединена в develop: полная normal/ASan матрица и публикация её
 первичных данных ещё не приняты. Наличие API не означает готовность всего
 production calibration/PostTune controller.
 
-## Проверенные новые факты
+## Оперативный статус после последней перепроверки
+
+Реализованное в коде отделено от runtime acceptance. Нижний журнал сохраняет
+последовательность проверок: его ранние «ещё выполняется» относятся к моменту
+конкретной записи и не заменяют эту сводку.
+
+| Контур | Авторитетное состояние |
+|---|---|
+| Potential baseline, PulseLib 7f17735 | 16 native, 29 independent и отдельные 8 частично перекрывающихся checks прошли; compact bundles опубликованы. Это собственный снимок. |
+| Raw validator/assessment, PulseLib 25cf6a5 | 16/16 native и 35/35 independent прошли; 897 files / 8251508 bytes primary archive опубликован. Полная ASan приёмка открыта. |
+| Signed threshold, PulseLib 479084f | 6/6 native и 6/6 Python прошли на Elder; 425 files / 810680 bytes опубликованы. Повтор полного normal 16-case gate и ASan a2 ещё выполняются. |
+| Persisted observations, PulseLib fece852 | Код и проверки roundtrip/corruption добавлены; syntax compilation прошла. Native normal/ASan gates ожидают свой source/build. |
+| Calibrated state, PulseLib 353882b → ce7e81e | Export/import/proof/owner mirror реализованы. Шесть production units первого снимка прошли syntax-only; изменённый NativeCalibratedState.cpp ce7e81e отдельно прошёл syntax-only. Model runtime gates a1/a2 не завершены. |
+| Frozen scorer/report, root b22c15fec | Реализованы, 9-test actual-package readers ожидают native outputs. 35-test compatibility reader выполняется на сохранённых старых native данных. |
+| Полные calibrated reports, root 590526997 | M40 job ожидает native и reader acceptance; затем построит все 4 patterns × все сомы Classic/Branch. 3 report checks ещё не выполнены. Полные изображения — cache, не bulk Git. |
+| develop | Новая calibration ветка не объединена. Только этап 0 принят целиком; весь план остаётся незавершённым. |
+
+Дополнительная проверка реализации `ce7e81e002c802412ce50c1f2b2f76ffa7215b2a`
+(root `0f53ab4ec420b921f766cbd78a7fd10d248b8a86`) связывает proof не только
+с model hash/frequency, но и с реальными soma bindings и LTZone path/class.
+Неверный descriptor или лишние soma channels теперь отклоняются и native import,
+и Python auditor. Для этой добавки поставлены a2 native/9-test reader gates.
+
+[Syntax evidence](../../../Reports/StructTrain/TimeLearner/s08-calibrated-syntax-m40-a2/README.md)
+содержит 22 metadata/log files в 7332-byte архиве, commit
+`7e4a1f7002bb25846664d8fcdc5faa6f186fbf6f`. Первая попытка harness ошибочно
+разместила private PulseLib вне Libraries/Nmsdk-PulseLib: 4 API units прошли,
+2 learner units подхватили старые headers через relative includes. После
+исправления layout все 6 прошли без изменения исходников. Это syntax-only,
+без link/runtime/ASan acceptance. Первоначальный push по HTTPS завершился 128
+из-за отсутствия credentials; тот же commit опубликован через Git SSH,
+remote branch SHA проверен, исходный failure log сохранён.
+
+Старая isolated ASan попытка root 88b48711a / PulseLib dd35368 завершилась
+5/6 native cases: единственный failure — незарегистрированное имя генератора.
+Это не полный PASS и не ASan finding; исправленный снимок проверяется отдельно.
+
+## Журнал проверок и уточнений за день
 
 1. Разрешённая очистка тяжёлых производных отчётов завершена в origin и 14
    корневых Git-копиях с сохранением файлов, восьми stash и резервных bundles.
