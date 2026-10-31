@@ -1475,7 +1475,9 @@ template<class Learner> void ThresholdGridChecks(EditingRig<Learner>& rig,const 
     spec.confirmation.dataPartitionId="declared-primary-pair";spec.confirmation.clockId=rig.name+"/grid-clock";
     spec.confirmation.attemptId=rig.name+"/grid-success";
     const auto run=[&](NativeThresholdGridSpec job,NativeCalibrationTransactionStatus expected,const std::string& suffix) {
+        const auto begin=rig.environment->GetTime().GetTime();
         Transaction transaction(*rig.learner,job,implementation);
+        EXPECT_EQ(begin,rig.environment->GetTime().GetTime());
         for(unsigned tick=0;!transaction.Done();++tick)
         {
             ASSERT_LT(tick,20000u);
@@ -1532,6 +1534,22 @@ template<class Learner> void ThresholdGridChecks(EditingRig<Learner>& rig,const 
         rig.learner->TakeNativeRecognitionTrialResult();
     }
     restore();
+    for(bool clockChange:{false,true})
+    {
+        auto changed=spec;changed.confirmation.attemptId+=clockChange?"/clock-change":"/frequency-change";
+        Transaction transaction(*rig.learner,changed,implementation);transaction.Advance();refresh();
+        const auto time=rig.environment->GetTime().GetTime();
+        ASSERT_GT(time,1000u);
+        if(clockChange)rig.environment->GetTime().SetTime(time-1000);
+        else rig.model->SetGlobalTimeStep(rig.frequency*2);
+        transaction.Advance();
+        EXPECT_EQ(transaction.Status(),NativeCalibrationTransactionStatus::RecoveryRequired);
+        EXPECT_NE(transaction.Reason().find(clockChange?"clock_moved_backwards":"context_changed"),std::string::npos);
+        Artifact(rig.name+(clockChange?"_clock":"_frequency")+"_grid_context_guard.json",QJsonDocument(transaction.Report()).toJson());
+        rig.environment->GetTime().SetTime(time);rig.model->SetGlobalTimeStep(rig.frequency);
+        rig.learner->CancelNativeRecognitionTrial("explicit-context-recovery");
+        rig.learner->TakeNativeRecognitionTrialResult();restore();
+    }
 }
 
 template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,const QJsonObject& solo,bool recordThresholdPotential=false,bool finalizeCalibration=false,bool runGrid=false)
