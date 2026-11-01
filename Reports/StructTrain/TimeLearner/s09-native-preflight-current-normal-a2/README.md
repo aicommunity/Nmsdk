@@ -1,0 +1,3 @@
+# Native preflight with owned runtime capture: normal
+
+14 positive preflights, six negative controls, two stopped one-tick Train controls and 20 actual-data reader checks. The production prepare command generated 32 additional native preflights: Classic/Branch x N0/N1 x 1/2/4/6 inputs x 2000/20000 Hz. All preflights preserve zero model ticks. Actual process executable and mapped-library evidence is captured at the native cooperative boundary. Includes the preceding failed six-argument audit unchanged; it is not an accepted case. Binary root d2bf789 and analysis root f198767 have the same Console source tree. No completed-learning or classification claim. ASan comparison pending.
