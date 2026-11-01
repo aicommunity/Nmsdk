@@ -242,7 +242,8 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, ensure_ascii=False))
             return 0
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
-            print(json.dumps({"kind":"nmsdk_root_revision_resolution","status":"invalid","reason":str(error),"scientific_verdict":None}),file=sys.stderr)
+            kind = "nmsdk_root_revision_resolution" if args.action == "resolve" else "timelearner_script_migration_verification"
+            print(json.dumps({"kind":kind,"status":"invalid","reason":str(error),"scientific_verdict":None}),file=sys.stderr)
             return 2
     elif args.command == "bundle":
         from .artifact_bundle import pack_native_tests, verify_bundle, extract_bundle
