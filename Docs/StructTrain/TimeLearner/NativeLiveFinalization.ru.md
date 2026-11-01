@@ -166,3 +166,9 @@ Train используется штатный ExternalStop, закрывающи
 Добавлены восемь native controls: Classic/Branch × armed/training/queued/PostTune.
 Это пока непроверенная реализация: серверные сборки и runtime receipts ожидаются.
 Production job schema2 остаётся отдельной незавершённой задачей.
+
+Corrected visual-a2 завершён3/3 (518.175s),16reports,931 unchanged source files.
+Compact proof58c5b3985d3d156f71b4eac4256e4acbcaa2e338 опубликован. Все440 metadata
+members и8 selected PNG сверены по SHA; эти восемь непосредственно просмотрены
+в1920×960, читаемость принята в области SELECTED_VISUAL_REVIEW.json.
+Полная ручная приёмка cache и научный PASS отсутствуют.

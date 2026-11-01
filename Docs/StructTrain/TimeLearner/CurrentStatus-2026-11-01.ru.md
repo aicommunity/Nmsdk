@@ -263,3 +263,28 @@ acceptance, production job/CLI declaration, target-reference/parallel-peak фа�
 исторический replay/cold retrain, permutations/ITI и полная документация.
 Серия D не возобновляется. Августовские визуальные 4/8–6/8 сохраняют исходную
 доказательность. Научные 8/8 не являются условием завершения рефакторинга.
+
+## Обновление: chronological visual proof и явная отмена
+
+Исправленный renderer d16237f838eec366df86d05455b3d266386a0e88 завершён:
+16 reports,3/3 checks без skips,518.175 s,931 source files неизменны.
+213 training и42 recognition trial-soma pairs; полный cache6928 files /
+447227287 bytes остаётся на M40 Data. Compact proof58c5b3985d3d156f71b4eac4256e4acbcaa2e338
+содержит440 metadata members /277096 compressed bytes и8 PNG /1194620 bytes.
+Все outer/member hashes проверены после Git merge. Восемь выбранных
+first-soma target/foil overview/first zoom Classic/Branch непосредственно
+просмотрены в1920×960: подписи, входные импульсы и кривые читаются. Полный
+cache вручную не принят; SI units и settling за концом окна не подтверждены.
+Первый chronology-broken attempt сохранён отдельно.
+[Proof и точная область QA](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-visual-normal-a2/README.md).
+
+В PulseLib4d2d278 добавлена отмена live finalization между тиками: native
+ExternalStop закрывает частичную Train-пробу; queued cancel не импортирует
+модель; PostTune использует штатный transactional rollback. Внешний connected
+request не записывается. Cancelled armed declaration не начинает Train снова
+при оставшемся true provider. Root e7543c5eb8f1224138ec591d504b59a64d204777
+добавил8 реальных controls обеих топологий. На Elder job
+s08-native-live-finalization-cancel-normal-a1 / PID2233662 выполняет сборку
+на неизменяемом снимке; runtime acceptance ещё нет. Independent payload reader
+дополнен для actual cancellation records и48 malformed controls; его проверка
+ожидает producer. Production Train schema2 ещё не реализована.
