@@ -330,3 +330,25 @@ Source этих контрольных моделей имеет search_unresolv
 data, без шаблонного Test fallback. Первый выпуск требует optional modes Off
 и reset-per-trial evaluation. Общая очередь и полная матрица остаются открытыми.
 
+# Адресный анализ native ModelArchive transfer
+
+Для schema1 characterization fixture поддерживается отдельный модуль:
+
+```sh
+python3 -m Scripts.StructTrain.TimeLearner.archive_transfer_reports --input /path/to/immutable/run --output /path/to/new/report --plots
+```
+
+Он требует все12 условий transfer, успешные native16/unit10 receipts и полные
+source/import данные. Проверяются native clock, actual synapse input,
+Soma2.SumPotential, отдельный ExcChannel.Output, точные matrix references и
+semantic identity/images. Неизвестная схема, неполное окно или несогласованность
+блокируют положительный audit. Historical pre-schema fixtures не дополняются
+придуманными timestamps или complete=true.
+
+Рисунки показывают реальный выход $.Soma2 с наложенным входом; shared scale и
+100-tick tiles сохраняют детали. Один выходной ряд не переименовывается в Soma1.
+Это проверка переноса одной импульсной characterization пробы, не восьмипаттерновая
+классификация и не mid-probe checkpoint. Full figure cache хранится на M40,
+в Git публикуются сжатые primary, метрики и выбранные проверенные изображения.
+Границы и receipts: Docs/StructTrain/TimeLearner/ArchiveF64Precision.ru.md.
+
