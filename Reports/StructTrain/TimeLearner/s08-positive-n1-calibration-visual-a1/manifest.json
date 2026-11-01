@@ -1,0 +1,863 @@
+{
+  "kind": "positive_n1_actual_calibration_temporal_proof",
+  "schema_version": 1,
+  "validation": {
+    "status": 0,
+    "rows": [
+      {
+        "name": "Classic-grid",
+        "status": "nonseparable",
+        "matrices": 10,
+        "trial_soma_pairs": 160
+      },
+      {
+        "name": "Branch-grid",
+        "status": "nonseparable",
+        "matrices": 10,
+        "trial_soma_pairs": 80
+      }
+    ],
+    "source_files_unchanged": 206,
+    "temporal_tests": 3,
+    "wall_seconds": 1156.3490705490112,
+    "manual_visual_review_complete": false,
+    "scientific_verdict": null
+  },
+  "cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1",
+  "records": [
+    {
+      "path": "receipts/supervisor.log",
+      "bytes": 39,
+      "sha256": "a508a16ab91a75e1142655ecf099aa0ef57d3defe98d2a0b58696059bfa5a888"
+    },
+    {
+      "path": "receipts/launch.json",
+      "bytes": 735,
+      "sha256": "fa9f46ca2a49d8ec95bf809b77e5ebe939cfea9de31a400253ae265b6c7631e1"
+    },
+    {
+      "path": "receipts/counterpart-equivalence.json",
+      "bytes": 1406,
+      "sha256": "28d5988a6c14226010312359c86615791bb1e75d094f8b286f2917dbbf17a74a"
+    },
+    {
+      "path": "receipts/evidence/progress.json",
+      "bytes": 231,
+      "sha256": "4785020d47c86a3218fc3d5de522a85abdf42f0b1791bfe5d993fb379393fcec"
+    },
+    {
+      "path": "receipts/evidence/validation.json",
+      "bytes": 452,
+      "sha256": "f37e7c05a28d821727b50ae769ffc0a1f1c657572a8b9166b03d4ffe4b91b9bf"
+    },
+    {
+      "path": "receipts/evidence/reader.log",
+      "bytes": 1759376,
+      "sha256": "0ea25b597150520a3b4cd3c1a55c8b6b32e4e82cad8f8e09b67ab842386051d5"
+    },
+    {
+      "path": "metadata/Classic-grid/SHA256SUMS.json",
+      "bytes": 922695,
+      "sha256": "b8ada5193386bb96304d8c4ff9d7673ae4996d3669b4cb891d02b8d22452fb71"
+    },
+    {
+      "path": "metadata/Classic-grid/manifest.json",
+      "bytes": 5719,
+      "sha256": "16bc0e0b72577ba0c55e38c51b324ce7630a1dc803ce628b1d9205f1b7f3ad9b"
+    },
+    {
+      "path": "metadata/Classic-grid/run-binding.json",
+      "bytes": 640,
+      "sha256": "13c4dbb7e0d7697c287bdb27cd094cfd160e127e2b7b694d5c8c7308b452b5ec"
+    },
+    {
+      "path": "metadata/Branch-grid/SHA256SUMS.json",
+      "bytes": 481215,
+      "sha256": "6d0da4da119ca536291b42d50ed6004e96a3a71d5a0cf0dcb0bd93a6b2b203a3"
+    },
+    {
+      "path": "metadata/Branch-grid/manifest.json",
+      "bytes": 5704,
+      "sha256": "f0bf0c35babc6512ac3e0a35c920f27d8b2d600745642a296bb057d5f3c7aae9"
+    },
+    {
+      "path": "metadata/Branch-grid/run-binding.json",
+      "bytes": 639,
+      "sha256": "5841e3b71b0ccec03dbd33830301e15d743c4878739c0648e9581e68af0842bc"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0007/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "2ea5585a54538ec2cab587aa76819d5e482bcfda4df909fe63f01700d9c29024"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0007/analysis.json",
+      "bytes": 5541,
+      "sha256": "05bc6e7496c5652cf613b2487229634fad8bdfd05f0d367bb4e4d26a854d4c68"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0007/series.json",
+      "bytes": 12781,
+      "sha256": "25722c2af20e6bffd92a4d02bca525bd68e6c02c35fbc56332bce1555a92b4ce"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0007/manifest.json",
+      "bytes": 201362,
+      "sha256": "3a46495a7cc0f3ee7587e33d8dc83399a1c052f480c0ab6298c15b3fb45ef6a6"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0004/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "84f83c9e171211e325bec91af1637158cb174d49935b740b6f7dc18570a46839"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0004/analysis.json",
+      "bytes": 5592,
+      "sha256": "2e7c8e2aa56bc26c71d382df0b51b4e53e9461dc011277a31c66452764f1b8cc"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0004/series.json",
+      "bytes": 12687,
+      "sha256": "82acf9f10e39ac04f54fc87f4129bac01884efe7aa9a55296535f01f25ea8b2c"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0004/manifest.json",
+      "bytes": 201282,
+      "sha256": "a948e66cd9cee63088dc4accbe1744cfa05747685d12466e29df942ba3829ef5"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0001/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "d71c23a6afc008bb3060fd2f2346b9f3a4db0375810b82556813ee432a25914d"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0001/analysis.json",
+      "bytes": 5610,
+      "sha256": "f690b82430405524937276522872e948739212ecbf2669d52a2cf9132a8afd20"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0001/series.json",
+      "bytes": 12527,
+      "sha256": "47a03e39dd6ecc213c2bb13630c493f0f17c17bfe53b3be57e3a75a4078bf505"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0001/manifest.json",
+      "bytes": 200585,
+      "sha256": "20d697be2777278c5b3f9519434204f1289a4c65c6e49eec7ed20764921643a8"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0002/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "771f407028a8b0f2336ba7a52c4badbaadfa7bf4214595a3918ee231952fb0be"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0002/analysis.json",
+      "bytes": 5592,
+      "sha256": "733d8e21e0cb2c421dd443f1715025d6e3ab73c77c4f14a8aeaa2efd92c58ab7"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0002/series.json",
+      "bytes": 12543,
+      "sha256": "0e53958c20dfcf4eaef37e3201ed4858409dd9c9ac59ab213c9989f8d99a828a"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0002/manifest.json",
+      "bytes": 200586,
+      "sha256": "8522d02ab5f4e59806dd5b70e040c0ad127cd544455a6a4fd3ba40e01cca8dfd"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0008/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "0c3fcbac4d9d33c1f3873e0971214bcd2ed65e15c47e157737949d6290315ca9"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0008/analysis.json",
+      "bytes": 5495,
+      "sha256": "5c44a447af5b4a4ff55a809b481c66e84df63dce132eb0d65813ff71d5919a4e"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0008/series.json",
+      "bytes": 12793,
+      "sha256": "73392f5f971b2488d0924413125e8f5d95b0cbe20b9c2b821efbccf67b63aaae"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0008/manifest.json",
+      "bytes": 201737,
+      "sha256": "1bb3d4250c7f3334108e854ba8764379dfa4127c36451a001a7424e092084e16"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0009/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "184897b6474b10ad986df37a0a561d9521357c18813a15ab5ca9683ec371a06b"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0009/analysis.json",
+      "bytes": 5417,
+      "sha256": "f8155a6aee017e3da00ce506b477876b2f353bc9b22b15cb153a932277c3e651"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0009/series.json",
+      "bytes": 12681,
+      "sha256": "3edb0a8a281913815064b38187a35d181e5822a8c69c904924c9b3472cc339b7"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0009/manifest.json",
+      "bytes": 201245,
+      "sha256": "fc0d7c3c4f49d4630c9f0fcaff1c0fe10bfb032324d2f026563800df1600e93a"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0005/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "f3499d296285b8a4a2f494e0f0f768f339832e66e43ba62c3103201a5750f5a4"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0005/analysis.json",
+      "bytes": 5589,
+      "sha256": "26012c92c75a3a3a16675b0ff1e909f9c64103ead05e3e6952e09f6d28bcfbfe"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0005/series.json",
+      "bytes": 12729,
+      "sha256": "0014985c0e037ac31128e3e9ef9a2661d6972dac6475e47f7b1a87a7d25782ab"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0005/manifest.json",
+      "bytes": 201597,
+      "sha256": "d11ff7eab1b7383bcd2786e718a6d5a6c0591f870ae4efb8722ab7991460f7c8"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0006/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "dd868790e2e5f296dc6b92fef406366273423cd30079283d61fc7be1e5ee8625"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0006/analysis.json",
+      "bytes": 5546,
+      "sha256": "d522e703e46a84976cbff0d499291676f258fa5adab264769c9797fe5e484004"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0006/series.json",
+      "bytes": 12675,
+      "sha256": "0335c15ebaebaac7a44d6e808d0aa839d5488c31ab89b352ca537b617320021b"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0006/manifest.json",
+      "bytes": 201211,
+      "sha256": "adf5d6fdfb961922f1cf11cb94f4e9ce77e111782c10e52cbc5ce03ca343f1bb"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0003/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "2fc56dcae40f7e163636e2252e9a6d0b2f680895c3bb39aadc68c7e065b6e3df"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0003/analysis.json",
+      "bytes": 5598,
+      "sha256": "5a2677958a002f47147441769099560630725d1436d1f94d1b0847714d8ed70b"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0003/series.json",
+      "bytes": 12643,
+      "sha256": "80709cf45fa7847954493e822af252a55abdac92ec2efb38d2002755f3d043ed"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0003/manifest.json",
+      "bytes": 201080,
+      "sha256": "1dda629ba332a88293f100ec1cc5c67b06734f40a66dba81f67817b32348fb05"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0000/SHA256SUMS.json",
+      "bytes": 79938,
+      "sha256": "045dcd94918b191dde7cb6bc62b7580fbd28727e61948ac8483fc146b3d37004"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0000/analysis.json",
+      "bytes": 5632,
+      "sha256": "a8b1923d04e81574714aa0e62dab5b934d26dc39f764b45e05846165c5caf92f"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0000/series.json",
+      "bytes": 12491,
+      "sha256": "47db4f8beb3f20f96f736649d989dad33d9ac40e68d1947e58e975f531eed0da"
+    },
+    {
+      "path": "metadata/Classic-grid/candidate-0000/manifest.json",
+      "bytes": 201460,
+      "sha256": "ff379d78db936c6212aaa40db67491cc0f727a298ae62da48536b9009a151df1"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0007/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "21ea31e444e9c7acdd992033c11811b686fa49e97a1c122e27672d4949b50562"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0007/analysis.json",
+      "bytes": 5529,
+      "sha256": "59dad67ad44cd9238641dcfee1f250bccd88b42809419048c0418de8ba3b8923"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0007/series.json",
+      "bytes": 6386,
+      "sha256": "dcd6addeb404a05a6b2398e6eb1838fa83fb039b01518e9e53c7eae2d49e6d22"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0007/manifest.json",
+      "bytes": 102443,
+      "sha256": "1315ea5508baa4818c666ab71499d80050c6a54057c83c2833575eb9e581f2b1"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0004/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "3e0db0da43076b7946ac5424d0c54a8959d45eaafc68599aaa1391d4ac3ecd0a"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0004/analysis.json",
+      "bytes": 5580,
+      "sha256": "f910dd5b867e9a685291d234629be4d6f846b5a5d31e9cc6912a62545c98e4b9"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0004/series.json",
+      "bytes": 6339,
+      "sha256": "23e80462816f70cd9a27ec32b23d44cc85f85ef5a7700097532f6bff78a28c60"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0004/manifest.json",
+      "bytes": 102410,
+      "sha256": "fd393909e3e78122f483538ce99fcec8560a062b1751630d3268f3dd81aea10a"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0001/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "4eb4b797a38382b15839202993a11f67ff5a6d9f05c30dbc63b72744d78ca6ff"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0001/analysis.json",
+      "bytes": 5601,
+      "sha256": "d880f6a698d7495d25ed32096068d8bd9b466781eef2e67577002ca443c00a94"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0001/series.json",
+      "bytes": 6259,
+      "sha256": "603dc7bf1e0167157e4c0d71ef61139fee6a8924b8d6688b9e20a09fef0c314b"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0001/manifest.json",
+      "bytes": 102050,
+      "sha256": "2c9c26a80d0d51f96457cbbccd6f07cc5659ea7bb7ec51181dc70f60587b72d7"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0002/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "e45365fbb64315450a32413832fe75f723396e804b0f78b3b1cf22d3e21d1566"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0002/analysis.json",
+      "bytes": 5580,
+      "sha256": "4f3fcdc6c67a0f2b5aee3f3b7be7752fa9ccdbc2263284d617398d98dad1fced"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0002/series.json",
+      "bytes": 6267,
+      "sha256": "defb1569aadd0439b379733854574d52f6275263b2423db539648c007890952f"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0002/manifest.json",
+      "bytes": 102050,
+      "sha256": "117f10fc30218d71c704e07c6a92cbbc0bae61db30f498f579d1c4cafa55fcb4"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0008/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "04c6bdd27410fa8fd7a4e2273259c868d223bc08616e68dee6cc8226f246eb8a"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0008/analysis.json",
+      "bytes": 5483,
+      "sha256": "a7d2f3a8e4e472e8e14b5d7320820160c3061bb6b15e0c349288758906c10420"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0008/series.json",
+      "bytes": 6392,
+      "sha256": "690b4dd64efe1b0efa3a6f9f93fa60da3058c777d648b38ccac36a06f7ae2302"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0008/manifest.json",
+      "bytes": 102636,
+      "sha256": "63a3504368d9e4cb828807b77f2d58236b2e8daeb1344a454a5d5d88a52489be"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0009/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "e7bb5b300e4e767653159448525833a887fc4a346bfc8fe88e5c49e6d09be7df"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0009/analysis.json",
+      "bytes": 5408,
+      "sha256": "17595b5e16f4b44c46d28104c74a19a2586f794c7ebdf950056eee4d74983038"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0009/series.json",
+      "bytes": 6336,
+      "sha256": "6b73a6d6ecee13f2c377546921dfb236897c9638073067beec3732e8ddbf5d29"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0009/manifest.json",
+      "bytes": 102384,
+      "sha256": "c20030f9aca9a1f815ec3900488ab7f5f8837a128f2a2517e0d04273a005626e"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0005/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "90881faef34462515ad95eaad5d4327261155fa7e44aed8af083a48aa5af15f4"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0005/analysis.json",
+      "bytes": 5580,
+      "sha256": "4f8819b18bbeb6a6ad4d72f7c73aeeecfef54cf4d33f769436aee7a959043a84"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0005/series.json",
+      "bytes": 6360,
+      "sha256": "360e9901acba0482fb3a2e40232fd81781d16a4b2595608c32b9eeadadb3e5c3"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0005/manifest.json",
+      "bytes": 102560,
+      "sha256": "725faf945157c6afd58537dce62179fe95d09c758c27698416a7e1508957120e"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0006/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "52cc600eb25c2ab3fbbfc82928c43f0d49d83a8708ad03776d0582c88430fef8"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0006/analysis.json",
+      "bytes": 5537,
+      "sha256": "d6d5718a82a82cc5fc667dd463648384e696874211853e738e7f7c72b3cbb30d"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0006/series.json",
+      "bytes": 6333,
+      "sha256": "498703cffe7f0a959a5c200111324a2af94e64382c12923a4e39fa558710e2f3"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0006/manifest.json",
+      "bytes": 102364,
+      "sha256": "ff545140ef5fb2669147403df09610ce3b5a8e53fba0aec3f7e658d395d24824"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0003/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "5eabd4d5bce78f8a97d4fd6f0af628623247e0c363877d2629fdae40f8c8b381"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0003/analysis.json",
+      "bytes": 5589,
+      "sha256": "2da4dd486099578ac09d9d13a780834498d0fd1167479fd3cccbc3b4117f8711"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0003/series.json",
+      "bytes": 6317,
+      "sha256": "cb0c0b7d8d36347301e331f28206650df52fd649b2779059c64db5f332085218"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0003/manifest.json",
+      "bytes": 102293,
+      "sha256": "ff9b256beca78130a0be37fbe28dea319ed6354e34bb097992d836270d68726f"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0000/SHA256SUMS.json",
+      "bytes": 41145,
+      "sha256": "66aad307fd9aef049aefde3abd879e71d8ce02853a6f9cb859c5875923706e5b"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0000/analysis.json",
+      "bytes": 5623,
+      "sha256": "965c4c0edea9204182d9cd7b51b70bdf4eb373b009ca11eab338dae7ee97ddb9"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0000/series.json",
+      "bytes": 6241,
+      "sha256": "47526a52e711dad511e9debfec518fbdc53b70c4794b2e62e5152667667beb2c"
+    },
+    {
+      "path": "metadata/Branch-grid/candidate-0000/manifest.json",
+      "bytes": 102483,
+      "sha256": "d945abe43ff99eb0349377a19b3c7308f789de79a9bed073e3b9557f2e8327d2"
+    }
+  ],
+  "selected": [
+    {
+      "path": "selected/Classic/candidate-0004/target-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0000-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "977f938d00ed3f3bded7bc422d3fa21ab7f656122a32a4b1fd119736541c0905",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/target-soma0-zoom-001.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0000-soma-001/zoom-001.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-001",
+      "spike_count": 1,
+      "sha256": "df5b58d42769c2e7af169fe01e07766c4c1c1ee8e730ee050109e6f81f18f8b7",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/target-soma0-zoom-002.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0000-soma-001/zoom-002.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-002",
+      "spike_count": 1,
+      "sha256": "40e77aa3b8567f53f7e42b0b9a6da4fb6125f28625ef36d803f8919163599c72",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/target-soma1-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0000-soma-002/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 1,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "2a5226a493091de972e0853f34bc312797423a4d20b98ed2e11fe14c348dfac5",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/target-soma1-zoom-001.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0000-soma-002/zoom-001.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 1,
+      "view": "zoom-001",
+      "spike_count": 1,
+      "sha256": "6613295a66efc4b3add220fc353fc1225e43d24893ce8a6835afdb6907164f25",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-0-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0001-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/1",
+      "sample_id": "foil-0",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "14a66ea86e698daf976373dad3c92ec877d8afaa018aece3d120c8f069e5fae9",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-0-soma0-zoom-001.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0001-soma-001/zoom-001.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/1",
+      "sample_id": "foil-0",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-001",
+      "spike_count": 1,
+      "sha256": "432041bc193169909b3c8446fec02ed7089c42b5f8b27d1d7d84eba214ba9e9e",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-0-soma0-zoom-002.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0001-soma-001/zoom-002.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/1",
+      "sample_id": "foil-0",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-002",
+      "spike_count": 1,
+      "sha256": "5402a5e95dff96ee1f5bd710d2ea64b2db92d860915b866ab2296887d281d5f6",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-1-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0002-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/2",
+      "sample_id": "foil-1",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "4e6c2cc4892b4edd6c39db25bc3ccb40efc6e73ffe0f093f0640bc41d5bdc0f3",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-2-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0003-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/3",
+      "sample_id": "foil-2",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "9b366cfd08095f71b049e1a4039ddc412508455784ac1d111d5df588ea17d4b9",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-3-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0004-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/4",
+      "sample_id": "foil-3",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "d38ef3906d05a1bb69666ec3b24abbed2d47a97a9c55757ecd84c03e04a348a2",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-4-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0005-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/5",
+      "sample_id": "foil-4",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "600339a38bcc59970b5623916ea0d07631dfd1b4b777ccd9daa9bc4f1058224b",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-5-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0006-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/6",
+      "sample_id": "foil-5",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "73b13cf6c7a366fc22777556d8baa1a66a28f552f387649083f2b7362bf28350",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0004/foil-6-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0004/trial-0007-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/7",
+      "sample_id": "foil-6",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "8172851933cb28442cb54e90c06e2edf29275e04de70e84f2a815462ea4c70d3",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Classic/candidate-0009/target-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Classic-grid/candidate-0009/trial-0000-soma-001/overview.png",
+      "trial_id": "Classic/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 9,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "5a5621f66953f4c22a97ab40820269603d653cccdc4f8f1b203403848f3b90c1",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/target-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0000-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "a2ad9513d0b7a212d25e1a905a0558c5f4317218adb9d17d34cc41fe88bf68be",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/target-soma0-zoom-001.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0000-soma-001/zoom-001.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-001",
+      "spike_count": 1,
+      "sha256": "d2e931b30ddc105b3f0ec1e09a943e2612fc8b6818cedf6838a13cf152c33e8f",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/target-soma0-zoom-002.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0000-soma-001/zoom-002.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-002",
+      "spike_count": 1,
+      "sha256": "94783b3ffb82883f0b89ec3499bc125901dd6ecf10cd7895b51e38f15d004448",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-0-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0001-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/1",
+      "sample_id": "foil-0",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "cd71190cec689a9946e4e4c9f6d72d561e82e6005348c01247b33908f97bc231",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-0-soma0-zoom-001.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0001-soma-001/zoom-001.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/1",
+      "sample_id": "foil-0",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-001",
+      "spike_count": 1,
+      "sha256": "5296bef0f9def539d4cd60d6a59a0b54d19b7ffb6649c78bc82a37b7c84bbee1",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-0-soma0-zoom-002.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0001-soma-001/zoom-002.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/1",
+      "sample_id": "foil-0",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "zoom-002",
+      "spike_count": 1,
+      "sha256": "08d834aa91b3482edc92620b8bae58c56895df7e58456da8d88462f296e3c92b",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-1-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0002-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/2",
+      "sample_id": "foil-1",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "542299a00b92d1604dcad7199eb905750412f543812ab39ea03b425b6ef0fbd1",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-2-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0003-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/3",
+      "sample_id": "foil-2",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 1,
+      "sha256": "d613ebac9c68825668c504e12e6708c8948769e95bd81ec7e1d0ade131c6d6b4",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-3-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0004-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/4",
+      "sample_id": "foil-3",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "a966879a3dc9b6d4ecee94f4ef0cf070fbf36401fcede6498ee30f2126490e9e",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-4-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0005-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/5",
+      "sample_id": "foil-4",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "23c3fd0aca3ee5c33111497703d7e015d78d7202d0840aee801526205a15e813",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-5-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0006-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/6",
+      "sample_id": "foil-5",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "fdc5b4ad241ea5c0aa97338ed9ef0a6e7fac6572a14fd3a3c2eac1d374bff80c",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0004/foil-6-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0004/trial-0007-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/7",
+      "sample_id": "foil-6",
+      "label": "foil",
+      "candidate_index": 4,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "3082b46972362a32ea4be1a46171600545917fd7125a2310061dd99997393665",
+      "manual_reviewed": false
+    },
+    {
+      "path": "selected/Branch/candidate-0009/target-soma0-overview.png",
+      "source_cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-positive-n1-calibration-normal-a1/Branch-grid/candidate-0009/trial-0000-soma-001/overview.png",
+      "trial_id": "Branch/positive-n1-same-matrix-grid-v1/search/0",
+      "sample_id": "target",
+      "label": "target",
+      "candidate_index": 9,
+      "soma": 0,
+      "view": "overview",
+      "spike_count": 0,
+      "sha256": "303d65f38fa883766f938e1dd6b5fb587e560f0419b5d42e284097fc79710e7b",
+      "manual_reviewed": false
+    }
+  ],
+  "renderer_root": "1f2196e673e36007b690b02fceb08185669238c0",
+  "normal_primary": "27c5120e06d61be2244fd92111a4b062774880a8",
+  "asan_primary": "bd2e283bd9410367aa7cb063ac2eaa2a3901839a",
+  "counterpart_reuse": "four complete transaction/restored-model JSON values compare equal; distinct runtime provenance, no independent scientific replicate",
+  "manual_selected_review_complete": false,
+  "manual_full_cache_review_complete": false,
+  "scientific_verdict": null,
+  "results": "Each topology on each worker: best actually measured target-detecting candidate TP1 FP3 FN0 TN4 (5/8); all10 candidate grid nonseparable, original threshold1 restored, no calibrated package. Candidate4 plots are diagnostic, not independent frozen Test."
+}
