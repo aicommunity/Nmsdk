@@ -1,4 +1,14 @@
-# Эффективные области N1: следующий алгоритмический подэтап
+# Эффективные области N1: контракт и история
+
+Текущий native controller выполняет отдельные ResistanceDomain actions перед
+измерениями изменяемого Rs; после effective edit область запрашивается заново.
+Это реализованный production-путь, а не только первоначальный план ниже.
+Полная матрица physical profiles остаётся открытой. Новое уточнение между
+измеренными seed points описано отдельно в
+[MeasuredResistanceRefinement](MeasuredResistanceRefinement.ru.md) и ещё проходит
+серверную приёмку; оно не заменяет проверку native effective interval.
+
+## Историческая постановка и адресные проверки
 
 Ветка `stage07/native-dynamic-bounds` создана от develop. Зависимости native state
 включены отдельными `--no-ff` merges рабочих веток; это не их приёмка в develop.
