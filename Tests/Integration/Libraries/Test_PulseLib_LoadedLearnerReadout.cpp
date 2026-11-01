@@ -112,8 +112,9 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  channel=neuron->template GetComponentL<NPulseChannel>("Soma1.ExcChannel",true);
  synapse=neuron->template GetComponentL<NPulseSynapse>("Dendrite1_1.ExcSynapse1",true);ASSERT_TRUE(channel);ASSERT_TRUE(synapse);
  EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.23e-9);EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),91e6);
- // Repeated native Build must bind the existing tree without recreating physics.
- auto* identity=neuron.Get();learner->StructureBuildMode=0;model->Build();core.environment->Reset();
+ // A Ready component's Build is a native no-op, not a forced reconstruction.
+ auto* identity=neuron.Get();const auto readyLifecycle=learner->ObserveLifecycle();
+ learner->Build();EXPECT_TRUE(readyLifecycle.IsCurrent());core.environment->Reset();
  EXPECT_EQ(learner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),identity);
  EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.23e-9);EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),91e6);
  std::vector<std::vector<double>> restored;capture(learner,model,restored);ASSERT_FALSE(::testing::Test::HasFatalFailure());
@@ -134,14 +135,15 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  EXPECT_EQ(pulses,count);EXPECT_GT(maximum,1e-8);
  ReadoutArtifact(artifact+"roundtrip.csv",trace.str());
  // A corrupted output state must be diagnosed before children, without a
- // per-tick resize. An explicit native Build repairs only this workspace.
+ // per-tick resize. A no-op Build must retain the diagnostic under Rdk rules.
  learner->SomaNeuronAmplitude.Assign(1,2,0.0);ASSERT_TRUE(learner->IsReady());
  model->Calculate();
  EXPECT_EQ(learner->NativeModelEditFailure(),"legacy_readout_shape_requires_build");
  EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),2);
- learner->StructureBuildMode=0;learner->Build();core.environment->Reset();
- EXPECT_TRUE(learner->NativeModelEditFailure().empty());
- EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),count+1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),1);
+ const auto failedLifecycle=learner->ObserveLifecycle();learner->Build();
+ EXPECT_TRUE(failedLifecycle.IsCurrent());
+ EXPECT_EQ(learner->NativeModelEditFailure(),"legacy_readout_shape_requires_build");
+ EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),2);
  EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.23e-9);EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),91e6);
  core.environment->DestroyModel();
 }
