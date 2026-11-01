@@ -1,5 +1,6 @@
 """Owned saved-state Phase A replay on the original immutable August Git closure."""
 import argparse
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -76,11 +77,46 @@ def prepare_case(bin_repo, relative, directory):
     return inputs, work, ref, records
 
 
+def add_native_temporal_observer(bin_repo, work):
+    """Use the historical registered Rdk recorder; never calculate a neuron here."""
+    raw = subprocess.check_output(["git", "-C", str(bin_repo), "show", BIN+
+        ":Configs/SpikeSamples/StructTrain/SelectivityPhaseA/EXP00_baseline/Train/Model_00.xml"])
+    template = ET.fromstring(raw).find(".//StatisticDoubleMatrix")
+    require(template is not None and template.get("Class") == "UStatisticDoubleMatrix",
+            "historical_stock_statistic_template_missing")
+    path = work/"Model_00.xml";tree = ET.parse(path);model = tree.getroot().find("./Model")
+    links = model.find("./Links");components = model.find("./Components")
+    require(links is not None and components is not None
+            and components.find("./ReplayTemporalStatistic") is None, "historical_observer_graph_invalid")
+    observer = copy.deepcopy(template);observer.tag = "ReplayTemporalStatistic"
+    for name, value in {"Activity": "1", "SavePath": "TemporalTrace", "SubFolderAfterResetFlag": "0",
+                        "ForceCreateSavePath": "1", "TimeInterval": "0", "AverageMode": "0", "SaveMode": "0",
+                        "WriteIndexFlag": "1", "WriteModelTimeStampFlag": "1"}.items():
+        prop = observer.find("./Parameters/"+name)
+        require(prop is not None, "historical_statistic_property_missing:"+name);prop.text = value
+    components.append(observer)
+    descriptors = [("NeuronTimeLearner.Neuron.Soma"+str(i), "SumPotential", "soma"+str(i)) for i in range(1, 5)]
+    descriptors += [("NeuronTimeLearner.DatasetMatrix.Generator1", "Output", "stimulus"),
+                    ("NeuronTimeLearner.Neuron.LTZone", "Output", "lt_spikes"),
+                    ("NeuronTimeLearner", "SomaNeuronAmplitude", "learner_cached_somas")]
+    for owner, prop, role in descriptors:
+        link = ET.SubElement(links, "elem", {"Type": "ULink"})
+        ET.SubElement(link, "Item", {"Type": "ULinkSide", "Index": "-1", "Name": prop}).text = owner
+        ET.SubElement(link, "Connector", {"Type": "ULinkSide", "Index": "-1", "Name": "InputMatrixData"}).text = observer.tag
+    links.set("Size", str(len(links)))
+    tree.write(path, encoding="utf-8", xml_declaration=False)
+    return {"component": observer.tag, "class": observer.get("Class"), "streams":
+            [{"source": owner+"."+prop, "role": role} for owner, prop, role in descriptors],
+            "source_code_patched": False, "sampling": "native scheduler, TimeInterval0; no averaging"}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--runtime", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--observe", action="store_true", help="add historical stock UStatisticDoubleMatrix")
+    parser.add_argument("--baseline", type=Path, help="untouched completed replay required for observer comparison")
     args = parser.parse_args()
     source = args.source_root.resolve(strict=True);runtime = load(args.runtime)
     closure = source_closure(source)
@@ -88,16 +124,19 @@ def main():
             and closure["Libraries/Nmsdk-PulseLib"]["head"] == PULSE, "historical_phasea_closure_mismatch")
     require(runtime["source_closure"] == closure, "historical_runtime_closure_mismatch")
     verify_runtime(runtime)
+    require(args.observe == (args.baseline is not None), "observer_requires_untouched_baseline")
     args.output.mkdir(parents=True, exist_ok=False)
     rows = [];write(args.output/"closure.json", closure)
     for name, relative, old_correct in CASES:
         folder = args.output/name
         inputs, work, reference, records = prepare_case(source/"Bin", relative, folder)
+        observer = add_native_temporal_observer(source/"Bin", work) if args.observe else None
+        write(folder/"observer.json", observer)
         copied_ini = work/"NeuroModelerConsole.ini"
         shutil.copyfile(runtime["app_ini"]["path"], copied_ini)
         require(hashlib.sha256(copied_ini.read_bytes()).hexdigest() == runtime["app_ini"]["sha256"],
                 "historical_cwd_runtime_ini_mismatch")
-        before = model_readback(inputs/"Model_00.xml")
+        before = model_readback(work/"Model_00.xml")
         write(folder/"inputs.json", records)
         print("REPLAY", name, flush=True)
         result = execute(runtime, ["-c", str(work/"Project.ini"), "-s", "-t", "40", "-x", "-S"],
@@ -108,6 +147,11 @@ def main():
         actual_csv = work/"SelectivityLog/results.csv"
         original = analyze_historical_csv(reference, [str(i) for i in range(8)])
         actual = analyze_historical_csv(actual_csv, [str(i) for i in range(8)])
+        passive = None
+        if args.observe:
+            prior = args.baseline/name/"work/SelectivityLog/results.csv"
+            require(prior.is_file(), "untouched_baseline_missing")
+            passive = prior.read_bytes() == actual_csv.read_bytes()
         require(original["native_match_count"] == old_correct, "wrong_original_phasea_reference")
         require([(r["trial_id"], r["label"], r["isis"]) for r in original["rows"]]
                 == [(r["trial_id"], r["label"], r["isis"]) for r in actual["rows"]],
@@ -122,6 +166,7 @@ def main():
                   "saved_source_graph": before, "post_run_graph": after,
                   "graph_paths_classes_equal": before["graph"] == after["graph"],
                   "selected_parameter_differences": differences, "full_frozen_model_verified": False,
+                  "native_observer": observer, "csv_byte_equal_to_untouched_replay": passive,
                   "temporal_report_complete": False, "scientific_verdict": None}
         write(folder/"comparison.json", report)
         rows.append({"name": name, "archived_correct": old_correct,
@@ -129,6 +174,7 @@ def main():
                      "same_reported_counts": report["same_reported_counts"],
                      "graph_paths_classes_equal": report["graph_paths_classes_equal"],
                      "selected_parameter_differences": len(differences)})
+        rows[-1]["csv_byte_equal_to_untouched_replay"] = passive
         write(args.output/"progress.json", rows)
     require(source_closure(source) == closure, "historical_source_changed_during_replay")
     write(args.output/"validation.json", {"kind": "phasea_historical_saved_state_replay", "rows": rows,
