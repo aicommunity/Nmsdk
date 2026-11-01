@@ -7,6 +7,20 @@ configured learner properties. Отдельные typed PostTune/calibration API
 model import и production jobs реализованы позднее; актуальная граница описана
 в дополнении 31.10 в конце документа. Cold declaration не является checkpoint.
 
+## Актуальная граница configured PostTune
+
+По принятому PulseLib456a5ab и [NativeLiveFinalization](NativeLiveFinalization.ru.md)
+подключение native фаз к hooks уже выполнено. EnablePostTrainTuning=true
+разрешён при заранее установленном и согласованном NativeLiveFinalizationSpec;
+при отсутствии плана прежний guard сохраняется. Public mode/metric/пороговые
+flags проверяются относительно typed declaration, а не заменяют её. Runtime
+план не восстанавливается одним ControllerConfiguration после XML Load.
+SyncCapacitanceTrim обязан быть0, AutoCalibrateFixedLTZThreshold —false:
+старый target-reference протокол не подменяется реализованной grid calibration.
+Дополнения31.10 ниже сохраняют промежуточную историю; их фразы об отсутствующем
+hook dispatch не описывают текущее состояние. Полные этапы6–8 остаются открытыми.
+[Проверка текущего источника](PropertySourceDrift.ru.md).
+
 ## Порог и training-only калибровка
 
 | Свойство | Default, тип/единицы | Фактическое применение/setter | Ограничения и проверки |
@@ -30,7 +44,7 @@ finite/range validation. Native training ошибки идут через typed 
 
 | Свойство | Тип/default | Фактическая логика | Ограничения и обязательные controls |
 |---|---|---|---|
-| EnablePostTrainTuning | bool, **true** | Legacy EndOfLearning переводит в PostTune; native configured/BeginNativeTraining включение отвергают | Поэтому default legacy configuration не является готовым V2 config. Явное Off — базовый обязательный протокол, не ошибка постановки |
+| EnablePostTrainTuning | bool, **true** | Legacy EndOfLearning переводит в PostTune; native configured допускает включение только с согласованным заранее установленным live-finalization plan | Поэтому default legacy configuration не является готовым V2 config. Явное Off — базовый обязательный протокол, не ошибка постановки |
 | PostTrainTipResistanceMode | int, 1 CanonRmin | 0 Off, 1 CanonRmin, 2 FlatLastR, 3 KeepDone, 4 SearchSynthetic. ApplyPostTrainTipMode выбирает snapshot/canonical/flat/trial tips; неизвестный mode может попасть в canonical fallback | Setter отсутствует; preflight должен отвергать неизвестный enum. Нужны все commit/rollback/interruption controls и post-transform model identity |
 | EnablePostTrainMidThreshold | bool, true | Разрешает mid computation и inference free-run probes совместно с EnablePostTrainTuning; участвует также в Dataset hold/release | Это отдельная изменяющая порог стадия, не passive analysis. Frozen Test должен отключить автоматическое доподбирание |
 | PostTrainMidMetric | int, 0 Auto | 1 LTZ, 2 Soma. Auto Classic читает LTZ peak; Auto Branch использует shared-soma-related peak path. Branch ReadPostTuneProbeMetric берёт также max с per-input MaxIterSomaAmp; live metric берёт shared soma | Нельзя сравнивать Auto разных классов как одну величину. Нужно определить единственную измерительную процедуру и проверить тип наблюдений, а не полагаться на имя soma_amp_sum |
