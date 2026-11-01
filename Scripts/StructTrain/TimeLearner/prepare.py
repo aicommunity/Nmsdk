@@ -59,7 +59,7 @@ def _prepare_matrix(specification):
                 c["stimulus_profile"]["frequency_hz"] = frequency
                 c["duration"] = duration;c["maximum_sample_gap"] = 1./frequency
                 c["maximum_samples"] = math.ceil(duration*frequency)+1
-                c["windows"] = [[(i+1)*isi,(i+1)*isi+width] for i in range(inputs)]
+                c["windows"] = [{"begin": (i+1)*isi, "end": (i+1)*isi+width} for i in range(inputs)]
                 c["maximum_reference_probes"] = max(c["maximum_reference_probes"], 2*inputs)
                 c["run_id"] = specification["run_prefix"]+"/"+name
                 if normalization == "N0":
