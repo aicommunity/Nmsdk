@@ -42,7 +42,27 @@ N0 или5 N1 учитывают дополнительный native domain real
 fresh all-input certificate, normal/ASan и temporal evidence. Это отдельный
 контроль алгоритма, не independent recognition Test.
 
-Normal/ASan сборки и14 новых helper/controller checks ещё в процессе проверки;
-native regressions, cold A/B, отчёты и merge children-first пока не приняты.
+На обоих workers завершены39 production helper/controller checks без skips,
+включая14 новых:6 helper и8 контроллерных сценариев. Сборки используют root
+1cdbdaa2b072715d623cc00de62e0ca13c1ca918 и PulseLib
+a728d97110b706bd7869039557de957ea299c6ea. Native regression28 на каждом worker
+ещё выполняется; его результат не выводится из helper PASS.
+
+На Elder завершены8 реальных cold A/B и4 actual-template generator checks.
+Byte-identical jobs дают одинаковые initial graphs, CapturedPerInput references
+и допуски между baseline/current. Старый порядок измеряет L2/3/4/5 (N1 ещё6),
+новый L2/3/4/9 (N1 затем5). Все8 исходов SearchUnresolved с отрицательными свежими
+all-input certificates: фиксированные Ns/Rs не восстанавливают амплитуду.
+Измеренный скачок не объявляется сходимостью или классификацией.
+[Normal primary](../../../Reports/StructTrain/TimeLearner/s07-measured-length-native-normal-a1/README.md),
+commit7c8820398466341e6713c5c32ffc3cee585c8988:460 проверенных members/629680 B.
+Python experiment root41261d366b4d7537dcb24e7e7e22bafad5c6c8ed; Console/Pulse
+code одинаков с binary root1cdbdaa2b. Первый generator attempt остановился до
+моделей на progress-array/strict-object mismatch; receipts сохранены в primary.
+
+ASan cold A/B, native regressions, повтор прежних положительных N1-контролей,
+полные temporal reports/визуальная проверка и merge children-first пока
+не приняты. Full figure cache размещается только на M40 Data; в Git остаются
+сжатые primary, metadata и выбранные просмотренные рисунки.
 Полные этапы6/7/11 открыты; legacy EstDelayPerSeg/gamma не объявляются действующими
 V2 полями. Новые C-trim, общая A* или дополнительная физика не вводятся.
