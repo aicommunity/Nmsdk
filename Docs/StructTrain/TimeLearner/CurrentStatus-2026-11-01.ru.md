@@ -817,3 +817,14 @@ codex/timelearner-n1-measured-refinement (root e19a303f2d9252a5179ad0f457593e48c
 PulseLib bf50ae57512ff0a1591937f4f23cef172a8928dc); новые normal/ASan сборки
 выполняются. Эта реализация ещё не прошла серверную приёмку и не находится
 в develop; успешная физическая сходимость и классификация не заявлены.
+
+Подэтап dimension/N0 physical controls принят в develop merge
+2b5af8c191b6ea20dff0f8b676e702db8c53c82f (старые фразы «готов к merge» выше
+описывают предыдущий снимок). N1 measured refinement остаётся в отдельной ветке:
+актуальный PulseLib c89a067ea4719c2c3f7546a9cf77b11b188b334d включает code guard
+1dddf1b861546eb8e7802ab4ff6610ef2844520e и документацию. Сборки a1 пока проверяют
+предыдущий bf50ae57512ff0a1591937f4f23cef172a8928dc/root e19a303f2d9252a5179ad0f457593e48c0c35fd1;
+они не подменяют приёмку последнего commit. После их terminal состояния требуется
+свежая адресная a2 сборка/проверка, затем physical N1 A/B и temporal reports.
+Протокол, ограничения, baseline proof и критерии:
+[MeasuredResistanceRefinement](MeasuredResistanceRefinement.ru.md).
