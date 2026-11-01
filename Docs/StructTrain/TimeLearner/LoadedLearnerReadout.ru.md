@@ -174,3 +174,12 @@ CSV timestamps. Визуальный review не подменяет numerical co
 не является ручным просмотром полного cache. Compact evidence:
 `Reports/StructTrain/TimeLearner/s04-loaded-readout-visual-a1`.
 ASan regression всё ещё ожидается; совместная приёмка остаётся открытой.
+
+Дополнительная межсерверная сверка завершившейся native части a4:
+все32 полных CSV normal/ASan побайтово одинаковы (maximum numeric difference0).
+Normal primary для сверки получен на M40 через Git commit
+c794e3cbf11c920d8fae5bb86dddd6f91bbceb17 с проверкой archive/member SHA256.
+Это даёт основание применять уже опубликованные графики к обоим native
+корпусам. Самостоятельной случайной репликой либо завершённой ASan regression
+это совпадение не является. Crossworker receipt будет включён в текущую ASan
+primary-публикацию после фактического завершения21 regression и16 reader tests.
