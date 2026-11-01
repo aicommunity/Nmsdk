@@ -1,6 +1,19 @@
 # Состояние рефакторинга на 01.11.2026
 
-Последний принятый scoped результат: loaded learner graph/readout и общий
+Последний адресно принятый подэтап — [точность matrix archive](ArchiveF64Precision.ru.md).
+Исправлен общий Rdk floating MDMatrix serializer: длинные значения публичной
+TrainingPattern теперь сохраняются без округления, строгая identity не ослаблена.
+На обоих workers unit10/archive16/XML32, normal regression21 без skips;
+readers23/16/16/18 на каждом. Все24 transfer файла равны по числовым массивам
+и model/image identities,64 XML CSV побайтно равны.262 PNG проверены,28 selected
+оригиналов просмотрены с shared/detail scales. Normal/ASan primary опубликованы
+в2d1827febab8ec360d205163a3469f0077eba989 /fe8e700ef0695a9a6847c4809260f4abd5819278;
+проверены все441/398 members. Fast-exit provenance одного normal unit сохранён
+как incomplete, а не заменён на captured. Rdk develop0a1c1d05 сохраняет tested
+Core/Tests2732a08; root acceptance фиксирует child merge. Полные этапы4/5/11
+и цель0–12 остаются открытыми. Следующие записи — предыдущие принятые снимки.
+
+Ранее принятый scoped результат: loaded learner graph/readout и общий
 MDMatrix resize. Оба workers прошли10 math+32 native+21 regression+16 reader;
 полный компактный primary,32 byte-identical crossworker CSV,1476 temporal PNG
 в cache и30 directly reviewed selected PNG. Child mergesPulseLibe51c702 /
