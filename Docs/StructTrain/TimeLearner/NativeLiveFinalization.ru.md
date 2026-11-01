@@ -6,7 +6,7 @@
 сохраняемый codec адресно проверены normal/ASan. Production Console Train
 schema2 принят в указанной ниже normal/ASan-области; normal production
 временные отчёты приняты в автоматической и selected visual области.
-ASan temporal reports ещё выполняются. Это подэтапы плана0–12; полные этапы6–8,
+ASan temporal reports также проверены; selected legibility перенесена по точному совпадению PNG. Это подэтапы плана0–12; полные этапы6–8,
 обязательная матрица и независимая оценка остаются открытыми.
 
 | Область доказательства | Проверенная область | Источник |
@@ -18,6 +18,7 @@ ASan temporal reports ещё выполняются. Это подэтапы п�
 | Production Console schema2, normal |14 operations;1 codec test;3 original reader checks и4-check follow-up, включающий прежние проверки|[Production normal](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-normal-a2/README.md)|
 | Production Console schema2, ASan |14 operations;1 codec;3 original и4-check complete reader, Core019e5d1|[Production ASan](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-asan-a1/README.md)|
 | Production normal temporal reports |14 reports,3 checks;10 selected PNG просмотрены1920×960; весь cache вручную не принят|[Production visual](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-visual-normal-a1/README.md)|
+| Production ASan temporal reports |14 reports,3 checks;10 точных ссылок на просмотренные normal PNG без дублирования|[Production ASan visual](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-visual-asan-a1/README.md)|
 | Native integration temporal reports |16 reports,3 checks; восемь выбранных изображений просмотрены1920×960|[Visual proof](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-visual-normal-a2/README.md)|
 
 Числа checks разных серий перекрываются и не складываются в число независимых
@@ -172,8 +173,12 @@ Normal production14-report rendering и3 report checks завершены на M
 Full cache4119files/291766358bytes хранится на Data; Git содержит272 metadata
 members/190348bytes и10 выбранных PNG/1500834bytes. Эти10 непосредственно
 просмотрены1920×960, scope/ограничения записаны в SELECTED_VISUAL_REVIEW.json.
-Полная ручная приёмка cache отсутствует. ASan14-report rendering выполняется
-отдельно на его собственных primary, полученных через Git. Интеграционный `native-live-finalization` формат остаётся
+Полная ручная приёмка cache отсутствует. ASan14-report rendering выполнен
+на собственных primary из Git:3 checks,521 unchanged source files,93 training
+и42 recognition pairs. Все10 выбранных ASan PNG побайтно совпали с directly
+reviewed normal images; перенесена только их читаемость, новый прямой просмотр
+или full-cache acceptance не заявляются. Git содержит272 metadata members/
+190708bytes и точные normal PNG references, без новых копий изображений. Интеграционный `native-live-finalization` формат остаётся
 отдельным адаптером старых control records с обязательным primary inventory.
 
 ## Научная граница и остаток
@@ -184,7 +189,7 @@ frozen same-matrix target/foil парах TP0/FP0/FN1/TN1. Это молчани
 target, не успешная классификация. Двухпаттерновые engineering controls не
 воспроизводят и не опровергают августовские визуальные4/8–6/8.
 
-Открыты ASan temporal acceptance, target-reference/parallel-peak,
+Открыты target-reference/parallel-peak,
 optional C-trim, independent frozen evaluation и полные normalization/model/
 profile/frequency/dimension/lifecycle матрицы. Версия2 не рекомендуется для
 всей матрицы до их приёмки. Native integrated gate95 относится к более раннему
