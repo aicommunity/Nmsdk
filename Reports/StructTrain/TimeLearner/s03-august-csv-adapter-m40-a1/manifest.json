@@ -1,0 +1,75 @@
+{
+  "kind": "august_csv_descriptive_adapter_checks",
+  "schema_version": 1,
+  "validation": {
+    "root": "a21c589e98906a379e54e6059739dd09b6690ff9",
+    "worker": "m40",
+    "status": 0,
+    "modules": [
+      "test_historical_selectivity",
+      "test_legacy_dynamics",
+      "test_legacy_dynamics_cli",
+      "test_analysis_cli"
+    ],
+    "historical_fixtures": [
+      {
+        "repository": "Bin",
+        "commit": "1c1464e248f8744e858bd66df0be99e39969fd65",
+        "path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/EXP00_baseline/Test/SelectivityLog/results.csv",
+        "sha256": "ae21460b33e9ebb7feda72c80ad6b726459630873f8075e9f3664fc749a12e66",
+        "bytes": 878
+      },
+      {
+        "repository": "Bin",
+        "commit": "1c1464e248f8744e858bd66df0be99e39969fd65",
+        "path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/EXP01_ltz_threshold_sweep/Test_thr00130/SelectivityLog/results.csv",
+        "sha256": "47db92ece9e60952e222b653096388686e201620b5d15f84871f4ae52fbcfd89",
+        "bytes": 875
+      },
+      {
+        "repository": "Bin",
+        "commit": "1c1464e248f8744e858bd66df0be99e39969fd65",
+        "path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/EXP01_ltz_threshold_sweep/Test_thr00135/SelectivityLog/results.csv",
+        "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f",
+        "bytes": 872
+      }
+    ],
+    "source_files_unchanged": true,
+    "new_native_calculations": 0,
+    "scientific_verdict": null,
+    "wall_seconds": 0.31482911109924316
+  },
+  "tests": 29,
+  "worker": "m40",
+  "records": [
+    {
+      "path": "phasea-primary/EXP00_baseline/Test/SelectivityLog/results.csv",
+      "bytes": 878,
+      "sha256": "ae21460b33e9ebb7feda72c80ad6b726459630873f8075e9f3664fc749a12e66"
+    },
+    {
+      "path": "phasea-primary/EXP01_ltz_threshold_sweep/Test_thr00130/SelectivityLog/results.csv",
+      "bytes": 875,
+      "sha256": "47db92ece9e60952e222b653096388686e201620b5d15f84871f4ae52fbcfd89"
+    },
+    {
+      "path": "phasea-primary/EXP01_ltz_threshold_sweep/Test_thr00135/SelectivityLog/results.csv",
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    {
+      "path": "reader.log",
+      "bytes": 6327,
+      "sha256": "851c88430b7ac39efa964a782b794c081b8450614bdbabcb82f1aa129623270c"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1390,
+      "sha256": "0489eb370a513660d9976035badf77c0df5e709384f997044dd8cf58df28794f"
+    }
+  ],
+  "source_root": "a21c589e98906a379e54e6059739dd09b6690ff9",
+  "reused_original_dynamics_domain_primary": "860537391b22528e9afc26e44a54b6ec09be75c2",
+  "new_native_calculations": 0,
+  "scientific_verdict": null
+}

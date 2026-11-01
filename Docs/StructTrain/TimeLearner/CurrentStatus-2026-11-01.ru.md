@@ -6,6 +6,20 @@
 [утверждённом плане](RefactoringPlan.ru.md). Эта запись добавляет проверенные
 подэтапы, не заменяя исходную постановку или обязательную матрицу.
 
+[Исторический August saved-state replay](HistoricalAugustReplay.ru.md):
+свежая сборка точного root de02a380 и три новых Test на Elder воспроизвели4/8,
+5/8 и6/8 исходного протокола, TP1 и FP4/3/2. Это не cold retrain или robustness.
+Исправленный native observer сохранил CSV всех трёх случаев побайтно:
+12 потоков ×80000 samples/40s каждого случая, сумма каналов всех сом на каждом
+отсчёте совпала с native learner vector. Reader7/7 на каждом worker;96 PNG
+для всех24 предъявлений, full/detail и amplitude-focused companions,
+15 selected PNG непосредственно просмотрены при1920x1200. Все113 primary
+files неизменны. Первая неудачная recorder-попытка и промежуточные проблемы
+масштаба сохранены и описаны. Старый CSV adapter прошёл29/29 checks на обоих
+workers; строгая полнота/late verdict самой legacy CSV остаются unknown.
+Новые raw traces отдельно подтверждают покрытие окон и отсутствие лишних LT
+edges за записанные40s; они не создают training certificate.
+
 Активный [анализ Branch dynamics](BranchDynamicsMigration.ru.md) перенесён
 из Bin в root package, старый analyzer/test удалены без wrappers.20/20 Python
 checks на каждом worker:6 старых regression,9 migration/CLI/corruption и5
