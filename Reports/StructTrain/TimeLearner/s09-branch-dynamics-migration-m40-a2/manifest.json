@@ -1,0 +1,58 @@
+{
+  "kind": "branch_dynamics_root_migration_checks",
+  "schema_version": 1,
+  "root": "71df641bbbb61aca9cd3a12667178caeb036d099",
+  "worker": "m40",
+  "records": [
+    {
+      "path": "a3/reader.log",
+      "bytes": 4240,
+      "sha256": "114e15c86aeaaa87634ebc0bf3c57aab5c9949a12bccddb6df07e64ede043fe0"
+    },
+    {
+      "path": "a3/validation.json",
+      "bytes": 666,
+      "sha256": "e1e21280afb154c167d420d5dc2a835efee13a9dad7f28696805880d37395a2e"
+    },
+    {
+      "path": "a3/original_module.py",
+      "bytes": 18215,
+      "sha256": "b1f636d0ffcdafa88850b2922ee7c141ae426a55da160d70d0c366db0d843a1f"
+    },
+    {
+      "path": "a3/domain_preview.json",
+      "bytes": 111532,
+      "sha256": "9c43308b3300ba71435af6a22a2605fcffa8418fd9b6c5aa000f867614e85fb2"
+    }
+  ],
+  "attempts": [
+    {
+      "root": "71df641bbbb61aca9cd3a12667178caeb036d099",
+      "modules": [
+        "Scripts.StructTrain.TimeLearner.tests.test_legacy_dynamics",
+        "Scripts.StructTrain.TimeLearner.tests.test_legacy_dynamics_cli",
+        "Scripts.StructTrain.TimeLearner.tests.test_analysis_cli"
+      ],
+      "original_module": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-legacy-dynamics-migration-asan-a3/original_module.py",
+      "original_bin": "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e",
+      "original_sha256": "b1f636d0ffcdafa88850b2922ee7c141ae426a55da160d70d0c366db0d843a1f",
+      "status": 0,
+      "wall_seconds": 0.31454014778137207,
+      "native_calculations": 0,
+      "scientific_verdict": null,
+      "fixture_primary": {
+        "path": "/home/user/timelearner-refactor/readbacks/s07-domain-physics-asan-a1/native/Branch_2000_N1_domain_preview_domain_preview.json",
+        "sha256": "9c43308b3300ba71435af6a22a2605fcffa8418fd9b6c5aa000f867614e85fb2",
+        "kind": "native_resistance_domain_evidence",
+        "raw_native_provenance_retained": true
+      },
+      "assessment": "passed19_checks"
+    }
+  ],
+  "tests_final": 20,
+  "tests_skipped": 0,
+  "old_module_bin": "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e",
+  "native_calculations": 0,
+  "asan_instrumentation_used": false,
+  "scientific_verdict": null
+}
