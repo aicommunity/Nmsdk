@@ -46,10 +46,14 @@ class PrepareNativeMatrixTest(unittest.TestCase):
             self.assertEqual(job["configuration"]["search"]["tolerances"], original["configuration"]["search"]["tolerances"])
 
     def test_declares_complete_windows_and_sample_budget(self):
-        for job in prepare_matrix(self.specification()).values():
+        specification = self.specification()
+        for name, job in prepare_matrix(specification).items():
             c = job["configuration"];frequency = c["model"]["frequency_hz"]
             self.assertEqual(len(c["windows"]), len(c["model"]["inputs"]))
-            self.assertLessEqual(c["windows"][-1][1], c["duration"])
+            original_window = specification["templates"][name.split("-inputs")[0]]["configuration"]["windows"][0]
+            self.assertIsInstance(original_window, dict)
+            self.assertTrue(all(type(window) is dict and set(window) == set(original_window) for window in c["windows"]))
+            self.assertLessEqual(c["windows"][-1]["end"], c["duration"])
             self.assertGreaterEqual(c["maximum_samples"], c["duration"]*frequency+1)
             self.assertEqual(c["maximum_sample_gap"], 1/frequency)
 

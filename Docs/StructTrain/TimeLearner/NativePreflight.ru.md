@@ -83,3 +83,11 @@ runtime_checked/effective_model_checked/training_started остаются false;
 runtime. Их исходные receipts сохраняются; это setup failures, не отрицательные
 результаты моделей. Генерация jobs переносится из одноразового launcher в prepare;
 его серверная приёмка и повтор размерной проверки ещё впереди.
+
+Следующая попытка с production prepare6896144a3 прошла18 Python checks, но
+первый настоящий Console preflight отклонил windows в виде массивов:
+native codec требует объекты begin/end. Это ошибка генератора, выявленная
+до построения модели, а не физическая неудача. Исправлены output и проверка
+формата относительно реальных templates; обязательный повтор всех32 native
+cases остаётся незавершённым. Python checks отдельно не доказывают native codec
+compatibility; исходный отказ сохраняется вместе с остальными setup attempts.
