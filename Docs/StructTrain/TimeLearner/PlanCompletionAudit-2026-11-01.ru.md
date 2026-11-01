@@ -77,10 +77,15 @@ Git, полные производные отчёты остаются на M40 
 
 ## Текущая последовательность приёмки
 
-1. Объединить проверенный production N0 подэтап; его primary/temporal evidence
+1. Production N0 подэтап объединён merge commit
+   `674a7834f5440a7a07a17692fec6bf446731c0eb`; primary/temporal evidence
    завершены. Следующая алгоритмическая работа — реальные positive controls,
    размерности и physical cases для proposal policy, а не расширение claim
    по одному прохождению ограниченного negative corpus.
+   [Контроль размерности](NativeDimensionControls.ru.md) уже выполняется в новой
+   feature-ветке: normal 16/16, ASan pilot 4/4; полная ASan серия и temporal
+   приёмка ещё не завершены. N=1 Exact здесь проверяет тождественную модель и
+   свежий final gate; это не подтверждение успешного изменения геометрии.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
