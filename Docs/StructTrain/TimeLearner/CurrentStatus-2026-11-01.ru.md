@@ -488,3 +488,214 @@ N0/N1 полная алгоритмическая/physics matrix, historical rep
 Test, полная scripts migration, scheduler/publisher и оставшаяся документация
 по-прежнему обязательны. Все4 full models дают SearchUnresolved и silent
 target; научный PASS не установлен. СерияD не возобновлялась.
+
+Scoped live pipeline root включён --no-ff в develop
+1d4822af22e05b741e4a1c779cf99ba05cb0a1fa и опубликован; ls-remote проверен.
+Gitlinks PulseLibf23d1b8d/Bin49adcd02/Rdk027f7f83 совпадают с опубликованными
+child develop heads. Новый algorithm substage — codex/timelearner-n0-candidate-order.
+[N0 hypothesis и gates](N0CandidateOrdering.ru.md): сначала воспроизведение
+ограничения перебора на unchanged production kernel, затем измеряемое изменение
+порядка кандидатов. Full-stage7 и физическая N0 матрица пока не приняты.
+
+## N0: воспроизведение ограничения бюджета и проверяемое исправление
+
+M40 baseline supervisor135125 завершён0; native tests2/2 ожидаемо упали,
+process return1. На unchanged Coref23d1b8d / root31934548524ab0da77311f4fc046db05cdf69b81
+Classic и Branch оставили L2/Ns1 и SearchUnresolved: ближайшее L2/Ns2 не
+измерено. Это controlled production-kernel oracle, не физический эксперимент.
+Proof72d9df51a9684f1bdd485c7998ae065eb6defaa4 опубликован и включён --no-ff;
+21 archive member и outer hashes проверены локально,10724 compressed bytes.
+
+Corec25db29 предлагает соседние Ns после полного измеренного улучшения
+rank у timing-ready/amplitude-invalid кандидата; full geometry legality,
+fixed anchor, fresh anchor/input, repeats и final gate сохранены. Дубликаты
+кандидатов не расходуют бюджет повторно. Дополнительные regression cases
+проверяют length-only поиск, хуже работающий сосед/возврат к длинам, repeats.
+Docs-only Pulsee4978a2 имеет тот же Core tree64cdc352af865dc0e860ea05fb2c6d9799ccc36e.
+
+Исправленный root942e5df4559467a9a19c56755f945ce6501e7780 собирается/проверяется
+на M40 в readbacks/s07-n0-candidate-order-fixed-asan-a1, supervisor137298.
+На последней проверке процесс жив; production Core собран, интеграционные
+тесты ещё компилируются. Runtime/source активного задания не менялись.
+Новая feature не принята в develop; full stage7 и физическая матрица открыты.
+
+## N0: две серверные проверки и объявленная visual coverage
+
+M40 fixed-asan-a1 supervisor137298 после сборки прошёл новые5/5 kernel cases
+и реальные NativeModelEditor ClassicN0_2000/BranchN0_2000. Далее выполняется
+20000Hz. Общий wall limit300s оказался мал для расширенного ASan набора;
+результат ещё не терминальный на последней проверке. Очередь fixed-asan-a2
+PID148245 ждёт именно terminal timeout/wall_budget_exhausted и исчезновения
+принадлежащего процессу PID/start_ticks; только после этого повторяет тот же
+бинарник и неизменный source/runtime с лимитом3600s, без rebuild. Первый запуск
+и его реальные process receipts сохраняются, незавершённая серия не считается PASS.
+
+Normal Elder fixed-normal-a1 supervisor2304393 собирает тот же root942e5df45.
+Перед сборкой удалены только4 JSON-дубликата86901712 bytes: все543 members
+опубликованного proof84e79861 заново сверены с M40 extracted Git mirror;
+локальные SHA и отсутствие открывшего их процесса проверены перед unlink.
+Свободное место116051968→202956800 bytes. Receipt включён в normal readback;
+прошлый normal-a2 unpacked corpus теперь требует восстановления этих4 JSON
+из Git/M40 перед повторным использованием. Уникальные файлы не удалялись.
+
+Spec n0-candidate-order-native-v1.json объявляет точные31 test IDs и4 native
+training phases (warm/cold Classic/Branch). Report scope не включает waveform
+старых editor-only probes; они сохраняются в полном raw test archive. Visual
+worker M40 PID148416 ждёт успешного fixed-asan-a2; затем production renderer
+строит все объявленные training trial/soma views в Data cache. Первая visual
+setup попытка завершилась до запуска из-за short-SHA fetch; повтор использует
+полный445469038650354e98c740dbe52e433eb76c6fec. Ни visual, ни scoped algorithm
+приёмка пока не объявлены завершёнными; develop не изменён.
+
+
+ASan fixed-a1 теперь terminal1: production runner execution=timeout,
+wall_budget_exhausted, returncode=-15,300.599977652s. До остановки25 cases
+отмечены OK в stdout, включая5 новых и2 editor2000Hz; complete XML отсутствует.
+[Proof](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-timeout-asan-a1/README.md)
+d0bf145a80c8c03708374cbd5b012e7dfa1d2cbe сохранён в Git;40 archive members и
+outer hashes проверены локально,46552 compressed bytes. Это частичная попытка,
+не полный PASS. Fixed-a2 PID148245 действительно начал повтор того же binary
+с3600s после terminal timeout; visual PID148416 ждёт именно его успешный итог.
+Elder normal PID2304393 ещё компилирует integration target; runtime не обновляется.
+
+
+Независимый N0 reader roota86f96ee5d015b304c63e7070b733477ed69891b требует
+точного набора31 успешных JUnit cases и всех4 declared phases. Включает4 tests
+на actual JSON/CSV/certificates и повреждённые копии данных. Metadata workers
+Elder2312312 / M40154042 подтверждены живыми при запуске; ждут именно своих
+producer terminal0. Новых numeric jobs они не создают. Численные Elder2304393
+и M40148245 на последних отдельных /proc проверках живы; выполняются editor
+probes20000Hz. Full31/31 и reader4/4 ещё не объявлены. Runtime не меняется.
+
+
+Normal-a1 завершён terminal1: execution=timeout/wall_budget_exhausted,
+returncode=-15,300.304135126s,26 completed stdout cases, complete JUnit нет.
+[Proof941969016c577aef6fa4dc4deca1e1d3ab3b27c8](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-timeout-normal-a1/README.md)
+включает61 member/225672compressed bytes, abort dependent reader и duplicate
+cleanup receipt. Outer и все member hashes локально проверены. Первое staging
+публикации упёрлось в диск. Удалены133 неиспользуемых ELF ET_REL object caches
+80090112bytes только из завершённого owned build; проверены отсутствие
+компилятора/линкера и fuser. Receipt сохранён; runtime/executable не менялись.
+Диск5.6MB→85.9MB. Последующие сборки потребуют регенерации этих cache files.
+
+Normal-a2 PID2315548 запущен только после подтверждённого timeout и завершения
+owned PID/start_ticks, тот же binary/source/runtime,3600s без rebuild.
+На последней /proc проверке жив04:02: Classic/Branch2000 и Classic20000 прошли,
+выполняется Branch20000. Reader-normal-a1 остановился на неуспешном producer;
+новый reader-normal-a2 PID2316199 ждёт normal-a2. ASan-a2 PID148245 жив15:16,
+выполняет Classic20000; reader154042 и visual148416 ждут прежние точные jobs.
+Ни31/31, ни reader4/4 пока не объявлены.
+
+Новая [сводка всех этапов01.11](PlanCompletionAudit-2026-11-01.ru.md) заменяет
+старые текущие формулировки при сохранении исторических аудитов. Она учитывает
+реализованные controller/archive/live pipeline и отдельно полный остаток.
+План0–12 и активная цель сохраняются полностью; develop не обновлён.
+
+
+Normal fixed-a2 terminal0:31/31 native cases,375.292s по gtest. Reader-a2
+terminal1 до tests из-за overlap glob с service_model.json. Исправление71878cb54
+требует этот model file отдельно, canonical model hash и совпадение actual
+revision; numbered trial completeness не ослаблена. Reader-normal-a3 PID2322439
+terminal0:4/4,56 probes,188 unchanged files,0.221566s. Численное обучение не
+повторялось ради исправления reader. Первые reader/publisher отказы сохранены.
+
+Full [normal proof](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-normal-a2/README.md)
+c9c65de9b12989b0ddcb51da5924f1854a56f88e опубликован, включён --no-ff и локально
+сверен:205 members/8623983raw→346080compressed bytes. Model outcomes4×
+SearchUnresolved и negative certificates; распознавание этим native fixture
+не оценивается. Все5 controlled proposal cases,4 native editors2000/20000Hz
+и4 native warm/cold training controls прошли; полного stage7 это не закрывает.
+
+ASan corrected reader PID164462 на71878cb54 ждёт producer148245; прежний
+reader154042 сохраняется как первоначальная постановка, его ожидаемый setup
+failure не подменяется. Normal visual PID165784 получает исключительно Git
+proofc9c65de9b и строит4 declared training phases/56trials в M40 Data cache;
+численных прогонов не создаёт. Полные ASan и visual результаты ещё pending.
+
+
+Normal temporal worker165784 terminal0:4 phases,56trials,84soma pairs,
+render123.315699s,205 source files неизменны. Отдельный visual reader169106
+terminal0:3/3 N0 и3/3 old338-probe/507-pair regression checks,77.037563s;
+117 N0 selected phase files неизменны. Общий visual test сохранил старые
+явные counts/partial semantics; новый class задаёт56/84/complete=true.
+
+[Visual proof077334d7fb76bc6d05983a892570f5178ce9b21d](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-visual-normal-a1/README.md)
+включён --no-ff. Проверены outer hashes,141 metadata members/95916compressed
+bytes и8 PNG/1233786bytes. Полный cache2063files/103004513bytes остаётся Data.
+Все8 selected PNG непосредственно просмотрены1920×960: final input0/first soma
+warm/cold Classic/Branch overview и peak zoom. QA commitfd90e862d4f817cc2269ad9c46ba9c8c52aeb5a8
+фиксирует exact hashes, читаемые labels/legends/inputs/rise/peak. Полная ручная
+приёмка cache, SI units и ответы за пределами окна не заявлены.
+
+ASan real numeric process150150 подтверждён /proc живым26:43,104%CPU/RSS~1GB.
+ClassicN0_20000 прошёл1274.927s; далее BranchN0_20000. Runtime/source не менялись.
+Full31 и reader4 на M40 ещё pending. Publisher173580 ждёт именно producer
+terminal0 и corrected reader164462 terminal0, затем сохранит actual ASan primary
+и первоначальный failed reader. Новый numeric run не создаётся. Весь план и
+full stage7 открыты; develop пока не обновлён.
+
+
+Независимый source-review подэтап stage1 выполнен в отдельном worktree
+E:/Science-Repo/nmsdk-parameter-contracts и ветке codex/timelearner-parameter-contracts.
+[ParameterControlContracts](ParameterControlContracts.ru.md) + machine ledger
+содержат10 записей: ControllerVersion, ControllerConfiguration,
+ConfiguredModelInitialized, CalculateMode, IsNeedToTrain для Classic/Branch.
+Проверены47 refs/7 unique blobs полных pinned commits;4 текущих learner class
+blobs совпадают с reviewed f23d1b8d. Runtime tests для ledger0: существующие
+configured/live controls дают только частичное покрытие, не full acceptance.
+Исторический source_inventory.json не переписан и не помечен целиком PASS.
+
+CTRL-OWN-001 записан как source-contract risk с непроверенной production
+достижимостью, не воспроизведённый дефект. SetPointer ignores local writes;
+protected ExternalDataSource would forward them, но ненулевое присваивание
+в production дереве не найдено, только derived inspection-test exposer.
+Общий Rdk forwarding contract не менялся; unsafe-cast воспроизведение не вводилось.
+
+Root-only docs feature0e74bfa6c44b06aec48356f1c1f88db6b867889b объединена --no-ff
+в developc910ba84cada0a37b195f48ebe603215b75dd963 и опубликована, ls-remote проверен.
+Child gitlinks f23d1b8d/49adcd02/027f7f83 неизменны. Это docs-only delta к
+принятому live baseline1d4822af2, не новая численная сборка или закрытие stage1.
+Develop затем включён --no-ff в N0 feature, без изменения её functional Core.
+ASan native process150150 подтверждён живым39:33; идёт Branch20000Hz. Полные
+31/reader4/visual ASan и scoped N0 develop merge ещё ожидаются.
+
+
+## Принят scoped N0 candidate-order подэтап
+
+ASan producer148245 terminal0:31/31 native cases,2764.079s; corrected reader
+164462 terminal0:4/4,56 probes/188 unchanged files,0.159291s. Proof
+fb1f578b94395fbb786e7e6658b9e0f704f341ac:201 members/8658691raw→348832bytes,
+outer/member hashes проверены локально. Leak detection выключен.
+
+Configured repeat follow-ups normal2340047 / ASan186704 terminal0:каждый3/3
+native +3/3 actual-data checks,48probes/10groups/108 unchanged native files,
+39.513974s и253.101449s. Runtime before/after совпал, rebuild0. Proofs
+a0ff3273501466677d34423d3c2a5d52d36766d3 /6e596751df9be629b6480d249756f72dd9874a5a:
+по125 members,104708/108188compressed bytes; hashes проверены. Два exported
+model graphs каждого proof имеют пересчитанные hashes actual certificate model.
+
+Base ASan temporal148416 и visual reader197579 terminal0:56trials/84pairs,
+124.066112s render,3/3 checks0.454444s,117 phase files unchanged. Proof
+32cca42c0275ce92bee3a93f37970448f0bf9526:142members/96408bytes;8 exact PNG
+references к directly reviewed normal fd90e862, без новых image bytes.
+
+Repeat temporal normal192131 / ASan199542 terminal0:48trials/72pairs и3/3
+checks каждый,101.825486/99.217732s,125 primary files unchanged каждый.
+Normal proof78a12250c220c1e480559ab450ee07f0220298a0:119members/81904bytes и
+4PNG/618333bytes. Все4 прямо просмотрены1920×960; QA252ca56bf3a492130d9193efd8edb3c57875a38f.
+ASan proof4d024c5f822cc6265bbfc0ac017f90890f0addfb:112members/81664bytes,
+4 exact reviewed-image refs, новыхPNG0. Все outer/member/ref hashes проверены.
+Full caches остаются M40 Data:normal1763files/88636254bytes,ASan1763/88636239.
+Manual scope только selected first-soma/final-input0 views; full-cache manual
+acceptance, SI interpretation и независимые научные повторы не заявляются.
+
+Native fixture outcomes — SearchUnresolved и fresh negative certificates.
+Контролируемый response oracle подтверждает proposal policy, реальные native
+controls — регрессии. Warm/prebuilt означает построенный объявленный fixture,
+не continuation ранее обученного состояния. Августовский replay не выполнялся.
+
+PulseLib feature включена --no-ff в develop38edfcad7983478a7e2ca736c32ae2703861c1fd,
+push и ls-remote проверены. Core64cdc352af865dc0e860ea05fb2c6d9799ccc36e точно
+равен фактически проверенному c25db29. Bin49adcd02 и Rdk027f7f83 не менялись.
+Root feature фиксирует exact child link; root --no-ff merge следует после этой
+записи. Подэтап закрыт в указанной области, полный stage7/план0–12 открыт.

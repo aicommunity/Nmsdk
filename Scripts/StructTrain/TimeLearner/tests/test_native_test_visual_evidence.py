@@ -10,10 +10,15 @@ from ..native_evidence import load
 
 
 class NativeTestVisualEvidenceTest(unittest.TestCase):
+    source_environment = "TIMELEARNER_NATIVE_TEST_REPORT_DIR"
+    report_environment = "TIMELEARNER_NATIVE_TEST_VISUAL_DIR"
+    expected_probe_count = 338
+    expected_soma_pairs = 507
+    expected_data_complete = False
     @classmethod
     def setUpClass(cls):
-        source = os.environ.get("TIMELEARNER_NATIVE_TEST_REPORT_DIR")
-        report = os.environ.get("TIMELEARNER_NATIVE_TEST_VISUAL_DIR")
+        source = os.environ.get(cls.source_environment)
+        report = os.environ.get(cls.report_environment)
         if not source or not report:
             raise unittest.SkipTest("requires original native suite and completed full visual report")
         cls.native = Path(source)/"native"
@@ -28,7 +33,7 @@ class NativeTestVisualEvidenceTest(unittest.TestCase):
                 expected[(path.name, "")] = value
             if isinstance(value.get("probe"), dict) and value["probe"].get("kind") == "timelearner_native_probe_evidence":
                 expected[(path.name, "/probe")] = value["probe"]
-        self.assertEqual(len(expected), 338)
+        self.assertEqual(len(expected), self.expected_probe_count)
         seen = set()
         for group in self.manifest["groups"]:
             folder = self.report/Path(group["report"]).parent
@@ -46,7 +51,7 @@ class NativeTestVisualEvidenceTest(unittest.TestCase):
                 self.assertEqual(entry["packet_sha256"], hashlib.sha256((self.native/key[0]).read_bytes()).hexdigest())
         self.assertEqual(seen, set(expected))
 
-    def test_all_507_soma_pairs_have_large_overview_and_timestep_resolving_views(self):
+    def test_all_declared_soma_pairs_have_large_overview_and_timestep_resolving_views(self):
         pairs = 0
         for group in self.manifest["groups"]:
             folder = self.report/Path(group["report"]).parent
@@ -69,7 +74,7 @@ class NativeTestVisualEvidenceTest(unittest.TestCase):
                         self.assertEqual(header[:8], b"\x89PNG\r\n\x1a\n")
                         self.assertEqual(struct.unpack(">II", header[16:24]), (1920, 960))
                     pairs += 1
-        self.assertEqual(pairs, 507)
+        self.assertEqual(pairs, self.expected_soma_pairs)
         self.assertEqual(self.manifest["rendered_trial_soma_pairs"], pairs)
 
     def test_every_published_file_hash_matches_and_original_wrappers_are_retained(self):
@@ -81,6 +86,24 @@ class NativeTestVisualEvidenceTest(unittest.TestCase):
             self.assertEqual(hashlib.sha256((self.report/relative).read_bytes()).hexdigest(), expected, relative)
         for path in self.native.iterdir():
             self.assertEqual((self.report/"primary/native"/path.name).read_bytes(), path.read_bytes())
-        self.assertFalse(self.manifest["data_complete"])
+        self.assertEqual(self.manifest["data_complete"], self.expected_data_complete)
         self.assertFalse(self.manifest["visual_acceptance_complete"])
         self.assertIsNone(self.manifest["scientific_verdict"])
+
+
+class N0CandidateVisualEvidenceTest(NativeTestVisualEvidenceTest):
+    """Four declared actual warm/cold N0 phases, separate from editor probes."""
+    source_environment = "TIMELEARNER_N0_CANDIDATE_REPORT_DIR"
+    report_environment = "TIMELEARNER_N0_CANDIDATE_VISUAL_DIR"
+    expected_probe_count = 56
+    expected_soma_pairs = 84
+    expected_data_complete = True
+
+
+class N0RepeatedCandidateVisualEvidenceTest(NativeTestVisualEvidenceTest):
+    """Two complete configured schema2 N0 phases with real repeated probes."""
+    source_environment = "TIMELEARNER_N0_REPEATED_REPORT_DIR"
+    report_environment = "TIMELEARNER_N0_REPEATED_VISUAL_DIR"
+    expected_probe_count = 48
+    expected_soma_pairs = 72
+    expected_data_complete = True

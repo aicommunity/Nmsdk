@@ -1,0 +1,3 @@
+N0 candidate ordering: reproduced baseline limitation
+
+Unchanged production BoundedTrainingSession with controlled response oracle through actual ProbeRecorder and validators. Classic and Branch produce SearchUnresolved at three candidates: measured L2/Ns1 has valid timing but misses captured amplitude; L2/Ns2 is not proposed. Two gtest cases fail their desired Exact assertions (2 tests, 2 failures, native return1). Supervisor0 means expected failures verified, not tests passed. Runtime before/after identical. ASan enabled, leak detection disabled. Algorithmic reproduction, not physical-neuron or classification evidence. Full XML, process receipt, runtime source closure and launcher archived. Full stage7 remains open.
