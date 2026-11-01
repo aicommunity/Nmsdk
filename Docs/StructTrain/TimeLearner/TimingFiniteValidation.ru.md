@@ -19,8 +19,18 @@ Classic estimate >0, Branch seed может быть <=0 для прежнего
 В тесте отдельно проверяются эти различия и сохранность прежнего значения
 при EPropertySetterFail. Не используются копии функций или unsafe casts.
 
+Baseline primary опубликован в `433f5992343e50b0941c178828360102d74f7f51`:
+[отчёт и компактный архив](../../../Reports/StructTrain/TimeLearner/s01-timing-finite-baseline-normal-a1/README.md).
+Все30 members и внешние hashes проверены после получения из Git; archive10320 B.
+
 Исправление пока в feature-ветке; normal/ASan проверки и публикация primary
-evidence ещё не приняты. Baseline process_error с returncode1 сохраняется.
+evidence ещё не приняты. Численный root —
+`ebf590082a881cbc8a702bd25f48bfb26b73a50d`. На Elder запущен job
+s01-timing-finite-current-normal-a1 (PID2974833/start_ticks312123044), на M40 —
+s01-timing-finite-current-asan-a1 (PID909824/start_ticks262665851).
+Запланированы4 property cases и21 lifecycle/native-execution regression case
+на каждом worker. Наличие запущенного job не означает прохождения gate.
+Baseline process_error с returncode1 сохраняется.
 Нельзя считать четыре неуспешных gtests успешным gate.
 
 SetDataDirect и connected/external supplier следуют Rdk; они не покрыты
