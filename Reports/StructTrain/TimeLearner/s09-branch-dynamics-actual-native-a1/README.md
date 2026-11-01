@@ -1,0 +1,3 @@
+# Actual archived C++ Branch telemetry
+
+First16 and last16 matching schema-1 records extracted with exact byte offsets/per-line hashes from unchanged595939433-byte native log (26917 matching records). Full raw log remains on M40; selected raw primary slices and complete CLI summaries are here. Both old whole module and new production analyzer give identical complete summary fields per slice. Final slice has180 channels/90 membranes. Declared historical frequency2000Hz was used, not independently re-verified against effective native model here. Descriptive unknown validity, no complete experiment/classification/new C++ calculation claim.
