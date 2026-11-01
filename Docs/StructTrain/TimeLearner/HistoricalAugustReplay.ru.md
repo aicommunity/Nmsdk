@@ -6,6 +6,12 @@
 5/8 и6/8. Target обнаружен во всех трёх случаях; ложных срабатываний4,3 и2.
 Это runtime-подтверждение исходного протокола, а не только повторный анализ CSV.
 
+[Первичные данные replay](../../../Reports/StructTrain/TimeLearner/s11-august-phasea-replay-elder-a1/README.md)
+опубликованы commit`c7876951dfeda579a516c21f2d3593131c52154f`:104 members,
+1050008B xz; outer/member SHA256 независимо проверены на локальной машине.
+Включены исходные конфиги, отдельный reference, свежие CSV, post-run модели,
+process/runtime receipts, сборка и неудачная первая попытка observer.
+
 | Исходный Test | Порог в overlay | Совпадений | TP / FP / FN / TN |
 |---|---:|---:|---|
 | EXP00_baseline/Test |0.0115|4/8|1 /4 /0 /3|

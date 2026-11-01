@@ -3,6 +3,14 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Actual August original-protocol saved-state replay:
+[three fresh native Test runs, exact historical closure](s11-august-phasea-replay-elder-a1/README.md)
+reproduce4/8,5/8,6/8 (TP1, FP4/3/2).
+[Historical CSV adapter Elder29/29](s03-august-csv-adapter-elder-a1/README.md),
+[M4029/29](s03-august-csv-adapter-m40-a1/README.md).
+Cold retrain, order/ITI controls and the full historical temporal/visual gate remain open;
+legacy CSV completeness and strict verdict remain unknown.
+
 Active Branch telemetry analyzer moved from Bin to the root package:
 [Elder20/20 Python checks](s09-branch-dynamics-migration-elder-a2/README.md),
 [M4020/20](s09-branch-dynamics-migration-m40-a2/README.md);
@@ -38,7 +46,7 @@ Latest production N0 evidence:
 
 All16 full N0 Train executions across the two workers remain SearchUnresolved.
 Complete refers to declared windows; selected traces still decay at their end.
-Independent Test, full physical matrix and August replay remain open.
+Independent Test and the full physical matrix remain open; see the separate August replay above.
 
 Earlier scoped PostTune milestones (open items describe their historical snapshots):
 
