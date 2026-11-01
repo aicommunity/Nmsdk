@@ -569,7 +569,7 @@
       "last_change_commit": "4508a7f81a107ac2d2b18805d675705bb9ce02cf",
       "replacement": "Scripts/StructTrain/TimeLearner/legacy_dynamics.py",
       "mechanical_root_commit": "d742cf01b32d60e9ef792216a67c0c55f064e27f",
-      "verified_root_commit": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "verified_root_commit": "71df641bbbb61aca9cd3a12667178caeb036d099",
       "retrieval_command": [
         "git",
         "-C",
@@ -577,7 +577,9 @@
         "show",
         "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e:Configs/SpikeSamples/StructTrain/scripts/analyze_timelearner_dynamics.py"
       ],
-      "reason": "Active leaf Branch telemetry analysis and its full six regressions moved to root; no wrappers remain. Valid-record whole-module parity and root CLI covered on both workers. Malformed vector handling and CLI filesystem status corrected in a separate commit."
+      "reason": "Active leaf Branch telemetry analysis and its full six regressions moved to root; no wrappers remain. Valid-record whole-module parity and root CLI covered on both workers. Malformed vector handling and CLI filesystem status corrected in a separate commit.",
+      "initial_verified_root_commit": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "final_checks_per_worker": 20
     },
     {
       "repository": "Bin",
@@ -590,7 +592,7 @@
       "last_change_commit": "4508a7f81a107ac2d2b18805d675705bb9ce02cf",
       "replacement": "Scripts/StructTrain/TimeLearner/tests/test_legacy_dynamics.py",
       "mechanical_root_commit": "d742cf01b32d60e9ef792216a67c0c55f064e27f",
-      "verified_root_commit": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "verified_root_commit": "71df641bbbb61aca9cd3a12667178caeb036d099",
       "retrieval_command": [
         "git",
         "-C",
@@ -598,7 +600,9 @@
         "show",
         "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e:Configs/SpikeSamples/StructTrain/scripts/tests/test_analyze_timelearner_dynamics.py"
       ],
-      "reason": "Active leaf Branch telemetry analysis and its full six regressions moved to root; no wrappers remain. Valid-record whole-module parity and root CLI covered on both workers. Malformed vector handling and CLI filesystem status corrected in a separate commit."
+      "reason": "Active leaf Branch telemetry analysis and its full six regressions moved to root; no wrappers remain. Valid-record whole-module parity and root CLI covered on both workers. Malformed vector handling and CLI filesystem status corrected in a separate commit.",
+      "initial_verified_root_commit": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "final_checks_per_worker": 20
     }
   ]
 }

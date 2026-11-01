@@ -4,8 +4,9 @@ Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLear
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
 Active Branch telemetry analyzer moved from Bin to the root package:
-[Elder19/19 Python checks](s09-branch-dynamics-migration-elder-a1/README.md),
-[M4019/19 and preserved invalid first fixture](s09-branch-dynamics-migration-m40-a1/README.md).
+[Elder20/20 Python checks](s09-branch-dynamics-migration-elder-a2/README.md),
+[M4020/20](s09-branch-dynamics-migration-m40-a2/README.md);
+[initial M40 invalid fixture and corrected19-check attempt retained](s09-branch-dynamics-migration-m40-a1/README.md).
 Whole original-module parity on valid format, CLI/source preservation and corruption controls;
 no new C++ calculations, no ASan instrumentation or classification claim.
 

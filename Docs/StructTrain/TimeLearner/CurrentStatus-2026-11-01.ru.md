@@ -7,11 +7,12 @@
 подэтапы, не заменяя исходную постановку или обязательную матрицу.
 
 Активный [анализ Branch dynamics](BranchDynamicsMigration.ru.md) перенесён
-из Bin в root package, старый analyzer/test удалены без wrappers.19/19 Python
-checks на каждом worker:6 старых regression,8 migration/CLI/corruption и5
+из Bin в root package, старый analyzer/test удалены без wrappers.20/20 Python
+checks на каждом worker:6 старых regression,9 migration/CLI/corruption и5
 существующих CLI на реальном domain preview. Сохранена неудачная первая M40
 попытка с неправильной схемой fixture. Исправлены молчаливое отбрасывание
-повреждённых SynapticInputs и классификация OSError общего analyze CLI.
+повреждённых SynapticInputs и классификация OSError общего analyze CLI;
+изменяющийся во время чтения файл не публикуется как один immutable snapshot.
 Динамика/обучение компонентов не менялись; scientific/lifecycle матрица открыта.
 
 Адресная миграция scripts: удалён третий пакет из8 исторических shell helpers

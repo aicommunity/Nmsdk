@@ -15,6 +15,8 @@ Import не запускает эксперименты. Реализованы 
 descriptive-only (`validity=unknown`, без recognition verdict); local gain не
 подтверждает устойчивость всей модели, envelope не задаёт её rest state.
 Повреждённый SynapticInputs не превращается в укороченный корректный вектор.
+Для этой команды нужен закрытый неизменяемый файл: изменение во время чтения
+отвергается, существующий output сохраняется.
 [Контракт миграции](../../../Docs/StructTrain/TimeLearner/BranchDynamicsMigration.ru.md).
 
 `publish` принимает schema 2 с explicit push transport и обязательной проверкой

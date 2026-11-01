@@ -20,7 +20,7 @@ scheduler/CLI остаются открытыми. [Реестр/границы]
 
 Первый активный Bin analyzer [Branch dynamics](BranchDynamicsMigration.ru.md)
 перенесён с6 прежними тестами в root package. Оба старых `.py` удалены;
-19/19 адресных Python checks на каждом worker, archived full-module parity,
+20/20 адресных Python checks на каждом worker, archived full-module parity,
 явная corruption-диагностика. Это частичная миграция и не новый C++/ASan прогон.
 
 ## Снимки и пределы доказательств
