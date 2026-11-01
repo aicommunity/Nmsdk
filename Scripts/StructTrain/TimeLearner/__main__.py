@@ -9,6 +9,9 @@ from pathlib import Path
 
 def analyze(args: argparse.Namespace) -> dict:
     from .native_evidence import EvidenceError, audit_probe, load, require
+    for option in ("rest_bound", "soma_abs_limit", "time_step_hz"):
+        require(args.format == "branch-dynamics" or getattr(args, option, None) is None,
+                option + "_is_only_for_branch_dynamics")
     require(args.format == "native-live-finalization" or getattr(args, "primary_inventory", None) is None,
             "primary_inventory_is_only_for_live_finalization")
     require(args.format == "domain" or not args.allow_legacy, "legacy_adapter_is_only_for_domains")
@@ -17,7 +20,11 @@ def analyze(args: argparse.Namespace) -> dict:
     require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction", "posttune-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
     require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
     source = args.source.resolve(strict=True)
-    if args.format == "native-live-finalization":
+    if args.format == "branch-dynamics":
+        from .legacy_dynamics import analyze_telemetry
+        result = analyze_telemetry(source, rest_bound=args.rest_bound,
+                                  soma_abs_limit=args.soma_abs_limit, time_step_hz=args.time_step_hz)
+    elif args.format == "native-live-finalization":
         from .live_finalization_reports import read_live_report_source
         from .live_finalization_evidence import audit_completed_live_finalization, audit_pre_entry_live_finalization
         require(args.primary_inventory is not None, "live_finalization_primary_inventory_required")
@@ -116,7 +123,10 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics"), required=True)
+    analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
+    analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
+    analysis.add_argument("--time-step-hz", type=float, help="actual model update frequency for branch-dynamics local gain estimates")
     analysis.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     analysis.add_argument("--model", type=Path, help="recognition package required for recognition trial/evaluation")
     analysis.add_argument("--source-solo", type=Path, help="original learned-state package with primary trial siblings, required for threshold candidate")
@@ -357,7 +367,7 @@ def main(argv: list[str] | None = None) -> int:
                     output.write(text)
             if result["validity"] == "invalid":
                 return 2
-        except (EvidenceError, ValueError, OSError) as error:
+        except (EvidenceError, ValueError) as error:
             print(json.dumps({"kind": "timelearner_analysis", "schema_version": 1,
                               "execution": "completed", "validity": "invalid", "reason": str(error),
                               "evaluation_verdict": None}, ensure_ascii=False), file=sys.stderr)

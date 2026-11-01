@@ -18,6 +18,11 @@
 нет tracked `.sh`; Python, Bin, Reports runner receipts и полный production
 scheduler/CLI остаются открытыми. [Реестр/границы](ScriptMigration.ru.md).
 
+Первый активный Bin analyzer [Branch dynamics](BranchDynamicsMigration.ru.md)
+перенесён с6 прежними тестами в root package. Оба старых `.py` удалены;
+20/20 адресных Python checks на каждом worker, archived full-module parity,
+явная corruption-диагностика. Это частичная миграция и не новый C++/ASan прогон.
+
 ## Снимки и пределы доказательств
 
 Принятый сквозной live pipeline включён в корневой develop

@@ -6,6 +6,20 @@
 [утверждённом плане](RefactoringPlan.ru.md). Эта запись добавляет проверенные
 подэтапы, не заменяя исходную постановку или обязательную матрицу.
 
+Активный [анализ Branch dynamics](BranchDynamicsMigration.ru.md) перенесён
+из Bin в root package, старый analyzer/test удалены без wrappers.20/20 Python
+checks на каждом worker:6 старых regression,9 migration/CLI/corruption и5
+существующих CLI на реальном domain preview. Сохранена неудачная первая M40
+попытка с неправильной схемой fixture. Исправлены молчаливое отбрасывание
+повреждённых SynapticInputs и классификация OSError общего analyze CLI;
+изменяющийся во время чтения файл не публикуется как один immutable snapshot.
+Динамика/обучение компонентов не менялись; scientific/lifecycle матрица открыта.
+
+На настоящем C++ BR480 archived логе дополнительно проверены первые/последние
+16 telemetry records, включая180 каналов/90 мембран. Все summary fields старого
+и перенесённого анализатора совпали; raw slices и provenance опубликованы.
+Это32 строки реального формата, не полные trial windows/новый Train.
+
 Адресная миграция scripts: удалён третий пакет из8 исторических shell helpers
 плана20.10; всего19 удалённых файлов с полными Git retrieval records.18 исторических
 документов помечены и ссылаются на архивные исходники. Scripts/Tests/App не

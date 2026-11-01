@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "four retirement batches: twenty-seven historical root Docs shell tools removed; Docs Python, Reports receipts and Bin active/historical scripts still require migration",
+  "scope": "27 historical root Docs shell tools retired; active Bin Branch dynamics analyzer and six regressions migrated to root. Docs Python, remaining active/historical Bin tools and Reports receipts remain to migrate.",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -556,5 +556,53 @@
     ],
     "dependency_review": "Literal names searched in root Scripts/Tests/App/Docs and Bin/PulseLib executable/doc trees. Only historical Docs references found; dynamic invocation is not excluded.",
     "verification": "All eight files read fully; Git-normalized working/current blobs identical; archived SHA256/size/last-change recorded; no script executed; native code unchanged."
-  }
+  },
+  "moved_files": [
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/analyze_timelearner_dynamics.py",
+      "action": "moved_to_root",
+      "archive_commit": "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e",
+      "blob_sha1": "0be78947e2bb41e08086af1464b39583cb696ed3",
+      "content_sha256": "b1f636d0ffcdafa88850b2922ee7c141ae426a55da160d70d0c366db0d843a1f",
+      "bytes": 18215,
+      "last_change_commit": "4508a7f81a107ac2d2b18805d675705bb9ce02cf",
+      "replacement": "Scripts/StructTrain/TimeLearner/legacy_dynamics.py",
+      "mechanical_root_commit": "d742cf01b32d60e9ef792216a67c0c55f064e27f",
+      "verified_root_commit": "71df641bbbb61aca9cd3a12667178caeb036d099",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e:Configs/SpikeSamples/StructTrain/scripts/analyze_timelearner_dynamics.py"
+      ],
+      "reason": "Active leaf Branch telemetry analysis and its full six regressions moved to root; no wrappers remain. Valid-record whole-module parity and root CLI covered on both workers. Malformed vector handling and CLI filesystem status corrected in a separate commit.",
+      "initial_verified_root_commit": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "final_checks_per_worker": 20
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/tests/test_analyze_timelearner_dynamics.py",
+      "action": "moved_to_root",
+      "archive_commit": "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e",
+      "blob_sha1": "c293b6f074eb52729c6aac4fc1b0d2632ddea527",
+      "content_sha256": "5b9c84a2ee820343ea75da91d4ad11e495815cb91a85ab9770bf5eb3ce8b9cf0",
+      "bytes": 8283,
+      "last_change_commit": "4508a7f81a107ac2d2b18805d675705bb9ce02cf",
+      "replacement": "Scripts/StructTrain/TimeLearner/tests/test_legacy_dynamics.py",
+      "mechanical_root_commit": "d742cf01b32d60e9ef792216a67c0c55f064e27f",
+      "verified_root_commit": "71df641bbbb61aca9cd3a12667178caeb036d099",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e:Configs/SpikeSamples/StructTrain/scripts/tests/test_analyze_timelearner_dynamics.py"
+      ],
+      "reason": "Active leaf Branch telemetry analysis and its full six regressions moved to root; no wrappers remain. Valid-record whole-module parity and root CLI covered on both workers. Malformed vector handling and CLI filesystem status corrected in a separate commit.",
+      "initial_verified_root_commit": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "final_checks_per_worker": 20
+    }
+  ]
 }
