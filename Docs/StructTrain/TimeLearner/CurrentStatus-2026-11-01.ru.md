@@ -518,3 +518,31 @@ Docs-only Pulsee4978a2 имеет тот же Core tree64cdc352af865dc0e860ea05f
 На последней проверке процесс жив; production Core собран, интеграционные
 тесты ещё компилируются. Runtime/source активного задания не менялись.
 Новая feature не принята в develop; full stage7 и физическая матрица открыты.
+
+## N0: две серверные проверки и объявленная visual coverage
+
+M40 fixed-asan-a1 supervisor137298 после сборки прошёл новые5/5 kernel cases
+и реальные NativeModelEditor ClassicN0_2000/BranchN0_2000. Далее выполняется
+20000Hz. Общий wall limit300s оказался мал для расширенного ASan набора;
+результат ещё не терминальный на последней проверке. Очередь fixed-asan-a2
+PID148245 ждёт именно terminal timeout/wall_budget_exhausted и исчезновения
+принадлежащего процессу PID/start_ticks; только после этого повторяет тот же
+бинарник и неизменный source/runtime с лимитом3600s, без rebuild. Первый запуск
+и его реальные process receipts сохраняются, незавершённая серия не считается PASS.
+
+Normal Elder fixed-normal-a1 supervisor2304393 собирает тот же root942e5df45.
+Перед сборкой удалены только4 JSON-дубликата86901712 bytes: все543 members
+опубликованного proof84e79861 заново сверены с M40 extracted Git mirror;
+локальные SHA и отсутствие открывшего их процесса проверены перед unlink.
+Свободное место116051968→202956800 bytes. Receipt включён в normal readback;
+прошлый normal-a2 unpacked corpus теперь требует восстановления этих4 JSON
+из Git/M40 перед повторным использованием. Уникальные файлы не удалялись.
+
+Spec n0-candidate-order-native-v1.json объявляет точные31 test IDs и4 native
+training phases (warm/cold Classic/Branch). Report scope не включает waveform
+старых editor-only probes; они сохраняются в полном raw test archive. Visual
+worker M40 PID148416 ждёт успешного fixed-asan-a2; затем production renderer
+строит все объявленные training trial/soma views в Data cache. Первая visual
+setup попытка завершилась до запуска из-за short-SHA fetch; повтор использует
+полный445469038650354e98c740dbe52e433eb76c6fec. Ни visual, ни scoped algorithm
+приёмка пока не объявлены завершёнными; develop не изменён.
