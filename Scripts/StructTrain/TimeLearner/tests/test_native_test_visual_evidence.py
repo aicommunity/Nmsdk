@@ -98,3 +98,12 @@ class N0CandidateVisualEvidenceTest(NativeTestVisualEvidenceTest):
     expected_probe_count = 56
     expected_soma_pairs = 84
     expected_data_complete = True
+
+
+class N0RepeatedCandidateVisualEvidenceTest(NativeTestVisualEvidenceTest):
+    """Two complete configured schema2 N0 phases with real repeated probes."""
+    source_environment = "TIMELEARNER_N0_REPEATED_REPORT_DIR"
+    report_environment = "TIMELEARNER_N0_REPEATED_VISUAL_DIR"
+    expected_probe_count = 48
+    expected_soma_pairs = 72
+    expected_data_complete = True
