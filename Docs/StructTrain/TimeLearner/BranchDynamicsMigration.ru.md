@@ -72,5 +72,21 @@ M40 `860537391b22528e9afc26e44a54b6ec09be75c2` (4/8420B).
 [M40 final](../../../Reports/StructTrain/TimeLearner/s09-branch-dynamics-migration-m40-a2/README.md).
 Первоначальные19-check proofs и неудачная M40 попытка не удалены.
 
+Дополнительно проверен настоящий archived C++ лог BR480 от14.10 на M40:
+595939433B /26917 telemetry records. Извлечены первые16 и последние16 полных
+schema1 записей с line numbers, byte offsets и SHA256 каждой строки. Полный
+исходник прочитан для SHA256 и проверен неизменным; это выборка, не полное
+наблюдение эксперимента. Последний срез содержит180 каналов /90 мембран.
+Все summary fields старого полного модуля и нового production analyzer
+совпали для каждого среза; общий CLI отработал с validity=unknown.
+Это дополняет синтетические regression/parity cases реальным C++ форматом.
+Частота2000Hz взята из исторической команды, effective native model заново
+не проверялась. Ни нового Train, ни научного PASS здесь нет.
+
+[Actual trace proof](../../../Reports/StructTrain/TimeLearner/s09-branch-dynamics-actual-native-a1/README.md),
+commit `d5cc8b2c504696e128eba6dc89b60d67c35a4db1`:5 members /40656 xz bytes.
+Полный595-МБ лог остаётся на M40; в Git достаточно selected raw slices,
+CLI summaries и provenance для воспроизводимого анализа этих32 строк.
+
 Миграция остальных активных инструментов Bin, исторических Python Docs,
 Reports receipt runners и всего этапа9 остаётся открытой.
