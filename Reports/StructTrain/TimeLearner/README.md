@@ -3,6 +3,14 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Accepted scoped native timing property correction:
+[baseline4 failures /84 accepted nonfinite values](s01-timing-finite-baseline-normal-a1/README.md),
+[normal4+21](s01-timing-finite-current-normal-a1/README.md),
+[ASan4+21 with original timeout retained](s01-timing-finite-current-asan-a1/README.md).
+Each worker rejected120 invalid assignments and preserved previous finite values.
+The retry used the same frozen runtime; no scientific result or whole-stage
+acceptance follows. [Scope](../../../Docs/StructTrain/TimeLearner/TimingFiniteValidation.ru.md).
+
 Accepted scoped floating matrix serialization / native ModelArchive correction:
 [normal unit10/archive16/XML32/regression21](s05-archive-f64-current-normal-a1/README.md),
 [ASan unit10/archive16/XML32 and crossworker verification](s05-archive-f64-current-asan-a1/README.md),

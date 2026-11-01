@@ -1,0 +1,645 @@
+{
+  "kind": "timelearner_timing_finite_correction",
+  "schema_version": 1,
+  "worker": "asan",
+  "property_validation": {
+    "kind": "timing_property_finite_correction",
+    "worker": "asan",
+    "source": "ebf590082a881cbc8a702bd25f48bfb26b73a50d",
+    "execution": {
+      "kind": "timelearner_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "wall_seconds": 5.79708547424525,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "7a2e034a805e022d0cd55ee19469772def5676755dbb59ace912d59a0c8978a0",
+      "ownership_scope": "launched_executable_only",
+      "scientific_verdict": null
+    },
+    "gtest": {
+      "tests": "4",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "5.004",
+      "timestamp": "2026-11-01T19:47:58.007",
+      "name": "AllTests"
+    },
+    "skipped": 0,
+    "scientific_verdict": null
+  },
+  "regression_validation": {
+    "kind": "timing_finite_regression_budget_retry",
+    "execution": {
+      "kind": "timelearner_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "wall_seconds": 1997.2957919905894,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "7a2e034a805e022d0cd55ee19469772def5676755dbb59ace912d59a0c8978a0",
+      "ownership_scope": "launched_executable_only",
+      "scientific_verdict": null
+    },
+    "gtest": {
+      "tests": "21",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "1996.55",
+      "timestamp": "2026-11-01T20:21:34.063",
+      "name": "AllTests"
+    },
+    "skipped": 0,
+    "reason": "original1800s budget insufficient; immutable runtime retained",
+    "scientific_verdict": null
+  },
+  "initial_regression_timeout_retained": {
+    "kind": "timelearner_process_result",
+    "schema_version": 1,
+    "execution": "timeout",
+    "reason": "wall_budget_exhausted",
+    "returncode": -15,
+    "wall_seconds": 1800.6028125640005,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "7a2e034a805e022d0cd55ee19469772def5676755dbb59ace912d59a0c8978a0",
+    "ownership_scope": "launched_executable_only",
+    "scientific_verdict": null
+  },
+  "same_frozen_runtime": true,
+  "nonfinite_assignments_rejected_and_preserved": 120,
+  "records": [
+    {
+      "path": "s01-timing-finite-current-asan-a1/artifacts/timing-Branch-f2000.json",
+      "bytes": 7246,
+      "sha256": "5ed65f0c475b17a4dd58056a2d2f6261b7221fac8726ddb580ddef7fd73d674c"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/artifacts/timing-Branch-f20000.json",
+      "bytes": 7247,
+      "sha256": "3ab3ade577e040cf2a8e227a7c5986607d83716cd7f8e7f2aba69783526d8ad8"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/artifacts/timing-Classic-f2000.json",
+      "bytes": 7223,
+      "sha256": "2644d8d0a395c94b8cf6f6c3478c5a8cbf76c04f5de7d1b6d3788bdb882c9086"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/artifacts/timing-Classic-f20000.json",
+      "bytes": 7224,
+      "sha256": "7be0d78ba5eb3f08abb7644c163f8b80c7bc1b7b4c3c50bf13dca661f44af3b5"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/build.log",
+      "bytes": 6547,
+      "sha256": "75e2b027e43d982dac7339f8453d5a073da7b7714154631ed7be49558bf00295"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/checkout-Nmsdk-Bin.log",
+      "bytes": 79,
+      "sha256": "f64376f04d4f592b606e4e83ff24513be82433bd4921ab054903887cad7716d8"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/checkout-Nmsdk-PulseLib.log",
+      "bytes": 186,
+      "sha256": "f03daba26ea6fd136f8d84082cf5ea162e761d647d9333eaa656214db8a03a26"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/checkout-Rdk.log",
+      "bytes": 193,
+      "sha256": "c21269a0a1bad702a90012caaad2685795bce65184707e9c770d363d3518a4a6"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/checkout-root.log",
+      "bytes": 251,
+      "sha256": "ab4439cf681b8c3e3ac9a0c110ab2e394460bf0971beecb2530526833d5d3f4c"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/configure.log",
+      "bytes": 1345,
+      "sha256": "a9a128ff4c93e8f5003563562e4c3150e87e2822d3b6a2927f8822a34d149037"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/exception.json",
+      "bytes": 851,
+      "sha256": "d94f4648d8092a04b06d3a8c957767161c715dbd106ea75976e7df8a51ef610d"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/fetch-Nmsdk-Bin.log",
+      "bytes": 124,
+      "sha256": "2e3284fcc3ab128f81bfe0da06b1d12be239881c0cfd294a596653e4abb2bb8b"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/fetch-Nmsdk-PulseLib.log",
+      "bytes": 127,
+      "sha256": "fe5a6aac586de63efa59b577bb46c3138b9feace765b999416581e7d66c4ca64"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/fetch-Rdk.log",
+      "bytes": 118,
+      "sha256": "b7e98774342dc57feaca4c86df42012e3ee835464e22a11e915095dcb9369cf9"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/fetch-root.log",
+      "bytes": 122,
+      "sha256": "cc8697a8079eed686300881a8386d2b2b321b876be84e0941418e8d8b1a1eacb"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/gtest.xml",
+      "bytes": 1944,
+      "sha256": "3860b59b76c4efdaade21193277e34f7046c8265e55379e147eef1d81360e3d9"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/job.py",
+      "bytes": 6652,
+      "sha256": "b65e7639715a2447cec56f015ec4154a30f95d62c12b066c0e96e7ee575ace5d"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_20000_N2_native_executor.csv",
+      "bytes": 135743,
+      "sha256": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_20000_N2_native_executor.json",
+      "bytes": 196054,
+      "sha256": "1de3e41e011567a63d19a5534dc26a3042f7b91672d9dc328e0d6034509b1ad6"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_20000_N2_native_executor_reference_1.csv",
+      "bytes": 135655,
+      "sha256": "f000c2800e217c1e26d4ad7d83d6b823830f86227d33a5505147d61b10fbbc17"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_2000_N2_native_executor.csv",
+      "bytes": 13533,
+      "sha256": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_2000_N2_native_executor.json",
+      "bytes": 195902,
+      "sha256": "61a49cc15796a5b1928b07eeba095858a86c4ee541f83f38d31c0319979c9073"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_2000_N2_native_executor_certificate.json",
+      "bytes": 1038,
+      "sha256": "2c011015c60f9c1ab14f59b6983c6f08224d61bafd3323dd01b824d81fffde23"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_2000_N2_native_executor_reference_1.csv",
+      "bytes": 13532,
+      "sha256": "5505b584e54535732d9be4f1d40a1c4255d9e3cbe2453c3644f70833f6a3a707"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_2000_N2_native_executor_verify_0.csv",
+      "bytes": 13907,
+      "sha256": "c3b0685c303533f08aa0bd94cc2b46f40ed9171f3432b367e65a378f1641bca3"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Branch_2000_N2_native_executor_verify_1.csv",
+      "bytes": 14437,
+      "sha256": "9bfef45f018df63ff6f896960a6680487451f7b6bab4dfef47984b9d65b14c33"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_20000_N2_native_executor.csv",
+      "bytes": 207886,
+      "sha256": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_20000_N2_native_executor.json",
+      "bytes": 297446,
+      "sha256": "07dcb9cd1b18373a03b8b5b3afd2f059c3197c185c59b92d493e84bdd8c019f9"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_20000_N2_native_executor_certificate.json",
+      "bytes": 1040,
+      "sha256": "cb5cd6d58551b2e476340ea8cdc638e1338195499b85ec5a5327d46ebd3a4823"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_20000_N2_native_executor_verify_0.csv",
+      "bytes": 207510,
+      "sha256": "7b6474b9ad9f11fcdbeea7d19f96e804e466c1b14a63a464b7a1eece6206b676"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_20000_N2_native_executor_verify_1.csv",
+      "bytes": 211336,
+      "sha256": "9e041ca429c4ec89dae9bb28688d1cddc4ce36145ab3356140c4bb1a646bb7af"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_2000_N2_native_executor.csv",
+      "bytes": 20767,
+      "sha256": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_2000_N2_native_executor.json",
+      "bytes": 297218,
+      "sha256": "92b298e5bcfdf0ace2b14106f258ffac3bf8709f226ef5d775b2713a0d07feb4"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_2000_N2_native_executor_certificate.json",
+      "bytes": 1040,
+      "sha256": "5389eb6c25a437b6bfaf9a1f7b7df2587afe25d2245995af36c9b1a8f3cd3804"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_2000_N2_native_executor_verify_0.csv",
+      "bytes": 20737,
+      "sha256": "d69b64a5aa0d2c22510779a771e56876aa634fb6c0f417d28bddf8a12d514d2d"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/Classic_2000_N2_native_executor_verify_1.csv",
+      "bytes": 21112,
+      "sha256": "082ecf53e27ad22348528594f5fab7cf188c094125ece012a0de6086efc820b2"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/native-regression/uninitialized-container.json",
+      "bytes": 359,
+      "sha256": "8a8ef2fa563842a974b07be5def44634ce676222c28f213ad5b9b10f860d6d95"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/pid.json",
+      "bytes": 44,
+      "sha256": "000a3e451c9b33cfdfaf9c1ad62d02666c2a8c58647a3d8d7cdcc2a7258de924"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process/loaded-files.json",
+      "bytes": 12531,
+      "sha256": "71a061425d5c11d5ca4af0b602da0b08c9ee03ba54f41e3cc72a27e8f0f1e9ec"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process/owned-process.json",
+      "bytes": 417,
+      "sha256": "5c535a57776e5ddf12adfaa9d2654c7f91454c3e87fd28224dd7c5d3a170fcdc"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process/request.json",
+      "bytes": 523,
+      "sha256": "274cf2c376494c6059df3ae22369d464eaee01b556b312f9af44b0b63fc82adb"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process/result.json",
+      "bytes": 442,
+      "sha256": "b343be15243cd9ad6462cb6ccceaa00b1a862ccddf549eeb22c2ee389820e309"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process/runtime.json",
+      "bytes": 24339,
+      "sha256": "8824c39a77d9b1a5368b50fccb466b10d8ca3088435857066c308bb59be1f783"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process/stderr.log",
+      "bytes": 249,
+      "sha256": "39142bd79a1f8b8459a23dd9b7d111abeb7e00058ec35e264b14efd6ffcc36e5"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process/stdout.log",
+      "bytes": 1291,
+      "sha256": "cc1e85dbc4a8b8e0806ddb7d4e05fb1bf64043e8e0571fc90c51c71aecca30ff"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/process-guard.json",
+      "bytes": 376,
+      "sha256": "dfb1c3f202adf05d9837a9c290fed3c930e22909bb95999651cf54da468996a4"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/property-readback.json",
+      "bytes": 404,
+      "sha256": "ed73fd1d3704660ddf575963db3a231e07d867b444682be562ef112812b84acc"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/regression-process/loaded-files.json",
+      "bytes": 4704,
+      "sha256": "5f06dd7876386f81ac404f012ff918ca13be8c9e16c938545374d18705778681"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/regression-process/owned-process.json",
+      "bytes": 417,
+      "sha256": "83bf682371ca7ae638004de5369561a866dec30ff76feb1ba5b8c9bd7d6816fb"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/regression-process/request.json",
+      "bytes": 626,
+      "sha256": "6ae872f47cbfde815f32728b2f9f4b921f840b0983c9e1fcf61b65ef3ad08a37"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/regression-process/result.json",
+      "bytes": 456,
+      "sha256": "97899c2a4bb8ecda6599f3766b66610b2c035ae9110566ab74352f41cd4fa6b1"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/regression-process/runtime.json",
+      "bytes": 24339,
+      "sha256": "8824c39a77d9b1a5368b50fccb466b10d8ca3088435857066c308bb59be1f783"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/regression-process/stderr.log",
+      "bytes": 2586,
+      "sha256": "2f8b0b29a425e3602fa5aba86071616a01db8f162a838d47a3f2d1d06fa2e794"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/regression-process/stdout.log",
+      "bytes": 4435,
+      "sha256": "87c7b48189a9dd38a2864e8ae5d8cadb7514f152a9f0901dbdc68d4b27c59f9f"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/copy-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/initialized-copy-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/loaded-after-init.json",
+      "bytes": 186141,
+      "sha256": "31f63fdfa385487b9390646873fed943220445c514be6a875ab3bf37291a49ae"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/loaded-before-init.json",
+      "bytes": 186164,
+      "sha256": "7b7595c2c39a16563904b3fbf54c6a32fb7b19064ef266ea5902aa5ed3ae1fc2"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/native-graph.xml",
+      "bytes": 70459,
+      "sha256": "416c20118ecb75e61efaa7b5c9921814706aaa580a6c1acf2cb96a722ae8ada8"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/source.json",
+      "bytes": 186135,
+      "sha256": "81fddd44df82502e01bc0ab4a0f13e7705086c272cd7f93d5b308757e3b2a716"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/warm-vs-fresh.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/roundtrip-regression/xml-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/runtime.json",
+      "bytes": 24339,
+      "sha256": "8824c39a77d9b1a5368b50fccb466b10d8ca3088435857066c308bb59be1f783"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/source.json",
+      "bytes": 1304,
+      "sha256": "f76f5b92be062e37a59ce14f7129f2b9a97878402c1ff55beb44695852a010c2"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/supervisor.log",
+      "bytes": 656,
+      "sha256": "e85aff40b19a6d87ba30af16d838c783fd5eec7cc073040ba4a1a59393f703f7"
+    },
+    {
+      "path": "s01-timing-finite-current-asan-a1/validation.json",
+      "bytes": 841,
+      "sha256": "ac5b347e89a81d3fadaed76eaa4f28b1d84ab310a0201e6a92cab3680b8d4406"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/gtest.xml",
+      "bytes": 8286,
+      "sha256": "ff4dfc6877178ede9f71f5c1410a13eb5e59c069d8246ca5dcf35abfc2c6236f"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/job.py",
+      "bytes": 2339,
+      "sha256": "b17c1ed0b89f9efbc7411e38e3da17f47937d9450b16d19f460363fd92176c2f"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_20000_N2_native_executor.csv",
+      "bytes": 135743,
+      "sha256": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_20000_N2_native_executor.json",
+      "bytes": 196054,
+      "sha256": "1de3e41e011567a63d19a5534dc26a3042f7b91672d9dc328e0d6034509b1ad6"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_20000_N2_native_executor_certificate.json",
+      "bytes": 1014,
+      "sha256": "aedd085c732fcad73cd10b980be692da5f0534400bfc669b07da4a3b0a23d6d2"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_20000_N2_native_executor_reference_1.csv",
+      "bytes": 135655,
+      "sha256": "f000c2800e217c1e26d4ad7d83d6b823830f86227d33a5505147d61b10fbbc17"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_20000_N2_native_executor_verify_0.csv",
+      "bytes": 139481,
+      "sha256": "d258af2a6f27069881160babd46907c80cda9c3eb7d490f2e8e2831a43ee5ab8"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_20000_N2_native_executor_verify_1.csv",
+      "bytes": 142830,
+      "sha256": "229ed4ea1ab7ccd5b7100f3026e650ce4f20a668033b6f8f657c35f67680cf26"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_2000_N2_native_executor.csv",
+      "bytes": 13533,
+      "sha256": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_2000_N2_native_executor.json",
+      "bytes": 195902,
+      "sha256": "61a49cc15796a5b1928b07eeba095858a86c4ee541f83f38d31c0319979c9073"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_2000_N2_native_executor_certificate.json",
+      "bytes": 1038,
+      "sha256": "2c011015c60f9c1ab14f59b6983c6f08224d61bafd3323dd01b824d81fffde23"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_2000_N2_native_executor_reference_1.csv",
+      "bytes": 13532,
+      "sha256": "5505b584e54535732d9be4f1d40a1c4255d9e3cbe2453c3644f70833f6a3a707"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_2000_N2_native_executor_verify_0.csv",
+      "bytes": 13907,
+      "sha256": "c3b0685c303533f08aa0bd94cc2b46f40ed9171f3432b367e65a378f1641bca3"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Branch_2000_N2_native_executor_verify_1.csv",
+      "bytes": 14437,
+      "sha256": "9bfef45f018df63ff6f896960a6680487451f7b6bab4dfef47984b9d65b14c33"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_20000_N2_native_executor.csv",
+      "bytes": 207886,
+      "sha256": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_20000_N2_native_executor.json",
+      "bytes": 297446,
+      "sha256": "07dcb9cd1b18373a03b8b5b3afd2f059c3197c185c59b92d493e84bdd8c019f9"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_20000_N2_native_executor_certificate.json",
+      "bytes": 1040,
+      "sha256": "cb5cd6d58551b2e476340ea8cdc638e1338195499b85ec5a5327d46ebd3a4823"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_20000_N2_native_executor_verify_0.csv",
+      "bytes": 207510,
+      "sha256": "7b6474b9ad9f11fcdbeea7d19f96e804e466c1b14a63a464b7a1eece6206b676"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_20000_N2_native_executor_verify_1.csv",
+      "bytes": 211336,
+      "sha256": "9e041ca429c4ec89dae9bb28688d1cddc4ce36145ab3356140c4bb1a646bb7af"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_2000_N2_native_executor.csv",
+      "bytes": 20767,
+      "sha256": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_2000_N2_native_executor.json",
+      "bytes": 297218,
+      "sha256": "92b298e5bcfdf0ace2b14106f258ffac3bf8709f226ef5d775b2713a0d07feb4"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_2000_N2_native_executor_certificate.json",
+      "bytes": 1040,
+      "sha256": "5389eb6c25a437b6bfaf9a1f7b7df2587afe25d2245995af36c9b1a8f3cd3804"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_2000_N2_native_executor_verify_0.csv",
+      "bytes": 20737,
+      "sha256": "d69b64a5aa0d2c22510779a771e56876aa634fb6c0f417d28bddf8a12d514d2d"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/Classic_2000_N2_native_executor_verify_1.csv",
+      "bytes": 21112,
+      "sha256": "082ecf53e27ad22348528594f5fab7cf188c094125ece012a0de6086efc820b2"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/native-regression/uninitialized-container.json",
+      "bytes": 359,
+      "sha256": "8a8ef2fa563842a974b07be5def44634ce676222c28f213ad5b9b10f860d6d95"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/pid.json",
+      "bytes": 44,
+      "sha256": "7a42b276468ef676cb3517120fe1ba1bf12d62a086c77e1d5f4ec537b5dfe540"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/process/loaded-files.json",
+      "bytes": 6380,
+      "sha256": "9e021c9c40ece123584b5b92359c136be38ed823c07efd69114cc258778afd20"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/process/owned-process.json",
+      "bytes": 417,
+      "sha256": "624070987c4f55d39d5b8729d3eb9fdbc54c5e87f5ebe499d14bfbe67fe44f0a"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/process/request.json",
+      "bytes": 610,
+      "sha256": "86ea6bc3cc3020031b6dae8d8a014f6429ff6ca28f893aebe0559931d3591e03"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/process/result.json",
+      "bytes": 444,
+      "sha256": "274dbda671a9586a37f52a3ecb2f4ad85970bcae385319f16c6926056dc6de89"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/process/runtime.json",
+      "bytes": 24339,
+      "sha256": "8824c39a77d9b1a5368b50fccb466b10d8ca3088435857066c308bb59be1f783"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/process/stderr.log",
+      "bytes": 249,
+      "sha256": "39142bd79a1f8b8459a23dd9b7d111abeb7e00058ec35e264b14efd6ffcc36e5"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/process/stdout.log",
+      "bytes": 4768,
+      "sha256": "6853e8c98497c08201d36fab04b05eb4b4424bb90039ef5540d573701d9d269f"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/copy-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/initialized-copy-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/loaded-after-init.json",
+      "bytes": 186141,
+      "sha256": "31f63fdfa385487b9390646873fed943220445c514be6a875ab3bf37291a49ae"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/loaded-before-init.json",
+      "bytes": 186164,
+      "sha256": "7b7595c2c39a16563904b3fbf54c6a32fb7b19064ef266ea5902aa5ed3ae1fc2"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/native-graph.xml",
+      "bytes": 70459,
+      "sha256": "416c20118ecb75e61efaa7b5c9921814706aaa580a6c1acf2cb96a722ae8ada8"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/source.json",
+      "bytes": 186135,
+      "sha256": "81fddd44df82502e01bc0ab4a0f13e7705086c272cd7f93d5b308757e3b2a716"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/warm-vs-fresh.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/roundtrip-regression/xml-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/runtime.json",
+      "bytes": 24339,
+      "sha256": "8824c39a77d9b1a5368b50fccb466b10d8ca3088435857066c308bb59be1f783"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/source.json",
+      "bytes": 1304,
+      "sha256": "f76f5b92be062e37a59ce14f7129f2b9a97878402c1ff55beb44695852a010c2"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/supervisor.log",
+      "bytes": 144,
+      "sha256": "286568a82f53d1ffbcd091e8203a59b533a8b52fe30de6af91f9ff229dd9d67d"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/terminal.json",
+      "bytes": 68,
+      "sha256": "e6fe4f8d2c1a01ba5e2d3ea105afebd6f303399af19f3d805f6db4a2ac0f3a87"
+    },
+    {
+      "path": "s01-timing-finite-regression-asan-a2/validation.json",
+      "bytes": 851,
+      "sha256": "9f050b2a0c345afab167c32250a855b7488dc1b8d3e914e95a9bbee8b53e185f"
+    }
+  ],
+  "archive_sha256": "7e4aaab97d631714eccd2b0cb92fffb5f8b11ad9b88802226a5fc5f8afb0912a",
+  "full_plan_acceptance": false,
+  "scientific_verdict": null
+}
