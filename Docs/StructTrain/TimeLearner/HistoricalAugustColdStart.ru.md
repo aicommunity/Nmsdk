@@ -156,12 +156,45 @@ native import gate: успешное закрытие процесса, полн
 пять cached soma values, отсутствие входного импульса. Полный Test использует
 исходную подготовленную пару, а не изменённый post-save Model короткой пробы.
 Граф переносится целиком из fresh cold Train; Dataset заменяется явно
-объявленной исходной тестовой матрицей. Завершение всех трёх frozen Test и
-их визуальная приёмка пока не заявлены.
+объявленной исходной тестовой матрицей.
+
+Все три коротких gate и все три40s матрицы завершились0. Результаты при
+порогах0.0115/0.0130/0.0135:4/8,5/8,6/8, TP1, FP4/3/2, FN0, TN3/4/5.
+Каждый новый CSV побайтно равен untouched saved-state replay. Полный нейрон
+после короткой и полной пробы равен cold Train, кроме явно выбранного
+LTZone Threshold. Сам source export холодного Train не изменился.
+
+[Primary frozen Test](../../../Reports/StructTrain/TimeLearner/s11-august-coldtest-elder-a2/README.md),
+commit`0662a3aa8233a7eb2eb07df9af9540e6af69a181`:236 файлов/7609888B xz.
+Поле producer validation.operations=3 означает полные матрицы; итоговый
+manifest отдельно учитывает3 prestimulus gate и все6 native операций.
+[Первая аварийная попытка](../../../Reports/StructTrain/TimeLearner/s11-august-coldtest-failed-elder-a1/README.md),
+commit`37d042769a3357edf279960fa87b8cf70a65e1ce`:49 файлов/2168488B xz.
+Обе попытки сохраняют точные prepared inputs, raw данные и process receipts;
+outer/member hashes проверены локально.
+
+Production temporal reader повторно проверен на этих новых данных после
+восстановления236 primary files через Git:7/7 на Elder и7/7 на M40, включая
+corruption controls. Proof commits`2322b7e32450feb1c94858044b034e70e5aabd38`
+и`27e282405dc4cfbccf78927abe58d4d3e556afe0`, source
+`b9f9a0838091e5820bf54d387ecb00ed8a5920b2`; новые native операции readers
+не выполняют. Во всех24 предъявлениях записаны реальные входные импульсы,
+четыре сомы и LT output; проверены полные80000 отсчётов каждого потока.
+
+Все36 raw streams побайтно совпали с accepted saved-state observer primary
+`2376e1c3d6a17d0edcdcf9ce8d10272009ebfadd`. Поэтому96 ранее построенных
+full/detail/amplitude-focused графиков и15 непосредственно просмотренных
+selected PNG применимы к новым данным через явный `temporal-equivalence.json`.
+Новые изображения не рисовались и не дублировались в Git. Полный cache:
+`/media/user/Data/TimeLearnerRefactor/reports-august-phasea-temporal-m40-a3`;
+selected visual proof`dc9f8f43a2945cfefc9fc1efa6eb8abfe1e4cead`.
+Это приёмка по точной идентичности данных, не новый ручной просмотр96 PNG.
 
 Process completion и legacy Need0 не означают Exact V2. Итог маркируется
 legacy_done_uncertified либо unfinished_at_model_budget; сертификат и
 scientific verdict не создаются. После незавершённого Train обычный обученный
 Test запрещён: возможен только отдельно объявленный diagnostic evaluation.
-Полный перенос графа, post-import readback, frozen evaluation и временные
-диаграммы всех Test-паттернов остаются самостоятельными необходимыми проверками.
+Адресный historical cold Train→Test с post-import readback и временными
+диаграммами всех паттернов принят в исходном протоколе. Legacy/V2 A/B,
+перестановки, увеличенный ITI, independent frozen evaluation и полная
+physical/lifecycle матрица остаются открытыми; весь этап11 этим не закрыт.

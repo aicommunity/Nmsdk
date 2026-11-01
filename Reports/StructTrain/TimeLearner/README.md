@@ -23,7 +23,16 @@ seconds with original L49/41/25/1, Rs and newly captured references.
 The entire serialized neuron matches original Train/Test:604 nodes,8333 parameters,
 496 inbound edges. [Elder10/10 identity checks](s11-august-model-reader-elder-a1/README.md),
 [M4010/10](s11-august-model-reader-m40-a1/README.md).
-This is legacy_done_uncertified; full frozen import/classification is a separate gate.
+This is legacy_done_uncertified.
+[Full cold-model frozen Test](s11-august-coldtest-elder-a2/README.md) passes three
+native prestimulus gates and three full matrices:4/8,5/8,6/8, all CSVs and36 raw
+streams byte-equal to the accepted saved-state observer. The96 existing temporal
+diagrams/15 selected reviewed PNG apply through explicit data equivalence;
+no duplicate figures are added. [Elder7/7 temporal checks](s11-august-coldtest-reader-elder-a1/README.md),
+[M407/7](s11-august-coldtest-reader-m40-a1/README.md).
+[Failed earlier mode0 import](s11-august-coldtest-failed-elder-a1/README.md)
+is retained as process_error, never counted as a successful classification result.
+Historical same-matrix evaluation does not establish independent robustness.
 
 Active Branch telemetry analyzer moved from Bin to the root package:
 [Elder20/20 Python checks](s09-branch-dynamics-migration-elder-a2/README.md),
