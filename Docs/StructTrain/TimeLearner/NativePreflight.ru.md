@@ -91,3 +91,24 @@ native codec требует объекты begin/end. Это ошибка ген
 формата относительно реальных templates; обязательный повтор всех32 native
 cases остаётся незавершённым. Python checks отдельно не доказывают native codec
 compatibility; исходный отказ сохраняется вместе с остальными setup attempts.
+
+После исправления codec все18 Python checks прошли. Первая маленькая модель
+завершила native preflight, но parent не успел прочитать mappings до выхода;
+pipeline отверг её с pipeline_loaded_runtime_missing. Эта попытка не принята.
+
+## Подтверждение actual runtime для быстрых jobs
+
+Добавлен optional Console/supervisor обмен после окончания native job. Console
+публикует capture-ready с PID/start_ticks и ждёт ACK не более10 секунд. Parent
+проверяет owned identity, непосредственно читает /proc/exe и /proc/maps,
+проверяет inode/hash mapped files и только затем подтверждает capture. Child
+не передаёт выдуманный список библиотек; public loaded_files_captured требует
+настоящего наблюдения parent. Это point-in-time snapshot, не утверждение о
+полном времени жизни всех когда-либо загружавшихся библиотек.
+
+Для preflight runner включает этот обмен; для остальных execute-вызовов default
+остаётся прежним. Зарезервированный capture directory назначает supervisor.
+Ожидание происходит после native работы, не вызывает Calculate/Reset/Build
+и не изменяет model time. Wall budget включает ожидание. Portable audit проверяет
+request paths, PID/start_ticks и обе receipts; исторические passive snapshots
+читаются по прежнему контракту. Серверная приёмка этого изменения ещё не выполнена.

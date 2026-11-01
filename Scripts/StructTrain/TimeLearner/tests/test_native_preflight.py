@@ -128,3 +128,31 @@ class NativePreflightTest(unittest.TestCase):
             bad = _signed({k: v for k, v in bad.items() if k != "sha256"})
             with self.assertRaisesRegex(EvidenceError, "training_optional_modes_not_yet_supported"):
                 validate_job("preflight", bad)
+
+    def test_cooperative_capture_is_bound_to_actual_owned_process(self):
+        self.assertTrue(self.corpus["cooperative_capture"])
+        for name in self.corpus["positive"]:
+            folder = self.root/"runs"/name/"process"
+            owned = load(folder/"owned-process.json")
+            request = load(folder/"request.json")
+            self.assertIn("--timelearner-capture-directory", request["arguments"])
+            for filename, kind in (("capture-ready.json", "native_runtime_capture_ready"),
+                                   ("capture-ack.json", "native_runtime_capture_ack")):
+                self.assertEqual(load(folder/filename), {"kind": kind, "schema_version": 1,
+                    "pid": owned["pid"], "start_ticks": owned["start_ticks"]})
+
+    def test_rehashed_capture_identity_change_is_rejected(self):
+        import hashlib
+        original = self.root/"runs"/"pipeline-Classic-N1"
+        for filename in ("capture-ready.json", "capture-ack.json"):
+            with tempfile.TemporaryDirectory() as temporary:
+                folder = Path(temporary)/"run";shutil.copytree(original, folder)
+                receipt = load(folder/"process"/filename);receipt["start_ticks"] += "0"
+                save(folder/"process"/filename, receipt)
+                manifest = load(folder/"run-manifest.json")
+                for record in manifest["artifacts"]:
+                    raw = (folder/record["path"]).read_bytes()
+                    record.update(bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())
+                save(folder/"run-manifest.json", _signed({k: v for k, v in manifest.items() if k != "sha256"}))
+                with self.assertRaisesRegex(EvidenceError, "cooperative_capture_identity_changed"):
+                    audit_run_manifest(folder/"run-manifest.json")

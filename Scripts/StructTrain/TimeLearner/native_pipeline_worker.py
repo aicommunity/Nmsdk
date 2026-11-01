@@ -276,7 +276,7 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     _write(inputs/"job.json", job)
     process = execute(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
         "--timelearner-"+mode, str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
-        executable.parent, output/"process", maximum_wall_seconds)
+        executable.parent, output/"process", maximum_wall_seconds, cooperative_capture=mode == "preflight")
     verify_runtime(runtime)
     audit = None
     if process["execution"] == "completed" or _structured_live_exit(mode, job, process, output/"native"):
@@ -361,6 +361,32 @@ def audit_run_manifest(path):
                 process["returncode"] == (0 if process["execution"] == "completed" else 2) and process["ownership_scope"] == "launched_executable_only" and
                 process["runtime_provenance"] == "loaded_files_captured", "pipeline_owned_runtime_changed")
     audit = audit_execution(mode, root/"native", job, source_case) if auditable else None
+    if mode == "preflight" and auditable:
+        request = load(root/"process/request.json");arguments = request["arguments"]
+        if "--timelearner-capture-directory" in arguments:
+            require(arguments.count("--timelearner-capture-directory") == 1,
+                    "cooperative_capture_argument_changed")
+            index = arguments.index("--timelearner-capture-directory")
+            require(index+1 < len(arguments) and PurePosixPath(arguments[index+1]).name == "process",
+                    "cooperative_capture_argument_changed")
+            require(type(arguments) is list and len(arguments) == 8 and
+                    arguments[::2] == ["--app-ini", "--timelearner-preflight", "--timelearner-output",
+                                      "--timelearner-capture-directory"] and
+                    arguments[1] == runtime["app_ini"]["path"] and
+                    PurePosixPath(arguments[3]).name == "job.json" and
+                    PurePosixPath(arguments[3]).parent.name == "input" and
+                    PurePosixPath(arguments[5]).name == "native" and
+                    PurePosixPath(arguments[3]).parents[1] == PurePosixPath(arguments[5]).parent ==
+                    PurePosixPath(arguments[7]).parent, "cooperative_capture_argument_changed")
+            for filename, kind in (("capture-ready.json", "native_runtime_capture_ready"),
+                                   ("capture-ack.json", "native_runtime_capture_ack")):
+                record = load(root/"process"/filename)
+                require(type(record) is dict and type(record.get("schema_version")) is int and
+                        type(record.get("pid")) is int and record == {"kind": kind, "schema_version": 1,
+                        "pid": owned["pid"], "start_ticks": owned["start_ticks"]}, "cooperative_capture_identity_changed")
+        else:
+            require(not (root/"process/capture-ready.json").exists() and not (root/"process/capture-ack.json").exists(),
+                    "cooperative_capture_argument_missing")
     if auditable and process["execution"] != "completed":
         require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
     require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution"),

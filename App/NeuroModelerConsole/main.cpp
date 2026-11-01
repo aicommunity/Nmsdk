@@ -21,6 +21,7 @@
 #include "ClDescGenerator.h"
 #include "TimeLearnerCalibrationJob.h"
 #include "TimeLearnerTrainingJob.h"
+#include "RuntimeCapture.h"
 #include "TimeLearnerTransportJob.h"
 #include "TimeLearner/ModelInspection.h"
 #include "TimeLearner/ModelIdentity.h"
@@ -90,6 +91,7 @@ const QCommandLineOption timeLearnerPostTuneOption(QStringList() << "timelearner
                                                 "Execute declared measured PostTune and real threshold confirmation.", "json-path");
 const QCommandLineOption timeLearnerOutputOption(QStringList() << "timelearner-output",
                                                "New native TimeLearner artifact directory.", "directory");
+const QCommandLineOption runtimeCaptureOption(QStringList() << "timelearner-capture-directory", "Owned supervisor capture directory; native jobs only.", "directory");
 const QCommandLineOption timeLearnerPreflightOption(QStringList() << "timelearner-preflight", "Build and validate a cold native training job without calculating or starting Train.", "json-path");
 const QCommandLineOption timeLearnerTrainOption(QStringList() << "timelearner-train", "Execute a declared cold native training job.", "json-path");
 const QCommandLineOption timeLearnerExportOption(QStringList() << "timelearner-export", "Export a completed solo model to recognition state.", "json-path");
@@ -113,6 +115,7 @@ parser.addOption(timeLearnerPostTuneOption);
 parser.addOption(timeLearnerOutputOption);
 parser.addOption(timeLearnerTrainOption);
 parser.addOption(timeLearnerPreflightOption);
+parser.addOption(runtimeCaptureOption);
 parser.addOption(timeLearnerExportOption);
 parser.addOption(timeLearnerEvaluateOption);
  parser.process(a);
@@ -137,7 +140,7 @@ parser.addOption(timeLearnerEvaluateOption);
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
          option == "--cldesc-class" || option == "-K" ||
-         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate";
+         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -153,7 +156,7 @@ parser.addOption(timeLearnerEvaluateOption);
       option == "--cldesc-lexicon" || option == "-l" ||
       option == "--cldesc-library" || option == "-C" ||
       option == "--cldesc-class" || option == "-K" ||
-      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate")
+      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate")
    {
     if(shouldSkipValue(option) && !token.contains('=') && i + 1 < original.size())
      ++i;
@@ -180,12 +183,13 @@ const bool wantIdentity = parser.isSet(identityModelOption);
 const QString inspectionPath = parser.value(wantIdentity ? identityModelOption : inspectModelOption).trimmed();
 const int nativeOperations = int(parser.isSet(timeLearnerPreflightOption))+int(parser.isSet(timeLearnerJobOption))+int(parser.isSet(timeLearnerTrainOption))+
     int(parser.isSet(timeLearnerExportOption))+int(parser.isSet(timeLearnerEvaluateOption))+int(parser.isSet(timeLearnerPostTuneOption));
-const bool nativeJob = nativeOperations>0 || parser.isSet(timeLearnerOutputOption);
+const bool nativeJob = nativeOperations>0 || parser.isSet(timeLearnerOutputOption) || parser.isSet(runtimeCaptureOption);
 const auto& nativeOption = parser.isSet(timeLearnerPreflightOption)?timeLearnerPreflightOption:parser.isSet(timeLearnerTrainOption)?timeLearnerTrainOption:parser.isSet(timeLearnerExportOption)?
     timeLearnerExportOption:parser.isSet(timeLearnerEvaluateOption)?timeLearnerEvaluateOption:
     parser.isSet(timeLearnerPostTuneOption)?timeLearnerPostTuneOption:timeLearnerJobOption;
 if(nativeJob && (nativeOperations!=1 || !parser.isSet(timeLearnerOutputOption) ||
    parser.value(nativeOption).trimmed().isEmpty() || parser.value(timeLearnerOutputOption).trimmed().isEmpty() ||
+   (parser.isSet(runtimeCaptureOption) && parser.value(runtimeCaptureOption).trimmed().isEmpty()) ||
    parser.isSet(configOption) || cliStartCalc || cliSaveProject || cliExitAfterCalc || parser.isSet(calcTimeOption) ||
    cliGenerateClDesc || parser.isSet(checkConfigOption) || parser.isSet(inspectModelOption) || wantIdentity ||
    parser.isSet(lexiconOption) || parser.isSet(clDescLibraryOption) || parser.isSet(clDescClassOption) || parser.isSet(clDescForceOption)))
@@ -244,12 +248,16 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
  if(nativeJob)
  {
   const auto input=parser.value(nativeOption).trimmed(),output=parser.value(timeLearnerOutputOption).trimmed();
-  if(parser.isSet(timeLearnerPreflightOption))return RunTimeLearnerPreflightJob(input,output);
-  if(parser.isSet(timeLearnerTrainOption))return RunTimeLearnerTrainingJob(input,output);
-  if(parser.isSet(timeLearnerExportOption))return RunTimeLearnerExportJob(input,output);
-  if(parser.isSet(timeLearnerEvaluateOption))return RunTimeLearnerEvaluationJob(input,output);
-  if(parser.isSet(timeLearnerPostTuneOption))return RunTimeLearnerPostTuneJob(input,output);
-  return RunTimeLearnerCalibrationJob(input,output);
+  int result=2;
+  if(parser.isSet(timeLearnerPreflightOption))result=RunTimeLearnerPreflightJob(input,output);
+  else if(parser.isSet(timeLearnerTrainOption))result=RunTimeLearnerTrainingJob(input,output);
+  else if(parser.isSet(timeLearnerExportOption))result=RunTimeLearnerExportJob(input,output);
+  else if(parser.isSet(timeLearnerEvaluateOption))result=RunTimeLearnerEvaluationJob(input,output);
+  else if(parser.isSet(timeLearnerPostTuneOption))result=RunTimeLearnerPostTuneJob(input,output);
+  else result=RunTimeLearnerCalibrationJob(input,output);
+  if(parser.isSet(runtimeCaptureOption) && !AwaitNativeRuntimeCapture(parser.value(runtimeCaptureOption).trimmed()))
+  { qCritical()<<"native_runtime_capture_not_acknowledged";return 2; }
+  return result;
  }
 
  // Обработка проверки конфигурации
