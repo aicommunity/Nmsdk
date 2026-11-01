@@ -36,7 +36,7 @@ summary фиксирует nonfinite evidence. Корректные записи
 Общий analyze CLI больше не перехватывает OSError в ветке invalid data: missing
 input/занятый output дают process_error/unknown, прежний файл не меняется.
 
-На каждом worker19/19 проверок:6 прежних регрессий,8 новых production CLI/
+Первоначально на каждом worker19/19 проверок:6 прежних регрессий,8 новых production CLI/
 corruption/parity checks и5 прежних CLI checks на реальном native domain preview.
 Полный архивный analyzer загружается отдельно из Git; тела функций в тестовую
 копию не извлекаются. Сравнены все summary fields и parse result корректного
@@ -56,6 +56,21 @@ Primary proofs: Elder `5ca83feee49dd64346b0dc21c76389c0a8a0b95f` (4 members /
 [Elder](../../../Reports/StructTrain/TimeLearner/s09-branch-dynamics-migration-elder-a1/README.md),
 [M40](../../../Reports/StructTrain/TimeLearner/s09-branch-dynamics-migration-m40-a1/README.md).
 Bin accepted develop merge `6304b4a2bc4117c54c185a917850c7f65771c163`.
+
+Дополнительная граница snapshot: `analyze_file` сравнивает inode/device/size/
+mtime до и после чтения. Дописываемый/заменённый файл отвергается с
+`dynamics_source_changed_during_analysis`, вместо смешения хеша прочитанного
+содержимого с новым размером файла. Статистики корректного закрытого файла
+не изменены. Test выполняет реальную запись в читаемый временный файл;
+не проверяет лишь копию условия guard.
+
+Окончательный код `71df641bbbb61aca9cd3a12667178caeb036d099` прошёл20/20
+на каждом worker (6 прежних +9 migration/CLI/corruption +5 native-preview CLI).
+Final primary: Elder `f4348013736477ce7c7a88b57ce972f89fbf3ff7` (4/8336B),
+M40 `860537391b22528e9afc26e44a54b6ec09be75c2` (4/8420B).
+[Elder final](../../../Reports/StructTrain/TimeLearner/s09-branch-dynamics-migration-elder-a2/README.md),
+[M40 final](../../../Reports/StructTrain/TimeLearner/s09-branch-dynamics-migration-m40-a2/README.md).
+Первоначальные19-check proofs и неудачная M40 попытка не удалены.
 
 Миграция остальных активных инструментов Bin, исторических Python Docs,
 Reports receipt runners и всего этапа9 остаётся открытой.

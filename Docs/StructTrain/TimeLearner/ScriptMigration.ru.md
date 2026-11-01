@@ -8,7 +8,8 @@
 Основной модуль и шесть старых тестов находятся в корневом пакете, оба старых
 пути удалены без wrappers. Отдельный `moved_files` реестр сохраняет original
 Bin commit/blob, mechanical root commit, replacement и проверенную версию.
-19/19 checks на каждом worker проверяют CLI, whole-module parity и corruption;
+20/20 final checks на каждом worker проверяют CLI, whole-module parity, corruption
+и отказ для реально изменившегося во время чтения файла;
 один неверно выбранный M40 fixture сохранён как неудачная попытка.
 Это не перенос всего старого анализа и не новый научный прогон.
 
