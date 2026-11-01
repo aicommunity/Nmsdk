@@ -6,6 +6,18 @@
 [утверждённом плане](RefactoringPlan.ru.md). Эта запись добавляет проверенные
 подэтапы, не заменяя исходную постановку или обязательную матрицу.
 
+В отдельной feature разрабатывается [loaded-graph readout](LoadedLearnerReadout.ru.md):
+32/32 реальных отказа исходного PulseLib подтверждены на normal и ASan.
+Различаются неверный размер Parameters-only буфера и непривязанный learner
+при работающем физическом нейроне. Исправление последовательно проверяется;
+N=1 требует разрешения ролей в Reset при no-op Build. В develop этот подэтап
+ещё не принят; наличие кода и baseline proofs не считается закрытием этапа4.
+На normal последняя версия выполнила32/32 и21/21 native regression,
+а независимый анализ реальных данных —16/16. ASan выявил дополнительную
+ошибку изменения формы числовой матрицы Rdk. Исправление этого общего метода
+уже прошло10/10 прямых тестов на каждом worker; полные повторные сборки и
+проверки learner продолжаются. Приёмка подэтапа остаётся открытой.
+
 [Исторический August saved-state replay](HistoricalAugustReplay.ru.md):
 свежая сборка точного root de02a380 и три новых Test на Elder воспроизвели4/8,
 5/8 и6/8 исходного протокола, TP1 и FP4/3/2. Это не cold retrain или robustness.
@@ -936,3 +948,11 @@ PulseLib develop merge
 Подэтап принят, полный stage7 остаётся открытым.
 Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
 
+
+Последний проверенный срез loaded-learner a4: normal math10/10, native32/32,
+regression21/21, reader16/16; ASan math10/10 и native32/32, regression ещё идёт.
+Сжатая текущая normal primary-публикация c794e3cbf11c920d8fae5bb86dddd6f91bbceb17
+(336 файлов,388052 bytes). Графики68 case/soma pairs строятся на M40;
+визуальная приёмка ещё не выполнена. Это отдельный незавершённый подэтап,
+без scientific selectivity verdict. Детали и точные источники:
+[LoadedLearnerReadout.ru.md](LoadedLearnerReadout.ru.md).

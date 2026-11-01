@@ -1,0 +1,5 @@
+# Current native mode0 load defects: normal
+
+Original PulseLib d1c3df4cd0749e5869b977fb5e69417400ce1112 fails all32 actual storage/Environment/UNet XML cases: Classic/Branch, N1/2/4/6,2000/20000Hz, parameter-only/stateful. Twelve parameter-only N>1 cases retain the default two-row soma buffer. Twenty stateful or N1 cases have adequate dimensions but the learner cache stays zero while the actual physical soma responds. Native XML diagnostics are empty; failures occur after loaded graph/readout capture. No undefined out-of-bounds writes are intentionally executed.
+
+Expanded a8 source9f5a344c5abaf6c38a5018d80cf52ff7cf992e9c; earlier a7 sourcec74d05cde5022d0682501f222cebec3b3c2c6d47 fails16 stateful cases. All primary XML/graph/dimension dumps, native gtest/process/runtime records and earlier setup/compile failures a1..a6 are retained. The failed probes do not provide complete waveform recordings or a selectivity verdict. These are observed implementation defects, not scientific classification FAILs or a proof of all-stage completion.
