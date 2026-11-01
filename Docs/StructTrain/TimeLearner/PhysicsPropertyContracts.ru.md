@@ -28,8 +28,14 @@ ApplyDendriteCapacitances заменяет Exc и Inh capacities одним ck; 
 Новый trim обязан хранить per-segment baseline эффективных каналов, применять
 разрешённый scale, проверять каждый канал и conductance/integrator после edit,
 сохранять roundtrip. Подстановка 1nF при отсутствующем parent C запрещена:
-legacy PostTune Branch reconstruction — отдельный незакрытый риск, не часть
-валидного storage-owned import. До такой реализации V2 On не поддерживается.
+старый PostTune Branch reconstruction действительно использовал такой fallback.
+В текущем456a5ab этот путь заменён ReconstructNativeLearnerNeuron: импортируется
+реальный graph/storage state, затем выполняются штатные Dataset/Neuron Reset.
+Parent C overlay и повторный ApplyElementDefaults отсутствуют; отказ transfer
+делает PostTune setup невалидным. Это исправление реконструкции, а не реализация
+C-trim: V2 SyncCapacitanceTrim>0 по-прежнему не поддерживается. Источники,
+режимы и границы — [сверка каталога](PropertySourceDrift.ru.md) и
+[NativePostTuneController](NativePostTuneController.ru.md).
 
 ## Пять parent overrides обоих классов
 
