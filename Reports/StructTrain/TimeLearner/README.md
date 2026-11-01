@@ -406,3 +406,10 @@ Positive N1 Solo to frozen recognition:
   reviewed1920x960. All134 normal/ASan trial/model JSON values match;
   full derived cache remains on M40. No full-cache manual review or independent
   scientific replicate claim. Initial environment-only rejection receipts retained.
+
+[Current native loaded-learner normal a4](s04-loaded-readout-current-normal-a1/README.md):
+production MDMatrix10/10, native serialized learner32/32, regression21/21,
+production reader16/16; full graph projection and68 case/soma pairs audited.
+All32 trace CSVs are byte-identical to normal a3. Compact archive336 members,
+388052 bytes, all member hashes verified. ASan regression and visual acceptance
+remain separate pending gates; no selectivity verdict or full-stage acceptance.
