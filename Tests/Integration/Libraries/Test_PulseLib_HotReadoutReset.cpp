@@ -82,8 +82,9 @@ template<class Learner> void WarmReset(const bool branch,const int count,const u
  const auto initial=read();
  std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time_s,input";
  for(size_t i=0;i<somas.size();++i)trace<<",physical_soma"<<i+1<<",cached_soma"<<i+1;trace<<'\n';
+ const unsigned warmTicks=xmlRoundtrip?frequency/10:frequency/20;
  double maximum=0.;std::vector<std::vector<double>> warmRows;
- for(unsigned tick=0;tick<frequency/20;++tick)
+ for(unsigned tick=0;tick<warmTicks;++tick)
  {
   model->Calculate();core.environment->IncreaseModelTimeByStep();trace<<double(tick)/frequency<<','<<generator->Output(0,0);
   std::vector<double> row{generator->Output(0,0)};
@@ -128,10 +129,11 @@ template<class Learner> void WarmReset(const bool branch,const int count,const u
   loadedBeforeReset=read();
  }
  core.environment->Reset();const auto reset=read();
- QJsonObject observation;observation["kind"]=xmlRoundtrip?"native_hot_xml_reset":"native_hot_learner_reset";observation["schema_version"]=1;
+ QJsonObject observation;observation["kind"]=xmlRoundtrip?"native_hot_xml_reset":"native_hot_learner_reset";observation["schema_version"]=xmlRoundtrip?2:1;
  if(xmlRoundtrip)
  {
   observation["serialized_while_warm"]=true;observation["include_state"]=includeState;
+  observation["warm_sample_count"]=int(warmTicks);observation["warm_duration_s"]=double(warmTicks)/frequency;
   observation["loaded_after_native_init_before_explicit_reset"]=loadedBeforeReset;
   const auto graph=NmsdkTools::InspectModel(model);ASSERT_TRUE(graph["valid"].toBool());
   SaveResetArtifact(folder+"loaded-model.json",QJsonDocument(graph).toJson().toStdString());
@@ -155,7 +157,7 @@ template<class Learner> void WarmReset(const bool branch,const int count,const u
  {
   std::ostringstream replay;replay.imbue(std::locale::classic());replay<<std::setprecision(17)<<"time_s,warm_input,replay_input";
   for(size_t i=0;i<somas.size();++i)replay<<",warm_soma"<<i+1<<",replay_soma"<<i+1;replay<<'\n';
-  for(unsigned tick=0;tick<frequency/20;++tick)
+  for(unsigned tick=0;tick<warmTicks;++tick)
   {
    model->Calculate();core.environment->IncreaseModelTimeByStep();
    const double input=generator->Output(0,0);EXPECT_DOUBLE_EQ(input,warmRows[tick][0]);
@@ -200,5 +202,5 @@ TEST_P(HotXmlReadoutReset, NativeLoadOfWarmGraphResetsDynamicsAndReplaysResponse
  else WarmReset<NNeuronTimeLearner>(branch,count,frequency,true,state);
 }
 INSTANTIATE_TEST_SUITE_P(NativeStorage,HotXmlReadoutReset,
- ::testing::Combine(::testing::Values(false,true),::testing::Values(2,4),::testing::Values(2000u,20000u),::testing::Values(false,true)));
+ ::testing::Combine(::testing::Values(false,true),::testing::Values(1,2,4,6),::testing::Values(2000u,20000u),::testing::Values(false,true)));
 }
