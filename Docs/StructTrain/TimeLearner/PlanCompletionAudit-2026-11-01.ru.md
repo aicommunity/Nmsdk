@@ -73,6 +73,16 @@ shell удалены из Bin с полными retrieval records. Guard `runtim
 [migration](ScriptMigration.ru.md), [worktree identity](SourceWorktreeIdentity.ru.md).
 Ни один дополнительный полный этап0–12 этим пакетом не закрыт.
 
+Последующее уточнение Elder Bin: отсутствовали все tracked files запрошенного
+каталога. Отдельный owner-level repair восстановил их из точного Git commit
+и исправил только per-worktree metadata; общий config/соседний checkout
+проверены неизменными. Это не исправляет provenance прошлых запусков задним
+числом. Адресный повтор measured-length gate67 начат после исправления;
+ASan remainder24 выполняется после7200s timeout, где четыре training cases
+успели пройти. Приёмка алгоритмического подэтапа остаётся открытой.
+Область влияния прежнего Elder source на опубликованные provenance ещё
+подлежит сквозной проверке. [Подробности](SourceWorktreeIdentity.ru.md).
+
 Принятый сквозной live pipeline включён в корневой develop
 1d4822af22e05b741e4a1c779cf99ba05cb0a1fa, PulseLib
 f23d1b8dee908ddfdc549619b754875fc627ce9b, Bin
