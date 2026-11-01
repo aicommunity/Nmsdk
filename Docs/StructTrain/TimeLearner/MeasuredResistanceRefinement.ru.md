@@ -178,5 +178,12 @@ PulseLib объединён в develop merge
 `d1c3df4cd0749e5869b977fb5e69417400ce1112`. Его Core tree
 `412b4997167f47f70419a9281acadcd9ad81647c` идентичен проверенному521df545.
 Root feature записывает этот опубликованный gitlink. Дополнительный кэш
-временных отчётов native-domain depth=0 regressions строится отдельно;
-его наличие не расширяет доказанный nonzero-refinement режим до20000 Гц.
+временных отчётов native-domain depth=0 regressions завершён отдельно:
+четыре normal cases при2000/20000 Гц,48 проб/72 пары soma, полные native samples
+и input overlays проверены production renderer;192 исходных файлов не изменены.
+Все6 выбранных PNG прямо просмотрены. Compact proof:
+`Reports/StructTrain/TimeLearner/s07-native-domain-visual-normal-a1`, source
+`291793548f6acccb62b0a9111fadb957d902aec1`, proof
+`8e6825653cccc475670fa78be22325d30172a76c`. Сравнение с неполным ASan a1
+сохранено в metadata; общая отрисовка для них не заявляется. Это не расширяет
+доказанный nonzero-refinement режим до20000 Гц.
