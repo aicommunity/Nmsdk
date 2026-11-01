@@ -1,5 +1,10 @@
 # Native XML прогретого learner: проверка границы Load/Init/Reset
 
+Адресная приёмка завершена01.11: normal и ASan32/32, readers18/16/16 на
+каждом worker,64 byte-identical crossworker CSV,1476 автоматически проверенных
+PNG и26 прямо просмотренных selected originals. Разделы ниже сохраняют ход
+проверки; их ранние pending-статусы заменяет итоговый раздел приёмки.
+
 Fixture расширяет warm Reset контроль16 случаями: Classic/Branch, N2/4,
 2000/20000Гц, Parameters-only либо Parameters+State. Whole-model XML
 сохраняется после50ms реального отклика с индивидуальными C=1.23nF/Rs=91MOhm.
@@ -98,3 +103,29 @@ response fronts and maxima are readable, and source/replay soma curves visually 
 See Reports/StructTrain/TimeLearner/s04-hot-xml-visual-a1/visual-review.json.
 The complete cache was not manually inspected. ASan32 and acceptance remain pending.
 The earlier pending temporal-review statement above is superseded by this record.
+
+## Итоговая адресная приёмка
+
+M40 ASan source68b802123bcc0ce53c9ce6c4ddef7e38577692da завершил32/32 native
+cases за660 wall seconds. Затем immutable200-file reader export root59a8e149
+прошёл18 XML +16 warm +16 loaded tests. Полный аудит охватывает68 case/soma
+pairs; все64 warm/replay CSV побайтово равны normal. Оба supervisor834822 и
+reader838718 завершены, exception отсутствует; final source/runtime guards прошли.
+
+ASan primary8ac617120ab0a58f207f2175ea85ce58b89b2bbd содержит290 членов,
+285528 bytes xz. После Git retrieval локально проверены все outer/member
+SHA256 и размеры. Normal temporal cache применяется по доказанному тождеству
+данных; повторный полный PNG cache в Git не добавляется.
+
+Root acceptance сохраняет PulseLib develop70f467d3b66ea4defdec2f58b84e76b692ab3602
+(tree равен tested04b234b/6cfcca0c), Rdk78e51a9b и Bin6304b4a2. Дополнительного
+production C++ изменения в этом XML подэтапе нет: добавлены реальные fixtures,
+production reader, corruption checks и evidence. Исходная mathematical target
+и алгоритм обучения не меняются.
+
+Приёмка относится к перечисленным32 configured legacy графам с100ms
+warm fixture и корректно сброшенной динамикой.
+Она не доказывает arbitrary-precision матричных параметров, весь storage/growth
+контур, mid-probe checkpoint, classification или полные этапы4/5/11.
+Отдельный отказ ModelArchive с точной TrainingPattern уже воспроизведён;
+исправление общего Rdk matrix writer проходит собственную проверку.
