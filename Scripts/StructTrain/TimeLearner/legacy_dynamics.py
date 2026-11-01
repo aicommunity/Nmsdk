@@ -7,16 +7,12 @@ modify model state, or infer classification quality.
 
 from __future__ import annotations
 
-import argparse
 import hashlib
-import json
 import math
-import os
 import re
-import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, BinaryIO
+from typing import Any
 
 
 COMPONENT_RE = re.compile(
@@ -137,17 +133,12 @@ def parse_record(line: str) -> dict[str, Any] | None:
                 }
                 if channel_inputs_separator:
                     channel_inputs_raw, synaptic_separator, synaptic_inputs_raw = input_vectors.partition(":synaptic_inputs=")
-                    channel["bio"]["channel_inputs"] = [
-                        value for token in channel_inputs_raw.split(":")
-                        if (value := _number(token)) is not None
-                    ]
+                    channel["bio"]["channel_inputs"] = [_number(token) for token in channel_inputs_raw.split(":")]
                     if synaptic_separator:
-                        synaptic_inputs = [
-                            value for token in synaptic_inputs_raw.split(":")
-                            if (value := _number(token)) is not None
-                        ]
+                        synaptic_inputs = [_number(token) for token in synaptic_inputs_raw.split(":")]
                         channel["bio"]["synaptic_inputs"] = synaptic_inputs
-                        channel["synaptic_conductance"] = sum(synaptic_inputs)
+                        channel["synaptic_conductance"] = (sum(synaptic_inputs)
+                            if all(_finite(value) for value in synaptic_inputs) else float("nan"))
                         channel["synaptic_conductance_source"] = "SynapticInputs"
                     else:
                         channel["synaptic_conductance_source"] = "SumSynapticInput_fallback"
@@ -365,37 +356,18 @@ def analyze_file(path: Path, *, rest_bound: float = 1.0,
     }
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("log", type=Path, help="TimeLearnerTrainingDynamics.log")
-    parser.add_argument("--rest-bound", type=float, default=1.0,
-                        help="absolute resting bound used for telemetry flags (default: 1)")
-    parser.add_argument("--soma-abs-limit", type=float,
-                        help="optional trainer-specific absolute soma limit to count crossings")
-    parser.add_argument("--time-step-hz", type=float,
-                        help="model update frequency; enables per-sample explicit-step gain estimates")
-    parser.add_argument("--output", type=Path, help="write JSON summary atomically to this path")
-    args = parser.parse_args(argv)
-    if args.rest_bound <= 0 or (args.soma_abs_limit is not None and args.soma_abs_limit <= 0) \
-            or (args.time_step_hz is not None and args.time_step_hz <= 0):
-        parser.error("rest bound, soma limit, and time-step frequency must be positive")
-    try:
-        result = analyze_file(args.log, rest_bound=args.rest_bound,
-                              soma_abs_limit=args.soma_abs_limit,
-                              time_step_hz=args.time_step_hz)
-    except (OSError, ValueError) as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
-        return 2
-    rendered = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
-    if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        temp = args.output.with_name(args.output.name + f".{os.getpid()}.tmp")
-        temp.write_text(rendered, encoding="utf-8", newline="\n")
-        os.replace(temp, args.output)
-    else:
-        sys.stdout.write(rendered)
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+def analyze_telemetry(path: Path, *, rest_bound: float | None = None,
+                      soma_abs_limit: float | None = None,
+                      time_step_hz: float | None = None) -> dict[str, Any]:
+    """Descriptive legacy telemetry, never a certificate of physical validity."""
+    for name, value in (("rest_bound", rest_bound), ("soma_abs_limit", soma_abs_limit),
+                        ("time_step_hz", time_step_hz)):
+        if value is not None and (not math.isfinite(value) or value <= 0):
+            raise ValueError(name + "_must_be_finite_positive")
+    result = analyze_file(path, rest_bound=1.0 if rest_bound is None else rest_bound,
+                          soma_abs_limit=soma_abs_limit, time_step_hz=time_step_hz)
+    return {**result, "validity": "unknown", "classification_verified": False,
+            "evaluation_verdict": None,
+            "limitations": ["Legacy diagnostics do not prove complete trial windows or classification.",
+                            "Rest envelope is descriptive; actual model rest state is not inferred.",
+                            "Step gain is a fixed-input local estimate, not full integrator stability."]}
