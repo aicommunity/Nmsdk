@@ -52,3 +52,22 @@ Reader receipts опубликованы14f6c65b47d81684f907bd7158d4b4436ec43421
 Reports/StructTrain/TimeLearner/s04-hot-reader-normal-a1 (47700 bytes), затем
 локально проверены все outer hashes. ASan, графики и final acceptance остаются
 открытыми; исходные stages4/11 и полный план этим не закрыты.
+
+Повторный normal прогон source5c202d61c6312521a7472a86491145164808da33
+завершён: hot8/8, loaded32/32, regression21/21 без skipped, затем loaded
+reader16/16 на текущих данных. Все8 warm CSV побайтово равны исходному
+baseline; все32 loaded CSV равны принятому normal a4. Это подтверждает
+локализацию исправления на публикации состояния после Reset. Точные данные,
+runtime/process и equivalence records сохранены commit
+932c90c396b61162ab56cd7f205924afbdd2e50a:352 члена primary archive,
+415664 bytes. После получения через Git проверены все outer/member hashes.
+
+Prerequisite подэтап loaded graph/MDMatrix принят в root develop
+970fde1a0b13cf4d29b1c19659d423dd9899ebfe с Pulsee51c702/Rdk78e51a9b.
+Pulse hot feature объединила этот develop через --no-ff:
+04b234b693b0e4eaaadaf611550deb5d465d4a31 имеет точно тот же Git tree,
+что проверенный6cfcca0c. Это изменение ancestry, не новая версия алгоритма.
+ASan hot8/loaded32/reg21 выполняется на M40 отдельным runtime a1.
+Там же строятся рисунки всех16 warm case/soma pairs из Git-restored normal
+primary; визуальная приёмка ещё не выполнена. Root hot feature не принята
+в develop, полные stages4/11 и цель0–12 остаются открытыми.
