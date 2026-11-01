@@ -236,3 +236,37 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   members /190708 compressed bytes; ten exact references to directly reviewed
   normal PNG, no image copies. Legibility scope inherited only by actual PNG
   equality; full-cache manual acceptance remains false.
+
+- [N0 candidate ordering baseline](s07-n0-candidate-order-baseline-asan-a1/README.md):
+  two controlled-kernel expected failures on unchanged Core, actual native XML
+  and process/runtime receipts;21 archived members,10724 compressed bytes.
+  This reproduces proposal-budget loss, not physical infeasibility.
+
+- [N0 ASan wall-budget attempt](s07-n0-candidate-order-timeout-asan-a1/README.md):
+  actual300-second timeout,25 completed cases before termination; no complete
+  JUnit or full acceptance.40 verified members,46552 compressed bytes.
+
+- [N0 normal wall-budget attempt](s07-n0-candidate-order-timeout-normal-a1/README.md):
+  actual300-second timeout,26 completed stdout cases;61 verified archived
+  members,225672 compressed bytes. Includes exact duplicate cleanup and an
+  inactive compiler-cache receipt; no complete regression acceptance.
+
+- [N0 normal regression](s07-n0-candidate-order-normal-a2/README.md):31/31 native
+  cases and4/4 independent checks,56 real probes,188 unchanged source files.
+  205 verified members,346080 compressed bytes; temporal acceptance pending.
+
+- [N0 native temporal reports](s07-n0-candidate-order-visual-normal-a1/README.md):
+  all56 declared training trials /84 soma pairs,3 N0 visual checks and3 shared
+  historical regression checks. Eight selected1920x960 PNG directly reviewed;
+  full derived cache remains on M40 Data, no full-cache manual acceptance.
+
+- [N0 ASan regression](s07-n0-candidate-order-asan-a2/README.md):31/31 native
+  and4/4 primary-data checks,56 probes;201 verified members/348832 bytes.
+- [Configured N0 repeats, normal](s07-n0-candidate-order-repeated-normal-a1/README.md)
+  and [ASan](s07-n0-candidate-order-repeated-asan-a1/README.md):each3 native +3
+  primary checks,48 actual probes/10 groups.125 members per proof.
+- [N0 ASan temporal](s07-n0-candidate-order-visual-asan-a2/README.md):56/84,3 checks,
+  eight exact reviewed normal PNG references; no new image copies.
+- [Repeated N0 temporal, normal](s07-n0-candidate-order-repeated-visual-normal-a1/README.md)
+  and [ASan](s07-n0-candidate-order-repeated-visual-asan-a1/README.md):each48/72,
+  three checks. Four normal PNG directly reviewed;four exact ASan references.
