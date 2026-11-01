@@ -13,8 +13,17 @@ preserve all three untouched CSVs byte-for-byte;7/7 actual reader checks per wor
 [Final temporal/visual evidence](s11-august-phasea-temporal-visual-m40-a3/SELECTED_VISUAL_REVIEW.ru.md):
 96 PNGs for all24 presentations,15 selected directly reviewed at1920x1200;
 full feedback range plus explicit amplitude-focused companions and100ms detail.
-Cold retrain and order/ITI controls remain open. Legacy CSV completeness and
+Order/ITI controls remain open. Legacy CSV completeness and
 strict verdict remain unknown; new raw traces provide separate coverage evidence.
+
+[Native cold-start controls](s11-august-coldstart-elder-a2/README.md) reject
+parent-only cold overlays and verify the original State-file reset before input.
+[Actual cold Train](s11-august-coldtrain-elder-a2/README.md) completes160 model
+seconds with original L49/41/25/1, Rs and newly captured references.
+The entire serialized neuron matches original Train/Test:604 nodes,8333 parameters,
+496 inbound edges. [Elder10/10 identity checks](s11-august-model-reader-elder-a1/README.md),
+[M4010/10](s11-august-model-reader-m40-a1/README.md).
+This is legacy_done_uncertified; full frozen import/classification is a separate gate.
 
 Active Branch telemetry analyzer moved from Bin to the root package:
 [Elder20/20 Python checks](s09-branch-dynamics-migration-elder-a2/README.md),
