@@ -5,14 +5,24 @@ changing the declaration is insufficient: persisted Train summaries and exported
 models must confirm the selected normalization and physical candidate domain.
 """
 from copy import deepcopy
+from pathlib import Path
+import tempfile
 
 from ..native_evidence import EvidenceError, load
-from .live_pipeline_corpus import make_job
+from .live_pipeline_corpus import make_job, run_corpus
 from .test_live_pipeline_worker import LivePipelineWorkerTest as _Base
 
 
 class N0LivePipelineWorkerTest(_Base):
     corpus_environment = "TIMELEARNER_N0_LIVE_PIPELINE_CORPUS"
+
+    def test_insufficient_storage_rejected_before_any_run_directory_or_console(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)/"must-not-start"
+            with self.assertRaisesRegex(EvidenceError, "corpus_insufficient_primary_storage"):
+                run_corpus("nonexistent-fixtures", "nonexistent-runtime", output, 1,
+                           minimum_free_bytes=2**63)
+            self.assertFalse(output.exists())
 
     def test_declared_factors_survive_actual_training_and_frozen_handoff(self):
         factors = self.index["experiment_factors"]
