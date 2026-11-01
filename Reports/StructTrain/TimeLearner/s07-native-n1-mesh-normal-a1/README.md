@@ -1,1 +1,0 @@
-Actual native N1 finite-mesh baseline: 52 Classic /36 Branch measured candidates; best amplitude error 4.7358625548610256e-5 exceeds tolerance1e-5. Measured timing-ready amplitude sign bracket at L2; both outcomes SearchUnresolved. No physical impossibility or classification claim.
