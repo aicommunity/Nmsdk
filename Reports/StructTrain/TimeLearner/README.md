@@ -323,3 +323,9 @@ Measured N1 resistance refinement, scoped controls:
 These are V2 finite-mesh versus V2 refinement controls. They do not establish
 legacy V1 equivalence, August replay, classification, nonzero-refinement at
 20000Hz or completion of the full original plan.
+
+[Normal native-domain regression temporal evidence](s07-native-domain-visual-normal-a1/README.md):
+four depth0 fixtures,48 actual probes/72 soma pairs,2000/20000Hz, all source samples
+and production rendering checks. Six selected PNG directly reviewed1920x960.
+Historical ASan a1 differs in absolute clock and contains a censored final
+Classic20000 probe; no identical/full-window ASan counterpart is asserted.
