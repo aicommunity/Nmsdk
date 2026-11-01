@@ -102,6 +102,27 @@ archive16 при том же Rdk2732a08, но XML32 и новая версия p
 archive и XML процессы a4 имеют loaded_files_captured. Эти оси различаются
 в primary receipts и не подменяют результаты численных проверок.
 
+## Полный normal primary
+
+Normal a4 и reader a2 завершены: unit10, archive16, hot XML32, regression21
+без skips; data checks23/16/16/18. При сравнении всех24 source/import JSON
+между a3 и a4 массивы waveform/actual_input/soma совпали точно. Добавление
+native clock и схемы не меняло сам физический отклик.
+
+Совместный primary2d1827febab8ec360d205163a3469f0077eba989 опубликован черезGit:
+Reports/StructTrain/TimeLearner/s05-archive-f64-current-normal-a1,
+441 член/645556 bytes xz. После получения локально проверены внешние SHA256,
+размеры и SHA256 каждого члена. Включены оба fixed native запуска, оба reader
+снимка, source/runtime/process receipts и явно сохранённое ограничение unit a4.
+
+На M40 из этого primary строится temporal cache всех12 transfer conditions,
+физический выход $.Soma2 и реальные входные импульсы, без downsampling.
+Supervisor877348/start_ticks262449357; renderer использует immutable Git code
+export5c4e1a44 и не меняет исходники продолжающегося ASan задания850578.
+QA, выбранные изображения и прямой визуальный просмотр ещё требуются.
+Исправление Rdk2732a08 по-прежнему не принято в develop: остаются ASan XML,
+ASan schema1 producer/reader и визуальная приёмка. Полные этапы4/5/11 открыты.
+
 Проверки ещё не выполнены. Подэтап не принят; general archive/profile/growth
 матрица, все формы векторов/матриц и полный Train→Test остаются открытыми.
 Если native XML теряет значащие цифры, требуется сначала локализовать это
