@@ -457,3 +457,34 @@ proof264c42997, renderer9554c0e46. Численные фазы не повтор
 в единую корневую спецификацию. Core tree не изменился с019e5d1; Bin configs/
 ClDesc не менялись относительно фактически использованного97dd1943.
 Новая root/PulseLib feature ещё не принята в develop; полный план0–12 открыт.
+
+## Завершена scoped ASan temporal приёмка
+
+M40 visual PID114561 завершён0:14 reports,3/3 checks без skips,362.263 s
+(checks36.898 s),521 source files неизменны;14 run closures /446 artifacts
+проверены при распаковке Git proof264c42997.93 training и42 recognition
+trial-soma pairs, новых numeric runs0. Cache4119 files /291766822bytes
+остаётся на Data. Опубликован [compact ASan visual proof](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-visual-asan-a1/README.md),
+commit54b33d7029df3b5c00a5a0b4c8b8d70c54a4158d:272 metadata members /190708bytes.
+Все outer/member hashes локально проверены.
+
+Все10 independently rendered selected ASan PNG побайтно совпали с normal
+PNG, прямо просмотренными в QA commit92de61b01. В Git сохранены10 точных
+ссылок/hashes, новых PNG bytes0. Перенесена только selected legibility scope;
+новый direct manual review и full-cache acceptance не заявляются.
+Все заявленные normal/ASan14 production операции и temporal checks теперь
+имеют terminal0, доступные Git primary/metadata и адресные QA receipts.
+
+PulseLib feature включена --no-ff в developf23d1b8dee908ddfdc549619b754875fc627ce9b
+и опубликована. Core tree8e3a027a9d30d104886284b6825eed8cd6c413f1 в точности
+соответствует фактически проверенному019e5d1. Bin develop49adcd02 опубликован
+ранее; изменился только LAYOUT.md относительно runtime Bin97dd1943.
+Root merge выполняется после записи этих точных child gitlinks.
+
+Это приёмка scoped native live/cancel/codec + production schema2 baseline
+Classic/Branch,N1,2inputs,2000Hz,fixed/grid,CalculateMode0/1. Это не закрытие
+полных этапов6–9 и не full original matrix. C-trim, target-reference/parallel-peak,
+N0/N1 полная алгоритмическая/physics matrix, historical replay, independent
+Test, полная scripts migration, scheduler/publisher и оставшаяся документация
+по-прежнему обязательны. Все4 full models дают SearchUnresolved и silent
+target; научный PASS не установлен. СерияD не возобновлялась.

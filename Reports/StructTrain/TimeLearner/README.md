@@ -230,3 +230,9 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   metadata members /190348 compressed bytes and ten selected PNG /1500834bytes.
   All ten directly reviewed1920x960; full-cache manual acceptance remains false.
   Source543 files unchanged; ASan temporal rendering is still pending.
+
+- [Production temporal reports, ASan](s09-native-live-training-worker-visual-asan-a1/README.md):
+  14 reports, three checks,521 unchanged primary members.272 verified metadata
+  members /190708 compressed bytes; ten exact references to directly reviewed
+  normal PNG, no image copies. Legibility scope inherited only by actual PNG
+  equality; full-cache manual acceptance remains false.
