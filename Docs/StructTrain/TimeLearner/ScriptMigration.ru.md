@@ -135,3 +135,46 @@ Docs. Четыре документа помечены как историчес
 retrieval по полному commit и совпадение содержимого/SHA256. В root Docs больше
 нет tracked `.sh` внутри TimeLearner audit; Python и остальные Git trees ещё
 требуют отдельного review/migration. Старые server checkout не менялись.
+
+## Пятый пакет: исторические NSR/NSC Python entrypoints
+
+Удалены из текущего дерева `evidence/normsync/gen_nsr.py`, `gen_nsc.py` и
+`ns_readback.py`. Repository root, retrieval snapshot
+`044c76d1b1cbe35b2747285ef296ac22afe976ce`; точные пути, blob SHA1, SHA256,
+размер, последний изменявший commit и команды git show записаны в
+[script_migration.json](script_migration.json). Снимок извлечения не является
+утверждением о версии, реально использованной в старом эксперименте.
+
+Все8 Python-файлов normsync прочитаны целиком. Два генератора задают фиксированные
+группы кампании25.10, старые абсолютные executable/workspace paths и legacy
+параметры. gen_nsc импортирует gen_nsr через /home/user/normsync. ns_readback
+выполняет обход файлов при import, скрывает ошибки чтения/JSON и распознаёт
+PostTune по текстовой эвристике. Он не может служить современным доказательством
+валидной effective configuration. Паритет действующего нового readback CLI
+с этим одноразовым инструментом не заявляется.
+
+Буквальный поиск трёх имён по root, Bin и PulseLib обнаружил только сами файлы,
+импорт gen_nsr внутри gen_nsc и записи первоначального inventory. Действующих
+callers не найдено; динамическое построение имён такой поиск не исключает.
+Inventory сохраняет исходный snapshot и получает явную disposition
+retired_historical со ссылкой на migration manifest. Wrappers/копии на старых
+путях не оставлены. Остальные5 normsync-моделей и анализаторов не удаляются:
+их назначение и возможный перенос требуют отдельной проверки.
+
+Приёмка этого пакета: совпадение current/archive blobs до удаления, доступность
+архивных commits в Git, отсутствие трёх путей в новом tree, проверка retrieval
+SHA256/размеров и повторный поиск callers. Старые программы не запускаются,
+численные результаты и активный runtime не меняются. Это частичное выполнение
+этапа9; остальные Python, Bin, PulseLib и Reports entrypoints остаются открытыми.
+
+Пятый пакет проверен на Elder по root
+8e11fd5f9e2c2c2750e3d34f905e1c128202f647: все30 записей retired_files
+из manifest (включая27 прежних shell) извлекаются из Git с точными SHA256,
+размерами и blob IDs; в новом tree их пути отсутствуют. В Scripts/Tests/App/
+Apps/CMake root буквальных callers трёх новых имён нет. Receipt и точный
+источник read-only проверки опубликованы commit
+f2be2fe6e865ab1bdf4593cc18345cf8812bd1f4, каталог
+Reports/StructTrain/TimeLearner/s09-retired-normsync-elder-a1.
+После получения через Git локально перепроверены receipt hashes и все30 blobs.
+Это статическая Git/migration приёмка; численные/компиляционные тесты
+не выполнялись и не требуются для удаления этих одноразовых исторических файлов.
