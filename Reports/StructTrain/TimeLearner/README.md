@@ -288,3 +288,15 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   three checks. Four normal PNG directly reviewed;four exact ASan references.
 
 Дополнение: проверка совместимости N0-шаблона перед приёмкой подэтапа. Исправление 0980f23309e099cb7cc73a1355a2dd25c7f788ab сохраняет полную конфигурацию при вызове подготовителя без новых факторов; раньше такой вызов ошибочно требовал повторного задания диапазона Ns. Проверено исходниками 54382334754986c574c7ccbcd5ded5b55f1b638e на Elder и M40: исходная ошибка воспроизведена через прежний публичный make_job; по 9 проверок для repeat=1/2, по 10 фактических Train-заданий на протокол регенерированы идентично, 1147 исходных файлов каждого корпуса не изменились. Численные прогоны и отрисовка повторно не выполнялись. Исходные отчёты с 7 проверками остаются отчётами своего снимка. Новые квитанции: Reports/StructTrain/TimeLearner/s07-n0-template-contract-normal-a2 (7aeb9655afdc3aec7ef607664393318fe290d1a3), s07-n0-template-contract-asan-a2 (0689def9d7a056bc9e9464d5ba647fcb8e30cbf9). Первые попытки настройки a1 завершились SyntaxError до выполнения проверок и также сохранены. Это приёмка совместимости подготовителя, а не положительный результат физического обучения и не закрытие полного этапа 7.
+
+Новые native controls (приёмка temporal ещё не завершена):
+[normal dimensions](s07-native-dimension-normal-a1/README.md),
+[ASan dimensions](s07-native-dimension-asan-a1/README.md),
+[normal N0 proposal path](s07-native-proposal-normal-a1/README.md).
+Сходимость N=1 проверяет неизменённую модель свежим final gate; scientific
+classification verdict отсутствует. Полная постановка и ограничения:
+[NativeDimensionControls](../../../Docs/StructTrain/TimeLearner/NativeDimensionControls.ru.md).
+
+[ASan N0 physical proposal path](s07-native-proposal-asan-a1/README.md): завершён, reader 2/2; temporal приёмка ещё открыта.
+
+[Native controls temporal proof](s07-native-controls-visual-a1/README.md): 18 reports, 610 trial-soma pairs, shared counterpart primary equality, 20 selected PNG directly reviewed; full cache manual review is not claimed.
