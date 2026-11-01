@@ -7,6 +7,7 @@ from copy import deepcopy
 import contextlib
 import json
 from pathlib import Path
+import shutil
 
 from ..__main__ import main as cli
 from ..model_identity import canonical_model_sha256 as sha
@@ -75,8 +76,16 @@ def make_job(template, name, *, calibrate=False, legacy=False, budget=False, sto
 
 
 def run_corpus(fixtures, runtime, output, wall_seconds, *, normalization=None,
-               n0_candidate_repeats=1, n0_maximum_synapses=None):
+               n0_candidate_repeats=1, n0_maximum_synapses=None,
+               minimum_free_bytes=512*1024**2):
     fixtures, runtime, output = Path(fixtures), Path(runtime), Path(output)
+    # Measured two-protocol N0 primary data occupy about404 MB. This lower
+    # bound protects this engineering corpus only; it is not a reservation,
+    # a general job estimator, or a substitute for scheduler resource leases.
+    require(type(minimum_free_bytes) is int and minimum_free_bytes >= 512*1024**2,
+            "corpus_invalid_storage_budget")
+    require(shutil.disk_usage(output.parent).free >= minimum_free_bytes,
+            "corpus_insufficient_primary_storage")
     output.mkdir(parents=True, exist_ok=False);jobs = output/"jobs";jobs.mkdir();runs = output/"runs";runs.mkdir()
     rows = []
     factors = dict(normalization=normalization, n0_candidate_repeats=n0_candidate_repeats,
