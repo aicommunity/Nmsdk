@@ -36,7 +36,12 @@ def transfer_model(work, cold_model, threshold):
     position = list(children).index(previous);children.remove(previous)
     children.insert(position, copy.deepcopy(dataset))
     params = fresh.find("./Parameters")
-    for key, value in {"StructureBuildMode": "0", "IsNeedToTrain": "0",
+    # Preserve the original historical load protocol: Model mode1 initializes
+    # dimensioned learner caches, followed by Parameters mode0. Mode0 in both
+    # files leaves the old learner's default two-row amplitude buffer for N4.
+    model_mode = old.find("./Parameters/StructureBuildMode").text.strip()
+    require(model_mode == "1", "historical_model_load_mode_changed")
+    for key, value in {"StructureBuildMode": model_mode, "IsNeedToTrain": "0",
                        "LTZThreshold": str(threshold), "FixedLTZThreshold": str(threshold),
                        "UseFixedLTZThreshold": "0"}.items():
         matches = params.findall("./"+key)
@@ -64,11 +69,14 @@ def parameter_export(work):
     # not a template overlay with stale child Rs, C, morphology or dataset rows.
     root = ET.parse(work/"Parameters_00.xml").getroot()
     old = root.find("./Model");require(old is not None, "historical_parameters_root_missing")
+    mode = old.find("./Components/NeuronTimeLearner/Parameters/StructureBuildMode")
+    require(mode is not None and mode.text.strip() == "0", "historical_parameter_load_mode_changed")
     root.remove(old)
     model = copy.deepcopy(ET.parse(work/"Model_00.xml").getroot().find("./Model"))
     for node in model.iter():
         for child in list(node):
             if child.tag == "Links":node.remove(child)
+    model.find("./Components/NeuronTimeLearner/Parameters/StructureBuildMode").text = "0"
     root.append(model);ET.ElementTree(root).write(work/"Parameters_00.xml", encoding="utf-8")
 
 
@@ -122,6 +130,28 @@ def main():
         prepared = folder/"prepared";prepared.mkdir()
         for p in work.iterdir():
             if p.is_file():shutil.copyfile(p, prepared/p.name)
+        # Validate the native loaded graph AND runtime buffer dimensions before
+        # the expensive matrix. Never reuse this post-save Model (now mode0)
+        # as the next input; the full run starts from the untouched prepared pair.
+        short = folder/"preflight/work";short.parent.mkdir()
+        shutil.copytree(prepared, short)
+        gate = execute(runtime, ["-c", str(short/"Project.ini"), "-s", "-t", "0.0005", "-x", "-S"],
+                       short, folder/"preflight/process", 120)
+        require(gate["execution"] == "completed", "historical_import_prestimulus_process_failed:"+name)
+        require(serialized_neuron(short/"Model_00.xml")["sha256"] == recognition_identity(solo, threshold),
+                "historical_import_prestimulus_neuron_changed:"+name)
+        cached = list((short/"TemporalTrace").glob("*NeuronTimeLearner.SomaNeuronAmplitude.txt"))
+        stimulus = list((short/"TemporalTrace").glob("*NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt"))
+        require(len(cached) == len(stimulus) == 1, "historical_import_prestimulus_stream_missing")
+        cached_rows = [line.split() for line in cached[0].read_text().splitlines()]
+        require(bool(cached_rows) and all(len(row) == 7 for row in cached_rows),
+                "historical_import_learner_readout_dimension_invalid")
+        require(all(float(line.split()[-1]) == 0 for line in stimulus[0].read_text().splitlines()),
+                "historical_import_prestimulus_already_received_input")
+        write(folder/"preflight/validation.json", {"execution": gate["execution"],
+            "neuron_identity_verified": True, "learner_cached_soma_rows": 5,
+            "no_input_pulse": True, "original_load_modes": {"Model": 1, "Parameters": 0},
+            "scientific_verdict": None})
         print("COLD_FROZEN_TEST", name, flush=True)
         result = execute(runtime, ["-c", str(work/"Project.ini"), "-s", "-t", "40", "-x", "-S"],
                          work, folder/"process", 900)
