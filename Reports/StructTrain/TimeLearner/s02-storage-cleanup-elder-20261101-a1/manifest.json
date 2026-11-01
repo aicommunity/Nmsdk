@@ -81,5 +81,64 @@
   "source_or_git_history_removed": false,
   "current_runtime_hash_unchanged": true,
   "original_logs_losslessly_recoverable": false,
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "followup_archive": {
+    "path": "followup-receipts.tar.xz",
+    "members": [
+      {
+        "path": "module-v2-tests/exit-status.txt",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      {
+        "path": "module-v2-tests/tests.log",
+        "bytes": 768,
+        "sha256": "c70bb16b8eab769ba284683cafb3e4912c58e00c17680972925deeb1fb9000dc"
+      },
+      {
+        "path": "scratch-cleanup/launch.json",
+        "bytes": 154,
+        "sha256": "239acb9100b5a2f91878ad654706893774572ef4e840b5a82f2d511b81ac7edf"
+      },
+      {
+        "path": "scratch-cleanup/progress.json",
+        "bytes": 74,
+        "sha256": "9402c15e04348f973ce9d6bdfcf840ce6735020bd67cce97fefba794cca00abe"
+      },
+      {
+        "path": "scratch-cleanup/receipts.jsonl",
+        "bytes": 9753,
+        "sha256": "225341699c661d476010b10920eb1e3f120222395cc16b8592883f019f0435da"
+      },
+      {
+        "path": "scratch-cleanup/supervisor.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "scratch-cleanup/validation.json",
+        "bytes": 10794,
+        "sha256": "92d87e58db21ae141f919445166f9f7fe9cf2672dab9f5e0a3172f0ff80c601d"
+      },
+      {
+        "path": "scratch-initial-syntax-failure/launch.json",
+        "bytes": 154,
+        "sha256": "0dbaafc56ab8e467c8fdc5b981860f3d2c690fa828b173c803deb34b9616af70"
+      },
+      {
+        "path": "scratch-initial-syntax-failure/supervisor.log",
+        "bytes": 293,
+        "sha256": "7893191ce96e54dbc5a1dc0c5b561bd8bd2bfce02934f6ff86790b5e58c20bcd"
+      },
+      {
+        "path": "source.json",
+        "bytes": 172,
+        "sha256": "ac1dcec37b20c9483d45f6a59377669a3f0c540afc0516408bd0aebd8637c4cd"
+      }
+    ],
+    "module_v2_source": "b3f8fdf13569d232b7ed8f640fee82e6936fa44b",
+    "tests": 4,
+    "completed_scratch_removed": 21,
+    "completed_scratch_bytes_removed": 202735703
+  }
 }
