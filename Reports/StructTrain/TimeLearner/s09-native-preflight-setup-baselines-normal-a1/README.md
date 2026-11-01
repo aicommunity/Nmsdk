@@ -1,0 +1,3 @@
+# Preserved native preflight setup failures
+
+Five terminated attempts: import failure; loader environment mismatch; wrong generated windows codec; fast native exit with incomplete mappings; a repeat launcher output alias stopped before building. No attempt is accepted as successful model evaluation. The output alias changed three setup metadata files in the earlier positive readback; all276 original members were restored byte-exactly from Git aded6d28f0a16327fb536e3090c3cd5db93158bc. Modified metadata and an extra exception log were preserved here before restoration. No unique scientific primary data were deleted.
