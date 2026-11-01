@@ -1,0 +1,472 @@
+{
+  "kind": "historical_phasea_native_coldtrain_primary",
+  "schema_version": 1,
+  "training_source": "6a32300d48357ceeeca2df141bd5134f71437ab5",
+  "historical_root": "de02a3809395dd0bbd11e2ba792bfc04a51c89f3",
+  "packaging_source": "9e3886d0323559870ad282767c089e88a2b27d5e",
+  "serialized_model_comparison": {
+    "source": "9e3886d0323559870ad282767c089e88a2b27d5e",
+    "cold_sha256": "ed11c257e5b0e01c5ed3ccfc5bd397f93984cf6e544ab4ab87681627d445c474",
+    "original_train_sha256": "ed11c257e5b0e01c5ed3ccfc5bd397f93984cf6e544ab4ab87681627d445c474",
+    "original_test_sha256": "ed11c257e5b0e01c5ed3ccfc5bd397f93984cf6e544ab4ab87681627d445c474",
+    "nodes": 604,
+    "inbound_edges": 496,
+    "cold_equals_original_train": true,
+    "cold_equals_original_test": true,
+    "scope": "serialized parameters/classes/ordered graph and inbound links; external protocol and dynamic state excluded",
+    "scientific_verdict": null
+  },
+  "validation": {
+    "kind": "historical_phasea_native_cold_train_outcome",
+    "execution": "completed",
+    "model_budget": 160,
+    "native_cold_start_verified": true,
+    "legacy_is_need_to_train": 0.0,
+    "legacy_phase": "2",
+    "legacy_iteration": null,
+    "training_outcome": "legacy_done_uncertified",
+    "dendrite_lengths": [
+      49.0,
+      41.0,
+      25.0,
+      1.0
+    ],
+    "references": [
+      0.015781441626429582,
+      0.015828572406203167,
+      0.01578146659932167,
+      0.015781441636542715
+    ],
+    "effective_dendrite_segments": 116,
+    "calibration_or_test_performed": false,
+    "source_unchanged": true,
+    "training_certificate": null,
+    "scientific_verdict": null
+  },
+  "records": [
+    {
+      "path": "references/original-test/Model_00.xml",
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    {
+      "path": "references/original-test/Parameters_00.xml",
+      "bytes": 816326,
+      "sha256": "03dac589830d57d4a40e29b526f4126387a20461e221ce4e33d7e001679a62ff"
+    },
+    {
+      "path": "references/original-test/Project.ini",
+      "bytes": 1772,
+      "sha256": "58e4e694ef3d4532e3265ea806ddb08eda007eb126ba1bddaeaa87fda009e2cd"
+    },
+    {
+      "path": "references/original-train/Model_00.xml",
+      "bytes": 949728,
+      "sha256": "034c956d061839f4433c051855914ce3a3de3e850d0535df2acfe54149132032"
+    },
+    {
+      "path": "references/original-train/Parameters_00.xml",
+      "bytes": 817240,
+      "sha256": "3da95aec3b06c2911956eaf3bc5c5ab48be33791f45650a0dd843844d18e35e9"
+    },
+    {
+      "path": "references/original-train/Project.ini",
+      "bytes": 1773,
+      "sha256": "b544183c2e9fe242fdc624331251abb67d0f9b4dfe943b53fc905f422679f56f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/inputs/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/inputs/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/inputs/Model_00.xml",
+      "bytes": 949728,
+      "sha256": "034c956d061839f4433c051855914ce3a3de3e850d0535df2acfe54149132032"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/inputs/Parameters_00.xml",
+      "bytes": 817240,
+      "sha256": "3da95aec3b06c2911956eaf3bc5c5ab48be33791f45650a0dd843844d18e35e9"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/inputs/Project.ini",
+      "bytes": 1773,
+      "sha256": "b544183c2e9fe242fdc624331251abb67d0f9b4dfe943b53fc905f422679f56f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/inputs/README.md",
+      "bytes": 165,
+      "sha256": "ef03a8f6f11f4c9d60234e2db8118a5389a99148ca974039d4b93452e0463e28"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/pre-run-files.json",
+      "bytes": 1003,
+      "sha256": "82d06cfd62c2c75fdb39e5535ebc8802857bc3b287310a9662086fd2173cc1ad"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared-capture.json",
+      "bytes": 102,
+      "sha256": "62540923085312147d4115a993a99573b4684728aed255e6b60a61f818ec3fdd"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared/Model_00.xml",
+      "bytes": 949728,
+      "sha256": "034c956d061839f4433c051855914ce3a3de3e850d0535df2acfe54149132032"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared/Parameters_00.xml",
+      "bytes": 817240,
+      "sha256": "3da95aec3b06c2911956eaf3bc5c5ab48be33791f45650a0dd843844d18e35e9"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared/Project.ini",
+      "bytes": 1820,
+      "sha256": "d9d6af5ff5baed30927b112fec1f07dde397a403c790b9d22b5d06bfe7ea6280"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared/README.md",
+      "bytes": 165,
+      "sha256": "ef03a8f6f11f4c9d60234e2db8118a5389a99148ca974039d4b93452e0463e28"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/prepared/States_00.xml",
+      "bytes": 256,
+      "sha256": "b6f665b0c99700bd3a5db6c568685c7eb768454fc39ff4e2ac42adb7732a3b8f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/source-inputs.json",
+      "bytes": 1761,
+      "sha256": "e0d1a24122d189908de83177109b651b9bd125797bb25a904b7feeee42e319be"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/work/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/work/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/work/Model_00.xml",
+      "bytes": 949728,
+      "sha256": "034c956d061839f4433c051855914ce3a3de3e850d0535df2acfe54149132032"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/work/Parameters_00.xml",
+      "bytes": 817240,
+      "sha256": "3da95aec3b06c2911956eaf3bc5c5ab48be33791f45650a0dd843844d18e35e9"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/work/Project.ini",
+      "bytes": 1820,
+      "sha256": "d9d6af5ff5baed30927b112fec1f07dde397a403c790b9d22b5d06bfe7ea6280"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/work/README.md",
+      "bytes": 165,
+      "sha256": "ef03a8f6f11f4c9d60234e2db8118a5389a99148ca974039d4b93452e0463e28"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a1/train/work/States_00.xml",
+      "bytes": 256,
+      "sha256": "b6f665b0c99700bd3a5db6c568685c7eb768454fc39ff4e2ac42adb7732a3b8f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/closure.json",
+      "bytes": 1304,
+      "sha256": "88c3c257943eb524a39a40584c25cfbd7c3c1790284085f4bc865af9765a378e"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/execution.json",
+      "bytes": 443,
+      "sha256": "b8e15a92ce9a728dc9584b3f28f804e2976a23ea82c53ea56096fa2bec49586c"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/final-readback.json",
+      "bytes": 214016,
+      "sha256": "cf5a8971231410b4734c2aff49243af6f137cd741468729d69c4f5ebf6a5a338"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/protocol.json",
+      "bytes": 557,
+      "sha256": "abfebb2844407abdf00cb5bd204178a206bcc2fe252e0ff3f725109cd43142a7"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/serialized-model-comparison.json",
+      "bytes": 600,
+      "sha256": "7065916097499cea78811573b0f27851ed6ef7df51c52e77f36562df765867c9"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/serialized-neuron-cold.json",
+      "bytes": 3133356,
+      "sha256": "d3d5b4917277eb278b4436c531cf944a8783feae47fb2e49fc66f417b5b0e02f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/serialized-neuron-original-test.json",
+      "bytes": 3133356,
+      "sha256": "d3d5b4917277eb278b4436c531cf944a8783feae47fb2e49fc66f417b5b0e02f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/serialized-neuron-original-train.json",
+      "bytes": 3133356,
+      "sha256": "d3d5b4917277eb278b4436c531cf944a8783feae47fb2e49fc66f417b5b0e02f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/inputs/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/inputs/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/inputs/Model_00.xml",
+      "bytes": 949728,
+      "sha256": "034c956d061839f4433c051855914ce3a3de3e850d0535df2acfe54149132032"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/inputs/Parameters_00.xml",
+      "bytes": 817240,
+      "sha256": "3da95aec3b06c2911956eaf3bc5c5ab48be33791f45650a0dd843844d18e35e9"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/inputs/Project.ini",
+      "bytes": 1773,
+      "sha256": "b544183c2e9fe242fdc624331251abb67d0f9b4dfe943b53fc905f422679f56f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/inputs/README.md",
+      "bytes": 165,
+      "sha256": "ef03a8f6f11f4c9d60234e2db8118a5389a99148ca974039d4b93452e0463e28"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/pre-run-files.json",
+      "bytes": 1003,
+      "sha256": "82d06cfd62c2c75fdb39e5535ebc8802857bc3b287310a9662086fd2173cc1ad"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/prepared/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/prepared/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/prepared/Model_00.xml",
+      "bytes": 949728,
+      "sha256": "034c956d061839f4433c051855914ce3a3de3e850d0535df2acfe54149132032"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/prepared/Parameters_00.xml",
+      "bytes": 817240,
+      "sha256": "3da95aec3b06c2911956eaf3bc5c5ab48be33791f45650a0dd843844d18e35e9"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/prepared/Project.ini",
+      "bytes": 1820,
+      "sha256": "d9d6af5ff5baed30927b112fec1f07dde397a403c790b9d22b5d06bfe7ea6280"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/prepared/README.md",
+      "bytes": 165,
+      "sha256": "ef03a8f6f11f4c9d60234e2db8118a5389a99148ca974039d4b93452e0463e28"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/prepared/States_00.xml",
+      "bytes": 256,
+      "sha256": "b6f665b0c99700bd3a5db6c568685c7eb768454fc39ff4e2ac42adb7732a3b8f"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/process/loaded-files.json",
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/process/owned-process.json",
+      "bytes": 407,
+      "sha256": "a939ee8551aa0f3e94f7e0861f7e3549ad804272a9f86f453b9538db9ae8f5dd"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/process/request.json",
+      "bytes": 505,
+      "sha256": "f46201b1e1f98cb7c02e02d3f556ced57530618231bb94e4c6d507c8604bee6b"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/process/result.json",
+      "bytes": 443,
+      "sha256": "b8e15a92ce9a728dc9584b3f28f804e2976a23ea82c53ea56096fa2bec49586c"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/process/runtime.json",
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/process/stderr.log",
+      "bytes": 499,
+      "sha256": "bdd42412d2b48918c5d511e84e0eedb8a0d3a86d19c13e9e9f97f8e17ed7a59a"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/source-inputs.json",
+      "bytes": 1761,
+      "sha256": "e0d1a24122d189908de83177109b651b9bd125797bb25a904b7feeee42e319be"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/History.xml",
+      "bytes": 102,
+      "sha256": "8d9f69595296241484964b68a9e10df6cf845861d46accc803d83eb59c8329b2"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/Model_00.xml",
+      "bytes": 949797,
+      "sha256": "d1875891aca63fa2db0dc4af0877f693fa4c6a69e9e01af2bafff7cfad62ebfb"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/NeuroModelerConsole.ini",
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/Parameters_00.xml",
+      "bytes": 817309,
+      "sha256": "3c8704b96d25f490317f63e5b44cbe4bd18d074e3e957bbececc22cfd995093b"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/Project.ini",
+      "bytes": 1823,
+      "sha256": "59088fe05c97639f7b13964c4c23196c4e7adf5bd5d60142665c95d263fc636d"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/README.md",
+      "bytes": 165,
+      "sha256": "ef03a8f6f11f4c9d60234e2db8118a5389a99148ca974039d4b93452e0463e28"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/States_00.xml",
+      "bytes": 543728,
+      "sha256": "d857a3d5df9e2fe482b9a1a72140dcffe0d4b505dcf75b0f0ea59a8e6d7ee91d"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.AmpDtTrace.txt",
+      "bytes": 31747113,
+      "sha256": "2ec6a8750e3660a0d77540ff78e5cc0e9c4ee40c05528f8f225ebaf34203cc3d"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.DendriteLengthTrace.txt",
+      "bytes": 13297717,
+      "sha256": "a41a2d5c8e05368d9a92c2ea8a829324710d3fdeb13290698ff5344708072e9c"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.EffectiveGainTrace.txt",
+      "bytes": 35366735,
+      "sha256": "294f23d403afa06514d8e43c9074160247491142e87ca47e1976ef93fcf640b8"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.LastAbsDtTrace.txt",
+      "bytes": 35837039,
+      "sha256": "66c328ee19dd06b61a53ea9279f7e991afd73ac56af33addc038ea9f1d6d8fad"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.NoImproveResistanceTrace.txt",
+      "bytes": 12400607,
+      "sha256": "7f355079d66de88c6c4aaaf3f9d4414af40491e31c4dc3daa0aa28363665babf"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.ResistanceStatusTrace.txt",
+      "bytes": 12400607,
+      "sha256": "a813576092c93b978f2da3d6e246c2361d9dea487107f2ae4550d8cef3fe161a"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.SomaNeuronAmplitude.txt",
+      "bytes": 37942555,
+      "sha256": "ddd33e8a3c75817e39fffb5f14471f13995fc73ba9ba492ec1624139050b89d5"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.StimulusIterTrace.txt",
+      "bytes": 9808915,
+      "sha256": "ae6635feeef58bd19fe8ae1822f64fd21e8d836f53b264b41d777b228e38d93a"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/StatisticLog/2026.11.01 14-15-12/NeuronTimeLearner.TipSynapseResistanceTrace.txt",
+      "bytes": 30654175,
+      "sha256": "94b0e3255e624868043596350e8ad2f3c4e1dbb6a335a754feeea982fb88208c"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/train/work/save.tmp",
+      "bytes": 543728,
+      "sha256": "d857a3d5df9e2fe482b9a1a72140dcffe0d4b505dcf75b0f0ea59a8e6d7ee91d"
+    },
+    {
+      "path": "s11-august-coldtrain-elder-a2/validation.json",
+      "bytes": 645,
+      "sha256": "7fa082da7264591d748cff5fa104ff84522f9a08a4575654f1773a6bf9d4476c"
+    },
+    {
+      "path": "s11-august-coldtrain-supervisor-elder-a1/launch.json",
+      "bytes": 712,
+      "sha256": "b5284235a9de4a8243a4766e27b781d73910675799dc4e17e7f50667e100ac31"
+    },
+    {
+      "path": "s11-august-coldtrain-supervisor-elder-a1/supervisor.log",
+      "bytes": 1109,
+      "sha256": "119dc72624ebacacaf34d34838eaf9b279396d3ee714313fb0b4c75df55b50c7"
+    },
+    {
+      "path": "s11-august-coldtrain-supervisor-elder-a2/launch.json",
+      "bytes": 712,
+      "sha256": "ab7c32d686c5e64d79268ea37babd99bf81e5c6fa444f4d0c4e57fff2c0479d1"
+    },
+    {
+      "path": "s11-august-coldtrain-supervisor-elder-a2/supervisor.log",
+      "bytes": 42,
+      "sha256": "0bbe53d5716b8c2727db121b722555d28f31cf66bbe9c579c78717ffc4cfc600"
+    }
+  ],
+  "archive": {
+    "path": "primary.tar.xz",
+    "bytes": 5374628,
+    "sha256": "015ac45cb9c2074a84f9a21e8995adc2a9034d9b5367bd4050bbac9e7067f8c0"
+  },
+  "failed_a1_native_operations": 0,
+  "coldtrain_a2_native_operations": 1,
+  "classification_evaluated": false,
+  "scientific_verdict": null
+}
