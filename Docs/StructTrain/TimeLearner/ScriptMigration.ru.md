@@ -268,3 +268,15 @@ runtime equivalence неподтверждёнными. Существующий
 серверное повторение и merge children-first пока ожидаются из-за недоступности
 jump host. История предыдущих36 records и их адресные server receipts выше
 сохраняются. Полный этап9 остаётся открытым.
+
+
+Дополнительно подготовлен отрицательный Git fixture
+`39e91647e34a87afbfc4661ee7c149ad910ffd27`: manifest объявляет42 retirements,
+но Bin gitlink намеренно оставлен6304b4a, где шесть Phase12 paths ещё существуют.
+Это только metadata fixture, не runtime-конфигурация эксперимента. Текущий
+verifiera07a907c0ab8bf630599a97d39a7ad2e3f298f59 возвратил2 с
+migration_old_path_still_present и не создал положительный receipt. Исходный
+положительный snapshotb2e7af4ad проверялся исправленным verifier; сам b2e7af4ad
+содержал ошибочный вызов file-only JSON reader для Git bytes. Исправление
+parse_json_bytes сохранено отдельным commit413fd842c. Локальная проверка —
+подготовительная, не замена требуемой серверной приёмки.
