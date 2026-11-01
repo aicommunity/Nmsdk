@@ -358,7 +358,8 @@ semantic identity/images. Неизвестная схема, неполное о
 
 
 Для source-only проверки переноса scripts доступен `history verify-migration`:
-full root SHA, explicit repository paths и новый output receipt обязательны.
+Full root SHA и новый output receipt обязательны; для sparse worktrees нужны
+явные пути repository handles.
 Проверяются все manifest records по immutable Git blobs и точным gitlinks;
 архивные программы не исполняются. Это проверка retrieval/absence/replacement,
 не полнота migration и не numerical/runtime parity. Контракт:
