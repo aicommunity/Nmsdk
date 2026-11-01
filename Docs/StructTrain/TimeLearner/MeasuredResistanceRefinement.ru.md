@@ -132,6 +132,18 @@ read-only preview. Все десять native-domain regressions, включая
 Ненулевой refinement на реальной физике пока проверен только при 2000 Гц,
 двух входах и указанных профилях. `detect_leaks=0`: отсутствие утечек не доказано.
 
+Дополнительная сверка96 файлов четырёх depth=0 domain cases normal a3 и
+ASan a1 обнаружила26 несовпадающих файлов. В12 Branch20000 пробах значения
+stimulus/soma совпадают, но отличается абсолютное начало времени на0.0457 s.
+В последней Classic20000 пробе ASan записано2687 отсчётов вместо3601:
+`complete=false`, `end_reason=native_training_time_budget_exhausted`, итог
+BudgetExhausted без certificate. Это сохранённая диагностическая проба,
+не подтверждение full-window/final-gate при20000 Гц. GTest40/40 означает
+прохождение конкретных domain assertions; этот fixture не требовал сходимости
+или полного финального окна. Его ASan графики нельзя объявлять идентичными
+normal либо подменять ими. Новые nonzero N1 Train при2000 Гц имеют отдельные
+полные данные и свежие Exact certificates на обоих workers.
+
 В обоих runtime исходная finite-mesh версия давала SearchUnresolved,
 а measured refinement — Exact при тех же job declarations, исходных моделях,
 CapturedPerInput и допусках. Получено Rs[0]=64369082.70599112, L[0]=2,
