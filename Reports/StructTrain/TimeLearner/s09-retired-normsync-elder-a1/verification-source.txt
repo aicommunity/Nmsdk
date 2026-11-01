@@ -1,0 +1,18 @@
+import pathlib,subprocess,json,hashlib
+base=pathlib.Path('/home/user/timelearner-refactor');repo=base/'source-august-replay-proof-elder-a1'
+def git(*a):return subprocess.check_output(['git','-C',str(repo),*a])
+subprocess.run(['git','-C',str(repo),'fetch','--no-recurse-submodules','https://github.com/aicommunity/Nmsdk.git','codex/timelearner-docs-python-migration'],check=True,capture_output=True)
+sha=git('rev-parse','FETCH_HEAD').decode().strip();m=json.loads(git('show',sha+':Docs/StructTrain/TimeLearner/script_migration.json'))
+checked=[]
+for r in m['retired_files']:
+ assert r['repository']=='root'
+ raw=git('show',r['archive_commit']+':'+r['old_path'])
+ assert len(raw)==r['bytes'] and hashlib.sha256(raw).hexdigest()==r['content_sha256']
+ assert git('rev-parse',r['archive_commit']+':'+r['old_path']).decode().strip()==r['blob_sha1']
+ assert not git('ls-tree','--name-only',sha,'--',r['old_path']).strip()
+ checked.append({'path':r['old_path'],'archive_commit':r['archive_commit'],'blob_sha1':r['blob_sha1'],'sha256':r['content_sha256']})
+search=subprocess.run(['git','-C',str(repo),'grep','-n','-I','-E','gen_nsr|gen_nsc|ns_readback',sha,'--','Scripts','Tests','App','Apps','CMakeLists.txt'],capture_output=True,text=True)
+assert search.returncode==1,(search.returncode,search.stdout,search.stderr)
+out=base/'readbacks/s09-retired-normsync-elder-a1';out.mkdir(exist_ok=False)
+result={'kind':'retired_script_git_validation','schema_version':1,'source_root':sha,'worker':'10.245.1.11','retired_files_verified':len(checked),'records':checked,'active_root_literal_reference_search':'no_matches','compiled_or_numerical_tests':False,'scientific_verdict':None}
+(out/'validation.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
