@@ -32,13 +32,13 @@ void ReadoutArtifact(const std::string& name,const std::string& contents)
  std::ofstream file(path,std::ios::binary);file<<contents;ASSERT_TRUE(file.good());
 }
 
-class LoadedLearnerReadout : public ::testing::TestWithParam<std::tuple<bool,int,unsigned>> {};
+class LoadedLearnerReadout : public ::testing::TestWithParam<std::tuple<bool,int,unsigned,bool>> {};
 
-template<class Learner> void LoadedReadout(const bool branch,const int count,const unsigned frequency)
+template<class Learner> void LoadedReadout(const bool branch,const int count,const unsigned frequency,const bool savedState)
 {
  const auto& core=NmsdkTests::InitEngineForPulseLibTests();
  const std::string kind=branch?"Branch":"Classic";
- const std::string artifact=kind+"-N"+std::to_string(count)+"-f"+std::to_string(frequency)+"/";
+ const std::string artifact=kind+"-N"+std::to_string(count)+"-f"+std::to_string(frequency)+"-state"+(savedState?"1/":"0/");
  const std::string className=branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner";
  core.environment->DestroyModel();ASSERT_TRUE(core.environment->CreateModel("NModel"));
  auto model=dynamic_pointer_cast<UNet>(core.environment->GetModel());ASSERT_TRUE(model);model->SetGlobalTimeStep(frequency);
@@ -48,10 +48,12 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  learner->DendriteLength=std::vector<int>(count,1);learner->NumSynapse=std::vector<int>(count,1);
  learner->InitialSomaPotential=std::vector<double>(count,.015);
  learner->TipSynapseResistance=std::vector<double>(count,86e6);
- learner->CalculateMode=1;learner->IsNeedToTrain=false;learner->EnablePostTrainTuning=false;
+ learner->CalculateMode=1;learner->IsNeedToTrain=true;learner->EnablePostTrainTuning=false;
  learner->SyncCapacitanceTrim=0;learner->FixedLTZThreshold=1.;learner->LTZThreshold=1.;
  MDMatrix<double> pattern;pattern.Assign(count,1,.01);learner->InputPattern=pattern;
- ASSERT_NE(model->AddComponent(learner),ForbiddenId);core.environment->ModelInit();
+ // Populate the native training dataset during construction, then freeze before
+ // any Calculate. Need=false intentionally preserves an existing Test dataset.
+ ASSERT_NE(model->AddComponent(learner),ForbiddenId);core.environment->ModelInit();learner->IsNeedToTrain=false;
  auto neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
  // A saved full graph owns these deliberately nonuniform child values.
  learner->StructureBuildMode=0;neuron->StructureBuildMode=0;neuron->UseElementDefaults=false;
@@ -65,13 +67,13 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  const auto before=NmsdkTools::InspectModel(neuron);
  ReadoutArtifact(artifact+"source-neuron.json",QJsonDocument(before).toJson().toStdString());
  USerStorageXML xml;ASSERT_TRUE(xml.Create("LoadedReadoutFixture"));
- ASSERT_TRUE(model->SaveComponent(&xml,true,ptPubParameter|ptPubState|pgSystem));
+ ASSERT_TRUE(model->SaveComponent(&xml,true,ptPubParameter|pgSystem|(savedState?ptPubState:0)));
  std::string serialized;ASSERT_TRUE(xml.Save(serialized));ReadoutArtifact(artifact+"model.xml",serialized);
  const std::string modelName=model->GetName();
  const auto capture=[&](auto owner,auto tree,std::vector<std::vector<double>>& rows) {
   auto generator=owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
   ASSERT_TRUE(generator);
-  for(unsigned tick=0;tick<frequency/5;++tick)
+  for(unsigned tick=0;tick<frequency/10;++tick)
   {
    tree->Calculate();core.environment->IncreaseModelTimeByStep();
    std::vector<double> row{generator->Output(0,0)};
@@ -91,7 +93,10 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  neuron=0;channel=0;synapse=0;learner=0;model=0;core.environment->DestroyModel();
  ASSERT_TRUE(core.environment->CreateModel("NModel"));model=dynamic_pointer_cast<UNet>(core.environment->GetModel());ASSERT_TRUE(model);
  model->SetGlobalTimeStep(frequency);ASSERT_TRUE(xml.SelectNode(modelName));
- ASSERT_TRUE(model->LoadComponent(&xml,true));core.environment->ModelInit();core.environment->Reset();
+ TProjectLoadDiagnostics diagnostics;ASSERT_TRUE(model->LoadComponent(&xml,true,&diagnostics));
+ std::ostringstream errors;for(const auto& error:diagnostics.errors)errors<<error<<'\n';
+ ReadoutArtifact(artifact+"load-errors.txt",errors.str());ASSERT_TRUE(diagnostics.errors.empty())<<errors.str();
+ core.environment->ModelInit();core.environment->Reset();
  learner=model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(learner);
  neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
  const auto after=NmsdkTools::InspectModel(neuron);
@@ -126,17 +131,17 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
   {EXPECT_NEAR(original[tick][i],restored[tick][i],1e-12);maximum=std::max(maximum,std::abs(restored[tick][i]));trace<<','<<original[tick][i]<<','<<restored[tick][i];}
   trace<<'\n';
  }
- EXPECT_GE(pulses,count);EXPECT_GT(maximum,1e-8);
+ EXPECT_EQ(pulses,count);EXPECT_GT(maximum,1e-8);
  ReadoutArtifact(artifact+"roundtrip.csv",trace.str());
  core.environment->DestroyModel();
 }
 
 TEST_P(LoadedLearnerReadout, NativeModeZeroXmlRestoresBuffersGraphAndResponse)
 {
- const auto [branch,count,frequency]=GetParam();
- if(branch)LoadedReadout<NNeuronTimeLearnerBranch>(branch,count,frequency);
- else LoadedReadout<NNeuronTimeLearner>(branch,count,frequency);
+ const auto [branch,count,frequency,savedState]=GetParam();
+ if(branch)LoadedReadout<NNeuronTimeLearnerBranch>(branch,count,frequency,savedState);
+ else LoadedReadout<NNeuronTimeLearner>(branch,count,frequency,savedState);
 }
 INSTANTIATE_TEST_SUITE_P(NativeStorage,LoadedLearnerReadout,
- ::testing::Combine(::testing::Values(false,true),::testing::Values(1,2,4,6),::testing::Values(2000u,20000u)));
+ ::testing::Combine(::testing::Values(false,true),::testing::Values(1,2,4,6),::testing::Values(2000u,20000u),::testing::Values(false,true)));
 }
