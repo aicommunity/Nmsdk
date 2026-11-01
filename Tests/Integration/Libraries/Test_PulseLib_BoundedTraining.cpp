@@ -345,6 +345,56 @@ TEST(BoundedTraining, SingleInputStillRequiresRealFinalProbe)
     ASSERT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_EQ(session.IssuedProbes(),1u);
 }
 
+// Arithmetic decision controls only; real storage/Console verification must
+// separately establish applicability to physical membrane dynamics.
+TEST(BoundedTrainingN1Refinement, AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const bool damageFinal:{false,true})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
+        cfg.bounds={{2,2,1,1,1.,16.},{1,1,1,1,10.,10.}};
+        cfg.tolerances.sync=1.;cfg.resistanceSubdivisionDepth=1;cfg.maximumCandidatesPerInput=20;
+        BoundedTrainingSession session(References(p),cfg,{{2,1,16.},{1,1,10.}},true);
+        DriveTraining(session,p,[&](const auto& action,auto&,auto& raw) {
+            raw[0]+=.001*std::log(action.parameters[0].resistance/6.);
+            if(damageFinal && action.finalVerification)raw[0]+=.001;
+        },[](const auto& action) {
+            ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;d.baseModelRevision=action.baseModelRevision;
+            d.previewModelRevision="one_unchanged_physical_scope";d.geometry=action.parameters;d.inputIndex=action.inputIndex;
+            d.minimumResistance=1.;d.maximumResistance=16.;return d;
+        });
+        ASSERT_TRUE(session.Certificate());
+        EXPECT_EQ(session.Status(),damageFinal?TrainingStatus::SearchUnresolved:TrainingStatus::Exact);
+        EXPECT_EQ(session.Certificate()->Exact(),!damageFinal);
+        EXPECT_NEAR(session.Parameters()[0].resistance,6.,.061);
+        EXPECT_EQ(session.Parameters()[1].resistance,10.);
+        EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e) {
+            return e.parameters.resistance!=1. && e.parameters.resistance!=4. && e.parameters.resistance!=16.;
+        }));
+    }
+}
+
+TEST(BoundedTrainingN1Refinement, AChangedNormalizedPhysicalScopeCannotReuseTheOldBracket)
+{
+    const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);
+    cfg.bounds={{2,2,1,1,1.,16.},{1,1,1,1,10.,10.}};
+    cfg.tolerances.sync=1.;cfg.resistanceSubdivisionDepth=1;cfg.maximumCandidatesPerInput=6;
+    std::size_t measured=0;
+    BoundedTrainingSession session(References(p),cfg,{{2,1,16.},{1,1,10.}},true);
+    DriveTraining(session,p,[&](const auto& action,auto&,auto& raw) {
+        raw[0]+=.001*std::log(action.parameters[0].resistance/6.);
+        if(action.inputIndex==0 && !action.finalVerification)++measured;
+    },[&](const auto& action) {
+        ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;d.baseModelRevision=action.baseModelRevision;
+        d.previewModelRevision=measured>=4?"changed_scope":"original_scope";
+        d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=1.;d.maximumResistance=16.;return d;
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+    for(const auto& e:session.Evidence())
+        EXPECT_TRUE(e.parameters.resistance==1. || e.parameters.resistance==4. || e.parameters.resistance==16.);
+}
+
 TEST(BoundedTraining, RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged)
 {
     const auto p=Protocol();auto cfg=Configuration();cfg.bounds[0].maximumSynapses=1;
