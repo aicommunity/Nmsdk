@@ -82,8 +82,9 @@ Git, полные производные отчёты остаются на M40 
    завершены. Следующая алгоритмическая работа — реальные positive controls,
    размерности и physical cases для proposal policy, а не расширение claim
    по одному прохождению ограниченного negative corpus.
-   [Контроль размерности](NativeDimensionControls.ru.md) уже выполняется в новой
-   feature-ветке: normal 16/16 и ASan 16/16; temporal приёмка завершена:
+   [Контроль размерности](NativeDimensionControls.ru.md) принят merge
+   `2b5af8c191b6ea20dff0f8b676e702db8c53c82f`: normal 16/16 и ASan 16/16;
+   temporal приёмка завершена:
    16 dimension и 2 proposal reports с общими normal/ASan значениями,
    20 выбранных PNG прямо просмотрены. Полная ручная приёмка cache не заявлена.
    N=1 Exact здесь проверяет тождественную модель и
@@ -91,6 +92,22 @@ Git, полные производные отчёты остаются на M40 
    Дополнительный normal N0 контроль уже физически подтвердил timing-ready
    L2 → соседний Ns2 до L3 для Classic/Branch; ASan-аналог также подтверждён.
    Все четыре Train при этом SearchUnresolved; классификация не проверялась.
+   Следующий [N1 refinement](MeasuredResistanceRefinement.ru.md) находится
+   в отдельной feature. Актуальные normal a3 (40/40) и ASan a2 (32/32)
+   сборки прошли адресные C++ gates. Одинаковые реальные cold N1 jobs дали
+   Classic/Branch Exact на обоих workers против SearchUnresolved исходной
+   finite mesh; по 2/2 reader checks. Proof commits: normal
+   `bcbd30f1d87e352825e6c8400c5b929eff184ae5`, ASan
+   `44858d7fb92a330470f50741fb862f9f8db23840`.
+   Это первые положительные controls изменения L/Rs в данной V2 серии,
+   при собственных reference amplitudes, 2000 Гц и двух входах. Export/frozen
+   classification этих моделей ещё впереди. Визуальная приёмка подэтапа
+   завершена:434 пары probe/soma в полных caches,6 production report checks,
+   все24 выбранных PNG просмотрены в исходном1920x960; full-cache manual review
+   не заявлена. PulseLib develop merge
+   `d1c3df4cd0749e5869b977fb5e69417400ce1112` опубликован; Core совпадает
+   с проверенным521df545. Root gitlink следует этому merge.
+   Это не закрывает полный stage7 и не является historical V1 replay.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
