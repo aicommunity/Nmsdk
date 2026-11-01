@@ -17,7 +17,7 @@ from .process_runner import verify_runtime
 
 def _progress(output, records):
     pending = output/"progress.pending.json"
-    _write(pending, records)
+    _write(pending, {"kind": "native_measured_length_progress", "schema_version": 1, "records": records})
     pending.replace(output/"progress.json")
 
 
