@@ -321,3 +321,38 @@ source capture до импорта, nullable no-boundary diagnostic, разде�
 recognition export и typed nonzero exits. Добавлен production14-operation
 corpus с отдельным frozen evaluate; runtime-проверка этой новой реализации
 ещё не выполнена. Нельзя считать новый путь принятым по прежним8 native tests.
+
+## Завершение broad ASan live gate и запуск production schema2
+
+M40 producer PID20741 завершён status0:95/95 native checks,3822.630 s,
+без failures/errors/skips. Reader PID54868 завершён status0:6/6 checks,
+91.408 s,548 source files неизменны; runtime before/after совпал.
+Scope:75 прежних native controls +4 clock +16 live; payload reader
+независимо проверяет16 live controls, не все75 старых сценариев.
+Опубликован ASan proof531116d70b1d7b14fb1b8cfcf333c08a63e1d82d:
+792 members /667719504 raw bytes →3343244 compressed bytes. Все member
+и outer hashes локально проверены после --no-ff merge. Original profile/design
+closure2 portable runs /84 artifacts включена; первые supervisor/reader
+ошибки сохранены. Этот binary предшествует Cancel API, codec и production
+schema2; Leak detection выключен, полного этапа8 приёмка не заявляется.
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-asan-a2/README.md).
+
+Production source3f9661a01703d107b02f306c006e1f56be07ddf2 собран на Elder.
+Первый s09-native-live-training-worker-normal-a1 / PID2249379 завершён1:
+standalone codec fixture не создал свой output directory и Write отказал.
+Новый Train corpus не начинался. Исходные XML/process/status сохранены;
+исправление9d8da9af3079a91f512d13f4dd005b96063dc3c8 добавляет native mkpath
+в fixture. Новый normal-a2 / PID2253367 использует этот неизменяемый снимок;
+ожидаются1 codec check и14 production operations, затем3 reader checks.
+Нельзя считать production путь принятым по успешной компиляции.
+
+Для места Elder удалены10 подтверждённых распакованных дубликатов крупных
+старых live JSON. Каждый SHA сверён с published normal proofa7ef72e14 и
+599-member mirror на M40, который заново проверен целиком. Удалённые пути
+проверены на принадлежность точным старым native/corpus каталогам и отсутствие
+fuser handles; новый runtime и baseline profile/design fixtures не затронуты.
+Logical duplicate bytes258266323; свободное место203325440→353660928 bytes.
+Per-file receipt хранится в normal-a1/confirmed-duplicate-cleanup.json и должен
+войти в production proof. Для повторного старого reader-normal-a3 сначала
+восстановить удалённые archive members и composed view. Уникальные primary
+не удалялись; текущая production серия использует другой baseline-source.
