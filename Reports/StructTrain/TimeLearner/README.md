@@ -10,7 +10,7 @@ Accepted scoped legacy warm Reset correction:
 All40 CSVs are byte-identical across workers; hashes and complete native/runtime
 evidence are retained. [Scope and remaining gates](../../../Docs/StructTrain/TimeLearner/HotLearnerReset.ru.md).
 
-Current loaded legacy graph defects (implementation fix under acceptance):
+Historical baselines of the accepted scoped loaded legacy graph correction:
 [normal32/32 detected failures](s04-loaded-readout-baseline-normal-a1/README.md),
 [ASan32/32](s04-loaded-readout-baseline-asan-a1/README.md).
 Twelve parameter-only N>1 cases keep a two-row buffer; twenty stateful/N1 cases
@@ -18,6 +18,13 @@ keep a zero learner readout while the physical soma responds. Complete native
 XML/graph/dimension dumps and setup/compile attempts are retained compactly.
 [Scope and native lifecycle cause](../../../Docs/StructTrain/TimeLearner/LoadedLearnerReadout.ru.md).
 No scientific selectivity verdict or full stage4 acceptance is implied.
+
+Accepted native hot XML Load/Init/Reset scope:
+[normal32/32 and readers18/16/16](s04-hot-xml-current-normal-a1/README.md),
+[ASan32/32 and readers18/16/16](s04-hot-xml-current-asan-a1/README.md),
+[1476 cached figures /26 directly reviewed originals](s04-hot-xml-visual-a1/README.md).
+All64 warm/replay CSVs are byte-identical across workers. Arbitrary-precision
+matrix parameters and full lifecycle/profile coverage remain separate requirements.
 
 Actual August original-protocol saved-state replay:
 [three fresh native Test runs, exact historical closure](s11-august-phasea-replay-elder-a1/README.md)
@@ -427,3 +434,29 @@ MDMatrix10/10, native32/32, regression21/21 without skipped, reader16/16.
 Git retrieval. All32 CSVs byte-identical to current normal. Together with normal
 primary and30 directly reviewed selected PNGs this accepts only the scoped
 loaded graph/readout and MDMatrix correction. Full stages4/11 remain open.
+
+Warm learner Reset controls (separate from the accepted loaded-buffer correction):
+
+- [Current normal native evidence](s04-hot-readout-current-normal-a1/README.md):
+  8 warm Reset,32 loaded-graph and21 regression tests pass without skipped;
+  current loaded reader16/16 and earlier warm baseline/fixed16+16 checks.
+  All40 warm/loaded CSVs are byte-identical to the respective pre-fix controls.
+  The change is in the public soma readout immediately after Reset.
+- [Warm temporal evidence](s04-hot-readout-visual-a1/README.md):178 automatically
+  verified PNGs/16 case-soma pairs;18 selected originals directly reviewed.
+  Curves show the response before Reset; the reset boundary is checked in native
+  JSON and tests. ASan warm8/loaded32 passed; its full regression/data checks
+  and joint acceptance remain pending.
+
+Native warm XML Load/Init/Reset/replay:
+
+- [Initial16-case controls](s04-hot-xml-initial-normal-a1/README.md) preserve the
+  first50ms/schema1 scope and the earlier preparation error (zero tests).
+- [Current normal32-case primary](s04-hot-xml-current-normal-a1/README.md):
+  Classic/Branch,inputs1/2/4/6,2000/20000Hz,Parameters-only/Parameters+State,
+  full100ms traces. Schema3 compares source-rest and loaded-rest full graphs;
+  the warm graph and saved state are retained with dynamic TimeConstant marked
+  separately. All68 case/soma pairs audited; reader18/18 plus16+16 compatibility
+  checks pass.536 primary members/501960 compressed bytes, all hashes verified.
+  ASan32 and temporal visual acceptance remain pending. No mid-probe checkpoint,
+  scientific selectivity verdict or full-stage completion is asserted.

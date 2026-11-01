@@ -5,6 +5,15 @@
 этап0; остальные этапы выполнены частично. Научное8/8 не является условием
 рефакторинга. Зелёный тест отдельного API не заменяет матрицу режимов.
 
+Адресно принят [hot XML Load/Init/Reset](HotXmlReset.ru.md): normal32/32,
+ASan32/32, readers18/16/16 на каждом worker,64 byte-identical crossworker CSV,
+1476 temporal PNG в cache/26 directly reviewed originals. Scope — Classic/Branch,
+N1/2/4/6,2000/20000Hz, Parameters-only/Parameters+State и описанные физические
+fixtures. Это не вся lifecycle/profile матрица и не точный mid-probe checkpoint.
+Отдельно на Elder воспроизведены4/4 отказа ModelArchive для длинных десятичных
+значений публичной TrainingPattern: Rdk matrix writer округляет до6 цифр.
+Strict identity отклоняет export; проверка owner-level исправления ещё идёт.
+
 Дополнение миграции: удалены оставшиеся5 исторических normsync Python и
 standalone segsim.c. Manifest содержит36 retired records; Elder проверил
 retrieval всех36, отсутствие путей и сохранность всех5 JSON. Receipt
