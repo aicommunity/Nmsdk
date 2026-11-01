@@ -1,0 +1,33 @@
+{
+  "kind": "historical_cold_model_temporal_actual_data_checks",
+  "schema_version": 1,
+  "validation": {
+    "source": "b9f9a0838091e5820bf54d387ecb00ed8a5920b2",
+    "worker": "elder",
+    "status": 0,
+    "tests": 7,
+    "native_operations": 0,
+    "primary_members": 236,
+    "wall_seconds": 12.86633038520813,
+    "scientific_verdict": null
+  },
+  "records": [
+    {
+      "path": "reader.log",
+      "bytes": 951,
+      "sha256": "3aa9646ddb890006be509c890a8a0af8fc57b1d62bf7b96a232246acb5fc480f"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 228,
+      "sha256": "831384c9dd316e170ae8d222cce730133741404f67622967200910529474d83c"
+    }
+  ],
+  "archive": {
+    "path": "primary.tar.xz",
+    "bytes": 544,
+    "sha256": "a3c4b1658e25314c173f2786d40d126dcaac069f2b7a2550e7384cd02354df98"
+  },
+  "primary_commit": "0662a3aa8233a7eb2eb07df9af9540e6af69a181",
+  "scientific_verdict": null
+}

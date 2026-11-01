@@ -124,4 +124,7 @@ metadata6840B. Все113 primary files после отрисовки неизм�
 Offline sweep spiking trace не заменяет новый прогон выбранного порога.
 
 Этот результат закрывает адресный saved-state replay трёх случаев, но не весь
-этап11. Остаются cold retrain, legacy/V2 A/B, order/ITI и полная исходная матрица.
+этап11. Последующий [настоящий cold retrain и frozen Test](HistoricalAugustColdStart.ru.md)
+также воспроизвёл эти три результата; это отдельное доказательство, не свойство
+самого saved-state опыта. Legacy/V2 A/B, order/ITI и полная исходная матрица
+остаются открытыми.
