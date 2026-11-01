@@ -220,3 +220,63 @@ Reports/StructTrain/TimeLearner/s09-retired-normsync-model-elder-a1.
 HEAD серверной рабочей копии не менялся; выполнены только чтение Git-объектов
 и публикация receipt через отдельный index. Код фактической проверки приложен
 как verification-source.txt. Численные результаты заново не рассчитывались.
+
+
+## Bin Phase12: удаление исторических shell launchers
+
+В отдельной feature удалены6 shell-файлов старых волн1/2/3/5/6, включая
+wave3 resume. Source snapshot Bin — `6304b4a2bc4117c54c185a917850c7f65771c163`;
+полные пути, blob SHA-1, content SHA-256, last-change commits и retrieval commands
+добавлены в script_migration.json. Wrapper/copy на прежнем месте не оставляется.
+Bin feature commit `fd54fda2fbc1e0a96ae377789322d0804571b3a6` меняет только эти
+шесть launchers и архивную оговорку/ссылки в _repro/README.md. Модели, конфиги,
+таблицы и критерии исторических результатов не переписываются.
+
+Прочитаны все шесть программ. Они фиксируют старый /home/user/Nmsdk workspace,
+имена campaign cases и legacy phase12_validate.py. Wave1, помимо запуска,
+восстанавливает вручную выбранный TipR, правит прежние badges и коммитит отчёты;
+последующие waves смешивают выбранные повторные обучения, clones и gate rebuild.
+Это retrieval исторического tooling, не provenance его отдельных экспериментов.
+Общий Python validator и специализированные helpers не удалены этим пакетом;
+они требуют собственного review/migration. Новая серияD не запускается.
+
+Буквальный поиск по pinned root76afaeb/Bin6304b4a/PulseLib456a5ab дал30 ссылок
+в root inventory snapshots,5 в Bin _repro/README и0 в PulseLib. Executable callers
+с буквальными именами не обнаружены. Динамические имена/внешние пользовательские
+сценарии этим не исключены. README теперь явно является историческим разделом;
+ссылки для просмотра shell source указывают на immutable Bin commit.
+
+Для проверки manifest по всем трём Git trees добавлен root CLI:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner history verify-migration ROOT_COMMIT \
+  --root ROOT_REPOSITORY --bin-repository BIN_REPOSITORY \
+  --pulselib-repository PULSE_REPOSITORY --output NEW_RECEIPT.json
+```
+
+Команда не checkout-ит commits, не исполняет и не восстанавливает scripts.
+Она сверяет source commit/blob/content/size, отсутствие каждого old_path в
+точной root/child closure и существование moved replacement в корневом пакете.
+Root revision aliases разрешаются без изменения исходной записи. Неизвестные
+repositories/actions, unsafe paths, повреждённый digest, оставшийся old_path
+или отсутствующий replacement запрещают положительный receipt. Замена
+копий не доказывает runtime parity; tool явно оставляет full migration и
+runtime equivalence неподтверждёнными. Существующий history resolve сохранён.
+
+Локальная read-only Git сверка исходного root b2e7af4ad8a941186132af73c4b47a7f3288c62a
+проверила все44 records:42 retired и2 moved. Новые numerical tests не проводились;
+серверное повторение и merge children-first пока ожидаются из-за недоступности
+jump host. История предыдущих36 records и их адресные server receipts выше
+сохраняются. Полный этап9 остаётся открытым.
+
+
+Дополнительно подготовлен отрицательный Git fixture
+`39e91647e34a87afbfc4661ee7c149ad910ffd27`: manifest объявляет42 retirements,
+но Bin gitlink намеренно оставлен6304b4a, где шесть Phase12 paths ещё существуют.
+Это только metadata fixture, не runtime-конфигурация эксперимента. Текущий
+verifiera07a907c0ab8bf630599a97d39a7ad2e3f298f59 возвратил2 с
+migration_old_path_still_present и не создал положительный receipt. Исходный
+положительный snapshotb2e7af4ad проверялся исправленным verifier; сам b2e7af4ad
+содержал ошибочный вызов file-only JSON reader для Git bytes. Исправление
+parse_json_bytes сохранено отдельным commit413fd842c. Локальная проверка —
+подготовительная, не замена требуемой серверной приёмки.

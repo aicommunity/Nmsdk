@@ -181,10 +181,13 @@ def main(argv: list[str] | None = None) -> int:
     bundle.add_argument("--output", type=Path, help="new bundle or extraction directory")
     bundle.add_argument("--maximum-bytes", type=int, default=8*1024**3, help="maximum uncompressed extraction bytes")
     history = commands.add_parser("history", help="resolve historical root SHA after generated-report cleanup")
-    history.add_argument("action", choices=("resolve",))
+    history.add_argument("action", choices=("resolve", "verify-migration"))
     history.add_argument("revision")
     history.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     history.add_argument("--map", type=Path)
+    history.add_argument("--bin-repository", type=Path)
+    history.add_argument("--pulselib-repository", type=Path)
+    history.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     if args.command == "prepare":
         from .prepare import write_prepared_matrix
@@ -224,12 +227,23 @@ def main(argv: list[str] | None = None) -> int:
         write_inventory(args.root.resolve(), args.output.resolve())
     elif args.command == "history":
         from .history import resolve_revision
-        from .native_evidence import EvidenceError
+        from .native_evidence import EvidenceError, require
         try:
-            print(json.dumps(resolve_revision(args.root, args.revision, args.map), ensure_ascii=False))
+            if args.action == "resolve":
+                require(args.bin_repository is None and args.pulselib_repository is None and args.output is None,
+                        "migration_options_require_verify_migration")
+                result = resolve_revision(args.root, args.revision, args.map)
+            else:
+                from .migration import verify_migration
+                require(args.output is not None, "migration_receipt_output_required")
+                result = verify_migration(args.root, args.revision, args.bin_repository, args.pulselib_repository, args.map)
+                with args.output.open("x", encoding="utf-8", newline="\n") as output:
+                    json.dump(result, output, ensure_ascii=False, indent=2, allow_nan=False);output.write("\n")
+            print(json.dumps(result, ensure_ascii=False))
             return 0
-        except (EvidenceError, OSError, ValueError) as error:
-            print(json.dumps({"kind":"nmsdk_root_revision_resolution","status":"invalid","reason":str(error),"scientific_verdict":None}),file=sys.stderr)
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            kind = "nmsdk_root_revision_resolution" if args.action == "resolve" else "timelearner_script_migration_verification"
+            print(json.dumps({"kind":kind,"status":"invalid","reason":str(error),"scientific_verdict":None}),file=sys.stderr)
             return 2
     elif args.command == "bundle":
         from .artifact_bundle import pack_native_tests, verify_bundle, extract_bundle
