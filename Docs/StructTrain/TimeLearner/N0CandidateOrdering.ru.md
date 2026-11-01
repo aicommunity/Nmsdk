@@ -49,9 +49,26 @@ mesh и полный profile/frequency/dimension coverage остаются от�
 воспроизвело оба expected failures: SearchUnresolved, сохранён L2/Ns1,
 L2/Ns2 не измерен. ASan native XML:2 cases/2 failures; supervisor0 означает
 успех воспроизведения ожидаемого отказа, не прохождение tests. Runtime
-before/after совпал. Данные пока в readbacks/s07-n0-candidate-order-baseline-asan-a1
-на M40; Git publication и исправление ещё ожидают приёмки.
+before/after совпал. Первичные данные опубликованы ниже; приёмка исправления ещё не завершена.
 
 Baseline опубликован: Reports/StructTrain/TimeLearner/s07-n0-candidate-order-baseline-asan-a1,
 commit72d9df51a9684f1bdd485c7998ae065eb6defaa4. Проверены outer hashes и
 21 member; архив10724 bytes. Исправленный root942e5df45 ожидает ASan приёмку.
+
+## Обязательный независимый reader
+
+Набор test_n0_candidate_regression_evidence проверяет фактический успешный
+процесс с loaded-file provenance, точное множество31 JUnit cases без skips
+и все4 объявленные warm/cold Classic/Branch N0 phases. Число фаз не выводится
+из случайно имеющихся файлов. Каждый реально записанный JSON/CSV проверяется
+production audit_probe, а references/candidates/final certificate сверяются
+через audit_training_summary. Отрицательный сертификат не превращается в
+классификационный verdict.
+
+Четыре reader checks включают потерю финального trial, подмену residual/model
+revision/Exact, изменение captured reference и candidate timing, обрезанный
+CSV. Проверки используют копии фактических данных, не меняя численный source.
+Normal reader PID2312312 и ASan reader PID154042 запущены на metadata root
+a86f96ee5d015b304c63e7070b733477ed69891b и ждут успешного завершения соответствующей
+численной попытки. Результатов4/4 пока нет. Report scope отдельно объявляет
+четыре фазы обучения; editor-only waveform не выдаются за покрытые этим отчётом.

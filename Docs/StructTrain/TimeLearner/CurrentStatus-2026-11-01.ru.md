@@ -557,3 +557,12 @@ outer hashes проверены локально,46552 compressed bytes. Это 
 не полный PASS. Fixed-a2 PID148245 действительно начал повтор того же binary
 с3600s после terminal timeout; visual PID148416 ждёт именно его успешный итог.
 Elder normal PID2304393 ещё компилирует integration target; runtime не обновляется.
+
+
+Независимый N0 reader roota86f96ee5d015b304c63e7070b733477ed69891b требует
+точного набора31 успешных JUnit cases и всех4 declared phases. Включает4 tests
+на actual JSON/CSV/certificates и повреждённые копии данных. Metadata workers
+Elder2312312 / M40154042 подтверждены живыми при запуске; ждут именно своих
+producer terminal0. Новых numeric jobs они не создают. Численные Elder2304393
+и M40148245 на последних отдельных /proc проверках живы; выполняются editor
+probes20000Hz. Full31/31 и reader4/4 ещё не объявлены. Runtime не меняется.
