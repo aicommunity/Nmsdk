@@ -125,7 +125,15 @@ def render_case(data, output, case):
                     stop = trial["spike_times"][0] if trial["spike_times"] else trial["end"]
                     a = bisect.bisect_left(data["times"], trial["begin"])
                     z = bisect.bisect_right(data["times"], stop)
-                    limits = padded_limits([0.0]+[s[i] for s in data["somas"][a:z]])
+                    before_spike = [0.0]+[s[i] for s in data["somas"][a:z]]
+                    # Also retain every later positive wave: focusing solely on
+                    # pre-spike peaks can clip delayed responses to the burst.
+                    # Only excursions below the measured pre-spike baseline
+                    # may leave this companion scale; full views retain them.
+                    stop_full = bisect.bisect_right(data["times"], trial["end"]+.02)
+                    baseline = min(before_spike)
+                    positive_response = [s[i] for s in data["somas"][a:stop_full] if s[i] >= baseline]
+                    limits = padded_limits(before_spike+positive_response)
                     below, above = sum(v < limits[0] for v in y), sum(v > limits[1] for v in y)
                     ax.text(.99, .04, "outside vertical scale: "+str(below)+" below, "+str(above)+
                             " above; see full/detail", transform=ax.transAxes, ha="right", fontsize=8)
