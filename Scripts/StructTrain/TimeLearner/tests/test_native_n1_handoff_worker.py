@@ -69,8 +69,11 @@ class NativeN1HandoffWorkerTest(unittest.TestCase):
             self.assertEqual(load(folder/"native/model-after.json"), export)
             self.assertEqual(export["source_solo"]["sha256"], row["source_solo_sha256"])
             self.assertEqual(export["conversion_spec"], {"schema_version": 1, "mode": "identity", "resistance_bounds": []})
-            self.assertEqual(export["neuron"]["metadata"]["calibration"],
-                             export["source_solo"]["neuron"]["metadata"]["calibration"])
+            calibration = export["neuron"]["metadata"]["calibration"]
+            self.assertEqual(calibration["threshold"],
+                             export["source_solo"]["neuron"]["metadata"]["calibration"]["threshold"])
+            self.assertEqual(calibration["protocol"], "fixed-inherited-from-solo")
+            self.assertEqual(calibration["source_solo_sha256"], row["source_solo_sha256"])
 
     def test_metrics_are_id_based_and_damaged_coverage_cannot_be_positive(self):
         for row in self.rows:
