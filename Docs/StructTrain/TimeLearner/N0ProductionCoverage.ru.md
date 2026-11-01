@@ -105,7 +105,31 @@ commit8b25481711776c45dd5f89a87d477b2203310f60. В каждом проверен
 Normal архив через Git восстановлен на M40 Data по1150 member hashes.
 
 ASan temporal renderer завершил28 reports и3/3 checks для каждого протокола,
-1147 source files unchanged, wall831.52s. Manual acceptance пока false.
-Normal temporal renderer запущен на M40 по восстановленным primary.
-Публикация temporal evidence, выбранных изображений и visual QA ещё открыта;
-по этим engineering корпусам полный этап7 не закрывается.
+1147 source files unchanged, wall831.52s. Normal завершил те же28 reports,
+3/3 checks для каждого протокола,1150 source files unchanged, wall1033.79s.
+
+[ASan temporal proof](../../../Reports/StructTrain/TimeLearner/s07-n0-production-visual-asan-a1/README.md)
+3e388a5af0ea38d278ea8d00f8600183abdbb99d содержит589 metadata members,
+архив454108B и16 уникальных PNG для32 выбранных overview/peak views всех
+target/foil первых сом в Classic/Branch × fixed/grid × repeats1/2.
+Все16 изображений непосредственно просмотрены1920×960; scoped review
+зафиксирован7dfb3a01a18637804efcbf8502279bf17039f71d.
+[Normal temporal proof](../../../Reports/StructTrain/TimeLearner/s07-n0-production-visual-normal-a1/README.md)
+413cdea0b93aa1b8eb44942275dfabcacde52c9c содержит590 members /453344B;
+все32 выбранных PNG побайтно совпали с просмотренными ASan, новых PNG0.
+Каждый полный cache содержит9590 файлов, около655MB, и хранится на M40 Data.
+
+Полная ручная проверка cache и подтверждение SI units не заявляются.
+На выбранных графиках последняя реакция ещё затухает в конце объявленного окна.
+Поэтому complete=True означает полноту именно engineering window, а не
+подтверждённое установление rest-state или отсутствие более поздних ответов.
+Target peak zoom начинается после предшествующего импульса; его контекст виден
+в paired overview и соседнем cached zoom. Научный Test требует отдельно
+обоснованного полного post-stimulus окна. Исторический replay при этом сохраняет
+свои исходные окна и критерии, а расширение окна — отдельный протокол.
+
+Эти корпуса подтверждают production Ns search/edit/export, но преимущество
+time-ready proposal policy на физическом случае здесь не доказано: её адресное
+сравнение пока опирается на controlled-response kernel cases. Повторные пробы
+и сравнение ASan/normal не являются независимой научной выборкой.
+Адресный production N0 подэтап проверен; полный этап7 остаётся открытым.

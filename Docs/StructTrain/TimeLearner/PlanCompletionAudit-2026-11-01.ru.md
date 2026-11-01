@@ -25,6 +25,16 @@ Root acceptance merge8394a028a65afaacbe72f1ce741f26b309c4e3b7 опубликов
 с exact gitlinks. Полный stage7 не закрыт;
 [границы/источники](N0CandidateOrdering.ru.md), [журнал](CurrentStatus-2026-11-01.ru.md).
 
+Следующий production N0 подэтап также проверен адресно: на каждом worker два
+корпуса /28 реальных Console операций,7/7 reader checks для каждого протокола,
+28 temporal reports и3/3 temporal checks для каждого протокола. Проверены
+фактически измеренные Ns>1, фиксированные Rs/anchor и frozen handoff. Это
+2inputs/2000Hz/identity/keep_done/fixed-or-grid, а не вся матрица вариантов.
+Все16 full Train на двух workers — SearchUnresolved. Источники, limits окон
+и scoped visual review: [N0 production](N0ProductionCoverage.ru.md).
+Адресная [очистка серверов](ServerCleanup-2026-11-01.ru.md) завершена с receipts;
+она не закрывает весь resource/scheduler контур этапов2/10.
+
 ## Сверка по исходным этапам
 
 | Этап | Что действительно реализовано/проверено | Что ещё требуется для полного этапа |
@@ -67,8 +77,10 @@ Git, полные производные отчёты остаются на M40 
 
 ## Текущая последовательность приёмки
 
-1. Включить принятый N0 подэтап с точными child gitlinks; regression/repeat/
-   temporal evidence завершены, полная алгоритмическая матрица остаётся открытой.
+1. Объединить проверенный production N0 подэтап; его primary/temporal evidence
+   завершены. Следующая алгоритмическая работа — реальные positive controls,
+   размерности и physical cases для proposal policy, а не расширение claim
+   по одному прохождению ограниченного negative corpus.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
