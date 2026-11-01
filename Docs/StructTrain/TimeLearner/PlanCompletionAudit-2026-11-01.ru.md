@@ -13,6 +13,11 @@
 модель восстановлена; independent Test успешной калибровки отсутствует.
 Это закрывает scoped проверку фактических порогов и отчётов, а не полный этап8.
 
+Миграция root Docs shell:27 исторических entrypoints удалены в четырёх пакетах
+с проверенными полными Git retrieval records. В TimeLearner audit Docs больше
+нет tracked `.sh`; Python, Bin, Reports runner receipts и полный production
+scheduler/CLI остаются открытыми. [Реестр/границы](ScriptMigration.ru.md).
+
 ## Снимки и пределы доказательств
 
 Принятый сквозной live pipeline включён в корневой develop
