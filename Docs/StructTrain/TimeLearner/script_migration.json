@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools and3 one-off NSR/NSC Python tools retired; active Bin Branch dynamics analyzer and six regressions migrated. Remaining Docs Python/Bin/Reports tools and production CLI migration are incomplete.",
+  "scope": "27 historical root Docs shell tools and9 one-off normsync Python/C tools retired; active Bin Branch dynamics analyzer and six regressions migrated. Remaining Docs Python/Bin/Reports tools and production CLI migration are incomplete.",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -573,6 +573,120 @@
       ],
       "replacement": null,
       "reason": "One-off legacy e05/NSR/NSC inspection CLI; executes at import, masks missing artifacts and uses regex/heuristic phase parsing. Not a current effective-configuration validator and has no active caller.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/aggregate.py",
+      "action": "retired_historical",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "last_change_commit": "a7227b6877f8eecd58f4599634eda90c20c77c3e",
+      "blob_sha1": "1fff2744b1eb35bd1c4f5103e40bcc6835c3c213",
+      "content_sha256": "1eb4d49eee0a71bf6581f41122bda614f53434017a4ca8862070389a0a52665c",
+      "bytes": 1219,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/970fde1a0b13cf4d29b1c19659d423dd9899ebfe/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/aggregate.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "970fde1a0b13cf4d29b1c19659d423dd9899ebfe:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/aggregate.py"
+      ],
+      "replacement": null,
+      "reason": "Historical aggregation of runs_e05-style JSON; executes at import; ignores missing/zero span and accepts unvalidated arrays. Not a production verdict source.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/normsync_audit.py",
+      "action": "retired_historical",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "last_change_commit": "a7227b6877f8eecd58f4599634eda90c20c77c3e",
+      "blob_sha1": "5adff407c5989010921b3554d0af6218ff6545ae",
+      "content_sha256": "a3f5043df4a3a0bceb153664247f3a62a587c689a12d11680f04eec42aebbb3b",
+      "bytes": 4409,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/970fde1a0b13cf4d29b1c19659d423dd9899ebfe/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/normsync_audit.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "970fde1a0b13cf4d29b1c19659d423dd9899ebfe:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/normsync_audit.py"
+      ],
+      "replacement": null,
+      "reason": "Historical legacy log diagnostic: active-only pairing, previous peak_valid and cached anchor flags; no complete observation or revision proof. Kept in Git history for old reports only.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/model.py",
+      "action": "retired_historical",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "last_change_commit": "a7227b6877f8eecd58f4599634eda90c20c77c3e",
+      "blob_sha1": "10c12a918e1f17a1ae025e7ccfbbad5a52aac6a5",
+      "content_sha256": "7d462a75f6653bee76b5e14824e656e424794accbb331aa61d087d2f4617a74e",
+      "bytes": 2442,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/970fde1a0b13cf4d29b1c19659d423dd9899ebfe/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/model.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "970fde1a0b13cf4d29b1c19659d423dd9899ebfe:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/model.py"
+      ],
+      "replacement": null,
+      "reason": "Standalone driver for the historical segsim approximation. Assumes first target row and four patterns in synchronization; subprocess return code is not checked. Not the native component path.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/rs_delay_sim.py",
+      "action": "retired_historical",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "last_change_commit": "a7227b6877f8eecd58f4599634eda90c20c77c3e",
+      "blob_sha1": "3ebaa00d45f731750647a9ecfef451e19e01524b",
+      "content_sha256": "16e157e8f395ca8bae9df059b7c0ce8e40748546ba75b02da5dfd7a7e59a6bfd",
+      "bytes": 946,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/970fde1a0b13cf4d29b1c19659d423dd9899ebfe/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/rs_delay_sim.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "970fde1a0b13cf4d29b1c19659d423dd9899ebfe:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/rs_delay_sim.py"
+      ],
+      "replacement": null,
+      "reason": "One-off fixed October parameter sweep using local ./segsim; executes on import and writes a fixed JSON name. Historical result JSON is preserved.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/window_shift_sim.py",
+      "action": "retired_historical",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "last_change_commit": "a7227b6877f8eecd58f4599634eda90c20c77c3e",
+      "blob_sha1": "617b43642a9b5292e29f5f4146ee409e1a6a8012",
+      "content_sha256": "3a69330ae3e1158c716e5bc6f05f5b51d9d95719f157c80f465ef6f65d2cb692",
+      "bytes": 3413,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/970fde1a0b13cf4d29b1c19659d423dd9899ebfe/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/window_shift_sim.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "970fde1a0b13cf4d29b1c19659d423dd9899ebfe:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/window_shift_sim.py"
+      ],
+      "replacement": null,
+      "reason": "One-off linear superposition/window-shift hypothesis with fixed four-input scenarios and local ./segsim; not evidence of native learning convergence. Existing hypothesis data is preserved.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/segsim.c",
+      "action": "retired_historical",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "last_change_commit": "a7227b6877f8eecd58f4599634eda90c20c77c3e",
+      "blob_sha1": "c056db75d73eb03a63c2d2e76810b5735838b47e",
+      "content_sha256": "678bdad3fd95eecf3de66f4601df65621c95cb2dce0fe933d7d10e53dfec77fc",
+      "bytes": 2949,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/970fde1a0b13cf4d29b1c19659d423dd9899ebfe/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/segsim.c",
+      "retrieval_command": [
+        "git",
+        "show",
+        "970fde1a0b13cf4d29b1c19659d423dd9899ebfe:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/segsim.c"
+      ],
+      "replacement": null,
+      "reason": "Standalone historical approximate segment simulator used by the retired drivers; not linked by production CMake. It is not a native lifecycle/storage integration test.",
       "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
     }
   ],
