@@ -1,5 +1,6 @@
 """Acceptance of real Console dimension controls and original final-gate data."""
 from copy import deepcopy
+import csv
 import os
 from pathlib import Path
 import unittest
@@ -66,6 +67,21 @@ class NativeDimensionWorkerTest(unittest.TestCase):
             self.assertEqual(job["configuration"]["search"]["tolerances"],
                              {"amplitude_absolute": 1e-5, "amplitude_relative": 0, "sync": .02})
             self.assertIsNone(self.index["scientific_classification_verdict"])
+
+    def test_actual_trace_preserves_all_classic_somas_including_fifth_channel(self):
+        for row in self.index["records"]:
+            folder = self.root/"runs"/row["name"]/"native"
+            expected = row["inputs"] if row["topology"] == "Classic" else 1
+            packets = list(folder.glob("train_state_trial_*.json"))
+            self.assertTrue(packets)
+            for path in packets:
+                with self.subTest(run=row["name"], packet=path.name):
+                    packet = load(path)
+                    self.assertEqual(len(packet["observation"]["specification"]["baseline"]), expected)
+                    with path.with_suffix(".csv").open(newline="") as stream:
+                        rows = list(csv.reader(stream))
+                    self.assertGreater(len(rows), 1)
+                    self.assertTrue(all(len(r) == expected+2 for r in rows))
 
 
 if __name__ == "__main__":
