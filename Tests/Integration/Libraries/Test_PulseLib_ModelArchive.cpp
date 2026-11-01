@@ -38,12 +38,26 @@ QJsonObject Metadata()
     return metadata;
 }
 
-UEPtr<NPulseNeuron> Prepared(unsigned int frequency)
+UEPtr<NPulseNeuron> Prepared(unsigned int frequency, bool precise = false)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     StorageProfileSpec spec; spec.name = "NativeArchiveFixture_" + std::to_string(frequency);
     spec.frequencyHz = frequency; spec.ltMembrane = spec.body;
     spec.ltMembrane->excChannel.capacity = .3e-9;
+    if(precise)
+    {
+        spec.name += "_F64Precision";
+        // Uniform physics belongs to immutable storage recipes; learned
+        // individual changes below must survive alongside these prototypes.
+        spec.body.excChannel.capacity = 1.2345678901234567e-9;
+        spec.body.excChannel.resistance = 12345678.901234567;
+        spec.body.excChannel.restingResistance = 11223344.556677889;
+        spec.body.excSynapse.resistance = 86420975.3108642;
+        spec.body.excSynapse.secretionTC = .0012345678901234567;
+        spec.body.excSynapse.dissociationTC = .0009876543210987654;
+        spec.body.excSynapse.pulseAmplitude = 1.2345678901234567;
+        spec.ltMembrane->excChannel.capacity = .34567890123456789e-9;
+    }
     spec.body.excSynapse.usePresynapticInhibition = true; spec.body.excSynapse.inhibitionCoefficient = 2.5;
     const auto classes = RegisterStorageProfile(core.storage, core.environment, spec);
     auto neuron = dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(classes.neuronClass));
@@ -54,8 +68,21 @@ UEPtr<NPulseNeuron> Prepared(unsigned int frequency)
     auto tip = neuron->GetComponentL<NPulseMembrane>("Dendrite2_3", true);
     if(!tip) throw std::runtime_error("fixture tip unavailable");
     tip->NumExcitatorySynapses = 3; tip->Build();
-    tip->GetComponentL<NPulseSynapse>("ExcSynapse2",true)->Resistance = 333e6;
-    tip->GetComponentL<NPulseChannel>("ExcChannel",true)->Capacity = 1.41e-9;
+    tip->GetComponentL<NPulseSynapse>("ExcSynapse2",true)->Resistance = precise ? 333333333.12345678 : 333e6;
+    tip->GetComponentL<NPulseChannel>("ExcChannel",true)->Capacity = precise ? 1.4142135623730951e-9 : 1.41e-9;
+    if(precise)
+    {
+        auto channel = neuron->GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
+        auto synapse = neuron->GetComponentL<NPulseSynapse>("Dendrite1_1.ExcSynapse1",true);
+        if(!channel || !synapse || channel->Capacity.GetData()!=spec.body.excChannel.capacity ||
+           channel->Resistance.GetData()!=spec.body.excChannel.resistance ||
+           channel->RestingResistance.GetData()!=spec.body.excChannel.restingResistance ||
+           synapse->Resistance.GetData()!=spec.body.excSynapse.resistance ||
+           synapse->SecretionTC.GetData()!=spec.body.excSynapse.secretionTC ||
+           synapse->DissociationTC.GetData()!=spec.body.excSynapse.dissociationTC ||
+           synapse->PulseAmplitude.GetData()!=spec.body.excSynapse.pulseAmplitude)
+            throw std::runtime_error("high precision storage physics differs before archive export");
+    }
     return neuron;
 }
 
@@ -192,12 +219,12 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
 }
 
 class NativeArchive : public ::testing::TestWithParam<unsigned int> {};
-void TransferFixture(unsigned int frequency, bool withBoundary)
+void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = false)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     const char* phase = "prepare";
     try {
-    auto model = Prepared(frequency);
+    auto model = Prepared(frequency,precise);
     UEPtr<NConstGenerator> boundary;
     NmsdkTools::ModelBoundarySources ports;
     if(withBoundary)
@@ -224,7 +251,7 @@ void TransferFixture(unsigned int frequency, bool withBoundary)
     {
         directory = QString::fromLocal8Bit(artifacts); std::filesystem::create_directories(directory.toStdString());
     }
-    const auto prefix = withBoundary ? "/boundary-" : "/archive-";
+    const QString prefix = QString(precise ? "/precise-" : "/") + (withBoundary ? "boundary-" : "archive-");
     const auto input = directory + prefix + "fixture-" + QString::number(frequency) + ".json";
     const auto output = directory + prefix + "import-verification-" + QString::number(frequency) + ".json";
     Write(input,fixture);
@@ -248,6 +275,8 @@ void TransferFixture(unsigned int frequency, bool withBoundary)
 }
 TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess) { TransferFixture(GetParam(),false); }
 TEST_P(NativeArchive, TransfersDeclaredExternalStimulusIntoFreshNativeProcess) { TransferFixture(GetParam(),true); }
+TEST_P(NativeArchive, TransfersHighPrecisionStorageAndLearnedStateIntoFreshNativeProcess) { TransferFixture(GetParam(),false,true); }
+TEST_P(NativeArchive, TransfersHighPrecisionStateAndExternalStimulusIntoFreshNativeProcess) { TransferFixture(GetParam(),true,true); }
 INSTANTIATE_TEST_SUITE_P(SingleRate,NativeArchive,::testing::Values(2000u,20000u));
 
 TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
