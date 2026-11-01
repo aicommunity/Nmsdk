@@ -611,3 +611,25 @@ reader154042 сохраняется как первоначальная пост
 failure не подменяется. Normal visual PID165784 получает исключительно Git
 proofc9c65de9b и строит4 declared training phases/56trials в M40 Data cache;
 численных прогонов не создаёт. Полные ASan и visual результаты ещё pending.
+
+
+Normal temporal worker165784 terminal0:4 phases,56trials,84soma pairs,
+render123.315699s,205 source files неизменны. Отдельный visual reader169106
+terminal0:3/3 N0 и3/3 old338-probe/507-pair regression checks,77.037563s;
+117 N0 selected phase files неизменны. Общий visual test сохранил старые
+явные counts/partial semantics; новый class задаёт56/84/complete=true.
+
+[Visual proof077334d7fb76bc6d05983a892570f5178ce9b21d](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-visual-normal-a1/README.md)
+включён --no-ff. Проверены outer hashes,141 metadata members/95916compressed
+bytes и8 PNG/1233786bytes. Полный cache2063files/103004513bytes остаётся Data.
+Все8 selected PNG непосредственно просмотрены1920×960: final input0/first soma
+warm/cold Classic/Branch overview и peak zoom. QA commitfd90e862d4f817cc2269ad9c46ba9c8c52aeb5a8
+фиксирует exact hashes, читаемые labels/legends/inputs/rise/peak. Полная ручная
+приёмка cache, SI units и ответы за пределами окна не заявлены.
+
+ASan real numeric process150150 подтверждён /proc живым26:43,104%CPU/RSS~1GB.
+ClassicN0_20000 прошёл1274.927s; далее BranchN0_20000. Runtime/source не менялись.
+Full31 и reader4 на M40 ещё pending. Publisher173580 ждёт именно producer
+terminal0 и corrected reader164462 terminal0, затем сохранит actual ASan primary
+и первоначальный failed reader. Новый numeric run не создаётся. Весь план и
+full stage7 открыты; develop пока не обновлён.
