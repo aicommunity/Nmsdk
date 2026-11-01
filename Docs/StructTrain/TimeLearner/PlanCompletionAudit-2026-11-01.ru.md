@@ -83,7 +83,9 @@ Git, полные производные отчёты остаются на M40 
    размерности и physical cases для proposal policy, а не расширение claim
    по одному прохождению ограниченного negative corpus.
    [Контроль размерности](NativeDimensionControls.ru.md) уже выполняется в новой
-   feature-ветке: normal 16/16 и ASan 16/16; temporal приёмка ещё не завершена.
+   feature-ветке: normal 16/16 и ASan 16/16; temporal приёмка завершена:
+   16 dimension и 2 proposal reports с общими normal/ASan значениями,
+   20 выбранных PNG прямо просмотрены. Полная ручная приёмка cache не заявлена.
    N=1 Exact здесь проверяет тождественную модель и
    свежий final gate; это не подтверждение успешного изменения геометрии.
    Дополнительный normal N0 контроль уже физически подтвердил timing-ready

@@ -298,3 +298,5 @@ classification verdict отсутствует. Полная постановка
 [NativeDimensionControls](../../../Docs/StructTrain/TimeLearner/NativeDimensionControls.ru.md).
 
 [ASan N0 physical proposal path](s07-native-proposal-asan-a1/README.md): завершён, reader 2/2; temporal приёмка ещё открыта.
+
+[Native controls temporal proof](s07-native-controls-visual-a1/README.md): 18 reports, 610 trial-soma pairs, shared counterpart primary equality, 20 selected PNG directly reviewed; full cache manual review is not claimed.
