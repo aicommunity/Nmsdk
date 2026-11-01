@@ -26,6 +26,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Решения и обязательные контракты](Decisions.ru.md).
 - [История и доказательства](Evidence.ru.md).
 - [Первоначальный Git inventory (исторический снимок)](source_inventory.json).
+- [Владельцы18 параметров поиска, окон и интервалов: legacy и V2](ParameterSearchContracts.ru.md).
 - [Контракт наблюдений и оценки](ObservationContract.ru.md).
 - [Readback фактического графа модели](ModelInspection.ru.md).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).
