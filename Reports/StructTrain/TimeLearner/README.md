@@ -3,6 +3,13 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Accepted scoped legacy warm Reset correction:
+[normal8+32+21](s04-hot-readout-current-normal-a1/README.md),
+[ASan8+32+21 and readers16+16](s04-hot-readout-current-asan-a1/README.md),
+[178 temporal figures /18 selected directly reviewed](s04-hot-readout-visual-a1/README.md).
+All40 CSVs are byte-identical across workers; hashes and complete native/runtime
+evidence are retained. [Scope and remaining gates](../../../Docs/StructTrain/TimeLearner/HotLearnerReset.ru.md).
+
 Current loaded legacy graph defects (implementation fix under acceptance):
 [normal32/32 detected failures](s04-loaded-readout-baseline-normal-a1/README.md),
 [ASan32/32](s04-loaded-readout-baseline-asan-a1/README.md).
