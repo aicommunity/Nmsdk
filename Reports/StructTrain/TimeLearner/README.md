@@ -220,3 +220,13 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   hashes verified. Four frozen same-matrix evaluations are silent target misses,
   not classifier success. Initial codec-output and packaging failures retained.
   Production ASan, visual reports and full original stages remain open.
+
+- [Production live Train, ASan](s09-native-live-training-worker-asan-a1/README.md):
+  14 operations, one codec, original three and overlapping complete four reader
+  checks.521 verified members /1225484 compressed bytes,14 portable runs /446
+  artifacts. Leak detection disabled; all frozen pairs remain silent target misses.
+- [Production temporal reports, normal](s09-native-live-training-worker-visual-normal-a1/README.md):
+  14 reports, three checks,93 training and42 recognition trial-soma pairs.272
+  metadata members /190348 compressed bytes and ten selected PNG /1500834bytes.
+  All ten directly reviewed1920x960; full-cache manual acceptance remains false.
+  Source543 files unchanged; ASan temporal rendering is still pending.

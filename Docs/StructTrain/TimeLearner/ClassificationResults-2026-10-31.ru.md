@@ -101,3 +101,10 @@ SearchUnresolved; fixed выбирает веса, grid восстанавлив
 отражает молчание двухпаттерновой матрицы, не успешную детекцию. Научный PASS
 не установлен; это не независимый Test и не сравнение с августовскими8 cases.
 Production ASan и новые temporal reports пока не завершены.
+
+ASan production повтор опубликован в proof264c429974e9d97bb5d5277b1fc25c846fa80eda:
+14 операций и complete reader4/4. Во всех четырёх frozen парах снова
+TP0/FP0/FN1/TN1; model revisions совпадают с normal. Это deterministic
+engineering correspondence, не независимые обучения и не успешная классификация.
+Normal14 temporal reports проверены3/3;10 выбранных полных/partial PNG
+просмотрены. ASan temporal reports пока выполняются.
