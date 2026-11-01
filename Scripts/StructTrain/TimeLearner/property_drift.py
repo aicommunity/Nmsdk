@@ -55,12 +55,17 @@ def _methods(text, component):
         require(begin >= 0, "property_source_method_body_missing")
         finish = _close(masked, begin, "{", "}")
         name = match["name"]
-        require(name not in result, "property_source_overloaded_method_requires_explicit_review:"+name)
-        result[name] = {"line": text.count("\n", 0, match.start())+1,
+        result.setdefault(name, []).append({"line": text.count("\n", 0, match.start())+1,
+                        "start_offset": match.start(),
                         "body_line": text.count("\n", 0, begin)+1,
                         "body": text[begin:finish+1],
-                        "declaration": text[match.start():begin]}
+                        "declaration": text[match.start():begin]})
     return result
+
+
+def _single_method(methods, name):
+    require(len(methods.get(name, [])) == 1, "property_source_ambiguous_or_missing_method:"+name)
+    return methods[name][0]
 
 
 def catalog(repo, commit):
@@ -72,8 +77,9 @@ def catalog(repo, commit):
         sources.extend([header_ref, source_ref])
         methods = _methods(source, component)
         require(component in methods and "ADefault" in methods, "property_source_owner_lifecycle_missing")
-        constructor = methods[component]["declaration"]
-        default = methods["ADefault"]; default_masked = _masked(default["body"])
+        constructor_method = _single_method(methods, component)
+        constructor = constructor_method["declaration"]
+        default = _single_method(methods, "ADefault"); default_masked = _masked(default["body"])
         masked = _masked(header)
         for match in re.finditer(r"\bUProperty\s*<", masked):
             end = _close(masked, match.end()-1, "<", ">")
@@ -101,9 +107,10 @@ def catalog(repo, commit):
                 entry = {"line": default["body_line"]+default_masked.count("\n", 0, use.start()),
                          "source": default["body"][line_start:line_end].strip()}
                 if entry not in mentions:mentions.append(entry)
-            setter_body = methods[setter_name] if setter_name else None
+            setter_body = _single_method(methods, setter_name) if setter_name else None
             result.append({"component": component, "name": name, "type": arguments[0], "flags": arguments[2],
                            "declaration_line": header.count("\n", 0, match.start())+1,
+                           "registration_line": source.count("\n", 0, constructor_method["start_offset"]+registration.start())+1,
                            "registered_name": registration["label"], "setter": setter_name,
                            "setter_line": setter_body["line"] if setter_body else None,
                            "setter_source_sha256": _hash(setter_body["body"]) if setter_body else None,
@@ -126,6 +133,8 @@ def compare(repo, before, after):
         rows.append({"component": key[0], "name": key[1], "present_before": key in a,
                      "present_after": key in b, "changed_source_fields": changed})
     return {"kind": "timelearner_declared_property_source_drift", "schema_version": 1,
+            "producer": {"analyzer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                         "source_kind": "immutable_git_blobs", "runtime_test": False},
             "before": old, "after": new, "records": rows,
             "runtime_property_matrix_complete": False, "semantic_equivalence_attested": False,
             "limitations": ["Declared UProperty members only; inherited Rdk properties are outside this catalog.",
