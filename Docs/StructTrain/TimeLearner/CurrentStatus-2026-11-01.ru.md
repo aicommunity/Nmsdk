@@ -566,3 +566,27 @@ Elder2312312 / M40154042 подтверждены живыми при запус
 producer terminal0. Новых numeric jobs они не создают. Численные Elder2304393
 и M40148245 на последних отдельных /proc проверках живы; выполняются editor
 probes20000Hz. Full31/31 и reader4/4 ещё не объявлены. Runtime не меняется.
+
+
+Normal-a1 завершён terminal1: execution=timeout/wall_budget_exhausted,
+returncode=-15,300.304135126s,26 completed stdout cases, complete JUnit нет.
+[Proof941969016c577aef6fa4dc4deca1e1d3ab3b27c8](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-timeout-normal-a1/README.md)
+включает61 member/225672compressed bytes, abort dependent reader и duplicate
+cleanup receipt. Outer и все member hashes локально проверены. Первое staging
+публикации упёрлось в диск. Удалены133 неиспользуемых ELF ET_REL object caches
+80090112bytes только из завершённого owned build; проверены отсутствие
+компилятора/линкера и fuser. Receipt сохранён; runtime/executable не менялись.
+Диск5.6MB→85.9MB. Последующие сборки потребуют регенерации этих cache files.
+
+Normal-a2 PID2315548 запущен только после подтверждённого timeout и завершения
+owned PID/start_ticks, тот же binary/source/runtime,3600s без rebuild.
+На последней /proc проверке жив04:02: Classic/Branch2000 и Classic20000 прошли,
+выполняется Branch20000. Reader-normal-a1 остановился на неуспешном producer;
+новый reader-normal-a2 PID2316199 ждёт normal-a2. ASan-a2 PID148245 жив15:16,
+выполняет Classic20000; reader154042 и visual148416 ждут прежние точные jobs.
+Ни31/31, ни reader4/4 пока не объявлены.
+
+Новая [сводка всех этапов01.11](PlanCompletionAudit-2026-11-01.ru.md) заменяет
+старые текущие формулировки при сохранении исторических аудитов. Она учитывает
+реализованные controller/archive/live pipeline и отдельно полный остаток.
+План0–12 и активная цель сохраняются полностью; develop не обновлён.
