@@ -1747,6 +1747,24 @@
       "line": 7,
       "line_text": "    auto c=ParseConfiguredNativeTraining(owner.ControllerConfiguration.GetData());",
       "role": "configured_build_source"
+    },
+    {
+      "repository": "Rdk",
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UContainer.cpp",
+      "blob": "92fb2be56ed54ee86c56416ea492aebdd835d0ae",
+      "line": 2271,
+      "line_text": "   ABuild();",
+      "role": "native_container_ignores_ABuild_return"
+    },
+    {
+      "repository": "Rdk",
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UContainer.cpp",
+      "blob": "92fb2be56ed54ee86c56416ea492aebdd835d0ae",
+      "line": 2419,
+      "line_text": "   AReset();",
+      "role": "native_container_ignores_AReset_return"
     }
   ],
   "open_issues": [
@@ -1793,8 +1811,8 @@
     },
     {
       "id": "LIFECYCLE-BOOL-001",
-      "status": "source_confirmed_runtime_verification_pending",
-      "description": "Legacy ABuild and AReset still propagate false on some internal failures. This contradicts the approved always-true lifecycle contract. Preserve stop/diagnostics and scheduling when correcting it; do not mechanically replace false without a runtime negative control.",
+      "status": "source_confirmed_hook_consistency_question_public_bool_already_true",
+      "description": "Legacy ABuild/AReset hooks still return false on eight internal branches. UContainer invokes those hooks without reading their return; public Build/Reset already return true. This is residual hook consistency, not a reproduced public boolean failure. Any cleanup must preserve early stop, diagnostics and scheduler ordering; do not propagate hook bool or mechanically continue failed initialization.",
       "source_evidence": [
         {
           "repository": "PulseLib",
