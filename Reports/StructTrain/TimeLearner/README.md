@@ -236,3 +236,8 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   members /190708 compressed bytes; ten exact references to directly reviewed
   normal PNG, no image copies. Legibility scope inherited only by actual PNG
   equality; full-cache manual acceptance remains false.
+
+- [N0 candidate ordering baseline](s07-n0-candidate-order-baseline-asan-a1/README.md):
+  two controlled-kernel expected failures on unchanged Core, actual native XML
+  and process/runtime receipts;21 archived members,10724 compressed bytes.
+  This reproduces proposal-budget loss, not physical infeasibility.
