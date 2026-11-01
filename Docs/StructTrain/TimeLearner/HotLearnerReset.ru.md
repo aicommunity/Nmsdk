@@ -34,3 +34,21 @@ Branch per-input peak history и private peak/time vectors очищаются о
 native Reset, отсутствие diagnostic и Branch history до/после первого тика.
 Эти дополнительные assertions не входили в первый baseline и должны
 проверяться новым прогоном. Прежние исходники/данные baseline сохраняются.
+
+Production reader hot_readout_reports.py проверяет8 native условий и16
+case/soma pairs, строгую схему observation, все finite samples50ms, часы,
+фактическое число/интервалы входных импульсов, совпадение live physical/cache,
+соответствие последнего CSV отсчёта warm snapshot, физический rest и остаток
+cache после Reset. Отрицательный baseline остаётся stale_readout с process
+error; process success не подставляется. Scientific verdict/certificate=null.
+Для рисунков переиспользуется общий full-sample renderer с явными подписями
+Physical soma/Learner readout и before Reset, без мнимого второго предъявления.
+
+На Elder sourcee29669f45e4e9f3af390bf1aa8de5450237275a7 прошёл16/16
+corruption/data tests на baseline и16/16 на fixed корпусе. Совместимость
+прежнего loaded reader проверена16/16 на normal a4. Fixed C++8/8 завершился;
+loaded32/regression21 ещё выполняются и не выдаются за завершённую приёмку.
+Reader receipts опубликованы14f6c65b47d81684f907bd7158d4b4436ec43421,
+Reports/StructTrain/TimeLearner/s04-hot-reader-normal-a1 (47700 bytes), затем
+локально проверены все outer hashes. ASan, графики и final acceptance остаются
+открытыми; исходные stages4/11 и полный план этим не закрыты.
