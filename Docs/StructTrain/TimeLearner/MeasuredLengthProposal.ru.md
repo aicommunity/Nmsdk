@@ -84,3 +84,25 @@ Native regressions28 на каждом worker, full cold A/B temporal reports,
 сжатые primary, metadata и выбранные просмотренные рисунки.
 Полные этапы6/7/11 открыты; legacy EstDelayPerSeg/gamma не объявляются действующими
 V2 полями. Новые C-trim, общая A* или дополнительная физика не вводятся.
+
+## Уточнение после восстановления VPN и temporal review
+
+Full cold A/B temporal reports готовы:8 scenarios,240 trial-soma pairs,4146 PNG
+в M40 cache. Commit10e918079787b170d1bec862f0e1f7b04dae9ac3 публикует688 JSON
+metadata members и16 selected originals1920x960. Все16 непосредственно
+просмотрены: readable overview500ms и zoom50ms, actual input overlays, shared Y,
+без downsampling. L9 даёт более поздний и меньший ответ, не доказательство Exact.
+160/160 packet JSON semantic-equal между workers, но0/160 byte-equal из-за
+форматирования;160 CSV byte-equal не подменяются этим сравнением.
+
+Normal gate39+28 завершился, но последующая проверка нашла Bin worktree alias
+и отсутствие tracked files в запрошенном Elder Bin. Старый HEAD/status manifest
+не подтверждает физическое Bin дерево. Primary сохранены commit
+df9f3aff210b44191d7053a19ed9e3327f0904ff с ограничением provenance. После
+адресного repair выполнен strict source_closure и начат отдельный gate67
+на том же frozen runtime. ASan kernel39 прошёл; native attempt7200s завершил
+четыре NativeBoundedTraining cases, затем timeout в NativeModelEditor.
+Timeout/missing-XML launcher exception сохранены commit
+0608878fa3570698fa53571c66fdddcd7e59d8c2. Remaining24 cases проверяются отдельно
+на том же runtime с budget14400s. Scoped acceptance и merge children-first
+остаются открытыми. Repair не является ретроспективной проверкой прошлых ресурсов.
