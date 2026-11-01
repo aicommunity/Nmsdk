@@ -948,3 +948,11 @@ PulseLib develop merge
 Подэтап принят, полный stage7 остаётся открытым.
 Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
 
+
+Последний проверенный срез loaded-learner a4: normal math10/10, native32/32,
+regression21/21, reader16/16; ASan math10/10 и native32/32, regression ещё идёт.
+Сжатая текущая normal primary-публикация c794e3cbf11c920d8fae5bb86dddd6f91bbceb17
+(336 файлов,388052 bytes). Графики68 case/soma pairs строятся на M40;
+визуальная приёмка ещё не выполнена. Это отдельный незавершённый подэтап,
+без scientific selectivity verdict. Детали и точные источники:
+[LoadedLearnerReadout.ru.md](LoadedLearnerReadout.ru.md).

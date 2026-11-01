@@ -132,3 +132,36 @@ normal10/10, исходный ASan остановился на минималь�
 в отдельных runtime a4 на обоих workers. Их процессы, источники и runtime
 до завершения не обновляются. Сжатая публикация этих промежуточных/итоговых
 артефактов и временные рисунки остаются обязательными незавершёнными действиями.
+
+## Повторная проверка a4: текущий подтверждённый срез
+
+Источник всех новых native запусков — root
+`e1b7624749d370631b8f44552e6b99a679a2d2e5`, PulseLib
+`92241d3ded3d3d21e3090c753686d5e7c203f721`, Rdk
+`1699d365b9e02af4cf0a6327297328e8d3bd04ea`.
+На Elder завершены production MDMatrix10/10, serialized learner32/32 и
+regression21/21, без skipped. Production reader16/16 проверил все32 conditions
+и68 case/soma pairs, включая полную проекцию параметров/графа/связей/частот.
+Все32 roundtrip.csv a3 и a4 побайтово равны; equivalence record сохранён.
+
+Сжатая primary-публикация commit
+`c794e3cbf11c920d8fae5bb86dddd6f91bbceb17`:
+`Reports/StructTrain/TimeLearner/s04-loaded-readout-current-normal-a1`.
+Проверены внешний SHA256 и каждый из336 членов архива (388052 bytes).
+Промежуточные ошибки a1/a2/a3 и исходные ASan stacks сохранены отдельно в
+matrix-diagnostics-normal/asan-a1, а не заменены успешной попыткой.
+
+На M40 a4 завершил MDMatrix10/10 и native32/32; регрессия ещё выполняется.
+Состояние проверено по живому supervisor739700/start_ticks261493480 и текущему
+stdout дочернего теста. ASan whole-run acceptance пока не заявлена.
+
+Первый renderer завершился до создания отчёта: системный python3 не имел
+Matplotlib. Следующая попытка использует существующее изолированное окружение
+plot-venv-a1 (Matplotlib3.9.4), PID762923/start_ticks261647938. Полный cache:
+`/media/user/Data/TimeLearnerRefactor/reports-loaded-readout-normal-a3`.
+Это графики source/loaded characterization с фактическими входными импульсами,
+а не классификационный Test; результаты обучения и LT events не выдумываются.
+Завершение render, визуальная проверка выбранных изображений, их компактная
+публикация и итоговая совместная приёмка остаются открытыми. Общие stages4/11
+и цель0–12 не завершены; hot State/reset, остальные profiles и полная матрица
+требуют отдельных проверок.
