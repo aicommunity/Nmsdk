@@ -1,0 +1,3 @@
+# Native measured length cold A/B: normal
+
+Eight completed real cold Train runs: Classic/Branch x N0/N1 x baseline/current at 2000 Hz,2 inputs, ISI .01/.08. Identical jobs, initial graphs, captured per-input references and original tolerances. New controller measures L9 after2/3/4; old nearest mesh stays at2/3/4/5 (N1 also6). Fixed Ns/Rs isolate the timing proposal; all runs retain honest search_unresolved outcomes and fresh negative all-input certificates. Includes the preceding generator progress-schema failure before any model run. Four actual-template generator checks pass. Full native regression, ASan and temporal acceptance pending; no classification claim.
