@@ -488,3 +488,11 @@ N0/N1 полная алгоритмическая/physics matrix, historical rep
 Test, полная scripts migration, scheduler/publisher и оставшаяся документация
 по-прежнему обязательны. Все4 full models дают SearchUnresolved и silent
 target; научный PASS не установлен. СерияD не возобновлялась.
+
+Scoped live pipeline root включён --no-ff в develop
+1d4822af22e05b741e4a1c779cf99ba05cb0a1fa и опубликован; ls-remote проверен.
+Gitlinks PulseLibf23d1b8d/Bin49adcd02/Rdk027f7f83 совпадают с опубликованными
+child develop heads. Новый algorithm substage — codex/timelearner-n0-candidate-order.
+[N0 hypothesis и gates](N0CandidateOrdering.ru.md): сначала воспроизведение
+ограничения перебора на unchanged production kernel, затем измеряемое изменение
+порядка кандидатов. Full-stage7 и физическая N0 матрица пока не приняты.

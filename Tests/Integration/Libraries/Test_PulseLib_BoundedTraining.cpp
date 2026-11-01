@@ -410,3 +410,32 @@ TEST(BoundedTraining, ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments)
     EXPECT_EQ(session.Certificate()->Residuals().size(),4u);
 }
 }
+
+namespace {
+void JointN0Candidate(ProbeRouting routing)
+{
+    const auto p=Protocol(2,routing);auto cfg=Configuration();
+    cfg.maximumCandidatesPerInput=3;
+    cfg.bounds={{1,20,1,2,1.,100.},{1,1,1,1,1.,100.}};
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+    DriveTraining(session,p,[](const TrainingAction& action,auto& delay,auto& raw) {
+        const auto& input=action.parameters[0];
+        // Controlled response oracle, not a physical-neuron experiment:
+        // L=2 has valid measured timing, and Ns=2 restores the captured raw
+        // amplitude. Other lengths cannot synchronize at this small budget.
+        delay[0]=input.length==2?.13:.03;
+        if(input.synapses!=2)raw[0]+=.002;
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::Exact);
+    ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    EXPECT_EQ(session.Parameters()[0],(InputParameters{2,2,10.}));
+    EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+    EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e) {
+        return e.parameters.length==2 && e.parameters.synapses==2 && e.withinTiming && e.withinAmplitude;
+    }));
+}
+}
+TEST(BoundedTrainingN0Candidates, ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths)
+{JointN0Candidate(ProbeRouting::ClassicBurst);}
+TEST(BoundedTrainingN0Candidates, BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths)
+{JointN0Candidate(ProbeRouting::BranchSoloBurst);}
