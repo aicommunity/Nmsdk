@@ -101,6 +101,12 @@ def compact_tick_log(source, destination, *, delete_original=False, maximum_arch
         if last != footer or restored_lines != line_count or next_byte != identity[2] or repeats != groups:
             raise RuntimeError("incomplete diagnostic summary")
     if not collapsed:
+        # No information was reduced: retain the original and discard only
+        # this invocation's completed scratch copy, after checking it again.
+        _unused(source)
+        if _identity(source) != identity:
+            raise RuntimeError("source changed before scratch cleanup; original retained")
+        temporary.unlink()
         raise RuntimeError("no redundant tick messages; original retained")
     os.replace(temporary, destination)
     _unused(source)
