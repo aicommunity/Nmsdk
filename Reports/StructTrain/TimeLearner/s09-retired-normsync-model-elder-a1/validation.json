@@ -1,0 +1,387 @@
+{
+  "kind": "historical_script_retirement_verification",
+  "schema_version": 1,
+  "source": "a04491f47a7d301762be7f8e511968362ccdbcea",
+  "retrieval_records": [
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/build_full49_20261010.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "f7ce46ecf08112ff517f1cb6fb9266b03fe07e76",
+      "sha256": "9641f67484364c65b5eebf1d3d23006fa2190e16dc54ac04c8af9856c190d7b5",
+      "bytes": 831,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_full49_after_rs_20261010T064000Z.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "bcebfc818d176fc8e213a35a0cac57caabd3ca7c",
+      "sha256": "d064a567ab07740a5a4c58ad6f0c38df4d0e26e2ef48b7456045b25514e83940",
+      "bytes": 1806,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/monitor_full49_after_rs_20261010T064000Z.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "afe5f7d65d1a8ced9a848577be64d47caaff2fdb",
+      "sha256": "078cc4d4881fb9989c4bcc51a83b67c9d6b0a6ca97e5e05bc92ca7571427da1d",
+      "bytes": 1018,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_S3_retest_after_softcold_fix.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "5e88b4312b4fc628079775deda4aed0f74aed6c2",
+      "sha256": "a5be26a40d082cad00cdfaa9210b4146412876a5457464139cc5c4ff40d28fe0",
+      "bytes": 1352,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_S3cd_tails.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "b3811db6b84035fa11c2eff3882b71a5b03cc64c",
+      "sha256": "d227939f4791e7e84bdb9db2f9dc8219136480742485927a2e3a644d9743844b",
+      "bytes": 2034,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_phase2_queue.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "b027b02e03743d50d2c034d08225f7f9ddc6d038",
+      "sha256": "ab2b961a78fca5a349e995028faa9e9630e7d4282e648a7e673293bebcd47739",
+      "bytes": 1378,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/run_phase5_defer.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "bb76b4a3d353e9a3d69d91aec4c42d2f79436ab1",
+      "sha256": "b525789152eef1c3bf4ba143570c88710adfbec699bcacfa9e90133168f1370b",
+      "bytes": 1500,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "7d688df2d9150b81b5ed8846a9ad06aabcc5b923",
+      "sha256": "63076d83d15115ad1852ba8cf25b62711f5214437436b2073c077bee6cf29ca7",
+      "bytes": 1986,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/INH_GRID_LAUNCH_CASES.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "46370404ce7fa0ec71b0396845a87a5e6be0130e",
+      "sha256": "00393e13a83862a89d935417547eee1b501844e6c5eca3543d9b4d0f62470968",
+      "bytes": 2466,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_loop.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "06b9b2a8b6edc6da1588d147379d7f35802e1fc8",
+      "sha256": "1324650d9e0c725c7f5a87e24c99aa957649ffaffd81388585247d326e81e938",
+      "bytes": 1636,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/inh_grid_logs/monitor_diskstop_rerun.sh",
+      "archive_commit": "b62127538694a3442771598420fd78fa7e405c8b",
+      "blob": "6cfdbe25b280874a034cd7555fbc775df8bb9138",
+      "sha256": "7079b0630d9ac27d9b0ef09d555951c113ed8dffa6a74c00b8325370615849ff",
+      "bytes": 2975,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cpu_gate.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "a396b8d848aec47a8f3677abaed7f74d6f5d3900",
+      "sha256": "7031343c77e6ed75b1dd900b4d340817203e439d2bebdfb0c4f73cd115152150",
+      "bytes": 1057,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/find_root_for_pulselib.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "f0c9a196d7efe50f74d55a612b257cfdf548fb6c",
+      "sha256": "2b0735611312bb5c3e70727dd06e2c4f556020c0bd5c5ee4b4e5535d14773995",
+      "bytes": 720,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/launch_queue.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "782a388f2af3d8c65390a3b3566bf5a821f04baa",
+      "sha256": "6a17e8d9e0c71975f80f1b8320a3f89226d13ed87463fc7c6734f796bdc84b99",
+      "bytes": 2339,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/make_lane.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "3406345d3224c72abf777fd9367922b596c96432",
+      "sha256": "e75378b5e99465f688610e68945bae29cb372abda5ea1b882d802b71a78e97f8",
+      "bytes": 1645,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/provenance.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "8fa9bd3930f7db4fc3e89c0fb2d1f1500f3a942d",
+      "sha256": "9280c01fc91eca838eccc77e725f0cc68b500c542978ab9310e68b75181bb795",
+      "bytes": 1509,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/refresh_waves.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "072313452658377bf8e30cc67511588d1ae2480d",
+      "sha256": "3ad0a532d300471d58aa7da886fab922ef248fd8688c0d8f5f6724b1271a10b6",
+      "bytes": 1867,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "96375d2e8bcce647fda7511b6d24d2f9b4052111",
+      "sha256": "b914ddb3f7c980fd498e48537ee3bc3833cd0b3f115c6e6bb31d765285a554d6",
+      "bytes": 1666,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/wait_run.sh",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "blob": "cd69b295d56df368fd99d9425018c9e40cec4eb2",
+      "sha256": "7feccc2eb09dc7866651184c225b658343e2facb3098d8a1d3556088156abe72",
+      "bytes": 1342,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/archive_nmsdk_journals.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "1b505988a29bc69ae9d65d60e1d074ca2388f911",
+      "sha256": "38652f8126f885939ae3b204d647b054e64129434cd16f1d0fe141712982b8eb",
+      "bytes": 8185,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/disk_watch_offload.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "7565de3ea8ebddd9dce75f87661e9e3d5f611810",
+      "sha256": "0b0670cd62aac3017551ff1430d5ebec030b691b4ba97a6b9f680e8feb857a53",
+      "bytes": 3245,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e05_dispatch.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "2b126ebf5bda88852c4458db9c167b66709767d1",
+      "sha256": "7df505c1e946a04a960015334ee705a5b5580d202839bf4f1500c48d4912a4d7",
+      "bytes": 5092,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/r0_branch_nextseg_replay.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "2d9e609d0b432df90537bc8e4d7be2b1ccf4b735",
+      "sha256": "65c768e0b89e86f8fb37787cb2318ef0cdc22c5f919f231b022fc9a60e0ddf10",
+      "bytes": 4804,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/repass_sweep.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "e9d0a4efaa74b3b2791c805d21f8cb8a8d13538a",
+      "sha256": "61cc312256d372c419907d7d922d96f16e08538a8a33e3944661ad6e988927f1",
+      "bytes": 1501,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w0_br25_seed_jitter_launch.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "16335464244c482ee0338e658c254a7bf3a1db87",
+      "sha256": "52896034f168c99e62bb8f86c581361d5f7af6012f569c3b91b2b89af9176000",
+      "bytes": 3325,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w0_br25_test_tipr_jitter.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "2f94d55df7d3ae07c2d018ffc480615c0de5976d",
+      "sha256": "334bb8dbeae487bfea4c7a469e30fcf86770001ba2477c432fbbf303bb05ed65",
+      "bytes": 7337,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w1w2_sim_launch.sh",
+      "archive_commit": "8e4448ea2e055e8f4edb4c33fe2ad523a5467de9",
+      "blob": "33dccb143b5f0a75062d464471f3cab715ca7003",
+      "sha256": "348adb1642e186c371730d133d5ba25c25b42a17717b876eaef64406e81ccff5",
+      "bytes": 4212,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsr.py",
+      "archive_commit": "044c76d1b1cbe35b2747285ef296ac22afe976ce",
+      "blob": "f257c2c42717c90f1936c55cb3069bde534ad986",
+      "sha256": "a974fb5b7b19ac50abb053d6c3e44fe151d9cb8c39d5ca815033dd963310370d",
+      "bytes": 2137,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsc.py",
+      "archive_commit": "044c76d1b1cbe35b2747285ef296ac22afe976ce",
+      "blob": "9b2906d0403d7eae07b04122638a9f5faf2d5d37",
+      "sha256": "7b5aec93991511431fd19804b80701b4373fea2825e2efa822e3f58dca88c07e",
+      "bytes": 1157,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/ns_readback.py",
+      "archive_commit": "044c76d1b1cbe35b2747285ef296ac22afe976ce",
+      "blob": "a4a6c32ececd0c023e00f847b4a2fee5a7fd7261",
+      "sha256": "386a045dcd5bbf7eb680cb95970d999b6c54cc135f8b22eb92e8b6712add2f3e",
+      "bytes": 2244,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/aggregate.py",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "blob": "1fff2744b1eb35bd1c4f5103e40bcc6835c3c213",
+      "sha256": "1eb4d49eee0a71bf6581f41122bda614f53434017a4ca8862070389a0a52665c",
+      "bytes": 1219,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/normsync_audit.py",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "blob": "5adff407c5989010921b3554d0af6218ff6545ae",
+      "sha256": "a3f5043df4a3a0bceb153664247f3a62a587c689a12d11680f04eec42aebbb3b",
+      "bytes": 4409,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/model.py",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "blob": "10c12a918e1f17a1ae025e7ccfbbad5a52aac6a5",
+      "sha256": "7d462a75f6653bee76b5e14824e656e424794accbb331aa61d087d2f4617a74e",
+      "bytes": 2442,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/rs_delay_sim.py",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "blob": "3ebaa00d45f731750647a9ecfef451e19e01524b",
+      "sha256": "16e157e8f395ca8bae9df059b7c0ce8e40748546ba75b02da5dfd7a7e59a6bfd",
+      "bytes": 946,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/window_shift_sim.py",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "blob": "617b43642a9b5292e29f5f4146ee409e1a6a8012",
+      "sha256": "3a69330ae3e1158c716e5bc6f05f5b51d9d95719f157c80f465ef6f65d2cb692",
+      "bytes": 3413,
+      "absent_current": true,
+      "retrieval_verified": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/segsim.c",
+      "archive_commit": "970fde1a0b13cf4d29b1c19659d423dd9899ebfe",
+      "blob": "c056db75d73eb03a63c2d2e76810b5735838b47e",
+      "sha256": "678bdad3fd95eecf3de66f4601df65621c95cb2dce0fe933d7d10e53dfec77fc",
+      "bytes": 2949,
+      "absent_current": true,
+      "retrieval_verified": true
+    }
+  ],
+  "retired_count": 36,
+  "normsync_nonexecutables_preserved": [
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/rs_delay_sim.json",
+      "sha256": "7ccc8cff13cc6a8f7b47b1cb37bc57871cc2b26d27a11ecefffe01503b53178c",
+      "bytes": 5173,
+      "unchanged": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/runs_e05.json",
+      "sha256": "c3bcdddcd4c5e9fe27cbd5d13bab469ec7d27d9eb90f2dc8c31e76d69a663faa",
+      "bytes": 25153,
+      "unchanged": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/window_shift_sim_n0like.json",
+      "sha256": "a26691922e5dc4909f7bb864d648612016853667afdfbf33199d2722028cb94d",
+      "bytes": 2846,
+      "unchanged": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/window_shift_sim_n1big.json",
+      "sha256": "74c09ffe561486e4d4ccda151a5c36f2dc364535d015007dc566b6ed6201a52f",
+      "bytes": 2942,
+      "unchanged": true
+    },
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/window_shift_sim_n1huge.json",
+      "sha256": "e36de98a73ae350b8c5abaa79902b94e38543547f0f862243c98a323376ae62c",
+      "bytes": 2942,
+      "unchanged": true
+    }
+  ],
+  "active_caller_search": {
+    "argv": [
+      "grep",
+      "-n",
+      "-E",
+      "normsync_audit|rs_delay_sim\\.py|window_shift_sim\\.py|normsync/(aggregate\\.py|model\\.py|segsim)",
+      "a04491f47a7d301762be7f8e511968362ccdbcea",
+      "--",
+      "Scripts",
+      "Tests",
+      "App",
+      "Apps",
+      "CMakeLists.txt"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "",
+    "scope": "literal names and normsync-relative paths in root production sources only; no claim about arbitrary dynamically generated external callers"
+  },
+  "worktree_head_unchanged": "688e6bb78b7a93d68fb68f53073d8cca1e76c093",
+  "builds_or_numerical_tests_run": false,
+  "complete_stage9": false,
+  "scientific_verdict": null
+}
