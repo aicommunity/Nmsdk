@@ -11,6 +11,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_Observations.cpp
     Test_PulseLib_LifecycleContracts.cpp
     Test_PulseLib_HotReadoutReset.cpp
+    Test_PulseLib_LoadedLearnerReadout.cpp
     Test_PulseLib_ModelInspection.cpp
     Test_PulseLib_ModelRoundtrip.cpp
     Test_PulseLib_ClassImages.cpp
