@@ -798,3 +798,22 @@ reader 2/2. ASan proposal control и полная временная приём�
 Это не успешная классификация и не закрытие полной матрицы этапов 3–8.
 
 Уточнение: ASan proposal control завершён, оба случая подтверждены reader 2/2; proof db3211020d6e2695ec2a5768d417ebbc855cbc8f. В работе остаётся temporal/visual приёмка нового подэтапа.
+
+Итог temporal приёмки native-dimension-controls: 16 dimension reports /568
+trial-soma pairs и 2 physical N0 proposal reports /42 pairs; temporal checks
+3/3 для каждого dimension attempt и proposal набора. Дополнительно baseline
+production report reader 3/3. Все 20 выбранных PNG1920×960 прямо просмотрены,
+включая пятый soma channel и формы реальных L/Ns кандидатов; full cache manual
+review не заявлен. Shared normal/ASan plots обоснованы 252 canonical-equal JSON
+packet / byte-equal CSV pairs при отдельных runtime manifests. Proof438a11cae58cd307f6729fbbdb012f8c6ef8e264,
+Reports/StructTrain/TimeLearner/s07-native-controls-visual-a1; selected QA записана
+отдельно в SELECTED_VISUAL_REVIEW.json. Этот адресный подэтап готов к merge.
+
+Отдельно начато исправление N1 finite-mesh resolution: исходный real normal
+контроль имеет measured sign bracket и минимальную ошибку4.7358625548610256e-5
+при tolerance1e-5. Baseline proof12f39119a3eacc843441db2cbae58b0a5ad560e4 опубликован
+в отдельной ветке. Реализация measured resistance refinement изолирована в
+codex/timelearner-n1-measured-refinement (root e19a303f2d9252a5179ad0f457593e48c0c35fd1,
+PulseLib bf50ae57512ff0a1591937f4f23cef172a8928dc); новые normal/ASan сборки
+выполняются. Эта реализация ещё не прошла серверную приёмку и не находится
+в develop; успешная физическая сходимость и классификация не заявлены.
