@@ -1,0 +1,1915 @@
+{
+  "kind": "timelearner_search_parameter_contract_review",
+  "schema_version": 1,
+  "source_commits": {
+    "root": "fbc523a9d9fb226cf9a4834206fe17fdcd407185",
+    "PulseLib": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+    "Rdk": "0a1c1d05a1b12de20feabf54a25712e210865791"
+  },
+  "scope": "18 additional property source reviews, distinct from the original ten-control snapshot; no new runtime acceptance",
+  "records": [
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "StructureBuildMode",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 1,
+      "units": "enum",
+      "allowed_values": "Contract0/1; legacy setter itself accepts every int.",
+      "owner": "learner structure policy; distinct from nested neuron StructureBuildMode0/1/2",
+      "setter_behavior": "For any value>0 set Ready=false; accept zero and negative values without invalidation. No range or active-training check in this setter.",
+      "legacy_effect": "ABuild calls BuildStructure only for exactly1.0 uses the supplied graph; other accepted values must not be treated as supported modes.",
+      "native_effect": "Configured V2 uses model.preserve_allocated_cable. With explicit native ownership before a declaration, StructureBuildMode==0 seeds the preserve policy; an existing declaration owns subsequent edits.",
+      "reset_effect": "Reset does not restore this property to1; native resets retain learned graph.",
+      "risk": "Contract validity must be checked before using this as an experimental factor; accepted setter int is not proof of support.",
+      "setter_name": "SetStructureBuildMode",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 54,
+          "line_text": " UProperty<int, NNeuronTimeLearner, ptPubParameter> StructureBuildMode;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2413,
+          "line_text": " StructureBuildMode(\"StructureBuildMode\",this,&NNeuronTimeLearner::SetStructureBuildMode),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3789,
+          "line_text": " StructureBuildMode = 1;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2602,
+          "line_text": "bool NNeuronTimeLearner::SetStructureBuildMode(const int &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/NativeModelOwner.h",
+          "blob": "5f0816a39194e2bcbf2edd9dfb32853e871afca9",
+          "line": 7,
+          "line_text": "template<class Owner> NativeEditSpec NativeOwnerEditSpec(Owner& owner,const std::optional<NativeModelSpec>& declaration,",
+          "role": "native_edit_policy"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "MaxDendriteLength",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 100,
+      "units": "segments",
+      "allowed_values": "Integer>=1 before native declaration; exact declared maximum afterward.",
+      "owner": "topology edit policy",
+      "setter_behavior": "If a native declaration exists accept only its maximumCableLength. Otherwise reject<1 and immediately clamp/rebuild affected legacy geometry, including neuron Reset.",
+      "legacy_effect": "Classic clamps available dendrites and restores tip synapses/connections. Branch skips last reference input and rebuilds shared chain from attach positions. Not a passive numerical search bound.",
+      "native_effect": "Mirrored from model.maximum_cable_length; validated against immutable native declaration. Per-input search.maximum_length must fit the model bound.",
+      "reset_effect": "Does not return to100; individual trained lengths are separate model state.",
+      "risk": "Do not change mid-probe. Branch and Classic setter side effects are different and need topology-specific runtime controls.",
+      "setter_name": "SetMaxDendriteLength",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 81,
+          "line_text": " UProperty<int, NNeuronTimeLearner, ptPubParameter> MaxDendriteLength;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2422,
+          "line_text": " MaxDendriteLength(\"MaxDendriteLength\",this,&NNeuronTimeLearner::SetMaxDendriteLength),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3805,
+          "line_text": " MaxDendriteLength = 100;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2905,
+          "line_text": "bool NNeuronTimeLearner::SetMaxDendriteLength(const int &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/NativeModelOwner.h",
+          "blob": "5f0816a39194e2bcbf2edd9dfb32853e871afca9",
+          "line": 7,
+          "line_text": "template<class Owner> NativeEditSpec NativeOwnerEditSpec(Owner& owner,const std::optional<NativeModelSpec>& declaration,",
+          "role": "native_edit_policy"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "NormalizationMode",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 1,
+      "units": "enum",
+      "allowed_values": [
+        0,
+        1
+      ],
+      "owner": "model normalization policy:0 SynapseCount,1 TipResistance",
+      "setter_behavior": "With native declaration accept only declared mode. Otherwise reject other ints; N0 clears derived resistance bound readouts. N1 reads all effective tips only if every tip resolves positive, then enforces parametric synapse count.",
+      "legacy_effect": "Changes amplitude normalization mechanism; selecting N1 can change synapse multiplicity and synchronize tip Rs. Does not itself mark Ready=false.",
+      "native_effect": "Mirrored from model.normalization; search.normalization must agree. Native declaration prevents live algorithm switching through this property.",
+      "reset_effect": "Reset preserves selected mode; Default selects N1.",
+      "risk": "Identical outcomes do not imply factor failure; verify actual Ns/Rs edits and declared normalization.",
+      "setter_name": "SetNormalizationMode",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 159,
+          "line_text": " UProperty<int, NNeuronTimeLearner, ptPubParameter> NormalizationMode;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2447,
+          "line_text": " NormalizationMode(\"NormalizationMode\", this, &NNeuronTimeLearner::SetNormalizationMode),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3844,
+          "line_text": " NormalizationMode = kNormParametric;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3077,
+          "line_text": "bool NNeuronTimeLearner::SetNormalizationMode(const int &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/NativeModelOwner.h",
+          "blob": "5f0816a39194e2bcbf2edd9dfb32853e871afca9",
+          "line": 7,
+          "line_text": "template<class Owner> NativeEditSpec NativeOwnerEditSpec(Owner& owner,const std::optional<NativeModelSpec>& declaration,",
+          "role": "native_edit_policy"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "SyncTolerance",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.02,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only, allows0 and does not explicitly reject NaN/+Inf.",
+      "owner": "legacy timing acceptance; V2 search.tolerances.sync has separate ownership",
+      "setter_behavior": "Reject negative value; no Ready invalidation, finite check, revision invalidation or active-probe guard.",
+      "legacy_effect": "Used in synchronization decisions, peak agreement margins and legacy best-effort gates; original default remains0.02 seconds.",
+      "native_effect": "Configured V2 uses search.tolerances.sync parsed as finite>=0, not this legacy property. Explicit native training likewise receives tolerances in its plan.",
+      "reset_effect": "Reset preserves tolerance; no automatic conversion to a timestep or percentage.",
+      "risk": "Sweeping this legacy property alone does not change configured V2 tolerance. Finite validation gap is source-confirmed; production reachability through parsers has not been measured.",
+      "setter_name": "SetSyncTolerance",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 294,
+          "line_text": " UProperty<double, NNeuronTimeLearner, ptPubParameter> SyncTolerance;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2490,
+          "line_text": " SyncTolerance(\"SyncTolerance\", this, &NNeuronTimeLearner::SetSyncTolerance),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3809,
+          "line_text": " SyncTolerance = 0.02;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3275,
+          "line_text": "bool NNeuronTimeLearner::SetSyncTolerance(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "PeakMeasureMargin",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.06,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only; finite validation absent.",
+      "owner": "legacy predicted-peak search half-window",
+      "setter_behavior": "Reject negative value; no Ready/revision/active-probe guard.",
+      "legacy_effect": "Half-width around predicted legacy arrival. Does not establish that an actual peak exists.",
+      "native_effect": "V2 probe windows come from ControllerConfiguration.windows; peak_selection is explicit. This property is not the V2 window owner.",
+      "reset_effect": "Reset preserves value; Default0.06.",
+      "risk": "Do not infer a valid measured peak from a predicted time or window. No new runtime acceptance of this property.",
+      "setter_name": "SetPeakMeasureMargin",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 297,
+          "line_text": " UProperty<double, NNeuronTimeLearner, ptPubParameter> PeakMeasureMargin;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2491,
+          "line_text": " PeakMeasureMargin(\"PeakMeasureMargin\", this, &NNeuronTimeLearner::SetPeakMeasureMargin),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3810,
+          "line_text": " PeakMeasureMargin = 0.06;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3283,
+          "line_text": "bool NNeuronTimeLearner::SetPeakMeasureMargin(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "DelayAgreeMarginMin",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.03,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only; finite validation absent.",
+      "owner": "legacy DelayUseOf agreement floor",
+      "setter_behavior": "Reject negative value; no Ready/revision/active-probe guard.",
+      "legacy_effect": "Agreement margin uses max(SyncTolerance,DelayAgreeMarginMin) in legacy peak/delay selection.",
+      "native_effect": "Not an input to MakeConfiguredNativeTrainingPlan; V2 uses completed observations and explicit windows/tolerances.",
+      "reset_effect": "Reset preserves value; Default0.03.",
+      "risk": "Legacy factor only; current source review does not prove all peak-assignment edge cases.",
+      "setter_name": "SetDelayAgreeMarginMin",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 300,
+          "line_text": " UProperty<double, NNeuronTimeLearner, ptPubParameter> DelayAgreeMarginMin;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2492,
+          "line_text": " DelayAgreeMarginMin(\"DelayAgreeMarginMin\", this, &NNeuronTimeLearner::SetDelayAgreeMarginMin),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3811,
+          "line_text": " DelayAgreeMarginMin = 0.03;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3291,
+          "line_text": " bool NNeuronTimeLearner::SetDelayAgreeMarginMin(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "IterationGap",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.5,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only; finite validation absent.",
+      "owner": "legacy burst scheduler floor, conditional on AutoScaleIterationGap",
+      "setter_behavior": "Reject negative value; no Ready invalidation or active-probe guard.",
+      "legacy_effect": "If AutoScaleIterationGap=true, configured floor is ignored by EffectiveIterationGapSec. Otherwise use max(configured positive value or0.5,PatternSpan+SettleMargin+kGapSlack). Also seeds invalid timing sentinels; not equivalent to Test ITI.",
+      "native_effect": "V2 completed probes and declared duration/reset policy control timing; this property does not declare V2 intertrial protocol.",
+      "reset_effect": "Preserved; reset uses it for legacy unmeasured error sentinel.",
+      "risk": "A sweep with AutoScale=true can leave the effective burst interval unchanged. Record actual onset timestamps, not the nominal floor.",
+      "setter_name": "SetIterationGap",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 288,
+          "line_text": " UProperty<double, NNeuronTimeLearner, ptPubParameter> IterationGap;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2488,
+          "line_text": " IterationGap(\"IterationGap\", this, &NNeuronTimeLearner::SetIterationGap),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3806,
+          "line_text": " IterationGap = 0.5;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3267,
+          "line_text": "bool NNeuronTimeLearner::SetIterationGap(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 138,
+          "line_text": "double NNeuronTimeLearner::EffectiveIterationGapSec() const",
+          "role": "effective_gap"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 148,
+          "line_text": "double NNeuronTimeLearner::EffectiveDatasetDelaySec() const",
+          "role": "effective_dataset_delay"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "AutoScaleIterationGap",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "bool",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": true,
+      "units": "boolean",
+      "allowed_values": [
+        false,
+        true
+      ],
+      "owner": "legacy effective burst and Dataset delay policy",
+      "setter_behavior": "Registered without component setter. Generic assignment itself does not rebuild, validate timing or invalidate observations.",
+      "legacy_effect": "True uses physical span+settle+slack and ignores configured IterationGap/Delay floors. False retains those floors. EffectiveDatasetDelaySec additionally has a1.55-second late-response lower bound.",
+      "native_effect": "Not an input to configured V2 plan; use declared probe timing and actual timestamps.",
+      "reset_effect": "Preserved; Defaulttrue.",
+      "risk": "Neither nominal Delay nor IterationGap alone proves the observed experiment ITI.",
+      "setter_name": null,
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 291,
+          "line_text": " UProperty<bool, NNeuronTimeLearner, ptPubParameter> AutoScaleIterationGap;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2489,
+          "line_text": " AutoScaleIterationGap(\"AutoScaleIterationGap\", this),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3807,
+          "line_text": " AutoScaleIterationGap = true;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 138,
+          "line_text": "double NNeuronTimeLearner::EffectiveIterationGapSec() const",
+          "role": "effective_gap"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 148,
+          "line_text": "double NNeuronTimeLearner::EffectiveDatasetDelaySec() const",
+          "role": "effective_dataset_delay"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "EstDelayPerSeg",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": 0.005,
+      "units": "seconds/segment",
+      "owner": "legacy delay estimate; not timing evidence",
+      "allowed_values": "Setter rejects<=0 but lacks finite validation.",
+      "setter_name": "SetEstDelayPerSeg",
+      "setter_behavior": "Reject<=0; no Ready/revision guard. Property itself is also updated by the legacy measured EMA.",
+      "legacy_effect": "Classic uses public EstDelayPerSeg as initial/adaptive value; ResizeSyncVectors explicitly preserves it and valid measured growth updates EMA0.7*old+0.3*observed.",
+      "native_effect": "Configured V2 plan does not read this estimate; bounded search uses its own measured candidates. Do not describe this property as an implemented V2 proposal policy.",
+      "reset_effect": "Do not claim identical seed/reset semantics across topologies. Model learned state and controller history are separate.",
+      "persistence": "Branch persists seed but private estimate is not this property; Classic persists the adaptive public value. Neither is a full controller checkpoint.",
+      "risk": "Predicted delay is never proof of synchronization; V2 informed proposal policy remains an open requirement.",
+      "pending": [
+        "Native fixtures for fresh/load/resize/same-size Reset and warm continuation at both frequencies."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+          "line": 303,
+          "line_text": " UProperty<double, NNeuronTimeLearner, ptPubParameter> EstDelayPerSeg;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 2493,
+          "line_text": " EstDelayPerSeg(\"EstDelayPerSeg\", this, &NNeuronTimeLearner::SetEstDelayPerSeg),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 164,
+          "line_text": "void NNeuronTimeLearner::ResizeSyncVectors(int n)",
+          "role": "resize_policy"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 5386,
+          "line_text": "   EstDelayPerSeg = 0.7 * est + 0.3 * observed;",
+          "role": "measured_adaptation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3299,
+          "line_text": " bool NNeuronTimeLearner::SetEstDelayPerSeg(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3812,
+          "line_text": " EstDelayPerSeg = kDelayPerSegDefault;",
+          "role": "default_expression"
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "StructureBuildMode",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 1,
+      "units": "enum",
+      "allowed_values": "Contract0/1; legacy setter itself accepts every int.",
+      "owner": "learner structure policy; distinct from nested neuron StructureBuildMode0/1/2",
+      "setter_behavior": "For any value>0 set Ready=false; accept zero and negative values without invalidation. No range or active-training check in this setter.",
+      "legacy_effect": "ABuild calls BuildStructure only for exactly1.0 uses the supplied graph; other accepted values must not be treated as supported modes.",
+      "native_effect": "Configured V2 uses model.preserve_allocated_cable. With explicit native ownership before a declaration, StructureBuildMode==0 seeds the preserve policy; an existing declaration owns subsequent edits.",
+      "reset_effect": "Reset does not restore this property to1; native resets retain learned graph.",
+      "risk": "Contract validity must be checked before using this as an experimental factor; accepted setter int is not proof of support.",
+      "setter_name": "SetStructureBuildMode",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 54,
+          "line_text": " UProperty<int, NNeuronTimeLearnerBranch, ptPubParameter> StructureBuildMode;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3163,
+          "line_text": " StructureBuildMode(\"StructureBuildMode\",this,&NNeuronTimeLearnerBranch::SetStructureBuildMode),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4519,
+          "line_text": " StructureBuildMode = 1;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3365,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetStructureBuildMode(const int &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/NativeModelOwner.h",
+          "blob": "5f0816a39194e2bcbf2edd9dfb32853e871afca9",
+          "line": 7,
+          "line_text": "template<class Owner> NativeEditSpec NativeOwnerEditSpec(Owner& owner,const std::optional<NativeModelSpec>& declaration,",
+          "role": "native_edit_policy"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "MaxDendriteLength",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 100,
+      "units": "segments",
+      "allowed_values": "Integer>=1 before native declaration; exact declared maximum afterward.",
+      "owner": "topology edit policy",
+      "setter_behavior": "If a native declaration exists accept only its maximumCableLength. Otherwise reject<1 and immediately clamp/rebuild affected legacy geometry, including neuron Reset.",
+      "legacy_effect": "Classic clamps available dendrites and restores tip synapses/connections. Branch skips last reference input and rebuilds shared chain from attach positions. Not a passive numerical search bound.",
+      "native_effect": "Mirrored from model.maximum_cable_length; validated against immutable native declaration. Per-input search.maximum_length must fit the model bound.",
+      "reset_effect": "Does not return to100; individual trained lengths are separate model state.",
+      "risk": "Do not change mid-probe. Branch and Classic setter side effects are different and need topology-specific runtime controls.",
+      "setter_name": "SetMaxDendriteLength",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 81,
+          "line_text": " UProperty<int, NNeuronTimeLearnerBranch, ptPubParameter> MaxDendriteLength;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3172,
+          "line_text": " MaxDendriteLength(\"MaxDendriteLength\",this,&NNeuronTimeLearnerBranch::SetMaxDendriteLength),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4554,
+          "line_text": " MaxDendriteLength = 100;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3677,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetMaxDendriteLength(const int &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/NativeModelOwner.h",
+          "blob": "5f0816a39194e2bcbf2edd9dfb32853e871afca9",
+          "line": 7,
+          "line_text": "template<class Owner> NativeEditSpec NativeOwnerEditSpec(Owner& owner,const std::optional<NativeModelSpec>& declaration,",
+          "role": "native_edit_policy"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "NormalizationMode",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 1,
+      "units": "enum",
+      "allowed_values": [
+        0,
+        1
+      ],
+      "owner": "model normalization policy:0 SynapseCount,1 TipResistance",
+      "setter_behavior": "With native declaration accept only declared mode. Otherwise reject other ints; N0 clears derived resistance bound readouts. N1 reads all effective tips only if every tip resolves positive, then enforces parametric synapse count.",
+      "legacy_effect": "Changes amplitude normalization mechanism; selecting N1 can change synapse multiplicity and synchronize tip Rs. Does not itself mark Ready=false.",
+      "native_effect": "Mirrored from model.normalization; search.normalization must agree. Native declaration prevents live algorithm switching through this property.",
+      "reset_effect": "Reset preserves selected mode; Default selects N1.",
+      "risk": "Identical outcomes do not imply factor failure; verify actual Ns/Rs edits and declared normalization.",
+      "setter_name": "SetNormalizationMode",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 159,
+          "line_text": " UProperty<int, NNeuronTimeLearnerBranch, ptPubParameter> NormalizationMode;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3197,
+          "line_text": " NormalizationMode(\"NormalizationMode\", this, &NNeuronTimeLearnerBranch::SetNormalizationMode),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4594,
+          "line_text": " NormalizationMode = kNormParametric;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3827,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetNormalizationMode(const int &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/NativeModelOwner.h",
+          "blob": "5f0816a39194e2bcbf2edd9dfb32853e871afca9",
+          "line": 7,
+          "line_text": "template<class Owner> NativeEditSpec NativeOwnerEditSpec(Owner& owner,const std::optional<NativeModelSpec>& declaration,",
+          "role": "native_edit_policy"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "SyncTolerance",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.02,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only, allows0 and does not explicitly reject NaN/+Inf.",
+      "owner": "legacy timing acceptance; V2 search.tolerances.sync has separate ownership",
+      "setter_behavior": "Reject negative value; no Ready invalidation, finite check, revision invalidation or active-probe guard.",
+      "legacy_effect": "Used in synchronization decisions, peak agreement margins and legacy best-effort gates; original default remains0.02 seconds.",
+      "native_effect": "Configured V2 uses search.tolerances.sync parsed as finite>=0, not this legacy property. Explicit native training likewise receives tolerances in its plan.",
+      "reset_effect": "Reset preserves tolerance; no automatic conversion to a timestep or percentage.",
+      "risk": "Sweeping this legacy property alone does not change configured V2 tolerance. Finite validation gap is source-confirmed; production reachability through parsers has not been measured.",
+      "setter_name": "SetSyncTolerance",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 237,
+          "line_text": " UProperty<double, NNeuronTimeLearnerBranch, ptPubParameter> SyncTolerance;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3222,
+          "line_text": " SyncTolerance(\"SyncTolerance\", this, &NNeuronTimeLearnerBranch::SetSyncTolerance),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4558,
+          "line_text": " SyncTolerance = 0.02;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4025,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetSyncTolerance(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "PeakMeasureMargin",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.06,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only; finite validation absent.",
+      "owner": "legacy predicted-peak search half-window",
+      "setter_behavior": "Reject negative value; no Ready/revision/active-probe guard.",
+      "legacy_effect": "Half-width around predicted legacy arrival. Does not establish that an actual peak exists.",
+      "native_effect": "V2 probe windows come from ControllerConfiguration.windows; peak_selection is explicit. This property is not the V2 window owner.",
+      "reset_effect": "Reset preserves value; Default0.06.",
+      "risk": "Do not infer a valid measured peak from a predicted time or window. No new runtime acceptance of this property.",
+      "setter_name": "SetPeakMeasureMargin",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 240,
+          "line_text": " UProperty<double, NNeuronTimeLearnerBranch, ptPubParameter> PeakMeasureMargin;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3223,
+          "line_text": " PeakMeasureMargin(\"PeakMeasureMargin\", this, &NNeuronTimeLearnerBranch::SetPeakMeasureMargin),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4559,
+          "line_text": " PeakMeasureMargin = 0.06;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4033,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetPeakMeasureMargin(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "DelayAgreeMarginMin",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.03,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only; finite validation absent.",
+      "owner": "legacy DelayUseOf agreement floor",
+      "setter_behavior": "Reject negative value; no Ready/revision/active-probe guard.",
+      "legacy_effect": "Agreement margin uses max(SyncTolerance,DelayAgreeMarginMin) in legacy peak/delay selection.",
+      "native_effect": "Not an input to MakeConfiguredNativeTrainingPlan; V2 uses completed observations and explicit windows/tolerances.",
+      "reset_effect": "Reset preserves value; Default0.03.",
+      "risk": "Legacy factor only; current source review does not prove all peak-assignment edge cases.",
+      "setter_name": "SetDelayAgreeMarginMin",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 243,
+          "line_text": " UProperty<double, NNeuronTimeLearnerBranch, ptPubParameter> DelayAgreeMarginMin;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3224,
+          "line_text": " DelayAgreeMarginMin(\"DelayAgreeMarginMin\", this, &NNeuronTimeLearnerBranch::SetDelayAgreeMarginMin),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4560,
+          "line_text": " DelayAgreeMarginMin = 0.03;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4041,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetDelayAgreeMarginMin(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "IterationGap",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": 0.5,
+      "units": "seconds",
+      "allowed_values": "Legacy setter rejects value<0 only; finite validation absent.",
+      "owner": "legacy burst scheduler floor, conditional on AutoScaleIterationGap",
+      "setter_behavior": "Reject negative value; no Ready invalidation or active-probe guard.",
+      "legacy_effect": "If AutoScaleIterationGap=true, configured floor is ignored by EffectiveIterationGapSec. Otherwise use max(configured positive value or0.5,PatternSpan+SettleMargin+kGapSlack). Also seeds invalid timing sentinels; not equivalent to Test ITI.",
+      "native_effect": "V2 completed probes and declared duration/reset policy control timing; this property does not declare V2 intertrial protocol.",
+      "reset_effect": "Preserved; reset uses it for legacy unmeasured error sentinel.",
+      "risk": "A sweep with AutoScale=true can leave the effective burst interval unchanged. Record actual onset timestamps, not the nominal floor.",
+      "setter_name": "SetIterationGap",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 231,
+          "line_text": " UProperty<double, NNeuronTimeLearnerBranch, ptPubParameter> IterationGap;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3220,
+          "line_text": " IterationGap(\"IterationGap\", this, &NNeuronTimeLearnerBranch::SetIterationGap),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4555,
+          "line_text": " IterationGap = 0.5;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4017,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetIterationGap(const double &value)",
+          "role": "setter_implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 155,
+          "line_text": "double NNeuronTimeLearnerBranch::EffectiveIterationGapSec() const",
+          "role": "effective_gap"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 165,
+          "line_text": "double NNeuronTimeLearnerBranch::EffectiveDatasetDelaySec() const",
+          "role": "effective_dataset_delay"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "AutoScaleIterationGap",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "bool",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "persistence": "Public parameter; no full learned-model or mid-probe checkpoint guarantee.",
+      "default": true,
+      "units": "boolean",
+      "allowed_values": [
+        false,
+        true
+      ],
+      "owner": "legacy effective burst and Dataset delay policy",
+      "setter_behavior": "Registered without component setter. Generic assignment itself does not rebuild, validate timing or invalidate observations.",
+      "legacy_effect": "True uses physical span+settle+slack and ignores configured IterationGap/Delay floors. False retains those floors. EffectiveDatasetDelaySec additionally has a1.55-second late-response lower bound.",
+      "native_effect": "Not an input to configured V2 plan; use declared probe timing and actual timestamps.",
+      "reset_effect": "Preserved; Defaulttrue.",
+      "risk": "Neither nominal Delay nor IterationGap alone proves the observed experiment ITI.",
+      "setter_name": null,
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 234,
+          "line_text": " UProperty<bool, NNeuronTimeLearnerBranch, ptPubParameter> AutoScaleIterationGap;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3221,
+          "line_text": " AutoScaleIterationGap(\"AutoScaleIterationGap\", this),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4556,
+          "line_text": " AutoScaleIterationGap = true;",
+          "role": "default_expression"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "reset_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "build_dispatch"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "native_plan_owner"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 155,
+          "line_text": "double NNeuronTimeLearnerBranch::EffectiveIterationGapSec() const",
+          "role": "effective_gap"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 165,
+          "line_text": "double NNeuronTimeLearnerBranch::EffectiveDatasetDelaySec() const",
+          "role": "effective_dataset_delay"
+        }
+      ],
+      "pending": [
+        "Property-specific native fixture for assignment/load/copy/connection/reset behavior; source review is not runtime acceptance.",
+        "Resolve stated risk and verify effective factor before including it in an experiment matrix."
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "InitEstDelayPerSeg",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "not_newly_verified",
+      "cpp_type": "double",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": 0.0,
+      "units": "seconds/segment",
+      "owner": "legacy delay estimate; not timing evidence",
+      "allowed_values": "Branch has no component setter; positive seed or fallback0.005 at ResizeSyncVectors.",
+      "setter_name": null,
+      "setter_behavior": "No local setter: generic property assignment alone does not update the private adaptive estimate.",
+      "legacy_effect": "Branch copies positive InitEstDelayPerSeg into private EstDelayPerSeg in ResizeSyncVectors, otherwise uses0.005; later measured EMA updates private value. Not necessarily reseeded on every same-size Reset.",
+      "native_effect": "Configured V2 plan does not read this estimate; bounded search uses its own measured candidates. Do not describe this property as an implemented V2 proposal policy.",
+      "reset_effect": "Do not claim identical seed/reset semantics across topologies. Model learned state and controller history are separate.",
+      "persistence": "Branch persists seed but private estimate is not this property; Classic persists the adaptive public value. Neither is a full controller checkpoint.",
+      "risk": "Predicted delay is never proof of synchronization; V2 informed proposal policy remains an open requirement.",
+      "pending": [
+        "Native fixtures for fresh/load/resize/same-size Reset and warm continuation at both frequencies."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "8028120133838a47fde2c9fe7804b51091381d21",
+          "line": 278,
+          "line_text": " UProperty<double, NNeuronTimeLearnerBranch, ptPubParameter> InitEstDelayPerSeg;",
+          "role": "declaration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 3233,
+          "line_text": " InitEstDelayPerSeg(\"InitEstDelayPerSeg\", this),",
+          "role": "registration"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 179,
+          "line_text": "void NNeuronTimeLearnerBranch::ResizeSyncVectors(int n)",
+          "role": "resize_policy"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 6295,
+          "line_text": "   EstDelayPerSeg = 0.7 * EstDelayPerSeg + 0.3 * observed;",
+          "role": "measured_adaptation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4523,
+          "line_text": " InitEstDelayPerSeg = 0.0;",
+          "role": "default_expression"
+        }
+      ]
+    }
+  ],
+  "common_source_evidence": [
+    {
+      "repository": "PulseLib",
+      "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+      "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+      "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+      "line": 127,
+      "line_text": "        Require(std::isfinite(value) && value>=0.,\"invalid_configured_native_tolerance\");",
+      "role": "strict_native_finite_tolerances"
+    },
+    {
+      "repository": "PulseLib",
+      "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+      "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+      "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+      "line": 222,
+      "line_text": "    c.search.tolerances={Number(t[\"amplitude_absolute\"]),Number(t[\"amplitude_relative\"]),Number(t[\"sync\"])};",
+      "role": "native_json_tolerance_source"
+    },
+    {
+      "repository": "PulseLib",
+      "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+      "path": "Core/TimeLearner/ConfiguredNativeOwner.h",
+      "blob": "30cc3c53b0a9e5b3eac33f19a7e8408b96f2608e",
+      "line": 7,
+      "line_text": "    auto c=ParseConfiguredNativeTraining(owner.ControllerConfiguration.GetData());",
+      "role": "configured_build_source"
+    }
+  ],
+  "open_issues": [
+    {
+      "id": "PARAM-NATIVE-FACTOR-001",
+      "status": "source_confirmed_runtime_verification_pending",
+      "description": "Legacy timing/window/gap/estimate properties are not the configured V2 owners. Production preflight must resolve the declared controller and parameter owner; mere property presence is insufficient.",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "blob": "e41e10eb5d4367973f534633e27160252f4ca597",
+          "line": 110,
+          "line_text": "NativeTrainingPlan MakeConfiguredNativeTrainingPlan(const ConfiguredNativeTraining& c)",
+          "role": "implementation"
+        }
+      ]
+    },
+    {
+      "id": "PARAM-FINITE-001",
+      "status": "source_confirmed_runtime_verification_pending",
+      "description": "Legacy scalar timing setters only compare signs; they do not explicitly reject NaN/+Inf. This is a source-confirmed validation gap, not a reproduced numerical failure or proof a specific XML parser admits nonfinite values.",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3275,
+          "line_text": "bool NNeuronTimeLearner::SetSyncTolerance(const double &value)",
+          "role": "implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4025,
+          "line_text": "bool NNeuronTimeLearnerBranch::SetSyncTolerance(const double &value)",
+          "role": "implementation"
+        }
+      ]
+    },
+    {
+      "id": "LIFECYCLE-BOOL-001",
+      "status": "source_confirmed_runtime_verification_pending",
+      "description": "Legacy ABuild and AReset still propagate false on some internal failures. This contradicts the approved always-true lifecycle contract. Preserve stop/diagnostics and scheduling when correcting it; do not mechanically replace false without a runtime negative control.",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 3965,
+          "line_text": "bool NNeuronTimeLearner::ABuild(void)",
+          "role": "implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4569,
+          "line_text": "bool NNeuronTimeLearner::AReset(void)",
+          "role": "implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4698,
+          "line_text": "bool NNeuronTimeLearnerBranch::ABuild(void)",
+          "role": "implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5340,
+          "line_text": "bool NNeuronTimeLearnerBranch::AReset(void)",
+          "role": "implementation"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4005,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4012,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4621,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "c3ba1d0060af0088805a131dcd07daefbc6f31db",
+          "line": 4641,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4740,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 4750,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5391,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "ecff5be9db166ca81f5c389b05c2dba2d2111652",
+          "line": 5411,
+          "line_text": "   return false;",
+          "role": "legacy_failure_return"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Full stages1/4/6/7/9 remain incomplete.",
+    "Source references identify real code, not runtime evidence; no numerical tests run for this documentation change.",
+    "Original source_inventory.json and control review retain their snapshots."
+  ]
+}
