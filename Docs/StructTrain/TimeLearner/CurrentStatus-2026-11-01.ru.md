@@ -417,3 +417,43 @@ develop11ce4cec, затем отдельная docs branch50f94f67 описал�
 опубликован. От runtime Bin97dd1943 отличается только LAYOUT.md; конфиги и
 ClDesc новой docs-веткой не менялись. Новый PulseLib/root feature ещё не
 объединяется в develop до завершения текущей scoped ASan/visual приёмки.
+
+## Production ASan завершён; normal visual принят адресно
+
+ASan producer PID89567 завершён status0:1 codec,14 operations и3/3 original
+reader checks без skips,1130.925 s (3 checks48.147 s). Runtime и codec-runtime
+before/after совпали. Complete reader PID100877 завершён0:4/4,50.040 s,
+490 source files неизменны, новых numeric runs0.
+[ASan proof](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-asan-a1/README.md)
+commit264c429974e9d97bb5d5277b1fc25c846fa80eda:521 members /206717468 raw
+bytes →1225484 compressed bytes,14 portable runs /446 artifact entries.
+Все outer/member hashes локально проверены после --no-ff merge. Источники
+root7ea85a503/Core019e5d1, reader9554c0e46; leak detection выключен.
+Все четыре frozen пары на ASan также TP0/FP0/FN1/TN1, совпадают model revisions
+b4102b582e31 Classic и797ed41bf05d Branch. Это не независимые научные повторы.
+
+Normal visual PID97885 завершён0:14 reports через production CLI,3/3 checks
+без skips,393.604 s (checks41.056 s),543 неизменённых source files.
+93 training и42 recognition trial-soma pairs; все declared complete patterns
+и soma channels, partial schema1/schema2 явно цензурированы. Cache4119 files /
+291766358bytes на M40 Data. Compact [visual proof](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-visual-normal-a1/README.md)
+commite6f5cd9669f05cf38be4674340bfad974f6495ca:272 metadata members /190348
+compressed bytes и10 PNG /1500834bytes; все hashes проверены.
+
+Все10 selected PNG непосредственно просмотрены1920×960: first-soma target/
+foil overview/first zoom Classic/Branch и2 one-tick partial Train overview.
+Легенды/подписи читаются, реальные inputs наложены, partial panels показывают
+единственную точку и censored region с valid=false/complete=false. Padded
+ordinate1e-12 в one-sample view является масштабом отображения, не точностью
+измерения. Нет утверждений о settling/ответе после конца окна или full-cache
+ручной приёмке. QA commit92de61b01a25901781e2b3d0f0693e7017066d26.
+
+ASan visual PID114561 выполняет собственные14 reports и3 checks на source
+proof264c42997, renderer9554c0e46. Численные фазы не повторяются. Publication
+и selected QA этого отдельного ASan cache ещё не завершены.
+
+Документы PulseLib a3235b77734f089a271619b44d4155bac48edd0c и Bin develop
+49adcd0208d0c8ab8d70e7cca47ae6e34b05145e направляют текущие acceptance scopes
+в единую корневую спецификацию. Core tree не изменился с019e5d1; Bin configs/
+ClDesc не менялись относительно фактически использованного97dd1943.
+Новая root/PulseLib feature ещё не принята в develop; полный план0–12 открыт.
