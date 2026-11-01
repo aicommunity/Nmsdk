@@ -123,6 +123,20 @@ QA, выбранные изображения и прямой визуальны
 Исправление Rdk2732a08 по-прежнему не принято в develop: остаются ASan XML,
 ASan schema1 producer/reader и визуальная приёмка. Полные этапы4/5/11 открыты.
 
+Temporal QA завершена: все262 PNG декодированы Pillow, проверены SHA256,
+1920×960, полный состав overview/100-tick views, shared/detail limits и
+маркировка физического выхода Soma2. Первый набор20 selected содержал8 shared
+input/peak tiles с почти плоской кривой на общем масштабе; в набор добавлены
+их8 готовых detail companions. Все28 выбранных оригиналов непосредственно
+просмотрены: фронт и кривизна пика разрешаются, source/import кривые совпадают
+визуально. Общий масштаб сохранён рядом для контекста.
+
+QA/selection proof23b7e17751e8db62ab12757cc9bfc90ee50ae2f8 содержит metadata
+23744 bytes xz и28 selected PNG; после Git retrieval проверены все hashes.
+Запись прямого просмотра: Reports/StructTrain/TimeLearner/s05-archive-f64-visual-a1/visual-review.json.
+Ручной просмотр полного262-image cache не заявляется. Новая schema1 ASan
+проверка выполняется отдельно; C++ XML32 предыдущего ASan уже завершены успешно.
+
 Проверки ещё не выполнены. Подэтап не принят; general archive/profile/growth
 матрица, все формы векторов/матриц и полный Train→Test остаются открытыми.
 Если native XML теряет значащие цифры, требуется сначала локализовать это
