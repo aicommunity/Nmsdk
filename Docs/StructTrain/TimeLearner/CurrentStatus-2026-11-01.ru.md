@@ -699,3 +699,23 @@ push и ls-remote проверены. Core64cdc352af865dc0e860ea05fb2c6d9799ccc3
 равен фактически проверенному c25db29. Bin49adcd02 и Rdk027f7f83 не менялись.
 Root feature фиксирует exact child link; root --no-ff merge следует после этой
 записи. Подэтап закрыт в указанной области, полный stage7/план0–12 открыт.
+
+
+Root N0 functional acceptance merge8394a028a65afaacbe72f1ce741f26b309c4e3b7
+опубликован в develop, ls-remote проверен. Closure PulseLib38edfcad/Bin49adcd02/
+Rdk027f7f83 точно совпадает с child remote commits. Предыдущий root-only
+parameter-control review c910ba84 включён. Все owned numeric/repeat/visual
+задания этого подэтапа терминальны; runtime в ходе исполнения не менялся.
+
+Следующая ветка codex/timelearner-n0-production создана от этого develop.
+Приёмка выше относится к Test_PulseLib_StorageComponents, а не к заново
+собранному Console. Перед production N0 pipeline требуется отдельно собрать
+NeuroModelerConsole с текущим Core в новом runtime и проверить его manifest.
+Старый Console из runtime прошлой live-N1 серии этим подэтапом не выдаётся за
+новую N0 сборку. Elder compiler object cache частично удалён только как
+воспроизводимый cache; следующие сборки должны учитывать свободный диск.
+
+Полные этапы1–12 не объявлены выполненными. Следующая работа расширяет
+production coverage и выявляет оставшиеся algorithm/mode/profile дефекты;
+она не возобновляет старую сериюD и не меняет CapturedPerInput или августовскую
+доказательность4/8–6/8. Получение8/8 не является условием инженерной приёмки.
