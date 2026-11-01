@@ -1004,10 +1004,11 @@ regression21/21, reader16/16; ASan math10/10 и native32/32, regression ещё �
 ## Дополнение: владельцы параметров поиска и времени
 
 [Проверены по исходникам ещё18 свойств](ParameterSearchContracts.ru.md) Classic/Branch
-на PulseLib70f467d3:153 source references в7 blobs. Это вместе с предыдущими10
+на PulseLib70f467d3 / Rdk0a1c1d05:155 source references в8 blobs. Это вместе с предыдущими10
 даёт28 source-reviewed записей разных снимков, а не28 runtime-принятых свойств.
 Уточнено, что V2 использует допуски/windows из ControllerConfiguration; legacy
 IterationGap при AutoScale=true не задаёт фактический интервал. Зафиксированы
 отсутствие явной finite-проверки в legacy timing setters и8 ветвей false в
-legacy ABuild/AReset. Для этих мест ещё нужны исправления и адресные negative
-runtime controls. Полные этапы1/4/6/7/9 остаются открытыми.
+legacy ABuild/AReset. Публичные Build/Reset Rdk уже возвращают true и игнорируют
+bool этих hooks; это остаточная согласованность реализации, а не доказанный
+отказ публичного bool. Для finite validation нужны адресные negative controls. Полные этапы1/4/6/7/9 остаются открытыми.
