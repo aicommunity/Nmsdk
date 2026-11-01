@@ -3,6 +3,11 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Additional authorized build-object cleanup: [Elder](s02-unused-build-objects-elder-20261101-a1/README.md)
+and [M40](s02-unused-build-objects-m40-20261101-a1/README.md).
+19358 unused object/dependency files removed (5319965370 logical bytes);
+current executable/ini/library hashes verified unchanged. Sources, test logs and primary data retained.
+
 Latest production N0 evidence:
 
 - [Normal primary: two protocols,28 operations,7 checks per protocol](s07-n0-production-worker-normal-a2/README.md).
