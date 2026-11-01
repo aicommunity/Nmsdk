@@ -1,0 +1,743 @@
+{
+  "kind": "calibrated_frozen_visual_evidence",
+  "schema_version": 1,
+  "analysis_root": "ff432f5599982b6a7495d6c9a9feaad2e692a273",
+  "source_bundle_root": "9746ea4ba908b3030762fd6c276809142f27b8ce",
+  "source_primary_bundle": "../s08-calibrated-normal-a2/primary.tar.xz",
+  "validation": {
+    "reader_revision": "ff432f5599982b6a7495d6c9a9feaad2e692a273",
+    "tests": 8,
+    "errors": 0,
+    "failures": 0,
+    "skips": 0,
+    "full_visual_acceptance": false,
+    "scientific_verdict": null
+  },
+  "reports": [
+    {
+      "topology": "Classic",
+      "trial_soma_pairs": 8,
+      "full_cache_files": 335,
+      "pooled_counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 1,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 1,
+        "accuracy": 0.75,
+        "target_hit_rate": 0.5,
+        "foil_response_rate": 0.0
+      },
+      "by_reset_policy": {
+        "reset_per_trial": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0,
+          "criterion_satisfied": true,
+          "criterion_assessed": true
+        },
+        "preserve_neuron_dynamics": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 1,
+          "accuracy": 0.5,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0,
+          "criterion_satisfied": false,
+          "criterion_assessed": true
+        }
+      },
+      "full_cache": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibrated-normal-report-a2/reports/Classic",
+      "model_revision": "5681277994a8185c1744016d3352d65808e4d201a52007a1e8bc5ae2e9f05e47",
+      "visual_acceptance_complete": false
+    },
+    {
+      "topology": "Branch",
+      "trial_soma_pairs": 4,
+      "full_cache_files": 179,
+      "pooled_counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 1,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 1,
+        "accuracy": 0.75,
+        "target_hit_rate": 0.5,
+        "foil_response_rate": 0.0
+      },
+      "by_reset_policy": {
+        "reset_per_trial": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0,
+          "criterion_satisfied": true,
+          "criterion_assessed": true
+        },
+        "preserve_neuron_dynamics": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 1,
+          "accuracy": 0.5,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0,
+          "criterion_satisfied": false,
+          "criterion_assessed": true
+        }
+      },
+      "full_cache": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibrated-normal-report-a2/reports/Branch",
+      "model_revision": "cfb9e30719cecfe1d9122b90ac68fad6d3e45ab02d327e87ddbc265e4db322fd",
+      "visual_acceptance_complete": false
+    }
+  ],
+  "selected": [
+    {
+      "file": "primary-bundle/selected/Classic-trial-0-overview.png",
+      "source_report": "Classic",
+      "source_file": "trial-0000-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_0",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 0,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Classic_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 8.9475,
+        "end": 9.067499999999999,
+        "files": [
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ],
+        "y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ]
+      },
+      "sha256": "5e0abf6f00110817e8bcdaca989cf3d278df6629cd55aa7b23975183ec6caa17"
+    },
+    {
+      "file": "primary-bundle/selected/Classic-trial-1-overview.png",
+      "source_report": "Classic",
+      "source_file": "trial-0001-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_1",
+      "sample_id": "foil_dispersed",
+      "label": "foil",
+      "presentation_index": 1,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Classic_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 9.068,
+        "end": 9.748,
+        "files": [
+          "trial-0001-soma-001/overview.png",
+          "trial-0001-soma-001/overview.svg",
+          "trial-0001-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ],
+        "y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ]
+      },
+      "sha256": "d98fb47bebe8e0b0a14934a459bb0ef2214e0447f2c343c0a030fa4a03f65778"
+    },
+    {
+      "file": "primary-bundle/selected/Classic-trial-2-overview.png",
+      "source_report": "Classic",
+      "source_file": "trial-0002-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 2,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Classic_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 9.7485,
+        "end": 9.8685,
+        "files": [
+          "trial-0002-soma-001/overview.png",
+          "trial-0002-soma-001/overview.svg",
+          "trial-0002-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ],
+        "y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ]
+      },
+      "sha256": "0741af49a1dd475580df16bb234bf50c4df667e4164910c67cd2550f6ba2c037"
+    },
+    {
+      "file": "primary-bundle/selected/Classic-trial-2-spike-zoom.png",
+      "source_report": "Classic",
+      "source_file": "trial-0002-soma-001/zoom-001.png",
+      "role": "spike-zoom",
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 2,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Classic_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "zoom-001",
+        "begin": 9.7485,
+        "end": 9.7985,
+        "files": [
+          "trial-0002-soma-001/zoom-001.png",
+          "trial-0002-soma-001/zoom-001.svg",
+          "trial-0002-soma-001/zoom-001.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "zoom-001",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ],
+        "y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ]
+      },
+      "sha256": "db0bc886a25ea88bdf714f83a4607b16c245807773a65ada95cb6789e85eb70f"
+    },
+    {
+      "file": "primary-bundle/selected/Classic-trial-2-last-input-zoom.png",
+      "source_report": "Classic",
+      "source_file": "trial-0002-soma-001/zoom-002.png",
+      "role": "last-input-zoom",
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 2,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Classic_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "zoom-002",
+        "begin": 9.7985,
+        "end": 9.8485,
+        "files": [
+          "trial-0002-soma-001/zoom-002.png",
+          "trial-0002-soma-001/zoom-002.svg",
+          "trial-0002-soma-001/zoom-002.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "zoom-002",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ],
+        "y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ]
+      },
+      "sha256": "780ffb3dbc5570af8a9702948b1e918cc69972661d29de0016206d066487b086"
+    },
+    {
+      "file": "primary-bundle/selected/Classic-trial-3-overview.png",
+      "source_report": "Classic",
+      "source_file": "trial-0003-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_3",
+      "sample_id": "foil_dispersed",
+      "label": "foil",
+      "presentation_index": 3,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Classic_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 9.869,
+        "end": 10.549,
+        "files": [
+          "trial-0003-soma-001/overview.png",
+          "trial-0003-soma-001/overview.svg",
+          "trial-0003-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ],
+        "y_limits": [
+          -0.0002922597563634266,
+          0.003945506710906259
+        ]
+      },
+      "sha256": "9f1ee2b4825d640f6c88469aa34f1e6dd342c739b1f1923b06d5422c4172d051"
+    },
+    {
+      "file": "primary-bundle/selected/Branch-trial-0-overview.png",
+      "source_report": "Branch",
+      "source_file": "trial-0000-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_0",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 0,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 19.499,
+        "end": 19.619,
+        "files": [
+          "trial-0000-soma-001/overview.png",
+          "trial-0000-soma-001/overview.svg",
+          "trial-0000-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ],
+        "y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ]
+      },
+      "sha256": "59e6a33e0bd474bbb4f6598df49aafa605f5c102e5ce51716e9298c1c7d9cc47"
+    },
+    {
+      "file": "primary-bundle/selected/Branch-trial-1-overview.png",
+      "source_report": "Branch",
+      "source_file": "trial-0001-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_1",
+      "sample_id": "foil_dispersed",
+      "label": "foil",
+      "presentation_index": 1,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 19.6195,
+        "end": 20.2995,
+        "files": [
+          "trial-0001-soma-001/overview.png",
+          "trial-0001-soma-001/overview.svg",
+          "trial-0001-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ],
+        "y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ]
+      },
+      "sha256": "2b88762f1d4d9a28a26b67972a94ef70a0b3eeedb6b2a41df98e79b9710352b7"
+    },
+    {
+      "file": "primary-bundle/selected/Branch-trial-2-overview.png",
+      "source_report": "Branch",
+      "source_file": "trial-0002-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 2,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 20.3,
+        "end": 20.42,
+        "files": [
+          "trial-0002-soma-001/overview.png",
+          "trial-0002-soma-001/overview.svg",
+          "trial-0002-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ],
+        "y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ]
+      },
+      "sha256": "57392650643408af7dd32ef4e348de3c9583fe8f0d08cd8b32670682962e3c1f"
+    },
+    {
+      "file": "primary-bundle/selected/Branch-trial-2-spike-zoom.png",
+      "source_report": "Branch",
+      "source_file": "trial-0002-soma-001/zoom-001.png",
+      "role": "spike-zoom",
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 2,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "zoom-001",
+        "begin": 20.3,
+        "end": 20.35,
+        "files": [
+          "trial-0002-soma-001/zoom-001.png",
+          "trial-0002-soma-001/zoom-001.svg",
+          "trial-0002-soma-001/zoom-001.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "zoom-001",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ],
+        "y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ]
+      },
+      "sha256": "f34b98e0364f080713dae5b06630f66d27e730158e71c07b05b1ce01e7888966"
+    },
+    {
+      "file": "primary-bundle/selected/Branch-trial-2-last-input-zoom.png",
+      "source_report": "Branch",
+      "source_file": "trial-0002-soma-001/zoom-002.png",
+      "role": "last-input-zoom",
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "presentation_index": 2,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "zoom-002",
+        "begin": 20.35,
+        "end": 20.400000000000002,
+        "files": [
+          "trial-0002-soma-001/zoom-002.png",
+          "trial-0002-soma-001/zoom-002.svg",
+          "trial-0002-soma-001/zoom-002.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": 14.208,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "zoom-002",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ],
+        "y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ]
+      },
+      "sha256": "e4dcd5846900f081020ccecdd22535cae20fd07e75fb3ceeb971f34c7d5c4324"
+    },
+    {
+      "file": "primary-bundle/selected/Branch-trial-3-overview.png",
+      "source_report": "Branch",
+      "source_file": "trial-0003-soma-001/overview.png",
+      "role": "overview",
+      "trial_id": "trial_3",
+      "sample_id": "foil_dispersed",
+      "label": "foil",
+      "presentation_index": 3,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_11_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "view": {
+        "view": "overview",
+        "begin": 20.4205,
+        "end": 21.1005,
+        "files": [
+          "trial-0003-soma-001/overview.png",
+          "trial-0003-soma-001/overview.svg",
+          "trial-0003-soma-001/overview.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 960,
+        "minimum_native_tick_pixels_on_zoom": null,
+        "downsampling": false,
+        "y_scale": "shared",
+        "time_view": "overview",
+        "sample_markers": false,
+        "shared_y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ],
+        "y_limits": [
+          -0.0006187812820101258,
+          0.008353547307136697
+        ]
+      },
+      "sha256": "8abbe7be8ba72e463240bc7fc90bdaae6ac786c53fd525c1278c5379a97dace2"
+    }
+  ],
+  "metadata_archive_sha256": "e7dea73c5510ccb98f0899fd6d76907ab5fd12847a04f6f2a274c932992deed6",
+  "metadata_files": [
+    {
+      "path": "failed-interpreter-attempt/checkout.log",
+      "bytes": 273,
+      "sha256": "6a47d91a6cd4bca50b47d0c9eb099f53de4fccea7bbba10d8db87ac74180663b"
+    },
+    {
+      "path": "failed-interpreter-attempt/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "failed-interpreter-attempt/report.log",
+      "bytes": 661,
+      "sha256": "75c32e62999a4e46f9dd9c3edebe83062e852e86ec7038f3c73827456bdd50db"
+    },
+    {
+      "path": "failed-interpreter-attempt/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "generation/checkout.log",
+      "bytes": 279,
+      "sha256": "c3c86f2fc99ac631aff63b8929f60f346859a2de38d33df7acab489dd3a50906"
+    },
+    {
+      "path": "generation/plot-runtime.json",
+      "bytes": 159,
+      "sha256": "28879cbb4f59183110bbcce2ed6fa40301f5dc9bfadb3b064154eb12ca69d4fd"
+    },
+    {
+      "path": "generation/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "generation/report-generation.json",
+      "bytes": 1557,
+      "sha256": "095f464379cccc19b9f4785df4aa7895529a1b42d190d8e0f239f8c6ded3718a"
+    },
+    {
+      "path": "generation/report.log",
+      "bytes": 1197,
+      "sha256": "8d694de539e2920ee82404a98a9debd50e71a80cbb6b1eb380a8f328a96bc580"
+    },
+    {
+      "path": "generation/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "generation/tests.log",
+      "bytes": 1620,
+      "sha256": "73a14521d66e56751e775bc985c020b926e179f75a7b9001b422d3ec18cecfc1"
+    },
+    {
+      "path": "generation/validation.json",
+      "bytes": 193,
+      "sha256": "1d0f4ce91abce7f8bd4b20d50211d2e8fadff97d66b57ed43918937f7ffb33d8"
+    },
+    {
+      "path": "reports/Branch/SHA256SUMS.json",
+      "bytes": 19109,
+      "sha256": "f6757bfa8f5a697c5dffb386d03cc1ec4448467868a503938f0cbaaf8673824d"
+    },
+    {
+      "path": "reports/Branch/analysis.json",
+      "bytes": 4447,
+      "sha256": "ac79908a1e3e90692d8a467ae903a48910466496762e6f3d635e950ee952a3f5"
+    },
+    {
+      "path": "reports/Branch/manifest.json",
+      "bytes": 47716,
+      "sha256": "be655127f56ab655997bc5f21ff169c3b960b2a7a29791054737efabbf3e25ff"
+    },
+    {
+      "path": "reports/Branch/series.json",
+      "bytes": 2895,
+      "sha256": "17b3a208911bf6282a7485334153cec23212d6f1035700d30109ef5cb8613fad"
+    },
+    {
+      "path": "reports/Classic/SHA256SUMS.json",
+      "bytes": 35927,
+      "sha256": "ad248d1e0c0d288e37ea6ececf99b3e1afd78cd6f6ba502c9485f65fc56a7026"
+    },
+    {
+      "path": "reports/Classic/analysis.json",
+      "bytes": 4454,
+      "sha256": "d5737fcdac973aeb31c854bf1aefe2889e765d5fedd72e4c8b09104dd7afa9f9"
+    },
+    {
+      "path": "reports/Classic/manifest.json",
+      "bytes": 90881,
+      "sha256": "f79f82fc3ef54b64504ea33b77317b69af4939d18cea7bc25b5eaa66a2acca77"
+    },
+    {
+      "path": "reports/Classic/series.json",
+      "bytes": 5789,
+      "sha256": "213cff55068797eca7ff341da4f5a70d00bed7ab59393f0f550ee91df3f52a62"
+    }
+  ],
+  "full_reports_cache_only": true,
+  "statistical_independence_verified": false,
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,108 @@
+# TECH_DEBT TimeLearner
+
+Реестр открытых инженерных и алгоритмических долгов кампании AGENT_PLAN (2026-10-20+). Сводная машиночитаемая копия: [`TECH_DEBT.tsv`](TECH_DEBT.tsv). Постановка и выводы — развёрнутыми предложениями; cold-прогоны по этому тикету **не** запускались.
+
+---
+
+## Обновление 2026-10-22 (docs-only, post-RERUN)
+
+**G1_S1_RERUN dual-host закрыт** (последняя волна W02 rep3, `launch.exit=1`). В отборе [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv) **13 волн**; **3/13** exit-clean (W01/W13/W33), **10/13** с последним `launch.exit` ∈ {1,2}. Политика: [`G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md`](G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md) — `SYNTHESIS_FINAL` по полной матрице запрещён; разрешён PARTIAL rollup. Ниже — блокеры, которые остаются открытыми.
+
+**DEBT-D2-silent-test (variant A offline + mid policy patch, 2026-10-22):** на bundle `G1.S1.W01-11-20261021T113257Z-15892` парный Test-gate: **`candidate_mid=0.0024126668029073456`** → `fires=01000101`, Acc 4/8, Цель нет; **cpp thr=1** → `fires=00000000`, Acc 7/8 (как G1 partial). **H3 подтверждена** offline; **код:** `UseCandidateMidOnNonSeparableTest` (default **off**) + `ApplyCandidateMidOnNonSeparableTest` в `FinalizePostTuneMid` (Classic+Branch) — [`MID_POLICY_H3_2026-10-22.ru.md`](MID_POLICY_H3_2026-10-22.ru.md). **Cold harness (flag=1):** **PASS** — [`MID_POLICY_H3_COLD_2026-10-22.ru.md`](MID_POLICY_H3_COLD_2026-10-22.ru.md) (Console `4a0658f3…`, root `e44c8f20a`, PulseLib `5e5a59d`). **H1** — слабая форма (thr=1 маскирует partial fires), **target_hit=0** при обоих порогах. **H4 / sep_margin (2026-10-22):** сильная форма («flat TipR@Rmin ⇒ нет mid &lt;1 с fires») **ослаблена**; слабая (target LTZ≈0.00223 &lt; candidate_mid при gap&lt;0; E1.1b γ(L)≈const → равномерный TipR scale не чинит ranking) — [`SILENT_TEST_H4_MARGIN_2026-10-22.ru.md`](SILENT_TEST_H4_MARGIN_2026-10-22.ru.md). **W13/W33 mid replicate (2026-10-22):** H1-weak/H3 на exit-clean тройке — W13 Test mid → `fires=01000101` (как W01); W33 flag/CSV тот же Test mid/gap и TipR **20M×3+86M** (H2-сигнатура есть, Цель не чинит) — [`SILENT_TEST_W13_W33_MID_2026-10-22.ru.md`](SILENT_TEST_W13_W33_MID_2026-10-22.ru.md). **H2 KeepDone cold W33:** progon1 `H2.KeepDone-17-20261022T081725Z-74503` — smash `child_rc=-6` (pre-pin, infra-inconclusive). **Retry after glog 0.4** `H2.KeepDone-17-20261022T104632Z-66270`: Train ~31 мин **без** smash, L=`27 22 15 1`, TipR **flat `86M×4`**, Need=1, PostTune не complete → interrupt SIGTERM `child_rc=-15`, SKIP_GATE `fires=` пусто → H2 TipR-mode path **ослаблена** (KeepDone не сохранил midband) — [`SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md`](SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md). **DEBT-17-console-glog → done** (pin confirmed cold) — [`DEBT_17_GLOG_ABI_FIX_2026-10-22.ru.md`](DEBT_17_GLOG_ABI_FIX_2026-10-22.ru.md). **H2 TipR overlay** (`H2.TipROverlay-17-20261022T125500Z`): thr=1 silent на всех overlays → H2 **ослаблена** также на frozen TipR — [`SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md`](SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md). **DEBT-D2-silent-test** остаётся **partial** (silent thr=1 + H3; H2 weakened).
+
+## Обновление 2026-10-21 (docs-only)
+
+На срезе после **E2 R8×3 SERIES_DONE** и частичного **G1 S1** (drv `SERIES_DONE` на всех волнах, но только **3** волны с `launch.exit=0`; счёт «3/12» в тиках того дня был неточен — в TSV **13** `wave`) нижеперечисленные пункты оставались блокерами для `SYNTHESIS_FINAL` и для честного сравнения C2↔Console.
+
+### P0 — алгоритм и качество оценки
+
+**silent-Test (`DEBT-D2-silent-test`, связанный `DEBT-TRACE-NOCSV`).** На W01 Classic×N0 train сходится с `converged_need0`, но Test даёт `fires=00000000` и/или `child_rc=-15` на gate. Offline sweep (2026-10-22) показал, что **thr=1** скрывает partial soma-fire, достижимый при `candidate_mid`, без восстановления target hit на N0 flat TipR. **H4 ослаблена** как sole-cause: flat Rmin даёт тесный sep_margin (target&lt;mid), но E1.1b γ≈const по TipR — [`SILENT_TEST_H4_MARGIN_2026-10-22.ru.md`](SILENT_TEST_H4_MARGIN_2026-10-22.ru.md). **W13/W33** реплицируют H1-weak/H3 при TipR 20M×3+86M ([`SILENT_TEST_W13_W33_MID_2026-10-22.ru.md`](SILENT_TEST_W13_W33_MID_2026-10-22.ru.md)). **H2 KeepDone cold W33** после pin — **ослаблена** (Need=1, TipR flat `86M×4`, SKIP_GATE; `H2.KeepDone-17-20261022T104632Z-66270`) — [`SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md`](SILENT_TEST_H2_KEEPDONE_2026-10-22.ru.md). **H2 TipR overlay `.17`** — **ослаблена** (thr=1 silent на flat/midband/keep_snap; mid=`01000101`) — [`SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md`](SILENT_TEST_H2_TIPR_OVERLAY_2026-10-22.ru.md); **`DEBT-17-console-glog` done** (pin confirmed). F5 γ noop. E2: ось detection/mid ([`E2_R8_SYNTHESIS_2026-10-21.ru.md`](E2_R8_SYNTHESIS_2026-10-21.ru.md)). Evidence: [`SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md`](SILENT_TEST_OFFLINE_MID_SWEEP_2026-10-22.ru.md).
+
+**Classic N1 stall (`DEBT-CL-N1`, `DEBT-D2b5-W02`).** W02 `W02_CL480_N1_PSIoff` на всех плечах E2 заканчивается `not_converged_at_stop` с L=`54 44 1 1` (или близким `53 44 1 1` на ранних PulseLib) и разносом TipR — картина согласуется с [`CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md`](CLASSIC_BOUNDARY_MAP_2026-10-19.ru.md). D1 фаза 1: **нет** good→bad converged в окне 11.09–19.10 ([`D1_BISECT_VERDICT_2026-10-20.ru.md`](D1_BISECT_VERDICT_2026-10-20.ru.md)); фаза 2 (L₀ 53→≥54): **CLOSED** lo=`5308aa5`(53) … hi=`3cefd64`(L=`100 72 1 1`, MaxL escape); первый L₀≥54 = **`3cefd64`** — [`D1_BISECT_2026-10-22.ru.md`](D1_BISECT_2026-10-22.ru.md). **HEAD stage-2 ablations (2026-10-22, 6/6 DONE):** base + (a) Rmin floor 20 М + (b) no midband + (c) `RminLengthTolFactor=1` + (d) `AutoEstimateAttenuationGamma=0` + (e) `ResetNeuronBeforeTrainBurst=1` — **все** `not_converged_at_stop`, Need=1, L≈`53–54 44 1 1`, TipR `1e10×2+86M×2`; **ни одна абляция не вернула converged** — [`CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md`](CL_N1_HEAD_ABLATIONS_2026-10-22.ru.md). **Next arm W3on (2026-10-22):** `--train-param EnableRmaxLengthEscape=1` на том же W02 — фенотип **stall→MaxL** (`L=100 58 1 1`), Need=1, `not_converged_at_stop`; подтверждает гейт W3 после `a15f4eb`, но **не** sole-fix SoftCold — [`CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md`](CL_N1_NEXT_ARM_3CEFD64_2026-10-22.ru.md). **H1 Span100 baseline (2026-10-22, cold DONE):** `W02_CL100_N1_PSIoff`, W3=off, PostTune OFF — **`converged_need0`**, Need=0, L=`54 48 30 1`, TipR `2.88M×3+86M` (не TipR@`1e10`); `quality_fail` = silent-Test (`DEBT-D2`), не train stall — [`CL_N1_H1_SPAN100_2026-10-22.ru.md`](CL_N1_H1_SPAN100_2026-10-22.ru.md). Вердикт: TipR@Rmax / `not_converged_at_stop` **480-specific** (на 100 Train сходится). Multifactor a–c на 100 не запускали. H2 `infeasible_len` docs — [`CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md`](CL_N1_NEXT_HYPOTHESIS_2026-10-22.ru.md). Bin tip **`e49a52bf`** (W02 manifest refresh + E0 whitelist). **`DEBT-CL-N1` / `DEBT-D2b5-W02` остаются open** на оси Span **480**.
+
+**S0 C++ поля (`DEBT-S0-cpp-fields`) — done 2026-10-22.** PulseLib эмитит `delay_residue` / `amp_over_target` / `sync_exit` / **`amp_be`** / `done_be` и Train `sep_margin`/`sep_gap`/`sep_tgt`/`sep_max_foil` в audit `kind=done` (+ `sep_*` в `posttune_complete.flag`); harness → `matrix_result.json` ([`S0_CPP_EMIT_2026-10-22.ru.md`](S0_CPP_EMIT_2026-10-22.ru.md)). Формула Done_BE: **`done_be = sync_be ∨ rmin_be ∨ amp_be`**, где `amp_be` = любой дендрит с `StructuralAmpTracker.IsAccepted` (тот же предикат, что `amp_quantized_under_target`); `sep_margin = sep_gap/tgt` при finite && `tgt>0`, иначе NaN. PulseLib `4e3714a`, Bin `73a6e456`.
+
+### P1 — фиксы и пилоты
+
+**F5 OPEN (`DEBT-F5-gamma`).** Патч `CorrectAttenuationGammaForTipR` на tip PulseLib **`9efca9c`** (default off; re-land с `6d746ac` после conflict на F4-adjacent props). One-shot / W01 paired / tip-noop Span100 ([`F5_GAMMA_SPAN100_2026-10-22.ru.md`](F5_GAMMA_SPAN100_2026-10-22.ru.md)) **не** закрывали A7. **LIVE Span100 (2026-10-23):** Console sha256 **`213e7003…`** (символ F5 **present**), case `W02_CL100_N1_PSIoff`, PostTune OFF — `F5.S100L.0-…21224` (γ=0) + `F5.S100L.1-…27819` (γ=1), оба `launch.exit=0`, **γ=0≡γ=1** (`converged_need0`, L=`54 48 30 1`, TipR `2.88M×3+86M`, silent 7/8 `quality_fail`) при **активном** кодpath A7 — [`F5_GAMMA_SPAN100_LIVE_2026-10-23.ru.md`](F5_GAMMA_SPAN100_LIVE_2026-10-23.ru.md). PASS по фиксу **нет**; A7 = γ noop на midband silent Classic×N1 Span100. **Без** нового F5 cold без новой гипотезы.
+
+**Стратегия 23.10 + F1b / H0.** Канон: [`STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md`](STRATEGY_TAU_PER_SPAN_THEN_AXON_2026-10-23.ru.md). **Не** решать все Span одной τ: подбор τ через **Cm** per класс паттерна, свой NeuronModel, затем Classic/Branch × N0/N1 × mods — карточка [`H0_tau_cm_per_span.md`](../plans/AGENT_PLAN_2026-10-20/cards/H0_tau_cm_per_span.md), долг **`DEBT-H0-tau-cm` OPEN**. **F1b (`DEBT-F1b`) — still OPEN, не отменён:** это план **отдельного аксонного тренера** (рост сегментов аксонов источников) — фаза A **после** ворот H0; Console-пилот не стартовал; checklist в [`F1_fast_epsp_pilot.md`](../plans/AGENT_PLAN_2026-10-20/cards/F1_fast_epsp_pilot.md) и DRAFT INPUTS §5. F1a offline done. По стратегии 23.10 F1b **не** блокер дендритного Controller FINAL (блокеры: mid / tol / CL-N1@480). Архив Cursor-плана: [`../plans/CURSOR_PLAN_INDEX.ru.md`](../plans/CURSOR_PLAN_INDEX.ru.md).
+
+**Controller SPEC FINAL (2026-10-23):** [`CONTROLLER_V2_SPEC_FINAL_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_FINAL_2026-10-23.ru.md) — mid **C+A**; tol consts (eps_amp=1%·A*, eps_margin_verify, survive L±1/TipR±25%); CL-N1@480 `bounded_stall_rmax`/`maxl_hold`. `DEBT-CTRL-V2-DRAFT` **closed**. DRAFT retained as history: [`CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md).
+
+**H0 / ворота D (2026-10-23):** H0a UploadClass+EXP done; карта [`DENDRITE_MAP_TAU_CM_2026-10-23.ru.md`](DENDRITE_MAP_TAU_CM_2026-10-23.ru.md); `DEBT-H0-tau-cm` **partial** (H0b cold in flight). F1b фаза A отложена.
+
+**Controller SPEC DRAFT (2026-10-23, enrich tol+mid):** [`CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md`](CONTROLLER_V2_SPEC_DRAFT_2026-10-23.ru.md). **H2 `LEN_SEARCH` exit-классы** — **нормативны** (не регрессировать). **§5** VERIFY/Done tol guidance: остров `sep_ltz` ~1–2%; survive L±1 и TipR±25% (E1.5 FRAGILE); tol не съедает весь margin; proxy-margin (~7%) ≠ Console `sep_ltz`; `ideal_inh_proxy` intentional. **§6.1** mid: `UseCandidateMidOnNonSeparableTest` default-off; H3 cold restore при NonSeparable; production **OPEN** — опции A–D явно. KeepDone ≠ sole-fix; F3 opt-in; W3 ≠ SoftCold default; F1b = фаза A (не dendrite-FINAL blocker per STRATEGY 23.10). Train emit `DEBT-S0` done. **`DEBT-CTRL-V2-DRAFT` остаётся open** до FINAL: mid-опция, **константы** tol, CL-N1@480 (+ H0 τ map для дендритной фазы).
+
+### P0 infra — G1 exit-gate и диск
+
+**Ложный «зелёный» SERIES_DONE (`DEBT-G1-exit-gate`) — harness DONE 2026-10-22.** `wait_run.sh` / `run_series.sh` теперь пробрасывают значение `launch.exit` в exit-код драйвера ([`DEBT_G1_EXIT_GATE_FIX_2026-10-22.ru.md`](DEBT_G1_EXIT_GATE_FIX_2026-10-22.ru.md)). Исторический G1 RERUN по-прежнему **3/13** exit-clean ([`G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md`](G1_S1_RERUN_EXIT_STATUS_2026-10-22.ru.md)); rollup не опирается на старые drv `EXIT=0`.
+
+**Политика offload диска (`DEBT-disk-offload-policy`).** Soft-cold на `.17` смотрит Avail **корня** `/` (≥80 ГБ), тогда как `$DATA` на отдельном томе; неиспользуемые lanes и `_repro` offload на Data поднимали Avail корня до ~90–108 ГБ ([`STATUS_SNAPSHOT_2026-10-20T2325.ru.md`](STATUS_SNAPSHOT_2026-10-20T2325.ru.md), [`STATUS_SNAPSHOT_2026-10-21T0514.ru.md`](STATUS_SNAPSHOT_2026-10-21T0514.ru.md)). На 2026-10-21 корень снова ~76 ГБ — риск повторного `worker_exit=1` (E2 rep3 W01). Операционное правило: перед новым cold на `.17` — offload lanes/`_repro`, не трогая активные G1 runs; human rule `.11` DATA≥200G без STOP ([`CAMPAIGN_STATUS_2026-10-20.ru.md`](CAMPAIGN_STATUS_2026-10-20.ru.md)). Исправление gate в скриптах — открытый пункт (см. TSV).
+
+### Физика E1 (2026-10-22, E1.1c / E1.1d / E1.2)
+
+**FastSpan library PARTIAL** (`NSPNeuronGenD002C25e11`, τ=2.5 мс / D=2 мс / f=2000): offline timing L=1…100 + Rs×8 @ L∈{1,10,25} + N∈{1…128} — [`E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md`](E1_1c_FASTSPAN_LIBRARY_2026-10-22.ru.md). **Open:** Console amp/timing anchors FastSpan; amp-cal bias; на N≳64–128 short-τ Euler `model_unstable` (потолок N жёстче Gen).
+
+**E1.1d NextSegInh/PSI library PARTIAL** (2026-10-22): AsymRm L∈{1,4,7,10,25}×TipR×3×N=1 offline dual-Euler vs passive — [`E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md`](E1_1d_NEXTSEG_PSI_LIBRARY_2026-10-22.ru.md). PSI k=2.5: Δpeak ≈ +143 %, ΔFWHM ≈ 0 на 1 spike; NextSeg: ΔFWHM ≈ −9.5 % только @L=1, @L≥7 ≈passive. **Open / DEBT-E1.1d:** Console PSI prepare OK но hang на `posttune_mid_dbg`; Branch NextSeg probe (tl_probe_kernels Classic-only).
+
+**E1.1e multi-pulse tip IR PARTIAL** (2026-10-22): Pack-A ISI / packA_tgt4 @ L∈{1,7,10,25} TipR=8.6e7 — [`E1_1e_MULTIPULSE_IR_2026-10-22.ru.md`](E1_1e_MULTIPULSE_IR_2026-10-22.ru.md). NextSeg@L=7 ≈passive (last_fwhm~62–66 мс); **0/132** meet FWHM/span≲0.13; tip multi-pulse **не** retire E1.4 `ideal_inh_proxy`.
+
+**E1.1f 4-dendrite Pack-A PARTIAL / negative** (2026-10-22): island L=`7 6 4 1` TipR=`20M×3+86M` × Pack-A × {passive,nextseg,psi} × drive {per_input,full_train} — [`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md). NextSeg sep **−0.010 / −0.030** (proxy **+0.074**); tgt_fwhm~58–68 мс; **не** retire proxy.
+
+**E1.1g Console Branch soma IR PARTIAL / negative** (2026-10-22): Test-only TRACE nextseg vs gen @ island — Acc tgt FWHM **28.8 / 22.7 мс**, IR nextseg **30.9 мс**, sep_soma **≈−0.015**; proxy FWHM 2.1 мс **не** достигнут — [`E1_1g_CONSOLE_BRANCH_IR_2026-10-22.ru.md`](E1_1g_CONSOLE_BRANCH_IR_2026-10-22.ru.md). **`DEBT-E1.1f` → partial-wontfix-offline:** proxy **intentional for SPEC** (offline E1.1d/e/f + Console E1.1g all negative).
+
+**E1.2 repeatability PARTIAL** (AsymRm L=10 @ TipR=8.6e7, Console `4a0658f3…`): reset×20 **σ_amp=σ_lat=0** (bit-identical); noreset arm усечён (`MaxSpikesPerFeature=4`, trace≈13.5 с) → 4 valid EPSP, settled bias ≈**−28%** vs reset (A5/F3, не раздувать F4). Предложение F4: **eps_amp=1%·target**, **latency_tol=1/f** — [`E1_2_REPEATABILITY_2026-10-22.ru.md`](E1_2_REPEATABILITY_2026-10-22.ru.md). DEBT-C1 на L=10 не мешал.
+
+**E1.4 sep predictor PARTIAL** (gate **6/6** match Console Acc-direction): passive cable superposition для gen/W01 + ideal_inh proxy τ=0.5 мс для nextseg/preinh при length_sync_cv≤0.25 — [`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md). **Open:** E1.1d+e+**f** offline IR **не** заменяют proxy (4-dendrite Pack-A negative); нужен Console Branch IR или явный SPEC «proxy intentional» ([`E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md`](E1_1f_FOUR_DENDRITE_PACKA_2026-10-22.ru.md)).
+
+**E1.5 fragility PARTIAL** (`DEBT-E1.5-fragile-pass`, 2026-10-22): Test-only L±1 / TipR global ×0.8/×1.25 на PASS tiprmin + br25_nextseg — вердикт **FRAGILE** (br25 **0/9** strict; tiprmin TipR 0/2; sep_ltz baseline ~1–2%). Вход в Controller v2 SPEC: tol margin ≥ L±1 и TipR±25% — [`E1_5_FRAGILITY_2026-10-22.ru.md`](E1_5_FRAGILITY_2026-10-22.ru.md). Per-tip TipR ещё PENDING.
+
+**F3 Reset-before-pack CODE** (2026-10-22): `ResetNeuronBeforeTrainBurst` default **off** на PulseLib `timelearner_fix2` (Classic+Branch `BeginTrainingIteration`); Console после tip sync `f88d1852…` / PulseLib `3a599a7` — [`F3_RESET_BEFORE_PACK_2026-10-22.ru.md`](F3_RESET_BEFORE_PACK_2026-10-22.ru.md). **DEBT-F3-R8: done** — cold A/B flag=0 vs 1 на `W01_CL50_N1_PSIoff` и `W10_HIST_br25_nextseg`: Branch остров **не** регрессировал при flag=1 (Acc 8/8); W01 — Need=0 + silent Test `quality_fail` бит-в-бит как flag=0; матричные defaults не трогали — [`F3_R8_AB_2026-10-22.ru.md`](F3_R8_AB_2026-10-22.ru.md).
+
+### Прочие открытые (без изменения статуса)
+
+- `DEBT-A0-ctest` — **закрыт 2026-10-22**: TipR@Rmin early-BE не сбрасывает stall при `no_legal_recovery`; `PulseLib_StorageComponents` **87/87**. Тег `tl-baseline-20261020` на root **срезан 2026-10-23**: annotated → `03c8cb912748a7a9df9f6cf19eca092489a16ebc` (PulseLib `d52dc1c` / Bin `e7509263` на том коммите); pushed `origin` — [`A0_CTEST_2026-10-22.ru.md`](A0_CTEST_2026-10-22.ru.md).
+- `DEBT-H-A15b` — не подтверждён на E2 R8, но формально open до отдельного SoftCold-среза.
+- `DEBT-A3-trace-hang`, `DEBT-A1-preinh-silent`, `DEBT-G1-432` (полная 432-матрица v1/v2 — этап 5).
+- Закрытые: A15 inputs, cpu-gate, disk-200G, disk-freegib-root (разовый offload), matrix-prepare-wave, F1a-offline, F7 confirmed→F2.pref, **G1-exit-gate harness**, **A0-ctest** (87/87).
+
+---
+
+## TSV (канон)
+
+```tsv
+debt_id	opened_utc	stage_id	source	item_ref	priority	blocker_for	status	owner_arm	notes	closed_utc	fix_run_id
+DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	done	.11	Rmin BE skip when no_legal_recovery; StorageComponents 87/87	2026-10-22T15:13Z	A0_CTEST_FIX
+DEBT-cpu-gate-pgrep	2026-10-20T13:48Z	R2	companion	cpu_gate false positive	P1	D1	done	.11	pattern fixed	2026-10-20T13:48Z	local
+DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired 98ac830d	2026-10-20T14:05Z	98ac830d
+DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 EQUIVALENT — не подтверждён на R8; см. E2_R8_SYNTHESIS		
+DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	open	D1/E2	480 TipR@Rmax stall open; H1 Span100 converged_need0 (CL_N1_H1_SPAN100_2026-10-22) — stall 480-specific		
+DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	canon 24-32 selected for G1		
+DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH margins	2026-10-20T15:45Z	F1a_20261020
+DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Axon trainer / NAxoneDelay	P1	фаза A after H0	open	senior	STRATEGY 23.10; not discarded; not dendrite-FINAL blocker; no cold		
+DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	done	stage0	S0_CPP_EMIT_2026-10-22; amp_be+done_be OR; PulseLib 4e3714a	2026-10-22T12:40Z	4e3714a
+DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller SPEC DRAFT	P1	FINAL SPEC	open	docs	FINAL blocked: mid/tol/CL-N1@480; F1b=фаза A per STRATEGY 23.10		
+DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog→.17 Data	2026-10-20T15:16Z	offload
+DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang corrupt+repaired	P1	A3	open	A3	kill after stall		
+DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma_0/2 silent set1	P1	physics E1	open	C1	L43/L1 MODEL_MATCH		
+DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2.0/D2.2	W01 converge fires=0 Test hang	P0	SYNTH/G1	partial	D2/E2	H2 weakened: TipR overlay+KeepDone W33 TipR flat Need=1 SKIP; SILENT_TEST_H2_KEEPDONE		
+DEBT-17-console-glog	2026-10-22T12:10Z	R2	infra	.17 EmitToGlog stack-smash phase9	P0	H2 TipR/KeepDone	done	.17	glog 0.4 pin; keep on sync; DEBT_17_GLOG_ABI_FIX	2026-10-22T12:55Z	
+
+DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent fires	P0	G1 labels	open	A1	BASELINE_DEGRADED		
+DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol×4 masks measured dt	P0	F2 Done_BE	confirmed	F7	F2.pref cold	2026-10-20T17:12Z	F2.pref
+DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test	open	gate	kill etime>180; rc=-15; linked DEBT-D2		
+DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 Signed+RminTol not_converged	P0	CL-N1	open	D2b	CL480 stall open; H1 CL100 Need=0 TipR midband — see CL_N1_H1_SPAN100_2026-10-22		
+DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2 soft-cold	done	.17	lanes offload 2026-10-20	2026-10-20T20:17Z	lanes-offload
+DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare vs stale	P0	E2 R8	done	Bin	case-ids only 774704fc	2026-10-20T20:24Z	774704fc
+DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR no PASS W01+W02_CL100	P1	F8 chain/R3	open	F5	LIVE Span100 2026-10-23 A7 on tip 9efca9c; γ=0≡γ=1 silent noop; F5_GAMMA_SPAN100_LIVE		
+DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	done	drv	wait_run+run_series propagate; DEBT_G1_EXIT_GATE_FIX_2026-10-22	2026-10-22T06:30Z	harness
+DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail<80G vs DATA free	P1	new cold .17	open	ops	repeat offload; STATUS_SNAPSHOT 2026-10-21T0514; do not kill active G1		
+DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	done	F3	A/B W01+br25_nextseg; BR PASS no regress; W01 silent unchanged; default off; F3_R8_AB_2026-10-22	2026-10-22T16:15Z	F3.R8.W01+BR		
+DEBT-E1.5-fragile-pass	2026-10-22T13:20Z	E1	E1.5	L±1 TipR×0.8/1.25 Test-only	P1	Controller v2 tol	partial	.11	FRAGILE br25 0/9 tiprmin TipR 0/2; E1_5_FRAGILITY_2026-10-22		E1_5_20261022
+DEBT-E1.1f	2026-10-22T15:20Z	E1	E1.1f	4-dendrite Pack-A / Console IR retire proxy	P1	Controller VERIFY tol	partial-wontfix-offline	.11	offline E1.1d/e/f + Console E1.1g FWHM~29–31ms≫2.1; sep_soma&lt;0; proxy intentional for SPEC; E1_1g_CONSOLE_BRANCH_IR_2026-10-22	2026-10-22T15:40Z	E1_1g_20261022
+```
+
+---
+
+*Последнее docs-обновление: 2026-10-23 (F5 LIVE Span100 A/B на tip `9efca9c` — γ noop; DEBT-F5-gamma OPEN).*

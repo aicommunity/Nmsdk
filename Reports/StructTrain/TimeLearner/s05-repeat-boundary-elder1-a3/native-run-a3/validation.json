@@ -1,0 +1,167 @@
+{
+  "kind": "timelearner_repeat_boundary_gate",
+  "schema_version": 1,
+  "root": "02cf1542de6edfd67aa9da15798d34dd1b0eb08f",
+  "pulse": "7b5939c5744877ba1a762393d78f7183853fd5c0",
+  "native_tests": 51,
+  "python_tests": 77,
+  "skips": 0,
+  "failures": 0,
+  "errors": 0,
+  "current_configured_audits": [
+    {
+      "source": "Branch_2000_N0_configured_repeats_training_summary.json",
+      "primary_trials": 24,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "training_summary_schema": 2,
+        "candidate_repeat_groups_checked": 5,
+        "search_history_retained": true,
+        "model_revision": "f56388b10c6bec346a500df5ff282e43a1fb3f2d4579a796e82a3f0e92622cf0",
+        "reference_count": 2,
+        "candidate_count": 10,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "source": "Branch_2000_N0_configured_service_training_summary.json",
+      "primary_trials": 14,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "search_history_retained": true,
+        "model_revision": "e14d6e54b66196026d665e5ba350d5c6fc85edff63e2ddca7b2149c11a587795",
+        "reference_count": 2,
+        "candidate_count": 5,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "source": "Branch_2000_N1_configured_file_xml_summary.json",
+      "primary_trials": 14,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "search_history_retained": true,
+        "model_revision": "67bc594af48b9ba420bad3e483695a59efbd84603b644be44bbddf18208b1492",
+        "reference_count": 2,
+        "candidate_count": 5,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "source": "Branch_2000_N1_configured_service_training_summary.json",
+      "primary_trials": 14,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "search_history_retained": true,
+        "model_revision": "a25462018b80aedc1d04481a5f31937a19c16e00ec0f07650b7a8af0c1c0efd0",
+        "reference_count": 2,
+        "candidate_count": 5,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "source": "Classic_2000_N0_configured_file_xml_summary.json",
+      "primary_trials": 14,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "search_history_retained": true,
+        "model_revision": "5fd4cd1489e899f53f7c6e5a2559dd7729ddda5f7dabdae364bd73860ed2d63f",
+        "reference_count": 2,
+        "candidate_count": 5,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "source": "Classic_2000_N0_configured_repeats_training_summary.json",
+      "primary_trials": 24,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "training_summary_schema": 2,
+        "candidate_repeat_groups_checked": 5,
+        "search_history_retained": true,
+        "model_revision": "2f845f8b597044cc08726116efe678b4bc23ce7457ae5014ec993da7ca68785b",
+        "reference_count": 2,
+        "candidate_count": 10,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "source": "Classic_2000_N0_configured_service_training_summary.json",
+      "primary_trials": 14,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "search_history_retained": true,
+        "model_revision": "17e6f9d43668997467498f85777699d7f34a12bda0c8ada33227fa69f495163b",
+        "reference_count": 2,
+        "candidate_count": 5,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "source": "Classic_2000_N1_configured_service_training_summary.json",
+      "primary_trials": 14,
+      "audit": {
+        "auditor_version": 5,
+        "certificate_consistent": true,
+        "exact": false,
+        "search_history_retained": true,
+        "model_revision": "be7f68c5ecae907f278dc5db37dbd5c158bc098a8248fa082ef3c60b39151923",
+        "reference_count": 2,
+        "candidate_count": 5,
+        "evaluation_verdict": null
+      }
+    }
+  ],
+  "current_configured_primary_trials": 132,
+  "auxiliary_inputs": {
+    "TIMELEARNER_STOPPED_EVIDENCE_DIR": {
+      "path": "/home/user/timelearner-refactor/readbacks/s05-stopped-normal-a2/native",
+      "packages": {
+        "Branch_2000_N0_stopped_ConfiguredPartial_stopped_state.json": "5d310049e825855191bf529baaba1162b735ce3774cfcccb2c446c75b5f80976",
+        "Branch_2000_N0_stopped_N0BudgetSearch_stopped_state.json": "033b6bd646b6d7e07f3a66cdca48367c9c190362589830b07f91db31e5e0f730",
+        "Branch_2000_N1_stopped_BudgetEarly_stopped_state.json": "438d32c9bebb4a6f8e7e5d7bf9ffe3bfaa5ce5819bcb203f863ddb228fab9151",
+        "Branch_2000_N1_stopped_BudgetSearch_stopped_state.json": "3ccc10e34b9414bbe95c7af552a2535b9ca1508622a5d2f6aad9aebe8b66e600",
+        "Branch_2000_N1_stopped_ChangedPartial_stopped_state.json": "f0abcb5b8165923121949dc6adfb7bc88ede14d60e8da669254bdd95751bbe63",
+        "Branch_2000_N1_stopped_Early_stopped_state.json": "010449e260df62f33c3728630289eebc196a3fe4642d1b24191a590c523733b3",
+        "Branch_2000_N1_stopped_Final_stopped_state.json": "082cd3df60b43a3a063aeed0c6d39ce8cb17382903de3b879c9eccab86779e0d",
+        "Branch_2000_N1_stopped_InvalidProbe_stopped_state.json": "76e67685d8e75300dd244d3f043785f6af2eadf99acd1c24605ec0c4922a6b06",
+        "Branch_2000_N1_stopped_Partial_stopped_state.json": "f94c1775b0d061777baf8d1e0851a68f36b83ab9832af53e6e1ccc8848f85aca",
+        "Branch_2000_N1_stopped_Search_stopped_state.json": "738c52de6533fe86f4661454fdc745c2324e6b9a25d7e8046a8a3f6a072828fd",
+        "Classic_2000_N0_stopped_N0BudgetSearch_stopped_state.json": "b04fda57f4759a500c5ae0587e6f27b38fa78d3082a4e8afc30d673120c3fbf0",
+        "Classic_2000_N1_stopped_BudgetEarly_stopped_state.json": "83e5909a47c7cad3b4af9f5f72a52da2efd038e95f7469e8015033a9657dc052",
+        "Classic_2000_N1_stopped_BudgetSearch_stopped_state.json": "97d91120f4db56285a3900abb54b67564c6884734de3371ff310bcc256fd3767",
+        "Classic_2000_N1_stopped_ChangedPartial_stopped_state.json": "4d5dc37e3a50f917332f072f027a6e2cfd08d1831265a8ba70d0ef7a6a5f3b0d",
+        "Classic_2000_N1_stopped_ConfiguredPartial_stopped_state.json": "ae55ab74fb8732d40da8d1d58522d30b0fe96160b8f2d609a1fc23496b0de2a1",
+        "Classic_2000_N1_stopped_Early_stopped_state.json": "bd9d8acc71014735d4c8ff3b0d6e0ba105167e4b2076faeb9dc2d80563c7f326",
+        "Classic_2000_N1_stopped_Final_stopped_state.json": "7816641b87a9607f2ff3b6fbf491ff07477ec3af5d5e8cea940849f3622ffe2a",
+        "Classic_2000_N1_stopped_InvalidProbe_stopped_state.json": "0a41d21f0cafcbcd604e14750b09104c37b6bc1b604a28c3ed96c09de4f71da3",
+        "Classic_2000_N1_stopped_Partial_stopped_state.json": "ae40f15ef956598f127560212fededf84d295d5d4fec683862432bcc3644607d",
+        "Classic_2000_N1_stopped_Search_stopped_state.json": "a07f9c5e20d9b91b2bfd66aaee542991276a4cbe8905c10d706cfb29dfc73637"
+      }
+    },
+    "TIMELEARNER_N0_REPEATS_DIR": {
+      "path": "/home/user/timelearner-refactor/readbacks/s07-n0-repeats-normal-a2/native"
+    },
+    "TIMELEARNER_DOMAIN_EVIDENCE_DIR": {
+      "path": "/home/user/timelearner-refactor/readbacks/s07-domain-physics-normal-a1/native"
+    },
+    "TIMELEARNER_FULL_PROBE_REPORT_DIR": {
+      "path": "/home/user/timelearner-refactor/readbacks/s09-n0-full-probe-reports-a1"
+    }
+  },
+  "scientific_verdict": null
+}

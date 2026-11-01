@@ -1,0 +1,28 @@
+Note: Google Test filter = TimeLearnerNativeLifecycle.*:TimeLearnerObservations.*
+[==========] Running 8 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 5 tests from TimeLearnerObservations
+[ RUN      ] TimeLearnerObservations.RetainsEverySomaAndSignedMaxima
+[       OK ] TimeLearnerObservations.RetainsEverySomaAndSignedMaxima (0 ms)
+[ RUN      ] TimeLearnerObservations.NonfiniteCannotBeHiddenByPreviousPeak
+[       OK ] TimeLearnerObservations.NonfiniteCannotBeHiddenByPreviousPeak (0 ms)
+[ RUN      ] TimeLearnerObservations.OverflowAndDimensionChangeInvalidateEvidence
+[       OK ] TimeLearnerObservations.OverflowAndDimensionChangeInvalidateEvidence (0 ms)
+[ RUN      ] TimeLearnerObservations.Schema4IsExplicitAndRequiresActualMeasurementSources
+[       OK ] TimeLearnerObservations.Schema4IsExplicitAndRequiresActualMeasurementSources (0 ms)
+[ RUN      ] TimeLearnerObservations.Schema4WriterRoundtripFixture
+[       OK ] TimeLearnerObservations.Schema4WriterRoundtripFixture (0 ms)
+[----------] 5 tests from TimeLearnerObservations (0 ms total)
+
+[----------] 3 tests from TimeLearnerNativeLifecycle
+[ RUN      ] TimeLearnerNativeLifecycle.ResetRefreshesSynapseStepCoefficients
+[       OK ] TimeLearnerNativeLifecycle.ResetRefreshesSynapseStepCoefficients (596 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.BuildResetAndCalculateHaveObservableNativeOrder
+[       OK ] TimeLearnerNativeLifecycle.BuildResetAndCalculateHaveObservableNativeOrder (0 ms)
+[ RUN      ] TimeLearnerNativeLifecycle.StorageImageSurvivesFreshTakeAndReuse
+[       OK ] TimeLearnerNativeLifecycle.StorageImageSurvivesFreshTakeAndReuse (6 ms)
+[----------] 3 tests from TimeLearnerNativeLifecycle (602 ms total)
+
+[----------] Global test environment tear-down
+[==========] 8 tests from 2 test suites ran. (603 ms total)
+[  PASSED  ] 8 tests.
