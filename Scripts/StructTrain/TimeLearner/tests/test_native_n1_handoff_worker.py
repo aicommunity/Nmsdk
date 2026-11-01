@@ -36,9 +36,9 @@ class NativeN1HandoffWorkerTest(unittest.TestCase):
                 self.assertEqual(source[0]["sha256"], row["source_solo_sha256"])
 
     def test_all_eight_patterns_and_target_positions_have_full_real_observations(self):
-        target_positions = set()
         design = load(self.root/"design.json")
         for row in self.rows:
+            target_positions = set()
             folder = self.root/"runs"/row["name"]
             job = load(folder/"input/job.json")
             declared = next(d for d in design["rows"] if d["topology"] == row["name"].split("-")[0])
@@ -58,7 +58,7 @@ class NativeN1HandoffWorkerTest(unittest.TestCase):
             self.assertEqual(score["validity"], "valid")
             self.assertEqual(score["pooled_counts"]["targets"], 8)
             self.assertEqual(score["pooled_counts"]["foils"], 56)
-        self.assertEqual(target_positions, set(range(8)))
+            self.assertEqual(target_positions, set(range(8)))
 
     def test_frozen_model_and_threshold_remain_exactly_the_exported_values(self):
         for row in self.rows:
