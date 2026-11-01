@@ -83,9 +83,12 @@ Git, полные производные отчёты остаются на M40 
    размерности и physical cases для proposal policy, а не расширение claim
    по одному прохождению ограниченного negative corpus.
    [Контроль размерности](NativeDimensionControls.ru.md) уже выполняется в новой
-   feature-ветке: normal 16/16, ASan pilot 4/4; полная ASan серия и temporal
-   приёмка ещё не завершены. N=1 Exact здесь проверяет тождественную модель и
+   feature-ветке: normal 16/16 и ASan 16/16; temporal приёмка ещё не завершена.
+   N=1 Exact здесь проверяет тождественную модель и
    свежий final gate; это не подтверждение успешного изменения геометрии.
+   Дополнительный normal N0 контроль уже физически подтвердил timing-ready
+   L2 → соседний Ns2 до L3 для Classic/Branch; ASan-аналог ещё выполняется.
+   Оба normal Train при этом SearchUnresolved; классификация не проверялась.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
