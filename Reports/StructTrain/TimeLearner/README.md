@@ -413,3 +413,10 @@ production reader16/16; full graph projection and68 case/soma pairs audited.
 All32 trace CSVs are byte-identical to normal a3. Compact archive336 members,
 388052 bytes, all member hashes verified. ASan regression and visual acceptance
 remain separate pending gates; no selectivity verdict or full-stage acceptance.
+
+[Current native loaded-learner ASan a4](s04-loaded-readout-current-asan-a1/README.md):
+MDMatrix10/10, native32/32, regression21/21 without skipped, reader16/16.
+340 exact primary members/394220 bytes; outer and member hashes verified after
+Git retrieval. All32 CSVs byte-identical to current normal. Together with normal
+primary and30 directly reviewed selected PNGs this accepts only the scoped
+loaded graph/readout and MDMatrix correction. Full stages4/11 remain open.

@@ -1,5 +1,16 @@
 # Состояние рефакторинга на 01.11.2026
 
+Последний принятый scoped результат: loaded learner graph/readout и общий
+MDMatrix resize. Оба workers прошли10 math+32 native+21 regression+16 reader;
+полный компактный primary,32 byte-identical crossworker CSV,1476 temporal PNG
+в cache и30 directly reviewed selected PNG. Child mergesPulseLibe51c702 /
+Rdk78e51a9b опубликованы с trees, равными проверенным исходникам. Root exact
+closure фиксируется в текущем acceptance merge. [Подробности](LoadedLearnerReadout.ru.md).
+Полные этапы4/11 и цель0–12 остаются открытыми. Warm learner Reset — отдельная
+незавершённая feature; новые8 tests на normal уже прошли, ASan/graphs/acceptance
+ещё требуются. Ранние статусы ниже являются историческими снимками.
+
+
 Цель 0–12 активна. Полностью принят только этап 0; остальные этапы имеют
 незакрытые требования. Полный остаток сохранён в
 [сводке 31.10](CurrentStatus-2026-10-31.ru.md#остаток-полного-плана) и
