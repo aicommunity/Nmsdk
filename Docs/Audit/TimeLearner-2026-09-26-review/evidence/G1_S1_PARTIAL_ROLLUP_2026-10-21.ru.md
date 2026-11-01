@@ -1,5 +1,9 @@
 # G1 S1 — частичный rollup исполнения (PARTIAL, 2026-10-21)
 
+> Исторический документ: указанные ниже shell-команды относятся к аудиту октября2026. Исполняемые файлы удалены из текущего дерева; источники доступны только по зафиксированным Git-ссылкам. Это не инструкция запуска текущего pipeline и не разрешение возобновить серию D.
+> Источники: [run_series.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh).
+
+
 **Статус документа:** PARTIAL — **drv 12/12** `SERIES_DONE` + `EXIT=0` (tick 123); **matrix exit audit rep3: 3/12** с `launch.exit=0` (W01, W13, W33 на `.11`) — см. [`G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md`](G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md). W08 rep3: `launch.exit=1`, queue `paused_after_training_or_evaluation_issue` — **ложный «зелёный» drv подтверждён**.
 
 **Момент среза (UTC):** 2026-10-21T16:36Z (tick 124 exit-audit + metrics outline). Источники read-only: `drv-G1.S1.W*.log` на Elder-1 (`.11`) и M40 `.17` (`/media/user/Data/TLAgent-20261020/agent-reports/`), [`G1_LAUNCH_S1_2026-10-21.ru.md`](G1_LAUNCH_S1_2026-10-21.ru.md), [`G1_selected_2026-10-21.tsv`](G1_selected_2026-10-21.tsv), `$REPORTS/ASSIGNMENTS.tsv`, failure-analysis `$REPORTS/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md` (копия кампании: `/home/user/TLAgent-20261020/agent-reports/G1/G1_FAILURE_ANALYSIS_2026-10-21.ru.md`). Запущенный **W08 rep3** на `.17` не останавливался.
