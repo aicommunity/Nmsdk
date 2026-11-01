@@ -21,7 +21,8 @@ f23d1b8dee908ddfdc549619b754875fc627ce9b, Bin
 controls и temporal checks. Численный root942e5df4559467a9a19c56755f945ce6501e7780 /
 Pulsec25db29404b544311a3256336c0c43991a384e12. PulseLib develop merge
 38edfcad7983478a7e2ca736c32ae2703861c1fd сохраняет тот же functional Core.
-Root merge следует после фиксации exact gitlink. Полный stage7 не закрыт;
+Root acceptance merge8394a028a65afaacbe72f1ce741f26b309c4e3b7 опубликован
+с exact gitlinks. Полный stage7 не закрыт;
 [границы/источники](N0CandidateOrdering.ru.md), [журнал](CurrentStatus-2026-11-01.ru.md).
 
 ## Сверка по исходным этапам
