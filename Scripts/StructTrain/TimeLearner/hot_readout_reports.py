@@ -18,13 +18,14 @@ def conditions():
         yield ("Branch" if branch else "Classic")+f"-N{count}-f{frequency}", branch, count, frequency
 
 
-def read_case(folder, branch, count, frequency):
+def read_case(folder, branch, count, frequency, *, kind="native_hot_learner_reset",
+              schema_version=1, duration_denominator=20):
     records = []
     def raw(name):
         data, record = snapshot(folder, name);records.append(record);return data
     o = parse_json_bytes(raw("observation.json"));topology = "Branch" if branch else "Classic"
-    require(o.get("kind") == "native_hot_learner_reset" and type(o.get("schema_version")) is int
-            and o["schema_version"] == 1, "hot_unknown_observation_schema")
+    require(o.get("kind") == kind and type(o.get("schema_version")) is int
+            and o["schema_version"] == schema_version, "hot_unknown_observation_schema")
     require(o.get("topology") == topology and type(o.get("inputs")) is int and o["inputs"] == count
             and type(o.get("frequency_hz")) is int and o["frequency_hz"] == frequency, "hot_condition_mismatch")
     somas = 1 if branch else count
@@ -57,7 +58,7 @@ def read_case(folder, branch, count, frequency):
         require(values[1] >= 0, "hot_invalid_stimulus")
         # Renderer consumes two compared curves with one actual input timeline.
         rows.append(values[:2]+[values[1]]+values[2:])
-    require(len(rows) == frequency//20, "hot_incomplete_grid")
+    require(len(rows) == frequency//duration_denominator, "hot_incomplete_grid")
     edges = [i for i, r in enumerate(rows) if r[2] > 0 and (i == 0 or rows[i-1][2] == 0)]
     require(len(edges) == count, "hot_pulse_count")
     times = [rows[i][0] for i in edges]
