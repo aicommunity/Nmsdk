@@ -336,8 +336,10 @@ def audit_run_manifest(path):
             process["runtime_fingerprint"] == runtime["runtime_fingerprint"] == digest_json(runtime_content_identity(runtime)) and
             manifest["source_closure"] == runtime["source_closure"], "pipeline_run_runtime_changed")
     request = load(root/"process/request.json");arguments = request["arguments"]
-    require(type(arguments) is list and len(arguments) == 6 and all(type(a) is str for a in arguments) and
-            arguments[::2] == ["--app-ini", "--timelearner-"+mode, "--timelearner-output"] and
+    capture_arguments = (type(arguments) is list and len(arguments) == 8 and mode == "preflight" and
+                         arguments[6] == "--timelearner-capture-directory")
+    require(type(arguments) is list and len(arguments) == (8 if capture_arguments else 6) and all(type(a) is str for a in arguments) and
+            arguments[:6:2] == ["--app-ini", "--timelearner-"+mode, "--timelearner-output"] and
             arguments[1] == runtime["app_ini"]["path"], "pipeline_process_arguments_changed")
     output = PurePosixPath(arguments[5])
     require(output.is_absolute() and output.name == "native" and
