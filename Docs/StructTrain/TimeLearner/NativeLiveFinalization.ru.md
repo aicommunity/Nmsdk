@@ -252,3 +252,13 @@ binding, каждый Train sample/channel, все завершённые patter
 масштаб1920×960 и минимум8px/tick на zoom, запрет downsampling и overlays.
 Серверный рендеринг и эти проверки пока не выполнены; полные derived assets
 будут кэшем M40, в Git — compact metadata и выбранные изображения.
+
+Normal14 production operations и исходные3 reader checks завершены. При
+подготовке архива обнаружено ограничение общего artifact_bundle verifier:
+он принимал только calibration/PostTune run manifests и требовал внешний
+source package даже у cold Train. Проверка останавливает публикацию, а не
+обходит ошибку. Общий verifier расширен на native pipeline schema1 wrapper:
+train требует source_package_path=null, export/evaluate — имеющийся declared
+source artifact. Полная byte/hash/inventory closure сохраняется. Добавлен
+четвёртый reader check для всех14 runs и пяти повреждённых архивных наборов;
+его серверная проверка и публикация ещё ожидаются.

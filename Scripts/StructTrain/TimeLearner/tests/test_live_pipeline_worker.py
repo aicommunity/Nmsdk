@@ -94,3 +94,26 @@ class LivePipelineWorkerTest(unittest.TestCase):
                 signed(p);signed(j)
                 with self.subTest(run=name, corruption=mutation):
                     with self.assertRaises(EvidenceError):validate_job("train", j)
+
+    def test_packaged_all_run_closures_and_cold_source_contract(self):
+        from ..artifact_bundle import verify_packaged_run_closure
+        files = {p.relative_to(self.root).as_posix(): p.read_bytes()
+                 for p in (self.root/"runs").rglob("*") if p.is_file()}
+        result = verify_packaged_run_closure(files)
+        self.assertEqual(result["run_snapshots_verified"], 14)
+        train = "runs/Classic-fixed/run-manifest.json";evaluation = "runs/Classic-fixed-evaluate/run-manifest.json"
+        for mutation in ("missing_artifact", "changed_artifact", "cold_source", "evaluation_source", "operation"):
+            changed = dict(files)
+            if mutation in ("missing_artifact", "changed_artifact"):
+                row = load(self.root/train)["artifacts"][0];key = "runs/Classic-fixed/"+row["path"]
+                if mutation == "missing_artifact":changed.pop(key)
+                else:changed[key] += b" "
+            else:
+                key = evaluation if mutation == "evaluation_source" else train
+                m = json.loads(files[key])
+                if mutation == "cold_source":m["source_package_path"] = "input/job.json"
+                elif mutation == "evaluation_source":m["source_package_path"] = None
+                else:m["operation"] = "invented"
+                changed[key] = json.dumps(signed(m)).encode("utf-8")
+            with self.subTest(corruption=mutation):
+                with self.assertRaises(EvidenceError):verify_packaged_run_closure(changed)
