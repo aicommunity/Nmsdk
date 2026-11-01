@@ -719,3 +719,30 @@ NeuroModelerConsole с текущим Core в новом runtime и провер
 production coverage и выявляет оставшиеся algorithm/mode/profile дефекты;
 она не возобновляет старую сериюD и не меняет CapturedPerInput или августовскую
 доказательность4/8–6/8. Получение8/8 не является условием инженерной приёмки.
+# Продолжение: production N0 после принятого kernel-подэтапа
+
+Ветка `codex/timelearner-n0-production` продолжает план после root develop
+8394a028a65afaacbe72f1ce741f26b309c4e3b7. Добавлены явные N0-протоколы
+с1/2 измерениями кандидата, сохранением fixed anchor и индивидуальных Rs;
+производственные корпуса используют штатные CLI/Console/worker, по14 операций.
+Код запуска021692a3fa0de4577e0770fd0af867a582a0ef03; усиленные проверки
+фактически измеренного Ns>1 опубликованы1d2d3b0cd5abd783ebb96a0e746903257b1c708c.
+
+M40: отдельный Console runtime собран из PulseLib develop38edfcad7983478a7e2ca736c32ae2703861c1fd;
+build proof23edc5481229bb8f6deddda3cacc1c9ad04e9366 включён в feature через merge.
+Двадцать Python job preflight checks прошли. Производственный supervisor228908
+запущен, первая Classic-fixed Train/evaluate пара завершилась. Реальные
+кандидаты Ns1/2 измерены при Rs86000000; результат обучения SearchUnresolved,
+не Exact. Полная приёмка обоих корпусов и temporal reports ещё не завершена.
+
+Elder: свободно было75022336B. После проверки отсутствия пользователей/процессов,
+формата ar и контрольных сумм удалены только старые статические link caches
+двух собственных runtime;168469220B, free243515392B. Уникальные первичные данные
+и executable не удалялись. Receipt сохранён на сервере; отдельная normal сборка
+Console запущена supervisor2377203/start_ticks307276259 из root1d2d3b0c.
+
+См. [точную постановку и ограничения](N0ProductionCoverage.ru.md). Наличие
+build proof либо завершённой Train/evaluate пары не закрывает полный stage7,
+исторический replay и независимую оценку. Все остальные обязательства плана
+сохраняются.
+
