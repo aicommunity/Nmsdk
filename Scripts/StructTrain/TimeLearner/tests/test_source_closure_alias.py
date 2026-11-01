@@ -59,6 +59,9 @@ class SourceClosureAliasTests(unittest.TestCase):
         alias.mkdir()
         git(self.root, "config", "core.worktree", str(self.root))
         (alias / ".git").write_text("gitdir: " + str(self.root / ".git") + "\n")
+        git(self.child, "config", "core.worktree", str(self.child))
+        (alias / "Bin").mkdir()
+        (alias / "Bin" / ".git").write_text("gitdir: " + str(self.child / ".git") + "\n")
         self.assertEqual(git(alias, "rev-parse", "HEAD"), git(self.root, "rev-parse", "HEAD"))
         with self.assertRaisesRegex(RuntimeError, "source repository alias mismatch: root"):
             source_closure(alias)
