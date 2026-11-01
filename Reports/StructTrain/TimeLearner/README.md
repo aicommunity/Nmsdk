@@ -250,3 +250,7 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   actual300-second timeout,26 completed stdout cases;61 verified archived
   members,225672 compressed bytes. Includes exact duplicate cleanup and an
   inactive compiler-cache receipt; no complete regression acceptance.
+
+- [N0 normal regression](s07-n0-candidate-order-normal-a2/README.md):31/31 native
+  cases and4/4 independent checks,56 real probes,188 unchanged source files.
+  205 verified members,346080 compressed bytes; temporal acceptance pending.

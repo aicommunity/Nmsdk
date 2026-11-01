@@ -72,3 +72,21 @@ Normal reader PID2312312 и ASan reader PID154042 запущены на metadata
 a86f96ee5d015b304c63e7070b733477ed69891b и ждут успешного завершения соответствующей
 численной попытки. Результатов4/4 пока нет. Report scope отдельно объявляет
 четыре фазы обучения; editor-only waveform не выдаются за покрытые этим отчётом.
+
+## Полный normal regression принят адресно
+
+Elder numerical root942e5df4559467a9a19c56755f945ce6501e7780 / Core
+c25db29404b544311a3256336c0c43991a384e12 завершил31/31 native cases без skips,
+375.292s по GoogleTest. Independent reader root71878cb5435f75a413e979be5fba3071fdbd847d
+прошёл4/4,0.221566s whole reader,56 реальных проб и188 неизменённых файлов.
+Все4 экспортированных effective graphs имеют пересчитанный canonical hash,
+совпадающий с actual model revision сертификата. Исходный reader ошибочно
+считал обязательный service_model.json лишней trial; исправленный требует
+этот exact model file отдельно от строгого множества нумерованных проб.
+Первый setup failure и abort зависимого publisher сохранены.
+
+[Proofc9c65de9b12989b0ddcb51da5924f1854a56f88e](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-normal-a2/README.md):
+205 members,8623983 raw bytes→346080compressed. Outer и все member hashes
+локально проверены. Четыре native N0 warm/cold controls остаются SearchUnresolved
+с корректными свежими negative certificates; это не классификационный Test.
+ASan regression и temporal приёмка ещё ожидаются; develop не обновлён.
