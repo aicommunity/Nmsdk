@@ -1,0 +1,50 @@
+import pathlib,subprocess,json,hashlib,os
+b=pathlib.Path('/home/user/timelearner-refactor');repo=b/'source-august-replay-proof-elder-a1'
+root='a04491f47a7d301762be7f8e511968362ccdbcea'
+out=b/'readbacks/s09-retired-normsync-model-elder-a1';out.mkdir(exist_ok=False)
+def git(*args,raw=None):
+ return subprocess.check_output(['git','-C',str(repo),*args],input=raw)
+before=git('rev-parse','HEAD').decode().strip()
+git('fetch','--no-recurse-submodules','https://github.com/aicommunity/Nmsdk.git',root)
+assert git('rev-parse','FETCH_HEAD').decode().strip()==root
+manifest=json.loads(git('show',root+':Docs/StructTrain/TimeLearner/script_migration.json'))
+assert len(manifest['retired_files'])==36 and manifest['complete'] is False
+records=[]
+for x in manifest['retired_files']:
+ assert x['repository']=='root'
+ spec=x['archive_commit']+':'+x['old_path']
+ try:raw=git('show',spec)
+ except subprocess.CalledProcessError:
+  git('fetch','--no-recurse-submodules','https://github.com/aicommunity/Nmsdk.git',x['archive_commit']);raw=git('show',spec)
+ assert len(raw)==x['bytes'] and hashlib.sha256(raw).hexdigest()==x['content_sha256'],spec
+ assert git('rev-parse',spec).decode().strip()==x['blob_sha1']
+ assert not git('ls-tree','-r',root,'--',x['old_path']).strip()
+ records.append({'path':x['old_path'],'archive_commit':x['archive_commit'],'blob':x['blob_sha1'],'sha256':x['content_sha256'],'bytes':len(raw),'absent_current':True,'retrieval_verified':True})
+prefix='Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/'
+tree=git('ls-tree','-r','--name-only',root,'--',prefix).decode().splitlines()
+preserved=[]
+for path in tree:
+ assert not path.endswith(('.py','.c','.sh')),path
+ current=git('show',root+':'+path);old=git('show','970fde1a0b13cf4d29b1c19659d423dd9899ebfe:'+path)
+ assert current==old,path
+ preserved.append({'path':path,'sha256':hashlib.sha256(current).hexdigest(),'bytes':len(current),'unchanged':True})
+assert preserved
+pattern=r'normsync_audit|rs_delay_sim\.py|window_shift_sim\.py|normsync/(aggregate\.py|model\.py|segsim)'
+args=['git','-C',str(repo),'grep','-n','-E',pattern,root,'--','Scripts','Tests','App','Apps','CMakeLists.txt']
+r=subprocess.run(args,capture_output=True);assert r.returncode==1,(r.returncode,r.stdout,r.stderr)
+assert git('rev-parse','HEAD').decode().strip()==before
+result={'kind':'historical_script_retirement_verification','schema_version':1,'source':root,'retrieval_records':records,'retired_count':len(records),'normsync_nonexecutables_preserved':preserved,'active_caller_search':{'argv':args[3:],'returncode':r.returncode,'stdout':r.stdout.decode(),'stderr':r.stderr.decode(),'scope':'literal names and normsync-relative paths in root production sources only; no claim about arbitrary dynamically generated external callers'},'worktree_head_unchanged':before,'builds_or_numerical_tests_run':False,'complete_stage9':False,'scientific_verdict':None}
+(out/'validation.json').write_text(json.dumps(result,indent=2)+'\n')
+files={'validation.json':(out/'validation.json').read_bytes(),'README.md':b'# Historical normsync model retirement\n\nElder verified all 36 retired root files can be retrieved from their exact Git commits with matching blob IDs, sizes and SHA256. All removed paths are absent from the new tree. Every remaining non-executable normsync artifact is unchanged from the accepted source snapshot. Literal active-caller search in root production sources has no matches. No old executable, native experiment, source checkout or numerical test was run. Stage9 remains partial.\n'}
+files['SHA256SUMS.json']=(json.dumps({k:hashlib.sha256(v).hexdigest() for k,v in files.items()},indent=2)+'\n').encode()
+env=dict(os.environ,GIT_INDEX_FILE=str(out/'publication.index'))
+def publishgit(*a,raw=None):return subprocess.check_output(['git','-C',str(repo),*a],input=raw,env=env).decode().strip()
+publishgit('read-tree',root)
+report='Reports/StructTrain/TimeLearner/s09-retired-normsync-model-elder-a1'
+for name,raw in files.items():publishgit('update-index','--add','--cacheinfo','100644',publishgit('hash-object','-w','--stdin',raw=raw),report+'/'+name)
+commit=publishgit('commit-tree',publishgit('write-tree'),'-p',root,raw=b'Preserve server Git evidence for historical normsync model retirement\n')
+branch='codex/timelearner-normsync-model-retirement-proof'
+publishgit('update-ref','refs/heads/'+branch,commit,'0'*40)
+publishgit('push','--recurse-submodules=no','git@github.com:aicommunity/Nmsdk.git','refs/heads/'+branch+':refs/heads/'+branch)
+print(json.dumps({'commit':commit,'retired':len(records),'preserved':len(preserved),'worktree_unchanged':True}))
+
