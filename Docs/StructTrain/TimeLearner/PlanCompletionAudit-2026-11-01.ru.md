@@ -52,6 +52,14 @@ scheduler/CLI остаются открытыми. [Реестр/границы]
 отклонены. ASan regression повторён на том же runtime после timeout1800 s,
 с бюджетом3600 s, не с ослабленными численными условиями. Полные этапы открыты.
 
+Адресно приняты [production prepare/preflight](NativePreflight.ru.md): на каждом
+worker14 положительных/6 отрицательных сценариев,2 one-tick Train controls,
+20/20 reader/prepare checks и32 native размерных случая Classic/Branch×N0/N1×
+N1/2/4/6×2000/20000Hz. Все46 initial graphs/parameters/config hashes и32 prepared
+job hashes совпали между workers; preflight не вызвал Calculate. Actual runtime
+captured parent-процессом; все52 ASan snapshots содержат libasan. Это scoped
+приёмка команд, не полные этапы2/4/9/10 и не результат классификации.
+
 ## Снимки и пределы доказательств
 
 Принятый сквозной live pipeline включён в корневой develop
@@ -95,7 +103,7 @@ Root acceptance merge8394a028a65afaacbe72f1ce741f26b309c4e3b7 опубликов
 |6. Контроллер|Configured ControllerVersion=2 запускает общий NativeTrainingService через native scheduler; есть topology adapters и legacy controls.|Полный compatibility A/B и все режимы исходного плана. Текущее наличие общего контроллера не означает полноту поддержки всех configurations.|
 |7. Алгоритмы|Bounded L/Ns/Rs, собственные CapturedPerInput targets, revision-bound измерения, individual resistance domains, fresh all-input final gate, N0 repeats.|Полная алгоритмическая/physical matrix, informed proposal policies, quantized/best-effort semantics и C-trim. Scoped исправление N0 принято по обеим server/ASan и repeat/temporal проверкам; [границы](N0CandidateOrdering.ru.md).|
 |8. Conversion/PostTune/calibration|Immutable Solo→Recognition, native import, transactional candidate handling и live phase execution, cancel/rollback, persisted plans; реальные fixed/grid controls.|Остальные режимы/цели, target-reference/parallel-peak, optional C-trim, все модели, nonseparable/fallback semantics и независимая оценка.|
-|9. Пакет/migration|В корне есть train/export/evaluate/calibrate/posttune/analyze/report/bundle/publish/history и поддерживающие модули; настоящий schema2 production pipeline проверен.|Единый prepare/preflight для всей матрицы, завершение переноса активного специализированного анализа и удаление старых исполняемых scripts из Bin/PulseLib/Docs с Git migration manifest.|
+|9. Пакет/migration|В корне есть prepare/preflight/train/export/evaluate/calibrate/posttune/analyze/report/bundle/publish/history и поддерживающие модули; настоящий schema2 production pipeline проверен.|Расширить принятые prepare/preflight на остальные profiles/modes; завершить перенос активного специализированного анализа и удаление старых исполняемых scripts из Bin/PulseLib/Docs с Git migration manifest.|
 |10. Очереди/provenance/publisher|Есть ConditionSpec/сериализация, process ownership/runtime checks, publisher и их адресные проверки.|Полная интеграция scheduler/leases/recovery/cancel/resources на двух workers, все fault cases publication и использование единого ConditionSpec всеми production cases. Наличие файлов не доказывает эту интеграцию.|
 |11. Эксперименты|Есть реальные engineering Train→finalization→frozen evaluate controls и читаемые временные отчёты. Три свежих saved-state replay exact August closure воспроизвели4/8,5/8,6/8; passive observer CSV A/B совпал,7/7 reader checks на worker,96 PNG/15 directly reviewed ([источники/границы](HistoricalAugustReplay.ru.md)).|Настоящий historical cold Train и три frozen Test также приняты ([контроль](HistoricalAugustColdStart.ru.md)):4/8,5/8,6/8, полная serialized neuron identity, CSV и36 raw streams равны saved-state replay;7/7 temporal checks на worker. Это исходный same-matrix протокол. Legacy/V2, target в каждой позиции, ITI/reset-policy/independent Test и вся научная physical matrix остаются открытыми.|
 |12. Документация|Подэтапы описаны с source SHA, primary artifacts и ограничениями; есть единая live-finalization спецификация.|Сквозное согласование всех root/submodule/config/ClDesc документов, semantic defaults и migration links. Старые аудиты сохраняются как снимки, не текущие спецификации.|

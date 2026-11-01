@@ -6,8 +6,9 @@ Import не запускает эксперименты. Реализованы 
 `calibrate run/select/confirm`, owned `train/export/evaluate` и portable
 `analyze --format pipeline-run`. Runtime/process supervisor также имеют module CLI.
 Добавлены scoped `prepare` (декларативная размерная матрица) и `preflight`
-(эффективная native-модель без Calculate); их совместная серверная приёмка
-ещё не завершена. Общий prepare для всех profiles/modes, сквозной scheduler
+(эффективная native-модель без Calculate); адресная normal/ASan приёмка
+завершена: по32 размерных случая и20 reader/prepare checks,46 одинаковых
+начальных моделей между workers. Общий prepare для всех profiles/modes, сквозной scheduler
 и полная миграция остаются открытыми. [Контракт](../../../Docs/StructTrain/TimeLearner/NativePreflight.ru.md).
 
 Активный анализатор старой Branch schema-1 телеметрии перенесён из Bin:
