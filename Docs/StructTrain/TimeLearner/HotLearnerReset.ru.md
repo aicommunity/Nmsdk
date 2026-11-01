@@ -71,3 +71,16 @@ ASan hot8/loaded32/reg21 выполняется на M40 отдельным runt
 Там же строятся рисунки всех16 warm case/soma pairs из Git-restored normal
 primary; визуальная приёмка ещё не выполнена. Root hot feature не принята
 в develop, полные stages4/11 и цель0–12 остаются открытыми.
+
+Temporal evidence: все178 PNG для8 условий/16 case-soma pairs прошли
+проверку состава файлов, SHA256,1920x960 и полного покрытия overview/100tick
+окон. Выбраны18 рисунков: обзоры условий, Classic first/last soma, actual
+input/peak tiles при20kHz. Все18 оригиналов прямо просмотрены; подписи и
+кривые читаемы, графики показывают именно50ms warm response ДО Reset.
+После Reset проверяются отдельные native JSON и C++ assertions; разрыв
+или второе предъявление в графики не достраиваются. Полный178-image cache
+вручную не просматривался и в Git не копируется. Primary/metadata/selected:
+Reports/StructTrain/TimeLearner/s04-hot-readout-visual-a1, исходная публикация
+cc5f76323ef4b7a8dbed918bb137ab7dc64aefdc. Суммы всех опубликованных файлов
+и членов metadata archive проверены после Git retrieval. ASan hot8 уже
+прошёл; loaded32/reg21 нового ASan runtime ещё выполняются.
