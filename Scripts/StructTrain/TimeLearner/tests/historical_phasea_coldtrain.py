@@ -10,7 +10,36 @@ from ..native_evidence import load, require
 from ..process_runner import execute, verify_runtime
 from ..runtime import source_closure
 from .historical_phasea_replay import ROOT, BIN, PULSE, write
-from .historical_phasea_coldstart import prepare, readback
+from .historical_phasea_coldstart import COLD, prepare, readback
+
+
+def validate_coldstart_gate(directory, runtime):
+    """Read actual native exports before allowing the historical Train process."""
+    gate = load(directory/"validation.json")
+    require(gate.get("kind") == "historical_phasea_prestimulus_coldstart_gate" and
+            gate.get("native_cold_start_verified") is True and gate.get("parent_only_overlay_rejected") is True
+            and gate.get("source_unchanged") is True and gate.get("operations") == 4,
+            "native_coldstart_gate_not_completed")
+    preflight = directory/"native_state_reset"
+    require(load(preflight/"process/runtime.json") == runtime, "coldstart_gate_runtime_changed")
+    result = load(preflight/"process/result.json")
+    require(result.get("execution") == "completed" and result.get("returncode") == 0,
+            "coldstart_gate_process_not_completed")
+    state = readback(preflight/"work")
+    require(state == load(preflight/"readback.json"), "coldstart_gate_export_disagrees_with_metadata")
+    require(state["effective_dendrite_segments"] == 4 and state["generator_pulse_counter"] == 0 and
+            state["reset_flag"] == "0" and state["dendrite_exc1_resistances"] ==
+            {"Dendrite"+str(i)+"_1": 86000000.0 for i in range(1, 5)},
+            "coldstart_gate_effective_state_invalid")
+    require(all(state["learner"][key] == [float(t) for t in value.split()] for key, value in COLD.items()),
+            "coldstart_gate_parent_state_invalid")
+    declared = json.loads((preflight/"pre-run-files.json").read_text())
+    require(type(declared) is list and len(declared) == 7, "invalid_coldstart_prepared_input_manifest")
+    for record in declared:
+        relative = Path(record["path"]).relative_to("work")
+        require(len(relative.parts) == 1 and hashlib.sha256((preflight/"prepared"/relative).read_bytes()).hexdigest()
+                == record["sha256"], "coldstart_gate_prepared_input_corrupt")
+    return declared
 
 
 def main():
@@ -25,14 +54,7 @@ def main():
             closure["Libraries/Nmsdk-PulseLib"]["head"] == PULSE, "historical_coldtrain_closure_mismatch")
     require(runtime["source_closure"] == closure, "historical_runtime_closure_mismatch")
     verify_runtime(runtime)
-    gate = load(args.coldstart_gate/"validation.json")
-    require(gate["native_cold_start_verified"] and gate["parent_only_overlay_rejected"] and
-            gate["source_unchanged"] and gate["operations"] == 4, "native_coldstart_gate_not_completed")
-    preflight = args.coldstart_gate/"native_state_reset"
-    require(load(preflight/"process/runtime.json") == runtime, "coldstart_gate_runtime_changed")
-    state = load(preflight/"readback.json")
-    require(state["effective_dendrite_segments"] == 4 and state["generator_pulse_counter"] == 0 and
-            state["reset_flag"] == "0", "coldstart_gate_effective_state_invalid")
+    declared = validate_coldstart_gate(args.coldstart_gate, runtime)
     # Prevent unrestricted output on a nearly full filesystem; this is an
     # engineering minimum, not a scheduler reservation or arbitrary-run estimate.
     ancestor = args.output.parent
@@ -40,8 +62,6 @@ def main():
     require(shutil.disk_usage(ancestor).free >= 2*1024**3, "historical_coldtrain_storage_budget")
     args.output.mkdir(parents=True, exist_ok=False)
     work = prepare(source/"Bin", args.output/"train", "native_state_reset")
-    declared = json.loads((preflight/"pre-run-files.json").read_text())
-    require(type(declared) is list and len(declared) == 7, "invalid_coldstart_prepared_input_manifest")
     for record in declared:
         relative = Path(record["path"]).relative_to("work")
         require(hashlib.sha256((work/relative).read_bytes()).hexdigest() == record["sha256"],
