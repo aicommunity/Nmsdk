@@ -35,6 +35,7 @@ Baseline process_error с returncode1 сохраняется.
 
 SetDataDirect и connected/external supplier следуют Rdk; они не покрыты
 утверждением об отказе обычного локального setter. Build/Reset/Calculate
-данным изменением не исправляются. LIFECYCLE-BOOL-001 остаётся открытым.
+данным изменением не исправляются. LIFECYCLE-BOOL-001 касается остаточной согласованности внутренних hooks:
+публичные Build/Reset уже возвращают true; их интерфейс не объявляется сломанным.
 V2 tolerances/windows имеют отдельного владельца — ControllerConfiguration.
 Полные этапы1/4/6/7/9 остаются частичными; научный verdict отсутствует.
