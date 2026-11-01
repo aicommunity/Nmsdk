@@ -658,3 +658,44 @@ Child gitlinks f23d1b8d/49adcd02/027f7f83 неизменны. Это docs-only d
 Develop затем включён --no-ff в N0 feature, без изменения её functional Core.
 ASan native process150150 подтверждён живым39:33; идёт Branch20000Hz. Полные
 31/reader4/visual ASan и scoped N0 develop merge ещё ожидаются.
+
+
+## Принят scoped N0 candidate-order подэтап
+
+ASan producer148245 terminal0:31/31 native cases,2764.079s; corrected reader
+164462 terminal0:4/4,56 probes/188 unchanged files,0.159291s. Proof
+fb1f578b94395fbb786e7e6658b9e0f704f341ac:201 members/8658691raw→348832bytes,
+outer/member hashes проверены локально. Leak detection выключен.
+
+Configured repeat follow-ups normal2340047 / ASan186704 terminal0:каждый3/3
+native +3/3 actual-data checks,48probes/10groups/108 unchanged native files,
+39.513974s и253.101449s. Runtime before/after совпал, rebuild0. Proofs
+a0ff3273501466677d34423d3c2a5d52d36766d3 /6e596751df9be629b6480d249756f72dd9874a5a:
+по125 members,104708/108188compressed bytes; hashes проверены. Два exported
+model graphs каждого proof имеют пересчитанные hashes actual certificate model.
+
+Base ASan temporal148416 и visual reader197579 terminal0:56trials/84pairs,
+124.066112s render,3/3 checks0.454444s,117 phase files unchanged. Proof
+32cca42c0275ce92bee3a93f37970448f0bf9526:142members/96408bytes;8 exact PNG
+references к directly reviewed normal fd90e862, без новых image bytes.
+
+Repeat temporal normal192131 / ASan199542 terminal0:48trials/72pairs и3/3
+checks каждый,101.825486/99.217732s,125 primary files unchanged каждый.
+Normal proof78a12250c220c1e480559ab450ee07f0220298a0:119members/81904bytes и
+4PNG/618333bytes. Все4 прямо просмотрены1920×960; QA252ca56bf3a492130d9193efd8edb3c57875a38f.
+ASan proof4d024c5f822cc6265bbfc0ac017f90890f0addfb:112members/81664bytes,
+4 exact reviewed-image refs, новыхPNG0. Все outer/member/ref hashes проверены.
+Full caches остаются M40 Data:normal1763files/88636254bytes,ASan1763/88636239.
+Manual scope только selected first-soma/final-input0 views; full-cache manual
+acceptance, SI interpretation и независимые научные повторы не заявляются.
+
+Native fixture outcomes — SearchUnresolved и fresh negative certificates.
+Контролируемый response oracle подтверждает proposal policy, реальные native
+controls — регрессии. Warm/prebuilt означает построенный объявленный fixture,
+не continuation ранее обученного состояния. Августовский replay не выполнялся.
+
+PulseLib feature включена --no-ff в develop38edfcad7983478a7e2ca736c32ae2703861c1fd,
+push и ls-remote проверены. Core64cdc352af865dc0e860ea05fb2c6d9799ccc36e точно
+равен фактически проверенному c25db29. Bin49adcd02 и Rdk027f7f83 не менялись.
+Root feature фиксирует exact child link; root --no-ff merge следует после этой
+записи. Подэтап закрыт в указанной области, полный stage7/план0–12 открыт.

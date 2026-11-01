@@ -16,11 +16,13 @@ f23d1b8dee908ddfdc549619b754875fc627ce9b, Bin
 фактически использованного97dd1943a059e67888d56380c5409f3d3997d086 отличается
 документацией. Это согласованная опубликованная closure, не новый численный прогон.
 
-Отдельная feature codex/timelearner-n0-candidate-order проверяет изменение
-порядка N0. Численный root942e5df4559467a9a19c56755f945ce6501e7780 / Pulse
-c25db29404b544311a3256336c0c43991a384e12 ещё не принят в develop. Его partial
-stdout PASS и timeout не являются приёмкой полного набора. Актуальные процессы
-и последующие результаты: [журнал](CurrentStatus-2026-11-01.ru.md).
+Подэтап codex/timelearner-n0-candidate-order принят адресно:31/31 native cases
+и4/4 actual-data checks на обоих workers; дополнительно3+3 configured repeat
+controls и temporal checks. Численный root942e5df4559467a9a19c56755f945ce6501e7780 /
+Pulsec25db29404b544311a3256336c0c43991a384e12. PulseLib develop merge
+38edfcad7983478a7e2ca736c32ae2703861c1fd сохраняет тот же functional Core.
+Root merge следует после фиксации exact gitlink. Полный stage7 не закрыт;
+[границы/источники](N0CandidateOrdering.ru.md), [журнал](CurrentStatus-2026-11-01.ru.md).
 
 ## Сверка по исходным этапам
 
@@ -33,7 +35,7 @@ stdout PASS и timeout не являются приёмкой полного н�
 |4. Lifecycle/storage|Исправления Build/Init/Reset/frequency, storage-профили, native builders/editors, граф/readback и адресные growth/reuse/Copy/Load проверки.|Полная lifecycle×physics×frequency×dimension матрица, heterogeneous storage и сохранность индивидуальных Rs/C во всех поддержанных путях; multirate остаётся compatibility scope.|
 |5. Export/import|ModelArchive, learned/recognition ownership, actual graph identity и реальный Train→Test с readback в принятой области.|Все виды моделей, связей, inhibition/heterogeneous physics и calibration/conversion provenance; независимый frozen Test. Не обещать mid-probe dynamic checkpoint.|
 |6. Контроллер|Configured ControllerVersion=2 запускает общий NativeTrainingService через native scheduler; есть topology adapters и legacy controls.|Полный compatibility A/B и все режимы исходного плана. Текущее наличие общего контроллера не означает полноту поддержки всех configurations.|
-|7. Алгоритмы|Bounded L/Ns/Rs, собственные CapturedPerInput targets, revision-bound измерения, individual resistance domains, fresh all-input final gate, N0 repeats.|Полная алгоритмическая/physical matrix, informed proposal policies, quantized/best-effort semantics и C-trim. Текущее исправление N0 ещё проходит приёмку.|
+|7. Алгоритмы|Bounded L/Ns/Rs, собственные CapturedPerInput targets, revision-bound измерения, individual resistance domains, fresh all-input final gate, N0 repeats.|Полная алгоритмическая/physical matrix, informed proposal policies, quantized/best-effort semantics и C-trim. Scoped исправление N0 принято по обеим server/ASan и repeat/temporal проверкам; [границы](N0CandidateOrdering.ru.md).|
 |8. Conversion/PostTune/calibration|Immutable Solo→Recognition, native import, transactional candidate handling и live phase execution, cancel/rollback, persisted plans; реальные fixed/grid controls.|Остальные режимы/цели, target-reference/parallel-peak, optional C-trim, все модели, nonseparable/fallback semantics и независимая оценка.|
 |9. Пакет/migration|В корне есть train/export/evaluate/calibrate/posttune/analyze/report/bundle/publish/history и поддерживающие модули; настоящий schema2 production pipeline проверен.|Единый prepare/preflight для всей матрицы, завершение переноса активного специализированного анализа и удаление старых исполняемых scripts из Bin/PulseLib/Docs с Git migration manifest.|
 |10. Очереди/provenance/publisher|Есть ConditionSpec/сериализация, process ownership/runtime checks, publisher и их адресные проверки.|Полная интеграция scheduler/leases/recovery/cancel/resources на двух workers, все fault cases publication и использование единого ConditionSpec всеми production cases. Наличие файлов не доказывает эту интеграцию.|
@@ -64,8 +66,8 @@ Git, полные производные отчёты остаются на M40 
 
 ## Текущая последовательность приёмки
 
-1. Закончить N0 regression на реальных компонентах и строгий первичный аудит;
-   сохранить также timeout/failures и отчёты, затем принять scoped feature.
+1. Включить принятый N0 подэтап с точными child gitlinks; regression/repeat/
+   temporal evidence завершены, полная алгоритмическая матрица остаётся открытой.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
