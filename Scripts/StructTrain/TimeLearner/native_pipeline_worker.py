@@ -16,18 +16,22 @@ from .recognition_evidence import audit_recognition_source
 from .recognition_metrics import load_evaluation, score_recognition_evaluation
 
 
+TRAINING_FIELDS = {"owner_class", "implementation_id", "configuration", "profile_archives", "optional_modes",
+                   "calculate_mode", "structure_build_mode", "maximum_model_ticks"}
 FIELDS = {
-    "train": {"owner_class", "implementation_id", "configuration", "profile_archives", "optional_modes",
-              "calculate_mode", "structure_build_mode", "maximum_model_ticks"},
+    "train": TRAINING_FIELDS,
+    "preflight": TRAINING_FIELDS,
     "export": {"implementation_id", "source_solo", "conversion_spec"},
     "evaluate": {"owner_class", "implementation_id", "source_recognition", "maximum_model_ticks", "run_id",
                  "coverage_policy", "criterion", "trials"},
 }
-KINDS = {"train": "training", "export": "recognition_export", "evaluate": "evaluation"}
-EXECUTION_KINDS = {"train": "training", "export": "conversion", "evaluate": "evaluation"}
+KINDS = {"preflight": "training", "train": "training", "export": "recognition_export", "evaluate": "evaluation"}
+EXECUTION_KINDS = {"preflight": "preflight", "train": "training", "export": "conversion", "evaluate": "evaluation"}
 COMMON_EXECUTION = {"kind", "schema_version", "execution", "job_sha256", "model_revision", "model_ticks",
                     "artifacts", "evaluation_verdict", "sha256"}
 EXECUTION_FIELDS = {
+    "preflight": {"frequency_hz", "model_time_begin", "model_time_end", "training_started", "controller_state",
+                  "reference_probes", "observed_probes", "integration"},
     "train": {"attempt_id", "package_path", "package_sha256", "training_outcome", "completed_boundary",
               "frequency_hz", "model_time_begin", "model_time_end"},
     "export": {"source_solo_sha256", "model_sha256"},
@@ -52,13 +56,13 @@ def _audit_source(job, source_case, mode):
 @_evidence_boundary
 def validate_job(mode, job, source_case=None):
     require(mode in FIELDS and type(job) is dict, "unknown_native_pipeline_job")
-    live = mode == "train" and type(job.get("schema_version")) is int and job["schema_version"] == 2
+    live = mode in ("train", "preflight") and type(job.get("schema_version")) is int and job["schema_version"] == 2
     require(set(job) == FIELDS[mode] | {"kind", "schema_version", "sha256"} | ({"finalization_plan"} if live else set())
             and job["kind"] == "timelearner_native_"+KINDS[mode]+"_job" and
             type(job["schema_version"]) is int and job["schema_version"] == (2 if live else 1), "unknown_native_pipeline_job")
     _digest(job)
     require(type(job["implementation_id"]) is str and bool(job["implementation_id"].strip()), "pipeline_implementation_missing")
-    if mode == "train":
+    if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
         require(type(config) is dict and type(config["model"]) is dict and
@@ -93,7 +97,7 @@ def validate_job(mode, job, source_case=None):
         require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t["run_id"] == job["run_id"] for t in trials),
                 "invalid_evaluation_trial_scope")
         require(len({t["trial_id"] for t in trials}) == len(trials), "duplicate_evaluation_trial")
-    result = {"job_sha256": job["sha256"], "primary_source_checked": mode != "train",
+    result = {"job_sha256": job["sha256"], "primary_source_checked": mode not in ("train", "preflight"),
               "effective_model_checked": False, "native_configuration_validation_required": True}
     if live:
         from .live_training_worker import validate_live_plan
@@ -133,11 +137,46 @@ def audit_execution(mode, directory, job, source_case=None):
                                       ("completed", "cancelled", "model_tick_budget_exhausted")), "pipeline_execution_status_unknown")
     ticks = count(execution["model_ticks"])
     if mode != "export":
-        config = job["configuration"] if mode == "train" else source_case[0]["configuration"]
+        config = job["configuration"] if mode in ("train", "preflight") else source_case[0]["configuration"]
         frequency = count(execution["frequency_hz"])
         require(frequency == config["model"]["frequency_hz"] and ticks <= job["maximum_model_ticks"] and
                 equal(number(execution["model_time_end"])-number(execution["model_time_begin"]), ticks/frequency),
                 "pipeline_clock_changed")
+    if mode == "preflight":
+        require(execution["execution"] == "completed" and ticks == 0 and
+                execution["training_started"] is False and execution["controller_state"] == "idle" and
+                count(execution["reference_probes"]) == count(execution["observed_probes"]) == 0 and
+                names == {"job.json", "initial-state.json"}, "preflight_started_training_or_has_extra_artifacts")
+        initial = load(directory/"initial-state.json");_digest(initial)
+        require(set(initial) == {"kind", "schema_version", "identity", "parameters", "configuration_sha256",
+                "training_started", "dynamics_checkpoint", "sha256"} and
+                initial["kind"] == "native_training_initial_state" and type(initial["schema_version"]) is int and
+                initial["schema_version"] == 1 and initial["training_started"] is False and
+                initial["dynamics_checkpoint"] is False and initial["configuration_sha256"] == sha(job["configuration"]),
+                "preflight_initial_state_changed")
+        identity = initial["identity"]
+        require(identity["kind"] == "semantic_model_identity" and type(identity["schema_version"]) is int and
+                identity["schema_version"] == 2 and identity["valid"] is True and identity["diagnostics"] == [] and
+                identity["sha256"] == sha(identity["model"]) == execution["model_revision"],
+                "preflight_model_binding_changed")
+        parameters, inputs = initial["parameters"], job["configuration"]["model"]["inputs"]
+        require(type(parameters) is list and len(parameters) == len(inputs) and all(
+                type(p) is dict and set(p) == {"length", "synapses", "resistance"} and
+                count(p["length"]) == q["attachment"] and count(p["synapses"]) == q["synapses"] and
+                number(p["resistance"]) > 0 and (q["resistance"] is None or p["resistance"] == q["resistance"])
+                for p, q in zip(parameters, inputs)), "preflight_effective_parameters_changed")
+        integration = execution["integration"]
+        require(type(integration) is dict and set(integration) == {"valid", "reason", "channels"} and
+                integration["valid"] is True and integration["reason"] == "", "preflight_integration_not_valid")
+        channels = integration["channels"]
+        require(type(channels) is list and bool(channels) and all(type(c) is dict and
+                set(c) == {"path", "maximum_conductance", "maximum_step_gain"} and
+                type(c["path"]) is str and bool(c["path"]) and number(c["maximum_conductance"]) >= 0 and
+                0 <= number(c["maximum_step_gain"]) < 2 for c in channels) and
+                len({c["path"] for c in channels}) == len(channels), "preflight_integration_channels_changed")
+        return {"effective_initial_model_checked": True, "model_revision": execution["model_revision"],
+                "input_count": len(parameters), "integration_channels": len(channels), "training_started": False,
+                "native_execution_verified": False, "evaluation_verdict": None}
     if live:
         from .live_training_worker import audit_live_training
         return audit_live_training(directory, job, execution, names)
@@ -282,7 +321,7 @@ def audit_run_manifest(path):
         actual = root/r["path"]
         require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == r, "pipeline_run_artifact_changed")
     mode = manifest["operation"];source = manifest["source_package_path"];source_case = None
-    if mode == "train":
+    if mode in ("train", "preflight"):
         require(source is None, "pipeline_cold_training_has_source")
     else:
         require(type(source) is str and source in names and PurePosixPath(source).parent == PurePosixPath("input/source"),

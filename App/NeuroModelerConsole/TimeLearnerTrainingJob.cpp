@@ -178,10 +178,11 @@ template<class Owner,class Model,class Environment> int ExecuteLive(const Job& j
         {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
     return execution=="completed"?0:2;
 }
-template<class Owner> int Execute(const Job& job,const QString& output)
+template<class Owner> int Execute(const Job& job,const QString& output,const bool preflight=false)
 {
     const auto frequency=job.configuration.model.frequencyHz;
     return WithFreshOwner<Owner>(job.ownerClass,frequency,"TrainingOwner",[&](auto,auto environment,auto model,auto owner) {
+        const double preparationBegin=environment->GetTime().GetDoubleTime();
         owner->ControllerVersion=2;owner->CalculateMode=job.calculateMode;owner->StructureBuildMode=job.structureMode;
         owner->SyncCapacitanceTrim=0;owner->EnablePostTrainTuning=false;owner->AutoCalibrateFixedLTZThreshold=false;
         if(job.finalization) {
@@ -221,11 +222,38 @@ template<class Owner> int Execute(const Job& job,const QString& output)
             Require(actual.length==expected.attachment && actual.synapses==expected.synapses &&
                 (!expected.resistance || actual.resistance==*expected.resistance),"training_job_initial_parameters_changed");
         }
+        auto plan=MakeConfiguredNativeTrainingPlan(job.configuration);
+        plan.search.initialModelRevision=initial["sha256"].toString().toStdString();
+        ValidateBoundedTrainingInputs(plan.protocol,plan.search,parameters);
+        const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());
+        Require(integration.valid,integration.reason.c_str());
+        const auto& control=owner->NativeTrainingController();
+        Require(environment->GetTime().GetDoubleTime()==preparationBegin &&
+            control.State()==NativeTrainingState::Idle && control.IssuedReferenceProbes()==0 &&
+            control.ObservedPackets().empty() && !control.Certificate() && !control.References() &&
+            owner->NativeProbeState()==NativeProbeStatus::Idle && !owner->IsNeedToTrain.GetData(),
+            "training_preparation_started_calculation");
+        Require(NmsdkTools::IdentifyModel(neuron,ports)==initial,"training_preparation_model_changed");
         Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");QJsonArray artifacts;
         artifacts.append(Write(output,"job.json",job.document));
         artifacts.append(Write(output,"initial-state.json",Signed({{"kind","native_training_initial_state"},{"schema_version",1},
             {"identity",initial},{"parameters",Parameters(parameters)},{"configuration_sha256",NmsdkTools::CanonicalModelDataSha256(job.document["configuration"])},
             {"training_started",false},{"dynamics_checkpoint",false}})));
+        if(preflight)
+        {
+            QJsonArray channels;
+            for(const auto& channel:integration.channels)channels.append(QJsonObject{
+                {"path",QString::fromStdString(channel.path)},
+                {"maximum_conductance",channel.maximumConductance},{"maximum_step_gain",channel.maximumStepGain}});
+            Write(output,"execution.json",Signed({{"kind","timelearner_native_preflight_execution"},{"schema_version",1},
+                {"execution","completed"},{"job_sha256",job.document["sha256"]},{"model_revision",initial["sha256"]},
+                {"model_ticks",0},{"frequency_hz",double(frequency)},{"model_time_begin",preparationBegin},
+                {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},
+                {"controller_state",NativeTrainingStateName(control.State())},{"reference_probes",0},{"observed_probes",0},
+                {"integration",QJsonObject{{"valid",true},{"reason",""},{"channels",channels}}},
+                {"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
+            return 0;
+        }
         auto evidence=std::make_shared<EvidenceWriter>(output,job.configuration.model.branch?1:parameters.size());
         owner->SetConfiguredNativeEvidenceSinks({[evidence](const auto& p,const auto& s){evidence->Prepared(p,s);},
             [evidence](const auto& sample){evidence->Sample(sample);},[evidence](const auto& result){evidence->Observation(result);}});
@@ -271,4 +299,11 @@ int RunTimeLearnerTrainingJob(const QString& input,const QString& output)
     try{const auto job=Read(input);Require(!output.isEmpty(),"job_output_required");
         return job.configuration.model.branch?Execute<NNeuronTimeLearnerBranch>(job,output):Execute<NNeuronTimeLearner>(job,output);}
     catch(const std::exception& error){std::cerr<<"TimeLearner training job: "<<error.what()<<'\n';return 2;}
+}
+int RunTimeLearnerPreflightJob(const QString& input,const QString& output)
+{
+    try{const auto job=Read(input);Require(!output.isEmpty(),"job_output_required");
+        return job.configuration.model.branch?Execute<NNeuronTimeLearnerBranch>(job,output,true):
+            Execute<NNeuronTimeLearner>(job,output,true);}
+    catch(const std::exception& error){std::cerr<<"TimeLearner preflight job: "<<error.what()<<'\n';return 2;}
 }
