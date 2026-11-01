@@ -30,9 +30,11 @@ def refresh(folder, execution):
 
 
 class LivePipelineWorkerTest(unittest.TestCase):
+    corpus_environment = "TIMELEARNER_LIVE_PIPELINE_CORPUS"
+
     @classmethod
     def setUpClass(cls):
-        directory = os.environ.get("TIMELEARNER_LIVE_PIPELINE_CORPUS")
+        directory = os.environ.get(cls.corpus_environment)
         if not directory:
             raise unittest.SkipTest("requires real production live Train corpus")
         cls.root = Path(directory);cls.index = load(cls.root/"index.json")
