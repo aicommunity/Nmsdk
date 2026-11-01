@@ -38,7 +38,7 @@ QJsonObject Metadata()
     return metadata;
 }
 
-UEPtr<NPulseNeuron> Prepared(unsigned int frequency, bool precise = false)
+UEPtr<NPulseNeuron> Prepared(unsigned int frequency, bool precise = false, bool withMatrix = false)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     StorageProfileSpec spec; spec.name = "NativeArchiveFixture_" + std::to_string(frequency);
@@ -82,6 +82,18 @@ UEPtr<NPulseNeuron> Prepared(unsigned int frequency, bool precise = false)
            synapse->DissociationTC.GetData()!=spec.body.excSynapse.dissociationTC ||
            synapse->PulseAmplitude.GetData()!=spec.body.excSynapse.pulseAmplitude)
             throw std::runtime_error("high precision storage physics differs before archive export");
+    }
+    if(withMatrix)
+    {
+        // TrainingPattern is a public matrix parameter, unlike transient soma
+        // outputs. Archive identity must retain every stored reference bit.
+        MDMatrix<double> pattern;pattern.Assign(2,3,0.0);
+        pattern(0,0)=.0012345678901234567;pattern(0,1)=.0056789012345678901;
+        pattern(0,2)=.0098765432109876543;pattern(1,0)=.0023456789012345678;
+        pattern(1,1)=.0067890123456789012;pattern(1,2)=.012345678901234567;
+        neuron->TrainingPattern=pattern;
+        if(neuron->TrainingPattern.GetData()!=pattern)
+            throw std::runtime_error("high precision matrix differs before archive export");
     }
     return neuron;
 }
@@ -238,12 +250,12 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
 }
 
 class NativeArchive : public ::testing::TestWithParam<unsigned int> {};
-void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = false)
+void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = false, bool withMatrix = false)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     const char* phase = "prepare";
     try {
-    auto model = Prepared(frequency,precise);
+    auto model = Prepared(frequency,precise,withMatrix);
     UEPtr<NConstGenerator> boundary;
     NmsdkTools::ModelBoundarySources ports;
     if(withBoundary)
@@ -272,7 +284,7 @@ void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = f
     {
         directory = QString::fromLocal8Bit(artifacts); std::filesystem::create_directories(directory.toStdString());
     }
-    const QString prefix = QString(precise ? "/precise-" : "/") + (withBoundary ? "boundary-" : "archive-");
+    const QString prefix = QString(withMatrix ? "/matrix-precise-" : precise ? "/precise-" : "/") + (withBoundary ? "boundary-" : "archive-");
     const auto input = directory + prefix + "fixture-" + QString::number(frequency) + ".json";
     const auto output = directory + prefix + "import-verification-" + QString::number(frequency) + ".json";
     Write(input,fixture);
@@ -298,6 +310,8 @@ TEST_P(NativeArchive, TransfersImagesAndAsymmetricModelIntoFreshNativeProcess) {
 TEST_P(NativeArchive, TransfersDeclaredExternalStimulusIntoFreshNativeProcess) { TransferFixture(GetParam(),true); }
 TEST_P(NativeArchive, TransfersHighPrecisionStorageAndLearnedStateIntoFreshNativeProcess) { TransferFixture(GetParam(),false,true); }
 TEST_P(NativeArchive, TransfersHighPrecisionStateAndExternalStimulusIntoFreshNativeProcess) { TransferFixture(GetParam(),true,true); }
+TEST_P(NativeArchive, TransfersHighPrecisionMatrixIntoFreshNativeProcess) { TransferFixture(GetParam(),false,true,true); }
+TEST_P(NativeArchive, TransfersHighPrecisionMatrixAndExternalStimulusIntoFreshNativeProcess) { TransferFixture(GetParam(),true,true,true); }
 INSTANTIATE_TEST_SUITE_P(SingleRate,NativeArchive,::testing::Values(2000u,20000u));
 
 TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
