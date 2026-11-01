@@ -12,6 +12,12 @@ EnableTrainingAudit Default. Историческая строка таблиц�
 Исходный stock Return→Take не отказал: образ класса уже восстанавливал false.
 Baseline и исправленные native/ASan проверки: [AuditFlagDefault](AuditFlagDefault.ru.md).
 
+Исторический runtime control01.11:
+[August cold start](HistoricalAugustColdStart.ru.md) подтверждает native
+State-file one-shot и зависимость загрузки от ProjectAutoSaveStateFlag.
+Parent-only L1/Rs overlay оставляет116 старых сегментов и отвергается как cold.
+Это exact August legacy snapshot, не подтверждение всей текущей V2 reset-матрицы.
+
 | Свойство | Тип/default/flags | Фактическая логика | Ограничения и необходимые проверки |
 |---|---|---|---|
 | ResetToUntrainedState, оба | bool, false, ptPubState; setter принимает value без действия | Legacy AReset считывает one-shot, очищает flag и отдельно вызывает ResetToUntrained; snapshot принимается только при cold-looking lengths, иначе создаётся исходная структура. Native-owned AReset выходит раньше этой legacy ветви | В native режиме это поле не выполняет cold reconstruction. Обычный Reset сохраняет модель/цель; новый cold reset должен быть отдельной явной операцией. Проверять loaded trained graph, snapshot validity и действительную declared initial state, а не L>1 как обязательный признак trained |
