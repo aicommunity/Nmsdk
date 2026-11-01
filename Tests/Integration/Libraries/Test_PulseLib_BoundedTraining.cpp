@@ -553,3 +553,36 @@ TEST(BoundedTrainingN0Candidates, PriorityWaitsForAllRequiredObservations)
     }
     EXPECT_EQ(session.CandidateRepeats().back().fullParameters[0],(InputParameters{2,2,10.}));
 }
+
+
+namespace {
+void MeasuredLengthCandidate(ProbeRouting routing,Normalization normalization)
+{
+    const auto p=Protocol(2,routing);auto cfg=Configuration(2,normalization);
+    cfg.maximumCandidatesPerInput=4;
+    cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
+    DriveTraining(session,p,[](const TrainingAction& action,auto& delay,auto&) {
+        // Controlled response oracle, not a physical-neuron experiment. Three
+        // completed lengths predict L12, outside the four-point nearest mesh.
+        // Every candidate and the final all-input gate are still observed.
+        delay[0]=.03+.01*(action.parameters[0].length-2);
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::Exact);
+    ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    EXPECT_EQ(session.Parameters()[0],(InputParameters{12,1,10.}));
+    EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+    EXPECT_LE(session.Evidence().size(),4u);
+    EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e) {
+        return e.parameters.length==12 && e.withinTiming && e.withinAmplitude;
+    }));
+}
+}
+TEST(BoundedTrainingLengthCandidates, ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::ClassicBurst,Normalization::SynapseCount);}
+TEST(BoundedTrainingLengthCandidates, BranchN0UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::BranchSoloBurst,Normalization::SynapseCount);}
+TEST(BoundedTrainingLengthCandidates, ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::ClassicBurst,Normalization::TipResistance);}
+TEST(BoundedTrainingLengthCandidates, BranchN1UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::BranchSoloBurst,Normalization::TipResistance);}
