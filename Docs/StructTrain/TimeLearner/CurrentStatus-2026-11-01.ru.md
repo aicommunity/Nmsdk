@@ -590,3 +590,24 @@ owned PID/start_ticks, тот же binary/source/runtime,3600s без rebuild.
 старые текущие формулировки при сохранении исторических аудитов. Она учитывает
 реализованные controller/archive/live pipeline и отдельно полный остаток.
 План0–12 и активная цель сохраняются полностью; develop не обновлён.
+
+
+Normal fixed-a2 terminal0:31/31 native cases,375.292s по gtest. Reader-a2
+terminal1 до tests из-за overlap glob с service_model.json. Исправление71878cb54
+требует этот model file отдельно, canonical model hash и совпадение actual
+revision; numbered trial completeness не ослаблена. Reader-normal-a3 PID2322439
+terminal0:4/4,56 probes,188 unchanged files,0.221566s. Численное обучение не
+повторялось ради исправления reader. Первые reader/publisher отказы сохранены.
+
+Full [normal proof](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-normal-a2/README.md)
+c9c65de9b12989b0ddcb51da5924f1854a56f88e опубликован, включён --no-ff и локально
+сверен:205 members/8623983raw→346080compressed bytes. Model outcomes4×
+SearchUnresolved и negative certificates; распознавание этим native fixture
+не оценивается. Все5 controlled proposal cases,4 native editors2000/20000Hz
+и4 native warm/cold training controls прошли; полного stage7 это не закрывает.
+
+ASan corrected reader PID164462 на71878cb54 ждёт producer148245; прежний
+reader154042 сохраняется как первоначальная постановка, его ожидаемый setup
+failure не подменяется. Normal visual PID165784 получает исключительно Git
+proofc9c65de9b и строит4 declared training phases/56trials в M40 Data cache;
+численных прогонов не создаёт. Полные ASan и visual результаты ещё pending.
