@@ -133,6 +133,16 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  }
  EXPECT_EQ(pulses,count);EXPECT_GT(maximum,1e-8);
  ReadoutArtifact(artifact+"roundtrip.csv",trace.str());
+ // A corrupted output state must be diagnosed before children, without a
+ // per-tick resize. An explicit native Build repairs only this workspace.
+ learner->SomaNeuronAmplitude.Assign(1,2,0.0);ASSERT_TRUE(learner->IsReady());
+ model->Calculate();
+ EXPECT_EQ(learner->NativeModelEditFailure(),"legacy_readout_shape_requires_build");
+ EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),2);
+ learner->StructureBuildMode=0;learner->Build();core.environment->Reset();
+ EXPECT_TRUE(learner->NativeModelEditFailure().empty());
+ EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),count+1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),1);
+ EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.23e-9);EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),91e6);
  core.environment->DestroyModel();
 }
 
