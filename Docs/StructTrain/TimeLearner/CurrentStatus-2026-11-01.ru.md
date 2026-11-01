@@ -546,3 +546,14 @@ worker M40 PID148416 ждёт успешного fixed-asan-a2; затем produ
 setup попытка завершилась до запуска из-за short-SHA fetch; повтор использует
 полный445469038650354e98c740dbe52e433eb76c6fec. Ни visual, ни scoped algorithm
 приёмка пока не объявлены завершёнными; develop не изменён.
+
+
+ASan fixed-a1 теперь terminal1: production runner execution=timeout,
+wall_budget_exhausted, returncode=-15,300.599977652s. До остановки25 cases
+отмечены OK в stdout, включая5 новых и2 editor2000Hz; complete XML отсутствует.
+[Proof](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-timeout-asan-a1/README.md)
+d0bf145a80c8c03708374cbd5b012e7dfa1d2cbe сохранён в Git;40 archive members и
+outer hashes проверены локально,46552 compressed bytes. Это частичная попытка,
+не полный PASS. Fixed-a2 PID148245 действительно начал повтор того же binary
+с3600s после terminal timeout; visual PID148416 ждёт именно его успешный итог.
+Elder normal PID2304393 ещё компилирует integration target; runtime не обновляется.
