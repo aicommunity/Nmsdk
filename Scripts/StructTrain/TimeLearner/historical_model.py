@@ -45,6 +45,8 @@ def property_value(node):
 
 
 def serialized_neuron(path: Path, frequency_hz=2000):
+    require(type(frequency_hz) in (int, float) and math.isfinite(frequency_hz) and frequency_hz > 0,
+            "invalid_historical_model_frequency")
     root = ET.parse(path).getroot();model = root.find("./Model")
     require(model is not None, "historical_model_root_missing")
     neuron = model.find("./Components/NeuronTimeLearner/Components/Neuron")
@@ -76,6 +78,12 @@ def serialized_neuron(path: Path, frequency_hz=2000):
             links(child, child.tag if not container else container+"."+child.tag)
     links(model, "")
     require(bool(nodes) and bool(edges), "historical_neuron_or_inbound_links_empty")
+    paths = {node["path"] for node in nodes}
+    require(len(paths) == len(nodes), "duplicate_historical_component_path")
+    for edge in edges:
+        require(edge["destination"] in paths, "historical_link_destination_not_in_graph")
+        if edge["source"] == prefix or edge["source"].startswith(prefix+"."):
+            require(edge["source"] in paths, "historical_link_source_not_in_graph")
     result = {"schema": "historical_serialized_neuron_v1", "frequency_hz": frequency_hz,
               "nodes_in_native_order": nodes, "inbound_edges_in_serialized_order": edges}
     return {"snapshot": result, "sha256": canonical_model_sha256(result),
