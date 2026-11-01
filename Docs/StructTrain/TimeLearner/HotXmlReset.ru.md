@@ -89,3 +89,12 @@ figure cache остаётся вне Git, выбранные рисунки пу
 приписываться versioned ModelArchive: ModelIdentity использует битовое IEEE754
 представление F64. Проверка произвольных высокоточных параметров этого другого
 пути является отдельным требованием; данный hot XML подэтап её не заменяет.
+
+## Selected temporal evidence review, 2026-11-01
+
+All 1476 PNG files passed automatic coverage, dimensions and checksum checks on M40.
+All 26 selected original 1920x960 images were directly inspected: actual input pulses,
+response fronts and maxima are readable, and source/replay soma curves visually overlap.
+See Reports/StructTrain/TimeLearner/s04-hot-xml-visual-a1/visual-review.json.
+The complete cache was not manually inspected. ASan32 and acceptance remain pending.
+The earlier pending temporal-review statement above is superseded by this record.
