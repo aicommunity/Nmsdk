@@ -55,7 +55,7 @@ class LengthProposalExperiment(unittest.TestCase):
             output = Path(directory)
             _progress(output, [{"execution": "completed", "measured": None}])
             _progress(output, [{"execution": "completed", "measured": [2, 3, 4, 9]}])
-            self.assertEqual(load(output/"progress.json")[0]["measured"], [2, 3, 4, 9])
+            self.assertEqual(load(output/"progress.json")["records"][0]["measured"], [2, 3, 4, 9])
             self.assertFalse((output/"progress.pending.json").exists())
 
 
