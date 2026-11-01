@@ -845,7 +845,11 @@ Proof commits: normal `bcbd30f1d87e352825e6c8400c5b929eff184ae5`, ASan
 `44858d7fb92a330470f50741fb862f9f8db23840`. Сравнение относится к старой
 finite mesh V2 и новой measured-refinement V2. Оно не воспроизводит август
 и не доказывает классификацию: это bare Train двухвходовых моделей при 2000 Гц.
-Полные temporal reports строятся на M40; visual proof, export/frozen Test
-этих положительных моделей и полный исходный план ещё не завершены.
-Feature пока не develop. Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
+Полные temporal reports на M40 содержат434 пары probe/soma;6 production report
+checks пройдены, все24 выбранных PNG прямо просмотрены1920x960. Compact proof:
+`Reports/StructTrain/TimeLearner/s07-native-n1-visual-a1`. Full-cache manual review
+не заявлена. Export/frozen Test этих положительных моделей и полный исходный
+план ещё не завершены. PulseLib develop merge
+`d1c3df4cd0749e5869b977fb5e69417400ce1112` опубликован; root feature
+записывает его gitlink. Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
 

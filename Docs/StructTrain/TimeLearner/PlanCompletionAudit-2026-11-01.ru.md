@@ -101,7 +101,12 @@ Git, полные производные отчёты остаются на M40 
    `44858d7fb92a330470f50741fb862f9f8db23840`.
    Это первые положительные controls изменения L/Rs в данной V2 серии,
    при собственных reference amplitudes, 2000 Гц и двух входах. Export/frozen
-   classification этих моделей и визуальная приёмка ещё впереди.
+   classification этих моделей ещё впереди. Визуальная приёмка подэтапа
+   завершена:434 пары probe/soma в полных caches,6 production report checks,
+   все24 выбранных PNG просмотрены в исходном1920x960; full-cache manual review
+   не заявлена. PulseLib develop merge
+   `d1c3df4cd0749e5869b977fb5e69417400ce1112` опубликован; Core совпадает
+   с проверенным521df545. Root gitlink следует этому merge.
    Это не закрывает полный stage7 и не является historical V1 replay.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
