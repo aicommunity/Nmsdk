@@ -61,6 +61,9 @@ ASan leak detection выключен.
 
 ## Адресный результат
 
+Подэтап принят корневым develop merge
+`7ba19818740e91a810112232b6cc9edb2f95decc`; дочерние gitlinks не менялись.
+
 На каждом worker завершены4 реальные owned операции (2 export и2 evaluate),
 128 полных проб;4/4 primary reader checks. Wall time normal93.36 s,
 ASan300.26 s. При неизменённом пороге1 обе topology дали TP0/FP0/FN8/TN56:
