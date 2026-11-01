@@ -16,19 +16,29 @@ from .live_pipeline_corpus import signed, write
 from .native_dimension_corpus import make_dimension_job
 
 
-def run(fixtures, runtime, output):
+def run(fixtures, runtime, output, normalization="N0"):
+    require(normalization in ("N0", "N1"), "native_proposal_normalization")
     output.mkdir(parents=True, exist_ok=False)
     records = []
     for topology in ("Classic", "Branch"):
         original = load(fixtures/(topology+"-fixed")/"input/job.json")
-        job = make_dimension_job(original, topology, "N0", 2)
+        job = make_dimension_job(original, topology, normalization, 2)
         config = job["configuration"]
-        name = "native-priority-"+topology+"-isi030"
+        name = ("native-priority-" if normalization == "N0" else "native-n1-mesh-")+topology+"-isi030"
         config["run_id"] = name
-        config["protocol_revision"] = "native_n0_measured_proposal_isi030_v1"
+        config["protocol_revision"] = "native_"+normalization.lower()+"_measured_proposal_isi030_v1"
         config["model"]["initial_isi"] = [.01, .03]
         config["search"]["bounds"][0].update(maximum_length=4, maximum_synapses=4)
         config["search"]["maximum_candidates_per_input"] = 4
+        if normalization == "N1":
+            # Explicit narrow physical search box, retaining the initial Rs
+            # and fixed anchor. The native adapter derives its effective domain.
+            config["search"]["bounds"][0].update(maximum_length=3, maximum_synapses=1,
+                                                   minimum_resistance=43000000.)
+            config["search"].update(maximum_candidates_per_input=80, maximum_probes=256,
+                                    maximum_edits=128, resistance_subdivision_depth=4)
+            config["maximum_model_seconds"] = 180.
+            job["maximum_model_ticks"] = 360000
         signed(job)
         path = output/(name+".json")
         write(path, job)
@@ -55,10 +65,14 @@ def run(fixtures, runtime, output):
                "candidates": candidates, "measured_timing_ready_ns_pairs": pairs,
                "physical_priority_path_exercised": bool(pairs),
                "certificate": summary["certificate"], "scientific_verdict": None}
+        if normalization == "N1":
+            row.pop("measured_timing_ready_ns_pairs")
+            row.pop("physical_priority_path_exercised")
+            row["resistance_domains"] = summary["resistance_domains"]
         records.append(row)
         write(output/"progress.json", records)
-        print("END", name, audit["training_outcome"], "physical_priority_path", bool(pairs), flush=True)
-    write(output/"index.json", {"kind": "native_n0_proposal_controls", "schema_version": 1,
+        print("END", name, audit["training_outcome"], flush=True)
+    write(output/"index.json", {"kind": "native_"+normalization.lower()+"_proposal_controls", "schema_version": 1,
           "records": records, "scientific_verdict": None,
           "limits": "two inputs; 2000 Hz; declared ISI .01/.03; bare Train, no classification"})
 
@@ -68,8 +82,9 @@ def main():
     parser.add_argument("--fixtures", type=Path, required=True)
     parser.add_argument("--runtime", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--normalization", choices=("N0", "N1"), default="N0")
     args = parser.parse_args()
-    run(args.fixtures, args.runtime, args.output)
+    run(args.fixtures, args.runtime, args.output, args.normalization)
 
 
 if __name__ == "__main__":
