@@ -64,6 +64,21 @@ class NativePreflightTest(unittest.TestCase):
                 self.assertIsNone(manifest["analysis"])
                 self.assertEqual(load(run/"process/result.json")["returncode"], 2)
 
+    def test_shared_train_preparation_matches_preflight(self):
+        self.assertEqual(set(self.corpus["train_controls"]), {"Classic", "Branch"})
+        for topology in self.corpus["train_controls"]:
+            source = self.root/"runs"/("live-"+topology+"-legacy-budget")
+            train = self.root/"runs"/("train-"+topology+"-legacy-budget")
+            self.assertEqual(load(source/"input/job.json"), load(train/"input/job.json"))
+            self.assertEqual(load(source/"native/initial-state.json"), load(train/"native/initial-state.json"))
+            execution = load(train/"native/execution.json")
+            self.assertEqual(execution["execution"], "model_tick_budget_exhausted")
+            self.assertEqual(execution["model_ticks"], 1)
+            self.assertIsNone(execution["evaluation_verdict"])
+            manifest = load(train/"run-manifest.json")
+            self.assertEqual(manifest["validity"], "unverified_execution")
+            self.assertIsNone(manifest["analysis"])
+
     def corrupt_native(self, change, pattern):
         original = self.root/"runs"/"pipeline-Classic-N1"
         with tempfile.TemporaryDirectory() as temporary:
