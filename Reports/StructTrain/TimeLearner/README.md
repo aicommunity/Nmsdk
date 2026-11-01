@@ -164,7 +164,9 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   75/75 C++ checks, 2/2 independent reader checks, ten actual phase records and
   100 corrupt-receipt controls. All 836 archive members verified; compressed
   primary 4095348 bytes, original source closure two runs / 84 artifacts.
-  ASan/report acceptance and configured live-Train dispatch remain pending.
+  [ASan](s08-native-owned-posttune-asan-a1/README.md) also passed 75/75;
+  [selected visual acceptance](s08-native-owned-posttune-visual-asan-a1/README.md)
+  is published. Configured live-Train dispatch remains pending.
 
 
 - Production owned PostTune Console:
@@ -172,5 +174,65 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   [ASan](s08-native-owned-posttune-worker-asan-a1/README.md): 20 PostTune + 6
   standalone calibration controls per worker, ordered 19/19 checks, no skips.
   Initial setup skips remain recorded. Complete 28-run closures / 1196 artifacts
-  each; all compressed archive members verified. Full production temporal report
-  gate remains pending; live Train handoff and full stage8 are not accepted.
+  each; all compressed archive members verified.
+  [All 26 production temporal reports](s08-native-owned-posttune-worker-visual-asan-a1/README.md)
+  passed five checks; compact metadata and eight byte-identical previously reviewed
+  selected PNGs are published. Live Train handoff and full stage8 are not accepted.
+
+- Clock-only finalization seam:
+  [normal](s08-native-finalization-clock-handoff-normal-a2/README.md),
+  [ASan](s08-native-finalization-clock-handoff-asan-a2/README.md): 24/24 native
+  and 3/3 independent reader tests per worker. Four actual topology/mode records,
+  exact full boundary preservation after one outer-clock step without Calculate,
+  32 malformed-record and 16 re-signed projection controls. This uses imported
+  finished Solo state; it does not implement live Train dispatch.
+
+- [Actual cold live Train handoff, normal](s08-native-live-finalization-normal-a1/README.md):
+  31 native cases plus two stopped-primary serialization follow-ups, four complete
+  reader tests, 16 live records and 92 malformed-payload controls. All 599 archive
+  members verified; compressed primary 1943492 bytes. Mixed fixture provenance
+  is explicit per file. All four frozen target/foil pairs are silent; this is
+  functional pipeline evidence, without classification success. Broad ASan,
+  temporal reports and full original stages remain open.
+
+- [Live Train handoff temporal reports](s08-native-live-finalization-visual-normal-a2/README.md):
+  corrected chronological order,16 reports,3/3 checks,213 training and42
+  recognition trial-soma pairs. All440 metadata members and eight selected PNG
+  verified; selected images directly reviewed at1920x960. Full derived cache on
+  M40, no full-cache manual or scientific acceptance. Initial chronology error
+  retained; production Train-job declaration remains open.
+
+- [Full live finalization ASan scope](s08-native-live-finalization-asan-a2/README.md):
+  95 native tests, six independent checks,548 unchanged producer files;792
+  verified archive members /3343244 compressed bytes. Predates explicit Cancel,
+  persisted codec and production Train schema2. Leak detection disabled.
+- [Explicit live cancellation, normal](s08-native-live-finalization-cancel-normal-a1/README.md):
+  eight native and eight independent checks; real partial Train data, queued
+  cancellation and owned PostTune rollback.252 verified primary members /752596
+  compressed bytes. No frozen recognition evaluation after cancellation.
+
+- [Cancel and persisted codec, ASan](s08-native-live-finalization-cancel-codec-asan-a1/README.md):
+  nine native tests, eight independent checks;253 verified members /765044
+  compressed bytes. Predates production Train schema2.
+- [Production cold Train with live finalization, normal](s09-native-live-training-worker-normal-a2/README.md):
+  14 actual operations, one codec test, three original and four overlapping
+  complete-reader checks.14 portable run closures /446 artifacts; all member
+  hashes verified. Four frozen same-matrix evaluations are silent target misses,
+  not classifier success. Initial codec-output and packaging failures retained.
+  Production ASan, visual reports and full original stages remain open.
+
+- [Production live Train, ASan](s09-native-live-training-worker-asan-a1/README.md):
+  14 operations, one codec, original three and overlapping complete four reader
+  checks.521 verified members /1225484 compressed bytes,14 portable runs /446
+  artifacts. Leak detection disabled; all frozen pairs remain silent target misses.
+- [Production temporal reports, normal](s09-native-live-training-worker-visual-normal-a1/README.md):
+  14 reports, three checks,93 training and42 recognition trial-soma pairs.272
+  metadata members /190348 compressed bytes and ten selected PNG /1500834bytes.
+  All ten directly reviewed1920x960; full-cache manual acceptance remains false.
+  Source543 files unchanged; ASan temporal rendering is still pending.
+
+- [Production temporal reports, ASan](s09-native-live-training-worker-visual-asan-a1/README.md):
+  14 reports, three checks,521 unchanged primary members.272 verified metadata
+  members /190708 compressed bytes; ten exact references to directly reviewed
+  normal PNG, no image copies. Legibility scope inherited only by actual PNG
+  equality; full-cache manual acceptance remains false.

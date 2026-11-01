@@ -1,0 +1,91 @@
+{
+  "kind": "selected_temporal_visual_review",
+  "schema_version": 1,
+  "images": [
+    {
+      "path": "selected/Classic-trial-0-overview.png",
+      "cache_path": "Classic_live_finalization_0_local_0/frozen/trial-0000-soma-001/overview.png",
+      "bytes": 159319,
+      "sha256": "c2fa3ba99bdb4bec29f89d13874060ca79202bc0da5d5c173489a6512f0f7d5c",
+      "source_control_sha256": "c15c0c60ffcf1b28540aaa85530796b930be007e9f5b5aa1ab4ddfb6073b759f",
+      "manually_reviewed": true
+    },
+    {
+      "path": "selected/Classic-trial-0-zoom-001.png",
+      "cache_path": "Classic_live_finalization_0_local_0/frozen/trial-0000-soma-001/zoom-001.png",
+      "bytes": 147921,
+      "sha256": "129e27d565a87bf1bd1d25bb8b8d6f4dd07548e0338c9b1788344ee64817d655",
+      "source_control_sha256": "c15c0c60ffcf1b28540aaa85530796b930be007e9f5b5aa1ab4ddfb6073b759f",
+      "manually_reviewed": true
+    },
+    {
+      "path": "selected/Classic-trial-1-overview.png",
+      "cache_path": "Classic_live_finalization_0_local_0/frozen/trial-0001-soma-001/overview.png",
+      "bytes": 141968,
+      "sha256": "7803a605729a8a71f82afaf8a5ae5dfb98a630aa14958f4e71f85157e19da402",
+      "source_control_sha256": "c15c0c60ffcf1b28540aaa85530796b930be007e9f5b5aa1ab4ddfb6073b759f",
+      "manually_reviewed": true
+    },
+    {
+      "path": "selected/Classic-trial-1-zoom-001.png",
+      "cache_path": "Classic_live_finalization_0_local_0/frozen/trial-0001-soma-001/zoom-001.png",
+      "bytes": 147096,
+      "sha256": "ba21445167fa7d3b44515f6ddffeb0689bc8738f36fb815085851f92af2d9111",
+      "source_control_sha256": "c15c0c60ffcf1b28540aaa85530796b930be007e9f5b5aa1ab4ddfb6073b759f",
+      "manually_reviewed": true
+    },
+    {
+      "path": "selected/Branch-trial-0-overview.png",
+      "cache_path": "Branch_live_finalization_0_local_0/frozen/trial-0000-soma-001/overview.png",
+      "bytes": 158456,
+      "sha256": "5bd3eed944df7a11d43cb55dfe48b98558c885b12c85819c54d44873a539703d",
+      "source_control_sha256": "47ef0c33b6daf56214352538ec80ad2057100016630d7ac1f1e68c6d8027cbe7",
+      "manually_reviewed": true
+    },
+    {
+      "path": "selected/Branch-trial-0-zoom-001.png",
+      "cache_path": "Branch_live_finalization_0_local_0/frozen/trial-0000-soma-001/zoom-001.png",
+      "bytes": 149658,
+      "sha256": "fc0ae1051401df30a302c954c3ce3ac293d372c8d034657924d9bb6487ed76d4",
+      "source_control_sha256": "47ef0c33b6daf56214352538ec80ad2057100016630d7ac1f1e68c6d8027cbe7",
+      "manually_reviewed": true
+    },
+    {
+      "path": "selected/Branch-trial-1-overview.png",
+      "cache_path": "Branch_live_finalization_0_local_0/frozen/trial-0001-soma-001/overview.png",
+      "bytes": 141325,
+      "sha256": "14bc963bfae971edbc5f85d0e2d011d707051e333fa1891e990e918998ebca39",
+      "source_control_sha256": "47ef0c33b6daf56214352538ec80ad2057100016630d7ac1f1e68c6d8027cbe7",
+      "manually_reviewed": true
+    },
+    {
+      "path": "selected/Branch-trial-1-zoom-001.png",
+      "cache_path": "Branch_live_finalization_0_local_0/frozen/trial-0001-soma-001/zoom-001.png",
+      "bytes": 148877,
+      "sha256": "12c59eba06ad40cf328a61c8dc8b4e91e81a57a1823516ed85f20a74ada68fdf",
+      "source_control_sha256": "47ef0c33b6daf56214352538ec80ad2057100016630d7ac1f1e68c6d8027cbe7",
+      "manually_reviewed": true
+    }
+  ],
+  "resolution": [
+    1920,
+    960
+  ],
+  "direct_manual_review": true,
+  "checks": [
+    "axis and title labels readable, unclipped",
+    "actual input pulses visible on shared time axis",
+    "legends outside curves",
+    "overview and first detailed zoom readable"
+  ],
+  "scope": "First soma, target and foil frozen replay, fixed Classic and Branch, overview plus first zoom only",
+  "limitations": [
+    "Full cache not manually reviewed",
+    "Other soma channels and Train/PostTune images not included in this manual sample",
+    "Late response extends to some window boundaries; no settling or later silence claim",
+    "SI units unverified",
+    "No independent Test or scientific classification success"
+  ],
+  "full_cache_visual_review_complete": false,
+  "scientific_verdict": null
+}
