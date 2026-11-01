@@ -145,11 +145,16 @@ def audit_run(root):
 
 
 def render(data, output, *, source_label="Source soma", loaded_label="Loaded soma",
-           context="XML roundtrip characterization; not selectivity", state_description=None):
+           context="XML roundtrip characterization; not selectivity", state_description=None,
+           physical_soma_ids=None):
     import matplotlib.pyplot as plt
     output.mkdir(parents=True, exist_ok=False);figures = []
     s = data["summary"];rows = data["rows"];clock = [r[0] for r in rows]
+    ids = list(range(1, s["somas"]+1)) if physical_soma_ids is None else physical_soma_ids
+    require(len(ids) == s["somas"] and len(set(ids)) == len(ids) and
+            all(type(i) is int and i > 0 for i in ids), "readout_invalid_physical_soma_ids")
     for soma in range(s["somas"]):
+        physical_soma = ids[soma]
         source = [r[3+2*soma] for r in rows];loaded = [r[4+2*soma] for r in rows]
         shared = padded_limits(source+loaded)
         for view, left, right in time_views(clock[0], clock[-1], s["frequency_hz"]):
@@ -167,13 +172,13 @@ def render(data, output, *, source_label="Source soma", loaded_label="Loaded som
                 ax.set_xlabel("Native time [s]");ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
                 pulse.set_ylabel("Input [native units]", color="darkorange")
                 state = f'State={int(s["saved_state"])}' if state_description is None else state_description
-                fig.suptitle(f'{s["topology"]} N={s["inputs"]} {s["frequency_hz"]} Hz {state} | soma {soma+1}\n'
+                fig.suptitle(f'{s["topology"]} N={s["inputs"]} {s["frequency_hz"]} Hz {state} | soma {physical_soma}\n'
                              f'{view}, {scale} amplitude | {context}\n'
                              'LT events were not recorded', y=.98)
                 h, labels = ax.get_legend_handles_labels();h2, labels2 = pulse.get_legend_handles_labels()
                 fig.legend(h+h2, labels+labels2, loc="upper center", bbox_to_anchor=(.5, .83), frameon=False, ncol=3)
-                path = output/f"soma-{soma+1}-{view}-{scale}.png";fig.savefig(path);plt.close(fig)
-                figures.append({"path": path.name, "soma": soma+1, "view": view, "scale": scale,
+                path = output/f"soma-{physical_soma}-{view}-{scale}.png";fig.savefig(path);plt.close(fig)
+                figures.append({"path": path.name, "soma": physical_soma, "view": view, "scale": scale,
                                 "begin": left, "end": right, "y_limits": limits,
                                 "png_width": 1920, "png_height": 960, "downsampling": False,
                                 "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})

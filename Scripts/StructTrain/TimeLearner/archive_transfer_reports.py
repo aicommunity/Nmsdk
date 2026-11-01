@@ -103,6 +103,8 @@ def _read_case(folder, stem, boundary, frequency, precise, matrix):
     identity(child["identity"])
     require(child["identity"] == archive["graph"]["identity"], "archive_transfer_import_identity_changed")
     nodes = {n["path"]: n for n in model["nodes"]}
+    require("$.Soma2" in nodes and nodes["$"]["parameters"]["NumSomaMembraneParts"]["data"]["value"] == "2",
+            "archive_transfer_wrong_output_soma")
     def bits(path, parameter, expected):
         data = nodes[path]["parameters"][parameter]["data"]
         require(data["type"] == "binary64" and data["value"] == struct.pack(">d", expected).hex(),
@@ -145,6 +147,7 @@ def _read_case(folder, stem, boundary, frequency, precise, matrix):
     return {"rows": rows, "summary": {"topology": "Asymmetric archive neuron", "inputs": 1,
             "frequency_hz": frequency, "somas": 1, "samples": len(rows), "saved_state": True,
             "external_stimulus": boundary, "precise_scalar_physics": precise, "precise_matrix": matrix,
+            "observed_soma_paths": ["$.Soma2"], "physical_soma_ids": [2],
             "sample_grid_complete": True, "stimulus_times": [.005], "soma_spans": [span],
             "maximum_waveform_difference": [errors["soma"]], "exc_channel_difference": errors["waveform"],
             "model_sha256": archive["graph"]["identity"]["sha256"], "storage_images": len(definitions),
@@ -213,7 +216,7 @@ def main():
             report["cases"][name]["figures"] = render(value, args.output/name,
                 source_label="Source physical soma", loaded_label="Fresh-process imported soma",
                 context="Versioned model transfer characterization; not selectivity",
-                state_description="Native import and Reset; one pulse")
+                state_description="Native import and Reset; one pulse", physical_soma_ids=[2])
     report["plotting_runtime"] = runtime
     (args.output/"validation.json").write_text(json.dumps(report, indent=2, allow_nan=False)+"\n")
 
