@@ -850,6 +850,8 @@ checks пройдены, все24 выбранных PNG прямо просмо
 `Reports/StructTrain/TimeLearner/s07-native-n1-visual-a1`. Full-cache manual review
 не заявлена. Export/frozen Test этих положительных моделей и полный исходный
 план ещё не завершены. PulseLib develop merge
-`d1c3df4cd0749e5869b977fb5e69417400ce1112` опубликован; root feature
-записывает его gitlink. Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
+`d1c3df4cd0749e5869b977fb5e69417400ce1112` опубликован; корневой develop merge
+`ff98c7fef96eb4f947eca756528834877d14492d` записывает его gitlink.
+Подэтап принят, полный stage7 остаётся открытым.
+Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
 
