@@ -329,3 +329,16 @@ four depth0 fixtures,48 actual probes/72 soma pairs,2000/20000Hz, all source sam
 and production rendering checks. Six selected PNG directly reviewed1920x960.
 Historical ASan a1 differs in absolute clock and contains a censored final
 Classic20000 probe; no identical/full-window ASan counterpart is asserted.
+
+Positive N1 Solo to frozen recognition:
+
+- [Normal native handoff](s05-positive-n1-handoff-normal-a1/README.md) and
+  [ASan native handoff](s05-positive-n1-handoff-asan-a1/README.md):4 actual owned
+  operations/128 complete trials/4 reader checks per worker. Eight patterns,
+  target in all8 positions, identity export, unchanged source threshold1.
+  Both topologies give TP0/FP0/FN8/TN56: silence, not successful detection.
+- [Every frozen soma/input response](s05-positive-n1-handoff-visual-a1/README.md):
+  192 trial/soma pairs,3 production report checks,22 selected PNG directly
+  reviewed1920x960. All134 normal/ASan trial/model JSON values match;
+  full derived cache remains on M40. No full-cache manual review or independent
+  scientific replicate claim. Initial environment-only rejection receipts retained.

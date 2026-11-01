@@ -52,9 +52,40 @@ Production paths: `native_pipeline_worker`, `learned_evidence`,
 порядка строк и отказ для пропусков/дублей/censoring. Успех этих checks не
 требует положительной классификации: отрицательные реальные метрики сохраняются.
 
-Producer/reader source `764a8faca30d241ea2d3364141a473c4302e7180`.
+Producer source `764a8faca30d241ea2d3364141a473c4302e7180`;
+reader/renderer `58fd12cf6a5e356530ca48172948c6fc68805164`.
 Новые численные сборки не создаются: используются проверенные immutable runtime
 root `6ab3b0b3953b132c54a0c4db3662cec80f7f81b9` / PulseLib
 `521df5450c3655e0f08b3a01a7aed7d18351c250`, normal a3 и ASan a2.
-ASan leak detection выключен. Запуски и их приёмка фиксируются отдельно;
-до чтения результатов успех переноса/классификации не заявляется.
+ASan leak detection выключен.
+
+## Адресный результат
+
+На каждом worker завершены4 реальные owned операции (2 export и2 evaluate),
+128 полных проб;4/4 primary reader checks. Wall time normal93.36 s,
+ASan300.26 s. При неизменённом пороге1 обе topology дали TP0/FP0/FN8/TN56:
+87.5% accuracy объясняются молчанием всех паттернов, target hit rate0.
+Сходимость Train не превращена в сертификат recognition; RecognitionCertificate
+остаётся null. Положительный результат здесь — корректный полный перенос,
+frozen state и достоверное измерение отрицательного распознавания.
+
+Первые попытки a1 на обоих workers были отклонены guard окружения до запуска
+Console: отсутствовал QT_QPA_PLATFORM=offscreen. Их receipts сохранены вместе
+с исправленными a2; это setup failure, а не ошибка модели и не научный результат.
+
+Primary proofs: normal `34c628d011df939de77a3f403d616fad3a035df2` (669 members,
+102699638 raw bytes →1876396 bytes xz), ASan
+`121b470640cfab1460759bdcff66a8cf19d0b6cc` (670 members,102875411 →1903084).
+Все134 native frozen trial/model/evaluation JSON совпали по значениям между
+workers, runtime manifests остаются отдельными; это не независимые обучения.
+
+Полные temporal reports содержат192 пары trial/soma,3 production report checks,
+535 source files не изменены. Все22 выбранных PNG прямо просмотрены1920x960:
+overview всех8 паттернов каждой topology, zoom target и вторая сома Classic.
+Visual source `c3436e46da977993827eefb2f39e7ac306d658f8`, отдельный selected QA
+в `Reports/StructTrain/TimeLearner/s05-positive-n1-handoff-visual-a1`.
+Полная ручная проверка cache не заявлена.
+
+Далее проверяется отдельная реальная сетка порогов. Offline LTZ maxima могут
+предлагать её точки, но не доказывают классификацию либо глобальную
+неразделимость. Полные исходные этапы5/8/11 остаются открытыми.
