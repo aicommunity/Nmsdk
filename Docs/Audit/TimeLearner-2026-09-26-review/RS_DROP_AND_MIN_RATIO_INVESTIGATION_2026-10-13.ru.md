@@ -368,14 +368,14 @@ Console опыта: SHA-256 `3ccf7cabc1f9a8466cfbd393d5db67cbb18d77bb926cc41b2bf
 
 ### Подготовлен разбор per-tick телеметрии
 
-Добавлен read-only инструмент [analyze_timelearner_dynamics.py](../../../Bin/Configs/SpikeSamples/StructTrain/scripts/analyze_timelearner_dynamics.py). Он потоково обрабатывает `TimeLearnerTrainingDynamics.log`, считает min/max выходов каналов, `SumPotential` каждого сегмента и сомы, переходы через ноль и выходы за заданный resting bound; также извлекает сопротивления синапсов. Если задана частота обновления, инструмент суммирует фактический вектор `SynapticInputs` (как `NPulseChannel::ACalculate2`) и восстанавливает активное канальное сопротивление из `Capacity`, этой проводимости и записанного `TimeConstant`, затем оценивает локальный коэффициент явного шага. Это локальная оценка при замороженном входе канала, а не гарантия устойчивости всей связанной модели. Порог сомы не зашит: его можно передать только при наличии точного значения из конфигурации.
+Добавлен read-only инструмент [анализатор Branch dynamics (перенесён01.11)](../../../Scripts/StructTrain/TimeLearner/legacy_dynamics.py). Он потоково обрабатывает `TimeLearnerTrainingDynamics.log`, считает min/max выходов каналов, `SumPotential` каждого сегмента и сомы, переходы через ноль и выходы за заданный resting bound; также извлекает сопротивления синапсов. Если задана частота обновления, инструмент суммирует фактический вектор `SynapticInputs` (как `NPulseChannel::ACalculate2`) и восстанавливает активное канальное сопротивление из `Capacity`, этой проводимости и записанного `TimeConstant`, затем оценивает локальный коэффициент явного шага. Это локальная оценка при замороженном входе канала, а не гарантия устойчивости всей связанной модели. Порог сомы не зашит: его можно передать только при наличии точного значения из конфигурации.
 
-Пример запуска на сервере после восстановления доступа:
+Актуальный запуск из корня checkout после миграции01.11 (исходные измерения ниже исторические; существующий output не перезаписывается):
 
 ```bash
-python3 /home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/scripts/analyze_timelearner_dynamics.py \
+python3 -m Scripts.StructTrain.TimeLearner analyze \
   /media/user/Data/NmsdkStructTrainArchive/TimeLearnerAudit-20261013-historical_view/diagnostics/branch-rmin-refusal-20261014-01/rs-ratio-bound-20261014-02/runs/diag_rsratio_br480_20261014T070040Z_3412788_f16f478a_work/Train/TimeLearnerTrainingDynamics.log \
-  --time-step-hz 2000 \
+  --format branch-dynamics --time-step-hz 2000 \
   --output /media/user/Data/NmsdkStructTrainArchive/TimeLearnerAudit-20261013-historical_view/diagnostics/branch-rmin-refusal-20261014-01/rs-ratio-bound-20261014-02/dynamics_summary.json
 ```
 

@@ -11,6 +11,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from ..__main__ import main
 from ..legacy_dynamics import analyze_file, parse_record
@@ -98,6 +99,25 @@ class LegacyDynamicsMigrationTest(unittest.TestCase):
             self.assertEqual(status, 2)
             self.assertFalse(output)
             self.assertIsNone(json.loads(error)["evaluation_verdict"])
+
+    def test_actually_modified_log_cannot_be_published_as_one_immutable_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/"changing.log";path.write_text(record(0.01, -0.5, 0.5, 0.0))
+            original_parser = parse_record
+            changed = False
+            def append_during_read(line):
+                nonlocal changed
+                if not changed:
+                    with path.open("a") as output:
+                        output.write(record(0.02, -0.4, 0.4, 0.0))
+                    changed = True
+                return original_parser(line)
+            with patch("Scripts.StructTrain.TimeLearner.legacy_dynamics.parse_record", append_during_read):
+                status, output, error = self.invoke(path)
+            self.assertTrue(changed)
+            self.assertEqual(status, 2)
+            self.assertFalse(output)
+            self.assertEqual(json.loads(error)["reason"], "dynamics_source_changed_during_analysis")
 
     def test_existing_output_and_missing_input_are_process_errors(self):
         with tempfile.TemporaryDirectory() as directory:

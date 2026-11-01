@@ -3,6 +3,12 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Active Branch telemetry analyzer moved from Bin to the root package:
+[Elder19/19 Python checks](s09-branch-dynamics-migration-elder-a1/README.md),
+[M4019/19 and preserved invalid first fixture](s09-branch-dynamics-migration-m40-a1/README.md).
+Whole original-module parity on valid format, CLI/source preservation and corruption controls;
+no new C++ calculations, no ASan instrumentation or classification claim.
+
 Actual positive N1 calibration: [normal primary](s08-positive-n1-calibration-normal-a1/README.md),
 [ASan primary](s08-positive-n1-calibration-asan-a1/README.md),
 [all-pattern temporal proof and28 directly reviewed PNGs](s08-positive-n1-calibration-visual-a1/SELECTED_VISUAL_REVIEW.ru.md).
