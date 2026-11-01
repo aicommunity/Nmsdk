@@ -47,6 +47,22 @@ roundtrips float/double/long double. Схема и старый parser сохр�
 проверка ModelArchive identity не ослабляется. Исправление ещё не принято:
 нужны unit+native проверки на серверах, regression и temporal evidence.
 
+Baseline primary опубликован вbf38e748209db78d54334737bfd2a6188be5a9fc:
+Reports/StructTrain/TimeLearner/s05-archive-f64-baseline-normal-a1,
+82 члена/175292 bytes xz. После Git retrieval проверены внешние SHA256,
+размеры и SHA256 всех членов. Оба запуска, включая отрицательный a2,
+сохраняются отдельно и не заменяются результатом исправленной версии.
+
+Исправленный normal a3 выполняется на Elder: supervisor2924884,
+start_ticks311717423, source361b3a113b26aa3062671b9cddaf89fa6877f1c2.
+ASan a1 на M40: supervisor850578,start_ticks262290102,
+source9810425b7e5401354d0b68322a6405b1c9eac781. В обоих источниках Rdk2732a08;
+последний дополнительно включает уже принятый XML coverage root3d43e6b1.
+Normal проверяет unit10 и native archive16; ASan — unit10/archive16 и hot XML32
+при новом matrix writer. Каждый запуск имеет отдельный runtime; источники и
+build не обновляются до завершения соответствующего supervisor. Результаты
+этих проверок ещё не получены, приёмка исправления остаётся открытой.
+
 Проверки ещё не выполнены. Подэтап не принят; general archive/profile/growth
 матрица, все формы векторов/матриц и полный Train→Test остаются открытыми.
 Если native XML теряет значащие цифры, требуется сначала локализовать это
