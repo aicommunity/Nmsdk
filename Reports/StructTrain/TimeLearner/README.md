@@ -241,3 +241,7 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   two controlled-kernel expected failures on unchanged Core, actual native XML
   and process/runtime receipts;21 archived members,10724 compressed bytes.
   This reproduces proposal-budget loss, not physical infeasibility.
+
+- [N0 ASan wall-budget attempt](s07-n0-candidate-order-timeout-asan-a1/README.md):
+  actual300-second timeout,25 completed cases before termination; no complete
+  JUnit or full acceptance.40 verified members,46552 compressed bytes.
