@@ -1,0 +1,3 @@
+# Native measured length cold A/B: ASan
+
+Eight completed real cold Train runs: Classic/Branch x N0/N1 x baseline/current at2000 Hz,2inputs,ISI .01/.08. Identical jobs, initial graphs, captured references and original tolerances within each A/B pair. New controller measures L9 after2/3/4; fixed Ns/Rs retain search_unresolved and fresh negative all-input certificates. Four actual-template generator checks pass. Includes the preceding generator schema failure before models. Crossworker initial graphs/CSV compared: 168/168 byte-identical. Full regression and temporal acceptance pending; no classification claim.
