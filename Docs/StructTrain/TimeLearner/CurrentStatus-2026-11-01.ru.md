@@ -1012,3 +1012,14 @@ IterationGap при AutoScale=true не задаёт фактический ин
 legacy ABuild/AReset. Публичные Build/Reset Rdk уже возвращают true и игнорируют
 bool этих hooks; это остаточная согласованность реализации, а не доказанный
 отказ публичного bool. Для finite validation нужны адресные negative controls. Полные этапы1/4/6/7/9 остаются открытыми.
+
+## Принято: конечность десяти legacy timing properties
+
+[TimingFiniteValidation](TimingFiniteValidation.ru.md): normal4+21 и ASan4+21
+без skips, по120 отклонённых NaN/Inf назначений с сохранением прежних значений.
+Baseline84/120 ошибочных принятий и исходный ASan timeout сохранены. Регрессия
+с большим wall budget прошла на том же immutable runtime. Проверены все71/112
+primary members normal/ASan. PulseLib develop456a5ab сохраняет tested Coreecf35a6.
+Приёмка относится к обычным setters/TakeObject/ReturnObject и сохранению прежних
+конечных доменов. Она не покрывает SetDataDirect, external binding или все
+публичные параметры. Полные этапы1/3/4/6/7/9 и цель0–12 остаются открытыми.
