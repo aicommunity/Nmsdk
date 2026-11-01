@@ -1,5 +1,9 @@
 # PLAN 2026-10-25 — пределы дендритной схемы (одноканальный вариант)
 
+> Исторический документ: shell-команды этой кампании не являются текущими инструкциями запуска/очистки. Файлы удалены из рабочего дерева; данные кампании сохранены. Современная синхронизация выполняется через Git; серия D не возобновляется автоматически.
+> Источники: [archive_nmsdk_journals.sh](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/archive_nmsdk_journals.sh).
+
+
 Статус: **в работе** на ветке `plan/2026-10-25-dendrite-limits` (от `timelearner_audit3`). Дополнение Тима 2026-10-24 (dual-host / диск / offload) — §H ниже.
 Ссылки: PulseLib `2e5308e` (F4), Bin `b7706a07` (§0 F1–F3); контроль W0 = `br25_nextseg`.
 
@@ -21,7 +25,7 @@
 ### H3. Offload на `/media/user/Data` (M40)
 
 - Цель журналов: `/media/user/Data/TLAgent-offload/journals/<host>/<date>/` — **только** текстовые журналы NMSDK/Console (`*.log`, `*Audit.log`, `TimeLearnerTrainingAudit.log`, launch `*posttune*.out` / `*console*.out`). Модели, конфиги, `results.csv`, StatisticLog и чужие файлы **не трогать**.
-- Упаковка: `tar | zstd` по каталогу прогона; проверка `zstd -t` + сверка списка файлов; удаление исходных журналов **только** после OK. Активные прогоны / текущие волны — skip. `nice`/`ionice`. Скрипт: [`../evidence/tools/archive_nmsdk_journals.sh`](../evidence/tools/archive_nmsdk_journals.sh).
+- Упаковка: `tar | zstd` по каталогу прогона; проверка `zstd -t` + сверка списка файлов; удаление исходных журналов **только** после OK. Активные прогоны / текущие волны — skip. `nice`/`ionice`. Скрипт: [`../evidence/tools/archive_nmsdk_journals.sh`](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/archive_nmsdk_journals.sh).
 - Реестр: [`../evidence/RUN_REGISTRY`](../evidence/RUN_REGISTRY/) (строки `jarch_*`).
 - **Стоп archive/offload:** если на `/media/user/Data` свободно **&lt; 5%**, записать в [`CAMPAIGN_STATUS_LATEST.md`](../evidence/CAMPAIGN_STATUS_LATEST.md) и остановиться. (Порог снижен с 15%→5% 2026-10-24; при free≈11% перенос журналов **разрешён**.)
 

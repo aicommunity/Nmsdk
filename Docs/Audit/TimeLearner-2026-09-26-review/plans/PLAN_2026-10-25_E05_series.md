@@ -1,5 +1,9 @@
 # E05 series (E0–E5): dendrite length limits at dt = 0.5 ms
 
+> Исторический документ: shell-команды этой кампании не являются текущими инструкциями запуска/очистки. Файлы удалены из рабочего дерева; данные кампании сохранены. Современная синхронизация выполняется через Git; серия D не возобновляется автоматически.
+> Источники: [e05_dispatch.sh](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e05_dispatch.sh).
+
+
 Branch `plan/2026-10-25-dendrite-limits`. Parent plan: `PLAN_2026-10-25_dendrite_limits.md`.
 Integration step is fixed: DefaultTimeStep = 2000 (dt = 0.5 ms) in Train and Test (the templates ship 20000; e05_job patches both Project.ini).
 No new model classes; per-config overrides only (PulseLib 29c7ead: Override{MembraneCapacity,Exc/InhMembraneResistance,Exc/InhSynapseResistance}; DynamicsLog{Head,Every,ComponentState}).
