@@ -66,6 +66,9 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.23e-9);EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),91e6);
  const auto before=NmsdkTools::InspectModel(neuron);
  ReadoutArtifact(artifact+"source-neuron.json",QJsonDocument(before).toJson().toStdString());
+ const auto sourceGraph=NmsdkTools::InspectModel(model);
+ ReadoutArtifact(artifact+"source-model.json",QJsonDocument(sourceGraph).toJson().toStdString());
+ ASSERT_TRUE(sourceGraph["valid"].toBool())<<QJsonDocument(sourceGraph["diagnostics"].toArray()).toJson().constData();
  USerStorageXML xml;ASSERT_TRUE(xml.Create("LoadedReadoutFixture"));
  ASSERT_TRUE(model->SaveComponent(&xml,true,ptPubParameter|pgSystem|(savedState?ptPubState:0)));
  std::string serialized;ASSERT_TRUE(xml.Save(serialized));ReadoutArtifact(artifact+"model.xml",serialized);
@@ -101,6 +104,9 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  neuron=learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
  const auto after=NmsdkTools::InspectModel(neuron);
  ReadoutArtifact(artifact+"loaded-neuron.json",QJsonDocument(after).toJson().toStdString());
+ const auto loadedGraph=NmsdkTools::InspectModel(model);
+ ReadoutArtifact(artifact+"loaded-model.json",QJsonDocument(loadedGraph).toJson().toStdString());
+ ASSERT_TRUE(loadedGraph["valid"].toBool())<<QJsonDocument(loadedGraph["diagnostics"].toArray()).toJson().constData();
  std::ostringstream dimensions;dimensions<<"{\"inputs\":"<<count<<",\"soma_rows\":"
   <<learner->SomaNeuronAmplitude.GetRows()<<",\"dendrite_rows\":"<<learner->DendriteNeuronAmplitude.GetRows()<<"}\n";
  ReadoutArtifact(artifact+"loaded-dimensions.json",dimensions.str());
