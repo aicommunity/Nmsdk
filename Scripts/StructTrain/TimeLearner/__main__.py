@@ -117,7 +117,7 @@ def analyze(args: argparse.Namespace) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
-    for operation in ("train", "export", "evaluate"):
+    for operation in ("train", "preflight", "export", "evaluate"):
         native = commands.add_parser(operation, help="run an owned native Console "+operation+" job")
         native.add_argument("specification", type=Path)
         native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
@@ -194,11 +194,11 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError) as error:
             print(json.dumps({"validity": "invalid", "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
             return 2
-    if args.command in ("train", "export", "evaluate"):
+    if args.command in ("train", "preflight", "export", "evaluate"):
         from .native_evidence import EvidenceError, require
         from .native_pipeline_worker import run_job
         try:
-            require((args.source_solo is None) == (args.command == "train"), "pipeline_source_required_only_for_export_evaluate")
+            require((args.source_solo is None) == (args.command in ("train", "preflight")), "pipeline_source_required_only_for_export_evaluate")
             result = run_job(args.command, args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds)
             print(json.dumps(result, ensure_ascii=False, allow_nan=False))
             return 0 if result["execution"] == "completed" and result["validity"] == "valid" else 2
