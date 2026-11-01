@@ -8,7 +8,8 @@ fixed anchor, порядок входов Classic/Branch и fresh all-input gate
 численный root942e5df4559467a9a19c56755f945ce6501e7780. Последующие PulseLib
 commits меняют документацию; merge develop38edfcad7983478a7e2ca736c32ae2703861c1fd
 имеет тот же Core tree64cdc352af865dc0e860ea05fb2c6d9799ccc36e.
-Root feature фиксирует этот опубликованный child; root merge следует отдельно.
+Root functional acceptance merge8394a028a65afaacbe72f1ce741f26b309c4e3b7
+опубликован с этим exact child, Bin49adcd02 и Rdk027f7f83.
 
 ## Дефект и изменение
 

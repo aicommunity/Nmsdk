@@ -21,8 +21,19 @@ f23d1b8dee908ddfdc549619b754875fc627ce9b, Bin
 controls и temporal checks. Численный root942e5df4559467a9a19c56755f945ce6501e7780 /
 Pulsec25db29404b544311a3256336c0c43991a384e12. PulseLib develop merge
 38edfcad7983478a7e2ca736c32ae2703861c1fd сохраняет тот же functional Core.
-Root merge следует после фиксации exact gitlink. Полный stage7 не закрыт;
+Root acceptance merge8394a028a65afaacbe72f1ce741f26b309c4e3b7 опубликован
+с exact gitlinks. Полный stage7 не закрыт;
 [границы/источники](N0CandidateOrdering.ru.md), [журнал](CurrentStatus-2026-11-01.ru.md).
+
+Следующий production N0 подэтап также проверен адресно: на каждом worker два
+корпуса /28 реальных Console операций,7/7 reader checks для каждого протокола,
+28 temporal reports и3/3 temporal checks для каждого протокола. Проверены
+фактически измеренные Ns>1, фиксированные Rs/anchor и frozen handoff. Это
+2inputs/2000Hz/identity/keep_done/fixed-or-grid, а не вся матрица вариантов.
+Все16 full Train на двух workers — SearchUnresolved. Источники, limits окон
+и scoped visual review: [N0 production](N0ProductionCoverage.ru.md).
+Адресная [очистка серверов](ServerCleanup-2026-11-01.ru.md) завершена с receipts;
+она не закрывает весь resource/scheduler контур этапов2/10.
 
 ## Сверка по исходным этапам
 
@@ -66,8 +77,10 @@ Git, полные производные отчёты остаются на M40 
 
 ## Текущая последовательность приёмки
 
-1. Включить принятый N0 подэтап с точными child gitlinks; regression/repeat/
-   temporal evidence завершены, полная алгоритмическая матрица остаётся открытой.
+1. Объединить проверенный production N0 подэтап; его primary/temporal evidence
+   завершены. Следующая алгоритмическая работа — реальные positive controls,
+   размерности и physical cases для proposal policy, а не расширение claim
+   по одному прохождению ограниченного negative corpus.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
@@ -78,3 +91,5 @@ Git, полные производные отчёты остаются на M40 
 Только requirement-by-requirement доказательства всех строк исходного плана
 позволят закрыть цель. Количество commits/tests не переводится в достоверный
 процент завершения; приёмка отдельного сценария не закрывает весь этап.
+
+Дополнение: проверка совместимости N0-шаблона перед приёмкой подэтапа. Исправление 0980f23309e099cb7cc73a1355a2dd25c7f788ab сохраняет полную конфигурацию при вызове подготовителя без новых факторов; раньше такой вызов ошибочно требовал повторного задания диапазона Ns. Проверено исходниками 54382334754986c574c7ccbcd5ded5b55f1b638e на Elder и M40: исходная ошибка воспроизведена через прежний публичный make_job; по 9 проверок для repeat=1/2, по 10 фактических Train-заданий на протокол регенерированы идентично, 1147 исходных файлов каждого корпуса не изменились. Численные прогоны и отрисовка повторно не выполнялись. Исходные отчёты с 7 проверками остаются отчётами своего снимка. Новые квитанции: Reports/StructTrain/TimeLearner/s07-n0-template-contract-normal-a2 (7aeb9655afdc3aec7ef607664393318fe290d1a3), s07-n0-template-contract-asan-a2 (0689def9d7a056bc9e9464d5ba647fcb8e30cbf9). Первые попытки настройки a1 завершились SyntaxError до выполнения проверок и также сохранены. Это приёмка совместимости подготовителя, а не положительный результат физического обучения и не закрытие полного этапа 7.
