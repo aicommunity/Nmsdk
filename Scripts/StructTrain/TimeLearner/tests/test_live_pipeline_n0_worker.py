@@ -80,6 +80,45 @@ class N0LivePipelineWorkerTest(_Base):
                 make_job(template, "invalid", legacy=True, **changes)
         self.assertEqual(template, before)
 
+    def test_default_preparation_preserves_the_entire_existing_n0_declaration(self):
+        for name in self.completed:
+            folder = self.root/"runs"/name
+            original = load(folder/"input/job.json")
+            recognition = load(folder/"native/recognition-model.json")
+            template = {"source_recognition": recognition, "owner_class": original["owner_class"],
+                        "implementation_id": original["implementation_id"]}
+            before = deepcopy(template)
+            expected = deepcopy(recognition["source_solo"]["configuration"])
+            expected["run_id"] = "preserve-existing-declaration"
+            job = make_job(template, expected["run_id"], legacy=True)
+            with self.subTest(run=name):
+                self.assertEqual(job["configuration"], expected)
+                self.assertEqual(template, before)
+                for factors in ({"n0_maximum_synapses": 4}, {"n0_candidate_repeats": 2}):
+                    with self.assertRaisesRegex(EvidenceError, "requires_explicit_normalization"):
+                        make_job(template, "ambiguous-factor-change", legacy=True, **factors)
+
+    def test_explicit_factor_preparation_reproduces_every_actual_training_job(self):
+        factors = self.index["experiment_factors"]
+        for top in ("Classic", "Branch"):
+            baseline = load(self.root/"runs"/(top+"-grid")/"input/job.json")
+            plan = baseline["finalization_plan"]
+            template = {"owner_class": baseline["owner_class"], "implementation_id": baseline["implementation_id"],
+                        "source_recognition": {"source_solo": {"configuration": baseline["configuration"],
+                            "neuron": baseline["profile_archives"][0]}, "conversion_spec": plan["conversion"]},
+                        "post_tune": plan["post_tune"], "specification": plan["confirmation"],
+                        "trials": plan["trials"], "thresholds": plan["thresholds"],
+                        "maximum_candidates": plan["maximum_calibration_candidates"]}
+            before = deepcopy(template)
+            for scenario in ("fixed", "grid", "budget", "stopped", "legacy-budget"):
+                name = top+"-"+scenario
+                expected = load(self.root/"runs"/name/"input/job.json")
+                actual = make_job(template, name, calibrate=scenario=="grid", legacy=scenario=="legacy-budget",
+                                  budget=scenario in ("budget", "legacy-budget"), stopped=scenario=="stopped", **factors)
+                with self.subTest(run=name):
+                    self.assertEqual(actual, expected)
+                    self.assertEqual(template, before)
+
 
 # unittest discovers imported TestCase classes too. Keep only the N0 subclass
 # in this module; the original N1 corpus retains its separate acceptance suite.

@@ -30,8 +30,14 @@ def make_job(template, name, *, calibrate=False, legacy=False, budget=False, sto
     require(normalization in (None, "N0", "N1"), "corpus_unknown_normalization")
     require(type(n0_candidate_repeats) is int and 1 <= n0_candidate_repeats <= 128,
             "corpus_invalid_candidate_repeats")
-    selected = normalization or config["model"]["normalization"]
-    if selected == "N0":
+    require(config["model"]["normalization"] in ("N0", "N1"), "corpus_unknown_template_normalization")
+    if normalization is None:
+        require(n0_candidate_repeats == 1 and n0_maximum_synapses is None,
+                "corpus_factor_override_requires_explicit_normalization")
+        # No factor selection means keep the entire existing declaration,
+        # including N0 schema2 repeats and individual domains. Defaults must
+        # not reinterpret a saved experiment as a newly chosen protocol.
+    elif normalization == "N0":
         require(type(n0_maximum_synapses) is int and 2 <= n0_maximum_synapses <= 128,
                 "corpus_explicit_n0_synapse_domain_required")
         require(len(config["search"]["bounds"]) == len(config["model"]["inputs"]),
