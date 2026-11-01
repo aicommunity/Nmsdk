@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import time
@@ -43,6 +44,10 @@ def run(corpus, baseline_source, output):
             env = dict(environment, TIMELEARNER_N0_LIVE_PIPELINE_CORPUS=str(corpus/("repeat-"+str(repeat))))
             invoke("reader-repeat-"+str(repeat), [sys.executable, "-m", "unittest", "-v",
                 "Scripts.StructTrain.TimeLearner.tests.test_live_pipeline_n0_worker"], env)
+            text = (output/("reader-repeat-"+str(repeat)+".log")).read_text(encoding="utf-8")
+            count = re.search(r"Ran (\d+) tests? in", text)
+            if count is None or int(count.group(1)) != 9 or "skipped" in text or not text.rstrip().endswith("OK"):
+                raise RuntimeError("requires all nine actual contract checks without skips")
         if before != inventory(corpus):
             raise RuntimeError("production source files changed")
         value = {"kind": "n0_existing_template_contract", "status": 0,
