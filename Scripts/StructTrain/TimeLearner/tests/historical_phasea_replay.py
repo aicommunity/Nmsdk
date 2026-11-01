@@ -152,6 +152,16 @@ def main():
             prior = args.baseline/name/"work/SelectivityLog/results.csv"
             require(prior.is_file(), "untouched_baseline_missing")
             passive = prior.read_bytes() == actual_csv.read_bytes()
+            trace_files = []
+            for stream in observer["streams"]:
+                matches = [p for p in (work/"TemporalTrace").glob("*.txt")
+                           if p.name.endswith(stream["source"]+".txt")]
+                require(len(matches) == 1 and matches[0].stat().st_size > 0,
+                        "historical_native_trace_missing:"+stream["role"])
+                trace_files.append({**stream, "path": str(matches[0].relative_to(folder)),
+                    "bytes": matches[0].stat().st_size,
+                    "sha256": hashlib.sha256(matches[0].read_bytes()).hexdigest()})
+            write(folder/"trace-files.json", trace_files)
         require(original["native_match_count"] == old_correct, "wrong_original_phasea_reference")
         require([(r["trial_id"], r["label"], r["isis"]) for r in original["rows"]]
                 == [(r["trial_id"], r["label"], r["isis"]) for r in actual["rows"]],
