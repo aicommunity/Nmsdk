@@ -1,0 +1,1 @@
+Normal N1 build acceptance: current a3 passes40 selected production C++ tests, Console and runtime snapshot. Earlier a1 and compile-failed a2 are preserved with their own source versions; old binaries retained. This is no full-stage or classification claim.

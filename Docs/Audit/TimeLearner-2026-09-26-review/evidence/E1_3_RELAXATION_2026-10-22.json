@@ -1,0 +1,44 @@
+{
+  "task": "E1.3",
+  "date": "2026-10-22",
+  "verdict": "DONE_SCOPED",
+  "membrane_explains_E1_2_bias": false,
+  "Console_sha256": "4a0658f34736bf0575f051d6ee790e9342f5df8ebf904956640fbeaaa7fdc5d7",
+  "host": "Elder-1 (local tl-agent Console; glog 0.4 via LD_LIBRARY_PATH)",
+  "template_Train_Test": {
+    "AsymRm": "TimeLearnerMatrix/W01/inputs/W01_CL50_N0_PSIoff/{Train,Test} — probe uses Test only (IsNeedToTrain=0)",
+    "FastSpan": "TimeLearnerMatrix/W46/inputs/W46_HIST_FAST_D002_C2_5E10/Test (lengths 10,10,10,1)"
+  },
+  "AsymRm_L10_TipR_8_6e7": {
+    "tau_relax_s": 0.02597,
+    "t_to_1pct_s": 0.1285,
+    "t_to_noise_s": 0.16585,
+    "tau_fit_r2": 0.9922,
+    "res_frac_at_0.5_s": -0.00416,
+    "pause_sweep_bias_pct": {
+      "0.25": -28.04,
+      "0.5": -28.25,
+      "1.0": -27.59,
+      "1.55": -27.44,
+      "2.0": -27.67,
+      "5.0": -27.72
+    },
+    "pause_0_1_s": "invalid_pack1 (EPSP overlap; pause ≲ t_peak)"
+  },
+  "FastSpan_L10_optional": {
+    "tau_relax_s": 0.00595,
+    "t_to_1pct_s": 0.03,
+    "t_to_noise_s": 0.0385,
+    "pause_2_s_bias_pct": 21.87
+  },
+  "F3_implication": "ResetNeuronBeforeTrainBurst required; inter-pack pause ≤5 s does not restore Reset amp on AsymRm (bias stays ≈−28%). Membrane τ≪1 s cannot be the carrier of the Reset vs no-Reset gap.",
+  "open_question_294": "Physical carrier of ≥1 s memory is NOT passive soma voltage; candidates remain AsymRm rectifier / generator / LTZ-adjacent state — needs separate state probe, not longer pause.",
+  "artifacts": {
+    "ru_md": "E1_3_RELAXATION_2026-10-22.ru.md",
+    "decay_tsv": "E1_3_RELAXATION_2026-10-22.tsv",
+    "pause_tsv": "E1_3_PAUSE_SWEEP_2026-10-22.tsv",
+    "tool": "tools/e1_3_relaxation.py",
+    "runtime": "$HOME/TLAgent-20261020/scratch/E1_3/ and agent-reports/E1_3_20261022/"
+  },
+  "excluded": ["G1_RERUN", "F1b_cold", "KeepDone_W33"]
+}

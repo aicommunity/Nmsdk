@@ -1,0 +1,57 @@
+{
+  "kind": "timelearner_native_test_report_spec",
+  "schema_version": 1,
+  "fixture_contract": "n0-candidate-order-31-cases-root942e5df45-four-native-training-phases-only; editor probes remain in full raw archive outside this phase-report scope",
+  "expected_test_ids": [
+    "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+    "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+    "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+    "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+    "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+    "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+    "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+    "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+    "BoundedTraining/EmptyEffectiveDomainsRemainSearchUnresolvedWithFreshFinalMeasurements",
+    "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+    "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+    "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+    "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+    "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+    "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+    "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+    "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+    "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+    "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+    "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+    "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+    "NativeModelEditor/ClassicN0_2000",
+    "NativeModelEditor/BranchN0_2000",
+    "NativeModelEditor/ClassicN0_20000",
+    "NativeModelEditor/BranchN0_20000",
+    "NativeTrainingService/ClassicN0SearchAndFreshNegativeFinalGate",
+    "NativeTrainingService/BranchN0SearchAndFreshNegativeFinalGate",
+    "NativeColdTrainingService/ClassicN0",
+    "NativeColdTrainingService/BranchN0"
+  ],
+  "phases": [
+    {
+      "summary": "Classic_2000_N0_automatic_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N0_automatic_service_service_"
+    },
+    {
+      "summary": "Classic_2000_N0_automatic_cold_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N0_automatic_cold_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N0_automatic_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N0_automatic_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N0_automatic_cold_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N0_automatic_cold_service_service_"
+    }
+  ],
+  "standalone": []
+}

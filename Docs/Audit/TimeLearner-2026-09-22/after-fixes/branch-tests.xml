@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="8" failures="0" disabled="0" errors="0" time="0" timestamp="2026-09-23T14:29:58.592" name="AllTests">
+  <testsuite name="BranchUpdate" tests="5" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-23T14:29:58.593">
+    <testcase name="SelectedBestStartsFreshProbe" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="419" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchUpdate" />
+    <testcase name="FailedBestFallsBackAndLeavesSilent" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="425" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchUpdate" />
+    <testcase name="ValidSearchTrainStaysSilentAndSuppressesSecondMid" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="430" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchUpdate" />
+    <testcase name="InvalidInferenceKeepsSilentThreshold" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="435" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchUpdate" />
+    <testcase name="ValidInferenceCommitsMeasuredThreshold" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="442" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchUpdate" />
+  </testsuite>
+  <testsuite name="BranchRemaining" tests="3" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-23T14:29:58.593">
+    <testcase name="NaNInferenceMustNotCommitRecognitionThreshold" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="447" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchRemaining" />
+    <testcase name="SetupFailureMustNotMarkCalibrationComplete" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="452" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchRemaining" />
+    <testcase name="FallbackMustNotPublishRejectedCandidateMetrics" file="/home/user/Nmsdk/build/audit-timelearner-make/branch_update_probes.cpp" line="456" status="run" result="completed" time="0" timestamp="2026-09-23T14:29:58.593" classname="BranchRemaining" />
+  </testsuite>
+</testsuites>

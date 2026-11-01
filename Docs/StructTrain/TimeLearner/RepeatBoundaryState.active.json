@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "scope": "Repeated-N0 completed/stopped boundary summaries and warm trace recording; not whole plan",
+  "goal_complete": false,
+  "scoped_accepted": false,
+  "branch": "codex/timelearner-repeat-boundary",
+  "baseline_root": "a6cfc24acf00f5bf8a235ad7872741bb9e05da3f",
+  "baseline_pulse": "b2b670a22f849e0d0d2b6789b8242308521b1c37",
+  "fixed_pulse": "7b5939c5744877ba1a762393d78f7183853fd5c0",
+  "attempts": [
+    {
+      "worker": "10.245.1.11",
+      "attempt": "a1",
+      "status": "terminal",
+      "native_tests": 10,
+      "failed_native_tests": 10,
+      "assertions_per_case": 2,
+      "secondary_post_run_error": "Path JSON serialization",
+      "runtime_terminal_readback": "runtime-after-readback.json"
+    },
+    {
+      "worker": "10.245.1.17",
+      "attempt": "a1",
+      "status": "terminal",
+      "native_tests": 10,
+      "failed_native_tests": 10,
+      "assertions_per_case": 2,
+      "secondary_post_run_error": "Path JSON serialization",
+      "runtime_terminal_readback": "runtime-after-readback.json"
+    },
+    {
+      "worker": "10.245.1.11",
+      "attempt": "a2",
+      "status": "terminal",
+      "root": "7369ae85cc914c5e3f05d919c35fd9b8890d9d97",
+      "supervisor_pid": 702240,
+      "expected_native_tests": 51,
+      "expected_python_tests": 76,
+      "runtime": "/home/user/timelearner-refactor/runtime-s05-repeat-boundary-normal-a2",
+      "native_tests": 51,
+      "failed_native_tests": 0,
+      "native_exit_status": 0,
+      "process_exit_status": 1,
+      "post_audit_error": "Configured XML-load profiles use _xmlprobe_ filenames, not _service_; corrected in final audit"
+    },
+    {
+      "worker": "10.245.1.17",
+      "attempt": "a3",
+      "status": "terminal",
+      "root": "8d73c0fd575aeeedd163479aa7065245915056d9",
+      "supervisor_pid": 2523734,
+      "expected_native_tests": 51,
+      "expected_python_tests": 77,
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s05-repeat-boundary-asan-a3",
+      "post_audit_readback_required": "Audit with corrected XML-load selector and source-bound plot test at 02cf1542d after native job terminal; C++ source unchanged from 8d73c0fd5",
+      "native_tests": 51,
+      "failed_native_tests": 0,
+      "native_exit_status": 0,
+      "process_exit_status": 1,
+      "post_audit_error": "Temporary XML-load selector; corrected independent readback passed without native restart"
+    },
+    {
+      "worker": "10.245.1.11",
+      "attempt": "a3",
+      "expected_python_tests": 77,
+      "supervisor_pid": 712744,
+      "status": "terminal",
+      "expected_native_tests": 51,
+      "runtime": "/home/user/timelearner-refactor/runtime-s05-repeat-boundary-normal-a3",
+      "root": "02cf1542de6edfd67aa9da15798d34dd1b0eb08f",
+      "native_tests": 51,
+      "python_tests": 77,
+      "skips": 0,
+      "failures": 0,
+      "errors": 0,
+      "process_exit_status": 0
+    }
+  ],
+  "open_gates": [
+    "full source-bound visual reports of all new native trials",
+    "combined controller and renderer Python gate",
+    "submodule then root no-ff merges",
+    "full plan 0-12 remains incomplete"
+  ],
+  "observed_at_utc": "2026-10-30T16:20:23.3881702Z",
+  "baseline_report_commits": [
+    "779d34e7b3522db4c07cd24233de82a6f54518dc",
+    "b5e0c526bfad1edf2772c9adbbf774402584478f"
+  ],
+  "baseline_verified_stored_hashes_per_worker": 338,
+  "final_m40_readback": {
+    "skips": 0,
+    "cpp_source_equivalent": true,
+    "process_exit_status": 0,
+    "producer_root": "8d73c0fd575aeeedd163479aa7065245915056d9",
+    "python_tests": 77,
+    "status": "terminal",
+    "errors": 0,
+    "failures": 0,
+    "root": "02cf1542de6edfd67aa9da15798d34dd1b0eb08f"
+  },
+  "final_report_commits": [
+    "e5d97b47325fb871584ce61e46d402b3df7c2562",
+    "fb73b3e5bcdef4612640631f8060310e44e08749"
+  ],
+  "final_stored_hashes_verified": {
+    "m40": 1089,
+    "elder1": 1986
+  }
+}

@@ -1,0 +1,1 @@
+Actual native N0 geometry/Ns path: Classic and Branch measure (L1,Ns1), (L2,Ns1), (L2,Ns2), (L3,Ns1). L2 meets timing but not amplitude tolerance; both training outcomes SearchUnresolved. No classification or comparative advantage claim.

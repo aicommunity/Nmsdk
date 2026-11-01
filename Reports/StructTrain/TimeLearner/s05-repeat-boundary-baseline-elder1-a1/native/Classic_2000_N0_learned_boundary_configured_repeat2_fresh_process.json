@@ -1,0 +1,4454 @@
+{
+    "certificate": {
+        "exact": false,
+        "model_epoch": 4,
+        "model_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+        "peak_selection": "assigned_burst_wave",
+        "protocol_revision": "native_service_burst_v1",
+        "reference_model_epoch": 0,
+        "reference_model_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+        "residuals": [
+            {
+                "amplitude_residual": 0,
+                "amplitude_tolerance": 1e-05,
+                "effective_model_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+                "input_id": "input0",
+                "measured_raw_potential": 0.002968945525607114,
+                "target_raw_potential": 0.002968945525607114,
+                "timing_high": -0.06799999999999962,
+                "timing_low": -0.06799999999999962,
+                "trial_id": "Classic_2000_N0_learned_boundary_configured_repeat2/automatic/session/1/final/0/verify/4/1",
+                "within_amplitude": true,
+                "within_timing": false
+            },
+            {
+                "amplitude_residual": 0,
+                "amplitude_tolerance": 1e-05,
+                "effective_model_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+                "input_id": "input1",
+                "measured_raw_potential": 0.004602018844406253,
+                "target_raw_potential": 0.004602018844406253,
+                "timing_high": 0,
+                "timing_low": 0,
+                "trial_id": "Classic_2000_N0_learned_boundary_configured_repeat2/automatic/session/1/final/0/verify/4/2",
+                "within_amplitude": true,
+                "within_timing": true
+            }
+        ],
+        "schema_version": 1
+    },
+    "model": {
+        "canonical_encoding": "length-framed-utf8-binary64-v1",
+        "diagnostics": [
+        ],
+        "kind": "semantic_model_identity",
+        "model": {
+            "bindings": [
+                {
+                    "kind": "stimulus_port",
+                    "slot": "0",
+                    "source": "burst",
+                    "target": "$.Dendrite1_2.ExcSynapse1:Input"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.NegGenerator:Output",
+                    "target": "$.Dendrite1_2.ExcChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_2.ExcSynapse1:Output",
+                    "target": "$.Dendrite1_2.ExcChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.PosGenerator:Output",
+                    "target": "$.Dendrite1_2.InhChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_2.InhSynapse1:Output",
+                    "target": "$.Dendrite1_2.InhChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_2.ExcChannel:Output",
+                    "target": "$.Dendrite1_1.ExcChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_1.ExcSynapse1:Output",
+                    "target": "$.Dendrite1_1.ExcChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_2.InhChannel:Output",
+                    "target": "$.Dendrite1_1.InhChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_1.InhSynapse1:Output",
+                    "target": "$.Dendrite1_1.InhChannel:SynapticInputs"
+                },
+                {
+                    "kind": "stimulus_port",
+                    "slot": "0",
+                    "source": "burst",
+                    "target": "$.Dendrite2_1.ExcSynapse1:Input"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.NegGenerator:Output",
+                    "target": "$.Dendrite2_1.ExcChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite2_1.ExcSynapse1:Output",
+                    "target": "$.Dendrite2_1.ExcChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.PosGenerator:Output",
+                    "target": "$.Dendrite2_1.InhChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite2_1.InhSynapse1:Output",
+                    "target": "$.Dendrite2_1.InhChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_1.ExcChannel:Output",
+                    "target": "$.Soma1.ExcChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Soma1.ExcSynapse1:Output",
+                    "target": "$.Soma1.ExcChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite1_1.InhChannel:Output",
+                    "target": "$.Soma1.InhChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Soma1.InhSynapse1:Output",
+                    "target": "$.Soma1.InhChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite2_1.ExcChannel:Output",
+                    "target": "$.Soma2.ExcChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Soma2.ExcSynapse1:Output",
+                    "target": "$.Soma2.ExcChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Dendrite2_1.InhChannel:Output",
+                    "target": "$.Soma2.InhChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Soma2.InhSynapse1:Output",
+                    "target": "$.Soma2.InhChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.LTZone:Output",
+                    "target": "$.LTMembrane:InputFeedbackSignal"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Soma1.ExcChannel:Output",
+                    "target": "$.LTMembrane.ExcChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "1",
+                    "source": "$.Soma2.ExcChannel:Output",
+                    "target": "$.LTMembrane.ExcChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.LTMembrane.ExcSynapse1:Output",
+                    "target": "$.LTMembrane.ExcChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.Soma1.InhChannel:Output",
+                    "target": "$.LTMembrane.InhChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "1",
+                    "source": "$.Soma2.InhChannel:Output",
+                    "target": "$.LTMembrane.InhChannel:ChannelInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.LTMembrane.InhSynapse1:Output",
+                    "target": "$.LTMembrane.InhChannel:SynapticInputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "0",
+                    "source": "$.LTMembrane.ExcChannel:Output",
+                    "target": "$.LTZone:Inputs"
+                },
+                {
+                    "kind": "property_pointer",
+                    "slot": "1",
+                    "source": "$.LTMembrane.InhChannel:Output",
+                    "target": "$.LTZone:Inputs"
+                }
+            ],
+            "caches": [
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_ltzone": "$.LTZone",
+                    "cached_membranes": [
+                        "$.Dendrite1_2",
+                        "$.Dendrite1_1",
+                        "$.Dendrite2_1",
+                        "$.Soma1",
+                        "$.Soma2",
+                        "$.LTMembrane"
+                    ],
+                    "cached_negative_generator": "$.NegGenerator",
+                    "cached_positive_generator": "$.PosGenerator",
+                    "path": "$"
+                },
+                {
+                    "cached_channels": [
+                        "$.Dendrite1_2.ExcChannel",
+                        "$.Dendrite1_2.InhChannel"
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_2"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_2.ExcSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_2.InhSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_2.ExcChannel"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_2.InhChannel"
+                },
+                {
+                    "cached_channels": [
+                        "$.Dendrite1_1.ExcChannel",
+                        "$.Dendrite1_1.InhChannel"
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_1.ExcSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_1.InhSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_1.ExcChannel"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite1_1.InhChannel"
+                },
+                {
+                    "cached_channels": [
+                        "$.Dendrite2_1.ExcChannel",
+                        "$.Dendrite2_1.InhChannel"
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite2_1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite2_1.ExcSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite2_1.InhSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite2_1.ExcChannel"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Dendrite2_1.InhChannel"
+                },
+                {
+                    "cached_channels": [
+                        "$.Soma1.ExcChannel",
+                        "$.Soma1.InhChannel"
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma1.ExcSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma1.InhSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma1.ExcChannel"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma1.InhChannel"
+                },
+                {
+                    "cached_channels": [
+                        "$.Soma2.ExcChannel",
+                        "$.Soma2.InhChannel"
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma2"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma2.ExcSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma2.InhSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma2.ExcChannel"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.Soma2.InhChannel"
+                },
+                {
+                    "cached_channels": [
+                        "$.LTMembrane.ExcChannel",
+                        "$.LTMembrane.InhChannel"
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.LTMembrane"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.LTMembrane.ExcSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.LTMembrane.InhSynapse1"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.LTMembrane.ExcChannel"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.LTMembrane.InhChannel"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.LTZone"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.PosGenerator"
+                },
+                {
+                    "cached_channels": [
+                    ],
+                    "cached_membranes": [
+                    ],
+                    "path": "$.NegGenerator"
+                }
+            ],
+            "nodes": [
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                        "Dendrite1_2",
+                        "Dendrite1_1",
+                        "Dendrite2_1",
+                        "Soma1",
+                        "Soma2",
+                        "LTMembrane",
+                        "LTZone",
+                        "PosGenerator",
+                        "NegGenerator"
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Neuron",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DefaultComponentClassId": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "0"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcGeneratorClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_PositiveGenerator"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcMembraneResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcSynapseResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhGeneratorClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_NegativeGenerator"
+                            },
+                            "mask": "257"
+                        },
+                        "InhMembraneResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhSynapseResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "LTMembraneClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_Membrane"
+                            },
+                            "mask": "257"
+                        },
+                        "LTZoneClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_LTZone"
+                            },
+                            "mask": "257"
+                        },
+                        "LayerHeight": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "LayerWidth": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "LinkDistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "LinkOrganizationMode": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "0"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "MembraneCapacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MembraneClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_Membrane"
+                            },
+                            "mask": "257"
+                        },
+                        "NetType": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "0"
+                            },
+                            "mask": "257"
+                        },
+                        "NumDendriteMembranePartsVec": {
+                            "binding": false,
+                            "data": {
+                                "type": "integer_vector",
+                                "value": [
+                                    "2",
+                                    "1"
+                                ]
+                            },
+                            "mask": "257"
+                        },
+                        "NumLayers": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumSomaMembraneParts": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "2"
+                            },
+                            "mask": "257"
+                        },
+                        "ReceptorFieldHeight": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "ReceptorFieldWidth": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "StructureBuildMode": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "2"
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseDissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseSecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseTypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainingDendIndexes": {
+                            "binding": false,
+                            "data": {
+                                "columns": "0",
+                                "rows": "0",
+                                "type": "integer_matrix",
+                                "value": [
+                                ]
+                            },
+                            "mask": "257"
+                        },
+                        "TrainingPattern": {
+                            "binding": false,
+                            "data": {
+                                "columns": "0",
+                                "rows": "0",
+                                "type": "binary64_matrix",
+                                "value": [
+                                ]
+                            },
+                            "mask": "257"
+                        },
+                        "TrainingSynapsisNum": {
+                            "binding": false,
+                            "data": {
+                                "columns": "0",
+                                "rows": "0",
+                                "type": "integer_matrix",
+                                "value": [
+                                ]
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageDendritesPotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageLTZonePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseElementDefaults": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                        "ExcSynapse1",
+                        "InhSynapse1",
+                        "ExcChannel",
+                        "InhChannel"
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_Membrane",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "ExcChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "FeedbackGain": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "InhSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumExcitatorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumInhibitorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "ResetAvailable": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "NPSynapseBio"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_2"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4194810600000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_2.ExcSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "41c9a14780000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_2.InhSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_2.ExcChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_2.InhChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                        "ExcSynapse1",
+                        "InhSynapse1",
+                        "ExcChannel",
+                        "InhChannel"
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_Membrane",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "ExcChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "FeedbackGain": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "InhSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumExcitatorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumInhibitorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "ResetAvailable": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "NPSynapseBio"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4194810600000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_1.ExcSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "41c9a14780000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_1.InhSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e18393ede5fb8cd"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_1.ExcChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite1_1.InhChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                        "ExcSynapse1",
+                        "InhSynapse1",
+                        "ExcChannel",
+                        "InhChannel"
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_Membrane",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "ExcChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "FeedbackGain": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "InhSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumExcitatorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumInhibitorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "ResetAvailable": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "NPSynapseBio"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite2_1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4194810600000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite2_1.ExcSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "41c9a14780000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite2_1.InhSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite2_1.ExcChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Dendrite2_1.InhChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                        "ExcSynapse1",
+                        "InhSynapse1",
+                        "ExcChannel",
+                        "InhChannel"
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_Membrane",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "ExcChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "FeedbackGain": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "InhSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumExcitatorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumInhibitorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "ResetAvailable": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "NPSynapseBio"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4194810600000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma1.ExcSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "41c9a14780000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma1.InhSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma1.ExcChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma1.InhChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                        "ExcSynapse1",
+                        "InhSynapse1",
+                        "ExcChannel",
+                        "InhChannel"
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_Membrane",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "ExcChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "FeedbackGain": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "InhSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumExcitatorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumInhibitorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "ResetAvailable": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "NPSynapseBio"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma2"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4194810600000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma2.ExcSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "41c9a14780000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma2.InhSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_ExcChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma2.ExcChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_Body_InhChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.Soma2.InhChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                        "ExcSynapse1",
+                        "InhSynapse1",
+                        "ExcChannel",
+                        "InhChannel"
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_Membrane",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "ExcChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_ExcChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "ExcSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_ExcSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "FeedbackGain": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "InhChannelClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_InhChannel"
+                            },
+                            "mask": "257"
+                        },
+                        "InhSynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_InhSynapse"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumExcitatorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumInhibitorySynapses": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "1"
+                            },
+                            "mask": "257"
+                        },
+                        "ResetAvailable": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "SynapseClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": "NPSynapseBio"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.LTMembrane"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_ExcSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4194810600000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.LTMembrane.ExcSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_InhSynapse",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "DissociationTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "InhibitionCoeff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "41c9a14780000000"
+                            },
+                            "mask": "257"
+                        },
+                        "SecretionTC": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "TrainerClassName": {
+                            "binding": false,
+                            "data": {
+                                "type": "utf8",
+                                "value": ""
+                            },
+                            "mask": "257"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TypicalPulseDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "UsePresynapticInhibition": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        },
+                        "UsePulseSignal": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Weight": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.LTMembrane.InhSynapse1"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_ExcChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3df49da7e361ce4c"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.LTMembrane.ExcChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_LT_InhChannel",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Capacity": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3e112e0be826d695"
+                            },
+                            "mask": "257"
+                        },
+                        "FBResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "416312d000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "Resistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "RestingResistance": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "4197d78400000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "Type": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "UseAverageSynapsis": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": false
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.LTMembrane.InhChannel"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_LTZone",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "AvgInterval": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "NumChannelsInGroup": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "2"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseAmplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "PulseLength": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3f50624dd2f1a9fc"
+                            },
+                            "mask": "257"
+                        },
+                        "Threshold": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "ThresholdOff": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "0000000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        },
+                        "UseAveragePotential": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        }
+                    },
+                    "path": "$.LTZone"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_PositiveGenerator",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "ActionPeriod": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "0"
+                            },
+                            "mask": "257"
+                        },
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Amplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "3ff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        }
+                    },
+                    "path": "$.PosGenerator"
+                },
+                {
+                    "aliases": [
+                    ],
+                    "child_order": [
+                    ],
+                    "class": "Classic_2000_N0_learned_boundary_configured_repeat2_NegativeGenerator",
+                    "frequency_hz": "2000",
+                    "parameters": {
+                        "ActionPeriod": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "0"
+                            },
+                            "mask": "257"
+                        },
+                        "Activity": {
+                            "binding": false,
+                            "data": {
+                                "type": "boolean",
+                                "value": true
+                            },
+                            "mask": "257"
+                        },
+                        "Amplitude": {
+                            "binding": false,
+                            "data": {
+                                "type": "binary64",
+                                "value": "bff0000000000000"
+                            },
+                            "mask": "257"
+                        },
+                        "MaxCalculationDuration": {
+                            "binding": false,
+                            "data": {
+                                "type": "signed_integer",
+                                "value": "-1"
+                            },
+                            "mask": "257"
+                        },
+                        "TimeStep": {
+                            "binding": false,
+                            "data": {
+                                "type": "unsigned_integer",
+                                "value": "2000"
+                            },
+                            "mask": "513"
+                        }
+                    },
+                    "path": "$.NegGenerator"
+                }
+            ],
+            "schema_version": 2,
+            "stimulus_ports": [
+                {
+                    "id": "burst",
+                    "type": "matrix_binary64"
+                }
+            ]
+        },
+        "schema_version": 2,
+        "sha256": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+        "valid": true
+    },
+    "need": false,
+    "probe": {
+        "current_base_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+        "evidence_schema_version": 2,
+        "kind": "timelearner_native_probe_evidence",
+        "native_status": "completed",
+        "observation": {
+            "burst_assignments": [
+                {
+                    "channel": 0,
+                    "validity": "valid",
+                    "waves": [
+                        {
+                            "amplitude": 0.002968945525607114,
+                            "plateau_end": 4.367,
+                            "raw_potential": 0.002968945525607114,
+                            "relative_to_trial_start": 0.03249999999999975,
+                            "stimulus_id": "pulse0",
+                            "time": 4.367
+                        },
+                        {
+                            "amplitude": 0.003021484416234066,
+                            "plateau_end": 4.4465,
+                            "raw_potential": 0.003021484416234066,
+                            "relative_to_trial_start": 0.1120000000000001,
+                            "stimulus_id": "pulse1",
+                            "time": 4.4465
+                        }
+                    ]
+                }
+            ],
+            "complete": true,
+            "end_reason": "window_closed",
+            "first_stimulus_time": 4.345,
+            "peaks": [
+                {
+                    "amplitude": 0.002968945525607114,
+                    "candidate_count": 1,
+                    "delay_from_stimulus": 0.02200000000000024,
+                    "input_id": "input0",
+                    "plateau_end": 4.367,
+                    "raw_potential": 0.002968945525607114,
+                    "relative_to_trial_start": 0.03249999999999975,
+                    "stimulus_id": "pulse0",
+                    "time": 4.367,
+                    "validity": "valid"
+                }
+            ],
+            "reasons": [
+            ],
+            "sample_count": 361,
+            "schema_version": 3,
+            "specification": {
+                "baseline": [
+                    0,
+                    0
+                ],
+                "begin": 4.3345,
+                "effective_model_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+                "end": 4.5145,
+                "expected_stimulus_ids": [
+                    "pulse0",
+                    "pulse1"
+                ],
+                "maximum_sample_gap": 0.0005,
+                "maximum_samples": 380,
+                "minimum_amplitude": 1e-06,
+                "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+                "peak_selection": "assigned_burst_wave",
+                "record_spikes": false,
+                "run_id": "fresh-learned-import",
+                "sample_id": "target",
+                "schema_version": 3,
+                "stimulus_profile": {
+                    "amplitude": 1,
+                    "frequency_deviation": 0,
+                    "frequency_hz": 2000,
+                    "generator_class": "NPulseGeneratorTransit",
+                    "pulse_length": 0.001,
+                    "use_pattern_output": false,
+                    "use_transit_signal": false
+                },
+                "time_frame": "absolute_model_time",
+                "trial_id": "fresh-learned-import/probe",
+                "wave_assignment": "ordered_whole_burst",
+                "windows": [
+                    {
+                        "begin": 4.3345,
+                        "channel": 0,
+                        "end": 4.5145,
+                        "input_id": "input0",
+                        "stimulus_id": "pulse0"
+                    }
+                ]
+            },
+            "spike_count": null,
+            "spikes": [
+            ],
+            "stimuli": [
+                {
+                    "id": "pulse0",
+                    "relative_to_trial_start": 0.01049999999999951,
+                    "time": 4.345
+                },
+                {
+                    "id": "pulse1",
+                    "relative_to_trial_start": 0.09049999999999958,
+                    "time": 4.425
+                }
+            ],
+            "valid": true
+        },
+        "prepared": {
+            "base_model_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+            "effective_model_revision": "d295319154cc027e0b010cc93976604a772b13cd78c275308041eb8e3504b812",
+            "input_id": "input0",
+            "model_epoch": 4,
+            "protocol_revision": "native_service_burst_v1",
+            "routing": "classic_burst",
+            "selected_input_index": null
+        },
+        "reasons": [
+        ],
+        "requested_specification": {
+            "baseline": [
+            ],
+            "begin": 0,
+            "effective_model_revision": "",
+            "end": 0.18,
+            "expected_stimulus_ids": [
+                "pulse0",
+                "pulse1"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 380,
+            "minimum_amplitude": 1e-06,
+            "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+            "peak_selection": "assigned_burst_wave",
+            "record_spikes": false,
+            "run_id": "fresh-learned-import",
+            "sample_id": "target",
+            "schema_version": 3,
+            "stimulus_profile": {
+                "amplitude": 1,
+                "frequency_deviation": 0,
+                "frequency_hz": 2000,
+                "generator_class": "NPulseGeneratorTransit",
+                "pulse_length": 0.001,
+                "use_pattern_output": false,
+                "use_transit_signal": false
+            },
+            "time_frame": "relative_to_trial_start",
+            "trial_id": "fresh-learned-import/probe",
+            "wave_assignment": "ordered_whole_burst",
+            "windows": [
+                {
+                    "begin": 0,
+                    "channel": 0,
+                    "end": 0.18,
+                    "input_id": "input0",
+                    "stimulus_id": "pulse0"
+                }
+            ]
+        },
+        "requires_fresh_verification": false
+    }
+}

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Wrapper so "cmake --build" uses parallel make even when -j is not passed (Qt Creator).
+set -e
+exec "@NMSDK_REAL_MAKE_PROGRAM@" -j@NMSDK_BUILD_PARALLEL_JOBS@ "$@"

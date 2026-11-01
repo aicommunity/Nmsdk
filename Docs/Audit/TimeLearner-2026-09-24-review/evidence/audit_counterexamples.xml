@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="9" failures="0" disabled="0" errors="0" time="0" timestamp="2026-09-24T09:24:31.420" name="AllTests">
+  <testsuite name="PostTuneAudit" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T09:24:31.420">
+    <testcase name="GapMustIncludeEveryFoil" file="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp" line="7" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="PostTuneAudit" />
+    <testcase name="NonFiniteMetricsMustNotBeAccepted" file="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp" line="16" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="PostTuneAudit" />
+  </testsuite>
+  <testsuite name="RouterAudit" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T09:24:31.420">
+    <testcase name="ThinObstacleMustBeDetectedBetweenSamples" file="E:\Science-Repo\nmsdk-git\Scripts\audit-probes\counterexamples.cpp" line="22" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="RouterAudit" />
+  </testsuite>
+  <testsuite name="AnalyzerAudit" tests="5" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T09:24:31.420">
+    <testcase name="FirstPulseResponseMustNotCountAsCompletePattern" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="317" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="AnalyzerAudit" />
+    <testcase name="ThreePulseTargetMustBeSupported" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="324" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="AnalyzerAudit" />
+    <testcase name="LateSpikeAfterTimelySpikeMustRemainCounted" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="330" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="AnalyzerAudit" />
+    <testcase name="OneSpikeIsNotAResponseToEveryStimulus" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="336" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="AnalyzerAudit" />
+    <testcase name="NextClassMustNotRelabelPreviousTrial" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="339" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="AnalyzerAudit" />
+  </testsuite>
+  <testsuite name="AxonAudit" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T09:24:31.420">
+    <testcase name="IntegerDelayMustNotAddAnExtraStep" file="E:\Science-Repo\nmsdk-git\build\audit-timelearner-ninja\extracted_probes.cpp" line="345" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.420" classname="AxonAudit" />
+  </testsuite>
+</testsuites>

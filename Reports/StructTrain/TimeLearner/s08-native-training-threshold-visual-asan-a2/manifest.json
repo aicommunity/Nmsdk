@@ -1,0 +1,132 @@
+{
+  "kind": "native_training_threshold_visual_proof",
+  "schema_version": 1,
+  "native_root": "b922aaa20119c559367d12b50c6185543890014d",
+  "render_root": "a6acd8f45bbeffabe1b064f5bdc224af4e66069b",
+  "positive_threshold_detail": true,
+  "report_tests": 2,
+  "reports": 2,
+  "channel_trace_pairs": 5,
+  "seconds": 11.022175138350576,
+  "source_before": {
+    "Branch_solo_threshold_0-confirmation.json": "e607021bcc7e8f06b42112f68b8cd0e3ac18b8f77fc45e5941c9be869313210a",
+    "Classic_solo_threshold_0-confirmation.json": "b4f44f5246496629a5469bc6758b4176ffb9301be85c7fa764e9514ff89be617"
+  },
+  "source_after": {
+    "Branch_solo_threshold_0-confirmation.json": "e607021bcc7e8f06b42112f68b8cd0e3ac18b8f77fc45e5941c9be869313210a",
+    "Classic_solo_threshold_0-confirmation.json": "b4f44f5246496629a5469bc6758b4176ffb9301be85c7fa764e9514ff89be617"
+  },
+  "source_bindings": [
+    {
+      "report": "Branch_solo_threshold_0",
+      "confirmation_file_sha256": "e607021bcc7e8f06b42112f68b8cd0e3ac18b8f77fc45e5941c9be869313210a",
+      "confirmation_trace_sha256": "74b8772248189ce21c9a620c79cd638b3531dd0c406f752d14ae96c129d4d86a",
+      "source_trace_sha256": "d380345ba7c4cf09a4d4015b84849d18794df9bfdf916f052769a954847c3f03",
+      "proposal_sha256": "c2601e069ff6a8cf6651cef044616a8494ba7706159050c62491968aae0fd76a",
+      "proposal_file_sha256": "7faebd0b8f072242eaad770637463bff76bd77fff7099968576ed94c57dfd42f",
+      "threshold": 0.0014856928851619267
+    },
+    {
+      "report": "Classic_solo_threshold_0",
+      "confirmation_file_sha256": "b4f44f5246496629a5469bc6758b4176ffb9301be85c7fa764e9514ff89be617",
+      "confirmation_trace_sha256": "3bbe6d308d443fdaafe0c4773a083941c7dc73e04121f1e1953af4d08f0a29cd",
+      "source_trace_sha256": "5a1540a5ed69f653ae5a9d80ff7d01b73f7afd52af143b9c04c856086ee0b0a3",
+      "proposal_sha256": "0711bc569f5075d9bd3bb7d06717d6a89d75f94fc5a6829893c448488b55e7b0",
+      "proposal_file_sha256": "d6c3740a45177399b91304b83165d5446060b64b070d8e9b7c47f02c8e8b387c",
+      "threshold": 0.0016869611261023931
+    }
+  ],
+  "cache": "/media/user/Data/TimeLearnerRefactor/cache/s08-native-training-threshold-reference-asan-a2",
+  "cache_files": 140,
+  "cache_bytes": 8438965,
+  "selected": [
+    {
+      "path": "selected/Branch_solo_threshold_0/soma-000/overview.png",
+      "sha256": "107b8012f3dff30cf8dbd30ccc1a7517c27294859ad746d05e659502a0fb2b26",
+      "reviewed": false
+    },
+    {
+      "path": "selected/Branch_solo_threshold_0/soma-000/zoom-001.png",
+      "sha256": "6d53e7de8dc7a259ebe0ac991cd064ead2a61b6fd7f37fe882ccbad574efd7fb",
+      "reviewed": false
+    },
+    {
+      "path": "selected/Branch_solo_threshold_0/ltzone/overview.png",
+      "sha256": "934f10d2c361a100e952f0cd10c45ad98c66a3b0ddcb720bd3f45cb89f808d8f",
+      "reviewed": false
+    },
+    {
+      "path": "selected/Branch_solo_threshold_0/ltzone/zoom-001.png",
+      "sha256": "11075367d4b74a02fe992de0f7efcd5a63a65c3a37ec0a2867c0430825ad84c4",
+      "reviewed": false
+    },
+    {
+      "path": "selected/Classic_solo_threshold_0/soma-000/overview.png",
+      "sha256": "5cc855e2ab42ac7d5983c00cff75dfaef81a83b2ae04d4d0fa4fe2b6f9fe138c",
+      "reviewed": false
+    },
+    {
+      "path": "selected/Classic_solo_threshold_0/soma-000/zoom-001.png",
+      "sha256": "4963f73bb3f5a48232a24f789fb84f71627b46b3fc2ba1b887683f407ec5bb45",
+      "reviewed": false
+    },
+    {
+      "path": "selected/Classic_solo_threshold_0/ltzone/overview.png",
+      "sha256": "561459e4fec274c8509ef7868d239b7c4dde8663d0952a511ed2749486d21d5c",
+      "reviewed": false
+    },
+    {
+      "path": "selected/Classic_solo_threshold_0/ltzone/zoom-001.png",
+      "sha256": "610213120db867934e6820f1d7e2c302fb2df2ea91fc0e00c320dfe35b31377d",
+      "reviewed": false
+    }
+  ],
+  "visual_acceptance_complete": false,
+  "calibrated": false,
+  "scientific_verdict": null,
+  "archive_sha256": "35c01124f5d750d16a16c6861a3173ad099dfa5c28bc5ce5660752fb67199c47",
+  "files": [
+    {
+      "path": "reports/Branch_solo_threshold_0/SHA256SUMS.json",
+      "bytes": 6073,
+      "sha256": "b3062496e675435082f3a59e95184e47b14d2eabf80f11973965ebb8b49d2f9e"
+    },
+    {
+      "path": "reports/Branch_solo_threshold_0/index.html",
+      "bytes": 4526,
+      "sha256": "32915e0739ce66c44e7d73e2c004875aa60780d1514c7b54e2b4f8097ec04276"
+    },
+    {
+      "path": "reports/Branch_solo_threshold_0/manifest.json",
+      "bytes": 15805,
+      "sha256": "a5cd6ebab18639d95ab7b4ee0971c86bcaf4a1b561be6e1d70fdb85ad0c3b633"
+    },
+    {
+      "path": "reports/Branch_solo_threshold_0/source.json.gz",
+      "bytes": 10874,
+      "sha256": "4735ed82ecc73c184a6bbcb520715d616037daebc33fee1713f40712bd1dc2a7"
+    },
+    {
+      "path": "reports/Classic_solo_threshold_0/SHA256SUMS.json",
+      "bytes": 7804,
+      "sha256": "1d5ef40f25793727005c599ead8ab6513c64aa3c4cf4aeb72ccc917e5594f197"
+    },
+    {
+      "path": "reports/Classic_solo_threshold_0/index.html",
+      "bytes": 5516,
+      "sha256": "475c4c201979280cc079e968790a925baa066fe54c173a62934334985c9308e7"
+    },
+    {
+      "path": "reports/Classic_solo_threshold_0/manifest.json",
+      "bytes": 20121,
+      "sha256": "a1584aacc07af9d06a3f8d8dfcd0450b5151a587d21489857005089cbdedff57"
+    },
+    {
+      "path": "reports/Classic_solo_threshold_0/source.json.gz",
+      "bytes": 14633,
+      "sha256": "aedbee46727ea33a8f94d6751cc8f1c26bba36e433ae902a63849829b5ff8e2b"
+    }
+  ],
+  "selected_review_outcome": "legend_overlaps_plot_requires_fix",
+  "superseded_by": "s08-native-training-threshold-visual-asan-a3"
+}

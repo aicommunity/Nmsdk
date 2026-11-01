@@ -1,0 +1,15 @@
+Note: Google Test filter = TimeLearnerNativeRoundtrip.*
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from TimeLearnerNativeRoundtrip
+[ RUN      ] TimeLearnerNativeRoundtrip.CopyPreservesFullGraphParametersCachesAndImpulse
+[       OK ] TimeLearnerNativeRoundtrip.CopyPreservesFullGraphParametersCachesAndImpulse (1189 ms)
+[ RUN      ] TimeLearnerNativeRoundtrip.XmlPreservesFullGraphParametersCachesAndImpulse
+[       OK ] TimeLearnerNativeRoundtrip.XmlPreservesFullGraphParametersCachesAndImpulse (776 ms)
+[ RUN      ] TimeLearnerNativeRoundtrip.ModeZeroRebuildPreservesExplicitSiblingOrder
+[       OK ] TimeLearnerNativeRoundtrip.ModeZeroRebuildPreservesExplicitSiblingOrder (10 ms)
+[----------] 3 tests from TimeLearnerNativeRoundtrip (1977 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (1977 ms total)
+[  PASSED  ] 3 tests.

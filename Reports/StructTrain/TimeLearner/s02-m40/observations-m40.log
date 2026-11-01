@@ -1,0 +1,17 @@
+Note: Google Test filter = TimeLearnerObservations.*
+[==========] Running 4 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 4 tests from TimeLearnerObservations
+[ RUN      ] TimeLearnerObservations.RetainsEverySomaAndSignedMaxima
+[       OK ] TimeLearnerObservations.RetainsEverySomaAndSignedMaxima (0 ms)
+[ RUN      ] TimeLearnerObservations.NonfiniteCannotBeHiddenByPreviousPeak
+[       OK ] TimeLearnerObservations.NonfiniteCannotBeHiddenByPreviousPeak (0 ms)
+[ RUN      ] TimeLearnerObservations.OverflowAndDimensionChangeInvalidateEvidence
+[       OK ] TimeLearnerObservations.OverflowAndDimensionChangeInvalidateEvidence (0 ms)
+[ RUN      ] TimeLearnerObservations.Schema4IsExplicitAndRequiresActualMeasurementSources
+[       OK ] TimeLearnerObservations.Schema4IsExplicitAndRequiresActualMeasurementSources (0 ms)
+[----------] 4 tests from TimeLearnerObservations (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 4 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 4 tests.

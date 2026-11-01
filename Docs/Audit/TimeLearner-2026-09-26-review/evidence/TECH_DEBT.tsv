@@ -1,0 +1,29 @@
+debt_id	opened_utc	stage_id	source	item_ref	priority	blocker_for	status	owner_arm	notes	closed_utc	fix_run_id
+DEBT-A0-ctest	2026-10-20T13:22Z	A0	card	BranchInvalidPeakNoRecovery×2	P2	—	done	.11	Rmin BE skip when no_legal_recovery; StorageComponents 87/87	2026-10-22T15:13Z	A0_CTEST_FIX
+DEBT-cpu-gate-pgrep	2026-10-20T13:48Z	R2	companion	cpu_gate false positive	P1	D1	done	.11	pattern fixed	2026-10-20T13:48Z	local
+DEBT-A15-matrix-inputs	2026-10-20T13:23Z	R2	audit	45 FAIL Test	P0	B2	done	B2	repaired on tip 7292522e (port from 98ac830d); B1 1fa1aa7c; A15_PORT_TO_TIP_2026-10-23	2026-10-23T08:10Z	7292522e
+DEBT-H-A15b	2026-10-20T13:22Z	R	audit	SoftCold tip1 fan-out	P1	E2	open	E2	E2 R8 EQUIVALENT		
+DEBT-CL-N1	2026-10-20T13:22Z	R	audit	Classic N1 stall	P0	G1/SYNTH	partial-closed	D1/E2	FINAL policy bounded_stall_rmax/maxl_hold @480; H1 Span100 quality_fail; runtime stall=dendrite ceiling	2026-10-23T09:00Z	SPEC_FINAL
+DEBT-G1-432	2026-10-20T13:22Z	E2G1	plan	432 optional full matrix	P2	S5	open	—	G1 selected 24-32		
+DEBT-F1a-offline	2026-10-20T15:45Z	S1	card F1a	offline ideal/sweep	P2	S1	done	F1a	C2_MATCH	2026-10-20T15:45Z	F1a_20261020
+DEBT-F1b	2026-10-20T13:22Z	S1	card F1b	Axon trainer / NAxoneDelay pilot	P1	фаза A (после H0)	open	senior	STRATEGY 23.10: not discarded; axon trainer after dendrite map; no cold yet; not dendrite-FINAL blocker		
+DEBT-H0-tau-cm	2026-10-23T07:30Z	S1	strategy 23.10	τ(Cm) per Span + Trainer×Mode×Mod	P0	dendrite map / E1.7-8	partial	H0	H0a done; H0b wave1 SERIES_DONE 0 TauH0 SoftCold PASS (14 not_converged); Gate D→фаза A; DENDRITE_MAP_TAU_CM_2026-10-23	2026-10-23T12:36Z	H0B_wave1
+DEBT-S0-cpp-fields	2026-10-20T13:56Z	S0	audit	residue/margin/Done_BE C++ emit	P0	G1 rollup/SYNTH	done	stage0	S0_CPP_EMIT_2026-10-22; amp_be+done_be OR; PulseLib 4e3714a	2026-10-22T12:40Z	4e3714a
+DEBT-CTRL-V2-DRAFT	2026-10-22T12:46Z	S4	docs	Controller SPEC DRAFT	P1	FINAL SPEC	done	docs	FINAL: CONTROLLER_V2_SPEC_FINAL_2026-10-23 (mid C+A; tol consts; CL-N1@480 policy); F1b=фаза A	2026-10-23T09:00Z	SPEC_FINAL
+DEBT-disk-200G	2026-10-20T13:06Z	A0	card/human	DATA≥200G not STOP	P2	—	done	.11	EventsLog offload	2026-10-20T15:16Z	offload
+DEBT-A3-trace-hang	2026-10-20T14:19Z	R2	card	A3 TRACE hang	P1	A3	open	A3			
+DEBT-C1-silent-soma	2026-10-20T15:20Z	C1	card	soma silent set1	P1	E1	open	C1			
+DEBT-D2-silent-test	2026-10-20T16:05Z	R2	D2	W01 fires=0 Test hang	P0	SYNTH/G1	partial-closed	D2/E2	mid production C+A in SPEC FINAL; silent Acc7/8=quality_fail; KeepDone≠sole-fix	2026-10-23T09:00Z	SPEC_FINAL
+DEBT-17-console-glog	2026-10-22T12:10Z	R2	infra	.17 EmitToGlog smash phase9	P0	H2 TipR/KeepDone	done	.17	glog 0.4 pin tl-agent/lib; keep on sync; DEBT_17_GLOG_ABI_FIX	2026-10-22T12:55Z	H2.TipROverlay-17-20261022T125500Z
+DEBT-A1-preinh-silent	2026-10-20T15:15Z	R2	card A1	br25_preinh silent	P0	G1 labels	open	A1			
+DEBT-F7-rmin-tol-mask	2026-10-20T17:00Z	R3	D2b.1	RminTol masks dt	P0	F2 Done_BE	confirmed	F7		2026-10-20T17:12Z	F2.pref
+DEBT-TRACE-NOCSV	2026-10-20T17:10Z	R2	gate	Test hang no TRACE CSV	P1	silent-Test	open	gate			
+DEBT-D2b5-W02	2026-10-20T17:15Z	R2	D2b.5	W02 not_converged	P0	CL-N1	open	D2b	CL480 stall open; H1 CL100 Need=0 TipR midband — see CL_N1_H1_SPAN100_2026-10-22		
+DEBT-disk-freegib-root	2026-10-20T20:11Z	E2	infra	free_gib root vs DATA	P1	E2	done	.17	2026-10-20 offload	2026-10-20T20:17Z	lanes-offload
+DEBT-matrix-prepare-wave	2026-10-20T20:20Z	E2	queue	whole-wave prepare	P0	E2 R8	done	Bin	774704fc	2026-10-20T20:24Z	774704fc
+DEBT-F5-gamma	2026-10-21T08:00Z	R3	F5/A7	CorrectAttenuationGammaForTipR	P1	R3	open	F5	A7 on tip 9efca9c/Console 213e7003; LIVE Span100 γ=0≡γ=1 silent noop; F5_GAMMA_SPAN100_LIVE_2026-10-23; no PASS		
+DEBT-G1-exit-gate	2026-10-21T16:36Z	G1	infra	run_series launch.exit gate	P0	G1 SYNTH	done	drv	wait_run+run_series propagate launch.exit; DEBT_G1_EXIT_GATE_FIX_2026-10-22	2026-10-22T06:30Z	harness
+DEBT-disk-offload-policy	2026-10-21T05:14Z	E2	ops	root Avail 80G threshold	P1	cold .17	open	ops	root OK~156G; Dynamics offload 2026-10-22 → TLAgent-offload/dynamics-logs; OFFLOAD_DYNAMICS_17		
+DEBT-F3-R8	2026-10-22T13:00Z	R3	F3/A5	ResetNeuronBeforeTrainBurst R8 A/B	P1	R3 gate	done	F3	A/B W01+br25_nextseg flag0≡1; BR PASS no regress; W01 silent unchanged; default off; F3_R8_AB_2026-10-22	2026-10-22T16:15Z	F3.R8.W01+BR
+DEBT-E1.5-fragile-pass	2026-10-22T13:20Z	E1	E1.5	L±1 TipR×0.8/1.25 Test-only	P1	Controller v2 tol	partial	.11	FRAGILE br25 0/9 tiprmin TipR 0/2; E1_5_FRAGILITY_2026-10-22		E1_5_20261022
+DEBT-E1.1f	2026-10-22T15:20Z	E1	E1.1f	4-dendrite Pack-A / Console IR retire proxy	P1	Controller VERIFY tol	partial-wontfix-offline	.11	offline E1.1d/e/f + Console E1.1g FWHM~29–31ms≫2.1; sep_soma&lt;0; proxy intentional for SPEC; E1_1g_CONSOLE_BRANCH_IR_2026-10-22	2026-10-22T15:40Z	E1_1g_20261022
