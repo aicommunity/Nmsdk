@@ -28,8 +28,13 @@ evidence ещё не приняты. Численный root —
 `ebf590082a881cbc8a702bd25f48bfb26b73a50d`. На Elder запущен job
 s01-timing-finite-current-normal-a1 (PID2974833/start_ticks312123044), на M40 —
 s01-timing-finite-current-asan-a1 (PID909824/start_ticks262665851).
-Запланированы4 property cases и21 lifecycle/native-execution regression case
-на каждом worker. Наличие запущенного job не означает прохождения gate.
+На Elder завершены4 property cases и21 lifecycle/native-execution regression case,
+без skips.120 неконечных назначений отклонены с сохранением прежнего значения.
+Normal primary `fff3d9ddf116c39abaf22ab5fa8b13025efd350b`:
+[артефакты](../../../Reports/StructTrain/TimeLearner/s01-timing-finite-current-normal-a1/README.md),
+71 members/176784 compressed bytes, все hashes проверены после Git retrieval.
+На M404 property cases также прошли;21 regression cases ещё выполняются.
+Наличие запущенного job не означает прохождения полного gate.
 Baseline process_error с returncode1 сохраняется.
 Нельзя считать четыре неуспешных gtests успешным gate.
 

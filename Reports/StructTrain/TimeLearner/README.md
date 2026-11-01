@@ -7,6 +7,8 @@ Scoped engineering evidence below does not establish full mode/physics coverage 
 all4 negative controls failed before correction;84/120 nonfinite assignments
 were accepted. Original nonzero exit and actual property observations retained.
 Fixed-code normal/ASan acceptance is pending; this baseline is not a PASS.
+[Fixed normal4+21 primary](s01-timing-finite-current-normal-a1/README.md)
+is complete; joint normal/ASan acceptance remains pending.
 
 Accepted scoped floating matrix serialization / native ModelArchive correction:
 [normal unit10/archive16/XML32/regression21](s05-archive-f64-current-normal-a1/README.md),
