@@ -36,6 +36,15 @@ class NativeN1RefinedWorkerTest(unittest.TestCase):
                 self.assertEqual(current["identity"], before["identity"])
                 self.assertEqual(current["parameters"], before["parameters"])
                 self.assertTrue(audit_run_manifest(folder/"run-manifest.json")["run_evidence_consistent"])
+                runtime = load(folder/"run-manifest.json")
+                original_runtime = load(previous/"run-manifest.json")
+                self.assertNotEqual(runtime["runtime_fingerprint"], original_runtime["runtime_fingerprint"])
+                pulse = "Libraries/Nmsdk-PulseLib"
+                self.assertNotEqual(runtime["source_closure"][pulse]["head"],
+                                    original_runtime["source_closure"][pulse]["head"])
+                for dependency in set(runtime["source_closure"])-{"root", pulse}:
+                    self.assertEqual(runtime["source_closure"][dependency]["head"],
+                                     original_runtime["source_closure"][dependency]["head"])
                 self.assertEqual(audit_execution("train", folder/"native", job), row["execution_audit"])
 
     def test_actual_nonseed_resistance_change_passes_the_original_fresh_all_input_gate(self):
