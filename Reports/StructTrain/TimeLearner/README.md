@@ -1,6 +1,22 @@
 # TimeLearner reproducibility artifacts
 
-Latest scoped PostTune evidence:
+Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
+Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
+
+Latest production N0 evidence:
+
+- [Normal primary: two protocols,28 operations,7 checks per protocol](s07-n0-production-worker-normal-a2/README.md).
+- [ASan primary: the same declared coverage](s07-n0-production-worker-asan-a1/README.md).
+- [ASan temporal:28 reports,16 directly reviewed selected PNGs](s07-n0-production-visual-asan-a1/README.md).
+- [Normal temporal:32 exact references to those reviewed images](s07-n0-production-visual-normal-a1/README.md).
+- [Separate ASan Console build](s07-n0-production-build-asan-a1/README.md) and [normal build/resource-cancelled first attempt](s07-n0-production-normal-preparation-a1/README.md).
+- [Authorized Elder cleanup](s02-storage-cleanup-elder-20261101-a1/README.md) and [M40 cleanup](s02-storage-cleanup-m40-20261101-a1/README.md): scientific primary data retained; optional debug caches excluded from Git.
+
+All16 full N0 Train executions across the two workers remain SearchUnresolved.
+Complete refers to declared windows; selected traces still decay at their end.
+Independent Test, full physical matrix and August replay remain open.
+
+Earlier scoped PostTune milestones (open items describe their historical snapshots):
 
 [Original request bound to finalization: normal](s08-native-training-intent-binding-normal-a1/README.md),
 [ASan](s08-native-training-intent-binding-asan-a1/README.md): 61/61 native, 3/3 reader, actual successful import and 20 schema compatibility checks per worker.

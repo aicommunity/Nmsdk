@@ -745,3 +745,41 @@ Console запущена supervisor2377203/start_ticks307276259 из root1d2d3b0
 build proof либо завершённой Train/evaluate пары не закрывает полный stage7,
 исторический replay и независимую оценку. Все остальные обязательства плана
 сохраняются.
+
+## Завершение адресного production N0 и серверной очистки
+
+Production N0 проверен на обоих workers: по2 протокола /28 операций,
+7/7 data checks и3/3 temporal checks для каждого протокола. Отдельные Console
+сборки и настоящие Ns edits при фиксированных индивидуальных Rs,
+Train→frozen handoff и malformed-data controls
+подтверждены. Численный Core тот же38edfcad7983478a7e2ca736c32ae2703861c1fd;
+в этом подэтапе не вводилась новая амплитудная цель или физика.
+
+Primary proofs: dde55f0a0ce4331f194c4ea45b5cfc8933189816 (ASan) и
+8b25481711776c45dd5f89a87d477b2203310f60 (normal). Полные403MB корпуса сжаты
+до2473616B и2391204B, closure28 runs /1052 artifacts каждого проверена.
+Temporal proofs:3e388a5af0ea38d278ea8d00f8600183abdbb99d и
+413cdea0b93aa1b8eb44942275dfabcacde52c9c. Все16 уникальных выбранных PNG
+непосредственно просмотрены1920×960,32 normal counterparts совпали побайтно,
+новых normal PNG0. QA7dfb3a01a18637804efcbf8502279bf17039f71d.
+
+Все16 full Train — SearchUnresolved. Это не положительный результат обучения
+или независимой классификации. По графикам установлено, что окно заканчивается
+на затухающей реакции; полнота данных объявленного окна не доказывает полного
+settling/отсутствия последующих ответов. Эти limits добавлены в план.
+Преимущество informed proposal policy на реальном timing-ready случае ещё
+требует проверки, как и другие размерности/профили/режимы исходного stage7.
+
+Разрешённая пользователем очистка завершена:433.33GB логического объёма старых
+ELF/ar и повторяющихся INFO-логов, плюс715813989B законченных временных копий.
+Научные первичные данные, модели/конфиги, исходники и Git history не удалялись.
+Текущие Console hashes не изменились. Доступно102.61GiB на Elder,84.55GiB на
+системном диске M40 и506.01GiB на M40 Data. Необязательные debug-summary caches
+не добавлялись в Git; опубликованы небольшие receipts/selected excerpts.
+Новая версия helper прошла4/4 file-retention/fuser/scratch checks на обоих workers.
+
+Детали и полные SHA: [N0 production](N0ProductionCoverage.ru.md),
+[maintenance](ServerCleanup-2026-11-01.ru.md), [полный аудит](PlanCompletionAudit-2026-11-01.ru.md).
+Адресные подэтапы готовы к root merge; исходные этапы1–12 и цель целиком остаются
+открытыми. Следующий приоритет — physical positive/dimension controls и проверка
+алгоритмов, затем расширение матрицы; количество пройденных checks не заменяет их.
