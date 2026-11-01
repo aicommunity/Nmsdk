@@ -1,0 +1,44 @@
+# N0: порядок проверки длины и числа синапсов
+
+Ветка codex/timelearner-n0-candidate-order от согласованного develop
+1d4822af22e05b741e4a1c779cf99ba05cb0a1fa / PulseLib f23d1b8dee908ddfdc549619b754875fc627ce9b.
+Предыдущий scoped live pipeline принят normal/ASan с полными Git primary;
+полные этапы0–12 остаются открытыми.
+
+## Проверяемая гипотеза
+
+Текущий NextCandidate сначала перебирает все длины при текущем Ns, затем
+следующее Ns при всех длинах. При maximumCandidatesPerInput=3 и широком
+диапазоне L получаются (L1,Ns1),(L2,Ns1),(L3,Ns1). Даже если измерение L2
+подтвердило timing, ближайшая нормализация (L2,Ns2) не проверяется. Результат
+SearchUnresolved честен; проблема состоит в расходовании ограниченного
+бюджета без использования уже измеренной информации.
+
+Controlled kernel fixture использует production BoundedTrainingSession,
+ProbeRecorder/валидаторы и per-input captured references. Два входа:
+anchor L1/Ns1/Rs10 фиксирован, первый допускает L1..20/Ns1..2. Ответ таблицы
+имеет допустимое timing при L2 и captured raw amplitude при Ns2. Остальные
+длины не синхронизируются. Это oracle алгоритмического unit-test, не опыт
+на физическом нейроне и не свидетельство классификации.
+
+Сначала новый test должен воспроизвести SearchUnresolved текущего ядра на
+обеих топологиях. XML/process/runtime source snapshots сохраняются. Только
+после этого меняется порядок предложений; CapturedPerInput, tolerances,
+Classic/Branch input order, fixed anchor и fresh final verification сохраняются.
+
+## Направление исправления и ограничения
+
+После завершения всех обязательных повторов кандидата, если он улучшил
+измеренный rank, timing допустим, но amplitude вне допуска, приоритетно
+предложить соседние Ns на этой геометрии. Это предложение, не доказательство
+монотонности или сохранения timing: новый кандидат получает fresh anchor/input
+пробы, полную revision и все прежние проверки. Дубли full parameter vectors
+не расходуют бюджет повторно; заданные candidate repeats остаются отдельными
+реальными измерениями. При отсутствии улучшения возобновляется ограниченный
+основной перебор. Никаких выводов PhysicalInfeasible или Exact из stall/cap.
+
+Проверки: controlled baseline/fix Classic/Branch, не ухудшить чистый поиск L,
+Ns128/quantization, repeated observations, Branch shared banks, бюджет/stop,
+invalid peaks и финальную проверку всех входов. Нужна последующая реальная
+native N0-проверка edits/амплитуд/времени; unit oracle её не заменяет. N1 dynamic
+mesh и полный profile/frequency/dimension coverage остаются отдельным остатком.
