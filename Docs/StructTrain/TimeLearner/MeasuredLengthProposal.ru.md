@@ -60,8 +60,26 @@ Python experiment root41261d366b4d7537dcb24e7e7e22bafad5c6c8ed; Console/Pulse
 code одинаков с binary root1cdbdaa2b. Первый generator attempt остановился до
 моделей на progress-array/strict-object mismatch; receipts сохранены в primary.
 
-ASan cold A/B, native regressions, повтор прежних положительных N1-контролей,
-полные temporal reports/визуальная проверка и merge children-first пока
+ASan cold A/B также завершён:8/8 полных SearchUnresolved runs,4/4 generator
+checks. [ASan primary и сравнение workers](../../../Reports/StructTrain/TimeLearner/s07-measured-length-native-asan-a1/README.md),
+commit56dbd480706ffd1bfe2cd3c07493566b256eec9b:460 проверенных members/634976 B.
+Все160 CSV и8 initial-state файлов побайтно равны normal. Это не признак Exact:
+во всех16 cold A/B сохранены отрицательные all-input certificates.
+
+Прежние два положительных N1 job declarations повторены неизменёнными на
+каждом worker с новым kernel. Все4 Train сохраняют Exact, прежние параметры
+и CapturedPerInput references. На каждом worker все84 CSV побайтно равны
+соответствующему ранее принятому прогону, чьи full temporal reports/selected QA
+описаны в [MeasuredResistanceRefinement](MeasuredResistanceRefinement.ru.md).
+Новая классификация/independent Test этими контролями не выполнялись.
+
+- [Normal positive regression](../../../Reports/StructTrain/TimeLearner/s07-measured-length-positive-normal-a1/README.md):
+  commitd27bdb89b41b16d9fc030d2429965928e3e40d30,205 verified members/413236 B.
+- [ASan positive regression](../../../Reports/StructTrain/TimeLearner/s07-measured-length-positive-asan-a1/README.md):
+  commitf4b840290e42db9cfc1d65036f577eb797ac7d91,205 verified members/422136 B.
+
+Native regressions28 на каждом worker, full cold A/B temporal reports,
+визуальная проверка выбранных новых кривых и merge children-first пока
 не приняты. Full figure cache размещается только на M40 Data; в Git остаются
 сжатые primary, metadata и выбранные просмотренные рисунки.
 Полные этапы6/7/11 открыты; legacy EstDelayPerSeg/gamma не объявляются действующими
