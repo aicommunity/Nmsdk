@@ -100,8 +100,9 @@ Metadata proof `d13ad580638b00e89a3973aee8fc02d6565c1c2d`:92 members /
 подтверждает именно измеренное5/8 на same-matrix calibration candidates,
 а не успешную калибровку или independent Test. Все outer/member hashes
 обоих первичных пакетов (210+210) и metadata (92) дополнительно проверены.
-Scoped подэтап готов к merge; полный stage8, другие режимы/профили и
-исторический replay остаются открытыми.
+Scoped подэтап принят root develop merge
+`fa53680d62ce9dedbee464fc55418dd3f76a0ca6` с неизменными child gitlinks.
+Полный stage8, другие режимы/профили и исторический replay остаются открытыми.
 
 SyncTolerance0.02 допускает измеренный остаток около19 ms у исходных Exact
 моделей. Это часть объявленной задачи, не причина молча изменить default.
