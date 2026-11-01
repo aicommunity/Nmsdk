@@ -56,3 +56,42 @@ Producer `4c069e005ee9bc43c34154c4a603e8267b3dfd47`; source и reader получ
 отдельные полные SHA в отчётах. Приёмка требует обоих workers, compressed Git
 proofs и temporal reports, затем --no-ff merge. Пока эти проверки не завершены,
 успех калибровки и качество классификации не заявляются.
+
+## Измеренный результат и границы вывода
+
+На обоих workers завершены2 owned Console операции,20 полных matrices/160
+pattern trials. Все10 порогов измерены для каждой topology;4/4 independent
+reader checks на worker. Wall time normal373.22 s, ASan662.12 s;
+reader252.81/205.86 s. Никакое научное утверждение не выводится из wall time.
+
+| Модель | Лучший измеренный порог с target hit | TP/FP/FN/TN | Accuracy этого кандидата |
+|---|---:|---|---:|
+| Classic |0.005104094175900908|1/3/0/4|5/8|
+| Branch |0.01023534737566667|1/3/0/4|5/8|
+
+Это реальные кандидаты калибровки: response criterion на заданной same-matrix
+выборке, не независимый frozen Test и не подтверждённый calibrated package.
+При порогах без FP target не обнаруживается (TP0/FP0/FN1/TN7). Ни одна точка
+не удовлетворяет строгому target-hit/zero-FP критерию. Обе транзакции вернули
+`nonseparable`, `source_restored=true`, `calibrated_package=null`; исходный порог1
+сохранён, лучший5/8 не подменяет успешную калибровку. В то же время эти реальные
+5/8 не следует стирать словом NonSeparable либо заменять7/8 молчания.
+
+Normal proof `27c5120e06d61be2244fd92111a4b062774880a8`:210 members,
+202052941 raw bytes →3253356 xz bytes. ASan proof
+`bd2e283bd9410367aa7cb063ac2eaa2a3901839a`:210 members,202114684 →3260224.
+Reader `7eac18f6077ec6e9f0d6a77cdf96ce252b69e731`.
+Полные native transactions (все160 наблюдений, candidate models и assessments)
+и restored models совпали по значениям между workers; runtime provenance
+отдельный, независимость научных повторов не заявляется.
+
+Полные temporal reports строятся на M40 из Git-restored normal primary,
+renderer `1f2196e673e36007b690b02fceb08185669238c0`. Пока их quality/visual
+приёмка не завершена, feature не считается принятой в develop. Полный stage8,
+другие режимы/профили и исторический replay остаются открытыми.
+
+SyncTolerance0.02 допускает измеренный остаток около19 ms у исходных Exact
+моделей. Это часть объявленной задачи, не причина молча изменить default.
+Гипотезы о влиянии допуска, иных физических профилей или торможения требуют
+отдельных холодных контролей. Текущие данные не доказывают такую причинность
+и не отменяют августовские визуальные4/8–6/8 в ином исходном протоколе.
