@@ -80,6 +80,11 @@ template<class Learner> void WarmReset(const bool branch,const int count,const u
   result["physical_total"]=total;result["cached_total"]=learner->SomaNeuronAmplitude(0,0);return result;
  };
  const auto initial=read();
+ if(xmlRoundtrip)
+ {
+  const auto graph=NmsdkTools::InspectModel(model);ASSERT_TRUE(graph["valid"].toBool());
+  SaveResetArtifact(folder+"source-rest-model.json",QJsonDocument(graph).toJson().toStdString());
+ }
  std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time_s,input";
  for(size_t i=0;i<somas.size();++i)trace<<",physical_soma"<<i+1<<",cached_soma"<<i+1;trace<<'\n';
  const unsigned warmTicks=xmlRoundtrip?frequency/10:frequency/20;
@@ -129,7 +134,7 @@ template<class Learner> void WarmReset(const bool branch,const int count,const u
   loadedBeforeReset=read();
  }
  core.environment->Reset();const auto reset=read();
- QJsonObject observation;observation["kind"]=xmlRoundtrip?"native_hot_xml_reset":"native_hot_learner_reset";observation["schema_version"]=xmlRoundtrip?2:1;
+ QJsonObject observation;observation["kind"]=xmlRoundtrip?"native_hot_xml_reset":"native_hot_learner_reset";observation["schema_version"]=xmlRoundtrip?3:1;
  if(xmlRoundtrip)
  {
   observation["serialized_while_warm"]=true;observation["include_state"]=includeState;
