@@ -13,13 +13,29 @@
 | Свойство обоих классов | Тип, единицы, Default | Владелец и setter | Build/Calculate/Reset | Сохранение и ограничения |
 |---|---|---|---|---|
 | ControllerVersion | int, идентификатор версии, 1 | Декларация контроллера. Setter принимает только 1/2; после native ownership запрещает смену значения; допустимое присваивание делает компонент unready | V2 Build подготавливает native declaration, BeforeCalculate запускает службу только при Need и Idle; V1 без native ownership сохраняет legacy dispatch. Reset версию не переключает | ptPubParameter: XML/Copy и full learned-state package. Отсутствие поля оставляет default 1; V1 также допускает явный native C++ API, поэтому номер версии не равен признаку отсутствия native модели |
-| ControllerConfiguration | string, strict JSON schema 1, пустая строка | Декларация ModelSpec/protocol/search. Setter запрещает изменение при активном Train и изменение уже принятой декларации; допустимое присваивание делает компонент unready | V2 Build разбирает и проверяет конфигурацию, строит cold модель только при отсутствии process-local declaration и marker=false. BeforeCalculate не заменяет Build. Reset сохраняет декларацию и исходную цель | ptPubParameter: XML/Copy и full package. Не трактовать как controller checkpoint; сохранённый граф нельзя восстановить только этой cold декларацией. Configured retarget/reconfiguration ещё не реализованы; строку нельзя считать действующим фактором, если setter её отклонил |
+| ControllerConfiguration | string, strict JSON schema1/2, пустая строка | Декларация ModelSpec/protocol/search. Setter запрещает изменение при активном Train и изменение уже принятой декларации; допустимое присваивание делает компонент unready | V2 Build разбирает и проверяет конфигурацию, строит cold модель только при отсутствии process-local declaration и marker=false. BeforeCalculate не заменяет Build. Reset сохраняет декларацию и исходную цель | ptPubParameter: XML/Copy и full package. Не трактовать как controller checkpoint; сохранённый граф нельзя восстановить только этой cold декларацией. Configured retarget/reconfiguration ещё не реализованы; строку нельзя считать действующим фактором, если setter её отклонил |
 | ConfiguredModelInitialized | bool, marker, false | Внутренний сохраняемый признак принятого cold/import состояния. Отдельного setter нет; production native пути задают его SetDataDirect | Marker=true при отсутствии process-local declaration блокирует cold реконструкцию и выставляет diagnostic; Build возвращает управление без скрытой перезаписи обученной модели. Reset не возвращает marker в false | ptPubParameter \| ptPubState: параметр необходим, поскольку Rdk Copy(false) вызывает Build до копирования state. XML/Copy без полного импорта намеренно остаются удержанными. Это не флаг сходимости, valid Train или научного PASS |
 
 В обоих классах используются одинаковые validators и native service; различие
 топологий задаётся явным branch аргументом. Ошибки V2 Build попадают в
 `NativeModelEditFailure`/typed outcome; lifecycle bool не является протоколом ошибок.
 Legacy hooks и вся матрица режимов ещё требуют завершения общего этапа 4/6.
+
+## Уточнение текущих hooks и деклараций
+
+По PulseLib456a5ab native frozen recognition, owned PostTune и live finalization
+уже входят в Before/After-children dispatch; это не новый Calculate внутри
+контроллера. Explicit Reset останавливает transient управление/фазы, сохраняет
+обученную физику и публикует фактический rest-state после сброса детей.
+[Актуальная граница live планов](NativeLiveFinalization.ru.md),
+[Load/Reset](HotXmlReset.ru.md), [сверка исходного каталога](PropertySourceDrift.ru.md).
+
+ControllerConfiguration поддерживает schema1 и schema2 с явно заявленными
+N0 repeats; сам serialized cold config не является active request либо полным
+checkpoint. Configured retarget всё ещё требует нового согласованного плана.
+Отдельный NativeLiveFinalizationSpec/codec задаётся до Train; только при его
+наличии разрешён соответствующий публичный запрос PostTune. Optional C-trim
+и target-reference AutoCalibrate остаются неподдержанными.
 
 ## Проверки и доказательность
 
