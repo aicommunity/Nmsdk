@@ -126,7 +126,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -294,6 +294,11 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.primary_inventory is not None and args.trace is None and args.model is None,
                         "live_report_requires_primary_inventory_and_no_model_or_trace_overlay")
                 result = render_live_finalization(args.source.resolve(strict=True), args.primary_inventory.resolve(strict=True), args.output.resolve())
+            elif args.format == "pipeline-run":
+                from .live_pipeline_reports import render_pipeline_run
+                require(args.trace is None and args.model is None and args.source_solo is None and args.artifacts is None,
+                        "pipeline_report_declares_its_own_primary_closure")
+                result = render_pipeline_run(args.source.resolve(strict=True), args.output.resolve())
             elif args.format == "posttune-run":
                 from .posttune_transaction_reports import render_posttune_run
                 require(args.trace is None and args.model is None, "posttune_run_declares_its_models_and_observations")
