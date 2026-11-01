@@ -476,3 +476,20 @@ Native warm XML Load/Init/Reset/replay:
   checks pass.536 primary members/501960 compressed bytes, all hashes verified.
   ASan32 and temporal visual acceptance remain pending. No mid-probe checkpoint,
   scientific selectivity verdict or full-stage completion is asserted.
+
+
+Native cold preflight and production matrix preparation (scoped acceptance):
+
+- [Normal primary](s09-native-preflight-current-normal-a2/README.md):14 positive,
+  6 negative,2 stopped one-tick Train controls,20 reader/prepare checks,32 native
+  dimension cases;824 verified members/258004 compressed bytes. Includes the
+  preceding rejected argv audit; it is not an accepted run.
+- [ASan primary and crossworker comparison](s09-native-preflight-current-asan-a1/README.md):
+  same coverage,820 verified members/257144 bytes. All46 initial models/parameters
+  and32 prepared job hashes equal normal. Actual libasan in all52 process snapshots.
+- [Preserved setup failures](s09-native-preflight-setup-baselines-normal-a1/README.md):
+  128 verified members, including exact restoration of earlier setup metadata.
+
+Preflight runs zero model ticks; these are configuration/runtime checks, not
+completed learning or classification. Full physical/mode/scheduler coverage is
+still open. Contract and precise limits: Docs/StructTrain/TimeLearner/NativePreflight.ru.md.
