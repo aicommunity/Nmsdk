@@ -265,8 +265,8 @@ runtime equivalence неподтверждёнными. Существующий
 
 Локальная read-only Git сверка исходного root b2e7af4ad8a941186132af73c4b47a7f3288c62a
 проверила все44 records:42 retired и2 moved. Новые numerical tests не проводились;
-серверное повторение и merge children-first пока ожидаются из-за недоступности
-jump host. История предыдущих36 records и их адресные server receipts выше
+на момент подготовки серверное повторение ожидалось из-за недоступности
+jump host; результат после восстановления приведён ниже. История предыдущих36 records и их адресные server receipts выше
 сохраняются. Полный этап9 остаётся открытым.
 
 
@@ -280,3 +280,17 @@ migration_old_path_still_present и не создал положительный
 содержал ошибочный вызов file-only JSON reader для Git bytes. Исправление
 parse_json_bytes сохранено отдельным commit413fd842c. Локальная проверка —
 подготовительная, не замена требуемой серверной приёмки.
+
+После восстановления VPN серверная сверка завершена на обоих workers:
+44/44 source records, положительная проверка отсутствия старых путей и
+отрицательный fixture39e9164 (exit2, положительный receipt не создан).
+Receipts93d88621e25f43ea0fe9ecd841b53f38e274bbee (M40) и
+30818dfb3a59a01c0eac63b2f9fc0bf6bc086fd2 (Elder) опубликованы в Git.
+На Elder первая попытка корректно отклонена из-за Bin worktree alias;
+следующая читает точные Bin Git objects из изолированного repository,
+не меняя старые checkout. Это не attestation фактического Bin дерева старых
+запусков. [Диагностика и защита](SourceWorktreeIdentity.ru.md).
+Bin feature fd54fda объединена в develop merge commit
+14a88195a8a5538d3a2f5c0657981488e38829b7; root записывает этот gitlink.
+Шесть Phase12 shell scripts отсутствуют, wrappers не оставлены. Полный этап9
+открыт: прочие активные tools и исторические исполняемые файлы ещё требуют миграции.

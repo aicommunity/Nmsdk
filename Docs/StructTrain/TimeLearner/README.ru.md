@@ -104,3 +104,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [Lossless Rdk configs, numeric tags, native readback и UTF-8 BOM finding](ConfigDocument.ru.md).
 
 - [M40: перенос завершённых runtime и подтверждённая очистка дублей](M40Storage-2026-10-29.ru.md).
+
+- [Проверка принадлежности исходников Git worktree и Elder Bin alias](SourceWorktreeIdentity.ru.md).

@@ -91,6 +91,16 @@ Calculate не становятся протоколом ошибок обуче
 
 ## Что остаётся для полного плана
 
+После восстановления Automats2 выполнено независимое серверное повторение:
+217 source records на каждом worker побайтно равны опубликованному JSON.
+Receipts: 93d88621e25f43ea0fe9ecd841b53f38e274bbee (M40) и
+30818dfb3a59a01c0eac63b2f9fc0bf6bc086fd2 (Elder), разделы
+`s09-resumed-static-m40-a1` / `s09-resumed-static-elder-a1` в Reports.
+Это read-only Git metadata проверка без исполнения исторического кода;
+runtime/property coverage ею не расширяется. Соседняя миграционная проверка
+обнаружила Bin worktree alias на Elder; диагностика сохранена, для чтения
+точных Bin commits использован отдельный repository с корректным toplevel.
+
 Полная runtime/property/mode/physics matrix открыта. Нужны текущие consumer/
 helper evidence для каждой группы и реальные проверки применения факторов,
 включая connected properties, heterogeneous images, рост, Load/Copy/reuse,
