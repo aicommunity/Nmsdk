@@ -254,3 +254,8 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
 - [N0 normal regression](s07-n0-candidate-order-normal-a2/README.md):31/31 native
   cases and4/4 independent checks,56 real probes,188 unchanged source files.
   205 verified members,346080 compressed bytes; temporal acceptance pending.
+
+- [N0 native temporal reports](s07-n0-candidate-order-visual-normal-a1/README.md):
+  all56 declared training trials /84 soma pairs,3 N0 visual checks and3 shared
+  historical regression checks. Eight selected1920x960 PNG directly reviewed;
+  full derived cache remains on M40 Data, no full-cache manual acceptance.

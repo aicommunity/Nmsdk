@@ -90,3 +90,20 @@ c25db29404b544311a3256336c0c43991a384e12 завершил31/31 native cases бе
 локально проверены. Четыре native N0 warm/cold controls остаются SearchUnresolved
 с корректными свежими negative certificates; это не классификационный Test.
 ASan regression и temporal приёмка ещё ожидаются; develop не обновлён.
+
+## Temporal normal приёмка
+
+Production CLI построил все4 declared phases/56trials/84trial-soma pairs из
+Git primary c9c65de9b. Render123.315699s,205 source files неизменны. Reader
+526ac49bc7c75bca3a42a368c4e7371179807fb8:3/3 N0 visual checks и3/3 совместимых
+checks на прежних338-probe/507-pair данных,77.037563s. Это6 checks, не шесть
+независимых наборов. Все117 selected phase source files неизменны. Подтверждены
+полнота source/CSV binding,1920×960 overview/zoom, не менее8px/native tick,
+отсутствие downsampling и cache hashes.
+
+[Visual proof077334d7fb76bc6d05983a892570f5178ce9b21d](../../../Reports/StructTrain/TimeLearner/s07-n0-candidate-order-visual-normal-a1/README.md)
+содержит compact metadata и8 selected PNG. Все outer/member hashes проверены;
+все8 PNG просмотрены непосредственно при1920×960: читаемы подписи/легенды,
+реальные входы и rise/peak. QA относится только к final input0/first soma
+в4 phases; полная ручная приёмка cache и SI-unit интерпретация не заявляются.
+ASan regression и полный stage7 остаются открытыми.
