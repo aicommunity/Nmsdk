@@ -201,3 +201,12 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   verified; selected images directly reviewed at1920x960. Full derived cache on
   M40, no full-cache manual or scientific acceptance. Initial chronology error
   retained; production Train-job declaration remains open.
+
+- [Full live finalization ASan scope](s08-native-live-finalization-asan-a2/README.md):
+  95 native tests, six independent checks,548 unchanged producer files;792
+  verified archive members /3343244 compressed bytes. Predates explicit Cancel,
+  persisted codec and production Train schema2. Leak detection disabled.
+- [Explicit live cancellation, normal](s08-native-live-finalization-cancel-normal-a1/README.md):
+  eight native and eight independent checks; real partial Train data, queued
+  cancellation and owned PostTune rollback.252 verified primary members /752596
+  compressed bytes. No frozen recognition evaluation after cancellation.
