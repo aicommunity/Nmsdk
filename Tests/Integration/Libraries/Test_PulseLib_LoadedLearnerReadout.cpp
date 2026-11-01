@@ -144,12 +144,16 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  // per-tick resize. A no-op Build must retain the diagnostic under Rdk rules.
  learner->SomaNeuronAmplitude.Assign(1,2,0.0);ASSERT_TRUE(learner->IsReady());
  model->Calculate();
- EXPECT_EQ(learner->NativeModelEditFailure(),"legacy_readout_shape_requires_build");
+ EXPECT_EQ(learner->NativeModelEditFailure(),"legacy_readout_shape_requires_reset_or_build");
  EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),2);
  const auto failedLifecycle=learner->ObserveLifecycle();learner->Build();
  EXPECT_TRUE(failedLifecycle.IsCurrent());
- EXPECT_EQ(learner->NativeModelEditFailure(),"legacy_readout_shape_requires_build");
+ EXPECT_EQ(learner->NativeModelEditFailure(),"legacy_readout_shape_requires_reset_or_build");
  EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),2);
+ // Reset is an explicit native boundary for learner dynamics, preserving the
+ // full physical model. It also works when Build correctly remains a no-op.
+ core.environment->Reset();EXPECT_TRUE(learner->NativeModelEditFailure().empty());
+ EXPECT_EQ(learner->SomaNeuronAmplitude.GetRows(),count+1);EXPECT_EQ(learner->SomaNeuronAmplitude.GetCols(),1);
  EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.23e-9);EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),91e6);
  core.environment->DestroyModel();
 }
