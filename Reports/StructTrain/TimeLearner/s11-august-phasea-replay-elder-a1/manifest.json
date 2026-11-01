@@ -1,0 +1,592 @@
+{
+  "kind": "historical_phasea_native_replay_primary",
+  "schema_version": 1,
+  "producer_root": "1255bda1cba9abbf2fca762009d71bdb93315cef",
+  "packaging_root": "4bd87cfa7d84a4ae5d4017f52f2bdd568877b3d0",
+  "historical_root": "de02a3809395dd0bbd11e2ba792bfc04a51c89f3",
+  "validation": {
+    "kind": "phasea_historical_saved_state_replay",
+    "rows": [
+      {
+        "name": "baseline",
+        "archived_correct": 4,
+        "replay_correct": 4,
+        "counts": {
+          "TP": 1,
+          "FP": 4,
+          "FN": 0,
+          "TN": 3
+        },
+        "same_reported_counts": true,
+        "graph_paths_classes_equal": true,
+        "selected_parameter_differences": 1
+      },
+      {
+        "name": "threshold0130",
+        "archived_correct": 5,
+        "replay_correct": 5,
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4
+        },
+        "same_reported_counts": true,
+        "graph_paths_classes_equal": true,
+        "selected_parameter_differences": 3
+      },
+      {
+        "name": "threshold0135",
+        "archived_correct": 6,
+        "replay_correct": 6,
+        "counts": {
+          "TP": 1,
+          "FP": 2,
+          "FN": 0,
+          "TN": 5
+        },
+        "same_reported_counts": true,
+        "graph_paths_classes_equal": true,
+        "selected_parameter_differences": 3
+      }
+    ],
+    "operations": 3,
+    "historical_root": "de02a3809395dd0bbd11e2ba792bfc04a51c89f3",
+    "original_input_order_and_isis": true,
+    "cold_retrain_performed": false,
+    "robustness_controls_performed": false,
+    "temporal_report_complete": false,
+    "strict_evaluation_verdict": null,
+    "source_unchanged": true,
+    "limitations": "Legacy CSV has no complete-window/late-spike evidence; full soma/input traces still required. Selected XML readback is not a complete physics fingerprint."
+  },
+  "records": [
+    {
+      "path": "failed-observer-a1/baseline/inputs/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "failed-observer-a1/baseline/inputs/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "failed-observer-a1/baseline/inputs/Model_00.xml",
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    {
+      "path": "failed-observer-a1/baseline/inputs/Parameters_00.xml",
+      "bytes": 816326,
+      "sha256": "03dac589830d57d4a40e29b526f4126387a20461e221ce4e33d7e001679a62ff"
+    },
+    {
+      "path": "failed-observer-a1/baseline/inputs/Project.ini",
+      "bytes": 1772,
+      "sha256": "58e4e694ef3d4532e3265ea806ddb08eda007eb126ba1bddaeaa87fda009e2cd"
+    },
+    {
+      "path": "failed-observer-a1/baseline/inputs/README.md",
+      "bytes": 163,
+      "sha256": "166901a06f0ee7ec2180b7c1e14bcf152f0ddb78fa2d6117975b40025797024a"
+    },
+    {
+      "path": "failed-observer-a1/baseline/observer.json",
+      "bytes": 899,
+      "sha256": "e12bc350e0534a0e9b7ce7aabe5a5e91bb65ffde7322ce3380c7816ec8074e50"
+    },
+    {
+      "path": "failed-observer-a1/baseline/process/loaded-files.json",
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    {
+      "path": "failed-observer-a1/baseline/process/owned-process.json",
+      "bytes": 407,
+      "sha256": "61d8b43f85b15d64be7029e486fffdfef6cde0a986bcdd1757c7cbeec805631f"
+    },
+    {
+      "path": "failed-observer-a1/baseline/process/request.json",
+      "bytes": 530,
+      "sha256": "7674256134073c88ffe842b13be2be67ad991911b733238f5bfb2fcbadac4c7b"
+    },
+    {
+      "path": "failed-observer-a1/baseline/process/result.json",
+      "bytes": 444,
+      "sha256": "5efcf38620bde32517e03552883c36713842b81769c4dfc0478d4127584a8da1"
+    },
+    {
+      "path": "failed-observer-a1/baseline/process/runtime.json",
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    {
+      "path": "failed-observer-a1/baseline/process/stderr.log",
+      "bytes": 499,
+      "sha256": "fd4911c268364462c7932e29a9e09e9b65a10d8d73d92f63c3b54f290b89a0f5"
+    },
+    {
+      "path": "failed-observer-a1/baseline/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "failed-observer-a1/baseline/work/Model_00.xml",
+      "bytes": 950908,
+      "sha256": "71ddfb18dc28866e2358ef0cb90a416695f1a653953877efeab781761d22af37"
+    },
+    {
+      "path": "failed-observer-a1/baseline/work/Parameters_00.xml",
+      "bytes": 818528,
+      "sha256": "c85beccaecf3761dfa85aba2571e0e938b53a945e42623f8d135ca21670e7de7"
+    },
+    {
+      "path": "failed-observer-a1/baseline/work/Project.ini",
+      "bytes": 1772,
+      "sha256": "58e4e694ef3d4532e3265ea806ddb08eda007eb126ba1bddaeaa87fda009e2cd"
+    },
+    {
+      "path": "failed-observer-a1/baseline/work/SelectivityLog/results.csv",
+      "bytes": 878,
+      "sha256": "ae21460b33e9ebb7feda72c80ad6b726459630873f8075e9f3664fc749a12e66"
+    },
+    {
+      "path": "failed-observer-a1/baseline/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt",
+      "bytes": 2392103,
+      "sha256": "b98e782f64af0be2e9ed744da1f9793979337073a5b2e063c3db759f67955a22"
+    },
+    {
+      "path": "failed-observer-a1/baseline/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt",
+      "bytes": 2392103,
+      "sha256": "d6595ab7a4e09d0e8bc09353ffd0c820423b267d3829ea7cb2a6b6e143abf3e5"
+    },
+    {
+      "path": "failed-observer-a1/baseline/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt",
+      "bytes": 5532641,
+      "sha256": "946169b9f4d176650ad753135de8b95efdc354881a28fa2ce2901ee0c21ca18e"
+    },
+    {
+      "path": "replay/baseline/comparison.json",
+      "bytes": 383600,
+      "sha256": "b3f0172ce06770b41b1c173326cb28fc6576493f9f9053297e837c0f7106e4af"
+    },
+    {
+      "path": "replay/baseline/inputs.json",
+      "bytes": 1755,
+      "sha256": "177563f8a17c5f9726ed3741ae2d48ed3e854193a4476416d5701765331273d2"
+    },
+    {
+      "path": "replay/baseline/inputs/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "replay/baseline/inputs/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "replay/baseline/inputs/Model_00.xml",
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    {
+      "path": "replay/baseline/inputs/Parameters_00.xml",
+      "bytes": 816326,
+      "sha256": "03dac589830d57d4a40e29b526f4126387a20461e221ce4e33d7e001679a62ff"
+    },
+    {
+      "path": "replay/baseline/inputs/Project.ini",
+      "bytes": 1772,
+      "sha256": "58e4e694ef3d4532e3265ea806ddb08eda007eb126ba1bddaeaa87fda009e2cd"
+    },
+    {
+      "path": "replay/baseline/inputs/README.md",
+      "bytes": 163,
+      "sha256": "166901a06f0ee7ec2180b7c1e14bcf152f0ddb78fa2d6117975b40025797024a"
+    },
+    {
+      "path": "replay/baseline/process/loaded-files.json",
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    {
+      "path": "replay/baseline/process/owned-process.json",
+      "bytes": 407,
+      "sha256": "8402822e1e8ebf9bbe44089f636ad4ec2156bd74d56677a3066dc77d41badb5e"
+    },
+    {
+      "path": "replay/baseline/process/request.json",
+      "bytes": 524,
+      "sha256": "2b534256f0cc074493255262c69bb6c57166659357a1ac8fcf8ea2bdb4c8df4b"
+    },
+    {
+      "path": "replay/baseline/process/result.json",
+      "bytes": 443,
+      "sha256": "ddfbc4c7e675e536680ebad64c4e60d9d6b954efafd5c819869db45ab86420b0"
+    },
+    {
+      "path": "replay/baseline/process/runtime.json",
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    {
+      "path": "replay/baseline/process/stderr.log",
+      "bytes": 499,
+      "sha256": "76bb9d42e5f9c6607e9dec46102715c6e4b500a2bad4bfc4fff239fdb6a2744c"
+    },
+    {
+      "path": "replay/baseline/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "replay/baseline/reference.csv",
+      "bytes": 878,
+      "sha256": "ae21460b33e9ebb7feda72c80ad6b726459630873f8075e9f3664fc749a12e66"
+    },
+    {
+      "path": "replay/baseline/semantic-readback.json",
+      "bytes": 405,
+      "sha256": "627cefd2dc8aad000fffb62f9c0fad3f80f49cd2acc00802d3cd3969f8d17117"
+    },
+    {
+      "path": "replay/baseline/work/Model_00.xml",
+      "bytes": 947428,
+      "sha256": "634bfe4fb046258baa799d875f790499eb34929a241b795c6616cc85634f4d7b"
+    },
+    {
+      "path": "replay/baseline/work/NeuroModelerConsole.ini",
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    {
+      "path": "replay/baseline/work/Parameters_00.xml",
+      "bytes": 816282,
+      "sha256": "0e510050d9020f1111fcdb682777e5d1cc5f67c4f5443999bf1dd5ba23c9c872"
+    },
+    {
+      "path": "replay/baseline/work/Project.ini",
+      "bytes": 1772,
+      "sha256": "58e4e694ef3d4532e3265ea806ddb08eda007eb126ba1bddaeaa87fda009e2cd"
+    },
+    {
+      "path": "replay/baseline/work/SelectivityLog/results.csv",
+      "bytes": 878,
+      "sha256": "ae21460b33e9ebb7feda72c80ad6b726459630873f8075e9f3664fc749a12e66"
+    },
+    {
+      "path": "replay/closure.json",
+      "bytes": 1304,
+      "sha256": "88c3c257943eb524a39a40584c25cfbd7c3c1790284085f4bc865af9765a378e"
+    },
+    {
+      "path": "replay/progress.json",
+      "bytes": 853,
+      "sha256": "ec60cf066acb50454cbc98d86cda2c374846e4c9be7f2e983bf3476f21720a32"
+    },
+    {
+      "path": "replay/threshold0130/comparison.json",
+      "bytes": 383974,
+      "sha256": "a74a92b546a7d9c7b921969765b12ffcb49c16c08f5deaae3de8bd6a4fa6fcbf"
+    },
+    {
+      "path": "replay/threshold0130/inputs.json",
+      "bytes": 1875,
+      "sha256": "a27c3191af90801dfea61296d61ce4af18be3a4bff8eabe7e2b6b7927478af59"
+    },
+    {
+      "path": "replay/threshold0130/inputs/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "replay/threshold0130/inputs/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "replay/threshold0130/inputs/Model_00.xml",
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    {
+      "path": "replay/threshold0130/inputs/Parameters_00.xml",
+      "bytes": 816326,
+      "sha256": "f3490052d8ca69fcebd0e95052ab933719a230c880312fe36d624d1ecdcf49c4"
+    },
+    {
+      "path": "replay/threshold0130/inputs/Project.ini",
+      "bytes": 1772,
+      "sha256": "f343b2c12aa90e62e4ab089862d662d4e45c991c6b6a7344968e566ea78a13b4"
+    },
+    {
+      "path": "replay/threshold0130/inputs/README.md",
+      "bytes": 174,
+      "sha256": "5455f7eb4b147e57caaea4bf510a3e187d978131ad1adfaedd3ab1e1f00e5462"
+    },
+    {
+      "path": "replay/threshold0130/process/loaded-files.json",
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    {
+      "path": "replay/threshold0130/process/owned-process.json",
+      "bytes": 407,
+      "sha256": "0411e19016d0c36614924349b46cefaf029517f1f675243bbbadfa66f94ab489"
+    },
+    {
+      "path": "replay/threshold0130/process/request.json",
+      "bytes": 539,
+      "sha256": "31b584c350261d04f9ac12deac4c6dbdf7719c080a844dd82efe476ac95b20aa"
+    },
+    {
+      "path": "replay/threshold0130/process/result.json",
+      "bytes": 444,
+      "sha256": "0b2c5df92733ce70a3b8c969ae9141faf0fecc56b63bdb44c69f0a182c86ceeb"
+    },
+    {
+      "path": "replay/threshold0130/process/runtime.json",
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    {
+      "path": "replay/threshold0130/process/stderr.log",
+      "bytes": 499,
+      "sha256": "ac611023d62da67124ba1802367a57bb15e94d1d7d18951c6c22430420a57dbe"
+    },
+    {
+      "path": "replay/threshold0130/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "replay/threshold0130/reference.csv",
+      "bytes": 875,
+      "sha256": "47db92ece9e60952e222b653096388686e201620b5d15f84871f4ae52fbcfd89"
+    },
+    {
+      "path": "replay/threshold0130/semantic-readback.json",
+      "bytes": 566,
+      "sha256": "2401349934d2ebb528e3b92db76f60fb0e11d3d6e4c0a943cad29caaa70b4818"
+    },
+    {
+      "path": "replay/threshold0130/work/Model_00.xml",
+      "bytes": 947470,
+      "sha256": "d0655aec85c13d6c271bf7cd92763a16eec868426245473ddce9f02200a5eaef"
+    },
+    {
+      "path": "replay/threshold0130/work/NeuroModelerConsole.ini",
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    {
+      "path": "replay/threshold0130/work/Parameters_00.xml",
+      "bytes": 816324,
+      "sha256": "c52ee0cac0d0edfcd85c2b3eea2cebcc4e6e13fa91b8f21457a74e6d4fc69746"
+    },
+    {
+      "path": "replay/threshold0130/work/Project.ini",
+      "bytes": 1772,
+      "sha256": "f343b2c12aa90e62e4ab089862d662d4e45c991c6b6a7344968e566ea78a13b4"
+    },
+    {
+      "path": "replay/threshold0130/work/SelectivityLog/results.csv",
+      "bytes": 875,
+      "sha256": "47db92ece9e60952e222b653096388686e201620b5d15f84871f4ae52fbcfd89"
+    },
+    {
+      "path": "replay/threshold0135/comparison.json",
+      "bytes": 383916,
+      "sha256": "539bcd3da2edf939da718d88477d683f4c534a281459d1b6f810995904aa0ad1"
+    },
+    {
+      "path": "replay/threshold0135/inputs.json",
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    {
+      "path": "replay/threshold0135/inputs/ALGORITHM.md",
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    {
+      "path": "replay/threshold0135/inputs/Interface.xml",
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    {
+      "path": "replay/threshold0135/inputs/Model_00.xml",
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    {
+      "path": "replay/threshold0135/inputs/Parameters_00.xml",
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    {
+      "path": "replay/threshold0135/inputs/Project.ini",
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    {
+      "path": "replay/threshold0135/inputs/README.md",
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    {
+      "path": "replay/threshold0135/process/loaded-files.json",
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    {
+      "path": "replay/threshold0135/process/owned-process.json",
+      "bytes": 407,
+      "sha256": "da727efee08b2b5350dcfd52bd37b866334eed3cefd24dec8701f48eea35486e"
+    },
+    {
+      "path": "replay/threshold0135/process/request.json",
+      "bytes": 539,
+      "sha256": "4fae5ab340b274f43a45792016428b3636b70462e5cb13452352632cfe61d489"
+    },
+    {
+      "path": "replay/threshold0135/process/result.json",
+      "bytes": 444,
+      "sha256": "cb32548434df0ba8facd9a1a096faf28697365918ef8beaf3002c1a8b421ec63"
+    },
+    {
+      "path": "replay/threshold0135/process/runtime.json",
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    {
+      "path": "replay/threshold0135/process/stderr.log",
+      "bytes": 499,
+      "sha256": "91453db351e96841874d16ed808ef01f622585208dd464124b505e2185b028dd"
+    },
+    {
+      "path": "replay/threshold0135/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "replay/threshold0135/reference.csv",
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    {
+      "path": "replay/threshold0135/semantic-readback.json",
+      "bytes": 552,
+      "sha256": "b1ee200fa9b47375cde4089157e90d38eaae0f25b5c97919d32d1a15b4a62300"
+    },
+    {
+      "path": "replay/threshold0135/work/Model_00.xml",
+      "bytes": 947428,
+      "sha256": "4a0e6d41e8f9e2a0496800f5ae08abaeb06d1c35ae6d2a18a96dad41e2699f45"
+    },
+    {
+      "path": "replay/threshold0135/work/NeuroModelerConsole.ini",
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    {
+      "path": "replay/threshold0135/work/Parameters_00.xml",
+      "bytes": 816282,
+      "sha256": "7890fba96ff163f6660cbd7cfd8fb3d13840309c7ce9cb3b638568e8881f37cc"
+    },
+    {
+      "path": "replay/threshold0135/work/Project.ini",
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    {
+      "path": "replay/threshold0135/work/SelectivityLog/results.csv",
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    {
+      "path": "replay/validation.json",
+      "bytes": 1482,
+      "sha256": "0845d66c82ccb77135530909ff25ebfd93b1ca7db5b7641b695406163841956d"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/build-verification.json",
+      "bytes": 216,
+      "sha256": "bab6d61101174d25e8eed72b52d157c5e341dbc340aa47f1e7687040c365810a"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/build.log",
+      "bytes": 38333,
+      "sha256": "78b4d682cafa411485fefb808469a1d0ef205f91e520fae2ab969a9880038bc7"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/closure.json",
+      "bytes": 3305,
+      "sha256": "c39238a541e8687692ac4de0dc6a6d3aaffd940d34e174a00cf28d87c9e9f816"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/configure-result.json",
+      "bytes": 284,
+      "sha256": "651afaf1dde1f72f88e3e5a9c73e103e205402ecc5200842d7329e1c8bd55c25"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/configure.log",
+      "bytes": 1124,
+      "sha256": "b879ba93f6e9c5711446840c5d5bbc6be65fb53e32283d7c2305ab8b01664a36"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/incremental-verification.log",
+      "bytes": 1756,
+      "sha256": "5068b0113387d97e7b69199c6777e4efb8f00945c31368dcc53cd7156d6c0f37"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/launch.json",
+      "bytes": 338,
+      "sha256": "697db3015ac8baf7e532c5f74bcd2d2a49be62d59ef4c60aa4919ec4f05057ca"
+    },
+    {
+      "path": "s11-august-phasea-build-elder-a1/setup-correction.json",
+      "bytes": 3316,
+      "sha256": "d1336fafb62266991cc0d9f774472b6cc448f8fd13b3551fce23a5123a6d4adb"
+    },
+    {
+      "path": "s11-august-phasea-replay-supervisor-elder-a1/launch.json",
+      "bytes": 573,
+      "sha256": "94dbdb901675914f9338a7d5e49caeebdcd272250923582591c8a1a5303c2241"
+    },
+    {
+      "path": "s11-august-phasea-replay-supervisor-elder-a1/supervisor.log",
+      "bytes": 58,
+      "sha256": "4f9c12f19f8ec83f06f981ba4193d8365810a1391b1cf1838ce53c45b70b1735"
+    },
+    {
+      "path": "s11-august-phasea-runtime-elder-a1/NeuroModelerConsole.ini",
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    {
+      "path": "s11-august-phasea-runtime-elder-a1/runtime.json",
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    {
+      "path": "s11-august-phasea-temporal-supervisor-elder-a1/launch.json",
+      "bytes": 703,
+      "sha256": "389338a59dd657db600dc677f0a3eff420debce0602de8f126864f40f755af8d"
+    },
+    {
+      "path": "s11-august-phasea-temporal-supervisor-elder-a1/supervisor.log",
+      "bytes": 942,
+      "sha256": "45a1e8b7726a28635c80e12bf576493e7e4290370066379713b5ebbac6d0f516"
+    }
+  ],
+  "archive": {
+    "path": "primary.tar.xz",
+    "bytes": 1050008,
+    "sha256": "fb524f4c2811160d79f4f5af16626b9b66199242ece5ed2c810fd86c175aa60d"
+  },
+  "failed_observer_retained": true,
+  "scientific_verdict": null
+}
