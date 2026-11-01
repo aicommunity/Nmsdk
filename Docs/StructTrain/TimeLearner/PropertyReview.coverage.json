@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "Read-only catalog membership and document integrity; not a runtime test",
-  "pulselib_source": "4919bac2bd359118b13310862e54bcd24492967d",
+  "pulselib_source": "456a5abdb0ff36a218b25943f7f2c6f9c2175190",
   "original_inventory_records": 211,
   "reviewed_original_records": 211,
   "new_configured_records": 6,
@@ -11,5 +11,8 @@
   "missing_contract_documents": 0,
   "runtime_property_matrix_complete": false,
   "original_catalog_source": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
-  "correction_evidence": "AuditFlagDefault.ru.md; declarations unchanged, two ADefault values corrected"
+  "correction_evidence": "AuditFlagDefault.ru.md; declarations unchanged, two ADefault values corrected",
+  "source_drift_evidence": "PropertySourceDrift.json",
+  "source_drift_validation": "PropertySourceDrift.validation.json",
+  "inherited_rdk_properties_included": false
 }

@@ -1,0 +1,19 @@
+{
+  "kind": "phase12_script_retirement_preparation",
+  "schema_version": 1,
+  "scope": "Local read-only Git metadata preparation; server acceptance pending",
+  "bin_source": "6304b4a2bc4117c54c185a917850c7f65771c163",
+  "bin_feature": "fd54fda2fbc1e0a96ae377789322d0804571b3a6",
+  "positive_target_root": "b2e7af4ad8a941186132af73c4b47a7f3288c62a",
+  "verifier_root": "a07a907c0ab8bf630599a97d39a7ad2e3f298f59",
+  "retired_records": 42,
+  "moved_records": 2,
+  "source_records_verified": 44,
+  "negative_target_root": "39e91647e34a87afbfc4661ee7c149ad910ffd27",
+  "negative_exit_code": 2,
+  "negative_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/scripts/phase12_wave1_run2.sh",
+  "negative_created_positive_receipt": false,
+  "model_configuration_or_results_changed": false,
+  "whole_migration_attested": false,
+  "server_reproduction_complete": false
+}

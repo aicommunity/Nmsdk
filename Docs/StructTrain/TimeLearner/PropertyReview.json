@@ -1909,5 +1909,12 @@
       "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
       "factor_scope": "explicit cold command or instrumentation; empty experiment dispatch is unsupported"
     }
-  ]
+  ],
+  "current_source_drift": {
+    "source": "456a5abdb0ff36a218b25943f7f2c6f9c2175190",
+    "evidence": "PropertySourceDrift.json",
+    "contract": "PropertySourceDrift.ru.md",
+    "scope": "Declared source slices and explicitly reviewed deltas; original source_commit and historical records retained",
+    "runtime_property_matrix_complete": false
+  }
 }
