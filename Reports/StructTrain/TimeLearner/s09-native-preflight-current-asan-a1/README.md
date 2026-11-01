@@ -1,0 +1,3 @@
+# Native preflight with owned runtime capture: ASan
+
+14 positive preflights, six negative controls, two stopped one-tick Train controls and 20 actual-data reader checks. Production prepare generated 32 additional native preflights: Classic/Branch x N0/N1 x 1/2/4/6 inputs x 2000/20000 Hz. All preflights preserve zero model ticks. Parent captured actual executable/mapped files at the cooperative boundary. All46 initial semantic identities, parameters and configuration hashes equal the published normal evidence; all32 prepared job hashes match. Includes the preceding comparison reporter field-name error and its correction. No completed-learning or classification claim; the full physical/mode matrix remains open.
