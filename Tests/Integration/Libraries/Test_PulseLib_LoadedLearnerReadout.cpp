@@ -41,7 +41,7 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  const std::string artifact=kind+"-N"+std::to_string(count)+"-f"+std::to_string(frequency)+"/";
  const std::string className=branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner";
  core.environment->DestroyModel();ASSERT_TRUE(core.environment->CreateModel("NModel"));
- auto model=dynamic_pointer_cast<UComponent>(core.environment->GetModel());ASSERT_TRUE(model);model->SetGlobalTimeStep(frequency);
+ auto model=dynamic_pointer_cast<UNet>(core.environment->GetModel());ASSERT_TRUE(model);model->SetGlobalTimeStep(frequency);
  auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(className));ASSERT_TRUE(learner);
  learner->Name="Learner";learner->ControllerVersion=1;learner->StructureBuildMode=1;
  learner->NormalizationMode=0;learner->NumInputDendrite=count;
@@ -89,7 +89,7 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
  std::vector<std::vector<double>> original;capture(learner,model,original);ASSERT_FALSE(::testing::Test::HasFatalFailure());
  // Exercise native XML construction, not an overlay onto a pre-built learner.
  neuron=0;channel=0;synapse=0;learner=0;model=0;core.environment->DestroyModel();
- ASSERT_TRUE(core.environment->CreateModel("NModel"));model=dynamic_pointer_cast<UComponent>(core.environment->GetModel());ASSERT_TRUE(model);
+ ASSERT_TRUE(core.environment->CreateModel("NModel"));model=dynamic_pointer_cast<UNet>(core.environment->GetModel());ASSERT_TRUE(model);
  model->SetGlobalTimeStep(frequency);ASSERT_TRUE(xml.SelectNode(modelName));
  ASSERT_TRUE(model->LoadComponent(&xml,true));core.environment->ModelInit();core.environment->Reset();
  learner=model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(learner);
