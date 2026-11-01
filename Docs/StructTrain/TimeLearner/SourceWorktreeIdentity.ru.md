@@ -30,3 +30,29 @@ child с совпадающими HEAD/status, но другим core.worktree �
 Доказательства: root commits 43f427f1d8c032e85f45ba1daf86368c39f98054 (Elder)
 и e8edd5ca73275bf9fbfe44244cc1748e2938d7e7 (M40). Это Python/Git проверки,
 а не численные ASan испытания модели. Этапы 2/10 целиком не закрыты.
+
+## Адресное исправление Elder Bin после диагностики
+
+Полная сверка запрошенного Bin с tracked blobs6304b4a обнаружила отсутствие
+всех tracked files; в каталоге находились `.git` и untracked RTlibs.
+Это подтверждает недостаточность прежнего чистого HEAD/status. Отчёт
+`s02-elder-bin-worktree-repair-a1` сохранён commit
+de0f1ad60f7dd0c0637d931af8f7842c87d2d437, включая полный список missing paths.
+Резервные копии Git metadata остаются в одноимённом readbacks каталоге Elder.
+
+После проверки отсутствия процессов, использующих source, использовано уже
+включённое `extensions.worktreeConfig=true`: только в config.worktree Bin1
+записан правильный `core.worktree`. Общий config не менялся; HEAD/status/
+toplevel соседней `source-order-fixed-a1/Bin` до и после совпали. Через штатный
+`git restore --source=6304b4a --worktree -- .` восстановлены отсутствовавшие
+tracked files; untracked RTlibs не удалялись. Новый `source_closure` успешно
+проверил корень и все дочерние рабочие копии. На M40 соответствующая сверка
+toplevel всех gitlinks прошла без исправлений.
+
+Это проверка текущего состояния. Она не делает прежние Bin manifests
+ретроспективно достоверными. Для предыдущих запусков через этот Elder source
+нужны явная маркировка ограничения и адресная сверка зависимостей; отсутствие
+Bin само по себе не опровергает вычисления с compiled storage profiles и
+inline jobs, но недоступные ресурсы нельзя считать проверенными. В частности,
+старый measured-length gate39+28 сохранён с invalid Bin provenance; повторный
+gate67 на том же frozen runtime после исправления выполняется отдельно.
