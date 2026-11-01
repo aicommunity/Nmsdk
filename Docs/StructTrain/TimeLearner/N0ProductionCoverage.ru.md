@@ -35,6 +35,9 @@ Legacy-budget обозначает job1 без live finalization, а не Contro
 повреждения, preflight persisted plan и closure всех14 запусков. Ещё две
 проверки подтверждают N0/schema/repeat/domain в фактических Train packages
 и summaries, frozen recognition handoff и отклонение ошибочных факторов.
+Положительный контроль требует реально измеренного кандидата с Ns>1;
+проверяются фиксированные индивидуальные Rs, неизменность опорного входа
+во всех кандидатах и отсутствие N1 resistance-domain действий.
 Корпус задаётся `TIMELEARNER_N0_LIVE_PIPELINE_CORPUS`; оба протокола проверяются
 отдельно. Production audit каждого запуска независимо проверяет реальные
 наблюдения, сертификаты, графы и повторные измерения.
@@ -51,3 +54,21 @@ hash и runtime manifest сохраняются вместе с результа
 SearchUnresolved и NonSeparable допустимы как измеренные отрицательные исходы;
 наличие recognition-модели не означает успешной классификации. Этот контроль
 не заменяет августовский replay, независимый Test или всю physical matrix.
+
+## Серверная подготовка 01.11.2026
+
+Console собран на M40 из root021692a3fa0de4577e0770fd0af867a582a0ef03 /
+PulseLib38edfcad7983478a7e2ca736c32ae2703861c1fd. Configure, target build и
+runtime snapshot завершились успешно за36.65s. Новый runtime расположен в
+`/media/user/Data/TimeLearnerRefactor/runtime-s07-n0-production-asan-a1`.
+Executable SHA256: `be915df13bdf13884beb5ec5eac82d8e41901a2571b32f8e84997b8136833e3e`.
+Компактный [build proof](../../../Reports/StructTrain/TimeLearner/s07-n0-production-build-asan-a1/README.md)
+содержит девять файлов, включая cache/flags, logs, manifest и20 job preflight
+checks; архив18508B. Это отдельное доказательство сборки, не результат обучения.
+
+Запущен supervisor228908/start_ticks257797838 с последовательным выполнением
+двух корпусов на неизменяемом runtime. При первой проверке фактически работал
+Console228928 в Classic-fixed первого корпуса. Итоговая приёмка ещё открыта;
+проверки первичных данных, temporal reports и сервер normal предстоят.
+На Elder при ресурсной проверке осталось72MiB, поэтому новую сборку там
+пока не запускали и дополнительные исторические данные не удаляли.

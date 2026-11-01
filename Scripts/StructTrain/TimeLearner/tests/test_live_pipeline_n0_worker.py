@@ -38,6 +38,17 @@ class N0LivePipelineWorkerTest(_Base):
                 bounds = config["search"]["bounds"]
                 self.assertTrue(all(b["maximum_synapses"] == factors["n0_maximum_synapses"] for b in bounds[:-1]))
                 self.assertEqual(bounds[-1]["maximum_synapses"], config["model"]["inputs"][-1]["synapses"])
+                candidates = summary["candidates"]
+                self.assertTrue(any(c["parameters"]["synapses"] > 1 for c in candidates),
+                                "N0 positive control must actually measure a multi-synapse candidate")
+                self.assertEqual(summary["resistance_domains"], [])
+                for candidate in candidates:
+                    self.assertEqual(len(candidate["full_parameters"]), len(config["model"]["inputs"]))
+                    for actual, initial in zip(candidate["full_parameters"], config["model"]["inputs"]):
+                        self.assertEqual(actual["resistance"], initial["resistance"])
+                    anchor = candidate["full_parameters"][-1]
+                    self.assertEqual(anchor["length"], config["model"]["inputs"][-1]["attachment"])
+                    self.assertEqual(anchor["synapses"], config["model"]["inputs"][-1]["synapses"])
                 if repeats > 1:
                     groups = summary["candidate_repeat_groups"]
                     self.assertTrue(groups, "real candidate repeat measurements required")
