@@ -1,1 +1,0 @@
-Real cold native dimension controls. All four single-input cases Exact with fresh final probes; twelve fixed-geometry multi-input cases SearchUnresolved. Original tolerances retained. No successful classification claim. See manifest and lossless primary archive.

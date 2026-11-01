@@ -1,1 +1,0 @@
-Existing N0 template compatibility: baseline public preparer failure reproduced; corrected default preserves the complete template. Nine checks per protocol, ten actual Train jobs regenerated per protocol; numerical inputs and results unchanged. Initial setup a1 stopped with SyntaxError before execution.
