@@ -274,6 +274,7 @@ class ScalarStats:
 def analyze_file(path: Path, *, rest_bound: float = 1.0,
                  soma_abs_limit: float | None = None,
                  time_step_hz: float | None = None) -> dict[str, Any]:
+    source_before = path.stat()
     channel_stats: dict[str, ChannelStats] = {}
     membrane_stats = ScalarStats()
     synapse_resistance_stats = ScalarStats()
@@ -327,10 +328,15 @@ def analyze_file(path: Path, *, rest_bound: float = 1.0,
     if records == 0:
         raise ValueError(f"No schema-1 Branch dynamics records found in {path}")
 
+    source_after = path.stat()
+    if ((source_before.st_dev, source_before.st_ino, source_before.st_size, source_before.st_mtime_ns)
+            != (source_after.st_dev, source_after.st_ino, source_after.st_size, source_after.st_mtime_ns)):
+        raise ValueError("dynamics_source_changed_during_analysis")
+
     return {
         "schema": 1,
         "source_file": str(path),
-        "source_size_bytes": path.stat().st_size,
+        "source_size_bytes": source_before.st_size,
         "source_sha256": digest.hexdigest(),
         "records": records,
         "ignored_lines": ignored_lines,

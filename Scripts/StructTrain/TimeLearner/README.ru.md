@@ -8,6 +8,15 @@ Import не запускает эксперименты. Реализованы 
 Общий prepare, сквозной scheduler и полная миграция ещё не готовы; новые native
 операции имеют явно ограниченный контракт, описанный ниже.
 
+Активный анализатор старой Branch schema-1 телеметрии перенесён из Bin:
+`analyze DYNAMICS.log --format branch-dynamics --time-step-hz 2000 --output NEW.json`.
+Работа возможна из другого cwd при установленном пакете или явном PYTHONPATH
+корневого checkout. Нет sys.path-патчей на Bin и работы при import. Результат
+descriptive-only (`validity=unknown`, без recognition verdict); local gain не
+подтверждает устойчивость всей модели, envelope не задаёт её rest state.
+Повреждённый SynapticInputs не превращается в укороченный корректный вектор.
+[Контракт миграции](../../../Docs/StructTrain/TimeLearner/BranchDynamicsMigration.ru.md).
+
 `publish` принимает schema 2 с explicit push transport и обязательной проверкой
 checksum inventory по committed blobs. Producer helper умеет явно добавлять
 selected ignored/sparse artifacts. [Контракт, ограничения и приёмка](../../../Docs/StructTrain/TimeLearner/GitArtifactPublication.ru.md).
