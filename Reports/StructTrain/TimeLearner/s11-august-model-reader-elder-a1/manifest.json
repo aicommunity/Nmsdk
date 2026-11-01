@@ -1,0 +1,33 @@
+{
+  "kind": "historical_cold_model_actual_export_identity_checks",
+  "schema_version": 1,
+  "validation": {
+    "source": "3c14bd295c4597702b88975820ff0626e9e2ac66",
+    "worker": "elder",
+    "status": 0,
+    "tests": 10,
+    "native_operations": 0,
+    "primary_members": 83,
+    "wall_seconds": 3.2888004779815674,
+    "scientific_verdict": null
+  },
+  "records": [
+    {
+      "path": "reader.log",
+      "bytes": 1296,
+      "sha256": "227efc3d318bed6e8faa8cc894d2ea2b4ae85449b7c0315b8274505b7903f75a"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 229,
+      "sha256": "10d9ff41abb3e86a9fb7a7a238289d9dad7747d4e9ddf7e4992e789361aa7aec"
+    }
+  ],
+  "archive": {
+    "path": "primary.tar.xz",
+    "bytes": 600,
+    "sha256": "f8cec87251d3410279e97976c5ce493a1a9bf7d95ca8498ffa5ec627790970c9"
+  },
+  "primary_commit": "8ee71bcb67c9f5325e95517eee8dd26250e61045",
+  "scientific_verdict": null
+}
