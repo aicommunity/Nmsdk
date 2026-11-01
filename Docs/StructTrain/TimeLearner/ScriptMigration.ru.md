@@ -166,3 +166,15 @@ retired_historical со ссылкой на migration manifest. Wrappers/коп�
 SHA256/размеров и повторный поиск callers. Старые программы не запускаются,
 численные результаты и активный runtime не меняются. Это частичное выполнение
 этапа9; остальные Python, Bin, PulseLib и Reports entrypoints остаются открытыми.
+
+Пятый пакет проверен на Elder по root
+8e11fd5f9e2c2c2750e3d34f905e1c128202f647: все30 записей retired_files
+из manifest (включая27 прежних shell) извлекаются из Git с точными SHA256,
+размерами и blob IDs; в новом tree их пути отсутствуют. В Scripts/Tests/App/
+Apps/CMake root буквальных callers трёх новых имён нет. Receipt и точный
+источник read-only проверки опубликованы commit
+f2be2fe6e865ab1bdf4593cc18345cf8812bd1f4, каталог
+Reports/StructTrain/TimeLearner/s09-retired-normsync-elder-a1.
+После получения через Git локально перепроверены receipt hashes и все30 blobs.
+Это статическая Git/migration приёмка; численные/компиляционные тесты
+не выполнялись и не требуются для удаления этих одноразовых исторических файлов.
