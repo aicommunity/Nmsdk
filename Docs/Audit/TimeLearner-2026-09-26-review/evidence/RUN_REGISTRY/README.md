@@ -1,5 +1,9 @@
 # RUN_REGISTRY — единый реестр путей к прогонам
 
+> Исторический документ: shell-команды этой кампании не являются текущими инструкциями запуска/очистки. Файлы удалены из рабочего дерева; данные кампании сохранены. Современная синхронизация выполняется через Git; серия D не возобновляется автоматически.
+> Источники: [archive_nmsdk_journals.sh](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/archive_nmsdk_journals.sh).
+
+
 План: [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../../plans/PLAN_2026-10-25_dendrite_limits.md) §H3.
 
 ## Формат

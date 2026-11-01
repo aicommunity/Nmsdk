@@ -1,5 +1,9 @@
 # Campaign status — latest
 
+> Исторический документ: shell-команды этой кампании не являются текущими инструкциями запуска/очистки. Файлы удалены из рабочего дерева; данные кампании сохранены. Современная синхронизация выполняется через Git; серия D не возобновляется автоматически.
+> Источники: [e05_dispatch.sh](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e05_dispatch.sh), [r0_branch_nextseg_replay.sh](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/r0_branch_nextseg_replay.sh), [repass_sweep.sh](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/repass_sweep.sh), [w0_br25_test_tipr_jitter.sh](https://github.com/aicommunity/Nmsdk/blob/8e4448ea2e055e8f4edb4c33fe2ad523a5467de9/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w0_br25_test_tipr_jitter.sh).
+
+
 **Активный план:** [`../plans/PLAN_2026-10-25_dendrite_limits.md`](../plans/PLAN_2026-10-25_dendrite_limits.md) (+ §H)  
 **Ветка:** plan/2026-10-25-dendrite-limits (Nmsdk, Bin, PulseLib)  
 **Обновлено:** 2026-10-24T19:30Z (22:30 МСК)
