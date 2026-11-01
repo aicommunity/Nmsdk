@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_scoped_visual_review",
+  "schema_version": 1,
+  "review_date": "2026-10-30",
+  "reviewer": "Codex visual inspection",
+  "source_report_commit": "5bb64774268ef3815e457e0eda06a7c0e6254a84",
+  "agent_visual_review_complete": true,
+  "human_visual_review_complete": false,
+  "global_visual_acceptance": false,
+  "scope": "Only two listed Poppler previews at 1920x960: partial Branch overview and actual sixth-soma overview",
+  "notes": "The partial record contains only the observed zero prefix; the grey tail is unknown, not continued silence. Coincident zero input/soma traces in that prefix are real recorded values. Six-soma signal and actual pulses are readable. No full physics-matrix or classification acceptance.",
+  "records": [
+    {
+      "source_sha256": "4899bf6b5104b7d5470bcb9740e5d5e70d4c0629cb988d39136832bee00614ad",
+      "source_relative": "diagnostic-figures/test_actual_censored_trace_cli_retains_samples_and_unknown_tail/Branch-diagnostic/soma-001/overview.pdf",
+      "preview_sha256": "b8bab80c205e4d8323dce6ec25a7abf725b1dcf5f9409127aa18a9426a68d2b3",
+      "legend_overlap": false,
+      "labels_readable": true,
+      "visible_curve_clipping": false,
+      "preview": "partial-branch-overview.png"
+    },
+    {
+      "source_sha256": "a12cdac1b500982e464cff4f0bbb3687653af957750f349a08be7a26fdb87b57",
+      "source_relative": "diagnostic-figures/test_actual_six_soma_trace_has_six_individual_full_size_figures/report/soma-006/overview.pdf",
+      "preview_sha256": "f56ef2ffeab011fa567bbdade52b6129093ba4ba77bead2e3b7d6265976491b1",
+      "legend_overlap": false,
+      "labels_readable": true,
+      "visible_curve_clipping": false,
+      "preview": "sixth-soma-overview.png"
+    }
+  ],
+  "scientific_verdict": null
+}

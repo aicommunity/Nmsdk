@@ -1,0 +1,5 @@
+Production Console owned PostTune temporal reports
+
+All twenty PostTune operations (eighteen calibrated-policy controls and two fixed-policy controls) and six standalone calibration controls rendered from closed ASan corpus. Five automated report checks passed without skips. All complete native trials, declared patterns, soma channels and actual shared inputs are preserved; overviews and zooms use original samples, 1920x960 PNG, at least eight pixels per timestep in detailed views. Incomplete observations are not presented as complete. Original corpus file hashes were unchanged.
+
+Git stores compressed report metadata and eight selected fixed-model first-soma target/foil overview/first zoom PNGs. The complete reproducible PNG/SVG/PDF report remains on M40 Data. Primary source closure is already published in root13dfee817c3fbd796dfb91e7e74e2e4614506fcd. The eight selected PNGs match previously reviewed native-owner PNGs byte-for-byte; SELECTED_VISUAL_REVIEW.json binds each to that original-resolution legibility review. No new manual inspection, full-cache manual acceptance or scientific PASS is claimed.

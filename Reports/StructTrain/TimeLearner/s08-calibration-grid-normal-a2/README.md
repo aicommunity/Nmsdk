@@ -1,0 +1,9 @@
+# Native threshold-grid transaction: normal evidence
+
+Elder passed two real Classic/Branch N1 2000 Hz cases on c83f0ca4c7f11cb1957d690f7297fdbaaf110c8a / PulseLib c36e27273b194752b3ad78184b8205c351bf3ce2. The native driver explores every candidate in its declared budget prefix, independently rebuilds the selected candidate, runs fresh confirmation and imports/verifies the committed calibrated model. It makes no nested Calculate calls or model-clock advances.
+
+Twelve transaction records cover successful commit, nonseparable full grid, budget exhaustion, queued/running cancellation and foreign owner Reset. Four additional context controls reject changed frequency or a backwards clock without foreign rollback. Seventeen independent tests (eight transaction evidence tests plus nine calibrated-state/frozen regressions) passed. All primary raw observations, source CSV/models, before/after runtime evidence, both native snapshots and reader logs are archived. An additional independent audit rechecks all sixteen current records. The source training outcome remains search_unresolved. These two-pattern controls do not demonstrate converged training, independent Test or August replay.
+
+Source model schema 1 binds the selected threshold and fresh confirmation; full grid records are in this transaction report, not embedded in the standalone model proof. This limitation is explicit in both producer and reader. Diagnostic-only partial records cannot establish calibration or physical rollback merely by being self-consistent.
+
+The archive also preserves the verified hardlink deduplication receipt for inactive static-library caches; no primary experimental data were deleted. No binary/image caches are stored. All-pattern readable transaction plots remain a required subsequent report step. ASan, production CLI/worker integration, full PostTune, complete mode/profile matrix and stage 8 remain open. Scientific verdict is null.

@@ -1,0 +1,1 @@
+ASan N1 build acceptance: current a2 passes32 selected production C++ tests, Console and runtime snapshot. Earlier a1 passes40 at separate prototype source. Prior binaries retained. detect_leaks=0: no leak-freedom, full-stage or classification claim.

@@ -1,0 +1,251 @@
+diff --git a/Configs/SpikeSamples/StructTrain/scripts/run_timelearner_matrix_queue.py b/Configs/SpikeSamples/StructTrain/scripts/run_timelearner_matrix_queue.py
+index c39b06c2..15f90533 100755
+--- a/Configs/SpikeSamples/StructTrain/scripts/run_timelearner_matrix_queue.py
++++ b/Configs/SpikeSamples/StructTrain/scripts/run_timelearner_matrix_queue.py
+@@ -27,6 +27,7 @@ from timelearner_matrix import (
+     case_attempt_result,
+     parse_branch_initial_lengths,
+     parse_branch_segment_rm_profile,
++    parse_train_param,
+ )
+ 
+ BASE = Path(__file__).resolve().parents[1]
+@@ -146,6 +147,7 @@ def make_run_fingerprint(wave: str, specs: list[dict], args: argparse.Namespace)
+         "classic_rs_rm_limit": args.classic_rs_rm_limit,
+         "synapse_resistance_step": args.synapse_resistance_step,
+         "accept_quantized_amp_under_target": bool(args.accept_quantized_amp_under_target),
++        "train_params": args.train_params,
+         "branch_segment_rm_profile": args.branch_segment_rm_profile,
+         "branch_initial_lengths": args.branch_initial_lengths,
+         "skip_softcold_reset": args.branch_initial_lengths is not None,
+@@ -215,6 +217,7 @@ def make_run_fingerprint(wave: str, specs: list[dict], args: argparse.Namespace)
+             "classic_rs_rm_limit": args.classic_rs_rm_limit,
+             "synapse_resistance_step": args.synapse_resistance_step,
+             "accept_quantized_amp_under_target": bool(args.accept_quantized_amp_under_target),
++            "train_params": args.train_params,
+             "branch_segment_rm_profile": args.branch_segment_rm_profile,
+             "branch_initial_lengths": args.branch_initial_lengths,
+             "branch_segment_rm_profile_application": condition_runtime[
+@@ -315,6 +318,7 @@ def find_duplicate_result(wave: str, specs: list[dict], fingerprint: dict) -> di
+                         "classic_rs_rm_limit": (result.get("runtime_execution_options") or {}).get("classic_rs_rm_limit"),
+                         "synapse_resistance_step": (result.get("runtime_execution_options") or {}).get("synapse_resistance_step"),
+                         "accept_quantized_amp_under_target": (result.get("runtime_execution_options") or {}).get("accept_quantized_amp_under_target"),
++                        "train_params": (result.get("runtime_execution_options") or {}).get("train_params"),
+                         "branch_segment_rm_profile": (result.get("runtime_execution_options") or {}).get("branch_segment_rm_profile"),
+                         "branch_initial_lengths": (result.get("runtime_execution_options") or {}).get("branch_initial_lengths"),
+                         "skip_softcold_reset": (result.get("runtime_execution_options") or {}).get("skip_softcold_reset"),
+@@ -578,6 +582,15 @@ def main() -> int:
+         action="store_true",
+         help="diagnostic structural N0 option: accept a repeatedly verified lower member of a quantized amp bracket",
+     )
++    parser.add_argument(
++        "--train-param",
++        dest="train_params",
++        type=parse_train_param,
++        action="append",
++        metavar="NAME=VALUE",
++        help="diagnostic whitelisted NNeuronTimeLearner(Branch) parameter for the attempt-local Train XML only; "
++             "repeatable; recorded in the run fingerprint (see TRAIN_PARAM_WHITELIST)",
++    )
+     parser.add_argument(
+         "--branch-segment-rm-profile",
+         type=parse_branch_segment_rm_profile,
+@@ -650,6 +663,15 @@ def main() -> int:
+         not math.isfinite(args.synapse_resistance_step) or args.synapse_resistance_step <= 0.0
+     ):
+         raise SystemExit("--synapse-resistance-step must be finite and positive")
++    if args.train_params:
++        merged: dict[str, str] = {}
++        for name, value in args.train_params:
++            if name in merged:
++                raise SystemExit(f"--train-param {name} given twice")
++            merged[name] = value
++        args.train_params = dict(sorted(merged.items()))
++    else:
++        args.train_params = None
+     if args.resume and not args.run_id:
+         raise SystemExit("--resume requires an explicit --run-id")
+     if args.resume and args.allow_repeat:
+diff --git a/Configs/SpikeSamples/StructTrain/scripts/test_timelearner_matrix.py b/Configs/SpikeSamples/StructTrain/scripts/test_timelearner_matrix.py
+index 51652bb3..0e4b0011 100644
+--- a/Configs/SpikeSamples/StructTrain/scripts/test_timelearner_matrix.py
++++ b/Configs/SpikeSamples/StructTrain/scripts/test_timelearner_matrix.py
+@@ -547,6 +547,49 @@ class RuntimeStructuralSynapseStepOverlayTests(unittest.TestCase):
+             self.assertFalse((attempt / "runtime-input-overrides").exists())
+ 
+ 
++class RuntimeTrainParamOverlayTests(unittest.TestCase):
++    def _source(self, base):
++        source = base / "source"
++        for side in ("Train", "Test"):
++            (source / side).mkdir(parents=True)
++        (source / "matrix_input_manifest.json").write_text("{}\n", encoding="utf-8")
++        xml = (
++            '<Params><NormalizationMode Type="i">1</NormalizationMode>'
++            '<EstDelayPerSeg Type="d">0.002</EstDelayPerSeg></Params>'
++        )
++        for side in ("Train", "Test"):
++            for filename in ("Model_00.xml", "Parameters_00.xml"):
++                (source / side / filename).write_text(xml, encoding="utf-8")
++        return source, xml
++
++    def test_train_params_set_existing_and_insert_missing_in_train_only(self):
++        with tempfile.TemporaryDirectory() as temporary:
++            base = Path(temporary)
++            source, xml = self._source(base)
++            attempt = base / "runs" / "r10" / "W01" / "case" / "attempt-0001"
++            attempt.mkdir(parents=True)
++            params = dict([MODULE.parse_train_param("EstDelayPerSeg=0.01"),
++                           MODULE.parse_train_param("UseSignedDelayEstimate=1")])
++            overlay, record = MODULE.make_runtime_input_overlay(
++                source, attempt, "W01", "case",
++                quiet_debug_logs=False, branch_gamma_mode=None,
++                train_params=params,
++            )
++            for filename in ("Model_00.xml", "Parameters_00.xml"):
++                text = (overlay / "Train" / filename).read_text(encoding="utf-8")
++                self.assertIn('<EstDelayPerSeg Type="d">0.01</EstDelayPerSeg>', text)
++                self.assertIn(">1</UseSignedDelayEstimate>", text)
++                self.assertEqual((overlay / "Test" / filename).read_text(encoding="utf-8"), xml)
++                self.assertEqual((source / "Train" / filename).read_text(encoding="utf-8"), xml)
++            self.assertEqual(record["train_params"], params)
++            self.assertEqual(len(record["overrides"]), 2)
++
++    def test_unknown_or_invalid_train_params_are_rejected(self):
++        for raw in ("Foo=1", "EstDelayPerSeg", "EstDelayPerSeg=nan", "UseSignedDelayEstimate=2"):
++            with self.subTest(raw=raw), self.assertRaises(ValueError):
++                MODULE.parse_train_param(raw)
++
++
+ class RunProvenanceTests(unittest.TestCase):
+     def test_console_resolution_uses_host_platform_and_respects_override(self):
+         root = Path("/repo")
+diff --git a/Configs/SpikeSamples/StructTrain/scripts/timelearner_matrix.py b/Configs/SpikeSamples/StructTrain/scripts/timelearner_matrix.py
+index 2b7d1d7e..64f04db2 100755
+--- a/Configs/SpikeSamples/StructTrain/scripts/timelearner_matrix.py
++++ b/Configs/SpikeSamples/StructTrain/scripts/timelearner_matrix.py
+@@ -282,6 +282,39 @@ def _set_or_insert_runtime_tag(
+     return set_all_tags(text, tag, value)
+ 
+ 
++# Diagnostic Train-only parameters accepted by --train-param (audit plan 2026-10-20).
++# name -> XML value type.  New C++ switches must exist in the Console being run;
++# an unknown property is silently ignored by the loader, so check the C++ audit line.
++TRAIN_PARAM_WHITELIST: dict[str, str] = {
++    "EstDelayPerSeg": "d",
++    "SyncTolerance": "d",
++    "UseSignedDelayEstimate": "b",
++    "RminLengthTolFactor": "d",
++    "FreezeSynapseResistanceBase": "b",
++    "EstDelayPerSegInit": "d",
++    "AutoEstimateAttenuationGamma": "b",
++}
++
++
++def parse_train_param(raw: str) -> tuple[str, str]:
++    """Parse ``NAME=VALUE`` for a whitelisted numeric trainer parameter."""
++    name, separator, value = raw.partition("=")
++    name, value = name.strip(), value.strip()
++    if not separator or name not in TRAIN_PARAM_WHITELIST:
++        raise ValueError(
++            f"--train-param must be NAME=VALUE with NAME in {sorted(TRAIN_PARAM_WHITELIST)}"
++        )
++    if TRAIN_PARAM_WHITELIST[name] == "b":
++        if value not in ("0", "1"):
++            raise ValueError(f"{name} is boolean: use 0 or 1")
++    else:
++        number = float(value)
++        if not math.isfinite(number):
++            raise ValueError(f"{name} must be finite")
++        value = format(number, ".17g")
++    return name, value
++
++
+ def parse_branch_segment_rm_profile(raw: str | None) -> dict[int, float] | None:
+     """Parse diagnostic ``segment=ohms,...`` pairs for attempt-local Branch inputs."""
+     if raw is None:
+@@ -346,8 +379,11 @@ def make_runtime_input_overlay(
+     branch_segment_rm_profile: dict[int, float] | None = None,
+     branch_initial_lengths: list[int] | None = None,
+     force_posttrain_tuning: int | None = None,
++    train_params: dict[str, str] | None = None,
+ ) -> tuple[Path, dict[str, Any]]:
+     """Create an attempt-local input copy with recorded diagnostic overrides."""
++    for name, value in (train_params or {}).items():
++        parse_train_param(f"{name}={value}")
+     if branch_rs_rm_limit is not None and (
+         not math.isfinite(branch_rs_rm_limit) or branch_rs_rm_limit < 1.0
+     ):
+@@ -652,6 +688,27 @@ def make_runtime_input_overlay(
+                 "sha256_after": sha256(path),
+                 "parameters": {"EnablePostTrainTuning": enabled},
+             })
++    if train_params:
++        for filename in XML_INPUTS:
++            path = overlay / "Train" / filename
++            if not path.is_file():
++                raise FileNotFoundError(path)
++            original = path.read_text(encoding="utf-8")
++            updated = original
++            for name, value in train_params.items():
++                updated = _set_or_insert_runtime_tag(
++                    updated, name, value, "NormalizationMode",
++                    value_type=TRAIN_PARAM_WHITELIST[name],
++                )
++            ET.fromstring(updated)
++            path.write_text(updated, encoding="utf-8", newline="")
++            changed.append({
++                "side": "Train",
++                "file": f"Train/{filename}",
++                "sha256_before": hashlib.sha256(original.encode("utf-8")).hexdigest(),
++                "sha256_after": sha256(path),
++                "parameters": dict(train_params),
++            })
+     record = {
+         "mode": "runtime_input_overlay",
+         "source_input": str(input_root),
+@@ -664,6 +721,7 @@ def make_runtime_input_overlay(
+         "synapse_resistance_step": synapse_resistance_step,
+         "accept_quantized_amp_under_target": accept_quantized_amp_under_target,
+         "force_posttrain_tuning": force_posttrain_tuning,
++        "train_params": train_params,
+         "branch_segment_rm_profile": branch_segment_rm_profile,
+         "branch_initial_lengths": branch_initial_lengths,
+         "branch_segment_rm_profile_application": (
+@@ -1328,6 +1386,12 @@ def worker(
+     branch_segment_rm_profile = run_manifest.get("runtime", {}).get("branch_segment_rm_profile")
+     branch_initial_lengths = run_manifest.get("runtime", {}).get("branch_initial_lengths")
+     force_posttrain_tuning = run_manifest.get("runtime", {}).get("force_posttrain_tuning")
++    train_params = run_manifest.get("runtime", {}).get("train_params") or None
++    if train_params:
++        if spec.get("trainer") == "NNeuronTimeLearnerBranch" and "EstDelayPerSeg" in train_params:
++            raise ValueError("Branch EstDelayPerSeg is not an XML property; use EstDelayPerSegInit")
++        if spec.get("trainer") != "NNeuronTimeLearnerBranch" and "EstDelayPerSegInit" in train_params:
++            raise ValueError("EstDelayPerSegInit exists only in NNeuronTimeLearnerBranch; Classic uses EstDelayPerSeg")
+     if force_posttrain_tuning is not None:
+         force_posttrain_tuning = int(force_posttrain_tuning)
+         if force_posttrain_tuning not in (0, 1):
+@@ -1369,6 +1433,7 @@ def worker(
+         or accept_quantized_amp_under_target
+         or branch_segment_rm_profile is not None or branch_initial_lengths is not None
+         or force_posttrain_tuning is not None
++        or train_params is not None
+     ):
+         runtime_input_root, runtime_input_overrides = make_runtime_input_overlay(
+             input_root, attempt_dir, wave, case_id,
+@@ -1382,6 +1447,7 @@ def worker(
+             branch_segment_rm_profile=branch_segment_rm_profile,
+             branch_initial_lengths=branch_initial_lengths,
+             force_posttrain_tuning=force_posttrain_tuning,
++            train_params=train_params,
+         )
+     initial_rs_override = initial_rs_override_from_input(spec, runtime_input_root)
+     initial_rs_scalar = (
+@@ -1457,6 +1523,7 @@ def worker(
+         "classic_rs_rm_limit": classic_rs_rm_limit,
+         "synapse_resistance_step": synapse_resistance_step,
+         "accept_quantized_amp_under_target": accept_quantized_amp_under_target,
++        "train_params": train_params,
+         "initial_rs_post_softcold_override_ohm": initial_rs_scalar,
+         "initial_trainable_tipr_vector_post_softcold_override_ohm": initial_rs_vector,
+         "initial_trainable_tipr_rm_ratio": spec.get("initial_rs_trainable_to_rm"),

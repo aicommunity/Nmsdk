@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_combined_n0_infrastructure_gate",
+  "schema_version": 1,
+  "root": "2b7267526c834484be12549f3614d3d967b4bc9b",
+  "bin": "34a9e60d0b8e38522e1cce4d59378b6a9bda7844",
+  "xml_readbacks": [
+    "ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearner.xml",
+    "ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearnerBranch.xml"
+  ],
+  "tests": 45,
+  "skips": 0,
+  "failures": 1,
+  "errors": 6,
+  "modules": [
+    "test_n0_repeat_evidence",
+    "test_process_runner",
+    "test_publisher",
+    "test_condition",
+    "test_runtime",
+    "test_probe_reports",
+    "test_plotting",
+    "test_analysis_cli",
+    "test_full_probe_report_evidence"
+  ],
+  "scientific_verdict": null,
+  "scope": "Combined production Python paths and two ClassDesc readbacks; prior native A2 results reused without rerunning model"
+}
