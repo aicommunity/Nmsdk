@@ -11,8 +11,15 @@ ASan32/32, readers18/16/16 на каждом worker,64 byte-identical crossworke
 N1/2/4/6,2000/20000Hz, Parameters-only/Parameters+State и описанные физические
 fixtures. Это не вся lifecycle/profile матрица и не точный mid-probe checkpoint.
 Отдельно на Elder воспроизведены4/4 отказа ModelArchive для длинных десятичных
-значений публичной TrainingPattern: Rdk matrix writer округляет до6 цифр.
-Strict identity отклоняет export; проверка owner-level исправления ещё идёт.
+значений публичной TrainingPattern: прежний Rdk matrix writer округлял до6 цифр.
+[Исправление у владельца](ArchiveF64Precision.ru.md) принято адресно: floating
+MDMatrix writer использует max_digits10. Unit10/archive16/XML32 пройдены на
+обоих workers, normal regression21 без skips, readers23/16/16/18 на каждом.
+Все24 transfer файла совпали по числовым массивам и semantic model/image
+identities;64 XML CSV побайтно равны.262 PNG проверены автоматически,28 selected
+оригиналов непосредственно просмотрены. Strict identity не ослаблена.
+Ограничение actual mappings одного fast-exit normal unit-процесса сохранено;
+его численные проверки не подменяют provenance. Полные этапы4/5/11 открыты.
 
 Дополнение миграции: удалены оставшиеся5 исторических normsync Python и
 standalone segsim.c. Manifest содержит36 retired records; Elder проверил

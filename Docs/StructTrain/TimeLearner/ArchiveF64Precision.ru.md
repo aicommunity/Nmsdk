@@ -137,6 +137,34 @@ QA/selection proof23b7e17751e8db62ab12757cc9bfc90ee50ae2f8 содержит meta
 Ручной просмотр полного262-image cache не заявляется. Новая schema1 ASan
 проверка выполняется отдельно; C++ XML32 предыдущего ASan уже завершены успешно.
 
+## Адресная приёмка исправления
+
+Предыдущие pending-записи выше сохраняют историю проверки. ASan a2/schema1
+завершил unit10/archive16/reader23, затем immutable analyzer прошёл23/16/16/18.
+Все24 source/import файла совпали с normal по массивам waveform, actual_input,
+soma, native time_s и semantic model/image identities; все64 XML CSV совпали
+побайтово. Старый ASan a1 также прошёл unit10/archive16/XML32. Все supervisors
+завершены; source/runtime final guards прошли, exception отсутствует.
+
+ASan primaryfe8e700ef0695a9a6847c4809260f4abd5819278 содержит398 членов,
+497008 bytes xz. После Git retrieval локально проверены внешние SHA256,
+размер и SHA256 каждого члена. Normal primary2d1827fe и262-image temporal cache
+применимы по явному crossworker data-identity receipt; duplicate cache не нужен.
+Все28 selected originals просмотрены, review commiteb2fb87cb0d4100555c7cd6d6ca725161937e83f.
+
+Rdk feature принята --no-ff в develop0a1c1d05a1b12de20feabf54a25712e210865791.
+Core и Tests trees равны фактически проверенному2732a08; дополнительный98055ef
+меняет только документацию. Root acceptance записывает этот child merge,
+PulseLib70f467d3 и Bin6304b4a2. Исправление не ослабляет строгую identity и
+не меняет lifecycle или математическую цель обучения.
+
+Приёмка ограничена floating MDMatrix XML и описанными12 asymmetric-neuron
+transfer cases при2000/20000Hz, storage/scalar/matrix/individual C/R и external
+stimulus absent/present. Полная физическая/growth/mode матрица, произвольные
+other serializers, научная классификация и полные этапы4/5/11 остаются открытыми.
+Ограничение fast-exit provenance unit a4 сохранено явно; полный actual-map
+контроль идентичного unit executable имеется в a3, все ASan units mapped.
+
 Проверки ещё не выполнены. Подэтап не принят; general archive/profile/growth
 матрица, все формы векторов/матриц и полный Train→Test остаются открытыми.
 Если native XML теряет значащие цифры, требуется сначала локализовать это
