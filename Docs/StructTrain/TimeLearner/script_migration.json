@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools and9 one-off normsync Python/C tools retired; active Bin Branch dynamics analyzer and six regressions migrated. Remaining Docs Python/Bin/Reports tools and production CLI migration are incomplete.",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and its six tests migrated. Full script/CLI migration remains incomplete.",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -688,6 +688,132 @@
       "replacement": null,
       "reason": "Standalone historical approximate segment simulator used by the retired drivers; not linked by production CMake. It is not a native lifecycle/storage integration test.",
       "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_wave1_run2.sh",
+      "action": "retired_historical",
+      "archive_commit": "6304b4a2bc4117c54c185a917850c7f65771c163",
+      "last_change_commit": "281a2d01b006c6eb0a36e23e25cb4562735416ed",
+      "blob_sha1": "976186b18cdf5cbac5bbaa7d280fb94d045e2f26",
+      "content_sha256": "c7d833db39ff1ea3327a2689313bc20630dc201f88a55406be913ee98617aaca",
+      "bytes": 5598,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/6304b4a2bc4117c54c185a917850c7f65771c163/Configs/SpikeSamples/StructTrain/scripts/phase12_wave1_run2.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "6304b4a2bc4117c54c185a917850c7f65771c163:Configs/SpikeSamples/StructTrain/scripts/phase12_wave1_run2.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Phase12 wave shell orchestration with fixed old workspace/cases, legacy validator and report promotion; not an active native production command. Read in full; no literal executable callers found in pinned root/Bin/PulseLib trees. Dynamic external calls are not excluded.",
+      "original_results": "unchanged; source SHA is script retrieval evidence, not the execution provenance of historical model results"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_wave2_run.sh",
+      "action": "retired_historical",
+      "archive_commit": "6304b4a2bc4117c54c185a917850c7f65771c163",
+      "last_change_commit": "9b21e3aedccd51ea4c6818bb17981a7ef57902d1",
+      "blob_sha1": "935bc2ed27fd88a357544d7064814c1cecaaed7c",
+      "content_sha256": "002165b461d993288c3931a05786b16dd1693053c2759160b5e4be55e81ffa8c",
+      "bytes": 610,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/6304b4a2bc4117c54c185a917850c7f65771c163/Configs/SpikeSamples/StructTrain/scripts/phase12_wave2_run.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "6304b4a2bc4117c54c185a917850c7f65771c163:Configs/SpikeSamples/StructTrain/scripts/phase12_wave2_run.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Phase12 wave shell orchestration with fixed old workspace/cases, legacy validator and report promotion; not an active native production command. Read in full; no literal executable callers found in pinned root/Bin/PulseLib trees. Dynamic external calls are not excluded.",
+      "original_results": "unchanged; source SHA is script retrieval evidence, not the execution provenance of historical model results"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_wave3_run.sh",
+      "action": "retired_historical",
+      "archive_commit": "6304b4a2bc4117c54c185a917850c7f65771c163",
+      "last_change_commit": "4c43b224e56d7d9a5e016890710acfb51afa8243",
+      "blob_sha1": "2c1e01bc7bd1e4634966631bcc385f7bca7f36bb",
+      "content_sha256": "42fe62801907be940b614cdd6d70aa159a11f826cc6ac63dc98ddea5178dc1a3",
+      "bytes": 1695,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/6304b4a2bc4117c54c185a917850c7f65771c163/Configs/SpikeSamples/StructTrain/scripts/phase12_wave3_run.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "6304b4a2bc4117c54c185a917850c7f65771c163:Configs/SpikeSamples/StructTrain/scripts/phase12_wave3_run.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Phase12 wave shell orchestration with fixed old workspace/cases, legacy validator and report promotion; not an active native production command. Read in full; no literal executable callers found in pinned root/Bin/PulseLib trees. Dynamic external calls are not excluded.",
+      "original_results": "unchanged; source SHA is script retrieval evidence, not the execution provenance of historical model results"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_wave3_run_resume.sh",
+      "action": "retired_historical",
+      "archive_commit": "6304b4a2bc4117c54c185a917850c7f65771c163",
+      "last_change_commit": "055b5355171b8b8128d3547dd5858f2a57aec656",
+      "blob_sha1": "a5fb7437fd2baa1adf1d42a59dc97b030975029f",
+      "content_sha256": "edfc1c927d4e6ea9a87593346c44e83309e68c7e1c78af6b62217311ee4164b2",
+      "bytes": 618,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/6304b4a2bc4117c54c185a917850c7f65771c163/Configs/SpikeSamples/StructTrain/scripts/phase12_wave3_run_resume.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "6304b4a2bc4117c54c185a917850c7f65771c163:Configs/SpikeSamples/StructTrain/scripts/phase12_wave3_run_resume.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Phase12 wave shell orchestration with fixed old workspace/cases, legacy validator and report promotion; not an active native production command. Read in full; no literal executable callers found in pinned root/Bin/PulseLib trees. Dynamic external calls are not excluded.",
+      "original_results": "unchanged; source SHA is script retrieval evidence, not the execution provenance of historical model results"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_wave5_run.sh",
+      "action": "retired_historical",
+      "archive_commit": "6304b4a2bc4117c54c185a917850c7f65771c163",
+      "last_change_commit": "cb2da9ba0a169f0e91d2f3adb1b4455ba7c996af",
+      "blob_sha1": "6deebeebceeffffbdf830c19ab10c1e348ac7eac",
+      "content_sha256": "c5a2769e0eb0270cfa3c9e61e716d8ba20401b8183bd0746be2804ed7cce4f20",
+      "bytes": 3066,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/6304b4a2bc4117c54c185a917850c7f65771c163/Configs/SpikeSamples/StructTrain/scripts/phase12_wave5_run.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "6304b4a2bc4117c54c185a917850c7f65771c163:Configs/SpikeSamples/StructTrain/scripts/phase12_wave5_run.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Phase12 wave shell orchestration with fixed old workspace/cases, legacy validator and report promotion; not an active native production command. Read in full; no literal executable callers found in pinned root/Bin/PulseLib trees. Dynamic external calls are not excluded.",
+      "original_results": "unchanged; source SHA is script retrieval evidence, not the execution provenance of historical model results"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_wave6_run.sh",
+      "action": "retired_historical",
+      "archive_commit": "6304b4a2bc4117c54c185a917850c7f65771c163",
+      "last_change_commit": "0fc624b67e9257d3acedb9c5c460939e103fd269",
+      "blob_sha1": "502a1f9e009ab3de83a0fc59c1c74fdc2814b587",
+      "content_sha256": "86f4b8faaa2c3e2b2e80c734ac06e5ca242fafad9473215f64d0bc5825397e43",
+      "bytes": 2254,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/6304b4a2bc4117c54c185a917850c7f65771c163/Configs/SpikeSamples/StructTrain/scripts/phase12_wave6_run.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "6304b4a2bc4117c54c185a917850c7f65771c163:Configs/SpikeSamples/StructTrain/scripts/phase12_wave6_run.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Phase12 wave shell orchestration with fixed old workspace/cases, legacy validator and report promotion; not an active native production command. Read in full; no literal executable callers found in pinned root/Bin/PulseLib trees. Dynamic external calls are not excluded.",
+      "original_results": "unchanged; source SHA is script retrieval evidence, not the execution provenance of historical model results"
     }
   ],
   "reference_review": {
