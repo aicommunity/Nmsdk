@@ -687,8 +687,10 @@ TEST(NativeLiveFinalizationPlanCodec,ActualDesignRoundtripAndMalformedDeclaratio
         }
     }
     EXPECT_EQ(plans.size(),4);EXPECT_EQ(rejected,32);
-    if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+        ASSERT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
         NmsdkWorker::Write(QString::fromLocal8Bit(output),"live-finalization-plan-codec.json",
             {{"kind","native_live_finalization_plan_codec_control"},{"schema_version",1},{"plans",plans},
              {"malformed_controls",rejected},{"rdk_objects_constructed",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+    }
 }
