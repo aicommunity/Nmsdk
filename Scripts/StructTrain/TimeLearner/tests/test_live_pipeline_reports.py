@@ -17,6 +17,9 @@ from .test_owned_posttune_worker_reports import observations
 
 
 class LivePipelineReportsTest(unittest.TestCase):
+    def source_run(self, name):
+        return self.source/"runs"/name
+
     @classmethod
     def setUpClass(cls):
         if not all(os.environ.get(k) for k in ("TIMELEARNER_LIVE_PIPELINE_CORPUS", "TIMELEARNER_LIVE_PIPELINE_REPORTS")):
@@ -29,7 +32,7 @@ class LivePipelineReportsTest(unittest.TestCase):
 
     def test_full_source_binding_and_every_training_sample_preserved(self):
         for row in self.rows:
-            name = row["name"];source = self.source/"runs"/name/"run-manifest.json";folder = self.reports/name
+            name = row["name"];source = self.source_run(name)/"run-manifest.json";folder = self.reports/name
             original, _, _, _, _, _, packets = read_pipeline_report(source)
             m = load(folder/"manifest.json")
             with self.subTest(run=name):
@@ -52,14 +55,14 @@ class LivePipelineReportsTest(unittest.TestCase):
                         self.assertEqual(meta["trace_quality"]["sample_count"], sum(1 for _ in stream)-1)
                     self.assertEqual(len(meta["figures"]), len(o["specification"]["baseline"]))
                     self.assertGreater(o["specification"]["begin"], previous);previous = o["specification"]["begin"]
-                if not load(self.source/"runs"/name/"native/execution.json")["completed_boundary"]:
+                if not load(self.source_run(name)/"native/execution.json")["completed_boundary"]:
                     self.assertFalse(load(folder/"training/manifest.json")["data_complete"])
                     self.assertFalse((folder/"posttune").exists())
 
     def test_all_patterns_somas_and_readable_zoom_without_downsampling(self):
         from PIL import Image
         for row in self.rows:
-            name = row["name"];root = self.source/"runs"/name;folder = self.reports/name
+            name = row["name"];root = self.source_run(name);folder = self.reports/name
             expected = []
             if row["operation"] == "evaluate":
                 expected = load_evaluation(root/"native/evaluation.json")[1]
@@ -86,7 +89,7 @@ class LivePipelineReportsTest(unittest.TestCase):
                         self.assertIn("Actual shared input", svg.read_text());self.assertTrue(pdf.read_bytes().startswith(b"%PDF-"))
 
     def test_unknown_manifest_and_cli_overlays_rejected_before_output(self):
-        source = self.source/"runs"/self.rows[0]["name"]/"run-manifest.json"
+        source = self.source_run(self.rows[0]["name"])/"run-manifest.json"
         with tempfile.TemporaryDirectory(dir=self.reports.parent) as temporary:
             root = Path(temporary);changed = load(source);changed["unrecognized"] = True
             invalid = root/"invalid-source";invalid.mkdir()
