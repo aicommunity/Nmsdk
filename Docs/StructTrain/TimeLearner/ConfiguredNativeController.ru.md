@@ -6,9 +6,13 @@
 
 `ControllerVersion` по умолчанию 1: существующие конфигурации сохраняют legacy
 dispatch. Значение 2 включает explicit native cold configuration из строкового
-параметра `ControllerConfiguration`. Это JSON schema 1, kind
+параметра `ControllerConfiguration`. Базовый протокол — JSON schema 1, kind
 `timelearner_native_cold_configuration`, с ModelSpec, фактическим профилем
 генератора, начальными ISI, окнами, допусками и конечными бюджетами поиска.
+Schema2 явно задаёт N0 candidate repeats; она не меняет ControllerVersion и не
+совпадает по смыслу с production job schema2 live finalization. N1 использует
+schema1; новая N1 proposal policy не меняет mathematical goal и tolerances,
+см. [MeasuredResistanceRefinement](MeasuredResistanceRefinement.ru.md).
 
 Build разбирает декларацию и выполняет storage-owned cold builder только один
 раз. Последующие Build сохраняют граф и проверяют actual readback. Перед первым
@@ -28,8 +32,11 @@ ISI, а не задаются несогласованными копиями. A
 Callbacks и наблюдения не являются частью конфигурации. Read-only evidence sinks
 подключаются отдельно; ошибки sink отклоняют наблюдение. Общая физика принадлежит
 storage images, индивидуальные начальные Ns/Rs — ModelSpec. Неиспользуемые legacy
-optional C-trim/PostTune/calibration пока отклоняются явно и остаются обязательной
-незавершённой частью полного рефакторинга.
+optional PostTune/calibration без armed native finalization plan отклоняются
+явно. Production job schema2 уже выполняет отдельный
+[native live finalization](NativeLiveFinalization.ru.md) с проверяемым планом;
+legacy flags не заменяют такой план. Optional C-trim в native training всё ещё
+не поддержан и остаётся обязательной незавершённой частью полного рефакторинга.
 
 `ConfiguredModelInitialized` — сохраняемый guard холодного построения. Если после
 Load/Copy имеется этот marker, но отсутствует process-local native declaration,
