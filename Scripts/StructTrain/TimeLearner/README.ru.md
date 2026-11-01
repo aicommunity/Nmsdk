@@ -330,7 +330,7 @@ Source этих контрольных моделей имеет search_unresolv
 data, без шаблонного Test fallback. Первый выпуск требует optional modes Off
 и reset-per-trial evaluation. Общая очередь и полная матрица остаются открытыми.
 
-# Адресный анализ native ModelArchive transfer
+## Адресный анализ native ModelArchive transfer
 
 Для schema1 characterization fixture поддерживается отдельный модуль:
 
