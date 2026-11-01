@@ -5,6 +5,13 @@
 этап0; остальные этапы выполнены частично. Научное8/8 не является условием
 рефакторинга. Зелёный тест отдельного API не заменяет матрицу режимов.
 
+Дополнение миграции: удалены оставшиеся5 исторических normsync Python и
+standalone segsim.c. Manifest содержит36 retired records; Elder проверил
+retrieval всех36, отсутствие путей и сохранность всех5 JSON. Receipt
+58be4e41c2d095318d3260e634769f9b42d101b4 и границы проверки описаны в
+[ScriptMigration](ScriptMigration.ru.md). Другие Docs/Bin/PulseLib/Reports
+инструменты и полный этап9 остаются открытыми; численные результаты не менялись.
+
 Дополнительно принят адресный контур [реальной N1-калибровки](PositiveN1Calibration.ru.md):
 на каждом worker20 полных реально измеренных матриц /160 проб,4/4 reader checks;
 20 temporal matrices /240 trial-soma pairs,3/3 report checks и28 непосредственно
