@@ -439,3 +439,62 @@ TEST(BoundedTrainingN0Candidates, ClassicTimingReadyLengthGetsNearbyNsBeforeDist
 {JointN0Candidate(ProbeRouting::ClassicBurst);}
 TEST(BoundedTrainingN0Candidates, BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths)
 {JointN0Candidate(ProbeRouting::BranchSoloBurst);}
+
+TEST(BoundedTrainingN0Candidates, LengthOnlySearchKeepsItsOriginalBudget)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration();cfg.maximumCandidatesPerInput=5;
+        cfg.bounds={{1,20,1,2,1.,100.},{1,1,1,1,1.,100.}};
+        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+        DriveTraining(session,p,[](const TrainingAction& a,auto& delay,auto&) {
+            delay[0]=a.parameters[0].length==5?.13:.03;
+        });
+        ASSERT_EQ(session.Status(),TrainingStatus::Exact);
+        EXPECT_EQ(session.Parameters()[0],(InputParameters{5,1,10.}));
+        ASSERT_EQ(session.Evidence().size(),5u);
+        for(const auto& e:session.Evidence())EXPECT_EQ(e.parameters.synapses,1);
+    }
+}
+TEST(BoundedTrainingN0Candidates, WorseNeighborReturnsToLengthsAndIsNotIssuedTwice)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration();cfg.maximumCandidatesPerInput=40;
+        cfg.bounds={{2,3,1,2,1.,100.},{1,1,1,1,1.,100.}};
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
+        DriveTraining(session,p,[](const TrainingAction& a,auto& delay,auto& raw) {
+            delay[0]=a.parameters[0].synapses==1?.13:.03;
+            raw[0]+=.002;
+        });
+        EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+        ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
+        // Four unique legal candidates, followed by the mandatory fresh best
+        // restoration measurement. Priority points are not retried by fallback.
+        ASSERT_EQ(session.Evidence().size(),5u);
+        EXPECT_EQ(session.Evidence()[0].parameters,(InputParameters{2,1,10.}));
+        EXPECT_EQ(session.Evidence()[1].parameters,(InputParameters{2,2,10.}));
+        EXPECT_EQ(session.Evidence()[2].parameters,(InputParameters{3,1,10.}));
+        for(std::size_t i=0;i<4;++i)for(std::size_t j=i+1;j<4;++j)
+            EXPECT_NE(session.Evidence()[i].fullParameters,session.Evidence()[j].fullParameters);
+    }
+}
+TEST(BoundedTrainingN0Candidates, PriorityWaitsForAllRequiredObservations)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.maximumCandidatesPerInput=3;cfg.n0CandidateRepeats=2;
+    cfg.bounds={{1,20,1,2,1.,100.},{1,1,1,1,1.,100.}};
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+    DriveTraining(session,p,[](const TrainingAction& a,auto& delay,auto& raw) {
+        delay[0]=a.parameters[0].length==2?.13:.03;
+        if(a.parameters[0].synapses==1)raw[0]+=.002;
+    });
+    ASSERT_EQ(session.Status(),TrainingStatus::Exact);
+    ASSERT_EQ(session.CandidateRepeats().size(),3u);
+    for(const auto& group:session.CandidateRepeats())
+    {
+        EXPECT_TRUE(group.complete);ASSERT_EQ(group.trialIds.size(),2u);
+        EXPECT_NE(group.trialIds[0],group.trialIds[1]);
+        EXPECT_NE(group.anchorTrialIds[0],group.anchorTrialIds[1]);
+    }
+    EXPECT_EQ(session.CandidateRepeats().back().fullParameters[0],(InputParameters{2,2,10.}));
+}

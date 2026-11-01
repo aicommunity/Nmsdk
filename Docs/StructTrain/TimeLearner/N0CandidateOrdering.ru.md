@@ -42,3 +42,12 @@ Ns128/quantization, repeated observations, Branch shared banks, бюджет/sto
 invalid peaks и финальную проверку всех входов. Нужна последующая реальная
 native N0-проверка edits/амплитуд/времени; unit oracle её не заменяет. N1 dynamic
 mesh и полный profile/frequency/dimension coverage остаются отдельным остатком.
+
+## Baseline M40
+
+Неизменённое ядро f23d1b8d с root31934548524ab0da77311f4fc046db05cdf69b81
+воспроизвело оба expected failures: SearchUnresolved, сохранён L2/Ns1,
+L2/Ns2 не измерен. ASan native XML:2 cases/2 failures; supervisor0 означает
+успех воспроизведения ожидаемого отказа, не прохождение tests. Runtime
+before/after совпал. Данные пока в readbacks/s07-n0-candidate-order-baseline-asan-a1
+на M40; Git publication и исправление ещё ожидают приёмки.
