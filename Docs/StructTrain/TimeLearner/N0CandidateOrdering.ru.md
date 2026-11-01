@@ -51,3 +51,7 @@ L2/Ns2 не измерен. ASan native XML:2 cases/2 failures; supervisor0 оз
 успех воспроизведения ожидаемого отказа, не прохождение tests. Runtime
 before/after совпал. Данные пока в readbacks/s07-n0-candidate-order-baseline-asan-a1
 на M40; Git publication и исправление ещё ожидают приёмки.
+
+Baseline опубликован: Reports/StructTrain/TimeLearner/s07-n0-candidate-order-baseline-asan-a1,
+commit72d9df51a9684f1bdd485c7998ae065eb6defaa4. Проверены outer hashes и
+21 member; архив10724 bytes. Исправленный root942e5df45 ожидает ASan приёмку.

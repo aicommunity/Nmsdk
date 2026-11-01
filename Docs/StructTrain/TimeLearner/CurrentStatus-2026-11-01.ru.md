@@ -496,3 +496,25 @@ child develop heads. Новый algorithm substage — codex/timelearner-n0-cand
 [N0 hypothesis и gates](N0CandidateOrdering.ru.md): сначала воспроизведение
 ограничения перебора на unchanged production kernel, затем измеряемое изменение
 порядка кандидатов. Full-stage7 и физическая N0 матрица пока не приняты.
+
+## N0: воспроизведение ограничения бюджета и проверяемое исправление
+
+M40 baseline supervisor135125 завершён0; native tests2/2 ожидаемо упали,
+process return1. На unchanged Coref23d1b8d / root31934548524ab0da77311f4fc046db05cdf69b81
+Classic и Branch оставили L2/Ns1 и SearchUnresolved: ближайшее L2/Ns2 не
+измерено. Это controlled production-kernel oracle, не физический эксперимент.
+Proof72d9df51a9684f1bdd485c7998ae065eb6defaa4 опубликован и включён --no-ff;
+21 archive member и outer hashes проверены локально,10724 compressed bytes.
+
+Corec25db29 предлагает соседние Ns после полного измеренного улучшения
+rank у timing-ready/amplitude-invalid кандидата; full geometry legality,
+fixed anchor, fresh anchor/input, repeats и final gate сохранены. Дубликаты
+кандидатов не расходуют бюджет повторно. Дополнительные regression cases
+проверяют length-only поиск, хуже работающий сосед/возврат к длинам, repeats.
+Docs-only Pulsee4978a2 имеет тот же Core tree64cdc352af865dc0e860ea05fb2c6d9799ccc36e.
+
+Исправленный root942e5df4559467a9a19c56755f945ce6501e7780 собирается/проверяется
+на M40 в readbacks/s07-n0-candidate-order-fixed-asan-a1, supervisor137298.
+На последней проверке процесс жив; production Core собран, интеграционные
+тесты ещё компилируются. Runtime/source активного задания не менялись.
+Новая feature не принята в develop; full stage7 и физическая матрица открыты.
