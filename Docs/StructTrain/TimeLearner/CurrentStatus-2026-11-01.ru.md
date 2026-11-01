@@ -6,15 +6,28 @@ MDMatrix resize. Оба workers прошли10 math+32 native+21 regression+16 r
 в cache и30 directly reviewed selected PNG. Child mergesPulseLibe51c702 /
 Rdk78e51a9b опубликованы с trees, равными проверенным исходникам. Root exact
 closure фиксируется в текущем acceptance merge. [Подробности](LoadedLearnerReadout.ru.md).
-Полные этапы4/11 и цель0–12 остаются открытыми. Warm learner Reset — отдельная
-адресно принятая feature: normal и ASan прошли8 warm+32 loaded+21 regression
-без skips; readers16+16 на ASan проверили все84 case/soma pairs,40 CSV
-побайтово равны normal. Все178 temporal PNG проверены автоматически,18 selected
-оригиналов просмотрены. Primary ASan3600a729a07032b369e54d6d191e7ded5a442672
+Полные этапы4/11 и цель0–12 остаются открытыми. Warm learner Reset принят адресно
+в root develop469cd0597a9273b3ae54bcc6fefff338b06f67a5: normal и ASan прошли
+8 warm+32 loaded+21 regression без skips; readers16+16 на ASan проверили все84
+case/soma pairs,40 CSV побайтово равны normal. Все178 temporal PNG проверены
+автоматически,18 selected оригиналов просмотрены. ASan primary3600a729a07032b369e54d6d191e7ded5a442672
 проверен после Git retrieval:355 members/418980 bytes и все hashes.
 PulseLib develop merge70f467d3b66ea4defdec2f58b84e76b692ab3602 сохраняет tree
-проверенного6cfcca0c. [Границы приёмки](HotLearnerReset.ru.md). Hot XML32
-остаётся отдельной feature; полная lifecycle/physics матрица не закрыта.
+проверенного6cfcca0c. [Границы приёмки](HotLearnerReset.ru.md).
+
+В зависимой feature [hot XML](HotXmlReset.ru.md) normal прошёл32 native cases
+Classic/Branch × N1/2/4/6 ×2000/20000Hz ×Parameters-only/Parameters+State.
+Production reader проверил68 case/soma pairs и18 data/corruption tests;
+warm/loaded compatibility —16/16 каждый. Primary опубликован в59a8e1491b925510299e3c04bed360e000e082d8.
+Все1476 temporal PNG проверены автоматически; все26 выбранных оригиналов1920×960
+непосредственно просмотрены, включая input/peak zooms. Запись просмотра и hashes
+опубликованы вb1cdf435d673d8d4e303b9dfa88b1283b21e2dc9. Полный cache остаётся наM40;
+его ручной просмотр не заявляется. XML ASan32/32 завершён; readers18/16/16
+прошли, все64 warm/replay CSV побайтово равны normal. Primary8ac617120ab0a58f207f2175ea85ce58b89b2bbd
+проверен после Git retrieval:290 members/285528 bytes, все outer/member hashes.
+Оба supervisor834822 и reader838718 завершены. Подэтап принят адресно;
+arbitrary-precision matrix/storage/growth и полные этапы4/5/11 остаются открытыми.
+Этот контроль Load/Init/Reset не подтверждает классификацию или mid-probe checkpoint.
 Ранние статусы ниже являются историческими снимками.
 
 
