@@ -830,3 +830,22 @@ PulseLib bf50ae57512ff0a1591937f4f23cef172a8928dc); новые normal/ASan сб�
 [MeasuredResistanceRefinement](MeasuredResistanceRefinement.ru.md).
 
 Уточнение N1 сборок: normal a1 прошёл40/40 C++ cases и Console snapshot (исходникиe19a303f/bf50ae57). Normal a2 завершился compile_error в optional source-profile guard; исправление521df5450c3655e0f08b3a01a7aed7d18351c250 требует normal a3 и актуальной ASan проверки. Все прежние попытки сохранены; полного runtime-прохождения нового N1 поиска пока нет.
+# Актуализация: N1 measured refinement, адресные положительные controls
+
+Текущий код root `6ab3b0b3953b132c54a0c4db3662cec80f7f81b9` / PulseLib
+`521df5450c3655e0f08b3a01a7aed7d18351c250` проверен normal a3 (40/40)
+и ASan a2 (32/32 выбранных C++ cases). Console и runtime snapshot завершены.
+Реальные cold Train на одинаковых исходных jobs: Classic Exact и Branch Exact
+на каждом worker, по 2/2 reader checks. Амплитудный остаток входа0
+`-9.574000452428066e-7` укладывается в исходные `1e-5`; timing около `-0.019 s`
+в пределах исходных `0.02 s`. L и Rs действительно изменены, опора сохранена.
+Собственные CapturedPerInput не заменены общей амплитудой.
+
+Proof commits: normal `bcbd30f1d87e352825e6c8400c5b929eff184ae5`, ASan
+`44858d7fb92a330470f50741fb862f9f8db23840`. Сравнение относится к старой
+finite mesh V2 и новой measured-refinement V2. Оно не воспроизводит август
+и не доказывает классификацию: это bare Train двухвходовых моделей при 2000 Гц.
+Полные temporal reports строятся на M40; visual proof, export/frozen Test
+этих положительных моделей и полный исходный план ещё не завершены.
+Feature пока не develop. Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
+

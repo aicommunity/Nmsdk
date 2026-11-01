@@ -85,7 +85,7 @@ endpoint-кандидатов; N0 и standalone arithmetic callers без domain
 `2b5af8c191b6ea20dff0f8b676e702db8c53c82f`, с прежним PulseLib develop38edfcad.
 Эта N1 feature объединена с ним через отдельный merge, без переписывания истории.
 
-Новые изолированные normal/ASan сборки a1 запущены из root
+Первые изолированные normal/ASan сборки a1 были запущены из root
 `e19a303f2d9252a5179ad0f457593e48c0c35fd1` / PulseLib
 `bf50ae57512ff0a1591937f4f23cef172a8928dc`. После запуска локально добавлен
 guard амплитуды источника (PulseLib `1dddf1b861546eb8e7802ab4ff6610ef2844520e`)
@@ -94,9 +94,12 @@ guard амплитуды источника (PulseLib `1dddf1b861546eb8e7802ab4f
 и тесты актуального commit после подтверждённого завершения a1; её результаты
 не разрешается подменять результатами предыдущего commit.
 
-Для исходного finite-mesh kernel дополнительно запущен ASan physical baseline
+Для исходного finite-mesh kernel дополнительно выполнен ASan physical baseline
 `/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-n1-mesh-asan-a1`.
-Результат и временные отчёты этого N1 сравнения ещё не приняты.
+Оба реальных Train дали SearchUnresolved, reader 2/2; proof commit
+`1f14f6c031dae019733d52815737e1896532064f`. Его временные отчёты содержат
+292 пары probe/soma, проверены тремя production report tests; ручная проверка
+выбранных рисунков и публикация visual proof остаются отдельными действиями.
 
 Normal a1 завершён: 40/40 выбранных C++ cases, включая 7 новых helper/kernel
 cases, Console и runtime snapshot; wall1083.99 s. Это снимок e19a303f/bf50ae57,
@@ -110,4 +113,45 @@ Normal a2 (roota8709e79/Pulsec89a067e) остановился на компил�
 Исправление PulseLib `521df5450c3655e0f08b3a01a7aed7d18351c250` проверяет наличие
 профиля и использует `->amplitude`; при отсутствии профиля refinement не
 предлагается. Неудачная попытка сохранена в отдельных receipts и не считается
-прохождением тестов. Требуется normal a3 и актуальная ASan сборка после a1.
+прохождением тестов. Ниже приведена последующая проверка исправленного commit.
+
+### Адресная проверка актуального кода
+
+Runtime source root `6ab3b0b3953b132c54a0c4db3662cec80f7f81b9`, PulseLib
+`521df5450c3655e0f08b3a01a7aed7d18351c250`:
+
+| Проверка | Elder normal | M40 ASan |
+|---|---|---|
+| Текущая сборка | a3: 40/40 C++ cases, Console и snapshot | a2: 32/32 C++ cases, Console и snapshot |
+| Реальные cold N1 Train | Classic Exact; Branch Exact | Classic Exact; Branch Exact |
+| Проверка одинаковых исходных условий и финального gate | 2/2 reader tests | 2/2 reader tests |
+
+Текущий ASan набор включает весь изменённый helper/kernel и два native
+read-only preview. Все десять native-domain regressions, включая 20000 Гц,
+ранее прошли на ASan a1; эти depth=0 пути не меняет последующий guard.
+Ненулевой refinement на реальной физике пока проверен только при 2000 Гц,
+двух входах и указанных профилях. `detect_leaks=0`: отсутствие утечек не доказано.
+
+В обоих runtime исходная finite-mesh версия давала SearchUnresolved,
+а measured refinement — Exact при тех же job declarations, исходных моделях,
+CapturedPerInput и допусках. Получено Rs[0]=64369082.70599112, L[0]=2,
+Ns[0]=1; опорный вход сохранён L=1, Ns=1, Rs=86000000.
+Свежий финальный амплитудный остаток входа0 равен
+`-9.574000452428066e-7` при допуске `1e-5`, временной — около `-0.019 s`
+при допуске `0.02 s`. Собственные reference amplitudes входов различны:
+0.004590480933837182 и 0.005492406840386876. Общая цель A* не вводилась.
+
+Источники: normal proof commit
+`bcbd30f1d87e352825e6c8400c5b929eff184ae5`, ASan proof commit
+`44858d7fb92a330470f50741fb862f9f8db23840`; каталоги
+`Reports/StructTrain/TimeLearner/s07-n1-refinement-build-{normal,asan}-a1`
+и `s07-native-n1-refined-{normal,asan}-a1`. Сжатые архивы содержат первичные
+JSON/CSV, модели, runtime и receipts с пофайловыми SHA256. Reader source:
+`9699cd85c5bcf2c41c3662a4571960ab04eaca1a`.
+
+Это сравнение двух вариантов контроллера V2, а не исторический replay августа
+и не сравнение legacy V1/V2. Научная классификация, export/frozen evaluation
+этих положительных моделей и полная матрица остаются отдельными проверками.
+Временные отчёты строятся из всех реальных проб с наложенными входами;
+полный кэш хранится на M40, выбранные рисунки и metadata публикуются в Git.
+До завершения этой визуальной приёмки feature не объединяется в develop.
