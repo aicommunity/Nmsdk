@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools retired; active Bin Branch dynamics analyzer and six regressions migrated to root. Docs Python, remaining active/historical Bin tools and Reports receipts remain to migrate.",
+  "scope": "27 historical root Docs shell tools and3 one-off NSR/NSC Python tools retired; active Bin Branch dynamics analyzer and six regressions migrated. Remaining Docs Python/Bin/Reports tools and production CLI migration are incomplete.",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -517,6 +517,63 @@
       "replacement": null,
       "reason": "Historical October queue/replay/jitter/similarity/offload shell; fixed archived cases/runtime paths, monkeypatch and old result criteria, or non-Git rsync synchronization. Current Scripts/Tests/App and submodule script trees have no literal dependency. No scientific result is deleted.",
       "original_results": "preserved; snapshot is script retrieval source, not original execution provenance"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsr.py",
+      "action": "retired_historical",
+      "archive_commit": "044c76d1b1cbe35b2747285ef296ac22afe976ce",
+      "last_change_commit": "6cefd37dea0bd6f739f5a9a2ec15f6457456ed08",
+      "blob_sha1": "f257c2c42717c90f1936c55cb3069bde534ad986",
+      "content_sha256": "a974fb5b7b19ac50abb053d6c3e44fe151d9cb8c39d5ca815033dd963310370d",
+      "bytes": 2137,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/044c76d1b1cbe35b2747285ef296ac22afe976ce/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsr.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "044c76d1b1cbe35b2747285ef296ac22afe976ce:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsr.py"
+      ],
+      "replacement": null,
+      "reason": "Fixed NSR2026-10-25 job generator; absolute old build_rs executable, fixed E1/E2/E5 groups and legacy parameter sets. No active root/Bin/PulseLib caller found.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsc.py",
+      "action": "retired_historical",
+      "archive_commit": "044c76d1b1cbe35b2747285ef296ac22afe976ce",
+      "last_change_commit": "6cefd37dea0bd6f739f5a9a2ec15f6457456ed08",
+      "blob_sha1": "9b2906d0403d7eae07b04122638a9f5faf2d5d37",
+      "content_sha256": "7b5aec93991511431fd19804b80701b4373fea2825e2efa822e3f58dca88c07e",
+      "bytes": 1157,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/044c76d1b1cbe35b2747285ef296ac22afe976ce/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsc.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "044c76d1b1cbe35b2747285ef296ac22afe976ce:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/gen_nsc.py"
+      ],
+      "replacement": null,
+      "reason": "Fixed NSC2026-10-25 campaign generator importing retired gen_nsr through an absolute old workspace. No active caller found.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/ns_readback.py",
+      "action": "retired_historical",
+      "archive_commit": "044c76d1b1cbe35b2747285ef296ac22afe976ce",
+      "last_change_commit": "6cefd37dea0bd6f739f5a9a2ec15f6457456ed08",
+      "blob_sha1": "a4a6c32ececd0c023e00f847b4a2fee5a7fd7261",
+      "content_sha256": "386a045dcd5bbf7eb680cb95970d999b6c54cc135f8b22eb92e8b6712add2f3e",
+      "bytes": 2244,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/044c76d1b1cbe35b2747285ef296ac22afe976ce/Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/ns_readback.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "044c76d1b1cbe35b2747285ef296ac22afe976ce:Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync/ns_readback.py"
+      ],
+      "replacement": null,
+      "reason": "One-off legacy e05/NSR/NSC inspection CLI; executes at import, masks missing artifacts and uses regex/heuristic phase parsing. Not a current effective-configuration validator and has no active caller.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not an execution provenance claim"
     }
   ],
   "reference_review": {
