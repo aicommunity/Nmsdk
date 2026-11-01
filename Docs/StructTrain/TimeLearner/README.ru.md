@@ -28,6 +28,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Первоначальный Git inventory (исторический снимок)](source_inventory.json).
 - [Владельцы18 параметров поиска, окон и интервалов: legacy и V2](ParameterSearchContracts.ru.md).
 - [Неконечные timing values: воспроизведённый дефект и проверка исправления](TimingFiniteValidation.ru.md).
+- [Native preflight и декларативный prepare: normal evidence и незавершённая приёмка](NativePreflight.ru.md).
 - [Контракт наблюдений и оценки](ObservationContract.ru.md).
 - [Readback фактического графа модели](ModelInspection.ru.md).
 - [Lifecycle/storage: ход проверки и оставшиеся ограничения](Stage04-Progress.ru.md).

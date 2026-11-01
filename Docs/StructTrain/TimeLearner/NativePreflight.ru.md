@@ -1,6 +1,7 @@
 # Эффективная проверка перед cold Train
 
-Рабочая реализация отдельного native preflight; приёмка пока не завершена.
+Рабочая реализация отдельного native preflight; совместная normal/ASan приёмка
+пока не завершена. Normal-корпус уже проверен, источники приведены ниже.
 Команда использует тот же training job schema1/2 и тот же путь создания owner,
 регистрации immutable storage profiles, Build/Init/Reset, проверки параметров
 и semantic graph identity, что и production Train.
@@ -40,5 +41,45 @@ owned process и загруженные файлы штатным путём. Po
 частот, нулевой measurement budget, запрет старта Train; реальные one-tick
 Train controls для общего подготовительного пути; rehashed corruptions
 clock/training flags/parameters/integration/extra certificate. Сборки и тесты —
-на Elder/M40, без локальной численной приёмки. На этом снимке эти проверки
-ещё не выполнены; полные этапы2/4/9/10 остаются открытыми.
+на Elder/M40, без локальной численной приёмки. Полные этапы2/4/9/10 открыты.
+
+## Normal evidence
+
+На Elder root `ec24ae157fff785ead8a38bc658c55bd18e5ae0c` прошёл14 реальных
+schema1/2 jobs Classic/Branch,N0/N1,2inputs,2000Hz; отклонены6 неверных
+деклараций, включая legacy SyncTolerance в V2 JSON. Два one-tick Train получили
+идентичный initial-state с preflight и остановились по заявленному бюджету,
+а не завершили обучение. Все10 actual-data/corruption checks прошли без skips.
+
+Primary commit `aded6d28f0a16327fb536e3090c3cd5db93158bc`:
+[отчёт и все входы/исходы](../../../Reports/StructTrain/TimeLearner/s09-native-preflight-current-normal-a1/README.md).
+Проверены все276 members и outer hashes; сжатый архив108128 B. ASan и полная
+размерная/физическая матрица пока не приняты. Ни один исход не является
+доказательством научной классификации.
+
+## Подготовка размерной матрицы
+
+Для следующей проверки добавлен production `prepare SPEC.json --output NEW_DIR`.
+Он не выполняет модель. SPEC schema1 имеет kind
+`timelearner_native_matrix_preparation`, четыре полных cold templates в
+`templates` (ключи Classic-N0,Classic-N1,Branch-N0,Branch-N1), массивы
+`input_counts` и `frequencies_hz`, положительные `isi_seconds`, `probe_duration`,
+`window_width`, N0 `n0_candidate_repeats`2..128 и непустой `run_prefix`.
+
+Для каждого N сохраняются параметры и bounds последнего опорного входа исходного
+template; копируется только первый неопорный вход. Storage profile definitions
+не меняются, никакой fallback C не подставляется. При N=1 остаётся исходный
+опорный вход. Inhibition templates отвергаются до явного определения remapping;
+live finalization templates также не превращаются неявно в cold templates.
+Допуски амплитуды/синхронизации не масштабируются при смене N или частоты.
+Проверяются clipping окон, уникальность осей и ограничение sample budget.
+
+Output содержит specification.json, jobs/*.json и signed manifest. Поля
+runtime_checked/effective_model_checked/training_started остаются false;
+подготовленные jobs требуется реально проверить через preflight.
+
+Две первые попытки дополнительного размерного запуска не запустили модели:
+ошибочный импорт verify_runtime, затем несовпадение QT_QPA_PLATFORM с сохранённым
+runtime. Их исходные receipts сохраняются; это setup failures, не отрицательные
+результаты моделей. Генерация jobs переносится из одноразового launcher в prepare;
+его серверная приёмка и повтор размерной проверки ещё впереди.
