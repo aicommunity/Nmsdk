@@ -62,9 +62,12 @@ def inspect_attempt(directory):
             "owned_process": owned, "scientific_verdict": None}
 
 
-def execute(manifest, arguments, working_directory, output, maximum_wall_seconds, cancel_file=None, terminate_grace_seconds=2.):
+def execute(manifest, arguments, working_directory, output, maximum_wall_seconds, cancel_file=None,
+            terminate_grace_seconds=2., cooperative_capture=False):
     require(hasattr(os, "pidfd_open") and hasattr(signal, "pidfd_send_signal"), "linux_pidfd_support_required")
     require(type(arguments) is list and all(type(a) is str and "\0" not in a for a in arguments), "invalid_process_arguments")
+    require(type(cooperative_capture) is bool and all(a.split("=", 1)[0] != "--timelearner-capture-directory"
+            for a in arguments), "capture_directory_is_supervisor_owned")
     require(type(maximum_wall_seconds) in (int, float) and math.isfinite(maximum_wall_seconds)
             and maximum_wall_seconds > 0, "invalid_wall_budget")
     require(type(terminate_grace_seconds) in (int, float) and math.isfinite(terminate_grace_seconds)
@@ -74,6 +77,9 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
     require(cwd.is_dir(), "invalid_process_working_directory")
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
+    arguments = list(arguments)
+    if cooperative_capture:
+        arguments.extend(["--timelearner-capture-directory", str(output)])
     cancel = Path(cancel_file).resolve() if cancel_file is not None else output/"cancel.request"
     require(not cancel.exists(), "cancellation_request_already_exists")
     _write(output/"runtime.json", manifest)
@@ -97,8 +103,25 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
                          "executable": str(executable), "executable_sha256": manifest["executable"]["sha256"],
                          "runtime_fingerprint": manifest["runtime_fingerprint"]}
                 _write(output/"owned-process.json", owned)
-                mappings = loaded_process_files(process.pid, executable)
-                _write(output/"loaded-files.json", mappings)
+                ready_path = output/"capture-ready.json"
+                if cooperative_capture:
+                    while not ready_path.exists() and process.poll() is None and not cancel.exists() and \
+                            time.monotonic()-begin < maximum_wall_seconds:
+                        time.sleep(.002)
+                    if ready_path.exists():
+                        ready = load(ready_path)
+                        require(type(ready) is dict and type(ready.get("schema_version")) is int and
+                                type(ready.get("pid")) is int and ready == {"kind": "native_runtime_capture_ready", "schema_version": 1,
+                                "pid": owned["pid"], "start_ticks": owned["start_ticks"]} and
+                                _start_identity(process.pid) == owned["start_ticks"], "cooperative_capture_identity_changed")
+                    else:
+                        mapping_error = "cooperative_capture_not_ready"
+                if not cooperative_capture or ready_path.exists():
+                    mappings = loaded_process_files(process.pid, executable)
+                    _write(output/"loaded-files.json", mappings)
+                    if cooperative_capture:
+                        _write(output/"capture-ack.json", {"kind": "native_runtime_capture_ack", "schema_version": 1,
+                               "pid": owned["pid"], "start_ticks": owned["start_ticks"]})
             except RuntimeError as error:
                 if "no executable mappings" not in str(error):
                     raise EvidenceError("loaded_runtime_integrity_failure:"+str(error)) from error
@@ -156,12 +179,14 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--wall-seconds", type=float, required=True)
     parser.add_argument("--cancel-file", type=Path)
+    parser.add_argument("--cooperative-runtime-capture", action="store_true",
+                        help="capture actual mappings at the supported native Console exit boundary")
     parser.add_argument("arguments", nargs=argparse.REMAINDER)
     args = parser.parse_args(argv)
     arguments = args.arguments[1:] if args.arguments[:1] == ["--"] else args.arguments
     try:
         result = execute(load(args.runtime_manifest), arguments, args.working_directory, args.output,
-                         args.wall_seconds, args.cancel_file)
+                         args.wall_seconds, args.cancel_file, cooperative_capture=args.cooperative_runtime_capture)
         print(json.dumps(result, ensure_ascii=False, allow_nan=False))
         return 0 if result["execution"] == "completed" else 2
     except (EvidenceError, OSError, KeyError, TypeError, ValueError) as error:
