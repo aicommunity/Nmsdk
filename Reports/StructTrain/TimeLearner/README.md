@@ -259,3 +259,14 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   all56 declared training trials /84 soma pairs,3 N0 visual checks and3 shared
   historical regression checks. Eight selected1920x960 PNG directly reviewed;
   full derived cache remains on M40 Data, no full-cache manual acceptance.
+
+- [N0 ASan regression](s07-n0-candidate-order-asan-a2/README.md):31/31 native
+  and4/4 primary-data checks,56 probes;201 verified members/348832 bytes.
+- [Configured N0 repeats, normal](s07-n0-candidate-order-repeated-normal-a1/README.md)
+  and [ASan](s07-n0-candidate-order-repeated-asan-a1/README.md):each3 native +3
+  primary checks,48 actual probes/10 groups.125 members per proof.
+- [N0 ASan temporal](s07-n0-candidate-order-visual-asan-a2/README.md):56/84,3 checks,
+  eight exact reviewed normal PNG references; no new image copies.
+- [Repeated N0 temporal, normal](s07-n0-candidate-order-repeated-visual-normal-a1/README.md)
+  and [ASan](s07-n0-candidate-order-repeated-visual-asan-a1/README.md):each48/72,
+  three checks. Four normal PNG directly reviewed;four exact ASan references.
