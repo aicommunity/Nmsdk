@@ -77,10 +77,20 @@ Git, полные производные отчёты остаются на M40 
 
 ## Текущая последовательность приёмки
 
-1. Объединить проверенный production N0 подэтап; его primary/temporal evidence
+1. Production N0 подэтап объединён merge commit
+   `674a7834f5440a7a07a17692fec6bf446731c0eb`; primary/temporal evidence
    завершены. Следующая алгоритмическая работа — реальные positive controls,
    размерности и physical cases для proposal policy, а не расширение claim
    по одному прохождению ограниченного negative corpus.
+   [Контроль размерности](NativeDimensionControls.ru.md) уже выполняется в новой
+   feature-ветке: normal 16/16 и ASan 16/16; temporal приёмка завершена:
+   16 dimension и 2 proposal reports с общими normal/ASan значениями,
+   20 выбранных PNG прямо просмотрены. Полная ручная приёмка cache не заявлена.
+   N=1 Exact здесь проверяет тождественную модель и
+   свежий final gate; это не подтверждение успешного изменения геометрии.
+   Дополнительный normal N0 контроль уже физически подтвердил timing-ready
+   L2 → соседний Ns2 до L3 для Classic/Branch; ASan-аналог также подтверждён.
+   Все четыре Train при этом SearchUnresolved; классификация не проверялась.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
