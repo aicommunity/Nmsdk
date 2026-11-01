@@ -99,7 +99,8 @@ UEPtr<NPulseNeuron> Prepared(unsigned int frequency, bool precise = false, bool 
 }
 
 QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency, NConstGenerator* boundary = nullptr,
-                   QJsonArray* actualInputs = nullptr, QJsonArray* somaSignal = nullptr)
+                   QJsonArray* actualInputs = nullptr, QJsonArray* somaSignal = nullptr,
+                   QJsonArray* sampleClock = nullptr)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     // Environment advances time using its current model's rate. A detached
@@ -120,6 +121,9 @@ QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency, NConstGene
     for(unsigned int tick = 0; tick < frequency / 10; ++tick)
     {
         const double time = double(tick) / frequency, stimulus = time >= .005 && time < .006 ? 1. : 0.;
+        const double nativeTime=core.environment->GetTime().GetDoubleTime();
+        if(!std::isfinite(nativeTime) || std::abs(nativeTime-time)>1e-12)
+            throw std::runtime_error("archive fixture native clock differs from declared grid");
         if(boundary) boundary->Output.Assign(1,1,stimulus);
         for(int i = 1; i <= 3; ++i)
         {
@@ -136,6 +140,7 @@ QJsonArray Waveform(UEPtr<UContainer> neuron, unsigned int frequency, NConstGene
         trace.append(value);
         if(actualInputs) actualInputs->append(input);
         if(somaSignal) somaSignal->append(somaValue);
+        if(sampleClock) sampleClock->append(nativeTime);
     }
     model->DelComponent(name, false); core.environment->DestroyModel();
     return trace;
@@ -219,8 +224,8 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
     ASSERT_TRUE(model);
     const auto expectedIdentity = archive["graph"].toObject()["identity"].toObject();
     EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(expectedIdentity, model,ports)["match"].toBool());
-    QJsonArray inputs,soma;
-    const auto actual = Waveform(model, static_cast<unsigned int>(fixture["frequency_hz"].toInt()),boundary.Get(),&inputs,&soma);
+    QJsonArray inputs,soma,clock;
+    const auto actual = Waveform(model, static_cast<unsigned int>(fixture["frequency_hz"].toInt()),boundary.Get(),&inputs,&soma,&clock);
     const auto expected = fixture["waveform"].toArray(); ASSERT_EQ(actual.size(),expected.size());
     double error = 0., low = 0., high = 0.;
     for(int i=0;i<actual.size();++i)
@@ -233,6 +238,7 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
     if(fixture.contains("actual_input"))
     {
         EXPECT_EQ(inputs,fixture["actual_input"].toArray());
+        if(fixture.contains("time_s")) EXPECT_EQ(clock,fixture["time_s"].toArray());
         const auto expectedSoma=fixture["soma"].toArray();ASSERT_EQ(soma.size(),expectedSoma.size());
         for(int i=0;i<soma.size();++i)
             somaError=std::max(somaError,std::abs(soma[i].toDouble()-expectedSoma[i].toDouble()));
@@ -242,7 +248,8 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
     const char* output = std::getenv("TIMELEARNER_ARCHIVE_CHILD_OUTPUT");
     if(output) Write(QString::fromLocal8Bit(output), QJsonObject{{"max_pairwise_error",error},{"samples",actual.size()},
         {"identity",NmsdkTools::IdentifyModel(model,ports)},{"waveform",actual},
-        {"actual_input",inputs},{"soma",soma},{"max_soma_pairwise_error",somaError}});
+        {"actual_input",inputs},{"soma",soma},{"time_s",clock},{"max_soma_pairwise_error",somaError},
+        {"kind","native_model_archive_transfer_observation"},{"schema_version",1},{"complete",true}});
     dynamic_pointer_cast<UNet>(model)->BreakLinks();
     model->Free(); // Release boundary bindings before returning the external source.
     core.storage->ReturnObject(model);
@@ -271,11 +278,13 @@ void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = f
     auto archive = NmsdkTools::ExportModelArchive(model,Metadata(),ports);
     ASSERT_GT(archive["class_definitions"].toArray().size(),0);
     phase = "waveform";
-    QJsonArray inputs,soma;
-    const auto waveform = Waveform(model,frequency,boundary.Get(),&inputs,&soma);
+    QJsonArray inputs,soma,clock;
+    const auto waveform = Waveform(model,frequency,boundary.Get(),&inputs,&soma,&clock);
     EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(),model,ports)["match"].toBool());
     QJsonObject fixture{{"archive",archive},{"frequency_hz",int(frequency)},{"waveform",waveform},
-        {"actual_input",inputs},{"soma",soma}};
+        {"actual_input",inputs},{"soma",soma},{"time_s",clock},
+        {"kind","native_model_archive_transfer_fixture"},{"schema_version",1},
+        {"complete",true},{"window_begin_s",0.0},{"window_end_s",.1}};
     if(withBoundary) fixture["stimulus_port"] = "training_burst";
     phase = "child";
     QTemporaryDir temporary; ASSERT_TRUE(temporary.isValid());
