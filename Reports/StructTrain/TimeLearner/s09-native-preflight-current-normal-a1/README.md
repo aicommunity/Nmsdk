@@ -1,0 +1,3 @@
+# Actual native cold Train preflight: normal
+
+14 real schema1/schema2 Classic/Branch N0/N1 jobs passed effective native preflight without Calculate, probes, certificate or model-time advance. Six invalid declarations were rejected: four by native configuration validation and two before process launch. Two real one-tick Train controls reached their declared model tick budget and preserve identical initial graphs to preflight; these stopped Train runs are not completed learning. All10 actual-data/corruption checks passed. Complete inputs, models, runtime/process receipts and negative outcomes included. Current scope:2inputs/2000Hz and the archived production profiles, not full dimensional/physical coverage or scientific success. ASan acceptance pending.
