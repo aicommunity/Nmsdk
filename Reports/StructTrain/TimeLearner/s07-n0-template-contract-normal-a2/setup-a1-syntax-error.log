@@ -1,4 +1,0 @@
-  File "<string>", line 9
-    runner=\"from pathlib import Path; import sys,json; sys.path.insert(0,sys.argv[1]); from Scripts.StructTrain.TimeLearner.tests.live_pipeline_corpus import make_job; from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError; p=Path(sys.argv[2]); j=json.loads((p/'input/job.json').read_text()); r=json.loads((p/'native/recognition-model.json').read_text()); t={'source_recognition':r,'owner_class':j['owner_class'],'implementation_id':j['implementation_id']}; exec(\\\"try:\\\\n make_job(t,'baseline-preserve',legacy=True)\\\\nexcept EvidenceError as e:\\\\n assert str(e)=='corpus_explicit_n0_synapse_domain_required'; print(str(e))\\\\nelse: raise RuntimeError('expected baseline incompatibility absent')\\\")\"
-            ^
-SyntaxError: unexpected character after line continuation character
