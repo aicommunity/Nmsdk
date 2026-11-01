@@ -64,13 +64,16 @@ template<class Learner> void WarmReset(const bool branch,const int count,const u
  }
  auto generator=learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(generator);
  auto read=[&]() {
-  QJsonArray physical,cached;double total=0.;
+  QJsonArray physical,cached,dendriteReadout,history;double total=0.;
   for(size_t i=0;i<somas.size();++i)
   {
    const double value=somas[i]->SumPotential(0,0);physical.append(value);total+=value;
    cached.append(learner->SomaNeuronAmplitude(branch?0:int(i)+1,0));
   }
   QJsonObject result;result["physical_somas"]=physical;result["cached_somas"]=cached;
+  for(int i=0;i<=count;++i)dendriteReadout.append(learner->DendriteNeuronAmplitude(i,0));
+  for(int i=1;i<=count;++i)history.append(learner->SomaNeuronAmplitude(i,0));
+  result["dendrite_readout"]=dendriteReadout;result["per_input_soma_readout"]=history;
   result["physical_total"]=total;result["cached_total"]=learner->SomaNeuronAmplitude(0,0);return result;
  };
  const auto initial=read();
@@ -102,6 +105,11 @@ template<class Learner> void WarmReset(const bool branch,const int count,const u
   EXPECT_DOUBLE_EQ(reset["cached_somas"].toArray()[int(i)].toDouble(),rest)<<"stale learner readout before first tick after native Reset";
  }
  EXPECT_DOUBLE_EQ(reset["cached_total"].toDouble(),reset["physical_total"].toDouble());
+ EXPECT_EQ(reset["dendrite_readout"],initial["dendrite_readout"]);
+ EXPECT_TRUE(learner->NativeModelEditFailure().empty());
+ if(branch)for(int i=1;i<=count;++i)EXPECT_DOUBLE_EQ(learner->SomaNeuronAmplitude(i,0),0.0);
+ model->Calculate();core.environment->IncreaseModelTimeByStep();
+ if(branch)for(int i=1;i<=count;++i)EXPECT_DOUBLE_EQ(learner->SomaNeuronAmplitude(i,0),0.0);
  EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.23e-9);EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),91e6);
  EXPECT_EQ(learner->DendriteLength.GetData(),std::vector<int>(count,1));
  EXPECT_EQ(learner->TipSynapseResistance.GetData(),tips);
