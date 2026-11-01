@@ -85,6 +85,8 @@ class N0LivePipelineWorkerTest(_Base):
             folder = self.root/"runs"/name
             original = load(folder/"input/job.json")
             recognition = load(folder/"native/recognition-model.json")
+            if recognition["kind"] == "timelearner_calibrated_recognition_state":
+                recognition = recognition["source_candidate"]["source_recognition"]
             template = {"source_recognition": recognition, "owner_class": original["owner_class"],
                         "implementation_id": original["implementation_id"]}
             before = deepcopy(template)
