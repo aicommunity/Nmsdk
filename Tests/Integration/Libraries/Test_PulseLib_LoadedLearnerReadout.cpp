@@ -5,7 +5,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
-#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGeneratorTransit.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGenerator.h"
 #include "TimeLearner/ModelInspection.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
@@ -80,7 +80,7 @@ template<class Learner> void LoadedReadout(const bool branch,const int count,con
     auto soma=owner->template GetComponentL<NPulseMembrane>("Neuron.Soma"+std::to_string(i+1),true);
     ASSERT_TRUE(soma);const double value=soma->SumPotential(0,0);ASSERT_TRUE(std::isfinite(value));
     row.push_back(value);
-    EXPECT_DOUBLE_EQ(owner->SomaNeuronAmplitude(branch?0:i+1,0),value);
+    ASSERT_DOUBLE_EQ(owner->SomaNeuronAmplitude(branch?0:i+1,0),value);
    }
    rows.push_back(row);
   }
