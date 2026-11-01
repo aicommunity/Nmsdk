@@ -165,3 +165,12 @@ plot-venv-a1 (Matplotlib3.9.4), PID762923/start_ticks261647938. Полный cac
 публикация и итоговая совместная приёмка остаются открытыми. Общие stages4/11
 и цель0–12 не завершены; hot State/reset, остальные profiles и полная матрица
 требуют отдельных проверок.
+
+Temporal evidence завершён адресно: автоматическая проверка всех1476 PNG
+для32 условий/68 case-soma pairs;30 выбранных оригиналов1920x960 прямо
+просмотрены. Полный cache остаётся на M40. Первые20kHz zoom001 являются
+pre-stimulus окнами: отдельно добавлены8 stimulus/peak tiles по фактическим
+CSV timestamps. Визуальный review не подменяет numerical comparison и
+не является ручным просмотром полного cache. Compact evidence:
+`Reports/StructTrain/TimeLearner/s04-loaded-readout-visual-a1`.
+ASan regression всё ещё ожидается; совместная приёмка остаётся открытой.
