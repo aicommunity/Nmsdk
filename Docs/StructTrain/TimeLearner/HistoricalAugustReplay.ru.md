@@ -80,7 +80,7 @@ child threshold в двух threshold cases. Без effective pre-run readback �
 с ожидаемыми ID, метками и ISI во всех случаях; это ограниченное наблюдение,
 не общее доказательство валидности любой исторической конфигурации.
 
-## Временные диаграммы: обязательная незавершённая проверка
+## Временные диаграммы: выполненная адресная проверка
 
 Первый отдельный observer-прогон a1 использовал штатный исторический
 UStatisticDoubleMatrix. Stimulus, LT output и learner SomaNeuronAmplitude
@@ -97,13 +97,31 @@ historical_native_trace_missing:soma1. Попытка сохранена как 
 Cached learner vector служит отдельной диагностикой порядка, а не незаявленной
 заменой прямых измерений каналов.
 
-До визуальной приёмки обязательны: все потоки/finite значения, общий clock и
-шаг,32 фактических импульса/8 пачек, соответствие ISI и ID, покрытие окон,
-побайтное сравнение CSV с untouched replay, рисунки всех8 паттернов с входными
-импульсами и читаемыми zoom. Полный cache хранится на M40, в Git — сжатые
-первичные данные, метрики и выбранные рисунки. На момент этой записи a2 ещё
-не принят; temporal_report_complete=false. Offline sweep spiking trace не
-заменяет новый прогон выбранного порога.
+Все три observer-прогона a2 завершились: CSV побайтно равны untouched replay.
+Reader проверил12 потоков ×80000 samples каждого случая, общий clock2000Гц,
+32 фактических импульса/8 пачек, ISI/ID, покрытие окон и finite значения.
+Сумма каналов каждой сомы на каждом отсчёте совпала с native learner vector.
+Выходных LT edges5/4/3; за40s вне восьми окон новых edges не обнаружено.
+На Elder и M40 по7/7 actual native/corruption checks. Producer сохраняет
+temporal_report_complete=false как исходную до-отрисовочную квитанцию;
+последующая приёмка отчётов записана отдельно и не переписывает этот файл.
+
+[Temporal primary](../../../Reports/StructTrain/TimeLearner/s11-august-phasea-temporal-primary-elder-a2/README.md)
+опубликован commit`2376e1c3d6a17d0edcdcf9ce8d10272009ebfadd`:
+113 members/7533332B xz. Исходники исторического C++ не менялись.
+Final renderer`41a2b70d95931af6f10da14a6065259a3cfe4782` построил96 PNG
+в1920×1200: все24 предъявления/96 trial-soma pairs в четырёх видах.
+Full/detail сохраняют весь диапазон, signal/signal_detail увеличивают полезную
+амплитуду, включая запаздывающие положительные волны; clipping отрицательного
+feedback обозначен явно. Это исправило недостаточный масштаб первых рисунков.
+
+[Непосредственно просмотрены15 выбранных PNG](../../../Reports/StructTrain/TimeLearner/s11-august-phasea-temporal-visual-m40-a3/SELECTED_VISUAL_REVIEW.ru.md),
+включая все8 baseline паттернов и target/foil detail трёх случаев.
+Proof`dc9f8f43a2945cfefc9fc1efa6eb8abfe1e4cead`:15 PNG/2704518B,
+metadata6840B. Все113 primary files после отрисовки неизменны.
+Полный cache только на M40; в Git — сжатые первичные данные, метрики и
+выбранные рисунки. Полный ручной просмотр всех96 PNG не заявляется.
+Offline sweep spiking trace не заменяет новый прогон выбранного порога.
 
 Этот результат закрывает адресный saved-state replay трёх случаев, но не весь
 этап11. Остаются cold retrain, legacy/V2 A/B, order/ITI и полная исходная матрица.
