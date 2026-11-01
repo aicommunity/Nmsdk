@@ -93,8 +93,16 @@ Git, полные производные отчёты остаются на M40 
    L2 → соседний Ns2 до L3 для Classic/Branch; ASan-аналог также подтверждён.
    Все четыре Train при этом SearchUnresolved; классификация не проверялась.
    Следующий [N1 refinement](MeasuredResistanceRefinement.ru.md) находится
-   в отдельной feature; исходный measured bracket подтверждён, новые сборки
-   ещё проходят проверку. Это не закрывает полный stage7.
+   в отдельной feature. Актуальные normal a3 (40/40) и ASan a2 (32/32)
+   сборки прошли адресные C++ gates. Одинаковые реальные cold N1 jobs дали
+   Classic/Branch Exact на обоих workers против SearchUnresolved исходной
+   finite mesh; по 2/2 reader checks. Proof commits: normal
+   `bcbd30f1d87e352825e6c8400c5b929eff184ae5`, ASan
+   `44858d7fb92a330470f50741fb862f9f8db23840`.
+   Это первые положительные controls изменения L/Rs в данной V2 серии,
+   при собственных reference amplitudes, 2000 Гц и двух входах. Export/frozen
+   classification этих моделей и визуальная приёмка ещё впереди.
+   Это не закрывает полный stage7 и не является historical V1 replay.
 2. Продолжить алгоритмические и native physical gates этапов4–8; изменения
    математической задачи не подменяют исправление реализации.
 3. Завершить production preflight/migration/scheduler/publication и исторический
