@@ -289,7 +289,7 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
 
 Дополнение: проверка совместимости N0-шаблона перед приёмкой подэтапа. Исправление 0980f23309e099cb7cc73a1355a2dd25c7f788ab сохраняет полную конфигурацию при вызове подготовителя без новых факторов; раньше такой вызов ошибочно требовал повторного задания диапазона Ns. Проверено исходниками 54382334754986c574c7ccbcd5ded5b55f1b638e на Elder и M40: исходная ошибка воспроизведена через прежний публичный make_job; по 9 проверок для repeat=1/2, по 10 фактических Train-заданий на протокол регенерированы идентично, 1147 исходных файлов каждого корпуса не изменились. Численные прогоны и отрисовка повторно не выполнялись. Исходные отчёты с 7 проверками остаются отчётами своего снимка. Новые квитанции: Reports/StructTrain/TimeLearner/s07-n0-template-contract-normal-a2 (7aeb9655afdc3aec7ef607664393318fe290d1a3), s07-n0-template-contract-asan-a2 (0689def9d7a056bc9e9464d5ba647fcb8e30cbf9). Первые попытки настройки a1 завершились SyntaxError до выполнения проверок и также сохранены. Это приёмка совместимости подготовителя, а не положительный результат физического обучения и не закрытие полного этапа 7.
 
-Новые native controls (приёмка temporal ещё не завершена):
+Новые native controls (адресная temporal приёмка завершена):
 [normal dimensions](s07-native-dimension-normal-a1/README.md),
 [ASan dimensions](s07-native-dimension-asan-a1/README.md),
 [normal N0 proposal path](s07-native-proposal-normal-a1/README.md).
@@ -297,6 +297,29 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
 classification verdict отсутствует. Полная постановка и ограничения:
 [NativeDimensionControls](../../../Docs/StructTrain/TimeLearner/NativeDimensionControls.ru.md).
 
-[ASan N0 physical proposal path](s07-native-proposal-asan-a1/README.md): завершён, reader 2/2; temporal приёмка ещё открыта.
+[ASan N0 physical proposal path](s07-native-proposal-asan-a1/README.md): завершён, reader 2/2; temporal приёмка включена в следующий proof.
 
 [Native controls temporal proof](s07-native-controls-visual-a1/README.md): 18 reports, 610 trial-soma pairs, shared counterpart primary equality, 20 selected PNG directly reviewed; full cache manual review is not claimed.
+
+Measured N1 resistance refinement, scoped controls:
+
+- [Original normal finite mesh](s07-native-n1-mesh-normal-a1/README.md) and
+  [ASan counterpart](s07-native-n1-mesh-asan-a1/README.md): two actual cold jobs
+  per worker, both SearchUnresolved; measured amplitude brackets retained.
+- [Current normal build](s07-n1-refinement-build-normal-a1/README.md): a3 passes40
+  selected C++ cases; earlier prototype and failed optional-profile compile
+  attempt preserved separately.
+- [Current ASan build](s07-n1-refinement-build-asan-a1/README.md): a2 passes32
+  selected C++ cases; earlier a1 passes40 on its distinct source; detect_leaks=0.
+- [Current normal physical A/B](s07-native-n1-refined-normal-a1/README.md) and
+  [ASan counterpart](s07-native-n1-refined-asan-a1/README.md): Classic and Branch
+  each Exact after actual L/Rs changes, same cold jobs and original tolerances;
+  2/2 primary-data checks per worker. Two inputs,2000Hz,CapturedPerInput.
+- [Full baseline/refined temporal evidence](s07-native-n1-visual-a1/README.md):
+  434 probe/soma pairs,6 production report checks,24 selected PNG directly
+  reviewed1920x960. All536 original trial JSON/CSV files compare equal in value
+  across normal/ASan; runtime provenance remains distinct. Full cache on M40.
+
+These are V2 finite-mesh versus V2 refinement controls. They do not establish
+legacy V1 equivalence, August replay, classification, nonzero-refinement at
+20000Hz or completion of the full original plan.
