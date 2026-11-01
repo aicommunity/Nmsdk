@@ -1,0 +1,672 @@
+{
+  "schema_version": 1,
+  "resume_checkpoint": {
+    "document": "ResumeCheckpoint-2026-10-29.ru.md",
+    "checked_at": "2026-10-29T06:36:44+03:00",
+    "goal_complete": false,
+    "connection_after_user_restoration": "two Paramiko SSH attempts, independent TCP and Windows OpenSSH timed out before authentication",
+    "jump_host": "10.245.1.12:22",
+    "selected_route": "10.245.1.0/24 via 192.168.192.254 on Ethernet 3",
+    "network_configuration_changed": false,
+    "active_native_jobs_claimed": false,
+    "a2_native_rerun_required": false,
+    "next_gate": "finish integrated normal regressions and independent audits on both workers; no active network blocker",
+    "connection_recovered": true,
+    "historical_network_failure": true
+  },
+  "scope": "historical transient plus completed graph-boundary A2, condition/runtime evidence and current owner-policy/integrated validation",
+  "native_root": "a5ada26f4ff0d6e6e1292cffc83df26bb004026b",
+  "pulse_core": "0e1b01ae91addfe27c3a4731596f82d27321d01b",
+  "pulse_documented": "8f248aa",
+  "python_root": "bb4a351185956365d483d1db5e2d7309bd39ab31",
+  "workers": {
+    "10.245.1.11": {
+      "build_kind": "normal",
+      "native_cases_passed": 4,
+      "python_tests_passed": 8,
+      "complete_presentations": 8,
+      "primary_samples": 19368,
+      "baseline_expected_failures": 4,
+      "byte_exact_common_waveforms": 8,
+      "report": "s08-transient-elder1",
+      "stored_checksums_verified": 198,
+      "raw_checksums_verified": 196
+    },
+    "10.245.1.17": {
+      "build_kind": "asan_detect_leaks_0",
+      "native_cases_passed": 4,
+      "python_tests_passed": 8,
+      "complete_presentations": 8,
+      "primary_samples": 19368,
+      "baseline_expected_failures": 4,
+      "byte_exact_common_waveforms": 8,
+      "report": "s08-transient-m40",
+      "stored_checksums_verified": 198,
+      "raw_checksums_verified": 196
+    }
+  },
+  "evaluation_verdict": null,
+  "full_stage_8_complete": false,
+  "subsequent_jobs": {
+    "scope": "A2 native terminal success returned by retained SSH sessions on both workers; independent A2 audit/publication pending jump-host connectivity",
+    "root": "8e7b9e8800d30e88eabd84799f97169cb5acb946",
+    "workers": {
+      "10.245.1.11": {
+        "attempt": "s08-boundary-normal-a1",
+        "observed_cmake_pid": 3225129,
+        "session_id": 1437,
+        "observed_native_pid": 3227868,
+        "dependent_audit_pid": 3230976,
+        "dependent_audit_session_id": 23521,
+        "a1_terminal": true,
+        "a1_native_passed": 24,
+        "a1_python_passed": 10,
+        "a1_sample_pairs": 16570,
+        "lifecycle_baseline_tests": 4,
+        "lifecycle_baseline_expected_failures": 1,
+        "current_attempt": "s08-boundary-normal-a2",
+        "current_session_id": 62815,
+        "a2_native_terminal": true,
+        "a2_process_exit_status": 0,
+        "a2_tests_passed": 14,
+        "a2_independent_audit": "passed",
+        "a2_artifact_publication": "published",
+        "a2_python_tests": 2,
+        "a2_sample_pairs": 16570,
+        "a2_old_csv_equal": 20,
+        "a2_report_commit": "241c10f2ec01a50e95f3f0d2edcc8273fc08a857",
+        "stored_hashes_verified": 426,
+        "raw_hashes_verified": 424
+      },
+      "10.245.1.17": {
+        "attempt": "s08-boundary-asan-a1",
+        "observed_cmake_pid": 587564,
+        "session_id": 62516,
+        "observed_native_pid": 591682,
+        "dependent_audit_pid": 594032,
+        "dependent_audit_session_id": 16766,
+        "a1_terminal": true,
+        "a1_controlled_interruption": true,
+        "a1_audit_terminal": true,
+        "current_attempt": "s08-boundary-asan-a2",
+        "current_session_id": 50462,
+        "a2_native_terminal": true,
+        "a2_process_exit_status": 0,
+        "a2_tests_passed": 14,
+        "a2_independent_audit": "passed",
+        "a2_artifact_publication": "published",
+        "a2_python_tests": 2,
+        "a2_sample_pairs": 16570,
+        "a2_old_csv_equal": 8,
+        "a2_report_commit": "45d55b03d4c6d0d56aad964c62321bafa8591078",
+        "stored_hashes_verified": 241,
+        "raw_hashes_verified": 239
+      }
+    },
+    "python_root": "c174c98b237cd241fbae1d46850d7cbdc0d0c100",
+    "audit_attempt": "s08-boundary-data-a1",
+    "audit_policy": "wait for the specific native process and terminal success; never restart native job; separate immutable Python worktree",
+    "fixed_root": "325052a0802e431f45ed91619c089fbc0eef7922",
+    "pulse_fixed": "32dc2e0223cab8adca8280eb1c4586764b6a9c86",
+    "baseline_root": "c4fccab86e6dbce939288c77e9379f9aff88c5e0"
+  },
+  "unvalidated_owner_policy": {
+    "root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
+    "pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
+    "server_build": "passed both workers",
+    "native_cases_planned": 9,
+    "subsequent_lifecycle_callback_guard": "tested in native source c7266dcb on normal Elder and ASan M40",
+    "reason": "targeted normal Elder and ASan M40 completed and published; integrated normal regression pending",
+    "latest_pulse": "c7266dcb93ec51a765125bc30647cf1b59129c91",
+    "subsequent_provenance_guard": "full reference/final/observed packets; negative control preserves certificate/status/epoch while changing reference trial IDs",
+    "test_protocol": "2 kHz external CalculateMode=1 release; 20 kHz CalculateMode=0; explicit fixture sync tolerance 1 s; raw training proof captured",
+    "first_implementation_root": "2a9357afa73e485d3461683c4ee7e597bb7fc176",
+    "first_implementation_pulse": "d9b4199cfb6644962cff678763c98eaaecbfa7c0",
+    "workers": {
+      "10.245.1.11": {
+        "native_passed": 23,
+        "native_exit_status": 0,
+        "python_tests_each_attempt": 4,
+        "primary_training_packets": 42,
+        "sample_pairs": 8646,
+        "report_commit": "640a39df9f5a83bff84a06294c1c5d10ee6a4913",
+        "report_local_hash_check": "324 stored / 322 raw verified",
+        "graph_csv_equal_previous_a2": 20
+      },
+      "10.245.1.17": {
+        "native_passed": 23,
+        "native_exit_status": 0,
+        "native_terminal": true,
+        "python_tests_each_attempt": 4,
+        "primary_training_packets": 42,
+        "sample_pairs": 8646,
+        "graph_csv_equal_previous_a2": 20,
+        "report_commit": "ec944b447468c2d20ad308b069ef6136bc41aabc",
+        "report_local_hash_check": "324 stored / 322 raw verified"
+      }
+    },
+    "python_a1": "664ced2346171cd6b50f3f79af217dde83dde86f",
+    "python_a2": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
+    "documented_pulse": "8683bbff4f587946239d3cb4ebde37869493cb93"
+  },
+  "unvalidated_condition_identities": {
+    "scope": "ConditionSpec/content artifacts, matrix/analysis/attempt IDs; runtime content identity schema 2",
+    "server_tests": "18 passed on each worker",
+    "modules": [
+      "Scripts.StructTrain.TimeLearner.tests.test_condition",
+      "Scripts.StructTrain.TimeLearner.tests.test_runtime"
+    ],
+    "runner_queue_integration": false,
+    "historical_schema_1_rewritten": false,
+    "runtime_relocation": "real .rs2 binary startup and production snapshot identity equal on each worker",
+    "reports": {
+      "elder1": "c05b75aec4b8952002af3d4e91d4e07d60c8f96b",
+      "m40": "976bdfcf71fd67593450e08f303cfa90a0df01f1"
+    },
+    "local_hash_verification_each": {
+      "stored": 14,
+      "raw": 12
+    }
+  },
+  "integrated_normal_regression": {
+    "host": "10.245.1.11",
+    "native_root": "912ef71b36fbc040c6177a82070a796ee5eb99de",
+    "session_id": 49214,
+    "attempt": "s08-integrated-normal-a1",
+    "state": "both native and independent audit processes completed exit zero; evidence published and all stored/raw hashes verified locally",
+    "scope": "three maintained Rdk CTest targets plus full PulseLib parent, separate XML",
+    "runtime": "/home/user/timelearner-refactor/runtime-s08-integrated-normal-a1",
+    "workers": {
+      "10.245.1.11": {
+        "native_session_id": 49214,
+        "observed_native_pid": 3623663,
+        "python_waiter_session_id": 99128,
+        "cache": "/home/user/timelearner-refactor/build-order-fixed-normal-a1",
+        "process_state": "completed",
+        "independent_primary_data_audit_passed": true
+      },
+      "10.245.1.17": {
+        "native_session_id": 8546,
+        "observed_native_pid": 1062506,
+        "python_waiter_session_id": 9628,
+        "cache": "/home/user/timelearner-refactor/build-s08-integrated-normal-a1",
+        "source": "/home/user/timelearner-refactor/source-s08-integrated-normal-a1",
+        "low_disk_period_observed": true,
+        "acceptance_requires_independent_primary_data_completeness": true,
+        "process_state": "completed",
+        "independent_primary_data_audit_passed": true
+      }
+    },
+    "python_root": "54b3d56073ebbe9e2cc3ef9edacb5085bf817293",
+    "python_audit_attempt": "s08-integrated-data-a1",
+    "python_scope": "13 modules; all required evidence directories explicit; fresh-process cross-worker replay remains separate",
+    "native_tests_each": 491,
+    "native_passed_each": 480,
+    "native_helper_skips_each": 11,
+    "native_failures_each": 0,
+    "rdk_ctest_groups_each": 3,
+    "python_tests_each": 114,
+    "python_skips_each": 0,
+    "python_failures_each": 0,
+    "reports": {
+      "elder1": "bc37077f18adce02c9d90b2aecdc2b75fc8e6b4f",
+      "m40": "182191b9534f62257687b97b24f9f7fc936dd71e"
+    },
+    "local_hash_verification_each": {
+      "stored": 3268,
+      "raw": 3266
+    },
+    "develop_merged": true,
+    "accepted_pulse_develop": "4db59424125dda426a29bc74faac565db871511f",
+    "accepted_root_develop": "9e06c339a8186e3330303f6cd4fa829d09b74510",
+    "fresh_recursive_closure_verified": true,
+    "closure_report_commit": "7f21442575db614df55c781bb4c9b242c5fbea6e",
+    "closure_hashes": {
+      "stored": 5,
+      "raw": 2
+    }
+  },
+  "config_adapter": {
+    "branch": "stage09/lossless-config-adapter",
+    "native_root": "ccbf453f1d51638369c6b0afcf89cc1cbad166f4",
+    "rdk_tested": "8ebf64dd39571cb6f95f23cfc2b55f30972c591c",
+    "rdk_documented": "abc21b650471ef6d2e5ef9ba94429d34f3697323",
+    "python_tests_each_worker": 7,
+    "tracked_structtrain_project_ini_files": 1599,
+    "native_readback_host": "10.245.1.17",
+    "build_kind": "asan_detect_leaks_0",
+    "native_files": 4,
+    "native_values": 11,
+    "rdk_ctest_groups": 4,
+    "reports": {
+      "m40": "6210f02353cf2b3956a8a4ee93201607d870541a",
+      "elder1": "13c4328116f284d17b09d4af758b38e67e39a6fd"
+    },
+    "effective_component_preflight_complete": false,
+    "attempts": {
+      "a1": "reproduced native BOM plus declaration failure",
+      "a2": "shell launcher syntax error; not parser failure",
+      "a3": "build disk exhaustion; not parser failure",
+      "a4": "passed"
+    },
+    "rdk_accepted_develop": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+    "normal_rdk_evidence": {
+      "host": "10.245.1.11",
+      "ctest_groups": 4,
+      "encoding_tests": 2,
+      "commit": "fa39375f17f3cb694a9a42c3d37c3d7c11c5a58b",
+      "stored_hashes": 10,
+      "raw_hashes": 8,
+      "wide_platform_verified": false
+    }
+  },
+  "m40_storage": {
+    "report_commit": "dc733b2a85685127b033889449d310fd8d77d941",
+    "data_mount": "/media/user/Data",
+    "data_device": "/dev/sda",
+    "policy": "user: only confirmed duplicates and caches; unique raw scientific traces retained",
+    "completed_runtime_count_moved": 10,
+    "moved_bytes": 5410721907,
+    "old_runtime_paths_preserved": true,
+    "immutable_git_pack_duplicate_copies_replaced": 191,
+    "released_pack_blocks_bytes": 18389184512,
+    "git_head_objects_readable": 75,
+    "stored_hashes_verified": 30,
+    "raw_hashes_verified": 28,
+    "active_jobs_moved": false,
+    "raw_experiment_files_deleted": 0,
+    "production_storage_scheduler_complete": false
+  },
+  "native_owner_config_bindings": {
+    "native_root": "1f819b429a292a575593203be3bfe6b42392c8c4",
+    "pulse_core": "cbbf56ce541027ef8e07d6be7a1841cf513b2b8e",
+    "worker": "10.245.1.17",
+    "build_kind": "asan_detect_leaks_0",
+    "native_tests_passed": 16,
+    "independent_json_readbacks": 16,
+    "baseline_a4_conflicting_expected_failures": 8,
+    "baseline_a4_matching_passes": 8,
+    "report_commit": "1c55f903d9d30e1367a30461c5f5f7b1a92f30c3",
+    "local_hash_verification": {
+      "stored": 467,
+      "raw": 465
+    },
+    "elder_validation_complete": false,
+    "editor_metadata_assignments_covered": false,
+    "runtime_control_flags_covered": false,
+    "develop_merged": true
+  },
+  "native_owner_editor_bindings": {
+    "native_root": "796a73075b930d634c905355541e47187aed6f5f",
+    "pulse_core": "0ca75b3e5b7354ee801645d5d0d73b3f942cb645",
+    "auditor_root": "07e66559a4030537ed24605fcdb676838b94b257",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "process_state": "completed_exit_zero",
+    "native_passed_each": 46,
+    "native_skips_each": 0,
+    "native_failures_each": 0,
+    "python_tests_each": 2,
+    "complete_boundary_probes_each": 12,
+    "boundary_samples_each": 4332,
+    "fixed_reports": {
+      "elder1": "073b2906e6926f026f9a2c55ee1b69475f49a9ff",
+      "m40": "37e6326c98bcd74d859ff3381acf90514763905a"
+    },
+    "fixed_hashes_each": {
+      "stored": 530,
+      "raw": 528
+    },
+    "baseline_reports": {
+      "elder1": "2c08b5b4c0a2fb7f359a31609e13d8d6a73f2d13",
+      "m40": "1e9e52f225b6cec1b5b8cde51b30b65c7abdd869"
+    },
+    "baseline_hashes_each": {
+      "stored": 331,
+      "raw": 329
+    },
+    "baseline_conflicting_expected_failures_each": 6,
+    "baseline_matching_passes_each": 6,
+    "initial_missing_probe_boundary_fixture_error": true,
+    "develop_merged": true,
+    "runtime_control_flags_complete": false,
+    "accepted_pulse_develop": "4e6be0cbc0215805cd40b881600934e35c86430e"
+  },
+  "next_experiment_gate_document": "ExperimentReadiness.ru.md",
+  "goal_complete": false,
+  "owner_bom_acceptance": {
+    "root_acceptance_branch": "stage04/native-owner-config-bindings",
+    "pulse_develop": "4e6be0cbc0215805cd40b881600934e35c86430e",
+    "rdk_develop": "c903b9bba4a31e604f9740ae6f6ed52a4e7de74a",
+    "root_merge_pending": false,
+    "fresh_recursive_closure_verified": true,
+    "full_stage_4_complete": false,
+    "accepted_root": "d7ee23f48ef4f4938373bd1f1be8e2336d1eb40b",
+    "closure_report_commit": "0cf41c155d38589c3af9dff33b238669b1330d6a",
+    "closure_hashes": {
+      "stored": 4,
+      "raw": 2
+    }
+  },
+  "frozen_recognition_owner": {
+    "branch": "stage08/frozen-recognition-owner",
+    "native_root": "6ff1d43a9af8df7a97111ba04b259aa207454ce0",
+    "pulse_core": "0b9d0ff992238b6f72bc1046d50c5d80fecee6d7",
+    "state": "A1/A2 native gates and strict A3 independent audits completed exit zero on both workers; published and hashes verified",
+    "planned_cases": {
+      "new_owner": 8,
+      "cold_training_regression": 4
+    },
+    "workers": {
+      "10.245.1.11": {
+        "kind": "normal",
+        "session_id": 56145,
+        "state": "completed_exit_zero"
+      },
+      "10.245.1.17": {
+        "kind": "asan_detect_leaks_0",
+        "session_id": 34267,
+        "state": "completed_exit_zero"
+      }
+    },
+    "record_spikes": false,
+    "scientific_evaluation_complete": false,
+    "extra_configured_cases_in_working_source": 2,
+    "extra_configured_cases_runtime_validated": true,
+    "develop_merged": false,
+    "a1_native_passed_each": 12,
+    "a2_native_root": "112acdae1c21bb6e0b1667b3fffdeb90a02859b1",
+    "a2_native_passed_each": 12,
+    "a3_python_tests_each": 8,
+    "a3_skips_each": 0,
+    "source_trials_each": 164,
+    "paired_samples_each": 5052,
+    "a2_owner_observation_schema": 2,
+    "a1_prototype_missing_hash_fields_inferred": false,
+    "a1_source_proof_packages_each": 8,
+    "a1_source_trials_each": 108,
+    "reports": {
+      "elder1": "aa75bc2d82d2655aa0da4080fe896267645f3072",
+      "m40": "8b9febb3ce18548a4644d57aad89b10d0a1d4552"
+    },
+    "local_hash_verification_each": {
+      "stored": 912,
+      "raw": 910
+    },
+    "runtime_hash_records_rechecked": {
+      "elder1": 56,
+      "m40": 150
+    },
+    "automatic_control_cases_runtime_validated": true,
+    "initial_a2_cli_class_skip": "preserved; strict A3 provided real domain fixture and requires zero skips",
+    "fresh_destination_owner_verified": true,
+    "fresh_process_owner_verified": true,
+    "training_owner_reused_for_recognition": true,
+    "active_jobs": false,
+    "fresh_owner_scope": "two configured 2 kHz profiles: Classic N0 identity, Branch N1 scaled; not full matrix or cross-worker owner replay"
+  },
+  "fresh_recognition_owner": {
+    "destination_native_root": "7de6128261792df123d5e8dd4afe29f4a4ded58b",
+    "replay_native_root": "abad4a68e0dcdf5f6c2c0d6db68eb81b2496a3dc",
+    "auditor_root": "ab4a2f7a7881ec489aec330e72cdbcc2ed6738fd",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "native_destination_cases_each": 2,
+    "fresh_process_cases_each": 2,
+    "python_tests_each": 12,
+    "python_skips_each": 0,
+    "source_trials_each": 28,
+    "paired_samples_each": 762,
+    "fresh_process_samples_each": 762,
+    "byte_exact_replay_each": true,
+    "reports": {
+      "elder1": "73b1427fd479e3a0d4c8d81799c859daec33fcf6",
+      "m40": "f079e7073cc58a06c276e131f9b264067ae7fbaa"
+    },
+    "hashes_each": {
+      "stored": 108,
+      "raw": 106
+    },
+    "active_jobs": false,
+    "scientific_evaluation_complete": false,
+    "develop_merged": true,
+    "accepted_root": "f00989cb1fd98f126e37784ebb9b9f2d9e34b8ae",
+    "accepted_pulse": "9902545414b7381d328024caf28994d53f97f090"
+  },
+  "spike_history_reset": {
+    "baseline_root": "9ecb3967fa30d813785a08a6ce509d622fc767ea",
+    "fixed_root": "d13620e1e5734373d840fc4f2efe5db049d30c62",
+    "baseline_expected_failures_each": 2,
+    "elder_fixed_gtest_passed": 12,
+    "elder_process_status_verified": true,
+    "m40_fixed_state": "terminal_native_pass",
+    "publication_complete": true,
+    "accepted": true,
+    "next_action": "implement complete frozen spike/foil observations and selected-threshold verification",
+    "fixed_tests_each": 12,
+    "skips_each": 0,
+    "native_exit_each": 0,
+    "wrapper_exit_each": 1,
+    "wrapper_failure_cause": "login .bash_logout clear_console under set -e and SHLVL=1; controlled reproduction on both workers",
+    "develop_merged": true,
+    "reports": {
+      "elder1": "8e1569e7bcb41a531babe68d569d0661b37f9d4c",
+      "m40": "04a705c9d05967d3cf5ffd4d6eb96077f75d2f49"
+    },
+    "stored_hashes_each": 98,
+    "raw_hashes_each": 96,
+    "active_jobs": false,
+    "accepted_root": "a28765c3e816bab09c08366510b35edfafff91f7",
+    "accepted_pulse": "a753603cc27e2f5580195e649fc672eeb5769618"
+  },
+  "frozen_recognition_trials": {
+    "native_root": "127806a34d5caa07f4d9543c465fc6a497925e3e",
+    "pulse_core": "81ee217ceee27c54528b279d1033cc9e8536ea9e",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "native_tests_each": 6,
+    "python_tests_each": 12,
+    "skips_each": 0,
+    "full_trials_each": 16,
+    "invalid_controls_each": 8,
+    "primary_frames_each": 3864,
+    "actual_spikes_each": 4,
+    "source_training_trials_each": 56,
+    "profiles": "Classic N0 / Branch N1; 2 kHz; fixed storage thresholds 1 and 0.0001",
+    "reports": {
+      "elder1": "60a1bd6fa44be04ce8fb59f2f2813dad84373b74",
+      "m40": "4eb082dd4ae6a5dd9c7fa4d4516ccb3b17bbce70"
+    },
+    "stored_hashes_each": 414,
+    "raw_hashes_each": 412,
+    "runtime_hash_records": {
+      "elder1": 112,
+      "m40": 300
+    },
+    "active_jobs": false,
+    "scoped_accepted": true,
+    "develop_merged": true,
+    "scientific_verdict": null,
+    "full_stage_8_complete": false,
+    "remaining": "calibration; production job and scientific metrics; full mode/physics matrix; additional Reset/recovery controls",
+    "accepted_root": "d2d32dbc03faeaba15582d0e3c75e2f366577db4",
+    "accepted_pulse": "a95746bd0e1ec6d0f51dffe46f1ff7f654a93580",
+    "source_checkout_closure": {
+      "verified": true,
+      "report_commit": "a7a746fe1e35044b5bc1542874b36d81f778cbe1",
+      "root": "d2d32dbc03faeaba15582d0e3c75e2f366577db4",
+      "children": 7,
+      "clean": true,
+      "stored_hashes": 4,
+      "raw_hashes": 2,
+      "method": "fresh shared Git objects; each child fetched from configured origin; actual recursive registered status checked"
+    }
+  },
+  "connected_training_stop": {
+    "native_root": "38492772838dcb48afc1a3c44c0388ccb387c11c",
+    "pulse_core": "c99c47d89c24baf48879ace3d6ded635f8485272",
+    "auditor_root": "b236ee563d99e07250db584146a82e925ce231ce",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "baseline_cases_each": 20,
+    "baseline_missed_stops_each": 16,
+    "keep_true_controls_each": 4,
+    "native_fixed_cases_each": 57,
+    "python_cases_each": 10,
+    "skips_each": 0,
+    "new_primary_trials_each": 28,
+    "existing_primary_trials_each": 66,
+    "reports": {
+      "elder1": "8280a184e6e1e15a749119dfe08c4a646d48261c",
+      "m40": "406191506fa162a52780ffd12fb4ccc0b6d1006e"
+    },
+    "stored_hashes_each": 1069,
+    "raw_hashes_each": 1067,
+    "runtime_hash_records": {
+      "elder1": 84,
+      "m40": 225
+    },
+    "scope": "V2 N1 Classic/Branch CalculateMode 0/1 read-only scalar SetPointer; additional direct-setter/service/cold regressions",
+    "active_jobs": false,
+    "scoped_accepted": true,
+    "develop_merged": true,
+    "full_stage_6_complete": false,
+    "scientific_verdict": null,
+    "accepted_root": "1845df823b1e7f656b1d01a040cad3b0e2555275",
+    "accepted_pulse": "98308fc9b6c2d831578194d00fc76b173b62627b",
+    "recursive_source_closure": {
+      "verified": true,
+      "report_commit": "5eec69aeb563d596e3e088bbed6278985dff684b",
+      "children": 7,
+      "clean": true,
+      "stored_hashes": 4,
+      "raw_hashes": 2
+    }
+  },
+  "mandatory_visual_test_reports": {
+    "user_requirement_date": "2026-10-29",
+    "spec": "VisualTestReports.ru.md",
+    "scope": "all tested patterns/trials and all somas; actual input-pulse overlay; readable full-window and zoom plots",
+    "renderer_implemented": true,
+    "visual_acceptance_complete": false,
+    "required_for_plan_completion": true,
+    "implementation_scope": "schema-1 diagnostic native recognition reports; all recorded soma pairs, overview and 100-tick zoom; full matrix and descriptors/panorama/detail views incomplete",
+    "develop_merged": true,
+    "renderer_root": "a7e37f6e9d5f7fbbe004881a7e60bd3751236b3a",
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "python_cases_each": 6,
+    "trials_each": 16,
+    "trial_soma_pairs_each": 24,
+    "reports": {
+      "elder1": "8188472cd3d36f00c698b1b531815e84b43f1731",
+      "m40": "8abf68a20c4abc03718b662ee4ed1e01b2dff6ee"
+    },
+    "locally_verified_hashes": {
+      "elder1": 342,
+      "m40": 345
+    },
+    "addressed_png_review": "Elder Branch target overview; M40 Classic Soma2 foil zoom-001/002; readable legend, samples and pulses; full matrix/vector review pending",
+    "native_rerun": false,
+    "accepted_root": "398dabf684181cddccaa37cb221227a38ad64295",
+    "baseline_report": "78983e9354de71496b51bdb3d5be2da275790867",
+    "baseline_stored_hashes": 4
+  },
+  "frozen_recognition_metrics": {
+    "scoped_accepted": true,
+    "integration_reports": {
+      "elder1": "2cfcd3ee3944a5abc0da843bd4c3ae43dbddc669",
+      "m40": "b4e5f744f829a3f50356874d13c539b8b0ae85ef"
+    },
+    "python_cases_each": 25,
+    "auditor_root": "0164e9357c3ec0196191cfa218e65f1c215bae31",
+    "reports": {
+      "elder1": "f1bd35dfa20a01e2c0a03a4a3372e528f7da3860",
+      "m40": "ae44a2a511e3ac9fe2381ee8dc4c3df65f2e9eba"
+    },
+    "full_stage_3_complete": false,
+    "stored_hashes_each": 39,
+    "integration_stored_hashes_each": 5,
+    "skips_each": 0,
+    "combined_auditor_root": "102c1fc15a106060f1f5b37ecb149b0e752baba1",
+    "criterion_satisfied_all_control_profiles": false,
+    "develop_merged": true,
+    "primary_frames_each": 3856,
+    "native_rerun": false,
+    "scientific_verdict": null,
+    "integration_raw_hashes_each": 4,
+    "workers": [
+      "10.245.1.11",
+      "10.245.1.17"
+    ],
+    "complete_trials_each": 16,
+    "raw_hashes_each": 37,
+    "combined_python_cases_each": 30,
+    "accepted_root": "77d5bd2bf5b7a14b0069c928972c0813d1e9fe74"
+  },
+  "visual_series_detail": {
+    "develop_merged": true,
+    "errors_each": 0,
+    "failures_each": 0,
+    "verified_hashes_each": 398,
+    "tests_each": 16,
+    "scope": "actual-clock series for all recorded somas and additional explicit local-detail views; physical units and full native continuous/physics matrix open",
+    "reports": {
+      "m40": "1e1ce1d85f7a297a31c04e57c4fad67750ef81ed",
+      "elder1": "7cb89e8e4b8554501ef19ed8e367d6af95835069"
+    },
+    "visual_acceptance_complete": false,
+    "skips_each": 0,
+    "native_rerun": false,
+    "trial_soma_pairs_each": 24,
+    "auditor_root": "fd80b9ec43d8ac1d13c1163abf8a0d8414a5f127",
+    "trials_each": 16,
+    "accepted_root": "75d09a6d7ea75ef067d85384ac7d29f014a93188"
+  },
+  "git_closure_publisher": {
+    "raw_hashes_each": 8,
+    "tests_each": 8,
+    "combined_tests_each": 26,
+    "reports": {
+      "m40": "852154adcfe0f1450f137c85a37eafcb54eba229",
+      "elder1": "6b9ba782067637e53a09be84c36af1f8609488a4"
+    },
+    "scientific_verdict": null,
+    "skips_each": 0,
+    "stored_hashes_each": 10,
+    "full_stage_10_complete": false,
+    "root": "e3a916fabca0fa7aa7559e7c6573e01b36b3669d",
+    "failures_each": 0,
+    "scope": "actual local Git receive-hook and CLI tests; children-before-root exact ref publication; external server/crash/runner matrix incomplete",
+    "develop_merged": true,
+    "accepted_root": "1ce9eb6a3390a6f553b81ffa72bde7e285f7f930"
+  },
+  "owned_process_supervisor": {
+    "full_stage_10_complete": false,
+    "skips_each": 0,
+    "stored_hashes_each": 9,
+    "develop_merged": true,
+    "raw_hashes_each": 7,
+    "reports": {
+      "elder1": "f80ea87d8502902d3086d98fa0129a8df42d8918",
+      "m40": "37588a9c6b3f411250cf77d48acbd2737c0fd6d6"
+    },
+    "combined_tests_each": 35,
+    "root": "9195208a9f0bcf24ff37b285084f7f86ed657bb5",
+    "failures_each": 0,
+    "scope": "actual Linux pidfds and system binaries; launched executable only; process-tree, scheduler and neural worker matrix incomplete",
+    "tests_each": 9,
+    "scientific_verdict": null,
+    "accepted_root": "54e9fa8ece12e43571814ca04704e7529b23b4cd"
+  }
+}

@@ -1,0 +1,9 @@
+# Native owner editor fixed gate: elder1
+
+Native root 796a73075b930d634c905355541e47187aed6f5f / PulseLib 0ca75b3e5b7354ee801645d5d0d73b3f942cb645. All 46 native cases passed without skips/failures: 14 editor regressions, 4 cold training controls, 12 connected-editor controls and 16 construction/import binding controls. Elder uses normal Release, M40 uses ASan with detect_leaks=0. The editor regressions cover 2/20 kHz and heterogeneous banks; connected-owner controls use 2 kHz. Each case preserves its declared scientific/fixture tolerances.
+
+The native run includes two independent Python tests from source 796a7307. A subsequent Python-only audit from 07e66559a4030537ed24605fcdb676838b94b257 also passed both tests and all twelve controls, now explicitly binding each pre-edit model revision to the actual boundary observation. Twelve complete boundary probes, 4332 samples, six matching read-only successes and six conflict rejections before physical modification. Corruption checks reject wrong schema, statuses, hashes, nonfinite/boolean numbers, changed sources and metadata mismatches. No scientific selectivity verdict.
+
+All native primary data, model exports, raw traces, parent XML, logs, runtime manifests, older audit logs and later independent audit are stored losslessly. Native producer identity is not replaced by the later auditor identity; no native rerun was required for the additional Python-only provenance check. Runtime binary/INI hashes were rechecked before publication.
+
+Baseline A1 fixture error and corrected A2's six actual conflicting failures are retained separately in s04-editor-baseline-elder1. Construction/import earlier baselines are in s04-owner-bindings-m40. External training-control signals, full lifecycle/storage matrix, recognition/PostTune/calibration production wiring and full-plan completion remain open.

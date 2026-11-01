@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="13" failures="0" disabled="0" errors="0" time="0.005" timestamp="2026-09-24T09:24:31.344" name="AllTests">
+  <testsuite name="UModernDiagramLinkRouter" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0.003" timestamp="2026-09-24T09:24:31.344">
+    <testcase name="AutoExternal_UsesCorridor" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramLinkRouter.cpp" line="64" status="run" result="completed" time="0.001" timestamp="2026-09-24T09:24:31.344" classname="UModernDiagramLinkRouter" />
+    <testcase name="ExternalDeep_OutsideEnvelopeClearsChain" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramLinkRouter.cpp" line="79" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.346" classname="UModernDiagramLinkRouter" />
+    <testcase name="AutoForward_Cubic" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramLinkRouter.cpp" line="96" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.346" classname="UModernDiagramLinkRouter" />
+    <testcase name="AutoReverse_OrthogonalFromOutput" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramLinkRouter.cpp" line="106" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.346" classname="UModernDiagramLinkRouter" />
+    <testcase name="MidRowPort_WorseThanOutsideForDeep" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramLinkRouter.cpp" line="128" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.346" classname="UModernDiagramLinkRouter" />
+    <testcase name="LeftPocketFanOut_UsesVerticalBusNotEnvelope" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramLinkRouter.cpp" line="149" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.347" classname="UModernDiagramLinkRouter" />
+  </testsuite>
+  <testsuite name="UModernDiagramScopePath" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0.001" timestamp="2026-09-24T09:24:31.347">
+    <testcase name="TopChild_StripsFullScopeBeforeFirstSegment" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramScopePath.cpp" line="33" status="run" result="completed" time="0.001" timestamp="2026-09-24T09:24:31.347" classname="UModernDiagramScopePath" />
+    <testcase name="Dendrite85_SiblingChannelExport_IsOutgoingSink" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramScopePath.cpp" line="43" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.348" classname="UModernDiagramScopePath" />
+    <testcase name="Dendrite85_InternalSynapseToChannel_NotOutgoingSink" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramScopePath.cpp" line="63" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.349" classname="UModernDiagramScopePath" />
+    <testcase name="NeuronScope_SiblingDendriteLink_NotOutgoingSink" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramScopePath.cpp" line="78" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.349" classname="UModernDiagramScopePath" />
+    <testcase name="NeuronScope_NoLeaveNeuronExports_InStructTrainSample" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramScopePath.cpp" line="93" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.349" classname="UModernDiagramScopePath" />
+    <testcase name="SinkLabel_DropsCurrentLevelName" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramScopePath.cpp" line="124" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.349" classname="UModernDiagramScopePath" />
+  </testsuite>
+  <testsuite name="ExternalSinkLayout" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-09-24T09:24:31.349">
+    <testcase name="SinkTopLeft_IsRightOfSourceNotLeftPocket" file="E:\Science-Repo\nmsdk-git\Rdk\Tests\Unit\GUI\Test_UModernDiagramScopePath.cpp" line="110" status="run" result="completed" time="0" timestamp="2026-09-24T09:24:31.349" classname="ExternalSinkLayout" />
+  </testsuite>
+</testsuites>

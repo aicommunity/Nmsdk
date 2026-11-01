@@ -1,0 +1,637 @@
+{
+  "kind": "timelearner_parameter_contract_review",
+  "schema_version": 1,
+  "source_commits": {
+    "root": "1d4822af22e05b741e4a1c779cf99ba05cb0a1fa",
+    "PulseLib": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+    "Rdk": "027f7f8353608f83b55f3857a2f6c39138df4c65"
+  },
+  "scope": "five shared control properties on each learner; ten source reviews, not full parameter/runtime acceptance",
+  "records": [
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "ControllerVersion",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": 1,
+      "units": "enum",
+      "allowed_values": [
+        1,
+        2
+      ],
+      "owner": "learner configuration; persisted choice of legacy/native control path",
+      "setter_name": "SetControllerVersion",
+      "setter_behavior": "Reject values outside1/2. If NativeTrainingOwned, reject a different version. When invoked and accepted, set Ready=false; stored value changes afterward in UProperty.",
+      "build_effect": "1 selects legacy unless an explicit native owner already holds the model.2 parses/validates configured native model and plan through PrepareConfiguredNativeOwner. Public Build remains true; typed service/failure diagnostics determine validity.",
+      "reset_effect": "Native Reset hooks do not restore version1; Default explicitly restores1.",
+      "persistence": "Public parameter; absence in an old configuration retains Default1. Not an algorithm/model checkpoint.",
+      "mode_scope": "legacy1 and configured2; explicit native API ownership also guards the graph independently of version",
+      "pending": [
+        "Full property-specific Load/Copy/Build and binding matrix; current code/old legacy behavior must remain distinguished."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "c93b52a30c66621d14ce4ab96c4ade8ea16ba40f",
+          "line": 50
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 2583
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 3777
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 4111
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "ControllerConfiguration",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "std::string",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": "",
+      "units": "JSON text",
+      "allowed_values": "Strict configured-native schema1 or2 when ControllerVersion2; empty is the legacy default, not a valid native declaration.",
+      "owner": "immutable configured ModelSpec/training declaration, interpreted by native configured owner",
+      "setter_name": "SetControllerConfiguration",
+      "setter_behavior": "Reject a changed declaration after ConfiguredModelInitialized with NativeModelDeclaration. Reject setter invocation during capturing/searching. Otherwise mark Ready=false; parsing occurs in Build, not setter. Same-value assignment can be elided by generic equality checks before setter.",
+      "build_effect": "Parse strict JSON; validate topology, effective generator and optional-mode support; construct through storage only when declaration absent. Invalid configuration is a typed failure, not a false Build return.",
+      "reset_effect": "Reset preserves declaration/model; Default clears the text and configured owner. Internal lifecycle scopes distinguish implicit Reset from user Reset.",
+      "persistence": "Parameter text is not the full learned-model archive. Once a graph is declared, editing JSON is not a supported live retarget/checkpoint operation.",
+      "mode_scope": "Used by configured2, not an active experimental factor for legacy1. Schema1 keeps one N0 observation; schema2 requires N0 repeats2..128; N1 repeated policy rejected.",
+      "pending": [
+        "Full imported/declaration/version/binding matrix and all optional mode combinations."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "c93b52a30c66621d14ce4ab96c4ade8ea16ba40f",
+          "line": 51
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 2589
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 3777
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 4111
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "ConfiguredModelInitialized",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "bool",
+      "flags": [
+        "ptPubParameter",
+        "ptPubState"
+      ],
+      "default": false,
+      "units": "service marker",
+      "allowed_values": [
+        false,
+        true
+      ],
+      "owner": "native construction/import guard; not a user training factor",
+      "setter_name": null,
+      "setter_behavior": "Registered without a component setter. Generic property assignment alone does not validate graph or force Ready=false.",
+      "build_effect": "A true marker without NativeModelDeclaration fails with configured_trained_model_requires_explicit_state_import instead of silently cold-building over saved graph. Successful configured construction sets it true via native owner.",
+      "reset_effect": "Native Reset does not declare the model untrained. Default clears marker and ownership.",
+      "persistence": "Has both parameter/state flags; existing Copy-without-state controls retain the parameter marker to prevent accidental cold replacement. Marker is not a certificate, full graph, or controller checkpoint.",
+      "mode_scope": "Service guard for native configured/imported state; do not sweep or manually use it to authorize an existing graph.",
+      "pending": [
+        "Full saved graph/storage/lifecycle combinations; a true marker alone is never transfer proof."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "c93b52a30c66621d14ce4ab96c4ade8ea16ba40f",
+          "line": 52
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 2411
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 3777
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 4111
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "CalculateMode",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": 0,
+      "units": "enum",
+      "allowed_values": [
+        0,
+        1
+      ],
+      "owner": "management policy for local training request, not convergence status",
+      "setter_name": "SetCalculateMode",
+      "setter_behavior": "Reject values outside0/1; reset legacy CountIteration and IsFirstBeat when setter is invoked. Does not itself rebuild the physical model.",
+      "build_effect": "No physical ModelSpec/profile replacement follows from this setter alone. Native live control snapshots bind the management policy separately from search outcome.",
+      "reset_effect": "Native Reset hooks do not restore default0; Default explicitly assigns0.",
+      "persistence": "Public parameter, separate from TrainingStatus/certificate/recognition score.",
+      "mode_scope": "0 may automatically clear a local request after terminal training/finalization.1 retains external control. Need=false is not evidence of Exact or successful recognition.",
+      "pending": [
+        "Ownership guards of all terminal/error writes and all binding variants; changing mode mid-probe is not certified merely because the setter accepts0/1."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "c93b52a30c66621d14ce4ab96c4ade8ea16ba40f",
+          "line": 66
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 2866
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 3777
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 4111
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "property": "IsNeedToTrain",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "bool",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": true,
+      "units": "training request",
+      "allowed_values": [
+        false,
+        true
+      ],
+      "owner": "local request unless a property provider supplies it; provider remains owner of external request",
+      "setter_name": "SetIsNeedToTrain",
+      "setter_behavior": "NativeRecognition rejects true. Native false calls ExternalStop when native training owns control; false cancels an owned standalone probe. A local false→true native request clears prior intent/control/probe transient state. Legacy setter has distinct threshold/iteration behavior. Generic source/binding dispatch precedes this setter.",
+      "build_effect": "Configured cold construction preserves the requested value around native model construction; it must not infer trained state or convergence from this flag.",
+      "reset_effect": "Explicit native Reset clears transient control in ABeforeReset while preserving model/declaration; it is not Default or reset-to-untrained. Generic bindings can bypass the local setter, so controller also reads the request on native ticks.",
+      "persistence": "Public request parameter. Not a saved TrainingCertificate or complete checkpoint; frozen evaluation must not be enabled by toggling it alone.",
+      "mode_scope": "Both calculate modes and both controllers; normal connected SetPointer reads provider and ignores local SetDataDirect. ExternalDataSource has separate forwarding semantics.",
+      "pending": [
+        "No production non-null ExternalDataSource assignment was found in reviewed tree; do not call hypothetical forwarding a reproduced current-model failure. Audit unguarded automatic calls separately before any change to generic Rdk semantics."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.h",
+          "blob": "c93b52a30c66621d14ce4ab96c4ade8ea16ba40f",
+          "line": 69
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 2781
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 3777
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 4111
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "ControllerVersion",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": 1,
+      "units": "enum",
+      "allowed_values": [
+        1,
+        2
+      ],
+      "owner": "learner configuration; persisted choice of legacy/native control path",
+      "setter_name": "SetControllerVersion",
+      "setter_behavior": "Reject values outside1/2. If NativeTrainingOwned, reject a different version. When invoked and accepted, set Ready=false; stored value changes afterward in UProperty.",
+      "build_effect": "1 selects legacy unless an explicit native owner already holds the model.2 parses/validates configured native model and plan through PrepareConfiguredNativeOwner. Public Build remains true; typed service/failure diagnostics determine validity.",
+      "reset_effect": "Native Reset hooks do not restore version1; Default explicitly restores1.",
+      "persistence": "Public parameter; absence in an old configuration retains Default1. Not an algorithm/model checkpoint.",
+      "mode_scope": "legacy1 and configured2; explicit native API ownership also guards the graph independently of version",
+      "pending": [
+        "Full property-specific Load/Copy/Build and binding matrix; current code/old legacy behavior must remain distinguished."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "0aca7a082bdf44071063d5bfc885e46b094ce6e0",
+          "line": 50
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 3346
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4507
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4850
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "ControllerConfiguration",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "std::string",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": "",
+      "units": "JSON text",
+      "allowed_values": "Strict configured-native schema1 or2 when ControllerVersion2; empty is the legacy default, not a valid native declaration.",
+      "owner": "immutable configured ModelSpec/training declaration, interpreted by native configured owner",
+      "setter_name": "SetControllerConfiguration",
+      "setter_behavior": "Reject a changed declaration after ConfiguredModelInitialized with NativeModelDeclaration. Reject setter invocation during capturing/searching. Otherwise mark Ready=false; parsing occurs in Build, not setter. Same-value assignment can be elided by generic equality checks before setter.",
+      "build_effect": "Parse strict JSON; validate topology, effective generator and optional-mode support; construct through storage only when declaration absent. Invalid configuration is a typed failure, not a false Build return.",
+      "reset_effect": "Reset preserves declaration/model; Default clears the text and configured owner. Internal lifecycle scopes distinguish implicit Reset from user Reset.",
+      "persistence": "Parameter text is not the full learned-model archive. Once a graph is declared, editing JSON is not a supported live retarget/checkpoint operation.",
+      "mode_scope": "Used by configured2, not an active experimental factor for legacy1. Schema1 keeps one N0 observation; schema2 requires N0 repeats2..128; N1 repeated policy rejected.",
+      "pending": [
+        "Full imported/declaration/version/binding matrix and all optional mode combinations."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "0aca7a082bdf44071063d5bfc885e46b094ce6e0",
+          "line": 51
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 3352
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4507
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4850
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "ConfiguredModelInitialized",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "bool",
+      "flags": [
+        "ptPubParameter",
+        "ptPubState"
+      ],
+      "default": false,
+      "units": "service marker",
+      "allowed_values": [
+        false,
+        true
+      ],
+      "owner": "native construction/import guard; not a user training factor",
+      "setter_name": null,
+      "setter_behavior": "Registered without a component setter. Generic property assignment alone does not validate graph or force Ready=false.",
+      "build_effect": "A true marker without NativeModelDeclaration fails with configured_trained_model_requires_explicit_state_import instead of silently cold-building over saved graph. Successful configured construction sets it true via native owner.",
+      "reset_effect": "Native Reset does not declare the model untrained. Default clears marker and ownership.",
+      "persistence": "Has both parameter/state flags; existing Copy-without-state controls retain the parameter marker to prevent accidental cold replacement. Marker is not a certificate, full graph, or controller checkpoint.",
+      "mode_scope": "Service guard for native configured/imported state; do not sweep or manually use it to authorize an existing graph.",
+      "pending": [
+        "Full saved graph/storage/lifecycle combinations; a true marker alone is never transfer proof."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "0aca7a082bdf44071063d5bfc885e46b094ce6e0",
+          "line": 52
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 3161
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4507
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4850
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "CalculateMode",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "int",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": 0,
+      "units": "enum",
+      "allowed_values": [
+        0,
+        1
+      ],
+      "owner": "management policy for local training request, not convergence status",
+      "setter_name": "SetCalculateMode",
+      "setter_behavior": "Reject values outside0/1; reset legacy CountIteration and IsFirstBeat when setter is invoked. Does not itself rebuild the physical model.",
+      "build_effect": "No physical ModelSpec/profile replacement follows from this setter alone. Native live control snapshots bind the management policy separately from search outcome.",
+      "reset_effect": "Native Reset hooks do not restore default0; Default explicitly assigns0.",
+      "persistence": "Public parameter, separate from TrainingStatus/certificate/recognition score.",
+      "mode_scope": "0 may automatically clear a local request after terminal training/finalization.1 retains external control. Need=false is not evidence of Exact or successful recognition.",
+      "pending": [
+        "Ownership guards of all terminal/error writes and all binding variants; changing mode mid-probe is not certified merely because the setter accepts0/1."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "0aca7a082bdf44071063d5bfc885e46b094ce6e0",
+          "line": 66
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 3638
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4507
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4850
+        }
+      ]
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "property": "IsNeedToTrain",
+      "semantic_review": "source_reviewed",
+      "runtime_acceptance": "partial_existing_controls",
+      "cpp_type": "bool",
+      "flags": [
+        "ptPubParameter"
+      ],
+      "default": true,
+      "units": "training request",
+      "allowed_values": [
+        false,
+        true
+      ],
+      "owner": "local request unless a property provider supplies it; provider remains owner of external request",
+      "setter_name": "SetIsNeedToTrain",
+      "setter_behavior": "NativeRecognition rejects true. Native false calls ExternalStop when native training owns control; false cancels an owned standalone probe. A local false→true native request clears prior intent/control/probe transient state. Legacy setter has distinct threshold/iteration behavior. Generic source/binding dispatch precedes this setter.",
+      "build_effect": "Configured cold construction preserves the requested value around native model construction; it must not infer trained state or convergence from this flag.",
+      "reset_effect": "Explicit native Reset clears transient control in ABeforeReset while preserving model/declaration; it is not Default or reset-to-untrained. Generic bindings can bypass the local setter, so controller also reads the request on native ticks.",
+      "persistence": "Public request parameter. Not a saved TrainingCertificate or complete checkpoint; frozen evaluation must not be enabled by toggling it alone.",
+      "mode_scope": "Both calculate modes and both controllers; normal connected SetPointer reads provider and ignores local SetDataDirect. ExternalDataSource has separate forwarding semantics.",
+      "pending": [
+        "No production non-null ExternalDataSource assignment was found in reviewed tree; do not call hypothetical forwarding a reproduced current-model failure. Audit unguarded automatic calls separately before any change to generic Rdk semantics."
+      ],
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.h",
+          "blob": "0aca7a082bdf44071063d5bfc885e46b094ce6e0",
+          "line": 69
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 3547
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4507
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 4850
+        }
+      ]
+    }
+  ],
+  "shared_source_evidence": [
+    {
+      "repository": "Rdk",
+      "commit": "027f7f8353608f83b55f3857a2f6c39138df4c65",
+      "path": "Core/Engine/UProperty.h",
+      "blob": "3576a7a8bdd92503d46ef50a985b565a9cec172b",
+      "line": 705
+    },
+    {
+      "repository": "Rdk",
+      "commit": "027f7f8353608f83b55f3857a2f6c39138df4c65",
+      "path": "Core/Engine/UProperty.h",
+      "blob": "3576a7a8bdd92503d46ef50a985b565a9cec172b",
+      "line": 752
+    },
+    {
+      "repository": "PulseLib",
+      "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+      "path": "Core/TimeLearner/ConfiguredNativeOwner.h",
+      "blob": "30cc3c53b0a9e5b3eac33f19a7e8408b96f2608e",
+      "line": 5
+    },
+    {
+      "repository": "PulseLib",
+      "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+      "path": "Core/TimeLearner/NativeTrainingBindings.h",
+      "blob": "d451c097fc7b67c1d8fe775723080b5dda41b873",
+      "line": 8
+    }
+  ],
+  "runtime_evidence_documents": [
+    "ConfiguredNativeController.ru.md",
+    "NativeLiveFinalization.ru.md"
+  ],
+  "open_audit_questions": [
+    {
+      "id": "CTRL-OWN-001",
+      "status": "source_contract_risk_production_reachability_unproven",
+      "description": "Some automatic terminal/error writes do not guard UsesExternalDataSource when live finalization is absent. Normal SetPointer ignores local writes. The protected ExternalDataSource forwarding branch exists, but no production assignment to non-null was found; the reviewed tree has only a derived inspection test exposer. Do not invent a runtime reproduction using unsafe casts or change Rdk forwarding semantics to hide a learner ownership question.",
+      "source_evidence": [
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "blob": "9cea20766ea6a677ff2fd93c156330963e72499d",
+          "line": 7428
+        },
+        {
+          "repository": "PulseLib",
+          "commit": "f23d1b8dee908ddfdc549619b754875fc627ce9b",
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "blob": "32d1f318118e2f66375801366d3a2a64f00eeb75",
+          "line": 8594
+        },
+        {
+          "repository": "Rdk",
+          "commit": "027f7f8353608f83b55f3857a2f6c39138df4c65",
+          "path": "Core/Engine/UProperty.h",
+          "blob": "3576a7a8bdd92503d46ef50a985b565a9cec172b",
+          "line": 422
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "No new numerical/runtime tests were run for this source ledger. Existing controls cover subsets only.",
+    "Historical source_inventory.json retains its own original snapshot and pending flags; this ledger does not silently mark all inventory rows accepted.",
+    "All other public parameters remain outside this ten-record review."
+  ]
+}

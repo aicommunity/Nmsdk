@@ -1,0 +1,25 @@
+{
+  "scope": "native implementation evidence; no scientific training claim",
+  "tested_root": "12f450c91755d268180a08d6b04f264f20bff273",
+  "host": "10.245.1.17",
+  "profile_cases": 10,
+  "targeted_with_shutdown_probe": 11,
+  "ctest_suites": 4,
+  "asan_full_cases": 122,
+  "asan_options": "detect_leaks=0:halt_on_error=1",
+  "asan_exit": 0,
+  "traces": [
+    {
+      "name": "TLProfileUnit_Wave_20000.csv",
+      "samples": 2000,
+      "max_pairwise_error": 0.0,
+      "legacy_range": 0.003249374479493916
+    },
+    {
+      "name": "TLProfileUnit_Wave_2000.csv",
+      "samples": 200,
+      "max_pairwise_error": 0.0,
+      "legacy_range": 0.0033828893825672557
+    }
+  ]
+}

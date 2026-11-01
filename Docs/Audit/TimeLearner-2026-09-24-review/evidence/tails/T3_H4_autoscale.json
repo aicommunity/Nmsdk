@@ -1,0 +1,50 @@
+{
+  "probe": "T3_H4_autoscale",
+  "gap1": {
+    "gap": "1",
+    "work": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_h4_gap1_20260924T201541Z_work",
+    "AutoScaleIterationGap": "1",
+    "Delay": "1.5",
+    "Need": "0",
+    "TipR": "2e07 2e07 2e07 8.6e07",
+    "mid": "1",
+    "fires": "",
+    "train_status": "done_flag_flush_gate_FAIL_gate_rc=1",
+    "gate_ok": false,
+    "row_fail": true,
+    "fail_notes": [
+      "train_incomplete:done_flag_flush_gate_FAIL_gate_rc=1",
+      "fires_missing",
+      "gate_fail",
+      "gate_rc=1"
+    ],
+    "expected_delay_floor_sec": 1.55
+  },
+  "gap0": {
+    "gap": "0",
+    "work": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_h4_gap0_20260924T202324Z_work",
+    "AutoScaleIterationGap": "0",
+    "Delay": "1.5",
+    "Need": "0",
+    "TipR": "2e07 2e07 2e07 8.6e07",
+    "mid": "1",
+    "fires": "",
+    "train_status": "done_flag_flush_gate_FAIL_gate_rc=1",
+    "gate_ok": false,
+    "row_fail": true,
+    "fail_notes": [
+      "train_incomplete:done_flag_flush_gate_FAIL_gate_rc=1",
+      "fires_missing",
+      "gate_fail",
+      "gate_rc=1"
+    ],
+    "expected_delay_floor_sec": 1.55
+  },
+  "differs": {
+    "Delay": false,
+    "mid": false,
+    "TipR": false,
+    "fires": false,
+    "Need": false
+  }
+}

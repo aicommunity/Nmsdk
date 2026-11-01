@@ -1,0 +1,58 @@
+--- a/Tests/Integration/Libraries/Test_PulseLib_TimeLearnerResistance.cpp
++++ b/Tests/Integration/Libraries/Test_PulseLib_TimeLearnerResistance.cpp
+@@ -2333,3 +2333,55 @@
+     ASSERT_EQ(tips.size(), 3u);
+     EXPECT_NEAR(tips[1], 2.0e6 * std::exp(-0.05 * 2.0), 1e-8);
+ }
++
++// --- Audit 2026-10-20: diagnostic switches (UseSignedDelayEstimate, RminLengthTolFactor,
++// FreezeSynapseResistanceBase, Branch EstDelayPerSegInit). Defaults must reproduce d52dc1c.
++namespace {
++class ClassicAuditFlagsHarness : public NMSDK::NNeuronTimeLearner
++{
++public:
++    using NMSDK::NNeuronTimeLearner::RminLengthTolFactorValue;
++};
++
++class BranchAuditFlagsHarness : public NMSDK::NNeuronTimeLearnerBranch
++{
++public:
++    using NMSDK::NNeuronTimeLearnerBranch::RminLengthTolFactorValue;
++};
++}  // namespace
++
++TEST(TimeLearnerAuditFlags20261020Test, ClassicDefaultsKeepHistoricalBehaviour)
++{
++    ClassicAuditFlagsHarness learner;
++    learner.Default();
++    EXPECT_FALSE(learner.UseSignedDelayEstimate.GetData());
++    EXPECT_FALSE(learner.FreezeSynapseResistanceBase.GetData());
++    EXPECT_DOUBLE_EQ(learner.RminLengthTolFactor.GetData(), 4.0);
++    EXPECT_DOUBLE_EQ(learner.RminLengthTolFactorValue(), 4.0);
++}
++
++TEST(TimeLearnerAuditFlags20261020Test, BranchDefaultsKeepHistoricalBehaviour)
++{
++    BranchAuditFlagsHarness learner;
++    learner.Default();
++    EXPECT_FALSE(learner.UseSignedDelayEstimate.GetData());
++    EXPECT_FALSE(learner.FreezeSynapseResistanceBase.GetData());
++    EXPECT_DOUBLE_EQ(learner.RminLengthTolFactor.GetData(), 4.0);
++    EXPECT_DOUBLE_EQ(learner.RminLengthTolFactorValue(), 4.0);
++    EXPECT_DOUBLE_EQ(learner.EstDelayPerSegInit.GetData(), 0.0);
++}
++
++TEST(TimeLearnerAuditFlags20261020Test, RminLengthTolFactorOverrideAndFallback)
++{
++    ClassicAuditFlagsHarness classic;
++    classic.Default();
++    classic.RminLengthTolFactor = 1.0;
++    EXPECT_DOUBLE_EQ(classic.RminLengthTolFactorValue(), 1.0);
++    classic.RminLengthTolFactor = 0.5;  // below 1 is not a valid slack: fall back to 4
++    EXPECT_DOUBLE_EQ(classic.RminLengthTolFactorValue(), 4.0);
++
++    BranchAuditFlagsHarness branch;
++    branch.Default();
++    branch.RminLengthTolFactor = 2.0;
++    EXPECT_DOUBLE_EQ(branch.RminLengthTolFactorValue(), 2.0);
++}

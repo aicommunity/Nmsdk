@@ -1,0 +1,90 @@
+{
+  "probe": "T3_H3_soft_vs_strip",
+  "archive": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/SelectivityBranch/EXP_br_span25_packA_gen_C1e9_posttune",
+  "soft": {
+    "label": "soft",
+    "work": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_h3_soft_20260924T195954Z_work",
+    "run_id": "br25_h3_soft_20260924T195954Z",
+    "train": {
+      "Need": "0",
+      "TipR": "2e07 2e07 2e07 8.6e07",
+      "L": "1 1 1 1",
+      "mid": "1",
+      "flag_exists": true,
+      "flag_result": "2",
+      "flag_metrics": "0.102519,0.10328,0.103349,0.103419,0.0786552,0.0790846,0.101577,0.103503",
+      "tip_slots": 4
+    },
+    "test": {
+      "Need": "0",
+      "TipR": "2e07 2e07 2e07 8.6e07",
+      "L": "1 1 1 1",
+      "mid": "1",
+      "flag_exists": true,
+      "flag_result": "2",
+      "flag_metrics": "0.0134003,0.0141973,0.0126681,0.0132587,0.0116843,0.0140422,0.0136387,0.0151749",
+      "tip_slots": 4
+    },
+    "row": {
+      "train_status": "done_flag_flush_gate_FAIL_gate_rc=1",
+      "Need": "0",
+      "TipR": "2e07 2e07 2e07 8.6e07",
+      "mid": "1",
+      "fires": "",
+      "gate_ok": false,
+      "row_fail": true,
+      "fail_notes": [
+        "train_incomplete:done_flag_flush_gate_FAIL_gate_rc=1",
+        "fires_missing",
+        "gate_fail",
+        "gate_rc=1"
+      ],
+      "params_source": "flag_flush",
+      "tipr_class": "canon"
+    }
+  },
+  "strip": {
+    "label": "strip",
+    "work": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_h3_strip_20260924T200758Z_work",
+    "run_id": "br25_h3_strip_20260924T200758Z",
+    "train": {
+      "Need": "0",
+      "TipR": "2e07 2e07 2e07 8.6e07",
+      "L": "1 1 1 1",
+      "mid": "1",
+      "flag_exists": true,
+      "flag_result": "2",
+      "flag_metrics": "0.102519,0.10328,0.103349,0.103419,0.0786552,0.0790846,0.101577,0.103503",
+      "tip_slots": 4
+    },
+    "test": {
+      "Need": "0",
+      "TipR": "2e07 2e07 2e07 8.6e07",
+      "L": "1 1 1 1",
+      "mid": "1",
+      "flag_exists": true,
+      "flag_result": "2",
+      "flag_metrics": "0.0134003,0.0141973,0.0126681,0.0132587,0.0116843,0.0140422,0.0136387,0.0151749",
+      "tip_slots": 4
+    },
+    "row": {
+      "train_status": "done_flag_flush_gate_FAIL_gate_rc=1",
+      "Need": "0",
+      "TipR": "2e07 2e07 2e07 8.6e07",
+      "mid": "1",
+      "fires": "",
+      "gate_ok": false,
+      "row_fail": true,
+      "fail_notes": [
+        "train_incomplete:done_flag_flush_gate_FAIL_gate_rc=1",
+        "fires_missing",
+        "gate_fail",
+        "gate_rc=1"
+      ],
+      "params_source": "flag_flush",
+      "tipr_class": "canon"
+    }
+  },
+  "strip_differs_from_soft": false,
+  "verdict": "no_material_diff"
+}
