@@ -3,6 +3,15 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Current loaded legacy graph defects (implementation fix under acceptance):
+[normal32/32 detected failures](s04-loaded-readout-baseline-normal-a1/README.md),
+[ASan32/32](s04-loaded-readout-baseline-asan-a1/README.md).
+Twelve parameter-only N>1 cases keep a two-row buffer; twenty stateful/N1 cases
+keep a zero learner readout while the physical soma responds. Complete native
+XML/graph/dimension dumps and setup/compile attempts are retained compactly.
+[Scope and native lifecycle cause](../../../Docs/StructTrain/TimeLearner/LoadedLearnerReadout.ru.md).
+No scientific selectivity verdict or full stage4 acceptance is implied.
+
 Actual August original-protocol saved-state replay:
 [three fresh native Test runs, exact historical closure](s11-august-phasea-replay-elder-a1/README.md)
 reproduce4/8,5/8,6/8 (TP1, FP4/3/2).
