@@ -3,6 +3,8 @@
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeLearnedState.h"
+#include "TimeLearner/NativeLiveFinalization.h"
+#include "NNeuronPostTrainTune.h"
 #include <iomanip>
 #include <iostream>
 #include <locale>
@@ -21,20 +23,27 @@ struct Job {
     std::string ownerClass,implementation;
     int calculateMode=0,structureMode=1;
     std::size_t maximumTicks=0;
+    std::optional<NativeLiveFinalizationSpec> finalization;
 };
 Job Read(const QString& path)
 {
     Job j;j.document=ReadDocument(path);const auto& d=j.document;
-    Keys(d,{"kind","schema_version","owner_class","implementation_id","configuration",
-        "profile_archives","optional_modes","calculate_mode","structure_build_mode","maximum_model_ticks","sha256"});
-    Require(d["kind"]==QJsonValue("timelearner_native_training_job") && Number(d["schema_version"])==1.,"unsupported_training_job");
+    const auto version=Count(d["schema_version"],1,2);
+    std::set<QString> fields{"kind","schema_version","owner_class","implementation_id","configuration",
+        "profile_archives","optional_modes","calculate_mode","structure_build_mode","maximum_model_ticks","sha256"};
+    if(version==2)fields.insert("finalization_plan");Keys(d,fields);
+    Require(d["kind"]==QJsonValue("timelearner_native_training_job"),"unsupported_training_job");
     Require(Signed(d)==d,"job_digest_mismatch");j.implementation=Text(d["implementation_id"]);
+    if(version==2) {
+        j.finalization=DecodeNativeLiveFinalizationSpec(Object(d["finalization_plan"]));
+        Require(j.finalization->implementationId==j.implementation,"training_finalization_implementation_mismatch");
+    }
     j.configuration=DecodeConfiguredNativeTraining(Object(d["configuration"]));j.ownerClass=Text(d["owner_class"]);
     Require(j.ownerClass==(j.configuration.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"),"training_job_owner_mismatch");
     j.profiles=Array(d["profile_archives"]);Require(j.profiles.size()<=32,"training_profile_budget_exceeded");
     for(const auto& profile:j.profiles)Object(profile);
     const auto modes=Object(d["optional_modes"]);Keys(modes,{"sync_capacitance_trim","post_train_tuning","auto_calibrate_threshold"});
-    Require(Number(modes["sync_capacitance_trim"])==0. && modes["post_train_tuning"]==QJsonValue(false) &&
+    Require(Number(modes["sync_capacitance_trim"])==0. && modes["post_train_tuning"]==QJsonValue(bool(j.finalization)) &&
         modes["auto_calibrate_threshold"]==QJsonValue(false),"training_optional_modes_not_yet_supported");
     j.calculateMode=int(Count(d["calculate_mode"],0,1));j.structureMode=int(Count(d["structure_build_mode"],0,1));
     j.maximumTicks=Count(d["maximum_model_ticks"],1,1000000000);return j;
@@ -94,12 +103,105 @@ public:
         return records;
     }
 };
+// This driver owns only the outer clock. The learner owns Train and every
+// finalization phase, and its native scheduler calculates physical children.
+// The captured Solo boundary is read before any recognition import replaces
+// the graph/controller; cached Train pointers are never used after conversion.
+template<class Owner,class Model,class Environment> int ExecuteLive(const Job& job,const QString& output,
+    Owner owner,Model model,Environment environment,std::shared_ptr<EvidenceWriter> evidence,QJsonArray artifacts)
+{
+    const double begin=environment->GetTime().GetDoubleTime();std::size_t ticks=0;
+    std::string execution="completed";QJsonObject solo,summary;
+    const auto capture=[&]() {
+        const auto live=owner->NativeLiveFinalizationReport();
+        const auto boundary=live["boundary"].toObject();
+        if(boundary.isEmpty() || !solo.isEmpty())return;
+        // Live queues the import for the following tick, so the real finished
+        // service and all source evidence are still available at this boundary.
+        const auto& service=owner->NativeTrainingController();
+        Require(service.State()==NativeTrainingState::Finished && !owner->HasNativeRecognitionState(),
+            "training_source_summary_missed_before_import");
+        solo=boundary["source_solo"].toObject();Require(!solo.isEmpty(),"training_live_source_missing");
+        summary=EncodeNativeTrainingState(service,solo["model_revision"].toString().toStdString(),owner->ReadNativeParameters());
+    };
+    owner->IsNeedToTrain=true;
+    while(!owner->NativeLiveFinalizationDone()) {
+        if(QFileInfo::exists(QDir(output).filePath("cancel.request"))) {
+            execution="cancelled";owner->CancelNativeLiveFinalization("job_cancel_request");capture();break;
+        }
+        if(ticks==job.maximumTicks) {
+            execution="model_tick_budget_exhausted";owner->CancelNativeLiveFinalization("job_model_tick_budget");capture();break;
+        }
+        model->Calculate();environment->IncreaseModelTimeByStep();++ticks;capture();
+    }
+    const auto live=owner->NativeLiveFinalizationReport();
+    Require(owner->NativeLiveFinalizationDone(),"training_live_execution_not_terminal");
+    const bool started=!live["training_request"].toObject().isEmpty();
+    const bool completed=!solo.isEmpty() && solo["kind"]==QJsonValue("timelearner_completed_state");
+    if(!solo.isEmpty())Require(live["boundary"].toObject()["source_solo"].toObject()==solo,"training_live_source_changed");
+    for(const auto& record:evidence->Finalize(!completed))artifacts.append(record);
+    owner->SetConfiguredNativeEvidenceSinks({});
+    QJsonValue packagePath(QJsonValue::Null),packageSha(QJsonValue::Null),revision(QJsonValue::Null),outcome(QJsonValue::Null);
+    if(!solo.isEmpty()) {
+        const QString name=completed?"train_learned_state.json":"train_stopped_state.json";
+        artifacts.append(Write(output,name,solo));
+        artifacts.append(Write(output,completed?"train_learned_summary.json":"train_stopped_summary.json",summary));
+        packagePath=name;packageSha=solo["sha256"];revision=solo["model_revision"];outcome=solo["training_outcome"];
+    } else Require(summary.isEmpty(),"training_live_summary_without_source");
+    artifacts.append(Write(output,"finalization.json",live));
+    const auto phaseStatus=live["post_tune"].toObject()["status"].toString();
+    const bool recognitionAvailable=execution=="completed" && completed && live["status"]==QJsonValue("completed") &&
+        (phaseStatus=="weights_selected" || phaseStatus=="calibrated" || phaseStatus=="search_unresolved" || phaseStatus=="budget_exhausted");
+    QJsonValue recognitionPath(QJsonValue::Null),recognitionSha(QJsonValue::Null),recognitionRevision(QJsonValue::Null);
+    if(recognitionAvailable) {
+        Require(owner->HasNativeRecognitionState(),"training_live_final_graph_missing");
+        const auto final=owner->ExportNativeRecognitionState(job.implementation);
+        artifacts.append(Write(output,"recognition-model.json",final));
+        recognitionPath="recognition-model.json";recognitionSha=final["sha256"];recognitionRevision=final["model_revision"];
+    }
+    if(execution=="completed" && (live["status"]==QJsonValue("failed") || live["status"]==QJsonValue("recovery_required") ||
+        live["status"]==QJsonValue("interrupted") || phaseStatus=="failed" || phaseStatus=="recovery_required"))execution="finalization_failed";
+    // Keep the exact external request as an artifact, without rewriting it.
+    const QString cancelPath=QDir(output).filePath("cancel.request");
+    if(QFileInfo::exists(cancelPath)) {
+        QFile file(cancelPath);Require(file.open(QIODevice::ReadOnly) && file.size()<=65536,"training_cancel_request_unreadable");
+        const auto bytes=file.readAll();artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
+            {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
+    }
+    Write(output,"execution.json",Signed({{"kind","timelearner_native_training_execution"},{"schema_version",2},
+        {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},{"attempt_id",QString::fromStdString(job.configuration.runId)},
+        {"training_started",started},{"package_path",packagePath},{"package_sha256",packageSha},{"model_revision",revision},
+        {"training_outcome",outcome},{"completed_boundary",completed},{"finalization_path","finalization.json"},{"finalization_sha256",live["sha256"]},
+        {"finalization_status",live["status"]},{"recognition_available",recognitionAvailable},{"recognition_package_path",recognitionPath},
+        {"recognition_package_sha256",recognitionSha},{"recognition_model_revision",recognitionRevision},
+        {"frequency_hz",double(job.configuration.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",begin},
+        {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
+    return execution=="completed"?0:2;
+}
 template<class Owner> int Execute(const Job& job,const QString& output)
 {
     const auto frequency=job.configuration.model.frequencyHz;
     return WithFreshOwner<Owner>(job.ownerClass,frequency,"TrainingOwner",[&](auto,auto environment,auto model,auto owner) {
         owner->ControllerVersion=2;owner->CalculateMode=job.calculateMode;owner->StructureBuildMode=job.structureMode;
         owner->SyncCapacitanceTrim=0;owner->EnablePostTrainTuning=false;owner->AutoCalibrateFixedLTZThreshold=false;
+        if(job.finalization) {
+            const auto& spec=job.finalization->postTune;
+            owner->EnablePostTrainTuning=true;owner->EnablePostTrainMidThreshold=spec.finalization==NativePostTuneFinalization::Calibrate;
+            int mode=PostTrainTune::kPostTipOff;
+            switch(spec.mode) {
+            case NativePostTuneControllerMode::Off:break;
+            case NativePostTuneControllerMode::KeepDone:mode=PostTrainTune::kPostTipKeepDone;break;
+            case NativePostTuneControllerMode::CanonRmin:mode=PostTrainTune::kPostTipCanonRmin;break;
+            case NativePostTuneControllerMode::FlatLastR:mode=PostTrainTune::kPostTipFlatLastR;break;
+            case NativePostTuneControllerMode::SearchSynthetic:mode=PostTrainTune::kPostTipSearchSynthetic;break;
+            }
+            owner->PostTrainTipResistanceMode=mode;owner->PostTrainMidMetric=int(spec.metric);
+            owner->UseCandidateMidOnNonSeparableTest=false;
+            owner->TipResistanceCanonFloor=spec.canonicalFloor;owner->TipResistanceCanonLast=spec.canonicalLast;
+            owner->PostTrainTipSearchIters=int(spec.searchPasses);
+            if(spec.weightProbeThreshold)owner->PostTrainSilentThreshold=*spec.weightProbeThreshold;
+            owner->ConfigureNativeFinalization(*job.finalization);
+        }
         const auto encoded=QJsonDocument(EncodeConfiguredNativeTraining(job.configuration)).toJson(QJsonDocument::Compact).toStdString();
         owner->ControllerConfiguration=encoded;owner->IsNeedToTrain=false;
         Require(owner->ControllerVersion.GetData()==2 && owner->ControllerConfiguration.GetData()==encoded &&
@@ -127,6 +229,7 @@ template<class Owner> int Execute(const Job& job,const QString& output)
         auto evidence=std::make_shared<EvidenceWriter>(output,job.configuration.model.branch?1:parameters.size());
         owner->SetConfiguredNativeEvidenceSinks({[evidence](const auto& p,const auto& s){evidence->Prepared(p,s);},
             [evidence](const auto& sample){evidence->Sample(sample);},[evidence](const auto& result){evidence->Observation(result);}});
+        if(job.finalization)return ExecuteLive(job,output,owner,model,environment,evidence,artifacts);
         const double begin=environment->GetTime().GetDoubleTime();std::size_t ticks=0;std::string execution="completed";
         owner->IsNeedToTrain=true;
         while(owner->NativeTrainingController().State()!=NativeTrainingState::Finished)

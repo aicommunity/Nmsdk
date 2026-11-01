@@ -307,3 +307,17 @@ root dcc64fff651e29569e03312f1f8acad0179d9c00. Он ждёт успешного 
 source/build/runtime, затем выполнит9 checks (8 cancellation +1 codec).
 Оба старых процесса повторно подтверждены живыми; они не перезапускаются.
 Production Console Train schema2 и Python worker integration остаются открытыми.
+
+Cancellation reader завершён status0:8/8 checks без skips,112.695 s,
+136 producer files неизменны. Опубликован proof1af3cc9e155d1ce94c18afd08f7cd0900176b26a:
+252 members /117794880 raw bytes →752596 compressed bytes. Все member и
+outer hashes локально проверены после --no-ff merge. Оригинальные два
+profile/design portable runs /84 artifacts включены; старые regression primary
+связаны с прежним опубликованным normal proof без дублирования.
+[Cancellation proof](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-cancel-normal-a1/README.md).
+
+Реализуется production Console Train schema2 + Python worker: explicit plan,
+source capture до импорта, nullable no-boundary diagnostic, раздельный
+recognition export и typed nonzero exits. Добавлен production14-operation
+corpus с отдельным frozen evaluate; runtime-проверка этой новой реализации
+ещё не выполнена. Нельзя считать новый путь принятым по прежним8 native tests.
