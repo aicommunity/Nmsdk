@@ -633,3 +633,28 @@ Full31 и reader4 на M40 ещё pending. Publisher173580 ждёт именно
 terminal0 и corrected reader164462 terminal0, затем сохранит actual ASan primary
 и первоначальный failed reader. Новый numeric run не создаётся. Весь план и
 full stage7 открыты; develop пока не обновлён.
+
+
+Независимый source-review подэтап stage1 выполнен в отдельном worktree
+E:/Science-Repo/nmsdk-parameter-contracts и ветке codex/timelearner-parameter-contracts.
+[ParameterControlContracts](ParameterControlContracts.ru.md) + machine ledger
+содержат10 записей: ControllerVersion, ControllerConfiguration,
+ConfiguredModelInitialized, CalculateMode, IsNeedToTrain для Classic/Branch.
+Проверены47 refs/7 unique blobs полных pinned commits;4 текущих learner class
+blobs совпадают с reviewed f23d1b8d. Runtime tests для ledger0: существующие
+configured/live controls дают только частичное покрытие, не full acceptance.
+Исторический source_inventory.json не переписан и не помечен целиком PASS.
+
+CTRL-OWN-001 записан как source-contract risk с непроверенной production
+достижимостью, не воспроизведённый дефект. SetPointer ignores local writes;
+protected ExternalDataSource would forward them, но ненулевое присваивание
+в production дереве не найдено, только derived inspection-test exposer.
+Общий Rdk forwarding contract не менялся; unsafe-cast воспроизведение не вводилось.
+
+Root-only docs feature0e74bfa6c44b06aec48356f1c1f88db6b867889b объединена --no-ff
+в developc910ba84cada0a37b195f48ebe603215b75dd963 и опубликована, ls-remote проверен.
+Child gitlinks f23d1b8d/49adcd02/027f7f83 неизменны. Это docs-only delta к
+принятому live baseline1d4822af2, не новая численная сборка или закрытие stage1.
+Develop затем включён --no-ff в N0 feature, без изменения её functional Core.
+ASan native process150150 подтверждён живым39:33; идёт Branch20000Hz. Полные
+31/reader4/visual ASan и scoped N0 develop merge ещё ожидаются.
