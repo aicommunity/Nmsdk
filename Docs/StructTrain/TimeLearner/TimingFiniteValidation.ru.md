@@ -23,14 +23,29 @@ Baseline primary опубликован в `433f5992343e50b0941c178828360102d74f
 [отчёт и компактный архив](../../../Reports/StructTrain/TimeLearner/s01-timing-finite-baseline-normal-a1/README.md).
 Все30 members и внешние hashes проверены после получения из Git; archive10320 B.
 
-Исправление пока в feature-ветке; normal/ASan проверки и публикация primary
-evidence ещё не приняты. Численный root —
-`ebf590082a881cbc8a702bd25f48bfb26b73a50d`. На Elder запущен job
-s01-timing-finite-current-normal-a1 (PID2974833/start_ticks312123044), на M40 —
-s01-timing-finite-current-asan-a1 (PID909824/start_ticks262665851).
-Запланированы4 property cases и21 lifecycle/native-execution regression case
-на каждом worker. Наличие запущенного job не означает прохождения gate.
-Baseline process_error с returncode1 сохраняется.
+Исправление принято адресно. Численный root —
+`ebf590082a881cbc8a702bd25f48bfb26b73a50d`, tested Pulse Core —
+`ecf35a6c322f58fc9c4ffdfb998bf882f990252a`. На каждом worker пройдены4/4
+property cases и21/21 lifecycle/native-execution regressions без skips;
+120 неконечных назначений отклонены с сохранением прежнего значения.
+
+Normal primary `fff3d9ddf116c39abaf22ab5fa8b13025efd350b`:
+[артефакты](../../../Reports/StructTrain/TimeLearner/s01-timing-finite-current-normal-a1/README.md),
+71 members/176784 compressed bytes. ASan primary
+`afe5bdf4b56deddf4a6021853b1ad76d145a494e`:
+[артефакты](../../../Reports/StructTrain/TimeLearner/s01-timing-finite-current-asan-a1/README.md),
+112 members/177616 bytes. Все outer/member hashes проверены после Git retrieval.
+
+Первый ASan regression21 остановлен лимитом1800 wall s; XML не завершён,
+последующий parse error launcher сохранён. Повтор только21 regressions с лимитом
+3600 s прошёл за1997.296 wall s на том же frozen runtime, без пересборки и
+повтора уже пройденных property cases. Это исправление бюджета проверки,
+а не изменение алгоритма, численного допуска или независимое обучение.
+Baseline process_error с returncode1 и первоначальный timeout сохраняются.
+
+PulseLib develop merge `456a5abdb0ff36a218b25943f7f2c6f9c2175190` опубликован;
+его Core tree01761a77e37fee635279afdfdc5dcbf787c666f5 точно равен tested Core.
+Root acceptance закрепляет этот child gitlink.
 Нельзя считать четыре неуспешных gtests успешным gate.
 
 SetDataDirect и connected/external supplier следуют Rdk; они не покрыты
