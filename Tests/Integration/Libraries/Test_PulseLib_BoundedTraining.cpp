@@ -362,6 +362,7 @@ TEST(BoundedTrainingN1Refinement, AMeasuredBracketCanReachBetweenMeshPointsButSt
         },[](const auto& action) {
             ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;d.baseModelRevision=action.baseModelRevision;
             d.previewModelRevision="one_unchanged_physical_scope";d.geometry=action.parameters;d.inputIndex=action.inputIndex;
+            d.sourceAmplitude=1.;
             d.minimumResistance=1.;d.maximumResistance=16.;return d;
         });
         ASSERT_TRUE(session.Certificate());
@@ -375,8 +376,10 @@ TEST(BoundedTrainingN1Refinement, AMeasuredBracketCanReachBetweenMeshPointsButSt
     }
 }
 
-TEST(BoundedTrainingN1Refinement, AChangedNormalizedPhysicalScopeCannotReuseTheOldBracket)
+TEST(BoundedTrainingN1Refinement, AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket)
 {
+    for(const bool changeSource:{false,true})
+    {
     const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);
     cfg.bounds={{2,2,1,1,1.,16.},{1,1,1,1,10.,10.}};
     cfg.tolerances.sync=1.;cfg.resistanceSubdivisionDepth=1;cfg.maximumCandidatesPerInput=6;
@@ -387,12 +390,14 @@ TEST(BoundedTrainingN1Refinement, AChangedNormalizedPhysicalScopeCannotReuseTheO
         if(action.inputIndex==0 && !action.finalVerification)++measured;
     },[&](const auto& action) {
         ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;d.baseModelRevision=action.baseModelRevision;
-        d.previewModelRevision=measured>=4?"changed_scope":"original_scope";
+        d.previewModelRevision=measured>=4 && !changeSource?"changed_scope":"original_scope";
+        d.sourceAmplitude=measured>=4 && changeSource?2.:1.;
         d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=1.;d.maximumResistance=16.;return d;
     });
     EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
     for(const auto& e:session.Evidence())
         EXPECT_TRUE(e.parameters.resistance==1. || e.parameters.resistance==4. || e.parameters.resistance==16.);
+    }
 }
 
 TEST(BoundedTraining, RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged)
