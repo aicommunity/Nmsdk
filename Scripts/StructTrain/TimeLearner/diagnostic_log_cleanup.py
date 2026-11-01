@@ -114,6 +114,10 @@ def compact_tick_log(source, destination, *, delete_original=False, maximum_arch
     with destination.open("rb") as file:os.fsync(file.fileno())
     receipt = destination.with_name(destination.name+".json")
     receipt.write_text(json.dumps(result, indent=2)+"\n", encoding="utf-8")
+    with receipt.open("rb") as file:os.fsync(file.fileno())
+    directory = os.open(destination.parent, os.O_RDONLY | os.O_DIRECTORY)
+    try:os.fsync(directory)
+    finally:os.close(directory)
     if delete_original:
         source.unlink();result["original_removed"] = True
         receipt.write_text(json.dumps(result, indent=2)+"\n", encoding="utf-8")
