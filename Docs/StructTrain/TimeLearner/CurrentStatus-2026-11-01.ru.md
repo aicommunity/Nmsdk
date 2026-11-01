@@ -22,8 +22,11 @@ warm/loaded compatibility —16/16 каждый. Primary опубликован 
 Все1476 temporal PNG проверены автоматически; все26 выбранных оригиналов1920×960
 непосредственно просмотрены, включая input/peak zooms. Запись просмотра и hashes
 опубликованы вb1cdf435d673d8d4e303b9dfa88b1283b21e2dc9. Полный cache остаётся наM40;
-его ручной просмотр не заявляется. XML ASan32 выполняется наM40 в отдельном
-runtime; supervisor834822/start_ticks262176902. Merge-приёмка ещё требуется.
+его ручной просмотр не заявляется. XML ASan32/32 завершён; readers18/16/16
+прошли, все64 warm/replay CSV побайтово равны normal. Primary8ac617120ab0a58f207f2175ea85ce58b89b2bbd
+проверен после Git retrieval:290 members/285528 bytes, все outer/member hashes.
+Оба supervisor834822 и reader838718 завершены. Подэтап принят адресно;
+arbitrary-precision matrix/storage/growth и полные этапы4/5/11 остаются открытыми.
 Этот контроль Load/Init/Reset не подтверждает классификацию или mid-probe checkpoint.
 Ранние статусы ниже являются историческими снимками.
 

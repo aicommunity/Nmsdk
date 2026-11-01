@@ -10,7 +10,7 @@ Accepted scoped legacy warm Reset correction:
 All40 CSVs are byte-identical across workers; hashes and complete native/runtime
 evidence are retained. [Scope and remaining gates](../../../Docs/StructTrain/TimeLearner/HotLearnerReset.ru.md).
 
-Current loaded legacy graph defects (implementation fix under acceptance):
+Historical baselines of the accepted scoped loaded legacy graph correction:
 [normal32/32 detected failures](s04-loaded-readout-baseline-normal-a1/README.md),
 [ASan32/32](s04-loaded-readout-baseline-asan-a1/README.md).
 Twelve parameter-only N>1 cases keep a two-row buffer; twenty stateful/N1 cases
@@ -18,6 +18,13 @@ keep a zero learner readout while the physical soma responds. Complete native
 XML/graph/dimension dumps and setup/compile attempts are retained compactly.
 [Scope and native lifecycle cause](../../../Docs/StructTrain/TimeLearner/LoadedLearnerReadout.ru.md).
 No scientific selectivity verdict or full stage4 acceptance is implied.
+
+Accepted native hot XML Load/Init/Reset scope:
+[normal32/32 and readers18/16/16](s04-hot-xml-current-normal-a1/README.md),
+[ASan32/32 and readers18/16/16](s04-hot-xml-current-asan-a1/README.md),
+[1476 cached figures /26 directly reviewed originals](s04-hot-xml-visual-a1/README.md).
+All64 warm/replay CSVs are byte-identical across workers. Arbitrary-precision
+matrix parameters and full lifecycle/profile coverage remain separate requirements.
 
 Actual August original-protocol saved-state replay:
 [three fresh native Test runs, exact historical closure](s11-august-phasea-replay-elder-a1/README.md)
