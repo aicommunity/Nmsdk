@@ -1,5 +1,27 @@
 # Готовый legacy-граф: размер и привязка измерительных буферов
 
+Текущая приёмка подэтапа loaded graph/readout: завершена адресно. Источник
+численных запусков e1b7624749d370631b8f44552e6b99a679a2d2e5,
+Pulse92241d3/Rdk1699d365. На каждом worker: MDMatrix10/10, native32/32,
+regression21/21 без skipped, production reader16/16. Normal/ASan32 CSV
+побайтово равны. Для всех68 case/soma pairs построены1476 PNG;30 выбранных
+прямо просмотрены1920x960, full-cache manual review не заявлена.
+
+ASan primary52874374009aaa00d11347b93eff626ca42d93f1:340 файлов,
+394220 bytes; outer/member hashes проверены локально после Git retrieval.
+Normal primaryc794e3cbf11c920d8fae5bb86dddd6f91bbceb17:336 файлов,
+388052 bytes. Baseline/intermediate ошибки сохранены отдельными архивами.
+Remote child merges: PulseLibe51c70201e82f994a38cd72e1aa462c059b69b17,
+Rdk78e51a9b8760711f44988e6a0131643162c5b55a. Их trees точно совпадают
+с проверенными92241d3/1699d365; новая научная реплика не выдумывается.
+
+Подэтап не закрывает полный stage4/11, V2 public readouts, hot XML checkpoint,
+остальные profiles/матрицу или всю цель0–12. Новый warm Reset дефект уже
+воспроизведён отдельно и исправляется в codex/timelearner-hot-readout-reset;
+он не входит в эту приёмку. Ниже сохранены последовательные снимки исследования;
+старые формулировки «проверяется/ожидается» относятся к своим снимкам.
+
+
 Подэтап lifecycle/storage, в разработке; в develop пока не принят.
 Исходный develop root `044c76d1b1cbe35b2747285ef296ac22afe976ce`, PulseLib
 `d1c3df4cd0749e5869b977fb5e69417400ce1112`. Наблюдение продолжает
