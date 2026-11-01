@@ -1,0 +1,3 @@
+# Native timing property correction: ASan
+
+All4 real storage property cases passed;120 nonfinite assignments rejected with previous values preserved. All21 lifecycle/copy/XML/native scheduler regressions passed without skips on the exact same frozen runtime. The original21-test attempt reached its1800-second wall budget and did not produce complete XML; timeout and launcher parse error remain preserved. A regression-only retry with3600 seconds completed in1997.296 wall seconds. No rebuild or property-test repetition. Actual mappings include libasan. No learning certificate, scientific verdict or full mode/profile acceptance.
