@@ -92,8 +92,9 @@ Git, полные производные отчёты остаются на M40 
    Дополнительный normal N0 контроль уже физически подтвердил timing-ready
    L2 → соседний Ns2 до L3 для Classic/Branch; ASan-аналог также подтверждён.
    Все четыре Train при этом SearchUnresolved; классификация не проверялась.
-   Следующий [N1 refinement](MeasuredResistanceRefinement.ru.md) находится
-   в отдельной feature. Актуальные normal a3 (40/40) и ASan a2 (32/32)
+   [N1 refinement](MeasuredResistanceRefinement.ru.md) принят адресным root
+   develop merge `ff98c7fef96eb4f947eca756528834877d14492d`.
+   Актуальные normal a3 (40/40) и ASan a2 (32/32)
    сборки прошли адресные C++ gates. Одинаковые реальные cold N1 jobs дали
    Classic/Branch Exact на обоих workers против SearchUnresolved исходной
    finite mesh; по 2/2 reader checks. Proof commits: normal

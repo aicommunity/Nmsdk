@@ -177,7 +177,9 @@ probe/soma исходного поиска и142 нового, по3 production 
 PulseLib объединён в develop merge
 `d1c3df4cd0749e5869b977fb5e69417400ce1112`. Его Core tree
 `412b4997167f47f70419a9281acadcd9ad81647c` идентичен проверенному521df545.
-Root feature записывает этот опубликованный gitlink. Дополнительный кэш
+Корневой develop merge `ff98c7fef96eb4f947eca756528834877d14492d` записывает
+этот опубликованный gitlink. Это приёмка данного подэтапа, не полного stage7.
+Дополнительный кэш
 временных отчётов native-domain depth=0 regressions завершён отдельно:
 четыре normal cases при2000/20000 Гц,48 проб/72 пары soma, полные native samples
 и input overlays проверены production renderer;192 исходных файлов не изменены.
