@@ -211,3 +211,12 @@ learning proof. segsim не входит в production CMake и не прове�
 проверяет Git retrieval всех36 записей, отсутствие удалённых путей и сохранность
 неисполняемых normsync artifacts; серверный receipt ещё требуется. Этап9
 в целом остаётся открытым, включая другие Docs/Bin/PulseLib/Reports tools.
+
+Серверная статическая проверка завершена на Elder:36/36 retrieval records,
+все5 оставшихся normsync JSON byte-identical исходному snapshot, удалённых
+путей в новом Git tree нет; буквальных root production callers не найдено.
+Receipt опубликован в58be4e41c2d095318d3260e634769f9b42d101b4,
+Reports/StructTrain/TimeLearner/s09-retired-normsync-model-elder-a1.
+HEAD серверной рабочей копии не менялся; выполнены только чтение Git-объектов
+и публикация receipt через отдельный index. Код фактической проверки приложен
+как verification-source.txt. Численные результаты заново не рассчитывались.
