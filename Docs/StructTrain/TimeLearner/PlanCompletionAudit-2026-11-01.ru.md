@@ -46,6 +46,12 @@ scheduler/CLI остаются открытыми. [Реестр/границы]
 20/20 адресных Python checks на каждом worker, archived full-module parity,
 явная corruption-диагностика. Это частичная миграция и не новый C++/ASan прогон.
 
+Адресно принята [finite validation десяти timing properties](TimingFiniteValidation.ru.md):
+на обоих workers4 property+21 native regressions без skips; baseline84/120
+неконечных назначений принятых ошибочно сохранён, после исправления120/120
+отклонены. ASan regression повторён на том же runtime после timeout1800 s,
+с бюджетом3600 s, не с ослабленными численными условиями. Полные этапы открыты.
+
 ## Снимки и пределы доказательств
 
 Принятый сквозной live pipeline включён в корневой develop
