@@ -1,1 +1,0 @@
-Actual ASan N1 A/B: identical jobs and cold models; old finite mesh SearchUnresolved, current measured refinement Exact for Classic and Branch. Fresh final residual amplitude -9.574000452428066e-7, timing about-.019s. Actual nonseed resistance64369082.70599112; unchanged anchor. Classification and full-matrix acceptance remain separate; ASan detect_leaks=0.

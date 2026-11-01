@@ -1,5 +1,0 @@
-N0 configured repeated measurements: ASan scoped proof
-
-Actual configured ControllerVersion2/schema2 Classic and Branch N0 runs require two fresh anchor/input measurements per candidate. Three native cases (both real topologies and strict schema codec) and three independent primary-data checks passed without skips. All48 probes support ten repeat groups;108 native source files unchanged. Missing measurements, duplicate IDs, altered ranges/revisions and schema downgrade are rejected by the production auditor. Both effective graphs have recomputed canonical hashes matching actual model revisions.
-
-The same immutable executable/runtime/source was reused, with no rebuild; runtime before/after matched. Both training outcomes remain SearchUnresolved with negative final certificates. Repeated probes are engineering evidence, not independent scientific trainings or classification success. Full raw primary/model/configuration, process and reader receipts are archived. ASan leak detection is disabled; no leak-freedom acceptance is claimed. Temporal report acceptance and full stage7 remain pending.
