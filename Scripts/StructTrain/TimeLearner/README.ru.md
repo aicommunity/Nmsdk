@@ -355,3 +355,11 @@ semantic identity/images. Неизвестная схема, неполное о
 в Git публикуются сжатые primary, метрики и выбранные проверенные изображения.
 Границы и receipts: Docs/StructTrain/TimeLearner/ArchiveF64Precision.ru.md.
 
+
+
+Для source-only проверки переноса scripts доступен `history verify-migration`:
+full root SHA, explicit repository paths и новый output receipt обязательны.
+Проверяются все manifest records по immutable Git blobs и точным gitlinks;
+архивные программы не исполняются. Это проверка retrieval/absence/replacement,
+не полнота migration и не numerical/runtime parity. Контракт:
+[ScriptMigration](../../../Docs/StructTrain/TimeLearner/ScriptMigration.ru.md).

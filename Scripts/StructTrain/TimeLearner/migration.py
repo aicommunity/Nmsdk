@@ -9,7 +9,7 @@ import re
 import subprocess
 
 from .history import resolve_revision
-from .native_evidence import load_json, require
+from .native_evidence import parse_json_bytes, require
 
 
 def _git(repository, *arguments):
@@ -58,8 +58,8 @@ def verify_migration(root, revision, bin_repository=None, pulselib_repository=No
                 "migration_repository_alias_mismatch:"+name)
         require(_git(repository, "cat-file", "-t", revisions[name]).strip() == b"commit",
                 "migration_target_commit_missing:"+name)
-    manifest = load_json(_git(root, "show", target+":Docs/StructTrain/TimeLearner/script_migration.json").decode("utf-8"))
-    require(manifest.get("kind") == "timelearner_script_migration" and type(manifest.get("schema_version")) is int
+    manifest = parse_json_bytes(_git(root, "show", target+":Docs/StructTrain/TimeLearner/script_migration.json"))
+    require(type(manifest) is dict and manifest.get("kind") == "timelearner_script_migration" and type(manifest.get("schema_version")) is int
             and manifest["schema_version"] == 1 and type(manifest.get("complete")) is bool
             and type(manifest.get("retired_files")) is list and type(manifest.get("moved_files", [])) is list,
             "unknown_script_migration_manifest")
