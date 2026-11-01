@@ -1,0 +1,48 @@
+{
+  "kind": "n0_existing_template_contract",
+  "status": 0,
+  "reader_source": "54382334754986c574c7ccbcd5ded5b55f1b638e",
+  "baseline_source": "1d2d3b0cd5abd783ebb96a0e746903257b1c708c",
+  "baseline_expected_incompatibility_reproduced": true,
+  "steps": [
+    {
+      "name": "baseline-reproduction",
+      "returncode": 0,
+      "command": [
+        "/usr/bin/python3",
+        "/home/user/timelearner-refactor/source-n0-candidate-order-reader-normal-a2/Scripts/StructTrain/TimeLearner/tests/template_contract_baseline.py",
+        "--source-root",
+        "/home/user/timelearner-refactor/source-order-fixed-a1",
+        "--case",
+        "/dev/shm/TimeLearnerRefactor-user/n0-production-worker-normal-a2/repeat-2/runs/Classic-fixed"
+      ]
+    },
+    {
+      "name": "reader-repeat-1",
+      "returncode": 0,
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "-v",
+        "Scripts.StructTrain.TimeLearner.tests.test_live_pipeline_n0_worker"
+      ]
+    },
+    {
+      "name": "reader-repeat-2",
+      "returncode": 0,
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "-v",
+        "Scripts.StructTrain.TimeLearner.tests.test_live_pipeline_n0_worker"
+      ]
+    }
+  ],
+  "tests_per_protocol": 9,
+  "actual_jobs_regenerated_per_protocol": 10,
+  "source_files_unchanged": 1147,
+  "numerical_rerun": false,
+  "wall_seconds": 124.62312936782837
+}

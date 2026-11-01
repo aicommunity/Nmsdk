@@ -7,6 +7,7 @@ from copy import deepcopy
 import contextlib
 import json
 from pathlib import Path
+import shutil
 
 from ..__main__ import main as cli
 from ..model_identity import canonical_model_sha256 as sha
@@ -22,9 +23,44 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2, allow_nan=False)+"\n", encoding="utf-8")
 
 
-def make_job(template, name, *, calibrate=False, legacy=False, budget=False, stopped=False):
+def make_job(template, name, *, calibrate=False, legacy=False, budget=False, stopped=False,
+             normalization=None, n0_candidate_repeats=1, n0_maximum_synapses=None):
     solo = template["source_recognition"]["source_solo"]
     config = deepcopy(solo["configuration"]);config["run_id"] = name
+    require(normalization in (None, "N0", "N1"), "corpus_unknown_normalization")
+    require(type(n0_candidate_repeats) is int and 1 <= n0_candidate_repeats <= 128,
+            "corpus_invalid_candidate_repeats")
+    require(config["model"]["normalization"] in ("N0", "N1"), "corpus_unknown_template_normalization")
+    if normalization is None:
+        require(n0_candidate_repeats == 1 and n0_maximum_synapses is None,
+                "corpus_factor_override_requires_explicit_normalization")
+        # No factor selection means keep the entire existing declaration,
+        # including N0 schema2 repeats and individual domains. Defaults must
+        # not reinterpret a saved experiment as a newly chosen protocol.
+    elif normalization == "N0":
+        require(type(n0_maximum_synapses) is int and 2 <= n0_maximum_synapses <= 128,
+                "corpus_explicit_n0_synapse_domain_required")
+        require(len(config["search"]["bounds"]) == len(config["model"]["inputs"]),
+                "corpus_input_bounds_shape_changed")
+        require(template["source_recognition"]["conversion_spec"]["mode"] == "identity",
+                "corpus_n0_requires_declared_identity_conversion")
+        config["model"]["normalization"] = "N0"
+        # The final input remains the fixed reference. N0 varies counts on the
+        # other inputs and keeps their declared individual resistances fixed.
+        for i, (bound, initial) in enumerate(zip(config["search"]["bounds"], config["model"]["inputs"])):
+            require(type(initial["resistance"]) in (int, float) and initial["resistance"] > 0,
+                    "corpus_explicit_n0_resistance_required")
+            bound["minimum_resistance"] = bound["maximum_resistance"] = initial["resistance"]
+            if i + 1 < len(config["model"]["inputs"]):
+                bound["maximum_synapses"] = n0_maximum_synapses
+        config["schema_version"] = 2 if n0_candidate_repeats > 1 else 1
+        config["search"].pop("n0_candidate_repeats", None)
+        if n0_candidate_repeats > 1:
+            config["search"]["n0_candidate_repeats"] = n0_candidate_repeats
+    else:
+        require(n0_candidate_repeats == 1 and n0_maximum_synapses is None,
+                "corpus_n0_factors_on_n1")
+        require(config["model"]["normalization"] == "N1", "corpus_n1_template_required")
     if stopped:
         config["maximum_model_seconds"] = 1/config["model"]["frequency_hz"]
     job = {"kind": "timelearner_native_training_job", "schema_version": 1 if legacy else 2,
@@ -45,10 +81,21 @@ def make_job(template, name, *, calibrate=False, legacy=False, budget=False, sto
     return signed(job)
 
 
-def run_corpus(fixtures, runtime, output, wall_seconds):
+def run_corpus(fixtures, runtime, output, wall_seconds, *, normalization=None,
+               n0_candidate_repeats=1, n0_maximum_synapses=None,
+               minimum_free_bytes=512*1024**2):
     fixtures, runtime, output = Path(fixtures), Path(runtime), Path(output)
+    # Measured two-protocol N0 primary data occupy about404 MB. This lower
+    # bound protects this engineering corpus only; it is not a reservation,
+    # a general job estimator, or a substitute for scheduler resource leases.
+    require(type(minimum_free_bytes) is int and minimum_free_bytes >= 512*1024**2,
+            "corpus_invalid_storage_budget")
+    require(shutil.disk_usage(output.parent).free >= minimum_free_bytes,
+            "corpus_insufficient_primary_storage")
     output.mkdir(parents=True, exist_ok=False);jobs = output/"jobs";jobs.mkdir();runs = output/"runs";runs.mkdir()
     rows = []
+    factors = dict(normalization=normalization, n0_candidate_repeats=n0_candidate_repeats,
+                   n0_maximum_synapses=n0_maximum_synapses)
     def invoke(name, mode, job, *, source=None, expected=0):
         path = jobs/(name+".json");write(path, job)
         args = [mode, str(path), "--runtime-manifest", str(runtime), "--wall-seconds", str(wall_seconds), "--output", str(runs/name)]
@@ -72,7 +119,7 @@ def run_corpus(fixtures, runtime, output, wall_seconds):
         template = load(fixtures/old/"input/job.json")
         for calibrate in (False, True):
             name = top+("-grid" if calibrate else "-fixed")
-            job = make_job(template, name, calibrate=calibrate)
+            job = make_job(template, name, calibrate=calibrate, **factors)
             train = invoke(name, "train", job)
             e = load(train/"native/execution.json")
             require(e["completed_boundary"] and e["recognition_available"], "live_pipeline_completed_recognition_missing")
@@ -97,10 +144,12 @@ def run_corpus(fixtures, runtime, output, wall_seconds):
             write(output/"progress.json", {"records": rows});print("END", name+"-evaluate", flush=True)
         for scenario in ("budget", "stopped", "legacy-budget"):
             name = top+"-"+scenario
-            job = make_job(template, name, legacy=scenario=="legacy-budget", budget=scenario!="stopped", stopped=scenario=="stopped")
+            job = make_job(template, name, legacy=scenario=="legacy-budget", budget=scenario!="stopped", stopped=scenario=="stopped", **factors)
             invoke(name, "train", job, expected=0 if scenario=="stopped" else 2)
     require(len(rows)==14, "live_pipeline_operation_count")
     value = {"kind": "native_live_pipeline_corpus", "schema_version": 1, "records": rows,
              "operations": len(rows), "cold_live_finalization_runs": 4, "frozen_same_matrix_evaluations": 4,
              "partial_v2_controls": 4, "legacy_v1_controls": 2, "independent_partition_verified": False, "scientific_verdict": None}
+    if normalization is not None:
+        value["experiment_factors"] = factors
     write(output/"index.json", value);return value

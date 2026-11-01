@@ -1,6 +1,22 @@
 # TimeLearner reproducibility artifacts
 
-Latest scoped PostTune evidence:
+Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
+Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
+
+Latest production N0 evidence:
+
+- [Normal primary: two protocols,28 operations,7 checks per protocol](s07-n0-production-worker-normal-a2/README.md).
+- [ASan primary: the same declared coverage](s07-n0-production-worker-asan-a1/README.md).
+- [ASan temporal:28 reports,16 directly reviewed selected PNGs](s07-n0-production-visual-asan-a1/README.md).
+- [Normal temporal:32 exact references to those reviewed images](s07-n0-production-visual-normal-a1/README.md).
+- [Separate ASan Console build](s07-n0-production-build-asan-a1/README.md) and [normal build/resource-cancelled first attempt](s07-n0-production-normal-preparation-a1/README.md).
+- [Authorized Elder cleanup](s02-storage-cleanup-elder-20261101-a1/README.md) and [M40 cleanup](s02-storage-cleanup-m40-20261101-a1/README.md): scientific primary data retained; optional debug caches excluded from Git.
+
+All16 full N0 Train executions across the two workers remain SearchUnresolved.
+Complete refers to declared windows; selected traces still decay at their end.
+Independent Test, full physical matrix and August replay remain open.
+
+Earlier scoped PostTune milestones (open items describe their historical snapshots):
 
 [Original request bound to finalization: normal](s08-native-training-intent-binding-normal-a1/README.md),
 [ASan](s08-native-training-intent-binding-asan-a1/README.md): 61/61 native, 3/3 reader, actual successful import and 20 schema compatibility checks per worker.
@@ -270,3 +286,5 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
 - [Repeated N0 temporal, normal](s07-n0-candidate-order-repeated-visual-normal-a1/README.md)
   and [ASan](s07-n0-candidate-order-repeated-visual-asan-a1/README.md):each48/72,
   three checks. Four normal PNG directly reviewed;four exact ASan references.
+
+Дополнение: проверка совместимости N0-шаблона перед приёмкой подэтапа. Исправление 0980f23309e099cb7cc73a1355a2dd25c7f788ab сохраняет полную конфигурацию при вызове подготовителя без новых факторов; раньше такой вызов ошибочно требовал повторного задания диапазона Ns. Проверено исходниками 54382334754986c574c7ccbcd5ded5b55f1b638e на Elder и M40: исходная ошибка воспроизведена через прежний публичный make_job; по 9 проверок для repeat=1/2, по 10 фактических Train-заданий на протокол регенерированы идентично, 1147 исходных файлов каждого корпуса не изменились. Численные прогоны и отрисовка повторно не выполнялись. Исходные отчёты с 7 проверками остаются отчётами своего снимка. Новые квитанции: Reports/StructTrain/TimeLearner/s07-n0-template-contract-normal-a2 (7aeb9655afdc3aec7ef607664393318fe290d1a3), s07-n0-template-contract-asan-a2 (0689def9d7a056bc9e9464d5ba647fcb8e30cbf9). Первые попытки настройки a1 завершились SyntaxError до выполнения проверок и также сохранены. Это приёмка совместимости подготовителя, а не положительный результат физического обучения и не закрытие полного этапа 7.
