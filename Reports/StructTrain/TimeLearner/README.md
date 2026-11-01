@@ -3,6 +3,14 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Actual positive N1 calibration: [normal primary](s08-positive-n1-calibration-normal-a1/README.md),
+[ASan primary](s08-positive-n1-calibration-asan-a1/README.md),
+[all-pattern temporal proof and28 directly reviewed PNGs](s08-positive-n1-calibration-visual-a1/SELECTED_VISUAL_REVIEW.ru.md).
+Each worker measured20 matrices/160 complete trials,4/4 reader checks.
+Best target-detecting candidate: TP1/FP3/FN0/TN4 (5/8), both topologies.
+All declared grids nonseparable; original threshold1 restored, no calibrated package.
+This is historical same-matrix candidate evidence, not independent frozen Test.
+
 Additional authorized build-object cleanup: [Elder](s02-unused-build-objects-elder-20261101-a1/README.md)
 and [M40](s02-unused-build-objects-m40-20261101-a1/README.md).
 19358 unused object/dependency files removed (5319965370 logical bytes);
