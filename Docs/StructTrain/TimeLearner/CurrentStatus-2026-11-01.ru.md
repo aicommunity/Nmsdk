@@ -6,9 +6,26 @@ MDMatrix resize. Оба workers прошли10 math+32 native+21 regression+16 r
 в cache и30 directly reviewed selected PNG. Child mergesPulseLibe51c702 /
 Rdk78e51a9b опубликованы с trees, равными проверенным исходникам. Root exact
 closure фиксируется в текущем acceptance merge. [Подробности](LoadedLearnerReadout.ru.md).
-Полные этапы4/11 и цель0–12 остаются открытыми. Warm learner Reset — отдельная
-незавершённая feature; новые8 tests на normal уже прошли, ASan/graphs/acceptance
-ещё требуются. Ранние статусы ниже являются историческими снимками.
+Полные этапы4/11 и цель0–12 остаются открытыми. Ранние статусы ниже являются
+историческими снимками.
+
+Warm learner Reset остаётся отдельной незавершённой feature. Normal-проверки
+8 warm +32 loaded +21 regression завершены; все40 CSV совпадают с контрольными
+данными. Для178 temporal PNG выполнена автоматическая проверка, все18 выбранных
+изображений непосредственно просмотрены. На M40 подтверждены живыми supervisor
+792527/start_ticks261869449 и ожидающий reader801210/start_ticks261922523:
+ASan warm8 и loaded32 пройдены, regression выполняет последний native executor
+case. Это проверенный текущий ход работы, а не завершённая приёмка.
+
+В зависимой feature [hot XML](HotXmlReset.ru.md) normal прошёл32 native cases
+Classic/Branch × N1/2/4/6 ×2000/20000Hz ×Parameters-only/Parameters+State.
+Production reader проверил68 case/soma pairs и18 data/corruption tests;
+warm/loaded compatibility —16/16 каждый. Primary опубликован в59a8e1491b925510299e3c04bed360e000e082d8.
+Все1476 temporal PNG проверены автоматически; все26 выбранных оригиналов1920×960
+непосредственно просмотрены, включая input/peak zooms. Запись просмотра и hashes
+опубликованы вb1cdf435d673d8d4e303b9dfa88b1283b21e2dc9. Полный cache остаётся наM40;
+его ручной просмотр не заявляется. XML ASan32 и merge-приёмка ещё требуются.
+Этот контроль Load/Init/Reset не подтверждает классификацию или mid-probe checkpoint.
 
 
 Цель 0–12 активна. Полностью принят только этап 0; остальные этапы имеют
