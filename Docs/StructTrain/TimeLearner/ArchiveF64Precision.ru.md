@@ -63,6 +63,22 @@ Normal проверяет unit10 и native archive16; ASan — unit10/archive16 
 build не обновляются до завершения соответствующего supervisor. Результаты
 этих проверок ещё не получены, приёмка исправления остаётся открытой.
 
+Для последующей проверяемой temporal evidence fixture получает явную schema1,
+complete/window fields и массив native clock, считанный до Calculate каждого
+отсчёта. Child сохраняет такой же clock и проверяет совпадение. Старые primary
+a1/a2/a3 не переименовываются в эту схему: отсутствие полей остаётся известным
+ограничением соответствующего producer snapshot.
+
+Новый root module archive_transfer_reports проверяет12 transfer условий,
+native16/unit10 receipts, полный состав файлов, archive/image/XML/identity
+hashes, finite IEEE754 параметры, ожидаемые индивидуальные C/R и точную2×3
+TrainingPattern. Проверяются все native timestamps и input samples, физическая
+Soma.SumPotential и отдельный ExcChannel.Output, совпадение source/import
+откликов и сводных ошибок. Графики используют production renderer с полными
+отсчётами, shared amplitude и100-tick zooms; scientific verdict остаётся null.
+23 tests вносят повреждения в реальные server exports; они ещё не запускались.
+Новый producer/reader требуют отдельного прогона после завершения текущих jobs.
+
 Проверки ещё не выполнены. Подэтап не принят; general archive/profile/growth
 матрица, все формы векторов/матриц и полный Train→Test остаются открытыми.
 Если native XML теряет значащие цифры, требуется сначала локализовать это
