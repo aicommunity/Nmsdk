@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-02",
+  "kind": "timelearner_continuation_checkpoint",
+  "accepted_root": "b40289cbb23ee599dcfdf41839a11768d1cf00e8",
+  "accepted_submodules": {
+    "PulseLib": "456a5abdb0ff36a218b25943f7f2c6f9c2175190",
+    "Bin": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+    "Rdk": "0a1c1d05a1b12de20feabf54a25712e210865791"
+  },
+  "accepted_scope": [
+    "217 property source declarations byte-reproduced on both workers; source slices only, not runtime/consumer coverage",
+    "44 migration records verified on both workers; six Phase12 historical shell paths removed from Bin; full migration incomplete",
+    "source_closure rejects another Git worktree with matching HEAD/status;3 actual Git fixtures pass per worker,2 baseline alias failures",
+    "Elder Bin per-worktree core.worktree repaired, missing tracked files restored from exact6304; shared config and neighboring checkout unchanged"
+  ],
+  "pending_feature": {
+    "root": "6d3eb379a544f3974e66fac135cc2c2786388184",
+    "pulse": "a728d97110b706bd7869039557de957ea299c6ea",
+    "branch": "codex/timelearner-measured-length",
+    "numerical_root": "1cdbdaa2b072715d623cc00de62e0ca13c1ca918",
+    "status": "not merged into develop; native gates pending"
+  },
+  "running_jobs": [
+    {
+      "host": "10.245.1.11",
+      "path": "/home/user/timelearner-refactor/readbacks/s07-measured-length-regression-normal-a2",
+      "pid": 3153949,
+      "start_ticks": "313658102",
+      "expected_tests": 67,
+      "budget_seconds": 7200,
+      "last_observation": "owned process alive; Classic2000 and Branch2000 passed; Classic20000 running",
+      "reason": "repeat after corrected Bin worktree; same frozen runtime"
+    },
+    {
+      "host": "10.245.1.17",
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-length-regression-asan-a2",
+      "pid": 1127897,
+      "start_ticks": "264186303",
+      "expected_tests": 24,
+      "budget_seconds": 14400,
+      "last_observation": "owned process alive; first4 NativeModelEditor2000 cases passed; ClassicN0_20000 running",
+      "reason": "remaining cases after7200s timeout; four NativeBoundedTraining cases passed in original stdout; same frozen runtime"
+    }
+  ],
+  "proofs": {
+    "static_m40": "93d88621e25f43ea0fe9ecd841b53f38e274bbee",
+    "static_elder": "30818dfb3a59a01c0eac63b2f9fc0bf6bc086fd2",
+    "guard_elder": "43f427f1d8c032e85f45ba1daf86368c39f98054",
+    "guard_m40": "e8edd5ca73275bf9fbfe44244cc1748e2938d7e7",
+    "elder_bin_repair": "de0f1ad60f7dd0c0637d931af8f7842c87d2d437",
+    "length_gate_normal_limited": "df9f3aff210b44191d7053a19ed9e3327f0904ff",
+    "length_gate_asan_timeout": "0608878fa3570698fa53571c66fdddcd7e59d8c2",
+    "length_visual": "10e918079787b170d1bec862f0e1f7b04dae9ac3",
+    "length_visual_direct_review": "6d3eb379a544f3974e66fac135cc2c2786388184"
+  },
+  "temporal": {
+    "cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s07-measured-length-normal-a1",
+    "png_count": 4146,
+    "scenarios": 8,
+    "trial_soma_pairs": 240,
+    "selected_originals_reviewed": 16,
+    "original_resolution": [
+      1920,
+      960
+    ],
+    "all_cache_manually_reviewed": false,
+    "crossworker_csv_byte_equal": 160,
+    "crossworker_packet_json_semantically_equal": 160,
+    "crossworker_packet_json_byte_equal": 0
+  },
+  "limitations": [
+    "No additional whole stage0-12 accepted; stage0 remains the only whole accepted stage",
+    "Prior Elder source Bin HEAD/status did not attest physical Bin; current repair does not retroactively attest prior runs; impact inventory required",
+    "Normal67 and ASan24 jobs must reach terminal before publication; inspect owned PID/start_ticks, XML, skips, execution result and runtime mappings",
+    "Measured length cold corpus remains SearchUnresolved; no classification or Exact claim from plots",
+    "Compact Git policy retained; full derived images stay in M40 cache",
+    "VPN Automats2 restored; jump10.245.1.12; do not restart running jobs on observation timeout"
+  ],
+  "next": [
+    "Wait for existing normal67 and ASan24 gates; preserve any failure before retry",
+    "Publish compressed primary/actual runtime/validation; fetch and hash-verify proof bytes",
+    "Bind selected temporal plots to independently validated ASan source or rerender selected ASan probes; do not silently transfer old normal provenance",
+    "Accept measured-length change only after gates, then merge PulseLib first and root with exact gitlinks",
+    "Audit prior affected Elder source provenance and continue full remaining stages"
+  ],
+  "scientific_verdict": null,
+  "goal_complete": false
+}
