@@ -1,5 +1,9 @@
 # 00. Общие правила для всех задач
 
+> Исторический документ: указанные ниже shell-команды относятся к аудиту октября2026. Исполняемые файлы удалены из текущего дерева; источники доступны только по зафиксированным Git-ссылкам. Это не инструкция запуска текущего pipeline и не разрешение возобновить серию D.
+> Источники: [cpu_gate.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cpu_gate.sh), [launch_queue.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/launch_queue.sh), [make_lane.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/make_lane.sh), [provenance.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/provenance.sh), [run_series.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh), [wait_run.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/wait_run.sh).
+
+
 Эти правила повторяют и уточняют `Docs/Audit/TimeLearner-2026-09-26-review/TIMELEARNER_EXPERIMENT_RUNBOOK.ru.md`. При противоречии действует runbook, а противоречие нужно отметить в отчёте.
 
 ## 1. Неизменные запреты

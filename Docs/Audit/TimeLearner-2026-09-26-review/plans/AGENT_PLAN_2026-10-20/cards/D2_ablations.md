@@ -1,5 +1,9 @@
 # D2. Абляции на baseline: какие параметры ломают и чинят Classic N1
 
+> Исторический документ: указанные ниже shell-команды относятся к аудиту октября2026. Исполняемые файлы удалены из текущего дерева; источники доступны только по зафиксированным Git-ссылкам. Это не инструкция запуска текущего pipeline и не разрешение возобновить серию D.
+> Источники: [make_lane.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/make_lane.sh), [run_series.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh).
+
+
 **Цель:** однофакторными диагностическими вариантами проверить главные гипотезы аудита о причине несходимости Classic N1 и узнать разброс повторов.
 **Уровень:** слабый. **Хост:** `.17` или `.11`. **Console:** до 6. **Время:** 1–2 дня.
 **Зависит от:** A0, E0. Часть D2b — ещё и от E1.
