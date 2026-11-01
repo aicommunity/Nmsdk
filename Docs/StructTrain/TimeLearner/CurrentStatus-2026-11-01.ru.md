@@ -288,3 +288,22 @@ s08-native-live-finalization-cancel-normal-a1 / PID2233662 выполняет с
 на неизменяемом снимке; runtime acceptance ещё нет. Independent payload reader
 дополнен для actual cancellation records и48 malformed controls; его проверка
 ожидает producer. Production Train schema2 ещё не реализована.
+
+Обновление cancellation gate: Elder producer PID2233662 завершён status0,
+8/8 native checks без skips,62.289 s; runtime before/after совпал. Native
+source root e7543c5eb8f1224138ec591d504b59a64d204777 /
+PulseLib4d2d278ee047b4860d07f8dbf9f7d629f670ac0e. Reader PID2237620
+на root604b468200d461bd7b064d0f18536454b33026c4 уже прошёл2 receipt checks,
+проверку восьми actual cancelled records и48 malformed controls; выполняет
+прежние4 payload regressions. До terminal receipt полная приёмка reader
+и публикация cancellation primary не заявляются.
+
+Сохраняемый codec финализации добавлен в PulseLib019e5d1 (runtime пока не
+проверен), root cbe7d7a69ffbe2ed5a3c02a9cc6b82c3e58f9996 добавил fixture
+четырёх persisted designs и32 malformed controls. Queued M40 job
+s08-native-live-finalization-cancel-codec-asan-a1 / PID69156 закреплён на
+root dcc64fff651e29569e03312f1f8acad0179d9c00. Он ждёт успешного завершения
+старого95-case producer PID20741 и reader PID54868 перед изменением owned
+source/build/runtime, затем выполнит9 checks (8 cancellation +1 codec).
+Оба старых процесса повторно подтверждены живыми; они не перезапускаются.
+Production Console Train schema2 и Python worker integration остаются открытыми.
