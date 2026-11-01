@@ -97,3 +97,17 @@ guard амплитуды источника (PulseLib `1dddf1b861546eb8e7802ab4f
 Для исходного finite-mesh kernel дополнительно запущен ASan physical baseline
 `/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-n1-mesh-asan-a1`.
 Результат и временные отчёты этого N1 сравнения ещё не приняты.
+
+Normal a1 завершён: 40/40 выбранных C++ cases, включая 7 новых helper/kernel
+cases, Console и runtime snapshot; wall1083.99 s. Это снимок e19a303f/bf50ae57,
+а не проверка последней правки. После подтверждённого terminal состояния
+исходники и build cache переиспользованы для a2 с новым отдельным runtime.
+Старые бинарники a1 оставлены; первоначальный finite-mesh runtime38edfcad
+и его исходники не изменялись.
+
+Normal a2 (roota8709e79/Pulsec89a067e) остановился на компиляции за10.37 s:
+в source guard была неверно использована optional `VerificationProtocol::stimulusProfile`.
+Исправление PulseLib `521df5450c3655e0f08b3a01a7aed7d18351c250` проверяет наличие
+профиля и использует `->amplitude`; при отсутствии профиля refinement не
+предлагается. Неудачная попытка сохранена в отдельных receipts и не считается
+прохождением тестов. Требуется normal a3 и актуальная ASan сборка после a1.

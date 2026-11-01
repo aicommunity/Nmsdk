@@ -828,3 +828,5 @@ PulseLib bf50ae57512ff0a1591937f4f23cef172a8928dc); новые normal/ASan сб�
 свежая адресная a2 сборка/проверка, затем physical N1 A/B и temporal reports.
 Протокол, ограничения, baseline proof и критерии:
 [MeasuredResistanceRefinement](MeasuredResistanceRefinement.ru.md).
+
+Уточнение N1 сборок: normal a1 прошёл40/40 C++ cases и Console snapshot (исходникиe19a303f/bf50ae57). Normal a2 завершился compile_error в optional source-profile guard; исправление521df5450c3655e0f08b3a01a7aed7d18351c250 требует normal a3 и актуальной ASan проверки. Все прежние попытки сохранены; полного runtime-прохождения нового N1 поиска пока нет.
