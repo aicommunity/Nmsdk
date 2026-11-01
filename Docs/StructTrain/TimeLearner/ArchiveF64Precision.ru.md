@@ -86,6 +86,22 @@ Soma1. Адаптер renderer передаёт physical_soma_ids=[2]; заго�
 по умолчанию не меняется. Новая схема native clock уже прошла16/16 C++ и
 23/23 actual-data checks на Elder; полные XML/regression и ASan ещё выполняются.
 
+После проверки5c4e1a44cbdbc92fbab646933a1c15de606ebfda immutable code export
+на Elder завершил23 archive +16 warm +16 loaded +18 XML checks. Сохранены
+полные аудиты12 archive output-soma pairs и68 XML pairs; новая маркировка
+выхода $.Soma2 проверяется по эффективному графу. Native normal XML32 также
+прошёл; regression21 ещё выполняется. ASan source9810425b уже прошёл native
+archive16 при том же Rdk2732a08, но XML32 и новая версия producer/reader там
+ещё требуют завершения/проверки. Полного приёма исправления это не означает.
+
+У очень короткого unit-процесса normal a4 зафиксирован fast-exit race чтения
+/proc: runtime_provenance=incomplete_loaded_files. Этот статус не заменяется
+на complete. Для a3 сохранены полные actual mappings того же unit executable
+и одинаковый prelaunch runtime identity; отдельный comparison record явно
+указывает, что фактические mappings a4 остаются неизвестными. Основные native
+archive и XML процессы a4 имеют loaded_files_captured. Эти оси различаются
+в primary receipts и не подменяют результаты численных проверок.
+
 Проверки ещё не выполнены. Подэтап не принят; general archive/profile/growth
 матрица, все формы векторов/матриц и полный Train→Test остаются открытыми.
 Если native XML теряет значащие цифры, требуется сначала локализовать это
