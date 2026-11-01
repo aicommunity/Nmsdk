@@ -1,0 +1,425 @@
+{
+  "kind": "timelearner_timing_finite_correction",
+  "schema_version": 1,
+  "worker": "normal",
+  "validations": [
+    {
+      "kind": "timing_property_finite_correction",
+      "worker": "normal",
+      "source": "ebf590082a881cbc8a702bd25f48bfb26b73a50d",
+      "execution": {
+        "kind": "timelearner_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "wall_seconds": 1.1475502089597285,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "dd8066919b4c18c6f58861d4850894c2f380da277d5e7df47869d0d1e065b746",
+        "ownership_scope": "launched_executable_only",
+        "scientific_verdict": null
+      },
+      "gtest": {
+        "tests": "4",
+        "failures": "0",
+        "disabled": "0",
+        "errors": "0",
+        "time": "0.88",
+        "timestamp": "2026-11-01T19:48:44.510",
+        "name": "AllTests"
+      },
+      "skipped": 0,
+      "scientific_verdict": null
+    },
+    {
+      "execution": {
+        "kind": "timelearner_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "wall_seconds": 276.5312629160471,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "dd8066919b4c18c6f58861d4850894c2f380da277d5e7df47869d0d1e065b746",
+        "ownership_scope": "launched_executable_only",
+        "scientific_verdict": null
+      },
+      "gtest": {
+        "tests": "21",
+        "failures": "0",
+        "disabled": "0",
+        "errors": "0",
+        "time": "276.223",
+        "timestamp": "2026-11-01T19:48:45.856",
+        "name": "AllTests"
+      },
+      "skipped": 0,
+      "scientific_verdict": null
+    }
+  ],
+  "records": [
+    {
+      "path": "s01-timing-finite-current-normal-a1/artifacts/timing-Branch-f2000.json",
+      "bytes": 7246,
+      "sha256": "5ed65f0c475b17a4dd58056a2d2f6261b7221fac8726ddb580ddef7fd73d674c"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/artifacts/timing-Branch-f20000.json",
+      "bytes": 7247,
+      "sha256": "3ab3ade577e040cf2a8e227a7c5986607d83716cd7f8e7f2aba69783526d8ad8"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/artifacts/timing-Classic-f2000.json",
+      "bytes": 7223,
+      "sha256": "2644d8d0a395c94b8cf6f6c3478c5a8cbf76c04f5de7d1b6d3788bdb882c9086"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/artifacts/timing-Classic-f20000.json",
+      "bytes": 7224,
+      "sha256": "7be0d78ba5eb3f08abb7644c163f8b80c7bc1b7b4c3c50bf13dca661f44af3b5"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/build.log",
+      "bytes": 7195,
+      "sha256": "160f416183d41bd73190e3e0fbc159a1ed780dc2d3a8f8fd3e1318b663a8759c"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/checkout-Nmsdk-Bin.log",
+      "bytes": 79,
+      "sha256": "f64376f04d4f592b606e4e83ff24513be82433bd4921ab054903887cad7716d8"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/checkout-Nmsdk-PulseLib.log",
+      "bytes": 186,
+      "sha256": "f03daba26ea6fd136f8d84082cf5ea162e761d647d9333eaa656214db8a03a26"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/checkout-Rdk.log",
+      "bytes": 87,
+      "sha256": "100dda4372f84375ada7dd8ec7bb2b32595e8a0db0d22beaf082caf3ecf228f6"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/checkout-root.log",
+      "bytes": 233,
+      "sha256": "b6f79c57850ec9e71dc392bfc8c534e00e20dbf79fca13a98c2910063ea161f4"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/configure.log",
+      "bytes": 1225,
+      "sha256": "4cd844b15bb98c6119fb278a01ade7ed04c2c776d93986e23bccfa3574868c35"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/fetch-Nmsdk-Bin.log",
+      "bytes": 124,
+      "sha256": "2e3284fcc3ab128f81bfe0da06b1d12be239881c0cfd294a596653e4abb2bb8b"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/fetch-Nmsdk-PulseLib.log",
+      "bytes": 127,
+      "sha256": "fe5a6aac586de63efa59b577bb46c3138b9feace765b999416581e7d66c4ca64"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/fetch-Rdk.log",
+      "bytes": 118,
+      "sha256": "b7e98774342dc57feaca4c86df42012e3ee835464e22a11e915095dcb9369cf9"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/fetch-root.log",
+      "bytes": 122,
+      "sha256": "cc8697a8079eed686300881a8386d2b2b321b876be84e0941418e8d8b1a1eacb"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/gtest.xml",
+      "bytes": 1930,
+      "sha256": "e7a0ca0eb49c49f89dc65de375a2e104a38146a0066e2de21524da9fbc1652f6"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/job.py",
+      "bytes": 6479,
+      "sha256": "8e16f1a3491bb03fb23942182e420458d11497fb480d46ecf59b9f6ee1c5f003"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_20000_N2_native_executor.csv",
+      "bytes": 135743,
+      "sha256": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_20000_N2_native_executor.json",
+      "bytes": 196054,
+      "sha256": "1de3e41e011567a63d19a5534dc26a3042f7b91672d9dc328e0d6034509b1ad6"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_20000_N2_native_executor_certificate.json",
+      "bytes": 1014,
+      "sha256": "aedd085c732fcad73cd10b980be692da5f0534400bfc669b07da4a3b0a23d6d2"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_20000_N2_native_executor_reference_1.csv",
+      "bytes": 135655,
+      "sha256": "f000c2800e217c1e26d4ad7d83d6b823830f86227d33a5505147d61b10fbbc17"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_20000_N2_native_executor_verify_0.csv",
+      "bytes": 139481,
+      "sha256": "d258af2a6f27069881160babd46907c80cda9c3eb7d490f2e8e2831a43ee5ab8"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_20000_N2_native_executor_verify_1.csv",
+      "bytes": 142830,
+      "sha256": "229ed4ea1ab7ccd5b7100f3026e650ce4f20a668033b6f8f657c35f67680cf26"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_2000_N2_native_executor.csv",
+      "bytes": 13533,
+      "sha256": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_2000_N2_native_executor.json",
+      "bytes": 195902,
+      "sha256": "61a49cc15796a5b1928b07eeba095858a86c4ee541f83f38d31c0319979c9073"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_2000_N2_native_executor_certificate.json",
+      "bytes": 1038,
+      "sha256": "2c011015c60f9c1ab14f59b6983c6f08224d61bafd3323dd01b824d81fffde23"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_2000_N2_native_executor_reference_1.csv",
+      "bytes": 13532,
+      "sha256": "5505b584e54535732d9be4f1d40a1c4255d9e3cbe2453c3644f70833f6a3a707"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_2000_N2_native_executor_verify_0.csv",
+      "bytes": 13907,
+      "sha256": "c3b0685c303533f08aa0bd94cc2b46f40ed9171f3432b367e65a378f1641bca3"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Branch_2000_N2_native_executor_verify_1.csv",
+      "bytes": 14437,
+      "sha256": "9bfef45f018df63ff6f896960a6680487451f7b6bab4dfef47984b9d65b14c33"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_20000_N2_native_executor.csv",
+      "bytes": 207886,
+      "sha256": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_20000_N2_native_executor.json",
+      "bytes": 297446,
+      "sha256": "07dcb9cd1b18373a03b8b5b3afd2f059c3197c185c59b92d493e84bdd8c019f9"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_20000_N2_native_executor_certificate.json",
+      "bytes": 1040,
+      "sha256": "cb5cd6d58551b2e476340ea8cdc638e1338195499b85ec5a5327d46ebd3a4823"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_20000_N2_native_executor_verify_0.csv",
+      "bytes": 207510,
+      "sha256": "7b6474b9ad9f11fcdbeea7d19f96e804e466c1b14a63a464b7a1eece6206b676"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_20000_N2_native_executor_verify_1.csv",
+      "bytes": 211336,
+      "sha256": "9e041ca429c4ec89dae9bb28688d1cddc4ce36145ab3356140c4bb1a646bb7af"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_2000_N2_native_executor.csv",
+      "bytes": 20767,
+      "sha256": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_2000_N2_native_executor.json",
+      "bytes": 297218,
+      "sha256": "92b298e5bcfdf0ace2b14106f258ffac3bf8709f226ef5d775b2713a0d07feb4"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_2000_N2_native_executor_certificate.json",
+      "bytes": 1040,
+      "sha256": "5389eb6c25a437b6bfaf9a1f7b7df2587afe25d2245995af36c9b1a8f3cd3804"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_2000_N2_native_executor_verify_0.csv",
+      "bytes": 20737,
+      "sha256": "d69b64a5aa0d2c22510779a771e56876aa634fb6c0f417d28bddf8a12d514d2d"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/Classic_2000_N2_native_executor_verify_1.csv",
+      "bytes": 21112,
+      "sha256": "082ecf53e27ad22348528594f5fab7cf188c094125ece012a0de6086efc820b2"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/native-regression/uninitialized-container.json",
+      "bytes": 359,
+      "sha256": "8a8ef2fa563842a974b07be5def44634ce676222c28f213ad5b9b10f860d6d95"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/pid.json",
+      "bytes": 45,
+      "sha256": "ae447cab675616c9236ebdb9d5d85000e5d7a64a2c8bf287833f8f5d681aaace"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process/loaded-files.json",
+      "bytes": 4515,
+      "sha256": "8954e2183c3997b652fd35349f553c093d2eb3d3c5e125309f22e047806a0d3a"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process/owned-process.json",
+      "bytes": 415,
+      "sha256": "06fa3f6e7bec333934dc0626353c315d1f004c93c5d74015c361d948b26f066c"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process/request.json",
+      "bytes": 514,
+      "sha256": "a05d3250a1dce4f8438180fe560283c12b91ff57ec177aa7125f9a79f8a9007b"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process/result.json",
+      "bytes": 444,
+      "sha256": "54fa663662876c20ecdde17758bdcff34fcb5f73ef7be6600a8b236531843693"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process/runtime.json",
+      "bytes": 12169,
+      "sha256": "314fe3f03659434ef7a4d3575d822a7c0b9f5d6b89b692f728f8da08635dac40"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process/stderr.log",
+      "bytes": 243,
+      "sha256": "d2b753901cf67693f3967cc8cdf836b6a3d224343fb54b9455a0124cc6ab09bf"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process/stdout.log",
+      "bytes": 1285,
+      "sha256": "5dcff1af3d677791f8ec29cc4428dd988fb537d4ae07a2e22c1e07b1284f91be"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/process-guard.json",
+      "bytes": 380,
+      "sha256": "1c06e45d5164daaf376e4b745cd76a8da7e5dcf48079b8ab14cacb17d5224ff1"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/property-readback.json",
+      "bytes": 404,
+      "sha256": "ed73fd1d3704660ddf575963db3a231e07d867b444682be562ef112812b84acc"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-gtest.xml",
+      "bytes": 8212,
+      "sha256": "a91f662ca038a6ecb8f485bbd25a40baceb66f607f67a3c4fb9e4f51f07f31ba"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-process/loaded-files.json",
+      "bytes": 4515,
+      "sha256": "8954e2183c3997b652fd35349f553c093d2eb3d3c5e125309f22e047806a0d3a"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-process/owned-process.json",
+      "bytes": 415,
+      "sha256": "052e252e62cd894f4fd1d8a6120f487b0377391aadf92cf6feab13fd979d71ab"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-process/request.json",
+      "bytes": 617,
+      "sha256": "e5bb0b6adbdd6983751ef01fc8596f899bac33f76ae7cf0927891b425155d0ad"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-process/result.json",
+      "bytes": 443,
+      "sha256": "b472fddd4bb27d077c11ea1e731a11cb43cdfb74c68ee1bd8cf2353bcc5475aa"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-process/runtime.json",
+      "bytes": 12169,
+      "sha256": "314fe3f03659434ef7a4d3575d822a7c0b9f5d6b89b692f728f8da08635dac40"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-process/stderr.log",
+      "bytes": 243,
+      "sha256": "d2b753901cf67693f3967cc8cdf836b6a3d224343fb54b9455a0124cc6ab09bf"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-process/stdout.log",
+      "bytes": 4755,
+      "sha256": "58721dfcb9d5913546f076351fa9d3181ebacc47fb7e49fdd023dac33265ec13"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/regression-validation.json",
+      "bytes": 722,
+      "sha256": "8a992faa4adb88de87af4855d32c2a5bb4349842d5999c7e99c9c9a37108b93b"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/copy-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/initialized-copy-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/loaded-after-init.json",
+      "bytes": 186141,
+      "sha256": "31f63fdfa385487b9390646873fed943220445c514be6a875ab3bf37291a49ae"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/loaded-before-init.json",
+      "bytes": 186164,
+      "sha256": "7b7595c2c39a16563904b3fbf54c6a32fb7b19064ef266ea5902aa5ed3ae1fc2"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/native-graph.xml",
+      "bytes": 70459,
+      "sha256": "416c20118ecb75e61efaa7b5c9921814706aaa580a6c1acf2cb96a722ae8ada8"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/source.json",
+      "bytes": 186135,
+      "sha256": "81fddd44df82502e01bc0ab4a0f13e7705086c272cd7f93d5b308757e3b2a716"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/warm-vs-fresh.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/roundtrip-regression/xml-impulse.csv",
+      "bytes": 25188,
+      "sha256": "e48fa5d23d57c229ad470c5f4452ff46954b587ff6e5011d6c778918026b5ca1"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/runtime.json",
+      "bytes": 12169,
+      "sha256": "314fe3f03659434ef7a4d3575d822a7c0b9f5d6b89b692f728f8da08635dac40"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/source.json",
+      "bytes": 1304,
+      "sha256": "f76f5b92be062e37a59ce14f7129f2b9a97878402c1ff55beb44695852a010c2"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/supervisor.log",
+      "bytes": 313,
+      "sha256": "6819618398e6820c75e4888e11c26cf8073cae780b5d373209731d2f55c20e86"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/terminal.json",
+      "bytes": 110,
+      "sha256": "971c135533f29a92d119ba5ae1a39406eed9748a16456b8ffd2c0289892c99ce"
+    },
+    {
+      "path": "s01-timing-finite-current-normal-a1/validation.json",
+      "bytes": 844,
+      "sha256": "7b628f125193e3767d354fff07352d327571a7c0a7ef88314512737555453061"
+    }
+  ],
+  "archive_sha256": "b789cfbd1605e4fa80e22d49396edae02e4ab15760b20f2d26f49c9f4bb3ac4c",
+  "nonfinite_assignments_rejected_and_preserved": 120,
+  "full_plan_acceptance": false,
+  "scientific_verdict": null
+}
