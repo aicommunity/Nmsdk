@@ -1,0 +1,25 @@
+{
+  "source": "e29669f45e4e9f3af390bf1aa8de5450237275a7",
+  "runs": [
+    {
+      "label": "baseline",
+      "returncode": 0,
+      "module": "Scripts.StructTrain.TimeLearner.tests.test_hot_readout_reports",
+      "data": "s04-hot-readout-baseline-normal-a1"
+    },
+    {
+      "label": "loaded_compatibility",
+      "returncode": 0,
+      "module": "Scripts.StructTrain.TimeLearner.tests.test_loaded_readout_reports",
+      "data": "s04-loaded-readout-fixed-normal-a4"
+    },
+    {
+      "label": "fixed",
+      "returncode": 0,
+      "module": "Scripts.StructTrain.TimeLearner.tests.test_hot_readout_reports",
+      "data": "s04-hot-readout-fixed-normal-a1"
+    }
+  ],
+  "all_passed": true,
+  "scientific_verdict": null
+}
