@@ -194,3 +194,10 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   is explicit per file. All four frozen target/foil pairs are silent; this is
   functional pipeline evidence, without classification success. Broad ASan,
   temporal reports and full original stages remain open.
+
+- [Live Train handoff temporal reports](s08-native-live-finalization-visual-normal-a2/README.md):
+  corrected chronological order,16 reports,3/3 checks,213 training and42
+  recognition trial-soma pairs. All440 metadata members and eight selected PNG
+  verified; selected images directly reviewed at1920x960. Full derived cache on
+  M40, no full-cache manual or scientific acceptance. Initial chronology error
+  retained; production Train-job declaration remains open.

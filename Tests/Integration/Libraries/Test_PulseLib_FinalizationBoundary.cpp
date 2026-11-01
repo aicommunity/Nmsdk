@@ -643,3 +643,52 @@ TEST(NativeLiveFinalization,BranchCancelQueued){LiveFinalization<NNeuronTimeLear
 TEST(NativeLiveFinalization,ClassicCancelPostTune){LiveFinalization<NNeuronTimeLearner>(1,true,LiveScenario::CancelPostTune);}
 
 TEST(NativeLiveFinalization,BranchCancelPostTune){LiveFinalization<NNeuronTimeLearnerBranch>(1,true,LiveScenario::CancelPostTune);}
+
+TEST(NativeLiveFinalizationPlanCodec,ActualDesignRoundtripAndMalformedDeclarations)
+{
+    const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
+    if(!directory)GTEST_SKIP()<<"Requires actual persisted PostTune designs";
+    const QDir root(QString::fromLocal8Bit(directory));QJsonArray plans;int rejected=0;
+    for(bool branch:{false,true})for(bool calibrate:{false,true}) {
+        const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
+        NativeThresholdGridSpec grid;
+        grid.confirmation=DecodeNativeThresholdConfirmationSpec(job["specification"].toObject());
+        for(const auto& q:job["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(q.toObject()));
+        if(calibrate) {
+            for(const auto& t:job["thresholds"].toArray())grid.thresholds.push_back(t.toDouble());
+            grid.maximumCandidates=std::size_t(job["maximum_candidates"].toDouble());
+        } else grid.maximumCandidates=0;
+        auto post=DecodeNativePostTuneControls(job["post_tune"].toObject(),grid);
+        post.mode=NativePostTuneControllerMode::KeepDone;post.canonicalFloor=post.canonicalLast=0.;post.resistanceBounds.clear();
+        post.finalization=calibrate?NativePostTuneFinalization::Calibrate:NativePostTuneFinalization::KeepFixedThreshold;
+        post.weightProbeThreshold=2.;
+        NativeLiveFinalizationSpec spec{DecodeNativeRecognitionSpec(job["source_recognition"].toObject()["conversion_spec"].toObject()),
+            post,job["implementation_id"].toString().toStdString()};
+        const auto plan=EncodeNativeLiveFinalizationSpec(spec);
+        const auto persisted=QJsonDocument::fromJson(QJsonDocument(plan).toJson(QJsonDocument::Compact)).object();
+        EXPECT_EQ(EncodeNativeLiveFinalizationSpec(DecodeNativeLiveFinalizationSpec(persisted)),plan);
+        plans.append(plan);
+        const auto resign=[](QJsonObject value) {value.remove("sha256");value["sha256"]=NmsdkTools::CanonicalModelDataSha256(value);return value;};
+        for(int mutation=0;mutation<8;++mutation) {
+            auto bad=plan;
+            switch(mutation) {
+            case 0:bad["unknown_field"]=true;break;
+            case 1:bad["maximum_calibration_candidates"]=1.5;break;
+            case 2:bad["maximum_calibration_candidates"]=9007199254740992.;break;
+            case 3:bad["thresholds"]=QJsonArray{"NaN"};break;
+            case 4:bad["schema_version"]=true;break;
+            case 5:bad["trials"]=QJsonArray{QJsonObject{}};break;
+            case 6:bad["implementation_id"]="";break;
+            case 7:bad["sha256"]="invalid_digest";break;
+            }
+            if(mutation!=7)bad=resign(bad);
+            EXPECT_THROW(DecodeNativeLiveFinalizationSpec(bad),std::invalid_argument)<<"mutation="<<mutation;
+            ++rejected;
+        }
+    }
+    EXPECT_EQ(plans.size(),4);EXPECT_EQ(rejected,32);
+    if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        NmsdkWorker::Write(QString::fromLocal8Bit(output),"live-finalization-plan-codec.json",
+            {{"kind","native_live_finalization_plan_codec_control"},{"schema_version",1},{"plans",plans},
+             {"malformed_controls",rejected},{"rdk_objects_constructed",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+}

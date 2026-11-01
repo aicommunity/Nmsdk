@@ -172,3 +172,20 @@ Compact proof58c5b3985d3d156f71b4eac4256e4acbcaa2e338 опубликован. В
 members и8 selected PNG сверены по SHA; эти восемь непосредственно просмотрены
 в1920×960, читаемость принята в области SELECTED_VISUAL_REVIEW.json.
 Полная ручная приёмка cache и научный PASS отсутствуют.
+
+## Сохраняемое описание финализации: реализация, проверка ожидается
+
+EncodeNativeLiveFinalizationSpec / DecodeNativeLiveFinalizationSpec сохраняют
+тот же подписанный native_live_finalization_plan schema1, который уже записан
+в runtime evidence. Состав: implementation, conversion, PostTune controlsV3,
+trials, thresholds, maximum calibration candidates и confirmation. Decoder
+проверяет типы и лимиты, выполняет штатные nested codecs и требует точного
+обратного представления, включая hash и отсутствие лишних полей.
+
+Это описание будущей фазы, не checkpoint контроллера или динамики. Decoder
+не создаёт компоненты и не меняет физику. Effective model/design preflight
+по-прежнему обязателен перед Train. Codec не подтверждает достижимость обучения
+или полноту Test. Новый native fixture проверяет четыре реальных профиля
+описания (две топологии × fixed/calibrate) после JSON roundtrip и32 malformed
+controls. Серверная компиляция и проверка codec пока ожидаются; Console job
+схема2 и Python worker ещё не подключены.
