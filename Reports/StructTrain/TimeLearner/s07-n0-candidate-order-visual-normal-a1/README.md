@@ -1,0 +1,7 @@
+N0 native training temporal reports: normal scoped proof
+
+All four declared warm/cold Classic/Branch N0 training phases rendered from the actual Git primary proofc9c65de9b12989b0ddcb51da5924f1854a56f88e:56 real trials,84 trial-soma pairs, all source samples and native input pulses. All205 primary archive members verified before rendering; source files unchanged. Production report CLI uses the explicit31-case suite specification, with editor-only probe figures outside this declared phase scope.
+
+Three N0 visual evidence checks verify complete source/trace/figure binding,1920x960 overview and detailed views with at least8pixels per native timestep and no downsampling, all84 soma pairs and every published cache hash. Three overlapping shared-reader regression checks also pass on retained338-probe/507-pair boundary data, including its partial-window semantics. This is six checks, not six independent datasets. Selected eight PNGs show final input0 overview and a measured-peak zoom for each declared phase; direct visual review pending. Full derived cache remains on M40 Data; Git contains compact metadata and selected PNG only, with primary packets/traces in the separate source proof.
+
+All four training controls remain SearchUnresolved with valid negative certificates. These are native training diagnostics, not a recognition matrix or scientific classification success. No full-cache manual acceptance, verified SI-unit interpretation or observations beyond recorded windows are inferred. ASan and full-stage7 acceptance remain pending.
