@@ -107,5 +107,10 @@ reader `d4e616c7ec52f4de77acb86ba92b3f4a6e4a0047`; 2/2 actual-data checks.
 Первичный proof `528ddb505d78765eb3e10f37d34a11fec4ebbd3b`, каталог
 `Reports/StructTrain/TimeLearner/s07-native-proposal-normal-a1`: 94 файла,
 9 683 667 исходных байт, archive 135 620 байт.
-ASan-аналог запущен отдельно на M40; его результат и временная приёмка пока
-не подтверждены. Серия D не запускается.
+ASan-аналог завершён отдельно на M40 с теми же измеренными последовательностями
+и исходами; actual-data reader 2/2. Источник producer/reader:
+`d4e616c7ec52f4de77acb86ba92b3f4a6e4a0047`; proof
+`db3211020d6e2695ec2a5768d417ebbc855cbc8f`, каталог
+`Reports/StructTrain/TimeLearner/s07-native-proposal-asan-a1`: 94 файла,
+9 745 731 исходных байт, archive 140 628 байт. Временная и ручная визуальная
+приёмка proposal controls ещё не выполнена. Серия D не запускается.

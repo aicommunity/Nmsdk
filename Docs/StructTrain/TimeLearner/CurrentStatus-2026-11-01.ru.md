@@ -796,3 +796,5 @@ L2/Ns1 → L2/Ns2 → L3/Ns1 в обеих топологиях; оба Train Se
 reader 2/2. ASan proposal control и полная временная приёмка ещё выполняются.
 Источники/артефакты/ограничения: [NativeDimensionControls](NativeDimensionControls.ru.md).
 Это не успешная классификация и не закрытие полной матрицы этапов 3–8.
+
+Уточнение: ASan proposal control завершён, оба случая подтверждены reader 2/2; proof db3211020d6e2695ec2a5768d417ebbc855cbc8f. В работе остаётся temporal/visual приёмка нового подэтапа.

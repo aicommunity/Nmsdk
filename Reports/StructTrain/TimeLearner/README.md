@@ -296,3 +296,5 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
 Сходимость N=1 проверяет неизменённую модель свежим final gate; scientific
 classification verdict отсутствует. Полная постановка и ограничения:
 [NativeDimensionControls](../../../Docs/StructTrain/TimeLearner/NativeDimensionControls.ru.md).
+
+[ASan N0 physical proposal path](s07-native-proposal-asan-a1/README.md): завершён, reader 2/2; temporal приёмка ещё открыта.
