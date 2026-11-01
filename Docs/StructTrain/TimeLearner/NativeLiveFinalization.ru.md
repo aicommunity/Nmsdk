@@ -229,3 +229,26 @@ final model. Typed nonzero exit2 нового worker допускает анал
 Test, четыре partial schema2 и две partial schema1 controls. Reader проверяет
 полную closure и повреждения source/status/phase clock/availability;
 server build и фактические результаты этого corpus пока ожидаются.
+
+## Production temporal report: реализация, проверка ожидается
+
+`report RUN/run-manifest.json --format pipeline-run --output NEW_REPORT`
+читает собственную portable closure production-запуска и сначала повторяет
+её audit. Посторонние model/trace/source overlays и external inventory
+запрещены. Поддерживаются Train schema1/2 и отдельный evaluate: все реальные
+Train packets сортируются по непрерывному writer ordinal, измеренное native
+время проверяется на возрастание, partial windows сохраняют свой статус.
+PostTune/calibration рисуются из подписанного finalization report; frozen
+Test — из собственного evaluation run, а не из искусственного control-record.
+
+Сохраняются исходные CSV, все soma channels, входные импульсы, полные отсчёты,
+overview и детальные zooms. Для partial Train не создаётся recognition-график.
+Manifest отчёта связывает исходные artifacts, training outcome, process/native
+execution и доступность recognition отдельно. Наличие графиков не означает
+Exact или классификационный PASS; same-matrix не становится independent Test.
+
+Добавлены3 report checks для всех14 production operations: whole-file/source
+binding, каждый Train sample/channel, все завершённые pattern/soma responses,
+масштаб1920×960 и минимум8px/tick на zoom, запрет downsampling и overlays.
+Серверный рендеринг и эти проверки пока не выполнены; полные derived assets
+будут кэшем M40, в Git — compact metadata и выбранные изображения.
