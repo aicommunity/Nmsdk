@@ -99,8 +99,9 @@ def render_case(data, output, case):
     paths = []
     for trial in data["trials"]:
         onset = trial["onset"]
-        for mode in ("full", "detail"):
-            left, right = ((trial["begin"], trial["end"]+.02) if mode == "full" else
+        for mode in ("full", "detail", "signal", "signal_detail"):
+            focused = mode.startswith("signal")
+            left, right = ((trial["begin"], trial["end"]+.02) if mode in ("full", "signal") else
                            (trial["stimulus_times"][-1]-.02, trial["stimulus_times"][-1]+.08))
             first = max(0, bisect.bisect_left(data["times"], left)-1)
             last = min(len(data["times"]), bisect.bisect_right(data["times"], right)+1)
@@ -116,14 +117,31 @@ def render_case(data, output, case):
                 for j, t in enumerate(trial["spike_times"]):
                     if left <= t <= right:ax.axvline((t-onset)*1000, color="crimson", lw=1,
                                                    label="LT output spike" if j == 0 else None)
-                ax.set_ylim(*padded_limits(y));ax.set_ylabel("potential, native units")
-                ax.grid(alpha=.25);ax.legend(loc="upper left", fontsize=8)
+                limits = padded_limits(y)
+                if focused:
+                    # A large post-spike negative feedback must not conceal the
+                    # input response. Keep full/detail unchanged as companions;
+                    # derive the additional vertical scale from pre-spike data.
+                    stop = trial["spike_times"][0] if trial["spike_times"] else trial["end"]
+                    a = bisect.bisect_left(data["times"], trial["begin"])
+                    z = bisect.bisect_right(data["times"], stop)
+                    limits = padded_limits([0.0]+[s[i] for s in data["somas"][a:z]])
+                    below, above = sum(v < limits[0] for v in y), sum(v > limits[1] for v in y)
+                    ax.text(.99, .04, "outside vertical scale: "+str(below)+" below, "+str(above)+
+                            " above; see full/detail", transform=ax.transAxes, ha="right", fontsize=8)
+                ax.set_ylim(*limits);ax.set_ylabel("soma "+str(i+1)+" potential\nnative units")
+                ax.grid(alpha=.25)
             axes[-1].set_xlim((left-onset)*1000, (right-onset)*1000)
             axes[-1].set_xlabel("time since first actual input pulse, ms")
             fig.suptitle(case+" | trial "+trial["trial_id"]+" | "+trial["label"]+
                          " | "+mode+" | orange: actual input; red: actual LT spikes\n"+
-                         "Historical saved-state replay; soma = ExcChannel + InhChannel; CSV A/B unchanged")
-            fig.tight_layout(rect=(0, 0, 1, .94))
+                         "Historical saved-state replay; soma = ExcChannel + InhChannel; CSV A/B unchanged"+
+                         ("; AMPLITUDE FOCUS, feedback may clip" if focused else ""))
+            handles, labels = axes[0].get_legend_handles_labels()
+            # A single external legend leaves early input responses unobscured.
+            labels[0] = "native soma membrane potential"
+            fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(.5, .93), ncol=3, fontsize=9)
+            fig.tight_layout(rect=(0, 0, 1, .89))
             path = output/("trial-"+trial["trial_id"]+"-"+mode+".png")
             fig.savefig(path);plt.close(fig);paths.append(path.name)
     return paths
