@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "two retirement batches: eleven historical root Docs shell launchers/monitors; active tools/physics models and Bin/PulseLib remain to migrate",
+  "scope": "three retirement batches: nineteen historical root Docs shell launchers/monitors/helpers; active analyzers, remaining Docs/Python, Reports launch receipts and Bin require further migration",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -213,6 +213,158 @@
       "replacement": null,
       "reason": "Historical InhGrid SoftCold/disk-stop campaign launcher or monitor; old paths/TSV/case-prefix pool and auto-offload policy. No current maintained package or submodule literal reference found; general runner replacement remains incomplete.",
       "original_results": "preserved; source snapshot is for script retrieval, not actual experiment execution provenance"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cpu_gate.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "137947c664f4cc9b759b5cf024cbb5093144ce4e",
+      "blob_sha1": "a396b8d848aec47a8f3677abaed7f74d6f5d3900",
+      "content_sha256": "7031343c77e6ed75b1dd900b4d340817203e439d2bebdfb0c4f73cd115152150",
+      "bytes": 1057,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cpu_gate.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cpu_gate.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/find_root_for_pulselib.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "f0c9a196d7efe50f74d55a612b257cfdf548fb6c",
+      "content_sha256": "2b0735611312bb5c3e70727dd06e2c4f556020c0bd5c5ee4b4e5535d14773995",
+      "bytes": 720,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/find_root_for_pulselib.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/find_root_for_pulselib.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/launch_queue.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "137947c664f4cc9b759b5cf024cbb5093144ce4e",
+      "blob_sha1": "782a388f2af3d8c65390a3b3566bf5a821f04baa",
+      "content_sha256": "6a17e8d9e0c71975f80f1b8320a3f89226d13ed87463fc7c6734f796bdc84b99",
+      "bytes": 2339,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/launch_queue.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/launch_queue.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/make_lane.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "3406345d3224c72abf777fd9367922b596c96432",
+      "content_sha256": "e75378b5e99465f688610e68945bae29cb372abda5ea1b882d802b71a78e97f8",
+      "bytes": 1645,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/make_lane.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/make_lane.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/provenance.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "8fa9bd3930f7db4fc3e89c0fb2d1f1500f3a942d",
+      "content_sha256": "9280c01fc91eca838eccc77e725f0cc68b500c542978ab9310e68b75181bb795",
+      "bytes": 1509,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/provenance.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/provenance.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/refresh_waves.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "072313452658377bf8e30cc67511588d1ae2480d",
+      "content_sha256": "3ad0a532d300471d58aa7da886fab922ef248fd8688c0d8f5f6724b1271a10b6",
+      "bytes": 1867,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/refresh_waves.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/refresh_waves.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "f25aa291a4dc0a3adf6bf6e7f5041a377273eebd",
+      "blob_sha1": "96375d2e8bcce647fda7511b6d24d2f9b4052111",
+      "content_sha256": "b914ddb3f7c980fd498e48537ee3bc3833cd0b3f115c6e6bb31d765285a554d6",
+      "bytes": 1666,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/wait_run.sh",
+      "action": "retired_historical",
+      "archive_commit": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+      "last_change_commit": "f25aa291a4dc0a3adf6bf6e7f5041a377273eebd",
+      "blob_sha1": "cd69b295d56df368fd99d9425018c9e40cec4eb2",
+      "content_sha256": "7feccc2eb09dc7866651184c225b658343e2facb3098d8a1d3556088156abe72",
+      "bytes": 1342,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/wait_run.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "fa53680d62ce9dedbee464fc55418dd3f76a0ca6:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/wait_run.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical 2026-10-20 audit lane/queue/provenance helper; literal dependency audit found only historical Docs and within the retired group. No current runner depends on this entry point. Full modern scheduler and historical replay coverage remain separate open requirements.",
+      "original_results": "preserved; retrieval commit is not an assertion of original experiment execution source"
     }
   ],
   "reference_review": {
@@ -240,5 +392,31 @@
     "active script relocation",
     "remaining historical scripts in Docs/Bin/PulseLib",
     "full migration dependency review"
-  ]
+  ],
+  "last_batch": {
+    "source_snapshot": "fa53680d62ce9dedbee464fc55418dd3f76a0ca6",
+    "retired_count": 8,
+    "historical_documents_annotated": [
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/DEBT_G1_EXIT_GATE_FIX_2026-10-22.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/G1_LAUNCH_S1_2026-10-21.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/G1_S1_EXIT_POLICY_PARTIAL_2026-10-22.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/G1_S1_LAUNCH_EXIT_AUDIT_2026-10-21.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/G1_S1_LAUNCH_EXIT_RERUN_2026-10-21.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/G1_S1_PARTIAL_ROLLUP_2026-10-21.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/TECH_DEBT_TIMELEARNER_2026-10-20.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/evidence/V_S0_UPDATE_2026-10-20.ru.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/00_RULES.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/01_A0_ENV_SETUP.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/README.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/cards/A1_smoke_controls.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/cards/B2_repair_inputs_and_rerun.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/cards/D1_bisect_classic_n1.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/cards/D2_ablations.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/cards/E2_ab_R8.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/cards/G1_boundary_matrix.md",
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/templates/REPORT_TEMPLATE.md"
+    ],
+    "dependency_review": "Literal names searched in tracked root Scripts/Tests/App/Docs and Bin/PulseLib script/docs/CMake trees; no current executable dependency found. Dynamic name construction is not excluded by this search.",
+    "verification": "Git-normalized working file blob matches archived object; full archive/current hashes recorded; no script executed; no numerical implementation changed"
+  }
 }

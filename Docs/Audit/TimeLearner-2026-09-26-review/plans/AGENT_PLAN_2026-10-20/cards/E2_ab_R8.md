@@ -1,5 +1,9 @@
 # E2. A/B на регрессионном наборе R8: baseline, патчи скриптов, Console E1
 
+> Исторический документ: указанные ниже shell-команды относятся к аудиту октября2026. Исполняемые файлы удалены из текущего дерева; источники доступны только по зафиксированным Git-ссылкам. Это не инструкция запуска текущего pipeline и не разрешение возобновить серию D.
+> Источники: [launch_queue.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/launch_queue.sh), [run_series.sh](https://github.com/aicommunity/Nmsdk/blob/fa53680d62ce9dedbee464fc55418dd3f76a0ca6/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/run_series.sh).
+
+
 **Цель:** доказать (или опровергнуть), что (a) патчи Bin B1+E0 не меняют результаты, и (b) Console E1 с флагами по умолчанию даёт те же результаты, что baseline. Заодно получить разброс трёх повторов на каждом случае. Без зелёного E2 выводы D2b не принимаются.
 **Уровень:** слабый. **Хост:** `.17` (до 12 Console). **Время:** 2–4 дня машинного времени.
 **Зависит от:** A0, A1, B1, E0, E1.
