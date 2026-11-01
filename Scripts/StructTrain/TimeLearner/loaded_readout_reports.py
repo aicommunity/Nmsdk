@@ -144,7 +144,8 @@ def audit_run(root):
                   "training_certificate": None, "scientific_verdict": None}
 
 
-def render(data, output):
+def render(data, output, *, source_label="Source soma", loaded_label="Loaded soma",
+           context="XML roundtrip characterization; not selectivity", state_description=None):
     import matplotlib.pyplot as plt
     output.mkdir(parents=True, exist_ok=False);figures = []
     s = data["summary"];rows = data["rows"];clock = [r[0] for r in rows]
@@ -158,15 +159,16 @@ def render(data, output):
             for scale, limits in scales:
                 fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
                 fig.subplots_adjust(left=.12, right=.86, bottom=.15, top=.72)
-                ax.plot(clock, source, color="navy", lw=1.8, label="Source soma")
-                ax.plot(clock, loaded, color="teal", ls="--", lw=1., label="Loaded soma")
+                ax.plot(clock, source, color="navy", lw=1.8, label=source_label)
+                ax.plot(clock, loaded, color="teal", ls="--", lw=1., label=loaded_label)
                 pulse = ax.twinx();pulse.step(clock, [r[2] for r in rows], where="post", color="darkorange",
                                              alpha=.7, label="Actual native input")
                 ax.set_xlim(left, right);ax.set_ylim(*limits);ax.grid(alpha=.25)
                 ax.set_xlabel("Native time [s]");ax.set_ylabel("Soma SumPotential [model units; SI unverified]")
                 pulse.set_ylabel("Input [native units]", color="darkorange")
-                fig.suptitle(f'{s["topology"]} N={s["inputs"]} {s["frequency_hz"]} Hz State={int(s["saved_state"])} | soma {soma+1}\n'
-                             f'{view}, {scale} amplitude | XML roundtrip characterization; not selectivity\n'
+                state = f'State={int(s["saved_state"])}' if state_description is None else state_description
+                fig.suptitle(f'{s["topology"]} N={s["inputs"]} {s["frequency_hz"]} Hz {state} | soma {soma+1}\n'
+                             f'{view}, {scale} amplitude | {context}\n'
                              'LT events were not recorded', y=.98)
                 h, labels = ax.get_legend_handles_labels();h2, labels2 = pulse.get_legend_handles_labels()
                 fig.legend(h+h2, labels+labels2, loc="upper center", bbox_to_anchor=(.5, .83), frameon=False, ncol=3)

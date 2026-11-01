@@ -1,0 +1,913 @@
+{
+  "kind": "native_hot_reset_report",
+  "schema_version": 1,
+  "native_validation": {
+    "worker": "normal",
+    "phase": "warm_reset_fixed",
+    "source": "5c202d61c6312521a7472a86491145164808da33",
+    "pulse": "6cfcca0c7970a6f9a9381c9592cfbc8ffcbdea94",
+    "rdk": "1699d365b9e02af4cf0a6327297328e8d3bd04ea",
+    "execution": {
+      "kind": "timelearner_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "wall_seconds": 6.948799487669021,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "0b38149671579d23b982c133ce897a562d16b1591421801b96b0b2561dd28489",
+      "ownership_scope": "launched_executable_only",
+      "scientific_verdict": null
+    },
+    "gtest": {
+      "tests": "8",
+      "failures": "0",
+      "disabled": "0",
+      "errors": "0",
+      "time": "6.611",
+      "timestamp": "2026-11-01T17:25:18.229",
+      "name": "AllTests"
+    },
+    "scientific_verdict": null
+  },
+  "cases": {
+    "Classic-N2-f2000": {
+      "topology": "Classic",
+      "inputs": 2,
+      "frequency_hz": 2000,
+      "somas": 2,
+      "samples": 100,
+      "stimulus_times": [
+        0.0105,
+        0.0205
+      ],
+      "reset_residuals": [
+        0,
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 2000,
+        "initial": {
+          "cached_somas": [
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 2,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Classic",
+        "warm": {
+          "cached_somas": [
+            0.013780535873293087,
+            0.013580059039027481
+          ],
+          "cached_total": 0.02736059491232057,
+          "dendrite_readout": [
+            0.01082318598429921,
+            0.005261548337741839,
+            0.005561637646557371
+          ],
+          "per_input_soma_readout": [
+            0.013780535873293087,
+            0.013580059039027481
+          ],
+          "physical_somas": [
+            0.013780535873293087,
+            0.013580059039027481
+          ],
+          "physical_total": 0.02736059491232057
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 1541,
+          "sha256": "78081ecfa6645f0cfd792115ee660f88e39197c8ad6dbc4e086a8267b1cfc2b8"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 8825,
+          "sha256": "2f34eb7d115aeeca900c47b6439edf150832f44a3b8fffe2ae2a320778777a05"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    },
+    "Classic-N2-f20000": {
+      "topology": "Classic",
+      "inputs": 2,
+      "frequency_hz": 20000,
+      "somas": 2,
+      "samples": 1000,
+      "stimulus_times": [
+        0.01005,
+        0.02005
+      ],
+      "reset_residuals": [
+        0,
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 20000,
+        "initial": {
+          "cached_somas": [
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 2,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Classic",
+        "warm": {
+          "cached_somas": [
+            0.012615552939354124,
+            0.012555632617098134
+          ],
+          "cached_total": 0.025171185556452258,
+          "dendrite_readout": [
+            0.010174332964211885,
+            0.004945885348805357,
+            0.0052284476154065285
+          ],
+          "per_input_soma_readout": [
+            0.012615552939354124,
+            0.012555632617098134
+          ],
+          "physical_somas": [
+            0.012615552939354124,
+            0.012555632617098134
+          ],
+          "physical_total": 0.025171185556452258
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 1546,
+          "sha256": "f153f344b174441c262f73ff1f80aa4fae1a3de0e14fa39186d40357a6f0410d"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 89245,
+          "sha256": "cfaf4275bc6704fbe3baf26b2f493e063661f79b3ba04cee1de6777231deb7a2"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    },
+    "Classic-N4-f2000": {
+      "topology": "Classic",
+      "inputs": 4,
+      "frequency_hz": 2000,
+      "somas": 4,
+      "samples": 100,
+      "stimulus_times": [
+        0.0105,
+        0.0205,
+        0.0305,
+        0.0405
+      ],
+      "reset_residuals": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 2000,
+        "initial": {
+          "cached_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 4,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Classic",
+        "warm": {
+          "cached_somas": [
+            0.034838094448132795,
+            0.03812108285742699,
+            0.03812108285742699,
+            0.03812108285742699
+          ],
+          "cached_total": 0.14920134302041377,
+          "dendrite_readout": [
+            0.1402457621237031,
+            0.03364058550314697,
+            0.03553505887351871,
+            0.03553505887351871,
+            0.03553505887351871
+          ],
+          "per_input_soma_readout": [
+            0.034838094448132795,
+            0.03812108285742699,
+            0.03812108285742699,
+            0.03812108285742699
+          ],
+          "physical_somas": [
+            0.034838094448132795,
+            0.03812108285742699,
+            0.03812108285742699,
+            0.03812108285742699
+          ],
+          "physical_total": 0.14920134302041377
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 2039,
+          "sha256": "8c43366ddb010e090e8e3b06f80bd025c0987681589a17aae43fe8eb9e299740"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 15739,
+          "sha256": "7f4da9e806c97b302f4e85408d9999757b19b565b39b352cfb20cb84a76fb97d"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    },
+    "Classic-N4-f20000": {
+      "topology": "Classic",
+      "inputs": 4,
+      "frequency_hz": 20000,
+      "somas": 4,
+      "samples": 1000,
+      "stimulus_times": [
+        0.01005,
+        0.02005,
+        0.03005,
+        0.04005
+      ],
+      "reset_residuals": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 20000,
+        "initial": {
+          "cached_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 4,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Classic",
+        "warm": {
+          "cached_somas": [
+            0.03097001809616662,
+            0.03395735178924286,
+            0.03395735178924286,
+            0.03395735178924286
+          ],
+          "cached_total": 0.1328420734638952,
+          "dendrite_readout": [
+            0.12536603793817813,
+            0.03006827574070292,
+            0.03176592073249174,
+            0.03176592073249174,
+            0.03176592073249174
+          ],
+          "per_input_soma_readout": [
+            0.03097001809616662,
+            0.03395735178924286,
+            0.03395735178924286,
+            0.03395735178924286
+          ],
+          "physical_somas": [
+            0.03097001809616662,
+            0.03395735178924286,
+            0.03395735178924286,
+            0.03395735178924286
+          ],
+          "physical_total": 0.1328420734638952
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 2036,
+          "sha256": "32b7354e2159cca587f3d450df987024ce9c0d0bc6624921b6ced468051d58dd"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 158515,
+          "sha256": "45c5662f15eec66a4a77dce5e4f857b8ae579206173005fb1da3f8c527fb5ae1"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    },
+    "Branch-N2-f2000": {
+      "topology": "Branch",
+      "inputs": 2,
+      "frequency_hz": 2000,
+      "somas": 1,
+      "samples": 100,
+      "stimulus_times": [
+        0.0105,
+        0.0205
+      ],
+      "reset_residuals": [
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 2000,
+        "initial": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 2,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Branch",
+        "warm": {
+          "cached_somas": [
+            0.013780535873293087
+          ],
+          "cached_total": 0.013780535873293087,
+          "dendrite_readout": [
+            0.010523096675483679,
+            0.005261548337741839,
+            0.005261548337741839
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0.013780535873293087
+          ],
+          "physical_total": 0.013780535873293087
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 1377,
+          "sha256": "591f94cd74646e6208d3b38dbf0d146ec3ba99808e53c29a4186312902aae69c"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 5387,
+          "sha256": "3373c99d386b43cda0d368a8551a34cd49be88df7117af3b7b5804752c6ef2a3"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    },
+    "Branch-N2-f20000": {
+      "topology": "Branch",
+      "inputs": 2,
+      "frequency_hz": 20000,
+      "somas": 1,
+      "samples": 1000,
+      "stimulus_times": [
+        0.01005,
+        0.02005
+      ],
+      "reset_residuals": [
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 20000,
+        "initial": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 2,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Branch",
+        "warm": {
+          "cached_somas": [
+            0.012615552939354124
+          ],
+          "cached_total": 0.012615552939354124,
+          "dendrite_readout": [
+            0.009891770697610713,
+            0.004945885348805357,
+            0.004945885348805357
+          ],
+          "per_input_soma_readout": [
+            0,
+            0
+          ],
+          "physical_somas": [
+            0.012615552939354124
+          ],
+          "physical_total": 0.012615552939354124
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 1378,
+          "sha256": "646c2f0bb355307f3ac0a502353c7765e6305ce7634eaaf09c2536f6a6fe02de"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 54593,
+          "sha256": "07480d0ec16a73d4789c7eecfa52f8103c6ea48bdd2211e64da806070832a467"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    },
+    "Branch-N4-f2000": {
+      "topology": "Branch",
+      "inputs": 4,
+      "frequency_hz": 2000,
+      "somas": 1,
+      "samples": 100,
+      "stimulus_times": [
+        0.0105,
+        0.0205,
+        0.0305,
+        0.0405
+      ],
+      "reset_residuals": [
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 2000,
+        "initial": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 4,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Branch",
+        "warm": {
+          "cached_somas": [
+            0.034838094448132795
+          ],
+          "cached_total": 0.034838094448132795,
+          "dendrite_readout": [
+            0.13456234201258788,
+            0.03364058550314697,
+            0.03364058550314697,
+            0.03364058550314697,
+            0.03364058550314697
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0.034838094448132795
+          ],
+          "physical_total": 0.034838094448132795
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 1590,
+          "sha256": "a2e48ec49fb324467430138ded010da10e2778ac6c7a5e427ca60547baeeecc0"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 5389,
+          "sha256": "4bf950af72f7638e0bd5b096a1acc354842e1b3cb23cd81265e91e6bd9c88322"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    },
+    "Branch-N4-f20000": {
+      "topology": "Branch",
+      "inputs": 4,
+      "frequency_hz": 20000,
+      "somas": 1,
+      "samples": 1000,
+      "stimulus_times": [
+        0.01005,
+        0.02005,
+        0.03005,
+        0.04005
+      ],
+      "reset_residuals": [
+        0
+      ],
+      "observed_lifecycle": "consistent_readout",
+      "observation": {
+        "after_reset": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "effective_capacity": 1.23e-09,
+        "effective_resistance": 91000000,
+        "frequency_hz": 20000,
+        "initial": {
+          "cached_somas": [
+            0
+          ],
+          "cached_total": 0,
+          "dendrite_readout": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0
+          ],
+          "physical_total": 0
+        },
+        "inputs": 4,
+        "kind": "native_hot_learner_reset",
+        "schema_version": 1,
+        "topology": "Branch",
+        "warm": {
+          "cached_somas": [
+            0.03097001809616662
+          ],
+          "cached_total": 0.03097001809616662,
+          "dendrite_readout": [
+            0.12027310296281168,
+            0.03006827574070292,
+            0.03006827574070292,
+            0.03006827574070292,
+            0.03006827574070292
+          ],
+          "per_input_soma_readout": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical_somas": [
+            0.03097001809616662
+          ],
+          "physical_total": 0.03097001809616662
+        }
+      },
+      "primary": [
+        {
+          "path": "observation.json",
+          "bytes": 1587,
+          "sha256": "7aa498c608b09a86f93837327224edd388add573b2a357a72a9a115cdbd13198"
+        },
+        {
+          "path": "warm.csv",
+          "bytes": 54601,
+          "sha256": "29765728baee9df95e77b4c3c03ad82571985ae3a5a60cb0b84c6661ab0b642d"
+        }
+      ],
+      "lt_spike_timestamps": null,
+      "scientific_verdict": null
+    }
+  },
+  "stale_cases": 0,
+  "case_soma_pairs": 16,
+  "scientific_verdict": null,
+  "training_certificate": null
+}
