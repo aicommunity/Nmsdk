@@ -1,0 +1,1 @@
+All actual dimension and physical proposal Train responses: native soma potentials with real input overlays, readable zooms and no downsampling. Full plots remain M40 cache. Shared counterpart traces are bound by canonical packet equality and byte-equal CSV; process/runtime manifests remain distinct. Selected images await manual review. No classification claim.
