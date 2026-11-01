@@ -1,0 +1,34 @@
+Usage: /home/user/timelearner-refactor/runtime-s02/NeuroModelerConsole [options]
+NeuroModelerConsole automation arguments
+
+Options:
+  -h, --help                                Displays help on commandline
+                                            options.
+  --help-all                                Displays help including Qt specific
+                                            options.
+  -c, --config <path>                       Path to project ini to open.
+  -s, --start-calc                          Start calculations immediately
+                                            after launch.
+  -t, --calc-time <seconds>                 Calculation time interval in
+                                            seconds.
+  -x, --exit-after-calc                     Exit application after calculations
+                                            finish.
+  -S, --save-project                        Save project (Model + Parameters +
+                                            Interface) before exit.
+  -g, --generate-cldesc                     Generate XML descriptions for
+                                            loaded component classes and exit.
+  -l, --cldesc-lexicon <path>               Optional path to custom lexicon
+                                            JSON used during description
+                                            generation.
+  -C, --cldesc-library <name>               Limit generation to the specified
+                                            library name (can be repeated).
+  -K, --cldesc-class <class>                Limit generation to the specified
+                                            component class name (can be
+                                            repeated).
+  -F, --cldesc-force                        Force overwrite of existing
+                                            headers/descriptions when generating
+                                            ClDesc.
+  --check-config, --validate-config <path>  Validate configuration file and
+                                            exit with error code.
+  --app-ini <path>                          Application ini containing explicit
+                                            resource paths.

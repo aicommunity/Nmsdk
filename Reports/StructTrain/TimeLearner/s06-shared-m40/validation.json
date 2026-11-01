@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "host": "10.245.1.17",
+  "tested_root": "8f5481523525515143be9899d1584ef5d673b184",
+  "scientific_training_result": false,
+  "comparison_scope": "complete observation/decision JSON and waveform hashes; graph topology/order/physics/links and parameter-mask properties; graph state properties excluded",
+  "cases": {
+    "Branch-N0-f2000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "2000": 49
+      },
+      "nodes": 49,
+      "readback_valid": true,
+      "waveform_sha256": "b1df1f4b21f0f896c5a02add07a8740bbe5f224e584d001fac6ae989f0ab376e"
+    },
+    "Branch-N0-f20000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "20000": 49
+      },
+      "nodes": 49,
+      "readback_valid": true,
+      "waveform_sha256": "7771f4cfd7d9e5eb802303bf0543a88844fd97f0470fbea11eeb674b8abbc548"
+    },
+    "Branch-N1-f2000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "2000": 49
+      },
+      "nodes": 49,
+      "readback_valid": true,
+      "waveform_sha256": "b1df1f4b21f0f896c5a02add07a8740bbe5f224e584d001fac6ae989f0ab376e"
+    },
+    "Branch-N1-f20000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "20000": 49
+      },
+      "nodes": 49,
+      "readback_valid": true,
+      "waveform_sha256": "7771f4cfd7d9e5eb802303bf0543a88844fd97f0470fbea11eeb674b8abbc548"
+    },
+    "Classic-N0-f2000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "2000": 79
+      },
+      "nodes": 79,
+      "readback_valid": true,
+      "waveform_sha256": "48a6faecc116c3b47ec0a2101fa4aed7bef38b5d938cf1b8303ce5516cf1cb1f"
+    },
+    "Classic-N0-f20000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "20000": 79
+      },
+      "nodes": 79,
+      "readback_valid": true,
+      "waveform_sha256": "4a0c0885f4cadaefe3967806ad930696c09ed047d9718dc722bcf56acaaed838"
+    },
+    "Classic-N1-f2000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "2000": 79
+      },
+      "nodes": 79,
+      "readback_valid": true,
+      "waveform_sha256": "48a6faecc116c3b47ec0a2101fa4aed7bef38b5d938cf1b8303ce5516cf1cb1f"
+    },
+    "Classic-N1-f20000": {
+      "observations_and_decisions_identical": true,
+      "effective_graph_projection_identical": true,
+      "frequencies": {
+        "20000": 79
+      },
+      "nodes": 79,
+      "readback_valid": true,
+      "waveform_sha256": "4a0c0885f4cadaefe3967806ad930696c09ed047d9718dc722bcf56acaaed838"
+    }
+  },
+  "s06-baseline-tests.xml": {
+    "tests": "8",
+    "failures": "0",
+    "disabled": "0",
+    "errors": "0",
+    "time": "416.95",
+    "timestamp": "2026-10-26T06:40:05.844",
+    "name": "AllTests"
+  },
+  "s06-shared-tests.xml": {
+    "tests": "8",
+    "failures": "0",
+    "disabled": "0",
+    "errors": "0",
+    "time": "416.599",
+    "timestamp": "2026-10-26T06:48:48.574",
+    "name": "AllTests"
+  },
+  "s06-shared-unit.xml": {
+    "tests": "6",
+    "failures": "0",
+    "disabled": "0",
+    "errors": "0",
+    "time": "0.",
+    "timestamp": "2026-10-26T06:48:48.569",
+    "name": "AllTests"
+  }
+}

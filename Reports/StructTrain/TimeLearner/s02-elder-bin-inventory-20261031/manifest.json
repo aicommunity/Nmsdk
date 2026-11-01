@@ -1,0 +1,106 @@
+{
+  "kind": "elder_bin_archive_comparison_inventory",
+  "schema_version": 1,
+  "source": "user@10.245.1.11:/home/user/Nmsdk/Bin",
+  "archive": "user@10.245.1.17:/media/user/Data",
+  "agent_model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "records": [
+    {
+      "path": "elder_eventslog_inventory_v2.json.gz",
+      "bytes": 45960,
+      "sha256": "a1c726a366a40aa458ddfb8c643c79f5c0df8a871b2120d7c6d898961c78eded",
+      "schema": "elder-eventslog-inventory-v2",
+      "summary": {
+        "source_file_count": 462,
+        "source_bytes": 65729871153,
+        "archive_root_stats": {
+          "/media/user/Data/from-11-offload-20261020/Nmsdk-Bin-Platform-Linux-EventsLog": {
+            "files": 763,
+            "logical_bytes": 219854120481,
+            "basename_prefixes": {
+              "Elder": 763
+            }
+          },
+          "/media/user/Data/from-11-offload-inh_20261023T1752Z/EventsLog_Elder1": {
+            "files": 227,
+            "logical_bytes": 20175106501,
+            "basename_prefixes": {
+              "Elder": 226,
+              "other": 1
+            }
+          },
+          "/media/user/Data/TLAgent-offload/home-Nmsdk/EventsLog-20261021T0607Z": {
+            "files": 517,
+            "logical_bytes": 29188996680,
+            "basename_prefixes": {
+              "M40": 517
+            }
+          }
+        },
+        "candidate_same_basename_size_pairs": 0,
+        "exact_hash_pairs": 0,
+        "same_name_different_size_pairs": 1,
+        "source_names_missing_from_all_roots": 461,
+        "source_bytes_missing_by_basename": 64033529264
+      }
+    },
+    {
+      "path": "elder_structtrain_primary_inventory.json.gz",
+      "bytes": 44202,
+      "sha256": "81a3f2e3ae31b37929dd3c47512828808bc4c92e5356f2bab5c321fd4c33cf64",
+      "schema": "elder-structtrain-primary-inventory-v2",
+      "summary": {
+        "source": "Elder /home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/**/StatisticLog/**",
+        "source_file_count": 2448,
+        "source_logical_bytes": 11296432784,
+        "loose_same_size_pairs": 16,
+        "loose_same_size_source_files": 8,
+        "loose_exact_hash_matches": 0,
+        "loose_different_content_pairs": 16,
+        "loose_content_unverified_pairs": 0,
+        "tar_archives_listed": 30,
+        "tar_member_files_listed": 3058,
+        "tar_listing_errors": 0,
+        "tar_basename_uncompressed_size_matches": 0,
+        "compressed_candidate_source_files": 0,
+        "missing_by_inventory_count": 2448,
+        "missing_by_inventory_bytes": 11296432784,
+        "archive_roots": {
+          "/media/user/Data/TLAgent-offload/repro/home-Nmsdk-StructTrain-_repro-20261021T0902Z": {
+            "file_count": 2081,
+            "logical_bytes": 1235100842
+          },
+          "/media/user/Data/TLAgent-offload/home-Nmsdk/EventsLog-20261021T0607Z": {
+            "file_count": 517,
+            "logical_bytes": 29188996680
+          },
+          "/media/user/Data/TLAgent-offload/repro": {
+            "file_count": 2484,
+            "logical_bytes": 1292512492
+          },
+          "/media/user/Data/TLAgent-20261020/offload/repro-20261021T052829Z": {
+            "file_count": 24972,
+            "logical_bytes": 14821210104
+          },
+          "/media/user/Data/TLAgent-20261020/offload/lanes-20261020T201138Z": {
+            "file_count": 294234,
+            "logical_bytes": 43451096179
+          },
+          "/media/user/Data/from-11-offload-inh_20261023T1752Z/structtrain_repro": {
+            "file_count": 1913,
+            "logical_bytes": 365612132
+          },
+          "/media/user/Data/NmsdkStructTrainArchive": {
+            "file_count": 25210,
+            "logical_bytes": 314521210149
+          }
+        }
+      }
+    }
+  ],
+  "data_transferred": false,
+  "source_deleted": false,
+  "full_content_identity_verified": false,
+  "scientific_verdict": null
+}
