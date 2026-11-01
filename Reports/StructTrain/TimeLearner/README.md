@@ -3,6 +3,14 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Accepted scoped floating matrix serialization / native ModelArchive correction:
+[normal unit10/archive16/XML32/regression21](s05-archive-f64-current-normal-a1/README.md),
+[ASan unit10/archive16/XML32 and crossworker verification](s05-archive-f64-current-asan-a1/README.md),
+[262 cached figures /28 selected originals directly reviewed](s05-archive-f64-visual-a1/README.md).
+All24 transfer files have equal numeric arrays and semantic model/image identities;
+all64 XML CSVs are byte-identical. The short normal unit mapping limitation is
+retained explicitly. [Full scope and limits](../../../Docs/StructTrain/TimeLearner/ArchiveF64Precision.ru.md).
+
 Accepted scoped legacy warm Reset correction:
 [normal8+32+21](s04-hot-readout-current-normal-a1/README.md),
 [ASan8+32+21 and readers16+16](s04-hot-readout-current-asan-a1/README.md),
