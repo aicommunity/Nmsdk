@@ -1,6 +1,6 @@
 # Миграция скриптов TimeLearner
 
-Три пакета удаления: девятнадцать исторических shell-файлов из Docs.
+Четыре пакета удаления: двадцать семь исторических shell-файлов из Docs.
 Это частичная миграция этапа 9; production runner/queue, активные анализаторы,
 физические модели и остальные исторические файлы пока не перенесены.
 
@@ -99,3 +99,30 @@ provenance контракт. Generic read-only `find_root`/`provenance` такж
 нет; серверные численные тесты для удаления этих исторических файлов не нужны.
 Python-инструменты Docs, исторические Reports runner receipts и Bin остаются
 открытой частью миграции; текущий пакет не означает завершения этапа9.
+
+## Четвёртый пакет: старые campaign/offload shell entrypoints
+
+Снимок root `8e4448ea2e055e8f4edb4c33fe2ad523a5467de9`, прежний каталог
+`Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools`: удалены
+`archive_nmsdk_journals.sh`, `disk_watch_offload.sh`, `e05_dispatch.sh`,
+`r0_branch_nextseg_replay.sh`, `repass_sweep.sh`, `w0_br25_seed_jitter_launch.sh`,
+`w0_br25_test_tipr_jitter.sh`, `w1w2_sim_launch.sh`.
+
+Это старые кампании и прежние offload-инструменты, а не поддерживаемые команды.
+Они используют Bin/Platform, фиксированный br25 template, monkeypatch
+posttune_verify/CASES, неполный overlay Train→Test, byte inequality как gate
+изменения ответа либо rsync. Их алгоритмы не переносились автоматически в
+новый пакет. Современные export/calibration/evaluation и runtime manifest
+проверяются своим production путём; текущая diagnostic cleanup не объявляется
+drop-in заменой старого архивационного скрипта.
+
+Все восемь файлов прочитаны; буквальные ссылки найдены только в исторических
+Docs. Четыре документа помечены как исторические, локальная Markdown-ссылка на
+удалённый archive helper заменена immutable Git source. Измерения, численные
+данные, models/configs и научные выводы не переписывались. Перестановки, jitter
+и сходство сохраняют исходную историческую постановку, а не получают новый PASS.
+
+Все27 удалённых путей проверяются через manifest: отсутствие в текущем дереве,
+retrieval по полному commit и совпадение содержимого/SHA256. В root Docs больше
+нет tracked `.sh` внутри TimeLearner audit; Python и остальные Git trees ещё
+требуют отдельного review/migration. Старые server checkout не менялись.

@@ -13,6 +13,11 @@
 менялось; Python-инструменты Docs, Bin, старые Reports runner receipts и
 полный новый scheduler/CLI остаются открытыми. [Реестр и границы](ScriptMigration.ru.md).
 
+Четвёртый пакет удалил ещё8 старых campaign/offload shell entrypoints:
+всего27 исторических инструментов с retrieval records; все `.sh` root Docs
+TimeLearner audit удалены. Четыре исторических документа дополнительно помечены;
+results/models/configs сохранены, старые server checkout не тронуты.
+
 ## Приёмка реальной N1-калибровки после Exact Solo Train
 
 На каждом worker выполнены2 owned calibration операции /20 реально измеренных
