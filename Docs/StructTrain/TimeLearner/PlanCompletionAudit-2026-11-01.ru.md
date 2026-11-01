@@ -62,6 +62,17 @@ captured parent-процессом; все52 ASan snapshots содержат lib
 
 ## Снимки и пределы доказательств
 
+Приняты адресно текущая source drift сверка217 learner properties и Git
+проверка44 migration records на обоих workers; ещё6 исторических Phase12
+shell удалены из Bin с полными retrieval records. Guard `runtime.source_closure`
+теперь отклоняет неверный Git worktree даже при совпадении HEAD/status:
+3/3 реальные Git fixtures на worker,2 воспроизведённых baseline отказа.
+Обнаруженный Elder Bin alias сохранён в диагностике, существующие рабочие
+копии не переписаны. Это ограничивает старую source provenance; численные
+результаты сами по себе этим не опровергнуты. См. [source drift](PropertySourceDrift.ru.md),
+[migration](ScriptMigration.ru.md), [worktree identity](SourceWorktreeIdentity.ru.md).
+Ни один дополнительный полный этап0–12 этим пакетом не закрыт.
+
 Принятый сквозной live pipeline включён в корневой develop
 1d4822af22e05b741e4a1c779cf99ba05cb0a1fa, PulseLib
 f23d1b8dee908ddfdc549619b754875fc627ce9b, Bin
