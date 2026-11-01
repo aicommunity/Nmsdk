@@ -785,3 +785,35 @@ ELF/ar и повторяющихся INFO-логов, плюс715813989B зак�
 алгоритмов, затем расширение матрицы; количество пройденных checks не заменяет их.
 
 Дополнение: проверка совместимости N0-шаблона перед приёмкой подэтапа. Исправление 0980f23309e099cb7cc73a1355a2dd25c7f788ab сохраняет полную конфигурацию при вызове подготовителя без новых факторов; раньше такой вызов ошибочно требовал повторного задания диапазона Ns. Проверено исходниками 54382334754986c574c7ccbcd5ded5b55f1b638e на Elder и M40: исходная ошибка воспроизведена через прежний публичный make_job; по 9 проверок для repeat=1/2, по 10 фактических Train-заданий на протокол регенерированы идентично, 1147 исходных файлов каждого корпуса не изменились. Численные прогоны и отрисовка повторно не выполнялись. Исходные отчёты с 7 проверками остаются отчётами своего снимка. Новые квитанции: Reports/StructTrain/TimeLearner/s07-n0-template-contract-normal-a2 (7aeb9655afdc3aec7ef607664393318fe290d1a3), s07-n0-template-contract-asan-a2 (0689def9d7a056bc9e9464d5ba647fcb8e30cbf9). Первые попытки настройки a1 завершились SyntaxError до выполнения проверок и также сохранены. Это приёмка совместимости подготовителя, а не положительный результат физического обучения и не закрытие полного этапа 7.
+
+Новый подэтап native-dimension-controls (feature; ещё не merge в develop):
+normal и ASan по 16 реальных cold Train для Classic/Branch × N0/N1 × N=1/2/4/5;
+по 4 Exact только в одновходовых identity controls с новым final probe,
+по 12 SearchUnresolved при фиксированной геометрии. По два reader набора 4/4
+на каждом worker; проверен пятый канал Classic CSV. Дополнительный normal N0
+physical proposal control подтвердил измеренную последовательность L1/Ns1 →
+L2/Ns1 → L2/Ns2 → L3/Ns1 в обеих топологиях; оба Train SearchUnresolved,
+reader 2/2. ASan proposal control и полная временная приёмка ещё выполняются.
+Источники/артефакты/ограничения: [NativeDimensionControls](NativeDimensionControls.ru.md).
+Это не успешная классификация и не закрытие полной матрицы этапов 3–8.
+
+Уточнение: ASan proposal control завершён, оба случая подтверждены reader 2/2; proof db3211020d6e2695ec2a5768d417ebbc855cbc8f. В работе остаётся temporal/visual приёмка нового подэтапа.
+
+Итог temporal приёмки native-dimension-controls: 16 dimension reports /568
+trial-soma pairs и 2 physical N0 proposal reports /42 pairs; temporal checks
+3/3 для каждого dimension attempt и proposal набора. Дополнительно baseline
+production report reader 3/3. Все 20 выбранных PNG1920×960 прямо просмотрены,
+включая пятый soma channel и формы реальных L/Ns кандидатов; full cache manual
+review не заявлен. Shared normal/ASan plots обоснованы 252 canonical-equal JSON
+packet / byte-equal CSV pairs при отдельных runtime manifests. Proof438a11cae58cd307f6729fbbdb012f8c6ef8e264,
+Reports/StructTrain/TimeLearner/s07-native-controls-visual-a1; selected QA записана
+отдельно в SELECTED_VISUAL_REVIEW.json. Этот адресный подэтап готов к merge.
+
+Отдельно начато исправление N1 finite-mesh resolution: исходный real normal
+контроль имеет measured sign bracket и минимальную ошибку4.7358625548610256e-5
+при tolerance1e-5. Baseline proof12f39119a3eacc843441db2cbae58b0a5ad560e4 опубликован
+в отдельной ветке. Реализация measured resistance refinement изолирована в
+codex/timelearner-n1-measured-refinement (root e19a303f2d9252a5179ad0f457593e48c0c35fd1,
+PulseLib bf50ae57512ff0a1591937f4f23cef172a8928dc); новые normal/ASan сборки
+выполняются. Эта реализация ещё не прошла серверную приёмку и не находится
+в develop; успешная физическая сходимость и классификация не заявлены.
