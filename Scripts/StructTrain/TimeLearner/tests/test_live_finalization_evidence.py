@@ -101,3 +101,54 @@ class LiveFinalizationRejectionEvidenceTest(unittest.TestCase):
                 changed["live"]["sha256"] = sha({k: v for k, v in changed["live"].items() if k != "sha256"})
                 with self.subTest(case=p.name, corruption=name):
                     with self.assertRaises(EvidenceError):audit_pre_entry_live_finalization(changed, source)
+
+
+class LiveFinalizationCancellationEvidenceTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        root = os.environ.get("TIMELEARNER_LIVE_CANCEL_NATIVE")
+        if not root:
+            raise unittest.SkipTest("requires eight actual native cancellation controls")
+        cls.paths = [p for p in sorted(Path(root).glob("*.json")) if re.fullmatch(
+            r"(?:Classic|Branch)_live_finalization_[01]_(?:local|connected)_(?:[89]|1[01])\.json", p.name)]
+        if len(cls.paths) != 8:
+            raise RuntimeError("requires Classic/Branch and all four cancellation boundaries")
+
+    @staticmethod
+    def source(p, record):
+        if record["scenario"] == 8:
+            if list(p.parent.glob(p.stem+"_*trial_*.json")):
+                raise RuntimeError("cancelled armed plan unexpectedly produced probes")
+            return None
+        if record["scenario"] == 9:
+            return load_stopped_case(p.with_name(p.stem+"_stopped_state.json"))
+        return load_case(p.with_name(p.stem+"_learned_state.json"))
+
+    def test_actual_cancelled_boundaries_and_primary_data(self):
+        from ..live_finalization_evidence import audit_cancelled_live_finalization
+        seen = set()
+        for p in self.paths:
+            r = load(p)
+            with self.subTest(case=p.name):
+                result = audit_cancelled_live_finalization(r, self.source(p, r))
+                self.assertIsNone(result["scientific_verdict"])
+                self.assertTrue(result.get("no_recognition_evidence") or result.get("no_frozen_evaluation"))
+                seen.add((p.name.split("_")[0], r["scenario"]))
+        self.assertEqual(seen, {(top, s) for top in ("Classic", "Branch") for s in range(8, 12)})
+
+    def test_resigned_false_completion_and_discarded_data_rejected(self):
+        from ..live_finalization_evidence import audit_cancelled_live_finalization
+        for p in self.paths:
+            r = load(p);source = self.source(p, r)
+            for name, mutate in (
+                ("false_model", lambda r: r.update(final_package={"unexpected": True})),
+                ("false_reason", lambda r: r["live"].update(reason="exact")),
+                ("false_entry", lambda r: r["live"].update(entry_model_time=-1)),
+                ("false_summary", lambda r: r.update(training_summary={"invented": True})),
+                ("false_frozen", lambda r: r["frozen_replay"]["observations"].append({})),
+                ("false_verdict", lambda r: r.update(scientific_verdict=True)),
+            ):
+                changed = deepcopy(r);mutate(changed)
+                changed["live"]["sha256"] = sha({k: v for k, v in changed["live"].items() if k != "sha256"})
+                with self.subTest(case=p.name, corruption=name):
+                    with self.assertRaises(EvidenceError):audit_cancelled_live_finalization(changed, source)

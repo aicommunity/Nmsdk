@@ -31,11 +31,22 @@ def _signed(value, fields, kind):
 
 def audit_completed_live_finalization(record, source_case):
     """Completed execution including negative calibration outcomes, not success."""
+    return _audit_finalized_live(record, source_case, cancelled=False)
+
+
+def audit_cancelled_live_finalization(record, source_case=None):
+    """Cancelled management is never a frozen evaluation or a successful Train."""
+    if type(record) is dict and record.get("scenario") in (8, 9, 10):
+        return audit_pre_entry_live_finalization(record, source_case)
+    return _audit_finalized_live(record, source_case, cancelled=True)
+
+
+def _audit_finalized_live(record, source_case, *, cancelled):
     try:
         require(type(record) is dict and set(record) == FIELDS and record["kind"] == "native_live_finalization_control"
                 and type(record["schema_version"]) is int and record["schema_version"] == 1,
                 "unknown_live_finalization_control")
-        require(type(record["scenario"]) is int and record["scenario"] in (0, 1) and
+        require(type(record["scenario"]) is int and record["scenario"] in ((11,) if cancelled else (0, 1)) and
                 type(record["calculate_mode"]) is int and record["calculate_mode"] in (0, 1) and
                 type(record["connected"]) is bool and record["cold_training"] is True and
                 record["scientific_verdict"] is None, "unsupported_live_finalization_claim")
@@ -85,7 +96,16 @@ def audit_completed_live_finalization(record, source_case):
         else:
             require(report["source_restored"] is True, "live_negative_result_not_restored")
             final = report["source_recognition"]
-        require(record["final_package"] == final, "live_final_model_changed")
+        if not cancelled:
+            require(record["final_package"] == final, "live_final_model_changed")
+        if cancelled:
+            require(report["status"] == "cancelled" and report["reason"] == "fixture_cancel" and
+                    report["source_restored"] is True and record["final_package"] == {} and
+                    record["frozen_replay"] == {"requests": [], "observations": []},
+                    "cancelled_live_phase_has_evaluation_evidence")
+            return {"schema_version": 1, "training_source_audit": learned, "phase_audit": phase,
+                    "transaction_audit": transaction, "no_frozen_evaluation": True,
+                    "cold_construction_and_native_execution_attested": False, "scientific_verdict": None}
         matrix = record["frozen_replay"]
         require(type(matrix) is dict and set(matrix) == {"requests", "observations"} and
                 len(matrix["requests"]) == len(plan["trials"]), "live_frozen_matrix_incomplete")
@@ -119,7 +139,7 @@ def audit_pre_entry_live_finalization(record, source_case=None):
                 and type(record["schema_version"]) is int and record["schema_version"] == 1,
                 "unknown_live_finalization_control")
         scenario = record["scenario"]
-        require(type(scenario) is int and scenario in range(2, 8) and
+        require(type(scenario) is int and scenario in (*range(2, 8), 8, 9, 10) and
                 type(record["calculate_mode"]) is int and record["calculate_mode"] in (0, 1) and
                 type(record["connected"]) is bool and record["cold_training"] is True and
                 record["scientific_verdict"] is None, "unsupported_live_rejection_claim")
@@ -137,9 +157,12 @@ def audit_pre_entry_live_finalization(record, source_case=None):
             5: ("failed", "native_finalization_external_stop"),
             6: ("failed", "unbalanced_live_finalization_design"),
             7: ("failed", "native_owned_post_tune_requires_uniform_frequency_tree"),
+            8: ("cancelled", "fixture_cancel"),
+            9: ("stopped_diagnostic", "training_has_no_completed_certificate"),
+            10: ("cancelled", "fixture_cancel"),
         }[scenario]
         require((live["status"], live["reason"]) == (status, reason), "live_rejection_reason_mismatch")
-        if scenario in (6, 7):
+        if scenario in (6, 7, 8):
             require(source_case is None and live["boundary"] is None and live["training_request"] == {} and
                     record["training_summary"] == {} and live["captured_model_time"] is None,
                     "preflight_rejection_has_training_boundary")
@@ -159,9 +182,10 @@ def audit_pre_entry_live_finalization(record, source_case=None):
             p, bindings = boundary["controls"]["parameters"], boundary["controls"]["bindings"]
             require(p["CalculateMode"] == record["calculate_mode"] and
                     bindings["IsNeedToTrain"]["connected"] is record["connected"], "live_rejection_controls_changed")
-            if scenario == 2:
+            if scenario in (2, 9):
                 require(boundary["diagnostic_only"] is True and source_case[0]["certificate"] is None and
-                        boundary["training_outcome"] == "budget_exhausted", "invalid_live_stopped_certificate")
+                        boundary["training_outcome"] == ("external_stop" if scenario == 9 else "budget_exhausted"),
+                        "invalid_live_stopped_certificate")
                 source = audit_stopped_state(*source_case)
             else:
                 require(boundary["diagnostic_only"] is False, "queued_rejection_requires_completed_source")
