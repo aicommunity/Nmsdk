@@ -1,0 +1,3 @@
+# Actual positive N1 calibration temporal proof
+
+All20 actual threshold matrices /160 pattern trials /240 trial-soma pairs rendered from Git-restored primary. Three production report checks passed;206 source files unchanged. Full PNG/SVG/PDF cache remains on M40. Selected28 readable PNGs: all8 pattern overviews per topology for real TP1/FP3 candidate4, target and actual foil response zooms, Classic second soma, silent source-threshold target control. Manual selected review pending. Finite grid nonseparable; no candidate committed;5/8 is a measured calibration observation, not independent Test.
