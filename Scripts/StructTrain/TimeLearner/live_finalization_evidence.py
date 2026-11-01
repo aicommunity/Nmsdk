@@ -82,9 +82,10 @@ def _audit_finalized_live(record, source_case, *, cancelled):
                 report["source_recognition"]["conversion_spec"] == plan["conversion"],
                 "live_conversion_source_changed")
         for key in ("mode", "metric", "canonical_floor", "canonical_last", "resistance_bounds", "search_passes",
-                    "maximum_candidates", "maximum_recorded_samples", "minimum_positive_gap", "finalization"):
+                    "maximum_candidates", "maximum_recorded_samples", "minimum_positive_gap"):
             require(report[key] == plan["post_tune"][key], "live_post_tune_plan_changed:" + key)
-        require(report.get("weight_probe_threshold") == plan["post_tune"]["weight_probe_threshold"] and
+        require(report.get("finalization", "calibrate") == plan["post_tune"]["finalization"] and
+                report.get("weight_probe_threshold") == plan["post_tune"]["weight_probe_threshold"] and
                 all(report[key] == plan[key] for key in ("trials", "thresholds", "maximum_calibration_candidates")) and
                 report["confirmation_specification"] == plan["confirmation"], "live_post_tune_design_changed")
         transaction = audit_posttune_transaction(report, source_case)

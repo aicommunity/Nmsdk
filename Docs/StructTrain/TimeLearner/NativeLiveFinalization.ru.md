@@ -189,3 +189,43 @@ trials, thresholds, maximum calibration candidates и confirmation. Decoder
 описания (две топологии × fixed/calibrate) после JSON roundtrip и32 malformed
 controls. Серверная компиляция и проверка codec пока ожидаются; Console job
 схема2 и Python worker ещё не подключены.
+
+## Console Train schema2: реализация, runtime-приёмка ожидается
+
+Сохраняется команда `train JOB --runtime-manifest RUNTIME --output NEW_RUN`.
+Schema1 не меняет поля или исходную семантику. Schema2 добавляет обязательный
+`finalization_plan`, подписанный codec выше; optional_modes.post_train_tuning
+должен быть true, C-trim и target-only calibration остаются выключенными.
+Внешний worker не рассчитывает вложенные компоненты: он вызывает только
+обычный Calculate корневой модели и продвигает Environment на один шаг.
+
+Console фиксирует source Solo и native summary на queued/stopped boundary
+до следующего импорта. Пересозданные граф и controller не используются для
+восстановления старого Train результата. `finalization.json` сохраняет полный
+live report, включая source outcome, conversion, пробные матрицы, grid и
+confirmation. `execution.json` schema2 отдельно записывает training_started,
+completed_boundary, finalization_status и recognition_available. Source
+package_path/sha/model_revision/training_outcome nullable, если Train boundary
+ещё не возникла; шаблонные learned/stopped packages не создаются.
+
+`recognition-model.json` записывается только для нормального завершения
+разрешённой финализации. Это доступность модели для объявленной оценки,
+а не Exact, успешная калибровка или классификация. При отмене/лимите общего
+числа тиков native Cancel закрывает пробу и откатывает PostTune; completed
+Solo boundary может сохраниться, но recognition_available остаётся false.
+Exact содержимого внешнего cancel.request сохраняется отдельным артефактом.
+
+Python worker проверяет source CSV/model/summary, immutable declaration,
+public controls, полный owned PostTune clock до конца execution и effective
+final model. Typed nonzero exit2 нового worker допускает анализ diagnostic
+результата при той же проверке process/runtime ownership; process_error не
+переименовывается в completed. Schema1 nonzero manifest сохраняет прежнюю
+семантику. Frozen Test выполняется отдельной командой evaluate с genuine
+новым Train source и явно выбранным дизайном. Same-matrix не объявляется
+независимой оценкой.
+
+Новый production corpus задаёт14 операций: четыре cold live Train (две
+топологии × fixed/grid, CalculateMode0/1), четыре отдельных frozen same-matrix
+Test, четыре partial schema2 и две partial schema1 controls. Reader проверяет
+полную closure и повреждения source/status/phase clock/availability;
+server build и фактические результаты этого corpus пока ожидаются.

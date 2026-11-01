@@ -51,9 +51,11 @@ def _audit_source(job, source_case, mode):
 
 @_evidence_boundary
 def validate_job(mode, job, source_case=None):
-    require(mode in FIELDS and type(job) is dict and set(job) == FIELDS[mode] | {"kind", "schema_version", "sha256"}
+    require(mode in FIELDS and type(job) is dict, "unknown_native_pipeline_job")
+    live = mode == "train" and type(job.get("schema_version")) is int and job["schema_version"] == 2
+    require(set(job) == FIELDS[mode] | {"kind", "schema_version", "sha256"} | ({"finalization_plan"} if live else set())
             and job["kind"] == "timelearner_native_"+KINDS[mode]+"_job" and
-            type(job["schema_version"]) is int and job["schema_version"] == 1, "unknown_native_pipeline_job")
+            type(job["schema_version"]) is int and job["schema_version"] == (2 if live else 1), "unknown_native_pipeline_job")
     _digest(job)
     require(type(job["implementation_id"]) is str and bool(job["implementation_id"].strip()), "pipeline_implementation_missing")
     if mode == "train":
@@ -67,7 +69,7 @@ def validate_job(mode, job, source_case=None):
         modes = job["optional_modes"]
         require(type(modes) is dict and set(modes) == {"sync_capacitance_trim", "post_train_tuning", "auto_calibrate_threshold"}
                 and type(modes["sync_capacitance_trim"]) is int and modes["sync_capacitance_trim"] == 0 and
-                modes["post_train_tuning"] is False and modes["auto_calibrate_threshold"] is False,
+                modes["post_train_tuning"] is live and modes["auto_calibrate_threshold"] is False,
                 "training_optional_modes_not_yet_supported")
         require(all(type(job[k]) is int and job[k] in (0, 1) for k in ("calculate_mode", "structure_build_mode")),
                 "invalid_training_control_mode")
@@ -91,8 +93,12 @@ def validate_job(mode, job, source_case=None):
         require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t["run_id"] == job["run_id"] for t in trials),
                 "invalid_evaluation_trial_scope")
         require(len({t["trial_id"] for t in trials}) == len(trials), "duplicate_evaluation_trial")
-    return {"job_sha256": job["sha256"], "primary_source_checked": mode != "train",
-            "effective_model_checked": False, "native_configuration_validation_required": True}
+    result = {"job_sha256": job["sha256"], "primary_source_checked": mode != "train",
+              "effective_model_checked": False, "native_configuration_validation_required": True}
+    if live:
+        from .live_training_worker import validate_live_plan
+        result["finalization"] = validate_live_plan(job["finalization_plan"], config, job["implementation_id"])
+    return result
 
 
 def _artifact_records(directory, execution):
@@ -115,13 +121,16 @@ def audit_execution(mode, directory, job, source_case=None):
     validate_job(mode, job, source_case)
     directory = Path(directory)
     execution = load(directory/"execution.json");_digest(execution)
-    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] and
+    live = mode == "train" and job["schema_version"] == 2
+    from .live_training_worker import EXECUTION_FIELDS as LIVE_EXECUTION_FIELDS
+    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) and
             execution["kind"] == "timelearner_native_"+EXECUTION_KINDS[mode]+"_execution" and
-            type(execution["schema_version"]) is int and execution["schema_version"] == 1 and
+            type(execution["schema_version"]) is int and execution["schema_version"] == (2 if live else 1) and
             execution["job_sha256"] == job["sha256"] and load(directory/"job.json") == job and
             execution["evaluation_verdict"] is None, "pipeline_execution_scope_changed")
     names = _artifact_records(directory, execution)
-    require(execution["execution"] in ("completed", "cancelled", "model_tick_budget_exhausted"), "pipeline_execution_status_unknown")
+    require(execution["execution"] in (("completed", "cancelled", "model_tick_budget_exhausted", "finalization_failed") if live else
+                                      ("completed", "cancelled", "model_tick_budget_exhausted")), "pipeline_execution_status_unknown")
     ticks = count(execution["model_ticks"])
     if mode != "export":
         config = job["configuration"] if mode == "train" else source_case[0]["configuration"]
@@ -129,6 +138,9 @@ def audit_execution(mode, directory, job, source_case=None):
         require(frequency == config["model"]["frequency_hz"] and ticks <= job["maximum_model_ticks"] and
                 equal(number(execution["model_time_end"])-number(execution["model_time_begin"]), ticks/frequency),
                 "pipeline_clock_changed")
+    if live:
+        from .live_training_worker import audit_live_training
+        return audit_live_training(directory, job, execution, names)
     if mode == "train":
         completed = execution["completed_boundary"]
         require(type(completed) is bool, "invalid_training_boundary")
@@ -190,6 +202,12 @@ def audit_execution(mode, directory, job, source_case=None):
     return {"frozen_model_verified": True, "metrics": metrics, "native_execution_verified": False, "evaluation_verdict": None}
 
 
+def _structured_live_exit(mode, job, process, directory):
+    return (mode == "train" and job["schema_version"] == 2 and process["execution"] == "process_error" and
+            type(process["returncode"]) is int and process["returncode"] == 2 and
+            (Path(directory)/"execution.json").is_file())
+
+
 def _snapshot_source(source, destination):
     source = Path(source).resolve(strict=True)
     stem = source.name.removesuffix("_learned_state.json")
@@ -222,9 +240,11 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         executable.parent, output/"process", maximum_wall_seconds)
     verify_runtime(runtime)
     audit = None
-    if process["execution"] == "completed":
+    if process["execution"] == "completed" or _structured_live_exit(mode, job, process, output/"native"):
         require(process["runtime_provenance"] == "loaded_files_captured", "pipeline_loaded_runtime_missing")
         audit = audit_execution(mode, output/"native", job, source_case)
+        if process["execution"] != "completed":
+            require(load(output/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
     result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 1, "operation": mode,
         "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
         "job_sha256": job["sha256"], "source_package_path": source_relative,
@@ -285,7 +305,8 @@ def audit_run_manifest(path):
             PurePosixPath(arguments[3]) == output.parent/"input/job.json" and
             request["working_directory"] == str(PurePosixPath(runtime["executable"]["path"]).parent) and
             number(request["maximum_wall_seconds"]) > 0 and request["model_time"] is None, "pipeline_process_scope_changed")
-    if process["execution"] == "completed":
+    auditable = process["execution"] == "completed" or _structured_live_exit(mode, job, process, root/"native")
+    if auditable:
         from .native_evidence import load_json
         owned = load(root/"process/owned-process.json");loaded = load_json(root/"process/loaded-files.json")
         require(type(loaded) is list and all(type(r) is dict and set(r) == {"path", "size", "sha256"} and
@@ -298,9 +319,11 @@ def audit_run_manifest(path):
                 owned["executable"] == runtime["executable"]["path"] and
                 owned["executable_sha256"] == runtime["executable"]["sha256"] and
                 owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
-                process["returncode"] == 0 and process["ownership_scope"] == "launched_executable_only" and
+                process["returncode"] == (0 if process["execution"] == "completed" else 2) and process["ownership_scope"] == "launched_executable_only" and
                 process["runtime_provenance"] == "loaded_files_captured", "pipeline_owned_runtime_changed")
-    audit = audit_execution(mode, root/"native", job, source_case) if process["execution"] == "completed" else None
+    audit = audit_execution(mode, root/"native", job, source_case) if auditable else None
+    if auditable and process["execution"] != "completed":
+        require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
     require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution"),
             "pipeline_run_analysis_changed")
     return {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
