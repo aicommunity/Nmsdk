@@ -1,0 +1,46 @@
+{
+  "kind": "timelearner_native_probe_visual_report",
+  "schema_version": 2,
+  "status": "diagnostic",
+  "run_id": "Branch_2000_N1_stopped_InvalidProbe/automatic/session/7/capture/7",
+  "trial_id": "Branch_2000_N1_stopped_InvalidProbe/automatic/session/7/capture/7/1",
+  "sample_id": "target",
+  "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+  "base_model_revision": null,
+  "observed_model_revision": null,
+  "frequency_hz": null,
+  "figures": [],
+  "primary_audit": {
+    "valid_observation": false,
+    "trace_checked": false,
+    "trial_id": "Branch_2000_N1_stopped_InvalidProbe/automatic/session/7/capture/7/1",
+    "native_status": "rejected",
+    "reason": "missing_observation",
+    "evaluation_verdict": null
+  },
+  "spike_recording_enabled": false,
+  "source_packet_sha256": "c9ea2dc9137971d67f4128ca43d6262967f4d45cf2e39de9212027fabe1eaf6d",
+  "source_trace_sha256": "5e0100da69949ecbda0aae254eaee6276e47356b575937dc80a07513b3a2e073",
+  "runtime": {
+    "python": "3.12.3",
+    "matplotlib": "3.9.4",
+    "backend": "Agg"
+  },
+  "comparison_scope": "individual probe",
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null,
+  "trace_quality": {
+    "context_observed": false,
+    "raw_trace_checked": true,
+    "sample_count": 0,
+    "trace_header_present": true,
+    "recorded_header_channels": 1,
+    "recorded_window_complete": false,
+    "first_sample_time": null,
+    "last_sample_time": null,
+    "unobserved_intervals": [],
+    "nonfinite_cells": [],
+    "reason": "no_observed_context"
+  },
+  "observed_soma_count": null
+}

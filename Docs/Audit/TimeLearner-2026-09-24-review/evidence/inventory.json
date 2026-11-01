@@ -1,0 +1,66 @@
+[
+  {
+    "path": ".",
+    "head": "14286c9ebf80193a3436790850ba39e3844fbe44",
+    "baseline": "23e4e8231e2bd1c7201f724fd5510f824c229dad",
+    "status": "? Bin\n?? .gigacode_vsc/\n?? .gigaide/\n?? .idea/",
+    "commits": "14286c9ebf80193a3436790850ba39e3844fbe44 2026-09-24T09:04:20+03:00 docs(audit): add next-plan after partial cold follow-up\n101df9fa325320e4f8d40c3f47ef3a348396e56c 2026-09-24T02:05:38+03:00 docs(audit): after-fixes status after cold follow-up (partial)\n90e8633f1eac274d925c55d2a36c3a28ec082b2b 2026-09-23T15:01:13+03:00 fix(audit-probes): match A01 legacy IsPatternComplete (>=4 only)\n176c8293dbca9b08f2d4f530fb8fa95c2b44c876 2026-09-23T14:33:19+03:00 fix(audit-probes): align stubs with A01/PostTuneResult; expect PASS after remediation\ndb6d400d6aa61286e714d994934e86ab016de359 2026-09-23T13:35:51+03:00 chore: bump PulseLib gitlink\n72ca1609ea34fe8a6ace9245d938016e0f258e07 2026-09-23T13:35:35+03:00 chore: sync PulseLib and Rdk gitlinks to audit-fix HEADs\nbe26e083bf408a5daf38864811d452bd0732f882 2026-09-23T13:35:10+03:00 fix: apply TimeLearner audit remediation A01-A16\n0dbfb27e07f7bf1c2ccc2921f3526e0497bd0043 2026-09-23T13:34:16+03:00 fix(Console): once-per-run Save and AppCore exit flag (A15)",
+    "diff": "App/NeuroModelerConsole/main.cpp                   |   12 +-\n Bin                                                |    2 +-\n .../after-fixes/NEXT_PLAN.ru.md                    |   98 +\n .../after-fixes/NeuroModelerConsole.sha256         |    1 +\n .../after-fixes/RECONCILE.md                       |   49 +\n .../after-fixes/branch-tests.xml                   |   15 +\n .../after-fixes/cpp-counterexamples.xml            |   24 +\n .../after-fixes/follow-up-plan.md                  |   26 +\n .../after-fixes/gui-tests.xml                      |   22 +\n .../after-fixes/py/counterexamples.json            |  260 +\n .../after-fixes/py/inventory.json                  | 5119 +++++++++++++\n .../after-fixes/py/stored_metrics.json             | 7620 ++++++++++++++++++++\n .../TimeLearner-2026-09-22/after-fixes/status.json |   60 +\n Libraries/Nmsdk-PulseLib                           |    2 +-\n Rdk                                                |    2 +-\n Scripts/audit-probes/README.md                     |   66 +-\n .../audit-probes/generate_branch_update_probes.py  |    3 +-\n Scripts/audit-probes/generate_probes.py            |   68 +-\n 18 files changed, 13415 insertions(+), 34 deletions(-)"
+  },
+  {
+    "path": "Bin",
+    "head": "9733281ccaf660785d4a77f95fcfd7cc82f392ca",
+    "baseline": "d2361191bdcc582e82eb1071571d185f6b35c79f",
+    "status": "?? Configs/SpikeSamples/StructTrain/scripts/__pycache__/\n?? Platform/Win/j\n?? Platform/Win/settings.qt",
+    "commits": "9733281ccaf660785d4a77f95fcfd7cc82f392ca 2026-09-24T02:05:32+03:00 docs(StructTrain): calibration-quality cold follow-up RESULT (partial)\n09328e088ad3354b96781fbce2157ab9a3aa9272 2026-09-23T17:42:14+03:00 fix(StructTrain): soft_cold resets FixedLTZ to silent\n03fc4358e6614130d98ef94d6251cb49af03987b 2026-09-23T14:33:19+03:00 docs(StructTrain): note hardcoded NeuroModelerConsole path for verify\n8731c771b97d17c922a3bdde347cc91a1d0513ad 2026-09-23T14:32:41+03:00 fix(StructTrain): A16 provenance SHA and tipr expect gate\n616deefa053cd539c7263b71c22d85ee1469fee0 2026-09-23T13:30:53+03:00 fix(StructTrain): metrics v2 foil spikes and last_pulse (A05-A06)\n20e5e4a4adaa33c5ad6b040906a78db09895ccf4 2026-09-23T13:26:24+03:00 chore: drop accidental pycache from A16 tests commit\n83614d55a9589b88d24a72a1b530e41ffe5bd6a5 2026-09-23T13:26:18+03:00 fix(StructTrain): harden posttune_verify provenance (A16)",
+    "diff": ".../StructTrain/POST_TRAIN_VERIFY.ru.md            |   1 +\n .../EXP_span25ms_packA_gen_posttune/README.md      |   5 +-\n .../EXP_span50ms_packA_gen_posttune/README.md      |   7 +-\n .../README.md                                      |  18 +-\n .../README.md                                      |  21 +-\n .../README.md                                      |  20 +-\n .../README.md                                      |  20 +-\n .../Phase6/EXP_480_gen_posttune/README.md          |   9 +-\n .../StructTrain/_repro/POSTTUNE_VERIFY_RESULT.md   |  47 +-\n .../StructTrain/scripts/audit_structtrain.py       |  27 +-\n .../StructTrain/scripts/posttune_verify.py         | 581 ++++++++++++++++-----\n .../StructTrain/scripts/repro_cold_lib.py          |  10 +\n .../StructTrain/scripts/selectivity_metrics.py     |  57 +-\n .../StructTrain/scripts/tests/.gitignore           |   1 +\n .../StructTrain/scripts/tests/__init__.py          |   0\n .../scripts/tests/test_posttune_verify_unit.py     | 155 ++++++\n 16 files changed, 776 insertions(+), 203 deletions(-)"
+  },
+  {
+    "path": "Rdk",
+    "head": "c503a04090ea7aa8c4cd09f4abe8d86d68cd66d3",
+    "baseline": "aeedfb80d9d34d5c7a1cd25bfad042ec0362f1f7",
+    "status": "",
+    "commits": "c503a04090ea7aa8c4cd09f4abe8d86d68cd66d3 2026-09-23T13:34:16+03:00 fix(GUI): exact segment-rect obstacle hits for link router (A14)",
+    "diff": "GUI/Qt/UModernDiagramLinkRouter.cpp | 37 +++++++++++++++++++++++--------------\n 1 file changed, 23 insertions(+), 14 deletions(-)"
+  },
+  {
+    "path": "Libraries/Nmsdk-PulseLib",
+    "head": "d4149190aa30a99366eb453bd69306a0278c34f9",
+    "baseline": "17854a4fabd53841d8840d382a2186ba1cadbd80",
+    "status": "",
+    "commits": "d4149190aa30a99366eb453bd69306a0278c34f9 2026-09-23T15:01:13+03:00 fix(A01): bind Branch DatasetMatrix for pattern complete\ncf32942d3de348079f5e6c21ef640587405adeb5 2026-09-23T13:35:51+03:00 docs(analyzer): note A01-A06 fixes supersede audit caveat\na84ed298dd96d7d5db1fa63df78dbe88f0198f7e 2026-09-23T13:35:35+03:00 docs: finish analyzer contract notes; clarify TL Soma probe comment\nceaa67441795fc2bb8ad525cf44e0f431445784e 2026-09-23T13:35:10+03:00 docs: update analyzer and delay contracts after audit fixes\n8c04814f741e3bd90c02c68247963640cc7cf909 2026-09-23T13:34:16+03:00 fix(PulseLib): exact axon delay N ticks and Preinh defaults (A11, A13)\n02c89326bd0994f4b3512c327a8d7d816aaedcb7 2026-09-23T13:33:39+03:00 fix(PostTune): align TL Soma probe metric with free-run LiveMetric\nc3fddbdf017b94d969204c58e01ae4ad5e840518 2026-09-23T13:33:20+03:00 fix(PostTune): validity, result codes, TL reprobe, metric modes (A08-A10)\nfed93141c9f9d6ce6314cc228facc5c3bbb2bb49 2026-09-23T13:30:53+03:00 fix(analyzer): injective per_stim morphology matching (A04)\n1082d357ab524fc6625b48d270e02fb9539f7ba6 2026-09-23T13:29:43+03:00 fix(analyzer): sample bounds and immutable trial labels (A01-A03)\nac8a82d3b6dae4297700da467e2d71b9c0e85c1f 2026-09-23T13:26:18+03:00 fix(PostTune): write tipr_snapshot to posttune_complete.flag (A16)",
+    "diff": "Core/NAxoneDelay.cpp                        |   2 +-\n Core/NDatasetBase.cpp                       |  64 +++++++\n Core/NDatasetBase.h                         |  12 ++\n Core/NNeuronPostTrainTune.cpp               |  15 +-\n Core/NNeuronPostTrainTune.h                 |  24 ++-\n Core/NNeuronTimeLearner.cpp                 |  63 ++++--\n Core/NNeuronTimeLearner.h                   |   3 +\n Core/NNeuronTimeLearnerBranch.cpp           |  73 +++++--\n Core/NNeuronTimeLearnerBranch.h             |   4 +\n Core/NPatternResponseAnalyzer.cpp           | 288 +++++++++++++++++++---------\n Core/NPatternResponseAnalyzer.h             |  16 ++\n Core/NPulseDelay.cpp                        |   2 +-\n Core/NPulseLibrary.cpp                      |   3 +-\n Docs/Components/NAxoneDelay.md              |   4 +-\n Docs/Components/NPatternResponseAnalyzer.md |  14 +-\n 15 files changed, 448 insertions(+), 139 deletions(-)"
+  },
+  {
+    "path": "Libraries/Nmsdk-MotionControlLib",
+    "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+    "baseline": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+    "status": "",
+    "commits": "",
+    "diff": ""
+  },
+  {
+    "path": "Libraries/Rdk-BasicLib",
+    "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+    "baseline": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+    "status": "",
+    "commits": "",
+    "diff": ""
+  },
+  {
+    "path": "Libraries/Rdk-CvBasicLib",
+    "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+    "baseline": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+    "status": "",
+    "commits": "",
+    "diff": ""
+  },
+  {
+    "path": "Libraries/Rdk-HardwareLib",
+    "head": "043b883174fdf6fbb229e66f0fae941a5c1cb0ea",
+    "baseline": "043b883174fdf6fbb229e66f0fae941a5c1cb0ea",
+    "status": "",
+    "commits": "",
+    "diff": ""
+  }
+]

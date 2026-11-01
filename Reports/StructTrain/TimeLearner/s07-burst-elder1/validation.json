@@ -1,0 +1,1072 @@
+{
+  "schema_version": 1,
+  "host_label": "elder1",
+  "tested_root": "9357c9351feed54d498d943f3f2a6fa1e01e3d56",
+  "source_closure": {
+    "root": {
+      "head": "9357c9351feed54d498d943f3f2a6fa1e01e3d56",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "e78596e9639a841cd1989d73df7fe614419770ce",
+      "head": "e78596e9639a841cd1989d73df7fe614419770ce",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "f03ab8b605708b1b7398b83819272c3614b1198c",
+      "head": "f03ab8b605708b1b7398b83819272c3614b1198c",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6",
+      "head": "8846c1423ab13a24e3ebfdce786ce85b6a9fc0d6",
+      "status": ""
+    }
+  },
+  "a1_targeted": {
+    "tests": "40",
+    "failures": "0",
+    "errors": "0",
+    "time": "295.617"
+  },
+  "merged_native_controls": {
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "time": "9.271"
+  },
+  "dimensional_native_controls": {
+    "tests": "6",
+    "failures": "0",
+    "errors": "0",
+    "time": "278.275"
+  },
+  "maintained_ctest_suites": 4,
+  "pulse_full": {
+    "tests": 269,
+    "passed": 260,
+    "skipped": 9
+  },
+  "previous_source2_waveform_comparisons": [
+    {
+      "case": "Branch_20000_N1_native_executor.json",
+      "semantic_model_sha256": "3c91b11d714258ad4c4a7cc93e3fcc85ff5b2ca6dd2236c36cf0bf11da55b18e",
+      "equal_primary_csv_sha256": "71bd0761ac30b97e87b4dbb6117278dcfd5e4f456551965a104713b107d6943c"
+    },
+    {
+      "case": "Branch_20000_N2_native_executor.json",
+      "semantic_model_sha256": "952b8fd9762ae9f2592fa8d264e41f062c882cf5292e0ca33ca3d27c803f5843",
+      "equal_primary_csv_sha256": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3"
+    },
+    {
+      "case": "Branch_20000_N4_native_executor.json",
+      "semantic_model_sha256": "776dd848cfb0c1894ac469db4510280bb8b590ec1f8ac137eed44df52ce1e9c2",
+      "equal_primary_csv_sha256": "a6aa854db1447a2b41613154216652f2dd2645e4f965ededd4eae75396bec96a"
+    },
+    {
+      "case": "Branch_2000_N1_native_executor.json",
+      "semantic_model_sha256": "4d81d322a2c65476fcd327944b2516bb705d92281dbe155ee652b1e2da7197ef",
+      "equal_primary_csv_sha256": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6"
+    },
+    {
+      "case": "Branch_2000_N2_native_executor.json",
+      "semantic_model_sha256": "75c76214235fa4bb3fa42855c8dfd2d095a61383782cd99b77bc5125d8563807",
+      "equal_primary_csv_sha256": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a"
+    },
+    {
+      "case": "Branch_2000_N4_native_executor.json",
+      "semantic_model_sha256": "a925c4eee61c05a49148b9e7e57b517490fab25b252adc173dd32f6b0d79d663",
+      "equal_primary_csv_sha256": "73b3a0e60340b4c4d6c4f090e36952171674c04dfb722679257c31849f3b615b"
+    },
+    {
+      "case": "Branch_2000_N6_native_executor.json",
+      "semantic_model_sha256": "984462b2d29c9d17db29bef1f86e45adc75b78b63289caf0463b20d6d7c858f8",
+      "equal_primary_csv_sha256": "43789010cc668674d844a5156a3d7f8795ee5549406896984ebf6a6460e91819"
+    },
+    {
+      "case": "Classic_20000_N1_native_executor.json",
+      "semantic_model_sha256": "cec9c2be077de6a8ecebf32cc82f28c018b471977e65774ce73b7017df635963",
+      "equal_primary_csv_sha256": "71bd0761ac30b97e87b4dbb6117278dcfd5e4f456551965a104713b107d6943c"
+    },
+    {
+      "case": "Classic_20000_N2_native_executor.json",
+      "semantic_model_sha256": "af6d1146b573c7aa1fafbf1b5df150255acfdcfe108b0df76d6bffe6e76bf886",
+      "equal_primary_csv_sha256": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8"
+    },
+    {
+      "case": "Classic_20000_N4_native_executor.json",
+      "semantic_model_sha256": "b9aa2c0d7400beccb4372ae6e0df66d1597cf7ff3e6e5f4c54b4182c7fbac273",
+      "equal_primary_csv_sha256": "6b21f6aaf11776d626b640d2e076c1372ca6474da4636eb74501e61f9860a07c"
+    },
+    {
+      "case": "Classic_2000_N1_native_executor.json",
+      "semantic_model_sha256": "24c26fa2695c33aaeaabafb98eab869c9f17f88cf6659df62d8a5b15f8355117",
+      "equal_primary_csv_sha256": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6"
+    },
+    {
+      "case": "Classic_2000_N2_native_executor.json",
+      "semantic_model_sha256": "93497a757f06579726c3c92885e5932d2fe18f05e0680c4fa2e2d9eef7b4ce37",
+      "equal_primary_csv_sha256": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221"
+    },
+    {
+      "case": "Classic_2000_N4_native_executor.json",
+      "semantic_model_sha256": "ea7aa8e91c2db4b9430bd39a0b5432d1187fc6a0be36fc829e0ce2eda05a345b",
+      "equal_primary_csv_sha256": "640d155d6c3e4c830cdfdc5ae9ef957961d4c32e26003cb0e570bd78e662fd07"
+    },
+    {
+      "case": "Classic_2000_N6_native_executor.json",
+      "semantic_model_sha256": "8a097736942358e48774a1885b6b1eccd221e1b61bec0f153aa4db878957ac42",
+      "equal_primary_csv_sha256": "ba298170fc368849cd64e2d09617c29db02f8ca3da65e09f171eba6d7899be8d"
+    }
+  ],
+  "schema2_schema3_waveform_pairs": [
+    {
+      "schema2_file": "Branch_20000_N2_native_executor.json",
+      "schema3_file": "Branch_20000_N2_native_executor_whole_burst.json",
+      "input_count": 2,
+      "schema2_model_sha256": "952b8fd9762ae9f2592fa8d264e41f062c882cf5292e0ca33ca3d27c803f5843",
+      "schema3_model_sha256": "a8cbeea7870ec23b2d09b00fc18f19604964da9b21fa978e94da4da0e7adb8e5",
+      "equal_primary_csv_sha256": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3"
+    },
+    {
+      "schema2_file": "Branch_2000_N1_native_executor.json",
+      "schema3_file": "Branch_2000_N1_native_executor_whole_burst.json",
+      "input_count": 1,
+      "schema2_model_sha256": "4d81d322a2c65476fcd327944b2516bb705d92281dbe155ee652b1e2da7197ef",
+      "schema3_model_sha256": "72ade94df899a702e1289e74406e2ba8f8d3827d43013c2f0d3114535bc42f62",
+      "equal_primary_csv_sha256": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6"
+    },
+    {
+      "schema2_file": "Branch_2000_N2_native_executor.json",
+      "schema3_file": "Branch_2000_N2_native_executor_whole_burst.json",
+      "input_count": 2,
+      "schema2_model_sha256": "75c76214235fa4bb3fa42855c8dfd2d095a61383782cd99b77bc5125d8563807",
+      "schema3_model_sha256": "2527e67e8390a31dc3717d7f93cd2f2f927bf79186d6d8600169bc20cffda859",
+      "equal_primary_csv_sha256": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a"
+    },
+    {
+      "schema2_file": "Branch_2000_N4_native_executor.json",
+      "schema3_file": "Branch_2000_N4_native_executor_whole_burst.json",
+      "input_count": 4,
+      "schema2_model_sha256": "a925c4eee61c05a49148b9e7e57b517490fab25b252adc173dd32f6b0d79d663",
+      "schema3_model_sha256": "f2fa96b401c9781ccae9d8a514bf9e4aa4e2f06344a348ff9a2d428c0bef07f1",
+      "equal_primary_csv_sha256": "73b3a0e60340b4c4d6c4f090e36952171674c04dfb722679257c31849f3b615b"
+    },
+    {
+      "schema2_file": "Branch_2000_N6_native_executor.json",
+      "schema3_file": "Branch_2000_N6_native_executor_whole_burst.json",
+      "input_count": 6,
+      "schema2_model_sha256": "984462b2d29c9d17db29bef1f86e45adc75b78b63289caf0463b20d6d7c858f8",
+      "schema3_model_sha256": "97d1ab4d21b05d8543d3618eb1e780503211ddbdc3d56878ba274db6f288fb23",
+      "equal_primary_csv_sha256": "43789010cc668674d844a5156a3d7f8795ee5549406896984ebf6a6460e91819"
+    },
+    {
+      "schema2_file": "Classic_20000_N2_native_executor.json",
+      "schema3_file": "Classic_20000_N2_native_executor_whole_burst.json",
+      "input_count": 2,
+      "schema2_model_sha256": "af6d1146b573c7aa1fafbf1b5df150255acfdcfe108b0df76d6bffe6e76bf886",
+      "schema3_model_sha256": "a5033c6ad1d4f9d890c37b9f84ca010121a78946cebbd39a59f89a70ff056116",
+      "equal_primary_csv_sha256": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8"
+    },
+    {
+      "schema2_file": "Classic_2000_N1_native_executor.json",
+      "schema3_file": "Classic_2000_N1_native_executor_whole_burst.json",
+      "input_count": 1,
+      "schema2_model_sha256": "24c26fa2695c33aaeaabafb98eab869c9f17f88cf6659df62d8a5b15f8355117",
+      "schema3_model_sha256": "6c7a1bd5d758407dad511413774922f9a3d1dbc88a92b19ac837009ea2a097c3",
+      "equal_primary_csv_sha256": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6"
+    },
+    {
+      "schema2_file": "Classic_2000_N2_native_executor.json",
+      "schema3_file": "Classic_2000_N2_native_executor_whole_burst.json",
+      "input_count": 2,
+      "schema2_model_sha256": "93497a757f06579726c3c92885e5932d2fe18f05e0680c4fa2e2d9eef7b4ce37",
+      "schema3_model_sha256": "e27a17c3a3263a53765eaf4419a19a1f64cb9e1eeaa22a2e8c303bfc07da2786",
+      "equal_primary_csv_sha256": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221"
+    },
+    {
+      "schema2_file": "Classic_2000_N4_native_executor.json",
+      "schema3_file": "Classic_2000_N4_native_executor_whole_burst.json",
+      "input_count": 4,
+      "schema2_model_sha256": "ea7aa8e91c2db4b9430bd39a0b5432d1187fc6a0be36fc829e0ce2eda05a345b",
+      "schema3_model_sha256": "15ca826f8da7139758c7c5de4a9dbd9ce5ced7ffde145d6f816b932d63958357",
+      "equal_primary_csv_sha256": "640d155d6c3e4c830cdfdc5ae9ef957961d4c32e26003cb0e570bd78e662fd07"
+    },
+    {
+      "schema2_file": "Classic_2000_N6_native_executor.json",
+      "schema3_file": "Classic_2000_N6_native_executor_whole_burst.json",
+      "input_count": 6,
+      "schema2_model_sha256": "8a097736942358e48774a1885b6b1eccd221e1b61bec0f153aa4db878957ac42",
+      "schema3_model_sha256": "161e6a305372fbc532a43012cc0f2ae100a89c39b25c813ce6ba3215cb532444",
+      "equal_primary_csv_sha256": "ba298170fc368849cd64e2d09617c29db02f8ca3da65e09f171eba6d7899be8d"
+    }
+  ],
+  "merged_waveform_pairs": [
+    {
+      "topology": "Classic",
+      "window_only": "Classic_2000_N2_native_executor_merged_burst.json",
+      "whole_burst": "Classic_2000_N2_native_executor_whole_burst_merged_burst.json",
+      "equal_primary_csv_sha256": "7f4fd2a84eb631e7f2abd2da4e463aea116f4d16966f88c9ee3b01d202f6d5c9",
+      "actual_stimuli": [
+        {
+          "id": "pulse0",
+          "time": 0.011
+        },
+        {
+          "id": "pulse1",
+          "time": 0.012
+        }
+      ],
+      "whole_burst_assignments": [
+        {
+          "channel": 0,
+          "validity": "missing",
+          "waves": [
+            {
+              "amplitude": 0.00683090594586544,
+              "plateau_end": 0.031,
+              "raw_potential": 0.00683090594586544,
+              "stimulus_id": "",
+              "time": 0.031
+            }
+          ]
+        },
+        {
+          "channel": 1,
+          "validity": "missing",
+          "waves": [
+            {
+              "amplitude": 0.009263531182663431,
+              "plateau_end": 0.0215,
+              "raw_potential": 0.009263531182663431,
+              "stimulus_id": "",
+              "time": 0.0215
+            }
+          ]
+        }
+      ],
+      "schema2_valid": true,
+      "schema3_valid": false
+    },
+    {
+      "topology": "Branch",
+      "window_only": "Branch_2000_N2_native_executor_merged_burst.json",
+      "whole_burst": "Branch_2000_N2_native_executor_whole_burst_merged_burst.json",
+      "equal_primary_csv_sha256": "4007d5afc8ae1d605692cf6a96520292c17cff41b654b1fce7627b544b93d5f9",
+      "actual_stimuli": [
+        {
+          "id": "pulse0",
+          "time": 0.011
+        },
+        {
+          "id": "pulse1",
+          "time": 0.012
+        }
+      ],
+      "whole_burst_assignments": [
+        {
+          "channel": 0,
+          "validity": "missing",
+          "waves": [
+            {
+              "amplitude": 0.00683090594586544,
+              "plateau_end": 0.031,
+              "raw_potential": 0.00683090594586544,
+              "stimulus_id": "",
+              "time": 0.031
+            }
+          ]
+        }
+      ],
+      "schema2_valid": true,
+      "schema3_valid": false
+    }
+  ],
+  "native_cases": [
+    {
+      "file": "Branch_20000_N1_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 1801,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_20000_N2_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 3401,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_20000_N2_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 3401,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Branch_20000_N4_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 11401,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N1_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 181,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N1_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 181,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 341,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault1.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault10.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 10,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault12.json",
+      "execution": "cancelled",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault13.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault2.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault4.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault5.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault6.json",
+      "execution": "cancelled",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault7.json",
+      "execution": "cancelled",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_fault8.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 341,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_merged_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 183,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 341,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_whole_burst_merged_burst.json",
+      "execution": "completed",
+      "valid": false,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 183,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Branch_2000_N4_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 1141,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N4_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 1141,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Branch_2000_N6_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 2581,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Branch_2000_N6_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 2581,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Classic_20000_N1_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 1801,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_20000_N2_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 3401,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_20000_N2_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 3401,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Classic_20000_N4_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 11401,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N1_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 181,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N1_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 181,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 341,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault1.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault11.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 0,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault12.json",
+      "execution": "cancelled",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault2.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault3.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault5.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault6.json",
+      "execution": "cancelled",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault7.json",
+      "execution": "cancelled",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 80,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault8.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 341,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_fault9.json",
+      "execution": "rejected",
+      "valid": false,
+      "complete": false,
+      "observation_schema": 2,
+      "raw_samples": 0,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_merged_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 183,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 341,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_whole_burst_merged_burst.json",
+      "execution": "completed",
+      "valid": false,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 183,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Classic_2000_N4_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 1141,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N4_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 1141,
+      "criteria": "ordered_whole_burst"
+    },
+    {
+      "file": "Classic_2000_N6_native_executor.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 2,
+      "raw_samples": 2581,
+      "criteria": "window_only_or_rejected_before_observation"
+    },
+    {
+      "file": "Classic_2000_N6_native_executor_whole_burst.json",
+      "execution": "completed",
+      "valid": true,
+      "complete": true,
+      "observation_schema": 3,
+      "raw_samples": 2581,
+      "criteria": "ordered_whole_burst"
+    }
+  ],
+  "certificates": [
+    {
+      "file": "Branch_20000_N1_native_executor_certificate.json",
+      "primary_file": "Branch_20000_N1_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "exact",
+      "input_count": 1,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Branch_20000_N2_native_executor_certificate.json",
+      "primary_file": "Branch_20000_N2_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Branch_20000_N2_native_executor_whole_burst_certificate.json",
+      "primary_file": "Branch_20000_N2_native_executor_whole_burst.json",
+      "observation_schema": 3,
+      "criteria": "ordered_whole_burst",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Branch_2000_N1_native_executor_certificate.json",
+      "primary_file": "Branch_2000_N1_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "exact",
+      "input_count": 1,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Branch_2000_N1_native_executor_whole_burst_certificate.json",
+      "primary_file": "Branch_2000_N1_native_executor_whole_burst.json",
+      "observation_schema": 3,
+      "criteria": "ordered_whole_burst",
+      "status": "exact",
+      "input_count": 1,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_certificate.json",
+      "primary_file": "Branch_2000_N2_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Branch_2000_N2_native_executor_whole_burst_certificate.json",
+      "primary_file": "Branch_2000_N2_native_executor_whole_burst.json",
+      "observation_schema": 3,
+      "criteria": "ordered_whole_burst",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Classic_20000_N1_native_executor_certificate.json",
+      "primary_file": "Classic_20000_N1_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "exact",
+      "input_count": 1,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Classic_20000_N2_native_executor_certificate.json",
+      "primary_file": "Classic_20000_N2_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Classic_20000_N2_native_executor_whole_burst_certificate.json",
+      "primary_file": "Classic_20000_N2_native_executor_whole_burst.json",
+      "observation_schema": 3,
+      "criteria": "ordered_whole_burst",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Classic_2000_N1_native_executor_certificate.json",
+      "primary_file": "Classic_2000_N1_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "exact",
+      "input_count": 1,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Classic_2000_N1_native_executor_whole_burst_certificate.json",
+      "primary_file": "Classic_2000_N1_native_executor_whole_burst.json",
+      "observation_schema": 3,
+      "criteria": "ordered_whole_burst",
+      "status": "exact",
+      "input_count": 1,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_certificate.json",
+      "primary_file": "Classic_2000_N2_native_executor.json",
+      "observation_schema": 2,
+      "criteria": "window_only",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    },
+    {
+      "file": "Classic_2000_N2_native_executor_whole_burst_certificate.json",
+      "primary_file": "Classic_2000_N2_native_executor_whole_burst.json",
+      "observation_schema": 3,
+      "criteria": "ordered_whole_burst",
+      "status": "outside_tolerance",
+      "input_count": 2,
+      "scope": "derived fixture constraint certificate, not a complete trained-state export"
+    }
+  ],
+  "scientific_training_result": false,
+  "raw_payload_sha256": {
+    "s07-burst-a1/Branch_20000_N2_native_executor_whole_burst.csv": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3",
+    "s07-burst-a1/Branch_20000_N2_native_executor_whole_burst.json": "b714d2526196af4485894d9cec2d6801436fb18677f2bf5131140b1f2a2a7fad",
+    "s07-burst-a1/Branch_20000_N2_native_executor_whole_burst_certificate.json": "787e28253f6e91a69a83bfb6a7222d62e8b1ea0dea637341ab4a6d541b60c29e",
+    "s07-burst-a1/Branch_20000_N2_native_executor_whole_burst_reference_1.csv": "f000c2800e217c1e26d4ad7d83d6b823830f86227d33a5505147d61b10fbbc17",
+    "s07-burst-a1/Branch_20000_N2_native_executor_whole_burst_verify_0.csv": "d258af2a6f27069881160babd46907c80cda9c3eb7d490f2e8e2831a43ee5ab8",
+    "s07-burst-a1/Branch_20000_N2_native_executor_whole_burst_verify_1.csv": "229ed4ea1ab7ccd5b7100f3026e650ce4f20a668033b6f8f657c35f67680cf26",
+    "s07-burst-a1/Branch_2000_N2_native_executor_whole_burst.csv": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a",
+    "s07-burst-a1/Branch_2000_N2_native_executor_whole_burst.json": "9e93c4916a6d7c0f9f53e8ffc129b6a8ad51cb43d342e410121d4dba27e94613",
+    "s07-burst-a1/Branch_2000_N2_native_executor_whole_burst_certificate.json": "be21252b55463aa7ca0c6e2d7b68099513ec2b0f736cead1fb680607bfc7dfdf",
+    "s07-burst-a1/Branch_2000_N2_native_executor_whole_burst_reference_1.csv": "5505b584e54535732d9be4f1d40a1c4255d9e3cbe2453c3644f70833f6a3a707",
+    "s07-burst-a1/Branch_2000_N2_native_executor_whole_burst_verify_0.csv": "c3b0685c303533f08aa0bd94cc2b46f40ed9171f3432b367e65a378f1641bca3",
+    "s07-burst-a1/Branch_2000_N2_native_executor_whole_burst_verify_1.csv": "9bfef45f018df63ff6f896960a6680487451f7b6bab4dfef47984b9d65b14c33",
+    "s07-burst-a1/Classic_20000_N2_native_executor_whole_burst.csv": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8",
+    "s07-burst-a1/Classic_20000_N2_native_executor_whole_burst.json": "ae2256449727cf399af94443a2a71ff9426ff7bab7f62c7495ad1a15426b9d8d",
+    "s07-burst-a1/Classic_20000_N2_native_executor_whole_burst_certificate.json": "aab9fe5bfd6ea26b43daed6f3013629ce99e4f86399f7551ca1aa64d2821be19",
+    "s07-burst-a1/Classic_20000_N2_native_executor_whole_burst_verify_0.csv": "7b6474b9ad9f11fcdbeea7d19f96e804e466c1b14a63a464b7a1eece6206b676",
+    "s07-burst-a1/Classic_20000_N2_native_executor_whole_burst_verify_1.csv": "9e041ca429c4ec89dae9bb28688d1cddc4ce36145ab3356140c4bb1a646bb7af",
+    "s07-burst-a1/Classic_2000_N2_native_executor_whole_burst.csv": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221",
+    "s07-burst-a1/Classic_2000_N2_native_executor_whole_burst.json": "e7e3ab71023f992739ab0c4a29bba0a037d830d84c56417de553add4e84e38e9",
+    "s07-burst-a1/Classic_2000_N2_native_executor_whole_burst_certificate.json": "e1a67d87682931178e63b3f1edd4000726749dc4babd1fba5618bb9aac4331d9",
+    "s07-burst-a1/Classic_2000_N2_native_executor_whole_burst_verify_0.csv": "d69b64a5aa0d2c22510779a771e56876aa634fb6c0f417d28bddf8a12d514d2d",
+    "s07-burst-a1/Classic_2000_N2_native_executor_whole_burst_verify_1.csv": "082ecf53e27ad22348528594f5fab7cf188c094125ece012a0de6086efc820b2",
+    "s07-burst-a1-build.log": "befac36b23d1d77fe36ac7c834391ee6faaf62305a9054797f0564966472a323",
+    "s07-burst-a1-configure.log": "c55c41e64e8fe03dab2b2a9b639e1c1e458f649cbc20a9d5c9c697ef5bbbdda0",
+    "s07-burst-a1-runtime.json": "057428f78b5b26cc7b34e82a1c6f5ac85a49cb0e10a642eb402b1c89727d4175",
+    "s07-burst-a1.log": "ae78136c2e33d16278b988558c7ff2d9cd82a85bb11ae20744fd614617f6a85a",
+    "s07-burst-a1.xml": "d81817fd2422a0d951653b2f50a9cac8b66b956635044131c93dcb9e867564ff",
+    "s07-burst-a2/Branch_2000_N2_native_executor_merged_burst.csv": "4007d5afc8ae1d605692cf6a96520292c17cff41b654b1fce7627b544b93d5f9",
+    "s07-burst-a2/Branch_2000_N2_native_executor_merged_burst.json": "4b4d43105f240f6a7d3518b1dba8cdb1f819fc62afdcbaf6de991a99a247727b",
+    "s07-burst-a2/Branch_2000_N2_native_executor_whole_burst_merged_burst.csv": "4007d5afc8ae1d605692cf6a96520292c17cff41b654b1fce7627b544b93d5f9",
+    "s07-burst-a2/Branch_2000_N2_native_executor_whole_burst_merged_burst.json": "373bd4b029e8c9bad5a1a96bb5987459635b79505db31bc6e709f2ed2708e9c7",
+    "s07-burst-a2/Classic_2000_N2_native_executor_merged_burst.csv": "7f4fd2a84eb631e7f2abd2da4e463aea116f4d16966f88c9ee3b01d202f6d5c9",
+    "s07-burst-a2/Classic_2000_N2_native_executor_merged_burst.json": "45fe566485649dd742c693b7895c6532601810460f9c744c92b2abd75ff6f67d",
+    "s07-burst-a2/Classic_2000_N2_native_executor_whole_burst_merged_burst.csv": "7f4fd2a84eb631e7f2abd2da4e463aea116f4d16966f88c9ee3b01d202f6d5c9",
+    "s07-burst-a2/Classic_2000_N2_native_executor_whole_burst_merged_burst.json": "e4cd87c1ed9db4709917b70f0ab87b15b9835f75495541a73e66a6675398716b",
+    "s07-burst-a2-build.log": "536f2812567871f69f022f2ac84fffbf6a419a8ad4b6964b4197735b7b73a940",
+    "s07-burst-a2-configure.log": "e8cd9bb6e739cfbe8cf4492b3ef9093fab3fc05c0460fe5749167baf3c8b7c9f",
+    "s07-burst-a2-runtime.json": "5ba0ba2fb8b05851f6107d518e249f5454f6b2ee490184cd817760ad6a933655",
+    "s07-burst-a2.log": "247d2ab34c4a77abed1d6c9b539a0c99151ad7ec6cf4e3aef3ed7f7f2d18de57",
+    "s07-burst-a2.xml": "b14afde0d07d2800c8e2ad917df9db900cdb63d1843e25cc3190795289c7119f",
+    "s07-burst-a3/Branch_2000_N1_native_executor_whole_burst.csv": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6",
+    "s07-burst-a3/Branch_2000_N1_native_executor_whole_burst.json": "63a91c543c7180ae6cea663f1dc328cf5a0755beb95446ab31061f11ddce6dd4",
+    "s07-burst-a3/Branch_2000_N1_native_executor_whole_burst_certificate.json": "cdb4c083c8ef32015d3bdc41c4b36c6dc913974e34123ec3446a9ce661e484f4",
+    "s07-burst-a3/Branch_2000_N1_native_executor_whole_burst_verify_0.csv": "5b7dfc87d37dd77f5f6264eea8583a0412cb5206e7afe23d62b5bbe3d83d17e0",
+    "s07-burst-a3/Branch_2000_N4_native_executor_whole_burst.csv": "73b3a0e60340b4c4d6c4f090e36952171674c04dfb722679257c31849f3b615b",
+    "s07-burst-a3/Branch_2000_N4_native_executor_whole_burst.json": "648ec27461d796f93abed7a4d3ca06a9608593dca3c3853394dea3d47f378764",
+    "s07-burst-a3/Branch_2000_N6_native_executor_whole_burst.csv": "43789010cc668674d844a5156a3d7f8795ee5549406896984ebf6a6460e91819",
+    "s07-burst-a3/Branch_2000_N6_native_executor_whole_burst.json": "4145f75a066d601750507a6a2b83f9b274a60ededf17c3fd0c968daec2c400e2",
+    "s07-burst-a3/Classic_2000_N1_native_executor_whole_burst.csv": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6",
+    "s07-burst-a3/Classic_2000_N1_native_executor_whole_burst.json": "5e6be51720497240bc2f5d00041bbfca1631ed7919a46febb42b8581cff9fd92",
+    "s07-burst-a3/Classic_2000_N1_native_executor_whole_burst_certificate.json": "f1b16508ab82f255b86474f4554e19869cbd508544833556c465a4d78c1e1225",
+    "s07-burst-a3/Classic_2000_N1_native_executor_whole_burst_verify_0.csv": "5b7dfc87d37dd77f5f6264eea8583a0412cb5206e7afe23d62b5bbe3d83d17e0",
+    "s07-burst-a3/Classic_2000_N4_native_executor_whole_burst.csv": "640d155d6c3e4c830cdfdc5ae9ef957961d4c32e26003cb0e570bd78e662fd07",
+    "s07-burst-a3/Classic_2000_N4_native_executor_whole_burst.json": "0552ec05b61d09ff84af9417690f59375d501aaa9d8aaf5df6e2bfdef80770cd",
+    "s07-burst-a3/Classic_2000_N6_native_executor_whole_burst.csv": "ba298170fc368849cd64e2d09617c29db02f8ca3da65e09f171eba6d7899be8d",
+    "s07-burst-a3/Classic_2000_N6_native_executor_whole_burst.json": "c005d77b26523c150de72e372d531782bf1117d5d4cd318985822715b8cd0438",
+    "s07-burst-a3-build.log": "8a40e3d9c2588e8994c4fa098e0ab689ddfa6ac02cfe38c5434b98285ed353c6",
+    "s07-burst-a3-configure.log": "fba2840e5a9e8eda73be741aebbe8c525330213570a1b11a442ee48e19d4d97d",
+    "s07-burst-a3-full/Branch_20000_N1_native_executor.csv": "71bd0761ac30b97e87b4dbb6117278dcfd5e4f456551965a104713b107d6943c",
+    "s07-burst-a3-full/Branch_20000_N1_native_executor.json": "e814fe73f4b9675a1cf4f715d3fa86a502d298f7e6ac005a1d031c4427e1bd45",
+    "s07-burst-a3-full/Branch_20000_N1_native_executor_certificate.json": "a9eca09e36d717344a7a7193135a25e39b1c7aecc43b5f9b6d631eb6a900b33a",
+    "s07-burst-a3-full/Branch_20000_N1_native_executor_verify_0.csv": "a78d0892a574d4ef054062eaeeac35d155fb3574c0fca32848f9a55ef9e11968",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor.csv": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor.json": "43dffe1882d58e53def8ad667dc9059d4e66cf179f6f993e9b48754b0805f365",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_certificate.json": "aedd085c732fcad73cd10b980be692da5f0534400bfc669b07da4a3b0a23d6d2",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_reference_1.csv": "f000c2800e217c1e26d4ad7d83d6b823830f86227d33a5505147d61b10fbbc17",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_verify_0.csv": "d258af2a6f27069881160babd46907c80cda9c3eb7d490f2e8e2831a43ee5ab8",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_verify_1.csv": "229ed4ea1ab7ccd5b7100f3026e650ce4f20a668033b6f8f657c35f67680cf26",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_whole_burst.csv": "f4c801981a2493eb994d5d743f1e57d4257012ac7c6df6bdce48a6122b48dda3",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_whole_burst.json": "b714d2526196af4485894d9cec2d6801436fb18677f2bf5131140b1f2a2a7fad",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_whole_burst_certificate.json": "787e28253f6e91a69a83bfb6a7222d62e8b1ea0dea637341ab4a6d541b60c29e",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_whole_burst_reference_1.csv": "f000c2800e217c1e26d4ad7d83d6b823830f86227d33a5505147d61b10fbbc17",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_whole_burst_verify_0.csv": "d258af2a6f27069881160babd46907c80cda9c3eb7d490f2e8e2831a43ee5ab8",
+    "s07-burst-a3-full/Branch_20000_N2_native_executor_whole_burst_verify_1.csv": "229ed4ea1ab7ccd5b7100f3026e650ce4f20a668033b6f8f657c35f67680cf26",
+    "s07-burst-a3-full/Branch_20000_N4_native_executor.csv": "a6aa854db1447a2b41613154216652f2dd2645e4f965ededd4eae75396bec96a",
+    "s07-burst-a3-full/Branch_20000_N4_native_executor.json": "1562eddaf1a2262778f32f8b60a42ed8029140ce864504dfd9f2bf371d8b43a2",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor.csv": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor.json": "a4c21a1e9e6382fb0b6d2aef7781835cc65289c51f68dea3de3353e994aee786",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor_certificate.json": "49272acc38cecbc53f040acd5474c5f79b9600c627a62d47bb6f05053b4b494c",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor_verify_0.csv": "5b7dfc87d37dd77f5f6264eea8583a0412cb5206e7afe23d62b5bbe3d83d17e0",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor_whole_burst.csv": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor_whole_burst.json": "63a91c543c7180ae6cea663f1dc328cf5a0755beb95446ab31061f11ddce6dd4",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor_whole_burst_certificate.json": "cdb4c083c8ef32015d3bdc41c4b36c6dc913974e34123ec3446a9ce661e484f4",
+    "s07-burst-a3-full/Branch_2000_N1_native_executor_whole_burst_verify_0.csv": "5b7dfc87d37dd77f5f6264eea8583a0412cb5206e7afe23d62b5bbe3d83d17e0",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor.csv": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor.json": "209b5ef61b362e75eb23f56b5d079930218eeb8aa49286c13c62d9d1c500453c",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_certificate.json": "2c011015c60f9c1ab14f59b6983c6f08224d61bafd3323dd01b824d81fffde23",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault1.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault1.json": "dc95523bbccd6eddbf8f7f1289d3c6f14563b3b3ded2bbc5649a647026c25ff3",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault10.csv": "b84282775c1651a6d1bdbcfab756305bdf033094d5e44d792a54880efb34ea36",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault10.json": "52f5d3a94dd915be2dc72e736e6d40399cea27ee24b0c61e6330b41b9675052c",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault12.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault12.json": "ede28774ed97066f816bd52a0e7ed9312b4c30636338bba67c8fb92d2d0b092e",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault13.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault13.json": "187dfd85d814544fb4ca7cb4c8a9f8ee94afbac831fd3aa70780c2a3f2c30625",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault2.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault2.json": "55cb9c4ec329887208374d8a2ee839512df6d9fff42103cf7f66c45463c7a6eb",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault4.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault4.json": "919c4309c18371e2475568852fdac648784233a3691d0db63ae6106c1584aa25",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault5.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault5.json": "340ef1ccd11725247fafda3e02170b8164f070d00523208eff5a5fabe70a1f53",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault6.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault6.json": "12490be710f5ddc40dbfc86c44223b8ff107fd8e0de91b317578947bc84a947b",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault7.csv": "51afdcf7d4ea0bda7fc8bde4a480b604040513b6ab9094dd3f9cd6fe76acdce4",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault7.json": "a6d96b01e6be0819b0d6ac5c510f988e7508ad685d968c3598f6fc24badf4d1f",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault8.csv": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_fault8.json": "f1305bb8121fe95944a6cbf861071d50bd84473c4324acf4a444924c5193f0fb",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_merged_burst.csv": "4007d5afc8ae1d605692cf6a96520292c17cff41b654b1fce7627b544b93d5f9",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_merged_burst.json": "4b4d43105f240f6a7d3518b1dba8cdb1f819fc62afdcbaf6de991a99a247727b",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_reference_1.csv": "5505b584e54535732d9be4f1d40a1c4255d9e3cbe2453c3644f70833f6a3a707",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_verify_0.csv": "c3b0685c303533f08aa0bd94cc2b46f40ed9171f3432b367e65a378f1641bca3",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_verify_1.csv": "9bfef45f018df63ff6f896960a6680487451f7b6bab4dfef47984b9d65b14c33",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst.csv": "618b032c466d486e846067008615d64879c430ef016d4a0504eb32773318f25a",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst.json": "9e93c4916a6d7c0f9f53e8ffc129b6a8ad51cb43d342e410121d4dba27e94613",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst_certificate.json": "be21252b55463aa7ca0c6e2d7b68099513ec2b0f736cead1fb680607bfc7dfdf",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst_merged_burst.csv": "4007d5afc8ae1d605692cf6a96520292c17cff41b654b1fce7627b544b93d5f9",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst_merged_burst.json": "373bd4b029e8c9bad5a1a96bb5987459635b79505db31bc6e709f2ed2708e9c7",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst_reference_1.csv": "5505b584e54535732d9be4f1d40a1c4255d9e3cbe2453c3644f70833f6a3a707",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst_verify_0.csv": "c3b0685c303533f08aa0bd94cc2b46f40ed9171f3432b367e65a378f1641bca3",
+    "s07-burst-a3-full/Branch_2000_N2_native_executor_whole_burst_verify_1.csv": "9bfef45f018df63ff6f896960a6680487451f7b6bab4dfef47984b9d65b14c33",
+    "s07-burst-a3-full/Branch_2000_N4_native_executor.csv": "73b3a0e60340b4c4d6c4f090e36952171674c04dfb722679257c31849f3b615b",
+    "s07-burst-a3-full/Branch_2000_N4_native_executor.json": "258dbadd6c1fa6d3ec9a77f2e17de20378c2ef6d3a118b7d727b3f949b211525",
+    "s07-burst-a3-full/Branch_2000_N4_native_executor_whole_burst.csv": "73b3a0e60340b4c4d6c4f090e36952171674c04dfb722679257c31849f3b615b",
+    "s07-burst-a3-full/Branch_2000_N4_native_executor_whole_burst.json": "648ec27461d796f93abed7a4d3ca06a9608593dca3c3853394dea3d47f378764",
+    "s07-burst-a3-full/Branch_2000_N6_native_executor.csv": "43789010cc668674d844a5156a3d7f8795ee5549406896984ebf6a6460e91819",
+    "s07-burst-a3-full/Branch_2000_N6_native_executor.json": "632711355e5eeaa6d101966f097d7dbd5b43e1dac2ecd4f4a3f187d3426b2071",
+    "s07-burst-a3-full/Branch_2000_N6_native_executor_whole_burst.csv": "43789010cc668674d844a5156a3d7f8795ee5549406896984ebf6a6460e91819",
+    "s07-burst-a3-full/Branch_2000_N6_native_executor_whole_burst.json": "4145f75a066d601750507a6a2b83f9b274a60ededf17c3fd0c968daec2c400e2",
+    "s07-burst-a3-full/Classic_20000_N1_native_executor.csv": "71bd0761ac30b97e87b4dbb6117278dcfd5e4f456551965a104713b107d6943c",
+    "s07-burst-a3-full/Classic_20000_N1_native_executor.json": "efacfa0dbe7937ef92cd1b67856b5286bbf30748f3d546f5c45e982b62a5a077",
+    "s07-burst-a3-full/Classic_20000_N1_native_executor_certificate.json": "5410fd7ee2551f52750587d5b166f5b01a77182dfe862623e4531607b6caf171",
+    "s07-burst-a3-full/Classic_20000_N1_native_executor_verify_0.csv": "a78d0892a574d4ef054062eaeeac35d155fb3574c0fca32848f9a55ef9e11968",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor.csv": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor.json": "e93a72ae5ae808b07ca6bf086e49c76452f10fac96d1b95d632c5386a0eac117",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_certificate.json": "cb5cd6d58551b2e476340ea8cdc638e1338195499b85ec5a5327d46ebd3a4823",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_verify_0.csv": "7b6474b9ad9f11fcdbeea7d19f96e804e466c1b14a63a464b7a1eece6206b676",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_verify_1.csv": "9e041ca429c4ec89dae9bb28688d1cddc4ce36145ab3356140c4bb1a646bb7af",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_whole_burst.csv": "1f27c73880e4a2c9c7854c6d62423a4ee20289c6f929af6c48b1606782a92fa8",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_whole_burst.json": "ae2256449727cf399af94443a2a71ff9426ff7bab7f62c7495ad1a15426b9d8d",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_whole_burst_certificate.json": "aab9fe5bfd6ea26b43daed6f3013629ce99e4f86399f7551ca1aa64d2821be19",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_whole_burst_verify_0.csv": "7b6474b9ad9f11fcdbeea7d19f96e804e466c1b14a63a464b7a1eece6206b676",
+    "s07-burst-a3-full/Classic_20000_N2_native_executor_whole_burst_verify_1.csv": "9e041ca429c4ec89dae9bb28688d1cddc4ce36145ab3356140c4bb1a646bb7af",
+    "s07-burst-a3-full/Classic_20000_N4_native_executor.csv": "6b21f6aaf11776d626b640d2e076c1372ca6474da4636eb74501e61f9860a07c",
+    "s07-burst-a3-full/Classic_20000_N4_native_executor.json": "c99d13429481bd0341938e54549715b07d3c980a51f098e282562c652688cf57",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor.csv": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor.json": "4e02fc6aa8be6c1997b0b07539f194efe76bdc55905b9e13ae407a98c10f9680",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor_certificate.json": "3c3b44685fc2b82309a821d6c023e4cb342b08779951685c542195c8cb2b6bc1",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor_verify_0.csv": "5b7dfc87d37dd77f5f6264eea8583a0412cb5206e7afe23d62b5bbe3d83d17e0",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor_whole_burst.csv": "c7b56c1e6d41e4e724804c76a3dd75a65cc1296d4a54041ebd4a6e34cd95f3e6",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor_whole_burst.json": "5e6be51720497240bc2f5d00041bbfca1631ed7919a46febb42b8581cff9fd92",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor_whole_burst_certificate.json": "f1b16508ab82f255b86474f4554e19869cbd508544833556c465a4d78c1e1225",
+    "s07-burst-a3-full/Classic_2000_N1_native_executor_whole_burst_verify_0.csv": "5b7dfc87d37dd77f5f6264eea8583a0412cb5206e7afe23d62b5bbe3d83d17e0",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor.csv": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor.json": "3196f943f4389d8f4074742c6ca534ed7ffce47a891c809f56a4eb902fd5c1df",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_certificate.json": "5389eb6c25a437b6bfaf9a1f7b7df2587afe25d2245995af36c9b1a8f3cd3804",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault1.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault1.json": "574f1852bbfe26b26dd30a85896041983753adbf176404eacd3a8a1acbd91cdf",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault11.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault11.json": "63b0915df752fb8c4172457613011529b2013f4cfea3f566646f8936754a0bc3",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault12.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault12.json": "a9718ddcbbd12aa8b9a2683e7f871a229d9ae014ec131fbf829ec43230248711",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault2.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault2.json": "53c316abaf2b00ea235b79045d56afe283193cabfd7e742d5c03f41b555df309",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault3.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault3.json": "303f8018f65aa37240f9ed2ed0593636757ddbd4dc1593ceba92c6b972d4affd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault5.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault5.json": "1a025614a9fdb1d7ab800f304f091cfad73479a61413435be4568a8e79e63a5b",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault6.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault6.json": "a8685ab88e34ebc4c7961584cfa19ff3d2684fb44b06338397a0c0fd1c9094ef",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault7.csv": "09f42c1a799901944b9b4c9968c30fbe3b4921728349d61d79183e1d0df8dafd",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault7.json": "fea692f8dffd5507b0045e1ad0a13490466d82dff43f0ec989e2611bae9d2df2",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault8.csv": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault8.json": "2be409bd7a3b090fcb79e92e87c4d567d33dcadb588c0067aed3eda0476929b9",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault9.csv": "e396b301df2c5f3a509c8bf496135d6f2d381a350232d285cb96f781e73aa097",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_fault9.json": "fbc8d7c5d9a886e1411cb832e075d4d16e147026f152224c4baed144bce549d8",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_merged_burst.csv": "7f4fd2a84eb631e7f2abd2da4e463aea116f4d16966f88c9ee3b01d202f6d5c9",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_merged_burst.json": "45fe566485649dd742c693b7895c6532601810460f9c744c92b2abd75ff6f67d",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_verify_0.csv": "d69b64a5aa0d2c22510779a771e56876aa634fb6c0f417d28bddf8a12d514d2d",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_verify_1.csv": "082ecf53e27ad22348528594f5fab7cf188c094125ece012a0de6086efc820b2",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_whole_burst.csv": "9e21bfceec542c2b982ea5e625cf5a912a70ffe9a0835c9c217ba4a8bf4a0221",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_whole_burst.json": "e7e3ab71023f992739ab0c4a29bba0a037d830d84c56417de553add4e84e38e9",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_whole_burst_certificate.json": "e1a67d87682931178e63b3f1edd4000726749dc4babd1fba5618bb9aac4331d9",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_whole_burst_merged_burst.csv": "7f4fd2a84eb631e7f2abd2da4e463aea116f4d16966f88c9ee3b01d202f6d5c9",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_whole_burst_merged_burst.json": "e4cd87c1ed9db4709917b70f0ab87b15b9835f75495541a73e66a6675398716b",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_whole_burst_verify_0.csv": "d69b64a5aa0d2c22510779a771e56876aa634fb6c0f417d28bddf8a12d514d2d",
+    "s07-burst-a3-full/Classic_2000_N2_native_executor_whole_burst_verify_1.csv": "082ecf53e27ad22348528594f5fab7cf188c094125ece012a0de6086efc820b2",
+    "s07-burst-a3-full/Classic_2000_N4_native_executor.csv": "640d155d6c3e4c830cdfdc5ae9ef957961d4c32e26003cb0e570bd78e662fd07",
+    "s07-burst-a3-full/Classic_2000_N4_native_executor.json": "58a734f8afe11ca0b1ecf2869ffb45383d519d82e8171b9baa50e3963b521417",
+    "s07-burst-a3-full/Classic_2000_N4_native_executor_whole_burst.csv": "640d155d6c3e4c830cdfdc5ae9ef957961d4c32e26003cb0e570bd78e662fd07",
+    "s07-burst-a3-full/Classic_2000_N4_native_executor_whole_burst.json": "0552ec05b61d09ff84af9417690f59375d501aaa9d8aaf5df6e2bfdef80770cd",
+    "s07-burst-a3-full/Classic_2000_N6_native_executor.csv": "ba298170fc368849cd64e2d09617c29db02f8ca3da65e09f171eba6d7899be8d",
+    "s07-burst-a3-full/Classic_2000_N6_native_executor.json": "8891a37f9668c6de6a3d36637c6fbd266b1ebd1efcc2994cdb927e7e93fe084b",
+    "s07-burst-a3-full/Classic_2000_N6_native_executor_whole_burst.csv": "ba298170fc368849cd64e2d09617c29db02f8ca3da65e09f171eba6d7899be8d",
+    "s07-burst-a3-full/Classic_2000_N6_native_executor_whole_burst.json": "c005d77b26523c150de72e372d531782bf1117d5d4cd318985822715b8cd0438",
+    "s07-burst-a3-full-binaries.sha256": "0b9cb4afcc84d1c0bddedfa77604cafa50bdec5ef526c7e8d1a4447c6c99adb6",
+    "s07-burst-a3-full-details.log": "a400f5a322dd80605106ce9651b9d7df3a1104aafd25522b115d0dbc2513ac34",
+    "s07-burst-a3-full.log": "9d7729a555863ca32dacef949a7ebf1490cb6abc61a020dfd92a544bb8d56205",
+    "s07-burst-a3-runtime.json": "01df79d40ea57b28baa44becb393bd5506dfa0b019d79d2121ec37b4a33396c1",
+    "s07-burst-a3.log": "8e1c84aaaa876e924cb5334386a6d2f1731c66f696ca3acfdaa44c25f2f5ef88",
+    "s07-burst-a3.xml": "743ecbb63529069f9cbf810832f348b492fb24359762ef2fec68eda66ba9806a",
+    "s07-burst-full-waveform-comparison.json": "5658ddb9da4db86f5b34eff23ee7331ceeab3256519f0ece4dc42667ee9803e3",
+    "s07-burst-merged-waveform-comparison.json": "38763dd68794e98ccf4513862b41c836ea707a41cc334197568db97625ffe7fe"
+  }
+}

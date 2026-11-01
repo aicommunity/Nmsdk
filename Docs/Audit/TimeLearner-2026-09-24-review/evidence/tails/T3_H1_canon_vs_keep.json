@@ -1,0 +1,36 @@
+{
+  "hypothesis": "Canon_vs_Keep_same_soft_cold_L",
+  "mode_tested": 3,
+  "baseline_canon_soft_cold": "FAIL NonSeparable",
+  "keep_train_flag_excerpt": "mid=1 gap=-0.00113693 landscape_ok=0 inference=0 result=2 FixedLTZ=1\ntipr=2e+07 2e+07 4.20211e+07 8.6e+07\ntipr_snapshot=2e+07 2e+07 4.20211e+07 8.6e+07\nmetrics=0.0838088,0.0845027,0.0845261,0.0845325,0.0641387,0.064503,0.0831975,0.0849457\n",
+  "keep_result": 2,
+  "keep_landscape_ok": 0,
+  "row_fail": true,
+  "fires": "",
+  "mid_source": "missing",
+  "tipr_class": "flat",
+  "fail_notes": [
+    "fires_missing",
+    "gate_fail",
+    "gate_rc=1"
+  ],
+  "after": {
+    "TipSynapseResistance": "86000000 86000000 86000000 86000000",
+    "FixedLTZThreshold": "1",
+    "ResistanceMin": "20000000",
+    "IsNeedToTrain": "1",
+    "EnablePostTrainTuning": "1",
+    "PostTrainTipResistanceMode": "3",
+    "PostTrainTuneComplete": "",
+    "TrainingPhase": "",
+    "DendriteLength": "1 1 1 1"
+  },
+  "conclusion": "KeepDone also NonSeparable on soft_cold L \u2014 Canon-alone not supported as sole cause",
+  "next_hypotheses": [
+    "Incomplete soft_cold reset (soft vs strip/full init)",
+    "Train\u2192Test TipR Parameters lag (flag tipr\u2260Parameters TipR)",
+    "Interval/AutoScale residual activity"
+  ],
+  "work": "Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_on_t3_keep_20260924T184149Z_work",
+  "run_dir": "/home/user/Nmsdk/Bin/Configs/SpikeSamples/StructTrain/_repro/runs/br25_t3_keep_gate_20260924T184655Z"
+}

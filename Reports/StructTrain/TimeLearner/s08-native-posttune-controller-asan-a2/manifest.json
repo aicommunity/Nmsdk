@@ -1,0 +1,3706 @@
+{
+  "kind": "native_posttune_controller_asan_bundle",
+  "schema_version": 1,
+  "native_source_root": "44a1598af2cfdd2fa1703d5ea70f8f1e8beabc9b",
+  "native_pulse_head": "c8a1995019be944acb0cbfd7f40d6ff7cba111c9",
+  "latest_reader_source_root": "e9f3cc85275bcdd9b1ab7a0ef4f355dd52d8cf2d",
+  "native_tests": 10,
+  "native_seconds": 3733.602,
+  "native_skips": 0,
+  "original_reader_checks": 19,
+  "original_reader_seconds": 158.845,
+  "latest_reader_checks": 20,
+  "latest_reader_seconds": 159.205,
+  "leak_detection_enabled": false,
+  "scope_ab_recovery_native_per_binary": 8,
+  "scope_ab_initial_grid_per_binary": 2,
+  "scope_ab_exact_csv_pairs": 28,
+  "scope_ab_exact_ownership_json": 8,
+  "controller_outcomes": {
+    "calibrated": 9,
+    "search_unresolved": 7,
+    "cancelled": 4,
+    "recovery_required": 2,
+    "budget_exhausted": 2
+  },
+  "transactions": [
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_auto_metric.json",
+      "mode": "keep_done",
+      "metric": "auto",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "e770cdad149dec8442d30cb9b773ec8c9dbbc21e344bb94623639efbf1b077c2"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_canon.json",
+      "mode": "canon_rmin",
+      "metric": "ltzone",
+      "status": "search_unresolved",
+      "reason": "selected_weights_not_confirmed: no_successful_measured_candidate",
+      "source_restored": true,
+      "candidates": 1,
+      "transaction_sha256": "659e2d2c49f06db2122540564bcbc00729fdb56283558cf2021d80ab2a3f8624"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_child_cancel.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "cancelled",
+      "reason": "explicit-cancel",
+      "source_restored": true,
+      "candidates": 1,
+      "transaction_sha256": "9245e6f658003c0ced1044689ebce050312baa7e135fcb5eaa9582825f60e96e"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_flat.json",
+      "mode": "flat_last_r",
+      "metric": "ltzone",
+      "status": "search_unresolved",
+      "reason": "selected_weights_not_confirmed: no_successful_measured_candidate",
+      "source_restored": true,
+      "candidates": 1,
+      "transaction_sha256": "9009cfc10587051d615544976633d51b5f17aebf0e830523c922998ce8e53f44"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_foreign_trial.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "recovery_required",
+      "reason": "post_tune_transaction_trial_ownership_changed; rollback: post_tune_transaction_trial_ownership_changed",
+      "source_restored": false,
+      "candidates": 0,
+      "transaction_sha256": "71c5dbb0a649366baccd26d2096b8af115ea46ce1ac4616a6ad6e8cb1c16f9c2"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_keep.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "d545bd5b72d924c2a96bb9848d27342a0c6d0b7ec2fa7c0449c76077caf6efef"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_off.json",
+      "mode": "off",
+      "metric": "ltzone",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "abfab13be6de4bf6a6575574e1ea184bd9a8d141cc92b29a57f367c95b1f5bb5"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_recording_budget.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "budget_exhausted",
+      "reason": "weight_observation_budget",
+      "source_restored": true,
+      "candidates": 0,
+      "transaction_sha256": "ae56ce4576bf98999dc9473d72c8b73ad1881f593a31131c55dad90bf420fe77"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_silent.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "search_unresolved",
+      "reason": "selected_weights_not_confirmed: no_successful_measured_candidate",
+      "source_restored": true,
+      "candidates": 1,
+      "transaction_sha256": "8daf43a687a7e77d5e1e6d0d10b70d337dcb74142c551265140b520ee67e835d"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_soma_metric.json",
+      "mode": "keep_done",
+      "metric": "soma_sum",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "c1c7b5561819acb2b600923ccfe7743589efe7f91756c611de9fb477f04fd290"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_synthetic.json",
+      "mode": "search_synthetic",
+      "metric": "ltzone",
+      "status": "search_unresolved",
+      "reason": "selected_weights_not_confirmed: no_successful_measured_candidate",
+      "source_restored": true,
+      "candidates": 3,
+      "transaction_sha256": "a5e8c29c99a13b51ff373c34433de3723016023e40721d5f15dc0d23097cd415"
+    },
+    {
+      "path": "Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_weight_cancel.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "cancelled",
+      "reason": "explicit-cancel",
+      "source_restored": true,
+      "candidates": 0,
+      "transaction_sha256": "9a7aaec855e97b67392aaa4e9a60780df68de16c5e95343cb4bdb101a8c7a1cc"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_auto_metric.json",
+      "mode": "keep_done",
+      "metric": "auto",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "50b2057cd19b3cb25608063fa7ee3914a5a1b02cffc2c810c80eccdba0c34298"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_canon.json",
+      "mode": "canon_rmin",
+      "metric": "ltzone",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "c866800c7488a088a2e0a850022e1ff67d75e2cfeb3623aaf1fc6fcc4dffad4c"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_child_cancel.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "cancelled",
+      "reason": "explicit-cancel",
+      "source_restored": true,
+      "candidates": 1,
+      "transaction_sha256": "fb5ef6f6b496eaee09cc3c6bc52ea9f01ef6cb85eafa97cfee10582e656ec526"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_flat.json",
+      "mode": "flat_last_r",
+      "metric": "ltzone",
+      "status": "search_unresolved",
+      "reason": "selected_weights_not_confirmed: no_successful_measured_candidate",
+      "source_restored": true,
+      "candidates": 1,
+      "transaction_sha256": "1a7a3fc08d8dff8522d01a0a6b32c2082f949e5a951c684d738de0b870cabf07"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_foreign_trial.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "recovery_required",
+      "reason": "post_tune_transaction_trial_ownership_changed; rollback: post_tune_transaction_trial_ownership_changed",
+      "source_restored": false,
+      "candidates": 0,
+      "transaction_sha256": "98fd36c1062ab052773e0b44f23fd1a1a3c251120556e1933f5c85b6cf38cd70"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_keep.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "77cf83e1870e15f543cc2ff9d8aa756ea6d70501d5155480638e3eb11e846bc2"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_off.json",
+      "mode": "off",
+      "metric": "ltzone",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "cea80ffbf43e1fe21f9c62d300c983946a2fd9b5f63ced4459ba44bed1d79c9c"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_recording_budget.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "budget_exhausted",
+      "reason": "weight_observation_budget",
+      "source_restored": true,
+      "candidates": 0,
+      "transaction_sha256": "2a4258e996b7a9ce008daab3b78716e99ad4304e7c5d2b4049fb2b65a1b7cc09"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_silent.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "search_unresolved",
+      "reason": "selected_weights_not_confirmed: no_successful_measured_candidate",
+      "source_restored": true,
+      "candidates": 1,
+      "transaction_sha256": "ce961ac4d048c52cdd45baa62b52b092776d1f41d2cdb6c5a1612eba8c8b50be"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_soma_metric.json",
+      "mode": "keep_done",
+      "metric": "soma_sum",
+      "status": "calibrated",
+      "reason": "",
+      "source_restored": false,
+      "candidates": 1,
+      "transaction_sha256": "5dc5a18f24869ae214d22d9b13a6a6621131a5019c1fa1cd9020809f07330950"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_synthetic.json",
+      "mode": "search_synthetic",
+      "metric": "ltzone",
+      "status": "search_unresolved",
+      "reason": "selected_weights_not_confirmed: no_successful_measured_candidate",
+      "source_restored": true,
+      "candidates": 3,
+      "transaction_sha256": "af4d4797716dcc49e3f206df6551499250552d96de21c423b30ba80187db341e"
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_weight_cancel.json",
+      "mode": "keep_done",
+      "metric": "ltzone",
+      "status": "cancelled",
+      "reason": "explicit-cancel",
+      "source_restored": true,
+      "candidates": 0,
+      "transaction_sha256": "cdce0e1f65bccfe154d5f84bc75d6f81710b47967cbd5462ded62651396ef05c"
+    }
+  ],
+  "cross_worker_waveform_equivalence_verified": false,
+  "archive_sha256": "609546e33fe90afa8270118c0203e0b3f9afa84b9039a5c34b328a5c8ce15a8c",
+  "files": [
+    {
+      "path": "cancelled-queued-budget-bug-a1/cancel-before-build.json",
+      "bytes": 471,
+      "sha256": "633ca34f061ba7c62c1196412f12d23c79651ffa37e9f856bc577b0c5c9614b7"
+    },
+    {
+      "path": "cancelled-queued-budget-bug-a1/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "cancelled-queued-budget-bug-a1/runner.sh",
+      "bytes": 3053,
+      "sha256": "b674cbea49b2db04ad0fdf44223216735c863cad53533f78ad84b99bd4e0be7b"
+    },
+    {
+      "path": "cancelled-queued-budget-bug-a1/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cancelled-queued-budget-bug-a1/supervisor.pid",
+      "bytes": 8,
+      "sha256": "a30e9ba4fd8be4fdd8edaa469f3f2d4ab6d814b514c5887c5e314330e2ef280d"
+    },
+    {
+      "path": "controller-fixed-a2/build.log",
+      "bytes": 2492,
+      "sha256": "858710f1ec3cc0e394ade72008e5e392e46acf37ab9d8ebc5b48c8dfa390fafd"
+    },
+    {
+      "path": "controller-fixed-a2/checkout.log",
+      "bytes": 664,
+      "sha256": "30e0b76bb93fa08948120774a5d80e5bf6b187bc876369bbe967bb54e9b47a55"
+    },
+    {
+      "path": "controller-fixed-a2/configure.log",
+      "bytes": 1355,
+      "sha256": "4477eaaca2b8fc5cb089130744cd479e6dea5364c46318d4243bb4522d84dee9"
+    },
+    {
+      "path": "controller-fixed-a2/disk-before.txt",
+      "bytes": 104,
+      "sha256": "7bf0593f2ceb848f723033a1b69a3b89b3774cf182ecc904daea212443cf56d8"
+    },
+    {
+      "path": "controller-fixed-a2/native.log",
+      "bytes": 2128,
+      "sha256": "c46c78efa330923a8703c8794a6084b2ed78e825ccd0349229626e7e93b7c2aa"
+    },
+    {
+      "path": "controller-fixed-a2/native.xml",
+      "bytes": 3823,
+      "sha256": "b065cd5383e3afd743a35e79af8c926ab4867b680d70e392e43c13ba0e9ad8bd"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_0.json",
+      "bytes": 79205,
+      "sha256": "6d01ba762bf0a7dfe31212dce7c22f6c2a9a2015650ff0f17780271edc1a7ba1"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_1.json",
+      "bytes": 442908,
+      "sha256": "e1dccb255499b6ad7b9aad3873b3d71a22befd83609d5cbcde2e8c348680b64b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_2.json",
+      "bytes": 84141,
+      "sha256": "f72f7f2ad18af67fdbf8ded382e074eb23c9d5acca22fbf1a7eb0f2d0827d08e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_3.json",
+      "bytes": 476436,
+      "sha256": "14a29530b13db757bc385e76a5a862f13bbe3e79dbddaddfe083f9b1d3221bcd"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_cancelled.json",
+      "bytes": 1629,
+      "sha256": "688c668292065bcbf1257e5ca31c8b9cc79309d0685065dbdebc835bf508a28b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_gap.json",
+      "bytes": 1651,
+      "sha256": "4e874b3c60e4afe208c03e7849be0ad24b5af78cc5f0b2be8905e248657e297c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_auto_metric.json",
+      "bytes": 35869141,
+      "sha256": "c185f88751afdc4241aaf90b9ff30284507b1718d13bd9789a3cbcfd4a79c0c7"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_canon.json",
+      "bytes": 19642959,
+      "sha256": "23cadec0cd4de450aba44bdaea97dbb9503f366873f0b0c73ae4072f3bee4a3a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_child_cancel.json",
+      "bytes": 8780317,
+      "sha256": "094386bbd8463624fa59cae9834edc24fbf8a10eaefdecc47817ea0f11288ab2"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_flat.json",
+      "bytes": 19573879,
+      "sha256": "06aae8753498969b98e16e5d8d8d7d5ea514a0f1afae9d6b93fda314734c0718"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_foreign_trial.json",
+      "bytes": 2486828,
+      "sha256": "25b939f1301d58572e6c976575bba1430561804bfe4a898b4ae6d4a86efd6226"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_keep.json",
+      "bytes": 35868719,
+      "sha256": "a0de38fcafe3637cf21c21856aa3ac614b1caa1668a3af4c8622160a40b70d6b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_off.json",
+      "bytes": 35868599,
+      "sha256": "95227219ebe7c997af267613d1a3d0e19e9f3a3ee89ad5a2f30d2833624abc65"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_recording_budget.json",
+      "bytes": 2486109,
+      "sha256": "a3dc15589d5f13e0905cc2f5b0b953d322e45b3519dd35f40cfe310715c9e0ab"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_silent.json",
+      "bytes": 14175930,
+      "sha256": "749b022141c9b972bd748f4f59481838a2154b9951cecfa127ca68cb3954151c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_soma_metric.json",
+      "bytes": 35869156,
+      "sha256": "8f2275eb9a6bc7178e84dee92ba19b47a54a04dc5dd714692eb37a1927f64d4b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_synthetic.json",
+      "bytes": 27008642,
+      "sha256": "aa317810f3e7fa829eaf2a8ceb9a112b75b27287544f9d589592db5268ded120"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_weight_cancel.json",
+      "bytes": 2488249,
+      "sha256": "c444f0985cb290b3f739f9d9ebc7be07b61bb67fc3b20bdbd24801f6c34fccc4"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_calibrated_state.json",
+      "bytes": 6657600,
+      "sha256": "cd9267bbad4df0667a207962e741df1a7ff3d26aa900d31f43af69f0d8fb8b86"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_calibration_assessment.json",
+      "bytes": 5327,
+      "sha256": "6debebc0687e424ea5d5e033a2d78278d6e3cb14d2a30a451d5635c862f10ecd"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_calibration_design.json",
+      "bytes": 2670,
+      "sha256": "c8c7d3de4c96f252842f386ab1c91fefd633b61e5735338711578e0bca1a409f"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "7afb9ace5e7288a9b42b8e2312fba6f7791ad50835ed8872250aeb253858b807"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_0.json",
+      "bytes": 78620,
+      "sha256": "cb6f28264774663fe855e14783223667c06bccafc0331386af13326b1d56a82b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_1.json",
+      "bytes": 442912,
+      "sha256": "7c18aa97b697b7ba73b985006d51da796ace5da74750aec42122be9f276568d5"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_2.json",
+      "bytes": 79365,
+      "sha256": "e6215c25e8040137785934033398a1f9c2f4025c451e664fae9dbd828da2d10e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_3.json",
+      "bytes": 443732,
+      "sha256": "07f9c5b78b5023cf985fe18f9901761a86b9b4f7c4ba3fa0ca5e9edc3102acbf"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_cancelled.json",
+      "bytes": 1645,
+      "sha256": "11e18c8d0edba37b598c79e6dec7f2c2d831cda1c588e5e483403350c948552c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_gap.json",
+      "bytes": 1644,
+      "sha256": "c045d625f00675596e806426ac52ba0ac8643302613b60fbaace977bc54e5903"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_primary_calibration_assessment.json",
+      "bytes": 3275,
+      "sha256": "9744356ea052b55432835519f78e0f0ab93f896f3b9dc41b8136ab95c777e974"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_high_recognition_candidate.json",
+      "bytes": 3613628,
+      "sha256": "b1b5bd7b049b5d5fea2342f34258fc118ea3f74846cd07775b00b938e984c786"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_calibration_assessment.json",
+      "bytes": 5458,
+      "sha256": "184bcb0b44938746df36425fbf4272f2db9f007d6c16c054d32549f3cc7717d3"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_calibration_design.json",
+      "bytes": 2669,
+      "sha256": "5e4a37c97047d82a2c6644301c912001addbb4055ece97bc1baa7fdab3dd3534"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "7359d8a400a130dcb6ffe0fc37c51f1b2da670eff31771eb684b3ea4ec64f512"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_0.json",
+      "bytes": 83764,
+      "sha256": "47cc8b01106d691f19fe7e0a31def4835544a8f2f97c25b61cc138bc9aaf5aaf"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_1.json",
+      "bytes": 474469,
+      "sha256": "f39276b70633d577364f6e7ce19882743ccd804aa9836d51ec7cf02dcb215c45"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_2.json",
+      "bytes": 90622,
+      "sha256": "39aed831176cccc37b867c1461d06b51e8b4028e63c1aba9dee837d6bff55050"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_3.json",
+      "bytes": 486781,
+      "sha256": "75085a0666e36704762bf94f3daecc4150e824bd5807c11ac634d4f34dfc9333"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_cancelled.json",
+      "bytes": 1644,
+      "sha256": "a22f3fb92b0e39483d8101325968d92b9e11ee3781bc73918759eb040bf873be"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_gap.json",
+      "bytes": 1643,
+      "sha256": "bd2dcc0e1221169aa93d8a16128a4962af65d065e17583e4c93cc8877763565c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_primary_calibration_assessment.json",
+      "bytes": 3341,
+      "sha256": "4bd4a36b4062c9819517480c41dfcb9ed99937d521bcc9a3f1a3615a99086c1d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_candidate_low_recognition_candidate.json",
+      "bytes": 3613649,
+      "sha256": "eeb0618cf4d5aac18d2854cca0cab023d83be6ebfe45aa4771bdebe32c4aecaa"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1162886,
+      "sha256": "5410537ed0c1288a7e3fae0e3c44c64957816f6dfa97dbe29d7b3b51028045f2"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 602841,
+      "sha256": "684ce7071247c36dcb0b52d8e4e9b1c9c58b32b69a094e158fa81f05ee6f57ae"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_legacy_v1_candidate.json",
+      "bytes": 3613649,
+      "sha256": "646117abb0e88c88e4b4ed5b8681f43c03fa2a539bf83463ddf4e451fd2a132f"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_numeric_domain_negative_candidate.json",
+      "bytes": 3613633,
+      "sha256": "e21d9d18807708c13ed5e65a7f32193ec5e5cb0a3f38f57068dba4896cac703e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_numeric_domain_negative_zero_candidate.json",
+      "bytes": 3613629,
+      "sha256": "ff906385e392860dfd9a5e35f5170ddafb8d1eaec328b9194314bccd698feece"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_numeric_domain_zero_candidate.json",
+      "bytes": 3613628,
+      "sha256": "98ae5aa3bda200a58574a74ecce46ec506fca97aa30d6dcdb53d985ce5232ef2"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_candidate.json",
+      "bytes": 3613724,
+      "sha256": "caebb7baa5e619ef3d136de63d5d85dcb4b6e6b8d1f8c276c02c6e38ffbcd7d4"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_calibration_assessment.json",
+      "bytes": 5413,
+      "sha256": "3d451b59c956f5fa4c2fa528ddb52a1a3c743b98b34c29c500d2821cd2103791"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_calibration_design.json",
+      "bytes": 2677,
+      "sha256": "b810f79fc2356879564b6610da31ecbc13d5ceb9bc9bcffb099829b4e72eb38d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "9a17b07805a6ce0d1987556912524e8b82f9541bf0682a7fe2ba5a4c11fcd5eb"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_0.json",
+      "bytes": 79231,
+      "sha256": "3f3f7890edbcbd9b1c5bd73624d6ff6433ef1aba36cfb5c15381d51afaecba70"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_1.json",
+      "bytes": 442919,
+      "sha256": "49184b076a28c78d3e9599bc373bbf96b247bedf8f12e6e659c4053acd000101"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_2.json",
+      "bytes": 84152,
+      "sha256": "15ba85678b5b99ed233597aaaf955ac3124a362a10641a107acb3fec1e542187"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_3.json",
+      "bytes": 476438,
+      "sha256": "5abe6b9c3a97267308ded4195992e0c2c161d3a0887a37e71ef89a9ac4a6d528"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_cancelled.json",
+      "bytes": 1636,
+      "sha256": "af936da0eaf580c57a81213408589113767d09b0b93f31766c2777e38241222d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_gap.json",
+      "bytes": 1662,
+      "sha256": "cc140aff5623ff2711ce116873ef3a6507b7a6fc290471d4fccaefddda5dea65"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_primary_calibration_assessment.json",
+      "bytes": 3318,
+      "sha256": "cdef0b097aa55479bc1ece94bdd2a359c8a477d910e7255fdd22ab1d296504db"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_protocol.json",
+      "bytes": 776,
+      "sha256": "f818766f81c53dcbae5c1aec1262b126fe9f3b581493542a4ad81376b04e25ea"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_restoration.json",
+      "bytes": 319,
+      "sha256": "15ccc66197cb046775e5341b82b62675228e480df55d1c4701ac20b9541ebc07"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_calibration_assessment.json",
+      "bytes": 5384,
+      "sha256": "2aafd32366c4565a8a8508b160bc13e8f89d50ab51e88fab6e4025f7498d091b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_calibration_design.json",
+      "bytes": 2671,
+      "sha256": "432f1450bf1e03b8ed190fe1effe9b4eaa70166c1305e762045ba64cde4b9804"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "94c64834bf7f172e23889dba1162c4df090b830845d363b1544e9b2e985cb433"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_0.json",
+      "bytes": 79225,
+      "sha256": "5616b81ac179bb1cbaffb33e485a0a3e7b6b5872a63f04df73fa88e39ad1d563"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_1.json",
+      "bytes": 442915,
+      "sha256": "41475b6ad0d8218711ecb237afa6a4ffb5408e03cb1b6176d0fee15239dd6abb"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_2.json",
+      "bytes": 84144,
+      "sha256": "773acfe638650de6f6f7c6edd301ba935bce9594af9c97f2f05f04884d9afa99"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_3.json",
+      "bytes": 476441,
+      "sha256": "499331e2b1bd47d77ac131f14cab47f8e8b42ad26a1e05864d55bc39201235b3"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_cancelled.json",
+      "bytes": 1646,
+      "sha256": "0c130e3e6bfe0182069d07b067cbc68d44342491490c4993f1fc5f143b0d9792"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_gap.json",
+      "bytes": 1645,
+      "sha256": "caebc72f7d78972efad03f6ddd691318e48a270524fd24f584179098a31d24c8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_proposal_search_primary_calibration_assessment.json",
+      "bytes": 3300,
+      "sha256": "fd2759a07a7a4a789872536048f157782f468ca875a6659eb68a041b5fc3cf2e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_signed_bounds_threshold_proposal.json",
+      "bytes": 2536,
+      "sha256": "7ab08a73a0e23a78130351f86cd9927aaf12b1caa1df8c6f5953da5aec6fdc0c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_startup_after.json",
+      "bytes": 196067,
+      "sha256": "d6e96c7004c561cf81ef1d5279f4b57493a1385299d44b84ef667b1695279f28"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_startup_before.json",
+      "bytes": 196062,
+      "sha256": "6646858ec13993d9db106d99a3768e3ea334312888850c94980532a36fc6f25f"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 14639,
+      "sha256": "7e015be7ce9c2e46c5e7320a51b88ca2fceda416052948c02d81a6b6dbe5869f"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5920,
+      "sha256": "001cd055a375e4ea13c486eaafc086c8e08ebec38c40caff60a51bd7b1d7848b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 14750,
+      "sha256": "2c8239c5fb392e5d336f00ccb68ff0a37a7672a8141f1447b1801f494e14caba"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5901,
+      "sha256": "907d4a053026dc6b4af2c0ad8360613cad418cf53f4e53fee4013a9b15f061d2"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 14685,
+      "sha256": "ef5ce86a70e579db26f5795c8ec573c48c02d2418e5f57bf098047456858edef"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5903,
+      "sha256": "71e652c539e2c689552e2339bf82ab0165133e734fd5d0b4135d198fcbf6cc25"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 14697,
+      "sha256": "fef19f9d639f44cd6c828f99a596dec4bf240977a9a8fb81e117c8e1852ae4b0"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5895,
+      "sha256": "9c260f9164b9482d68959e1cd0ec45f0496bc362570d04955ae70c7de1786ce6"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 14720,
+      "sha256": "e62a8ea31f3a3e7994d52344f00e7431e56ab04e2bff46f35475ce63e87b2513"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5935,
+      "sha256": "2a9712538f43f0df2c896164108549f44092402b56b6040690fec33545466131"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 14687,
+      "sha256": "3ecd4a7ea4d74bf23ff17dad81067f9eeda92016c82459796a5e61b8b58ebd9e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5929,
+      "sha256": "1886f13b7c240f157e71ea18b15dcfb888a10f69d5b9907da0422f39ed42279a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 14720,
+      "sha256": "4dc7d2be71ba83caf0c8a3cc5707d11a7d18912f92910fcdc98efb54dfdaf637"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5922,
+      "sha256": "92fd507daae9847443467cfc79ae8b9811f152a014e6b95e04acc26236e79708"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 14708,
+      "sha256": "9befc9a953e3cc66475a8cf434b1e9202f30e4daf8c245cdbbbf83122827b76d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5901,
+      "sha256": "d843fcccdff6b79e96dce500bbd0f8fc40e61cca823dec22d27632bb48ce2a2f"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 14695,
+      "sha256": "42e33e1006b8f52f24cac422c448028d3b35027b63e6bb8464e19b8f676c96e8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5893,
+      "sha256": "9ff4002839ac7dcee1a09f408f7e107fb827dc0982efc7859111a9d50390c58b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 14708,
+      "sha256": "8fa435d1d2477c04082337d05815fb97b364eb6f5c236c6ff6f86e30d3205f8f"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5901,
+      "sha256": "0d856d6becc7e4a12093c8a3d27897e383a5bed79366de3a73e35e50aa1d8e83"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 14724,
+      "sha256": "9c684d184d80e6169aa5506c1b138aed8dce567e9a734eb2cbf1588b2d220520"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5897,
+      "sha256": "9363395c58021913d991835b278c1311692797a4179a09f593ea5e33f9575211"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 14661,
+      "sha256": "b561e09dd2126ceac1b7021224231f15aebd853bd4bfe6436095e7a6ed56efd1"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5898,
+      "sha256": "e1f8afa73321727d5a35abea14f1f3c471381fea5d8f7aa9dd0d9ec120022954"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 14625,
+      "sha256": "8b7ac56947f6ba4cdebe85b446d51ea9d96fc03660c158749d390c186a73a3f7"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5895,
+      "sha256": "2c73abdbcba8f2d075eb9a68f4d752dcd94328775b01fb131d72fdf4ca6da2d8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 14659,
+      "sha256": "8c70d299bdcaf23ed3e3d2e263c1472f0ac70a568347b2a6e862b751bbf9ad46"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5898,
+      "sha256": "b57485c0ba55054ab2a171f483717427fef51b3a72d1b87c8a7e240afd733331"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_threshold_proposal.json",
+      "bytes": 2537,
+      "sha256": "36689976b26d99f977d2256f88a63a5053c543f966a023d0f9e8c23d96b8eab9"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_2000_N1_learned_boundary_configured_recognition_14_threshold_source.json",
+      "bytes": 2357871,
+      "sha256": "57894701b7d9362cd4ad62fd5ab267f77778bb2be3af914aac9e05d0718f0cca"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_ownership_0.json",
+      "bytes": 10213302,
+      "sha256": "1d93eb3b38c447212335b01a73f129239409e0a8f55c1926672ff3eae427d79c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_ownership_1.json",
+      "bytes": 10303534,
+      "sha256": "209e2e3843b45d18c88fea53c066e2df2d5e7b0b4d4b9fa8fc830d040ed405b4"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_ownership_2.json",
+      "bytes": 10213312,
+      "sha256": "204b2af5f7ee5b612452dbe827d11d05643ba5b8cc609d68e5eb703152f93c52"
+    },
+    {
+      "path": "controller-fixed-a2/native/Branch_ownership_3.json",
+      "bytes": 33471722,
+      "sha256": "a6f23d0525173c5607b505cc590d6374da57a5a2b6b023cdfa352a3352dad3c6"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_0.json",
+      "bytes": 88146,
+      "sha256": "046b282a122b7ac182b8e81345916e3735929f03f0c5f3b5ad05fedf2cad9d30"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_1.json",
+      "bytes": 494561,
+      "sha256": "306c07773652bc9da0ce722e20593ef5353e8fe468ce03fed293813278157012"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_2.json",
+      "bytes": 93176,
+      "sha256": "bf2a7540358f255695f07e4bdd25c19d1824e6b8b682550af30f302902a512ff"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_3.json",
+      "bytes": 528010,
+      "sha256": "a728f68576d51153d553fd6ba7863e362e9fdb871062e55e6876a6a1864b24c0"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_cancelled.json",
+      "bytes": 1654,
+      "sha256": "8167e4a08e7c95c5cd773b32360e3f0dd624918fd915756c93bdc7e5f167ae47"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_frozen_trial_gap.json",
+      "bytes": 1653,
+      "sha256": "392e0c8275af546085fa70d56c08a2b1ee370f1a6cebd2048c3d251a65c66df0"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_auto_metric.json",
+      "bytes": 38886760,
+      "sha256": "edf1865998aa06f65cef1cb8c831fad8a265a55cf4956a3d7d5912b839b3d1cd"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_canon.json",
+      "bytes": 38887905,
+      "sha256": "b9134cfac3073b9e157a0fad5b5890d31bce030f209d63eed648f8cb2d954396"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_child_cancel.json",
+      "bytes": 9493209,
+      "sha256": "1dab289cebeeec849cb502caa2bb878de36606aa6be485c8db4a53ca9e8b6f7b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_flat.json",
+      "bytes": 21180515,
+      "sha256": "eeee1f75cfef5fccdd6250ec987a11dfba073cb6e199d9c795b9ecaf809a2871"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_foreign_trial.json",
+      "bytes": 2683192,
+      "sha256": "ef92dc66b4c00a259b64e57554d44bfa80d0ec30f579bd4cf4c1f929d786b0f5"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_keep.json",
+      "bytes": 38886281,
+      "sha256": "d9329f65b3c77260afa165a5a0ab1e9ef54179c709ad1b80519b8df5be467cd1"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_off.json",
+      "bytes": 38885686,
+      "sha256": "d53c268c8dbeaebb88e65a0ee65f9855dae2f263a25fd77b22090ddfa5de1f4a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_recording_budget.json",
+      "bytes": 2682472,
+      "sha256": "5056efe9eba150138300280d485296f8c62915e861dda1a996f88f7799b5e1ac"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_silent.json",
+      "bytes": 15335820,
+      "sha256": "34fac2e697a81de08be34d1b60e653dbc1df8501b503b8abc90c8537e1805085"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_soma_metric.json",
+      "bytes": 38886812,
+      "sha256": "e1a73dbbd3de00314d0133277eebae80510ed44009a55f7a51a0ce4fe1f3226e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_synthetic.json",
+      "bytes": 29232382,
+      "sha256": "c000f7d63e2a88afdbd2c92ec589638fb9eceb9bc31c60a491cde9898207f5a0"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_post_tune_weight_cancel.json",
+      "bytes": 2684614,
+      "sha256": "33b18ace1a2ca656ad19b02408398e4e9e2c4b1035853cd423a4a30722de2f8d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_calibrated_state.json",
+      "bytes": 7222841,
+      "sha256": "7e38002538aa19088d4e9e962f2a182f20016ed05f962e50725b1a1234fb9036"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_calibration_assessment.json",
+      "bytes": 5343,
+      "sha256": "0ee4730a3973d3636d724240bff14fd7f3567fe0e4e1f8dfa9fd737c5c0c4607"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_calibration_design.json",
+      "bytes": 2671,
+      "sha256": "6825e1d5b9d8ce0fc59c9cb5cebd70df2f851745c9bfa7644140c0a07da8424a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "d274ddb792f3bb968df1da52e62ef3f41ed958d173a633607823aa54014d8b86"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_0.json",
+      "bytes": 87523,
+      "sha256": "d0c4aa3c7ebc764f832d923a4d1a439989e9464ee3ec202f9e3caf4cc4bd0be8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_1.json",
+      "bytes": 494565,
+      "sha256": "1af18e53798e179c42ac6023acd61b5917f123262481902f973916f2f0b549f6"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_2.json",
+      "bytes": 88714,
+      "sha256": "629c27b7ab1624f82ddf861e56eb2f979ad89c31bbbf2ec85dd91318b63f624c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_3.json",
+      "bytes": 495754,
+      "sha256": "2e8bec9dbf2575832f31b43f33aa72e8ce5012210b6ea5642d100cb532c90a79"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_cancelled.json",
+      "bytes": 1654,
+      "sha256": "635023d006fe88f1a0cacd75008f19640dbbcdc64ebe14e66ba798484235e360"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_frozen_trial_gap.json",
+      "bytes": 1670,
+      "sha256": "03d9b1ac7dd9daa8e236c730793b77b6b488591f54ee9102e28f2d74947cbbf8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_primary_calibration_assessment.json",
+      "bytes": 3297,
+      "sha256": "995023f2f32bee57c256c4423f5b6935774b16a14bd7d40b18b6e20e42bfcdbf"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_high_recognition_candidate.json",
+      "bytes": 3900673,
+      "sha256": "531442bfde568a73189b52453ea2961af92ca5e3114924317d8a4c4a8e8f6983"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_calibration_assessment.json",
+      "bytes": 5423,
+      "sha256": "7c8179214d970365a65d0bc3a33173113284580eed01423665f363309474dc36"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_calibration_design.json",
+      "bytes": 2670,
+      "sha256": "0c5050f64546d76fe60624323639f9e92a2d01fd0f77240f2ff16393e6f4bcf7"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "e1d1872591d7168a4bab9e2bdce41ef8bab8f930ffd90dc93bd101e65b85c6a8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_0.json",
+      "bytes": 92065,
+      "sha256": "032058f3cca4d2001b220fc5cba0f45071059df1f97884517da8eafbb0445ab9"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_1.json",
+      "bytes": 525886,
+      "sha256": "6aa6a8610c23dd2f99d86370d9e6df2ed182d4eafcf2ca3f3cadc0cd307b60d3"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_2.json",
+      "bytes": 99576,
+      "sha256": "0d3240623160eaf81273425e04228bfb1353441936d2277ab7a7f2660487f7e8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_3.json",
+      "bytes": 537184,
+      "sha256": "47c37846b5978c418c98ed2b36913dae9b2081648cba20d183ab54f7a79b2ada"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_cancelled.json",
+      "bytes": 1653,
+      "sha256": "de90c34e0ef3fd0ae3200e47d676f6956e8adc80451fc6b6f56b466c1a70557b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_frozen_trial_gap.json",
+      "bytes": 1669,
+      "sha256": "bc037899703699ac11ffac0de58c077b1539133213de954ed7efad1f8340ec62"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_primary_calibration_assessment.json",
+      "bytes": 3359,
+      "sha256": "1bbe94b3623f21d7078e3a929647bfa83391c4a093b89960aa956524da116ffe"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_candidate_low_recognition_candidate.json",
+      "bytes": 3900694,
+      "sha256": "d8362e1f749d4c5dce03b7923b3f14491fe84bb0009ef235210739d9cf164233"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_state.json",
+      "bytes": 1253723,
+      "sha256": "0f304f6e01119ce70ba875de78773cfa489fbd9040836e8972d47f90dd09674a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "2a172df9a5e3481142f18ec5af42cbfaa077b0bcc7ab3174b525cf70d518d2ef"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_legacy_v1_candidate.json",
+      "bytes": 3900694,
+      "sha256": "846a24ef152d9c3c5570024a1e9fb01d7fb7ebd53dece90ce56842f352939a35"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_numeric_domain_negative_candidate.json",
+      "bytes": 3900678,
+      "sha256": "a3b956005b381ca47ed124569ef77bbe58c9a8e34b312980cfca3028beec284a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_numeric_domain_negative_zero_candidate.json",
+      "bytes": 3900674,
+      "sha256": "2abc5b9c265f45a4e06c0aaa285bae474d5d3647671e584319bdaad3f1cd4068"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_numeric_domain_zero_candidate.json",
+      "bytes": 3900673,
+      "sha256": "880b1d90ce9d29704c9e8c9f490bb6f614cbcb34f9c45aa195b5a17ebf79962d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_candidate.json",
+      "bytes": 3900768,
+      "sha256": "35ec6c2b4c4219ed839eefdf1ab0c28e0cccfd50458e0039fa5c2c10a302a782"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_calibration_assessment.json",
+      "bytes": 5402,
+      "sha256": "f41a4db1b50d7e7c84a68316b8cd8032ddb0001629645771f0e444b48da20503"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_calibration_design.json",
+      "bytes": 2678,
+      "sha256": "3b33fe23a3afa206702d27c0f2bb4078e4443a0e96cd4e1e0e7a9124e4a71957"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "870f0ba3087e2f4c2939c85baf6854faa16e95442b5bd9c12b7cc8b843fdc8ed"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_0.json",
+      "bytes": 88192,
+      "sha256": "843e68648414fe2b5ad72e1f008c5664771e03a8ee197e6acd394714a53d5532"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_1.json",
+      "bytes": 494593,
+      "sha256": "26dd791fd93ee3b5df3074011d61e88721fa807c956a2cd4c3e88aea021d2e5b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_2.json",
+      "bytes": 93188,
+      "sha256": "90abdc2337b7f0ee6bd3ed2ddb343a736afb3c97f83ab85eb895c4c2a5b2d09c"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_3.json",
+      "bytes": 526919,
+      "sha256": "cc32457d50cbe67da521dc9e7719a8e4de8a714850bb10d44f54ccb050ece813"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_cancelled.json",
+      "bytes": 1672,
+      "sha256": "e85f6725db9ae1eed097bcac31f2d38e1fb50bd29100174924c5f733d0d9a607"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_frozen_trial_gap.json",
+      "bytes": 1676,
+      "sha256": "103e0da96b59ea7498c53428f7d571ed5db675610142de459e7d02b061da7540"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_confirmation_primary_calibration_assessment.json",
+      "bytes": 3313,
+      "sha256": "34afd494458dd2a16a9beccece163b7fe81f10b10250fc913e0c026470b3650a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_protocol.json",
+      "bytes": 778,
+      "sha256": "39cca0f1668a89004070af223ddf098ce3fa3ce7b58469a26fa30862a8cd5b59"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_restoration.json",
+      "bytes": 319,
+      "sha256": "df913c4a31a29f0bab5b8d3ff498d146d9049db74f081f3cccd980180eba96a8"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_calibration_assessment.json",
+      "bytes": 5392,
+      "sha256": "f3af16699f7ef7a82534b541137d88ee0c490a561a1e570edf5b023a92a78260"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_calibration_design.json",
+      "bytes": 2672,
+      "sha256": "eb09dd06a91e6a82ae85bf11065868f5498c33cdd6d9e8b43bb4da65784adefb"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "a0802767d395ce44b653280c368f952561718b071b177735c9b32bd16d082fea"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_0.json",
+      "bytes": 88177,
+      "sha256": "96df5f6688ad55520ef2d0c0c55765a9c259343ee50e1efdbddcda38e66d8830"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_1.json",
+      "bytes": 494560,
+      "sha256": "aaefd1b39c5ba69e243e61132cb2b3d272a847938cd823e0f8ef94d41b6a79ca"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_2.json",
+      "bytes": 93203,
+      "sha256": "bdce533a89af7f347fd778de3664a71e81bd5e644d92dd439f319fcc349d053d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_3.json",
+      "bytes": 526946,
+      "sha256": "41c75ad5fc3417f072ef9dbaf9b204696f7f400b0d6d29aabeb6bd07bc29248e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_cancelled.json",
+      "bytes": 1655,
+      "sha256": "65bcf7353117f1bc4a5234aa04fb09e88e5e8807f268059d8ec6f6365059fb77"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_frozen_trial_gap.json",
+      "bytes": 1658,
+      "sha256": "fdfccb11b80c2badfd8515fecb009e4d4a450ce22f8daa63f155d0e569706032"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_proposal_search_primary_calibration_assessment.json",
+      "bytes": 3291,
+      "sha256": "667dbffd70b9613640913cbbb6d4c316e9d5238bfa5700270294eead51ccdad1"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_signed_bounds_threshold_proposal.json",
+      "bytes": 2570,
+      "sha256": "e22beffcc100b25573ea1a4d954d3b6489a6e47c0769b14c7c7f3bcf675a0821"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_startup_after.json",
+      "bytes": 261668,
+      "sha256": "0d0856aac53b0517677b485c7eeed6fe156eee0e79362c99e2078e39e5e40ae5"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_startup_before.json",
+      "bytes": 261662,
+      "sha256": "eb76be27d70787b71343208e062b6054452a2879a9bd0243aed48219a315af9b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_1.json",
+      "bytes": 5873,
+      "sha256": "75864dca2cb9ce46a67ce636b9e299b1c1a6e04886a139ee9c0fd1f93da59575"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_10.json",
+      "bytes": 5910,
+      "sha256": "be07fec7d676d2e3567e21fbb345fe3d1586f08c64a1393e60a01a7e7fccceef"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_11.json",
+      "bytes": 5892,
+      "sha256": "fc609d2b05b91079abe133a099c71515ef3a8b0a078f1f6d48c797dbe9290b7e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_12.json",
+      "bytes": 5900,
+      "sha256": "4b4d5da4eca7859d18fccce624dba485fcca56b1c7357e3113e5f134697a7523"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_13.json",
+      "bytes": 5961,
+      "sha256": "8815ff3818226ba9ef778dbf818579379e215d27eef42117a4ebfc6b7db7deb5"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_14.json",
+      "bytes": 5942,
+      "sha256": "ec8600c9ec943a7dc35530c692bb0c853ba517fb55ed62c3d38718e70166fc0e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_2.json",
+      "bytes": 5931,
+      "sha256": "af3529153ba98e14059c056e2a9a867e22dfc94960aa63d6cdbbe18535095835"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_3.json",
+      "bytes": 5900,
+      "sha256": "0a7921dfd27ad11ad827ee9a6fe6729ca8d9b449e445db28a324d0099d3cbe5b"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_4.json",
+      "bytes": 5902,
+      "sha256": "40229f4ca7175512affcbb7bf694fb6718485c83cda056a26f94cb7639a4a83e"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_5.json",
+      "bytes": 5901,
+      "sha256": "525a9bab1e65be3039812534ff2654a90f8528702ce870b3f78918361cf1bbf7"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_6.json",
+      "bytes": 5908,
+      "sha256": "636b2d0716496f4ddaf897b31cd063271ef68ba7fc80050ad791a8ab6f591d4d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_7.json",
+      "bytes": 5908,
+      "sha256": "121378005269321606838157ceae9216bb5753e2655d88da5a6ce2fe290b3d64"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_8.json",
+      "bytes": 5908,
+      "sha256": "ca32315ec24c46bf86c3f6ed72520828b4ca902fb0a2c443626ac96b04ec016d"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_state_trial_9.json",
+      "bytes": 5908,
+      "sha256": "9e795d1475c060b4bf80c04119e96feb4fab0589d57ab0cbfc594a60f1d68921"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_threshold_proposal.json",
+      "bytes": 2571,
+      "sha256": "fd43a279193b9f0e7a1d43b3519e652d657fcdd6dc944be878b4485815805aec"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_2000_N1_learned_boundary_configured_recognition_14_threshold_source.json",
+      "bytes": 2544346,
+      "sha256": "d402f9641be294b61df6b0b96928354d86d4c75dfdd9668fb3cda32ce8662484"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_ownership_0.json",
+      "bytes": 11023259,
+      "sha256": "8b0faedd2e0e9151bf0714348d621bf171a598be72cf282e885b4391d1f1a7dd"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_ownership_1.json",
+      "bytes": 11123546,
+      "sha256": "b992ae2ffb60cdb2763b4215e1d061c18f773badca164cbcb546e9b7b755f071"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_ownership_2.json",
+      "bytes": 11023269,
+      "sha256": "1ff5f5f6d3676b38238f8cba1e6e0c1b6d45defa284c559e510a4e59957fdd82"
+    },
+    {
+      "path": "controller-fixed-a2/native/Classic_ownership_3.json",
+      "bytes": 36283903,
+      "sha256": "8274e59df0859fd1f51b72b4c4872d802d873f5597ae10dbcf7b186cc6c0e419"
+    },
+    {
+      "path": "controller-fixed-a2/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "controller-fixed-a2/reader.log",
+      "bytes": 3537,
+      "sha256": "982ec43d2f81b2bf47f89512d241b5553da7d2674cf863b3d95e5c2b798a7a9d"
+    },
+    {
+      "path": "controller-fixed-a2/runner.sh",
+      "bytes": 3409,
+      "sha256": "3ed3c3d2a86d327a5fd615631df1a935673e7ed33e3db7fedda97d00e83ddd55"
+    },
+    {
+      "path": "controller-fixed-a2/runtime-after.json",
+      "bytes": 152,
+      "sha256": "2e6e86dfffbb3e7ccea4b841b5540e5b0ff9d34be412add8e3782aefea531a27"
+    },
+    {
+      "path": "controller-fixed-a2/runtime-before.json",
+      "bytes": 24431,
+      "sha256": "19054d2eddfd3d159a30724758b05ef5732946f10bd98652e8cc82628d520454"
+    },
+    {
+      "path": "controller-fixed-a2/source-closure.txt",
+      "bytes": 648,
+      "sha256": "0e91c89cf98e106dfea6056669b0113e52c00cb0a16643e6b414c5a072e0fe26"
+    },
+    {
+      "path": "controller-fixed-a2/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "controller-fixed-a2/supervisor.pid",
+      "bytes": 8,
+      "sha256": "a52b74f8766b660be5efbbace148fb13d38bd98240ded4e2db0d2e3da67d4070"
+    },
+    {
+      "path": "controller-fixed-a2/validation.json",
+      "bytes": 203,
+      "sha256": "a523364bd36a3a735bf28e5956bcd8373978a543ae261c8cb80a438b3db4a8bf"
+    },
+    {
+      "path": "controller-fixed-a2/validation.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "latest-reader-a3/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "latest-reader-a3/reader.log",
+      "bytes": 3743,
+      "sha256": "c6dc2ecb80deab2cd0dc410404763ba4e9ff5db7a7bbc47f814a324da8201567"
+    },
+    {
+      "path": "latest-reader-a3/runner.sh",
+      "bytes": 753,
+      "sha256": "e75d8ba86250c9e1b541f3cafcd7559f19066de2208eefd6d0dbffcbf02c0996"
+    },
+    {
+      "path": "latest-reader-a3/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "latest-reader-a3/supervisor.pid",
+      "bytes": 8,
+      "sha256": "68e5d923239e4c197dcc057a5e4bdc457969bd9b10a098239ffc454396ddd228"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline-preflight.json",
+      "bytes": 152,
+      "sha256": "25ecc91447318008a58b9c22733a66319ee52ec36c8420b9d907660a0ebb35b3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline-runtime.json",
+      "bytes": 24431,
+      "sha256": "042c7ffcb63cd9e3218d03663061143097c96daf76e089b6aac26a1fb29139f2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline.log",
+      "bytes": 4297,
+      "sha256": "b71c623bbd754930eda526899ffc8d33d98580921b9e1043ce1af56677f416f4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline.xml",
+      "bytes": 7535,
+      "sha256": "1f20540c0c0dbe2153c725e559c296637d7fac7aed36f680cbdf27f5a429440a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction.json",
+      "bytes": 7605140,
+      "sha256": "49e0c73d035fe6b68b31cbef6c00d36dbe4e8bf308a474292951a3bb9473c1ff"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_clock_grid_context_guard.json",
+      "bytes": 2486639,
+      "sha256": "07630d0880df63f212ac029d28cb0677882984ee76753c16ed42ad704a80e3ac"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_foreign_reset_grid_transaction.json",
+      "bytes": 2486645,
+      "sha256": "3731c5f0bb240f2838e00b18b15d242cc0cdb56e47f90bc6731fd594ca890748"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frequency_grid_context_guard.json",
+      "bytes": 2486635,
+      "sha256": "7dce96e5bec81ac5acdc3af2fd22a8d7946d351fa6f39faf265ab2bb5af94b80"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_0.json",
+      "bytes": 79278,
+      "sha256": "360aa90f197496063175305d5b9bcde51a6c885c8c7502d83d42af80023fecfc"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_1.json",
+      "bytes": 442910,
+      "sha256": "f037c24d4c23590515ab58c6fed2ffa7e12ef2527ab27af44bea67bfc94d3194"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_2.json",
+      "bytes": 83958,
+      "sha256": "9b2c649a4457c7abe1b59cdf30ee7563d79b9acaae2fb9edb44a672b1ac90516"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_3.json",
+      "bytes": 475124,
+      "sha256": "88232d22cc7fd8266961a48117496e557725320abdf62d77488624ecf1ccd074"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_cancelled.json",
+      "bytes": 1644,
+      "sha256": "0050ed0566bc169ca7c251c7c167e1e181fba35e3c7ff7d0782f37bcd1c13f54"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_gap.json",
+      "bytes": 1636,
+      "sha256": "6aab27f9221d47716850f271b56f495a7057c4ce8bfd43bf4a85e8f1f48c6e0a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction.json",
+      "bytes": 7605061,
+      "sha256": "1b92ca8faae7457f5acf8f03209ff23a4ce1c21732744a598327148114ea9d82"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_queued_cancel_grid_transaction.json",
+      "bytes": 2488050,
+      "sha256": "8dd5e2dc819ea2c6b7241b2b4c80a6bb59c17efa51646c434fc50fe24f459ec0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_running_cancel_grid_transaction.json",
+      "bytes": 2488932,
+      "sha256": "c33346d6342787d7a332497aa94edc823296c76cc6c1f6b14555886167d42564"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_state.json",
+      "bytes": 6657852,
+      "sha256": "8c346e72163bca88cb2e71dd776313700d15a463930bfeff843bcfc3e181edeb"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction.json",
+      "bytes": 21349616,
+      "sha256": "f83ff0cdc1d9fff9814eae8e368084a52e72edf038a173ba524d1228863f7ae9"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_assessment.json",
+      "bytes": 5354,
+      "sha256": "ea236816e064b61181fafa5e242579e6ec3def025701fdc6897b34aa6c25b443"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_design.json",
+      "bytes": 2670,
+      "sha256": "a416b592e3082f09a4ec27a6c5932a6967e5a927da37e8809664c02a2d1d0c6b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "fac89c3ba4062f8d933ce06a378f72dc7b1173a8f69d0bccb64d0e9ccb56a421"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_0.json",
+      "bytes": 78620,
+      "sha256": "762eec9336b847902b2513b726d1dcfd0dc8cc84db2f360d8afb44243f3ccc2c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_1.json",
+      "bytes": 442940,
+      "sha256": "dc3bfeb87d4ba4f4377b8becf4e178704cf91ddc3aff88e824b6eab916b7dbd6"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_2.json",
+      "bytes": 79362,
+      "sha256": "3f375de5dfbf21eee643b77f35d2ba7e1cb4470e0fe391df672ae9a250ba9b50"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_3.json",
+      "bytes": 443772,
+      "sha256": "d258a83a36bdd92dd4826d3bffc5b8be7085d09e3b78e79365b9822b86650bef"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_cancelled.json",
+      "bytes": 1637,
+      "sha256": "3bc238634100fef2a8d275b7158a6259e9f117f50c41147d30d462997989c816"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_gap.json",
+      "bytes": 1640,
+      "sha256": "13d2ba5b545d245733891f3507e038b11826ce5b713d97ffbf3d733832bae47c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_primary_calibration_assessment.json",
+      "bytes": 3278,
+      "sha256": "10d08adc877f49877b27d16e54139e191b230f29d5998114ba2bdc1282e29494"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_recognition_candidate.json",
+      "bytes": 3613631,
+      "sha256": "f08b99989fba1fd5b616a9433d66f5534144086c6543b27ddd8a8d6a0de8324a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_assessment.json",
+      "bytes": 5432,
+      "sha256": "265cc13ccd6810882f8dccce89eee028bb7d9809f340e3842f988735229415f1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_design.json",
+      "bytes": 2669,
+      "sha256": "057da5067268114a6b2d87e5a6c0842e472c33263029d8f58990ecf8f27d2fb0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "fc214a3529bc4d10f0b4f8a9f985253631bea39b04635cd0722977d38c5868f5"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_0.json",
+      "bytes": 83565,
+      "sha256": "6998c2ae48ffa4bed2fddb912e32b543a40ff429ad19b8872850d5cd7bc2e4e1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_1.json",
+      "bytes": 475864,
+      "sha256": "02cfdf32d2855882176441204f0a2f0b70576559c93c48ad847ece66e305ec48"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_2.json",
+      "bytes": 91110,
+      "sha256": "30eefe41abea3c26502b8bf777789a15e6022ba842a98ad3d3c1dba9d0736502"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_3.json",
+      "bytes": 488666,
+      "sha256": "dfa1ac0287f4254e12b1c4b4b914bda5cc5ef9e8ac0e2c25568c3e4961577736"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_cancelled.json",
+      "bytes": 1647,
+      "sha256": "68f0dabd3c060e6eb8b17ad4e142268496c386a39bced063d192a0da00552969"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_gap.json",
+      "bytes": 1639,
+      "sha256": "f4d9bfcc913cdd77d6087eeaea7bb6b45855c76b7a247558eac03cefd04e300c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_primary_calibration_assessment.json",
+      "bytes": 3360,
+      "sha256": "08917b55c5be4b3058b60ad65725e74910616b67e7b73bad566ac5a15612d854"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_recognition_candidate.json",
+      "bytes": 3613652,
+      "sha256": "aaeda080066bc3861e1155f51b2985fcdf97e0d53c17e15766d46724ec9e991e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_learned_state.json",
+      "bytes": 1162889,
+      "sha256": "314aecf571181e8e1c5a6700769229eba5b52e6cf208f51b902382ef0beb5798"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_learned_summary.json",
+      "bytes": 602839,
+      "sha256": "d1577c3b424a091e7ecca556ce55e76a3e832e38418635359c17bc09d3c0b6f1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_legacy_v1_candidate.json",
+      "bytes": 3613652,
+      "sha256": "859677317384614af07b670616439ef4b29d8851313e23d6e90c1e87cb892fec"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_candidate.json",
+      "bytes": 3613636,
+      "sha256": "7f553d2b892f7a2ef4bd9ad270a50c58886ffb5c619f6b36cad7c49bcf6039ac"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_zero_candidate.json",
+      "bytes": 3613632,
+      "sha256": "8515d8011c40b0a4dba5165b1060dd4eab99b74897dbe305bb48011968cfe143"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_zero_candidate.json",
+      "bytes": 3613631,
+      "sha256": "1d0d10cc054fea251f3badbada28eff4a787ba4aa603fdebd0465635a6a8d260"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_candidate.json",
+      "bytes": 3613727,
+      "sha256": "f9884ff7979ca5bfac597ce6a69a40c676f921ee42d456d11e3b77a329d6bd71"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_assessment.json",
+      "bytes": 5438,
+      "sha256": "7736805cc008566ebce6ca30b1d7071c3460da48e12c7acb7ddbb72c9dfc42ea"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_design.json",
+      "bytes": 2677,
+      "sha256": "829f421287443b50982cab6cc52b13ae84d02d2c7574443a65c47e6d2ba9f97e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "a7ee32f39e9befe963aa41ebfd6fe594967d652647f1b4c3f163aeff1e40693d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_0.json",
+      "bytes": 79253,
+      "sha256": "453682b1d3ce5b47a57d5d416bdb8465f8a80a2f4051414be1ff2ee3f11b77c3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_1.json",
+      "bytes": 442960,
+      "sha256": "8945401dc182e38574f63e59c81c42c7c26974caed6b3852c2c1f693eb56e35d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_2.json",
+      "bytes": 83946,
+      "sha256": "e33462ecf2658c1c7d8d5eea241bb4c5bf9013c2b0a5c3ddb6a1a196c27be98f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_3.json",
+      "bytes": 475087,
+      "sha256": "705f377668a2ada708dec2655d1c59f2c98e6f5173699bf3c540d43d278e81e2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_cancelled.json",
+      "bytes": 1644,
+      "sha256": "b7d93e9d49d703b9896b391f2366e67ce3273d5872b56937caf04fa5d0eac87e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_gap.json",
+      "bytes": 1659,
+      "sha256": "3fa6e87c82d50d9841abbef9d098814b877a7c0df6dec13f40ff405c3039c30a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_primary_calibration_assessment.json",
+      "bytes": 3343,
+      "sha256": "7229cabbd2dde66f4604bb645d10c169c2325f1ab704ea6c3bf22a89bfab5c5e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_protocol.json",
+      "bytes": 776,
+      "sha256": "2517aaeb868a2c6b4ebe0d8383b0ce6764c428e16d4164d44eebf484ae2c6861"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_restoration.json",
+      "bytes": 319,
+      "sha256": "7a9414718f5622d392c4b871954dcb0f2227fe64eadeb2b5f8ca425b9bd7f4fb"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_assessment.json",
+      "bytes": 5406,
+      "sha256": "fe23886aaf6c248f2c5be1f0a158742ff552f0f3f493ee8cacff5e6d59de3265"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_design.json",
+      "bytes": 2671,
+      "sha256": "7e46693ed655207e121ef84b12d48f27e2f4ee042d955512096e2e42a8bfd334"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "b38823ae21e6e59ba5f157b158caf74b1d674b102ccf95f368044c7645e02916"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_0.json",
+      "bytes": 79271,
+      "sha256": "226c083f5d11ae6d09323afba0174915f9376b99844b67ed1aab0564a5f10448"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_1.json",
+      "bytes": 442965,
+      "sha256": "fcf873c2f585f26a397cf84a11df463f7df591f0a9d5e540d9ab0deba1dce178"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_2.json",
+      "bytes": 83973,
+      "sha256": "ba1237847286e81e6c6929c8697b850800faf3adc962c75902dbd830d28543aa"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_3.json",
+      "bytes": 475083,
+      "sha256": "45f7664c75ae6bce77238b4a72d5bbca31eaf8b88dd9f37486763f0ed7c69057"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_cancelled.json",
+      "bytes": 1638,
+      "sha256": "270565e8ca6a3a1774aae8395675c4b4b9f97c9ac18bbb2d3d640c46dc4270a9"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_gap.json",
+      "bytes": 1634,
+      "sha256": "bd34968d551e3195ca444150e2fafcde898fd26668a2f32c5b7dbf6f47351ba2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_primary_calibration_assessment.json",
+      "bytes": 3301,
+      "sha256": "42bd0cd45888629fb96f1891e97238d9f2317fc7bcf6bda520be4388ee6fcaf0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_signed_bounds_threshold_proposal.json",
+      "bytes": 2539,
+      "sha256": "6193558c323578e3313cff67ddf58a5f0c52b14d1d482a2e94b4cc3258fc3f42"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_startup_after.json",
+      "bytes": 196066,
+      "sha256": "256c18944f38c826922a0b31eff5856154bfa82bf6d5eb007b28a454acb80824"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_startup_before.json",
+      "bytes": 196062,
+      "sha256": "3fdd5b2d5532af892324ff34e318256227d6d6fe277603ce254ee872cb32dbf4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.csv",
+      "bytes": 12871,
+      "sha256": "beac831b7213adf3cad06230594e6a3897994f59a0151c4ce4e60814045f6d93"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.json",
+      "bytes": 5918,
+      "sha256": "f03d71fe2137d9b15030523a9a9c2ad8b957d4c9d88ad0a3dad6b48256b30a85"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.csv",
+      "bytes": 14183,
+      "sha256": "7b3417bf627e39b11115f12b019621a0d949279175f2169313e792e8ff72481b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "74c5893f235493df3df9fa7daa3f9fd06457541922ea5128628845f76a7e51ea"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.csv",
+      "bytes": 14072,
+      "sha256": "75eeafa7abdf933cdecfd3e08d602623cd59d1c7929c8ebc0dc7f7ed39e71317"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.json",
+      "bytes": 5892,
+      "sha256": "be7cfc334fc607184402df814b8324a434b5c43b012e4874c4a004819a1649b9"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.csv",
+      "bytes": 14052,
+      "sha256": "cccb107e693dd261e8dac4d08f55350478fd05ea893c253dfd160c3fc1123922"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.json",
+      "bytes": 5920,
+      "sha256": "237735d427bc278b50893dc40e118c507bfa7fabbdf0566c6a08b54a1f6d183f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.csv",
+      "bytes": 14085,
+      "sha256": "8b85b39139e39a2b8adde77af48629984ab6cc49246c37a1c46b118358dbcd57"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.json",
+      "bytes": 5932,
+      "sha256": "807bb8691889a23e2550eeba104274357543fbca167a1dc16ce7eca95a63333e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.csv",
+      "bytes": 14070,
+      "sha256": "cd4483b83133e02b0577dba29480dd95298aaf19f7594d0deafb34200b195c24"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.json",
+      "bytes": 5932,
+      "sha256": "ac1e5fcd730d208d4383f66af3eb53d47b282ccddc233759bfc737b22b4ee1d6"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.csv",
+      "bytes": 12859,
+      "sha256": "726909aa8fa0aa97fe935103f5211fe413e21f2b7e2cd15bf60660ec96b12759"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.json",
+      "bytes": 5927,
+      "sha256": "6752eca90f2671a3e2561eadb63e772537919dea44e5fe18271272f751dba0be"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.csv",
+      "bytes": 12901,
+      "sha256": "b20c6ec29ed01f437fec3d892c1b486cf47e7fdcbeee5146b0eb541c3f62b9e2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.json",
+      "bytes": 5915,
+      "sha256": "0e22c3f2affb4cc366baee8347ebbeaafcf7807373f81c1cca949914919f24c4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.csv",
+      "bytes": 12848,
+      "sha256": "ac179f5df9482e662641ab33c8a7788cf0defe7a0275ce5f97cf6c46e3c1caa3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.json",
+      "bytes": 5886,
+      "sha256": "997d812ad9916634d99918f071a8c610f6ab25a57a9d8bd92c66287184dd8e0d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.csv",
+      "bytes": 12882,
+      "sha256": "52ec681dc3cafd83a4c4cec9f2094423cf5342040db3128cea20b8b34ea39f03"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.json",
+      "bytes": 5896,
+      "sha256": "a4ae0f469b458a4e390ffc7aa9d1528d9f804b7289b13ac3ec0aae33f2ef26da"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.csv",
+      "bytes": 12954,
+      "sha256": "28c627b78484d611226fdfa774bfa54cb7c245942ef40ee93f84edb4cea46d6b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.json",
+      "bytes": 5898,
+      "sha256": "fca1e64b402b24d7b5cb800997ef7a69a0c720f006f244d97ced8fab62447fba"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.csv",
+      "bytes": 12857,
+      "sha256": "eef79042925d556f895d61a259983783a83e1ff229a6ecf0ef28011fed2e057d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.json",
+      "bytes": 5903,
+      "sha256": "2c086c692e77c585d037847feb2a183b94e9b6a6729408d5e23a21f153248502"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.csv",
+      "bytes": 12877,
+      "sha256": "495cbccdd31d91b31b72b29ab25c3baac9bb867e48ad8f8a42f15d476e4872ab"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.json",
+      "bytes": 5900,
+      "sha256": "d69291fd418358b2ac303c9e2e4594a36dbf799de00891e0170d3f4c2e574727"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.csv",
+      "bytes": 14084,
+      "sha256": "3085dcbb10a6d6f9f56bab2c2dd218d722382439a16f6bb71475a038ce46aa5c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.json",
+      "bytes": 5903,
+      "sha256": "6945e705f8c075beaf8f567e5dac256d95747e01ad2b0dd038baab3ff8a5e20f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_threshold_proposal.json",
+      "bytes": 2540,
+      "sha256": "cb6f0b92c8d0c194db79f9adbe043cbe23e27df6bca9206ab083f66e478c1915"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Branch_2000_N1_learned_boundary_configured_recognition_12_threshold_source.json",
+      "bytes": 2357874,
+      "sha256": "3fcfd516ea1d1bd713a6863040605564ae465d687edf06fbb145a740f50c88a0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction.json",
+      "bytes": 8227104,
+      "sha256": "1a2c22e6c910781c9500b393c058bb1f2f2211f425f9d077ee2f5b7bd024c487"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_clock_grid_context_guard.json",
+      "bytes": 2682999,
+      "sha256": "8cc638a445e0a5cbf4fb8ccc2dd86d2e1c5c33b3ad48b0328d576a4562b981d8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_foreign_reset_grid_transaction.json",
+      "bytes": 2683005,
+      "sha256": "f79f8f8297c10841adf559040c65b857b91facdbd0aebb14f05e2adf3a2b2b07"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frequency_grid_context_guard.json",
+      "bytes": 2682995,
+      "sha256": "d30624f1ca3c4a51780365fa9e984ca32fbebbf1eb4ab2598e8a8b75ecef0c08"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_0.json",
+      "bytes": 88146,
+      "sha256": "d26a2ce984ccd7d3e6b4493f56db96f18306a8b6b0e1d207f565246ce8b3dff7"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_1.json",
+      "bytes": 494561,
+      "sha256": "43f1a7be0a6d79937d932912ad252a5110e8d33dd4d57849426b089f7ef7b30e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_2.json",
+      "bytes": 93176,
+      "sha256": "aa7c622e91714fdfa797ff93ffe22d85748056ea409e791697ec0d5514677c07"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_3.json",
+      "bytes": 528010,
+      "sha256": "47c65efd57bf4f188ddb0515c6c027a6ee3ea515f0a194f7c9bb38b6c284ed6f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_cancelled.json",
+      "bytes": 1654,
+      "sha256": "08c1347224061007d76b5b5802055a87f6475d5142b5d81be64cf3a9dc2ce4de"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_gap.json",
+      "bytes": 1653,
+      "sha256": "5f919a24482c0a587d5ce135fad21b09d0189feda4e585bd21ccdcac7fe2b936"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction.json",
+      "bytes": 8227070,
+      "sha256": "8e261132856b93c9c61ab1ba4e24ec02fec6a15289fb956078fdacfbe316f50d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_queued_cancel_grid_transaction.json",
+      "bytes": 2684411,
+      "sha256": "9427610b878d26d87847b10a53fff3a941ba33d5d39bbb952098074560dc32f6"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_running_cancel_grid_transaction.json",
+      "bytes": 2685325,
+      "sha256": "3b7e4e525c26aa80196940d5ba549a19a26a88730b967546c03c855a228e52b0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_state.json",
+      "bytes": 7222840,
+      "sha256": "412b7816d836ecfce5552b942affac9908f92a73edf94cf990e52968ce5f4159"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction.json",
+      "bytes": 23161163,
+      "sha256": "74b80984f58d95f3e59cdf4dc1b36f25c4e240bc2b184cc510348ceb5644dcc1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_assessment.json",
+      "bytes": 5343,
+      "sha256": "8b12dd453f548a697123169d04dad38881a1528e518eda1aaa6ce6297d1300fd"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_design.json",
+      "bytes": 2671,
+      "sha256": "cfde58598cd84147e25f11ae45800b59b84796f1c2aa1999f99928211ace0c75"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "36875d37781bd7de3caf8dbbe1b841d79d88c16877e2c54ea23bd7b9d65cb9ae"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_0.json",
+      "bytes": 87523,
+      "sha256": "30ea9ee1551ceb3d2bb32e562bd4b3100224546c5d865fc0b6b7f9fc8af0c03f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_1.json",
+      "bytes": 494565,
+      "sha256": "5bcbd6c2f6d312127bc9cd4a3868c52efedafedfefd381ba85cfb9f8824a838c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_2.json",
+      "bytes": 88714,
+      "sha256": "36f3cdd5905f18ecd646d49c1aeacd2477df5840c416323b323816b34da0441d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_3.json",
+      "bytes": 495754,
+      "sha256": "8c6fef52dad286e421a4eb1ebec36bb22209b9b30517c8ec2111765475d5512c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_cancelled.json",
+      "bytes": 1654,
+      "sha256": "742e53ab3c29a2c4df3001d636a7e4beea79c615761ad7234ade8371e83e1c92"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_gap.json",
+      "bytes": 1670,
+      "sha256": "72fcbae672d67c9fe38bdbc182d8d8f116f217b284a280cac90b5290e859e059"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_primary_calibration_assessment.json",
+      "bytes": 3297,
+      "sha256": "e2df5fe24863bc41266f9deaaa9e9fe19e5062066a4fb7f87b4c57cf1837f1ea"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_recognition_candidate.json",
+      "bytes": 3900672,
+      "sha256": "aff91ba846ce9e00fd470d555342145787245a89b51a6b23063b47fa49b6e2c8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_assessment.json",
+      "bytes": 5423,
+      "sha256": "a8f7e75fd5f78735fa66b9a04d5dfe9f23814c5cf7410f823f7dcde5cb7f55d8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_design.json",
+      "bytes": 2670,
+      "sha256": "6a5f73618bf3095bcfe75935719fb30ee0b4af27d7cf2c4448344a74e4844a7e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "ae09008d5c09a101537019ab378e037aeceabdf6a8b48e8b520ac9f1b1250b23"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_0.json",
+      "bytes": 92065,
+      "sha256": "e4de1fcdc64f5257c649d1d0e2e4a1f2686028db4a1ffcd379833b271fec0d01"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_1.json",
+      "bytes": 525886,
+      "sha256": "a8479dc3e2ad37445de6ea906ba5fe2fc398a175474181391b2e5505f01ab72d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_2.json",
+      "bytes": 99576,
+      "sha256": "f42e2b2d3624b7902239057d416ac287c8cd7f482c84850d3670363ed5bca8a4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_3.json",
+      "bytes": 537184,
+      "sha256": "c5631801605367bf7389a97ec1d19be411657da66b25206d76ce79a80864454c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_cancelled.json",
+      "bytes": 1653,
+      "sha256": "ec4a0913e71c1f4ba7cb142473d653ecbeedcb07b264736178684faa42c2b296"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_gap.json",
+      "bytes": 1669,
+      "sha256": "38ee4b227f3c49ab6ddbf2b01935c780f6cb817a6e3275cc4d34a3ba17448ea0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_primary_calibration_assessment.json",
+      "bytes": 3359,
+      "sha256": "46918e22c002c9cc0164ad367b421f7480de411f5300ebc5393d3ead3f3592a2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_recognition_candidate.json",
+      "bytes": 3900693,
+      "sha256": "170b08c41d1c2223a680e0aabc0f8ffe4cb7fbc85d6884ea48bd396dca0fb1fa"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_learned_state.json",
+      "bytes": 1253722,
+      "sha256": "2cf2c24ec146d7a29e66a8b3e996737e44d5d8777d9e9117e96268088c4b32ce"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "41782a7ddcb23c70d1e09e4bb0d292ab160001e04c30df33a671c723198fb64f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_legacy_v1_candidate.json",
+      "bytes": 3900693,
+      "sha256": "ac09b2265aeea2a98456321c090bf82b05736c574d34efabf98a9b891bf14c16"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_candidate.json",
+      "bytes": 3900677,
+      "sha256": "9cabf27ea78148f372a02374ae59d21627feed3035f1236d663f320ae74d9e71"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_zero_candidate.json",
+      "bytes": 3900673,
+      "sha256": "8d710dc44d8da49a57ff6a7cdb8d4e0f7e1056c5e0ab427038ef5f5016b05c68"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_zero_candidate.json",
+      "bytes": 3900672,
+      "sha256": "aa3f93925b8a9a4cd4107aeed29db594001fb1a34d678bfe247dcf9e175afd75"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_candidate.json",
+      "bytes": 3900767,
+      "sha256": "3ad23e3ca03d8186b8bb7cffdae84008afd77a14960c2582d03d0e477751ced6"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_assessment.json",
+      "bytes": 5402,
+      "sha256": "ee525797241533eea28c410a20e2c25300449d3d61c6d4a5ae5bce6572adc37c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_design.json",
+      "bytes": 2678,
+      "sha256": "08c6d1a456f0286e746fee76da632cc07d9b878ba56b11277f11b241288d4c4c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "bfa6002b8b6b83275261ad06428d889ece9a161be9fb84336ddd9c45a38f2e13"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_0.json",
+      "bytes": 88192,
+      "sha256": "f3cad45ad1625a739868cdd5158f980871ed2189001ad6602aa290f8ddfbb2bf"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_1.json",
+      "bytes": 494593,
+      "sha256": "1dd73ffe81d566cf519f1ae67ed9a8e8f4324d3b415c11a2fc73702ffd4da25a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_2.json",
+      "bytes": 93188,
+      "sha256": "3d66cda370b47dab66b5d32d4ef71b544ac9cf3593fda75c398dc1823adf10e0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_3.json",
+      "bytes": 526919,
+      "sha256": "f059e5dfc9bbdcbc437ccd0dd088e8908ad67800dcd4b3bb043bb05923761e64"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_cancelled.json",
+      "bytes": 1672,
+      "sha256": "7fbd57647e0591594210d53233f632ee77d3ab1c02604d8fe7e7a555788aae1c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_gap.json",
+      "bytes": 1676,
+      "sha256": "f4e331939be09607d50c882f55414cf42d5e45a2250917b98df78ae87481930f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_primary_calibration_assessment.json",
+      "bytes": 3313,
+      "sha256": "b43a20ddbccb2bc2cf3802ac7dc999adc9ca38b684a4fdb34a50a2f3579b732a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_protocol.json",
+      "bytes": 778,
+      "sha256": "0567d695037840a0acb5dc803b4da5d87ea5c9c7d071b4ef7d6cedb2d4c6b0e3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_restoration.json",
+      "bytes": 319,
+      "sha256": "7be2033497d030d60d34dce44ac075f1f8bba0dc34377370298a2893c23d344c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_assessment.json",
+      "bytes": 5392,
+      "sha256": "38d95cab85e64ababb464f9444787e72c434f43a5607f4bb0dfa0b07ac44b2eb"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_design.json",
+      "bytes": 2672,
+      "sha256": "19f5d053ff117099036fa0447cc18ff0c0521739e30b83568d05f8d3c897ac36"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "8073dc7f90d61632a39e3f0e8afef318ec1277e2fd43ff35834047f95d9b5c9c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_0.json",
+      "bytes": 88177,
+      "sha256": "84033405865e1fe7f9954434bb45c6bdd45453dc85a49510dfba2a923e817339"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_1.json",
+      "bytes": 494560,
+      "sha256": "b122883d62431f0dcd0f271b1956af9a86af4d5d293d75d6b6b8ecb18f0c1fd7"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_2.json",
+      "bytes": 93203,
+      "sha256": "3c83ca8c106e5d866ad6109008daea12cd57cb6282f756cedeff01ee66d61281"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_3.json",
+      "bytes": 526946,
+      "sha256": "92bd0284d96a5f3b079e92c3f1a57217eef6960185b5ddfaa7f4cac784797f4b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_cancelled.json",
+      "bytes": 1655,
+      "sha256": "d549d605e410a5aee43f9ca2e8d6bfb1308e07c45216bf6d7d490b1090b00982"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_gap.json",
+      "bytes": 1658,
+      "sha256": "b12e7bf0ba4224e9f3143ca3b0c21e15ac4d7bda413ab53439c80b2c27965f7b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_primary_calibration_assessment.json",
+      "bytes": 3291,
+      "sha256": "f7c2ccef733b2dd3e05327b423b8aa582568a19b99018b588c93f3bb75a35c83"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_signed_bounds_threshold_proposal.json",
+      "bytes": 2570,
+      "sha256": "9a5681dd53f3ae4b626cc05ea191e0a8685976d5e4ff66c2a95029b53b467c70"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_startup_after.json",
+      "bytes": 261669,
+      "sha256": "1845151689ed15021c2325f3797e30adc54940c8d90b2233e8dd8e6dba46ab3b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_startup_before.json",
+      "bytes": 261662,
+      "sha256": "1cb4a9423b0730e6111dcd9d6618e05f7f3e13badb52d582375d6df83c11796a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.json",
+      "bytes": 5873,
+      "sha256": "33467a6793505e20563d7459980dc15419ec282df14e09c0fc25b9c034f1d3bf"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.json",
+      "bytes": 5910,
+      "sha256": "60aa8e0c21ea31c7f5f900562d35989d858b33570d0cb1e5f4d5f5334846fb75"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.json",
+      "bytes": 5892,
+      "sha256": "e90a81d21ed62a2a26e10c93e20ab0d8c80c41da402e2e8f4e36ae1b6f9555a7"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.json",
+      "bytes": 5900,
+      "sha256": "0b87a208ae34a64b38e0c111441b6be298bc60cd7c41276d518045e19ae45274"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.json",
+      "bytes": 5961,
+      "sha256": "f131abda9d713b6644c0859ac87a4605fcc9ed96ea32ec8695bb6d7eade40c04"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.json",
+      "bytes": 5942,
+      "sha256": "6dd8ca1fd7a4b3201e7734c386d874e7fa4ee3b0a54cdff77b996d39d14091fc"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.json",
+      "bytes": 5931,
+      "sha256": "09d4341ec169f5a2d44f0722c4ba6f9049f3aac7149c881d55a6265b6c510588"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.json",
+      "bytes": 5900,
+      "sha256": "994d15fcdd284d341653b31eb299fbe157f337fde241efd30edad5ae92bc2c8d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.json",
+      "bytes": 5902,
+      "sha256": "f988bf97b810e4d853c8691cf21cda0a79142c2cb89666551aa701f8ea42f1ec"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.json",
+      "bytes": 5901,
+      "sha256": "c5858ca80445756d0abcf5d67cff60b3294afd1d1150dcb478c4dcf4bd493951"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.json",
+      "bytes": 5908,
+      "sha256": "84edbf06b0cd4f923ece87a723a6d9a5b690df389dd17c446bd234750fd59497"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.json",
+      "bytes": 5908,
+      "sha256": "ff8221048897e952c56fd0fd3366941e77f0d461c793868d7b101f3268e23c6a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.json",
+      "bytes": 5908,
+      "sha256": "205517116b02119bf1cd22df2ae387e780fffcc5e4f77de39e30e0f749b7c507"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.json",
+      "bytes": 5908,
+      "sha256": "a9a4e096ec87742beb942eabfe8eeec44724fa9aabe84462f8fe056ab5d965d8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_threshold_proposal.json",
+      "bytes": 2571,
+      "sha256": "358095316386baf26dc9f12604084c808291d6eafb6d9c71812ff725aa8e84a0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/baseline/Classic_2000_N1_learned_boundary_configured_recognition_12_threshold_source.json",
+      "bytes": 2544345,
+      "sha256": "64fabd1dc93627b5de4075e7ba2b1b2de1fde081947c094b15650e1bc85405a0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/build.log",
+      "bytes": 2378,
+      "sha256": "76ee62d4c4e24bd9014f269098397acabae72901c10e39ef34c5861000727540"
+    },
+    {
+      "path": "scope-missing-fixture-a1/checkout.log",
+      "bytes": 661,
+      "sha256": "4476daf075f04747deed9d4b830adf233da568e52ec6acd027911d20392025f5"
+    },
+    {
+      "path": "scope-missing-fixture-a1/configure.log",
+      "bytes": 1355,
+      "sha256": "a740fac45f9564a399e2cea70ca419846208a5ab4943c9c52afe9829c8da21d5"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native.log",
+      "bytes": 4283,
+      "sha256": "5c682c39e3ee9e72068825a7f89d5555f2f47217fb1a5fd745b805da1b0be295"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native.xml",
+      "bytes": 7528,
+      "sha256": "44ec01f963a59ac7c934003b847a12379f33958fe465e09ea979fb7bd217c8bf"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction.json",
+      "bytes": 7605140,
+      "sha256": "ddeedff03133c8a61a9b7ac59d76827c21dc5000ae36e30b257b012f13976364"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_clock_grid_context_guard.json",
+      "bytes": 2486639,
+      "sha256": "e76b30db369c678b420df3215546614bce84b2ddb67cbe11b77679a71f1195f6"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_foreign_reset_grid_transaction.json",
+      "bytes": 2486645,
+      "sha256": "7b3f5436238383421aac95149a53ba5d888d7cc26d8b19c629b3933f7742795a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frequency_grid_context_guard.json",
+      "bytes": 2486635,
+      "sha256": "5d30bd5f53ce80cc62b55f24e439ae3427e118b4ffe29e6936a2382fb7a1ee78"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_0.json",
+      "bytes": 79278,
+      "sha256": "360aa90f197496063175305d5b9bcde51a6c885c8c7502d83d42af80023fecfc"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_1.json",
+      "bytes": 442910,
+      "sha256": "f037c24d4c23590515ab58c6fed2ffa7e12ef2527ab27af44bea67bfc94d3194"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_2.json",
+      "bytes": 83958,
+      "sha256": "9b2c649a4457c7abe1b59cdf30ee7563d79b9acaae2fb9edb44a672b1ac90516"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_3.json",
+      "bytes": 475124,
+      "sha256": "88232d22cc7fd8266961a48117496e557725320abdf62d77488624ecf1ccd074"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_cancelled.json",
+      "bytes": 1644,
+      "sha256": "0050ed0566bc169ca7c251c7c167e1e181fba35e3c7ff7d0782f37bcd1c13f54"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_gap.json",
+      "bytes": 1636,
+      "sha256": "6aab27f9221d47716850f271b56f495a7057c4ce8bfd43bf4a85e8f1f48c6e0a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction.json",
+      "bytes": 7605061,
+      "sha256": "a6bd8c20112927735033fc3f68b834f5e1791b913b0e2b05a3ac5605718b4252"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_queued_cancel_grid_transaction.json",
+      "bytes": 2488050,
+      "sha256": "bda09f1eb2471cac743cf3b0c6d16e9f69747a81b5a1703340f8e0a34f2b11df"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_running_cancel_grid_transaction.json",
+      "bytes": 2488932,
+      "sha256": "b0a92926144c0f1c36960146b2a285777e0b1627293b106cc440355b6ecc7f0f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_state.json",
+      "bytes": 6657852,
+      "sha256": "451585624fceb317ec53bf263820620a70dd04f0c4685f2ab6332e2d71488acf"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction.json",
+      "bytes": 21349616,
+      "sha256": "61276c3888b2b6609932e5f844ce12690f2f553920627ca97b1143bb1848764a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_assessment.json",
+      "bytes": 5354,
+      "sha256": "ea236816e064b61181fafa5e242579e6ec3def025701fdc6897b34aa6c25b443"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_design.json",
+      "bytes": 2670,
+      "sha256": "a416b592e3082f09a4ec27a6c5932a6967e5a927da37e8809664c02a2d1d0c6b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "fac89c3ba4062f8d933ce06a378f72dc7b1173a8f69d0bccb64d0e9ccb56a421"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_0.json",
+      "bytes": 78620,
+      "sha256": "762eec9336b847902b2513b726d1dcfd0dc8cc84db2f360d8afb44243f3ccc2c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_1.json",
+      "bytes": 442940,
+      "sha256": "dc3bfeb87d4ba4f4377b8becf4e178704cf91ddc3aff88e824b6eab916b7dbd6"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_2.json",
+      "bytes": 79362,
+      "sha256": "3f375de5dfbf21eee643b77f35d2ba7e1cb4470e0fe391df672ae9a250ba9b50"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_3.json",
+      "bytes": 443772,
+      "sha256": "d258a83a36bdd92dd4826d3bffc5b8be7085d09e3b78e79365b9822b86650bef"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_cancelled.json",
+      "bytes": 1637,
+      "sha256": "3bc238634100fef2a8d275b7158a6259e9f117f50c41147d30d462997989c816"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_gap.json",
+      "bytes": 1640,
+      "sha256": "13d2ba5b545d245733891f3507e038b11826ce5b713d97ffbf3d733832bae47c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_primary_calibration_assessment.json",
+      "bytes": 3278,
+      "sha256": "10d08adc877f49877b27d16e54139e191b230f29d5998114ba2bdc1282e29494"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_high_recognition_candidate.json",
+      "bytes": 3613631,
+      "sha256": "fd7f404d0c3ca1256987ec024eb1fff3fe7990b1f148085ef2fd5b0ce58033c1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_assessment.json",
+      "bytes": 5432,
+      "sha256": "265cc13ccd6810882f8dccce89eee028bb7d9809f340e3842f988735229415f1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_design.json",
+      "bytes": 2669,
+      "sha256": "057da5067268114a6b2d87e5a6c0842e472c33263029d8f58990ecf8f27d2fb0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "fc214a3529bc4d10f0b4f8a9f985253631bea39b04635cd0722977d38c5868f5"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_0.json",
+      "bytes": 83565,
+      "sha256": "6998c2ae48ffa4bed2fddb912e32b543a40ff429ad19b8872850d5cd7bc2e4e1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_1.json",
+      "bytes": 475864,
+      "sha256": "02cfdf32d2855882176441204f0a2f0b70576559c93c48ad847ece66e305ec48"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_2.json",
+      "bytes": 91110,
+      "sha256": "30eefe41abea3c26502b8bf777789a15e6022ba842a98ad3d3c1dba9d0736502"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_3.json",
+      "bytes": 488666,
+      "sha256": "dfa1ac0287f4254e12b1c4b4b914bda5cc5ef9e8ac0e2c25568c3e4961577736"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_cancelled.json",
+      "bytes": 1647,
+      "sha256": "68f0dabd3c060e6eb8b17ad4e142268496c386a39bced063d192a0da00552969"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_gap.json",
+      "bytes": 1639,
+      "sha256": "f4d9bfcc913cdd77d6087eeaea7bb6b45855c76b7a247558eac03cefd04e300c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_primary_calibration_assessment.json",
+      "bytes": 3360,
+      "sha256": "08917b55c5be4b3058b60ad65725e74910616b67e7b73bad566ac5a15612d854"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_candidate_low_recognition_candidate.json",
+      "bytes": 3613652,
+      "sha256": "52f067ce8d1730a2d3efeb695cc6f59716c2a67af9036669dd9bec2ddb73e255"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_learned_state.json",
+      "bytes": 1162889,
+      "sha256": "e7fe1b93e47a86b08082526ab3daf626eacf56637d5791468a2048ae6bbe3559"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_learned_summary.json",
+      "bytes": 602839,
+      "sha256": "d1577c3b424a091e7ecca556ce55e76a3e832e38418635359c17bc09d3c0b6f1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_legacy_v1_candidate.json",
+      "bytes": 3613652,
+      "sha256": "bf04c316669d10e338750f3e81bba8046f86eaa497e63afee5daf8fda68759a1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_candidate.json",
+      "bytes": 3613636,
+      "sha256": "dee5ea54ddecd8c93986152465a7d3491f64e2edc23098cc6c9049e07cbebb01"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_zero_candidate.json",
+      "bytes": 3613632,
+      "sha256": "1a266317e09566eb5aff7a0c2d9411cb72647b8c6ba70b37026fe8b05cb41b02"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_zero_candidate.json",
+      "bytes": 3613631,
+      "sha256": "1b855b8d0ed343fd6ffe0a754d5cb2ed8457ceef73581ed8332fc9df8be21165"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_candidate.json",
+      "bytes": 3613727,
+      "sha256": "cadc2526626fed5db8d82292604b54a3e4be10b51fc6a975b269e7c88de8dfa8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_assessment.json",
+      "bytes": 5438,
+      "sha256": "7736805cc008566ebce6ca30b1d7071c3460da48e12c7acb7ddbb72c9dfc42ea"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_design.json",
+      "bytes": 2677,
+      "sha256": "829f421287443b50982cab6cc52b13ae84d02d2c7574443a65c47e6d2ba9f97e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "a7ee32f39e9befe963aa41ebfd6fe594967d652647f1b4c3f163aeff1e40693d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_0.json",
+      "bytes": 79253,
+      "sha256": "453682b1d3ce5b47a57d5d416bdb8465f8a80a2f4051414be1ff2ee3f11b77c3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_1.json",
+      "bytes": 442960,
+      "sha256": "8945401dc182e38574f63e59c81c42c7c26974caed6b3852c2c1f693eb56e35d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_2.json",
+      "bytes": 83946,
+      "sha256": "e33462ecf2658c1c7d8d5eea241bb4c5bf9013c2b0a5c3ddb6a1a196c27be98f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_3.json",
+      "bytes": 475087,
+      "sha256": "705f377668a2ada708dec2655d1c59f2c98e6f5173699bf3c540d43d278e81e2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_cancelled.json",
+      "bytes": 1644,
+      "sha256": "b7d93e9d49d703b9896b391f2366e67ce3273d5872b56937caf04fa5d0eac87e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_gap.json",
+      "bytes": 1659,
+      "sha256": "3fa6e87c82d50d9841abbef9d098814b877a7c0df6dec13f40ff405c3039c30a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_primary_calibration_assessment.json",
+      "bytes": 3343,
+      "sha256": "7229cabbd2dde66f4604bb645d10c169c2325f1ab704ea6c3bf22a89bfab5c5e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_protocol.json",
+      "bytes": 776,
+      "sha256": "85d8ed52a16108575968297c82f739fdd9699c63cae25e9ec0cff2d6af7af442"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_restoration.json",
+      "bytes": 319,
+      "sha256": "4a9085df903a802876c6a39dc305da2fb406e355db474cc6873c791d9c79ef0f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_assessment.json",
+      "bytes": 5406,
+      "sha256": "fe23886aaf6c248f2c5be1f0a158742ff552f0f3f493ee8cacff5e6d59de3265"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_design.json",
+      "bytes": 2671,
+      "sha256": "7e46693ed655207e121ef84b12d48f27e2f4ee042d955512096e2e42a8bfd334"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "b38823ae21e6e59ba5f157b158caf74b1d674b102ccf95f368044c7645e02916"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_0.json",
+      "bytes": 79271,
+      "sha256": "226c083f5d11ae6d09323afba0174915f9376b99844b67ed1aab0564a5f10448"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_1.json",
+      "bytes": 442965,
+      "sha256": "fcf873c2f585f26a397cf84a11df463f7df591f0a9d5e540d9ab0deba1dce178"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_2.json",
+      "bytes": 83973,
+      "sha256": "ba1237847286e81e6c6929c8697b850800faf3adc962c75902dbd830d28543aa"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_3.json",
+      "bytes": 475083,
+      "sha256": "45f7664c75ae6bce77238b4a72d5bbca31eaf8b88dd9f37486763f0ed7c69057"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_cancelled.json",
+      "bytes": 1638,
+      "sha256": "270565e8ca6a3a1774aae8395675c4b4b9f97c9ac18bbb2d3d640c46dc4270a9"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_gap.json",
+      "bytes": 1634,
+      "sha256": "bd34968d551e3195ca444150e2fafcde898fd26668a2f32c5b7dbf6f47351ba2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_proposal_search_primary_calibration_assessment.json",
+      "bytes": 3301,
+      "sha256": "42bd0cd45888629fb96f1891e97238d9f2317fc7bcf6bda520be4388ee6fcaf0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_signed_bounds_threshold_proposal.json",
+      "bytes": 2539,
+      "sha256": "6193558c323578e3313cff67ddf58a5f0c52b14d1d482a2e94b4cc3258fc3f42"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_startup_after.json",
+      "bytes": 196066,
+      "sha256": "aab75b9c8bffd6cb5c8491dd62745f4062b1d0ebffc33042e0115d37f21b8fff"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_startup_before.json",
+      "bytes": 196062,
+      "sha256": "3fdd5b2d5532af892324ff34e318256227d6d6fe277603ce254ee872cb32dbf4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.csv",
+      "bytes": 12871,
+      "sha256": "beac831b7213adf3cad06230594e6a3897994f59a0151c4ce4e60814045f6d93"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.json",
+      "bytes": 5918,
+      "sha256": "f03d71fe2137d9b15030523a9a9c2ad8b957d4c9d88ad0a3dad6b48256b30a85"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.csv",
+      "bytes": 14183,
+      "sha256": "7b3417bf627e39b11115f12b019621a0d949279175f2169313e792e8ff72481b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.json",
+      "bytes": 5903,
+      "sha256": "74c5893f235493df3df9fa7daa3f9fd06457541922ea5128628845f76a7e51ea"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.csv",
+      "bytes": 14072,
+      "sha256": "75eeafa7abdf933cdecfd3e08d602623cd59d1c7929c8ebc0dc7f7ed39e71317"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.json",
+      "bytes": 5892,
+      "sha256": "be7cfc334fc607184402df814b8324a434b5c43b012e4874c4a004819a1649b9"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.csv",
+      "bytes": 14052,
+      "sha256": "cccb107e693dd261e8dac4d08f55350478fd05ea893c253dfd160c3fc1123922"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.json",
+      "bytes": 5920,
+      "sha256": "237735d427bc278b50893dc40e118c507bfa7fabbdf0566c6a08b54a1f6d183f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.csv",
+      "bytes": 14085,
+      "sha256": "8b85b39139e39a2b8adde77af48629984ab6cc49246c37a1c46b118358dbcd57"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.json",
+      "bytes": 5932,
+      "sha256": "807bb8691889a23e2550eeba104274357543fbca167a1dc16ce7eca95a63333e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.csv",
+      "bytes": 14070,
+      "sha256": "cd4483b83133e02b0577dba29480dd95298aaf19f7594d0deafb34200b195c24"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.json",
+      "bytes": 5932,
+      "sha256": "ac1e5fcd730d208d4383f66af3eb53d47b282ccddc233759bfc737b22b4ee1d6"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.csv",
+      "bytes": 12859,
+      "sha256": "726909aa8fa0aa97fe935103f5211fe413e21f2b7e2cd15bf60660ec96b12759"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.json",
+      "bytes": 5927,
+      "sha256": "6752eca90f2671a3e2561eadb63e772537919dea44e5fe18271272f751dba0be"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.csv",
+      "bytes": 12901,
+      "sha256": "b20c6ec29ed01f437fec3d892c1b486cf47e7fdcbeee5146b0eb541c3f62b9e2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.json",
+      "bytes": 5915,
+      "sha256": "0e22c3f2affb4cc366baee8347ebbeaafcf7807373f81c1cca949914919f24c4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.csv",
+      "bytes": 12848,
+      "sha256": "ac179f5df9482e662641ab33c8a7788cf0defe7a0275ce5f97cf6c46e3c1caa3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.json",
+      "bytes": 5886,
+      "sha256": "997d812ad9916634d99918f071a8c610f6ab25a57a9d8bd92c66287184dd8e0d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.csv",
+      "bytes": 12882,
+      "sha256": "52ec681dc3cafd83a4c4cec9f2094423cf5342040db3128cea20b8b34ea39f03"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.json",
+      "bytes": 5896,
+      "sha256": "a4ae0f469b458a4e390ffc7aa9d1528d9f804b7289b13ac3ec0aae33f2ef26da"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.csv",
+      "bytes": 12954,
+      "sha256": "28c627b78484d611226fdfa774bfa54cb7c245942ef40ee93f84edb4cea46d6b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.json",
+      "bytes": 5898,
+      "sha256": "fca1e64b402b24d7b5cb800997ef7a69a0c720f006f244d97ced8fab62447fba"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.csv",
+      "bytes": 12857,
+      "sha256": "eef79042925d556f895d61a259983783a83e1ff229a6ecf0ef28011fed2e057d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.json",
+      "bytes": 5903,
+      "sha256": "2c086c692e77c585d037847feb2a183b94e9b6a6729408d5e23a21f153248502"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.csv",
+      "bytes": 12877,
+      "sha256": "495cbccdd31d91b31b72b29ab25c3baac9bb867e48ad8f8a42f15d476e4872ab"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.json",
+      "bytes": 5900,
+      "sha256": "d69291fd418358b2ac303c9e2e4594a36dbf799de00891e0170d3f4c2e574727"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.csv",
+      "bytes": 14084,
+      "sha256": "3085dcbb10a6d6f9f56bab2c2dd218d722382439a16f6bb71475a038ce46aa5c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.json",
+      "bytes": 5903,
+      "sha256": "6945e705f8c075beaf8f567e5dac256d95747e01ad2b0dd038baab3ff8a5e20f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_threshold_proposal.json",
+      "bytes": 2540,
+      "sha256": "cb6f0b92c8d0c194db79f9adbe043cbe23e27df6bca9206ab083f66e478c1915"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Branch_2000_N1_learned_boundary_configured_recognition_12_threshold_source.json",
+      "bytes": 2357874,
+      "sha256": "0a64cd0d36cadd322a0f6429093c02b99201f9c9f49a52f524826b78296c1911"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_budget_grid_transaction.json",
+      "bytes": 8227106,
+      "sha256": "db9631b66c2170aa34c88d2a229eec563d434753b52147e59813e6cc86e50d92"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_clock_grid_context_guard.json",
+      "bytes": 2683000,
+      "sha256": "5b552da699bceec79a1306ffe686ec8881be7f865cd33905b62d809b5783c188"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_foreign_reset_grid_transaction.json",
+      "bytes": 2683006,
+      "sha256": "6806259ac0ec00f22e0bb75d6bec9b59b9f3e88a5823e9fa1e9744ceff10d81a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frequency_grid_context_guard.json",
+      "bytes": 2682996,
+      "sha256": "b62e28ed975bb26b2a06bf6dad50bb9bbbca8ab5e7007087f309a0b90daebd75"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_0.json",
+      "bytes": 88146,
+      "sha256": "d26a2ce984ccd7d3e6b4493f56db96f18306a8b6b0e1d207f565246ce8b3dff7"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_1.json",
+      "bytes": 494561,
+      "sha256": "43f1a7be0a6d79937d932912ad252a5110e8d33dd4d57849426b089f7ef7b30e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_2.json",
+      "bytes": 93176,
+      "sha256": "aa7c622e91714fdfa797ff93ffe22d85748056ea409e791697ec0d5514677c07"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_3.json",
+      "bytes": 528010,
+      "sha256": "47c65efd57bf4f188ddb0515c6c027a6ee3ea515f0a194f7c9bb38b6c284ed6f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_cancelled.json",
+      "bytes": 1654,
+      "sha256": "08c1347224061007d76b5b5802055a87f6475d5142b5d81be64cf3a9dc2ce4de"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_frozen_trial_gap.json",
+      "bytes": 1653,
+      "sha256": "5f919a24482c0a587d5ce135fad21b09d0189feda4e585bd21ccdcac7fe2b936"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_nonseparable_grid_transaction.json",
+      "bytes": 8227072,
+      "sha256": "ed73c05324f40013f0e3f832d97c892be68de89e142da82ba3457246f5ac0573"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_queued_cancel_grid_transaction.json",
+      "bytes": 2684412,
+      "sha256": "6453ecedc85bd4d9eaaccbc82efe43f0006ff4a4b7cbf6d0c3b3332bb503f044"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_running_cancel_grid_transaction.json",
+      "bytes": 2685326,
+      "sha256": "7af126546ed8530b226d54d58da7a60fc0a1084bbe5176366eff73ad59ec7bd1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_state.json",
+      "bytes": 7222841,
+      "sha256": "18b87f6c66bd331490fa6c3216ae98b0dbfbee9f1319e094599e4c01b1193750"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_calibrated_success_grid_transaction.json",
+      "bytes": 23161167,
+      "sha256": "1103d81a7b92d9076a02efde0689bc7c6fa649cfd6363dfc9e434aea60ff359b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_assessment.json",
+      "bytes": 5343,
+      "sha256": "8b12dd453f548a697123169d04dad38881a1528e518eda1aaa6ce6297d1300fd"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_design.json",
+      "bytes": 2671,
+      "sha256": "cfde58598cd84147e25f11ae45800b59b84796f1c2aa1999f99928211ace0c75"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "36875d37781bd7de3caf8dbbe1b841d79d88c16877e2c54ea23bd7b9d65cb9ae"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_0.json",
+      "bytes": 87523,
+      "sha256": "30ea9ee1551ceb3d2bb32e562bd4b3100224546c5d865fc0b6b7f9fc8af0c03f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_1.json",
+      "bytes": 494565,
+      "sha256": "5bcbd6c2f6d312127bc9cd4a3868c52efedafedfefd381ba85cfb9f8824a838c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_2.json",
+      "bytes": 88714,
+      "sha256": "36f3cdd5905f18ecd646d49c1aeacd2477df5840c416323b323816b34da0441d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_3.json",
+      "bytes": 495754,
+      "sha256": "8c6fef52dad286e421a4eb1ebec36bb22209b9b30517c8ec2111765475d5512c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_cancelled.json",
+      "bytes": 1654,
+      "sha256": "742e53ab3c29a2c4df3001d636a7e4beea79c615761ad7234ade8371e83e1c92"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_frozen_trial_gap.json",
+      "bytes": 1670,
+      "sha256": "72fcbae672d67c9fe38bdbc182d8d8f116f217b284a280cac90b5290e859e059"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_primary_calibration_assessment.json",
+      "bytes": 3297,
+      "sha256": "e2df5fe24863bc41266f9deaaa9e9fe19e5062066a4fb7f87b4c57cf1837f1ea"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_high_recognition_candidate.json",
+      "bytes": 3900673,
+      "sha256": "20487d7df47bb16d39551e05fb6f4d2231256380391b224cc2c8139f077f7b0b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_assessment.json",
+      "bytes": 5423,
+      "sha256": "a8f7e75fd5f78735fa66b9a04d5dfe9f23814c5cf7410f823f7dcde5cb7f55d8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_design.json",
+      "bytes": 2670,
+      "sha256": "6a5f73618bf3095bcfe75935719fb30ee0b4af27d7cf2c4448344a74e4844a7e"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "ae09008d5c09a101537019ab378e037aeceabdf6a8b48e8b520ac9f1b1250b23"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_0.json",
+      "bytes": 92065,
+      "sha256": "e4de1fcdc64f5257c649d1d0e2e4a1f2686028db4a1ffcd379833b271fec0d01"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_1.json",
+      "bytes": 525886,
+      "sha256": "a8479dc3e2ad37445de6ea906ba5fe2fc398a175474181391b2e5505f01ab72d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_2.json",
+      "bytes": 99576,
+      "sha256": "f42e2b2d3624b7902239057d416ac287c8cd7f482c84850d3670363ed5bca8a4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_3.json",
+      "bytes": 537184,
+      "sha256": "c5631801605367bf7389a97ec1d19be411657da66b25206d76ce79a80864454c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_cancelled.json",
+      "bytes": 1653,
+      "sha256": "ec4a0913e71c1f4ba7cb142473d653ecbeedcb07b264736178684faa42c2b296"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_frozen_trial_gap.json",
+      "bytes": 1669,
+      "sha256": "38ee4b227f3c49ab6ddbf2b01935c780f6cb817a6e3275cc4d34a3ba17448ea0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_primary_calibration_assessment.json",
+      "bytes": 3359,
+      "sha256": "46918e22c002c9cc0164ad367b421f7480de411f5300ebc5393d3ead3f3592a2"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_candidate_low_recognition_candidate.json",
+      "bytes": 3900694,
+      "sha256": "628e721a502464d551d6fe05f2c458af7e90edbc0d970f03de154622a1c77a32"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_learned_state.json",
+      "bytes": 1253723,
+      "sha256": "3c8f21ce5787c989a737e17e15399b03c2c40dabd31b9c650ef55a7e74d35233"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_learned_summary.json",
+      "bytes": 825311,
+      "sha256": "41782a7ddcb23c70d1e09e4bb0d292ab160001e04c30df33a671c723198fb64f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_legacy_v1_candidate.json",
+      "bytes": 3900694,
+      "sha256": "b9f6dda95312cee5cf095c6bd10c263f6f4677b2765e50f2bdc0403d5dc3eaac"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_candidate.json",
+      "bytes": 3900678,
+      "sha256": "5f896c6d9007a11d3520ae6fcf22d417dff02b6d88ad62282acac5c959c008b4"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_negative_zero_candidate.json",
+      "bytes": 3900674,
+      "sha256": "2ff1b9c3466a7dcb1126aeddacc94d5a2b32fe8521d70d77f250db0771425048"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_numeric_domain_zero_candidate.json",
+      "bytes": 3900673,
+      "sha256": "4d8cd0dd7ac41329ba85eaba092d60f7cfdfb32531e6259281b48e6472ab9f94"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_candidate.json",
+      "bytes": 3900768,
+      "sha256": "948ac8193a19296b64fa7a249b2ca0e5affd12bb7f17627bf799b787d4e675af"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_assessment.json",
+      "bytes": 5402,
+      "sha256": "ee525797241533eea28c410a20e2c25300449d3d61c6d4a5ae5bce6572adc37c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_design.json",
+      "bytes": 2678,
+      "sha256": "08c6d1a456f0286e746fee76da632cc07d9b878ba56b11277f11b241288d4c4c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "bfa6002b8b6b83275261ad06428d889ece9a161be9fb84336ddd9c45a38f2e13"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_0.json",
+      "bytes": 88192,
+      "sha256": "f3cad45ad1625a739868cdd5158f980871ed2189001ad6602aa290f8ddfbb2bf"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_1.json",
+      "bytes": 494593,
+      "sha256": "1dd73ffe81d566cf519f1ae67ed9a8e8f4324d3b415c11a2fc73702ffd4da25a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_2.json",
+      "bytes": 93188,
+      "sha256": "3d66cda370b47dab66b5d32d4ef71b544ac9cf3593fda75c398dc1823adf10e0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_3.json",
+      "bytes": 526919,
+      "sha256": "f059e5dfc9bbdcbc437ccd0dd088e8908ad67800dcd4b3bb043bb05923761e64"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_cancelled.json",
+      "bytes": 1672,
+      "sha256": "7fbd57647e0591594210d53233f632ee77d3ab1c02604d8fe7e7a555788aae1c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_frozen_trial_gap.json",
+      "bytes": 1676,
+      "sha256": "f4e331939be09607d50c882f55414cf42d5e45a2250917b98df78ae87481930f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_confirmation_primary_calibration_assessment.json",
+      "bytes": 3313,
+      "sha256": "b43a20ddbccb2bc2cf3802ac7dc999adc9ca38b684a4fdb34a50a2f3579b732a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_protocol.json",
+      "bytes": 778,
+      "sha256": "760bf3e17ae183e7df4d8d9aaea7803bc559391a7b4d2fc9b50e7bb3b7c3f86f"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_restoration.json",
+      "bytes": 319,
+      "sha256": "a443aaa1ea3b5415772bb3548d83d5cd501a163560fcb2fb4b7cd96bf03a421b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_assessment.json",
+      "bytes": 5392,
+      "sha256": "38d95cab85e64ababb464f9444787e72c434f43a5607f4bb0dfa0b07ac44b2eb"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_design.json",
+      "bytes": 2672,
+      "sha256": "19f5d053ff117099036fa0447cc18ff0c0521739e30b83568d05f8d3c897ac36"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_calibration_persistence.json",
+      "bytes": 238,
+      "sha256": "8073dc7f90d61632a39e3f0e8afef318ec1277e2fd43ff35834047f95d9b5c9c"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_0.json",
+      "bytes": 88177,
+      "sha256": "84033405865e1fe7f9954434bb45c6bdd45453dc85a49510dfba2a923e817339"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_1.json",
+      "bytes": 494560,
+      "sha256": "b122883d62431f0dcd0f271b1956af9a86af4d5d293d75d6b6b8ecb18f0c1fd7"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_2.json",
+      "bytes": 93203,
+      "sha256": "3c83ca8c106e5d866ad6109008daea12cd57cb6282f756cedeff01ee66d61281"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_3.json",
+      "bytes": 526946,
+      "sha256": "92bd0284d96a5f3b079e92c3f1a57217eef6960185b5ddfaa7f4cac784797f4b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_cancelled.json",
+      "bytes": 1655,
+      "sha256": "d549d605e410a5aee43f9ca2e8d6bfb1308e07c45216bf6d7d490b1090b00982"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_frozen_trial_gap.json",
+      "bytes": 1658,
+      "sha256": "b12e7bf0ba4224e9f3143ca3b0c21e15ac4d7bda413ab53439c80b2c27965f7b"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_proposal_search_primary_calibration_assessment.json",
+      "bytes": 3291,
+      "sha256": "f7c2ccef733b2dd3e05327b423b8aa582568a19b99018b588c93f3bb75a35c83"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_signed_bounds_threshold_proposal.json",
+      "bytes": 2570,
+      "sha256": "9a5681dd53f3ae4b626cc05ea191e0a8685976d5e4ff66c2a95029b53b467c70"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_startup_after.json",
+      "bytes": 261668,
+      "sha256": "2e6a52be5a73c0b7eaa25f6ae23cd26428addaaa40479e45d8f9a45905b23499"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_startup_before.json",
+      "bytes": 261662,
+      "sha256": "1cb4a9423b0730e6111dcd9d6618e05f7f3e13badb52d582375d6df83c11796a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.csv",
+      "bytes": 22074,
+      "sha256": "96bcd816301b54bda3397e1ef8b1e547665337d00fc2bf2c0811f01f51d5a7ee"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_1.json",
+      "bytes": 5873,
+      "sha256": "33467a6793505e20563d7459980dc15419ec282df14e09c0fc25b9c034f1d3bf"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.csv",
+      "bytes": 20912,
+      "sha256": "3bf7d2420fd6656c41c269c9899ff9adeda865eae044456826be28c4d7bf2a64"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_10.json",
+      "bytes": 5910,
+      "sha256": "60aa8e0c21ea31c7f5f900562d35989d858b33570d0cb1e5f4d5f5334846fb75"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.csv",
+      "bytes": 20852,
+      "sha256": "6f52779403bab505772827e846c67d8dfab74be339991df0cbb23d041156a5ca"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_11.json",
+      "bytes": 5892,
+      "sha256": "e90a81d21ed62a2a26e10c93e20ab0d8c80c41da402e2e8f4e36ae1b6f9555a7"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.csv",
+      "bytes": 21819,
+      "sha256": "c394fbcd52b1c6394689943a052a68253bcf81d45af22ca71f43f08834286ca3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_12.json",
+      "bytes": 5900,
+      "sha256": "0b87a208ae34a64b38e0c111441b6be298bc60cd7c41276d518045e19ae45274"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.csv",
+      "bytes": 21875,
+      "sha256": "6c2540b0addcda1f07b323c6aea962dc86bd331efe8ab061bf0b2c137f54b2c9"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_13.json",
+      "bytes": 5961,
+      "sha256": "f131abda9d713b6644c0859ac87a4605fcc9ed96ea32ec8695bb6d7eade40c04"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.csv",
+      "bytes": 21860,
+      "sha256": "ca78e995d71da51725df11dbc91d09970cb142752b6f74be75621252eccb9fcc"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_14.json",
+      "bytes": 5942,
+      "sha256": "6dd8ca1fd7a4b3201e7734c386d874e7fa4ee3b0a54cdff77b996d39d14091fc"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.csv",
+      "bytes": 22044,
+      "sha256": "1278cbef1d31c36dc1f90f0f3ed8bfcb442cee3cfffc61e5a137abfca2002d2a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_2.json",
+      "bytes": 5931,
+      "sha256": "09d4341ec169f5a2d44f0722c4ba6f9049f3aac7149c881d55a6265b6c510588"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.csv",
+      "bytes": 22419,
+      "sha256": "b33471e42f522c6e1cd8dde30b6614589925e73d1d76712a4976ff18a7dfd216"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_3.json",
+      "bytes": 5900,
+      "sha256": "994d15fcdd284d341653b31eb299fbe157f337fde241efd30edad5ae92bc2c8d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.csv",
+      "bytes": 22835,
+      "sha256": "3ec5027b7dde4cc6b41b4fcc62e16a8137bfeb57298ca91ab71441b3463bbdc1"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_4.json",
+      "bytes": 5902,
+      "sha256": "f988bf97b810e4d853c8691cf21cda0a79142c2cb89666551aa701f8ea42f1ec"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.csv",
+      "bytes": 22906,
+      "sha256": "a4991be1fad6453d71f6ba45cbdbecc1a1ea85e742d1d2b6423f8c9e85bdab58"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_5.json",
+      "bytes": 5901,
+      "sha256": "c5858ca80445756d0abcf5d67cff60b3294afd1d1150dcb478c4dcf4bd493951"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.csv",
+      "bytes": 22020,
+      "sha256": "d053e6cdc1525915d027ea4c966c381680201f4ced03ec2c5dba4725bf957e42"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_6.json",
+      "bytes": 5908,
+      "sha256": "84edbf06b0cd4f923ece87a723a6d9a5b690df389dd17c446bd234750fd59497"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.csv",
+      "bytes": 20840,
+      "sha256": "84fde38ae033930cd101c99f7cac2e368898d427b6598df988d7db42122784f3"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_7.json",
+      "bytes": 5908,
+      "sha256": "ff8221048897e952c56fd0fd3366941e77f0d461c793868d7b101f3268e23c6a"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.csv",
+      "bytes": 20849,
+      "sha256": "dd9a79e6e0dfdfa884b4f7aca9247e51fae319347f6c6e10f66487ca6e851d52"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_8.json",
+      "bytes": 5908,
+      "sha256": "205517116b02119bf1cd22df2ae387e780fffcc5e4f77de39e30e0f749b7c507"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.csv",
+      "bytes": 20948,
+      "sha256": "93fb0db9439316b9cbde8f87953af4a66369bf4d2742a97b7505aee029be2396"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_state_trial_9.json",
+      "bytes": 5908,
+      "sha256": "a9a4e096ec87742beb942eabfe8eeec44724fa9aabe84462f8fe056ab5d965d8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_threshold_proposal.json",
+      "bytes": 2571,
+      "sha256": "358095316386baf26dc9f12604084c808291d6eafb6d9c71812ff725aa8e84a0"
+    },
+    {
+      "path": "scope-missing-fixture-a1/native/Classic_2000_N1_learned_boundary_configured_recognition_12_threshold_source.json",
+      "bytes": 2544346,
+      "sha256": "f0106379a73982033cb3c80a1c9cf91033ee5d75dad68bb1b20a6d18b22632c5"
+    },
+    {
+      "path": "scope-missing-fixture-a1/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "scope-missing-fixture-a1/process-inventory.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "scope-missing-fixture-a1/runner.sh",
+      "bytes": 4277,
+      "sha256": "fd85d2d97c3b9ec228e4a4b4f3d74833e145eb68399fb4cdfc4c0e4fb3b20c4d"
+    },
+    {
+      "path": "scope-missing-fixture-a1/runtime-before.json",
+      "bytes": 24413,
+      "sha256": "cd5659790dd4951cb33ab2106166bf463e50e14b51d33de7cc3ce32d50ef9b31"
+    },
+    {
+      "path": "scope-missing-fixture-a1/source-closure.txt",
+      "bytes": 648,
+      "sha256": "0e0bcf3f2ee29fcb35384ead286d9f9b5b607344ce02d7d925670da7d3a784a8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "scope-missing-fixture-a1/supervisor.pid",
+      "bytes": 8,
+      "sha256": "662ec1eff744676ea1553acd5d7cb283296eff5cfbe3d299b9800d58bb7b1bf8"
+    },
+    {
+      "path": "scope-missing-fixture-a1/validation.log",
+      "bytes": 143,
+      "sha256": "df3bb3d1b6f571d9909f0e3a575b49461546c3a25961de7f3e31bea93c3885d7"
+    },
+    {
+      "path": "scope-recovery-a2/baseline-reader.log",
+      "bytes": 1097,
+      "sha256": "7b24e0fc78af1c7b303cd3e005c255f64a2d0c805ae1c4f2ae068e2f45042a3f"
+    },
+    {
+      "path": "scope-recovery-a2/baseline-runtime.json",
+      "bytes": 152,
+      "sha256": "25ecc91447318008a58b9c22733a66319ee52ec36c8420b9d907660a0ebb35b3"
+    },
+    {
+      "path": "scope-recovery-a2/baseline.log",
+      "bytes": 1729,
+      "sha256": "be9aaaca0771285b7ede6849053bf359c7af86792a09a136f19d1838faca6134"
+    },
+    {
+      "path": "scope-recovery-a2/baseline.xml",
+      "bytes": 3002,
+      "sha256": "7900771f534273f8da2b732d9fdee6f51256718e1be166f0ca3e67066b3d4d1b"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Branch_ownership_0.json",
+      "bytes": 10213302,
+      "sha256": "1d93eb3b38c447212335b01a73f129239409e0a8f55c1926672ff3eae427d79c"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Branch_ownership_1.json",
+      "bytes": 10303270,
+      "sha256": "b61ea08eebaa24125860ce585ee7ced269ce3a2676e0fed8925a0a4300632668"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Branch_ownership_2.json",
+      "bytes": 10213312,
+      "sha256": "204b2af5f7ee5b612452dbe827d11d05643ba5b8cc609d68e5eb703152f93c52"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Branch_ownership_3.json",
+      "bytes": 33458248,
+      "sha256": "e7981c58a63dd714fb068365d93fcb25c157fa1e91eeed0728263572eda39ec9"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Classic_ownership_0.json",
+      "bytes": 11023259,
+      "sha256": "8b0faedd2e0e9151bf0714348d621bf171a598be72cf282e885b4391d1f1a7dd"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Classic_ownership_1.json",
+      "bytes": 11123289,
+      "sha256": "8995da0b93e578cb3380e65597a14ba3e635716bcc85aee16688e882938a26d2"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Classic_ownership_2.json",
+      "bytes": 11023269,
+      "sha256": "1ff5f5f6d3676b38238f8cba1e6e0c1b6d45defa284c559e510a4e59957fdd82"
+    },
+    {
+      "path": "scope-recovery-a2/baseline/Classic_ownership_3.json",
+      "bytes": 36270202,
+      "sha256": "e63475c68fb9f6d936f1eef1d99cd41161ae39290735a7f5bc36e4fd129558b9"
+    },
+    {
+      "path": "scope-recovery-a2/grid-recovery.json",
+      "bytes": 538,
+      "sha256": "b0adb9b4e840f15a11c71c088b920ce0cf01088a71c697224719036d5cd7a36e"
+    },
+    {
+      "path": "scope-recovery-a2/grid-recovery.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "scope-recovery-a2/native-reader.log",
+      "bytes": 1097,
+      "sha256": "08126bb3636751a5330043ea03f6c455796a1550803ba7d062cc064da766b7da"
+    },
+    {
+      "path": "scope-recovery-a2/native-runtime.json",
+      "bytes": 146,
+      "sha256": "5e32629877fadd5df040a49005125009dcca73c81c8f34e9ebd785fefc622726"
+    },
+    {
+      "path": "scope-recovery-a2/native.log",
+      "bytes": 1717,
+      "sha256": "1bab02cf49c0d78417c0a3fab0d8a31cd4fb0c57bb777c40aee807c2414091b8"
+    },
+    {
+      "path": "scope-recovery-a2/native.xml",
+      "bytes": 3002,
+      "sha256": "e337e3a49057c427e83ca72270f426133315aba16e889b473890a480d7bdbc27"
+    },
+    {
+      "path": "scope-recovery-a2/native/Branch_ownership_0.json",
+      "bytes": 10213302,
+      "sha256": "1d93eb3b38c447212335b01a73f129239409e0a8f55c1926672ff3eae427d79c"
+    },
+    {
+      "path": "scope-recovery-a2/native/Branch_ownership_1.json",
+      "bytes": 10303270,
+      "sha256": "b61ea08eebaa24125860ce585ee7ced269ce3a2676e0fed8925a0a4300632668"
+    },
+    {
+      "path": "scope-recovery-a2/native/Branch_ownership_2.json",
+      "bytes": 10213312,
+      "sha256": "204b2af5f7ee5b612452dbe827d11d05643ba5b8cc609d68e5eb703152f93c52"
+    },
+    {
+      "path": "scope-recovery-a2/native/Branch_ownership_3.json",
+      "bytes": 33458248,
+      "sha256": "e7981c58a63dd714fb068365d93fcb25c157fa1e91eeed0728263572eda39ec9"
+    },
+    {
+      "path": "scope-recovery-a2/native/Classic_ownership_0.json",
+      "bytes": 11023259,
+      "sha256": "8b0faedd2e0e9151bf0714348d621bf171a598be72cf282e885b4391d1f1a7dd"
+    },
+    {
+      "path": "scope-recovery-a2/native/Classic_ownership_1.json",
+      "bytes": 11123289,
+      "sha256": "8995da0b93e578cb3380e65597a14ba3e635716bcc85aee16688e882938a26d2"
+    },
+    {
+      "path": "scope-recovery-a2/native/Classic_ownership_2.json",
+      "bytes": 11023269,
+      "sha256": "1ff5f5f6d3676b38238f8cba1e6e0c1b6d45defa284c559e510a4e59957fdd82"
+    },
+    {
+      "path": "scope-recovery-a2/native/Classic_ownership_3.json",
+      "bytes": 36270202,
+      "sha256": "e63475c68fb9f6d936f1eef1d99cd41161ae39290735a7f5bc36e4fd129558b9"
+    },
+    {
+      "path": "scope-recovery-a2/process-exit-status.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "scope-recovery-a2/runner.sh",
+      "bytes": 4018,
+      "sha256": "2c93ca785439fdc75f41d8c948a3c8b4396819a5a65ee5080007029ec68c6e0a"
+    },
+    {
+      "path": "scope-recovery-a2/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "scope-recovery-a2/supervisor.pid",
+      "bytes": 8,
+      "sha256": "6ca36421bb22429e0d36a097068255aab84d0227eb51129acc848554fe51222f"
+    },
+    {
+      "path": "scope-recovery-a2/validation.json",
+      "bytes": 412,
+      "sha256": "45635d94c142276b31bac32493d5c54ccadb9acf264174ca5092763e41dbe52c"
+    },
+    {
+      "path": "scope-recovery-a2/validation.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "scope-recovery-a2/waveform-comparison.json",
+      "bytes": 5795,
+      "sha256": "3ae1c1a597ebe57304e0fb00ee79275777ef670ed5a2f5958e6d666df6e16a80"
+    }
+  ],
+  "full_visual_acceptance": false,
+  "production_console_asan_accepted": false,
+  "full_stage_8_accepted": false,
+  "scientific_verdict": null
+}
