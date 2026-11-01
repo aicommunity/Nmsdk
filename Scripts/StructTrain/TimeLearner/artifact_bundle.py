@@ -45,7 +45,8 @@ def verify_packaged_run_closure(files):
     artifacts = 0
     for name in manifests:
         run = parse_json_bytes(files[name])
-        require(type(run) is dict and run.get("kind") in {"timelearner_post_tune_run_manifest", "timelearner_calibration_run_manifest"}
+        require(type(run) is dict and run.get("kind") in {"timelearner_post_tune_run_manifest", "timelearner_calibration_run_manifest",
+                "timelearner_native_pipeline_run_manifest"}
                 and type(run.get("schema_version")) is int and run["schema_version"] == 1,
                 "unknown_packaged_run_manifest")
         require(run.get("sha256") == canonical_model_sha256({k: v for k, v in run.items() if k != "sha256"}),
@@ -66,8 +67,13 @@ def verify_packaged_run_closure(files):
                     "packaged_run_artifact_bytes_changed:"+path)
         require({path for path in files if path.startswith(prefix) and path != name} == expected,
                 "packaged_run_has_unrecorded_artifacts")
-        require(type(run.get("source_package_path")) is str and prefix+_name(run["source_package_path"]) in expected,
-                "packaged_run_missing_source_package")
+        if run["kind"] == "timelearner_native_pipeline_run_manifest":
+            require(run.get("operation") in {"train", "export", "evaluate"}, "unknown_packaged_pipeline_operation")
+        if run["kind"] == "timelearner_native_pipeline_run_manifest" and run["operation"] == "train":
+            require(run.get("source_package_path") is None, "packaged_cold_run_has_source_package")
+        else:
+            require(type(run.get("source_package_path")) is str and prefix+_name(run["source_package_path"]) in expected,
+                    "packaged_run_missing_source_package")
         artifacts += len(expected)
     return {"run_snapshots_verified": len(manifests), "artifact_entries_verified": artifacts, "scientific_verdict": None}
 
