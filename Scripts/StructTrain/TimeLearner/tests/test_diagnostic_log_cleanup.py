@@ -53,3 +53,14 @@ class DiagnosticLogCleanupTest(unittest.TestCase):
             other=root/"observation.csv";other.write_text("primary\n")
             with self.assertRaises(ValueError):compact_tick_log(other,root/"bad.gz",delete_original=True)
             self.assertTrue(other.exists())
+
+    def test_nonredundant_log_remains_without_leaving_a_completed_scratch_copy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,_=self.fixture(root);dest=root/"summary.jsonl.gz"
+            original=b"Log file created at: fixture\nI1023 00:00:00.000001 1 x:1] EolGateAudit phase=0\n"
+            source.write_bytes(original)
+            with self.assertRaisesRegex(RuntimeError,"no redundant tick messages"):
+                compact_tick_log(source,dest,delete_original=True)
+            self.assertEqual(source.read_bytes(),original)
+            self.assertFalse(dest.exists())
+            self.assertFalse(Path(str(dest)+".partial").exists())
