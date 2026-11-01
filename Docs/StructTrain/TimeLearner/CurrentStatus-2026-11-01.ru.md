@@ -848,8 +848,13 @@ finite mesh V2 и новой measured-refinement V2. Оно не воспрои�
 Полные temporal reports на M40 содержат434 пары probe/soma;6 production report
 checks пройдены, все24 выбранных PNG прямо просмотрены1920x960. Compact proof:
 `Reports/StructTrain/TimeLearner/s07-native-n1-visual-a1`. Full-cache manual review
-не заявлена. Export/frozen Test этих положительных моделей и полный исходный
-план ещё не завершены. PulseLib develop merge
+не заявлена. Последующий [export/frozen контроль](PositiveN1Handoff.ru.md)
+положительных моделей завершён адресно: по4 owned operations/128 trials/4 reader
+checks на worker, обе topology при пороге1 дают TP0/FP0/FN8/TN56. Все192 пары
+trial/soma отражены в temporal reports,3 report checks и22 выбранных PNG
+просмотрены. Это отрицательная классификация при корректном переносе;
+независимый Test, калибровка и полный исходный план остаются открытыми.
+PulseLib develop merge
 `d1c3df4cd0749e5869b977fb5e69417400ce1112` опубликован; корневой develop merge
 `ff98c7fef96eb4f947eca756528834877d14492d` записывает его gitlink.
 Подэтап принят, полный stage7 остаётся открытым.

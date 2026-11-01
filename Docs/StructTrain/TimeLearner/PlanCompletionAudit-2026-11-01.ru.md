@@ -101,8 +101,13 @@ Git, полные производные отчёты остаются на M40 
    `bcbd30f1d87e352825e6c8400c5b929eff184ae5`, ASan
    `44858d7fb92a330470f50741fb862f9f8db23840`.
    Это первые положительные controls изменения L/Rs в данной V2 серии,
-   при собственных reference amplitudes, 2000 Гц и двух входах. Export/frozen
-   classification этих моделей ещё впереди. Визуальная приёмка подэтапа
+   при собственных reference amplitudes, 2000 Гц и двух входах.
+   [Export/frozen контроль](PositiveN1Handoff.ru.md) этих моделей уже выполнен:
+   по4 owned operations/128 trials/4 reader checks на worker, порог1 сохранён;
+   Classic и Branch дают TP0/FP0/FN8/TN56. Полные192 trial/soma пары и3 report
+   checks,22 выбранных PNG просмотрены. Это корректный перенос и отрицательное
+   распознавание, не87.5% успешной детекции. Независимая оценка/калибровка и
+   полная матрица остаются открытыми. Визуальная приёмка N1 Train подэтапа
    завершена:434 пары probe/soma в полных caches,6 production report checks,
    все24 выбранных PNG просмотрены в исходном1920x960; full-cache manual review
    не заявлена. PulseLib develop merge
