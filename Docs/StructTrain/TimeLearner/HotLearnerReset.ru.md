@@ -23,3 +23,14 @@ Build/Reset/Calculate bool не используются как доказате
 ASan runtime M40 и его source tree не изменять. Failing/compile-error
 попытки сохранять с точной Git closure, без объявления подтверждённого
 runtime-дефекта при ошибке компиляции fixture.
+
+Первый baseline16638b7ad завершился на Elder: компиляция успешна,8/8
+native cases дают отказ из-за stale SomaNeuronAmplitude после Reset.
+Физические сомы при этом возвращаются к измеренному начальному rest.
+Новый PulseLib6cfcca0c7970a6f9a9381c9592cfbc8ffcbdea94 публикует
+физические показания в AAfterReset, после штатного сброса детей.
+Branch per-input peak history и private peak/time vectors очищаются отдельно.
+Тест дополнительно проверяет dendrite readout относительно начального
+native Reset, отсутствие diagnostic и Branch history до/после первого тика.
+Эти дополнительные assertions не входили в первый baseline и должны
+проверяться новым прогоном. Прежние исходники/данные baseline сохраняются.
