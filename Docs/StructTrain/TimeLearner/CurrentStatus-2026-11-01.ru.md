@@ -1,10 +1,33 @@
 # Состояние рефакторинга на 01.11.2026
 
+Последний принятый scoped результат: loaded learner graph/readout и общий
+MDMatrix resize. Оба workers прошли10 math+32 native+21 regression+16 reader;
+полный компактный primary,32 byte-identical crossworker CSV,1476 temporal PNG
+в cache и30 directly reviewed selected PNG. Child mergesPulseLibe51c702 /
+Rdk78e51a9b опубликованы с trees, равными проверенным исходникам. Root exact
+closure фиксируется в текущем acceptance merge. [Подробности](LoadedLearnerReadout.ru.md).
+Полные этапы4/11 и цель0–12 остаются открытыми. Warm learner Reset — отдельная
+незавершённая feature; новые8 tests на normal уже прошли, ASan/graphs/acceptance
+ещё требуются. Ранние статусы ниже являются историческими снимками.
+
+
 Цель 0–12 активна. Полностью принят только этап 0; остальные этапы имеют
 незакрытые требования. Полный остаток сохранён в
 [сводке 31.10](CurrentStatus-2026-10-31.ru.md#остаток-полного-плана) и
 [утверждённом плане](RefactoringPlan.ru.md). Эта запись добавляет проверенные
 подэтапы, не заменяя исходную постановку или обязательную матрицу.
+
+В отдельной feature разрабатывается [loaded-graph readout](LoadedLearnerReadout.ru.md):
+32/32 реальных отказа исходного PulseLib подтверждены на normal и ASan.
+Различаются неверный размер Parameters-only буфера и непривязанный learner
+при работающем физическом нейроне. Исправление последовательно проверяется;
+N=1 требует разрешения ролей в Reset при no-op Build. В develop этот подэтап
+ещё не принят; наличие кода и baseline proofs не считается закрытием этапа4.
+На normal последняя версия выполнила32/32 и21/21 native regression,
+а независимый анализ реальных данных —16/16. ASan выявил дополнительную
+ошибку изменения формы числовой матрицы Rdk. Исправление этого общего метода
+уже прошло10/10 прямых тестов на каждом worker; полные повторные сборки и
+проверки learner продолжаются. Приёмка подэтапа остаётся открытой.
 
 [Исторический August saved-state replay](HistoricalAugustReplay.ru.md):
 свежая сборка точного root de02a380 и три новых Test на Elder воспроизвели4/8,
@@ -936,3 +959,11 @@ PulseLib develop merge
 Подэтап принят, полный stage7 остаётся открытым.
 Подробности: [MeasuredResistanceRefinement.ru.md](MeasuredResistanceRefinement.ru.md).
 
+
+Последний проверенный срез loaded-learner a4: normal math10/10, native32/32,
+regression21/21, reader16/16; ASan math10/10 и native32/32, regression ещё идёт.
+Сжатая текущая normal primary-публикация c794e3cbf11c920d8fae5bb86dddd6f91bbceb17
+(336 файлов,388052 bytes). Графики68 case/soma pairs строятся на M40;
+визуальная приёмка ещё не выполнена. Это отдельный незавершённый подэтап,
+без scientific selectivity verdict. Детали и точные источники:
+[LoadedLearnerReadout.ru.md](LoadedLearnerReadout.ru.md).

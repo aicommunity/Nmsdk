@@ -1,0 +1,2943 @@
+{
+  "kind": "native_loaded_readout_and_matrix_diagnostics",
+  "schema_version": 1,
+  "worker": "asan",
+  "packaging_source": "d045bffdc5789e37886e124424804c4722a31f9d",
+  "attempts": [
+    {
+      "name": "s04-loaded-readout-fixed-asan-a1",
+      "validation": {
+        "worker": "asan",
+        "phase": "fixed_native_load",
+        "source": "88d8f8fa47bbc9ea56993141e0d8168174ee354a",
+        "pulse": "fcec291dfffe3c9065b2f19df56635d2c18228a7",
+        "execution": {
+          "kind": "timelearner_process_result",
+          "schema_version": 1,
+          "execution": "process_error",
+          "reason": "nonzero_exit",
+          "returncode": 1,
+          "wall_seconds": 610.4600096619688,
+          "model_time": null,
+          "runtime_provenance": "loaded_files_captured",
+          "mapping_error": null,
+          "runtime_fingerprint": "49f2a78b02847b8287a336177b7270b3c9c852cbbc51fd257adfd8e8039cd6d3",
+          "ownership_scope": "launched_executable_only",
+          "scientific_verdict": null
+        },
+        "gtest": {
+          "tests": "32",
+          "failures": "32",
+          "disabled": "0",
+          "errors": "0",
+          "time": "609.731",
+          "timestamp": "2026-11-01T15:42:21.672",
+          "name": "AllTests"
+        },
+        "scientific_verdict": null
+      }
+    },
+    {
+      "name": "s04-loaded-readout-fixed-asan-a2",
+      "validation": {
+        "worker": "asan",
+        "phase": "fixed_native_load",
+        "source": "19d9b9cd4d3ca4ea33e6f2f0f73f6cbf048be0e9",
+        "pulse": "9e7b8b0cf7611ad6b1a9a4479fc5873e75e49a48",
+        "execution": {
+          "kind": "timelearner_process_result",
+          "schema_version": 1,
+          "execution": "process_error",
+          "reason": "nonzero_exit",
+          "returncode": 1,
+          "wall_seconds": 614.4659785926342,
+          "model_time": null,
+          "runtime_provenance": "loaded_files_captured",
+          "mapping_error": null,
+          "runtime_fingerprint": "713357b2da80b8232bf120a0ad0d7266524202d658cff261d2972a3d255ea890",
+          "ownership_scope": "launched_executable_only",
+          "scientific_verdict": null
+        },
+        "gtest": {
+          "tests": "32",
+          "failures": "8",
+          "disabled": "0",
+          "errors": "0",
+          "time": "613.767",
+          "timestamp": "2026-11-01T15:54:40.838",
+          "name": "AllTests"
+        },
+        "scientific_verdict": null
+      }
+    },
+    {
+      "name": "s04-loaded-readout-fixed-asan-a3",
+      "validation": {
+        "worker": "asan",
+        "phase": "fixed_native_load",
+        "source": "f49e904139c491077fe2c957474c5b1fa9a687a6",
+        "pulse": "92241d3ded3d3d21e3090c753686d5e7c203f721",
+        "execution": {
+          "kind": "timelearner_process_result",
+          "schema_version": 1,
+          "execution": "process_error",
+          "reason": "nonzero_exit",
+          "returncode": 1,
+          "wall_seconds": 60.18382142391056,
+          "model_time": null,
+          "runtime_provenance": "loaded_files_captured",
+          "mapping_error": null,
+          "runtime_fingerprint": "dd7443bfed05350d8c9acded5ff6e512e1d0499fb486828efefd814a2097ba48",
+          "ownership_scope": "launched_executable_only",
+          "scientific_verdict": null
+        },
+        "gtest": null,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "name": "s04-mdmatrix-baseline-asan-a1",
+      "validation": {
+        "worker": "asan",
+        "phase": "matrix_resize_baseline",
+        "source": "fc3f10691820f392c17d524fcf0f5f0e4e62fb3b",
+        "pulse": "92241d3ded3d3d21e3090c753686d5e7c203f721",
+        "execution": {
+          "kind": "timelearner_process_result",
+          "schema_version": 1,
+          "execution": "process_error",
+          "reason": "nonzero_exit",
+          "returncode": 1,
+          "wall_seconds": 0.30534116365015507,
+          "model_time": null,
+          "runtime_provenance": "loaded_files_captured",
+          "mapping_error": null,
+          "runtime_fingerprint": "21cc1ee9e4a47a3b42c10e9555577db935df0a47d984e89d52f57835b0330114",
+          "ownership_scope": "launched_executable_only",
+          "scientific_verdict": null
+        },
+        "gtest": null,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "records": [
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state0/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state0/model.xml",
+      "bytes": 37793,
+      "sha256": "201ec1011ba5328661708e7c6e27e9df7a1be0c32e1e0a670b42ac05bb427390"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state0/source-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state1/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state1/model.xml",
+      "bytes": 53384,
+      "sha256": "15401799e2dad6ae00b3444f117fac440425903cb2bf95ed19c99a5813fe9b3e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f2000-state1/source-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state0/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state0/model.xml",
+      "bytes": 37811,
+      "sha256": "616fb3fd5307ef90827de18e1e7aabd5bbdbf1da13de01486ed172ee8d509e82"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state0/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state1/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state1/model.xml",
+      "bytes": 53402,
+      "sha256": "dfc5458da05af153c3f6651fc31513f6770cec6376cd07ead73720aa13e03e86"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N1-f20000-state1/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state0/loaded-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state0/model.xml",
+      "bytes": 37845,
+      "sha256": "80ed33c18c6b579c5e90f7cbdbcb1a083da349fa326f06ae61ed40b41c8fee90"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state0/roundtrip.csv",
+      "bytes": 12378,
+      "sha256": "7300391468aa5574229268dc34f9d6f5109ca93896f938d939aca4d4c8e7c806"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state0/source-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state1/loaded-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state1/model.xml",
+      "bytes": 53452,
+      "sha256": "a4714b660acabd9cc6c366f22203008fcc07d1b8b7ad8df5bb6001e2ef00ca90"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state1/roundtrip.csv",
+      "bytes": 12378,
+      "sha256": "7300391468aa5574229268dc34f9d6f5109ca93896f938d939aca4d4c8e7c806"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f2000-state1/source-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state0/loaded-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state0/model.xml",
+      "bytes": 37863,
+      "sha256": "d281ed5dcbf465da0b3bf3648eddda2fba0a3ec6ef9773c9226a5341b9cb184f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state0/roundtrip.csv",
+      "bytes": 124385,
+      "sha256": "f667b4068067f2683f91efe8f5176daa6a107a07965a7988e60f0ee1c26f465e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state0/source-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state1/loaded-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state1/model.xml",
+      "bytes": 53470,
+      "sha256": "78a4408fb1aee9dc74ddaef276f2bbb5c06e3dabe77a4ff68ed16b595a53eb63"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state1/roundtrip.csv",
+      "bytes": 124385,
+      "sha256": "f667b4068067f2683f91efe8f5176daa6a107a07965a7988e60f0ee1c26f465e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N2-f20000-state1/source-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state0/loaded-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state0/model.xml",
+      "bytes": 37949,
+      "sha256": "6d407ec2d4d221a0825dbabdfdbeaceaa27e4ccf1d4176200eae2c428ef287ec"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state0/roundtrip.csv",
+      "bytes": 12238,
+      "sha256": "e409930041e07a6d233f6f649490c375e0eea86f21e13b3c0797efa9c14776e8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state0/source-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state1/loaded-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state1/model.xml",
+      "bytes": 53588,
+      "sha256": "a90b44b8e42c7469d0df3410937f73c781f4a94d3ccae093352fdb8fd95f0063"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state1/roundtrip.csv",
+      "bytes": 12238,
+      "sha256": "e409930041e07a6d233f6f649490c375e0eea86f21e13b3c0797efa9c14776e8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f2000-state1/source-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state0/loaded-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state0/model.xml",
+      "bytes": 37967,
+      "sha256": "e3b5aedec05bcea5ff47759cd2060039615f0c515dd9a48be14b749da393bfaa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state0/roundtrip.csv",
+      "bytes": 123061,
+      "sha256": "9b852a6c5b750625cfc447e2d5e00a6cc111de1db22b589e64c3299e33ad3b74"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state0/source-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state1/loaded-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state1/model.xml",
+      "bytes": 53606,
+      "sha256": "ccee11a4bfdd60d5af497f03bd0f4462b5f63db56f960c9802227958d8e9cd2d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state1/roundtrip.csv",
+      "bytes": 123061,
+      "sha256": "9b852a6c5b750625cfc447e2d5e00a6cc111de1db22b589e64c3299e33ad3b74"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N4-f20000-state1/source-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state0/loaded-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state0/model.xml",
+      "bytes": 38053,
+      "sha256": "cf3e9b0542bd07ffb5ba0434928a6fbdff377579c260623d7831ac4e5022c604"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state0/roundtrip.csv",
+      "bytes": 12168,
+      "sha256": "fc6e78afc68dbc537a7a948d7e46c7119a0bb87017258423e822b16d9e6f2fa5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state0/source-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state1/loaded-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state1/model.xml",
+      "bytes": 53724,
+      "sha256": "c6cd508879538b0d1b009a7285425d52d84fe5db1530160a3d8588658b0f11f3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state1/roundtrip.csv",
+      "bytes": 12168,
+      "sha256": "fc6e78afc68dbc537a7a948d7e46c7119a0bb87017258423e822b16d9e6f2fa5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f2000-state1/source-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state0/loaded-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state0/model.xml",
+      "bytes": 38071,
+      "sha256": "e7bb5120f638ea6370741e035f754a350369ce089eabe741525f21b55ff76add"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state0/roundtrip.csv",
+      "bytes": 122229,
+      "sha256": "aef6384a3a36731683c8b0452d0df1cbc9582c65e8bbb279abf76e8d1c661a51"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state0/source-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state1/loaded-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state1/model.xml",
+      "bytes": 53742,
+      "sha256": "f63c68d160aee6010627e0a8af7bb30245c41a33924f5f54b13774a9dd913b59"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state1/roundtrip.csv",
+      "bytes": 122229,
+      "sha256": "aef6384a3a36731683c8b0452d0df1cbc9582c65e8bbb279abf76e8d1c661a51"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Branch-N6-f20000-state1/source-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state0/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state0/model.xml",
+      "bytes": 37790,
+      "sha256": "f157f22d88a42445f8af3530aa4989d87cee5b4f2b044dd122aa77f939f8ab4f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state0/source-neuron.json",
+      "bytes": 89446,
+      "sha256": "2ef62caab939834c5dde2ae2ba993ed0d1daf0a5873708218f14e6bef96dec3e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state1/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state1/model.xml",
+      "bytes": 53357,
+      "sha256": "347a35e1e053ba30b28bce4ca5921ed2b1bbf6baae01fe6c809cbf737bdebd28"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f2000-state1/source-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state0/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state0/model.xml",
+      "bytes": 37808,
+      "sha256": "99ae78733fad2046ddd0b2f1db25edfe3c6ce6fa62d7fe48a7d9a1b3564d21f4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state0/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state1/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state1/model.xml",
+      "bytes": 53375,
+      "sha256": "89dcc5015517a41bc661f6e8c3ff339be5d766facb1d941af57250c982e38bd3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N1-f20000-state1/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state0/loaded-neuron.json",
+      "bytes": 153962,
+      "sha256": "b0c452d22102d6fabf3caec244c589e768695cd5a66d7ff9f5532c4ae99e3138"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state0/model.xml",
+      "bytes": 55954,
+      "sha256": "cb3dc1555559778770e4fdb17dd2823a3966339f77163501ac1daaf69b02873e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state0/roundtrip.csv",
+      "bytes": 20246,
+      "sha256": "05073856307fb60310a135ded69c470fee5cf526e085df08a44dacbfcc1c1ed9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state0/source-neuron.json",
+      "bytes": 153961,
+      "sha256": "44d81d780f4690074bbd8687d2ea13b17f821a5cc725d48cc7aa297a46c6bbbc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state1/loaded-neuron.json",
+      "bytes": 153962,
+      "sha256": "b0c452d22102d6fabf3caec244c589e768695cd5a66d7ff9f5532c4ae99e3138"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state1/model.xml",
+      "bytes": 79581,
+      "sha256": "21aa075c888e16ea538e1546be32c08d53d9ca5927c989faeaaa53e0c74052bc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state1/roundtrip.csv",
+      "bytes": 20246,
+      "sha256": "05073856307fb60310a135ded69c470fee5cf526e085df08a44dacbfcc1c1ed9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f2000-state1/source-neuron.json",
+      "bytes": 153962,
+      "sha256": "b0c452d22102d6fabf3caec244c589e768695cd5a66d7ff9f5532c4ae99e3138"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state0/loaded-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state0/model.xml",
+      "bytes": 55982,
+      "sha256": "0f5964a7d039d45c6b9cd75e609f78217e8c0d58b7efc31a0f64da0fa51f3af6"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state0/roundtrip.csv",
+      "bytes": 203301,
+      "sha256": "a5eba25e7cb7564efe360a79937615594518d159e8eeb2bfdb269c794061c43b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state0/source-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state1/loaded-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state1/model.xml",
+      "bytes": 79609,
+      "sha256": "21def947094f5367cddb87f33a44061d8a3f9fbb1941eaac40d76e5226c3ae1d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state1/roundtrip.csv",
+      "bytes": 203301,
+      "sha256": "a5eba25e7cb7564efe360a79937615594518d159e8eeb2bfdb269c794061c43b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N2-f20000-state1/source-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state0/loaded-neuron.json",
+      "bytes": 282995,
+      "sha256": "3afecea99f845c9738239de5448d4f8ef6ce93c214f8c565a6469600f3a2f226"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state0/model.xml",
+      "bytes": 92285,
+      "sha256": "209644ff95cc4335a7f0a2907460970e99137e7ec1a561666060e7a7ecd045ab"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state0/roundtrip.csv",
+      "bytes": 35356,
+      "sha256": "ff179bf93e77ec1d73f59fa23689d514a6beccd6e178c66b921d216751a4f928"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state0/source-neuron.json",
+      "bytes": 282993,
+      "sha256": "170ff6e4a4e6562db18b468e0082cb193a1d3a695a94b164682353e6fbe21943"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state1/loaded-neuron.json",
+      "bytes": 282995,
+      "sha256": "3afecea99f845c9738239de5448d4f8ef6ce93c214f8c565a6469600f3a2f226"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state1/model.xml",
+      "bytes": 132032,
+      "sha256": "ccad2c5b482e8a5cc342cd554aefd0d106b1ab3d47fcab3c7bfdc79f7b649031"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state1/roundtrip.csv",
+      "bytes": 35356,
+      "sha256": "ff179bf93e77ec1d73f59fa23689d514a6beccd6e178c66b921d216751a4f928"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f2000-state1/source-neuron.json",
+      "bytes": 282995,
+      "sha256": "3afecea99f845c9738239de5448d4f8ef6ce93c214f8c565a6469600f3a2f226"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state0/loaded-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state0/model.xml",
+      "bytes": 92333,
+      "sha256": "d822b589497af32f44e6c50120215d2c4b7d8968e009b0df4c44272ccf8ed79b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state0/roundtrip.csv",
+      "bytes": 355117,
+      "sha256": "d92f27f7d6145f16b0450605c1c028a3ee8f00e06344fc73a24549b447c92dcd"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state0/source-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state1/loaded-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state1/model.xml",
+      "bytes": 132080,
+      "sha256": "83181ae406727723d720915db3e91c89a2a352cdf5da0a61d430e38096914ae8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state1/roundtrip.csv",
+      "bytes": 355117,
+      "sha256": "d92f27f7d6145f16b0450605c1c028a3ee8f00e06344fc73a24549b447c92dcd"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N4-f20000-state1/source-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state0/loaded-neuron.json",
+      "bytes": 412032,
+      "sha256": "86b5e46018124a14e5d1758c56d7f09e9b8cdb35baa28e39865c6cc42e34d4b0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state0/model.xml",
+      "bytes": 128617,
+      "sha256": "358120160921597cdb753bd96024803435128447da7d66640871ff6c0c3daf00"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state0/roundtrip.csv",
+      "bytes": 50398,
+      "sha256": "364d64834d4f110b66c9fb0292ab915cea72a1947136056886d6cf384664f0c4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state0/source-neuron.json",
+      "bytes": 412030,
+      "sha256": "caedac14208095d533e11eaf14bb2a393242765c3fbe68a2eadb4ba30110ec24"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state1/loaded-neuron.json",
+      "bytes": 412032,
+      "sha256": "86b5e46018124a14e5d1758c56d7f09e9b8cdb35baa28e39865c6cc42e34d4b0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state1/model.xml",
+      "bytes": 184485,
+      "sha256": "846279423d102b232aa381e592337feb5c419e7a644c99b2ed8a14f05cd93268"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state1/roundtrip.csv",
+      "bytes": 50398,
+      "sha256": "364d64834d4f110b66c9fb0292ab915cea72a1947136056886d6cf384664f0c4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f2000-state1/source-neuron.json",
+      "bytes": 412032,
+      "sha256": "86b5e46018124a14e5d1758c56d7f09e9b8cdb35baa28e39865c6cc42e34d4b0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state0/loaded-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state0/model.xml",
+      "bytes": 128685,
+      "sha256": "1d8043643326fce70287ef176210473caa97c476e988c9b72ecf749b11cd8a53"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state0/roundtrip.csv",
+      "bytes": 505159,
+      "sha256": "9820e35e8d82a135cc61491f994a53f992eaa63fdeffa8a3089fdcb19939c257"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state0/source-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state1/loaded-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state1/model.xml",
+      "bytes": 184553,
+      "sha256": "ce7df8cf7c8adce08e706c5a0c1c62a9273f60b2574368c246e49d113d3fb52b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state1/roundtrip.csv",
+      "bytes": 505159,
+      "sha256": "9820e35e8d82a135cc61491f994a53f992eaa63fdeffa8a3089fdcb19939c257"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/artifacts/Classic-N6-f20000-state1/source-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/build.log",
+      "bytes": 2610,
+      "sha256": "02d14213d31097dbb171dfec10f1f0034c903cc6c6a082480fa64406b94f3cfb"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/checkout-Nmsdk-Bin.log",
+      "bytes": 79,
+      "sha256": "f64376f04d4f592b606e4e83ff24513be82433bd4921ab054903887cad7716d8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/checkout-Nmsdk-PulseLib.log",
+      "bytes": 206,
+      "sha256": "c4ff7715513f5b518c7111b4f2cf33312d16434d9038b4ae9a5828ad37f82661"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/checkout-root.log",
+      "bytes": 254,
+      "sha256": "31927968d66f5136d9df35dfd02c9b69a9ce26e0bfc577da61527d291ca07f9c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/configure.log",
+      "bytes": 1345,
+      "sha256": "a074b463eff143d3bed29cfaac6fd07ec8b8b5e468471bf729cf21e57a61f168"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/fetch-Nmsdk-Bin.log",
+      "bytes": 94,
+      "sha256": "6d7aabf91b4d0b62d00ff69de570f5aba2410f6485e63f8c5362de85c8a11062"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/fetch-Nmsdk-PulseLib.log",
+      "bytes": 119,
+      "sha256": "2414eedbb4e801aad47d965558612b925cfe8616abd1c9d52501273dec142a1f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/fetch-root.log",
+      "bytes": 114,
+      "sha256": "908bdbd922659e15e687c2eb4e4a127c8297f8af751d0577efa169dcc5165598"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/gtest.xml",
+      "bytes": 64530,
+      "sha256": "46ad8266ac12bca4536c74a13e2c7248a84b610a3dcb97cf7d4e159c56363535"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/job.py",
+      "bytes": 5478,
+      "sha256": "bcb630a39c93554127b1f0a94d61a5a290e88aae68a6613752427d508b5c2874"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/launch.json",
+      "bytes": 142,
+      "sha256": "29ed4f42ec7c466d663aaee144fb30df4ef52fa28887e197f5b6196b3df55ca4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process-guard.json",
+      "bytes": 376,
+      "sha256": "dfb1c3f202adf05d9837a9c290fed3c930e22909bb95999651cf54da468996a4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process/loaded-files.json",
+      "bytes": 5873,
+      "sha256": "de08301b453f1b2db06a563e3d665b9dad313378af77effcafb6b2f9826953e9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process/owned-process.json",
+      "bytes": 416,
+      "sha256": "90846f3239dcbb382515c789455f351cf8b20f916fd9680591e901e248263b74"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process/request.json",
+      "bytes": 513,
+      "sha256": "3b08fb7ff5924a19c3d0062b03d0e71dac6b1ff6b2501c2ef613b3e128170258"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process/result.json",
+      "bytes": 450,
+      "sha256": "7d24f646278bc6c8b91a03f980278e5c6bc0c5805eb6b1f588cf438b93f7bc31"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process/runtime.json",
+      "bytes": 24336,
+      "sha256": "ee56986b899b3d915078e11a185006ebb4102306e05c4b87174adeb146f36bb9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process/stderr.log",
+      "bytes": 1799,
+      "sha256": "0142e4e9b64daff420f1adf13aa5abb1baf6e96fbfebb2368b38789115c19f8c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/process/stdout.log",
+      "bytes": 35761,
+      "sha256": "bed5a6828b38518a628b17b9aa070cc65b3c7bf89bcc2256b8c7793f60f10fac"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/runtime.json",
+      "bytes": 24336,
+      "sha256": "ee56986b899b3d915078e11a185006ebb4102306e05c4b87174adeb146f36bb9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/source.json",
+      "bytes": 1304,
+      "sha256": "d2de7eeb335177dafd72e14c6ff6990fc1a35c06bbeaf8e886c3c36656fa5f24"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/supervisor.log",
+      "bytes": 145,
+      "sha256": "a072a03e9f163965129ffc12e78a28a8572f090fed874c91fb6112b9eefa97c1"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a1/validation.json",
+      "bytes": 877,
+      "sha256": "6fbfc51b8aaf04ee8ce38b7da61a121fb19b930a31e9f4538d944ad1fab797cd"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state0/loaded-model.json",
+      "bytes": 132270,
+      "sha256": "32280f13ebdf375b8f10ec81a0797dec45fa2b24e4a7f5333e96eb21e39bb6da"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state0/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state0/model.xml",
+      "bytes": 37793,
+      "sha256": "201ec1011ba5328661708e7c6e27e9df7a1be0c32e1e0a670b42ac05bb427390"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state0/source-model.json",
+      "bytes": 132270,
+      "sha256": "32280f13ebdf375b8f10ec81a0797dec45fa2b24e4a7f5333e96eb21e39bb6da"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state0/source-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state1/loaded-model.json",
+      "bytes": 132270,
+      "sha256": "32280f13ebdf375b8f10ec81a0797dec45fa2b24e4a7f5333e96eb21e39bb6da"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state1/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state1/model.xml",
+      "bytes": 53384,
+      "sha256": "15401799e2dad6ae00b3444f117fac440425903cb2bf95ed19c99a5813fe9b3e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state1/source-model.json",
+      "bytes": 132270,
+      "sha256": "32280f13ebdf375b8f10ec81a0797dec45fa2b24e4a7f5333e96eb21e39bb6da"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f2000-state1/source-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state0/loaded-model.json",
+      "bytes": 132306,
+      "sha256": "dc5e95e236488448cb43b0e240f6190c417b9c11317cf8f8ca18804f3b197233"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state0/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state0/model.xml",
+      "bytes": 37811,
+      "sha256": "616fb3fd5307ef90827de18e1e7aabd5bbdbf1da13de01486ed172ee8d509e82"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state0/source-model.json",
+      "bytes": 132306,
+      "sha256": "dc5e95e236488448cb43b0e240f6190c417b9c11317cf8f8ca18804f3b197233"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state0/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state1/loaded-model.json",
+      "bytes": 132306,
+      "sha256": "dc5e95e236488448cb43b0e240f6190c417b9c11317cf8f8ca18804f3b197233"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state1/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state1/model.xml",
+      "bytes": 53402,
+      "sha256": "dfc5458da05af153c3f6651fc31513f6770cec6376cd07ead73720aa13e03e86"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state1/source-model.json",
+      "bytes": 132306,
+      "sha256": "dc5e95e236488448cb43b0e240f6190c417b9c11317cf8f8ca18804f3b197233"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N1-f20000-state1/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/loaded-model.json",
+      "bytes": 132337,
+      "sha256": "43caa728c3a21b5158a0f35b5cc435115e9a64b06ea41196d518a20820351fd5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/loaded-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/model.xml",
+      "bytes": 37845,
+      "sha256": "80ed33c18c6b579c5e90f7cbdbcb1a083da349fa326f06ae61ed40b41c8fee90"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/roundtrip.csv",
+      "bytes": 12378,
+      "sha256": "7300391468aa5574229268dc34f9d6f5109ca93896f938d939aca4d4c8e7c806"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/source-model.json",
+      "bytes": 132337,
+      "sha256": "43caa728c3a21b5158a0f35b5cc435115e9a64b06ea41196d518a20820351fd5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state0/source-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/loaded-model.json",
+      "bytes": 132337,
+      "sha256": "43caa728c3a21b5158a0f35b5cc435115e9a64b06ea41196d518a20820351fd5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/loaded-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/model.xml",
+      "bytes": 53452,
+      "sha256": "a4714b660acabd9cc6c366f22203008fcc07d1b8b7ad8df5bb6001e2ef00ca90"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/roundtrip.csv",
+      "bytes": 12378,
+      "sha256": "7300391468aa5574229268dc34f9d6f5109ca93896f938d939aca4d4c8e7c806"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/source-model.json",
+      "bytes": 132337,
+      "sha256": "43caa728c3a21b5158a0f35b5cc435115e9a64b06ea41196d518a20820351fd5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f2000-state1/source-neuron.json",
+      "bytes": 89456,
+      "sha256": "21ba42b7da6de1de79ef2c2f9e55b6cf8280196743b3c54ba603d67b8170cf05"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/loaded-model.json",
+      "bytes": 132373,
+      "sha256": "6aa5c1afdf6987bc5b558047fdfbf83c42093c33209b6a782bbddab26138787a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/loaded-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/model.xml",
+      "bytes": 37863,
+      "sha256": "d281ed5dcbf465da0b3bf3648eddda2fba0a3ec6ef9773c9226a5341b9cb184f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/roundtrip.csv",
+      "bytes": 124385,
+      "sha256": "f667b4068067f2683f91efe8f5176daa6a107a07965a7988e60f0ee1c26f465e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/source-model.json",
+      "bytes": 132373,
+      "sha256": "6aa5c1afdf6987bc5b558047fdfbf83c42093c33209b6a782bbddab26138787a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state0/source-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/loaded-model.json",
+      "bytes": 132373,
+      "sha256": "6aa5c1afdf6987bc5b558047fdfbf83c42093c33209b6a782bbddab26138787a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/loaded-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/model.xml",
+      "bytes": 53470,
+      "sha256": "78a4408fb1aee9dc74ddaef276f2bbb5c06e3dabe77a4ff68ed16b595a53eb63"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/roundtrip.csv",
+      "bytes": 124385,
+      "sha256": "f667b4068067f2683f91efe8f5176daa6a107a07965a7988e60f0ee1c26f465e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/source-model.json",
+      "bytes": 132373,
+      "sha256": "6aa5c1afdf6987bc5b558047fdfbf83c42093c33209b6a782bbddab26138787a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N2-f20000-state1/source-neuron.json",
+      "bytes": 89484,
+      "sha256": "6f2cdd73f281741712f06693e858518a62358ef080e991d2550ead9cfdd9892e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/loaded-model.json",
+      "bytes": 132471,
+      "sha256": "419564473fa6147af0638d06cd358ec9e3a583845ab00a93f35e0dcc767ec9c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/loaded-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/model.xml",
+      "bytes": 37949,
+      "sha256": "6d407ec2d4d221a0825dbabdfdbeaceaa27e4ccf1d4176200eae2c428ef287ec"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/roundtrip.csv",
+      "bytes": 12238,
+      "sha256": "e409930041e07a6d233f6f649490c375e0eea86f21e13b3c0797efa9c14776e8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/source-model.json",
+      "bytes": 132471,
+      "sha256": "419564473fa6147af0638d06cd358ec9e3a583845ab00a93f35e0dcc767ec9c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state0/source-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/loaded-model.json",
+      "bytes": 132471,
+      "sha256": "419564473fa6147af0638d06cd358ec9e3a583845ab00a93f35e0dcc767ec9c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/loaded-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/model.xml",
+      "bytes": 53588,
+      "sha256": "a90b44b8e42c7469d0df3410937f73c781f4a94d3ccae093352fdb8fd95f0063"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/roundtrip.csv",
+      "bytes": 12238,
+      "sha256": "e409930041e07a6d233f6f649490c375e0eea86f21e13b3c0797efa9c14776e8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/source-model.json",
+      "bytes": 132471,
+      "sha256": "419564473fa6147af0638d06cd358ec9e3a583845ab00a93f35e0dcc767ec9c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f2000-state1/source-neuron.json",
+      "bytes": 89474,
+      "sha256": "2ca2987e874348d1179f46c85ab010d855a15745d80f07665f0d3366b61e3e15"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/loaded-model.json",
+      "bytes": 132507,
+      "sha256": "75c3f3a40da447deb1f9ff0cf716084fef59a5da0e0281f33476acb03747a65d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/loaded-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/model.xml",
+      "bytes": 37967,
+      "sha256": "e3b5aedec05bcea5ff47759cd2060039615f0c515dd9a48be14b749da393bfaa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/roundtrip.csv",
+      "bytes": 123061,
+      "sha256": "9b852a6c5b750625cfc447e2d5e00a6cc111de1db22b589e64c3299e33ad3b74"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/source-model.json",
+      "bytes": 132507,
+      "sha256": "75c3f3a40da447deb1f9ff0cf716084fef59a5da0e0281f33476acb03747a65d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state0/source-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/loaded-model.json",
+      "bytes": 132507,
+      "sha256": "75c3f3a40da447deb1f9ff0cf716084fef59a5da0e0281f33476acb03747a65d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/loaded-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/model.xml",
+      "bytes": 53606,
+      "sha256": "ccee11a4bfdd60d5af497f03bd0f4462b5f63db56f960c9802227958d8e9cd2d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/roundtrip.csv",
+      "bytes": 123061,
+      "sha256": "9b852a6c5b750625cfc447e2d5e00a6cc111de1db22b589e64c3299e33ad3b74"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/source-model.json",
+      "bytes": 132507,
+      "sha256": "75c3f3a40da447deb1f9ff0cf716084fef59a5da0e0281f33476acb03747a65d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N4-f20000-state1/source-neuron.json",
+      "bytes": 89502,
+      "sha256": "1bcfb4631d3e14b6e995addef4facb7575e3c84ac267aa022adfa4bc423580a8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/loaded-model.json",
+      "bytes": 132605,
+      "sha256": "75dfdf6e557f330121447e228be66e85f908e1b742f5162a65172009133b4854"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/loaded-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/model.xml",
+      "bytes": 38053,
+      "sha256": "cf3e9b0542bd07ffb5ba0434928a6fbdff377579c260623d7831ac4e5022c604"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/roundtrip.csv",
+      "bytes": 12168,
+      "sha256": "fc6e78afc68dbc537a7a948d7e46c7119a0bb87017258423e822b16d9e6f2fa5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/source-model.json",
+      "bytes": 132605,
+      "sha256": "75dfdf6e557f330121447e228be66e85f908e1b742f5162a65172009133b4854"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state0/source-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/loaded-model.json",
+      "bytes": 132605,
+      "sha256": "75dfdf6e557f330121447e228be66e85f908e1b742f5162a65172009133b4854"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/loaded-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/model.xml",
+      "bytes": 53724,
+      "sha256": "c6cd508879538b0d1b009a7285425d52d84fe5db1530160a3d8588658b0f11f3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/roundtrip.csv",
+      "bytes": 12168,
+      "sha256": "fc6e78afc68dbc537a7a948d7e46c7119a0bb87017258423e822b16d9e6f2fa5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/source-model.json",
+      "bytes": 132605,
+      "sha256": "75dfdf6e557f330121447e228be66e85f908e1b742f5162a65172009133b4854"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f2000-state1/source-neuron.json",
+      "bytes": 89492,
+      "sha256": "572c1523e841e949730297a53b43105947d2709ee05b54bfdf9130ede89e31ef"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/loaded-model.json",
+      "bytes": 132641,
+      "sha256": "671b27afe4c4054629603e4659078c085e44d9fe1e6023ebb58e8ce1562bbe55"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/loaded-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/model.xml",
+      "bytes": 38071,
+      "sha256": "e7bb5120f638ea6370741e035f754a350369ce089eabe741525f21b55ff76add"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/roundtrip.csv",
+      "bytes": 122229,
+      "sha256": "aef6384a3a36731683c8b0452d0df1cbc9582c65e8bbb279abf76e8d1c661a51"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/source-model.json",
+      "bytes": 132641,
+      "sha256": "671b27afe4c4054629603e4659078c085e44d9fe1e6023ebb58e8ce1562bbe55"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state0/source-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/loaded-model.json",
+      "bytes": 132641,
+      "sha256": "671b27afe4c4054629603e4659078c085e44d9fe1e6023ebb58e8ce1562bbe55"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/loaded-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/model.xml",
+      "bytes": 53742,
+      "sha256": "f63c68d160aee6010627e0a8af7bb30245c41a33924f5f54b13774a9dd913b59"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/roundtrip.csv",
+      "bytes": 122229,
+      "sha256": "aef6384a3a36731683c8b0452d0df1cbc9582c65e8bbb279abf76e8d1c661a51"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/source-model.json",
+      "bytes": 132641,
+      "sha256": "671b27afe4c4054629603e4659078c085e44d9fe1e6023ebb58e8ce1562bbe55"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Branch-N6-f20000-state1/source-neuron.json",
+      "bytes": 89520,
+      "sha256": "7a3db124c60d2bbd620c5be23c78b31d542f98208d01ec91e60a4c1a4a1b7947"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state0/loaded-model.json",
+      "bytes": 132113,
+      "sha256": "eaa378ad5e20153343ba0c84497e7ca0983250ad287fbca9d71f75a9c25ab700"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state0/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state0/model.xml",
+      "bytes": 37790,
+      "sha256": "f157f22d88a42445f8af3530aa4989d87cee5b4f2b044dd122aa77f939f8ab4f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state0/source-model.json",
+      "bytes": 132112,
+      "sha256": "378d7eb48860ffc9a36eebd25c68a035ab674465d8eae7c424137d7cd5d2311b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state0/source-neuron.json",
+      "bytes": 89446,
+      "sha256": "2ef62caab939834c5dde2ae2ba993ed0d1daf0a5873708218f14e6bef96dec3e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state1/loaded-model.json",
+      "bytes": 132113,
+      "sha256": "eaa378ad5e20153343ba0c84497e7ca0983250ad287fbca9d71f75a9c25ab700"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state1/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state1/model.xml",
+      "bytes": 53357,
+      "sha256": "347a35e1e053ba30b28bce4ca5921ed2b1bbf6baae01fe6c809cbf737bdebd28"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state1/source-model.json",
+      "bytes": 132113,
+      "sha256": "eaa378ad5e20153343ba0c84497e7ca0983250ad287fbca9d71f75a9c25ab700"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f2000-state1/source-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state0/loaded-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state0/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state0/model.xml",
+      "bytes": 37808,
+      "sha256": "99ae78733fad2046ddd0b2f1db25edfe3c6ce6fa62d7fe48a7d9a1b3564d21f4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state0/source-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state0/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state1/loaded-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state1/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state1/model.xml",
+      "bytes": 53375,
+      "sha256": "89dcc5015517a41bc661f6e8c3ff339be5d766facb1d941af57250c982e38bd3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state1/source-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N1-f20000-state1/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/loaded-model.json",
+      "bytes": 197289,
+      "sha256": "a2ec1effff8ff1d8695214717d38317a443e8adf6229dd0a379057c6fcdfbca8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/loaded-neuron.json",
+      "bytes": 153962,
+      "sha256": "b0c452d22102d6fabf3caec244c589e768695cd5a66d7ff9f5532c4ae99e3138"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/model.xml",
+      "bytes": 55954,
+      "sha256": "cb3dc1555559778770e4fdb17dd2823a3966339f77163501ac1daaf69b02873e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/roundtrip.csv",
+      "bytes": 20246,
+      "sha256": "05073856307fb60310a135ded69c470fee5cf526e085df08a44dacbfcc1c1ed9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/source-model.json",
+      "bytes": 197288,
+      "sha256": "6dcf4f986872b2312a4989d1d17158704882e2354182f8dc9fc979e378268eb2"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state0/source-neuron.json",
+      "bytes": 153961,
+      "sha256": "44d81d780f4690074bbd8687d2ea13b17f821a5cc725d48cc7aa297a46c6bbbc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/loaded-model.json",
+      "bytes": 197289,
+      "sha256": "a2ec1effff8ff1d8695214717d38317a443e8adf6229dd0a379057c6fcdfbca8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/loaded-neuron.json",
+      "bytes": 153962,
+      "sha256": "b0c452d22102d6fabf3caec244c589e768695cd5a66d7ff9f5532c4ae99e3138"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/model.xml",
+      "bytes": 79581,
+      "sha256": "21aa075c888e16ea538e1546be32c08d53d9ca5927c989faeaaa53e0c74052bc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/roundtrip.csv",
+      "bytes": 20246,
+      "sha256": "05073856307fb60310a135ded69c470fee5cf526e085df08a44dacbfcc1c1ed9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/source-model.json",
+      "bytes": 197289,
+      "sha256": "a2ec1effff8ff1d8695214717d38317a443e8adf6229dd0a379057c6fcdfbca8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f2000-state1/source-neuron.json",
+      "bytes": 153962,
+      "sha256": "b0c452d22102d6fabf3caec244c589e768695cd5a66d7ff9f5532c4ae99e3138"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/loaded-model.json",
+      "bytes": 197345,
+      "sha256": "a452a09829ef9650c7220ae1da3441af291b5c009f29ff2cd1cf8970f1e15cfc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/loaded-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/model.xml",
+      "bytes": 55982,
+      "sha256": "0f5964a7d039d45c6b9cd75e609f78217e8c0d58b7efc31a0f64da0fa51f3af6"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/roundtrip.csv",
+      "bytes": 203301,
+      "sha256": "a5eba25e7cb7564efe360a79937615594518d159e8eeb2bfdb269c794061c43b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/source-model.json",
+      "bytes": 197345,
+      "sha256": "a452a09829ef9650c7220ae1da3441af291b5c009f29ff2cd1cf8970f1e15cfc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state0/source-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/loaded-model.json",
+      "bytes": 197345,
+      "sha256": "a452a09829ef9650c7220ae1da3441af291b5c009f29ff2cd1cf8970f1e15cfc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/loaded-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/model.xml",
+      "bytes": 79609,
+      "sha256": "21def947094f5367cddb87f33a44061d8a3f9fbb1941eaac40d76e5226c3ae1d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/roundtrip.csv",
+      "bytes": 203301,
+      "sha256": "a5eba25e7cb7564efe360a79937615594518d159e8eeb2bfdb269c794061c43b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/source-model.json",
+      "bytes": 197345,
+      "sha256": "a452a09829ef9650c7220ae1da3441af291b5c009f29ff2cd1cf8970f1e15cfc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N2-f20000-state1/source-neuron.json",
+      "bytes": 154010,
+      "sha256": "8b95f142f738bbc2b86082b060edf055d6f9f6b86f3d1b0c7799666fb4b2452c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/loaded-model.json",
+      "bytes": 327644,
+      "sha256": "de60b6fa16e1fe7d20524f688665b9315911a0062a7d8311219061cb647526fb"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/loaded-neuron.json",
+      "bytes": 282995,
+      "sha256": "3afecea99f845c9738239de5448d4f8ef6ce93c214f8c565a6469600f3a2f226"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/model.xml",
+      "bytes": 92285,
+      "sha256": "209644ff95cc4335a7f0a2907460970e99137e7ec1a561666060e7a7ecd045ab"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/roundtrip.csv",
+      "bytes": 35356,
+      "sha256": "ff179bf93e77ec1d73f59fa23689d514a6beccd6e178c66b921d216751a4f928"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/source-model.json",
+      "bytes": 327642,
+      "sha256": "d8f963cb256454b7c6a48e5e1072ec8bad50edbe39a465be5940eadf14504a85"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state0/source-neuron.json",
+      "bytes": 282993,
+      "sha256": "170ff6e4a4e6562db18b468e0082cb193a1d3a695a94b164682353e6fbe21943"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/loaded-model.json",
+      "bytes": 327644,
+      "sha256": "de60b6fa16e1fe7d20524f688665b9315911a0062a7d8311219061cb647526fb"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/loaded-neuron.json",
+      "bytes": 282995,
+      "sha256": "3afecea99f845c9738239de5448d4f8ef6ce93c214f8c565a6469600f3a2f226"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/model.xml",
+      "bytes": 132032,
+      "sha256": "ccad2c5b482e8a5cc342cd554aefd0d106b1ab3d47fcab3c7bfdc79f7b649031"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/roundtrip.csv",
+      "bytes": 35356,
+      "sha256": "ff179bf93e77ec1d73f59fa23689d514a6beccd6e178c66b921d216751a4f928"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/source-model.json",
+      "bytes": 327644,
+      "sha256": "de60b6fa16e1fe7d20524f688665b9315911a0062a7d8311219061cb647526fb"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f2000-state1/source-neuron.json",
+      "bytes": 282995,
+      "sha256": "3afecea99f845c9738239de5448d4f8ef6ce93c214f8c565a6469600f3a2f226"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/loaded-model.json",
+      "bytes": 327740,
+      "sha256": "cbe3636dc830fc669ad7a511f7d029f055ac63350dd35c143e79a0f8bb81a360"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/loaded-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/model.xml",
+      "bytes": 92333,
+      "sha256": "d822b589497af32f44e6c50120215d2c4b7d8968e009b0df4c44272ccf8ed79b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/roundtrip.csv",
+      "bytes": 355117,
+      "sha256": "d92f27f7d6145f16b0450605c1c028a3ee8f00e06344fc73a24549b447c92dcd"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/source-model.json",
+      "bytes": 327740,
+      "sha256": "cbe3636dc830fc669ad7a511f7d029f055ac63350dd35c143e79a0f8bb81a360"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state0/source-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "720b8614290e82eb160e058bf56597cd11a0364469a99a6138a22e35528012cf"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/loaded-model.json",
+      "bytes": 327740,
+      "sha256": "cbe3636dc830fc669ad7a511f7d029f055ac63350dd35c143e79a0f8bb81a360"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/loaded-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/model.xml",
+      "bytes": 132080,
+      "sha256": "83181ae406727723d720915db3e91c89a2a352cdf5da0a61d430e38096914ae8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/roundtrip.csv",
+      "bytes": 355117,
+      "sha256": "d92f27f7d6145f16b0450605c1c028a3ee8f00e06344fc73a24549b447c92dcd"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/source-model.json",
+      "bytes": 327740,
+      "sha256": "cbe3636dc830fc669ad7a511f7d029f055ac63350dd35c143e79a0f8bb81a360"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N4-f20000-state1/source-neuron.json",
+      "bytes": 283083,
+      "sha256": "3755dc65fffb72014b30581b1b94b021e020bda5c00f3a0eb982186e784378e0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/loaded-model.json",
+      "bytes": 458003,
+      "sha256": "7ad9c0a16bf38ac074d358db08b3593999e41f4b8e2718041d447e880041438f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/loaded-neuron.json",
+      "bytes": 412032,
+      "sha256": "86b5e46018124a14e5d1758c56d7f09e9b8cdb35baa28e39865c6cc42e34d4b0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/model.xml",
+      "bytes": 128617,
+      "sha256": "358120160921597cdb753bd96024803435128447da7d66640871ff6c0c3daf00"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/roundtrip.csv",
+      "bytes": 50398,
+      "sha256": "364d64834d4f110b66c9fb0292ab915cea72a1947136056886d6cf384664f0c4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/source-model.json",
+      "bytes": 458001,
+      "sha256": "b20c79c49164907b45e657975ce71deab34a28cd9c91527d1158ea4ed854d669"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state0/source-neuron.json",
+      "bytes": 412030,
+      "sha256": "caedac14208095d533e11eaf14bb2a393242765c3fbe68a2eadb4ba30110ec24"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/loaded-model.json",
+      "bytes": 458003,
+      "sha256": "7ad9c0a16bf38ac074d358db08b3593999e41f4b8e2718041d447e880041438f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/loaded-neuron.json",
+      "bytes": 412032,
+      "sha256": "86b5e46018124a14e5d1758c56d7f09e9b8cdb35baa28e39865c6cc42e34d4b0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/model.xml",
+      "bytes": 184485,
+      "sha256": "846279423d102b232aa381e592337feb5c419e7a644c99b2ed8a14f05cd93268"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/roundtrip.csv",
+      "bytes": 50398,
+      "sha256": "364d64834d4f110b66c9fb0292ab915cea72a1947136056886d6cf384664f0c4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/source-model.json",
+      "bytes": 458003,
+      "sha256": "7ad9c0a16bf38ac074d358db08b3593999e41f4b8e2718041d447e880041438f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f2000-state1/source-neuron.json",
+      "bytes": 412032,
+      "sha256": "86b5e46018124a14e5d1758c56d7f09e9b8cdb35baa28e39865c6cc42e34d4b0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/loaded-model.json",
+      "bytes": 458139,
+      "sha256": "db00f578d3fdfd920ce56cc9f4d06ee5473aca724f64273eec02d38671618e11"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/loaded-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/model.xml",
+      "bytes": 128685,
+      "sha256": "1d8043643326fce70287ef176210473caa97c476e988c9b72ecf749b11cd8a53"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/roundtrip.csv",
+      "bytes": 505159,
+      "sha256": "9820e35e8d82a135cc61491f994a53f992eaa63fdeffa8a3089fdcb19939c257"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/source-model.json",
+      "bytes": 458139,
+      "sha256": "db00f578d3fdfd920ce56cc9f4d06ee5473aca724f64273eec02d38671618e11"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state0/source-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "6c9cd5db6806683a3370cbe2d03f6b04153f3aa9e335562c1b31e1367f58285e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/loaded-model.json",
+      "bytes": 458139,
+      "sha256": "db00f578d3fdfd920ce56cc9f4d06ee5473aca724f64273eec02d38671618e11"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/loaded-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/model.xml",
+      "bytes": 184553,
+      "sha256": "ce7df8cf7c8adce08e706c5a0c1c62a9273f60b2574368c246e49d113d3fb52b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/roundtrip.csv",
+      "bytes": 505159,
+      "sha256": "9820e35e8d82a135cc61491f994a53f992eaa63fdeffa8a3089fdcb19939c257"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/source-model.json",
+      "bytes": 458139,
+      "sha256": "db00f578d3fdfd920ce56cc9f4d06ee5473aca724f64273eec02d38671618e11"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/artifacts/Classic-N6-f20000-state1/source-neuron.json",
+      "bytes": 412160,
+      "sha256": "3787e8b4cf4970b1c7ad41ad3beebd593095d67c10315e959b4f8ce8ecaef36d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/build.log",
+      "bytes": 2310,
+      "sha256": "5815e9fc735ca3e4656bebdfa943c61b0b137e8d05493f62f5094eae8a8b9324"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/checkout-Nmsdk-Bin.log",
+      "bytes": 79,
+      "sha256": "f64376f04d4f592b606e4e83ff24513be82433bd4921ab054903887cad7716d8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/checkout-Nmsdk-PulseLib.log",
+      "bytes": 193,
+      "sha256": "8c4498e6a9b52f837084494bd289d41fafcc7c0b7d2eac098d1ea9b8143df776"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/checkout-root.log",
+      "bytes": 248,
+      "sha256": "30247df24669a1c6be457a74b9b472a8e251be0e0c5c348c47aaec5e11154229"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/configure.log",
+      "bytes": 1345,
+      "sha256": "a95b93e5dbc80ffb805f7afde4ecd0c1d0c673c1d0bdf51ac2f804acfbce8946"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/fetch-Nmsdk-Bin.log",
+      "bytes": 94,
+      "sha256": "6d7aabf91b4d0b62d00ff69de570f5aba2410f6485e63f8c5362de85c8a11062"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/fetch-Nmsdk-PulseLib.log",
+      "bytes": 119,
+      "sha256": "2414eedbb4e801aad47d965558612b925cfe8616abd1c9d52501273dec142a1f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/fetch-root.log",
+      "bytes": 114,
+      "sha256": "908bdbd922659e15e687c2eb4e4a127c8297f8af751d0577efa169dcc5165598"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/gtest.xml",
+      "bytes": 22791,
+      "sha256": "72abcfeb61c7061f3a8508ef5fd71268717bb720782aca2e51dc44b87e2b439c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/job.py",
+      "bytes": 5479,
+      "sha256": "dedbe1d05b92986a1a2b7189ab6501901eeeebee759f1248241d54647b649ecd"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/launch.json",
+      "bytes": 142,
+      "sha256": "58d2e9bf6f3ffa7ff2a619c7c4ea192c76c3f964dc731039776f7f8c4f8c6df9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process-guard.json",
+      "bytes": 376,
+      "sha256": "dfb1c3f202adf05d9837a9c290fed3c930e22909bb95999651cf54da468996a4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process/loaded-files.json",
+      "bytes": 5377,
+      "sha256": "1a99760bf1cd2686579d1ee08da27996993ea7257fbcb1778e59ca14441f25f0"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process/owned-process.json",
+      "bytes": 416,
+      "sha256": "d16db2eb3af90f18b7843a26aefc8827ba41c7f993ae85aa252139bea0e49564"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process/request.json",
+      "bytes": 514,
+      "sha256": "0b21d2890839b3ce5da733ab95563b3285b465d84543f6800bf2675f8ccac33f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process/result.json",
+      "bytes": 450,
+      "sha256": "972aaf36bd991e5d0f91d17a0b879575b82849f68fece837cae2d3bd24bb3a1d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process/runtime.json",
+      "bytes": 24336,
+      "sha256": "a26c4c80565f76a94325144c51595ca42d99284d3b5271b070960b94fa87a9d2"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process/stderr.log",
+      "bytes": 1799,
+      "sha256": "70ddebce2d8fce418c7416321e05346f85e413fa0c13d99b9eb5a5a0b0c893f6"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/process/stdout.log",
+      "bytes": 12919,
+      "sha256": "03b61bc19a0eafee3aee646fa9caafd23d66ef8ca8fcae334fb841eb523cf600"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/runtime.json",
+      "bytes": 24336,
+      "sha256": "a26c4c80565f76a94325144c51595ca42d99284d3b5271b070960b94fa87a9d2"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/source.json",
+      "bytes": 1304,
+      "sha256": "fbc7956c9afaa9c38c3466608266f3eb7f0b089b6fd23e4295799c61320314b8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/supervisor.log",
+      "bytes": 144,
+      "sha256": "2a3946c869b69a6bb5605a42589488a593b659315c4458050529c691bfc45cd6"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a2/validation.json",
+      "bytes": 876,
+      "sha256": "72dde3b1b0b09527cd99acb7c8bf58be6c09aa5f092ad459244fcb9a06fa133f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/loaded-model.json",
+      "bytes": 132113,
+      "sha256": "eaa378ad5e20153343ba0c84497e7ca0983250ad287fbca9d71f75a9c25ab700"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/model.xml",
+      "bytes": 37790,
+      "sha256": "f157f22d88a42445f8af3530aa4989d87cee5b4f2b044dd122aa77f939f8ab4f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/roundtrip.csv",
+      "bytes": 12502,
+      "sha256": "3dc7b58f5da4ce4f568de347cc01411fc846c1a517f79c2d24ee091224575fe6"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/source-model.json",
+      "bytes": 132112,
+      "sha256": "378d7eb48860ffc9a36eebd25c68a035ab674465d8eae7c424137d7cd5d2311b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state0/source-neuron.json",
+      "bytes": 89446,
+      "sha256": "2ef62caab939834c5dde2ae2ba993ed0d1daf0a5873708218f14e6bef96dec3e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/loaded-model.json",
+      "bytes": 132113,
+      "sha256": "eaa378ad5e20153343ba0c84497e7ca0983250ad287fbca9d71f75a9c25ab700"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/loaded-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/model.xml",
+      "bytes": 53357,
+      "sha256": "347a35e1e053ba30b28bce4ca5921ed2b1bbf6baae01fe6c809cbf737bdebd28"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/roundtrip.csv",
+      "bytes": 12502,
+      "sha256": "3dc7b58f5da4ce4f568de347cc01411fc846c1a517f79c2d24ee091224575fe6"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/source-model.json",
+      "bytes": 132113,
+      "sha256": "eaa378ad5e20153343ba0c84497e7ca0983250ad287fbca9d71f75a9c25ab700"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f2000-state1/source-neuron.json",
+      "bytes": 89447,
+      "sha256": "f0b3c42863030af3c83b0dad61164503cf7aa17d652e76bec315fb6dcc979c79"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/loaded-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/model.xml",
+      "bytes": 37808,
+      "sha256": "99ae78733fad2046ddd0b2f1db25edfe3c6ce6fa62d7fe48a7d9a1b3564d21f4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/roundtrip.csv",
+      "bytes": 125793,
+      "sha256": "b084ccc93034d9a0042ff6f181ff0cb01454653126b01d6e97ed582fde4f1c36"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/source-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state0/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "4728bfcaee690a36f16903da0849c6bbe307880d2d80ec4344848108ef536926"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/loaded-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/loaded-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/model.xml",
+      "bytes": 53375,
+      "sha256": "89dcc5015517a41bc661f6e8c3ff339be5d766facb1d941af57250c982e38bd3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/roundtrip.csv",
+      "bytes": 125793,
+      "sha256": "b084ccc93034d9a0042ff6f181ff0cb01454653126b01d6e97ed582fde4f1c36"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/source-model.json",
+      "bytes": 132149,
+      "sha256": "a1ef0a4d5af204b3d6eb1a378cfccf52af8c81ad4534857c44c5a71c5e86f1c3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N1-f20000-state1/source-neuron.json",
+      "bytes": 89475,
+      "sha256": "9abad000d3fec60fc44f2e4bd7fd7ad8c4a5dc9f20068938bd828eb908579afa"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/load-errors.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/loaded-dimensions.json",
+      "bytes": 45,
+      "sha256": "82c76bd6f79189edde0b38c82b0d47aba535f7a23852031ca53bca6df1ac818a"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/loaded-model.json",
+      "bytes": 197289,
+      "sha256": "a2ec1effff8ff1d8695214717d38317a443e8adf6229dd0a379057c6fcdfbca8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/loaded-neuron.json",
+      "bytes": 153962,
+      "sha256": "b0c452d22102d6fabf3caec244c589e768695cd5a66d7ff9f5532c4ae99e3138"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/model.xml",
+      "bytes": 55954,
+      "sha256": "cb3dc1555559778770e4fdb17dd2823a3966339f77163501ac1daaf69b02873e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/roundtrip.csv",
+      "bytes": 20246,
+      "sha256": "05073856307fb60310a135ded69c470fee5cf526e085df08a44dacbfcc1c1ed9"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/source-model.json",
+      "bytes": 197288,
+      "sha256": "6dcf4f986872b2312a4989d1d17158704882e2354182f8dc9fc979e378268eb2"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/artifacts/Classic-N2-f2000-state0/source-neuron.json",
+      "bytes": 153961,
+      "sha256": "44d81d780f4690074bbd8687d2ea13b17f821a5cc725d48cc7aa297a46c6bbbc"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/build.log",
+      "bytes": 6379,
+      "sha256": "403e372c0579969118477e5d85e6eaff5e167e241f2200a285452e94c8e8033b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/checkout-Nmsdk-Bin.log",
+      "bytes": 79,
+      "sha256": "f64376f04d4f592b606e4e83ff24513be82433bd4921ab054903887cad7716d8"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/checkout-Nmsdk-PulseLib.log",
+      "bytes": 205,
+      "sha256": "3be8993c7c133b27b8f1bfb66f45f5f15d7fd20beb20f8a37737d1063699d7da"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/checkout-root.log",
+      "bytes": 241,
+      "sha256": "141fa685786e683cdc024cdacf625528e8ba0b3875f1b69809a952931a759582"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/configure.log",
+      "bytes": 1345,
+      "sha256": "e7cde7ecbd93cae96777fa2f0a587850ef294e6c7a92c02a72b7f877859cdf9c"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/fetch-Nmsdk-Bin.log",
+      "bytes": 94,
+      "sha256": "6d7aabf91b4d0b62d00ff69de570f5aba2410f6485e63f8c5362de85c8a11062"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/fetch-Nmsdk-PulseLib.log",
+      "bytes": 119,
+      "sha256": "2414eedbb4e801aad47d965558612b925cfe8616abd1c9d52501273dec142a1f"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/fetch-root.log",
+      "bytes": 122,
+      "sha256": "3e787aa09c462092c072430aaba3989b89b920cca650b3dff68e6f56759773e5"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/job.py",
+      "bytes": 5487,
+      "sha256": "28c34362354a8e1a0b93637cf4ea809b95306dcb4c87a2182c7899c72f7f4460"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/launch.json",
+      "bytes": 142,
+      "sha256": "598e0eba384b9c3fbf1d59095562c8ca25429062d9922015dbf4b2b9930f764e"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process-guard.json",
+      "bytes": 376,
+      "sha256": "dfb1c3f202adf05d9837a9c290fed3c930e22909bb95999651cf54da468996a4"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process/loaded-files.json",
+      "bytes": 6210,
+      "sha256": "8f532572433fb9a379252e840cb9097d933f96816177a255196894e9db59c5e7"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process/owned-process.json",
+      "bytes": 416,
+      "sha256": "0e0bc90ca819028bb0034b9001c42fb0fea51ddb8b4fdf0064e569762fac7e1b"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process/request.json",
+      "bytes": 514,
+      "sha256": "befb811cd1f7eb69d3d8acc443d2b3b7590c2045b9858dd3afd59d7b1b1c416d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process/result.json",
+      "bytes": 450,
+      "sha256": "39cc45563757282426da8a239e501547e34607474cbb12b08e2d1e06b227e743"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process/runtime.json",
+      "bytes": 24336,
+      "sha256": "2de5824b2dfeff1adc85b457e776367d4a55459abb392aa2b244fb6e318ece77"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process/stderr.log",
+      "bytes": 10662,
+      "sha256": "29ec0dd474a5fe1e0d57dd2ce13395aafd4aaf59a0431edd7c9b9399d7ce455d"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/process/stdout.log",
+      "bytes": 1153,
+      "sha256": "a44e6c33552b22a39078b379eff71570f2c89f37c7e8993460244faa206fcdc1"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/runtime.json",
+      "bytes": 24336,
+      "sha256": "2de5824b2dfeff1adc85b457e776367d4a55459abb392aa2b244fb6e318ece77"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/source.json",
+      "bytes": 1304,
+      "sha256": "a63d333522b3e1261c53512a1525c3d2d2b43184f1411ea07b03bc64982675b3"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/supervisor.log",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "path": "s04-loaded-readout-fixed-asan-a3/validation.json",
+      "bytes": 705,
+      "sha256": "85d7927a1eefc4975a0dca0f41372ab5abceb37d28ee005d1536b24bbcee7acb"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/build.log",
+      "bytes": 840,
+      "sha256": "cfd6ca0b8c370606eb93e151e9c1d6a29e438bfd7186121e4d0729847f9cabf3"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/checkout-Nmsdk-Bin.log",
+      "bytes": 79,
+      "sha256": "f64376f04d4f592b606e4e83ff24513be82433bd4921ab054903887cad7716d8"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/checkout-Nmsdk-PulseLib.log",
+      "bytes": 107,
+      "sha256": "0d448b01e4e4c37cb34517109d95aac7efb2c950c89957ec303f42c97b05bfcd"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/checkout-root.log",
+      "bytes": 223,
+      "sha256": "6818998490fc68ae449667d723aeaefdf0c3ded15319d9591db017b174b79a8f"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/configure.log",
+      "bytes": 1345,
+      "sha256": "3248be63fe68e008c81df6e6c9238bdd0556a77d1364b8d2129f4a62dc3e9345"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/fetch-Nmsdk-Bin.log",
+      "bytes": 94,
+      "sha256": "6d7aabf91b4d0b62d00ff69de570f5aba2410f6485e63f8c5362de85c8a11062"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/fetch-Nmsdk-PulseLib.log",
+      "bytes": 119,
+      "sha256": "2414eedbb4e801aad47d965558612b925cfe8616abd1c9d52501273dec142a1f"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/fetch-root.log",
+      "bytes": 122,
+      "sha256": "7d74a3a265b5f1e1da5a96e8eee5d8df7e3402af195424285c52ba74c4ffe571"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/job.py",
+      "bytes": 4636,
+      "sha256": "48c0167e5a294aec4e84df0cf5f93739b0be688438bca98b44e67f830fc055c3"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/launch.json",
+      "bytes": 139,
+      "sha256": "f8cbaee4278fa13fcbd48d65fc551283dba19d9089429110a966317547f25ff0"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process-guard.json",
+      "bytes": 376,
+      "sha256": "dfb1c3f202adf05d9837a9c290fed3c930e22909bb95999651cf54da468996a4"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process/loaded-files.json",
+      "bytes": 5872,
+      "sha256": "bee0082334457642b84afc91c98b89729ed583cc00bc0919548618a4f50af59e"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process/owned-process.json",
+      "bytes": 401,
+      "sha256": "3e449c16a9a1472e20b0c8a64cd18615ecb631064fd4d4bcf3d1ca6c9205e502"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process/request.json",
+      "bytes": 470,
+      "sha256": "c36996aba114aeaceb1f0916f5cc6c8ad431d94011b131b3aca5773ac84a58c0"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process/result.json",
+      "bytes": 452,
+      "sha256": "4f247605ee547d04f5be8344e0683642373493bc9e89e9aa3cf0b76d5378dbf7"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process/runtime.json",
+      "bytes": 23291,
+      "sha256": "741e67f14521c22a91744998383f5c8b91d3b6321770d8e928b8a4ab813bdf03"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process/stderr.log",
+      "bytes": 5845,
+      "sha256": "1845b79d65a9174e4e20d1e4417d5eb81ed52df5de41af15bebe91c888f37de0"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/process/stdout.log",
+      "bytes": 261,
+      "sha256": "32cd64d26836d0bd88027cd12d72dd15f54f8cf447c22ac36fdce7fe4da1fb90"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/runtime.json",
+      "bytes": 23291,
+      "sha256": "741e67f14521c22a91744998383f5c8b91d3b6321770d8e928b8a4ab813bdf03"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/source.json",
+      "bytes": 1304,
+      "sha256": "3f11a925b68962b4ec04a12ceda93bea5296e72336557df97a310d8c529c3a57"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/supervisor.log",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "path": "s04-mdmatrix-baseline-asan-a1/validation.json",
+      "bytes": 712,
+      "sha256": "b2c4cf84a4e99fb72c2ae2779752cab811aacaccdb09129f74412f4661e076a1"
+    }
+  ],
+  "archive": {
+    "path": "primary.tar.xz",
+    "bytes": 379560,
+    "sha256": "4d9fbf88979b664f41ad63cdb518419ad2e1d4d5eefe2c0505bc67f149f2dcaf"
+  },
+  "joint_acceptance": false,
+  "scientific_verdict": null
+}
