@@ -1,6 +1,7 @@
 """Bounded historical cold Train after the actual native pre-stimulus gate."""
 import argparse
 import hashlib
+import json
 from pathlib import Path
 import shutil
 import xml.etree.ElementTree as ET
@@ -39,7 +40,8 @@ def main():
     require(shutil.disk_usage(ancestor).free >= 2*1024**3, "historical_coldtrain_storage_budget")
     args.output.mkdir(parents=True, exist_ok=False)
     work = prepare(source/"Bin", args.output/"train", "native_state_reset")
-    declared = load(preflight/"pre-run-files.json")
+    declared = json.loads((preflight/"pre-run-files.json").read_text())
+    require(type(declared) is list and len(declared) == 7, "invalid_coldstart_prepared_input_manifest")
     for record in declared:
         relative = Path(record["path"]).relative_to("work")
         require(hashlib.sha256((work/relative).read_bytes()).hexdigest() == record["sha256"],

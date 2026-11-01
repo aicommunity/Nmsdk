@@ -70,6 +70,10 @@ def prepare(bin_repo, folder, mode):
     write(folder/"pre-run-files.json", [{"path": str(p.relative_to(folder)),
         "bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
         for p in sorted(work.iterdir()) if p.is_file()])
+    prepared = folder/"prepared"
+    prepared.mkdir()
+    for path in work.iterdir():
+        if path.is_file():shutil.copyfile(path, prepared/path.name)
     return work
 
 
