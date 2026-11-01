@@ -84,3 +84,25 @@ Reports/StructTrain/TimeLearner/s04-hot-readout-visual-a1, исходная пу
 cc5f76323ef4b7a8dbed918bb137ab7dc64aefdc. Суммы всех опубликованных файлов
 и членов metadata archive проверены после Git retrieval. ASan hot8 уже
 прошёл; loaded32/reg21 нового ASan runtime ещё выполняются.
+
+## Адресная приёмка warm Reset, 01.11
+
+Прежние статусы выполнения выше относятся к своим снимкам. M40 ASan завершил
+8/8 warm,32/32 loaded и21/21 regression без skips, затем production readers
+16/16 warm +16/16 loaded. Проверены все16 warm и68 loaded case/soma pairs;
+все40 CSV побайтово равны normal. Оба supervisor792527 и reader801210 завершены;
+exception отсутствует, источник и runtime проверены после последней пробы.
+Длительность regression2034 wall seconds не является model time.
+
+Полный ASan primary опубликован в3600a729a07032b369e54d6d191e7ded5a442672,
+Reports/StructTrain/TimeLearner/s04-hot-readout-current-asan-a1:
+355 членов,418980 bytes xz. Локально после Git retrieval проверены внешние
+SHA256, размер и SHA256 каждого члена. Повторное построение тех же normal
+рисунков не требуется по доказанному тождеству CSV;18 selected уже просмотрены.
+
+PulseLib hot feature принята --no-ff в develop70f467d3b66ea4defdec2f58b84e76b692ab3602;
+её Git tree равен фактически проверенному6cfcca0c7970a6f9a9381c9592cfbc8ffcbdea94.
+Root acceptance фиксирует этот child merge и прежний Rdk78e51a9b/Bin6304b4a2.
+Подэтап принят только для описанных legacy warm Reset случаев. Hot XML N1/2/4/6,
+production storage/growth/physics matrix и полные этапы4/11 остаются отдельными
+требованиями. Качество распознавания и новые learning certificates здесь не оценивались.

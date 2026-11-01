@@ -7,8 +7,15 @@ MDMatrix resize. Оба workers прошли10 math+32 native+21 regression+16 r
 Rdk78e51a9b опубликованы с trees, равными проверенным исходникам. Root exact
 closure фиксируется в текущем acceptance merge. [Подробности](LoadedLearnerReadout.ru.md).
 Полные этапы4/11 и цель0–12 остаются открытыми. Warm learner Reset — отдельная
-незавершённая feature; новые8 tests на normal уже прошли, ASan/graphs/acceptance
-ещё требуются. Ранние статусы ниже являются историческими снимками.
+адресно принятая feature: normal и ASan прошли8 warm+32 loaded+21 regression
+без skips; readers16+16 на ASan проверили все84 case/soma pairs,40 CSV
+побайтово равны normal. Все178 temporal PNG проверены автоматически,18 selected
+оригиналов просмотрены. Primary ASan3600a729a07032b369e54d6d191e7ded5a442672
+проверен после Git retrieval:355 members/418980 bytes и все hashes.
+PulseLib develop merge70f467d3b66ea4defdec2f58b84e76b692ab3602 сохраняет tree
+проверенного6cfcca0c. [Границы приёмки](HotLearnerReset.ru.md). Hot XML32
+остаётся отдельной feature; полная lifecycle/physics матрица не закрыта.
+Ранние статусы ниже являются историческими снимками.
 
 
 Цель 0–12 активна. Полностью принят только этап 0; остальные этапы имеют
