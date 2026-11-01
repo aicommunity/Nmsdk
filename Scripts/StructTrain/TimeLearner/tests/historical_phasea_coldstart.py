@@ -99,7 +99,8 @@ def readback(work):
     states = ET.parse(work/"States_00.xml").getroot()
     counter = states.find(".//Generator1/State/PulseCounter")
     reset = states.find(".//NeuronTimeLearner/State/ResetToUntrainedState")
-    return {"learner": values, "tip_resistances": tips, "graph": graph, "selected_physics": physics,
+    return {"learner": values, "dendrite_exc1_resistances": tips, "effective_dendrite_segments": len(tips),
+            "graph": graph, "selected_physics": physics,
             "generator_pulse_counter": int(counter.text) if counter is not None else None,
             "reset_flag": reset.text.strip() if reset is not None else None,
             "scope": "native graph/classes and selected child physics; not complete dynamic checkpoint"}
@@ -130,23 +131,37 @@ def main():
         actual = readback(work);write(folder/"readback.json", actual)
         if mode != "state_disabled":
             require(actual["generator_pulse_counter"] == 0, "preflight_already_presented_stimulus:"+mode)
-        cold = mode in ("native_state_reset", "explicit_cold")
-        require(actual["learner"]["DendriteLength"] == ([1]*4 if cold else [49, 41, 25, 1]),
+        cold = mode == "native_state_reset"
+        declared_cold = cold or mode == "explicit_cold"
+        require(actual["learner"]["DendriteLength"] == ([1]*4 if declared_cold else [49, 41, 25, 1]),
                 "historical_coldstart_length_mismatch:"+mode)
-        if cold:
+        if declared_cold:
             for key, value in COLD.items():
                 require(actual["learner"][key] == [float(t) for t in value.split()],
                         "historical_coldstart_parameter_mismatch:"+mode+":"+key)
-            require(actual["tip_resistances"] == {"Dendrite"+str(i)+"_1": 86000000.0 for i in range(1, 5)},
+        if cold:
+            require(actual["dendrite_exc1_resistances"] == {"Dendrite"+str(i)+"_1": 86000000.0 for i in range(1, 5)},
                     "historical_coldstart_effective_tips_mismatch:"+mode)
-        rows[mode] = {"execution": result, "readback": actual}
+            require(actual["reset_flag"] == "0", "historical_reset_request_not_consumed")
+        else:
+            require(actual["effective_dendrite_segments"] == 116,
+                    "historical_loaded_graph_control_changed:"+mode)
+        if mode == "state_disabled":
+            require(actual["reset_flag"] == "1", "disabled_state_file_was_modified")
+        rows[mode] = {"execution": result, "readback": actual,
+                      "cold_start_verified": cold,
+                      "configuration_validity": "graph_parameter_mismatch" if mode == "explicit_cold" else "valid_in_declared_scope",
+                      "training_allowed": cold}
         write(args.output/"progress.json", rows)
     a, b = rows["native_state_reset"]["readback"], rows["explicit_cold"]["readback"]
-    require(a["graph"] == b["graph"] and a["selected_physics"] == b["selected_physics"],
-            "native_reset_explicit_cold_effective_model_disagree")
+    # Parent overlays do not reconstruct this loaded historical graph. Keep the
+    # discrepancy as a measured negative control, never promote it to cold Train.
+    require(a["graph"] != b["graph"] and a["learner"] == b["learner"],
+            "historical_parent_overlay_negative_control_not_reproduced")
     require(source_closure(source) == closure, "historical_source_changed")
     write(args.output/"validation.json", {"kind": "historical_phasea_prestimulus_coldstart_gate",
-        "operations": 4, "source_unchanged": True, "native_and_explicit_cold_agree": True,
+        "operations": 4, "source_unchanged": True, "native_cold_start_verified": True,
+        "parent_only_overlay_rejected": True, "native_and_parent_overlay_graphs_agree": False,
         "state_load_switch_negative_control": True, "all_completed_before_first_input": True,
         "training_performed": False, "scientific_verdict": None})
 
