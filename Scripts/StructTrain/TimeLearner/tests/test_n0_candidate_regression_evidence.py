@@ -7,6 +7,7 @@ import unittest
 import xml.etree.ElementTree as ET
 
 from ..native_evidence import EvidenceError, audit_probe, audit_training_summary, load
+from ..model_identity import canonical_model_sha256
 
 
 class N0CandidateRegressionEvidenceTest(unittest.TestCase):
@@ -35,8 +36,16 @@ class N0CandidateRegressionEvidenceTest(unittest.TestCase):
             summary = load(cls.native/phase["summary"])
             total = summary["reference_probes"]+summary["search_probes"]
             expected = {phase["probe_prefix"]+str(i)+".json" for i in range(1, total+1)}
-            if not expected or {p.name for p in cls.native.glob(phase["probe_prefix"]+"*.json")} != expected:
-                raise RuntimeError("missing or extra declared N0 training probe")
+            # The native fixture exports its effective model with the same
+            # prefix. It is mandatory graph evidence, not an extra trial.
+            model_name = phase["probe_prefix"]+"model.json"
+            if not expected or {p.name for p in cls.native.glob(phase["probe_prefix"]+"*.json")} != expected | {model_name}:
+                raise RuntimeError("missing or extra declared N0 training probe/model")
+            model = load(cls.native/model_name)
+            if (model["valid"] is not True
+                    or model["sha256"] != canonical_model_sha256(model["model"])
+                    or model["sha256"] != summary["actual_model_revision"]):
+                raise RuntimeError("N0 effective graph does not match the training model")
             packets, paths = {}, []
             for name in sorted(expected):
                 path = cls.native/name
