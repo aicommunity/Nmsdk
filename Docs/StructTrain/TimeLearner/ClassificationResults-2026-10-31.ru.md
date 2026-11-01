@@ -74,3 +74,37 @@ robustness не подменяет собственный сертификат �
 Августовские визуальные 4/8–6/8 остаются рабочими наблюдениями исходного
 протокола с плохой разделимостью. Перестановки и увеличенный ITI тогда не
 проверялись; новые критерии не отменяют исторический результат.
+
+## Дополнение 01.11: первый живой handoff
+
+[Normal primary](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-normal-a1/README.md)
+включают четыре настоящих холодных перехода Classic/Branch: fixed и grid
+finalization, затем frozen replay двух объявленных паттернов. Во всех четырёх
+Train сохраняет SearchUnresolved, а конечные target иfoil дают по0 spikes.
+Fixed завершает выбор весов WeightsSelected; grid завершается SearchUnresolved
+с восстановлением source. Следовательно, ложные срабатывания здесь отсутствуют
+за счёт молчания вместе с target: это FN, не успешная классификация.
+
+Native31/31, stopped follow-up2/2 и независимый reader4/4 подтверждают
+функциональный переход и целостность данных в указанной области. Они не
+подтверждают научный успех, независимый Test или августовскую8-case матрицу.
+Полные временные отчёты нового handoff и broad ASan приёмка ещё ожидаются.
+
+## Production schema2 normal,01.11
+
+[Proof84e79861](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-normal-a2/README.md)
+содержит четыре новых cold Train→finalization и четыре отдельно вызванных
+frozen same-matrix evaluate, используя genuine новый source Solo. Classic/
+Branch × fixed/grid, N1/2000Hz, два входа и два паттерна. Train везде
+SearchUnresolved; fixed выбирает веса, grid восстанавливает source. Во всех
+четырёх оценках TP0/FP0/FN1/TN1, target hit0 и foil response0. Accuracy0.5
+отражает молчание двухпаттерновой матрицы, не успешную детекцию. Научный PASS
+не установлен; это не независимый Test и не сравнение с августовскими8 cases.
+Production ASan и новые temporal reports пока не завершены.
+
+ASan production повтор опубликован в proof264c429974e9d97bb5d5277b1fc25c846fa80eda:
+14 операций и complete reader4/4. Во всех четырёх frozen парах снова
+TP0/FP0/FN1/TN1; model revisions совпадают с normal. Это deterministic
+engineering correspondence, не независимые обучения и не успешная классификация.
+Normal14 temporal reports проверены3/3;10 выбранных полных/partial PNG
+просмотрены. ASan temporal reports пока выполняются.

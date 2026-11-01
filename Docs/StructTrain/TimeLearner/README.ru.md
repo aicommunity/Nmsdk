@@ -6,8 +6,9 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
 
 - [План и условия приёмки](RefactoringPlan.ru.md).
-- [Состояние 01.11: native owner phase, temporal reports и незавершённая Console-интеграция](CurrentStatus-2026-11-01.ru.md).
+- [Состояние 01.11: принятые native owner/Console подэтапы, temporal reports и оставшийся live Train handoff](CurrentStatus-2026-11-01.ru.md).
 - [PostTune как native фаза learner: контракты и границы](NativeOwnedPostTunePhase.ru.md).
+- [Живой Train → финализация: новая реализация и незавершённая приёмка](NativeLiveFinalization.ru.md).
 - [Состояние 31.10: калибровочные пробы, компактные отчёты и полный остаток плана](CurrentStatus-2026-10-31.ru.md).
 - [Native threshold candidate/proposal, независимый аудит и CLI select/confirm](NativeThresholdCalibration.ru.md).
 - [Cold native Train/export/evaluate: production-команды и границы приёмки](NativePipelineWorker.ru.md).
