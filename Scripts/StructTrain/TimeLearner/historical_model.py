@@ -80,10 +80,16 @@ def serialized_neuron(path: Path, frequency_hz=2000):
     require(bool(nodes) and bool(edges), "historical_neuron_or_inbound_links_empty")
     paths = {node["path"] for node in nodes}
     require(len(paths) == len(nodes), "duplicate_historical_component_path")
+    global_paths = {""}
+    def collect(node, prefix):
+        for child in node.findall("./Components/*"):
+            path = child.tag if not prefix else prefix+"."+child.tag
+            require(path not in global_paths, "duplicate_historical_global_component_path")
+            global_paths.add(path);collect(child, path)
+    collect(model, "")
     for edge in edges:
         require(edge["destination"] in paths, "historical_link_destination_not_in_graph")
-        if edge["source"] == prefix or edge["source"].startswith(prefix+"."):
-            require(edge["source"] in paths, "historical_link_source_not_in_graph")
+        require(edge["source"] in global_paths, "historical_link_source_not_in_graph")
     result = {"schema": "historical_serialized_neuron_v1", "frequency_hz": frequency_hz,
               "nodes_in_native_order": nodes, "inbound_edges_in_serialized_order": edges}
     return {"snapshot": result, "sha256": canonical_model_sha256(result),
