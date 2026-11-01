@@ -210,3 +210,13 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
   eight native and eight independent checks; real partial Train data, queued
   cancellation and owned PostTune rollback.252 verified primary members /752596
   compressed bytes. No frozen recognition evaluation after cancellation.
+
+- [Cancel and persisted codec, ASan](s08-native-live-finalization-cancel-codec-asan-a1/README.md):
+  nine native tests, eight independent checks;253 verified members /765044
+  compressed bytes. Predates production Train schema2.
+- [Production cold Train with live finalization, normal](s09-native-live-training-worker-normal-a2/README.md):
+  14 actual operations, one codec test, three original and four overlapping
+  complete-reader checks.14 portable run closures /446 artifacts; all member
+  hashes verified. Four frozen same-matrix evaluations are silent target misses,
+  not classifier success. Initial codec-output and packaging failures retained.
+  Production ASan, visual reports and full original stages remain open.

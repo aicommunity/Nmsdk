@@ -356,3 +356,64 @@ Per-file receipt хранится в normal-a1/confirmed-duplicate-cleanup.json 
 войти в production proof. Для повторного старого reader-normal-a3 сначала
 восстановить удалённые archive members и composed view. Уникальные primary
 не удалялись; текущая production серия использует другой baseline-source.
+
+## Принята normal production schema2, ASan/visual выполняются
+
+Normal-a2 / PID2253367 завершён status0 на root9d8da9af3079a91f512d13f4dd005b96063dc3c8,
+PulseLib019e5d17aa1d2dcc551dc71a32a85c383953c71a:1 codec test (4 plans/32
+malformed declarations),14 production operations и3/3 reader checks.
+337.735 s для codec/corpus/checks, из них58.514 s для3 reader tests.
+Это4 genuine cold Train→native finalization,4 отдельных frozen same-matrix
+evaluate,4 partial schema2 и2 partial schema1 controls. Runtime и codec-runtime
+before/after совпали. При post-Train замене графа source Solo и summary не
+теряются. Typed partial schema2 nonzero сохраняет process_error, но его
+структурированные данные проверяются; schema1 semantics сохранена.
+
+Complete reader root07e172610eb480c90f1d70d27c6e7eb2c5f918a8 / PID2266608
+прошёл4/4 без skips,61.222 s,490 source files неизменны. Четвёртая проверка
+добавляет bundle closure всех14 runs и5 malformed packaged controls;
+предыдущие проверки включают16 re-signed native и24 malformed plan controls.
+Это4 проверки с перекрытием прежних3, не7 независимых tests.
+
+Опубликован [normal production proof](../../../Reports/StructTrain/TimeLearner/s09-native-live-training-worker-normal-a2/README.md),
+commit84e798616736a36140c293c3d0ad7851a4fe3412. Closure14 portable runs /
+446 artifact entries; каждый outer/member hash проверен локально после merge.
+Сохранены исходный codec-directory failure и initial publication rejection:
+общий verifier ранее не знал pipeline manifests. Теперь cold Train требует
+source=null, export/evaluate — включённый source artifact, полная byte/hash
+closure сохраняется. Numeric runs при corrected reader/publisher не повторялись.
+
+ASan Cancel/codec и reader также завершены:9/9 native (382.178s),8/8 reader
+(91.297s),137 unchanged source files;4 actual codec plans проверены повторно.
+[Proof](../../../Reports/StructTrain/TimeLearner/s08-native-live-finalization-cancel-codec-asan-a1/README.md)
+commit9e9be85de7706631c873331402d63f510090ec21:253 members /117892004 raw
+bytes →765044 compressed bytes. Все hashes проверены локально. Core019e5d1,
+rootdcc64fff6; этот binary ещё не содержит production Train schema2.
+
+На M40 production ASan PID89567 закреплён на root7ea85a5035dcfd66d5f677cacdb41127af30f47c
+и том же Core019e5d1. Ожидаются1 codec +14 operations +3 original checks.
+Queued complete reader PID100877 на root9554c0e465b5ce72a989c3d34edfd63dc0e5df2b
+ждёт именно его status0 и повторит4 complete checks, без нового обучения.
+Numeric source/build/runtime работающего задания не обновляются.
+
+M40 normal production visual PID97885 использует renderer root9554c0e46
+в отдельном metadata worktree. Он получил proof84e79861 через Git, проверяет
+полную archive closure и строит14 reports реальным CLI --format pipeline-run.
+Затем3 report checks должны сверить каждый Train sample/soma, все completed
+pattern responses и readable zoom. Нового численного обучения нет; cache —
+Data, selected QA и compact visual publication ещё ожидаются.
+
+Все4 normal full Train остаются SearchUnresolved. Fixed — WeightsSelected,
+grid — SearchUnresolved/source restored. Все4 отдельных frozen target/foil
+Test дают TP0/FP0/FN1/TN1. Это достоверный отрицательный результат, не успешная
+классификация и не8-case August reproduction. Весь исходный план0–12 открыт.
+
+Обновлены native runtime/worker документы корня и PulseLib; PulseLib
+d06859c24238663401f6583e31265eb9080281e7 — docs-only, Core tree в точности
+8e3a027a9d30d104886284b6825eed8cd6c413f1 как у фактически собранного019e5d1.
+Bin прежний accepted docs/ClDesc snapshot97dd1943 через --no-ff включён в
+develop11ce4cec, затем отдельная docs branch50f94f67 описала новый CLI и
+историческую область старых каталогов; --no-ff merge develop03e8aec4517e69a38e72918b9fcf40bdd7fb0882
+опубликован. От runtime Bin97dd1943 отличается только LAYOUT.md; конфиги и
+ClDesc новой docs-веткой не менялись. Новый PulseLib/root feature ещё не
+объединяется в develop до завершения текущей scoped ASan/visual приёмки.
