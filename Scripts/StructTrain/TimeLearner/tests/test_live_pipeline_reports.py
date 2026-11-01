@@ -89,7 +89,8 @@ class LivePipelineReportsTest(unittest.TestCase):
         source = self.source/"runs"/self.rows[0]["name"]/"run-manifest.json"
         with tempfile.TemporaryDirectory(dir=self.reports.parent) as temporary:
             root = Path(temporary);changed = load(source);changed["unrecognized"] = True
-            bad = root/"bad.json";bad.write_text(json.dumps(signed(changed)))
+            invalid = root/"invalid-source";invalid.mkdir()
+            bad = invalid/"run-manifest.json";bad.write_text(json.dumps(signed(changed)))
             output = root/"bad-report"
             with self.assertRaises(EvidenceError):render_pipeline_run(bad, output)
             self.assertFalse(output.exists())
