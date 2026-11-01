@@ -6,6 +6,13 @@
 [утверждённом плане](RefactoringPlan.ru.md). Эта запись добавляет проверенные
 подэтапы, не заменяя исходную постановку или обязательную матрицу.
 
+В отдельной feature разрабатывается [loaded-graph readout](LoadedLearnerReadout.ru.md):
+32/32 реальных отказа исходного PulseLib подтверждены на normal и ASan.
+Различаются неверный размер Parameters-only буфера и непривязанный learner
+при работающем физическом нейроне. Исправление последовательно проверяется;
+N=1 требует разрешения ролей в Reset при no-op Build. В develop этот подэтап
+ещё не принят; наличие кода и baseline proofs не считается закрытием этапа4.
+
 [Исторический August saved-state replay](HistoricalAugustReplay.ru.md):
 свежая сборка точного root de02a380 и три новых Test на Elder воспроизвели4/8,
 5/8 и6/8 исходного протокола, TP1 и FP4/3/2. Это не cold retrain или robustness.
