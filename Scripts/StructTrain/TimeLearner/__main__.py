@@ -117,6 +117,9 @@ def analyze(args: argparse.Namespace) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    prepare = commands.add_parser("prepare", help="prepare a declared native cold-job matrix without running models")
+    prepare.add_argument("specification", type=Path)
+    prepare.add_argument("--output", type=Path, required=True, help="new immutable job matrix directory")
     for operation in ("train", "preflight", "export", "evaluate"):
         native = commands.add_parser(operation, help="run an owned native Console "+operation+" job")
         native.add_argument("specification", type=Path)
@@ -183,6 +186,16 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     history.add_argument("--map", type=Path)
     args = parser.parse_args(argv)
+    if args.command == "prepare":
+        from .prepare import write_prepared_matrix
+        from .native_evidence import EvidenceError
+        try:
+            result = write_prepared_matrix(args.specification, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_preparation_error", "validity": "invalid",
+                              "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
+            return 2
     if args.command == "posttune":
         from .native_evidence import EvidenceError
         from .native_calibration_worker import run_job
