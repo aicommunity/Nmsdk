@@ -205,7 +205,12 @@
     }
   ],
   "full_cache": "/media/user/Data/TimeLearnerRefactor/reports-loaded-readout-normal-a3",
-  "manual_review": "pending",
+  "manual_review": {
+    "status": "selected_completed",
+    "images": 30,
+    "record": "visual-review.json",
+    "full_cache_reviewed": false
+  },
   "a3_primary": "e45b6d1be53c4b524f9cac34d8c712dfebd2c6ca",
   "a4_csv_equivalence": "c794e3cbf11c920d8fae5bb86dddd6f91bbceb17",
   "packaging_source": "4e3973ec5e35476bdbcccd6e9d869aa515a011a2",
@@ -257,5 +262,6 @@
     }
   ],
   "metadata_archive_sha256": "24f22881cb59e5fb29b36c50b185f2107af24739eca7907dd6e08232463013e0",
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "additional_selected_index": "response-zoom-selection.json"
 }
