@@ -72,3 +72,40 @@ Console228928 в Classic-fixed первого корпуса. Итоговая �
 проверки первичных данных, temporal reports и сервер normal предстоят.
 На Elder при ресурсной проверке осталось72MiB, поэтому новую сборку там
 пока не запускали и дополнительные исторические данные не удаляли.
+
+## Завершённые production корпуса
+
+Предыдущий абзац фиксирует исходную ресурсную проверку. После подтверждённой
+очистки static-link caches отдельный normal Console собран за303.35s из
+root1d2d3b0cd5abd783ebb96a0e746903257b1c708c, с тем же PulseLib38edfcad.
+Первый normal job явно отменён по owned PID из-за недостатка места для полного
+объёма первичных данных; его partial evidence сохранены в
+[preparation proof](../../../Reports/StructTrain/TimeLearner/s07-n0-production-normal-preparation-a1/README.md).
+После подтверждения terminal состояния новая попытка выполнялась в tmpfs
+с TMPDIR там же. История отменённого запуска не заменялась успешной попыткой.
+
+| Worker | Полные корпуса | Production операций | Дополнительный reader |
+|---|---:|---:|---|
+| M40 ASan |2|28|7/7 для каждого протокола|
+| Elder normal |2|28|7/7 для каждого протокола|
+
+ASan выполнился за2283.43s, normal за723.89s. Это измерения всего корпуса,
+включая выполнение исходного reader; последующий reader и упаковка отдельно.
+Все16 full Train на двух workers дали SearchUnresolved. В normal во всех8
+frozen same-matrix парах TP0/FP0/FN1/TN1; молчание target не является успехом.
+Контроль реально измерил Ns>1, а не только прочитал factor из config.
+Результат не является независимым Test либо воспроизведением августа.
+
+Опубликованы [ASan primary](../../../Reports/StructTrain/TimeLearner/s07-n0-production-worker-asan-a1/README.md),
+commitdde55f0a0ce4331f194c4ea45b5cfc8933189816, и
+[normal primary](../../../Reports/StructTrain/TimeLearner/s07-n0-production-worker-normal-a2/README.md),
+commit8b25481711776c45dd5f89a87d477b2203310f60. В каждом проверена closure28 runs /
+1052 artifact entries. Архивы2473616B и2391204B содержат полные первичные
+данные/модели/метрики/process receipts; все outer/member hashes сверены локально.
+Normal архив через Git восстановлен на M40 Data по1150 member hashes.
+
+ASan temporal renderer завершил28 reports и3/3 checks для каждого протокола,
+1147 source files unchanged, wall831.52s. Manual acceptance пока false.
+Normal temporal renderer запущен на M40 по восстановленным primary.
+Публикация temporal evidence, выбранных изображений и visual QA ещё открыта;
+по этим engineering корпусам полный этап7 не закрывается.
