@@ -178,3 +178,36 @@ Reports/StructTrain/TimeLearner/s09-retired-normsync-elder-a1.
 После получения через Git локально перепроверены receipt hashes и все30 blobs.
 Это статическая Git/migration приёмка; численные/компиляционные тесты
 не выполнялись и не требуются для удаления этих одноразовых исторических файлов.
+
+## Шестой пакет: исторические normsync анализаторы и standalone модель
+
+Все пять оставшихся Python и связанный C source прочитаны целиком:
+`aggregate.py`, `normsync_audit.py`, `model.py`, `rs_delay_sim.py`,
+`window_shift_sim.py`, `segsim.c`. Они удаляются без wrappers/копий из
+`Docs/Audit/TimeLearner-2026-09-26-review/evidence/normsync`.
+Retrieval snapshot —970fde1a0b13cf4d29b1c19659d423dd9899ebfe; для каждого
+файла manifest содержит полный commit, blob, SHA256 и размер. Теперь в
+retired_files36 записей; complete=false сохраняется.
+
+Это исторический пакет гипотез25.10, а не активный native анализ. Audit
+сопоставляет legacy iteration logs и старые peak_valid/anchor поля без
+современной полноты/revision. Aggregate молча пропускает нулевой/отсутствующий
+span. Standalone драйвер не проверяет subprocess return code, использует
+четыре входа и target-first margin; sweep-скрипты выполняются при import,
+привязаны к локальному ./segsim и фиксированным JSON outputs. Window shift
+является линейной суперпозицией для гипотезы о загрязнении окна, а не native
+learning proof. segsim не входит в production CMake и не проверяет storage.
+
+Поиск буквальных callers в Scripts/Tests/App/Apps/CMake root не обнаружил
+действующих ссылок. Import model внутри самого старого пакета удаляется вместе
+с ним; одноимённая другая модель theory/sim этим пакетом не затрагивается.
+Это ограничение буквального поиска, не доказательство отсутствия любых
+динамически составленных имён в сторонних пользовательских сценариях.
+
+Все JSON и исторический NORMALIZATION_SYNC отчёт сохраняются; в отчёт добавлена
+ссылка на полный исходный Git-каталог и пределы старого E0 сравнения. Его числа
+и прежние научные выводы не переписаны. Современный scorer/контроллер не
+объявляются drop-in заменой исторической аппроксимации. Статическая приёмка
+проверяет Git retrieval всех36 записей, отсутствие удалённых путей и сохранность
+неисполняемых normsync artifacts; серверный receipt ещё требуется. Этап9
+в целом остаётся открытым, включая другие Docs/Bin/PulseLib/Reports tools.
