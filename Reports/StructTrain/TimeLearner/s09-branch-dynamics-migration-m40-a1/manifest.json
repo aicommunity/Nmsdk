@@ -1,0 +1,100 @@
+{
+  "kind": "branch_dynamics_root_migration_checks",
+  "schema_version": 1,
+  "root": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+  "worker": "m40",
+  "records": [
+    {
+      "path": "a1/reader.log",
+      "bytes": 6197,
+      "sha256": "3e80b4a74b21b491898c69c089609681291535e1a97c229d4e305caab8ccd437"
+    },
+    {
+      "path": "a1/validation.json",
+      "bytes": 666,
+      "sha256": "c47658451defda4445987c50856f73fb9669f10a2e5946130b139fd56f6380f1"
+    },
+    {
+      "path": "a1/original_module.py",
+      "bytes": 18215,
+      "sha256": "b1f636d0ffcdafa88850b2922ee7c141ae426a55da160d70d0c366db0d843a1f"
+    },
+    {
+      "path": "a1/domain_preview.json",
+      "bytes": 561,
+      "sha256": "6c82afedff9eb2636438ae8c1830ea8be76c2c6099ba0298d0049ba915e0a6da"
+    },
+    {
+      "path": "a2/reader.log",
+      "bytes": 3998,
+      "sha256": "d3adbcd3cf9d97d671c0175b61ca77759f5930da96fdc2df04ad2b41ae40036c"
+    },
+    {
+      "path": "a2/validation.json",
+      "bytes": 665,
+      "sha256": "c29d1f05e71016d12a0038b81c21f2ec6f57f840066604dd84437e0a8b9fb91b"
+    },
+    {
+      "path": "a2/original_module.py",
+      "bytes": 18215,
+      "sha256": "b1f636d0ffcdafa88850b2922ee7c141ae426a55da160d70d0c366db0d843a1f"
+    },
+    {
+      "path": "a2/domain_preview.json",
+      "bytes": 111532,
+      "sha256": "9c43308b3300ba71435af6a22a2605fcffa8418fd9b6c5aa000f867614e85fb2"
+    }
+  ],
+  "attempts": [
+    {
+      "root": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "modules": [
+        "Scripts.StructTrain.TimeLearner.tests.test_legacy_dynamics",
+        "Scripts.StructTrain.TimeLearner.tests.test_legacy_dynamics_cli",
+        "Scripts.StructTrain.TimeLearner.tests.test_analysis_cli"
+      ],
+      "original_module": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-legacy-dynamics-migration-asan-a1/original_module.py",
+      "original_bin": "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e",
+      "original_sha256": "b1f636d0ffcdafa88850b2922ee7c141ae426a55da160d70d0c366db0d843a1f",
+      "status": 1,
+      "wall_seconds": 0.26447200775146484,
+      "native_calculations": 0,
+      "scientific_verdict": null,
+      "fixture_primary": {
+        "path": "/home/user/timelearner-refactor/readbacks/s07-domain-preview-a2/native/Branch_2000_N1_domain_preview_domain_preview.json",
+        "sha256": "6c82afedff9eb2636438ae8c1830ea8be76c2c6099ba0298d0049ba915e0a6da",
+        "kind": null,
+        "raw_native_provenance_retained": true
+      },
+      "assessment": "invalid_fixture_selection"
+    },
+    {
+      "root": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
+      "modules": [
+        "Scripts.StructTrain.TimeLearner.tests.test_legacy_dynamics",
+        "Scripts.StructTrain.TimeLearner.tests.test_legacy_dynamics_cli",
+        "Scripts.StructTrain.TimeLearner.tests.test_analysis_cli"
+      ],
+      "original_module": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-legacy-dynamics-migration-asan-a2/original_module.py",
+      "original_bin": "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e",
+      "original_sha256": "b1f636d0ffcdafa88850b2922ee7c141ae426a55da160d70d0c366db0d843a1f",
+      "status": 0,
+      "wall_seconds": 0.2644369602203369,
+      "native_calculations": 0,
+      "scientific_verdict": null,
+      "fixture_primary": {
+        "path": "/home/user/timelearner-refactor/readbacks/s07-domain-physics-asan-a1/native/Branch_2000_N1_domain_preview_domain_preview.json",
+        "sha256": "9c43308b3300ba71435af6a22a2605fcffa8418fd9b6c5aa000f867614e85fb2",
+        "kind": "native_resistance_domain_evidence",
+        "raw_native_provenance_retained": true
+      },
+      "assessment": "passed19_checks"
+    }
+  ],
+  "tests_final": 19,
+  "tests_skipped": 0,
+  "old_module_bin": "49adcd0208d0c8ab8d70e7cca47ae6e34b05145e",
+  "native_calculations": 0,
+  "asan_instrumentation_used": false,
+  "scientific_verdict": null
+}
