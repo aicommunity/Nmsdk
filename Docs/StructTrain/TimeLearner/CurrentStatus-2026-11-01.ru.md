@@ -20,6 +20,25 @@ workers; строгая полнота/late verdict самой legacy CSV ост
 Новые raw traces отдельно подтверждают покрытие окон и отсутствие лишних LT
 edges за записанные40s; они не создают training certificate.
 
+Следующий [cold-start контроль и настоящее повторное обучение](HistoricalAugustColdStart.ru.md)
+выполнены отдельно от saved-state replay. Parent-only cold overlay оставлял116
+старых сегментов и отвергнут; native State-file reset действительно создал4
+сегмента, L1/Ns1, Rs86МОм и references0 до первого импульса. Полный cold Train
+160 model seconds завершился legacy phase2/Need0 с исходными L49/41/25/1,
+Rs и заново измеренными references. Полная сериализованная neuron identity
+совпала с историческими Train/Test:604 компонента,8333 параметра,496 связей;
+reader10/10 на каждом worker. Это legacy_done_uncertified, не Exact V2.
+Первая frozen Test попытка выявила ошибку producer и аварийное освобождение
+памяти при неверной исходной последовательности Model0/Parameters0. Сохраняется
+исторический Model1/Parameters0; три prestimulus gate и три полных40s Test
+завершились0 и воспроизвели4/8,5/8,6/8 с TP1/FP4,3,2. Каждый CSV равен
+untouched replay побайтно; физический нейрон frozen кроме объявленного порога.
+Все36 raw streams также равны прежнему observed replay, поэтому его96 графиков
+и15 selected reviewed PNG используются через явную запись эквивалентности без
+новых копий. Primary236 файлов/7609888B xz опубликован; temporal reader7/7 на
+каждом worker после Git restore. Это исходный historical same-matrix протокол,
+не independent Test, robustness или полное завершение этапа11.
+
 Активный [анализ Branch dynamics](BranchDynamicsMigration.ru.md) перенесён
 из Bin в root package, старый analyzer/test удалены без wrappers.20/20 Python
 checks на каждом worker:6 старых regression,9 migration/CLI/corruption и5
