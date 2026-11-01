@@ -245,3 +245,8 @@ TL-037 follow-up: [normal 37 regressions and six peak replay checks](s08-posttun
 - [N0 ASan wall-budget attempt](s07-n0-candidate-order-timeout-asan-a1/README.md):
   actual300-second timeout,25 completed cases before termination; no complete
   JUnit or full acceptance.40 verified members,46552 compressed bytes.
+
+- [N0 normal wall-budget attempt](s07-n0-candidate-order-timeout-normal-a1/README.md):
+  actual300-second timeout,26 completed stdout cases;61 verified archived
+  members,225672 compressed bytes. Includes exact duplicate cleanup and an
+  inactive compiler-cache receipt; no complete regression acceptance.
