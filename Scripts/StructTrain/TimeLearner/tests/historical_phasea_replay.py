@@ -95,7 +95,16 @@ def add_native_temporal_observer(bin_repo, work):
         prop = observer.find("./Parameters/"+name)
         require(prop is not None, "historical_statistic_property_missing:"+name);prop.text = value
     components.append(observer)
-    descriptors = [("NeuronTimeLearner.Neuron.Soma"+str(i), "SumPotential", "soma"+str(i)) for i in range(1, 5)]
+    # Historical SumPotential is ptPubState, not ptOutput. UStatisticMatrix
+    # opens files through FindOutputProperty, so a state-only connection
+    # silently produces no file. Record the two native channel outputs instead;
+    # NPulseMembraneCommon::ACalculate defines SumPotential as their sum.
+    # Preserve the unmodified historical executable and expose this derivation.
+    descriptors = [("NeuronTimeLearner.Neuron.Soma"+str(i)+"."+channel, "Output",
+                    "soma"+str(i)+"_"+role)
+                   for i in range(1, 5)
+                   for channel, role in (("ExcChannel", "exc"), ("InhChannel", "inh"))]
+    descriptors += [("NeuronTimeLearner.Neuron", "SomaSumPotential", "neuron_soma_sum")]
     descriptors += [("NeuronTimeLearner.DatasetMatrix.Generator1", "Output", "stimulus"),
                     ("NeuronTimeLearner.Neuron.LTZone", "Output", "lt_spikes"),
                     ("NeuronTimeLearner", "SomaNeuronAmplitude", "learner_cached_somas")]
@@ -107,7 +116,10 @@ def add_native_temporal_observer(bin_repo, work):
     tree.write(path, encoding="utf-8", xml_declaration=False)
     return {"component": observer.tag, "class": observer.get("Class"), "streams":
             [{"source": owner+"."+prop, "role": role} for owner, prop, role in descriptors],
-            "source_code_patched": False, "sampling": "native scheduler, TimeInterval0; no averaging"}
+            "source_code_patched": False, "sampling": "native scheduler, TimeInterval0; no averaging",
+            "soma_derivation": "soma_i = Soma_i.ExcChannel.Output + Soma_i.InhChannel.Output; "
+                "historical NPulseMembraneCommon::ACalculate; state-only SumPotential cannot be recorded "
+                "by historical UStatisticMatrix::FindOutputProperty"}
 
 
 def main():
