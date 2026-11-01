@@ -6,6 +6,23 @@
 [утверждённом плане](RefactoringPlan.ru.md). Эта запись добавляет проверенные
 подэтапы, не заменяя исходную постановку или обязательную матрицу.
 
+## Приёмка реальной N1-калибровки после Exact Solo Train
+
+На каждом worker выполнены2 owned calibration операции /20 реально измеренных
+матриц /160 полных проб и4/4 reader checks. Обе topology: лучший кандидат
+с target hit даёт TP1/FP3/FN0/TN4 (5/8), но ни один из10 порогов не разделяет
+всю матрицу. Обе транзакции NonSeparable на объявленной сетке, исходный порог1
+восстановлен; calibrated package отсутствует. Это валидный ограниченный результат,
+не глобальная физическая недостижимость и не independent Test.
+
+Построены20 полных temporal matrices /240 trial-soma pairs,3/3 checks;
+206 primary files неизменны. Непосредственно просмотрены28 выбранных PNG
+при1920x960: все8 паттернов с входными импульсами для обеих topology,
+target/FP zoom, вторая сома Classic и silent control. Полный cache только M40;
+Git содержит primary xz, модели/метрики, metadata и выбранные рисунки.
+[Источники, протокол, SHA и ограничения](PositiveN1Calibration.ru.md).
+Полный stage8 и вся исходная матрица этим не закрываются.
+
 ## Принято адресно: native owner PostTune
 
 Код PulseLib ecdbd9944f46a45efafba7d1547b2fbd3e75d084; fixtures root

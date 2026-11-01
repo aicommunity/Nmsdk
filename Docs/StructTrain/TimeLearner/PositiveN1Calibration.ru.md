@@ -85,10 +85,23 @@ Reader `7eac18f6077ec6e9f0d6a77cdf96ce252b69e731`.
 и restored models совпали по значениям между workers; runtime provenance
 отдельный, независимость научных повторов не заявляется.
 
-Полные temporal reports строятся на M40 из Git-restored normal primary,
-renderer `1f2196e673e36007b690b02fceb08185669238c0`. Пока их quality/visual
-приёмка не завершена, feature не считается принятой в develop. Полный stage8,
-другие режимы/профили и исторический replay остаются открытыми.
+Полные temporal reports завершены на M40 из Git-restored normal primary,
+renderer `1f2196e673e36007b690b02fceb08185669238c0`:20 матриц /160 проб /
+240 trial-soma pairs,3/3 production report checks,206 исходных файлов без
+изменений. Wall1156.35 s включает построение и проверки, не model time.
+Metadata proof `d13ad580638b00e89a3973aee8fc02d6565c1c2d`:92 members /
+502804 xz bytes;28 выбранных PNG /4175776B непосредственно просмотрены
+при1920x960. Все8 паттернов обеих топологий представлены с наложением
+фактических входов; target и FP имеют50 ms zoom,14.208 px/native tick.
+Пики не обрезаны, оси читаются; вторая сома Classic и silent threshold1
+представлены отдельно. Полный кэш вручную не принят и в Git не копируется.
+
+[Визуальная приёмка](../../../Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-visual-a1/SELECTED_VISUAL_REVIEW.ru.md)
+подтверждает именно измеренное5/8 на same-matrix calibration candidates,
+а не успешную калибровку или independent Test. Все outer/member hashes
+обоих первичных пакетов (210+210) и metadata (92) дополнительно проверены.
+Scoped подэтап готов к merge; полный stage8, другие режимы/профили и
+исторический replay остаются открытыми.
 
 SyncTolerance0.02 допускает измеренный остаток около19 ms у исходных Exact
 моделей. Это часть объявленной задачи, не причина молча изменить default.
