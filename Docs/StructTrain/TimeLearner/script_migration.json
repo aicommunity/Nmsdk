@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and its six tests migrated. Full script/CLI migration remains incomplete.",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -814,6 +814,82 @@
       "replacement": null,
       "reason": "Historical Phase12 wave shell orchestration with fixed old workspace/cases, legacy validator and report promotion; not an active native production command. Read in full; no literal executable callers found in pinned root/Bin/PulseLib trees. Dynamic external calls are not excluded.",
       "original_results": "unchanged; source SHA is script retrieval evidence, not the execution provenance of historical model results"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/monitor_softcold_autosave.py",
+      "action": "retired_historical",
+      "archive_commit": "ce285d7eee907d7d453ae00e1840246df09d5086",
+      "last_change_commit": "75b4988095efde8ba862ae10f6e7c2f2f246e6a4",
+      "blob_sha1": "953b307fd9588dcbb1601282a47cb07879cb5546",
+      "content_sha256": "8a0c62429b5795f805083a4614074da421fbbba646673770d64d96e387035aeb",
+      "bytes": 8746,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/ce285d7eee907d7d453ae00e1840246df09d5086/Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/monitor_softcold_autosave.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "ce285d7eee907d7d453ae00e1840246df09d5086:Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/monitor_softcold_autosave.py"
+      ],
+      "replacement": null,
+      "reason": "Historical SoftCold autosave monitor, fixed legacy artifacts and campaigns; not the owned-process/manifest control of the current pipeline.",
+      "original_results": "preserved; retrieval snapshot does not assert actual experiment source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/refresh_fail_taxonomy_after_fix.py",
+      "action": "retired_historical",
+      "archive_commit": "ce285d7eee907d7d453ae00e1840246df09d5086",
+      "last_change_commit": "e52abf4379ee52569ed8275c135c1b77c14dc73c",
+      "blob_sha1": "a7bc55c450739f00f763d0d18a53e0dba40eb48e",
+      "content_sha256": "6b4b4a14481b8c660181973b3ad23e6eb09431b64b68ab5d3b718444c03e138d",
+      "bytes": 10847,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/ce285d7eee907d7d453ae00e1840246df09d5086/Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/refresh_fail_taxonomy_after_fix.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "ce285d7eee907d7d453ae00e1840246df09d5086:Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/refresh_fail_taxonomy_after_fix.py"
+      ],
+      "replacement": null,
+      "reason": "One-off SoftCold taxonomy generator; historical plan explicitly marks this campaign snapshot obsolete and forbids blind reruns.",
+      "original_results": "preserved; retrieval snapshot does not assert actual experiment source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w1_order_ctrl_run.py",
+      "action": "retired_historical",
+      "archive_commit": "ce285d7eee907d7d453ae00e1840246df09d5086",
+      "last_change_commit": "7adae87c42fc26dc2e00bd6936cdda79194eac13",
+      "blob_sha1": "98d86d8b8570b221502e7edfbeeafbcf8f47573e",
+      "content_sha256": "d4d48c0515386bd9dfb2ff95f43341dc60bdcb6f3805895b5270d0a50e9de973",
+      "bytes": 3134,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/ce285d7eee907d7d453ae00e1840246df09d5086/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w1_order_ctrl_run.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "ce285d7eee907d7d453ae00e1840246df09d5086:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w1_order_ctrl_run.py"
+      ],
+      "replacement": null,
+      "reason": "One-off W1 order-control launcher with hard-coded October24 source work directories and simultaneous processes.",
+      "original_results": "preserved; retrieval snapshot does not assert actual experiment source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w1w2_sim_template.py",
+      "action": "retired_historical",
+      "archive_commit": "ce285d7eee907d7d453ae00e1840246df09d5086",
+      "last_change_commit": "f217ca388f8b064eb3b8f7ce5cd812e1f057dcbd",
+      "blob_sha1": "e5ce09db03ed56bcb3cd31ff8852a23136ca5908",
+      "content_sha256": "b6e82540a811b3e7e46b28817e778d097a127970ed3653b0e69867050917d80b",
+      "bytes": 3829,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/ce285d7eee907d7d453ae00e1840246df09d5086/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w1w2_sim_template.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "ce285d7eee907d7d453ae00e1840246df09d5086:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/w1w2_sim_template.py"
+      ],
+      "replacement": null,
+      "reason": "October W1/W2 time-scaled twin generator using historical storage profiles, module imports and hard-coded scientific assumptions; not a current model preparation path.",
+      "original_results": "preserved; retrieval snapshot does not assert actual experiment source"
     }
   ],
   "reference_review": {
