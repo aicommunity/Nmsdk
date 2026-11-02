@@ -99,3 +99,11 @@ input/soma samples по-прежнему сравниваются без доп�
 timestamps. Native clock Rdk остаётся целочисленным microseconds. Spec
 `native-dataset-clock-extended-v1.json`:20 cases,76 полных recordings. Новые
 проверки ещё требуют серверного выполнения; они не были частью baseline A3.
+
+Первый build кандидата bf6bdf6 (root8a627f82) остановился до тестов: макрос
+RDK_THROW использует this и не применим в свободном numeric helper. Исправление
+Pulse9f907a9 использует std::invalid_argument для этого helper; Rdk operation
+ledger обрабатывает его в контексте вызывающего dataset. Member method для
+проверки backwards clock сохраняет штатный RDK_THROW. Failed build evidence
+`8559afd8599a1f5c4084ee73241abb9ff7a8a214` сохраняется отдельно. Это не runtime
+проверка алгоритма и не доказательство нарушения dataset invariance новым кодом.
