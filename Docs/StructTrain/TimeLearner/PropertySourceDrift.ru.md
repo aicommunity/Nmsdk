@@ -106,5 +106,8 @@ helper evidence для каждой группы и реальные прове�
 включая connected properties, heterogeneous images, рост, Load/Copy/reuse,
 опциональные режимы и inherited Rdk properties. Последние не входят в217
 объявленных learner UProperty и не должны исчезать из общего аудита.
+Их девять shared source contracts и полная цепочка наследования теперь
+описаны [отдельно](InheritedPropertyContracts.ru.md); server-reproduced
+catalog не заменяет требуемую inherited runtime/connected/profile матрицу.
 Сверка источников не доказывает полноту истории экспериментов, migration,
 самостоятельный frozen Test или поддержку C-trim/target-reference calibration.
