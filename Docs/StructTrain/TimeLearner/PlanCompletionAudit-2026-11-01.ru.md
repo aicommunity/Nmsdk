@@ -5,6 +5,14 @@
 этап0; остальные этапы выполнены частично. Научное8/8 не является условием
 рефакторинга. Зелёный тест отдельного API не заменяет матрицу режимов.
 
+Дополнение source provenance: [проверка references](SourceReferenceAudit.ru.md)
+охватила96506 text entries/206 archives принятого Root422647a2d на двух workers,
+с полностью одинаковым audit JSON.25 folders содержат references;22 требуют
+dependency review, два являются диагностическими и один — fresh normal67 после
+repair. Четыре крупных calibration transaction JSON остаются unknown. Это
+адресный inventory, не подтверждение actual resource reads и не автоматическая
+инвалидация научных измерений. Полный runtime impact audit остаётся открытым.
+
 Дополнение02.11: адресно принят [поиск длины по измеренным задержкам](MeasuredLengthProposal.ru.md).
 Normal fresh67/67 после Bin repair; ASan39 kernel+4 completed training cases
 из сохранённого stdout+24/24 remaining XML, одинаковые67 имён без skips.
