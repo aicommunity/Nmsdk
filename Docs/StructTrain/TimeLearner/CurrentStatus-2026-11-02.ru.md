@@ -2,6 +2,25 @@
 
 ## Обновление 19:08 UTC: normal transfer, reader fix и отдельный CMake merge
 
+Последующее дополнение: Rdk develop опубликован через merge commit
+`a62393f7791cc4ad10d1c2c11f255b3db3334f89`. Он включает tested Corec3850711
+и docsbd50d9ac; отсутствие Core-различий проверено перед merge. Основание:
+normal094bced1 и ASan12d5a246, 9/9 unit и13/13 native, actual libasan maps,
+74/74 совпадающих CSV/packets. Merge выполнен в отдельной локальной копии
+`E:/Science-Repo/rdk-lifecycle-acceptance`; пользовательские source checkouts
+не переключались. Корневой develop пока сохраняет прежний Rdk gitlink до
+приёмки согласованного PulseLib среза и children-first root merge.
+
+Telemetry normal A1 root420befe14 выявил два слишком сильных ожидания теста:
+временные image buffers могут меняться, а native Init пересчитывает производную
+TimeConstant. [Подробности и уточнённый контракт](ArchiveTelemetryNoise.ru.md).
+Root `1e0988be8f3761928710dc23a84442657be3a50b` меняет тест/документы, Pulse
+e360b31d имеет тот же Coredc7edb23. A2 поставлен в очередь только после закрытия
+и полной проверки опубликованного A1 с ровно двумя известными отказами.
+Supervisor очереди Elder4156956, metadata `s05-archive-telemetry-normal-queue-a2`.
+Очередь M40 telemetry2241058 отменена до запуска: C2 продолжает работать,
+известно неуспешный telemetry A1 автоматически на M40 не запускается.
+
 Принятый корневой develop теперь `d12c50a67192897220d2d6f9f38db16c3f0f4e5b`:
 merge общего BUILD_TESTING / legacy BUILD_TESTS и компактного configure evidence.
 Gitlinks PulseLib/Rdk в develop этим merge не менялись. Проверены ON, legacy
