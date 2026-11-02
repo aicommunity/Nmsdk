@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NDataset.h"
-#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGeneratorTransit.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QCryptographicHash>
 #include <QFile>
