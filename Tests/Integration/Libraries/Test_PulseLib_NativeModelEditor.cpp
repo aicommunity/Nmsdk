@@ -1026,7 +1026,7 @@ TEST(NativeOperationDiagnostics,BuildPreservesTrueAndReportsSubtreeFailure)
     }
     {
         BorrowedBuildContractEnvironment environment;environment.Borrow(rig.model.Get());
-        ASSERT_TRUE(environment.SetModelCalculationComponent("Learner.Neuron"));
+        ASSERT_TRUE(environment.SetModelCalculationComponent(rig.neuron->GetLongId(rig.model.Get())));
         failing->ArmBuildFailure();const auto before=environment.OperationFailureSequence();
         EXPECT_TRUE(environment.Build());EXPECT_TRUE(environment.HasOperationFailureSince(before));
         EXPECT_EQ(environment.LastOperationFailure().Operation,"Build");
