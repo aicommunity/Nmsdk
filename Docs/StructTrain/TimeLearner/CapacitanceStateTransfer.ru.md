@@ -29,6 +29,9 @@ completed/frozen/fresh-process C₀ fixtures, два partial stopped C₀ fixtur
 Положительные completed controls используют явно заданный sync=0.2; default
 0.02 и amp=1e-5 сохранены. Это проверки переноса, не новая научная сходимость.
 Mutation reader tests используют настоящие C++ packages и primary CSV.
+Проверяется также независимый reader для обоих новых owned recognition
+результатов с сохранённым source-solo C₀. Старые reader fixtures с фиксированным
+набором 20 stopped scenarios не ослабляются под новый меньший набор.
 
 Остаётся выполнить normal/ASan и reader gates, построить временные отчёты,
 проверить выбранные рисунки и merge closure. Также остаются автоматическое
