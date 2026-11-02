@@ -117,6 +117,9 @@ def analyze(args: argparse.Namespace) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
+    gate.add_argument("specification", type=Path)
+    gate.add_argument("--output", type=Path, required=True)
     regression = commands.add_parser("preflight-regression", help="run the declared public Console regression matrix")
     regression.add_argument("specification", type=Path)
     regression.add_argument("--output", type=Path, required=True)
@@ -212,6 +215,17 @@ def main(argv: list[str] | None = None) -> int:
             return 0 if result["validity"] == "valid" else 2
         except (EvidenceError, OSError, ValueError) as error:
             print(json.dumps({"validity": "invalid", "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command == "native-gate":
+        from .native_evidence import EvidenceError
+        from .native_gate import run_native_gate
+        try:
+            result = run_native_gate(args.specification, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result["validity"] == "valid" and result["assertion_status"] == "passed" else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_native_gate_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     if args.command == "preflight-regression":
         from .native_evidence import EvidenceError
