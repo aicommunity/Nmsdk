@@ -4682,6 +4682,62 @@ TEST(NativeTrainingTermination,BranchN0SweepBudgetBoundary){NativeSweepBudgetBou
 TEST(NativeTrainingTermination,BranchN1SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearnerBranch>(1);}
 
 namespace {
+template<class Learner> void NativeFiniteCandidateRanking(int normalization)
+{
+    EditingRig<Learner> rig(2000,normalization,"finite_ranking_zero_sync",false,2,true);
+    auto plan=rig.Plan();const auto initial=rig.learner->ReadNativeParameters();
+    plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    plan.search.maximumCandidatesPerInput=8;plan.search.maximumSweeps=1;
+    plan.search.resistanceSubdivisionDepth=0;
+    // Isolate measured timing ranking: explicit loose amplitude tolerance is
+    // an engineering control, not amplitude convergence at the default 1e-5.
+    plan.search.tolerances.sync=0.;plan.search.tolerances.amplitudeAbsolute=1.;
+    plan.search.tolerances.amplitudeRelative=0.;
+    for(std::size_t i=0;i<initial.size();++i)
+    {
+        auto& bound=plan.search.bounds[i];bound.minimumLength=bound.maximumLength=initial[i].length;
+        bound.minimumSynapses=bound.maximumSynapses=initial[i].synapses;
+        bound.minimumResistance=bound.maximumResistance=initial[i].resistance;
+    }
+    plan.search.bounds[0].minimumLength=1;plan.search.bounds[0].maximumLength=3;
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*rig.frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();
+    const auto parameters=rig.learner->ReadNativeParameters();
+    const auto summary=EncodeNativeTrainingState(service,rig.Revision(),parameters);
+    Artifact(rig.name+"_ranking_summary.json",QJsonDocument(summary).toJson());
+    ASSERT_TRUE(service.Search());const auto& evidence=service.Search()->Evidence();ASSERT_FALSE(evidence.empty());
+    const auto error=[](const CandidateEvidence& e){return std::max(std::fabs(e.timingResidualLow),std::fabs(e.timingResidualHigh));};
+    std::set<int> measured;double minimum=std::numeric_limits<double>::infinity(),selected=minimum;
+    for(const auto& e:evidence)
+    {
+        ASSERT_TRUE(std::isfinite(error(e)));EXPECT_TRUE(e.withinAmplitude);
+        measured.insert(e.parameters.length);minimum=std::min(minimum,error(e));
+        if(e.fullParameters==parameters)selected=std::min(selected,error(e));
+    }
+    EXPECT_EQ(measured,(std::set<int>{1,2,3}));
+    // A sensitive positive control: the actual native physics must offer a
+    // strictly better measured geometry, not merely execute three no-op cases.
+    EXPECT_LT(minimum,error(evidence.front())-1e-12);
+    EXPECT_DOUBLE_EQ(selected,minimum);
+    EXPECT_EQ(parameters[1],initial[1]);
+    for(std::size_t i=0;i<parameters.size();++i)
+    {EXPECT_EQ(parameters[i].synapses,initial[i].synapses);EXPECT_EQ(parameters[i].resistance,initial[i].resistance);}
+    EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
+    EXPECT_EQ(service.Reason(),"maximum_sweeps_exhausted");EXPECT_FALSE(service.Certificate());
+    ASSERT_TRUE(service.Search()->Certificate());EXPECT_FALSE(service.Search()->Certificate()->Exact());
+    Artifact(rig.name+"_stopped_package.json",QJsonDocument(rig.learner->ExportNativeLearnedState("native-finite-ranking-fixture-v1")).toJson());
+}
+}
+TEST(NativeFiniteRanking,ClassicN0){NativeFiniteCandidateRanking<NNeuronTimeLearner>(0);}
+TEST(NativeFiniteRanking,ClassicN1){NativeFiniteCandidateRanking<NNeuronTimeLearner>(1);}
+TEST(NativeFiniteRanking,BranchN0){NativeFiniteCandidateRanking<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeFiniteRanking,BranchN1){NativeFiniteCandidateRanking<NNeuronTimeLearnerBranch>(1);}
+
+namespace {
 template<class Learner> void DiagnosticRecognitionBoundary(int normalization,bool partial)
 {
     EditingRig<Learner> rig(2000,normalization,partial?"diagnostic_partial":"diagnostic_budget");
