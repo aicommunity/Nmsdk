@@ -4129,3 +4129,131 @@ TEST(NativeModelEditor, ShrinkCannotSilentlyDeleteAnExternalObservationSource)
   }
 }
 }
+
+namespace {
+template<class Learner> QJsonObject InheritedReadback(EditingRig<Learner>& rig)
+{
+    auto& owner=*rig.learner;
+    const std::vector<std::pair<const char*,UIProperty*>> properties{
+        {"Name",&owner.Name},{"Id",&owner.Id},{"Activity",&owner.Activity},{"TimeStep",&owner.TimeStep},
+        {"MaxCalculationDuration",&owner.MaxCalculationDuration},{"CalculationDurationThreshold",&owner.CalculationDurationThreshold},
+        {"Coord",&owner.Coord},{"StepDuration",&owner.StepDuration},{"DebugSysEventsMask",&owner.DebugSysEventsMask}};
+    QJsonArray names;
+    for(const auto& [name,property]:properties)
+    {
+        EXPECT_EQ(owner.FindProperty(name).Get(),property)<<name;
+        names.append(QString::fromLatin1(name));
+    }
+    EXPECT_EQ(owner.GetTimeStep(),rig.frequency);EXPECT_EQ(owner.Name.GetData(),"Learner");
+    EXPECT_NE(owner.Id.GetData(),ForbiddenId);
+    EXPECT_EQ(rig.model->GetComponent("Learner",true).Get(),rig.learner.Get());
+    EXPECT_LT(owner.MaxCalculationDuration.GetData(),0);
+    return {{"registered_properties",names},{"name",QString::fromStdString(owner.Name.GetData())},
+        {"id",double(owner.Id.GetData())},{"activity",owner.Activity.GetData()},{"frequency_hz",int(owner.GetTimeStep())},
+        {"maximum_calculation_duration_ms",double(owner.MaxCalculationDuration.GetData())},
+        {"calculation_duration_threshold_ms",double(owner.CalculationDurationThreshold.GetData())},
+        {"step_duration_ms",double(owner.StepDuration.GetData())},{"debug_events_mask",double(owner.DebugSysEventsMask.GetData())}};
+}
+
+void SameNativeWave(const std::vector<NativeProbeSample>& before,const std::vector<NativeProbeSample>& after)
+{
+    ASSERT_FALSE(before.empty());ASSERT_EQ(before.size(),after.size());
+    for(std::size_t i=0;i<before.size();++i)
+    {
+        EXPECT_NEAR(before[i].time-before.front().time,after[i].time-after.front().time,1.e-11);
+        EXPECT_EQ(before[i].stimulus,after[i].stimulus);
+        ASSERT_EQ(before[i].potentials.size(),after[i].potentials.size());
+        for(std::size_t j=0;j<before[i].potentials.size();++j)
+            EXPECT_NEAR(before[i].potentials[j],after[i].potentials[j],1.e-12);
+    }
+}
+
+template<class Learner> void InheritedActivityReset(unsigned frequency)
+{
+    EditingRig<Learner> rig(frequency,1,"inherited_activity",false,2,true);
+    const auto parameters=rig.learner->ReadNativeParameters();const auto revision=rig.Revision();
+    const auto initial=InheritedReadback(rig);
+    std::vector<std::vector<NativeProbeSample>> previous(2),following(2);
+    for(std::size_t input=0;input<2;++input)
+    {
+        const auto result=rig.Probe(input,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+            [&](const auto& sample){previous[input].push_back(sample);});
+        ASSERT_EQ(result.status,NativeProbeStatus::Completed);ASSERT_TRUE(result.observation);ASSERT_TRUE(result.observation->valid);
+    }
+    // Apply public metadata through its native setters between complete probes.
+    rig.learner->MaxCalculationDuration=-2;rig.learner->CalculationDurationThreshold=-3;
+    rig.learner->DebugSysEventsMask=0;
+    auto coordinate=rig.learner->Coord.GetData();coordinate(0)=1.25;coordinate(1)=-2.5;coordinate(2)=3.75;
+    rig.learner->Coord=coordinate;
+    rig.learner->Activity=false;
+    EXPECT_EQ(rig.learner->NativeProbeState(),NativeProbeStatus::Idle);
+    EXPECT_FALSE(rig.neuron->Activity.GetData());
+    auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    EXPECT_FALSE(dataset->Activity.GetData());
+    std::vector<MDMatrix<double>> baseline;
+    for(std::size_t i=0;i<(rig.branch?1u:2u);++i)
+    {
+        const auto soma=rig.neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);ASSERT_TRUE(soma);
+        baseline.push_back(soma->SumPotential.GetData());
+    }
+    for(int tick=0;tick<32;++tick){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    EXPECT_EQ(rig.learner->StepDuration.GetData(),0u);
+    for(std::size_t i=0;i<baseline.size();++i)
+    {
+        const auto soma=rig.neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);
+        EXPECT_EQ(soma->SumPotential.GetData(),baseline[i]);
+    }
+    rig.learner->Activity=true;
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.Revision(),revision);
+    EXPECT_EQ(rig.learner->Coord.GetData(),coordinate);
+    EXPECT_EQ(rig.learner->MaxCalculationDuration.GetData(),-2);
+    EXPECT_EQ(rig.learner->CalculationDurationThreshold.GetData(),-3);
+    EXPECT_EQ(rig.learner->DebugSysEventsMask.GetData(),0u);
+    for(std::size_t input=0;input<2;++input)
+    {
+        const auto result=rig.Probe(input,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+            [&](const auto& sample){following[input].push_back(sample);});
+        ASSERT_EQ(result.status,NativeProbeStatus::Completed);ASSERT_TRUE(result.observation);ASSERT_TRUE(result.observation->valid);
+        SameNativeWave(previous[input],following[input]);
+    }
+    Artifact(rig.name+"_inherited_contract.json",QJsonDocument(QJsonObject{
+        {"kind","native_inherited_activity_contract"},{"schema_version",1},{"initial",initial},
+        {"after",InheritedReadback(rig)},{"inactive_ticks",32},{"compared_inputs",2},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+
+template<class Learner> void InheritedLocalFrequency(unsigned frequency)
+{
+    EditingRig<Learner> rig(frequency,1,"inherited_local_frequency",false,2,true);
+    const auto parameters=rig.learner->ReadNativeParameters();const auto revision=rig.Revision();
+    std::vector<NativeProbeSample> before,after;
+    const auto positive=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const auto& sample){before.push_back(sample);});
+    ASSERT_EQ(positive.status,NativeProbeStatus::Completed);ASSERT_TRUE(positive.observation);ASSERT_TRUE(positive.observation->valid);
+    rig.source->SetTimeStep(frequency/2);
+    std::size_t invalidSamples=0;
+    const auto rejected=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const auto&){++invalidSamples;});
+    EXPECT_EQ(rejected.status,NativeProbeStatus::Rejected);EXPECT_FALSE(rejected.observation);EXPECT_EQ(invalidSamples,0u);
+    EXPECT_NE(std::find(rejected.reasons.begin(),rejected.reasons.end(),"unready_or_multirate_native_graph"),rejected.reasons.end());
+    rig.source->SetTimeStep(frequency);
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.Revision(),revision);
+    const auto restored=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const auto& sample){after.push_back(sample);});
+    ASSERT_EQ(restored.status,NativeProbeStatus::Completed);ASSERT_TRUE(restored.observation);ASSERT_TRUE(restored.observation->valid);
+    SameNativeWave(before,after);
+    Artifact(rig.name+"_inherited_contract.json",QJsonDocument(QJsonObject{
+        {"kind","native_inherited_frequency_contract"},{"schema_version",1},{"effective",InheritedReadback(rig)},
+        {"rejected_samples",double(invalidSamples)},{"rejected_reason","unready_or_multirate_native_graph"},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+
+TEST(NativeInheritedProperties,ClassicActivity2000){InheritedActivityReset<NNeuronTimeLearner>(2000);}
+TEST(NativeInheritedProperties,BranchActivity2000){InheritedActivityReset<NNeuronTimeLearnerBranch>(2000);}
+TEST(NativeInheritedProperties,ClassicActivity20000){InheritedActivityReset<NNeuronTimeLearner>(20000);}
+TEST(NativeInheritedProperties,BranchActivity20000){InheritedActivityReset<NNeuronTimeLearnerBranch>(20000);}
+TEST(NativeInheritedProperties,ClassicLocalFrequency2000){InheritedLocalFrequency<NNeuronTimeLearner>(2000);}
+TEST(NativeInheritedProperties,BranchLocalFrequency2000){InheritedLocalFrequency<NNeuronTimeLearnerBranch>(2000);}
+TEST(NativeInheritedProperties,ClassicLocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearner>(20000);}
+TEST(NativeInheritedProperties,BranchLocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearnerBranch>(20000);}
+}
