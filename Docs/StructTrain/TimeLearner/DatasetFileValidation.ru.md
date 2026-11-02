@@ -37,6 +37,13 @@ cases и7 JUnit/environment readers. Evidence
 `22a037fd0f7f345ada4c5aa1260d3389662ca5dc`: проверены85 members,
 48 012 compressed bytes, actual libasan mappings. Исходный root
 `8555f348b2274cec68b3cf5419b53423e60b99ae`, Pulse — указанный выше кандидат.
-Обычный counterpart выполняется на Elder; приёмка в develop пока не назначена.
+Обычный counterpart Elder завершён:26/26 native и7 readers PASS, evidence
+`ea03ae8d2c752d87c46d899c90d4431c2622a021`, проверены87 members/32 195 bytes.
+Все26 входных файлов и26 JSON observations normal/ASan совпали побайтно;
+поимённые hashes сохранены в Reports/StructTrain/TimeLearner/
+s03-dataset-file-normal-asan-comparison-b1/comparison.json. Приёмка parser
+в develop пока не назначена: integrated53 на обоих серверах дополняет cold26
+двумя проверками corrupt reload/recovery при активном импульсе и25 принятыми
+clock/lifecycle/dispatch controls. Assertions не заменяют научную классификацию.
 Нельзя восстанавливать старые повреждённые файлы подстановкой0
 либо считать ClassID из прежнего atoi доказательством корректной метки.
