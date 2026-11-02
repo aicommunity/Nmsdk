@@ -4158,14 +4158,22 @@ template<class Learner> QJsonObject InheritedReadback(EditingRig<Learner>& rig)
 void SameNativeWave(const std::vector<NativeProbeSample>& before,const std::vector<NativeProbeSample>& after)
 {
     ASSERT_FALSE(before.empty());ASSERT_EQ(before.size(),after.size());
+    double maximumTimeResidual=0.,maximumPotentialResidual=0.;std::size_t differentStimulusSamples=0;
     for(std::size_t i=0;i<before.size();++i)
     {
-        EXPECT_NEAR(before[i].time-before.front().time,after[i].time-after.front().time,1.e-11);
-        EXPECT_EQ(before[i].stimulus,after[i].stimulus);
+        ASSERT_TRUE(std::isfinite(before[i].time) && std::isfinite(after[i].time));
+        ASSERT_TRUE(std::isfinite(before[i].stimulus) && std::isfinite(after[i].stimulus));
+        maximumTimeResidual=std::max(maximumTimeResidual,std::abs(
+            (before[i].time-before.front().time)-(after[i].time-after.front().time)));
+        differentStimulusSamples+=before[i].stimulus!=after[i].stimulus;
         ASSERT_EQ(before[i].potentials.size(),after[i].potentials.size());
         for(std::size_t j=0;j<before[i].potentials.size();++j)
-            EXPECT_NEAR(before[i].potentials[j],after[i].potentials[j],1.e-12);
+        {
+            ASSERT_TRUE(std::isfinite(before[i].potentials[j]) && std::isfinite(after[i].potentials[j]));
+            maximumPotentialResidual=std::max(maximumPotentialResidual,std::abs(before[i].potentials[j]-after[i].potentials[j]));
+        }
     }
+    EXPECT_EQ(differentStimulusSamples,0u);EXPECT_LE(maximumTimeResidual,1.e-11);EXPECT_LE(maximumPotentialResidual,1.e-12);
 }
 
 template<class Learner> void InheritedActivityReset(unsigned frequency)
