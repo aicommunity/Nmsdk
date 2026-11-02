@@ -100,3 +100,12 @@ class IntegratedNativeReportsTest(unittest.TestCase):
         self.write_spec(spec)
         with self.assertRaisesRegex(EvidenceError, "native_test_alias_target_not_primary"):
             inventory_native_test_run(self.spec, run)
+
+    def test_model_sharing_phase_prefix_is_not_a_probe_but_extra_probe_is_rejected(self):
+        run = self.copied_run(); spec = load(self.spec)
+        phase = spec["phases"][0]
+        self.assertTrue((run/"native"/(phase["probe_prefix"]+"model.json")).exists())
+        shutil.copyfile(run/"native"/(phase["probe_prefix"]+"1.json"),
+                        run/"native"/(phase["probe_prefix"]+"unaccounted.json"))
+        with self.assertRaisesRegex(EvidenceError, "unaccounted_or_missing_primary_packet"):
+            inventory_native_test_run(self.spec, run)
