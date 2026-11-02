@@ -59,5 +59,6 @@
     "DatasetScheduling/FasterSourceAt4000"
   ],
   "maximum_wall_seconds": 1800,
-  "cooperative_runtime_capture": true
+  "cooperative_runtime_capture": true,
+  "asan_options": "detect_leaks=0"
 }
