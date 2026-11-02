@@ -34,9 +34,38 @@ unsupported_native_wall_limited_schedule, отсутствие observation/onSam
 Для4 owner/Large cases восстановление отрицательного исходного лимита
 подтверждается свежей настоящей пробой. Серверные результаты пока ожидаются.
 
-Далее: единый read-only guard в native builder/preflight/edit/probe и
-recognition, включая изменения политики во время наблюдения. Ошибки передаются
+Далее: единый read-only execution guard в preflight/native-training bindings/
+probe/recognition и owned finalization, включая изменения политики во время
+наблюдения. Generic Build/import/export и standalone physical edits этим
+ограничением не запрещаются: это допустимые операции с данными Rdk; особенно
+важно не блокировать восстановление физического checkpoint после внешнего
+изменения scheduler policy. Отказ относится к выполнению проверенного
+протокола, а не к возможности построить или сохранить граф. Ошибки передаются
 специализированными статусами/диагностикой, не bool Build/Calculate/Reset.
 Обязательны реальные проверки перед Arm и после изменения во время пробы;
 C++ code и guards не принимаются до positive/negative/temporal evidence
 на обоих workers. Это не закрытие всей lifecycle/storage matrix.
+
+Начат исходный контроль по root162afc02abc321368304c8913a12a8ab2195682b.
+Elder переиспользует source/build только после проверки отсутствия процессов
+в cwd/exe/maps/fd; runtime новый и неизменяемый. На M40 созданы отдельные
+Git clones всех gitlinks, отдельные build/runtime: исходное inherited ASan
+задание продолжает работу. До дополнительной сборки доступны24GiB RAM и
+около487GiB на Data; compile jobs ограничены2.
+
+Первая M40 configure попытка a1 остановлена по проверенному PID/process group
+до запуска тестов: не был перенесён RDK_LLM_BUILD_EMBEDDED=OFF из прежней
+сборки. a2 сохраняет7 submodule clones, проверяет отсутствие пользователей
+нового source/build, передаёт все прежние RDK_/NO_MOTION_CONTROL bool flags и
+ASan compile/link settings. Контекст старого native source/build сравнивается
+до и после; артефакты отменённой настройки сохраняются отдельно. Ни одна
+baseline попытка ещё не принята как воспроизведение проблемы.
+
+Предлагаемая реализация после воспроизведения: общий NativeCalculationPolicy
+helper читает MaxCalculationDuration у owner/предков и required Neuron/
+DatasetMatrix subtrees. BindNativeTraining проверяет execution policy до
+Start и перед действиями, public preflight — до положительной квитанции,
+probe/recognition — до arm и на live boundaries. Проверка не меняет свойства,
+не вызывает Calculate/Reset/Build и не входит в общий model rollback.
+В отдельной проверке нужно подтвердить отмену live наблюдения после изменения
+политики; частичная observation не может стать valid complete result.
