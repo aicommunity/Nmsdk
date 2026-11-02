@@ -1,0 +1,171 @@
+{
+  "kind": "timelearner_native_trace_visual_qa",
+  "schema_version": 1,
+  "primary_commit": "5f84cdf009b9d1537f464635b16a8096cb00741b",
+  "visual_evidence_commit": "ab1ff2ec6f1eed706f98a5ac0dcbfc9d9237bd39",
+  "numeric_root": "d06585dfc2a739f2244f7ca59328721fe21475dd",
+  "source_worker": "Elder normal",
+  "render_worker": "M40",
+  "trials": 88,
+  "trial_soma_pairs": 138,
+  "full_png_count": 821,
+  "automated_visual_checks_passed": 3,
+  "selected_manual_review_count": 14,
+  "review_resolution": [
+    1920,
+    960
+  ],
+  "review_method": "Direct view of each original PNG using view_image(detail=original).",
+  "full_cache_manual_review": false,
+  "scientific_verdict": null,
+  "notes": [
+    "Cold references, cold final and warm final curves are readable; actual input pulses remain overlaid and axes/legend are not clipped.",
+    "Warm zoom shows the measured delayed potential with actual zero input in that particular window; overview retains both preceding input pulses.",
+    "Physics-change and external-stop diagnostics retain ten actual baseline samples; deadline retains four. Unobserved interval is grey and contains no extrapolated curve.",
+    "Flat zero baseline uses an explicit 1e-12 plotting range; this is axis padding, not measured signal variation. These pre-stimulus partial probes do not demonstrate spike absence or recognition.",
+    "SI units remain explicitly unverified. Scope is native training diagnostics, not all-pattern frozen recognition.",
+    "ASan gate18 and full original CI163 temporal/raw-Reset acceptance remain open."
+  ],
+  "selected": [
+    {
+      "source_packet": "Classic_2000_N1_service_exact_warm_training_proof_1.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_service_exact_warm_training_proof_1-soma0-overview.png",
+      "sha256": "e3301b3b978bb2ab5b76569a786fe1f4ded18e1eac9fc48dbf9729f2fd4725c6",
+      "source_packet_sha256": "e18d1a0c2e92a0c2d5e25d58a82a8eec56057c0988a491f05aca9bcde371a37a",
+      "source_trace_sha256": "210ec2a9dcbc14f7728720928af1f635ea2d90f3be76a7dfda726c975125ec30",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N1_service_exact_warm_training_proof_2.json",
+      "channel": 1,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_service_exact_warm_training_proof_2-soma1-overview.png",
+      "sha256": "b51c02290f273d0cde9a2fe499ad73e15f99db556b69a37081b94caafc537152",
+      "source_packet_sha256": "61588ee9044ca7ef064cba50ceb43d7b934f2fe6afe64756cd140dd1bd80698f",
+      "source_trace_sha256": "3804e1a272d509620d5f1b700bf2eddccaea479e25ff8715a754b4e015a079ce",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N1_service_exact_warm_training_proof_5.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_service_exact_warm_training_proof_5-soma0-overview.png",
+      "sha256": "d2d59521031794601bbcc3a2b10b8de9c5cd73ae398971b0fd5529047755dbec",
+      "source_packet_sha256": "f1e6238d3f7a8965099fad6517886735f7f6fbd2f22d61f835c2bc94a0935152",
+      "source_trace_sha256": "b3023ec4b3bb64d27d3b13387e8bb1d86f1e8cace059a163110381550552684a",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N1_service_exact_warm_training_proof_6.json",
+      "channel": 1,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_service_exact_warm_training_proof_6-soma1-overview.png",
+      "sha256": "5b360c6c31d7727f5a4bf04b772e4314adc6cad983b8007af8900e3fa50bb02b",
+      "source_packet_sha256": "76a59e366c64af3071f024ee911f4628f5d6c80901a543046fc4d8df7430993e",
+      "source_trace_sha256": "a13808a36e206c0b6d1a2f0db6a79ac07641e3c622c1ce8e60c642bea1fdd342",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N1_service_exact_warm_training_proof_9.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_service_exact_warm_training_proof_9-soma0-overview.png",
+      "sha256": "7870b62bd5fd858fe681d4d92396b5c07b3a51053b3289f62f08336b60457df0",
+      "source_packet_sha256": "d9ba1d6fc8b0286f65335bdd45acfced9ca4d2413a0f425fac2e012ccd890874",
+      "source_trace_sha256": "833c3cb1856ff8661da007b3448b4117b80f4daf41be961104265d202fa635cc",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N1_service_exact_warm_training_proof_10.json",
+      "channel": 1,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_service_exact_warm_training_proof_10-soma1-overview.png",
+      "sha256": "0d75b541c31758de733832fa3a63c3708e003e68b3d98cc52f83d3bfca0e8078",
+      "source_packet_sha256": "7e82d2152ce14c4e8b3076feeedd41f1cd6e5b64ae3bffa5cb7ddb48d110f557",
+      "source_trace_sha256": "03e3c319ea88ce825bf5bce6cb1fe9ebdb1920563ffea8898a0801164136ec58",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N1_service_exact_warm_training_proof_9.json",
+      "channel": 0,
+      "view": "zoom-003",
+      "file": "selected/Classic_2000_N1_service_exact_warm_training_proof_9-soma0-zoom-003.png",
+      "sha256": "d8f8d602df23d05f262f04a1af92ae621d7c5e04270294a559b31520317f56c2",
+      "source_packet_sha256": "d9ba1d6fc8b0286f65335bdd45acfced9ca4d2413a0f425fac2e012ccd890874",
+      "source_trace_sha256": "833c3cb1856ff8661da007b3448b4117b80f4daf41be961104265d202fa635cc",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N0_observer_external_physics_training_proof_1.json",
+      "channel": 0,
+      "view": "zoom-001",
+      "file": "selected/Classic_2000_N0_observer_external_physics_training_proof_1-soma0-zoom-001.png",
+      "sha256": "0f173d79f2bb4afd7554df9c07ea13d0a6039dd8f40a04aaeba1d9884acecb8a",
+      "source_packet_sha256": "3b01fdea12068412039c3cbc855fe15bd1f3354ab02673be38ca68b46bbf48c8",
+      "source_trace_sha256": "e7069b1008773b2f973b26496e3b7b58f7dc4f0cf9090612909eeb5f686ef29c",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N0_observer_external_physics_training_proof_1.json",
+      "channel": 1,
+      "view": "zoom-001",
+      "file": "selected/Classic_2000_N0_observer_external_physics_training_proof_1-soma1-zoom-001.png",
+      "sha256": "9b8d6ae2ce393ee10536f932489220b20baf27fadee070b9c45fc262c7e0938f",
+      "source_packet_sha256": "3b01fdea12068412039c3cbc855fe15bd1f3354ab02673be38ca68b46bbf48c8",
+      "source_trace_sha256": "e7069b1008773b2f973b26496e3b7b58f7dc4f0cf9090612909eeb5f686ef29c",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N0_service_external_stop_training_proof_1.json",
+      "channel": 0,
+      "view": "zoom-001",
+      "file": "selected/Classic_2000_N0_service_external_stop_training_proof_1-soma0-zoom-001.png",
+      "sha256": "a441fecfc5af3c6f0fdee80fa4ead7cb60b02efbf4190ca6744aadbbf85419bd",
+      "source_packet_sha256": "7b55f47eb02bef32f4c7b458ac4b711362a22211571e5d6b698238df40043dcb",
+      "source_trace_sha256": "78106cbbf9c62be27a7f1683a9b7a85788738a92712ff30b9371544830d13cc8",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Classic_2000_N0_service_external_stop_training_proof_1.json",
+      "channel": 1,
+      "view": "zoom-001",
+      "file": "selected/Classic_2000_N0_service_external_stop_training_proof_1-soma1-zoom-001.png",
+      "sha256": "8e095a0465548a2b6367799943f525da7e6f0dc1602a2cbce9dadf02f0781aba",
+      "source_packet_sha256": "7b55f47eb02bef32f4c7b458ac4b711362a22211571e5d6b698238df40043dcb",
+      "source_trace_sha256": "78106cbbf9c62be27a7f1683a9b7a85788738a92712ff30b9371544830d13cc8",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Branch_2000_N0_observer_external_physics_training_proof_1.json",
+      "channel": 0,
+      "view": "zoom-001",
+      "file": "selected/Branch_2000_N0_observer_external_physics_training_proof_1-soma0-zoom-001.png",
+      "sha256": "e3cf027ddbbd5d284ed0a813f98e65c7105941ead740d280522b7c849785425a",
+      "source_packet_sha256": "0b64862c2c5030ade9ba2ae789b713ba1799e9ab9080060f674aceb4941a1ec7",
+      "source_trace_sha256": "14d80987f0f09599f5c69632cc218a2064fb414f04a1b7a9c8ea6432bfdaf3bb",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Branch_2000_N0_service_external_stop_training_proof_1.json",
+      "channel": 0,
+      "view": "zoom-001",
+      "file": "selected/Branch_2000_N0_service_external_stop_training_proof_1-soma0-zoom-001.png",
+      "sha256": "1a0b5bef5562c049953aa29383820663979f85c5c68993ab8dbf67cc68efc16a",
+      "source_packet_sha256": "37c062b068c11e5b35223443b9f46e6f342bfdccf360af0fa752808e6f13f60d",
+      "source_trace_sha256": "29d9c786775e8074f71e43c98caa4e5127f8d3b2d56eabe20954aea041df9170",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    },
+    {
+      "source_packet": "Branch_2000_N1_service_deadline_training_proof_1.json",
+      "channel": 0,
+      "view": "zoom-001",
+      "file": "selected/Branch_2000_N1_service_deadline_training_proof_1-soma0-zoom-001.png",
+      "sha256": "233c320fc6e09cdf1664003743938aec25590035865ace1fd1b39f7140842c3a",
+      "source_packet_sha256": "bb823567f9c3cabe7ba23b1dcc29073bbdfabfdd36a3a71967a277276b5c78c4",
+      "source_trace_sha256": "306d6c21ffd1cb2374b0e60ee35d310e5d79cc82fbc42c448754dfef4b757d70",
+      "manual_review": "reviewed_readable_at_original_resolution"
+    }
+  ]
+}
