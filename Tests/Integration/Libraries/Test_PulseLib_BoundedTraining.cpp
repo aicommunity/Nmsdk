@@ -118,7 +118,9 @@ void CheckFiniteCandidateRanking(ProbeRouting routing,Normalization normalizatio
         DriveTraining(session,protocol,[&](const TrainingAction& action,auto& delay,auto& raw) {
             const int length=action.parameters[0].length;
             const double residual=length==2?.006:(length==3?.002:.001);
-            if(axes&1)delay[0]+=(length==2?.06:(length==3?.02:.01));
+            // The anchor input is excited 0.1 s after input0. Arrival is
+            // relative to originStimulusId, not the input's own pulse.
+            if(axes&1)delay[0]=.13+(length==2?.06:(length==3?.02:.01));
             if(axes&2)raw[0]+=residual;
         });
         EXPECT_EQ(session.Parameters()[0].length,4);
@@ -129,7 +131,14 @@ void CheckFiniteCandidateRanking(ProbeRouting routing,Normalization normalizatio
         EXPECT_EQ(session.Reason(),"maximum_sweeps_exhausted");
         ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
         std::set<int> measured;
-        for(const auto& evidence:session.Evidence())measured.insert(evidence.parameters.length);
+        for(const auto& evidence:session.Evidence())
+        {
+            measured.insert(evidence.parameters.length);
+            const int length=evidence.parameters.length;
+            if(axes&1)EXPECT_NEAR(std::max(std::fabs(evidence.timingResidualLow),std::fabs(evidence.timingResidualHigh)),
+                length==2?.06:(length==3?.02:.01),1e-12);
+            if(axes&2)EXPECT_NEAR(evidence.amplitudeResidual,length==2?.006:(length==3?.002:.001),1e-12);
+        }
         EXPECT_EQ(measured,(std::set<int>{2,3,4}));
     }
 }
