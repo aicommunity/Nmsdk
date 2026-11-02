@@ -1,5 +1,55 @@
 # Ранжирование измеренных кандидатов при нулевых и малых допусках
 
+## Текущий подтверждённый scope
+
+Core225642bd9b3a5651fce2808bd0bef79944d4f1b8 адресно проверен на Elder normal
+и M40 ASan: regression81/81, дополнительно physical4/4, затем raw readers21/21
+на каждом worker. Это отдельные gates, не один JUnit85. Doc-only Pulse1eeb23094c45681bb95250b1a1b81b734796790b
+сохраняет тот же Core tree2743819327158d12389221ba8c1cd9a928f28224.
+В develop изменения ещё не приняты: общая приёмка prerequisites продолжается.
+Defaults/цель/условия Exact не меняются; полные этапы0–12 этим не закрыты.
+
+Physical baseline4 показал selected70.5ms при уже измеренном61ms. Correction
+выбирает61ms при прежних fixed Ns/Rs/anchor; BudgetExhausted и отсутствие
+сертификата сохраняются. Для изоляции timing-rank явно задан amplitude tolerance1.
+Это не нормализация при default1e-5 и не научный результат классификации.
+
+| Доказательство | Root commit |
+|---|---|
+| Corrected old-Core controller baseline8 failures | 244399829e94bae3d619c858f48431e89ce59505 |
+| Normal regression81 + reader15/native-boundary4 audits | f9e823ced7d51614a2a1af307405bbdaaac0478f |
+| ASan regression81 + reader15/native-boundary4 audits | b9ce935628f758fbee8c7a546b0f169b3122ad93 |
+| Actual native old-Core baseline4 failures | d6fb8ce3da25582afd25a544d4d669cd39dfc3fe |
+| Normal physical4 + primary reader20 | f5e3bccacce748960f67b53afa5574f980bc4f7c |
+| ASan physical4 + primary reader20/comparison48 | 41db2c7641c41a934dec401bf11df09ef8f1665b |
+| Stronger normal reader21, explicit producer scopes | 11bc25b0721d950599c7b8dc4eae3f771f5fe9f8 |
+| Stronger ASan reader21, explicit producer scopes | cae2becc651d7e1fe2b629b4bf67621237b0f793 |
+| Complete normal temporal cache/selected figures | 48a8b1be28c6a60bd8c280159e51122be8ddd410 |
+
+Все archive/member/receipt hashes проверены после Git fetch. ASan process
+snapshots содержат реальную libasan.48 corrected CSV byte-equal между workers,
+48 native packets semantically equal. Поэтому normal temporal cache относится
+и к тем же ASan сигналам; независимый ASan rerender не заявляется.
+
+Кэш M40 содержит8 отчётов/96 probes/144 soma pairs/864 PNG. Все14 selected
+original PNG просмотрены1920x960: [QA](FiniteCandidateRankingVisualQA.json).
+Полная ручная проверка864 не заявляется. Окно0.18s полностью записано, но
+затухание некоторых EPSP продолжается у его конца: это не доказательство
+rest-state или отсутствия более поздних ответов.
+
+Новый finite_ranking_evidence пересчитывает signed timing/amplitude residuals
+по первичным peak/time/stimulus данным с проверкой CSV через audit_probe;
+summary не является самостоятельным источником min/selected verdict.
+measured_training_probe общий с ordinary training certificate reader.
+Null observation отвергается с unusable_measurement до обращения к полям.
+Проверены перестановка candidate rows, подмена residual/flags, NaN, stale
+anchor и потеря trace. Обычный stopped-state audit не объявляется полным
+универсальным аудитом всех search histories: новый rank reader имеет явный
+engineering-fixture scope. Старый producer_root в normal reader20 относился
+к reused regression81; receipt21 явно называет81, physical4 и baseline roots.
+
+## Исходная постановка и журнал попыток
+
 Source review общего BoundedTraining::Rank выявил потерю различий: ненулевая
 ошибка при tolerance=0 превращается в infinity. Для положительного очень
 малого tolerance деление также может переполниться. В обоих случаях лучший
@@ -23,7 +73,7 @@ timestep или подстановки скрытого численного д�
 с исходными допусками и свежего all-input прохода; лучший отрицательный
 кандидат остаётся BudgetExhausted/SearchUnresolved по причине остановки.
 
-Этот документ задаёт ещё не проверенное исправление. Не объявлять все
+Исходная постановка задавала ещё не проверенное исправление. Не объявлять все
 алгоритмы или этап7 принятыми; нужны baseline, correction, прежние decision
 regressions и native controls на обоих workers, с исходными artifacts.
 

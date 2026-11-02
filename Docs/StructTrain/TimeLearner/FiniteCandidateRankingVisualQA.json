@@ -1,0 +1,157 @@
+{
+  "kind": "timelearner_finite_rank_temporal_visual_qa",
+  "schema_version": 1,
+  "source_evidence": "f5e3bccacce748960f67b53afa5574f980bc4f7c",
+  "visual_evidence": "48a8b1be28c6a60bd8c280159e51122be8ddd410",
+  "reader": "8342f7d99e7b805ea0c64e54ade43dcd3a16abb9",
+  "reports": 8,
+  "trials": 96,
+  "trial_soma_pairs": 144,
+  "full_png_count": 864,
+  "automated_checks_passed": 3,
+  "selected_manual_review_count": 14,
+  "review_resolution": [
+    1920,
+    960
+  ],
+  "review_method": "Direct view of all fourteen original PNGs with view_image(detail=original).",
+  "full_cache_manual_review": false,
+  "scientific_verdict": null,
+  "notes": [
+    "All selected titles, legends, axes, input pulses and soma traces are readable without clipping.",
+    "Four old-Core baselines retain L2 responses; four corrected cases show the delayed and attenuated L3 response. The raw-derived error improves from about 70.5 ms to 61 ms and remains outside sync=0.",
+    "Two additional Classic soma2 overviews preserve the fixed-anchor channel response; four zooms resolve the actual input pulse and delayed membrane peak.",
+    "Shared Y scales cover all geometries within each source case. No source samples were downsampled.",
+    "Native absolute clocks differ across cases; timing comparisons use the measured burst origin. SI units remain unverified.",
+    "These are target-burst engineering controls with amplitude tolerance1. They do not demonstrate normalization at default amplitude tolerance, Exact learning, spike detection or selectivity.",
+    "The complete declared 0.18 s window still contains a decaying tail near its end; it does not prove rest-state or absence of later responses."
+  ],
+  "selected": [
+    {
+      "phase": "baseline",
+      "prefix": "Classic_2000_N0_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/final/0/verify/3/1",
+      "channel": 0,
+      "view": "overview",
+      "path": "baseline/Classic_2000_N0_finite_ranking_zero_sync/probe-0010/soma-001/overview.png",
+      "sha256": "25ce7b50724944bc4bd70b427fe322a0e72461b0b4a3f985cabc2e7ca2bca1b7"
+    },
+    {
+      "phase": "baseline",
+      "prefix": "Classic_2000_N1_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/final/0/verify/3/1",
+      "channel": 0,
+      "view": "overview",
+      "path": "baseline/Classic_2000_N1_finite_ranking_zero_sync/probe-0010/soma-001/overview.png",
+      "sha256": "7845d6e257b6e25be41120c33cb7a0125087ebd0a649476f455d2948d0defb0b"
+    },
+    {
+      "phase": "baseline",
+      "prefix": "Branch_2000_N0_finite_ranking_zero_sync",
+      "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/final/0/verify/3/2",
+      "channel": 0,
+      "view": "overview",
+      "path": "baseline/Branch_2000_N0_finite_ranking_zero_sync/probe-0011/soma-001/overview.png",
+      "sha256": "45781b7dfdd1c73810807b7e5c3057d9f5b5ec1f50eb19d6249ddf5d520d2fb5"
+    },
+    {
+      "phase": "baseline",
+      "prefix": "Branch_2000_N1_finite_ranking_zero_sync",
+      "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/final/0/verify/3/2",
+      "channel": 0,
+      "view": "overview",
+      "path": "baseline/Branch_2000_N1_finite_ranking_zero_sync/probe-0011/soma-001/overview.png",
+      "sha256": "90fa8015246126ab8f6d2737998271ce8f7abd7e896c8e9e8a62125c9e60e69b"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Classic_2000_N0_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/final/0/verify/3/1",
+      "channel": 0,
+      "view": "overview",
+      "path": "correction/Classic_2000_N0_finite_ranking_zero_sync/probe-0010/soma-001/overview.png",
+      "sha256": "6db5a86b847e91c7a81cecd9a2d94321b7d3a370d038c9c3dbaf2f070b7f69c9"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Classic_2000_N0_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/final/0/verify/3/1",
+      "channel": 0,
+      "view": "zoom-001",
+      "path": "correction/Classic_2000_N0_finite_ranking_zero_sync/probe-0010/soma-001/zoom-001.png",
+      "sha256": "0f2fbe586dcb594b983445b9f4bf3bb166847fb6ee168ed18251d1347c812aea"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Classic_2000_N0_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/final/0/verify/3/1",
+      "channel": 1,
+      "view": "overview",
+      "path": "correction/Classic_2000_N0_finite_ranking_zero_sync/probe-0010/soma-002/overview.png",
+      "sha256": "e4cdd1659beb236bab466ab6d1b95564227ab24a64740f441d0fa80f3e3efc5e"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Classic_2000_N1_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/final/0/verify/3/1",
+      "channel": 0,
+      "view": "overview",
+      "path": "correction/Classic_2000_N1_finite_ranking_zero_sync/probe-0010/soma-001/overview.png",
+      "sha256": "97a7dd0f67fa49ef76415f16ce06c82d5df7d76aca04a1c0eff6419c91e72126"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Classic_2000_N1_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/final/0/verify/3/1",
+      "channel": 0,
+      "view": "zoom-001",
+      "path": "correction/Classic_2000_N1_finite_ranking_zero_sync/probe-0010/soma-001/zoom-001.png",
+      "sha256": "b8a3af3a873d83737cf13424625b83e743c774a906c08d8b2afe2ac888e38e17"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Classic_2000_N1_finite_ranking_zero_sync",
+      "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/final/0/verify/3/1",
+      "channel": 1,
+      "view": "overview",
+      "path": "correction/Classic_2000_N1_finite_ranking_zero_sync/probe-0010/soma-002/overview.png",
+      "sha256": "c2f873306af668e4d114119688c9c6ab2bf7c904eb956826fb55bf22971f6d12"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Branch_2000_N0_finite_ranking_zero_sync",
+      "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/final/0/verify/3/2",
+      "channel": 0,
+      "view": "overview",
+      "path": "correction/Branch_2000_N0_finite_ranking_zero_sync/probe-0011/soma-001/overview.png",
+      "sha256": "115b3e53e1da786608003b6e796ddee83f424194b8408601736ef53ba4345179"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Branch_2000_N0_finite_ranking_zero_sync",
+      "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/final/0/verify/3/2",
+      "channel": 0,
+      "view": "zoom-001",
+      "path": "correction/Branch_2000_N0_finite_ranking_zero_sync/probe-0011/soma-001/zoom-001.png",
+      "sha256": "1f87953851d86da0a3dc133388a8458c932f04e0e4c5b7fe077f5795cf389c7b"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Branch_2000_N1_finite_ranking_zero_sync",
+      "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/final/0/verify/3/2",
+      "channel": 0,
+      "view": "overview",
+      "path": "correction/Branch_2000_N1_finite_ranking_zero_sync/probe-0011/soma-001/overview.png",
+      "sha256": "05ff524e924a3e8e3f7a778da8d880e8bdb1096f2529976deaec867ef4155efa"
+    },
+    {
+      "phase": "correction",
+      "prefix": "Branch_2000_N1_finite_ranking_zero_sync",
+      "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/final/0/verify/3/2",
+      "channel": 0,
+      "view": "zoom-001",
+      "path": "correction/Branch_2000_N1_finite_ranking_zero_sync/probe-0011/soma-001/zoom-001.png",
+      "sha256": "0f21338dd00398ef718f7fafed7027225728a3097032253b0b44d2c08c8a3112"
+    }
+  ]
+}

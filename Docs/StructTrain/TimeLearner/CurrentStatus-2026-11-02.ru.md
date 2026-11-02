@@ -26,11 +26,15 @@ BoundedTraining устранена потеря различий при нуле
 correction на Elder:81/81,15/15 readers и4 stopped-boundary audits.
 Proofs244399829e94bae3d619c858f48431e89ce59505 и
 f9e823ced7d51614a2a1af307405bbdaaac0478f полностью проверены после Git fetch.
-20 контроллерных сценариев не подменяют native physical ranking:4 новых
-сценария с несколькими реальными длинами ещё проверяются. Первая их сборка
-отклонена из-за ошибочного вызова test factory, исправление собирается отдельно.
-Новый ASan runtime строится в независимом M40 worktree; старый live163
-не обновлялся. Подэтап не принят в develop; defaults, CapturedPerInput,
+20 контроллерных сценариев теперь дополнены4/4 настоящих multi-length
+physical cases на обоих workers. Native baseline4 failures сохранён; correction
+выбирает measured61ms вместо70.5ms без ложного Exact. ASan81/81 также прошёл;
+raw readers21/21 на каждом worker, все48 corrected CSV byte-equal и48 packets
+semantically equal. Полные8 temporal reports/96 probes/144 soma pairs/864 PNG
+в M40 cache,3/3 automated checks;14 selected original PNG directly reviewed.
+Все SHA и границы в FiniteCandidateRanking.ru.md/validation/VisualQA.
+Независимый ASan worktree сохраняется; старый live163 не обновлялся.
+Подэтап не принят в develop; defaults, CapturedPerInput,
 fresh final gate и условия Exact не изменены. Полные этапы1–12 остаются открытыми.
 
 ## Завершено

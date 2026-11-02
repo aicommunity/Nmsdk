@@ -22,10 +22,10 @@
     "interpretation": "Initial timing fixture ignored the burst-origin ISI. Retained as failed attempts, not timing-defect proof. Corrected baseline explicitly checks actual measured residuals."
   },
   "pending": [
-    "ASan81 on independent M40 source/runtime",
-    "Four physical multi-length ranking controls on both workers",
-    "Primary temporal reports/direct review for those physical controls",
-    "Full original stage7 algorithm and model matrix"
+    "Prerequisite integrated ASan163 and trace-recording18 acceptance",
+    "Public diagnostic ASan pipeline acceptance and remaining broader compatibility matrix",
+    "Full original stage7 algorithm/model matrix including Quantized/BestEffort and C-trim",
+    "Children-first develop merges only after common prerequisite acceptance"
   ],
   "unchanged": [
     "CapturedPerInput target",
@@ -34,5 +34,26 @@
     "native lifecycle and scheduler",
     "search bounds and terminal reasons"
   ],
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "addressed_behavior_verified": true,
+  "doc_only_pulse": "1eeb23094c45681bb95250b1a1b81b734796790b",
+  "functional_core_tree": "2743819327158d12389221ba8c1cd9a928f28224",
+  "asan_regression_evidence": "b9ce935628f758fbee8c7a546b0f169b3122ad93",
+  "asan_regression_tests_passed": 81,
+  "normal_physics_root": "5b2773a2d9c96a55bc9f563bc7a485d7ee8f38ad",
+  "normal_physics_evidence": "f5e3bccacce748960f67b53afa5574f980bc4f7c",
+  "asan_physics_root": "d467ef31af128bceabfeb5fd5bae237309b3a984",
+  "asan_physics_evidence": "41db2c7641c41a934dec401bf11df09ef8f1665b",
+  "physical_tests_passed_per_worker": 4,
+  "reader_tests_passed_per_worker": 21,
+  "normal_reader_evidence": "11bc25b0721d950599c7b8dc4eae3f771f5fe9f8",
+  "asan_reader_evidence": "cae2becc651d7e1fe2b629b4bf67621237b0f793",
+  "physical_csv_byte_equal": 48,
+  "physical_packets_semantically_equal": 48,
+  "temporal_evidence": "48a8b1be28c6a60bd8c280159e51122be8ddd410",
+  "temporal_probes": 96,
+  "temporal_soma_pairs": 144,
+  "temporal_png_cache": 864,
+  "selected_original_png_reviewed": 14,
+  "asan_independent_rerender": false
 }
