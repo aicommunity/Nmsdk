@@ -4680,3 +4680,74 @@ TEST(NativeTrainingTermination,ClassicN0SweepBudgetBoundary){NativeSweepBudgetBo
 TEST(NativeTrainingTermination,ClassicN1SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearner>(1);}
 TEST(NativeTrainingTermination,BranchN0SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeTrainingTermination,BranchN1SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearnerBranch>(1);}
+
+namespace {
+template<class Learner> void DiagnosticRecognitionBoundary(int normalization,bool partial)
+{
+    EditingRig<Learner> rig(2000,normalization,partial?"diagnostic_partial":"diagnostic_budget");
+    auto plan=TrainingPlan(rig);RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    if(partial)plan.maximumModelSeconds=.002;
+    else for(auto& bound:plan.search.bounds)
+    {bound.maximumLength=bound.minimumLength;bound.maximumSynapses=bound.minimumSynapses;bound.maximumResistance=bound.minimumResistance;}
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
+    {ASSERT_LT(tick,20000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);ASSERT_FALSE(service.Certificate());
+    const std::string implementation="native-learned-boundary-fixture-v1";
+    const auto stopped=rig.learner->ExportNativeLearnedState(implementation);
+    ASSERT_EQ(stopped["kind"],QJsonValue("timelearner_stopped_state"));
+    EXPECT_EQ(stopped["reference_complete"],QJsonValue(!partial));
+    Artifact(rig.name+"_stopped_package.json",QJsonDocument(stopped).toJson());
+    Artifact(rig.name+"_training_outcome.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
+    const auto clock=rig.environment->GetTime().GetDoubleTime();
+    EXPECT_THROW(ConvertNativeSoloToRecognition(stopped,{},rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+    NativeRecognitionSpec conversion;
+    if(rig.branch && normalization)
+    {
+        NativeRecognitionSpec scaled;scaled.mode=RecognitionConversionMode::HistoricalBranchN1;
+        scaled.resistanceBounds={{1.e6,1.e12},{1.e6,1.e12}};
+        if(partial)EXPECT_THROW(ConvertNativeStoppedToDiagnosticRecognition(stopped,scaled,rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+        else conversion=scaled;
+    }
+    const auto package=ConvertNativeStoppedToDiagnosticRecognition(stopped,conversion,rig.learner->GetStorage(),rig.environment,implementation);
+    EXPECT_EQ(package["kind"],QJsonValue("timelearner_diagnostic_recognition_state"));
+    EXPECT_EQ(package["state_kind"],QJsonValue("diagnostic_recognition"));
+    EXPECT_EQ(package["source_solo"],QJsonValue(stopped));EXPECT_TRUE(package["recognition_certificate"].isNull());
+    EXPECT_EQ(package,ConvertNativeStoppedToDiagnosticRecognition(stopped,conversion,rig.learner->GetStorage(),rig.environment,implementation));
+    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),clock);
+    EXPECT_THROW(PrepareNativeRecognitionState(package,rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+    EXPECT_THROW(CreateNativeThresholdCandidate(package,.01,rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+    const auto oldRevision=rig.Revision();
+    const auto rejected=rig.learner->ImportNativeRecognitionState(package,implementation);
+    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(rejected.modelMayHaveChanged);
+    EXPECT_EQ(rig.Revision(),oldRevision);
+    auto forged=package;forged["kind"]="timelearner_recognition_state";forged["state_kind"]="recognition";
+    forged.remove("sha256");forged["sha256"]=NmsdkTools::CanonicalModelDataSha256(forged);
+    EXPECT_THROW(PrepareNativeRecognitionState(forged,rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+    const auto imported=rig.learner->ImportNativeDiagnosticRecognitionState(package,implementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    rig.learner->Build();rig.learner->Init();
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    ASSERT_TRUE(rig.neuron);ASSERT_TRUE(rig.source);rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());
+    ASSERT_EQ(rig.learner->ExportNativeRecognitionState(implementation),package);
+    Artifact(rig.name+"_diagnostic_recognition.json",QJsonDocument(package).toJson());
+    FrozenTrialChecks(rig,package);
+    EXPECT_EQ(package["source_solo"].toObject()["training_outcome"],QJsonValue("budget_exhausted"));
+    EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),package);
+}
+}
+#define DIAGNOSTIC_RECOGNITION_TESTS(Topology,Type,N) \
+TEST(NativeDiagnosticRecognition,Topology##N##Partial){DiagnosticRecognitionBoundary<Type>(N,true);} \
+TEST(NativeDiagnosticRecognition,Topology##N##Budget){DiagnosticRecognitionBoundary<Type>(N,false);}
+DIAGNOSTIC_RECOGNITION_TESTS(Classic,NNeuronTimeLearner,0)
+DIAGNOSTIC_RECOGNITION_TESTS(Classic,NNeuronTimeLearner,1)
+DIAGNOSTIC_RECOGNITION_TESTS(Branch,NNeuronTimeLearnerBranch,0)
+DIAGNOSTIC_RECOGNITION_TESTS(Branch,NNeuronTimeLearnerBranch,1)
+#undef DIAGNOSTIC_RECOGNITION_TESTS
+TEST(NativeDiagnosticRecognition,OrdinaryClassicCompletedRegression)
+{LearnedBoundary<NNeuronTimeLearner>(1,.2,2000,2,false,RecognitionCase::OwnedIdentity);}
+TEST(NativeDiagnosticRecognition,OrdinaryBranchCompletedRegression)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,false,RecognitionCase::OwnedScaled);}
