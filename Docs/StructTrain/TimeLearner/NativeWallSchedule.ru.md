@@ -171,3 +171,23 @@ Reader `e7782709157b84b5f8b1cec62711ff0ae4ecf1a2`:10/10 на обоих workers,
 Оба supervisor подтверждены живыми по PID/start ticks, выполняют сборку;
 численного результата integrated closure пока нет. Точные пути и identities
 в progress JSON. Не обновлять эти sources/builds/runtimes до terminal.
+
+
+Следующий default-policy Console regression подготовлен на обоих workers:
+`s04-wall-public-preflight-{normal,asan}-a2` ждёт завершения owned integrated
+supervisor и обязательного terminal74. Дальше14 positive configs,6 negative
+(4 native failures +2 descriptor rejections),2 реальных one-tick Train controls
+и production reader/prepare tests. Копируются только неизменённые ранее
+проверенные declarations, hashes сохраняются; новый runtime snapshot привязан
+к integrated Console. Не заявляется воздействие положительного wall-limit
+через публичный descriptor: отдельного такого фактора в контракте нет.
+Ожидающие a1 supervisors остановлены до Console/создания corpus: в новом
+wrong-owner fixture исправлен ключ owner на реальный owner_class. Это ошибка
+подготовки fixture; оригинальные jobs и cancellation record сохраняются в a2.
+Основные numerical supervisors не останавливались и остаются владельцами
+неизменяемых source/build/runtime. Точные identities в progress JSON.
+
+Независимая metadata миграция16 старых plan tools принята в root develop
+`8cf5b78ae23b37d0fdd0c99f1c334aabbccbc0bd`; оба worker source-context
+before/after совпали. Numeric root integrated gate остаётся507c8a6c4,
+этот исходный экспериментальный snapshot задним числом не переименовывается.

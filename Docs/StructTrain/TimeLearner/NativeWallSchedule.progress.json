@@ -107,7 +107,7 @@
       "start_ticks": "266416273"
     }
   ],
-  "current_accepted_root": "0c12a71757d4eb34412f043028f56edfa38ba974",
+  "current_accepted_root": "8cf5b78ae23b37d0fdd0c99f1c334aabbccbc0bd",
   "positive_attempt_a3": {
     "numeric_root": "f35f614d2d07c1cc0cdf9786bcadd31d9237ed06",
     "tests_each_worker": 66,
@@ -161,5 +161,35 @@
     "math_expected": 6,
     "status": "both owned supervisors confirmed live, building; no result yet",
     "do_not_update_sources_builds_or_runtimes": true
+  },
+  "public_preflight_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s04-wall-public-preflight-normal-a2",
+      "pid": 3574411,
+      "start_ticks": "317326349"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-wall-public-preflight-asan-a2",
+      "pid": 1617028,
+      "start_ticks": "267869261"
+    }
+  ],
+  "public_preflight_scope": {
+    "awaits_integrated_native_terminal": true,
+    "positive_configs": 14,
+    "negative_configs": 6,
+    "one_tick_train_controls": 2,
+    "inherited_wall_policy": "default negative limits only; positive public override capability not attested",
+    "attempt_a1": "waiting-only supervisors cancelled before any Console or source readback: wrong-owner test mutation corrected from owner to actual owner_class schema field; full original jobs preserved in a2 prior-setup.json"
+  },
+  "independent_migration": {
+    "accepted_root": "8cf5b78ae23b37d0fdd0c99f1c334aabbccbc0bd",
+    "normal_proof": "5daf892a9ca85ba0917de1cbade810beb2aec724",
+    "m40_proof": "ee01174127b6783422b7c223769343ee6a06aa0a",
+    "records_verified": 64,
+    "retired_plan_files": 16,
+    "active_numeric_source_context_unchanged": true
   }
 }
