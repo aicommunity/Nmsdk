@@ -4685,7 +4685,8 @@ namespace {
 template<class Learner> void NativeFiniteCandidateRanking(int normalization)
 {
     EditingRig<Learner> rig(2000,normalization,"finite_ranking_zero_sync",false,2,true);
-    auto plan=rig.Plan();const auto initial=rig.learner->ReadNativeParameters();
+    auto plan=TrainingPlan(rig,0.);plan.maximumWallSeconds=1800.;
+    const auto initial=rig.learner->ReadNativeParameters();
     plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
     plan.search.maximumCandidatesPerInput=8;plan.search.maximumSweeps=1;
