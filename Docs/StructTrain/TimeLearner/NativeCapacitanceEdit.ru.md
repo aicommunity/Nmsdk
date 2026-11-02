@@ -76,6 +76,13 @@ native physical roundtrip, реальные waveform probes, negative candidates
 4. Classic: корректировать выбранный путь. Branch: явный интервал общего кабеля;
    инвалидировать все затронутые observations/certificates и вновь оценить Rs
    domains после C edits. Прогноз задержки не является доказательством пика.
+   Для совместного поиска L/Ns/Rs/C нужен общий native preview кандидата:
+   недопустимо оценивать Rs domain по старой C или отвергать совместно
+   допустимый кандидат только из-за недопустимого промежуточного C-edit при
+   старой Rs. Новый отдельный API намеренно проверяет фиксированные остальные
+   параметры; его последовательная композиция не доказывает joint feasibility.
+   Controller action/readback/evidence должны описывать полный physical candidate,
+   включая C correction state, а не только прежние InputParameters(L,Ns,Rs).
 5. Допустить Exact только по fresh all-input pass нового revision; сохранять
    negative/quantized/best-effort/budget reasons раздельно.
 6. Проверить Train→export/import→Test, warm continuation, growth/Build/load,
