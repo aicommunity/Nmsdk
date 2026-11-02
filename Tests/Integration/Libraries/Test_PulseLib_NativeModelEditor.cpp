@@ -294,6 +294,8 @@ template<class Learner> struct EditingRig {
     }
 };
 
+void RecordNativeTrainingProof(NativeTrainingPlan& plan,const std::string& caseName,std::size_t channels);
+
 template<class Learner> void NativeAbsoluteClockProbe(unsigned frequency,double origin)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -3139,6 +3141,7 @@ TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
 {
     EditingRig<NNeuronTimeLearner> rig(2000,1,"service_exact_warm");rig.learner->CalculateMode=0;
     auto plan=TrainingPlan(rig,.2);
+    RecordNativeTrainingProof(plan,rig.name,rig.inputCount);
     for(auto& bound:plan.search.bounds){bound.maximumLength=bound.minimumLength;bound.maximumResistance=bound.minimumResistance;}
     const auto run=[&] {
         rig.learner->BeginNativeTraining(plan);
@@ -3146,6 +3149,7 @@ TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
         {ASSERT_LT(ticks,20000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     };
     run();const auto& service=rig.learner->NativeTrainingController();
+    Artifact(rig.name+"_cold_outcome.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
     ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());
     EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());EXPECT_TRUE(service.Certificate()->Exact());
     const auto captured=service.References()->Inputs();const auto hash=rig.Revision();
@@ -3154,6 +3158,7 @@ TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
     rig.learner->Reset();EXPECT_EQ(rig.Revision(),hash);ASSERT_TRUE(service.Certificate());
     ASSERT_EQ(service.ReferenceObservations().size(),2u);
     run();EXPECT_EQ(service.Outcome(),TrainingStatus::Exact);EXPECT_EQ(service.IssuedReferenceProbes(),0u);
+    Artifact(rig.name+"_warm_outcome.json",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
     ASSERT_TRUE(service.References());EXPECT_EQ(service.References()->Inputs(),captured);
     ASSERT_EQ(service.ReferenceObservations().size(),2u);
     EXPECT_EQ(service.ReferenceObservations()[0].observation.specification.trialId,originalReferenceTrial);
@@ -3161,12 +3166,17 @@ TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)
     EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
     EXPECT_TRUE(service.ReferenceObservations().empty());
     EXPECT_NE(service.Outcome(),TrainingStatus::Exact);
+    Artifact(rig.name+"_retarget_control.json",QJsonDocument(QJsonObject{
+        {"kind","native_retarget_invalidation"},{"schema_version",1},
+        {"references",bool(service.References())},{"certificate",bool(service.Certificate())},
+        {"outcome",TrainingStatusName(service.Outcome())},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
 
 template<class Learner> void StopNativeTraining()
 {
     EditingRig<Learner> rig(2000,0,"service_external_stop");auto plan=TrainingPlan(rig);
     std::vector<NativeProbeResult> recorded;plan.observationSink=[&](const auto& result){recorded.push_back(result);};
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
     const auto before=rig.Revision();rig.learner->BeginNativeTraining(plan);
     for(unsigned i=0;i<10;++i){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     EXPECT_EQ(rig.learner->NativeProbeState(),NativeProbeStatus::Running);
@@ -3185,7 +3195,8 @@ TEST(NativeTrainingService,ModelTimeBudgetCannotManufactureConvergence)
 {
     EditingRig<NNeuronTimeLearnerBranch> rig(2000,1,"service_deadline");auto plan=TrainingPlan(rig);
     plan.maximumModelSeconds=.002;std::vector<NativeProbeResult> recorded;
-    plan.observationSink=[&](const auto& result){recorded.push_back(result);};rig.learner->BeginNativeTraining(plan);
+    plan.observationSink=[&](const auto& result){recorded.push_back(result);};
+    RecordNativeTrainingProof(plan,rig.name,1u);rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
     {ASSERT_LT(ticks,20u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::BudgetExhausted);
@@ -3199,6 +3210,7 @@ TEST(NativeTrainingService,DeclaredPatternHashMustMatchTheActualNativeDataset)
     EditingRig<NNeuronTimeLearner> rig(2000,0,"service_spoofed_hash");auto plan=TrainingPlan(rig);
     plan.protocol.patternHash=plan.probe.specification.patternHash="unverified_declared_hash";
     std::vector<NativeProbeResult> recorded;plan.observationSink=[&](const auto& result){recorded.push_back(result);};
+    RecordNativeTrainingProof(plan,rig.name,rig.inputCount);
     rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
     {ASSERT_LT(ticks,20u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
@@ -3238,6 +3250,7 @@ template<class Learner> void ObserverSeesExternalPhysicsEdit()
         if(++samples==10)channel->Capacity=std::nextafter(capacity,std::numeric_limits<double>::infinity());
     };
     plan.observationSink=[&](const NativeProbeResult& result){recorded.push_back(result);};
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
     rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
     {ASSERT_LT(ticks,100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
@@ -3576,24 +3589,32 @@ TEST(NativePostTuneGraphBoundary,BranchN1_20000){PostTuneGraphBoundary<NNeuronTi
 TEST(NativePostTuneGraphBoundary,ClassicAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearner>(2000,1,true);}
 TEST(NativePostTuneGraphBoundary,BranchAttachFailure){PostTuneGraphBoundary<NNeuronTimeLearnerBranch>(2000,1,true);}
 
-void RecordPostTuneBoundaryTrainingProof(NativeTrainingPlan& plan,const std::string& caseName,std::size_t channels)
+void RecordNativeTrainingProof(NativeTrainingPlan& plan,const std::string& caseName,std::size_t channels)
 {
     struct Trace {std::ostringstream csv;std::string trial;std::size_t packet=0;};
     auto trace=std::make_shared<Trace>();
-    plan.probe.onPrepared=[trace,channels](const PreparedVerificationProbe&,const ProbeSpec& spec) {
+    std::ostringstream columns;columns<<"time,stimulus";
+    for(std::size_t i=0;i<channels;++i)columns<<",soma"<<i;columns<<'\n';
+    const auto header=columns.str();trace->csv<<header;
+    const auto previousPrepared=plan.probe.onPrepared;
+    const auto previousSample=plan.probe.onSample;
+    const auto previousSink=plan.observationSink;
+    plan.probe.onPrepared=[trace,header,previousPrepared](const PreparedVerificationProbe& prepared,const ProbeSpec& spec) {
         trace->trial=spec.trialId;trace->csv.str({});trace->csv.clear();trace->csv.imbue(std::locale::classic());
-        trace->csv<<std::setprecision(17)<<"time,stimulus";
-        for(std::size_t i=0;i<channels;++i)trace->csv<<",soma"<<i;trace->csv<<'\n';
+        trace->csv<<std::setprecision(17)<<header;
+        if(previousPrepared)previousPrepared(prepared,spec);
     };
-    plan.probe.onSample=[trace](const NativeProbeSample& sample) {
+    plan.probe.onSample=[trace,previousSample](const NativeProbeSample& sample) {
         trace->csv<<sample.time<<','<<sample.stimulus;
         for(double value:sample.potentials)trace->csv<<','<<value;trace->csv<<'\n';
+        if(previousSample)previousSample(sample);
     };
-    plan.observationSink=[trace,caseName](const NativeProbeResult& result) {
+    plan.observationSink=[trace,caseName,header,previousSink](const NativeProbeResult& result) {
         const auto name=caseName+"_training_proof_"+std::to_string(++trace->packet);
         Artifact(name+".json",QJsonDocument(EncodeNativeProbeEvidence(result)).toJson());
-        if(result.observation && result.observation->specification.trialId==trace->trial)
-            Artifact(name+".csv",QByteArray::fromStdString(trace->csv.str()));
+        const bool recorded=result.observation && result.observation->specification.trialId==trace->trial;
+        Artifact(name+".csv",QByteArray::fromStdString(recorded?trace->csv.str():header));
+        if(previousSink)previousSink(result);
     };
 }
 
@@ -3602,7 +3623,7 @@ template<class Learner> void NativePostTuneOwnerPolicy(unsigned frequency,int no
     EditingRig<Learner> rig(frequency,normalization,"posttune_owner_policy",false,2,true);
     if(frequency==20000)rig.learner->CalculateMode=0;
     auto plan=TrainingPlan(rig);plan.search.tolerances.sync=1.;
-    RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
     rig.learner->BeginNativeTraining(plan);
     for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
     {ASSERT_LT(tick,50000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
@@ -3674,7 +3695,7 @@ template<class Learner> void RejectConnectedNativeOwnerConfiguration(bool import
     if(importing)
     {
         auto plan=TrainingPlan(rig);plan.search.tolerances.sync=1.;
-        RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+        RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
         rig.learner->BeginNativeTraining(plan);
         for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
         {ASSERT_LT(tick,50000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
@@ -3926,7 +3947,7 @@ TEST(NativePostTuneOwnerPolicy,EquivalentCertificateCannotHideChangedReferencePr
         +[]() -> UComponent* {return new PostTuneProvenanceLearner;},image),image);
     EditingRig<PostTuneProvenanceLearner> rig(2000,0,"posttune_owner_provenance",false,2,true,2,1,false,image);
     auto plan=TrainingPlan(rig);plan.search.tolerances.sync=1.;
-    RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
     rig.learner->BeginNativeTraining(plan);
     for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
     {ASSERT_LT(tick,50000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
@@ -4436,7 +4457,7 @@ TEST(NativeWallSchedule,BranchRecognitionGenerator){RejectWallPolicyBeforeRecogn
 template<class Learner> void ChangeWallPolicyInObservationSink()
 {
     EditingRig<Learner> rig(2000,1,"wall_observation_sink",false,2,true);
-    auto plan=TrainingPlan(rig);RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:2u);
+    auto plan=TrainingPlan(rig);RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:2u);
     const auto originalSink=plan.observationSink;const auto observations=std::make_shared<std::size_t>(0);
     const auto owner=rig.learner;
     plan.observationSink=[originalSink,observations,owner](const NativeProbeResult& packet) {
@@ -4623,7 +4644,7 @@ template<class Learner> void NativeSweepBudgetBoundary(int normalization)
     for(auto& bound:plan.search.bounds)
     {bound.maximumLength=bound.minimumLength;bound.maximumSynapses=bound.minimumSynapses;bound.maximumResistance=bound.minimumResistance;}
     const auto parameters=rig.learner->ReadNativeParameters();const auto revision=rig.Revision();
-    RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
     rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
     {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*rig.frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
