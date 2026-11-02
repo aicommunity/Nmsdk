@@ -17,13 +17,14 @@ M40 archive telemetry ASan также завершён:unit9/native20/readers24,
 Это подтверждение private StepDuration normalization и названных archive/
 transfer controls; full dynamic checkpoint и вся матрица не заявлены.
 
-Оба узких ASan owners завершились. Read-only normal202 на Elder остаётся
-отдельным running gate (owner101217/322637777, publisher101223/322637787).
-Он по-прежнему использует source-capacitance-state-normal-b1/rootb9af8990 и
-immutable runtime normal B6; source нельзя checkout/update до его закрытия.
-Общий source-кандидат не объединяется в develop до проверки этой регрессии.
-Accepted develop остаётся17ca5a0b (explicit C₀ scope). Открытый parser defect
-и последующие пункты полного плана не маскируются успехом source25/archive20.
+Read-only normal202 на Elder завершён:202/202 PASS и8 JUnit/contract readers.
+Evidence `248660b2362308de583e72f1a0ec6b7aa139ef10`: проверены1 865 members,
+8 374 229 compressed bytes. Использован immutable normal B6/rootb9af8990;
+ограничение его lease снято после завершения владельца и публикации.
+Это закрывает проверку расширенной регрессии source-кандидата. Приёмка scope
+описана в [SourceArchiveAcceptance](SourceArchiveAcceptance-2026-11-03.ru.md).
+Строгий файловый parser развивается отдельно: ASan26 прошёл, normal выполняется.
+Последующие пункты полного плана остаются открытыми.
 
 ## Source visual QA и расширенная регрессия 03.11
 
@@ -34,15 +35,16 @@ origin1e9s, near-grid и cutoff; exact hashes в visual-review.json. Evidence
 Global visual acceptance=false: не объявлять просмотренными все3888 PNG и
 не трактовать source-characterisation PASS как классификацию.
 
-Elder ASan25 owner77120 остаётся жив на прежнем immutable runtime rootb9af8990.
-На том же source запущен отдельный read-only normal gate202:
+Историческая постановка завершённых gates: ASan25 и read-only normal202
+использовали прежний immutable runtime rootb9af8990:
 owner101217/322637777, publisher101223/322637787, runtime из завершённого B6.
 Это union finite81 +integrated163 +physical ranking4 без дублирования IDs.
 Включены kernel/configured/native/diagnostic/archive/inherited scheduling
 контроли; waveforms/certificates оцениваются исходными assertions. Source,
 build и runtime не изменяются; wall budget10800s не меняет model/search budgets.
-После успеха ожидаются8 JUnit/contract reader checks. Результат пока pending;
-никакой общей matrix/legacy parity или научной приёмки заранее не назначено.
+Все202 native и8 JUnit/contract reader checks прошли; первичные данные
+проверены, как указано выше. Общая matrix/legacy parity или научная приёмка
+из этого ограниченного scope не следуют.
 
 В Pulse feature также исправлен ошибочный header example файлового NDataset и
 описаны native reload/registry semantics. Parser atoi/atof/extra-field defect

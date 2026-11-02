@@ -109,4 +109,6 @@ actual libasan mappings доступны. Все83 CSV, включая76 source/
 совпали побайтно с normal B6. Это подтверждает использование тех же сигналов
 в normal temporal cache и для ASan-наблюдений; независимый ASan rerender всех
 3888 PNG не заявлен. C₀ readers41 включают24 прежних normal primary controls,
-а не новую ASan-проверку C₀ transfer. Расширенный native202 scope ещё pending.
+а не новую ASan-проверку C₀ transfer. Расширенный native202 scope завершён:
+202/202 и8 JUnit/contract readers PASS, evidence
+`248660b2362308de583e72f1a0ec6b7aa139ef10`, все1 865 members проверены.
