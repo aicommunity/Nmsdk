@@ -95,3 +95,12 @@ Build может законно заменить ребёнка из storage, с
 лимите. Four restored owner probes подтверждают отрицательный лимит; все
 46 создаваемых проб имеют schema3 packet/CSV. Серверная positive приёмка,
 регрессии, проверка полного Console preflight и temporal reports ещё открыты.
+
+Дополнительная граница callback: observationSink вызывается уже после закрытия
+пробы. Политика проверяется повторно после сохранения packet/sink, до принятия
+reference либо сертификата. Две реальные service cases подтверждают сохранение
+предыдущего valid complete observation и остановку текущего Train без Exact/
+certificate при смене политики в sink. Всего64 cases/48 schema3 packet/CSV;
+сервисы с pure adapters могут не предоставлять optional execution validator,
+а BindNativeTraining предоставляет его всегда. Pulse итоговой реализации
+`151a3883137bf112519543f64aa0b9bbf500c579`; серверная приёмка ещё ожидается.
