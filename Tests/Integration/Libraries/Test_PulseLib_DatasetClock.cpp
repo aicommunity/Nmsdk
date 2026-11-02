@@ -9,13 +9,16 @@
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <algorithm>
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
 #include <iomanip>
 #include <locale>
+#include <limits>
 #include <sstream>
 #include <stdexcept>
+#include <vector>
 
 namespace {
 using namespace RDK;
@@ -34,8 +37,14 @@ void Write(const std::string& name,const QByteArray& bytes)
 }
 struct Frame { double time,stimulus,soma; };
 struct Playback { std::vector<Frame> frames;QJsonObject record; };
+struct Protocol {
+    double firstIsi=.01,secondIsi=.04,timeGeneration=.18;
+    int minimumEdges=4;
+    bool nearGrid=false;
+    std::string tag;
+};
 
-Playback Play(unsigned frequency,int mode,double delay,double origin,const std::string& stem)
+Playback Play(unsigned frequency,int mode,double delay,double origin,const std::string& stem,const Protocol& protocol)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     core.environment->DestroyModel();
@@ -53,11 +62,11 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
     neuron->NumSomaMembraneParts=1;neuron->StructureBuildMode=2;
     neuron->NumDendriteMembranePartsVec=std::vector<int>{1};
     dataset->NumSamples=1;dataset->NumFeatures=1;dataset->MaxSpikesPerFeature=2;
-    MDMatrix<double> pattern;pattern.Assign(2,1,0.);pattern(0,0)=.01;pattern(1,0)=.04;
+    MDMatrix<double> pattern;pattern.Assign(2,1,0.);pattern(0,0)=protocol.firstIsi;pattern(1,0)=protocol.secondIsi;
     MDMatrix<int> labels;labels.Assign(1,1,1);
     dataset->MatrixData=pattern;dataset->MatrixClasses=labels;
     dataset->Delay=delay;dataset->AdvanceSampleAfterBurst=false;dataset->LoopSamples=true;
-    dataset->TimeGeneration=.18;dataset->StateGeneration=mode;
+    dataset->TimeGeneration=protocol.timeGeneration;dataset->StateGeneration=mode;
     UEPtr<UContainer> dataNode=dataset,neuronNode=neuron;
     Require(model->AddComponent(dataNode)!=ForbiddenId && model->AddComponent(neuronNode)!=ForbiddenId,"clock fixture attach failed");
     const auto marker=model->OperationFailureSequence();model->Init();
@@ -82,7 +91,8 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
         model->Calculate();
         Require(!model->HasOperationFailureSince(marker),"clock fixture caught native Calculate failure");
         const double time=core.environment->GetTime().GetDoubleTime();
-        Require(std::abs((time-origin)-double(tick)/frequency)<1e-12,"clock fixture native sample grid differs");
+        const auto clockRoundoff=32.*std::numeric_limits<double>::epsilon()*std::max({1.,std::abs(time),std::abs(origin)});
+        Require(std::abs((time-origin)-double(tick)/frequency)<=std::max(1e-12,clockRoundoff),"clock fixture native sample grid differs");
         Require(generator->Output.GetRows()==1 && generator->Output.GetCols()==1 && soma->SumPotential.GetRows()==1 && soma->SumPotential.GetCols()==1,"clock fixture invalid readout dimensions");
         const double input=generator->Output(0,0),potential=soma->SumPotential(0,0);
         Require(std::isfinite(time) && std::isfinite(input) && std::isfinite(potential),"clock fixture nonfinite measurement");
@@ -94,11 +104,11 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
     }
     const auto after=NmsdkTools::IdentifyModel(neuron,ports);
     Require(after["valid"].toBool() && after["sha256"]==before["sha256"],"clock fixture physical model changed");
-    Require(edges.size()>=4 && peak>1e-6,"clock fixture must show repeated real pulses and soma response");
+    Require(edges.size()>=protocol.minimumEdges && peak>1e-6,"clock fixture must show declared real pulses and soma response");
     result.record=QJsonObject{{"kind","native_dataset_clock_observation"},{"schema_version",1},
         {"frequency_hz",int(frequency)},{"mode",mode},{"delay",delay},{"origin",origin},
         {"complete",true},{"window_duration",.25},{"sample_count",double(result.frames.size())},
-        {"scheduled_isi",QJsonArray{.01,.04}},{"pulse_length",.001},{"time_generation",.18},
+        {"scheduled_isi",QJsonArray{protocol.firstIsi,protocol.secondIsi}},{"pulse_length",.001},{"time_generation",protocol.timeGeneration},
         {"rising_edges",edges},{"model",before},{"after_model",after},{"peak_abs_soma",peak},
         {"trace",QString::fromStdString(stem+".csv")},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
     Write(stem+".csv",QByteArray::fromStdString(csv.str()));Write(stem+".json",QJsonDocument(result.record).toJson());
@@ -111,13 +121,19 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
     neuron->Free();dataset->Free();core.environment->DestroyModel();
     return result;
 }
-void OriginInvariant(unsigned frequency,int mode,double delay)
+void OriginInvariant(unsigned frequency,int mode,double delay,Protocol protocol={},bool extended=false)
 {
-    const auto stem="dataset_clock_"+std::to_string(frequency)+"_mode"+std::to_string(mode)+"_gap"+std::to_string(int(delay*1000));
+    const auto stem="dataset_clock_"+std::to_string(frequency)+"_mode"+std::to_string(mode)+"_gap"+std::to_string(int(delay*1000))+protocol.tag;
     try
     {
         std::vector<Playback> runs;
-        for(unsigned index=0;index<3;++index)runs.push_back(Play(frequency,mode,delay,index==0?0.:index==1?.1:1.,stem+"_origin"+std::to_string(index)));
+        const std::vector<double> origins=extended?std::vector<double>{0.,.1,1.,86400.,1e9}:std::vector<double>{0.,.1,1.};
+        for(unsigned index=0;index<origins.size();++index)
+        {
+            runs.push_back(Play(frequency,mode,delay,origins[index],stem+"_origin"+std::to_string(index),protocol));
+            EXPECT_EQ(runs.back().record["rising_edges"].toArray()[0].toObject()["tick"].toInt(),
+                      int(frequency/100)+(protocol.nearGrid?1:0))<<"first actual pulse must occur at the declared native tick";
+        }
         for(unsigned index=1;index<runs.size();++index)
         {
             ASSERT_EQ(runs[index].frames.size(),runs[0].frames.size());
@@ -147,4 +163,19 @@ TEST(DatasetClockOrigin,ContinuousThirtyMsAt20000){OriginInvariant(20000,2,.03);
 TEST(DatasetClockOrigin,TimedNoGapAt20000){OriginInvariant(20000,1,0.);}
 TEST(DatasetClockOrigin,TimedFiveMsAt20000){OriginInvariant(20000,1,.005);}
 TEST(DatasetClockOrigin,TimedThirtyMsAt20000){OriginInvariant(20000,1,.03);}
+Protocol Extended(const std::string& tag,bool near=false,bool cutoff=false)
+{
+    Protocol p;p.tag="_"+tag;p.nearGrid=near;
+    if(near){p.firstIsi=.01000001;p.secondIsi=.03999999;}
+    if(cutoff){p.timeGeneration=.01;p.minimumEdges=1;}
+    return p;
+}
+TEST(DatasetClockExtended,ContinuousAt2000){OriginInvariant(2000,2,0.,Extended("long"),true);}
+TEST(DatasetClockExtended,TimedAt2000){OriginInvariant(2000,1,0.,Extended("long"),true);}
+TEST(DatasetClockExtended,ContinuousAt20000){OriginInvariant(20000,2,0.,Extended("long"),true);}
+TEST(DatasetClockExtended,TimedAt20000){OriginInvariant(20000,1,0.,Extended("long"),true);}
+TEST(DatasetClockExtended,NearGridAt2000){OriginInvariant(2000,2,0.,Extended("near",true),true);}
+TEST(DatasetClockExtended,NearGridAt20000){OriginInvariant(20000,2,0.,Extended("near",true),true);}
+TEST(DatasetClockExtended,TimedFirstOnsetCutoffAt2000){OriginInvariant(2000,1,0.,Extended("cutoff",false,true),true);}
+TEST(DatasetClockExtended,TimedFirstOnsetCutoffAt20000){OriginInvariant(20000,1,0.,Extended("cutoff",false,true),true);}
 }

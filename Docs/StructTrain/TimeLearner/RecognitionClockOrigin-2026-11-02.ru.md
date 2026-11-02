@@ -90,3 +90,12 @@ Onset/end/repeat используют согласованный guard отно�
 seconds interpretation. Детальный контракт — PulseLib
 `Docs/Analysis/DatasetClockPlayback.ru.md`. Нужны normal/ASan, расширение
 origins/near-grid/cutoff и regression переноса: это ещё не принятый fix.
+
+Расширение тестов сохраняет исходные12 cases и добавляет8 с origins
+0/0.1/1/86400/1e9s. Проверяются обычный repeat, onset на10ns позже grid point
+(нельзя предъявить раньше) и timed cutoff точно на первом onset. Все реальные
+input/soma samples по-прежнему сравниваются без допуска; допуск машинного
+округления применяется только к проверке double-представления абсолютных
+timestamps. Native clock Rdk остаётся целочисленным microseconds. Spec
+`native-dataset-clock-extended-v1.json`:20 cases,76 полных recordings. Новые
+проверки ещё требуют серверного выполнения; они не были частью baseline A3.
