@@ -48,3 +48,20 @@ TIMELEARNER_DATASET_CLOCK_ARTIFACTS. Для extended выставить
 TIMELEARNER_DATASET_CLOCK_EXTENDED=1. Проверки включают неизвестную/bool schema,
 incomplete window, неверный origin, потерю events/model digest, NaN и пропуск
 native tick. Серверная приёмка нового adapter и визуальный review ещё требуются.
+
+Baseline reader evidence `bdabaa6cea61250014051f6da7757fa6f9dec1df` подтвердил9/9
+на36 полных исходных записях и повреждающих мутациях; SHA256 всех6 файлов
+проверены. Fixed normal B3 прошёл34/34 native (20 clock +14 transfer). Его
+unit-процесс реально выполнил9 тестов, но завершился до capture /proc mappings;
+unit gate остаётся incomplete_test_observation, общий запуск не принят. Нельзя
+подменять фактическую provenance сведениями ldd или hash executable. Publisher
+также обнаружил nullable inventory; исходный failure сохранён отдельно.
+
+Для быстрых PulseLib native tests добавлен явный gate schema2 с
+`cooperative_runtime_capture=true`. Test main после RUN_ALL_TESTS удерживает
+тот же процесс через существующий Console RuntimeCapture ready/ack contract.
+Supervisor проверяет PID/start_ticks и фактически загруженные файлы до ack.
+Схема1 не меняется; неизвестный режим, числовой/строковый true или boolean
+schema запрещены. Source/model ticks и Reset при ожидании не выполняются.
+Это не поддержка такого handshake в Rdk gtest_main: ему schema2 не назначать.
+Новый handshake и file/scheduling fixtures ещё требуют серверной проверки.

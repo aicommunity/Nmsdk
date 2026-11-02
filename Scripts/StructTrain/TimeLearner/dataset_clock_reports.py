@@ -15,7 +15,7 @@ import sys
 
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, count, load, number, require
-from .native_gate import FIELDS as GATE_FIELDS, audit_junit
+from .native_gate import audit_junit, supported_specification
 from .plotting import padded_limits, plotting_runtime, render_soma
 
 
@@ -109,16 +109,12 @@ def audit_dataset_clock(specification, artifacts):
     """Independently check declared recordings, including failed invariance cases."""
     try:
         root = Path(artifacts).resolve(strict=True); spec = load(Path(specification))
-        require(type(spec) is dict and set(spec) == GATE_FIELDS
-                and spec['kind'] == 'timelearner_native_test_gate' and type(spec['schema_version']) is int
-                and spec['schema_version'] == 1, 'unknown_dataset_clock_specification')
+        require(supported_specification(spec), 'unknown_dataset_clock_specification')
         expected = spec['expected_test_ids']
         require(type(expected) is list and expected and len(expected) == len(set(expected)), 'invalid_dataset_clock_inventory')
         conditions = [_condition(identity) for identity in expected]
         gate = load(root/'specification.json'); result = load(root/'result.json')
-        require(type(gate) is dict and set(gate) == GATE_FIELDS and gate['kind'] == 'timelearner_native_test_gate'
-                and type(gate['schema_version']) is int and gate['schema_version'] == 1,
-                'unknown_dataset_clock_source_gate')
+        require(supported_specification(gate), 'unknown_dataset_clock_source_gate')
         require(type(result) is dict and result['kind'] == 'timelearner_native_test_gate_result'
                 and type(result['schema_version']) is int and result['schema_version'] == 1
                 and result['scientific_verdict'] is None, 'unknown_dataset_clock_gate_result')
