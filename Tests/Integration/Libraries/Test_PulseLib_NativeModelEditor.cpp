@@ -308,6 +308,7 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     exc->Capacity=.9e-9;inh->Capacity=.6e-9;soma->Capacity=1.4e-9;
     const double cExc=exc->Capacity.GetData(),cInh=inh->Capacity.GetData(),cSoma=soma->Capacity.GetData(),cLt=lt->Capacity.GetData();
     const auto original=rig.Revision();const auto baseline=rig.learner->CaptureNativeCapacitanceBaseline();
+    Artifact(rig.name+"_capacitance_before_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron.Get(),rig.ports)).toJson());
     const auto decoded=QJsonDocument::fromJson(QJsonDocument(baseline).toJson()).object();ASSERT_EQ(decoded,baseline);
     EXPECT_DOUBLE_EQ(baseline["channels"].toObject()["Dendrite1_2.ExcChannel"].toDouble(),cExc);
     EXPECT_DOUBLE_EQ(baseline["channels"].toObject()["Dendrite1_2.InhChannel"].toDouble(),cInh);
@@ -322,6 +323,7 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     EXPECT_DOUBLE_EQ(exc->Capacity.GetData(),cExc*1.1);EXPECT_DOUBLE_EQ(inh->Capacity.GetData(),cInh*1.1);
     EXPECT_DOUBLE_EQ(soma->Capacity.GetData(),cSoma);EXPECT_DOUBLE_EQ(lt->Capacity.GetData(),cLt);
     const auto edited=rig.Revision();const auto life=rig.neuron->ObserveLifecycle();
+    Artifact(rig.name+"_capacitance_after_model.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron.Get(),rig.ports)).toJson());
     const auto repeat=rig.learner->ApplyNativeCapacitanceScale(decoded,scales,.1);
     ASSERT_EQ(repeat.status,NativeEditStatus::Applied)<<repeat.reason;
     EXPECT_EQ(rig.Revision(),edited);EXPECT_EQ(repeat.afterRevision,edited);EXPECT_TRUE(life.IsCurrent());
