@@ -2432,7 +2432,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         EXPECT_FALSE(test->NativeTrainingController().Certificate());
         EXPECT_EQ(test->ReadNativeParameters(),parameters);
         EXPECT_EQ(NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}})["sha256"],package["model_revision"]);
-        EXPECT_THROW(test->ExportNativeLearnedState(implementation),std::invalid_argument);
+        std::string resetExportReason;
+        try {test->ExportNativeLearnedState(implementation);}
+        catch(const std::invalid_argument& error){resetExportReason=error.what();}
+        EXPECT_EQ(resetExportReason,"learned_state_requires_completed_or_stopped_boundary");
     }
     else EXPECT_EQ(test->ExportNativeLearnedState(implementation)["model_revision"],package["model_revision"]);
     const auto outcomeBeforeRejectedImports=test->NativeTrainingController().Outcome();
@@ -2456,6 +2459,13 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     };
     corrupted=package;auto claim=corrupted["certificate"].toObject();claim["exact"]=!claim["exact"].toBool();corrupted["certificate"]=claim;
     rejectWithoutMutation(resign(corrupted));
+    if(!diagnostic)
+    {
+        // Retain the original completed-boundary missing-final regression.
+        // Only diagnostic stopped packages may contain a partial final prefix.
+        corrupted=package;auto incompleteFinals=corrupted["final_packets"].toArray();ASSERT_FALSE(incompleteFinals.isEmpty());
+        incompleteFinals.removeLast();corrupted["final_packets"]=incompleteFinals;rejectWithoutMutation(resign(corrupted));
+    }
     corrupted=package;auto finals=corrupted["final_packets"].toArray();ASSERT_FALSE(finals.isEmpty());
     // A stopped package may legitimately retain a partial final prefix. A
     // duplicate trial is invalid for both package kinds and must be rejected.
