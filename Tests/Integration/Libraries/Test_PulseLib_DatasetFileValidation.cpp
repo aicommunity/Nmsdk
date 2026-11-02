@@ -93,28 +93,28 @@ void Check(const std::string& name,const QByteArray& content,bool expected,
     }
     else {EXPECT_FALSE(ready);EXPECT_TRUE(failed);}
 }
-template<class F> void Run(F operation)
+template<class F> void ExecuteFileCheck(F operation)
 {try{operation();}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
-TEST(DatasetFileValidation,ValidLegacySingle){Run([]{Check("legacy","class;f0;f1\n7;0.01;0.02\n",true,1,2,{.01,.02});});}
-TEST(DatasetFileValidation,ValidMultiBlankClass){Run([]{Check("multi_blank","#NDataset;MaxSpikes=2\nclass;f0;f1\n7;.01;.02\n;.03;-1\n",true,2,2,{.01,.02,.03,-1});});}
-TEST(DatasetFileValidation,ValidMultiNoClass){Run([]{Check("multi_none","# NDataset MaxSpikes=2\nclass;f0;f1\n7;.01;.02\n.03;-1\n",true,2,2,{.01,.02,.03,-1});});}
-TEST(DatasetFileValidation,ValidSignedWhitespaceCRLF){Run([]{Check("whitespace","class;f0;f1\r\n +7 ; +1e-2 ; -1 \r\n",true,1,2,{.01,-1});});}
-TEST(DatasetFileValidation,MissingFileIdle){Run([]{Check("missing","",true,0,0,{},true);});}
-TEST(DatasetFileValidation,RejectGarbageClass){Run([]{Check("class_junk","class;f0\nlabel;.01\n",false);});}
-TEST(DatasetFileValidation,RejectClassSuffix){Run([]{Check("class_suffix","class;f0\n7x;.01\n",false);});}
-TEST(DatasetFileValidation,RejectClassDecimal){Run([]{Check("class_decimal","class;f0\n7.0;.01\n",false);});}
-TEST(DatasetFileValidation,RejectClassOverflow){Run([]{Check("class_overflow","class;f0\n2147483648;.01\n",false);});}
-TEST(DatasetFileValidation,RejectGarbageIsi){Run([]{Check("isi_junk","class;f0\n7;bad\n",false);});}
-TEST(DatasetFileValidation,RejectIsiSuffix){Run([]{Check("isi_suffix","class;f0\n7;.01ms\n",false);});}
-TEST(DatasetFileValidation,RejectNaN){Run([]{Check("nan","class;f0\n7;nan\n",false);});}
-TEST(DatasetFileValidation,RejectInf){Run([]{Check("inf","class;f0\n7;inf\n",false);});}
-TEST(DatasetFileValidation,RejectOverflowIsi){Run([]{Check("isi_overflow","class;f0\n7;1e999\n",false);});}
-TEST(DatasetFileValidation,RejectEmptyIsi){Run([]{Check("empty","class;f0;f1\n7;;.02\n",false);});}
-TEST(DatasetFileValidation,RejectExtraIsi){Run([]{Check("extra","class;f0\n7;.01;.02\n",false);});}
-TEST(DatasetFileValidation,RejectTrailingDelimiter){Run([]{Check("trailing","class;f0\n7;.01;\n",false);});}
-TEST(DatasetFileValidation,RejectWrongHeaderWidth){Run([]{Check("header","f0;f1\n7;.01;.02\n",false);});}
-TEST(DatasetFileValidation,RejectMetaSuffix){Run([]{Check("meta_suffix","#NDataset;MaxSpikes=2junk\nclass;f0\n7;.01\n;.02\n",false);});}
-TEST(DatasetFileValidation,RejectUnknownMeta){Run([]{Check("meta_unknown","#NDatasetX;MaxSpikes=2\nclass;f0\n7;.01\n;.02\n",false);});}
-TEST(DatasetFileValidation,RejectIncompleteBlock){Run([]{Check("block","#NDataset;MaxSpikes=2\nclass;f0\n7;.01\n",false);});}
-TEST(DatasetFileValidation,RejectMissingFeature){Run([]{Check("short_row","class;f0;f1\n7;.01\n",false);});}
+TEST(DatasetFileValidation,ValidLegacySingle){ExecuteFileCheck([]{Check("legacy","class;f0;f1\n7;0.01;0.02\n",true,1,2,{.01,.02});});}
+TEST(DatasetFileValidation,ValidMultiBlankClass){ExecuteFileCheck([]{Check("multi_blank","#NDataset;MaxSpikes=2\nclass;f0;f1\n7;.01;.02\n;.03;-1\n",true,2,2,{.01,.02,.03,-1});});}
+TEST(DatasetFileValidation,ValidMultiNoClass){ExecuteFileCheck([]{Check("multi_none","# NDataset MaxSpikes=2\nclass;f0;f1\n7;.01;.02\n.03;-1\n",true,2,2,{.01,.02,.03,-1});});}
+TEST(DatasetFileValidation,ValidSignedWhitespaceCRLF){ExecuteFileCheck([]{Check("whitespace","class;f0;f1\r\n +7 ; +1e-2 ; -1 \r\n",true,1,2,{.01,-1});});}
+TEST(DatasetFileValidation,MissingFileIdle){ExecuteFileCheck([]{Check("missing","",true,0,0,{},true);});}
+TEST(DatasetFileValidation,RejectGarbageClass){ExecuteFileCheck([]{Check("class_junk","class;f0\nlabel;.01\n",false);});}
+TEST(DatasetFileValidation,RejectClassSuffix){ExecuteFileCheck([]{Check("class_suffix","class;f0\n7x;.01\n",false);});}
+TEST(DatasetFileValidation,RejectClassDecimal){ExecuteFileCheck([]{Check("class_decimal","class;f0\n7.0;.01\n",false);});}
+TEST(DatasetFileValidation,RejectClassOverflow){ExecuteFileCheck([]{Check("class_overflow","class;f0\n2147483648;.01\n",false);});}
+TEST(DatasetFileValidation,RejectGarbageIsi){ExecuteFileCheck([]{Check("isi_junk","class;f0\n7;bad\n",false);});}
+TEST(DatasetFileValidation,RejectIsiSuffix){ExecuteFileCheck([]{Check("isi_suffix","class;f0\n7;.01ms\n",false);});}
+TEST(DatasetFileValidation,RejectNaN){ExecuteFileCheck([]{Check("nan","class;f0\n7;nan\n",false);});}
+TEST(DatasetFileValidation,RejectInf){ExecuteFileCheck([]{Check("inf","class;f0\n7;inf\n",false);});}
+TEST(DatasetFileValidation,RejectOverflowIsi){ExecuteFileCheck([]{Check("isi_overflow","class;f0\n7;1e999\n",false);});}
+TEST(DatasetFileValidation,RejectEmptyIsi){ExecuteFileCheck([]{Check("empty","class;f0;f1\n7;;.02\n",false);});}
+TEST(DatasetFileValidation,RejectExtraIsi){ExecuteFileCheck([]{Check("extra","class;f0\n7;.01;.02\n",false);});}
+TEST(DatasetFileValidation,RejectTrailingDelimiter){ExecuteFileCheck([]{Check("trailing","class;f0\n7;.01;\n",false);});}
+TEST(DatasetFileValidation,RejectWrongHeaderWidth){ExecuteFileCheck([]{Check("header","f0;f1\n7;.01;.02\n",false);});}
+TEST(DatasetFileValidation,RejectMetaSuffix){ExecuteFileCheck([]{Check("meta_suffix","#NDataset;MaxSpikes=2junk\nclass;f0\n7;.01\n;.02\n",false);});}
+TEST(DatasetFileValidation,RejectUnknownMeta){ExecuteFileCheck([]{Check("meta_unknown","#NDatasetX;MaxSpikes=2\nclass;f0\n7;.01\n;.02\n",false);});}
+TEST(DatasetFileValidation,RejectIncompleteBlock){ExecuteFileCheck([]{Check("block","#NDataset;MaxSpikes=2\nclass;f0\n7;.01\n",false);});}
+TEST(DatasetFileValidation,RejectMissingFeature){ExecuteFileCheck([]{Check("short_row","class;f0;f1\n7;.01\n",false);});}
 }
