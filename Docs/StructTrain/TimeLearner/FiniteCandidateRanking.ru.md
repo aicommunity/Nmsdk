@@ -64,6 +64,17 @@ production stopped-boundary audits. Proof f9e823ced7d51614a2a1af307405bbdaaac047
 проверкой нового порядка нескольких физических кандидатов. Такая адресная
 native проверка остаётся нужна, как и ASan; подэтап не принят в develop.
 
+Для этого добавлен NativeFiniteRanking:4 настоящих Classic/Branch×N0/N1
+случая с L1..3, fixed Ns/Rs/anchor и sync=0. Амплитудный tolerance=1 задан
+явно для изоляции timing-rank, а не подтверждения default1e-5. Проверяются
+фактический лучший измеренный остаток, чувствительный positive control
+«другая геометрия действительно лучше исходной», fresh final verification
+и отрицательный certificate. Все training soma/input traces записываются
+production recorder. Физический baseline327d8d5d13a42c6e1ebd17eba39af962be69b929
+пинует старый Core427; его сборка начата отдельно на Elder. Результат пока
+неизвестен; отсутствие улучшения или invalid peak будет явным failure fixture,
+а не автоматическим доказательством дефекта ранжирования.
+
 На M40 отдельная новая ASan-сборка использует другое source/build/runtime
 дерево; живой07167 ASan163 не меняется. Первая настройка новой сборки
 выявила неполную подготовку dependency closure: отсутствовали4 штатных
