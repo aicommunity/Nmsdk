@@ -1,0 +1,18 @@
+{
+  "kind": "timelearner_dataset_clock_fixed_evidence",
+  "schema_version": 1,
+  "root": "b9af8990fe56e9b1662ddaceaa8f874e5b3bb143",
+  "pulselib": "9ab6d57f0118ad6564ffd8421d7ab2a7a4040fe2",
+  "rdk": "48d6548e46f3310537a2d8b59fb5be553307a54f",
+  "statuses": {},
+  "acceptance_status": "incomplete_or_failed",
+  "archive_sha256": "c44fc8b169cd4e7ae23545e24719e2d5deb598c1a5fd67319d67cc702e20ad25",
+  "archive_bytes": 899,
+  "members": {
+    "gate/exception.json": "f97afb41ed39b2c5acb3e33e0be329b14e4f2ba87eb272c1bef9a0b872418e48",
+    "gate/owned-supervisor.json": "3328f2d1da276957447245afcd21017b759e0fb890cd1eb197bfcca3b43b783e",
+    "gate/prerequisite-verification.json": "949ad72828cc1b7303895a0fcfee40731a4d02b75dbd0d40ed4e93129fb47726"
+  },
+  "scope": "Native25: dataset clock20, real file lifecycle2, native scheduling3, explicit cooperative runtime capture; independent41 reader/JUnit controls after success. Unchanged Rdk unit scope has prior separate evidence; this run does not reaccept it. No ASan or full mode acceptance.",
+  "scientific_verdict": null
+}
