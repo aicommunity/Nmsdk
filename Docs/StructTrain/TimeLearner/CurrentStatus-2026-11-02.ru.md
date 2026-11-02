@@ -63,6 +63,16 @@ renderer1797026/ticks269055735; wall budget7200s относится только
 результата ещё нет. Шесть untraced packets и5 gaps остаются видимыми, raw Reset
 plots этим запуском не строятся. Не обновлять этот Python checkout до terminal.
 
+Последующее подтверждение:407 render завершён(returncode0,1343.526s),
+557 trial/soma pairs/5600 PNG. Все16 reader checks прошли, в том числе3 проверки
+этого полного кэша,3 регрессии recorder88 и10 wall/raw controls.24 selected
+original1920x960 PNG прямо просмотрены: Classic/Branch,N0/N1,2000/20000Hz,
+финальные diagnostic probes и100-tick peak zooms. Proofb091e60425ed4cd8c4218ae44d9aa9582aa93143:
+55 members/4528772 bytes полностью hash-verified. QA:Integrated163TemporalVisualQA.json.
+Весь кэш вручную не просмотрен и в Git не добавлен.6 исторических CSV и прежние
+Exact/warm traces не появились задним числом. Renderer/Python checkout теперь
+освобождён и обновлён отдельно; ASan163 source/runtime не менялись.
+
 Отдельный raw Reset supplement теперь завершён:4 diagnostics/6 soma pairs,
 21 PNG в `report-cache/s04-s07-integrated163-raw-reset-normal-a1`;10/10 readers,
 9 selected PNG directly reviewed1920x960. Источник — исходный Elder CI163,

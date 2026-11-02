@@ -1,0 +1,271 @@
+{
+  "kind": "timelearner_integrated163_temporal_visual_qa",
+  "schema_version": 1,
+  "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+  "primary_commit": "3cc20c1449d67b443e440a09b474d6b0eb54b15a",
+  "visual_evidence_commit": "b091e60425ed4cd8c4218ae44d9aa9582aa93143",
+  "source_worker": "Elder normal",
+  "render_worker": "M40",
+  "trials": 407,
+  "trial_soma_pairs": 557,
+  "full_png_count": 5600,
+  "selected_reviewed": 24,
+  "full_cache_manual_review": false,
+  "untraced_packets": 6,
+  "old_exact_warm_observability_gap": true,
+  "raw_reset_supplement": "c9831d3fb73d5eab337dce1c4cbf40f88a678efa",
+  "reader_tests_passed": 16,
+  "scientific_verdict": null,
+  "review_method": "Each of24 original PNGs viewed directly using view_image(detail=original).",
+  "notes": [
+    "Classic/Branch,N0/N1,2000/20000Hz inherited Activity probes before and after the declared control sequence; four final training diagnostic probes; four measured-peak100-tick zooms at20000Hz.",
+    "Actual input pulses are overlaid. Axes, legends and waveform extrema are readable and not clipped in selected views. SI units are explicitly unverified.",
+    "Shared-Y peak zooms retain the overview amplitude scale. Input is actually zero in a zoom whose preceding stimulus lies outside its bounds; the linked overview shows the real pulse.",
+    "Absolute clocks and source model hashes remain visible. Similar-looking probes do not establish equivalent algorithms or independence.",
+    "Valid complete probe observations do not imply Exact training, recognition success, robustness or all-pattern scientific evaluation.",
+    "Historical6 untraced packets and absent Exact/warm traces remain absent. Raw Reset plots are separately reviewed; they are not closed probe results.",
+    "No complete manual review of all5600 PNGs is claimed."
+  ],
+  "selected": [
+    {
+      "source_packet": "Classic_2000_N0_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_2000_N0_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "4ddd029e31d4cf4b9788c2980d3d53e07e2ff1defd918118a2d25d72e0c051f5",
+      "source_packet_sha256": "da600d72b359c9b3b436f51a6205fffd27afabb0b610d0072e2b8d4e2ac9bd9b",
+      "source_trace_sha256": "ec5502a93a86dcc4f031fbe00a790f8c9762c1e03701acc20e7514b516266082",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_2000_N0_inherited_activity_probe_8_evidence.json",
+      "channel": 1,
+      "view": "overview",
+      "file": "selected/Classic_2000_N0_inherited_activity_probe_8_evidence-soma1-overview.png",
+      "sha256": "1fc1a9288907ee34dfae6b6f535733dbd7752136774176c687ca5c2b5d9f8dfc",
+      "source_packet_sha256": "b4d19ac2126df4c9325843d4634c322301fc5b0560995cbd82dd1dd8491055f6",
+      "source_trace_sha256": "d212c662d6783ecd9e569f34015167400864082f55ce05272849efecb8f8daad",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_20000_N0_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_20000_N0_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "d8737654f745b2dcc4d86a6c09f3e8c407fcf12f291c5acb34e4acabfb466c7c",
+      "source_packet_sha256": "188703db7deafebc75769753b004aaff4fffecfb54e093ab8ae27ab35bf53107",
+      "source_trace_sha256": "4aa514f3ddabf991e737ad16f513352822966e2ebc3bce0df5ae59466854a6d6",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_20000_N0_inherited_activity_probe_8_evidence.json",
+      "channel": 1,
+      "view": "overview",
+      "file": "selected/Classic_20000_N0_inherited_activity_probe_8_evidence-soma1-overview.png",
+      "sha256": "4632dff1cc9096d33eda954420caea6da27b5a0127cb6ad29c3335226a41778f",
+      "source_packet_sha256": "9d3367773af81fb146260c32f87f8dfa5a6b76b40eb1a65e6c9e8dfb6c3a1a42",
+      "source_trace_sha256": "35fece54632ad52af6e5f4712a88ec1891ef15661b2e743b32324e7ac83e9e70",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_2000_N0_learned_boundary_state_trial_13.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_2000_N0_learned_boundary_state_trial_13-soma0-overview.png",
+      "sha256": "b784a5412ec8799730f55f3d44d98f30c3652ff570da4afe5eabc9edcbcc59ad",
+      "source_packet_sha256": "0ae390b31032cf552506c10603ea9d98dc033d26c94fce53b359b3225ca5bd4a",
+      "source_trace_sha256": "2899567a132a7c4d8f7dc3762aa77914bb3438d868b2fe3c4102e3e54f9c4df6",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_20000_N0_inherited_activity_probe_8_evidence.json",
+      "channel": 1,
+      "view": "zoom-021",
+      "file": "selected/Classic_20000_N0_inherited_activity_probe_8_evidence-soma1-zoom-021.png",
+      "sha256": "28ef1746795bc2c81325b98f7aa3d79486279f95958856a324fc448ee55e6089",
+      "source_packet_sha256": "9d3367773af81fb146260c32f87f8dfa5a6b76b40eb1a65e6c9e8dfb6c3a1a42",
+      "source_trace_sha256": "35fece54632ad52af6e5f4712a88ec1891ef15661b2e743b32324e7ac83e9e70",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_2000_N1_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "6cc5349462f0ffc98ac290956df92c3d2c5bf9f1854511704d849f5ab025b858",
+      "source_packet_sha256": "ab25896e38a817309b5d2c0e395609a2f0cc5c8805a5f426b39fdae5d3eeb832",
+      "source_trace_sha256": "77b210004164cdc7571651f77efbf70fc09b9224f58c4f66889db979b6f87379",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_2000_N1_inherited_activity_probe_8_evidence.json",
+      "channel": 1,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_inherited_activity_probe_8_evidence-soma1-overview.png",
+      "sha256": "b64395b1edd74dfc174369639063e8944842bf2ed5bde055baa23d83e8db74fe",
+      "source_packet_sha256": "26fbd302a1e2db8497732b587e437ad0583b2355131647d37d8120b3746edd10",
+      "source_trace_sha256": "09c9819716b7c9eab4ff3bb19bcb1e844ddbdd6306fad91a62349b61b0961b84",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_20000_N1_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_20000_N1_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "d4daf89f193d742a13206440fa106955e2ed6b9bb0ff69d0cca43a47f42cca09",
+      "source_packet_sha256": "fa8d37bdf948d25fdc249f69553180e45b907525a0c6c8f9a994fa4c595e724a",
+      "source_trace_sha256": "8e2b56a5402b60b6cffad7e534a4fea02e49a74818355a2a78eaffe163ffce76",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_20000_N1_inherited_activity_probe_8_evidence.json",
+      "channel": 1,
+      "view": "overview",
+      "file": "selected/Classic_20000_N1_inherited_activity_probe_8_evidence-soma1-overview.png",
+      "sha256": "eed0aada4142ce25212d5d9425852750063afaa2fce20caa772b930b06d3d92a",
+      "source_packet_sha256": "18a57f8b661654f4ef4e82031455f5b3696d59be1893ec5fdb12fb14fe92d6ba",
+      "source_trace_sha256": "b45b6556a6943a246b05070bedf8af8062f705765d99249488af0c39090309ff",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_2000_N1_learned_boundary_state_trial_13.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Classic_2000_N1_learned_boundary_state_trial_13-soma0-overview.png",
+      "sha256": "3293ad9c0e5dfc3aee16929d2fbefaa641d6396d0a190b347109c395252a9d29",
+      "source_packet_sha256": "953c5ef691ad432d8fa533722f9e306c7e3577796d277d4b8cf413d69c821e88",
+      "source_trace_sha256": "a354a1a1e760519f9d1461f607f7dd1effda52f932e1e2ccc1afd8eeee914565",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Classic_20000_N1_inherited_activity_probe_8_evidence.json",
+      "channel": 1,
+      "view": "zoom-021",
+      "file": "selected/Classic_20000_N1_inherited_activity_probe_8_evidence-soma1-zoom-021.png",
+      "sha256": "a9093659850d8006f63d6ada8ede16310f08ac67a195e0f5a162a4d7130367f4",
+      "source_packet_sha256": "18a57f8b661654f4ef4e82031455f5b3696d59be1893ec5fdb12fb14fe92d6ba",
+      "source_trace_sha256": "b45b6556a6943a246b05070bedf8af8062f705765d99249488af0c39090309ff",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_2000_N0_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_2000_N0_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "134f309e06273f025b996e114c45388399d202d382349de4e5ae0d79380a8619",
+      "source_packet_sha256": "b7614e376f31950c48eb65ebb00c6ce34904c043301a978bc077365fa63f5ad4",
+      "source_trace_sha256": "8f4a35cb33579bbdf6101ec5c54d2feb1880fddaaaeeb144ae53cad7cafd74b1",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_2000_N0_inherited_activity_probe_8_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_2000_N0_inherited_activity_probe_8_evidence-soma0-overview.png",
+      "sha256": "90b0ba31bc3131fab8e1c27fe7eb83870066d013911d8ef33e9d68126e1e82dd",
+      "source_packet_sha256": "1e5732b4adeb033b7bf7f6db33aee358e198ed2d1e701dfde0660bce87623ee2",
+      "source_trace_sha256": "7b526beaefc5145238b4e0cb9455711c47e83693d757b9141763e0d6af7f4bed",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_20000_N0_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_20000_N0_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "4a6510f75e141e291e90bdb9e504be972ed500c39e41b831aef487341585d78e",
+      "source_packet_sha256": "2ae4b370efbf8409dfab32fd5f255f3ea8727132c6aed9d7981a7fc530732dc1",
+      "source_trace_sha256": "3baab3e64702fdbf4db3c536d9976bf5ba1746723dd0ac0bd38cfd47ccd3ddac",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_20000_N0_inherited_activity_probe_8_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_20000_N0_inherited_activity_probe_8_evidence-soma0-overview.png",
+      "sha256": "d92b150aed44af87beae58a13d447bacf5a6627557e01617f4c974f69b646091",
+      "source_packet_sha256": "b8ee14e59665bdba46f8aaaf68cabd4f4da7389a9ea87ae8719704216487f1c4",
+      "source_trace_sha256": "6782be293ec12eaafe80defd0a1d7ac4b0a3dd49f708c2d316fe939d6d6a1fcd",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_2000_N0_learned_boundary_state_trial_13.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_2000_N0_learned_boundary_state_trial_13-soma0-overview.png",
+      "sha256": "053f10491a8c27c6378ee2d4b1aa0478989ea0ea59be52cf4f8722b66eb14f5b",
+      "source_packet_sha256": "27b1a34e1644d48e222aba923c006a228494c5bb7672f9ccda801f0a931c8e1f",
+      "source_trace_sha256": "fe684c8dde52050705cba404ef7bc885f6eb171e6f1448fccd49fb4dbd243f10",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_20000_N0_inherited_activity_probe_8_evidence.json",
+      "channel": 0,
+      "view": "zoom-021",
+      "file": "selected/Branch_20000_N0_inherited_activity_probe_8_evidence-soma0-zoom-021.png",
+      "sha256": "c8dd4985aaeab3f3effc0e4c341de9bee0ec6bb52eb525d0b283a1a73c19f42d",
+      "source_packet_sha256": "b8ee14e59665bdba46f8aaaf68cabd4f4da7389a9ea87ae8719704216487f1c4",
+      "source_trace_sha256": "6782be293ec12eaafe80defd0a1d7ac4b0a3dd49f708c2d316fe939d6d6a1fcd",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_2000_N1_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_2000_N1_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "82ea76c896995425d0ef0704edb188a8690873310248780e07befe844f2a39cb",
+      "source_packet_sha256": "ae1a92c9ab14370028d0cc762613cfd7dcc5b9b2d569be4285653ce39bfc1ea9",
+      "source_trace_sha256": "95ce5f5c603aa6639e7e207e77393983da1829ab46be98bae34425fd114ca3db",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_2000_N1_inherited_activity_probe_8_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_2000_N1_inherited_activity_probe_8_evidence-soma0-overview.png",
+      "sha256": "c2ea0cf314939361405babf9896481fb6bfe00753a43b4d915bed89c8f7a76f0",
+      "source_packet_sha256": "f5da6c51c14f4026fd29d3ed7d57f43e5908bdea71b7af3d48e3f3ab904506b1",
+      "source_trace_sha256": "79700d537f3711b526201b0360645a30423c22d011b528b1143f011b2efdaf66",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_20000_N1_inherited_activity_probe_2_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_20000_N1_inherited_activity_probe_2_evidence-soma0-overview.png",
+      "sha256": "9bfae729938fd0c9971a332ddc6dee888a8b7180f2694e17d302f1623a46d4f2",
+      "source_packet_sha256": "ea67ac03a4c30d6feda8d92d13c141919bbd791b70566aeb2b05edfe80b83ec3",
+      "source_trace_sha256": "e738067200239dac4c2ea61bef8eadd671ba4e30838c4f4b22595ca4045aa677",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_20000_N1_inherited_activity_probe_8_evidence.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_20000_N1_inherited_activity_probe_8_evidence-soma0-overview.png",
+      "sha256": "3a3a61df2665cbfe6996b5d22a4871041788dcaaab290338d3ad1ae3cdd89381",
+      "source_packet_sha256": "cd6be554509f8a442becb364b03f0ba38c5887893efabba1872d97dabf3636e7",
+      "source_trace_sha256": "66352afd3fb1d726217483f9778769fca0356389feb9568319f20023dddf9e11",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_2000_N1_learned_boundary_state_trial_13.json",
+      "channel": 0,
+      "view": "overview",
+      "file": "selected/Branch_2000_N1_learned_boundary_state_trial_13-soma0-overview.png",
+      "sha256": "2a4deb4d42deee0e75ecc98997dd9027ebc057010a83ddcb349640a7efcba01f",
+      "source_packet_sha256": "0e8ff7c616ff348ea84af6f315ccf32799a5aa8e747cdabe080c07a7f7e2c5b3",
+      "source_trace_sha256": "da6049a5a83eae73834cc8a6674201fa07c943613b071ec068b438739ce10f72",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    },
+    {
+      "source_packet": "Branch_20000_N1_inherited_activity_probe_8_evidence.json",
+      "channel": 0,
+      "view": "zoom-021",
+      "file": "selected/Branch_20000_N1_inherited_activity_probe_8_evidence-soma0-zoom-021.png",
+      "sha256": "863d69ec60dcedba99dceafe7a9f3f24f87c789c0e503d95d087b3b08badd73a",
+      "source_packet_sha256": "cd6be554509f8a442becb364b03f0ba38c5887893efabba1872d97dabf3636e7",
+      "source_trace_sha256": "66352afd3fb1d726217483f9778769fca0356389feb9568319f20023dddf9e11",
+      "manual_review": "reviewed_readable_at_original1920x960"
+    }
+  ]
+}
