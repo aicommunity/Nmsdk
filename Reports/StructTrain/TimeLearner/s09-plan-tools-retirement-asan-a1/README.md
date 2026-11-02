@@ -1,0 +1,1 @@
+Production Git migration verifier: 64 exact retrieval/absence records, including 16 historical plan tools; restored old path rejected. Seven source files are exact evidence copies. Separate clones/index preserve active native build sources. Historical scripts not executed; no numerical, ASan or runtime-equivalence claim.
