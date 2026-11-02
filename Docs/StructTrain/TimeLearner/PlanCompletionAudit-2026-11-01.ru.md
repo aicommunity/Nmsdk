@@ -235,3 +235,16 @@ workers production verifier проверил48 migration records и отклон
 fixture с возвращённым старым файлом. Это metadata/Git приёмка, а не
 численные/ASan tests и не закрытие полного этапа9.
 [Обоснование и полные SHA](DocsPythonRetirement.ru.md).
+
+
+## Дополнение02.11: structured schema1 Train exit
+
+Исправлен production Python worker: exit2 с реальными stopped-state данными
+training job schema1 ранее не анализировался. Новый run manifest schema2
+разделяет process_error и data validity; старый schema1 не переоценивается.
+На обоих workers maintained preflight-regression14 positive/6 negative/2
+one-tick Train и28 reader/preparation/compatibility tests без skips.
+Primary и exact compatibility inputs доступны в Git, hashes проверены.
+[Источники и границы](StructuredTrainingExit.ru.md). Это частичное завершение
+конкретного дефекта этапа10 и переноса active regression tool в этап9,
+а не полный scheduler/publisher или весь исходный план0–12.

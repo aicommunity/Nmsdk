@@ -1,0 +1,1 @@
+Self-contained inputs for rerunning the maintained preflight regression and its28 checks: exact18 template jobs, original corpus metadata and actual legacy schema1 Train primary. Legacy data are compatibility inputs only; their recorded source/runtime assurance is not upgraded. Combine with the parent current-primary report; no external absolute path is needed for reanalysis.
