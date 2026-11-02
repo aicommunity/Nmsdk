@@ -1,5 +1,13 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+Следующее дополнение: [декларативный validation runner](ValidationSuites.ru.md)
+прошёл66/66 без skips на каждом worker и5 actual CLI negative controls.
+Versioned suite фиксирует Python package, все test IDs и1599-file Git corpus.
+Остальные artifact-dependent suites не объявляются принятыми. Численные
+алгоритмы этим дополнением не меняются; C-trim/Quantized/BestEffort остаются
+открытыми требованиями. Исходная accepted closure этого подэтапа — root
+47ef1229474099fd9d540175c8a7f3f5a6cc95b5 / Pulsea18c8a1097a221e5aca3bfc2c1afc07fb2534a56.
+
 Дополнение к PlanCompletionAudit-2026-11-01.ru.md. Полностью завершённым
 этапом исходного плана остаётся0; этапы1–12 частичны. Узкие gates не заменяют
 обязательную матрицу. Принятый develop44334e272de8429f29775512a860584c60350899
