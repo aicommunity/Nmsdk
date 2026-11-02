@@ -30,3 +30,27 @@ Source/build/runtime ASan163-a2 не обновлять. Дозапись вып
 numeric snapshot/runtime на свободном Elder; позднее аналогичный gate на M40.
 Исходный163 остаётся своим архивом с явными untraced gaps. Новый short gate не
 переписывает его и не заменяет полный CI163 или научную матрицу.
+
+## Явный учёт долга в отчёте
+
+`native_test_reports` schema2 добавляет `untraced`, `packet_aliases` и
+`observability_gaps`; schema1 продолжает читаться без изменения контракта.
+Список ожидаемых C++ cases задаётся отдельно от реально найденных файлов.
+`integrated-wall-search-report-v2.json` описывает исходный CI163:18 фаз,
+153 standalone traced probes,6 untraced packets,407 CSV,413 primary packets.
+Все найденные probe packets и CSV должны быть явно учтены; наличие долга
+не разрешает пропустить файл. Для untraced обязательны исходный packet,
+его hash, читаемая схема и причина отсутствия трассы; `data_complete=false`.
+
+Alias допустим только при полном равенстве JSON с первичным packet,
+без цепочек aliases и повторного учёта измерения. Различная сериализация
+может иметь разные hashes; равенство проверяется по strict decoded JSON.
+Gap ссылается на существующий test ID; дубли запрещены. HTML перечисляет
+пробелы явно, без синтетических кривых. `data_complete=false`, если есть
+любой gap, untraced либо неполное/невалидное traced observation.
+
+Четыре raw explicit-Reset diagnostics не превращаются в closed probes:
+в schema2 они отдельно отмечены как необходимость raw-only отчёта.
+Полный рендер407 проб и отдельные Reset-графики, проверка масштаба и
+визуальный просмотр ещё не выполнены этим изменением. Новые reader tests
+должны пройти на реальном immutable CI163 на сервере до приёмки.
