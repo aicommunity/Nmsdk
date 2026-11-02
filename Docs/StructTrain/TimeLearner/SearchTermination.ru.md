@@ -57,3 +57,25 @@ Classic/Branch×N0/N1 budget/export/import controls. Native controls фикси�
 условие несинхронности,8 полных observations на case. Это не научная оценка
 при default0.02. Все32 packet/CSV и48 soma pairs подлежат строгому анализу
 и полным временным отчётам. Приёмка ещё не выполнена, в develop изменений нет.
+
+
+## Проверенный промежуточный результат
+
+На обоих workers46/46 C++ (42 controller и4 native boundary cases),
+4 production stopped-state audits и32 полных probe/CSV (48 soma pairs).
+Normal primary `348f15e866f36769b29a20678c6ef0e0897a2961`, ASan
+`f3061e974e3e134ba0900e80e53a1c02dc14015d`: по114 verified members,
+95560/98336 bytes. ASan loaded-files snapshot содержит реальную libasan.
+Baseline initial `fc8b8a2b0b0616866aa5a94f9028e81f6f47e1a6` (29 members),
+corrected `a2bc9dadba6fb651cc52a5e7918b0125d0eeb25a` (38 members): также
+проверены все archive/member/bundle hashes. Сохранились исходные setup errors.
+
+Feature НЕ принята в develop. Важно: смена max-sweep статуса влияет на свежие
+ранее nonexact completed-boundary/recognition fixtures. Их регрессии нельзя
+заменить четырьмя успешными singleton-domain controls. Требуются actual
+configured/positive/transfer проверки и явный diagnostic evaluation путь,
+без автоматического обхода guard-а и без переоценки исторических архивов.
+Native32 temporal reports и scoped direct visual review ещё открыты.
+Точное состояние и следующие обязательные действия в progress JSON.
+Все текущие numeric jobs завершились; их immutable source/runtime snapshots
+не переименовываются под более поздний metadata HEAD.
