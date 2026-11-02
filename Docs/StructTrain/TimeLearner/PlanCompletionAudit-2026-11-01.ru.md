@@ -303,3 +303,8 @@ export сохраняется до Reset. Допуски не расширяли
 миграция scripts, scheduler/leases и публикация со сбоями, научные order/ITI/
 frozen матрицы и сквозная документация. SHA/отрицательные попытки/owned jobs:
 SearchTermination.ru.md, SearchTermination.progress.json, SearchTerminationVisualQA.json.
+
+Последующее уточнение: ASan5 также прошёл5/5, primary461cc58deda8f8d1b026fa3564591d1bd2882926
+полностью проверен после Git fetch. Scoped transport root5e299dedf закрыт на
+обоих workers. Новый combined root07167d551 всё ещё проверяется: Elder163
+выполняется, M40 build выполняется. Общие статусы этапов0–12 не меняются.
