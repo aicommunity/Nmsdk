@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -890,6 +890,301 @@
       "replacement": null,
       "reason": "October W1/W2 time-scaled twin generator using historical storage profiles, module imports and hard-coded scientific assumptions; not a current model preparation path.",
       "original_results": "preserved; retrieval snapshot does not assert actual experiment source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/audit_matrix_wiring.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "e758e2a6c962b4bec33aed48ffed17a9cce53d08",
+      "content_sha256": "668ea659e64da708924f2f308db2c700cdfd07a18bce161512df0f551afb9111",
+      "bytes": 2298,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/audit_matrix_wiring.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/audit_matrix_wiring.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/cable.c",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "5e8279e5eeb919e5d69a3705fa5e471cf15ef6cf",
+      "content_sha256": "1fd641922fea125ab62116a0c35df1172ce4da802ad52cfd62f1df722b585324",
+      "bytes": 1987,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/cable.c",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/cable.c"
+      ],
+      "replacement": null,
+      "reason": "historical plan copy; byte-identical evidence source remains independently tracked",
+      "identical_source_at_snapshot": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable.c"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/cable2.c",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "984868db8cc4bb8de3c66c08b706edee9c6f1bf3",
+      "content_sha256": "02028197cde2328f7aecc5568fccb2469bf36e13c0d4035fa5c805f6087f5c27",
+      "bytes": 2055,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/cable2.c",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/cable2.c"
+      ],
+      "replacement": null,
+      "reason": "historical plan copy; byte-identical evidence source remains independently tracked",
+      "identical_source_at_snapshot": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable2.c"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/classic_full.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "6ff1dc1a3f9be1849ce06f321d69a4268c27a298",
+      "content_sha256": "676c5da15f85112633c03050405e078296b169c57a61797384cb8883d7e137ad",
+      "bytes": 840,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/classic_full.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/classic_full.py"
+      ],
+      "replacement": null,
+      "reason": "historical plan copy; byte-identical evidence source remains independently tracked",
+      "identical_source_at_snapshot": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/classic_full.py"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/ideal_delay.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "d053f8dd1502b4b1899a6ecd6a4e5b651f1296c4",
+      "content_sha256": "af8a8d26c1eb550810e7fe590f61a6f3f2380f49297dadb849ad605cd730ec68",
+      "bytes": 934,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/ideal_delay.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/ideal_delay.py"
+      ],
+      "replacement": null,
+      "reason": "historical plan copy; byte-identical evidence source remains independently tracked",
+      "identical_source_at_snapshot": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/ideal_delay.py"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/library.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "a8fc68b398de3afb546c7f5689561ded9769f992",
+      "content_sha256": "b97979b937faae4647af98ee32197d1e7ed0570554ee309c104285fe8e9c5a21",
+      "bytes": 3373,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/library.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/library.py"
+      ],
+      "replacement": null,
+      "reason": "historical plan copy; byte-identical evidence source remains independently tracked",
+      "identical_source_at_snapshot": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/library.py"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/oracle.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "6cca612746f2190f14b474fbd3c6bcf2ccc02178",
+      "content_sha256": "2b75f4fe1fd8ddb84f752fbd557bbab7791c7a7b4390c1c84291206b261d672d",
+      "bytes": 1646,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/oracle.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/oracle.py"
+      ],
+      "replacement": null,
+      "reason": "historical plan copy; byte-identical evidence source remains independently tracked",
+      "identical_source_at_snapshot": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/oracle.py"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/sweep.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "32206659825f47e93fd25cd8a9ecf8e03e7bc17f",
+      "content_sha256": "536d3a7479947e319561fdfd87fdcff061ce8ac387960d4c86005110846a3fa6",
+      "bytes": 1666,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/sweep.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/sweep.py"
+      ],
+      "replacement": null,
+      "reason": "historical plan copy; byte-identical evidence source remains independently tracked",
+      "identical_source_at_snapshot": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/sweep.py"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/check_model_wiring.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "8edc6a78d65ab23f10d63cf1dddbac97eea04fa3",
+      "content_sha256": "fe0d49f23c10864aca8f45f129c0edb87fc2554ea552e5c87d1a24b0480052df",
+      "bytes": 3931,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/check_model_wiring.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/check_model_wiring.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/compare_sweep.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "57fe8add0fa48adc3df9ea2f86a53e8e6824335f",
+      "content_sha256": "b6e92146515b7fc536c256854718243ee16c4fd91c30e2cf1822bb9f79fd71be",
+      "bytes": 1121,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/compare_sweep.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/compare_sweep.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/repair_matrix_inputs.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "fa8399c047118b8d40d246e19e2fdf15f09a0f09",
+      "content_sha256": "e2655cd2a6074d5fae63b7a56ec3796db407a943ab59eb94ca75150253207942",
+      "bytes": 4439,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/repair_matrix_inputs.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/repair_matrix_inputs.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/repair_model_wiring.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "7c538d7d4fae2add3d4cfd0cacf2b3a4a73d6bb6",
+      "content_sha256": "02f875556427f9e3b9e319318fae841f6ff7651c26acd8f02943c75474b958f8",
+      "bytes": 6878,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/repair_model_wiring.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/repair_model_wiring.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/select_cases.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "57b200f671a3803bf4fed64bfe0980dfc28cb6bc",
+      "content_sha256": "e64aea7363e26b253f0a126a4c2d7e87423b61ec381fb85bff4e371e13f1808a",
+      "bytes": 1840,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/select_cases.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/select_cases.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/summarize_run.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "07bb72394cb8f4e968c3dc9c40c579fb13173215",
+      "blob_sha1": "dde3b46389f618e584cc5dce35a2452146771f44",
+      "content_sha256": "601651fbba72f6bf39119cadfa7fe378084d9462c7a1b1d29e03ecfda6957add",
+      "bytes": 3729,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/summarize_run.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/summarize_run.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/tl_probe_kernels.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "137947c664f4cc9b759b5cf024cbb5093144ce4e",
+      "blob_sha1": "a16e56402ac86b1b480ec4d3482f2b84950c69e9",
+      "content_sha256": "aeb4ec4fbf12ab1ebdccf83da26041dc5fedd065115a16ca2cd49761448286e6",
+      "bytes": 17181,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/tl_probe_kernels.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/tl_probe_kernels.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/trace_soma_peaks.py",
+      "action": "retired_historical",
+      "archive_commit": "0c12a71757d4eb34412f043028f56edfa38ba974",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "903ea331dfb1e050774b1d073a92fb57cecd10e3",
+      "content_sha256": "14aaa01f285945eda85ff1a2544d1b9c3db3dc83245de92b7211088506cbdb89",
+      "bytes": 1693,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/trace_soma_peaks.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "0c12a71757d4eb34412f043028f56edfa38ba974:Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/trace_soma_peaks.py"
+      ],
+      "replacement": null,
+      "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
     }
   ],
   "reference_review": {
