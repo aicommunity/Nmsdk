@@ -83,7 +83,7 @@ def time_views(begin, end, frequency):
 
 def render_soma(observation, channel, label, limits, output: Path, *,
                 potential_axis_label="Soma SumPotential [model units; SI unverified]",
-                reference_level=None):
+                reference_level=None, context_label=None):
     # Lazy backend import: inventory/analyze and module import need no GUI/backend.
     import matplotlib
     matplotlib.use("Agg")
@@ -156,7 +156,8 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                     ax.axvline(event, color="#8c2c91", alpha=.5, linestyle=":",
                                label=None if labelled_spike else "Actual LT spike event")
                     labelled_spike = True
-            fig.suptitle(f'{observation["sample_id"]} | {observation["label"]} | {observation["trial_id"]}\n'
+            fig.suptitle((context_label+' | ' if context_label else '')+
+                         f'{observation["sample_id"]} | {observation["label"]} | {observation["trial_id"]}\n'
                          f'{label} | {observation["reset_policy"]}\n'
                          f'{name} ({scale} Y) | valid={observation["valid"]}, complete={observation["complete"]} | '
                          f'model {observation["model_before"][:12]}', y=.98)
@@ -181,7 +182,7 @@ def render_soma(observation, channel, label, limits, output: Path, *,
     return rows
 
 
-def render_series(observations, channel, label, limits, output: Path):
+def render_series(observations, channel, label, limits, output: Path, *, context_label=None):
     """Unsqueezed native clock; grey gaps are unknown, not silent ITI evidence."""
     import matplotlib
     matplotlib.use("Agg")
@@ -235,7 +236,8 @@ def render_series(observations, channel, label, limits, output: Path):
             overlay.set_ylabel("Input [native generator units]", color="#a34d00")
             overlay.tick_params(axis="y", colors="#a34d00")
             ax.grid(True, alpha=.25)
-            fig.suptitle(f'{name} | {label} | trials {first}..{last-1}\n'
+            fig.suptitle((context_label+' | ' if context_label else '')+
+                         f'{name} | {label} | trials {first}..{last-1}\n'
                          'Green boundary: reset policy; grey area: unobserved\n'
                          'Actual order and stimulus intervals: timing table in index/manifest', y=.98)
             handles, labels = ax.get_legend_handles_labels()

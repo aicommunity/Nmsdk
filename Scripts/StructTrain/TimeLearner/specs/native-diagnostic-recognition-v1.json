@@ -1,0 +1,30 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 1,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "NativeDiagnosticRecognition/Classic0Partial",
+    "NativeDiagnosticRecognition/Classic0Budget",
+    "NativeDiagnosticRecognition/Classic1Partial",
+    "NativeDiagnosticRecognition/Classic1Budget",
+    "NativeDiagnosticRecognition/Branch0Partial",
+    "NativeDiagnosticRecognition/Branch0Budget",
+    "NativeDiagnosticRecognition/Branch1Partial",
+    "NativeDiagnosticRecognition/Branch1Budget",
+    "NativeDiagnosticRecognition/OrdinaryClassicCompletedRegression",
+    "NativeDiagnosticRecognition/OrdinaryBranchCompletedRegression",
+    "NativeTrainingTermination/ClassicN0SweepBudgetBoundary",
+    "NativeTrainingTermination/ClassicN1SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN0SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN1SweepBudgetBoundary",
+    "TimeLearnerModelArchive/BoundaryMustBeDeclaredUsedAndReboundByStableId",
+    "TimeLearnerModelArchive/RejectsMalformedArchiveBeforeRegistration",
+    "TimeLearnerModelArchive/RejectsLostGraphInformationEvenWithUpdatedFileHashes",
+    "TimeLearnerModelArchive/CalibrationMustMatchActualZoneWithoutInventingAThresholdSignRule",
+    "NativeDiagnosticRecognition/OrdinaryClassicFullPatternRegression",
+    "NativeDiagnosticRecognition/OrdinaryBranchFullPatternRegression"
+  ],
+  "maximum_wall_seconds": 7200,
+  "asan_options": "detect_leaks=0"
+}

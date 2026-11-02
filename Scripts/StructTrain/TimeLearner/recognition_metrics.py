@@ -27,7 +27,7 @@ def _counts(rows):
             "foil_response_rate": counts["FP"]/foils if foils else None}
 
 
-def _score_recognition(spec, observations, package, *, calibration_probe):
+def _score_recognition(spec, observations, package, *, calibration_probe, diagnostic=False, partial_diagnostic=False):
     try:
         require(type(package) is dict, "unsupported_evaluation_model_package")
         candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
@@ -39,7 +39,8 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
             calibrated_audit = audit_calibrated_state(package)
         physical_package = package["source_candidate"] if calibrated else package
         context = physical_package["source_recognition"] if candidate or calibrated else package
-        require(set(spec) == SPEC_FIELDS and spec["kind"] == "timelearner_recognition_evaluation_spec"
+        require(set(spec) == SPEC_FIELDS | ({"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set())
+                and spec["kind"] == ("timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec")
                 and type(spec["schema_version"]) is int and spec["schema_version"] == 1, "unknown_evaluation_spec")
         require(type(spec["run_id"]) is str and bool(spec["run_id"]) and spec["model_revision"] == package["model_revision"],
                 "evaluation_model_or_run_mismatch")
@@ -49,7 +50,14 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
             require(spec["run_id"] not in calibration_runs, "frozen_evaluation_reuses_calibration_run")
         require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_evaluation_coverage")
         source = context["source_solo"]
-        require(source["kind"] == "timelearner_completed_state" and source["state_kind"] == "learned_solo"
+        if diagnostic:
+            from .stopped_evidence import OUTCOMES
+            require(source["kind"] == "timelearner_stopped_state" and source["state_kind"] == "diagnostic"
+                    and source["certificate"] is None and source["training_outcome"] in OUTCOMES
+                    and spec["diagnostic_only"] is True and spec["source_stopped_sha256"] == source["sha256"]
+                    and spec["training_outcome"] == source["training_outcome"], "unsupported_diagnostic_evaluation_source")
+        else:
+            require(source["kind"] == "timelearner_completed_state" and source["state_kind"] == "learned_solo"
                 and source["dynamic_checkpoint"] is False and type(source["certificate"]) is dict
                 and source["training_outcome"] in ("exact", "search_unresolved"), "unsupported_evaluation_source_state")
         criterion = spec["criterion"]
@@ -83,7 +91,11 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
             # The calibrated proof was checked once above. Its physical graph
             # equals this candidate exactly; avoid rescoring the entire proof
             # once per evaluation trial. Direct trial auditing still checks it.
-            audit = audit_recognition_trial(observation, physical_package)
+            if diagnostic:
+                from .recognition_trial_evidence import _audit_recognition_trial
+                audit = _audit_recognition_trial(observation, physical_package, diagnostic=True)
+            else:
+                audit = audit_recognition_trial(observation, physical_package)
             trial_id = audit["trial_id"]
             require(audit["run_id"] == spec["run_id"] and trial_id in expected and trial_id not in actual,
                     "unexpected_or_duplicate_evaluation_trial")
@@ -94,8 +106,8 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
                 require(equal(observation["end"], number(observation["begin"])+number(wanted["duration"])),
                         "evaluation_trial_duration_mismatch")
             actual[trial_id], audits[trial_id] = observation, audit
-        require(set(actual) == set(expected), "missing_evaluation_trial")
-        invalid = sorted(key for key, audit in audits.items() if not audit["valid_observation"])
+        require((diagnostic and partial_diagnostic) or set(actual) == set(expected), "missing_evaluation_trial")
+        invalid = sorted((set(expected)-set(actual)) | {key for key, audit in audits.items() if not audit["valid_observation"]})
         calibration = package["neuron"]["metadata"]["calibration"]
         if candidate:
             from .threshold_candidate_evidence import audit_threshold_candidate
@@ -117,6 +129,8 @@ def _score_recognition(spec, observations, package, *, calibration_probe):
                   "evaluation_verdict": None, "invalid_trial_ids": invalid}
         if candidate:
             result["calibration_probe"] = True
+        if diagnostic:
+            result.update(diagnostic_only=True, training_completed=False, training_certificate_present=False)
         if calibrated:
             result.update(calibration_evidence_checked=calibrated_audit["calibration_evidence_consistent"],
                           calibration_proof_sha256=package["calibration_proof"]["sha256"],
@@ -172,6 +186,25 @@ def score_recognition_evaluation(spec, observations, package):
     return _score_recognition(spec, observations, package, calibration_probe=False)
 
 
+def score_diagnostic_recognition_evaluation(spec, observations, package, source_case):
+    """Measured responses of stopped Train, never evidence of completed learning."""
+    from .diagnostic_recognition_evidence import audit_diagnostic_recognition
+    proof = audit_diagnostic_recognition(package, source_case)
+    result = _score_recognition(spec, observations, package, calibration_probe=False, diagnostic=True)
+    return {**result, "source_training_evidence_checked": True, "source_diagnostic_audit": proof,
+            "evaluation_verdict": None}
+
+
+def score_partial_diagnostic_evaluation(spec, observations, package, source_case):
+    """Explicit missing-observation diagnostics; incomplete data never get counts."""
+    from .diagnostic_recognition_evidence import audit_diagnostic_recognition
+    proof = audit_diagnostic_recognition(package, source_case)
+    result = _score_recognition(spec, observations, package, calibration_probe=False,
+                               diagnostic=True, partial_diagnostic=True)
+    return {**result, "source_training_evidence_checked": True, "source_diagnostic_audit": proof,
+            "evaluation_verdict": None}
+
+
 def score_threshold_candidate(spec, observations, package):
     """Same complete label/ID/window criterion, explicitly for calibration data.
 
@@ -180,9 +213,10 @@ def score_threshold_candidate(spec, observations, package):
     return _score_recognition(spec, observations, package, calibration_probe=True)
 
 
-def load_evaluation(path: Path):
+def _load_evaluation(path: Path, *, diagnostic=False, missing=None):
     spec = load(path)
-    require(set(spec) == SPEC_FIELDS and spec.get("kind") == "timelearner_recognition_evaluation_spec"
+    require(set(spec) == SPEC_FIELDS | ({"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set())
+            and spec.get("kind") == ("timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec")
             and type(spec.get("schema_version")) is int and spec["schema_version"] == 1
             and type(spec.get("trials")) is list, "unknown_evaluation_spec")
     root = path.resolve(strict=True).parent
@@ -192,7 +226,25 @@ def load_evaluation(path: Path):
         relative = trial.get("observation")
         require(type(relative) is str and relative and "\\" not in relative and ":" not in relative
                 and not Path(relative).is_absolute() and ".." not in Path(relative).parts, "invalid_evaluation_artifact_path")
-        actual = (root/relative).resolve(strict=True)
+        actual = (root/relative).resolve()
         require(actual.is_relative_to(root), "evaluation_artifact_outside_root")
+        if diagnostic and missing is not None and not actual.exists():
+            missing.append(trial["trial_id"])
+            continue
         observations.append(load(actual))
     return spec, observations
+
+
+def load_evaluation(path: Path):
+    return _load_evaluation(path)
+
+
+def load_diagnostic_evaluation(path: Path):
+    return _load_evaluation(path, diagnostic=True)
+
+
+def load_partial_diagnostic_evaluation(path: Path):
+    """Retain the declared design while listing genuinely absent trial files."""
+    missing = []
+    spec, observations = _load_evaluation(path, diagnostic=True, missing=missing)
+    return spec, observations, missing

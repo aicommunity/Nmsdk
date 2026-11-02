@@ -11,7 +11,7 @@ import shutil
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-from .native_evidence import count, load, require
+from .native_evidence import audit_probe, count, load, require
 from .probe_reports import _read_probe_data, render_probe_set
 from .plotting import plotting_runtime
 
@@ -37,9 +37,12 @@ def _write(path, value):
 
 def inventory_native_test_run(specification, artifact_root):
     spec = load(specification)
-    require(set(spec) == {"kind", "schema_version", "fixture_contract", "expected_test_ids", "phases", "standalone"}
+    base_fields = {"kind", "schema_version", "fixture_contract", "expected_test_ids", "phases", "standalone"}
+    version = spec.get("schema_version")
+    debt_fields = {"untraced", "packet_aliases", "observability_gaps"}
+    require(set(spec) == base_fields | (debt_fields if version == 2 else set())
             and spec["kind"] == "timelearner_native_test_report_spec"
-            and type(spec["schema_version"]) is int and spec["schema_version"] == 1,
+            and type(version) is int and version in (1, 2),
             "unknown_native_test_report_spec")
     require(type(spec["fixture_contract"]) is str and bool(spec["fixture_contract"]), "missing_native_test_contract")
     expected = spec["expected_test_ids"]
@@ -92,7 +95,11 @@ def inventory_native_test_run(specification, artifact_root):
         require(summary.get("kind") == "native_training_state_summary", "native_test_phase_summary_kind")
         total = count(summary["reference_probes"])+count(summary.get("search_probes", 0))
         require(total > 0, "native_test_phase_has_no_recorded_probes")
-        paths = sorted(p.name for p in native.glob(prefix+"*.json"))
+        # A saved model may share the prefix (e.g. service_model.json).
+        # Numbered probes must match the declared counter; the final global
+        # packet inventory still rejects every unaccounted probe of any name.
+        paths = sorted(p.name for p in native.glob(prefix+"*.json")
+                       if p.stem[len(prefix):].isdigit())
         expected_paths = [prefix+str(i)+".json" for i in range(1, total+1)]
         require(set(paths) == set(expected_paths), "native_test_phase_missing_or_extra_probe")
         entries = [entry(p, p[:-5]+".csv") for p in expected_paths]
@@ -108,6 +115,42 @@ def inventory_native_test_run(specification, artifact_root):
         groups.append({"identity": identity, "summary": None,
                        "trials": [entry(row["packet"], row["trace"], row["json_pointer"])]})
         identities.add(identity)
+    untraced, aliases, gaps = [], [], []
+    if version == 2:
+        require(all(type(spec[k]) is list for k in debt_fields), "invalid_native_test_observability_lists")
+        for row in spec["untraced"]:
+            require(type(row) is dict and set(row) == {"packet", "json_pointer", "reason"}
+                    and type(row["reason"]) is str and bool(row["reason"]), "invalid_native_test_untraced")
+            require(row["json_pointer"] in ("", "/probe"), "unsupported_native_probe_json_pointer")
+            path = _artifact(native, row["packet"])
+            require(path.parent == native, "native_test_sources_must_be_flat")
+            value = load(path); packet = value if not row["json_pointer"] else value.get("probe")
+            require(type(packet) is dict and packet.get("kind") == KIND, "native_test_source_is_not_probe")
+            key = (row["packet"], row["json_pointer"])
+            require(key not in packet_sources, "duplicate_native_test_source")
+            audit = audit_probe(packet)
+            packet_sources.add(key)
+            untraced.append({**row, "packet_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                             "trial_id": audit["trial_id"], "trace_checked": False,
+                             "data_complete": False, "scientific_verdict": None})
+        primary_sources = packet_sources.copy()
+        for row in spec["packet_aliases"]:
+            require(type(row) is dict and set(row) == {"packet", "of_packet"}
+                    and row["packet"] != row["of_packet"], "invalid_native_test_packet_alias")
+            path, original = _artifact(native, row["packet"]), _artifact(native, row["of_packet"])
+            require(path.parent == original.parent == native, "native_test_sources_must_be_flat")
+            require((row["of_packet"], "") in primary_sources
+                    and (row["packet"], "") not in packet_sources, "native_test_alias_target_not_primary")
+            require(load(path) == load(original), "native_test_alias_packet_mismatch")
+            packet_sources.add((row["packet"], ""))
+            aliases.append({**row, "packet_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                            "independent_measurement": False})
+        gap_ids = set()
+        for row in spec["observability_gaps"]:
+            require(type(row) is dict and set(row) == {"test_id", "reason"}
+                    and row["test_id"] in expected and row["test_id"] not in gap_ids
+                    and type(row["reason"]) is str and bool(row["reason"]), "invalid_native_test_observability_gap")
+            gap_ids.add(row["test_id"]); gaps.append(row)
     discovered = set()
     for path in native.glob("*.json"):
         value = load(path)
@@ -117,12 +160,14 @@ def inventory_native_test_run(specification, artifact_root):
             discovered.add((path.name, "/probe"))
     require(discovered == packet_sources, "native_test_unaccounted_or_missing_primary_packet")
     require({p.name for p in native.glob("*.csv")} == trace_sources, "native_test_unaccounted_or_missing_primary_csv")
-    return {"kind": "timelearner_native_test_inventory", "schema_version": 1,
+    return {"kind": "timelearner_native_test_inventory", "schema_version": version,
             "fixture_contract": spec["fixture_contract"], "tests": len(cases), "groups": groups,
             "trials": sum(len(g["trials"]) for g in groups),
             "known_trial_soma_pairs": sum(e["channels"] for g in groups for e in g["trials"]),
             "plottable_trial_soma_pairs": sum(e["plottable_channels"] for g in groups for e in g["trials"]),
-            "data_complete": all(e["data_complete"] for g in groups for e in g["trials"]),
+            "data_complete": not untraced and not gaps and all(e["data_complete"] for g in groups for e in g["trials"]),
+            **({"untraced": untraced, "packet_aliases": aliases, "observability_gaps": gaps,
+                "primary_packet_count": len(packet_sources)-len(aliases)} if version == 2 else {}),
             "visual_acceptance_complete": False, "scientific_verdict": None}
 
 
@@ -174,11 +219,17 @@ def render_native_test_run(specification, artifact_root, output):
     require(rendered_pairs == inventory["plottable_trial_soma_pairs"], "native_test_total_rendered_coverage_mismatch")
     inventory["rendered_trial_soma_pairs"] = rendered_pairs
     _write(output/"manifest.json", inventory)
+    debt = "" if inventory["schema_version"] == 1 else (
+        '<h2>Missing temporal evidence</h2><p>No waveforms are reconstructed for these entries.</p><ul>'
+        + ''.join('<li>'+html.escape(r["packet"]+r["json_pointer"]+": "+r["reason"])+"</li>"
+                  for r in inventory["untraced"])
+        + ''.join('<li>'+html.escape(r["test_id"]+": "+r["reason"])+"</li>"
+                  for r in inventory["observability_gaps"])+"</ul>")
     (output/"index.html").write_text('<!doctype html><meta charset="utf-8"><title>Native test run</title>'
         '<style>body{font:18px sans-serif;margin:2em}</style><h1>All declared native test observations</h1>'
         '<p>Includes partial and fresh-process probes. Every expected phase and primary CSV is accounted for. '
         'No scientific verdict or complete visual acceptance is inferred. Open individual full PNG/SVG/PDF views.</p><ul>'
-        +''.join(links)+'</ul>\n', encoding="utf-8")
+        +''.join(links)+'</ul>'+debt+'\n', encoding="utf-8")
     _write(output/"SHA256SUMS.json", {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                                    for p in sorted(output.rglob("*")) if p.is_file()})
     return {k: v for k, v in inventory.items() if k != "groups"}
