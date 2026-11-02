@@ -1,8 +1,9 @@
 # Состояние полного плана TimeLearner — 01.11.2026
 
 Последующее дополнение: [срез02.11 по полноте временных данных](CurrentStatus-2026-11-02.ru.md).
-Elder recorder18/18, readers8+15 и compact primary опубликованы; ASan нового
-instrumentation и полная визуальная приёмка ещё не завершены. Состояния
+Обновление02.11: ASan163/163 и recording18/18 завершены, primary readers32/32;
+сигналы совпали с normal temporal sources. Адресная приёмка search/scheduling/
+diagnostic/ranking: [scope](SearchDiagnosticAcceptance-2026-11-02.ru.md). Состояния
 исходных этапов0–12 этим адресным подэтапом не меняются.
 
 Эта сводка описывает исходные этапы0–12, а не количество завершённых подэтапов.
