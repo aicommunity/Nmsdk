@@ -117,4 +117,8 @@ TEST(DatasetFileValidation,RejectMetaSuffix){ExecuteFileCheck([]{Check("meta_suf
 TEST(DatasetFileValidation,RejectUnknownMeta){ExecuteFileCheck([]{Check("meta_unknown","#NDatasetX;MaxSpikes=2\nclass;f0\n7;.01\n;.02\n",false);});}
 TEST(DatasetFileValidation,RejectIncompleteBlock){ExecuteFileCheck([]{Check("block","#NDataset;MaxSpikes=2\nclass;f0\n7;.01\n",false);});}
 TEST(DatasetFileValidation,RejectMissingFeature){ExecuteFileCheck([]{Check("short_row","class;f0;f1\n7;.01\n",false);});}
+TEST(DatasetFileValidation,RejectClassDoubleSign){ExecuteFileCheck([]{Check("class_sign","class;f0\n+-7;.01\n",false);});}
+TEST(DatasetFileValidation,RejectIsiDoubleSign){ExecuteFileCheck([]{Check("isi_sign","class;f0\n7;+-0.01\n",false);});}
+TEST(DatasetFileValidation,ValidUtf8Bom){ExecuteFileCheck([]{Check("bom",QByteArray::fromHex("efbbbf")+"#NDataset;MaxSpikes=2\nclass;f0\n7;.01\n;.02\n",true,2,1,{.01,.02});});}
+TEST(DatasetFileValidation,ValidBlankWhitespaceLines){ExecuteFileCheck([]{Check("blank_lines","class;f0\n \t\r\n7;.01\n\t\n",true,1,1,{.01});});}
 }

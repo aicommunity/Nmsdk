@@ -25,7 +25,11 @@
     "DatasetFileValidation/RejectMetaSuffix",
     "DatasetFileValidation/RejectUnknownMeta",
     "DatasetFileValidation/RejectIncompleteBlock",
-    "DatasetFileValidation/RejectMissingFeature"
+    "DatasetFileValidation/RejectMissingFeature",
+    "DatasetFileValidation/RejectClassDoubleSign",
+    "DatasetFileValidation/RejectIsiDoubleSign",
+    "DatasetFileValidation/ValidUtf8Bom",
+    "DatasetFileValidation/ValidBlankWhitespaceLines"
   ],
   "maximum_wall_seconds": 600,
   "asan_options": "detect_leaks=0"
