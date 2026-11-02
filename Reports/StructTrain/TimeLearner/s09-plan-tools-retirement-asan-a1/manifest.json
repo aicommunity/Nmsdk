@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_historical_plan_tool_retirement_gate",
+  "source": "6b8292822e5f41702321eb8848e012f8aef67f9d",
+  "worker": "asan",
+  "source_records_verified": 64,
+  "new_retired_files": 16,
+  "exact_evidence_copies": 7,
+  "negative_fixture_commit": "3b4aa86110c93e19862630337af2e7f15b9e0dd7",
+  "negative_fixture_branch": "codex/timelearner-plan-tools-restored-negative-asan-a1",
+  "active_source_context_unchanged": true,
+  "records": [
+    {
+      "path": "active-context-after.json",
+      "bytes": 1304,
+      "sha256": "805dcd0bfd50bca199a0f434638df47c17c513ed1b6e1ac9d1e8f3cf658b4e10"
+    },
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "805dcd0bfd50bca199a0f434638df47c17c513ed1b6e1ac9d1e8f3cf658b4e10"
+    },
+    {
+      "path": "job.py",
+      "bytes": 6408,
+      "sha256": "d2672ab67f2e09ee90f261a3f2ad69cf27eb1e5ad820c3a1bb5ac097525d627b"
+    },
+    {
+      "path": "negative.json",
+      "bytes": 375,
+      "sha256": "cec9fcc171e1f343fd7f21ea40df7d195b59228a050dfa77e218cb3d0b4241e7"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 44,
+      "sha256": "21fbd3430aa5c74d9a578a8be45b7b80e1c6a4f9bd27d767aebe57763568363e"
+    },
+    {
+      "path": "positive.json",
+      "bytes": 36793,
+      "sha256": "2dbf2fcde0186aa9dd817feb5c02fee4c3121d53a9d21f899d4215ec9cdef031"
+    },
+    {
+      "path": "revision-map.json",
+      "bytes": 314418,
+      "sha256": "21cc55726787e628404031d866b8ba93d61cb2efd3522cf066a8ba19c732e01a"
+    }
+  ],
+  "archive_sha256": "0063ff1810ee9150fb6eecb46c05fc7e1bb0c721c404e0d10b83c7eb64705cf4",
+  "runtime_equivalence_attested": false,
+  "scientific_verdict": null
+}
