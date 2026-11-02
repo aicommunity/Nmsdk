@@ -1,0 +1,71 @@
+{
+  "kind": "native_wall_schedule_strict_reader_gate",
+  "worker": "normal",
+  "source": "e7782709157b84b5f8b1cec62711ff0ae4ecf1a2",
+  "numeric_root": "f35f614d2d07c1cc0cdf9786bcadd31d9237ed06",
+  "reader_tests": 10,
+  "packet_outcomes": {
+    "unprepared_rejected": 32,
+    "live_rejected": 8,
+    "completed_valid": 6
+  },
+  "records": [
+    {
+      "path": "checkout.log",
+      "bytes": 200,
+      "sha256": "a42a0806cc3d59ece2e657a704e80c9f8c5d5886750fa258e83da1f6b4577cf9"
+    },
+    {
+      "path": "clone.log",
+      "bytes": 92,
+      "sha256": "3f9de91feb242c92dc9273137103881481b86d0a96bcac40a0821c1ab7cf2c2e"
+    },
+    {
+      "path": "corpus-sources.json",
+      "bytes": 55647,
+      "sha256": "2ff8a7d0a007e196deb1fb53f5366195adf8d548e0f7d0b062d214bb1d1d8bfb"
+    },
+    {
+      "path": "fetch.log",
+      "bytes": 122,
+      "sha256": "173f93f3cb3ca55610e5d03f05673ad88ae70c4767bda6ca7220ee507b108321"
+    },
+    {
+      "path": "inventory.json",
+      "bytes": 220328,
+      "sha256": "f66dd9158428fb03151206afbc51f4db41f4a9096f061b242594b9f2f2567190"
+    },
+    {
+      "path": "job.py",
+      "bytes": 3250,
+      "sha256": "ff8b39b8a2383ee4c46160bb98b3a26589db4822e80bee582ef75e60457f2a04"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 44,
+      "sha256": "67fa78b73d716b75ce2c02bef177b3a1532cce4e55ca62b928cd7c7c1ed76675"
+    },
+    {
+      "path": "reader-tests.log",
+      "bytes": 1605,
+      "sha256": "47f074a29d4acc9d71d04959ebb8655fe1281481e093e030270f0b78301a3553"
+    },
+    {
+      "path": "sparse.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "terminal.json",
+      "bytes": 154,
+      "sha256": "338df53c773bc8e850540fc4c264aeb4760dedabb0b26db6ef9939f38a7c2e8c"
+    }
+  ],
+  "archive_sha256": "905e79554cab9604870b45f74550766221e0b00cb90110b7ea99bcf75c07d19c",
+  "scientific_verdict": null
+}
