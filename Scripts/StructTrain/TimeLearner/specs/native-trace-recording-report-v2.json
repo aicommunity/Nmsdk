@@ -1,0 +1,496 @@
+{
+  "kind": "timelearner_native_test_report_spec",
+  "schema_version": 2,
+  "fixture_contract": "Source-declared 18 recording regressions at numeric rootd06585d. 88 independently recorded packets/CSV pairs, six exact JSON aliases of negative observations. Real short cold/warm Exact control uses explicit tolerance0.2; not scientific classification.",
+  "expected_test_ids": [
+    "NativeTrainingTermination/ClassicN0SweepBudgetBoundary",
+    "NativeTrainingTermination/ClassicN1SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN0SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN1SweepBudgetBoundary",
+    "NativeTrainingService/ExactAutoCompletionResetWarmRestartAndRetarget",
+    "NativeTrainingService/ClassicExternalStopPreservesCensoredEvidence",
+    "NativeTrainingService/BranchExternalStopPreservesCensoredEvidence",
+    "NativeTrainingService/ModelTimeBudgetCannotManufactureConvergence",
+    "NativeTrainingService/DeclaredPatternHashMustMatchTheActualNativeDataset",
+    "NativeTrainingService/ClassicObserverDetectsTinyExternalPhysicsChange",
+    "NativeTrainingService/BranchObserverDetectsTinyExternalPhysicsChange",
+    "NativeWallSchedule/ClassicObservationSinkChange",
+    "NativeWallSchedule/BranchObservationSinkChange",
+    "NativePostTuneOwnerPolicy/ClassicN0_2000",
+    "NativePostTuneOwnerPolicy/ClassicN1_2000",
+    "NativePostTuneOwnerPolicy/BranchN0_2000",
+    "NativePostTuneOwnerPolicy/BranchN1_2000",
+    "NativePostTuneOwnerPolicy/EquivalentCertificateCannotHideChangedReferenceProvenance"
+  ],
+  "phases": [],
+  "standalone": [
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_training_proof_1.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_training_proof_2.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_training_proof_3.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_training_proof_4.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_training_proof_5.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_training_proof_6.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_policy_probe_4_evidence.json",
+      "trace": "Classic_2000_N0_posttune_owner_policy_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_training_proof_1.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_training_proof_2.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_training_proof_3.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_training_proof_4.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_training_proof_5.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_training_proof_6.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_posttune_owner_policy_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_posttune_owner_policy_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_observation_sink_training_proof_1.json",
+      "trace": "Classic_2000_N1_wall_observation_sink_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_training_proof_1.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_training_proof_2.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_training_proof_3.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_training_proof_4.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_training_proof_5.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_training_proof_6.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_posttune_owner_policy_probe_4_evidence.json",
+      "trace": "Branch_2000_N0_posttune_owner_policy_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_training_proof_1.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_training_proof_2.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_training_proof_3.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_training_proof_4.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_training_proof_5.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_training_proof_6.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_posttune_owner_policy_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_posttune_owner_policy_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_observation_sink_training_proof_1.json",
+      "trace": "Branch_2000_N1_wall_observation_sink_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_provenance_training_proof_1.json",
+      "trace": "Classic_2000_N0_posttune_owner_provenance_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_provenance_training_proof_2.json",
+      "trace": "Classic_2000_N0_posttune_owner_provenance_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_provenance_training_proof_3.json",
+      "trace": "Classic_2000_N0_posttune_owner_provenance_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_provenance_training_proof_4.json",
+      "trace": "Classic_2000_N0_posttune_owner_provenance_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_provenance_training_proof_5.json",
+      "trace": "Classic_2000_N0_posttune_owner_provenance_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_posttune_owner_provenance_training_proof_6.json",
+      "trace": "Classic_2000_N0_posttune_owner_provenance_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_1.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_2.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_3.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_4.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_5.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_6.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_7.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_8.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_9.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_9.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_service_exact_warm_training_proof_10.json",
+      "trace": "Classic_2000_N1_service_exact_warm_training_proof_10.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_observer_external_physics_training_proof_1.json",
+      "trace": "Classic_2000_N0_observer_external_physics_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_observer_external_physics_training_proof_1.json",
+      "trace": "Branch_2000_N0_observer_external_physics_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_service_external_stop_training_proof_1.json",
+      "trace": "Classic_2000_N0_service_external_stop_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_service_external_stop_training_proof_1.json",
+      "trace": "Branch_2000_N0_service_external_stop_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_service_deadline_training_proof_1.json",
+      "trace": "Branch_2000_N1_service_deadline_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_service_spoofed_hash_training_proof_1.json",
+      "trace": "Classic_2000_N0_service_spoofed_hash_training_proof_1.csv",
+      "json_pointer": ""
+    }
+  ],
+  "untraced": [],
+  "packet_aliases": [
+    {
+      "packet": "Classic_2000_N0_observer_external_physics_rejected.json",
+      "of_packet": "Classic_2000_N0_observer_external_physics_training_proof_1.json"
+    },
+    {
+      "packet": "Branch_2000_N0_observer_external_physics_rejected.json",
+      "of_packet": "Branch_2000_N0_observer_external_physics_training_proof_1.json"
+    },
+    {
+      "packet": "Classic_2000_N0_service_external_stop_cancelled.json",
+      "of_packet": "Classic_2000_N0_service_external_stop_training_proof_1.json"
+    },
+    {
+      "packet": "Branch_2000_N0_service_external_stop_cancelled.json",
+      "of_packet": "Branch_2000_N0_service_external_stop_training_proof_1.json"
+    },
+    {
+      "packet": "Branch_2000_N1_service_deadline_budget.json",
+      "of_packet": "Branch_2000_N1_service_deadline_training_proof_1.json"
+    },
+    {
+      "packet": "Classic_2000_N0_service_spoofed_hash_rejected.json",
+      "of_packet": "Classic_2000_N0_service_spoofed_hash_training_proof_1.json"
+    }
+  ],
+  "observability_gaps": []
+}
