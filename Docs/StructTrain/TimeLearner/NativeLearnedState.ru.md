@@ -157,6 +157,11 @@ Maintained [LegacyCompletedReplay](LegacyCompletedReplay.ru.md) проверяе
 CSV сохранены. Публикация и independent reader acceptance этого нового
 подэтапа ещё ожидаются; весь этап5 по-прежнему открыт.
 
+Последующее уточнение: этот replay подэтап опубликован и проверен на обоих
+workers,4 native +5 reader cases; SHA/границы в LegacyCompletedReplay.ru.md.
+Физически измерялся active input0, поэтому replay всех входов/recognition и
+полный этап5 остаются открытыми.
+
 Для свежих diagnostic exports явный Reset learner очищает временный control:
 сохраняется физическая модель и references, но Idle не является повторно
 экспортируемой терминальной попыткой. Сохранять immutable stopped package
