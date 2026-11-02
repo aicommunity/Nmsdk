@@ -1,10 +1,11 @@
 # Inherited properties: незавершённая native runtime проверка
 
 Продолжение [source contracts](InheritedPropertyContracts.ru.md). В production
-`Test_PulseLib_StorageComponents` добавлены восемь случаев `NativeInheritedProperties`:
-Classic/Branch ×2000/20000Hz ×Activity/reset и local-frequency rejection.
+`Test_PulseLib_StorageComponents` добавлены16 случаев `NativeInheritedProperties`:
+Classic/Branch ×N0/N1 ×2000/20000Hz ×Activity/reset и local-frequency rejection.
 Они используют существующий реальный EditingRig со storage/Environment/native
-model construction, а не копию функций Rdk.
+model construction, а не копию функций Rdk. Контур вызывается через native
+probe API; это не полная матрица configured ControllerVersion1/2 Train.
 
 Activity cases проверяют runtime регистрацию всех девяти свойств и effective
 frequency/identity. До вмешательства и после него измеряются оба входа в штатной
