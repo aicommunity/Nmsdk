@@ -22,6 +22,26 @@ runtime-s07-capacitance-edit-normal-a3 / -asan-a3. Не менять их source
 Это checkpoint запуска, а не результат: ещё нужны actual8 JUnit cases,
 проверка raw packets/CSV, temporal reports и scoped acceptance.
 
+Последующая проверка: обе сборки a3 завершены; native gate ещё жив на обоих
+workers. Elder CLI3909822, M40 CLI1982839. В сохранённом stdout Elder прошли
+первые5 cases (четыре2000Hz и ClassicN0At20000); M40 прошли первые3 cases
+2000Hz. Это partial progress, не полный8/8. Не менять source/build/runtime.
+
+Для четырёх завершённых Elder2000Hz cases проверены исходные native packets
+и CSV через production raw reader. До/после по361 samples, реальные входные
+samples идентичны. Максимальная разность ответа сомы при scale1.1:
+N0=0.00026699785413619725, N1=0.00012980397012751776 для обеих topology.
+Readback: s07-capacitance-initial-raw-normal-a1/result.json. Широкие diagnostic
+окна дают peak_ambiguous:input0, поэтому эти traces показывают физическую
+чувствительность, но не являются valid peak measurements или convergence proof.
+
+В feature после numerical rootf683 добавлены полные before/after model identity
+артефакты и C++ assertions реальной чувствительности к C при одинаковых input
+samples. Они находятся в root3ab4b5a414210504114801fe9aee9d57c2b45077 и ещё не
+собраны/исполнены. Core Pulse30d4 не менялся. Повтор с дополненными fixtures
+можно готовить только после terminal текущих owners; результаты старых fixtures
+нельзя объявлять проверкой нового instrumentation.
+
 Source audit старого C-trim выявил ClassCapacitance из parent MembraneCapacity
 и запись scalar DendriteCapacitance[i] одновременно в Exc/Inh каналы всех
 выбранных сегментов. Это не сохраняет heterogeneous child physics. Подмена
