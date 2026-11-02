@@ -38,5 +38,9 @@ CreateStructure используют marker специализированной
 (прежние12 плюс Build), дополнительно требуется9 unit Rdk на обоих workers.
 Прежние9/12 результаты относятся к Rdk03497edf и не подтверждают этот patch.
 Новая Elder сборка root5d73cd0858abc1e93655d5fa10189225da990201 завершена;
-9/9 Rdk unit passed,13 native ещё выполняются. Docs-only Rdk48d6548e46f3310537a2d8b59fb5be553307a54f
+9/9 Rdk unit,13/13 native и4/4 дополнительных explicit0.2 transport passed.
+Evidence094bced1b7431e726b052e315eceb2e04e2ad277 содержит37 raw probes,
+baseline исправлен: bool true при сохранённом отказе linking и Environment
+diagnostics. ASan этой коррекции ещё требуется; develop не менялся.
+Docs-only Rdk48d6548e46f3310537a2d8b59fb5be553307a54f
 имеет тот же Core tree b204ef8da698476898394aa1d5b6a2679e5a91ed, что numerical c385.
