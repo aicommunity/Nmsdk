@@ -1,0 +1,312 @@
+{
+  "kind": "elder_source_context_review_register",
+  "schema_version": 1,
+  "reviewed_root_revision": "422647a2dff24d5783f95f2a2980507de81febcc",
+  "reference_audit_sha256": "c3112045904de2b5abcdcd82aa2d04b41c61d7de09b0c27a40590986e6d7edf4",
+  "source_workspace_name": "source-n1-measured-refinement-normal-a1",
+  "rows": [
+    {
+      "report": "s01-timing-finite-baseline-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 172,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 2,
+        "log_source_path_reference": 168
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s01-timing-finite-current-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 25,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 3
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s02-elder-bin-worktree-repair-a1",
+      "review_class": "diagnostic_metadata_only",
+      "reference_categories": {
+        "metadata_reference": 2
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s04-hot-readout-baseline-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 32,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 2,
+        "log_source_path_reference": 24
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s04-hot-readout-current-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 61,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 4
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s04-hot-xml-current-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 64,
+        "source_binding_in_code": 2,
+        "configured_resource_root_reference": 4
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s04-hot-xml-initial-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "source_binding_in_code": 2,
+        "metadata_reference": 16,
+        "configured_resource_root_reference": 2
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s04-loaded-readout-baseline-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "source_binding_in_code": 8,
+        "log_source_path_reference": 101,
+        "metadata_reference": 132,
+        "configured_resource_root_reference": 4
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s04-loaded-readout-current-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 63,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 5
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s04-loaded-readout-matrix-diagnostics-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 231,
+        "source_binding_in_code": 4,
+        "configured_resource_root_reference": 9,
+        "log_source_path_reference": 104
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s05-archive-f64-baseline-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 32,
+        "source_binding_in_code": 2,
+        "configured_resource_root_reference": 4,
+        "log_source_path_reference": 4
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s05-archive-f64-current-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 105,
+        "source_binding_in_code": 2,
+        "configured_resource_root_reference": 10
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s05-positive-n1-handoff-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "configured_resource_root_reference": 6
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s07-measured-length-baseline-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 24,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 2,
+        "log_source_path_reference": 20
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s07-measured-length-gate-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 68,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 3
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s07-measured-length-gate-normal-a2",
+      "review_class": "post_repair_scoped_native_gate",
+      "reference_categories": {
+        "metadata_reference": 67,
+        "source_binding_in_code": 1,
+        "configured_resource_root_reference": 2
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s07-measured-length-native-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "configured_resource_root_reference": 12,
+        "source_binding_in_code": 2
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s07-measured-length-positive-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "configured_resource_root_reference": 3,
+        "source_binding_in_code": 1
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s07-n1-refinement-build-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "metadata_reference": 149,
+        "configured_resource_root_reference": 4,
+        "log_source_path_reference": 2
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s07-native-n1-refined-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "configured_resource_root_reference": 3
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s08-positive-n1-calibration-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "configured_resource_root_reference": 3
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s09-native-preflight-current-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "configured_resource_root_reference": 21,
+        "source_binding_in_code": 1
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s09-native-preflight-current-normal-a2",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "configured_resource_root_reference": 55,
+        "metadata_reference": 1,
+        "source_binding_in_code": 3,
+        "log_source_path_reference": 3
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s09-native-preflight-setup-baselines-normal-a1",
+      "review_class": "source_dependency_review_required",
+      "reference_categories": {
+        "source_binding_in_code": 5,
+        "log_source_path_reference": 1,
+        "configured_resource_root_reference": 3
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    },
+    {
+      "report": "s09-resumed-static-elder-a1",
+      "review_class": "diagnostic_metadata_only",
+      "reference_categories": {
+        "metadata_reference": 1
+      },
+      "actual_resource_reads_attested": false,
+      "scientific_verdict_reclassified": false
+    }
+  ],
+  "counts": {
+    "diagnostic_metadata_only": 2,
+    "post_repair_scoped_native_gate": 1,
+    "source_dependency_review_required": 22
+  },
+  "uninspected_metadata": [
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-asan-a1/primary.tar.xz",
+      "blob": "354cc495bbae7a39ec3a7c54dde8a2afe768e35a",
+      "member": "corpus/runs/Branch-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    },
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-asan-a1/primary.tar.xz",
+      "blob": "354cc495bbae7a39ec3a7c54dde8a2afe768e35a",
+      "member": "corpus/runs/Classic-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    },
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-normal-a1/primary.tar.xz",
+      "blob": "bc84adf5883cc406b78784686a23c5dd11e16de2",
+      "member": "corpus/runs/Branch-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    },
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-normal-a1/primary.tar.xz",
+      "blob": "bc84adf5883cc406b78784686a23c5dd11e16de2",
+      "member": "corpus/runs/Classic-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    }
+  ],
+  "historical_temporal_extent_of_alias_attested": false,
+  "reports_without_literal_reference_attested_unaffected": false,
+  "scientific_verdict": null
+}
