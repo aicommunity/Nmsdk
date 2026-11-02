@@ -94,6 +94,20 @@ endif()
 # Common definitions and dependencies (OpenCV/Boost/etc.)
 include(RdkDefines OPTIONAL)
 
+# Resolve the test switch before Rdk reads BUILD_TESTING. Keep the historical
+# BUILD_TESTS spelling as an input alias, not a second independent cache flag.
+if(DEFINED BUILD_TESTS)
+  if(DEFINED BUILD_TESTING)
+    if((BUILD_TESTS AND NOT BUILD_TESTING) OR (BUILD_TESTING AND NOT BUILD_TESTS))
+      message(FATAL_ERROR "Conflicting BUILD_TESTS/BUILD_TESTING values; use BUILD_TESTING or matching values")
+    endif()
+  endif()
+  set(BUILD_TESTING "${BUILD_TESTS}" CACHE BOOL "Build the root and Rdk test suites" FORCE)
+  unset(BUILD_TESTS CACHE)
+endif()
+include(CTest)
+set(BUILD_TESTS "${BUILD_TESTING}")
+
 # Subprojects (gradual migration)
 add_subdirectory(Rdk) # rdk.static
 add_subdirectory(Libraries/Rdk-BasicLib) # Rdk-BasicLib
@@ -115,9 +129,7 @@ if(TARGET NeuroModeler)
 endif()
 
 # Tests (optional, can be disabled for production builds)
-option(BUILD_TESTS "Build tests" ON)
-if(BUILD_TESTS)
-    enable_testing()
+if(BUILD_TESTING)
     add_subdirectory(Tests)
 endif()
 
