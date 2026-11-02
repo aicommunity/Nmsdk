@@ -9,7 +9,8 @@ import unittest
 from ..native_evidence import EvidenceError, load
 from ..native_pipeline_worker import audit_run_manifest
 from ..recognition_metrics import (load_diagnostic_evaluation, load_evaluation,
-                                   score_diagnostic_recognition_evaluation, score_recognition_evaluation)
+                                   score_diagnostic_recognition_evaluation, score_recognition_evaluation,
+                                   load_partial_diagnostic_evaluation, score_partial_diagnostic_evaluation)
 from ..stopped_evidence import load_case
 from .test_native_pipeline_worker import save, resign
 
@@ -27,7 +28,10 @@ class DiagnosticPipelineTest(unittest.TestCase):
 
     def case(self, topology, interrupted=False):
         root = self.folder(topology, interrupted)
-        spec, observations = load_diagnostic_evaluation(root/"native/evaluation.json")
+        if interrupted:
+            spec, observations, _ = load_partial_diagnostic_evaluation(root/"native/evaluation.json")
+        else:
+            spec, observations = load_diagnostic_evaluation(root/"native/evaluation.json")
         model = load(root/"native/model.json")
         source = load_case(root/"input/source/train_stopped_state.json")
         return root, spec, observations, model, source
@@ -44,7 +48,7 @@ class DiagnosticPipelineTest(unittest.TestCase):
                     self.assertEqual(model["source_solo"], source[0])
                     self.assertIsNone(source[0]["certificate"])
                     self.assertEqual(len(spec["trials"]), 4)
-                    self.assertEqual(len(observations), 4)
+                    self.assertEqual(len(observations), 1 if interrupted else 4)
 
     def test_completed_responses_keep_unfinished_training_role(self):
         for topology in ("Classic", "Branch"):
@@ -71,10 +75,12 @@ class DiagnosticPipelineTest(unittest.TestCase):
             manifest = load(root/"run-manifest.json")
             self.assertEqual(manifest["execution"], "process_error")
             self.assertIsNone(manifest["analysis"]["metrics"])
-            metrics = score_diagnostic_recognition_evaluation(spec, observations, model, source)
-            self.assertEqual(metrics["validity"], "incomplete")
+            with self.assertRaises(EvidenceError):
+                score_diagnostic_recognition_evaluation(spec, observations, model, source)
+            metrics = score_partial_diagnostic_evaluation(spec, observations, model, source)
+            self.assertEqual(metrics["validity"], "invalid")
             self.assertTrue(metrics["invalid_trial_ids"])
-            self.assertNotIn("pooled_counts", metrics)
+            self.assertIsNone(metrics["pooled_counts"])
             self.assertEqual(sum(bool(o["samples"]) for o in observations), 1)
 
     def test_missing_duplicate_nonfinite_observations_rejected(self):

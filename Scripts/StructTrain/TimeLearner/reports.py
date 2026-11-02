@@ -31,11 +31,14 @@ def render_diagnostic_evaluation(source: Path, model: Path, stopped: Path, outpu
 def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None):
     runtime = plotting_runtime()
     diagnostic = source_case is not None
-    from .recognition_metrics import load_diagnostic_evaluation, score_diagnostic_recognition_evaluation
-    spec, observations = (load_diagnostic_evaluation if diagnostic else load_evaluation)(source)
+    from .recognition_metrics import load_partial_diagnostic_evaluation, score_partial_diagnostic_evaluation
+    if diagnostic:
+        spec, observations, missing = load_partial_diagnostic_evaluation(source)
+    else:
+        spec, observations = load_evaluation(source)
     package = load(model)
     scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
-    analysis = (score_diagnostic_recognition_evaluation(spec, observations, package, source_case)
+    analysis = (score_partial_diagnostic_evaluation(spec, observations, package, source_case)
                 if diagnostic else scorer(spec, observations, package))
     calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
     context = package["source_candidate"]["source_recognition"] if calibrated else (
@@ -76,6 +79,10 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     by_id = {o["trial_id"]: o for o in observations}
     figures, links = [], []
     for trial in sorted(spec["trials"], key=lambda t: t["presentation_index"]):
+        if trial["trial_id"] not in by_id:
+            copied_spec["trials"].append(dict(trial))
+            links.append(f'<h2>{html.escape(trial["trial_id"])}</h2><p>Observation file absent; no curve or classification inferred.</p>')
+            continue
         o = by_id[trial["trial_id"]]
         index = trial["presentation_index"]
         name = f"trial-{index:04d}.json.gz"
@@ -102,7 +109,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     _write(primary/"evaluation.json", copied_spec)
     _write(output/"analysis.json", analysis)
     # Preserve actual presentation order and gaps in a separate series view.
-    ordered = [by_id[t["trial_id"]] for t in sorted(spec["trials"], key=lambda t: t["presentation_index"])]
+    ordered = [by_id[t["trial_id"]] for t in sorted(spec["trials"], key=lambda t: t["presentation_index"]) if t["trial_id"] in by_id]
     series = []
     for descriptor in descriptors:
         if limits[descriptor["index"]] is None:
@@ -132,8 +139,11 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         manifest.update(purpose="stopped_training_recognition_diagnostic", diagnostic_only=True,
                         training_completed=False, source_training_outcome=source_case[0]["training_outcome"],
                         source_stopped_sha256=source_case[0]["sha256"],
-                        declared_trials=[{"trial_id": o["trial_id"], "armed": o["armed"],
-                                          "complete": o["complete"], "sample_count": len(o["samples"])} for o in ordered],
+                        missing_observation_ids=missing,
+                        declared_trials=[{"trial_id": t["trial_id"], "observation_present": t["trial_id"] in by_id,
+                                          "complete": by_id[t["trial_id"]]["complete"] if t["trial_id"] in by_id else False,
+                                          "sample_count": len(by_id[t["trial_id"]]["samples"]) if t["trial_id"] in by_id else 0}
+                                         for t in spec["trials"]],
                         observed_trial_soma_pairs=len(figures))
     _write(output/"manifest.json", manifest)
     (output/"index.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8">'
