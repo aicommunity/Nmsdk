@@ -117,6 +117,9 @@ def analyze(args: argparse.Namespace) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    regression = commands.add_parser("preflight-regression", help="run the declared public Console regression matrix")
+    regression.add_argument("specification", type=Path)
+    regression.add_argument("--output", type=Path, required=True)
     prepare = commands.add_parser("prepare", help="prepare a declared native cold-job matrix without running models")
     prepare.add_argument("specification", type=Path)
     prepare.add_argument("--output", type=Path, required=True, help="new immutable job matrix directory")
@@ -209,6 +212,16 @@ def main(argv: list[str] | None = None) -> int:
             return 0 if result["validity"] == "valid" else 2
         except (EvidenceError, OSError, ValueError) as error:
             print(json.dumps({"validity": "invalid", "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command == "preflight-regression":
+        from .native_evidence import EvidenceError
+        from .preflight_regression import run_preflight_regression
+        try:
+            result = run_preflight_regression(args.specification, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_preflight_regression_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     if args.command in ("train", "preflight", "export", "evaluate"):
         from .native_evidence import EvidenceError, require

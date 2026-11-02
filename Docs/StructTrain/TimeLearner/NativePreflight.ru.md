@@ -125,3 +125,14 @@ ASan branch без замены удалённой истории.
 все режимы C-trim/PostTune, полная scheduler recovery/publication matrix,
 измерения после роста, legacy/V2 A/B и независимая классификация. Ноль Calculate
 не заменяет эксперимент на модели; научный verdict во всех receipts — null.
+
+
+## Актуальная версия worker-аудита (02.11)
+
+Новый pipeline run manifest schema2 также анализирует структурированный
+exit2 training job schema1. Process error и diagnostic incomplete boundary
+сохраняются; valid означает consistency данных, не успех обучения. Старые
+manifest schema1 сохраняют прежнюю политику. Команда preflight-regression
+исполняет декларативный maintained root workflow14+6+2 с environment до
+runtime snapshot. Реальные проверки и exact sources/limits:
+[StructuredTrainingExit](StructuredTrainingExit.ru.md).
