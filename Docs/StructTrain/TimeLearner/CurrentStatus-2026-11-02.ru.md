@@ -5,6 +5,16 @@
 обязательную матрицу. Принятый develop44334e272de8429f29775512a860584c60350899
 не изменён; алгоритмическая feature ещё не принята.
 
+Уточнение текущего feature: public diagnostic-evaluate теперь реально
+проверен на Elder normal,6/6 операций и7/7 portable readers. Два завершённых
+diagnostic Test, два прерванных и два ordinary Console rejections используют
+настоящий остановленный публичный Train. Proof480c7683fb91c237d420f441693cd80a2190f3b2
+содержит465 проверенных members/4733324 bytes. Источники external_stop,
+сертификат отсутствует; обе модели TP0/FP0/FN2/TN2. Это не успешная детекция.
+Отдельный partial reader и отчёт сохраняют отсутствующие пробы как unknown,
+не создавая файлов наблюдений. Новый render на M40 и ASan-приёмка pending.
+Подробности: [DiagnosticRecognition](DiagnosticRecognition.ru.md).
+
 ## Завершено
 
 Исходный root07167d55125ced4eeff72703a718203e8c90bfc7/Pulsefca7141:
