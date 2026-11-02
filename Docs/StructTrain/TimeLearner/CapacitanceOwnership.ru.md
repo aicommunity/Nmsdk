@@ -68,7 +68,24 @@ Codec обязан отвергать active/dormant overlap, неизвестн
 не-конечные/bound-нарушающие scales и dormant запись существующего узла.
 Storage closure проверяется целиком, включая исходные образы временно удалённых
 каналов; изменение неиспользуемого сейчас образа нельзя скрыть shrink-операцией.
-Эти изменения не объявляются уже реализованными.
+Кандидат Pulse `4ae7e5c7ecb6ee7b05003b0f49a9f514afcd55f1` реализует эти
+механизмы, но ещё не прошёл server build/runtime. NativeLearnedState export
+дополнительно сохраняет образы dormant-каналов для fresh-process import.
+Root candidate расширяет8 ownership tests shrink/regrowth и negative codec
+controls, сохраняет48 независимых effective graph/image/state snapshots;
+production reader проверяет их физику, исходную C₀ и continuity maps между
+фазами. Новый schema2 state не выдаётся за legacy schema1 без dormant history.
+Потеря этой истории должна отвергаться даже при пересчитанных envelope hashes.
+
+Ownership gate8 получает wall budget7200s для более тяжёлых наблюдений; model
+time, physics, search tolerances и assertions не ослаблены. Более широкая
+regression47 объединяет прежние8 legacy C edits,8 bound C cases,13 joint/failure
+controls и14 completed/stopped/recognition transfer cases с8 ownership cases:
+47 уникальных IDs после удаления4 повторов legacy cases внутри joint-контракта.
+Она запускается
+после ownership gate; до положительных normal/ASan и полных reader checks
+в develop ничего из owner-кандидата не объединяется. Это всё ещё не C-trim
+controller search, полная lifecycle/physics матрица либо научное8/8.
 
 Изменения выполняются в codex/timelearner-capacitance-owner от принятого develop;
 server jobs не должны вытеснять текущую invalid-reload проверку. После адресной
