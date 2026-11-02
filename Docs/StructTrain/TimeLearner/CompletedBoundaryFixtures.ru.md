@@ -37,3 +37,19 @@ canonical SHA, exact=true и явным tolerances sync0.2/amp1e-5/relative0.
 нетривиальной морфологии или перенос каждого вида learned overlay.
 M40 ASan той же постановки запланирован после завершения и публикации
 предыдущих владельцев. ASan PASS этого набора ещё не заявляется.
+
+Для ASan публикации подготовлен точный файловый delta к normal primary
+archive в commitc17f7f61f11a05c7ea8992e77593528690c956c5. Совпадающие bytes
+не копируются повторно; logical_members указывает source=base/delta, member,
+размер и SHA. Base имеет полный Git commit/archive path/archive SHA; изменённые
+файлы находятся в delta.tar.gz. Перед публикацией проверяется полное точное
+восстановление всех ASan файлов из этих двух Git-доступных источников. Это не
+ссылка на worker cache и не SHA отсутствующего файла. Общий production
+artifact_bundle этот scoped evidence format пока не читает автоматически;
+его унификация остаётся частью stage9/10. До адаптации report readers должны
+материализовать и проверить все logical_members, а не считать delta полным run.
+
+После завершения и сохранения ASan owner разрешена следующая isolated сборка
+root5d73/Rdkc385 с9 unit и13 native Build-contract cases. Source/runtime
+работающего transport job не изменяются. При неожиданном positive failure
+следующая сборка автоматически не запускается.

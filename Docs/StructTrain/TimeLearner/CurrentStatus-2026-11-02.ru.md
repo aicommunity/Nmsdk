@@ -18,9 +18,14 @@ develop не менялся. Документационные heads Pulse5bdd08b
 отличаются от numerical f9272f5/c3850711 только Docs; Core trees совпадают.
 
 M40 версия до bool correction (rootd8bf/Rdk03497edf) завершила9/9 unit и12/12
-native под ASan,1259632ms native. Публикация и source update ждут завершения
-отдельного regression8 owner. После этого предусмотрен transport explicit0.2
-из root589; к новой Rdk bool correction эти результаты не относятся.
+native под ASan,1259632ms native. Опубликовано в31840e7173094912856ddc0f43d8a446ed73ebba:
+492 verified members.36 native CSV/packets и112 negative downstream CSV/packets
+совпали с normal. Отдельный regression8 закончил теми же failures и сохранён.
+Следующий transport explicit0.2 root589 на M40 жив (PID2115894/start_ticks271244564);
+при последней проверке4/8 passed, calibration/PostTune ещё выполняются.
+Publisher2126622 ждёт его завершения, сохраняет primary delta с normal Git base,
+затем запускает isolated9/13 correction. К новой Rdk bool correction завершённые
+результаты до этого запуска не относятся.
 
 Дополнительная задолженность stage9/12: native_test_reports schema1/2 требует
 JUnit без failures. Для отрицательных test runs нужен явный diagnostic report
