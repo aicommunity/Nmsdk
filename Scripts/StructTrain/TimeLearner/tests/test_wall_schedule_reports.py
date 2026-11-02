@@ -45,6 +45,11 @@ class WallScheduleReportsTest(unittest.TestCase):
         with self.assertRaises((EvidenceError, FileNotFoundError)):
             inventory_wall_schedule(self.root)
 
+    def test_positive_control_cannot_be_downgraded_into_an_expected_rejection(self):
+        self.mutate("*probe_4_evidence.json", lambda row: row["observation"].update(valid=False))
+        with self.assertRaises(EvidenceError):
+            inventory_wall_schedule(self.root)
+
     def test_failed_junit_is_not_accepted_as_a_successful_gate(self):
         path = self.root/"native.xml"
         tree = ET.parse(path)
