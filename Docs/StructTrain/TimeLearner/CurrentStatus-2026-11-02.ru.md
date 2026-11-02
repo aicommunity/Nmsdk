@@ -12,7 +12,10 @@ Rdk Build всё ещё возвращал false при caught exception, воп
 738985c742f881e3fca3ff23229f68db7d3adf68. В Rdk feature исправлены возврат и
 consumer guards Connect/CreateStructure/Environment. [Контракт и проверка](NativeBuildBoolContract.ru.md).
 На Elder новый numeric root5d73cd0858abc1e93655d5fa10189225da990201 с Rdkc3850711:
-9/9 unit passed,13 native в процессе; develop не менялся.
+9/9 unit,13/13 native и4/4 explicit0.2 transport passed. Evidence
+094bced1b7431e726b052e315eceb2e04e2ad277. ASan этой коррекции ещё требуется;
+develop не менялся. Документационные heads Pulse5bdd08b и Rdk48d6548e
+отличаются от numerical f9272f5/c3850711 только Docs; Core trees совпадают.
 
 M40 версия до bool correction (rootd8bf/Rdk03497edf) завершила9/9 unit и12/12
 native под ASan,1259632ms native. Публикация и source update ждут завершения
