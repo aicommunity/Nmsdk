@@ -1,5 +1,15 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Принятый файловый вход, 03.11
+
+Опубликован root develop merge `f153d5c45b250ae94cdc4fc49db8f146a67d98db`:
+Pulse develop merge `5a5256577a5f708742befb0b87aedeb575c324e2`, Rdk a62393f7,
+Bin14a88195. Cold26 и integrated53 на normal/ASan завершены; в каждой integrated
+серии17 independent readers, actual libasan подтверждён. Все85 CSV и52 cold
+input/observation files normal/ASan побайтно равны. [Scope и evidence](DatasetInputAcceptance-2026-11-03.ru.md).
+Owner C₀ — отдельный непроверенный кандидат; accepted Core его не включает.
+Полностью завершённым остаётся только исходный этап0.
+
 ## Принятые source/archive исправления, 03.11
 
 Последующее обновление parser-кандидата: cold normal26/readers7 и
