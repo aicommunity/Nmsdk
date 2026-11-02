@@ -1,0 +1,60 @@
+# Сохранение C₀ при Train → Test
+
+Реализация следующего среза; полная серверная приёмка ещё не завершена.
+PulseLib: `922ba91f71075b296a1c808e561b69fdd71f6255`.
+Первый изолированный build root `833b9bb9e1062778d405928a191bb32500828f2b`
+остановился до тестов из-за отсутствующего include QJsonDocument в обоих
+learner. Исправление PulseLib `69d463aa50144a1c8ddb4a674bb900c2a07e769f`.
+Неудачная сборка опубликована в `6f05f66ea89d93762dee1860a9952f4e5cc95400`,
+её фактический cache/flags дополнительно сохранены до изменения build cache:
+`bd35b706609d1c1acfb8df230e2f231cb4cfdebe`. B1 не является runtime PASS.
+
+Completed/stopped package schema 2 добавляет `capacitance_state` к полному
+native archive. Содержимое: исходные индивидуальные C₀, их capture/image
+свидетельства, ModelSpec/storage closure, полная карта абсолютных поправок,
+граница изменения и hash конечного физического графа. Первый экспорт явно
+принимает NativeCapacitanceCorrection. Перед экспортом проверяются все C,
+классы, статическая физика, storage и единая частота. Проверка сертификата
+обучения остаётся отдельной и не ослабляется.
+
+PrepareNativeLearnedState проверяет это состояние на приватно восстановленных
+нейроне и dataset до commit живых детей. Import обоих learner сохраняет C₀
+для последующего обычного re-export; baseline не захватывается заново.
+Пакеты schema 1 не меняют прежний формат и не получают вымышленных C₀.
+Source-solo с schema 2 может проходить существующий recognition import;
+его сертификат относится к solo, а не автоматически к преобразованному графу.
+
+`capacitance_evidence.py` независимо сверяет C₀, классы/физику, image closure,
+масштабы и итоговую модель. Readers learned/stopped версии 3 читают обе схемы;
+для schema 1 provenance C₀ остаётся unknown. Reader не утверждает, что исполнил
+native XML import: это доказывают отдельные реальные компонентные fixtures.
+
+Spec `native-capacitance-state-transfer-v1.json` объявляет 14 cases: шесть
+completed/frozen/fresh-process C₀ fixtures, два partial stopped C₀ fixtures,
+четыре прежних completed transport и два прежних partial stopped controls.
+Положительные completed controls используют явно заданный sync=0.2; default
+0.02 и amp=1e-5 сохранены. Это проверки переноса, не новая научная сходимость.
+Mutation reader tests используют настоящие C++ packages и primary CSV.
+Проверяется также независимый reader для обоих новых owned recognition
+результатов с сохранённым source-solo C₀. Старые reader fixtures с фиксированным
+набором 20 stopped scenarios не ослабляются под новый меньший набор.
+
+Normal B3 (root `58d941c2664703e794179d0e5dfeaa95e54949ad`) завершил
+9/9 lifecycle и 14/14 native проверок. Reader gate завершился с ошибкой:
+Python учитывал только классы существующих узлов, тогда как native
+`ModelArchive::Classes` также включает непустые строковые параметры
+`*ClassName`, управляющие последующим ростом. Исправление сохраняет строгую
+проверку точного множества зависимостей и добавляет отрицательный контроль
+удаления growth-only зависимости на реальных пакетах. До повторной проверки
+reader это не полная приёмка B3.
+
+ASan C1 не дошёл до тестов: Qt6 не разрешает неявное сравнение QJsonObject
+с QJsonValue в четырёх EXPECT_EQ. Исправление теста `673f632b9` явно использует
+`toObject()`; точность сравнения не меняется. Evidence неудачной сборки:
+`17e5baadb0aece02aa278ef6323845d107ed163a`. Повтор использует новый runtime.
+
+Остаётся выполнить normal/ASan и reader gates, построить временные отчёты,
+проверить выбранные рисунки и merge closure. Также остаются автоматическое
+владение baseline алгоритмом C-trim, обновление карты после последующих edits,
+native XML/Copy retention и полная матрица режимов. Этот срез не включает
+полноценный bounded C-trim search: V2 с SyncCapacitanceTrim On ещё не разрешён.

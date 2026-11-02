@@ -1,5 +1,219 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Последний проверенный результат: transport и временные отчёты
+
+Исправленный Rdk Build contract завершил M40 ASan9/9 unit и13/13 native:
+`12d5a24605bd464f0471a4b044f198c8d1b19763`. Все237 members локально проверены,
+74/74 CSV/packets равны normal13; фактические libasan mappings сохранены для
+unit и native процессов. Numeric root5d73cd08 / Pulsef9272f52 / Rdkc3850711.
+Это не проверка последующего C₀ transfer Pulse69d463a.
+
+B2 failure `2515c1babfaf223f6e2c914265f3d79cb744fe2a` проверен по11 members.
+Root CMake fix7290955b в B3 прошёл реальные configure ON / legacy OFF /
+conflict, с проверкой наличия/отсутствия обеих unit/native целей. B3 numerical
+gate и readers ещё не завершены.
+
+Активные задания на момент readback (проверять PID вместе со start ticks):
+
+| Worker/readback | Supervisor | Start ticks | Scope |
+|---|---:|---:|---|
+| Elder `s05-capacitance-state-normal-b3` | 4128382 | 321495971 | unit9, native14, primary readers, CMake3 |
+| Elder `s05-capacitance-state-publication-normal-b3` | 4130181 | 321504508 | публикация после закрытия owner |
+| M40 `s07-capacitance-combined-asan-c1` | 2223180 | 272064403 | unit9, native35, readers |
+| M40 `s07-capacitance-combined-publication-asan-c1` | 2224330 | 272069453 | публикация и actual libasan verification |
+
+Оба новых cohort используют numeric root `58d941c2664703e794179d0e5dfeaa95e54949ad`,
+Pulse `69d463aa50144a1c8ddb4a674bb900c2a07e769f`, Rdk docs48d6548e/Corec3850711.
+Elder source/build: `source-capacitance-state-normal-b1` /
+`build-capacitance-state-normal-b1`, runtime `runtime-s05-capacitance-state-normal-b3`.
+M40 source/build: `source-finite-ranking-asan-a1` /
+`build-finite-ranking-asan-a1`, runtime `runtime-s07-capacitance-combined-asan-c1`.
+Не обновлять их до терминального состояния владельцев и сохранения evidence.
+Develop пока остаётся принятым f1708eb9; новые scoped merges в develop ещё требуются.
+
+Elder completed transport после image extraction: 8/8 на root c6345fa6,
+evidence `abac5800c0ec93c1ecec100b37480982ec176f00`; M40 полный ASan transport
+на прежнем root589c7e30: 8/8, evidence `a311a6e3d4133faf57ac826b61460d7ba64917ff`.
+Оба delta архива локально восстановлены по точным Git references и проверены:
+458/466 logical members; в каждом случае 52/52 CSV и 48/48 сопоставленных
+probe packets равны исходному c17f7f61, 8/8 solo model revisions совпали.
+Это explicit sync=0.2 transport controls, не классификация8/8 и не default0.02.
+
+Для normal21 baseline/growth завершён полный temporal render: 61 наблюдение,
+93 trial-soma pairs,1680 PNG/SVG/PDF в M40 cache. Все20 selected PNG напрямую
+просмотрены, включая local-detail шкалы при20000Hz. [Отчёт просмотра](../../../Reports/StructTrain/TimeLearner/s07-bound-capacitance-temporal-selected-a1/VISUAL_REVIEW.ru.md).
+Полный cache не объявлен вручную просмотренным. Primary и20 selected — в Git.
+
+Новая schema2 C₀ transfer ещё не прошла runtime gate. B1 остановился из-за
+include, исправленного в Pulse69d463a. B2 успешно собрал native executable,
+затем обнаружил отсутствие Test_UComponent_Lifecycle в fresh CMake cache.
+Это расхождение BUILD_TESTS/BUILD_TESTING, а не падение численного теста.
+[Исправление](BuildTestSwitch.ru.md) выполнено в отдельной ветке от develop,
+commit `7290955b0269c1b3b90f205ec3b35e38d51d11dd`; требуется configure/build gate.
+
+Дополнительный дефект объёма/стабильности package: [runtime StepDuration](ArchiveTelemetryNoise.ru.md).
+Исправление ещё не реализовано. Старые primary не удаляются.
+Весь исходный план остаётся активным; этапы1–12 выполнены частично.
+
+## Последующее изменение кода: перенос C₀ в model package
+
+Первая fresh сборка schema-2 переноса B1 остановилась до unit/native
+из-за пропущенного include QJsonDocument. Исправлено в PulseLib
+`69d463aa50144a1c8ddb4a674bb900c2a07e769f`; нужен следующий build/test cohort.
+Failure evidence `6f05f66ea89d93762dee1860a9952f4e5cc95400`, cache seal
+`bd35b706609d1c1acfb8df230e2f231cb4cfdebe`. Исходники старого runtime с
+21/21 и завершившихся 8/8 transport при этом не менялись.
+
+В feature добавлен [schema-2 Train→Test](CapacitanceStateTransfer.ru.md),
+retention проверенного импортированного baseline и независимый reader.
+Это следующий ещё не проверенный сервером код, не расширение старых PASS.
+Предыдущий root `c6345fa6d2121625e93ec3d26433786fcc85cccc` на Elder завершил
+21/21 native и 9/9 unit без ошибок; evidence опубликован в
+`26fbfc17dfe717e0f8ae1f2e7b099adcf468f0aa` и требует локальной проверки hashes.
+Последующая локальная проверка выполнена: SHA архива и всех 349 members
+совпали; сохранены 61 probe packet и восемь bound C₀ states. Архив занимает
+1 762 278 байт. Evidence объединён через merge commit
+`39cdc257b3760b7baf28fd052170477046924188`. Это normal-проверка указанного
+Core cc1eb71, не проверка следующего schema-2 transfer Core 922ba91.
+Все восемь новых baseline/growth cases прошли, включая 20000 Гц.
+Дальнейшие прежние readbacks ниже сохранены как промежуточные снимки.
+
+## Текущая работа: storage-bound C₀
+
+Серверный запуск нового среза: root
+`c6345fa6d2121625e93ec3d26433786fcc85cccc`, PulseLib
+`cc1eb71c8a4be8b2241c2b9a870ac4b533e01a51`. Elder build завершён,
+9/9 unit PASS. На момент readback новые cases: 4/4 при 2000 Гц и
+Classic N0 при 20000 Гц PASS; остальные native cases ещё выполняются.
+Общий gate 21 пока не закрыт и не заменяет ASan-проверку.
+
+Активные/ожидающие readbacks на Elder (префикс
+`/home/user/timelearner-refactor/readbacks/`):
+
+- `s07-bound-capacitance-normal-a1`: supervisor PID 4065102,
+  start ticks 320989028; 9 unit и 21 native.
+- `s07-bound-capacitance-publication-normal-a1`: PID 4067107,
+  ticks 321000497; ждёт закрытия owner и публикует primary через Git.
+- `s05-bound-capacitance-transport-normal-a1`: PID 4074659,
+  ticks 321053640; ждёт успешного предыдущего gate, затем запускает
+  все восемь explicit sync=0.2 transport controls на том же runtime.
+- `s05-bound-capacitance-transport-publication-normal-a1`: PID 4075041,
+  ticks 321056785; ждёт transport, сохраняет новые байты и точные Git-ссылки
+  на одинаковые primary исходного `c17f7f61…`, без повторного копирования.
+
+Пути source/build/runtime не менять до закрытия всех их owners. PID сверять
+со start ticks; timeout подключения не считать завершением процесса.
+Результаты публикации и их member hashes ещё предстоит проверить локально.
+
+Добавлены schema 2 baseline, проверяемое происхождение новых C₀ при росте
+и отдельное сохраняемое состояние поправок ёмкости. Новые восемь fixtures
+ещё требуют серверного запуска; старые PASS не подтверждают новый код.
+[Состав и ограничения](NativeCapacitanceEdit.ru.md).
+VPN Automats2 восстановлен. M40 продолжает ASan completed-transport без
+перезапуска: шесть из восьми cases прошли, идёт Classic PostTune.
+Это промежуточный статус, не закрытие gate. Develop остаётся принятым
+`f1708eb97bc3b412c101dffc468221af2bc87e59`; этапы 1–12 остаются частичными.
+
+## Последнее дополнение: transport и Build
+
+Elder completed transport:8/8 на явно объявленном sync0.2,8 Exact packages
+проверены по SHA/допускам. [Результат и ограничения](CompletedBoundaryFixtures.ru.md).
+Это отдельный положительный контроль; прежние default0.02 cold-Train8 failures
+сохраняются и не превращены в PASS. Evidencec17f7f61f11a05c7ea8992e77593528690c956c5.
+
+Rdk Build всё ещё возвращал false при caught exception, вопреки требуемому
+контракту. Реальный native baseline подтвердил единственный bool failure:
+738985c742f881e3fca3ff23229f68db7d3adf68. В Rdk feature исправлены возврат и
+consumer guards Connect/CreateStructure/Environment. [Контракт и проверка](NativeBuildBoolContract.ru.md).
+На Elder новый numeric root5d73cd0858abc1e93655d5fa10189225da990201 с Rdkc3850711:
+9/9 unit,13/13 native и4/4 explicit0.2 transport passed. Evidence
+094bced1b7431e726b052e315eceb2e04e2ad277. ASan этой коррекции ещё требуется;
+develop не менялся. Документационные heads Pulse5bdd08b и Rdk48d6548e
+отличаются от numerical f9272f5/c3850711 только Docs; Core trees совпадают.
+
+M40 версия до bool correction (rootd8bf/Rdk03497edf) завершила9/9 unit и12/12
+native под ASan,1259632ms native. Опубликовано в31840e7173094912856ddc0f43d8a446ed73ebba:
+492 verified members.36 native CSV/packets и112 negative downstream CSV/packets
+совпали с normal. Отдельный regression8 закончил теми же failures и сохранён.
+Следующий transport explicit0.2 root589 на M40 жив (PID2115894/start_ticks271244564);
+при последней проверке4/8 passed, calibration/PostTune ещё выполняются.
+Publisher2126622 ждёт его завершения, сохраняет primary delta с normal Git base,
+затем запускает isolated9/13 correction. К новой Rdk bool correction завершённые
+результаты до этого запуска не относятся.
+
+Дополнительная задолженность stage9/12: native_test_reports schema1/2 требует
+JUnit без failures. Для отрицательных test runs нужен явный diagnostic report
+mode с сохранением failed inventory, partial windows и неизвестной полноты;
+не ослаблять PASS policy старых схем. Прямой probe renderer partial observations
+поддерживает, но единого отчёта failed native suite этим ещё не получено.
+
+Ниже сохранены предыдущие уточнения этого дня. Полными остаются только этап0
+и перечисленные scoped проверки; исходные этапы1–12 остаются частичными.
+
+## Checkpoint: восстановлена связь Automats2
+
+Обе машины доступны через user@10.245.1.12. Elder standalone C-editor8/8
+с32 raw probes опубликован в5acd3eebbf2c812a5e04e07bd0a14f88eb2ea4fb.
+M40 ASan той же версии завершён:8/8,6359859ms. Evidence
+23f0086845092feed0967112b1cd59583d086149 содержит32 проверенных raw probes:
+все32 CSV побайтно равны normal, все32 packets равны по полному JSON.
+Это проверка старого standalone API, не нового joint editor/operation ledger.
+
+Полный temporal cache завершён на M40:32 trials,48 trial/soma pairs,
+1787 PNG,5545 проверенных файлов. В Git только16 выбранных рисунков
+с индивидуальным просмотром и metadata; остальные изображения остаются
+воспроизводимым cache. [Протокол просмотра](../../../Reports/StructTrain/TimeLearner/s07-capacitance-temporal-selected-a1/Review.ru.md).
+
+Первый joint L/Ns/Rs/C gate Elder:8/10, оба rollback faults не прошли.
+Отрицательные данные, runtime и сборка сохранены в7364e82e219b1a63b6fa6f598dc7876dc2e59b02.
+Новая feature numerical closure:rootecedb55cd89ea7fd9d6c806268a2761f5a1b0c4a,
+Pulsef9272f5244e6183206e1a47a89eadb06a60abbb4,
+Rdk03497edfa52e6a0ee2c2e8cd4eaa5021211d514d. В ней специализированная
+диагностика пойманных Rdk исключений не меняет bool lifecycle или scheduler.
+Первая сборка eced остановилась на ошибке области видимости переменной в
+новом тесте. Отрицательная попытка сохранена в
+f018cacc04c0ef34f6ddfab9fe62166e4066a840 (15 verified members).
+Исправленный numerical rootd8bf0419ef3e022514f77613e2f4a5acbe4e4875
+на Elder прошёл9/9 Rdk unit и12/12 native cases. Evidence
+6bb5e09b897d0932f641f42aa8e966b935f713a9:229 verified members,36 raw trials.
+Оба rollback теста зафиксировали реальное исключение при C=4e-9, восстановили
+граф и следующую native пробу. Calculate failure делает пробу incomplete/invalid.
+
+Расширенный normal gate8/8 failed ДО проверки transfer/recognition/calibration/
+PostTune: при maximum_sweeps_exhausted прежние fixtures всё ещё требуют
+completed certificate. Это открытая регрессия проверки предпосылок, а не
+PASS downstream-путей. A/B со старым неизменным runtime f683 завершён:
+те же8 failures,112 CSV побайтно равны,112 Train packets равны целиком.
+Evidencef0af7f4a3629e6cf6e60fe2225c86952fd9800c7. Для этого набора проблема
+существовала до joint editor и Rdk ledger. Это не общее доказательство
+отсутствия регрессий. Первый control отклонён source alias guard; отдельный
+worktree Bin получил собственный core.worktree, первичный отказ сохранён.
+Нельзя менять допуски или объявлять stopped Train завершённым ради этих tests.
+
+Следующий обязательный пункт: исправить зависимости downstream suites от
+неподтверждённого completed Train. Нужны реальные положительные certified
+модели и отдельные negative/diagnostic cases для long-ISI cold Train; нельзя
+выдавать отрицательный Train за проверку conversion/calibration/PostTune.
+Сохранённые модели, cold retrain и changed-protocol evaluation проверять
+раздельно. Добавление очередного узкого PASS не закрывает эту задолженность.
+
+На M40 жив новый ASan job s07-operation-diagnostics-asan-a1,
+PID2078457/start_ticks270983842: isolated runtime,9 unit +12 native cases.
+Следующий regression gate8 ждёт его завершения по PID/start_ticks;
+source/build/runtime до окончания всех owners не обновлять.
+
+Принятый develop по-прежнему f1708eb97bc3b412c101dffc468221af2bc87e59.
+Полный C-trim V2, его persistence/growth/search, общая матрица и этапы1–12
+не закрыты. Ни текущие traces, ни эти gates не являются результатом
+классификации. Ниже прежние checkpoints сохранены как история уточнений.
+
+Текущая алгоритмическая работа: [per-channel C-trim physical editor](NativeCapacitanceEdit.ru.md).
+Новый API и8 actual native fixtures находятся в отдельной feature; серверная
+приёмка ещё идёт. Старый scalar C-trim не считается исправленным этим API,
+ControllerVersion2 по-прежнему явно отклоняет режим до полной интеграции.
+Baseline provenance/persistence, growth extension, bounded C search и fresh
+final verification остаются обязательными. Develop этим checkpoint не меняется.
+
 Следующее дополнение: [декларативный validation runner](ValidationSuites.ru.md)
 прошёл66/66 без skips на каждом worker и5 actual CLI negative controls.
 Versioned suite фиксирует Python package, все test IDs и1599-file Git corpus.
