@@ -1,8 +1,8 @@
 {
   "kind": "inherited_property_runtime_checkpoint",
-  "accepted_root": "ce285d7eee907d7d453ae00e1840246df09d5086",
+  "accepted_root": "f03f3a277fb69c082e670d7afec6f90ced313a4f",
   "feature_branch": "codex/timelearner-inherited-runtime",
-  "feature_root": "5b6dd147200a37ea93f303cbb01408312555e5ac",
+  "feature_root": "f5273750690ae126577eca91801757f8b23d02ca",
   "numeric_root": "ff2eb1129c4d3d57e767058ab7e512236168c794",
   "rdk_feature": "b34223ef113ca60a817589995205de06af77543a",
   "rdk_branch": "codex/timelearner-vector-stream",
@@ -27,7 +27,7 @@
       "start_ticks": "265736335",
       "runtime": "runtime-s01-inherited-native-asan-a4",
       "budget": 21600,
-      "last_verified": "math6 passed; first2 native cases passed; ClassicActivity20000 running; terminal absent"
+      "last_verified": "owned native parent alive; Math6 passed; first3 native cases passed; BranchActivity20000 running"
     }
   ],
   "expected": {
@@ -147,7 +147,12 @@
       "pid": 1349982,
       "start_ticks": "265873003",
       "python": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
-      "cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s01-inherited-normal-a1"
+      "cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s01-inherited-normal-a1",
+      "terminal": true,
+      "png_files": 2651,
+      "trials": 56,
+      "trial_soma_pairs": 72,
+      "visual_acceptance_complete": false
     },
     {
       "host": "10.245.1.17",
@@ -156,5 +161,37 @@
       "start_ticks": "265882424"
     }
   ],
-  "render_setup_failure": "normal render a1 used system Python without matplotlib; preserved exception; no figures generated. a2 uses existing plot-venv-a1; native jobs unchanged."
+  "render_setup_failure": "normal render a1 used system Python without matplotlib; preserved exception; no figures generated. a2 uses existing plot-venv-a1; native jobs unchanged.",
+  "docs_python_retirement": {
+    "accepted_root": "f03f3a277fb69c082e670d7afec6f90ced313a4f",
+    "source": "2c3ac22a64c9f6443b6d8bc38ccb227ad1185919",
+    "normal_proof": "3c631ed1ab1616aa12e004a83151e83c933f9357",
+    "m40_proof": "841790f474d1cc22c2acadcf51cf5f3b6255b09a",
+    "records_verified": 48,
+    "whole_stage9_complete": false
+  },
+  "normal_visual": {
+    "proof": "e8ecd698cd00c4a4a7c696c6687be888f0bfc5c6",
+    "metadata_members": 519,
+    "cache_png_files": 2651,
+    "directly_viewed": 16,
+    "informative": 12,
+    "pre_stimulus_selected_zooms_rejected": 4,
+    "full_visual_acceptance": false
+  },
+  "review_selection_source": "02833ffb4431660a0d86ba72d522ba0c66582ea9",
+  "review_selection_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s03-inherited-review-selection-normal-a1",
+      "pid": 3355859,
+      "start_ticks": "315422413"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-inherited-review-selection-asan-a1",
+      "pid": 1363138,
+      "start_ticks": "265965194"
+    }
+  ]
 }

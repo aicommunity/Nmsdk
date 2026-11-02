@@ -95,3 +95,19 @@ continuation и не результат классификации.
 Git source анализа и компактный primary proof. Полный cache остаётся на M40
 Data; в Git предусмотрены report metadata и16 selected PNG для прямой
 проверки. ASan native16, завершённый render и визуальная приёмка ещё ожидаются.
+
+Полный normal temporal cache завершён:56 probes/72 trial-soma pairs,2651 PNG.
+Compact visual proof `e8ecd698cd00c4a4a7c696c6687be888f0bfc5c6`:519
+verified metadata members,411092 compressed bytes и16 selected PNG. Все
+16 изображений1920×960 прямо просмотрены.12 подходят для просмотра отклика;
+четыре zoom-001 на20000Hz охватывают только участок до первого импульса.
+Это дефект выбора selected views, не пропуск данных в полном отчёте: overview
+содержит оба импульса и отклик, а cache содержит все остальные zoom windows.
+`InheritedPropertyNormalVisualQA.json` фиксирует исключённые четыре окна.
+
+Общий helper `review_views.select_review_views` теперь выбирает overview,
+окно фактического первого импульса и первого отклика по native samples,
+сохраняя native scale. Это помощь просмотру, не измеренный training peak,
+спайк либо новое доказательство сходимости. Seven actual-cache tests
+и corrected selected figures ожидают серверной проверки по02833ffb4.
+Полная ручная приёмка2651 PNG и ASan native16 не заявляются.
