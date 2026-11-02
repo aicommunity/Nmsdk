@@ -102,11 +102,13 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
         {"rising_edges",edges},{"model",before},{"after_model",after},{"peak_abs_soma",peak},
         {"trace",QString::fromStdString(stem+".csv")},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
     Write(stem+".csv",QByteArray::fromStdString(csv.str()));Write(stem+".json",QJsonDocument(result.record).toJson());
-    neuron->BreakLinks();neuron->Free();
     const auto attached=model->GetNumComponents();
+    neuron->BreakLinks();
     model->DelComponent("Neuron",false);model->DelComponent("Dataset",false);
     Require(model->GetNumComponents()==attached-2,"clock fixture detach failed");
-    core.storage->ReturnObject(neuron);core.storage->ReturnObject(dataset);core.environment->DestroyModel();
+    // Native Free recursively releases children, breaks ownership and returns
+    // a non-static storage object itself. Do not ReturnObject a second time.
+    neuron->Free();dataset->Free();core.environment->DestroyModel();
     return result;
 }
 void OriginInvariant(unsigned frequency,int mode,double delay)
