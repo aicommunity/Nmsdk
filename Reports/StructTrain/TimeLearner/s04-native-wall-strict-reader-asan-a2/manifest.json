@@ -1,0 +1,71 @@
+{
+  "kind": "native_wall_schedule_strict_reader_gate",
+  "worker": "asan",
+  "source": "e7782709157b84b5f8b1cec62711ff0ae4ecf1a2",
+  "numeric_root": "f35f614d2d07c1cc0cdf9786bcadd31d9237ed06",
+  "reader_tests": 10,
+  "packet_outcomes": {
+    "unprepared_rejected": 32,
+    "live_rejected": 8,
+    "completed_valid": 6
+  },
+  "records": [
+    {
+      "path": "checkout.log",
+      "bytes": 200,
+      "sha256": "a42a0806cc3d59ece2e657a704e80c9f8c5d5886750fa258e83da1f6b4577cf9"
+    },
+    {
+      "path": "clone.log",
+      "bytes": 95,
+      "sha256": "a4de54260e46991eaec4f2e14d614666469d9a07ff3cc5617932ce5af57d17bc"
+    },
+    {
+      "path": "corpus-sources.json",
+      "bytes": 55647,
+      "sha256": "7021c72812eee94d889f0995babfefe531ce3e5217b8f3e8796dafb7347052b1"
+    },
+    {
+      "path": "fetch.log",
+      "bytes": 122,
+      "sha256": "173f93f3cb3ca55610e5d03f05673ad88ae70c4767bda6ca7220ee507b108321"
+    },
+    {
+      "path": "inventory.json",
+      "bytes": 220328,
+      "sha256": "ecd9b422de3805e948d263651671d2919472c5470a831031b886c5336a4b1ca7"
+    },
+    {
+      "path": "job.py",
+      "bytes": 3238,
+      "sha256": "04703f8d000659ff1c888dc42839d1b9ffba5df48320085e629cd157425b50c9"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 44,
+      "sha256": "6fd4fa74395cee888b8d823a562a5d1761e6541f9c0f5263527e01ab1005c6b2"
+    },
+    {
+      "path": "reader-tests.log",
+      "bytes": 2131,
+      "sha256": "eff612738bc0db8f73177b39bc71c5df85924c5b22ff574b28f2d380d6197c0e"
+    },
+    {
+      "path": "sparse.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "terminal.json",
+      "bytes": 154,
+      "sha256": "338df53c773bc8e850540fc4c264aeb4760dedabb0b26db6ef9939f38a7c2e8c"
+    }
+  ],
+  "archive_sha256": "841b33801b1091cc64c8c5f2929682ebb18ec92f870c3ddcf4eb53f00a5646c5",
+  "scientific_verdict": null
+}
