@@ -73,8 +73,15 @@ inventory53 и ровно2 hot-reload failures; проверены257 members/3 
 исключительно3 invalid-phase samples: input1→0. Валидное исходное и recovery
 расписание сохранено. Поимённые hashes и changed cells — в Reports/StructTrain/
 TimeLearner/s03-dataset-invalid-reload-normal-comparison-b1/comparison.json.
-ASan baseline и повторный B1 ещё выполняются последовательно; приёмка в develop
-до их завершения не назначена.
+ASan baseline A3 завершён с теми же2 failures при полном inventory53:
+`84f2ff1e3520f5e369ddb690a02b20b7ae2b3625`,248 members/3 034 447 bytes проверены.
+Исправленный ASan B1 прошёл53/53 native и17 readers:
+`33b95d5b173691ce0df067efe65b8954c098d079`,261 members/3 064 350 bytes проверены,
+actual mapping `/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0` сохранён.
+Весь85 CSV/26 входов/26 JSON набор совпал побайтно между normal/ASan отдельно
+для baseline и исправленного кода. Поимённые hashes — в Reports/StructTrain/
+TimeLearner/s03-dataset-integrated-normal-asan-comparison-b1/comparison.json.
+[Scope адресной приёмки](DatasetInputAcceptance-2026-11-03.ru.md).
 
 Два отказа fixture A1 (неверный include) сохранены: M40
 `924a2ec3b2af48c7bb1d724412f148458ec2d6da`, Elder

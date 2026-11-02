@@ -10,12 +10,14 @@ Integrated ASan A3 воспроизвёл stale high output после invalid r
 в ветке отказа parser. Normal B1 завершён:53/53 native и17 readers PASS,
 evidence `5c94d5490be958145989c5d019015c6acd0ccd51`,261 members проверены.
 Все83 соседних CSV неизменны; изменены только3 invalid-phase input samples
-на каждой частоте. ASan B1 ещё ожидает закрытия ASan baseline; в develop
-parser-кандидат до его проверки не принят.
+на каждой частоте. ASan B1 также завершён:53/53 native и17 readers PASS,
+`33b95d5b173691ce0df067efe65b8954c098d079`,261 members проверены, actual libasan.
+Normal/ASan совпадают по всем85 CSV и52 cold input/observation файлам отдельно
+для baseline и correction. [Scope адресной приёмки](DatasetInputAcceptance-2026-11-03.ru.md).
 [Подробности и отрицательные setup evidence](DatasetFileValidation.ru.md).
 
-Следующие B1 gates53 поставлены последовательно за завершением и публикацией
-baseline; до этого source/build/runtime не меняются:
+Закрытые B1 gates53 выполнялись последовательно за завершением и публикацией
+baseline; их immutable manifests и старые process handles сохранены:
 
 - Elder `/home/user/timelearner-refactor/readbacks/s03-dataset-file-integrated-normal-b1`,
   owner148337/start_ticks323006824, publisher148338.
@@ -26,16 +28,19 @@ baseline; до этого source/build/runtime не меняются:
 Rdk a62393f7, Bin14a88195 и отдельный B1 runtime. Предшественники:
 Elder integrated normal A2 и M40 integrated ASan A3. B1 сначала проверяет
 сохранённые primary и закрытие владельцев, затем выполняет checkout/build.
-Normal B1 уже завершён, его lease закрыт; ASan B1 остаётся ожидающим. На Elder
-после проверки положительного B1 запущен отдельный capacitance-owner baseline8
-на принятом Core8b41, rootc0bfedffc. Это новые tests состояния, не C-trim search.
-Source/build Elder снова leased этим заданием; не переключать их вручную.
+Оба B1 lease закрыты. На Elder отдельный corrected capacitance-owner baseline8
+выполняется на принятом Core8b41/root7e993fae4; новый owner-кандидат root1eab7d147/
+Pulse4ae7e5c поставлен после него. На M40 тот же owner-кандидат поставлен после
+положительного parser ASan B1. Publisher owner-кандидата имеет suffix current-*
+b2 (исправлен evidence kind; native workers не перезапускались). Это отдельные
+ветки и pending результаты, не C-trim controller search. Source/build обоих
+workers принадлежат этим заданиям; не переключать их вручную.
 
 Root develop merge `b71f14a694426fe23af993bf9ab48f2399480789` опубликован с
 Pulse develop merge `8b41ffe4c438b188ef83406cfda1b616e2f3b199`; Rdk a62393f7 и
 Bin14a88195 сохранены. Все202 expanded regression cases и8 reader checks
 пройдены, primary полностью проверены. [Scope приёмки](SourceArchiveAcceptance-2026-11-03.ru.md).
-Strict parser остаётся отдельным кандидатом: cold normal/ASan26 PASS. Integrated
+Строгий parser проверен отдельно от source/archive: cold normal/ASan26 PASS. Integrated
 gate53:26 cold,2 active corrupt reload/recovery и25 source clock/lifecycle/
 dispatch. Научная классификация и
 полное завершение исходного плана этим не объявляются.
