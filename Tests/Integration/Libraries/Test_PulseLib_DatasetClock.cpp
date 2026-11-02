@@ -129,7 +129,7 @@ void OriginInvariant(unsigned frequency,int mode,double delay,Protocol protocol=
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         struct RestoreClock {
             UEPtr<UEnvironment> environment;ULongTime prior;
-            ~RestoreClock() { environment->GetTime().SetTime(prior); }
+            ~RestoreClock() { environment->DestroyModel();environment->GetTime().SetTime(prior); }
         } restore{core.environment,core.environment->GetTime().GetTime()};
         std::vector<Playback> runs;
         const std::vector<double> origins=extended?std::vector<double>{0.,.1,1.,86400.,1e9}:std::vector<double>{0.,.1,1.};
