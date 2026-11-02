@@ -42,3 +42,24 @@ Baseline ba34e4aa8/Pulse427 дал8/8 failed, compact proof
 и явно проверяет измеренные остатки0.06/0.02/0.01 через Evidence контроллера.
 Амплитуды и цель не меняются. Нужен повтор baseline с прежним Core427 и затем
 того же fixture с Core225; ошибочную попытку нельзя объявлять PASS.
+
+Corrected baseline daefecf61cabff82d8d6983321d17df5abd8d310/Core427
+на Elder действительно дал8 expected failures. Все дополнительные проверки
+измеренных timing/amplitude residuals прошли; только best length2 вместо4
+остаётся неверным. Proof244399829e94bae3d619c858f48431e89ce59505:
+26 verified members/8305 bytes. Предыдущая negative regression81 сохранена
+в47be80c10851c0f2755f60b3be9a5d049c3bfdc1:380 members/2799815 bytes.
+
+Correction numeric rootfbe7b667faaeb5eb17319d9d3a4a5b8d92c86754/Pulse
+225642bd9b3a5651fce2808bd0bef79944d4f1b8 проверяется объявленным gate81:
+все50 BoundedTraining tests,5 measured-R,6 measured-L и20 native/archive
+controls. Это включает старые positive/negative cases и fresh all-input gate.
+Приёмка не выводится из запуска процесса: нужно дождаться полного JUnit.
+
+На M40 отдельная новая ASan-сборка использует другое source/build/runtime
+дерево; живой07167 ASan163 не меняется. Первая настройка новой сборки
+выявила неполную подготовку dependency closure: отсутствовали4 штатных
+library submodules. Она остановилась до компиляции tests и сохранена как
+s07-finite-ranking-build-asan-a1. Следующая подготовка перебирает все7 paths
+из .gitmodules, сверяет точные gitlinks и оставляет HEAD прежнего активного
+дерева неизменными. Configure a2 прошёл, сборка и последующий gate81 pending.
