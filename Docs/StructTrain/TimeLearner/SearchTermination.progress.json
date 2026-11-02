@@ -34,30 +34,23 @@
   "native_scope": "internal native API; singleton physical bounds, sync0 deliberately negative, N2/f2000; not full configured V2 or legacy A/B",
   "active_jobs": [
     {
-      "worker": "10.245.1.11",
-      "path": "readbacks/s07-s04-integrated-normal-a1",
-      "owner_pid": 3674564,
-      "start_ticks": "318025395",
-      "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
-      "action": "actual163 native-gate running; do not change source/build/runtime"
-    },
-    {
       "worker": "10.245.1.17",
-      "path": "readbacks/s07-s04-integrated-build-asan-a1",
-      "owner_pid": 1723172,
-      "start_ticks": "268574026",
+      "path": "readbacks/s07-s04-integrated-asan-a2",
+      "owner_pid": 1745907,
+      "start_ticks": "268723161",
       "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
-      "action": "combined build only; inspect terminal before snapshot and actual163 gate"
+      "maximum_wall_seconds": 21600,
+      "action": "corrected actual163 gate; do not change source/build/runtime; inspect committed owned process and result before follow-up"
     }
   ],
   "feature_accepted_in_develop": false,
   "remaining": [
-    "Build and run declared163 integrated tests on both workers, including precise Reset reason and original completed missing-final rejection not yet tested on candidate07167d551.",
-    "Replay actual saved legacy nonexact completed boundaries and recognition controls without retro-reclassifying archives.",
-    "Complete public diagnostic evaluation for stopped physical models; default completed-Train recognition must continue rejecting them.",
-    "Temporal reports for new integrated/transfer observations and full74 wall/inherited controls; baseline32/48 reports and selected24 direct review are complete.",
-    "Console preflight/structured-exit/report regressions against combined runtime; merge Pulse first/root last only after scoped acceptance.",
-    "Quantized/best_effort, broader physics/modes/history/scripts/queues/scientific matrix and full original stages0-12 remain mandatory."
+    "Finish current ASan163-a2; independently audit and publish complete primary. Normal163 and both public14/6/2 plus reader28 are closed and published.",
+    "Complete strict declared raw observation inventory, full temporal reports for integrated163/transfer controls and wall/inherited raw Reset diagnostics; baseline32/48 and selected24 review already complete.",
+    "Extend saved nonexact replay to remaining inputs, recognition and additional physics/frequency/dimensions; current four A14 input0 controls passed on both workers.",
+    "Complete public diagnostic evaluation for stopped models; default completed-Train recognition must keep rejecting them.",
+    "Complete scoped combined acceptance before child-first/root-last develop merges; full original stages0-12 and mandatory matrix remain open.",
+    "Quantized/best_effort, broader physics/modes/history/property review/scripts/queues/scientific experiments and documentation remain mandatory."
   ],
   "whole_plan_complete": false,
   "scientific_verdict": null,
@@ -118,5 +111,45 @@
     "explicit_point2_exact_completed": 1,
     "frozen_fresh_process_csv_equal": 5,
     "libasan_loaded": true
+  },
+  "integrated_normal": {
+    "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+    "primary": "3cc20c1449d67b443e440a09b474d6b0eb54b15a",
+    "tests": 163,
+    "passed": 163,
+    "native_gate_reader_tests": 7,
+    "archive_members": 1793,
+    "archive_bytes": 8965180,
+    "raw_payload_audit": "pending complete declared inventory and temporal reports"
+  },
+  "integrated_public_preflight": {
+    "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+    "normal_primary": "3cc20c1449d67b443e440a09b474d6b0eb54b15a",
+    "asan_primary": "4b4498a67815633335328a27e44e4d2787ad0fcf",
+    "positive_each": 14,
+    "negative_each": 6,
+    "one_tick_train_each": 2,
+    "reader_each": 28,
+    "reader_source": "7577b97e1afd1f3aef8346f9d0ad04c56d465c9b",
+    "first_reader_attempt": "27/28 each; inherited child CLI discovery depended on cwd; corrected test executes from foreign cwd with explicit PYTHONPATH"
+  },
+  "legacy_completed_replay": {
+    "driver": "b499bb9224666ff90e999f8d7c82121c7ca2d127",
+    "reader": "e641218f917c9227e44287af307d3b97f865f309",
+    "normal_primary": "f6a975f0aab5113f86855a26f170cb0060f21ea6",
+    "asan_primary": "1c7ee355b13323b43594eeef36e6bf37dba355a6",
+    "native_cases_each": 4,
+    "reader_tests_each": 5,
+    "scope": "A14 saved nonexact completed Classic/Branch x N0/N1; active input0, all recorded soma channels; full frozen CSV byte equality; not all inputs, recognition or legacy learning dispatcher"
+  },
+  "interrupted_integrated_asan_a1": {
+    "primary": "bdebe7cd4686c93358ef326b13686894ecef1ec1",
+    "reason": "incorrect7200s CI budget, below measured9447.088s inherited16 baseline alone; verified owned pidfd SIGTERM, no physical/configuration change",
+    "execution": "process_error",
+    "returncode": -15,
+    "validity": "incomplete_test_observation",
+    "assertion_status": "not_assessed",
+    "archive_members": 424,
+    "archive_bytes": 1209742
   }
 }
