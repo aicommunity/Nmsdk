@@ -462,6 +462,7 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
         const auto inh=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true);
         phases.append(QJsonObject{{"phase",phase},{"state",state},{"revision",QString::fromStdString(rig.Revision())},
             {"exc_capacity",exc->Capacity.GetData()},{"inh_capacity",inh->Capacity.GetData()}});
+        Artifact(rig.name+"_ownership_"+phase+".json",QJsonDocument(phases.last().toObject()).toJson());
         EXPECT_FALSE(state.isEmpty())<<"a successful bound edit must retain its original C0 automatically";
         if(!state.isEmpty())
         {
@@ -481,16 +482,19 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
     // owner's complete state, rather than replace its map with one entry.
     auto second=rig.learner->ApplyNativeCapacitanceScale(original.baseline,{{"Dendrite1_1",.9}},.2);
     ASSERT_EQ(second.status,NativeEditStatus::Applied)<<second.reason;
-    auto state=snapshot("second_membrane_edit");
+    const auto state=snapshot("second_membrane_edit");
     EXPECT_EQ(state["membrane_scales"].toObject()["Dendrite1_1"],QJsonValue(.9));
     const auto beforeReset=state;EXPECT_TRUE(rig.learner->Reset());
     EXPECT_EQ(snapshot("native_reset"),beforeReset);
+    // Reset clears the executor's consumed-probe boundary. Re-establish it
+    // through a real native observation before requesting the next edit.
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
 
     auto candidate=rig.learner->ReadNativeParameters();candidate[0].length=3;
     const auto growth=rig.learner->ApplyNativeParameters(candidate);
     ASSERT_EQ(growth.status,NativeEditStatus::Applied)<<growth.reason;
-    state=snapshot("ordinary_growth_without_correction_argument");
-    const auto extended=state["baseline"].toObject();
+    const auto growthState=snapshot("ordinary_growth_without_correction_argument");
+    const auto extended=growthState["baseline"].toObject();
     EXPECT_EQ(extended["channel_origins"].toObject()["Dendrite1_3.ExcChannel"],QJsonValue("storage_image"));
     const auto added=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_3.ExcChannel",true);ASSERT_TRUE(added);
     EXPECT_GT(extended["channels"].toObject()["Dendrite1_3.ExcChannel"].toDouble(),0.);
