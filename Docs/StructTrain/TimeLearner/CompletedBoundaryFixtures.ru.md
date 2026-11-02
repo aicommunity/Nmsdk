@@ -28,5 +28,12 @@ Saved-state replay, cold train и изменённый протокол оста
 
 Gate: Scripts/StructTrain/TimeLearner/specs/native-completed-transport-explicit-point-two-v1.json.
 Перед запуском подставляются source_root и manifest неизменной server runtime.
-Серверное исполнение обоих workers ещё требуется; текущий файл описывает
-проверяемую постановку, а не успешный результат.
+Elder normal numerical root589c7e3086b8c32c163deb070c5294d846718bc2:
+8/8 passed,704870ms. Evidencec17f7f61f11a05c7ea8992e77593528690c956c5:
+467 проверенных members; все8 completed packages независимо проверены по
+canonical SHA, exact=true и явным tolerances sync0.2/amp1e-5/relative0.
+Контроль допускает Exact без изменения параметров, если исходная модель
+проходит свою объявленную fresh verification. Он не доказывает обучение
+нетривиальной морфологии или перенос каждого вида learned overlay.
+M40 ASan той же постановки запланирован после завершения и публикации
+предыдущих владельцев. ASan PASS этого набора ещё не заявляется.

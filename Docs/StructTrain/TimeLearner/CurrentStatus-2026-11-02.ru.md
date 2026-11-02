@@ -1,5 +1,33 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Последнее дополнение: transport и Build
+
+Elder completed transport:8/8 на явно объявленном sync0.2,8 Exact packages
+проверены по SHA/допускам. [Результат и ограничения](CompletedBoundaryFixtures.ru.md).
+Это отдельный положительный контроль; прежние default0.02 cold-Train8 failures
+сохраняются и не превращены в PASS. Evidencec17f7f61f11a05c7ea8992e77593528690c956c5.
+
+Rdk Build всё ещё возвращал false при caught exception, вопреки требуемому
+контракту. Реальный native baseline подтвердил единственный bool failure:
+738985c742f881e3fca3ff23229f68db7d3adf68. В Rdk feature исправлены возврат и
+consumer guards Connect/CreateStructure/Environment. [Контракт и проверка](NativeBuildBoolContract.ru.md).
+На Elder новый numeric root5d73cd0858abc1e93655d5fa10189225da990201 с Rdkc3850711:
+9/9 unit passed,13 native в процессе; develop не менялся.
+
+M40 версия до bool correction (rootd8bf/Rdk03497edf) завершила9/9 unit и12/12
+native под ASan,1259632ms native. Публикация и source update ждут завершения
+отдельного regression8 owner. После этого предусмотрен transport explicit0.2
+из root589; к новой Rdk bool correction эти результаты не относятся.
+
+Дополнительная задолженность stage9/12: native_test_reports schema1/2 требует
+JUnit без failures. Для отрицательных test runs нужен явный diagnostic report
+mode с сохранением failed inventory, partial windows и неизвестной полноты;
+не ослаблять PASS policy старых схем. Прямой probe renderer partial observations
+поддерживает, но единого отчёта failed native suite этим ещё не получено.
+
+Ниже сохранены предыдущие уточнения этого дня. Полными остаются только этап0
+и перечисленные scoped проверки; исходные этапы1–12 остаются частичными.
+
 ## Checkpoint: восстановлена связь Automats2
 
 Обе машины доступны через user@10.245.1.12. Elder standalone C-editor8/8
