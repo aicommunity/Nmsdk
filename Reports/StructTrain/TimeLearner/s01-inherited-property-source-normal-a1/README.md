@@ -1,0 +1,1 @@
+Read-only reproduction of nine shared inherited UContainer property records and eight-node learner hierarchy from pinned Git blobs. Catalog bytes match Docs/StructTrain/TimeLearner/InheritedPropertySource.json at57708bec6fbcb8f1fc20b87e00173ba072a8007f. Source HEADs unchanged. This is metadata review on the named worker, not numerical ASan or runtime property matrix acceptance.
