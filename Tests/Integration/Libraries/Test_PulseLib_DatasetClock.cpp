@@ -320,13 +320,15 @@ void Scheduling(unsigned sourceFrequency)
     model->SetEnvironment(core.environment);model->SetGlobalTimeStep(2000);
     UEPtr<ObservedDataset> dataset(new ObservedDataset);
     dataset->SetStorage(core.storage);dataset->SetEnvironment(core.environment);dataset->Default();dataset->Name="Dataset";
+    dataset->Activity=true;
     MDMatrix<double> values;values.Assign(2,1,0.);values(0,0)=.01;values(1,0)=.04;
     MDMatrix<int> labels;labels.Assign(1,1,1);
     dataset->MaxSpikesPerFeature=2;dataset->MatrixData=values;dataset->MatrixClasses=labels;
     dataset->Delay=.005;dataset->StateGeneration=2;
     UEPtr<UContainer> child=dataset;Require(model->AddComponent(child)!=ForbiddenId,"dispatch attach failed");
     const auto marker=model->OperationFailureSequence();model->Init();model->Reset();
-    Require(!model->HasOperationFailureSince(marker) && model->IsInit(),"dispatch native Init failed");
+    Require(!model->HasOperationFailureSince(marker) && model->IsInit() && model->Activity.GetData() &&
+            dataset->IsInit() && dataset->Activity.GetData(),"dispatch native Init/activity precondition failed");
     // Explicit multirate intervention after native construction. Never update
     // frequency or repair the graph inside the calculation loop.
     dataset->SetGlobalTimeStep(sourceFrequency);
