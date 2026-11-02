@@ -1,5 +1,35 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Текущий незавершённый C₀ owner, 03.11
+
+Принятый root develop — c594eacef (документирует parser merge f153d5c45),
+Pulse develop5a52565. Новый C₀ owner не включён в develop. Corrected baseline8
+на прежнем Core8b41 завершён с8 failures отсутствия owned metadata; все191
+members evidence a054904f проверены. Подготовлен owner-кандидат: prospective
+parameter state проверяется до live commit; C₀/scales автоматически переходят
+через обычные edits, Reset, growth и shrink/regrowth с dormant maps.
+
+Первые B1 builds успешны, но выявили избыточный whole-graph roundtrip assertion:
+native editor законно освобождает бывшие owned banks при сохранении остальных
+банков. Одни L/Ns/Rs не задают весь граф. B1 намеренно остановлены по проверенным
+PID/start_ticks/executable hashes; primary/receipts опубликованы и проверены.
+Их execution=interrupted, observation=incomplete, acceptance=not_accepted.
+
+Исправленный контракт проверяет точные C₀, scales, L/Ns/Rs и реальные identities
+каждого графа; full graph export/import identity не ослаблена. Выполняются:
+
+- Elder normal C2: root3a1b7fe1f, owner185679/323290894,
+  publisher185680/323290894, native outer7200s.
+- M40 ASan C3: rooteab5e61c2, owner2470460/273856765,
+  publisher2470461/273856765, native outer18000s по измеренным ASan затратам.
+
+Pulse обоих jobs f899ef0: новый owner плюс принятый parser. Source/build/runtime
+leased; вручную не обновлять. Ожидаются8 native и19 independent readers;
+результат пока pending. Затем нужны regression47, native transfer/legacy
+проверки и читаемые soma/input temporal reports всех48 проб,72 trial-soma pairs.
+[Полные SHA, handles, ограничения и следующий шаг](CapacitanceOwnership.ru.md).
+Статусы исходных этапов0–12 не сокращаются; полностью завершён только0.
+
 ## Принятый файловый вход, 03.11
 
 Опубликован root develop merge `f153d5c45b250ae94cdc4fc49db8f146a67d98db`:
