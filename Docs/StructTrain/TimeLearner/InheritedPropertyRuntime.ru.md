@@ -42,7 +42,10 @@ Connected inherited properties, XML/Copy/reuse, изменение глобал�
 Исправление у владельца Rdk b34223ef113ca60a817589995205de06af77543a сохраняет
 формат и precision caller; некорректный vector input теперь даёт failbit без
 частичной подстановки координат. Добавлены шесть отдельных production-header
-Math tests; clean negative build на старом Rdk и обе positive сборки ожидаются.
+Math tests. Clean negative build на старом Rdk воспроизведён на обоих workers;
+root proofsa7b9ffd4f7e4747a0ab364a4aca178dcaa2086d6 и
+1b8c173aa8acf57ea5cade60c67baec39d9c2977: по33 verified primary members,
+7284/6972 compressed bytes. Positive сборки ожидаются.
 Это исправление стандартного vector stream, не MDMatrix XML writer и не
 изменение физики нейрона. Первые compilation failures сохраняются как setup
 ошибки, а не модельные или научные отрицательные результаты.
