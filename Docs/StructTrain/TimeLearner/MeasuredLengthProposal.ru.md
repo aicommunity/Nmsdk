@@ -1,4 +1,35 @@
-# Измеренное предложение длины — незавершённая приёмка
+# Измеренное предложение длины — адресная приёмка
+
+02.11.2026 подэтап принят в области ниже. История промежуточных ожиданий и
+отказов сохранена; итог задаёт этот раздел, а не более ранние pending записи.
+
+- Normal после repair Bin:67/67 cases в одном XML, без skips,1868.97s,
+  [385 verified primary members](../../../Reports/StructTrain/TimeLearner/s07-measured-length-gate-normal-a2/README.md),
+  root proof1701991807a10db5609a3656c468bb18bb1f30c3.
+- ASan:39 kernel XML +4 завершённых NativeBoundedTraining cases в исходном
+  stdout до timeout7200s +24/24 remaining XML,7072.72s с budget14400s;
+  [325 verified primary members](../../../Reports/StructTrain/TimeLearner/s07-measured-length-gate-asan-a2/README.md),
+  root proofd6110479ffc5deb5f496eb6e36ae10e6ce4e857a. Наборы67 имён равны;
+  первичный процесс не выдал завершённый28-case XML. Actual mappings проверены,
+  ASan содержит libasan. Временной budget не меняет tolerances/model budgets.
+- Все16 выбранных originals1920×960 непосредственно просмотрены; independent
+  rerender8 ASan probes дал16/16 byte-identical PNG:
+  [proofbd3ead63b019f8ad2cdbf4223143470f9e25930f](../../../Reports/StructTrain/TimeLearner/s07-measured-length-selected-asan-a1/README.md).
+  Полный normal cache4146 PNG/240 trial-soma pairs остаётся на M40; Git содержит
+  все688 JSON metadata и выбранные изображения. Full ASan cache не заявлен:
+  соответствие остальных кривых опирается на160 byte-identical CSV и160
+  semantic-equal observation packets, а не на повторный render каждого файла.
+- Прежний normal gate и cold corpus сохраняют явно выявленное ограничение Bin
+  provenance. Текущий repair не делает их manifests достоверными задним числом.
+  Fresh normal67 проверен с corrected source closure; ASan cold corpus и selected
+  rerender являются отдельными источниками evidence. Это ограничение не скрыто
+  сравнением CSV. [Диагностика](SourceWorktreeIdentity.ru.md).
+
+PulseLib develop merge a18bf543007c52a3ac7a6fbb148a48cb2c351de3 опубликован
+первым; его Core побайтно соответствует проверенному a728d97110b706bd7869039557de957ea299c6ea.
+Root записывает exact gitlink этого merge. Приняты bounded measured proposal,
+guarded fallback, его integration/regression и описанные temporal controls.
+Это не полные этапы6/7/11, не legacy/V2 parity по всем modes и не классификация.
 
 Feature изменяет порядок кандидатов V2, сохраняя CapturedPerInput, исходные
 допуски, fixed anchor, topology order, native scheduler и все search budgets.

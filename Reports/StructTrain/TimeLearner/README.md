@@ -495,3 +495,5 @@ completed learning or classification. Full physical/mode/scheduler coverage is
 still open. Contract and precise limits: Docs/StructTrain/TimeLearner/NativePreflight.ru.md.
 
 Scoped metadata acceptance 2026-11-01: [Elder property/migration](s09-resumed-static-elder-a1/validation.json), [M40 property/migration](s09-resumed-static-m40-a1/validation.json), [Elder worktree guard](s02-source-worktree-identity-normal-a1/validation.json), [M40 worktree guard](s02-source-worktree-identity-asan-a1/validation.json). Actual Git fixtures; no numerical or full-stage claim. Elder Bin alias diagnosis is preserved in its report.
+
+Measured length scoped acceptance2026-11-02: [normal67 after source repair](s07-measured-length-gate-normal-a2/README.md), [ASan remaining24 plus original39+4](s07-measured-length-gate-asan-a2/README.md), [selected ASan rerender16/16](s07-measured-length-selected-asan-a1/README.md), [scope and source limitations](../../../Docs/StructTrain/TimeLearner/MeasuredLengthProposal.ru.md). Full stages6/7/11 remain open.
