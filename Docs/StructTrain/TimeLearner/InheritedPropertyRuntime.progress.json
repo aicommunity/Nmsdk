@@ -1,9 +1,9 @@
 {
   "kind": "inherited_property_runtime_checkpoint",
-  "accepted_root": "422647a2dff24d5783f95f2a2980507de81febcc",
+  "accepted_root": "ce285d7eee907d7d453ae00e1840246df09d5086",
   "feature_branch": "codex/timelearner-inherited-runtime",
-  "feature_root": "5b300dcc6d95e345ef9f41ecac049c3330e07897",
-  "numeric_root": "9cefcf41f991ce3b38f793fdefde578346ea51cb",
+  "feature_root": "3122fe471270e770ad3fa6363fd3f3efa2da1459",
+  "numeric_root": "ff2eb1129c4d3d57e767058ab7e512236168c794",
   "rdk_feature": "b34223ef113ca60a817589995205de06af77543a",
   "rdk_branch": "codex/timelearner-vector-stream",
   "pulse": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
@@ -12,22 +12,22 @@
     {
       "host": "10.245.1.11",
       "base": "/home/user/timelearner-refactor",
-      "output": "readbacks/s01-inherited-native-normal-a3",
-      "pid": 3308813,
-      "start_ticks": "315066664",
-      "runtime": "runtime-s01-inherited-native-normal-a3",
+      "output": "readbacks/s01-inherited-native-normal-a4",
+      "pid": 3326081,
+      "start_ticks": "315193557",
+      "runtime": "runtime-s01-inherited-native-normal-a4",
       "budget": 7200,
-      "last_verified": "owned process alive, building integration target at96%"
+      "last_verified": "owned process alive; math6 pass; first6 native cases passed, ClassicLocalFrequency20000 running"
     },
     {
       "host": "10.245.1.17",
       "base": "/media/user/Data/TimeLearnerRefactor",
-      "output": "readbacks/s01-inherited-native-asan-a3",
-      "pid": 1309253,
-      "start_ticks": "265609410",
-      "runtime": "runtime-s01-inherited-native-asan-a3",
+      "output": "readbacks/s01-inherited-native-asan-a4",
+      "pid": 1328814,
+      "start_ticks": "265736335",
+      "runtime": "runtime-s01-inherited-native-asan-a4",
       "budget": 21600,
-      "last_verified": "owned process alive, compiling NativeModelEditor integration TU"
+      "last_verified": "owned process alive; math6 pass; first2 native cases passed, ClassicActivity20000 running"
     }
   ],
   "expected": {
@@ -78,5 +78,25 @@
     "Continue full original plan; inherited configured ControllerVersion1/2 Train, connected/XML/Copy/reuse/global-frequency and trained continuation remain open."
   ],
   "full_acceptance": false,
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "math_current_passed": 6,
+  "math_actual_loaded_files_captured_both_workers": true,
+  "math_failed_attempt_proofs": {
+    "normal": "25f06a95023f84527fbf3e36c3449ceddd4c423f",
+    "asan": "28f33e0f78daed127449fe1c6ffd100f9cf1a6ac",
+    "archive_members_each": 26,
+    "reason": "test assumed std token extraction despite SDK line-preserving string overload; corrected with explicit getline"
+  },
+  "source_reference_audit": {
+    "accepted_root": "ce285d7eee907d7d453ae00e1840246df09d5086",
+    "revision": "422647a2dff24d5783f95f2a2980507de81febcc",
+    "producer": "eaf6c5fbba055264a51987e3437bfbc14b02d0f2",
+    "proof_m40": "e0105c7a3345641c489c9a4bb5d379a208154b05",
+    "proof_elder": "408e9a06ae4722f9f34bbb7a2245379e0813fb3f",
+    "audit_sha256": "c3112045904de2b5abcdcd82aa2d04b41c61d7de09b0c27a40590986e6d7edf4",
+    "matching_reports": 25,
+    "dependency_review_required": 22,
+    "unknown_large_metadata": 4,
+    "scientific_reclassification": false
+  }
 }
