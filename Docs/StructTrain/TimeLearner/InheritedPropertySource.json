@@ -1,0 +1,510 @@
+{
+  "kind": "timelearner_inherited_property_source_catalog",
+  "schema_version": 1,
+  "producer_sha256": "ecf46b62e6286b125a58217d8ba4205c216b36cea36da2d84a337596003a9370",
+  "helper_sha256": "e7444b3a4381cb8c8fc787fd6da5fd1529e08dc1138b5442be0e44fb85d6f4ea",
+  "pulse_commit": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
+  "rdk_commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+  "sources": [
+    {
+      "commit": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
+      "path": "Core/NNeuronTimeLearner.h",
+      "blob": "49aafafd23ce031d6869fed9c4cb9fc37e747858",
+      "sha256": "b9e39bd2554f8f5142cb5138a0c085cc1258bc15cfe87345252c3268fa9bae8f"
+    },
+    {
+      "commit": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
+      "path": "Core/NNeuronTimeLearnerBranch.h",
+      "blob": "7bf32a197b3a2bc79635617adf42550b580cb78a",
+      "sha256": "3b7ee97e221aa12df6dea46f68b65e128c84f410d41378ce7e851ee2e54be487"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UNet.h",
+      "blob": "7a39aac0999817dbd83643e2ccf5fd9e894cea6a",
+      "sha256": "a762f15b1d90a0798892e100f9bac26b4e1ca7494910f4747c67b99c16b22542"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UItem.h",
+      "blob": "64cc16faf310168fa5c853d221c1d12bb222b090",
+      "sha256": "72860eb6bb5cccb08908ad0053005fc18263452c2a4234b9b8d4c92d834ef0d4"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UConnector.h",
+      "blob": "f15b8408772fe267c6881389853f12c9947ced47",
+      "sha256": "6feb12078b7ff4b4ba8a0e6302f75e4e81f4480ed5f3687209246a970b1fa659"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UContainer.h",
+      "blob": "0b526c908fd6dbfa45482f21fd8ccc7478adb2fc",
+      "sha256": "5dd2c4675141e61f7b2d457d6b26f9ca6d1e14214080559311621651b760ead1"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UComponent.h",
+      "blob": "92d786aaf7f7dec4629744d24b69cd9fec9ed03c",
+      "sha256": "af82ed97b1c35d17aace887e9c5979299f41efbbb897afaa6894d06d0f366e2a"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UModule.h",
+      "blob": "89d3cd3426f0fcc925d675190fa082e0c2f20210",
+      "sha256": "35056913fc1877a43b95ec4c31b80f02856b30371f30aeb099a0b65bb168a4bb"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UContainer.cpp",
+      "blob": "92fb2be56ed54ee86c56416ea492aebdd835d0ae",
+      "sha256": "be9e96b7f797d2d72ae745bc2750be24f57e34550363f8002ca8ccedf2fe7bfb"
+    },
+    {
+      "commit": "0a1c1d05a1b12de20feabf54a25712e210865791",
+      "path": "Core/Engine/UTime.h",
+      "blob": "75d62b104ebf40ec68f722719cf859f30668b4c0",
+      "sha256": "f3af3e1779633e962b5ca0384768bb7b902fe21afc4d7bfcff659bc1d717f96d"
+    }
+  ],
+  "hierarchy": [
+    {
+      "class": "NNeuronTimeLearner",
+      "parent": "UNet",
+      "line": 45
+    },
+    {
+      "class": "NNeuronTimeLearnerBranch",
+      "parent": "UNet",
+      "line": 45
+    },
+    {
+      "class": "UNet",
+      "parent": "UItem",
+      "line": 28
+    },
+    {
+      "class": "UItem",
+      "parent": "UConnector",
+      "line": 22
+    },
+    {
+      "class": "UConnector",
+      "parent": "UContainer",
+      "line": 154
+    },
+    {
+      "class": "UContainer",
+      "parent": "UComponent",
+      "line": 88
+    },
+    {
+      "class": "UComponent",
+      "parent": "UModule",
+      "line": 169
+    },
+    {
+      "class": "UModule",
+      "parent": null,
+      "line": 40
+    }
+  ],
+  "shared_records": [
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "Name",
+      "type": "NameT",
+      "flags": "ptSysParameter",
+      "setter": "SetName",
+      "declaration_line": 123,
+      "lifecycle_source_mentions": {
+        "constructor": [],
+        "Default": [
+          {
+            "line": 2018,
+            "source": "NameT name=Name;"
+          },
+          {
+            "line": 2021,
+            "source": "SetName(name);"
+          }
+        ]
+      },
+      "consumers": [
+        {
+          "method": "SetName",
+          "line": 647,
+          "body_sha256": "a7e0d5b26a56114d52967702dec08fdf43bc1b325cfbfc2d8c67239f98d6d639"
+        },
+        {
+          "method": "GetFullName",
+          "line": 671,
+          "body_sha256": "d047c9be4ab4c30f2252aab0fefa50be373294d98fe2042e2b4c9fe9bd4335da"
+        },
+        {
+          "method": "GetFullName",
+          "line": 686,
+          "body_sha256": "55e26405f38b5de5b88d2686d615c9e20ad0ecfd4febca88a38425ea1645296d"
+        },
+        {
+          "method": "Copy",
+          "line": 1053,
+          "body_sha256": "1f7abedec2d26317bac9ca67638e7071253bdf8492cb8cb730c90ae4e581682c"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "Id",
+      "type": "UId",
+      "flags": "ptSysParameter",
+      "setter": "SetId",
+      "declaration_line": 126,
+      "lifecycle_source_mentions": {
+        "constructor": [
+          {
+            "line": 86,
+            "source": "Id = 0;"
+          }
+        ],
+        "Default": [
+          {
+            "line": 2058,
+            "source": "if(id_error && id_error->Id == 0)"
+          }
+        ]
+      },
+      "consumers": [
+        {
+          "method": "SetId",
+          "line": 946,
+          "body_sha256": "48397a0ffe036cb9f7835a0f1630e93e070ceadee9d7621e237c1f82fac91e5b"
+        },
+        {
+          "method": "GetComponentId",
+          "line": 750,
+          "body_sha256": "84a9ea1fe9e95b86a34ba3054712be94fb41e4d10b009f4c3b5df254c3060011"
+        },
+        {
+          "method": "Copy",
+          "line": 1053,
+          "body_sha256": "1f7abedec2d26317bac9ca67638e7071253bdf8492cb8cb730c90ae4e581682c"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "Activity",
+      "type": "bool",
+      "flags": "ptPubParameter",
+      "setter": "SetActivity",
+      "declaration_line": 130,
+      "lifecycle_source_mentions": {
+        "constructor": [
+          {
+            "line": 87,
+            "source": "Activity = false;"
+          }
+        ],
+        "Default": [
+          {
+            "line": 2019,
+            "source": "bool activity=Activity;"
+          },
+          {
+            "line": 2022,
+            "source": "SetActivity(activity);"
+          }
+        ]
+      },
+      "consumers": [
+        {
+          "method": "SetActivity",
+          "line": 917,
+          "body_sha256": "c5a2c39023558e54561200c78d864d5d9fb860c8b186ff5bef482da8fbd82c1d"
+        },
+        {
+          "method": "Calculate",
+          "line": 2475,
+          "body_sha256": "0ec942a33a48a408a64db0a92f64042b0f81c532a15959691ced453f1da36920"
+        },
+        {
+          "method": "Reset",
+          "line": 2379,
+          "body_sha256": "ae5e1a67596aaf9a977c77008f32e514af8f64fcdd11e9cb99621e6c458c09e7"
+        },
+        {
+          "method": "Default",
+          "line": 1992,
+          "body_sha256": "bfd4a8d6d6acfb44ed9337f6c424a568df0048be72cd7e44d58def76b7b91a43"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "TimeStep",
+      "type": "UTime",
+      "flags": "ptSysParameter",
+      "setter": "SetTimeStep",
+      "declaration_line": 133,
+      "lifecycle_source_mentions": {
+        "constructor": [],
+        "Default": [
+          {
+            "line": 2010,
+            "source": "SetTimeStep(2000);"
+          }
+        ]
+      },
+      "consumers": [
+        {
+          "method": "SetTimeStep",
+          "line": 857,
+          "body_sha256": "f5d0144bacb10186203a658a4a421f8d41e295d3aba6bae3fb4a975419537c35"
+        },
+        {
+          "method": "SetGlobalTimeStep",
+          "line": 898,
+          "body_sha256": "e9c5acb963d643dbb849715b8e31963833691c18ce062f5fa31a3368cf6a65e1"
+        },
+        {
+          "method": "Calculate",
+          "line": 2475,
+          "body_sha256": "0ec942a33a48a408a64db0a92f64042b0f81c532a15959691ced453f1da36920"
+        },
+        {
+          "method": "Reset",
+          "line": 2379,
+          "body_sha256": "ae5e1a67596aaf9a977c77008f32e514af8f64fcdd11e9cb99621e6c458c09e7"
+        },
+        {
+          "method": "Default",
+          "line": 1992,
+          "body_sha256": "bfd4a8d6d6acfb44ed9337f6c424a568df0048be72cd7e44d58def76b7b91a43"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "MaxCalculationDuration",
+      "type": "long long",
+      "flags": "ptPubParameter",
+      "setter": "SetMaxCalculationDuration",
+      "declaration_line": 139,
+      "lifecycle_source_mentions": {
+        "constructor": [
+          {
+            "line": 92,
+            "source": "MaxCalculationDuration = -1;"
+          }
+        ],
+        "Default": [
+          {
+            "line": 2011,
+            "source": "SetMaxCalculationDuration(-1);"
+          }
+        ]
+      },
+      "consumers": [
+        {
+          "method": "SetMaxCalculationDuration",
+          "line": 976,
+          "body_sha256": "3fae23f84f8d32d21211b02fc334c5021d1d7342566bdf1a56a704feb16fc588"
+        },
+        {
+          "method": "Calculate",
+          "line": 2475,
+          "body_sha256": "0ec942a33a48a408a64db0a92f64042b0f81c532a15959691ced453f1da36920"
+        },
+        {
+          "method": "CheckDurationAndSkipComponentCalculation",
+          "line": 2869,
+          "body_sha256": "1d093e6d6603595e71c5ec4f09a1ba7f8fa39b05f339d4bb223480c3581fb413"
+        },
+        {
+          "method": "Default",
+          "line": 1992,
+          "body_sha256": "bfd4a8d6d6acfb44ed9337f6c424a568df0048be72cd7e44d58def76b7b91a43"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "CalculationDurationThreshold",
+      "type": "long long",
+      "flags": "ptPubParameter",
+      "setter": "SetCalculationDurationThreshold",
+      "declaration_line": 143,
+      "lifecycle_source_mentions": {
+        "constructor": [
+          {
+            "line": 91,
+            "source": "CalculationDurationThreshold= -1;"
+          }
+        ],
+        "Default": [
+          {
+            "line": 2012,
+            "source": "SetCalculationDurationThreshold(-1);"
+          }
+        ]
+      },
+      "consumers": [
+        {
+          "method": "SetCalculationDurationThreshold",
+          "line": 990,
+          "body_sha256": "26f65449c1c0c0ac26d10c6e9b3d1a031bb6dcc44d8d241ea875beea08aca384"
+        },
+        {
+          "method": "Calculate",
+          "line": 2475,
+          "body_sha256": "0ec942a33a48a408a64db0a92f64042b0f81c532a15959691ced453f1da36920"
+        },
+        {
+          "method": "Default",
+          "line": 1992,
+          "body_sha256": "bfd4a8d6d6acfb44ed9337f6c424a568df0048be72cd7e44d58def76b7b91a43"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "Coord",
+      "type": "RDK::MVector<double,3>",
+      "flags": "ptPubParameter",
+      "setter": "SetCoord",
+      "declaration_line": 146,
+      "lifecycle_source_mentions": {
+        "constructor": [],
+        "Default": []
+      },
+      "consumers": [
+        {
+          "method": "SetCoord",
+          "line": 467,
+          "body_sha256": "479ec4786d841ba4975126cf702ab37e0da1165c364a4f8a918b2a0a3ce5b785"
+        },
+        {
+          "method": "Copy",
+          "line": 1053,
+          "body_sha256": "1f7abedec2d26317bac9ca67638e7071253bdf8492cb8cb730c90ae4e581682c"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "StepDuration",
+      "type": "unsigned long long",
+      "flags": "ptPubSysState",
+      "setter": null,
+      "declaration_line": 149,
+      "lifecycle_source_mentions": {
+        "constructor": [],
+        "Default": []
+      },
+      "consumers": [
+        {
+          "method": "SetActivity",
+          "line": 917,
+          "body_sha256": "c5a2c39023558e54561200c78d864d5d9fb860c8b186ff5bef482da8fbd82c1d"
+        },
+        {
+          "method": "Calculate",
+          "line": 2475,
+          "body_sha256": "0ec942a33a48a408a64db0a92f64042b0f81c532a15959691ced453f1da36920"
+        },
+        {
+          "method": "GetStepDuration",
+          "line": 480,
+          "body_sha256": "329f155decd85acc4b41aa94b2adabe65281e677e4434dcdb2d76722a77ad155"
+        },
+        {
+          "method": "GetFullStepDuration",
+          "line": 491,
+          "body_sha256": "dc750c5d6a89ac54b1d6665ab01e2c3b6a9cb917561ce585089dedcfcbf2593b"
+        }
+      ]
+    },
+    {
+      "owner": "UContainer",
+      "applies_to": [
+        "NNeuronTimeLearner",
+        "NNeuronTimeLearnerBranch"
+      ],
+      "name": "DebugSysEventsMask",
+      "type": "unsigned int",
+      "flags": "ptPubParameter | static_cast<unsigned int>(pgSystem)",
+      "setter": "SetDebugSysEventsMask",
+      "declaration_line": 152,
+      "lifecycle_source_mentions": {
+        "constructor": [],
+        "Default": [
+          {
+            "line": 2013,
+            "source": "SetDebugSysEventsMask(0xFFFFFFFF);"
+          }
+        ]
+      },
+      "consumers": [
+        {
+          "method": "SetDebugSysEventsMask",
+          "line": 1003,
+          "body_sha256": "b12925fae43b86c599215438361cd08bbf69ef581f915be1d08563848ee132f1"
+        },
+        {
+          "method": "Calculate",
+          "line": 2475,
+          "body_sha256": "0ec942a33a48a408a64db0a92f64042b0f81c532a15959691ced453f1da36920"
+        },
+        {
+          "method": "LogDebugSysMessage",
+          "line": 318,
+          "body_sha256": "2e0889316f7c84e2ab7f1643160c9b761d6a2a5ac6a117a73ee4d1f670de875c"
+        },
+        {
+          "method": "Default",
+          "line": 1992,
+          "body_sha256": "bfd4a8d6d6acfb44ed9337f6c424a568df0048be72cd7e44d58def76b7b91a43"
+        }
+      ]
+    }
+  ],
+  "shared_count": 9,
+  "runtime_test": false,
+  "runtime_aliases_inventoried": false,
+  "semantic_equivalence_attested": false,
+  "lifecycle_mentions_are_evaluated_defaults": false,
+  "scientific_verdict": null
+}
