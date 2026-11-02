@@ -2345,7 +2345,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     {
         EXPECT_TRUE(package["certificate"].isNull());EXPECT_EQ(package["training_outcome"],QJsonValue("budget_exhausted"));
         EXPECT_EQ(package["reason"],QJsonValue("maximum_sweeps_exhausted"));
-        EXPECT_THROW(ConvertNativeSoloToRecognition(package,{},UEPtr<UStorage>{},UEPtr<UEnvironment>{},implementation),std::invalid_argument);
+        const auto& conversionCore=NmsdkTests::InitEngineForPulseLibTests();std::string conversionReason;
+        try {ConvertNativeSoloToRecognition(package,{},conversionCore.storage,conversionCore.environment,implementation);}
+        catch(const std::invalid_argument& error){conversionReason=error.what();}
+        EXPECT_EQ(conversionReason,"recognition_requires_completed_solo");
     }
     if(n0Repeats>1)
     {
@@ -2420,7 +2423,21 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     for(unsigned i=0;i<8;++i){rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     EXPECT_FALSE(test->IsNeedToTrain.GetData());EXPECT_EQ(test->ReadNativeParameters(),parameters);
     test->Reset();EXPECT_EQ(test->NativeTrainingController().References()->Inputs(),references);
-    EXPECT_EQ(test->ExportNativeLearnedState(implementation)["model_revision"],package["model_revision"]);
+    if(diagnostic)
+    {
+        // Explicit learner Reset clears temporary control, not the physical
+        // model. An idle controller is no longer a stopped attempt that can
+        // be exported again; retain the already exported immutable package.
+        EXPECT_EQ(test->NativeTrainingController().State(),NativeTrainingState::Idle);
+        EXPECT_FALSE(test->NativeTrainingController().Certificate());
+        EXPECT_EQ(test->ReadNativeParameters(),parameters);
+        EXPECT_EQ(NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}})["sha256"],package["model_revision"]);
+        EXPECT_THROW(test->ExportNativeLearnedState(implementation),std::invalid_argument);
+    }
+    else EXPECT_EQ(test->ExportNativeLearnedState(implementation)["model_revision"],package["model_revision"]);
+    const auto outcomeBeforeRejectedImports=test->NativeTrainingController().Outcome();
+    const auto stateBeforeRejectedImports=test->NativeTrainingController().State();
+    const auto reasonBeforeRejectedImports=test->NativeTrainingController().Reason();
     auto corrupted=package;corrupted["model_revision"]="corrupt";
     const auto rejected=test->ImportNativeLearnedState(corrupted,implementation);EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);
     EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(test->ReadNativeParameters(),parameters);
@@ -2433,7 +2450,9 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         EXPECT_EQ(test->ReadNativeParameters(),parameters);
         EXPECT_EQ(NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}})["sha256"],package["model_revision"]);
         EXPECT_EQ(certificateValue(test->NativeTrainingController()),certificate);
-        EXPECT_EQ(test->NativeTrainingController().Outcome(),service.Outcome());
+        EXPECT_EQ(test->NativeTrainingController().Outcome(),outcomeBeforeRejectedImports);
+        EXPECT_EQ(test->NativeTrainingController().State(),stateBeforeRejectedImports);
+        EXPECT_EQ(test->NativeTrainingController().Reason(),reasonBeforeRejectedImports);
     };
     corrupted=package;auto claim=corrupted["certificate"].toObject();claim["exact"]=!claim["exact"].toBool();corrupted["certificate"]=claim;
     rejectWithoutMutation(resign(corrupted));
