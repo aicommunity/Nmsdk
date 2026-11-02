@@ -53,8 +53,12 @@ ASan C1 не дошёл до тестов: Qt6 не разрешает неяв�
 `toObject()`; точность сравнения не меняется. Evidence неудачной сборки:
 `17e5baadb0aece02aa278ef6323845d107ed163a`. Повтор использует новый runtime.
 
-Остаётся выполнить normal/ASan и reader gates, построить временные отчёты,
-проверить выбранные рисунки и merge closure. Также остаются автоматическое
+Normal9/14 и independent reader24 завершены; ASan9/35/readers24 также прошёл,
+actual libasan mappings и766 members проверены. [Адресная приёмка и полные
+commits](C0Acceptance-2026-11-03.ru.md). Исходный reader failure не переписан.
+Cross-inventory signals118/122 совпали,4 отличаются при разной предыстории
+model time старого source; полную cross-run эквивалентность не объявлять.
+Дальнейшие временные/научные проверки относятся к полному плану. Остаются автоматическое
 владение baseline алгоритмом C-trim, обновление карты после последующих edits,
 native XML/Copy retention и полная матрица режимов. Этот срез не включает
 полноценный bounded C-trim search: V2 с SyncCapacitanceTrim On ещё не разрешён.

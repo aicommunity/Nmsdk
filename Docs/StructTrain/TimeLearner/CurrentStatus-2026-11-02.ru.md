@@ -1,5 +1,21 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Последующее дополнение 03.11: принят explicit C₀ API
+
+Bound baseline/growth, joint edits/rollback и completed/stopped C₀ transfer
+адресно проверены normal9/14, independent readers24 и ASan9/35/readers24.
+ASan evidence780b21af:766 members/5 367 892 compressed bytes и actual libasan
+mappings проверены. [Полная область и ограничения](C0Acceptance-2026-11-03.ru.md).
+PulseLib develop merge5cbb877b и Rdk develop mergea62393f7 сохраняют tested Core;
+корень записывает эти точные gitlinks. Runtime source directories серверов
+не переключаются: они остаются leased активными заданиями других срезов.
+
+Дальнейшие archive telemetry/source clock изменения проверяются отдельно.
+Четыре cross-inventory waveform differences старого source остаются открытым
+ограничением сравнения; scientific PASS из этих gates не следует. Automatic
+C₀ ownership/search, полная матрица и остальные этапы плана остаются открытыми.
+Ниже сохранена история снимков до этой адресной приёмки.
+
 ## Последний проверенный результат: transport и временные отчёты
 
 Исправленный Rdk Build contract завершил M40 ASan9/9 unit и13/13 native:
