@@ -177,3 +177,12 @@ transfer +1 named Exact transport,66 wall-policy,16 inherited/frequency.
 workers. Old source closures не переименовываются под новый metadata HEAD.
 Saved legacy replay, public diagnostic evaluation, остальные режимы/physics,
 legacy A/B и другие требования исходного плана остаются открытыми.
+
+ASan five-case follow-up завершён:5/5 passed, с настоящей loaded libasan,
+diagnostic Budget4 и named Exact/completed1; все5 frozen/fresh-process CSV
+побайтно равны внутри worker. Primary
+`461cc58deda8f8d1b026fa3564591d1bd2882926`:248 verified members/904,964 bytes.
+Этим закрыт scoped transport gate численного root5e299dedf на обоих workers.
+Усиленные проверки и combined Pulse нового root07167d551 этим не принимаются.
+Его Elder build завершён и163-case gate запущен; на M40 начат build той же
+точной closure. Owned PID/start ticks и пути обновлены в progress JSON.

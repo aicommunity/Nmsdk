@@ -34,25 +34,24 @@
   "native_scope": "internal native API; singleton physical bounds, sync0 deliberately negative, N2/f2000; not full configured V2 or legacy A/B",
   "active_jobs": [
     {
-      "worker": "10.245.1.17",
-      "path": "readbacks/s07-diagnostic-transfer-asan-a1",
-      "owner_pid": 1710499,
-      "start_ticks": "268491589",
-      "numeric_root": "5e299dedfd10985cce3bca8da04b70acbe3a4432",
-      "action": "five diagnostic/completed transfer controls; do not change source/build/runtime"
+      "worker": "10.245.1.11",
+      "path": "readbacks/s07-s04-integrated-normal-a1",
+      "owner_pid": 3674564,
+      "start_ticks": "318025395",
+      "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+      "action": "actual163 native-gate running; do not change source/build/runtime"
     },
     {
-      "worker": "10.245.1.11",
-      "path": "readbacks/s07-s04-integrated-build-normal-a1",
-      "owner_pid": 3668635,
-      "start_ticks": "317982700",
+      "worker": "10.245.1.17",
+      "path": "readbacks/s07-s04-integrated-build-asan-a1",
+      "owner_pid": 1723172,
+      "start_ticks": "268574026",
       "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
-      "action": "combined Pulse fca7141 build only; require terminal before snapshot and163 tests"
+      "action": "combined build only; inspect terminal before snapshot and actual163 gate"
     }
   ],
   "feature_accepted_in_develop": false,
   "remaining": [
-    "Finish, independently audit and publish current ASan5 transport gate.",
     "Build and run declared163 integrated tests on both workers, including precise Reset reason and original completed missing-final rejection not yet tested on candidate07167d551.",
     "Replay actual saved legacy nonexact completed boundaries and recognition controls without retro-reclassifying archives.",
     "Complete public diagnostic evaluation for stopped physical models; default completed-Train recognition must continue rejecting them.",
@@ -76,7 +75,8 @@
     "tests": 5,
     "failed": 5,
     "reason": "incorrect post-Reset fixture expectations",
-    "correction_root_unverified": "5e299dedfd10985cce3bca8da04b70acbe3a4432"
+    "correction_root": "5e299dedfd10985cce3bca8da04b70acbe3a4432",
+    "correction_status": "scoped five-case gate passed on both workers; combined candidate has additional strengthened checks not yet accepted"
   },
   "separate_search_feature": "63fd7a9fecbc567fb8e5c690ae58fc73a896de65",
   "integrated_candidate_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
@@ -108,5 +108,15 @@
     "pngs": 288,
     "selected_directly_reviewed_pngs": 24,
     "full_manual_visual_acceptance": false
+  },
+  "diagnostic_transport_asan": {
+    "numeric_root": "5e299dedfd10985cce3bca8da04b70acbe3a4432",
+    "primary": "461cc58deda8f8d1b026fa3564591d1bd2882926",
+    "tests": 5,
+    "passed": 5,
+    "diagnostic_budget": 4,
+    "explicit_point2_exact_completed": 1,
+    "frozen_fresh_process_csv_equal": 5,
+    "libasan_loaded": true
   }
 }
