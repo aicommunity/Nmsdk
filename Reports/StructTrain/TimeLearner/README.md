@@ -493,3 +493,5 @@ Native cold preflight and production matrix preparation (scoped acceptance):
 Preflight runs zero model ticks; these are configuration/runtime checks, not
 completed learning or classification. Full physical/mode/scheduler coverage is
 still open. Contract and precise limits: Docs/StructTrain/TimeLearner/NativePreflight.ru.md.
+
+Scoped metadata acceptance 2026-11-01: [Elder property/migration](s09-resumed-static-elder-a1/validation.json), [M40 property/migration](s09-resumed-static-m40-a1/validation.json), [Elder worktree guard](s02-source-worktree-identity-normal-a1/validation.json), [M40 worktree guard](s02-source-worktree-identity-asan-a1/validation.json). Actual Git fixtures; no numerical or full-stage claim. Elder Bin alias diagnosis is preserved in its report.

@@ -6,7 +6,8 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
 
 - [План и условия приёмки](RefactoringPlan.ru.md).
-- [Измеренное предложение длины: normal/ASan cold A/B и незавершённая полная приёмка](MeasuredLengthProposal.ru.md).
+- [Измеренное предложение длины: native normal/ASan, cold A/B и temporal evidence](MeasuredLengthProposal.ru.md).
+- [Актуальность каталога:217 деклараций,16 source changes и границы проверки](PropertySourceDrift.ru.md).
 - [Состояние 01.11: принятые native owner/Console подэтапы, temporal reports и оставшийся live Train handoff](CurrentStatus-2026-11-01.ru.md).
 - [PostTune как native фаза learner: контракты и границы](NativeOwnedPostTunePhase.ru.md).
 - [Живой Train → финализация: новая реализация и незавершённая приёмка](NativeLiveFinalization.ru.md).
@@ -104,3 +105,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [Lossless Rdk configs, numeric tags, native readback и UTF-8 BOM finding](ConfigDocument.ru.md).
 
 - [M40: перенос завершённых runtime и подтверждённая очистка дублей](M40Storage-2026-10-29.ru.md).
+
+- [Проверка принадлежности исходников Git worktree и Elder Bin alias](SourceWorktreeIdentity.ru.md).

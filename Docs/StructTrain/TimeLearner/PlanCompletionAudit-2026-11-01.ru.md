@@ -62,6 +62,27 @@ captured parent-процессом; все52 ASan snapshots содержат lib
 
 ## Снимки и пределы доказательств
 
+Приняты адресно текущая source drift сверка217 learner properties и Git
+проверка44 migration records на обоих workers; ещё6 исторических Phase12
+shell удалены из Bin с полными retrieval records. Guard `runtime.source_closure`
+теперь отклоняет неверный Git worktree даже при совпадении HEAD/status:
+3/3 реальные Git fixtures на worker,2 воспроизведённых baseline отказа.
+Обнаруженный Elder Bin alias сохранён в диагностике, существующие рабочие
+копии не переписаны. Это ограничивает старую source provenance; численные
+результаты сами по себе этим не опровергнуты. См. [source drift](PropertySourceDrift.ru.md),
+[migration](ScriptMigration.ru.md), [worktree identity](SourceWorktreeIdentity.ru.md).
+Ни один дополнительный полный этап0–12 этим пакетом не закрыт.
+
+Последующее уточнение Elder Bin: отсутствовали все tracked files запрошенного
+каталога. Отдельный owner-level repair восстановил их из точного Git commit
+и исправил только per-worktree metadata; общий config/соседний checkout
+проверены неизменными. Это не исправляет provenance прошлых запусков задним
+числом. Адресный повтор measured-length gate67 начат после исправления;
+ASan remainder24 выполняется после7200s timeout, где четыре training cases
+успели пройти. Приёмка алгоритмического подэтапа остаётся открытой.
+Область влияния прежнего Elder source на опубликованные provenance ещё
+подлежит сквозной проверке. [Подробности](SourceWorktreeIdentity.ru.md).
+
 Принятый сквозной live pipeline включён в корневой develop
 1d4822af22e05b741e4a1c779cf99ba05cb0a1fa, PulseLib
 f23d1b8dee908ddfdc549619b754875fc627ce9b, Bin
@@ -95,7 +116,7 @@ Root acceptance merge8394a028a65afaacbe72f1ce741f26b309c4e3b7 опубликов
 | Этап | Что действительно реализовано/проверено | Что ещё требуется для полного этапа |
 |---|---|---|
 |0. Начальное объединение|Merge commits, согласованные gitlinks, develop hints; последующие принятые подэтапы также объединялись children-first.|Этап принят. Для каждой новой feature сохраняется собственная приёмка и --no-ff merge.|
-|1. Реестр доказательств/параметров|Есть опорные исторические commits, исходный inventory, дефекты и адресные evidence reports; отдельно source-reviewed10 control-property records с47 source references ([контракты](ParameterControlContracts.ru.md)) и ещё18 search/timing records с155 ссылками ([владельцы legacy/V2](ParameterSearchContracts.ru.md)); runtime-приёмка этих18 не заявлена.|Завершить семантический review всех публичных параметров/defaults/setters/owners/modes и поэкспериментный реестр с августа; закрыть review_required с доказательствами.|
+|1. Реестр доказательств/параметров|Есть опорные исторические commits, исходный inventory, дефекты и адресные evidence reports; отдельно source-reviewed10 control-property records с47 source references ([контракты](ParameterControlContracts.ru.md)) и ещё18 search/timing records с155 ссылками ([владельцы legacy/V2](ParameterSearchContracts.ru.md)); runtime-приёмка этих18 не заявлена.|Исходный semantic catalog211+6 уже существует. Актуализировать его consumers/helpers и runtime proofing по текущим ревизиям, учесть inherited Rdk properties; завершить поэкспериментный реестр с августа и закрыть review_required с доказательствами. [Сверка source slices](PropertySourceDrift.ru.md) не является runtime matrix.|
 |2. Runtime|Изолированные deploy roots, runtime/build/source manifests, запуск с explicit ini, переносимые компактные primary bundles.|Доказать общий контур для всей матрицы targets/profiles/workers; соблюдать ресурсные ограничения, опубликованные closure и восстановимость всех научных результатов.|
 |3. Наблюдения/scorer|Строгие IDs/completeness/finite/peak policies, реальные CSV, native summary/certificate аудит; явные отрицательные исходы и portable reports.|Распространить единый verdict на все активные исторические/новые аналитические пути, пройти всю размерность и corruption matrix.|
 |4. Lifecycle/storage|Исправления Build/Init/Reset/frequency, storage-профили, native builders/editors, граф/readback и адресные growth/reuse/Copy/Load проверки.|Полная lifecycle×physics×frequency×dimension матрица, heterogeneous storage и сохранность индивидуальных Rs/C во всех поддержанных путях; multirate остаётся compatibility scope.|
