@@ -117,9 +117,17 @@ class DiagnosticRecognitionEvidenceTest(unittest.TestCase):
             path_source, case = sources[model["source_solo"]["sha256"]]
             self.assertTrue(audit_recognition_source(model, case)["conversion_math_verified"])
             prefix = path_source.name.removesuffix("_learned_state.json")
-            for index in range(4):
-                observation = load(self.native/(prefix+f"_frozen_trial_{index}.json"))
-                self.assertTrue(audit_recognition_trial(observation, model)["valid_observation"])
+            # Source-declared full-pattern controls are distinct from the
+            # existing paired-impulse transport controls (enum values4/5).
+            if prefix.endswith(("_recognition_7", "_recognition_8")):
+                for index in range(4):
+                    observation = load(self.native/(prefix+f"_frozen_trial_{index}.json"))
+                    self.assertTrue(audit_recognition_trial(observation, model)["valid_observation"])
             topologies.add(case[0]["configuration"]["model"]["branch"])
             with self.assertRaises(EvidenceError): audit_diagnostic_recognition(model, case)
         self.assertEqual(topologies, {False, True})
+        self.assertEqual({p.name.removesuffix("_learned_state.json") for p, _ in sources.values()}, {
+            "Classic_2000_N1_learned_boundary_explicit_tolerance_recognition_4",
+            "Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_5",
+            "Classic_2000_N1_learned_boundary_explicit_tolerance_recognition_7",
+            "Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8"})

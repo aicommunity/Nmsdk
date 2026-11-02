@@ -4751,3 +4751,7 @@ TEST(NativeDiagnosticRecognition,OrdinaryClassicCompletedRegression)
 {LearnedBoundary<NNeuronTimeLearner>(1,.2,2000,2,false,RecognitionCase::OwnedIdentity);}
 TEST(NativeDiagnosticRecognition,OrdinaryBranchCompletedRegression)
 {LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,false,RecognitionCase::OwnedScaled);}
+TEST(NativeDiagnosticRecognition,OrdinaryClassicFullPatternRegression)
+{LearnedBoundary<NNeuronTimeLearner>(1,.2,2000,2,false,RecognitionCase::OwnedFreshIdentity);}
+TEST(NativeDiagnosticRecognition,OrdinaryBranchFullPatternRegression)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,false,RecognitionCase::OwnedFreshScaled);}
