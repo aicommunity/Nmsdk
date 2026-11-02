@@ -1,0 +1,970 @@
+{
+  "baseline/Classic_2000_N0_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "28cb3b0a9c78675ce2a31ceda846e77324792f2325da77373b76fa12b8ab5780",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.07050000000000006,
+    "minimum_measured_timing_error": 0.06099999999999994,
+    "selected_timing_error": 0.07050000000000006,
+    "selected_is_measured_minimum": false,
+    "rows": [
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/2",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/1",
+        "begin": 0.5415,
+        "model_revision": "69abbae46a138070bbea06a42131e8ff8c45616a46b91e42ae2da348f78b93d6",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000006,
+        "timing_high": -0.07050000000000006,
+        "timing_error": 0.07050000000000006,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/5",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/4",
+        "begin": 0.903,
+        "model_revision": "ac663df12055a61fb61fd5d43476b0e22b170d27a8e4c5a21a207a5e8180832d",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/8",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/7",
+        "begin": 1.2645,
+        "model_revision": "83e5b8e4e3a651e16c56243dc5cac1135fc34185a9e7cff02a4b4fc9ca7a8f1b",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000007,
+        "timing_high": -0.08000000000000007,
+        "timing_error": 0.08000000000000007,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/11",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/10",
+        "begin": 1.626,
+        "model_revision": "3a7fe2f3a8b26bc64d1ee3071f04a6cc04b2a4b3ec96e3379dba1085ccf2b38c",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000023,
+        "timing_high": -0.07050000000000023,
+        "timing_error": 0.07050000000000023,
+        "amplitude_residual": 0.0
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "baseline/Classic_2000_N1_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "261b820e90280456afb251876cab9e86648b8866fe1126e98f4bda2d14804df8",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.07050000000000001,
+    "minimum_measured_timing_error": 0.0609999999999995,
+    "selected_timing_error": 0.07050000000000001,
+    "selected_is_measured_minimum": false,
+    "rows": [
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/2",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/1",
+        "begin": 2.709,
+        "model_revision": "2f01534daba0204c60a9d1254763d60f64ea73299ed850a682d997717c68248f",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000001,
+        "timing_high": -0.07050000000000001,
+        "timing_error": 0.07050000000000001,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/7",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/6",
+        "begin": 3.0715,
+        "model_revision": "bc50deef547d4095e63568d51577347fe2a0d0f61383fd75800aa052fba9256c",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.0609999999999995,
+        "timing_high": -0.0609999999999995,
+        "timing_error": 0.0609999999999995,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/12",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/11",
+        "begin": 3.434,
+        "model_revision": "31f2d2161c6af8d0962a47b9fec88719aacd47f1da3cb1082f2e1f6b255ac444",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000052,
+        "timing_high": -0.08000000000000052,
+        "timing_error": 0.08000000000000052,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/16",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/15",
+        "begin": 3.796,
+        "model_revision": "07f1be013ba471a868d51bcaac3e9d3830596f211a99a7f980a361ad3cf8ab3a",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000045,
+        "timing_high": -0.07050000000000045,
+        "timing_error": 0.07050000000000045,
+        "amplitude_residual": 0.0
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "baseline/Branch_2000_N0_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "858661abdb9ec35deccdb4140531d3fbb3ceed70f1ca6dcc57623a540b70eb12",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.0705000000000009,
+    "minimum_measured_timing_error": 0.06099999999999994,
+    "selected_timing_error": 0.07050000000000001,
+    "selected_is_measured_minimum": false,
+    "rows": [
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/2",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/1",
+        "begin": 4.879,
+        "model_revision": "9de1783a4e17108c8edb4d8fbef5a4d1e766fa881ec451a62300e6fd14a70996",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.0705000000000009,
+        "timing_high": -0.0705000000000009,
+        "timing_error": 0.0705000000000009,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/5",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/4",
+        "begin": 5.2405,
+        "model_revision": "2061372e124dc8f5d9687c360520841a2380d0e415d09d06c44f77dc6bdc33c1",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/8",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/7",
+        "begin": 5.602,
+        "model_revision": "f9a53818e8f2d50a99784d9b31dcde4328929ed074f7e349b473f70684cd0061",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000007,
+        "timing_high": -0.08000000000000007,
+        "timing_error": 0.08000000000000007,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/11",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/10",
+        "begin": 5.9635,
+        "model_revision": "9de1783a4e17108c8edb4d8fbef5a4d1e766fa881ec451a62300e6fd14a70996",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000001,
+        "timing_high": -0.07050000000000001,
+        "timing_error": 0.07050000000000001,
+        "amplitude_residual": 0.0
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "baseline/Branch_2000_N1_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "76d0c35fac20b219d6ce36dc1cdc0ee51af8ed84f1984d5fb64c3a9912a01675",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.07050000000000001,
+    "minimum_measured_timing_error": 0.06099999999999994,
+    "selected_timing_error": 0.07049999999999912,
+    "selected_is_measured_minimum": false,
+    "rows": [
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/2",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/1",
+        "begin": 7.0465,
+        "model_revision": "7ecabb4e4bac7a2f1d2cadda324a368a4cacc6fc0d8734104da91fa5ec4edb53",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000001,
+        "timing_high": -0.07050000000000001,
+        "timing_error": 0.07050000000000001,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/7",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/6",
+        "begin": 7.409,
+        "model_revision": "2585c65609aa6f4c3be01c1266b88c3e120905a34cbcc747c1bf3a3b950f4482",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/12",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/11",
+        "begin": 7.7715,
+        "model_revision": "7b9a2d9061a487eef5968b3c059ab522866690778aea3f4ad3cf410185006c8e",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000007,
+        "timing_high": -0.08000000000000007,
+        "timing_error": 0.08000000000000007,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/16",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/15",
+        "begin": 8.1335,
+        "model_revision": "7ecabb4e4bac7a2f1d2cadda324a368a4cacc6fc0d8734104da91fa5ec4edb53",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07049999999999912,
+        "timing_high": -0.07049999999999912,
+        "timing_error": 0.07049999999999912,
+        "amplitude_residual": 0.0
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "correction/Classic_2000_N0_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "e18b3bc3cbee09babf8c3ee617a05fae116684706a447d8b95a86aa7b502d81e",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.07050000000000006,
+    "minimum_measured_timing_error": 0.06099999999999994,
+    "selected_timing_error": 0.06099999999999994,
+    "selected_is_measured_minimum": true,
+    "rows": [
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/2",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/1",
+        "begin": 0.5415,
+        "model_revision": "69abbae46a138070bbea06a42131e8ff8c45616a46b91e42ae2da348f78b93d6",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000006,
+        "timing_high": -0.07050000000000006,
+        "timing_error": 0.07050000000000006,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/5",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/4",
+        "begin": 0.903,
+        "model_revision": "ac663df12055a61fb61fd5d43476b0e22b170d27a8e4c5a21a207a5e8180832d",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/8",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/7",
+        "begin": 1.2645,
+        "model_revision": "83e5b8e4e3a651e16c56243dc5cac1135fc34185a9e7cff02a4b4fc9ca7a8f1b",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000007,
+        "timing_high": -0.08000000000000007,
+        "timing_error": 0.08000000000000007,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/11",
+        "anchor_trial_id": "Classic_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/10",
+        "begin": 1.626,
+        "model_revision": "f1f7dbb94286eefa6c04c6b4be9dadba27bf3e478b2fca1e8220f9c47c9aedbf",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.061000000000000165,
+        "timing_high": -0.061000000000000165,
+        "timing_error": 0.061000000000000165,
+        "amplitude_residual": -0.000581394627834797
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "correction/Classic_2000_N1_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "14c7380ee14e4253d0bae80fe161163bee856d06adf5814b664988fb361de44b",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.07050000000000001,
+    "minimum_measured_timing_error": 0.0609999999999995,
+    "selected_timing_error": 0.0609999999999995,
+    "selected_is_measured_minimum": true,
+    "rows": [
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/2",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/1",
+        "begin": 2.709,
+        "model_revision": "2f01534daba0204c60a9d1254763d60f64ea73299ed850a682d997717c68248f",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000001,
+        "timing_high": -0.07050000000000001,
+        "timing_error": 0.07050000000000001,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/7",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/6",
+        "begin": 3.0715,
+        "model_revision": "bc50deef547d4095e63568d51577347fe2a0d0f61383fd75800aa052fba9256c",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.0609999999999995,
+        "timing_high": -0.0609999999999995,
+        "timing_error": 0.0609999999999995,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/12",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/11",
+        "begin": 3.434,
+        "model_revision": "31f2d2161c6af8d0962a47b9fec88719aacd47f1da3cb1082f2e1f6b255ac444",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000052,
+        "timing_high": -0.08000000000000052,
+        "timing_error": 0.08000000000000052,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/16",
+        "anchor_trial_id": "Classic_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/15",
+        "begin": 3.796,
+        "model_revision": "78fd68fe10952fecefafa00974f4930c47c2cf932d3a9852a6e627c197331eb4",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06100000000000039,
+        "timing_high": -0.06100000000000039,
+        "timing_error": 0.06100000000000039,
+        "amplitude_residual": -0.000581394627834797
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "correction/Branch_2000_N0_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "0ab9038849b9567e22dfbaabb04867868fe032af73b6e7c0feeb89e0c7aba1b0",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.0705000000000009,
+    "minimum_measured_timing_error": 0.06099999999999994,
+    "selected_timing_error": 0.06099999999999994,
+    "selected_is_measured_minimum": true,
+    "rows": [
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/2",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/1",
+        "begin": 4.879,
+        "model_revision": "9de1783a4e17108c8edb4d8fbef5a4d1e766fa881ec451a62300e6fd14a70996",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.0705000000000009,
+        "timing_high": -0.0705000000000009,
+        "timing_error": 0.0705000000000009,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/5",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/4",
+        "begin": 5.2405,
+        "model_revision": "2061372e124dc8f5d9687c360520841a2380d0e415d09d06c44f77dc6bdc33c1",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/8",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/7",
+        "begin": 5.602,
+        "model_revision": "f9a53818e8f2d50a99784d9b31dcde4328929ed074f7e349b473f70684cd0061",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000007,
+        "timing_high": -0.08000000000000007,
+        "timing_error": 0.08000000000000007,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/11",
+        "anchor_trial_id": "Branch_2000_N0_finite_ranking_zero_sync/automatic/session/1/search/10",
+        "begin": 5.9635,
+        "model_revision": "c9ef808dd801bb4a58db4e994d6ab5d824fb814a358181b1521e11a0896d27c6",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "correction/Branch_2000_N1_finite_ranking_zero_sync": {
+    "kind": "timelearner_finite_timing_rank_audit",
+    "schema_version": 1,
+    "source_stopped_sha256": "dc2befb9e5ca29e4a47bffa535b94d2595a6ab05e3c22a13eac72db3dc7d9c84",
+    "source_audit": {
+      "auditor_version": 2,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 12,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "evaluation_verdict": null
+    },
+    "initial_timing_error": 0.07050000000000001,
+    "minimum_measured_timing_error": 0.06099999999999994,
+    "selected_timing_error": 0.06099999999999994,
+    "selected_is_measured_minimum": true,
+    "rows": [
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/2",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/1",
+        "begin": 7.0465,
+        "model_revision": "7ecabb4e4bac7a2f1d2cadda324a368a4cacc6fc0d8734104da91fa5ec4edb53",
+        "model_epoch": 0,
+        "full_parameters": [
+          {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.07050000000000001,
+        "timing_high": -0.07050000000000001,
+        "timing_error": 0.07050000000000001,
+        "amplitude_residual": 0.0
+      },
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/7",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/6",
+        "begin": 7.409,
+        "model_revision": "2585c65609aa6f4c3be01c1266b88c3e120905a34cbcc747c1bf3a3b950f4482",
+        "model_epoch": 1,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      },
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/12",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/11",
+        "begin": 7.7715,
+        "model_revision": "7b9a2d9061a487eef5968b3c059ab522866690778aea3f4ad3cf410185006c8e",
+        "model_epoch": 2,
+        "full_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.08000000000000007,
+        "timing_high": -0.08000000000000007,
+        "timing_error": 0.08000000000000007,
+        "amplitude_residual": 0.0012075915512699265
+      },
+      {
+        "trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/16",
+        "anchor_trial_id": "Branch_2000_N1_finite_ranking_zero_sync/automatic/session/2/search/15",
+        "begin": 8.1335,
+        "model_revision": "ca6ed68e776e7f49df1e49ec0a9afc19726719f2fec76fd3a669ede889ccc534",
+        "model_epoch": 3,
+        "full_parameters": [
+          {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "timing_low": -0.06099999999999994,
+        "timing_high": -0.06099999999999994,
+        "timing_error": 0.06099999999999994,
+        "amplitude_residual": -0.000581394627834797
+      }
+    ],
+    "training_completed": false,
+    "certificate_present": false,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  }
+}
