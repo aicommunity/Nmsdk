@@ -4,6 +4,20 @@
 исправление реализовано в отдельной ветке, серверная проверка ещё требуется.
 Отрицательный научный результат отсюда не следует.
 
+Normal A1 root420befe14 выявил чрезмерные ожидания нового теста. В 2000 Гц
+между двумя exports различались transient buffers отдельных image instances:
+InputFeedbackSignal 0×0 → 1×1 с нулём. После native Load/Init пересчитывался
+производный NPulseChannel.TimeConstant, соответствующий индивидуальной C.
+Это не остаток StepDuration и не обещанный dynamic checkpoint. Исходные
+failed assertions и witness packages сохраняются. Проверка уточнена:
+полный snapshot живого графа до/после изменения только counters должен быть
+побайтно одинаковым; storage closure должна иметь одинаковую полную semantic
+identity; legacy import — сохранять все параметры/связи и иметь нулевую
+StepDuration в новом export. После import полный native XML может отличаться
+пересчитанными производными State. Fresh-process waveform проверяется отдельно.
+Другие transient image buffers этим изменением не канонизируются. Очередь
+ASan для прежнего420befe14 отменена; действующий C2 не прерывался.
+
 PulseLib `dc7edb2384633d4a1ce65bb40d2f5c8927482896` нормализует только
 `State/StepDuration` приватной native XML-копии. Проверяет соответствие реальному
 графу, scalar/type layout и полноту дочерних компонентов; живые значения не
