@@ -315,6 +315,7 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     const std::map<std::string,double> scales{{"Dendrite1_2",1.1}};
     EXPECT_EQ(rig.learner->ApplyNativeCapacitanceScale(baseline,scales,.1).status,NativeEditStatus::Rejected);
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
+    ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
     const auto first=rig.learner->ApplyNativeCapacitanceScale(decoded,scales,.1);
     ASSERT_EQ(first.status,NativeEditStatus::Applied)<<first.reason;
     EXPECT_NE(first.beforeRevision,first.afterRevision);EXPECT_EQ(first.beforeRevision,original);
@@ -330,6 +331,7 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     EXPECT_DOUBLE_EQ(clone->template GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true)->Capacity.GetData(),cInh*1.1);
     clone->BreakLinks();clone->GetStorage()->ReturnObject(clone);clone=0;
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
+    ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
     for(const double scale:{std::numeric_limits<double>::quiet_NaN(),std::numeric_limits<double>::infinity(),1.2,1.e-12})
     {
         const auto rejected=rig.learner->ApplyNativeCapacitanceScale(baseline,{{"Dendrite1_2",scale}},scale==1.e-12?1.:.1);
