@@ -45,3 +45,22 @@ Reader tests требуют `TIMELEARNER_LEGACY_REPLAY_DIR` (каталог resu
 завершённого replay). Они проверяют реальные четыре inputs/outputs/receipts,
 а также отказ до создания output при повреждении stored/raw hash, дублировании
 case ID, неизвестной/boolean schema и попытке перезаписи существующих данных.
+
+## Подтверждённый подэтап
+
+На обоих workers4/4 native replay и5/5 independent reader tests, без skip.
+Normal primary `f6a975f0aab5113f86855a26f170cb0060f21ea6`:88 members,
+274,649 bytes. ASan primary `1c7ee355b13323b43594eeef36e6bf37dba355a6`:
+88 members,287,604 bytes. После Git fetch локально проверены outer SHA256SUMS,
+hash каждого архива и всех members. ASan loaded-file capture содержит libasan.
+Первый publication preflight ошибочно ожидал source_closure.root.commit вместо
+штатного root.head; failed-closed попытка сохранена в primary. Модели не
+перезапускались из-за ошибки упаковки.
+
+Существенное ограничение: штатный FreshProcessImport предъявляет **active
+input0**. Проверяется весь его CSV и все записанные soma channels, но не все
+входы, target/foil матрица или legacy training dispatcher. Импорт заново
+проверяет сохранённый сертификат по всем embedded reference/final packets;
+это не новое физическое измерение всех входов. Остальные входы/recognition,
+другие архивы/частоты/профили и public diagnostic evaluation остаются в плане.
+Августовские4/8–6/8 этими CI случаями не переоцениваются.
