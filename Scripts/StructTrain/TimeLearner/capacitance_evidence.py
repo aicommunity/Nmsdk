@@ -64,7 +64,16 @@ def _images(definitions):
                 and snapshot['native_xml_sha256'] == hashlib.sha256(snapshot['native_xml'].encode()).hexdigest(),
                 'invalid_capacitance_image_snapshot')
         nodes = _nodes(model)
-        expected = {n['class'] for n in nodes.values()} - {d['name']}
+        # Match ModelArchive::Classes: structural selectors govern future
+        # growth even when no instance of the selected class exists yet.
+        expected = {n['class'] for n in nodes.values()}
+        for node in nodes.values():
+            for name, parameter in node['parameters'].items():
+                data = parameter['data']
+                if name.endswith('ClassName') and data['type'] == 'utf8':
+                    require(type(data['value']) is str, 'invalid_capacitance_class_selector')
+                    if data['value']: expected.add(data['value'])
+        expected.discard(d['name'])
         if d['base_class']: expected.add(d['base_class'])
         require(type(d['dependencies']) is list and all(type(x) is str for x in d['dependencies'])
                 and len(set(d['dependencies'])) == len(d['dependencies']) and set(d['dependencies']) == expected

@@ -82,6 +82,22 @@ class CapacitanceEvidenceTest(unittest.TestCase):
     def test_missing_image_dependency(self):
         self.reject(lambda p, s, b: b['storage_images'].pop())
 
+    def test_missing_growth_selector_dependency(self):
+        def remove(package, state, baseline):
+            for definition in baseline['storage_images']:
+                nodes = definition['snapshot']['identity']['model']['nodes']
+                instantiated = {node['class'] for node in nodes}
+                for node in nodes:
+                    for name, parameter in node['parameters'].items():
+                        data = parameter['data']
+                        if name.endswith('ClassName') and data['type'] == 'utf8':
+                            selected = data['value']
+                            if selected and selected not in instantiated and selected != definition['base_class']:
+                                definition['dependencies'].remove(selected)
+                                return
+            self.fail('real profile must exercise a growth-only class dependency')
+        self.reject(remove)
+
     def test_invented_new_channel_origin(self):
         self.reject(lambda p, s, b: b['channel_origins'].__setitem__('Dendrite1_2.ExcChannel', 'storage_image'))
 
