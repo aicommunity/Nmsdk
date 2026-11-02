@@ -2,13 +2,35 @@
 
 ## Принятые source/archive исправления, 03.11
 
+Последующее обновление parser-кандидата: cold normal26/readers7 и
+ASan26/readers7 завершены,26 входов и26 JSON observations совпали побайтно.
+Integrated ASan A3 воспроизвёл stale high output после invalid reload при
+2000 и20000 Гц. Исправление Pulse
+`6a60f5c63c23a8f0645480408a5f60b64ed85957` остановило генераторы штатным Reset
+в ветке отказа parser; это пока кандидат, не принятый runtime-результат.
+[Подробности и отрицательные setup evidence](DatasetFileValidation.ru.md).
+
+Следующие B1 gates53 поставлены последовательно за завершением и публикацией
+baseline; до этого source/build/runtime не меняются:
+
+- Elder `/home/user/timelearner-refactor/readbacks/s03-dataset-file-integrated-normal-b1`,
+  owner148337/start_ticks323006824, publisher148338.
+- M40 `/media/user/Data/TimeLearnerRefactor/readbacks/s03-dataset-file-integrated-asan-b1`,
+  owner2427985/start_ticks273549647, publisher2427986.
+
+Оба запрашивают root `b05a098893e7e0cb50c89bdcacf2718d974078d3`, Pulse6a60f5c,
+Rdk a62393f7, Bin14a88195 и отдельный B1 runtime. Предшественники:
+Elder integrated normal A2 и M40 integrated ASan A3. B1 сначала проверяет
+сохранённые primary и закрытие владельцев, затем выполняет checkout/build.
+Ожидаются53 native и17 reader controls; положительный результат не назначен.
+
 Root develop merge `b71f14a694426fe23af993bf9ab48f2399480789` опубликован с
 Pulse develop merge `8b41ffe4c438b188ef83406cfda1b616e2f3b199`; Rdk a62393f7 и
 Bin14a88195 сохранены. Все202 expanded regression cases и8 reader checks
 пройдены, primary полностью проверены. [Scope приёмки](SourceArchiveAcceptance-2026-11-03.ru.md).
-Strict parser остаётся отдельным кандидатом: cold ASan26 PASS; normal counterpart
-выполняется на Elder. На M40 запущен integrated gate53:26 cold,2 active corrupt
-reload/recovery и25 source clock/lifecycle/dispatch. Научная классификация и
+Strict parser остаётся отдельным кандидатом: cold normal/ASan26 PASS. Integrated
+gate53:26 cold,2 active corrupt reload/recovery и25 source clock/lifecycle/
+dispatch. Научная классификация и
 полное завершение исходного плана этим не объявляются.
 
 ## Последний подтверждённый срез 03.11: source25 и archive20 ASan завершены
