@@ -28,4 +28,12 @@ Git snapshot. Упоминания в старых отчётах остаютс
 `migration.verify_migration` на обоих workers: все48 записей, включая прежние
 44, проверяются по Git trees, точным blob/content hash и отсутствию old paths.
 Отдельный Git fixture возвращает один удалённый файл в новое дерево;
-положительная квитанция для него запрещена. Проверки пока ожидаются.
+положительная квитанция для него запрещена. Проверки завершены на обоих workers; это metadata-only проверка, не ASan/numerical acceptance.
+
+Elder proof `3c631ed1ab1616aa12e004a83151e83c933f9357`, M40 proof
+`841790f474d1cc22c2acadcf51cf5f3b6255b09a`: по48 verified records и
+одному отклонённому restored-path fixture. Все9 members каждого metadata
+archive и bundle hashes проверены локально; архивы7572/7580 bytes. Точные
+исходники численных заданий остались прежними: source-context before/after
+совпали. Скрипты истории не исполнялись; current root tree не хранит wrappers.
+Архивные snapshots не являются closure экспериментальных результатов.

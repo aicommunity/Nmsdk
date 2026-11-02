@@ -295,3 +295,9 @@ Bin feature fd54fda объединена в develop merge commit
 14a88195a8a5538d3a2f5c0657981488e38829b7; root записывает этот gitlink.
 Шесть Phase12 shell scripts отсутствуют, wrappers не оставлены. Полный этап9
 открыт: прочие активные tools и исторические исполняемые файлы ещё требуют миграции.
+
+Дополнение: четыре исторических Docs Python tools удалены с проверкой на
+обоих workers. В production migration manifest теперь46 retired и2 moved
+records; все48 проверены по точным Git trees/content hashes и restored-path
+negative fixture. [Источники, ограничения и proofs](DocsPythonRetirement.ru.md).
+Полный перенос активного анализа и остальных исторических скриптов не завершён.
