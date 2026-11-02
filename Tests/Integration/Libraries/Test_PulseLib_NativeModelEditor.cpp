@@ -315,7 +315,10 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     EXPECT_DOUBLE_EQ(baseline["channels"].toObject()["LTMembrane.ExcChannel"].toDouble(),cLt);
     const std::map<std::string,double> scales{{"Dendrite1_2",1.1}};
     EXPECT_EQ(rig.learner->ApplyNativeCapacitanceScale(baseline,scales,.1).status,NativeEditStatus::Rejected);
-    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
+    std::vector<std::vector<double>> beforeWave,afterWave;std::vector<double> beforeInput,afterInput;
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true,false,
+        [&](const NativeProbeSample& sample){beforeWave.push_back(sample.potentials);beforeInput.push_back(sample.stimulus);}).status,
+        NativeProbeStatus::Completed);
     ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
     const auto first=rig.learner->ApplyNativeCapacitanceScale(decoded,scales,.1);
     ASSERT_EQ(first.status,NativeEditStatus::Applied)<<first.reason;
@@ -332,8 +335,22 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     EXPECT_DOUBLE_EQ(clone->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true)->Capacity.GetData(),cExc*1.1);
     EXPECT_DOUBLE_EQ(clone->template GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true)->Capacity.GetData(),cInh*1.1);
     clone->BreakLinks();clone->GetStorage()->ReturnObject(clone);clone=0;
-    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true,false,
+        [&](const NativeProbeSample& sample){afterWave.push_back(sample.potentials);afterInput.push_back(sample.stimulus);}).status,
+        NativeProbeStatus::Completed);
     ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
+    ASSERT_FALSE(beforeWave.empty());ASSERT_EQ(beforeWave.size(),afterWave.size());EXPECT_EQ(beforeInput,afterInput);
+    double maximumWaveformChange=0.;
+    for(std::size_t row=0;row<beforeWave.size();++row)
+    {
+        ASSERT_EQ(beforeWave[row].size(),afterWave[row].size());ASSERT_EQ(beforeWave[row].size(),branch?1u:2u);
+        for(std::size_t channel=0;channel<beforeWave[row].size();++channel)
+        {
+            ASSERT_TRUE(std::isfinite(beforeWave[row][channel]) && std::isfinite(afterWave[row][channel]));
+            maximumWaveformChange=std::max(maximumWaveformChange,std::fabs(beforeWave[row][channel]-afterWave[row][channel]));
+        }
+    }
+    EXPECT_GT(maximumWaveformChange,0.)<<"Changing effective C must change the actual soma response to identical input samples";
     for(const double scale:{std::numeric_limits<double>::quiet_NaN(),std::numeric_limits<double>::infinity(),1.2,1.e-12})
     {
         const auto rejected=rig.learner->ApplyNativeCapacitanceScale(baseline,{{"Dendrite1_2",scale}},scale==1.e-12?1.:.1);
@@ -362,6 +379,7 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     QJsonObject receipt{{"baseline",baseline},{"applied",first.appliedChannels},
         {"before",QString::fromStdString(original)},{"after",QString::fromStdString(edited)},
         {"grown",QString::fromStdString(grown)},{"branch",branch},{"normalization",normalization},
+        {"maximum_waveform_change",maximumWaveformChange},
         {"unknown_baseline_reason",QString::fromStdString(unknown.reason)}};
     Artifact(rig.name+"_capacitance_edit.json",QJsonDocument(receipt).toJson());
 }
