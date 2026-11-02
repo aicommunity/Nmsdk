@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_acceptance_python_regression_evidence",
+  "worker": "M40 (Python, not a new native ASan run)",
+  "reader": "a8eaf77e4262c8807c6a7b86af4f8c6a14d3b778",
+  "completed_tests": 60,
+  "failures": 0,
+  "errors": 0,
+  "skipped_classes": [
+    [
+      "setUpClass (Scripts.StructTrain.TimeLearner.tests.test_live_pipeline_n0_worker.N0LivePipelineWorkerTest)",
+      "requires real production live Train corpus"
+    ]
+  ],
+  "config_corpus": {
+    "Bin_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+    "project_ini_count": 1599,
+    "scope": "Every Project.ini in Configs/SpikeSamples/StructTrain extracted from exact Git blobs; all roundtrip bytes unchanged. Paths/blob/SHA manifest included; raw corpus remains obtainable from referenced Bin commit."
+  },
+  "prior_attempts": {
+    "a1": "unittest discover does not import this namespace package; no test ran",
+    "a2": "122 explicit modules: 72 tests, one corpus failure, 13 missing external-fixture environment errors, 109 skipped classes. Retained; not a passing suite."
+  },
+  "limits": [
+    "60 executed tests pass; external N0 production corpus class skipped.",
+    "Not complete acceptance of all122 artifact-dependent modules.",
+    "A declared fixture/acceptance suite inventory is still required for full stage9/10; no monkeypatch or relaxed assertions used."
+  ],
+  "archive_sha256": "f9c8af8b3fcc844232f7c24de3a85d5e4c92080f5f7373ce161dc1f12d7cd113",
+  "archive_bytes": 71211,
+  "members": {
+    "acceptance-python-regression-a1/owner.json": "58d5568b48d3a12ab8b4f79a29cb34482a57c5ef46bb87094c40a96c4f0d5b25",
+    "acceptance-python-regression-a1/reader.py": "b016cbb97ce739ec1a4f9701107b32daaa203b8c64d0c707adb36474a1dcf7f4",
+    "acceptance-python-regression-a1/stderr.log": "b3e5d51f9fdf99495010a77db17d9497041807204b9ec314e31efefd2f6a5070",
+    "acceptance-python-regression-a1/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "acceptance-python-regression-a2/owner.json": "1e10e79ad372c957485886d5fc5caf53f71fa97f59fd1c2b89188c340925d294",
+    "acceptance-python-regression-a2/reader.py": "755a1b844e10c30a3482653e0d170c0858db6f02fc8e2c464a0e6b2ab249e476",
+    "acceptance-python-regression-a2/result.json": "4b37ffc9f1dc2c2e4e5aadca5740982a025ad5acb4c08a0015f2fa7c5b9897a5",
+    "acceptance-python-regression-a2/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "acceptance-python-regression-a2/stdout.log": "385908e008101edcb1deaaefcc28518bbea12d1d1219910b9dac257e65abbe9d",
+    "acceptance-python-regression-a2/unittest.log": "f3da6638c1adafddf05903ab20693a10f210681ea9c358f5ae634bb5858c2344",
+    "acceptance-python-unit-a2/corpus-manifest.json": "6a666aca6877d78c1c0647f325b85ea52ed12443db99e702d1e95febf7b4eea9",
+    "acceptance-python-unit-a2/owner.json": "fc9e8b362b250fbed53ec2653bee542d3de718275f33051ec0d2927513319f0f",
+    "acceptance-python-unit-a2/reader.py": "ab3bf76473191f9ca9f694e03df7149ab0ef988e81598fe1a7e29f5a5e790fd5",
+    "acceptance-python-unit-a2/result.json": "26baff77cb6b172171e0ea297f5e095ba75b569d2e642e44918bc0f40fa9be66",
+    "acceptance-python-unit-a2/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "acceptance-python-unit-a2/stdout.log": "d3e35a42a5ad8f082b64bbdc50d000d9caddee283a0af8075a2492c61d678569",
+    "acceptance-python-unit-a2/unittest.log": "e5085eb866988726f7a204a5d81d3e5065c7a6f8ed3da5e1f3a5e9c5f1c960d8"
+  },
+  "scientific_verdict": null
+}
