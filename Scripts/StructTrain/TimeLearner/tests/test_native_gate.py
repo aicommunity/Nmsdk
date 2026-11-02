@@ -7,7 +7,7 @@ import unittest
 from xml.etree import ElementTree as ET
 
 from ..native_evidence import EvidenceError
-from ..native_gate import _environment, audit_junit
+from ..native_gate import _environment, audit_junit, supported_specification
 
 
 class NativeGateJUnitTest(unittest.TestCase):
@@ -35,6 +35,20 @@ class NativeGateJUnitTest(unittest.TestCase):
         result = audit_junit(self.path, self.expected)
         self.assertEqual(result, audit_junit(self.path, list(reversed(self.expected))))
         self.assertEqual(result["observed"], len(self.expected))
+
+    def test_actual_contract_and_explicit_capture_versions(self):
+        original = json.loads((self.root/"specification.json").read_text())
+        self.assertTrue(supported_specification(original))
+        legacy = dict(original, schema_version=1)
+        legacy.pop("cooperative_runtime_capture", None)
+        self.assertTrue(supported_specification(legacy))
+        cooperative = dict(legacy, schema_version=2, cooperative_runtime_capture=True)
+        self.assertTrue(supported_specification(cooperative))
+        for change in ({"schema_version": True}, {"schema_version": 3},
+                       {"cooperative_runtime_capture": 1}, {"cooperative_runtime_capture": "true"},
+                       {"cooperative_runtime_capture": False}, {"unknown_capture_option": True}):
+            self.assertFalse(supported_specification(dict(cooperative, **change)))
+        self.assertFalse(supported_specification(dict(legacy, cooperative_runtime_capture=True)))
 
     def test_missing_or_duplicate_identity_is_rejected(self):
         for duplicate in (False, True):
