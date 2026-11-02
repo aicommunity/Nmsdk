@@ -1,5 +1,21 @@
 # История и уровень доказательности
 
+## Актуальность проверок completed-boundary
+
+Восемь transport/recognition/calibration/PostTune tests на rootd8bf не дошли
+до downstream assertions: default0.02 Train завершился maximum_sweeps_exhausted
+без completed certificate. Контроль на неизменном runtime rootf683 дал те же
+восемь failures;112 CSV byte-equal и112 packets полностью equal. Evidence
+f0af7f4a3629e6cf6e60fe2225c86952fd9800c7 сохранён с обеими source/runtime
+closures, JUnit, первичными данными и первоначальным alias-guard отказом.
+Это подтверждённая прежняя проблема предпосылок fixtures для этих условий,
+а не доказательство исправности downstream-путей или всех алгоритмов.
+
+Новые named explicit0.2 controls используют ранее существовавшую положительную
+математическую постановку. Их результат необходимо хранить отдельно от
+default0.02 cold Train, historical saved-state replay и independent evaluation.
+См. [точные ограничения постановки](CompletedBoundaryFixtures.ru.md).
+
 ## Август
 
 Визуально подтверждённые 4/8, 5/8 и 6/8 сохраняются как валидные наблюдения

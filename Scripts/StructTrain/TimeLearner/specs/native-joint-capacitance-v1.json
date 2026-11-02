@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 1,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "NativeOperationDiagnostics/BuildPreservesTrueAndReportsSubtreeFailure",
+    "NativeOperationDiagnostics/ResetPreservesTrueAndReportsSubtreeFailure",
+    "NativeOperationDiagnostics/CalculateFailureCensorsTheActualNativeObservation",
+    "NativeJointCapacitance/ClassicN0",
+    "NativeJointCapacitance/BranchN0",
+    "NativeJointCapacitance/ClassicN1",
+    "NativeJointCapacitance/BranchN1",
+    "NativeJointCapacitance/ClassicRollback",
+    "NativeJointCapacitance/BranchRollback",
+    "NativeCapacitanceEdit/ClassicN0At2000",
+    "NativeCapacitanceEdit/ClassicN1At2000",
+    "NativeCapacitanceEdit/BranchN0At2000",
+    "NativeCapacitanceEdit/BranchN1At2000"
+  ],
+  "maximum_wall_seconds": 7200,
+  "asan_options": "detect_leaks=0"
+}
