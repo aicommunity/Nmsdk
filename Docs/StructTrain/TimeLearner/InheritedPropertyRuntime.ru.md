@@ -127,3 +127,23 @@ Elder corpus на двух машинах; слово asan в пути M40 не 
 вершины теперь различима. Подробности: `InheritedPropertyCorrectedVisualQA.json`.
 Полный cache2651 PNG остаётся на M40; целиком вручную не принимался.
 ASan native16 и общая приёмка наследуемых свойств/Rdk feature ещё открыты.
+
+
+## Подтверждение ASan и граница объединения (2026-11-02)
+
+Закрыт исходный ASan native16:16/16, Math6/6, reader7/7.
+Primary `b127bb3d7ab903ab97cd908b540f753711e5c5b4`:279 members,
+444144 bytes; проверены archive/member SHA256 и terminal/JUnit closure.
+Все48 positive waveform совпадают с normal по input и потенциалам
+в сравнительном допуске1e-12;72 trial-soma pairs. Подробные остатки
+в `InheritedPropertyNormalAsanComparison.json`. Это сравнение не заменяет
+визуальную приёмку всех ASan-графиков и не означает научную классификацию.
+Проверенная специализация MVector3 объединена в Rdk develop merge
+`eda206b6b35de451ae837473d731ba20e7c30bde`; tree
+`65bd007a4512283d1635131cb93699f21cdd7b3d` совпадает с реально испытанным
+`b34223ef113ca60a817589995205de06af77543a`.
+Объединяется проверенный ограниченный набор Activity/local-frequency,
+его реальные probe fixtures и отчётность; не весь этап4. Полная проверка
+inherited/connected/XML/Copy/reuse, неоднородных storage, growth,
+физических профилей и продолжения обученной модели остаётся открытой.
+Wall-clock execution policy имеет отдельную ветку и отдельную приёмку.
