@@ -2,6 +2,31 @@
 
 ## Текущая работа: storage-bound C₀
 
+Серверный запуск нового среза: root
+`c6345fa6d2121625e93ec3d26433786fcc85cccc`, PulseLib
+`cc1eb71c8a4be8b2241c2b9a870ac4b533e01a51`. Elder build завершён,
+9/9 unit PASS. На момент readback новые cases: 4/4 при 2000 Гц и
+Classic N0 при 20000 Гц PASS; остальные native cases ещё выполняются.
+Общий gate 21 пока не закрыт и не заменяет ASan-проверку.
+
+Активные/ожидающие readbacks на Elder (префикс
+`/home/user/timelearner-refactor/readbacks/`):
+
+- `s07-bound-capacitance-normal-a1`: supervisor PID 4065102,
+  start ticks 320989028; 9 unit и 21 native.
+- `s07-bound-capacitance-publication-normal-a1`: PID 4067107,
+  ticks 321000497; ждёт закрытия owner и публикует primary через Git.
+- `s05-bound-capacitance-transport-normal-a1`: PID 4074659,
+  ticks 321053640; ждёт успешного предыдущего gate, затем запускает
+  все восемь explicit sync=0.2 transport controls на том же runtime.
+- `s05-bound-capacitance-transport-publication-normal-a1`: PID 4075041,
+  ticks 321056785; ждёт transport, сохраняет новые байты и точные Git-ссылки
+  на одинаковые primary исходного `c17f7f61…`, без повторного копирования.
+
+Пути source/build/runtime не менять до закрытия всех их owners. PID сверять
+со start ticks; timeout подключения не считать завершением процесса.
+Результаты публикации и их member hashes ещё предстоит проверить локально.
+
 Добавлены schema 2 baseline, проверяемое происхождение новых C₀ при росте
 и отдельное сохраняемое состояние поправок ёмкости. Новые восемь fixtures
 ещё требуют серверного запуска; старые PASS не подтверждают новый код.
