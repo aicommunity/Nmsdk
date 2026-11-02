@@ -6,8 +6,12 @@
 ASan26/readers7 завершены,26 входов и26 JSON observations совпали побайтно.
 Integrated ASan A3 воспроизвёл stale high output после invalid reload при
 2000 и20000 Гц. Исправление Pulse
-`6a60f5c63c23a8f0645480408a5f60b64ed85957` остановило генераторы штатным Reset
-в ветке отказа parser; это пока кандидат, не принятый runtime-результат.
+`6a60f5c63c23a8f0645480408a5f60b64ed85957` останавливает генераторы штатным Reset
+в ветке отказа parser. Normal B1 завершён:53/53 native и17 readers PASS,
+evidence `5c94d5490be958145989c5d019015c6acd0ccd51`,261 members проверены.
+Все83 соседних CSV неизменны; изменены только3 invalid-phase input samples
+на каждой частоте. ASan B1 ещё ожидает закрытия ASan baseline; в develop
+parser-кандидат до его проверки не принят.
 [Подробности и отрицательные setup evidence](DatasetFileValidation.ru.md).
 
 Следующие B1 gates53 поставлены последовательно за завершением и публикацией
@@ -22,7 +26,10 @@ baseline; до этого source/build/runtime не меняются:
 Rdk a62393f7, Bin14a88195 и отдельный B1 runtime. Предшественники:
 Elder integrated normal A2 и M40 integrated ASan A3. B1 сначала проверяет
 сохранённые primary и закрытие владельцев, затем выполняет checkout/build.
-Ожидаются53 native и17 reader controls; положительный результат не назначен.
+Normal B1 уже завершён, его lease закрыт; ASan B1 остаётся ожидающим. На Elder
+после проверки положительного B1 запущен отдельный capacitance-owner baseline8
+на принятом Core8b41, rootc0bfedffc. Это новые tests состояния, не C-trim search.
+Source/build Elder снова leased этим заданием; не переключать их вручную.
 
 Root develop merge `b71f14a694426fe23af993bf9ab48f2399480789` опубликован с
 Pulse develop merge `8b41ffe4c438b188ef83406cfda1b616e2f3b199`; Rdk a62393f7 и
