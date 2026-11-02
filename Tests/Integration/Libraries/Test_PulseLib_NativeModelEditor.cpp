@@ -1579,7 +1579,7 @@ TEST(NativeLearnedState,FreshProcessImport)
             {"probe",EncodeNativeProbeEvidence(*probe)},{"need",target->IsNeedToTrain.GetData()}};
         if(package["schema_version"]==QJsonValue(2))
         {
-            EXPECT_EQ(target->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+            EXPECT_EQ(target->ImportedNativeCapacitanceState(),package["capacitance_state"].toObject());
             record["capacitance_state"]=target->ImportedNativeCapacitanceState();
         }
         QFile json(QString::fromLocal8Bit(output));ASSERT_TRUE(json.open(QIODevice::WriteOnly|QIODevice::NewOnly));
@@ -2802,7 +2802,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     ASSERT_TRUE(test->NativeModelEditFailure().empty())<<test->NativeModelEditFailure();
     if(withCapacitance)
     {
-        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"].toObject());
         EXPECT_EQ(test->ExportNativeLearnedState(implementation)["capacitance_state"],package["capacitance_state"]);
     }
     if(n0Repeats>1)RepeatedBoundarySummary(test->NativeTrainingController(),original,parameters,rig.name+"_imported_summary.json");
@@ -2904,7 +2904,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         auto scales=correction["membrane_scales"].toObject();scales["Dendrite1_2"]=1.2;
         correction["membrane_scales"]=scales;corrupted["capacitance_state"]=resign(correction);
         rejectWithoutMutation(resign(corrupted));
-        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"].toObject());
     }
     corrupted=package;auto claim=corrupted["certificate"].toObject();claim["exact"]=!claim["exact"].toBool();corrupted["certificate"]=claim;
     rejectWithoutMutation(resign(corrupted));
@@ -3514,7 +3514,7 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
     if(withCapacitance)
     {
-        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"].toObject());
         EXPECT_EQ(test->ExportNativeLearnedState(implementation)["capacitance_state"],package["capacitance_state"]);
     }
     const auto& restored=test->NativeTrainingController();ASSERT_FALSE(restored.Certificate());
