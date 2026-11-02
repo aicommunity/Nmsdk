@@ -1,5 +1,31 @@
 # C-trim: физический baseline и правка ёмкостей
 
+## Актуальный checkpoint после восстановления VPN
+
+Elder standalone gate завершён: 8/8, 32 raw probes проверены, 8 сравнений
+ответа при одинаковых входах подтверждают ненулевое изменение сомы. Evidence
+5acd3eebbf2c812a5e04e07bd0a14f88eb2ea4fb. На M40 ASan gate ещё выполняется.
+Temporal cache на M40 завершён: 8 cases, 32 trials, 48 trial/soma pairs,
+1787 PNG, 5545 hash-проверенных файлов. Ручной просмотр выбранных рисунков
+ещё требуется. Это диагностические traces с ambiguous peaks, не сходимость.
+
+Совместный editor L/Ns/Rs/C (Pulse9694ae3) проверяет Rs domain после новой C.
+Первый Elder gate numerical root722c978: 8/10; оба fault rollback теста
+не прошли (получен Applied). Отрицательная попытка сохранена в evidence
+7364e82e219b1a63b6fa6f598dc7876dc2e59b02 вместе с runtime, build и raw data.
+Её нельзя считать проверкой работающего отката.
+
+Source audit: BeforeReset/BeforeCalculate вызывают соответствующие A-hooks;
+ни UComponent/UItem, ни NPulseNeuron их не перекрывают. UContainer ловит
+исключения и возвращает штатный bool. Для отделения этого механизма от
+ошибки fault injection новые тесты фиксируют факт hook и фактическую C.
+Rdk добавляет специализированный process-local operation ledger, сохраняя
+bool и порядок lifecycle. Native Init/Reset, probe и recognition проверяют
+новые ошибки после marker. Новые 12 integration cases и Rdk unit suite ещё
+должны быть собраны и выполнены на серверах. Develop остаётся прежним.
+
+Ниже сохранены предыдущие checkpoints; сведения о живых jobs в них исторические.
+
 Новая feature от developf1708eb97bc3b412c101dffc468221af2bc87e59.
 Pulse исходная точкаa18c8a1097a221e5aca3bfc2c1afc07fb2534a56.
 Первая implementation4239b807c37311fe91ca3aae322aab7445795aec.
