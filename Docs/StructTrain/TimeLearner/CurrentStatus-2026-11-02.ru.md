@@ -8,6 +8,11 @@ retention проверенного импортированного baseline и 
 Предыдущий root `c6345fa6d2121625e93ec3d26433786fcc85cccc` на Elder завершил
 21/21 native и 9/9 unit без ошибок; evidence опубликован в
 `26fbfc17dfe717e0f8ae1f2e7b099adcf468f0aa` и требует локальной проверки hashes.
+Последующая локальная проверка выполнена: SHA архива и всех 349 members
+совпали; сохранены 61 probe packet и восемь bound C₀ states. Архив занимает
+1 762 278 байт. Evidence объединён через merge commit
+`39cdc257b3760b7baf28fd052170477046924188`. Это normal-проверка указанного
+Core cc1eb71, не проверка следующего schema-2 transfer Core 922ba91.
 Все восемь новых baseline/growth cases прошли, включая 20000 Гц.
 Дальнейшие прежние readbacks ниже сохранены как промежуточные снимки.
 
