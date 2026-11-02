@@ -9,6 +9,7 @@ from Scripts.StructTrain.TimeLearner.learned_evidence import audit_learned_state
 from Scripts.StructTrain.TimeLearner.stopped_evidence import audit_stopped_state, load_case as stopped_case
 from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError, load
+from Scripts.StructTrain.TimeLearner.recognition_owner_evidence import audit_owner_recognition, load_case as owner_case
 
 
 def resign(value):
@@ -24,8 +25,11 @@ class CapacitanceEvidenceTest(unittest.TestCase):
         cls.completed = [(p, load(p)) for p in sorted(root.glob('*_learned_state.json'))]
         cls.stopped = [(p, load(p)) for p in sorted(root.glob('*_stopped_state.json'))]
         cls.cases = [(p, v) for p, v in cls.completed+cls.stopped if v['schema_version'] == 2]
+        cls.recognition = [p for p in sorted(root.glob('*_owner_recognition_state.json'))
+                           if load(p)['source_solo']['schema_version'] == 2]
         if len(cls.cases) != 8 or sum(v['kind'] == 'timelearner_completed_state' for _, v in cls.cases) != 6:
             raise RuntimeError('requires six completed and two stopped native C0 controls')
+        if len(cls.recognition) != 2: raise RuntimeError('requires identity and scaled C0 recognition controls')
 
     def test_actual_primary_readers_and_bound_C0(self):
         for path, package in self.cases:
@@ -41,6 +45,13 @@ class CapacitanceEvidenceTest(unittest.TestCase):
         legacy = [v for _, v in self.completed+self.stopped if v['schema_version'] == 1]
         self.assertGreaterEqual(len(legacy), 2)
         for package in legacy: self.assertIsNone(audit_package_capacitance(package))
+
+    def test_actual_recognition_preserves_source_C0(self):
+        for path in self.recognition:
+            with self.subTest(path=path.name):
+                result = audit_owner_recognition(*owner_case(path))
+                self.assertTrue(result['owner_readback_consistent'])
+                self.assertIsNone(result['evaluation_verdict'])
 
     def reject(self, edit):
         for _, original in self.cases:
