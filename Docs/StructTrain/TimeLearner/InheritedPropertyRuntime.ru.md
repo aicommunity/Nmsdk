@@ -1,0 +1,149 @@
+# Inherited properties: незавершённая native runtime проверка
+
+Продолжение [source contracts](InheritedPropertyContracts.ru.md). В production
+`Test_PulseLib_StorageComponents` добавлены16 случаев `NativeInheritedProperties`:
+Classic/Branch ×N0/N1 ×2000/20000Hz ×Activity/reset и local-frequency rejection.
+Они используют существующий реальный EditingRig со storage/Environment/native
+model construction, а не копию функций Rdk. Контур вызывается через native
+probe API; это не полная матрица configured ControllerVersion1/2 Train.
+
+Activity cases проверяют runtime регистрацию всех девяти свойств и effective
+frequency/identity. До вмешательства и после него измеряются оба входа в штатной
+пачке. Между пробами штатными setters меняются диагностические пороги, debug
+mask и Coord; выключение Activity должно сбросить native probe control и
+выключить детей.32 глобальных ticks не должны менять физический rest baseline
+выключенной модели; нулевой rest не предполагается. После включения должны
+сохраниться индивидуальные параметры native графа, model revision и фактические
+soma/input waveforms обоих входов. MaxCalculationDuration остаётся отрицательным:
+этот тест не подтверждает режим с wall-driven пропуском детей.
+Здесь проверяется явно построенное начальное состояние с неодинаковыми L,
+а не результат проведённого Train. Continuation реально обученной модели
+и произвольные heterogeneous Rs/C требуют собственных runtime cases.
+
+Frequency cases изменяют локальную частоту реального генератора, сохраняя
+частоту owner. Проба должна быть отклонена как multirate до первого записанного
+sample; после восстановления частоты waveform и модель должны совпасть с
+baseline. Цель — исключить ошибочное принятие такой конфигурации в uniform V2
+контур, а не объявить поддержку multirate.
+
+Для waveform сравнения используются весь stimulus ряд и все soma channels;
+допуск потенциала1e-12 и относительного времени1e-11s проверяет повторение этого
+контроля и не заменяет исходные training tolerances. Научный verdict не создаётся.
+Серверная сборка/проверка, temporal reports и приёмка пока ожидаются.
+Connected inherited properties, XML/Copy/reuse, изменение глобальной частоты с
+пересборкой производных коэффициентов, raw Default и positive wall-limit
+режимы остаются вне этого подэтапа и открыты в полном плане.
+
+Первая серверная сборка bb3020192 на обоих workers остановилась до запуска
+моделей. Тест ошибочно вызывал protected SetTimeStep напрямую; теперь используется
+публичная TimeStep property со штатным setter. Отдельно компиляция native Coord
+диагностики подтвердила общий дефект Rdk MUIOStream: MVector<T,3> formatter/input
+ссылаются на несуществующие x/y/z вместо публичного operator()(index).
+Исправление у владельца Rdk b34223ef113ca60a817589995205de06af77543a сохраняет
+формат и precision caller; некорректный vector input теперь даёт failbit без
+частичной подстановки координат. Добавлены шесть отдельных production-header
+Math tests. Clean negative build на старом Rdk воспроизведён на обоих workers;
+root proofsa7b9ffd4f7e4747a0ab364a4aca178dcaa2086d6 и
+1b8c173aa8acf57ea5cade60c67baec39d9c2977: по33 verified primary members,
+7284/6972 compressed bytes. Positive сборки ожидаются.
+Это исправление стандартного vector stream, не MDMatrix XML writer и не
+изменение физики нейрона. Первые compilation failures сохраняются как setup
+ошибки, а не модельные или научные отрицательные результаты.
+
+Для полного временного отчёта объявлен immutable fixture contract
+`Scripts/StructTrain/TimeLearner/specs/inherited-properties-native-v1.json`:
+16 test IDs и56 конкретных JSON/CSV пар.48 положительных проб дают72
+trial-soma pairs; восемь намеренно отклонённых multirate проб не имеют
+наблюдаемого контекста и не должны получать выдуманные оси/нулевые кривые.
+Контракт не строится из surviving files. Generic native-test report adapter
+дополнен поддержкой nonempty standalone-only набора без искусственной training
+summary. Условия полного expected test/packet/CSV closure сохраняются;
+полностью пустой набор остаётся ошибкой. Семь reader checks на реальных
+артефактах, в том числе missing/duplicate/extra/NaN случаи, пока ожидаются.
+
+Positive attemptA3 на обоих workers собрал targets, затем выполнил5/6 Math
+cases успешно. Оставшийся test ошибочно предполагал standard token extraction
+для string при using namespace RDK; штатный SDK extractor сохранил ведущий
+пробел. Проверка остатка заменена явным std::getline с ожидаемым пробелом;
+Rdk string semantics не меняются. Native16 не запускались после failed Math
+gate. Следующая попытка должна сохранить A3 целиком и проверить6+16 заново.
+
+Текущая попытка A4: Math6/6 на обоих workers; native16 ещё выполняются.
+На Elder подтверждены первые11 cases, на M40 первые2. Отдельные reader jobs
+ожидают закрытый terminal16, затем копируют полный native corpus и исходный
+JUnit, сохраняют SHA256 и запускают7 проверок reader/inventory. Код анализа
+получается отдельным shallow filtered Git checkout; live source/build/runtime
+численного задания не меняются. Первый analysis setup остановлен по проверенной
+owned process group из-за неограниченного fetch и некорректной команды
+материализации путей; cancellation metadata сохранены. Это ошибка подготовки
+анализа, не результат численного теста. Приёмка и временные графики ещё ожидаются.
+
+Elder A4 завершён: Math6/6, native16/16 за1258.03s, reader7/7.
+Compact proof `cc7d8b66d1ee4552e6bff8cd2d49bba63507e0af`:279 archive members,
+439424 bytes. Все archive/bundle hashes проверены локально;233 файла reader
+побайтно привязаны к native corpus, включая исходный JUnit как native.xml.
+Оба процесса Math/native имеют actual loaded-file provenance. Независимая
+проверка первичных CSV сравнила24 waveform pairs до/после Activity либо
+локальной частоты: stimulus совпал, максимум расхождения потенциала0,
+относительного времени1.7763568394002505e-15s. Полные результаты записаны в
+`InheritedPropertyNormalGateValidation.json`. Это начальные модели, не Train
+continuation и не результат классификации.
+
+Те же семь reader checks на Elder corpus прошли на M40. Первый render
+остановился до графиков: системный Python не имел matplotlib; exception
+сохранён. Повторный render использует существующий plot-venv-a1, отдельный
+Git source анализа и компактный primary proof. Полный cache остаётся на M40
+Data; в Git предусмотрены report metadata и16 selected PNG для прямой
+проверки. ASan native16, завершённый render и визуальная приёмка ещё ожидаются.
+
+Полный normal temporal cache завершён:56 probes/72 trial-soma pairs,2651 PNG.
+Compact visual proof `e8ecd698cd00c4a4a7c696c6687be888f0bfc5c6`:519
+verified metadata members,411092 compressed bytes и16 selected PNG. Все
+16 изображений1920×960 прямо просмотрены.12 подходят для просмотра отклика;
+четыре zoom-001 на20000Hz охватывают только участок до первого импульса.
+Это дефект выбора selected views, не пропуск данных в полном отчёте: overview
+содержит оба импульса и отклик, а cache содержит все остальные zoom windows.
+`InheritedPropertyNormalVisualQA.json` фиксирует исключённые четыре окна.
+
+Общий helper `review_views.select_review_views` теперь выбирает overview,
+окно фактического первого импульса и первого отклика по native samples,
+сохраняя native scale. Это помощь просмотру, не измеренный training peak,
+спайк либо новое доказательство сходимости. Seven actual-cache tests
+и corrected selected figures ожидают серверной проверки по02833ffb4.
+Полная ручная приёмка2651 PNG и ASan native16 не заявляются.
+
+Исправленный отбор проверен на обоих workers по исходникам
+`12649b3a6f1da80d5898a6744ab7f7b35f47ac49`:7/7 checks,8 реальных
+вариантов,24 named anchors/20 unique views. Elder analysis proof
+`41a5cf04ff4394e3016c682df1d01d0d36ed3930`, M40 analysis proof
+`1edb1f403786c8266baf401cd64e239bfc000095`. Это один и тот же закрытый
+Elder corpus на двух машинах; слово asan в пути M40 не делает эту проверку
+доказательством ASan-native waveform.24 anchor records совпали семантически.
+
+Для20kHz выбраны actual-input zoom-003 и response zoom-007-detail,
+с явно подписанной local_detail шкалой Y; overview сохраняет общий масштаб.
+Все20 final PNG просмотрены:16 уже проверенных побайтно совпадающих
+изображений и4 дополнительно открытых local-detail рисунка. Кривая
+вершины теперь различима. Подробности: `InheritedPropertyCorrectedVisualQA.json`.
+Полный cache2651 PNG остаётся на M40; целиком вручную не принимался.
+ASan native16 и общая приёмка наследуемых свойств/Rdk feature ещё открыты.
+
+
+## Подтверждение ASan и граница объединения (2026-11-02)
+
+Закрыт исходный ASan native16:16/16, Math6/6, reader7/7.
+Primary `b127bb3d7ab903ab97cd908b540f753711e5c5b4`:279 members,
+444144 bytes; проверены archive/member SHA256 и terminal/JUnit closure.
+Все48 positive waveform совпадают с normal по input и потенциалам
+в сравнительном допуске1e-12;72 trial-soma pairs. Подробные остатки
+в `InheritedPropertyNormalAsanComparison.json`. Это сравнение не заменяет
+визуальную приёмку всех ASan-графиков и не означает научную классификацию.
+Проверенная специализация MVector3 объединена в Rdk develop merge
+`eda206b6b35de451ae837473d731ba20e7c30bde`; tree
+`65bd007a4512283d1635131cb93699f21cdd7b3d` совпадает с реально испытанным
+`b34223ef113ca60a817589995205de06af77543a`.
+Объединяется проверенный ограниченный набор Activity/local-frequency,
+его реальные probe fixtures и отчётность; не весь этап4. Полная проверка
+inherited/connected/XML/Copy/reuse, неоднородных storage, growth,
+физических профилей и продолжения обученной модели остаётся открытой.
+Wall-clock execution policy имеет отдельную ветку и отдельную приёмку.
