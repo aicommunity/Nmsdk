@@ -338,12 +338,12 @@ def measured_training_probe(packets, trial, input_id, origin_stimulus_id, select
     require(trial in packets, "missing_trial:" + trial)
     packet = packets[trial]
     observation = packet["observation"]
+    require(packet["native_status"] == "completed" and isinstance(observation, dict) and
+            observation["complete"] is True and observation["valid"] is True, "unusable_measurement")
     selection = observation["specification"].get("peak_selection", "isolated_window")
     require(selection in {"isolated_window", "assigned_burst_wave"}, "unknown_peak_selection")
     selections.add(selection)
     require(len(selections) == 1, "training_peak_selection_changed")
-    require(packet["native_status"] == "completed" and observation is not None and
-            observation["complete"] is True and observation["valid"] is True, "unusable_measurement")
     require(packet["prepared"]["input_id"] == input_id, "measured_input_mismatch")
     peaks = [p for p in observation["peaks"] if p["input_id"] == input_id]
     origins = [event for event in observation["stimuli"] if event["id"] == origin_stimulus_id]

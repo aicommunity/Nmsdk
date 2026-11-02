@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 
 from ..finite_ranking_evidence import load_case, audit_finite_timing_ranking
-from ..native_evidence import EvidenceError
+from ..native_evidence import EvidenceError, measured_training_probe
 
 
 class FiniteRankingEvidenceTest(unittest.TestCase):
@@ -59,3 +59,11 @@ class FiniteRankingEvidenceTest(unittest.TestCase):
         for _, case in self.cases():
             traces = dict(case[3]);traces.pop(next(iter(traces)))
             with self.assertRaises(EvidenceError):audit_finite_timing_ranking(*case[:3], traces)
+
+    def test_missing_measurement_has_a_structured_reason_before_field_access(self):
+        for _, case in self.cases():
+            candidate = case[1]["candidates"][0];packets = deepcopy(case[2])
+            packets[candidate["trial_id"]]["observation"] = None
+            with self.assertRaisesRegex(EvidenceError, "unusable_measurement"):
+                measured_training_probe(packets, candidate["trial_id"], case[0]["protocol"]["inputs"][0]["id"],
+                                        case[0]["protocol"]["origin_stimulus_id"], set())
