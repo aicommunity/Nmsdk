@@ -35,7 +35,9 @@ TEST(MVectorStream, SpacesAndFollowingToken)
 {
     MVector<double,3> value;std::istringstream stream(" { 1.25 , -2.5 , 3.75 } tail");
     stream>>value;ASSERT_FALSE(stream.fail());EXPECT_EQ(value(0),1.25);EXPECT_EQ(value(1),-2.5);EXPECT_EQ(value(2),3.75);
-    std::string tail;stream>>tail;EXPECT_EQ(tail,"tail");
+    // Rdk provides a line-preserving string extractor; inspect remaining
+    // characters explicitly instead of assuming std::string token extraction.
+    std::string tail;std::getline(stream,tail);EXPECT_EQ(tail," tail");
 }
 TEST(MVectorStream, InvalidInputPreservesAllPreviousCoordinates)
 {

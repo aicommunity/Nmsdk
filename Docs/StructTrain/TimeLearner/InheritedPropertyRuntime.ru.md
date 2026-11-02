@@ -60,3 +60,10 @@ trial-soma pairs; восемь намеренно отклонённых multira
 summary. Условия полного expected test/packet/CSV closure сохраняются;
 полностью пустой набор остаётся ошибкой. Семь reader checks на реальных
 артефактах, в том числе missing/duplicate/extra/NaN случаи, пока ожидаются.
+
+Positive attemptA3 на обоих workers собрал targets, затем выполнил5/6 Math
+cases успешно. Оставшийся test ошибочно предполагал standard token extraction
+для string при using namespace RDK; штатный SDK extractor сохранил ведущий
+пробел. Проверка остатка заменена явным std::getline с ожидаемым пробелом;
+Rdk string semantics не меняются. Native16 не запускались после failed Math
+gate. Следующая попытка должна сохранить A3 целиком и проверить6+16 заново.
