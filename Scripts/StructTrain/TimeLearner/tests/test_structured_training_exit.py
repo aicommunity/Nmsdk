@@ -1,14 +1,19 @@
 """Actual native one-tick runs plus destructive copies; no fabricated success."""
-import copy
+import json
 import os
 from pathlib import Path
 import shutil
 import tempfile
 import unittest
 
-from ..native_calibration_worker import _record, _signed, _write
+from ..native_calibration_worker import _record, _signed
 from ..native_evidence import EvidenceError, load
 from ..native_pipeline_worker import _structured_training_exit, audit_execution, audit_run_manifest
+
+
+def _save(path, value):
+    # Only destructive temporary copies are overwritten; production writers stay exclusive.
+    path.write_text(json.dumps(value, allow_nan=False)+"\n", encoding="utf-8")
 
 
 class StructuredTrainingExitTest(unittest.TestCase):
@@ -56,7 +61,7 @@ class StructuredTrainingExitTest(unittest.TestCase):
     def test_changing_only_legacy_version_does_not_upgrade_old_evidence(self):
         root = self.copied(self.legacy)
         record = load(root/"run-manifest.json");record["schema_version"] = 2
-        _write(root/"run-manifest.json", _signed({k: v for k, v in record.items() if k != "sha256"}))
+        _save(root/"run-manifest.json", _signed({k: v for k, v in record.items() if k != "sha256"}))
         with self.assertRaisesRegex(EvidenceError, "pipeline_run_analysis_changed"):
             audit_run_manifest(root/"run-manifest.json")
 
@@ -64,18 +69,18 @@ class StructuredTrainingExitTest(unittest.TestCase):
         root = self.copied();original = load(root/"run-manifest.json")
         for version in (3, True):
             record = {**original, "schema_version": version}
-            _write(root/"run-manifest.json", _signed({k: v for k, v in record.items() if k != "sha256"}))
+            _save(root/"run-manifest.json", _signed({k: v for k, v in record.items() if k != "sha256"}))
             with self.assertRaisesRegex(EvidenceError, "unknown_native_pipeline_run_manifest"):
                 audit_run_manifest(root/"run-manifest.json")
 
     def mutate_execution(self, change):
         root = self.copied();execution = load(root/"native/execution.json")
         change(execution)
-        _write(root/"native/execution.json", _signed({k: v for k, v in execution.items() if k != "sha256"}))
+        _save(root/"native/execution.json", _signed({k: v for k, v in execution.items() if k != "sha256"}))
         record = load(root/"run-manifest.json")
         record["artifacts"] = [_record(root/r["path"], root) if r["path"] == "native/execution.json" else r
                                for r in record["artifacts"]]
-        _write(root/"run-manifest.json", _signed({k: v for k, v in record.items() if k != "sha256"}))
+        _save(root/"run-manifest.json", _signed({k: v for k, v in record.items() if k != "sha256"}))
         return root
 
     def test_nonzero_exit_cannot_claim_completed_execution(self):
