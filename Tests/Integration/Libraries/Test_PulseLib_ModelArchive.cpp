@@ -257,7 +257,8 @@ TEST(TimeLearnerModelArchive, FreshProcessImport)
 }
 
 class NativeArchive : public ::testing::TestWithParam<unsigned int> {};
-void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = false, bool withMatrix = false)
+void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = false, bool withMatrix = false,
+                     bool useGateOutput = false)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
     const char* phase = "prepare";
@@ -293,7 +294,12 @@ void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = f
     {
         directory = QString::fromLocal8Bit(artifacts); std::filesystem::create_directories(directory.toStdString());
     }
-    const QString prefix = QString(withMatrix ? "/matrix-precise-" : precise ? "/precise-" : "/") + (withBoundary ? "boundary-" : "archive-");
+    if(useGateOutput)
+        if(const char* artifacts = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            directory = QString::fromLocal8Bit(artifacts); std::filesystem::create_directories(directory.toStdString());
+        }
+    const QString prefix = QString(useGateOutput ? "/telemetry-matrix-precise-" : withMatrix ? "/matrix-precise-" : precise ? "/precise-" : "/") + (withBoundary ? "boundary-" : "archive-");
     const auto input = directory + prefix + "fixture-" + QString::number(frequency) + ".json";
     const auto output = directory + prefix + "import-verification-" + QString::number(frequency) + ".json";
     Write(input,fixture);
@@ -322,6 +328,64 @@ TEST_P(NativeArchive, TransfersHighPrecisionStateAndExternalStimulusIntoFreshNat
 TEST_P(NativeArchive, TransfersHighPrecisionMatrixIntoFreshNativeProcess) { TransferFixture(GetParam(),false,true,true); }
 TEST_P(NativeArchive, TransfersHighPrecisionMatrixAndExternalStimulusIntoFreshNativeProcess) { TransferFixture(GetParam(),true,true,true); }
 INSTANTIATE_TEST_SUITE_P(SingleRate,NativeArchive,::testing::Values(2000u,20000u));
+
+void TelemetryFixture(unsigned int frequency)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto model = Prepared(frequency,true,true);
+    auto channel = model->GetComponentL<NPulseChannel>("Dendrite2_3.ExcChannel",true);
+    ASSERT_TRUE(channel);
+    model->MaxCalculationDuration = 234567LL;
+    channel->CalculationDurationThreshold = 345678LL;
+    const auto before = NmsdkTools::ExportModelArchive(model,Metadata());
+    model->StepDuration = 123456789ULL;
+    channel->StepDuration = 987654321ULL;
+    const auto after = NmsdkTools::ExportModelArchive(model,Metadata());
+    EXPECT_EQ(before,after); // full signed archive, not just semantic identity
+    EXPECT_EQ(model->StepDuration.GetData(),123456789ULL);
+    EXPECT_EQ(channel->StepDuration.GetData(),987654321ULL);
+    EXPECT_EQ(model->MaxCalculationDuration.GetData(),234567LL);
+    EXPECT_EQ(channel->CalculationDurationThreshold.GetData(),345678LL);
+
+    // Older signed XML with measured counters remains readable. This is a
+    // physical import; retaining transient timing is not a checkpoint promise.
+    auto legacy = before; auto graph = legacy["graph"].toObject(); USerStorageXML xml;
+    ASSERT_TRUE(xml.Load(graph["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph"));
+    ASSERT_TRUE(xml.SelectNode(model->GetName())); ASSERT_TRUE(xml.SelectNode("State"));
+    ASSERT_TRUE(xml.SelectNode("StepDuration")); ASSERT_TRUE(xml.SetNodeText("13579"));
+    std::string bytes; ASSERT_TRUE(xml.Save(bytes));
+    graph["native_xml"] = QString::fromStdString(bytes);
+    graph["native_xml_sha256"] = QString::fromLatin1(QCryptographicHash::hash(QByteArray::fromStdString(bytes),QCryptographicHash::Sha256).toHex());
+    legacy["graph"] = graph; Seal(legacy);
+    auto imported = NmsdkTools::ImportModelArchive(legacy,core.storage,core.environment,"native-archive-fixture-v1");
+    ASSERT_TRUE(imported);
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(graph["identity"].toObject(),imported)["match"].toBool());
+    EXPECT_EQ(imported->MaxCalculationDuration.GetData(),234567LL);
+    EXPECT_EQ(imported->GetComponentL<NPulseChannel>("Dendrite2_3.ExcChannel",true)->CalculationDurationThreshold.GetData(),345678LL);
+    const auto normalized = NmsdkTools::ExportModelArchive(imported,Metadata());
+    EXPECT_EQ(normalized["graph"].toObject()["native_xml"],before["graph"].toObject()["native_xml"]);
+
+    model->MaxCalculationDuration = 234568LL;
+    const auto changedLimit = NmsdkTools::ExportModelArchive(model,Metadata());
+    EXPECT_NE(changedLimit["graph"].toObject()["identity"],before["graph"].toObject()["identity"]);
+    EXPECT_NE(changedLimit["sha256"],before["sha256"]);
+    if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    {
+        std::filesystem::create_directories(output);
+        Write(QString::fromLocal8Bit(output)+"/telemetry-witness-"+QString::number(frequency)+".json",
+            QJsonObject{{"kind","native_archive_telemetry_witness"},{"schema_version",1},
+            {"frequency_hz",int(frequency)},{"before",before},{"after",after},{"legacy",legacy},
+            {"normalized",normalized},{"changed_limit",changedLimit},
+            {"live_root_duration",QString::number(qulonglong(model->StepDuration.GetData()))},
+            {"live_channel_duration",QString::number(qulonglong(channel->StepDuration.GetData()))}});
+    }
+    core.storage->ReturnObject(imported); core.storage->ReturnObject(model);
+    // Actual asymmetric matrix/boundary reconstruction in a separate process,
+    // with complete actual-input, time, channel and soma arrays saved by gate.
+    TransferFixture(frequency,true,true,true,true);
+}
+TEST(NativeArchiveTelemetry,At2000) { TelemetryFixture(2000); }
+TEST(NativeArchiveTelemetry,At20000) { TelemetryFixture(20000); }
 
 TEST(TimeLearnerModelArchive, BoundaryMustBeDeclaredUsedAndReboundByStableId)
 {
