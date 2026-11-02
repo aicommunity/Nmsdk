@@ -1,0 +1,82 @@
+{
+  "kind": "inherited_property_runtime_checkpoint",
+  "accepted_root": "422647a2dff24d5783f95f2a2980507de81febcc",
+  "feature_branch": "codex/timelearner-inherited-runtime",
+  "feature_root": "5b300dcc6d95e345ef9f41ecac049c3330e07897",
+  "numeric_root": "9cefcf41f991ce3b38f793fdefde578346ea51cb",
+  "rdk_feature": "b34223ef113ca60a817589995205de06af77543a",
+  "rdk_branch": "codex/timelearner-vector-stream",
+  "pulse": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
+  "bin": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+  "jobs": [
+    {
+      "host": "10.245.1.11",
+      "base": "/home/user/timelearner-refactor",
+      "output": "readbacks/s01-inherited-native-normal-a3",
+      "pid": 3308813,
+      "start_ticks": "315066664",
+      "runtime": "runtime-s01-inherited-native-normal-a3",
+      "budget": 7200,
+      "last_verified": "owned process alive, building integration target at96%"
+    },
+    {
+      "host": "10.245.1.17",
+      "base": "/media/user/Data/TimeLearnerRefactor",
+      "output": "readbacks/s01-inherited-native-asan-a3",
+      "pid": 1309253,
+      "start_ticks": "265609410",
+      "runtime": "runtime-s01-inherited-native-asan-a3",
+      "budget": 21600,
+      "last_verified": "owned process alive, compiling NativeModelEditor integration TU"
+    }
+  ],
+  "expected": {
+    "math_tests": 6,
+    "native_tests": 16,
+    "topologies": [
+      "Classic",
+      "Branch"
+    ],
+    "normalization": [
+      "N0",
+      "N1"
+    ],
+    "frequencies": [
+      2000,
+      20000
+    ],
+    "reader_tests": 7,
+    "probe_packets": 56,
+    "complete_positive_probes": 48,
+    "expected_rejected_unprepared": 8,
+    "known_plottable_soma_pairs": 72
+  },
+  "negative_proofs": {
+    "normal": "a7b9ffd4f7e4747a0ab364a4aca178dcaa2086d6",
+    "asan": "1b8c173aa8acf57ea5cade60c67baec39d9c2977",
+    "baseline_root": "cc9b29421b7a7d538dcafe7899ef70965e3ae167",
+    "baseline_rdk": "0a1c1d05a1b12de20feabf54a25712e210865791",
+    "verified_members_per_worker": 33
+  },
+  "notes": [
+    "Initial test setup incorrectly called protected SetTimeStep; corrected via public TimeStep property.",
+    "Clean production-header stream target reproduces nonexistent MVector3 x/y/z member compile failure on both workers.",
+    "Owner fix uses public element accessor and transactional delimiter-checked extraction; general vector dimensions unchanged.",
+    "A3 sources/build/runtime must not be changed while owned processes are live.",
+    "New report code/spec does not alter C++ compiled source relative to numeric9ce.",
+    "Generic native-test adapter now permits declared nonempty standalone-only sets; exact JUnit/packet/CSV closure remains required.",
+    "Actual native test outputs not accepted until terminal, math6/native16 results and reader/temporal gates inspected.",
+    "Primary stages0-12 not complete. Prior Elder Bin provenance impact audit still open."
+  ],
+  "next": [
+    "Poll same owned A3 processes; do not restart on observation timeout.",
+    "Preserve failures before any retry. Fast math process may lack actual loader mappings: report separately; native long process must have mappings.",
+    "After success, stage closed native artifacts and exact gtest.xml as native.xml for report adapter with recorded hashes.",
+    "Export analysis code from feature through Git without modifying live source; run7 reader checks on both actual corpora.",
+    "Render all56 declared probes, keeping8 unprepared contexts as unknown without axes or fabricated zeros; directly inspect selected original soma/input plots.",
+    "Publish compact primary/proofs, verify bytes and graph/waveform outcomes, then merge Rdk first and root exact gitlink using --no-ff.",
+    "Continue full original plan; inherited configured ControllerVersion1/2 Train, connected/XML/Copy/reuse/global-frequency and trained continuation remain open."
+  ],
+  "full_acceptance": false,
+  "scientific_verdict": null
+}
