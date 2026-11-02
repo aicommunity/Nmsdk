@@ -103,3 +103,10 @@ Global acceptance остаётся false; остальные3872 PNG не объ
 audit. TimeGeneration может обрезать pulse на объявленной границе; complete
 означает полное окно наблюдения, а не обещание полной ширины вне этого режима.
 Между native samples проводится линия; она не доказывает sub-timestep latency.
+
+Source ASan25/readers41 завершён: primary6173d832,198 members проверены,
+actual libasan mappings доступны. Все83 CSV, включая76 source/soma recordings,
+совпали побайтно с normal B6. Это подтверждает использование тех же сигналов
+в normal temporal cache и для ASan-наблюдений; независимый ASan rerender всех
+3888 PNG не заявлен. C₀ readers41 включают24 прежних normal primary controls,
+а не новую ASan-проверку C₀ transfer. Расширенный native202 scope ещё pending.

@@ -1,8 +1,36 @@
 # Ненужная временная телеметрия в native model archive
 
 Статус: подтверждённый адресный дефект размера/стабильности артефактов;
-исправление реализовано в отдельной ветке, серверная проверка ещё требуется.
+исправление реализовано в отдельной ветке; normal/ASan scope ниже проверен,
+его отдельный develop merge ещё не оформлен.
 Отрицательный научный результат отсюда не следует.
+
+## Проверенный срез 03.11
+
+Pulse Core e360b31d/dc7edb23 и root1e0988be нормализуют только StepDuration
+ptPubSysState в приватном XML snapshot. Живые объекты, остальные states,
+links и wall-duration limits не изменяются. Старые signed packages читаются.
+Полная signed-archive byte stability не заявляется: прочие native state buffers
+и производные значения могут меняться при Init. Это не physical checkpoint.
+
+Normal20/unit9/readers24: evidence
+`69a1c928eed1f0248790ce1dd9c843b6c7d3bf12`,470 members/4 233 738 bytes.
+ASan20/unit9/readers24: evidence
+`6d0d1d4c3fc50fe55f6c9b7a04d89a15d92259e4`,471 members/4 254 678 bytes.
+Все members проверены по SHA256, actual ASan mappings доступны. В обоих
+запусках одинаковый набор122 CSV, все совпали побайтно; это scoped waveform
+equivalence, не сравнение всех динамических XML state bytes.
+[Полные CSV hashes и метод](../../../Reports/StructTrain/TimeLearner/s05-archive-normal-asan-comparison-a1/comparison.json).
+
+Проверены counter-only snapshot/restore при2000/20000Hz, effective graph,
+реальный импульсный отклик и14 completed/stopped transfer regressions.
+Ранее слишком сильные ожидания полного live image State совпадения были
+исправлены отдельным тестовым commit; их failed evidence сохранён. Сравнение
+с прежним B3 без archive prelude выявило независимый clock-origin defect;
+control на том же binary без prelude воспроизвёл исходные122 CSV и28 records.
+Это не доказательство влияния serializer на физику.
+
+Ниже — постановка и исходные наблюдения этого дефекта до исправления.
 
 Normal A1 root420befe14 выявил чрезмерные ожидания нового теста. В 2000 Гц
 между двумя exports различались transient buffers отдельных image instances:

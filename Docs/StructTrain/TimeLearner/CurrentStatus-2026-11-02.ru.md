@@ -1,5 +1,30 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Последний подтверждённый срез 03.11: source25 и archive20 ASan завершены
+
+Source normal25/readers41 и ASan25/readers41 завершены. ASan evidence
+`6173d8324f7db784bf1f69efef8a60a8893ca081`:198 members/3 043 997 compressed bytes
+проверены, actual libasan mappings подтверждены. Весь83-CSV набор normal/ASan
+совпал побайтно, включая input/soma76, file reload и native dispatch records.
+Это не новая ASan C₀ transfer серия:24 C₀ readers используют прежние normal B3
+primary. [Сравнение с hashes каждого CSV](../../../Reports/StructTrain/TimeLearner/s03-source-normal-asan-comparison-a1/comparison.json).
+Pulse feature b84b7e9175ded1ccea73ff2caecdf89e5b32f9fe имеет tested Core9ab6d57.
+
+M40 archive telemetry ASan также завершён:unit9/native20/readers24, evidence
+`6d0d1d4c3fc50fe55f6c9b7a04d89a15d92259e4`,471 members/4 254 678 compressed bytes
+проверены. Actual libasan mappings подтверждены. Normal20/ASan20 имеют одинаковые
+122 CSV, все побайтно равны. [Сравнение](../../../Reports/StructTrain/TimeLearner/s05-archive-normal-asan-comparison-a1/comparison.json).
+Это подтверждение private StepDuration normalization и названных archive/
+transfer controls; full dynamic checkpoint и вся матрица не заявлены.
+
+Оба узких ASan owners завершились. Read-only normal202 на Elder остаётся
+отдельным running gate (owner101217/322637777, publisher101223/322637787).
+Он по-прежнему использует source-capacitance-state-normal-b1/rootb9af8990 и
+immutable runtime normal B6; source нельзя checkout/update до его закрытия.
+Общий source-кандидат не объединяется в develop до проверки этой регрессии.
+Accepted develop остаётся17ca5a0b (explicit C₀ scope). Открытый parser defect
+и последующие пункты полного плана не маскируются успехом source25/archive20.
+
 ## Source visual QA и расширенная регрессия 03.11
 
 Fixed B6 report76 завершён:3888 PNG/SVG/PDF в M40 Data cache. Все16 selected
