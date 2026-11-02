@@ -1,3 +1,8 @@
+Адресный inventory опубликованных references теперь доступен в
+[SourceReferenceAudit](SourceReferenceAudit.ru.md): два byte-identical server
+повтора,25 report folders, из них22 требуют dependency review. Этот inventory
+не является retroactive source attestation или переоценкой научных результатов.
+
 # Проверка принадлежности исходников рабочей копии Git
 
 01.11.2026 при серверной проверке migration manifest обнаружен Bin alias:
