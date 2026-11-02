@@ -1,0 +1,509 @@
+{
+  "kind": "timelearner_cross_gate_csv_comparison",
+  "schema_version": 1,
+  "normal_commit": "69a1c928eed1f0248790ce1dd9c843b6c7d3bf12",
+  "normal_report": "s05-archive-telemetry-normal-a2",
+  "asan_commit": "6d0d1d4c3fc50fe55f6c9b7a04d89a15d92259e4",
+  "asan_report": "s05-archive-telemetry-asan-a2",
+  "method": "Compare complete CSV filename sets and original bytes; for differing bytes additionally compare CSV header, row count and every non-time token. No alignment or resampling.",
+  "normal_csv": 122,
+  "asan_csv": 122,
+  "same_csv_set": true,
+  "common_csv": 122,
+  "byte_equal": 122,
+  "differences": [],
+  "missing_in_asan": [],
+  "missing_in_normal": [],
+  "source_sha256": {
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_fresh_process.csv": {
+      "normal": "f22295d56fe77db5f8c874ae09d9ded02ffc8c1191dee3e76739b0e54f618288",
+      "asan": "f22295d56fe77db5f8c874ae09d9ded02ffc8c1191dee3e76739b0e54f618288"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_frozen_test.csv": {
+      "normal": "f22295d56fe77db5f8c874ae09d9ded02ffc8c1191dee3e76739b0e54f618288",
+      "asan": "f22295d56fe77db5f8c874ae09d9ded02ffc8c1191dee3e76739b0e54f618288"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_probe_2.csv": {
+      "normal": "6beb75f831adc6175c3a0eecf1993030b2f53db5c248b7280ae73d0aa44bbc75",
+      "asan": "6beb75f831adc6175c3a0eecf1993030b2f53db5c248b7280ae73d0aa44bbc75"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_probe_4.csv": {
+      "normal": "f22295d56fe77db5f8c874ae09d9ded02ffc8c1191dee3e76739b0e54f618288",
+      "asan": "f22295d56fe77db5f8c874ae09d9ded02ffc8c1191dee3e76739b0e54f618288"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_rollback_after.csv": {
+      "normal": "c6a0f8e578b26b57282135d95a6f44020fb5438385f5c0f5fefb6f5cb9381a48",
+      "asan": "c6a0f8e578b26b57282135d95a6f44020fb5438385f5c0f5fefb6f5cb9381a48"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_rollback_before.csv": {
+      "normal": "2a27f376a6d817d111b00b00d821807a0de1d6a5fe798b421b4ac1c6d75fdfff",
+      "asan": "2a27f376a6d817d111b00b00d821807a0de1d6a5fe798b421b4ac1c6d75fdfff"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_1.csv": {
+      "normal": "a3ca252a18c23c7a15878b5d47b502e654f6f584d7f8f7ac0831b04187a441f4",
+      "asan": "a3ca252a18c23c7a15878b5d47b502e654f6f584d7f8f7ac0831b04187a441f4"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_2.csv": {
+      "normal": "670e7367a19fe311120d6ac72f4753c856751da653b4f4a80e28b6a89e019ed3",
+      "asan": "670e7367a19fe311120d6ac72f4753c856751da653b4f4a80e28b6a89e019ed3"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_3.csv": {
+      "normal": "2da99396b06992b0e2ccbb9d385d35ded8466294501016a98f8826803325fac0",
+      "asan": "2da99396b06992b0e2ccbb9d385d35ded8466294501016a98f8826803325fac0"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_4.csv": {
+      "normal": "59c33b309b74a4996ac91f68a1918a07382f6dea895909c5cd5d9d84851770d3",
+      "asan": "59c33b309b74a4996ac91f68a1918a07382f6dea895909c5cd5d9d84851770d3"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_5.csv": {
+      "normal": "7f48e98fc37694f92e191023dde5cc86add1e513a6378cd73962449964312415",
+      "asan": "7f48e98fc37694f92e191023dde5cc86add1e513a6378cd73962449964312415"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_6.csv": {
+      "normal": "fe64e1dc806cee189cd33ec0ac9d82346b7663480c73f9bab9206a329f3a974a",
+      "asan": "fe64e1dc806cee189cd33ec0ac9d82346b7663480c73f9bab9206a329f3a974a"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_1.csv": {
+      "normal": "c57d3c3000478015dde5d532384d96bf677010b9f04c8338945ba530447331ae",
+      "asan": "c57d3c3000478015dde5d532384d96bf677010b9f04c8338945ba530447331ae"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_2.csv": {
+      "normal": "9df9178416f408421c032e8fed2ceec28328a4543bc9e8d7c12f99be5f4566b3",
+      "asan": "9df9178416f408421c032e8fed2ceec28328a4543bc9e8d7c12f99be5f4566b3"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_3.csv": {
+      "normal": "d247d13142aa9d030c8e1be38e8c45c907d0d7c002fe71cf194f91b8c6554f15",
+      "asan": "d247d13142aa9d030c8e1be38e8c45c907d0d7c002fe71cf194f91b8c6554f15"
+    },
+    "gate/native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_4.csv": {
+      "normal": "214c5635119d301a0d6cba2fe401ab9a636df53b271cf58481c28044431a960b",
+      "asan": "214c5635119d301a0d6cba2fe401ab9a636df53b271cf58481c28044431a960b"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_fresh_process.csv": {
+      "normal": "ffff506d196b98ae86983d5b273ee04c7f4e6f45d541b00fc7122f48f06865cb",
+      "asan": "ffff506d196b98ae86983d5b273ee04c7f4e6f45d541b00fc7122f48f06865cb"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_frozen_test.csv": {
+      "normal": "ffff506d196b98ae86983d5b273ee04c7f4e6f45d541b00fc7122f48f06865cb",
+      "asan": "ffff506d196b98ae86983d5b273ee04c7f4e6f45d541b00fc7122f48f06865cb"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_probe_2.csv": {
+      "normal": "0fba199c11fe74dc8673ff31a84363fc410bb14b2a8e380f093d125c3b5c7403",
+      "asan": "0fba199c11fe74dc8673ff31a84363fc410bb14b2a8e380f093d125c3b5c7403"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_probe_4.csv": {
+      "normal": "ffff506d196b98ae86983d5b273ee04c7f4e6f45d541b00fc7122f48f06865cb",
+      "asan": "ffff506d196b98ae86983d5b273ee04c7f4e6f45d541b00fc7122f48f06865cb"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_1.csv": {
+      "normal": "97733216882f3fd3c27aae3bd89c9f18720a70a0f02029a0549ed8e40cac75d8",
+      "asan": "97733216882f3fd3c27aae3bd89c9f18720a70a0f02029a0549ed8e40cac75d8"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_2.csv": {
+      "normal": "19b8d1f8a8289bc915f64104380e99ffb84e68c02a9a60c1d3388bfd67f0c19a",
+      "asan": "19b8d1f8a8289bc915f64104380e99ffb84e68c02a9a60c1d3388bfd67f0c19a"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_3.csv": {
+      "normal": "d0eae2dd7e3562856298e07ca077862dfaa6657ace03a424ebd0eca04031565a",
+      "asan": "d0eae2dd7e3562856298e07ca077862dfaa6657ace03a424ebd0eca04031565a"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_4.csv": {
+      "normal": "636b87bcef9e45861dc8e35cf2554f1294e855a46e7e48b4b5e514e07619abed",
+      "asan": "636b87bcef9e45861dc8e35cf2554f1294e855a46e7e48b4b5e514e07619abed"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_5.csv": {
+      "normal": "31db0ba16493f97b14297ea809d8fd7aa5b85e64a1023a33c974a3c4a444f9a8",
+      "asan": "31db0ba16493f97b14297ea809d8fd7aa5b85e64a1023a33c974a3c4a444f9a8"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_6.csv": {
+      "normal": "35d8bddbc97a5afa95877166995d6cf5b6bef9c417677c921ba91f11c82754ee",
+      "asan": "35d8bddbc97a5afa95877166995d6cf5b6bef9c417677c921ba91f11c82754ee"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_1.csv": {
+      "normal": "e89a8cb500a9fe330052f6fd92237d9b6ac8f75311c9f3adae06727434ee3aa8",
+      "asan": "e89a8cb500a9fe330052f6fd92237d9b6ac8f75311c9f3adae06727434ee3aa8"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_2.csv": {
+      "normal": "896e735c2591c213fa5b5d3c64e4223f90fc6a23e185d7c2323733c9413a169a",
+      "asan": "896e735c2591c213fa5b5d3c64e4223f90fc6a23e185d7c2323733c9413a169a"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_3.csv": {
+      "normal": "b1abd4da01f96567c0e010cffd5f3990e941399761cd459f2ef929231575c960",
+      "asan": "b1abd4da01f96567c0e010cffd5f3990e941399761cd459f2ef929231575c960"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_4.csv": {
+      "normal": "8f064a483f583d40ce6ccd721dea701d3528ffaca176d964a548594743ebe3e2",
+      "asan": "8f064a483f583d40ce6ccd721dea701d3528ffaca176d964a548594743ebe3e2"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking_owner_recognition_wave.csv": {
+      "normal": "978fcc82a200afd186087d9703b69b0f759a78986adc5afd62b74a3f384f512a",
+      "asan": "978fcc82a200afd186087d9703b69b0f759a78986adc5afd62b74a3f384f512a"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking_state_trial_1.csv": {
+      "normal": "22d02194bb03c9b915642231ba4b33e83c05f917d03f248c1992c0d69c1b096d",
+      "asan": "22d02194bb03c9b915642231ba4b33e83c05f917d03f248c1992c0d69c1b096d"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking_state_trial_2.csv": {
+      "normal": "d069cd60fe071f62879e7c1d7f6dba8d585244ee2735da157642c141ac705ff0",
+      "asan": "d069cd60fe071f62879e7c1d7f6dba8d585244ee2735da157642c141ac705ff0"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking_state_trial_3.csv": {
+      "normal": "a356da7fe7f32e6c52116c50cf50df75a77870431fa594d36f987e21e40bdc47",
+      "asan": "a356da7fe7f32e6c52116c50cf50df75a77870431fa594d36f987e21e40bdc47"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking_state_trial_4.csv": {
+      "normal": "63cf7b1c6a8ec7d9b62320a585f98921087d99677d663d30580aacc896907818",
+      "asan": "63cf7b1c6a8ec7d9b62320a585f98921087d99677d663d30580aacc896907818"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking_state_trial_5.csv": {
+      "normal": "a9532eba0729cf053330a54f31c7d5e075e8b5888fd2627094c6d694708feb39",
+      "asan": "a9532eba0729cf053330a54f31c7d5e075e8b5888fd2627094c6d694708feb39"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking_state_trial_6.csv": {
+      "normal": "023b8c68b700e854bd97a7ca222b31503fbe6edd8754869cef691cd6c2b9470f",
+      "asan": "023b8c68b700e854bd97a7ca222b31503fbe6edd8754869cef691cd6c2b9470f"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_1_recognition_roundtrip.csv": {
+      "normal": "65d9c01357bfba713512230bec5b5ef95acd55a7eb67be3cbef27bea83ed3ac8",
+      "asan": "65d9c01357bfba713512230bec5b5ef95acd55a7eb67be3cbef27bea83ed3ac8"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_1_state_trial_1.csv": {
+      "normal": "0eb97d9fd723c5d300e89e20da2d58a1e3a901f36a28fad072a876d606bd9278",
+      "asan": "0eb97d9fd723c5d300e89e20da2d58a1e3a901f36a28fad072a876d606bd9278"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_1_state_trial_2.csv": {
+      "normal": "26fcb42d447a429954048ec2187d955eb755803706dd084b7635374909ed9ca3",
+      "asan": "26fcb42d447a429954048ec2187d955eb755803706dd084b7635374909ed9ca3"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_1_state_trial_3.csv": {
+      "normal": "bd5bbd2401de5abd3b8a68a0f99f2147cf6218c953e391f10a412cf58022680d",
+      "asan": "bd5bbd2401de5abd3b8a68a0f99f2147cf6218c953e391f10a412cf58022680d"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_1_state_trial_4.csv": {
+      "normal": "83e97b89fe4dfc83abc86d48d1323b74f28ed1cdd395e0c36f210c41afe6a2e3",
+      "asan": "83e97b89fe4dfc83abc86d48d1323b74f28ed1cdd395e0c36f210c41afe6a2e3"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_1_state_trial_5.csv": {
+      "normal": "cee5acf0da7653427d3cda3a77221693f5307a53df936927efc81b6499f77825",
+      "asan": "cee5acf0da7653427d3cda3a77221693f5307a53df936927efc81b6499f77825"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_1_state_trial_6.csv": {
+      "normal": "39953954c703e45e68e1be6606df7979dabdba386dba5931363ddb7ebead209b",
+      "asan": "39953954c703e45e68e1be6606df7979dabdba386dba5931363ddb7ebead209b"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_owner_recognition_wave.csv": {
+      "normal": "d5e89ee63d4031fc0f408a76fc835b0774e79a9ab862457a2bf59470a1b6e0ef",
+      "asan": "d5e89ee63d4031fc0f408a76fc835b0774e79a9ab862457a2bf59470a1b6e0ef"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_probe_2.csv": {
+      "normal": "0c519de9ebdc54591ec30caa5986e01916a8667f3e696b8115e929810ac71b23",
+      "asan": "0c519de9ebdc54591ec30caa5986e01916a8667f3e696b8115e929810ac71b23"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_state_trial_1.csv": {
+      "normal": "dc7f7547a0199a1ab072782d91e55c4157bc7d04fe5b5eb1fde44390cbfe656a",
+      "asan": "dc7f7547a0199a1ab072782d91e55c4157bc7d04fe5b5eb1fde44390cbfe656a"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_state_trial_2.csv": {
+      "normal": "02957bc0278b0b030fa6e8a7c4c6ec7348fa44d8baf2b1ca8093d43bd3afe4e4",
+      "asan": "02957bc0278b0b030fa6e8a7c4c6ec7348fa44d8baf2b1ca8093d43bd3afe4e4"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_state_trial_3.csv": {
+      "normal": "936582e34b07a7339a3bce7aa8c88d26594bb935f667256931998a79c16fb4c5",
+      "asan": "936582e34b07a7339a3bce7aa8c88d26594bb935f667256931998a79c16fb4c5"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_state_trial_4.csv": {
+      "normal": "eb8ed65b5f164effcdad34a176a421e9af6bd646fb617e27bd06bdd334673549",
+      "asan": "eb8ed65b5f164effcdad34a176a421e9af6bd646fb617e27bd06bdd334673549"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_state_trial_5.csv": {
+      "normal": "63ff1fc16fcfe2a4f11e1520a747af68dccdea9ee50c56bde2c480b015c0a29f",
+      "asan": "63ff1fc16fcfe2a4f11e1520a747af68dccdea9ee50c56bde2c480b015c0a29f"
+    },
+    "gate/native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_recognition_8_capacitance_state_state_trial_6.csv": {
+      "normal": "b6198e1bc7203c8d495999935aa5e1b8f58ae399b740e81b819a895525828a8d",
+      "asan": "b6198e1bc7203c8d495999935aa5e1b8f58ae399b740e81b819a895525828a8d"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_CapacitancePartial_fresh_process.csv": {
+      "normal": "24a91d3475927cc4382d46abc84851dc025d9de48f094cc8ab6c150fd1e92e68",
+      "asan": "24a91d3475927cc4382d46abc84851dc025d9de48f094cc8ab6c150fd1e92e68"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_CapacitancePartial_frozen.csv": {
+      "normal": "24a91d3475927cc4382d46abc84851dc025d9de48f094cc8ab6c150fd1e92e68",
+      "asan": "24a91d3475927cc4382d46abc84851dc025d9de48f094cc8ab6c150fd1e92e68"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_CapacitancePartial_probe_2.csv": {
+      "normal": "6bc3c4aad026ffb41d5bae9b34abe4041e4a63178488580d59f9d84676f65894",
+      "asan": "6bc3c4aad026ffb41d5bae9b34abe4041e4a63178488580d59f9d84676f65894"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_CapacitancePartial_probe_4.csv": {
+      "normal": "24a91d3475927cc4382d46abc84851dc025d9de48f094cc8ab6c150fd1e92e68",
+      "asan": "24a91d3475927cc4382d46abc84851dc025d9de48f094cc8ab6c150fd1e92e68"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_CapacitancePartial_stopped_trial_1.csv": {
+      "normal": "cfb72216dafc75b43b9f9377f10b45bea96f533bb367c40b80981973aa02627e",
+      "asan": "cfb72216dafc75b43b9f9377f10b45bea96f533bb367c40b80981973aa02627e"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_Partial_fresh_process.csv": {
+      "normal": "f3feb38ca998a7f65cf8cf8c54b548aee3857445ba056de6ebd8d050bf6847a9",
+      "asan": "f3feb38ca998a7f65cf8cf8c54b548aee3857445ba056de6ebd8d050bf6847a9"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_Partial_frozen.csv": {
+      "normal": "f3feb38ca998a7f65cf8cf8c54b548aee3857445ba056de6ebd8d050bf6847a9",
+      "asan": "f3feb38ca998a7f65cf8cf8c54b548aee3857445ba056de6ebd8d050bf6847a9"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_Partial_probe_2.csv": {
+      "normal": "f3feb38ca998a7f65cf8cf8c54b548aee3857445ba056de6ebd8d050bf6847a9",
+      "asan": "f3feb38ca998a7f65cf8cf8c54b548aee3857445ba056de6ebd8d050bf6847a9"
+    },
+    "gate/native-result/native/Branch_2000_N1_stopped_Partial_stopped_trial_1.csv": {
+      "normal": "467f16810985edc203a22422600081202271c7bc5a8fde1493631dedf0efd4de",
+      "asan": "467f16810985edc203a22422600081202271c7bc5a8fde1493631dedf0efd4de"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_fresh_process.csv": {
+      "normal": "1e015ee61fc06da7105339f6e20a15b7b6e478531b154ad7b2cbc6852ad9ea9f",
+      "asan": "1e015ee61fc06da7105339f6e20a15b7b6e478531b154ad7b2cbc6852ad9ea9f"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_frozen_test.csv": {
+      "normal": "1e015ee61fc06da7105339f6e20a15b7b6e478531b154ad7b2cbc6852ad9ea9f",
+      "asan": "1e015ee61fc06da7105339f6e20a15b7b6e478531b154ad7b2cbc6852ad9ea9f"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_probe_2.csv": {
+      "normal": "4fed8523c63f10635ee0e467d5ca4e1c7d7c91644262c6c08e642f152d8f4b4d",
+      "asan": "4fed8523c63f10635ee0e467d5ca4e1c7d7c91644262c6c08e642f152d8f4b4d"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_probe_4.csv": {
+      "normal": "1e015ee61fc06da7105339f6e20a15b7b6e478531b154ad7b2cbc6852ad9ea9f",
+      "asan": "1e015ee61fc06da7105339f6e20a15b7b6e478531b154ad7b2cbc6852ad9ea9f"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_rollback_after.csv": {
+      "normal": "71fd317729a1a167617d295b1edf4f6955f84f3705ca13189229861bc9e1c467",
+      "asan": "71fd317729a1a167617d295b1edf4f6955f84f3705ca13189229861bc9e1c467"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_rollback_before.csv": {
+      "normal": "f31ec43e093a158202d490f45520ef46beb3370d494acb26dffc3431b94d714e",
+      "asan": "f31ec43e093a158202d490f45520ef46beb3370d494acb26dffc3431b94d714e"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_1.csv": {
+      "normal": "edeabc98a768c7e0518e2631448555455eda358541570fd4429dd95408e32bc7",
+      "asan": "edeabc98a768c7e0518e2631448555455eda358541570fd4429dd95408e32bc7"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_2.csv": {
+      "normal": "41b1aafaf9dbaf5689bae95a5fbb51f1b4170896c3c3c68cb3137221f167cef4",
+      "asan": "41b1aafaf9dbaf5689bae95a5fbb51f1b4170896c3c3c68cb3137221f167cef4"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_3.csv": {
+      "normal": "f8bb09518e90a9048f009e90c94fd38f3f5ec55af4812609f2f644699f510595",
+      "asan": "f8bb09518e90a9048f009e90c94fd38f3f5ec55af4812609f2f644699f510595"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_4.csv": {
+      "normal": "ed6a09be47a4812269bbf0db26426822c5d41f7d0ef67534ccf91d01e4345d3b",
+      "asan": "ed6a09be47a4812269bbf0db26426822c5d41f7d0ef67534ccf91d01e4345d3b"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_5.csv": {
+      "normal": "71f3ee82cd8c8ad44afd42168dad24719bc223dca20f1de3c2a4d73434ac34f1",
+      "asan": "71f3ee82cd8c8ad44afd42168dad24719bc223dca20f1de3c2a4d73434ac34f1"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_state_trial_6.csv": {
+      "normal": "992b153687702e806f6e483757cab123c02bb4d14fc826c3a466f4039d11db1d",
+      "asan": "992b153687702e806f6e483757cab123c02bb4d14fc826c3a466f4039d11db1d"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_1.csv": {
+      "normal": "c25c48501a5ff96f2d8b7ff746aa507768be6cabf8f9f97ae0c2cbc6601db2f5",
+      "asan": "c25c48501a5ff96f2d8b7ff746aa507768be6cabf8f9f97ae0c2cbc6601db2f5"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_2.csv": {
+      "normal": "ebea365f4e328150057bcd75d0f5faf214eb22d24dfd9f603d8a3edb1e5c7e98",
+      "asan": "ebea365f4e328150057bcd75d0f5faf214eb22d24dfd9f603d8a3edb1e5c7e98"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_3.csv": {
+      "normal": "6efd3e3339bd468e3766389646642ce7c34efec14ac1e907b18051e8d6b2145d",
+      "asan": "6efd3e3339bd468e3766389646642ce7c34efec14ac1e907b18051e8d6b2145d"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_4.csv": {
+      "normal": "e753fc78874605500b2fef7f600b2101308e8476084050c0e590649e5ea99279",
+      "asan": "e753fc78874605500b2fef7f600b2101308e8476084050c0e590649e5ea99279"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_owner_recognition_wave.csv": {
+      "normal": "c60f2e7f76dd6d20e1d08a448e8c7956d6b52eab7ae232995c1a7ad6f605bbc8",
+      "asan": "c60f2e7f76dd6d20e1d08a448e8c7956d6b52eab7ae232995c1a7ad6f605bbc8"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_1.csv": {
+      "normal": "8e8bddbb1f6adbff0ece5ee6047eead8323cb0a7126cd0b9df1f9e7a7f63c44f",
+      "asan": "8e8bddbb1f6adbff0ece5ee6047eead8323cb0a7126cd0b9df1f9e7a7f63c44f"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_2.csv": {
+      "normal": "a228d5a8e8b5a6411dd94cedcb0bb95b4e15615478853b0a3462a959d2199743",
+      "asan": "a228d5a8e8b5a6411dd94cedcb0bb95b4e15615478853b0a3462a959d2199743"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_3.csv": {
+      "normal": "9e67c6a04675d6e1eb83eedbbb0232fee163886262973a5d07429747d7b6eeef",
+      "asan": "9e67c6a04675d6e1eb83eedbbb0232fee163886262973a5d07429747d7b6eeef"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_4.csv": {
+      "normal": "bc7c5b1e9939d4d0838482feb373ff1518bc5dfd4f0881cd75732a0282799c54",
+      "asan": "bc7c5b1e9939d4d0838482feb373ff1518bc5dfd4f0881cd75732a0282799c54"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_5.csv": {
+      "normal": "33165df4538811a008613484b0b1fb058b8e9bd979dfe9a02a8a5a331e7f2e03",
+      "asan": "33165df4538811a008613484b0b1fb058b8e9bd979dfe9a02a8a5a331e7f2e03"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_6.csv": {
+      "normal": "c0e61fac991aab6334a53fd8433f9f1788ddaa463eb5dc9f1b9d82945bad56c3",
+      "asan": "c0e61fac991aab6334a53fd8433f9f1788ddaa463eb5dc9f1b9d82945bad56c3"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_0_recognition_roundtrip.csv": {
+      "normal": "8a499fefa240f344c9f376f7efb547bad73b93e4eaf99582e8753aceecb10475",
+      "asan": "8a499fefa240f344c9f376f7efb547bad73b93e4eaf99582e8753aceecb10475"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_0_state_trial_1.csv": {
+      "normal": "279ffd8543b6b54817255d5a4f2e1af02de57fa4ad164efd85f0516f68c3cafd",
+      "asan": "279ffd8543b6b54817255d5a4f2e1af02de57fa4ad164efd85f0516f68c3cafd"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_0_state_trial_2.csv": {
+      "normal": "5956298a56bfa6b0301c34bf8618cab1dac98321f68d5c903dac41887ae231ec",
+      "asan": "5956298a56bfa6b0301c34bf8618cab1dac98321f68d5c903dac41887ae231ec"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_0_state_trial_3.csv": {
+      "normal": "cab8e79e3b85596971c8576e8d5cad503ef18833d383aab286ae9663aceb4e15",
+      "asan": "cab8e79e3b85596971c8576e8d5cad503ef18833d383aab286ae9663aceb4e15"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_0_state_trial_4.csv": {
+      "normal": "c4a6c6277d809faecc298372c662ca4c0c385873bbca81f4569902e66465ec23",
+      "asan": "c4a6c6277d809faecc298372c662ca4c0c385873bbca81f4569902e66465ec23"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_0_state_trial_5.csv": {
+      "normal": "8da91fb6e6abe366f2301383cdff57963ada966ee01551458d40ce60252d02ce",
+      "asan": "8da91fb6e6abe366f2301383cdff57963ada966ee01551458d40ce60252d02ce"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_0_state_trial_6.csv": {
+      "normal": "0a9fc2c0af9e33d1c4d2c205dc582d51c0144a2e331f00918f93cfffa6fe4ea2",
+      "asan": "0a9fc2c0af9e33d1c4d2c205dc582d51c0144a2e331f00918f93cfffa6fe4ea2"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_owner_recognition_wave.csv": {
+      "normal": "20423996c18cf0ece053f080858615d69aad01c7ee30a340578f3b7e766cfa69",
+      "asan": "20423996c18cf0ece053f080858615d69aad01c7ee30a340578f3b7e766cfa69"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_probe_2.csv": {
+      "normal": "f6fe63fa656e73dfea6c570e05e102b18fa7d73c8b7619dea7d8a646cdfc8548",
+      "asan": "f6fe63fa656e73dfea6c570e05e102b18fa7d73c8b7619dea7d8a646cdfc8548"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_state_trial_1.csv": {
+      "normal": "89f9e249b86bbc9209d18d762bf4da150b3fb7f7b218b146280f3404fe664637",
+      "asan": "89f9e249b86bbc9209d18d762bf4da150b3fb7f7b218b146280f3404fe664637"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_state_trial_2.csv": {
+      "normal": "e0f7c7e1b013241eb4064db91fd89a62be32be3c74d60fca94e9534dd7e12f7d",
+      "asan": "e0f7c7e1b013241eb4064db91fd89a62be32be3c74d60fca94e9534dd7e12f7d"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_state_trial_3.csv": {
+      "normal": "bd80bd1729745f289c22a556aa0c3fd13a6d91f35d6b257ab81d0e6a0f30fc4b",
+      "asan": "bd80bd1729745f289c22a556aa0c3fd13a6d91f35d6b257ab81d0e6a0f30fc4b"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_state_trial_4.csv": {
+      "normal": "95b384bc0f8e5a034d27e7124c58c7f7ea6c01a9ec4c48bf1d439ae983d6bef4",
+      "asan": "95b384bc0f8e5a034d27e7124c58c7f7ea6c01a9ec4c48bf1d439ae983d6bef4"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_state_trial_5.csv": {
+      "normal": "10439fa9917dcc9b5f1414b6418dc85840c61ffd8c2e8688513193badc732d2c",
+      "asan": "10439fa9917dcc9b5f1414b6418dc85840c61ffd8c2e8688513193badc732d2c"
+    },
+    "gate/native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_recognition_7_capacitance_state_state_trial_6.csv": {
+      "normal": "3150f5e96b1633f8e9760bc5d51993b523eaf3b979ef05302617a0a15498fdb5",
+      "asan": "3150f5e96b1633f8e9760bc5d51993b523eaf3b979ef05302617a0a15498fdb5"
+    },
+    "gate/native-result/native/Classic_2000_N0_stopped_CapacitancePartial_fresh_process.csv": {
+      "normal": "f12070ccb5082c0c1a6bac527c0aad507fed5a4cb22009ea48c5187050c76246",
+      "asan": "f12070ccb5082c0c1a6bac527c0aad507fed5a4cb22009ea48c5187050c76246"
+    },
+    "gate/native-result/native/Classic_2000_N0_stopped_CapacitancePartial_frozen.csv": {
+      "normal": "f12070ccb5082c0c1a6bac527c0aad507fed5a4cb22009ea48c5187050c76246",
+      "asan": "f12070ccb5082c0c1a6bac527c0aad507fed5a4cb22009ea48c5187050c76246"
+    },
+    "gate/native-result/native/Classic_2000_N0_stopped_CapacitancePartial_probe_2.csv": {
+      "normal": "e8148a90cba91cee956e9cdfadc65d98c911b588d4cf24ba2bfdefd64f4b3cd0",
+      "asan": "e8148a90cba91cee956e9cdfadc65d98c911b588d4cf24ba2bfdefd64f4b3cd0"
+    },
+    "gate/native-result/native/Classic_2000_N0_stopped_CapacitancePartial_probe_4.csv": {
+      "normal": "f12070ccb5082c0c1a6bac527c0aad507fed5a4cb22009ea48c5187050c76246",
+      "asan": "f12070ccb5082c0c1a6bac527c0aad507fed5a4cb22009ea48c5187050c76246"
+    },
+    "gate/native-result/native/Classic_2000_N0_stopped_CapacitancePartial_stopped_trial_1.csv": {
+      "normal": "feef837993fc98efb4cf54d7c7237ff35365a8b643e45c4e0d84ad3ad8bc2944",
+      "asan": "feef837993fc98efb4cf54d7c7237ff35365a8b643e45c4e0d84ad3ad8bc2944"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_fresh_process.csv": {
+      "normal": "ea282e67f9cd120170bd85b1a227d90a5cc436245b51dc2ffdaf27a4b3c0fe9c",
+      "asan": "ea282e67f9cd120170bd85b1a227d90a5cc436245b51dc2ffdaf27a4b3c0fe9c"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_frozen_test.csv": {
+      "normal": "ea282e67f9cd120170bd85b1a227d90a5cc436245b51dc2ffdaf27a4b3c0fe9c",
+      "asan": "ea282e67f9cd120170bd85b1a227d90a5cc436245b51dc2ffdaf27a4b3c0fe9c"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_probe_2.csv": {
+      "normal": "31479a0dcb42cbb0cde9c45390158840a0e3f938206032143707cb63114258b9",
+      "asan": "31479a0dcb42cbb0cde9c45390158840a0e3f938206032143707cb63114258b9"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_probe_4.csv": {
+      "normal": "ea282e67f9cd120170bd85b1a227d90a5cc436245b51dc2ffdaf27a4b3c0fe9c",
+      "asan": "ea282e67f9cd120170bd85b1a227d90a5cc436245b51dc2ffdaf27a4b3c0fe9c"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_1.csv": {
+      "normal": "1649fdfd109500b68093dab39fd86c0d39e9176efd722609bbacdcd739628467",
+      "asan": "1649fdfd109500b68093dab39fd86c0d39e9176efd722609bbacdcd739628467"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_2.csv": {
+      "normal": "933ee05f1dba371676d23c3c873f06672350a3b4f55adf626ba55b3454688365",
+      "asan": "933ee05f1dba371676d23c3c873f06672350a3b4f55adf626ba55b3454688365"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_3.csv": {
+      "normal": "e4953609d1c0b2645bb226eef26f1e73373b13b21fd3fccd03cbfcfc98d4ba87",
+      "asan": "e4953609d1c0b2645bb226eef26f1e73373b13b21fd3fccd03cbfcfc98d4ba87"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_4.csv": {
+      "normal": "4f676493d267a7463b6d0a9546cdbe80fbe260917e85f3f7ed6d0b59ab8425ef",
+      "asan": "4f676493d267a7463b6d0a9546cdbe80fbe260917e85f3f7ed6d0b59ab8425ef"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_5.csv": {
+      "normal": "eb3a805ce21d4fd4aafe7f87a94cbcfae761c162d87487703444373869a004de",
+      "asan": "eb3a805ce21d4fd4aafe7f87a94cbcfae761c162d87487703444373869a004de"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_state_trial_6.csv": {
+      "normal": "b8652c78dd9da0ef39a3a6c8fd8ebbf8c197d87f76e956cb09d4a2feb4eaa126",
+      "asan": "b8652c78dd9da0ef39a3a6c8fd8ebbf8c197d87f76e956cb09d4a2feb4eaa126"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_1.csv": {
+      "normal": "c6db4650de9915b5e902d41af647ffd05ef28df6a84f2476740ef44cb396ba60",
+      "asan": "c6db4650de9915b5e902d41af647ffd05ef28df6a84f2476740ef44cb396ba60"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_2.csv": {
+      "normal": "59ce22a8997c4d7c3a416d1bb64b11a1145ebada3259433682841f90c2280a83",
+      "asan": "59ce22a8997c4d7c3a416d1bb64b11a1145ebada3259433682841f90c2280a83"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_3.csv": {
+      "normal": "697ab1440bcabae58937b39b8314a84301fd7bbbdec036655ea40fae05a2e523",
+      "asan": "697ab1440bcabae58937b39b8314a84301fd7bbbdec036655ea40fae05a2e523"
+    },
+    "gate/native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_capacitance_state_warm_trial_4.csv": {
+      "normal": "7d3f43500ff984a781d5d283cf1a8e3d7f98233468d4f4d207819eee7be8f0ea",
+      "asan": "7d3f43500ff984a781d5d283cf1a8e3d7f98233468d4f4d207819eee7be8f0ea"
+    },
+    "gate/native-result/native/Classic_2000_N1_stopped_Partial_fresh_process.csv": {
+      "normal": "8fdda5cacf3b90ffeb8d67e71d7cc06674f7fa21b05ed043b63dac3b134abcb2",
+      "asan": "8fdda5cacf3b90ffeb8d67e71d7cc06674f7fa21b05ed043b63dac3b134abcb2"
+    },
+    "gate/native-result/native/Classic_2000_N1_stopped_Partial_frozen.csv": {
+      "normal": "8fdda5cacf3b90ffeb8d67e71d7cc06674f7fa21b05ed043b63dac3b134abcb2",
+      "asan": "8fdda5cacf3b90ffeb8d67e71d7cc06674f7fa21b05ed043b63dac3b134abcb2"
+    },
+    "gate/native-result/native/Classic_2000_N1_stopped_Partial_probe_2.csv": {
+      "normal": "8fdda5cacf3b90ffeb8d67e71d7cc06674f7fa21b05ed043b63dac3b134abcb2",
+      "asan": "8fdda5cacf3b90ffeb8d67e71d7cc06674f7fa21b05ed043b63dac3b134abcb2"
+    },
+    "gate/native-result/native/Classic_2000_N1_stopped_Partial_stopped_trial_1.csv": {
+      "normal": "4718e17568e91ef22db4edbfb10daaf2adf01f4e50142f8a44094efbb646299f",
+      "asan": "4718e17568e91ef22db4edbfb10daaf2adf01f4e50142f8a44094efbb646299f"
+    }
+  },
+  "scientific_verdict": null,
+  "scope": "Exact comparison of this pair of already verified native primary CSV sets only; not all JSON/state fields or full mode/scientific matrix."
+}
