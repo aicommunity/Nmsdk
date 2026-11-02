@@ -1,0 +1,216 @@
+{
+  "kind": "timelearner_native_test_report_spec",
+  "schema_version": 1,
+  "fixture_contract": "Source-declared 46 controller/native termination tests; four Classic/Branch x N0/N1 singleton-domain N2/f2000 cases, sync0 deliberately negative, eight complete probes each. Internal native API; diagnostic stopped-state proof, no classification verdict.",
+  "expected_test_ids": [
+    "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+    "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+    "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+    "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+    "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+    "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+    "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+    "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+    "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+    "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+    "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+    "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+    "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+    "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+    "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+    "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+    "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+    "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+    "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+    "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+    "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+    "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+    "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+    "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+    "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions",
+    "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+    "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+    "TrainingTermination/MaximumSweepsClassicN0",
+    "TrainingTermination/MaximumSweepsClassicN1",
+    "TrainingTermination/MaximumSweepsBranchN0",
+    "TrainingTermination/MaximumSweepsBranchN1",
+    "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+    "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+    "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+    "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+    "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+    "NativeTrainingTermination/ClassicN0SweepBudgetBoundary",
+    "NativeTrainingTermination/ClassicN1SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN0SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN1SweepBudgetBoundary"
+  ],
+  "phases": [],
+  "standalone": [
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    }
+  ]
+}
