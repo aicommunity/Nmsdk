@@ -100,6 +100,12 @@ timestamps. Native clock Rdk остаётся целочисленным microse
 `native-dataset-clock-extended-v1.json`:20 cases,76 полных recordings. Новые
 проверки ещё требуют серверного выполнения; они не были частью baseline A3.
 
+Fixtures возвращают исходное внешнее model time после завершения независимых
+моделей. Это изоляция тестов: их явные origin interventions не должны менять
+начальные условия последующих unrelated cases. Production clock/reset policy
+learner этим не меняется. Внутри каждого case все declared origins по-прежнему
+реально применяются и проверяются, source/soma сравниваются без допуска.
+
 Первый build кандидата bf6bdf6 (root8a627f82) остановился до тестов: макрос
 RDK_THROW использует this и не применим в свободном numeric helper. Исправление
 Pulse9f907a9 использует std::invalid_argument для этого helper; Rdk operation
