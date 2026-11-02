@@ -126,6 +126,15 @@ export/import по-прежнему обязательно. Политика idl
 банками0 можно задавать через storage, но это другая явно объявленная модель;
 он не заменяет исходные профили незаметно и требует самостоятельной матрицы.
 
+ASan B1 измерил308.652s уже на одном2k case с6 реальными probes. Нельзя
+экстраполировать normal wall budget на инструментированный20k matrix. Для
+исправленного контракта выделен отдельный native-capacitance-ownership-asan-v1
+с outer execution budget18000s; обычный gate сохраняет7200s. Это не меняет
+model time, физику, критерии, windows либо учебные tolerances. Старые B1
+используют заведомо неверный whole-graph assertion; их намеренная остановка
+должна сохраняться как interrupted/incomplete с точным owned process handle,
+а не трактоваться как научная несостоятельность C₀ или успешная полная матрица.
+
 Изменения выполняются в codex/timelearner-capacitance-owner от принятого develop;
 server jobs не должны вытеснять текущую invalid-reload проверку. После адресной
 приёмки — --no-ff merge Pulse develop, затем root с точным gitlink. Полные
