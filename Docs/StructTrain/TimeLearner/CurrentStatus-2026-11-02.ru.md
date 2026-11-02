@@ -1,5 +1,16 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Принятые source/archive исправления, 03.11
+
+Root develop merge `b71f14a694426fe23af993bf9ab48f2399480789` опубликован с
+Pulse develop merge `8b41ffe4c438b188ef83406cfda1b616e2f3b199`; Rdk a62393f7 и
+Bin14a88195 сохранены. Все202 expanded regression cases и8 reader checks
+пройдены, primary полностью проверены. [Scope приёмки](SourceArchiveAcceptance-2026-11-03.ru.md).
+Strict parser остаётся отдельным кандидатом: cold ASan26 PASS; normal counterpart
+выполняется на Elder. На M40 запущен integrated gate53:26 cold,2 active corrupt
+reload/recovery и25 source clock/lifecycle/dispatch. Научная классификация и
+полное завершение исходного плана этим не объявляются.
+
 ## Последний подтверждённый срез 03.11: source25 и archive20 ASan завершены
 
 Source normal25/readers41 и ASan25/readers41 завершены. ASan evidence
