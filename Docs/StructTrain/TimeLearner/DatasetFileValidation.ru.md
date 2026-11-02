@@ -18,8 +18,20 @@ baseline) сохраняются с SHA256. Это cold configuration tests, н�
 не-конечные числа, пустые/лишние поля, trailing delimiter, metadata suffix,
 неизвестная metadata, неполный блок и недостаточная ширина строки.
 
-Baseline пока не выполнен. До его публикации production parser не меняется.
-После воспроизведения нужен locale-independent full-token parse, точная
+Baseline22 выполнен на M40 под ASan:7 PASS,15 failures из-за ошибочного
+Ready=true/отсутствия диагностики. Actual loaded mappings и все primary
+проверены: evidence `e37135ab04f244a1e680452366fb872826cfab94`. Исходный build
+fixture A1 не собрался: имя helper Run затенялось private testing::Test::Run;
+отказ `a66b8cca0f438108494970331daef44377357087` сохранён отдельно. Исправлено
+только имя helper, assertions не ослаблялись.
+
+Кандидат Pulse `e686297ad10084429f7220fd2c5674f6d9869f25` вводит
+locale-independent full-token parse, точную
 размерность и проверка finite/range без подстановок. Negative ISI сохраняют
 прежнее skip-значение, канонически-1. Hot reload и clock/lifecycle исправление
 являются отдельной зависимостью, не подтверждаемой этим cold fixture.
+
+Новый gate26 сохраняет все22 baseline cases и добавляет защиту от двойного
+знака, UTF-8 BOM и whitespace-only строк. Это ещё не runtime-проверенное
+исправление. Нельзя восстанавливать старые повреждённые файлы подстановкой0
+либо считать ClassID из прежнего atoi доказательством корректной метки.
