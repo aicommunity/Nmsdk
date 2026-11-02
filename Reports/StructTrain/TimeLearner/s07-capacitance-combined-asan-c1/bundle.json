@@ -1,0 +1,30 @@
+{
+  "kind": "timelearner_capacitance_combined_asan_evidence",
+  "schema_version": 1,
+  "root": "58d941c2664703e794179d0e5dfeaa95e54949ad",
+  "pulselib": "69d463aa50144a1c8ddb4a674bb900c2a07e769f",
+  "rdk": "48d6548e46f3310537a2d8b59fb5be553307a54f",
+  "statuses": {},
+  "actual_libasan_mappings_verified": false,
+  "acceptance_status": "incomplete_or_failed",
+  "archive_sha256": "2c7eda58e271ff48550c6a78c4efc16ffbf289eb6946ca3f246197208f3037bc",
+  "archive_bytes": 17746,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/CMakeCache.before.txt": "abaac2e6b8e046d9d5e5b53c8dd3143a480cfccc3b9c1d7ffc66517ba1b96240",
+    "gate/build-request.json": "6b3d0a1900f34f25df2c3aa0e86e5786641205f1d478f2f48f2db6c95e88adad",
+    "gate/build.log": "3fd7c585caef1425cfa53b1ac34f55ec2d37c970c162a4e6bc37c3555baaeed4",
+    "gate/checkout-Nmsdk-PulseLib.log": "ff89db6e6c8206abf417841c58ea7e695037d2c9eefd1e08fae64e4d5f08ad27",
+    "gate/checkout-Rdk.log": "e69d422e46a2e61d46b437a1bcb8a639baab43d9be4bfdde40cf20aec29dab12",
+    "gate/checkout.log": "aa3e3b0f6fe548f4a956bb173db00ef4d2df081aabd355f691df254201b762cf",
+    "gate/configure.log": "2769c30db338c7be4d40a5601a5d8a985a07f97a68290587af92a17f840f0631",
+    "gate/exception.json": "943a885405692033ffc7d3ed03e6713bf744765f6320b322e0592bd4b7bc397f",
+    "gate/fetch-Nmsdk-PulseLib.log": "af24c14f03dc9be602d651934e92c3d012d0335e2ee9c3a9dec444ec0256e8d9",
+    "gate/fetch-Rdk.log": "3ca15f32fa550522c5f81b5b36f856483de150e401a4af1086843b1cb020bedf",
+    "gate/fetch.log": "caab6064a5f19227c59fc8d20d8404e826738d828d02c2ca13c789fb170712cb",
+    "gate/owned-supervisor.json": "f8c18166a4d40ee8b3a7dc6989355baa2f71bc56220abbfa796dd3cf8d676ace",
+    "gate/process-guard.json": "01a2f0e4c6328d33aff13ead7cd0ca2de12d68f594b5f11a05a143f7938bff16"
+  },
+  "scope": "M40 ASan unit9/native35: bound C0 at2000/20000Hz, legacy joint edits/rollback/lifecycle faults, schema2 completed/stopped/frozen transfer, source1 regressions and independent readers. Full C-trim controller, XML retention and full mode matrix remain incomplete.",
+  "scientific_verdict": null
+}
