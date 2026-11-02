@@ -100,6 +100,49 @@ void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& p
     }
 }
 
+void CheckFiniteCandidateRanking(ProbeRouting routing,Normalization normalization,bool overflow)
+{
+    // Production session and recorder; only the measured physical response is
+    // controlled here. All three legal geometries are actually consumed.
+    for(const int axes:(overflow?std::vector<int>{1,2}:std::vector<int>{1,2,3}))
+    {
+        SCOPED_TRACE(axes);
+        const auto protocol=Protocol(2,routing);auto config=Configuration(2,normalization);
+        config.maximumCandidatesPerInput=3;
+        config.bounds={{2,4,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        const double tolerance=overflow?std::numeric_limits<double>::denorm_min():0.;
+        config.tolerances.sync=(axes&1)?tolerance:1.;
+        config.tolerances.amplitudeAbsolute=(axes&2)?tolerance:1e-5;
+        config.tolerances.amplitudeRelative=0.;
+        BoundedTrainingSession session(References(protocol),config,{{2,1,10.},{1,1,10.}});
+        DriveTraining(session,protocol,[&](const TrainingAction& action,auto& delay,auto& raw) {
+            const int length=action.parameters[0].length;
+            const double residual=length==2?.006:(length==3?.002:.001);
+            if(axes&1)delay[0]+=(length==2?.06:(length==3?.02:.01));
+            if(axes&2)raw[0]+=residual;
+        });
+        EXPECT_EQ(session.Parameters()[0].length,4);
+        EXPECT_EQ(session.Parameters()[0].synapses,1);
+        EXPECT_EQ(session.Parameters()[0].resistance,10.);
+        EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        EXPECT_EQ(session.Reason(),"maximum_sweeps_exhausted");
+        ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
+        std::set<int> measured;
+        for(const auto& evidence:session.Evidence())measured.insert(evidence.parameters.length);
+        EXPECT_EQ(measured,(std::set<int>{2,3,4}));
+    }
+}
+
+TEST(BoundedTrainingFiniteRanking,ClassicN0Zero){CheckFiniteCandidateRanking(ProbeRouting::ClassicBurst,Normalization::SynapseCount,false);}
+TEST(BoundedTrainingFiniteRanking,ClassicN1Zero){CheckFiniteCandidateRanking(ProbeRouting::ClassicBurst,Normalization::TipResistance,false);}
+TEST(BoundedTrainingFiniteRanking,BranchN0Zero){CheckFiniteCandidateRanking(ProbeRouting::BranchSoloBurst,Normalization::SynapseCount,false);}
+TEST(BoundedTrainingFiniteRanking,BranchN1Zero){CheckFiniteCandidateRanking(ProbeRouting::BranchSoloBurst,Normalization::TipResistance,false);}
+TEST(BoundedTrainingFiniteRanking,ClassicN0Overflow){CheckFiniteCandidateRanking(ProbeRouting::ClassicBurst,Normalization::SynapseCount,true);}
+TEST(BoundedTrainingFiniteRanking,ClassicN1Overflow){CheckFiniteCandidateRanking(ProbeRouting::ClassicBurst,Normalization::TipResistance,true);}
+TEST(BoundedTrainingFiniteRanking,BranchN0Overflow){CheckFiniteCandidateRanking(ProbeRouting::BranchSoloBurst,Normalization::SynapseCount,true);}
+TEST(BoundedTrainingFiniteRanking,BranchN1Overflow){CheckFiniteCandidateRanking(ProbeRouting::BranchSoloBurst,Normalization::TipResistance,true);}
+
 TEST(BoundedTrainingN0Repeats, SecondObservationCanRejectAnApparentlyExactCandidate)
 {
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
