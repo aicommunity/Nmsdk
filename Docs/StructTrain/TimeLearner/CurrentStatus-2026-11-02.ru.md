@@ -1,5 +1,49 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Обновление 19:08 UTC: normal transfer, reader fix и отдельный CMake merge
+
+Принятый корневой develop теперь `d12c50a67192897220d2d6f9f38db16c3f0f4e5b`:
+merge общего BUILD_TESTING / legacy BUILD_TESTS и компактного configure evidence.
+Gitlinks PulseLib/Rdk в develop этим merge не менялись. Проверены ON, legacy
+OFF и отклонение конфликта, обе unit/native цели, фактические 9/9 и14/14.
+Scope: [BuildTestSwitch](BuildTestSwitch.ru.md); это не закрытие всего этапа2.
+
+Elder B3 завершён: 9/9 lifecycle и14/14 native. Evidence
+`57383f8d93ebf660bd2f80d08ac315a67abe2896` проверен по всем476 members,
+3 632 679 сжатых байт. Его исходный reader gate упал: growth-only *ClassName
+не входили в Python dependency closure. Исторический статус failed сохранён.
+Исправление root `6db2d5156fe51e03e1ebdeb1c256c5010dadb9b7` независимо проверено
+на прежних primary, без нового Train: B5 exit0, 24/24 reader controls без skips,
+включая удаление growth-only зависимости. Evidence
+`b7b2d5d0a15e281da503d0b5af076d03e072f21f`, все5 members и6 files проверены.
+
+M40 C1 не исполнил тесты: Qt6 object/value EXPECT_EQ compilation error.
+Evidence `17e5baadb0aece02aa278ef6323845d107ed163a`, все14 members проверены.
+Root673f632b9 исправляет только явное сравнение QJsonObject. C2 использует
+numeric root6db2d5156 / Pulse69d463aa / Rdk48d6548e и новый runtime;
+на readback прошёл unit9, native35 ещё выполняется. Не принимать ожидаемые
+35 за уже прошедшие и не обновлять его source/build/runtime.
+
+Отдельная ветка archive-telemetry: Pulse
+`dc7edb2384633d4a1ce65bb40d2f5c8927482896`, root
+`420befe14d97dc60f9daf2c8c87a72ba50c380d6`.
+Нормализует только StepDuration в приватной serialization-копии, не живую
+модель и не scheduler limits. Нужна серверная проверка. Elder запускает
+native20 (6 archive +14 transfer), unit9 и24 readers. Этот код ещё не в develop.
+
+| Текущее задание | Owner / start ticks | Состояние на срезе |
+|---|---|---|
+| M40 `s07-capacitance-combined-asan-c2` | 2230628 /272114945 | native35 выполняется |
+| M40 publication C2 | 2230629 /272114956 | ждёт завершения owner |
+| Elder `s05-archive-telemetry-normal-a1` | 4148974 | сборка/проверки; ticks в owned-supervisor.json |
+| Elder publication telemetry A1 | 4148979 | ждёт завершения owner |
+
+Старые B1/B2/B3, B5 readers и C1 закрыты. Ниже — предыдущий срез,
+включая прежнюю таблицу активных процессов; она больше не является текущей.
+Полный план остаётся незавершённым: автоматическое владение C₀, bounded
+C-trim, полная physics/mode/lifecycle matrix, миграция и production pipeline,
+независимые научные эксперименты и документация по всем режимам остаются.
+
 ## Последний проверенный результат: transport и временные отчёты
 
 Исправленный Rdk Build contract завершил M40 ASan9/9 unit и13/13 native:
