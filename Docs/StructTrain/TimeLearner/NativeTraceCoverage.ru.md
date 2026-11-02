@@ -67,7 +67,9 @@ Proof5f84cdf009b9d1537f464635b16a8096cb00741b содержит299 members,
 Сохранена неудачная первая reader-попытка: prefix glob принимал saved model
 за probe. Исправление2e785da3e проверяет только числовые ordinals и сохраняет
 глобальное обнаружение любого неучтённого packet. ASan instrumentation18
-пока открыт. Normal temporal report завершён:88 probes/138 soma pairs,
+теперь завершён18/18,5/5 actual-data readers. Все88 CSV byte-equal normal,
+94 packets semantically equal, включая6 aliases. Proof44548f908365f5030445e4ced11a71147d044331,
+[границы](CompletedASanGates-2026-11-02.ru.md). Normal temporal report завершён:88 probes/138 soma pairs,
 821 PNG в M40 cache,3/3 coverage/hash/scale checks;14 selected PNG прямо
 просмотрены1920x960. QA и hashes: NativeTraceCoverageVisualQA.json.
 Proofab1ff2ec6f1eed706f98a5ac0dcbfc9d9237bd39 содержит33 verified members,

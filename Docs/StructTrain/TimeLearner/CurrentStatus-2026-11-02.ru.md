@@ -3,7 +3,16 @@
 Дополнение к PlanCompletionAudit-2026-11-01.ru.md. Полностью завершённым
 этапом исходного плана остаётся0; этапы1–12 частичны. Узкие gates не заменяют
 обязательную матрицу. Принятый develop44334e272de8429f29775512a860584c60350899
-не изменён; алгоритмическая feature ещё не принята.
+был исходной принятой точкой до описанного ниже scoped merge.
+
+Адресная приёмка search/scheduling/diagnostic/ranking завершена:
+PulseLib develop mergea18c8a1097a221e5aca3bfc2c1afc07fb2534a56 опубликован,
+его tested Core не изменился. Корень записывает точный gitlink и принимает
+feature следующим --no-ff merge. [Scope и доказательства](SearchDiagnosticAcceptance-2026-11-02.ru.md).
+Дополнительно на каждом worker60 выполненных Python tests без failures/errors,
+один N0 corpus class skipped; все1599 Project.ini roundtrip byte-exact.
+Общий запуск122 modules не прошёл без внешних fixtures и сохранён как
+неудачная попытка, а не полный PASS. Полные этапы1–12 по-прежнему частичны.
 
 Обновление после восстановления VPN: все четыре ожидавшихся ASan задания
 завершились. Integrated163:163/163; recording18:18/18; public preflight:

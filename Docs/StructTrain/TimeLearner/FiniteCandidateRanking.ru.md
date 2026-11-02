@@ -6,7 +6,9 @@ Core225642bd9b3a5651fce2808bd0bef79944d4f1b8 адресно проверен н�
 и M40 ASan: regression81/81, дополнительно physical4/4, затем raw readers21/21
 на каждом worker. Это отдельные gates, не один JUnit85. Doc-only Pulse1eeb23094c45681bb95250b1a1b81b734796790b
 сохраняет тот же Core tree2743819327158d12389221ba8c1cd9a928f28224.
-В develop изменения ещё не приняты: общая приёмка prerequisites продолжается.
+Адресная приёмка prerequisites завершена; PulseLib develop merge
+a18c8a1097a221e5aca3bfc2c1afc07fb2534a56 сохраняет тот же Core. Корень
+принимает точный gitlink следующим merge: [scope](SearchDiagnosticAcceptance-2026-11-02.ru.md).
 Defaults/цель/условия Exact не меняются; полные этапы0–12 этим не закрыты.
 
 Ожидавшиеся prerequisite ASan163/recording18/public diagnostic теперь
