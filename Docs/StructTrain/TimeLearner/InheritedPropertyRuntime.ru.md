@@ -30,3 +30,16 @@ baseline. Цель — исключить ошибочное принятие т
 Connected inherited properties, XML/Copy/reuse, изменение глобальной частоты с
 пересборкой производных коэффициентов, raw Default и positive wall-limit
 режимы остаются вне этого подэтапа и открыты в полном плане.
+
+Первая серверная сборка bb3020192 на обоих workers остановилась до запуска
+моделей. Тест ошибочно вызывал protected SetTimeStep напрямую; теперь используется
+публичная TimeStep property со штатным setter. Отдельно компиляция native Coord
+диагностики подтвердила общий дефект Rdk MUIOStream: MVector<T,3> formatter/input
+ссылаются на несуществующие x/y/z вместо публичного operator()(index).
+Исправление у владельца Rdk b34223ef113ca60a817589995205de06af77543a сохраняет
+формат и precision caller; некорректный vector input теперь даёт failbit без
+частичной подстановки координат. Добавлены шесть отдельных production-header
+Math tests; clean negative build на старом Rdk и обе positive сборки ожидаются.
+Это исправление стандартного vector stream, не MDMatrix XML writer и не
+изменение физики нейрона. Первые compilation failures сохраняются как setup
+ошибки, а не модельные или научные отрицательные результаты.
