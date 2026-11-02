@@ -1,0 +1,69 @@
+{
+  "kind": "native_wall_schedule_checkpoint",
+  "accepted_root": "f03f3a277fb69c082e670d7afec6f90ced313a4f",
+  "baseline_root": "162afc02abc321368304c8913a12a8ab2195682b",
+  "pulse_baseline": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
+  "rdk_baseline": "0a1c1d05a1b12de20feabf54a25712e210865791",
+  "root_branch": "codex/timelearner-native-wall-limits",
+  "pulse_branch": "codex/timelearner-native-wall-limits",
+  "pulse_worktree": "E:/Science-Repo/pulselib-native-wall-limits",
+  "guard_implemented": false,
+  "declared_probe_cases": 32,
+  "selected_baseline_cases": 2,
+  "baseline_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s04-native-wall-baseline-normal-a1",
+      "pid": 3363165,
+      "start_ticks": "315486965",
+      "source": "/home/user/timelearner-refactor/source-n1-measured-refinement-normal-a1",
+      "build": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1",
+      "runtime": "/home/user/timelearner-refactor/runtime-s04-native-wall-baseline-normal-a1"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-wall-baseline-asan-a2",
+      "pid": 1377398,
+      "start_ticks": "266067078",
+      "source": "/media/user/Data/TimeLearnerRefactor/source-native-wall-asan-a1",
+      "build": "/media/user/Data/TimeLearnerRefactor/build-native-wall-asan-a1",
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s04-native-wall-baseline-asan-a2"
+    }
+  ],
+  "publication_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s04-native-wall-baseline-publication-normal-a1",
+      "pid": 3364974,
+      "start_ticks": "315496340"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-wall-baseline-publication-asan-a1",
+      "pid": 1381144,
+      "start_ticks": "266085503"
+    }
+  ],
+  "cancelled_setup": {
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-wall-baseline-asan-a1",
+    "pid": 1374794,
+    "start_ticks": "266053243",
+    "reason": "omitted existing RDK_LLM_BUILD_EMBEDDED=OFF; own process group stopped before native tests"
+  },
+  "unchanged_inherited_native_asan": {
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-native-asan-a4",
+    "parent_pid": 1328814,
+    "parent_start_ticks": "265736335",
+    "child_pid": 1330455,
+    "numeric_root": "ff2eb1129c4d3d57e767058ab7e512236168c794",
+    "note": "do not update its source/build/runtime; original native16 gate still open"
+  },
+  "next": [
+    "Verify exact baseline actual readback, preserving setup failures separately; no inference of real wall-driven skips from the capability-policy test.",
+    "After reproduction, implement shared execution-only guard; leave generic Build/import/export/edit/rollback possible and Rdk semantics unchanged.",
+    "Add actual preflight/Begin/recognition/live-policy-change coverage, positive negative-limit controls, readers and temporal reports on both workers.",
+    "Preserve all original stages0-12; this substep is not whole lifecycle/storage or algorithm acceptance."
+  ],
+  "full_acceptance": false,
+  "scientific_verdict": null
+}
