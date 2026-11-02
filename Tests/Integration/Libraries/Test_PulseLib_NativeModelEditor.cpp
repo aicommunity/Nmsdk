@@ -450,6 +450,79 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     Artifact(rig.name+"_capacitance_edit.json",QJsonDocument(receipt).toJson());
 }
 
+template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int normalization)
+{
+    EditingRig<Learner> rig(frequency,normalization,"capacitance_owner",false,2,true);
+    NativeCapacitanceCorrection original;
+    ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,original));
+    QJsonArray phases;
+    auto snapshot=[&](const char* phase) {
+        const auto state=rig.learner->ImportedNativeCapacitanceState();
+        const auto exc=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
+        const auto inh=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true);
+        phases.append(QJsonObject{{"phase",phase},{"state",state},{"revision",QString::fromStdString(rig.Revision())},
+            {"exc_capacity",exc->Capacity.GetData()},{"inh_capacity",inh->Capacity.GetData()}});
+        EXPECT_FALSE(state.isEmpty())<<"a successful bound edit must retain its original C0 automatically";
+        if(!state.isEmpty())
+        {
+            EXPECT_NO_THROW(rig.learner->ValidateAppliedNativeCapacitanceState(state));
+            EXPECT_EQ(state["baseline"].toObject()["model_revision"],original.baseline["model_revision"]);
+            EXPECT_EQ(state["baseline"].toObject()["channels"].toObject()["Dendrite1_2.ExcChannel"],
+                original.baseline["channels"].toObject()["Dendrite1_2.ExcChannel"]);
+            EXPECT_EQ(state["membrane_scales"].toObject()["Dendrite1_2"],QJsonValue(1.1));
+            EXPECT_EQ(state["applied_model_revision"],QJsonValue(QString::fromStdString(rig.Revision())));
+        }
+        EXPECT_DOUBLE_EQ(exc->Capacity.GetData(),.9e-9*1.1);
+        EXPECT_DOUBLE_EQ(inh->Capacity.GetData(),.6e-9*1.1);
+        return state;
+    };
+    snapshot("first_bound_edit");
+    // A subset edit must preserve the earlier absolute correction in the
+    // owner's complete state, rather than replace its map with one entry.
+    auto second=rig.learner->ApplyNativeCapacitanceScale(original.baseline,{{"Dendrite1_1",.9}},.2);
+    ASSERT_EQ(second.status,NativeEditStatus::Applied)<<second.reason;
+    auto state=snapshot("second_membrane_edit");
+    EXPECT_EQ(state["membrane_scales"].toObject()["Dendrite1_1"],QJsonValue(.9));
+    const auto beforeReset=state;EXPECT_TRUE(rig.learner->Reset());
+    EXPECT_EQ(snapshot("native_reset"),beforeReset);
+
+    auto candidate=rig.learner->ReadNativeParameters();candidate[0].length=3;
+    const auto growth=rig.learner->ApplyNativeParameters(candidate);
+    ASSERT_EQ(growth.status,NativeEditStatus::Applied)<<growth.reason;
+    state=snapshot("ordinary_growth_without_correction_argument");
+    const auto extended=state["baseline"].toObject();
+    EXPECT_EQ(extended["channel_origins"].toObject()["Dendrite1_3.ExcChannel"],QJsonValue("storage_image"));
+    const auto added=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_3.ExcChannel",true);ASSERT_TRUE(added);
+    EXPECT_GT(extended["channels"].toObject()["Dendrite1_3.ExcChannel"].toDouble(),0.);
+    EXPECT_DOUBLE_EQ(added->Capacity.GetData(),extended["channels"].toObject()["Dendrite1_3.ExcChannel"].toDouble());
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+
+    // Capturing a currently trimmed graph is not permission to replace the
+    // original baseline and multiply it again. Rejection must be transactional.
+    const auto rebased=rig.learner->CaptureBoundNativeCapacitanceBaseline();
+    const auto beforeRevision=rig.Revision();
+    const auto beforeState=rig.learner->ImportedNativeCapacitanceState();
+    const auto refused=rig.learner->ApplyNativeCapacitanceScale(rebased,{{"Dendrite1_2",1.1}},.2);
+    phases.append(QJsonObject{{"phase","rebase_attempt"},{"status",NativeEditStatusName(refused.status)},
+        {"reason",QString::fromStdString(refused.reason)},{"before",QString::fromStdString(beforeRevision)},
+        {"after",QString::fromStdString(rig.Revision())},{"state",rig.learner->ImportedNativeCapacitanceState()}});
+    Artifact(rig.name+"_ownership.json",QJsonDocument(QJsonObject{{"kind","native_capacitance_ownership"},
+        {"schema_version",1},{"frequency_hz",int(frequency)},{"normalization",normalization},
+        {"branch",rig.branch},{"phases",phases},{"original_baseline",original.baseline},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    EXPECT_EQ(refused.status,NativeEditStatus::Rejected);EXPECT_EQ(rig.Revision(),beforeRevision);
+    EXPECT_EQ(rig.learner->ImportedNativeCapacitanceState(),beforeState);
+}
+TEST(NativeCapacitanceOwnership,ClassicN0At2000){NativeCapacitanceOwnership<NNeuronTimeLearner>(2000,0);}
+TEST(NativeCapacitanceOwnership,ClassicN1At2000){NativeCapacitanceOwnership<NNeuronTimeLearner>(2000,1);}
+TEST(NativeCapacitanceOwnership,BranchN0At2000){NativeCapacitanceOwnership<NNeuronTimeLearnerBranch>(2000,0);}
+TEST(NativeCapacitanceOwnership,BranchN1At2000){NativeCapacitanceOwnership<NNeuronTimeLearnerBranch>(2000,1);}
+TEST(NativeCapacitanceOwnership,ClassicN0At20000){NativeCapacitanceOwnership<NNeuronTimeLearner>(20000,0);}
+TEST(NativeCapacitanceOwnership,ClassicN1At20000){NativeCapacitanceOwnership<NNeuronTimeLearner>(20000,1);}
+TEST(NativeCapacitanceOwnership,BranchN0At20000){NativeCapacitanceOwnership<NNeuronTimeLearnerBranch>(20000,0);}
+TEST(NativeCapacitanceOwnership,BranchN1At20000){NativeCapacitanceOwnership<NNeuronTimeLearnerBranch>(20000,1);}
+
 template<class Learner> void BoundCapacitanceGrowth(unsigned frequency,int normalization)
 {
     EditingRig<Learner> rig(frequency,normalization,"bound_capacitance",false,2,true);
