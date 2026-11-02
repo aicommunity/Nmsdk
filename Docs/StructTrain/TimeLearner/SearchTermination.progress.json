@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_search_termination_checkpoint",
+  "accepted_root_develop": "6068f6af753d6a9d61634d5143d401af8dbffa71",
+  "root_branch": "codex/timelearner-search-termination",
+  "pulse_branch": "codex/timelearner-search-termination",
+  "pulse_feature": "63fd7a9fecbc567fb8e5c690ae58fc73a896de65",
+  "numeric_root": "24d1beba2bb58982931a62668a3019dd053e20f8",
+  "baseline": {
+    "root": "91a9524b5e4607c5444a2e7ea5fc6a2561cf271f",
+    "worker": "10.245.1.17",
+    "tests": 7,
+    "expected_failures": 4,
+    "controls_passed": 3,
+    "primary": "a2bc9dadba6fb651cc52a5e7918b0125d0eeb25a"
+  },
+  "gates": {
+    "normal": {
+      "primary": "348f15e866f36769b29a20678c6ef0e0897a2961",
+      "cpp_tests": 46,
+      "reader_cases": 4,
+      "archive_members": 114,
+      "archive_bytes": 95560
+    },
+    "asan": {
+      "primary": "f3061e974e3e134ba0900e80e53a1c02dc14015d",
+      "cpp_tests": 46,
+      "reader_cases": 4,
+      "archive_members": 114,
+      "archive_bytes": 98336
+    }
+  },
+  "probe_packets_each": 32,
+  "trial_soma_pairs_each": 48,
+  "native_scope": "internal native API; singleton physical bounds, sync0 deliberately negative, N2/f2000; not full configured V2 or legacy A/B",
+  "active_jobs": [],
+  "feature_accepted_in_develop": false,
+  "remaining": [
+    "Run native service positive/external-stop/warm/retarget and configured/XML/Copy/repeated-pair regressions.",
+    "Verify old completed-boundary and recognition controls: changing sweep termination to BudgetExhausted can turn former freshly produced nonexact completed packages into diagnostic stopped packages; do not hide this compatibility change or bypass the source-state guard.",
+    "Implement and verify explicit diagnostic evaluation for stopped physical models where required; default completed-Train recognition must continue rejecting them.",
+    "Strict complete observation/report inventory, full soma/input temporal caches and selected direct visual review for32 packets/48 pairs.",
+    "Merge accepted wall-policy and structured-exit changes into feature, rerun justified integrated checks; merge Pulse first/root last only after acceptance.",
+    "Quantized/best_effort, broader physics/modes/history/scripts/queues/scientific matrix and full original stages0-12 remain mandatory."
+  ],
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}
