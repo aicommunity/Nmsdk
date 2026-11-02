@@ -4162,8 +4162,14 @@ template<class Learner> void RejectNativeWallLimitedProbe(int normalization,cons
         {"limited_revision",QString::fromStdString(revision)},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     if(result.status==NativeProbeStatus::Rejected && node=="owner" && limit>0)
     {
-        const auto restored=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true);ASSERT_EQ(restored.status,NativeProbeStatus::Completed);
-        ASSERT_TRUE(restored.observation);EXPECT_TRUE(restored.observation->valid);
+        // This is a whole-burst observation: isolated-window selection would
+        // correctly reject its two peaks as ambiguous. Keep the actual burst
+        // protocol and assign the requested wave by its stimulus ID.
+        const auto restored=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true);ASSERT_EQ(restored.status,NativeProbeStatus::Completed);
+        ASSERT_TRUE(restored.observation);EXPECT_TRUE(restored.observation->complete);
+        EXPECT_TRUE(restored.observation->valid);
+        ASSERT_EQ(restored.observation->peaks.size(),1u);
+        EXPECT_EQ(restored.observation->peaks[0].stimulusId,"pulse0");
         EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
     }
 }

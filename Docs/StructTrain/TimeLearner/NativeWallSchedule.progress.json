@@ -78,5 +78,34 @@
   },
   "positive_acceptance_complete": false,
   "declared_reset_diagnostics": 4,
-  "positive_attempt_a1": "both builds stopped before tests: new fixture called nonexistent public CancelNativeProbe; corrected using native Reset contract; preserve failed build artifacts"
+  "positive_attempt_a1": "both builds stopped before tests: new fixture called nonexistent public CancelNativeProbe; corrected using native Reset contract; preserve failed build artifacts",
+  "positive_attempt_a2": {
+    "numeric_root": "efdf7a3afa5b1c0167fc78fff957c0cdc70d7782",
+    "both_workers": {
+      "tests": 66,
+      "passed": 62,
+      "failed": 4
+    },
+    "failed_cases": [
+      "ClassicN0OwnerLarge",
+      "ClassicN1OwnerLarge",
+      "BranchN0OwnerLarge",
+      "BranchN1OwnerLarge"
+    ],
+    "reason": "whole-burst positive controls used IsolatedWindow: completed observation correctly reports peak_ambiguous:input0",
+    "correction": "test requests AssignedBurstWave and verifies selected pulse0; production validity/physics unchanged",
+    "acceptance": false
+  },
+  "assertion_publication_jobs": [
+    {
+      "worker": "normal",
+      "pid": 3411318,
+      "start_ticks": "315873116"
+    },
+    {
+      "worker": "asan",
+      "pid": 1428250,
+      "start_ticks": "266416273"
+    }
+  ]
 }
