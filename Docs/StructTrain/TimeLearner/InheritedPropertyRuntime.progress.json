@@ -1,0 +1,219 @@
+{
+  "kind": "inherited_property_runtime_checkpoint",
+  "accepted_root": "f03f3a277fb69c082e670d7afec6f90ced313a4f",
+  "feature_branch": "codex/timelearner-inherited-runtime",
+  "feature_root": "f5273750690ae126577eca91801757f8b23d02ca",
+  "numeric_root": "ff2eb1129c4d3d57e767058ab7e512236168c794",
+  "rdk_feature": "b34223ef113ca60a817589995205de06af77543a",
+  "rdk_branch": "codex/timelearner-vector-stream",
+  "pulse": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
+  "bin": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+  "jobs": [
+    {
+      "host": "10.245.1.11",
+      "base": "/home/user/timelearner-refactor",
+      "output": "readbacks/s01-inherited-native-normal-a4",
+      "pid": 3326081,
+      "start_ticks": "315193557",
+      "runtime": "runtime-s01-inherited-native-normal-a4",
+      "budget": 7200,
+      "last_verified": "terminal completed; Math6/native16/reader7 passed; compact279-member proof published and locally hash verified"
+    },
+    {
+      "host": "10.245.1.17",
+      "base": "/media/user/Data/TimeLearnerRefactor",
+      "output": "readbacks/s01-inherited-native-asan-a4",
+      "pid": 1328814,
+      "start_ticks": "265736335",
+      "runtime": "runtime-s01-inherited-native-asan-a4",
+      "budget": 21600,
+      "last_verified": "owned native parent alive; Math6 passed; first3 native cases passed; BranchActivity20000 running"
+    }
+  ],
+  "expected": {
+    "math_tests": 6,
+    "native_tests": 16,
+    "topologies": [
+      "Classic",
+      "Branch"
+    ],
+    "normalization": [
+      "N0",
+      "N1"
+    ],
+    "frequencies": [
+      2000,
+      20000
+    ],
+    "reader_tests": 7,
+    "probe_packets": 56,
+    "complete_positive_probes": 48,
+    "expected_rejected_unprepared": 8,
+    "known_plottable_soma_pairs": 72
+  },
+  "negative_proofs": {
+    "normal": "a7b9ffd4f7e4747a0ab364a4aca178dcaa2086d6",
+    "asan": "1b8c173aa8acf57ea5cade60c67baec39d9c2977",
+    "baseline_root": "cc9b29421b7a7d538dcafe7899ef70965e3ae167",
+    "baseline_rdk": "0a1c1d05a1b12de20feabf54a25712e210865791",
+    "verified_members_per_worker": 33
+  },
+  "notes": [
+    "Initial test setup incorrectly called protected SetTimeStep; corrected via public TimeStep property.",
+    "Clean production-header stream target reproduces nonexistent MVector3 x/y/z member compile failure on both workers.",
+    "Owner fix uses public element accessor and transactional delimiter-checked extraction; general vector dimensions unchanged.",
+    "A4 sources/build/runtime must not be changed while owned processes are live.",
+    "New report code/spec does not alter C++ compiled source relative to numeric ff2eb1129.",
+    "Generic native-test adapter now permits declared nonempty standalone-only sets; exact JUnit/packet/CSV closure remains required.",
+    "Actual native test outputs not accepted until terminal, math6/native16 results and reader/temporal gates inspected.",
+    "Primary stages0-12 not complete. Prior Elder Bin provenance impact audit still open."
+  ],
+  "next": [
+    "Poll same owned A4 processes; do not restart on observation timeout.",
+    "Preserve failures before any retry. Fast math process may lack actual loader mappings: report separately; native long process must have mappings.",
+    "After success, stage closed native artifacts and exact gtest.xml as native.xml for report adapter with recorded hashes.",
+    "Export analysis code from feature through Git without modifying live source; run7 reader checks on both actual corpora.",
+    "Render all56 declared probes, keeping8 unprepared contexts as unknown without axes or fabricated zeros; directly inspect selected original soma/input plots.",
+    "Publish compact primary/proofs, verify bytes and graph/waveform outcomes, then merge Rdk first and root exact gitlink using --no-ff.",
+    "Continue full original plan; inherited configured ControllerVersion1/2 Train, connected/XML/Copy/reuse/global-frequency and trained continuation remain open."
+  ],
+  "full_acceptance": false,
+  "scientific_verdict": null,
+  "math_current_passed": 6,
+  "math_actual_loaded_files_captured_both_workers": true,
+  "math_failed_attempt_proofs": {
+    "normal": "25f06a95023f84527fbf3e36c3449ceddd4c423f",
+    "asan": "28f33e0f78daed127449fe1c6ffd100f9cf1a6ac",
+    "archive_members_each": 26,
+    "reason": "test assumed std token extraction despite SDK line-preserving string overload; corrected with explicit getline"
+  },
+  "source_reference_audit": {
+    "accepted_root": "ce285d7eee907d7d453ae00e1840246df09d5086",
+    "revision": "422647a2dff24d5783f95f2a2980507de81febcc",
+    "producer": "eaf6c5fbba055264a51987e3437bfbc14b02d0f2",
+    "proof_m40": "e0105c7a3345641c489c9a4bb5d379a208154b05",
+    "proof_elder": "408e9a06ae4722f9f34bbb7a2245379e0813fb3f",
+    "audit_sha256": "c3112045904de2b5abcdcd82aa2d04b41c61d7de09b0c27a40590986e6d7edf4",
+    "matching_reports": 25,
+    "dependency_review_required": 22,
+    "unknown_large_metadata": 4,
+    "scientific_reclassification": false
+  },
+  "reader_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s01-inherited-reader-normal-a2",
+      "pid": 3339783,
+      "start_ticks": "315299660"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-reader-asan-a2",
+      "pid": 1343934,
+      "start_ticks": "265842434"
+    }
+  ],
+  "reader_source": "5b6dd147200a37ea93f303cbb01408312555e5ac",
+  "reader_policy": "Independent depth1 filtered Git source, no edits to live native source/build/runtime. Wait for closed terminal16, copy native corpus and exact gtest.xml to native.xml, hash primary files, run7 reader tests and inventory. Reader a1 cancelled by verified owned process group due unbounded fetch/setup command before acceptance; preserved cancellation metadata.",
+  "normal_gate": {
+    "proof": "cc7d8b66d1ee4552e6bff8cd2d49bba63507e0af",
+    "math": 6,
+    "native": 16,
+    "reader": 7,
+    "archive_members": 279,
+    "reader_copies_bound": 233,
+    "independent_waveform_pairs": 24,
+    "archive_bytes": 439424
+  },
+  "publication_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s01-inherited-publication-normal-a1",
+      "commit": "cc7d8b66d1ee4552e6bff8cd2d49bba63507e0af",
+      "terminal": true
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-publication-asan-a1",
+      "pid": 1346747,
+      "start_ticks": "265852392",
+      "terminal": false
+    }
+  ],
+  "render_jobs": [
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-normal-render-a2",
+      "pid": 1349982,
+      "start_ticks": "265873003",
+      "python": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+      "cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s01-inherited-normal-a1",
+      "terminal": true,
+      "png_files": 2651,
+      "trials": 56,
+      "trial_soma_pairs": 72,
+      "visual_acceptance_complete": false
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-normal-visual-publication-a1",
+      "pid": 1351524,
+      "start_ticks": "265882424"
+    }
+  ],
+  "render_setup_failure": "normal render a1 used system Python without matplotlib; preserved exception; no figures generated. a2 uses existing plot-venv-a1; native jobs unchanged.",
+  "docs_python_retirement": {
+    "accepted_root": "f03f3a277fb69c082e670d7afec6f90ced313a4f",
+    "source": "2c3ac22a64c9f6443b6d8bc38ccb227ad1185919",
+    "normal_proof": "3c631ed1ab1616aa12e004a83151e83c933f9357",
+    "m40_proof": "841790f474d1cc22c2acadcf51cf5f3b6255b09a",
+    "records_verified": 48,
+    "whole_stage9_complete": false
+  },
+  "normal_visual": {
+    "proof": "e8ecd698cd00c4a4a7c696c6687be888f0bfc5c6",
+    "metadata_members": 519,
+    "cache_png_files": 2651,
+    "directly_viewed": 16,
+    "informative": 12,
+    "pre_stimulus_selected_zooms_rejected": 4,
+    "full_visual_acceptance": false
+  },
+  "review_selection_source": "12649b3a6f1da80d5898a6744ab7f7b35f47ac49",
+  "review_selection_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s03-inherited-review-selection-normal-a1",
+      "pid": 3355859,
+      "start_ticks": "315422413"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-inherited-review-selection-asan-a1",
+      "pid": 1363138,
+      "start_ticks": "265965194"
+    }
+  ],
+  "review_selection_proofs": {
+    "normal": "41a5cf04ff4394e3016c682df1d01d0d36ed3930",
+    "m40": "1edb1f403786c8266baf401cd64e239bfc000095",
+    "tests_each": 7,
+    "actual_cases": 8,
+    "anchors": 24,
+    "unique_views": 20,
+    "directly_reviewed": 20,
+    "data_scope": "closed normal corpus; ASan native gate still running"
+  },
+  "asan_native_completed": {
+    "primary": "b127bb3d7ab903ab97cd908b540f753711e5c5b4",
+    "native_tests": 16,
+    "math_tests": 6,
+    "reader_tests": 7,
+    "verified_primary_members": 279,
+    "archive_bytes": 444144
+  },
+  "rdk_develop_merge": "eda206b6b35de451ae837473d731ba20e7c30bde",
+  "rdk_numeric_tree_equals_merge_tree": "65bd007a4512283d1635131cb93699f21cdd7b3d",
+  "normal_asan_waveform_comparison": "InheritedPropertyNormalAsanComparison.json",
+  "full_original_plan_complete": false
+}

@@ -57,8 +57,8 @@ def inventory_native_test_run(specification, artifact_root):
     require(all(c.get("status", "run") == "run" and c.get("result", "completed") == "completed"
                 and not any(c.find(tag) is not None for tag in ("failure", "error", "skipped")) for c in cases),
             "native_test_junit_not_all_completed_successfully")
-    require(type(spec["phases"]) is list and bool(spec["phases"])
-            and type(spec["standalone"]) is list, "invalid_native_test_groups")
+    require(type(spec["phases"]) is list and type(spec["standalone"]) is list
+            and bool(spec["phases"] or spec["standalone"]), "invalid_native_test_groups")
     groups, packet_sources, trace_sources, summaries, identities = [], set(), set(), set(), set()
 
     def entry(packet_name, trace_name, pointer=""):
