@@ -76,8 +76,13 @@ class NativePreflightTest(unittest.TestCase):
             self.assertEqual(execution["model_ticks"], 1)
             self.assertIsNone(execution["evaluation_verdict"])
             manifest = load(train/"run-manifest.json")
-            self.assertEqual(manifest["validity"], "unverified_execution")
-            self.assertIsNone(manifest["analysis"])
+            if manifest["schema_version"] == 2:
+                self.assertEqual(manifest["validity"], "valid")
+                self.assertFalse(manifest["analysis"]["completed_boundary"])
+                self.assertIsNone(manifest["analysis"]["evaluation_verdict"])
+            else:
+                self.assertEqual(manifest["validity"], "unverified_execution")
+                self.assertIsNone(manifest["analysis"])
 
     def corrupt_native(self, change, pattern):
         original = self.root/"runs"/"pipeline-Classic-N1"

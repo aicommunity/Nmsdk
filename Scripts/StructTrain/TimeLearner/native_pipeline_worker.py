@@ -242,9 +242,21 @@ def audit_execution(mode, directory, job, source_case=None):
 
 
 def _structured_live_exit(mode, job, process, directory):
+    """Historical schema-1 run-manifest policy; preserve archived interpretation."""
     return (mode == "train" and job["schema_version"] == 2 and process["execution"] == "process_error" and
             type(process["returncode"]) is int and process["returncode"] == 2 and
             (Path(directory)/"execution.json").is_file())
+
+
+def _structured_training_exit(mode, job, process, directory):
+    """A nonzero native Train result is auditable, never automatically successful.
+
+    The caller must still audit signed native data, owned runtime and the stopped
+    boundary, and reject a completed-execution claim paired with exit code 2.
+    """
+    return (mode == "train" and type(job.get("schema_version")) is int and job["schema_version"] in (1, 2)
+            and process["execution"] == "process_error" and type(process["returncode"]) is int
+            and process["returncode"] == 2 and (Path(directory)/"execution.json").is_file())
 
 
 def _snapshot_source(source, destination):
@@ -279,12 +291,12 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         executable.parent, output/"process", maximum_wall_seconds, cooperative_capture=mode == "preflight")
     verify_runtime(runtime)
     audit = None
-    if process["execution"] == "completed" or _structured_live_exit(mode, job, process, output/"native"):
+    if process["execution"] == "completed" or _structured_training_exit(mode, job, process, output/"native"):
         require(process["runtime_provenance"] == "loaded_files_captured", "pipeline_loaded_runtime_missing")
         audit = audit_execution(mode, output/"native", job, source_case)
         if process["execution"] != "completed":
             require(load(output/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
-    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 1, "operation": mode,
+    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 2, "operation": mode,
         "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
         "job_sha256": job["sha256"], "source_package_path": source_relative,
         "runtime_fingerprint": runtime["runtime_fingerprint"], "source_closure": runtime["source_closure"],
@@ -306,7 +318,7 @@ def audit_run_manifest(path):
             "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
             "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} and
             manifest["kind"] == "timelearner_native_pipeline_run_manifest" and
-            type(manifest["schema_version"]) is int and manifest["schema_version"] == 1 and
+            type(manifest["schema_version"]) is int and manifest["schema_version"] in (1, 2) and
             manifest["operation"] in FIELDS and manifest["independent_partition_verified"] is False and
             manifest["evaluation_verdict"] is None, "unknown_native_pipeline_run_manifest")
     records = manifest["artifacts"]
@@ -346,7 +358,8 @@ def audit_run_manifest(path):
             PurePosixPath(arguments[3]) == output.parent/"input/job.json" and
             request["working_directory"] == str(PurePosixPath(runtime["executable"]["path"]).parent) and
             number(request["maximum_wall_seconds"]) > 0 and request["model_time"] is None, "pipeline_process_scope_changed")
-    auditable = process["execution"] == "completed" or _structured_live_exit(mode, job, process, root/"native")
+    structured_exit = _structured_live_exit if manifest["schema_version"] == 1 else _structured_training_exit
+    auditable = process["execution"] == "completed" or structured_exit(mode, job, process, root/"native")
     if auditable:
         from .native_evidence import load_json
         owned = load(root/"process/owned-process.json");loaded = load_json(root/"process/loaded-files.json")
