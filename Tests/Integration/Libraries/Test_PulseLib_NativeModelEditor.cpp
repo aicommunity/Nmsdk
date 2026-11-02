@@ -323,7 +323,7 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     const auto edited=rig.Revision();const auto life=rig.neuron->ObserveLifecycle();
     const auto repeat=rig.learner->ApplyNativeCapacitanceScale(decoded,scales,.1);
     ASSERT_EQ(repeat.status,NativeEditStatus::Applied)<<repeat.reason;
-    EXPECT_EQ(rig.Revision(),edited);EXPECT_TRUE(life.IsCurrent());
+    EXPECT_EQ(rig.Revision(),edited);EXPECT_EQ(repeat.afterRevision,edited);EXPECT_TRUE(life.IsCurrent());
     EXPECT_DOUBLE_EQ(exc->Capacity.GetData(),cExc*1.1);
     auto clone=dynamic_pointer_cast<NPulseNeuron>(NmsdkTools::ClonePhysicalGraphForEdit(rig.neuron,rig.ports));ASSERT_TRUE(clone);
     EXPECT_DOUBLE_EQ(clone->GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true)->Capacity.GetData(),cExc*1.1);
@@ -338,6 +338,10 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     }
     auto corrupt=baseline;corrupt["sha256"]=QString(64,'0');
     EXPECT_EQ(rig.learner->ApplyNativeCapacitanceScale(corrupt,scales,.1).status,NativeEditStatus::Rejected);
+    auto invalidChannel=baseline;auto channels=invalidChannel["channels"].toObject();channels["LTMembrane.ExcChannel"]=0.;
+    invalidChannel["channels"]=channels;invalidChannel.remove("sha256");
+    invalidChannel["sha256"]=NmsdkTools::CanonicalModelDataSha256(invalidChannel);
+    EXPECT_EQ(rig.learner->ApplyNativeCapacitanceScale(invalidChannel,scales,.1).reason,"invalid_capacitance_baseline_channel");
     EXPECT_EQ(rig.learner->ApplyNativeCapacitanceScale(baseline,{{"Soma1",1.1}},.1).status,NativeEditStatus::Rejected);
     EXPECT_EQ(rig.Revision(),edited);
     const auto restored=rig.learner->ApplyNativeCapacitanceScale(baseline,{{"Dendrite1_2",1.}},.1);
