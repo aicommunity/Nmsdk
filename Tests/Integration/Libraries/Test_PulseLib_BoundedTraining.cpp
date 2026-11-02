@@ -696,7 +696,7 @@ TEST(TrainingTermination,ExactAtLastAllowedSweepTakesPrecedence)
     EXPECT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_TRUE(session.Certificate());
     EXPECT_TRUE(session.Certificate()->Exact());EXPECT_FALSE(session.NextAction());
 }
-TEST(TrainingTermination,NoMeasuredCandidateRemainsSearchUnresolved)
+TEST(TrainingTermination,InvalidMeasurementsRemainInvalidObservation)
 {
     const auto protocol=Protocol();auto config=Configuration();config.maximumCandidatesPerInput=2;
     config.maximumInvalidObservations=10;config.bounds.assign(2,{1,1,1,1,10.,10.});
@@ -710,6 +710,16 @@ TEST(TrainingTermination,NoMeasuredCandidateRemainsSearchUnresolved)
         if(action->inputIndex==0)raw[0]=-.065; // Actual flat recording: no candidate peak.
         session.Consume(Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,{.03,.03},raw),action->baseModelRevision);
     }
-    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);EXPECT_FALSE(session.Certificate());
+    EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);EXPECT_FALSE(session.Certificate());
     EXPECT_FALSE(session.Rejected().empty());
+}
+
+TEST(TrainingTermination,NoAdjustableInputsRemainSearchUnresolved)
+{
+    const auto protocol=Protocol(1);auto config=Configuration(1);
+    config.bounds.assign(1,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.}});
+    DriveTraining(session,protocol,[](const auto&,auto&,auto& raw){raw[0]+=.001;});
+    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);ASSERT_TRUE(session.Certificate());
+    EXPECT_FALSE(session.Certificate()->Exact());EXPECT_EQ(session.AppliedEdits(),0u);
 }
