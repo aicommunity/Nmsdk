@@ -162,7 +162,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -387,7 +387,7 @@ def main(argv: list[str] | None = None) -> int:
         from .reports import render_evaluation
         try:
             from .native_evidence import require
-            require(args.format == "native-test-run" or args.artifacts is None, "artifacts_option_is_only_for_native_test_run")
+            require(args.format in ("native-test-run", "dataset-clock") or args.artifacts is None, "artifacts_option_is_only_for_native_test_run")
             require(args.format == "posttune-transaction" or args.source_solo is None, "report_source_solo_is_only_for_posttune")
             require(args.format == "native-live-finalization" or args.primary_inventory is None,
                     "primary_inventory_is_only_for_live_finalization")
@@ -411,6 +411,11 @@ def main(argv: list[str] | None = None) -> int:
                         "posttune_report_requires_source_solo_not_model_or_trace")
                 result = render_posttune_transaction(args.source.resolve(strict=True),
                     args.source_solo.resolve(strict=True), args.output.resolve())
+            elif args.format == "dataset-clock":
+                from .dataset_clock_reports import render_dataset_clock_report
+                require(args.artifacts is not None and args.trace is None and args.model is None,
+                        "dataset_clock_report_requires_artifacts_not_model_or_trace")
+                result = render_dataset_clock_report(args.source.resolve(strict=True), args.artifacts.resolve(strict=True), args.output.resolve())
             elif args.format == "native-test-run":
                 from .native_test_reports import render_native_test_run
                 require(args.artifacts is not None and args.trace is None and args.model is None,

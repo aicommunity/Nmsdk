@@ -16,6 +16,20 @@ FIELDS = {"kind", "schema_version", "runtime_manifest", "source_root", "expected
           "maximum_wall_seconds", "asan_options"}
 
 
+def supported_specification(spec):
+    """V2 explicitly requests the executable's cooperative exit handshake.
+
+    V1 retains its original launch contract; a missed mapping remains invalid.
+    Never infer support from a binary name or silently retry a failed attempt.
+    """
+    if type(spec) is not dict or spec.get("kind") != "timelearner_native_test_gate" or type(spec.get("schema_version")) is not int:
+        return False
+    if spec["schema_version"] == 1:
+        return set(spec) == FIELDS
+    return (spec["schema_version"] == 2 and set(spec) == FIELDS | {"cooperative_runtime_capture"}
+            and spec["cooperative_runtime_capture"] is True)
+
+
 @contextmanager
 def _environment(values):
     previous = {key: os.environ.get(key) for key in values}
@@ -57,9 +71,7 @@ def audit_junit(path, expected):
 def run_native_gate(specification, output):
     specification = Path(specification).resolve(strict=True)
     spec = load(specification)
-    require(type(spec) is dict and set(spec) == FIELDS and spec["kind"] == "timelearner_native_test_gate"
-            and type(spec["schema_version"]) is int and spec["schema_version"] == 1,
-            "unknown_native_gate_specification")
+    require(supported_specification(spec), "unknown_native_gate_specification")
     expected = spec["expected_test_ids"]
     require(type(expected) is list and bool(expected)
             and all(type(x) is str and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*/[A-Za-z_][A-Za-z0-9_]*", x)
@@ -91,7 +103,8 @@ def run_native_gate(specification, output):
     with _environment(environment):
         result = execute(runtime, ["--gtest_filter="+":".join(x.replace("/", ".") for x in expected),
                                   "--gtest_output=xml:"+str(output/"native.xml")],
-                         executable.parent, output/"process", wall)
+                         executable.parent, output/"process", wall,
+                         cooperative_capture=spec.get("cooperative_runtime_capture", False))
         verify_runtime(runtime)
     record = {"kind": "timelearner_native_test_gate_result", "schema_version": 1,
               "execution": result["execution"], "validity": "incomplete_test_observation",

@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_direct_visual_review",
+  "schema_version": 1,
+  "source_commit": "466d1693ed6c369dc92acd33a9d4dcc7695fcb38",
+  "direct_visual_review": true,
+  "reviewed_png": 8,
+  "visual_status": "passed",
+  "reviewed": [
+    {
+      "path": "dataset_clock_2000_mode2_gap0_origin0/overview.png",
+      "sha256": "bf34192080c754f445fe6125124fd6c92d0d27ba0d44180073e62945d870c010"
+    },
+    {
+      "path": "dataset_clock_2000_mode2_gap0_origin0/zoom-002.png",
+      "sha256": "251a5d9dcb7999c16ad1ad9f5438563b476b071dce0420abca0f328b9325db8f"
+    },
+    {
+      "path": "dataset_clock_2000_mode2_gap0_origin1/overview.png",
+      "sha256": "cc0ede6c5967fd6ca133fe36bcb6c46d1ad9e0e22cd01bdfca5de951f4177031"
+    },
+    {
+      "path": "dataset_clock_2000_mode2_gap0_origin1/zoom-002.png",
+      "sha256": "4aaea84bc6e8523d774db0e5c07d802e01a048ee1ce2e227b59b7625359dd3bc"
+    },
+    {
+      "path": "dataset_clock_20000_mode2_gap0_origin0/overview.png",
+      "sha256": "51cba03968e4827adfc4fe8cb93c33c7e1ac802c767546e17e3c67b50ea2bd5f"
+    },
+    {
+      "path": "dataset_clock_20000_mode2_gap0_origin0/zoom-011.png",
+      "sha256": "ed6e2c0feee3d272af79598384471d62ae7e6dc1fb57c5882014b619e7b776fd"
+    },
+    {
+      "path": "dataset_clock_20000_mode2_gap0_origin1/overview.png",
+      "sha256": "3d06d4da4240fd0a2d4031fbbd6f3d1c7829ade2d963c3fad37064525f067266"
+    },
+    {
+      "path": "dataset_clock_20000_mode2_gap0_origin1/zoom-011.png",
+      "sha256": "42a9fdf3eae6a776ad29fd8fe4f0bb2af83c9072a7c2bb8ed876880fe4855328"
+    }
+  ],
+  "findings": [
+    "All eight original-size PNG were directly viewed. Titles, axes and legends are inside the canvas and readable.",
+    "Input overlay and soma potential remain visible. Native-tick zoom and common Y scales support direct comparison without downsampling.",
+    "Original failed origin/pulse-program status is visible and retained. These are baseline characterization data, not classification results."
+  ],
+  "global_visual_acceptance": false,
+  "limitation": "Only the eight named selected figures were directly reviewed, not every view in the36-record/1797-PNG M40 cache, not the new fixed model or the full scientific matrix.",
+  "scientific_verdict": null
+}

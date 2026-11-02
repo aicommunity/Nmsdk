@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../Support/ConsoleLikeInit.h"
+#include "../../../App/NeuroModelerConsole/RuntimeCapture.h"
 
 #include <cstdio>
 #include <charconv>
@@ -17,6 +18,15 @@ int main(int argc, char** argv)
     freopen_s(&dummy, "NUL", "w", stderr);
 #endif
 
+    QString captureDirectory;
+    for(int index=1;index<argc;++index)
+    {
+        if(std::strcmp(argv[index],"--timelearner-capture-directory")!=0)continue;
+        if(!captureDirectory.isEmpty() || index+1>=argc || !argv[index+1][0])return 2;
+        captureDirectory=QString::fromLocal8Bit(argv[index+1]);
+        for(int next=index;next+2<argc;++next)argv[next]=argv[next+2];
+        argc-=2;argv[argc]=nullptr;--index;
+    }
     ::testing::InitGoogleTest(&argc, argv);
     // Explicit test-process initial condition, applied once before any test.
     // It is not a per-probe reset or a production clock policy. Child roles
@@ -31,7 +41,10 @@ int main(int argc, char** argv)
         std::fprintf(stderr,"TimeLearner test initial model time: %s microseconds\n",seed);
     }
     const int result = RUN_ALL_TESTS();
+    // The native work has finished. Keep this same owned process alive until
+    // its supervisor captures actual mappings; no model ticks/resets are added.
+    const bool captured=AwaitNativeRuntimeCapture(captureDirectory);
     NmsdkTests::ShutdownEngineForPulseLibTests();
-    return result;
+    return captured?result:2;
 }
 
