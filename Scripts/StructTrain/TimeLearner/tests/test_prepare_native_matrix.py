@@ -83,8 +83,14 @@ class PrepareNativeMatrixTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             spec = Path(temporary)/"specification.json";output = Path(temporary)/"prepared"
             spec.write_text(json.dumps(self.specification()), encoding="utf-8")
+            # Module discovery is explicit; the operation itself must work
+            # from an unrelated directory and resolve its declared inputs.
+            environment = dict(os.environ)
+            root = str(Path(__file__).resolve().parents[4])
+            environment["PYTHONPATH"] = root + (os.pathsep+environment["PYTHONPATH"] if environment.get("PYTHONPATH") else "")
             result = subprocess.run([sys.executable, "-m", "Scripts.StructTrain.TimeLearner", "prepare", str(spec),
-                                     "--output", str(output)], capture_output=True, text=True)
+                                     "--output", str(output)], capture_output=True, text=True,
+                                    cwd=temporary, env=environment)
             self.assertEqual(result.returncode, 0, result.stderr)
             manifest = load(output/"manifest.json")
             self.assertEqual(len(manifest["job_sha256"]), 32)
