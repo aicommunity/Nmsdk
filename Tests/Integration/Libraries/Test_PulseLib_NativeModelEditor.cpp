@@ -4341,9 +4341,10 @@ template<class Learner> void ChangeWallPolicyInObservationSink()
 {
     EditingRig<Learner> rig(2000,1,"wall_observation_sink",false,2,true);
     auto plan=TrainingPlan(rig);RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:2u);
-    const auto originalSink=plan.observationSink;std::size_t observations=0;
-    plan.observationSink=[&](const NativeProbeResult& packet) {
-        originalSink(packet);++observations;rig.learner->MaxCalculationDuration=1000000000LL;
+    const auto originalSink=plan.observationSink;const auto observations=std::make_shared<std::size_t>(0);
+    const auto owner=rig.learner;
+    plan.observationSink=[originalSink,observations,owner](const NativeProbeResult& packet) {
+        originalSink(packet);++*observations;if(owner)owner->MaxCalculationDuration=1000000000LL;
     };
     const auto old=rig.learner->MaxCalculationDuration.GetData();const auto parameters=rig.learner->ReadNativeParameters();
     rig.learner->BeginNativeTraining(plan);
@@ -4351,7 +4352,7 @@ template<class Learner> void ChangeWallPolicyInObservationSink()
     {ASSERT_LT(ticks,unsigned((rig.duration+.02)*rig.frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();
     const auto limit=rig.learner->MaxCalculationDuration.GetData();rig.learner->MaxCalculationDuration=old;
-    EXPECT_EQ(observations,1u);EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);
+    EXPECT_EQ(*observations,1u);EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);
     EXPECT_EQ(service.Reason(),"unsupported_native_wall_limited_schedule");EXPECT_FALSE(service.Certificate());
     EXPECT_FALSE(service.References());ASSERT_EQ(service.ObservedPackets().size(),1u);
     ASSERT_TRUE(service.ObservedPackets().front().observation);
