@@ -79,3 +79,13 @@ global_visual_acceptance и не считать автоматическое с�
 полные исходные идентификаторы, source paths и SHA остаются в manifest. Нельзя
 уменьшать разрешение, прореживать waveform или сокращать окно ради вёрстки.
 Новый baseline cache A2 требует повторного рендера и прямого visual review.
+
+Baseline A2 завершён; selected evidence
+`466d1693ed6c369dc92acd33a9d4dcc7695fcb38` проверен по13 SHA256. Все8 PNG
+непосредственно просмотрены после исправления: titles, labels и legends
+помещаются, input overlay и native-tick zoom читаются. Отдельный
+[visual-review.json](../../../Reports/StructTrain/TimeLearner/s03-dataset-clock-temporal-baseline-selected-a2/visual-review.json)
+содержит точный subset/hashes. Это visual PASS8, не просмотр всех1797 PNG и
+не подтверждение научной классификации. Global acceptance остаётся false.
+Для исправленного B6 источника строится отдельный cache76 на primary91fd3930;
+его visual review пока pending. Нельзя переносить на него baseline review.
