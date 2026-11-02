@@ -553,3 +553,109 @@ TEST(BoundedTrainingN0Candidates, PriorityWaitsForAllRequiredObservations)
     }
     EXPECT_EQ(session.CandidateRepeats().back().fullParameters[0],(InputParameters{2,2,10.}));
 }
+
+
+namespace {
+void MeasuredLengthCandidate(ProbeRouting routing,Normalization normalization)
+{
+    const auto p=Protocol(2,routing);auto cfg=Configuration(2,normalization);
+    cfg.maximumCandidatesPerInput=4;
+    cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
+    DriveTraining(session,p,[](const TrainingAction& action,auto& delay,auto&) {
+        // Controlled response oracle, not a physical-neuron experiment. Three
+        // completed lengths predict L12, outside the four-point nearest mesh.
+        // Every candidate and the final all-input gate are still observed.
+        delay[0]=.03+.01*(action.parameters[0].length-2);
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::Exact);
+    ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    EXPECT_EQ(session.Parameters()[0],(InputParameters{12,1,10.}));
+    EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+    EXPECT_LE(session.Evidence().size(),4u);
+    EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e) {
+        return e.parameters.length==12 && e.withinTiming && e.withinAmplitude;
+    }));
+}
+}
+TEST(BoundedTrainingLengthCandidates, ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::ClassicBurst,Normalization::SynapseCount);}
+TEST(BoundedTrainingLengthCandidates, BranchN0UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::BranchSoloBurst,Normalization::SynapseCount);}
+TEST(BoundedTrainingLengthCandidates, ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::ClassicBurst,Normalization::TipResistance);}
+TEST(BoundedTrainingLengthCandidates, BranchN1UsesMeasuredDelayTrendWithinOriginalBudget)
+{MeasuredLengthCandidate(ProbeRouting::BranchSoloBurst,Normalization::TipResistance);}
+
+
+TEST(BoundedTrainingLengthCandidates, PredictedPointIsMeasuredAndCannotBypassTheFinalGate)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const bool damageFinal:{false,true})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration();cfg.maximumCandidatesPerInput=4;
+        cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
+        DriveTraining(session,p,[&](const auto& action,auto& delay,auto&) {
+            const int length=action.parameters[0].length;
+            delay[0]=.03+.01*(length-2);
+            if(length==12 && (!damageFinal || action.finalVerification))delay[0]=.03;
+        });
+        EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+        ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
+        EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e){return e.parameters.length==12;}));
+    }
+}
+TEST(BoundedTrainingLengthCandidates, N0ProposalWaitsForRequiredCandidateRepetitions)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.maximumCandidatesPerInput=4;cfg.n0CandidateRepeats=2;
+    cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
+    DriveTraining(session,p,[](const auto& action,auto& delay,auto&) {
+        delay[0]=.03+.01*(action.parameters[0].length-2);
+    });
+    ASSERT_EQ(session.Status(),TrainingStatus::Exact);
+    ASSERT_EQ(session.CandidateRepeats().size(),4u);
+    for(const auto& group:session.CandidateRepeats())
+    {EXPECT_TRUE(group.complete);EXPECT_EQ(group.trialIds.size(),2u);EXPECT_EQ(group.anchorTrialIds.size(),2u);}
+    EXPECT_EQ(session.Parameters()[0].length,12);
+}
+TEST(BoundedTrainingLengthCandidates, N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
+        cfg.maximumCandidatesPerInput=5;
+        cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},true);
+        DriveTraining(session,p,[](const auto& action,auto& delay,auto&) {
+            delay[0]=.03+.01*(action.parameters[0].length-2);
+        },[](const auto& action) {
+            // Controlled domain adapter; actual physical domains are checked
+            // separately by native storage/Console experiments.
+            ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+            d.baseModelRevision=action.baseModelRevision;d.geometry=action.parameters;d.inputIndex=action.inputIndex;
+            d.previewModelRevision="length_scope_"+std::to_string(action.parameters[0].length);
+            d.minimumResistance=d.maximumResistance=10.;d.sourceAmplitude=1.;return d;
+        });
+        EXPECT_EQ(session.Status(),TrainingStatus::Exact);
+        EXPECT_TRUE(std::any_of(session.Domains().begin(),session.Domains().end(),[](const auto& d){return d.geometry[0].length==12;}));
+        EXPECT_EQ(session.Parameters()[0].length,12);
+    }
+}
+TEST(BoundedTrainingLengthCandidates, NonmonotoneMeasurementsRetainTheBoundedLengthScan)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration();cfg.maximumCandidatesPerInput=4;
+        cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
+        DriveTraining(session,p,[](const auto& action,auto& delay,auto&) {
+            const int length=action.parameters[0].length;
+            delay[0]=length==2?.03:length==3?.05:length==4?.04:.13;
+        });
+        EXPECT_EQ(session.Status(),TrainingStatus::Exact);EXPECT_EQ(session.Parameters()[0].length,5);
+        ASSERT_EQ(session.Evidence().size(),4u);
+        for(std::size_t i=0;i<4;++i)EXPECT_EQ(session.Evidence()[i].parameters.length,int(i)+2);
+    }
+}

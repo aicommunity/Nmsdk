@@ -1,0 +1,1714 @@
+{
+  "kind": "measured_length_native_gate_after_recovery",
+  "worker": "asan",
+  "new_xml_passed": 24,
+  "new_xml_test_names": [
+    "NativeModelEditor.ClassicN0_2000",
+    "NativeModelEditor.BranchN0_2000",
+    "NativeModelEditor.ClassicN1_2000",
+    "NativeModelEditor.BranchN1_2000",
+    "NativeModelEditor.ClassicN0_20000",
+    "NativeModelEditor.BranchN0_20000",
+    "NativeModelEditor.ClassicN1_20000",
+    "NativeModelEditor.BranchN1_20000",
+    "NativeModelEditor.TightBurstAfterGrowthRemainsAnExplicitInvalidObservation",
+    "NativeModelEditor.CoupledColdBranchFourInputsUseSharedPhysicalBanks",
+    "NativeModelEditor.HeterogeneousClassicBankCannotBeFlattened",
+    "NativeModelEditor.HeterogeneousBranchBankCannotBeFlattened",
+    "NativeModelEditor.ExplicitGraphPreservesUnownedBanksAndRejectsMissingAttachments",
+    "NativeModelEditor.ShrinkCannotSilentlyDeleteAnExternalObservationSource",
+    "NativeResistanceDomains.ClassicSearchUsesEffectiveDomain",
+    "NativeResistanceDomains.BranchSearchUsesEffectiveDomain",
+    "NativeResistanceDomains.ClassicSearchUsesEffectiveDomain20000",
+    "NativeResistanceDomains.BranchSearchUsesEffectiveDomain20000",
+    "NativeResistanceDomains.BranchBoundedSharedBanksKeepSingletonGeometry",
+    "NativeResistanceDomains.BranchFreeUpstreamBanksCanSeparateForRsSearch",
+    "NativeResistanceDomains.ClassicReadonlyPreview",
+    "NativeResistanceDomains.BranchReadonlyPreview",
+    "NativeResistanceDomains.ClassicScaledInhibitionDomain",
+    "NativeResistanceDomains.BranchScaledInhibitionDomain"
+  ],
+  "prior_passed_names": [
+    "BoundedTrainingN0Repeats.SecondObservationCanRejectAnApparentlyExactCandidate",
+    "BoundedTrainingN0Repeats.BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+    "BoundedTrainingN0Repeats.Cap128CanPassWithTwoActualMeasurements",
+    "BoundedTrainingN0Repeats.NoOpN1AndInvalidRepeatCountsAreRejected",
+    "BoundedTraining.MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+    "BoundedTraining.IndependentResistanceBoundsAndNoCommonIntersection",
+    "BoundedTraining.IndependentEffectiveDomainsDoNotRequireACommonInterval",
+    "BoundedTraining.EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+    "BoundedTraining.EmptyEffectiveDomainsRemainSearchUnresolvedWithFreshFinalMeasurements",
+    "BoundedTraining.Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+    "BoundedTraining.LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+    "BoundedTraining.SearchBudgetAndExternalStopNeverCreateCertificate",
+    "BoundedTraining.CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+    "BoundedTraining.AppliedReadbackAndProbeRevisionAreMandatory",
+    "BoundedTraining.SingleInputStillRequiresRealFinalProbe",
+    "BoundedTraining.RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+    "BoundedTraining.MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+    "BoundedTraining.ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+    "BoundedTrainingN1Refinement.AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+    "BoundedTrainingN1Refinement.AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+    "BoundedTrainingN0Candidates.ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates.BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates.LengthOnlySearchKeepsItsOriginalBudget",
+    "BoundedTrainingN0Candidates.WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+    "BoundedTrainingN0Candidates.PriorityWaitsForAllRequiredObservations",
+    "BoundedTrainingLengthCandidates.ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates.BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates.ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates.BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates.PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+    "BoundedTrainingLengthCandidates.N0ProposalWaitsForRequiredCandidateRepetitions",
+    "BoundedTrainingLengthCandidates.N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+    "BoundedTrainingLengthCandidates.NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+    "MeasuredLengthSearch.ThreeMeasuredPointsCanProposeBeyondTheNearestMesh",
+    "MeasuredLengthSearch.BracketUsesOnlyAnUnmeasuredBoundedInteger",
+    "MeasuredLengthSearch.NonmonotoneFlatAndAmbiguousIntervalsKeepEnumeration",
+    "MeasuredLengthSearch.RepeatedIntervalsCannotBeAveragedIntoASlope",
+    "MeasuredLengthSearch.InvalidNumbersAndDomainsNeverProposeAnEdit",
+    "MeasuredLengthSearch.WideIntegerBoundsDoNotOverflowTheMidpoint",
+    "NativeBoundedTraining.Classic2000",
+    "NativeBoundedTraining.Branch2000",
+    "NativeBoundedTraining.Classic20000",
+    "NativeBoundedTraining.Branch20000"
+  ],
+  "unique_passed": 67,
+  "prior_evidence": "0608878fa3570698fa53571c66fdddcd7e59d8c2",
+  "four_asan_training_cases_have_stdout_not_final_xml": true,
+  "source_worktree_guard_commit": "0ac096110acd9b50ad9656d362b618d222a94f73",
+  "source_closure_checked_before_after": true,
+  "same_frozen_runtime": true,
+  "runtime_fingerprint": "e7316a71636d6db2310e08b68569199a50b969137f9587d78d6fb088deecc520",
+  "wall_seconds": 7072.722002416849,
+  "records": [
+    {
+      "path": "execution.json",
+      "bytes": 443,
+      "sha256": "a97c11713a551bfbe6b79414331d5457ee8e7219cc71b87c5c0cf851bbd29033"
+    },
+    {
+      "path": "gtest.xml",
+      "bytes": 8388,
+      "sha256": "4d167e9c04e732f3094399ed3ad57c02a925945214c0106ace18764737751e68"
+    },
+    {
+      "path": "job.py",
+      "bytes": 2449,
+      "sha256": "f26b55963c51a657dec87139707c8b30dd7ed50f72e3a852598168f4b5f071c3"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_edit.json",
+      "bytes": 275942,
+      "sha256": "4aa3633ecd2655e27363f35963d1ed710735a743690a79d026a2d1bb10bc6184"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_model.json",
+      "bytes": 110507,
+      "sha256": "d7d20c3a936e9a9cc92f776856608a20af2659fdcd345a95839a54eb1410314a"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_probe_2.csv",
+      "bytes": 142677,
+      "sha256": "ba1aa50be44577bf030b3747b8357e3a814a9f4b3f087bac38cee900fed320d9"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_probe_2.json",
+      "bytes": 389,
+      "sha256": "fe4666ed86cf6d04627dec34812d5c303636f897b0b67f50875bfe7666c426b9"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_probe_4.csv",
+      "bytes": 141314,
+      "sha256": "08eff88b2e7900ac39fd6058502d73c14db8e24353566a853abc2a79b6733bc4"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_probe_4.json",
+      "bytes": 388,
+      "sha256": "94e95f9f7a9dc78324dffd6bddbb7644d0bb52f476c5a6df7e82cf3ab5871fe3"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_probe_6.csv",
+      "bytes": 142606,
+      "sha256": "ccd80b075910844724d165be6d1d3275d661bbf2a606ba8467a8db15d6595e4b"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_probe_6.json",
+      "bytes": 390,
+      "sha256": "29445063bd90d628534499434e586b647f2aff89157084642c48e7f3b64a3a7d"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_startup_after.json",
+      "bytes": 194946,
+      "sha256": "d5a627fb29ebb463349e77314eb05248b16ee2c875b30bf15d232358a0d2afff"
+    },
+    {
+      "path": "native-regression/Branch_20000_N0_native_model_edit_startup_before.json",
+      "bytes": 194942,
+      "sha256": "ba2d6dba3a4e7e5b67a2a3735ba0d333273ca1013f8756eee254ba5bdf0f3244"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_summary.json",
+      "bytes": 282911,
+      "sha256": "d8b9cf6050fe6f0cec347a65ee9706cc888a0ba6ed11b39cd9d0bbc09949165f"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_1.csv",
+      "bytes": 130703,
+      "sha256": "41591e8422d68f65b23a60b3d7adba22b97a8645b95d8e544fba4c88fccbe99b"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_1.json",
+      "bytes": 5874,
+      "sha256": "5c88ec95633bd7baa48238299d12e99b7351a0ba546b05549f8a56733940896b"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_10.csv",
+      "bytes": 130683,
+      "sha256": "7993263af8485327effba1e3a287d416304aedf41d3cadf7e131875328f612e4"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_10.json",
+      "bytes": 5854,
+      "sha256": "2694cbc653a5fdeda4a294caca90af514e0166e788ed569d01569eeb349ee946"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_11.csv",
+      "bytes": 131027,
+      "sha256": "7f38cd532621dac8c89c8696f7952dbc5814d2af4c1f3f442307e46e16aee094"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_11.json",
+      "bytes": 5891,
+      "sha256": "9520762948d6a45fa542fe197d422f752a81ebb8e0ab34ddb8ca9c267ae1bd2f"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_12.csv",
+      "bytes": 130748,
+      "sha256": "7bbf0db9252313ea878c1fd6660402e625110bd358958309b358fe1ba0bf7746"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_12.json",
+      "bytes": 5887,
+      "sha256": "9a6ef2c2820d604c7e174ddba56fa69f5b5a7950d5f086bc7758ab95a55ce39d"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_2.csv",
+      "bytes": 130979,
+      "sha256": "6c2cfc107b28e9adcbd9dfbd7d9efee19ab6f6941d121ff354efb2d015faf583"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_2.json",
+      "bytes": 5880,
+      "sha256": "3a4ccb55df153e1e8516df4920dd6ea96bc72f164ed272ef9512028ed9c040d9"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_3.csv",
+      "bytes": 131016,
+      "sha256": "63700566761da3e6c7caa1dde01d104da5867b8102d3cbbf1f4ca282be8f999f"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_3.json",
+      "bytes": 5855,
+      "sha256": "2a23429509759602c22003493b49a9f088f3031428855748e3a881e2be57371f"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_4.csv",
+      "bytes": 130737,
+      "sha256": "446704d1201ba1fa9dc791f1841f6d08a87ca0a3e56516857ceb5f94ca17b6b8"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_4.json",
+      "bytes": 5874,
+      "sha256": "f5075963469fc79f31f46ae892d671cfe9999064fbc0d038fa835d92bfff1dfd"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_5.csv",
+      "bytes": 130974,
+      "sha256": "11f2a61a6058674d390d15e32dd676f25c79501211892bd8fd5c87d78a1c52da"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_5.json",
+      "bytes": 5855,
+      "sha256": "749b99bf2c0a66ab9c00a5d92d3886370f0c66e38779262cbf4e5ddec0542da5"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_6.csv",
+      "bytes": 130695,
+      "sha256": "b572853bd125ff79a0f01a93de7468279eb2cd45ea420688f20b46dc6d3e6cf3"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_6.json",
+      "bytes": 5849,
+      "sha256": "9700d5dc657fc2aea960f28b9e0d7600b59a00bbd687095a1e44ea8fb3e80e24"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_7.csv",
+      "bytes": 131040,
+      "sha256": "2ec1a592ca5cf57f6a9c25b6ae4362226f52991ee5ba19db44fbe2ab6e43fe53"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_7.json",
+      "bytes": 5857,
+      "sha256": "feb3732b6c8010dee56f9c2cdb444391f3bad2710565afa857b5d00579701fe0"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_8.csv",
+      "bytes": 124446,
+      "sha256": "64edc9ae9a58d9855cbb5230ac89fef28235bb90090c4a1d4988c3507534a44e"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_8.json",
+      "bytes": 5847,
+      "sha256": "3946c80deb9d11ec5ebd918c0446d12ef725f335b19fe9bd48111429fed73371"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_9.csv",
+      "bytes": 130985,
+      "sha256": "7e6be274ea091fbcba91ab5570b2a9c26a7d20348c13a491971d6520657ad8d1"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_domain_trial_9.json",
+      "bytes": 5856,
+      "sha256": "9a69c3540f9e7be194896689d18e504229b821c2eb936bdbd71511ed7165434b"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_startup_after.json",
+      "bytes": 195508,
+      "sha256": "173bb80e21730beba06458cbda3df35c85d5275718d31549cf7d7a3b1d88a8f7"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_effective_resistance_domain_startup_before.json",
+      "bytes": 195504,
+      "sha256": "283361c376902f5ec3cdefeeb247f499e3d2cd61f19126b1cbafe04151c496d3"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_edit.json",
+      "bytes": 264334,
+      "sha256": "c5a1eb6cc62caf8d34085a35aedc39d2b164b981390909d057039b880918b711"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_model.json",
+      "bytes": 110507,
+      "sha256": "00dbcc26c97f5b9a8bfe8d500b86a6e2ceb72267b050ac91ac5a8e8447bd26fd"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_probe_2.csv",
+      "bytes": 142680,
+      "sha256": "fd07d63a5c656a6af5c525de55b08368f6df13cc210f60559df28e2655888a79"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_probe_2.json",
+      "bytes": 389,
+      "sha256": "b7518102339669a94049d9dcf31dcce3bddb988a64116d52720bf029dba0aff4"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_probe_4.csv",
+      "bytes": 146333,
+      "sha256": "51cae16c3cb995c4779a3ed0a030cdc4e32ef538fbb6b07b54ff2aae4ab28d78"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_probe_4.json",
+      "bytes": 390,
+      "sha256": "b1e411c6cad96db352f44754046801c380669358d4d32020f312e26bc94c6632"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_probe_6.csv",
+      "bytes": 147284,
+      "sha256": "3bacb47abe2c121101853791a8044e6e4dd7eedae80e57e7cb26b041ec9a66d8"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_probe_6.json",
+      "bytes": 390,
+      "sha256": "faa8bea6e23cb3c9acbe3b6467026fca83ff7342ce740b5dc8f9b748d3f380b3"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_startup_after.json",
+      "bytes": 195048,
+      "sha256": "505ebc3108185e846c25b7299565b8ea42954625638d684108cb8fd3730880e2"
+    },
+    {
+      "path": "native-regression/Branch_20000_N1_native_model_edit_startup_before.json",
+      "bytes": 195044,
+      "sha256": "161bfa9bacb4f0896bda27c2b7318a432d4a71e39aa172ae96a220a7e90cf05b"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_coupled_cold_four_model.json",
+      "bytes": 110414,
+      "sha256": "669020ae13844c14de49bcb23f57f6ddbd0171b23245a484b2f268467dfc7438"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_coupled_cold_four_probe_2.csv",
+      "bytes": 28266,
+      "sha256": "fb450dea6a73427232577e11f7a47b2504dd788c1320b455dcc23e230552dee1"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_coupled_cold_four_probe_2.json",
+      "bytes": 388,
+      "sha256": "8f26caca1e6944ac2f7ccc265e2a052ad9467ef57c8a57fd781974b3e6b5418b"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_coupled_cold_four_probe_4.csv",
+      "bytes": 28216,
+      "sha256": "5e3ef980a50798add763227cdb12987fb1efcd8b5ed339c7e173e0eaf68b76b6"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_coupled_cold_four_probe_4.json",
+      "bytes": 388,
+      "sha256": "6132e1ffc99814bd93e965c1e1d723ea7b85ef6faedde77f09e5e2c89e61f498"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_coupled_cold_four_startup_after.json",
+      "bytes": 162757,
+      "sha256": "772a5e199bc6a4c20a06399730348d76cc7c2a9950ecc0ac5187b6150a0e284a"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_coupled_cold_four_startup_before.json",
+      "bytes": 162754,
+      "sha256": "aec5e5315162803654178d2dacbdd8735549ae878ec5f4ef49a64015f18ea7ab"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_heterogeneous_bank_probe_2.csv",
+      "bytes": 14763,
+      "sha256": "bc1875575a09f333a0bb82273dd09cdd1890e1bef60048829ec3c50c7ece997e"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_heterogeneous_bank_probe_2.json",
+      "bytes": 389,
+      "sha256": "5fec611867ef3520df9cc7fa27437b9684198eaa4eb709d8358c5503543d448d"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_heterogeneous_bank_rejection.json",
+      "bytes": 345,
+      "sha256": "686d4f375081397bc8e07607b106d6279d5774af6a52b2d9d1a6696ad20f06eb"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_heterogeneous_bank_startup_after.json",
+      "bytes": 194892,
+      "sha256": "8dbb3167d96cb2cc2fc509103dd2ae4d1dd51be0fa000ea8642bfa3e790a063f"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_heterogeneous_bank_startup_before.json",
+      "bytes": 194888,
+      "sha256": "3d2f69c45bdf622502e7b91c909d7543caa2a96ab5625af7f2396e249ab9a186"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_edit.json",
+      "bytes": 275734,
+      "sha256": "660532d04d334ed01b44829f5de97e21476c2a0fc69590560dcbb2ffa43fc4f5"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_model.json",
+      "bytes": 110414,
+      "sha256": "e6b66690a90483318f39ab5381ff1416b9aa9c8f4b143897e8eafe7d774fb651"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_probe_2.csv",
+      "bytes": 15174,
+      "sha256": "3030538fc66e0a80818a86ee71c4b7c43343cf82d0a65f79654b88a3d3aa784d"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_probe_2.json",
+      "bytes": 388,
+      "sha256": "de7981cf18506800548fca67c06d43378ced9f3f8215ec7d175bfeee1bec1192"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_probe_4.csv",
+      "bytes": 15010,
+      "sha256": "9450b2b66a9e1ce1202feb7035f8ded6c72291a7ab39e723eb051c1b2f5fd020"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_probe_4.json",
+      "bytes": 386,
+      "sha256": "32d7b810464b3c6f5c2434b2c7cd4c92b18359e6f9ab56bc0f30d00b6d385642"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_probe_6.csv",
+      "bytes": 14274,
+      "sha256": "295fe705518a0ca0e9efcc49538229be2e2df746d0a7aee66fd6d46af1bd62b7"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_probe_6.json",
+      "bytes": 387,
+      "sha256": "c5b031a10803ddf1ff8141ae42d82d4df0d53174bded9d5bbcb38511f8c658d5"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_startup_after.json",
+      "bytes": 194845,
+      "sha256": "816a3392c0f98a17a092930ebfe0fc352aa9e2898353d67f184a3497f1cab492"
+    },
+    {
+      "path": "native-regression/Branch_2000_N0_native_model_edit_startup_before.json",
+      "bytes": 194842,
+      "sha256": "f6c0cc7b57627b7e05d092fea2d52c33e0f6c3cbefc832f35ff70f8f6bde201a"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_construction.json",
+      "bytes": 134,
+      "sha256": "5061d7fdecc8490fc65bd37eb54953d35b561b09871b57faaebb47547f687bc1"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_fixed_domain.json",
+      "bytes": 134503,
+      "sha256": "ac52b598861570a6f4f7ad98765c904446b1ceed04f1803f749f25ba40bfeb1a"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_probe_2.csv",
+      "bytes": 14126,
+      "sha256": "dd22c5e63e74819b645276e0e83bedd9e8cc2c0a62853b8000c17762c22cfcca"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_probe_2.json",
+      "bytes": 429,
+      "sha256": "a4ce506fa0c8beacc52fdf4a32657d6a0fdc06ff650e2e752f9c6ed343b9f939"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_probe_4.csv",
+      "bytes": 14136,
+      "sha256": "c30f73f26caf0f395753308006029e619fa4a781ace8823685aa412fdc9d40cd"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_probe_4.json",
+      "bytes": 429,
+      "sha256": "1e95aea091b0acdee1dde7f61258cdf287f50096821a9537094893447b6a788d"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_scaled_domain.json",
+      "bytes": 134976,
+      "sha256": "70b97d23267596080fc28be1537d51c31def9e7a1b98603e972ef0d7c571c990"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_startup_after.json",
+      "bytes": 195055,
+      "sha256": "a0d80f647cfd4fb6bba85fa670312eb9f77b9b0c68b8dc7181ce6941e1d4c08c"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_inhibition_startup_before.json",
+      "bytes": 195055,
+      "sha256": "a0d80f647cfd4fb6bba85fa670312eb9f77b9b0c68b8dc7181ce6941e1d4c08c"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_construction.json",
+      "bytes": 134,
+      "sha256": "4133dbd78ab861406dcf4f4bda42eaceea4be753c3d0a74d6ca69dfde91d08e5"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_summary.json",
+      "bytes": 253143,
+      "sha256": "31fc6bd915f40dbdead3c33913b5495056eb6c2b955541a5607dede7317bfdf7"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_1.csv",
+      "bytes": 25380,
+      "sha256": "94eb4d0a70dedcb04f5ddb0dc3a162ca92ebdf41d485a9e9d834c24cedc7a23e"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_1.json",
+      "bytes": 7048,
+      "sha256": "9ed21d45d170c3ba66977674c6053673c5135da8b93f02e6f9325899b794f708"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_2.csv",
+      "bytes": 25390,
+      "sha256": "461785aeb9773648213fe5548bf98ac495f9aa9faea4f32d5cfba5b79c18f9e2"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_2.json",
+      "bytes": 7066,
+      "sha256": "a5b9bf72aa3b9b1271515d0fce0d3fa49f8ed7fa1306835a3ac06f4ca14b531e"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_3.csv",
+      "bytes": 25380,
+      "sha256": "3c1122263ef9f66a1f3dee7910561cbd1637d54c16bab2c856c11e5af9dd1302"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_3.json",
+      "bytes": 7048,
+      "sha256": "9e5645e8a5d4a54c913f0ba7ebe68a375c20da071d52e3c991f9bfa08f98b25a"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_4.csv",
+      "bytes": 25590,
+      "sha256": "72785cb1a951273c4777cb912bf72533efa891d75a1d0dc52d28306bc708d2fc"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_4.json",
+      "bytes": 7045,
+      "sha256": "0659d127133efda9ce817e21ee6dab14ca0c6b9d79d7c5c113e02e7366e820a8"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_5.csv",
+      "bytes": 27290,
+      "sha256": "56d2a3c25bfa85b43d9ebf4c10372d76950accd23f97e8fa352a521a265fa319"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_5.json",
+      "bytes": 7016,
+      "sha256": "e18caddf1e27ca84c57938805ac743a9ff0f2b1ab0abd28e53611cde6fc12d90"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_6.csv",
+      "bytes": 27290,
+      "sha256": "48af87ccf331897f6f53bff358d1fd7ed30338c9f9011fa3a3b7b7b22d1f55e0"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_6.json",
+      "bytes": 7021,
+      "sha256": "774ac7e7c0c1e38f6bc2f4cc26b71f2e7c35f4843f40139485f9a9f256112026"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_7.csv",
+      "bytes": 27280,
+      "sha256": "01619942589109ba8b7ff6d45ceb88d3907607bfdd7f9363d991b5827bae781d"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_7.json",
+      "bytes": 7019,
+      "sha256": "fff667dc0a2e12cead598393104daab7bd86df639b094670ff18c18ea921a346"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_8.csv",
+      "bytes": 27216,
+      "sha256": "da2f3079a555a7e1351338d2a148015beddb56302488d2b788e1f0819a953a01"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_geometry_trial_8.json",
+      "bytes": 7025,
+      "sha256": "12c9608ab631a2454140a37a956e3b040b941114def7b5e10924fbe6753f5a4e"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_startup_after.json",
+      "bytes": 162800,
+      "sha256": "113f6d9ff7178cef2e50042a3aef6a4a5199400b6d7b4c67938d2e67ec61861e"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_locked_banks_startup_before.json",
+      "bytes": 162800,
+      "sha256": "113f6d9ff7178cef2e50042a3aef6a4a5199400b6d7b4c67938d2e67ec61861e"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_domain_preview.json",
+      "bytes": 111532,
+      "sha256": "9c43308b3300ba71435af6a22a2605fcffa8418fd9b6c5aa000f867614e85fb2"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_observer_counts_4.json",
+      "bytes": 47,
+      "sha256": "218c5f45526aa59d99af3d0300bc2811c1c2bd615404942aba8f679b6b4de954"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_probe_2.csv",
+      "bytes": 14255,
+      "sha256": "41910301d772a7c359be8868ea9d922c7e3b3f04a00cb350627158277159b9e3"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_probe_2.json",
+      "bytes": 387,
+      "sha256": "dfc7e47bd294a738109dd80f4f2670776a3f30583b2ace4fdb50a4b06d8b8a32"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_probe_4.csv",
+      "bytes": 13686,
+      "sha256": "820d0fa5ddf64f904bbff3d29c4fc2a612f316d4db9786bae43881b9d72545b1"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_probe_4.json",
+      "bytes": 385,
+      "sha256": "9e83d0947a5821b4a0fecb23ba523e4180e23a6409f00d1a614226f02a8d62bc"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_probe_4_evidence.json",
+      "bytes": 5424,
+      "sha256": "d668844699de69a58a04ad0e5cc1c5302c707cc886c679e1a51b86ac3fe00d55"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_startup_after.json",
+      "bytes": 194810,
+      "sha256": "26cafea6571a8859bb4e2cc32cda34ab1f5c5470cef1225ace454b75b29d0e68"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_preview_startup_before.json",
+      "bytes": 194806,
+      "sha256": "cd79f42ccd23d2c49d3f319bcea7d3abc13d54e8b484f6390896ef85e8198edf"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_construction.json",
+      "bytes": 134,
+      "sha256": "72a328bc4700f1efa5774c5f8cfcfbbedca66324000cac97969a1e07b091b5f2"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_summary.json",
+      "bytes": 722041,
+      "sha256": "7618b294706b75cbccb8fda563d66998b1c7a8372dc822f2ccb2da75d85521f8"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_1.csv",
+      "bytes": 27270,
+      "sha256": "ca6d4b39c11858f893c0c1328a59529c3adfdabed7654a2917754b8419ed7d6e"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_1.json",
+      "bytes": 7057,
+      "sha256": "09d81312484aa6547cb2cb0a3b501bf22569df7e19e6f506e9854d4a6a5afb4f"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_10.csv",
+      "bytes": 27206,
+      "sha256": "9320bc9731d01c9539e368b561a1e8f44fc8b4fa7598203fc9f3fe1c63eace20"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_10.json",
+      "bytes": 7040,
+      "sha256": "ac53a1c3b4e4c5d0c99e88f72bf4ac28020ef7b53a80395cedbb11e3e5f2fdc5"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_11.csv",
+      "bytes": 27280,
+      "sha256": "3e23cfefc320c4226d06a0707ad44a1268a7f18cf24742374d2b4410dc46b6a5"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_11.json",
+      "bytes": 7032,
+      "sha256": "e3d5a6924ee268d62014c734075557f8572df88baed1bcf58eaa49344957b1df"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_12.csv",
+      "bytes": 26090,
+      "sha256": "cd0bf756b6cdd1457fffcd2dcf8322a0ca61fc2b909c6c4fdf93bebfe6bc3f0b"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_12.json",
+      "bytes": 7042,
+      "sha256": "50f1c757d98066f93f25aef7ad256e89c2f0a8126508a2408d55220f6d954367"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_2.csv",
+      "bytes": 27270,
+      "sha256": "250f22966609a018cd1976c4c9b3111e7237b3bac04955a31203e86764e8fa15"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_2.json",
+      "bytes": 7056,
+      "sha256": "9995dbae35e7d54f996bf6deb0f09ea2cc63fd260810dd0076dee67903aeb568"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_3.csv",
+      "bytes": 27290,
+      "sha256": "826feda30c4553a6ff9160cf4d9c6b589a42b3c9635e37c99ecf7bf25b38cfed"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_3.json",
+      "bytes": 7058,
+      "sha256": "48cb7719df156466abe1aec958cef1a1772e61d5f4e42efcfc6609d9e7447b0d"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_4.csv",
+      "bytes": 27280,
+      "sha256": "496847a63c2e1d88f8734ad1b6a8e805b6cffe923ac50fcae85928650c0071fb"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_4.json",
+      "bytes": 7057,
+      "sha256": "9171376eb9cd0c999846b8884bb5b370369539b109ecf7d14746bb51132457f4"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_5.csv",
+      "bytes": 27290,
+      "sha256": "0e0c26842a93a66e41d3f22005c384ffe53fc7897852e415534f5a278a124ac0"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_5.json",
+      "bytes": 7028,
+      "sha256": "2a014b1463408b46c51c6ca185dae1d750498ac141ce13d5c59872e4f04618fd"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_6.csv",
+      "bytes": 27290,
+      "sha256": "0070c24573874b2fb25d08c9ee308f412aaa907dc034af79c5e636e00d5b3104"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_6.json",
+      "bytes": 7032,
+      "sha256": "2c7f43a0c941370a90bcab91490f5cb21464519f4996de94b273fc73d0afb187"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_7.csv",
+      "bytes": 27280,
+      "sha256": "091f78c9f71c39c79a13facfb241bd441ad09a07c89db8becf17e2cf330214e0"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_7.json",
+      "bytes": 7031,
+      "sha256": "32fcd0c80f82a5dd774e54f29f4d15ca6cb850d56145c5e60771e65ac705f4bc"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_8.csv",
+      "bytes": 27216,
+      "sha256": "4d2c88e5c607f349645bee004a58bba7c482b166fa2c280bee17b66f63c59592"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_8.json",
+      "bytes": 7037,
+      "sha256": "e916e8179bcc35ceb13507c45731f6f3d37a2e57d54a63340e358283e68f3e87"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_9.csv",
+      "bytes": 27290,
+      "sha256": "788782fd465f8265ec7ff329f6054633afedc3f50c112d79e40c5cf779f363aa"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_geometry_trial_9.json",
+      "bytes": 7033,
+      "sha256": "bee866c9fde6b1dc6656153ca2fb1727442c7d9d362204c2989e567bd1546635"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_startup_after.json",
+      "bytes": 162911,
+      "sha256": "16ccbfe572cc74f1c282885203c12cf75a64ac07cd85d8c0cfb5cc1051ad2dfa"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_domain_separated_banks_startup_before.json",
+      "bytes": 162911,
+      "sha256": "16ccbfe572cc74f1c282885203c12cf75a64ac07cd85d8c0cfb5cc1051ad2dfa"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_summary.json",
+      "bytes": 282714,
+      "sha256": "3699f04d879e7ebfa301d8b744a91ff19006b8bc1061ff086086774aae360315"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_1.csv",
+      "bytes": 15027,
+      "sha256": "a2e7362511ec93f43e5aed20460d17563ae1eb5439efb219ce8b1afcc757a5c2"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_1.json",
+      "bytes": 5858,
+      "sha256": "8fadb971921bf9f098332a6e6fce2aa790ffe94e7f0ac0ccebdfb4929e1df317"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_10.csv",
+      "bytes": 13011,
+      "sha256": "389dd3c4fb437381ca216f6b7759d0467452149d7d10df0c8b2c953e3bef6c01"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_10.json",
+      "bytes": 5849,
+      "sha256": "bd9073398bce5183b13ad15d95462de198e8612b9f09756dd7bd397fbbc01327"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_11.csv",
+      "bytes": 13071,
+      "sha256": "3f6860857bd18c6c42c774f11ede24162a8d36df1b521a4418c726cb745bb377"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_11.json",
+      "bytes": 5877,
+      "sha256": "e6c58e84f2a54e07081abc381237935afe1f05a38d4818da75c0f80e4d28d76a"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_12.csv",
+      "bytes": 13011,
+      "sha256": "1248331ffb9d64ad1236feb8cb921af089cca660e5db68192d18be29771d3c1b"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_12.json",
+      "bytes": 5882,
+      "sha256": "2f36b10f9ac34a81fb93d8c69af98b71d3bf580dbcff8e15369d6e5835dea18f"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_2.csv",
+      "bytes": 15030,
+      "sha256": "9486794fe7382c6b174c89ae8286c1f0e4bd04fd0e8a597e873cef9305c9f621"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_2.json",
+      "bytes": 5876,
+      "sha256": "c468fdec5cec033dd11a6ca576423f3b13c1e59b379e7bb38e46768743d0143f"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_3.csv",
+      "bytes": 15042,
+      "sha256": "a0904d692b97f1bafd66e5f3a4c11fab4ac3668ecde0e11b53a3ff8abab52fca"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_3.json",
+      "bytes": 5828,
+      "sha256": "d421511a5fc30049761eaa25dab523a2c06998ca03db3525df84f019319aa69b"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_4.csv",
+      "bytes": 15003,
+      "sha256": "cca703d022b56730b1172831818ab2ef6a8d50ad0146a8001a1617121853965f"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_4.json",
+      "bytes": 5833,
+      "sha256": "fd279861bed38dc30dec2c7fe9ae951aba751e3c2b03b1bf17ffbb610cf3c8f2"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_5.csv",
+      "bytes": 15054,
+      "sha256": "cc74e704c892b6ca30b4eae6b1883af298acf83578d3c82402d4f5fb06fe1126"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_5.json",
+      "bytes": 5828,
+      "sha256": "c90217a96df505b8c0179cfa006f165cd71b69a6ad63046778a4bfd0b659f626"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_6.csv",
+      "bytes": 15003,
+      "sha256": "c6851b5dd5732d7c4b59ea86206e83f915281408ca87c29e6ebd2f35e41af048"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_6.json",
+      "bytes": 5833,
+      "sha256": "2307e5afbdf0b8660797fddbea61c0870bd4d7b15a740e320c5c266201498541"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_7.csv",
+      "bytes": 15030,
+      "sha256": "91986d7c0d6f29e8e7e2a34a2ebb5c5c07327791dc988caaead9c9a0bdb71435"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_7.json",
+      "bytes": 5828,
+      "sha256": "74ebb24da2e8ab549f62c7a8ddf8566ec187144b7b50d06fd0a2b0ef61ca2d55"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_8.csv",
+      "bytes": 14458,
+      "sha256": "e384b33f29d8419efde85f4fe2a36fe9c114f975fbfc48178e61668cc396946c"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_8.json",
+      "bytes": 5824,
+      "sha256": "b2bdd8ca81d4b3162a06674d00c448522b7f4c00a2c519e9e625a1c74af23ebb"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_9.csv",
+      "bytes": 14476,
+      "sha256": "8d9e584488276f60bfb1c44d003e86e386414e19748f36b49374eef35cb47e9a"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_domain_trial_9.json",
+      "bytes": 5854,
+      "sha256": "e2bee7af69038ec4923a96eee2df0de03c40ccfee3dfcebc12fcca3f707259d2"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_startup_after.json",
+      "bytes": 195408,
+      "sha256": "ed0a0716f5abb83a643477834be2df39f528ede985c715295cabc123f4730db3"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_effective_resistance_domain_startup_before.json",
+      "bytes": 195404,
+      "sha256": "1282629eacdeb4630fac866d6080ac72b00cf64c867de3eb3a719d92877db788"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_edit.json",
+      "bytes": 264132,
+      "sha256": "4dfe8a70924c43c65b0992ad9f1b6310373454983e0726baeffd948c2e339795"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_model.json",
+      "bytes": 110414,
+      "sha256": "ee50136bdeca3757453ae70d8a6a107e4662a63fac66b7f5d0b73f2ff949adce"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_probe_2.csv",
+      "bytes": 13141,
+      "sha256": "354487a4b19919b17f891a9d3eee0112bbbc422d06bfb14ce6fe6136cb014458"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_probe_2.json",
+      "bytes": 388,
+      "sha256": "25ee27d25aa0ca99be4c088febbcd40f8b14715967157c699bd120a470bed381"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_probe_4.csv",
+      "bytes": 13170,
+      "sha256": "6c4f2f441d270a94cb9786ee00d530fed1ca8f9374b1e2fe01bda94372a69b30"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_probe_4.json",
+      "bytes": 386,
+      "sha256": "4aaa1f1e0df94e5301489f60cad9bfb8f5c92bed17e8abe312c59178396bdc84"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_probe_6.csv",
+      "bytes": 14131,
+      "sha256": "b415d0a3e56656e4a1314fa44c1c4898398e9729aeacec555cf2fc02b1a3407c"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_probe_6.json",
+      "bytes": 386,
+      "sha256": "c9e6bc6a9c53a3f77ffbad90fb0f9f898f885128542fb3d0e532629014dd8e70"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_startup_after.json",
+      "bytes": 194948,
+      "sha256": "b30675b4a14ee6886282ade9044f58897e332964e15b100e1dd019364cc48e7a"
+    },
+    {
+      "path": "native-regression/Branch_2000_N1_native_model_edit_startup_before.json",
+      "bytes": 194944,
+      "sha256": "b9a996a42a61e57dfe497b8d5d1ec373fd026384aa5a85dde3f860a4674eeb85"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_edit.json",
+      "bytes": 376714,
+      "sha256": "359fb7b20e25f9037718b77d7771f2a7783d1a324af1ea485a8231f1a6be5e6b"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_model.json",
+      "bytes": 155847,
+      "sha256": "42f5d17068d7bd322b8c29a29262604533f3e39d6a7486fe3698232d7243318a"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_probe_2.csv",
+      "bytes": 219384,
+      "sha256": "4c6c240416b609d696d5ac8379d592c61e6f92c7cb1cbafda1e16fe7362b2c35"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_probe_2.json",
+      "bytes": 390,
+      "sha256": "00258010d9d40d6aa46cebb9445d4f1850d3aae740ebaf7962241a492a18e1a4"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_probe_4.csv",
+      "bytes": 218019,
+      "sha256": "78bf7f188ac1de63cc3da4ada50fe291f7c6aa31cec256bf8ae3cd8440d8664e"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_probe_4.json",
+      "bytes": 389,
+      "sha256": "479997cac36a1e0a441647c98aae1a8c77c9425d1b56876d338a0f8f3d52e7b7"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_probe_6.csv",
+      "bytes": 219349,
+      "sha256": "ef4d845343020ad6e171eb4d00617681b63ee0c0c945188697886c3eb68cc0b4"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_probe_6.json",
+      "bytes": 391,
+      "sha256": "62e2c417c0b35ec306311ec74725ce094cc175678caeb56bd754c2e38c3bff1f"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_startup_after.json",
+      "bytes": 260137,
+      "sha256": "17ed728664e712e844c49e70eb8687bd073c2e7da6d0b00d181030695f672e44"
+    },
+    {
+      "path": "native-regression/Classic_20000_N0_native_model_edit_startup_before.json",
+      "bytes": 260130,
+      "sha256": "6d323ddef146f0dd570b1f7654afead763096276d9c1ab2e8ec3173b77e0be17"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_summary.json",
+      "bytes": 391955,
+      "sha256": "b48c7ec59534972de6ab2d116905b6049f3fbf581ff7c1126d60ed5bfea3c3ca"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_1.csv",
+      "bytes": 207422,
+      "sha256": "8bd19ad7fc232d2e16de3df4a90b77d827b61aac815ec627d9fa6834768b193d"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_1.json",
+      "bytes": 5903,
+      "sha256": "d597bd1203c08b5f0d41ff2a49f4760e34aeedc4e182ea92a8f5d8aa7f086830"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_10.csv",
+      "bytes": 207426,
+      "sha256": "921a56e3976f65171107a454ea4fe1cfa1be2854977885f53731a5c4c117bc37"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_10.json",
+      "bytes": 5879,
+      "sha256": "29acb08df5cda22ad282a41208f420090e8fb1917bb2f286948fafb04d29c0bd"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_11.csv",
+      "bytes": 138451,
+      "sha256": "6cec5acc48caa539551586b803ca0fb91b7153bfe3b02816246d272c669d385b"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_11.json",
+      "bytes": 5335,
+      "sha256": "dd03ee22b38688fc28e732a31783e28cf38b06b39ac33c553c408c47d3fc5dfa"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_2.csv",
+      "bytes": 207412,
+      "sha256": "e39547c488559074a978324432aad4da66b2ad088e55cc3ff3d6f5eca09f0de4"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_2.json",
+      "bytes": 5903,
+      "sha256": "241423ab3528244058dcba6b861f6f76d1636c8b31e4ee91a603f02c8f290107"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_3.csv",
+      "bytes": 207420,
+      "sha256": "f457cf937659aed9cb18bb5657e1249490f330d4fb676b00774c1784d7d73490"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_3.json",
+      "bytes": 5873,
+      "sha256": "d6b5e99ab05817168b575d2e11eeeaf3524d91c065d73402e42cd9fa27957bc0"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_4.csv",
+      "bytes": 207445,
+      "sha256": "b22f237af041c9a5630fe232cbf763464764405503becedf27feee4a60c59784"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_4.json",
+      "bytes": 5895,
+      "sha256": "c38cbed0714c67d9ac5c5ac55950474765c5c6f45ba136323a65c85a9eb745ff"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_5.csv",
+      "bytes": 201162,
+      "sha256": "b0a6cc8c8eab14ffeb1aa851ce67a3f1c4cede671d247cc13a39db7ed2dab424"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_5.json",
+      "bytes": 5876,
+      "sha256": "9fde71a2d9af2637c859298369f2eae5da979a027ec74207c8bdcca4afa0cd19"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_6.csv",
+      "bytes": 201120,
+      "sha256": "657a0f536a3a9efe463e4cecb5e33f937a02121946ab909cae199351c5d6555c"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_6.json",
+      "bytes": 5867,
+      "sha256": "13901ed7efd0de989d71d5915445ea272c9db7a2ea9d623f2975cbbdad1cf54e"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_7.csv",
+      "bytes": 209265,
+      "sha256": "35ce8a4f0b27fdf6a92b0689c7caebee6fb2b3d452fe74bed3d9a3cee7d834a5"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_7.json",
+      "bytes": 5896,
+      "sha256": "3af1e18135cd006ef5956e3d38aab294d9cbfc9ba6522f72f07741f928e59b28"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_8.csv",
+      "bytes": 209254,
+      "sha256": "70d3a67bff1e5518ca01a0a41df949a3d5ba8000261e49277fcd6553ca0f0080"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_8.json",
+      "bytes": 5884,
+      "sha256": "6ccdb5757019644f6fea4bd65df240c43c5465d856a298a3e75f0b605fb5a7e7"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_9.csv",
+      "bytes": 207422,
+      "sha256": "012bc4efc31ff37805476aa9fe29af1cd8e7d35c04a486445642a13e74f753e9"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_domain_trial_9.json",
+      "bytes": 5877,
+      "sha256": "88f148e7fc0815eb9cc9065b05501f12f18da987d099e375c18d4a3feff91088"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_startup_after.json",
+      "bytes": 260879,
+      "sha256": "62e2ddd738fd232fe94cfc955491a95ec012dec3bc40eff61058e73bb48f896c"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_effective_resistance_domain_startup_before.json",
+      "bytes": 260872,
+      "sha256": "0851efc902bcb320a7a149d71efcbb571ae1058a38f59fc41d83aede3e328a74"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_edit.json",
+      "bytes": 365104,
+      "sha256": "54b43a882323b754757a44823879b5bd702d386d8cd6bf653bb63910a8f370bd"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_model.json",
+      "bytes": 155847,
+      "sha256": "86d089536368db1a554086ad2ebe03976a01ebd1bde2827ee48739d03af68537"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_probe_2.csv",
+      "bytes": 219395,
+      "sha256": "a74799a97b546d96932898e4b359a73e95f8a39507922135d252979e7be55d4a"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_probe_2.json",
+      "bytes": 390,
+      "sha256": "8d4ede33bc0ef63f2057fc157efbb7c2adebd4031a3bb3b827012c213b32d9da"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_probe_4.csv",
+      "bytes": 219206,
+      "sha256": "424ae78a637d62a919e4d1c9661a414e2818d1039adfff20d957e2a0ac37c023"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_probe_4.json",
+      "bytes": 391,
+      "sha256": "aac3b0c997f087b86e0122046870a171720c63c5d264005518fe33018ab3f0ce"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_probe_6.csv",
+      "bytes": 219332,
+      "sha256": "7a3f7c60613e5b112bfc25ac1ae17f2287b7e4f259aca20d17b17eb67572fa62"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_probe_6.json",
+      "bytes": 391,
+      "sha256": "d9d7d5ae1fa62d174ac32fb530207a3ef4bd9d8f9dcf222f45e524a2d448ef39"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_startup_after.json",
+      "bytes": 260241,
+      "sha256": "8a3781d3f64c79a4f4ccea7e127dbe8df7ddc57a89f4b564f48140b5e1376078"
+    },
+    {
+      "path": "native-regression/Classic_20000_N1_native_model_edit_startup_before.json",
+      "bytes": 260232,
+      "sha256": "989f4b2c29e1def264a11ae5bff5ccf384c55e7e651f654208d313c0a0c4b408"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_explicit_graph_ownership_probe_2.csv",
+      "bytes": 22450,
+      "sha256": "ebbc2fe6d5bbfc9f4d6a5983fa1700f38889f82139119468fff12e04a6b19407"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_explicit_graph_ownership_probe_2.json",
+      "bytes": 396,
+      "sha256": "0d33660d8fbfb47bf4f7222dd75489b10691cc4ce5279d54804a1847caebe657"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_explicit_graph_ownership_probe_4.csv",
+      "bytes": 22391,
+      "sha256": "35c0d7b9f7a859be6dfb70108e8aafe43226a274407153fc93a93599d9157bc6"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_explicit_graph_ownership_probe_4.json",
+      "bytes": 395,
+      "sha256": "5ade8bbb55d394ea08352404a90ebe0bae23594e5dc4563c45c175aeac2af5d4"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_explicit_graph_ownership_startup_after.json",
+      "bytes": 260447,
+      "sha256": "c80b7ff00a09d3cf8a0fb9babb7ee6444371b2b773799eaa58148cfe18331fd8"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_explicit_graph_ownership_startup_before.json",
+      "bytes": 260440,
+      "sha256": "450661326ab0f0736cfa303092b5d6089d4558c2723db6f64ddda3cd2435312f"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_direct_observer_guard.json",
+      "bytes": 416,
+      "sha256": "63d67d9d1eb6b4514017ad3d7c6a86c7267331f0dc26cb2834d2187f04dd6429"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_direct_probe_2.csv",
+      "bytes": 22462,
+      "sha256": "b9e47da34dfb1b116b38b3841b6e6088d62a9d06cd3e47ce07f447f9c8c39cdf"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_direct_probe_2.json",
+      "bytes": 396,
+      "sha256": "073f628900d2ce3411a16724a529ab21d731817015b91fa7278a4feba16f1121"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_direct_startup_after.json",
+      "bytes": 260447,
+      "sha256": "02899209c1cd2320904ecbbd9ce01bebf58b8d55228d8e22342f1c785319f7a4"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_direct_startup_before.json",
+      "bytes": 260440,
+      "sha256": "42b46533ee09f6e0ff5c5f0ea8e6f7db107f02849bf0bdd0a9acd432b9443799"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_native_observer_guard.json",
+      "bytes": 419,
+      "sha256": "4350d0ef2a7c0cba0aaba93a446745e49de134b7ace3593b4363e8771f2b66b7"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_native_probe_2.csv",
+      "bytes": 22462,
+      "sha256": "05241287d6dc30e13c9607e78b5efa68e8284b65f00449b8e71c123dff4de296"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_native_probe_2.json",
+      "bytes": 396,
+      "sha256": "5f1a7897f609b6baa31331a7f6cff7a5f3d37730c1646a03049ac01f99217909"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_native_startup_after.json",
+      "bytes": 260447,
+      "sha256": "08eb37eb34b45a27af38482580a4740011dc570a172ab5f2c6780c48fdddccd9"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_external_observer_native_startup_before.json",
+      "bytes": 260440,
+      "sha256": "81254bcdefe720cc37b47b670441391d4732e4d6313286183566d06f98baafd8"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_heterogeneous_bank_probe_2.csv",
+      "bytes": 22450,
+      "sha256": "9507aa2324018dee136fd7854429e5062aae18096d064afe1a8188c75d4254c1"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_heterogeneous_bank_probe_2.json",
+      "bytes": 390,
+      "sha256": "20bdd9e0a64766c21c219b48c8b4e1eb45f62960f3fb2f09f2dfee46c9a21e55"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_heterogeneous_bank_rejection.json",
+      "bytes": 345,
+      "sha256": "3ddf1d051c32bd929824617802d4bf7160509fa61f40dba9a4e7d3aa3f4e1911"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_heterogeneous_bank_startup_after.json",
+      "bytes": 260063,
+      "sha256": "ee82509592c5e4c779ca397641d77c1e578b453f5a95874423e6a8fdc7faa1a8"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_heterogeneous_bank_startup_before.json",
+      "bytes": 260056,
+      "sha256": "c117edebf64432969343bdf24d71eef830a53afcd6c6bfe01142ad9aedafae30"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_edit.json",
+      "bytes": 376430,
+      "sha256": "710612a233207f5451cac1fced6d7eec75dce96a463ebf6160b0682e4226d810"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_model.json",
+      "bytes": 155716,
+      "sha256": "5998618c086727cc47dd9833c37575f8965d0ffcb16d9dc1d738f0fca5323ff1"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_probe_2.csv",
+      "bytes": 22100,
+      "sha256": "210ec2a9dcbc14f7728720928af1f635ea2d90f3be76a7dfda726c975125ec30"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_probe_2.json",
+      "bytes": 389,
+      "sha256": "29bbe8cb198ee28e4d5b401ee72cc79dcd211023e21a75eee7208eab64e95fa2"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_probe_4.csv",
+      "bytes": 21918,
+      "sha256": "9346d615286302ddc68365b8cd463b0539b535618f40f2582fd9df4f6fcc3a9d"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_probe_4.json",
+      "bytes": 387,
+      "sha256": "8576a68d7be5a7e72b8f1eecea825b783c1cfb35f92f78def0bacd2ad358516c"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_probe_6.csv",
+      "bytes": 22442,
+      "sha256": "0b6e5eb20edf1986bc94a61f123b5a09e245ca80851dab480c4a595193162772"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_probe_6.json",
+      "bytes": 388,
+      "sha256": "ca787976ca16a702a7860033c34f55eb57136663fe7a91145281ac42941f16f6"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_startup_after.json",
+      "bytes": 259998,
+      "sha256": "110780a45e19e603de69ced7e62a6636965bed8dee4d5bc3984695ad6816a07f"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_native_model_edit_startup_before.json",
+      "bytes": 259992,
+      "sha256": "2be02f1e88bccd7f60a302e94bb5cafa8fc4577254320995e3f9a3bb75df9cb9"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_tight_burst_after_growth_probe_2.csv",
+      "bytes": 9825,
+      "sha256": "094cd502bf073fa01b76e52dccdab4d0cfc1a64480292294e1202df9b1b16f71"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_tight_burst_after_growth_probe_2.json",
+      "bytes": 396,
+      "sha256": "c403e440b2eaad365720b93ef48476cbc7cb4ebf06f3ace7120bb1e2da6ecbdd"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_tight_burst_after_growth_probe_4.csv",
+      "bytes": 9781,
+      "sha256": "52f208b165cf11fefff3b64e8d65b5132cb12c8b3c99889cf3f562b27bd514bd"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_tight_burst_after_growth_probe_4.json",
+      "bytes": 437,
+      "sha256": "5fa528e576a79d33153c53b7c4b238690680d5783ff3b2f5c8a2944e0605eb07"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_tight_burst_after_growth_startup_after.json",
+      "bytes": 260481,
+      "sha256": "678c7e6b88bd0c1339d312f3b2a48896b845aaa13f8d616cfa45a99470d3a813"
+    },
+    {
+      "path": "native-regression/Classic_2000_N0_tight_burst_after_growth_startup_before.json",
+      "bytes": 260474,
+      "sha256": "e1a68a0b2a241f222c52cc6b1e0fdc817f6d95c359763cb0916d278b5e521845"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_construction.json",
+      "bytes": 134,
+      "sha256": "f37c0468bc99b4f8c82ca5f3fe0649c61085f2c359fdfd34c568a11efbe83c67"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_fixed_domain.json",
+      "bytes": 202272,
+      "sha256": "57505bfccb0bd7c7822c5133e3abc44882c6690865d2a16c81b60a8c940ab025"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_probe_2.csv",
+      "bytes": 21670,
+      "sha256": "8853384e3b62954d472d43ea38c9afac622f191be8e91ec0748bcc7892161891"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_probe_2.json",
+      "bytes": 430,
+      "sha256": "47bc4f834a8a3a53655b916732623133069d401235e8da1506957d79d1c6b93d"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_probe_4.csv",
+      "bytes": 21710,
+      "sha256": "548e4957bc4a4e289bb20bd4a1ff5960fdac79f1ef4d1f89dd024099975161e6"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_probe_4.json",
+      "bytes": 430,
+      "sha256": "0a5bd7f009fde103958d2d23a97372cdc196d52773a8dcd3ff2de2ea1749579d"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_scaled_domain.json",
+      "bytes": 202745,
+      "sha256": "8765081bda4ab5e1756abb7f10266a6e6c9bc3c871700e45390a45cff7c937e9"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_startup_after.json",
+      "bytes": 259917,
+      "sha256": "8515c779ada769fb751c0c4c2387df4f6b000f9bc146a492c626ab5be5c2a677"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_inhibition_startup_before.json",
+      "bytes": 259917,
+      "sha256": "8515c779ada769fb751c0c4c2387df4f6b000f9bc146a492c626ab5be5c2a677"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_domain_preview.json",
+      "bytes": 156781,
+      "sha256": "d23528cd96370c36c96482be8a80d992e3c573408e7955a26cd0cb77a05db468"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_observer_counts_4.json",
+      "bytes": 47,
+      "sha256": "218c5f45526aa59d99af3d0300bc2811c1c2bd615404942aba8f679b6b4de954"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_probe_2.csv",
+      "bytes": 21922,
+      "sha256": "fa5d98546d4a570b68184c43c13827c5b8ef5736a6f33f7988b03a2c308e9a42"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_probe_2.json",
+      "bytes": 388,
+      "sha256": "7fe0fb9975e46a3f2cfbda413bf1b5407bd4f2d587f195e9d201140416a810dd"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_probe_4.csv",
+      "bytes": 21373,
+      "sha256": "f2c6ebb1d635e95e4c8895e1de5d3b59d969e71b35792f6ec9176f4d2ec77064"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_probe_4.json",
+      "bytes": 386,
+      "sha256": "14ad6c61855a9d12baf8307cdfe705d77ac2ef4c2c9d9cda7f0f9a44d1365e03"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_probe_4_evidence.json",
+      "bytes": 5448,
+      "sha256": "244621f9ac2e04d019a43068e8289f4f88849572fbba8c81f0b1fbd77f3c2014"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_startup_after.json",
+      "bytes": 259909,
+      "sha256": "b8f3b022f4f0deeeccae5eaf8723a461fca39e55375dde76b047d3cdbfb20585"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_domain_preview_startup_before.json",
+      "bytes": 259902,
+      "sha256": "b905b24856faa054f77754c97279756f7014c1d4300f5255e62436f5f424d037"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_summary.json",
+      "bytes": 393470,
+      "sha256": "e113f203131057443cb78737881ab561a49ba1dfc579f5f84c559effa83be919"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_1.csv",
+      "bytes": 22462,
+      "sha256": "6b3c261cf6011848114524af76666dc5c43444b30bb3c3b2875d648b4c9195e3"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_1.json",
+      "bytes": 5879,
+      "sha256": "5d40587c2e56825ea84502244b89fb252982ed66776cbe6e8f58cde3581bbeeb"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_10.csv",
+      "bytes": 22534,
+      "sha256": "142691edbfc7de5a70d13e47d1fe190de1cdd0154398921f88bfeec5ddee5af4"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_10.json",
+      "bytes": 5856,
+      "sha256": "095947afb935da2da0b30d750949416b5672b01c34f5d96af9ec292e21a668ce"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_11.csv",
+      "bytes": 22702,
+      "sha256": "87b75e61d7476d5d182de1a5fc4eb925ed32df5387cbc2aa3e2267f225880d39"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_11.json",
+      "bytes": 5892,
+      "sha256": "bb95d376791e24464eda1bf5aad1458ccfbed29e14772f14cd0f0a3e995fdc02"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_12.csv",
+      "bytes": 22690,
+      "sha256": "79dabf77a7096a908c825d778d067126b5ff1f9b83ef027794f083127afedbb9"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_12.json",
+      "bytes": 5886,
+      "sha256": "0bc3ffaede13eccd90ec99a6147df5595fe1bb7d078a346d983237fd2dbd8887"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_2.csv",
+      "bytes": 22462,
+      "sha256": "bd6c040a331f9f242df79b0e0621c0222e2a230904da4fadd8cccbf9f175f8a0"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_2.json",
+      "bytes": 5898,
+      "sha256": "a9b3bc4475296993b8830a17a7418201b7542fc472cdca704be5db1ba6434c48"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_3.csv",
+      "bytes": 22450,
+      "sha256": "c80499c36dd8630c8094ebf6e364c6d211bc7ed1ea64f9d4d4189eab6a91acdb"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_3.json",
+      "bytes": 5850,
+      "sha256": "f9dab2cb895886d79c79d2d63fa2a7cc625fd7f8d385f7ab55f664a9a879a2dc"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_4.csv",
+      "bytes": 22450,
+      "sha256": "5f6e372fff64d023176b98bb46b04798025a08159755e173a6b255722ef7921f"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_4.json",
+      "bytes": 5853,
+      "sha256": "2730a5b17b049ed783f4fa0e93d492dccadb56eb735f60fc59930daa83520746"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_5.csv",
+      "bytes": 21881,
+      "sha256": "2f060da8052d6ecdfc52ed5404be8bbfeff51049da3ea8fa6d5e03fdd44bfdba"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_5.json",
+      "bytes": 5849,
+      "sha256": "2982654919337a53963178f4df50a536782c5eca9c778248e58a83ebcce24411"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_6.csv",
+      "bytes": 21881,
+      "sha256": "407830a94a62c64bb8e5ac258555ef3063578c138769304c8382ee0751675a83"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_6.json",
+      "bytes": 5844,
+      "sha256": "71bf205361555063ee2c7ca8822d8d7459e8d1f89a6e2e23f5fc730ad8d1204c"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_7.csv",
+      "bytes": 22619,
+      "sha256": "d5b07a88f565aa32c834a3bca2ed55aef0e1329bad66c48e77769657719a9881"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_7.json",
+      "bytes": 5849,
+      "sha256": "f0aab1db16e59146534487011fbd7cc5170865aedef04c5635fed5fbd8f189e8"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_8.csv",
+      "bytes": 22619,
+      "sha256": "cc031a41522f6cbdab4a135caffb480b60f2fe2f5546692b16d2fcb8cbec90cf"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_8.json",
+      "bytes": 5874,
+      "sha256": "5c34dbfdbf63feb619ec3698448988b81597e164ad54f4788c96bb47bded0e71"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_9.csv",
+      "bytes": 22462,
+      "sha256": "7fee04295e2a6bae109ccf8c3157fdcbe647d67cf9c599e8eb284745fe0d38cc"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_domain_trial_9.json",
+      "bytes": 5874,
+      "sha256": "2b799adecc137cae66af301d40fafcbf77ae13dce6787c7d51e053a639333648"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_startup_after.json",
+      "bytes": 260743,
+      "sha256": "53b8add2855d866a7f8f8b74dccf40d2331e113d267a52ca707699478bf9002b"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_effective_resistance_domain_startup_before.json",
+      "bytes": 260734,
+      "sha256": "4d6deedf9672ade4c03a6b18b2238a2420cfc8307e43a910b89eec8f68cecf39"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_edit.json",
+      "bytes": 364826,
+      "sha256": "3cf3398d2415f210f31c0bb72672507cf8f2f55b900d176429bb73eda0bd4358"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_model.json",
+      "bytes": 155716,
+      "sha256": "ef21d1d6e9ad9dd1c89eef696f6aeb1857455b50fd4256ed791879e3ea7af916"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_probe_2.csv",
+      "bytes": 20869,
+      "sha256": "d4dd04efacf8c33088f1cfbecbaac10b34532a5bca694276ea5b8472099339b7"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_probe_2.json",
+      "bytes": 389,
+      "sha256": "0a138d9afff3f4962491680f83fdb9e901aa5b552da0a15f9623079b677514df"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_probe_4.csv",
+      "bytes": 20856,
+      "sha256": "6b76b5789dc3090981d2206abeb25c48ac19ebab76a22e86ac8b7e708106a60e"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_probe_4.json",
+      "bytes": 387,
+      "sha256": "e8856a2142cf7a0b12a53360bb612abe10ebe7c02ef18207b4906294cea73c31"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_probe_6.csv",
+      "bytes": 20838,
+      "sha256": "74535aebd94a8155d167a5c66cb1fdc157de7714865c140f6257882cade6120a"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_probe_6.json",
+      "bytes": 388,
+      "sha256": "68a12ebc70b8916a7276c704833f84d9dba06c8f9b4eb8975ecaede99f101650"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_startup_after.json",
+      "bytes": 260101,
+      "sha256": "3117174a6f8a7c50ce33fb04db4c05bd69b9d78d3bf75180060f8c40f56fb5f1"
+    },
+    {
+      "path": "native-regression/Classic_2000_N1_native_model_edit_startup_before.json",
+      "bytes": 260094,
+      "sha256": "395098e5f6f79114bdca910b0abb4f557c8c884324d25ecaae8efb3e900bdc14"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 45,
+      "sha256": "9ab26d82b7ac210dfbc61b851c5bed95e4f5ff8d6316ec7410d4050a60f7cec9"
+    },
+    {
+      "path": "process/loaded-files.json",
+      "bytes": 6213,
+      "sha256": "4160f761d6ccc1cc4e01e450ef59721baa17c6f2acd92c2c1c4c0bac30da48e4"
+    },
+    {
+      "path": "process/owned-process.json",
+      "bytes": 420,
+      "sha256": "d4f6c58f246856f94ab7de72718905ae9831514009b6ab3f9b27c2ec218fe553"
+    },
+    {
+      "path": "process/request.json",
+      "bytes": 539,
+      "sha256": "56b4504b2e861d9a608dcb79d22d4cc44a657523a5e6f6209bbadb070ca4c29f"
+    },
+    {
+      "path": "process/result.json",
+      "bytes": 443,
+      "sha256": "a97c11713a551bfbe6b79414331d5457ee8e7219cc71b87c5c0cf851bbd29033"
+    },
+    {
+      "path": "process/runtime.json",
+      "bytes": 24345,
+      "sha256": "11d49b26ff4709ebcb1ebda0c2b13cfd3f1a50a1e00f1686c742ffbaa21aad69"
+    },
+    {
+      "path": "process/stderr.log",
+      "bytes": 253,
+      "sha256": "d631e21587a40a0934628ee8f1cb53923e034f7009e99fab3e091d88276e18d8"
+    },
+    {
+      "path": "process/stdout.log",
+      "bytes": 3946,
+      "sha256": "b81c8e4888285451ee0b39f5b31dc2b12c58a8119cc194793b6d2570fe98f82d"
+    },
+    {
+      "path": "runtime.json",
+      "bytes": 24345,
+      "sha256": "11d49b26ff4709ebcb1ebda0c2b13cfd3f1a50a1e00f1686c742ffbaa21aad69"
+    },
+    {
+      "path": "source.json",
+      "bytes": 1304,
+      "sha256": "ea730389919eca8ffd0862accc3cc1fdd6082e9b2bdd3a42f79a6d793d1292f4"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "terminal.json",
+      "bytes": 94,
+      "sha256": "23fc4c196f746ceb0f17c9a3588238f947a9bd51393a8963b9370a8aa95dd079"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 496,
+      "sha256": "828dae6130b9a706946d98adeb64d15937884ea9b26324af292b6f6135d6adc8"
+    }
+  ],
+  "archive_sha256": "0fb2b6a1062bfd5e11fe3496271a99526a3adb7f884732733ff75509e0d083e2",
+  "whole_stage_acceptance": false,
+  "scientific_verdict": null
+}

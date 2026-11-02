@@ -5,6 +5,17 @@
 этап0; остальные этапы выполнены частично. Научное8/8 не является условием
 рефакторинга. Зелёный тест отдельного API не заменяет матрицу режимов.
 
+Дополнение02.11: адресно принят [поиск длины по измеренным задержкам](MeasuredLengthProposal.ru.md).
+Normal fresh67/67 после Bin repair; ASan39 kernel+4 completed training cases
+из сохранённого stdout+24/24 remaining XML, одинаковые67 имён без skips.
+Первичный timeout7200s сохранён. Cold A/B не объявлен Exact; прежние positive
+N1 controls сохраняют параметры/references и84 CSV на worker. Все16 selected
+PNG directly reviewed, independent ASan rerender16/16 byte-equal; полные
+временные отчёты240 trial-soma pairs и4146 PNG хранятся в M40 cache.
+Old normal Bin provenance limitation остаётся открытым для прежних запусков.
+Pulse merge a18bf543007c52a3ac7a6fbb148a48cb2c351de3 сохраняет tested Core.
+Полные этапы6/7/11 и весь исходный план остаются частично выполненными.
+
 Адресно принят [hot XML Load/Init/Reset](HotXmlReset.ru.md): normal32/32,
 ASan32/32, readers18/16/16 на каждом worker,64 byte-identical crossworker CSV,
 1476 temporal PNG в cache/26 directly reviewed originals. Scope — Classic/Branch,
