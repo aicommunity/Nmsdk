@@ -65,3 +65,13 @@ diagnostic_only=true, training_completed=false и evaluation_verdict=null.
 Остановленный diagnostic evaluation может сохранить partial execution,
 но не становится completed Train. C++/Python production path, fresh-process
 проверки и temporal reports этого CLI ещё требуют серверной приёмки.
+
+Обновление scoped native проверки: на bb9666e248 прошли20/20 cases;
+Python193fcd373 прошёл8/8 без skips, включая2 настоящих ordinary full-pattern
+контроля. Proofc808ce15b84f6a0bd63ab7289a461ee90c7ae3cb,381 members/2792305 bytes
+проверены после Git fetch. Это не приёмка Console/CLI: он отдельно собран на
+193fcd373 в runtime-s05-diagnostic-recognition-normal-a3. Public preflight
+запущен повторной попыткойa2; a1 отверг неполный loader_environment до запуска
+моделей. Новый maintained diagnostic-regression90afd1663 задаёт2 complete,
+2 interrupted diagnostic runs и2 реальных ordinary Console rejections по
+исходным публичным stopped Train. Его выполнение и temporal reports пока pending.
