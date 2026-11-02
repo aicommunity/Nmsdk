@@ -129,10 +129,14 @@ def main(argv: list[str] | None = None) -> int:
     prepare = commands.add_parser("prepare", help="prepare a declared native cold-job matrix without running models")
     prepare.add_argument("specification", type=Path)
     prepare.add_argument("--output", type=Path, required=True, help="new immutable job matrix directory")
-    for operation in ("train", "preflight", "export", "evaluate"):
+    for operation in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate"):
         native = commands.add_parser(operation, help="run an owned native Console "+operation+" job")
         native.add_argument("specification", type=Path)
-        native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
+        if operation == "diagnostic-evaluate":
+            native.add_argument("--source-stopped", dest="source_solo", type=Path, required=True,
+                                help="stopped package with its original primary trial siblings; never completed Train")
+        else:
+            native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
         native.add_argument("--runtime-manifest", type=Path, required=True)
         native.add_argument("--wall-seconds", type=float, required=True)
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
@@ -251,7 +255,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"kind": "timelearner_preflight_regression_error", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
-    if args.command in ("train", "preflight", "export", "evaluate"):
+    if args.command in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate"):
         from .native_evidence import EvidenceError, require
         from .native_pipeline_worker import run_job
         try:

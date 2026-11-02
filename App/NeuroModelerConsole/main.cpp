@@ -96,6 +96,7 @@ const QCommandLineOption timeLearnerPreflightOption(QStringList() << "timelearne
 const QCommandLineOption timeLearnerTrainOption(QStringList() << "timelearner-train", "Execute a declared cold native training job.", "json-path");
 const QCommandLineOption timeLearnerExportOption(QStringList() << "timelearner-export", "Export a completed solo model to recognition state.", "json-path");
 const QCommandLineOption timeLearnerEvaluateOption(QStringList() << "timelearner-evaluate", "Execute a declared frozen evaluation job.", "json-path");
+const QCommandLineOption timeLearnerDiagnosticEvaluateOption(QStringList() << "timelearner-diagnostic-evaluate", "Measure an explicitly diagnostic frozen model from stopped Train; never a completed-training result.", "json-path");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
@@ -118,6 +119,7 @@ parser.addOption(timeLearnerPreflightOption);
 parser.addOption(runtimeCaptureOption);
 parser.addOption(timeLearnerExportOption);
 parser.addOption(timeLearnerEvaluateOption);
+parser.addOption(timeLearnerDiagnosticEvaluateOption);
  parser.process(a);
 
  auto buildForwardArgs = [&parser]() {
@@ -140,7 +142,7 @@ parser.addOption(timeLearnerEvaluateOption);
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
          option == "--cldesc-class" || option == "-K" ||
-         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate";
+         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate" || option == "--timelearner-diagnostic-evaluate";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -156,7 +158,7 @@ parser.addOption(timeLearnerEvaluateOption);
       option == "--cldesc-lexicon" || option == "-l" ||
       option == "--cldesc-library" || option == "-C" ||
       option == "--cldesc-class" || option == "-K" ||
-      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate")
+      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate" || option == "--timelearner-diagnostic-evaluate")
    {
     if(shouldSkipValue(option) && !token.contains('=') && i + 1 < original.size())
      ++i;
@@ -182,10 +184,10 @@ const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
 const bool wantIdentity = parser.isSet(identityModelOption);
 const QString inspectionPath = parser.value(wantIdentity ? identityModelOption : inspectModelOption).trimmed();
 const int nativeOperations = int(parser.isSet(timeLearnerPreflightOption))+int(parser.isSet(timeLearnerJobOption))+int(parser.isSet(timeLearnerTrainOption))+
-    int(parser.isSet(timeLearnerExportOption))+int(parser.isSet(timeLearnerEvaluateOption))+int(parser.isSet(timeLearnerPostTuneOption));
+    int(parser.isSet(timeLearnerExportOption))+int(parser.isSet(timeLearnerDiagnosticEvaluateOption))+int(parser.isSet(timeLearnerEvaluateOption))+int(parser.isSet(timeLearnerPostTuneOption));
 const bool nativeJob = nativeOperations>0 || parser.isSet(timeLearnerOutputOption) || parser.isSet(runtimeCaptureOption);
 const auto& nativeOption = parser.isSet(timeLearnerPreflightOption)?timeLearnerPreflightOption:parser.isSet(timeLearnerTrainOption)?timeLearnerTrainOption:parser.isSet(timeLearnerExportOption)?
-    timeLearnerExportOption:parser.isSet(timeLearnerEvaluateOption)?timeLearnerEvaluateOption:
+    timeLearnerExportOption:parser.isSet(timeLearnerEvaluateOption)?timeLearnerEvaluateOption:parser.isSet(timeLearnerDiagnosticEvaluateOption)?timeLearnerDiagnosticEvaluateOption:
     parser.isSet(timeLearnerPostTuneOption)?timeLearnerPostTuneOption:timeLearnerJobOption;
 if(nativeJob && (nativeOperations!=1 || !parser.isSet(timeLearnerOutputOption) ||
    parser.value(nativeOption).trimmed().isEmpty() || parser.value(timeLearnerOutputOption).trimmed().isEmpty() ||
@@ -252,6 +254,7 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   if(parser.isSet(timeLearnerPreflightOption))result=RunTimeLearnerPreflightJob(input,output);
   else if(parser.isSet(timeLearnerTrainOption))result=RunTimeLearnerTrainingJob(input,output);
   else if(parser.isSet(timeLearnerExportOption))result=RunTimeLearnerExportJob(input,output);
+  else if(parser.isSet(timeLearnerDiagnosticEvaluateOption))result=RunTimeLearnerDiagnosticEvaluationJob(input,output);
   else if(parser.isSet(timeLearnerEvaluateOption))result=RunTimeLearnerEvaluationJob(input,output);
   else if(parser.isSet(timeLearnerPostTuneOption))result=RunTimeLearnerPostTuneJob(input,output);
   else result=RunTimeLearnerCalibrationJob(input,output);
