@@ -1,5 +1,31 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Последний проверенный результат: transport и временные отчёты
+
+Elder completed transport после image extraction: 8/8 на root c6345fa6,
+evidence `abac5800c0ec93c1ecec100b37480982ec176f00`; M40 полный ASan transport
+на прежнем root589c7e30: 8/8, evidence `a311a6e3d4133faf57ac826b61460d7ba64917ff`.
+Оба delta архива локально восстановлены по точным Git references и проверены:
+458/466 logical members; в каждом случае 52/52 CSV и 48/48 сопоставленных
+probe packets равны исходному c17f7f61, 8/8 solo model revisions совпали.
+Это explicit sync=0.2 transport controls, не классификация8/8 и не default0.02.
+
+Для normal21 baseline/growth завершён полный temporal render: 61 наблюдение,
+93 trial-soma pairs,1680 PNG/SVG/PDF в M40 cache. Все20 selected PNG напрямую
+просмотрены, включая local-detail шкалы при20000Hz. [Отчёт просмотра](../../../Reports/StructTrain/TimeLearner/s07-bound-capacitance-temporal-selected-a1/VISUAL_REVIEW.ru.md).
+Полный cache не объявлен вручную просмотренным. Primary и20 selected — в Git.
+
+Новая schema2 C₀ transfer ещё не прошла runtime gate. B1 остановился из-за
+include, исправленного в Pulse69d463a. B2 успешно собрал native executable,
+затем обнаружил отсутствие Test_UComponent_Lifecycle в fresh CMake cache.
+Это расхождение BUILD_TESTS/BUILD_TESTING, а не падение численного теста.
+[Исправление](BuildTestSwitch.ru.md) выполнено в отдельной ветке от develop,
+commit `7290955b0269c1b3b90f205ec3b35e38d51d11dd`; требуется configure/build gate.
+
+Дополнительный дефект объёма/стабильности package: [runtime StepDuration](ArchiveTelemetryNoise.ru.md).
+Исправление ещё не реализовано. Старые primary не удаляются.
+Весь исходный план остаётся активным; этапы1–12 выполнены частично.
+
 ## Последующее изменение кода: перенос C₀ в model package
 
 Первая fresh сборка schema-2 переноса B1 остановилась до unit/native
