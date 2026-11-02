@@ -5,6 +5,23 @@ Pulse исходная точкаa18c8a1097a221e5aca3bfc2c1afc07fb2534a56.
 Первая implementation4239b807c37311fe91ca3aae322aab7445795aec.
 Серверная приёмка ещё не завершена; develop не меняется до результатов.
 
+Рабочий numerical rootf68305c3b54bfebac1bdfd71efb7bb9cfb230d32,
+Pulse30d4b1d92007c028a6f85cd7630dd401b3226872. Первая сборка остановилась
+на const UEPtr→base-handle преобразованиях; они заменены штатным .Get().
+Вторая собрала library API, но остановилась на missing dependent-template
+keyword в новом тесте. Обе попытки сохранены на каждом worker; их gate
+supervisors остановились с prerequisite_build_failed, численные cases не шли.
+
+Следующие отдельные jobs при последней проверке живы по PID/start_ticks:
+Elder builder3906945/319677913, supervisor3906946/319677918;
+M40 builder1980074/270220931, supervisor1980081/270220936.
+Readbacks: s07-capacitance-edit-build-normal-a3 / -asan-a3 и
+s07-capacitance-edit-normal-a2 / -asan-a2. Runtime roots оканчиваются
+runtime-s07-capacitance-edit-normal-a3 / -asan-a3. Не менять их source/build
+и не запускать повторы до установления terminal или отсутствия владельца.
+Это checkpoint запуска, а не результат: ещё нужны actual8 JUnit cases,
+проверка raw packets/CSV, temporal reports и scoped acceptance.
+
 Source audit старого C-trim выявил ClassCapacitance из parent MembraneCapacity
 и запись scalar DendriteCapacitance[i] одновременно в Exc/Inh каналы всех
 выбранных сегментов. Это не сохраняет heterogeneous child physics. Подмена
@@ -35,6 +52,8 @@ on unexpected live failure: restore previous C and verify original identity
 
 Неизвестные equations/connected Capacity, отсутствующий channel baseline,
 NaN/Inf, bounds, unsafe integration и повреждённый baseline дают явный отказ.
+Проверяется весь baseline, включая невыбранные каналы; даже idempotent edit
+сверяет полный predicted/live identity, сохраняя живой lifecycle без Reset.
 Ни универсальное tau>=2dt, ни fallback1nF не используются. Baseline является
 явной декларацией физического исходного состояния; его принадлежность к
 profile/ModelSpec и controller persistence ещё не реализованы и не доказаны.
