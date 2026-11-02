@@ -1,0 +1,114 @@
+# Проверка и визуализация dataset-clock observations
+
+`dataset_clock_reports.audit_dataset_clock` читает настоящие C++ record/CSV,
+полный declared JUnit и gate result. Проверяет схему, все ожидаемые origins,
+условия f/mode/gap/ISI/cutoff, model identities, finite samples, полную grid,
+согласованность реальных rising edges и пика/вариации сомы. Сравнение input/soma между
+origins не использует численный допуск; типизированная проверка absolute
+timestamp допускает только roundoff double. Schema2 явно объявляет contract
+origin_and_pulse_program_v1: источник должен сохранить onset, ширину, repeat и
+cutoff наряду с origin invariance. Все эти выводы обязаны совпасть с C++ case.
+Historical schema1 не объявляла полный набор assertions: её дополнительные
+необъяснённые C++ failures остаются unknown, а не превращаются в PASS.
+Повреждённая либо неполная матрица
+не получает положительный результат. Unknown schema и boolean version запрещены.
+
+Это data-consistency adapter, не native import и не classification scorer.
+Baseline failures имеют полные и валидные записи и должны оставаться видимыми
+в отчёте. Failed fixture с отсутствующими origins не становится такой матрицей.
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner report \
+  Scripts/StructTrain/TimeLearner/specs/native-dataset-clock-v1.json \
+  --format dataset-clock --artifacts NATIVE_GATE_RESULT --output NEW_CACHE
+```
+
+Для расширенных20 cases использовать native-dataset-clock-extended-v1.json.
+Первый contract требует36 recordings, второй76. Допускается исходный combined
+gate с дополнительными cases: отчёт явно перечисляет свой subset и сохраняет
+полный source gate inventory; all_gate_tests_reported в этом случае false.
+Прочие14 transfer cases этим отчётом не объявляются визуально проверенными.
+
+Каждая запись имеет полный soma/input overview и tiles без downsampling:
+1920×960 PNG, SVG, PDF, не менее14px на native tick в zoom. Y одинаковый для
+origins одного условия; нужны также автоматически создаваемые local-detail
+виды слабого отклика. Вход — реально измеренный generator output поверх
+потенциала сомы. LT events здесь не собирались и не выдаются за отсутствие
+спайков. Рисунки не участвуют в численном scorer.
+
+Report cache хранит portable primary copies, JUnit/runtime/result, contract,
+manifest, hashes renderer files/backend и всех созданных файлов. Полные
+рисунки хранить в M40 Data cache; Git содержит сжатые исходные native данные,
+метрики и отдельно выбранные/непосредственно просмотренные рисунки. Генерация
+не присваивает global_visual_acceptance. Code/root/data references публикации
+должны указывать точные commits; один абсолютный путь не является evidence.
+
+`tests.test_dataset_clock_reports` использует реальные gate artifacts из
+TIMELEARNER_DATASET_CLOCK_ARTIFACTS. Для extended выставить
+TIMELEARNER_DATASET_CLOCK_EXTENDED=1. Проверки включают неизвестную/bool schema,
+incomplete window, неверный origin, потерю events/model digest, NaN и пропуск
+native tick. Серверная приёмка нового adapter и визуальный review ещё требуются.
+
+Baseline reader evidence `bdabaa6cea61250014051f6da7757fa6f9dec1df` подтвердил9/9
+на36 полных исходных записях и повреждающих мутациях; SHA256 всех6 файлов
+проверены. Fixed normal B3 прошёл34/34 native (20 clock +14 transfer). Его
+unit-процесс реально выполнил9 тестов, но завершился до capture /proc mappings;
+unit gate остаётся incomplete_test_observation, общий запуск не принят. Нельзя
+подменять фактическую provenance сведениями ldd или hash executable. Publisher
+также обнаружил nullable inventory; исходный failure сохранён отдельно.
+
+Для быстрых PulseLib native tests добавлен явный gate schema2 с
+`cooperative_runtime_capture=true`. Test main после RUN_ALL_TESTS удерживает
+тот же процесс через существующий Console RuntimeCapture ready/ack contract.
+Supervisor проверяет PID/start_ticks и фактически загруженные файлы до ack.
+Схема1 не меняется; неизвестный режим, числовой/строковый true или boolean
+schema запрещены. Source/model ticks и Reset при ожидании не выполняются.
+Это не поддержка такого handshake в Rdk gtest_main: ему schema2 не назначать.
+Новый handshake и file/scheduling fixtures ещё требуют серверной проверки.
+
+Первый полный baseline cache содержит36 recordings/1797 PNG (также SVG/PDF)
+на M40. Компактный отбор8 PNG и сжатых cache indices опубликован отдельно:
+`2187ea106f06e6b028b28f416270fd934ba87cfc`,13 файлов проверены по SHA256,
+1 720 326 bytes. Все8 PNG непосредственно просмотрены. Динамика сомы и
+наложенный input читаются, zoom сохраняет отдельные native ticks, но длинная
+первая строка заголовка обрезана. Визуальная приёмка отклонена: не повышать
+global_visual_acceptance и не считать автоматическое создание1797 картинок
+проверкой их вёрстки. Численные отрицательные baseline результаты неизменны.
+
+Исправляется только отображение: компактные Source/t0 и origin/pulses labels;
+полные исходные идентификаторы, source paths и SHA остаются в manifest. Нельзя
+уменьшать разрешение, прореживать waveform или сокращать окно ради вёрстки.
+Новый baseline cache A2 требует повторного рендера и прямого visual review.
+
+Baseline A2 завершён; selected evidence
+`466d1693ed6c369dc92acd33a9d4dcc7695fcb38` проверен по13 SHA256. Все8 PNG
+непосредственно просмотрены после исправления: titles, labels и legends
+помещаются, input overlay и native-tick zoom читаются. Отдельный
+[visual-review.json](../../../Reports/StructTrain/TimeLearner/s03-dataset-clock-temporal-baseline-selected-a2/visual-review.json)
+содержит точный subset/hashes. Это visual PASS8, не просмотр всех1797 PNG и
+не подтверждение научной классификации. Global acceptance остаётся false.
+Для исправленного B6 источника строится отдельный cache76 на primary91fd3930;
+его visual review пока pending. Нельзя переносить на него baseline review.
+
+## Fixed B6: прямая проверка выбранных изображений
+
+Cache76 завершён:3888 PNG плюс SVG/PDF, полный набор остаётся на M40 Data.
+Компактный evidence `d416ee157223a5e4ccb8c6906081f061651aa334` содержит16
+selected PNG и сжатые индексы (3 367 040 bytes);21 опубликованный файл проверен.
+Все16 PNG непосредственно просмотрены: readable labels/legends, реальные
+input overlays, native-tick zoom, continuous/timed, near-grid и onset cutoff,
+включая t0=1e9s. [Точный subset и hashes visual review](../../../Reports/StructTrain/TimeLearner/s03-dataset-clock-temporal-fixed-b6-selected-a1/visual-review.json).
+Global acceptance остаётся false; остальные3872 PNG не объявлены просмотренными.
+Это источник с физической сомой, не learner classification matrix или LT-event
+audit. TimeGeneration может обрезать pulse на объявленной границе; complete
+означает полное окно наблюдения, а не обещание полной ширины вне этого режима.
+Между native samples проводится линия; она не доказывает sub-timestep latency.
+
+Source ASan25/readers41 завершён: primary6173d832,198 members проверены,
+actual libasan mappings доступны. Все83 CSV, включая76 source/soma recordings,
+совпали побайтно с normal B6. Это подтверждает использование тех же сигналов
+в normal temporal cache и для ASan-наблюдений; независимый ASan rerender всех
+3888 PNG не заявлен. C₀ readers41 включают24 прежних normal primary controls,
+а не новую ASan-проверку C₀ transfer. Расширенный native202 scope завершён:
+202/202 и8 JUnit/contract readers PASS, evidence
+`248660b2362308de583e72f1a0ec6b7aa139ef10`, все1 865 members проверены.
