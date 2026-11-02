@@ -27,7 +27,7 @@ def _counts(rows):
             "foil_response_rate": counts["FP"]/foils if foils else None}
 
 
-def _score_recognition(spec, observations, package, *, calibration_probe, diagnostic=False):
+def _score_recognition(spec, observations, package, *, calibration_probe, diagnostic=False, partial_diagnostic=False):
     try:
         require(type(package) is dict, "unsupported_evaluation_model_package")
         candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
@@ -106,8 +106,8 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
                 require(equal(observation["end"], number(observation["begin"])+number(wanted["duration"])),
                         "evaluation_trial_duration_mismatch")
             actual[trial_id], audits[trial_id] = observation, audit
-        require(set(actual) == set(expected), "missing_evaluation_trial")
-        invalid = sorted(key for key, audit in audits.items() if not audit["valid_observation"])
+        require((diagnostic and partial_diagnostic) or set(actual) == set(expected), "missing_evaluation_trial")
+        invalid = sorted((set(expected)-set(actual)) | {key for key, audit in audits.items() if not audit["valid_observation"]})
         calibration = package["neuron"]["metadata"]["calibration"]
         if candidate:
             from .threshold_candidate_evidence import audit_threshold_candidate
@@ -195,6 +195,16 @@ def score_diagnostic_recognition_evaluation(spec, observations, package, source_
             "evaluation_verdict": None}
 
 
+def score_partial_diagnostic_evaluation(spec, observations, package, source_case):
+    """Explicit missing-observation diagnostics; incomplete data never get counts."""
+    from .diagnostic_recognition_evidence import audit_diagnostic_recognition
+    proof = audit_diagnostic_recognition(package, source_case)
+    result = _score_recognition(spec, observations, package, calibration_probe=False,
+                               diagnostic=True, partial_diagnostic=True)
+    return {**result, "source_training_evidence_checked": True, "source_diagnostic_audit": proof,
+            "evaluation_verdict": None}
+
+
 def score_threshold_candidate(spec, observations, package):
     """Same complete label/ID/window criterion, explicitly for calibration data.
 
@@ -203,7 +213,7 @@ def score_threshold_candidate(spec, observations, package):
     return _score_recognition(spec, observations, package, calibration_probe=True)
 
 
-def _load_evaluation(path: Path, *, diagnostic=False):
+def _load_evaluation(path: Path, *, diagnostic=False, missing=None):
     spec = load(path)
     require(set(spec) == SPEC_FIELDS | ({"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set())
             and spec.get("kind") == ("timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec")
@@ -216,8 +226,11 @@ def _load_evaluation(path: Path, *, diagnostic=False):
         relative = trial.get("observation")
         require(type(relative) is str and relative and "\\" not in relative and ":" not in relative
                 and not Path(relative).is_absolute() and ".." not in Path(relative).parts, "invalid_evaluation_artifact_path")
-        actual = (root/relative).resolve(strict=True)
+        actual = (root/relative).resolve()
         require(actual.is_relative_to(root), "evaluation_artifact_outside_root")
+        if diagnostic and missing is not None and not actual.exists():
+            missing.append(trial["trial_id"])
+            continue
         observations.append(load(actual))
     return spec, observations
 
@@ -228,3 +241,10 @@ def load_evaluation(path: Path):
 
 def load_diagnostic_evaluation(path: Path):
     return _load_evaluation(path, diagnostic=True)
+
+
+def load_partial_diagnostic_evaluation(path: Path):
+    """Retain the declared design while listing genuinely absent trial files."""
+    missing = []
+    spec, observations = _load_evaluation(path, diagnostic=True, missing=missing)
+    return spec, observations, missing
