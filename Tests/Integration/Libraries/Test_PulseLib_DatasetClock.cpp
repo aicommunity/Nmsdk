@@ -103,7 +103,9 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
         {"trace",QString::fromStdString(stem+".csv")},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
     Write(stem+".csv",QByteArray::fromStdString(csv.str()));Write(stem+".json",QJsonDocument(result.record).toJson());
     neuron->BreakLinks();neuron->Free();
-    Require(model->DelComponent("Neuron",false) && model->DelComponent("Dataset",false),"clock fixture detach failed");
+    const auto attached=model->GetNumComponents();
+    model->DelComponent("Neuron",false);model->DelComponent("Dataset",false);
+    Require(model->GetNumComponents()==attached-2,"clock fixture detach failed");
     core.storage->ReturnObject(neuron);core.storage->ReturnObject(dataset);core.environment->DestroyModel();
     return result;
 }
