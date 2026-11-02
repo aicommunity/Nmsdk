@@ -81,11 +81,18 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
     core.environment->GetTime().SetTime(static_cast<ULongTime>(std::llround(origin*1e6)));model->Reset();
     Require(core.environment->GetTime().GetDoubleTime()==origin,"clock fixture origin not applied");
     Require(!model->HasOperationFailureSince(marker),"clock fixture native Reset failed");
+    Require(generator->PulseLength.GetData()==.001 && generator->FrequencyDeviation.GetData()==0. &&
+            !generator->UseTransitSignal.GetData() && !generator->UsePatternOutput.GetData() &&
+            generator->TimeStep.GetData()==frequency && dataset->Delay.GetData()==delay &&
+            dataset->StateGeneration.GetData()==mode && dataset->TimeGeneration.GetData()==protocol.timeGeneration &&
+            dataset->MatrixData.GetData()==pattern,"clock fixture effective source configuration differs");
     const NmsdkTools::ModelBoundarySources ports{{&generator->Output,"dataset_generator"}};
     const auto before=NmsdkTools::IdentifyModel(neuron,ports);Require(before["valid"].toBool(),"clock fixture identity invalid");
+    for(const auto& value:before["model"].toObject()["nodes"].toArray())
+        Require(value.toObject()["frequency_hz"]==QJsonValue(QString::number(frequency)),"clock fixture physical child frequency differs");
     Playback result;QJsonArray edges;std::ostringstream csv;csv.imbue(std::locale::classic());
     csv<<std::setprecision(17)<<"time,stimulus,soma0\n";
-    bool wasHigh=false;double peak=0.;
+    bool wasHigh=false;double peak=0.,low=std::numeric_limits<double>::infinity(),high=-low;
     for(unsigned tick=0;tick<=frequency/4;++tick)
     {
         model->Calculate();
@@ -99,13 +106,16 @@ Playback Play(unsigned frequency,int mode,double delay,double origin,const std::
         Require(synapse->Input(0,0)==input,"clock fixture actual synapse input differs");
         if(input>0. && !wasHigh)edges.append(QJsonObject{{"tick",double(tick)},{"time",time}});
         wasHigh=input>0.;peak=std::max(peak,std::abs(potential));
+        low=std::min(low,potential);high=std::max(high,potential);
         result.frames.push_back({time,input,potential});csv<<time<<','<<input<<','<<potential<<'\n';
         core.environment->IncreaseModelTimeByStep();
     }
     const auto after=NmsdkTools::IdentifyModel(neuron,ports);
     Require(after["valid"].toBool() && after["sha256"]==before["sha256"],"clock fixture physical model changed");
-    Require(edges.size()>=protocol.minimumEdges && peak>1e-6,"clock fixture must show declared real pulses and soma response");
-    result.record=QJsonObject{{"kind","native_dataset_clock_observation"},{"schema_version",1},
+    Require(edges.size()>=protocol.minimumEdges && high-low>1e-6,"clock fixture must show declared real pulses and soma response");
+    result.record=QJsonObject{{"kind","native_dataset_clock_observation"},{"schema_version",2},
+        {"assertion_contract","origin_and_pulse_program_v1"},
+        {"playback_phase",dataset->WasPlaybackHandledBeforeChildren()?"before_children":"after_children_compatibility"},
         {"frequency_hz",int(frequency)},{"mode",mode},{"delay",delay},{"origin",origin},
         {"complete",true},{"window_duration",.25},{"sample_count",double(result.frames.size())},
         {"scheduled_isi",QJsonArray{protocol.firstIsi,protocol.secondIsi}},{"pulse_length",.001},{"time_generation",protocol.timeGeneration},
@@ -138,6 +148,18 @@ void OriginInvariant(unsigned frequency,int mode,double delay,Protocol protocol=
             runs.push_back(Play(frequency,mode,delay,origins[index],stem+"_origin"+std::to_string(index),protocol));
             EXPECT_EQ(runs.back().record["rising_edges"].toArray()[0].toObject()["tick"].toInt(),
                       int(frequency/100)+(protocol.nearGrid?1:0))<<"first actual pulse must occur at the declared native tick";
+            const auto period=frequency*51/1000+unsigned(std::llround(delay*frequency));
+            const auto first=frequency/100+unsigned(protocol.nearGrid),last=frequency/20,width=frequency/1000;
+            const auto cutoff=unsigned(std::llround(protocol.timeGeneration*frequency));
+            unsigned wrongPulseSamples=0;
+            for(unsigned tick=0;tick<runs.back().frames.size();++tick)
+            {
+                const auto phase=tick%period;
+                const bool expected=(mode!=1 || tick<=cutoff) &&
+                    ((phase>=first && phase<first+width) || (phase>=last && phase<last+width));
+                wrongPulseSamples+=(runs.back().frames[tick].stimulus>0.)!=expected;
+            }
+            EXPECT_EQ(wrongPulseSamples,0u)<<"entire native pulse program must retain declared width, repeat and timed cutoff";
         }
         for(unsigned index=1;index<runs.size();++index)
         {

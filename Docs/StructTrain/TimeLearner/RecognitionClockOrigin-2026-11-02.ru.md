@@ -113,3 +113,25 @@ ledger обрабатывает его в контексте вызывающе�
 проверки backwards clock сохраняет штатный RDK_THROW. Failed build evidence
 `8559afd8599a1f5c4084ee73241abb9ff7a8a214` сохраняется отдельно. Это не runtime
 проверка алгоритма и не доказательство нарушения dataset invariance новым кодом.
+
+Fixed B2 (root0a4f3269/Pulse9f907a9) завершил9 unit и34 native:14 transfer
+прошли,20 clock fixtures не прошли. Ни одного changedInput/changedSoma assertion
+для записанных серий не было;66 записей имели first pulse на tick позже
+запрошенного (21 вместо20 при2000Hz). Два cutoff cases не собрали минимальный
+положительный response. Evidence `857d38d4ef8ad5421357f5fff6b2231e31413742`.
+То есть integer clock исправил origin dependence, но не всю семантику source.
+
+Проверка Rdk UContainer::Calculate подтверждает порядок BeforeCalculate →
+children → ACalculate. Dataset управлял генераторами в ACalculate. В zero-gap
+2000Hz CSV last pulse имел1 high sample вместо2; немедленный Begin стирал
+последний sample после child calculation. PulseLib f358ce4 переносит управление
+в ABeforeCalculate при единой частоте ancestry/generators. Multirate source
+hierarchy сохраняет after/gated compatibility path, без второго Calculate.
+Pending file reload подготовляется в выбранной фазе; initialized structural
+owner штатно инициализирует newly created/unready generators до arming.
+
+Новые record schema2 и origin_and_pulse_program_v1 проверяют весь input program,
+эффективное применение source parameters/частоты и ненулевую вариацию сомы,
+не только постоянный rest potential. Source waveform и morphology learner
+не меняются для получения зелёного scorer. Новый код ещё требует34-case gate,
+file/multirate/lifecycle tests, ASan, reader mutations и temporal visual review.
