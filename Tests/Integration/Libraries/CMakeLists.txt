@@ -6,6 +6,7 @@ set(PULSELIB_TEST_OUTPUT_DIR "${DEPLOY_ROOT}")
 
 add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_StorageComponents.cpp
+    Test_PulseLib_DatasetClock.cpp
     Test_PulseLib_NeuronGrowth.cpp
     Test_PulseLib_TimeLearnerResistance.cpp
     Test_PulseLib_Observations.cpp
