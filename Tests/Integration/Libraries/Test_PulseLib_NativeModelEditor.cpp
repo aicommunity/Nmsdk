@@ -88,9 +88,16 @@ class CapacitanceResetFaultNeuron : public NPulseNeuron {
 public:
     int resetsUntilFailure=0;
     int calculationsUntilFailure=0;
+    int buildsUntilFailure=0;
     std::function<void(double)> failureSink;
+    void ArmBuildFailure() {buildsUntilFailure=1;Ready=false;}
     CapacitanceResetFaultNeuron* New(void) override {return new CapacitanceResetFaultNeuron;}
 protected:
+    bool ABeforeBuild(void) override {
+        if(buildsUntilFailure>0 && --buildsUntilFailure==0)
+            throw std::runtime_error("injected_native_child_build");
+        return NPulseNeuron::ABeforeBuild();
+    }
     bool ABeforeReset(void) override {
         if(resetsUntilFailure>0 && --resetsUntilFailure==0)
         {
@@ -958,6 +965,28 @@ void NativeOperationFailureProbe(bool calculate)
 }
 TEST(NativeOperationDiagnostics,ResetPreservesTrueAndReportsSubtreeFailure){NativeOperationFailureProbe(false);}
 TEST(NativeOperationDiagnostics,CalculateFailureCensorsTheActualNativeObservation){NativeOperationFailureProbe(true);}
+
+TEST(NativeOperationDiagnostics,BuildPreservesTrueAndReportsSubtreeFailure)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="CapacitanceResetFaultNeuronFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]()->UComponent*{return new CapacitanceResetFaultNeuron;},image),image);
+    EditingRig<NNeuronTimeLearner> rig(2000,1,"operation_build",false,2,true,2,1,false,{},1,1.,image);
+    auto failing=dynamic_cast<CapacitanceResetFaultNeuron*>(rig.neuron.Get());ASSERT_TRUE(failing);
+    const auto marker=rig.learner->OperationFailureSequence();
+    failing->ArmBuildFailure();const bool returned=rig.neuron->Build();
+    EXPECT_TRUE(returned);EXPECT_FALSE(rig.neuron->IsReady());
+    ASSERT_TRUE(rig.learner->HasOperationFailureSince(marker));
+    const auto failure=rig.learner->LastOperationFailure();
+    EXPECT_EQ(failure.Operation,"Build");
+    EXPECT_NE(failure.Reason.find("injected_native_child_build"),std::string::npos);
+    const auto after=rig.learner->OperationFailureSequence();
+    EXPECT_TRUE(rig.neuron->Build());EXPECT_TRUE(rig.neuron->IsReady());
+    EXPECT_FALSE(rig.learner->HasOperationFailureSince(after));
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    Artifact(rig.name+"_operation_diagnostic.json",QJsonDocument(QJsonObject{{"returned",returned},
+        {"operation",QString::fromStdString(failure.Operation)},{"reason",QString::fromStdString(failure.Reason)}}).toJson());
+}
 
 template<class Learner> void NativeResistanceDomainSearch(unsigned frequency=2000)
 {
