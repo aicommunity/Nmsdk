@@ -37,3 +37,35 @@ wall limits. Не заявляется публичное применение �
 полное физическое обучение или научный результат. Серверная приёмка pending.
 Ранние ad-hoc setup failures сохраняются отдельно, новые campaign Python
 launchers не создаются: CLI получает декларативный SPEC.
+
+
+## Серверная приёмка
+
+Driver `5325bbd0938c453d988b0ac71b3263c24683c401`, immutable C++ runtime root
+`507c8a6c4da2b795d4dca3caf7b43806c8bf6835` (Pulse151a388, Rdkeda206b6).
+На обоих workers14 positive preflights,6 expected rejections и2 schema1
+one-tick Train controls. По28/28 reader/preparation/compatibility tests,
+0 failures/errors/skips. Основные primary:
+normal `9eeb7ba1cea3eedd1cefdbdf7c213e469d230107` (1162 members,344648 B),
+ASan `b4fa92323ec4e9642a929fc913e9746cd0dcfd5c` (883 members,267376 B).
+Содержат также завершённые integrated74 иMath6, прежние setup failures и
+actual loaded-file snapshots; ASan библиотека присутствует в обоих C++
+процессах M40. Source context before/after совпал до следующего checkout.
+
+Дополнительно self-contained compatibility inputs:
+normal `295012f7dd36d0e0a861ecacdee5e7a4ca1ea9e5` (35 members,56236 B),
+M40 `89aaefc1d10831624a90ab6262e257385f20ae01` (35 members,60320 B).
+Сохранены exact18 template job files, corpus metadata и реальный legacy Train
+с manifest schema1. Его interpretation остаётся unverified; новое runtime/
+physics assurance ему не приписывается. Все bundle/archive/member hashes
+проверены локально. Для повторного анализа не требуется старый абсолютный
+путь на сервере: unpack primary и compatibility archives, передать локальные
+пути в TIMELEARNER_NATIVE_PREFLIGHT_DIR / TIMELEARNER_STRUCTURED_EXIT_DIR /
+TIMELEARNER_LEGACY_SCHEMA1_TRAIN_DIR и запустить три test modules.
+
+Это приёмка Python пути анализа и maintained regression CLI, а не всех
+stages9/10. Новые numerical experiments, queue leases/recovery, все modes,
+полная source-impact review и scientific matrix остаются открытыми.
+Visual acceptance integrated74 не выводится из этих records; полные soma
+reports продолжаются в соответствующем native подэтапе. Preflight не
+измеряет response; one-tick controls не являются полным Test-паттерном.
