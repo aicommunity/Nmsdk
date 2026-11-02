@@ -348,6 +348,18 @@ template<class Learner> struct EditingRig {
     }
 };
 
+template<class Learner> void PrepareCapacitanceTransfer(EditingRig<Learner>& rig,NativeCapacitanceCorrection& correction)
+{
+    auto exc=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
+    auto inh=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true);ASSERT_TRUE(exc && inh);
+    exc->Capacity=.9e-9;inh->Capacity=.6e-9;
+    correction.baseline=rig.learner->CaptureBoundNativeCapacitanceBaseline();correction.maximumRelativeChange=.2;
+    correction.membraneScales={{"Dendrite1_2",1.1}};
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    const auto edited=rig.learner->ApplyNativeCapacitanceScale(correction.baseline,correction.membraneScales,correction.maximumRelativeChange);
+    ASSERT_EQ(edited.status,NativeEditStatus::Applied)<<edited.reason;
+}
+
 void RecordNativeTrainingProof(NativeTrainingPlan& plan,const std::string& caseName,std::size_t channels);
 
 template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normalization)
@@ -1565,6 +1577,11 @@ TEST(NativeLearnedState,FreshProcessImport)
         EXPECT_EQ(NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}})["sha256"],package["model_revision"]);
         QJsonObject record{{"model",identity},{"certificate",stopped?QJsonValue(QJsonValue::Null):QJsonValue(EncodeTrainingCertificate(*target->NativeTrainingController().Certificate()))},
             {"probe",EncodeNativeProbeEvidence(*probe)},{"need",target->IsNeedToTrain.GetData()}};
+        if(package["schema_version"]==QJsonValue(2))
+        {
+            EXPECT_EQ(target->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+            record["capacitance_state"]=target->ImportedNativeCapacitanceState();
+        }
         QFile json(QString::fromLocal8Bit(output));ASSERT_TRUE(json.open(QIODevice::WriteOnly|QIODevice::NewOnly));
         ASSERT_GT(json.write(QJsonDocument(record).toJson()),0);json.close();
         QFile csv(QString::fromLocal8Bit(output)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_GT(csv.write(QByteArray::fromStdString(trace.str())),0);
@@ -2672,7 +2689,7 @@ void RepeatedBoundarySummary(const NativeTrainingService& service,const std::str
 enum class BoundaryExpectation { Completed, DiagnosticSweepBudget };
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
     std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
-    double fixtureWallSeconds=600.,BoundaryExpectation expectation=BoundaryExpectation::Completed)
+    double fixtureWallSeconds=600.,BoundaryExpectation expectation=BoundaryExpectation::Completed,bool withCapacitance=false)
 {
     ASSERT_TRUE(std::isfinite(fixtureWallSeconds) && fixtureWallSeconds>0.);
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
@@ -2680,6 +2697,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(recognition)suffix+="_recognition_"+std::to_string(int(*recognition));
     if(initialThreshold!=1.)suffix+="_spiking";
     if(n0Repeats>1)suffix+="_repeat"+std::to_string(n0Repeats);
+    if(withCapacitance)suffix+="_capacitance_state";
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold);
     if(automatic)rig.learner->CalculateMode=0;
     std::optional<ConfiguredNativeTraining> configuredPlan;
@@ -2696,6 +2714,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     auto initialZone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(initialZone);
     ASSERT_DOUBLE_EQ(initialZone->Threshold.GetData(),initialThreshold);
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
+    NativeCapacitanceCorrection capacitance;
+    if(withCapacitance)ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,capacitance));
     auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     plan.maximumWallSeconds=fixtureWallSeconds;
     plan.search.n0CandidateRepeats=n0Repeats;
@@ -2750,7 +2770,12 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     const auto certificate=certificateValue(service);
     Artifact(rig.name+"_learned_summary.json",QJsonDocument(EncodeNativeTrainingState(service,original,parameters)).toJson());
     const std::string implementation=diagnostic?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1";
-    const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    const auto package=withCapacitance?rig.learner->ExportNativeLearnedState(implementation,capacitance):rig.learner->ExportNativeLearnedState(implementation);
+    if(withCapacitance)
+    {
+        EXPECT_EQ(package["schema_version"],QJsonValue(2));
+        EXPECT_EQ(package["capacitance_state"].toObject()["baseline"],QJsonValue(capacitance.baseline));
+    }
     EXPECT_EQ(package["kind"],QJsonValue(diagnostic?"timelearner_stopped_state":"timelearner_completed_state"));
     if(diagnostic)
     {
@@ -2775,6 +2800,11 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     const auto imported=test->ImportNativeLearnedState(package,implementation);
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
     ASSERT_TRUE(test->NativeModelEditFailure().empty())<<test->NativeModelEditFailure();
+    if(withCapacitance)
+    {
+        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+        EXPECT_EQ(test->ExportNativeLearnedState(implementation)["capacitance_state"],package["capacitance_state"]);
+    }
     if(n0Repeats>1)RepeatedBoundarySummary(test->NativeTrainingController(),original,parameters,rig.name+"_imported_summary.json");
     auto testNeuron=test->template GetComponentL<NPulseNeuron>("Neuron",true);
     auto testSource=test->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(testNeuron);ASSERT_TRUE(testSource);
@@ -2868,6 +2898,14 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         EXPECT_EQ(test->NativeTrainingController().State(),stateBeforeRejectedImports);
         EXPECT_EQ(test->NativeTrainingController().Reason(),reasonBeforeRejectedImports);
     };
+    if(withCapacitance)
+    {
+        corrupted=package;auto correction=corrupted["capacitance_state"].toObject();
+        auto scales=correction["membrane_scales"].toObject();scales["Dendrite1_2"]=1.2;
+        correction["membrane_scales"]=scales;corrupted["capacitance_state"]=resign(correction);
+        rejectWithoutMutation(resign(corrupted));
+        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+    }
     corrupted=package;auto claim=corrupted["certificate"].toObject();claim["exact"]=!claim["exact"].toBool();corrupted["certificate"]=claim;
     rejectWithoutMutation(resign(corrupted));
     if(!diagnostic)
@@ -2996,6 +3034,17 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             NmsdkTools::IdentifyModel(testNeuron,{{&testSource->Output,"burst"}})["sha256"].toString().toStdString(),test->ReadNativeParameters())).toJson());
     }
 }
+template<class Learner> void CapacitanceCompletedTransport(int normalization,std::optional<RecognitionCase> recognition={})
+{
+    LearnedBoundary<Learner>(normalization,.2,2000,2,false,recognition,false,1.,1,600.,BoundaryExpectation::Completed,true);
+}
+TEST(NativeCapacitanceStateTransport,ClassicN0){CapacitanceCompletedTransport<NNeuronTimeLearner>(0);}
+TEST(NativeCapacitanceStateTransport,ClassicN1){CapacitanceCompletedTransport<NNeuronTimeLearner>(1);}
+TEST(NativeCapacitanceStateTransport,BranchN0){CapacitanceCompletedTransport<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeCapacitanceStateTransport,BranchN1){CapacitanceCompletedTransport<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeCapacitanceStateTransport,ClassicFrozenIdentity){CapacitanceCompletedTransport<NNeuronTimeLearner>(0,RecognitionCase::OwnedFreshIdentity);}
+TEST(NativeCapacitanceStateTransport,BranchFrozenScaled){CapacitanceCompletedTransport<NNeuronTimeLearnerBranch>(1,RecognitionCase::OwnedFreshScaled);}
+
 template<class Learner> void DiagnosticSweepBudgetBoundary(int normalization)
 {
     LearnedBoundary<Learner>(normalization,.02,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::DiagnosticSweepBudget);
@@ -3376,9 +3425,11 @@ TRAINING_INTENT_TESTS(Branch,NNeuronTimeLearnerBranch)
 #undef TRAINING_INTENT_TESTS
 
 enum class StoppedCase { Early, Partial, BudgetEarly, BudgetSearch, Search, Final, InvalidProbe, ChangedPartial, RepeatPartial };
-template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false,unsigned n0Repeats=1)
+template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::string& label,int normalization=1,bool configured=false,unsigned n0Repeats=1,bool withCapacitance=false)
 {
-    EditingRig<Learner> rig(2000,normalization,"stopped_"+label);auto plan=TrainingPlan(rig);
+    EditingRig<Learner> rig(2000,normalization,"stopped_"+label,false,2,withCapacitance);auto plan=TrainingPlan(rig);
+    NativeCapacitanceCorrection capacitance;
+    if(withCapacitance)ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,capacitance));
     plan.search.n0CandidateRepeats=n0Repeats;
     if(configured)
     {
@@ -3448,7 +3499,8 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     if(scenario==StoppedCase::Final)EXPECT_EQ(service.FinalPackets().size(),1u);
     ASSERT_FALSE(service.ObservedPackets().empty());
     const std::string implementation="native-stopped-boundary-fixture-v1";
-    const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    const auto package=withCapacitance?rig.learner->ExportNativeLearnedState(implementation,capacitance):rig.learner->ExportNativeLearnedState(implementation);
+    if(withCapacitance)EXPECT_EQ(package["schema_version"],QJsonValue(2));
     EXPECT_EQ(package["kind"],QJsonValue("timelearner_stopped_state"));EXPECT_TRUE(package["certificate"].isNull());
     EXPECT_EQ(package["reason"].toString().toStdString(),service.Reason());
     EXPECT_EQ(package["observed_packets"].toArray().size(),int(service.ObservedPackets().size()));
@@ -3460,6 +3512,11 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     test->Name="StoppedTest";UEPtr<UContainer> node=test;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);test->SetGlobalTimeStep(rig.frequency);
     const auto imported=test->ImportNativeLearnedState(package,implementation);
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;test->Build();test->Init();
+    if(withCapacitance)
+    {
+        EXPECT_EQ(test->ImportedNativeCapacitanceState(),package["capacitance_state"]);
+        EXPECT_EQ(test->ExportNativeLearnedState(implementation)["capacitance_state"],package["capacitance_state"]);
+    }
     const auto& restored=test->NativeTrainingController();ASSERT_FALSE(restored.Certificate());
     if(n0Repeats>1)RepeatedBoundarySummary(restored,package["model_revision"].toString().toStdString(),test->ReadNativeParameters(),rig.name+"_imported_summary.json");
     EXPECT_EQ(restored.Outcome(),expected);EXPECT_EQ(restored.Reason(),service.Reason());EXPECT_FALSE(test->IsNeedToTrain.GetData());
@@ -3544,6 +3601,9 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     Artifact(rig.name+"_warm_boundary.json",QJsonDocument(stoppedAgain).toJson());
     Artifact(rig.name+"_restored_summary.json",QJsonDocument(EncodeNativeTrainingState(restored,importedRevision(),test->ReadNativeParameters())).toJson());
 }
+TEST(NativeCapacitanceStateTransport,ClassicStoppedPartial){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::Partial,"CapacitancePartial",0,false,1,true);}
+TEST(NativeCapacitanceStateTransport,BranchStoppedPartial){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::Partial,"CapacitancePartial",1,false,1,true);}
+
 #define STOPPED_CASE(Name,Value) \
 TEST(NativeStoppedState,Classic##Name){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::Value,#Name);} \
 TEST(NativeStoppedState,Branch##Name){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::Value,#Name);}
