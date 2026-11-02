@@ -34,3 +34,26 @@ budget, возвращая InvalidObservation. Исправлено только
 добавлен независимый N=1/no-adjustable-input control, который действительно
 должен остаться SearchUnresolved при свежем OutsideTolerance.
 Повторный baseline должен иметь7 tests /4 expected failures /3 controls.
+
+
+Исправленный baseline91a9524b5 на M40:7 tests, четыре ожидаемых failures
+и три controls passed. Реализованная Pulse feature
+`63fd7a9fecbc567fb8e5c690ae58fc73a896de65` различает sweep/probe/edit/epoch/
+adapter limits и передаёт Reason через native service в существующие
+summary/stopped-package поля. FinalVerification rejection не подменяется
+старой search rejection. Exact на последнем sweep сохраняется.
+
+В pure session свежий negative certificate остаётся измерительным свидетельством.
+Native service при BudgetExhausted сохраняет модель, references, final/observed
+packets в штатном diagnostic stopped state, без completed-Train сертификата.
+Import должен сохранять outcome/reason/graph; ConvertNativeSoloToRecognition
+не должен автоматически принимать такой stopped package. Отдельный diagnostic
+Test path остаётся обязательным открытым пунктом плана, а не скрытым обходом.
+
+Подготовлено46 cases:33 прежних controller tests (у девяти reviewed ожиданий
+max-sweep сменён терминальный статус),9 termination checks и4 настоящих native
+Classic/Branch×N0/N1 budget/export/import controls. Native controls фиксируют
+законную исходную геометрию и Rs/Ns, sync tolerance0 только как контролируемое
+условие несинхронности,8 полных observations на case. Это не научная оценка
+при default0.02. Все32 packet/CSV и48 soma pairs подлежат строгому анализу
+и полным временным отчётам. Приёмка ещё не выполнена, в develop изменений нет.
