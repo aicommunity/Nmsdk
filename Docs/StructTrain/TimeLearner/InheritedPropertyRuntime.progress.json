@@ -2,7 +2,7 @@
   "kind": "inherited_property_runtime_checkpoint",
   "accepted_root": "ce285d7eee907d7d453ae00e1840246df09d5086",
   "feature_branch": "codex/timelearner-inherited-runtime",
-  "feature_root": "3122fe471270e770ad3fa6363fd3f3efa2da1459",
+  "feature_root": "5b6dd147200a37ea93f303cbb01408312555e5ac",
   "numeric_root": "ff2eb1129c4d3d57e767058ab7e512236168c794",
   "rdk_feature": "b34223ef113ca60a817589995205de06af77543a",
   "rdk_branch": "codex/timelearner-vector-stream",
@@ -17,7 +17,7 @@
       "start_ticks": "315193557",
       "runtime": "runtime-s01-inherited-native-normal-a4",
       "budget": 7200,
-      "last_verified": "owned process alive; math6 pass; first6 native cases passed, ClassicLocalFrequency20000 running"
+      "last_verified": "owned native parent alive; math6 passed; first11 native cases passed; BranchN0Activity20000 running"
     },
     {
       "host": "10.245.1.17",
@@ -27,7 +27,7 @@
       "start_ticks": "265736335",
       "runtime": "runtime-s01-inherited-native-asan-a4",
       "budget": 21600,
-      "last_verified": "owned process alive; math6 pass; first2 native cases passed, ClassicActivity20000 running"
+      "last_verified": "math6 passed; first2 native cases passed; ClassicActivity20000 running; terminal absent"
     }
   ],
   "expected": {
@@ -62,14 +62,14 @@
     "Initial test setup incorrectly called protected SetTimeStep; corrected via public TimeStep property.",
     "Clean production-header stream target reproduces nonexistent MVector3 x/y/z member compile failure on both workers.",
     "Owner fix uses public element accessor and transactional delimiter-checked extraction; general vector dimensions unchanged.",
-    "A3 sources/build/runtime must not be changed while owned processes are live.",
-    "New report code/spec does not alter C++ compiled source relative to numeric9ce.",
+    "A4 sources/build/runtime must not be changed while owned processes are live.",
+    "New report code/spec does not alter C++ compiled source relative to numeric ff2eb1129.",
     "Generic native-test adapter now permits declared nonempty standalone-only sets; exact JUnit/packet/CSV closure remains required.",
     "Actual native test outputs not accepted until terminal, math6/native16 results and reader/temporal gates inspected.",
     "Primary stages0-12 not complete. Prior Elder Bin provenance impact audit still open."
   ],
   "next": [
-    "Poll same owned A3 processes; do not restart on observation timeout.",
+    "Poll same owned A4 processes; do not restart on observation timeout.",
     "Preserve failures before any retry. Fast math process may lack actual loader mappings: report separately; native long process must have mappings.",
     "After success, stage closed native artifacts and exact gtest.xml as native.xml for report adapter with recorded hashes.",
     "Export analysis code from feature through Git without modifying live source; run7 reader checks on both actual corpora.",
@@ -98,5 +98,21 @@
     "dependency_review_required": 22,
     "unknown_large_metadata": 4,
     "scientific_reclassification": false
-  }
+  },
+  "reader_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s01-inherited-reader-normal-a2",
+      "pid": 3339783,
+      "start_ticks": "315299660"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-reader-asan-a2",
+      "pid": 1343934,
+      "start_ticks": "265842434"
+    }
+  ],
+  "reader_source": "5b6dd147200a37ea93f303cbb01408312555e5ac",
+  "reader_policy": "Independent depth1 filtered Git source, no edits to live native source/build/runtime. Wait for closed terminal16, copy native corpus and exact gtest.xml to native.xml, hash primary files, run7 reader tests and inventory. Reader a1 cancelled by verified owned process group due unbounded fetch/setup command before acceptance; preserved cancellation metadata."
 }
