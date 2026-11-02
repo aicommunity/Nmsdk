@@ -135,6 +135,42 @@ model time, физику, критерии, windows либо учебные tole
 должна сохраняться как interrupted/incomplete с точным owned process handle,
 а не трактоваться как научная несостоятельность C₀ или успешная полная матрица.
 
+## Проверенный checkpoint
+
+Corrected baseline A2 завершён:8/8 отрицательных cases на Core8b41 без прежней
+ошибки edit после Reset; evidence `a054904f31160271a87ea327353890f052d540f1`,
+191 members/1 565 650 bytes проверены. A1 `f903a8273c28bb7597cb8008c095d31933322dff`
+с ошибками fixture тоже сохранён:81 members/408 997 bytes проверены.
+
+Первый owner-кандидат B1 намеренно остановлен по точным native handles после
+выявления избыточного whole-graph assertion, без подмены результатов:
+normal `81d4cad7211c633c37bef142707e486e66050cba` (183 members/6 651 611 bytes),
+ASan `9168972e48e1181ae71033c19ce605b900ff7b52` (130 members/3 799 254 bytes).
+Все members и intentional-stop receipts проверены. Raw native_gate сообщает
+process_error/incomplete_test_observation из-за отсутствующего cooperative exit;
+семантика задания — interrupted, acceptance=not_accepted. Отдельный audit JSON
+Reports/StructTrain/TimeLearner/s07-capacitance-owner-interruption-audit-b1/audit.json
+связывает эти уровни и точные PID/start_ticks/executable hashes. Это не научный FAIL.
+
+Текущие jobs используют уже merged parser develop, Pulse
+`f899ef024698afa7bc8e9a17f2307116368048da` (owner code как4ae7e5c, плюс принятый
+NDataset), Rdk a62393f7 и Bin14a88195:
+
+- Elder normal C2: root `3a1b7fe1f0a2a958d034736613f2793abe16c5ec`, readbacks
+  s07-capacitance-owner-current-normal-c2, owner185679/start_ticks323290894,
+  publisher185680/start_ticks323290894; outer7200s.
+- M40 ASan C3: root `eab5e61c2c246d15dcf28ba03454b8ae44b1f6c2`, readbacks
+  s07-capacitance-owner-current-asan-c3, owner2470460/start_ticks273856765,
+  publisher2470461/start_ticks273856765; outer18000s.
+
+Оба прошли server build и начали native8. Ожидаются19 reader checks после
+native success. Результат пока pending, publisher ждёт закрытия точного owner.
+M40 queued C2 (2467199/2467200, start_ticks273833678) отменён до fetch/checkout/
+runtime changes ради измеренного ASan budget; cancellation receipts копируются
+в C3 primary. Работающие source/build/runtime нельзя переключать вручную.
+После успеха ещё нужны regression47, transport/legacy readers и временные
+отчёты с прямой visual QA. Общая цель и этапы4/5/6/7/11 не завершены.
+
 Изменения выполняются в codex/timelearner-capacitance-owner от принятого develop;
 server jobs не должны вытеснять текущую invalid-reload проверку. После адресной
 приёмки — --no-ff merge Pulse develop, затем root с точным gitlink. Полные

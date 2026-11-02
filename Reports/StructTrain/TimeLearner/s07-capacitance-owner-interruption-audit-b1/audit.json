@@ -1,0 +1,74 @@
+{
+  "kind": "timelearner_intentional_test_interruption_audit",
+  "schema_version": 1,
+  "records": [
+    {
+      "worker": "normal",
+      "evidence_commit": "81d4cad7211c633c37bef142707e486e66050cba",
+      "receipt_sha256": "f6ab59d530b51a7997355f049b26fb4d896fb9980f15657c59ac82ddfac8348e",
+      "intentional_stop": {
+        "requested_execution": "interrupted",
+        "reason": "superseded incorrect whole-graph equality assertion; native bank release contract verified in source and actual graph differences; partial observations retained",
+        "owned_native_process": {
+          "pid": 180663,
+          "start_ticks": "323247656",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "executable": "/home/user/timelearner-refactor/runtime-s07-capacitance-owner-current-normal-b1/Test_PulseLib_StorageComponents",
+          "executable_sha256": "ede1f8803049ebb2e96206fffa69df7991e37a85413a2acdaaf777548d02d363",
+          "runtime_fingerprint": "a8517d7f5be61363a1e5031e7c6ad3ab3ff33b6f16c1f577bea9b1ee8ba694a3"
+        },
+        "signal": "SIGTERM",
+        "replacement_root": "3a1b7fe1f0a2a958d034736613f2793abe16c5ec",
+        "physical_tolerances_changed": false
+      },
+      "execution_status": "interrupted",
+      "observation_validity": "incomplete_test_observation",
+      "training_status": "not_applicable",
+      "calibration_status": "not_applicable",
+      "evaluation_status": "not_assessed",
+      "acceptance_status": "not_accepted",
+      "raw_native_status": {
+        "inventory": null,
+        "execution": "process_error",
+        "validity": "incomplete_test_observation",
+        "assertion_status": "not_assessed",
+        "reason": "native_gate_loaded_runtime_missing"
+      }
+    },
+    {
+      "worker": "asan",
+      "evidence_commit": "9168972e48e1181ae71033c19ce605b900ff7b52",
+      "receipt_sha256": "ce63cc1dd49a2efa5686acf65b2fe2139bb4a14c5835525fa62426f4a51b511a",
+      "intentional_stop": {
+        "requested_execution": "interrupted",
+        "reason": "superseded incorrect whole-graph equality assertion; native bank release contract verified in source and actual graph differences; partial observations retained",
+        "owned_native_process": {
+          "pid": 2457569,
+          "start_ticks": "273759837",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/media/user/Data/TimeLearnerRefactor/runtime-s07-capacitance-owner-current-asan-b1/Test_PulseLib_StorageComponents",
+          "executable_sha256": "c6da4f04e5591f44fb2ab939179e0d7f5de812587bb399bada7d1e6e1c49a13f",
+          "runtime_fingerprint": "2f0c79c5d3b72b1b5f436762c4d26dfcb959cf0cc86dd9666eaa51cba5e2e88d"
+        },
+        "signal": "SIGTERM",
+        "replacement_root": "eab5e61c2c246d15dcf28ba03454b8ae44b1f6c2",
+        "physical_tolerances_changed": false
+      },
+      "execution_status": "interrupted",
+      "observation_validity": "incomplete_test_observation",
+      "training_status": "not_applicable",
+      "calibration_status": "not_applicable",
+      "evaluation_status": "not_assessed",
+      "acceptance_status": "not_accepted",
+      "raw_native_status": {
+        "inventory": null,
+        "execution": "process_error",
+        "validity": "incomplete_test_observation",
+        "assertion_status": "not_assessed",
+        "reason": "native_gate_loaded_runtime_missing"
+      }
+    }
+  ],
+  "scope": "Exact owned native handles were deliberately stopped because the whole-graph equality assertion contradicted native bank ownership semantics. The supervisor completed reporting; the test observation is incomplete and is not a positive or scientific result.",
+  "scientific_verdict": null
+}
