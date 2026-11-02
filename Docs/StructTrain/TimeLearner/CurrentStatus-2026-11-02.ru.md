@@ -32,8 +32,20 @@ f018cacc04c0ef34f6ddfab9fe62166e4066a840 (15 verified members).
 Расширенный normal gate8/8 failed ДО проверки transfer/recognition/calibration/
 PostTune: при maximum_sweeps_exhausted прежние fixtures всё ещё требуют
 completed certificate. Это открытая регрессия проверки предпосылок, а не
-PASS downstream-путей. Готовится A/B со старым неизменным runtime f683.
+PASS downstream-путей. A/B со старым неизменным runtime f683 завершён:
+те же8 failures,112 CSV побайтно равны,112 Train packets равны целиком.
+Evidencef0af7f4a3629e6cf6e60fe2225c86952fd9800c7. Для этого набора проблема
+существовала до joint editor и Rdk ledger. Это не общее доказательство
+отсутствия регрессий. Первый control отклонён source alias guard; отдельный
+worktree Bin получил собственный core.worktree, первичный отказ сохранён.
 Нельзя менять допуски или объявлять stopped Train завершённым ради этих tests.
+
+Следующий обязательный пункт: исправить зависимости downstream suites от
+неподтверждённого completed Train. Нужны реальные положительные certified
+модели и отдельные negative/diagnostic cases для long-ISI cold Train; нельзя
+выдавать отрицательный Train за проверку conversion/calibration/PostTune.
+Сохранённые модели, cold retrain и changed-protocol evaluation проверять
+раздельно. Добавление очередного узкого PASS не закрывает эту задолженность.
 
 На M40 жив новый ASan job s07-operation-diagnostics-asan-a1,
 PID2078457/start_ticks270983842: isolated runtime,9 unit +12 native cases.
