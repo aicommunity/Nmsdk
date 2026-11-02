@@ -304,4 +304,4 @@ negative fixture. [Источники, ограничения и proofs](DocsPyt
 
 
 Плановые инструменты20 октября: ещё16 historical files удалены;64 records,
-серверная приёмка этой добавки ожидается. [Причины и точные источники](PlanToolRetirement.ru.md).
+production Git-приёмка всех64 записей и restored-path negative fixture пройдена на обоих workers. [Причины и точные источники](PlanToolRetirement.ru.md).

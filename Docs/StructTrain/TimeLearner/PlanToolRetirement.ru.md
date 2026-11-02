@@ -34,8 +34,19 @@ observations и native probes уже имеют отдельные контра�
 Это проверка tracked source, не произвольных внешних consumers. Исторические
 карточки/README сохранены и явно помечены как снимки с Git-ссылкой на инструменты.
 
-Требуется серверная metadata-приёмка всех64 migration records (62 retired +2 moved),
+Завершена серверная metadata-приёмка всех64 migration records (62 retired +2 moved),
 включая отрицательный fixture, возвращающий старый путь. Длительные numerical
 jobs используют прежние immutable sources/builds/runtimes и не изменяются.
 Полный этап9 открыт: прочие Docs/Bin/PulseLib scripts, активный специализированный
 анализ и declarative job specs ещё требуют миграции.
+
+
+Elder proof `5daf892a9ca85ba0917de1cbade810beb2aec724`, M40 proof
+`ee01174127b6783422b7c223769343ee6a06aa0a`. Все7 members каждого архива,
+archive/bundle hashes и context before/after проверены локально. Архивы
+84452/84780 bytes. Возвращённый check_model_wiring отклонён в отдельных
+Git fixtures `734597efa024a126491655381e01b43efcf9b92c` и
+`3b4aa86110c93e19862630337af2e7f15b9e0dd7`; fixture refs опубликованы,
+положительный receipt для них не создавался. Численные методы, конфиги и
+результаты экспериментов не изменены; утверждение об эквивалентности старого
+анализа новому не делается. Это не закрывает полный этап9.
