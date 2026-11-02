@@ -58,6 +58,7 @@ class DiagnosticPipelineReportsTest(unittest.TestCase):
                     png, svg, pdf = (folder/p for p in view["files"])
                     with Image.open(png) as image:self.assertEqual(image.size, (1920, 960))
                     self.assertIn("Actual shared input", svg.read_text())
+                    self.assertIn("Stopped Train: external_stop", svg.read_text())
                     self.assertTrue(pdf.read_bytes().startswith(b"%PDF-"))
 
     def test_all_cache_hashes_and_unfinished_role(self):

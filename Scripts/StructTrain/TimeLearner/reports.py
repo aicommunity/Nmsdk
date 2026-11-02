@@ -37,6 +37,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     else:
         spec, observations = load_evaluation(source)
     package = load(model)
+    context_label = 'Stopped Train: '+source_case[0]["training_outcome"] if diagnostic else None
     scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
     analysis = (score_partial_diagnostic_evaluation(spec, observations, package, source_case)
                 if diagnostic else scorer(spec, observations, package))
@@ -95,7 +96,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         for descriptor in descriptors:
             folder = output/f'trial-{index:04d}-soma-{descriptor["index"]+1:03d}'
             folder.mkdir()
-            views = render_soma(o, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder)
+            views = render_soma(o, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
+                                context_label=context_label)
             for view in views:
                 view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
             figures.append({"trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],
@@ -117,7 +119,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         observed = [o for o in ordered if o["samples"]] if diagnostic else ordered
         folder = output/f'series-soma-{descriptor["index"]+1:03d}'
         rendered = render_series(observed, descriptor["index"], descriptor["path"],
-                                 limits[descriptor["index"]], folder)
+                                 limits[descriptor["index"]], folder, context_label=context_label)
         for view in rendered["views"]:
             view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
         series.append({"descriptor": descriptor, **rendered})
