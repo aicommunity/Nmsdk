@@ -69,3 +69,29 @@ probe/recognition — до arm и на live boundaries. Проверка не м
 не вызывает Calculate/Reset/Build и не входит в общий model rollback.
 В отдельной проверке нужно подтвердить отмену live наблюдения после изменения
 политики; частичная observation не может стать valid complete result.
+
+Baseline завершён на обоих workers:2 выбранных cases принимают большой
+положительный лимит и выдают completed/по361 samples без нужной диагностики.
+Elder proof `f6ad0174e9dee5943a4e66576894bf615ab75509` (43 members,27864B),
+M40 proof `eb6c648128c1b3f8be2bad7ae17f6abb2c74f801` (66 members,33764B)
+содержат также cancelled configure metadata. Это воспроизведение пробела
+capability validation; фактические wall-driven skips не заявляются.
+
+Pulse implementation `6d59d764fbd4181bf9d9697cf19291753a453100` добавляет
+execution-only NativeCalculationPolicy и проверки в probe, recognition,
+training adapter/service и owned finalization; Console preflight вызывает тот
+же helper. Model revision reader не блокируется при невалидной политике,
+чтобы сохранить partial observations. Общие builder/editor/import/rollback
+не изменены. После onSample отдельно проверяются final-sample изменения;
+явный callback cancel/reset сохраняет собственный исход.
+
+Теперь объявлены62 native cases:32 pre-arm probe rejections,8 live changes
+(включая4 final-sample),2 callback cancellation,16 Begin/reset/build controls
+и4 recognition preparation rejections. Последние используют production
+executor и реальные physical bindings; это не trained/frozen evaluation.
+В Begin controls child metadata восстанавливается до структурного Build:
+Build может законно заменить ребёнка из storage, старый pointer не checkpoint.
+Восемь owner/ancestor controls проверяют Build/Init при сохранённом положительном
+лимите. Four restored owner probes подтверждают отрицательный лимит; все
+46 создаваемых проб имеют schema3 packet/CSV. Серверная positive приёмка,
+регрессии, проверка полного Console preflight и temporal reports ещё открыты.
