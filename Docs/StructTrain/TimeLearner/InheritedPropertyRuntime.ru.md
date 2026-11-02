@@ -43,3 +43,14 @@ Math tests; clean negative build на старом Rdk и обе positive сбо
 Это исправление стандартного vector stream, не MDMatrix XML writer и не
 изменение физики нейрона. Первые compilation failures сохраняются как setup
 ошибки, а не модельные или научные отрицательные результаты.
+
+Для полного временного отчёта объявлен immutable fixture contract
+`Scripts/StructTrain/TimeLearner/specs/inherited-properties-native-v1.json`:
+16 test IDs и56 конкретных JSON/CSV пар.48 положительных проб дают72
+trial-soma pairs; восемь намеренно отклонённых multirate проб не имеют
+наблюдаемого контекста и не должны получать выдуманные оси/нулевые кривые.
+Контракт не строится из surviving files. Generic native-test report adapter
+дополнен поддержкой nonempty standalone-only набора без искусственной training
+summary. Условия полного expected test/packet/CSV closure сохраняются;
+полностью пустой набор остаётся ошибкой. Семь reader checks на реальных
+артефактах, в том числе missing/duplicate/extra/NaN случаи, пока ожидаются.
