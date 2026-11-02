@@ -2936,6 +2936,27 @@ TEST(NativeLearnedState,BranchN0){DiagnosticSweepBudgetBoundary<NNeuronTimeLearn
 TEST(NativeLearnedState,ClassicN1){DiagnosticSweepBudgetBoundary<NNeuronTimeLearner>(1);}
 TEST(NativeLearnedState,BranchN1){DiagnosticSweepBudgetBoundary<NNeuronTimeLearnerBranch>(1);}
 TEST(NativeLearnedState,ExactCertificateWithExplicitPointTwoTolerance){LearnedBoundary<NNeuronTimeLearner>(1,.2);}
+
+// Transport controls reuse the existing explicitly declared 0.2 fixture.
+// Keep the original 0.02 cold-Train cases above/below unchanged: they currently
+// exhaust their sweep budget before downstream checks. These separate controls
+// must obtain a real Exact certificate, never import a stopped model as trained.
+TEST(NativeCompletedTransportExplicitPointTwo,ClassicIdentityN0)
+{LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,false,RecognitionCase::Identity);}
+TEST(NativeCompletedTransportExplicitPointTwo,BranchHistoricalScaleN1)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,false,RecognitionCase::Scaled);}
+TEST(NativeCompletedTransportExplicitPointTwo,ClassicSpikingFreshN0)
+{LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,true,RecognitionCase::OwnedFreshIdentity,false,.0001);}
+TEST(NativeCompletedTransportExplicitPointTwo,BranchSpikingFreshN1)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,true,RecognitionCase::OwnedFreshScaled,false,.0001);}
+TEST(NativeCompletedTransportExplicitPointTwo,ClassicCalibrationGridN1)
+{LearnedBoundary<NNeuronTimeLearner>(1,.2,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
+TEST(NativeCompletedTransportExplicitPointTwo,BranchCalibrationGridN1)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
+TEST(NativeCompletedTransportExplicitPointTwo,ClassicPostTuneN0)
+{LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
+TEST(NativeCompletedTransportExplicitPointTwo,BranchPostTuneN1)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
 TEST(NativeLearnedState,ClassicN0_20000){LearnedBoundary<NNeuronTimeLearner>(0,.02,20000);}
 TEST(NativeLearnedState,BranchN0_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,20000);}
 TEST(NativeLearnedState,ClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000);}
