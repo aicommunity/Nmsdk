@@ -1,0 +1,101 @@
+{
+  "kind": "timelearner_public_diagnostic_visual_qa",
+  "schema_version": 1,
+  "primary_commit": "480c7683fb91c237d420f441693cd80a2190f3b2",
+  "visual_evidence_commit": "4661b39647b204e3ca04ee613bb08bb6d7cadc88",
+  "reader": "e379f404ccee7bbe84c4c8f9004a50bcdd533733",
+  "reports": 4,
+  "observed_trial_soma_pairs": 15,
+  "full_png_count": 80,
+  "automated_checks_passed": 10,
+  "selected_manual_review_count": 9,
+  "review_resolution": [
+    1920,
+    960
+  ],
+  "review_method": "Direct view of every selected original PNG with view_image(detail=original).",
+  "full_cache_manual_review": false,
+  "scientific_verdict": null,
+  "notes": [
+    "All nine selected labels, axes and input overlays are readable without clipping.",
+    "Classic individual soma channels and Branch soma show distinct target/foil responses. No spike or successful detection is inferred from subthreshold curves.",
+    "All figures explicitly say Stopped Train: external_stop; complete refers only to the observation window.",
+    "Both interrupted examples contain one actual zero baseline sample and grey unobserved time; no trace is extrapolated. The 1e-12 Y range is plotting padding, not a measured oscillation.",
+    "Two selected zooms resolve the real input pulse and delayed membrane peak. All source samples remain available without downsampling.",
+    "Six unstarted trials across the two interrupted runs have no observation files or curves and remain explicitly missing."
+  ],
+  "selected": [
+    {
+      "case": "Classic-completed",
+      "trial": "trial-0",
+      "channel": 0,
+      "view": "overview",
+      "path": "Classic-completed/evaluation/trial-0000-soma-001/overview.png",
+      "sha256": "375f1e3d2150c94283b7c5efc9809baaa6043d0dd8133caf02dd14c46b8298e7"
+    },
+    {
+      "case": "Classic-completed",
+      "trial": "trial-0",
+      "channel": 1,
+      "view": "overview",
+      "path": "Classic-completed/evaluation/trial-0000-soma-002/overview.png",
+      "sha256": "30c9736d9e18d4ea21b974da7699a5627bd650f84c612909ec05bb735316779a"
+    },
+    {
+      "case": "Classic-completed",
+      "trial": "trial-1",
+      "channel": 0,
+      "view": "overview",
+      "path": "Classic-completed/evaluation/trial-0001-soma-001/overview.png",
+      "sha256": "28eeac3d4ec809c542ce7e129dbb8c45d18f830f73419e0803d30dd3be7d9398"
+    },
+    {
+      "case": "Classic-completed",
+      "trial": "trial-0",
+      "channel": 0,
+      "view": "zoom-001",
+      "path": "Classic-completed/evaluation/trial-0000-soma-001/zoom-001.png",
+      "sha256": "111af5a61511985140d0bce396a6239911bfb3adcf0cab4ffd7839cb813a8c7f"
+    },
+    {
+      "case": "Branch-completed",
+      "trial": "trial-0",
+      "channel": 0,
+      "view": "overview",
+      "path": "Branch-completed/evaluation/trial-0000-soma-001/overview.png",
+      "sha256": "1718736cba661ce31a603c04ca6079186ec3a6a5d869aabd7348765a2b0c24ad"
+    },
+    {
+      "case": "Branch-completed",
+      "trial": "trial-1",
+      "channel": 0,
+      "view": "overview",
+      "path": "Branch-completed/evaluation/trial-0001-soma-001/overview.png",
+      "sha256": "c68883339349b31fa17df8aa8d45d5bb89cbd82a8a0f65931d14cd8922a66b5f"
+    },
+    {
+      "case": "Branch-completed",
+      "trial": "trial-0",
+      "channel": 0,
+      "view": "zoom-001",
+      "path": "Branch-completed/evaluation/trial-0000-soma-001/zoom-001.png",
+      "sha256": "b0d8764b380461260305665131aaf488874834edc25e59c49d1fb5604c93d4b6"
+    },
+    {
+      "case": "Classic-interrupted",
+      "trial": "trial-0",
+      "channel": 0,
+      "view": "overview",
+      "path": "Classic-interrupted/evaluation/trial-0000-soma-001/overview.png",
+      "sha256": "6bdb1cf0a6cd27b767297ef9176d482e0d50e9a7c6331e5e54155c0eb0c624f3"
+    },
+    {
+      "case": "Branch-interrupted",
+      "trial": "trial-0",
+      "channel": 0,
+      "view": "overview",
+      "path": "Branch-interrupted/evaluation/trial-0000-soma-001/overview.png",
+      "sha256": "91a6532afc9eee6cb2f3154b8e2e7c2b2abe91c06d02529be5ea47e59662c7a1"
+    }
+  ]
+}

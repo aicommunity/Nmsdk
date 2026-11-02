@@ -22,11 +22,15 @@ def _events(values, begin, closed):
     return result
 
 
-def audit_recognition_trial(observation, package):
+def _audit_recognition_trial(observation, package, *, diagnostic=False):
     try:
         o = observation
         require(type(package) is dict, "unsupported_trial_model_package")
-        if package.get("kind") == "timelearner_calibrated_recognition_state":
+        if diagnostic:
+            require(package.get("kind") == "timelearner_diagnostic_recognition_state"
+                    and package.get("source_solo", {}).get("kind") == "timelearner_stopped_state",
+                    "diagnostic_trial_requires_stopped_source")
+        if not diagnostic and package.get("kind") == "timelearner_calibrated_recognition_state":
             from .calibrated_evidence import audit_calibrated_state
             audit_calibrated_state(package)
             # The proof audit establishes exact equality of candidate/final
@@ -36,15 +40,15 @@ def audit_recognition_trial(observation, package):
         require(type(o) is dict, "unknown_recognition_trial_schema")
         schema = o.get("schema_version")
         require(type(schema) is int and schema in (1, 2), "unknown_recognition_trial_schema")
-        candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
+        candidate = not diagnostic and package.get("kind") == "timelearner_recognition_threshold_candidate"
         if candidate:
             from .threshold_candidate_evidence import audit_threshold_candidate
             audit_threshold_candidate(package)
         context = package["source_recognition"] if candidate else package
         require(set(o) == FIELDS | ({"threshold_potential_source"} if schema == 2 else set()), "recognition_trial_field_set_mismatch")
         require(o["kind"] == "native_recognition_trial", "unknown_recognition_trial_schema")
-        require((candidate or package["kind"] == "timelearner_recognition_state") and type(package["schema_version"]) is int
-                and package["schema_version"] == 1 and package["state_kind"] == "recognition"
+        require((candidate or package["kind"] == ("timelearner_diagnostic_recognition_state" if diagnostic else "timelearner_recognition_state")) and type(package["schema_version"]) is int
+                and package["schema_version"] == 1 and package["state_kind"] == ("diagnostic_recognition" if diagnostic else "recognition")
                 and package["dynamic_checkpoint"] is False and package["recognition_certificate"] is None,
                 "unsupported_trial_model_package")
         require(package["sha256"] == canonical_model_sha256({k: v for k, v in package.items() if k != "sha256"}),
@@ -155,6 +159,10 @@ def audit_recognition_trial(observation, package):
         raise
     except (KeyError, TypeError, ValueError, OverflowError, ZeroDivisionError) as error:
         raise EvidenceError("malformed_recognition_trial:" + str(error)) from error
+
+
+def audit_recognition_trial(observation, package):
+    return _audit_recognition_trial(observation, package)
 
 
 def audit_recognition_trial_set(observations, expected, package):

@@ -1,0 +1,1066 @@
+{
+  "kind": "timelearner_native_test_report_spec",
+  "schema_version": 2,
+  "fixture_contract": "Immutable root07167 CI163: source-declared tests; 407 recorded CSVs, six explicitly untraced negative probes. Four raw Reset diagnostics require separate raw-only plots. No scientific verdict.",
+  "expected_test_ids": [
+    "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+    "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+    "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+    "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+    "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+    "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+    "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+    "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+    "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+    "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+    "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+    "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+    "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+    "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+    "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+    "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+    "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+    "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+    "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+    "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+    "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+    "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+    "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+    "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+    "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions",
+    "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+    "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+    "TrainingTermination/MaximumSweepsClassicN0",
+    "TrainingTermination/MaximumSweepsClassicN1",
+    "TrainingTermination/MaximumSweepsBranchN0",
+    "TrainingTermination/MaximumSweepsBranchN1",
+    "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+    "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+    "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+    "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+    "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+    "NativeTrainingTermination/ClassicN0SweepBudgetBoundary",
+    "NativeTrainingTermination/ClassicN1SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN0SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN1SweepBudgetBoundary",
+    "NativeTrainingService/ClassicN0SearchAndFreshNegativeFinalGate",
+    "NativeTrainingService/BranchN0SearchAndFreshNegativeFinalGate",
+    "NativeTrainingService/ClassicN1SearchAndFreshNegativeFinalGate",
+    "NativeTrainingService/BranchN1SearchAndFreshNegativeFinalGate",
+    "ConfiguredNativeTraining/ClassicN0",
+    "ConfiguredNativeTraining/BranchN0",
+    "ConfiguredNativeTraining/ClassicN1",
+    "ConfiguredNativeTraining/BranchN1",
+    "ConfiguredNativeTrainingN0Repeats/ClassicNativePairs",
+    "ConfiguredNativeTrainingN0Repeats/BranchNativePairs",
+    "ConfiguredNativeTraining/ClassicColdXmlStartsTheController",
+    "ConfiguredNativeTraining/BranchColdXmlStartsTheController",
+    "ConfiguredNativeTraining/StrictCodecRejectsDuplicateUnknownAndCorruptFields",
+    "ConfiguredNativeTrainingN0Repeats/Schema2DeclaresPolicyAndSchema1DoesNotSilentlyChange",
+    "ConfiguredNativeTraining/MissingConfigurationAndLoadedMarkerFailWithoutColdReset",
+    "ConfiguredNativeTraining/ClassicXmlLoadDoesNotColdReset",
+    "ConfiguredNativeTraining/BranchXmlLoadDoesNotColdReset",
+    "ConfiguredNativeTraining/ClassicCopyWithoutStateDoesNotColdReset",
+    "ConfiguredNativeTraining/BranchCopyWithoutStateDoesNotColdReset",
+    "ConfiguredNativeTraining/ClassicCopyWithStateDoesNotColdReset",
+    "ConfiguredNativeTraining/BranchCopyWithStateDoesNotColdReset",
+    "NativeLearnedState/ClassicN0",
+    "NativeLearnedState/BranchN0",
+    "NativeLearnedState/ClassicN1",
+    "NativeLearnedState/BranchN1",
+    "NativeTrainingService/ExactAutoCompletionResetWarmRestartAndRetarget",
+    "NativeTrainingService/ClassicExternalStopPreservesCensoredEvidence",
+    "NativeTrainingService/BranchExternalStopPreservesCensoredEvidence",
+    "NativeTrainingService/ModelTimeBudgetCannotManufactureConvergence",
+    "NativeTrainingService/DeclaredPatternHashMustMatchTheActualNativeDataset",
+    "NativeTrainingService/EvidenceEncoderRejectsNonfiniteNumbers",
+    "NativeTrainingService/InvalidSearchDomainIsRejectedBeforeAnyReferenceProbe",
+    "NativeTrainingService/ClassicObserverDetectsTinyExternalPhysicsChange",
+    "NativeTrainingService/BranchObserverDetectsTinyExternalPhysicsChange",
+    "NativeLearnedState/ExactCertificateWithExplicitPointTwoTolerance",
+    "NativeWallSchedule/ClassicN0OwnerZero",
+    "NativeWallSchedule/ClassicN0OwnerLarge",
+    "NativeWallSchedule/ClassicN0AncestorZero",
+    "NativeWallSchedule/ClassicN0AncestorLarge",
+    "NativeWallSchedule/ClassicN0NeuronZero",
+    "NativeWallSchedule/ClassicN0NeuronLarge",
+    "NativeWallSchedule/ClassicN0GeneratorZero",
+    "NativeWallSchedule/ClassicN0GeneratorLarge",
+    "NativeWallSchedule/ClassicN0MidProbeChange",
+    "NativeWallSchedule/ClassicN0FinalSampleChange",
+    "NativeWallSchedule/ClassicN0BeginOwner",
+    "NativeWallSchedule/ClassicN0BeginAncestor",
+    "NativeWallSchedule/ClassicN0BeginNeuron",
+    "NativeWallSchedule/ClassicN0BeginGenerator",
+    "NativeWallSchedule/ClassicN1OwnerZero",
+    "NativeWallSchedule/ClassicN1OwnerLarge",
+    "NativeWallSchedule/ClassicN1AncestorZero",
+    "NativeWallSchedule/ClassicN1AncestorLarge",
+    "NativeWallSchedule/ClassicN1NeuronZero",
+    "NativeWallSchedule/ClassicN1NeuronLarge",
+    "NativeWallSchedule/ClassicN1GeneratorZero",
+    "NativeWallSchedule/ClassicN1GeneratorLarge",
+    "NativeWallSchedule/ClassicN1MidProbeChange",
+    "NativeWallSchedule/ClassicN1FinalSampleChange",
+    "NativeWallSchedule/ClassicN1BeginOwner",
+    "NativeWallSchedule/ClassicN1BeginAncestor",
+    "NativeWallSchedule/ClassicN1BeginNeuron",
+    "NativeWallSchedule/ClassicN1BeginGenerator",
+    "NativeWallSchedule/ClassicCallbackResetMid",
+    "NativeWallSchedule/ClassicCallbackResetFinal",
+    "NativeWallSchedule/ClassicRecognitionOwner",
+    "NativeWallSchedule/ClassicRecognitionGenerator",
+    "NativeWallSchedule/ClassicObservationSinkChange",
+    "NativeWallSchedule/BranchN0OwnerZero",
+    "NativeWallSchedule/BranchN0OwnerLarge",
+    "NativeWallSchedule/BranchN0AncestorZero",
+    "NativeWallSchedule/BranchN0AncestorLarge",
+    "NativeWallSchedule/BranchN0NeuronZero",
+    "NativeWallSchedule/BranchN0NeuronLarge",
+    "NativeWallSchedule/BranchN0GeneratorZero",
+    "NativeWallSchedule/BranchN0GeneratorLarge",
+    "NativeWallSchedule/BranchN0MidProbeChange",
+    "NativeWallSchedule/BranchN0FinalSampleChange",
+    "NativeWallSchedule/BranchN0BeginOwner",
+    "NativeWallSchedule/BranchN0BeginAncestor",
+    "NativeWallSchedule/BranchN0BeginNeuron",
+    "NativeWallSchedule/BranchN0BeginGenerator",
+    "NativeWallSchedule/BranchN1OwnerZero",
+    "NativeWallSchedule/BranchN1OwnerLarge",
+    "NativeWallSchedule/BranchN1AncestorZero",
+    "NativeWallSchedule/BranchN1AncestorLarge",
+    "NativeWallSchedule/BranchN1NeuronZero",
+    "NativeWallSchedule/BranchN1NeuronLarge",
+    "NativeWallSchedule/BranchN1GeneratorZero",
+    "NativeWallSchedule/BranchN1GeneratorLarge",
+    "NativeWallSchedule/BranchN1MidProbeChange",
+    "NativeWallSchedule/BranchN1FinalSampleChange",
+    "NativeWallSchedule/BranchN1BeginOwner",
+    "NativeWallSchedule/BranchN1BeginAncestor",
+    "NativeWallSchedule/BranchN1BeginNeuron",
+    "NativeWallSchedule/BranchN1BeginGenerator",
+    "NativeWallSchedule/BranchCallbackResetMid",
+    "NativeWallSchedule/BranchCallbackResetFinal",
+    "NativeWallSchedule/BranchRecognitionOwner",
+    "NativeWallSchedule/BranchRecognitionGenerator",
+    "NativeWallSchedule/BranchObservationSinkChange",
+    "NativeInheritedProperties/ClassicActivity2000",
+    "NativeInheritedProperties/BranchActivity2000",
+    "NativeInheritedProperties/ClassicActivity20000",
+    "NativeInheritedProperties/BranchActivity20000",
+    "NativeInheritedProperties/ClassicLocalFrequency2000",
+    "NativeInheritedProperties/BranchLocalFrequency2000",
+    "NativeInheritedProperties/ClassicLocalFrequency20000",
+    "NativeInheritedProperties/BranchLocalFrequency20000",
+    "NativeInheritedProperties/ClassicN0Activity2000",
+    "NativeInheritedProperties/BranchN0Activity2000",
+    "NativeInheritedProperties/ClassicN0Activity20000",
+    "NativeInheritedProperties/BranchN0Activity20000",
+    "NativeInheritedProperties/ClassicN0LocalFrequency2000",
+    "NativeInheritedProperties/BranchN0LocalFrequency2000",
+    "NativeInheritedProperties/ClassicN0LocalFrequency20000",
+    "NativeInheritedProperties/BranchN0LocalFrequency20000"
+  ],
+  "phases": [
+    {
+      "summary": "Classic_2000_N0_automatic_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N0_automatic_service_service_"
+    },
+    {
+      "summary": "Classic_2000_N0_configured_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N0_configured_service_service_"
+    },
+    {
+      "summary": "Classic_2000_N0_learned_boundary_learned_summary.json",
+      "probe_prefix": "Classic_2000_N0_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_configured_repeats_training_summary.json",
+      "probe_prefix": "Classic_2000_N0_configured_repeats_service_"
+    },
+    {
+      "summary": "Classic_2000_N1_automatic_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N1_automatic_service_service_"
+    },
+    {
+      "summary": "Classic_2000_N1_configured_service_training_summary.json",
+      "probe_prefix": "Classic_2000_N1_configured_service_service_"
+    },
+    {
+      "summary": "Classic_2000_N1_learned_boundary_learned_summary.json",
+      "probe_prefix": "Classic_2000_N1_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_automatic_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N0_automatic_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N0_configured_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N0_configured_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N0_learned_boundary_learned_summary.json",
+      "probe_prefix": "Branch_2000_N0_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Branch_2000_N0_configured_repeats_training_summary.json",
+      "probe_prefix": "Branch_2000_N0_configured_repeats_service_"
+    },
+    {
+      "summary": "Branch_2000_N1_automatic_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N1_automatic_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N1_configured_service_training_summary.json",
+      "probe_prefix": "Branch_2000_N1_configured_service_service_"
+    },
+    {
+      "summary": "Branch_2000_N1_learned_boundary_learned_summary.json",
+      "probe_prefix": "Branch_2000_N1_learned_boundary_state_trial_"
+    },
+    {
+      "summary": "Classic_2000_N0_configured_file_xml_summary.json",
+      "probe_prefix": "Classic_2000_N0_configured_file_xmlprobe_"
+    },
+    {
+      "summary": "Branch_2000_N1_configured_file_xml_summary.json",
+      "probe_prefix": "Branch_2000_N1_configured_file_xmlprobe_"
+    },
+    {
+      "summary": "Classic_2000_N1_learned_boundary_explicit_tolerance_learned_summary.json",
+      "probe_prefix": "Classic_2000_N1_learned_boundary_explicit_tolerance_state_trial_"
+    },
+    {
+      "summary": "Classic_2000_N1_learned_boundary_explicit_tolerance_warm_summary.json",
+      "probe_prefix": "Classic_2000_N1_learned_boundary_explicit_tolerance_warm_trial_"
+    }
+  ],
+  "standalone": [
+    {
+      "packet": "Classic_2000_N0_inherited_activity_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_inherited_activity_probe_4_evidence.json",
+      "trace": "Classic_2000_N0_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_inherited_activity_probe_6_evidence.json",
+      "trace": "Classic_2000_N0_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_inherited_activity_probe_8_evidence.json",
+      "trace": "Classic_2000_N0_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Classic_2000_N0_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Classic_2000_N0_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_inherited_activity_probe_2_evidence.json",
+      "trace": "Classic_20000_N0_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_inherited_activity_probe_4_evidence.json",
+      "trace": "Classic_20000_N0_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_inherited_activity_probe_6_evidence.json",
+      "trace": "Classic_20000_N0_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_inherited_activity_probe_8_evidence.json",
+      "trace": "Classic_20000_N0_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Classic_20000_N0_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Classic_20000_N0_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Classic_20000_N0_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_inherited_activity_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_inherited_activity_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_inherited_activity_probe_6_evidence.json",
+      "trace": "Classic_2000_N1_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_inherited_activity_probe_8_evidence.json",
+      "trace": "Classic_2000_N1_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Classic_2000_N1_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_inherited_activity_probe_2_evidence.json",
+      "trace": "Classic_20000_N1_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_inherited_activity_probe_4_evidence.json",
+      "trace": "Classic_20000_N1_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_inherited_activity_probe_6_evidence.json",
+      "trace": "Classic_20000_N1_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_inherited_activity_probe_8_evidence.json",
+      "trace": "Classic_20000_N1_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Classic_20000_N1_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Classic_20000_N1_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Classic_20000_N1_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_inherited_activity_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_inherited_activity_probe_4_evidence.json",
+      "trace": "Branch_2000_N0_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_inherited_activity_probe_6_evidence.json",
+      "trace": "Branch_2000_N0_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_inherited_activity_probe_8_evidence.json",
+      "trace": "Branch_2000_N0_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Branch_2000_N0_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Branch_2000_N0_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_inherited_activity_probe_2_evidence.json",
+      "trace": "Branch_20000_N0_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_inherited_activity_probe_4_evidence.json",
+      "trace": "Branch_20000_N0_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_inherited_activity_probe_6_evidence.json",
+      "trace": "Branch_20000_N0_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_inherited_activity_probe_8_evidence.json",
+      "trace": "Branch_20000_N0_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Branch_20000_N0_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Branch_20000_N0_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Branch_20000_N0_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_inherited_activity_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_inherited_activity_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_inherited_activity_probe_6_evidence.json",
+      "trace": "Branch_2000_N1_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_inherited_activity_probe_8_evidence.json",
+      "trace": "Branch_2000_N1_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Branch_2000_N1_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_inherited_activity_probe_2_evidence.json",
+      "trace": "Branch_20000_N1_inherited_activity_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_inherited_activity_probe_4_evidence.json",
+      "trace": "Branch_20000_N1_inherited_activity_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_inherited_activity_probe_6_evidence.json",
+      "trace": "Branch_20000_N1_inherited_activity_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_inherited_activity_probe_8_evidence.json",
+      "trace": "Branch_20000_N1_inherited_activity_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_inherited_local_frequency_probe_2_evidence.json",
+      "trace": "Branch_20000_N1_inherited_local_frequency_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_inherited_local_frequency_probe_4_evidence.json",
+      "trace": "Branch_20000_N1_inherited_local_frequency_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_inherited_local_frequency_probe_6_evidence.json",
+      "trace": "Branch_20000_N1_inherited_local_frequency_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_owner_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_owner_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_owner_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_owner_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_owner_1000000000_probe_4_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_owner_1000000000_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_ancestor_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_ancestor_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_ancestor_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_ancestor_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_neuron_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_neuron_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_neuron_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_neuron_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_generator_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_generator_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_limit_generator_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_limit_generator_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_live_mid_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_live_mid_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_wall_live_final_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_wall_live_final_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_owner_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_owner_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_owner_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_owner_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_owner_1000000000_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_owner_1000000000_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_ancestor_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_ancestor_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_ancestor_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_ancestor_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_neuron_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_neuron_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_neuron_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_neuron_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_generator_0_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_generator_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_limit_generator_1000000000_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_limit_generator_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_live_mid_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_live_mid_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_live_final_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_wall_live_final_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_wall_observation_sink_training_proof_1.json",
+      "trace": "Classic_2000_N1_wall_observation_sink_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_owner_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_owner_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_owner_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_owner_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_owner_1000000000_probe_4_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_owner_1000000000_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_ancestor_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_ancestor_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_ancestor_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_ancestor_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_neuron_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_neuron_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_neuron_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_neuron_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_generator_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_generator_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_limit_generator_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_limit_generator_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_live_mid_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_live_mid_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_wall_live_final_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_wall_live_final_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_owner_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_owner_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_owner_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_owner_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_owner_1000000000_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_owner_1000000000_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_ancestor_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_ancestor_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_ancestor_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_ancestor_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_neuron_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_neuron_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_neuron_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_neuron_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_generator_0_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_generator_0_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_limit_generator_1000000000_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_limit_generator_1000000000_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_live_mid_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_live_mid_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_live_final_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_wall_live_final_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_wall_observation_sink_training_proof_1.json",
+      "trace": "Branch_2000_N1_wall_observation_sink_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Classic_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Classic_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Branch_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "trace": "Branch_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_learned_boundary_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_frozen_test_evidence.json",
+      "trace": "Classic_2000_N0_learned_boundary_frozen_test.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_fresh_process.json",
+      "trace": "Classic_2000_N0_learned_boundary_fresh_process.csv",
+      "json_pointer": "/probe"
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_rollback_before_evidence.json",
+      "trace": "Classic_2000_N0_learned_boundary_rollback_before.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_learned_boundary_rollback_after_evidence.json",
+      "trace": "Classic_2000_N0_learned_boundary_rollback_after.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_learned_boundary_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_frozen_test_evidence.json",
+      "trace": "Classic_2000_N1_learned_boundary_frozen_test.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_fresh_process.json",
+      "trace": "Classic_2000_N1_learned_boundary_fresh_process.csv",
+      "json_pointer": "/probe"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_learned_boundary_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_frozen_test_evidence.json",
+      "trace": "Branch_2000_N0_learned_boundary_frozen_test.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_fresh_process.json",
+      "trace": "Branch_2000_N0_learned_boundary_fresh_process.csv",
+      "json_pointer": "/probe"
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_rollback_before_evidence.json",
+      "trace": "Branch_2000_N0_learned_boundary_rollback_before.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_learned_boundary_rollback_after_evidence.json",
+      "trace": "Branch_2000_N0_learned_boundary_rollback_after.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_learned_boundary_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_learned_boundary_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_learned_boundary_frozen_test_evidence.json",
+      "trace": "Branch_2000_N1_learned_boundary_frozen_test.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_learned_boundary_fresh_process.json",
+      "trace": "Branch_2000_N1_learned_boundary_fresh_process.csv",
+      "json_pointer": "/probe"
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_explicit_tolerance_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_learned_boundary_explicit_tolerance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_explicit_tolerance_frozen_test_evidence.json",
+      "trace": "Classic_2000_N1_learned_boundary_explicit_tolerance_frozen_test.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_learned_boundary_explicit_tolerance_fresh_process.json",
+      "trace": "Classic_2000_N1_learned_boundary_explicit_tolerance_fresh_process.csv",
+      "json_pointer": "/probe"
+    }
+  ],
+  "untraced": [
+    {
+      "packet": "Branch_2000_N0_observer_external_physics_rejected.json",
+      "json_pointer": "",
+      "reason": "This immutable fixture saved a probe packet without temporal CSV. Later instrumentation cannot repair this historical attempt."
+    },
+    {
+      "packet": "Classic_2000_N0_observer_external_physics_rejected.json",
+      "json_pointer": "",
+      "reason": "This immutable fixture saved a probe packet without temporal CSV. Later instrumentation cannot repair this historical attempt."
+    },
+    {
+      "packet": "Branch_2000_N0_service_external_stop_cancelled.json",
+      "json_pointer": "",
+      "reason": "This immutable fixture saved a probe packet without temporal CSV. Later instrumentation cannot repair this historical attempt."
+    },
+    {
+      "packet": "Classic_2000_N0_service_external_stop_cancelled.json",
+      "json_pointer": "",
+      "reason": "This immutable fixture saved a probe packet without temporal CSV. Later instrumentation cannot repair this historical attempt."
+    },
+    {
+      "packet": "Branch_2000_N1_service_deadline_budget.json",
+      "json_pointer": "",
+      "reason": "This immutable fixture saved a probe packet without temporal CSV. Later instrumentation cannot repair this historical attempt."
+    },
+    {
+      "packet": "Classic_2000_N0_service_spoofed_hash_rejected.json",
+      "json_pointer": "",
+      "reason": "This immutable fixture saved a probe packet without temporal CSV. Later instrumentation cannot repair this historical attempt."
+    }
+  ],
+  "packet_aliases": [],
+  "observability_gaps": [
+    {
+      "test_id": "NativeTrainingService/ExactAutoCompletionResetWarmRestartAndRetarget",
+      "reason": "No cold/warm temporal probes or retarget control artifact were recorded in this immutable attempt."
+    },
+    {
+      "test_id": "NativeWallSchedule/ClassicCallbackResetMid",
+      "reason": "Raw pre-reset JSON samples exist; Reset discards the closed probe. Separate raw-only plots remain required and are outside this probe report."
+    },
+    {
+      "test_id": "NativeWallSchedule/ClassicCallbackResetFinal",
+      "reason": "Raw pre-reset JSON samples exist; Reset discards the closed probe. Separate raw-only plots remain required and are outside this probe report."
+    },
+    {
+      "test_id": "NativeWallSchedule/BranchCallbackResetMid",
+      "reason": "Raw pre-reset JSON samples exist; Reset discards the closed probe. Separate raw-only plots remain required and are outside this probe report."
+    },
+    {
+      "test_id": "NativeWallSchedule/BranchCallbackResetFinal",
+      "reason": "Raw pre-reset JSON samples exist; Reset discards the closed probe. Separate raw-only plots remain required and are outside this probe report."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "kind": "timelearner_diagnostic_normal_asan_raw_comparison",
+  "normal_evidence": "480c7683fb91c237d420f441693cd80a2190f3b2",
+  "normal_archive_sha256": "391480a73f6b62215fae3df9088f7d9fbfc05ac17b3436b5e831bf1ad912ac91",
+  "asan_evidence": "44548f908365f5030445e4ced11a71147d044331",
+  "cases": {
+    "Classic-completed": {
+      "csv_count": 1,
+      "csv_equal": 1,
+      "packet_count": 4,
+      "packet_equal": 4,
+      "missing": [],
+      "csv_differing": [],
+      "packet_differing": []
+    },
+    "Branch-completed": {
+      "csv_count": 1,
+      "csv_equal": 1,
+      "packet_count": 4,
+      "packet_equal": 4,
+      "missing": [],
+      "csv_differing": [],
+      "packet_differing": []
+    },
+    "Classic-interrupted": {
+      "csv_count": 1,
+      "csv_equal": 1,
+      "packet_count": 1,
+      "packet_equal": 1,
+      "missing": [],
+      "csv_differing": [],
+      "packet_differing": []
+    },
+    "Branch-interrupted": {
+      "csv_count": 1,
+      "csv_equal": 1,
+      "packet_count": 1,
+      "packet_equal": 1,
+      "missing": [],
+      "csv_differing": [],
+      "packet_differing": []
+    }
+  },
+  "scientific_verdict": null,
+  "temporal_scope": "Exact same ten inline waveform trial packets and four source Train CSVs as normal. Existing normal four-report cache and nine reviewed originals apply to these signals; no separate ASan rerender or new visual inspection claimed.",
+  "normal_temporal_evidence": "4661b39647b204e3ca04ee613bb08bb6d7cadc88",
+  "inventory_correction": "Initial CSV/native-probe selector found zero candidates because diagnostic waveform samples are inline in trial JSON. That empty discovery was not acceptance. This strict selector requires exactly 4+4+1+1 trials and one source CSV per run."
+}

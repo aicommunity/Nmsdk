@@ -75,7 +75,12 @@ QJsonValue задан явно. Эти ошибки тестов не припи
 gitlink; tested SHA в manifests не заменяется merge SHA. Подробности:
 [ComponentOrderBounds](ComponentOrderBounds.ru.md).
 
-## Ещё не завершённые gates
+## Историческая запись ожидавшихся gates A9/A15
+
+Ниже сохранён статус на момент соответствующих A-серий; он не означает,
+что перечисленные процессы работают сейчас. Последующая maintained приёмка
+указана в начале документа. Текущие работы и actual owned identities —
+SearchTermination.progress.json.
 
 Полный maintained CTest после shared harness изменения ещё
 не принят. Elder-1 A9 использует root `270c62ce…`; M40 A15 — root `51c54abb…`.
@@ -122,9 +127,12 @@ Bare XML/Copy с initialized marker не является заменой пол�
 native API с ControllerVersion=1. Исторические V1 конфигурации без marker сохраняют
 прежний dispatch.
 
-Начальная реализация принимает certified completed boundaries Exact и
-SearchUnresolved; diagnostic/budget/external-stop без финального сертификата,
-RecognitionState/conversion и calibrated/PostTune состояния требуют расширения.
+Историческая начальная реализация принимала certified completed boundaries
+Exact и SearchUnresolved. Позднее отдельные API добавили
+[diagnostic/budget/external-stop](StoppedTrainingState.ru.md),
+[RecognitionState/conversion](NativeRecognitionState.ru.md) и
+[finalization/calibration/PostTune](NativeLiveFinalization.ru.md).
+Их наличие не закрывает полную матрицу моделей и переноса.
 Полный experiment run bundle, первичные CSV и provenance остаются отдельными
 артефактами pipeline; модельный пакет не объявляет научный verdict и не является
 самостоятельным доказательством независимого Test.
@@ -136,3 +144,26 @@ references/certificate/readback, сохранением после Reset и от
 Fresh-process/cross-host перенос и сравнение настоящих frozen response traces
 подтверждены дополнением A6 выше. Расширенная corruption/rollback матрица,
 все статусы и перечисленные оставшиеся проверки остаются условиями приёмки.
+
+## Saved nonexact completed и свежий sweep-budget — разные результаты
+
+В новой search feature свежий maximum-sweeps stop классифицируется как
+BudgetExhausted и экспортируется как diagnostic stopped без completed
+сертификата. Старые сохранённые `timelearner_completed_state` с отрицательным
+сертификатом остаются данными своего протокола; импорт не переименовывает их.
+Maintained [LegacyCompletedReplay](LegacyCompletedReplay.ru.md) проверяет
+четыре настоящих A14 Classic/Branch×N0/N1 состояния на новом combined runtime:
+на обоих workers4/4 native imports, исходный model hash/сертификат и весь frozen
+CSV сохранены. Публикация и independent reader acceptance этого нового
+подэтапа ещё ожидаются; весь этап5 по-прежнему открыт.
+
+Последующее уточнение: этот replay подэтап опубликован и проверен на обоих
+workers,4 native +5 reader cases; SHA/границы в LegacyCompletedReplay.ru.md.
+Физически измерялся active input0, поэтому replay всех входов/recognition и
+полный этап5 остаются открытыми.
+
+Для свежих diagnostic exports явный Reset learner очищает временный control:
+сохраняется физическая модель и references, но Idle не является повторно
+экспортируемой терминальной попыткой. Сохранять immutable stopped package
+следует до Reset. Подтверждённые transport gates и ограничения:
+[SearchTermination](SearchTermination.ru.md).
