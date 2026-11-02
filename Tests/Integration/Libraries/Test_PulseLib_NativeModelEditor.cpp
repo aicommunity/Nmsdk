@@ -4176,9 +4176,9 @@ void SameNativeWave(const std::vector<NativeProbeSample>& before,const std::vect
     EXPECT_EQ(differentStimulusSamples,0u);EXPECT_LE(maximumTimeResidual,1.e-11);EXPECT_LE(maximumPotentialResidual,1.e-12);
 }
 
-template<class Learner> void InheritedActivityReset(unsigned frequency)
+template<class Learner> void InheritedActivityReset(unsigned frequency,int normalization=1)
 {
-    EditingRig<Learner> rig(frequency,1,"inherited_activity",false,2,true);
+    EditingRig<Learner> rig(frequency,normalization,"inherited_activity",false,2,true);
     const auto parameters=rig.learner->ReadNativeParameters();const auto revision=rig.Revision();
     const auto initial=InheritedReadback(rig);
     std::vector<std::vector<NativeProbeSample>> previous(2),following(2);
@@ -4230,9 +4230,9 @@ template<class Learner> void InheritedActivityReset(unsigned frequency)
         {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
 
-template<class Learner> void InheritedLocalFrequency(unsigned frequency)
+template<class Learner> void InheritedLocalFrequency(unsigned frequency,int normalization=1)
 {
-    EditingRig<Learner> rig(frequency,1,"inherited_local_frequency",false,2,true);
+    EditingRig<Learner> rig(frequency,normalization,"inherited_local_frequency",false,2,true);
     const auto parameters=rig.learner->ReadNativeParameters();const auto revision=rig.Revision();
     std::vector<NativeProbeSample> before,after;
     const auto positive=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
@@ -4264,4 +4264,12 @@ TEST(NativeInheritedProperties,ClassicLocalFrequency2000){InheritedLocalFrequenc
 TEST(NativeInheritedProperties,BranchLocalFrequency2000){InheritedLocalFrequency<NNeuronTimeLearnerBranch>(2000);}
 TEST(NativeInheritedProperties,ClassicLocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearner>(20000);}
 TEST(NativeInheritedProperties,BranchLocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearnerBranch>(20000);}
+TEST(NativeInheritedProperties,ClassicN0Activity2000){InheritedActivityReset<NNeuronTimeLearner>(2000,0);}
+TEST(NativeInheritedProperties,BranchN0Activity2000){InheritedActivityReset<NNeuronTimeLearnerBranch>(2000,0);}
+TEST(NativeInheritedProperties,ClassicN0Activity20000){InheritedActivityReset<NNeuronTimeLearner>(20000,0);}
+TEST(NativeInheritedProperties,BranchN0Activity20000){InheritedActivityReset<NNeuronTimeLearnerBranch>(20000,0);}
+TEST(NativeInheritedProperties,ClassicN0LocalFrequency2000){InheritedLocalFrequency<NNeuronTimeLearner>(2000,0);}
+TEST(NativeInheritedProperties,BranchN0LocalFrequency2000){InheritedLocalFrequency<NNeuronTimeLearnerBranch>(2000,0);}
+TEST(NativeInheritedProperties,ClassicN0LocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearner>(20000,0);}
+TEST(NativeInheritedProperties,BranchN0LocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearnerBranch>(20000,0);}
 }
