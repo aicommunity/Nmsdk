@@ -5,6 +5,7 @@
 #include <limits>
 #include <functional>
 
+
 namespace {
 using namespace NMSDK::TimeLearner;
 VerificationProtocol Protocol(std::size_t n=2,ProbeRouting routing=ProbeRouting::ClassicBurst)
@@ -658,4 +659,57 @@ TEST(BoundedTrainingLengthCandidates, NonmonotoneMeasurementsRetainTheBoundedLen
         ASSERT_EQ(session.Evidence().size(),4u);
         for(std::size_t i=0;i<4;++i)EXPECT_EQ(session.Evidence()[i].parameters.length,int(i)+2);
     }
+}
+
+
+// Controller-only protocol checks use the production recorder and session.
+// They do not attest native physical dynamics or scientific classification.
+namespace {
+void CheckSweepBudget(ProbeRouting routing,Normalization normalization)
+{
+    for(std::size_t sweeps:{1u,2u})
+    {
+        const auto protocol=Protocol(2,routing);auto config=Configuration(2,normalization);
+        config.maximumSweeps=sweeps;config.maximumCandidatesPerInput=2;
+        config.bounds.assign(2,{1,1,1,1,10.,10.});
+        BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+        DriveTraining(session,protocol);
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
+        EXPECT_EQ(session.Certificate()->Residuals().size(),2u);
+        EXPECT_FALSE(session.NextAction());EXPECT_EQ(session.AppliedEdits(),0u);
+    }
+}
+}
+TEST(TrainingTermination,MaximumSweepsClassicN0){CheckSweepBudget(ProbeRouting::ClassicBurst,Normalization::SynapseCount);}
+TEST(TrainingTermination,MaximumSweepsClassicN1){CheckSweepBudget(ProbeRouting::ClassicBurst,Normalization::TipResistance);}
+TEST(TrainingTermination,MaximumSweepsBranchN0){CheckSweepBudget(ProbeRouting::BranchSoloBurst,Normalization::SynapseCount);}
+TEST(TrainingTermination,MaximumSweepsBranchN1){CheckSweepBudget(ProbeRouting::BranchSoloBurst,Normalization::TipResistance);}
+TEST(TrainingTermination,ExactAtLastAllowedSweepTakesPrecedence)
+{
+    const auto protocol=Protocol();auto config=Configuration();config.maximumCandidatesPerInput=2;
+    config.bounds.assign(2,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    DriveTraining(session,protocol,[](const auto& action,auto& delay,auto&) {
+        if(action.finalVerification)delay[0]=.13;
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_TRUE(session.Certificate());
+    EXPECT_TRUE(session.Certificate()->Exact());EXPECT_FALSE(session.NextAction());
+}
+TEST(TrainingTermination,NoMeasuredCandidateRemainsSearchUnresolved)
+{
+    const auto protocol=Protocol();auto config=Configuration();config.maximumCandidatesPerInput=2;
+    config.maximumInvalidObservations=10;config.bounds.assign(2,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    unsigned calls=0;
+    while(const auto action=session.NextAction())
+    {
+        ASSERT_LT(++calls,20u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);auto raw=Raw(2);
+        if(action->inputIndex==0)raw[0]=-.065; // Actual flat recording: no candidate peak.
+        session.Consume(Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,{.03,.03},raw),action->baseModelRevision);
+    }
+    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);EXPECT_FALSE(session.Certificate());
+    EXPECT_FALSE(session.Rejected().empty());
 }
