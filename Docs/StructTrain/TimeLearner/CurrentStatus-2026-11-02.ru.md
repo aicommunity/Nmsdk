@@ -1,5 +1,38 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Обновление 03.11, 00:25 MSK: native34 завершён, unit provenance неполна
+
+Fixed normal B3 завершён:34/34 native PASS с подтверждёнными loaded mappings;
+20 clock cases/76 записей и14 transfer controls. Но unit gate вернул2:
+реальные9 assertions прошли за0ms, процесс завершился раньше захвата /proc/exe.
+Результат unit — incomplete_test_observation, inventory=null. Общий PASS
+запрещён. Исходный publisher упал на предположении о ненулевом inventory;
+очередь file A1 поэтому не запустила новый build. Оба отказа сохранены на сервере.
+
+Recovery publisher сохранил исходный terminal, raw unit/native данные и
+негативную общую оценку: evidence `b8306e23780a797c0fb832565e3be497723b6087`,
+612 members и6 600 584 compressed bytes полностью проверены локально.
+Это не повтор numerical experiment и не повышение статуса unit.
+
+Новый root `068a488361910d21a04469aa97f32cf0cfbb695f` вводит явный cooperative
+exit handshake для поддерживающего его PulseLib test main/gate schema2.
+Используется существующий Console RuntimeCapture contract; нет sleep вместо
+измерения provenance, второго Calculate или ослабления критериев.
+Rdk gtest_main не объявлен поддерживающим этот режим; его не запускаем снова
+как способ случайно получить зелёный быстрый capture. Неизменённый Rdk Core
+имеет отдельную ранее подтверждённую normal/ASan приёмку.
+
+Elder normal B4: owner63661/start_ticks322368044, publisher63664/322368054.
+Native25 =20 clock +2 реальных file lifecycle +3 native dispatch cases;
+после успеха41 reader/JUnit controls. Дополнительно независимый reader B3
+owner64587/322371323 проверяет те же41 controls на уже завершённых34 primary,
+без нового Train. Оба задания пока pending. Source/build/runtime B4 не менять.
+
+M40 renderer baseline owner2331038/272883688 строит полные временные графики
+из Git-проверенного baseline A3; весь кэш остаётся на Data. Генерация не
+является direct visual review. M40 ASan C2 продолжает работу; telemetry queue
+не изменялась. ASan нового clock fix и полная матрица по-прежнему открыты.
+
 ## Обновление 03.11, 00:10 MSK: источник паттернов и границы приёмки
 
 Предыдущие записи ниже — хронология, а не актуальное состояние заданий.
