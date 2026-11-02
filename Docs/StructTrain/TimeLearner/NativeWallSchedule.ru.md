@@ -104,3 +104,11 @@ certificate при смене политики в sink. Всего64 cases/48 sc
 сервисы с pure adapters могут не предоставлять optional execution validator,
 а BindNativeTraining предоставляет его всегда. Pulse итоговой реализации
 `151a3883137bf112519543f64aa0b9bbf500c579`; серверная приёмка ещё ожидается.
+
+Первая positive сборка a1 на обоих workers остановилась до тестов:
+в новом fixture ошибочно вызван отсутствующий public CancelNativeProbe.
+Core guard скомпилировался. Fixture исправлен через штатный learner.Reset
+в середине/на final sample: Reset должен оставить Idle и удалить pending
+result; контроль не фабрикует закрытую observation, а сохраняет отдельную
+raw-sample reset diagnostic. Это66 declared cases,46 schema3 packet/CSV и
+4 отдельных reset diagnostics. Это setup error теста, не модельный результат.
