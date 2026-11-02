@@ -17,7 +17,7 @@
       "start_ticks": "315193557",
       "runtime": "runtime-s01-inherited-native-normal-a4",
       "budget": 7200,
-      "last_verified": "owned native parent alive; math6 passed; first11 native cases passed; BranchN0Activity20000 running"
+      "last_verified": "terminal completed; Math6/native16/reader7 passed; compact279-member proof published and locally hash verified"
     },
     {
       "host": "10.245.1.17",
@@ -114,5 +114,47 @@
     }
   ],
   "reader_source": "5b6dd147200a37ea93f303cbb01408312555e5ac",
-  "reader_policy": "Independent depth1 filtered Git source, no edits to live native source/build/runtime. Wait for closed terminal16, copy native corpus and exact gtest.xml to native.xml, hash primary files, run7 reader tests and inventory. Reader a1 cancelled by verified owned process group due unbounded fetch/setup command before acceptance; preserved cancellation metadata."
+  "reader_policy": "Independent depth1 filtered Git source, no edits to live native source/build/runtime. Wait for closed terminal16, copy native corpus and exact gtest.xml to native.xml, hash primary files, run7 reader tests and inventory. Reader a1 cancelled by verified owned process group due unbounded fetch/setup command before acceptance; preserved cancellation metadata.",
+  "normal_gate": {
+    "proof": "cc7d8b66d1ee4552e6bff8cd2d49bba63507e0af",
+    "math": 6,
+    "native": 16,
+    "reader": 7,
+    "archive_members": 279,
+    "reader_copies_bound": 233,
+    "independent_waveform_pairs": 24,
+    "archive_bytes": 439424
+  },
+  "publication_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s01-inherited-publication-normal-a1",
+      "commit": "cc7d8b66d1ee4552e6bff8cd2d49bba63507e0af",
+      "terminal": true
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-publication-asan-a1",
+      "pid": 1346747,
+      "start_ticks": "265852392",
+      "terminal": false
+    }
+  ],
+  "render_jobs": [
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-normal-render-a2",
+      "pid": 1349982,
+      "start_ticks": "265873003",
+      "python": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+      "cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s01-inherited-normal-a1"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-normal-visual-publication-a1",
+      "pid": 1351524,
+      "start_ticks": "265882424"
+    }
+  ],
+  "render_setup_failure": "normal render a1 used system Python without matplotlib; preserved exception; no figures generated. a2 uses existing plot-venv-a1; native jobs unchanged."
 }

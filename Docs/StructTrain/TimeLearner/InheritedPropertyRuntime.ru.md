@@ -77,3 +77,21 @@ JUnit, сохраняют SHA256 и запускают7 проверок reader/
 owned process group из-за неограниченного fetch и некорректной команды
 материализации путей; cancellation metadata сохранены. Это ошибка подготовки
 анализа, не результат численного теста. Приёмка и временные графики ещё ожидаются.
+
+Elder A4 завершён: Math6/6, native16/16 за1258.03s, reader7/7.
+Compact proof `cc7d8b66d1ee4552e6bff8cd2d49bba63507e0af`:279 archive members,
+439424 bytes. Все archive/bundle hashes проверены локально;233 файла reader
+побайтно привязаны к native corpus, включая исходный JUnit как native.xml.
+Оба процесса Math/native имеют actual loaded-file provenance. Независимая
+проверка первичных CSV сравнила24 waveform pairs до/после Activity либо
+локальной частоты: stimulus совпал, максимум расхождения потенциала0,
+относительного времени1.7763568394002505e-15s. Полные результаты записаны в
+`InheritedPropertyNormalGateValidation.json`. Это начальные модели, не Train
+continuation и не результат классификации.
+
+Те же семь reader checks на Elder corpus прошли на M40. Первый render
+остановился до графиков: системный Python не имел matplotlib; exception
+сохранён. Повторный render использует существующий plot-venv-a1, отдельный
+Git source анализа и компактный primary proof. Полный cache остаётся на M40
+Data; в Git предусмотрены report metadata и16 selected PNG для прямой
+проверки. ASan native16, завершённый render и визуальная приёмка ещё ожидаются.
