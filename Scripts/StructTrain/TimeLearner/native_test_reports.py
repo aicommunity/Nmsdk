@@ -95,7 +95,11 @@ def inventory_native_test_run(specification, artifact_root):
         require(summary.get("kind") == "native_training_state_summary", "native_test_phase_summary_kind")
         total = count(summary["reference_probes"])+count(summary.get("search_probes", 0))
         require(total > 0, "native_test_phase_has_no_recorded_probes")
-        paths = sorted(p.name for p in native.glob(prefix+"*.json"))
+        # A saved model may share the prefix (e.g. service_model.json).
+        # Numbered probes must match the declared counter; the final global
+        # packet inventory still rejects every unaccounted probe of any name.
+        paths = sorted(p.name for p in native.glob(prefix+"*.json")
+                       if p.stem[len(prefix):].isdigit())
         expected_paths = [prefix+str(i)+".json" for i in range(1, total+1)]
         require(set(paths) == set(expected_paths), "native_test_phase_missing_or_extra_probe")
         entries = [entry(p, p[:-5]+".csv") for p in expected_paths]
