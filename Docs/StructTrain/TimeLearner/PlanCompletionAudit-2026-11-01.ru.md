@@ -16,6 +16,13 @@ Old normal Bin provenance limitation остаётся открытым для п
 Pulse merge a18bf543007c52a3ac7a6fbb148a48cb2c351de3 сохраняет tested Core.
 Полные этапы6/7/11 и весь исходный план остаются частично выполненными.
 
+Дополнительно source-reviewed девять shared inherited UContainer properties,
+действующих на оба learner: [контракты и consumer anchors](InheritedPropertyContracts.ru.md).
+На обоих workers9 records/8 hierarchy nodes byte-identical опубликованному
+JSON. Activity вызывает Reset при выключении; TimeStep — частота; wall duration
+ограничения могут менять child traversal. Это закрывает отсутствие inherited
+source inventory, но не runtime/connected/save/load/profile матрицу этапов1/4.
+
 Адресно принят [hot XML Load/Init/Reset](HotXmlReset.ru.md): normal32/32,
 ASan32/32, readers18/16/16 на каждом worker,64 byte-identical crossworker CSV,
 1476 temporal PNG в cache/26 directly reviewed originals. Scope — Classic/Branch,

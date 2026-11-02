@@ -14,6 +14,13 @@ UModule. Девять перечисленных UProperty объявлены в
 Runtime aliases из ClDesc, подключаемые свойства и образцы storage этим
 статическим счётчиком не инвентаризируются. Каталог217 остаётся отдельным.
 
+Серверное повторение production extractor завершено на обоих workers:
+9 shared records/8 hierarchy nodes, JSON побайтно равен опубликованному
+каталогу (SHA25636e6dd8029cd64e3d034212ea363920617c626a26a3f00810a22ee0e6ed5b73f).
+Root proofse31ffb150377b39a3778c2451585c5edd714ad3b (Elder) и
+88dcf2a5d8a7d24cc3624bd69a28aecf4fad5cc2 (M40); source HEADs не изменены.
+Это source metadata checks, а не численные ASan или runtime property tests.
+
 |Свойство|Владелец/единицы и применение|Constructor и public Default|Последствия для эксперимента|
 |---|---|---|---|
 |Name|UContainer, NameT; SetName, owner lookup, пути связей/диагностики.|Default не назначает фиксированное имя. Setter отклоняет пустое имя, проверяет имя и обновляет owner lookup.|Это идентичность графа/адресация, не научный фактор. Переименование требует проверки связей и semantic model identity.|
