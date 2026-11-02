@@ -1,0 +1,170 @@
+{
+  "kind": "published_source_reference_audit",
+  "root_revision": "422647a2dff24d5783f95f2a2980507de81febcc",
+  "needle": "source-n1-measured-refinement-normal-a1",
+  "producer_sha256": "291255cde33d7cfd6d826a907ce68127e3f0708873441cbc2e64ba442629148e",
+  "statistics": {
+    "git_blobs_read": 48882,
+    "text_files_considered": 96506,
+    "text_files_inspected": 96506,
+    "archives_read": 206
+  },
+  "report_references": {
+    "s01-timing-finite-baseline-normal-a1": {
+      "metadata_reference": 172,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 2,
+      "log_source_path_reference": 168
+    },
+    "s01-timing-finite-current-normal-a1": {
+      "metadata_reference": 25,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 3
+    },
+    "s02-elder-bin-worktree-repair-a1": {
+      "metadata_reference": 2
+    },
+    "s04-hot-readout-baseline-normal-a1": {
+      "metadata_reference": 32,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 2,
+      "log_source_path_reference": 24
+    },
+    "s04-hot-readout-current-normal-a1": {
+      "metadata_reference": 61,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 4
+    },
+    "s04-hot-xml-current-normal-a1": {
+      "metadata_reference": 64,
+      "source_binding_in_code": 2,
+      "configured_resource_root_reference": 4
+    },
+    "s04-hot-xml-initial-normal-a1": {
+      "source_binding_in_code": 2,
+      "metadata_reference": 16,
+      "configured_resource_root_reference": 2
+    },
+    "s04-loaded-readout-baseline-normal-a1": {
+      "source_binding_in_code": 8,
+      "log_source_path_reference": 101,
+      "metadata_reference": 132,
+      "configured_resource_root_reference": 4
+    },
+    "s04-loaded-readout-current-normal-a1": {
+      "metadata_reference": 63,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 5
+    },
+    "s04-loaded-readout-matrix-diagnostics-normal-a1": {
+      "metadata_reference": 231,
+      "source_binding_in_code": 4,
+      "configured_resource_root_reference": 9,
+      "log_source_path_reference": 104
+    },
+    "s05-archive-f64-baseline-normal-a1": {
+      "metadata_reference": 32,
+      "source_binding_in_code": 2,
+      "configured_resource_root_reference": 4,
+      "log_source_path_reference": 4
+    },
+    "s05-archive-f64-current-normal-a1": {
+      "metadata_reference": 105,
+      "source_binding_in_code": 2,
+      "configured_resource_root_reference": 10
+    },
+    "s05-positive-n1-handoff-normal-a1": {
+      "configured_resource_root_reference": 6
+    },
+    "s07-measured-length-baseline-normal-a1": {
+      "metadata_reference": 24,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 2,
+      "log_source_path_reference": 20
+    },
+    "s07-measured-length-gate-normal-a1": {
+      "metadata_reference": 68,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 3
+    },
+    "s07-measured-length-gate-normal-a2": {
+      "metadata_reference": 67,
+      "source_binding_in_code": 1,
+      "configured_resource_root_reference": 2
+    },
+    "s07-measured-length-native-normal-a1": {
+      "configured_resource_root_reference": 12,
+      "source_binding_in_code": 2
+    },
+    "s07-measured-length-positive-normal-a1": {
+      "configured_resource_root_reference": 3,
+      "source_binding_in_code": 1
+    },
+    "s07-n1-refinement-build-normal-a1": {
+      "metadata_reference": 149,
+      "configured_resource_root_reference": 4,
+      "log_source_path_reference": 2
+    },
+    "s07-native-n1-refined-normal-a1": {
+      "configured_resource_root_reference": 3
+    },
+    "s08-positive-n1-calibration-normal-a1": {
+      "configured_resource_root_reference": 3
+    },
+    "s09-native-preflight-current-normal-a1": {
+      "configured_resource_root_reference": 21,
+      "source_binding_in_code": 1
+    },
+    "s09-native-preflight-current-normal-a2": {
+      "configured_resource_root_reference": 55,
+      "metadata_reference": 1,
+      "source_binding_in_code": 3,
+      "log_source_path_reference": 3
+    },
+    "s09-native-preflight-setup-baselines-normal-a1": {
+      "source_binding_in_code": 5,
+      "log_source_path_reference": 1,
+      "configured_resource_root_reference": 3
+    },
+    "s09-resumed-static-elder-a1": {
+      "metadata_reference": 1
+    }
+  },
+  "uninspected_metadata": [
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-asan-a1/primary.tar.xz",
+      "blob": "354cc495bbae7a39ec3a7c54dde8a2afe768e35a",
+      "member": "corpus/runs/Branch-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    },
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-asan-a1/primary.tar.xz",
+      "blob": "354cc495bbae7a39ec3a7c54dde8a2afe768e35a",
+      "member": "corpus/runs/Classic-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    },
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-normal-a1/primary.tar.xz",
+      "blob": "bc84adf5883cc406b78784686a23c5dd11e16de2",
+      "member": "corpus/runs/Branch-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    },
+    {
+      "git_path": "Reports/StructTrain/TimeLearner/s08-positive-n1-calibration-normal-a1/primary.tar.xz",
+      "blob": "bc84adf5883cc406b78784686a23c5dd11e16de2",
+      "member": "corpus/runs/Classic-grid/native/transaction.json",
+      "reason": "text_size_limit"
+    }
+  ],
+  "absence_proves_unaffected": false,
+  "runtime_source_attested": false,
+  "scientific_result_validity_changed": false,
+  "limitations": [
+    "Textual path claims only; source references do not establish actual resource reads.",
+    "Reports without a matching source name may still have used the affected worktree.",
+    "CSV/image contents, nested archives and non-text payloads are outside this scan.",
+    "Escaped/computed source names may not occur literally; unreadable/large metadata remains unknown.",
+    "No source checkout, archived script execution, source metadata repair or result rewriting."
+  ],
+  "scientific_verdict": null
+}

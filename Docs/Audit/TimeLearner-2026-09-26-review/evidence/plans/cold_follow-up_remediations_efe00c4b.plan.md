@@ -281,7 +281,7 @@ sha256sum Bin/Platform/Linux/NeuroModelerConsole
 
 **Таксономия:**
 
-1. Скрипт `[evidence/metrics/refresh_fail_taxonomy_after_fix.py](Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/refresh_fail_taxonomy_after_fix.py)` → перезаписать `[FAIL_TAXONOMY.json](Docs/Audit/TimeLearner-2026-09-26-review/evidence/FAIL_TAXONOMY.json)` по всем 37 RC + diag; asym50/100 after-fix **не** `B_tipr_frozen_cold`.
+1. Скрипт `[evidence/metrics/refresh_fail_taxonomy_after_fix.py](https://github.com/aicommunity/Nmsdk/blob/ce285d7eee907d7d453ae00e1840246df09d5086/Docs/Audit/TimeLearner-2026-09-26-review/evidence/metrics/refresh_fail_taxonomy_after_fix.py)` → перезаписать `[FAIL_TAXONOMY.json](Docs/Audit/TimeLearner-2026-09-26-review/evidence/FAIL_TAXONOMY.json)` по всем 37 RC + diag; asym50/100 after-fix **не** `B_tipr_frozen_cold`.
 2. При необходимости абзац в `[SOFTCOLD_PLAN_RESULT.md](Docs/Audit/TimeLearner-2026-09-26-review/evidence/SOFTCOLD_PLAN_RESULT.md)` / ссылка на этот follow-up plan.
 
 **Коммит:** Bin (EXPERIMENTS/SUCCESSFUL) + root Docs; без `_work`, без `host_metrics.jsonl`, без `.partial`.
