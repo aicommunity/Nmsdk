@@ -5,6 +5,21 @@
 обязательную матрицу. Принятый develop44334e272de8429f29775512a860584c60350899
 не изменён; алгоритмическая feature ещё не принята.
 
+Обновление после восстановления VPN: все четыре ожидавшихся ASan задания
+завершились. Integrated163:163/163; recording18:18/18; public preflight:
+14 positive/6 negative/2 one-tick Train; public diagnostic:6/6 операций.
+Readers24/24 +8/8 integrated, без skips. Proof44548f908365f5030445e4ced11a71147d044331:
+2172 members/11207017 compressed bytes, hashes полностью проверены локально.
+407+88 CSV и413+94 probe packets равны normal;94 включает6 aliases.
+Для diagnostic отдельно равны10 inline trials и4 source CSV:
+proof286f7e1b4499db2bc4e9ad49e5980dbd219866bf.
+ASan native20 также уже входит в ранее пройденный gate81 на Pulse225.
+Это закрывает ожидание перечисленных gates, но не полную приёмку feature.
+Подробные source scopes, ограничения и temporal linkage:
+[CompletedASanGates](CompletedASanGates-2026-11-02.ru.md).
+Ниже сохранён журнал прежних checkpoints; упоминания live/pending относятся
+к моменту соответствующей записи и заменены этим обновлением.
+
 Уточнение текущего feature: public diagnostic-evaluate теперь реально
 проверен на Elder normal,6/6 операций и7/7 portable readers. Два завершённых
 diagnostic Test, два прерванных и два ordinary Console rejections используют
@@ -67,7 +82,7 @@ Readers2e785da3e7f84ea1173ab0b6c55bdc58ab78982a и
 ce63736ba79d1ed6d97a230ea76aebca5b70324f.
 Подробнее: [NativeTraceCoverage](NativeTraceCoverage.ru.md).
 
-## Живые задания и ближайшая приёмка
+## Журнал прежних заданий и приёмки (terminal уточнён выше)
 
 M40 ASan163-a2 на07167d551 остаётся живым:PID1745907/start_ticks268723161,
 execution budget21600s. Его source/build/runtime не обновлялись. Прежний a1

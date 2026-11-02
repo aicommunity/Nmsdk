@@ -33,3 +33,10 @@ Baseline служит обоснованием планирования ресу
 событие pidfd cancellation и проверенный baseline JUnit. ASan-a2 запущен
 отдельно с21600; источники/runtime не менялись. Elder-a1 завершился163/163
 без расширения его исходного7200s лимита.
+
+ASan-a2 впоследствии завершился163/163 с исходным21600s execution budget,
+stderr пуст. Публикация44548f908365f5030445e4ced11a71147d044331 содержит
+неизменённые inputs, полный JUnit, runtime и первичные данные.8/8 inventory
+readers прошли;407 CSV побайтно и413 native probe packets семантически равны
+normal. Это не устраняет6 untraced packets/5 observability gaps.
+Подробности: [завершённые gates](CompletedASanGates-2026-11-02.ru.md).
