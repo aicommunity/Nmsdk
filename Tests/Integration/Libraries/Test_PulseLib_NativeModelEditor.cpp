@@ -502,6 +502,42 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
     ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
 
+    const auto beforeShrink=rig.Revision();candidate[0].length=1;
+    const auto shrink=rig.learner->ApplyNativeParameters(candidate);
+    ASSERT_EQ(shrink.status,NativeEditStatus::Applied)<<shrink.reason;
+    const auto dormant=rig.learner->OwnedNativeCapacitanceState();
+    phases.append(QJsonObject{{"phase","ordinary_shrink"},{"state",dormant},
+        {"revision",QString::fromStdString(rig.Revision())}});
+    EXPECT_EQ(dormant["schema_version"],QJsonValue(2));
+    EXPECT_EQ(dormant["dormant_membrane_scales"].toObject()["Dendrite1_2"],QJsonValue(1.1));
+    EXPECT_FALSE(dormant["membrane_scales"].toObject().contains("Dendrite1_2"));
+    EXPECT_NO_THROW(rig.learner->ValidateAppliedNativeCapacitanceState(dormant));
+    std::string dormantRevision;
+    const auto decoded=ParseNativeCapacitanceState(QJsonDocument(dormant).toJson().toStdString(),dormantRevision);
+    EXPECT_EQ(EncodeNativeCapacitanceState(decoded,dormantRevision),dormant);
+    auto overlap=decoded;overlap.membraneScales["Dendrite1_2"]=1.;
+    EXPECT_THROW(EncodeNativeCapacitanceState(overlap,dormantRevision),std::runtime_error);
+    auto unknown=decoded;unknown.dormantMembraneScales["Dendrite1_999"]=1.;
+    EXPECT_THROW(EncodeNativeCapacitanceState(unknown,dormantRevision),std::runtime_error);
+    auto outside=decoded;outside.dormantMembraneScales["Dendrite1_2"]=1.3;
+    EXPECT_THROW(EncodeNativeCapacitanceState(outside,dormantRevision),std::runtime_error);
+    auto nonfinite=decoded;nonfinite.dormantMembraneScales["Dendrite1_2"]=std::numeric_limits<double>::quiet_NaN();
+    EXPECT_THROW(EncodeNativeCapacitanceState(nonfinite,dormantRevision),std::runtime_error);
+    auto falselyDormant=decoded;falselyDormant.membraneScales.erase("Dendrite1_1");
+    falselyDormant.dormantMembraneScales["Dendrite1_1"]=.9;
+    EXPECT_THROW({
+        const auto invalidState=EncodeNativeCapacitanceState(falselyDormant,dormantRevision);
+        rig.learner->ValidateAppliedNativeCapacitanceState(invalidState);
+    },std::runtime_error);
+    candidate[0].length=3;
+    const auto regrowth=rig.learner->ApplyNativeParameters(candidate);
+    ASSERT_EQ(regrowth.status,NativeEditStatus::Applied)<<regrowth.reason;
+    const auto restored=snapshot("ordinary_regrowth_without_correction_argument");
+    EXPECT_TRUE(restored["dormant_membrane_scales"].toObject().isEmpty());
+    EXPECT_EQ(rig.Revision(),beforeShrink)<<"identical declared structure must recover original per-channel C0 and scales";
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+
     // Capturing a currently trimmed graph is not permission to replace the
     // original baseline and multiply it again. Rejection must be transactional.
     const auto rebased=rig.learner->CaptureBoundNativeCapacitanceBaseline();
