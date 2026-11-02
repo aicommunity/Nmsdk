@@ -1,5 +1,33 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Checkpoint: восстановлена связь Automats2
+
+Обе машины доступны через user@10.245.1.12. Elder standalone C-editor8/8
+с32 raw probes опубликован в5acd3eebbf2c812a5e04e07bd0a14f88eb2ea4fb.
+M40 ASan той же версии ещё выполняется;6/8 завершены без failures, Branch
+20000Hz ещё идёт. Это промежуточный счёт, не полный PASS.
+
+Полный temporal cache завершён на M40:32 trials,48 trial/soma pairs,
+1787 PNG,5545 проверенных файлов. В Git только16 выбранных рисунков
+с индивидуальным просмотром и metadata; остальные изображения остаются
+воспроизводимым cache. [Протокол просмотра](../../../Reports/StructTrain/TimeLearner/s07-capacitance-temporal-selected-a1/Review.ru.md).
+
+Первый joint L/Ns/Rs/C gate Elder:8/10, оба rollback faults не прошли.
+Отрицательные данные, runtime и сборка сохранены в7364e82e219b1a63b6fa6f598dc7876dc2e59b02.
+Новая feature numerical closure:rootecedb55cd89ea7fd9d6c806268a2761f5a1b0c4a,
+Pulsef9272f5244e6183206e1a47a89eadb06a60abbb4,
+Rdk03497edfa52e6a0ee2c2e8cd4eaa5021211d514d. В ней специализированная
+диагностика пойманных Rdk исключений не меняет bool lifecycle или scheduler.
+На Elder сборка s07-operation-diagnostics-build-normal-a1
+(PID3955124/start_ticks320085846), затем supervisor
+s07-operation-diagnostics-normal-a1 (3955125/320085846) запускает9 Rdk unit
+и12 native cases. Это ожидаемые проверки; результата пока нет.
+
+Принятый develop по-прежнему f1708eb97bc3b412c101dffc468221af2bc87e59.
+Полный C-trim V2, его persistence/growth/search, общая матрица и этапы1–12
+не закрыты. Ни текущие traces, ни эти gates не являются результатом
+классификации. Ниже прежние checkpoints сохранены как история уточнений.
+
 Текущая алгоритмическая работа: [per-channel C-trim physical editor](NativeCapacitanceEdit.ru.md).
 Новый API и8 actual native fixtures находятся в отдельной feature; серверная
 приёмка ещё идёт. Старый scalar C-trim не считается исправленным этим API,
