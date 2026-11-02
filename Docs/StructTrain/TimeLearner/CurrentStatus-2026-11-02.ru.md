@@ -63,6 +63,18 @@ renderer1797026/ticks269055735; wall budget7200s относится только
 результата ещё нет. Шесть untraced packets и5 gaps остаются видимыми, raw Reset
 plots этим запуском не строятся. Не обновлять этот Python checkout до terminal.
 
+Отдельный raw Reset supplement теперь завершён:4 diagnostics/6 soma pairs,
+21 PNG в `report-cache/s04-s07-integrated163-raw-reset-normal-a1`;10/10 readers,
+9 selected PNG directly reviewed1920x960. Источник — исходный Elder CI163,
+не повтор66 native cases. View66 содержит копии настоящих JUnit nodes и wall
+artifacts с original/derived hashes. Proofc9831d3fb73d5eab337dce1c4cbf40f88a678efa,
+15 members/934815 compressed bytes полностью проверены после Git fetch.
+QA:Integrated163RawResetVisualQA.json. Неудачная попытка system-Python без
+matplotlib сохранена; a2 использует существующий plot-venv. Closed probe
+по-прежнему отсутствует по контракту Reset; графики показывают только raw samples.
+Это закрывает необходимость отдельных Reset-графиков для normal CI163, но не
+его6 untraced packets/Exact-warm gap или полный ручной просмотр всех407 проб.
+
 После освобождения M40 нужен отдельный ASan gate18 numericd06585d.
 Не обновлять source активного163, не перезапускать до terminal/identity check.
 Дальнейшая приёмка и --no-ff merge детей, затем корня остаются обязательными.
