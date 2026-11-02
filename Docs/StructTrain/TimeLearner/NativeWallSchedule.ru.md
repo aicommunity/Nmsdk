@@ -191,3 +191,17 @@ wrong-owner fixture исправлен ключ owner на реальный owne
 `8cf5b78ae23b37d0fdd0c99f1c334aabbccbc0bd`; оба worker source-context
 before/after совпали. Numeric root integrated gate остаётся507c8a6c4,
 этот исходный экспериментальный snapshot задним числом не переименовывается.
+
+
+Integrated root507: native74 иMath6 завершились успешно на обоих workers.
+Сохранены в structured-exit primary9eeb7ba1 /b4fa9232 с полными source/runtime,
+actual loaded files, setup failures и неизменёнными contexts. В public Console
+regression обнаружен отдельный Python defect: schema1 Train exit2 не получал
+имеющегося native data audit. Maintained root command и run manifest schema2
+исправлены отдельно;14+6+2 и28 checks на worker приняты в develop6068f6af.
+Старые schema1 manifests не переинтерпретируются. Их exact compatibility
+inputs также опубликованы; подробности StructuredTrainingExit.ru.md в develop.
+Wall Pulse feature151a388 всё ещё не merged: требуется полный temporal cache
+integrated74/57 soma pairs, отдельные Reset raw diagnostics и scoped review.
+Все перечисленные owned numeric supervisors закрыты; повторно не запускать
+из-за отсутствия свежего progress сообщения. Numeric snapshot остаётся507.
