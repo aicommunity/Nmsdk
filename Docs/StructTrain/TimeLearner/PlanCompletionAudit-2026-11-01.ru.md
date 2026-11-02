@@ -276,3 +276,30 @@ fault matrix публикации, независимые order/ITI экспер
 Научного нового результата разделимой классификации здесь не получено.
 
 Уточнение при объединении feature branches: integrated74+Math6 и public preflight уже завершены на обоих workers; их данные входят в StructuredTrainingExit.ru.md. Принятый root develop теперь44334e272de8429f29775512a860584c60350899. Объединение wall-policy и search-termination выполняется только в feature branch; оно не означает приёмку алгоритмических изменений в develop. Новое совместное состояние требует отдельной сборки и адресных gates.
+
+## Подэтап 02.11: native gates, перенос и временные отчёты
+
+В develop44334e272 принят maintained native-gate: positive2 и reader7 на обоих
+workers; failed JUnit не становится PASS. Полный configured34 прежней search
+feature завершился30/34 на обоих, с одинаковыми четырьмя ожиданиями сертификата
+после sweep budget. Эти отрицательные gates сохранены. Исправленный diagnostic
+transport4 + named Exact completed control1 прошёл5/5 на Elder, с равенством
+frozen/fresh-process CSV; его ASan5 ещё работает.
+
+Все32 закрытые training probes имеют48 soma/input пар и288 PNG в M40 Data;
+24 selected original-resolution графика просмотрены. Normal/ASan32 CSV
+идентичны, strict canonical packets идентичны; ledger связывает их с общим
+visual cache. Git содержит сжатые primary, hashes и выбранные рисунки.
+Это не классификация восьми паттернов и не полный ручной просмотр288 PNG.
+
+Pulse fca7141/root07167d551 — совместный feature candidate, не принятый
+алгоритмический develop. Его163 source-declared tests нужны после server build.
+Явный Reset очищает control; граф проверяется отдельно, immutable stopped
+export сохраняется до Reset. Допуски не расширялись.
+
+Полностью закрытым этапом исходного плана остаётся только0. Этапы1–12 частичны:
+полные evidence/property review и lifecycle/storage/physics, saved legacy и
+весь Train→Test, legacy/V2 A/B и режимы алгоритмов, finalization/calibration,
+миграция scripts, scheduler/leases и публикация со сбоями, научные order/ITI/
+frozen матрицы и сквозная документация. SHA/отрицательные попытки/owned jobs:
+SearchTermination.ru.md, SearchTermination.progress.json, SearchTerminationVisualQA.json.
