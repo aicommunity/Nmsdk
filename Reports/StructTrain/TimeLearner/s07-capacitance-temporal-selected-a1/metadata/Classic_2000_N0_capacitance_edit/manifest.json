@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_probe_set_visual_report",
+  "schema_version": 2,
+  "status": "diagnostic",
+  "expected_trials": [
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/1",
+      "packet": "probe-0000/primary/probe.json",
+      "trace": "probe-0000/primary/trace.csv"
+    },
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/3",
+      "packet": "probe-0001/primary/probe.json",
+      "trace": "probe-0001/primary/trace.csv"
+    },
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/5",
+      "packet": "probe-0002/primary/probe.json",
+      "trace": "probe-0002/primary/trace.csv"
+    },
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/7",
+      "packet": "probe-0003/primary/probe.json",
+      "trace": "probe-0003/primary/trace.csv"
+    }
+  ],
+  "reports": [
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/1",
+      "folder": "probe-0000",
+      "soma_count": 2,
+      "plotted_soma_count": 2,
+      "observed_soma_count": 2,
+      "data_complete": false
+    },
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/3",
+      "folder": "probe-0001",
+      "soma_count": 2,
+      "plotted_soma_count": 2,
+      "observed_soma_count": 2,
+      "data_complete": false
+    },
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/5",
+      "folder": "probe-0002",
+      "soma_count": 2,
+      "plotted_soma_count": 2,
+      "observed_soma_count": 2,
+      "data_complete": false
+    },
+    {
+      "trial_id": "Classic_2000_N0_capacitance_edit/trial/7",
+      "folder": "probe-0003",
+      "soma_count": 2,
+      "plotted_soma_count": 2,
+      "observed_soma_count": 2,
+      "data_complete": false
+    }
+  ],
+  "common_y_limits": [
+    [
+      -0.0005204419907663472,
+      0.007025966875345686
+    ],
+    [
+      -0.00036816150755250023,
+      0.004970180351958753
+    ]
+  ],
+  "comparison_profile": {
+    "amplitude": 1,
+    "frequency_deviation": 0,
+    "frequency_hz": 2000,
+    "generator_class": "NPulseGeneratorTransit",
+    "pulse_length": 0.001,
+    "use_pattern_output": false,
+    "use_transit_signal": false
+  },
+  "routing": "classic_burst",
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null,
+  "data_complete": false,
+  "observation_policy": "complete_or_partial",
+  "rendered_trial_soma_pairs": 8,
+  "known_trial_soma_pairs": 8,
+  "unknown_soma_trials": []
+}

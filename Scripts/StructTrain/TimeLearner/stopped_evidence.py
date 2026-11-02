@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from .model_identity import canonical_model_sha256
+from .capacitance_evidence import audit_package_capacitance
 from .native_evidence import (audit_probe, count, load, number, require,
                               validate_configured_repeat_policy, validate_search_history_availability)
 
@@ -14,8 +15,8 @@ OUTCOMES = {"external_stop", "budget_exhausted", "invalid_model", "invalid_obser
 
 def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dict) -> dict:
     require(package.get("kind") == "timelearner_stopped_state" and type(package.get("schema_version")) is int
-            and package["schema_version"] == 1
-            and len(package) == 26, "unknown_stopped_state_schema")
+            and package["schema_version"] in (1, 2)
+            and len(package) == (27 if package["schema_version"] == 2 else 26), "unknown_stopped_state_schema")
     require(package["state_kind"] == "diagnostic" and package["dynamic_checkpoint"] is False,
             "unsupported_stopped_state_kind")
     require(package["certificate"] is None and package["training_outcome"] in OUTCOMES,
@@ -92,11 +93,13 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
     require(training["captured_per_input"] == raw
             and training["target_pattern"] == package["configuration"]["model"]["initial_isi"],
             "archive_target_or_reference_mismatch")
-    return {"auditor_version": 2, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
+    capacitance = audit_package_capacitance(package)
+    return {"auditor_version": 3, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
             "n0_candidate_repeats": repeats, "search_history_retained": retained,
             "primary_trials": len(packets), "reference_trials": len(references), "final_trials": len(final_ids),
             "invalid_or_censored_trials": sum(not a["valid_observation"] for a in audits.values()),
-            "certificate_present": False, "native_import_verified": False, "evaluation_verdict": None}
+            "certificate_present": False, "native_import_verified": False,
+            "capacitance_state": capacitance, "evaluation_verdict": None}
 
 
 def load_case(path: Path) -> tuple[dict, dict, dict, dict]:
