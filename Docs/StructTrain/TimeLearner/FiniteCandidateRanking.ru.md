@@ -56,6 +56,14 @@ Correction numeric rootfbe7b667faaeb5eb17319d9d3a4a5b8d92c86754/Pulse
 controls. Это включает старые positive/negative cases и fresh all-input gate.
 Приёмка не выводится из запуска процесса: нужно дождаться полного JUnit.
 
+Этот Elder normal gate завершён:81/81,15/15 JUnit/diagnostic readers и4
+production stopped-boundary audits. Proof f9e823ced7d51614a2a1af307405bbdaaac0478f:
+384 verified members/2799016 bytes. Все20 чисто контроллерных сценариев теперь
+выбирают меньший измеренный остаток. Прежние native20 проверяют интеграцию
+и guards, но их законные singleton domains не являются самостоятельной
+проверкой нового порядка нескольких физических кандидатов. Такая адресная
+native проверка остаётся нужна, как и ASan; подэтап не принят в develop.
+
 На M40 отдельная новая ASan-сборка использует другое source/build/runtime
 дерево; живой07167 ASan163 не меняется. Первая настройка новой сборки
 выявила неполную подготовку dependency closure: отсутствовали4 штатных
