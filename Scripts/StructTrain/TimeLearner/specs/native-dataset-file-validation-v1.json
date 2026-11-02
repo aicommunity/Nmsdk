@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 1,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "DatasetFileValidation/ValidLegacySingle",
+    "DatasetFileValidation/ValidMultiBlankClass",
+    "DatasetFileValidation/ValidMultiNoClass",
+    "DatasetFileValidation/ValidSignedWhitespaceCRLF",
+    "DatasetFileValidation/MissingFileIdle",
+    "DatasetFileValidation/RejectGarbageClass",
+    "DatasetFileValidation/RejectClassSuffix",
+    "DatasetFileValidation/RejectClassDecimal",
+    "DatasetFileValidation/RejectClassOverflow",
+    "DatasetFileValidation/RejectGarbageIsi",
+    "DatasetFileValidation/RejectIsiSuffix",
+    "DatasetFileValidation/RejectNaN",
+    "DatasetFileValidation/RejectInf",
+    "DatasetFileValidation/RejectOverflowIsi",
+    "DatasetFileValidation/RejectEmptyIsi",
+    "DatasetFileValidation/RejectExtraIsi",
+    "DatasetFileValidation/RejectTrailingDelimiter",
+    "DatasetFileValidation/RejectWrongHeaderWidth",
+    "DatasetFileValidation/RejectMetaSuffix",
+    "DatasetFileValidation/RejectUnknownMeta",
+    "DatasetFileValidation/RejectIncompleteBlock",
+    "DatasetFileValidation/RejectMissingFeature"
+  ],
+  "maximum_wall_seconds": 600,
+  "asan_options": "detect_leaks=0"
+}
