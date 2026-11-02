@@ -326,8 +326,8 @@ template<class Learner> void NativeCapacitanceEdit(unsigned frequency,int normal
     EXPECT_EQ(rig.Revision(),edited);EXPECT_EQ(repeat.afterRevision,edited);EXPECT_TRUE(life.IsCurrent());
     EXPECT_DOUBLE_EQ(exc->Capacity.GetData(),cExc*1.1);
     auto clone=dynamic_pointer_cast<NPulseNeuron>(NmsdkTools::ClonePhysicalGraphForEdit(rig.neuron,rig.ports));ASSERT_TRUE(clone);
-    EXPECT_DOUBLE_EQ(clone->GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true)->Capacity.GetData(),cExc*1.1);
-    EXPECT_DOUBLE_EQ(clone->GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true)->Capacity.GetData(),cInh*1.1);
+    EXPECT_DOUBLE_EQ(clone->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true)->Capacity.GetData(),cExc*1.1);
+    EXPECT_DOUBLE_EQ(clone->template GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true)->Capacity.GetData(),cInh*1.1);
     clone->BreakLinks();clone->GetStorage()->ReturnObject(clone);clone=0;
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true).status,NativeProbeStatus::Completed);
     for(const double scale:{std::numeric_limits<double>::quiet_NaN(),std::numeric_limits<double>::infinity(),1.2,1.e-12})
