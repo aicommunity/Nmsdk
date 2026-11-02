@@ -1,5 +1,11 @@
 # C-trim: физический baseline и правка ёмкостей
 
+Последующий normal gate baseline/growth завершён21/21 +9/9 unit на rootc6345fa6,
+все349 members и61 probe packet проверены. Полный временной отчёт:
+93 trial-soma pairs,1680PNG в M40 cache,20 выбранных оригиналов непосредственно
+просмотрены. Новая [schema2 переноса C₀](CapacitanceStateTransfer.ru.md) —
+следующий срез кода с отдельной ещё не завершённой приёмкой.
+
 ## Новый срез: привязанный baseline (серверная проверка впереди)
 
 В PulseLib `cc1eb71c8a4be8b2241c2b9a870ac4b533e01a51` реализованы отдельный
