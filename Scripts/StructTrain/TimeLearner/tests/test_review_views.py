@@ -39,6 +39,8 @@ class ReviewViews(unittest.TestCase):
                 pulse = selected[1]["view"]
                 self.assertTrue(any(s["stimulus"] != 0 and pulse["begin"] <= s["time"] <= pulse["end"]
                                     for s in samples))
+                if "_20000_" in name:
+                    self.assertEqual(selected[2]["view"]["y_scale"], "local_detail")
 
     def test_old_first_zoom_is_blank_in_all_four_20000_hz_cases(self):
         bad = 0

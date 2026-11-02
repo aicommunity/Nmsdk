@@ -37,5 +37,16 @@ def select_review_views(views, samples, channel):
         candidates = [v for v in zooms if v["begin"] <= time <= v["end"]]
         require(bool(candidates), "review_anchor_not_covered:"+purpose)
         view = min(candidates, key=lambda v: (abs((v["begin"]+v["end"])/2-time)/(v["end"]-v["begin"]), v["view"]))
+        if purpose == "first_response_excursion":
+            # Retain the overview's common amplitude scale while using an
+            # already-rendered, explicitly labelled local detail for a small
+            # excursion that would look flat on the shared-scale zoom.
+            detail = [v for v in views if v["view"] == view["view"]+"-detail"
+                      and v["y_scale"] == "local_detail"]
+            require(len(detail) <= 1, "review_duplicate_detail")
+            if detail:
+                require(detail[0]["begin"] == view["begin"] and detail[0]["end"] == view["end"],
+                        "review_detail_window_changed")
+                view = detail[0]
         result.append({"purpose": purpose, "anchor_time": time, "view": view})
     return result
