@@ -17,5 +17,16 @@ BUILD_TESTS принимается как legacy input alias и удаляетс
 -DBUILD_TESTS=ON/OFF также поддерживаются. Действующие Rdk методы
 Default/Build/Calculate/Reset и параметры learner от изменения не зависят.
 
-Приёмка ещё требуется: реальные configure ON/legacy OFF/conflict и наличие
-обеих ожидаемых целей в первом случае, затем unit/native gate на workers.
+Адресная приёмка на Elder завершена: реальные configure ON / legacy OFF /
+conflict дали ожидаемый результат; проверены обе unit/native цели и их
+отсутствие при OFF. Исполнены 9/9 unit и 14/14 native проверок. CMakeLists
+в численном root58d941c2 и исправлении7290955b имеет один blob
+`2a54513b75286c025142c1972f26a74b3ee2e176`.
+
+Компактные первичные configure logs/cache и результаты выполнения:
+`Reports/StructTrain/TimeLearner/s02-test-switch-configure-b3`.
+Они извлечены с проверкой SHA из evidence
+`57383f8d93ebf660bd2f80d08ac315a67abe2896`. Ошибка независимого C₀ reader
+в исходном cohort сохранена там отдельно и не выдаётся за успешную приёмку
+всего cohort. Этот отчёт принимает только CMake-флаг и доступность целей;
+он не закрывает весь этап 2 и не меняет gitlinks PulseLib/Rdk.
