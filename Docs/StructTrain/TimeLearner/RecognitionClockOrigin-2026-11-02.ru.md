@@ -135,3 +135,29 @@ owner штатно инициализирует newly created/unready generators
 не только постоянный rest potential. Source waveform и morphology learner
 не меняются для получения зелёного scorer. Новый код ещё требует34-case gate,
 file/multirate/lifecycle tests, ASan, reader mutations и temporal visual review.
+
+Normal B3 завершил34/34 native с valid loaded runtime; evidence
+`b8306e23780a797c0fb832565e3be497723b6087`,612 members проверены. Unit raw9
+прошёл, но gate invalid из-за fast-exit capture race: общий запуск остаётся
+incomplete. Independent41 reader/JUnit checks прошли на этих primary;
+оригинальный wrapper ошибочно считал слово skipped в имени успешного теста
+пропуском. Raw evidence `e38d10be161dd4a362286abe137cd0c6fc3ae4d4` сохранён,
+отдельный точный transcript audit `29162f94d9a46818eded84407e3fedb4a350f0c2`
+подтверждает41 completed/0 skipped по уникальным case lines и footer unittest.
+Это не переоценка unit provenance и не повтор Train.
+
+Normal B4 root068a4883 проверил explicit cooperative capture: actual mappings,
+ack и полный failed JUnit25 сохранены корректно. Evidence
+`70d24b8cfee719ad97242d0d4af1e46fbafd36c3`,194 members проверены.20 matrix
+cases прошли повторно;2 file cases нашли задержку на1 tick после reload.
+Причина — pending matrix assignment оставлял Ready=false до следующего native
+Build→AfterBuild→Reset. PulseLib `9ab6d57f0118ad6564ffd8421d7ab2a7a4040fe2`
+переносит всю структурную загрузку в native Build до arming текущего tick.
+Не проверять bool Build; проверять Ready и operation diagnostics.
+
+Три dispatch cases B4 не запускали алгоритм: диагностический direct-created
+компонент оставался Activity=false. Исправлен только fixture: Activity=true и
+явные native Init/activity preconditions. Нулевые callback counts B4 не
+доказывают ошибку frequency scheduler. Ожидания сохраняют фактический Rdk
+higher-frequency ratio+1 loop; это compatibility dispatch audit, а не допуск
+multirate в learner V2. Новые file/dispatch изменения ещё не приняты.
