@@ -6,6 +6,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
 
 - [План и условия приёмки](RefactoringPlan.ru.md).
+- [Опубликованные ссылки на Elder source context:22 folders для dependency review, без переоценки результатов](SourceReferenceAudit.ru.md).
 - [Девять общих inherited Rdk properties: lifecycle, scheduler и открытые runtime проверки](InheritedPropertyContracts.ru.md).
 - [Измеренное предложение длины: native normal/ASan, cold A/B и temporal evidence](MeasuredLengthProposal.ru.md).
 - [Актуальность каталога:217 деклараций,16 source changes и границы проверки](PropertySourceDrift.ru.md).
