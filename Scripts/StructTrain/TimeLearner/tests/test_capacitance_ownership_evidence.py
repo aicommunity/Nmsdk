@@ -55,6 +55,11 @@ class CapacitanceOwnershipEvidenceTest(unittest.TestCase):
             record['state']['schema_version'] = 999; resign(record['state'])
         self.reject(corrupt)
 
+    def test_changed_owned_input_readback(self):
+        def corrupt(path, record):
+            record['input_parameters'][0]['synapses'] += 1
+        self.reject(corrupt, 'ordinary_regrowth_without_correction_argument')
+
     def test_overlapping_active_dormant_maps(self):
         def corrupt(path, record):
             state = record['state']; key = next(iter(state['dormant_membrane_scales']))

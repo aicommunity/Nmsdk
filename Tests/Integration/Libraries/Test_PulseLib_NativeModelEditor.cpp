@@ -462,8 +462,12 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
         std::vector<std::string> imageRoots{"NDatasetMatrix","NPulseGeneratorTransit"};
         for(const auto& entry:original.baseline["storage_images"].toArray())
             imageRoots.push_back(entry.toObject()["name"].toString().toStdString());
-        QJsonObject record{{"kind","native_capacitance_owner_snapshot"},{"schema_version",1},
+        QJsonArray inputs;
+        for(const auto& value:rig.learner->ReadNativeParameters())
+            inputs.append(QJsonObject{{"length",value.length},{"synapses",value.synapses},{"resistance",value.resistance}});
+        QJsonObject record{{"kind","native_capacitance_owner_snapshot"},{"schema_version",2},
             {"test_id",QString::fromStdString(testId)},{"phase",phase},{"state",state},
+            {"input_parameters",inputs},
             {"declaration",original.baseline["model_spec"]},{"effective_model",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)},
             {"class_definitions",NmsdkTools::CaptureModelImageDefinitions(rig.neuron,rig.ports,imageRoots)}};
         phases.append(record);
@@ -513,7 +517,8 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
     ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
 
-    const auto beforeShrink=rig.Revision();candidate[0].length=1;
+    const auto beforeShrink=rig.Revision();
+    const auto beforeShrinkInputs=rig.learner->ReadNativeParameters();candidate[0].length=1;
     const auto shrink=rig.learner->ApplyNativeParameters(candidate);
     ASSERT_EQ(shrink.status,NativeEditStatus::Applied)<<shrink.reason;
     const auto dormant=rig.learner->OwnedNativeCapacitanceState();
@@ -544,7 +549,13 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
     ASSERT_EQ(regrowth.status,NativeEditStatus::Applied)<<regrowth.reason;
     const auto restored=snapshot("ordinary_regrowth_without_correction_argument");
     EXPECT_TRUE(restored["dormant_membrane_scales"].toObject().isEmpty());
-    EXPECT_EQ(rig.Revision(),beforeShrink)<<"identical declared structure must recover original per-channel C0 and scales";
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),beforeShrinkInputs);
+    // The native editor releases formerly owned input banks while preserving
+    // unowned banks. Equal L/Ns/Rs is not a claim of an identical whole graph.
+    // Retain both actual identities; export/import still requires full identity.
+    phases.append(QJsonObject{{"phase","bank_ownership_graph_transition"},
+        {"before",QString::fromStdString(beforeShrink)},{"after",QString::fromStdString(rig.Revision())},
+        {"whole_graph_equal",rig.Revision()==beforeShrink}});
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
     ASSERT_EQ(rig.Probe(1,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
 
