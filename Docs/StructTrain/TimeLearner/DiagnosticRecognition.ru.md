@@ -83,7 +83,15 @@ load_partial_diagnostic_evaluation и score_partial_diagnostic_evaluation
 последним sample. Все объявленные пробы остаются в manifest.
 
 Полные рисунки — кэш M40 Data; в Git compressed primaries, модели, метрики
-и выбранные просмотренные рисунки. Текущий render ещё требует проверки.
+и выбранные просмотренные рисунки. Render e379f404c на M40 завершён:
+4 отчёта,15 observed trial/soma pairs,80 PNG,10/10 automated checks.
+Proof4661b39647b204e3ca04ee613bb08bb6d7cadc88:45 verified members/1273432 bytes.
+Все9 selected PNG прямо просмотрены1920x960; запись проверки:
+[DiagnosticRecognitionVisualQA](DiagnosticRecognitionVisualQA.json).
+Все рисунки явно подписаны Stopped Train: external_stop; complete обозначает
+полноту окна, не обучение.6 неначатых проб остаются без файлов/кривых.
+Elder reader e379f404c также прошёл27/27 ordinary preflight/native diagnostic/
+public pipeline checks без skips; proofe85f003d6060f4ea7769ad71b40eacfc7b3cd969.
 Открыты ASan native20/public Console/CLI/reports и широкая матрица плана.
 Живой ASan163-a2 на07167 не обновляется и не заменяет проверку Pulse427.
 Этот подэтап не рекомендует ControllerVersion2 и не закрывает этапы5/8/10.

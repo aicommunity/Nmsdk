@@ -12,7 +12,11 @@ diagnostic Test, два прерванных и два ordinary Console rejectio
 содержит465 проверенных members/4733324 bytes. Источники external_stop,
 сертификат отсутствует; обе модели TP0/FP0/FN2/TN2. Это не успешная детекция.
 Отдельный partial reader и отчёт сохраняют отсутствующие пробы как unknown,
-не создавая файлов наблюдений. Новый render на M40 и ASan-приёмка pending.
+не создавая файлов наблюдений. M40 render завершён:4 отчёта/15 observed
+trial-soma pairs/80 PNG,10/10 checks,9 selected original PNG просмотрены.
+Proof4661b39647b204e3ca04ee613bb08bb6d7cadc88; QA DiagnosticRecognitionVisualQA.json.
+Дополнительные ordinary+diagnostic readers27/27 без skips:
+proofe85f003d6060f4ea7769ad71b40eacfc7b3cd969. ASan-приёмка нового контура pending.
 Подробности: [DiagnosticRecognition](DiagnosticRecognition.ru.md).
 
 ## Завершено
