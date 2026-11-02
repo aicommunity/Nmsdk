@@ -4336,4 +4336,36 @@ TEST(NativeWallSchedule,BranchN1BeginGenerator){RejectWallPolicyBeforeTraining<N
 TEST(NativeWallSchedule,BranchCallbackCancellation){CancelFromWallControlCallback<NNeuronTimeLearnerBranch>();}
 TEST(NativeWallSchedule,BranchRecognitionOwner){RejectWallPolicyBeforeRecognition<NNeuronTimeLearnerBranch>("owner");}
 TEST(NativeWallSchedule,BranchRecognitionGenerator){RejectWallPolicyBeforeRecognition<NNeuronTimeLearnerBranch>("generator");}
+
+template<class Learner> void ChangeWallPolicyInObservationSink()
+{
+    EditingRig<Learner> rig(2000,1,"wall_observation_sink",false,2,true);
+    auto plan=TrainingPlan(rig);RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:2u);
+    const auto originalSink=plan.observationSink;std::size_t observations=0;
+    plan.observationSink=[&](const NativeProbeResult& packet) {
+        originalSink(packet);++observations;rig.learner->MaxCalculationDuration=1000000000LL;
+    };
+    const auto old=rig.learner->MaxCalculationDuration.GetData();const auto parameters=rig.learner->ReadNativeParameters();
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,unsigned((rig.duration+.02)*rig.frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();
+    const auto limit=rig.learner->MaxCalculationDuration.GetData();rig.learner->MaxCalculationDuration=old;
+    EXPECT_EQ(observations,1u);EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);
+    EXPECT_EQ(service.Reason(),"unsupported_native_wall_limited_schedule");EXPECT_FALSE(service.Certificate());
+    EXPECT_FALSE(service.References());ASSERT_EQ(service.ObservedPackets().size(),1u);
+    ASSERT_TRUE(service.ObservedPackets().front().observation);
+    // The already-closed observation remains evidence of the prior valid
+    // protocol; the changed current policy cannot borrow it to finish Train.
+    EXPECT_TRUE(service.ObservedPackets().front().observation->valid);
+    EXPECT_TRUE(service.ObservedPackets().front().observation->complete);
+    EXPECT_EQ(limit,1000000000LL);EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    Artifact(rig.name+"_sink_policy_summary.json",QJsonDocument(QJsonObject{
+        {"kind","native_wall_observation_sink_policy"},{"schema_version",1},
+        {"observed_packets",double(service.ObservedPackets().size())},
+        {"outcome",TrainingStatusName(service.Outcome())},{"reason",QString::fromStdString(service.Reason())},
+        {"certificate",bool(service.Certificate())},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(NativeWallSchedule,ClassicObservationSinkChange){ChangeWallPolicyInObservationSink<NNeuronTimeLearner>();}
+TEST(NativeWallSchedule,BranchObservationSinkChange){ChangeWallPolicyInObservationSink<NNeuronTimeLearnerBranch>();}
 }
