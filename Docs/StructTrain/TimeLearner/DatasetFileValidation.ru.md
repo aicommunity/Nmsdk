@@ -63,7 +63,18 @@ SilenceGenerators при FileLoadResult::Invalid в PrepareDataset. Послед
 принятая матрица сохраняется для диагностики; старый сигнал не должен
 продолжать предъявляться. Native Build/Reset восстанавливает playback при
 валидном файле. Bool lifecycle не меняется; nested Calculate и модификация
-storage prototypes не добавлены. Исправление пока ожидает повторной проверки.
+storage prototypes не добавлены.
+
+Normal integrated B1 завершён:53/53 native,17/17 readers PASS, evidence
+`5c94d5490be958145989c5d019015c6acd0ccd51`, проверены261 members/3 047 522 bytes.
+Normal baseline A2 `e4f4a1fa7e349ced8f1f736e01717e84b0de614c` имеет полный
+inventory53 и ровно2 hot-reload failures; проверены257 members/3 047 513 bytes.
+Все83 остальных CSV побайтно равны. В каждом из двух hot CSV изменились
+исключительно3 invalid-phase samples: input1→0. Валидное исходное и recovery
+расписание сохранено. Поимённые hashes и changed cells — в Reports/StructTrain/
+TimeLearner/s03-dataset-invalid-reload-normal-comparison-b1/comparison.json.
+ASan baseline и повторный B1 ещё выполняются последовательно; приёмка в develop
+до их завершения не назначена.
 
 Два отказа fixture A1 (неверный include) сохранены: M40
 `924a2ec3b2af48c7bb1d724412f148458ec2d6da`, Elder
