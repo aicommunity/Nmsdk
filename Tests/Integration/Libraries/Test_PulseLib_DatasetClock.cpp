@@ -318,8 +318,8 @@ void Scheduling(unsigned sourceFrequency)
     core.environment->DestroyModel();Require(core.environment->CreateModel("NModel"),"dispatch root unavailable");
     auto model=dynamic_pointer_cast<UNet>(core.environment->GetModel());Require(bool(model),"dispatch root type differs");
     model->SetEnvironment(core.environment);model->SetGlobalTimeStep(2000);
-    UEPtr<ObservedDataset> dataset=new ObservedDataset;
-    dataset->SetEnvironment(core.environment);dataset->Default();dataset->Name="Dataset";
+    UEPtr<ObservedDataset> dataset(new ObservedDataset);
+    dataset->SetStorage(core.storage);dataset->SetEnvironment(core.environment);dataset->Default();dataset->Name="Dataset";
     MDMatrix<double> values;values.Assign(2,1,0.);values(0,0)=.01;values(1,0)=.04;
     MDMatrix<int> labels;labels.Assign(1,1,1);
     dataset->MaxSpikesPerFeature=2;dataset->MatrixData=values;dataset->MatrixClasses=labels;
