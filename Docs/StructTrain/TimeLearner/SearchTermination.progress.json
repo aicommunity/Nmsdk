@@ -1,0 +1,155 @@
+{
+  "kind": "timelearner_search_termination_checkpoint",
+  "accepted_root_develop": "44334e272de8429f29775512a860584c60350899",
+  "root_branch": "codex/timelearner-search-termination",
+  "pulse_branch": "codex/timelearner-search-termination",
+  "pulse_feature": "fca7141178a854c5a2f579e4a195b3a3165340f9",
+  "numeric_root": "24d1beba2bb58982931a62668a3019dd053e20f8",
+  "baseline": {
+    "root": "91a9524b5e4607c5444a2e7ea5fc6a2561cf271f",
+    "worker": "10.245.1.17",
+    "tests": 7,
+    "expected_failures": 4,
+    "controls_passed": 3,
+    "primary": "a2bc9dadba6fb651cc52a5e7918b0125d0eeb25a"
+  },
+  "gates": {
+    "normal": {
+      "primary": "348f15e866f36769b29a20678c6ef0e0897a2961",
+      "cpp_tests": 46,
+      "reader_cases": 4,
+      "archive_members": 114,
+      "archive_bytes": 95560
+    },
+    "asan": {
+      "primary": "f3061e974e3e134ba0900e80e53a1c02dc14015d",
+      "cpp_tests": 46,
+      "reader_cases": 4,
+      "archive_members": 114,
+      "archive_bytes": 98336
+    }
+  },
+  "probe_packets_each": 32,
+  "trial_soma_pairs_each": 48,
+  "native_scope": "internal native API; singleton physical bounds, sync0 deliberately negative, N2/f2000; not full configured V2 or legacy A/B",
+  "active_jobs": [
+    {
+      "worker": "10.245.1.17",
+      "path": "readbacks/s07-s04-integrated-asan-a2",
+      "owner_pid": 1745907,
+      "start_ticks": "268723161",
+      "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+      "maximum_wall_seconds": 21600,
+      "action": "corrected actual163 gate; do not change source/build/runtime; inspect committed owned process and result before follow-up"
+    }
+  ],
+  "feature_accepted_in_develop": false,
+  "remaining": [
+    "Finish current ASan163-a2; independently audit and publish complete primary. Normal163 and both public14/6/2 plus reader28 are closed and published.",
+    "Complete strict declared raw observation inventory, full temporal reports for integrated163/transfer controls and wall/inherited raw Reset diagnostics; baseline32/48 and selected24 review already complete.",
+    "Extend saved nonexact replay to remaining inputs, recognition and additional physics/frequency/dimensions; current four A14 input0 controls passed on both workers.",
+    "Complete public diagnostic evaluation for stopped models; default completed-Train recognition must keep rejecting them.",
+    "Complete scoped combined acceptance before child-first/root-last develop merges; full original stages0-12 and mandatory matrix remain open.",
+    "Quantized/best_effort, broader physics/modes/history/property review/scripts/queues/scientific experiments and documentation remain mandatory."
+  ],
+  "whole_plan_complete": false,
+  "scientific_verdict": null,
+  "configured_normal": {
+    "numeric_root": "24d1beba2bb58982931a62668a3019dd053e20f8",
+    "primary": "946fbb10ec11d19d1677547501023db29d7634b8",
+    "tests": 34,
+    "passed": 30,
+    "failed": 4,
+    "status": "negative gate; default-boundary certificate expectation incompatible with BudgetExhausted"
+  },
+  "diagnostic_transport_fixture_attempt": {
+    "numeric_root": "575046be521cdc26507bd52f5b85ceb29f46d3bd",
+    "primary": "dfbe623c510c5b2ab831e4584bc73d2e626e8e4f",
+    "tests": 5,
+    "failed": 5,
+    "reason": "incorrect post-Reset fixture expectations",
+    "correction_root": "5e299dedfd10985cce3bca8da04b70acbe3a4432",
+    "correction_status": "scoped five-case gate passed on both workers; combined candidate has additional strengthened checks not yet accepted"
+  },
+  "separate_search_feature": "63fd7a9fecbc567fb8e5c690ae58fc73a896de65",
+  "integrated_candidate_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+  "integrated_gate_spec": "Scripts/StructTrain/TimeLearner/specs/integrated-wall-search-native-v1.json",
+  "integrated_expected_tests": 163,
+  "configured_asan": {
+    "numeric_root": "24d1beba2bb58982931a62668a3019dd053e20f8",
+    "primary": "e6a42403fabe970db55130dae35de4aa4cd6da4c",
+    "tests": 34,
+    "passed": 30,
+    "failed": 4,
+    "status": "negative gate; same four certificate expectation failures as normal"
+  },
+  "diagnostic_transport_normal": {
+    "numeric_root": "5e299dedfd10985cce3bca8da04b70acbe3a4432",
+    "primary": "f80a5f3f71fdaabbe38a1d2bb12d67ac8318d6d0",
+    "tests": 5,
+    "passed": 5,
+    "diagnostic_budget": 4,
+    "explicit_point2_exact_completed": 1,
+    "frozen_fresh_process_csv_equal": 5
+  },
+  "temporal32": {
+    "publication": "cc0c6c6d6abfdb1583b2aa4f14503698f6049ce6",
+    "normal_asan_equivalence": "fbed495970d5fdce1f279c613425bcbf01ac73b1",
+    "cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s07-search-termination-asan-a1",
+    "trials": 32,
+    "trial_soma_pairs": 48,
+    "pngs": 288,
+    "selected_directly_reviewed_pngs": 24,
+    "full_manual_visual_acceptance": false
+  },
+  "diagnostic_transport_asan": {
+    "numeric_root": "5e299dedfd10985cce3bca8da04b70acbe3a4432",
+    "primary": "461cc58deda8f8d1b026fa3564591d1bd2882926",
+    "tests": 5,
+    "passed": 5,
+    "diagnostic_budget": 4,
+    "explicit_point2_exact_completed": 1,
+    "frozen_fresh_process_csv_equal": 5,
+    "libasan_loaded": true
+  },
+  "integrated_normal": {
+    "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+    "primary": "3cc20c1449d67b443e440a09b474d6b0eb54b15a",
+    "tests": 163,
+    "passed": 163,
+    "native_gate_reader_tests": 7,
+    "archive_members": 1793,
+    "archive_bytes": 8965180,
+    "raw_payload_audit": "pending complete declared inventory and temporal reports"
+  },
+  "integrated_public_preflight": {
+    "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+    "normal_primary": "3cc20c1449d67b443e440a09b474d6b0eb54b15a",
+    "asan_primary": "4b4498a67815633335328a27e44e4d2787ad0fcf",
+    "positive_each": 14,
+    "negative_each": 6,
+    "one_tick_train_each": 2,
+    "reader_each": 28,
+    "reader_source": "7577b97e1afd1f3aef8346f9d0ad04c56d465c9b",
+    "first_reader_attempt": "27/28 each; inherited child CLI discovery depended on cwd; corrected test executes from foreign cwd with explicit PYTHONPATH"
+  },
+  "legacy_completed_replay": {
+    "driver": "b499bb9224666ff90e999f8d7c82121c7ca2d127",
+    "reader": "e641218f917c9227e44287af307d3b97f865f309",
+    "normal_primary": "f6a975f0aab5113f86855a26f170cb0060f21ea6",
+    "asan_primary": "1c7ee355b13323b43594eeef36e6bf37dba355a6",
+    "native_cases_each": 4,
+    "reader_tests_each": 5,
+    "scope": "A14 saved nonexact completed Classic/Branch x N0/N1; active input0, all recorded soma channels; full frozen CSV byte equality; not all inputs, recognition or legacy learning dispatcher"
+  },
+  "interrupted_integrated_asan_a1": {
+    "primary": "bdebe7cd4686c93358ef326b13686894ecef1ec1",
+    "reason": "incorrect7200s CI budget, below measured9447.088s inherited16 baseline alone; verified owned pidfd SIGTERM, no physical/configuration change",
+    "execution": "process_error",
+    "returncode": -15,
+    "validity": "incomplete_test_observation",
+    "assertion_status": "not_assessed",
+    "archive_members": 424,
+    "archive_bytes": 1209742
+  }
+}

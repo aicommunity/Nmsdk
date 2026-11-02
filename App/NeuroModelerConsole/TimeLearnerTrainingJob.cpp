@@ -3,6 +3,7 @@
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeLearnedState.h"
+#include "TimeLearner/NativeCalculationPolicy.h"
 #include "TimeLearner/NativeLiveFinalization.h"
 #include "NNeuronPostTrainTune.h"
 #include <iomanip>
@@ -225,6 +226,7 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
         auto plan=MakeConfiguredNativeTrainingPlan(job.configuration);
         plan.search.initialModelRevision=initial["sha256"].toString().toStdString();
         ValidateBoundedTrainingInputs(plan.protocol,plan.search,parameters);
+        NMSDK::TimeLearner::RequireNativeCalculationSchedule(*owner);
         const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());
         Require(integration.valid,integration.reason.c_str());
         const auto& control=owner->NativeTrainingController();

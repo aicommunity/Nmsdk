@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_legacy_completed_replay_scoped_acceptance",
+  "schema_version": 1,
+  "numeric_root": "07167d55125ced4eeff72703a718203e8c90bfc7",
+  "pulse": "fca7141178a854c5a2f579e4a195b3a3165340f9",
+  "driver": "b499bb9224666ff90e999f8d7c82121c7ca2d127",
+  "reader": "e641218f917c9227e44287af307d3b97f865f309",
+  "cases_each_worker": 4,
+  "reader_tests_each_worker": 5,
+  "native_skips": 0,
+  "reader_skips": 0,
+  "normal": {
+    "commit": "f6a975f0aab5113f86855a26f170cb0060f21ea6",
+    "verified_members": 88,
+    "archive_bytes": 274649
+  },
+  "asan": {
+    "commit": "1c7ee355b13323b43594eeef36e6bf37dba355a6",
+    "verified_members": 88,
+    "archive_bytes": 287604
+  },
+  "original_evidence_commit": "0b556b9dde5338625525707eee2ad96956e4c237",
+  "archive_snapshot_commit": "07167d55125ced4eeff72703a718203e8c90bfc7",
+  "scope": "A14 saved nonexact completed Classic/Branch x N0/N1; active input0, all recorded soma channels; full frozen CSV byte equality; not all inputs, recognition or legacy learning dispatcher",
+  "primary_outer_archive_member_hashes_verified": true,
+  "full_stage5_complete": false,
+  "scientific_verdict": null
+}

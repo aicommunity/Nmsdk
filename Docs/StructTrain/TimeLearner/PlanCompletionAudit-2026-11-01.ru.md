@@ -1,5 +1,11 @@
 # Состояние полного плана TimeLearner — 01.11.2026
 
+Последующее дополнение: [срез02.11 по полноте временных данных](CurrentStatus-2026-11-02.ru.md).
+Обновление02.11: ASan163/163 и recording18/18 завершены, primary readers32/32;
+сигналы совпали с normal temporal sources. Адресная приёмка search/scheduling/
+diagnostic/ranking: [scope](SearchDiagnosticAcceptance-2026-11-02.ru.md). Состояния
+исходных этапов0–12 этим адресным подэтапом не меняются.
+
 Эта сводка описывает исходные этапы0–12, а не количество завершённых подэтапов.
 Нормативный объём сохраняет [план](RefactoringPlan.ru.md). Полностью принят
 этап0; остальные этапы выполнены частично. Научное8/8 не является условием
@@ -248,3 +254,78 @@ Primary и exact compatibility inputs доступны в Git, hashes прове
 [Источники и границы](StructuredTrainingExit.ru.md). Это частичное завершение
 конкретного дефекта этапа10 и переноса active regression tool в этап9,
 а не полный scheduler/publisher или весь исходный план0–12.
+
+### Историческая запись wall-кандидата 486955b7 (до завершения integrated gate)
+
+## Дополнение 2026-11-02: подтверждённые ограниченные изменения
+
+Accepted root develop: `0c12a71757d4eb34412f043028f56edfa38ba974`.
+Rdk develop: `eda206b6b35de451ae837473d731ba20e7c30bde`.
+Закрыты normal/ASan native16, Math6 и reader7 для Activity/local-frequency
+реальных fixtures. Все48 положительных проб /72 soma pairs сравнены между
+workers; потенциалы совпали. Проверенные отчёты и границы находятся в
+`InheritedPropertyRuntime.ru.md`, progress JSON и NormalAsanComparison.
+Это частичное усиление этапов3/4/12, не весь lifecycle/storage или алгоритм.
+
+В feature ветке wall-policy66/66 и строгий reader10/10 на обоих workers;
+46 packets имеют объявленные разные исходы,4 Reset traces не считаются
+закрытыми пробами. Full cache141 PNG на M40,18 выбранных просмотрены.
+В develop эти изменения ещё не приняты: integrated74+Math6 выполняется,
+публичный Console preflight и оставшаяся приёмка открыты. См.
+`NativeWallSchedule.ru.md` / progress / VisualQA с точными SHA и job identities.
+
+Статусы полного плана0–12 этим дополнением не повышаются до complete:
+остаются полная история/evidence review, матрица lifecycle/storage/physics,
+весь Train→Test и режимы финализации/калибровки, алгоритмы и статусы поиска,
+legacy/V2 A/B, миграция оставшихся scripts, production scheduler/leases и
+fault matrix публикации, независимые order/ITI эксперименты и сквозная docs.
+Научного нового результата разделимой классификации здесь не получено.
+
+Уточнение при объединении feature branches: integrated74+Math6 и public preflight уже завершены на обоих workers; их данные входят в StructuredTrainingExit.ru.md. Принятый root develop теперь44334e272de8429f29775512a860584c60350899. Объединение wall-policy и search-termination выполняется только в feature branch; оно не означает приёмку алгоритмических изменений в develop. Новое совместное состояние требует отдельной сборки и адресных gates.
+
+## Подэтап 02.11: native gates, перенос и временные отчёты
+
+В develop44334e272 принят maintained native-gate: positive2 и reader7 на обоих
+workers; failed JUnit не становится PASS. Полный configured34 прежней search
+feature завершился30/34 на обоих, с одинаковыми четырьмя ожиданиями сертификата
+после sweep budget. Эти отрицательные gates сохранены. Исправленный diagnostic
+transport4 + named Exact completed control1 прошёл5/5 на Elder, с равенством
+frozen/fresh-process CSV; его ASan5 ещё работает.
+
+Все32 закрытые training probes имеют48 soma/input пар и288 PNG в M40 Data;
+24 selected original-resolution графика просмотрены. Normal/ASan32 CSV
+идентичны, strict canonical packets идентичны; ledger связывает их с общим
+visual cache. Git содержит сжатые primary, hashes и выбранные рисунки.
+Это не классификация восьми паттернов и не полный ручной просмотр288 PNG.
+
+Pulse fca7141/root07167d551 — совместный feature candidate, не принятый
+алгоритмический develop. Его163 source-declared tests нужны после server build.
+Явный Reset очищает control; граф проверяется отдельно, immutable stopped
+export сохраняется до Reset. Допуски не расширялись.
+
+Полностью закрытым этапом исходного плана остаётся только0. Этапы1–12 частичны:
+полные evidence/property review и lifecycle/storage/physics, saved legacy и
+весь Train→Test, legacy/V2 A/B и режимы алгоритмов, finalization/calibration,
+миграция scripts, scheduler/leases и публикация со сбоями, научные order/ITI/
+frozen матрицы и сквозная документация. SHA/отрицательные попытки/owned jobs:
+SearchTermination.ru.md, SearchTermination.progress.json, SearchTerminationVisualQA.json.
+
+Последующее уточнение: ASan5 также прошёл5/5, primary461cc58deda8f8d1b026fa3564591d1bd2882926
+полностью проверен после Git fetch. Scoped transport root5e299dedf закрыт на
+обоих workers. Новый combined root07167d551 всё ещё проверяется: Elder163
+выполняется, M40 build выполняется. Общие статусы этапов0–12 не меняются.
+
+Позднейший подтверждённый checkpoint: combined root07167d551 прошёл163/163
+на Elder, JUnit readers7/7. Public Console на обоих:14+6+2, readers28/28;
+данные и exact compatibility inputs опубликованы и проверены. Новый
+saved-nonexact completed replay:4 модели/input0 +5 readers на worker,
+model hash/certificate и весь golden CSV сохранены. Это не полная проверка
+legacy training/recognition или всех входов. Полные SHA и ограничения —
+SearchTermination.progress.json / LegacyCompletedReplay.validation.json.
+
+ASan163-a1 прерван из-за ошибочного общего CI budget7200<9447.088s старого
+inherited16 baseline. Частичные данные и -15 exit сохранены; новая ASan-a2
+с21600s пока выполняется. Не принимать её заранее. Full payload/temporal
+acceptance нового163 и широкая матрица планов всё ещё открыты. Stage0 остаётся
+единственным полностью завершённым этапом0–12; версии2 в целом не присваивается
+статус рекомендуемой по этим узким gates.

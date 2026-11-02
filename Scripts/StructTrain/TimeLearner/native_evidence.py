@@ -333,6 +333,25 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     return repeats
 
 
+def measured_training_probe(packets, trial, input_id, origin_stimulus_id, selections):
+    """Shared measured arrival relative to the declared whole-burst origin."""
+    require(trial in packets, "missing_trial:" + trial)
+    packet = packets[trial]
+    observation = packet["observation"]
+    require(packet["native_status"] == "completed" and isinstance(observation, dict) and
+            observation["complete"] is True and observation["valid"] is True, "unusable_measurement")
+    selection = observation["specification"].get("peak_selection", "isolated_window")
+    require(selection in {"isolated_window", "assigned_burst_wave"}, "unknown_peak_selection")
+    selections.add(selection)
+    require(len(selections) == 1, "training_peak_selection_changed")
+    require(packet["prepared"]["input_id"] == input_id, "measured_input_mismatch")
+    peaks = [p for p in observation["peaks"] if p["input_id"] == input_id]
+    origins = [event for event in observation["stimuli"] if event["id"] == origin_stimulus_id]
+    require(len(peaks) == len(origins) == 1 and peaks[0]["validity"] == "valid", "missing_peak_or_protocol_origin")
+    peak, origin = peaks[0], number(origins[0]["time"])
+    return packet, number(peak["raw_potential"]), number(peak["time"]) - origin, number(peak["plateau_end"]) - origin
+
+
 def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
                            origin_stimulus_id: str) -> dict[str, Any]:
     """Compare exported certificate/candidates with independently audited probes.
@@ -357,21 +376,7 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
     selections: set[str] = set()
 
     def measured(trial: str, input_id: str) -> tuple[dict[str, Any], float, float, float]:
-        require(trial in packets, "missing_trial:" + trial)
-        packet = packets[trial]
-        observation = packet["observation"]
-        selection = observation["specification"].get("peak_selection", "isolated_window")
-        require(selection in {"isolated_window", "assigned_burst_wave"}, "unknown_peak_selection")
-        selections.add(selection)
-        require(len(selections) == 1, "training_peak_selection_changed")
-        require(packet["native_status"] == "completed" and observation is not None and
-                observation["complete"] is True and observation["valid"] is True, "unusable_measurement")
-        require(packet["prepared"]["input_id"] == input_id, "measured_input_mismatch")
-        peaks = [p for p in observation["peaks"] if p["input_id"] == input_id]
-        origins = [event for event in observation["stimuli"] if event["id"] == origin_stimulus_id]
-        require(len(peaks) == len(origins) == 1 and peaks[0]["validity"] == "valid", "missing_peak_or_protocol_origin")
-        peak, origin = peaks[0], number(origins[0]["time"])
-        return packet, number(peak["raw_potential"]), number(peak["time"]) - origin, number(peak["plateau_end"]) - origin
+        return measured_training_probe(packets, trial, input_id, origin_stimulus_id, selections)
 
     for ref in refs:
         input_id = ref["input_id"]

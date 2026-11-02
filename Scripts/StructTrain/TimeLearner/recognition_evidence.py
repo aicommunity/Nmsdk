@@ -87,17 +87,21 @@ def _audit_post_tune(spec: dict, record: dict, expected_model: dict, parameters:
     return result
 
 
-def _audit_derivation(package: dict, source_case: tuple) -> dict:
+def _audit_derivation(package: dict, source_case: tuple, *, diagnostic=False) -> dict:
     require(set(package) == {"kind", "schema_version", "dynamic_checkpoint", "state_kind", "implementation_id",
                             "source_solo", "conversion_spec", "conversion_record", "recognition_inputs", "model_revision",
                             "recognition_certificate", "dataset", "neuron", "sha256"}, "recognition_field_set_mismatch")
-    require(package["kind"] == "timelearner_recognition_state" and type(package["schema_version"]) is int
-            and package["schema_version"] == 1 and package["state_kind"] == "recognition"
+    require(package["kind"] == ("timelearner_diagnostic_recognition_state" if diagnostic else "timelearner_recognition_state") and type(package["schema_version"]) is int
+            and package["schema_version"] == 1 and package["state_kind"] == ("diagnostic_recognition" if diagnostic else "recognition")
             and package["dynamic_checkpoint"] is False and package["recognition_certificate"] is None,
             "unsupported_recognition_claim")
     _digest(package)
     source, summary, _, _ = source_case
-    source_audit = audit_learned_state(*source_case)
+    if diagnostic:
+        from .stopped_evidence import audit_stopped_state
+        source_audit = audit_stopped_state(*source_case)
+    else:
+        source_audit = audit_learned_state(*source_case)
     require(isinstance(package["implementation_id"], str) and bool(package["implementation_id"].strip()), "missing_recognition_implementation")
     require(package["source_solo"] == source and package["implementation_id"] == source["implementation_id"]
             and package["dataset"] == source["dataset"], "recognition_source_mismatch")
@@ -124,8 +128,6 @@ def _audit_derivation(package: dict, source_case: tuple) -> dict:
     n = len(params)
     declaration = source["configuration"]["model"]
     require(type(declaration["branch"]) is bool and n > 0, "invalid_conversion_topology")
-    refs = {item["input_id"]: number(item["raw_potential"]) for item in summary["references"]}
-    amplitudes = [refs[item["id"]] for item in source["protocol"]["inputs"]]
     factors = [1.] * n
     bounds = conversion["resistance_bounds"]
     if mode == "identity":
@@ -133,6 +135,13 @@ def _audit_derivation(package: dict, source_case: tuple) -> dict:
     else:
         require(declaration["branch"] and declaration["normalization"] == "N1" and len(bounds) == n,
                 "unsupported_historical_conversion")
+        if diagnostic:
+            require(source["reference_complete"] is True, "diagnostic_conversion_requires_complete_references")
+            amplitudes = [number(v) for v in source["neuron"]["metadata"]["training"]["captured_per_input"]]
+            require(len(amplitudes) == n, "diagnostic_conversion_reference_dimension")
+        else:
+            refs = {item["input_id"]: number(item["raw_potential"]) for item in summary["references"]}
+            amplitudes = [refs[item["id"]] for item in source["protocol"]["inputs"]]
         if n > 1:
             require(all(value > 0 for value in amplitudes), "nonpositive_conversion_reference")
             mean = 0.
@@ -210,7 +219,7 @@ def _audit_derivation(package: dict, source_case: tuple) -> dict:
             record["source_solo_identity"] == source["model_revision"] and record["result_identity"] == package["model_revision"] and
             record["activated_synapses"] == activated and record["inhibition_policy"] == "preserve_source", "conversion_record_mismatch")
     metadata = copy.deepcopy(source["neuron"]["metadata"])
-    metadata["state_kind"], metadata["recognition_schema_version"] = "recognition", 1
+    metadata["state_kind"], metadata["recognition_schema_version"] = ("diagnostic_recognition" if diagnostic else "recognition"), 1
     metadata["training"]["scope"] = "source_solo"
     metadata["calibration"]["protocol"] = "fixed-inherited-from-solo"
     metadata["calibration"]["source_solo_sha256"] = source["sha256"]

@@ -1,0 +1,1 @@
+Actual corrected seven-case ASan baseline: four sweep-budget classification failures and three independent controls passed. Production decision controller/recorder; no native physical dynamics or classification inference. Prior publication ref-name collision and dependent-gate no-start failure are preserved; sources unchanged.

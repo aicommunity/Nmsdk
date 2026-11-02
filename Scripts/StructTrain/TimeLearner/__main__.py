@@ -120,16 +120,26 @@ def main(argv: list[str] | None = None) -> int:
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
     gate.add_argument("--output", type=Path, required=True)
+    replay = commands.add_parser("legacy-completed-replay", help="replay pinned saved nonexact completed states without retraining")
+    replay.add_argument("specification", type=Path)
+    replay.add_argument("--output", type=Path, required=True)
     regression = commands.add_parser("preflight-regression", help="run the declared public Console regression matrix")
     regression.add_argument("specification", type=Path)
     regression.add_argument("--output", type=Path, required=True)
+    diagnostic = commands.add_parser("diagnostic-regression", help="run declared public stopped-Train diagnostic regressions")
+    diagnostic.add_argument("specification", type=Path)
+    diagnostic.add_argument("--output", type=Path, required=True)
     prepare = commands.add_parser("prepare", help="prepare a declared native cold-job matrix without running models")
     prepare.add_argument("specification", type=Path)
     prepare.add_argument("--output", type=Path, required=True, help="new immutable job matrix directory")
-    for operation in ("train", "preflight", "export", "evaluate"):
+    for operation in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate"):
         native = commands.add_parser(operation, help="run an owned native Console "+operation+" job")
         native.add_argument("specification", type=Path)
-        native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
+        if operation == "diagnostic-evaluate":
+            native.add_argument("--source-stopped", dest="source_solo", type=Path, required=True,
+                                help="stopped package with its original primary trial siblings; never completed Train")
+        else:
+            native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
         native.add_argument("--runtime-manifest", type=Path, required=True)
         native.add_argument("--wall-seconds", type=float, required=True)
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
@@ -195,6 +205,16 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--pulselib-repository", type=Path)
     history.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
+    if args.command == "diagnostic-regression":
+        from .diagnostic_regression import run_diagnostic_regression
+        from .native_evidence import EvidenceError
+        try:
+            print(json.dumps(run_diagnostic_regression(args.specification, args.output), ensure_ascii=False, allow_nan=False))
+            return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_diagnostic_regression_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
     if args.command == "prepare":
         from .prepare import write_prepared_matrix
         from .native_evidence import EvidenceError
@@ -215,6 +235,17 @@ def main(argv: list[str] | None = None) -> int:
             return 0 if result["validity"] == "valid" else 2
         except (EvidenceError, OSError, ValueError) as error:
             print(json.dumps({"validity": "invalid", "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command == "legacy-completed-replay":
+        from .legacy_completed_replay import run_legacy_completed_replay
+        from .native_evidence import EvidenceError
+        try:
+            result = run_legacy_completed_replay(args.specification, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result["assertion_status"] == "passed" else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_legacy_completed_replay_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     if args.command == "native-gate":
         from .native_evidence import EvidenceError
@@ -237,7 +268,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"kind": "timelearner_preflight_regression_error", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
-    if args.command in ("train", "preflight", "export", "evaluate"):
+    if args.command in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate"):
         from .native_evidence import EvidenceError, require
         from .native_pipeline_worker import run_job
         try:
