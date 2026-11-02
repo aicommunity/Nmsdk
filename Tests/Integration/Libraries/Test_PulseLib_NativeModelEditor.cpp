@@ -450,7 +450,7 @@ template<class Learner> void ColdModel(unsigned frequency,int neuronMode,int lea
     EXPECT_EQ(rig.learner->StructureBuildMode.GetData(),learnerMode);
     const auto first=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
     ASSERT_EQ(first.status,NativeProbeStatus::Completed);ASSERT_TRUE(first.observation);ASSERT_TRUE(first.observation->valid);
-    const auto oldNeuron=rig.neuron.Get();auto injected=std::make_shared<std::pair<bool,double>>(false,0.);
+    const auto oldNeuron=rig.neuron.Get();
     const auto oldDataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get();
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
     auto lt=rig.neuron->template GetComponentL<NPulseChannel>("LTMembrane.ExcChannel",true);ASSERT_TRUE(lt);
@@ -856,6 +856,7 @@ template<class Learner> void NativeJointCapacitanceCandidate(int normalization,b
     }
     else candidate[0].synapses=3;
     const auto oldNeuron=rig.neuron.Get();
+    auto injected=std::make_shared<std::pair<bool,double>>(false,0.);
     if(fault)
     {
         auto failing=dynamic_cast<CapacitanceResetFaultNeuron*>(rig.neuron.Get());ASSERT_TRUE(failing);
