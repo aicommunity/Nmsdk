@@ -157,7 +157,7 @@ def audit_dataset_clock(specification, artifacts):
             primary.update(t['stem']+'.'+extension for t in trials for extension in ('json', 'csv'))
             cases.append({'condition': condition, 'trials': trials, 'differences': differences, 'invariant': passed,
                           'pulse_program_passed': program_passed, 'cpp_passed': cpp_passed,
-                          'cpp_assertion_contract_verified': versions == {2} or (not passed and not cpp_passed) or cpp_passed})
+                          'cpp_assertion_contract_verified': versions == {2}})
         actual = {p.name for p in native.glob('dataset_clock_*')}
         require(actual == primary, 'dataset_clock_unrecorded_or_extra_primary')
         return {'cases': cases, 'reported_test_ids': expected, 'source_gate_inventory': inventory,
