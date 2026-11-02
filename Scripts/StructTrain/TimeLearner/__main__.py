@@ -126,6 +126,9 @@ def main(argv: list[str] | None = None) -> int:
     regression = commands.add_parser("preflight-regression", help="run the declared public Console regression matrix")
     regression.add_argument("specification", type=Path)
     regression.add_argument("--output", type=Path, required=True)
+    diagnostic = commands.add_parser("diagnostic-regression", help="run declared public stopped-Train diagnostic regressions")
+    diagnostic.add_argument("specification", type=Path)
+    diagnostic.add_argument("--output", type=Path, required=True)
     prepare = commands.add_parser("prepare", help="prepare a declared native cold-job matrix without running models")
     prepare.add_argument("specification", type=Path)
     prepare.add_argument("--output", type=Path, required=True, help="new immutable job matrix directory")
@@ -202,6 +205,16 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--pulselib-repository", type=Path)
     history.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
+    if args.command == "diagnostic-regression":
+        from .diagnostic_regression import run_diagnostic_regression
+        from .native_evidence import EvidenceError
+        try:
+            print(json.dumps(run_diagnostic_regression(args.specification, args.output), ensure_ascii=False, allow_nan=False))
+            return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_diagnostic_regression_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
     if args.command == "prepare":
         from .prepare import write_prepared_matrix
         from .native_evidence import EvidenceError
