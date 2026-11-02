@@ -1,0 +1,179 @@
+{
+  "kind": "inherited_runtime_setup_failures",
+  "worker": "normal",
+  "initial_test_setup_error": "protected_SetTimeStep_called_instead_of_public_property",
+  "confirmed_owner_defect": "MVector3_stream_nonexistent_xyz_fields",
+  "clean_baseline_root": "cc9b29421b7a7d538dcafe7899ef70965e3ae167",
+  "baseline_rdk": "0a1c1d05a1b12de20feabf54a25712e210865791",
+  "expected_compile_failure_reproduced": true,
+  "runtime_tests_started": false,
+  "records": [
+    {
+      "path": "s01-inherited-native-normal-a1/build.log",
+      "bytes": 22137,
+      "sha256": "72814daf0d764ae66c900b5b789a6517803751f606771fead239f7576fea89fc"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/checkout-Nmsdk-Bin.log",
+      "bytes": 196,
+      "sha256": "e22fb61149c3a3d7fc98bf1e07ca29eca34847e61f2bd719a0caef67e9be1804"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/checkout-Nmsdk-PulseLib.log",
+      "bytes": 219,
+      "sha256": "efca225b548d79d4b001275c98a24f7860fc1541d4f47637894f8ab1f543bddd"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/checkout-Rdk.log",
+      "bytes": 87,
+      "sha256": "100dda4372f84375ada7dd8ec7bb2b32595e8a0db0d22beaf082caf3ecf228f6"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/checkout-root.log",
+      "bytes": 237,
+      "sha256": "d5dda367b3f9ad980423c1b58bfa093c73b93662959d4ee83dba1d2cbb53e132"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/configure.log",
+      "bytes": 1225,
+      "sha256": "20c593a875150784a3bf16188285a8eb9db4c2fd61b0e2d81ca3702286e73e36"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/exception.json",
+      "bytes": 540,
+      "sha256": "a22487747c44f0b42f56dcbf9100de68f4482380b2e68217669780f1ee1c1495"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/fetch-Nmsdk-Bin.log",
+      "bytes": 124,
+      "sha256": "3e9aff61521a536ee5a5d14bc43f1043b337c8a307414a15dddd91ccf011a4ed"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/fetch-Nmsdk-PulseLib.log",
+      "bytes": 127,
+      "sha256": "3cbbf80fcca071bf22cecf77e32c14d81c0fb77c55c73cb793d94a7739548307"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/fetch-Rdk.log",
+      "bytes": 118,
+      "sha256": "b7e98774342dc57feaca4c86df42012e3ee835464e22a11e915095dcb9369cf9"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/fetch-root.log",
+      "bytes": 122,
+      "sha256": "eb98ff71f766227202bf33edfdb45aecfd6bc6a349b7075ad64fd59e886a2277"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/job.py",
+      "bytes": 5469,
+      "sha256": "a98d4bec892bd0451657db8a864b0f7979d1fb17a154faf5b1b8f685be3b179f"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/pid.json",
+      "bytes": 45,
+      "sha256": "8a21b3347a1a29c0d869755581c6f2578b8bcce6de431ac57fa7db00ac143e29"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/process-guard.json",
+      "bytes": 380,
+      "sha256": "1c06e45d5164daaf376e4b745cd76a8da7e5dcf48079b8ab14cacb17d5224ff1"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/source.json",
+      "bytes": 1304,
+      "sha256": "02ed0f9651de895deb0c48845ad0e1081780725ff6c13e023b0a51eb1c261ef3"
+    },
+    {
+      "path": "s01-inherited-native-normal-a1/supervisor.log",
+      "bytes": 482,
+      "sha256": "f8add333a823fe1b665e48e2a228f752a8c31d28af6f33969aa0eaccce5a9573"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/build.log",
+      "bytes": 7802,
+      "sha256": "7f4fdb51b64886a02c86fdfdf179e0e6f8b53c9f3a9740a38c986d674c721b88"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/checkout-Nmsdk-Bin.log",
+      "bytes": 105,
+      "sha256": "692712e8a574dc16274f9019c4c2eab8208614f40ccfbed6c0eb393954370098"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/checkout-Nmsdk-PulseLib.log",
+      "bytes": 113,
+      "sha256": "cb9ef4d2a2a057ef86d1706643a81a6c833fa5bc2f9f27149afa50e27c8c4dec"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/checkout-Rdk.log",
+      "bytes": 87,
+      "sha256": "100dda4372f84375ada7dd8ec7bb2b32595e8a0db0d22beaf082caf3ecf228f6"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/checkout-root.log",
+      "bytes": 189,
+      "sha256": "5cb6593049ef6d350b31b1266745f62412e4cdafee74d8adcd5b0fe9e9ca43ac"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/configure.log",
+      "bytes": 1225,
+      "sha256": "fef27acb39e42e1583393e550a0afde82a179d3b49315f4cfe6b2ffd37750a09"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/fetch-Nmsdk-Bin.log",
+      "bytes": 124,
+      "sha256": "3e9aff61521a536ee5a5d14bc43f1043b337c8a307414a15dddd91ccf011a4ed"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/fetch-Nmsdk-PulseLib.log",
+      "bytes": 127,
+      "sha256": "3cbbf80fcca071bf22cecf77e32c14d81c0fb77c55c73cb793d94a7739548307"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/fetch-Rdk.log",
+      "bytes": 118,
+      "sha256": "b7e98774342dc57feaca4c86df42012e3ee835464e22a11e915095dcb9369cf9"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/fetch-root.log",
+      "bytes": 122,
+      "sha256": "6eea5c26620b5e1804fd42a95f3088240378db40737ecfc4865fe542fee07894"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/job.py",
+      "bytes": 5100,
+      "sha256": "a175120760ba31d48311b3e75e5034f8a4917086a1543187ac0acf8a8b1536fd"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/pid.json",
+      "bytes": 45,
+      "sha256": "7fead31360057ec80af06a6cf8ed2dc1a7ce7df950ff85174389d1fdd5e8ffc0"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/process-guard.json",
+      "bytes": 380,
+      "sha256": "1c06e45d5164daaf376e4b745cd76a8da7e5dcf48079b8ab14cacb17d5224ff1"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/source.json",
+      "bytes": 1304,
+      "sha256": "a4a3b073d331df761d5c6abf9f5bc1e0d9e1bba48783984fcbaaeb2337372b58"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/supervisor.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/terminal.json",
+      "bytes": 87,
+      "sha256": "3ed7cdf27a509742d91b5045019e841bf2aaeaf23fee492ee54dfb58e6b7e604"
+    },
+    {
+      "path": "s01-vector-stream-baseline-normal-a2/validation.json",
+      "bytes": 316,
+      "sha256": "29447019ad21bbb3b6d920cdaa7951aaba45e40c4b0c83e013d251a2b960c978"
+    }
+  ],
+  "archive_sha256": "8d9c1a7434738952832a7d2e06a4d998214214b7c5a6d70ed1998256a0c67f10",
+  "scientific_verdict": null
+}
