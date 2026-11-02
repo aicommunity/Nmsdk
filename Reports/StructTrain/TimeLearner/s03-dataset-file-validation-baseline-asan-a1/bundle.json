@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_dataset_file_validation_baseline_evidence",
+  "schema_version": 1,
+  "root": "a2ad6ec294933abc6e55fdac8e30a923aa9be961",
+  "pulselib": "5cbb877bbabaab88f4bf7bb04e4c846598744884",
+  "rdk": "a62393f7791cc4ad10d1c2c11f255b3db3334f89",
+  "statuses": {},
+  "actual_libasan_mappings_verified": false,
+  "acceptance_status": "incomplete_or_failed",
+  "archive_sha256": "72023c544aa6fe5d4d490c5a1880b75537775f32687aad864b500e160fd85ae5",
+  "archive_bytes": 18839,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/CMakeCache.before.txt": "35cb92f959cf4429af8c5fe1be33b39dc32eb9c0ee70b39f10e1e021277fdcde",
+    "gate/build-request.json": "f1f8383a80f75ee9025f5fab5c2365b460e6147bd4591eedea0f68528f212dec",
+    "gate/build.log": "4bb41e199b8a704051764238762100b17cb11fc9de6d8d1c1121c530f7a05a3d",
+    "gate/checkout-Nmsdk-PulseLib.log": "6e245476883766ca023acc9bfd5eea8d974e293287d671e0c4547efb0d27391a",
+    "gate/checkout-Rdk.log": "88c90b8f96eb0dfb1ffd68b3de61bf0d19951534ab773f671fcb0302f6849e90",
+    "gate/checkout.log": "692e29ecea1582b37cad9526860a67ee8807ce175d3edc1176805a234023fc29",
+    "gate/configure.log": "a944cd93a92aeb031cb852930dc9ac4f72506190bac7c0e0dceed69dc1895a68",
+    "gate/exception.json": "a56ed0bffcc711a9c506043b659c9c8a8f0c4555be93641356e9f556e0542208",
+    "gate/fetch-Nmsdk-PulseLib.log": "176d7ee2e00d899c88006aab7da763bc90fc85289b0d61a96b9b9a39e4909804",
+    "gate/fetch-Rdk.log": "7a20ba5afb06ce5cadf692a5355fc951c9b2aa53664981903c58a767a04e8fc5",
+    "gate/fetch.log": "c92d8288d241550a6839143bfddb57493f8780ef0e6c21d7ddeddc89b6ba604a",
+    "gate/owned-supervisor.json": "3434c3460f4df9e676714daf59543d9abd619acd7287c5bdd1a8feaf19ed8820",
+    "gate/prerequisite-verification.json": "6cb196ae3d9d55cb95faf16f168851892b5c8af430f22a3eb3274302167f965f",
+    "gate/process-guard.json": "01a2f0e4c6328d33aff13ead7cd0ca2de12d68f594b5f11a05a143f7938bff16"
+  },
+  "scope": "M40 actual NDataset storage/Build22 cold file validation cases on unchanged permissive parser. Expected failing assertions reproduce corrupt-token acceptance; no assertion weakening and no scientific classification. Gate schema1 has no cooperative handshake; missing loaded mapping remains invalid.",
+  "scientific_verdict": null
+}
