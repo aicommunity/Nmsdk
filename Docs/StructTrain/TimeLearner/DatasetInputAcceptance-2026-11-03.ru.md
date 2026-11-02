@@ -3,6 +3,10 @@
 Scope — строгий parser и отказ горячего reload без продолжения прежнего сигнала.
 Полные этапы3/4/9 и весь исходный план остаются частичными.
 
+Pulse develop merge `5a5256577a5f708742befb0b87aedeb575c324e2` опубликован;
+его Core побайтно совпадает с проверенным6a60f5c. Удалённая достижимость merge
+подтверждена до записи gitlink и публикации корневого develop.
+
 Parser использует full-token locale-independent conversion, integer range и
 finite double проверки, точное число полей и проверенную MaxSpikes metadata.
 Транспортные BOM/whitespace/CRLF и оба штатных layout поздних slots сохраняются.
