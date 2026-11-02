@@ -1,3 +1,5 @@
+> Исторический снимок плана и команд от20.10.2026. Инструменты удалены из текущего дерева; их точные исходники: [Git snapshot](https://github.com/aicommunity/Nmsdk/tree/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools). Действующий план и причины миграции: [реестр](../../../../../StructTrain/TimeLearner/PlanToolRetirement.ru.md). Старые команды не являются текущей инструкцией запуска.
+
 # B1. Исправление источника дефекта A15 в Bin (`repro_cold_lib.py`)
 
 **Цель:** функции `fix_generator_tip_links`, `fix_branch_tip_links` и `rewrite_links_to_tip1` больше не переименовывают `<Item>` связей синапс → канал. Они трогают только `Input`-коннекторы `DatasetMatrix.Generator1` и не оставляют висячих связей.
