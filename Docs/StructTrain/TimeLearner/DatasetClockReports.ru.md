@@ -89,3 +89,17 @@ Baseline A2 завершён; selected evidence
 не подтверждение научной классификации. Global acceptance остаётся false.
 Для исправленного B6 источника строится отдельный cache76 на primary91fd3930;
 его visual review пока pending. Нельзя переносить на него baseline review.
+
+## Fixed B6: прямая проверка выбранных изображений
+
+Cache76 завершён:3888 PNG плюс SVG/PDF, полный набор остаётся на M40 Data.
+Компактный evidence `d416ee157223a5e4ccb8c6906081f061651aa334` содержит16
+selected PNG и сжатые индексы (3 367 040 bytes);21 опубликованный файл проверен.
+Все16 PNG непосредственно просмотрены: readable labels/legends, реальные
+input overlays, native-tick zoom, continuous/timed, near-grid и onset cutoff,
+включая t0=1e9s. [Точный subset и hashes visual review](../../../Reports/StructTrain/TimeLearner/s03-dataset-clock-temporal-fixed-b6-selected-a1/visual-review.json).
+Global acceptance остаётся false; остальные3872 PNG не объявлены просмотренными.
+Это источник с физической сомой, не learner classification matrix или LT-event
+audit. TimeGeneration может обрезать pulse на объявленной границе; complete
+означает полное окно наблюдения, а не обещание полной ширины вне этого режима.
+Между native samples проводится линия; она не доказывает sub-timestep latency.
