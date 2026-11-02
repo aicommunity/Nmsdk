@@ -1,5 +1,29 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Source visual QA и расширенная регрессия 03.11
+
+Fixed B6 report76 завершён:3888 PNG/SVG/PDF в M40 Data cache. Все16 selected
+PNG непосредственно просмотрены и прошли проверку читаемости, включая
+origin1e9s, near-grid и cutoff; exact hashes в visual-review.json. Evidence
+`d416ee157223a5e4ccb8c6906081f061651aa334`,21 файл проверен,3 367 040 bytes.
+Global visual acceptance=false: не объявлять просмотренными все3888 PNG и
+не трактовать source-characterisation PASS как классификацию.
+
+Elder ASan25 owner77120 остаётся жив на прежнем immutable runtime rootb9af8990.
+На том же source запущен отдельный read-only normal gate202:
+owner101217/322637777, publisher101223/322637787, runtime из завершённого B6.
+Это union finite81 +integrated163 +physical ranking4 без дублирования IDs.
+Включены kernel/configured/native/diagnostic/archive/inherited scheduling
+контроли; waveforms/certificates оцениваются исходными assertions. Source,
+build и runtime не изменяются; wall budget10800s не меняет model/search budgets.
+После успеха ожидаются8 JUnit/contract reader checks. Результат пока pending;
+никакой общей matrix/legacy parity или научной приёмки заранее не назначено.
+
+В Pulse feature также исправлен ошибочный header example файлового NDataset и
+описаны native reload/registry semantics. Parser atoi/atof/extra-field defect
+остается открытым: это следующий отдельный алгоритмический input-validation
+пункт, а не уже выполненное исправление. Accepted C₀ develop17ca5a0b не меняется.
+
 ## Принятый develop 03.11: C₀ transfer, отдельно от source кандидата
 
 Root develop опубликован merge commit `17ca5a0b6bde98765c4abc736a66dd314477d258`.
