@@ -1,20 +1,307 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
-## Последующее дополнение 03.11: принят explicit C₀ API
+## Последний подтверждённый срез 03.11: source25 и archive20 ASan завершены
 
-Bound baseline/growth, joint edits/rollback и completed/stopped C₀ transfer
-адресно проверены normal9/14, independent readers24 и ASan9/35/readers24.
-ASan evidence780b21af:766 members/5 367 892 compressed bytes и actual libasan
-mappings проверены. [Полная область и ограничения](C0Acceptance-2026-11-03.ru.md).
-PulseLib develop merge5cbb877b и Rdk develop mergea62393f7 сохраняют tested Core;
-корень записывает эти точные gitlinks. Runtime source directories серверов
-не переключаются: они остаются leased активными заданиями других срезов.
+Source normal25/readers41 и ASan25/readers41 завершены. ASan evidence
+`6173d8324f7db784bf1f69efef8a60a8893ca081`:198 members/3 043 997 compressed bytes
+проверены, actual libasan mappings подтверждены. Весь83-CSV набор normal/ASan
+совпал побайтно, включая input/soma76, file reload и native dispatch records.
+Это не новая ASan C₀ transfer серия:24 C₀ readers используют прежние normal B3
+primary. [Сравнение с hashes каждого CSV](../../../Reports/StructTrain/TimeLearner/s03-source-normal-asan-comparison-a1/comparison.json).
+Pulse feature b84b7e9175ded1ccea73ff2caecdf89e5b32f9fe имеет tested Core9ab6d57.
 
-Дальнейшие archive telemetry/source clock изменения проверяются отдельно.
-Четыре cross-inventory waveform differences старого source остаются открытым
-ограничением сравнения; scientific PASS из этих gates не следует. Automatic
-C₀ ownership/search, полная матрица и остальные этапы плана остаются открытыми.
-Ниже сохранена история снимков до этой адресной приёмки.
+M40 archive telemetry ASan также завершён:unit9/native20/readers24, evidence
+`6d0d1d4c3fc50fe55f6c9b7a04d89a15d92259e4`,471 members/4 254 678 compressed bytes
+проверены. Actual libasan mappings подтверждены. Normal20/ASan20 имеют одинаковые
+122 CSV, все побайтно равны. [Сравнение](../../../Reports/StructTrain/TimeLearner/s05-archive-normal-asan-comparison-a1/comparison.json).
+Это подтверждение private StepDuration normalization и названных archive/
+transfer controls; full dynamic checkpoint и вся матрица не заявлены.
+
+Read-only normal202 на Elder завершён:202/202 PASS и8 JUnit/contract readers.
+Evidence `248660b2362308de583e72f1a0ec6b7aa139ef10`: проверены1 865 members,
+8 374 229 compressed bytes. Использован immutable normal B6/rootb9af8990;
+ограничение его lease снято после завершения владельца и публикации.
+Это закрывает проверку расширенной регрессии source-кандидата. Приёмка scope
+описана в [SourceArchiveAcceptance](SourceArchiveAcceptance-2026-11-03.ru.md).
+Строгий файловый parser развивается отдельно: ASan26 прошёл, normal выполняется.
+Последующие пункты полного плана остаются открытыми.
+
+## Source visual QA и расширенная регрессия 03.11
+
+Fixed B6 report76 завершён:3888 PNG/SVG/PDF в M40 Data cache. Все16 selected
+PNG непосредственно просмотрены и прошли проверку читаемости, включая
+origin1e9s, near-grid и cutoff; exact hashes в visual-review.json. Evidence
+`d416ee157223a5e4ccb8c6906081f061651aa334`,21 файл проверен,3 367 040 bytes.
+Global visual acceptance=false: не объявлять просмотренными все3888 PNG и
+не трактовать source-characterisation PASS как классификацию.
+
+Историческая постановка завершённых gates: ASan25 и read-only normal202
+использовали прежний immutable runtime rootb9af8990:
+owner101217/322637777, publisher101223/322637787, runtime из завершённого B6.
+Это union finite81 +integrated163 +physical ranking4 без дублирования IDs.
+Включены kernel/configured/native/diagnostic/archive/inherited scheduling
+контроли; waveforms/certificates оцениваются исходными assertions. Source,
+build и runtime не изменяются; wall budget10800s не меняет model/search budgets.
+Все202 native и8 JUnit/contract reader checks прошли; первичные данные
+проверены, как указано выше. Общая matrix/legacy parity или научная приёмка
+из этого ограниченного scope не следуют.
+
+В Pulse feature также исправлен ошибочный header example файлового NDataset и
+описаны native reload/registry semantics. Parser atoi/atof/extra-field defect
+остается открытым: это следующий отдельный алгоритмический input-validation
+пункт, а не уже выполненное исправление. Accepted C₀ develop17ca5a0b не меняется.
+
+## Принятый develop 03.11: C₀ transfer, отдельно от source кандидата
+
+Root develop опубликован merge commit `17ca5a0b6bde98765c4abc736a66dd314477d258`.
+Он фиксирует PulseLib develop `5cbb877bbabaab88f4bf7bb04e4c846598744884` и Rdk
+develop `a62393f7791cc4ad10d1c2c11f255b3db3334f89`; Bin14a88195 не изменён.
+Локальный develop рабочего tl-metrics синхронизирован с опубликованным merge,
+пользовательский E:/Science-Repo/nmsdk-git не переключался. [Приёмка explicit
+C₀ native API](C0Acceptance-2026-11-03.ru.md) не включает дальнейшие source/
+archive изменения. Все исходные этапы, кроме0, остаются частичными.
+
+Dataset feature объединила принятый develop без изменения проверенного Core:
+Pulse `41160baced81c44d8cd7ceb23a9e168ca024fbfd` имеет тот же Core, что9ab6d57.
+Root feature использует этот gitlink и Rdk develop. Идущий ASan остаётся на
+исходном immutable rootb9af8990/Pulse9ab6d57/Rdk48d6548e; runtime не обновляется.
+Source candidate ещё не принят в develop; ниже — его normal25/readers41
+и независимые проверки. Полный C-trim controller по-прежнему не включён.
+
+## Последнее дополнение 03.11: normal source gate принят в своём объёме
+
+Elder B6 завершён:25/25 native и41/41 Python/JUnit, returncodes0.
+Evidence `91fd3930ba29d0255c9b2cc2a339ebfa8afe7116`:199 members и3 036 859
+compressed bytes полностью проверены. Native25 включает20 clock cases,
+2 production file missing→grow→shrink и3 instrumented native scheduling cases.
+Реальная file задержка1 tick устранена native Build/AfterBuild/Reset до arming.
+Cooperative capture даёт valid actual mappings и точный complete JUnit.
+Это scoped normal PASS; multirate physics и весь этап4/7 этим не закрыты.
+
+Запущен отдельный Elder ASan source gate `s03-dataset-clock-lifecycle-asan-a1`:
+owner77120/322456825, publisher77127/322456835, тот же numerical rootb9af8990
+и Pulse9ab6d57. Новый build-dataset-clock-asan-a1 и отдельный immutable runtime;
+normal build flags не менялись. Shared source-capacitance-state-normal-b1
+сейчас используется ASan supervisor: не выполнять checkout/update/build поверх
+действующего source/runtime. Native25/readers41 pending.24 C0 readers используют
+прежние normal B3 primary; это не новая ASan-проверка C0 transfer.
+
+Baseline temporal A2 завершён на тех же36 записях:1797 PNG плюс SVG/PDF в M40
+Data cache. Компактный отбор `466d1693ed6c369dc92acd33a9d4dcc7695fcb38` —8 PNG
+и сжатые индексы,1 678 617 bytes;13 опубликованных файлов проверены. Все8
+картинок непосредственно просмотрены, title clipping устранён, оси/легенды,
+input overlay и native-tick zoom читаются. Отдельный visual-review.json
+фиксирует ровно этот subset; global_visual_acceptance остаётся false.
+[Пример увеличения](../../../Reports/StructTrain/TimeLearner/s03-dataset-clock-temporal-baseline-selected-a2/dataset_clock_2000_mode2_gap0_origin0/zoom-002.png).
+Baseline FAIL сохраняется; это визуализация дефекта, не успех классификации.
+
+На M40 запущен fixed B6 temporal report76 recordings:
+owner2352301/273017016, source renderer root607c2b616, primary commit91fd3930.
+Полные PNG/SVG/PDF остаются cache, в Git публикуются только выбранные рисунки,
+сжатые первичные данные и метаданные. Selected direct review фиксированного
+среза ещё не выполнен. Параллельный M40 telemetry ASan2343535 остаётся отдельным
+старым срезом; не смешивать его с новым source ASan Elder.
+
+Все изменения закоммичены в codex/timelearner-dataset-clock. Полный план0–12
+остаётся активен: source fix не переносится в develop до ASan/визуальной
+проверки и согласованного children-first merge. C0 auto-ownership/C-trim,
+остальная матрица моделей/режимов и другие открытые пункты не объявлены готовыми.
+
+## Дополнение 03.11: ASan C2 завершён, source fix ещё проверяется
+
+M40 C2 завершён и опубликован: unit9/native35/readers24, все returncodes0,
+actual libasan mappings подтверждены. Evidence
+`780b21afcd6e9d477bc7eb8181217c5a655fa0df`:766 members,5 367 892 compressed bytes
+полностью проверены. [Точная область и ограничения](CapacitanceStateTransfer.ru.md).
+Cross-run normal14/ASan35 совпали non-time columns118/122 CSV;4 отличаются при
+различной model-time предыстории старого source. Полную численную эквивалентность
+не объявлять. Следующий telemetry ASan уже стартовал после sealed C2:
+owner2343535/272969575, publisher2343536/272969585. Это старый root1e0988be,
+PulseE360, native20; source/build/runtime M40 не менять.
+
+Normal B4 показал20 clock PASS и5 failures:2 реальных file reload +3 неверных
+Activity=false instrumentation fixtures. Все194 members evidence70d24b8c
+проверены. Pulse9ab6d57 переносит file reload в native Build до первого pulse;
+fixture теперь включает Activity и проверяет effective Init/activity.
+B5 не начал сборку: guard не распознал ещё живой SSH-процесс собственного
+launcher. Evidence `6a6e838690e960c183487bbb71b304494b78cfee`,3 members проверены.
+B6 передаёт launcher ancestor PID/start_ticks явно; неизвестные процессы
+по-прежнему запрещают изменение source. Никаких общих исключений для sshd нет.
+
+Elder B6 owner71929/322424834, publisher71932/322424845, numerical root
+`b9af8990fe56e9b1662ddaceaa8f874e5b3bb143`, Pulse9ab6d57. Native25/readers41
+ещё pending; действующие source/build/runtime не менять. Independent reader41
+на B3 primary уже подтверждён exact transcript audit29162f94; исходный wrapper
+negative сохранён и объяснён в [clock-origin отчёте](RecognitionClockOrigin-2026-11-02.ru.md).
+
+Первый полный baseline temporal cache:36 recordings/1797 PNG и SVG/PDF.
+Просмотрены8 selected PNG: сигналы и native-tick zoom читаются, но title clipping
+мешает приёмке. Renderer root607c2b616 сокращает только display labels;
+M40 cache A2 owner2342167/272962216 строится на тех же Git-проверенных primary
+без повторного моделирования. Global visual acceptance=false. Все изменения
+сохранены feature branches; source clock/перенос не объявлены полными этапами.
+
+## Предыдущее дополнение 03.11: native34 завершён, unit provenance неполна
+
+Fixed normal B3 завершён:34/34 native PASS с подтверждёнными loaded mappings;
+20 clock cases/76 записей и14 transfer controls. Но unit gate вернул2:
+реальные9 assertions прошли за0ms, процесс завершился раньше захвата /proc/exe.
+Результат unit — incomplete_test_observation, inventory=null. Общий PASS
+запрещён. Исходный publisher упал на предположении о ненулевом inventory;
+очередь file A1 поэтому не запустила новый build. Оба отказа сохранены на сервере.
+
+Recovery publisher сохранил исходный terminal, raw unit/native данные и
+негативную общую оценку: evidence `b8306e23780a797c0fb832565e3be497723b6087`,
+612 members и6 600 584 compressed bytes полностью проверены локально.
+Это не повтор numerical experiment и не повышение статуса unit.
+
+Новый root `068a488361910d21a04469aa97f32cf0cfbb695f` вводит явный cooperative
+exit handshake для поддерживающего его PulseLib test main/gate schema2.
+Используется существующий Console RuntimeCapture contract; нет sleep вместо
+измерения provenance, второго Calculate или ослабления критериев.
+Rdk gtest_main не объявлен поддерживающим этот режим; его не запускаем снова
+как способ случайно получить зелёный быстрый capture. Неизменённый Rdk Core
+имеет отдельную ранее подтверждённую normal/ASan приёмку.
+
+Elder normal B4: owner63661/start_ticks322368044, publisher63664/322368054.
+Native25 =20 clock +2 реальных file lifecycle +3 native dispatch cases;
+после успеха41 reader/JUnit controls. Дополнительно независимый reader B3
+owner64587/322371323 проверяет те же41 controls на уже завершённых34 primary,
+без нового Train. Оба задания пока pending. Source/build/runtime B4 не менять.
+
+M40 renderer baseline owner2331038/272883688 строит полные временные графики
+из Git-проверенного baseline A3; весь кэш остаётся на Data. Генерация не
+является direct visual review. M40 ASan C2 продолжает работу; telemetry queue
+не изменялась. ASan нового clock fix и полная матрица по-прежнему открыты.
+
+## Предыдущее дополнение 03.11: источник паттернов и границы приёмки
+
+Предыдущие записи ниже — хронология, а не актуальное состояние заданий.
+Исходный план этапов0–12 ещё не выполнен: полностью принят этап0; отдельные
+проверенные изменения CMake и lifecycle Rdk не означают приёмку целых этапов2/4.
+
+Clock control normal A2 завершён на том же executable без archive prelude:
+122/122 CSV и28/28 standalone records побайтно совпали с исходным transfer B3.
+Evidence `5c430f4d3f86f1bc6fc46515716c0c7f654b0d95`. Это изолировало влияние
+начального model time от изменения сериализатора. Реальный baseline A3
+(`43343cbad7fd293a4e42b333534b090543b7a1c5`) затем воспроизвёл зависимость
+импульсов и сомы от начала часов в4/12 случаях, все36 записей полные.
+
+Integer-clock кандидат устранил эту зависимость, но выявил прежнюю задержку
+source controller на один tick и обрезание последнего импульса пачки. Native
+Rdk рассчитывает ACalculate после детей. Кандидат PulseLib
+`f358ce4281712dcb05012eb565ba1e27eee9b685` управляет источником до детей при
+единой частоте, сохраняя after/gated path при разных частотах и штатный scheduler.
+Подробности и отрицательные промежуточные проверки:
+[RecognitionClockOrigin](RecognitionClockOrigin-2026-11-02.ru.md).
+
+Текущий normal B3: numerical root `fa631e1662eee2d77c8fe891143398c2dcd1ecd4`.
+На readback прошли20/20 dataset-clock cases (76 полных input/soma recordings):
+2000/20000Hz, timed/continuous, gap0/5/30ms, origins до1e9s, near-grid onset и
+cutoff на первом onset. Проверяется весь pulse program и точное совпадение
+реальных сигналов при переносе origin. Совместный gate ещё выполняет14 transfer
+cases; завершение,33 Python readers, публикация и проверка bundle пока не
+подтверждены. Не считать текущий результат полным PASS или принятым fix.
+
+Независимый reader baseline A1 завершён:9/9, evidence
+`bdabaa6cea61250014051f6da7757fa6f9dec1df`, все6 опубликованных файлов проверены
+по SHA256. Использованы прежние36 реальных записей и мутации повреждённых
+данных; четыре отрицательных invariance результата сохранены. Legacy schema1
+не доказывает полный новый C++ assertion contract.
+
+Оставшиеся обязательные gates этого исправления: настоящий файловый NDataset
+с missing→load→growth→shrink; проверка scheduler при разных частотах; ASan;
+построение читаемых временных графиков и прямой просмотр выбранных изображений.
+Добавлены два file lifecycle tests (2000/20000Hz), ещё не выполнены. Они
+проверяют нативную инициализацию новых generators и каждый отсчёт импульсов,
+а не только наличие детей. Строгий file parser пока отдельная открытая задача.
+
+M40 C2 жив: PID2230628/start_ticks272114945, publisher2230629/272114956.
+Очередь telemetry ASan2249188/272246534 продолжает ждать его проверенной
+публикации. Она проверяет старый telemetry/transfer срез, а не новый clock fix.
+Активные source/build/runtime не изменять. Все новые версии остаются в feature
+ветках; develop gitlinks PulseLib/Rdk не продвигаются до адресной приёмки.
+
+## Обновление 19:08 UTC: normal transfer, reader fix и отдельный CMake merge
+
+Последний readback: telemetry normal A2 завершён unit9/native20/readers24,
+все returncodes0. Evidence `69a1c928eed1f0248790ce1dd9c843b6c7d3bf12`,
+470 archive members проверены,4 233 738 compressed bytes. Но cross-run
+сравнение с B3 выявило3/122 CSV с отличающимися входными импульсами при
+общем сдвиге абсолютного model time+0.1s;119 signal arrays совпали побайтно.
+Это отдельный открытый [clock-origin контроль](RecognitionClockOrigin-2026-11-02.ru.md),
+а не полная A/B эквивалентность или доказанная регрессия serialization.
+Для изоляции причины на неизменном A2 executable/runtime (root1e0988be)
+запущен прежний native14 без archive prelude, unit9 и24 readers:
+Elder `s05-recognition-clock-control-normal-a1`, owner4172395, publisher4172441.
+Source/build/runtime до завершения не менять.
+
+M40 C2 продолжает native35. Новая очередь `s05-archive-telemetry-asan-queue-a2`,
+owner2249188 /ticks272246534, проверила опубликованные470 normal A2 members.
+Следующий ASan20 разрешён только после закрытия C2 owner/publisher и проверки
+его complete PASS, actual ASan mappings и каждого опубликованного member.
+Это проверка telemetry/transfer; она не закрывает новый clock-origin дефект.
+
+Последующее дополнение: Rdk develop опубликован через merge commit
+`a62393f7791cc4ad10d1c2c11f255b3db3334f89`. Он включает tested Corec3850711
+и docsbd50d9ac; отсутствие Core-различий проверено перед merge. Основание:
+normal094bced1 и ASan12d5a246, 9/9 unit и13/13 native, actual libasan maps,
+74/74 совпадающих CSV/packets. Merge выполнен в отдельной локальной копии
+`E:/Science-Repo/rdk-lifecycle-acceptance`; пользовательские source checkouts
+не переключались. Корневой develop пока сохраняет прежний Rdk gitlink до
+приёмки согласованного PulseLib среза и children-first root merge.
+
+Telemetry normal A1 root420befe14 выявил два слишком сильных ожидания теста:
+временные image buffers могут меняться, а native Init пересчитывает производную
+TimeConstant. [Подробности и уточнённый контракт](ArchiveTelemetryNoise.ru.md).
+Root `1e0988be8f3761928710dc23a84442657be3a50b` меняет тест/документы, Pulse
+e360b31d имеет тот же Coredc7edb23. A2 поставлен в очередь только после закрытия
+и полной проверки опубликованного A1 с ровно двумя известными отказами.
+Supervisor очереди Elder4156956, metadata `s05-archive-telemetry-normal-queue-a2`.
+Очередь M40 telemetry2241058 отменена до запуска: C2 продолжает работать,
+известно неуспешный telemetry A1 автоматически на M40 не запускается.
+
+Принятый корневой develop теперь `d12c50a67192897220d2d6f9f38db16c3f0f4e5b`:
+merge общего BUILD_TESTING / legacy BUILD_TESTS и компактного configure evidence.
+Gitlinks PulseLib/Rdk в develop этим merge не менялись. Проверены ON, legacy
+OFF и отклонение конфликта, обе unit/native цели, фактические 9/9 и14/14.
+Scope: [BuildTestSwitch](BuildTestSwitch.ru.md); это не закрытие всего этапа2.
+
+Elder B3 завершён: 9/9 lifecycle и14/14 native. Evidence
+`57383f8d93ebf660bd2f80d08ac315a67abe2896` проверен по всем476 members,
+3 632 679 сжатых байт. Его исходный reader gate упал: growth-only *ClassName
+не входили в Python dependency closure. Исторический статус failed сохранён.
+Исправление root `6db2d5156fe51e03e1ebdeb1c256c5010dadb9b7` независимо проверено
+на прежних primary, без нового Train: B5 exit0, 24/24 reader controls без skips,
+включая удаление growth-only зависимости. Evidence
+`b7b2d5d0a15e281da503d0b5af076d03e072f21f`, все5 members и6 files проверены.
+
+M40 C1 не исполнил тесты: Qt6 object/value EXPECT_EQ compilation error.
+Evidence `17e5baadb0aece02aa278ef6323845d107ed163a`, все14 members проверены.
+Root673f632b9 исправляет только явное сравнение QJsonObject. C2 использует
+numeric root6db2d5156 / Pulse69d463aa / Rdk48d6548e и новый runtime;
+на readback прошёл unit9, native35 ещё выполняется. Не принимать ожидаемые
+35 за уже прошедшие и не обновлять его source/build/runtime.
+
+Отдельная ветка archive-telemetry: Pulse
+`dc7edb2384633d4a1ce65bb40d2f5c8927482896`, root
+`420befe14d97dc60f9daf2c8c87a72ba50c380d6`.
+Нормализует только StepDuration в приватной serialization-копии, не живую
+модель и не scheduler limits. Нужна серверная проверка. Elder запускает
+native20 (6 archive +14 transfer), unit9 и24 readers. Этот код ещё не в develop.
+
+| Текущее задание | Owner / start ticks | Состояние на срезе |
+|---|---|---|
+| M40 `s07-capacitance-combined-asan-c2` | 2230628 /272114945 | native35 выполняется |
+| M40 publication C2 | 2230629 /272114956 | ждёт завершения owner |
+| Elder `s05-archive-telemetry-normal-a1` | 4148974 | сборка/проверки; ticks в owned-supervisor.json |
+| Elder publication telemetry A1 | 4148979 | ждёт завершения owner |
+
+Старые B1/B2/B3, B5 readers и C1 закрыты. Ниже — предыдущий срез,
+включая прежнюю таблицу активных процессов; она больше не является текущей.
+Полный план остаётся незавершённым: автоматическое владение C₀, bounded
+C-trim, полная physics/mode/lifecycle matrix, миграция и production pipeline,
+независимые научные эксперименты и документация по всем режимам остаются.
 
 ## Последний проверенный результат: transport и временные отчёты
 
