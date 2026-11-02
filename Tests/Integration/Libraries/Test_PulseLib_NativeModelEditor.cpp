@@ -4128,4 +4128,78 @@ TEST(NativeModelEditor, ShrinkCannotSilentlyDeleteAnExternalObservationSource)
         {"before",QString::fromStdString(before)},{"after",QString::fromStdString(rig.Revision())}}).toJson());
   }
 }
+
+// V2's verified single-rate native protocol requires every required child to
+// run. Rdk's optional wall-clock budget is a separate compatibility behavior.
+template<class Learner> void RejectNativeWallLimitedProbe(int normalization,const std::string& node,long long limit)
+{
+    EditingRig<Learner> rig(2000,normalization,"wall_limit_"+node+"_"+std::to_string(limit),false,2,true);
+    UEPtr<UContainer> target;
+    if(node=="owner")target=rig.learner;
+    else if(node=="ancestor")target=rig.model;
+    else if(node=="neuron")target=rig.neuron;
+    else if(node=="generator")target=rig.source;
+    ASSERT_TRUE(target);const auto original=target->MaxCalculationDuration.GetData();
+    ASSERT_LT(original,0);target->MaxCalculationDuration=limit;
+    const auto revision=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
+    std::size_t samples=0;
+    const auto result=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true,false,
+        [&](const NativeProbeSample&){++samples;});
+    // The V2 guard must diagnose unsupported scheduling, never repair a user's
+    // inherited Rdk property or require special Reset/Build return values.
+    const auto effectiveLimit=target->MaxCalculationDuration.GetData();
+    target->MaxCalculationDuration=original;
+    EXPECT_EQ(effectiveLimit,limit);EXPECT_EQ(result.status,NativeProbeStatus::Rejected);
+    EXPECT_FALSE(result.observation);EXPECT_EQ(samples,0u);
+    EXPECT_NE(std::find(result.reasons.begin(),result.reasons.end(),"unsupported_native_wall_limited_schedule"),result.reasons.end());
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    QJsonArray reasons;for(const auto& reason:result.reasons)reasons.append(QString::fromStdString(reason));
+    Artifact(rig.name+"_wall_policy.json",QJsonDocument(QJsonObject{
+        {"kind","native_wall_schedule_policy"},{"schema_version",1},{"location",QString::fromStdString(node)},
+        {"configured_limit",double(limit)},{"effective_limit_after_rejection",double(effectiveLimit)},
+        {"observed_samples",double(samples)},{"status",NativeProbeStatusName(result.status)},
+        {"reasons",reasons},{"changed_individual_parameters",rig.learner->ReadNativeParameters()!=parameters},
+        {"limited_revision",QString::fromStdString(revision)},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    if(result.status==NativeProbeStatus::Rejected && node=="owner" && limit>0)
+    {
+        const auto restored=rig.Probe();ASSERT_EQ(restored.status,NativeProbeStatus::Completed);
+        ASSERT_TRUE(restored.observation);EXPECT_TRUE(restored.observation->valid);
+        EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    }
+}
+#define WALL_CASE(Name,Learner,Norm,Node,Limit) \
+ TEST(NativeWallSchedule,Name){RejectNativeWallLimitedProbe<Learner>(Norm,Node,Limit);}
+WALL_CASE(ClassicN0OwnerZero,NNeuronTimeLearner,0,"owner",0)
+WALL_CASE(ClassicN0OwnerLarge,NNeuronTimeLearner,0,"owner",1000000000)
+WALL_CASE(ClassicN0AncestorZero,NNeuronTimeLearner,0,"ancestor",0)
+WALL_CASE(ClassicN0AncestorLarge,NNeuronTimeLearner,0,"ancestor",1000000000)
+WALL_CASE(ClassicN0NeuronZero,NNeuronTimeLearner,0,"neuron",0)
+WALL_CASE(ClassicN0NeuronLarge,NNeuronTimeLearner,0,"neuron",1000000000)
+WALL_CASE(ClassicN0GeneratorZero,NNeuronTimeLearner,0,"generator",0)
+WALL_CASE(ClassicN0GeneratorLarge,NNeuronTimeLearner,0,"generator",1000000000)
+WALL_CASE(ClassicN1OwnerZero,NNeuronTimeLearner,1,"owner",0)
+WALL_CASE(ClassicN1OwnerLarge,NNeuronTimeLearner,1,"owner",1000000000)
+WALL_CASE(ClassicN1AncestorZero,NNeuronTimeLearner,1,"ancestor",0)
+WALL_CASE(ClassicN1AncestorLarge,NNeuronTimeLearner,1,"ancestor",1000000000)
+WALL_CASE(ClassicN1NeuronZero,NNeuronTimeLearner,1,"neuron",0)
+WALL_CASE(ClassicN1NeuronLarge,NNeuronTimeLearner,1,"neuron",1000000000)
+WALL_CASE(ClassicN1GeneratorZero,NNeuronTimeLearner,1,"generator",0)
+WALL_CASE(ClassicN1GeneratorLarge,NNeuronTimeLearner,1,"generator",1000000000)
+WALL_CASE(BranchN0OwnerZero,NNeuronTimeLearnerBranch,0,"owner",0)
+WALL_CASE(BranchN0OwnerLarge,NNeuronTimeLearnerBranch,0,"owner",1000000000)
+WALL_CASE(BranchN0AncestorZero,NNeuronTimeLearnerBranch,0,"ancestor",0)
+WALL_CASE(BranchN0AncestorLarge,NNeuronTimeLearnerBranch,0,"ancestor",1000000000)
+WALL_CASE(BranchN0NeuronZero,NNeuronTimeLearnerBranch,0,"neuron",0)
+WALL_CASE(BranchN0NeuronLarge,NNeuronTimeLearnerBranch,0,"neuron",1000000000)
+WALL_CASE(BranchN0GeneratorZero,NNeuronTimeLearnerBranch,0,"generator",0)
+WALL_CASE(BranchN0GeneratorLarge,NNeuronTimeLearnerBranch,0,"generator",1000000000)
+WALL_CASE(BranchN1OwnerZero,NNeuronTimeLearnerBranch,1,"owner",0)
+WALL_CASE(BranchN1OwnerLarge,NNeuronTimeLearnerBranch,1,"owner",1000000000)
+WALL_CASE(BranchN1AncestorZero,NNeuronTimeLearnerBranch,1,"ancestor",0)
+WALL_CASE(BranchN1AncestorLarge,NNeuronTimeLearnerBranch,1,"ancestor",1000000000)
+WALL_CASE(BranchN1NeuronZero,NNeuronTimeLearnerBranch,1,"neuron",0)
+WALL_CASE(BranchN1NeuronLarge,NNeuronTimeLearnerBranch,1,"neuron",1000000000)
+WALL_CASE(BranchN1GeneratorZero,NNeuronTimeLearnerBranch,1,"generator",0)
+WALL_CASE(BranchN1GeneratorLarge,NNeuronTimeLearnerBranch,1,"generator",1000000000)
+#undef WALL_CASE
 }
