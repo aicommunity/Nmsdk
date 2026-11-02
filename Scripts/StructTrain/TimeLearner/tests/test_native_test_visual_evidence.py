@@ -33,6 +33,9 @@ class NativeTestVisualEvidenceTest(unittest.TestCase):
                 expected[(path.name, "")] = value
             if isinstance(value.get("probe"), dict) and value["probe"].get("kind") == "timelearner_native_probe_evidence":
                 expected[(path.name, "/probe")] = value["probe"]
+        for alias in self.manifest.get("packet_aliases", []):
+            self.assertEqual(expected[(alias["packet"], "")], expected[(alias["of_packet"], "")])
+            expected.pop((alias["packet"], ""))
         self.assertEqual(len(expected), self.expected_probe_count)
         seen = set()
         for group in self.manifest["groups"]:
@@ -89,6 +92,14 @@ class NativeTestVisualEvidenceTest(unittest.TestCase):
         self.assertEqual(self.manifest["data_complete"], self.expected_data_complete)
         self.assertFalse(self.manifest["visual_acceptance_complete"])
         self.assertIsNone(self.manifest["scientific_verdict"])
+
+
+class NativeTraceRecordingVisualEvidenceTest(NativeTestVisualEvidenceTest):
+    source_environment = "TIMELEARNER_NATIVE_TRACE_RECORDING_DIR"
+    report_environment = "TIMELEARNER_NATIVE_TRACE_RECORDING_VISUAL_DIR"
+    expected_probe_count = 88
+    expected_soma_pairs = 138
+    expected_data_complete = False
 
 
 class N0CandidateVisualEvidenceTest(NativeTestVisualEvidenceTest):
