@@ -72,3 +72,21 @@ onset/repeat, но использует строгий now<OneShotEndTime для
 TimeGeneration также сравнивается без roundoff guard. Сначала воспроизвести
 риск на production-компонентах. Не приписывать наблюдение NPulseGenerator
 или этой конкретной ветке сравнения до подтверждающего вмешательства.
+
+Baseline A3 завершил полную матрицу36 recordings:8/12 invariance cases прошли,
+4/12 без паузы (оба режима и обе частоты) обнаружили различающиеся реальные
+входы и soma. Evidence `43343cbad7fd293a4e42b333534b090543b7a1c5`, numerical
+root `e966ca52f01eac845eb4efd20620aa31488577e1`, Pulse Coree360b31d.
+Первые A1/A2 versions fixture не доказывали clock bug: A1 не собрался из-за
+ожидания bool от void DelComponent; A2 остановился после первого origin из-за
+неверного порядка освобождения. Native Free сам разрывает owner и возвращает
+объект в storage. A3 сначала отсоединяет оба объекта, затем Free ровно один раз.
+
+Кандидат исправления PulseLib `bf6bdf6164d152f6272a5d80a5ee632961a2ace6`:
+сначала вычесть integer microsecond clocks Rdk, затем перевести elapsed в
+секунды. Есть отдельные anchors для sample, активного pulse и timed session.
+Onset/end/repeat используют согласованный guard относительной арифметики с
+прежним floor1e-12. Внешний override OperatingTime сохраняет compatibility
+seconds interpretation. Детальный контракт — PulseLib
+`Docs/Analysis/DatasetClockPlayback.ru.md`. Нужны normal/ASan, расширение
+origins/near-grid/cutoff и regression переноса: это ещё не принятый fix.
