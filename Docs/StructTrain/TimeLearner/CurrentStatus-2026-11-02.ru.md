@@ -2,6 +2,35 @@
 
 ## Последний проверенный результат: transport и временные отчёты
 
+Исправленный Rdk Build contract завершил M40 ASan9/9 unit и13/13 native:
+`12d5a24605bd464f0471a4b044f198c8d1b19763`. Все237 members локально проверены,
+74/74 CSV/packets равны normal13; фактические libasan mappings сохранены для
+unit и native процессов. Numeric root5d73cd08 / Pulsef9272f52 / Rdkc3850711.
+Это не проверка последующего C₀ transfer Pulse69d463a.
+
+B2 failure `2515c1babfaf223f6e2c914265f3d79cb744fe2a` проверен по11 members.
+Root CMake fix7290955b в B3 прошёл реальные configure ON / legacy OFF /
+conflict, с проверкой наличия/отсутствия обеих unit/native целей. B3 numerical
+gate и readers ещё не завершены.
+
+Активные задания на момент readback (проверять PID вместе со start ticks):
+
+| Worker/readback | Supervisor | Start ticks | Scope |
+|---|---:|---:|---|
+| Elder `s05-capacitance-state-normal-b3` | 4128382 | 321495971 | unit9, native14, primary readers, CMake3 |
+| Elder `s05-capacitance-state-publication-normal-b3` | 4130181 | 321504508 | публикация после закрытия owner |
+| M40 `s07-capacitance-combined-asan-c1` | 2223180 | 272064403 | unit9, native35, readers |
+| M40 `s07-capacitance-combined-publication-asan-c1` | 2224330 | 272069453 | публикация и actual libasan verification |
+
+Оба новых cohort используют numeric root `58d941c2664703e794179d0e5dfeaa95e54949ad`,
+Pulse `69d463aa50144a1c8ddb4a674bb900c2a07e769f`, Rdk docs48d6548e/Corec3850711.
+Elder source/build: `source-capacitance-state-normal-b1` /
+`build-capacitance-state-normal-b1`, runtime `runtime-s05-capacitance-state-normal-b3`.
+M40 source/build: `source-finite-ranking-asan-a1` /
+`build-finite-ranking-asan-a1`, runtime `runtime-s07-capacitance-combined-asan-c1`.
+Не обновлять их до терминального состояния владельцев и сохранения evidence.
+Develop пока остаётся принятым f1708eb9; новые scoped merges в develop ещё требуются.
+
 Elder completed transport после image extraction: 8/8 на root c6345fa6,
 evidence `abac5800c0ec93c1ecec100b37480982ec176f00`; M40 полный ASan transport
 на прежнем root589c7e30: 8/8, evidence `a311a6e3d4133faf57ac826b61460d7ba64917ff`.
