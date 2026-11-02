@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NDataset.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGeneratorTransit.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QCryptographicHash>
 #include <QFile>
@@ -121,4 +122,91 @@ TEST(DatasetFileValidation,RejectClassDoubleSign){ExecuteFileCheck([]{Check("cla
 TEST(DatasetFileValidation,RejectIsiDoubleSign){ExecuteFileCheck([]{Check("isi_sign","class;f0\n7;+-0.01\n",false);});}
 TEST(DatasetFileValidation,ValidUtf8Bom){ExecuteFileCheck([]{Check("bom",QByteArray::fromHex("efbbbf")+"#NDataset;MaxSpikes=2\nclass;f0\n7;.01\n;.02\n",true,2,1,{.01,.02});});}
 TEST(DatasetFileValidation,ValidBlankWhitespaceLines){ExecuteFileCheck([]{Check("blank_lines","class;f0\n \t\r\n7;.01\n\t\n",true,1,1,{.01});});}
+
+// A valid cold parser is insufficient: reject a corrupt replacement while an
+// initialized generator is high, then recover through the native owner path.
+void CheckHotReload(unsigned frequency)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    struct Cleanup {
+        UEPtr<UEnvironment> environment;ULongTime prior;
+        ~Cleanup(){environment->DestroyModel();environment->GetTime().SetTime(prior);}
+    } cleanup{core.environment,core.environment->GetTime().GetTime()};
+    core.environment->DestroyModel();
+    Require(core.environment->CreateModel("NModel"),"hot validation model unavailable");
+    auto model=dynamic_pointer_cast<UNet>(core.environment->GetModel());
+    Require(bool(model),"hot validation model type differs");
+    model->SetEnvironment(core.environment);model->SetGlobalTimeStep(frequency);
+    auto source=dynamic_pointer_cast<NDataset>(core.storage->TakeObject("NDataset"));
+    Require(bool(source),"hot validation storage image unavailable");
+    QTemporaryDir directory;Require(directory.isValid(),"hot validation directory unavailable");
+    const auto path=directory.filePath("data.txt");
+    auto replace=[&](const QByteArray& content) {
+        QFile file(path);Require(file.open(QIODevice::WriteOnly|QIODevice::Truncate),"hot input unavailable");
+        Require(file.write(content)==content.size() && file.flush(),"hot input write failed");
+    };
+    const QByteArray original="class;f0\n7;.01\n",corrupt="class;f0\n9;bad\n",recovered="class;f0\n9;.02\n";
+    replace(original);
+    source->Name="Dataset";source->SetEnvironment(core.environment);source->SetGlobalTimeStep(frequency);
+    source->UseRelativePathFromConfig=false;source->UseRelativePathFromWorkDir=false;
+    source->FileName=path.toStdString();source->Activity=true;source->StateGeneration=2;source->Delay=0.;
+    UEPtr<UContainer> child=source;Require(model->AddComponent(child)!=ForbiddenId,"hot validation attach failed");
+    const auto initMarker=model->OperationFailureSequence();model->Init();model->Reset();
+    Require(model->IsInit() && model->IsReady() && !model->HasOperationFailureSince(initMarker),"hot initialization failed");
+    core.environment->GetTime().SetTime(1000000);
+    auto output=[&]() {
+        auto generator=source->GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+        Require(bool(generator) && generator->IsInit() && generator->IsReady(),"hot generator not initialized");
+        Require(generator->Output.GetRows()==1 && generator->Output.GetCols()==1,"hot output shape differs");
+        const double value=generator->Output(0,0);Require(std::isfinite(value),"hot output nonfinite");return value;
+    };
+    std::ostringstream csv;csv.imbue(std::locale::classic());csv<<std::setprecision(17)<<"time,phase,input,ready,reload,operation_failure\n";
+    unsigned originalWrong=0,invalidHigh=0,recoveryWrong=0;bool invalidDetected=true,publicResults=true;
+    for(unsigned tick=0;tick<=frequency/100;++tick)
+    {
+        const auto marker=model->OperationFailureSequence();publicResults&=model->Calculate();
+        Require(!model->HasOperationFailureSince(marker),"valid original playback failed");
+        const double value=output();originalWrong+=(value>0.)!=(tick==frequency/100);
+        csv<<core.environment->GetTime().GetDoubleTime()<<",0,"<<value<<','<<source->IsReady()<<','<<source->ReloadDataset.GetData()<<",0\n";
+        core.environment->IncreaseModelTimeByStep();
+    }
+    replace(corrupt);source->ReloadDataset=true;
+    for(unsigned tick=0;tick<3;++tick)
+    {
+        const auto marker=source->OperationFailureSequence();publicResults&=model->Calculate();
+        const bool failed=source->HasOperationFailureSince(marker);
+        invalidDetected&=failed && !source->IsReady() && source->ReloadDataset.GetData();
+        const double value=output();invalidHigh+=value>0.;
+        csv<<core.environment->GetTime().GetDoubleTime()<<",1,"<<value<<','<<source->IsReady()<<','<<source->ReloadDataset.GetData()<<','<<failed<<'\n';
+        core.environment->IncreaseModelTimeByStep();
+    }
+    // The rejected parse must not partially replace the old matrix or label.
+    EXPECT_EQ(source->GetSampleClass(0),7);ASSERT_EQ(source->MatrixData.GetRows(),1);
+    ASSERT_EQ(source->MatrixData.GetCols(),1);EXPECT_DOUBLE_EQ(source->MatrixData(0,0),.01);
+    replace(recovered);source->ReloadDataset=true;
+    for(unsigned tick=0;tick<=frequency*3/100;++tick)
+    {
+        const auto marker=model->OperationFailureSequence();publicResults&=model->Calculate();
+        Require(!model->HasOperationFailureSince(marker) && source->IsReady() && !source->ReloadDataset.GetData(),"recovery did not complete natively");
+        Require(source->GetSampleClass(0)==9,"recovery reused stale label");
+        const double value=output();const unsigned onset=frequency/50,width=frequency/1000;
+        recoveryWrong+=(value>0.)!=(tick>=onset && tick<onset+width);
+        csv<<core.environment->GetTime().GetDoubleTime()<<",2,"<<value<<",1,0,0\n";
+        core.environment->IncreaseModelTimeByStep();
+    }
+    const auto stem="dataset_hot_validation_"+std::to_string(frequency);
+    Write(stem+".csv",QByteArray::fromStdString(csv.str()));
+    Write(stem+"_original.txt",original);Write(stem+"_corrupt.txt",corrupt);Write(stem+"_recovered.txt",recovered);
+    Write(stem+".json",QJsonDocument(QJsonObject{{"kind","native_dataset_hot_validation"},{"schema_version",1},
+        {"frequency_hz",int(frequency)},{"original_wrong_samples",int(originalWrong)},
+        {"invalid_high_samples",int(invalidHigh)},{"invalid_detected",invalidDetected},
+        {"recovery_wrong_samples",int(recoveryWrong)},{"public_results_true",publicResults},
+        {"complete",true},{"trace",QString::fromStdString(stem+".csv")},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+    EXPECT_TRUE(publicResults);EXPECT_TRUE(invalidDetected);EXPECT_EQ(originalWrong,0u);
+    EXPECT_EQ(invalidHigh,0u)<<"invalid replacement must not continue stale stimulus";
+    EXPECT_EQ(recoveryWrong,0u)<<"recovery must not shift onset or reuse old schedule";
+}
+TEST(DatasetHotValidation,CorruptThenRecoverAt2000){ExecuteFileCheck([]{CheckHotReload(2000);});}
+TEST(DatasetHotValidation,CorruptThenRecoverAt20000){ExecuteFileCheck([]{CheckHotReload(20000);});}
 }
