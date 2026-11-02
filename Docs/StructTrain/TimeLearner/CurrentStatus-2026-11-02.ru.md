@@ -2,6 +2,24 @@
 
 ## Обновление 19:08 UTC: normal transfer, reader fix и отдельный CMake merge
 
+Последний readback: telemetry normal A2 завершён unit9/native20/readers24,
+все returncodes0. Evidence `69a1c928eed1f0248790ce1dd9c843b6c7d3bf12`,
+470 archive members проверены,4 233 738 compressed bytes. Но cross-run
+сравнение с B3 выявило3/122 CSV с отличающимися входными импульсами при
+общем сдвиге абсолютного model time+0.1s;119 signal arrays совпали побайтно.
+Это отдельный открытый [clock-origin контроль](RecognitionClockOrigin-2026-11-02.ru.md),
+а не полная A/B эквивалентность или доказанная регрессия serialization.
+Для изоляции причины на неизменном A2 executable/runtime (root1e0988be)
+запущен прежний native14 без archive prelude, unit9 и24 readers:
+Elder `s05-recognition-clock-control-normal-a1`, owner4172395, publisher4172441.
+Source/build/runtime до завершения не менять.
+
+M40 C2 продолжает native35. Новая очередь `s05-archive-telemetry-asan-queue-a2`,
+owner2249188 /ticks272246534, проверила опубликованные470 normal A2 members.
+Следующий ASan20 разрешён только после закрытия C2 owner/publisher и проверки
+его complete PASS, actual ASan mappings и каждого опубликованного member.
+Это проверка telemetry/transfer; она не закрывает новый clock-origin дефект.
+
 Последующее дополнение: Rdk develop опубликован через merge commit
 `a62393f7791cc4ad10d1c2c11f255b3db3334f89`. Он включает tested Corec3850711
 и docsbd50d9ac; отсутствие Core-различий проверено перед merge. Основание:
