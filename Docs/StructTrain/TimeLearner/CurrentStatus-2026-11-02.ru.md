@@ -2,6 +2,13 @@
 
 ## Последующее изменение кода: перенос C₀ в model package
 
+Первая fresh сборка schema-2 переноса B1 остановилась до unit/native
+из-за пропущенного include QJsonDocument. Исправлено в PulseLib
+`69d463aa50144a1c8ddb4a674bb900c2a07e769f`; нужен следующий build/test cohort.
+Failure evidence `6f05f66ea89d93762dee1860a9952f4e5cc95400`, cache seal
+`bd35b706609d1c1acfb8df230e2f231cb4cfdebe`. Исходники старого runtime с
+21/21 и завершившихся 8/8 transport при этом не менялись.
+
 В feature добавлен [schema-2 Train→Test](CapacitanceStateTransfer.ru.md),
 retention проверенного импортированного baseline и независимый reader.
 Это следующий ещё не проверенный сервером код, не расширение старых PASS.

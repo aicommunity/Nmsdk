@@ -2,6 +2,12 @@
 
 Реализация следующего среза; численная серверная приёмка ещё не проведена.
 PulseLib: `922ba91f71075b296a1c808e561b69fdd71f6255`.
+Первый изолированный build root `833b9bb9e1062778d405928a191bb32500828f2b`
+остановился до тестов из-за отсутствующего include QJsonDocument в обоих
+learner. Исправление PulseLib `69d463aa50144a1c8ddb4a674bb900c2a07e769f`.
+Неудачная сборка опубликована в `6f05f66ea89d93762dee1860a9952f4e5cc95400`,
+её фактический cache/flags дополнительно сохранены до изменения build cache:
+`bd35b706609d1c1acfb8df230e2f231cb4cfdebe`. B1 не является runtime PASS.
 
 Completed/stopped package schema 2 добавляет `capacitance_state` к полному
 native archive. Содержимое: исходные индивидуальные C₀, их capture/image
