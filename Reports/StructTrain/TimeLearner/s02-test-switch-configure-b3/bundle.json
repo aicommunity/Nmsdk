@@ -1,0 +1,40 @@
+{
+  "kind": "timelearner_build_test_switch_evidence",
+  "schema_version": 1,
+  "source_commit": "57383f8d93ebf660bd2f80d08ac315a67abe2896",
+  "source_report": "Reports/StructTrain/TimeLearner/s05-capacitance-state-normal-b3",
+  "numerical_root": "58d941c2664703e794179d0e5dfeaa95e54949ad",
+  "cmake_blob": "2a54513b75286c025142c1972f26a74b3ee2e176",
+  "worker": "Elder",
+  "configure_assertion_status": "passed",
+  "scenarios": [
+    "standard ON and both expected targets",
+    "legacy OFF and both targets absent",
+    "conflicting explicit flags rejected"
+  ],
+  "executed_targets": {
+    "unit": 9,
+    "native": 14
+  },
+  "source_reader_gate": "failed; unrelated dependency reader defect preserved in source evidence",
+  "scope": "Only shared CMake test switch and target availability; not acceptance of source C0 controller or all refactor stages. Exact CMake file matches branch7290955b.",
+  "archive_sha256": "856964db9713026ca191f821489231c01f07bd676bcb1a399c524e672d1e383d",
+  "members": {
+    "test-switch-results.json": "9fe8414bb6e84476c95d77c519b2fcb6a5cd1f8eeec8d39e567f12199db2e7a6",
+    "configure-on-request.json": "bd81c184ca1de5c567aefce791650483f79b783f239e1eda52b681ae95562e51",
+    "configure-off-request.json": "a8d6e0882c95e7a00802a9a55fe50941d98062a1fefd12947b9b066349d60c8e",
+    "configure-conflict-request.json": "3ac6c8c1ab7823c4ab277c99324171a99fb59bb7ef31b4a29b2a20986395805b",
+    "configure-on.log": "23a85d550fec5c57d01ea38033fff8facf7358c6c409a4de2e124c5ffa656e30",
+    "configure-off.log": "3804b0382f271e2e220b7eea0b318f96a0a29cbe0aa0a4b5e430badabc4f0256",
+    "configure-conflict.log": "003a8132846840dc7185d4cff1230397b2f426478ae2f9c0da5d089ae2dcbfe0",
+    "configure-on.CMakeCache.txt": "2c430805f79c49714d2df6d6efa76175f66e3c51b161cb3879885d3d2f2fe6c3",
+    "configure-off.CMakeCache.txt": "d57231c8f5a3ec0fd1fe7ad6a2722eb3660f7befaa6cb9bbf410142cfdc5be0d",
+    "configure-conflict.CMakeCache.txt": "891bc2d51e0010150da1a024e5552ee7209ae3f8519a6d9ba099e8b837566237",
+    "on-targets.log": "938017e460bb23aec04e89bb40519d2b6b43b2a19fa9f4cf4bd6bec0b797afc1",
+    "targets-on.log": "938017e460bb23aec04e89bb40519d2b6b43b2a19fa9f4cf4bd6bec0b797afc1",
+    "targets-off.log": "7ae8ee83aa276f5aecbbdd98f62f20793b1d9c15a8a4029dc724588d15540682",
+    "unit-result/result.json": "66a286ba15166992881f88ee1b7badf139913c7e5c16fbed9512c19ac69c7b40",
+    "native-result/result.json": "930abfede9d73d7295cdf1226fd1c3634baa75e24d52cd42e8df236b44e651fe"
+  },
+  "scientific_verdict": null
+}
