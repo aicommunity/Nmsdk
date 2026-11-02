@@ -6,3 +6,7 @@ add_executable(Test_MDMatrixResize Test_MDMatrixResize.cpp)
 target_link_libraries(Test_MDMatrixResize PRIVATE rdk.static.qt GTest::gtest GTest::gtest_main)
 add_test(NAME Math_MDMatrixResize COMMAND Test_MDMatrixResize)
 
+add_executable(Test_MVectorStream Test_MVectorStream.cpp)
+target_link_libraries(Test_MVectorStream PRIVATE rdk.static.qt GTest::gtest GTest::gtest_main)
+add_test(NAME Math_MVectorStream COMMAND Test_MVectorStream)
+

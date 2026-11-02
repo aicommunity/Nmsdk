@@ -4238,13 +4238,13 @@ template<class Learner> void InheritedLocalFrequency(unsigned frequency,int norm
     const auto positive=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
         [&](const auto& sample){before.push_back(sample);});
     ASSERT_EQ(positive.status,NativeProbeStatus::Completed);ASSERT_TRUE(positive.observation);ASSERT_TRUE(positive.observation->valid);
-    rig.source->SetTimeStep(frequency/2);
+    rig.source->TimeStep=frequency/2;
     std::size_t invalidSamples=0;
     const auto rejected=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
         [&](const auto&){++invalidSamples;});
     EXPECT_EQ(rejected.status,NativeProbeStatus::Rejected);EXPECT_FALSE(rejected.observation);EXPECT_EQ(invalidSamples,0u);
     EXPECT_NE(std::find(rejected.reasons.begin(),rejected.reasons.end(),"unready_or_multirate_native_graph"),rejected.reasons.end());
-    rig.source->SetTimeStep(frequency);
+    rig.source->TimeStep=frequency;
     EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.Revision(),revision);
     const auto restored=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
         [&](const auto& sample){after.push_back(sample);});
