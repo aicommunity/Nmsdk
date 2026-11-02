@@ -1,0 +1,589 @@
+{
+  "kind": "native_search_termination_gate",
+  "worker": "normal",
+  "numeric_root": "24d1beba2bb58982931a62668a3019dd053e20f8",
+  "pulse": "63fd7a9fecbc567fb8e5c690ae58fc73a896de65",
+  "rdk": "eda206b6b35de451ae837473d731ba20e7c30bde",
+  "cpp_tests": 46,
+  "pure_controller_tests": 42,
+  "native_boundary_controls": 4,
+  "reader_cases": 4,
+  "complete_probe_packets": 32,
+  "trial_soma_pairs": 48,
+  "scope": "internal native API; Classic/Branch N0/N1 singleton physical bounds, 2000Hz, sync0 negative control; not full configured-controller or scientific matrix",
+  "records": [
+    {
+      "path": "native-gate/build.log",
+      "bytes": 11864,
+      "sha256": "2ae3115cb0fec25f632160864d2a389615226a540ed853e767bfdc71175a65c1"
+    },
+    {
+      "path": "native-gate/checkout-Nmsdk-Bin.log",
+      "bytes": 105,
+      "sha256": "692712e8a574dc16274f9019c4c2eab8208614f40ccfbed6c0eb393954370098"
+    },
+    {
+      "path": "native-gate/checkout-Nmsdk-PulseLib.log",
+      "bytes": 511,
+      "sha256": "618eded861224b93dfb4496dcae4ca4e83a15273d3dd87bd37a652a63343b567"
+    },
+    {
+      "path": "native-gate/checkout-Rdk.log",
+      "bytes": 80,
+      "sha256": "5fde31571f7b28d9ffec8c02322d662fcf7a136b0f683d27cb1fce7dbf70cd98"
+    },
+    {
+      "path": "native-gate/checkout-root.log",
+      "bytes": 633,
+      "sha256": "e266c12af9f9a3ffb64b280fe90ce252d9c0c04a3b8774fa500f724b06bd97e3"
+    },
+    {
+      "path": "native-gate/configure.log",
+      "bytes": 1225,
+      "sha256": "1b37cfb701372eae5d3484ace22443e08c25831ba9921847a86f1e866c93aaca"
+    },
+    {
+      "path": "native-gate/execution.json",
+      "bytes": 444,
+      "sha256": "b60c2590f5a4a269a980e11018674a5ac31afbd04451748639274ebbd915dc64"
+    },
+    {
+      "path": "native-gate/fetch-Nmsdk-Bin.log",
+      "bytes": 124,
+      "sha256": "3e9aff61521a536ee5a5d14bc43f1043b337c8a307414a15dddd91ccf011a4ed"
+    },
+    {
+      "path": "native-gate/fetch-Nmsdk-PulseLib.log",
+      "bytes": 127,
+      "sha256": "aba8295a8a829fd0263c86f3e2f10f33bafe28a490bba9514aead2d3e2474475"
+    },
+    {
+      "path": "native-gate/fetch-Rdk.log",
+      "bytes": 118,
+      "sha256": "43dd5042afe9ce031714c2281cc9b87b65f9a7cf8830c43584f562a8036dcf19"
+    },
+    {
+      "path": "native-gate/fetch-root.log",
+      "bytes": 122,
+      "sha256": "441ff947a159170c6bc9c8662f891c18c614e6ab066d253c3831250ff6503a5c"
+    },
+    {
+      "path": "native-gate/gtest.xml",
+      "bytes": 16827,
+      "sha256": "35fa02023eaddeaf14ee9fef8290c1eeb835ae766739416a5a04c8331b919d8f"
+    },
+    {
+      "path": "native-gate/job.py",
+      "bytes": 6028,
+      "sha256": "60b1975ce09566f54a82064169802060e827ba8048eeeb573849f8e861693593"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_construction.json",
+      "bytes": 134,
+      "sha256": "6def281fec282e14f242a163e27b7663916547da3be34bbc1707948ddd39ed8f"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_startup_after.json",
+      "bytes": 195273,
+      "sha256": "810e73a10ca46df1307e2ea6ac2b6e023c87c4680de1c232e6dfce044f247c67"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_startup_before.json",
+      "bytes": 195273,
+      "sha256": "810e73a10ca46df1307e2ea6ac2b6e023c87c4680de1c232e6dfce044f247c67"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_stopped_package.json",
+      "bytes": 1213801,
+      "sha256": "d23461c6d6ccd0488aa7b4f6b9b5e2a390d6ec4759f1e56827f0b4ae1bceffa0"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_sweep_budget_summary.json",
+      "bytes": 5378,
+      "sha256": "5c1e9ba28b20d5737c6afce2a667d35a7cd06de7235a80620ce3d4c1e471c97f"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "bytes": 14211,
+      "sha256": "2006b8709aaec406c4381846a4dbde2127fb4455aefcd7d4b783108b97e73eb4"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "bytes": 5827,
+      "sha256": "9a2032f1e011c361f2383caf16caf1562f98487a2be95fccf8951b846df7f7e8"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "bytes": 14217,
+      "sha256": "7b063fef5abe3200be6f577f0e01eac9922f6bf11843757bbc496c9497a1a584"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "bytes": 5823,
+      "sha256": "028e6a837c9d01c2254674b8165738f782376ce6306fd8ff49d793963b21d973"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "bytes": 14228,
+      "sha256": "78601eddc3e5c048bc591a4d3eaf14020b93e434e6928365ba545c9dd49834c5"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "bytes": 5827,
+      "sha256": "a363037e579409854d9c6765c1de88b7d72f4f6ad87b26df16f74f2702c4d69a"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "bytes": 14200,
+      "sha256": "75d578433c6536ef2186cca7c33da1af1377d89064ae437acf709ff383f5c0f2"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "bytes": 5806,
+      "sha256": "f3ca1396fc782f11519221c6bac65957348764a7660dceeb5f07ccb509c26e56"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "bytes": 14226,
+      "sha256": "8847ac9df88d69fdfe4d7f9e77860391572c1df1b3b37df285ebc95c963e29ec"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "bytes": 5798,
+      "sha256": "4f56eb6a4c34e51fd5cebe85e2aadaf7bc8ddcc7b0c45115d66e7768ded02aba"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "bytes": 14218,
+      "sha256": "46da2486b232f31ef56ef178dfc470583c4ab41b64b89b9c82da10c5bd69ac69"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "bytes": 5833,
+      "sha256": "727adcb8710fe2c1778a01e1ea90873e295e5be727a99c0bada7504a8a6ef839"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "bytes": 14650,
+      "sha256": "e2662d959ae5eab1b033d4559119f2a0ae127a3e4a26097fd6d1ac0e00eb170f"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "bytes": 5837,
+      "sha256": "4ef559db41316c5f3a14b574f4efa8ab9056a4cefaeb69399d430ad6d41fc22a"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "bytes": 14715,
+      "sha256": "e89a71ade4d178a24668379b97ed593347cbebe21900851a74ca0ac706b07d5c"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "bytes": 5842,
+      "sha256": "dac153d2477ba278f5ff962f041ca5aba170beb9e2ff3e95d9f68014aaf19e93"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_construction.json",
+      "bytes": 134,
+      "sha256": "e4120086cef541c4a9348fa99325e493d56a50cba2de3dc4c63ec33993c382e2"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_startup_after.json",
+      "bytes": 195279,
+      "sha256": "cff8cf0412642fd28cb256abf7da3fff9aaee8db6844f78405163d405f4ca4e1"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_startup_before.json",
+      "bytes": 195279,
+      "sha256": "cff8cf0412642fd28cb256abf7da3fff9aaee8db6844f78405163d405f4ca4e1"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_stopped_package.json",
+      "bytes": 1213798,
+      "sha256": "909afed66710033e97dff574e9770e683db7bf9b03ac3a6f7064e06b1b8ad491"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_sweep_budget_summary.json",
+      "bytes": 5379,
+      "sha256": "de4cb79254f439c7879a03c6b0d51bd4fab77f8a10e281d237daa3c9c92a71a8"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "bytes": 14714,
+      "sha256": "6e0d097a5af660f08f79beb5a680f39a316a4f990a968251aba88576a8d290dc"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "bytes": 5826,
+      "sha256": "2c75146c5d9976dbed3074620d4aba1c70864cd9ec063604d5ec0712db5362d8"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "bytes": 14744,
+      "sha256": "c8fbf4e0468b0d80bb99ad30cae0609fe8d2e3c4df4b3d5cbdf760029890c8e4"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "bytes": 5822,
+      "sha256": "f2472d77e7cc87d00abfde08f057775a6617a049c988a689d67c5c05be89a22d"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "bytes": 14729,
+      "sha256": "1e55719352a6526485dac77391ed4d2a9317584ab185362ad7724aaffe703672"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "bytes": 5826,
+      "sha256": "6d5fe35c7c90b98ca7b1617bcab114d3fe7cae63d78b9eeac40cedb38b0971e5"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "bytes": 14711,
+      "sha256": "84962adc6dfb0088e65745775903745ffcb3a8c1a0ccbea69f24a9ecc6470b14"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "bytes": 5807,
+      "sha256": "de52e7b87aa93b7c69bfc145a3a6dea2642373c22a01c56822bfdface309add7"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "bytes": 14731,
+      "sha256": "2ad9c68c7a31a6b04290801f34e9a1bd677c9a038208a74f1c5e6d3c632c6beb"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "bytes": 5801,
+      "sha256": "ace601c628c0d4ba164e331426c52875db9d1892f4a7427a71353d356a2dccf1"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "bytes": 14716,
+      "sha256": "73f88b3bb8972c4e307646b30aebd86b90de0ef5d802648411c501b71a1cb4ad"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "bytes": 5829,
+      "sha256": "b077ef397625a3305583ecf20a6f766fb95e343ecc0076bf6cd5bd72c059e2e1"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "bytes": 14728,
+      "sha256": "2baa08dc8908bc276856f22cde95fea31fa5c73636bff494dab8976010a6d58f"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "bytes": 5838,
+      "sha256": "9efceede3964175c7cfdd543a06727535117b229b8bc97f093be61a7424c4c16"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "bytes": 14715,
+      "sha256": "11b9add4a001d06536363a4dcf7e8632e5c91fb79e4db3ba025919cd3004c90c"
+    },
+    {
+      "path": "native-gate/native/Branch_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "bytes": 5842,
+      "sha256": "8a4b1a4da83787bfa623033f22912ff39833434f4e805170f08d606a434a1b2d"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_construction.json",
+      "bytes": 134,
+      "sha256": "ce4ff701ea0ae0d7aa2689c8abe81e2361e4b7bd54a9f2a995c76efa5a4aea90"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_startup_after.json",
+      "bytes": 260227,
+      "sha256": "d13b412e2950a13d972c55678cb54b8117f916b42dbf42fdb947b0fef507ef22"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_startup_before.json",
+      "bytes": 260227,
+      "sha256": "d13b412e2950a13d972c55678cb54b8117f916b42dbf42fdb947b0fef507ef22"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_stopped_package.json",
+      "bytes": 1304105,
+      "sha256": "dacf746e31e00da5e2044dc05ab4b9f0bbe3db5e949bf32d7e6e1d52e24b1d62"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_sweep_budget_summary.json",
+      "bytes": 5387,
+      "sha256": "b0d57eaa7326179cb0af4626bd1c8bcc6fac99bf0b6dc25b6752022deca8870e"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_1.csv",
+      "bytes": 22082,
+      "sha256": "2cf05522eb1db3c14ca99146f3052101c5e4b01902b78a3a0cf1cc0d3ba6e3ca"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_1.json",
+      "bytes": 5761,
+      "sha256": "872b65a03bf6033fac7f6064793b362d696ddda2c03fc386a69b661d40a9c44e"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_2.csv",
+      "bytes": 22070,
+      "sha256": "d5ef565e53d447d5ff0fc814b93af74f6a556bdeaf9e8e73bf6052f6800cdcbc"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_2.json",
+      "bytes": 5844,
+      "sha256": "1dbf129e865a420bb07534824d26c2a328de1d67486c2569a79517e7220b8515"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_3.csv",
+      "bytes": 22445,
+      "sha256": "631a288d5f0c6987c9e69f3ea386f378e794de214f83558c0fb4bd5c5b6e5c49"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_3.json",
+      "bytes": 5849,
+      "sha256": "1e23fa990764eda743fdb8b8fb27e18e6c675577f74032cc6aefd7103fa02e5a"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_4.csv",
+      "bytes": 22861,
+      "sha256": "ca9368db79a46bc3b1e53f27d401adfc0d4c3e2fd4504053bea635b1bce33789"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_4.json",
+      "bytes": 5832,
+      "sha256": "af62c81938ffb1dcc7ecd21059b51d168cd1bf22a9cd295e3597f7ee1c52e099"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_5.csv",
+      "bytes": 22849,
+      "sha256": "0d709eab1e92e0c13f04d62dc7b824c881df5ad481a519c1bb0ac6c399cdb8ad"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_5.json",
+      "bytes": 5850,
+      "sha256": "6847e8328fde9319329cba10414bcb1a02d92843a6e16a491c4084350e158611"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_6.csv",
+      "bytes": 21979,
+      "sha256": "b06f3d24ea533f96c3ec6b39c76f6e81fe82e16c3cfa65cc989805c3c79b8ab1"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_6.json",
+      "bytes": 5832,
+      "sha256": "41d3ad17748f0be80ebab00da5881cd739d3cb24b5888cb84fdd13d7c3026b83"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_7.csv",
+      "bytes": 20881,
+      "sha256": "ef5851113abf30e3069d5e3dad70c16aaabeffbe3f7ea4566646b53122cdf38a"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_7.json",
+      "bytes": 5860,
+      "sha256": "a86f116193973252bb41b5c850b0d2352f7c9ccd5eba4c6ccb9aa225c5be8506"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_8.csv",
+      "bytes": 20890,
+      "sha256": "dd07914e22a3a5ff845e52c8590ee83c8dd31b16e8c798c83d10d18a9ea2286f"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N0_sweep_budget_boundary_training_proof_8.json",
+      "bytes": 5855,
+      "sha256": "b7fdc6b02c35300067d84fd8fa7654634660ca385f36d7f25652e6ed8a29322a"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_construction.json",
+      "bytes": 134,
+      "sha256": "40393a9afec00268ac89867016b2a3e88318824a981693a1c4018072f0a62ef5"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_startup_after.json",
+      "bytes": 260233,
+      "sha256": "671635373f98336ecd7b2d9c3e60540601448a168850e5b9eca9739333fae9f7"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_startup_before.json",
+      "bytes": 260233,
+      "sha256": "671635373f98336ecd7b2d9c3e60540601448a168850e5b9eca9739333fae9f7"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_stopped_package.json",
+      "bytes": 1304360,
+      "sha256": "475614fe22d65938195a29a7ee3ef0d86a0686b26f7bedf51482a9f0dcbdbf49"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_sweep_budget_summary.json",
+      "bytes": 5388,
+      "sha256": "1cd902053dd3104e79c75f1d24eec4fb9835d47e28aa274103144c1cca5fa9d0"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_1.csv",
+      "bytes": 20841,
+      "sha256": "f4ea1db0e78c42acc8af5854268ac06fbc2397b11d9aebc9fad0d2e9ecd970bf"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_1.json",
+      "bytes": 5876,
+      "sha256": "82ac462489bbba98d786fae3faa0605aee2fec6fd6b8988195ab45f24e6a1e90"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_2.csv",
+      "bytes": 20840,
+      "sha256": "406581894ba7da26c251213ea6f3c5164e83e0e8a13f8a70e4b3a2f2c9a5e728"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_2.json",
+      "bytes": 5845,
+      "sha256": "c6343078c9ebba756c45747b724daa726fd5453cedcebd782f0f4d8506b2a0c6"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_3.csv",
+      "bytes": 20903,
+      "sha256": "4dc9030919043692923a7818d4f3556a4ef851e992ef8baef56ae74575172c0a"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_3.json",
+      "bytes": 5850,
+      "sha256": "ad1029767dad8824cd7350a4af88cb90e9425e283880bc3bfcae2d9ac3da46df"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_4.csv",
+      "bytes": 21808,
+      "sha256": "15f130b73fcc649c7675f3e2d1cf3f5c34d32ed76f1022ff5f9f65bec724eebe"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_4.json",
+      "bytes": 5831,
+      "sha256": "2b4a749a85f6eb96ba9c59dc15bfc841fb7a42b801351de99b1637e245a3d482"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_5.csv",
+      "bytes": 21901,
+      "sha256": "09384543f802c446d4d4a4a19779703081acee948cfa191f38c7f23b0d8ca77d"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_5.json",
+      "bytes": 5824,
+      "sha256": "2050c7800dc6088f6163e13afc2685d3938b5ce8ce0d57f29880179bf000fcf5"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_6.csv",
+      "bytes": 21886,
+      "sha256": "ad0e33420c3317439258fb7951c71cac2f445e05a1b80b49bc6564b02806b1f4"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_6.json",
+      "bytes": 5829,
+      "sha256": "5af96b5f415194a00830356afc25332a9204b440cf4923a5f4317e06b57e04c8"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_7.csv",
+      "bytes": 21904,
+      "sha256": "b9eb0ee88fbdf1fed009464c687264afff7237d623161ed2eab7af67fa966f7c"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_7.json",
+      "bytes": 5886,
+      "sha256": "4c290df9c0ad7c332d63db7f853436d2fe8733a21b50fadff17dd2df83fcdd28"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_8.csv",
+      "bytes": 21886,
+      "sha256": "b31dfd6d8ae535ede60bf58bab8a0be9e19d06ad0964692a9403de13bb2ff5b5"
+    },
+    {
+      "path": "native-gate/native/Classic_2000_N1_sweep_budget_boundary_training_proof_8.json",
+      "bytes": 5855,
+      "sha256": "cb074816839f4150462676f5aa3d7839cffb8d02046a7a5ef9ba982ee6372898"
+    },
+    {
+      "path": "native-gate/pid.json",
+      "bytes": 44,
+      "sha256": "5b755d1f3ca06ba05a769f1b5a2f22813e37803010cbd252d845bc4ba4135199"
+    },
+    {
+      "path": "native-gate/prior-closed-campaign-publication.json",
+      "bytes": 133,
+      "sha256": "e44c4347f3a180dd995cc5414b0d5eebc610d807ff1a02e6720ced1f69f1cef9"
+    },
+    {
+      "path": "native-gate/process/loaded-files.json",
+      "bytes": 4517,
+      "sha256": "eb24ee623c645c88e9ed90aaf81cd440f7b23e29350ac006ff733efe27343cd9"
+    },
+    {
+      "path": "native-gate/process/owned-process.json",
+      "bytes": 417,
+      "sha256": "77ebfc7a17130edd0e420d11e26741092f291ba31593c70ecc77650e20fd1ae3"
+    },
+    {
+      "path": "native-gate/process/request.json",
+      "bytes": 546,
+      "sha256": "34d1c1b43edd91aa2ad08e6cfe9176c9f452e68ff83a635ccc54511089549362"
+    },
+    {
+      "path": "native-gate/process/result.json",
+      "bytes": 444,
+      "sha256": "b60c2590f5a4a269a980e11018674a5ac31afbd04451748639274ebbd915dc64"
+    },
+    {
+      "path": "native-gate/process/runtime.json",
+      "bytes": 12175,
+      "sha256": "4445a8ef6bc8e3da450a636b3e8557147fac07461bc3af611af2937bec6c2122"
+    },
+    {
+      "path": "native-gate/process/stderr.log",
+      "bytes": 247,
+      "sha256": "63c0761f471df49da69c67b99969e2fbe6ab25fbc4622fe728ba7aec1bbd1463"
+    },
+    {
+      "path": "native-gate/process/stdout.log",
+      "bytes": 9131,
+      "sha256": "1c92890ad8e7f479af6a6560a4d05cc215706c839e5111aeef4e3feb8a765c12"
+    },
+    {
+      "path": "native-gate/process-guard.json",
+      "bytes": 380,
+      "sha256": "1c06e45d5164daaf376e4b745cd76a8da7e5dcf48079b8ab14cacb17d5224ff1"
+    },
+    {
+      "path": "native-gate/runtime.json",
+      "bytes": 12175,
+      "sha256": "4445a8ef6bc8e3da450a636b3e8557147fac07461bc3af611af2937bec6c2122"
+    },
+    {
+      "path": "native-gate/source.json",
+      "bytes": 1304,
+      "sha256": "d574f67d0b87218d57de311bfbe2b4e6ffa2bf375bee72dd5d496cd8f712f68b"
+    },
+    {
+      "path": "native-gate/supervisor.log",
+      "bytes": 143,
+      "sha256": "3bdf86b1e48ca3de360cc439d8c6c27012f9d26966b5c597263868fa35eea9d7"
+    },
+    {
+      "path": "native-gate/terminal.json",
+      "bytes": 98,
+      "sha256": "6da95882bf2f5580c1b1fd23902dab7701700b578acb36fa7b0608208061b278"
+    },
+    {
+      "path": "native-gate/validation.json",
+      "bytes": 816,
+      "sha256": "278ee505ae8bc08ac39df59b5d9ea2c5d32b6ee9b406b507d24d3aa3e54f9970"
+    },
+    {
+      "path": "reader/result.json",
+      "bytes": 2790,
+      "sha256": "c42617bcc967f609d0c224e5ea8aea4d2f5654e9e53ae5ea7bdc9d33d1ad52c3"
+    },
+    {
+      "path": "post-gate-source.json",
+      "bytes": 1304,
+      "sha256": "d574f67d0b87218d57de311bfbe2b4e6ffa2bf375bee72dd5d496cd8f712f68b"
+    }
+  ],
+  "archive_sha256": "223949a09628af8925c4b44bca9861cdda680b1234b4b846284e074f463a202f",
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null
+}

@@ -17,7 +17,7 @@ from .native_pipeline_worker import audit_execution, audit_run_manifest
 from .plotting import plotting_runtime
 from .posttune_transaction_reports import render_posttune_transaction_data
 from .probe_reports import render_probe_set
-from .reports import render_evaluation
+from .reports import render_evaluation, render_diagnostic_evaluation
 from .stopped_evidence import load_case as load_stopped
 
 
@@ -29,7 +29,7 @@ def write(path, value):
 def read_pipeline_report(source):
     source = Path(source);audit = audit_run_manifest(source);root = source.parent
     manifest, job, execution = load(source), load(root/"input/job.json"), load(root/"native/execution.json")
-    mode = manifest["operation"];require(mode in {"train", "evaluate"}, "pipeline_report_has_no_native_observations")
+    mode = manifest["operation"];require(mode in {"train", "evaluate", "diagnostic-evaluate"}, "pipeline_report_has_no_native_observations")
     native = root/"native";packets = [];case = live = None
     if mode == "train":
         # Also audit the typed schema1 partial result, whose historical process
@@ -81,6 +81,10 @@ def render_pipeline_run(source, output):
             if live["post_tune"]:
                 posttune = render_posttune_transaction_data(live["post_tune"], case, output/"posttune")
                 links.append('<li><a href="posttune/index.html">Actual PostTune/calibration matrices and final-threshold responses</a></li>')
+    elif manifest["operation"] == "diagnostic-evaluate":
+        evaluation = render_diagnostic_evaluation(root/"native/evaluation.json", root/"native/model.json",
+                                                 root/"input/source/train_stopped_state.json", output/"evaluation")
+        links.append('<li><a href="evaluation/index.html">Stopped Train: declared patterns, actual soma responses and missing observations</a></li>')
     else:
         evaluation = render_evaluation(root/"native/evaluation.json", root/"native/model.json", output/"evaluation")
         links.append('<li><a href="evaluation/index.html">Every declared frozen-evaluation pattern and soma channel</a></li>')
@@ -96,6 +100,9 @@ def render_pipeline_run(source, output):
         "training_packet_order": [p.name for p in packets], "runtime": runtime,
         "native_execution_attested": False, "independent_partition_verified": False,
         "visual_acceptance_complete": False, "scientific_verdict": None}
+    if manifest["operation"] == "diagnostic-evaluate":
+        result.update(diagnostic_only=True, training_completed=False,
+                      source_training_outcome=execution["training_outcome"])
     write(output/"manifest.json", result)
     (output/"index.html").write_text('<!doctype html><meta charset="utf-8"><title>Production TimeLearner responses</title>'
         '<style>body{font:18px sans-serif;margin:2em}</style><h1>Production TimeLearner: actual responses</h1><p>'+

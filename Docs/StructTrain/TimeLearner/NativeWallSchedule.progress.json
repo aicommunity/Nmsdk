@@ -1,0 +1,191 @@
+{
+  "kind": "native_wall_schedule_checkpoint",
+  "accepted_root": "f03f3a277fb69c082e670d7afec6f90ced313a4f",
+  "baseline_root": "162afc02abc321368304c8913a12a8ab2195682b",
+  "pulse_baseline": "a18bf543007c52a3ac7a6fbb148a48cb2c351de3",
+  "rdk_baseline": "0a1c1d05a1b12de20feabf54a25712e210865791",
+  "root_branch": "codex/timelearner-native-wall-limits",
+  "pulse_branch": "codex/timelearner-native-wall-limits",
+  "pulse_worktree": "E:/Science-Repo/pulselib-native-wall-limits",
+  "guard_implemented": true,
+  "declared_probe_cases": 32,
+  "selected_baseline_cases": 2,
+  "baseline_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s04-native-wall-baseline-normal-a1",
+      "pid": 3363165,
+      "start_ticks": "315486965",
+      "source": "/home/user/timelearner-refactor/source-n1-measured-refinement-normal-a1",
+      "build": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1",
+      "runtime": "/home/user/timelearner-refactor/runtime-s04-native-wall-baseline-normal-a1"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-wall-baseline-asan-a2",
+      "pid": 1377398,
+      "start_ticks": "266067078",
+      "source": "/media/user/Data/TimeLearnerRefactor/source-native-wall-asan-a1",
+      "build": "/media/user/Data/TimeLearnerRefactor/build-native-wall-asan-a1",
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s04-native-wall-baseline-asan-a2"
+    }
+  ],
+  "publication_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s04-native-wall-baseline-publication-normal-a1",
+      "pid": 3364974,
+      "start_ticks": "315496340"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-wall-baseline-publication-asan-a1",
+      "pid": 1381144,
+      "start_ticks": "266085503"
+    }
+  ],
+  "cancelled_setup": {
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-wall-baseline-asan-a1",
+    "pid": 1374794,
+    "start_ticks": "266053243",
+    "reason": "omitted existing RDK_LLM_BUILD_EMBEDDED=OFF; own process group stopped before native tests"
+  },
+  "unchanged_inherited_native_asan": {
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-inherited-native-asan-a4",
+    "parent_pid": 1328814,
+    "parent_start_ticks": "265736335",
+    "child_pid": 1330455,
+    "numeric_root": "ff2eb1129c4d3d57e767058ab7e512236168c794",
+    "note": "Historical closed16-case gate, published; source path may since have been reused under a new explicit closure."
+  },
+  "next": [
+    "Complete declared163 gate on combined Pulse fca7141/root07167d551, tracked in SearchTermination.progress.json.",
+    "Complete static integrated74 report/cache and raw Reset diagnostics; search32 temporal cache is a different dataset.",
+    "Complete public Console/reader checks against combined runtime and scoped review; merge children first/root last only after acceptance.",
+    "Whole original stages0-12 remain incomplete."
+  ],
+  "full_acceptance": false,
+  "scientific_verdict": null,
+  "pulse_feature": "151a3883137bf112519543f64aa0b9bbf500c579",
+  "declared_native_cases": 66,
+  "declared_probe_packets": 46,
+  "baseline_proofs": {
+    "normal": "f6ad0174e9dee5943a4e66576894bf615ab75509",
+    "m40": "eb6c648128c1b3f8be2bad7ae17f6abb2c74f801",
+    "baseline_cases_each": 2,
+    "observed_samples_each_case": 361,
+    "actual_wall_skips_attested": false
+  },
+  "positive_acceptance_complete": false,
+  "declared_reset_diagnostics": 4,
+  "positive_attempt_a1": "both builds stopped before tests: new fixture called nonexistent public CancelNativeProbe; corrected using native Reset contract; preserve failed build artifacts",
+  "positive_attempt_a2": {
+    "numeric_root": "efdf7a3afa5b1c0167fc78fff957c0cdc70d7782",
+    "both_workers": {
+      "tests": 66,
+      "passed": 62,
+      "failed": 4
+    },
+    "failed_cases": [
+      "ClassicN0OwnerLarge",
+      "ClassicN1OwnerLarge",
+      "BranchN0OwnerLarge",
+      "BranchN1OwnerLarge"
+    ],
+    "reason": "whole-burst positive controls used IsolatedWindow: completed observation correctly reports peak_ambiguous:input0",
+    "correction": "test requests AssignedBurstWave and verifies selected pulse0; production validity/physics unchanged",
+    "acceptance": false
+  },
+  "assertion_publication_jobs": [
+    {
+      "worker": "normal",
+      "pid": 3411318,
+      "start_ticks": "315873116"
+    },
+    {
+      "worker": "asan",
+      "pid": 1428250,
+      "start_ticks": "266416273"
+    }
+  ],
+  "current_accepted_root": "44334e272de8429f29775512a860584c60350899",
+  "positive_attempt_a3": {
+    "numeric_root": "f35f614d2d07c1cc0cdf9786bcadd31d9237ed06",
+    "tests_each_worker": 66,
+    "all_passed": true,
+    "normal_primary": "83dc90cfdd1227a31ffef4392671ddb079dce287",
+    "asan_primary": "271a395cc44366d9b4495abcaa15758233895083",
+    "verified_members": {
+      "normal": 440,
+      "asan": 773
+    }
+  },
+  "strict_reader": {
+    "source": "e7782709157b84b5f8b1cec62711ff0ae4ecf1a2",
+    "tests_each_worker": 10,
+    "all_passed": true,
+    "normal_primary": "44ea08e35811531bbeef2ba61304883f8deae402",
+    "asan_primary": "7e696d6724da3d4770229cfb1d5ddb2e1170c918",
+    "packet_outcomes": {
+      "unprepared_rejected": 32,
+      "live_rejected": 8,
+      "completed_valid": 6
+    }
+  },
+  "visual": {
+    "full_cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s04-native-wall-asan-a1",
+    "png_files": 141,
+    "selected_pngs": 18,
+    "selected_directly_reviewed": 18,
+    "whole_cache_direct_review_complete": false,
+    "qa": "NativeWallScheduleVisualQA.json"
+  },
+  "active_native_jobs": [],
+  "integrated_numeric_root": "507c8a6c4da2b795d4dca3caf7b43806c8bf6835",
+  "integrated_rdk": "eda206b6b35de451ae837473d731ba20e7c30bde",
+  "integrated_gate": {
+    "native_expected": 74,
+    "scope": "66 wall-policy cases plus eight inherited Activity/local-frequency cases at 2000Hz, N0/N1, Classic/Branch",
+    "math_expected": 6,
+    "status": "completed: native74 and Math6 on both workers; published with structured-exit primary",
+    "do_not_update_sources_builds_or_runtimes": false,
+    "runtime_snapshot_immutable": true,
+    "source_build_reuse_requires_closed_owner_and_published_snapshot": true
+  },
+  "public_preflight_jobs": [],
+  "public_preflight_scope": {
+    "awaits_integrated_native_terminal": false,
+    "positive_configs": 14,
+    "negative_configs": 6,
+    "one_tick_train_controls": 2,
+    "inherited_wall_policy": "default negative limits only; positive public override capability not attested",
+    "attempt_a1": "waiting-only supervisors cancelled before any Console or source readback: wrong-owner test mutation corrected from owner to actual owner_class schema field; full original jobs preserved in a2 prior-setup.json"
+  },
+  "independent_migration": {
+    "accepted_root": "8cf5b78ae23b37d0fdd0c99f1c334aabbccbc0bd",
+    "normal_proof": "5daf892a9ca85ba0917de1cbade810beb2aec724",
+    "m40_proof": "ee01174127b6783422b7c223769343ee6a06aa0a",
+    "records_verified": 64,
+    "retired_plan_files": 16,
+    "active_numeric_source_context_unchanged": true
+  },
+  "integrated_primary": {
+    "normal": "9eeb7ba1cea3eedd1cefdbdf7c213e469d230107",
+    "asan": "b4fa92323ec4e9642a929fc913e9746cd0dcfd5c"
+  },
+  "maintained_public_preflight": {
+    "driver": "5325bbd0938c453d988b0ac71b3263c24683c401",
+    "counts_each": {
+      "positive": 14,
+      "negative": 6,
+      "one_tick_train": 2,
+      "reader_tests": 28
+    },
+    "root_develop_merge": "6068f6af753d6a9d61634d5143d401af8dbffa71",
+    "old_manifest_interpretation_preserved": true
+  },
+  "integration_tracking_document": "SearchTermination.progress.json",
+  "combined_pulse_feature": "fca7141178a854c5a2f579e4a195b3a3165340f9",
+  "combined_numeric_candidate": "07167d55125ced4eeff72703a718203e8c90bfc7",
+  "historical_job_identities_note": "All baseline/publication/inherited/integrated/public-preflight PID records in this file refer to closed campaigns; current owned jobs are tracked only in SearchTermination.progress.json."
+}

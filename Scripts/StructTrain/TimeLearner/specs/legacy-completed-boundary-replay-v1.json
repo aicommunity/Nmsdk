@@ -1,0 +1,85 @@
+{
+  "kind": "timelearner_legacy_completed_replay",
+  "schema_version": 1,
+  "archive_repository": "REPLACE_WITH_GIT_REPOSITORY_CONTAINING_PINNED_ARTIFACTS",
+  "archive_snapshot_commit": "07167d55125ced4eeff72703a718203e8c90bfc7",
+  "origin_evidence_commit": "0b556b9dde5338625525707eee2ad96956e4c237",
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "maximum_wall_seconds": 120,
+  "asan_options": "detect_leaks=0",
+  "cases": [
+    {
+      "id": "ClassicN0",
+      "package": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Classic_2000_N0_learned_boundary_learned_state.json.gz",
+        "stored_sha256": "714b3d976b1ede0c16e4abedf80daabc95127ebb3f497c2cd0cbf554a52f95d5",
+        "raw_sha256": "a6940d48580097caf59a82036a5f872d77828a6a49a717f4491a44565187868d"
+      },
+      "expected_trace": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Classic_2000_N0_learned_boundary_frozen_test.csv.gz",
+        "stored_sha256": "04aa389ccb5eedb2f12140a588cd0900b215dee7395f6e431769513b37fffdb2",
+        "raw_sha256": "5d92034e80fed0dd00860f4758ffd8de29d671113b6a0d6bc94e74b76e89eae7"
+      },
+      "expected_probe": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Classic_2000_N0_learned_boundary_frozen_test_evidence.json.gz",
+        "stored_sha256": "eeecdb0a19e81d6ce10a69ef781a7bae2dc98ee80895bf2aad89e641a9580946",
+        "raw_sha256": "e86eb92f49de07a76a7dd252e452b836d07292d475b7d0cf77c797a3a29fcf96"
+      }
+    },
+    {
+      "id": "ClassicN1",
+      "package": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Classic_2000_N1_learned_boundary_learned_state.json.gz",
+        "stored_sha256": "84886a227511e36f549d6aad20b81f81c002ef66ce58a9dcc48c247c55ed606b",
+        "raw_sha256": "5b8bf7239c43afe0060597638431375b34a03101784d777e0e1a2779142266b2"
+      },
+      "expected_trace": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Classic_2000_N1_learned_boundary_frozen_test.csv.gz",
+        "stored_sha256": "ec333e14fde9f7925abf521205a32f721cbde611e64f0285c992668a9cc9d643",
+        "raw_sha256": "b628dacbf9cd40baa459b8e809bb6ac67a181873225e377871248bde4264136d"
+      },
+      "expected_probe": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Classic_2000_N1_learned_boundary_frozen_test_evidence.json.gz",
+        "stored_sha256": "0f4d9a3045a1ae49bae067e8f6664d177d2185d09eaf56373600a9bdeae67e65",
+        "raw_sha256": "f000acd58371db9646aaf6d20b3dc8ce2f54a5d83172a82d355b17d8405343b4"
+      }
+    },
+    {
+      "id": "BranchN0",
+      "package": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Branch_2000_N0_learned_boundary_learned_state.json.gz",
+        "stored_sha256": "9070920d217a208fac194e9ea5a3d25c56bfc9020bc7312b9fb050e24fc79387",
+        "raw_sha256": "5e0f95ce1b87c272e4ef07e7b8689d48055f3d8d861730e5a76230b583816094"
+      },
+      "expected_trace": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Branch_2000_N0_learned_boundary_frozen_test.csv.gz",
+        "stored_sha256": "91561d3137abea6f14507562b3c57f9afa89e814484555d64a6fe7c2143f1ff9",
+        "raw_sha256": "8e7b1869cd53dc84d250b59363c0db86c503d999daa1604d5ee7e9856f2665b2"
+      },
+      "expected_probe": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Branch_2000_N0_learned_boundary_frozen_test_evidence.json.gz",
+        "stored_sha256": "2c7b94c5b8a4b3cd258d8c5036837f933c33c156dcabb539df6231c3e20f9aad",
+        "raw_sha256": "04998ff8d55c10d2aaa932ca293bcff461a2c2eb8f9fd253801f93802ffe0fae"
+      }
+    },
+    {
+      "id": "BranchN1",
+      "package": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Branch_2000_N1_learned_boundary_learned_state.json.gz",
+        "stored_sha256": "ff339b19083914b4ed052c6c141aa136f0ae72116cca970e952c106d8f26571e",
+        "raw_sha256": "ff56497336972c5a3d7da72683118dcb3dd014d18c7d2c18c384931506ccac85"
+      },
+      "expected_trace": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Branch_2000_N1_learned_boundary_frozen_test.csv.gz",
+        "stored_sha256": "5ac8d7c1f55f590da41ff58af9285dd315bee9c5b9920951b6628f021b6d2764",
+        "raw_sha256": "6353c2a0a3c9d26ad13d360230739ed2e645793edff5b5cf27d2b69f61e63d8c"
+      },
+      "expected_probe": {
+        "path": "Reports/StructTrain/TimeLearner/s05-native-learned-elder1/s05-learned-a14/native/Branch_2000_N1_learned_boundary_frozen_test_evidence.json.gz",
+        "stored_sha256": "aff82bfbc5ecba5fad0bfc232b4d33dd0ed00d61a75d3d1816203d0e5c5a18cb",
+        "raw_sha256": "91d3e1a6244ac3399da967ffb4837ed369be3d6753a730e4ef8af2b624b7eb1c"
+      }
+    }
+  ]
+}

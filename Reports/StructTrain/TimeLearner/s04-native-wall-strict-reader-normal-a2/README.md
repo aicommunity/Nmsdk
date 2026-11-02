@@ -1,0 +1,1 @@
+Ten production-reader tests against actual native wall-policy output, with destructive negative copies. Expected outcomes are separate: 32 unprepared rejections, eight live-policy rejections, six valid completed positive probes; four raw Reset diagnostics remain outside closed-probe evidence. Corpus hashes bind to original native output. No classification verdict.

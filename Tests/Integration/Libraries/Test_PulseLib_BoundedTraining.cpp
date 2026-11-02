@@ -5,6 +5,7 @@
 #include <limits>
 #include <functional>
 
+
 namespace {
 using namespace NMSDK::TimeLearner;
 VerificationProtocol Protocol(std::size_t n=2,ProbeRouting routing=ProbeRouting::ClassicBurst)
@@ -234,7 +235,7 @@ TEST(BoundedTraining, EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit)
     }
 }
 
-TEST(BoundedTraining, EmptyEffectiveDomainsRemainSearchUnresolvedWithFreshFinalMeasurements)
+TEST(BoundedTraining, EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements)
 {
     const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);cfg.maximumCandidatesPerInput=2;
     for(auto& b:cfg.bounds)b.maximumLength=2;
@@ -243,7 +244,7 @@ TEST(BoundedTraining, EmptyEffectiveDomainsRemainSearchUnresolvedWithFreshFinalM
         ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Unavailable;d.reason="synthetic_policy_no_interval";
         d.baseModelRevision=a.baseModelRevision;d.geometry=a.parameters;d.inputIndex=a.inputIndex;return d;
     });
-    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);ASSERT_TRUE(session.Certificate());
+    EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);ASSERT_TRUE(session.Certificate());
     EXPECT_FALSE(session.Certificate()->Exact());EXPECT_EQ(session.Certificate()->Residuals().size(),2u);
     EXPECT_EQ(session.AppliedEdits(),0u);EXPECT_FALSE(session.Domains().empty());
 }
@@ -257,7 +258,7 @@ TEST(BoundedTraining, Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesEx
         DriveTraining(session,p,[&](const TrainingAction& a,auto&,auto& raw) {
             raw[0]+=exactAtCap && a.parameters[0].synapses==128?0.:.0001;
         });
-        EXPECT_EQ(session.Status(),exactAtCap?TrainingStatus::Exact:TrainingStatus::SearchUnresolved);
+        EXPECT_EQ(session.Status(),exactAtCap?TrainingStatus::Exact:TrainingStatus::BudgetExhausted);
         ASSERT_TRUE(session.Certificate());EXPECT_EQ(session.Certificate()->Exact(),exactAtCap);
         if(exactAtCap)EXPECT_EQ(session.Parameters()[0].synapses,128);
     }
@@ -273,7 +274,7 @@ TEST(BoundedTraining, LaterSharedPhysicsDamageCannotInheritLocalSuccess)
         // to an earlier committed input. No local flag can bypass that sweep.
         if(a.finalVerification)raw[1]+=.001;
     });
-    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);ASSERT_TRUE(session.Certificate());
+    EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);ASSERT_TRUE(session.Certificate());
     EXPECT_FALSE(session.Certificate()->Exact());EXPECT_FALSE(session.Certificate()->Residuals()[1].withinAmplitude);
 }
 
@@ -309,7 +310,7 @@ TEST(BoundedTraining, CoincidentBranchInputsCannotHideChangesToTheFixedAnchor)
     cfg.bounds[0].maximumLength=1;
     BoundedTrainingSession tied(References(p),cfg,{{1,1,10.},{1,1,10.}});
     DriveTraining(tied,p,[](const auto&,auto&,auto& raw){raw[0]+=.0001;});
-    EXPECT_EQ(tied.Status(),TrainingStatus::SearchUnresolved);EXPECT_EQ(tied.AppliedEdits(),0u);
+    EXPECT_EQ(tied.Status(),TrainingStatus::BudgetExhausted);EXPECT_EQ(tied.AppliedEdits(),0u);
     EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,2,10.},{1,1,10.}})),std::invalid_argument);
     EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,1,11.},{1,1,10.}})),std::invalid_argument);
 }
@@ -318,7 +319,7 @@ TEST(BoundedTraining, AppliedReadbackAndProbeRevisionAreMandatory)
 {
     const auto p=Protocol();auto cfg=Configuration();BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
     DriveTraining(session,p); // Constant delays cannot synchronize these two inputs.
-    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+    EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
     BoundedTrainingSession bad(References(p),cfg,{{1,1,10.},{1,1,10.}});
     auto action=bad.NextAction();ASSERT_TRUE(action);const auto prepared=Prepare(p,action->inputIndex,"initial",0);
     bad.Arm(action->serial,prepared);
@@ -366,7 +367,7 @@ TEST(BoundedTrainingN1Refinement, AMeasuredBracketCanReachBetweenMeshPointsButSt
             d.minimumResistance=1.;d.maximumResistance=16.;return d;
         });
         ASSERT_TRUE(session.Certificate());
-        EXPECT_EQ(session.Status(),damageFinal?TrainingStatus::SearchUnresolved:TrainingStatus::Exact);
+        EXPECT_EQ(session.Status(),damageFinal?TrainingStatus::BudgetExhausted:TrainingStatus::Exact);
         EXPECT_EQ(session.Certificate()->Exact(),!damageFinal);
         EXPECT_NEAR(session.Parameters()[0].resistance,6.,.061);
         EXPECT_EQ(session.Parameters()[1].resistance,10.);
@@ -394,7 +395,7 @@ TEST(BoundedTrainingN1Refinement, AChangedNormalizedPhysicalScopeOrSourceCannotR
         d.sourceAmplitude=measured>=4 && changeSource?2.:1.;
         d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=1.;d.maximumResistance=16.;return d;
     });
-    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+    EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
     for(const auto& e:session.Evidence())
         EXPECT_TRUE(e.parameters.resistance==1. || e.parameters.resistance==4. || e.parameters.resistance==16.);
     }
@@ -522,7 +523,7 @@ TEST(BoundedTrainingN0Candidates, WorseNeighborReturnsToLengthsAndIsNotIssuedTwi
             delay[0]=a.parameters[0].synapses==1?.13:.03;
             raw[0]+=.002;
         });
-        EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
         ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
         // Four unique legal candidates, followed by the mandatory fresh best
         // restoration measurement. Priority points are not retried by fallback.
@@ -601,7 +602,7 @@ TEST(BoundedTrainingLengthCandidates, PredictedPointIsMeasuredAndCannotBypassThe
             delay[0]=.03+.01*(length-2);
             if(length==12 && (!damageFinal || action.finalVerification))delay[0]=.03;
         });
-        EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
         ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
         EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e){return e.parameters.length==12;}));
     }
@@ -658,4 +659,102 @@ TEST(BoundedTrainingLengthCandidates, NonmonotoneMeasurementsRetainTheBoundedLen
         ASSERT_EQ(session.Evidence().size(),4u);
         for(std::size_t i=0;i<4;++i)EXPECT_EQ(session.Evidence()[i].parameters.length,int(i)+2);
     }
+}
+
+
+// Controller-only protocol checks use the production recorder and session.
+// They do not attest native physical dynamics or scientific classification.
+namespace {
+void CheckSweepBudget(ProbeRouting routing,Normalization normalization)
+{
+    for(std::size_t sweeps:{1u,2u})
+    {
+        const auto protocol=Protocol(2,routing);auto config=Configuration(2,normalization);
+        config.maximumSweeps=sweeps;config.maximumCandidatesPerInput=2;
+        config.bounds.assign(2,{1,1,1,1,10.,10.});
+        BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+        DriveTraining(session,protocol);
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        EXPECT_EQ(session.Reason(),"maximum_sweeps_exhausted");
+        ASSERT_TRUE(session.Certificate());EXPECT_FALSE(session.Certificate()->Exact());
+        EXPECT_EQ(session.Certificate()->Residuals().size(),2u);
+        EXPECT_FALSE(session.NextAction());EXPECT_EQ(session.AppliedEdits(),0u);
+    }
+}
+}
+TEST(TrainingTermination,MaximumSweepsClassicN0){CheckSweepBudget(ProbeRouting::ClassicBurst,Normalization::SynapseCount);}
+TEST(TrainingTermination,MaximumSweepsClassicN1){CheckSweepBudget(ProbeRouting::ClassicBurst,Normalization::TipResistance);}
+TEST(TrainingTermination,MaximumSweepsBranchN0){CheckSweepBudget(ProbeRouting::BranchSoloBurst,Normalization::SynapseCount);}
+TEST(TrainingTermination,MaximumSweepsBranchN1){CheckSweepBudget(ProbeRouting::BranchSoloBurst,Normalization::TipResistance);}
+TEST(TrainingTermination,ExactAtLastAllowedSweepTakesPrecedence)
+{
+    const auto protocol=Protocol();auto config=Configuration();config.maximumCandidatesPerInput=2;
+    config.bounds.assign(2,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    DriveTraining(session,protocol,[](const auto& action,auto& delay,auto&) {
+        if(action.finalVerification)delay[0]=.13;
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_TRUE(session.Certificate());
+    EXPECT_TRUE(session.Certificate()->Exact());EXPECT_FALSE(session.NextAction());
+}
+TEST(TrainingTermination,InvalidMeasurementsRemainInvalidObservation)
+{
+    const auto protocol=Protocol();auto config=Configuration();config.maximumCandidatesPerInput=2;
+    config.maximumInvalidObservations=10;config.bounds.assign(2,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    unsigned calls=0;
+    while(const auto action=session.NextAction())
+    {
+        ASSERT_LT(++calls,20u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);auto raw=Raw(2);
+        if(action->inputIndex==0)raw[0]=-.065; // Actual flat recording: no candidate peak.
+        session.Consume(Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,{.03,.03},raw),action->baseModelRevision);
+    }
+    EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);EXPECT_FALSE(session.Certificate());
+    EXPECT_FALSE(session.Rejected().empty());
+}
+
+TEST(TrainingTermination,NoAdjustableInputsRemainSearchUnresolved)
+{
+    const auto protocol=Protocol(1);auto config=Configuration(1);
+    config.bounds.assign(1,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.}});
+    DriveTraining(session,protocol,[](const auto&,auto&,auto& raw){raw[0]+=.001;});
+    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);ASSERT_TRUE(session.Certificate());
+    EXPECT_EQ(session.Reason(),"no_adjustable_inputs_outside_tolerance");
+    EXPECT_FALSE(session.Certificate()->Exact());EXPECT_EQ(session.AppliedEdits(),0u);
+}
+
+TEST(TrainingTermination,ProbeAndAdapterBudgetReasonsAreDistinct)
+{
+    const auto protocol=Protocol();auto config=Configuration();config.maximumProbes=1;
+    BoundedTrainingSession probes(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    DriveTraining(probes,protocol);EXPECT_EQ(probes.Status(),TrainingStatus::BudgetExhausted);
+    EXPECT_EQ(probes.Reason(),"maximum_probes_exhausted");
+    config.maximumProbes=100;
+    BoundedTrainingSession adapter(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    ASSERT_TRUE(adapter.NextAction());adapter.ExhaustBudget();
+    EXPECT_EQ(adapter.Status(),TrainingStatus::BudgetExhausted);
+    EXPECT_EQ(adapter.Reason(),"adapter_execution_budget_exhausted");
+}
+TEST(TrainingTermination,FinalRejectionDoesNotBorrowEarlierSearchDiagnostic)
+{
+    const auto protocol=Protocol();auto config=Configuration();config.maximumInvalidObservations=1;
+    config.maximumCandidatesPerInput=2;config.bounds.assign(2,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    unsigned calls=0;bool rejectedSearch=false;
+    while(const auto action=session.NextAction())
+    {
+        ASSERT_LT(++calls,30u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);auto raw=Raw(2);
+        if(!action->finalVerification && action->inputIndex==0 && !rejectedSearch)
+        {raw[0]=-.065;rejectedSearch=true;}
+        auto observation=Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,{.03,.03},raw);
+        if(action->finalVerification)observation.specification.patternHash="corrupted_final_pattern";
+        session.Consume(observation,action->baseModelRevision);
+    }
+    ASSERT_TRUE(rejectedSearch);EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);
+    EXPECT_EQ(session.Reason().find("final_verification:"),0u);EXPECT_FALSE(session.Certificate());
 }
