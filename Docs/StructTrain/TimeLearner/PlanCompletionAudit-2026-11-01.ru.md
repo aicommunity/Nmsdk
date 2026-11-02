@@ -248,3 +248,31 @@ Primary и exact compatibility inputs доступны в Git, hashes прове
 [Источники и границы](StructuredTrainingExit.ru.md). Это частичное завершение
 конкретного дефекта этапа10 и переноса active regression tool в этап9,
 а не полный scheduler/publisher или весь исходный план0–12.
+
+### Историческая запись wall-кандидата 486955b7 (до завершения integrated gate)
+
+## Дополнение 2026-11-02: подтверждённые ограниченные изменения
+
+Accepted root develop: `0c12a71757d4eb34412f043028f56edfa38ba974`.
+Rdk develop: `eda206b6b35de451ae837473d731ba20e7c30bde`.
+Закрыты normal/ASan native16, Math6 и reader7 для Activity/local-frequency
+реальных fixtures. Все48 положительных проб /72 soma pairs сравнены между
+workers; потенциалы совпали. Проверенные отчёты и границы находятся в
+`InheritedPropertyRuntime.ru.md`, progress JSON и NormalAsanComparison.
+Это частичное усиление этапов3/4/12, не весь lifecycle/storage или алгоритм.
+
+В feature ветке wall-policy66/66 и строгий reader10/10 на обоих workers;
+46 packets имеют объявленные разные исходы,4 Reset traces не считаются
+закрытыми пробами. Full cache141 PNG на M40,18 выбранных просмотрены.
+В develop эти изменения ещё не приняты: integrated74+Math6 выполняется,
+публичный Console preflight и оставшаяся приёмка открыты. См.
+`NativeWallSchedule.ru.md` / progress / VisualQA с точными SHA и job identities.
+
+Статусы полного плана0–12 этим дополнением не повышаются до complete:
+остаются полная история/evidence review, матрица lifecycle/storage/physics,
+весь Train→Test и режимы финализации/калибровки, алгоритмы и статусы поиска,
+legacy/V2 A/B, миграция оставшихся scripts, production scheduler/leases и
+fault matrix публикации, независимые order/ITI эксперименты и сквозная docs.
+Научного нового результата разделимой классификации здесь не получено.
+
+Уточнение при объединении feature branches: integrated74+Math6 и public preflight уже завершены на обоих workers; их данные входят в StructuredTrainingExit.ru.md. Принятый root develop теперь44334e272de8429f29775512a860584c60350899. Объединение wall-policy и search-termination выполняется только в feature branch; оно не означает приёмку алгоритмических изменений в develop. Новое совместное состояние требует отдельной сборки и адресных gates.
