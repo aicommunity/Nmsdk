@@ -1,5 +1,44 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Последнее дополнение 03.11: normal source gate принят в своём объёме
+
+Elder B6 завершён:25/25 native и41/41 Python/JUnit, returncodes0.
+Evidence `91fd3930ba29d0255c9b2cc2a339ebfa8afe7116`:199 members и3 036 859
+compressed bytes полностью проверены. Native25 включает20 clock cases,
+2 production file missing→grow→shrink и3 instrumented native scheduling cases.
+Реальная file задержка1 tick устранена native Build/AfterBuild/Reset до arming.
+Cooperative capture даёт valid actual mappings и точный complete JUnit.
+Это scoped normal PASS; multirate physics и весь этап4/7 этим не закрыты.
+
+Запущен отдельный Elder ASan source gate `s03-dataset-clock-lifecycle-asan-a1`:
+owner77120/322456825, publisher77127/322456835, тот же numerical rootb9af8990
+и Pulse9ab6d57. Новый build-dataset-clock-asan-a1 и отдельный immutable runtime;
+normal build flags не менялись. Shared source-capacitance-state-normal-b1
+сейчас используется ASan supervisor: не выполнять checkout/update/build поверх
+действующего source/runtime. Native25/readers41 pending.24 C0 readers используют
+прежние normal B3 primary; это не новая ASan-проверка C0 transfer.
+
+Baseline temporal A2 завершён на тех же36 записях:1797 PNG плюс SVG/PDF в M40
+Data cache. Компактный отбор `466d1693ed6c369dc92acd33a9d4dcc7695fcb38` —8 PNG
+и сжатые индексы,1 678 617 bytes;13 опубликованных файлов проверены. Все8
+картинок непосредственно просмотрены, title clipping устранён, оси/легенды,
+input overlay и native-tick zoom читаются. Отдельный visual-review.json
+фиксирует ровно этот subset; global_visual_acceptance остаётся false.
+[Пример увеличения](../../../Reports/StructTrain/TimeLearner/s03-dataset-clock-temporal-baseline-selected-a2/dataset_clock_2000_mode2_gap0_origin0/zoom-002.png).
+Baseline FAIL сохраняется; это визуализация дефекта, не успех классификации.
+
+На M40 запущен fixed B6 temporal report76 recordings:
+owner2352301/273017016, source renderer root607c2b616, primary commit91fd3930.
+Полные PNG/SVG/PDF остаются cache, в Git публикуются только выбранные рисунки,
+сжатые первичные данные и метаданные. Selected direct review фиксированного
+среза ещё не выполнен. Параллельный M40 telemetry ASan2343535 остаётся отдельным
+старым срезом; не смешивать его с новым source ASan Elder.
+
+Все изменения закоммичены в codex/timelearner-dataset-clock. Полный план0–12
+остаётся активен: source fix не переносится в develop до ASan/визуальной
+проверки и согласованного children-first merge. C0 auto-ownership/C-trim,
+остальная матрица моделей/режимов и другие открытые пункты не объявлены готовыми.
+
 ## Дополнение 03.11: ASan C2 завершён, source fix ещё проверяется
 
 M40 C2 завершён и опубликован: unit9/native35/readers24, все returncodes0,
