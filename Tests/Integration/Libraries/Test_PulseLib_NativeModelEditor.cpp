@@ -4162,7 +4162,7 @@ template<class Learner> void RejectNativeWallLimitedProbe(int normalization,cons
         {"limited_revision",QString::fromStdString(revision)},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     if(result.status==NativeProbeStatus::Rejected && node=="owner" && limit>0)
     {
-        const auto restored=rig.Probe();ASSERT_EQ(restored.status,NativeProbeStatus::Completed);
+        const auto restored=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true);ASSERT_EQ(restored.status,NativeProbeStatus::Completed);
         ASSERT_TRUE(restored.observation);EXPECT_TRUE(restored.observation->valid);
         EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
     }
@@ -4202,4 +4202,138 @@ WALL_CASE(BranchN1NeuronLarge,NNeuronTimeLearnerBranch,1,"neuron",1000000000)
 WALL_CASE(BranchN1GeneratorZero,NNeuronTimeLearnerBranch,1,"generator",0)
 WALL_CASE(BranchN1GeneratorLarge,NNeuronTimeLearnerBranch,1,"generator",1000000000)
 #undef WALL_CASE
+
+template<class Learner> void ChangeWallPolicyWhileRecording(int normalization,bool finalSample)
+{
+    EditingRig<Learner> rig(2000,normalization,finalSample?"wall_live_final":"wall_live_mid",false,2,true);
+    const auto parameters=rig.learner->ReadNativeParameters();
+    const auto before=rig.environment->GetTime().GetDoubleTime();
+    const auto old=rig.learner->MaxCalculationDuration.GetData();bool changed=false;std::size_t samples=0;
+    const auto result=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true,false,
+        [&](const NativeProbeSample& sample){
+            ++samples;
+            if(!changed && ((!finalSample && samples==2) ||
+                (finalSample && sample.time+1e-12>=before+rig.duration)))
+            {rig.learner->MaxCalculationDuration=1000000000LL;changed=true;}
+        });
+    const auto limit=rig.learner->MaxCalculationDuration.GetData();rig.learner->MaxCalculationDuration=old;
+    ASSERT_TRUE(changed);EXPECT_EQ(limit,1000000000LL);EXPECT_EQ(result.status,NativeProbeStatus::Rejected);
+    ASSERT_TRUE(result.observation);EXPECT_FALSE(result.observation->valid);
+    EXPECT_EQ(result.observation->complete,finalSample);EXPECT_TRUE(result.requiresFreshVerification);
+    EXPECT_EQ(result.observation->sampleCount,samples);
+    if(!finalSample)EXPECT_EQ(samples,2u);
+    EXPECT_NE(std::find(result.reasons.begin(),result.reasons.end(),"unsupported_native_wall_limited_schedule"),result.reasons.end());
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    Artifact(rig.name+"_live_wall_policy.json",QJsonDocument(QJsonObject{
+        {"kind","native_live_wall_policy"},{"schema_version",1},{"changed_on_final_sample",finalSample},
+        {"samples",double(samples)},{"window_complete",result.observation->complete},
+        {"valid",result.observation->valid},{"status",NativeProbeStatusName(result.status)},
+        {"partial_observation_preserved",true},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+template<class Learner> void CancelFromWallControlCallback()
+{
+    EditingRig<Learner> rig(2000,1,"wall_callback_cancel",false,2,true);std::size_t samples=0;
+    const auto result=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true,false,
+        [&](const NativeProbeSample&){if(++samples==2)rig.learner->CancelNativeProbe("wall_control_cancel");});
+    EXPECT_EQ(result.status,NativeProbeStatus::Cancelled);ASSERT_TRUE(result.observation);
+    EXPECT_FALSE(result.observation->complete);EXPECT_FALSE(result.observation->valid);EXPECT_EQ(samples,2u);
+}
+template<class Learner> void RejectWallPolicyBeforeTraining(int normalization,const std::string& location)
+{
+    EditingRig<Learner> rig(2000,normalization,"wall_begin_"+location,false,2,true);
+    UEPtr<UContainer> target;
+    if(location=="owner")target=rig.learner;
+    else if(location=="ancestor")target=rig.model;
+    else if(location=="neuron")target=rig.neuron;
+    else if(location=="generator")target=rig.source;
+    ASSERT_TRUE(target);const auto old=target->MaxCalculationDuration.GetData();ASSERT_LT(old,0);
+    const auto parameters=rig.learner->ReadNativeParameters();const auto before=rig.environment->GetTime().GetDoubleTime();
+    target->MaxCalculationDuration=1000000000LL;
+    rig.learner->BeginNativeTraining(TrainingPlan(rig));
+    const auto& service=rig.learner->NativeTrainingController();const auto reason=service.Reason();
+    const auto state=service.State();const auto outcome=service.Outcome();
+    const auto issued=service.IssuedReferenceProbes();const bool certified=bool(service.Certificate());
+    EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidModel);
+    EXPECT_EQ(reason,"unsupported_native_wall_limited_schedule");EXPECT_EQ(service.IssuedReferenceProbes(),0u);
+    EXPECT_TRUE(service.ObservedPackets().empty());EXPECT_FALSE(service.Certificate());
+    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),before);
+    // A rejected execution policy must not disable ordinary Rdk data/lifecycle
+    // operations, including the resets/builds needed by checkpoint rollback.
+    rig.learner->Reset();
+    EXPECT_EQ(target->MaxCalculationDuration.GetData(),1000000000LL);
+    const bool limitedOwner=location=="owner" || location=="ancestor";
+    // Structural Build may replace children from their storage images. Do not
+    // pretend an old child pointer/metadata override is a transparent checkpoint.
+    if(!limitedOwner)target->MaxCalculationDuration=old;
+    rig.learner->Build();rig.learner->Init();
+    EXPECT_TRUE(rig.learner->IsReady());EXPECT_TRUE(rig.learner->IsInit());
+    EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),before);
+    if(limitedOwner){EXPECT_EQ(target->MaxCalculationDuration.GetData(),1000000000LL);target->MaxCalculationDuration=old;}
+    Artifact(rig.name+"_wall_begin_policy.json",QJsonDocument(QJsonObject{
+        {"kind","native_wall_before_training"},{"schema_version",1},{"location",QString::fromStdString(location)},
+        {"reason",QString::fromStdString(reason)},{"started_reference_probes",double(issued)},
+        {"state_before_reset",NativeTrainingStateName(state)},{"outcome_before_reset",TrainingStatusName(outcome)},
+        {"certificate_before_reset",certified},
+        {"reset_build_preserved_parameters",rig.learner->ReadNativeParameters()==parameters},
+        {"build_with_limited_owner",limitedOwner},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+template<class Learner> void RejectWallPolicyBeforeRecognition(const std::string& location)
+{
+    EditingRig<Learner> rig(2000,1,"wall_recognition_"+location,false,2,true);
+    UEPtr<UContainer> target=rig.learner;if(location=="generator")target=rig.source;
+    const auto old=target->MaxCalculationDuration.GetData();target->MaxCalculationDuration=1000000000LL;
+    NativeProbeBindings bindings;bindings.owner=rig.learner.Get();bindings.neuron=rig.neuron;
+    bindings.dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    bindings.branch=rig.branch;bindings.inputCount=2;bindings.routingComplete=true;
+    for(unsigned i=0;i<(rig.branch?1u:2u);++i)
+    {auto soma=rig.neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);ASSERT_TRUE(soma);bindings.somas.push_back(soma);}
+    NativeRecognitionTrialRequest request;request.runId=rig.name;request.trialId="schedule";request.sampleId="target";
+    request.label="target";request.pattern=rig.learner->InputPattern.GetData();request.duration=rig.duration;
+    QJsonArray values;for(int i=0;i<request.pattern.GetRows();++i)values.append(request.pattern(i,0));
+    request.patternHash=NmsdkTools::CanonicalModelDataSha256(values).toStdString();
+    const auto parameters=rig.learner->ReadNativeParameters();const auto before=rig.environment->GetTime().GetDoubleTime();
+    NativeRecognitionTrialExecutor executor;executor.Queue(request);unsigned presentationEdits=0;
+    executor.BeforeChildren(bindings,before,[&](const auto&){++presentationEdits;},[&](bool){return rig.Revision();});
+    auto result=executor.TakeResult();const auto effective=target->MaxCalculationDuration.GetData();target->MaxCalculationDuration=old;
+    ASSERT_TRUE(result);EXPECT_FALSE(result->armed);EXPECT_FALSE(result->complete);EXPECT_FALSE(result->valid);
+    EXPECT_TRUE(result->samples.empty());EXPECT_EQ(presentationEdits,0u);
+    EXPECT_EQ(result->reason,"unsupported_native_wall_limited_schedule");EXPECT_EQ(effective,1000000000LL);
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),before);
+    // Actual production executor and physical bindings at preparation only;
+    // this is not a trained/frozen evaluation or a classification experiment.
+    Artifact(rig.name+"_unarmed_recognition.json",QJsonDocument(NativeRecognitionTrialJson(*result)).toJson());
+}
+TEST(NativeWallSchedule,ClassicN0MidProbeChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearner>(0,false);}
+TEST(NativeWallSchedule,ClassicN0FinalSampleChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearner>(0,true);}
+TEST(NativeWallSchedule,ClassicN0BeginOwner){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(0,"owner");}
+TEST(NativeWallSchedule,ClassicN0BeginAncestor){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(0,"ancestor");}
+TEST(NativeWallSchedule,ClassicN0BeginNeuron){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(0,"neuron");}
+TEST(NativeWallSchedule,ClassicN0BeginGenerator){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(0,"generator");}
+TEST(NativeWallSchedule,ClassicN1MidProbeChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearner>(1,false);}
+TEST(NativeWallSchedule,ClassicN1FinalSampleChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearner>(1,true);}
+TEST(NativeWallSchedule,ClassicN1BeginOwner){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(1,"owner");}
+TEST(NativeWallSchedule,ClassicN1BeginAncestor){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(1,"ancestor");}
+TEST(NativeWallSchedule,ClassicN1BeginNeuron){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(1,"neuron");}
+TEST(NativeWallSchedule,ClassicN1BeginGenerator){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(1,"generator");}
+TEST(NativeWallSchedule,ClassicCallbackCancellation){CancelFromWallControlCallback<NNeuronTimeLearner>();}
+TEST(NativeWallSchedule,ClassicRecognitionOwner){RejectWallPolicyBeforeRecognition<NNeuronTimeLearner>("owner");}
+TEST(NativeWallSchedule,ClassicRecognitionGenerator){RejectWallPolicyBeforeRecognition<NNeuronTimeLearner>("generator");}
+TEST(NativeWallSchedule,BranchN0MidProbeChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearnerBranch>(0,false);}
+TEST(NativeWallSchedule,BranchN0FinalSampleChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearnerBranch>(0,true);}
+TEST(NativeWallSchedule,BranchN0BeginOwner){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(0,"owner");}
+TEST(NativeWallSchedule,BranchN0BeginAncestor){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(0,"ancestor");}
+TEST(NativeWallSchedule,BranchN0BeginNeuron){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(0,"neuron");}
+TEST(NativeWallSchedule,BranchN0BeginGenerator){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(0,"generator");}
+TEST(NativeWallSchedule,BranchN1MidProbeChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearnerBranch>(1,false);}
+TEST(NativeWallSchedule,BranchN1FinalSampleChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearnerBranch>(1,true);}
+TEST(NativeWallSchedule,BranchN1BeginOwner){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(1,"owner");}
+TEST(NativeWallSchedule,BranchN1BeginAncestor){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(1,"ancestor");}
+TEST(NativeWallSchedule,BranchN1BeginNeuron){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(1,"neuron");}
+TEST(NativeWallSchedule,BranchN1BeginGenerator){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(1,"generator");}
+TEST(NativeWallSchedule,BranchCallbackCancellation){CancelFromWallControlCallback<NNeuronTimeLearnerBranch>();}
+TEST(NativeWallSchedule,BranchRecognitionOwner){RejectWallPolicyBeforeRecognition<NNeuronTimeLearnerBranch>("owner");}
+TEST(NativeWallSchedule,BranchRecognitionGenerator){RejectWallPolicyBeforeRecognition<NNeuronTimeLearnerBranch>("generator");}
 }

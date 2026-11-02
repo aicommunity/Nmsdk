@@ -7,7 +7,7 @@
   "root_branch": "codex/timelearner-native-wall-limits",
   "pulse_branch": "codex/timelearner-native-wall-limits",
   "pulse_worktree": "E:/Science-Repo/pulselib-native-wall-limits",
-  "guard_implemented": false,
+  "guard_implemented": true,
   "declared_probe_cases": 32,
   "selected_baseline_cases": 2,
   "baseline_jobs": [
@@ -65,5 +65,16 @@
     "Preserve all original stages0-12; this substep is not whole lifecycle/storage or algorithm acceptance."
   ],
   "full_acceptance": false,
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "pulse_feature": "6d59d764fbd4181bf9d9697cf19291753a453100",
+  "declared_native_cases": 62,
+  "declared_probe_packets": 46,
+  "baseline_proofs": {
+    "normal": "f6ad0174e9dee5943a4e66576894bf615ab75509",
+    "m40": "eb6c648128c1b3f8be2bad7ae17f6abb2c74f801",
+    "baseline_cases_each": 2,
+    "observed_samples_each_case": 361,
+    "actual_wall_skips_attested": false
+  },
+  "positive_acceptance_complete": false
 }
