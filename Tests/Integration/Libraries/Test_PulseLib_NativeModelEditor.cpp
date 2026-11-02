@@ -88,16 +88,9 @@ class CapacitanceResetFaultNeuron : public NPulseNeuron {
 public:
     int resetsUntilFailure=0;
     int calculationsUntilFailure=0;
-    int buildsUntilFailure=0;
     std::function<void(double)> failureSink;
-    void ArmBuildFailure() {buildsUntilFailure=1;Ready=false;}
     CapacitanceResetFaultNeuron* New(void) override {return new CapacitanceResetFaultNeuron;}
 protected:
-    bool ABeforeBuild(void) override {
-        if(buildsUntilFailure>0 && --buildsUntilFailure==0)
-            throw std::runtime_error("injected_native_child_build");
-        return NPulseNeuron::ABeforeBuild();
-    }
     bool ABeforeReset(void) override {
         if(resetsUntilFailure>0 && --resetsUntilFailure==0)
         {
@@ -112,6 +105,20 @@ protected:
             throw std::runtime_error("injected_native_child_calculate");
         return NPulseNeuron::ABeforeCalculate();
     }
+};
+class BuildContractFaultNeuron : public NPulseNeuron {
+public:
+    UProperty<MDMatrix<double>,BuildContractFaultNeuron,ptInput|ptPubState> TestInput;
+    BuildContractFaultNeuron():TestInput("FaultInput",this) {}
+    BuildContractFaultNeuron* New(void) override {return new BuildContractFaultNeuron;}
+    void ArmBuildFailure() {armed=true;Ready=false;}
+protected:
+    bool ABeforeBuild(void) override {
+        if(armed){armed=false;throw std::runtime_error("injected_native_child_build");}
+        return NPulseNeuron::ABeforeBuild();
+    }
+private:
+    bool armed=false;
 };
 template<class Learner> class PostTuneStimulusLearner : public Learner {
 public:
@@ -968,11 +975,11 @@ TEST(NativeOperationDiagnostics,CalculateFailureCensorsTheActualNativeObservatio
 
 TEST(NativeOperationDiagnostics,BuildPreservesTrueAndReportsSubtreeFailure)
 {
-    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="CapacitanceResetFaultNeuronFixture";
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="BuildContractFaultNeuronFixture";
     if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
-        +[]()->UComponent*{return new CapacitanceResetFaultNeuron;},image),image);
+        +[]()->UComponent*{return new BuildContractFaultNeuron;},image),image);
     EditingRig<NNeuronTimeLearner> rig(2000,1,"operation_build",false,2,true,2,1,false,{},1,1.,image);
-    auto failing=dynamic_cast<CapacitanceResetFaultNeuron*>(rig.neuron.Get());ASSERT_TRUE(failing);
+    auto failing=dynamic_cast<BuildContractFaultNeuron*>(rig.neuron.Get());ASSERT_TRUE(failing);
     const auto marker=rig.learner->OperationFailureSequence();
     failing->ArmBuildFailure();const bool returned=rig.neuron->Build();
     EXPECT_TRUE(returned);EXPECT_FALSE(rig.neuron->IsReady());
@@ -983,6 +990,19 @@ TEST(NativeOperationDiagnostics,BuildPreservesTrueAndReportsSubtreeFailure)
     const auto after=rig.learner->OperationFailureSequence();
     EXPECT_TRUE(rig.neuron->Build());EXPECT_TRUE(rig.neuron->IsReady());
     EXPECT_FALSE(rig.learner->HasOperationFailureSince(after));
+    int connection=-1;
+    failing->ArmBuildFailure();
+    EXPECT_FALSE(failing->Connect(UEPtr<UConnector>(failing),"Output","FaultInput",connection,true));
+    EXPECT_TRUE(failing->TestInput.GetDataSources().empty());EXPECT_FALSE(failing->IsReady());
+    EXPECT_TRUE(failing->Build());
+    failing->ArmBuildFailure();
+    EXPECT_FALSE(failing->ConnectToItem(UEPtr<UItem>(failing),"Output","FaultInput",connection,true));
+    EXPECT_TRUE(failing->TestInput.GetDataSources().empty());EXPECT_FALSE(failing->IsReady());
+    EXPECT_TRUE(failing->Build());
+    ASSERT_TRUE(failing->Connect(UEPtr<UConnector>(failing),"Output","FaultInput",connection,true));
+    EXPECT_EQ(failing->TestInput.GetDataSources().size(),1u);
+    failing->Disconnect(UEPtr<UConnector>(failing),"Output","FaultInput",connection);
+    EXPECT_TRUE(failing->TestInput.GetDataSources().empty());
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
     Artifact(rig.name+"_operation_diagnostic.json",QJsonDocument(QJsonObject{{"returned",returned},
         {"operation",QString::fromStdString(failure.Operation)},{"reason",QString::fromStdString(failure.Reason)}}).toJson());
