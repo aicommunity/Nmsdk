@@ -111,3 +111,19 @@ verified metadata members,411092 compressed bytes и16 selected PNG. Все
 спайк либо новое доказательство сходимости. Seven actual-cache tests
 и corrected selected figures ожидают серверной проверки по02833ffb4.
 Полная ручная приёмка2651 PNG и ASan native16 не заявляются.
+
+Исправленный отбор проверен на обоих workers по исходникам
+`12649b3a6f1da80d5898a6744ab7f7b35f47ac49`:7/7 checks,8 реальных
+вариантов,24 named anchors/20 unique views. Elder analysis proof
+`41a5cf04ff4394e3016c682df1d01d0d36ed3930`, M40 analysis proof
+`1edb1f403786c8266baf401cd64e239bfc000095`. Это один и тот же закрытый
+Elder corpus на двух машинах; слово asan в пути M40 не делает эту проверку
+доказательством ASan-native waveform.24 anchor records совпали семантически.
+
+Для20kHz выбраны actual-input zoom-003 и response zoom-007-detail,
+с явно подписанной local_detail шкалой Y; overview сохраняет общий масштаб.
+Все20 final PNG просмотрены:16 уже проверенных побайтно совпадающих
+изображений и4 дополнительно открытых local-detail рисунка. Кривая
+вершины теперь различима. Подробности: `InheritedPropertyCorrectedVisualQA.json`.
+Полный cache2651 PNG остаётся на M40; целиком вручную не принимался.
+ASan native16 и общая приёмка наследуемых свойств/Rdk feature ещё открыты.
