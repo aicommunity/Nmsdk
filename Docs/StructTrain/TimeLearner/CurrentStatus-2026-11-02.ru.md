@@ -1,5 +1,12 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+Текущая алгоритмическая работа: [per-channel C-trim physical editor](NativeCapacitanceEdit.ru.md).
+Новый API и8 actual native fixtures находятся в отдельной feature; серверная
+приёмка ещё идёт. Старый scalar C-trim не считается исправленным этим API,
+ControllerVersion2 по-прежнему явно отклоняет режим до полной интеграции.
+Baseline provenance/persistence, growth extension, bounded C search и fresh
+final verification остаются обязательными. Develop этим checkpoint не меняется.
+
 Следующее дополнение: [декларативный validation runner](ValidationSuites.ru.md)
 прошёл66/66 без skips на каждом worker и5 actual CLI negative controls.
 Versioned suite фиксирует Python package, все test IDs и1599-file Git corpus.
