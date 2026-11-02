@@ -1,5 +1,11 @@
 # Состояние полного плана TimeLearner — 01.11.2026
 
+Дополнение03.11: [explicit C₀ native edits и transfer](C0Acceptance-2026-11-03.ru.md)
+приняты адресно: normal9/14, independent reader24, ASan9/35/readers24, verified
+actual mappings и766 members. Это не automatic C-trim ownership/search и не
+вся матрица профилей; статусы исходных этапов0–12 не меняются. Отдельные
+dataset clock/archive изменения не входят в этот принятый Core.
+
 Последующее дополнение: [срез02.11 по полноте временных данных](CurrentStatus-2026-11-02.ru.md).
 Обновление02.11: ASan163/163 и recording18/18 завершены, primary readers32/32;
 сигналы совпали с normal temporal sources. Адресная приёмка search/scheduling/
