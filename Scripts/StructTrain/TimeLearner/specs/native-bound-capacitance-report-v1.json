@@ -1,0 +1,336 @@
+{
+  "kind": "timelearner_native_test_report_spec",
+  "schema_version": 1,
+  "fixture_contract": "native-bound-capacitance21-v1: declared 61 native probe traces; complete and censored windows remain distinct; no scientific verdict or visual acceptance inferred",
+  "expected_test_ids": [
+    "NativeOperationDiagnostics/BuildPreservesTrueAndReportsSubtreeFailure",
+    "NativeOperationDiagnostics/ResetPreservesTrueAndReportsSubtreeFailure",
+    "NativeOperationDiagnostics/CalculateFailureCensorsTheActualNativeObservation",
+    "NativeJointCapacitance/ClassicN0",
+    "NativeJointCapacitance/BranchN0",
+    "NativeJointCapacitance/ClassicN1",
+    "NativeJointCapacitance/BranchN1",
+    "NativeJointCapacitance/ClassicRollback",
+    "NativeJointCapacitance/BranchRollback",
+    "NativeCapacitanceEdit/ClassicN0At2000",
+    "NativeCapacitanceEdit/ClassicN1At2000",
+    "NativeCapacitanceEdit/BranchN0At2000",
+    "NativeCapacitanceEdit/BranchN1At2000",
+    "NativeBoundCapacitance/ClassicN0At2000",
+    "NativeBoundCapacitance/ClassicN1At2000",
+    "NativeBoundCapacitance/BranchN0At2000",
+    "NativeBoundCapacitance/BranchN1At2000",
+    "NativeBoundCapacitance/ClassicN0At20000",
+    "NativeBoundCapacitance/ClassicN1At20000",
+    "NativeBoundCapacitance/BranchN0At20000",
+    "NativeBoundCapacitance/BranchN1At20000"
+  ],
+  "phases": [],
+  "standalone": [
+    {
+      "packet": "Branch_20000_N0_bound_capacitance_probe_2_evidence.json",
+      "trace": "Branch_20000_N0_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_bound_capacitance_probe_4_evidence.json",
+      "trace": "Branch_20000_N0_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N0_bound_capacitance_probe_6_evidence.json",
+      "trace": "Branch_20000_N0_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_bound_capacitance_probe_2_evidence.json",
+      "trace": "Branch_20000_N1_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_bound_capacitance_probe_4_evidence.json",
+      "trace": "Branch_20000_N1_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_20000_N1_bound_capacitance_probe_6_evidence.json",
+      "trace": "Branch_20000_N1_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_bound_capacitance_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_bound_capacitance_probe_4_evidence.json",
+      "trace": "Branch_2000_N0_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_bound_capacitance_probe_6_evidence.json",
+      "trace": "Branch_2000_N0_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_capacitance_edit_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_capacitance_edit_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_capacitance_edit_probe_4_evidence.json",
+      "trace": "Branch_2000_N0_capacitance_edit_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_capacitance_edit_probe_6_evidence.json",
+      "trace": "Branch_2000_N0_capacitance_edit_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_capacitance_edit_probe_8_evidence.json",
+      "trace": "Branch_2000_N0_capacitance_edit_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_joint_capacitance_probe_2_evidence.json",
+      "trace": "Branch_2000_N0_joint_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_joint_capacitance_probe_4_evidence.json",
+      "trace": "Branch_2000_N0_joint_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N0_joint_capacitance_probe_6_evidence.json",
+      "trace": "Branch_2000_N0_joint_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_bound_capacitance_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_bound_capacitance_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_bound_capacitance_probe_6_evidence.json",
+      "trace": "Branch_2000_N1_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_capacitance_edit_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_capacitance_edit_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_capacitance_edit_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_capacitance_edit_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_capacitance_edit_probe_6_evidence.json",
+      "trace": "Branch_2000_N1_capacitance_edit_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_capacitance_edit_probe_8_evidence.json",
+      "trace": "Branch_2000_N1_capacitance_edit_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_joint_capacitance_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_joint_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_joint_capacitance_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_joint_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_joint_capacitance_probe_6_evidence.json",
+      "trace": "Branch_2000_N1_joint_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_joint_capacitance_rollback_probe_2_evidence.json",
+      "trace": "Branch_2000_N1_joint_capacitance_rollback_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_joint_capacitance_rollback_probe_4_evidence.json",
+      "trace": "Branch_2000_N1_joint_capacitance_rollback_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Branch_2000_N1_joint_capacitance_rollback_probe_6_evidence.json",
+      "trace": "Branch_2000_N1_joint_capacitance_rollback_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_bound_capacitance_probe_2_evidence.json",
+      "trace": "Classic_20000_N0_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_bound_capacitance_probe_4_evidence.json",
+      "trace": "Classic_20000_N0_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N0_bound_capacitance_probe_6_evidence.json",
+      "trace": "Classic_20000_N0_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_bound_capacitance_probe_2_evidence.json",
+      "trace": "Classic_20000_N1_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_bound_capacitance_probe_4_evidence.json",
+      "trace": "Classic_20000_N1_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_20000_N1_bound_capacitance_probe_6_evidence.json",
+      "trace": "Classic_20000_N1_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_bound_capacitance_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_bound_capacitance_probe_4_evidence.json",
+      "trace": "Classic_2000_N0_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_bound_capacitance_probe_6_evidence.json",
+      "trace": "Classic_2000_N0_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_capacitance_edit_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_capacitance_edit_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_capacitance_edit_probe_4_evidence.json",
+      "trace": "Classic_2000_N0_capacitance_edit_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_capacitance_edit_probe_6_evidence.json",
+      "trace": "Classic_2000_N0_capacitance_edit_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_capacitance_edit_probe_8_evidence.json",
+      "trace": "Classic_2000_N0_capacitance_edit_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_joint_capacitance_probe_2_evidence.json",
+      "trace": "Classic_2000_N0_joint_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_joint_capacitance_probe_4_evidence.json",
+      "trace": "Classic_2000_N0_joint_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N0_joint_capacitance_probe_6_evidence.json",
+      "trace": "Classic_2000_N0_joint_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_bound_capacitance_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_bound_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_bound_capacitance_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_bound_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_bound_capacitance_probe_6_evidence.json",
+      "trace": "Classic_2000_N1_bound_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_capacitance_edit_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_capacitance_edit_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_capacitance_edit_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_capacitance_edit_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_capacitance_edit_probe_6_evidence.json",
+      "trace": "Classic_2000_N1_capacitance_edit_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_capacitance_edit_probe_8_evidence.json",
+      "trace": "Classic_2000_N1_capacitance_edit_probe_8.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_joint_capacitance_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_joint_capacitance_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_joint_capacitance_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_joint_capacitance_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_joint_capacitance_probe_6_evidence.json",
+      "trace": "Classic_2000_N1_joint_capacitance_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_joint_capacitance_rollback_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_joint_capacitance_rollback_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_joint_capacitance_rollback_probe_4_evidence.json",
+      "trace": "Classic_2000_N1_joint_capacitance_rollback_probe_4.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_joint_capacitance_rollback_probe_6_evidence.json",
+      "trace": "Classic_2000_N1_joint_capacitance_rollback_probe_6.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_operation_build_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_operation_build_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_operation_calculate_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_operation_calculate_probe_2.csv",
+      "json_pointer": ""
+    },
+    {
+      "packet": "Classic_2000_N1_operation_reset_probe_2_evidence.json",
+      "trace": "Classic_2000_N1_operation_reset_probe_2.csv",
+      "json_pointer": ""
+    }
+  ]
+}
