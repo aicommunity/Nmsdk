@@ -4230,13 +4230,39 @@ template<class Learner> void ChangeWallPolicyWhileRecording(int normalization,bo
         {"valid",result.observation->valid},{"status",NativeProbeStatusName(result.status)},
         {"partial_observation_preserved",true},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
-template<class Learner> void CancelFromWallControlCallback()
+template<class Learner> void ResetFromWallControlCallback(bool finalSample)
 {
-    EditingRig<Learner> rig(2000,1,"wall_callback_cancel",false,2,true);std::size_t samples=0;
-    const auto result=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true,false,
-        [&](const NativeProbeSample&){if(++samples==2)rig.learner->CancelNativeProbe("wall_control_cancel");});
-    EXPECT_EQ(result.status,NativeProbeStatus::Cancelled);ASSERT_TRUE(result.observation);
-    EXPECT_FALSE(result.observation->complete);EXPECT_FALSE(result.observation->valid);EXPECT_EQ(samples,2u);
+    EditingRig<Learner> rig(2000,1,finalSample?"wall_callback_reset_final":"wall_callback_reset_mid",false,2,true);
+    const auto before=rig.environment->GetTime().GetDoubleTime();const auto parameters=rig.learner->ReadNativeParameters();
+    std::vector<NativeProbeSample> frames;bool reset=false;std::string diagnostic;
+    try {
+        (void)rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::IsolatedWindow,true,false,
+            [&](const NativeProbeSample& sample){
+                frames.push_back(sample);
+                if(!reset && ((!finalSample && frames.size()==2) ||
+                    (finalSample && sample.time+1e-12>=before+rig.duration)))
+                {reset=true;rig.learner->Reset();}
+            });
+    }
+    catch(const std::runtime_error& error){diagnostic=error.what();}
+    ASSERT_TRUE(reset);EXPECT_EQ(diagnostic,"missing_editor_fixture_result");
+    EXPECT_EQ(rig.learner->NativeProbeState(),NativeProbeStatus::Idle);
+    EXPECT_FALSE(rig.learner->TakeNativeProbeResult());EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    EXPECT_EQ(frames.size(),finalSample?361u:2u);
+    // Explicit Reset discards the pending native result by contract. Preserve
+    // raw callback samples as a labelled reset diagnostic, not a forged packet.
+    QJsonArray raw;
+    for(const auto& frame:frames)
+    {
+        QJsonArray values;for(double v:frame.potentials)values.append(v);
+        raw.append(QJsonObject{{"time",frame.time},{"stimulus",frame.stimulus},{"soma",values},
+            {"observed_revision",QString::fromStdString(frame.effectiveModelRevision)}});
+    }
+    Artifact(rig.name+"_reset_diagnostic.json",QJsonDocument(QJsonObject{
+        {"kind","native_probe_explicit_reset_diagnostic"},{"schema_version",1},
+        {"reset_on_final_sample",finalSample},{"control_state",NativeProbeStatusName(rig.learner->NativeProbeState())},
+        {"sample_count",double(frames.size())},{"raw_pre_reset_samples",raw},{"closed_probe_available",false},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
 }
 template<class Learner> void RejectWallPolicyBeforeTraining(int normalization,const std::string& location)
 {
@@ -4318,7 +4344,8 @@ TEST(NativeWallSchedule,ClassicN1BeginOwner){RejectWallPolicyBeforeTraining<NNeu
 TEST(NativeWallSchedule,ClassicN1BeginAncestor){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(1,"ancestor");}
 TEST(NativeWallSchedule,ClassicN1BeginNeuron){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(1,"neuron");}
 TEST(NativeWallSchedule,ClassicN1BeginGenerator){RejectWallPolicyBeforeTraining<NNeuronTimeLearner>(1,"generator");}
-TEST(NativeWallSchedule,ClassicCallbackCancellation){CancelFromWallControlCallback<NNeuronTimeLearner>();}
+TEST(NativeWallSchedule,ClassicCallbackResetMid){ResetFromWallControlCallback<NNeuronTimeLearner>(false);}
+TEST(NativeWallSchedule,ClassicCallbackResetFinal){ResetFromWallControlCallback<NNeuronTimeLearner>(true);}
 TEST(NativeWallSchedule,ClassicRecognitionOwner){RejectWallPolicyBeforeRecognition<NNeuronTimeLearner>("owner");}
 TEST(NativeWallSchedule,ClassicRecognitionGenerator){RejectWallPolicyBeforeRecognition<NNeuronTimeLearner>("generator");}
 TEST(NativeWallSchedule,BranchN0MidProbeChange){ChangeWallPolicyWhileRecording<NNeuronTimeLearnerBranch>(0,false);}
@@ -4333,7 +4360,8 @@ TEST(NativeWallSchedule,BranchN1BeginOwner){RejectWallPolicyBeforeTraining<NNeur
 TEST(NativeWallSchedule,BranchN1BeginAncestor){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(1,"ancestor");}
 TEST(NativeWallSchedule,BranchN1BeginNeuron){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(1,"neuron");}
 TEST(NativeWallSchedule,BranchN1BeginGenerator){RejectWallPolicyBeforeTraining<NNeuronTimeLearnerBranch>(1,"generator");}
-TEST(NativeWallSchedule,BranchCallbackCancellation){CancelFromWallControlCallback<NNeuronTimeLearnerBranch>();}
+TEST(NativeWallSchedule,BranchCallbackResetMid){ResetFromWallControlCallback<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeWallSchedule,BranchCallbackResetFinal){ResetFromWallControlCallback<NNeuronTimeLearnerBranch>(true);}
 TEST(NativeWallSchedule,BranchRecognitionOwner){RejectWallPolicyBeforeRecognition<NNeuronTimeLearnerBranch>("owner");}
 TEST(NativeWallSchedule,BranchRecognitionGenerator){RejectWallPolicyBeforeRecognition<NNeuronTimeLearnerBranch>("generator");}
 
