@@ -297,4 +297,75 @@ TEST(DatasetFileLifecycle,MissingThenGrowThenShrinkAt2000)
 {try{FileReload(2000);}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
 TEST(DatasetFileLifecycle,MissingThenGrowThenShrinkAt20000)
 {try{FileReload(20000);}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
+
+class ObservedDataset: public NDatasetMatrix {
+public:
+    unsigned beforeCalls=0,calculateCalls=0,prepareCalls=0;
+protected:
+    bool ABeforeCalculate() override {++beforeCalls;return NDatasetMatrix::ABeforeCalculate();}
+    bool ACalculate() override {++calculateCalls;return NDatasetMatrix::ACalculate();}
+    void PreparePlaybackData() override {++prepareCalls;NDatasetMatrix::PreparePlaybackData();}
+};
+// Instrument only native callbacks; all playback and child calculations remain
+// production implementations. This establishes dispatch, not multirate physics.
+void Scheduling(unsigned sourceFrequency)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    struct Cleanup {
+        UEPtr<UEnvironment> environment;ULongTime prior;
+        ~Cleanup(){environment->DestroyModel();environment->GetTime().SetTime(prior);}
+    } cleanup{core.environment,core.environment->GetTime().GetTime()};
+    core.environment->DestroyModel();Require(core.environment->CreateModel("NModel"),"dispatch root unavailable");
+    auto model=dynamic_pointer_cast<UNet>(core.environment->GetModel());Require(bool(model),"dispatch root type differs");
+    model->SetEnvironment(core.environment);model->SetGlobalTimeStep(2000);
+    UEPtr<ObservedDataset> dataset=new ObservedDataset;
+    dataset->SetEnvironment(core.environment);dataset->Default();dataset->Name="Dataset";
+    MDMatrix<double> values;values.Assign(2,1,0.);values(0,0)=.01;values(1,0)=.04;
+    MDMatrix<int> labels;labels.Assign(1,1,1);
+    dataset->MaxSpikesPerFeature=2;dataset->MatrixData=values;dataset->MatrixClasses=labels;
+    dataset->Delay=.005;dataset->StateGeneration=2;
+    UEPtr<UContainer> child=dataset;Require(model->AddComponent(child)!=ForbiddenId,"dispatch attach failed");
+    const auto marker=model->OperationFailureSequence();model->Init();model->Reset();
+    Require(!model->HasOperationFailureSince(marker) && model->IsInit(),"dispatch native Init failed");
+    // Explicit multirate intervention after native construction. Never update
+    // frequency or repair the graph inside the calculation loop.
+    dataset->SetGlobalTimeStep(sourceFrequency);
+    auto generator=dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+    Require(bool(generator) && generator->TimeStep.GetData()==sourceFrequency && model->TimeStep.GetData()==2000,
+            "dispatch frequency intervention not applied");
+    core.environment->GetTime().SetTime(1000000);
+    dataset->beforeCalls=dataset->calculateCalls=dataset->prepareCalls=0;
+    std::ostringstream csv;csv.imbue(std::locale::classic());csv<<std::setprecision(17)<<"time,stimulus,before_calls,calculate_calls,prepare_calls\n";
+    unsigned highSamples=0;
+    constexpr unsigned count=160;
+    for(unsigned tick=0;tick<count;++tick)
+    {
+        model->Calculate();Require(!model->HasOperationFailureSince(marker),"dispatch native Calculate failed");
+        EXPECT_EQ(dataset->WasPlaybackHandledBeforeChildren(),sourceFrequency==2000);
+        Require(generator->Output.GetRows()==1 && generator->Output.GetCols()==1,"dispatch output unavailable");
+        const double output=generator->Output(0,0);Require(std::isfinite(output),"dispatch nonfinite output");highSamples+=output>0.;
+        csv<<core.environment->GetTime().GetDoubleTime()<<','<<output<<','<<dataset->beforeCalls<<','<<dataset->calculateCalls<<','<<dataset->prepareCalls<<'\n';
+        core.environment->IncreaseModelTimeByStep();
+    }
+    EXPECT_EQ(dataset->beforeCalls,count);
+    // Preserve the actual Rdk higher-frequency loop (ratio+1), without silently
+    // replacing it by the scientifically desired ratio in a learner controller.
+    const unsigned expected=sourceFrequency==1000?count/2:sourceFrequency==2000?count:count*3;
+    EXPECT_EQ(dataset->calculateCalls,expected);EXPECT_EQ(dataset->prepareCalls,expected);
+    EXPECT_GT(highSamples,0u);
+    const auto stem="dataset_dispatch_"+std::to_string(sourceFrequency);
+    Write(stem+".csv",QByteArray::fromStdString(csv.str()));
+    Write(stem+".json",QJsonDocument(QJsonObject{{"kind","native_dataset_dispatch"},{"schema_version",1},
+        {"root_frequency_hz",2000},{"source_frequency_hz",int(sourceFrequency)},{"native_ticks",int(count)},
+        {"before_calls",int(dataset->beforeCalls)},{"calculate_calls",int(dataset->calculateCalls)},
+        {"prepare_calls",int(dataset->prepareCalls)},{"expected_calculate_calls",int(expected)},
+        {"high_samples",int(highSamples)},{"trace",QString::fromStdString(stem+".csv")},
+        {"scope","native dispatch only; no multirate physical-support certificate"}}).toJson());
+}
+TEST(DatasetScheduling,UniformSourceAt2000)
+{try{Scheduling(2000);}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
+TEST(DatasetScheduling,SlowerSourceAt1000)
+{try{Scheduling(1000);}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
+TEST(DatasetScheduling,FasterSourceAt4000)
+{try{Scheduling(4000);}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
 }
