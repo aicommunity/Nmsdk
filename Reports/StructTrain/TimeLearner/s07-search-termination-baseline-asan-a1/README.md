@@ -1,0 +1,1 @@
+Actual ASan production-controller baseline: four sweep-budget classification failures plus one incorrect missing-peak test expectation. Exact-at-last-sweep positive control passed. Original six-case run retained before seven-case corrected baseline; no simulator physics/classification inference.
