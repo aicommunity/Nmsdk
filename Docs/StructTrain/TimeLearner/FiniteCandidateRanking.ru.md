@@ -9,6 +9,13 @@ Core225642bd9b3a5651fce2808bd0bef79944d4f1b8 адресно проверен н�
 В develop изменения ещё не приняты: общая приёмка prerequisites продолжается.
 Defaults/цель/условия Exact не меняются; полные этапы0–12 этим не закрыты.
 
+Ожидавшиеся prerequisite ASan163/recording18/public diagnostic теперь
+завершены и проверены: [отчёт](CompletedASanGates-2026-11-02.ru.md),
+proof44548f908365f5030445e4ced11a71147d044331. Дополнительная diagnostic
+temporal equivalence:286f7e1b4499db2bc4e9ad49e5980dbd219866bf.
+Ниже журнал попыток, включая прежние pending checkpoints; это не текущий
+статус заданий. Полная stage7/mode matrix и develop acceptance ещё открыты.
+
 Physical baseline4 показал selected70.5ms при уже измеренном61ms. Correction
 выбирает61ms при прежних fixed Ns/Rs/anchor; BudgetExhausted и отсутствие
 сертификата сохраняются. Для изоляции timing-rank явно задан amplitude tolerance1.

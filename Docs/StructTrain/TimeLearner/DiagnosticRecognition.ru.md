@@ -92,6 +92,12 @@ Proof4661b39647b204e3ca04ee613bb08bb6d7cadc88:45 verified members/1273432 bytes.
 полноту окна, не обучение.6 неначатых проб остаются без файлов/кривых.
 Elder reader e379f404c также прошёл27/27 ordinary preflight/native diagnostic/
 public pipeline checks без skips; proofe85f003d6060f4ea7769ad71b40eacfc7b3cd969.
-Открыты ASan native20/public Console/CLI/reports и широкая матрица плана.
-Живой ASan163-a2 на07167 не обновляется и не заменяет проверку Pulse427.
+ASan native20 уже прошёл внутри regression81 на Pulse225, функциональном
+потомке Pulse427. Public Console/CLI теперь прошёл6/6, preflight14/6/2,
+portable readers12+7; proof44548f908365f5030445e4ced11a71147d044331.
+Все10 inline waveform trials и4 source CSV равны normal; отдельный receipt
+286f7e1b4499db2bc4e9ad49e5980dbd219866bf связывает их с указанными temporal
+reports и9 просмотренными originals. Независимый ASan rerender не заявляется.
+ASan163-a2 также завершён без обновления его source/runtime. Широкая матрица
+плана и приёмка feature остаются открыты; [scope](CompletedASanGates-2026-11-02.ru.md).
 Этот подэтап не рекомендует ControllerVersion2 и не закрывает этапы5/8/10.

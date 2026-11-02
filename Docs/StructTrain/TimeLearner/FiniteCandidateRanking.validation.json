@@ -22,8 +22,7 @@
     "interpretation": "Initial timing fixture ignored the burst-origin ISI. Retained as failed attempts, not timing-defect proof. Corrected baseline explicitly checks actual measured residuals."
   },
   "pending": [
-    "Prerequisite integrated ASan163 and trace-recording18 acceptance",
-    "Public diagnostic ASan pipeline acceptance and remaining broader compatibility matrix",
+    "Remaining broader compatibility matrix and explicit feature acceptance",
     "Full original stage7 algorithm/model matrix including Quantized/BestEffort and C-trim",
     "Children-first develop merges only after common prerequisite acceptance"
   ],
@@ -55,5 +54,26 @@
   "temporal_soma_pairs": 144,
   "temporal_png_cache": 864,
   "selected_original_png_reviewed": 14,
-  "asan_independent_rerender": false
+  "asan_independent_rerender": false,
+  "prerequisite_asan": {
+    "evidence": "44548f908365f5030445e4ced11a71147d044331",
+    "integrated163": 163,
+    "trace_recording18": 18,
+    "public_diagnostic_operations": 6,
+    "preflight_positive": 14,
+    "preflight_negative": 6,
+    "one_tick_train": 2,
+    "reader_tests_passed": 32,
+    "verified_archive_members": 2172,
+    "compressed_bytes": 11207017,
+    "integrated_csv_equal": 407,
+    "integrated_packets_equal": 413,
+    "recording_csv_equal": 88,
+    "recording_packets_equal_including_aliases": 94,
+    "recording_aliases": 6,
+    "diagnostic_temporal_equality": "286f7e1b4499db2bc4e9ad49e5980dbd219866bf",
+    "whole_run_semantic_equality": false,
+    "independent_asan_rerender": false,
+    "scientific_verdict": null
+  }
 }
