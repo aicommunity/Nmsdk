@@ -186,10 +186,10 @@ def render_dataset_clock_report(specification, artifacts, output):
             observation = {'samples': trial['samples'], 'frequency_hz': condition['frequency'],
                 'begin': record['origin'], 'end': record['origin']+.25, 'closed_at': trial['samples'][-1]['time'],
                 'complete': True, 'valid': True, 'spike_times': [], 'model_before': trial['revision'],
-                'sample_id': condition['test_id'], 'trial_id': trial['stem'], 'label': 'Dataset playback characterisation',
+                'sample_id': condition['test_id'], 'trial_id': f"t0={record['origin']:g}s", 'label': 'Source',
                 'reset_policy': 'independent native physical Reset; LT events not collected'}
             views = render_soma(observation, 0, 'Soma1 SumPotential', limits, destination,
-                context_label=f"Origin={record['origin']}s | origin={'PASS' if case['invariant'] else 'FAIL'}; pulse program={'PASS' if case['pulse_program_passed'] else 'FAIL'}; no classification verdict")
+                context_label=f"origin {'PASS' if case['invariant'] else 'FAIL'}; pulses {'PASS' if case['pulse_program_passed'] else 'FAIL'}")
             records.append({'test_id': condition['test_id'], 'origin': record['origin'], 'model_revision': trial['revision'],
                 'source_record': 'primary/'+trial['stem']+'.json', 'source_record_sha256': trial['record_sha256'],
                 'source_trace': 'primary/'+trial['stem']+'.csv', 'source_trace_sha256': trial['trace_sha256'],
