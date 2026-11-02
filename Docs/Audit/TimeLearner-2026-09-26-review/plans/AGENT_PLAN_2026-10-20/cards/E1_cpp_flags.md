@@ -1,3 +1,5 @@
+> Исторический снимок плана и команд от20.10.2026. Инструменты удалены из текущего дерева; их точные исходники: [Git snapshot](https://github.com/aicommunity/Nmsdk/tree/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools). Действующий план и причины миграции: [реестр](../../../../../StructTrain/TimeLearner/PlanToolRetirement.ru.md). Старые команды не являются текущей инструкцией запуска.
+
 # E1. Диагностические флаги C++ (F1, F7, F8, Branch EstDelayPerSegInit)
 
 **Цель:** собрать Console с четырьмя новыми свойствами тренеров. Значения по умолчанию воспроизводят `d52dc1c` бит в бит, а включаются флаги через `--train-param` (E0) только в копии Train.

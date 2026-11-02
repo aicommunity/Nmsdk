@@ -301,3 +301,7 @@ Bin feature fd54fda объединена в develop merge commit
 records; все48 проверены по точным Git trees/content hashes и restored-path
 negative fixture. [Источники, ограничения и proofs](DocsPythonRetirement.ru.md).
 Полный перенос активного анализа и остальных исторических скриптов не завершён.
+
+
+Плановые инструменты20 октября: ещё16 historical files удалены;64 records,
+серверная приёмка этой добавки ожидается. [Причины и точные источники](PlanToolRetirement.ru.md).
