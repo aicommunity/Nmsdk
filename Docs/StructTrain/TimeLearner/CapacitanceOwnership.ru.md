@@ -10,7 +10,12 @@ edits не владеют полной картой исходных C₀/абс
 требует ручной передачи correction. Проверять этот риск надо на native owners,
 а не копии helper-функции. Baseline gate8 добавляет Classic/Branch × N0/N1 ×
 2000/20000 Гц и сохраняет физические waveforms и JSON каждой фазы. Результат
-gate пока не получен; исходный Core в baseline не меняется.
+gate пока не получен; исходный Core в baseline не меняется. В первом A1 уже
+наблюдается пустой owner state после bound edits. Найдены и исправлены две
+ошибки fixture: после Reset необходимо заново завершить реальную probe до
+структурного edit; чтение отсутствующего поля через неконстантный QJsonObject
+не должно менять локальную копию state. Assertions сохранены, raw A1 остаётся
+непринятым из-за этой примеси ошибок теста. Corrected baseline требует A2.
 
 Обязательная последовательность baseline: initial bound trim heterogeneous
 Exc/Inh → trim другой мембраны → native Reset → обычный growth без correction
@@ -52,6 +57,18 @@ inhibition, rollback/injected failure, unchanged frozen model, warm continuation
 export/import переносит исходную C₀; XML/Copy не объявляются checkpoint этого
 private controller/parameter state без самостоятельной проверки. Reset learner
 не означает возврат физики к исходному storage image.
+
+Для shrink/regrowth нужно явно определить dormant scales: отсутствие физического
+сегмента не означает разрешение забыть исходную C₀ и повторно захватить ёмкость
+из trimmed-состояния. Версионированное состояние должно различать применённые
+scales существующих мембран и сохранённые scales удалённых мембран. Перед ростом
+они заново разделяются на active/dormant по preview-графу. Recreated каналы
+получают исходные индивидуальные C₀, новые имена — проверенный storage C₀.
+Codec обязан отвергать active/dormant overlap, неизвестный baseline path,
+не-конечные/bound-нарушающие scales и dormant запись существующего узла.
+Storage closure проверяется целиком, включая исходные образы временно удалённых
+каналов; изменение неиспользуемого сейчас образа нельзя скрыть shrink-операцией.
+Эти изменения не объявляются уже реализованными.
 
 Изменения выполняются в codex/timelearner-capacitance-owner от принятого develop;
 server jobs не должны вытеснять текущую invalid-reload проверку. После адресной
