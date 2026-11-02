@@ -1,0 +1,30 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 1,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "DatasetClockOrigin/ContinuousNoGapAt2000",
+    "DatasetClockOrigin/ContinuousFiveMsAt2000",
+    "DatasetClockOrigin/ContinuousThirtyMsAt2000",
+    "DatasetClockOrigin/TimedNoGapAt2000",
+    "DatasetClockOrigin/TimedFiveMsAt2000",
+    "DatasetClockOrigin/TimedThirtyMsAt2000",
+    "DatasetClockOrigin/ContinuousNoGapAt20000",
+    "DatasetClockOrigin/ContinuousFiveMsAt20000",
+    "DatasetClockOrigin/ContinuousThirtyMsAt20000",
+    "DatasetClockOrigin/TimedNoGapAt20000",
+    "DatasetClockOrigin/TimedFiveMsAt20000",
+    "DatasetClockOrigin/TimedThirtyMsAt20000",
+    "DatasetClockExtended/ContinuousAt2000",
+    "DatasetClockExtended/TimedAt2000",
+    "DatasetClockExtended/ContinuousAt20000",
+    "DatasetClockExtended/TimedAt20000",
+    "DatasetClockExtended/NearGridAt2000",
+    "DatasetClockExtended/NearGridAt20000",
+    "DatasetClockExtended/TimedFirstOnsetCutoffAt2000",
+    "DatasetClockExtended/TimedFirstOnsetCutoffAt20000"
+  ],
+  "maximum_wall_seconds": 7200,
+  "asan_options": "detect_leaks=0"
+}
