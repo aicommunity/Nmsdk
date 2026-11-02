@@ -87,6 +87,27 @@ native physical roundtrip, реальные waveform probes, negative candidates
 
 ## Оставшаяся интеграция C-trim
 
+Рабочее дополнение joint API: общий preview теперь может включать
+L/Ns/Rs/C перед assessment. Отдельный C-plan helper выделен механическим
+commit aafdaea80c2f630750d2c0ffe1bd45dde8c2c35a; joint implementation —
+Pulse9694ae3e0bb1db386939113f640120ac63190540. Оба ещё не прошли серверную
+приёмку. Старые overloads без C передают nullptr и сохраняют прежнюю задачу.
+Rs domain рассчитывается после применения C к private preview. При live
+отказе joint edit использует NativeLearnerGraphCheckpoint для обоих детей;
+adapters обновляют Neuron/Dataset и result.graphWasReplaced сообщает замену.
+Checkpoint может явно отвергнуть неподдерживаемые внешние bindings до commit;
+поддержка полной connectivity матрицы этим не заявляется.
+
+Новый gate10 (2000Hz) объявляет6 joint cases +4 standalone regressions.
+N1 positive control использует C×4 с явно разрешённой maxRelativeChange=3,
+а не defaults C-trim. Из реально вычисленных domain bounds выбирается Rs,
+запрещённая при старой C и допустимая при новой. N0 меняет Ns2→3 вместе с C.
+В fault cases настоящий neuron subclass бросает исключение на втором live
+Reset, после изменения C; preview faults не вооружены. Проверяются возврат
+всего исходного графа, обновлённые handles, следующий физический отклик и
+запрет внешнего edit при активном Train. Это пока declared checks, не PASS.
+Поддержка поиска C в контроллере и её persistent state всё ещё отсутствует.
+
 1. Связать baseline с immutable ModelSpec/storage profile и сохранить явные
    baseline/correction records в trained state, plan и boundary continuation.
 2. Добавить baseline extension после native growth из подтверждённого нового
