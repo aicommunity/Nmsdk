@@ -4156,7 +4156,7 @@ template<class Learner> void RejectNativeWallLimitedProbe(int normalization,cons
     QJsonArray reasons;for(const auto& reason:result.reasons)reasons.append(QString::fromStdString(reason));
     Artifact(rig.name+"_wall_policy.json",QJsonDocument(QJsonObject{
         {"kind","native_wall_schedule_policy"},{"schema_version",1},{"location",QString::fromStdString(node)},
-        {"configured_limit",double(limit)},{"effective_limit_after_rejection",double(effectiveLimit)},
+        {"configured_limit",double(limit)},{"effective_limit_after_probe",double(effectiveLimit)},
         {"observed_samples",double(samples)},{"status",NativeProbeStatusName(result.status)},
         {"reasons",reasons},{"changed_individual_parameters",rig.learner->ReadNativeParameters()!=parameters},
         {"limited_revision",QString::fromStdString(revision)},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
