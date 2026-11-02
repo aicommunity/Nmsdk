@@ -205,3 +205,16 @@ Wall Pulse feature151a388 всё ещё не merged: требуется полн
 integrated74/57 soma pairs, отдельные Reset raw diagnostics и scoped review.
 Все перечисленные owned numeric supervisors закрыты; повторно не запускать
 из-за отсутствия свежего progress сообщения. Numeric snapshot остаётся507.
+
+Последующее объединение выполняется в codex/timelearner-search-termination:
+Pulse merge fca7141178a854c5a2f579e4a195b3a3165340f9, численный root-кандидат
+07167d55125ced4eeff72703a718203e8c90bfc7. Develop44334e272 содержит только
+принятый общий native-gate runner, не эти алгоритмические изменения.
+В совместном gate163 сохранены66 wall и все16 inherited/frequency случаев;
+ожидается новая проверка совместно с budget termination и transport fixtures.
+Текущие owned jobs и следующая работа теперь в SearchTermination.progress.json.
+Все PID предыдущих baseline/integrated/public-preflight кампаний в этом
+документе исторические и закрыты. Их неизменяемые runtimes/primary не трогать;
+source/build могут переиспользоваться только после проверки отсутствия owner
+и доступности полного опубликованного snapshot. Integrated74/57 temporal
+cache/raw Reset QA всё ещё не завершён и не подменяется новым search32 cache.
