@@ -109,13 +109,17 @@ class DiagnosticRecognitionEvidenceTest(unittest.TestCase):
         with self.assertRaises(EvidenceError): audit_diagnostic_recognition_trial(observation, model, case)
 
     def test_ordinary_completed_sources_still_use_ordinary_readers(self):
-        sources = {load(p)["sha256"]: load_completed(p) for p in self.native.glob("*_learned_state.json")}
+        sources = {load(p)["sha256"]: (p, load_completed(p)) for p in self.native.glob("*_learned_state.json")}
         topologies = set()
         for path in self.native.glob("*.json"):
             model = load(path)
             if model.get("kind") != "timelearner_recognition_state": continue
-            case = sources[model["source_solo"]["sha256"]]
+            path_source, case = sources[model["source_solo"]["sha256"]]
             self.assertTrue(audit_recognition_source(model, case)["conversion_math_verified"])
+            prefix = path_source.name.removesuffix("_learned_state.json")
+            for index in range(4):
+                observation = load(self.native/(prefix+f"_frozen_trial_{index}.json"))
+                self.assertTrue(audit_recognition_trial(observation, model)["valid_observation"])
             topologies.add(case[0]["configuration"]["model"]["branch"])
             with self.assertRaises(EvidenceError): audit_diagnostic_recognition(model, case)
         self.assertEqual(topologies, {False, True})
