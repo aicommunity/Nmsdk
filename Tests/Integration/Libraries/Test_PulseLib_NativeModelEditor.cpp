@@ -120,6 +120,21 @@ protected:
 private:
     bool armed=false;
 };
+class BorrowedBuildContractEnvironment : public UEnvironment {
+public:
+    void Borrow(UEPtr<UContainer> target,BuildContractFaultNeuron* structureFault=nullptr)
+    {Model=target;fault=structureFault;Ready=false;}
+    // This fixture borrows a real storage graph owned by EditingRig. It must
+    // not return that graph to storage a second time in UEnvironment's dtor.
+    ~BorrowedBuildContractEnvironment(){Model=0;}
+protected:
+    bool ACreateStructure(void) override {
+        if(fault)fault->ArmBuildFailure();
+        return true;
+    }
+private:
+    BuildContractFaultNeuron* fault=nullptr;
+};
 template<class Learner> class PostTuneStimulusLearner : public Learner {
 public:
     PostTuneStimulusLearner* New(void) override {return new PostTuneStimulusLearner;}
@@ -1003,6 +1018,26 @@ TEST(NativeOperationDiagnostics,BuildPreservesTrueAndReportsSubtreeFailure)
     EXPECT_EQ(failing->TestInput.GetDataSources().size(),1u);
     failing->Disconnect(UEPtr<UConnector>(failing),"Output","FaultInput",connection);
     EXPECT_TRUE(failing->TestInput.GetDataSources().empty());
+    {
+        BorrowedBuildContractEnvironment environment;environment.Borrow(rig.neuron.Get());
+        failing->ArmBuildFailure();const auto before=environment.OperationFailureSequence();
+        EXPECT_TRUE(environment.Build());EXPECT_TRUE(environment.HasOperationFailureSince(before));
+        EXPECT_EQ(environment.LastOperationFailure().Operation,"Build");
+    }
+    {
+        BorrowedBuildContractEnvironment environment;environment.Borrow(rig.model.Get());
+        ASSERT_TRUE(environment.SetModelCalculationComponent("Learner.Neuron"));
+        failing->ArmBuildFailure();const auto before=environment.OperationFailureSequence();
+        EXPECT_TRUE(environment.Build());EXPECT_TRUE(environment.HasOperationFailureSince(before));
+        EXPECT_EQ(environment.LastOperationFailure().Operation,"Build");
+    }
+    {
+        BorrowedBuildContractEnvironment environment;environment.Borrow(rig.neuron.Get(),failing);
+        const auto before=environment.OperationFailureSequence();
+        EXPECT_FALSE(environment.CreateStructure());
+        EXPECT_TRUE(environment.HasOperationFailureSince(before));
+        EXPECT_EQ(environment.LastOperationFailure().Operation,"Build");
+    }
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
     Artifact(rig.name+"_operation_diagnostic.json",QJsonDocument(QJsonObject{{"returned",returned},
         {"operation",QString::fromStdString(failure.Operation)},{"reason",QString::fromStdString(failure.Reason)}}).toJson());
