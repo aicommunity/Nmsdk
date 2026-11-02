@@ -456,13 +456,24 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
     NativeCapacitanceCorrection original;
     ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,original));
     QJsonArray phases;
+    const auto testId=std::string("NativeCapacitanceOwnership/")+(rig.branch?"Branch":"Classic")+
+        "N"+std::to_string(normalization)+"At"+std::to_string(frequency);
+    auto appendState=[&](const char* phase,const QJsonObject& state) {
+        std::vector<std::string> imageRoots{"NDatasetMatrix","NPulseGeneratorTransit"};
+        for(const auto& entry:original.baseline["storage_images"].toArray())
+            imageRoots.push_back(entry.toObject()["name"].toString().toStdString());
+        QJsonObject record{{"kind","native_capacitance_owner_snapshot"},{"schema_version",1},
+            {"test_id",QString::fromStdString(testId)},{"phase",phase},{"state",state},
+            {"declaration",original.baseline["model_spec"]},{"effective_model",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)},
+            {"class_definitions",NmsdkTools::CaptureModelImageDefinitions(rig.neuron,rig.ports,imageRoots)}};
+        phases.append(record);
+        Artifact(rig.name+"_ownership_"+phase+".json",QJsonDocument(record).toJson());
+    };
     auto snapshot=[&](const char* phase) {
         const auto state=rig.learner->ImportedNativeCapacitanceState();
         const auto exc=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
         const auto inh=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.InhChannel",true);
-        phases.append(QJsonObject{{"phase",phase},{"state",state},{"revision",QString::fromStdString(rig.Revision())},
-            {"exc_capacity",exc->Capacity.GetData()},{"inh_capacity",inh->Capacity.GetData()}});
-        Artifact(rig.name+"_ownership_"+phase+".json",QJsonDocument(phases.last().toObject()).toJson());
+        appendState(phase,state);
         EXPECT_FALSE(state.isEmpty())<<"a successful bound edit must retain its original C0 automatically";
         if(!state.isEmpty())
         {
@@ -506,8 +517,7 @@ template<class Learner> void NativeCapacitanceOwnership(unsigned frequency,int n
     const auto shrink=rig.learner->ApplyNativeParameters(candidate);
     ASSERT_EQ(shrink.status,NativeEditStatus::Applied)<<shrink.reason;
     const auto dormant=rig.learner->OwnedNativeCapacitanceState();
-    phases.append(QJsonObject{{"phase","ordinary_shrink"},{"state",dormant},
-        {"revision",QString::fromStdString(rig.Revision())}});
+    appendState("ordinary_shrink",dormant);
     EXPECT_EQ(dormant["schema_version"],QJsonValue(2));
     EXPECT_EQ(dormant["dormant_membrane_scales"].toObject()["Dendrite1_2"],QJsonValue(1.1));
     EXPECT_FALSE(dormant["membrane_scales"].toObject().contains("Dendrite1_2"));
