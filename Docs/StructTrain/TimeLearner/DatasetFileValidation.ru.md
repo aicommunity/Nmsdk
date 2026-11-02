@@ -47,3 +47,29 @@ s03-dataset-file-normal-asan-comparison-b1/comparison.json. Приёмка parse
 clock/lifecycle/dispatch controls. Assertions не заменяют научную классификацию.
 Нельзя восстанавливать старые повреждённые файлы подстановкой0
 либо считать ClassID из прежнего atoi доказательством корректной метки.
+
+## Горячий reload: обнаруженный дефект
+
+Integrated ASan A3, бинарник из source root
+`e13019653c4789e43513eca52a59fc67e1c51ef1`, обнаружил отдельный дефект при
+2000 и20000 Гц: после замены файла повреждённым на высоком уровне выход
+генератора оставался высоким на всех трёх проверенных invalid ticks. Ready=false
+и operation diagnostics не обнуляли наблюдаемый выход. После восстановления
+валидного файла исходные проверки recovery проходили. Это дефект физического
+источника при отказе reload, а не отсутствие strict parser-диагностики.
+
+Pulse кандидат `6a60f5c63c23a8f0645480408a5f60b64ed85957` вызывает штатный
+SilenceGenerators при FileLoadResult::Invalid в PrepareDataset. Последняя
+принятая матрица сохраняется для диагностики; старый сигнал не должен
+продолжать предъявляться. Native Build/Reset восстанавливает playback при
+валидном файле. Bool lifecycle не меняется; nested Calculate и модификация
+storage prototypes не добавлены. Исправление пока ожидает повторной проверки.
+
+Два отказа fixture A1 (неверный include) сохранены: M40
+`924a2ec3b2af48c7bb1d724412f148458ec2d6da`, Elder
+`458ae7046d8cd2102a2c731ae8aecfb3921f274a`; все13 members каждого пакета проверены.
+ASan A2 собран, но CLI отклонил spec без обязательного asan_options:
+`2892eae0fdb40e0eca7a80866e690c5ee369dda0`,18 members проверены. A3 использует
+тот же immutable runtime с исправленным spec из
+`a0bc101d83ab7f2f10743c3467051820c6a2baa9`. Исправление include/spec не меняет
+assertions. Результат A3 сохраняется отрицательным; не подменяется поздним fix.
