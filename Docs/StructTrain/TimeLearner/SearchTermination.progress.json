@@ -1,6 +1,6 @@
 {
   "kind": "timelearner_search_termination_checkpoint",
-  "accepted_root_develop": "6068f6af753d6a9d61634d5143d401af8dbffa71",
+  "accepted_root_develop": "44334e272de8429f29775512a860584c60350899",
   "root_branch": "codex/timelearner-search-termination",
   "pulse_branch": "codex/timelearner-search-termination",
   "pulse_feature": "63fd7a9fecbc567fb8e5c690ae58fc73a896de65",
@@ -32,10 +32,28 @@
   "probe_packets_each": 32,
   "trial_soma_pairs_each": 48,
   "native_scope": "internal native API; singleton physical bounds, sync0 deliberately negative, N2/f2000; not full configured V2 or legacy A/B",
-  "active_jobs": [],
+  "active_jobs": [
+    {
+      "worker": "10.245.1.17",
+      "path": "readbacks/s07-search-termination-configured-asan-a1",
+      "owner_pid": 1686126,
+      "start_ticks": "268322079",
+      "action": "original 34-case gate; do not restart"
+    },
+    {
+      "worker": "10.245.1.11",
+      "path": "readbacks/s07-diagnostic-transfer-build-normal-a2",
+      "action": "compile corrected fixtures; inspect owned-builder.json and terminal before follow-up"
+    },
+    {
+      "worker": "10.245.1.17",
+      "path": "readbacks/s07-search-termination-temporal-asan-a2",
+      "action": "render closed 32-probe primary into report-cache/s07-search-termination-asan-a1; inspect owned-renderer.json and terminal"
+    }
+  ],
   "feature_accepted_in_develop": false,
   "remaining": [
-    "Run native service positive/external-stop/warm/retarget and configured/XML/Copy/repeated-pair regressions.",
+    "Complete original ASan34, verify and publish its complete primary. Validate corrected diagnostic transfer4 plus existing completed Exact transport1 on both workers.",
     "Verify old completed-boundary and recognition controls: changing sweep termination to BudgetExhausted can turn former freshly produced nonexact completed packages into diagnostic stopped packages; do not hide this compatibility change or bypass the source-state guard.",
     "Implement and verify explicit diagnostic evaluation for stopped physical models where required; default completed-Train recognition must continue rejecting them.",
     "Strict complete observation/report inventory, full soma/input temporal caches and selected direct visual review for32 packets/48 pairs.",
@@ -43,5 +61,21 @@
     "Quantized/best_effort, broader physics/modes/history/scripts/queues/scientific matrix and full original stages0-12 remain mandatory."
   ],
   "whole_plan_complete": false,
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "configured_normal": {
+    "numeric_root": "24d1beba2bb58982931a62668a3019dd053e20f8",
+    "primary": "946fbb10ec11d19d1677547501023db29d7634b8",
+    "tests": 34,
+    "passed": 30,
+    "failed": 4,
+    "status": "negative gate; default-boundary certificate expectation incompatible with BudgetExhausted"
+  },
+  "diagnostic_transport_fixture_attempt": {
+    "numeric_root": "575046be521cdc26507bd52f5b85ceb29f46d3bd",
+    "primary": "dfbe623c510c5b2ab831e4584bc73d2e626e8e4f",
+    "tests": 5,
+    "failed": 5,
+    "reason": "incorrect post-Reset fixture expectations",
+    "correction_root_unverified": "5e299dedfd10985cce3bca8da04b70acbe3a4432"
+  }
 }

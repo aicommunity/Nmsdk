@@ -79,3 +79,55 @@ Native32 temporal reports и scoped direct visual review ещё открыты.
 Точное состояние и следующие обязательные действия в progress JSON.
 Все текущие numeric jobs завершились; их immutable source/runtime snapshots
 не переименовываются под более поздний metadata HEAD.
+
+## Продолжение проверки 2026-11-02
+
+Предыдущий абзац описывает закрытые 46-case gates, а не более поздние задания.
+В develop принят только независимый `native-gate` runner, root merge
+`44334e272de8429f29775512a860584c60350899`; алгоритмическая Pulse feature
+`63fd7a9fecbc567fb8e5c690ae58fc73a896de65` по-прежнему НЕ принята.
+
+На Elder численный root `24d1beba2bb58982931a62668a3019dd053e20f8` прошёл
+30/34 дополнительных случаев: native service, configured/XML/Copy, repeated N0.
+Четыре прежних `NativeLearnedState` fixtures требуют сертификат сразу после
+`maximum_sweeps_exhausted` и падают до проверки переноса. Первичные данные,
+включая failed JUnit: `946fbb10ec11d19d1677547501023db29d7634b8`, 643 verified
+members / 1,693,314 bytes. Это отрицательный результат gate, без PASS.
+Такой же полный ASan gate продолжает работать; повторно он не запускался.
+
+Root `575046be521cdc26507bd52f5b85ceb29f46d3bd` явно разделил ожидания helper-а:
+четыре default0.02 случая должны сохранить BudgetExhausted и stopped package,
+а существующий named explicit0.2 контроль должен сохранить Exact/completed
+package. Оба пути проверяют настоящий import, frozen input/soma samples,
+отдельный процесс и rollback. Допуски, модель и алгоритм не изменены.
+Пять случаев были выполнены на Elder: 5 failed из-за двух новых ошибочных
+ожиданий helper-а ПОСЛЕ явного learner Reset. Данные сохранены в
+`dfbe623c510c5b2ab831e4584bc73d2e626e8e4f`, 230 verified members / 846,577 bytes.
+Это не положительная приёмка и не доказательство изменения физического графа.
+
+В root `5e299dedfd10985cce3bca8da04b70acbe3a4432` исправлены именно эти
+ожидания: Reset переводит управление в Idle/Searching; остановленный attempt
+после этого нельзя повторно export как терминальную границу. Ранее полученный
+immutable stopped package сохраняется, граф/индивидуальные параметры/refs
+проверяются отдельно. После rejected import проверяется состояние именно
+перед этой операцией, включая status/reason/state, а не до Reset.
+Нужна повторная серверная проверка; по коду она не считается завершённой.
+
+Diagnostic frozen probes не являются completed-Train recognition. Conversion
+проверяется с реальными storage/environment и точной причиной
+`recognition_requires_completed_solo`; отсутствие сертификата не маскируется.
+Runner обязан export на закрытой границе ДО явного Reset контроллера.
+Самостоятельный model export после Reset и публичный diagnostic-evaluation
+протокол остаются отдельными обязательными пунктами общего плана.
+Старые сохранённые nonexact completed packages не переименовываются в stopped;
+их фактический replay/import требует отдельного compatibility контроля.
+
+`specs/native-search-termination-v1.json` содержит 46 source-declared TEST IDs
+и ровно 32 ожидаемых packet/CSV. Полнота не выводится из существующих файлов.
+Для этих закрытых исходных gates строится temporal cache на M40 Data:
+48 trial/soma pairs с реальными входными импульсами, overview и sample-scale
+увеличениями. Попытка системным Python завершилась до rendering из-за
+отсутствия matplotlib; сохранена как temporal-asan-a1. Повтор использует
+существующий plot-venv-a1 и отдельный readback temporal-asan-a2. Полный кэш не
+публикуется в Git; нужны его manifest, проверенные hashes и выбранные рисунки.
+До завершения rendering/direct review визуальная приёмка остаётся открытой.
