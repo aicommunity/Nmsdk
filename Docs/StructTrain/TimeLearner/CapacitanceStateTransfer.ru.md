@@ -1,7 +1,10 @@
 # Сохранение C₀ при Train → Test
 
-Реализация следующего среза; полная серверная приёмка ещё не завершена.
-PulseLib: `922ba91f71075b296a1c808e561b69fdd71f6255`.
+Explicit C₀ native transfer принят адресно; полный controller/physics scope
+остаётся открытым. [Приёмка и согласованный develop](C0Acceptance-2026-11-03.ru.md).
+Проверенный Pulse Core: `69d463aa50144a1c8ddb4a674bb900c2a07e769f`.
+
+История реализации: исходный Pulse `922ba91f71075b296a1c808e561b69fdd71f6255`.
 Первый изолированный build root `833b9bb9e1062778d405928a191bb32500828f2b`
 остановился до тестов из-за отсутствующего include QJsonDocument в обоих
 learner. Исправление PulseLib `69d463aa50144a1c8ddb4a674bb900c2a07e769f`.

@@ -1,5 +1,22 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Принятый develop 03.11: C₀ transfer, отдельно от source кандидата
+
+Root develop опубликован merge commit `17ca5a0b6bde98765c4abc736a66dd314477d258`.
+Он фиксирует PulseLib develop `5cbb877bbabaab88f4bf7bb04e4c846598744884` и Rdk
+develop `a62393f7791cc4ad10d1c2c11f255b3db3334f89`; Bin14a88195 не изменён.
+Локальный develop рабочего tl-metrics синхронизирован с опубликованным merge,
+пользовательский E:/Science-Repo/nmsdk-git не переключался. [Приёмка explicit
+C₀ native API](C0Acceptance-2026-11-03.ru.md) не включает дальнейшие source/
+archive изменения. Все исходные этапы, кроме0, остаются частичными.
+
+Dataset feature объединила принятый develop без изменения проверенного Core:
+Pulse `41160baced81c44d8cd7ceb23a9e168ca024fbfd` имеет тот же Core, что9ab6d57.
+Root feature использует этот gitlink и Rdk develop. Идущий ASan остаётся на
+исходном immutable rootb9af8990/Pulse9ab6d57/Rdk48d6548e; runtime не обновляется.
+Source candidate ещё не принят в develop; ниже — его normal25/readers41
+и независимые проверки. Полный C-trim controller по-прежнему не включён.
+
 ## Последнее дополнение 03.11: normal source gate принят в своём объёме
 
 Elder B6 завершён:25/25 native и41/41 Python/JUnit, returncodes0.
