@@ -125,3 +125,15 @@ raw-sample reset diagnostic. Это66 declared cases,46 schema3 packet/CSV и
 Production-алгоритм, физика и численные допуски не изменяются.
 Полные failed-attempt данные сохраняются до нового серверного checkout.
 66-case acceptance и актуальные temporal reports остаются открытыми.
+
+
+Для отчётов объявлен самостоятельный статический contract
+`specs/native-wall-schedule-v1.json`: точные66 JUnit IDs и46 packet/CSV.
+`wall_schedule_reports` дополнительно проверяет32 pre-arm,16 Begin,
+8 live-change,4 recognition-preparation,2 sink metadata и4 Reset diagnostics.
+Сброшенный result не заменяется синтетической observation: отдельный renderer
+строит raw соматические временные графики с реальным sampled input, без
+утверждений о завершённости пробы, спайках или классификации. Масштаб zoom
+следует общей политике100 native ticks на панель; отсчёты не прореживаются.
+Reader tests используют реальные серверные corpus и их повреждённые копии.
+Серверная проверка нового reader/renderer до приёмки ещё обязательна.
