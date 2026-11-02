@@ -1,0 +1,17 @@
+{
+  "kind": "timelearner_unittest_transcript_audit",
+  "schema_version": 1,
+  "source_commit": "e38d10be161dd4a362286abe137cd0c6fc3ae4d4",
+  "source_log": "Reports/StructTrain/TimeLearner/s03-dataset-clock-reader-fixed-b3-a1/readers.log",
+  "source_log_sha256": "d0d38471041ae9c89acbfd4b8b65f04d6c7f8f7832780a51e896e6414ceb50c0",
+  "source_terminal_sha256": "d129ed9d8e81f8918978e3c2039fcb9cfda8364a563cd7addd9f690019a822d6",
+  "execution": "completed",
+  "returncode": 0,
+  "observed": 41,
+  "skipped": 0,
+  "assertion_status": "passed",
+  "original_wrapper_assertion_status": "failed",
+  "correction_reason": "Wrapper searched substring skipped anywhere, matching test_skipped_or_unfinished_case_is_rejected; all41 cases and unittest footer are successful. No model rerun or original terminal rewrite.",
+  "scientific_verdict": null,
+  "scope": "Independent transcript audit of actual reader/JUnit controls; combined native/unit acceptance remains incomplete."
+}
