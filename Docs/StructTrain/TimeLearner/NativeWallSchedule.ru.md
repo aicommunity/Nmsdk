@@ -160,3 +160,14 @@ Reader `e7782709157b84b5f8b1cec62711ff0ae4ecf1a2`:10/10 на обоих workers,
 Ветка ещё не объединена: впереди интеграция нового develop/Rdk closure,
 адресные регрессии и публичный Console preflight. Не объявляются завершёнными
 весь этап4, lifecycle matrix, алгоритмы или этапы0–12.
+
+
+Интеграция develop выполнена merge `507c8a6c4da2b795d4dca3caf7b43806c8bf6835`.
+Единственный конфликт reader был форматированием одинакового требования
+«phases либо standalone не пусты»; сохранена семантика develop. C++ tests
+содержат оба набора. Rdk gitlink теперь `eda206b6b35de451ae837473d731ba20e7c30bde`.
+Запущены отдельные immutable runtimes integrated-normal-a1 / integrated-asan-a1:
+ожидаются74 native (66 новых и8 регрессионных inherited при2000Hz) и6 Math.
+Оба supervisor подтверждены живыми по PID/start ticks, выполняют сборку;
+численного результата integrated closure пока нет. Точные пути и identities
+в progress JSON. Не обновлять эти sources/builds/runtimes до terminal.

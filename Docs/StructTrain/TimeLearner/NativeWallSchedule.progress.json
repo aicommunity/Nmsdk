@@ -139,5 +139,27 @@
     "whole_cache_direct_review_complete": false,
     "qa": "NativeWallScheduleVisualQA.json"
   },
-  "active_native_jobs": []
+  "active_native_jobs": [
+    {
+      "host": "10.245.1.11",
+      "output": "/home/user/timelearner-refactor/readbacks/s04-native-wall-integrated-normal-a1",
+      "pid": 3563214,
+      "start_ticks": "317256308"
+    },
+    {
+      "host": "10.245.1.17",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-wall-integrated-asan-a1",
+      "pid": 1604450,
+      "start_ticks": "267799222"
+    }
+  ],
+  "integrated_numeric_root": "507c8a6c4da2b795d4dca3caf7b43806c8bf6835",
+  "integrated_rdk": "eda206b6b35de451ae837473d731ba20e7c30bde",
+  "integrated_gate": {
+    "native_expected": 74,
+    "scope": "66 wall-policy cases plus eight inherited Activity/local-frequency cases at 2000Hz, N0/N1, Classic/Branch",
+    "math_expected": 6,
+    "status": "both owned supervisors confirmed live, building; no result yet",
+    "do_not_update_sources_builds_or_runtimes": true
+  }
 }
