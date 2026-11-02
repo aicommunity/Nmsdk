@@ -54,6 +54,15 @@ hashes полностью проверены. QA: NativeTraceCoverageVisualQA.js
 вручную не просмотрен и в Git не добавлен. Старый CI163 также требует собственного
 отчёта407 проб и отдельных raw Reset графиков.
 
+Следующий probe render407 запущен отдельно на M40 из проверенного Git proof3cc20c1,
+без обновления Python checkoutb1787ca05 и без изменений ASan runtime.
+Readback:`readbacks/s03-integrated163-temporal-cache-m40-a1`, cache:
+`report-cache/s04-s07-integrated163-normal-a1`. Supervisor1796987/ticks269055558,
+renderer1797026/ticks269055735; wall budget7200s относится только к построению
+рисунков. `terminal.json` сохраняет реальный returncode/elapsed; при checkpoint
+результата ещё нет. Шесть untraced packets и5 gaps остаются видимыми, raw Reset
+plots этим запуском не строятся. Не обновлять этот Python checkout до terminal.
+
 После освобождения M40 нужен отдельный ASan gate18 numericd06585d.
 Не обновлять source активного163, не перезапускать до terminal/identity check.
 Дальнейшая приёмка и --no-ff merge детей, затем корня остаются обязательными.
