@@ -1,0 +1,17 @@
+{
+  "reader_root": "068a488361910d21a04469aa97f32cf0cfbb695f",
+  "source_archive_sha256": "07a3cd2f064296ae519d159975a9e6e5ebc0d755d5a060cbc16c41840bd2e0a1",
+  "primary_commit": "b8306e23780a797c0fb832565e3be497723b6087",
+  "primary_path": "/home/user/timelearner-refactor/readbacks/s03-dataset-clock-fixed-normal-b3/native-result",
+  "tests": 41,
+  "arguments": [
+    "python3",
+    "-m",
+    "unittest",
+    "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence",
+    "Scripts.StructTrain.TimeLearner.tests.test_learned_evidence",
+    "Scripts.StructTrain.TimeLearner.tests.test_dataset_clock_reports",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate",
+    "-v"
+  ]
+}
