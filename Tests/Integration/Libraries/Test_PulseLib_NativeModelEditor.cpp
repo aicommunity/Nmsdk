@@ -41,6 +41,7 @@
 #include <chrono>
 #include <algorithm>
 #include <cmath>
+#include <functional>
 
 namespace {
 using namespace RDK;
@@ -86,12 +87,23 @@ protected:
 class CapacitanceResetFaultNeuron : public NPulseNeuron {
 public:
     int resetsUntilFailure=0;
+    int calculationsUntilFailure=0;
+    std::function<void(double)> failureSink;
     CapacitanceResetFaultNeuron* New(void) override {return new CapacitanceResetFaultNeuron;}
 protected:
     bool ABeforeReset(void) override {
         if(resetsUntilFailure>0 && --resetsUntilFailure==0)
+        {
+            auto channel=GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
+            if(failureSink)failureSink(channel?channel->Capacity.GetData():0.);
             throw std::runtime_error("injected_joint_capacitance_live_reset");
+        }
         return NPulseNeuron::ABeforeReset();
+    }
+    bool ABeforeCalculate(void) override {
+        if(calculationsUntilFailure>0 && --calculationsUntilFailure==0)
+            throw std::runtime_error("injected_native_child_calculate");
+        return NPulseNeuron::ABeforeCalculate();
     }
 };
 template<class Learner> class PostTuneStimulusLearner : public Learner {
@@ -438,7 +450,7 @@ template<class Learner> void ColdModel(unsigned frequency,int neuronMode,int lea
     EXPECT_EQ(rig.learner->StructureBuildMode.GetData(),learnerMode);
     const auto first=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,true);
     ASSERT_EQ(first.status,NativeProbeStatus::Completed);ASSERT_TRUE(first.observation);ASSERT_TRUE(first.observation->valid);
-    const auto oldNeuron=rig.neuron.Get();
+    const auto oldNeuron=rig.neuron.Get();auto injected=std::make_shared<std::pair<bool,double>>(false,0.);
     const auto oldDataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get();
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
     auto lt=rig.neuron->template GetComponentL<NPulseChannel>("LTMembrane.ExcChannel",true);ASSERT_TRUE(lt);
@@ -850,12 +862,16 @@ template<class Learner> void NativeJointCapacitanceCandidate(int normalization,b
         // No structural edit in this fixture: Transform Reset, then C Reset.
         // Preview instances have no armed fault; the second live Reset throws.
         failing->resetsUntilFailure=2;
+        failing->failureSink=[injected](double capacity){injected->first=true;injected->second=capacity;};
     }
     const auto applied=rig.learner->ApplyNativeParameters(candidate,correction);
     if(fault)
     {
         ASSERT_EQ(applied.status,NativeEditStatus::Rejected)<<applied.reason;
-        EXPECT_EQ(applied.reason,"injected_joint_capacitance_live_reset");
+        EXPECT_EQ(applied.reason.find("native_operation_failure:Reset:"),0u);
+        EXPECT_NE(applied.reason.find("injected_joint_capacitance_live_reset"),std::string::npos);
+        EXPECT_TRUE(injected->first);
+        EXPECT_DOUBLE_EQ(injected->second,baseline["channels"].toObject()["Dendrite1_2.ExcChannel"].toDouble()*4.);
         EXPECT_FALSE(applied.modelMayHaveChanged);EXPECT_TRUE(applied.graphWasReplaced);
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
         rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
@@ -882,7 +898,8 @@ template<class Learner> void NativeJointCapacitanceCandidate(int normalization,b
     Artifact(rig.name+"_joint_result.json",QJsonDocument(QJsonObject{{"baseline",baseline},
         {"status",NativeEditStatusName(applied.status)},{"reason",QString::fromStdString(applied.reason)},
         {"graph_replaced",applied.graphWasReplaced},{"separate_rejection",QString::fromStdString(oldRejection)},
-        {"scale",correction.membraneScales.at("Dendrite1_2")},{"rollback",fault}}).toJson());
+        {"scale",correction.membraneScales.at("Dendrite1_2")},{"rollback",fault},
+        {"reset_fault_observed",injected->first},{"capacity_at_reset_fault",injected->second}}).toJson());
     if(!fault)
     {
         auto activePlan=TrainingPlan(rig);
@@ -901,6 +918,45 @@ TEST(NativeJointCapacitance,ClassicN1){NativeJointCapacitanceCandidate<NNeuronTi
 TEST(NativeJointCapacitance,BranchN1){NativeJointCapacitanceCandidate<NNeuronTimeLearnerBranch>(1);}
 TEST(NativeJointCapacitance,ClassicRollback){NativeJointCapacitanceCandidate<NNeuronTimeLearner>(1,true);}
 TEST(NativeJointCapacitance,BranchRollback){NativeJointCapacitanceCandidate<NNeuronTimeLearnerBranch>(1,true);}
+
+void NativeOperationFailureProbe(bool calculate)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string image="CapacitanceResetFaultNeuronFixture";
+    if(!core.storage->CheckClass(image))core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]()->UComponent*{return new CapacitanceResetFaultNeuron;},image),image);
+    EditingRig<NNeuronTimeLearner> rig(2000,1,calculate?"operation_calculate":"operation_reset",false,2,true,2,1,false,{},1,1.,image);
+    auto failing=dynamic_cast<CapacitanceResetFaultNeuron*>(rig.neuron.Get());ASSERT_TRUE(failing);
+    const auto marker=rig.learner->OperationFailureSequence();const auto neuronMarker=rig.neuron->OperationFailureSequence();
+    if(calculate)
+    {
+        failing->calculationsUntilFailure=10;
+        const auto result=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true);
+        ASSERT_EQ(result.status,NativeProbeStatus::Rejected);ASSERT_TRUE(result.observation);
+        EXPECT_FALSE(result.observation->complete);EXPECT_FALSE(result.observation->valid);
+        EXPECT_EQ(result.observation->sampleCount,9u);
+        EXPECT_TRUE(std::any_of(result.reasons.begin(),result.reasons.end(),[](const auto& reason){
+            return reason.find("native_operation_failure:Calculate:")==0 && reason.find("injected_native_child_calculate")!=std::string::npos;}));
+    }
+    else
+    {
+        failing->resetsUntilFailure=1;
+        // Preserve the native Rdk boolean contract even when the hook fails.
+        EXPECT_TRUE(rig.neuron->Reset());
+        EXPECT_TRUE(rig.neuron->HasOperationFailureSince(neuronMarker));
+        EXPECT_TRUE(rig.learner->HasOperationFailureSince(marker));
+        EXPECT_EQ(rig.neuron->LastOperationFailure().Operation,"Reset");
+        const auto after=rig.learner->OperationFailureSequence();
+        EXPECT_TRUE(rig.neuron->Reset());EXPECT_FALSE(rig.learner->HasOperationFailureSince(after));
+        EXPECT_NE(rig.learner->LastOperationFailure().Reason.find("injected_joint_capacitance_live_reset"),std::string::npos);
+        ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    }
+    const auto failure=rig.learner->LastOperationFailure();
+    Artifact(rig.name+"_operation_diagnostic.json",QJsonDocument(QJsonObject{{"sequence",double(failure.Sequence)},
+        {"overflowed",failure.Overflowed},{"operation",QString::fromStdString(failure.Operation)},
+        {"reason",QString::fromStdString(failure.Reason)}}).toJson());
+}
+TEST(NativeOperationDiagnostics,ResetPreservesTrueAndReportsSubtreeFailure){NativeOperationFailureProbe(false);}
+TEST(NativeOperationDiagnostics,CalculateFailureCensorsTheActualNativeObservation){NativeOperationFailureProbe(true);}
 
 template<class Learner> void NativeResistanceDomainSearch(unsigned frequency=2000)
 {
