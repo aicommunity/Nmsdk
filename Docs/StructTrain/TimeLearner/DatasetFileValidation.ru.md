@@ -27,11 +27,16 @@ fixture A1 не собрался: имя helper Run затенялось private
 
 Кандидат Pulse `e686297ad10084429f7220fd2c5674f6d9869f25` вводит
 locale-independent full-token parse, точную
-размерность и проверка finite/range без подстановок. Negative ISI сохраняют
+размерность и проверку finite/range без подстановок. Negative ISI сохраняют
 прежнее skip-значение, канонически-1. Hot reload и clock/lifecycle исправление
 являются отдельной зависимостью, не подтверждаемой этим cold fixture.
 
 Новый gate26 сохраняет все22 baseline cases и добавляет защиту от двойного
-знака, UTF-8 BOM и whitespace-only строк. Это ещё не runtime-проверенное
-исправление. Нельзя восстанавливать старые повреждённые файлы подстановкой0
+знака, UTF-8 BOM и whitespace-only строк. На M40 ASan B1 прошли26/26 native
+cases и7 JUnit/environment readers. Evidence
+`22a037fd0f7f345ada4c5aa1260d3389662ca5dc`: проверены85 members,
+48 012 compressed bytes, actual libasan mappings. Исходный root
+`8555f348b2274cec68b3cf5419b53423e60b99ae`, Pulse — указанный выше кандидат.
+Обычный counterpart выполняется на Elder; приёмка в develop пока не назначена.
+Нельзя восстанавливать старые повреждённые файлы подстановкой0
 либо считать ClassID из прежнего atoi доказательством корректной метки.
