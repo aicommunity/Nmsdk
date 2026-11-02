@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_dataset_file_validation_fixed_evidence",
+  "schema_version": 1,
+  "root": "4c41c0797964354e57124f5cc6548093c5489a79",
+  "pulselib": "60465d12eb11562886b66ea2314d6b2585a318ab",
+  "rdk": "a62393f7791cc4ad10d1c2c11f255b3db3334f89",
+  "statuses": {},
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "incomplete_or_failed",
+  "archive_sha256": "6c4ccce95f7973fbf3ab81aeee7b28fcddab711d3bf817cd92707b00491201e4",
+  "archive_bytes": 12376,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/CMakeCache.before.txt": "5a223ae8539b45ab8672a24a603ecf99bf165be584564bb2c02d3e7b926bfd99",
+    "gate/build-request.json": "62a8f891db629d4cfffdbc321395e6d19550ab659c0ab25fa668d9f8b8c607ee",
+    "gate/build.log": "9c7930081ad744dc82abdd2936c9e88d694e59d2417d25cb77209668da72a869",
+    "gate/checkout-Nmsdk-PulseLib.log": "6eb72b6cbc1fff22cb13b643223a1904a701ab83438ae3ddd7e009b7b367439d",
+    "gate/checkout.log": "ce3fe01455f208a60b40a6770cbbef81b2daaf0afedf37df1cc351bdbdd426c0",
+    "gate/configure.log": "8e5b481be65ec210db4218429803a07355869ca960b842b941782c7a55460040",
+    "gate/exception.json": "4b8ca9f043c541217f2e691ca194390aaef48b5e8c7a3a9343a5aab79243cbe8",
+    "gate/fetch-Nmsdk-PulseLib.log": "8f001f9994423942ce0e6306732f10153c9e4a28ba4763f302e6ca81282e81b8",
+    "gate/fetch.log": "9632dc949c19349962bb2e3d56421a741c72521742c8495618229188029afeb2",
+    "gate/owned-supervisor.json": "1d42028bedfc2dc694c33e1e7922e7dbd6842fb8b3413c758ecf3d2dd7dc4c0d",
+    "gate/prerequisite-verification.json": "7c1fd0808d2d8f0e6d382c8d023d3969c33cf8dedc811fca353de8c6efd99152",
+    "gate/process-guard.json": "407f78245e97d546970451919c5241cd93eade2b6775afcec882c634a854add4"
+  },
+  "scope": "Elder integrated NDataset53 native: strict parser26, active corrupt reload/recovery2 and accepted source clock/lifecycle/dispatch25;17 JUnit/clock readers only after native success. Normal runtime with no libasan mappings. Negative outcomes retained; no scientific classification acceptance.",
+  "scientific_verdict": null
+}

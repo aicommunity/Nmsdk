@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_dataset_file_validation_fixed_evidence",
+  "schema_version": 1,
+  "root": "4c41c0797964354e57124f5cc6548093c5489a79",
+  "pulselib": "60465d12eb11562886b66ea2314d6b2585a318ab",
+  "rdk": "a62393f7791cc4ad10d1c2c11f255b3db3334f89",
+  "statuses": {},
+  "actual_libasan_mappings_verified": false,
+  "acceptance_status": "incomplete_or_failed",
+  "archive_sha256": "b7e8a339b0e409524d3df6c21628c473c840a9017304d45d541a408e951996e8",
+  "archive_bytes": 16792,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/CMakeCache.before.txt": "61d69fd958c734754b143cc005795f6402578030beed5a8a7559d531ae4ecf1a",
+    "gate/build-request.json": "f1f8383a80f75ee9025f5fab5c2365b460e6147bd4591eedea0f68528f212dec",
+    "gate/build.log": "d4e0d4c0bdf80a9269cc7c6f9fc8f5cb5d103808371b6abf68b32c7fca8d452c",
+    "gate/checkout-Nmsdk-PulseLib.log": "6f39ffdbc3d5ea38e839470bcadc1fa8c7b046f46ec3b4dd6688353acdb2c965",
+    "gate/checkout.log": "ce3fe01455f208a60b40a6770cbbef81b2daaf0afedf37df1cc351bdbdd426c0",
+    "gate/configure.log": "36fabef4057151174e5b82e2de67b7a53cae7beeb0bd6bc9d90296e8d335da2b",
+    "gate/exception.json": "e9ddd2f5fd70e8a0b0143f448125a23e81f0ec281c3e0ac57792e3a9ec0de50a",
+    "gate/fetch-Nmsdk-PulseLib.log": "bc9cb3322e1794904d1dc52273bc9bada4aa7d6dc1ef730925ada34b14dacb76",
+    "gate/fetch.log": "9632dc949c19349962bb2e3d56421a741c72521742c8495618229188029afeb2",
+    "gate/owned-supervisor.json": "1ffdc710337ecfa9e176900add112e756d4e5e788d34d89fa476d8df8b3616b4",
+    "gate/prerequisite-verification.json": "79425b23e76282b6861da28986bef15436fe12670430654ff3a1cf0f21ac5cbc",
+    "gate/process-guard.json": "01a2f0e4c6328d33aff13ead7cd0ca2de12d68f594b5f11a05a143f7938bff16"
+  },
+  "scope": "M40 integrated NDataset53 native: strict parser26, active corrupt reload/recovery2 and accepted source clock/lifecycle/dispatch25;17 JUnit/clock readers only after native success. Actual libasan mappings. Negative outcomes retained; no scientific classification acceptance.",
+  "scientific_verdict": null
+}
