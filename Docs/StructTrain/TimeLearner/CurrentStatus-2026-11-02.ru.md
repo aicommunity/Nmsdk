@@ -1,6 +1,40 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
-## Обновление 03.11, 00:25 MSK: native34 завершён, unit provenance неполна
+## Дополнение 03.11: ASan C2 завершён, source fix ещё проверяется
+
+M40 C2 завершён и опубликован: unit9/native35/readers24, все returncodes0,
+actual libasan mappings подтверждены. Evidence
+`780b21afcd6e9d477bc7eb8181217c5a655fa0df`:766 members,5 367 892 compressed bytes
+полностью проверены. [Точная область и ограничения](CapacitanceStateTransfer.ru.md).
+Cross-run normal14/ASan35 совпали non-time columns118/122 CSV;4 отличаются при
+различной model-time предыстории старого source. Полную численную эквивалентность
+не объявлять. Следующий telemetry ASan уже стартовал после sealed C2:
+owner2343535/272969575, publisher2343536/272969585. Это старый root1e0988be,
+PulseE360, native20; source/build/runtime M40 не менять.
+
+Normal B4 показал20 clock PASS и5 failures:2 реальных file reload +3 неверных
+Activity=false instrumentation fixtures. Все194 members evidence70d24b8c
+проверены. Pulse9ab6d57 переносит file reload в native Build до первого pulse;
+fixture теперь включает Activity и проверяет effective Init/activity.
+B5 не начал сборку: guard не распознал ещё живой SSH-процесс собственного
+launcher. Evidence `6a6e838690e960c183487bbb71b304494b78cfee`,3 members проверены.
+B6 передаёт launcher ancestor PID/start_ticks явно; неизвестные процессы
+по-прежнему запрещают изменение source. Никаких общих исключений для sshd нет.
+
+Elder B6 owner71929/322424834, publisher71932/322424845, numerical root
+`b9af8990fe56e9b1662ddaceaa8f874e5b3bb143`, Pulse9ab6d57. Native25/readers41
+ещё pending; действующие source/build/runtime не менять. Independent reader41
+на B3 primary уже подтверждён exact transcript audit29162f94; исходный wrapper
+negative сохранён и объяснён в [clock-origin отчёте](RecognitionClockOrigin-2026-11-02.ru.md).
+
+Первый полный baseline temporal cache:36 recordings/1797 PNG и SVG/PDF.
+Просмотрены8 selected PNG: сигналы и native-tick zoom читаются, но title clipping
+мешает приёмке. Renderer root607c2b616 сокращает только display labels;
+M40 cache A2 owner2342167/272962216 строится на тех же Git-проверенных primary
+без повторного моделирования. Global visual acceptance=false. Все изменения
+сохранены feature branches; source clock/перенос не объявлены полными этапами.
+
+## Предыдущее дополнение 03.11: native34 завершён, unit provenance неполна
 
 Fixed normal B3 завершён:34/34 native PASS с подтверждёнными loaded mappings;
 20 clock cases/76 записей и14 transfer controls. Но unit gate вернул2:
@@ -33,7 +67,7 @@ M40 renderer baseline owner2331038/272883688 строит полные врем�
 является direct visual review. M40 ASan C2 продолжает работу; telemetry queue
 не изменялась. ASan нового clock fix и полная матрица по-прежнему открыты.
 
-## Обновление 03.11, 00:10 MSK: источник паттернов и границы приёмки
+## Предыдущее дополнение 03.11: источник паттернов и границы приёмки
 
 Предыдущие записи ниже — хронология, а не актуальное состояние заданий.
 Исходный план этапов0–12 ещё не выполнен: полностью принят этап0; отдельные

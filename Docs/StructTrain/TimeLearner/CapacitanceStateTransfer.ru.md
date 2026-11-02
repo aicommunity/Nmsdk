@@ -53,8 +53,23 @@ ASan C1 не дошёл до тестов: Qt6 не разрешает неяв�
 `toObject()`; точность сравнения не меняется. Evidence неудачной сборки:
 `17e5baadb0aece02aa278ef6323845d107ed163a`. Повтор использует новый runtime.
 
-Остаётся выполнить normal/ASan и reader gates, построить временные отчёты,
-проверить выбранные рисунки и merge closure. Также остаются автоматическое
+Normal B3 подтвердил9/14, отдельный reader B5 —24/24 на прежних primary.
+ASan C2 завершён:9/9 unit,35/35 native (8 bound C0 +6 joint +3 diagnostics
++14 transfer),24/24 readers. Evidence `780b21afcd6e9d477bc7eb8181217c5a655fa0df`:
+766 members/5 367 892 compressed bytes и actual libasan mappings проверены.
+PulseLib `69d463aa50144a1c8ddb4a674bb900c2a07e769f`, numerical root
+`6db2d5156fe51e03e1ebdeb1c256c5010dadb9b7`. Это scoped memory/lifecycle/transfer
+проверка; она не охватывает последующие archive/dataset clock changes.
+
+Между normal14 и ASan35 общие122 CSV:118 имеют полностью одинаковые non-time
+columns,4 — разные signals при разной предыстории shared model time.
+[Сравнение с SHA каждого исходного CSV](../../../Reports/StructTrain/TimeLearner/s07-capacitance-normal-asan-comparison-a1/comparison.json).
+Полная cross-run waveform equivalence не подтверждена. Независимый
+[clock-origin эксперимент](RecognitionClockOrigin-2026-11-02.ru.md) показывает
+реальную зависимость старого источника от clock origin; не приписывать эти4
+различия ASan или C0 без отдельного вмешательства. Кандидат исправления source
+требует собственной normal/ASan приёмки. Для подэтапа остаются временные отчёты,
+проверка выбранных рисунков и merge closure. Также остаются автоматическое
 владение baseline алгоритмом C-trim, обновление карты после последующих edits,
 native XML/Copy retention и полная матрица режимов. Этот срез не включает
 полноценный bounded C-trim search: V2 с SyncCapacitanceTrim On ещё не разрешён.
