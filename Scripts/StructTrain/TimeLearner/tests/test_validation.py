@@ -39,7 +39,11 @@ class ValidationContractTest(unittest.TestCase):
                 self.assertEqual(os.environ["TIMELEARNER_NATIVE_GATE_DIR"], "/undeclared")
             self.assertEqual(result["assertion_status"], "failed")
             self.assertTrue(result["skipped"])
-            self.assertEqual(result["executed_tests"], 0)
+            # This real module also has one autonomous environment contract.
+            # It executes; the artifact-dependent JUnit class must stay skipped.
+            self.assertEqual(result["executed_tests"], 1)
+            self.assertEqual(len(result["skipped"]), 1)
+            self.assertIn("NativeGateJUnitTest", result["skipped"][0]["test_id"])
 
     def test_changed_package_and_test_inventory_rejected_before_output(self):
         spec = declaration()
