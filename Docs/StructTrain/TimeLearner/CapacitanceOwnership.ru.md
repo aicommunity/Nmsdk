@@ -87,6 +87,16 @@ controls и14 completed/stopped/recognition transfer cases с8 ownership cases:
 в develop ничего из owner-кандидата не объединяется. Это всё ещё не C-trim
 controller search, полная lifecycle/physics матрица либо научное8/8.
 
+Временной report-контракт native-capacitance-ownership-report-v1.json объявляет
+48 фактических полных probe traces (serial2/4/6/8/10/12 на каждый case): до C
+edit, после Reset с сохранёнными C, после growth и regrowth для обоих input IDs.
+Используется production native_test_reports: soma всех доступных каналов,
+фактический stimulus overlay и zoom с native samples. После положительных
+native gates нужны проверка полноты72 trial-soma pairs, читаемости выбранных
+изображений и неизменности первичных CSV. Полные PNG/SVG/PDF — cache на M40;
+Git — сжатые первичные данные, модели, метрики и выбранные проверенные рисунки.
+До рендера/прямого просмотра визуальная приёмка не назначается.
+
 Изменения выполняются в codex/timelearner-capacitance-owner от принятого develop;
 server jobs не должны вытеснять текущую invalid-reload проверку. После адресной
 приёмки — --no-ff merge Pulse develop, затем root с точным gitlink. Полные
