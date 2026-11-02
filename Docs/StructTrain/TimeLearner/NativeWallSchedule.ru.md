@@ -137,3 +137,26 @@ Production-алгоритм, физика и численные допуски �
 следует общей политике100 native ticks на панель; отсчёты не прореживаются.
 Reader tests используют реальные серверные corpus и их повреждённые копии.
 Серверная проверка нового reader/renderer до приёмки ещё обязательна.
+
+
+## Фактические результаты 2026-11-02
+
+Numeric root `f35f614d2d07c1cc0cdf9786bcadd31d9237ed06`:66/66 на обоих
+workers. Primary normal `83dc90cfdd1227a31ffef4392671ddb079dce287` (440 members),
+ASan `271a395cc44366d9b4495abcaa15758233895083` (773 members, включая metadata
+renderer и ошибку предварительного счётчика выбранных PNG). Проверены все
+archive/member SHA256. Реально выбрано18 PNG, а не предварительно ожидавшиеся16;
+ошибка publisher остановила публикацию до Git push и сохранена в новом архиве.
+Reader `e7782709157b84b5f8b1cec62711ff0ae4ecf1a2`:10/10 на обоих workers,
+включая порчу positive packet. Proofs normal
+`44ea08e35811531bbeef2ba61304883f8deae402`, ASan
+`7e696d6724da3d4770229cfb1d5ddb2e1170c918`;11 archive members каждый.
+Ожидаемые исходы проверяются отдельно:32 unprepared rejection,8 live rejection,
+6 completed valid,4 raw Reset diagnostics. Последние не являются закрытыми
+пробами. Full cache на M40:141 PNG;18 выбранных изображений просмотрены,
+индивидуальные hashes и границы review в `NativeWallScheduleVisualQA.json`.
+Четыре live-mid overview показывают цензурированное окно до первого стимула;
+это диагностические изображения, а не доказательство отсутствия реакции.
+Ветка ещё не объединена: впереди интеграция нового develop/Rdk closure,
+адресные регрессии и публичный Console preflight. Не объявляются завершёнными
+весь этап4, lifecycle matrix, алгоритмы или этапы0–12.

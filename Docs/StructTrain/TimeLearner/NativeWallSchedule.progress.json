@@ -59,10 +59,9 @@
     "note": "do not update its source/build/runtime; original native16 gate still open"
   },
   "next": [
-    "Verify exact baseline actual readback, preserving setup failures separately; no inference of real wall-driven skips from the capability-policy test.",
-    "After reproduction, implement shared execution-only guard; leave generic Build/import/export/edit/rollback possible and Rdk semantics unchanged.",
-    "Add actual preflight/Begin/recognition/live-policy-change coverage, positive negative-limit controls, readers and temporal reports on both workers.",
-    "Preserve all original stages0-12; this substep is not whole lifecycle/storage or algorithm acceptance."
+    "Integrate accepted develop (Rdk merge/inherited tests) into feature without rewriting history.",
+    "Run targeted existing native regression controls and public Console preflight on the integrated closure; positive wall override through storage/config needs separate capability evidence.",
+    "After remaining scoped acceptance, merge Pulse feature into its develop first and root feature last; full original stages remain open."
   ],
   "full_acceptance": false,
   "scientific_verdict": null,
@@ -107,5 +106,38 @@
       "pid": 1428250,
       "start_ticks": "266416273"
     }
-  ]
+  ],
+  "current_accepted_root": "0c12a71757d4eb34412f043028f56edfa38ba974",
+  "positive_attempt_a3": {
+    "numeric_root": "f35f614d2d07c1cc0cdf9786bcadd31d9237ed06",
+    "tests_each_worker": 66,
+    "all_passed": true,
+    "normal_primary": "83dc90cfdd1227a31ffef4392671ddb079dce287",
+    "asan_primary": "271a395cc44366d9b4495abcaa15758233895083",
+    "verified_members": {
+      "normal": 440,
+      "asan": 773
+    }
+  },
+  "strict_reader": {
+    "source": "e7782709157b84b5f8b1cec62711ff0ae4ecf1a2",
+    "tests_each_worker": 10,
+    "all_passed": true,
+    "normal_primary": "44ea08e35811531bbeef2ba61304883f8deae402",
+    "asan_primary": "7e696d6724da3d4770229cfb1d5ddb2e1170c918",
+    "packet_outcomes": {
+      "unprepared_rejected": 32,
+      "live_rejected": 8,
+      "completed_valid": 6
+    }
+  },
+  "visual": {
+    "full_cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s04-native-wall-asan-a1",
+    "png_files": 141,
+    "selected_pngs": 18,
+    "selected_directly_reviewed": 18,
+    "whole_cache_direct_review_complete": false,
+    "qa": "NativeWallScheduleVisualQA.json"
+  },
+  "active_native_jobs": []
 }
