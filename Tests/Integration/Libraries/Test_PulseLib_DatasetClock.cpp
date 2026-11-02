@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NDatasetMatrix.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NDataset.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
@@ -9,6 +10,7 @@
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QTemporaryDir>
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
@@ -205,4 +207,94 @@ TEST(DatasetClockExtended,NearGridAt2000){OriginInvariant(2000,2,0.,Extended("ne
 TEST(DatasetClockExtended,NearGridAt20000){OriginInvariant(20000,2,0.,Extended("near",true),true);}
 TEST(DatasetClockExtended,TimedFirstOnsetCutoffAt2000){OriginInvariant(2000,1,0.,Extended("cutoff",false,true),true);}
 TEST(DatasetClockExtended,TimedFirstOnsetCutoffAt20000){OriginInvariant(20000,1,0.,Extended("cutoff",false,true),true);}
+
+// Exercise the production file owner, including children added to an already
+// initialized tree. Matrix-only probes cannot establish this lifecycle contract.
+void FileReload(unsigned frequency)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    struct Cleanup {
+        UEPtr<UEnvironment> environment;ULongTime prior;
+        ~Cleanup(){environment->DestroyModel();environment->GetTime().SetTime(prior);}
+    } cleanup{core.environment,core.environment->GetTime().GetTime()};
+    core.environment->DestroyModel();
+    Require(core.environment->CreateModel("NModel"),"file fixture model unavailable");
+    auto model=dynamic_pointer_cast<UNet>(core.environment->GetModel());Require(bool(model),"file fixture root unavailable");
+    model->SetEnvironment(core.environment);model->SetGlobalTimeStep(frequency);
+    auto dataset=dynamic_pointer_cast<NDataset>(core.storage->TakeObject("NDataset"));
+    Require(bool(dataset),"file fixture storage image unavailable");
+    QTemporaryDir directory;Require(directory.isValid(),"file fixture temporary directory unavailable");
+    const auto path=directory.filePath("patterns.txt");
+    dataset->Name="Dataset";dataset->SetEnvironment(core.environment);dataset->SetGlobalTimeStep(frequency);
+    dataset->UseRelativePathFromConfig=false;dataset->UseRelativePathFromWorkDir=false;
+    dataset->FileName=path.toStdString();dataset->StateGeneration=2;dataset->Delay=.005;
+    UEPtr<UContainer> child=dataset;
+    Require(model->AddComponent(child)!=ForbiddenId,"file fixture attach failed");
+    const auto marker=model->OperationFailureSequence();model->Init();model->Reset();
+    Require(!model->HasOperationFailureSince(marker) && model->IsInit() && model->IsReady(),"file fixture native initialization failed");
+    core.environment->GetTime().SetTime(1000000);
+    model->Calculate();
+    Require(dataset->ReloadDataset.GetData() && dataset->GetNumComponents()==0 &&
+            !model->HasOperationFailureSince(marker),"missing file must remain retryable and idle");
+    core.environment->IncreaseModelTimeByStep();
+    auto replaceFile=[&](const QByteArray& text) {
+        QFile file(path);Require(file.open(QIODevice::WriteOnly|QIODevice::Truncate),"file fixture write unavailable");
+        Require(file.write(text)==text.size() && file.flush(),"file fixture write failed");
+    };
+    replaceFile("# NDataset MaxSpikes=2\nclass;f1;f2\n7;0.01;0.015\n;0.04;0.03\n");
+    QJsonArray observations;
+    for(int phase=0;phase<2;++phase)
+    {
+        if(phase==1)
+        {
+            replaceFile("# NDataset MaxSpikes=2\nclass;f1\n9;0.02\n;0.02\n");
+            dataset->ReloadDataset=true;
+        }
+        std::ostringstream csv;csv.imbue(std::locale::classic());csv<<std::setprecision(17)<<"time,input1,input2\n";
+        std::vector<unsigned> firstEdges(phase==0?2:1,std::numeric_limits<unsigned>::max());
+        std::vector<bool> previous(firstEdges.size(),false);
+        unsigned wrong=0;
+        for(unsigned tick=0;tick<=frequency*8/100;++tick)
+        {
+            model->Calculate();
+            Require(!model->HasOperationFailureSince(marker),"file fixture caught native failure");
+            Require(!dataset->ReloadDataset.GetData() && dataset->WasPlaybackHandledBeforeChildren(),"file playback did not prepare before children");
+            Require(dataset->GetNumComponents()==int(firstEdges.size()) && dataset->NumFeatures.GetData()==int(firstEdges.size()) &&
+                    dataset->MaxSpikesPerFeature.GetData()==2 && dataset->GetSampleClass(0)==(phase==0?7:9),"file reload effective graph/data differ");
+            csv<<core.environment->GetTime().GetDoubleTime();
+            const unsigned period=frequency*(phase==0?56:46)/1000;
+            for(unsigned index=0;index<firstEdges.size();++index)
+            {
+                auto generator=dataset->GetComponentL<NPulseGeneratorTransit>("Generator"+std::to_string(index+1),true);
+                Require(bool(generator) && generator->IsInit() && generator->IsReady() && generator->TimeStep.GetData()==frequency,
+                        "hot-created generator is not natively initialized at the declared frequency");
+                Require(generator->Output.GetRows()==1 && generator->Output.GetCols()==1,"file fixture output shape differs");
+                const double output=generator->Output(0,0);Require(std::isfinite(output),"file fixture nonfinite output");
+                const bool high=output>0.;if(high && !previous[index] && firstEdges[index]==std::numeric_limits<unsigned>::max())firstEdges[index]=tick;
+                previous[index]=high;
+                const unsigned first=frequency*(phase==1?20:index==0?10:15)/1000;
+                const unsigned last=frequency*(phase==1?40:index==0?50:45)/1000;
+                const unsigned position=tick%period,width=frequency/1000;
+                const bool expected=(position>=first && position<first+width)||(position>=last && position<last+width);
+                wrong+=high!=expected;csv<<','<<output;
+            }
+            if(phase==1)csv<<",0";
+            csv<<'\n';core.environment->IncreaseModelTimeByStep();
+        }
+        EXPECT_EQ(wrong,0u)<<"hot reload must preserve every actual pulse sample";
+        for(unsigned index=0;index<firstEdges.size();++index)
+            EXPECT_EQ(firstEdges[index],frequency*(phase==1?20:index==0?10:15)/1000);
+        const auto stem="dataset_file_reload_"+std::to_string(frequency)+"_phase"+std::to_string(phase);
+        Write(stem+".csv",QByteArray::fromStdString(csv.str()));
+        observations.append(QJsonObject{{"phase",phase},{"features",int(firstEdges.size())},{"wrong_pulse_samples",int(wrong)},
+            {"trace",QString::fromStdString(stem+".csv")},{"complete",true}});
+    }
+    Write("dataset_file_reload_"+std::to_string(frequency)+".json",QJsonDocument(QJsonObject{
+        {"kind","native_dataset_file_reload"},{"schema_version",1},{"frequency_hz",int(frequency)},
+        {"observations",observations},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(DatasetFileLifecycle,MissingThenGrowThenShrinkAt2000)
+{try{FileReload(2000);}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
+TEST(DatasetFileLifecycle,MissingThenGrowThenShrinkAt20000)
+{try{FileReload(20000);}catch(const RDK::UException& e){FAIL()<<e.what();}catch(const std::exception& e){FAIL()<<e.what();}}
 }
