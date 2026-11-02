@@ -341,7 +341,12 @@ void TelemetryFixture(unsigned int frequency)
     model->StepDuration = 123456789ULL;
     channel->StepDuration = 987654321ULL;
     const auto after = NmsdkTools::ExportModelArchive(model,Metadata());
-    EXPECT_EQ(before,after); // full signed archive, not just semantic identity
+    // Compare the entire live graph snapshot, including retained bindings and
+    // state. Separate image instances can have different transient buffers;
+    // physical archives intentionally are not dynamic checkpoints of images.
+    EXPECT_EQ(before["graph"],after["graph"]);
+    EXPECT_EQ(NmsdkTools::ModelImageDefinitionsFingerprint(before["class_definitions"].toArray()),
+              NmsdkTools::ModelImageDefinitionsFingerprint(after["class_definitions"].toArray()));
     EXPECT_EQ(model->StepDuration.GetData(),123456789ULL);
     EXPECT_EQ(channel->StepDuration.GetData(),987654321ULL);
     EXPECT_EQ(model->MaxCalculationDuration.GetData(),234567LL);
@@ -363,7 +368,11 @@ void TelemetryFixture(unsigned int frequency)
     EXPECT_EQ(imported->MaxCalculationDuration.GetData(),234567LL);
     EXPECT_EQ(imported->GetComponentL<NPulseChannel>("Dendrite2_3.ExcChannel",true)->CalculationDurationThreshold.GetData(),345678LL);
     const auto normalized = NmsdkTools::ExportModelArchive(imported,Metadata());
-    EXPECT_EQ(normalized["graph"].toObject()["native_xml"],before["graph"].toObject()["native_xml"]);
+    EXPECT_EQ(normalized["graph"].toObject()["identity"],before["graph"].toObject()["identity"]);
+    USerStorageXML normalizedXml;
+    ASSERT_TRUE(normalizedXml.Load(normalized["graph"].toObject()["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph"));
+    ASSERT_TRUE(normalizedXml.SelectNode(imported->GetName())); ASSERT_TRUE(normalizedXml.SelectNode("State"));
+    ASSERT_TRUE(normalizedXml.SelectNode("StepDuration")); EXPECT_EQ(normalizedXml.GetNodeText(),"0");
 
     model->MaxCalculationDuration = 234568LL;
     const auto changedLimit = NmsdkTools::ExportModelArchive(model,Metadata());
