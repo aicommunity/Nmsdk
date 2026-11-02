@@ -891,18 +891,20 @@ template<class Learner> void RunNativeTraining(int normalization,bool cold=false
         rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
     }
     const auto& service=rig.learner->NativeTrainingController();
-    ASSERT_EQ(service.Outcome(),TrainingStatus::SearchUnresolved)<<service.Reason();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
     ASSERT_TRUE(service.References());EXPECT_EQ(service.References()->Inputs().size(),2u);
     ASSERT_TRUE(service.Search());EXPECT_GE(service.Search()->AppliedEdits(),1u);
-    EXPECT_EQ(service.Search()->Status(),TrainingStatus::SearchUnresolved);
-    ASSERT_TRUE(service.Certificate());EXPECT_FALSE(service.Certificate()->Exact());
-    EXPECT_TRUE(service.Certificate()->Matches(rig.Revision(),*service.References(),plan.search.tolerances,
+    EXPECT_EQ(service.Search()->Status(),TrainingStatus::BudgetExhausted);
+    EXPECT_FALSE(service.Certificate());ASSERT_TRUE(service.Search());ASSERT_TRUE(service.Search()->Certificate());EXPECT_FALSE(service.Search()->Certificate()->Exact());
+    EXPECT_EQ(service.Reason(),"maximum_sweeps_exhausted");
+    EXPECT_TRUE(service.Search()->Certificate()->Matches(rig.Revision(),*service.References(),plan.search.tolerances,
         ModelStateKind::LearnedSolo,service.Search()->ModelEpoch()));
     EXPECT_EQ(observations,service.IssuedReferenceProbes()+service.Search()->IssuedProbes());EXPECT_GT(frames,0u);
     auto summary=EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters());
     summary["implementation_control"]=true;
-    EXPECT_TRUE(summary["certificate_matches_actual_model"].toBool());
-    EXPECT_FALSE(summary["certificate"].toObject()["exact"].toBool());
+    EXPECT_FALSE(summary["certificate_matches_actual_model"].toBool());
+    EXPECT_TRUE(summary["certificate"].isNull());
+    EXPECT_EQ(summary["model_state_kind"],QJsonValue("diagnostic"));
     EXPECT_EQ(summary["actual_parameters"],summary["accepted_parameters"]);
     Artifact(rig.name+"_training_summary.json",QJsonDocument(summary).toJson());
     // Reset keeps the physical model and captured goal. It must not invoke
@@ -985,8 +987,9 @@ template<class Learner> void ConfiguredTraining(int normalization,bool fromXml=f
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
     {ASSERT_LT(ticks,40000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();
-    ASSERT_EQ(service.Outcome(),TrainingStatus::SearchUnresolved)<<service.Reason();
-    ASSERT_TRUE(service.References());ASSERT_TRUE(service.Certificate());EXPECT_FALSE(service.Certificate()->Exact());
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
+    ASSERT_TRUE(service.References());EXPECT_FALSE(service.Certificate());ASSERT_TRUE(service.Search());ASSERT_TRUE(service.Search()->Certificate());EXPECT_FALSE(service.Search()->Certificate()->Exact());
+    EXPECT_EQ(service.Reason(),"maximum_sweeps_exhausted");
     ASSERT_TRUE(service.Search());EXPECT_GT(service.Search()->AppliedEdits(),0u);
     if(n0Repeats)
     {
@@ -996,7 +999,7 @@ template<class Learner> void ConfiguredTraining(int normalization,bool fromXml=f
         EXPECT_EQ(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())["schema_version"],QJsonValue(2));
     }
     EXPECT_EQ(observations,service.IssuedReferenceProbes()+service.Search()->IssuedProbes());
-    EXPECT_TRUE(service.Certificate()->Matches(rig.Revision(),*service.References(),configuration.search.tolerances,
+    EXPECT_TRUE(service.Search()->Certificate()->Matches(rig.Revision(),*service.References(),configuration.search.tolerances,
         ModelStateKind::LearnedSolo,service.ModelEpoch()));
     Artifact(rig.name+"_configuration.json",encoded);
     Artifact(rig.name+(fromXml?"_xml_summary.json":"_training_summary.json"),QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());
@@ -4273,3 +4276,52 @@ TEST(NativeInheritedProperties,BranchN0LocalFrequency2000){InheritedLocalFrequen
 TEST(NativeInheritedProperties,ClassicN0LocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearner>(20000,0);}
 TEST(NativeInheritedProperties,BranchN0LocalFrequency20000){InheritedLocalFrequency<NNeuronTimeLearnerBranch>(20000,0);}
 }
+
+
+namespace {
+template<class Learner> void NativeSweepBudgetBoundary(int normalization)
+{
+    EditingRig<Learner> rig(2000,normalization,"sweep_budget_boundary",false,2,true);
+    auto plan=TrainingPlan(rig,0.);plan.maximumWallSeconds=1800.;
+    plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;
+    for(auto& bound:plan.search.bounds)
+    {bound.maximumLength=bound.minimumLength;bound.maximumSynapses=bound.minimumSynapses;bound.maximumResistance=bound.minimumResistance;}
+    const auto parameters=rig.learner->ReadNativeParameters();const auto revision=rig.Revision();
+    RecordPostTuneBoundaryTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*rig.frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
+    EXPECT_EQ(service.Reason(),"maximum_sweeps_exhausted");EXPECT_FALSE(service.Certificate());
+    ASSERT_TRUE(service.Search());ASSERT_TRUE(service.Search()->Certificate());
+    EXPECT_FALSE(service.Search()->Certificate()->Exact());
+    EXPECT_EQ(service.ReferencePackets().size(),2u);EXPECT_EQ(service.FinalPackets().size(),2u);
+    EXPECT_EQ(service.ObservedPackets().size(),8u);
+    for(const auto& packet:service.ObservedPackets())
+    {ASSERT_TRUE(packet.observation);EXPECT_TRUE(packet.observation->valid);EXPECT_TRUE(packet.observation->complete);}
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.Revision(),revision);
+    const std::string implementation="native-sweep-budget-fixture-v1";
+    const auto summary=EncodeNativeTrainingState(service,rig.Revision(),parameters);
+    const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    Artifact(rig.name+"_sweep_budget_summary.json",QJsonDocument(summary).toJson());
+    Artifact(rig.name+"_stopped_package.json",QJsonDocument(package).toJson());
+    EXPECT_EQ(package["kind"],QJsonValue("timelearner_stopped_state"));
+    EXPECT_EQ(package["state_kind"],QJsonValue("diagnostic"));EXPECT_TRUE(package["certificate"].isNull());
+    EXPECT_EQ(package["training_outcome"],QJsonValue("budget_exhausted"));
+    EXPECT_EQ(package["reason"],QJsonValue("maximum_sweeps_exhausted"));
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const auto clock=rig.environment->GetTime().GetDoubleTime();
+    auto restored=PrepareNativeLearnedState(package,core.storage,core.environment,implementation);
+    EXPECT_EQ(restored->service.Outcome(),TrainingStatus::BudgetExhausted);
+    EXPECT_EQ(restored->service.Reason(),"maximum_sweeps_exhausted");EXPECT_FALSE(restored->service.Certificate());
+    EXPECT_EQ(restored->service.FinalPackets().size(),2u);EXPECT_EQ(restored->modelRevision,revision);
+    EXPECT_EQ(restored->parameters,parameters);EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),clock);
+    EXPECT_THROW(ConvertNativeSoloToRecognition(package,NativeRecognitionSpec{},core.storage,core.environment,implementation),std::invalid_argument);
+}
+}
+TEST(NativeTrainingTermination,ClassicN0SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearner>(0);}
+TEST(NativeTrainingTermination,ClassicN1SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearner>(1);}
+TEST(NativeTrainingTermination,BranchN0SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeTrainingTermination,BranchN1SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearnerBranch>(1);}
