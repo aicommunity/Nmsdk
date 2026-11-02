@@ -308,3 +308,18 @@ SearchTermination.ru.md, SearchTermination.progress.json, SearchTerminationVisua
 полностью проверен после Git fetch. Scoped transport root5e299dedf закрыт на
 обоих workers. Новый combined root07167d551 всё ещё проверяется: Elder163
 выполняется, M40 build выполняется. Общие статусы этапов0–12 не меняются.
+
+Позднейший подтверждённый checkpoint: combined root07167d551 прошёл163/163
+на Elder, JUnit readers7/7. Public Console на обоих:14+6+2, readers28/28;
+данные и exact compatibility inputs опубликованы и проверены. Новый
+saved-nonexact completed replay:4 модели/input0 +5 readers на worker,
+model hash/certificate и весь golden CSV сохранены. Это не полная проверка
+legacy training/recognition или всех входов. Полные SHA и ограничения —
+SearchTermination.progress.json / LegacyCompletedReplay.validation.json.
+
+ASan163-a1 прерван из-за ошибочного общего CI budget7200<9447.088s старого
+inherited16 baseline. Частичные данные и -15 exit сохранены; новая ASan-a2
+с21600s пока выполняется. Не принимать её заранее. Full payload/temporal
+acceptance нового163 и широкая матрица планов всё ещё открыты. Stage0 остаётся
+единственным полностью завершённым этапом0–12; версии2 в целом не присваивается
+статус рекомендуемой по этим узким gates.

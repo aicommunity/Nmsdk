@@ -186,3 +186,33 @@ diagnostic Budget4 и named Exact/completed1; все5 frozen/fresh-process CSV
 Усиленные проверки и combined Pulse нового root07167d551 этим не принимаются.
 Его Elder build завершён и163-case gate запущен; на M40 начат build той же
 точной closure. Owned PID/start ticks и пути обновлены в progress JSON.
+
+## Следующий закрытый подэтап combined root07167d551
+
+Elder163/163 и независимые JUnit corruption checks7/7 завершены. Public Console
+на каждом worker:14 положительных preflight,6 отказов,2 one-tick Train;
+independent readers28/28 без skip. Первый reader запуск дал27/28 из-за
+зависимости дочерней CLI-проверки от inherited CWD; test теперь задаёт путь
+импорта и выполняет CLI из постороннего каталога. Reader source7577b97e1;
+actual native/public operations не повторялись для исправления reader.
+
+Primary normal `3cc20c1449d67b443e440a09b474d6b0eb54b15a`:1793 members,
+8,965,180 bytes; ASan public-only `4b4498a67815633335328a27e44e4d2787ad0fcf`:
+353 members,3,681,730 bytes. Проверены outer, archive и все member SHA.
+Сохранены исходные reader failures и exact compatibility inputs для повторного
+анализа. В этих размерах сжатые raw traces/models, а не полный visual cache.
+Полный declared payload audit и temporal reports нового163 ещё открыты.
+
+ASan163-a1 контролируемо прерван:7200s общий budget был меньше уже известного
+ASan16 baseline9447.088s. Это ошибка моего CI задания. Raw -15 exit, incomplete
+observation и причина сохранены в `bdebe7cd4686c93358ef326b13686894ecef1ec1`,
+424 verified members/1,209,742 bytes. См. Integrated163BudgetCorrection.ru.md.
+Новая отдельная ASan163-a2 с21600s сохраняет те же source/runtime/163 IDs;
+до фактического результата не принимается. Elder-a1 с7200s завершён успешно.
+
+Четыре A14 saved nonexact completed состояния также воспроизведены на обоих
+workers,4 native +5 reader, с исходным сертификатом и byte-equal frozen CSV.
+Это active input0; полный replay других входов и recognition ещё впереди.
+SHA/ограничения: LegacyCompletedReplay.ru.md и validation JSON.
+Ни Pulse feature, ни root feature этими scoped результатами ещё не merged в
+develop; алгоритмическая и научная матрица исходного плана остаётся полной.
