@@ -28,6 +28,31 @@ def inventory_wall_schedule(root):
     root = Path(root).resolve(strict=True)
     inventory = inventory_native_test_run(SPEC, root)
     native = root/"native"
+    outcomes = {"unprepared_rejected": 0, "live_rejected": 0, "completed_valid": 0}
+    for group in inventory["groups"]:
+        name = group["trials"][0]["source_packet"]
+        packet = load(native/name)
+        observation = packet["observation"]
+        if "_wall_limit_" in name and "_probe_2_" in name:
+            require(packet["native_status"] == "rejected" and packet["prepared"] is None
+                    and observation is None and REASON in packet["reasons"], "wall_unprepared_packet_mismatch")
+            outcomes["unprepared_rejected"] += 1
+        elif "_wall_live_" in name:
+            final = "_wall_live_final_" in name
+            require(packet["native_status"] == "rejected" and type(observation) is dict
+                    and observation["valid"] is False and observation["complete"] is final
+                    and REASON in packet["reasons"] and observation["sample_count"] == (361 if final else 2),
+                    "wall_live_packet_mismatch")
+            outcomes["live_rejected"] += 1
+        else:
+            require(packet["native_status"] == "completed" and type(observation) is dict
+                    and observation["valid"] is True and observation["complete"] is True
+                    and observation["sample_count"] == 361 and len(observation["peaks"]) == 1
+                    and observation["peaks"][0]["stimulus_id"] == "pulse0"
+                    and observation["peaks"][0]["validity"] == "valid", "wall_positive_packet_mismatch")
+            outcomes["completed_valid"] += 1
+    require(outcomes == {"unprepared_rejected": 32, "live_rejected": 8, "completed_valid": 6},
+            "wall_packet_outcome_set_mismatch")
     resets = []
     expected_resets = set()
     for topology in ("Classic", "Branch"):
@@ -91,7 +116,7 @@ def inventory_wall_schedule(root):
     require(inventory["tests"] == 66 and inventory["trials"] == 46
             and inventory["plottable_trial_soma_pairs"] == 21, "wall_declared_coverage_mismatch")
     return {"kind": "native_wall_schedule_report_inventory", "schema_version": 1,
-            "native_inventory": inventory, "reset_diagnostics": resets,
+            "native_inventory": inventory, "packet_outcomes": outcomes, "reset_diagnostics": resets,
             "visual_acceptance_complete": False, "scientific_verdict": None}
 
 
