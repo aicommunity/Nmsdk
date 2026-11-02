@@ -19,6 +19,20 @@ Proof4661b39647b204e3ca04ee613bb08bb6d7cadc88; QA DiagnosticRecognitionVisualQA.
 proofe85f003d6060f4ea7769ad71b40eacfc7b3cd969. ASan-приёмка нового контура pending.
 Подробности: [DiagnosticRecognition](DiagnosticRecognition.ru.md).
 
+Следующий незавершённый алгоритмический подэтап:
+[finite candidate ranking](FiniteCandidateRanking.ru.md). В production
+BoundedTraining устранена потеря различий при нулевом tolerance и overflow
+нормированной ошибки. Corrected old-Core baseline:8 ожидаемых failures;
+correction на Elder:81/81,15/15 readers и4 stopped-boundary audits.
+Proofs244399829e94bae3d619c858f48431e89ce59505 и
+f9e823ced7d51614a2a1af307405bbdaaac0478f полностью проверены после Git fetch.
+20 контроллерных сценариев не подменяют native physical ranking:4 новых
+сценария с несколькими реальными длинами ещё проверяются. Первая их сборка
+отклонена из-за ошибочного вызова test factory, исправление собирается отдельно.
+Новый ASan runtime строится в независимом M40 worktree; старый live163
+не обновлялся. Подэтап не принят в develop; defaults, CapturedPerInput,
+fresh final gate и условия Exact не изменены. Полные этапы1–12 остаются открытыми.
+
 ## Завершено
 
 Исходный root07167d55125ced4eeff72703a718203e8c90bfc7/Pulsefca7141:

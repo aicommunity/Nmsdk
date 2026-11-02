@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_finite_candidate_ranking_validation",
+  "schema_version": 1,
+  "accepted_in_develop": false,
+  "production_core": "225642bd9b3a5651fce2808bd0bef79944d4f1b8",
+  "corrected_normal_root": "fbe7b667faaeb5eb17319d9d3a4a5b8d92c86754",
+  "normal_evidence": "f9e823ced7d51614a2a1af307405bbdaaac0478f",
+  "native_regression_tests_passed": 81,
+  "controlled_ranking_scenarios_passed": 20,
+  "reader_tests_passed": 15,
+  "stopped_boundaries_audited": 4,
+  "corrected_baseline": {
+    "root": "daefecf61cabff82d8d6983321d17df5abd8d310",
+    "core": "427bf9300a5caeab2ece6dffb0b76c82f6096025",
+    "expected_failures": 8,
+    "observed_failures": 8,
+    "evidence": "244399829e94bae3d619c858f48431e89ce59505"
+  },
+  "initial_attempts": {
+    "baseline": "6ecdff6ab10a9e123173270a845f0e95927a8f28",
+    "negative_regression": "47be80c10851c0f2755f60b3be9a5d049c3bfdc1",
+    "interpretation": "Initial timing fixture ignored the burst-origin ISI. Retained as failed attempts, not timing-defect proof. Corrected baseline explicitly checks actual measured residuals."
+  },
+  "pending": [
+    "ASan81 on independent M40 source/runtime",
+    "Four physical multi-length ranking controls on both workers",
+    "Primary temporal reports/direct review for those physical controls",
+    "Full original stage7 algorithm and model matrix"
+  ],
+  "unchanged": [
+    "CapturedPerInput target",
+    "default tolerances",
+    "readiness and Exact comparisons",
+    "native lifecycle and scheduler",
+    "search bounds and terminal reasons"
+  ],
+  "scientific_verdict": null
+}
