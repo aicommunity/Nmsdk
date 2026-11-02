@@ -43,11 +43,15 @@ execution budget21600s. Его source/build/runtime не обновлялись.
 сохранён. Ни terminal a2, ни PASS заранее не заявляются.
 
 На M40 Data из Git proof5f84cdf получены primary новых88 проб. Full temporal
-report строится в `report-cache/s03-native-trace-recording-normal-a1`,
-driverb1787ca05f678c690aebc54221a1c0f0681eafbd,PID1791275/start_ticks269014144.
+report завершён в `report-cache/s03-native-trace-recording-normal-a1`,
+driverb1787ca05f678c690aebc54221a1c0f0681eafbd; прежний PID1791275 закрыт.
+Все138 trial/soma pairs покрыты821 PNG;3/3 coverage/hash/scale checks прошли.
+Все14 selected PNG прямо просмотрены1920x960: cold/warm, physics-change,
+external stop и deadline. Partial traces не дорисованы после последнего sample.
 Это рендер Elder normal данных, не ASan-прогон нового instrumentation.
-Нужны завершение, hashes/масштаб/coverage checks и просмотр selected PNG.
-Полный кэш в Git не добавлять. Старый CI163 также требует собственного
+Proofab1ff2ec6f1eed706f98a5ac0dcbfc9d9237bd39:33 members/2078999 bytes,
+hashes полностью проверены. QA: NativeTraceCoverageVisualQA.json. Весь кэш
+вручную не просмотрен и в Git не добавлен. Старый CI163 также требует собственного
 отчёта407 проб и отдельных raw Reset графиков.
 
 После освобождения M40 нужен отдельный ASan gate18 numericd06585d.

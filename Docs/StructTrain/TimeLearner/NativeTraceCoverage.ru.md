@@ -67,5 +67,10 @@ Proof5f84cdf009b9d1537f464635b16a8096cb00741b содержит299 members,
 Сохранена неудачная первая reader-попытка: prefix glob принимал saved model
 за probe. Исправление2e785da3e проверяет только числовые ordinals и сохраняет
 глобальное обнаружение любого неучтённого packet. ASan instrumentation18
-и full temporal/visual acceptance пока открыты. Рабочий checkpoint:
+пока открыт. Normal temporal report завершён:88 probes/138 soma pairs,
+821 PNG в M40 cache,3/3 coverage/hash/scale checks;14 selected PNG прямо
+просмотрены1920x960. QA и hashes: NativeTraceCoverageVisualQA.json.
+Proofab1ff2ec6f1eed706f98a5ac0dcbfc9d9237bd39 содержит33 verified members,
+2078999 bytes. Полный кэш вручную не просмотрен; старый CI163 требует своего
+полного отчёта и raw Reset графиков. Рабочий checkpoint:
 [CurrentStatus-2026-11-02](CurrentStatus-2026-11-02.ru.md).
