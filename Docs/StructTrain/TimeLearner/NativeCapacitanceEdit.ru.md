@@ -4,10 +4,13 @@
 
 Elder standalone gate завершён: 8/8, 32 raw probes проверены, 8 сравнений
 ответа при одинаковых входах подтверждают ненулевое изменение сомы. Evidence
-5acd3eebbf2c812a5e04e07bd0a14f88eb2ea4fb. На M40 ASan gate ещё выполняется.
+5acd3eebbf2c812a5e04e07bd0a14f88eb2ea4fb. M40 ASan тоже завершён8/8:
+23f0086845092feed0967112b1cd59583d086149;32 CSV byte-equal и32 JSON packets
+полностью совпадают с normal. Это прежняя standalone версия, не joint API.
 Temporal cache на M40 завершён: 8 cases, 32 trials, 48 trial/soma pairs,
-1787 PNG, 5545 hash-проверенных файлов. Ручной просмотр выбранных рисунков
-ещё требуется. Это диагностические traces с ambiguous peaks, не сходимость.
+1787 PNG, 5545 hash-проверенных файлов.16 выбранных PNG просмотрены поштучно,
+сохранены в Git с протоколом Review.ru.md. Полная48-pair визуальная приёмка
+не заявляется. Это диагностические traces с ambiguous peaks, не сходимость.
 
 Совместный editor L/Ns/Rs/C (Pulse9694ae3) проверяет Rs domain после новой C.
 Первый Elder gate numerical root722c978: 8/10; оба fault rollback теста
@@ -21,8 +24,14 @@ Source audit: BeforeReset/BeforeCalculate вызывают соответств�
 ошибки fault injection новые тесты фиксируют факт hook и фактическую C.
 Rdk добавляет специализированный process-local operation ledger, сохраняя
 bool и порядок lifecycle. Native Init/Reset, probe и recognition проверяют
-новые ошибки после marker. Новые 12 integration cases и Rdk unit suite ещё
-должны быть собраны и выполнены на серверах. Develop остаётся прежним.
+новые ошибки после marker. Rootd8bf0419ef3e022514f77613e2f4a5acbe4e4875:
+Elder9/9 Rdk и12/12 native passed, evidence6bb5e09b897d0932f641f42aa8e966b935f713a9.
+Сбой реально наблюдался при4nF и завершился полным восстановлением графа;
+прежняя история ошибок не блокирует следующую исправную пробу.
+M40 ASan новой версии ещё собирается. Дополнительные8 downstream fixtures
+на normal не прошли предпосылку certificate при исчерпании sweep; нужны A/B
+и корректные положительные/отрицательные контроли, без ослабления критериев.
+Develop остаётся прежним.
 
 Ниже сохранены предыдущие checkpoints; сведения о живых jobs в них исторические.
 

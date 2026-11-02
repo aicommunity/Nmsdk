@@ -4,8 +4,10 @@
 
 Обе машины доступны через user@10.245.1.12. Elder standalone C-editor8/8
 с32 raw probes опубликован в5acd3eebbf2c812a5e04e07bd0a14f88eb2ea4fb.
-M40 ASan той же версии ещё выполняется;6/8 завершены без failures, Branch
-20000Hz ещё идёт. Это промежуточный счёт, не полный PASS.
+M40 ASan той же версии завершён:8/8,6359859ms. Evidence
+23f0086845092feed0967112b1cd59583d086149 содержит32 проверенных raw probes:
+все32 CSV побайтно равны normal, все32 packets равны по полному JSON.
+Это проверка старого standalone API, не нового joint editor/operation ledger.
 
 Полный temporal cache завершён на M40:32 trials,48 trial/soma pairs,
 1787 PNG,5545 проверенных файлов. В Git только16 выбранных рисунков
@@ -18,10 +20,25 @@ M40 ASan той же версии ещё выполняется;6/8 заверш
 Pulsef9272f5244e6183206e1a47a89eadb06a60abbb4,
 Rdk03497edfa52e6a0ee2c2e8cd4eaa5021211d514d. В ней специализированная
 диагностика пойманных Rdk исключений не меняет bool lifecycle или scheduler.
-На Elder сборка s07-operation-diagnostics-build-normal-a1
-(PID3955124/start_ticks320085846), затем supervisor
-s07-operation-diagnostics-normal-a1 (3955125/320085846) запускает9 Rdk unit
-и12 native cases. Это ожидаемые проверки; результата пока нет.
+Первая сборка eced остановилась на ошибке области видимости переменной в
+новом тесте. Отрицательная попытка сохранена в
+f018cacc04c0ef34f6ddfab9fe62166e4066a840 (15 verified members).
+Исправленный numerical rootd8bf0419ef3e022514f77613e2f4a5acbe4e4875
+на Elder прошёл9/9 Rdk unit и12/12 native cases. Evidence
+6bb5e09b897d0932f641f42aa8e966b935f713a9:229 verified members,36 raw trials.
+Оба rollback теста зафиксировали реальное исключение при C=4e-9, восстановили
+граф и следующую native пробу. Calculate failure делает пробу incomplete/invalid.
+
+Расширенный normal gate8/8 failed ДО проверки transfer/recognition/calibration/
+PostTune: при maximum_sweeps_exhausted прежние fixtures всё ещё требуют
+completed certificate. Это открытая регрессия проверки предпосылок, а не
+PASS downstream-путей. Готовится A/B со старым неизменным runtime f683.
+Нельзя менять допуски или объявлять stopped Train завершённым ради этих tests.
+
+На M40 жив новый ASan job s07-operation-diagnostics-asan-a1,
+PID2078457/start_ticks270983842: isolated runtime,9 unit +12 native cases.
+Следующий regression gate8 ждёт его завершения по PID/start_ticks;
+source/build/runtime до окончания всех owners не обновлять.
 
 Принятый develop по-прежнему f1708eb97bc3b412c101dffc468221af2bc87e59.
 Полный C-trim V2, его persistence/growth/search, общая матрица и этапы1–12
