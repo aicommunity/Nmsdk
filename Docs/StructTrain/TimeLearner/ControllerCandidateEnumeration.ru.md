@@ -157,3 +157,36 @@ trace equivalence, ни scientific recognition этим не подтвержд�
 
 Normal native A/B принят в этом scope. ASan и fresh closure остаются отдельными
 условиями перед develop merge; исходный этап6 полностью не закрывается.
+
+## ASan очередь03.11: H20, приёмки пока нет
+
+Baseline H14 с root5c9b92350ee48d130d954bf10bf9521251f99e4e и
+Pulse54516bcc0aa7b0437c68f818598a19788e20eb55 продолжает настоящий native213
+прогон на M40; лимит native process43200s. Отдельная publisher-квитанция должна
+сохранить его исходный результат, включая старый reader87, если он не пройдёт.
+Поздний corrected reader не изменяет первоначальный overall verdict.
+
+H19 остановился до checkout/build/numerical work: проверка памяти требовала12GiB,
+когда доступно около10GiB. Publisher тоже отказался: пытался прочитать .gitmodules
+из ещё не созданного checkout. Оба exception receipts сохраняются в readbacks;
+они включаются в следующий пакет, а не считаются численным результатом.
+
+Исправленный H20 ждёт точный H14 supervisor PID3024065/start_ticks278028377.
+После подтверждённого закрытия owner и native children он требует фактические
+native213 pass, actual libasan mapping и опубликованный original evidence.
+Далее повторно проверяет12GiB available/20GiB disk и создаёт новые private
+source/build/runtime/framework каталоги `candidate-cursor-native-asan-h20`.
+Чужие процессы для освобождения памяти не останавливаются.
+
+Кандидат root9c39adbbbd7afd6af4a64393e719fd48efce4dd5 / Pulse
+5fed73a0379d5599656e40f58e0600469d43f28c; production C-search/schema4 отсутствует.
+Декларация:6 addressed ownership cases,213 native cases,105 corrected readers,
+точное сравнение полного original/candidate CSV inventory и bytes. Бюджет
+full native43200s; failure или mismatch запрещает положительную приёмку.
+Build timeout завершается только для принадлежащей worker process group с
+подтверждёнными PID/start_ticks. Publisher проверяет reachability каждого
+child commit по parent Git metadata даже при отказе до checkout.
+
+На момент записи H20 worker3299200 подтверждён живым в состоянии ожидания;
+publisher3299201 запущен отдельно. Это очередь, а не ASan pass. Fresh recursive
+closure и исходные полные этапы6/7 остаются открытыми.
