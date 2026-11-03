@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -1185,6 +1185,329 @@
       ],
       "replacement": null,
       "reason": "historical 20 October campaign tooling; no current executable consumer found; assumptions and schema are not the maintained native pipeline"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_fast_amp.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "58346e793abb0b4c17df5ab7dba4bcf85cf414b2",
+      "blob_sha1": "27caa2148c8af0961bf3dda1f83a272067e2b7ef",
+      "content_sha256": "d281b889d27f31caf267f1be16a56f85369dd17eba32349d31b2b7996c56fc29",
+      "bytes": 3804,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_fast_amp.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_fast_amp.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Pack A/C completion retries: seed existing states, amplitude-only schedules and legacy Done gates; not a production declarative job.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_preinh_amp.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "58346e793abb0b4c17df5ab7dba4bcf85cf414b2",
+      "blob_sha1": "45dc241bdd4a444af39605ff1ec6e79e4e1b4268",
+      "content_sha256": "40780fad5f70f0a33c3a727b2097967b6e809935efc9130a0f33aeb991a3f4d9",
+      "bytes": 5017,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_preinh_amp.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_preinh_amp.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Pack A/C completion retries: seed existing states, amplitude-only schedules and legacy Done gates; not a production declarative job.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_tip_reset_amp.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "060d68c5e638a9f9eae3f510431b82599c9db6bd",
+      "blob_sha1": "41c9f2e94aad2bf828ea4c1df7378bfb64ba97d8",
+      "content_sha256": "517acdf647b98b0561ebb7e706e879ffa49347f8db5151c01db6f9de57a17ddf",
+      "bytes": 3560,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_tip_reset_amp.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_packC_gen_tip_reset_amp.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Pack A/C completion retries: seed existing states, amplitude-only schedules and legacy Done gates; not a production declarative job.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_pilot_amp.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "9c45613df1e0c04f697a63efd03a7dea78aaac3f",
+      "blob_sha1": "faf364a76f4bc00ab4d07c1bf918eb3ba11e308a",
+      "content_sha256": "91ef938ca14a6e2b6295a15081b1460e96c5050c2d56e74b7b07a43d5cdb066f",
+      "bytes": 726,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_pilot_amp.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_pilot_amp.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Pack A/C completion retries: seed existing states, amplitude-only schedules and legacy Done gates; not a production declarative job.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_pilot_lref.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "e775aa1f57f189dc3e93faadf8541d2ac10d5eee",
+      "blob_sha1": "c00fc11bd0bf3c0e3ffe3ebf83a7adfbfe81fa31",
+      "content_sha256": "6b3c04936b0550beccc8ffb6bf76396e3b9ac916c214b9767455ccad4a8001c9",
+      "bytes": 569,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_pilot_lref.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/finish_pilot_lref.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Pack A/C completion retries: seed existing states, amplitude-only schedules and legacy Done gates; not a production declarative job.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_gate_scale.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "9c45613df1e0c04f697a63efd03a7dea78aaac3f",
+      "blob_sha1": "dc11083674f68d3f2aa7691e7dc7ff5f778df109",
+      "content_sha256": "c4a525f74aa4079c03fa854ad54fdc62e4a67fee7ad6f26004936585e912c9cb",
+      "bytes": 1602,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_gate_scale.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_gate_scale.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed pilot Done gate / automatic Pack B/C scaling; invokes the retired pilot sweep and silently tolerates failed jobs.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_span100.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "68fb5e3be4da0585fdb6a16b7798a2cd49bfd3ed",
+      "blob_sha1": "eebf6781ea78d2acf7da8038bc1e96aee80a5116",
+      "content_sha256": "fcf63f98dc1e2244a8eb3d189e092e99c75ac031b87fbf964f1d25ed3990d5b4",
+      "bytes": 1704,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_span100.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_span100.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack A pilot/cold-reset sequence; mutates existing campaign state and uses legacy Done/partial-train policy.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_span50.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "9c45613df1e0c04f697a63efd03a7dea78aaac3f",
+      "blob_sha1": "8f27bc46b1fa6cc25e0accf4606e71bbc4354042",
+      "content_sha256": "7b8efbb54863164574733372770a92d722db5bc2ca4882b5698dfe4941ceb37c",
+      "bytes": 1346,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_span50.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_span50.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack A pilot/cold-reset sequence; mutates existing campaign state and uses legacy Done/partial-train policy.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_gen.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "00ec1bff0f4488deac5fe8c408bdfdf0d57af4ed",
+      "blob_sha1": "4c07cad8a80b740435605433579396dd06c5aa1f",
+      "content_sha256": "58596ad6f01d3cd26fbcb9c35d85675f9f01c5942498cf37b7828b00139758be",
+      "bytes": 553,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_gen.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_gen.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack A pilot/cold-reset sequence; mutates existing campaign state and uses legacy Done/partial-train policy.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_preinh.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "00ec1bff0f4488deac5fe8c408bdfdf0d57af4ed",
+      "blob_sha1": "a45db189e47523c76dc63fac6576e50f0c91385d",
+      "content_sha256": "bfcb0f657feb40965f754790416c6d2403eb10f51f188d0ddcb4a207b075aaf9",
+      "bytes": 453,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_preinh.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_preinh.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack A pilot/cold-reset sequence; mutates existing campaign state and uses legacy Done/partial-train policy.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_sequence.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "9c45613df1e0c04f697a63efd03a7dea78aaac3f",
+      "blob_sha1": "4a99960d2c2e38eabfe4016a2a1f3b47416c57c1",
+      "content_sha256": "e2b0812807f3ec54ee7dc92b9c026cdb722d00d3bb1b9e160014e0a8883cc3ad",
+      "bytes": 2410,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_sequence.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_pilot_v4_sequence.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack A pilot/cold-reset sequence; mutates existing campaign state and uses legacy Done/partial-train policy.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span100.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "68fb5e3be4da0585fdb6a16b7798a2cd49bfd3ed",
+      "blob_sha1": "6be3a45341c1c811e1a2f81d6f05184c0f95fe46",
+      "content_sha256": "87f98114fc40754cf9e706cb518e9f62f8f530ba35c19d55ff3f04d46fe5e7ca",
+      "bytes": 873,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span100.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span100.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack B/C span wave using legacy mutable campaign runner; retained configs/results remain retrievable.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span25.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "68fb5e3be4da0585fdb6a16b7798a2cd49bfd3ed",
+      "blob_sha1": "ff464d4c04b84706926acf5aec158c1369630473",
+      "content_sha256": "deefb8e8db108685812a325ad5eb275e17eb7dfc9f57e0e0d1388d50733a9bec",
+      "bytes": 729,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span25.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span25.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack B/C span wave using legacy mutable campaign runner; retained configs/results remain retrievable.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span50.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "68fb5e3be4da0585fdb6a16b7798a2cd49bfd3ed",
+      "blob_sha1": "a9a84c40c9c7c446e10126987ae2393e27f02a92",
+      "content_sha256": "af914bd480073307381f25ba8596aa27a5717d4911de580ab3a75ca6cc114e78",
+      "bytes": 729,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span50.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_scale_bc_span50.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed Pack B/C span wave using legacy mutable campaign runner; retained configs/results remain retrievable.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/scale_asymrm.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "68fb5e3be4da0585fdb6a16b7798a2cd49bfd3ed",
+      "blob_sha1": "abae6ed30c2880d61a53d5a15d039880e00cc7fc",
+      "content_sha256": "b3179d6c57bcee482ceaf9a95c1769c794acec286bad57e92c0d8a6b95904828",
+      "bytes": 5360,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/scale_asymrm.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/scale_asymrm.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed pilot Done gate / automatic Pack B/C scaling; invokes the retired pilot sweep and silently tolerates failed jobs.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/sweep_asymrm_amp.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "55c5b21a493d84626d01790845383cdb79532be1",
+      "blob_sha1": "91bc8f1e09dde7cb2a3f50c95456577bdbb31e0f",
+      "content_sha256": "1175b0464bd67216a86db3b66c6e670909f85bf8438664b8c641227320aeb806",
+      "bytes": 3655,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/sweep_asymrm_amp.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/sweep_asymrm_amp.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical pilot sweep patches shared XML/physics in place and continues after failed legacy jobs; requires new declarative specification before reuse.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/sweep_asymrm_timing.sh",
+      "action": "retired_historical",
+      "archive_commit": "14a88195a8a5538d3a2f5c0657981488e38829b7",
+      "last_change_commit": "55c5b21a493d84626d01790845383cdb79532be1",
+      "blob_sha1": "f2e184424781c9b2419daa5d85d3e0a53e4f77b8",
+      "content_sha256": "4eea539f7c5335aa36d45fb02fc33af7cd1e18d69b48022bf0f0bdb8dd6dfd65",
+      "bytes": 2304,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/14a88195a8a5538d3a2f5c0657981488e38829b7/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/sweep_asymrm_timing.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "14a88195a8a5538d3a2f5c0657981488e38829b7:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/sweep_asymrm_timing.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical pilot sweep patches shared XML/physics in place and continues after failed legacy jobs; requires new declarative specification before reuse.",
+      "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
     }
   ],
   "reference_review": {
