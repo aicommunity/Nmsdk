@@ -1,3 +1,14 @@
+# Следующий обязательный deliverable: графики C-region, 03.11.2026
+
+Добавлен штатный report --format capacitance-region: portable snapshot,
+проверка полного before/after набора входов, общие soma scales, input overlays,
+исходный timestep и явная диагностическая маркировка. Root9a916d8b858efa0384226b285a8997f030e11547.
+Новые3 server checks вместе с прежними8 readers требуют actual восьми R1
+fixtures; ожидается32 probes/48 trial-soma pairs. Worker visual-v2 на M40
+пока ждёт положительный R1 Git evidence. Полные картинки в M40 cache;
+manual selected-figure review ещё не выполнен. Локально только AST/diff.
+[Контракт, причины замены ожидающего v1 и приёмка](CapacitanceRegions.ru.md).
+
 # Проверка текущих заданий и evidence, 03.11.2026
 
 Automats2 восстановлен; SSH через jump host проверен на обоих workers.

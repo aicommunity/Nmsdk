@@ -35,3 +35,32 @@ TIMELEARNER_CAPACITANCE_REGION_DIR указывает каталог actual nati
 Ни region helper, ни изменение формы импульса не являются доказательством
 сходимости или успешной классификации. После C-edit Branch требуется
 инвалидировать затронутые входы и заново измерить всю итоговую модель.
+
+
+## Штатный before/after отчёт и ожидающий worker, 03.11.2026
+
+Root9a916d8b858efa0384226b285a8997f030e11547 добавляет
+`report CASE_region.json --format capacitance-region --output NEW_M40_CACHE`.
+Перед созданием output проверяется весь набор effective physics/primary probes;
+после копирования повторно проверяется portable snapshot. Рендерятся все сомы
+и actual input samples, общий Y scale внутри case и дополнительные zoom/detail
+views без децимации. Метки phase/input сохранены в manifest и HTML.
+Visual acceptance по умолчанию false; classification/convergence не выводятся.
+
+На M40 поставлен ожидающий worker
+`/media/user/Data/TimeLearnerRefactor/readbacks/s07-capacitance-region-visual-v2`.
+Он требует успешный Git-пакет R1 и самостоятельно проверяет archive/members
+прежде, чем извлечь actual primaries в свой каталог. Код берётся через Git,
+активные source/build/runtime R1 не меняются. Декларация8 прежних readers +3
+новых render checks =11; ожидаются32 trials/48 trial-soma pairs. Пока worker
+ждёт prerequisites, эти числа не являются результатами.
+
+Первый ожидающий visual-v1 остановлен до рендеринга с явным receipt:
+предварительная сверка обнаружила, что архив использует префикс
+`gate/native-result/native`, а не `native-result/native`. Visual-v2 исправляет
+разбор. Native эксперимент R1 не останавливался и не перезапускался.
+
+Полный отчёт остаётся кэшем M40 Data; компактная Git-квитанция содержит source
+hashes, строгий validation result и manifests/checksums, со ссылкой на доступные
+в Git первичные CSV и модели R1. Выбор и визуальный просмотр рисунков ещё нужны.
+Публикация квитанции без manual review не является visual acceptance.
