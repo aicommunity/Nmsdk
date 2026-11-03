@@ -1,5 +1,18 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Совпадение всех normal/ASan primary waveform, 03.11
+
+Опубликован5c7838123aafa54597b4f66e0a1a2a08f462a1f9: все48 owner8 CSV
+Normal C2/ASan C3 побайтно идентичны (95088 строк времени/input/всех soma).
+Проверены полный inventory, archive hashes и каждый primary member обоих прогонов;
+результат и пары hashes доступны в Git. Это engineering two-pulse probes,
+не scientific8-pattern classification и не подтверждение всего плана.
+
+M40 production renderer готовит полный temporal cache48/72 с native-tick zoom
+и input overlays. В Git пойдут только выбранные графики и gzip manifest/checksums;
+полный cache остаётся на Data. Визуальная приёмка пока pending.
+[Источники, handles, масштаб и ограничения](NativeTrainingCapacitanceBridge.ru.md).
+
 ## ASan owner8 принят адресно; typed N1 domain подготовлен, 03.11
 
 M40 C3 завершён8/8 native +19/19 readers. Evidence

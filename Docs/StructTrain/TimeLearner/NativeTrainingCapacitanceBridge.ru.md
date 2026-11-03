@@ -201,3 +201,34 @@ M40 ASan transport G2 source496a80d7190cafcc1e96329ee3c8e2b17cb40114:
 owner2621211/274992757, publisher2621212/274992757. Ожидает successful normal G2;
 это gate automatic owner/transport43, а не новой typed domain реализации.
 Для schema3 domain по-прежнему нужен отдельный ASan gate после normal J1.
+
+
+## ASan owner temporal report и сравнение waveform, 03.11
+
+Для ASan C3 primary d7cace1f5f9f62385b97281d0d1f48770e7153fd на M40
+запущен production native-test-run renderer: source2736598f113cbb48874240696b46955ab840fb90,
+owner2627462/275036158, renderer2627516/275036447, publication owner2627463.
+До запуска проверены все261 archive members. Код извлечён через Git archive
+в отдельный readback; leased SDK source/build не меняются. Используется существующий
+plot-venv-a1 (matplotlib3.9.4, Pillow13.0.0), штатный Agg renderer.
+Первый bootstrap с short root ref и следующий запуск с системным Python завершились
+до создания cache; их exception/ownership receipts сохраняются, численных прогонов
+не было. Текущий C3c использует full SHA и проверенное окружение.
+
+Полный отчёт48 engineering two-pulse probes/72 soma pairs сохраняется только в
+/media/user/Data/TimeLearnerRefactor/report-cache/s07-capacitance-owner-asan-c3c.
+Каждый soma имеет overview и native-sample zoom с input overlay, без downsampling,
+PNG1920×960 и минимум8px/native tick на zoom, SVG/PDF. Publisher проверит
+рекурсивный file inventory и все cache hashes. В Git предназначены manifest/checksums
+в gzip и выбранные overview/peak zoom для всех8 Classic/Branch ×N0/N1×2k/20k
+после regrowth на каждом soma; полный cache не публикуется. Direct visual review
+и global visual acceptance пока не заявляются.
+
+Отдельный server-анализ5c7838123aafa54597b4f66e0a1a2a08f462a1f9 уже опубликован
+и проверен: Normal C2 a928fb92edd0880728a697da0fed6d7ede3e7d4a против ASan C3
+d7cace1f5f9f62385b97281d0d1f48770e7153fd. Все48 CSV побайтно идентичны,
+95088 строк, нулевые отличия времени, stimulus и каждого soma column. Перед
+сравнением проверены все259/261 archive members и inventory8/8 каждого источника.
+Это равенство записанных откликов конкретных engineering probes; из него нельзя
+вывести классификацию8 паттернов, сходимость, эквивалентность всей динамики либо
+завершение C-search/service integration.
