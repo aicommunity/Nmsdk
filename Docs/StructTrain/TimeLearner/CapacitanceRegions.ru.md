@@ -64,3 +64,24 @@ Visual acceptance по умолчанию false; classification/convergence не
 hashes, строгий validation result и manifests/checksums, со ссылкой на доступные
 в Git первичные CSV и модели R1. Выбор и визуальный просмотр рисунков ещё нужны.
 Публикация квитанции без manual review не является visual acceptance.
+
+
+## R1 завершён; визуальный повтор выполняется
+
+ASan native15/15 и independent readers16/16 завершены без skips/errors/failures.
+Evidencee99ba52092d122cba26f2df5d34094e19900ed24:172 members/2591291 compressed
+bytes независимо сверены, включая actual libasan.so.8.0.0 mapping/hash.
+Root1a4fd929296f05322d469270039e195698b5f620,
+Pulse194643e261fae59dbb3bfdd7b83ea54663ae04d7. Leak checks выключены;
+полная regression224/251 и normal region gate этим не подтверждаются.
+
+Visual-v2 завершился неуспешно:11 tests observed, прежние readers и negative
+controls прошли, renderer не нашёл matplotlib в системном Python. Evidence
+344266c1e5dbbe6b042b861036ecc1c2a7b87c26 (10 members/23076 bytes) независимо
+сверен; отказ не переименован в успех. Visual-v3 использует существующий
+/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python:Python3.12.3,
+Matplotlib3.9.4/Pillow13.0.0; preflight versions сохранены до выполнения.
+Reader PID3015062/start_ticks277962255 подтверждён живым, первые PNG созданы.
+Новый расчёт модели не выполняется; исходные CSV берутся из проверенного R1
+Git evidence. Полнота отчёта и непосредственный просмотр selected figures
+ещё не приняты. Развёрнутые PNG/SVG/PDF остаются M40 cache.
