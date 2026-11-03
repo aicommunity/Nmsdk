@@ -1,5 +1,16 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Уточнён канонический lifecycle Rdk, 03.11
+
+Rdk docs merge33bdf2d19bb915d3fe4c8a917b84bdfe28bf6580 и дополнение
+acc3de8d1af2480d61ddb723c3288f7e81003049 сохраняют Core/Deploy
+принятого a62393f7 побайтно. Уточнены фактические Init/Reset/Build guards,
+Ready/InitFlag и штатный обход детей; прямые ACalculate/AReset детей на схемах
+заменены публичными Calculate/Reset. [Scope и проверка](NativeLifecycleDocumentation-2026-11-03.ru.md).
+Это документальный подэтап4/12, не приёмка новой реализации и не закрытие
+матрицы lifecycle/storage. Дополнение описывает Build внутри native операций
+связей/Load и CheckEqualsFlag/connected assignment. Полностью завершён только исходный этап0.
+
 ## Текущий незавершённый C₀ owner, 03.11
 
 Принятый root develop — 9de7aa0d591ab1a111976e2616e5bc58c4d81eac:

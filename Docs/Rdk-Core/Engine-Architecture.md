@@ -6,6 +6,9 @@
 
 Краткий навигатор. Полное описание, диаграммы и детали — в canonical-документе субмодуля Rdk.
 
+[Точный lifecycle UModule/UContainer](../../Rdk/Docs/Engine/NativeLifecycle.md):
+guards, независимые Ready/InitFlag, косвенные Build/Reset и структурное владение.
+
 ### Содержание canonical
 
 - Архитектура подсистемы `Engine-Architecture`
@@ -25,6 +28,9 @@
 > **Canonical (submodule):** [Rdk/Docs/Architecture/Engine-Architecture.md](../../Rdk/Docs/Architecture/Engine-Architecture.md)
 
 Short navigator. Full description, diagrams, and details live in the Rdk submodule canonical document.
+
+[Exact UModule/UContainer lifecycle](../../Rdk/Docs/Engine/NativeLifecycle.md):
+guards, independent Ready/InitFlag, indirect Build/Reset and graph ownership.
 
 ### Canonical contents
 
