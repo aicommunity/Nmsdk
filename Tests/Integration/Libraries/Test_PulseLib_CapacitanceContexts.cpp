@@ -211,4 +211,21 @@ TEST(CapacitanceContexts, ProbeBudgetAndExternalStopCannotManufactureExact)
     cfg=ContextConfig();BoundedTrainingSession stopped(References(protocol),cfg,{{2,1,10.},{1,1,10.}},false,ContextC0());
     stopped.ExternalStop();EXPECT_EQ(stopped.Status(),TrainingStatus::ExternalStop);EXPECT_FALSE(stopped.NextAction());EXPECT_FALSE(stopped.Certificate());
 }
+TEST(CapacitanceContexts, CursorInventoryIsBoundedBeforeContextCopiesAndDomainExpansion)
+{
+    const auto protocol=Protocol();auto cfg=ContextConfig();cfg.capacitanceSearch->maximumCursorElements=4;
+    EXPECT_THROW(ValidateBoundedTrainingInputs(protocol,cfg,{{2,1,10.},{1,1,10.}}),std::invalid_argument);
+    cfg=ContextConfig(Normalization::TipResistance);cfg.capacitanceSearch->maximumCursorElements=8;
+    cfg.bounds[0].minimumResistance=5.;cfg.bounds[0].maximumResistance=20.;
+    BoundedTrainingSession session(References(protocol),cfg,{{2,1,10.},{1,1,10.}},true,ContextC0());
+    DriveTraining(session,protocol,{},[&](const auto& action) {
+        ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;d.baseModelRevision=action.baseModelRevision;
+        d.previewModelRevision="scope/"+std::to_string(SelectedScale(action.capacitance));
+        d.geometry=action.parameters;d.inputIndex=action.inputIndex;
+        d.minimumResistance=5.;d.maximumResistance=20.;d.sourceAmplitude=1.;d.capacitance=action.capacitance;return d;
+    });
+    EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+    EXPECT_EQ(session.Reason(),"capacitance_cursor_inventory_budget_exhausted");EXPECT_FALSE(session.Certificate());
+}
+
 }

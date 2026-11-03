@@ -1,3 +1,19 @@
+# Проверенный K1 и следующий aggregate-budget контроль
+
+K1 evidence9ab8a63a892e4ad780ebd19bf2dfeaef648a04f3 проверен независимо:
+52 members /65793 compressed bytes,357 точных Git source hashes.
+Root e4a2db58854c67d08d4dd45067d1724d55947fea /Pulse9aad0f7f208c61c91f38d54bc92c939c642fab5b:
+Off A/B137/137 на каждой стороне, отдельный kernel147/147 без skips/failures.
+Одинарная проверка не выдана за A/B; native_rdk_integration_verified=false.
+Контур конфигурации/переноса schema4, native/ASan C-search и графики реальных
+моделей не подтверждаются этими управляемыми test responses.
+
+Следующий commit добавляет maximumCursorElements — общий предел seed inventory,
+разделяемый между C-контекстами. Проверки выполняются до копирования контекстов
+и каждого расширения N1 Rs mesh. Исчерпание явно BudgetExhausted, не сходимость.
+К нему подготовлен один дополнительный тест: kernel148/11 On controls; его
+серверная проверка пока ожидается. Политика ещё не переносится старым codec.
+
 # Совместный перебор L/Ns/Rs/C в общем контроллере
 
 Статус: отдельная экспериментальная ветка; серверная проверка ещё не выполнена.
