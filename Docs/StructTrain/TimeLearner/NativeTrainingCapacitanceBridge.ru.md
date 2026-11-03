@@ -416,3 +416,45 @@ s07-capacitance-witness-codec-publication-normal-h7. Gate4 native/28 structured
 readers запускается только после verified H6 PASS4/18 и закрытия его owners;
 H6 в свою очередь ждёт H5 PASS183/52. Уникальные runtime roots, immutable SHA и
 actual process guard сохраняются. Никакого PASS этих очередей пока нет.
+
+## Service history/schema3: подготовлен следующий integrated snapshot
+
+В NativeTrainingPlan добавлен recordCapacitanceHistory=false. Explicit true
+требует существующего bound C₀, не захватывает baseline автоматически. Общий
+native adapter предоставляет read-witness, full-map edit и typed N1-domain
+callbacks, но выключенный plan их не вызывает. Service передаёт initial C map
+в bounded controller, валидирует full readback после edits/domains и хранит
+свидетельства до queue и после TakeResult/observation sink. Running ticks не
+снимают witness и не выполняют дополнительных Calculate/Reset/Build.
+
+Исправлена структура registry: ключ — canonical SHA полного witness, физический
+model_revision остаётся отдельным проверяемым полем. Один граф может иметь две
+разные допустимые dormant histories; revision-keyed таблица теряла бы контекст.
+Новый контроль воспроизводит такую коллизию. Summary3 сохраняет C maps и IDs
+references/candidates/repeats/domain bases/current model. Read-only evidence
+сохраняется при Reset, target invalidation очищает его. Ошибка свежей проверки
+не выдаёт старый witness за actual только из-за совпавшего physical hash.
+
+Root production auditor сначала проверяет physical history, C₀/storage continuity,
+actual Ns/Rs и stimulus bank bindings, затем повторно вычисляет references,
+candidate/repeated residuals и final certificate из primary observations/CSV.
+Явный require_certificate=false разрешает анализ завершённой diagnostic history
+с exact=None/certificate_verified=false; default certificate gate остаётся строгим.
+CLI analyze --format capacitance-history требует точный primary trial inventory.
+Schema1/2 с unversioned C-полями отклоняется; исторические data не переписываются.
+
+Подготовлены10 native controls: шесть service N0/N1/repeat runs, два unbound refusals
+и два observation-sink dormant-only faults с неизменным model hash. Новые12 reader
+checks проверяют реальные traces, повторные группы, reset, пропуски, counterfeit
+C/Rs/context и оба отказа. Existing witness checks11 также требуют actual encoded
+frames. Следующий normal197 spec =183 previous +10 new +4 legacy service regressions;
+independent suite75 =52 prior +11 witness +12 history. Пока это код/declared inventory,
+не выполненная приёмка. H5/H6/H7 используют прежние immutable snapshots.
+
+Ограничения, которые остаются обязательными: ConfiguredNativeTraining codec ещё
+не включает record flag; learned-state package/import3 должен сохранять boundary
+reference/current witnesses. Чтобы не терять их молча, прежний export tracked run
+явно запрещён до schema3. C-trim On/search policy не включены. Старый module
+test_native_evidence по source всё ещё ожидает service negative certificates там,
+где текущий RunNativeTraining сохраняет diagnostic summary без certificate; его
+полная актуализация/повторный runtime остаётся отдельной открытой задачей.

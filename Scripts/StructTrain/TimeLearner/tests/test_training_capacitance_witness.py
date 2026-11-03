@@ -8,6 +8,7 @@ import subprocess
 import sys
 import unittest
 
+from ..capacitance_evidence import controller_capacitance_parameters
 from ..model_identity import canonical_model_sha256
 from ..native_evidence import EvidenceError, load
 from ..training_capacitance_witness import audit_training_capacitance_witness, audit_training_capacitance_registry
@@ -56,12 +57,32 @@ class TrainingCapacitanceWitnessTest(unittest.TestCase):
 
     def test_registry_binds_every_required_revision(self):
         for stem in {p.stem.split('_witness_')[0] for p, _ in self.records}:
-            registry = {r['model_revision']: r for p, r in self.records if p.stem.startswith(stem+'_witness_')}
-            self.assertEqual(set(audit_training_capacitance_registry(registry, list(registry))), set(registry))
+            registry = {canonical_model_sha256(r): r for p, r in self.records if p.stem.startswith(stem+'_witness_')}
+            required = {k: r['model_revision'] for k, r in registry.items()}
+            self.assertEqual(set(audit_training_capacitance_registry(registry, required)), set(registry))
             with self.assertRaisesRegex(EvidenceError, '^missing_training_capacitance_revision_witness$'):
-                audit_training_capacitance_registry(registry, [*registry, 'a'*64])
+                audit_training_capacitance_registry(registry, {**required, 'a'*64: 'b'*64})
+        original = self.records[0][1]; key = canonical_model_sha256(original)
+        with self.assertRaisesRegex(EvidenceError, '^training_capacitance_registry_id_mismatch$'):
+            audit_training_capacitance_registry({'a'*64: original}, {})
         with self.assertRaisesRegex(EvidenceError, '^training_capacitance_registry_revision_mismatch$'):
-            audit_training_capacitance_registry({'a'*64: self.records[0][1]}, [])
+            audit_training_capacitance_registry({key: original}, {key: 'b'*64})
+
+    def test_distinct_dormant_states_can_share_a_physical_revision(self):
+        for path, original in self.records:
+            if not path.stem.endswith('_joint_shrink'):
+                continue
+            alternative = copy.deepcopy(original); state = alternative['native_state']
+            self.assertEqual(state['dormant_membrane_scales']['Dendrite1_2'], 1.1)
+            state['dormant_membrane_scales']['Dendrite1_2'] = 1.15
+            state['sha256'] = canonical_model_sha256({k: v for k, v in state.items() if k != 'sha256'})
+            alternative['controller_parameters'] = controller_capacitance_parameters(state)
+            self.assertTrue(audit_training_capacitance_witness(alternative)['physical_state_verified'])
+            registry = {canonical_model_sha256(r): r for r in (original, alternative)}
+            self.assertEqual(len(registry), 2)
+            required = {k: r['model_revision'] for k, r in registry.items()}
+            self.assertEqual(len(set(required.values())), 1)
+            self.assertEqual(len(audit_training_capacitance_registry(registry, required)), 2)
 
     def test_registry_rejects_a_consistently_resigned_policy_change(self):
         for path, original in self.records:
@@ -73,8 +94,8 @@ class TrainingCapacitanceWitnessTest(unittest.TestCase):
             state['sha256'] = canonical_model_sha256({k: v for k, v in state.items() if k != 'sha256'})
             self.assertTrue(audit_training_capacitance_witness(record)['physical_state_verified'])
             with self.assertRaisesRegex(EvidenceError, '^training_capacitance_registry_origin_or_policy_changed$'):
-                audit_training_capacitance_registry({initial['model_revision']: initial,
-                                                    record['model_revision']: record}, [])
+                audit_training_capacitance_registry({canonical_model_sha256(initial): initial,
+                                                    canonical_model_sha256(record): record}, {})
 
     def test_applied_revision_cannot_be_replaced(self):
         for _, original in self.records:
