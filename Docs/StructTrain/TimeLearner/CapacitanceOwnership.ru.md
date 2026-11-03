@@ -55,7 +55,11 @@ Dataset Build/Init, Neuron Build/Init, adoption и native model Init/Reset/Calcu
 Снимки включают реальные class names, Ready/Init и обе контрольные C. Они не
 меняют структуру, физику, допуски или strict import identity. Следующая правка
 должна опираться на первую фактически изменившую класс операцию, а не на
-предположение о финальном месте отказа. E6 пока не выполнен.
+предположение о финальном месте отказа. E6 назначен на Elder с root
+5f6add3064890a7647d43a2ec8ebc34fbe252695, Pulse30495d1, worker278449 и
+publisher278450; результат pending. Ранее отдельным docs-only merge принят
+точный канонический lifecycle Rdk (root develop3a6b83de2, Rdk33bdf2d1): Core
+и Deploy совпадают с a62393f7; работающие jobs сохраняют собственные gitlinks.
 
 ## Текущая приёмка, 03.11: открытый native roundtrip дефект
 
