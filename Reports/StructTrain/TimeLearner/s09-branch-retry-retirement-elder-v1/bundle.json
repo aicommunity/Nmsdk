@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_branch_retry_retirement_evidence",
+  "schema_version": 1,
+  "root": "d764d56e193fc14ea0549b3e2b40eb8be1bf6e82",
+  "base": "28d03f1931671d9cbca571ad8b091015312dd245",
+  "host": "elder",
+  "acceptance_status": "passed",
+  "archive_sha256": "b97e4ab3a538cd1558ed4daf7788d95455cba980cae823ac6dc1d398d2d4e225",
+  "archive_bytes": 39882,
+  "members": {
+    "owned-supervisor.json": "535d2fade948364cffe64a7a1f9815ef655305118610d23d0b052ec658b3c38c",
+    "source-hashes.json": "11feb3dbeb88966cc90c87424f1acd488e8f6e6659fb3f5351eadd002801b6d1",
+    "negative-stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "negative-stderr.log": "145ef5ab1c4c81911e61c47d5b11e6b960f53da0dbc453a2a7d70e4f298511c4",
+    "positive.json": "b8f3c32a3af4f4f37c161a2ff035a8d056c788665fe539ff559b6305f6d4dd4a",
+    "positive-stdout.log": "1a1d29c7e4b01e2c6a5027a0ec184826fbd345c55217493dea23c9c87bfcef53",
+    "negative.json": "2392a993cd90c131e49cbe8f5715a00228d380bf874f7e51df9e0ad221e06a88",
+    "positive-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "terminal.json": "b2a5965fc7c71c671b1bce43276acee00826cdf6ac9b35a5f93b8084315d0e32",
+    "scope-verification.json": "45e3d8a3628ed6baf2a2ad3cdb367c37796be5eb1a52daabd0b6053fb08f6bea"
+  },
+  "scope": "Read-only production history CLI107 records; restored Bin launcher Git-tree negative fixture; exact17 root/14 child changed paths and all other blobs preserved. No historical script executed or materialized. Numerical sources/builds/runtimes unchanged. Whole migration and runtime equivalence not attested.",
+  "scientific_verdict": null
+}
