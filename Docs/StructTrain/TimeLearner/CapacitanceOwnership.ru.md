@@ -26,6 +26,24 @@ Pulse30495d143795022ad444bf290d2ac30b7e140199. Native normal4 назначен �
 результат ещё не получен. E1/E3 не доказывают дефект dormant export: до него
 эти попытки не дошли.
 
+## Owning controller после Load: E4 и следующий адресный E5
+
+E4 (`6cc7274d5a228954f6dbe7ad50c239381ba1b429`): сборка успешна,4 FAIL до Train;
+все51 members/103 675 compressed bytes проверены. Сохранённый native XML
+содержит новый storage-класс и в ExcChannelClassName, и в Class дочернего узла.
+При полном model Build ещё не adopted learner выполняет legacy BuildStructure,
+который штатно удаляет загруженный Neuron и создаёт новый из общего образа.
+В таком порядке тест сам теряет неоднородную конфигурацию.
+
+E5 готовит загруженные Dataset/Neuron через их native Build/Init, затем явно
+AdoptNativeModel закрепляет готовый граф; обычный внешний scheduler завершает
+lifecycle owner. Порядок соответствует construction/adoption API: Inspect
+проверяет ready/initialized физических детей до принятия декларации, а Build
+owner уже учитывает native-владение. Learner-specific Ready toggles, Default,
+самоприсваивания параметров и вложенный Calculate не добавляются. Полные
+bindings, класс канала и1.41nF сохранённой мембраны остаются assertions.
+Результат E5 ещё не получен; dormant export по E4 не проверен.
+
 ## Текущая приёмка, 03.11: открытый native roundtrip дефект
 
 Normal owner8/readers19 пройдены, temporal48/72 построен, selected12 просмотрены.
