@@ -3549,7 +3549,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     // CalculateMode=1 intentionally leaves the request raised at convergence.
     // Freeze it explicitly before adding/building the evaluation component:
     // a native Reset must not be allowed to start a new configured training.
-    rig.learner->IsNeedToTrain=false;
+    if(configured)rig.learner->IsNeedToTrain=false;
     EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson(QJsonDocument::Compact).toStdString()),package);
     if(recognition){RecognitionChecks(rig,package,*recognition);return;}
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
