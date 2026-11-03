@@ -50,3 +50,11 @@ PulseLib. A2 использовал private bare object store, но остано
 не отказ алгоритма. Evidence849cb6e8b446982c288ac7f437598a6638949ecf сохраняет
 not_accepted и обе причины; эти попытки не объявляются numerical runs. Кандидат
 runner исправлен на explicit Git-verified GoogleTest source, runtime ещё ожидается.
+
+
+A3 обе стороны остановились на одинаковых двух relative include errors:
+FinalVerification/ProbeObservation tests ожидают штатный root/Libraries/PulseLib
+layout. Evidence da3612b95ec70d34f638b626fa41d9102bce74de сохраняет обе compiler
+диагностики. Исправление runner размещает целые исходные файлы в реальной структуре
+корень/сабмодуль, не меняя include directives или test bodies. Успех130/130 пока
+не заявляется; повторный A/B должен проверить исправленную production CLI.
