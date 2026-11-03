@@ -66,14 +66,17 @@ def _run(arguments, directory, output, wall_seconds, environment):
     return result
 
 
-def run_controller_ab(specification, root_repository, pulse_repository, compiler, gtest_source, output):
+def run_controller_ab(specification, root_repository, pulse_repository, compiler, gtest_source, output, *, single=False):
     require(os.name == 'posix' and Path('/proc/self/stat').exists(), 'controller_ab_requires_linux_worker')
     spec = load(Path(specification).resolve(strict=True))
-    require(type(spec) is dict and set(spec) == {'kind', 'schema_version', 'baseline_root', 'candidate_root',
-            'production_paths', 'test_paths', 'expected_test_ids', 'compile_wall_seconds', 'test_wall_seconds'} and
-            spec['kind'] == 'timelearner_controller_ab' and type(spec['schema_version']) is int and
-            spec['schema_version'] == 1, 'unsupported_controller_ab_specification')
-    for field in ('baseline_root', 'candidate_root'):
+    revisions = ('root',) if single else ('baseline_root', 'candidate_root')
+    keys = {'kind', 'schema_version', 'production_paths', 'test_paths', 'expected_test_ids',
+            'compile_wall_seconds', 'test_wall_seconds'} | set(revisions)
+    require(type(spec) is dict and set(spec) == keys and
+            spec['kind'] == ('timelearner_controller_kernel' if single else 'timelearner_controller_ab') and
+            type(spec['schema_version']) is int and spec['schema_version'] == 1,
+            'unsupported_controller_ab_specification')
+    for field in revisions:
         require(type(spec[field]) is str and re.fullmatch('[0-9a-f]{40}', spec[field]), 'controller_ab_requires_full_sha')
     for field in ('compile_wall_seconds', 'test_wall_seconds'):
         require(type(spec[field]) is int and 0 < spec[field] <= 7200, 'invalid_controller_ab_wall_budget')
@@ -120,8 +123,8 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
     toolchain['googletest'] = {'repository': str(gtest_repository), 'commit': gtest_revision, 'files': records}
     _write(output/'toolchain.json', toolchain)
     results, source_maps = {}, {}
-    for label in ('baseline', 'candidate'):
-        revision = spec[label+'_root']
+    for label in (('candidate',) if single else ('baseline', 'candidate')):
+        revision = spec['root'] if single else spec[label+'_root']
         require(_git(root_repository, 'rev-parse', revision+'^{commit}').decode().strip() == revision,
                 'controller_ab_root_commit_unavailable')
         pulse = _git(root_repository, 'rev-parse', revision+':Libraries/Nmsdk-PulseLib').decode().strip()
@@ -182,7 +185,7 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
         _write(directory/'result.json', record)
     # The corpus itself must be identical: a different test body is not an A/B
     # refactor comparison even when its test ID stayed unchanged.
-    require(all(source_maps['baseline'][p]['sha256'] == source_maps['candidate'][p]['sha256']
+    require(single or all(source_maps['baseline'][p]['sha256'] == source_maps['candidate'][p]['sha256']
                 for p in spec['test_paths']), 'controller_ab_test_sources_changed')
     require(toolchain['compiler'] == file_record(compiler), 'controller_ab_toolchain_changed')
     for record in records:
@@ -195,5 +198,14 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
               'assertion_status': 'passed' if passed else 'failed', 'same_test_sources': True,
               'native_rdk_integration_verified': False, 'operation_trace_equivalence_verified': False,
               'capacitance_search_enabled': False, 'scientific_verdict': None}
+    if single:
+        result['kind'] = 'timelearner_controller_kernel_result'
+        result['comparison_performed'] = False
+        result['same_test_sources'] = None
+        del result['capacitance_search_enabled']
     _write(output/'result.json', result)
     return result
+
+
+def run_controller_kernel(specification, root_repository, pulse_repository, compiler, gtest_source, output):
+    return run_controller_ab(specification, root_repository, pulse_repository, compiler, gtest_source, output, single=True)
