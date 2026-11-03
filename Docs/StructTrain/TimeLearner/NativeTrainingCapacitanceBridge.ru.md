@@ -367,3 +367,21 @@ SDK183/structured readers52, не автоматическое возобнов�
 локальный файл только с кодом, credentials по stdin и прежний проверяющий known
 hosts SSH helper. Project sources/config/results по-прежнему только через Git;
 пароли не записывались в файлы. После успешного запуска handles проверены живыми.
+
+## Read-only physical witnesses: следующий адресный gate
+
+Pulse9490b7a73ad3b1bbb05c4c025af866fce667a0ea добавляет
+`ReadNativeTrainingCapacitanceWitness` в оба learner. Он возвращает typed full map
+и independently capturable native identity/state/actual registry closure одного
+revision. Проверяются actual C, исходный storage profile и неизменность identity
+вокруг capture; unbound остаётся unknown, во время пробы чтение запрещено.
+Метод не вызывает lifecycle, не ремонтирует физику и не создаёт новый C₀.
+
+Bridge tests дополнены сравнениями witness с independently captured frames,
+сохранностью lifecycle/epoch, fault injection actual child C без обновления owner
+и отказом во время настоящей scheduled probe. Новые assertions runtime pending:
+H5 использует прежний immutable snapshot и не подтверждает это дополнение.
+План следующей адресной проверки: существующие четыре bridge cases Classic/Branch
+N0/N1 плюс18 independent bridge/domain readers; после полного закрытия owners H5
+и проверки его evidence. Не включать C-trim/service до versioned history schema3
+с физическими witnesses каждого candidate/repeat/final и независимым reader.
