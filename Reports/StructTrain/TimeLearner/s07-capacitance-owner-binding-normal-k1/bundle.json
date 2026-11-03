@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_native_training_capacitance_bridge_evidence",
+  "schema_version": 1,
+  "root": "d8fb9a56d7ac49dd8057c7decc1539897eccae68",
+  "pulselib": "0407db7dd109b444e01121d19db307334d1bfae4",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 23,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "a4d5793f23854f5bc68959ea1748af7b98e23e5c05bcbec421ea69a40a2c9224",
+  "archive_bytes": 800,
+  "members": {
+    "publisher-correction.json": "5bc79cf9c2e49647daadb707a00aaaff7dfa9b7fb5f4e17049d4d4b4981532e7",
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/exception.json": "f08fd20af73255e85f6416ca86a3aa6d77e49a2cec17f0710e7a5b920b2e8f8a",
+    "gate/owned-supervisor.json": "6546b037eaf4a678cc15b07bd752c4cf7ec82606ccb105663b402360e0f15fca"
+  },
+  "scope": "SDK140: six explicit C0 binding/reference-guard cases, four native capacitance bridge/domain cases and130 production controller/proposal/state/observation/final tests; structured readers23. New bridge not dispatched by NativeTrainingService; C-trim On remains unsupported. No scientific classification verdict.",
+  "scientific_verdict": null
+}
