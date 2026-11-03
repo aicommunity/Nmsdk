@@ -393,3 +393,17 @@ s07-capacitance-witness-publication-normal-h6; runtime отдельный. До 
 H5 PASS183/52 и закрытия обоих его owners H6 не выполняет checkout/build.
 Далее дополнительно проверяет actual source/build users. При провале prerequisite
 новый native run не запускается. Текущий H5 и ASan G3 не перезапущены.
+
+Следующий commit дополняет provider version1 encoder и независимым
+`training_capacitance_witness` auditor/registry. Каждая ссылка на revision
+обязана иметь full physical witness; таблица не может менять origin/policy,
+поля исходного baseline и общие C₀/physics/class/origin entries при росте.
+CLI `analyze --format capacitance-witness` возвращает только physical audit,
+без probe или scientific verdict. Summary1/2 и NativeTrainingService пока не
+переведены на schema3: активация без сохранения истории остаётся запрещённой.
+
+Добавлены20 production witness artifacts (четыре bridge cases ×пять bound
+frames), assertions native encoder и10 independent witness tests с corrupted
+revision/map/number/profile/C и missing required revision/policy controls.
+Проверки требуют реальных server artifacts; локально выполняется только syntax
+inspection. H6 pinned до этих изменений и не подтверждает codec/registry.

@@ -616,6 +616,17 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
             EXPECT_EQ(QJsonDocument::fromJson(QByteArray::fromStdString(witness->modelIdentityJson)).object(),snapshot["model"].toObject());
             EXPECT_EQ(QJsonDocument::fromJson(QByteArray::fromStdString(witness->nativeStateJson)).object(),native);
             EXPECT_EQ(QJsonDocument::fromJson(QByteArray::fromStdString(witness->storageImagesJson)).array(),snapshot["storage_images"].toArray());
+            const auto encoded=EncodeNativeTrainingCapacitanceWitness(*witness);
+            EXPECT_EQ(encoded["model"],snapshot["model"]);EXPECT_EQ(encoded["native_state"],snapshot["native_state"]);
+            EXPECT_EQ(encoded["storage_images"],snapshot["storage_images"]);
+            EXPECT_EQ(encoded["controller_parameters"],snapshot["controller_parameters"]);
+            Artifact(rig.name+"_witness_"+phase+".json",QJsonDocument(encoded).toJson());
+            auto invalid=*witness;invalid.modelRevision=std::string(64,'a');
+            EXPECT_THROW(EncodeNativeTrainingCapacitanceWitness(invalid),std::invalid_argument);
+            invalid=*witness;invalid.parameters.membraneScales.erase("Dendrite1_2");
+            EXPECT_THROW(EncodeNativeTrainingCapacitanceWitness(invalid),std::invalid_argument);
+            invalid=*witness;invalid.storageImagesJson="[]";
+            EXPECT_THROW(EncodeNativeTrainingCapacitanceWitness(invalid),std::invalid_argument);
         }
         EXPECT_TRUE(life.IsCurrent());EXPECT_EQ(epoch,rig.learner->NativeTrainingController().ModelEpoch());
         EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),snapshot["model"].toObject());
