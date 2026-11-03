@@ -66,7 +66,7 @@ def _run(arguments, directory, output, wall_seconds, environment):
     return result
 
 
-def run_controller_ab(specification, root_repository, pulse_repository, compiler, output):
+def run_controller_ab(specification, root_repository, pulse_repository, compiler, gtest_source, output):
     require(os.name == 'posix' and Path('/proc/self/stat').exists(), 'controller_ab_requires_linux_worker')
     spec = load(Path(specification).resolve(strict=True))
     require(type(spec) is dict and set(spec) == {'kind', 'schema_version', 'baseline_root', 'candidate_root',
@@ -94,15 +94,30 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
     environment = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C'}
     toolchain = {'compiler': file_record(compiler), 'environment': environment,
                  'version': subprocess.check_output([str(compiler), '--version'], env=environment, text=True, timeout=30)}
-    libraries = []
-    for name in ('libgtest_main.a', 'libgtest.a'):
-        value = subprocess.check_output([str(compiler), '-print-file-name='+name], env=environment, text=True, timeout=30).strip()
-        path = Path(value).resolve(strict=True)
-        libraries.append(path)
-    toolchain['gtest_libraries'] = [file_record(p) for p in libraries]
-    headers = Path('/usr/include/gtest')
-    require(headers.is_dir(), 'controller_ab_system_gtest_headers_missing')
-    toolchain['gtest_headers'] = [file_record(p) for p in sorted(headers.rglob('*.h'))]
+    # Nmsdk normally uses FetchContent googletest, not a system installation.
+    # Copy complete original test-framework source files into this job and
+    # compile the same copy for both sides; no active build library is reused.
+    gtest_source = Path(gtest_source).resolve(strict=True)
+    require((gtest_source/'src/gtest-all.cc').is_file() and (gtest_source/'src/gtest_main.cc').is_file(),
+            'controller_ab_googletest_source_missing')
+    gtest_repository = Path(_git(gtest_source, 'rev-parse', '--show-toplevel').decode().strip()).resolve(strict=True)
+    gtest_revision = _git(gtest_repository, 'rev-parse', 'HEAD').decode().strip()
+    records = []
+    gtest_copy = output/'googletest'
+    for folder in ('include', 'src'):
+        for path in sorted((gtest_source/folder).rglob('*')):
+            if not path.is_file() or path.suffix not in ('.h', '.cc', '.inc'):
+                continue
+            record = file_record(path)
+            relative = path.relative_to(gtest_source)
+            data = _blob(gtest_repository, gtest_revision, path.relative_to(gtest_repository).as_posix())
+            require(hashlib.sha256(data).hexdigest() == record['sha256'], 'controller_ab_googletest_source_modified')
+            destination = gtest_copy/relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
+            record['relative_path'] = relative.as_posix()
+            records.append(record)
+    toolchain['googletest'] = {'repository': str(gtest_repository), 'commit': gtest_revision, 'files': records}
     _write(output/'toolchain.json', toolchain)
     results, source_maps = {}, {}
     for label in ('baseline', 'candidate'):
@@ -133,8 +148,10 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
         source_maps[label] = sources
         binary = directory/'controller-tests'
         args = [str(compiler), '-std=c++20', '-O2', '-g0', '-I'+str(directory/'Core'),
+                '-I'+str(gtest_copy/'include'), '-I'+str(gtest_copy),
                 *[str(directory/n) for n in sources if n.endswith('.cpp')],
-                *map(str, libraries), '-pthread', '-o', str(binary)]
+                str(gtest_copy/'src/gtest-all.cc'), str(gtest_copy/'src/gtest_main.cc'),
+                '-pthread', '-o', str(binary)]
         compile_result = _run(args, directory, directory/'compile', spec['compile_wall_seconds'], environment)
         record = {'root': revision, 'pulselib': pulse, 'compile': compile_result,
                   'execution': 'not_started', 'validity': 'not_assessed', 'assertion_status': 'not_assessed'}
@@ -163,8 +180,11 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
     # refactor comparison even when its test ID stayed unchanged.
     require(all(source_maps['baseline'][p]['sha256'] == source_maps['candidate'][p]['sha256']
                 for p in spec['test_paths']), 'controller_ab_test_sources_changed')
-    for record in [toolchain['compiler'], *toolchain['gtest_libraries'], *toolchain['gtest_headers']]:
-        require(record == file_record(Path(record['path'])), 'controller_ab_toolchain_changed')
+    require(toolchain['compiler'] == file_record(compiler), 'controller_ab_toolchain_changed')
+    for record in records:
+        require({k: v for k, v in record.items() if k != 'relative_path'} == file_record(Path(record['path'])) and
+                hashlib.sha256((gtest_copy/record['relative_path']).read_bytes()).hexdigest() == record['sha256'],
+                'controller_ab_googletest_changed')
     passed = all(r['execution'] == 'completed' and r['validity'] == 'valid' and r['assertion_status'] == 'passed'
                  for r in results.values())
     result = {'kind': 'timelearner_controller_ab_result', 'schema_version': 1, 'cases': results,
