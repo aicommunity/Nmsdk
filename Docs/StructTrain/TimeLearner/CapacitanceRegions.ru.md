@@ -85,3 +85,30 @@ Reader PID3015062/start_ticks277962255 подтверждён живым, пер
 Новый расчёт модели не выполняется; исходные CSV берутся из проверенного R1
 Git evidence. Полнота отчёта и непосредственный просмотр selected figures
 ещё не приняты. Развёрнутые PNG/SVG/PDF остаются M40 cache.
+
+
+## Полный отчёт и выборочная визуальная проверка завершены
+
+Visual-v3:11/11 reader/render checks без skips/failures/errors; все8 cases,
+32 before/after input probes и48 recorded trial-soma pairs. Evidence
+bd2a9ef56bf185b187343a6aff080cbdd9343c8b:107 members/829267 compressed bytes
+проверены независимо. Все renderer source hashes сверены с точным Gitroot
+9a916d8b858efa0384226b285a8997f030e11547, а не только с archive manifest.
+Полный кэш: /media/user/Data/TimeLearnerRefactor/readbacks/
+s07-capacitance-region-visual-v3/full-report-cache.
+
+Selected evidence07fcd6ad8195b16b4d6085406fce830e7d859d83 содержит16 исходных
+PNG (2475267 bytes): overview и shared-Y peak zoom для after/input0/soma0 всех
+8 сочетаний topology/N0/N1/frequency. Все16 оригиналов1920x960 непосредственно
+просмотрены; подписи и шкалы читаемы, кривые и input overlay различимы, видимых
+обрезаний/наложений текста не обнаружено. На20кГц узкий5ms peak zoom может
+не содержать более ранний входной импульс; полный overview показывает обе
+реальные подачи, дополнительные local-Y detail views сохранены в cache.
+[Точные SHA изображений и границы review](CapacitanceRegionVisualQA-2026-11-03.json).
+
+Это полная генерация данного32-probe characterization и выборочная визуальная
+проверка16 images, не просмотр всех картинок и не классификация всей матрицы
+паттернов. Исходные producer manifests с visual_acceptance_complete=false не
+переписываются; отдельная QA запись уточняет выполненный scope. Scientific
+verdict остаётся null. Остальные режимы, normal native region gate и полные
+этапы4/7/11 сохраняют открытые требования.
