@@ -333,7 +333,14 @@ template<class Learner> struct EditingRig {
         learner->QueueNativeProbe(std::move(request));unsigned ticks=0;
         while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
         {
-            if(++ticks>unsigned((duration+.02)*frequency))throw std::runtime_error("editor_fixture_probe_budget");
+            if(++ticks>unsigned((duration+.02)*frequency))
+            {
+                Artifact(name+"_probe_budget.json",QJsonDocument(QJsonObject{
+                    {"probe_status",NativeProbeStatusName(learner->NativeProbeState())},
+                    {"training",EncodeNativeTrainingState(learner->NativeTrainingController(),Revision(),learner->ReadNativeParameters())},
+                    {"need",learner->IsNeedToTrain.GetData()},{"ticks",double(ticks)}}).toJson());
+                throw std::runtime_error("editor_fixture_probe_budget");
+            }
             model->Calculate();environment->IncreaseModelTimeByStep();
         }
         auto result=learner->TakeNativeProbeResult();if(!result)throw std::runtime_error("missing_editor_fixture_result");
@@ -2111,7 +2118,13 @@ TEST(NativeLearnedState,FreshProcessImport)
     learner->SetGlobalTimeStep(c.model.frequencyHz);
     const auto run=[&]<class Learner>(UEPtr<Learner> target) {
         const auto result=target->ImportNativeLearnedState(package,stopped?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1");
-        ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;target->Build();target->Init();model->Init();model->Reset();
+        ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
+        // A boundary export is taken before Reset clears temporary controller
+        // state. Frozen evaluation must not depend on a surviving stop status.
+        const auto importedBoundary=package["schema_version"]==QJsonValue(3)?
+            target->ExportNativeLearnedState(stopped?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1"):QJsonObject{};
+        const auto importedHistory=target->NativeTrainingController().CapacitanceHistory();
+        target->Build();target->Init();model->Init();model->Reset();
         ASSERT_TRUE(target->NativeModelEditFailure().empty())<<target->NativeModelEditFailure();
         auto neuron=target->template GetComponentL<NPulseNeuron>("Neuron",true);
         auto source=target->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(neuron);ASSERT_TRUE(source);
@@ -2146,8 +2159,18 @@ TEST(NativeLearnedState,FreshProcessImport)
             record["capacitance_state"]=target->ImportedNativeCapacitanceState();
         }
         if(package["schema_version"]==QJsonValue(3))
-            record["capacitance_history"]=target->ExportNativeLearnedState(stopped?
-                "native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1")["capacitance_history"];
+        {
+            const auto& retained=target->NativeTrainingController().CapacitanceHistory();
+            ASSERT_TRUE(importedHistory && retained);
+            EXPECT_EQ(retained->captureWitnessId,importedHistory->captureWitnessId);
+            EXPECT_EQ(retained->currentWitnessId,importedHistory->currentWitnessId);
+            EXPECT_EQ(retained->currentVerified,importedHistory->currentVerified);
+            EXPECT_EQ(retained->trialWitnessIds,importedHistory->trialWitnessIds);
+            ASSERT_EQ(retained->witnesses.size(),importedHistory->witnesses.size());
+            for(const auto& [id,witness]:importedHistory->witnesses)
+                EXPECT_EQ(EncodeNativeTrainingCapacitanceWitness(retained->witnesses.at(id)),EncodeNativeTrainingCapacitanceWitness(witness));
+            record["capacitance_history"]=importedBoundary["capacitance_history"];
+        }
         QFile json(QString::fromLocal8Bit(output));ASSERT_TRUE(json.open(QIODevice::WriteOnly|QIODevice::NewOnly));
         ASSERT_GT(json.write(QJsonDocument(record).toJson()),0);json.close();
         QFile csv(QString::fromLocal8Bit(output)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_GT(csv.write(QByteArray::fromStdString(trace.str())),0);
@@ -3523,6 +3546,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         EXPECT_EQ(package["configuration"].toObject()["search"].toObject()["n0_candidate_repeats"],QJsonValue(2));
     }
     Artifact(rig.name+"_learned_state.json",QJsonDocument(package).toJson());
+    // CalculateMode=1 intentionally leaves the request raised at convergence.
+    // Freeze it explicitly before adding/building the evaluation component:
+    // a native Reset must not be allowed to start a new configured training.
+    rig.learner->IsNeedToTrain=false;
     EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson(QJsonDocument::Compact).toStdString()),package);
     if(recognition){RecognitionChecks(rig,package,*recognition);return;}
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
