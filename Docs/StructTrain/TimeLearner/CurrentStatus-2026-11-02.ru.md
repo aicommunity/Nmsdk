@@ -38,7 +38,10 @@ Diagnostic E1 локализовал две отсутствующие связ�
 дочернего канала при ready parent. Артефакты E1 (67 members) и build-failed E2
 (11 members, 0 native tests) проверены и объединены в feature. E3 использует
 UNet owning-tree Load с UnInit/Build/Init/Reset и проверяет все прежние связи
-до первой физической правки; запущен на Elder, root3d144493a, Pulse30495d1.
+до первой физической правки. E3 собран, но4 tests остановились до Train:
+канал сохранил прежний storage-класс. Все47 members proof5d0438d1 проверены.
+E4 явно согласует membrane property и Class дочернего узла в native XML;
+назначен на Elder, root7a4417b5a, Pulse30495d1. Результат пока pending.
 Strict identity сохраняется. Conditional ASan transport43 со старыми четырьмя
 fixtures отменён до изменения source/build/runtime: проверены точные
 PID/start_ticks2488268/273986367 и2488269/273986367, отсутствие дочерних
