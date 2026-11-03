@@ -14,11 +14,11 @@ class CapacitanceMinimalContextEvidenceTest(unittest.TestCase):
         if not directory:
             raise unittest.SkipTest('requires real native two-context C-search traces')
         cls.cases = [load_case(p) for p in sorted(Path(directory).glob('*_csearch_minimal_stopped_state.json'))]
-        inventory = {(p['configuration']['model']['branch'], p['configuration']['normalization'])
+        inventory = {(p['configuration']['model']['branch'], p['configuration']['model']['normalization'])
                      for p, _, _, _ in cls.cases}
         if len(cls.cases) != 4 or inventory != {
             (branch, normalization) for branch in (False, True)
-            for normalization in ('synapse_count', 'tip_resistance')
+            for normalization in ('N0', 'N1')
         }:
             raise RuntimeError('requires Classic/Branch N0/N1 actual minimal-context cases')
 
