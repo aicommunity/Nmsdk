@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_assigned_reader_contract_evidence",
+  "schema_version": 1,
+  "root": "47e09bec527973500fb24cad0f0ca17c69095242",
+  "native_root": "aeff4a9d73c02b7672352ecb1b7a4b1cd8de9224",
+  "primary_git_root": "47e09bec527973500fb24cad0f0ca17c69095242",
+  "primary_git_prefix": "Reports/StructTrain/TimeLearner/s07-clock-full-elder1/",
+  "acceptance_status": "passed",
+  "readers": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "assigned-reader-contract-elder1",
+    "package_fingerprint": "2b454b150e09c879df49321f9b5af3c0df4a4c092d538356e86877dd9a4e05fd",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.AssignedNativeEvidenceTest.test_actual_policies_have_different_measurement_validity",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.AssignedNativeEvidenceTest.test_policy_cannot_be_injected_into_legacy_envelope",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.AssignedNativeEvidenceTest.test_assigned_policy_still_requires_neighbour_samples",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.AssignedNativeEvidenceTest.test_unknown_or_changed_policy_is_rejected"
+    ],
+    "executed_tests": 4,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_ASSIGNED_EVIDENCE_DIR": {
+        "path": "/home/user/timelearner-refactor/readbacks/s03-assigned-reader-contract-elder1/primary",
+        "files": 4,
+        "fingerprint": "ccf3e514a6c7fadd4ecff9a72ac06e6163a9c6d2132519bc5a5fe67260bef8f0"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "members": {
+    "retained-primary-inventory.json": "09aafe1b88c99af897a053df366eaa9e1b379e09399bf0ca0938bf48698a599c",
+    "owned-supervisor.json": "cf4228f534ef02cbb59b35ef0d8d45976e321ad95b614b329e9d5fd1489a435d",
+    "owned-readers.json": "50673294629bd6884fe7369af1885aa8e141ffe80f06d0304d4898eda8474337",
+    "source-hashes.json": "474bff965f1efea6610ddad75014db57040aacf476b5c57941c553e0adc70ef6",
+    "terminal.json": "882021d17ce1d4ec511144a026a81383ae509617b2b074a8db13e639b631b0ea",
+    "readers-cli.log": "d8779c1701e5d3c69fc5a531647fb80847aa3f76a42213dbc9f02d0ea0ecf6dc",
+    "reader-suite.json": "341e6334893f69b3417e25aeaa4c5f92c62006b7c182f9471bafecbba53a500f",
+    "structured-readers/unittest.log": "3b3e579647c7bd4f7ddbfe00b98f8b96450cf44abde1abc221d96f3d6e0e37d2",
+    "structured-readers/suite.json": "341e6334893f69b3417e25aeaa4c5f92c62006b7c182f9471bafecbba53a500f",
+    "structured-readers/result.json": "3a53cd6a2902d23a082201bd1ecca1a7930b573d4701a2693b7738dd8336b448"
+  },
+  "archive_sha256": "2aa2d42e9aaf8c350f824082f4d720c8c127d5074151ff752b240a76b1708b61",
+  "archive_bytes": 16700,
+  "scope": "Four independent AssignedNativeEvidenceTest controls against eight original hash-verified JSON/CSV files from the accepted Elder full-clock snapshot. No native rerun; no new C++ or whole-plan acceptance. The separate17 diagnostic/certificate controls remain pending.",
+  "scientific_verdict": null
+}
