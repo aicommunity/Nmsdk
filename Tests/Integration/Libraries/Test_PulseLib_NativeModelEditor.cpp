@@ -6260,9 +6260,9 @@ template<class Learner> void CapacitanceConfigurationCodec(int normalization)
     EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),owned);
 }
 
-template<class Learner> void CapacitanceSearchActivation(int normalization)
+template<class Learner> void CapacitanceSearchActivation(int normalization,bool minimalContextBudget=false)
 {
-    EditingRig<Learner> rig(2000,normalization,"csearch_activation",false,2,true,2,1,false,{},1,1.,"NSPNeuronGen",.8e-9);
+    EditingRig<Learner> rig(2000,normalization,minimalContextBudget?"csearch_minimal":"csearch_activation",false,2,true,2,1,false,{},1,1.,"NSPNeuronGen",.8e-9);
     rig.learner->BindNativeTrainingCapacitance(.2);auto plan=TrainingPlan(rig,0.);
     plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     const auto original=rig.learner->ReadNativeParameters();
@@ -6272,8 +6272,8 @@ template<class Learner> void CapacitanceSearchActivation(int normalization)
         b.minimumSynapses=b.maximumSynapses=original[i].synapses;
         b.minimumResistance=b.maximumResistance=original[i].resistance;
     }
-    plan.search.maximumCandidatesPerInput=6;
-    plan.search.capacitanceSearch=CapacitanceSearchPolicy{.9,1.1,0,4,8,128};
+    plan.search.maximumCandidatesPerInput=minimalContextBudget?2:6;
+    plan.search.capacitanceSearch=CapacitanceSearchPolicy{.9,1.1,0,minimalContextBudget?2u:4u,8,128};
     plan.recordCapacitanceHistory=true;plan.maximumModelSeconds=20.;plan.maximumWallSeconds=1800.;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
     RecordNativeTrainingProof(plan,rig.name,rig.branch?1:rig.inputCount,"_stopped_trial_");
@@ -6326,6 +6326,10 @@ TEST(NativeCapacitanceSearchActivation,ClassicN0){CapacitanceSearchActivation<NN
 TEST(NativeCapacitanceSearchActivation,ClassicN1){CapacitanceSearchActivation<NNeuronTimeLearner>(1);}
 TEST(NativeCapacitanceSearchActivation,BranchN0){CapacitanceSearchActivation<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeCapacitanceSearchActivation,BranchN1){CapacitanceSearchActivation<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeCapacitanceSearchMinimalBudget,ClassicN0){CapacitanceSearchActivation<NNeuronTimeLearner>( 0,true);}
+TEST(NativeCapacitanceSearchMinimalBudget,ClassicN1){CapacitanceSearchActivation<NNeuronTimeLearner>( 1,true);}
+TEST(NativeCapacitanceSearchMinimalBudget,BranchN0){CapacitanceSearchActivation<NNeuronTimeLearnerBranch>( 0,true);}
+TEST(NativeCapacitanceSearchMinimalBudget,BranchN1){CapacitanceSearchActivation<NNeuronTimeLearnerBranch>( 1,true);}
 
 namespace {
 template<class Learner> void ConfiguredProbeOwnership(int normalization)
