@@ -278,7 +278,7 @@ TEST(TimeLearnerProbe, StimulusCompletenessAndUniqueIdsAreRequired)
         if(mode==2)recorder.RecordStimulus("unknown",.1);
         auto result=recorder.Close(1.,"model_1","closed");EXPECT_FALSE(result.valid);
         EXPECT_TRUE(Has(result,mode==1?"duplicate_stimulus_id":"missing_stimulus"));
-        if(mode!=1)EXPECT_FALSE(result.peaks[0].delayFromStimulus);
+        if(mode!=1){EXPECT_FALSE(result.peaks[0].delayFromStimulus);}
     }
 }
 
