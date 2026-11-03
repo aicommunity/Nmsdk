@@ -516,3 +516,16 @@ s07-capacitance-history-boundary-publication-normal-h9. Сборка пока н
 с точным описанным runtime_error; любое иное расхождение запрещает автоматический
 переход. Его not_accepted остаётся неизменным. Новая ветка исправляет ожидание
 fixture и добавляет portable schema3; новый PASS нельзя подменять прежним183/52.
+
+
+### Актуализация legacy reader contract (код, runtime pending)
+
+Отдельная ветка codex/timelearner-native-evidence-contract обновляет
+NativeEvidenceTest: exhausted service остаётся diagnostic без certificate,
+strict default gate обязан его отвергать, явно разрешённый diagnostic analysis
+возвращает exact=None. Новые проверки запрещают превращать outcome в exact.
+Certificate corruption/reordering/missing-trial проверки теперь берут реальные
+completed packages со всеми первичными CSV, проверенные audit_learned_state.
+Это сохраняет проверку пересчёта certificate, вместо выдуманного сертификата у
+BudgetExhausted. Проверки обоих классов peak assignment сохранены. Серверная
+проверка этой отдельной ветки ещё ожидается; H9 использует прежний immutable root.
